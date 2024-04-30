@@ -104,8 +104,7 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
                   ],
                 ]
               : []),
-            ...(hasRights(session, EScope.eori) &&
-            immatriculationEORI &&
+            ...(!isNotAuthorized(immatriculationEORI) &&
             (!isAPINotResponding(immatriculationEORI) ||
               isAPI404(immatriculationEORI))
               ? [

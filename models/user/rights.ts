@@ -67,5 +67,5 @@ export function isNotAuthorized<T>(
 }
 
 export function notAuthorized(): INotAuthorized {
-  return { __I_NOT_AUTHORIZED__: undefined } as unknown as INotAuthorized;
+  return { __I_NOT_AUTHORIZED__: true } as unknown as INotAuthorized;
 }

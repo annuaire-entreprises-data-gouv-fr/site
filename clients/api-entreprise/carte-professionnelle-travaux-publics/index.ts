@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 import { ICarteProfessionnelleTravauxPublics } from '#models/espace-agent/carte-professionnelle-travaux-publics';
-import { Siren } from '#utils/helpers';
+import { Siren, Siret } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
 export type IAPIEntrepriseCarteProfessionnelleTravauxPublics =
@@ -13,7 +13,8 @@ export type IAPIEntrepriseCarteProfessionnelleTravauxPublics =
  * GET documents from API Entreprise
  */
 export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
-  siren: Siren
+  siren: Siren,
+  recipientSiret: Siret | undefined
 ) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseCarteProfessionnelleTravauxPublics,
@@ -25,7 +26,8 @@ export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
       '{siren}',
       siren
     )}`,
-    mapToDomainObject
+    mapToDomainObject,
+    recipientSiret
   );
 };
 

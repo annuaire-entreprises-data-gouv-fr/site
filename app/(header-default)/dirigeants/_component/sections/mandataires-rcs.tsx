@@ -28,11 +28,21 @@ const MandatairesRCSSection: React.FC<IProps> = ({
     notFoundInfo={null}
   >
     {(mandatairesRCS) => (
-      <DirigeantContent
-        dirigeants={mandatairesRCS}
-        isFallback={false}
-        uniteLegale={uniteLegale}
-      />
+      <>
+        {mandatairesRCS.length === 0 ? (
+          <p>
+            Cette entreprise est enregistrée au{' '}
+            <strong>Registre de Commerce et des Sociétés (RCS)</strong>, mais
+            n’y possède aucun dirigeant.
+          </p>
+        ) : (
+          <DirigeantContent
+            dirigeants={mandatairesRCS}
+            isFallback={false}
+            uniteLegale={uniteLegale}
+          />
+        )}
+      </>
     )}
   </DataSectionServer>
 );

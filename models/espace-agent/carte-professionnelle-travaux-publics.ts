@@ -21,7 +21,8 @@ export const getCarteProfessionnelleTravauxPublic = async (
   if (!hasRights(session, EScope.carteProfessionnelleTravauxPublics)) {
     return notAuthorized();
   }
-  return clientApiEntrepriseCarteProfessionnelleTravauxPublics(siren).catch(
-    (error) => handleApiEntrepriseError(error, { siren })
-  );
+  return clientApiEntrepriseCarteProfessionnelleTravauxPublics(
+    siren,
+    session?.user?.siret
+  ).catch((error) => handleApiEntrepriseError(error, { siren }));
 };

@@ -30,7 +30,6 @@ export function DirigeantInformation({
   mandatairesRCS: Array<IDirigeant> | IAPINotRespondingError | INotAuthorized;
 }) {
   const immatriculationRNE = useFetchImmatriculationRNE(uniteLegale);
-
   const session = useSession();
   return (
     <>

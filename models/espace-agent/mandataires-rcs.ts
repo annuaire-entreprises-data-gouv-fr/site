@@ -18,7 +18,7 @@ export const getMandatairesRCS = async (
   if (!hasRights(session, EScope.mandatairesRCS)) {
     return notAuthorized();
   }
-  return clientApiEntrepriseMandatairesRCS(siren).catch((error) =>
-    handleApiEntrepriseError(error, { siren })
+  return clientApiEntrepriseMandatairesRCS(siren, session?.user?.siret).catch(
+    (error) => handleApiEntrepriseError(error, { siren })
   );
 };

@@ -46,7 +46,6 @@ const DirigeantsPage = async (props: AppRouterProps) => {
 
   const session = await getSession();
   const mandatairesRCS = await getMandatairesRCS(uniteLegale.siren, session);
-
   return (
     <>
       <div className="content-container">
