@@ -7,6 +7,7 @@ export type IDefaultRequestConfig = {
   method?: 'POST' | 'GET' | 'PATCH';
   responseType?: 'blob' | 'arraybuffer';
   data?: any;
+  isSensitive?: boolean;
 };
 
 /**
