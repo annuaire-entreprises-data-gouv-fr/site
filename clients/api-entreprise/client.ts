@@ -2,6 +2,7 @@ import { HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
 import { Information } from '#models/exceptions';
 import { httpGet } from '#utils/network';
+import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
 import { logInfoInSentry } from '#utils/sentry';
 
 /**
@@ -30,6 +31,8 @@ export default async function clientAPIEntreprise<T, U>(
     throw new HttpUnauthorizedError('Missing API Entreprise credentials');
   }
 
+  sensitiveRequestLogger(route);
+
   // never cache any API Entreprise request
   const useCache = false;
 
@@ -44,7 +47,6 @@ export default async function clientAPIEntreprise<T, U>(
       recipient: recipientSiret || '13002526500013',
     },
     useCache,
-    isSensitive: true,
   });
   return mapToDomainObject(response);
 }

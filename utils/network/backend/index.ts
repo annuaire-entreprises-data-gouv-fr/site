@@ -7,7 +7,6 @@ import {
   setupCache,
 } from 'axios-cache-interceptor';
 import constants from '#models/constants';
-import { sensitiveRequestLogger } from '#utils/network/backend/sensitive-request-logger';
 import { IDefaultRequestConfig } from '..';
 import { CACHE_TIMEOUT, defaultCacheConfig } from './cache-config';
 import errorInterceptor from './error-interceptor';
@@ -62,10 +61,6 @@ export const axiosInstanceFactory = (
 const axiosInstanceWithCache = axiosInstanceFactory();
 
 async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
-  if (config.isSensitive && config.url) {
-    sensitiveRequestLogger(config.url);
-  }
-
   const response = await axiosInstanceWithCache({
     timeout: constants.timeout.L,
     cache: config.useCache ? defaultCacheConfig : false,
