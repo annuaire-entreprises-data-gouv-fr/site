@@ -76,7 +76,7 @@ export const sensitiveRequestLogger = async (route: string) => {
       };
     }
     // eslint-disable-next-line no-console
-    console.info(JSON.stringify(log));
+    console.info(JSON.stringify({ message: log }));
   } catch (e) {
     logErrorInSentry(
       new Exception({
