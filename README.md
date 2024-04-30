@@ -2,7 +2,7 @@
   <img src="https://github.com/annuaire-entreprises-data-gouv-fr/site/blob/main/public/images/annuaire-entreprises-paysage-large.gif" width="400px" />
 </h1>
 
-<a href="https://github.com/annuaire-entreprises-data-gouv-fr/site/blob/main/LICENSE"><img src="https://img.shields.io/github/license/etalab/annuaire-entreprises-site.svg?color=green" alt="License Badge"></a>
+<a href="https://github.com/annuaire-entreprises-data-gouv-fr/site/blob/main/LICENSE"><img src="https://img.shields.io/github/license/annuaire-entreprises-data-gouv-fr/site.svg?color=green" alt="License Badge"></a>
 [![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
 [![External API check](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/external-api-test.yml)
 [![Deploy cluster](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy-cluster.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy-cluster.yml)
@@ -12,7 +12,7 @@
 <a href="https://annuaire-entreprises.data.gouv.fr/historique-des-modifications"><img src="https://img.shields.io/badge/Page-changelog-blue.svg" alt="Changelog Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/a-propos/stats"><img src="https://img.shields.io/badge/Page-stats-blue.svg" alt="Statistiques Badge"></a>
 
-Dépôt du site [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr). Pour [l’API Recherche d’Entreprises](https://api.gouv.fr/les-api/api-recherche-entreprises), consultez le [dépôt de l’API](https://github.com/etalab/annuaire-entreprises-search-api).
+Dépôt du site [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr). Pour [l’API Recherche d’Entreprises](https://api.gouv.fr/les-api/api-recherche-entreprises), consultez le [dépôt de l’API](https://github.com/annuaire-entreprises-data-gouv-fr/search-api).
 
 Ce site met à disposition des citoyens et des agents les données ouvertes (open-data) des entreprises, associations et administrations dotées d'un n° SIREN/SIRET.
 
@@ -36,13 +36,13 @@ Voici la liste des dépôts de code du projet [Annuaire des Entreprises](https:/
 
 | Description                         | Accès                                                                       |
 | ----------------------------------- | --------------------------------------------------------------------------- |
-| Le site Web                         | [par ici 👉](https://github.com/etalab/annuaire-entreprises-site)           |
-| Les actions SEO                     | [par ici 👉](https://github.com/etalab/annuaire-entreprises-seo)            |
-| L’API du Moteur de recherche        | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-api)     |
-| Pipeline ETL                        | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra)   |
-| Le proxy API du site                | [par ici 👉](https://github.com/etalab/annuaire-entreprises-api-proxy)      |
-| Tests de pertinence de la recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-testing) |
-| Authentification des outils d’admin | [par ici 👉](https://github.com/etalab/annuaire-entreprises-admin-auth)     |
+| Le site Web                         | [par ici 👉](https://github.com/annuaire-entreprises-data-gouv-fr/site)           |
+| Les actions SEO                     | [par ici 👉](https://github.com/annuaire-entreprises-data-gouv-fr/seo)            |
+| L’API du Moteur de recherche        | [par ici 👉](https://github.com/annuaire-entreprises-data-gouv-fr/search-api)     |
+| Pipeline ETL                        | [par ici 👉](https://github.com/annuaire-entreprises-data-gouv-fr/search-infra)   |
+| Le proxy API du site                | [par ici 👉](https://github.com/annuaire-entreprises-data-gouv-fr/api-proxy)      |
+| Tests de pertinence de la recherche | [par ici 👉](https://github.com/annuaire-entreprises-data-gouv-fr/search-testing) |
+| Authentification des outils d’admin | [par ici 👉](https://github.com/annuaire-entreprises-data-gouv-fr/admin-auth)     |
 
 ## Développement
 

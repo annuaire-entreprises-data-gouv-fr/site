@@ -1,6 +1,6 @@
 # Tutoriel : Comment contribuer aux pages de contenus ?
 
-Pour rappel, github agit comme une sorte de bibliothèque du code. Dans cette bibliothèque se trouve le [livre de l'Annuaire des Entreprises](https://github.com/etalab/annuaire-entreprises-site)
+Pour rappel, github agit comme une sorte de bibliothèque du code. Dans cette bibliothèque se trouve le [livre de l'Annuaire des Entreprises](https://github.com/annuaire-entreprises-data-gouv-fr/site)
 
 Le contenu est centralisé de manière très pratique dans le dossier [/data](https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data)
 
