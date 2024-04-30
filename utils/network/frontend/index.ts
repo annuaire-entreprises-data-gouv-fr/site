@@ -29,6 +29,9 @@ function buildUrl(url: string, params: any) {
 }
 
 export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
+  if (config.isSensitive) {
+    console.warn('Sensitive requests should not be called from client');
+  }
   if (!config.url) {
     throw new InternalError({ message: 'Url is required' });
   }

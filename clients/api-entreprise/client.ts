@@ -2,75 +2,7 @@ import { HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
 import { Information } from '#models/exceptions';
 import { httpGet } from '#utils/network';
-import { randomId } from '#utils/helpers';
 import { logInfoInSentry } from '#utils/sentry';
-import getSession from '#utils/server-side-helper/app/get-session';
-
-type ApiEntrepriseLogType = {
-  date: string;
-  timestamp: integer;
-  request: {
-    route: string;
-    id: string;
-  };
-  content: {
-    resource_type: string | null;
-    resource_id: string | nul;
-  };
-  url: {
-    scheme: string;
-    domain: string;
-    path: string;
-    query: string;
-  };
-  user?: {
-    email?: string;
-    siret?: string;
-  }
-}
-
-const logUserRequest = async (route: string) => {
-  const url = new URL(route)
-
-  const [resource_type, resource_id] = (url.pathname.match(/\/(.*)\/([^\/]*)$/) || [null, null, null]).slice(1)
-
-  let log: ApiEntrepriseLogType = {
-    date: (new Date()).toISOString(),
-    timestamp: Date.now(),
-
-    request: {
-      route: route,
-      id: randomId(),
-    },
-
-    content: {
-      resource_type: resource_type,
-      resource_id: resource_id,
-    },
-
-    // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-url.html
-    url: {
-      scheme: (url.protocol.match(/^(https?)/) || ['']).shift(),
-      domain: url.host,
-      path: url.pathname,
-      query: url.search,
-
-    },
-  }
-
-  const session = await getSession()
-
-  if (session?.user) {
-    // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-user.html
-    log.user = {
-      email: session.user.email,
-      siret: session.user.siret,
-    };
-
-  }
-
-  console.log(`${JSON.stringify({'message': JSON.stringify(log)})}`)
-}
 
 /**
  * Wrapper client to call API Entreprise
@@ -85,8 +17,6 @@ export default async function clientAPIEntreprise<T, U>(
   mapToDomainObject: (e: T) => U,
   recipientSiret?: string
 ) {
-  logUserRequest(route)
-
   if (!recipientSiret) {
     logInfoInSentry(
       new Information({
@@ -114,6 +44,7 @@ export default async function clientAPIEntreprise<T, U>(
       recipient: recipientSiret || '13002526500013',
     },
     useCache,
+    isSensitive: true,
   });
   return mapToDomainObject(response);
 }
