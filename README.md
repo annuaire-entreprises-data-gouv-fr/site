@@ -1,11 +1,11 @@
 <h1 align="center">
-  <img src="https://github.com/etalab/annuaire-entreprises-site/blob/main/public/images/annuaire-entreprises-paysage-large.gif" width="400px" />
+  <img src="https://github.com/annuaire-entreprises-data-gouv-fr/site/blob/main/public/images/annuaire-entreprises-paysage-large.gif" width="400px" />
 </h1>
 
-<a href="https://github.com/etalab/annuaire-entreprises-site/blob/main/LICENSE"><img src="https://img.shields.io/github/license/etalab/annuaire-entreprises-site.svg?color=green" alt="License Badge"></a>
+<a href="https://github.com/annuaire-entreprises-data-gouv-fr/site/blob/main/LICENSE"><img src="https://img.shields.io/github/license/etalab/annuaire-entreprises-site.svg?color=green" alt="License Badge"></a>
 [![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
-[![External API check](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml)
-[![Deploy cluster](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml)
+[![External API check](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/external-api-test.yml)
+[![Deploy cluster](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy-cluster.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy-cluster.yml)
 <a href="https://annuaire-entreprises.data.gouv.fr/administration"><img src="https://img.shields.io/badge/Page-partenaires-blue.svg" alt="Partenaires Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/donnees/sources"><img src="https://img.shields.io/badge/Page-datasources-blue.svg" alt="Sources de données Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/donnees/api"><img src="https://img.shields.io/badge/Page-statuts-blue.svg" alt="Statut des API Badge"></a>
@@ -22,7 +22,7 @@ Ce site ré-utilise les données des différentes [administrations partenaires](
 
 ### Comment contribuer ?
 
-Vous êtes un contributeur exterieur ? [Soumettez-nous une nouvelle issue ou une pull request.](https://github.com/etalab/annuaire-entreprises-site/issues/new/choose)
+Vous êtes un contributeur exterieur ? [Soumettez-nous une nouvelle issue ou une pull request.](https://github.com/annuaire-entreprises-data-gouv-fr/site/issues/new/choose)
 
 Vous faîtes partie de l’équipe contenu ? [Consultez le tutoriel.](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/tree/main/CONTRIBUTE-CONTENT.md)
 
@@ -101,14 +101,14 @@ npm run test:api-clients
 
 ## Deploiement
 
-Le déploiement se fait par [Github action](https://github.com/etalab/annuaire-entreprises-site/actions)
+Le déploiement se fait par [Github action](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions)
 
 A chaque "merge" sur master :
 
-- Laissez le déploiement se faire automatiquement sur [staging](https://staging.annuaire-entreprises.data.gouv.fr) via l'action [deploy-staging](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-staging.yml)
+- Laissez le déploiement se faire automatiquement sur [staging](https://staging.annuaire-entreprises.data.gouv.fr) via l'action [deploy-staging](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy-staging.yml)
 - Vérifiez vos changements sur [staging](https://staging.annuaire-entreprises.data.gouv.fr)
-- Vérifiez que les tests end2end passent sur [recipe-staging](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/recipe-staging.yml)
-- Lancez manuellement le déploiement sur [production](https://annuaire-entreprises.data.gouv.fr) : sur [deploy-production](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-production.yml) et cliquez sur "Run workflow" -> "Run workflow"
+- Vérifiez que les tests end2end passent sur [recipe-staging](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/recipe-staging.yml)
+- Lancez manuellement le déploiement sur [production](https://annuaire-entreprises.data.gouv.fr) : sur [deploy-production](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy-production.yml) et cliquez sur "Run workflow" -> "Run workflow"
 
 NB: Si plusieurs déploiements sont déclenchés en même temps, seul le premier va jusqu'au bout. Les autres sont automatiquement interrompus.
 
