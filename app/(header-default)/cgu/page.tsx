@@ -12,10 +12,7 @@ export const metadata: Metadata = {
 
 const CGU: NextPageWithLayout = () => (
   <TextWrapper>
-    <h1>
-      Conditions générales d’utilisation - Annuaire des Entreprises - Agents
-      publics - 29/04/2024
-    </h1>
+    <h1>Conditions générales d’utilisation</h1>
     <p>
       Les présentes conditions générales d’utilisation (dites “CGU”) fixent le
       cadre juridique de la plateforme numérique “Annuaire des Entreprises” et
