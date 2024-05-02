@@ -39,9 +39,6 @@ export const sensitiveRequestLogger = async (route: string) => {
   try {
     const url = new URL(route);
 
-    // we extract siren and siret in a different regex as we are not sure of the URL composition
-    // /resource_type/<SIREN_OR_SIRET>/resource_id
-    // /resource_type/resource_id/<SIREN_OR_SIRET>
     const resource_type = url.pathname
       .replace(/\d{9}|\d{14}/, '')
       .replace('//', '/');
