@@ -1,5 +1,5 @@
 import { Exception } from '#models/exceptions';
-import { randomId } from '#utils/helpers';
+import { extractSirenOrSiretSlugFromUrl, randomId } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 
@@ -24,6 +24,7 @@ type ISensitiveLogType = {
     email?: string;
     siret?: string;
     scopes?: string[];
+    domain?: string;
   };
 };
 
@@ -38,9 +39,14 @@ export const sensitiveRequestLogger = async (route: string) => {
   try {
     const url = new URL(route);
 
-    const [resource_type, resource_id] = (
-      url.pathname.match(/\/(.*)\/([^\/]*)$/) || [null, null, null]
-    ).slice(1);
+    // we extract siren and siret in a different regex as we are not sure of the URL composition
+    // /resource_type/<SIREN_OR_SIRET>/resource_id
+    // /resource_type/resource_id/<SIREN_OR_SIRET>
+    const resource_type = url.pathname
+      .replace(/\d{9}|\d{14}/, '')
+      .replace('//', '/');
+
+    const resource_id = extractSirenOrSiretSlugFromUrl(url.pathname);
 
     let log: ISensitiveLogType = {
       date: new Date().toISOString(),
@@ -74,6 +80,10 @@ export const sensitiveRequestLogger = async (route: string) => {
         siret: session.user.siret,
         scopes: session.user.scopes,
       };
+
+      if (log.user.email) {
+        log.user.domain = (log.user.email.match(/@(.*)/) || ['']).shift();
+      }
     }
     // eslint-disable-next-line no-console
     console.info(JSON.stringify(log));
