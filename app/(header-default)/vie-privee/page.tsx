@@ -293,20 +293,20 @@ const Privacy = () => (
             <td>France</td>
             <td>www.matomo.org/matomo-cloud-dpa</td>
             <td>13 mois</td>
-            <tr>
-              <td>pk_ref</td>
-              <td>Mesure d’audience</td>
-              <td>France</td>
-              <td>www.matomo.org/matomo-cloud-dpa</td>
-              <td>6 mois</td>
-            </tr>
-            <tr>
-              <td>pk_ses</td>
-              <td>Mesure d’audience</td>
-              <td>France</td>
-              <td>www.matomo.org/matomo-cloud-dpa</td>
-              <td>30 minutes </td>
-            </tr>
+          </tr>
+          <tr>
+            <td>pk_ref</td>
+            <td>Mesure d’audience</td>
+            <td>France</td>
+            <td>www.matomo.org/matomo-cloud-dpa</td>
+            <td>6 mois</td>
+          </tr>
+          <tr>
+            <td>pk_ses</td>
+            <td>Mesure d’audience</td>
+            <td>France</td>
+            <td>www.matomo.org/matomo-cloud-dpa</td>
+            <td>30 minutes </td>
           </tr>
         </tbody>
       </table>
