@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import { DILA, INPI, INSEE } from '#components/administrations';
 import { NextPageWithLayout } from '../../../pages/_app';
+import MatomoIframe from './_component';
 
 export const metadata: Metadata = {
   title: 'Politique de confidentialité',
@@ -355,15 +356,7 @@ const Privacy: NextPageWithLayout = () => (
     <p>
       Pour l’outil Matomo, vous pouvez décider de ne jamais être suivi, y
       compris anonymement :
-      <iframe
-        style={{
-          overflow: 'visible',
-          borderWidth: '0',
-          width: '100%',
-        }}
-        title="Optout cookie"
-        src="https://stats.data.gouv.fr/index.php?module=CoreAdminHome&action=optOut&language=fr&backgroundColor=&fontColor=333&fontSize=16px&fontFamily=sans-serif&overflow=visible"
-      ></iframe>
+      <MatomoIframe />
     </p>
     <p>
       Pour aller plus loin, vous pouvez consulter les fiches proposées par la{' '}
