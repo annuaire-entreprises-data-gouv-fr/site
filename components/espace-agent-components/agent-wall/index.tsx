@@ -19,6 +19,7 @@ const AgentWall: React.FC<{
           agentColor
           className={style['cta-actes']}
           footer={modalFooter}
+          noMobile
         >
           <h3>Vous êtes agent public ?</h3>
           <p>
