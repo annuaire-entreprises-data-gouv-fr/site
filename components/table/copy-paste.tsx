@@ -24,6 +24,8 @@ export function CopyPaste({
 
   const timeoutId = useRef<NodeJS.Timeout>();
 
+  const element = useRef<HTMLButtonElement>(null);
+
   const copyToClipboard = (e: any) => {
     const valueToCopy = shouldRemoveSpace
       ? children.replace(/\s/g, '')
@@ -40,11 +42,11 @@ export function CopyPaste({
       document.body.removeChild(el);
     }
 
-    setCopied(true);
-
     const isKeyboardNavigation = e.detail === 0;
     if (isKeyboardNavigation) {
       element.current?.focus();
+    } else {
+      setFocused(false);
     }
     setCopied(true);
     logCopyPaste(label);
@@ -52,8 +54,6 @@ export function CopyPaste({
       setCopied(false);
     }, 2000);
   };
-
-  const element = useRef<HTMLButtonElement>(null);
 
   const handleBlur = () => {
     setFocused(false);
