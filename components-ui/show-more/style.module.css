@@ -1,0 +1,28 @@
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.90) 40%, rgba(255, 255, 255, 1) 60%);
+  padding-bottom: 1rem;
+  height: 5rem;
+  bottom: 0;
+  position: relative;
+
+}
+
+
+
+.content {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -5rem;
+}
+
+.collapsed .content {
+  height: var(--collapsed-height);
+}
+
+.expanded .button-container {
+  position: sticky;
+  margin-top: calc(var(--collapsed-height) - 5rem);
+}
