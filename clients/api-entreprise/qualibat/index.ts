@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { IQualibat } from '#models/espace-agent/qualibat';
+import { IQualibat } from '#models/espace-agent/certificats/qualibat';
 import { Siret } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 

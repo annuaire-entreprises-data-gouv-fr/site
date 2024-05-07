@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { IQualifelec } from '#models/espace-agent/qualifelec';
+import { IQualifelec } from '#models/espace-agent/certificats/qualifelec';
 import { Siret } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 

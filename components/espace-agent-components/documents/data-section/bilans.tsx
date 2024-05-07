@@ -72,21 +72,23 @@ const AgentBilansSection: React.FC<{
                 :
               </p>
               <FullTable
-                head={['Date de dépôt', 'Année fiscale', '', 'Lien']}
+                head={['Date de dépôt', 'Année fiscale', 'Lien']}
                 body={documents.bilans.map((a) => [
                   formatDateLong(a.dateDepot),
                   getFiscalYear(a.dateCloture),
-                  a.typeBilan === 'K' && (
-                    <Tag color="info">bilan consolidé</Tag>
-                  ),
-                  <ButtonLink
-                    alt
-                    small
-                    target="_blank"
-                    to={`${routes.api.rne.documents.download}${a.id}?type=bilan`}
-                  >
-                    Télécharger
-                  </ButtonLink>,
+                  <>
+                    <ButtonLink
+                      alt
+                      small
+                      target="_blank"
+                      to={`${routes.api.rne.documents.download}${a.id}?type=bilan`}
+                    >
+                      Télécharger
+                    </ButtonLink>{' '}
+                    {a.typeBilan === 'K' && (
+                      <Tag color="info">bilan consolidé</Tag>
+                    )}
+                  </>,
                 ])}
               />
             </>

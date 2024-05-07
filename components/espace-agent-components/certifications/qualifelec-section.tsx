@@ -5,7 +5,7 @@ import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IQualifelec } from '#models/espace-agent/qualifelec';
+import { IQualifelec } from '#models/espace-agent/certificats/qualifelec';
 import { formatDate, formatDateLong } from '#utils/helpers';
 
 export const QualifelecSection: React.FC<{

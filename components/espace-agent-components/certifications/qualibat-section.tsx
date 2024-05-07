@@ -5,7 +5,7 @@ import { DataSectionServer } from '#components/section/data-section/server';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IQualibat } from '#models/espace-agent/qualibat';
+import { IQualibat } from '#models/espace-agent/certificats/qualibat';
 import { formatDateLong } from '#utils/helpers';
 
 export const QualibatSection: React.FC<{
