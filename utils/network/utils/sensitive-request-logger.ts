@@ -40,7 +40,7 @@ export const sensitiveRequestLogger = async (route: string) => {
     const url = new URL(route);
 
     const resource_type = url.pathname
-      .replace(/\d{9}|\d{14}/, '')
+      .replace(/\d{14}|\d{9}/, '')
       .replace('//', '/');
 
     const resource_id = extractSirenOrSiretSlugFromUrl(url.pathname);
