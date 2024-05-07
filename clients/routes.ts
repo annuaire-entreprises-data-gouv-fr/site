@@ -166,6 +166,11 @@ const routes = {
       account: 'https://data.inpi.fr/register',
     },
   },
+  infogreffe: {
+    portail: {
+      entreprise: 'https://www.infogreffe.fr/entreprise/',
+    },
+  },
   sireneInsee: {
     auth: 'https://api.insee.fr/token',
     avis: 'https://api-avis-situation-sirene.insee.fr/identification/pdf/',
