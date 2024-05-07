@@ -17,11 +17,11 @@ import { CertificationsRGESection } from '#components/labels-and-certificates/rg
 import { CertificationSocieteMission } from '#components/labels-and-certificates/societe-mission';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { isAPI404 } from '#models/api-not-responding';
 import { getCertificationsFromSlug } from '#models/certifications';
-import { getOpqibi } from '#models/espace-agent/opqibi';
-import { getQualibat } from '#models/espace-agent/qualibat';
-import { getQualifelec } from '#models/espace-agent/qualifelec';
+import {
+  getProtectedCertificats,
+  hasProtectedCertificatsEntreprise,
+} from '#models/espace-agent/certificats';
 import { isNotAuthorized } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
@@ -59,13 +59,6 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
   const { slug, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
-  const protectedCertificats = await Promise.all([
-    getQualifelec(uniteLegale.siege.siret, session),
-    getQualibat(uniteLegale.siege.siret, session),
-    getOpqibi(uniteLegale.siren, session),
-  ] as const);
-  const [qualifelec, qualibat, opqibi] = protectedCertificats;
-
   const {
     estEss,
     estRge,
@@ -77,15 +70,21 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
     estEntrepriseInclusive,
   } = uniteLegale.complements;
 
-  const {
-    rge,
-    entrepreneurSpectacles,
-    egapro,
-    bio,
-    organismesDeFormation,
-    ess,
-    entrepriseInclusive,
-  } = await getCertificationsFromSlug(uniteLegale);
+  const [
+    {
+      rge,
+      entrepreneurSpectacles,
+      egapro,
+      bio,
+      organismesDeFormation,
+      ess,
+      entrepriseInclusive,
+    },
+    protectedCertificats,
+  ] = await Promise.all([
+    getCertificationsFromSlug(uniteLegale),
+    getProtectedCertificats(uniteLegale, session),
+  ]);
 
   return (
     <>
@@ -96,9 +95,9 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
           session={session}
         />
         {!checkHasLabelsAndCertificates(uniteLegale) &&
-          protectedCertificats.every(
-            (certif) => isNotAuthorized(certif) || isAPI404(certif)
-          ) && <p>Cette structure ne possède aucun label ou certificat.</p>}
+          !hasProtectedCertificatsEntreprise(protectedCertificats) && (
+            <p>Cette structure ne possède aucun label ou certificat.</p>
+          )}
         {estEss && <CertificationESSSection ess={ess} />}
         {estSocieteMission && <CertificationSocieteMission />}
         {estEntrepriseInclusive && (
@@ -129,11 +128,15 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         {estBio && (
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
-        {!isNotAuthorized(qualifelec) && (
-          <QualifelecSection qualifelec={qualifelec} />
+        {!isNotAuthorized(protectedCertificats.qualifelec) && (
+          <QualifelecSection qualifelec={protectedCertificats.qualifelec} />
         )}
-        {!isNotAuthorized(qualibat) && <QualibatSection qualibat={qualibat} />}
-        {!isNotAuthorized(opqibi) && <OpqibiSection opqibi={opqibi} />}
+        {!isNotAuthorized(protectedCertificats.qualibat) && (
+          <QualibatSection qualibat={protectedCertificats.qualibat} />
+        )}
+        {!isNotAuthorized(protectedCertificats.opqibi) && (
+          <OpqibiSection opqibi={protectedCertificats.opqibi} />
+        )}
       </div>
     </>
   );

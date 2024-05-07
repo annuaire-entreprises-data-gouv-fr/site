@@ -8,7 +8,7 @@ import {
 } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { Siren } from '#utils/helpers';
-import { handleApiEntrepriseError } from './utils';
+import { handleApiEntrepriseError } from '../utils';
 type Qualification = {
   nom: string;
   codeQualification: string;

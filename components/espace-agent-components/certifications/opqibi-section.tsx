@@ -5,7 +5,7 @@ import { DataSectionServer } from '#components/section/data-section/server';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IOpqibi } from '#models/espace-agent/opqibi';
+import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { formatDateLong } from '#utils/helpers';
 
 export const OpqibiSection: React.FC<{
@@ -28,7 +28,7 @@ export const OpqibiSection: React.FC<{
               target="_blank"
               rel="noreferrer"
               aria-label="En savoir plus sur les certificats Opqibi, nouvelle fenêtre"
-              href="https://www.opqibi.com/qualification-des-competences/"
+              href="https://www.opqibi.com/page/la-qualification-opqibi"
             >
               certificat Opqibi
             </a>{' '}

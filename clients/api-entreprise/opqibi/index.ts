@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { IOpqibi } from '#models/espace-agent/opqibi';
+import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { Siren, Siret } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 

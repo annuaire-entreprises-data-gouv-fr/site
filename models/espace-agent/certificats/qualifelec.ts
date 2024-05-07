@@ -8,7 +8,7 @@ import {
 } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { Siret } from '#utils/helpers';
-import { handleApiEntrepriseError } from './utils';
+import { handleApiEntrepriseError } from '../utils';
 export type IQualifelec = Array<{
   documentUrl: string;
   numero: number;
