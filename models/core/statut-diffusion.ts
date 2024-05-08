@@ -166,9 +166,7 @@ export const getAdresseEtablissement = (
 };
 
 /**
- * Return adresse depending on diffusibility status (https://www.insee.fr/fr/information/6683782)
- * @param uniteLegale
- * @returns
+ * Return association’s personnal informations depending on diffusibility status (https://www.insee.fr/fr/information/6683782)
  */
 export const getPersonnalDataAssociation = (
   adresse: string | ReactElement,
