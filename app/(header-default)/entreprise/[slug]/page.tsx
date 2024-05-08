@@ -99,7 +99,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
               </>
             )}
             {isAssociation(uniteLegale) && (
-              <AssociationSection uniteLegale={uniteLegale} />
+              <AssociationSection uniteLegale={uniteLegale} session={session} />
             )}
             <UsefulShortcuts uniteLegale={uniteLegale} />
             {uniteLegale.siege && (
