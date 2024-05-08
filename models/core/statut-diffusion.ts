@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { IEtablissement, IUniteLegale } from './types';
@@ -162,4 +163,21 @@ export const getAdresseEtablissement = (
     postale ? adressePostale : adresse,
     commune
   );
+};
+
+/**
+ * Return adresse depending on diffusibility status (https://www.insee.fr/fr/information/6683782)
+ * @param uniteLegale
+ * @returns
+ */
+export const getPersonnalDataAssociation = (
+  adresse: string | ReactElement,
+  uniteLegale: IUniteLegale,
+  session: ISession | null
+) => {
+  const shouldDiff = canSeeNonDiffusible(session)
+    ? true
+    : estDiffusible(uniteLegale);
+
+  return shouldDiff ? adresse : defaultNonDiffusiblePlaceHolder;
 };

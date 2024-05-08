@@ -5,14 +5,20 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IDataAssociation } from '#models/association/types';
-import { getAdresseUniteLegale } from '#models/core/statut-diffusion';
+import {
+  getAdresseUniteLegale,
+  getPersonnalDataAssociation,
+} from '#models/core/statut-diffusion';
 import { IAssociation } from '#models/core/types';
+import useSession from 'hooks/use-session';
 import { Warning } from '../alerts';
 
 const AssociationAdressAlert: React.FC<{
   uniteLegale: IAssociation;
   association: IDataAssociation | IAPINotRespondingError | null;
 }> = ({ uniteLegale, association }) => {
+  const session = useSession();
+
   if (!association || isAPINotResponding(association)) {
     return null;
   }
@@ -30,7 +36,12 @@ const AssociationAdressAlert: React.FC<{
           <INSEE /> :
           <ul>
             <li>
-              <MI /> : {associationAdresse || <NonRenseigne />}
+              <MI /> :{' '}
+              {getPersonnalDataAssociation(
+                associationAdresse,
+                uniteLegale,
+                session
+              ) || <NonRenseigne />}
             </li>
             <li>
               <INSEE /> : {getAdresseUniteLegale(uniteLegale, null)}
