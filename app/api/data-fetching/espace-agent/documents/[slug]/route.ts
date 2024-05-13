@@ -1,44 +1,25 @@
 import { clientDocuments } from '#clients/api-proxy/rne/documents';
-import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { FetchRessourceException } from '#models/exceptions';
-import { EScope, hasRights } from '#models/user/rights';
+import { EScope } from '#models/user/rights';
 import { verifySiren } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import getSession from '#utils/server-side-helper/app/get-session';
+import { ProtectedAPIRoute } from '../../_helper';
 
 export async function GET(
   _request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const session = await getSession();
   const slug = params.slug;
-  try {
-    if (!hasRights(session, EScope.documentsRne)) {
-      throw new HttpForbiddenError('Unauthorized account');
+  return ProtectedAPIRoute(
+    'RNEDocuments',
+    slug,
+    EAdministration.INPI,
+    EScope.documentsRne,
+    async () => {
+      const siren = verifySiren(slug as string);
+
+      const actes = await clientDocuments(siren);
+      actes.hasBilanConsolide =
+        actes.bilans.filter((b) => b.typeBilan === 'K').length > 0;
     }
-
-    const siren = verifySiren(slug as string);
-
-    const actes = await clientDocuments(siren);
-    actes.hasBilanConsolide =
-      actes.bilans.filter((b) => b.typeBilan === 'K').length > 0;
-
-    return Response.json(actes, { status: 200 });
-  } catch (e: any) {
-    const message = 'Failed to fetch document list';
-
-    if (!(e instanceof HttpNotFound)) {
-      logErrorInSentry(
-        new FetchRessourceException({
-          cause: e,
-          ressource: 'RNEDocuments',
-          message,
-          administration: EAdministration.INPI,
-          context: { siren: slug as string },
-        })
-      );
-    }
-    return Response.json({ message }, { status: e.status || 500 });
-  }
+  );
 }
