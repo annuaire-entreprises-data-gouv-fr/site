@@ -17,8 +17,8 @@ env:
   INDEXING_ENABLED: enabled
   REDIS_ENABLED: disabled
   MATOMO_ENABLED: disabled
-  MATOMO_SITE_ID: 1 #dummy
-  MATOMO_API_SITE_ID: 1 #dummy
+  MATOMO_SITE_ID: ${{ secrets.MATOMO_SITE_ID }}
+  MATOMO_API_SITE_ID: ${{ secrets.MATOMO_API_SITE_ID }}
   PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
   IRON_SESSION_PWD: ${{ secrets.IRON_SESSION_PWD }}
   GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
