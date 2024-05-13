@@ -20,6 +20,7 @@ export async function GET(
       const actes = await clientDocuments(siren);
       actes.hasBilanConsolide =
         actes.bilans.filter((b) => b.typeBilan === 'K').length > 0;
+      return actes;
     }
   );
 }
