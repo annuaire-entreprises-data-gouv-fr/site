@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 import constants from '#models/constants';
-import { FetchRessourceException } from '#models/exceptions';
+import { FetchRessourceException, InternalError } from '#models/exceptions';
 import { readFromGrist } from '#utils/integrations/grist';
 import { httpGet } from '#utils/network';
 
@@ -30,9 +30,6 @@ export type IMatomoStats = {
   copyPasteAction: { value: number; label: string }[];
   redirectedSiren: { value: number; label: string }[];
 };
-
-const SITE_ID = '145';
-const API_SITE_ID = '294';
 
 const getLabel = (labelAsString: string, index: number) => {
   if (
@@ -157,6 +154,15 @@ const computeStats = (
 };
 
 export const clientMatomoStats = async (): Promise<IMatomoStats> => {
+  const SITE_ID = process.env.MATOMO_SITE_ID;
+  const API_SITE_ID = process.env.MATOMO_API_SITE_ID;
+
+  if (!SITE_ID || !API_SITE_ID) {
+    throw new InternalError({
+      message: 'Matomo site id (site & API) are required for the stats page',
+    });
+  }
+
   try {
     const [
       matomoMonthlyStats,
@@ -169,7 +175,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       httpGet<IMatomoMonthlyStat[]>(createPageViewUrl(SITE_ID), {
         timeout: constants.timeout.XXL,
       }),
-      httpGet<IMatomoMonthlyStat[]>(createAgentPageViewUrl(), {
+      httpGet<IMatomoMonthlyStat[]>(createAgentPageViewUrl(SITE_ID), {
         timeout: constants.timeout.XXL,
       }),
       httpGet<IMatomoMonthlyStat[]>(createPageViewUrl(API_SITE_ID), {
@@ -178,7 +184,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       httpGet<IMatomoEventStat[]>(createCopyPasteEventUrl(), {
         timeout: constants.timeout.XXL,
       }),
-      httpGet<IMatomoEventStat[][]>(createEventsCategoryUrl(), {
+      httpGet<IMatomoEventStat[][]>(createEventsCategoryUrl(SITE_ID), {
         timeout: constants.timeout.XXL,
       }),
       getNpsRecords(),
@@ -220,18 +226,18 @@ const createPageViewUrl = (siteId: string) => {
   return baseUrl;
 };
 
-const createAgentPageViewUrl = () => {
+const createAgentPageViewUrl = (siteId: string) => {
   const agentConnecté = encodeURIComponent('Agent connecté');
   const segment = encodeURIComponent('dimension1==' + agentConnecté);
-  const baseUrl = createPageViewUrl(SITE_ID) + '&segment=' + segment;
+  const baseUrl = createPageViewUrl(siteId) + '&segment=' + segment;
   return baseUrl;
 };
 
-const createEventsCategoryUrl = () => {
+const createEventsCategoryUrl = (siteId: string) => {
   let baseUrl = routes.tooling.matomo.report.bulkRequest;
   lastTwelveMonths().forEach((month, index) => {
     baseUrl += `&urls[${index}]=`;
-    const subRequest = `idSite=${SITE_ID}&period=month&method=Events.getCategory&module=API&date=${month.firstDay}`;
+    const subRequest = `idSite=${siteId}&period=month&method=Events.getCategory&module=API&date=${month.firstDay}`;
     baseUrl += encodeURIComponent(subRequest);
   });
   return baseUrl;
