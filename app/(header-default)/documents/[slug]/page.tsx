@@ -5,6 +5,7 @@ import ConformiteSection from '#components/espace-agent-components/conformite-se
 import ActesSection from '#components/espace-agent-components/documents/actes-walled';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
+import { isAPI404 } from '#models/api-not-responding';
 import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte-professionnelle-travaux-publics';
 import { EScope, hasRights, isNotAuthorized } from '#models/user/rights';
 import {
@@ -61,13 +62,14 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
           </>
         )}
         <ActesSection uniteLegale={uniteLegale} session={session} />
-        {!isNotAuthorized(carteProfessionnelleTravauxPublics) && (
-          <CarteProfessionnelleTravauxPublicsSection
-            carteProfessionnelleTravauxPublics={
-              carteProfessionnelleTravauxPublics
-            }
-          />
-        )}
+        {!isNotAuthorized(carteProfessionnelleTravauxPublics) &&
+          !isAPI404(carteProfessionnelleTravauxPublics) && (
+            <CarteProfessionnelleTravauxPublicsSection
+              carteProfessionnelleTravauxPublics={
+                carteProfessionnelleTravauxPublics
+              }
+            />
+          )}
       </div>
     </>
   );
