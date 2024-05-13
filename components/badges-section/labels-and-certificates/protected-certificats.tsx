@@ -1,18 +1,20 @@
 import { isAPINotResponding } from '#models/api-not-responding';
 import { IProtectedCertificatsEntreprise } from '#models/espace-agent/certificats';
-import { isNotAuthorized } from '#models/user/rights';
 import { IUniteLegale } from '../../../models/core/types';
 import { LabelWithLinkToSection } from './label-with-link-to-section';
 
 export const ProtectedCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
-  protectedCertificats: IProtectedCertificatsEntreprise;
+  protectedCertificats: IProtectedCertificatsEntreprise | null;
 }> = ({ uniteLegale, protectedCertificats }) => {
+  if (!protectedCertificats) {
+    return null;
+  }
   const { opqibi, qualibat, qualifelec } = protectedCertificats;
 
   return (
     <>
-      {!isNotAuthorized(opqibi) && !isAPINotResponding(opqibi) && (
+      {!isAPINotResponding(opqibi) && (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure possède une certification délivrée par l'association OPQIBI, attestant de ses différentes qualifications d'ingénierie"
           label="OPQIBI - Ingénierie"
@@ -20,7 +22,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
           siren={uniteLegale.siren}
         />
       )}
-      {!isNotAuthorized(qualibat) && !isAPINotResponding(qualibat) && (
+      {!isAPINotResponding(qualibat) && (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure a obtenue un label de fiabilité QUALIBAT, garantissant sa qualification dans le bâtiment"
           label="QUALIBAT - Bâtiment"
@@ -28,7 +30,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
           siren={uniteLegale.siren}
         />
       )}
-      {!isNotAuthorized(qualifelec) && !isAPINotResponding(qualifelec) && (
+      {!isAPINotResponding(qualifelec) && (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure est certifiée par QUALIFELEC, attestant de ses qualifications dans le domaine du génie électrique et énergétique"
           label="QUALIFELEC - Génie électrique"

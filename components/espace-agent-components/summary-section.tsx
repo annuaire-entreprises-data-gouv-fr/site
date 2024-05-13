@@ -12,21 +12,13 @@ import {
 } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
 import { IImmatriculationEORI } from '#models/espace-agent/immatriculation-eori';
-import {
-  EScope,
-  INotAuthorized,
-  hasRights,
-  isNotAuthorized,
-} from '#models/user/rights';
+import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps {
   uniteLegale: IUniteLegale;
-  immatriculationEORI:
-    | IImmatriculationEORI
-    | INotAuthorized
-    | IAPINotRespondingError;
+  immatriculationEORI: IImmatriculationEORI | IAPINotRespondingError | null;
   session: ISession | null;
 }
 
@@ -104,14 +96,14 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
                   ],
                 ]
               : []),
-            ...(!isNotAuthorized(immatriculationEORI) &&
+            ...(immatriculationEORI &&
             (!isAPINotResponding(immatriculationEORI) ||
               isAPI404(immatriculationEORI))
               ? [
                   ['', <br />],
                   [
                     'Immatriculation EORI',
-                    isNotAuthorized(immatriculationEORI) ? (
+                    !immatriculationEORI ? (
                       <em>Non autorisé</em> // Shouldn't happen (all agents have EORI rights)
                     ) : isAPI404(immatriculationEORI) ? (
                       <NonRenseigne />

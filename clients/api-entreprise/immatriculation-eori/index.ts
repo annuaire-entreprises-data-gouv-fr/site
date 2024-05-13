@@ -17,7 +17,10 @@ export type IAPIEntrepriseImmatriculationEORI = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseImmatriculationEORI = async (siret: Siret) => {
+export const clientApiEntrepriseImmatriculationEORI = async (
+  siret: Siret,
+  recipientSiret: Siret | undefined
+) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseImmatriculationEORI,
     IImmatriculationEORI
@@ -25,7 +28,8 @@ export const clientApiEntrepriseImmatriculationEORI = async (siret: Siret) => {
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.immatriculationEORI.replace('{siret}', siret)}`,
-    mapToDomainObject
+    mapToDomainObject,
+    recipientSiret
   );
 };
 

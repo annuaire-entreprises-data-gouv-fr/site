@@ -9,12 +9,7 @@ import {
 import { estDiffusible } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { IDirigeant } from '#models/immatriculation';
-import {
-  EScope,
-  INotAuthorized,
-  hasRights,
-  isNotAuthorized,
-} from '#models/user/rights';
+import { EScope, hasRights } from '#models/user/rights';
 import { useFetchImmatriculationRNE } from 'hooks';
 import useSession from 'hooks/use-session';
 import BeneficiairesSection from './beneficiaires';
@@ -27,7 +22,7 @@ export function DirigeantInformation({
   mandatairesRCS,
 }: {
   uniteLegale: IUniteLegale;
-  mandatairesRCS: Array<IDirigeant> | IAPINotRespondingError | INotAuthorized;
+  mandatairesRCS: Array<IDirigeant> | IAPINotRespondingError | null;
 }) {
   const immatriculationRNE = useFetchImmatriculationRNE(uniteLegale);
   const session = useSession();
@@ -40,8 +35,7 @@ export function DirigeantInformation({
       {estDiffusible(uniteLegale) ||
       hasRights(session, EScope.nonDiffusible) ? (
         <>
-          {!isNotAuthorized(mandatairesRCS) &&
-          !isAPINotResponding(mandatairesRCS) ? (
+          {mandatairesRCS && !isAPINotResponding(mandatairesRCS) ? (
             <MandatairesRCSSection
               mandatairesRCS={mandatairesRCS}
               immatriculationRNE={immatriculationRNE}

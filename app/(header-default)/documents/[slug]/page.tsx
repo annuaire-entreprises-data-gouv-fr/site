@@ -7,7 +7,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { isAPI404 } from '#models/api-not-responding';
 import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte-professionnelle-travaux-publics';
-import { EScope, hasRights, isNotAuthorized } from '#models/user/rights';
+import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -45,8 +45,16 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
   const session = await getSession();
   const { slug, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-  const carteProfessionnelleTravauxPublics =
-    await getCarteProfessionnelleTravauxPublic(uniteLegale.siren, session);
+
+  const carteProfessionnelleTravauxPublics = hasRights(
+    session,
+    EScope.carteProfessionnelleTravauxPublics
+  )
+    ? await getCarteProfessionnelleTravauxPublic(
+        uniteLegale.siren,
+        session?.user
+      )
+    : null;
   return (
     <>
       <div className="content-container">
@@ -62,7 +70,7 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
           </>
         )}
         <ActesSection uniteLegale={uniteLegale} session={session} />
-        {!isNotAuthorized(carteProfessionnelleTravauxPublics) &&
+        {carteProfessionnelleTravauxPublics &&
           !isAPI404(carteProfessionnelleTravauxPublics) && (
             <CarteProfessionnelleTravauxPublicsSection
               carteProfessionnelleTravauxPublics={

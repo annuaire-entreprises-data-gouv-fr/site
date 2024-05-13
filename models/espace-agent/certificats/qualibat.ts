@@ -1,11 +1,5 @@
 import { clientApiEntrepriseQualibat } from '#clients/api-entreprise/qualibat';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import {
-  EScope,
-  INotAuthorized,
-  hasRights,
-  notAuthorized,
-} from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { Siret } from '#utils/helpers';
 import { handleApiEntrepriseError } from '../utils';
@@ -33,12 +27,9 @@ export type IQualibat = {
 
 export const getQualibat = async (
   siret: Siret,
-  session: ISession | null
-): Promise<IQualibat | IAPINotRespondingError | INotAuthorized> => {
-  if (!hasRights(session, EScope.qualibat)) {
-    return notAuthorized();
-  }
-  return clientApiEntrepriseQualibat(siret, session?.user?.siret).catch(
-    (error) => handleApiEntrepriseError(error, { siret })
+  user: ISession['user'] | null
+): Promise<IQualibat | IAPINotRespondingError> => {
+  return clientApiEntrepriseQualibat(siret, user?.siret).catch((error) =>
+    handleApiEntrepriseError(error, { siret })
   );
 };

@@ -3,6 +3,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
 import { getServicePublicByUniteLegale } from '#models/service-public';
+import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -45,7 +46,9 @@ const DirigeantsPage = async (props: AppRouterProps) => {
   });
 
   const session = await getSession();
-  const mandatairesRCS = await getMandatairesRCS(uniteLegale.siren, session);
+  const mandatairesRCS = hasRights(session, EScope.mandatairesRCS)
+    ? await getMandatairesRCS(uniteLegale.siren, session?.user)
+    : null;
   return (
     <>
       <div className="content-container">

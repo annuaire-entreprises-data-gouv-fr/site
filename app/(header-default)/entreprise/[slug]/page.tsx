@@ -61,8 +61,12 @@ export default async function UniteLegalePage(props: AppRouterProps) {
       getServicePublicByUniteLegale(uniteLegale, {
         isBot,
       }),
-      getImmatriculationEORI(uniteLegale.siege.siret, session),
-      getProtectedCertificats(uniteLegale, session),
+      hasRights(session, EScope.eori)
+        ? getImmatriculationEORI(uniteLegale.siege.siret, session?.user)
+        : null,
+      hasRights(session, EScope.protectedCertificats)
+        ? getProtectedCertificats(uniteLegale, session?.user)
+        : null,
     ]);
 
   return (

@@ -1,11 +1,5 @@
 import { clientApiEntrepriseImmatriculationEORI } from '#clients/api-entreprise/immatriculation-eori';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import {
-  EScope,
-  INotAuthorized,
-  hasRights,
-  notAuthorized,
-} from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { Siret } from '#utils/helpers';
 import { handleApiEntrepriseError } from './utils';
@@ -18,12 +12,9 @@ export type IImmatriculationEORI = {
 
 export const getImmatriculationEORI = async (
   siret: Siret,
-  session: ISession | null
-): Promise<IImmatriculationEORI | IAPINotRespondingError | INotAuthorized> => {
-  if (!hasRights(session, EScope.eori)) {
-    return notAuthorized();
-  }
-  return clientApiEntrepriseImmatriculationEORI(siret).catch((error) =>
-    handleApiEntrepriseError(error, { siret })
+  user: ISession['user'] | null
+): Promise<IImmatriculationEORI | IAPINotRespondingError> => {
+  return clientApiEntrepriseImmatriculationEORI(siret, user?.siret).catch(
+    (error) => handleApiEntrepriseError(error, { siret })
   );
 };

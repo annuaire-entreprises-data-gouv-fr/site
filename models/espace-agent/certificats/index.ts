@@ -3,26 +3,25 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
-import { INotAuthorized, isNotAuthorized } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { IOpqibi, getOpqibi } from './opqibi';
 import { IQualibat, getQualibat } from './qualibat';
 import { IQualifelec, getQualifelec } from './qualifelec';
 
 export type IProtectedCertificatsEntreprise = {
-  qualifelec: IQualifelec | IAPINotRespondingError | INotAuthorized;
-  qualibat: IQualibat | IAPINotRespondingError | INotAuthorized;
-  opqibi: IOpqibi | IAPINotRespondingError | INotAuthorized;
+  qualifelec: IQualifelec | IAPINotRespondingError;
+  qualibat: IQualibat | IAPINotRespondingError;
+  opqibi: IOpqibi | IAPINotRespondingError;
 };
 
 export async function getProtectedCertificats(
   uniteLegale: IUniteLegale,
-  session: ISession | null
+  user: ISession['user'] | null
 ): Promise<IProtectedCertificatsEntreprise> {
   const [qualifelec, qualibat, opqibi] = await Promise.all([
-    getQualifelec(uniteLegale.siege.siret, session),
-    getQualibat(uniteLegale.siege.siret, session),
-    getOpqibi(uniteLegale.siren, session),
+    getQualifelec(uniteLegale.siege.siret, user),
+    getQualibat(uniteLegale.siege.siret, user),
+    getOpqibi(uniteLegale.siren, user),
   ]);
   return { qualifelec, qualibat, opqibi };
 }
@@ -31,7 +30,6 @@ export function hasProtectedCertificatsEntreprise(
   privateCertificats: IProtectedCertificatsEntreprise
 ): boolean {
   return Object.values(privateCertificats).some(
-    (certificat) =>
-      !isNotAuthorized(certificat) && !isAPINotResponding(certificat)
+    (certificat) => !isAPINotResponding(certificat)
   );
 }

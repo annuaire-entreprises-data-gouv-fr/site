@@ -8,7 +8,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { EScope, hasAnyRights } from '#models/user/rights';
+import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import styles from './styles.module.css';
 
@@ -101,11 +101,7 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay:
         checkHasLabelsAndCertificates(uniteLegale) ||
-        hasAnyRights(session, [
-          EScope.qualifelec,
-          EScope.qualibat,
-          EScope.opqibi,
-        ]),
+        hasRights(session, EScope.protectedCertificats),
       width: checkHasQuality(uniteLegale) ? '200px' : '110px',
     },
     {

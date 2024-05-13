@@ -36,12 +36,13 @@ import {
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
-  protectedCertificats: IProtectedCertificatsEntreprise;
+  protectedCertificats: IProtectedCertificatsEntreprise | null;
   session: ISession | null;
 }> = ({ uniteLegale, session, protectedCertificats }) => {
   const hasLabelsAndCertificates =
     checkHasLabelsAndCertificates(uniteLegale) ||
-    hasProtectedCertificatsEntreprise(protectedCertificats);
+    (protectedCertificats &&
+      hasProtectedCertificatsEntreprise(protectedCertificats));
   const conventionsCollectives = Object.keys(
     uniteLegale.conventionsCollectives || {}
   );
