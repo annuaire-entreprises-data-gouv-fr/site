@@ -30,7 +30,9 @@ const superAgents = new SuperAgentsList();
 
 export const checkIsSuperAgent = async (agentMail: string) => {
   const isTestAccount =
-    agentMail === 'user@yopmail.com' && process.env.NODE_ENV !== 'production';
+    (agentMail === 'user@yopmail.com' ||
+      agentMail === 'annuaire@yopmail.com') &&
+    process.env.NODE_ENV !== 'production';
 
   if (isTestAccount) {
     return true;

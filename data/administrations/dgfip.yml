@@ -1,0 +1,12 @@
+slug: dgfip
+short: DGFiP
+long: Direction générale des Finances publiques
+site: https://www.impots.gouv.fr/presentation-de-la-dgfip-overview-dgfip
+contact: https://www.impots.gouv.fr/contacts
+dataSources:
+  - label: Statut fiscal des entreprises
+    data:
+      - label: Attestation de conformité fiscale
+logoType: portrait
+description: |
+  La direction générale des Finances publiques (DGFiP) est la direction de l'administration française qui gère la fiscalité de l’État français et des collectivités territoriales. Elle gère l’imposition des particuliers et des entreprises, en définit les règles juridiques, en assure le recouvrement et en instruit les contentieux fiscaux.

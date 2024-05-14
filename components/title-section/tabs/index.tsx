@@ -8,6 +8,8 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
+import { EScope, hasRights } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 import styles from './styles.module.css';
 
 export enum FICHE {
@@ -29,7 +31,8 @@ export enum FICHE {
 export const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
-}> = ({ currentFicheType, uniteLegale }) => {
+  session: ISession | null;
+}> = ({ currentFicheType, uniteLegale, session }) => {
   const shouldDisplayFinances =
     // hide for public services
     !isServicePublic(uniteLegale) &&
@@ -96,7 +99,9 @@ export const Tabs: React.FC<{
       }abels et certificats`,
       pathPrefix: '/labels-certificats/',
       noFollow: false,
-      shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
+      shouldDisplay:
+        checkHasLabelsAndCertificates(uniteLegale) ||
+        hasRights(session, EScope.protectedCertificats),
       width: checkHasQuality(uniteLegale) ? '200px' : '110px',
     },
     {

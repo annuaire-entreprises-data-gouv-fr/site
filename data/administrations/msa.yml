@@ -1,0 +1,13 @@
+slug: msa
+short: MSA
+long: Mutualité sociale agricole
+site: https://www.msa.fr/lfp
+contact: https://www.msa.fr/lfp
+estServicePublic: false
+logoType: portrait
+dataSources:
+  - label: Statut des assurés à la sécurité sociale agricole
+    data:
+      - label: Attestation de conformité des cotisations sociales agricoles
+description: |
+  Infogreffe est le Groupement d’Intérêt Economique (G.I.E.) regroupant les 141 greffes des tribunaux de commerce.

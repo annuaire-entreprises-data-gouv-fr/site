@@ -118,7 +118,11 @@ const TitleEtablissementWithDenomination: React.FC<{
       />
     )}
 
-    <Tabs uniteLegale={uniteLegale} currentFicheType={FICHE.ETABLISSEMENT} />
+    <Tabs
+      uniteLegale={uniteLegale}
+      currentFicheType={FICHE.ETABLISSEMENT}
+      session={session}
+    />
   </div>
 );
 

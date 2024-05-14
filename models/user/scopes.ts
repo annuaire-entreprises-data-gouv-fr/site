@@ -1,6 +1,14 @@
 import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
 
-export type IScope = 'rne' | 'nonDiffusible' | 'conformite' | 'agent';
+export type IScope =
+  | 'rne'
+  | 'nonDiffusible'
+  | 'conformite'
+  | 'agent'
+  | 'opendata';
+
+const agentScope = ['agent', 'nonDiffusible', 'rne', 'opendata'] as const;
+const superAgentScope = [...agentScope, 'conformite'] as const;
 
 export const getUserScopes = async (
   userEmail: string
@@ -9,13 +17,13 @@ export const getUserScopes = async (
 
   if (isSuperAgent) {
     return {
-      scopes: ['agent', 'nonDiffusible', 'conformite', 'rne'],
+      scopes: [...superAgentScope],
       userType: 'Super-agent connecté',
     };
   }
 
   return {
-    scopes: ['agent', 'nonDiffusible', 'rne'],
+    scopes: [...agentScope],
     userType: 'Agent connecté',
   };
 };

@@ -1,18 +1,14 @@
 import routes from '#clients/routes';
-import { IConformite } from '#models/espace-agent/donnees-restreintes-entreprise';
+import { IConformite } from '#models/espace-agent/conformite';
 import { Siren } from '#utils/helpers';
-import clientAPIEntreprise from '../client';
+import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
-export type IAPIEntrepriseConformiteFiscale = {
-  data: {
-    document_url: string;
-    document_url_expires_in: number;
-    date_delivrance_attestation: string;
-    date_periode_analysee: string;
-  };
-  links: {};
-  meta: {};
-};
+export type IAPIEntrepriseConformiteFiscale = IAPIEntrepriseResponse<{
+  document_url: string;
+  document_url_expires_in: number;
+  date_delivrance_attestation: string;
+  date_periode_analysee: string;
+}>;
 
 /**
  * GET documents from API Entreprise
@@ -25,7 +21,9 @@ export const clientApiEntrepriseConformiteFiscale = async (
     IAPIEntrepriseConformiteFiscale,
     IConformite
   >(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale}${siren}/attestation_fiscale`,
+    `${
+      process.env.API_ENTREPRISE_URL
+    }${routes.apiEntreprise.conformite.fiscale.replace('{siren}', siren)}`,
     mapToDomainObject,
     recipientSiret
   );

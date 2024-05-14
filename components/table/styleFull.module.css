@@ -13,6 +13,7 @@ td.cell {
   border-right: none;
   border: none;
   padding: 5px 0;
+  padding-right: 10px;
   background-color: #fff;
 }
 

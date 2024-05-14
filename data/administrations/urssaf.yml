@@ -1,0 +1,12 @@
+slug: urssaf
+short: URSSAF
+long: Union de recouvrement des cotisations de sécurité sociale et d'allocations familiales
+site: https://www.urssaf.fr/accueil.html
+contact: https://www.urssaf.fr/accueil/contacter-urssaf.html
+logoType: portrait
+dataSources:
+  - label: Statut des assurés auprès de l'URSSAF Caisse nationale
+    data:
+      - label: Attestation de vigilance
+description: |
+  Les URSSAF sont des organismes privés chargés d'une mission de service public. Ils relèvent de la branche « recouvrement » du régime général de la sécurité sociale et ont pour principale mission de collecter les cotisations salariales et patronales destinées à financer le régime général de la Sécurité sociale.

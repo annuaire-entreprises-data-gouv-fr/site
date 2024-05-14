@@ -5,6 +5,11 @@ import { httpGet } from '#utils/network';
 import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
 import { logInfoInSentry } from '#utils/sentry';
 
+export type IAPIEntrepriseResponse<T> = {
+  data: T;
+  links: {};
+  meta: {};
+};
 /**
  * Wrapper client to call API Entreprise
  *

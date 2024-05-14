@@ -4,7 +4,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { IConformite } from '#models/espace-agent/donnees-restreintes-entreprise';
+import { IConformite } from '#models/espace-agent/conformite';
 import AdministrationInformation from './administration-information';
 
 const APINotRespongingElement: React.FC<{

@@ -2,20 +2,30 @@ import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
+import NonRenseigne from '#components/non-renseigne';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
+import {
+  IAPINotRespondingError,
+  isAPI404,
+  isAPINotResponding,
+} from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
+import { IImmatriculationEORI } from '#models/espace-agent/immatriculation-eori';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import { formatIntFr } from '#utils/helpers';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps {
   uniteLegale: IUniteLegale;
+  immatriculationEORI: IImmatriculationEORI | IAPINotRespondingError | null;
   session: ISession | null;
 }
 
 export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
   uniteLegale,
+  immatriculationEORI,
   session,
 }) => {
   return (
@@ -23,6 +33,32 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
       <Section title="Résumé pour les agents publics" isProtected>
         <TwoColumnTable
           body={[
+            ...(immatriculationEORI &&
+            (!isAPINotResponding(immatriculationEORI) ||
+              isAPI404(immatriculationEORI))
+              ? [
+                  [
+                    <FAQLink
+                      tooltipLabel="N° EORI"
+                      to="https://www.economie.gouv.fr/entreprises/numero-eori"
+                    >
+                      Le numéro EORI (Economic Operator Registration and
+                      Identification) est un numéro unique communautaire permet
+                      d’identifier les entreprises dans ses relations avec les
+                      autorités douanières.
+                    </FAQLink>,
+                    !immatriculationEORI ? (
+                      <em>Non autorisé</em> // Shouldn't happen (all agents have EORI rights)
+                    ) : isAPI404(immatriculationEORI) ? (
+                      <NonRenseigne />
+                    ) : !immatriculationEORI.actif ? (
+                      'Non actif'
+                    ) : (
+                      formatIntFr(immatriculationEORI.identifiantEORI)
+                    ),
+                  ],
+                ]
+              : []),
             [
               <FAQLink
                 tooltipLabel="Immatriculation au RNE"
