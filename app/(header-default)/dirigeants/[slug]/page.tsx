@@ -46,9 +46,11 @@ const DirigeantsPage = async (props: AppRouterProps) => {
   });
 
   const session = await getSession();
+
   const mandatairesRCS = hasRights(session, EScope.mandatairesRCS)
-    ? await getMandatairesRCS(uniteLegale.siren, session?.user)
+    ? await getMandatairesRCS(uniteLegale.siren, session?.user?.siret)
     : null;
+
   return (
     <>
       <div className="content-container">

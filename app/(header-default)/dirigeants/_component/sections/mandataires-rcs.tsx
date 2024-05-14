@@ -4,7 +4,7 @@ import React from 'react';
 import routes from '#clients/routes';
 import { Warning } from '#components-ui/alerts';
 import FadeIn from '#components-ui/animation/fade-in';
-import { Section } from '#components/section';
+import { DataSectionClient } from '#components/section/data-section/client';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPILoading, isAPILoading } from '#models/api-loading';
 import {
@@ -25,33 +25,58 @@ type IProps = {
 };
 
 /**
- * Dirigeants section
+ * Dirigeants from RCS section
  */
 const MandatairesRCSSection: React.FC<IProps> = ({
   mandatairesRCS,
   immatriculationRNE,
   uniteLegale,
 }) => (
-  <Section
+  <DataSectionClient
     id="rne-dirigeants"
     title="Dirigeant(s)"
     isProtected
-    sources={[EAdministration.DINUM]}
+    sources={[EAdministration.INFOGREFFE]}
+    data={mandatairesRCS}
   >
-    <>
-      {mandatairesRCS.length === 0 ? (
-        <p>
-          Cette entreprise est enregistrée sur{' '}
-          <strong>Infogreffe (ex-RCS)</strong>, mais n’y possède aucun
-          dirigeant.
-        </p>
+    {(mandatairesRCS) =>
+      mandatairesRCS.length === 0 ? (
+        <p>Cette entreprise ne possède aucun dirigeant.</p>
       ) : (
         <>
+          {RCSDiffersFromRNE(mandatairesRCS, immatriculationRNE) && (
+            <FadeIn>
+              <Warning>
+                Le nombre de dirigeants enregistrés sur Infogreffe (ex-RCS)
+                diffère de celui du RNE. Cette situation est anormale. Pour en
+                savoir plus vous pouvez consulter la page de cette entreprise
+                sur{' '}
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
+                  aria-label="Consulter la liste des dirigeants sur le site de l’INPI, nouvelle fenêtre"
+                >
+                  data.inpi.fr
+                </a>{' '}
+                ou sur{' '}
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href={`${routes.infogreffe.portail.entreprise}${uniteLegale.siren}`}
+                  aria-label="Consulter la liste des dirigeants sur le site d’Infogreffe, nouvelle fenêtre"
+                >
+                  Infogreffe
+                </a>
+                .
+              </Warning>
+            </FadeIn>
+          )}
           <p>
             Cette entreprise possède {mandatairesRCS.length} mandataire(s)
-            enregistrés sur <strong>Infogreffe (ex-RCS)</strong>. En tant
-            qu’agent public, vous avez accès à la date de naissance exacte des
-            dirigeants.
+            enregistrés sur <strong>Infogreffe</strong> (ex-RCS). Nous vous
+            affichons cette liste en complément du RNE car elle permet d’accèder
+            à la date de naissance complète des personnes physiques :
           </p>
           <DirigeantContent
             dirigeants={mandatairesRCS}
@@ -59,42 +84,9 @@ const MandatairesRCSSection: React.FC<IProps> = ({
             uniteLegale={uniteLegale}
           />
         </>
-      )}
-      {RCSDiffersFromRNE(mandatairesRCS, immatriculationRNE) && (
-        <FadeIn>
-          <Warning>
-            <p>
-              Le nombre de dirigeants enregistrés sur Infogreffe diffère de
-              celui du RNE. Cette situation est anormale, et relève d’un
-              dysfonctionnement du RNE ou d’Infogreffe.
-            </p>
-            <ul>
-              <li>
-                <a
-                  rel="noopener"
-                  target="_blank"
-                  href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
-                  aria-label="Consulter la liste des dirigeants sur le site de l’INPI, nouvelle fenêtre"
-                >
-                  Consulter la liste des dirigeants sur le site de l’INPI
-                </a>
-              </li>
-              <li>
-                <a
-                  rel="noopener"
-                  target="_blank"
-                  href={`${routes.infogreffe.portail.entreprise}${uniteLegale.siren}`}
-                  aria-label="Consulter la liste des dirigeants sur le site d’Infogreffe, nouvelle fenêtre"
-                >
-                  Consulter la liste des dirigeants sur le site d’Infogreffe
-                </a>
-              </li>
-            </ul>
-          </Warning>
-        </FadeIn>
-      )}
-    </>
-  </Section>
+      )
+    }
+  </DataSectionClient>
 );
 
 export default MandatairesRCSSection;

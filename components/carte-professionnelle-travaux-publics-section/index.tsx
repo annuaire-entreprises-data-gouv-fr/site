@@ -20,7 +20,7 @@ export function CarteProfessionnelleTravauxPublicsSection({
         title="Carte professionnelle travaux publics"
         id="carte-professionnelle-travaux-publics"
         isProtected
-        sources={[EAdministration.DINUM]}
+        sources={[EAdministration.FNTP]}
         data={carteProfessionnelleTravauxPublics}
       >
         {(data) => (

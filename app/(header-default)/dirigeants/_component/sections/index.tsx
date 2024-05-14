@@ -35,14 +35,13 @@ export function DirigeantInformation({
       {estDiffusible(uniteLegale) ||
       hasRights(session, EScope.nonDiffusible) ? (
         <>
-          {mandatairesRCS && !isAPINotResponding(mandatairesRCS) ? (
+          <DirigeantsSection
+            immatriculationRNE={immatriculationRNE}
+            uniteLegale={uniteLegale}
+          />
+          {mandatairesRCS && !isAPINotResponding(mandatairesRCS) && (
             <MandatairesRCSSection
               mandatairesRCS={mandatairesRCS}
-              immatriculationRNE={immatriculationRNE}
-              uniteLegale={uniteLegale}
-            />
-          ) : (
-            <DirigeantsSection
               immatriculationRNE={immatriculationRNE}
               uniteLegale={uniteLegale}
             />
