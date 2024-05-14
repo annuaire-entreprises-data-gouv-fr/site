@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import FadeIn from '#components-ui/animation/fade-in';
-import { Loader } from '#components-ui/loader';
+import { PageLoader } from '#components/page-loader';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { getServicePublicByUniteLegale } from '#models/service-public';
@@ -59,19 +58,8 @@ const DirigeantsPage = async (props: AppRouterProps) => {
         {servicePublic ? (
           <ResponsableSection servicePublic={servicePublic} />
         ) : (
-          <Suspense
-            fallback={
-              <>
-                Chargement des données en cours <Loader />
-              </>
-            }
-          >
-            <FadeIn>
-              <DirigeantInformation
-                uniteLegale={uniteLegale}
-                session={session}
-              />
-            </FadeIn>
+          <Suspense fallback={<PageLoader />}>
+            <DirigeantInformation uniteLegale={uniteLegale} session={session} />
           </Suspense>
         )}
       </div>
