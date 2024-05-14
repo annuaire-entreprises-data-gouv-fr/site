@@ -70,7 +70,7 @@ const Footer = () => (
                     className="fr-footer__top-link"
                     target="_blank"
                     rel="noreferrer noopener"
-                    href="https://github.com/annuaire-entreprises-data-gouv-fr/site"
+                    href="https://github.com/annuaire-entreprises-data-gouv-fr"
                   >
                     Code source
                   </a>
