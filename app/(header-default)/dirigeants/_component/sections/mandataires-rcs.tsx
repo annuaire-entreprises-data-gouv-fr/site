@@ -82,7 +82,6 @@ async function MandatairesRCSSection({
     </DataSection>
   );
 }
-
 export default MandatairesRCSSection;
 
 function RCSDiffersFromRNE(

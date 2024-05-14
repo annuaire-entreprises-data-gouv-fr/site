@@ -59,7 +59,11 @@ export const AgentActesSection: React.FC<{
                 RNE. Chaque document peut contenir un ou plusieurs actes :
               </p>
               {documents.actes.length >= 5 ? (
-                <ShowMore>
+                <ShowMore
+                  label={`Voir les ${
+                    documents.actes.length - 5
+                  } documents supplémentaires`}
+                >
                   <ActesTable actes={documents.actes} />
                 </ShowMore>
               ) : (
