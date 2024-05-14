@@ -1,0 +1,16 @@
+slug: infogreffe
+short: Infogreffe
+long: Infogreffe
+site: https://www.infogreffe.fr/
+contact: https://www.infogreffe.fr/contact-infogreffe
+# apiMonitors:
+#   - apiName: API EORI
+#     apiSlug: eori
+estServicePublic: false
+logoType: portrait
+dataSources:
+  - label: RCS
+    data:
+      - label: mandataires RCS
+description: |
+  Infogreffe est le Groupement d’Intérêt Economique (G.I.E.) regroupant les 141 greffes des tribunaux de commerce.

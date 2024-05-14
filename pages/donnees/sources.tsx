@@ -66,24 +66,24 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
                           )),
                         ],
                         [
-                          'Accès au jeu de données complet',
-                          <a
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            href={datagouvLink}
-                          >
-                            → Consulter la source
-                          </a>,
+                          'Accès au jeu de données',
+                          datagouvLink ? (
+                            <a
+                              target="_blank"
+                              rel="noreferrer noopener"
+                              href={datagouvLink}
+                            >
+                              → Consulter la source
+                            </a>
+                          ) : null,
                         ],
-                        ...[
-                          apiSlug
-                            ? [
-                                'Accès par API',
-                                <a href={`/donnees/api#${apiSlug}`}>
-                                  → Consulter l’API
-                                </a>,
-                              ]
-                            : [],
+                        [
+                          'Accès par API',
+                          apiSlug ? (
+                            <a href={`/donnees/api#${apiSlug}`}>
+                              → Consulter l’API
+                            </a>
+                          ) : null,
                         ],
                         ...[
                           contact
