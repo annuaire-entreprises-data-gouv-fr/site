@@ -1,65 +1,50 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
-import AdministrationNotRespondingMessage from '#components/administration-not-responding/message';
-import { administrationsMetaData } from '#models/administrations';
-import { IAPILoading } from '#models/api-loading';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
+import { Suspense } from 'react';
+import FadeIn from '#components-ui/animation/fade-in';
+import { HeightTransition } from '#components-ui/animation/height-transition';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import { ISectionProps, Section } from '..';
+import { DataSectionContent } from './content';
+import { DataSectionLoader } from './loader';
 
 interface IDataSectionServerProps<T> extends ISectionProps {
-  data: IAPINotRespondingError | T;
-  notFoundInfo?: React.ReactNode;
+  data: Promise<IAPINotRespondingError | T>;
+  notFoundInfo?: NonNullable<React.ReactNode>;
   additionalInfoOnError?: React.ReactNode;
   children: (data: T) => JSX.Element;
 }
 
-/**
- * Uses data's type to handle transitions, display loader, error or formatted data
- * @param param0
- * @returns
- */
-export function DataSectionServer<T extends Exclude<unknown, IAPILoading>>({
-  data,
-  notFoundInfo,
-  additionalInfoOnError,
-  ...props
-}: IDataSectionServerProps<T>) {
-  //@ts-ignore
-  const lastModified = data?.lastModified || null;
-
-  if (isAPINotResponding(data)) {
-    if (data.errorType === 404 && notFoundInfo === null) {
-      return null;
-    }
-
-    if (data.errorType === 404 && notFoundInfo) {
-      return (
-        <Section {...props} lastModified={lastModified}>
-          {notFoundInfo}
-        </Section>
-      );
-    }
-
-    const administrationMetaData =
-      administrationsMetaData[data.administration] || {};
+export function AsyncDataSectionServer<T>(props: IDataSectionServerProps<T>) {
+  if (props.notFoundInfo === null) {
     return (
-      <Section {...props} lastModified={lastModified}>
-        <AdministrationNotRespondingMessage
-          administrationMetaData={administrationMetaData}
-        />
-        {additionalInfoOnError ?? null}
-      </Section>
+      <Suspense>
+        <HeightTransition animateAppear>
+          <DataSectionContentServerAsync {...props} />
+        </HeightTransition>
+      </Suspense>
     );
   }
 
   return (
-    <Section {...props} lastModified={lastModified}>
-      {props.children(data)}
+    <Section {...props}>
+      <HeightTransition>
+        <Suspense fallback={<DataSectionLoader sources={props.sources} />}>
+          <FadeIn>
+            <DataSectionContentServerAsync {...props} />
+          </FadeIn>
+        </Suspense>
+      </HeightTransition>
     </Section>
   );
 }
+
+async function DataSectionContentServerAsync<T>({
+  data: promiseData,
+  ...props
+}: IDataSectionServerProps<T>) {
+  const data = await promiseData;
+  return <DataSectionContent data={data} {...props} />;
+}
+
 /* eslint-enable react/jsx-props-no-spreading */

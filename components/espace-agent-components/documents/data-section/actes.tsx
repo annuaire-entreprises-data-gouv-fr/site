@@ -5,7 +5,7 @@ import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import { PrintNever } from '#components-ui/print-visibility';
 import ShowMore from '#components-ui/show-more';
-import { DataSectionClient } from '#components/section/data-section/client';
+import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
@@ -28,7 +28,7 @@ export const AgentActesSection: React.FC<{
 
   return (
     <PrintNever>
-      <DataSectionClient
+      <AsyncDataSectionClient
         title="Actes et statuts"
         id="actes"
         isProtected
@@ -72,7 +72,7 @@ export const AgentActesSection: React.FC<{
             </>
           )
         }
-      </DataSectionClient>
+      </AsyncDataSectionClient>
     </PrintNever>
   );
 };

@@ -1,21 +1,26 @@
-'use client';
-
 import { PrintNever } from '#components-ui/print-visibility';
-import { DataSectionClient } from '#components/section/data-section/client';
+import { DataSectionServer } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import useFetchConformite from 'hooks/fetch/conformite';
+import { getConformiteEntreprise } from '#models/espace-agent/conformite';
+import { ISession } from '#models/user/session';
 import Conformite from './conformite';
 
-const ConformiteSection: React.FC<{
+interface IProps {
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
-  const conformite = useFetchConformite(uniteLegale);
+  session: ISession | null;
+}
+async function ConformiteSection({ uniteLegale, session }: IProps) {
+  const conformite = getConformiteEntreprise(
+    uniteLegale.siren,
+    uniteLegale.siege.siret,
+    session?.user?.siret
+  );
 
   return (
     <PrintNever>
-      <DataSectionClient
+      <DataSectionServer
         title="Conformité"
         id="conformite"
         isProtected
@@ -44,9 +49,9 @@ const ConformiteSection: React.FC<{
             ]}
           />
         )}
-      </DataSectionClient>
+      </DataSectionServer>
     </PrintNever>
   );
-};
+}
 
 export default ConformiteSection;

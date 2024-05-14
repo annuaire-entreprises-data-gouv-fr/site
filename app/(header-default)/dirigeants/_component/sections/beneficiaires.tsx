@@ -5,7 +5,7 @@ import routes from '#clients/routes';
 import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
-import { DataSectionClient } from '#components/section/data-section/client';
+import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -39,7 +39,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
   return (
     <>
       <HorizontalSeparator />
-      <DataSectionClient
+      <AsyncDataSectionClient
         id="beneficiaires"
         title="Bénéficiaire(s) effectif(s)"
         sources={[EAdministration.INPI]}
@@ -57,7 +57,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
             uniteLegale={uniteLegale}
           />
         )}
-      </DataSectionClient>
+      </AsyncDataSectionClient>
     </>
   );
 };

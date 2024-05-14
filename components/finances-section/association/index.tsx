@@ -1,5 +1,5 @@
 import { LineChart } from '#components/chart/line';
-import { DataSectionServer } from '#components/section/data-section/server';
+import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
@@ -35,7 +35,7 @@ export const FinancesAssociationSection: React.FC<{
     APINotRespondingFactory(EAdministration.MI, 404);
 
   return (
-    <DataSectionServer
+    <DataSection
       notFoundInfo="Aucun indicateur financier n’a été retrouvé pour cette association."
       title="Indicateurs financiers"
       sources={[EAdministration.MI]}
@@ -127,6 +127,6 @@ export const FinancesAssociationSection: React.FC<{
           />
         </>
       )}
-    </DataSectionServer>
+    </DataSection>
   );
 };

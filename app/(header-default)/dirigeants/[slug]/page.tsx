@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
+import { PageLoader } from '#components/page-loader';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
 import { getServicePublicByUniteLegale } from '#models/service-public';
-import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -47,10 +47,6 @@ const DirigeantsPage = async (props: AppRouterProps) => {
 
   const session = await getSession();
 
-  const mandatairesRCS = hasRights(session, EScope.mandatairesRCS)
-    ? await getMandatairesRCS(uniteLegale.siren, session?.user?.siret)
-    : null;
-
   return (
     <>
       <div className="content-container">
@@ -62,10 +58,9 @@ const DirigeantsPage = async (props: AppRouterProps) => {
         {servicePublic ? (
           <ResponsableSection servicePublic={servicePublic} />
         ) : (
-          <DirigeantInformation
-            mandatairesRCS={mandatairesRCS}
-            uniteLegale={uniteLegale}
-          />
+          <Suspense fallback={<PageLoader />}>
+            <DirigeantInformation uniteLegale={uniteLegale} session={session} />
+          </Suspense>
         )}
       </div>
     </>

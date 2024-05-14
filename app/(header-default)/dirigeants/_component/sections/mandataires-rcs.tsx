@@ -1,10 +1,6 @@
-'use client';
-
-import React from 'react';
 import routes from '#clients/routes';
 import { Warning } from '#components-ui/alerts';
-import FadeIn from '#components-ui/animation/fade-in';
-import { DataSectionServer } from '#components/section/data-section/server';
+import { DataSection } from '#components/section/data-section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPILoading, isAPILoading } from '#models/api-loading';
 import {
@@ -16,36 +12,33 @@ import { IDirigeant, IImmatriculationRNE } from '#models/immatriculation';
 import { DirigeantContent } from './dirigeant-content';
 
 type IProps = {
-  mandatairesRCS: Array<IDirigeant>;
-  immatriculationRNE:
-    | IImmatriculationRNE
-    | IAPINotRespondingError
-    | IAPILoading;
+  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
   uniteLegale: IUniteLegale;
+  mandatairesRCS: Array<IDirigeant> | IAPINotRespondingError;
 };
 
 /**
  * Dirigeants from RCS section
  */
-const MandatairesRCSSection: React.FC<IProps> = ({
-  mandatairesRCS,
-  immatriculationRNE,
+async function MandatairesRCSSection({
   uniteLegale,
-}) => (
-  <DataSectionServer
-    id="rne-dirigeants"
-    title="Dirigeant(s)"
-    isProtected
-    sources={[EAdministration.INFOGREFFE]}
-    data={mandatairesRCS}
-  >
-    {(mandatairesRCS) =>
-      mandatairesRCS.length === 0 ? (
-        <p>Cette entreprise ne possède aucun dirigeant.</p>
-      ) : (
-        <>
-          {RCSDiffersFromRNE(mandatairesRCS, immatriculationRNE) && (
-            <FadeIn>
+  immatriculationRNE,
+  mandatairesRCS,
+}: IProps) {
+  return (
+    <DataSection
+      id="rne-dirigeants"
+      title="Dirigeant(s)"
+      isProtected
+      sources={[EAdministration.INFOGREFFE]}
+      data={mandatairesRCS}
+    >
+      {(mandatairesRCS) =>
+        mandatairesRCS.length === 0 ? (
+          <p>Cette entreprise ne possède aucun dirigeant.</p>
+        ) : (
+          <>
+            {RCSDiffersFromRNE(mandatairesRCS, immatriculationRNE) && (
               <Warning>
                 Le nombre de dirigeants enregistrés sur Infogreffe (ex-RCS)
                 diffère de celui du RNE. Cette situation est anormale. Pour en
@@ -70,25 +63,25 @@ const MandatairesRCSSection: React.FC<IProps> = ({
                 </a>
                 .
               </Warning>
-            </FadeIn>
-          )}
-          <p>
-            Cette entreprise possède {mandatairesRCS.length} mandataire(s)
-            enregistrés sur <strong>Infogreffe</strong> (ex-RCS). Nous vous
-            affichons cette liste en complément du RNE car elle permet d’accèder
-            à la date de naissance complète des personnes physiques :
-          </p>
-          <DirigeantContent
-            dirigeants={mandatairesRCS}
-            isFallback={false}
-            uniteLegale={uniteLegale}
-          />
-        </>
-      )
-    }
-  </DataSectionServer>
-);
-
+            )}
+            <p>
+              Cette entreprise possède {mandatairesRCS.length} mandataire(s)
+              enregistrés sur <strong>Infogreffe</strong> (ex-RCS). Nous vous
+              affichons cette liste en complément du RNE car elle permet
+              d’accèder à la date de naissance complète des personnes physiques
+              :
+            </p>
+            <DirigeantContent
+              dirigeants={mandatairesRCS}
+              isFallback={false}
+              uniteLegale={uniteLegale}
+            />
+          </>
+        )
+      }
+    </DataSection>
+  );
+}
 export default MandatairesRCSSection;
 
 function RCSDiffersFromRNE(

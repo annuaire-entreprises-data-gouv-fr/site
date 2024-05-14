@@ -1,8 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
-import FadeIn from '#components-ui/animation/fade-in';
 import { Loader } from '#components-ui/loader';
 import { INPI, INSEE, MI } from '#components/administrations';
-import { IAPILoading, isAPILoading } from '#models/api-loading';
+import { isAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -42,23 +41,17 @@ const NoDirigeantDefault = () => (
 );
 
 type IDirigeantSummaryProps = {
-  immatriculationRNE:
-    | IImmatriculationRNE
-    | IAPINotRespondingError
-    | IAPILoading;
+  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
   uniteLegale: IUniteLegale;
 };
 
-const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
+const DirigeantSummary: React.FC<IDirigeantSummaryProps> = async ({
   uniteLegale,
   immatriculationRNE,
 }) => {
   const summaries = [];
 
-  if (
-    !isAPILoading(immatriculationRNE) &&
-    !isAPINotResponding(immatriculationRNE)
-  ) {
+  if (!isAPINotResponding(immatriculationRNE)) {
     const dirigeantsCount = (immatriculationRNE?.dirigeants || []).length;
     summaries.push(
       <a href="#rne-dirigeants">
@@ -104,9 +97,7 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
       Cette structure possède :
       <ul>
         {summaries.map((summary, index) => (
-          <li key={index}>
-            <FadeIn>{summary}</FadeIn>
-          </li>
+          <li key={index}>{summary}</li>
         ))}
       </ul>
       <br />

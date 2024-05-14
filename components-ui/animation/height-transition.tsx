@@ -1,3 +1,4 @@
+'use client';
 import { animated } from '@react-spring/web';
 import { useHeightTransition } from 'hooks/use-height-transition';
 

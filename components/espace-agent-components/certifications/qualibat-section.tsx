@@ -1,7 +1,7 @@
 'use client';
 
 import ButtonLink from '#components-ui/button';
-import { DataSectionServer } from '#components/section/data-section/server';
+import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -12,7 +12,7 @@ export const QualibatSection: React.FC<{
   qualibat: IQualibat | IAPINotRespondingError;
 }> = ({ qualibat }) => {
   return (
-    <DataSectionServer
+    <DataSection
       title="Certificat Qualibat"
       id="qualibat"
       isProtected
@@ -80,6 +80,6 @@ export const QualibatSection: React.FC<{
           />
         </>
       )}
-    </DataSectionServer>
+    </DataSection>
   );
 };

@@ -1,7 +1,7 @@
 'use client';
 
 import ButtonLink from '#components-ui/button';
-import { DataSectionServer } from '#components/section/data-section/server';
+import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -12,7 +12,7 @@ export const QualifelecSection: React.FC<{
   qualifelec: IQualifelec | IAPINotRespondingError;
 }> = ({ qualifelec }) => {
   return (
-    <DataSectionServer
+    <DataSection
       title="Certificats Qualifelec"
       id="qualifelec"
       isProtected
@@ -73,6 +73,6 @@ export const QualifelecSection: React.FC<{
           />
         </>
       )}
-    </DataSectionServer>
+    </DataSection>
   );
 };

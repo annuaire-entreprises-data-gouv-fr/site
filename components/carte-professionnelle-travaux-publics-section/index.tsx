@@ -1,7 +1,7 @@
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
-import { DataSectionServer } from '#components/section/data-section/server';
+import { DataSection } from '#components/section/data-section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { ICarteProfessionnelleTravauxPublics } from '#models/espace-agent/carte-professionnelle-travaux-publics';
@@ -16,7 +16,7 @@ export function CarteProfessionnelleTravauxPublicsSection({
 }: IProps) {
   return (
     <PrintNever>
-      <DataSectionServer
+      <DataSection
         title="Carte professionnelle travaux publics"
         id="carte-professionnelle-travaux-publics"
         isProtected
@@ -49,7 +49,7 @@ export function CarteProfessionnelleTravauxPublicsSection({
             </div>
           </>
         )}
-      </DataSectionServer>
+      </DataSection>
     </PrintNever>
   );
 }
