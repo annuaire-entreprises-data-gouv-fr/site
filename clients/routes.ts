@@ -1,6 +1,5 @@
 const routes = {
   api: {
-    association: '/api/data-fetching/association',
     rne: {
       documents: {
         list: '/api/data-fetching/espace-agent/documents/',
