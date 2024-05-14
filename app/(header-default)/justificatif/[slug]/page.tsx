@@ -1,4 +1,7 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
+import FadeIn from '#components-ui/animation/fade-in';
+import { Loader } from '#components-ui/loader';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { getImmatriculationJOAFE } from '#models/immatriculation/joafe';
@@ -47,11 +50,21 @@ const JustificatifPage = async (props: AppRouterProps) => {
           ficheType={FICHE.JUSTIFICATIFS}
           session={session}
         />
-        <Immatriculations
-          uniteLegale={uniteLegale}
-          immatriculationJOAFE={immatriculationJOAFE}
-          session={session}
-        />
+        <Suspense
+          fallback={
+            <>
+              Chargement des données en cours <Loader />
+            </>
+          }
+        >
+          <FadeIn>
+            <Immatriculations
+              uniteLegale={uniteLegale}
+              immatriculationJOAFE={immatriculationJOAFE}
+              session={session}
+            />
+          </FadeIn>
+        </Suspense>
       </div>
     </>
   );

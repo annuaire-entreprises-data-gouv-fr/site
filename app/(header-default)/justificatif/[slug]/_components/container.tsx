@@ -2,7 +2,7 @@ import React from 'react';
 import AssociationCreationNotFoundAlert from '#components-ui/alerts-with-explanations/association-creation-not-found-alert';
 import ImmatriculationRNENotFoundAlert from '#components-ui/alerts-with-explanations/rne-not-found-alert';
 import BreakPageForPrint from '#components-ui/print-break-page';
-import { IAPILoading, isAPILoading } from '#models/api-loading';
+import { isAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -31,10 +31,7 @@ const isNotFound = (
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;
   immatriculationJOAFE: IImmatriculationJOAFE | IAPINotRespondingError;
-  immatriculationRNE:
-    | IImmatriculationRNE
-    | IAPINotRespondingError
-    | IAPILoading;
+  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
 }
 
 interface IProps extends IJustificatifs {

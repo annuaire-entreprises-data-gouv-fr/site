@@ -7,11 +7,10 @@ import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
+import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
   defaultNonDiffusiblePlaceHolder,
@@ -22,7 +21,7 @@ import { IImmatriculationRNE } from '#models/immatriculation';
 import { formatDate, formatIntFr } from '#utils/helpers';
 
 type IProps = {
-  immatriculation: IImmatriculationRNE | IAPINotRespondingError | IAPILoading;
+  immatriculation: IImmatriculationRNE | IAPINotRespondingError;
   uniteLegale: IUniteLegale;
 };
 
@@ -93,7 +92,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
 }) => {
   return (
     <>
-      <AsyncDataSectionClient
+      <DataSection
         id="rne"
         title="Inscription au RNE"
         sources={[EAdministration.INPI]}
@@ -148,7 +147,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
             ) : null}
           </>
         )}
-      </AsyncDataSectionClient>
+      </DataSection>
       <HorizontalSeparator />
     </>
   );
