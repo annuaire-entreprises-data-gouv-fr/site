@@ -4,7 +4,6 @@
 import { useEffect, useState } from 'react';
 import { FadeIn } from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
-import { administrationsMetaData } from '#models/administrations';
 import { IAPILoading, isAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { useTimeout } from 'hooks/use-timeout';
@@ -25,19 +24,15 @@ export function AsyncDataSectionClient<T>({
   const showLoadingState = useShowLoadingState(data);
 
   if (isAPILoading(data) && !showLoadingState) {
-    return <div style={{ minHeight: '100px' }} />;
+    return <div style={{ minHeight: '80px' }} />;
   }
-
-  const dataSources = Array.from(new Set(props.sources || [])).map(
-    (key) => administrationsMetaData[key]
-  );
 
   if (showLoadingState) {
     return (
       <Section {...props}>
         <HeightTransition>
           <FadeIn>
-            <DataSectionLoader dataSources={dataSources} />
+            <DataSectionLoader sources={props.sources} />
           </FadeIn>
         </HeightTransition>
       </Section>

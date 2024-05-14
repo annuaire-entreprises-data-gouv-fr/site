@@ -1,21 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
-import AdministrationNotRespondingMessage from '#components/administration-not-responding/message';
-import { administrationsMetaData } from '#models/administrations';
 import { IAPILoading } from '#models/api-loading';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
 import { ISectionProps, Section } from '..';
+import { DataSectionContent, IDataSectionContentProps } from './content';
 
-interface IDataSectionProps<T> extends ISectionProps {
-  data: IAPINotRespondingError | T;
-  notFoundInfo?: React.ReactNode;
-  additionalInfoOnError?: React.ReactNode;
-  children: (data: T) => JSX.Element;
-}
+interface IDataSectionProps<T>
+  extends ISectionProps,
+    IDataSectionContentProps<T> {}
 
 /**
  * Uses data's type to handle transitions, display loader, error or formatted data
@@ -25,40 +16,28 @@ interface IDataSectionProps<T> extends ISectionProps {
 export function DataSection<T extends Exclude<unknown, IAPILoading>>({
   data,
   notFoundInfo,
+  children,
   additionalInfoOnError,
   ...props
 }: IDataSectionProps<T>) {
   //@ts-ignore
-  const lastModified = data?.lastModified || null;
-
-  if (isAPINotResponding(data)) {
-    if (data.errorType === 404 && notFoundInfo === null) {
-      return null;
-    }
-
-    if (data.errorType === 404 && notFoundInfo) {
-      return (
-        <Section {...props} lastModified={lastModified}>
-          {notFoundInfo}
-        </Section>
-      );
-    }
-
-    const administrationMetaData =
-      administrationsMetaData[data.administration] || {};
-    return (
-      <Section {...props} lastModified={lastModified}>
-        <AdministrationNotRespondingMessage
-          administrationMetaData={administrationMetaData}
-        />
-        {additionalInfoOnError ?? null}
-      </Section>
-    );
+  const dataSectionContent = (
+    <DataSectionContent
+      data={data}
+      notFoundInfo={notFoundInfo}
+      children={children}
+      additionalInfoOnError={additionalInfoOnError}
+    />
+  );
+  if (!dataSectionContent) {
+    return null;
   }
+  //@ts-ignore
+  const lastModified = data?.lastModified || null;
 
   return (
     <Section {...props} lastModified={lastModified}>
-      {props.children(data)}
+      {dataSectionContent}
     </Section>
   );
 }

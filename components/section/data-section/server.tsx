@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import { Suspense } from 'react';
-import { administrationsMetaData } from '#models/administrations';
+import FadeIn from '#components-ui/animation/fade-in';
+import { HeightTransition } from '#components-ui/animation/height-transition';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { DataSection } from '.';
 import { ISectionProps, Section } from '..';
+import { DataSectionContent } from './content';
 import { DataSectionLoader } from './loader';
 
 interface IDataSectionServerProps<T> extends ISectionProps {
@@ -13,33 +14,37 @@ interface IDataSectionServerProps<T> extends ISectionProps {
   additionalInfoOnError?: React.ReactNode;
   children: (data: T) => JSX.Element;
 }
-export function AsyncDataSectionServer<T>({
-  data,
-  ...props
-}: IDataSectionServerProps<T>) {
-  const dataSources = Array.from(new Set(props.sources || [])).map(
-    (key) => administrationsMetaData[key]
-  );
+
+export function AsyncDataSectionServer<T>(props: IDataSectionServerProps<T>) {
+  if (props.notFoundInfo === null) {
+    return (
+      <Suspense>
+        <HeightTransition animateAppear>
+          <DataSectionContentServerAsync {...props} />
+        </HeightTransition>
+      </Suspense>
+    );
+  }
 
   return (
-    <Suspense
-      fallback={
-        <Section {...props}>
-          <DataSectionLoader dataSources={dataSources} />
-        </Section>
-      }
-    >
-      <DataSectionServerAsync data={data} {...props} />
-    </Suspense>
+    <Section {...props}>
+      <HeightTransition>
+        <Suspense fallback={<DataSectionLoader sources={props.sources} />}>
+          <FadeIn>
+            <DataSectionContentServerAsync {...props} />
+          </FadeIn>
+        </Suspense>
+      </HeightTransition>
+    </Section>
   );
 }
 
-async function DataSectionServerAsync<T>({
+async function DataSectionContentServerAsync<T>({
   data: promiseData,
   ...props
 }: IDataSectionServerProps<T>) {
   const data = await promiseData;
-  return <DataSection data={data} {...props} />;
+  return <DataSectionContent data={data} {...props} />;
 }
 
 /* eslint-enable react/jsx-props-no-spreading */

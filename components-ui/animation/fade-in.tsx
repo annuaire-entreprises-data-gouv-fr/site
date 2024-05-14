@@ -1,3 +1,5 @@
+'use client';
+
 type IProps = {
   duration?: number;
   delay?: number;

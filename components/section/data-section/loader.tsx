@@ -3,15 +3,25 @@ import { Info } from '#components-ui/alerts';
 import { FadeIn } from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
 import { Loader } from '#components-ui/loader';
-import { IAdministrationMetaData } from '#models/administrations/types';
+import { administrationsMetaData } from '#models/administrations';
 import { useTimeout } from 'hooks/use-timeout';
+import { ISectionProps } from '..';
 
 export function DataSectionLoader({
-  dataSources,
+  sources,
 }: {
-  dataSources: IAdministrationMetaData[];
+  sources: ISectionProps['sources'];
 }) {
+  const before100ms = !useTimeout(100);
   const after5s = useTimeout(5000);
+
+  if (before100ms) {
+    return <div style={{ minHeight: '150px' }} />;
+  }
+
+  const dataSources = Array.from(new Set(sources || [])).map(
+    (key) => administrationsMetaData[key]
+  );
   return (
     <>
       {after5s && (
@@ -23,6 +33,7 @@ export function DataSectionLoader({
               semble occupé en ce moment. Le téléchargement des informations
               peut prendre du temps (10s à 20s).
             </Info>
+            <br />
           </FadeIn>
         </HeightTransition>
       )}

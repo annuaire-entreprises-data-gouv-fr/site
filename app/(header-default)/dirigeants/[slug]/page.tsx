@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
+import FadeIn from '#components-ui/animation/fade-in';
 import { Loader } from '#components-ui/loader';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -65,7 +66,12 @@ const DirigeantsPage = async (props: AppRouterProps) => {
               </>
             }
           >
-            <DirigeantInformation uniteLegale={uniteLegale} session={session} />
+            <FadeIn>
+              <DirigeantInformation
+                uniteLegale={uniteLegale}
+                session={session}
+              />
+            </FadeIn>
           </Suspense>
         )}
       </div>
