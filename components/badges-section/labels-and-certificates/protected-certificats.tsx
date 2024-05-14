@@ -14,12 +14,19 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
   }
   const { opqibi, qualibat, qualifelec } = protectedCertificats;
 
+  if (
+    isAPINotResponding(opqibi) &&
+    isAPINotResponding(qualibat) &&
+    isAPINotResponding(qualifelec)
+  ) {
+    return null;
+  }
+
   return (
     <div
       style={{
         borderRadius: '30px',
         border: `2px solid ${constants.colors.espaceAgentPastel}`,
-        padding: '3px',
         paddingLeft: '8px',
         display: 'inline-block',
       }}

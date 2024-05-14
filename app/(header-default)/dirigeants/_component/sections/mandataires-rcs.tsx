@@ -4,7 +4,7 @@ import React from 'react';
 import routes from '#clients/routes';
 import { Warning } from '#components-ui/alerts';
 import FadeIn from '#components-ui/animation/fade-in';
-import { DataSectionClient } from '#components/section/data-section/client';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPILoading, isAPILoading } from '#models/api-loading';
 import {
@@ -32,7 +32,7 @@ const MandatairesRCSSection: React.FC<IProps> = ({
   immatriculationRNE,
   uniteLegale,
 }) => (
-  <DataSectionClient
+  <DataSectionServer
     id="rne-dirigeants"
     title="Dirigeant(s)"
     isProtected
@@ -86,7 +86,7 @@ const MandatairesRCSSection: React.FC<IProps> = ({
         </>
       )
     }
-  </DataSectionClient>
+  </DataSectionServer>
 );
 
 export default MandatairesRCSSection;
