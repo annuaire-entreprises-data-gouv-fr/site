@@ -17,7 +17,7 @@ const AssociationAdressAlert: React.FC<{
   uniteLegale: IAssociation;
   association: IDataAssociation | IAPINotRespondingError | null;
   session: ISession | null;
-}> = ({ uniteLegale, association }) => {
+}> = ({ uniteLegale, association, session }) => {
   if (!association || isAPINotResponding(association)) {
     return null;
   }
