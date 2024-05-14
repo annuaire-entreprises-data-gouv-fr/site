@@ -37,10 +37,10 @@ export default function ShowMore(props: IProps) {
         <ButtonLink
           onClick={() => setIsExpanded(!isExpanded)}
           aria-label={props['aria-label'] || 'Voir toutes les informations'}
-          alt
           described-by={id}
+          alt
         >
-          {isExpanded ? 'Voir moins' : 'Voir plus'}
+          {isExpanded ? 'Voir moins' : props.label || 'Voir plus'}
         </ButtonLink>
         <p id={id} className="fr-sr-only">
           {!isExpanded ? 'Affiche le texte caché' : 'Cache une partie du texte'}{' '}
