@@ -5,7 +5,7 @@ site: https://www.urssaf.fr/accueil.html
 contact: https://www.urssaf.fr/accueil/contacter-urssaf.html
 logoType: portrait
 dataSources:
-  - label: Conformité des cotisations de sécurité sociale auprès de l'URSSAF Caisse nationale
+  - label: Statut des assurés auprès de l'URSSAF Caisse nationale
     data:
       - label: Attestation de vigilance
 description: |

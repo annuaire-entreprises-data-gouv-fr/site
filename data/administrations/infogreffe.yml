@@ -9,7 +9,7 @@ contact: https://www.infogreffe.fr/contact-infogreffe
 estServicePublic: false
 logoType: portrait
 dataSources:
-  - label: RCS
+  - label: Registre du Commerce et des Sociétés
     data:
       - label: mandataires RCS
 description: |

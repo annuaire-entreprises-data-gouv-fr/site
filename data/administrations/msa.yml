@@ -6,8 +6,8 @@ contact: https://www.msa.fr/lfp
 estServicePublic: false
 logoType: portrait
 dataSources:
-  - label: Conformité des cotisations de sécurité sociale agricole
+  - label: Statut des assurés à la sécurité sociale agricole
     data:
-      - label: Statut des cotisations sociales
+      - label: Attestation de conformité des cotisations sociales agricoles
 description: |
   Infogreffe est le Groupement d’Intérêt Economique (G.I.E.) regroupant les 141 greffes des tribunaux de commerce.
