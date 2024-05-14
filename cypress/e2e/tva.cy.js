@@ -5,17 +5,15 @@ describe('TVA validation', () => {
   });
   it('TVA Non-assujettie', () => {
     cy.visit(`/entreprise/883010316`).then(() => {
-      cy.contains('Non-assujetti à la TVA');
+      cy.contains('n° TVA valide');
     });
     cy.visit(`/entreprise/423208180`).then(() => {
-      cy.contains('Non-assujetti à la TVA');
+      cy.contains('n° TVA valide');
     });
   });
   it('TVA link', () => {
     cy.visit(`/entreprise/383657467`).then(() => {
-      cy.contains(
-        'Numéro de TVA inconnu ou structure non-assujettie à la TVA'
-      ).click();
+      cy.contains('n° TVA valide').click();
       cy.url().should('include', '/definitions/tva-intracommunautaire');
       0;
     });

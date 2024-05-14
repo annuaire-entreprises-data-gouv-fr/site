@@ -39,8 +39,8 @@ const AnnoncesBodacc: React.FC<{
             </Info>
           ) : (
             <p>
-              Cette structure n’a pas de procédure collective (en cours ou
-              cloturée).
+              Cette structure n’a pas fait l’objet d’une procédure collective
+              (en cours ou clôturée).
             </p>
           )}
           {bodacc.annonces.length === 0 ? (

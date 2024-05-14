@@ -14,17 +14,42 @@ import { ITVAIntracommunautaire } from '#models/tva';
 import { Siren, formatIntFr } from '#utils/helpers';
 import useFetchTVA from 'hooks/fetch/tva';
 
-const NoTVA = () => <i>Non-assujetti à la TVA</i>;
-
-const Unknown = () => (
+const NoTVA = () => (
   <i>
-    <FAQLink
-      to="/faq/tva-intracommunautaire"
-      tooltipLabel="Numéro de TVA inconnu ou structure non-assujettie à la TVA"
-    >
-      Le numéro de TVA de cette entreprise est inconnu. Cela peut signifier
-      qu’elle est non-assujettie à la TVA, ou qu’elle possède un numéro de TVA
-      valide mais non renseigné dans nos bases.
+    Pas de{' '}
+    <FAQLink to="/faq/tva-intracommunautaire" tooltipLabel="n° TVA valide">
+      Cette structure n’est plus en activité, par conséquent elle ne peut pas
+      avoir de numéro de TVA valide.
+    </FAQLink>
+  </i>
+);
+
+const TVAInvalide = ({
+  number,
+  multipleNum,
+}: {
+  number: string;
+  multipleNum: boolean;
+}) => (
+  <i>
+    Pas de{' '}
+    <FAQLink to="/faq/tva-intracommunautaire" tooltipLabel="n° TVA valide">
+      Le numéro de TVA {'FR' + formatIntFr(number)} n’est pas validé par
+      l’administration fiscale.
+      <br />
+      Plusieurs explications sont possibles :
+      <ul>
+        <li>soit la structure n’est pas assujettie à la TVA</li>
+        <li>
+          soit elle est assujettie, mais ce numéro a été invalidé par
+          l’administration fiscale
+        </li>
+        {multipleNum && (
+          <li>
+            soit elle est assujettie, mais nous ne connaissons pas son numéro
+          </li>
+        )}
+      </ul>
     </FAQLink>
   </i>
 );
@@ -121,12 +146,11 @@ const VerifyTVA: React.FC<{
               <CopyCell number={tva} />
             )}
           </>
-        ) : mayHaveMultipleTVANumber.allTime ? (
-          <>
-            <Unknown />
-          </>
         ) : (
-          <NoTVA />
+          <TVAInvalide
+            number={tvaNumber}
+            multipleNum={mayHaveMultipleTVANumber.allTime}
+          />
         )}
 
         {Math.random() < 0.0001 && (

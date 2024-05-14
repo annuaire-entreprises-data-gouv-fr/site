@@ -8,12 +8,20 @@ const FAQLink: React.FC<
   PropsWithChildren<{ tooltipLabel: string; to?: string }>
 > = ({ to, tooltipLabel, children }) => (
   <InformationTooltip
-    label={children}
+    label={
+      <>
+        {children}
+        {to ? (
+          <div className="layout-right" style={{ marginTop: '10px' }}>
+            <a href={to}>→ en savoir plus</a>
+          </div>
+        ) : null}
+      </>
+    }
     tabIndex={to ? undefined : 0}
     orientation="left"
     width={230}
     left="0px"
-    cursor={to ? 'pointer' : 'auto'}
     ariaRelation="describedby"
   >
     <LinkOrSpan to={to} ariaLabel={`En savoir plus sur ${tooltipLabel}`}>
