@@ -81,7 +81,17 @@ const UniteLegaleSection: React.FC<{
         uniteLegale.anneeTrancheEffectif
       ),
     ],
-    ['Taille de la structure', libelleCategorieEntreprise(uniteLegale)],
+    [
+      <FAQLink
+        tooltipLabel="Taille de la structure"
+        to="https://www.insee.fr/fr/metadonnees/definition/c1057"
+      >
+        La taille de l’entreprise, ou catégorie d’entreprise, est une variable
+        statistique calculée par l’Insee sur la base de l’effectif, du chiffre
+        d’affaires et du total du bilan.
+      </FAQLink>,
+      libelleCategorieEntreprise(uniteLegale),
+    ],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
       'Dernière modification à l’Insee',
