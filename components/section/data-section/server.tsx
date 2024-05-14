@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
+import { Suspense } from 'react';
 import { administrationsMetaData } from '#models/administrations';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { Suspense } from 'react';
 import { DataSection } from '.';
 import { ISectionProps, Section } from '..';
 import { DataSectionLoader } from './loader';
