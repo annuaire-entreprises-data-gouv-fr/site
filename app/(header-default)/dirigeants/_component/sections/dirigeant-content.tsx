@@ -5,7 +5,7 @@ import {
   IEtatCivil,
   IPersonneMorale,
 } from '#models/immatriculation';
-import { formatDate, formatDatePartial, formatIntFr } from '#utils/helpers';
+import { formatDateLong, formatDatePartial, formatIntFr } from '#utils/helpers';
 import { isPersonneMorale } from './is-personne-morale';
 
 export function DirigeantContent({
@@ -56,7 +56,7 @@ export function DirigeantContent({
           {dirigeant.dateNaissance || dirigeant.dateNaissancePartial
             ? `, né(e) ${
                 dirigeant.dateNaissance
-                  ? 'le ' + formatDate(dirigeant.dateNaissance)
+                  ? 'le ' + formatDateLong(dirigeant.dateNaissance)
                   : 'en ' + formatDatePartial(dirigeant.dateNaissancePartial)
               }`
             : ''}
