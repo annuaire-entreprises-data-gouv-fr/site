@@ -19,4 +19,5 @@ export enum EAdministration {
   DGFIP = 'dgfip',
   URSSAF = 'urssaf',
   MSA = 'msa',
+  FNTP = 'fntp',
 }
