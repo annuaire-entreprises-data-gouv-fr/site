@@ -7,7 +7,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
-import { DataSectionClient } from '#components/section/data-section/client';
+import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -93,7 +93,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
 }) => {
   return (
     <>
-      <DataSectionClient
+      <AsyncDataSectionClient
         id="rne"
         title="Inscription au RNE"
         sources={[EAdministration.INPI]}
@@ -148,7 +148,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
             ) : null}
           </>
         )}
-      </DataSectionClient>
+      </AsyncDataSectionClient>
       <HorizontalSeparator />
     </>
   );

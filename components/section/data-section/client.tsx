@@ -2,17 +2,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import { useEffect, useState } from 'react';
-import { Info } from '#components-ui/alerts';
 import { FadeIn } from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
-import { Loader } from '#components-ui/loader';
 import { administrationsMetaData } from '#models/administrations';
-import { IAdministrationMetaData } from '#models/administrations/types';
 import { IAPILoading, isAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { useTimeout } from 'hooks/use-timeout';
+import { DataSection } from '.';
 import { ISectionProps, Section } from '..';
-import { DataSectionServer } from './server';
+import { DataSectionLoader } from './loader';
 
 interface IDataSectionClientProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IAPILoading | T;
@@ -20,7 +18,7 @@ interface IDataSectionClientProps<T> extends ISectionProps {
   additionalInfoOnError?: React.ReactNode;
   children: (data: T) => JSX.Element;
 }
-export function DataSectionClient<T>({
+export function AsyncDataSectionClient<T>({
   data,
   ...props
 }: IDataSectionClientProps<T>) {
@@ -45,7 +43,7 @@ export function DataSectionClient<T>({
       </Section>
     );
   }
-  return <DataSectionServer data={data} {...props} />;
+  return <DataSection data={data} {...props} />;
 }
 
 /** Contains the logic that prevents flickering of UI */
@@ -71,49 +69,3 @@ function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
   }
   return isAPILoading(data);
 }
-
-function DataSectionLoader({
-  dataSources,
-}: {
-  dataSources: IAdministrationMetaData[];
-}) {
-  const after5s = useTimeout(5000);
-  return (
-    <>
-      {after5s && (
-        <HeightTransition animateAppear>
-          <FadeIn>
-            <Info full>
-              Le téléservice qui renvoie la donnée{' '}
-              {dataSources && `(${dataSources.map((d) => d.short).join(', ')})`}{' '}
-              semble occupé en ce moment. Le téléchargement des informations
-              peut prendre du temps (10s à 20s).
-            </Info>
-          </FadeIn>
-        </HeightTransition>
-      )}
-      {!dataSources || dataSources.length === 0 ? (
-        <p>
-          Nous récupérons les informations <Loader />
-        </p>
-      ) : dataSources.length === 1 ? (
-        <p>
-          Nous récupérons les informations dans la base de données «{' '}
-          {dataSources[0].long} » <Loader />
-        </p>
-      ) : (
-        <>
-          Nous récupérons les informations dans les bases de données :
-          <ul>
-            {dataSources.map((d) => (
-              <li key={d.slug}>{d.long}</li>
-            ))}
-          </ul>
-          <Loader />
-        </>
-      )}
-    </>
-  );
-}
-
-/* eslint-enable react/jsx-props-no-spreading */

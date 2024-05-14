@@ -1,7 +1,6 @@
 import routes from '#clients/routes';
 import { Warning } from '#components-ui/alerts';
-import FadeIn from '#components-ui/animation/fade-in';
-import { DataSectionClient } from '#components/section/data-section/client';
+import { DataSection } from '#components/section/data-section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPILoading, isAPILoading } from '#models/api-loading';
 import {
@@ -34,7 +33,7 @@ async function MandatairesRCSSection({
   );
 
   return (
-    <DataSectionClient
+    <DataSection
       id="rne-dirigeants"
       title="Dirigeant(s)"
       isProtected
@@ -47,32 +46,30 @@ async function MandatairesRCSSection({
         ) : (
           <>
             {RCSDiffersFromRNE(mandatairesRCS, immatriculationRNE) && (
-              <FadeIn>
-                <Warning>
-                  Le nombre de dirigeants enregistrés sur Infogreffe (ex-RCS)
-                  diffère de celui du RNE. Cette situation est anormale. Pour en
-                  savoir plus vous pouvez consulter la page de cette entreprise
-                  sur{' '}
-                  <a
-                    rel="noopener"
-                    target="_blank"
-                    href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
-                    aria-label="Consulter la liste des dirigeants sur le site de l’INPI, nouvelle fenêtre"
-                  >
-                    data.inpi.fr
-                  </a>{' '}
-                  ou sur{' '}
-                  <a
-                    rel="noopener"
-                    target="_blank"
-                    href={`${routes.infogreffe.portail.entreprise}${uniteLegale.siren}`}
-                    aria-label="Consulter la liste des dirigeants sur le site d’Infogreffe, nouvelle fenêtre"
-                  >
-                    Infogreffe
-                  </a>
-                  .
-                </Warning>
-              </FadeIn>
+              <Warning>
+                Le nombre de dirigeants enregistrés sur Infogreffe (ex-RCS)
+                diffère de celui du RNE. Cette situation est anormale. Pour en
+                savoir plus vous pouvez consulter la page de cette entreprise
+                sur{' '}
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
+                  aria-label="Consulter la liste des dirigeants sur le site de l’INPI, nouvelle fenêtre"
+                >
+                  data.inpi.fr
+                </a>{' '}
+                ou sur{' '}
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href={`${routes.infogreffe.portail.entreprise}${uniteLegale.siren}`}
+                  aria-label="Consulter la liste des dirigeants sur le site d’Infogreffe, nouvelle fenêtre"
+                >
+                  Infogreffe
+                </a>
+                .
+              </Warning>
             )}
             <p>
               Cette entreprise possède {mandatairesRCS.length} mandataire(s)
@@ -89,7 +86,7 @@ async function MandatairesRCSSection({
           </>
         )
       }
-    </DataSectionClient>
+    </DataSection>
   );
 }
 

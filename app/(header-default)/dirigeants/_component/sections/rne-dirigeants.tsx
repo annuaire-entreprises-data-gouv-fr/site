@@ -1,7 +1,7 @@
 import routes from '#clients/routes';
 import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { INPI } from '#components/administrations';
-import { DataSectionServer } from '#components/section/data-section/server';
+import { DataSection } from '#components/section/data-section';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -19,7 +19,7 @@ type IProps = {
  */
 async function DirigeantsSection({ uniteLegale, immatriculationRNE }: IProps) {
   return (
-    <DataSectionServer
+    <DataSection
       id="rne-dirigeants"
       title="Dirigeant(s)"
       sources={[EAdministration.INPI]}
@@ -72,7 +72,7 @@ async function DirigeantsSection({ uniteLegale, immatriculationRNE }: IProps) {
           </>
         );
       }}
-    </DataSectionServer>
+    </DataSection>
   );
 }
 

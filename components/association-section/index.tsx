@@ -5,7 +5,7 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { Tag } from '#components-ui/tag';
 import { Section } from '#components/section';
-import { DataSectionClient } from '#components/section/data-section/client';
+import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IDataAssociation } from '#models/association/types';
@@ -150,7 +150,7 @@ const AssociationSection = ({
 
   return (
     <>
-      <DataSectionClient
+      <AsyncDataSectionClient
         title="Répertoire National des Associations"
         sources={[EAdministration.MI]}
         data={association}
@@ -192,7 +192,7 @@ const AssociationSection = ({
             )}
           </>
         )}
-      </DataSectionClient>
+      </AsyncDataSectionClient>
       <HorizontalSeparator />
       <BreakPageForPrint />
     </>

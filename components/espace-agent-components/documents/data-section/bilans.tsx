@@ -6,7 +6,7 @@ import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
-import { DataSectionClient } from '#components/section/data-section/client';
+import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
@@ -29,7 +29,7 @@ const AgentBilansSection: React.FC<{
 
   return (
     <PrintNever>
-      <DataSectionClient
+      <AsyncDataSectionClient
         title="Bilans"
         id="bilans"
         isProtected
@@ -94,7 +94,7 @@ const AgentBilansSection: React.FC<{
             </>
           )
         }
-      </DataSectionClient>
+      </AsyncDataSectionClient>
     </PrintNever>
   );
 };

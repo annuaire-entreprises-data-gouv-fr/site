@@ -5,7 +5,7 @@ import routes from '#clients/routes';
 import { Info } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import { DILA } from '#components/administrations';
-import { DataSectionClient } from '#components/section/data-section/client';
+import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -19,7 +19,7 @@ const AnnoncesBodacc: React.FC<{
   const bodacc = useFetchBODACC(uniteLegale);
 
   return (
-    <DataSectionClient
+    <AsyncDataSectionClient
       title="Annonces BODACC"
       sources={[EAdministration.DILA]}
       data={bodacc}
@@ -104,7 +104,7 @@ const AnnoncesBodacc: React.FC<{
           `}</style>
         </>
       )}
-    </DataSectionClient>
+    </AsyncDataSectionClient>
   );
 };
 export default AnnoncesBodacc;

@@ -65,7 +65,7 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
         />
         {hasRights(session, EScope.conformite) && (
           <>
-            <ConformiteSection uniteLegale={uniteLegale} />
+            <ConformiteSection uniteLegale={uniteLegale} session={session} />
             <HorizontalSeparator />
           </>
         )}

@@ -3,7 +3,7 @@ import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
-import { DataSectionServer } from '#components/section/data-section/server';
+import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -30,7 +30,7 @@ export const CertificationsRGESection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, certificationsRGE, session }) => {
   return (
-    <DataSectionServer
+    <DataSection
       id="rge"
       title="RGE - Reconnu Garant de l'Environnement"
       sources={[EAdministration.ADEME]}
@@ -152,6 +152,6 @@ export const CertificationsRGESection: React.FC<{
           </>
         );
       }}
-    </DataSectionServer>
+    </DataSection>
   );
 };
