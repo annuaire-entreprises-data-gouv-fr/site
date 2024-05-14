@@ -14,6 +14,7 @@ import { IUniteLegale } from '#models/core/types';
 import { IImmatriculationEORI } from '#models/espace-agent/immatriculation-eori';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import { formatIntFr } from '#utils/helpers';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps {
@@ -32,6 +33,32 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
       <Section title="Résumé pour les agents publics" isProtected>
         <TwoColumnTable
           body={[
+            ...(immatriculationEORI &&
+            (!isAPINotResponding(immatriculationEORI) ||
+              isAPI404(immatriculationEORI))
+              ? [
+                  [
+                    <FAQLink
+                      tooltipLabel="N° EORI"
+                      to="https://www.economie.gouv.fr/entreprises/numero-eori"
+                    >
+                      Le numéro EORI (Economic Operator Registration and
+                      Identification) est un numéro unique communautaire permet
+                      d’identifier les entreprises dans ses relations avec les
+                      autorités douanières.
+                    </FAQLink>,
+                    !immatriculationEORI ? (
+                      <em>Non autorisé</em> // Shouldn't happen (all agents have EORI rights)
+                    ) : isAPI404(immatriculationEORI) ? (
+                      <NonRenseigne />
+                    ) : !immatriculationEORI.actif ? (
+                      'Non actif'
+                    ) : (
+                      formatIntFr(immatriculationEORI.identifiantEORI)
+                    ),
+                  ],
+                ]
+              : []),
             [
               <FAQLink
                 tooltipLabel="Immatriculation au RNE"
@@ -93,25 +120,6 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
                     <a href={`/documents/${uniteLegale.siren}#conformite`}>
                       → Consulter les attestations fiscales et sociales
                     </a>,
-                  ],
-                ]
-              : []),
-            ...(immatriculationEORI &&
-            (!isAPINotResponding(immatriculationEORI) ||
-              isAPI404(immatriculationEORI))
-              ? [
-                  ['', <br />],
-                  [
-                    'Immatriculation EORI',
-                    !immatriculationEORI ? (
-                      <em>Non autorisé</em> // Shouldn't happen (all agents have EORI rights)
-                    ) : isAPI404(immatriculationEORI) ? (
-                      <NonRenseigne />
-                    ) : !immatriculationEORI.actif ? (
-                      'Non actif'
-                    ) : (
-                      immatriculationEORI.identifiantEORI
-                    ),
                   ],
                 ]
               : []),
