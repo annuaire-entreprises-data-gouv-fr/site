@@ -1,0 +1,15 @@
+slug: douanes
+short: DOUANES
+long: Direction Générale des Douanes
+site: https://www.douane.gouv.fr/
+contact: https://www.douane.gouv.fr/formulaire-infos-douane-service
+# apiMonitors:
+#   - apiName: API EORI
+#     apiSlug: eori
+logoType: portrait
+dataSources:
+  - label: EORI
+    data:
+      - label: numéro EORI
+description: |
+  La douane est chargée de tenir les frontières, qu’elles soient terrestres, maritimes, physiques ou numériques, afin d’assurer la protection du territoire, des citoyens et des intérêts économiques et financiers nationaux ou communautaires.

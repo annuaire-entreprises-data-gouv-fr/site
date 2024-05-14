@@ -29,8 +29,9 @@ export interface IEtatCivil {
   nom: string;
   prenom: string;
   role: string;
-  dateNaissancePartial: string;
   lieuNaissance: string;
+  dateNaissancePartial?: string;
+  dateNaissance?: string;
 }
 
 export interface IBeneficiaire {
@@ -58,7 +59,7 @@ export interface IIdentite {
 export interface IPersonneMorale {
   siren: string;
   denomination: string;
-  natureJuridique: string;
+  natureJuridique: string | null;
   role: string;
 }
 

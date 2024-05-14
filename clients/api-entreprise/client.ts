@@ -2,8 +2,14 @@ import { HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
 import { Information } from '#models/exceptions';
 import { httpGet } from '#utils/network';
+import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
 import { logInfoInSentry } from '#utils/sentry';
 
+export type IAPIEntrepriseResponse<T> = {
+  data: T;
+  links: {};
+  meta: {};
+};
 /**
  * Wrapper client to call API Entreprise
  *
@@ -29,6 +35,8 @@ export default async function clientAPIEntreprise<T, U>(
   if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
     throw new HttpUnauthorizedError('Missing API Entreprise credentials');
   }
+
+  await sensitiveRequestLogger(route);
 
   // never cache any API Entreprise request
   const useCache = false;

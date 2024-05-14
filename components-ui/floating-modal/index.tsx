@@ -2,10 +2,11 @@ import { forwardRef } from 'react';
 import styles from './style.module.css';
 type IProps = React.HTMLAttributes<HTMLDivElement> & {
   agentColor?: boolean;
+  noMobile?: boolean;
   footer?: React.ReactNode;
 };
 export default forwardRef(function FloatingModal(
-  { children, agentColor = false, footer, ...props }: IProps,
+  { children, agentColor = false, footer, noMobile = false, ...props }: IProps,
   ref: React.Ref<HTMLDivElement>
 ) {
   return (
@@ -16,7 +17,9 @@ export default forwardRef(function FloatingModal(
         ' ' +
         (agentColor ? styles['agent'] : '') +
         ' ' +
-        (props.className ?? '')
+        (props.className ?? '') +
+        ' ' +
+        (noMobile ? styles['no-mobile'] : '')
       }
       ref={ref}
     >

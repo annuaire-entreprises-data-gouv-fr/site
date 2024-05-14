@@ -1,15 +1,11 @@
 import routes from '#clients/routes';
-import { IConformite } from '#models/espace-agent/donnees-restreintes-entreprise';
+import { IConformite } from '#models/espace-agent/conformite';
 import { Siret } from '#utils/helpers';
-import clientAPIEntreprise from '../client';
+import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
-export type IAPIEntrepriseConformiteMSA = {
-  data: {
-    status: 'up_to_date' | string;
-  };
-  links: {};
-  meta: {};
-};
+export type IAPIEntrepriseConformiteMSA = IAPIEntrepriseResponse<{
+  status: 'up_to_date' | string;
+}>;
 
 /**
  * GET documents from API Entreprise
@@ -19,7 +15,9 @@ export const clientApiEntrepriseConformiteMSA = async (
   recipientSiret?: string
 ) => {
   return await clientAPIEntreprise<IAPIEntrepriseConformiteMSA, IConformite>(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.msa}${siret}/conformite_cotisations`,
+    `${
+      process.env.API_ENTREPRISE_URL
+    }${routes.apiEntreprise.conformite.msa.replace('{siret}', siret)}`,
     mapToDomainObject,
     recipientSiret
   );

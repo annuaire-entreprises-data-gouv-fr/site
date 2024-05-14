@@ -36,7 +36,7 @@ const SocialNetworks = () => (
                 <li>
                   <a
                     className="fr-btn--github fr-btn"
-                    href="https://github.com/etalab/annuaire-entreprises-site"
+                    href="https://github.com/annuaire-entreprises-data-gouv-fr/site"
                     target="_blank"
                     rel="noreferrer noopener"
                     title="Page github de l’Annuaire des Entreprises"

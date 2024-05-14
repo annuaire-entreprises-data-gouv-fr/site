@@ -47,6 +47,7 @@ const shouldRemoveSpace = (label: any) => {
 
     if (
       labelAsString.indexOf('TVA') > -1 ||
+      labelAsString.indexOf('EORI') > -1 ||
       labelAsString.indexOf('SIREN') > -1 ||
       labelAsString.indexOf('SIRET') > -1 ||
       labelAsString.indexOf('RNA') > -1

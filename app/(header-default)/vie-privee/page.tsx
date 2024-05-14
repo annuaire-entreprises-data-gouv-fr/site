@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import { DILA, INPI, INSEE } from '#components/administrations';
-import { NextPageWithLayout } from '../../../pages/_app';
 
 export const metadata: Metadata = {
   title: 'Politique de confidentialité',
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
   },
 };
 
-const Privacy: NextPageWithLayout = () => (
+const Privacy = () => (
   <TextWrapper>
     <h1>Politique de confidentialité</h1>
     <p>
@@ -237,18 +236,87 @@ const Privacy: NextPageWithLayout = () => (
       </table>
     </div>
     <h2>Cookies</h2>
-    Le site dépose des cookies de mesure d’audience (nombre de visites, pages
-    consultées), respectant les conditions d’exemption du consentement de
-    l’internaute définies par la recommandation « Cookies » de la Commission
-    nationale informatique et libertés (CNIL). Cela signifie, notamment, que ces
-    cookies ne servent qu’à la production de statistiques anonymes et ne
-    permettent pas de suivre la navigation de l’internaute sur d’autres sites.
     <p>
-      Nous utilisons pour cela{' '}
+      En application de l’article 5(3) de la directive 2002/58/CE modifiée
+      concernant le traitement des données à caractère personnel et la
+      protection de la vie privée dans le secteur des communications
+      électroniques, transposée à l’article 82 de la loi n°78-17 du 6 janvier
+      1978 relative à l’informatique, aux fichiers et aux libertés, les traceurs
+      ou cookies suivent deux régimes distincts.
+    </p>
+    <p>
+      Les cookies strictement nécessaires au service ou ayant pour finalité
+      exclusive de faciliter la communication par voie électronique sont
+      dispensés de consentement préalable au titre de l’article 82 de la loi
+      n°78-17 du 6 janvier 1978.
+    </p>
+    <p>
+      Les cookies n’étant pas strictement nécessaires au service ou n’ayant pas
+      pour finalité exclusive de faciliter la communication par voie
+      électronique doivent être consenti par l’utilisateur.
+    </p>
+    <p>
+      Ce consentement de la personne concernée pour une ou plusieurs finalités
+      spécifiques constitue une base légale au sens du RGPD et doit être entendu
+      au sens de l’article 6-a du Règlement (UE) 2016/679 du Parlement européen
+      et du Conseil du 27 avril 2016 relatif à la protection des personnes
+      physiques à l’égard du traitement des données à caractère personnel et à
+      la libre circulation de ces données.
+    </p>
+    <p>
+      Un cookie est un fichier déposé sur votre terminal lors de la visite d’un
+      site. Il a pour but de collecter des informations relatives à votre
+      navigation et de vous adresser des services adaptés à votre terminal
+      (ordinateur, mobile ou tablette).
+    </p>
+    <p>
+      Des cookies relatifs aux statistiques publiques et anonymes sont également
+      déposés.
+    </p>
+    <p>Cookies recensés sur l’Annuaire des entreprises :</p>
+    <div className="fr-table">
+      <table>
+        <caption>Résumé des différents sous-traitants</caption>
+        <thead>
+          <tr>
+            <td>Nom du cookie</td>
+            <td>Finalités</td>
+            <td>Hébergement</td>
+            <td>Garanties</td>
+            <td>Durées de conservation du cookie</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>pk_id</td>
+            <td>Mesure d’audience</td>
+            <td>France</td>
+            <td>www.matomo.org/matomo-cloud-dpa</td>
+            <td>13 mois</td>
+          </tr>
+          <tr>
+            <td>pk_ref</td>
+            <td>Mesure d’audience</td>
+            <td>France</td>
+            <td>www.matomo.org/matomo-cloud-dpa</td>
+            <td>6 mois</td>
+          </tr>
+          <tr>
+            <td>pk_ses</td>
+            <td>Mesure d’audience</td>
+            <td>France</td>
+            <td>www.matomo.org/matomo-cloud-dpa</td>
+            <td>30 minutes </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Le logiciel{' '}
       <a href="https://matomo.org/" rel="noopener noreferrer" target="_blank">
         Matomo
       </a>
-      , un outil{' '}
+      , est un outil{' '}
       <a
         href="https://matomo.org/free-software/"
         rel="noopener noreferrer"

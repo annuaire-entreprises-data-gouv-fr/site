@@ -18,6 +18,22 @@ const Mentions: NextPageWithLayout = () => (
       Ce site est édité par l’incubateur des services numériques, Direction
       interministérielle du numérique (DINUM), Services du Premier ministre.
     </p>
+    <h2>Directrice de la publication</h2>
+    <p>
+      La directrice de la publication est Stéphanie SCHAER, directrice
+      interministérielle du numérique.
+    </p>
+    <h2>Hébergement de la plateforme</h2>
+    <p>Cette plateforme est hébergée par :</p>
+    <p>
+      OVH
+      <br />
+      2 rue Kellermann
+      <br />
+      59100 Roubaix
+      <br />
+      France
+    </p>
     <h2>Conception et gestion du site</h2>
     <p>
       Ce site est développé en mode agile, selon un principe d’amélioration
@@ -25,11 +41,6 @@ const Mentions: NextPageWithLayout = () => (
     </p>
     <h2>Code source du site</h2>
     <p>Le code source du site est disponible sur Github.</p>
-    <h2>Hébergement</h2>
-    <p>
-      OVH 2 rue Kellermann - 59100 Roubaix - France Tel. 09 72 10 10 07 (prix
-      d’un appel vers un poste fixe en France)
-    </p>
   </TextWrapper>
 );
 

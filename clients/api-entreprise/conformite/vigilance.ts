@@ -1,23 +1,20 @@
 import routes from '#clients/routes';
-import { IConformite } from '#models/espace-agent/donnees-restreintes-entreprise';
+import { IConformite } from '#models/espace-agent/conformite';
 import { Siren } from '#utils/helpers';
-import clientAPIEntreprise from '../client';
+import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
-export type IAPIEntrepriseConformiteVigilance = {
-  data: {
-    entity_status: {
-      code: 'ok';
-      libelle: string;
-      description: string;
-    };
-    date_debut_validite: string;
-    date_fin_validite: string;
-    code_securite: string;
-    document_url: string;
-    document_url_expires_in: number;
+export type IAPIEntrepriseConformiteVigilance = IAPIEntrepriseResponse<{
+  entity_status: {
+    code: 'ok';
+    libelle: string;
+    description: string;
   };
-};
-
+  date_debut_validite: string;
+  date_fin_validite: string;
+  code_securite: string;
+  document_url: string;
+  document_url_expires_in: number;
+}>;
 /**
  * GET documents from API Entreprise
  */
@@ -29,7 +26,9 @@ export const clientApiEntrepriseConformiteVigilance = async (
     IAPIEntrepriseConformiteVigilance,
     IConformite
   >(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.vigilance}${siren}/attestation_vigilance`,
+    `${
+      process.env.API_ENTREPRISE_URL
+    }${routes.apiEntreprise.conformite.vigilance.replace('{siren}', siren)}`,
     mapToDomainObject,
     recipientSiret
   );

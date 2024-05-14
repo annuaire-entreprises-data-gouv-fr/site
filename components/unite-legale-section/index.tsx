@@ -2,6 +2,7 @@ import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
+import { ProtectedCertificatesBadgesSection } from '#components/badges-section/labels-and-certificates/protected-certificats';
 import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import ExtraitRNELink from '#components/justificatifs/extrait-rne-link';
 import { Section } from '#components/section';
@@ -18,6 +19,10 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
+import {
+  IProtectedCertificatsEntreprise,
+  hasProtectedCertificatsEntreprise,
+} from '#models/espace-agent/certificats';
 import { ISession } from '#models/user/session';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
@@ -31,10 +36,13 @@ import {
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
+  protectedCertificats: IProtectedCertificatsEntreprise | null;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
-  const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
-
+}> = ({ uniteLegale, session, protectedCertificats }) => {
+  const hasLabelsAndCertificates =
+    checkHasLabelsAndCertificates(uniteLegale) ||
+    (protectedCertificats &&
+      hasProtectedCertificatsEntreprise(protectedCertificats));
   const conventionsCollectives = Object.keys(
     uniteLegale.conventionsCollectives || {}
   );
@@ -73,7 +81,17 @@ const UniteLegaleSection: React.FC<{
         uniteLegale.anneeTrancheEffectif
       ),
     ],
-    ['Taille de la structure', libelleCategorieEntreprise(uniteLegale)],
+    [
+      <FAQLink
+        tooltipLabel="Taille de la structure"
+        to="https://www.insee.fr/fr/metadonnees/definition/c1057"
+      >
+        La taille de l’entreprise, ou catégorie d’entreprise, est une variable
+        statistique calculée par l’Insee sur la base de l’effectif, du chiffre
+        d’affaires et du total du bilan.
+      </FAQLink>,
+      libelleCategorieEntreprise(uniteLegale),
+    ],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
       'Dernière modification à l’Insee',
@@ -106,7 +124,13 @@ const UniteLegaleSection: React.FC<{
             `${
               checkHasQuality(uniteLegale) ? 'Qualités, l' : 'L'
             }abels et certificats`,
-            <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />,
+            <>
+              <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />
+              <ProtectedCertificatesBadgesSection
+                uniteLegale={uniteLegale}
+                protectedCertificats={protectedCertificats}
+              />
+            </>,
           ],
         ]
       : []),

@@ -1,43 +1,24 @@
-import { HttpForbiddenError } from '#clients/exceptions';
-import { getDonneesRestreintesEntreprise } from '#models/espace-agent/donnees-restreintes-entreprise';
-import { FetchRessourceException } from '#models/exceptions';
-import { EScope, hasRights } from '#models/user/rights';
+import { EAdministration } from '#models/administrations/EAdministration';
+import { getConformiteEntreprise } from '#models/espace-agent/conformite';
+import { EScope } from '#models/user/rights';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
-import { logFatalErrorInSentry } from '#utils/sentry';
-import getSession from '#utils/server-side-helper/app/get-session';
+import { ProtectedAPIRoute } from '../../_helper';
 
 export async function GET(
   _request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const session = await getSession();
   const slug = params.slug;
-  try {
-    if (!hasRights(session, EScope.conformite)) {
-      throw new HttpForbiddenError('Unauthorized account');
+  return ProtectedAPIRoute(
+    'DonneesConformite',
+    slug,
+    EAdministration.DINUM,
+    EScope.conformite,
+    async (agentSiret: string) => {
+      const siret = verifySiret(slug as string);
+      const siren = extractSirenFromSiret(siret);
+
+      return await getConformiteEntreprise(siren, siret, agentSiret);
     }
-
-    const agentSiret = session?.user?.siret;
-
-    const siret = verifySiret(slug as string);
-    const siren = extractSirenFromSiret(siret);
-
-    const donneesRestreintes = await getDonneesRestreintesEntreprise(
-      siren,
-      siret,
-      agentSiret
-    );
-    return Response.json(donneesRestreintes, { status: 200 });
-  } catch (e: any) {
-    const message = 'Failed to get donnees conformite';
-    logFatalErrorInSentry(
-      new FetchRessourceException({
-        ressource: 'DonneesConformite',
-        context: { siret: slug as string },
-        cause: e,
-        message,
-      })
-    );
-    return Response.json({ message }, { status: e.status || 500 });
-  }
+  );
 }

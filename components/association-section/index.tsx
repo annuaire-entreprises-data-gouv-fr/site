@@ -9,14 +9,18 @@ import { DataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IDataAssociation } from '#models/association/types';
-import { IAssociation } from '#models/core/types';
+import { getPersonnalDataAssociation } from '#models/core/statut-diffusion';
+import { IAssociation, IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
 import { useFetchAssociation } from 'hooks/fetch/association';
 import { AssociationNotFound } from './association-not-found';
 
 const getTableData = (
   idAssociation: string | IdRna,
-  association: IDataAssociation
+  association: IDataAssociation,
+  uniteLegale: IUniteLegale,
+  session: ISession | null
 ) => {
   const {
     nomComplet = '',
@@ -78,13 +82,35 @@ const getTableData = (
       ? [['Date dissolution', formatDate(dateDissolution)]]
       : []),
     ['', <br />],
-    ['Adresse du siège', adresseSiege],
-    ['Adresse de gestion', adresseGestion],
+    [
+      'Adresse du siège',
+      getPersonnalDataAssociation(adresseSiege, uniteLegale, session),
+    ],
+    [
+      'Adresse de gestion',
+      getPersonnalDataAssociation(adresseGestion, uniteLegale, session),
+    ],
+
     [
       'Téléphone',
-      telephone ? <a href={`tel:${telephone}`}>{telephone}</a> : '',
+      telephone
+        ? getPersonnalDataAssociation(
+            <a href={`tel:${telephone}`}>{telephone}</a>,
+            uniteLegale,
+            session
+          )
+        : '',
     ],
-    ['Email', mail ? <a href={`mailto:${mail}`}>{mail}</a> : ''],
+    [
+      'Email',
+      mail
+        ? getPersonnalDataAssociation(
+            <a href={`mailto:${mail}`}>{mail}</a>,
+            uniteLegale,
+            session
+          )
+        : '',
+    ],
     [
       'Site web',
       siteWeb ? (
@@ -98,7 +124,13 @@ const getTableData = (
   ];
 };
 
-const AssociationSection = ({ uniteLegale }: { uniteLegale: IAssociation }) => {
+const AssociationSection = ({
+  uniteLegale,
+  session,
+}: {
+  uniteLegale: IAssociation;
+  session: ISession | null;
+}) => {
   const { idAssociation = '' } = uniteLegale.association;
 
   const association = useFetchAssociation(uniteLegale.siren);
@@ -135,7 +167,14 @@ const AssociationSection = ({ uniteLegale }: { uniteLegale: IAssociation }) => {
               <strong>Répertoire National des Associations (RNA)</strong>, avec
               les informations suivantes&nbsp;:
             </p>
-            <TwoColumnTable body={getTableData(idAssociation, association)} />
+            <TwoColumnTable
+              body={getTableData(
+                idAssociation,
+                association,
+                uniteLegale,
+                session
+              )}
+            />
             {idAssociation && (
               <>
                 <br />

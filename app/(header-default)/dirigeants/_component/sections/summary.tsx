@@ -2,9 +2,13 @@ import { HttpNotFound } from '#clients/exceptions';
 import FadeIn from '#components-ui/animation/fade-in';
 import { Loader } from '#components-ui/loader';
 import { INPI, INSEE, MI } from '#components/administrations';
-import { isAPILoading } from '#models/api-loading';
-import { isAPINotResponding } from '#models/api-not-responding';
-import { IDirigeants } from '#models/dirigeants';
+import { IAPILoading, isAPILoading } from '#models/api-loading';
+import {
+  IAPINotRespondingError,
+  isAPINotResponding,
+} from '#models/api-not-responding';
+import { IUniteLegale } from '#models/core/types';
+import { IImmatriculationRNE } from '#models/immatriculation';
 
 const NoDirigeantAssociation = ({ idAssociation = '' }) => (
   <>
@@ -37,7 +41,15 @@ const NoDirigeantDefault = () => (
   </p>
 );
 
-const DirigeantSummary: React.FC<IDirigeants> = ({
+type IDirigeantSummaryProps = {
+  immatriculationRNE:
+    | IImmatriculationRNE
+    | IAPINotRespondingError
+    | IAPILoading;
+  uniteLegale: IUniteLegale;
+};
+
+const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   uniteLegale,
   immatriculationRNE,
 }) => {

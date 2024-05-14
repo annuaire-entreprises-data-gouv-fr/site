@@ -12,12 +12,22 @@ const routes = {
     tva: '/api/data-fetching/verify-tva/',
   },
   apiEntreprise: {
-    association: '/v4/djepva/api-association/associations/',
     conformite: {
-      fiscale: '/v4/dgfip/unites_legales/',
-      vigilance: '/v4/urssaf/unites_legales/',
-      msa: '/v3/msa/etablissements/',
+      fiscale: '/v4/dgfip/unites_legales/{siren}/attestation_fiscale',
+      vigilance: '/v4/urssaf/unites_legales/{siren}/attestation_vigilance',
+      msa: '/v3/msa/etablissements/{siret}/conformite_cotisations',
     },
+    immatriculationEORI:
+      '/v3/douanes/etablissements/{siret}/immatriculations_eori',
+    carteProfessionnelleTravauxPublics:
+      '/v3/fntp/unites_legales/{siren}/carte_professionnelle_travaux_publics',
+    certifications: {
+      qualifelec: '/v3/qualifelec/etablissements/{siret}/certificats',
+      qualibat: '/v3/qualibat/etablissements/{siret}/certification_batiment',
+      opqibi: '/v3/opqibi/unites_legales/{siren}/certification_ingenierie',
+    },
+    mandatairesRCS:
+      '/v3/infogreffe/rcs/unites_legales/{siren}/mandataires_sociaux',
   },
   ban: 'https://api-adresse.data.gouv.fr/search/?q=',
   bodacc: {
@@ -154,6 +164,11 @@ const routes = {
       pdf: 'https://data.inpi.fr/export/companies',
       entreprise: 'https://data.inpi.fr/entreprises/',
       account: 'https://data.inpi.fr/register',
+    },
+  },
+  infogreffe: {
+    portail: {
+      entreprise: 'https://www.infogreffe.fr/entreprise/',
     },
   },
   sireneInsee: {

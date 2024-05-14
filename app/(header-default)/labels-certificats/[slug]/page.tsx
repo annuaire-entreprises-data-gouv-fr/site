@@ -4,6 +4,9 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/badges-section/labels-and-certificates';
+import { OpqibiSection } from '#components/espace-agent-components/certifications/opqibi-section';
+import { QualibatSection } from '#components/espace-agent-components/certifications/qualibat-section';
+import { QualifelecSection } from '#components/espace-agent-components/certifications/qualifelec-section';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
@@ -15,6 +18,11 @@ import { CertificationSocieteMission } from '#components/labels-and-certificates
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { getCertificationsFromSlug } from '#models/certifications';
+import {
+  getProtectedCertificats,
+  hasProtectedCertificatsEntreprise,
+} from '#models/espace-agent/certificats';
+import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -62,15 +70,23 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
     estEntrepriseInclusive,
   } = uniteLegale.complements;
 
-  const {
-    rge,
-    entrepreneurSpectacles,
-    egapro,
-    bio,
-    organismesDeFormation,
-    ess,
-    entrepriseInclusive,
-  } = await getCertificationsFromSlug(uniteLegale);
+  const [
+    {
+      rge,
+      entrepreneurSpectacles,
+      egapro,
+      bio,
+      organismesDeFormation,
+      ess,
+      entrepriseInclusive,
+    },
+    protectedCertificats,
+  ] = await Promise.all([
+    getCertificationsFromSlug(uniteLegale),
+    hasRights(session, EScope.protectedCertificats)
+      ? getProtectedCertificats(uniteLegale, session?.user)
+      : null,
+  ]);
 
   return (
     <>
@@ -80,9 +96,11 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
           uniteLegale={uniteLegale}
           session={session}
         />
-        {!checkHasLabelsAndCertificates(uniteLegale) && (
-          <p>Cette structure ne possède aucun label ou certificat.</p>
-        )}
+        {!checkHasLabelsAndCertificates(uniteLegale) &&
+          (!protectedCertificats ||
+            !hasProtectedCertificatsEntreprise(protectedCertificats)) && (
+            <p>Cette structure ne possède aucun label ou certificat.</p>
+          )}
         {estEss && <CertificationESSSection ess={ess} />}
         {estSocieteMission && <CertificationSocieteMission />}
         {estEntrepriseInclusive && (
@@ -110,9 +128,17 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
             entrepreneurSpectacles={entrepreneurSpectacles}
           />
         )}
-        {/* Can be quite long  */}
         {estBio && (
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
+        )}
+        {protectedCertificats && (
+          <QualifelecSection qualifelec={protectedCertificats.qualifelec} />
+        )}
+        {protectedCertificats && (
+          <QualibatSection qualibat={protectedCertificats.qualibat} />
+        )}
+        {protectedCertificats && (
+          <OpqibiSection opqibi={protectedCertificats.opqibi} />
         )}
       </div>
     </>

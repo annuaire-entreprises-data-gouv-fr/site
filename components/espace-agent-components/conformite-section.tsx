@@ -3,6 +3,7 @@
 import { PrintNever } from '#components-ui/print-visibility';
 import { DataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import useFetchConformite from 'hooks/fetch/conformite';
 import Conformite from './conformite';
@@ -19,6 +20,11 @@ const ConformiteSection: React.FC<{
         id="conformite"
         isProtected
         data={conformite}
+        sources={[
+          EAdministration.DGFIP,
+          EAdministration.URSSAF,
+          EAdministration.MSA,
+        ]}
       >
         {(conformite) => (
           <TwoColumnTable

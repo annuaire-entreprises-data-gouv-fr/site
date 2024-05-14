@@ -103,13 +103,13 @@ function DataSectionLoader({
         </p>
       ) : (
         <>
-          <Loader /> Nous récupérons les informations dans les bases de données
-          :
+          Nous récupérons les informations dans les bases de données :
           <ul>
             {dataSources.map((d) => (
               <li key={d.slug}>{d.long}</li>
             ))}
           </ul>
+          <Loader />
         </>
       )}
     </>

@@ -14,4 +14,10 @@ export enum EAdministration {
   DJEPVA = 'djepva',
   ESSFRANCE = 'ess-france',
   MARCHE_INCLUSION = 'marche-inclusion',
+  INFOGREFFE = 'infogreffe',
+  DOUANES = 'douanes',
+  DGFIP = 'dgfip',
+  URSSAF = 'urssaf',
+  MSA = 'msa',
+  FNTP = 'fntp',
 }

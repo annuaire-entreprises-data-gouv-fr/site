@@ -5,6 +5,10 @@ export enum EScope {
   bilansRne = 'rne',
   documentsRne = 'rne',
   conformite = 'conformite',
+  eori = 'opendata',
+  protectedCertificats = 'opendata',
+  mandatairesRCS = 'opendata',
+  carteProfessionnelleTravauxPublics = 'opendata',
   nonDiffusible = 'nonDiffusible',
   isAgent = 'isAgent',
 }
@@ -22,6 +26,12 @@ export function hasRights(session: ISession | null, rightScope: EScope) {
       return userScopes.includes('rne');
     case EScope.conformite:
       return userScopes.includes('conformite');
+    case EScope.eori:
+    case EScope.protectedCertificats:
+    case EScope.carteProfessionnelleTravauxPublics:
+    case EScope.mandatairesRCS:
+      return userScopes.includes('opendata');
+
     case EScope.nonDiffusible:
       return userScopes.includes('nonDiffusible');
     case EScope.isAgent:

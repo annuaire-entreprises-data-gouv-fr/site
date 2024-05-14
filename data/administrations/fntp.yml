@@ -1,0 +1,15 @@
+slug: fntp
+short: FNTP
+long: Fédération nationale des travaux publics
+site: https://www.fntp.fr/
+contact: https://www.fntp.fr/contact
+# apiMonitors:
+#   - apiName: API EORI
+#     apiSlug: eori
+estServicePublic: false
+dataSources:
+  - label: Liste des entrepreneurs de travaux publics
+    data:
+      - label: Carte professionnelle d’entrepreneur de travaux publics
+description: |
+  La Fédération nationale des travaux publics est une association qui représente et accompagne les entreprises de travaux publics.
