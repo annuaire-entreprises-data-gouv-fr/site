@@ -1,9 +1,7 @@
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
-import { isAPINotResponding } from '#models/api-not-responding';
 import { estDiffusible } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
 import getImmatriculationRNE from '#models/immatriculation/rne';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
@@ -20,9 +18,6 @@ export async function DirigeantInformation({
   session: ISession | null;
 }) {
   const immatriculationRNE = await getImmatriculationRNE(uniteLegale.siren);
-  const mandatairesRCS = hasRights(session, EScope.mandatairesRCS)
-    ? await getMandatairesRCS(uniteLegale.siren, session?.user?.siret)
-    : null;
 
   if (
     !estDiffusible(uniteLegale) &&
@@ -40,9 +35,9 @@ export async function DirigeantInformation({
         uniteLegale={uniteLegale}
         immatriculationRNE={immatriculationRNE}
       />
-      {mandatairesRCS && !isAPINotResponding(mandatairesRCS) && (
+      {hasRights(session, EScope.mandatairesRCS) && (
         <MandatairesRCSSection
-          mandatairesRCS={mandatairesRCS}
+          session={session}
           immatriculationRNE={immatriculationRNE}
           uniteLegale={uniteLegale}
         />
