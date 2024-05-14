@@ -8,15 +8,13 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
-import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
 import { IDirigeant, IImmatriculationRNE } from '#models/immatriculation';
-import { ISession } from '#models/user/session';
 import { DirigeantContent } from './dirigeant-content';
 
 type IProps = {
   immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
   uniteLegale: IUniteLegale;
-  session: ISession | null;
+  mandatairesRCS: Array<IDirigeant> | IAPINotRespondingError;
 };
 
 /**
@@ -25,13 +23,8 @@ type IProps = {
 async function MandatairesRCSSection({
   uniteLegale,
   immatriculationRNE,
-  session,
+  mandatairesRCS,
 }: IProps) {
-  const mandatairesRCS = await getMandatairesRCS(
-    uniteLegale.siren,
-    session?.user?.siret
-  );
-
   return (
     <DataSection
       id="rne-dirigeants"

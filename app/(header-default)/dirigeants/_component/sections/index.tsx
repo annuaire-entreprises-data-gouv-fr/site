@@ -2,6 +2,7 @@ import BreakPageForPrint from '#components-ui/print-break-page';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import { estDiffusible } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
+import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
 import getImmatriculationRNE from '#models/immatriculation/rne';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
@@ -17,7 +18,11 @@ export async function DirigeantInformation({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
-  const immatriculationRNE = await getImmatriculationRNE(uniteLegale.siren);
+  const [immatriculationRNE, mandatairesRCS] = await Promise.all([
+    getImmatriculationRNE(uniteLegale.siren),
+    hasRights(session, EScope.mandatairesRCS) &&
+      getMandatairesRCS(uniteLegale.siren, session?.user?.siret),
+  ]);
 
   if (
     !estDiffusible(uniteLegale) &&
@@ -35,11 +40,11 @@ export async function DirigeantInformation({
         uniteLegale={uniteLegale}
         immatriculationRNE={immatriculationRNE}
       />
-      {hasRights(session, EScope.mandatairesRCS) && (
+      {mandatairesRCS && (
         <MandatairesRCSSection
-          session={session}
           immatriculationRNE={immatriculationRNE}
           uniteLegale={uniteLegale}
+          mandatairesRCS={mandatairesRCS}
         />
       )}
 
