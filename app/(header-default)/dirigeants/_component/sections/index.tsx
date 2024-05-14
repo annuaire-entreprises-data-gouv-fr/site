@@ -1,60 +1,58 @@
-'use client';
-
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
+import { isAPINotResponding } from '#models/api-not-responding';
 import { estDiffusible } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { IDirigeant } from '#models/immatriculation';
+import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
+import getImmatriculationRNE from '#models/immatriculation/rne';
 import { EScope, hasRights } from '#models/user/rights';
-import { useFetchImmatriculationRNE } from 'hooks';
-import useSession from 'hooks/use-session';
+import { ISession } from '#models/user/session';
 import BeneficiairesSection from './beneficiaires';
 import MandatairesRCSSection from './mandataires-rcs';
 import DirigeantsSection from './rne-dirigeants';
 import DirigeantSummary from './summary';
 
-export function DirigeantInformation({
+export async function DirigeantInformation({
   uniteLegale,
-  mandatairesRCS,
+  session,
 }: {
   uniteLegale: IUniteLegale;
-  mandatairesRCS: Array<IDirigeant> | IAPINotRespondingError | null;
+  session: ISession | null;
 }) {
-  const immatriculationRNE = useFetchImmatriculationRNE(uniteLegale);
-  const session = useSession();
+  const immatriculationRNE = await getImmatriculationRNE(uniteLegale.siren);
+  const mandatairesRCS = hasRights(session, EScope.mandatairesRCS)
+    ? await getMandatairesRCS(uniteLegale.siren, session?.user?.siret)
+    : null;
+
+  if (
+    !estDiffusible(uniteLegale) &&
+    !hasRights(session, EScope.nonDiffusible)
+  ) {
+    return <DonneesPriveesSection />;
+  }
   return (
     <>
       <DirigeantSummary
         uniteLegale={uniteLegale}
         immatriculationRNE={immatriculationRNE}
       />
-      {estDiffusible(uniteLegale) ||
-      hasRights(session, EScope.nonDiffusible) ? (
-        <>
-          <DirigeantsSection
-            immatriculationRNE={immatriculationRNE}
-            uniteLegale={uniteLegale}
-          />
-          {mandatairesRCS && !isAPINotResponding(mandatairesRCS) && (
-            <MandatairesRCSSection
-              mandatairesRCS={mandatairesRCS}
-              immatriculationRNE={immatriculationRNE}
-              uniteLegale={uniteLegale}
-            />
-          )}
-          <BreakPageForPrint />
-          <BeneficiairesSection
-            immatriculationRNE={immatriculationRNE}
-            uniteLegale={uniteLegale}
-          />
-        </>
-      ) : (
-        <DonneesPriveesSection />
+      <DirigeantsSection
+        uniteLegale={uniteLegale}
+        immatriculationRNE={immatriculationRNE}
+      />
+      {mandatairesRCS && !isAPINotResponding(mandatairesRCS) && (
+        <MandatairesRCSSection
+          mandatairesRCS={mandatairesRCS}
+          immatriculationRNE={immatriculationRNE}
+          uniteLegale={uniteLegale}
+        />
       )}
+
+      <BreakPageForPrint />
+      <BeneficiairesSection
+        immatriculationRNE={immatriculationRNE}
+        uniteLegale={uniteLegale}
+      />
     </>
   );
 }
