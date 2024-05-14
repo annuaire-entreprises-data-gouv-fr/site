@@ -6,24 +6,20 @@ import { Loader } from '#components-ui/loader';
 import { administrationsMetaData } from '#models/administrations';
 import { useTimeout } from 'hooks/use-timeout';
 import { ISectionProps } from '..';
+import style from './style.module.css';
 
 export function DataSectionLoader({
   sources,
 }: {
   sources: ISectionProps['sources'];
 }) {
-  const before100ms = !useTimeout(100);
   const after5s = useTimeout(5000);
-
-  if (before100ms) {
-    return <div style={{ minHeight: '150px' }} />;
-  }
 
   const dataSources = Array.from(new Set(sources || [])).map(
     (key) => administrationsMetaData[key]
   );
   return (
-    <>
+    <div className={style.loader}>
       {after5s && (
         <HeightTransition animateAppear>
           <FadeIn>
@@ -33,7 +29,6 @@ export function DataSectionLoader({
               semble occupé en ce moment. Le téléchargement des informations
               peut prendre du temps (10s à 20s).
             </Info>
-            <br />
           </FadeIn>
         </HeightTransition>
       )}
@@ -48,7 +43,7 @@ export function DataSectionLoader({
         </p>
       ) : (
         <>
-          Nous récupérons les informations dans les bases de données :
+          <p>Nous récupérons les informations dans les bases de données :</p>
           <ul>
             {dataSources.map((d) => (
               <li key={d.slug}>{d.long}</li>
@@ -57,6 +52,6 @@ export function DataSectionLoader({
           <Loader />
         </>
       )}
-    </>
+    </div>
   );
 }
