@@ -1,12 +1,17 @@
 'use client';
 
 import { Loader } from '#components-ui/loader';
-import style from './style.module.css';
+import { useTimeout } from 'hooks';
 
 export function PageLoader() {
+  const before100ms = !useTimeout(100);
+  if (before100ms) {
+    return <div style={{ minHeight: '300px' }} />;
+  }
+
   return (
-    <div className={style.loader}>
+    <>
       Chargement des données en cours <Loader />
-    </div>
+    </>
   );
 }
