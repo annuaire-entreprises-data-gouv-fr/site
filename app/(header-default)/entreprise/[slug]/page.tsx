@@ -103,7 +103,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
                 <BreakPageForPrint />
               </>
             )}
-            {isAssociation(uniteLegale) && (
+            {!isBot && isAssociation(uniteLegale) && (
               <AssociationSection uniteLegale={uniteLegale} session={session} />
             )}
             <UsefulShortcuts uniteLegale={uniteLegale} />

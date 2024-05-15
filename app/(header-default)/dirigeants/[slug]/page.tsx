@@ -58,9 +58,14 @@ const DirigeantsPage = async (props: AppRouterProps) => {
         {servicePublic ? (
           <ResponsableSection servicePublic={servicePublic} />
         ) : (
-          <Suspense fallback={<PageLoader />}>
-            <DirigeantInformation uniteLegale={uniteLegale} session={session} />
-          </Suspense>
+          !isBot && (
+            <Suspense fallback={<PageLoader />}>
+              <DirigeantInformation
+                uniteLegale={uniteLegale}
+                session={session}
+              />
+            </Suspense>
+          )
         )}
       </div>
     </>
