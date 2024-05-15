@@ -42,4 +42,11 @@ describe('Siren / Siret redirections', () => {
     cy.visit('/etablissement/487444697');
     cy.url().should('include', '/entreprise/487444697');
   });
+
+  it('Allow search request with 9 or plus digits', () => {
+    cy.visit(
+      '/rechercher?terme=&cp_dep_label=&cp_dep_type=&cp_dep=&fn=&n=&dmin=&dmax=&type=&label=&ca_min=100000000&etat=&sap=&naf=&nature_juridique=&tranche_effectif_salarie=&categorie_entreprise='
+    );
+    cy.url().should('include', '/rechercher?terme=');
+  });
 });
