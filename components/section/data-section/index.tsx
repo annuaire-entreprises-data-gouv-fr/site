@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import { IAPILoading } from '#models/api-loading';
+import { isAPI404 } from '#models/api-not-responding';
 import { ISectionProps, Section } from '..';
 import { DataSectionContent, IDataSectionContentProps } from './content';
 
@@ -21,15 +22,7 @@ export function DataSection<T extends Exclude<unknown, IAPILoading>>({
   ...props
 }: IDataSectionProps<T>) {
   //@ts-ignore
-  const dataSectionContent = (
-    <DataSectionContent
-      data={data}
-      notFoundInfo={notFoundInfo}
-      children={children}
-      additionalInfoOnError={additionalInfoOnError}
-    />
-  );
-  if (!dataSectionContent) {
+  if (notFoundInfo === null && isAPI404(data)) {
     return null;
   }
   //@ts-ignore
@@ -37,7 +30,12 @@ export function DataSection<T extends Exclude<unknown, IAPILoading>>({
 
   return (
     <Section {...props} lastModified={lastModified}>
-      {dataSectionContent}
+      <DataSectionContent
+        data={data}
+        notFoundInfo={notFoundInfo}
+        children={children}
+        additionalInfoOnError={additionalInfoOnError}
+      />
     </Section>
   );
 }
