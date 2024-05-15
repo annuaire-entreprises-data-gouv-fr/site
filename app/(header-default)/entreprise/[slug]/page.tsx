@@ -17,7 +17,6 @@ import UsefulShortcuts from '#components/useful-shortcuts';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
-import { getProtectedCertificats } from '#models/espace-agent/certificats';
 import { getImmatriculationEORI } from '#models/espace-agent/immatriculation-eori';
 import { getServicePublicByUniteLegale } from '#models/service-public';
 import { EScope, hasRights } from '#models/user/rights';
@@ -56,18 +55,14 @@ export default async function UniteLegalePage(props: AppRouterProps) {
   const session = await getSession();
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
-  const [servicePublic, immatriculationEORI, privateCertificats] =
-    await Promise.all([
-      getServicePublicByUniteLegale(uniteLegale, {
-        isBot,
-      }),
-      hasRights(session, EScope.eori)
-        ? getImmatriculationEORI(uniteLegale.siege.siret, session?.user)
-        : null,
-      hasRights(session, EScope.protectedCertificats)
-        ? getProtectedCertificats(uniteLegale, session?.user)
-        : null,
-    ]);
+  const [servicePublic, immatriculationEORI] = await Promise.all([
+    getServicePublicByUniteLegale(uniteLegale, {
+      isBot,
+    }),
+    hasRights(session, EScope.eori)
+      ? getImmatriculationEORI(uniteLegale.siege.siret, session?.user)
+      : null,
+  ]);
 
   return (
     <>
@@ -84,11 +79,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
           <NonDiffusibleSection />
         ) : (
           <>
-            <UniteLegaleSection
-              uniteLegale={uniteLegale}
-              session={session}
-              protectedCertificats={privateCertificats}
-            />
+            <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
             {hasRights(session, EScope.isAgent) && (
               <EspaceAgentSummarySection
                 immatriculationEORI={immatriculationEORI}
@@ -112,7 +103,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
                 <BreakPageForPrint />
               </>
             )}
-            {isAssociation(uniteLegale) && (
+            {!isBot && isAssociation(uniteLegale) && (
               <AssociationSection uniteLegale={uniteLegale} session={session} />
             )}
             <UsefulShortcuts uniteLegale={uniteLegale} />

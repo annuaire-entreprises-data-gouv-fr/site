@@ -35,6 +35,7 @@ async function MandatairesRCSSection({
       id="rne-dirigeants"
       title="Dirigeant(s)"
       isProtected
+      notFoundInfo={null}
       sources={[EAdministration.INFOGREFFE]}
       data={mandatairesRCS}
     >

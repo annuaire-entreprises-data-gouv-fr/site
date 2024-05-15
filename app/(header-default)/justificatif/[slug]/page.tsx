@@ -49,13 +49,15 @@ const JustificatifPage = async (props: AppRouterProps) => {
           ficheType={FICHE.JUSTIFICATIFS}
           session={session}
         />
-        <Suspense fallback={<PageLoader />}>
-          <Immatriculations
-            uniteLegale={uniteLegale}
-            immatriculationJOAFE={immatriculationJOAFE}
-            session={session}
-          />
-        </Suspense>
+        {!isBot && (
+          <Suspense fallback={<PageLoader />}>
+            <Immatriculations
+              uniteLegale={uniteLegale}
+              immatriculationJOAFE={immatriculationJOAFE}
+              session={session}
+            />
+          </Suspense>
+        )}
       </div>
     </>
   );

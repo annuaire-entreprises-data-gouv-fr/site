@@ -1,7 +1,6 @@
 import { clientApiEntrepriseOpqibi } from '#clients/api-entreprise/opqibi';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { ISession } from '#models/user/session';
-import { Siren } from '#utils/helpers';
+import { Siren, Siret } from '#utils/helpers';
 import { handleApiEntrepriseError } from '../utils';
 type Qualification = {
   nom: string;
@@ -23,9 +22,9 @@ export type IOpqibi = {
 
 export const getOpqibi = async (
   siren: Siren,
-  user: ISession['user'] | null
+  recipientSiret: Siret | undefined
 ): Promise<IOpqibi | IAPINotRespondingError> => {
-  return clientApiEntrepriseOpqibi(siren, user?.siret).catch((error) =>
+  return clientApiEntrepriseOpqibi(siren, recipientSiret).catch((error) =>
     handleApiEntrepriseError(error, { siren })
   );
 };

@@ -1,0 +1,16 @@
+.loader {
+    min-height: 500px;
+    opacity: 0;
+    /* animate after 500ms during 200ms */
+    animation: fadeIn 200ms 300ms forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
