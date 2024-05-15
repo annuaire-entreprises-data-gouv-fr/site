@@ -1,5 +1,7 @@
+'use client';
+
 import FAQLink from '#components-ui/faq-link';
-import { AsyncDataSectionServer } from '#components/section/data-section/server';
+import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -7,10 +9,10 @@ import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { formatDateLong } from '#utils/helpers';
 
 export const OpqibiSection: React.FC<{
-  opqibi: Promise<IOpqibi | IAPINotRespondingError>;
+  opqibi: IOpqibi | IAPINotRespondingError;
 }> = ({ opqibi }) => {
   return (
-    <AsyncDataSectionServer
+    <DataSection
       title="Certificat OPQIBI"
       id="opqibi"
       isProtected
@@ -100,7 +102,7 @@ export const OpqibiSection: React.FC<{
           )}
         </>
       )}
-    </AsyncDataSectionServer>
+    </DataSection>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
@@ -19,7 +19,10 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import {
+  IProtectedCertificatsEntreprise,
+  hasProtectedCertificatsEntreprise,
+} from '#models/espace-agent/certificats';
 import { ISession } from '#models/user/session';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
@@ -33,11 +36,13 @@ import {
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
+  protectedCertificats: IProtectedCertificatsEntreprise | null;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}> = ({ uniteLegale, session, protectedCertificats }) => {
   const hasLabelsAndCertificates =
     checkHasLabelsAndCertificates(uniteLegale) ||
-    hasRights(session, EScope.protectedCertificats);
+    (protectedCertificats &&
+      hasProtectedCertificatsEntreprise(protectedCertificats));
   const conventionsCollectives = Object.keys(
     uniteLegale.conventionsCollectives || {}
   );
@@ -121,14 +126,10 @@ const UniteLegaleSection: React.FC<{
             }abels et certificats`,
             <>
               <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />
-              {hasRights(session, EScope.protectedCertificats) && (
-                <Suspense>
-                  <ProtectedCertificatesBadgesSection
-                    session={session}
-                    uniteLegale={uniteLegale}
-                  />
-                </Suspense>
-              )}
+              <ProtectedCertificatesBadgesSection
+                uniteLegale={uniteLegale}
+                protectedCertificats={protectedCertificats}
+              />
             </>,
           ],
         ]

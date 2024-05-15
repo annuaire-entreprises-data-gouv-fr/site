@@ -1,22 +1,18 @@
 import { Icon } from '#components-ui/icon/wrapper';
 import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
-import { getOpqibi } from '#models/espace-agent/certificats/opqibi';
-import { getQualibat } from '#models/espace-agent/certificats/qualibat';
-import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
-import { ISession } from '#models/user/session';
+import { IProtectedCertificatsEntreprise } from '#models/espace-agent/certificats';
 import { IUniteLegale } from '../../../models/core/types';
 import { LabelWithLinkToSection } from './label-with-link-to-section';
 
 export const ProtectedCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = async ({ uniteLegale, session }) => {
-  const [opqibi, qualifelec, qualibat] = await Promise.all([
-    getOpqibi(uniteLegale.siren, session?.user?.siret),
-    getQualifelec(uniteLegale.siege.siret, session?.user?.siret),
-    getQualibat(uniteLegale.siege.siret, session?.user?.siret),
-  ]);
+  protectedCertificats: IProtectedCertificatsEntreprise | null;
+}> = ({ uniteLegale, protectedCertificats }) => {
+  if (!protectedCertificats) {
+    return null;
+  }
+  const { opqibi, qualibat, qualifelec } = protectedCertificats;
 
   if (
     isAPINotResponding(opqibi) &&

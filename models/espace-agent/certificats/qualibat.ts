@@ -1,5 +1,6 @@
 import { clientApiEntrepriseQualibat } from '#clients/api-entreprise/qualibat';
 import { IAPINotRespondingError } from '#models/api-not-responding';
+import { ISession } from '#models/user/session';
 import { Siret } from '#utils/helpers';
 import { handleApiEntrepriseError } from '../utils';
 export type IQualibat = {
@@ -26,9 +27,9 @@ export type IQualibat = {
 
 export const getQualibat = async (
   siret: Siret,
-  recipientSiret: Siret | undefined
+  user: ISession['user'] | null
 ): Promise<IQualibat | IAPINotRespondingError> => {
-  return clientApiEntrepriseQualibat(siret, recipientSiret).catch((error) =>
+  return clientApiEntrepriseQualibat(siret, user?.siret).catch((error) =>
     handleApiEntrepriseError(error, { siret })
   );
 };
