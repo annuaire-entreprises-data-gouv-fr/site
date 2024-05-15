@@ -1,19 +1,16 @@
-'use client';
-
 import AssociationAdressAlert from '#components-ui/alerts-with-explanations/association-adress';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { Tag } from '#components-ui/tag';
-import { Section } from '#components/section';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
+import { AsyncDataSectionServer } from '#components/section/data-section/server';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { getAssociationFromSlug } from '#models/association';
 import { IDataAssociation } from '#models/association/types';
 import { getPersonnalDataAssociation } from '#models/core/statut-diffusion';
 import { IAssociation, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
-import { useFetchAssociation } from 'hooks/fetch/association';
 import { AssociationNotFound } from './association-not-found';
 
 const getTableData = (
@@ -133,66 +130,58 @@ const AssociationSection = ({
 }) => {
   const { idAssociation = '' } = uniteLegale.association;
 
-  const association = useFetchAssociation(uniteLegale.siren);
-
-  if (!association) {
-    // Data can be null if the natureJuridique is an association,
-    // but no idAssociation is provided by Insee API call.
-    return (
-      <Section
-        title={`Répertoire National des Associations`}
-        sources={[EAdministration.MI]}
-      >
-        <AssociationNotFound uniteLegale={uniteLegale} />;
-      </Section>
-    );
-  }
+  const association = getAssociationFromSlug(uniteLegale.siren);
 
   return (
     <>
-      <AsyncDataSectionClient
+      <AsyncDataSectionServer
         title="Répertoire National des Associations"
         sources={[EAdministration.MI]}
         data={association}
         notFoundInfo={<AssociationNotFound uniteLegale={uniteLegale} />}
       >
-        {(association) => (
-          <>
-            <AssociationAdressAlert
-              uniteLegale={uniteLegale}
-              association={association}
-            />
-            <p>
-              Cette structure est inscrite au{' '}
-              <strong>Répertoire National des Associations (RNA)</strong>, avec
-              les informations suivantes&nbsp;:
-            </p>
-            <TwoColumnTable
-              body={getTableData(
-                idAssociation,
-                association,
-                uniteLegale,
-                session
+        {(association) =>
+          !association ? (
+            <AssociationNotFound uniteLegale={uniteLegale} />
+          ) : (
+            <>
+              <AssociationAdressAlert
+                uniteLegale={uniteLegale}
+                session={session}
+                association={association}
+              />
+              <p>
+                Cette structure est inscrite au{' '}
+                <strong>Répertoire National des Associations (RNA)</strong>,
+                avec les informations suivantes&nbsp;:
+              </p>
+              <TwoColumnTable
+                body={getTableData(
+                  idAssociation,
+                  association,
+                  uniteLegale,
+                  session
+                )}
+              />
+              {idAssociation && (
+                <>
+                  <br />
+                  Retrouvez plus d&apos;informations (comptes, effectifs et
+                  documents administratifs) sur la{' '}
+                  <a
+                    target="_blank"
+                    href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
+                    rel="noopener noreferrer"
+                  >
+                    fiche data-asso de cette association
+                  </a>
+                  .
+                </>
               )}
-            />
-            {idAssociation && (
-              <>
-                <br />
-                Retrouvez plus d&apos;informations (comptes, effectifs et
-                documents administratifs) sur la{' '}
-                <a
-                  target="_blank"
-                  href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
-                  rel="noopener noreferrer"
-                >
-                  fiche data-asso de cette association
-                </a>
-                .
-              </>
-            )}
-          </>
-        )}
-      </AsyncDataSectionClient>
+            </>
+          )
+        }
+      </AsyncDataSectionServer>
       <HorizontalSeparator />
       <BreakPageForPrint />
     </>
