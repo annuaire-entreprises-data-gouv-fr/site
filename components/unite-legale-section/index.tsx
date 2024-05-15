@@ -35,9 +35,7 @@ const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const hasLabelsAndCertificates =
-    checkHasLabelsAndCertificates(uniteLegale) ||
-    hasRights(session, EScope.protectedCertificats);
+  const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
   const conventionsCollectives = Object.keys(
     uniteLegale.conventionsCollectives || {}
   );
@@ -112,7 +110,8 @@ const UniteLegaleSection: React.FC<{
       />,
     ],
     // jump line and add label and certificates
-    ...(hasLabelsAndCertificates
+    ...(hasLabelsAndCertificates ||
+    hasRights(session, EScope.protectedCertificats)
       ? [
           ['', <br />],
           [
@@ -126,6 +125,7 @@ const UniteLegaleSection: React.FC<{
                   <ProtectedCertificatesBadgesSection
                     session={session}
                     uniteLegale={uniteLegale}
+                    hasOtherCertificates={hasLabelsAndCertificates}
                   />
                 </Suspense>
               )}
