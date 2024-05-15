@@ -33,9 +33,11 @@ const shouldRedirect = (path: string, search: string, url: string) => {
     }
 
     if (path.startsWith('/rechercher')) {
-      const sirenOrSiretParam = extractSirenOrSiretSlugFromUrl(
-        search.replaceAll(/[+]|(%20)/g, '')
+      const slug = (search.match(/terme=([^&]*)/g) || [''])[0].replaceAll(
+        /[+]|(%20)/g,
+        ''
       );
+      const sirenOrSiretParam = extractSirenOrSiretSlugFromUrl(slug);
 
       if (isLikelyASiret(sirenOrSiretParam)) {
         return new URL(`/etablissement/${sirenOrSiretParam}`, url);
