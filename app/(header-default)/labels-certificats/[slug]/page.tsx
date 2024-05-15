@@ -117,9 +117,11 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
         {hasRights(session, EScope.protectedCertificats) && (
-          <>
-            <ProtectedCertificats uniteLegale={uniteLegale} session={session} />
-          </>
+          <ProtectedCertificats
+            uniteLegale={uniteLegale}
+            session={session}
+            hasOtherCertificates={checkHasLabelsAndCertificates(uniteLegale)}
+          />
         )}
       </div>
     </>
