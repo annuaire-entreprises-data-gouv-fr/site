@@ -1,5 +1,6 @@
 import { clientApiEntrepriseQualifelec } from '#clients/api-entreprise/qualifelec';
 import { IAPINotRespondingError } from '#models/api-not-responding';
+import { ISession } from '#models/user/session';
 import { Siret } from '#utils/helpers';
 import { handleApiEntrepriseError } from '../utils';
 export type IQualifelec = Array<{
@@ -42,9 +43,9 @@ export type IQualifelec = Array<{
 }>;
 export const getQualifelec = async (
   siret: Siret,
-  recipientSiret: Siret | undefined
+  user: ISession['user'] | null
 ): Promise<IQualifelec | IAPINotRespondingError> => {
-  return clientApiEntrepriseQualifelec(siret, recipientSiret).catch((error) =>
+  return clientApiEntrepriseQualifelec(siret, user?.siret).catch((error) =>
     handleApiEntrepriseError(error, { siret })
   );
 };
