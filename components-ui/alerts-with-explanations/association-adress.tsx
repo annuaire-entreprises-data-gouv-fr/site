@@ -10,15 +10,14 @@ import {
   getPersonnalDataAssociation,
 } from '#models/core/statut-diffusion';
 import { IAssociation } from '#models/core/types';
-import useSession from 'hooks/use-session';
+import { ISession } from '#models/user/session';
 import { Warning } from '../alerts';
 
 const AssociationAdressAlert: React.FC<{
   uniteLegale: IAssociation;
   association: IDataAssociation | IAPINotRespondingError | null;
-}> = ({ uniteLegale, association }) => {
-  const session = useSession();
-
+  session: ISession | null;
+}> = ({ uniteLegale, association, session }) => {
   if (!association || isAPINotResponding(association)) {
     return null;
   }

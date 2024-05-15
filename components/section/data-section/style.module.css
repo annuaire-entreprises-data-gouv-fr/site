@@ -1,0 +1,5 @@
+.loader {
+    /* Composes loader from page-loader */
+    composes: loader from 'components/page-loader/style.module.css';
+    min-height: 0px;
+}

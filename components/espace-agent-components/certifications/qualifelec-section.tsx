@@ -1,18 +1,17 @@
-'use client';
-
 import ButtonLink from '#components-ui/button';
-import { DataSection } from '#components/section/data-section';
+import { AsyncDataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IQualifelec } from '#models/espace-agent/certificats/qualifelec';
 import { formatDate, formatDateLong } from '#utils/helpers';
 
-export const QualifelecSection: React.FC<{
-  qualifelec: IQualifelec | IAPINotRespondingError;
-}> = ({ qualifelec }) => {
+type IProps = {
+  qualifelec: Promise<IQualifelec | IAPINotRespondingError>;
+};
+export async function QualifelecSection({ qualifelec }: IProps) {
   return (
-    <DataSection
+    <AsyncDataSectionServer
       title="Certificats Qualifelec"
       id="qualifelec"
       isProtected
@@ -73,6 +72,6 @@ export const QualifelecSection: React.FC<{
           />
         </>
       )}
-    </DataSection>
+    </AsyncDataSectionServer>
   );
-};
+}
