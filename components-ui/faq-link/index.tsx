@@ -8,18 +8,7 @@ const FAQLink: React.FC<
   PropsWithChildren<{ tooltipLabel: string; to?: string }>
 > = ({ to, tooltipLabel, children }) => (
   <InformationTooltip
-    label={
-      <>
-        {children}
-        {to ? (
-          <div className="layout-right" style={{ marginTop: '10px' }}>
-            <a href={to} tabIndex={-1}>
-              → en savoir plus
-            </a>
-          </div>
-        ) : null}
-      </>
-    }
+    label={children}
     tabIndex={to ? undefined : 0}
     orientation="left"
     width={230}
