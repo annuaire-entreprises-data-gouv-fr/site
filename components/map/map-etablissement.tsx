@@ -13,13 +13,15 @@ function checkLatLng(latitude: string, longitude: string): LngLatLike | null {
   try {
     const lat = parseFloat(latitude);
     const lng = parseFloat(longitude);
-
-    if (lat < -90 || lat > 90) {
-      throw new Error('Invalid latitude');
-    }
-
-    if (lng < -180 || lng > 180) {
-      throw new Error('Invalid latitude');
+    if (
+      isNaN(lat) ||
+      isNaN(lng) ||
+      lat < -90 ||
+      lat > 90 ||
+      lng < -180 ||
+      lng > 180
+    ) {
+      throw new Error('Invalid coords');
     }
 
     return {
@@ -84,9 +86,8 @@ export function MapEtablissement({
       ) : (
         <i>
           Nous n’avons pas réussi à déterminer la géolocalisation de cet
-          établissement, car ses coordonnées (latitude :{' '}
-          {etablissement.latitude}°, longitude : {etablissement.longitude}°)
-          sont invalides.
+          établissement, car ses coordonnées sont invalides ou inconnues : [
+          {etablissement.latitude || '⎽'}°, {etablissement.longitude || '⎽'}°].
         </i>
       )}
     </div>
