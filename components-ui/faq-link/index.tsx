@@ -13,7 +13,9 @@ const FAQLink: React.FC<
         {children}
         {to ? (
           <div className="layout-right" style={{ marginTop: '10px' }}>
-            <a href={to}>→ en savoir plus</a>
+            <a href={to} tabIndex={-1}>
+              → en savoir plus
+            </a>
           </div>
         ) : null}
       </>
