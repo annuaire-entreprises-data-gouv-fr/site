@@ -1,4 +1,5 @@
 import { Icon } from '#components-ui/icon/wrapper';
+import NonRenseigne from '#components/non-renseigne';
 import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
 import { getOpqibi } from '#models/espace-agent/certificats/opqibi';
@@ -11,7 +12,8 @@ import { LabelWithLinkToSection } from './label-with-link-to-section';
 export const ProtectedCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = async ({ uniteLegale, session }) => {
+  hasOtherCertificates: boolean;
+}> = async ({ uniteLegale, session, hasOtherCertificates }) => {
   const [opqibi, qualifelec, qualibat] = await Promise.all([
     getOpqibi(uniteLegale.siren, session?.user?.siret),
     getQualifelec(uniteLegale.siege.siret, session?.user?.siret),
@@ -23,7 +25,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
     isAPINotResponding(qualibat) &&
     isAPINotResponding(qualifelec)
   ) {
-    return null;
+    return hasOtherCertificates ? null : <NonRenseigne />;
   }
 
   return (

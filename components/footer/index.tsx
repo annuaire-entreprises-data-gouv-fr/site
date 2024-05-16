@@ -127,7 +127,6 @@ const Footer = () => (
                     mon-entreprise.fr
                   </a>
                 </li>
-
                 <li className="fr-footer__content-item">
                   <a
                     className="fr-footer__top-link"
@@ -136,6 +135,16 @@ const Footer = () => (
                     href="https://formalites.entreprises.gouv.fr"
                   >
                     formalites.entreprises.gouv.fr
+                  </a>
+                </li>
+                <li className="fr-footer__content-item">
+                  <a
+                    className="fr-footer__top-link"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href="https://conseillers-entreprises.service-public.fr"
+                  >
+                    Conseillers Entreprises
                   </a>
                 </li>
               </ul>
