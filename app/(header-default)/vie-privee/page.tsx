@@ -175,60 +175,8 @@ const Privacy = () => (
             </td>
           </tr>
           <tr>
-            <td>Matomo</td>
-            <td>Mesure d’audience</td>
-            <td>France</td>
-            <td>https://fr.matomo.org/matomo-cloud-dpa/</td>
-          </tr>
-          <tr>
-            <td>Sentry</td>
-            <td>Tracking d’erreurs</td>
-            <td>Union Européenne</td>
-            <td>https://sentry.io/legal/dpa/</td>
-          </tr>
-          <tr>
-            <td>Nginix Amplify</td>
-            <td>Monitoring</td>
-            <td>Union Européenne</td>
-            <td>https://www.f5.com/company/policies/privacy-notice</td>
-          </tr>
-          <tr>
-            <td>Zammad</td>
-            <td>Support</td>
-            <td>Union Européenne</td>
-            <td>https://zammad.com/en/company/privacy</td>
-          </tr>
-          <tr>
-            <td>Github</td>
-            <td>Hébergement du code</td>
-            <td>États-Unis</td>
-            <td>
-              https://github.com/customer-terms/github-data-protection-agreement
-            </td>
-          </tr>
-          <tr>
-            <td>Notion</td>
-            <td>Gestion des connaissances</td>
-            <td>États-Unis</td>
-            <td>
-              https://notion.notion.site/Data-Processing-Addendum-361b540101274b1fa7e16b90402b0d99
-            </td>
-          </tr>
-          <tr>
-            <td>Tchap</td>
-            <td>Outil de collaboration</td>
-            <td>France</td>
-            <td>https://tchap.beta.gouv.fr/politique-de-confidentialite</td>
-          </tr>
-          <tr>
-            <td>Mattermost</td>
-            <td>Outil de collaboration</td>
-            <td>France</td>
-            <td>https://mattermost.com/data-processing-addendum/</td>
-          </tr>
-          <tr>
-            <td>Grist</td>
-            <td>Gestion des connaissances</td>
+            <td>Crisp</td>
+            <td>Gestion du support</td>
             <td>France</td>
             <td>https://www.getgrist.com/privacy/</td>
           </tr>
