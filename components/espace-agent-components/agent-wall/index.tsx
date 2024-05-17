@@ -35,7 +35,12 @@ const AgentWall: React.FC<{
             .
           </p>
           <p>
-            Disponible pour toutes les administrations, sans création de compte.
+            Disponible pour toutes les administrations, sans création de compte
+            (consultez les{' '}
+            <a href="/cgu" rel="noreferrer noopener" target="_blank">
+              conditions générales d’utilisation
+            </a>
+            ).
           </p>
           <ButtonAgentConnect useCurrentPathForRediction />
         </FloatingModal>
@@ -56,12 +61,10 @@ const AgentWall: React.FC<{
               ['Développeur backend', 'Typescript, Rails, Python etc.'],
               ['Data Engineer', 'Airflow, Python'],
               ['Devops', 'Ansible, Scalingo, OVH'],
-              [
-                'Chargé de déploiement',
-                'SEO, relations avec les administrations',
-              ],
+              ['Chargé de déploiement', 'Relations avec les administrations'],
+              ['Chargé de marketing', 'SEO, communication'],
+              ['Product Manager', 'Gestion du produit'],
               ['Designer', 'UX, UI, Product designer'],
-              ['Chargé de communication', 'X, Linkedin, newsletters internes'],
               ['Chargé des relations usagers', 'Outils de support'],
             ].map(([a, b]) => [a, b])}
           />

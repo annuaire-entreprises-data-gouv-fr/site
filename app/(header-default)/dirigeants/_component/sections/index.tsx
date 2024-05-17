@@ -18,18 +18,19 @@ export async function DirigeantInformation({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
-  const [immatriculationRNE, mandatairesRCS] = await Promise.all([
-    getImmatriculationRNE(uniteLegale.siren),
-    hasRights(session, EScope.mandatairesRCS) &&
-      getMandatairesRCS(uniteLegale.siren, session?.user?.siret),
-  ]);
-
   if (
     !estDiffusible(uniteLegale) &&
     !hasRights(session, EScope.nonDiffusible)
   ) {
     return <DonneesPriveesSection />;
   }
+
+  const [immatriculationRNE, mandatairesRCS] = await Promise.all([
+    getImmatriculationRNE(uniteLegale.siren),
+    hasRights(session, EScope.mandatairesRCS) &&
+      getMandatairesRCS(uniteLegale.siren, session?.user?.siret),
+  ]);
+
   return (
     <>
       <DirigeantSummary
