@@ -13,7 +13,7 @@ const fetchRNEImmatriculation = async (siren: Siren, useCache = true) =>
   clientAPIProxy<IImmatriculationRNE>(
     routes.proxy.rne.immatriculation + siren,
     {
-      timeout: constants.timeout.XXXXL,
+      timeout: constants.timeout.XXXL,
       useCache,
     }
   );

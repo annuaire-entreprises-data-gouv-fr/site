@@ -1,8 +1,6 @@
 'use client';
 
-import { getNomComplet } from '#models/core/statut-diffusion';
 import { IUniteLegale, isAssociation } from '#models/core/types';
-import useSession from 'hooks/use-session';
 
 type IProp = {
   /**
@@ -20,11 +18,9 @@ type IProp = {
 };
 
 export function UniteLegalePageLink({ uniteLegale, href, siteName }: IProp) {
-  const session = useSession();
-  const nomComplet = getNomComplet(uniteLegale, session);
   const linkLabel = isAssociation(uniteLegale)
-    ? `la page de l’association ${nomComplet}`
-    : `la page de l’entreprise ${nomComplet}`;
+    ? `la page de l’association`
+    : `la page de l’entreprise`;
   const siteDescription = siteName ? ` sur ${siteName}` : '';
   return (
     <>
