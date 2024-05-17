@@ -366,6 +366,11 @@ const Footer = () => (
               </a>
             </li>
             <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href="/cgu">
+                Conditions Générales d’Utilisation
+              </a>
+            </li>
+            <li className="fr-footer__bottom-item">
               <a className="fr-footer__bottom-link" href="/accessibilite">
                 Accessibilité : non conforme
               </a>

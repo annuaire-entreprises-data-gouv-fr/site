@@ -30,6 +30,12 @@ const LandingPageAgent = (props: AppRouterProps) => {
               Accessible à toutes les administrations, collectivités et services
               publics de l’Etat.
             </p>
+            <p>
+              <a href="/cgu" rel="noreferrer noopener" target="_blank">
+                Consultez nos conditions générales d’utilisation
+              </a>
+              .
+            </p>
           </header>
           <ButtonAgentConnect
             useCurrentPathForRediction={false}
