@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
-import { DILA, INPI, INSEE } from '#components/administrations';
 
 export const metadata: Metadata = {
   title: 'Politique de confidentialité',
@@ -13,80 +12,41 @@ export const metadata: Metadata = {
 const Privacy = () => (
   <TextWrapper>
     <h1>Politique de confidentialité</h1>
+    <h2>Qui est responsable de l’Annuaire des Entreprises ?</h2>
     <p>
-      La DINUM est responsable de traitement de données à caractère personnel
-      réalisés par l’Annuaire des Entreprises. Elle s’engage à assurer un
-      traitement de ces données conforme au Règlement (UE) 2016/679 relatif à la
-      protection des données à caractère personnel et à la libre circulation de
-      ces données et à la loi n° 78-17 du 6 janvier 1978 relative à
-      l’informatique aux fichiers et aux libertés.
+      La Direction interministérielle du numérique (“DINUM”) met à disposition
+      des usagers et des agents publics un service numérique unique regroupant
+      et diffusant les informations légales publiques des entreprises,
+      associations et services publics en France. Ce service traite des données
+      à caractère personnel.
     </p>
-    <h2>Données à caractère personnel traitées</h2>
     <p>
-      Ne sont traitées que les données strictement nécessaires au fonctionnement
-      du service. Ces données ne pourront en aucun cas servir au contrôle et à
-      la surveillance de l’activité des Utilisateurs et Utilisatrices. Les
-      données à caractère personnel concernées sont les suivantes :
+      Le responsable du traitement des données à caractère personnel est la
+      DINUM représentée par Madame Stéphanie SCHAER, en qualité de directrice.
+    </p>
+    <h2>Pourquoi traitons-nous ces données ?</h2>
+    <p>
+      L’Annuaire des Entreprises traite des données à caractère personnel pour :
     </p>
     <ul>
       <li>
-        Données relatives aux dirigeants : prénoms, nom, lieu et mois de
-        naissance, adresse postale; (organisme qui produit les données :{' '}
-        <INSEE />, <DILA />, <INPI />)
+        Agréger et diffuser les informations légales publiques des entreprises,
+        associations et services publics en France ;
       </li>
       <li>
-        Données relatives aux bénéficiaires effectifs : prénoms, nom, prénoms,
-        date de naissance et nationalité; (organisme qui produit les données :{' '}
-        <INPI />)
+        Faciliter la découvrabilité des informations légales publiques de ces
+        structures ;
       </li>
       <li>
-        Données relatives aux agents publics : nom, prénom, adresse e-mail.
-      </li>
-      <li>
-        Données relatives aux personnes physiques qui s’opposent au traitement
-        de leurs données identifiantes : nom, prénom, lieu et date de naissance.
+        Gérer les accès auxdites informations en fonction de leur niveau de
+        sensibilité.
       </li>
     </ul>
+    <h2>Quelles sont les données que nous traitons ?</h2>
     <p>
-      La présente politique de confidentialité informe les personnes concernées
-      sur le traitement de données à caractère personnel sur Annuaire des
-      Entreprises et notamment sur{' '}
-      <a href="https://api.gouv.fr/les-api/api-recherche-entreprises">
-        API Recherche d’entreprises
-      </a>
-      .
+      L’Annuaire des Entreprises traite les données à caractère personnel
+      suivantes :
     </p>
-    <p>
-      Effectivement, certaines données du RGE ou relatives aux associations par
-      exemple peuvent être traitées par le biais d’
-      <a href="https://api.gouv.fr/les-api/api-recherche-entreprises">
-        API Recherche d’entreprises
-      </a>{' '}
-      sans qu’elles soient nécessaires au traitement : notamment l’adresse
-      postale du fondateur de l’association lorsqu’il n’y a pas de siège social
-      ou des adresses e-mail et numéros de téléphone de contact.{' '}
-    </p>
-    <h2>Finalités</h2>
-    <p>
-      Les traitements ont pour finalités la mise à disposition des données
-      publiques détenues par l’administration sur les entreprises ou les
-      associations et en particulier les données contenues dans un extrait
-      d’immatriculation d’entreprise (également appelé extrait KBIS ou extrait
-      D1).
-    </p>
-    <h2>Base légale</h2>
-    <p>
-      Les données à caractère personnel susvisées sont traitées par le biais de
-      l’exécution d’une mission d’intérêt public ou relevant de l’exercice de
-      l’autorité publique dont est investi le responsable de traitement au sens
-      de l’article 6-1 e) du RGPD.
-    </p>
-    <p>
-      Cette mission d’intérêt public est mise en œuvre par le décret n°
-      2019-1088 du 25 octobre 2019 relatif au système d’information et de
-      communication de l’Etat et à la direction interministérielle du numérique.
-    </p>
-    <h2>Durées de conservation</h2>
     <div className="fr-table">
       <table>
         <caption>
@@ -95,95 +55,244 @@ const Privacy = () => (
         <thead>
           <tr>
             <th>Catégories de données</th>
-            <th>Durée de conservation</th>
+            <th>Données à caractère personnel</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Données relatives aux dirigeants</td>
             <td>
-              Les données sont accessibles via API, elles sont supprimées des
-              serveurs au bout d’une dizaine de minute. <br />
-              Les données des dirigeants accessibles depuis l’API Recherche
-              d’entreprises sont conservées indéfiniment sur l’API et sont
-              réactualisées tous les jours.
+              Données relatives aux représentants des entreprises, associations,
+              services publics
             </td>
+            <td>Nom, prénom</td>
           </tr>
           <tr>
-            <td>Données relatives aux bénéficiaires effectifs</td>
             <td>
-              Les données sont accessibles via API, elles sont supprimées des
-              serveurs au bout d’une dizaine de minute.
+              Données relatives aux bénéficiaires effectifs des entreprises,
+              associations, services publics
             </td>
+            <td>Nom, prénom</td>
           </tr>
           <tr>
-            <td>Données relatives aux agents publics</td>
             <td>
-              Les données sont accessibles via API, elles sont supprimées des
-              serveurs au bout d’une dizaine de minutes.
+              Données relatives aux agents publics accédant aux services
+              numérique via AgentConnect
             </td>
-          </tr>
-          <tr>
-            <td>Données relatives aux personnes physiques qui s’opposent </td>
-            <td>
-              Les données sont supprimées dès la mise en œuvre de l’opposition.
-            </td>
-          </tr>
-          <tr>
-            <td>Cookies</td>
-            <td>Les cookies ne sont pas conservés sur le serveur.</td>
+            <td>Nom, prénom, adresse e-mail professionnelle</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <h2>Destinataires</h2>
     <p>
-      Les données traitées par le service sont des données publiques mises à
-      disposition du public, des entreprises et des administrations.
+      Les données des dirigeants et des bénéficiaires effectifs sont collectées
+      via les services suivants : Institut national de la statistique et des
+      études économiques (Insee), Institut national de la propriété industrielle
+      (INPI), la Direction de l’information légale et administrative (DILA).
+      Pour plus d’informations, voir{' '}
+      <a href="https://annuaire-entreprises.data.gouv.fr/donnees/sources">
+        ici
+      </a>
+      .
     </p>
-    <h2>Sous-traitants</h2>
+    <h2>Qu’est-ce qui nous autorise à traiter ces données ?</h2>
     <p>
-      Certaines données sont envoyées à des sous-traitants. Le responsable de
-      traitement s’est assuré de la mise en œuvre par ses sous-traitants de
-      garanties adéquates et du respect de conditions strictes de
-      confidentialité, d’usage et de protection des données.
+      L’Annuaire des Entreprises traite des données à caractère personnel en se
+      basant sur :
+    </p>
+    <ul>
+      <li>
+        L’exécution d’une mission d’intérêt public ou relevant de l’exercice de
+        l’autorité publique dont est investi le responsable de traitement au
+        sens de l’article 6-1 e) du RGPD.
+      </li>
+    </ul>
+    <p>
+      Cette mission d’intérêt public se traduit en pratique par le décret
+      n°2023-304 du 22 avril 2023 modifiant le décret n°2019-1088 du 25 octobre
+      2019 relatif au système d’information et de communication de l’Etat et à
+      la direction interministérielle du numérique, notamment son article 6.
+    </p>
+    <h2>Pendant combien de temps conservons-nous ces données ?</h2>
+    <div className="fr-table">
+      <table>
+        <caption>
+          Résumé des différentes durées de conservation des données
+        </caption>
+        <thead>
+          <tr>
+            <th>Type de données</th>
+            <th>Durée de la conservation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Données relatives aux représentants des entreprises, associations
+              et services publics
+            </td>
+            <td>
+              Jusqu’à 10 ans suivant la cessation de l’activité de l’entreprise,
+              l’association et le service public concerné
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Données relatives aux bénéficiaires effectifs des entreprises,
+              associations, services publics
+            </td>
+            <td>
+              Jusqu’à 10 ans suivant la cessation de l’activité de l’entreprise,
+              l’association et le service public concerné
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Données relatives aux agents publics accédant au service numérique
+              via AgentConnect
+            </td>
+            <td>
+              Durant la durée de session de la personne concernée, au-delà les
+              données sont détruites sans délai. En cas de déconnexion ou
+              d’expiration de la session, l’Agent doit dès lors se reconnecter à
+              l’aide de ses identifiants.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Pour mémoire, les données qui transitent via l’API Annuaire des
+      Entreprises sont supprimées des serveurs au bout d’une dizaine de minute.
+    </p>
+    <h2>Quels droits avez-vous ?</h2>
+    <p>Vous disposez :</p>
+    <ul>
+      <li>D’un droit d’information et d’un droit d’accès à vos données ;</li>
+      <li>D’un droit de rectification ;</li>
+      <li>D’un droit d’opposition ;</li>
+      <li>D’un droit à la limitation du traitement.</li>
+    </ul>
+    <p>
+      Pour les exercer, contactez-nous à :{' '}
+      <a href="mailto:annuaire-entreprises@data.gouv.fr ">
+        annuaire-entreprises@data.gouv.fr{' '}
+      </a>
+    </p>
+    <p>Ou bien à :</p>
+    <ul>
+      <li>
+        L’adresse postale suivante : DINUM, à l’attention d’Annuaire des
+        entreprises, 20 avenue de Ségur, 75007 PARIS
+      </li>
+      <li>L’adresse e-mail suivante : dpd@pm.gouv.fr </li>
+    </ul>
+    <p>
+      Puisque ce sont des droits personnels, nous ne traiterons votre demande
+      que si nous sommes en mesure de vous identifier. Dans le cas où nous ne
+      parvenons pas à vous identifier, nous pouvons être amenés à vous demander
+      une preuve de votre identité.
+    </p>
+    <p>
+      Pour vous aider dans votre démarche, vous trouverez{' '}
+      <a href="https://www.cnil.fr/fr/modele/courrier/exercer-son-droit-dacces">
+        un modèle de courrier élaboré par la CNIL
+      </a>
+      .
+    </p>
+    <p>
+      Nous nous engageons à vous répondre dans un délai raisonnable qui ne
+      saurait dépasser 1 mois à compter de la réception de votre demande.
+    </p>
+    <p>
+      Vous pouvez introduire une réclamation auprès de la{' '}
+      <a href="https://www.cnil.fr/fr/cnil-direct/question/adresser-une-reclamation-plainte-la-cnil-quelles-conditions-et-comment">
+        CNIL
+      </a>
+      .
+    </p>
+    <h2>Qui va avoir accès à ces données ?</h2>
+    <p>
+      Les accès aux données sont strictement encadrés et juridiquement
+      justifiés. Les personnes suivantes vont avoir accès aux données :
+    </p>
+    <ul>
+      <li>Les membres du service numérique l’Annuaire les entreprises ;</li>
+      <li>
+        Les utilisateurs de l’API uniquement pour les données relatives aux
+        représentants et bénéficiaires effectifs des entreprises, associations
+        et services publics ;
+      </li>
+      <li>
+        Les usagers du service et agents publics accédant au service via
+        AgentConnect, diffusion publique des données relatives aux représentants
+        et bénéficiaires effectifs des entreprises, associations et services
+        publics et accès via un compte pour les agents publics.
+      </li>
+    </ul>
+    <h2>Quelles mesures de sécurité mettons-nous en place ?</h2>
+    <p>Nous mettons en place plusieurs mesures pour sécuriser les données :</p>
+    <ul>
+      <li>Stockage des données en base de données ;</li>
+      <li>Cloisonnement des données ;</li>
+      <li>Mesures de traçabilité ;</li>
+      <li>Surveillance ;</li>
+      <li>Protection contre les virus, malwares et logiciels espions ;</li>
+      <li>Protection des réseaux ;</li>
+      <li>Sauvegarde ;</li>
+      <li>
+        Mesures restrictives limitant l’accès physique aux données à caractère
+        personnel.
+      </li>
+    </ul>
+    <h2>Qui nous aide à traiter les données ?</h2>
+    <p>
+      Certaines des données sont envoyées à d’autres acteurs, appelés
+      “sous-traitants de données”, pour qu’ils nous aident à les manipuler. Nous
+      nous assurons qu’ils respectent strictement le RGPD et qu’ils apportent
+      des garanties suffisantes en matière de sécurité.
     </p>
     <div className="fr-table">
       <table>
         <caption>Résumé des différents sous-traitants</caption>
         <thead>
           <tr>
-            <th>Partenaire</th>
-            <th>Traitement réalisé</th>
+            <th>Sous-traitant</th>
             <th>Pays destinataire</th>
+            <th>Traitement réalisé</th>
             <th>Garanties</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>OVH</td>
-            <td>Hébergement</td>
             <td>France</td>
+            <td>Hébergement</td>
             <td>https://www.ovh.com/fr/protection-donnees-personnelles/</td>
           </tr>
           <tr>
             <td>Scalingo</td>
-            <td>Hébergement de test</td>
             <td>France</td>
+            <td>Hébergement de test</td>
             <td>
               https://scalingo.com/fr/contrat-gestion-traitements-donnees-personnelles
             </td>
           </tr>
           <tr>
             <td>Crisp</td>
-            <td>Gestion du support</td>
             <td>France</td>
-            <td>https://www.getgrist.com/privacy/</td>
+            <td>Gestion du support</td>
+            <td>https://crisp.chat/fr/privacy/</td>
           </tr>
         </tbody>
       </table>
     </div>
     <h2>Cookies</h2>
+    <p>
+      Un cookie est un fichier déposé sur votre terminal lors de la visite d’un
+      site. Il a pour but de collecter des informations relatives à votre
+      navigation et de vous adresser des services adaptés à votre terminal
+      (ordinateur, mobile ou tablette).
+    </p>
     <p>
       En application de l’article 5(3) de la directive 2002/58/CE modifiée
       concernant le traitement des données à caractère personnel et la
@@ -212,26 +321,26 @@ const Privacy = () => (
       la libre circulation de ces données.
     </p>
     <p>
-      Un cookie est un fichier déposé sur votre terminal lors de la visite d’un
-      site. Il a pour but de collecter des informations relatives à votre
-      navigation et de vous adresser des services adaptés à votre terminal
-      (ordinateur, mobile ou tablette).
+      À tout moment, vous pouvez refuser l’utilisation des cookies et désactiver
+      le dépôt sur votre ordinateur en utilisant la fonction dédiée de votre
+      navigateur (fonction disponible notamment sur Microsoft Internet Explorer
+      11, Google Chrome, Mozilla Firefox, Apple Safari et Opera).
     </p>
     <p>
       Des cookies relatifs aux statistiques publiques et anonymes sont également
       déposés.
     </p>
-    <p>Cookies recensés sur l’Annuaire des entreprises :</p>
+    <p>Cookies recensés sur l’Annuaire des entreprises :</p>
     <div className="fr-table">
       <table>
-        <caption>Résumé des différents sous-traitants</caption>
+        <caption>Résumé des cookies</caption>
         <thead>
           <tr>
-            <td>Nom du cookie</td>
-            <td>Finalités</td>
-            <td>Hébergement</td>
-            <td>Garanties</td>
-            <td>Durées de conservation du cookie</td>
+            <th>Sous-traitant</th>
+            <th>Finalités</th>
+            <th>Hébergement</th>
+            <th>Garanties</th>
+            <th>Durées de conservation du cookie</th>
           </tr>
         </thead>
         <tbody>
@@ -239,182 +348,61 @@ const Privacy = () => (
             <td>pk_id</td>
             <td>Mesure d’audience</td>
             <td>France</td>
-            <td>www.matomo.org/matomo-cloud-dpa</td>
+            <td>https://fr.matomo.org/matomo-cloud-dpa/</td>
             <td>13 mois</td>
           </tr>
           <tr>
             <td>pk_ref</td>
             <td>Mesure d’audience</td>
             <td>France</td>
-            <td>www.matomo.org/matomo-cloud-dpa</td>
+            <td>https://fr.matomo.org/matomo-cloud-dpa/</td>
             <td>6 mois</td>
           </tr>
           <tr>
             <td>pk_ses</td>
             <td>Mesure d’audience</td>
             <td>France</td>
-            <td>www.matomo.org/matomo-cloud-dpa</td>
-            <td>30 minutes </td>
+            <td>https://fr.matomo.org/matomo-cloud-dpa/</td>
+            <td>30 minute</td>
           </tr>
         </tbody>
       </table>
     </div>
     <p>
-      Le logiciel{' '}
-      <a href="https://matomo.org/" rel="noopener noreferrer" target="_blank">
-        Matomo
-      </a>
-      , est un outil{' '}
-      <a
-        href="https://matomo.org/free-software/"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        libre
-      </a>
-      , paramétré pour être en conformité avec la{' '}
-      <a
-        href="https://www.cnil.fr/fr/solutions-pour-les-cookies-de-mesure-daudience"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        recommandation « Cookies »
-      </a>{' '}
-      de la{' '}
-      <abbr title="Commission Nationale de l’Informatique et des Libertés">
-        CNIL
-      </abbr>
-      . Cela signifie que votre adresse IP, par exemple, est anonymisée avant
-      d’être enregistrée. Il est donc impossible d’associer vos visites sur ce
-      site à votre personne.
+      L’Anuaire des Entreprises utilise l’outil de mesure d’audience Matomo,
+      configuré en mode exempté, et ne nécessitant pas le recueil de votre
+      consentement conformément aux recommandations de la CNIL.{' '}
     </p>
     <p>
-      Il convient d’indiquer que : Les données collectées ne sont pas recoupées
-      avec d’autres traitements. Les cookies ne permettent pas de suivre la
-      navigation de l’internaute sur d’autres sites.
+      Vous êtes suivis de manière anonyme, décochez la case pour ne plus être
+      suivis même anonymement.
     </p>
+    <iframe
+      style={{
+        overflow: 'visible',
+        borderWidth: '0',
+        width: '100%',
+      }}
+      title="Optout cookie"
+      src="https://stats.data.gouv.fr/index.php?module=CoreAdminHome&action=optOut&language=fr&backgroundColor=&fontColor=333&fontSize=16px&fontFamily=sans-serif&overflow=visible"
+    ></iframe>
+
     <p>
-      À tout moment, vous pouvez refuser l’utilisation des cookies et désactiver
-      le dépôt sur votre ordinateur en utilisant la fonction dédiée de votre
-      navigateur (fonction disponible notamment sur Microsoft Internet Explorer
-      11, Google Chrome, Mozilla Firefox, Apple Safari et Opera).
-    </p>
-    <p>
-      Pour l’outil Matomo, vous pouvez décider de ne jamais être suivi, y
-      compris anonymement :
-      <iframe
-        style={{
-          overflow: 'visible',
-          borderWidth: '0',
-          width: '100%',
-        }}
-        title="Optout cookie"
-        src="https://stats.data.gouv.fr/index.php?module=CoreAdminHome&action=optOut&language=fr&backgroundColor=&fontColor=333&fontSize=16px&fontFamily=sans-serif&overflow=visible"
-      ></iframe>
-    </p>
-    <p>
-      Pour aller plus loin, vous pouvez consulter les fiches proposées par la{' '}
-      <abbr title="Commission Nationale de l’Informatique et des Libertés">
-        CNIL
-      </abbr>{' '}
-      :
+      Pour aller plus loin, vous pouvez consulter les ﬁches proposées par la
+      Commission Nationale de l’Informatique et des Libertés (CNIL) :
     </p>
     <ul>
       <li>
-        <a
-          href="https://www.cnil.fr/fr/cookies-traceurs-que-dit-la-loi"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Cookies et traceurs : que dit la loi ?
+        <a href="https://www.cnil.fr/fr/cookies-traceurs-que-dit-la-loi">
+          Cookies & traceurs : que dit la loi ?
         </a>
       </li>
       <li>
-        <a
-          href="https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+        <a href="https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser">
           Cookies : les outils pour les maîtriser
         </a>
       </li>
     </ul>
-    <p>
-      Annuaire-entreprises utilise également des cookies strictement nécessaires
-      au bon fonctionnement de l’Application sans lesquels l’accès à la
-      plateforme ne peut être pleinement garanti.{' '}
-    </p>
-    <h2>
-      Exercice des droits à la protection des données à caractère personnel
-    </h2>
-    <p>
-      Vous disposez d’un droit d’accès et de modification des données à
-      caractère personnel qui vous concernent. Vous pouvez également vous
-      opposer aux traitements réalisés par l’Annuaire des Entreprises.
-    </p>
-    <p>
-      Vos droits d’accès et d’opposition s’exercent auprès de la DINUM à
-      l’adresse{' '}
-      <a href="mailto:annuaire-entreprises@data.gouv.fr">
-        annuaire-entreprises@data.gouv.fr
-      </a>{' '}
-      ou par courrier à l’adresse suivante :
-    </p>
-    <ul>
-      <li>DINUM, A l’attention d’annuaire-entreprises</li>
-      <li>20 avenue de Ségur 75007 Paris</li>
-    </ul>
-    <p>
-      Si vous vous opposez au traitement de vos données à caractère personnel,
-      celles-ci ne seront plus diffusées en open data dans la rubrique
-      « dirigeants » de votre entreprise. Elles resteront cependant accessibles
-      sur demande aux administrations qui ont besoin d’en connaître dans le
-      cadre de leurs missions.
-    </p>
-    <p>
-      Pour exercer votre droit de modification, nous vous invitons à vous
-      rapprocher des organismes qui ont produit ces données :
-    </p>
-    <ul>
-      <li>
-        l’
-        <INSEE /> (Institut national de la statistique et des études
-        économiques)
-      </li>
-      <li>
-        l’
-        <INPI /> (Institut national de la propriété industrielle)
-      </li>
-      <li>
-        la <DILA /> (Direction de l’information légale et administrative)
-      </li>
-    </ul>
-    <p>
-      Pour exercer vos droits, vous pouvez également contacter le délégué à la
-      protection des données (DPD) des services du Premier Ministre : par mail à{' '}
-      <a href="mailto:dpd@pm.gouv.fr">dpd@pm.gouv.fr</a>
-      ou par courrier à l’adresse suivante :
-    </p>
-    <ul>
-      <li>
-        Services du Premier Ministre À l’attention du délégué à la protection
-        des données (DPD)
-      </li>
-      <li>56 rue de Varenne 75007 Paris</li>
-    </ul>
-    Conformément au règlement général sur la protection des données, vous
-    disposez du droit d’introduire une réclamation auprès de la CNIL (3 place de
-    Fontenoy – TSA 80715 – 75334 PARIS CEDEX 07).
-    <br />
-    Les modalités de réclamation sont précisées sur le site de la CNIL :{' '}
-    <a href="https://www.cnil.fr">www.cnil.fr</a>.<h2>Contact</h2>
-    <p>
-      L’adresse mail de contact est la suivante :
-      <a href="mailto:annuaire-entreprises@data.gouv.fr">
-        annuaire-entreprises@data.gouv.fr
-      </a>
-      .
-    </p>
   </TextWrapper>
 );
 
