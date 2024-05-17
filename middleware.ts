@@ -40,9 +40,9 @@ const shouldRedirect = (path: string, search: string, url: string) => {
       const sirenOrSiretParam = extractSirenOrSiretSlugFromUrl(slug);
 
       if (isLikelyASiret(sirenOrSiretParam)) {
-        return new URL(`/etablissement/${sirenOrSiretParam}`, url);
+        return new URL(`/etablissement/${sirenOrSiretParam}?redirected=1`, url);
       } else if (isLikelyASiren(sirenOrSiretParam)) {
-        return new URL(`/entreprise/${sirenOrSiretParam}`, url);
+        return new URL(`/entreprise/${sirenOrSiretParam}?redirected=1`, url);
       }
     }
   } catch (e) {
@@ -87,6 +87,7 @@ export async function middleware(request: NextRequest) {
    */
   const nextUrl = request.nextUrl;
   const paramIsPresent = nextUrl.search.indexOf('redirected=1') > -1;
+
   if (paramIsPresent) {
     // store redirection status in custom header as referrer seems missing from headers in RSC
     // isRedirected = params is present + previous page is coming from site
