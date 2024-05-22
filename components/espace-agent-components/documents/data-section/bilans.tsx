@@ -6,17 +6,18 @@ import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
+import { AsyncDataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
   IUniteLegale,
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
+import { IActesRNE } from '#models/immatriculation';
 import { formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import useFetchActesRNE from 'hooks/fetch/actes-RNE';
 
 const NoBilans = () => (
   <>Aucun comptes n’a été déposé au RNE pour cette entreprise.</>
@@ -24,12 +25,11 @@ const NoBilans = () => (
 
 const AgentBilansSection: React.FC<{
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
-  const documents = useFetchActesRNE(uniteLegale);
-
+  documents: Promise<IActesRNE | IAPINotRespondingError>;
+}> = ({ uniteLegale, documents }) => {
   return (
     <PrintNever>
-      <AsyncDataSectionClient
+      <AsyncDataSectionServer
         title="Bilans"
         id="bilans"
         isProtected
@@ -94,7 +94,7 @@ const AgentBilansSection: React.FC<{
             </>
           )
         }
-      </AsyncDataSectionClient>
+      </AsyncDataSectionServer>
     </PrintNever>
   );
 };
