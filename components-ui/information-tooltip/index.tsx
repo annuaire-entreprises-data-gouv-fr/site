@@ -83,7 +83,7 @@ function InformationTooltip({
         }}
       >
         <span>{children}</span>
-        <div
+        <span
           className={`${style.tooltip} ${style[orientation]} ${
             displayed ? style.displayed : ''
           }`}
@@ -97,7 +97,7 @@ function InformationTooltip({
           role="tooltip"
         >
           {label}
-        </div>
+        </span>
       </span>
     </>
   );
