@@ -1,25 +1,44 @@
 .menuLogout {
   position: relative;
-}
-.menuLogout:hover {
-  background-color: #eee !important;
-  cursor: default;
+  z-index: 10;
+  cursor: pointer;
 }
 
-.menuLogout > a {
+.menuLogout>.dialog {
   position: absolute;
-  top: 100%;
-  left: 0;
-  display: none;
-  width: 100%;
-  background-color: #fff;
-  padding: 5px 15px;
-  box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.5);
-}
-.menuLogout > a:hover {
-  background-color: #f8f8f8 !important;
+  right: -1rem;
+  z-index: 11;
+  visibility: hidden;
+  width: max-content;
 }
 
-.menuLogout:hover > a {
-  display: block;
+.menuLogout:hover>.dialog,
+.menuLogout:focus>.dialog,
+.dialog:focus-within,
+.dialog:hover {
+  visibility: visible !important;
+  animation: appear 0.1s ease-in-out forwards;
+
+}
+
+.dialog a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 992px) {
+  .menuText {
+    display: none;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
