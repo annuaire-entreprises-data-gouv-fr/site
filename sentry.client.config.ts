@@ -8,6 +8,7 @@ declare global {
     IS_OUTDATED_BROWSER: boolean;
   }
 }
+
 if (isNextJSSentryActivated) {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
@@ -35,6 +36,48 @@ if (isNextJSSentryActivated) {
           hint.originalException.name,
           hint.originalException.message,
         ];
+      }
+
+      if (
+        hint.originalException &&
+        typeof hint.originalException === 'object' &&
+        'message' in hint.originalException &&
+        typeof hint.originalException.message === 'string'
+      ) {
+        /*
+        A LOT of hydration error happens in production. This can be due to a lot of reasons:
+        1. Browser code in client SSRed component
+        2. Bad nesting of HTML tags (e.g. <p> inside <span>)
+        3. User browser extension messing with the DOM
+
+        In any of these case, a unhandled exception is thrown and sentry catches it.
+        Only 1 and 2 are fixable. 3 is not. But real world data is not accurate enough to determine which is which.
+
+        For now, we rely on E2E tests to catch those.
+
+        In production, only the minified version of the error is sent to sentry.
+        These are the react error numbers that we want to ignore:
+        - [422](https://react.dev/errors/422)
+        - [423](https://react.dev/errors/423)
+        - [418](https://react.dev/errors/418)
+        - [425](https://react.dev/errors/425)
+        */
+        if (
+          hint.originalException.message.match(
+            /Minified React error #(422|423|418|425)/
+          )
+        ) {
+          event.fingerprint = ['React hydration error'];
+        }
+
+        /*
+        This is a common error that happens when a chunk fails to load. We want to group them together.
+        */
+        if (
+          hint.originalException.message.match(/Loading chunk [\d]+ failed/)
+        ) {
+          event.fingerprint = ['Chunk load error'];
+        }
       }
 
       if (!event.tags) {
