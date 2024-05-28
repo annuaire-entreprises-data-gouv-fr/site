@@ -4,33 +4,11 @@
 import constants from '#models/constants';
 import { IEtablissement } from '#models/core/types';
 import { formatSiret } from '#utils/helpers';
-import maplibregl, { LngLatLike, Map } from 'maplibre-gl';
+import maplibregl, { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useEffect, useRef } from 'react';
+import { checkLatLng } from './check-lat-lng';
 import './map.css';
-
-function checkLatLng(latitude: string, longitude: string): LngLatLike | null {
-  try {
-    const lat = parseFloat(latitude);
-    const lng = parseFloat(longitude);
-    if (
-      isNaN(lat) ||
-      isNaN(lng) ||
-      lat < -90 ||
-      lat > 90 ||
-      lng < -180 ||
-      lng > 180
-    ) {
-      throw new Error('Invalid coords');
-    }
-
-    return {
-      lat,
-      lng,
-    };
-  } catch {}
-  return null;
-}
 
 export function MapEtablissement({
   etablissement,
