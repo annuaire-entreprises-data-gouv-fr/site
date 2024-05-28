@@ -25,13 +25,13 @@ const team = [
     photoUrl: '/images/team/jonathan.jpg',
     fullname: 'Jonathan Louis',
     pronoun: 'un',
-    role: 'chargé de déploiement SEO',
+    role: 'chargé de déploiement SEO & communication',
   },
   {
-    photoUrl: '/images/team/karen.jpg',
-    fullname: 'Karen Mazmanian',
-    pronoun: 'un',
-    role: 'chargé de déploiement et de communication',
+    photoUrl: '/images/team/lauren.jpg',
+    fullname: 'Lauren Michel',
+    pronoun: 'une',
+    role: 'chargée de déploiement',
   },
   {
     photoUrl: '/images/team/amandine.jpg',
