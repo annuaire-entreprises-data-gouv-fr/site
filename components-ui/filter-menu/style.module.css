@@ -46,9 +46,7 @@ span.search-filter-label {
   padding: 5px 10px;
 }
 
-span.search-filter-label>span {
-  color: var(--annuaire-colors-frBlue);
-}
+
 
 span.search-filter-label:hover {
   border-color: #0a76f6;
