@@ -89,7 +89,7 @@ function ActesTable({ actes }: IActesTableProps) {
         a.actes && (
           <ul>
             {(a?.actes || []).map((acteName) => (
-              <li>{acteName}</li>
+              <li key={acteName}>{acteName}</li>
             ))}
           </ul>
         ),

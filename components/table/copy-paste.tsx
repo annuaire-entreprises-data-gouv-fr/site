@@ -31,9 +31,9 @@ export function CopyPaste({
       ? children.replace(/\s/g, '')
       : children;
 
-    if (navigator.clipboard) {
+    try {
       navigator.clipboard.writeText(valueToCopy);
-    } else {
+    } catch {
       const el = document.createElement('textarea');
       el.value = valueToCopy;
       document.body.appendChild(el);
