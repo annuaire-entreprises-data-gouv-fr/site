@@ -75,20 +75,20 @@ const AgentBilansSection: React.FC<{
                 head={['Date de dépôt', 'Année fiscale', 'Lien']}
                 body={documents.bilans.map((a) => [
                   formatDateLong(a.dateDepot),
-                  getFiscalYear(a.dateCloture),
                   <>
-                    <ButtonLink
-                      alt
-                      small
-                      target="_blank"
-                      to={`${routes.api.rne.documents.download}${a.id}?type=bilan`}
-                    >
-                      Télécharger
-                    </ButtonLink>{' '}
+                    {getFiscalYear(a.dateCloture)}{' '}
                     {a.typeBilan === 'K' && (
                       <Tag color="info">bilan consolidé</Tag>
                     )}
                   </>,
+                  <ButtonLink
+                    alt
+                    small
+                    target="_blank"
+                    to={`${routes.api.rne.documents.download}${a.id}?type=bilan`}
+                  >
+                    Télécharger
+                  </ButtonLink>,
                 ])}
               />
             </>
