@@ -27,9 +27,6 @@
 .advanced-search-tutorial > div ul li {
   margin: 0 0 20px;
 }
-.advanced-search-tutorial > div li > span {
-  color: var(--annuaire-colors-frBlue);
-}
 
 @media only screen and (min-width: 1px) and (max-width: 576px) {
   .advanced-search-tutorial > svg {
