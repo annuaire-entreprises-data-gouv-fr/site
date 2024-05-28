@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { OpqibiSection } from '#components/espace-agent-components/certifications/opqibi-section';
-import { QualibatSection } from '#components/espace-agent-components/certifications/qualibat-section';
 import { QualifelecSection } from '#components/espace-agent-components/certifications/qualifelec-section';
 import {
   IAPINotRespondingError,
@@ -37,7 +36,8 @@ export async function ProtectedCertificats({
           <NoCertificatsWarning certificats={[opqibi, qualifelec, qualibat]} />
         </Suspense>
       )}
-      <QualibatSection qualibat={qualibat} />
+      {/* Qualibat API is down. When it's back up, uncomment this line 
+        <QualibatSection qualibat={qualibat} /> */}
       <QualifelecSection qualifelec={qualifelec} />
       <OpqibiSection opqibi={opqibi} />
     </>
