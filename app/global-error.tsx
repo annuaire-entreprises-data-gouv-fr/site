@@ -1,14 +1,14 @@
 'use client';
 
 import NextError from 'next/error';
-import { useLogFatalErrorAppClient } from 'hooks';
+import { useLog500ErrorAppClient } from 'hooks';
 
 export default function GlobalError({
   error,
 }: {
   error: Error & { digest?: string };
 }) {
-  useLogFatalErrorAppClient(error);
+  useLog500ErrorAppClient(error);
   return (
     <html>
       <body>
