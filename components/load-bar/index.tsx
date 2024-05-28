@@ -10,6 +10,8 @@ export default function LoadBar({ session }: { session: ISession | null }) {
     const loadBar = loadBarFactory();
     if (typeof window !== 'undefined') {
       window.addEventListener('beforeunload', loadBar.run);
+      window.addEventListener('runloadbar', loadBar.run);
+      window.addEventListener('cancelloadbar', loadBar.cancel);
     }
   }, []);
   return (
@@ -92,6 +94,12 @@ const loadBarFactory = () => {
         }
         this._loader.style.width = `${w}vw`;
         await wait(200);
+      }
+    },
+    cancel: function () {
+      this._currentJobId = '';
+      if (this._loader) {
+        this._loader.style.width = '0';
       }
     },
   };
