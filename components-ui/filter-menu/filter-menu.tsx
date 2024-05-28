@@ -2,6 +2,7 @@
 import { PropsWithChildren, useId, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import ButtonClose from '#components-ui/button/button-close';
+import FloatingModal from '#components-ui/floating-modal';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
 import {
@@ -78,9 +79,11 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             />
           )}
         </div>
-        <div
+        <FloatingModal
           className={styles['container']}
           style={{ display: open ? 'block' : 'none' }}
+          aria-label={'Les filtres de ' + activeFilter.label}
+          aria-modal={false}
         >
           <div className={styles['filter-container']}>{children}</div>
           {addSaveClearButton && (
@@ -99,7 +102,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
               </div>
             </>
           )}
-        </div>
+        </FloatingModal>
       </div>
     </>
   );

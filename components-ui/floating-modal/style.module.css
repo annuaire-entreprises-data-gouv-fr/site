@@ -2,15 +2,13 @@
   --gutter-vertical: 1rem;
   --gutter-horizontal: 1.5rem;
   background-color: #fff;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
   padding: var(--gutter-vertical) var(--gutter-horizontal);
   border-radius: 0.25rem;
-  border: 2px solid var(--annuaire-colors-pastelBlue);
+  border: 1px solid var(--annuaire-colors-pastelBlue);
 }
 
 .footer {
-  margin: calc(var(--gutter-vertical) * 2) calc(var(--gutter-horizontal) * -1)
-    calc(var(--gutter-vertical) * -1);
+  margin: calc(var(--gutter-vertical) * 2) calc(var(--gutter-horizontal) * -1) calc(var(--gutter-vertical) * -1);
   padding: var(--gutter-vertical) var(--gutter-horizontal);
   font-size: 0.9rem;
   background-color: var(--background-alt-grey);
@@ -20,9 +18,19 @@
   .no-mobile .footer {
     background-color: transparent;
   }
+
   .no-mobile.floating-modal {
     box-shadow: none;
     border: none;
     padding: 0;
   }
+}
+
+.elevation-low {
+  box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+.elevation-high {
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+
 }

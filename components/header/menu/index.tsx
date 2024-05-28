@@ -34,11 +34,12 @@ const Menu: React.FC<{
       <FloatingModal
         id="feedback-modal"
         aria-modal="false"
+        elevation="low"
         role="dialog"
         className={styles.dialog}
-        aria-label="Partager une idée, un bug, une question ou une donnée manquante avec l'équipe de l'Annuaire des Entreprises"
       >
         <a
+          aria-label="Se déconnecter de l'espace agent public"
           href={`/api/auth/agent-connect/logout?pathFrom=${encodeURIComponent(
             pathFrom
           )}`}
