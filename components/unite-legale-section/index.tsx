@@ -50,20 +50,13 @@ const UniteLegaleSection: React.FC<{
         formatSiret((uniteLegale.siege || {}).siret),
     ],
     [
-      <FAQLink
-        tooltipLabel="N° TVA Intracommunautaire"
-        to="/faq/tva-intracommunautaire"
-      >
-        Comprendre le numéro de TVA intracommunautaire
-      </FAQLink>,
+      <a href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</a>,
       <TVACell uniteLegale={uniteLegale} />,
     ],
     ['Activité principale (NAF/APE)', uniteLegale.libelleActivitePrincipale],
     ['Code NAF/APE', uniteLegale.activitePrincipale],
     [
-      <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse postale">
-        Comment modifier une adresse ?
-      </FAQLink>,
+      <a href="/faq/modifier-adresse">Adresse postale</a>,
       getAdresseUniteLegale(uniteLegale, session, true),
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],

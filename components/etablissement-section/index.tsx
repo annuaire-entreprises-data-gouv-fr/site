@@ -1,5 +1,4 @@
 import React from 'react';
-import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
@@ -92,9 +91,7 @@ const EtablissementSection: React.FC<IProps> = ({
         ]
       : []),
     [
-      <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse">
-        Comment modifier une adresse ?
-      </FAQLink>,
+      <a href="/faq/modifier-adresse">Adresse</a>,
       etablissement.adresse ? (
         <>
           <CopyPaste label="Adresse">
@@ -115,12 +112,7 @@ const EtablissementSection: React.FC<IProps> = ({
     ...(!usedInEntreprisePage
       ? [
           [
-            <FAQLink
-              tooltipLabel="N° TVA Intracommunautaire"
-              to="/faq/tva-intracommunautaire"
-            >
-              Comprendre le numéro de TVA intracommunautaire
-            </FAQLink>,
+            <a href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</a>,
             <TVACell uniteLegale={uniteLegale} />,
           ],
         ]
