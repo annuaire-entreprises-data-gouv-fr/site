@@ -8,6 +8,7 @@ const AgentWallDocuments: React.FC<
     title: string;
     id: string;
     uniteLegale: IUniteLegale;
+    condition: boolean;
   }>
 > = ({ uniteLegale, id, title }) => (
   <AgentWall
