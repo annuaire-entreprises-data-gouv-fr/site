@@ -3,24 +3,23 @@ import { getDocumentsRNEProtected } from '#models/immatriculation/rne';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import AgentWallDocuments from '../agent-wall/document';
-import AgentBilansSection from './data-section/bilans';
+import { AgentActesSection } from './data-section/actes';
 
-const BilansSection: React.FC<{
+const ActesSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = async ({ uniteLegale, session }) => {
-  if (!hasRights(session, EScope.bilansRne)) {
+  if (!hasRights(session, EScope.actesRne)) {
     return (
       <AgentWallDocuments
-        title="Bilans"
-        id="bilans"
+        title="Actes et statuts"
+        id="actes"
         uniteLegale={uniteLegale}
-        condition={!hasRights(session, EScope.bilansRne)}
+        condition={!hasRights(session, EScope.actesRne)}
       />
     );
   }
   const documents = getDocumentsRNEProtected(uniteLegale.siren);
-  return <AgentBilansSection uniteLegale={uniteLegale} documents={documents} />;
+  return <AgentActesSection uniteLegale={uniteLegale} documents={documents} />;
 };
-
-export default BilansSection;
+export default ActesSection;
