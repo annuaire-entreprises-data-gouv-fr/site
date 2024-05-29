@@ -1,13 +1,6 @@
 import { Metadata } from 'next';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { CarteProfessionnelleTravauxPublicsSection } from '#components/carte-professionnelle-travaux-publics-section';
-import ConformiteSection from '#components/espace-agent-components/conformite-section';
-import ActesSection from '#components/espace-agent-components/documents/actes-walled';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { isAPI404 } from '#models/api-not-responding';
-import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte-professionnelle-travaux-publics';
-import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -41,20 +34,17 @@ export const generateMetadata = async (
   };
 };
 
-const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
+const UniteLegaleDocumentPage = async (
+  props: AppRouterProps & {
+    conformite: React.ReactNode;
+    carteProfessionnelleTP: React.ReactNode;
+    actes: React.ReactNode;
+  }
+) => {
   const session = await getSession();
   const { slug, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
-  const carteProfessionnelleTravauxPublics = hasRights(
-    session,
-    EScope.carteProfessionnelleTravauxPublics
-  )
-    ? await getCarteProfessionnelleTravauxPublic(
-        uniteLegale.siren,
-        session?.user
-      )
-    : null;
   return (
     <>
       <div className="content-container">
@@ -63,21 +53,10 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
           ficheType={FICHE.DOCUMENTS}
           session={session}
         />
-        {hasRights(session, EScope.conformite) && (
-          <>
-            <ConformiteSection uniteLegale={uniteLegale} session={session} />
-            <HorizontalSeparator />
-          </>
-        )}
-        <ActesSection uniteLegale={uniteLegale} session={session} />
-        {carteProfessionnelleTravauxPublics &&
-          !isAPI404(carteProfessionnelleTravauxPublics) && (
-            <CarteProfessionnelleTravauxPublicsSection
-              carteProfessionnelleTravauxPublics={
-                carteProfessionnelleTravauxPublics
-              }
-            />
-          )}
+
+        {props.conformite}
+        {props.actes}
+        {props.carteProfessionnelleTP}
       </div>
     </>
   );
