@@ -1,25 +1,110 @@
 .menuLogout {
   position: relative;
+  z-index: 11;
+  cursor: pointer;
 }
+
 .menuLogout:hover {
-  background-color: #eee !important;
-  cursor: default;
+  background-color: #eee;
 }
 
-.menuLogout > a {
+.dialog {
   position: absolute;
-  top: 100%;
-  left: 0;
-  display: none;
-  width: 100%;
-  background-color: #fff;
-  padding: 5px 15px;
-  box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.5);
-}
-.menuLogout > a:hover {
-  background-color: #f8f8f8 !important;
+  padding: 1rem;
+  min-width: max-content;
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+  will-change: transform, opacity;
 }
 
-.menuLogout:hover > a {
+.menuLogout:hover>.dialog,
+.menuLogout:focus-visible>.dialog,
+.dialog:focus-visible,
+.dialog:hover {
+  visibility: visible !important;
+  animation: appear 0.15s ease-in-out forwards;
+}
+
+.dialog a {
   display: block;
+  margin: -1rem;
+  padding: 1rem;
+  color: var(--annuaire-colors-frBlue);
+}
+
+.dialog a:hover {
+  text-decoration: underline;
+
+}
+
+.dialog:hover {
+  background: #f8f8f8;
+
+}
+
+@media only screen and (min-width: 1px) and (max-width: 992px) {
+  .menuText {
+    display: none;
+  }
+
+  .dialog {
+    top: 0.25rem;
+    right: 0.5rem;
+  }
+
+  .menuLogout:hover>.dialog,
+  .menuLogout:focus-visible>.dialog,
+  .dialog:focus-visible,
+  .dialog:hover,
+  .menuLogout:focus>.dialog,
+  .dialog:focus {
+    visibility: visible !important;
+    animation: appear-right 0.1s ease-in-out forwards;
+  }
+
+}
+
+@media only screen and (min-width: 993px) {
+  .dialog {
+    right: 0;
+    left: 0;
+    top: 100%;
+    border: none;
+
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .menuLogout:hover>.dialog,
+  .menuLogout:focus-visible>.dialog,
+  .dialog:focus-visible,
+  .dialog:hover {
+    visibility: visible !important;
+    animation: appear-top 0.15s ease-in-out forwards;
+  }
+}
+
+@keyframes appear-top {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appear-right {
+  from {
+    opacity: 0;
+    transform: translateX(10%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

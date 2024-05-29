@@ -90,7 +90,13 @@ export const HeaderCore: React.FC<IProps> = ({
                         </a>
                       </div>
                     ) : null}
-                    <div className="fr-header__navbar"></div>
+                    <div className={styles.menuMobile}>
+                      <Menu
+                        session={session}
+                        useAgentCTA={useAgentCTA}
+                        pathFrom={pathFrom}
+                      />
+                    </div>
                   </div>
                   {useSearchBar ? (
                     <div className={styles.notFrSearch}>

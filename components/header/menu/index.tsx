@@ -1,3 +1,4 @@
+import FloatingModal from '#components-ui/floating-modal';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
 import { isLoggedIn } from '#models/user/rights';
@@ -10,38 +11,53 @@ const Menu: React.FC<{
   useAgentCTA: boolean;
 }> = ({ session, pathFrom, useAgentCTA }) => {
   return isLoggedIn(session) ? (
-    <div className={styles.menuLogout + ' fr-link'}>
+    <div className={styles.menuLogout + ' fr-link'} tabIndex={0}>
       <div>
         <Icon slug="accountLine">
-          {session?.user?.fullName ||
-            session?.user?.email ||
-            'Utilisateur inconnu'}
-          &nbsp;(
-          <strong
-            style={{
-              fontVariant: 'small-caps',
-              color: constants.colors.espaceAgent,
-            }}
-          >
-            agent public
-          </strong>
-          )
+          <span className={styles.menuText}>
+            {session?.user?.fullName ||
+              session?.user?.email ||
+              'Utilisateur inconnu'}
+            &nbsp;(
+            <strong
+              style={{
+                fontVariant: 'small-caps',
+                color: constants.colors.espaceAgent,
+              }}
+            >
+              agent public
+            </strong>
+            )
+          </span>
         </Icon>
       </div>
-      <a
-        href={`/api/auth/agent-connect/logout?pathFrom=${encodeURIComponent(
-          pathFrom
-        )}`}
+      <FloatingModal
+        id="feedback-modal"
+        aria-modal="false"
+        elevation="low"
+        role="dialog"
+        className={styles.dialog}
       >
-        <div>Se déconnecter</div>
-      </a>
+        <a
+          aria-label="Se déconnecter de l'espace agent public"
+          href={`/api/auth/agent-connect/logout?pathFrom=${encodeURIComponent(
+            pathFrom
+          )}`}
+        >
+          <div>Se déconnecter</div>
+        </a>
+      </FloatingModal>
     </div>
   ) : useAgentCTA ? (
     <a
       href={`/lp/agent-public?pathFrom=${encodeURIComponent(pathFrom)}`}
       className="fr-link"
+      title="Se connecter à l'espace agent"
+      aria-label="Accéder à la page de connexion de l'espace agent public"
     >
-      <Icon slug="accountLine">Espace agent public</Icon>
+      <Icon slug="accountLine">
+        <span className={styles.menuText}>Espace agent public</span>
+      </Icon>
     </a>
   ) : null;
 };
