@@ -15,7 +15,6 @@ type OrganismeDeFormationSectionProps = {
 
 export const OrganismeDeFormationSection = ({
   organismesDeFormation,
-  uniteLegale,
 }: OrganismeDeFormationSectionProps) => {
   return (
     <DataSection
@@ -24,21 +23,21 @@ export const OrganismeDeFormationSection = ({
       id="organisme-de-formation"
       data={organismesDeFormation}
       // if 404 from DGEFP we can assume this organism is NOT qualiopi
-      notFoundInfo={<OrganismeFormationLabel estQualiopi={false} />}
+      notFoundInfo={<OrganismeFormationLabel qualiopiCertified={false} />}
     >
       {(organismesDeFormation) => {
         // we use definition from DGEFP rather than recherche entreprise which can be outdated
-        const estQualiopi = organismesDeFormation.estQualiopi;
+        const qualiopiCertified = organismesDeFormation.qualiopiCertified;
 
         const head = [
           'Numéro Déclaration Activité (NDA)',
           'Détails',
-          ...(estQualiopi ? ['Certification(s) Qualiopi'] : []),
+          ...(qualiopiCertified ? ['Certification(s) Qualiopi'] : []),
         ];
 
         return (
           <>
-            <OrganismeFormationLabel estQualiopi={estQualiopi} />
+            <OrganismeFormationLabel qualiopiCertified={qualiopiCertified} />
             <FullTable
               head={head}
               body={organismesDeFormation.records.map((fields) => [
@@ -73,7 +72,7 @@ export const OrganismeDeFormationSection = ({
                     </>
                   )}
                 </>,
-                ...(estQualiopi
+                ...(qualiopiCertified
                   ? [
                       fields.certifications.map((certification) => (
                         <Tag color="info" key={certification}>
@@ -101,7 +100,7 @@ const FAQQaliopi = () => (
   </FAQLink>
 );
 
-const OrganismeFormationLabel = ({ estQualiopi = false }) => (
+const OrganismeFormationLabel = ({ qualiopiCertified = false }) => (
   <>
     Cette structure est un organisme de formation,{' '}
     <FAQLink tooltipLabel="à jour de ses obligations">
@@ -110,7 +109,7 @@ const OrganismeFormationLabel = ({ estQualiopi = false }) => (
       Pédagogique et Financier.
     </FAQLink>
     .
-    {estQualiopi ? (
+    {qualiopiCertified ? (
       <>
         <br />
         <br />

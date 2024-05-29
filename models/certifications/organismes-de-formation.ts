@@ -20,7 +20,7 @@ export type IOrganismeFormation = {
     dateDeclaration: string | null;
     region: string | null;
   }[];
-  estQualiopi: boolean;
+  qualiopiCertified: boolean;
   lastModified: string | null;
 };
 
