@@ -104,7 +104,6 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         {estOrganismeFormation && (
           <OrganismeDeFormationSection
             organismesDeFormation={organismesDeFormation}
-            uniteLegale={uniteLegale}
           />
         )}
         {egaproRenseignee && <EgaproSection egapro={egapro} />}

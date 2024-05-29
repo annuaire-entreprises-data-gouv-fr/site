@@ -23,6 +23,9 @@ const clientOrganismeFormation = async (
   const fields = response.records as IOrganismesFormationRecord[];
   return {
     records: fields.map(mapToDomainObject),
+    qualiopiCertified: !!fields.find(
+      (f) => (f?.certifications || []).length > 0
+    ),
     lastModified: response.lastModified,
   };
 };
