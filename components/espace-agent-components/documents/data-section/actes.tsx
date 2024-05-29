@@ -5,9 +5,10 @@ import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import { PrintNever } from '#components-ui/print-visibility';
 import ShowMore from '#components-ui/show-more';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
+import { AsyncDataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
   IUniteLegale,
   isAssociation,
@@ -15,7 +16,6 @@ import {
 } from '#models/core/types';
 import { IActesRNE } from '#models/immatriculation';
 import { formatDateLong } from '#utils/helpers';
-import useFetchActesRNE from 'hooks/fetch/actes-RNE';
 
 const NoDocument = () => (
   <>Aucun document n’a été retrouvé dans le RNE pour cette entreprise.</>
@@ -23,12 +23,11 @@ const NoDocument = () => (
 
 export const AgentActesSection: React.FC<{
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
-  const documents = useFetchActesRNE(uniteLegale);
-
+  documents: Promise<IActesRNE | IAPINotRespondingError>;
+}> = ({ uniteLegale, documents }) => {
   return (
     <PrintNever>
-      <AsyncDataSectionClient
+      <AsyncDataSectionServer
         title="Actes et statuts"
         id="actes"
         isProtected
@@ -72,7 +71,7 @@ export const AgentActesSection: React.FC<{
             </>
           )
         }
-      </AsyncDataSectionClient>
+      </AsyncDataSectionServer>
     </PrintNever>
   );
 };

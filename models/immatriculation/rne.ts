@@ -1,4 +1,5 @@
 import { fetchRNEImmatriculation } from '#clients/api-proxy/rne';
+import { clientDocuments } from '#clients/api-proxy/rne/documents';
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -13,7 +14,7 @@ import { IImmatriculationRNE } from '.';
  * Request Immatriculation from INPI's RNE
  * @param siren
  */
-const getImmatriculationRNE = async (
+export const getImmatriculationRNE = async (
   siren: Siren
 ): Promise<IAPINotRespondingError | IImmatriculationRNE> => {
   try {
@@ -47,4 +48,19 @@ const getImmatriculationRNE = async (
   }
 };
 
-export default getImmatriculationRNE;
+export async function getDocumentsRNEProtected(siren: Siren) {
+  try {
+    const actes = await clientDocuments(siren);
+    actes.hasBilanConsolide =
+      actes.bilans.filter((b) => b.typeBilan === 'K').length > 0;
+    return actes;
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      return APINotRespondingFactory(EAdministration.INPI, 404);
+    }
+
+    // no need to log an error as API-Proxy already logged it
+
+    return APINotRespondingFactory(EAdministration.INPI, 500);
+  }
+}

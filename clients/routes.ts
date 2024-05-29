@@ -2,7 +2,6 @@ const routes = {
   api: {
     rne: {
       documents: {
-        list: '/api/data-fetching/espace-agent/documents/',
         download: '/api/download/espace-agent/documents/',
       },
     },

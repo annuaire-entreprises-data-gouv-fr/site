@@ -3,7 +3,7 @@ import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import { estDiffusible } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
-import getImmatriculationRNE from '#models/immatriculation/rne';
+import { getImmatriculationRNE } from '#models/immatriculation/rne';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import BeneficiairesSection from './beneficiaires';
