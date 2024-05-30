@@ -56,6 +56,7 @@ export interface IServicePublic {
     | 'Syndicat mixte'
     | "Établissement d'enseignement";
   urlServicePublic: string | null;
+  subServicesId: string[];
 }
 type ILien = {
   libelle: string;

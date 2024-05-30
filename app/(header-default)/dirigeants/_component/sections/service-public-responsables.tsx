@@ -7,6 +7,7 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IServicePublic } from '#models/service-public';
 
 type IProps = { servicePublic: IServicePublic | IAPINotRespondingError };
+
 export default function ResponsableSection({ servicePublic }: IProps) {
   return (
     <DataSection
