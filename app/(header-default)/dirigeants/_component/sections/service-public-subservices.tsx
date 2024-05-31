@@ -37,7 +37,7 @@ function SubServicesDataSection({
             Ce service public se compose de {subServices.length} départements :
           </p>
           <FullTable
-            head={['Nom du département', 'Équipe dirigeante']}
+            head={['Nom du département', 'Responsable(s)']}
             body={subServices.map((service) => {
               return [
                 service.urlServicePublic ? (
