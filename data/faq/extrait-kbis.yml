@@ -1,0 +1,60 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
+administrations:
+  - inpi
+  - infogreffe
+faqTargets:
+  - all
+title: Comment télécharger un extrait Kbis ?
+seo:
+  description: Quelles sont les différentes solutions pour se procurer un extrait Kbis ?
+body: |
+  L'extrait K ou Kbis permet de prouver que votre entreprise est immatriculée au registre du commerce et des sociétés (RCS).
+
+  Depuis le 1er Janvier 2024, le RCS a été **remplacé par le Registre National des Entreprises (RNE)** et le Kbis n’est **plus demandé par l’administration française**.
+
+  Sur ce site, vous pouvez télécharger **gratuitement** l’extrait INPI ou extrait RNE qui contient les mêmes informations qu’un extrait Kbis et qui est en vigeur au sein de l’administration. 
+
+  Pour le télécharger, retrouvez la page de l’entreprise concernée grâce à la barre de recherche ci-dessus, puis cliquez sur "télécharger" l’extrait RNE.
+
+  Si vous avez absolument besoin d’un extrait Kbis, ce guide vous explique les solutions possibles.
+
+  ## Vous êtes agent(e) public ? 
+
+  Dans ce cas, un extrait INPI ou extrait RNE vous suffit. Vous pouvez le télécharger gratuitement sur l'Annuaire des entreprises. 
+
+  ## Vous êtes dirigeant(e) d’une société commerciale ?
+
+  Vous pouvez obtenir gratuitement le Kbis sur [monidenum.fr](https://monidenum.fr) :
+  - rendez-vous sur le site [monidenum.fr](https://monidenum.fr)
+  - créez un compte ou connectez-vous si vous en avez déjà un
+  - téléchargez votre Kbis gratuitement
+
+  ## Vous êtes un dirigeant(e) d’une micro-entreprise ou d’une société artisanale ?
+
+  Si votre entreprise n’est pas inscrite au Registre du Commerce et des Sociétés (RCS) alors ce n’est pas une société commerciale et le Kbis de votre entreprise **n’existe pas**.
+
+  En revanche votre entreprise est inscrite au RNE et vous pouvez donc télécharger son **extrait RNE**.
+
+  ## Vous n’êtes pas dirigeant(e) de l’entreprise concernée ?
+
+  Les Kbis sont en vente sur le site du tribunal de commerce : [infogreffe.fr](https://infogreffe.fr)
+  - recherchez une entreprise
+  - créez un compte ou connectez-vous si vous en avez déjà un
+  - sélectionnez l'extrait Kbis et procédez au paiement en ligne
+
+  Vous pouvez également acheter un Kbis en vous rendant physiquement au greffe du tribunal de commerce de l'entreprise concernée.
+more:
+  - label: Comment obtenir un extrait K ou Kbis ? sur entreprendre.service-public
+    href: https://entreprendre.service-public.fr/vosdroits/F21000
