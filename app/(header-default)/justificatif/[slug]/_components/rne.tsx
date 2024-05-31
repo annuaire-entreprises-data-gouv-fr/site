@@ -47,8 +47,11 @@ const ImmatriculationLinks = ({
       <PrintNever>
         <p>
           Pour accéder aux données contenues dans un extrait d’immatriculation
-          (équivalent de <strong>l’extrait KBIS ou D1</strong>), vous pouvez
-          soit télécharger le{' '}
+          (équivalent de{' '}
+          <strong>
+            <a href="/faq/extrait-kbis">l’extrait KBIS ou D1</a>
+          </strong>
+          ), vous pouvez soit télécharger le{' '}
           <strong>
             justificatif d’immatriculation au Registre National des Entreprises
             (RNE)
