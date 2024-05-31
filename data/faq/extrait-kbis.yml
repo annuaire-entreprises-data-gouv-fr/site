@@ -58,3 +58,5 @@ body: |
 more:
   - label: Comment obtenir un extrait K ou Kbis ? sur entreprendre.service-public
     href: https://entreprendre.service-public.fr/vosdroits/F21000
+  - label: 'Kbis : définition'
+    href: /definitions/kbis

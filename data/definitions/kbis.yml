@@ -5,21 +5,19 @@ seo:
   description: Le Kbis (ou extrait Kbis) est un document qui prouve l’existence légale d’une entreprise et son immatriculation au registre du commerce et des sociétés (RCS).
 
 body: |
-  ## **Kbis : définition**
+  L’extrait Kbis, communément appelé “Kbis”, est un document qui servait à prouver l’existence légale d’une société commerciale. 
 
-  L’extrait Kbis, communément appelé “Kbis”, peut être considéré comme la “carte identité” de l’entreprise. C’est un document qui prouve son existence légale. Il peut être demandé pour effectuer certaines démarches administratives et commerciales. Il ne concerne pas les entreprises individuelles (artisans ou les professions libérales).
+  Depuis le 23 novembre 2021, l'obligation de fournir un extrait Kbis a été supprimée dans 55 procédures administratives dans le cadre du plan d’action pour la croissance et la transformation des entreprises (PACTE). Il a alors été remplacé par l’extrait RNE ou extrait INPI que vous pouvez télécharger **gratuitement** sur ce site.
 
-  ## **Quelles sont les entreprises concernées ?**
+  **Attention**, le Kbis ne concerne pas les entreprises individuelles, les sociétés artisanales ou les professions libérales).
 
-  Toute entreprise exerçant une activité commerciale doit obligatoirement s’inscrire au RCS lors de sa création. L’extrait Kbis est le document légal qui certifie cette immatriculation. Pour prouver leur existence légale :
+  ## Quelles sont les entreprises concernées ?
 
-  * les sociétés commerciales doivent présenter l’extrait Kbis
-  * les entreprises individuelles (EI) et les micro-entrepreneurs doivent présenter l’extrait K
-  * les artisans et les professions libérales doivent présenter leur numéro de SIREN
+  Les entreprises exerçant une activité commerciale devaient obligatoirement s’inscrire au RCS lors de sa création. L’extrait Kbis était le document légal qui certifiait cette immatriculation au RCS. 
 
-  **A noter** : lors de la création d’un établissement secondaire, le document équivalent est l’extrait L bis.
+  **A noter** : depuis janvier 2023, toutes les entreprises (pas seulement commerciales) sont désormais immatriculées au Registre National des Entreprises (RNE).
 
-  ## **Quelles informations retrouve-t-on dans le Kbis ?**
+  ## Quelles informations retrouve-t-on dans le Kbis ?
 
   L’extrait Kbis informe sur l’activité de l’entreprise. Il est daté et récapitule  les informations inscrites au RCS :
 
@@ -31,13 +29,14 @@ body: |
   * l’adresse du siège
   * etc.
 
-  **Important** : le Kbis n’est pas un document confidentiel. Tout individu peut en faire la demande.
+  **Important** : 
+  - le Kbis n’est pas un document confidentiel. Tout individu peut en faire la demande.
+  - l’extrait RNE, disponible sur ce site, contient les mêmes informations
 
-  ## **A quoi sert le Kbis ?**
 
-  Depuis le 23 novembre 2021, l'obligation de fournir un extrait Kbis a été supprimée dans 55 procédures administratives dans le cadre du plan d’action pour la croissance et la transformation des entreprises (PACTE).
+  ## A quoi sert le Kbis ?
 
-  Dans les faits, il est encore demandé par d’éventuels partenaires commerciaux pour vérifier la légitimité d’une entreprise. Pour faire foi, il doit dater de moins de trois mois. Il sert, entre autres, à :
+  Le Kbis est encore demandé par d’éventuels partenaires commerciaux pour vérifier la légitimité d’une entreprise. Pour faire foi, il doit dater de moins de trois mois. Il sert, entre autres, à :
 
   * prouver l’existence légale d’une entreprise
   * établir des relations commerciales
@@ -45,19 +44,12 @@ body: |
   * accéder à un financement
   * prendre part à un appel d’offres
   * etc.
-
-  ## **Comment obtenir un Kbis gratuitement ?**
-
-  La gratuité de l'accès à l’extrait Kbis est conditionnée par le demandeur. En effet, tout chef d’entreprise peut se rendre sur le site [Monideum](https://www.monidenum.fr/) et créer son espace personnel pour télécharger gratuitement le Kbis au format numérique. Cette plate-forme est sous l’autorité des greffes des tribunaux de commerce.
-
-  Une personne extérieure à l’entreprise peut également effectuer une demande de Kbis. Cela est possible en ligne sur [Infogreffe.fr](https://www.infogreffe.fr/) (exceptées pour les sociétés dont le siège social est basé en Alsace, en Moselle ou en Guyane). Cette démarche est payante. Il est également possible de solliciter le greffe du tribunal de commerce dont relève l’entreprise.
-
 more:
+  - label: Comment télécharger un extrait Kbis ?
+    href: '/faq/extrait-kbis'
   - label: 'Personne morale'
     href: '/definition/personne-morale'
-
   - label: 'SIRET'
     href: '/definition/siret'
-
   - label: 'SIREN'
     href: '/definition/siren'
