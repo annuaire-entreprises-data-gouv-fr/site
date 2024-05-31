@@ -6,84 +6,84 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IOrganismeFormation } from '#models/certifications/organismes-de-formation';
-import { IUniteLegale } from '#models/core/types';
 
 type OrganismeDeFormationSectionProps = {
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
-  uniteLegale: IUniteLegale;
 };
 
 export const OrganismeDeFormationSection = ({
   organismesDeFormation,
-  uniteLegale,
 }: OrganismeDeFormationSectionProps) => {
-  const estQualiopi = uniteLegale.complements.estQualiopi;
-
-  const head = [
-    'Numéro Déclaration Activité (NDA)',
-    'Détails',
-    ...(estQualiopi ? ['Certification(s) Qualiopi'] : []),
-  ];
-
-  const title = `Organisme de formation${
-    estQualiopi ? ' certifié Qualiopi' : ''
-  }`;
-
   return (
     <DataSection
-      title={title}
+      title="Organisme de formation"
       sources={[EAdministration.MTPEI]}
       id="organisme-de-formation"
       data={organismesDeFormation}
-      notFoundInfo={<OrganismeFormationLabel estQualiopi={estQualiopi} />}
+      // if 404 from DGEFP we can assume this organism is NOT qualiopi
+      notFoundInfo={<OrganismeFormationLabel qualiopiCertified={false} />}
     >
-      {(organismesDeFormation) => (
-        <>
-          <OrganismeFormationLabel estQualiopi={estQualiopi} />
-          <FullTable
-            head={head}
-            body={organismesDeFormation.records.map((fields) => [
-              <Tag>{fields.nda ? fields.nda : 'Inconnu'}</Tag>,
-              <>
-                {fields.specialite && (
-                  <>
-                    <strong>Spécialité :</strong> {fields.specialite}
-                    <br />
-                  </>
-                )}
-                {fields.formateurs && (
-                  <>
-                    <strong>Effectifs formateurs :</strong> {fields.formateurs}
-                    <br />
-                  </>
-                )}
-                {fields.stagiaires && (
-                  <>
-                    <strong>Effectifs stagiaires :</strong> {fields.stagiaires}
-                    <br />
-                  </>
-                )}
-                {fields.dateDeclaration && (
-                  <>
-                    <strong>Déclaration : </strong> le {fields.dateDeclaration}
-                    {fields.region && <>, en région {fields.region}</>}
-                    <br />
-                  </>
-                )}
-              </>,
-              ...(estQualiopi
-                ? [
-                    fields.certifications.map((certification) => (
-                      <Tag color="info" key={certification}>
-                        {certification}
-                      </Tag>
-                    )),
-                  ]
-                : []),
-            ])}
-          />{' '}
-        </>
-      )}
+      {(organismesDeFormation) => {
+        // we use definition from DGEFP rather than recherche entreprise which can be outdated
+        const qualiopiCertified = organismesDeFormation.qualiopiCertified;
+
+        const head = [
+          'Numéro Déclaration Activité (NDA)',
+          'Détails',
+          ...(qualiopiCertified ? ['Certification(s) Qualiopi'] : []),
+        ];
+
+        return (
+          <>
+            <OrganismeFormationLabel qualiopiCertified={qualiopiCertified} />
+            <FullTable
+              head={head}
+              body={organismesDeFormation.records.map((fields) => [
+                <Tag>{fields.nda ? fields.nda : 'Inconnu'}</Tag>,
+                <>
+                  {fields.specialite && (
+                    <>
+                      <strong>Spécialité :</strong> {fields.specialite}
+                      <br />
+                    </>
+                  )}
+                  {fields.formateurs && (
+                    <>
+                      <strong>Effectifs formateurs :</strong>{' '}
+                      {fields.formateurs}
+                      <br />
+                    </>
+                  )}
+                  {fields.stagiaires && (
+                    <>
+                      <strong>Effectifs stagiaires :</strong>{' '}
+                      {fields.stagiaires}
+                      <br />
+                    </>
+                  )}
+                  {fields.dateDeclaration && (
+                    <>
+                      <strong>Déclaration : </strong> le{' '}
+                      {fields.dateDeclaration}
+                      {fields.region && <>, en région {fields.region}</>}
+                      <br />
+                    </>
+                  )}
+                </>,
+                ...(qualiopiCertified
+                  ? [
+                      fields.certifications.map((certification) => (
+                        <Tag color="info" key={certification}>
+                          {certification}
+                        </Tag>
+                      )),
+                    ]
+                  : []),
+              ])}
+            />{' '}
+          </>
+        );
+      }}
     </DataSection>
   );
 };
@@ -98,7 +98,7 @@ const FAQQaliopi = () => (
   </FAQLink>
 );
 
-const OrganismeFormationLabel = ({ estQualiopi = false }) => (
+const OrganismeFormationLabel = ({ qualiopiCertified = false }) => (
   <>
     Cette structure est un organisme de formation,{' '}
     <FAQLink tooltipLabel="à jour de ses obligations">
@@ -107,7 +107,7 @@ const OrganismeFormationLabel = ({ estQualiopi = false }) => (
       Pédagogique et Financier.
     </FAQLink>
     .
-    {estQualiopi ? (
+    {qualiopiCertified ? (
       <>
         <br />
         <br />

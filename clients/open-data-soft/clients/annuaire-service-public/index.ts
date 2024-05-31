@@ -19,7 +19,10 @@ interface IServicePublicRecord {
   telephone: string;
   type_organisme: string;
   url_service_public: string;
+  hierarchie: string;
 }
+
+type IServices = { type_hierarchie: string; service: string };
 
 type IAffectationRecord = {
   personne: {
@@ -75,6 +78,20 @@ const clientAnnuaireServicePublicByName = async (
   };
 };
 
+const clientAnnuaireServicePublicByIds = async (
+  ids: string[]
+): Promise<IServicePublic[]> => {
+  const query = `id="${ids.join('" OR id="')}"`;
+  const useCache = false;
+  let response = await queryAnnuaireServicePublic(query);
+
+  if (!response.records.length) {
+    throw new HttpNotFound(`Ids = ${ids.join(', ')}`);
+  }
+
+  return response.records.map(mapToDomainObject);
+};
+
 const clientAnnuaireServicePublicBySiret = async (
   siret: Siret
 ): Promise<IServicePublic> => {
@@ -107,8 +124,25 @@ const mapToDomainObject = (
     typeOrganisme:
       (record.type_organisme as IServicePublic['typeOrganisme']) || null,
     nom: mapToNom(record),
+    subServicesId: mapToServicesId(record.hierarchie),
   };
 };
+
+/**
+ * List of sub services
+ * @param hierarchieSerialized
+ * @returns
+ */
+function mapToServicesId(hierarchieSerialized: string): string[] {
+  const hierarchie = JSON.parse(
+    hierarchieSerialized || 'null'
+  ) as Array<IServices> | null;
+
+  if (!hierarchie || !hierarchie.length) {
+    return [];
+  }
+  return hierarchie.map((service) => service.service);
+}
 
 type IAffectationPersonne = IServicePublic['affectationPersonne'];
 function mapToAffectationPersonne(
@@ -232,6 +266,10 @@ function mapToLiens(record: IServicePublicRecord) {
   return liens;
 }
 
+const stubbedClientAnnuaireServicePublicByIds = stubClient({
+  clientAnnuaireServicePublicByIds,
+});
+
 const stubbedClientAnnuaireServicePublicBySiret = stubClient({
   clientAnnuaireServicePublicBySiret,
 });
@@ -240,6 +278,7 @@ const stubbedClientAnnuaireServicePublicByName = stubClient({
   clientAnnuaireServicePublicByName,
 });
 export {
+  stubbedClientAnnuaireServicePublicByIds as clientAnnuaireServicePublicByIds,
   stubbedClientAnnuaireServicePublicByName as clientAnnuaireServicePublicByName,
   stubbedClientAnnuaireServicePublicBySiret as clientAnnuaireServicePublicBySiret,
 };

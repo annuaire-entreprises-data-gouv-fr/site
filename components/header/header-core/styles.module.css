@@ -13,3 +13,15 @@
     margin-top: 0;
   }
 }
+
+.menuMobile {
+  order: 3;
+  padding: 1rem;
+  margin-left: auto;
+}
+
+@media screen and (min-width: 993px) {
+  .menuMobile {
+    display: none;
+  }
+}

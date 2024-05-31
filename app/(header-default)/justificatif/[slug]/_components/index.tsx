@@ -1,5 +1,5 @@
 import { IUniteLegale } from '#models/core/types';
-import getImmatriculationRNE from '#models/immatriculation/rne';
+import { getImmatriculationRNE } from '#models/immatriculation/rne';
 import { ISession } from '#models/user/session';
 import { IJustificatifs, ImmatriculationsSection } from './container';
 

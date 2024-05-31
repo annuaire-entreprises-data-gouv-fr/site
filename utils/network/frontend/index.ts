@@ -32,7 +32,9 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
   if (!config.url) {
     throw new InternalError({ message: 'Url is required' });
   }
-  if (config.useCache || config.method || config.data || config.headers) {
+  // use cache is ignore on frontend as it is handled by browser
+
+  if (config.method || config.data || config.headers) {
     throw new InternalError({
       message: 'Feature not yet supported on frontend client',
     });

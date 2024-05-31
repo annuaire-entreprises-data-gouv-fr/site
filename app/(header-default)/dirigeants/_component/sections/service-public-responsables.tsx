@@ -7,11 +7,12 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IServicePublic } from '#models/service-public';
 
 type IProps = { servicePublic: IServicePublic | IAPINotRespondingError };
+
 export default function ResponsableSection({ servicePublic }: IProps) {
   return (
     <DataSection
       id="responsables-service-public"
-      title={`Dirigeants`}
+      title={`Responsable(s)`}
       sources={[EAdministration.DILA]}
       notFoundInfo={<NotFoundInfo />}
       data={servicePublic}
@@ -20,15 +21,15 @@ export default function ResponsableSection({ servicePublic }: IProps) {
         <>
           {!servicePublic.affectationPersonne ? (
             <p>
-              Ce service public n’a pas d’équipe dirigeante enregistrée auprès
-              de la <DILA />.
+              Ce service public n’a pas de responsable enregistré auprès de la{' '}
+              <DILA />.
             </p>
           ) : (
             <>
               <p>
                 Ce service public possède{' '}
-                {servicePublic.affectationPersonne.length} dirigeant(es)
-                enregistré(es) auprès de la <DILA />
+                {servicePublic.affectationPersonne.length} responsable(s)
+                enregistré(s) auprès de la <DILA />
                 {servicePublic.liens.annuaireServicePublic && (
                   <>
                     {' '}

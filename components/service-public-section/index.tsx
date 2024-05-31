@@ -26,6 +26,7 @@ export default function ServicePublicSection({
       >
         {(servicePublic) => (
           <>
+            {servicePublic.mission && <p>{servicePublic.mission}</p>}
             <TwoColumnTable body={getTableData(servicePublic, uniteLegale)} />
             {servicePublic.liens.annuaireServicePublic && (
               <p>

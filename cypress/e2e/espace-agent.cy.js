@@ -13,7 +13,11 @@ describe(
     });
     it("Page d'accueil", () => {
       cy.visit(`/`);
-      cy.contains('Espace agent').click();
+      cy.contains('Espace agent')
+        // The element is present twice (mobile and desktop menu).
+        // The mobile one is hidden but appears first in the DOM,
+        // so we need to force the click
+        .click({ force: true });
       cy.contains('button', 'AgentConnect');
     });
 

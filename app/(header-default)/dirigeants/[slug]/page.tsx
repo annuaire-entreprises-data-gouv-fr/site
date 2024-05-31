@@ -13,8 +13,9 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import ResponsableSection from 'app/(header-default)/dirigeants/_component/sections/responsables-service-public';
+import ResponsableSection from 'app/(header-default)/dirigeants/_component/sections/service-public-responsables';
 import { DirigeantInformation } from '../_component/sections';
+import SubServicesSection from '../_component/sections/service-public-subservices';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -56,7 +57,13 @@ const DirigeantsPage = async (props: AppRouterProps) => {
           session={session}
         />
         {servicePublic ? (
-          <ResponsableSection servicePublic={servicePublic} />
+          <>
+            <ResponsableSection servicePublic={servicePublic} />
+            <SubServicesSection
+              servicePublic={servicePublic}
+              uniteLegale={uniteLegale}
+            />
+          </>
         ) : (
           !isBot && (
             <Suspense fallback={<PageLoader />}>

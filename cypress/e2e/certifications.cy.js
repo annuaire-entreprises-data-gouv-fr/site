@@ -33,7 +33,8 @@ describe('Certifications', () => {
   describe('Qualiopi', () => {
     it('Should display Qualiopi', () => {
       cy.visit(`/labels-certificats/356000000`);
-      cy.contains('Organisme de formation certifié Qualiopi');
+      cy.contains('Organisme de formation');
+      cy.contains('certifiée Qualiopi');
       cy.contains('Numéro Déclaration Activité');
       cy.contains('11755565775');
     });
