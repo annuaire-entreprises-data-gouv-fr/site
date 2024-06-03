@@ -1,12 +1,9 @@
 import { Metadata } from 'next';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { CarteProfessionnelleTravauxPublicsSection } from '#components/carte-professionnelle-travaux-publics-section';
+import { PrintNever } from '#components-ui/print-visibility';
+import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
-import ActesSection from '#components/espace-agent-components/documents/actes-walled';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { isAPI404 } from '#models/api-not-responding';
-import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte-professionnelle-travaux-publics';
 import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
@@ -17,6 +14,8 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import AgentActesSection from './_components/actes-section';
+import CarteProfessionnelleTPSection from './_components/carte-professionnelle-TP-section';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -46,15 +45,6 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
   const { slug, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
-  const carteProfessionnelleTravauxPublics = hasRights(
-    session,
-    EScope.carteProfessionnelleTravauxPublics
-  )
-    ? await getCarteProfessionnelleTravauxPublic(
-        uniteLegale.siren,
-        session?.user
-      )
-    : null;
   return (
     <>
       <div className="content-container">
@@ -63,21 +53,23 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
           ficheType={FICHE.DOCUMENTS}
           session={session}
         />
-        {hasRights(session, EScope.conformite) && (
-          <>
-            <ConformiteSection uniteLegale={uniteLegale} session={session} />
-            <HorizontalSeparator />
-          </>
-        )}
-        <ActesSection uniteLegale={uniteLegale} session={session} />
-        {carteProfessionnelleTravauxPublics &&
-          !isAPI404(carteProfessionnelleTravauxPublics) && (
-            <CarteProfessionnelleTravauxPublicsSection
-              carteProfessionnelleTravauxPublics={
-                carteProfessionnelleTravauxPublics
-              }
-            />
+        <PrintNever>
+          {hasRights(session, EScope.conformite) && (
+            <ConformiteSection session={session} uniteLegale={uniteLegale} />
           )}
+          {!hasRights(session, EScope.documentsRne) ? (
+            <AgentWallDocuments
+              title="Actes et statuts"
+              id="actes"
+              uniteLegale={uniteLegale}
+            />
+          ) : (
+            <AgentActesSection uniteLegale={uniteLegale} />
+          )}
+          {hasRights(session, EScope.carteProfessionnelleTravauxPublics) && (
+            <CarteProfessionnelleTPSection uniteLegale={uniteLegale} />
+          )}
+        </PrintNever>
       </div>
     </>
   );

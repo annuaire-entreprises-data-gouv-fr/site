@@ -1,16 +1,18 @@
+'use client';
+
 import AssociationAdressAlert from '#components-ui/alerts-with-explanations/association-adress';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { Tag } from '#components-ui/tag';
-import { AsyncDataSectionServer } from '#components/section/data-section/server';
+import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { getAssociationFromSlug } from '#models/association';
 import { IDataAssociation } from '#models/association/types';
 import { getPersonnalDataAssociation } from '#models/core/statut-diffusion';
 import { IAssociation, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
+import { useFetchAssociation } from 'hooks/fetch/association';
 import { AssociationNotFound } from './association-not-found';
 
 const getTableData = (
@@ -130,11 +132,11 @@ const AssociationSection = ({
 }) => {
   const { idAssociation = '' } = uniteLegale.association;
 
-  const association = getAssociationFromSlug(uniteLegale.siren);
+  const association = useFetchAssociation(uniteLegale.siren);
 
   return (
     <>
-      <AsyncDataSectionServer
+      <AsyncDataSectionClient
         title="Répertoire National des Associations"
         sources={[EAdministration.MI]}
         data={association}
@@ -181,7 +183,7 @@ const AssociationSection = ({
             </>
           )
         }
-      </AsyncDataSectionServer>
+      </AsyncDataSectionClient>
       <HorizontalSeparator />
       <BreakPageForPrint />
     </>
