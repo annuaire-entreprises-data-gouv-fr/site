@@ -37,15 +37,17 @@ export async function DirigeantInformation({
         uniteLegale={uniteLegale}
         immatriculationRNE={immatriculationRNE}
       />
-      <DirigeantsSection
-        uniteLegale={uniteLegale}
-        immatriculationRNE={immatriculationRNE}
-      />
-      {mandatairesRCS && (
+
+      {mandatairesRCS ? (
         <MandatairesRCSSection
           immatriculationRNE={immatriculationRNE}
           uniteLegale={uniteLegale}
           mandatairesRCS={mandatairesRCS}
+        />
+      ) : (
+        <DirigeantsSection
+          uniteLegale={uniteLegale}
+          immatriculationRNE={immatriculationRNE}
         />
       )}
 

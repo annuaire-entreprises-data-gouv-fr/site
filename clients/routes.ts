@@ -164,6 +164,7 @@ const routes = {
   },
   infogreffe: {
     portail: {
+      home: 'https://www.infogreffe.fr',
       entreprise: 'https://www.infogreffe.fr/entreprise/',
     },
   },
