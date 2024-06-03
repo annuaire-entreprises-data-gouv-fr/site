@@ -1,21 +1,37 @@
+'use client';
+
 import ButtonLink from '#components-ui/button';
-import { AsyncDataSectionServer } from '#components/section/data-section/server';
+import { DataSectionClient } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IQualibat } from '#models/espace-agent/certificats/qualibat';
+import { IUniteLegale } from '#models/core/types';
 import { formatDateLong } from '#utils/helpers';
+import { useFetchQualibat } from 'hooks/fetch/espace-agent/qualibat';
 
-export const QualibatSection: React.FC<{
-  qualibat: Promise<IQualibat | IAPINotRespondingError>;
-}> = ({ qualibat }) => {
+export const QualibatSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
+  uniteLegale,
+}) => {
+  const qualibat = useFetchQualibat(uniteLegale);
   return (
-    <AsyncDataSectionServer
+    <DataSectionClient
       title="Certificat Qualibat"
       id="qualibat"
       isProtected
       sources={[EAdministration.DINUM]}
-      notFoundInfo={null}
+      notFoundInfo={
+        <>
+          Cette entreprise n’a pas de{' '}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            aria-label="En savoir plus sur les certificats Qualibat, nouvelle fenêtre"
+            href="https://www.qualibat.com/qualification-des-competences/"
+          >
+            certificat Qualibat
+          </a>
+          .
+        </>
+      }
       data={qualibat}
     >
       {(qualibat) => (
@@ -78,6 +94,6 @@ export const QualibatSection: React.FC<{
           />
         </>
       )}
-    </AsyncDataSectionServer>
+    </DataSectionClient>
   );
 };

@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
-import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
-import { Siren, Siret } from '#utils/helpers';
+import { IOpqibi } from '#models/espace-agent/protected-certificates/types';
+import { Siren } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
 export type IAPIEntrepriseOpqibi = IAPIEntrepriseResponse<{
@@ -30,7 +30,7 @@ export type IAPIEntrepriseOpqibi = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseOpqibi = async (
   siren: Siren,
-  recipientSiret: Siret | undefined
+  recipientSiret?: string
 ) => {
   return await clientAPIEntreprise(
     `${

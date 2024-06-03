@@ -6,6 +6,11 @@ const routes = {
       },
     },
     tva: '/api/data-fetching/verify-tva/',
+    espaceAgent: {
+      qualibat: '/api/data-fetching/espace-agent/qualibat/',
+      qualifelec: '/api/data-fetching/espace-agent/qualifelec/',
+      opqibi: '/api/data-fetching/espace-agent/opqibi/',
+    },
   },
   apiEntreprise: {
     conformite: {

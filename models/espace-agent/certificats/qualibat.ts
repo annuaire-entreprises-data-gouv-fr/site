@@ -26,7 +26,7 @@ export type IQualibat = {
 
 export const getQualibat = async (
   siret: Siret,
-  recipientSiret: Siret | undefined
+  recipientSiret?: string
 ): Promise<IQualibat | IAPINotRespondingError> => {
   return clientApiEntrepriseQualibat(siret, recipientSiret).catch((error) =>
     handleApiEntrepriseError(error, { siret })

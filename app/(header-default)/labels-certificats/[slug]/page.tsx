@@ -4,6 +4,8 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/badges-section/labels-and-certificates';
+import { OpqibiSection } from '#components/espace-agent-components/certifications/opqibi-section';
+import { QualifelecSection } from '#components/espace-agent-components/certifications/qualifelec-section';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
@@ -25,7 +27,6 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { ProtectedCertificats } from './_components/protected-certificats';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -116,11 +117,12 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
         {hasRights(session, EScope.protectedCertificats) && (
-          <ProtectedCertificats
-            uniteLegale={uniteLegale}
-            session={session}
-            hasOtherCertificates={checkHasLabelsAndCertificates(uniteLegale)}
-          />
+          <>
+            <HorizontalSeparator />
+            {/* <QualibatSection qualibat={protectedCertificates.qualibat} /> */}
+            <QualifelecSection uniteLegale={uniteLegale} />
+            <OpqibiSection uniteLegale={uniteLegale} />
+          </>
         )}
       </div>
     </>

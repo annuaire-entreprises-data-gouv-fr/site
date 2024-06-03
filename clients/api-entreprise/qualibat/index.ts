@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { IQualibat } from '#models/espace-agent/certificats/qualibat';
+import { IQualibat } from '#models/espace-agent/protected-certificates/types';
 import { Siret } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
@@ -31,7 +31,7 @@ export type IAPIEntrepriseQualibat = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseQualibat = async (
   siret: Siret,
-  recipientSiret: Siret | undefined
+  recipientSiret?: string
 ) => {
   return await clientAPIEntreprise(
     `${
