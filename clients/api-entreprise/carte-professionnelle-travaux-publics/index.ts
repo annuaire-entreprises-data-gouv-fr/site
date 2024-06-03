@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 import { ICarteProfessionnelleTravauxPublics } from '#models/espace-agent/carte-professionnelle-travaux-publics';
-import { Siren, Siret } from '#utils/helpers';
+import { Siren } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
 export type IAPIEntrepriseCarteProfessionnelleTravauxPublics =
@@ -14,7 +14,7 @@ export type IAPIEntrepriseCarteProfessionnelleTravauxPublics =
  */
 export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
   siren: Siren,
-  recipientSiret: Siret | undefined
+  recipientSiret?: string
 ) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseCarteProfessionnelleTravauxPublics,

@@ -5,6 +5,7 @@ import { DataSectionClient } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
+import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { formatDateLong } from '#utils/helpers';
 import { useFetchOpqibi } from 'hooks/fetch/espace-agent/opqibi';
 
