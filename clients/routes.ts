@@ -10,6 +10,7 @@ const routes = {
     conformite: '/api/data-fetching/espace-agent/conformite/',
     carteProfessionnelleTravauxPublics:
       '/api/data-fetching/espace-agent/carte-professionnelle-TP/',
+    association: '/api/data-fetching/association/',
   },
   apiEntreprise: {
     conformite: {
