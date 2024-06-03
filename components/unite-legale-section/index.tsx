@@ -144,7 +144,7 @@ const UniteLegaleSection: React.FC<{
         )}
         {uniteLegale.dateMiseAJourInpi && (
           <li>
-            Extrait RNE (équivalent KBIS/D1) :{' '}
+            Extrait RNE (<a href="/faq/extrait-kbis">équivalent KBIS/D1</a>) :{' '}
             <ExtraitRNELink uniteLegale={uniteLegale} session={session} />
           </li>
         )}
