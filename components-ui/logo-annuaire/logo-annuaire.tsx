@@ -23,8 +23,7 @@ export const LogoAnnuaire = () => (
   <div className={styles.logoAnnuaire}>
     <span>{diamond}</span>
     <h1>
-      L’<strong>Annuaire</strong> des
-      <br />
+      L’<strong>Annuaire</strong> des <br />
       <strong>Entreprises</strong>
     </h1>
   </div>

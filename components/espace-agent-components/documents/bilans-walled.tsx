@@ -15,7 +15,6 @@ const BilansSection: React.FC<{
         title="Bilans"
         id="bilans"
         uniteLegale={uniteLegale}
-        condition={!hasRights(session, EScope.bilansRne)}
       />
     );
   }

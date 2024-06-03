@@ -10,6 +10,11 @@
     "permanent": true
   },
   {
+    "source": "/faq/extrait-kbis-agent-public",
+    "destination": "/definitions/extrait-kbis",
+    "permanent": true
+  },
+  {
     "source": "/budget",
     "destination": "/a-propos/budget",
     "permanent": true

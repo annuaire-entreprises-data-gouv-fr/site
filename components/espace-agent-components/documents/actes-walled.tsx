@@ -15,7 +15,6 @@ const ActesSection: React.FC<{
         title="Actes et statuts"
         id="actes"
         uniteLegale={uniteLegale}
-        condition={!hasRights(session, EScope.actesRne)}
       />
     );
   }

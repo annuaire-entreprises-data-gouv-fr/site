@@ -8,7 +8,7 @@ describe('Service public', () => {
   });
   it('Should display dirigeant information', () => {
     cy.visit('/dirigeants/130025265');
-    cy.contains('dirigeant(es) enregistré(es) auprès de la DILA');
+    cy.contains('responsable(s) enregistré(s) auprès de la DILA');
     const table = () => cy.get('#responsables-service-public table');
 
     table().contains('Role');

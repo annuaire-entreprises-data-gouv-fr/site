@@ -3,13 +3,18 @@ const routes = {
     rne: {
       documents: {
         download: '/api/download/espace-agent/documents/',
+        list: '/api/data-fetching/espace-agent/RNE-documents/',
       },
     },
     tva: '/api/data-fetching/verify-tva/',
+    association: '/api/data-fetching/association/',
     espaceAgent: {
       qualibat: '/api/data-fetching/espace-agent/qualibat/',
       qualifelec: '/api/data-fetching/espace-agent/qualifelec/',
       opqibi: '/api/data-fetching/espace-agent/opqibi/',
+      conformite: '/api/data-fetching/espace-agent/conformite/',
+      carteProfessionnelleTravauxPublics:
+        '/api/data-fetching/espace-agent/carte-professionnelle-TP/',
     },
   },
   apiEntreprise: {
