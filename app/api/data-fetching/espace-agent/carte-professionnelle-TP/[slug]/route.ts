@@ -13,7 +13,7 @@ export async function GET(
     'CarteProfessionnelleTravauxPublics',
     slug,
     EAdministration.FNTP,
-    EScope.conformite,
+    EScope.carteProfessionnelleTravauxPublics,
     async (agentSiret: string) => {
       const siret = verifySiret(slug as string);
       const siren = extractSirenFromSiret(siret);
