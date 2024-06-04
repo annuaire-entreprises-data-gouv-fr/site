@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { PrintNever } from '#components-ui/print-visibility';
 import {
   checkHasLabelsAndCertificates,
@@ -11,6 +12,7 @@ import {
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import styles from './styles.module.css';
+import TabLink from './tab-link';
 
 export enum FICHE {
   INFORMATION = 'résumé',
@@ -135,30 +137,27 @@ export const Tabs: React.FC<{
               noFollow,
               width = 'auto',
             }) => (
-              <a
-                className={`${
-                  currentFicheType === ficheType ? styles.activeLink : ''
-                } no-style-link`}
+              <TabLink
+                active={currentFicheType === ficheType}
                 href={fullPath || `${pathPrefix}${uniteLegale.siren}`}
-                rel={noFollow ? 'nofollow' : ''}
+                label={label}
+                noFollow={noFollow}
                 key={label}
-                style={{ width }}
-              >
-                {currentFicheType === ficheType ? label : <h2>{label}</h2>}
-              </a>
+                width={width}
+              />
             )
           )}
         {currentFicheType === FICHE.ETABLISSEMENT && (
           <>
             <div style={{ flexGrow: 1 }} />
-            <a
+            <Link
               className={styles.activeLink + ' no-style-link'}
               key="etablissement"
               href=""
               style={{ width: '120px' }}
             >
               <h2>Fiche établissement</h2>
-            </a>
+            </Link>
           </>
         )}
       </div>
