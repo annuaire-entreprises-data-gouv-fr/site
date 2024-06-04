@@ -9,14 +9,14 @@
   width: 100%;
   margin: 40px 0;
 }
-.horizontalSeparator > span.line {
+.horizontalSeparatorLine {
   width: 50px;
   background-color: var(--annuaire-colors-pastelBlue);
   height: 2px;
   margin: 0 10px;
 }
 
-.horizontalSeparator > span.circle {
+.horizontalSeparatorCircle {
   width: 7px;
   height: 7px;
   border-radius: 20px;

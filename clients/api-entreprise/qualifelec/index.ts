@@ -53,7 +53,7 @@ export type IAPIEntrepriseQualifelec = IAPIEntrepriseResponse<
  */
 export const clientApiEntrepriseQualifelec = async (
   siret: Siret,
-  recipientSiret: Siret | undefined
+  recipientSiret?: string
 ) => {
   return await clientAPIEntreprise<IAPIEntrepriseQualifelec, IQualifelec>(
     `${

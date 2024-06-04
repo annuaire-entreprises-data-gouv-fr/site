@@ -31,7 +31,7 @@ export type IAPIEntrepriseQualibat = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseQualibat = async (
   siret: Siret,
-  recipientSiret: Siret | undefined
+  recipientSiret?: string
 ) => {
   return await clientAPIEntreprise(
     `${

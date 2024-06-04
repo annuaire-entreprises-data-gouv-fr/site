@@ -42,7 +42,7 @@ export type IQualifelec = Array<{
 }>;
 export const getQualifelec = async (
   siret: Siret,
-  recipientSiret: Siret | undefined
+  recipientSiret?: string
 ): Promise<IQualifelec | IAPINotRespondingError> => {
   return clientApiEntrepriseQualifelec(siret, recipientSiret).catch((error) =>
     handleApiEntrepriseError(error, { siret })

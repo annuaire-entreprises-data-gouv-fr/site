@@ -1,21 +1,38 @@
+'use client';
+
 import ButtonLink from '#components-ui/button';
-import { AsyncDataSectionServer } from '#components/section/data-section/server';
+import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IQualifelec } from '#models/espace-agent/certificats/qualifelec';
+import { IUniteLegale } from '#models/core/types';
 import { formatDate, formatDateLong } from '#utils/helpers';
+import { useFetchQualifelec } from 'hooks/fetch/espace-agent/qualifelec';
 
-type IProps = {
-  qualifelec: Promise<IQualifelec | IAPINotRespondingError>;
-};
-export async function QualifelecSection({ qualifelec }: IProps) {
+export function QualifelecSection({
+  uniteLegale,
+}: {
+  uniteLegale: IUniteLegale;
+}) {
+  const qualifelec = useFetchQualifelec(uniteLegale);
   return (
-    <AsyncDataSectionServer
+    <DataSectionClient
       title="Certificats Qualifelec"
       id="qualifelec"
       isProtected
-      notFoundInfo={null}
+      notFoundInfo={
+        <>
+          Cette entreprise n’a pas de{' '}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            aria-label="En savoir plus sur les certificats Qualifelec, nouvelle fenêtre"
+            href="https://www.qualifelec.fr/pourquoi-choisir-une-entreprise-qualifelec/le-certificat-qualifelec-la-meilleure-des-recommandations/"
+          >
+            certificat Qualifelec
+          </a>
+          .
+        </>
+      }
       sources={[EAdministration.DINUM]}
       data={qualifelec}
     >
@@ -72,6 +89,6 @@ export async function QualifelecSection({ qualifelec }: IProps) {
           />
         </>
       )}
-    </AsyncDataSectionServer>
+    </DataSectionClient>
   );
 }

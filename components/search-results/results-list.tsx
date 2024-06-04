@@ -10,7 +10,7 @@ import {
 import { isCollectiviteTerritoriale } from '#models/core/types';
 import { IDirigeant } from '#models/immatriculation';
 import { ISearchResult } from '#models/search';
-import { isPersonneMorale } from 'app/(header-default)/dirigeants/_component/sections/is-personne-morale';
+import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
 import styles from './style.module.css';
 
 type IProps = {

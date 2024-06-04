@@ -21,7 +21,18 @@ export default function CarteProfessionnelleTPSection({
       id="carte-professionnelle-travaux-publics"
       isProtected
       notFoundInfo={
-        'Aucune carte professionnelle trouvée pour cette entreprise'
+        <>
+          Cette entreprise n’a pas de{' '}
+          <a
+            href="https://www.fntp.fr/tout-savoir-sur-la-carte-professionnelle-tp"
+            aria-label="En savoir plus sur la carte professionnelle d’entrepreneur de travaux publics, nouvelle fenêtre"
+            target="_blank"
+            rel="noreferrer"
+          >
+            carte professionnelle d’entrepreneur de travaux publics
+          </a>
+          .
+        </>
       }
       sources={[EAdministration.FNTP]}
       data={carteProfessionnelleTravauxPublics}

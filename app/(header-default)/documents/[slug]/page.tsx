@@ -55,7 +55,7 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
         />
         <PrintNever>
           {hasRights(session, EScope.conformite) && (
-            <ConformiteSection session={session} uniteLegale={uniteLegale} />
+            <ConformiteSection uniteLegale={uniteLegale} />
           )}
           {!hasRights(session, EScope.documentsRne) ? (
             <AgentWallDocuments

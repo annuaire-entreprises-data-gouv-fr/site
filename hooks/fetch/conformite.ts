@@ -14,7 +14,9 @@ export function useFetchConformite(uniteLegale: IUniteLegale) {
   return useFetchData(
     {
       fetchData: () =>
-        httpGet<IConformiteUniteLegale>(routes.api.conformite + siret),
+        httpGet<IConformiteUniteLegale>(
+          routes.api.espaceAgent.conformite + siret
+        ),
       administration: EAdministration.DINUM,
       logError: (e: any) => {
         if (e.status) {

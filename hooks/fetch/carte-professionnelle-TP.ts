@@ -15,7 +15,7 @@ export function useFetchCarteProfessionnelleTP(uniteLegale: IUniteLegale) {
     {
       fetchData: () =>
         httpGet<ICarteProfessionnelleTravauxPublics>(
-          routes.api.carteProfessionnelleTravauxPublics + siret
+          routes.api.espaceAgent.carteProfessionnelleTravauxPublics + siret
         ),
       administration: EAdministration.FNTP,
       logError: (e: any) => {

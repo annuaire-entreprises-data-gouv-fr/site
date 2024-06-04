@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
@@ -102,30 +102,29 @@ const UniteLegaleSection: React.FC<{
         siren={uniteLegale.siren}
       />,
     ],
-    // jump line and add label and certificates
-    ...(hasLabelsAndCertificates ||
-    hasRights(session, EScope.protectedCertificats)
+    // agents : we dont know yet if there are labels and certifs
+    ...(hasRights(session, EScope.protectedCertificats)
       ? [
           ['', <br />],
           [
             `${
               checkHasQuality(uniteLegale) ? 'Qualités, l' : 'L'
             }abels et certificats`,
-            <>
-              <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />
-              {hasRights(session, EScope.protectedCertificats) && (
-                <Suspense>
-                  <ProtectedCertificatesBadgesSection
-                    session={session}
-                    uniteLegale={uniteLegale}
-                    hasOtherCertificates={hasLabelsAndCertificates}
-                  />
-                </Suspense>
-              )}
-            </>,
+            <ProtectedCertificatesBadgesSection uniteLegale={uniteLegale} />,
           ],
         ]
-      : []),
+      : hasLabelsAndCertificates
+      ? [
+          ['', <br />],
+          [
+            `${
+              checkHasQuality(uniteLegale) ? 'Qualités, l' : 'L'
+            }abels et certificats`,
+            <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />,
+          ],
+        ]
+      : //  open data and no certif : we can hide the whole line
+        []),
     ['', <br />],
     [
       'Justificatif(s) d’existence',

@@ -1,16 +1,23 @@
 const routes = {
   api: {
-    rne: {
-      documents: {
-        download: '/api/download/espace-agent/documents/',
-        list: '/api/data-fetching/espace-agent/RNE-documents/',
+    tva: '/api/data-fetching/verify-tva/',
+    association: '/api/data-fetching/association/',
+    rne: '/api/data-fetching/rne/',
+    espaceAgent: {
+      qualibat: '/api/data-fetching/espace-agent/qualibat/',
+      qualifelec: '/api/data-fetching/espace-agent/qualifelec/',
+      opqibi: '/api/data-fetching/espace-agent/opqibi/',
+      conformite: '/api/data-fetching/espace-agent/conformite/',
+      carteProfessionnelleTravauxPublics:
+        '/api/data-fetching/espace-agent/carte-professionnelle-TP/',
+      rcsMandataires: '/api/data-fetching/espace-agent/rcs-mandataires/',
+      rne: {
+        documents: {
+          download: '/api/download/espace-agent/documents/',
+          list: '/api/data-fetching/espace-agent/rne/documents/',
+        },
       },
     },
-    tva: '/api/data-fetching/verify-tva/',
-    conformite: '/api/data-fetching/espace-agent/conformite/',
-    carteProfessionnelleTravauxPublics:
-      '/api/data-fetching/espace-agent/carte-professionnelle-TP/',
-    association: '/api/data-fetching/association/',
   },
   apiEntreprise: {
     conformite: {
@@ -169,6 +176,7 @@ const routes = {
   },
   infogreffe: {
     portail: {
+      home: 'https://www.infogreffe.fr',
       entreprise: 'https://www.infogreffe.fr/entreprise/',
     },
   },

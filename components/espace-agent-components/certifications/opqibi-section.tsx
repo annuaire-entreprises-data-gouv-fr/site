@@ -1,20 +1,37 @@
+'use client';
+
 import FAQLink from '#components-ui/faq-link';
-import { AsyncDataSectionServer } from '#components/section/data-section/server';
+import { DataSectionClient } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
+import { IUniteLegale } from '#models/core/types';
 import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { formatDateLong } from '#utils/helpers';
+import { useFetchOpqibi } from 'hooks/fetch/espace-agent/opqibi';
 
 export const OpqibiSection: React.FC<{
-  opqibi: Promise<IOpqibi | IAPINotRespondingError>;
-}> = ({ opqibi }) => {
+  uniteLegale: IUniteLegale;
+}> = ({ uniteLegale }) => {
+  const opqibi = useFetchOpqibi(uniteLegale);
   return (
-    <AsyncDataSectionServer
+    <DataSectionClient
       title="Certificat OPQIBI"
       id="opqibi"
       isProtected
-      notFoundInfo={null}
+      notFoundInfo={
+        <>
+          Cette entreprise n’a pas de{' '}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            aria-label="En savoir plus sur les certificats Opqibi, nouvelle fenêtre"
+            href="https://www.opqibi.com/page/la-qualification-opqibi"
+          >
+            certificat Opqibi
+          </a>
+          .
+        </>
+      }
       sources={[EAdministration.DINUM]}
       data={opqibi}
     >
@@ -100,7 +117,7 @@ export const OpqibiSection: React.FC<{
           )}
         </>
       )}
-    </AsyncDataSectionServer>
+    </DataSectionClient>
   );
 };
 

@@ -12,7 +12,7 @@ export function useFetchRNEDocuments(uniteLegale: IUniteLegale) {
   return useFetchData(
     {
       fetchData: () =>
-        httpGet<IActesRNE>(routes.api.rne.documents.list + siren),
+        httpGet<IActesRNE>(routes.api.espaceAgent.rne.documents.list + siren),
       administration: EAdministration.INPI,
       logError: (e: any) => {
         if (e.status) {

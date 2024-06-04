@@ -90,7 +90,7 @@ function ActesTable({ actes }: IActesTableProps) {
           target="_blank"
           alt
           small
-          to={`${routes.api.rne.documents.download}${a.id}?type=acte`}
+          to={`${routes.api.espaceAgent.rne.documents.download}${a.id}?type=acte`}
         >
           Télécharger
         </ButtonLink>,
