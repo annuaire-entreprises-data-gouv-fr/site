@@ -10,7 +10,7 @@ const routes = {
       conformite: '/api/data-fetching/espace-agent/conformite/',
       carteProfessionnelleTravauxPublics:
         '/api/data-fetching/espace-agent/carte-professionnelle-TP/',
-      rcsMandataires: '/api/data-fetching/rcs-mandataires/',
+      rcsMandataires: '/api/data-fetching/espace-agent/rcs-mandataires/',
       rne: {
         documents: {
           download: '/api/download/espace-agent/documents/',
