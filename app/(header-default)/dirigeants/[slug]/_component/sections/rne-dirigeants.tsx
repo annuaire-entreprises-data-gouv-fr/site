@@ -1,25 +1,29 @@
 import routes from '#clients/routes';
 import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { INPI } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
+import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { DirigeantContent } from './dirigeant-content';
 
 type IProps = {
-  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
+  immatriculationRNE:
+    | IImmatriculationRNE
+    | IAPINotRespondingError
+    | IAPILoading;
   uniteLegale: IUniteLegale;
 };
 
 /**
  * Dirigeants section
  */
-async function DirigeantsSection({ uniteLegale, immatriculationRNE }: IProps) {
+function DirigeantsSection({ uniteLegale, immatriculationRNE }: IProps) {
   return (
-    <DataSection
+    <AsyncDataSectionClient
       id="rne-dirigeants"
       title="Dirigeant(s)"
       sources={[EAdministration.INPI]}
@@ -72,7 +76,7 @@ async function DirigeantsSection({ uniteLegale, immatriculationRNE }: IProps) {
           </>
         );
       }}
-    </DataSection>
+    </AsyncDataSectionClient>
   );
 }
 

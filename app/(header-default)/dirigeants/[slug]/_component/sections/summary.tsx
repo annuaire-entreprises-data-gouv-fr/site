@@ -1,7 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
 import { Loader } from '#components-ui/loader';
 import { INPI, INSEE, MI } from '#components/administrations';
-import { isAPILoading } from '#models/api-loading';
+import { IAPILoading, isAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -41,40 +41,46 @@ const NoDirigeantDefault = () => (
 );
 
 type IDirigeantSummaryProps = {
-  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
+  immatriculationRNE:
+    | IImmatriculationRNE
+    | IAPINotRespondingError
+    | IAPILoading;
   uniteLegale: IUniteLegale;
 };
 
-const DirigeantSummary: React.FC<IDirigeantSummaryProps> = async ({
+const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   uniteLegale,
   immatriculationRNE,
 }) => {
   const summaries = [];
 
-  if (!isAPINotResponding(immatriculationRNE)) {
-    const dirigeantsCount = (immatriculationRNE?.dirigeants || []).length;
-    summaries.push(
-      <a href="#rne-dirigeants">
-        {dirigeantsCount} dirigeants inscrits au Registre National des
-        Entreprises (RNE)
-      </a>
-    );
-
-    const beneficiairesCount = (immatriculationRNE?.beneficiaires || []).length;
-    summaries.push(
-      <a href="#beneficiaires">
-        {beneficiairesCount} bénéficiaires inscrits à Référentiel des
-        Bénéficiaires Effectifs
-      </a>
-    );
-  }
   if (isAPILoading(immatriculationRNE)) {
     summaries.push(
       <span>
         chargement des données des dirigeants en cours <Loader />
       </span>
     );
+  } else {
+    if (!isAPINotResponding(immatriculationRNE)) {
+      const dirigeantsCount = (immatriculationRNE?.dirigeants || []).length;
+      summaries.push(
+        <a href="#rne-dirigeants">
+          {dirigeantsCount} dirigeants inscrits au Registre National des
+          Entreprises (RNE)
+        </a>
+      );
+
+      const beneficiairesCount = (immatriculationRNE?.beneficiaires || [])
+        .length;
+      summaries.push(
+        <a href="#beneficiaires">
+          {beneficiairesCount} bénéficiaires inscrits à Référentiel des
+          Bénéficiaires Effectifs
+        </a>
+      );
+    }
   }
+
   const hasNoDirigeant = summaries.length === 0;
   if (hasNoDirigeant) {
     if (uniteLegale.association.idAssociation) {

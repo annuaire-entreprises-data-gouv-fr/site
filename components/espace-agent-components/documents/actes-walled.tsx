@@ -1,5 +1,4 @@
 import { IUniteLegale } from '#models/core/types';
-import { getDocumentsRNEProtected } from '#models/immatriculation/rne';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import AgentWallDocuments from '../agent-wall/document';
@@ -8,7 +7,7 @@ import { AgentActesSection } from './data-section/actes';
 const ActesSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = async ({ uniteLegale, session }) => {
+}> = ({ uniteLegale, session }) => {
   if (!hasRights(session, EScope.actesRne)) {
     return (
       <AgentWallDocuments
@@ -18,7 +17,6 @@ const ActesSection: React.FC<{
       />
     );
   }
-  const documents = getDocumentsRNEProtected(uniteLegale.siren);
-  return <AgentActesSection uniteLegale={uniteLegale} documents={documents} />;
+  return <AgentActesSection uniteLegale={uniteLegale} />;
 };
 export default ActesSection;

@@ -2,6 +2,7 @@ const routes = {
   api: {
     tva: '/api/data-fetching/verify-tva/',
     association: '/api/data-fetching/association/',
+    rne: '/api/data-fetching/rne/',
     espaceAgent: {
       qualibat: '/api/data-fetching/espace-agent/qualibat/',
       qualifelec: '/api/data-fetching/espace-agent/qualifelec/',
@@ -9,6 +10,7 @@ const routes = {
       conformite: '/api/data-fetching/espace-agent/conformite/',
       carteProfessionnelleTravauxPublics:
         '/api/data-fetching/espace-agent/carte-professionnelle-TP/',
+      rcsMandataires: '/api/data-fetching/rcs-mandataires/',
       rne: {
         documents: {
           download: '/api/download/espace-agent/documents/',

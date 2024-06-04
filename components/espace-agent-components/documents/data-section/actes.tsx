@@ -3,12 +3,10 @@
 import routes from '#clients/routes';
 import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
-import { PrintNever } from '#components-ui/print-visibility';
 import ShowMore from '#components-ui/show-more';
-import { AsyncDataSectionServer } from '#components/section/data-section/server';
+import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
   IUniteLegale,
   isAssociation,
@@ -16,6 +14,7 @@ import {
 } from '#models/core/types';
 import { IActesRNE } from '#models/immatriculation';
 import { formatDateLong } from '#utils/helpers';
+import useFetchRNEDocuments from 'hooks/fetch/RNE-documents';
 
 const NoDocument = () => (
   <>Aucun document n’a été retrouvé dans le RNE pour cette entreprise.</>
@@ -23,56 +22,55 @@ const NoDocument = () => (
 
 export const AgentActesSection: React.FC<{
   uniteLegale: IUniteLegale;
-  documents: Promise<IActesRNE | IAPINotRespondingError>;
-}> = ({ uniteLegale, documents }) => {
+}> = ({ uniteLegale }) => {
+  const documents = useFetchRNEDocuments(uniteLegale);
+
   return (
-    <PrintNever>
-      <AsyncDataSectionServer
-        title="Actes et statuts"
-        id="actes"
-        isProtected
-        sources={[EAdministration.INPI]}
-        data={documents}
-        notFoundInfo={
-          <>
-            {(isAssociation(uniteLegale) || isServicePublic(uniteLegale)) && (
-              <>
-                <Warning full>
-                  Les associations et les services publics ne sont pas
-                  immatriculés au RNE.
-                </Warning>
-                <br />
-              </>
-            )}
-            <NoDocument />
-          </>
-        }
-      >
-        {(documents) =>
-          documents.actes?.length === 0 ? (
-            <NoDocument />
-          ) : (
+    <DataSectionClient
+      title="Actes et statuts"
+      id="actes"
+      isProtected
+      sources={[EAdministration.INPI]}
+      data={documents}
+      notFoundInfo={
+        <>
+          {(isAssociation(uniteLegale) || isServicePublic(uniteLegale)) && (
             <>
-              <p>
-                Cette entreprise possède {documents.actes.length} document(s) au
-                RNE. Chaque document peut contenir un ou plusieurs actes :
-              </p>
-              {documents.actes.length >= 5 ? (
-                <ShowMore
-                  label={`Voir les ${
-                    documents.actes.length - 5
-                  } documents supplémentaires`}
-                >
-                  <ActesTable actes={documents.actes} />
-                </ShowMore>
-              ) : (
-                <ActesTable actes={documents.actes} />
-              )}
+              <Warning full>
+                Les associations et les services publics ne sont pas
+                immatriculés au RNE.
+              </Warning>
+              <br />
             </>
-          )
-        }
-      </AsyncDataSectionServer>
-    </PrintNever>
+          )}
+          <NoDocument />
+        </>
+      }
+    >
+      {(documents) =>
+        documents.actes?.length === 0 ? (
+          <NoDocument />
+        ) : (
+          <>
+            <p>
+              Cette entreprise possède {documents.actes.length} document(s) au
+              RNE. Chaque document peut contenir un ou plusieurs actes :
+            </p>
+            {documents.actes.length >= 5 ? (
+              <ShowMore
+                label={`Voir les ${
+                  documents.actes.length - 5
+                } documents supplémentaires`}
+              >
+                <ActesTable actes={documents.actes} />
+              </ShowMore>
+            ) : (
+              <ActesTable actes={documents.actes} />
+            )}
+          </>
+        )
+      }
+    </DataSectionClient>
   );
 };
 
