@@ -13,6 +13,13 @@ describe('Data fetching routes', () => {
     }).then((resp) => {
       expect(resp.status).to.eq(403);
     });
+
+    cy.request({
+      url: '/api/data-fetching/espace-agent/rne/documents/552032534',
+      failOnStatusCode: false,
+    }).then((resp) => {
+      expect(resp.status).to.eq(403);
+    });
   });
   it('Bot-Protected routes are unauthorized', () => {
     cy.request({
@@ -23,7 +30,7 @@ describe('Data fetching routes', () => {
     });
 
     cy.request({
-      url: '/api/data-fetching/rne/552032534',
+      url: '/api/data-fetching/association/552032534',
       failOnStatusCode: false,
     }).then((resp) => {
       expect(resp.status).to.eq(401);

@@ -1,11 +1,5 @@
 const routes = {
   api: {
-    rne: {
-      documents: {
-        download: '/api/download/espace-agent/documents/',
-        list: '/api/data-fetching/espace-agent/RNE-documents/',
-      },
-    },
     tva: '/api/data-fetching/verify-tva/',
     association: '/api/data-fetching/association/',
     espaceAgent: {
@@ -15,6 +9,12 @@ const routes = {
       conformite: '/api/data-fetching/espace-agent/conformite/',
       carteProfessionnelleTravauxPublics:
         '/api/data-fetching/espace-agent/carte-professionnelle-TP/',
+      rne: {
+        documents: {
+          download: '/api/download/espace-agent/documents/',
+          list: '/api/data-fetching/espace-agent/rne/documents/',
+        },
+      },
     },
   },
   apiEntreprise: {
