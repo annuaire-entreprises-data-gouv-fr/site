@@ -47,7 +47,10 @@ function queryAnnuaireServicePublic(whereQuery: string) {
   return odsClient(
     {
       url: routes.annuaireServicePublic.ods.search,
-      config: { params: { where: whereQuery }, useCache: true },
+      config: {
+        params: { where: whereQuery },
+        useCache: true,
+      },
     },
     routes.annuaireServicePublic.ods.metadata
   );
@@ -82,7 +85,6 @@ const clientAnnuaireServicePublicByIds = async (
   ids: string[]
 ): Promise<IServicePublic[]> => {
   const query = `id="${ids.join('" OR id="')}"`;
-  const useCache = false;
   let response = await queryAnnuaireServicePublic(query);
 
   if (!response.records.length) {

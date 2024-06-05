@@ -1,28 +1,45 @@
+'use client';
+
 import { ReactNode } from 'react';
 import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
+import { DataSectionClient } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IUniteLegale } from '#models/core/types';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { IServicePublic } from '#models/service-public';
+import { useFetchServicePublic } from 'hooks/fetch/service-public';
 
 type IProps = {
-  servicePublic: IServicePublic | IAPINotRespondingError;
   uniteLegale: IUniteLegale;
+  etablissement?: IEtablissement;
 };
 
 export default function ServicePublicSection({
-  servicePublic,
   uniteLegale,
+  etablissement,
 }: IProps) {
+  const servicePublic = useFetchServicePublic(uniteLegale, etablissement);
+
   return (
     <>
-      <DataSection
+      <DataSectionClient
         title={'Service public'}
         sources={[EAdministration.DILA]}
         data={servicePublic}
-        notFoundInfo={null}
+        notFoundInfo={
+          <p>
+            Ce service public n’a pas été retrouvé dans l’
+            <a
+              href="https://lannuaire.service-public.fr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Voir l’Annuaire du service public, nouvelle fenêtre"
+            >
+              Annuaire du service public
+            </a>
+            .
+          </p>
+        }
       >
         {(servicePublic) => (
           <>
@@ -44,7 +61,7 @@ export default function ServicePublicSection({
             )}
           </>
         )}
-      </DataSection>
+      </DataSectionClient>
     </>
   );
 }
