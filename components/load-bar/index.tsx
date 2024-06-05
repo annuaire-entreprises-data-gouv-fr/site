@@ -4,27 +4,27 @@ import { useEffect } from 'react';
 import constants from '#models/constants';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-
+import styles from './style.module.css';
 export default function LoadBar({ session }: { session: ISession | null }) {
   useEffect(() => {
     const loadBar = loadBarFactory();
     if (typeof window !== 'undefined') {
-      window.addEventListener('beforeunload', loadBar.run);
+      window.addEventListener(
+        'beforeunload',
+        loadBar.runWithDelay.bind(loadBar)
+      );
+      window.addEventListener('runloadbar', loadBar.runImmediate.bind(loadBar));
+      window.addEventListener('cancelloadbar', loadBar.cancel.bind(loadBar));
     }
   }, []);
   return (
     <div
       id="loader-bar"
+      className={styles['load-bar']}
       style={{
         background: hasRights(session, EScope.isAgent)
           ? constants.colors.espaceAgent
           : 'transparent',
-        transition: 'width 300ms ease-in-out',
-        height: '3px',
-        position: 'fixed',
-        top: '0',
-        width: '0',
-        zIndex: '10000',
       }}
     />
   );
@@ -71,8 +71,7 @@ const loadBarFactory = () => {
   return {
     _currentJobId: '',
     _loader: null as HTMLElement | null,
-
-    run: async function () {
+    async _run(step: number) {
       const jobId = Math.random().toString(16).substring(7);
 
       this._currentJobId = jobId;
@@ -84,14 +83,29 @@ const loadBarFactory = () => {
           return;
         }
       }
-
-      for (let w of positions) {
+      this._loader.style.opacity = '1';
+      for (let i = step; i < positions.length; i++) {
         // interrupt job if another job has been triggered by another beforeunload event
         if (this._currentJobId !== jobId) {
           return;
         }
-        this._loader.style.width = `${w}vw`;
+        this._loader.style.width = `${positions[i]}%`;
         await wait(200);
+      }
+    },
+    runImmediate() {
+      this._run(2);
+    },
+    runWithDelay() {
+      this._run(0);
+    },
+    async cancel() {
+      this._currentJobId = '';
+      if (this._loader) {
+        this._loader.style.width = '100%';
+        this._loader.style.opacity = '0';
+        await wait(200);
+        this._loader.style.width = '0';
       }
     },
   };
