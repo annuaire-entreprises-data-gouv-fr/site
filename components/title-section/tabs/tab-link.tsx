@@ -20,6 +20,9 @@ export default function TabLink({
   useEffect(() => {
     active === false && window.dispatchEvent(new Event('cancelloadbar'));
   }, [active]);
+  useEffect(() => {
+    window.dispatchEvent(new Event('cancelloadbar'));
+  }, []);
   return (
     <Link
       className={`${active ? styles.activeLink : ''} no-style-link`}
