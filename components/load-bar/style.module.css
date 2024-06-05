@@ -6,4 +6,8 @@
   position: fixed;
   top: 0;
   z-index: 9999;
+
+  @media (max-width: 768px) {
+    height: 5px;
+  }
 }
