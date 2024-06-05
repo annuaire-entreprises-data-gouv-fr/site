@@ -5,6 +5,7 @@ import {
   checkHasQuality,
 } from '#components/badges-section/labels-and-certificates';
 import { OpqibiSection } from '#components/espace-agent-components/certifications/opqibi-section';
+import { QualibatSection } from '#components/espace-agent-components/certifications/qualibat-section';
 import { QualifelecSection } from '#components/espace-agent-components/certifications/qualifelec-section';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
@@ -119,7 +120,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         {hasRights(session, EScope.protectedCertificats) && (
           <>
             <HorizontalSeparator />
-            {/* <QualibatSection qualibat={protectedCertificates.qualibat} /> */}
+            <QualibatSection uniteLegale={uniteLegale} />
             <QualifelecSection uniteLegale={uniteLegale} />
             <OpqibiSection uniteLegale={uniteLegale} />
           </>

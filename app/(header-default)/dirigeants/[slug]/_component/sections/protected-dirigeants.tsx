@@ -6,7 +6,6 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPILoading, isAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
-  isAPI404,
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
@@ -77,7 +76,7 @@ function DirigeantsProtectedSection({
 
   if (!isAPILoading(mandatairesRCS)) {
     if (
-      isAPI404(mandatairesRCS) ||
+      isAPINotResponding(mandatairesRCS) ||
       (!isAPINotResponding(mandatairesRCS) && mandatairesRCS.length === 0)
     ) {
       return (
