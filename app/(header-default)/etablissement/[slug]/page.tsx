@@ -3,7 +3,7 @@ import { NonDiffusibleSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
-import { getServicePublicByEtablissement } from '#models/service-public';
+import { isServicePublic } from '#models/core/types';
 import {
   etablissementPageDescription,
   etablissementPageTitle,
@@ -44,11 +44,6 @@ export default (async function EtablissementPage(props: AppRouterProps) {
     await cachedEtablissementWithUniteLegale(slug, isBot);
 
   const session = await getSession();
-  const servicePublic = await getServicePublicByEtablissement(
-    uniteLegale,
-    etablissement,
-    { isBot }
-  );
 
   return (
     <>
@@ -73,10 +68,10 @@ export default (async function EtablissementPage(props: AppRouterProps) {
             usedInEntreprisePage={false}
           />
         )}
-        {servicePublic && (
+        {!isBot && isServicePublic(uniteLegale) && (
           <ServicePublicSection
-            servicePublic={servicePublic}
             uniteLegale={uniteLegale}
+            etablissement={etablissement}
           />
         )}
       </div>

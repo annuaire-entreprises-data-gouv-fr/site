@@ -3,7 +3,7 @@ import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { estDiffusible } from '#models/core/statut-diffusion';
-import { getServicePublicByUniteLegale } from '#models/service-public';
+import { isServicePublic } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
@@ -14,9 +14,8 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import ResponsableSection from 'app/(header-default)/dirigeants/[slug]/_component/sections/service-public-responsables';
 import { DirigeantInformation } from './_component/sections';
-import SubServicesSection from './_component/sections/service-public-subservices';
+import ResponsablesServicePublicSection from './_component/sections/service-public-responsables';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -43,9 +42,6 @@ const DirigeantsPage = async (props: AppRouterProps) => {
   const { slug, isBot } = extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-  const servicePublic = await getServicePublicByUniteLegale(uniteLegale, {
-    isBot,
-  });
 
   const session = await getSession();
 
@@ -57,14 +53,8 @@ const DirigeantsPage = async (props: AppRouterProps) => {
           ficheType={FICHE.DIRIGEANTS}
           session={session}
         />
-        {servicePublic ? (
-          <>
-            <ResponsableSection servicePublic={servicePublic} />
-            <SubServicesSection
-              servicePublic={servicePublic}
-              uniteLegale={uniteLegale}
-            />
-          </>
+        {isServicePublic(uniteLegale) ? (
+          <ResponsablesServicePublicSection uniteLegale={uniteLegale} />
         ) : !estDiffusible(uniteLegale) &&
           !hasRights(session, EScope.nonDiffusible) ? (
           <DonneesPriveesSection />

@@ -1,6 +1,4 @@
 import { Metadata } from 'next';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import BreakPageForPrint from '#components-ui/print-break-page';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
@@ -14,11 +12,13 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
-import { isAPINotResponding } from '#models/api-not-responding';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
-import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
+import {
+  isAssociation,
+  isCollectiviteTerritoriale,
+  isServicePublic,
+} from '#models/core/types';
 import { getImmatriculationEORI } from '#models/espace-agent/immatriculation-eori';
-import { getServicePublicByUniteLegale } from '#models/service-public';
 import { EScope, hasRights } from '#models/user/rights';
 import {
   shouldNotIndex,
@@ -55,14 +55,9 @@ export default async function UniteLegalePage(props: AppRouterProps) {
   const session = await getSession();
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
-  const [servicePublic, immatriculationEORI] = await Promise.all([
-    getServicePublicByUniteLegale(uniteLegale, {
-      isBot,
-    }),
-    hasRights(session, EScope.eori)
-      ? getImmatriculationEORI(uniteLegale.siege.siret, session?.user)
-      : null,
-  ]);
+  const immatriculationEORI = hasRights(session, EScope.eori)
+    ? await getImmatriculationEORI(uniteLegale.siege.siret, session?.user)
+    : null;
 
   return (
     <>
@@ -90,19 +85,10 @@ export default async function UniteLegalePage(props: AppRouterProps) {
             {isCollectiviteTerritoriale(uniteLegale) && (
               <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
             )}
-            {servicePublic && (
-              <ServicePublicSection
-                uniteLegale={uniteLegale}
-                servicePublic={servicePublic}
-              />
-            )}
-            {(isCollectiviteTerritoriale(uniteLegale) ||
-              (servicePublic && !isAPINotResponding(servicePublic))) && (
-              <>
-                <HorizontalSeparator />
-                <BreakPageForPrint />
-              </>
-            )}
+            {isServicePublic(uniteLegale) &&
+              !isCollectiviteTerritoriale(uniteLegale) && (
+                <ServicePublicSection uniteLegale={uniteLegale} />
+              )}
             {!isBot && isAssociation(uniteLegale) && (
               <AssociationSection uniteLegale={uniteLegale} session={session} />
             )}

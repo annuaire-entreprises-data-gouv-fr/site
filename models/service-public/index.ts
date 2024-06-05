@@ -8,11 +8,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import {
-  IEtablissement,
-  IUniteLegale,
-  isServicePublic,
-} from '#models/core/types';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { FetchRessourceException } from '#models/exceptions';
 import { Siret } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
@@ -69,14 +65,9 @@ type IAffectationPersonne = Array<{
 }>;
 
 export const getServicePublicByUniteLegale = async (
-  uniteLegale: IUniteLegale,
-  options: { isBot: boolean }
-): Promise<IServicePublic | IAPINotRespondingError | null> => {
+  uniteLegale: IUniteLegale
+): Promise<IServicePublic | IAPINotRespondingError> => {
   try {
-    if (options.isBot || !isServicePublic(uniteLegale)) {
-      return null;
-    }
-
     return await clientAnnuaireServicePublicBySiret(uniteLegale.siege.siret);
   } catch (eSiret: any) {
     try {
@@ -91,14 +82,9 @@ export const getServicePublicByUniteLegale = async (
 };
 
 export const getServicePublicByEtablissement = async (
-  uniteLegale: IUniteLegale,
-  etablissement: IEtablissement,
-  options: { isBot: boolean }
-): Promise<IServicePublic | IAPINotRespondingError | null> => {
+  etablissement: IEtablissement
+): Promise<IServicePublic | IAPINotRespondingError> => {
   try {
-    if (options.isBot || !isServicePublic(uniteLegale)) {
-      return null;
-    }
     return await clientAnnuaireServicePublicBySiret(etablissement.siret);
   } catch (e: any) {
     return mapToError(e, etablissement.siret);
