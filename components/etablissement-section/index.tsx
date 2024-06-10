@@ -6,6 +6,7 @@ import { Tag } from '#components-ui/tag';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
 import { labelsAndCertificatesSources } from '#components/badges-section/labels-and-certificates';
 import AvisSituationLink from '#components/justificatifs/avis-situation-link';
+import ExtraitRNELink from '#components/justificatifs/extrait-rne-link';
 import { Section } from '#components/section';
 import { CopyPaste } from '#components/table/copy-paste';
 import { TwoColumnTable } from '#components/table/simple';
@@ -170,9 +171,25 @@ const EtablissementSection: React.FC<IProps> = ({
           ['', <br />],
         ]
       : []),
+
     [
-      'Avis de situation Insee',
-      <AvisSituationLink session={session} etablissement={etablissement} />,
+      'Justificatif(s) d’existence',
+      <>
+        Avis de situation Insee de cet établissement :{' '}
+        <AvisSituationLink
+          session={session}
+          etablissement={etablissement}
+          label="télécharger"
+        />
+        {!usedInEntreprisePage && uniteLegale.dateMiseAJourInpi && (
+          <>
+            <br />
+            Extrait RNE {uniteLegaleLabel} (
+            <a href="/faq/extrait-kbis">équivalent KBIS/D1</a>) :{' '}
+            <ExtraitRNELink uniteLegale={uniteLegale} session={session} />
+          </>
+        )}
+      </>,
     ],
   ];
 
