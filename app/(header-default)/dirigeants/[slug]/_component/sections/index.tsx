@@ -4,7 +4,7 @@ import BreakPageForPrint from '#components-ui/print-break-page';
 import { IUniteLegale } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import useFetchRNEImmatriculation from 'hooks/fetch/RNE-immatriculation copy';
+import useFetchRNEImmatriculation from 'hooks/fetch/RNE-immatriculation';
 import BeneficiairesSection from './beneficiaires';
 import DirigeantsProtectedSection from './protected-dirigeants';
 import DirigeantsSection from './rne-dirigeants';

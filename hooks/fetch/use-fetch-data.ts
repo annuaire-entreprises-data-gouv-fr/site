@@ -14,7 +14,7 @@ type IFetchDataType<T> = {
 };
 
 /**
- * Hook to fetch data from an API
+ * Hook to fetch data from an external public API (i.e. opendatasoft, service-public, etc.)
  * @param fetchOptions : fetch function, administration, logError
  * @param dependancies : Array of dependancies to retrigger the fetch
  * @returns

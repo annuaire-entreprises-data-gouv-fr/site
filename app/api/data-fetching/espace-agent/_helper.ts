@@ -27,6 +27,7 @@ export async function ProtectedAPIRoute<T>(
         ressource: routeLabel,
         context: { slug },
         cause: e,
+        message,
         administration,
       })
     );

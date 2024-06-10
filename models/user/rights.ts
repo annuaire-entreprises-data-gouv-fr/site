@@ -1,6 +1,7 @@
 import { ISession } from './session';
 
 export enum EScope {
+  none = 'none',
   actesRne = 'rne',
   bilansRne = 'rne',
   documentsRne = 'rne',
@@ -18,8 +19,9 @@ export enum EScope {
  */
 export function hasRights(session: ISession | null, rightScope: EScope) {
   const userScopes = session?.user?.scopes || [];
-
   switch (rightScope) {
+    case EScope.none:
+      return true;
     case EScope.actesRne:
     case EScope.bilansRne:
     case EScope.documentsRne:

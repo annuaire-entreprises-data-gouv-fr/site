@@ -112,7 +112,6 @@ export class FailToFetchError extends Exception {
   ) {
     super({
       name: 'FailToFetchError',
-      message: 'Error while trying to fetch ressource from client',
       ...args,
     });
   }
