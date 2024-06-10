@@ -56,7 +56,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
   const immatriculationEORI = hasRights(session, EScope.eori)
-    ? await getImmatriculationEORI(uniteLegale.siege.siret, session?.user)
+    ? await getImmatriculationEORI(uniteLegale.siege.siret)
     : null;
 
   return (

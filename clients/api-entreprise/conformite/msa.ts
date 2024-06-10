@@ -10,16 +10,12 @@ export type IAPIEntrepriseConformiteMSA = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseConformiteMSA = async (
-  siret: Siret,
-  recipientSiret?: string
-) => {
+export const clientApiEntrepriseConformiteMSA = async (siret: Siret) => {
   return await clientAPIEntreprise<IAPIEntrepriseConformiteMSA, IConformite>(
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.conformite.msa.replace('{siret}', siret)}`,
-    mapToDomainObject,
-    recipientSiret
+    mapToDomainObject
   );
 };
 

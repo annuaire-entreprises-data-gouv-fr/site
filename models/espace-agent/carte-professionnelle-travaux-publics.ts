@@ -6,11 +6,13 @@ export type ICarteProfessionnelleTravauxPublics = {
   documentUrl: string;
 };
 export const getCarteProfessionnelleTravauxPublic = async (
-  siren: Siren,
-  recipientSiret?: string
+  siren: Siren
 ): Promise<ICarteProfessionnelleTravauxPublics | IAPINotRespondingError> => {
-  return clientApiEntrepriseCarteProfessionnelleTravauxPublics(
-    siren,
-    recipientSiret
-  ).catch((error) => handleApiEntrepriseError(error, { siren }));
+  return clientApiEntrepriseCarteProfessionnelleTravauxPublics(siren).catch(
+    (error) =>
+      handleApiEntrepriseError(error, {
+        siren,
+        apiResource: 'CarteProfessionnelleTravauxPublics',
+      })
+  );
 };

@@ -4,7 +4,7 @@ import {
   IEtatCivil,
   IPersonneMorale,
 } from '#models/immatriculation';
-import { Siren, Siret } from '#utils/helpers';
+import { Siren } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
   Array<
@@ -37,10 +37,7 @@ export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseMandatairesRCS = async (
-  siren: Siren,
-  recipientSiret: Siret | undefined
-) => {
+export const clientApiEntrepriseMandatairesRCS = async (siren: Siren) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseMandatairesRCS,
     Array<IDirigeant>
@@ -48,8 +45,7 @@ export const clientApiEntrepriseMandatairesRCS = async (
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.mandatairesRCS.replace('{siren}', siren)}`,
-    mapToDomainObject,
-    recipientSiret
+    mapToDomainObject
   );
 };
 

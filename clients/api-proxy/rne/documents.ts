@@ -3,6 +3,7 @@ import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { IActesRNE } from '#models/immatriculation';
 import { Siren } from '#utils/helpers';
+import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-request-caller-infos';
 import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
 import { clientAPIProxy } from '../client';
 
@@ -12,7 +13,10 @@ import { clientAPIProxy } from '../client';
  */
 const fetchDocumentsFromRNE = async (siren: Siren, useCache = true) => {
   const route = routes.proxy.rne.documents.list + siren;
-  await sensitiveRequestLogger(route);
+
+  const callerInfos = await sensitiveRequestCallerInfos();
+  sensitiveRequestLogger(route, callerInfos);
+
   return await clientAPIProxy<IActesRNE>(route, {
     timeout: constants.timeout.XXXXL,
     useCache,

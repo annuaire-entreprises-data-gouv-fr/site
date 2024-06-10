@@ -28,16 +28,12 @@ export type IAPIEntrepriseOpqibi = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseOpqibi = async (
-  siren: Siren,
-  recipientSiret?: string
-) => {
+export const clientApiEntrepriseOpqibi = async (siren: Siren) => {
   return await clientAPIEntreprise(
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.certifications.opqibi.replace('{siren}', siren)}`,
-    mapToDomainObject,
-    recipientSiret
+    mapToDomainObject
   );
 };
 

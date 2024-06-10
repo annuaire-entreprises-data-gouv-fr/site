@@ -21,10 +21,9 @@ export type IOpqibi = {
 };
 
 export const getOpqibi = async (
-  siren: Siren,
-  recipientSiret?: string
+  siren: Siren
 ): Promise<IOpqibi | IAPINotRespondingError> => {
-  return clientApiEntrepriseOpqibi(siren, recipientSiret).catch((error) =>
-    handleApiEntrepriseError(error, { siren })
+  return clientApiEntrepriseOpqibi(siren).catch((error) =>
+    handleApiEntrepriseError(error, { siren, apiResource: 'Opqibi' })
   );
 };

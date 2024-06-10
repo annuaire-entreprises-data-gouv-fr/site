@@ -10,7 +10,7 @@ export async function ProtectedAPIRoute<T>(
   slug: string,
   administration: EAdministration,
   scope: EScope,
-  run: (agentSiret: string) => Promise<T>
+  run: () => Promise<T>
 ) {
   const session = await getSession();
   try {
@@ -18,9 +18,7 @@ export async function ProtectedAPIRoute<T>(
       throw new HttpForbiddenError('Unauthorized account');
     }
 
-    const agentSiret = session?.user?.siret || 'Inconnu';
-
-    const data = await run(agentSiret);
+    const data = await run();
     return Response.json(data, { status: 200 });
   } catch (e: any) {
     const message = `Failed to get donnees ${routeLabel}`;
