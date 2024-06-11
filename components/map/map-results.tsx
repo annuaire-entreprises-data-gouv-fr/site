@@ -36,7 +36,7 @@ export default function MapWithResults({
       attributionControl: {
         compact: true,
         customAttribution:
-          '<a href="https://www.openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© Contributeurs OpenStreetMap</a>',
+          '<a href="https://maplibre.org/" target="_blank">MapLibre</a> <a href="https://www.openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© Contributeurs OpenStreetMap</a>',
       },
     });
 
