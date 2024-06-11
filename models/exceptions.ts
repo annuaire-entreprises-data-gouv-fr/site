@@ -23,6 +23,7 @@ type IExceptionArgument = {
     referrer?: string;
     browser?: string;
     digest?: string;
+    domain?: string;
   };
 };
 
