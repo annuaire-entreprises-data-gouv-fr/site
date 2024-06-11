@@ -26,10 +26,10 @@ dataSources:
         targets:
           - association
       - label: Informations des structures de l’ESS
-  - label: Code Officiel Géographiques (COG)
+  - label: Code Officiel Géographique (COG)
     apiSlug: recherche-entreprise
     datagouvLink: https://www.data.gouv.fr/fr/datasets/code-officiel-geographique-cog/
     data:
       - label: Code Officiel Géographique
 description: |
-  L’Insee est l’Institut National de la Statistique et des Études Économiques. C’est une direction générale du ministère des finances. Dans le cadre de sa mission, l’Insee a la charge du Système National d’Identification et du Répertoire des Entreprises et de leurs Établissements (SIRENE).
+  L’Insee est l’Institut National de la Statistique et des Études Économiques. C’est une direction générale du ministère des Finances. Dans le cadre de sa mission, l’Insee a la charge du Système National d’Identification et du Répertoire des Entreprises et de leurs Établissements (SIRENE).

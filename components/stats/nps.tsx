@@ -82,7 +82,7 @@ export const NpsStats: React.FC<{
   return (
     <>
       Les chiffres de cette section proviennent de l’analyse des réponses au{' '}
-      <a href="/formulaire/nps">questionnaire de statisfaction</a>.
+      <a href="/formulaire/nps">questionnaire de satisfaction</a>.
       <h3>Score de satisfaction</h3>
       <p>
         Le score de satisfaction agit comme un thermomètre. Il permet de

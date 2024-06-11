@@ -32,7 +32,7 @@ export interface IServicePublic {
   telephone: string | null;
   typeOrganisme:
     | null
-    | 'Administration centrale (ou Ministère)'
+    | 'Administration centrale (ou ministère)'
     | 'Ambassade ou mission diplomatique'
     | "Association d'utilité publique"
     | 'Autorité administrative indépendante'

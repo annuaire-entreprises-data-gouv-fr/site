@@ -1,7 +1,7 @@
 slug: education-nationale
-short: Education nationale
+short: Éducation nationale
 site: https://www.education.gouv.fr/
-long: Ministère de l'Éducation nationale et de la jeunesse (MENJ)
+long: ministère de l'Éducation nationale et de la Jeunesse (MENJ)
 contact: https://www.education.gouv.fr/contactez-nous-41633
 apiMonitors:
   - apiName: API Etablissements Scolaires
@@ -15,4 +15,4 @@ dataSources:
     data:
       - label: Informations des établissements scolaires
 description: |
-  Le ministère de l'Éducation nationale et de la jeunesse met en œuvre dans l'académie la politique éducative définie au niveau national. Il a autorité sur le premier degré (écoles maternelles et élémentaires) et le second degré (collèges et lycées).
+  Le ministère de l'Éducation nationale et de la Jeunesse met en œuvre dans l'académie la politique éducative définie au niveau national. Il a autorité sur le premier degré (écoles maternelles et élémentaires) et le second degré (collèges et lycées).

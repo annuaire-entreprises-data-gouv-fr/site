@@ -118,7 +118,7 @@ const Partager: NextPageWithLayout = () => {
           <h3>Quand l’utiliser ?</h3>
           <p>
             Si vous êtes un professionnel, insérer dans vos factures ou vos
-            couriers un QR code vers votre page de l’Annuaire, vous permettra
+            courriers un QR code vers votre page de l’Annuaire, vous permettra
             d’apporter toutes les informations légales nécessaires.
           </p>
           <p>Voici un exemple de QR code :</p>
@@ -180,7 +180,7 @@ const Partager: NextPageWithLayout = () => {
           </h2>
           <h3>Quand l’utiliser ?</h3>
           <p>
-            Si vous utilisez fréquement la recherche d’entreprises, vous pouvez
+            Si vous utilisez fréquemment la recherche d’entreprises, vous pouvez
             paramétrer votre navigateur pour que l’Annuaire des Entreprises
             apparaisse dans votre liste de moteurs de recherche.
           </p>

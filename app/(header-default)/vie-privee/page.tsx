@@ -75,8 +75,8 @@ const Privacy = () => (
           </tr>
           <tr>
             <td>
-              Données relatives aux agents publics accédant aux services
-              numérique via AgentConnect
+              Données relatives aux agents publics accédant au service numérique
+              via AgentConnect
             </td>
             <td>Nom, prénom, adresse e-mail professionnelle</td>
           </tr>
@@ -132,7 +132,7 @@ const Privacy = () => (
             </td>
             <td>
               Jusqu’à 10 ans suivant la cessation de l’activité de l’entreprise,
-              l’association et le service public concerné
+              l’association ou le service public concerné
             </td>
           </tr>
           <tr>
@@ -142,7 +142,7 @@ const Privacy = () => (
             </td>
             <td>
               Jusqu’à 10 ans suivant la cessation de l’activité de l’entreprise,
-              l’association et le service public concerné
+              l’association ou le service public concerné
             </td>
           </tr>
           <tr>
@@ -162,7 +162,7 @@ const Privacy = () => (
     </div>
     <p>
       Pour mémoire, les données qui transitent via l’API Annuaire des
-      Entreprises sont supprimées des serveurs au bout d’une dizaine de minute.
+      Entreprises sont supprimées des serveurs au bout d’une dizaine de minutes.
     </p>
     <h2>Quels droits avez-vous ?</h2>
     <p>Vous disposez :</p>
@@ -189,8 +189,8 @@ const Privacy = () => (
     <p>
       Puisque ce sont des droits personnels, nous ne traiterons votre demande
       que si nous sommes en mesure de vous identifier. Dans le cas où nous ne
-      parvenons pas à vous identifier, nous pouvons être amenés à vous demander
-      une preuve de votre identité.
+      parvenons pas à vous identifier, nous pourrions être amenés à vous
+      demander une preuve de votre identité.
     </p>
     <p>
       Pour vous aider dans votre démarche, vous trouverez{' '}
@@ -216,7 +216,7 @@ const Privacy = () => (
       justifiés. Les personnes suivantes vont avoir accès aux données :
     </p>
     <ul>
-      <li>Les membres du service numérique l’Annuaire les entreprises ;</li>
+      <li>Les membres du service numérique l’Annuaire des Entreprises ;</li>
       <li>
         Les utilisateurs de l’API uniquement pour les données relatives aux
         représentants et bénéficiaires effectifs des entreprises, associations
@@ -310,7 +310,7 @@ const Privacy = () => (
     <p>
       Les cookies n’étant pas strictement nécessaires au service ou n’ayant pas
       pour finalité exclusive de faciliter la communication par voie
-      électronique doivent être consenti par l’utilisateur.
+      électronique doivent être consentis par l’utilisateur.
     </p>
     <p>
       Ce consentement de la personne concernée pour une ou plusieurs finalités
@@ -363,7 +363,7 @@ const Privacy = () => (
             <td>Mesure d’audience</td>
             <td>France</td>
             <td>https://fr.matomo.org/matomo-cloud-dpa/</td>
-            <td>30 minute</td>
+            <td>30 minutes</td>
           </tr>
         </tbody>
       </table>

@@ -21,14 +21,14 @@ body: |
   - SIREN : 552081317
   - Numéro de TVA intracommunautaire : FR 03 552081317
 
-  ## Quelles sont les entreprises disposant d'un numéro de Numéro de TVA intracommunautaire ? 
+  ## Quelles sont les entreprises disposant d'un numéro de TVA intracommunautaire ? 
 
   Toute entreprise domiciliée dans l’Union Européenne (UE) et qui est redevable de la TVA doit disposer d’un numéro de TVA intracommunautaire.
 
   Toutefois, cet identifiant n’est pas accessible pour une entreprise si :
 
   - elle n'est pas assujettie à la TVA (du fait de la nature de son activité par exemple).
-  - elle dépend du régime de la franchise en base sans avoir solliciter le numéro auprès de son SIE de rattachement.(https://entreprendre.service-public.fr/vosdroits/R38712)
+  - elle dépend du régime de la franchise en base et n’a pas sollicité le numéro auprès de son SIE de rattachement.(https://entreprendre.service-public.fr/vosdroits/R38712)
   - elle a fait l'objet d'une suspension de son numéro par l'administration fiscale.
   - elle n'est plus en activité.
 
@@ -40,7 +40,7 @@ body: |
 
   Pour une entreprise établie hors de France, mais dans l’UE, cette vérification s’effectue via le [service européen de validation des numéros de TVA (VIES)](https://ec.europa.eu/taxation_customs/vies/#/vat-validation). Cette précaution est fortement recommandée afin de réduire le risque de fraude ou d’escroquerie.
 
-  Le numéro de TVA affiché sur l’Annuaire des Entreprises est validé par l’administration fiscale. Dans les cas ou le numéro n’est pas accesible (voir la liste ci-dessus), il est remplacé par la mention "pas de numéro de TVA valide".
+  Le numéro de TVA affiché sur l’Annuaire des Entreprises est validé par l’administration fiscale. Dans les cas où le numéro n’est pas accessible (voir la liste ci-dessus), il est remplacé par la mention "pas de numéro de TVA valide".
 
   **Attention : de nombreux sites internet affichent un numéro de TVA mais ne prennent pas la peine de vérifier sa validité.**
 
@@ -64,9 +64,9 @@ body: |
 
   ***À noter** : une entreprise redevable de la TVA, domiciliée hors de l’UE, est tenue de s’immatriculer en France pour obtenir son numéro d’identification à la TVA.*
 
-  ## Une entreprise peut-elle avoir plusieurs numéro de TVA intracommunautaire ?
+  ## Une entreprise peut-elle avoir plusieurs numéros de TVA intracommunautaire ?
 
-  Une entreprise assujettie à la TVA possède un numéro de TVA pour chacun de ses code d’activité (NAF/APE). Dans ce cas, le numéro de TVA affiché sur Annuaire des Entreprises est celui de son premier code d’activité.
+  Une entreprise assujettie à la TVA possède un numéro de TVA pour chacun de ses codes d’activité (NAF/APE). Dans ce cas, le numéro de TVA affiché sur Annuaire des Entreprises est celui de son premier code d’activité.
 more:
   - label: Consulter la page dédiée sur service-public.fr
     href: https://entreprendre.service-public.fr/vosdroits/F23570

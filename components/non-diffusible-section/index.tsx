@@ -16,7 +16,7 @@ export const NonDiffusibleSection = () => (
     </p>
     <p>
       Pour des raisons de sécurité, certaines associations et les organismes
-      relevant du Ministère de la Défense ne sont pas diffusibles non plus.
+      relevant du ministère de la Défense ne sont pas diffusibles non plus.
     </p>
     <p>
       Si cette entreprise est la vôtre et que vous souhaitez vous la rendre de

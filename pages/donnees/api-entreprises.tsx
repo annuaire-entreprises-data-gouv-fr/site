@@ -71,7 +71,7 @@ const AccesByAPIPage = () => (
         <br />
         Par définition elle est réservée aux administrations et nécessite un
         haut niveau d’habilitation. Ses données sont accessibles sur l’Annuaires
-        des Entrepirses, uniquement <strong>aux agents publics</strong>. Pour en
+        des Entreprises, uniquement <strong>aux agents publics</strong>. Pour en
         savoir plus,{' '}
         <a href="/lp/agent-public">découvrez l’espace agent public</a>.
       </p>

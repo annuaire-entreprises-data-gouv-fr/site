@@ -41,4 +41,4 @@ dataSources:
         targets:
           - agent
 description: |
-  La DILA est la Direction de l'Information Légale et Administrative. C'est une administration publique française. Dans le cadre de sa mission, la DILA a la charge de la diffusion des données dont la publication est obligatoire, par la publication au Journal-officiel de la République française et dans les bulletins d'annonces légale.
+  La DILA est la Direction de l'Information Légale et Administrative. C'est une administration publique française. Dans le cadre de sa mission, la DILA a la charge de la diffusion des données dont la publication est obligatoire, par la publication au Journal-officiel de la République française et dans les bulletins d'annonces légales.

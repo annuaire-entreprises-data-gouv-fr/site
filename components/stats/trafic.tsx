@@ -85,7 +85,7 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
         </li>
       </ul>
       <p>
-        Un utilisateur qui a déjà visité le site les mois précédents est un un{' '}
+        Un utilisateur qui a déjà visité le site les mois précédents est un{' '}
         <strong>utilisateur récurrent</strong>. À l’inverse, un utilisateur qui
         visite le site pour la première fois est un{' '}
         <strong>nouvel utilisateur</strong>.
