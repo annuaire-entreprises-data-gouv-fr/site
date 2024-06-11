@@ -17,11 +17,11 @@ faqTargets:
   - all
 title: Comment puis-je utiliser ces données dans mon site internet ?
 seo:
-  description: Toutes les données présentées sur le site sont publiées en open-data et lbrement réutilisables.
+  description: Les données accessibles publiquement sur le site sont des données ouvertes et réutilisables.
 body: |
-  Toutes les données présentées sur le site sont publiées en open-data.
+  Les données accessibles sur la partie publique du site sont des données open-data. En revanche, les données protégées, identifiées avec un petit verrou, sont réservées aux agents publics qui doivent s'authentifier pour les consulter.
 
-  Pour en savoir plus sur les différentes sources de données, consultez notre page dédiée :
+  Pour en savoir plus sur les différentes sources de données et leur statut d’ouverture, consultez notre page dédiée :
 cta:
   label: → Consulter la liste des jeux de données que nous utilisons
   to: /donnees/sources

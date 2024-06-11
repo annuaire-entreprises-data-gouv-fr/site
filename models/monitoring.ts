@@ -2,6 +2,7 @@ import { clientMonitoring } from '#clients/monitoring';
 import { logWarningInSentry } from '#utils/sentry';
 import { administrationsMetaData } from './administrations';
 import { EAdministration } from './administrations/EAdministration';
+import { IAPIMonitorMetaData } from './administrations/types';
 import { FetchRessourceException } from './exceptions';
 
 export type IRatio = {
@@ -18,10 +19,9 @@ export type IMonitoring = {
   series: IRatio[];
 };
 
-export interface IMonitoringWithMetaData extends IMonitoring {
-  apigouvLink?: string;
-  apiSlug: string;
-  apiName: string;
+export interface IMonitoringWithMetaData
+  extends IMonitoring,
+    IAPIMonitorMetaData {
   administrationEnum: EAdministration;
 }
 
@@ -44,16 +44,18 @@ export const getMonitorsByAdministration = async (): Promise<{
           .map(
             async ({
               updownIoId,
-              apigouvLink = null,
+              apiDocumentationLink = null,
+              isProtected = false,
               apiName = null,
               apiSlug = null,
             }) => {
               try {
                 const monitoring = await clientMonitoring(updownIoId);
                 return {
-                  apigouvLink,
+                  apiDocumentationLink,
                   apiSlug,
                   apiName,
+                  isProtected,
                   administrationEnum,
                   ...monitoring,
                 } as IMonitoringWithMetaData;

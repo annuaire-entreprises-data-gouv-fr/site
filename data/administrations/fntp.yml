@@ -3,12 +3,10 @@ short: FNTP
 long: Fédération nationale des travaux publics
 site: https://www.fntp.fr/
 contact: https://www.fntp.fr/contact
-# apiMonitors:
-#   - apiName: API EORI
-#     apiSlug: eori
 estServicePublic: false
 dataSources:
   - label: Liste des entrepreneurs de travaux publics
+    apiSlug: api-entreprise
     data:
       - label: Carte professionnelle d’entrepreneur de travaux publics
 description: |

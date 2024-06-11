@@ -7,6 +7,7 @@ contact: https://www.inpi.fr/fr/contactez-nous?about=030
 apiMonitors:
   - apiName: API Registre National des Entreprises
     apiSlug: rne
+    apiDocumentationLink: https://data.inpi.fr/content/editorial/Acces_API_Entreprises
     updownIoId: m1di
 dataSources:
   - label: Registre National des Entreprises
@@ -14,26 +15,34 @@ dataSources:
     datagouvLink: https://data.inpi.fr
     data:
       - label: Dénomination, NAF, Forme juridique et Adresse d’une entreprise
+        apiSlug: rne
         form: https://entreprendre.service-public.fr/vosdroits/F24023
         targets:
           - entreprise
           - independant
       - label: Société à mission
+        apiSlug: rne
         form: https://www.economie.gouv.fr/entreprises/societe-mission
         targets:
           - entreprise
       - label: Dirigeants d’une entreprise
+        apiSlug: rne
         form: https://entreprendre.service-public.fr/vosdroits/F36173
         targets:
           - entreprise
       - label: Bénéficaires Effectifs d’une entreprise
+        apiSlug: rne
         form: https://entreprendre.service-public.fr/vosdroits/F36703
         targets:
           - entreprise
       - label: Informations contenues dans un extrait RNE
+        apiSlug: rne
         form: https://formalites.entreprises.gouv.fr/
         targets:
           - entreprise
           - independant
+      - label: Actes, Statuts et Bilans
+        apiSlug: rne
+        form: https://formalites.entreprises.gouv.fr/
 description: |
   L’INPI est l’Institut National de la Protection Industrielle. C’est un établissement public à caractère administratif,  qui relève du ministère de l’Économie.

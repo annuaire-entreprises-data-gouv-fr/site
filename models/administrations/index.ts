@@ -1,5 +1,9 @@
 import { EAdministration } from './EAdministration';
-import { IAdministrationMetaData, IAdministrationsMetaData } from './types';
+import {
+  IAPIMonitorMetaData,
+  IAdministrationMetaData,
+  IAdministrationsMetaData,
+} from './types';
 
 /**
  * Validate administration meta data as we load it (during build)
@@ -47,18 +51,18 @@ const loadMetadata = (): IAdministrationsMetaData => {
 };
 
 /**
- * Load list of all api monitoring id. Should run once
+ * Load list of all apis. Should run once
  * @returns
  */
-const loadMonitoringIds = () =>
+const loadAllAPI = () =>
   Object.values(administrationsMetaData).reduce((acc, administration) => {
     (administration.apiMonitors || []).forEach((monitor) => {
       //@ts-ignore
-      acc.push(monitor.id);
+      acc[monitor.apiSlug] = monitor;
     });
     return acc;
-  }, []) as number[];
+  }, {}) as { [id: string]: IAPIMonitorMetaData };
 
 export const administrationsMetaData: IAdministrationsMetaData = loadMetadata();
 
-export const allMonitoringIds = loadMonitoringIds();
+export const allAPI = loadAllAPI();

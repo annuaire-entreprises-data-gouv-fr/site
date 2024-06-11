@@ -27,6 +27,11 @@ const loadDataToModify = () => {
   );
 };
 
+/**
+ * List the different data tht can be modifiedby users - useful in FAQ
+ * @param slug
+ * @returns
+ */
 export const getDataToModify = (slug: string) => {
   return allDataToModify.find((data) => data.slug === slug);
 };
