@@ -30,7 +30,9 @@ export default function TabLink({
       rel={noFollow ? 'nofollow' : ''}
       style={{ width }}
       scroll={false}
-      onClick={() => window.dispatchEvent(new Event('runloadbar'))}
+      onClick={() =>
+        active ? null : window.dispatchEvent(new Event('runloadbar'))
+      }
       prefetch={false}
     >
       {active ? label : <h2>{label}</h2>}
