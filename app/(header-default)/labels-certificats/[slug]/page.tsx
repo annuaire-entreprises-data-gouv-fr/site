@@ -43,7 +43,7 @@ export const generateMetadata = async (
       session
     )}`,
     description: uniteLegalePageDescription(uniteLegale, session),
-    robots: 'noindex, nofollow',
+    robots: 'noindex',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/labels-certificats/${uniteLegale.siren}`,
     },
