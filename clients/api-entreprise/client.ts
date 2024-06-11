@@ -30,7 +30,8 @@ export default async function clientAPIEntreprise<T, U>(
     logInfoInSentry(
       new Information({
         name: 'NoRecipientSiretForAgent',
-        message: `Fallback on Dinum siret for domain : ${callerInfos.domain}`,
+        message: 'Fallback on Dinum siret',
+        context: { domain: callerInfos.domain },
       })
     );
   }

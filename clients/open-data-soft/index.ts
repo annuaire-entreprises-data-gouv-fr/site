@@ -1,3 +1,4 @@
+import constants from '#models/constants';
 import { IDefaultRequestConfig, httpGet } from '#utils/network';
 import { IODSMetadata, IODSResponse } from './types';
 
@@ -8,9 +9,13 @@ const odsClient = async (
   search: { url: string; config?: IDefaultRequestConfig },
   metaDataUrl: string
 ): Promise<any> => {
+  const timeout = constants.timeout.XXL;
   const [response, responseMetaData] = await Promise.all([
-    httpGet<IODSResponse>(search.url, search.config),
-    httpGet<IODSMetadata>(metaDataUrl),
+    httpGet<IODSResponse>(search.url, {
+      timeout,
+      ...search.config,
+    }),
+    httpGet<IODSMetadata>(metaDataUrl, { timeout }),
   ]);
 
   const results = response || [];
