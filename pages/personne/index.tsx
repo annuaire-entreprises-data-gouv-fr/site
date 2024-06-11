@@ -99,16 +99,22 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const searchTerm = (context.query.terme || '') as string;
     const pageParam = (context.query.page || '') as string;
     const sirenFrom = (context.query.sirenFrom || '') as string;
+    const partialDate = (context.query.partialDate || '') as string;
+
+    if (!searchTerm && !pageParam && !partialDate) {
+      return {
+        redirect: { destination: '/404' },
+      };
+    }
+
     const page = parseIntWithDefaultValue(pageParam, 1);
 
-    const monthInterval = formatMonthIntervalFromPartialDate(
-      (context.query.partialDate as string) || ''
-    ) ?? ['', ''];
-    const [beginingOfMonth, endOfMonth] =
+    const monthInterval = formatMonthIntervalFromPartialDate(partialDate) ?? [
+      '',
+      '',
+    ];
+    const [dmin, dmax] =
       typeof monthInterval === 'string' ? ['', ''] : monthInterval;
-
-    const dmin = (context.query.dmin as string) || beginingOfMonth;
-    const dmax = (context.query.dmax as string) || endOfMonth;
 
     const searchFilterParams = new SearchFilterParams({
       ...context.query,
