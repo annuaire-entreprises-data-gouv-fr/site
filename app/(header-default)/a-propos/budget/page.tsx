@@ -48,7 +48,7 @@ export default function Budget() {
         <p>Répartition des sources de financements :</p>
         <ul>
           <li>
-            <strong>2021</strong> : le projet est une experimentation financée à
+            <strong>2021</strong> : le projet est une expérimentation financée à
             100% par la{' '}
             <a href="https://numerique.gouv.fr/" target="_blank" rel="noopener">
               Direction Interministérielle du Numérique (DINUM)

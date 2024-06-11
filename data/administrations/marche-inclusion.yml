@@ -16,4 +16,4 @@ dataSources:
       - label: Entreprise Sociale Inclusive (EA, ESAT, SIAE)
 estServicePublic: true
 description: |
-  Le Marché de l’Inclusion est l’outil mis à disposition des acheteurs privés et public pour trouver des fournisseurs inclusifs en France.
+  Le Marché de l’Inclusion est l’outil mis à disposition des acheteurs privés et publics pour trouver des fournisseurs inclusifs en France.

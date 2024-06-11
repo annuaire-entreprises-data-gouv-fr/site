@@ -2,7 +2,7 @@ title: Index Egapro (égalité professionnelle entre les femmes et les hommes)
 
 seo:
   title: Index Egapro - définition - Annuaire des Entreprises
-  description: L'index Egapro est un score calculé sur plusieurs indicateurs, permettant de mesurer le niveau d'égalité égalité professionnelle entre les femmes et les hommes dans les entreprises de plus de 50 salariés.
+  description: L'index Egapro est un score calculé sur plusieurs indicateurs, permettant de mesurer le niveau d'égalité professionnelle entre les femmes et les hommes dans les entreprises de plus de 50 salariés.
   url: https://annuaire-entreprises.data.gouv.fr/defintion/egapro-egalite-professionnelle-femme-homme
 more:
   ## 4. SECTION « Définition liées » ou « Sur le même sujet » en fin de page
@@ -18,7 +18,7 @@ more:
 body: |
   ## **Index Egapro : définition**
 
-  Issu de la loi pour la liberté de choisir son avenir professionnel du 5 septembre 2018, [l'index de l'égalité professionnelle femmes-hommes](https://egapro.travail.gouv.fr) (Egapro) est un score calculé sur plusieurs indicateurs, permettant de mesurer le niveau d'égalité égalité professionnelle entre les femmes et les hommes dans les entreprises de plus de 50 salariés.
+  Issu de la loi pour la liberté de choisir son avenir professionnel du 5 septembre 2018, [l'index de l'égalité professionnelle femmes-hommes](https://egapro.travail.gouv.fr) (Egapro) est un score calculé sur plusieurs indicateurs, permettant de mesurer le niveau d'égalité professionnelle entre les femmes et les hommes dans les entreprises de plus de 50 salariés.
 
   ## **A quoi sert l'index Egapro ?**
 
@@ -63,7 +63,7 @@ body: |
   Vous pouvez retrouver l'index Egapro d'une ou plusieurs entreprise(s) de plusieurs façons :
 
   * En vous rendant sa fiche Annuaire des Entreprises, sur la page “Labels et certificats” d'une entreprise de plus de 50 salariés basée en France. Exemple avec l'entreprise EDF : <https://annuaire-entreprises.data.gouv.fr/labels-certificats/552081317>
-  * En consultant le moteur de recherche du ministère du travail : <https://egapro.travail.gouv.fr/index-egapro/recherche>
+  * En consultant le moteur de recherche du ministère du Travail : <https://egapro.travail.gouv.fr/index-egapro/recherche>
   * En consultant directement la base de données Egapro disponible sur [datagouv.fr](http://datagouv.fr) et utilisée par l'Annuaire des Entreprises : <https://www.data.gouv.fr/fr/datasets/index-egalite-professionnelle-f-h-des-entreprises-de-50-salaries-ou-plus/>
 
   Pour aller plus loin : comprendre la méthode de calcul des indicateurs <https://egapro.travail.gouv.fr/aide-simulation>

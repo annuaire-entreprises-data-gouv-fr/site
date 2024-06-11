@@ -111,7 +111,7 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
         {isOnline ? (
           <p>
             L’API fonctionne normalement, vous ne devriez pas rencontrer de
-            problème en accèdant aux données.
+            problème en accédant aux données.
           </p>
         ) : (
           <p>

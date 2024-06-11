@@ -3,7 +3,7 @@ describe('Service public', () => {
     cy.visit('/entreprise/130025265');
     cy.contains('Service public');
     cy.contains('Type organisme');
-    cy.contains('Administration centrale (ou Ministère)');
+    cy.contains('Administration centrale (ou ministère)');
     cy.contains('fiche de l’Annuaire du service public');
   });
   it('Should display dirigeant information', () => {

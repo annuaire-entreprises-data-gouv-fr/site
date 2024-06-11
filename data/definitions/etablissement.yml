@@ -6,10 +6,10 @@ seo:
 body: |
   ## **Établissement : définition**
 
-  L'établissement est une dénomination juridique désignant l'unité de production d'une entreprise, liée à son unité légale. Ou autre dénomination utilisée est celle d'établissement principale ou secondaire où :
+  L’établissement est une dénomination juridique désignant l'unité de production d'une entreprise liée à son unité légale. L’autre dénomination utilisée est celle d'établissement principale ou secondaire :
 
-  * L'établissement principal renvoie à l'unité légale (traditionnellement le siège social)
-  * L'établissement secondaire (ou les établissements secondaire quand ils sont plusieurs) désigne un site de production.
+  * L’établissement principal renvoie à l'unité légale (traditionnellement le siège social)
+  * L’établissement secondaire désigne un site de production
 
   Cette dénomination permet de mieux identifier les différents sites d'activité d'une entreprise : siège social, sites de production, sites de distribution, sites de vente…
 
@@ -32,7 +32,7 @@ body: |
 
   Une entreprise peut donc avoir plusieurs SIRET (si elle possède plusieurs établissements) mais toujours un seul SIREN. En revanche, une entreprise possède toujours un SIREN et au moins un SIRET distincts.
 
-  Ces trois numéros (SIRET, SIREN, NIC) sont construits et fournis par l'INSEE afin de faciliter l'identification des entreprises et de leurs établissements basées en France, notamment auprès de l'administration.
+  Ces trois numéros (SIRET, SIREN, NIC) sont construits et fournis par l'INSEE afin de faciliter l'identification des entreprises et de leurs établissements basés en France, notamment auprès de l'administration.
 
   **Exemple : Carrefour Proximité France**
 

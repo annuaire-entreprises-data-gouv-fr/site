@@ -48,13 +48,13 @@ export const MTPEI = ({ queryString = '' }) => (
     href={`/administration/mtpei${queryString}`}
     title="Ministère du Travail de l’Emploi et de l’Insertion"
   >
-    Ministère du Travail de l’Emploi et de l’Insertion
+    ministère du Travail de l’Emploi et de l’Insertion
   </a>
 );
 
 export const MI = ({ queryString = '' }) => (
   <a href={`/administration/mi${queryString}`} title="Ministère de l’Intérieur">
-    Ministère de l’Intérieur
+    ministère de l’Intérieur
   </a>
 );
 
@@ -63,13 +63,13 @@ export const MEF = ({ queryString = '' }) => (
     href={`/administration/mef${queryString}`}
     title="Ministère de l’Économie et des Finances"
   >
-    Ministère de l’Économie et des Finances
+    ministère de l’Économie et des Finances
   </a>
 );
 
 export const MC = ({ queryString = '' }) => (
   <a href={`/administration/mc${queryString}`} title="Ministère de la Culture">
-    Ministère de la Culture
+    ministère de la Culture
   </a>
 );
 
@@ -78,7 +78,7 @@ export const EDUCNAT = ({ queryString = '' }) => (
     href={`/administration/education-nationale${queryString}`}
     title="Éducation nationale"
   >
-    Éducation nationale
+    éducation nationale
   </a>
 );
 

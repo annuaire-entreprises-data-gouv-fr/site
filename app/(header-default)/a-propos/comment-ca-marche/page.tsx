@@ -39,7 +39,7 @@ export default function About() {
         <div>
           <h2>Que trouve-t-on dans l’Annuaire des Entreprises ?</h2>
           <p>
-            Les fiches de l’Annuaire regroupe des informations légales sur
+            Les fiches de l’Annuaire regroupent des informations légales sur
             toutes les personnes morales basées en France (entreprises,
             associations, administrations, entrepreneurs…) à travers plusieurs
             onglets :
@@ -80,8 +80,7 @@ export default function About() {
             </li>
             <li>
               <strong>Conventions collectives :</strong> documents enregistrés
-              auprès du ministère du travail, du plein l’emploi et de
-              l’insertion
+              auprès du ministère du Travail, du Plein Emploi et de l’Insertion
             </li>
           </ul>
           <h2>

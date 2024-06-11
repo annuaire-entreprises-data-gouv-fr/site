@@ -135,7 +135,7 @@ export default function Equipe() {
             mail, enrichissement de CRM)
           </li>
           <li>
-            Effectuer une correction sur une informations affichée (pour une
+            Effectuer une correction sur une information affichée (pour une
             entreprise, consultez{' '}
             <a href="https://formalites.entreprises.gouv.fr">
               le site de formalités des entreprises de l’INPI

@@ -18,13 +18,13 @@
 - date: 07/06/2023
   title: Publication des données financières des sociétés dans l'onglet "Données financières"
 - date: 26/04/2023
-  title: Ajout de filtres sur la taille d’entreprise et le nombre de salarié
+  title: Ajout de filtres sur la taille d’entreprise et le nombre de salariés
   description: |
     Ajout du [filtre catégorie d'entreprise](https://sirene.fr/static-resources/htm/v_sommaire.htm#6) et du filtre [effectif salarié](https://sirene.fr/static-resources/htm/v_sommaire.htm#27)
 - date: 25/04/2023
   title: 'Ajout de la page notre équipe'
 - date: 17/04/2023
-  title: 'Ajout des représentation équilibrée d’une entreprise - Egapro dans le moteur de recherche et la page Labels et certificats'
+  title: 'Ajout des représentations équilibrées d’une entreprise - Egapro dans le moteur de recherche et la page Labels et certificats'
 - date: 04/04/2023
   title: 'Ajout des certificats “Qualiopi - Organisme de formation” dans le moteur de recherche et la page Labels et certificats'
 - date: 29/03/2023
@@ -54,7 +54,7 @@
 - date: 20/12/2022
   title: Ajout de l'onglet labels & certificats avec les entreprises RGE, ESS, et Spectacle Vivant
 - date: 08/12/2022
-  title: Ajout des dépots de comptes des associations, à retrouver sur l'onglet "Annonces"
+  title: Ajout des dépôts de comptes des associations, à retrouver sur l'onglet "Annonces"
 - date: 02/12/2022
   title: Gestion des collectivités territoriales. Ajout des codes géographiques des communes, départements et régions, ainsi que des élus
 - date: 25/11/2022
@@ -78,7 +78,7 @@
 - date: 29/06/2022
   title: Ajout de l’état administratif "en sommeil"
 - date: 17/06/2022
-  title: Ajout du filtre par département dans le recherche avancée
+  title: Ajout du filtre par département dans la recherche avancée
 - date: 09/06/2022
   title: Ajout de raccourcis de navigation dans la page "Informations Générales"
 - date: 09/06/2022
