@@ -18,10 +18,7 @@ export type IAPIEntrepriseConformiteVigilance = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseConformiteVigilance = async (
-  siren: Siren,
-  recipientSiret?: string
-) => {
+export const clientApiEntrepriseConformiteVigilance = async (siren: Siren) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseConformiteVigilance,
     IConformite
@@ -29,8 +26,7 @@ export const clientApiEntrepriseConformiteVigilance = async (
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.conformite.vigilance.replace('{siren}', siren)}`,
-    mapToDomainObject,
-    recipientSiret
+    mapToDomainObject
   );
 };
 

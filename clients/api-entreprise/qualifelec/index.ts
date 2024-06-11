@@ -51,10 +51,7 @@ export type IAPIEntrepriseQualifelec = IAPIEntrepriseResponse<
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseQualifelec = async (
-  siret: Siret,
-  recipientSiret?: string
-) => {
+export const clientApiEntrepriseQualifelec = async (siret: Siret) => {
   return await clientAPIEntreprise<IAPIEntrepriseQualifelec, IQualifelec>(
     `${
       process.env.API_ENTREPRISE_URL
@@ -62,8 +59,7 @@ export const clientApiEntrepriseQualifelec = async (
       '{siret}',
       siret
     )}`,
-    mapToDomainObject,
-    recipientSiret
+    mapToDomainObject
   );
 };
 

@@ -4,7 +4,10 @@ import { APINotRespondingFactory } from '#models/api-not-responding';
 import { FetchRessourceException, IExceptionContext } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 
-export function handleApiEntrepriseError(e: any, context: IExceptionContext) {
+export function handleApiEntrepriseError(
+  e: any,
+  context: IExceptionContext & { apiResource: string }
+) {
   if (e instanceof HttpNotFound) {
     return APINotRespondingFactory(EAdministration.DINUM, 404);
   }

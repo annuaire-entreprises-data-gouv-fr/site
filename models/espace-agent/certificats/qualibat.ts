@@ -25,10 +25,9 @@ export type IQualibat = {
 };
 
 export const getQualibat = async (
-  siret: Siret,
-  recipientSiret?: string
+  siret: Siret
 ): Promise<IQualibat | IAPINotRespondingError> => {
-  return clientApiEntrepriseQualibat(siret, recipientSiret).catch((error) =>
-    handleApiEntrepriseError(error, { siret })
+  return clientApiEntrepriseQualibat(siret).catch((error) =>
+    handleApiEntrepriseError(error, { siret, apiResource: 'Qualibat' })
   );
 };

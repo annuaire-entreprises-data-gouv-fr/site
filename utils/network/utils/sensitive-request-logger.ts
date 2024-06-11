@@ -1,7 +1,6 @@
 import { Exception } from '#models/exceptions';
 import { extractSirenOrSiretSlugFromUrl, randomId } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import getSession from '#utils/server-side-helper/app/get-session';
 
 type ISensitiveLogType = {
   date: string;
@@ -20,12 +19,15 @@ type ISensitiveLogType = {
     path: string;
     query: string;
   };
-  user?: {
-    email?: string;
-    siret?: string;
-    scopes?: string[];
-    domain?: string;
-  };
+  user: ISensitiveCaller;
+};
+
+// Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-user.html
+export type ISensitiveCaller = {
+  email: string;
+  siret: string | null;
+  scopes: string[];
+  domain: string;
 };
 
 /**
@@ -35,7 +37,10 @@ type ISensitiveLogType = {
  *
  * @param route
  */
-export const sensitiveRequestLogger = async (route: string) => {
+export const sensitiveRequestLogger = (
+  route: string,
+  user: ISensitiveCaller
+) => {
   try {
     const url = new URL(route);
 
@@ -66,22 +71,9 @@ export const sensitiveRequestLogger = async (route: string) => {
         path: url.pathname,
         query: url.search,
       },
+      user,
     };
 
-    const session = await getSession();
-
-    if (session?.user) {
-      // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-user.html
-      log.user = {
-        email: session.user.email,
-        siret: session.user.siret,
-        scopes: session.user.scopes,
-      };
-
-      if (log.user.email) {
-        log.user.domain = (log.user.email.match(/@(.*)/) || ['']).shift();
-      }
-    }
     // eslint-disable-next-line no-console
     console.info(JSON.stringify(log));
   } catch (e) {

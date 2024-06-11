@@ -13,10 +13,7 @@ export type IAPIEntrepriseConformiteFiscale = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseConformiteFiscale = async (
-  siren: Siren,
-  recipientSiret?: string
-) => {
+export const clientApiEntrepriseConformiteFiscale = async (siren: Siren) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseConformiteFiscale,
     IConformite
@@ -24,8 +21,7 @@ export const clientApiEntrepriseConformiteFiscale = async (
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.conformite.fiscale.replace('{siren}', siren)}`,
-    mapToDomainObject,
-    recipientSiret
+    mapToDomainObject
   );
 };
 

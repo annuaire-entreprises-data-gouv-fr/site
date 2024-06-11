@@ -13,8 +13,7 @@ export type IAPIEntrepriseCarteProfessionnelleTravauxPublics =
  * GET documents from API Entreprise
  */
 export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
-  siren: Siren,
-  recipientSiret?: string
+  siren: Siren
 ) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseCarteProfessionnelleTravauxPublics,
@@ -26,8 +25,7 @@ export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
       '{siren}',
       siren
     )}`,
-    mapToDomainObject,
-    recipientSiret
+    mapToDomainObject
   );
 };
 

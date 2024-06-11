@@ -14,11 +14,11 @@ export async function GET(
     slug,
     EAdministration.DINUM,
     EScope.conformite,
-    async (agentSiret: string) => {
+    async () => {
       const siret = verifySiret(slug as string);
       const siren = extractSirenFromSiret(siret);
 
-      return await getConformiteEntreprise(siren, siret, agentSiret);
+      return await getConformiteEntreprise(siren, siret);
     }
   );
 }

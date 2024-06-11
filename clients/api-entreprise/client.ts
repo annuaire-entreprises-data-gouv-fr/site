@@ -2,6 +2,7 @@ import { HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
 import { Information } from '#models/exceptions';
 import { httpGet } from '#utils/network';
+import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-request-caller-infos';
 import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
 import { logInfoInSentry } from '#utils/sentry';
 
@@ -20,14 +21,16 @@ export type IAPIEntrepriseResponse<T> = {
  */
 export default async function clientAPIEntreprise<T, U>(
   route: string,
-  mapToDomainObject: (e: T) => U,
-  recipientSiret?: string
+  mapToDomainObject: (e: T) => U
 ) {
-  if (!recipientSiret) {
+  const callerInfos = await sensitiveRequestCallerInfos();
+  sensitiveRequestLogger(route, callerInfos);
+
+  if (!callerInfos.siret) {
     logInfoInSentry(
       new Information({
         name: 'NoRecipientSiretForAgent',
-        message: 'Fallback on Dinum siret as recipient',
+        message: `Fallback on Dinum siret for domain : ${callerInfos.domain}`,
       })
     );
   }
@@ -35,8 +38,6 @@ export default async function clientAPIEntreprise<T, U>(
   if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
     throw new HttpUnauthorizedError('Missing API Entreprise credentials');
   }
-
-  await sensitiveRequestLogger(route);
 
   // never cache any API Entreprise request
   const useCache = false;
@@ -49,7 +50,7 @@ export default async function clientAPIEntreprise<T, U>(
     params: {
       object: 'espace-agent-public',
       context: 'annuaire-entreprises',
-      recipient: recipientSiret || '13002526500013',
+      recipient: callerInfos.siret || '13002526500013',
     },
     useCache,
   });

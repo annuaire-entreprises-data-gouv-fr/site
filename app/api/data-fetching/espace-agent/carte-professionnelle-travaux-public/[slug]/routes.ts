@@ -14,9 +14,9 @@ export async function GET(
     slug,
     EAdministration.DINUM,
     EScope.protectedCertificats,
-    async (agentSiret: string) => {
+    async () => {
       const siren = verifySiren(slug as string);
-      return await getCarteProfessionnelleTravauxPublic(siren, agentSiret);
+      return await getCarteProfessionnelleTravauxPublic(siren);
     }
   );
 }
