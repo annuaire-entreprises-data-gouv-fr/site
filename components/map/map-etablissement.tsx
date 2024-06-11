@@ -33,6 +33,11 @@ export function MapEtablissement({
       center: coords,
       zoom,
       minZoom: 3,
+      attributionControl: {
+        compact: true,
+        customAttribution:
+          '<a href="https://www.openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© Contributeurs OpenStreetMap</a>',
+      },
     });
 
     const popup = new maplibregl.Popup({ offset: 30 }).setHTML(

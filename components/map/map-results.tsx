@@ -33,6 +33,11 @@ export default function MapWithResults({
       center: [2, 47],
       zoom: 4.5,
       minZoom: 3,
+      attributionControl: {
+        compact: true,
+        customAttribution:
+          '<a href="https://www.openmaptiles.org/" target="_blank">© OpenMapTiles</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© Contributeurs OpenStreetMap</a>',
+      },
     });
 
     results.results.forEach((result) => {
