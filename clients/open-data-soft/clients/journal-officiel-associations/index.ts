@@ -1,6 +1,7 @@
 import routes from '#clients/routes';
 import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IAnnoncesAssociation } from '#models/annonces';
+import constants from '#models/constants';
 import { IdRna, Siren, formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import odsClient from '../..';
@@ -65,7 +66,10 @@ type IDCAField = {
 const clientJOAFE = async (idRna: string): Promise<IAnnoncesAssociation> => {
   const searchUrl = `${routes.journalOfficielAssociations.ods.search}&q=numero_rna=${idRna}&refine.source=joafe&sort=dateparution`;
   const metaDataUrl = routes.journalOfficielAssociations.ods.metadata;
-  const response = await odsClient({ url: searchUrl }, metaDataUrl);
+  const response = await odsClient(
+    { url: searchUrl, config: { timeout: constants.timeout.L } },
+    metaDataUrl
+  );
 
   return {
     annonces: response.records.map(

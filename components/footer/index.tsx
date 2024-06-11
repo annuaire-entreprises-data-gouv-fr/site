@@ -392,6 +392,16 @@ const Footer = () => (
                 Historique des changements
               </a>
             </li>
+            <li className="fr-footer__bottom-item">
+              <a
+                className="fr-footer__bottom-link"
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://github.com/annuaire-entreprises-data-gouv-fr"
+              >
+                Code source
+              </a>
+            </li>
           </ul>
           <div className="fr-footer__bottom-copy">
             <p>
