@@ -7,7 +7,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { Siren } from '#utils/helpers';
+import { verifySiren } from '#utils/helpers';
 import { IImmatriculationRNE } from '.';
 
 /*
@@ -15,8 +15,10 @@ import { IImmatriculationRNE } from '.';
  * @param siren
  */
 export const getImmatriculationRNE = async (
-  siren: Siren
+  maybeSiren: string
 ): Promise<IAPINotRespondingError | IImmatriculationRNE> => {
+  const siren = verifySiren(maybeSiren);
+
   try {
     // fetch RNE and use cache
     const {
@@ -48,7 +50,9 @@ export const getImmatriculationRNE = async (
   }
 };
 
-export async function getDocumentsRNEProtected(siren: Siren) {
+export async function getDocumentsRNEProtected(maybeSiren: string) {
+  const siren = verifySiren(maybeSiren);
+
   try {
     const actes = await clientDocuments(siren);
     actes.hasBilanConsolide =

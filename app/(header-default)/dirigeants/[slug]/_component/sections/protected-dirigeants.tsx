@@ -10,7 +10,7 @@ import {
 } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
 import { IDirigeant, IImmatriculationRNE } from '#models/immatriculation';
-import useFetchRCSMandataires from 'hooks/fetch/RCS-mandataires';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { DirigeantContent } from './dirigeant-content';
 import DirigeantsSection from './rne-dirigeants';
 
@@ -72,7 +72,10 @@ function DirigeantsProtectedSection({
   uniteLegale,
   immatriculationRNE,
 }: IProps) {
-  const mandatairesRCS = useFetchRCSMandataires(uniteLegale);
+  const mandatairesRCS = useAPIRouteData(
+    'espace-agent/rcs-mandataires',
+    uniteLegale.siren
+  );
 
   if (!isAPILoading(mandatairesRCS)) {
     if (

@@ -7,3 +7,5 @@ declare global {
     _paq: any[];
   }
 }
+
+export type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;

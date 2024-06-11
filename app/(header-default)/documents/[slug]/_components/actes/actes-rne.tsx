@@ -14,7 +14,7 @@ import {
 } from '#models/core/types';
 import { IActesRNE } from '#models/immatriculation';
 import { formatDateLong } from '#utils/helpers';
-import useFetchRNEDocuments from 'hooks/fetch/RNE-documents';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const NoDocument = () => (
   <>Aucun document n’a été retrouvé dans le RNE pour cette entreprise.</>
@@ -23,7 +23,10 @@ const NoDocument = () => (
 export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const documents = useFetchRNEDocuments(uniteLegale);
+  const documents = useAPIRouteData(
+    'espace-agent/rne/documents',
+    uniteLegale.siren
+  );
 
   return (
     <DataSectionClient

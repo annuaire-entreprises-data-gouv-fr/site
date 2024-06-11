@@ -8,6 +8,7 @@ import {
 } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
 import { IImmatriculationRNE } from '#models/immatriculation';
+import { useTimeout } from 'hooks';
 
 const NoDirigeantAssociation = ({ idAssociation = '' }) => (
   <>
@@ -53,8 +54,11 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   immatriculationRNE,
 }) => {
   const summaries = [];
-
+  const after100ms = useTimeout(100);
   if (isAPILoading(immatriculationRNE)) {
+    if (!after100ms) {
+      return null;
+    }
     summaries.push(
       <span>
         chargement des données des dirigeants en cours <Loader />

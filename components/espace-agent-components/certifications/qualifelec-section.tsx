@@ -6,14 +6,17 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { formatDate, formatDateLong } from '#utils/helpers';
-import { useFetchQualifelec } from 'hooks/fetch/espace-agent/qualifelec';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 export function QualifelecSection({
   uniteLegale,
 }: {
   uniteLegale: IUniteLegale;
 }) {
-  const qualifelec = useFetchQualifelec(uniteLegale);
+  const qualifelec = useAPIRouteData(
+    'espace-agent/qualifelec',
+    uniteLegale.siege.siret
+  );
   return (
     <DataSectionClient
       title="Certificats Qualifelec"

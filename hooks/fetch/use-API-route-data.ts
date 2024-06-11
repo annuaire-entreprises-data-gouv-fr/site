@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { APILoadingFactory, IAPILoading } from '#models/api-loading';
 import { httpGet } from '#utils/network';
 import {
@@ -6,7 +5,8 @@ import {
   RequestAbortedDuringUnloadException,
 } from '#utils/network/frontend';
 import logErrorInSentry from '#utils/sentry';
-import { APIPath, RouteResponse } from 'app/api/data-fetching/routes';
+import { APIPath, RouteResponse } from 'app/api/data-fetching/routes-handlers';
+import { useEffect, useState } from 'react';
 
 /**
  * Hook to fetch data from internal API

@@ -12,7 +12,7 @@ import { getPersonnalDataAssociation } from '#models/core/statut-diffusion';
 import { IAssociation, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
-import { useFetchAssociation } from 'hooks/fetch/association';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { AssociationNotFound } from './association-not-found';
 
 const getTableData = (
@@ -132,7 +132,7 @@ const AssociationSection = ({
 }) => {
   const { idAssociation = '' } = uniteLegale.association;
 
-  const association = useFetchAssociation(uniteLegale.siren);
+  const association = useAPIRouteData('association', uniteLegale.siren);
 
   return (
     <>

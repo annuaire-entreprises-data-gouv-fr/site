@@ -6,9 +6,7 @@ import NonRenseigne from '#components/non-renseigne';
 import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
-import { useFetchOpqibi } from 'hooks/fetch/espace-agent/opqibi';
-import { useFetchQualibat } from 'hooks/fetch/espace-agent/qualibat';
-import { useFetchQualifelec } from 'hooks/fetch/espace-agent/qualifelec';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import {
   LabelsAndCertificatesBadgesSection,
   checkHasLabelsAndCertificates,
@@ -20,9 +18,15 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const hasOtherCertificates = checkHasLabelsAndCertificates(uniteLegale);
-  const opqibi = useFetchOpqibi(uniteLegale);
-  const qualibat = useFetchQualibat(uniteLegale);
-  const qualifelec = useFetchQualifelec(uniteLegale);
+  const opqibi = useAPIRouteData('espace-agent/opqibi', uniteLegale.siren);
+  const qualibat = useAPIRouteData(
+    'espace-agent/qualibat',
+    uniteLegale.siege.siret
+  );
+  const qualifelec = useAPIRouteData(
+    'espace-agent/qualifelec',
+    uniteLegale.siege.siret
+  );
 
   if (
     isAPINotResponding(opqibi) &&

@@ -2,7 +2,7 @@ import { clientApiEntrepriseConformiteFiscale } from '#clients/api-entreprise/co
 import { clientApiEntrepriseConformiteMSA } from '#clients/api-entreprise/conformite/msa';
 import { clientApiEntrepriseConformiteVigilance } from '#clients/api-entreprise/conformite/vigilance';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { Siren, Siret } from '#utils/helpers';
+import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { handleApiEntrepriseError } from './utils';
 
 export type IConformite = {
@@ -18,9 +18,10 @@ export type IConformiteUniteLegale = {
 };
 
 export const getConformiteEntreprise = async (
-  siren: Siren,
-  siret: Siret
+  maybeSiret: string
 ): Promise<IConformiteUniteLegale> => {
+  const siret = verifySiret(maybeSiret as string);
+  const siren = extractSirenFromSiret(siret);
   const [fiscale, vigilance, msa] = await Promise.all([
     clientApiEntrepriseConformiteFiscale(siren).catch((error) =>
       handleApiEntrepriseError(error, {

@@ -12,7 +12,7 @@ import { isAPINotResponding } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
 import { ITVAIntracommunautaire } from '#models/tva';
 import { Siren, formatIntFr } from '#utils/helpers';
-import useFetchTVA from 'hooks/fetch/tva';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const NoTVA = () => (
   <i>
@@ -81,7 +81,7 @@ const VerifyTVA: React.FC<{
   siren: Siren;
 }> = ({ tva, siren }) => {
   const { tvaNumber, mayHaveMultipleTVANumber } = tva;
-  const verification = useFetchTVA(siren);
+  const verification = useAPIRouteData('verify-tva', siren);
   if (isAPILoading(verification)) {
     return (
       <>

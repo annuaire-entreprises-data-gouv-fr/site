@@ -15,7 +15,7 @@ import {
 } from '#models/core/types';
 import { formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import useFetchRNEDocuments from 'hooks/fetch/RNE-documents';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const NoBilans = () => (
   <>Aucun comptes n’a été déposé au RNE pour cette entreprise.</>
@@ -24,7 +24,10 @@ const NoBilans = () => (
 const AgentBilansSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const documents = useFetchRNEDocuments(uniteLegale);
+  const documents = useAPIRouteData(
+    'espace-agent/rne/documents',
+    uniteLegale.siren
+  );
   return (
     <AsyncDataSectionClient
       title="Bilans"

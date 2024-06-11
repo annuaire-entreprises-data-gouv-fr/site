@@ -5,14 +5,17 @@ import { AsyncDataSectionClient } from '#components/section/data-section/client'
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import useFetchConformite from 'hooks/fetch/conformite';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import Conformite from './conformite';
 
 interface IProps {
   uniteLegale: IUniteLegale;
 }
 function ConformiteSection({ uniteLegale }: IProps) {
-  const conformite = useFetchConformite(uniteLegale);
+  const conformite = useAPIRouteData(
+    'espace-agent/conformite',
+    uniteLegale.siege.siret
+  );
 
   return (
     <PrintNever>
