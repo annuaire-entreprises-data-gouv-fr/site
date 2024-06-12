@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
-import { RenderMarkdownServerOnly } from '#components/markdown';
-import data from '#models/historique-modifications';
+import ChangelogWithFilters from './_components';
 
 export const metadata: Metadata = {
   title: 'Historique des changements',
@@ -11,41 +10,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Changelog() {
-  const changelog = data;
+export default async function ChangelogPage() {
   return (
     <>
-      <h1>Nouveautés</h1>
-      <p>
-        Découvrez les dernières fonctionnalités ajoutées au site internet&nbsp;:
-      </p>
-      <ul style={{ listStyleType: 'none', margin: '0', padding: '0' }}>
-        {changelog.map((change, index) => (
-          <li
-            key={index}
-            style={{
-              display: 'flex',
-              marginBottom: '10px',
-            }}
-          >
-            <div style={{ marginRight: '20px', flexShrink: '0' }}>
-              <strong>{change.date}</strong>
-            </div>
-            <div>
-              <RenderMarkdownServerOnly>
-                {change.title}
-              </RenderMarkdownServerOnly>
-              {change.description && (
-                <em>
-                  <RenderMarkdownServerOnly>
-                    {change.description}
-                  </RenderMarkdownServerOnly>
-                </em>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
+      <h1>Quoi de neuf sur l’Annuaire des Entreprises ?</h1>
+      <ChangelogWithFilters />
     </>
   );
 }

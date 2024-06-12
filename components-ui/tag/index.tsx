@@ -4,7 +4,14 @@ import styles from './styles.module.css';
 interface ITagProps {
   size?: 'medium' | 'small';
   id?: string;
-  color?: 'default' | 'error' | 'info' | 'new' | 'success' | 'warning';
+  color?:
+    | 'default'
+    | 'error'
+    | 'info'
+    | 'new'
+    | 'success'
+    | 'warning'
+    | 'agent';
   // title?: string;
   link?: {
     href: string;
@@ -59,4 +66,5 @@ const badgeColor = {
   warning: 'fr-badge--warning',
   info: 'fr-badge--info',
   success: 'fr-badge--success',
+  agent: 'fr-badge--purple-glycine',
 };

@@ -1,89 +1,128 @@
 ---
 - date: 14/05/2024
-  title: 'Nouvelles données dans l’espace agent public : carte de travaux publics FNTP, N° EORI, certificats Qualifelec, Qualibat et OPQIBI'
+  isProtected: true
+  body: |
+    Nouvelles données dans l’espace agent public : carte de travaux publics FNTP, N° EORI, certificats Qualifelec, Qualibat et OPQIBI
 - date: 24/03/2024
-  title: 'Nouvelle source de donnée : les Entreprises Sociales Inclusives'
+  body: |
+    Nouvelle source de données et nouveau filtre : les Entreprises Sociales Inclusives
 - date: 24/02/2024
-  title: Ajout du filtre géographique EPCI
+  body: |
+    Ajout du filtre géographique EPCI
 - date: 14/02/2024
-  title: 'Nouvelle source de donnée, [l’Annuaire du service public](https://lannuaire.service-public.fr/) :'
-  description: |
+  body: |
+    Nouvelle source de donnée, [l’Annuaire du service public](https://lannuaire.service-public.fr/) :
+
     Ajoute les dirigeants et les informations de contact des services publics (administration, collectivités etc.).
 - date: 10/08/2023
-  title: Possibilité de filtrer par chiffre d’affaires et résultat net
+  body: |
+    Possibilité de filtrer par chiffre d’affaires et résultat net
 - date: 03/08/2023
-  title: Possibilité de filtrer par région
+  body: |
+    Possibilité de filtrer par région
 - date: 04/07/2023
-  title: Publication des données financières des associations dans l'onglet "Données financières"
+  body: |
+    Publication des données financières des associations dans l'onglet "Données financières"
 - date: 07/06/2023
-  title: Publication des données financières des sociétés dans l'onglet "Données financières"
+  body: |
+    Publication des données financières des sociétés dans l'onglet "Données financières"
 - date: 26/04/2023
-  title: Ajout de filtres sur la taille d’entreprise et le nombre de salariés
-  description: |
+  body: |
+    Ajout de filtres sur la taille d’entreprise et le nombre de salariés
+
     Ajout du [filtre catégorie d'entreprise](https://sirene.fr/static-resources/htm/v_sommaire.htm#6) et du filtre [effectif salarié](https://sirene.fr/static-resources/htm/v_sommaire.htm#27)
 - date: 25/04/2023
-  title: 'Ajout de la page notre équipe'
+  body: |
+    Ajout de la page [équipe](/equipe)
 - date: 17/04/2023
-  title: 'Ajout des représentations équilibrées d’une entreprise - Egapro dans le moteur de recherche et la page Labels et certificats'
+  body: |
+    Ajout des représentations équilibrées d’une entreprise - Egapro dans le moteur de recherche et la page Labels et certificats
 - date: 04/04/2023
-  title: 'Ajout des certificats “Qualiopi - Organisme de formation” dans le moteur de recherche et la page Labels et certificats'
+  body: |
+    Ajout des certificats “Qualiopi - Organisme de formation” dans le moteur de recherche et la page Labels et certificats
 - date: 29/03/2023
-  title: 'Ajout des déclarations d’égalité entre les femmes et les hommes - Egapro dans le moteur de recherche et la page Labels et certificats'
+  body: |
+    Ajout des déclarations d’égalité entre les femmes et les hommes - Egapro dans le moteur de recherche et la page Labels et certificats
 - date: 28/03/2023
-  title: 'Ajout des informations "Professionnels du Bio" dans le moteur de recherche et la page Labels et certificats'
+  body: |
+    Ajout des informations "Professionnels du Bio" dans le moteur de recherche et la page Labels et certificats
 - date: 22/03/2023
-  title: 'La page justificatif d’immatriculation fait peau neuve :'
-  description: |
+  body: |
+    La page justificatif d’immatriculation fait peau neuve :
+
     Suite à la création du [Guichet unique](https://procedures.inpi.fr/?/) la base de donnée de référence pour prouver l’immatriculation d’une entreprise, retrouver ses bénéficiaires effectifs et ses dirigeants, est désormais le Registre National des Entreprises (RNE).
 
     Ces données sont accessibles via [l’API RNE de l’Inpi](/administration/inpi).
 - date: 22/03/2023
-  title: 'L’[Insee](/administration/insee) a mis en place une nouvelle politique de non-diffusion des données des entrepreneurs individuels :'
-  description: |
+  body: |
+    L’[Insee](/administration/insee) a mis en place une nouvelle politique de non-diffusion des données des entrepreneurs individuels :
+
     Désormais, seuls l’adresse et les nom et prénom de l’entrepreneur ne sont pas diffusés. Le reste des informations sont publiques ([en savoir plus](https://www.insee.fr/fr/information/6683782)).
 - date: 09/02/2023
-  title: "Enrichissement de la section association : agréments administratif, éligibilité CEC, information de contact (email, site web, tel), association d'intérêt public et régime d’association."
+  body: |
+    "Enrichissement de la section association : agréments administratif, éligibilité CEC, information de contact (email, site web, tel), association d'intérêt public et régime d’association."
 - date: 27/01/2023
-  title: Nouveaux filtres de type de structure et de Labels et certificats.
+  body: |
+    Nouveaux filtres de type de structure et de Labels et certificats.
 - date: 26/01/2023
-  title: La sélection multiple fait son entrée dans les filtres d'activité et de code NAF.
+  body: |
+    La sélection multiple fait son entrée dans les filtres d'activité et de code NAF.
 - date: 25/01/2023
-  title: Nouveaux filtres géographiques. Le site se souvient désormais de vos dernières recherches !
+  body: |
+    Nouveaux filtres géographiques. Le site se souvient désormais de vos dernières recherches !
 - date: 02/01/2023
-  title: Ajout de l’onglet Établissements Scolaires avec la liste des établissements UAI
+  body: |
+    Ajout de l’onglet Établissements Scolaires avec la liste des établissements UAI
 - date: 20/12/2022
-  title: Ajout de l'onglet labels & certificats avec les entreprises RGE, ESS, et Spectacle Vivant
+  body: |
+    Ajout de l'onglet labels & certificats avec les entreprises RGE, ESS, et Spectacle Vivant
 - date: 08/12/2022
-  title: Ajout des dépôts de comptes des associations, à retrouver sur l'onglet "Annonces"
+  body: |
+    Ajout des dépôts de comptes des associations, à retrouver sur l'onglet "Annonces"
 - date: 02/12/2022
-  title: Gestion des collectivités territoriales. Ajout des codes géographiques des communes, départements et régions, ainsi que des élus
+  body: |
+    Gestion des collectivités territoriales. Ajout des codes géographiques des communes, départements et régions, ainsi que des élus
 - date: 25/11/2022
-  title: 'Création de badges distinguants les différents types de personnes morales : Administration publique, Entreprise individuelle, Association'
+  body: |
+    'Création de badges distinguants les différents types de personnes morales : Administration publique, Entreprise individuelle, Association'
 - date: 17/11/2022
-  title: Ajout des dirigeant(e)s d’entreprise dans la recherche
+  body: |
+    Ajout des dirigeant(e)s d’entreprise dans la recherche
 - date: 12/11/2022
-  title: Ajout d’un filtre géographique avec auto complétion
+  body: |
+    Ajout d’un filtre géographique avec auto complétion
 - date: 19/09/2022
-  title: Refonte de la page [Questions fréquentes](/faq)
+  body: |
+    Refonte de la page [Questions fréquentes](/faq)
 - date: 02/09/2022
-  title: Mise en place d’une vérification dynamique du numéro de TVA par le [VIES](/administration/vies)
+  body: |
+    Mise en place d’une vérification dynamique du numéro de TVA par le [VIES](/administration/vies)
 - date: 29/08/2022
-  title: Nouvelle mise en page de la liste des établissements
+  body: |
+    Nouvelle mise en page de la liste des établissements
 - date: 17/08/2022
-  title: Ajout des mentions "ancien siège social" pour les établissements concernés
+  body: |
+    Ajout des mentions "ancien siège social" pour les établissements concernés
 - date: 17/08/2022
-  title: Refonte de la page "Sources de données & statut des API"
+  body: |
+    Refonte de la page "Sources de données & statut des API"
 - date: 02/08/2022
-  title: Utilisation systématique des majuscules pour les dénominations et enseigne
+  body: |
+    Utilisation systématique des majuscules pour les dénominations et enseigne
 - date: 29/06/2022
-  title: Ajout de l’état administratif "en sommeil"
+  body: |
+    Ajout de l’état administratif "en sommeil"
 - date: 17/06/2022
-  title: Ajout du filtre par département dans la recherche avancée
+  body: |
+    Ajout du filtre par département dans la recherche avancée
 - date: 09/06/2022
-  title: Ajout de raccourcis de navigation dans la page "Informations Générales"
+  body: |
+    Ajout de raccourcis de navigation dans la page "Informations Générales"
 - date: 09/06/2022
-  title: 'Mise en place de filtres de recherche avancés :'
-  description: |
+  body: |
+    Mise en place de filtres de recherche avancés :
+
     Vous pouvez désormais affiner vos résultats de recherche par code postal et par domaine d'activité.
 - date: 08/06/2022
-  title: Création d’une page "Nouveautés"
+  body: |
+    Création d’une page "Nouveautés"
