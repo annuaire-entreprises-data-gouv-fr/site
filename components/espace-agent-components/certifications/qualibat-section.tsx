@@ -17,7 +17,7 @@ export const QualibatSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
       title="Certificat Qualibat"
       id="qualibat"
       isProtected
-      sources={[EAdministration.DINUM]}
+      sources={[EAdministration.QUALIBAT]}
       notFoundInfo={
         <>
           Cette entreprise n’a pas de{' '}

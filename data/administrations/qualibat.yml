@@ -1,0 +1,14 @@
+slug: qualibat
+short: QUALIBAT
+long: QUALIBAT
+site: https://www.qualibat.com/
+contact: https://www.qualibat.com/contact/
+estServicePublic: false
+logoType: portrait
+dataSources:
+  - label: Liste des entreprises QUALIBAT
+    apiSlug: api-entreprise
+    data:
+      - label: Certification QUALIBAT
+description: |
+  QUALIBAT est une association qui a pour mission la qualification des professionnels de la construction.
