@@ -1,11 +1,24 @@
-import { IMarkdown } from '#components/markdown/parse-markdown';
+import parseMarkdownSync, {
+  IMarkdown,
+} from '#components/markdown/parse-markdown';
 /** @ts-ignore */
 import data from '../../data/changelog.yml';
 
 export type IChangelog = {
   date: string;
-  title: IMarkdown;
-  description?: IMarkdown;
+  body: IMarkdown;
+  isProtected?: boolean;
+  htmlBody?: string;
 };
 
-export default data as IChangelog[];
+const loadData = (): IChangelog[] => {
+  return (data as IChangelog[]).map((d) => {
+    const htmlBody = parseMarkdownSync(d.body).html;
+    return {
+      ...d,
+      htmlBody,
+    };
+  });
+};
+
+export const changelogData = loadData();

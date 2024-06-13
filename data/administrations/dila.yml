@@ -7,15 +7,15 @@ contact: https://www.dila.premier-ministre.gouv.fr/contacts/nous-contacter
 apiMonitors:
   - apiName: API BODACC
     apiSlug: bodacc
-    apigouvLink: https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc
+    apiDocumentationLink: https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc
     updownIoId: wd04
   - apiName: API Annonces et comptes annuels des associations (JOAFE)
     apiSlug: joafe
-    apigouvLink: https://api.gouv.fr/les-api/api-annonces-comptes-annuels-associations-joafe
+    apiDocumentationLink: https://api.gouv.fr/les-api/api-annonces-comptes-annuels-associations-joafe
     updownIoId: 8pjy
   - apiName: API Annuaire des services publics
     apiSlug: annuaire-administration
-    apigouvLink: https://api.gouv.fr/les-api/api-annuaire-administration-services-publics
+    apiDocumentationLink: https://api.gouv.fr/les-api/api-annuaire-administration-services-publics
     updownIoId: ly69
 dataSources:
   - label: Bulletin officiel des annonces civiles et commerciales (BODACC)

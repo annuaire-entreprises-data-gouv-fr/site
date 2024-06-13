@@ -94,7 +94,7 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
   isOnline,
   series,
   uptime,
-  apigouvLink,
+  apiDocumentationLink,
 }) => (
   <>
     {!series ? (
@@ -141,12 +141,16 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
           </div>
         </div>
 
-        {apigouvLink && (
+        {apiDocumentationLink && (
           <i>
             <br />
             Envie de réutiliser cette API ?{' '}
-            {apigouvLink && (
-              <a href={apigouvLink} target="_blank" rel="noreferrer noopener">
+            {apiDocumentationLink && (
+              <a
+                href={apiDocumentationLink}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 Consulter la documentation
               </a>
             )}

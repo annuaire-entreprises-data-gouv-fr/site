@@ -20,4 +20,7 @@ export enum EAdministration {
   URSSAF = 'urssaf',
   MSA = 'msa',
   FNTP = 'fntp',
+  QUALIFELEC = 'qualifelec',
+  QUALIBAT = 'qualibat',
+  OPQIBI = 'opqibi',
 }

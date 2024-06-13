@@ -33,7 +33,7 @@ export function QualifelecSection({
           .
         </>
       }
-      sources={[EAdministration.DINUM]}
+      sources={[EAdministration.QUALIFELEC]}
       data={qualifelec}
     >
       {(qualifelec) => (

@@ -6,6 +6,7 @@ contact: https://www.urssaf.fr/accueil/contacter-urssaf.html
 logoType: portrait
 dataSources:
   - label: Statut des assurés auprès de l'URSSAF Caisse nationale
+    apiSlug: api-entreprise
     data:
       - label: Attestation de vigilance
 description: |

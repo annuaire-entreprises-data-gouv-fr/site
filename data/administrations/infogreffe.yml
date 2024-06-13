@@ -3,13 +3,11 @@ short: Infogreffe
 long: Infogreffe
 site: https://www.infogreffe.fr/
 contact: https://www.infogreffe.fr/contact-infogreffe
-# apiMonitors:
-#   - apiName: API EORI
-#     apiSlug: eori
 estServicePublic: false
 logoType: portrait
 dataSources:
   - label: Registre du Commerce et des Sociétés
+    apiSlug: api-entreprise
     data:
       - label: mandataires RCS
 description: |

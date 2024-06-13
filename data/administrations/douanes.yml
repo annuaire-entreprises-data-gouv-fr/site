@@ -3,12 +3,10 @@ short: DOUANES
 long: Direction Générale des Douanes
 site: https://www.douane.gouv.fr/
 contact: https://www.douane.gouv.fr/formulaire-infos-douane-service
-# apiMonitors:
-#   - apiName: API EORI
-#     apiSlug: eori
 logoType: portrait
 dataSources:
   - label: EORI
+    apiSlug: api-entreprise
     data:
       - label: numéro EORI
 description: |

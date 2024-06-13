@@ -32,7 +32,7 @@ export const OpqibiSection: React.FC<{
           .
         </>
       }
-      sources={[EAdministration.DINUM]}
+      sources={[EAdministration.OPQIBI]}
       data={opqibi}
     >
       {(opqibi) => (
