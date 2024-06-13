@@ -28,7 +28,7 @@ const loadDataToModify = () => {
 };
 
 /**
- * List the different data tht can be modifiedby users - useful in FAQ
+ * List the different data that can be modified by users - useful in FAQ
  * @param slug
  * @returns
  */
