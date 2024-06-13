@@ -60,7 +60,7 @@
     Désormais, seuls l’adresse et les nom et prénom de l’entrepreneur ne sont pas diffusés. Le reste des informations sont publiques ([en savoir plus](https://www.insee.fr/fr/information/6683782)).
 - date: 09/02/2023
   body: |
-    "Enrichissement de la section association : agréments administratif, éligibilité CEC, information de contact (email, site web, tel), association d'intérêt public et régime d’association."
+    "Enrichissement de la section association : agréments administratifs, éligibilité CEC, informations de contact (email, site web, tel), association d'intérêt public et régime d’association."
 - date: 27/01/2023
   body: |
     Nouveaux filtres de type de structure et de Labels et certificats.
