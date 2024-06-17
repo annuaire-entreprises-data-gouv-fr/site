@@ -5,6 +5,7 @@ site: https://www.impots.gouv.fr/presentation-de-la-dgfip-overview-dgfip
 contact: https://www.impots.gouv.fr/contacts
 dataSources:
   - label: Statut fiscal des entreprises
+    apiSlug: api-entreprise
     data:
       - label: Attestation de conformité fiscale
 logoType: portrait

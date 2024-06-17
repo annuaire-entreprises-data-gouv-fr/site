@@ -1,0 +1,13 @@
+slug: opqibi
+short: OPBQIBI
+long: Organisme de Qualification de l'Ingénierie
+site: https://www.opqibi.com/
+contact: https://www.opqibi.com/contact
+estServicePublic: false
+dataSources:
+  - label: Liste des entreprises certifiées OPQIBI
+    apiSlug: api-entreprise
+    data:
+      - label: Certification OPQIBI
+description: |
+  OPQIBI est une association qui a pour mission la qualification des entreprises de l'ingénierie.

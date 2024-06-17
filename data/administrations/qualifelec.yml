@@ -1,0 +1,13 @@
+slug: qualifelec
+short: Qualifelec
+long: Qualifelec
+site: https://www.qualifelec.fr/
+contact: https://www.qualifelec.fr/contact/
+estServicePublic: false
+dataSources:
+  - label: Liste des entreprises Qualifelec
+    apiSlug: api-entreprise
+    data:
+      - label: Certificat Qualifelec
+description: |
+  Qualifelec est une association professionnelle qui a pour mission la qualification des entreprises du génie électrique, énergétique et numérique.
