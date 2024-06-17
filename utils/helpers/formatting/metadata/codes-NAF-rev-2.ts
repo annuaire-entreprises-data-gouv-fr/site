@@ -727,7 +727,7 @@ export const codesNAFRev2 = {
   '77.39Z':
     'Location et location-bail d’autres machines, équipements et biens matériels n.c.a.',
   '77.40Z':
-    'Location-bail de propriété intellectuelle et de produits similaires, à l’exception des œuvres soumises à ,copyright',
+    'Location-bail de propriété intellectuelle et de produits similaires, à l’exception des œuvres soumises à copyright',
   '78.10Z': 'Activités des agences de placement de main-d’œuvre',
   '78.20Z': 'Activités des agences de travail temporaire',
   '78.30Z': 'Autre mise à disposition de ressources humaines',
