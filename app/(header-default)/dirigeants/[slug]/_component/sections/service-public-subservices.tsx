@@ -4,11 +4,13 @@ import NonRenseigne from '#components/non-renseigne';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
+import {
+  IDataFetchingState,
+  hasAnyError,
+  isDataLoading,
+} from '#models/data-fetching';
 import { IServicePublic } from '#models/service-public';
 import { useFetchServicePublicSubServices } from 'hooks/fetch/service-public-subservices';
 
@@ -78,11 +80,12 @@ export default function SubServicesSection({
   servicePublic,
   uniteLegale,
 }: {
-  servicePublic: IServicePublic | IAPINotRespondingError;
+  servicePublic: IServicePublic | IAPINotRespondingError | IDataFetchingState;
   uniteLegale: IUniteLegale;
 }) {
   if (
-    isAPINotResponding(servicePublic) ||
+    isDataLoading(servicePublic) ||
+    hasAnyError(servicePublic) ||
     servicePublic.subServicesId?.length === 0
   ) {
     return null;

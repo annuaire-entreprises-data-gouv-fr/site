@@ -13,6 +13,7 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
@@ -23,10 +24,12 @@ const NoBilans = () => (
 
 const AgentBilansSection: React.FC<{
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
   const documents = useAPIRouteData(
     'espace-agent/rne/documents',
-    uniteLegale.siren
+    uniteLegale.siren,
+    session
   );
   return (
     <AsyncDataSectionClient

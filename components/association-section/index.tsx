@@ -132,7 +132,11 @@ const AssociationSection = ({
 }) => {
   const { idAssociation = '' } = uniteLegale.association;
 
-  const association = useAPIRouteData('association', uniteLegale.siren);
+  const association = useAPIRouteData(
+    'association',
+    uniteLegale.siren,
+    session
+  );
 
   return (
     <>

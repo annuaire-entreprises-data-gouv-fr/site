@@ -1,12 +1,16 @@
 import { HttpNotFound } from '#clients/exceptions';
 import { Loader } from '#components-ui/loader';
 import { INPI, INSEE, MI } from '#components/administrations';
-import { IAPILoading, isAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
+import {
+  IDataFetchingState,
+  hasAnyError,
+  isDataLoading,
+} from '#models/data-fetching';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { useTimeout } from 'hooks';
 
@@ -45,7 +49,7 @@ type IDirigeantSummaryProps = {
   immatriculationRNE:
     | IImmatriculationRNE
     | IAPINotRespondingError
-    | IAPILoading;
+    | IDataFetchingState;
   uniteLegale: IUniteLegale;
 };
 
@@ -55,7 +59,7 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
 }) => {
   const summaries = [];
   const after100ms = useTimeout(100);
-  if (isAPILoading(immatriculationRNE)) {
+  if (isDataLoading(immatriculationRNE)) {
     if (!after100ms) {
       return null;
     }
@@ -65,7 +69,7 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
       </span>
     );
   } else {
-    if (!isAPINotResponding(immatriculationRNE)) {
+    if (!hasAnyError(immatriculationRNE)) {
       const dirigeantsCount = (immatriculationRNE?.dirigeants || []).length;
       summaries.push(
         <a href="#rne-dirigeants">

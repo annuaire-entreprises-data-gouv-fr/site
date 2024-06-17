@@ -17,7 +17,7 @@ export function DirigeantInformation({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
-  const immatriculationRNE = useAPIRouteData('rne', uniteLegale.siren);
+  const immatriculationRNE = useAPIRouteData('rne', uniteLegale.siren, session);
 
   return (
     <>
@@ -32,6 +32,7 @@ export function DirigeantInformation({
         />
       ) : (
         <DirigeantsProtectedSection
+          session={session}
           uniteLegale={uniteLegale}
           immatriculationRNE={immatriculationRNE}
         />

@@ -2,11 +2,11 @@
 
 import AdministrationNotRespondingMessage from '#components/administration-not-responding/message';
 import { administrationsMetaData } from '#models/administrations';
-import { IAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
+import { IDataFetchingState } from '#models/data-fetching';
 
 export type IDataSectionContentProps<T> = {
   data: IAPINotRespondingError | T;
@@ -15,7 +15,9 @@ export type IDataSectionContentProps<T> = {
   children: (data: T) => JSX.Element;
 };
 
-export function DataSectionContent<T extends Exclude<unknown, IAPILoading>>({
+export function DataSectionContent<
+  T extends Exclude<unknown, IDataFetchingState.LOADING>
+>({
   data,
   notFoundInfo,
   children,

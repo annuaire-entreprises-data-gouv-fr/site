@@ -5,16 +5,20 @@ import { Icon } from '#components-ui/icon/wrapper';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 export default function CarteProfessionnelleTPSection({
   uniteLegale,
+  session,
 }: {
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 }) {
   const carteProfessionnelleTravauxPublics = useAPIRouteData(
     'espace-agent/carte-professionnelle-TP',
-    uniteLegale.siege.siret
+    uniteLegale.siege.siret,
+    session
   );
 
   return (

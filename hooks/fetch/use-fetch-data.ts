@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { APILoadingFactory, IAPILoading } from '#models/api-loading';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
+import { IDataFetchingState } from '#models/data-fetching';
 import { RequestAbortedDuringUnloadException } from '#utils/network/frontend';
 
 type IFetchDataType<T> = {
@@ -24,8 +24,8 @@ export function useFetchData<T>(
   dependancies: Array<unknown>
 ) {
   const [response, setResponse] = useState<
-    T | IAPINotRespondingError | IAPILoading
-  >(APILoadingFactory());
+    T | IAPINotRespondingError | IDataFetchingState.LOADING
+  >(IDataFetchingState.LOADING);
 
   useEffect(() => {
     const fetchAndTreatResponse = async () => {

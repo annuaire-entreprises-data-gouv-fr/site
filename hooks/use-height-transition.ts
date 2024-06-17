@@ -11,7 +11,7 @@ export function useHeightTransition({ animateAppear = false } = {}) {
   const animatedStyle = useSpring(
     prefersReducedMotion || (!animateAppear && height === undefined)
       ? {}
-      : { height: height || 0 }
+      : { height: height || 0, config: { tension: 210, friction: 20 } }
   );
 
   return { ref, animatedStyle } as const;

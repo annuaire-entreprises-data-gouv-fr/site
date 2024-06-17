@@ -4,15 +4,11 @@ import { LineChart } from '#components/chart/line';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { isAPILoading } from '#models/api-loading';
-import {
-  APINotRespondingFactory,
-  isAPINotResponding,
-} from '#models/api-not-responding';
 import constants from '#models/constants';
 import { IAssociation } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatCurrency } from '#utils/helpers';
-import { useFetchAssociation } from 'hooks/fetch/association';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -29,16 +25,10 @@ const colorCA = constants.chartColors[4];
  */
 export const FinancesAssociationSection: React.FC<{
   uniteLegale: IAssociation;
-}> = ({ uniteLegale }) => {
-  const data = useFetchAssociation(uniteLegale.siren);
-
-  const financesAssociation =
-    (!!data &&
-      !isAPILoading(data) &&
-      !isAPINotResponding(data) &&
-      data?.bilans.length > 0 &&
-      data?.bilans) ||
-    APINotRespondingFactory(EAdministration.MI, 404);
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
+  const data = useAPIRouteData('association', uniteLegale.siren, session);
+  if (!data) return null;
 
   return (
     <DataSectionClient

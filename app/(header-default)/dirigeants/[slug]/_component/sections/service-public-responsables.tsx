@@ -5,7 +5,6 @@ import NonRenseigne from '#components/non-renseigne';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { isAPILoading } from '#models/api-loading';
 import { IUniteLegale } from '#models/core/types';
 import { useFetchServicePublic } from 'hooks/fetch/service-public';
 import SubServicesSection from './service-public-subservices';
@@ -106,12 +105,11 @@ export default function ResponsablesServicePublicSection({
           </>
         )}
       </DataSectionClient>
-      {!isAPILoading(servicePublic) && (
-        <SubServicesSection
-          servicePublic={servicePublic}
-          uniteLegale={uniteLegale}
-        />
-      )}
+
+      <SubServicesSection
+        servicePublic={servicePublic}
+        uniteLegale={uniteLegale}
+      />
     </>
   );
 }

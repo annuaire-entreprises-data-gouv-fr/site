@@ -120,9 +120,9 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         {hasRights(session, EScope.protectedCertificats) && (
           <>
             <HorizontalSeparator />
-            <QualibatSection uniteLegale={uniteLegale} />
-            <QualifelecSection uniteLegale={uniteLegale} />
-            <OpqibiSection uniteLegale={uniteLegale} />
+            <QualibatSection session={session} uniteLegale={uniteLegale} />
+            <QualifelecSection session={session} uniteLegale={uniteLegale} />
+            <OpqibiSection session={session} uniteLegale={uniteLegale} />
           </>
         )}
       </div>
