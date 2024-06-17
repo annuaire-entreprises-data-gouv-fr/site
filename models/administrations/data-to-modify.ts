@@ -1,9 +1,9 @@
 import { slugify } from '#utils/helpers';
-import { administrationsMetaData } from '.';
+import { administrationsMetaData, allAPI } from '.';
 
 const loadDataToModify = () => {
-  return Object.values(administrationsMetaData).flatMap(
-    ({ dataSources, contact, site, long, short }) => {
+  return Object.values(administrationsMetaData)
+    .flatMap(({ dataSources, contact, site, long, short }) => {
       return dataSources.flatMap((datasource) => {
         return (datasource.data || []).map(
           ({ label, form = '', targets = [] }) => {
@@ -13,6 +13,7 @@ const loadDataToModify = () => {
               slug,
               dataSource: datasource.label,
               datagouvLink: datasource.datagouvLink,
+              apiSlug: datasource.apiSlug,
               targets,
               form,
               contact,
@@ -23,8 +24,11 @@ const loadDataToModify = () => {
           }
         );
       });
-    }
-  );
+    })
+    .filter((d) => {
+      const api = allAPI[d.apiSlug];
+      return !api?.isProtected;
+    });
 };
 
 export const getDataToModify = (slug: string) => {
