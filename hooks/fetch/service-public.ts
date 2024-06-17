@@ -6,13 +6,13 @@ import {
   getServicePublicByUniteLegale,
 } from '#models/service-public';
 import logErrorInSentry from '#utils/sentry';
-import { useFetchData } from './use-fetch-data';
+import { useFetchExternalData } from './use-fetch-data';
 
 export function useFetchServicePublic(
   uniteLegale: IUniteLegale,
   etablissement?: IEtablissement
 ) {
-  return useFetchData(
+  return useFetchExternalData(
     {
       fetchData: async () => {
         if (etablissement) {
@@ -23,10 +23,6 @@ export function useFetchServicePublic(
       },
       administration: EAdministration.DILA,
       logError: (e: any) => {
-        if (e.status) {
-          // We already log error server side
-          return;
-        }
         logErrorInSentry(
           new FetchRessourceException({
             ressource: 'AnnuaireServicePublic',

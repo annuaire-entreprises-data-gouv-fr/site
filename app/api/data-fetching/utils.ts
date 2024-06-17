@@ -32,7 +32,7 @@ export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
       throw new APIRouteError(
         'Antibot Activated : user is a bot',
         routeAndSlug,
-        403
+        401
       );
     }
 
@@ -41,7 +41,7 @@ export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
       throw new APIRouteError(
         'Antibot Activated : user has not visited a page recently',
         routeAndSlug,
-        403
+        401
       );
     }
 
@@ -65,7 +65,7 @@ export class APIRouteError extends Exception {
   constructor(
     message: string,
     context: { route: string; slug: string },
-    public status: 404 | 403 | 500,
+    public status: 404 | 403 | 500 | 401,
     cause?: any
   ) {
     super({

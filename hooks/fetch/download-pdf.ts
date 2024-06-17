@@ -3,12 +3,12 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import { httpGet } from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
-import { useFetchData } from './use-fetch-data';
+import { useFetchExternalData } from './use-fetch-data';
 
 const is404 = (msg: string) => msg.indexOf('Siren non existant') !== 0;
 
 export function usePDFDownloader(pdfLink: string) {
-  return useFetchData(
+  return useFetchExternalData(
     {
       fetchData: async () => {
         try {

@@ -51,7 +51,7 @@ export function AsyncDataSectionClient<T>({
   if (hasFetchError(data)) {
     return (
       <Section {...props}>
-        <DataFetchErrorExplanation />
+        <DataFetchErrorExplanation fetchErrorType={data} />
       </Section>
     );
   }

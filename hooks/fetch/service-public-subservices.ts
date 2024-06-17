@@ -4,13 +4,13 @@ import { IUniteLegale } from '#models/core/types';
 import { FetchRessourceException } from '#models/exceptions';
 import { IServicePublic } from '#models/service-public';
 import logErrorInSentry from '#utils/sentry';
-import { useFetchData } from './use-fetch-data';
+import { useFetchExternalData } from './use-fetch-data';
 
 export function useFetchServicePublicSubServices(
   servicePublic: IServicePublic,
   uniteLegale: IUniteLegale
 ) {
-  return useFetchData(
+  return useFetchExternalData(
     {
       fetchData: () =>
         clientAnnuaireServicePublicByIds(servicePublic.subServicesId),

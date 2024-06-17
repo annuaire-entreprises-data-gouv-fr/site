@@ -3,11 +3,11 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
-import { useFetchData } from './use-fetch-data';
+import { useFetchExternalData } from './use-fetch-data';
 
 export function useFetchFinancesSociete(uniteLegale: IUniteLegale) {
   const { siren } = uniteLegale;
-  return useFetchData(
+  return useFetchExternalData(
     {
       fetchData: () => clientBilansFinanciers(siren),
       administration: EAdministration.MEF,

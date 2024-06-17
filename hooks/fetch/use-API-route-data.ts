@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IDataFetchingState } from '#models/data-fetching';
+import { InternalError } from '#models/exceptions';
 import { hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { httpGet } from '#utils/network';
@@ -7,7 +8,7 @@ import {
   FailToFetchError,
   RequestAbortedDuringUnloadException,
 } from '#utils/network/frontend';
-import logErrorInSentry from '#utils/sentry';
+import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { APIPath, RouteResponse } from 'app/api/data-fetching/routes-handlers';
 import { APIRoutesScopes } from 'app/api/data-fetching/routes-scopes';
 
@@ -39,26 +40,32 @@ export function useAPIRouteData<T extends APIPath>(
             '/api/data-fetching/' + route + '/' + slug
           )
         );
-      } catch (e: any) {
+      } catch (e: unknown) {
         if (e instanceof RequestAbortedDuringUnloadException) {
           return;
         }
-        if (!e.status) {
-          setResponse(IDataFetchingState.ERROR);
-          // Errors that are not already logged server side
-          logErrorInSentry(
-            new FailToFetchError({
-              context: {
-                slug: slug,
-                page: '/api/data-fetching/' + route,
-              },
-              cause: e,
-            })
-          );
+        if (e instanceof FailToFetchError) {
+          e.context.slug = slug;
+          e.context.page = '/api/data-fetching/' + route;
+          if (!e.status || [408, 504, 429, 401].includes(e.status)) {
+            logWarningInSentry(e);
+            setResponse(IDataFetchingState.CONNECTIVITY_ERROR);
+            return;
+          }
+          logErrorInSentry(e);
+          setResponse(IDataFetchingState.MODEL_ERROR);
+          return;
         }
-        throw e;
+        logErrorInSentry(
+          new InternalError({
+            cause: e,
+            message: "Ce type d'erreur n'est pas géré",
+          })
+        );
+        setResponse(IDataFetchingState.MODEL_ERROR);
       }
     };
+
     fetchAndTreatResponse();
   }, [slug, route, session]);
   return response;

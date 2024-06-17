@@ -86,7 +86,8 @@ export default function SubServicesSection({
   if (
     isDataLoading(servicePublic) ||
     hasAnyError(servicePublic) ||
-    servicePublic.subServicesId?.length === 0
+    !servicePublic.subServicesId ||
+    servicePublic.subServicesId.length === 0
   ) {
     return null;
   }
