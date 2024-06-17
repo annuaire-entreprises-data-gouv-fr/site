@@ -20,7 +20,7 @@ export type IAssociationResponse = {
     id: number; //39562;
     subv_cause: string; //'interet departemental des actions sociales et de santé';
     aides_3ans: number; //72110;
-    id_siret: string; //'77567227221138';
+    id_siret: number | string; //'77567227221138';
     annee: number; //2019;
   }[];
   etablissement?: Etablissement[];

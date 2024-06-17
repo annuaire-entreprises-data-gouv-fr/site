@@ -3,6 +3,7 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ComptesBodacc from '#components/annonces-section/comptes/bodacc';
 import { ComptesAssociationSection } from '#components/annonces-section/comptes/dca';
 import DocumentBilansSection from '#components/espace-agent-components/documents/bilans-walled';
+import { FinancesAssociationSection } from '#components/finances-section/association';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -48,7 +49,9 @@ const FinancePage = async (props: AppRouterProps) => {
           session={session}
         />
         {/* We use to have finances for association but data disappeared from open data API. Code still exists in <FinancesAssociationSection /> */}
-        {isAssociation(uniteLegale) ? null : (
+        {isAssociation(uniteLegale) ? (
+          <FinancesAssociationSection uniteLegale={uniteLegale} />
+        ) : (
           <>
             <FinancesSocieteSection uniteLegale={uniteLegale} />
             <HorizontalSeparator />
