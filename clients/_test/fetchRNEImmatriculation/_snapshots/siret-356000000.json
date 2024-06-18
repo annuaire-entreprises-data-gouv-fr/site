@@ -45,6 +45,27 @@
         "role": "Administrateur"
       },
       {
+        "nom": "Lautridou",
+        "prenom": "JEAN-YVES",
+        "role": "Administrateur représentant du personnel",
+        "dateNaissancePartial": "1962-06",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "Carnet (Gaubert)",
+        "prenom": "HELENE",
+        "role": "Administrateur représentant des usagers",
+        "dateNaissancePartial": "1952-02",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "Jonon (De Sio)",
+        "prenom": "BRIGITTE",
+        "role": "Administrateur représentant du personnel",
+        "dateNaissancePartial": "1960-08",
+        "dateNaissanceFull": ""
+      },
+      {
         "siren": "",
         "denomination": "CAISSE DES DEPOTS ET CONSIGNATIONS",
         "natureJuridique": "Etablissement public national",
@@ -65,6 +86,34 @@
         "dateNaissanceFull": ""
       },
       {
+        "nom": "Renaud",
+        "prenom": "YVES",
+        "role": "Administrateur représentant du personnel",
+        "dateNaissancePartial": "1956-01",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "Dumans",
+        "prenom": "JACQUES",
+        "role": "Administrateur représentant du personnel",
+        "dateNaissancePartial": "1954-12",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "Bard",
+        "prenom": "ALAIN",
+        "role": "Administrateur représentant du personnel",
+        "dateNaissancePartial": "1961-11",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "Rivard (Pianet)",
+        "prenom": "ANNETTE",
+        "role": "Administrateur représentant du personnel",
+        "dateNaissancePartial": "1967-05",
+        "dateNaissanceFull": ""
+      },
+      {
         "nom": "Malrieu (Mairot)",
         "prenom": "FRANCOISE",
         "role": "Administrateur",
@@ -78,10 +127,30 @@
         "role": "Commissaire aux comptes suppléant"
       },
       {
+        "siren": "672006483",
+        "denomination": "PRICEWATERHOUSECOOPERS AUDIT",
+        "natureJuridique": "Société anonyme",
+        "role": "Commissaire aux comptes titulaire"
+      },
+      {
+        "nom": "Ajdari",
+        "prenom": "MARTIN",
+        "role": "Administrateur",
+        "dateNaissancePartial": "1968-12",
+        "dateNaissanceFull": ""
+      },
+      {
         "nom": "Georghiou",
         "prenom": "JEAN, CHRISTOPHE",
         "role": "Commissaire aux comptes suppléant",
         "dateNaissancePartial": "1965-05",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "Mantel (Moulierac)",
+        "prenom": "SOPHIE",
+        "role": "Administrateur",
+        "dateNaissancePartial": "1965-10",
         "dateNaissanceFull": ""
       },
       {
@@ -92,10 +161,31 @@
         "dateNaissanceFull": ""
       },
       {
+        "nom": "Le Brun",
+        "prenom": "AGNES",
+        "role": "Administrateur représentant des communes et de leurs groupements",
+        "dateNaissancePartial": "1961-12",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "De Mollerat Du Jeu (Chapron)",
+        "prenom": "VIRGINIE",
+        "role": "Administrateur",
+        "dateNaissancePartial": "1961-10",
+        "dateNaissanceFull": ""
+      },
+      {
         "nom": "Sichel",
         "prenom": "OLIVIER",
         "role": "Administrateur",
         "dateNaissancePartial": "1967-04",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "Morvan",
+        "prenom": "SERGE",
+        "role": "Administrateur",
+        "dateNaissancePartial": "1959-09",
         "dateNaissanceFull": ""
       },
       {
@@ -124,6 +214,13 @@
         "prenom": "OLIVIER",
         "role": "Administrateur",
         "dateNaissancePartial": "1963-10",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "Fernandes",
+        "prenom": "VIRGINIE",
+        "role": "Administrateur",
+        "dateNaissancePartial": "1974-09",
         "dateNaissanceFull": ""
       },
       {
@@ -164,6 +261,13 @@
       {
         "nom": "Fleurence (Legain)",
         "prenom": "ISABELLE",
+        "role": "Administrateur représentant du personnel",
+        "dateNaissancePartial": "1964-09",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "Fimbel",
+        "prenom": "FLORENCE",
         "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1964-09",
         "dateNaissanceFull": ""

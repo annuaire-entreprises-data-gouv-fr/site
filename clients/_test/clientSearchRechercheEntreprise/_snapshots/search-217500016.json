@@ -42,8 +42,8 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "5003",
-              "5021"
+              "5021",
+              "5003"
             ],
             "idOrganismeFormation": [],
             "idRge": [],
@@ -93,8 +93,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "5003",
-                  "5021"
+                  "5021",
+                  "5003"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [],
@@ -136,8 +136,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "5003",
-                  "5021"
+                  "5021",
+                  "5003"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [],
@@ -151,7 +151,7 @@
           "unknown": [],
           "closed": [],
           "nombreEtablissementsOuverts": 1,
-          "nombreEtablissements": 3007,
+          "nombreEtablissements": 3011,
           "usePagination": true,
           "currentEtablissementPage": 1
         },
@@ -160,7 +160,7 @@
         "dateCreation": "1983-03-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-04-23T10:48:35.740",
+        "dateMiseAJourInsee": "2024-06-13T09:48:46.612",
         "dateMiseAJourInpi": "",
         "dateDebutActivite": "",
         "trancheEffectif": "53",
@@ -1500,10 +1500,17 @@
             }
           ]
         },
+        "listeIdcc": [
+          "5021",
+          "5003",
+          "5022",
+          "1043",
+          "9999"
+        ],
         "conventionsCollectives": {},
         "matchingEtablissements": [],
-        "nombreEtablissements": 3007,
-        "nombreEtablissementsOuverts": 2900,
+        "nombreEtablissements": 3011,
+        "nombreEtablissementsOuverts": 2904,
         "dirigeants": []
       }
     ]

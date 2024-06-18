@@ -6,237 +6,9 @@
   },
   "result": {
     "currentPage": 1,
-    "resultCount": 5,
+    "resultCount": 4,
     "pageCount": 1,
     "results": [
-      {
-        "siren": "817883150",
-        "oldSiren": "817883150",
-        "siege": {
-          "siren": "817883150",
-          "siret": "81788315000010",
-          "oldSiret": "",
-          "etatAdministratif": "en activité",
-          "statutDiffusion": "diffusible",
-          "estSiege": true,
-          "enseigne": "",
-          "denomination": null,
-          "nic": "00010",
-          "dateCreation": "2016-01-15",
-          "dateDerniereMiseAJour": "",
-          "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2017-06-01",
-          "dateFermeture": "",
-          "adresse": "3 RUE DE LA GAITE 75014 PARIS",
-          "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
-          "codePostal": "75014",
-          "commune": "PARIS",
-          "activitePrincipale": "70.22Z",
-          "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-          "trancheEffectif": "01",
-          "libelleTrancheEffectif": "",
-          "latitude": "48.84074",
-          "longitude": "2.324549",
-          "complements": {
-            "estEntrepreneurIndividuel": false,
-            "idFiness": [],
-            "idBio": [],
-            "idcc": [
-              "1486"
-            ],
-            "idOrganismeFormation": [],
-            "idRge": [],
-            "idUai": []
-          },
-          "anneeTrancheEffectif": "2021"
-        },
-        "allSiegesSiret": [],
-        "tva": null,
-        "statutDiffusion": "diffusible",
-        "etatAdministratif": "en activité",
-        "nomComplet": "GANYMEDE",
-        "chemin": "ganymede-817883150",
-        "natureJuridique": "5710",
-        "libelleNatureJuridique": "SAS, société par actions simplifiée",
-        "etablissements": {
-          "all": [
-            {
-              "siren": "817883150",
-              "siret": "81788315000010",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00010",
-              "dateCreation": "2016-01-15",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2017-06-01",
-              "dateFermeture": "",
-              "adresse": "3 RUE DE LA GAITE 75014 PARIS",
-              "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
-              "codePostal": "75014",
-              "commune": "PARIS",
-              "activitePrincipale": "70.22Z",
-              "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-              "trancheEffectif": "01",
-              "libelleTrancheEffectif": "",
-              "latitude": "48.84074",
-              "longitude": "2.324549",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "idFiness": [],
-                "idBio": [],
-                "idcc": [
-                  "1486"
-                ],
-                "idOrganismeFormation": [],
-                "idRge": [],
-                "idUai": []
-              },
-              "anneeTrancheEffectif": "2021"
-            }
-          ],
-          "open": [
-            {
-              "siren": "817883150",
-              "siret": "81788315000010",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00010",
-              "dateCreation": "2016-01-15",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2017-06-01",
-              "dateFermeture": "",
-              "adresse": "3 RUE DE LA GAITE 75014 PARIS",
-              "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
-              "codePostal": "75014",
-              "commune": "PARIS",
-              "activitePrincipale": "70.22Z",
-              "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-              "trancheEffectif": "01",
-              "libelleTrancheEffectif": "",
-              "latitude": "48.84074",
-              "longitude": "2.324549",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "idFiness": [],
-                "idBio": [],
-                "idcc": [
-                  "1486"
-                ],
-                "idOrganismeFormation": [],
-                "idRge": [],
-                "idUai": []
-              },
-              "anneeTrancheEffectif": "2021"
-            }
-          ],
-          "unknown": [],
-          "closed": [],
-          "nombreEtablissementsOuverts": 1,
-          "nombreEtablissements": 1,
-          "usePagination": false,
-          "currentEtablissementPage": 1
-        },
-        "activitePrincipale": "70.22Z",
-        "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
-        "dateCreation": "2016-01-15",
-        "dateFermeture": "",
-        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-01-13T18:45:59",
-        "dateDebutActivite": "",
-        "trancheEffectif": "01",
-        "anneeCategorieEntreprise": "2021",
-        "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2021",
-        "complements": {
-          "estBio": false,
-          "estEss": false,
-          "estServicePublic": false,
-          "estEntrepreneurIndividuel": false,
-          "estEntrepreneurSpectacle": false,
-          "statutEntrepreneurSpectacle": null,
-          "estFiness": false,
-          "egaproRenseignee": false,
-          "estRge": false,
-          "estOrganismeFormation": false,
-          "estSocieteMission": false,
-          "estQualiopi": false,
-          "estAssociation": false,
-          "estUai": false,
-          "estEntrepriseInclusive": false,
-          "typeEntrepriseInclusive": null
-        },
-        "association": {
-          "idAssociation": null,
-          "data": null
-        },
-        "colter": {
-          "codeColter": null
-        },
-        "conventionsCollectives": {},
-        "matchingEtablissements": [
-          {
-            "siren": "817883150",
-            "siret": "81788315000010",
-            "oldSiret": "",
-            "etatAdministratif": "en activité",
-            "statutDiffusion": "diffusible",
-            "estSiege": true,
-            "enseigne": "",
-            "denomination": null,
-            "nic": "00010",
-            "dateCreation": "2016-01-15",
-            "dateDerniereMiseAJour": "",
-            "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2017-06-01",
-            "dateFermeture": "",
-            "adresse": "3 RUE DE LA GAITE 75014 PARIS",
-            "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
-            "codePostal": "75014",
-            "commune": "PARIS",
-            "activitePrincipale": "70.22Z",
-            "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-            "trancheEffectif": "01",
-            "libelleTrancheEffectif": "",
-            "latitude": "48.84074",
-            "longitude": "2.324549",
-            "complements": {
-              "estEntrepreneurIndividuel": false,
-              "idFiness": [],
-              "idBio": [],
-              "idcc": [
-                "1486"
-              ],
-              "idOrganismeFormation": [],
-              "idRge": [],
-              "idUai": []
-            },
-            "anneeTrancheEffectif": "2021"
-          }
-        ],
-        "nombreEtablissements": 1,
-        "nombreEtablissementsOuverts": 1,
-        "dirigeants": [
-          {
-            "sexe": null,
-            "nom": "NÉGRIER",
-            "prenom": "Philippe",
-            "role": "Président de SAS",
-            "dateNaissancePartial": "",
-            "lieuNaissance": ""
-          }
-        ]
-      },
       {
         "siren": "414971929",
         "oldSiren": "414971929",
@@ -263,8 +35,8 @@
           "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
           "trancheEffectif": "01",
           "libelleTrancheEffectif": "",
-          "latitude": "43.926703",
-          "longitude": "4.784775",
+          "latitude": "43.926702999999996",
+          "longitude": "4.784774999999998",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -311,8 +83,8 @@
               "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
               "trancheEffectif": "01",
               "libelleTrancheEffectif": "",
-              "latitude": "43.926703",
-              "longitude": "4.784775",
+              "latitude": "43.926702999999996",
+              "longitude": "4.784774999999998",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -351,8 +123,8 @@
               "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
               "trancheEffectif": "01",
               "libelleTrancheEffectif": "",
-              "latitude": "43.926703",
-              "longitude": "4.784775",
+              "latitude": "43.926702999999996",
+              "longitude": "4.784774999999998",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -380,7 +152,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-01-13T02:01:59",
+        "dateMiseAJourInpi": "2024-05-18T13:07:27",
         "dateDebutActivite": "",
         "trancheEffectif": "01",
         "anneeCategorieEntreprise": "2021",
@@ -411,6 +183,9 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [
+          "0478"
+        ],
         "conventionsCollectives": {},
         "matchingEtablissements": [
           {
@@ -436,8 +211,8 @@
             "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
             "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
-            "latitude": "48.887985",
-            "longitude": "2.233045",
+            "latitude": "48.887984999999986",
+            "longitude": "2.233045000000001",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
@@ -472,8 +247,8 @@
             "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
             "trancheEffectif": "01",
             "libelleTrancheEffectif": "",
-            "latitude": "43.926703",
-            "longitude": "4.784775",
+            "latitude": "43.926702999999996",
+            "longitude": "4.784774999999998",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
@@ -510,8 +285,8 @@
             "libelleActivitePrincipale": "Organismes de placement en valeurs mobilières (65.2E)",
             "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
-            "latitude": "48.876263",
-            "longitude": "2.097763",
+            "latitude": "48.87626299999998",
+            "longitude": "2.0977630000000014",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
@@ -581,7 +356,7 @@
           "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": "48.700488",
+          "latitude": "48.700487999999986",
           "longitude": "2.758235",
           "complements": {
             "estEntrepreneurIndividuel": false,
@@ -627,7 +402,7 @@
               "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.700488",
+              "latitude": "48.700487999999986",
               "longitude": "2.758235",
               "complements": {
                 "estEntrepreneurIndividuel": false,
@@ -665,7 +440,7 @@
               "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.700488",
+              "latitude": "48.700487999999986",
               "longitude": "2.758235",
               "complements": {
                 "estEntrepreneurIndividuel": false,
@@ -692,7 +467,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-01-13T06:42:52",
+        "dateMiseAJourInpi": "2024-05-18T16:24:56",
         "dateDebutActivite": "",
         "trancheEffectif": null,
         "anneeCategorieEntreprise": "2021",
@@ -723,6 +498,7 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [],
         "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
@@ -764,8 +540,8 @@
           "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": "45.00782",
-          "longitude": "-0.619455",
+          "latitude": "45.007819999999995",
+          "longitude": "-0.6194549999999986",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -810,8 +586,8 @@
               "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "45.00782",
-              "longitude": "-0.619455",
+              "latitude": "45.007819999999995",
+              "longitude": "-0.6194549999999986",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -848,8 +624,8 @@
               "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "45.00782",
-              "longitude": "-0.619455",
+              "latitude": "45.007819999999995",
+              "longitude": "-0.6194549999999986",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -875,7 +651,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-01-13T08:05:54",
+        "dateMiseAJourInpi": "2024-05-18T17:27:53",
         "dateDebutActivite": "",
         "trancheEffectif": null,
         "anneeCategorieEntreprise": "2021",
@@ -906,6 +682,7 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [],
         "conventionsCollectives": {},
         "matchingEtablissements": [
           {
@@ -931,8 +708,8 @@
             "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
             "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
-            "latitude": "45.00782",
-            "longitude": "-0.619455",
+            "latitude": "45.007819999999995",
+            "longitude": "-0.6194549999999986",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
@@ -984,8 +761,8 @@
           "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
           "trancheEffectif": "02",
           "libelleTrancheEffectif": "",
-          "latitude": "43.458122",
-          "longitude": "2.00451",
+          "latitude": "43.458121999999996",
+          "longitude": "2.0045100000000007",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -1032,8 +809,8 @@
               "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
               "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
-              "latitude": "43.458122",
-              "longitude": "2.00451",
+              "latitude": "43.458121999999996",
+              "longitude": "2.0045100000000007",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -1072,8 +849,8 @@
               "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
               "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
-              "latitude": "43.458122",
-              "longitude": "2.00451",
+              "latitude": "43.458121999999996",
+              "longitude": "2.0045100000000007",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -1101,7 +878,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-01-14T00:34:19",
+        "dateMiseAJourInpi": "2024-05-19T06:42:48",
         "dateDebutActivite": "",
         "trancheEffectif": "02",
         "anneeCategorieEntreprise": "2021",
@@ -1132,6 +909,9 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [
+          "1527"
+        ],
         "conventionsCollectives": {},
         "matchingEtablissements": [
           {
@@ -1157,8 +937,8 @@
             "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
             "trancheEffectif": "02",
             "libelleTrancheEffectif": "",
-            "latitude": "43.458122",
-            "longitude": "2.00451",
+            "latitude": "43.458121999999996",
+            "longitude": "2.0045100000000007",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],

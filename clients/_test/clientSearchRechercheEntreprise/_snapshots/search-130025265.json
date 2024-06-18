@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": "48.850699",
-          "longitude": "2.308628",
+          "latitude": "48.85069899999997",
+          "longitude": "2.3086280000000006",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -81,8 +81,8 @@
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.850699",
-              "longitude": "2.308628",
+              "latitude": "48.85069899999997",
+              "longitude": "2.3086280000000006",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -119,8 +119,8 @@
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.850699",
-              "longitude": "2.308628",
+              "latitude": "48.85069899999997",
+              "longitude": "2.3086280000000006",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -177,6 +177,7 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [],
         "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
