@@ -10,6 +10,14 @@ type ICopyPasteProps = {
   label: string;
 };
 
+function copyFallback(value: string) {
+  const el = document.createElement('textarea');
+  el.value = value;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+}
 export function CopyPaste({
   children,
   shouldRemoveSpace = false,
@@ -32,14 +40,12 @@ export function CopyPaste({
       : children;
 
     try {
+      if (!document.hasFocus()) {
+        throw new Error('document is not focused');
+      }
       navigator.clipboard.writeText(valueToCopy);
     } catch {
-      const el = document.createElement('textarea');
-      el.value = valueToCopy;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
+      copyFallback(valueToCopy);
     }
 
     const isKeyboardNavigation = e.detail === 0;
