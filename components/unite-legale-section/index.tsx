@@ -36,9 +36,7 @@ const UniteLegaleSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
-  const conventionsCollectives = Object.keys(
-    uniteLegale.conventionsCollectives || {}
-  );
+  const conventionsCollectives = uniteLegale.listeIdcc;
 
   const data = [
     ['Dénomination', getNomComplet(uniteLegale, session)],
