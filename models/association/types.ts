@@ -35,3 +35,8 @@ type IBilanFinancierAssociation = {
   resultat: number;
   year: number;
 };
+
+export interface IDataAssociationForAgents {
+  documentsRNA: any[];
+  documentsDAC: any[];
+}

@@ -1,22 +1,23 @@
+import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
 import { IUniteLegale } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import AgentWallDocuments from '../agent-wall/document';
-import { AgentActesSection } from './data-section/actes';
+import AgentBilansSection from './bilans';
 
-const ActesSection: React.FC<{
+const BilansSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  if (!hasRights(session, EScope.actesRne)) {
+  if (!hasRights(session, EScope.bilansRne)) {
     return (
       <AgentWallDocuments
-        title="Actes et statuts"
-        id="actes"
+        title="Bilans"
+        id="bilans"
         uniteLegale={uniteLegale}
       />
     );
   }
-  return <AgentActesSection uniteLegale={uniteLegale} />;
+  return <AgentBilansSection uniteLegale={uniteLegale} />;
 };
-export default ActesSection;
+
+export default BilansSection;
