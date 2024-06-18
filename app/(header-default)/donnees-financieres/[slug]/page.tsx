@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ComptesBodacc from '#components/annonces-section/comptes/bodacc';
 import { ComptesAssociationSection } from '#components/annonces-section/comptes/dca';
-import DocumentBilansSection from '#components/espace-agent-components/documents/bilans-walled';
 import { FinancesAssociationSection } from '#components/finances-section/association';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
 import Title from '#components/title-section';
@@ -14,6 +13,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import BilansSection from './_components';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -55,10 +55,7 @@ const FinancePage = async (props: AppRouterProps) => {
           <>
             <FinancesSocieteSection uniteLegale={uniteLegale} />
             <HorizontalSeparator />
-            <DocumentBilansSection
-              uniteLegale={uniteLegale}
-              session={session}
-            />
+            <BilansSection uniteLegale={uniteLegale} session={session} />
           </>
         )}
         {isAssociation(uniteLegale) ? (
