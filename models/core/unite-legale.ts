@@ -110,8 +110,9 @@ class UniteLegaleBuilder {
       (ul: IUniteLegale) =>
         !estDiffusible(ul) || ul.complements.estEntrepreneurIndividuel,
       (ul: IUniteLegale) => {
-        // checks for inconsistency in recherche response
-        // no siege siret means siege might be corrupted
+        // checks for inconsistency in recherche response - needs a validation from sirene API
+        // - no dateMiseAJourInsee CAN mean there are two siren for this UL
+        // - no siege siret means CAN mean siege might be corrupted
         return !ul.dateMiseAJourInsee || !ul.siege.siret;
       }
     );
