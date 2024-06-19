@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { PrintNever } from '#components-ui/print-visibility';
-import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -14,7 +13,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import AgentActesSection from './_components/actes-section';
+import ActesSection from './_components/actes';
 import CarteProfessionnelleTPSection from './_components/carte-professionnelle-TP-section';
 
 export const generateMetadata = async (
@@ -57,15 +56,7 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
           {hasRights(session, EScope.conformite) && (
             <ConformiteSection uniteLegale={uniteLegale} />
           )}
-          {!hasRights(session, EScope.documentsRne) ? (
-            <AgentWallDocuments
-              title="Actes et statuts"
-              id="actes"
-              uniteLegale={uniteLegale}
-            />
-          ) : (
-            <AgentActesSection uniteLegale={uniteLegale} />
-          )}
+          <ActesSection uniteLegale={uniteLegale} session={session} />
           {hasRights(session, EScope.carteProfessionnelleTravauxPublics) && (
             <CarteProfessionnelleTPSection uniteLegale={uniteLegale} />
           )}

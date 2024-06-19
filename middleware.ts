@@ -13,22 +13,21 @@ import { sessionOptions, setVisitTimestamp } from '#utils/session';
 
 const shouldRedirect = (path: string, search: string, url: string) => {
   try {
-    const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(path);
-    if (sirenOrSiretSlug) {
-      if (path.startsWith('/entreprise/')) {
-        if (isLikelyASiret(sirenOrSiretSlug)) {
-          return new URL(`/etablissement/${sirenOrSiretSlug}`, url);
-        } else if (!isLikelyASiren(sirenOrSiretSlug)) {
-          return new URL(`/404`, url);
-        }
+    if (path.startsWith('/entreprise/')) {
+      const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(path);
+      if (isLikelyASiret(sirenOrSiretSlug)) {
+        return new URL(`/etablissement/${sirenOrSiretSlug}`, url);
+      } else if (!isLikelyASiren(sirenOrSiretSlug)) {
+        return new URL(`/404`, url);
       }
+    }
 
-      if (path.startsWith('/etablissement/')) {
-        if (isLikelyASiren(sirenOrSiretSlug)) {
-          return new URL(`/entreprise/${sirenOrSiretSlug}`, url);
-        } else if (!isLikelyASiret(sirenOrSiretSlug)) {
-          return new URL(`/404`, url);
-        }
+    if (path.startsWith('/etablissement/')) {
+      const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(path);
+      if (isLikelyASiren(sirenOrSiretSlug)) {
+        return new URL(`/entreprise/${sirenOrSiretSlug}`, url);
+      } else if (!isLikelyASiret(sirenOrSiretSlug)) {
+        return new URL(`/404`, url);
       }
     }
 
@@ -114,14 +113,16 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: [
-    '/entreprise/:path*',
-    '/etablissement/:path*',
-    '/rechercher/:path*',
-    '/rechercher/carte/:path*',
-    '/justificatif/:path*',
-    '/dirigeants/:path*',
-  ],
+  matcher:
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - robots.txt (robots file)
+     * - etc.
+     */
+    '/((?!api|_next/static|images|_next/image|favicon.ico|robots.txt|opensearch.xml|protected-siren.txt|dsfr-departements).*)',
 };
