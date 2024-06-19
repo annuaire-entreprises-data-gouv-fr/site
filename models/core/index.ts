@@ -7,7 +7,7 @@ export function shouldUseInsee<T extends {}>(
   rechercheEntrepriseResponse: T | IAPINotRespondingError,
   isBot: boolean,
   isEI: (r: T) => boolean,
-  hasIssueWithInseeStock?: (r: T) => boolean
+  hasInconsistencies?: (r: T) => boolean
 ) {
   const rechercheEntrepriseFailed = isAPINotResponding(
     rechercheEntrepriseResponse
@@ -22,8 +22,8 @@ export function shouldUseInsee<T extends {}>(
 
     if (rechercheEntrepriseResponse) {
       if (
-        hasIssueWithInseeStock &&
-        hasIssueWithInseeStock(rechercheEntrepriseResponse)
+        hasInconsistencies &&
+        hasInconsistencies(rechercheEntrepriseResponse)
       ) {
         return true;
       }
