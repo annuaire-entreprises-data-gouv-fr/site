@@ -129,7 +129,7 @@ const LandingPageAgent = (props: AppRouterProps) => {
             )}
         </div>
         <p>
-          <a href="/administrations">
+          <a href="/administration">
             → Voir la liste complète des administrations partenaires
           </a>
         </p>
