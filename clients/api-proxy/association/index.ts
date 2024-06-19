@@ -104,7 +104,8 @@ const mapToDomainObject = (
     }),
     adresseInconsistency: false,
     bilans: (association.compte || [])
-      .filter((c) => c.annee > 0 && c.id_siret === siretSiege)
+      // id_siret type can be a number !
+      .filter((c) => c.annee > 0 && c.id_siret == siretSiege)
       .map(
         ({
           dons = 0,

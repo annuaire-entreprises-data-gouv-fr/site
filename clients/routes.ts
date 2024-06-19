@@ -20,6 +20,7 @@ const routes = {
     },
   },
   apiEntreprise: {
+    association: '/v4/djepva/api-association/associations/{siren}',
     conformite: {
       fiscale: '/v4/dgfip/unites_legales/{siren}/attestation_fiscale',
       vigilance: '/v4/urssaf/unites_legales/{siren}/attestation_vigilance',
