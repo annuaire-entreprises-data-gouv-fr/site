@@ -8,9 +8,9 @@
         "nda": "11755565775",
         "exNda": "11755565775",
         "region": "Île-de-France",
-        "dateDeclaration": "23/05/2023",
+        "dateDeclaration": "23/05/2024",
         "specialite": "Développement des capacités comportementales et relationnelles",
-        "stagiaires": 88546,
+        "stagiaires": 111172,
         "formateurs": 400,
         "certifications": [
           "Actions de formations"
@@ -20,15 +20,16 @@
         "nda": "11755762075",
         "exNda": "11755762075",
         "region": "Île-de-France",
-        "dateDeclaration": "31/05/2023",
-        "specialite": "Transport, manutention, magasinage",
-        "stagiaires": 94,
-        "formateurs": 76,
+        "dateDeclaration": "31/05/2024",
+        "specialite": "Transport, manutention, magasinage/Commerce, vente",
+        "stagiaires": 309,
+        "formateurs": 77,
         "certifications": [
           "Actions de formations"
         ]
       }
     ],
+    "qualiopiCertified": true,
     "lastModified": "2023-10-18T23:19:19.590091+00:00"
   }
 }

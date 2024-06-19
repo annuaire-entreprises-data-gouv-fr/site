@@ -144,6 +144,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       identifiant_association = null,
       statut_entrepreneur_spectacle = '',
       est_association = false,
+      liste_idcc = [],
       est_siae = false,
       type_siae = '',
     },
@@ -259,6 +260,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     dateMiseAJourInsee: date_mise_a_jour_insee || '',
     dateMiseAJourInpi: date_mise_a_jour_rne || '',
     dateFermeture: date_fermeture ?? '',
+    listeIdcc: liste_idcc || [],
     conventionsCollectives: etablissements.reduce(
       (idccSiretPair, { siret, liste_idcc }) => {
         (liste_idcc || []).forEach((idcc) => {

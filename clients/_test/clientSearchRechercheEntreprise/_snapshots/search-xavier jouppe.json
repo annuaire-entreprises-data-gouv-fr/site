@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Location de terrains et d’autres biens immobiliers (68.20B)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": "47.388388",
-          "longitude": "0.68393",
+          "latitude": "47.38838799999998",
+          "longitude": "0.6839300000000013",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -81,8 +81,8 @@
               "libelleActivitePrincipale": "Location de terrains et d’autres biens immobiliers (68.20B)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "47.388388",
-              "longitude": "0.68393",
+              "latitude": "47.38838799999998",
+              "longitude": "0.6839300000000013",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -119,8 +119,8 @@
               "libelleActivitePrincipale": "Location de terrains et d’autres biens immobiliers (68.20B)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "47.388388",
-              "longitude": "0.68393",
+              "latitude": "47.38838799999998",
+              "longitude": "0.6839300000000013",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -146,7 +146,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-01-13T11:28:44",
+        "dateMiseAJourInpi": "2024-05-18T20:05:34",
         "dateDebutActivite": "",
         "trancheEffectif": null,
         "anneeCategorieEntreprise": null,
@@ -177,6 +177,7 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [],
         "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
@@ -408,6 +409,7 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [],
         "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,

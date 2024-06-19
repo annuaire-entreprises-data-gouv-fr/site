@@ -177,6 +177,7 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [],
         "conventionsCollectives": {},
         "matchingEtablissements": [
           {

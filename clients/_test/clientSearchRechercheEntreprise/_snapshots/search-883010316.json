@@ -35,7 +35,7 @@
           "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": "48.886494",
+          "latitude": "48.88649399999998",
           "longitude": "2.542338",
           "complements": {
             "estEntrepreneurIndividuel": true,
@@ -81,7 +81,7 @@
               "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.886494",
+              "latitude": "48.88649399999998",
               "longitude": "2.542338",
               "complements": {
                 "estEntrepreneurIndividuel": true,
@@ -121,7 +121,7 @@
               "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.886494",
+              "latitude": "48.88649399999998",
               "longitude": "2.542338",
               "complements": {
                 "estEntrepreneurIndividuel": true,
@@ -146,7 +146,7 @@
         "dateFermeture": "2020-09-01",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-01-15T17:38:04",
+        "dateMiseAJourInpi": "2024-05-20T13:13:31",
         "dateDebutActivite": "",
         "trancheEffectif": null,
         "anneeCategorieEntreprise": null,
@@ -177,6 +177,7 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [],
         "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,

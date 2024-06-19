@@ -195,6 +195,7 @@ class UniteLegaleBuilder {
         ...uniteLegaleRechercheEntreprise.colter,
       },
       chemin: uniteLegaleRechercheEntreprise.chemin,
+      listeIdcc: uniteLegaleRechercheEntreprise.listeIdcc,
       conventionsCollectives:
         uniteLegaleRechercheEntreprise.conventionsCollectives,
       dateDerniereMiseAJour:

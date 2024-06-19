@@ -117,6 +117,7 @@ export type IComplements = {
   identifiant_association: string;
   est_siae: boolean;
   type_siae: string;
+  liste_idcc: string[];
 };
 
 export type ICollectiviteTerritoriale = {

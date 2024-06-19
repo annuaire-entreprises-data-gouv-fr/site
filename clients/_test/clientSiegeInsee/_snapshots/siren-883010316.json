@@ -15,6 +15,7 @@
       "nic": "00015",
       "dateCreation": "2020-09-01",
       "dateDerniereMiseAJour": "",
+      "dateMiseAJourInsee": "",
       "dateDebutActivite": "",
       "dateFermeture": "",
       "adresse": "",
@@ -61,6 +62,7 @@
           "nic": "00015",
           "dateCreation": "2020-09-01",
           "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
           "adresse": "",
@@ -99,6 +101,7 @@
           "nic": "00015",
           "dateCreation": "2020-09-01",
           "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
           "adresse": "",
@@ -130,9 +133,12 @@
     "activitePrincipale": "70.22Z",
     "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
     "dateCreation": "2018-05-06",
+    "dateFermeture": "2020-09-01",
     "dateDerniereMiseAJour": "2023-10-5",
+    "dateMiseAJourInsee": "2024-03-22",
+    "dateMiseAJourInpi": "",
     "dateDebutActivite": "2020-09-01",
-    "trancheEffectif": "N",
+    "trancheEffectif": null,
     "anneeCategorieEntreprise": null,
     "categorieEntreprise": null,
     "anneeTrancheEffectif": null,
@@ -151,7 +157,8 @@
       "estQualiopi": false,
       "estUai": false,
       "estAssociation": false,
-      "estEntrepriseInclusive": false
+      "estEntrepriseInclusive": false,
+      "typeEntrepriseInclusive": ""
     },
     "association": {
       "idAssociation": null
@@ -159,6 +166,7 @@
     "colter": {
       "codeColter": null
     },
+    "listeIdcc": [],
     "conventionsCollectives": {}
   }
 }

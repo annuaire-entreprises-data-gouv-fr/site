@@ -15,6 +15,7 @@
       "nic": "00010",
       "dateCreation": "2022-01-01",
       "dateDerniereMiseAJour": "",
+      "dateMiseAJourInsee": "",
       "dateDebutActivite": "",
       "dateFermeture": "",
       "adresse": "",
@@ -61,6 +62,7 @@
           "nic": "00010",
           "dateCreation": "2022-01-01",
           "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
           "adresse": "",
@@ -99,6 +101,7 @@
           "nic": "00010",
           "dateCreation": "2022-01-01",
           "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
           "adresse": "",
@@ -130,7 +133,10 @@
     "activitePrincipale": "70.21Z",
     "libelleActivitePrincipale": "Conseil en relations publiques et communication",
     "dateCreation": "2022-01-01",
+    "dateFermeture": "",
     "dateDerniereMiseAJour": "2023-10-5",
+    "dateMiseAJourInsee": "2024-03-22",
+    "dateMiseAJourInpi": "",
     "dateDebutActivite": "2022-01-01",
     "trancheEffectif": null,
     "anneeCategorieEntreprise": null,
@@ -151,7 +157,8 @@
       "estQualiopi": false,
       "estUai": false,
       "estAssociation": false,
-      "estEntrepriseInclusive": false
+      "estEntrepriseInclusive": false,
+      "typeEntrepriseInclusive": ""
     },
     "association": {
       "idAssociation": null
@@ -159,6 +166,7 @@
     "colter": {
       "codeColter": null
     },
+    "listeIdcc": [],
     "conventionsCollectives": {}
   }
 }
