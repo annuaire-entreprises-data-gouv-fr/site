@@ -109,7 +109,11 @@ class UniteLegaleBuilder {
       this._isBot,
       (ul: IUniteLegale) =>
         !estDiffusible(ul) || ul.complements.estEntrepreneurIndividuel,
-      (ul: IUniteLegale) => !ul.dateMiseAJourInsee
+      (ul: IUniteLegale) => {
+        // checks for inconsistency in recherche response
+        // no siege siret means siege might be corrupted
+        return !ul.dateMiseAJourInsee || !ul.siege.siret;
+      }
     );
 
     if (!useInsee) {
