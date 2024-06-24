@@ -189,6 +189,9 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [
+          "9999"
+        ],
         "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,

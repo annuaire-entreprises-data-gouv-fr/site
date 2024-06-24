@@ -35,15 +35,13 @@
           "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": "48.829633",
+          "latitude": "48.82963299999998",
           "longitude": "2.374801",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
-            "idcc": [
-              "3090"
-            ],
+            "idcc": [],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
@@ -83,15 +81,13 @@
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.829633",
+              "latitude": "48.82963299999998",
               "longitude": "2.374801",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "3090"
-                ],
+                "idcc": [],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
@@ -123,15 +119,13 @@
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.829633",
+              "latitude": "48.82963299999998",
               "longitude": "2.374801",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "3090"
-                ],
+                "idcc": [],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
@@ -183,6 +177,7 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [],
         "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 2,

@@ -76,7 +76,9 @@ const mapToDomainObject = (rge: IRGEResponse) => {
     );
     if (findCertification !== -1) {
       if (result.domaine !== 'Inconnu') {
-        certifications[findCertification].domaines.push(result.domaine);
+        const domaines = new Set(certifications[findCertification].domaines);
+        domaines.add(result.domaine);
+        certifications[findCertification].domaines = Array.from(domaines);
       }
     } else {
       const {

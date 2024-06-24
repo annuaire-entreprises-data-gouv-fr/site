@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
           "trancheEffectif": null,
           "libelleTrancheEffectif": "",
-          "latitude": "48.873057",
-          "longitude": "2.316605",
+          "latitude": "48.87305699999998",
+          "longitude": "2.3166050000000005",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -83,8 +83,8 @@
               "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
               "trancheEffectif": null,
               "libelleTrancheEffectif": "",
-              "latitude": "48.873057",
-              "longitude": "2.316605",
+              "latitude": "48.87305699999998",
+              "longitude": "2.3166050000000005",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -123,8 +123,8 @@
               "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
               "trancheEffectif": null,
               "libelleTrancheEffectif": "",
-              "latitude": "48.873057",
-              "longitude": "2.316605",
+              "latitude": "48.87305699999998",
+              "longitude": "2.3166050000000005",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -152,7 +152,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-03-20T16:06:48",
+        "dateMiseAJourInpi": "2024-05-19T11:34:24",
         "dateDebutActivite": "",
         "trancheEffectif": null,
         "anneeCategorieEntreprise": null,
@@ -183,6 +183,9 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [
+          "9999"
+        ],
         "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,

@@ -185,7 +185,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-01-13T23:12:14",
+        "dateMiseAJourInpi": "2024-05-19T05:31:41",
         "dateDebutActivite": "",
         "trancheEffectif": "02",
         "anneeCategorieEntreprise": "2021",
@@ -216,6 +216,10 @@
         "colter": {
           "codeColter": null
         },
+        "listeIdcc": [
+          "1596",
+          "2609"
+        ],
         "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,

@@ -17,6 +17,10 @@ import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
+const NoDocument = () => (
+  <>Aucun document n’a été retrouvé dans le RNE pour cette entreprise.</>
+);
+
 export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
