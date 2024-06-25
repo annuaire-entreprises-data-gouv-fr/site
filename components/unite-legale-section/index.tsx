@@ -3,6 +3,7 @@ import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
 import { ProtectedCertificatesBadgesSection } from '#components/badges-section/labels-and-certificates/protected-certificats';
+import EORICell from '#components/eori-cell';
 import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import ExtraitRNELink from '#components/justificatifs/extrait-rne-link';
 import { Section } from '#components/section';
@@ -51,6 +52,7 @@ const UniteLegaleSection: React.FC<{
       <a href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</a>,
       <TVACell uniteLegale={uniteLegale} />,
     ],
+    ['N° EORI', <EORICell uniteLegale={uniteLegale} />],
     ['Activité principale (NAF/APE)', uniteLegale.libelleActivitePrincipale],
     ['Code NAF/APE', uniteLegale.activitePrincipale],
     [
@@ -169,6 +171,7 @@ const UniteLegaleSection: React.FC<{
         sources={[
           EAdministration.INSEE,
           EAdministration.VIES,
+          EAdministration.EOS,
           ...labelsAndCertificatesSources(uniteLegale),
           ...(isAssociation(uniteLegale)
             ? [EAdministration.DILA]

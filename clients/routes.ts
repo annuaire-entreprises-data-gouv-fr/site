@@ -208,6 +208,7 @@ const routes = {
     },
     monitoring: 'https://updown.io/api/checks/',
   },
+  eori: 'https://ec.europa.eu/taxation_customs/dds2/eos/validation/services/validation',
 };
 
 export default routes;

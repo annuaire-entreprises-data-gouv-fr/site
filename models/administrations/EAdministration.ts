@@ -11,6 +11,7 @@ export enum EAdministration {
   MTPEI = 'mtpei',
   MI = 'mi',
   VIES = 'vies',
+  EOS = 'eos',
   DJEPVA = 'djepva',
   ESSFRANCE = 'ess-france',
   MARCHE_INCLUSION = 'marche-inclusion',

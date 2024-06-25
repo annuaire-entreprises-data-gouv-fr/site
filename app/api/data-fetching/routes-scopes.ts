@@ -14,4 +14,5 @@ export const APIRoutesScopes: Record<APIPath, EScope> = {
   association: EScope.none,
   'verify-tva': EScope.none,
   geo: EScope.none,
+  'eori-validation': EScope.none,
 };
