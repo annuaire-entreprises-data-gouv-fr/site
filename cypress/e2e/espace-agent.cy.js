@@ -1,8 +1,8 @@
 describe(
   'Espace agent',
   {
-    defaultCommandTimeout: 60000, // 2min because AgentConnect testing env is veeeery slow
-    pageLoadTimeout: 180000, // 3min
+    defaultCommandTimeout: 10000, // 10 sec
+    pageLoadTimeout: 180000, // 3min because AgentConnect testing env is veeeery slow
     testIsolation: false, // We need to share session cookies between tests
     retries: {
       runMode: 2,
@@ -33,17 +33,9 @@ describe(
       cy.contains('button', 'AgentConnect').click();
       cy.origin('fca.integ01.dev-agentconnect.fr', () => {
         cy.get('input[type="email"]').clear().type('user@yopmail.com');
-        if (Cypress.currentRetry === 1) {
-          cy.screenshot('before_click');
-        }
+
         cy.contains('button', 'Se connecter').click();
-        if (Cypress.currentRetry === 1) {
-          cy.screenshot('after_click');
-        }
       });
-      if (Cypress.currentRetry === 1) {
-        cy.screenshot('after_connection');
-      }
 
       cy.origin('app-sandbox.moncomptepro.beta.gouv.fr', () => {
         cy.contains('Renseignez votre mot de passe');
