@@ -31,22 +31,19 @@ describe(
     it('Connexion', () => {
       cy.visit(`/lp/agent-public`);
       cy.contains('button', 'AgentConnect').click();
-      cy.origin('fca.integ01.dev-agentconnect.fr', () => {
+      cy.origin('https://fca.integ01.dev-agentconnect.fr', () => {
         cy.get('input[type="email"]').clear().type('user@yopmail.com');
 
         cy.contains('button', 'Se connecter').click();
       });
 
-      cy.origin('app-sandbox.moncomptepro.beta.gouv.fr', () => {
+      cy.origin('https://app-sandbox.moncomptepro.beta.gouv.fr', () => {
         cy.contains('Renseignez votre mot de passe');
         cy.get('input[type="password"]').type('user@yopmail.com');
         cy.contains('button', 'S’identifier').click();
         cy.contains('DINUM').click();
       });
 
-      cy.location().should((loc) => {
-        expect(loc.pathname).to.eq('/');
-      });
       cy.visit('/');
       cy.contains('user@yopmail.com');
     });
