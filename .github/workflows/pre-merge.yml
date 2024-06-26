@@ -118,7 +118,7 @@ jobs:
           NEXT_PUBLIC_END2END_MOCKING: enabled
       - name: Run Cypress tests 🧪
         # https://github.com/cypress-io/github-action
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         timeout-minutes: 10
         with:
           start: npm start
