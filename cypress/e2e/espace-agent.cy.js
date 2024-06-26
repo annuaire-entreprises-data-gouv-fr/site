@@ -32,8 +32,17 @@ describe(
       cy.contains('button', 'AgentConnect').click();
       cy.origin('fca.integ01.dev-agentconnect.fr', () => {
         cy.get('input[type="email"]').clear().type('user@yopmail.com');
+        if (Cypress.currentRetry === 1) {
+          cy.screenshot('before_click');
+        }
         cy.contains('button', 'Se connecter').click();
+        if (Cypress.currentRetry === 1) {
+          cy.screenshot('after_click');
+        }
       });
+      if (Cypress.currentRetry === 1) {
+        cy.screenshot('after_connection');
+      }
 
       cy.origin('app-sandbox.moncomptepro.beta.gouv.fr', () => {
         cy.contains('Renseignez votre mot de passe');
