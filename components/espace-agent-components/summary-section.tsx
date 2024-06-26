@@ -43,9 +43,9 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
                       to="https://www.economie.gouv.fr/entreprises/numero-eori"
                     >
                       Le numéro EORI (Economic Operator Registration and
-                      Identification) est un numéro unique communautaire permet
-                      d’identifier les entreprises dans ses relations avec les
-                      autorités douanières.
+                      Identification) est un identifiant unique communautaire
+                      permettant d’identifier l’entreprise dans ses relations
+                      avec les autorités douanières.
                     </FAQLink>,
                     !immatriculationEORI ? (
                       <em>Non autorisé</em> // Shouldn't happen (all agents have EORI rights)
