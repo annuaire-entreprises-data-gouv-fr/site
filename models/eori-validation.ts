@@ -1,4 +1,4 @@
-import { clientEORI } from '#clients/eori';
+import { clientEORI } from '#clients/api-proxy/eori';
 import { verifySiret } from '#utils/helpers';
 import { EAdministration } from './administrations/EAdministration';
 import {

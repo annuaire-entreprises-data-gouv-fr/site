@@ -3,7 +3,7 @@ import { tvaNumber } from '#models/tva/utils';
 import { verifyIdRna, verifySiren, verifyTVANumber } from '#utils/helpers';
 import { clientMarcheInclusion } from './api-inclusion';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
-import { clientTVA } from './api-vies';
+import { clientTVA } from './api-proxy/tva';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
 import { clientUniteLegaleRechercheEntreprise } from './recherche-entreprise/siren';
 import { clientUniteLegaleInsee } from './sirene-insee/siren';

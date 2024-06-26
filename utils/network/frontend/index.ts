@@ -44,7 +44,7 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
       signal: controller.signal,
       headers: config.headers,
       method: config.method || 'GET',
-      body: config.data,
+      body: config.data as BodyInit | null | undefined,
     });
     const isJson = response.headers
       .get('content-type')

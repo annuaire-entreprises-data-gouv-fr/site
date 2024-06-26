@@ -6,7 +6,7 @@ export type IDefaultRequestConfig = {
   headers?: any;
   method?: 'POST' | 'GET' | 'PATCH';
   responseType?: 'blob' | 'arraybuffer';
-  data?: string;
+  data?: unknown;
 };
 
 /**

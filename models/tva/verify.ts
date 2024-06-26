@@ -1,4 +1,4 @@
-import { TVAUserException, clientTVA } from '#clients/api-vies';
+import { TVAUserException, clientTVA } from '#clients/api-proxy/tva';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {

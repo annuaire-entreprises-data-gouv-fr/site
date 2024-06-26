@@ -167,6 +167,7 @@ const routes = {
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
     tva: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
+    eori: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/eori/',
   },
   rne: {
     portail: {
@@ -208,7 +209,6 @@ const routes = {
     },
     monitoring: 'https://updown.io/api/checks/',
   },
-  eori: 'https://ec.europa.eu/taxation_customs/dds2/eos/validation/services/validation',
 };
 
 export default routes;
