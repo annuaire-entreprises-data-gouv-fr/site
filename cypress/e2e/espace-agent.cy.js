@@ -1,7 +1,8 @@
 describe(
   'Espace agent',
   {
-    pageLoadTimeout: 180000, // 3min because AgentConnect testing env is veeeery slow
+    defaultCommandTimeout: 60000, // 2min because AgentConnect testing env is veeeery slow
+    pageLoadTimeout: 180000, // 3min
     testIsolation: false, // We need to share session cookies between tests
     retries: {
       runMode: 2,
