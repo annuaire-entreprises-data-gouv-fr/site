@@ -32,6 +32,7 @@ describe(
       cy.contains('button', 'AgentConnect').click();
       cy.origin('fca.integ01.dev-agentconnect.fr', () => {
         cy.get('input[type="email"]').clear().type('user@yopmail.com');
+        cy.contains('button', 'Se connecter').click();
       });
 
       cy.origin('app-sandbox.moncomptepro.beta.gouv.fr', () => {
@@ -41,11 +42,11 @@ describe(
         cy.contains('DINUM').click();
       });
 
-      // cy.location().should((loc) => {
-      //   expect(loc.pathname).to.eq('/');
-      // });
-      // cy.visit('/');
-      // cy.contains('user@yopmail.com');
+      cy.location().should((loc) => {
+        expect(loc.pathname).to.eq('/');
+      });
+      cy.visit('/');
+      cy.contains('user@yopmail.com');
     });
 
     it('Actes et statuts accessibles', () => {
