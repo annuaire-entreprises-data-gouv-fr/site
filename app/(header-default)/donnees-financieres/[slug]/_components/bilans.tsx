@@ -88,7 +88,7 @@ const AgentBilansSection: React.FC<{
                   alt
                   small
                   target="_blank"
-                  to={`${routes.api.espaceAgent.rne.documents.download}${a.id}?type=bilan`}
+                  to={`${routes.espaceAgent.documents.download}${a.id}?type=bilan`}
                 >
                   Télécharger
                 </ButtonLink>,

@@ -3,7 +3,7 @@ import { Siren } from '#utils/helpers';
 interface IActeRNE {
   id: string;
   dateDepot: string;
-  actes?: string[];
+  detailsDocuments: { nom: string; label: string }[];
 }
 
 interface IBilanRNE {

@@ -17,10 +17,6 @@ import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
-const NoDocument = () => (
-  <>Aucun document n’a été retrouvé dans le RNE pour cette entreprise.</>
-);
-
 export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
@@ -62,13 +58,13 @@ export const AgentActesRNE: React.FC<{
               Cette entreprise possède {documents.actes.length} document(s) au
               RNE. Chaque document peut contenir un ou plusieurs actes :
             </p>
-            {documents.actes.length >= 5 ? (
+            {documents.actes.length > 5 ? (
               <ShowMore
                 label={`Voir les ${
                   documents.actes.length - 5
                 } documents supplémentaires`}
               >
-                <ActesTable actes={documents.actes} />
+                <ActesTable actes={documents.actes.slice(0, 5)} />
               </ShowMore>
             ) : (
               <ActesTable actes={documents.actes} />
@@ -89,18 +85,22 @@ function ActesTable({ actes }: IActesTableProps) {
       head={['Date de dépôt', 'Acte(s) contenu(s)', 'Lien']}
       body={actes.map((a) => [
         formatDateLong(a.dateDepot),
-        a.actes && (
-          <ul>
-            {(a?.actes || []).map((acteName) => (
-              <li key={acteName}>{acteName}</li>
-            ))}
-          </ul>
-        ),
+        <ul>
+          {(a?.detailsDocuments || []).map(({ nom, label }) => (
+            <li key={nom}>
+              <b>
+                {nom}
+                {label && ' :'}
+              </b>
+              {label}
+            </li>
+          ))}
+        </ul>,
         <ButtonLink
           target="_blank"
           alt
           small
-          to={`${routes.api.espaceAgent.rne.documents.download}${a.id}?type=acte`}
+          to={`${routes.espaceAgent.documents.download}${a.id}?type=acte`}
         >
           Télécharger
         </ButtonLink>,
