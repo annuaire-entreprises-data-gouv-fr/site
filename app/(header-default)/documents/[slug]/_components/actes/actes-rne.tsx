@@ -60,9 +60,7 @@ export const AgentActesRNE: React.FC<{
             </p>
             {documents.actes.length > 5 ? (
               <ShowMore
-                label={`Voir les ${
-                  documents.actes.length - 5
-                } documents supplémentaires`}
+                label={`Voir tous les ${documents.actes.length} documents`}
               >
                 <ActesTable actes={documents.actes} />
               </ShowMore>
