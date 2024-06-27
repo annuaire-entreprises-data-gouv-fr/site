@@ -2,7 +2,6 @@
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Loader } from '#components-ui/loader';
-import NonRenseigne from '#components/non-renseigne';
 import { CopyPaste } from '#components/table/copy-paste';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
@@ -78,6 +77,6 @@ export default function EORICell(props: IProps) {
       {'FR ' + formatSiret(eoriValidation.eori)}
     </CopyPaste>
   ) : (
-    <NonRenseigne />
+    <i>Pas de n° EORI valide</i>
   );
 }

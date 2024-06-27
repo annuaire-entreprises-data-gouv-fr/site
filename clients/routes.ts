@@ -1,22 +1,7 @@
 const routes = {
-  api: {
-    tva: '/api/data-fetching/verify-tva/',
-    association: '/api/data-fetching/association/',
-    rne: '/api/data-fetching/rne/',
-    espaceAgent: {
-      qualibat: '/api/data-fetching/espace-agent/qualibat/',
-      qualifelec: '/api/data-fetching/espace-agent/qualifelec/',
-      opqibi: '/api/data-fetching/espace-agent/opqibi/',
-      conformite: '/api/data-fetching/espace-agent/conformite/',
-      carteProfessionnelleTravauxPublics:
-        '/api/data-fetching/espace-agent/carte-professionnelle-TP/',
-      rcsMandataires: '/api/data-fetching/espace-agent/rcs-mandataires/',
-      rne: {
-        documents: {
-          download: '/api/download/espace-agent/documents/',
-          list: '/api/data-fetching/espace-agent/rne/documents/',
-        },
-      },
+  espaceAgent: {
+    documents: {
+      download: '/api/download/espace-agent/documents/',
     },
   },
   apiEntreprise: {
@@ -26,8 +11,6 @@ const routes = {
       vigilance: '/v4/urssaf/unites_legales/{siren}/attestation_vigilance',
       msa: '/v3/msa/etablissements/{siret}/conformite_cotisations',
     },
-    immatriculationEORI:
-      '/v3/douanes/etablissements/{siret}/immatriculations_eori',
     carteProfessionnelleTravauxPublics:
       '/v3/fntp/unites_legales/{siren}/carte_professionnelle_travaux_publics',
     certifications: {
