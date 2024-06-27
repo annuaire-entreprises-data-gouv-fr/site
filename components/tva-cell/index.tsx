@@ -7,12 +7,11 @@ import InformationTooltip from '#components-ui/information-tooltip';
 import { Loader } from '#components-ui/loader';
 import MatomoEvent from '#components/matomo-event';
 import { CopyPaste } from '#components/table/copy-paste';
-import { isAPILoading } from '#models/api-loading';
-import { isAPINotResponding } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
+import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { ITVAIntracommunautaire } from '#models/tva';
 import { Siren, formatIntFr } from '#utils/helpers';
-import useFetchTVA from 'hooks/fetch/tva';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const NoTVA = () => (
   <i>
@@ -81,8 +80,8 @@ const VerifyTVA: React.FC<{
   siren: Siren;
 }> = ({ tva, siren }) => {
   const { tvaNumber, mayHaveMultipleTVANumber } = tva;
-  const verification = useFetchTVA(siren);
-  if (isAPILoading(verification)) {
+  const verification = useAPIRouteData('verify-tva', siren, null);
+  if (isDataLoading(verification)) {
     return (
       <>
         <Loader />
@@ -93,7 +92,7 @@ const VerifyTVA: React.FC<{
         &nbsp;
       </>
     );
-  } else if (isAPINotResponding(verification)) {
+  } else if (hasAnyError(verification)) {
     return (
       <>
         <InformationTooltip

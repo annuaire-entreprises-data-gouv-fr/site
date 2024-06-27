@@ -7,9 +7,9 @@ import { AsyncDataSectionClient } from '#components/section/data-section/client'
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAnnoncesBodacc } from '#models/annonces';
-import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
+import { IDataFetchingState } from '#models/data-fetching';
 import { formatDate } from '#utils/helpers';
 import { useFetchBODACC } from 'hooks';
 
@@ -17,13 +17,12 @@ const ComptesBodacc: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const bodacc = useFetchBODACC(uniteLegale);
-  return <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />;
+  return <AnnoncesBodaccSection bodacc={bodacc} />;
 };
 
 const AnnoncesBodaccSection: React.FC<{
-  uniteLegale: IUniteLegale;
-  bodacc: IAnnoncesBodacc | IAPINotRespondingError | IAPILoading;
-}> = ({ uniteLegale, bodacc }) => {
+  bodacc: IAnnoncesBodacc | IAPINotRespondingError | IDataFetchingState;
+}> = ({ bodacc }) => {
   return (
     <AsyncDataSectionClient
       title="Dépôts des comptes (BODACC C)"

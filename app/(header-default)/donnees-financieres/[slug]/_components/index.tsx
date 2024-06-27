@@ -17,7 +17,7 @@ const BilansSection: React.FC<{
       />
     );
   }
-  return <AgentBilansSection uniteLegale={uniteLegale} />;
+  return <AgentBilansSection uniteLegale={uniteLegale} session={session} />;
 };
 
 export default BilansSection;

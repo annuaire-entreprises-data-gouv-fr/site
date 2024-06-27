@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { IAPILoading } from '#models/api-loading';
 import { isAPI404 } from '#models/api-not-responding';
+import { IDataFetchingState } from '#models/data-fetching';
 import { ISectionProps, Section } from '..';
 import { DataSectionContent, IDataSectionContentProps } from './content';
 
@@ -14,7 +14,7 @@ interface IDataSectionProps<T>
  * @param param0
  * @returns
  */
-export function DataSection<T extends Exclude<unknown, IAPILoading>>({
+export function DataSection<T extends Exclude<unknown, IDataFetchingState>>({
   data,
   notFoundInfo,
   children,
@@ -42,4 +42,3 @@ export function DataSection<T extends Exclude<unknown, IAPILoading>>({
 /* eslint-enable react/jsx-props-no-spreading */
 
 export { AsyncDataSectionClient as DataSectionClient } from './client';
-export { AsyncDataSectionServer as DataSectionServer } from './server';

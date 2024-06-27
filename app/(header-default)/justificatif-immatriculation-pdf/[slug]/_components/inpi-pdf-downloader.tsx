@@ -3,8 +3,8 @@
 import routes from '#clients/routes';
 import { Tag } from '#components-ui/tag';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { isAPILoading } from '#models/api-loading';
-import { isAPI404, isAPINotResponding } from '#models/api-not-responding';
+import { isAPI404 } from '#models/api-not-responding';
+import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import usePDFDownloader from 'hooks/fetch/download-pdf';
@@ -30,7 +30,7 @@ export function InpiPDFDownloader({ siren }: { siren: string }) {
 
   const pdf = usePDFDownloader(downloadLink);
 
-  if (isAPILoading(pdf)) {
+  if (isDataLoading(pdf)) {
     return <PDFFLoading />;
   }
 
@@ -38,7 +38,7 @@ export function InpiPDFDownloader({ siren }: { siren: string }) {
     return <PDFNotFound downloadLink={downloadLink} />;
   }
 
-  if (isAPINotResponding(pdf)) {
+  if (hasAnyError(pdf)) {
     return <PDFFailed downloadLink={downloadLink} />;
   }
   try {

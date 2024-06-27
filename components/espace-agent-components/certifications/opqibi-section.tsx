@@ -6,13 +6,19 @@ import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
+import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
-import { useFetchOpqibi } from 'hooks/fetch/espace-agent/opqibi';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 export const OpqibiSection: React.FC<{
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
-  const opqibi = useFetchOpqibi(uniteLegale);
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
+  const opqibi = useAPIRouteData(
+    'espace-agent/opqibi',
+    uniteLegale.siren,
+    session
+  );
   return (
     <DataSectionClient
       title="Certificat OPQIBI"

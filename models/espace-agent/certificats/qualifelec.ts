@@ -1,6 +1,6 @@
 import { clientApiEntrepriseQualifelec } from '#clients/api-entreprise/qualifelec';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { Siret } from '#utils/helpers';
+import { verifySiret } from '#utils/helpers';
 import { handleApiEntrepriseError } from '../utils';
 export type IQualifelec = Array<{
   documentUrl: string;
@@ -41,8 +41,9 @@ export type IQualifelec = Array<{
   };
 }>;
 export const getQualifelec = async (
-  siret: Siret
+  maybeSiret: string
 ): Promise<IQualifelec | IAPINotRespondingError> => {
+  const siret = verifySiret(maybeSiret);
   return clientApiEntrepriseQualifelec(siret).catch((error) =>
     handleApiEntrepriseError(error, { siret, apiResource: 'Qualifelec' })
   );

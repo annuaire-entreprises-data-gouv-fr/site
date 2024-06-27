@@ -3,6 +3,11 @@
 import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
 import { Info, Warning } from '#components-ui/alerts';
 import { Loader } from '#components-ui/loader';
+import {
+  IAPINotRespondingError,
+  isAPI404,
+  isAPINotResponding,
+} from '#models/api-not-responding';
 import constants from '#models/constants';
 import { debounce } from '#utils/helpers/debounce';
 import { httpGet } from '#utils/network';
@@ -45,10 +50,21 @@ export const FilterGeo: React.FC<{
   const search = useCallback(
     debounce((term: string) => {
       setLoading(true);
-      httpGet<IGeoSuggest[]>(`/api/data-fetching/geo/${term}`, {
-        timeout: constants.timeout.XXL,
-      })
+      httpGet<IGeoSuggest[] | IAPINotRespondingError>(
+        `/api/data-fetching/geo/${term}`,
+        {
+          timeout: constants.timeout.XXL,
+        }
+      )
         .then((data) => {
+          if (isAPI404(data)) {
+            setIssue(Issue.NORESULT);
+            return;
+          }
+          if (isAPINotResponding(data)) {
+            setIssue(Issue.ERROR);
+            return;
+          }
           setGeoSuggests(data);
           if (data.length === 0) {
             setIssue(Issue.NORESULT);

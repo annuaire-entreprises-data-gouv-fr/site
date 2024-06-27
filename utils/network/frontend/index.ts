@@ -108,11 +108,10 @@ export class RequestAbortedDuringUnloadException extends Exception {
 export class FailToFetchError extends Exception {
   constructor(
     args: { context: IExceptionContext; cause: any },
-    public status = 500
+    public status: number
   ) {
     super({
       name: 'FailToFetchError',
-      message: 'Error while trying to fetch ressource from client',
       ...args,
     });
   }

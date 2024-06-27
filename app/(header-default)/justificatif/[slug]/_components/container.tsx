@@ -2,7 +2,6 @@ import React from 'react';
 import AssociationCreationNotFoundAlert from '#components-ui/alerts-with-explanations/association-creation-not-found-alert';
 import ImmatriculationRNENotFoundAlert from '#components-ui/alerts-with-explanations/rne-not-found-alert';
 import BreakPageForPrint from '#components-ui/print-break-page';
-import { isAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -49,8 +48,7 @@ export const ImmatriculationsSection: React.FC<IProps> = ({
   const noAssociationImmatriculation =
     !isAnAssociation || (isAnAssociation && isNotFound(immatriculationJOAFE));
 
-  const noRNEImmatriculation =
-    !isAPILoading(immatriculationRNE) && isNotFound(immatriculationRNE);
+  const noRNEImmatriculation = isNotFound(immatriculationRNE);
 
   const noImmatriculation =
     noAssociationImmatriculation && noRNEImmatriculation;

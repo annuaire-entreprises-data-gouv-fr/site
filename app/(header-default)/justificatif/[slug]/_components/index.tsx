@@ -1,10 +1,16 @@
 'use client';
 
 import { Loader } from '#components-ui/loader';
-import { isAPILoading } from '#models/api-loading';
+import { ClientErrorExplanations } from '#components/error-explanations';
 import { IUniteLegale } from '#models/core/types';
+import {
+  hasFetchError,
+  isDataLoading,
+  isUnauthorized,
+} from '#models/data-fetching';
 import { ISession } from '#models/user/session';
-import useFetchRNEImmatriculation from 'hooks/fetch/RNE-immatriculation copy';
+import { useTimeout } from 'hooks';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { IJustificatifs, ImmatriculationsSection } from './container';
 
 const Immatriculations: React.FC<{
@@ -12,23 +18,27 @@ const Immatriculations: React.FC<{
   immatriculationJOAFE: IJustificatifs['immatriculationJOAFE'];
   session: ISession | null;
 }> = ({ uniteLegale, immatriculationJOAFE, session }) => {
-  const immatriculationRNE = useFetchRNEImmatriculation(uniteLegale);
-
-  return (
-    <>
-      {isAPILoading(immatriculationRNE) ? (
+  const immatriculationRNE = useAPIRouteData('rne', uniteLegale.siren, session);
+  const after100ms = useTimeout(100);
+  if (hasFetchError(immatriculationRNE) || isUnauthorized(immatriculationRNE)) {
+    return <ClientErrorExplanations />;
+  }
+  if (isDataLoading(immatriculationRNE)) {
+    return (
+      after100ms && (
         <>
           Chargement des données en cours <Loader />
         </>
-      ) : (
-        <ImmatriculationsSection
-          uniteLegale={uniteLegale}
-          immatriculationRNE={immatriculationRNE}
-          immatriculationJOAFE={immatriculationJOAFE}
-          session={session}
-        />
-      )}
-    </>
+      )
+    );
+  }
+  return (
+    <ImmatriculationsSection
+      uniteLegale={uniteLegale}
+      immatriculationRNE={immatriculationRNE}
+      immatriculationJOAFE={immatriculationJOAFE}
+      session={session}
+    />
   );
 };
 

@@ -54,11 +54,14 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
         />
         <PrintNever>
           {hasRights(session, EScope.conformite) && (
-            <ConformiteSection uniteLegale={uniteLegale} />
+            <ConformiteSection session={session} uniteLegale={uniteLegale} />
           )}
           <ActesSection uniteLegale={uniteLegale} session={session} />
           {hasRights(session, EScope.carteProfessionnelleTravauxPublics) && (
-            <CarteProfessionnelleTPSection uniteLegale={uniteLegale} />
+            <CarteProfessionnelleTPSection
+              session={session}
+              uniteLegale={uniteLegale}
+            />
           )}
         </PrintNever>
       </div>

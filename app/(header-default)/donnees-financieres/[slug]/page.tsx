@@ -48,9 +48,11 @@ const FinancePage = async (props: AppRouterProps) => {
           uniteLegale={uniteLegale}
           session={session}
         />
-        {/* We use to have finances for association but data disappeared from open data API. Code still exists in <FinancesAssociationSection /> */}
         {isAssociation(uniteLegale) ? (
-          <FinancesAssociationSection uniteLegale={uniteLegale} />
+          <FinancesAssociationSection
+            session={session}
+            uniteLegale={uniteLegale}
+          />
         ) : (
           <>
             <FinancesSocieteSection uniteLegale={uniteLegale} />

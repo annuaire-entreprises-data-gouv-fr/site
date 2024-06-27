@@ -1,36 +1,30 @@
 import { TVAUserException, clientTVA } from '#clients/api-vies';
-import { HttpConnectionReset } from '#clients/exceptions';
+import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { FetchRessourceException } from '#models/exceptions';
+import {
+  APINotRespondingFactory,
+  IAPINotRespondingError,
+} from '#models/api-not-responding';
 import { verifySiren, verifyTVANumber } from '#utils/helpers';
-import { logWarningInSentry } from '#utils/sentry';
 import { tvaNumber } from './utils';
 
 export const buildAndVerifyTVA = async (
   slug: string
-): Promise<string | null> => {
+): Promise<{ tva: string | null } | IAPINotRespondingError> => {
   const siren = verifySiren(slug);
   const tvaNumberFromSiren = verifyTVANumber(tvaNumber(siren));
 
   try {
-    return await clientTVA(tvaNumberFromSiren);
+    return { tva: await clientTVA(tvaNumberFromSiren) };
   } catch (e: any) {
     if (e instanceof TVAUserException) {
       throw e;
     }
-    const message =
-      e instanceof HttpConnectionReset
-        ? 'ECONNRESET in API TVA'
-        : 'Error in API TVA';
-    logWarningInSentry(
-      new FetchRessourceException({
-        message,
-        ressource: 'VerifyTVA',
-        administration: EAdministration.VIES,
-        cause: e,
-        context: { siren },
-      })
-    );
-    throw e;
+
+    // no need to log an error as API-Proxy already logged it
+    if (e instanceof HttpNotFound) {
+      return APINotRespondingFactory(EAdministration.VIES, 404);
+    }
+    return APINotRespondingFactory(EAdministration.VIES, 500);
   }
 };

@@ -5,13 +5,19 @@ import { DataSectionClient } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
-import { useFetchQualibat } from 'hooks/fetch/espace-agent/qualibat';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
-export const QualibatSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
-  uniteLegale,
-}) => {
-  const qualibat = useFetchQualibat(uniteLegale);
+export const QualibatSection: React.FC<{
+  uniteLegale: IUniteLegale;
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
+  const qualibat = useAPIRouteData(
+    'espace-agent/qualibat',
+    uniteLegale.siege.siret,
+    session
+  );
   return (
     <DataSectionClient
       title="Certificat Qualibat"

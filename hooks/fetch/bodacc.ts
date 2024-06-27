@@ -1,13 +1,13 @@
 import clientBodacc from '#clients/open-data-soft/clients/bodacc';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { FetchRessourceException } from '#models/exceptions';
 import { IUniteLegale } from '#models/core/types';
+import { FetchRessourceException } from '#models/exceptions';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import { useFetchData } from './use-fetch-data';
+import { useFetchExternalData } from './use-fetch-data';
 
 export function useFetchBODACC(uniteLegale: IUniteLegale) {
-  return useFetchData(
+  return useFetchExternalData(
     {
       fetchData: () => clientBodacc(verifySiren(uniteLegale.siren)),
       administration: EAdministration.DILA,

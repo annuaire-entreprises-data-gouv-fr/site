@@ -4,7 +4,7 @@ import BreakPageForPrint from '#components-ui/print-break-page';
 import { IUniteLegale } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import useFetchRNEImmatriculation from 'hooks/fetch/RNE-immatriculation copy';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import BeneficiairesSection from './beneficiaires';
 import DirigeantsProtectedSection from './protected-dirigeants';
 import DirigeantsSection from './rne-dirigeants';
@@ -17,7 +17,7 @@ export function DirigeantInformation({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
-  const immatriculationRNE = useFetchRNEImmatriculation(uniteLegale);
+  const immatriculationRNE = useAPIRouteData('rne', uniteLegale.siren, session);
 
   return (
     <>
@@ -32,6 +32,7 @@ export function DirigeantInformation({
         />
       ) : (
         <DirigeantsProtectedSection
+          session={session}
           uniteLegale={uniteLegale}
           immatriculationRNE={immatriculationRNE}
         />

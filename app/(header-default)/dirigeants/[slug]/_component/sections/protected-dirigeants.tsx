@@ -3,14 +3,16 @@ import { Info, Warning } from '#components-ui/alerts';
 import { INPI } from '#components/administrations';
 import { DataSectionClient } from '#components/section/data-section';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPILoading, isAPILoading } from '#models/api-loading';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
+import {
+  IDataFetchingState,
+  hasAnyError,
+  isDataLoading,
+} from '#models/data-fetching';
 import { IDirigeant, IImmatriculationRNE } from '#models/immatriculation';
-import useFetchRCSMandataires from 'hooks/fetch/RCS-mandataires';
+import { ISession } from '#models/user/session';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { DirigeantContent } from './dirigeant-content';
 import DirigeantsSection from './rne-dirigeants';
 
@@ -18,8 +20,9 @@ type IProps = {
   immatriculationRNE:
     | IImmatriculationRNE
     | IAPINotRespondingError
-    | IAPILoading;
+    | IDataFetchingState;
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 };
 
 function RCSDiffersFromRNE({
@@ -31,13 +34,10 @@ function RCSDiffersFromRNE({
   immatriculationRNE:
     | IImmatriculationRNE
     | IAPINotRespondingError
-    | IAPILoading;
+    | IDataFetchingState;
   uniteLegale: IUniteLegale;
 }) {
-  if (
-    isAPILoading(immatriculationRNE) ||
-    isAPINotResponding(immatriculationRNE)
-  ) {
+  if (isDataLoading(immatriculationRNE) || hasAnyError(immatriculationRNE)) {
     return null;
   }
 
@@ -71,21 +71,21 @@ function RCSDiffersFromRNE({
 function DirigeantsProtectedSection({
   uniteLegale,
   immatriculationRNE,
+  session,
 }: IProps) {
-  const mandatairesRCS = useFetchRCSMandataires(uniteLegale);
+  const mandatairesRCS = useAPIRouteData(
+    'espace-agent/rcs-mandataires',
+    uniteLegale.siren,
+    session
+  );
 
-  if (!isAPILoading(mandatairesRCS)) {
-    if (
-      isAPINotResponding(mandatairesRCS) ||
-      (!isAPINotResponding(mandatairesRCS) && mandatairesRCS.length === 0)
-    ) {
-      return (
-        <DirigeantsSection
-          uniteLegale={uniteLegale}
-          immatriculationRNE={immatriculationRNE}
-        />
-      );
-    }
+  if (hasAnyError(mandatairesRCS)) {
+    return (
+      <DirigeantsSection
+        uniteLegale={uniteLegale}
+        immatriculationRNE={immatriculationRNE}
+      />
+    );
   }
 
   return (

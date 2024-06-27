@@ -68,6 +68,7 @@ const ClientErrorExplanations = ({ error }: { error?: Error }) => (
           Ce problème a été automatiquement signalé à notre équipe technique,
           qui va essayer de le corriger au plus vite.
         </p>
+        <p>Vous pouvez essayer de recharger la page ou de revenir plus tard.</p>
       </>
     )}
   </ErrorTemplate>

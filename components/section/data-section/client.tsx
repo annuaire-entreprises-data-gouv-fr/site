@@ -4,15 +4,21 @@
 import { useEffect, useState } from 'react';
 import { FadeIn } from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
-import { IAPILoading, isAPILoading } from '#models/api-loading';
-import { IAPINotRespondingError } from '#models/api-not-responding';
+import { IAPINotRespondingError, isAPI404 } from '#models/api-not-responding';
+import {
+  IDataFetchingState,
+  hasFetchError,
+  isDataLoading,
+  isUnauthorized,
+} from '#models/data-fetching';
 import { useTimeout } from 'hooks/use-timeout';
-import { DataSection } from '.';
 import { ISectionProps, Section } from '..';
+import { DataSectionContent } from './content';
+import DataFetchErrorExplanation from './error';
 import { DataSectionLoader } from './loader';
 
 interface IDataSectionClientProps<T> extends ISectionProps {
-  data: IAPINotRespondingError | IAPILoading | T;
+  data: IAPINotRespondingError | IDataFetchingState | T;
   notFoundInfo?: NonNullable<React.ReactNode>;
   additionalInfoOnError?: React.ReactNode;
   children: (data: T) => JSX.Element;
@@ -23,7 +29,11 @@ export function AsyncDataSectionClient<T>({
 }: IDataSectionClientProps<T>) {
   const showLoadingState = useShowLoadingState(data);
 
-  if (isAPILoading(data) && !showLoadingState) {
+  if (isUnauthorized(data)) {
+    return null;
+  }
+
+  if (isDataLoading(data) && !showLoadingState) {
     return <div style={{ minHeight: '80px' }} />;
   }
 
@@ -38,19 +48,47 @@ export function AsyncDataSectionClient<T>({
       </Section>
     );
   }
-  return <DataSection data={data} {...props} />;
+  if (hasFetchError(data)) {
+    return (
+      <Section {...props}>
+        <DataFetchErrorExplanation fetchErrorType={data} />
+      </Section>
+    );
+  }
+  if (props.notFoundInfo === null && isAPI404(data)) {
+    return null;
+  }
+  //@ts-ignore
+  const lastModified = data?.lastModified || null;
+
+  return (
+    <Section {...props} lastModified={lastModified}>
+      <HeightTransition>
+        <FadeIn key={lastModified}>
+          <DataSectionContent
+            data={data}
+            notFoundInfo={props.notFoundInfo}
+            children={props.children}
+            additionalInfoOnError={props.additionalInfoOnError}
+          />
+        </FadeIn>
+      </HeightTransition>
+    </Section>
+  );
 }
 
 /** Contains the logic that prevents flickering of UI */
-function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
+function useShowLoadingState<T>(
+  data: IDataFetchingState.LOADING | T
+): data is IDataFetchingState.LOADING {
   const before100ms = !useTimeout(100);
   const before800ms = !useTimeout(800);
   const [dataLoadedBefore100ms, setDataLoadedBefore100ms] = useState(
-    before100ms && !isAPILoading(data)
+    before100ms && !isDataLoading(data)
   );
 
   useEffect(() => {
-    if (!isAPILoading(data) && before100ms) {
+    if (!isDataLoading(data) && before100ms) {
       setDataLoadedBefore100ms(true);
     }
   }, [data]);
@@ -62,5 +100,5 @@ function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
     // We show the loading state for at least 500ms to avoid flickering
     return true;
   }
-  return isAPILoading(data);
+  return isDataLoading(data);
 }

@@ -5,15 +5,22 @@ import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatDate, formatDateLong } from '#utils/helpers';
-import { useFetchQualifelec } from 'hooks/fetch/espace-agent/qualifelec';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 export function QualifelecSection({
   uniteLegale,
+  session,
 }: {
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 }) {
-  const qualifelec = useFetchQualifelec(uniteLegale);
+  const qualifelec = useAPIRouteData(
+    'espace-agent/qualifelec',
+    uniteLegale.siege.siret,
+    session
+  );
   return (
     <DataSectionClient
       title="Certificats Qualifelec"

@@ -9,9 +9,9 @@ import { AsyncDataSectionClient } from '#components/section/data-section/client'
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
+import { IDataFetchingState } from '#models/data-fetching';
 import { IBeneficiaire, IImmatriculationRNE } from '#models/immatriculation';
 import { formatDatePartial } from '#utils/helpers';
 
@@ -19,7 +19,7 @@ type IProps = {
   immatriculationRNE:
     | IImmatriculationRNE
     | IAPINotRespondingError
-    | IAPILoading;
+    | IDataFetchingState;
   uniteLegale: IUniteLegale;
 };
 

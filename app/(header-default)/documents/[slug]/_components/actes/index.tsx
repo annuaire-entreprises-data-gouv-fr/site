@@ -1,8 +1,7 @@
 import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
-import { IUniteLegale, isAssociation } from '#models/core/types';
+import { IUniteLegale } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { AgentDocumentsAssociation } from './actes-association';
 import { AgentActesRNE } from './actes-rne';
 
 const ActesSection: React.FC<{
@@ -20,10 +19,10 @@ const ActesSection: React.FC<{
   }
   return (
     <>
-      <AgentActesRNE uniteLegale={uniteLegale} />
-      {isAssociation(uniteLegale) && (
+      <AgentActesRNE uniteLegale={uniteLegale} session={session} />
+      {/* {isAssociation(uniteLegale) && (
         <AgentDocumentsAssociation uniteLegale={uniteLegale} />
-      )}
+      )} */}
     </>
   );
 };

@@ -4,9 +4,9 @@ import { INPI } from '#components/administrations';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
+import { IDataFetchingState } from '#models/data-fetching';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { DirigeantContent } from './dirigeant-content';
 
@@ -14,7 +14,7 @@ type IProps = {
   immatriculationRNE:
     | IImmatriculationRNE
     | IAPINotRespondingError
-    | IAPILoading;
+    | IDataFetchingState;
   uniteLegale: IUniteLegale;
 };
 
