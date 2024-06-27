@@ -22,8 +22,8 @@ export default function ChangelogWithFilters() {
   useEffect(() => {
     setData(
       changelogData
-        .filter((c) => showAgents || c.isProtected)
-        .filter((c) => showPublic || !c.isProtected)
+        .filter((c) => showAgents || !c.isProtected)
+        .filter((c) => showPublic || c.isProtected)
     );
   }, [showAgents, showPublic]);
 

@@ -64,7 +64,7 @@ export const AgentActesRNE: React.FC<{
                   documents.actes.length - 5
                 } documents supplémentaires`}
               >
-                <ActesTable actes={documents.actes.slice(0, 5)} />
+                <ActesTable actes={documents.actes} />
               </ShowMore>
             ) : (
               <ActesTable actes={documents.actes} />

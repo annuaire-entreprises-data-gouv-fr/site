@@ -1,4 +1,6 @@
 ---
+- date: 27/06/2024
+  body: Ajout de la vérification du [numéro EORI](https://www.economie.gouv.fr/entreprises/numero-eori) pour tous les visiteurs.
 - date: 14/05/2024
   isProtected: true
   body: |

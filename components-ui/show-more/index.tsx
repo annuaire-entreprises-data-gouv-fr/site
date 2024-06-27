@@ -1,7 +1,7 @@
 'use client';
 
-import { CSSProperties, useId, useState } from 'react';
 import ButtonLink from '#components-ui/button';
+import { CSSProperties, useId, useState } from 'react';
 import styles from './style.module.css';
 
 type IProps = {
@@ -22,7 +22,7 @@ Design point of attention:
 export default function ShowMore(props: IProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const id = useId();
-  const collapsedHeight = props.collapsedHeight ?? '30rem';
+  const collapsedHeight = props.collapsedHeight ?? '20rem';
   return (
     <div
       className={isExpanded ? styles['expanded'] : styles['collapsed']}
