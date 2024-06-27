@@ -13,14 +13,14 @@
   border-color: #0a76f6;
 }
 
-.selected-filter-container>a {
+.selected-filter-container > a {
   padding: 5px 10px 5px 5px;
   font-weight: bold;
   position: absolute;
   right: 0;
 }
 
-.selected-filter-container>a:hover {
+.selected-filter-container > a:hover {
   background-color: #00009111;
 }
 
@@ -45,8 +45,6 @@ span.search-filter-label {
   border-radius: 3px;
   padding: 5px 10px;
 }
-
-
 
 span.search-filter-label:hover {
   border-color: #0a76f6;
@@ -84,7 +82,7 @@ span.search-filter-label:hover {
   border-color: transparent transparent white transparent;
 }
 
-.container>.filter-container {
+.container > .filter-container {
   max-height: 400px;
   overflow-y: auto;
   z-index: 100;
@@ -96,7 +94,7 @@ span.search-filter-label:hover {
     position: fixed;
     top: 0;
     left: 0;
-    padding-top: 50px;
+    padding-top: 50px !important;
     width: 100vw;
     height: 100vh;
     margin-top: 0;

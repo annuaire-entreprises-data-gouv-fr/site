@@ -6,7 +6,6 @@ import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
 import { getConformiteEntreprise } from '#models/espace-agent/conformite';
 import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
-import { searchGeoElementByText } from '#models/geo';
 import {
   getDocumentsRNEProtected,
   getImmatriculationRNE,
@@ -25,7 +24,6 @@ export const APIRoutesHandlers = {
   rne: getImmatriculationRNE,
   association: getAssociationFromSlug,
   'verify-tva': buildAndVerifyTVA,
-  geo: searchGeoElementByText,
   'eori-validation': getEORIValidation,
 } as const;
 
