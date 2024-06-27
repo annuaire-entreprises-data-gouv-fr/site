@@ -92,7 +92,7 @@ function ActesTable({ actes }: IActesTableProps) {
               {label && (
                 <>
                   {' - '}
-                  <i>label</i>
+                  <i>{label}</i>
                 </>
               )}
             </li>
