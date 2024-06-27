@@ -88,11 +88,13 @@ function ActesTable({ actes }: IActesTableProps) {
         <ul>
           {(a?.detailsDocuments || []).map(({ nom, label }) => (
             <li key={nom}>
-              <b>
-                {nom}
-                {label && ' :'}
-              </b>
-              {label}
+              <b>{nom}</b>
+              {label && (
+                <>
+                  {' - '}
+                  <i>label</i>
+                </>
+              )}
             </li>
           ))}
         </ul>,
