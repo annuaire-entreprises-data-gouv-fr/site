@@ -167,6 +167,7 @@ const routes = {
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
     tva: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
+    eori: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/eori/',
   },
   rne: {
     portail: {

@@ -1,23 +1,13 @@
 'use client';
 
 import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
+import { IGeoElement } from '#clients/geo';
 import { Info, Warning } from '#components-ui/alerts';
 import { Loader } from '#components-ui/loader';
-import {
-  IAPINotRespondingError,
-  isAPI404,
-  isAPINotResponding,
-} from '#models/api-not-responding';
-import constants from '#models/constants';
+import { isAPI404, isAPINotResponding } from '#models/api-not-responding';
+import { searchGeoElementByText } from '#models/geo';
 import { debounce } from '#utils/helpers/debounce';
-import { httpGet } from '#utils/network';
 import { useStorage } from 'hooks';
-
-type IGeoSuggest = {
-  label: string;
-  value: string;
-  type: 'insee' | 'cp' | 'dep';
-};
 
 enum Issue {
   NONE = 2,
@@ -37,7 +27,7 @@ export const FilterGeo: React.FC<{
   const [issue, setIssue] = useState(Issue.NONE);
   const [searchTerm, setSearchTerm] = useState(cp_dep_label);
   const [isLoading, setLoading] = useState(false);
-  const [geoSuggests, setGeoSuggests] = useState<IGeoSuggest[]>([]);
+  const [geoSuggests, setGeoSuggests] = useState<IGeoElement[]>([]);
 
   const [suggestsHistory, setSuggestsHistory] = useStorage(
     'local',
@@ -48,37 +38,31 @@ export const FilterGeo: React.FC<{
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const search = useCallback(
-    debounce((term: string) => {
+    debounce(async (term: string) => {
       setLoading(true);
-      httpGet<IGeoSuggest[] | IAPINotRespondingError>(
-        `/api/data-fetching/geo/${term}`,
-        {
-          timeout: constants.timeout.XXL,
+      try {
+        const result = await searchGeoElementByText(term);
+
+        if (isAPI404(result)) {
+          setIssue(Issue.NORESULT);
+        } else if (isAPINotResponding(result)) {
+          setIssue(Issue.ERROR);
+        } else {
+          setGeoSuggests(result);
+          if (result.length === 0) {
+            setIssue(Issue.NORESULT);
+          }
         }
-      )
-        .then((data) => {
-          if (isAPI404(data)) {
-            setIssue(Issue.NORESULT);
-            return;
-          }
-          if (isAPINotResponding(data)) {
-            setIssue(Issue.ERROR);
-            return;
-          }
-          setGeoSuggests(data);
-          if (data.length === 0) {
-            setIssue(Issue.NORESULT);
-          }
-          setLoading(false);
-        })
-        .catch((e) => {
-          setIssue(e?.status === 404 ? Issue.NORESULT : Issue.ERROR);
-        });
+      } catch (e: any) {
+        setIssue(e?.status === 404 ? Issue.NORESULT : Issue.ERROR);
+      } finally {
+        setLoading(false);
+      }
     }),
     []
   );
 
-  const selectDep = ({ label, value, type }: IGeoSuggest) => {
+  const selectDep = ({ label, value, type }: IGeoElement) => {
     setDep(value);
     setLabelDep(label);
     setTypeDep(type);
@@ -87,11 +71,11 @@ export const FilterGeo: React.FC<{
     saveSuggestsHistory({ label, value, type });
   };
 
-  const saveSuggestsHistory = ({ label, value, type }: IGeoSuggest) => {
+  const saveSuggestsHistory = ({ label, value, type }: IGeoElement) => {
     try {
       const newSuggestHistory = [
         { label, value, type },
-        ...suggestsHistory.filter((s: IGeoSuggest) => s.value !== value),
+        ...suggestsHistory.filter((s: IGeoElement) => s.value !== value),
       ];
 
       setSuggestsHistory(newSuggestHistory.slice(0, 4));
@@ -181,7 +165,7 @@ export const FilterGeo: React.FC<{
             suggestsHistory.length > 0 && (
               <div className="drop-down">
                 <strong>Localisations récentes :</strong>
-                {suggestsHistory.map((suggest: IGeoSuggest) => (
+                {suggestsHistory.map((suggest: IGeoElement) => (
                   <div
                     key={'suggest-history-' + suggest.label}
                     className="suggest cursor-pointer"
@@ -198,7 +182,7 @@ export const FilterGeo: React.FC<{
                 <Loader />
               </div>
             ) : (
-              geoSuggests.map((suggest: IGeoSuggest) => (
+              geoSuggests.map((suggest: IGeoElement) => (
                 <div
                   key={suggest.label}
                   className="suggest cursor-pointer"

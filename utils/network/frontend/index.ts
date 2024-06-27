@@ -34,12 +34,6 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
   }
   // use cache is ignore on frontend as it is handled by browser
 
-  if (config.method || config.data || config.headers) {
-    throw new InternalError({
-      message: 'Feature not yet supported on frontend client',
-    });
-  }
-
   const controller = new AbortController();
   const timeoutId = setTimeout(() => {
     controller.abort(new HttpTimeoutError('Timeout'));
@@ -48,6 +42,9 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
   try {
     const response = await fetch(buildUrl(config.url, config.params), {
       signal: controller.signal,
+      headers: config.headers,
+      method: config.method || 'GET',
+      body: config.data as BodyInit | null | undefined,
     });
     const isJson = response.headers
       .get('content-type')

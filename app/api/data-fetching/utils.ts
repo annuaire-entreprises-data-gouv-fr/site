@@ -28,9 +28,10 @@ export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
   return async function (request, params) {
     const { isBot } = userAgent(request);
     const routeAndSlug = getRouteAndSlug(params);
+
     if (isBot) {
       throw new APIRouteError(
-        'Antibot Activated : user is a bot',
+        'Antibot activated : user is a bot',
         routeAndSlug,
         401
       );
@@ -39,7 +40,7 @@ export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
     const session = await getSession();
     if (!userVisitedAPageRecently(session)) {
       throw new APIRouteError(
-        'Antibot Activated : user has not visited a page recently',
+        'Antiscrap activated : user has not visited a page recently',
         routeAndSlug,
         401
       );

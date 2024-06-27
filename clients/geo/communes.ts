@@ -36,7 +36,7 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
   return response
     .sort((a, b) => b.codesPostaux.length - a.codesPostaux.length)
     .reduce(
-      (communes: IGeoElement[], commune) => [
+      (communes: IGeoElement[], commune: IGeoCommuneResponse) => [
         ...communes,
         ...(['Paris', 'Lyon', 'Marseille'].indexOf(commune.nom) === -1
           ? [
@@ -44,12 +44,16 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
                 type: 'insee',
                 value: commune.code,
                 label: `${commune.nom} (Toute la ville)`,
-              },
+              } as IGeoElement,
             ]
           : []),
         ...(commune.codesPostaux.length > 1
           ? commune.codesPostaux.map((cp) => {
-              return { label: `${commune.nom} (${cp})`, value: cp, type: 'cp' };
+              return {
+                label: `${commune.nom} (${cp})`,
+                value: cp,
+                type: 'cp',
+              } as IGeoElement;
             })
           : []),
       ],

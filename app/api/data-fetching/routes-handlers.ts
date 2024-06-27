@@ -1,11 +1,11 @@
 import { getAssociationFromSlug } from '#models/association';
+import { getEORIValidation } from '#models/eori-validation';
 import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte-professionnelle-travaux-publics';
 import { getOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
 import { getConformiteEntreprise } from '#models/espace-agent/conformite';
 import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
-import { searchGeoElementByText } from '#models/geo';
 import {
   getDocumentsRNEProtected,
   getImmatriculationRNE,
@@ -24,7 +24,7 @@ export const APIRoutesHandlers = {
   rne: getImmatriculationRNE,
   association: getAssociationFromSlug,
   'verify-tva': buildAndVerifyTVA,
-  geo: searchGeoElementByText,
+  'eori-validation': getEORIValidation,
 } as const;
 
 export type APIPath = keyof typeof APIRoutesHandlers;

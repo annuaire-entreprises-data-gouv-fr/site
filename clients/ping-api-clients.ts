@@ -1,9 +1,15 @@
 import { clientAssociation } from '#clients/api-proxy/association';
 import { tvaNumber } from '#models/tva/utils';
-import { verifyIdRna, verifySiren, verifyTVANumber } from '#utils/helpers';
+import {
+  verifyIdRna,
+  verifySiren,
+  verifySiret,
+  verifyTVANumber,
+} from '#utils/helpers';
 import { clientMarcheInclusion } from './api-inclusion';
+import { clientEORI } from './api-proxy/eori';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
-import { clientTVA } from './api-vies';
+import { clientTVA } from './api-proxy/tva';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
 import { clientUniteLegaleRechercheEntreprise } from './recherche-entreprise/siren';
 import { clientUniteLegaleInsee } from './sirene-insee/siren';
@@ -16,8 +22,9 @@ export class APISlugNotFound extends Error {
 
 const ping = async (slug: string | string[]) => {
   const sirenGanymede = verifySiren('880878145');
+  const siretGanymede = verifySiret('88087814500015');
   const sirenDanone = verifySiren('552032534');
-  const siretInclusion = verifySiren('419437629');
+  const sirenInclusion = verifySiren('419437629');
 
   const useCache = false;
 
@@ -35,10 +42,12 @@ const ping = async (slug: string | string[]) => {
     case 'api-association':
       return await clientAssociation(verifyIdRna('W551000280'), '', useCache);
     case 'api-marche-inclusion':
-      return await clientMarcheInclusion(siretInclusion);
+      return await clientMarcheInclusion(sirenInclusion);
     case 'api-tva':
       const tva = verifyTVANumber(tvaNumber(sirenDanone));
       return await clientTVA(tva, useCache);
+    case 'api-eori':
+      return await clientEORI(siretGanymede);
     case 'api-recherche':
       return await clientSearchRechercheEntreprise({
         searchTerms: 'test',

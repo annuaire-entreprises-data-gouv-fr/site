@@ -66,7 +66,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
             Dernière mise à jour : {formatDateLong(lastModified)}.
           </Warning>
         )}
-        <div style={{ overflow: 'hidden' }}>{children}</div>
+        <div>{children}</div>
         {dataSources.length > 0 && (
           <div className={style['administration-page-link']}>
             <DataSourcesTooltip

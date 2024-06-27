@@ -12,11 +12,9 @@ import {
   IAPINotRespondingError,
 } from '#models/api-not-responding';
 
-type GeoSearchResults = Array<IGeoElement>;
-
 export async function searchGeoElementByText(
   slug: string
-): Promise<GeoSearchResults | IAPINotRespondingError> {
+): Promise<IGeoElement[] | IAPINotRespondingError> {
   const term = slug as string;
   const isNumber = /^[0-9]+$/.test(term);
   if (isNumber) {
