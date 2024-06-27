@@ -59,7 +59,7 @@ export function useAPIRouteData<T extends APIPath>(
         logErrorInSentry(
           new InternalError({
             cause: e,
-            message: "Ce type d'erreur n'est pas géré",
+            message: 'Unhandled error',
           })
         );
         setResponse(IDataFetchingState.MODEL_ERROR);
