@@ -4,9 +4,14 @@ long: Direction Générale des Douanes
 site: https://www.douane.gouv.fr/
 contact: https://www.douane.gouv.fr/formulaire-infos-douane-service
 logoType: portrait
+apiMonitors:
+  - apiName: API EORI
+    apiSlug: api-eori
+    updownIoId: 7xy2
+    apiDocumentationLink: https://ec.europa.eu/taxation_customs/dds2/eos/eos_home.jsp
 dataSources:
   - label: EORI
-    apiSlug: api-entreprise
+    apiSlug: api-eori
     data:
       - label: numéro EORI
 description: |

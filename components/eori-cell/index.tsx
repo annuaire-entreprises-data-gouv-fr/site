@@ -11,17 +11,19 @@ import {
   isDataLoading,
   isUnauthorized,
 } from '#models/data-fetching';
+import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 type IProps = {
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 };
 export default function EORICell(props: IProps) {
   const eoriValidation = useAPIRouteData(
     'eori-validation',
     props.uniteLegale.siege.siret,
-    null
+    props.session
   );
   if (isDataLoading(eoriValidation))
     return (
@@ -58,8 +60,8 @@ export default function EORICell(props: IProps) {
         label={
           <>
             Nous n’avons pas pu controler la validité du numéro EORI car le
-            téléservice EOS ne fonctionne pas actuellement. Merci de ré-essayer
-            plus tard pour vérifier si cette structure possède un numéro EORI
+            téléservice ne fonctionne pas actuellement. Merci de ré-essayer plus
+            tard pour vérifier si cette structure possède un numéro EORI
           </>
         }
         orientation="left"

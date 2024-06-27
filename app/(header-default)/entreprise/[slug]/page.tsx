@@ -18,7 +18,6 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { getImmatriculationEORI } from '#models/espace-agent/immatriculation-eori';
 import { EScope, hasRights } from '#models/user/rights';
 import {
   shouldNotIndex,
@@ -55,10 +54,6 @@ export default async function UniteLegalePage(props: AppRouterProps) {
   const session = await getSession();
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
-  const immatriculationEORI = hasRights(session, EScope.eori)
-    ? await getImmatriculationEORI(uniteLegale.siege.siret)
-    : null;
-
   return (
     <>
       {isRedirected && (
@@ -77,7 +72,6 @@ export default async function UniteLegalePage(props: AppRouterProps) {
             <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
             {hasRights(session, EScope.isAgent) && (
               <EspaceAgentSummarySection
-                immatriculationEORI={immatriculationEORI}
                 uniteLegale={uniteLegale}
                 session={session}
               />

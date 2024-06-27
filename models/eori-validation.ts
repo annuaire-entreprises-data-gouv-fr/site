@@ -18,11 +18,11 @@ export const getEORIValidation = async (
     const siret = verifySiret(eori);
     const data = await clientEORI(siret);
     if (!data) {
-      return APINotRespondingFactory(EAdministration.EOS, 500);
+      return APINotRespondingFactory(EAdministration.DOUANES, 500);
     }
     return data;
   } catch (e: any) {
     console.error(e);
-    return APINotRespondingFactory(EAdministration.EOS, e.status || 500);
+    return APINotRespondingFactory(EAdministration.DOUANES, e.status || 500);
   }
 };
