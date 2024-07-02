@@ -24,7 +24,7 @@ export const generateMetadata = async (
   const session = await getSession();
 
   return {
-    robots: 'noindex, nofollow',
+    robots: 'noindex',
     title: `Données financières - ${uniteLegalePageTitle(
       uniteLegale,
       session

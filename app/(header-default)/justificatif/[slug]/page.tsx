@@ -26,7 +26,7 @@ export const generateMetadata = async (
       session
     )}`,
     description: uniteLegalePageDescription(uniteLegale, session),
-    robots: 'noindex, nofollow',
+    robots: 'follow, noindex',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/justificatif/${uniteLegale.siren}`,
     },
