@@ -22,7 +22,7 @@ Design point of attention:
 export default function ShowMore(props: IProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const id = useId();
-  const collapsedHeight = props.collapsedHeight ?? '25rem';
+  const collapsedHeight = props.collapsedHeight ?? '30rem';
   return (
     <div
       className={isExpanded ? styles['expanded'] : styles['collapsed']}
