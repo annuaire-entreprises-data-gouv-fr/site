@@ -12,7 +12,8 @@ export const EspaceAgentLink = ({ pathFrom }: { pathFrom: string }) => (
     onClick={() => logConversionEvent('HEADER_LOGIN')}
     aria-label="Accéder à la page de connexion de l'espace agent public"
   >
-    <Icon slug="accountLine">
+    <span className="fr-sr-only">Accéder à l’espace agent public</span>
+    <Icon slug="accountLine" alt="" aria-hidden>
       <span className={styles.menuText}>Espace agent public</span>
     </Icon>
   </a>
