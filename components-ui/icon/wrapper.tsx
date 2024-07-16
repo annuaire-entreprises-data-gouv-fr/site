@@ -8,6 +8,7 @@ type IProps = {
   size?: number;
   color?: string;
   slug: IIconsSlug;
+  alt: string;
 };
 
 export const Icon: React.FC<PropsWithChildren<IProps>> = ({
@@ -15,6 +16,7 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
   className = '',
   size = 18,
   color,
+  alt,
   children,
   slug,
 }) => {
@@ -35,6 +37,7 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
           alignItems: 'center',
           justifyContent: 'center',
         }}
+        alt={alt}
       >
         {icon}
       </span>
