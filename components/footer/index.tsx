@@ -217,13 +217,13 @@ const Footer = () => (
       <div className="fr-container">
         <div className="fr-footer__body">
           <div className="fr-footer__brand">
-            <a className="fr-logo" href="#" title="république française">
+            <span className="fr-logo">
               <span className="fr-logo__title">
                 république
                 <br />
                 française
               </span>
-            </a>
+            </span>
           </div>
           <div className="fr-footer__content">
             <p className="fr-footer__content-desc">
