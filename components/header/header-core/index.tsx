@@ -39,6 +39,9 @@ export const HeaderCore: React.FC<IProps> = ({
   return (
     <>
       <LoadBar session={session} />
+      <aside>
+        <InfoBanner />
+      </aside>
       <header
         role="banner"
         className="fr-header"
