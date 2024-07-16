@@ -8,7 +8,6 @@ export const InfoBanner: React.FC<{}> = () => (
   <PrintNever>
     <div
       className="info-banner"
-      role="dialog"
       aria-label="Instabilité des services de nos partenaires"
       style={{
         paddingTop: '10px',
@@ -27,10 +26,7 @@ export const InfoBanner: React.FC<{}> = () => (
           size={14}
         >
           Suite à la mise à jour{' '}
-          <a
-            className="fr-link"
-            href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/"
-          >
+          <a href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/">
             de la base Sirene
           </a>{' '}
           de l’

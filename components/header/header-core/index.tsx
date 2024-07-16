@@ -32,13 +32,14 @@ export const HeaderCore: React.FC<IProps> = ({
   return (
     <>
       <LoadBar session={session} />
+      <aside>
+        <InfoBanner />
+      </aside>
       <header
         role="banner"
         className="fr-header"
         style={{ filter: !useSearchBar ? 'none' : undefined }}
       >
-        <InfoBanner />
-
         <PrintNever>
           <div className="fr-header__body">
             <div className="fr-container">
