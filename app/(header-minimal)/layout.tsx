@@ -17,7 +17,9 @@ export default function HomeLayout({
         useAgentCTA={false}
         useAgentBanner={false}
       />
-      <main className="fr-container">{children}</main>
+      <main className="fr-container" id="contenu">
+        {children}
+      </main>
       <Question />
     </>
   );

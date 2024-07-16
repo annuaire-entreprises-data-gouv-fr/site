@@ -21,7 +21,9 @@ export default function LayoutWithSearchBar({
         useAgentCTA={true}
         useAgentBanner={true}
       />
-      <main className="fr-container">{children}</main>
+      <main className="fr-container" id="contenu">
+        {children}
+      </main>
       <SocialNetworks />
       <Question />
       <Footer />
