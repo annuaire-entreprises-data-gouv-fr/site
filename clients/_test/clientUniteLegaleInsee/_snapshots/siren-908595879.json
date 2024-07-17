@@ -166,7 +166,6 @@
     "colter": {
       "codeColter": null
     },
-    "listeIdcc": [],
-    "conventionsCollectives": {}
+    "listeIdcc": []
   }
 }

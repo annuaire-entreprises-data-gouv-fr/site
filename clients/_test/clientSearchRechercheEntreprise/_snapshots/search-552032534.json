@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
           "trancheEffectif": "42",
           "libelleTrancheEffectif": "",
-          "latitude": "48.87256499999998",
-          "longitude": "2.3349259999999994",
+          "latitude": "48.872565",
+          "longitude": "2.334926",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [
@@ -85,8 +85,8 @@
               "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
               "trancheEffectif": "42",
               "libelleTrancheEffectif": "",
-              "latitude": "48.87256499999998",
-              "longitude": "2.3349259999999994",
+              "latitude": "48.872565",
+              "longitude": "2.334926",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [
@@ -127,8 +127,8 @@
               "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
               "trancheEffectif": "42",
               "libelleTrancheEffectif": "",
-              "latitude": "48.87256499999998",
-              "longitude": "2.3349259999999994",
+              "latitude": "48.872565",
+              "longitude": "2.334926",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [
@@ -157,8 +157,8 @@
         "dateCreation": "1955-01-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-05-31T05:30:41",
-        "dateMiseAJourInpi": "2024-06-07T04:12:57",
+        "dateMiseAJourInsee": "2024-06-22T05:26:24",
+        "dateMiseAJourInpi": "2024-06-25T10:22:46",
         "dateDebutActivite": "",
         "trancheEffectif": "42",
         "anneeCategorieEntreprise": "2021",
@@ -192,7 +192,6 @@
         "listeIdcc": [
           "9999"
         ],
-        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 17,
         "nombreEtablissementsOuverts": 2,
