@@ -2,6 +2,7 @@
 
 import React from 'react';
 import routes from '#clients/routes';
+import { Warning } from '#components-ui/alerts';
 import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
@@ -87,6 +88,7 @@ function BénéficiairesContent({
 
   return (
     <>
+      <WarningRBE />
       {immatriculationRNE.beneficiaires.length === 0 ? (
         <p>
           Cette structure ne possède aucun{' '}
@@ -139,3 +141,35 @@ function BénéficiairesContent({
     </>
   );
 }
+
+const WarningRBE = () => (
+  <Warning>
+    À compter du 31 juillet 2024, le registre des bénéficiaires effectifs n’est
+    plus accessible au public, en application de la{' '}
+    <a
+      href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000049761732"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      directive européenne 2024/1640 du 31 mai 2024
+    </a>
+    . Désormais, seules les{' '}
+    <a
+      href="https://www.inpi.fr/faq/qui-peut-acceder-aux-donnees-des-beneficiaires-effectifs"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      personnes en mesure de justifier d’un intérêt légitime
+    </a>{' '}
+    peuvent{' '}
+    <a
+      href="https://data.inpi.fr/content/editorial/acces_BE"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      effectuer une demande d’accès
+    </a>{' '}
+    au registre auprès de l’
+    <INPI />.
+  </Warning>
+);
