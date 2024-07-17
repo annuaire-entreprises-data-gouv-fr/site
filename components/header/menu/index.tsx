@@ -63,7 +63,7 @@ const Menu: React.FC<{
       >
         <span className="fr-sr-only">{userText}</span>
         <span aria-hidden className={styles.menuText}>
-          <Icon slug="accountLine" alt="">
+          <Icon slug="accountLine">
             {userText}
             &nbsp;(
             <strong
@@ -101,7 +101,7 @@ const Menu: React.FC<{
           aria-label="Se déconnecter de l'espace agent public"
           href={logoutUrl}
           tabIndex={-1}
-          className="fr-link"
+          className="fr-link no-style-link"
           onMouseDown={logout}
           role="menuitem"
         >

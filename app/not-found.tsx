@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <>
       <HeaderServer useSearchBar={true} useAgentCTA={true} />
-      <main className="fr-container">
+      <main className="fr-container" id="contenu">
         <ErrorNotFoundExplanations />
       </main>
       <QuestionOrFeedback session={null} />

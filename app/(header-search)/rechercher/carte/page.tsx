@@ -40,7 +40,11 @@ const MapSearchResultPage = async function UniteLegalePage(
         searchParams={searchFilterParamsJSON}
         currentSearchTerm={searchTerm}
       />
-      <main style={{ maxWidth: '100%', marginBottom: 0 }} className="map">
+      <main
+        id="contenu"
+        style={{ maxWidth: '100%', marginBottom: 0 }}
+        className="map"
+      >
         <StructuredDataSearchAction />
         <HiddenH1 title="Résultats de recherche" />
         <SearchResultsMap

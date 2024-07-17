@@ -15,7 +15,9 @@ export default async function HomeLayout({
   return (
     <>
       <HeaderServer useSearchBar={false} useAgentCTA={false} />
-      <main className="fr-container">{children}</main>
+      <main className="fr-container" id="contenu">
+        {children}
+      </main>
       <QuestionOrFeedback session={session} />
     </>
   );

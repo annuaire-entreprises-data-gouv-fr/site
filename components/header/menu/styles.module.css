@@ -1,5 +1,6 @@
 .menuLogout {
   position: relative;
+  font-size: small;
 }
 .menuLogout > button {
   margin: 0 !important;
