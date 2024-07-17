@@ -7,7 +7,6 @@ import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation';
 import { IdRna, Siren, Siret } from '#utils/helpers';
 import { EAdministration } from '../administrations/EAdministration';
-import { IConventionsCollectives } from '../conventions-collectives';
 import {
   Exception,
   FetchRessourceException,
@@ -115,7 +114,6 @@ export interface IUniteLegale extends IEtablissementsList {
     codeColter: string | null;
   };
   listeIdcc: string[];
-  conventionsCollectives: IConventionsCollectives;
 }
 
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
@@ -154,7 +152,6 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
       codeColter: null,
     },
     listeIdcc: [],
-    conventionsCollectives: {},
   };
 };
 
