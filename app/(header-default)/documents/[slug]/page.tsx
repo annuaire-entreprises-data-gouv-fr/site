@@ -32,9 +32,7 @@ export const generateMetadata = async (
     description: uniteLegalePageDescription(uniteLegale, session),
     robots: 'noindex',
     alternates: {
-      canonical: `https://annuaire-entreprises.data.gouv.fr/documents/${
-        uniteLegale.chemin || uniteLegale.siren
-      }`,
+      canonical: `https://annuaire-entreprises.data.gouv.fr/documents/${uniteLegale.siren}`,
     },
   };
 };

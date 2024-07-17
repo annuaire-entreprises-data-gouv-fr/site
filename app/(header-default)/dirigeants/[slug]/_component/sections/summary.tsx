@@ -1,4 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
+import { Icon } from '#components-ui/icon/wrapper';
 import { Loader } from '#components-ui/loader';
 import { INPI, INSEE, MI } from '#components/administrations';
 import {
@@ -82,8 +83,10 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
         .length;
       summaries.push(
         <a href="#beneficiaires">
-          {beneficiairesCount} bénéficiaires inscrits à Référentiel des
-          Bénéficiaires Effectifs
+          <Icon slug="alertFill" color="#ff9c00">
+            {beneficiairesCount} bénéficiaires inscrits à Référentiel des
+            Bénéficiaires Effectifs
+          </Icon>
         </a>
       );
     }
