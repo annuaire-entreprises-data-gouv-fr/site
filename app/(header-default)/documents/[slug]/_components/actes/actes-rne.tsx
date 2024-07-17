@@ -16,16 +16,27 @@ import { IActesRNE } from '#models/immatriculation';
 import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { AgentDocumentsAssociation } from './actes-association';
 
 export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const documents = useAPIRouteData(
+  const documentsRne = useAPIRouteData(
     'espace-agent/rne/documents',
     uniteLegale.siren,
     session
   );
+
+  if (isAssociation(uniteLegale)) {
+    return (
+      <AgentDocumentsAssociation
+        uniteLegale={uniteLegale}
+        documentsRne={documentsRne}
+        session={session}
+      />
+    );
+  }
 
   return (
     <DataSectionClient
@@ -33,39 +44,36 @@ export const AgentActesRNE: React.FC<{
       id="actes"
       isProtected
       sources={[EAdministration.INPI]}
-      data={documents}
-      //@ts-ignore
+      data={documentsRne}
       notFoundInfo={
-        isAssociation(uniteLegale) ? null : (
-          <>
-            {isServicePublic(uniteLegale) && (
-              <Warning full>
-                Les services publics ne sont pas immatriculés au RNE.
-              </Warning>
-            )}
-          </>
+        isServicePublic(uniteLegale) ? (
+          <Warning full>
+            Les services publics ne sont pas immatriculés au RNE.
+          </Warning>
+        ) : (
+          <>Aucun document n’a été retrouvé dans le RNE pour cette structure.</>
         )
       }
     >
-      {(documents) =>
-        documents.actes?.length === 0 ? (
+      {(documentsRne) =>
+        documentsRne.actes?.length === 0 ? (
           <>
             Aucun document n’a été retrouvé dans le RNE pour cette entreprise.
           </>
         ) : (
           <>
             <p>
-              Cette entreprise possède {documents.actes.length} document(s) au
-              RNE. Chaque document peut contenir un ou plusieurs actes :
+              Cette entreprise possède {documentsRne.actes.length} document(s)
+              au RNE. Chaque document peut contenir un ou plusieurs actes :
             </p>
-            {documents.actes.length > 5 ? (
+            {documentsRne.actes.length > 5 ? (
               <ShowMore
-                label={`Voir tous les ${documents.actes.length} documents`}
+                label={`Voir tous les ${documentsRne.actes.length} documents`}
               >
-                <ActesTable actes={documents.actes} />
+                <ActesTable actes={documentsRne.actes} />
               </ShowMore>
             ) : (
-              <ActesTable actes={documents.actes} />
+              <ActesTable actes={documentsRne.actes} />
             )}
           </>
         )
@@ -77,7 +85,7 @@ export const AgentActesRNE: React.FC<{
 type IActesTableProps = {
   actes: IActesRNE['actes'];
 };
-function ActesTable({ actes }: IActesTableProps) {
+export function ActesTable({ actes }: IActesTableProps) {
   return (
     <FullTable
       head={['Date de dépôt', 'Acte(s) contenu(s)', 'Lien']}

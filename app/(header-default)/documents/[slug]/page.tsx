@@ -53,6 +53,24 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
           session={session}
         />
         <PrintNever>
+          Documents disponibles pour cette structure :
+          <ul>
+            {hasRights(session, EScope.conformite) && (
+              <li>
+                <a href="#conformite">Attestations de conformite</a>
+              </li>
+            )}
+            <li>
+              <a href="#actes">Actes et statuts</a>
+            </li>
+            {hasRights(session, EScope.carteProfessionnelleTravauxPublics) && (
+              <li>
+                <a href="#carte-professionnelle-travaux-publics">
+                  Carte professionnelle travaux publics
+                </a>
+              </li>
+            )}
+          </ul>
           {hasRights(session, EScope.conformite) && (
             <ConformiteSection session={session} uniteLegale={uniteLegale} />
           )}

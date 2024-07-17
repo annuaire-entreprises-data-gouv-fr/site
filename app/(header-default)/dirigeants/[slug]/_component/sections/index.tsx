@@ -1,11 +1,13 @@
 'use client';
 
 import BreakPageForPrint from '#components-ui/print-break-page';
-import { IUniteLegale } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import AgentWall from '#components/espace-agent-components/agent-wall';
+import { IUniteLegale, isAssociation } from '#models/core/types';
+import { hasAnyError, isUnauthorized } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import BeneficiairesSection from './beneficiaires';
+import DirigeantsAssociationProtectedSection from './protected-association-dirigeants';
 import DirigeantsProtectedSection from './protected-dirigeants';
 import DirigeantsSection from './rne-dirigeants';
 import DirigeantSummary from './summary';
@@ -19,20 +21,45 @@ export function DirigeantInformation({
 }) {
   const immatriculationRNE = useAPIRouteData('rne', uniteLegale.siren, session);
 
+  const associationProtected = useAPIRouteData(
+    'espace-agent/association-protected',
+    uniteLegale.siren,
+    session
+  );
+
+  const mandatairesRCS = useAPIRouteData(
+    'espace-agent/rcs-mandataires',
+    uniteLegale.siren,
+    session
+  );
+
   return (
     <>
       <DirigeantSummary
         uniteLegale={uniteLegale}
         immatriculationRNE={immatriculationRNE}
       />
-      {!hasRights(session, EScope.mandatairesRCS) ? (
-        <DirigeantsSection
+      {isAssociation(uniteLegale) &&
+        (isUnauthorized(associationProtected) ? (
+          <AgentWall
+            title="Actes et statuts"
+            id="actes"
+            uniteLegale={uniteLegale}
+          />
+        ) : (
+          <DirigeantsAssociationProtectedSection
+            uniteLegale={uniteLegale}
+            associationProtected={associationProtected}
+          />
+        ))}
+      {!isUnauthorized(mandatairesRCS) && !hasAnyError(mandatairesRCS) ? (
+        <DirigeantsProtectedSection
           uniteLegale={uniteLegale}
           immatriculationRNE={immatriculationRNE}
+          mandatairesRCS={mandatairesRCS}
         />
       ) : (
-        <DirigeantsProtectedSection
-          session={session}
+        <DirigeantsSection
           uniteLegale={uniteLegale}
           immatriculationRNE={immatriculationRNE}
         />

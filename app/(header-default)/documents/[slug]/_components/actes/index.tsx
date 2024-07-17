@@ -17,13 +17,6 @@ const ActesSection: React.FC<{
       />
     );
   }
-  return (
-    <>
-      <AgentActesRNE uniteLegale={uniteLegale} session={session} />
-      {/* {isAssociation(uniteLegale) && (
-        <AgentDocumentsAssociation uniteLegale={uniteLegale} />
-      )} */}
-    </>
-  );
+  return <AgentActesRNE uniteLegale={uniteLegale} session={session} />;
 };
 export default ActesSection;
