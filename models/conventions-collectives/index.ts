@@ -1,7 +1,12 @@
 import { clientIdccMetadata } from '#clients/metadata-store/idcc';
+import { clientIdccRechercheEntreprise } from '#clients/recherche-entreprise/idcc';
+import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { EAdministration } from '../administrations/EAdministration';
-import { APINotRespondingFactory } from '../api-not-responding';
+import {
+  APINotRespondingFactory,
+  IAPINotRespondingError,
+} from '../api-not-responding';
 import { FetchRessourceException } from '../exceptions';
 import { idccUpdates } from './idcc-updates';
 
@@ -21,10 +26,15 @@ export type ICCWithMetadata = {
   unknown: boolean;
 };
 
-export const getCCMetadata = async (cc: IConventionsCollectives) => {
+export const getAllIdccWithMetadata = async (
+  siren: Siren
+): Promise<ICCWithMetadata[] | IAPINotRespondingError> => {
   try {
+    const allIdcc = await clientIdccRechercheEntreprise(siren, true);
+
     const metadata = [] as ICCWithMetadata[];
-    for (let [idcc, sirets] of Object.entries(cc)) {
+
+    for (let [idcc, sirets] of Object.entries(allIdcc)) {
       const idccMetadata = await clientIdccMetadata(idcc);
 
       const updates = idccUpdates(idcc);
@@ -45,10 +55,10 @@ export const getCCMetadata = async (cc: IConventionsCollectives) => {
         cause: e,
         ressource: 'Convention Collective',
         context: {
-          details: Object.keys(cc).join(', '),
+          siren,
         },
       })
     );
-    return APINotRespondingFactory(EAdministration.MTPEI, 500);
+    return APINotRespondingFactory(EAdministration.DINUM, 500);
   }
 };

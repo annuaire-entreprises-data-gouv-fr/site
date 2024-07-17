@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
           "trancheEffectif": "22",
           "libelleTrancheEffectif": "",
-          "latitude": null,
-          "longitude": null,
+          "latitude": "46.8030906",
+          "longitude": "4.4244097",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -85,8 +85,8 @@
               "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
               "trancheEffectif": "22",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "46.8030906",
+              "longitude": "4.4244097",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -127,8 +127,8 @@
               "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
               "trancheEffectif": "22",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "46.8030906",
+              "longitude": "4.4244097",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -192,7 +192,6 @@
         "listeIdcc": [
           "9999"
         ],
-        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,

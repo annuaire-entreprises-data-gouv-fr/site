@@ -201,8 +201,6 @@ class UniteLegaleBuilder {
       },
       chemin: uniteLegaleRechercheEntreprise.chemin,
       listeIdcc: uniteLegaleRechercheEntreprise.listeIdcc,
-      conventionsCollectives:
-        uniteLegaleRechercheEntreprise.conventionsCollectives,
       dateDerniereMiseAJour:
         uniteLegaleRechercheEntreprise.dateDerniereMiseAJour,
       dateMiseAJourInsee:

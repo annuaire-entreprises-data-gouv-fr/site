@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": null,
-          "longitude": null,
+          "latitude": "48.870938",
+          "longitude": "2.305917",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -81,8 +81,8 @@
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "48.870938",
+              "longitude": "2.305917",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -121,8 +121,8 @@
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "48.870938",
+              "longitude": "2.305917",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -178,7 +178,6 @@
           "codeColter": null
         },
         "listeIdcc": [],
-        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 0,

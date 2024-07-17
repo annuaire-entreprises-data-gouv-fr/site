@@ -6,7 +6,7 @@
   },
   "result": {
     "currentPage": 1,
-    "resultCount": 4,
+    "resultCount": 5,
     "pageCount": 1,
     "results": [
       {
@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
           "trancheEffectif": "01",
           "libelleTrancheEffectif": "",
-          "latitude": "43.926702999999996",
-          "longitude": "4.784774999999998",
+          "latitude": "43.926703",
+          "longitude": "4.784775",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -83,8 +83,8 @@
               "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
               "trancheEffectif": "01",
               "libelleTrancheEffectif": "",
-              "latitude": "43.926702999999996",
-              "longitude": "4.784774999999998",
+              "latitude": "43.926703",
+              "longitude": "4.784775",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -123,8 +123,8 @@
               "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
               "trancheEffectif": "01",
               "libelleTrancheEffectif": "",
-              "latitude": "43.926702999999996",
-              "longitude": "4.784774999999998",
+              "latitude": "43.926703",
+              "longitude": "4.784775",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -186,44 +186,7 @@
         "listeIdcc": [
           "0478"
         ],
-        "conventionsCollectives": {},
         "matchingEtablissements": [
-          {
-            "siren": "414971929",
-            "siret": "41497192900024",
-            "oldSiret": "",
-            "etatAdministratif": "en activité",
-            "statutDiffusion": "diffusible",
-            "estSiege": false,
-            "enseigne": "",
-            "denomination": null,
-            "nic": "00024",
-            "dateCreation": "2002-10-30",
-            "dateDerniereMiseAJour": "",
-            "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2008-01-01",
-            "dateFermeture": "",
-            "adresse": "60 AVENUE DU GENERAL DE GAULLE 92800 PUTEAUX",
-            "adressePostale": "60 AVENUE DU GENERAL DE GAULLE 92800 PUTEAUX",
-            "codePostal": "92800",
-            "commune": "PUTEAUX",
-            "activitePrincipale": "64.30Z",
-            "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
-            "trancheEffectif": "N",
-            "libelleTrancheEffectif": "",
-            "latitude": "48.887984999999986",
-            "longitude": "2.233045000000001",
-            "complements": {
-              "estEntrepreneurIndividuel": false,
-              "idFiness": [],
-              "idBio": [],
-              "idcc": [],
-              "idOrganismeFormation": [],
-              "idRge": [],
-              "idUai": []
-            },
-            "anneeTrancheEffectif": null
-          },
           {
             "siren": "414971929",
             "siret": "41497192900040",
@@ -247,8 +210,8 @@
             "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
             "trancheEffectif": "01",
             "libelleTrancheEffectif": "",
-            "latitude": "43.926702999999996",
-            "longitude": "4.784774999999998",
+            "latitude": "43.926703",
+            "longitude": "4.784775",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
@@ -261,6 +224,42 @@
               "idUai": []
             },
             "anneeTrancheEffectif": "2021"
+          },
+          {
+            "siren": "414971929",
+            "siret": "41497192900024",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": false,
+            "enseigne": "",
+            "denomination": null,
+            "nic": "00024",
+            "dateCreation": "2002-10-30",
+            "dateDerniereMiseAJour": "",
+            "dateMiseAJourInsee": "",
+            "dateDebutActivite": "2008-01-01",
+            "dateFermeture": "",
+            "adresse": "60 AVENUE DU GENERAL DE GAULLE 92800 PUTEAUX",
+            "adressePostale": "60 AVENUE DU GENERAL DE GAULLE 92800 PUTEAUX",
+            "codePostal": "92800",
+            "commune": "PUTEAUX",
+            "activitePrincipale": "64.30Z",
+            "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
+            "trancheEffectif": "N",
+            "libelleTrancheEffectif": "",
+            "latitude": "48.887985",
+            "longitude": "2.233045",
+            "complements": {
+              "estEntrepreneurIndividuel": false,
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
+            "anneeTrancheEffectif": null
           },
           {
             "siren": "414971929",
@@ -285,8 +284,8 @@
             "libelleActivitePrincipale": "Organismes de placement en valeurs mobilières (65.2E)",
             "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
-            "latitude": "48.87626299999998",
-            "longitude": "2.0977630000000014",
+            "latitude": "48.876263",
+            "longitude": "2.097763",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
@@ -356,7 +355,7 @@
           "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": "48.700487999999986",
+          "latitude": "48.700488",
           "longitude": "2.758235",
           "complements": {
             "estEntrepreneurIndividuel": false,
@@ -402,7 +401,7 @@
               "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.700487999999986",
+              "latitude": "48.700488",
               "longitude": "2.758235",
               "complements": {
                 "estEntrepreneurIndividuel": false,
@@ -440,7 +439,7 @@
               "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.700487999999986",
+              "latitude": "48.700488",
               "longitude": "2.758235",
               "complements": {
                 "estEntrepreneurIndividuel": false,
@@ -499,7 +498,6 @@
           "codeColter": null
         },
         "listeIdcc": [],
-        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
@@ -540,8 +538,8 @@
           "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": "45.007819999999995",
-          "longitude": "-0.6194549999999986",
+          "latitude": "45.00782",
+          "longitude": "-0.619455",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -586,8 +584,8 @@
               "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "45.007819999999995",
-              "longitude": "-0.6194549999999986",
+              "latitude": "45.00782",
+              "longitude": "-0.619455",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -624,8 +622,8 @@
               "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "45.007819999999995",
-              "longitude": "-0.6194549999999986",
+              "latitude": "45.00782",
+              "longitude": "-0.619455",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -683,7 +681,6 @@
           "codeColter": null
         },
         "listeIdcc": [],
-        "conventionsCollectives": {},
         "matchingEtablissements": [
           {
             "siren": "491470597",
@@ -708,8 +705,8 @@
             "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
             "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
-            "latitude": "45.007819999999995",
-            "longitude": "-0.6194549999999986",
+            "latitude": "45.00782",
+            "longitude": "-0.619455",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
@@ -761,8 +758,8 @@
           "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
           "trancheEffectif": "02",
           "libelleTrancheEffectif": "",
-          "latitude": "43.458121999999996",
-          "longitude": "2.0045100000000007",
+          "latitude": "43.458122",
+          "longitude": "2.00451",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -809,8 +806,8 @@
               "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
               "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
-              "latitude": "43.458121999999996",
-              "longitude": "2.0045100000000007",
+              "latitude": "43.458122",
+              "longitude": "2.00451",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -849,8 +846,8 @@
               "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
               "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
-              "latitude": "43.458121999999996",
-              "longitude": "2.0045100000000007",
+              "latitude": "43.458122",
+              "longitude": "2.00451",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -912,7 +909,6 @@
         "listeIdcc": [
           "1527"
         ],
-        "conventionsCollectives": {},
         "matchingEtablissements": [
           {
             "siren": "852504034",
@@ -937,8 +933,8 @@
             "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
             "trancheEffectif": "02",
             "libelleTrancheEffectif": "",
-            "latitude": "43.458121999999996",
-            "longitude": "2.0045100000000007",
+            "latitude": "43.458122",
+            "longitude": "2.00451",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
@@ -961,6 +957,229 @@
             "nom": "DURET",
             "prenom": "Eric",
             "role": "Président de SAS",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          }
+        ]
+      },
+      {
+        "siren": "800069130",
+        "oldSiren": "800069130",
+        "siege": {
+          "siren": "800069130",
+          "siret": "80006913000022",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": "",
+          "denomination": null,
+          "nic": "00022",
+          "dateCreation": "2024-06-06",
+          "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
+          "dateDebutActivite": "2024-06-06",
+          "dateFermeture": "",
+          "adresse": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
+          "adressePostale": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
+          "codePostal": "34990",
+          "commune": "JUVIGNAC",
+          "activitePrincipale": "43.33Z",
+          "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs (43.33Z)",
+          "trancheEffectif": null,
+          "libelleTrancheEffectif": "",
+          "latitude": "43.616979",
+          "longitude": "3.811008",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
+          "anneeTrancheEffectif": null
+        },
+        "allSiegesSiret": [],
+        "tva": null,
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "SOL GRAND SUD (S.G.S)",
+        "chemin": "sol-grand-sud-s-g-s-800069130",
+        "natureJuridique": "5499",
+        "libelleNatureJuridique": "Société à responsabilité limitée (sans autre indication)",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "800069130",
+              "siret": "80006913000022",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00022",
+              "dateCreation": "2024-06-06",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2024-06-06",
+              "dateFermeture": "",
+              "adresse": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
+              "adressePostale": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
+              "codePostal": "34990",
+              "commune": "JUVIGNAC",
+              "activitePrincipale": "43.33Z",
+              "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs (43.33Z)",
+              "trancheEffectif": null,
+              "libelleTrancheEffectif": "",
+              "latitude": "43.616979",
+              "longitude": "3.811008",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
+              "anneeTrancheEffectif": null
+            }
+          ],
+          "open": [
+            {
+              "siren": "800069130",
+              "siret": "80006913000022",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00022",
+              "dateCreation": "2024-06-06",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2024-06-06",
+              "dateFermeture": "",
+              "adresse": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
+              "adressePostale": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
+              "codePostal": "34990",
+              "commune": "JUVIGNAC",
+              "activitePrincipale": "43.33Z",
+              "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs (43.33Z)",
+              "trancheEffectif": null,
+              "libelleTrancheEffectif": "",
+              "latitude": "43.616979",
+              "longitude": "3.811008",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
+              "anneeTrancheEffectif": null
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 2,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "43.33Z",
+        "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs",
+        "dateCreation": "2014-01-13",
+        "dateFermeture": "",
+        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2024-06-27T12:21:00",
+        "dateMiseAJourInpi": "2024-06-27T12:21:04",
+        "dateDebutActivite": "",
+        "trancheEffectif": null,
+        "anneeCategorieEntreprise": "2021",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": false,
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "listeIdcc": [
+          "2609",
+          "1596"
+        ],
+        "matchingEtablissements": [
+          {
+            "siren": "800069130",
+            "siret": "80006913000022",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": "",
+            "denomination": null,
+            "nic": "00022",
+            "dateCreation": "2024-06-06",
+            "dateDerniereMiseAJour": "",
+            "dateMiseAJourInsee": "",
+            "dateDebutActivite": "2024-06-06",
+            "dateFermeture": "",
+            "adresse": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
+            "adressePostale": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
+            "codePostal": "34990",
+            "commune": "JUVIGNAC",
+            "activitePrincipale": "43.33Z",
+            "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs (43.33Z)",
+            "trancheEffectif": null,
+            "libelleTrancheEffectif": "",
+            "latitude": "43.616979",
+            "longitude": "3.811008",
+            "complements": {
+              "estEntrepreneurIndividuel": false,
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
+            "anneeTrancheEffectif": null
+          }
+        ],
+        "nombreEtablissements": 2,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "TURK (TURK)",
+            "prenom": "Suat",
+            "role": "Gérant",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }

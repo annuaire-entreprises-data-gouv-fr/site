@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
           "trancheEffectif": "02",
           "libelleTrancheEffectif": "",
-          "latitude": null,
-          "longitude": null,
+          "latitude": "44.075685",
+          "longitude": "1.943401",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -94,8 +94,8 @@
               "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
               "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "44.075685",
+              "longitude": "1.943401",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -145,8 +145,8 @@
               "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
               "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "44.075685",
+              "longitude": "1.943401",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -220,7 +220,6 @@
           "1596",
           "2609"
         ],
-        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,

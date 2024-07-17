@@ -35,7 +35,7 @@
           "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": "48.88649399999998",
+          "latitude": "48.886494",
           "longitude": "2.542338",
           "complements": {
             "estEntrepreneurIndividuel": true,
@@ -81,7 +81,7 @@
               "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.88649399999998",
+              "latitude": "48.886494",
               "longitude": "2.542338",
               "complements": {
                 "estEntrepreneurIndividuel": true,
@@ -121,7 +121,7 @@
               "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.88649399999998",
+              "latitude": "48.886494",
               "longitude": "2.542338",
               "complements": {
                 "estEntrepreneurIndividuel": true,
@@ -178,7 +178,6 @@
           "codeColter": null
         },
         "listeIdcc": [],
-        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 0,

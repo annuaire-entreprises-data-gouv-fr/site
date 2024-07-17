@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import ConventionsCollectivesSection from '#components/conventions-collectives-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { getCCMetadata } from '#models/conventions-collectives';
+import { getAllIdccWithMetadata } from '#models/conventions-collectives';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -39,9 +39,7 @@ export default async function ConventionCollectivePage(props: AppRouterProps) {
   const { slug, page, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
-  const ccWithMetadata = await getCCMetadata(
-    uniteLegale.conventionsCollectives
-  );
+  const ccWithMetadata = await getAllIdccWithMetadata(uniteLegale.siren);
 
   return (
     <>

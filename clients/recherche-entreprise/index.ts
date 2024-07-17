@@ -2,7 +2,6 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
-import { IConventionsCollectives } from '#models/conventions-collectives';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import {
@@ -261,15 +260,6 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     dateMiseAJourInpi: date_mise_a_jour_rne || '',
     dateFermeture: date_fermeture ?? '',
     listeIdcc: liste_idcc || [],
-    conventionsCollectives: etablissements.reduce(
-      (idccSiretPair, { siret, liste_idcc }) => {
-        (liste_idcc || []).forEach((idcc) => {
-          idccSiretPair[idcc] = [...(idccSiretPair[idcc] || []), siret];
-        });
-        return idccSiretPair;
-      },
-      {} as IConventionsCollectives
-    ),
   };
 };
 
