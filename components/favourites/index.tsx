@@ -17,9 +17,16 @@ export default function Favourites() {
   return (
     shortCuts.length > 0 && (
       <>
-        <small className="layout-center">
+        <h2
+          className="layout-center"
+          style={{
+            fontSize: 'inherit',
+            fontWeight: 'inherit',
+            fontFamily: 'inherit',
+          }}
+        >
           Page{plural} récemment consultée{plural} :
-        </small>
+        </h2>
         <div className="layout-center">
           {shortCuts.map(({ siren, name, path }) => {
             const fullName = `${formatIntFr(siren)}${name ? ` - ${name}` : ''}`;

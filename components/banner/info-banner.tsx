@@ -8,6 +8,7 @@ export const InfoBanner: React.FC<{}> = () => (
   <PrintNever>
     <div
       className="info-banner"
+      role="note"
       aria-label="Instabilité des services de nos partenaires"
       style={{
         paddingTop: '10px',
