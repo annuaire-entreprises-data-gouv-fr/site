@@ -19,18 +19,20 @@ const APINotRespongingElement: React.FC<{
             La récupération du document auprès des services {administration} a
             pris trop de temps.
           </Icon>
+          <br />
+          <a href="">Cliquez-ici pour recharger la page</a> ou ré-essayez
+          plus-tard.
         </>
       )) || (
-        <Icon slug="errorFill" color="#df0a00">
-          La récupération du document auprès des services {administration} a
-          échoué.
-        </Icon>
+        <>
+          <Icon slug="errorFill" color="#df0a00">
+            La récupération du document auprès des services {administration} a
+            échoué.
+          </Icon>
+          <br />
+          Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui demander la pièce directement.
+        </>
       )}
-      <>
-        <br />
-        <a href="">Cliquez-ici pour recharger la page</a> ou ré-essayez
-        plus-tard.
-      </>
     </i>
   );
 };
