@@ -12,28 +12,36 @@ const APINotRespongingElement: React.FC<{
   administration: string;
 }> = ({ data, administration }) => {
   return (
-    <i>
+    <>
       {(data?.errorType === 408 && (
         <>
-          <Icon slug="alertFill" color="orange">
-            La récupération du document auprès des services {administration} a
-            pris trop de temps.
-          </Icon>
+          <i>
+            <Icon slug="alertFill" color="orange">
+              La récupération du document auprès des services {administration} a
+              pris trop de temps.
+            </Icon>
+          </i>
           <br />
-          <a href="">Cliquez-ici pour recharger la page</a> ou ré-essayez
-          plus-tard.
+          <a href="">Rechargez la page</a> ou ré-essayez plus-tard.
+          <br />
+          <br />
         </>
       )) || (
         <>
-          <Icon slug="errorFill" color="#df0a00">
-            La récupération du document auprès des services {administration} a
-            échoué.
-          </Icon>
+          <i>
+            <Icon slug="errorFill" color="#df0a00">
+              La récupération du document auprès des services {administration} a
+              échoué.
+            </Icon>
+          </i>
           <br />
-          Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui demander la pièce directement.
+          Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui
+          demander la pièce directement.
+          <br />
+          <br />
         </>
       )}
-    </i>
+    </>
   );
 };
 
