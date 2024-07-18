@@ -34,7 +34,7 @@ function mapToDomainObject(response: IIdccMetadata) {
 }
 
 const store = new MetadataStore<ICCWithMetadata>(
-  routes.conventionsCollectives.metadata,
+  routes.rechercheEntreprise.idcc.metadata,
   'idcc-metadata',
   mapToDomainObject
 );

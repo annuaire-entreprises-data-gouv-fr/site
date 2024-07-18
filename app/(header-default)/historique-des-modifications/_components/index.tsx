@@ -36,7 +36,7 @@ export default function ChangelogWithFilters() {
           className="fr-fieldset"
         >
           <legend className="fr-fieldset__legend" id="sidebar_category_legend">
-            Filtres
+            Qui est concerné ?
           </legend>
           <div className="fr-fieldset__element">
             <div className="fr-checkbox-group">
@@ -47,7 +47,7 @@ export default function ChangelogWithFilters() {
                 checked={showPublic}
               />
               <label className="fr-label" htmlFor="filter-all">
-                Accessible à tous
+                Tous les usagers
               </label>
             </div>
           </div>
@@ -81,7 +81,7 @@ export default function ChangelogWithFilters() {
                   </Icon>
                 </Tag>
               ) : (
-                <Tag color="info">accessible à tous</Tag>
+                <Tag color="info">Tous les usagers</Tag>
               )}
               {change.htmlBody && (
                 <p dangerouslySetInnerHTML={{ __html: change.htmlBody }} />

@@ -35,7 +35,7 @@
           "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
           "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
-          "latitude": "48.82963299999998",
+          "latitude": "48.829633",
           "longitude": "2.374801",
           "complements": {
             "estEntrepreneurIndividuel": false,
@@ -81,7 +81,7 @@
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.82963299999998",
+              "latitude": "48.829633",
               "longitude": "2.374801",
               "complements": {
                 "estEntrepreneurIndividuel": false,
@@ -119,7 +119,7 @@
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
               "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
-              "latitude": "48.82963299999998",
+              "latitude": "48.829633",
               "longitude": "2.374801",
               "complements": {
                 "estEntrepreneurIndividuel": false,
@@ -178,7 +178,6 @@
           "codeColter": null
         },
         "listeIdcc": [],
-        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 2,
         "nombreEtablissementsOuverts": 1,

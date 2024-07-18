@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
           "trancheEffectif": null,
           "libelleTrancheEffectif": "",
-          "latitude": "48.87305699999998",
-          "longitude": "2.3166050000000005",
+          "latitude": "48.873057",
+          "longitude": "2.316605",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -83,8 +83,8 @@
               "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
               "trancheEffectif": null,
               "libelleTrancheEffectif": "",
-              "latitude": "48.87305699999998",
-              "longitude": "2.3166050000000005",
+              "latitude": "48.873057",
+              "longitude": "2.316605",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -123,8 +123,8 @@
               "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
               "trancheEffectif": null,
               "libelleTrancheEffectif": "",
-              "latitude": "48.87305699999998",
-              "longitude": "2.3166050000000005",
+              "latitude": "48.873057",
+              "longitude": "2.316605",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -186,7 +186,6 @@
         "listeIdcc": [
           "9999"
         ],
-        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,

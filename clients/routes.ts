@@ -39,8 +39,6 @@ const routes = {
     ess: 'https://tabular-api.data.gouv.fr/api/resources/57bc99ca-0432-4b46-8fcc-e76a35c9efaf/data/',
   },
   conventionsCollectives: {
-    metadata:
-      'https://recherche-entreprises.api.gouv.fr/metadata/conventions_collectives',
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
     details: 'https://code.travail.gouv.fr/convention-collective/',
   },
@@ -175,6 +173,10 @@ const routes = {
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
     rechercheUniteLegaleStaging:
       'https://recherche-entreprises.api.gouv.fr/search',
+    idcc: {
+      metadata: 'https://recherche-entreprises.api.gouv.fr/idcc/metadata',
+      siren: 'https://recherche-entreprises.api.gouv.fr/idcc',
+    },
   },
   tooling: {
     crisp: 'https://api.crisp.chat/v1/website/',
