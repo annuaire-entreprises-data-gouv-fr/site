@@ -1,9 +1,9 @@
 'use client';
 
 import AssociationAdressAlert from '#components-ui/alerts-with-explanations/association-adress';
+import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
-import { Tag } from '#components-ui/tag';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -38,6 +38,7 @@ const getTableData = (
     siteWeb = '',
     agrement = [],
     eligibiliteCEC = false,
+    impotCommerciaux = false,
   } = association || {};
 
   return [
@@ -46,17 +47,28 @@ const getTableData = (
     ['Famille', libelleFamille],
     ['Objet', objet],
     [
-      'Forme juridique',
-      regime || formeJuridique || utilPublique || eligibiliteCEC ? (
-        <>
-          {regime ? `${regime}, ` : ''}
-          {formeJuridique}
-          {utilPublique && <Tag color="info">Reconnue d’utilité publique</Tag>}
-          {eligibiliteCEC && <Tag color="info">Éligible CEC</Tag>}
-        </>
-      ) : (
-        ''
-      ),
+      <FAQLink tooltipLabel="Regime">
+        Les deux régimes possibles sont “Loi 1901” (cas général des associations
+        établies en France) et “Alsace-Moselle” (associations dont le siège se
+        trouve en Alsace et en Moselle, régies par un droit local)
+      </FAQLink>,
+      regime,
+    ],
+    ['Forme juridique', formeJuridique],
+    ['Reconnue d’utilité publique', utilPublique ? 'Oui' : 'Non'],
+    [
+      <FAQLink tooltipLabel="Éligible CEC">
+        Compte d’Engagement Citoyen
+      </FAQLink>,
+      eligibiliteCEC ? 'Oui' : 'Non',
+    ],
+    [
+      <FAQLink tooltipLabel="Assujettie aux impôts commerciaux">
+        Indique si l’association est soumise aux impôts commerciaux (à la TVA ou
+        à l’impôt sur les sociétés). Cela concerne notamment les associations
+        exerçant une activité lucrative.
+      </FAQLink>,
+      impotCommerciaux ? 'Oui' : 'Non',
     ],
     [
       'Agrément(s)',

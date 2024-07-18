@@ -1,13 +1,11 @@
 'use client';
 
 import BreakPageForPrint from '#components-ui/print-break-page';
-import AgentWall from '#components/espace-agent-components/agent-wall';
-import { IUniteLegale, isAssociation } from '#models/core/types';
+import { IUniteLegale } from '#models/core/types';
 import { hasAnyError, isUnauthorized } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import BeneficiairesSection from './beneficiaires';
-import DirigeantsAssociationProtectedSection from './protected-association-dirigeants';
 import DirigeantsProtectedSection from './protected-dirigeants';
 import DirigeantsSection from './rne-dirigeants';
 import DirigeantSummary from './summary';
@@ -21,17 +19,14 @@ export function DirigeantInformation({
 }) {
   const immatriculationRNE = useAPIRouteData('rne', uniteLegale.siren, session);
 
-  const associationProtected = useAPIRouteData(
-    'espace-agent/association-protected',
-    uniteLegale.siren,
-    session
-  );
-
   const mandatairesRCS = useAPIRouteData(
     'espace-agent/rcs-mandataires',
     uniteLegale.siren,
     session
   );
+
+  const hasMandataireRCS =
+    !isUnauthorized(mandatairesRCS) && !hasAnyError(mandatairesRCS);
 
   return (
     <>
@@ -39,20 +34,7 @@ export function DirigeantInformation({
         uniteLegale={uniteLegale}
         immatriculationRNE={immatriculationRNE}
       />
-      {isAssociation(uniteLegale) &&
-        (isUnauthorized(associationProtected) ? (
-          <AgentWall
-            title="Actes et statuts"
-            id="actes"
-            uniteLegale={uniteLegale}
-          />
-        ) : (
-          <DirigeantsAssociationProtectedSection
-            uniteLegale={uniteLegale}
-            associationProtected={associationProtected}
-          />
-        ))}
-      {!isUnauthorized(mandatairesRCS) && !hasAnyError(mandatairesRCS) ? (
+      {hasMandataireRCS ? (
         <DirigeantsProtectedSection
           uniteLegale={uniteLegale}
           immatriculationRNE={immatriculationRNE}

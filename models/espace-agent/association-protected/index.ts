@@ -41,8 +41,8 @@ export type IAssociationProtected = {
   documents: {
     rna: IDocumentRNA[];
     dac: IDocumentDAC[];
-    dirigeants: IAssociationDirigeant[];
   };
+  dirigeants: IAssociationDirigeant[];
 };
 
 export const getAssociationProtected = async (

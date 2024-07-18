@@ -3,7 +3,7 @@ import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { estDiffusible } from '#models/core/statut-diffusion';
-import { isServicePublic } from '#models/core/types';
+import { isAssociation, isServicePublic } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
@@ -14,8 +14,9 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { DirigeantInformation } from './_component/sections';
-import ResponsablesServicePublicSection from './_component/sections/service-public-responsables';
+import DirigeantsAssociationSection from './_component/sections/association/dirigeants';
+import { DirigeantInformation } from './_component/sections/entreprise';
+import ResponsablesServicePublicSection from './_component/sections/service-public';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -58,6 +59,11 @@ const DirigeantsPage = async (props: AppRouterProps) => {
         ) : !estDiffusible(uniteLegale) &&
           !hasRights(session, EScope.nonDiffusible) ? (
           <DonneesPriveesSection />
+        ) : isAssociation(uniteLegale) ? (
+          <DirigeantsAssociationSection
+            uniteLegale={uniteLegale}
+            session={session}
+          />
         ) : (
           <DirigeantInformation uniteLegale={uniteLegale} session={session} />
         )}

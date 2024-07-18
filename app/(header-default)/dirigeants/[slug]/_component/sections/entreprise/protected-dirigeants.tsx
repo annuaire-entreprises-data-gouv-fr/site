@@ -108,7 +108,6 @@ function DirigeantsProtectedSection({
           </p>
           <DirigeantContent
             dirigeants={mandatairesRCS}
-            isFallback={false}
             uniteLegale={uniteLegale}
           />
         </>

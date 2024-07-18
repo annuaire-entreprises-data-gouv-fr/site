@@ -30,11 +30,11 @@ const mapToDomainObject = (
           return { ...d, siret: e.siret };
         });
       }),
-      dirigeants: response.data.etablissements.flatMap((e) => {
-        return e.representants_legaux.map((d) => {
-          return { ...d, siret: e.siret };
-        });
-      }),
     },
+    dirigeants: response.data.etablissements.flatMap((e) => {
+      return e.representants_legaux.map((d) => {
+        return { ...d, siret: e.siret };
+      });
+    }),
   };
 };

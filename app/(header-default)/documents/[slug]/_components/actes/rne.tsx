@@ -1,22 +1,17 @@
 'use client';
 
 import routes from '#clients/routes';
-import { Warning } from '#components-ui/alerts';
+import { Info } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import ShowMore from '#components-ui/show-more';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import {
-  IUniteLegale,
-  isAssociation,
-  isServicePublic,
-} from '#models/core/types';
+import { IUniteLegale, isServicePublic } from '#models/core/types';
 import { IActesRNE } from '#models/immatriculation';
 import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { AgentDocumentsAssociation } from './actes-association';
 
 export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
@@ -28,16 +23,6 @@ export const AgentActesRNE: React.FC<{
     session
   );
 
-  if (isAssociation(uniteLegale)) {
-    return (
-      <AgentDocumentsAssociation
-        uniteLegale={uniteLegale}
-        documentsRne={documentsRne}
-        session={session}
-      />
-    );
-  }
-
   return (
     <DataSectionClient
       title="Actes et statuts"
@@ -47,19 +32,17 @@ export const AgentActesRNE: React.FC<{
       data={documentsRne}
       notFoundInfo={
         isServicePublic(uniteLegale) ? (
-          <Warning full>
+          <Info full>
             Les services publics ne sont pas immatriculés au RNE.
-          </Warning>
+          </Info>
         ) : (
-          <>Aucun document n’a été retrouvé dans le RNE pour cette structure.</>
+          <>Cette structure n’est pas immatriculée au RNE.</>
         )
       }
     >
       {(documentsRne) =>
         documentsRne.actes?.length === 0 ? (
-          <>
-            Aucun document n’a été retrouvé dans le RNE pour cette entreprise.
-          </>
+          <>Aucun document n’a été retrouvé dans le RNE pour cette structure.</>
         ) : (
           <>
             <p>

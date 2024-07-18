@@ -6,7 +6,12 @@ import {
   IPersonneMorale,
 } from '#models/immatriculation';
 import { formatDateLong, formatDatePartial, formatIntFr } from '#utils/helpers';
-import { isPersonneMorale } from './is-personne-morale';
+import { isPersonneMorale } from '../is-personne-morale';
+
+type IDirigeantContentProps = {
+  dirigeants: IDirigeant[];
+  uniteLegale: IUniteLegale;
+};
 
 export function DirigeantContent({
   dirigeants,
@@ -83,9 +88,3 @@ export function DirigeantContent({
     </>
   );
 }
-
-type IDirigeantContentProps = {
-  dirigeants: IDirigeant[];
-  uniteLegale: IUniteLegale;
-  isFallback: boolean;
-};
