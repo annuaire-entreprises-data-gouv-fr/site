@@ -23,7 +23,7 @@ const NoDirigeants = () => (
 );
 
 /**
- * Dirigeants for agents : either from Infogreffe or from RNE
+ * Dirigeants for agents : RNA or Le compte asso
  */
 function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
   const associationProtected = useAPIRouteData(
