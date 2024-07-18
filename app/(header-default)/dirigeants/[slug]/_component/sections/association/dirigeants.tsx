@@ -33,11 +33,13 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
   );
 
   if (isUnauthorized(associationProtected)) {
-    <AgentWallAssociationProtected
-      title="Dirigeants des associations"
-      id="dirigeants"
-      uniteLegale={uniteLegale}
-    />;
+    return (
+      <AgentWallAssociationProtected
+        title="Dirigeants des associations"
+        id="dirigeants"
+        uniteLegale={uniteLegale}
+      />
+    );
   }
 
   return (

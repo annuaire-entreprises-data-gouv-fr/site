@@ -1,3 +1,4 @@
+import AgentWallAssociationProtected from '#components/espace-agent-components/agent-wall/association';
 import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
 import { IUniteLegale, isAssociation } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
@@ -10,6 +11,15 @@ const ActesSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   if (!hasRights(session, EScope.actesRne)) {
+    if (isAssociation(uniteLegale)) {
+      return (
+        <AgentWallAssociationProtected
+          title="Actes et statuts des associations"
+          id="actes"
+          uniteLegale={uniteLegale}
+        />
+      );
+    }
     return (
       <AgentWallDocuments
         title="Actes et statuts"

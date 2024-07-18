@@ -10,9 +10,10 @@ const AgentWall: React.FC<{
   id?: string;
   sectionIntro?: JSX.Element;
   modalFooter?: JSX.Element;
-}> = ({ id, title, sectionIntro = null, modalFooter = null }) => {
+  sources?: EAdministration[];
+}> = ({ id, title, sectionIntro = null, modalFooter = null, sources = [] }) => {
   return (
-    <Section title={title} id={id} sources={[EAdministration.INPI]} isProtected>
+    <Section title={title} id={id} sources={sources} isProtected>
       {sectionIntro}
       <div className={style['cta-wrapper']}>
         <FloatingModal
