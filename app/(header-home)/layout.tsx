@@ -19,7 +19,9 @@ export default async function HomeLayout({
     <>
       <NPSBanner />
       <HeaderServer useSearchBar={false} useAgentCTA={true} />
-      <main className="fr-container">{children}</main>
+      <main className="fr-container" id="contenu">
+        {children}
+      </main>
       <SocialNetworks />
       <QuestionOrFeedback session={session} />
       <Footer />
