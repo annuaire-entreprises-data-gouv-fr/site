@@ -4,19 +4,37 @@ import parseMarkdownSync, {
 /** @ts-ignore */
 import data from '../../data/changelog.yml';
 
-export type IChangelog = {
+type IChangelogTarget = {
+  agent: boolean;
+  site: boolean;
+  api: boolean;
+};
+
+type IChangelogRaw = {
   date: string;
   body: IMarkdown;
-  isProtected?: boolean;
-  htmlBody?: string;
+  target?: IChangelogTarget;
+};
+
+export type IChangelog = {
+  date: string;
+  target: IChangelogTarget;
+  htmlBody: string;
 };
 
 const loadData = (): IChangelog[] => {
-  return (data as IChangelog[]).map((d) => {
+  const noneTarget = {
+    agent: false,
+    api: false,
+    site: false,
+  };
+
+  return (data as IChangelogRaw[]).map((d) => {
     const htmlBody = parseMarkdownSync(d.body).html;
     return {
       ...d,
       htmlBody,
+      target: { ...noneTarget, ...(d.target ? d.target : { site: true }) },
     };
   });
 };
