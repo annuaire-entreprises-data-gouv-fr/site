@@ -7,6 +7,7 @@ export interface IDataAssociation {
   mail: string;
   siteWeb: string;
   utilPublique: boolean;
+  impotCommerciaux: boolean;
   regime: string;
   agrement: {
     type: string;

@@ -68,7 +68,6 @@ function DirigeantsSection({ uniteLegale, immatriculationRNE }: IProps) {
 
                 <DirigeantContent
                   dirigeants={immatriculationRNE.dirigeants}
-                  isFallback={immatriculationRNE.metadata.isFallback}
                   uniteLegale={uniteLegale}
                 />
               </>

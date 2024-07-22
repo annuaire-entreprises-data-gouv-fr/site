@@ -11,10 +11,7 @@ import {
   isDataLoading,
 } from '#models/data-fetching';
 import { IDirigeant, IImmatriculationRNE } from '#models/immatriculation';
-import { ISession } from '#models/user/session';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { DirigeantContent } from './dirigeant-content';
-import DirigeantsSection from './rne-dirigeants';
 
 type IProps = {
   immatriculationRNE:
@@ -22,7 +19,10 @@ type IProps = {
     | IAPINotRespondingError
     | IDataFetchingState;
   uniteLegale: IUniteLegale;
-  session: ISession | null;
+  mandatairesRCS:
+    | Array<IDirigeant>
+    | IAPINotRespondingError
+    | IDataFetchingState;
 };
 
 function RCSDiffersFromRNE({
@@ -71,23 +71,8 @@ function RCSDiffersFromRNE({
 function DirigeantsProtectedSection({
   uniteLegale,
   immatriculationRNE,
-  session,
+  mandatairesRCS,
 }: IProps) {
-  const mandatairesRCS = useAPIRouteData(
-    'espace-agent/rcs-mandataires',
-    uniteLegale.siren,
-    session
-  );
-
-  if (hasAnyError(mandatairesRCS)) {
-    return (
-      <DirigeantsSection
-        uniteLegale={uniteLegale}
-        immatriculationRNE={immatriculationRNE}
-      />
-    );
-  }
-
   return (
     <DataSectionClient
       id="rne-dirigeants"
@@ -123,7 +108,6 @@ function DirigeantsProtectedSection({
           </p>
           <DirigeantContent
             dirigeants={mandatairesRCS}
-            isFallback={false}
             uniteLegale={uniteLegale}
           />
         </>

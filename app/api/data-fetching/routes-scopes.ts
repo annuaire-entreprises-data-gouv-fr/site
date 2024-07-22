@@ -10,6 +10,7 @@ export const APIRoutesScopes: Record<APIPath, EScope> = {
   'espace-agent/qualifelec': EScope.protectedCertificats,
   'espace-agent/rcs-mandataires': EScope.mandatairesRCS,
   'espace-agent/rne/documents': EScope.documentsRne,
+  'espace-agent/association-protected': EScope.associationProtected,
   rne: EScope.none,
   association: EScope.none,
   'verify-tva': EScope.none,

@@ -9,8 +9,8 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
   immatriculationRNE,
 }) => {
   return (
-    <>
-      Cette structure est :
+    <nav role="navigation" aria-labelledby="immatriculation-summary-title">
+      <strong id="immatriculation-summary-title">Cette structure est :</strong>
       <ul>
         {immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE) && (
           <li>
@@ -64,7 +64,7 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
         )}
       </ul>
       <br />
-    </>
+    </nav>
   );
 };
 

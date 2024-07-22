@@ -45,6 +45,7 @@ const mapToDomainObject = (
     eligibilite_cec = false,
     regime = '',
     util_publique = false,
+    impots_commerciaux,
   } = association.identite || {};
 
   const {
@@ -89,6 +90,7 @@ const mapToDomainObject = (
     dateCreation: date_creat,
     dateDissolution: date_dissolution,
     eligibiliteCEC: eligibilite_cec,
+    impotCommerciaux: impots_commerciaux,
     adresseSiege: formatAdresse({
       numeroVoie: num_voie,
       typeVoie: type_voie,

@@ -44,7 +44,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
     : constants.colors.frBlue;
 
   return (
-    <SectionErrorBoundary>
+    <SectionErrorBoundary title={title}>
       <div
         className={style['section-container']}
         id={id}

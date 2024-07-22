@@ -1,16 +1,19 @@
 import { ErrorBoundary as SentryErrorBoundary } from '@sentry/nextjs';
 import { Warning } from '#components-ui/alerts';
 import constants from '#models/constants';
+import { Section } from '.';
 
 export default function SectionErrorBoundary({
   children,
+  title,
 }: {
   children: React.ReactNode;
+  title: string;
 }) {
   return (
     <SentryErrorBoundary
       fallback={
-        <div>
+        <Section title={title}>
           <Warning>
             Une erreur est survenue lors de l’affichage de cette section.
           </Warning>
@@ -22,7 +25,7 @@ export default function SectionErrorBoundary({
               que nous puissions trouver la panne 🕵️‍♀️.
             </p>
           )}
-        </div>
+        </Section>
       }
     >
       {children}

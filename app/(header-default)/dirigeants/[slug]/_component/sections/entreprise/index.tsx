@@ -2,7 +2,7 @@
 
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { IUniteLegale } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { hasAnyError, isUnauthorized } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import BeneficiairesSection from './beneficiaires';
@@ -19,20 +19,29 @@ export function DirigeantInformation({
 }) {
   const immatriculationRNE = useAPIRouteData('rne', uniteLegale.siren, session);
 
+  const mandatairesRCS = useAPIRouteData(
+    'espace-agent/rcs-mandataires',
+    uniteLegale.siren,
+    session
+  );
+
+  const hasMandataireRCS =
+    !isUnauthorized(mandatairesRCS) && !hasAnyError(mandatairesRCS);
+
   return (
     <>
       <DirigeantSummary
         uniteLegale={uniteLegale}
         immatriculationRNE={immatriculationRNE}
       />
-      {!hasRights(session, EScope.mandatairesRCS) ? (
-        <DirigeantsSection
+      {hasMandataireRCS ? (
+        <DirigeantsProtectedSection
           uniteLegale={uniteLegale}
           immatriculationRNE={immatriculationRNE}
+          mandatairesRCS={mandatairesRCS}
         />
       ) : (
-        <DirigeantsProtectedSection
-          session={session}
+        <DirigeantsSection
           uniteLegale={uniteLegale}
           immatriculationRNE={immatriculationRNE}
         />

@@ -7,6 +7,7 @@ export enum EScope {
   documentsRne = 'rne',
   conformite = 'conformite',
   protectedCertificats = 'opendata',
+  associationProtected = 'opendata',
   mandatairesRCS = 'opendata',
   carteProfessionnelleTravauxPublics = 'opendata',
   nonDiffusible = 'nonDiffusible',

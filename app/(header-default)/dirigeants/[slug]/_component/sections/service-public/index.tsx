@@ -7,7 +7,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { useFetchServicePublic } from 'hooks/fetch/service-public';
-import SubServicesSection from './service-public-subservices';
+import SubServicesSection from './subservices';
 
 export default function ResponsablesServicePublicSection({
   uniteLegale,

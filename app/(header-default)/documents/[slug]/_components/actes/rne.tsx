@@ -1,17 +1,13 @@
 'use client';
 
 import routes from '#clients/routes';
-import { Warning } from '#components-ui/alerts';
+import { Info } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import ShowMore from '#components-ui/show-more';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import {
-  IUniteLegale,
-  isAssociation,
-  isServicePublic,
-} from '#models/core/types';
+import { IUniteLegale, isServicePublic } from '#models/core/types';
 import { IActesRNE } from '#models/immatriculation';
 import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
@@ -21,7 +17,7 @@ export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const documents = useAPIRouteData(
+  const documentsRne = useAPIRouteData(
     'espace-agent/rne/documents',
     uniteLegale.siren,
     session
@@ -33,39 +29,34 @@ export const AgentActesRNE: React.FC<{
       id="actes"
       isProtected
       sources={[EAdministration.INPI]}
-      data={documents}
-      //@ts-ignore
+      data={documentsRne}
       notFoundInfo={
-        isAssociation(uniteLegale) ? null : (
-          <>
-            {isServicePublic(uniteLegale) && (
-              <Warning full>
-                Les services publics ne sont pas immatriculés au RNE.
-              </Warning>
-            )}
-          </>
+        isServicePublic(uniteLegale) ? (
+          <Info full>
+            Les services publics ne sont pas immatriculés au RNE.
+          </Info>
+        ) : (
+          <>Cette structure n’est pas immatriculée au RNE.</>
         )
       }
     >
-      {(documents) =>
-        documents.actes?.length === 0 ? (
-          <>
-            Aucun document n’a été retrouvé dans le RNE pour cette entreprise.
-          </>
+      {(documentsRne) =>
+        documentsRne.actes?.length === 0 ? (
+          <>Aucun document n’a été retrouvé dans le RNE pour cette structure.</>
         ) : (
           <>
             <p>
-              Cette entreprise possède {documents.actes.length} document(s) au
-              RNE. Chaque document peut contenir un ou plusieurs actes :
+              Cette entreprise possède {documentsRne.actes.length} document(s)
+              au RNE. Chaque document peut contenir un ou plusieurs actes :
             </p>
-            {documents.actes.length > 5 ? (
+            {documentsRne.actes.length > 5 ? (
               <ShowMore
-                label={`Voir tous les ${documents.actes.length} documents`}
+                label={`Voir tous les ${documentsRne.actes.length} documents`}
               >
-                <ActesTable actes={documents.actes} />
+                <ActesTable actes={documentsRne.actes} />
               </ShowMore>
             ) : (
-              <ActesTable actes={documents.actes} />
+              <ActesTable actes={documentsRne.actes} />
             )}
           </>
         )
@@ -77,7 +68,7 @@ export const AgentActesRNE: React.FC<{
 type IActesTableProps = {
   actes: IActesRNE['actes'];
 };
-function ActesTable({ actes }: IActesTableProps) {
+export function ActesTable({ actes }: IActesTableProps) {
   return (
     <FullTable
       head={['Date de dépôt', 'Acte(s) contenu(s)', 'Lien']}

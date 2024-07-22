@@ -110,15 +110,17 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   }
 
   return (
-    <>
-      Cette structure possède :
+    <nav role="navigation" aria-labelledby="dirigeant-summary-title">
+      <strong id="dirigeant-summary-title">
+        Cette structure a pour dirigeant(s) :
+      </strong>
       <ul>
         {summaries.map((summary, index) => (
           <li key={index}>{summary}</li>
         ))}
       </ul>
       <br />
-    </>
+    </nav>
   );
 };
 

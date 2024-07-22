@@ -15,6 +15,7 @@ import extractParamsAppRouter, {
 import getSession from '#utils/server-side-helper/app/get-session';
 import ActesSection from './_components/actes';
 import CarteProfessionnelleTPSection from './_components/carte-professionnelle-TP-section';
+import { SummaryDocuments } from './_components/summary-documents';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -51,6 +52,7 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
           session={session}
         />
         <PrintNever>
+          <SummaryDocuments session={session} />
           {hasRights(session, EScope.conformite) && (
             <ConformiteSection session={session} uniteLegale={uniteLegale} />
           )}
