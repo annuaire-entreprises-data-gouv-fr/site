@@ -11,6 +11,7 @@ import { IChangelog, changelogData } from '#models/historique-modifications';
 export default function ChangelogWithFilters() {
   const [showAgents, setShowAgents] = useState<boolean>(true);
   const [showPublic, setShowPublic] = useState<boolean>(true);
+  const [showAPI, setShowAPI] = useState<boolean>(true);
 
   const [data, setData] = useState<IChangelog[]>([]);
 
@@ -21,11 +22,20 @@ export default function ChangelogWithFilters() {
 
   useEffect(() => {
     setData(
-      changelogData
-        .filter((c) => showAgents || !c.isProtected)
-        .filter((c) => showPublic || c.isProtected)
+      changelogData.filter((c) => {
+        if (showAPI && c.target.api) {
+          return true;
+        }
+        if (showPublic && c.target.site) {
+          return true;
+        }
+        if (showAgents && c.target.agent) {
+          return true;
+        }
+        return false;
+      })
     );
-  }, [showAgents, showPublic]);
+  }, [showAgents, showPublic, showAPI]);
 
   return (
     <div className="fr-grid-row fr-grid-row--gutters">
@@ -36,7 +46,7 @@ export default function ChangelogWithFilters() {
           className="fr-fieldset"
         >
           <legend className="fr-fieldset__legend" id="sidebar_category_legend">
-            Qui est concerné ?
+            Filtrer par usagers :
           </legend>
           <div className="fr-fieldset__element">
             <div className="fr-checkbox-group">
@@ -47,7 +57,7 @@ export default function ChangelogWithFilters() {
                 checked={showPublic}
               />
               <label className="fr-label" htmlFor="filter-all">
-                Tous les usagers
+                Site public
               </label>
             </div>
           </div>
@@ -64,6 +74,19 @@ export default function ChangelogWithFilters() {
               </label>
             </div>
           </div>
+          <div className="fr-fieldset__element">
+            <div className="fr-checkbox-group">
+              <input
+                onChange={() => setShowAPI(!showAPI)}
+                id="filter-api"
+                type="checkbox"
+                checked={showAPI}
+              />
+              <label className="fr-label" htmlFor="filter-api">
+                API (développeurs)
+              </label>
+            </div>
+          </div>
         </fieldset>
       </div>
       <div className="fr-col-md-9">
@@ -74,15 +97,15 @@ export default function ChangelogWithFilters() {
               className="fr-mb-4w fr-px-2w fr-py-2w"
               style={{ backgroundColor: '#f6f6f6', borderRadius: '3px' }}
             >
-              {change.isProtected ? (
+              {change.target.agent && (
                 <Tag color="agent">
                   <Icon slug="lockFill" size={12}>
-                    espace Agent public
+                    Espace Agent public
                   </Icon>
                 </Tag>
-              ) : (
-                <Tag color="info">Tous les usagers</Tag>
               )}
+              {change.target.site && <Tag color="info">Site public</Tag>}
+              {change.target.api && <Tag color="new">API (développeurs)</Tag>}
               {change.htmlBody && (
                 <p dangerouslySetInnerHTML={{ __html: change.htmlBody }} />
               )}
