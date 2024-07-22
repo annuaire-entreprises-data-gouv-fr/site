@@ -31,11 +31,10 @@ const ActesSection: React.FC<{
 
   return (
     <>
-      {isAssociation(uniteLegale) ? (
+      {isAssociation(uniteLegale) && (
         <AgentActesAssociation uniteLegale={uniteLegale} session={session} />
-      ) : (
-        <AgentActesRNE uniteLegale={uniteLegale} session={session} />
       )}
+      <AgentActesRNE uniteLegale={uniteLegale} session={session} />
     </>
   );
 };

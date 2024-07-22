@@ -2,8 +2,10 @@ import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 
 export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
-  <>
-    Documents disponibles pour cette structure :
+  <nav role="navigation" aria-labelledby="document-summary-title">
+    <strong id="document-summary-title">
+      Documents disponibles pour cette structure :
+    </strong>
     <ul>
       {hasRights(session, EScope.conformite) && (
         <li>
@@ -21,5 +23,5 @@ export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
         </li>
       )}
     </ul>
-  </>
+  </nav>
 );

@@ -6,11 +6,9 @@ import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { ActesTable } from './rne';
 
 const NoDocument = () => (
   <>Aucun document n’a été retrouvé pour cette association.</>
@@ -26,17 +24,6 @@ export const AgentActesAssociation: React.FC<{
     session
   );
 
-  const actesRne = useAPIRouteData(
-    'espace-agent/rne/documents',
-    uniteLegale.siren,
-    session
-  );
-
-  const hasActesRNE =
-    !isDataLoading(actesRne) &&
-    !hasAnyError(actesRne) &&
-    actesRne.actes.length > 0;
-
   return (
     <DataSectionClient
       title="Actes et statuts"
@@ -48,8 +35,7 @@ export const AgentActesAssociation: React.FC<{
     >
       {(associationProtected) => (
         <>
-          {hasActesRNE &&
-            associationProtected.documents.rna.length === 0 &&
+          {associationProtected.documents.rna.length === 0 &&
             associationProtected.documents.dac.length === 0 && <NoDocument />}
 
           {associationProtected.documents.rna.length > 0 && (
@@ -118,12 +104,6 @@ export const AgentActesAssociation: React.FC<{
                   ]
                 )}
               />
-            </>
-          )}
-          {hasActesRNE && (
-            <>
-              <h3>Actes au RNE</h3>
-              <ActesTable actes={actesRne.actes} />
             </>
           )}
         </>
