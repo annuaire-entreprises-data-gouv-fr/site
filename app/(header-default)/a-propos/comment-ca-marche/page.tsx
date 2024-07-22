@@ -148,7 +148,7 @@ export default function About() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              l’API Recherche d’entreprises
+              l’API Recherche d’Entreprises
             </a>
             .
           </p>

@@ -36,13 +36,19 @@ function ConformiteSection({ uniteLegale, session }: IProps) {
         {(conformite) => (
           <TwoColumnTable
             body={[
-              ['Conformité fiscale', <Conformite data={conformite?.fiscale} />],
+              [
+                'Conformité fiscale',
+                <Conformite
+                  data={conformite?.fiscale}
+                  administration="DGFiP"
+                />,
+              ],
               [
                 'Conformité sociale',
                 <>
                   <Conformite
                     data={conformite?.vigilance}
-                    administration="Urssaf"
+                    administration="URSSAF"
                   />
                   <br />
                   <Conformite data={conformite?.msa} administration="MSA" />

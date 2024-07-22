@@ -51,6 +51,8 @@ jobs:
             host: SSH_PRODUCTION_01
           - environment: production-02
             host: SSH_PRODUCTION_02
+          - environment: production-03
+            host: SSH_PRODUCTION_03
     steps:
       - uses: actions/checkout@v3
 

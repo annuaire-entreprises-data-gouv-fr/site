@@ -17,10 +17,10 @@ const AccesByAPIPage = () => (
         </a>
         , la <DINUM /> propose deux API pour accéder aux données détenues par
         les administrations sur une entreprise française : l’
-        <strong>API Recherche d’entreprise</strong> et l’
+        <strong>API Recherche d’Entreprises</strong> et l’
         <strong>API Entreprise</strong>.
       </p>
-      <h2>L’API Recherche d’entreprise</h2>
+      <h2>L’API Recherche d’Entreprises</h2>
       <p>
         C’est l’API qui alimente le moteur de recherche de l’Annuaire des
         Entreprises. Elle fait une synthèse des différentes bases de données

@@ -1,26 +1,14 @@
-import { GetServerSideProps, Metadata } from 'next';
-import Meta from '#components/meta/meta-client';
+import { Metadata } from 'next';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { getNomComplet } from '#models/core/statut-diffusion';
-import { IUniteLegale } from '#models/core/types';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
-import {
-  IPropsWithMetadata,
-  postServerSideProps,
-} from '#utils/server-side-helper/page/post-server-side-props';
-import ElusSection from 'app/(header-default)/elus/_component/section/elus-section';
-import { NextPageWithLayout } from 'pages/_app';
+import { uniteLegalePageDescription } from '#utils/helpers';
+import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
-import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
 import getSession from '#utils/server-side-helper/app/get-session';
-import {
-  uniteLegalePageDescription,
-  uniteLegalePageTitle,
-} from '#utils/helpers';
+import ElusSection from 'app/(header-default)/elus/_component/section/elus-section';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -35,7 +23,7 @@ export const generateMetadata = async (
       uniteLegale.siren
     }`,
     description: uniteLegalePageDescription(uniteLegale, session),
-    robots: 'noindex, nofollow',
+    robots: 'noindex',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/elus/${uniteLegale.siren}`,
     },
