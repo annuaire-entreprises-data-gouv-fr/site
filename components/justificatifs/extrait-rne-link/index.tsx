@@ -21,7 +21,9 @@ const ExtraitRNELink: React.FC<{
       télécharger
     </a>
   ) : (
-    <>{nonDiffusibleDataFormatter('document non-diffusible')}</>
+    <a href="/faq/justificatif-immatriculation-non-diffusible">
+      {nonDiffusibleDataFormatter('document non-diffusible')}
+    </a>
   );
 };
 
