@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { LogoAnnuaireWithEasterEgg } from '#components-ui/logo-annuaire/logo-with-easter-egg';
-import { SocieteAMissionBanner } from '#components/banner/societe-a-mission-banner';
 import Favourites from '#components/favourites';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -60,7 +59,6 @@ const Index = () => (
     <div style={{ height: '25vh', maxHeight: '150px' }}>
       <Favourites />
     </div>
-    <SocieteAMissionBanner />
   </>
 );
 

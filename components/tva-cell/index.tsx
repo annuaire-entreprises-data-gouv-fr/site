@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
@@ -11,7 +12,6 @@ import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { ITVAIntracommunautaire } from '#models/tva';
 import { Siren, formatIntFr } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import React from 'react';
 
 const NoTVA = () => (
   <i>

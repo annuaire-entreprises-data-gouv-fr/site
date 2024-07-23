@@ -1,9 +1,9 @@
+import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Section } from '#components/section';
 import constants from '#models/constants';
 import { IMonitoringWithMetaData, IRatio } from '#models/monitoring';
-import React from 'react';
 import styles from './styles.module.css';
 
 const getUptimeColor = (ratio: IRatio) => {
