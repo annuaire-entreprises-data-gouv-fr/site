@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import { NPSBanner } from '#components/banner/nps';
+import { SocieteAMissionBanner } from '#components/banner/societe-a-mission-banner';
 import Footer from '#components/footer';
 import { HeaderWithAdvancedSearch } from '#components/header/header-advanced-search';
 import SearchResults from '#components/search-results';
@@ -58,7 +59,9 @@ const SearchResultPage = async function UniteLegalePage(props: AppRouterProps) {
             />
           )}
         </div>
+        <SocieteAMissionBanner />
       </main>
+
       <SocialNetworks />
       <Footer />
     </>

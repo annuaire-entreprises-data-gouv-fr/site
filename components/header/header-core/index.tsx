@@ -1,6 +1,5 @@
 import React from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
-import { InfoBanner } from '#components/banner/info-banner';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import { ISession } from '#models/user/session';
@@ -37,8 +36,6 @@ export const HeaderCore: React.FC<IProps> = ({
         className="fr-header"
         style={{ filter: !useSearchBar ? 'none' : undefined }}
       >
-        <InfoBanner />
-
         <PrintNever>
           <form
             id="search-bar-form"
