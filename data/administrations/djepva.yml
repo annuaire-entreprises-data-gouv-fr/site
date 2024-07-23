@@ -8,5 +8,14 @@ apiMonitors:
     apiSlug: rna
     updownIoId: phbs
     apiDocumentationLink: https://www.associations.gouv.fr/les-api-et-autres-outils.html
+dataSources:
+  - label: Dirigeants des associations
+    apiSlug: api-entreprise
+    data:
+      - label: dirigeants des associations
+  - label: Documents des associations
+    apiSlug: api-entreprise
+    data:
+      - label: Actes, statuts et documents complémentaires
 description: |
   Au sein du ministère de l'Éducation nationale et de la Jeunesse, la DJEPVA élabore et pilote les politiques en faveur des jeunes, de l'engagement, de l'éducation populaire et de la vie associative.
