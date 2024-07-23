@@ -20,7 +20,7 @@ export const AgentActesAssociation: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const [selectedSiret, setSelectedSiret] = useState<string>('');
+  const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
 
   const associationProtected = useAPIRouteData(
     'espace-agent/association-protected',
@@ -87,15 +87,16 @@ export const AgentActesAssociation: React.FC<{
                   value: k.siret,
                   label: `${formatSiret(k.siret)} - ${k.adresse}`,
                 }))}
-                onChange={setSelectedSiret}
+                onChange={(e) => setSelectedSiret(e)}
                 placeholder="Filtrer par établissement"
+                fallback={null}
               />
               <FullTable
                 head={['Siret', 'Dépôt', 'Validité', 'Description', 'Lien']}
                 body={associationProtected.documents.dac
                   .filter((d) =>
-                    selectedSiret
-                      ? d.etablissement.siret === selectedSiret
+                    selectedSiret.length > 0
+                      ? selectedSiret.indexOf(d.etablissement.siret) > -1
                       : true
                   )
                   .map(

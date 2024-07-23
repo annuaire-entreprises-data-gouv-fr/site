@@ -1,34 +1,34 @@
-import { ChangeEvent } from 'react';
-import { Select } from '#components-ui/select';
+import { MultiSelect } from '#components-ui/select/multi-select';
 
 type IProps = {
-  onChange: (e: string) => void;
+  onChange: (selectedValues: string[]) => void;
   dataSelect: { value: string; label: string }[];
   placeholder?: string;
+  fallback?: JSX.Element | null;
 };
 
 export default function TableFilter({
   dataSelect,
   onChange,
   placeholder,
+  fallback = null,
 }: IProps) {
-  if (!dataSelect || dataSelect.length === 0) {
-    return null;
+  if (!dataSelect || dataSelect.length <= 1) {
+    return fallback;
   }
-
-  const onFilter = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value as string);
-  };
 
   return (
     <div className="layout-right" style={{ marginBottom: '15px' }}>
-      <Select
+      <MultiSelect
         placeholder={placeholder}
-        onChange={onFilter}
+        instanceId="table-filter"
+        id="table-filter"
+        onChange={onChange}
         options={dataSelect.map(({ value, label }) => ({
           value,
           label,
         }))}
+        menuPosition="absolute"
       />
     </div>
   );

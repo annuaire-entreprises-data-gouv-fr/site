@@ -29,7 +29,7 @@ const NoDirigeants = () => (
  * Dirigeants for agents : RNA or Le compte asso
  */
 function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
-  const [selectedSiret, setSelectedSiret] = useState<string>('');
+  const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
   const associationProtected = useAPIRouteData(
     'espace-agent/association-protected',
     uniteLegale.siren,
@@ -68,8 +68,6 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
                 Registre National des Associations
               </FAQLink>{' '}
               :
-              <br />
-              <br />
               <TableFilter
                 dataSelect={Array.from(
                   new Set(
@@ -79,15 +77,21 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
                   value: k.siret,
                   label: `${formatSiret(k.siret)} - ${k.adresse}`,
                 }))}
-                onChange={setSelectedSiret}
+                onChange={(e) => setSelectedSiret(e)}
                 placeholder="Filtrer par établissement"
+                fallback={
+                  <>
+                    <br />
+                    <br />
+                  </>
+                }
               />
               <FullTable
                 head={['Etablissement', 'Role', 'Détails', 'Contact']}
                 body={associationProtected.dirigeants
                   .filter((d) =>
-                    selectedSiret
-                      ? d.etablissement.siret === selectedSiret
+                    selectedSiret.length > 0
+                      ? selectedSiret.indexOf(d.etablissement.siret) > -1
                       : true
                   )
                   .map(
