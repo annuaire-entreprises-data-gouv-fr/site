@@ -1,8 +1,8 @@
-import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Siren } from '#utils/helpers';
+import React from 'react';
 import PrintButton from './print-button';
 import styles from './styles.module.css';
 
@@ -17,7 +17,7 @@ const SocialMedia: React.FC<{
         <InformationTooltip
           ariaRelation="labelledby"
           tabIndex={undefined}
-          orientation="right"
+          horizontalOrientation="right"
           label="Partager cette page sur Linkedin"
         >
           <a
@@ -34,7 +34,7 @@ const SocialMedia: React.FC<{
         <InformationTooltip
           ariaRelation="labelledby"
           tabIndex={undefined}
-          orientation="right"
+          horizontalOrientation="right"
           label="Partager cette page sur Twitter"
         >
           <a
@@ -51,7 +51,7 @@ const SocialMedia: React.FC<{
         <InformationTooltip
           ariaRelation="labelledby"
           tabIndex={undefined}
-          orientation="right"
+          horizontalOrientation="right"
           label="Partager cette page sur Facebook"
         >
           <a
@@ -70,7 +70,7 @@ const SocialMedia: React.FC<{
         <InformationTooltip
           ariaRelation="labelledby"
           tabIndex={undefined}
-          orientation="right"
+          horizontalOrientation="right"
           label="Partager cette page par Email"
         >
           <a
@@ -87,7 +87,7 @@ const SocialMedia: React.FC<{
             ariaRelation="describedby"
             tabIndex={undefined}
             label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cette page"
-            orientation="right"
+            horizontalOrientation="right"
           >
             <a
               aria-label="Partager cette page grâce à un QR Code"

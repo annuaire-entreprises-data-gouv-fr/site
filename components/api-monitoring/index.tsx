@@ -1,9 +1,9 @@
-import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Section } from '#components/section';
 import constants from '#models/constants';
 import { IMonitoringWithMetaData, IRatio } from '#models/monitoring';
+import React from 'react';
 import styles from './styles.module.css';
 
 const getUptimeColor = (ratio: IRatio) => {
@@ -53,7 +53,7 @@ const Metric: React.FC<{
           key={index}
         >
           <InformationTooltip
-            orientation={index < 76 ? 'left' : 'right'}
+            horizontalOrientation={index < 76 ? 'left' : 'right'}
             width={170}
             tabIndex={0}
             ariaRelation="labelledby"
@@ -81,7 +81,7 @@ const Metric: React.FC<{
 
 const RobotTooltip = () => (
   <InformationTooltip
-    orientation="right"
+    horizontalOrientation="right"
     tabIndex={0}
     ariaRelation="labelledby"
     label="Ces données sont obtenues via un robot qui interroge la source de données toutes les minutes"

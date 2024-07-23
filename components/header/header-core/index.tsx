@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
 import LoadBar from '#components/load-bar';
@@ -6,6 +7,9 @@ import { ISession } from '#models/user/session';
 import Menu from '../menu';
 import styles from './styles.module.css';
 
+const NouveautésWithoutSSR = dynamic(() => import('../nouveautes-badge'), {
+  ssr: false,
+});
 type IProps = {
   currentSearchTerm?: string;
   useLogo?: boolean;
@@ -105,6 +109,7 @@ export const HeaderCore: React.FC<IProps> = ({
                   <div className="fr-header__tools">
                     <div className="fr-header__tools-links">
                       <ul className="fr-links-group">
+                        <NouveautésWithoutSSR />
                         <li>
                           <Menu
                             session={session}
