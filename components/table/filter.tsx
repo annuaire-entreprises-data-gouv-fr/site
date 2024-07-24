@@ -28,6 +28,7 @@ export default function TableFilter({
           value,
           label,
         }))}
+        maxWidth="375px"
         menuPosition="absolute"
       />
     </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { DataSectionClient } from '#components/section/data-section';
@@ -8,6 +8,7 @@ import TableFilter from '#components/table/filter';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
+import { isDataSuccess } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { formatDate, formatSiret } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
@@ -27,6 +28,18 @@ export const AgentActesAssociation: React.FC<{
     uniteLegale.siren,
     session
   );
+
+  const etablissementsForFilter = useMemo(() => {
+    if (!isDataSuccess(associationProtected)) {
+      return [];
+    }
+    return Array.from(
+      new Set(associationProtected.documents.dac.map((d) => d.etablissement))
+    ).map((k) => ({
+      value: k.siret,
+      label: `${formatSiret(k.siret)} - ${k.adresse}`,
+    }));
+  }, [associationProtected]);
 
   return (
     <DataSectionClient
@@ -69,24 +82,12 @@ export const AgentActesAssociation: React.FC<{
               <h3>
                 <FAQLink tooltipLabel="Documents Administratifs Complémentaires (DAC)">
                   Documents déposés par l’association lors de démarches en ligne
-                  sur{' '}
-                  <a href="https://lecompteasso.associations.gouv.fr/">
-                    Le Compte Asso
-                  </a>
+                  sur Le Compte Asso
                 </FAQLink>
               </h3>
 
               <TableFilter
-                dataSelect={Array.from(
-                  new Set(
-                    associationProtected.documents.dac.map(
-                      (d) => d.etablissement
-                    )
-                  )
-                ).map((k) => ({
-                  value: k.siret,
-                  label: `${formatSiret(k.siret)} - ${k.adresse}`,
-                }))}
+                dataSelect={etablissementsForFilter}
                 onChange={(e) => setSelectedSiret(e)}
                 placeholder="Filtrer par établissement"
                 fallback={null}

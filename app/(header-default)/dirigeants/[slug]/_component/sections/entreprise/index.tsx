@@ -2,7 +2,7 @@
 
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { IUniteLegale } from '#models/core/types';
-import { hasAnyError, isUnauthorized } from '#models/data-fetching';
+import { isDataSuccess } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import BeneficiairesSection from './beneficiaires';
@@ -25,8 +25,7 @@ export function DirigeantInformation({
     session
   );
 
-  const hasMandataireRCS =
-    !isUnauthorized(mandatairesRCS) && !hasAnyError(mandatairesRCS);
+  const hasMandataireRCS = isDataSuccess(mandatairesRCS);
 
   return (
     <>

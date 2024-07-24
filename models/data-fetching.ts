@@ -50,3 +50,12 @@ export function hasAnyError<T>(
       isAPINotResponding(toBeDetermined))
   );
 }
+
+/**
+ * The data is authorized, not loading, no fetch error, no API error
+ */
+export function isDataSuccess<T>(
+  toBeDetermined: T | IDataFetchingState | IAPINotRespondingError
+): toBeDetermined is T {
+  return !isDataLoading(toBeDetermined) && !hasAnyError(toBeDetermined);
+}

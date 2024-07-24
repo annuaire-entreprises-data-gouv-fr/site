@@ -5,11 +5,7 @@ import { DataSectionClient } from '#components/section/data-section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
-import {
-  IDataFetchingState,
-  hasAnyError,
-  isDataLoading,
-} from '#models/data-fetching';
+import { IDataFetchingState, isDataSuccess } from '#models/data-fetching';
 import { IDirigeant, IImmatriculationRNE } from '#models/immatriculation';
 import { DirigeantContent } from './dirigeant-content';
 
@@ -37,7 +33,7 @@ function RCSDiffersFromRNE({
     | IDataFetchingState;
   uniteLegale: IUniteLegale;
 }) {
-  if (isDataLoading(immatriculationRNE) || hasAnyError(immatriculationRNE)) {
+  if (!isDataSuccess(immatriculationRNE)) {
     return null;
   }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import FAQLink from '#components-ui/faq-link';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
@@ -11,7 +11,7 @@ import TableFilter from '#components/table/filter';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import { isUnauthorized } from '#models/data-fetching';
+import { isDataSuccess, isUnauthorized } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
@@ -35,6 +35,18 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
     uniteLegale.siren,
     session
   );
+
+  const etablissementsForFilter = useMemo(() => {
+    if (!isDataSuccess(associationProtected)) {
+      return [];
+    }
+    return Array.from(
+      new Set(associationProtected.dirigeants.map((d) => d.etablissement))
+    ).map((k) => ({
+      value: k.siret,
+      label: `${formatSiret(k.siret)} - ${k.adresse}`,
+    }));
+  }, [associationProtected]);
 
   if (isUnauthorized(associationProtected)) {
     return (
@@ -69,14 +81,7 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
               </FAQLink>{' '}
               :
               <TableFilter
-                dataSelect={Array.from(
-                  new Set(
-                    associationProtected.dirigeants.map((d) => d.etablissement)
-                  )
-                ).map((k) => ({
-                  value: k.siret,
-                  label: `${formatSiret(k.siret)} - ${k.adresse}`,
-                }))}
+                dataSelect={etablissementsForFilter}
                 onChange={(e) => setSelectedSiret(e)}
                 placeholder="Filtrer par établissement"
                 fallback={
