@@ -97,6 +97,7 @@ export const HeaderCore: React.FC<IProps> = ({
                         </div>
                       ) : null}
                       <div className={styles.menuMobile}>
+                        <ChangelogNotificationWithoutSSR />
                         <Menu
                           session={session}
                           useAgentCTA={useAgentCTA}
@@ -113,7 +114,9 @@ export const HeaderCore: React.FC<IProps> = ({
                   <div className="fr-header__tools">
                     <div className="fr-header__tools-links">
                       <ul className="fr-links-group">
-                        <ChangelogNotificationWithoutSSR />
+                        <li>
+                          <ChangelogNotificationWithoutSSR />
+                        </li>
                         <li>
                           <Menu
                             session={session}

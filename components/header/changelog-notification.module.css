@@ -2,7 +2,7 @@
   content: '';
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 2px;
   width: 10px;
   height: 10px;
   background-color: #ff0000;
@@ -11,6 +11,14 @@
 }
 
 .changelogNotification {
-  top: -2px;
   position: relative;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 992px) {
+  .notificationText {
+    display: none;
+  }
+  .changelogNotification::before {
+    top: 0;
+  }
 }

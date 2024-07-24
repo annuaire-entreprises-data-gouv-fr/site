@@ -1,14 +1,34 @@
 import { useState } from 'react';
 
+function isStorageAvailable(type: 'session' | 'local') {
+  const test = 'test';
+  const store =
+    type === 'session' ? window.sessionStorage : window.localStorage;
+
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  try {
+    store.setItem(test, test);
+    store.removeItem(test);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 export const useStorage = (
   type: 'session' | 'local',
   key: string,
   initialValue: any
 ) => {
+  const storageAvailable = isStorageAvailable(type);
+
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState(() => {
-    if (typeof window === 'undefined') {
+    if (!storageAvailable) {
       return initialValue;
     }
 
@@ -24,6 +44,10 @@ export const useStorage = (
       return initialValue;
     }
   });
+
+  if (!storageAvailable) {
+    return [storedValue, () => {}];
+  }
 
   // Return a wrapped version of useState's setter function that ...
   // ... persists the new value to localStorage.
