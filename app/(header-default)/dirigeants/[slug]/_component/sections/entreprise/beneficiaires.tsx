@@ -144,8 +144,9 @@ function BénéficiairesContent({
 
 const WarningRBE = () => (
   <Warning>
-    À compter du 31 juillet 2024, le registre des bénéficiaires effectifs n’est
-    plus accessible au public, en application de la{' '}
+    À compter du 31 juillet 2024, le registre des bénéficiaires effectifs ne
+    sera plus accessible ni sur le site, ni sur l’espace agent public, en
+    application de la{' '}
     <a
       href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000049761732"
       target="_blank"
