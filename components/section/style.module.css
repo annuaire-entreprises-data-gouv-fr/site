@@ -5,19 +5,30 @@
   position: relative;
   margin: 20px 0 40px;
   padding: 1rem;
-
 }
 
-.section-container>h2 {
-  margin-top: 0;
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 25px;
+}
+
+.section-header > h2 {
+  margin-top: 0;
   display: inline-block;
   font-size: 1.1rem;
   line-height: 1.8rem;
 
   padding: 0 7px;
   border-radius: 2px;
-  max-width: calc(100% - 400px);
+}
+
+.section-logo-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+  margin-top: 5px;
 }
 
 .administration-page-link {
@@ -29,20 +40,12 @@
   margin-top: 25px;
 }
 
-.section-logo-wrapper {
-  position: absolute;
-  top: 25px;
-  right: 16px;
-  display: flex;
-  justify-content: flex-end;
-}
-
 @media only screen and (min-width: 1px) and (max-width: 768px) {
   .section-logo-wrapper {
     display: none;
   }
 
-  .section-container>h2 {
+  .section-container > h2 {
     max-width: 100%;
   }
 }

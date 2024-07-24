@@ -57,9 +57,31 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
             </Icon>
           </div>
         )}
-        <h2 style={{ color: titleColor, backgroundColor: borderColor }}>
-          {title}
-        </h2>
+        <div className={style['section-header']}>
+          <h2 style={{ color: titleColor, backgroundColor: borderColor }}>
+            {title}
+          </h2>
+          <div className={style['section-logo-wrapper']}>
+            {dataSources.map(
+              ({ slug, long, logoType }) =>
+                logoType && (
+                  <a
+                    key={long}
+                    href={faqLink}
+                    title={long}
+                    className="no-style-link"
+                  >
+                    {logoType === 'portrait' ? (
+                      <Logo title={long} slug={slug} width={70} height={40} />
+                    ) : (
+                      <Logo title={long} slug={slug} width={170} height={40} />
+                    )}
+                  </a>
+                )
+            )}
+          </div>
+        </div>
+
         {isOld && lastModified && (
           <Warning>
             Ces données n’ont pas été mises à jour depuis plus de deux mois.
@@ -77,25 +99,6 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
             />
           </div>
         )}
-        <div className={style['section-logo-wrapper']}>
-          {dataSources.map(
-            ({ slug, long, logoType }) =>
-              logoType && (
-                <a
-                  key={long}
-                  href={faqLink}
-                  title={long}
-                  className="no-style-link"
-                >
-                  {logoType === 'portrait' ? (
-                    <Logo title={long} slug={slug} width={70} height={40} />
-                  ) : (
-                    <Logo title={long} slug={slug} width={170} height={40} />
-                  )}
-                </a>
-              )
-          )}
-        </div>
       </div>
     </SectionErrorBoundary>
   );
