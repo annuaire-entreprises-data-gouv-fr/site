@@ -25,7 +25,7 @@ export const setAgentSession = async (
 };
 
 export const cleanAgentSession = async (session: IronSession<ISession>) => {
-  session.user = {};
+  session.user = null;
   await session.save();
 };
 

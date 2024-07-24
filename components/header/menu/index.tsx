@@ -25,7 +25,7 @@ const Menu: React.FC<{
                 color: constants.colors.espaceAgent,
               }}
             >
-              agent public
+              {session?.user?.isPrestataire ? 'externe' : 'agent public'}
             </strong>
             )
           </span>

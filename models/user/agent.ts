@@ -26,7 +26,7 @@ const isLikelyPrestataire = (email: string | undefined) => {
 };
 
 const isFromMCP = (idp_id: string) => {
-  if (idp_id === 'test') {
+  if (idp_id === '71144ab3-ee1a-4401-b7b3-79b44f7daeeb') {
     return true;
   } else {
     return false;

@@ -23,7 +23,7 @@ const getAgentContactInfo = (
     return null;
   }
   return {
-    email: session.user.email,
-    name: session.user.fullName,
+    email: session?.user?.email,
+    name: session?.user?.fullName,
   };
 };
