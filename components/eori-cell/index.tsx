@@ -42,7 +42,7 @@ export default function EORICell(props: IProps) {
             page, ou revenir plus tard.
           </>
         }
-        orientation="left"
+        horizontalOrientation="left"
         left="5px"
       >
         <Icon slug="errorFill" color="#df0a00">
@@ -63,7 +63,7 @@ export default function EORICell(props: IProps) {
             tard pour vérifier si cette structure possède un numéro EORI
           </>
         }
-        orientation="left"
+        horizontalOrientation="left"
         left="5px"
       >
         <Icon slug="errorFill" color="#df0a00">

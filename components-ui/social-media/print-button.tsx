@@ -9,7 +9,7 @@ export default function PrintButton() {
       ariaRelation="labelledby"
       tabIndex={undefined}
       label="Imprimer cette page ou la sauvegarder au format PDF"
-      orientation="right"
+      horizontalOrientation="right"
     >
       <button
         id="print-button"

@@ -49,6 +49,7 @@ const Index = () => (
             autoFocus={true}
           />
         </div>
+
         <br />
         <div className="layout-center">
           <a href="/rechercher">→ Effectuer une recherche avancée</a>

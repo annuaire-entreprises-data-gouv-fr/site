@@ -1,7 +1,7 @@
-import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import { IAdministrationMetaData } from '#models/administrations/types';
 import constants from '#models/constants';
+import React from 'react';
 import InformationTooltip from '.';
 import style from './style.module.css';
 
@@ -24,7 +24,7 @@ const DataSourcesTooltip: React.FC<{
     )}
     <InformationTooltip
       tabIndex={undefined}
-      orientation={orientation || 'center'}
+      horizontalOrientation={orientation || 'center'}
       label={
         <>
           {dataSources.map((dataSource) => (
