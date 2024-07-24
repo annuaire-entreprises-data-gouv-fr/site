@@ -1,16 +1,19 @@
 'use client';
 
+import { useMemo, useState } from 'react';
 import FAQLink from '#components-ui/faq-link';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
 import AgentWallAssociationProtected from '#components/espace-agent-components/agent-wall/association';
 import NonRenseigne from '#components/non-renseigne';
 import { DataSectionClient } from '#components/section/data-section';
+import TableFilter from '#components/table/filter';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import { isUnauthorized } from '#models/data-fetching';
+import { isDataSuccess, isUnauthorized } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
+import { formatSiret } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 type IProps = {
@@ -26,11 +29,24 @@ const NoDirigeants = () => (
  * Dirigeants for agents : RNA or Le compte asso
  */
 function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
+  const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
   const associationProtected = useAPIRouteData(
     'espace-agent/association-protected',
     uniteLegale.siren,
     session
   );
+
+  const etablissementsForFilter = useMemo(() => {
+    if (!isDataSuccess(associationProtected)) {
+      return [];
+    }
+    return Array.from(
+      new Set(associationProtected.dirigeants.map((d) => d.etablissement))
+    ).map((k) => ({
+      value: k.siret,
+      label: `${formatSiret(k.siret)} - ${k.adresse}`,
+    }));
+  }, [associationProtected]);
 
   if (isUnauthorized(associationProtected)) {
     return (
@@ -64,42 +80,64 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
                 Registre National des Associations
               </FAQLink>{' '}
               :
-              <br />
-              <br />
+              <TableFilter
+                dataSelect={etablissementsForFilter}
+                onChange={(e) => setSelectedSiret(e)}
+                placeholder="Filtrer par établissement"
+                fallback={
+                  <>
+                    <br />
+                    <br />
+                  </>
+                }
+              />
               <FullTable
-                head={['Role', 'Détails', 'Contact']}
-                body={associationProtected.dirigeants.map(
-                  ({
-                    civilite,
-                    nom,
-                    prenom,
-                    fonction,
-                    valideur_cec,
-                    publication_internet,
-                    telephone,
-                    courriel,
-                  }) => [
-                    <>
-                      {fonction}{' '}
-                      {valideur_cec && (
-                        <InformationTooltip
-                          label="Le validateur CEC est le dirigeant de l’association chargé d’attester les déclarations d’engagement des responsables associatifs dans le cadre du compte d’engagement citoyen (CEC)."
-                          tabIndex={0}
-                        >
-                          <Tag color="info">Validateur CEC</Tag>
-                        </InformationTooltip>
-                      )}
-                    </>,
-                    <>
-                      {civilite} {(nom || '').toUpperCase()} {prenom}
-                    </>,
-                    publication_internet && courriel ? (
-                      <a href={`mailto:${courriel}`}>{courriel}</a>
-                    ) : (
-                      <NonRenseigne />
-                    ),
-                  ]
-                )}
+                head={['Etablissement', 'Role', 'Détails', 'Contact']}
+                body={associationProtected.dirigeants
+                  .filter((d) =>
+                    selectedSiret.length > 0
+                      ? selectedSiret.indexOf(d.etablissement.siret) > -1
+                      : true
+                  )
+                  .map(
+                    ({
+                      etablissement,
+                      civilite,
+                      nom,
+                      prenom,
+                      fonction,
+                      valideur_cec,
+                      publication_internet,
+                      courriel,
+                    }) => [
+                      <>
+                        <a href={`/etablissement/${etablissement.siret}`}>
+                          {formatSiret(etablissement.siret)}
+                        </a>
+                        {etablissement.siege && <Tag color="info">siège</Tag>}
+                      </>,
+
+                      <>
+                        {fonction}{' '}
+                        {valideur_cec && (
+                          <InformationTooltip
+                            label="Le validateur CEC est le dirigeant de l’association chargé d’attester les déclarations d’engagement des responsables associatifs dans le cadre du compte d’engagement citoyen (CEC)."
+                            tabIndex={0}
+                          >
+                            <Tag color="info">Validateur CEC</Tag>
+                          </InformationTooltip>
+                        )}
+                      </>,
+                      <>
+                        {civilite} {(nom || '').toUpperCase()} {prenom}
+                      </>,
+                      publication_internet && courriel ? (
+                        <a href={`mailto:${courriel}`}>{courriel}</a>
+                      ) : (
+                        <NonRenseigne />
+                      ),
+                    ]
+                  )}
               />
             </>
           )}

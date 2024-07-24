@@ -3,7 +3,8 @@
 import React from 'react';
 import { FilterMenu } from '#components-ui/filter-menu';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import { MultiSelect, Select } from '#components-ui/select';
+import { Select } from '#components-ui/select';
+import { MultiSelect } from '#components-ui/select/multi-select';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
 import { codesEffectifsOptions } from '#utils/helpers/formatting/codes-effectifs';
@@ -189,6 +190,7 @@ const SearchFilters: React.FC<{
               value: k,
               label: codesSectionNAF[k as keyof typeof codesSectionNAF],
             }))}
+            menuPosition="fixed"
           />
           <label>Code NAF/APE :</label>
           <MultiSelect
@@ -203,6 +205,7 @@ const SearchFilters: React.FC<{
                 codesNAFRev2[code as keyof typeof codesNAFRev2]
               }`,
             }))}
+            menuPosition="fixed"
           />
         </div>
         <SimpleSeparator />
@@ -215,6 +218,7 @@ const SearchFilters: React.FC<{
             id="nature-juridique-multi-select"
             instanceId="nature-juridique-multi-select"
             options={getNaturesJuridiques()}
+            menuPosition="fixed"
           />
         </div>
         <SimpleSeparator />
@@ -227,6 +231,7 @@ const SearchFilters: React.FC<{
             id="effectif-salarie-multi-select"
             instanceId="effectif-salarie-multi-select"
             options={codesEffectifsOptions}
+            menuPosition="fixed"
           />
         </div>
         <div>
@@ -238,6 +243,7 @@ const SearchFilters: React.FC<{
             id="categorie-entreprise-multi-select"
             instanceId="categorie-entreprise-multi-select"
             options={categoriesEntreprisesOptions}
+            menuPosition="fixed"
           />
         </div>
       </FilterMenu>

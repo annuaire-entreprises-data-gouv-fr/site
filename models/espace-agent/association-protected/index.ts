@@ -15,7 +15,7 @@ type IDocumentDAC = IDocumentAssociation & {
   commentaire: string; //'Les comptes annuels sont consolidés au niveau national';
   etat: string; //'courant';
   nom: string; //'Rapport annuel 2019.pdf';
-  siret: string;
+  etablissement: IAssoEtablissement;
 };
 
 type IDocumentRNA = IDocumentAssociation & {
@@ -35,6 +35,13 @@ type IAssociationDirigeant = {
   publication_internet: boolean;
   telephone: string;
   courriel: string;
+  etablissement: IAssoEtablissement;
+};
+
+type IAssoEtablissement = {
+  siret: string;
+  adresse: string;
+  siege: boolean;
 };
 
 export type IAssociationProtected = {

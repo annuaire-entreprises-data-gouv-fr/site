@@ -1,13 +1,16 @@
 'use client';
 
+import { useMemo, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { DataSectionClient } from '#components/section/data-section';
+import TableFilter from '#components/table/filter';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
+import { isDataSuccess } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
-import { formatSiret } from '#utils/helpers';
+import { formatDate, formatSiret } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const NoDocument = () => (
@@ -18,11 +21,25 @@ export const AgentActesAssociation: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
+  const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
+
   const associationProtected = useAPIRouteData(
     'espace-agent/association-protected',
     uniteLegale.siren,
     session
   );
+
+  const etablissementsForFilter = useMemo(() => {
+    if (!isDataSuccess(associationProtected)) {
+      return [];
+    }
+    return Array.from(
+      new Set(associationProtected.documents.dac.map((d) => d.etablissement))
+    ).map((k) => ({
+      value: k.siret,
+      label: `${formatSiret(k.siret)} - ${k.adresse}`,
+    }));
+  }, [associationProtected]);
 
   return (
     <DataSectionClient
@@ -47,10 +64,10 @@ export const AgentActesAssociation: React.FC<{
                 </FAQLink>
               </h3>
               <FullTable
-                head={['Date de dépôt', 'Description', 'Lien']}
+                head={['Dépôt', 'Description', 'Lien']}
                 body={associationProtected.documents.rna.map(
                   ({ date_depot, sous_type, url }) => [
-                    date_depot,
+                    formatDate(date_depot),
                     sous_type.libelle,
                     <ButtonLink target="_blank" alt small to={url}>
                       Télécharger
@@ -65,44 +82,48 @@ export const AgentActesAssociation: React.FC<{
               <h3>
                 <FAQLink tooltipLabel="Documents Administratifs Complémentaires (DAC)">
                   Documents déposés par l’association lors de démarches en ligne
-                  sur{' '}
-                  <a href="https://lecompteasso.associations.gouv.fr/">
-                    Le Compte Asso
-                  </a>
+                  sur Le Compte Asso
                 </FAQLink>
               </h3>
+
+              <TableFilter
+                dataSelect={etablissementsForFilter}
+                onChange={(e) => setSelectedSiret(e)}
+                placeholder="Filtrer par établissement"
+                fallback={null}
+              />
               <FullTable
-                head={[
-                  'Date de dépôt',
-                  'Établissement',
-                  'Année de validité',
-                  'Description',
-                  'Lien',
-                ]}
-                body={associationProtected.documents.dac.map(
-                  ({
-                    date_depot,
-                    nom,
-                    annee_validite,
-                    commentaire,
-                    siret,
-                    url,
-                  }) => [
-                    date_depot,
-                    <a href={`/etablissement/${siret}`}>
-                      {formatSiret(siret)}
-                    </a>,
-                    annee_validite,
-                    <>
-                      <b>{nom}</b>
-                      <br />
-                      {commentaire && <i>{commentaire}</i>}
-                    </>,
-                    <ButtonLink target="_blank" alt small to={url}>
-                      Télécharger
-                    </ButtonLink>,
-                  ]
-                )}
+                head={['Siret', 'Dépôt', 'Validité', 'Description', 'Lien']}
+                body={associationProtected.documents.dac
+                  .filter((d) =>
+                    selectedSiret.length > 0
+                      ? selectedSiret.indexOf(d.etablissement.siret) > -1
+                      : true
+                  )
+                  .map(
+                    ({
+                      date_depot,
+                      nom,
+                      annee_validite,
+                      commentaire,
+                      etablissement,
+                      url,
+                    }) => [
+                      <a href={`/etablissement/${etablissement.siret}`}>
+                        {formatSiret(etablissement.siret)}
+                      </a>,
+                      formatDate(date_depot),
+                      annee_validite,
+                      <>
+                        <b>{nom}</b>
+                        <br />
+                        {commentaire && <i>{commentaire}</i>}
+                      </>,
+                      <ButtonLink target="_blank" alt small to={url}>
+                        Télécharger
+                      </ButtonLink>,
+                    ]
+                  )}
               />
             </>
           )}

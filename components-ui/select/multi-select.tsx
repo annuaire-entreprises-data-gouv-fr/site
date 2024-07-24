@@ -1,13 +1,16 @@
-import React from 'react';
 import ReactSelect, { GroupBase, OptionsOrGroups, Props } from 'react-select';
+import { ISelectOptions } from './type';
 
 type MultiSelectProps = {
   defaultValue?: string | string[];
   id: string;
   instanceId: Props['instanceId'];
   name?: string;
-  options: { value: string; label: string }[];
+  options: ISelectOptions[];
   placeholder?: string;
+  onChange?: (values: string[]) => void;
+  maxWidth?: string;
+  menuPosition: 'absolute' | 'fixed';
 };
 
 export const MultiSelect = ({
@@ -16,6 +19,9 @@ export const MultiSelect = ({
   name,
   options,
   placeholder,
+  onChange,
+  maxWidth = 'none',
+  menuPosition,
 }: MultiSelectProps) => {
   const getDefaultValue = () => {
     if (!defaultValue) {
@@ -38,17 +44,27 @@ export const MultiSelect = ({
     return null;
   };
 
+  const onUpdate = (options: ISelectOptions[]) => {
+    if (onChange) {
+      onChange(options.map((o) => o.value));
+    }
+  };
+
   return (
-    <div style={{ marginBottom: 16 }}>
+    <div style={{ marginBottom: 16, width: '100%', maxWidth }}>
       <ReactSelect
         defaultValue={getDefaultValue()}
         id="react-select-section-naf"
         instanceId={instanceId}
         isMulti
-        menuPosition="fixed"
+        menuPosition={menuPosition}
+        menuPlacement="auto"
         name={name}
         options={options as OptionsOrGroups<{}, GroupBase<{}>>}
+        noOptionsMessage={() => 'Liste vide'}
         placeholder={placeholder}
+        //@ts-ignore
+        onChange={onUpdate}
         styles={{
           clearIndicator: (base) => ({ ...base, color: '#000' }),
           placeholder: (base) => ({ ...base, color: '#161616' }),
@@ -72,7 +88,10 @@ export const MultiSelect = ({
               color: 'black',
             },
           }),
-          menuPortal: (base) => ({ ...base, zIndex: 2 }),
+          menuPortal: (base) => ({
+            ...base,
+            zIndex: 2,
+          }),
           multiValue: (base) => ({ ...base, backgroundColor: '#FFF' }),
         }}
       />

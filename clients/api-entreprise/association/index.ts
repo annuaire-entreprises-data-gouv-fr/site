@@ -27,13 +27,28 @@ const mapToDomainObject = (
       rna: response.data.documents_rna,
       dac: response.data.etablissements.flatMap((e) => {
         return e.documents_dac.map((d) => {
-          return { ...d, siret: e.siret };
+          return {
+            ...d,
+            etablissement: {
+              siret: e.siret,
+              adresse: `${e.adresse.code_postal} ${e.adresse.commune}`,
+              siege: e.siege,
+            },
+          };
         });
       }),
     },
     dirigeants: response.data.etablissements.flatMap((e) => {
       return e.representants_legaux.map((d) => {
-        return { ...d, siret: e.siret };
+        return {
+          ...d,
+          siret: e.siret,
+          etablissement: {
+            siret: e.siret,
+            adresse: `${e.adresse.code_postal} ${e.adresse.commune}`,
+            siege: e.siege,
+          },
+        };
       });
     }),
   };

@@ -6,11 +6,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
-import {
-  IDataFetchingState,
-  hasAnyError,
-  isDataLoading,
-} from '#models/data-fetching';
+import { IDataFetchingState, isDataSuccess } from '#models/data-fetching';
 import { IServicePublic } from '#models/service-public';
 import { useFetchServicePublicSubServices } from 'hooks/fetch/service-public-subservices';
 
@@ -84,8 +80,7 @@ export default function SubServicesSection({
   uniteLegale: IUniteLegale;
 }) {
   if (
-    isDataLoading(servicePublic) ||
-    hasAnyError(servicePublic) ||
+    !isDataSuccess(servicePublic) ||
     !servicePublic.subServicesId ||
     servicePublic.subServicesId.length === 0
   ) {
