@@ -1,4 +1,4 @@
-import { franceConnectLogoutUrl } from '#clients/auth/france-connect/strategy';
+import { franceConnectLogoutUrl } from '#clients/authentication/france-connect/strategy';
 import { Exception } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { setPathFrom } from '#utils/session';

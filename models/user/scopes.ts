@@ -1,4 +1,4 @@
-import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
+import { checkIsSuperAgent } from '#clients/authentication/super-agent';
 
 export type IScope =
   | 'rne'

@@ -1,4 +1,4 @@
-import { FranceConnectAuthorizeUrl } from '#clients/auth/france-connect/strategy';
+import { FranceConnectAuthorizeUrl } from '#clients/authentication/france-connect/strategy';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import withSession from '#utils/session/with-session';
 import { FranceConnectFailedException } from './callback';
