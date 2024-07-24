@@ -23,5 +23,13 @@ dataSources:
       - label: Élus d’une collectivité territoriale
         targets:
           - agent
+  - label: Dirigeants des associations
+    apiSlug: api-entreprise
+    data:
+      - label: dirigeants des associations
+  - label: Documents des associations
+    apiSlug: api-entreprise
+    data:
+      - label: Actes et statuts
 description: |
   Le ministère de l’Intérieur publie toutes les données des associations enregistrées dans le [Répertoire National des Associations (RNA). Le RNA remplace depuis 2010 le répertoire Waldec (Web des associations librement déclarées).
