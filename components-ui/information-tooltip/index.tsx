@@ -17,7 +17,8 @@ type IProps = PropsWithChildren<{
    * MUST NOT contain any interactive elements (like buttons or links) for accessibility reasons
    */
   label: string | ReactNode;
-  orientation?: 'left' | 'right' | 'center';
+  horizontalOrientation?: 'left' | 'right' | 'center';
+  verticalOrientation?: 'top' | 'bottom';
   width?: number;
   inlineBlock?: boolean;
   left?: string;
@@ -42,7 +43,8 @@ type IProps = PropsWithChildren<{
 function InformationTooltip({
   children,
   label,
-  orientation = 'center',
+  horizontalOrientation = 'center',
+  verticalOrientation = 'top',
   ariaRelation = 'describedby',
   width = 250,
   inlineBlock = true,
@@ -84,14 +86,16 @@ function InformationTooltip({
       >
         <span>{children}</span>
         <span
-          className={`${style.tooltip} ${style[orientation]} ${
-            displayed ? style.displayed : ''
-          }`}
+          className={`${style.tooltip} ${style[horizontalOrientation]} ${
+            style[verticalOrientation]
+          } ${displayed ? style.displayed : ''}`}
           style={{
             width: `${width}px`,
-            left: left || computeLeft(orientation, width),
-            borderBottomRightRadius: orientation === 'right' ? '0' : '5px',
-            borderBottomLeftRadius: orientation === 'left' ? '0' : '5px',
+            left: left || computeLeft(horizontalOrientation, width),
+            borderBottomRightRadius:
+              horizontalOrientation === 'right' ? '0' : '5px',
+            borderBottomLeftRadius:
+              horizontalOrientation === 'left' ? '0' : '5px',
           }}
           id={id}
           role="tooltip"

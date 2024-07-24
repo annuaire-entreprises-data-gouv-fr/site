@@ -1,41 +1,33 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
-import { IChangelog, changelogData } from '#models/historique-modifications';
+import { changelogData } from '#models/historique-modifications';
+import { EScope, hasRights } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 
-/**
- * Full client changelog (no server rendering as it triggers hydration errors)
- */
-export default function ChangelogWithFilters() {
-  const [showAgents, setShowAgents] = useState<boolean>(true);
+export default function ChangelogWithFilters({
+  session,
+}: {
+  session: ISession | null;
+}) {
+  const [showAgents, setShowAgents] = useState<boolean>(
+    hasRights(session, EScope.isAgent)
+  );
   const [showPublic, setShowPublic] = useState<boolean>(true);
-  const [showAPI, setShowAPI] = useState<boolean>(true);
+  const [showAPI, setShowAPI] = useState<boolean>(false);
 
-  const [data, setData] = useState<IChangelog[]>([]);
-
-  /** render empty list to avoid hydration errors */
-  useEffect(() => {
-    setData(changelogData);
-  }, []);
-
-  useEffect(() => {
-    setData(
-      changelogData.filter((c) => {
-        if (showAPI && c.target.api) {
-          return true;
-        }
-        if (showPublic && c.target.site) {
-          return true;
-        }
-        if (showAgents && c.target.agent) {
-          return true;
-        }
-        return false;
-      })
-    );
-  }, [showAgents, showPublic, showAPI]);
+  const data = useMemo(
+    () =>
+      changelogData.filter(
+        ({ target }) =>
+          (target.api && showAPI) ||
+          (target.site && showPublic) ||
+          (target.agent && showAgents)
+      ),
+    [showAgents, showPublic, showAPI]
+  );
 
   return (
     <div className="fr-grid-row fr-grid-row--gutters">
@@ -45,8 +37,12 @@ export default function ChangelogWithFilters() {
           aria-labelledby="sidebar_category_legend"
           className="fr-fieldset"
         >
-          <legend className="fr-fieldset__legend" id="sidebar_category_legend">
-            Filtrer par usagers :
+          <legend
+            className="fr-fieldset__legend"
+            id="sidebar_category_legend"
+            aria-label="Filtrer les nouveautés par périmètre"
+          >
+            Filtrer par périmètre :
           </legend>
           <div className="fr-fieldset__element">
             <div className="fr-checkbox-group">
@@ -89,7 +85,7 @@ export default function ChangelogWithFilters() {
           </div>
         </fieldset>
       </div>
-      <div className="fr-col-md-9">
+      <div className="fr-col-md-9" aria-live="polite">
         {data.map((change, index) => (
           <div key={`${change.date}-${index}`} className="fr-mb-4w">
             <h3>{change.date}</h3>
@@ -107,7 +103,7 @@ export default function ChangelogWithFilters() {
               {change.target.site && <Tag color="info">Site public</Tag>}
               {change.target.api && <Tag color="new">API (développeurs)</Tag>}
               {change.htmlBody && (
-                <p dangerouslySetInnerHTML={{ __html: change.htmlBody }} />
+                <div dangerouslySetInnerHTML={{ __html: change.htmlBody }} />
               )}
             </div>
           </div>

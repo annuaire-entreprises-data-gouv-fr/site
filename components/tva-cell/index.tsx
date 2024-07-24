@@ -105,7 +105,7 @@ const VerifyTVA: React.FC<{
               assujettie à la TVA.
             </>
           }
-          orientation="left"
+          horizontalOrientation="left"
           left="5px"
         >
           <Icon slug="errorFill" color="#df0a00">
@@ -134,7 +134,7 @@ const VerifyTVA: React.FC<{
                     ancienne.
                   </>
                 }
-                orientation="left"
+                horizontalOrientation="left"
                 left="5px"
               >
                 <Icon slug="lightbulbFill" color="#ffb300">

@@ -28,7 +28,9 @@ const AvisSituationLink: React.FC<{
       diffusibles, y compris les agents publics.
     </FAQLink>
   ) : (
-    <>{nonDiffusibleDataFormatter('document non-diffusible')}</>
+    <a href="/faq/justificatif-immatriculation-non-diffusible">
+      {nonDiffusibleDataFormatter('document non-diffusible')}
+    </a>
   );
 
 export default AvisSituationLink;

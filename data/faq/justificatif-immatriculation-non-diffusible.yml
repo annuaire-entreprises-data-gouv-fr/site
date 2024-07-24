@@ -1,0 +1,35 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
+administrations:
+  - insee
+  - inpi
+faqTargets:
+  - entreprise
+  - independant
+  - association
+  - agent
+title: Comment accèder aux justificatifs d’immatriculation d’une entreprise non-diffusible ?
+seo:
+  description: Qui peut accèder à l’avis de situation ou l’extrait RNE d’une entreprise non-diffusible ?
+body: |
+  ## Extrait RNE ou extrait INPI
+
+  Les extraits RNE sont consultables sur le site [data.inpi.fr](https://data.inpi.fr), y compris ceux des entreprises non-diffusibles. Munissez-vous du siren concerné et téléchargez le justificatif depuis la fiche de l’entreprise.
+
+  ## Avis de situation Sirene
+
+  L’avis de situation Sirene est uniquement accessible aux propriétaires des entreprises non-diffusibles. Il faut en faire la demande sur le site [avis-situation-sirene.insee.fr](https://avis-situation-sirene.insee.fr/).
+more:
+  - label: Rendre son entreprise diffusible ou non-diffusible
+    href: /faq/rendre-mon-entreprise-non-diffusible

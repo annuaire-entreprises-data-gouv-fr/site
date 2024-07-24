@@ -1,0 +1,16 @@
+.changelogNotification::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.changelogNotification {
+  top: -2px;
+  position: relative;
+}

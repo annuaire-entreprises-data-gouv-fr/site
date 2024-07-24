@@ -1,11 +1,18 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
-import { InfoBanner } from '#components/banner/info-banner';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import { ISession } from '#models/user/session';
 import Menu from '../menu';
 import styles from './styles.module.css';
+
+const ChangelogNotificationWithoutSSR = dynamic(
+  () => import('../changelog-notification'),
+  {
+    ssr: false,
+  }
+);
 
 type IProps = {
   currentSearchTerm?: string;
@@ -37,8 +44,6 @@ export const HeaderCore: React.FC<IProps> = ({
         className="fr-header"
         style={{ filter: !useSearchBar ? 'none' : undefined }}
       >
-        <InfoBanner />
-
         <PrintNever>
           <form
             id="search-bar-form"
@@ -108,6 +113,7 @@ export const HeaderCore: React.FC<IProps> = ({
                   <div className="fr-header__tools">
                     <div className="fr-header__tools-links">
                       <ul className="fr-links-group">
+                        <ChangelogNotificationWithoutSSR />
                         <li>
                           <Menu
                             session={session}

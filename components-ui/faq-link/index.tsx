@@ -1,7 +1,7 @@
-import React, { PropsWithChildren } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import constants from '#models/constants';
+import React, { PropsWithChildren } from 'react';
 import styles from './style.module.css';
 
 const FAQLink: React.FC<
@@ -10,7 +10,7 @@ const FAQLink: React.FC<
   <InformationTooltip
     label={children}
     tabIndex={to ? undefined : 0}
-    orientation="left"
+    horizontalOrientation="left"
     width={230}
     left="0px"
     ariaRelation="describedby"

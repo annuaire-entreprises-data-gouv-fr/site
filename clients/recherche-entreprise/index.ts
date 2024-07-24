@@ -200,7 +200,8 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
         )
       : [etablissementSiege],
     pageEtablissements,
-    result.nombre_etablissements
+    result.nombre_etablissements,
+    result.nombre_etablissements_ouverts
   );
 
   return {
