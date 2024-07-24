@@ -11,6 +11,7 @@ import { IUniteLegale } from '#models/core/types';
 import { isDataSuccess } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { formatDate, formatSiret } from '#utils/helpers';
+import { extractAssociationEtablissements } from '#utils/helpers/association';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const NoDocument = () => (
@@ -33,12 +34,7 @@ export const AgentActesAssociation: React.FC<{
     if (!isDataSuccess(associationProtected)) {
       return [];
     }
-    return Array.from(
-      new Set(associationProtected.documents.dac.map((d) => d.etablissement))
-    ).map((k) => ({
-      value: k.siret,
-      label: `${formatSiret(k.siret)} - ${k.adresse}`,
-    }));
+    return extractAssociationEtablissements(associationProtected.documents.dac);
   }, [associationProtected]);
 
   return (

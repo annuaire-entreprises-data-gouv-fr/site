@@ -38,18 +38,19 @@ const mapToDomainObject = (
         });
       }),
     },
-    dirigeants: response.data.etablissements.flatMap((e) => {
-      return e.representants_legaux.map((d) => {
-        return {
-          ...d,
-          siret: e.siret,
-          etablissement: {
-            siret: e.siret,
-            adresse: `${e.adresse.code_postal} ${e.adresse.commune}`,
-            siege: e.siege,
-          },
-        };
-      });
-    }),
+    dirigeants: response.data.etablissements
+      .flatMap((e) => {
+        return e.representants_legaux.map((d) => {
+          return {
+            ...d,
+            etablissement: {
+              siret: e.siret,
+              adresse: `${e.adresse.code_postal} ${e.adresse.commune}`,
+              siege: e.siege,
+            },
+          };
+        });
+      })
+      .sort((d1, _d2) => (d1.etablissement.siege ? -1 : 1)),
   };
 };
