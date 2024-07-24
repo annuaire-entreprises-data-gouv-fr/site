@@ -8,7 +8,7 @@ import { changelogData } from '#models/historique-modifications';
 import { EScope, hasRights } from '#models/user/rights';
 import { useStorage } from 'hooks';
 import useSession from 'hooks/use-session';
-import style from './nouveautes-badge.module.css';
+import style from './changelog-notification.module.css';
 
 const NEW_SINCE_LAST_VISIT_ID = 'new-since-last-visit';
 const siteChangelog = changelogData.filter(
