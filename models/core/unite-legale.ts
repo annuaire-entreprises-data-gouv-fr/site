@@ -84,7 +84,7 @@ class UniteLegaleBuilder {
     // en sommeil
     if (
       estActif(uniteLegale) &&
-      !(uniteLegale.etablissements.all || []).find((a) => estActif(a))
+      uniteLegale.etablissements.nombreEtablissementsOuverts === 0
     ) {
       uniteLegale.etatAdministratif =
         IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;
