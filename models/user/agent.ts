@@ -9,7 +9,7 @@ const isLikelyPrestataire = (email: string | undefined) => {
     if (domain === 'beta.gouv.fr') {
       return true;
     } else {
-      if (!!domain.match(/[.-@]*(ext)(ernal|ernes|erne)*[.-@]/g)) {
+      if (!!domain.match(/[.@-]*(ext)(ernal|ernes|erne)*[.@-]/g)) {
         return true;
       }
       return false;
