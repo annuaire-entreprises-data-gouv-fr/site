@@ -59,6 +59,7 @@ const SearchResultPage = async function UniteLegalePage(props: AppRouterProps) {
           )}
         </div>
       </main>
+
       <SocialNetworks />
       <Footer />
     </>

@@ -22,13 +22,15 @@ export interface IEtablissementsList {
  *
  * @param all
  * @param currentEtablissementPage (optional) for pagination
- * @param realTotal (optional) total etablissement (can exceed pagination)
+ * @param realTotal (optional) total etablissements if known, otherwise fallback on etablissement list within pagination
+ * @param realOpen (optional) total open etablissements if known, otherwise fallback on etablissement list within pagination
  * @returns
  */
 export const createEtablissementsList = (
   all: IEtablissement[],
   currentEtablissementPage = 0,
-  realTotal?: number
+  realTotal?: number,
+  realOpen?: number
 ) => {
   const open = all
     .filter((e) => estActif(e) && !estNonDiffusible(e))
@@ -38,8 +40,10 @@ export const createEtablissementsList = (
 
   const unknown = all.filter((e) => estNonDiffusible(e));
 
-  // real total can exceede all.length if we need pagination
-  const nombreEtablissements = realTotal || all.length;
+  // real total and open can exceede all.length if we need pagination
+  const nombreEtablissements = realTotal ?? all.length;
+  const nombreEtablissementsOuverts = realOpen ?? open.length;
+
   const usePagination =
     nombreEtablissements > constants.resultsPerPage.etablissements;
 
@@ -48,8 +52,8 @@ export const createEtablissementsList = (
     open,
     unknown,
     closed,
-    nombreEtablissementsOuverts: open.length,
-    nombreEtablissements: nombreEtablissements,
+    nombreEtablissementsOuverts,
+    nombreEtablissements,
     // pagination
     usePagination,
     currentEtablissementPage,
