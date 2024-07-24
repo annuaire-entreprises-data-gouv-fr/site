@@ -1,4 +1,4 @@
-.badge::before {
+.changelogNotification::before {
   content: '';
   position: absolute;
   top: 5px;
@@ -10,7 +10,7 @@
   border: 2px solid #fff;
 }
 
-.badge {
+.changelogNotification {
   top: -2px;
   position: relative;
 }

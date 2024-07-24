@@ -20,7 +20,7 @@ function convertToISO(frenchDate: string) {
   return `${year}-${month}-${day}`;
 }
 
-export default function NouveautésIcon() {
+export default function ChangelogNotification() {
   const session = useSession();
   const isAgent = hasRights(session, EScope.isAgent);
 
@@ -39,6 +39,7 @@ export default function NouveautésIcon() {
       saveDateOfLastNews(dateOfLastNews);
     }
   }, []);
+
   if (
     !dateOfLastNews ||
     !previousDateOfLastNews ||
@@ -46,6 +47,7 @@ export default function NouveautésIcon() {
   ) {
     return null;
   }
+
   return (
     <li>
       <FadeIn>
@@ -58,7 +60,7 @@ export default function NouveautésIcon() {
         >
           <a
             href="/historique-des-modifications"
-            className={style.badge + ' fr-btn  fr-btn--sm'}
+            className={style.changelogNotification + ' fr-btn  fr-btn--sm'}
           >
             <Icon slug="present" />
           </a>

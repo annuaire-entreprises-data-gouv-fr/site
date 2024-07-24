@@ -7,9 +7,13 @@ import { ISession } from '#models/user/session';
 import Menu from '../menu';
 import styles from './styles.module.css';
 
-const NouveautésWithoutSSR = dynamic(() => import('../nouveautes-badge'), {
-  ssr: false,
-});
+const ChangelogNotificationWithoutSSR = dynamic(
+  () => import('../changelog-notification'),
+  {
+    ssr: false,
+  }
+);
+
 type IProps = {
   currentSearchTerm?: string;
   useLogo?: boolean;
@@ -109,7 +113,7 @@ export const HeaderCore: React.FC<IProps> = ({
                   <div className="fr-header__tools">
                     <div className="fr-header__tools-links">
                       <ul className="fr-links-group">
-                        <NouveautésWithoutSSR />
+                        <ChangelogNotificationWithoutSSR />
                         <li>
                           <Menu
                             session={session}
