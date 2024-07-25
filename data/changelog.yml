@@ -12,10 +12,13 @@
 
 ---
 - date: 31/07/2024
+  target:
+    agent: true
+    site: true
   body: |
-    Le registre des bénéficiaires effectifs n’est plus accessible au public, en application de la [directive européenne 2024/1640 du 31 mai 2024](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000049761732).
+    À partir du 31 juillet, le registre des bénéficiaires effectifs n’est plus accessible ni sur le site public, ni sur l’espace agent public, en application de la [directive européenne 2024/1640 du 31 mai 2024](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000049761732).
 
-    Désormais, seules les [personnes en mesure de justifier d’un intérêt légitime](https://www.inpi.fr/faq/qui-peut-acceder-aux-donnees-des-beneficiaires-effectifs) peuvent [effectuer une demande d’accès au registre auprès de l’INPI](https://data.inpi.fr/content/editorial/acces_BE)
+    Désormais, seules les [personnes en mesure de justifier d’un intérêt légitime](https://www.inpi.fr/faq/qui-peut-acceder-aux-donnees-des-beneficiaires-effectifs) peuvent [effectuer une demande d’accès au registre auprès de l’INPI](https://data.inpi.fr/content/editorial/acces_BE).
 - date: 22/07/2024
   target:
     agent: true
