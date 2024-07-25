@@ -18,6 +18,8 @@
   order: 3;
   padding: 1rem;
   margin-left: auto;
+  gap: 1rem;
+  display: flex;
 }
 
 @media screen and (min-width: 993px) {

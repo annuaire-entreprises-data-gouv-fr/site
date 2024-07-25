@@ -1,20 +1,42 @@
 import { useState } from 'react';
 
+function isStorageAvailable(type: 'session' | 'local') {
+  const test = 'test';
+
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  const store = getStore(type);
+  try {
+    store.setItem(test, test);
+    store.removeItem(test);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+const getStore = (type: 'session' | 'local') => {
+  return type === 'session' ? window.sessionStorage : window.localStorage;
+};
+
 export const useStorage = (
   type: 'session' | 'local',
   key: string,
   initialValue: any
 ) => {
+  const storageAvailable = isStorageAvailable(type);
+
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState(() => {
-    if (typeof window === 'undefined') {
+    if (!storageAvailable) {
       return initialValue;
     }
 
     try {
-      const store =
-        type === 'session' ? window.sessionStorage : window.localStorage;
+      const store = getStore(type);
       // Get from local storage by key
       const item = store.getItem(key);
       // Parse stored json or if none return initialValue
@@ -24,6 +46,10 @@ export const useStorage = (
       return initialValue;
     }
   });
+
+  if (!storageAvailable) {
+    return [storedValue, () => {}];
+  }
 
   // Return a wrapped version of useState's setter function that ...
   // ... persists the new value to localStorage.
@@ -36,8 +62,7 @@ export const useStorage = (
       setStoredValue(valueToStore);
       // Save to local storage
       if (typeof window !== 'undefined') {
-        const store =
-          type === 'session' ? window.sessionStorage : window.localStorage;
+        const store = getStore(type);
         store.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (error) {

@@ -1,11 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
-import FadeIn from '#components-ui/animation/fade-in';
 import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
 import { changelogData } from '#models/historique-modifications';
 import { EScope, hasRights } from '#models/user/rights';
+import { formatDate } from '#utils/helpers';
 import { useStorage } from 'hooks';
 import useSession from 'hooks/use-session';
 import style from './changelog-notification.module.css';
@@ -31,7 +30,7 @@ export default function ChangelogNotification() {
   const [previousDateOfLastNews, saveDateOfLastNews] = useStorage(
     'local',
     NEW_SINCE_LAST_VISIT_ID,
-    dateOfLastNews
+    null
   );
 
   useEffect(() => {
@@ -40,32 +39,27 @@ export default function ChangelogNotification() {
     }
   }, []);
 
+  if (!previousDateOfLastNews) {
+    saveDateOfLastNews(formatDate(new Date()));
+  }
+
   if (
-    !dateOfLastNews ||
     !previousDateOfLastNews ||
+    !dateOfLastNews ||
     convertToISO(previousDateOfLastNews) >= convertToISO(dateOfLastNews)
   ) {
     return null;
   }
 
   return (
-    <li>
-      <FadeIn>
-        <InformationTooltip
-          verticalOrientation="bottom"
-          label="Découvrir les nouveautés"
-          width={200}
-          tabIndex={undefined}
-          ariaRelation="labelledby"
-        >
-          <a
-            href="/historique-des-modifications"
-            className={style.changelogNotification + ' fr-btn  fr-btn--sm'}
-          >
-            <Icon slug="present" />
-          </a>
-        </InformationTooltip>
-      </FadeIn>
-    </li>
+    <a
+      href="/historique-des-modifications"
+      className={style.changelogNotification + ' fr-link'}
+      title="Découvrir les dernières évolutions de l’Annuaire des Entreprises"
+    >
+      <Icon slug="present">
+        <span className={style.notificationText}>Nouveautés</span>
+      </Icon>
+    </a>
   );
 }
