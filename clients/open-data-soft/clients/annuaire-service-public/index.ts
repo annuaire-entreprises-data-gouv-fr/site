@@ -2,6 +2,7 @@ import { HttpNotFound } from '#clients/exceptions';
 import odsClient from '#clients/open-data-soft';
 import routes from '#clients/routes';
 import { stubClient } from '#clients/stub-client-with-snaphots';
+import constants from '#models/constants';
 import { IServicePublic } from '#models/service-public';
 import { Siret } from '#utils/helpers';
 
@@ -50,6 +51,7 @@ function queryAnnuaireServicePublic(whereQuery: string) {
       config: {
         params: { where: whereQuery },
         useCache: true,
+        timeout: constants.timeout.XXXL,
       },
     },
     routes.annuaireServicePublic.ods.metadata
