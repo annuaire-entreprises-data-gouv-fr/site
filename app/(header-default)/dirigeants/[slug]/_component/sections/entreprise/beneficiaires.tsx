@@ -89,21 +89,7 @@ function BénéficiairesContent({
   return (
     <>
       <WarningRBE />
-      {immatriculationRNE.beneficiaires.length === 0 ? (
-        <p>
-          Cette structure ne possède aucun{' '}
-          <a
-            rel="noreferrer noopener"
-            target="_blank"
-            href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
-          >
-            bénéficiaire effectif
-          </a>{' '}
-          enregistré au <strong>Registre National des Entreprises (RNE)</strong>{' '}
-          tenu par l’
-          <INPI />.
-        </p>
-      ) : (
+      {immatriculationRNE.beneficiaires.length === 0 ? null : (
         <>
           {immatriculationRNE.metadata.isFallback && (
             <InpiPartiallyDownWarning />
@@ -144,9 +130,8 @@ function BénéficiairesContent({
 
 const WarningRBE = () => (
   <Warning>
-    À compter du 31 juillet 2024, le registre des bénéficiaires effectifs ne
-    sera plus accessible ni sur le site, ni sur l’espace agent public, en
-    application de la{' '}
+    À compter du 31 juillet 2024, le registre des bénéficiaires effectifs n’est
+    plus accessible sur le site, en application de la{' '}
     <a
       href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000049761732"
       target="_blank"
@@ -154,7 +139,7 @@ const WarningRBE = () => (
     >
       directive européenne 2024/1640 du 31 mai 2024
     </a>
-    . Désormais, seules les{' '}
+    . Désormais, les{' '}
     <a
       href="https://www.inpi.fr/faq/qui-peut-acceder-aux-donnees-des-beneficiaires-effectifs"
       target="_blank"
@@ -172,5 +157,9 @@ const WarningRBE = () => (
     </a>{' '}
     au registre auprès de l’
     <INPI />.
+    <br />
+    Nous travaillons avec la Direction générale du Trésor et l’
+    <INPI /> afin de rendre le registre accessible aux administrations, via
+    l’espace agent public.
   </Warning>
 );
