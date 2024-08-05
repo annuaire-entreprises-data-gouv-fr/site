@@ -40,6 +40,7 @@ const LandingPageAgent = (props: AppRouterProps) => {
           <ButtonAgentConnect
             useCurrentPathForRediction={false}
             alternatePathForRedirection={pathFrom as string}
+            event="LANDING_PAGE"
           />
         </div>
         <img src="/images/lp-agent/secure-folder 1.svg" alt="" />
@@ -111,6 +112,7 @@ const LandingPageAgent = (props: AppRouterProps) => {
           <ButtonAgentConnect
             useCurrentPathForRediction={false}
             alternatePathForRedirection={pathFrom as string}
+            event="LANDING_PAGE_BOTTOM"
           />
         </section>
       </Container>
