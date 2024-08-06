@@ -75,7 +75,7 @@ export const OpqibiSection: React.FC<{
               ],
             ]}
           />
-          {opqibi.qualifications.length && (
+          {opqibi.qualifications.length && opqibi.qualifications.length > 0 ? (
             <>
               <h4>Qualifications</h4>
               <TwoColumnTable
@@ -91,8 +91,9 @@ export const OpqibiSection: React.FC<{
                 ]}
               />
             </>
-          )}
-          {opqibi.qualificationsProbatoires.length && (
+          ) : null}
+          {opqibi.qualificationsProbatoires.length &&
+          opqibi.qualificationsProbatoires.length > 0 ? (
             <>
               <h4>
                 <FAQLink tooltipLabel="Qualifications probatoires">
@@ -120,7 +121,7 @@ export const OpqibiSection: React.FC<{
                 ]}
               />
             </>
-          )}
+          ) : null}
         </>
       )}
     </DataSectionClient>
