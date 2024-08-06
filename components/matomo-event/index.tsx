@@ -1,3 +1,8 @@
+/**
+ * Log an event in matomo but rendered from server side
+ * @param param0
+ * @returns
+ */
 const MatomoEvent: React.FC<{
   category: string;
   action: string;
