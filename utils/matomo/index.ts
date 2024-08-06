@@ -11,6 +11,6 @@ const logMatomoEvent = (category: string, action: string, label: string) => {
 
 export const logConversionEvent = (label: string) => {
   if (typeof window !== 'undefined') {
-    logMatomoEvent('conversion', label, window?.location.pathname);
+    logMatomoEvent('agent:conversion', label, window?.location.pathname);
   }
 };
