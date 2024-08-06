@@ -13,7 +13,7 @@ type IProps = {
 const ButtonAgentConnect: React.FC<IProps> = ({
   alternatePathForRedirection,
   useCurrentPathForRediction,
-  event = 'BTN_AGENT',
+  event = 'BTN_DEFAULT',
 }) => {
   let pathFrom = null;
   const currentPath = usePathname();
