@@ -3,6 +3,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
 import { isLoggedIn } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import { EspaceAgentLink } from './espace-agent-link';
 import styles from './styles.module.css';
 
 const Menu: React.FC<{
@@ -49,16 +50,7 @@ const Menu: React.FC<{
       </FloatingModal>
     </div>
   ) : useAgentCTA ? (
-    <a
-      href={`/lp/agent-public?pathFrom=${encodeURIComponent(pathFrom)}`}
-      className="fr-link"
-      title="Se connecter à l'espace agent"
-      aria-label="Accéder à la page de connexion de l'espace agent public"
-    >
-      <Icon slug="accountLine">
-        <span className={styles.menuText}>Espace agent public</span>
-      </Icon>
-    </a>
+    <EspaceAgentLink pathFrom={pathFrom} />
   ) : null;
 };
 

@@ -32,7 +32,10 @@ const Login = () => {
           Disponible pour toutes les administrations, sans création de compte.
         </p>
       </p>
-      <ButtonAgentConnect useCurrentPathForRediction={false} />
+      <ButtonAgentConnect
+        useCurrentPathForRediction={false}
+        event="LOGIN_PAGE"
+      />
       <style jsx>{`
         h1,
         p {
