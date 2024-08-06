@@ -5,7 +5,7 @@ const InpiPartiallyDownWarning = () => (
   <Warning>
     Le téléservice de l’
     <INPI />, qui nous transmet les données,{' '}
-    <strong>fonctionne partiellement</strong>.
+    <a href="/donnees/api#rne">fonctionne partiellement</a>.
     <br />
     L’information ci-dessous est la plus récente que nous ayons à notre
     disposition, elle a été récupérée auprès de l’

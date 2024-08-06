@@ -51,8 +51,11 @@ const AssociationAdressAlert: React.FC<{
           <br />
           <br />
           <strong>NB :</strong> si vous avez déjà effectué la correction auprès
-          du <MI />, sachez qu’elle peut prendre quelques semaines avant d’être
-          prise en compte dans les bases de données.
+          de l’administration, sachez que dans certains cas exceptionnels,{' '}
+          <strong>
+            la mise à jour des données peut prendre jusqu’à deux mois
+          </strong>{' '}
+          avant d’être totalement prise en compte .
         </Warning>
       )}
     </>
