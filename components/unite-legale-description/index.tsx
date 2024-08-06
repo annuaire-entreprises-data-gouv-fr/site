@@ -1,8 +1,4 @@
 import React from 'react';
-import {
-  getAdresseUniteLegale,
-  getNomComplet,
-} from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import {
@@ -32,7 +28,7 @@ export const UniteLegaleDescription: React.FC<{
       <p>
         <>
           {capitalize(uniteLegaleLabelWithPronoun(uniteLegale))}{' '}
-          {getNomComplet(uniteLegale, session)}
+          {uniteLegale.nomComplet}
         </>
         {uniteLegale.dateCreation ? (
           <>
@@ -75,7 +71,7 @@ export const UniteLegaleDescription: React.FC<{
             </a>{' '}
             est domicilié au{' '}
             <a href={`/carte/${uniteLegale.siege.siret}`}>
-              {getAdresseUniteLegale(uniteLegale, session)}
+              {uniteLegale.siege.adresse}
             </a>
             .
           </>

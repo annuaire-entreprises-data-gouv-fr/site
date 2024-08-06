@@ -1,5 +1,5 @@
 import { clientBanGeoLoc } from '#clients/base-adresse';
-import { estDiffusible } from './core/statut-diffusion';
+import { estDiffusible } from './core/diffusion';
 import { IEtablissement } from './core/types';
 
 export interface IGeoLoc {

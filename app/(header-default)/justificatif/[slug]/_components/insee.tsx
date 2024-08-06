@@ -7,10 +7,7 @@ import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import {
-  estNonDiffusible,
-  getAdresseEtablissement,
-} from '#models/core/statut-diffusion';
+import { estNonDiffusible } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
@@ -26,7 +23,7 @@ const AvisSituationTable: React.FC<{
         {formatSiret(etablissement.siret)}
       </a>,
       <>
-        {getAdresseEtablissement(etablissement, session)}
+        {etablissement.adresse}
         {etablissement.estSiege && <Tag color="info">siège social</Tag>}
       </>,
       <IsActiveTag

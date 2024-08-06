@@ -1,4 +1,4 @@
-import { ISTATUTDIFFUSION, estDiffusible } from '#models/core/statut-diffusion';
+import { ISTATUTDIFFUSION, estDiffusible } from '#models/core/diffusion';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { Info, ProtectedData } from '../alerts';

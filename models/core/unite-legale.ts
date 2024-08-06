@@ -15,6 +15,7 @@ import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { Siren, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
+import getSession from '#utils/server-side-helper/app/get-session';
 import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
 import {
@@ -24,7 +25,11 @@ import {
 } from '../api-not-responding';
 import { FetchRessourceException } from '../exceptions';
 import { getTvaUniteLegale } from '../tva';
-import { ISTATUTDIFFUSION, estDiffusible } from './statut-diffusion';
+import {
+  ISTATUTDIFFUSION,
+  anonymiseUniteLegale,
+  estDiffusible,
+} from './diffusion';
 import {
   IUniteLegale,
   SirenNotFoundError,
@@ -42,15 +47,18 @@ interface IUniteLegaleOptions {
 
 /**
  * Return an uniteLegale if and only if siren is valid and exists otherwise throw SirenInvalid or SirenNotFound errors
+ *
  */
 export const getUniteLegaleFromSlug = async (
   slug: string,
   options: IUniteLegaleOptions
 ): Promise<IUniteLegale> => {
   const { isBot = false, page = 1 } = options;
-  const uniteLegale = new UniteLegaleBuilder(slug, isBot, page);
+  const builder = new UniteLegaleBuilder(slug, isBot, page);
 
-  return await uniteLegale.build();
+  const uniteLegale = await builder.build();
+  const session = await getSession();
+  return anonymiseUniteLegale(uniteLegale, session);
 };
 
 class UniteLegaleBuilder {

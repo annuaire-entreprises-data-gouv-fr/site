@@ -1,9 +1,9 @@
-import React from 'react';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
+import { ISTATUTDIFFUSION } from '#models/core/diffusion';
 import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
-import { ISTATUTDIFFUSION } from '#models/core/statut-diffusion';
 import { formatDate } from '#utils/helpers';
+import React from 'react';
 
 const classFromState = (state: IETATADMINSTRATIF) => {
   switch (state) {

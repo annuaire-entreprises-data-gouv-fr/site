@@ -15,7 +15,7 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
   defaultNonDiffusiblePlaceHolder,
   estDiffusible,
-} from '#models/core/statut-diffusion';
+} from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { formatDate, formatIntFr } from '#utils/helpers';

@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 import { INPI, INSEE } from '#components/administrations';
-import { estNonDiffusible } from '#models/core/statut-diffusion';
+import { estNonDiffusible } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { Warning } from '../alerts';
 

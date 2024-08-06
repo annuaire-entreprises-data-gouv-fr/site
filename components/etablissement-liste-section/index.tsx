@@ -7,13 +7,7 @@ import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
-import {
-  estNonDiffusible,
-  getAdresseEtablissement,
-  getDenominationEtablissement,
-  getEnseigneEtablissement,
-  getNomComplet,
-} from '#models/core/statut-diffusion';
+import { estNonDiffusible } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { Siret, formatDate, formatSiret } from '#utils/helpers';
@@ -62,13 +56,12 @@ const EtablissementTable: React.FC<{
                   {(etablissement.enseigne || etablissement.denomination) && (
                     <a href={`/etablissement/${etablissement.siret}`}>
                       <strong>
-                        {getEnseigneEtablissement(etablissement, session) ||
-                          getDenominationEtablissement(etablissement, session)}
+                        {etablissement.enseigne || etablissement.denomination}
                         <br />
                       </strong>
                     </a>
                   )}
-                  <>{getAdresseEtablissement(etablissement, session)}</>
+                  <>{etablissement.adresse}</>
                 </span>
                 {etablissement.estSiege && <Tag color="info">siège social</Tag>}
                 {sieges.indexOf(etablissement.siret) > 0 &&
@@ -126,10 +119,7 @@ const EtablissementListeSection: React.FC<{
         . Cliquez sur un n° SIRET pour obtenir plus d’information :
       </p>
       <Section
-        title={`${nombreEtablissements} établissement${plural} de ${getNomComplet(
-          uniteLegale,
-          session
-        )}`}
+        title={`${nombreEtablissements} établissement${plural} de ${uniteLegale.nomComplet}`}
         sources={[EAdministration.INSEE]}
         lastModified={uniteLegale.dateDerniereMiseAJour}
       >

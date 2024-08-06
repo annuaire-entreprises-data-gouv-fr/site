@@ -3,10 +3,6 @@ import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { estActif } from '#models/core/etat-administratif';
-import {
-  getAdresseEtablissement,
-  getAdresseUniteLegale,
-} from '#models/core/statut-diffusion';
 import { isCollectiviteTerritoriale } from '#models/core/types';
 import { IDirigeant } from '#models/immatriculation';
 import { ISearchResult } from '#models/search';
@@ -109,7 +105,7 @@ const ResultItem: React.FC<{
           <Icon slug="mapPin">
             <span className={styles['adress']}>
               <AddressWithColouredZip
-                adress={getAdresseUniteLegale(result, null, true)}
+                adress={result.siege.adressePostale}
                 zip={(shouldColorSiege && result.siege.codePostal) || ''}
               />
             </span>
@@ -126,7 +122,7 @@ const ResultItem: React.FC<{
                 href={`/etablissement/${etablissement.siret}`}
               >
                 <AddressWithColouredZip
-                  adress={getAdresseEtablissement(etablissement, null, true)}
+                  adress={etablissement.adressePostale}
                   zip={(shouldColorZipCode && etablissement.codePostal) || ''}
                 />
                 <span className={styles['down']} />

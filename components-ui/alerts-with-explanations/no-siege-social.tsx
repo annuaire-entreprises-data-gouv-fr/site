@@ -1,4 +1,4 @@
-import { estNonDiffusible } from '#models/core/statut-diffusion';
+import { estNonDiffusible } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { Error } from '../alerts';
 

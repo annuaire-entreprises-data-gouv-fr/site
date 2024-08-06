@@ -35,14 +35,12 @@ export const generateMetadata = async (
   const { slug, isBot } = extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-  const session = await getSession();
 
   return {
     title: `Qualités, labels et certificats - ${uniteLegalePageTitle(
-      uniteLegale,
-      session
+      uniteLegale
     )}`,
-    description: uniteLegalePageDescription(uniteLegale, session),
+    description: uniteLegalePageDescription(uniteLegale),
     robots: 'noindex',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/labels-certificats/${uniteLegale.siren}`,

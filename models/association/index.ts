@@ -20,7 +20,10 @@ import { IDataAssociation } from './types';
 export const getAssociationFromSlug = async (
   slug: string
 ): Promise<IDataAssociation | IAPINotRespondingError | null> => {
-  const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot: false });
+  const uniteLegale = await getUniteLegaleFromSlug(slug, {
+    isBot: false,
+  });
+
   if (!isAssociation(uniteLegale)) {
     return null;
   }

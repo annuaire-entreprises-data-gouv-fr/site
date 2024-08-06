@@ -6,11 +6,7 @@ import { SaveFavourite } from '#components/save-favourite';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
 import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
-import {
-  estDiffusible,
-  estNonDiffusible,
-  getNomComplet,
-} from '#models/core/statut-diffusion';
+import { estDiffusible, estNonDiffusible } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatIntFr } from '#utils/helpers';
@@ -38,12 +34,12 @@ const Title: React.FC<IProps> = ({
       />
       <SaveFavourite
         siren={uniteLegale.siren}
-        name={getNomComplet(uniteLegale, session)}
+        name={uniteLegale.nomComplet}
         path={`/entreprise/${uniteLegale.chemin}`}
       />
       <h1>
         <a href={`/entreprise/${uniteLegale.chemin}`}>
-          {getNomComplet(uniteLegale, session)}
+          {uniteLegale.nomComplet}
         </a>
       </h1>
       <div className={styles.subTitle}>
@@ -67,7 +63,7 @@ const Title: React.FC<IProps> = ({
     </div>
     <SocialMedia
       path={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
-      label={getNomComplet(uniteLegale, session)}
+      label={uniteLegale.nomComplet}
       siren={uniteLegale.siren}
     />
     {estNonDiffusible(uniteLegale) ? (

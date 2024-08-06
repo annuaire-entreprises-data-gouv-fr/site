@@ -4,10 +4,9 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { Siren, verifySiren } from '#utils/helpers';
+import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { EAdministration } from './administrations/EAdministration';
-import { getUniteLegaleFromSlug } from './core/unite-legale';
 import { FetchRessourceException } from './exceptions';
 
 export interface IEtablissementsScolaires {
@@ -53,21 +52,4 @@ export const getEtablissementsScolaires = async (
     );
     return APINotRespondingFactory(EAdministration.EDUCATION_NATIONALE, 500);
   }
-};
-
-export const getEtablissementsScolairesFromSlug = async (
-  slug: string,
-  page: number,
-  isBot: boolean
-) => {
-  const siren = verifySiren(slug);
-  const [uniteLegale, etablissementsScolaires] = await Promise.all([
-    getUniteLegaleFromSlug(siren, { isBot }),
-    getEtablissementsScolaires(siren, page),
-  ]);
-
-  return {
-    uniteLegale,
-    etablissementsScolaires,
-  };
 };

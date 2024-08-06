@@ -4,7 +4,7 @@ import FAQLink from '#components-ui/faq-link';
 import {
   estDiffusible,
   nonDiffusibleDataFormatter,
-} from '#models/core/statut-diffusion';
+} from '#models/core/diffusion';
 import { IEtablissement } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';

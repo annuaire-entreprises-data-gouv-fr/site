@@ -1,5 +1,5 @@
+import { estDiffusible } from '#models/core/diffusion';
 import { estActif } from '#models/core/etat-administratif';
-import { estDiffusible } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (

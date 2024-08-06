@@ -13,7 +13,7 @@ import {
   IExceptionContext,
 } from '../exceptions';
 import { ITVAIntracommunautaire } from '../tva';
-import { ISTATUTDIFFUSION } from './statut-diffusion';
+import { ISTATUTDIFFUSION } from './diffusion';
 
 export interface IEtablissement {
   enseigne: string | null;

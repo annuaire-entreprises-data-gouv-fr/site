@@ -4,11 +4,7 @@ import IsActiveTag from '#components-ui/is-active-tag';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import { EtablissementDescription } from '#components/etablissement-description';
-import {
-  estNonDiffusible,
-  getEtablissementName,
-  getNomComplet,
-} from '#models/core/statut-diffusion';
+import { estNonDiffusible } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import {
@@ -48,7 +44,10 @@ const TitleEtablissementWithDenomination: React.FC<{
     />
 
     <h1>
-      Établissement {getEtablissementName(etablissement, uniteLegale, session)}{' '}
+      Établissement{' '}
+      {etablissement.enseigne ||
+        etablissement.denomination ||
+        uniteLegale.nomComplet}{' '}
       {etablissement.commune && (
         <>
           à{' '}
@@ -89,7 +88,7 @@ const TitleEtablissementWithDenomination: React.FC<{
         {' '}
         {uniteLegaleLabelWithPronounContracted(uniteLegale)}{' '}
         <a href={`/entreprise/${uniteLegale.siren}`}>
-          {getNomComplet(uniteLegale, session)}&nbsp;‣&nbsp;
+          {uniteLegale.nomComplet}&nbsp;‣&nbsp;
           <span className={styles.sirenOrSiret}>
             {formatIntFr(uniteLegale.siren)}
           </span>
@@ -105,7 +104,11 @@ const TitleEtablissementWithDenomination: React.FC<{
 
     <SocialMedia
       path={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}
-      label={getEtablissementName(etablissement, uniteLegale, session)}
+      label={
+        etablissement.enseigne ||
+        etablissement.denomination ||
+        uniteLegale.nomComplet
+      }
     />
 
     {estNonDiffusible(etablissement) ? (

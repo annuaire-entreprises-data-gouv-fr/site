@@ -23,14 +23,10 @@ export const generateMetadata = async (
   const { slug, isBot } = extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-  const session = await getSession();
 
   return {
-    title: `Documents, Actes et statuts - ${uniteLegalePageTitle(
-      uniteLegale,
-      session
-    )}`,
-    description: uniteLegalePageDescription(uniteLegale, session),
+    title: `Documents, Actes et statuts - ${uniteLegalePageTitle(uniteLegale)}`,
+    description: uniteLegalePageDescription(uniteLegale),
     robots: 'noindex',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/documents/${uniteLegale.siren}`,

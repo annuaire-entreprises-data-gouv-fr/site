@@ -1,6 +1,6 @@
 import constants from '#models/constants';
+import { estNonDiffusible } from './diffusion';
 import { estActif } from './etat-administratif';
-import { estNonDiffusible } from './statut-diffusion';
 import { IEtablissement } from './types';
 
 export interface IEtablissementsList {
