@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { NonDiffusibleSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
-import { estNonDiffusible } from '#models/core/statut-diffusion';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { isServicePublic } from '#models/core/types';
 import {
   etablissementPageDescription,
@@ -26,11 +26,11 @@ export const generateMetadata = async function (
 
   const title = `${
     etablissement.estSiege ? 'Siège social' : 'Etablissement secondaire'
-  } - ${etablissementPageTitle(etablissement, uniteLegale, null)}`;
+  } - ${etablissementPageTitle(etablissement, uniteLegale)}`;
 
   return {
     title,
-    description: etablissementPageDescription(etablissement, uniteLegale, null),
+    description: etablissementPageDescription(etablissement, uniteLegale),
     robots: shouldNotIndex(uniteLegale) ? 'noindex, nofollow' : 'index, follow',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`,
@@ -57,7 +57,7 @@ export default (async function EtablissementPage(props: AppRouterProps) {
           session={session}
         />
         <br />
-        {estNonDiffusible(etablissement) ? (
+        {estNonDiffusibleStrict(etablissement) ? (
           <NonDiffusibleSection />
         ) : (
           <EtablissementSection

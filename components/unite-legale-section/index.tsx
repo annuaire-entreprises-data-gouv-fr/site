@@ -12,10 +12,6 @@ import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { estActif } from '#models/core/etat-administratif';
 import {
-  getAdresseUniteLegale,
-  getNomComplet,
-} from '#models/core/statut-diffusion';
-import {
   IUniteLegale,
   isAssociation,
   isServicePublic,
@@ -40,7 +36,7 @@ const UniteLegaleSection: React.FC<{
   const conventionsCollectives = uniteLegale.listeIdcc;
 
   const data = [
-    ['Dénomination', getNomComplet(uniteLegale, session)],
+    ['Dénomination', uniteLegale.nomComplet],
     ['SIREN', formatIntFr(uniteLegale.siren)],
     [
       'SIRET du siège social',
@@ -67,7 +63,7 @@ const UniteLegaleSection: React.FC<{
     ['Code NAF/APE', uniteLegale.activitePrincipale],
     [
       <a href="/faq/modifier-adresse">Adresse postale</a>,
-      getAdresseUniteLegale(uniteLegale, session, true),
+      uniteLegale.siege.adressePostale,
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
@@ -177,7 +173,7 @@ const UniteLegaleSection: React.FC<{
   return (
     <div id="entreprise">
       <Section
-        title={`Informations légales de ${getNomComplet(uniteLegale, session)}`}
+        title={`Informations légales de ${uniteLegale.nomComplet}`}
         sources={[
           EAdministration.INSEE,
           EAdministration.VIES,

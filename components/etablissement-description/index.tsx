@@ -1,11 +1,7 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
-import {
-  estNonDiffusible,
-  getAdresseEtablissement,
-  getNomComplet,
-} from '#models/core/statut-diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import {
@@ -51,7 +47,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
 
   return (
     <>
-      {!estNonDiffusible(uniteLegale) && (
+      {!estNonDiffusibleStrict(uniteLegale) && (
         <>
           <span>
             Cet{' '}
@@ -101,7 +97,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
             )}{' '}
             {uniteLegaleLabelWithPronounContracted(uniteLegale)}{' '}
             <a href={`/entreprise/${uniteLegale.chemin}`}>
-              {getNomComplet(uniteLegale, session)}
+              {uniteLegale.nomComplet}
             </a>
             {uniteLegale.etablissements.all.length > 1 ? (
               <>
@@ -133,7 +129,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
                 {' '}
                 Il est domicilié au{' '}
                 <a href={`/carte/${etablissement.siret}`}>
-                  {getAdresseEtablissement(etablissement, session)}
+                  {etablissement.adresse}
                 </a>
               </>
             )}

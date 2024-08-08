@@ -13,13 +13,6 @@ import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { estActif } from '#models/core/etat-administratif';
-import {
-  getAdresseEtablissement,
-  getDenominationEtablissement,
-  getEnseigneEtablissement,
-  getEtablissementName,
-  getNomComplet,
-} from '#models/core/statut-diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import {
@@ -51,10 +44,7 @@ const EtablissementSection: React.FC<IProps> = ({
   const data = [
     ...(withDenomination
       ? [
-          [
-            `Dénomination ${uniteLegaleLabel}`,
-            getNomComplet(uniteLegale, session),
-          ],
+          [`Dénomination ${uniteLegaleLabel}`, uniteLegale.nomComplet],
           [
             'Type d’établissement',
             <>
@@ -76,28 +66,16 @@ const EtablissementSection: React.FC<IProps> = ({
         ]
       : []),
     ...(etablissement.enseigne
-      ? [
-          [
-            'Enseigne de l’établissement',
-            getEnseigneEtablissement(etablissement, session),
-          ],
-        ]
+      ? [['Enseigne de l’établissement', etablissement.enseigne]]
       : []),
     ...(etablissement.denomination
-      ? [
-          [
-            'Nom de l’établissement',
-            getDenominationEtablissement(etablissement, session),
-          ],
-        ]
+      ? [['Nom de l’établissement', etablissement.denomination]]
       : []),
     [
       <a href="/faq/modifier-adresse">Adresse</a>,
       etablissement.adresse ? (
         <>
-          <CopyPaste label="Adresse">
-            {getAdresseEtablissement(etablissement, session)}
-          </CopyPaste>
+          <CopyPaste label="Adresse">{etablissement.adresse}</CopyPaste>
           <PrintNever key="adresse-link">
             <a href={`/carte/${etablissement.siret}`}>→ voir sur la carte</a>
             <br />
@@ -198,12 +176,12 @@ const EtablissementSection: React.FC<IProps> = ({
       <Section
         title={
           usedInEntreprisePage
-            ? `Siège social de ${getNomComplet(uniteLegale, session)}`
-            : `Information légales de l’établissement ${getEtablissementName(
-                etablissement,
-                uniteLegale,
-                session
-              )}${etablissement.commune ? ` à ${etablissement.commune}` : ''}`
+            ? `Siège social de ${uniteLegale.nomComplet}`
+            : `Information légales de l’établissement ${
+                etablissement.enseigne ||
+                etablissement.denomination ||
+                uniteLegale.nomComplet
+              }${etablissement.commune ? ` à ${etablissement.commune}` : ''}`
         }
         id="etablissement"
         sources={[

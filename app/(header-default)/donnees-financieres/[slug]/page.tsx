@@ -21,14 +21,10 @@ export const generateMetadata = async (
   const { slug, isBot } = extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-  const session = await getSession();
 
   return {
     robots: 'noindex',
-    title: `Données financières - ${uniteLegalePageTitle(
-      uniteLegale,
-      session
-    )}`,
+    title: `Données financières - ${uniteLegalePageTitle(uniteLegale)}`,
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/donnees-financieres/${uniteLegale.siren}`,
     },

@@ -1,17 +1,10 @@
 import {
-  getAdresseEtablissement,
-  getAdresseUniteLegale,
-  getEtablissementName,
-  getNomComplet,
-} from '#models/core/statut-diffusion';
-import {
   IEtablissement,
   IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import { formatSiret } from '../siren-and-siret';
 import { capitalize, formatIntFr } from './formatting';
 
@@ -70,64 +63,48 @@ export const uniteLegaleLabel = (uniteLegale: IUniteLegale) => {
   }
 };
 
-export const uniteLegalePageTitle = (
-  uniteLegale: IUniteLegale,
-  session: ISession | null
-) => {
+export const uniteLegalePageTitle = (uniteLegale: IUniteLegale) => {
   const city =
     uniteLegale.siege.codePostal || uniteLegale.siege.commune
       ? ` à ${uniteLegale.siege.codePostal} ${uniteLegale.siege.commune}`
       : '';
 
-  return `${capitalize(uniteLegaleLabel(uniteLegale))} ${getNomComplet(
-    uniteLegale,
-    session
-  )}${city} - SIREN ${formatIntFr(
+  return `${capitalize(uniteLegaleLabel(uniteLegale))} ${
+    uniteLegale.nomComplet
+  }${city} - SIREN ${formatIntFr(
     uniteLegale.siren
   )} | Annuaire des Entreprises`;
 };
 
-export const uniteLegalePageDescription = (
-  uniteLegale: IUniteLegale,
-  session: ISession | null
-) =>
-  `L’administration permet aux particuliers et agents publics de vérifier les informations légales de ${getNomComplet(
-    uniteLegale,
-    session
-  )}, ${getAdresseUniteLegale(
-    uniteLegale,
-    session
-  )} : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;
+export const uniteLegalePageDescription = (uniteLegale: IUniteLegale) =>
+  `L’administration permet aux particuliers et agents publics de vérifier les informations légales de ${uniteLegale.nomComplet}, ${uniteLegale.siege.adresse} : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;
 
 export const etablissementPageDescription = (
   etablissement: IEtablissement,
-  uniteLegale: IUniteLegale,
-  session: ISession | null
+  uniteLegale: IUniteLegale
 ) =>
-  `L’administration permet aux particuliers et agents publics de vérifier les informations légales de l’établissement ${getEtablissementName(
-    etablissement,
-    uniteLegale,
-    session
-  )}, ${getAdresseEtablissement(
-    etablissement,
-    session
-  )} : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;
+  `L’administration permet aux particuliers et agents publics de vérifier les informations légales de l’établissement ${
+    etablissement.enseigne ||
+    etablissement.denomination ||
+    uniteLegale.nomComplet
+  }, ${
+    etablissement.adresse
+  } : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;
 
 export const etablissementPageTitle = (
   etablissement: IEtablissement,
-  uniteLegale: IUniteLegale,
-  session: ISession | null
+  uniteLegale: IUniteLegale
 ) => {
   const city =
     etablissement.codePostal || etablissement.commune
       ? ` à ${etablissement.codePostal} ${etablissement.commune}`
       : '';
 
-  return `${getEtablissementName(
-    etablissement,
-    uniteLegale,
-    session
-  )}${city} - SIRET ${formatSiret(
+  return `${
+    etablissement.enseigne ||
+    etablissement.denomination ||
+    uniteLegale.nomComplet
+  }${city} - SIRET ${formatSiret(
     etablissement.siret
   )} | Annuaire des Entreprises`;
 };

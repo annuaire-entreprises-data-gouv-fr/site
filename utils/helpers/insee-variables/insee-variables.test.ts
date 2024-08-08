@@ -1,5 +1,5 @@
+import { ISTATUTDIFFUSION } from '#models/core/diffusion';
 import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
-import { ISTATUTDIFFUSION } from '#models/core/statut-diffusion';
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
@@ -25,7 +25,7 @@ describe('Check statuDiffusionFromStatutDiffusionInsee', () => {
       ISTATUTDIFFUSION.DIFFUSIBLE
     );
     expect(statuDiffusionFromStatutDiffusionInsee('N', '')).toBe(
-      ISTATUTDIFFUSION.NONDIFF
+      ISTATUTDIFFUSION.NON_DIFF_STRICT
     );
     expect(statuDiffusionFromStatutDiffusionInsee('P', '')).toBe(
       ISTATUTDIFFUSION.PARTIAL

@@ -8,7 +8,7 @@ import { AsyncDataSectionClient } from '#components/section/data-section/client'
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IDataAssociation } from '#models/association/types';
-import { getPersonnalDataAssociation } from '#models/core/statut-diffusion';
+import { getPersonnalDataAssociation } from '#models/core/diffusion';
 import { IAssociation, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';

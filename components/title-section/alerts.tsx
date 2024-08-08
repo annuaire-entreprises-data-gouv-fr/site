@@ -6,7 +6,7 @@ import NotInSireneAlert from '#components-ui/alerts-with-explanations/not-in-sir
 import { NotLuhnValidAlert } from '#components-ui/alerts-with-explanations/not-luhn-valid';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
-import { ISTATUTDIFFUSION } from '#models/core/statut-diffusion';
+import { ISTATUTDIFFUSION } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
