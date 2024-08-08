@@ -1,8 +1,17 @@
-import { IAgentInfo } from './agent';
+import { Siret } from '#utils/helpers';
+import { IScope } from './scopes';
 
 export type ISession = {
   lastVisitTimestamp?: number;
-  user: IAgentInfo | null;
+  user?: {
+    email?: string;
+    familyName?: string;
+    firstName?: string;
+    fullName?: string;
+    siret?: Siret;
+    userType?: string;
+    scopes?: IScope[];
+  };
 
   // agent connect
   state?: string;

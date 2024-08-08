@@ -1,4 +1,3 @@
-import { getAgentScopes } from './helpers';
 import { ISession } from './session';
 
 export enum EScope {
@@ -19,7 +18,7 @@ export enum EScope {
  * Has rights to access a view
  */
 export function hasRights(session: ISession | null, rightScope: EScope) {
-  const userScopes = getAgentScopes(session);
+  const userScopes = session?.user?.scopes || [];
   switch (rightScope) {
     case EScope.none:
       return true;
@@ -44,5 +43,5 @@ export function hasRights(session: ISession | null, rightScope: EScope) {
 }
 
 export function isLoggedIn(session: ISession | null) {
-  return getAgentScopes(session).length > 0;
+  return (session?.user?.scopes || []).length > 0;
 }
