@@ -93,7 +93,7 @@ const FAQQaliopi = () => (
     tooltipLabel="certifiée Qualiopi"
     to="/faq/qualiopi-organisme-formation"
   >
-    La certification Qualiopi est accordé par le <MTPEI /> aux organismes de
+    La certification Qualiopi est accordée par le <MTPEI /> aux organismes de
     formation répondant à certains critères de qualité.
   </FAQLink>
 );
