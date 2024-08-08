@@ -1,7 +1,6 @@
 import type { IronSession, SessionOptions } from 'iron-session';
-import { IScope } from '#models/user/scopes';
+import { IAgentInfo } from '#models/user/agent';
 import { ISession } from '#models/user/session';
-import { Siret } from '#utils/helpers';
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
@@ -18,28 +17,15 @@ export async function setVisitTimestamp(session: IronSession<ISession>) {
 }
 
 export const setAgentSession = async (
-  email: string,
-  familyName: string,
-  firstName: string,
-  siret: string,
-  scopes: IScope[],
-  userType: string,
+  agent: IAgentInfo,
   session: IronSession<ISession>
 ) => {
-  session.user = {
-    email,
-    firstName,
-    familyName,
-    fullName: familyName ? `${firstName} ${familyName}` : undefined,
-    siret: siret as Siret,
-    userType,
-    scopes,
-  };
+  session.user = agent;
   await session.save();
 };
 
 export const cleanAgentSession = async (session: IronSession<ISession>) => {
-  session.user = {};
+  session.user = null;
   await session.save();
 };
 

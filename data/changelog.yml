@@ -25,7 +25,7 @@
   target:
     agent: true
   body: |
-    Les documents (actes, statuts et documents administratifs complémentaires) et les dirigeants des assoications sont désormais accessibles aux agents publics.
+    Les documents (actes, statuts et documents administratifs complémentaires) et les dirigeants des associations sont désormais accessibles aux agents publics.
 - date: 27/06/2024
   body: Ajout de la vérification du [numéro EORI](https://www.economie.gouv.fr/entreprises/numero-eori) pour tous les visiteurs.
 - date: 14/05/2024

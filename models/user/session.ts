@@ -1,17 +1,8 @@
-import { Siret } from '#utils/helpers';
-import { IScope } from './scopes';
+import { IAgentInfo } from './agent';
 
 export type ISession = {
   lastVisitTimestamp?: number;
-  user?: {
-    email?: string;
-    familyName?: string;
-    firstName?: string;
-    fullName?: string;
-    siret?: Siret;
-    userType?: string;
-    scopes?: IScope[];
-  };
+  user: IAgentInfo | null;
 
   // agent connect
   state?: string;
