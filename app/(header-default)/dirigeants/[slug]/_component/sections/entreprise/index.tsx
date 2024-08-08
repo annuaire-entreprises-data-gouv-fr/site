@@ -47,10 +47,7 @@ export function DirigeantInformation({
       )}
 
       <BreakPageForPrint />
-      <BeneficiairesSection
-        immatriculationRNE={immatriculationRNE}
-        uniteLegale={uniteLegale}
-      />
+      <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
     </>
   );
 }

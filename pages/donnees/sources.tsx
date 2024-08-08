@@ -114,7 +114,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
                                 [
                                   'API utilisée',
                                   <>
-                                    <b>{api.apiName}</b>
+                                    <strong>{api.apiName}</strong>
                                     {api.apiDocumentationLink && (
                                       <>
                                         {' ('}

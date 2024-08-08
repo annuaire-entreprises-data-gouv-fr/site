@@ -9,9 +9,17 @@ const AgentWall: React.FC<{
   title: string;
   id?: string;
   sectionIntro?: JSX.Element;
+  conditionExplanation?: JSX.Element;
   modalFooter?: JSX.Element;
   sources?: EAdministration[];
-}> = ({ id, title, sectionIntro = null, modalFooter = null, sources = [] }) => {
+}> = ({
+  id,
+  title,
+  sectionIntro = null,
+  conditionExplanation = null,
+  modalFooter = null,
+  sources = [],
+}) => {
   return (
     <Section title={title} id={id} sources={sources} isProtected>
       {sectionIntro}
@@ -36,12 +44,18 @@ const AgentWall: React.FC<{
             .
           </p>
           <p>
-            Disponible pour toutes les administrations, sans création de compte
-            (consultez les{' '}
-            <a href="/cgu" rel="noreferrer noopener" target="_blank">
-              conditions générales d’utilisation
-            </a>
-            ).
+            {conditionExplanation ? (
+              conditionExplanation
+            ) : (
+              <>
+                Disponible pour toutes les administrations, sans création de
+                compte (consultez les{' '}
+                <a href="/cgu" rel="noreferrer noopener" target="_blank">
+                  conditions générales d’utilisation
+                </a>
+                ).
+              </>
+            )}
           </p>
           <ButtonAgentConnect useCurrentPathForRediction event="AGENT_WALL" />
         </FloatingModal>

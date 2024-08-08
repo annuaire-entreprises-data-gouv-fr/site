@@ -1,5 +1,4 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { Icon } from '#components-ui/icon/wrapper';
 import { Loader } from '#components-ui/loader';
 import { INPI, INSEE, MI } from '#components/administrations';
 import {
@@ -79,15 +78,8 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
         </a>
       );
 
-      const beneficiairesCount = (immatriculationRNE?.beneficiaires || [])
-        .length;
       summaries.push(
-        <a href="#beneficiaires">
-          <Icon slug="alertFill" color="#ff9c00">
-            {beneficiairesCount} bénéficiaires inscrits à Référentiel des
-            Bénéficiaires Effectifs
-          </Icon>
-        </a>
+        <a href="#beneficiaires">Liste des bénéficiaires effectifs</a>
       );
     }
   }
@@ -112,7 +104,7 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   return (
     <nav role="navigation" aria-labelledby="dirigeant-summary-title">
       <strong id="dirigeant-summary-title">
-        Cette structure a pour dirigeant(s) :
+        Informations disponibles sur les dirigeant(s) :
       </strong>
       <ul>
         {summaries.map((summary, index) => (
