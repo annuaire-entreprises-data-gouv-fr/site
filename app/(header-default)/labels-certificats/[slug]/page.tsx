@@ -103,6 +103,13 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
             session={session}
           />
         )}
+        {hasRights(session, EScope.protectedCertificats) && (
+          <>
+            <QualibatSection session={session} uniteLegale={uniteLegale} />
+            <QualifelecSection session={session} uniteLegale={uniteLegale} />
+            <OpqibiSection session={session} uniteLegale={uniteLegale} />
+          </>
+        )}
         {estOrganismeFormation && (
           <OrganismeDeFormationSection
             organismesDeFormation={organismesDeFormation}
@@ -116,14 +123,6 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         )}
         {estBio && (
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
-        )}
-        {hasRights(session, EScope.protectedCertificats) && (
-          <>
-            <HorizontalSeparator />
-            <QualibatSection session={session} uniteLegale={uniteLegale} />
-            <QualifelecSection session={session} uniteLegale={uniteLegale} />
-            <OpqibiSection session={session} uniteLegale={uniteLegale} />
-          </>
         )}
       </div>
     </>
