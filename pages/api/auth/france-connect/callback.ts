@@ -1,4 +1,4 @@
-import { franceConnectAuthenticate } from '#clients/authentication/france-connect/strategy';
+import { franceConnectAuthenticate } from '#clients/auth/france-connect/strategy';
 import { Exception } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { setHidePersonalDataRequestFCSession } from '#utils/session';

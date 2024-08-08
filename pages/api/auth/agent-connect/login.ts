@@ -1,4 +1,4 @@
-import { agentConnectAuthorizeUrl } from '#clients/authentication/agent-connect/strategy';
+import { agentConnectAuthorizeUrl } from '#clients/auth/agent-connect/strategy';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { setPathFrom } from '#utils/session';
 import withSession from '#utils/session/with-session';

@@ -13,7 +13,7 @@ const REDIRECT_URI = process.env.AGENTCONNECT_REDIRECT_URI;
 const POST_LOGOUT_REDIRECT_URI =
   process.env.AGENTCONNECT_POST_LOGOUT_REDIRECT_URI;
 
-const SCOPES = 'openid given_name usual_name email siret idp_id';
+const SCOPES = 'openid given_name usual_name email siret';
 
 export const getClient = async () => {
   if (_client) {
@@ -74,7 +74,6 @@ export type IAgentConnectUserInfo = {
   label: string | null;
   is_collectivite_territoriale: boolean;
   is_service_public: boolean;
-  idp_id: string;
 };
 
 export const agentConnectAuthenticate = async (req: IReqWithSession) => {

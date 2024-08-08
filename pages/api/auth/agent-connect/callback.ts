@@ -1,7 +1,7 @@
-import { agentConnectAuthenticate } from '#clients/authentication/agent-connect/strategy';
+import { agentConnectAuthenticate } from '#clients/auth/agent-connect/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { Exception } from '#models/exceptions';
-import { getAgent } from '#models/user/agent';
+import { getUserScopes } from '#models/user/scopes';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
 import withSession from '#utils/session/with-session';
@@ -9,9 +9,18 @@ import withSession from '#utils/session/with-session';
 export default withSession(async function callbackRoute(req, res) {
   try {
     const userInfo = await agentConnectAuthenticate(req);
-    const agent = await getAgent(userInfo);
+    const { scopes, userType } = await getUserScopes(userInfo?.email);
     const session = req.session;
-    await setAgentSession(agent, session);
+
+    await setAgentSession(
+      userInfo.email,
+      userInfo.family_name ?? '',
+      userInfo.given_name ?? '',
+      userInfo.siret ?? '',
+      scopes,
+      userType,
+      session
+    );
 
     const pathFrom = decodeURIComponent(getPathFrom(session) || '');
 
