@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { NonDiffusibleSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
-import { estNonDiffusible } from '#models/core/diffusion';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { isServicePublic } from '#models/core/types';
 import {
   etablissementPageDescription,
@@ -57,7 +57,7 @@ export default (async function EtablissementPage(props: AppRouterProps) {
           session={session}
         />
         <br />
-        {estNonDiffusible(etablissement) ? (
+        {estNonDiffusibleStrict(etablissement) ? (
           <NonDiffusibleSection />
         ) : (
           <EtablissementSection

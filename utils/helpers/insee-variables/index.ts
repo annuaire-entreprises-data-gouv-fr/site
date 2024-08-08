@@ -42,7 +42,7 @@ export const statuDiffusionFromStatutDiffusionInsee = (
     case 'O':
       return ISTATUTDIFFUSION.DIFFUSIBLE;
     case 'N':
-      return ISTATUTDIFFUSION.NONDIFF;
+      return ISTATUTDIFFUSION.NON_DIFF_STRICT;
     case 'P':
       return ISTATUTDIFFUSION.PARTIAL;
     default:

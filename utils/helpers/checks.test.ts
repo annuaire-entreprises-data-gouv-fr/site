@@ -45,7 +45,7 @@ describe('Check shouldIndex', () => {
   });
   test('NonDiffusible succeed', () => {
     const u = createDefaultUniteLegale('000000000' as Siren);
-    u.statutDiffusion = ISTATUTDIFFUSION.NONDIFF;
+    u.statutDiffusion = ISTATUTDIFFUSION.NON_DIFF_STRICT;
     expect(shouldNotIndex(u)).toBe(true);
   });
   test('PartiallyDiffusible succeed', () => {

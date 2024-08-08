@@ -47,7 +47,7 @@ const getEtablissementFromSlug = async (
 
   const siren = extractSirenFromSiret(siret);
 
-  if (isProtectedSiren(siren)) {
+  if (isProtectedSiren(siren) && estDiffusible(etablissement)) {
     etablissement.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
   }
 

@@ -25,7 +25,7 @@ describe('Check statuDiffusionFromStatutDiffusionInsee', () => {
       ISTATUTDIFFUSION.DIFFUSIBLE
     );
     expect(statuDiffusionFromStatutDiffusionInsee('N', '')).toBe(
-      ISTATUTDIFFUSION.NONDIFF
+      ISTATUTDIFFUSION.NON_DIFF_STRICT
     );
     expect(statuDiffusionFromStatutDiffusionInsee('P', '')).toBe(
       ISTATUTDIFFUSION.PARTIAL

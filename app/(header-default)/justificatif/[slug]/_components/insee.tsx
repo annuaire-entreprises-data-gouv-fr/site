@@ -7,8 +7,9 @@ import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { estNonDiffusible } from '#models/core/diffusion';
+import { estDiffusible } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
+import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
 
@@ -67,7 +68,8 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, session }) => (
     title="Inscription à l’Insee"
     sources={[EAdministration.INSEE]}
   >
-    {estNonDiffusible(uniteLegale) ? (
+    {!estDiffusible(uniteLegale) &&
+    !hasRights(session, EScope.nonDiffusible) ? (
       <AvisSituationNonDiffusible />
     ) : (
       <>

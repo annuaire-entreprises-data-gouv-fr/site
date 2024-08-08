@@ -7,7 +7,7 @@ import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
-import { estNonDiffusible } from '#models/core/diffusion';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { Siret, formatDate, formatSiret } from '#utils/helpers';
@@ -41,14 +41,14 @@ const EtablissementTable: React.FC<{
             {formatSiret(etablissement.siret)}
           </a>,
           <>
-            {estNonDiffusible(etablissement) ? (
+            {estNonDiffusibleStrict(etablissement) ? (
               <NonRenseigne />
             ) : (
               etablissement.libelleActivitePrincipale
             )}
           </>,
           <>
-            {estNonDiffusible(etablissement) ? (
+            {estNonDiffusibleStrict(etablissement) ? (
               <NonRenseigne />
             ) : (
               <>
@@ -69,7 +69,7 @@ const EtablissementTable: React.FC<{
               </>
             )}
           </>,
-          (!estNonDiffusible(etablissement) &&
+          (!estNonDiffusibleStrict(etablissement) &&
             formatDate(etablissement.dateCreation)) ||
             '',
           <>

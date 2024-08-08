@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 import { INPI, INSEE } from '#components/administrations';
-import { estNonDiffusible } from '#models/core/diffusion';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { Warning } from '../alerts';
 
@@ -8,7 +8,7 @@ const NotInSireneAlert: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   /* non-diffusible = exist in insee so following do not apply */
-  if (estNonDiffusible(uniteLegale)) {
+  if (estNonDiffusibleStrict(uniteLegale)) {
     return null;
   }
 

@@ -1,4 +1,4 @@
-import { estNonDiffusible } from '#models/core/diffusion';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { Error } from '../alerts';
 
@@ -6,7 +6,7 @@ const NoSiegeSocialAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
 }) => {
   /* non-diffusible = likely to have empty siege as no information given by insee */
-  if (estNonDiffusible(uniteLegale)) {
+  if (estNonDiffusibleStrict(uniteLegale)) {
     return null;
   }
 

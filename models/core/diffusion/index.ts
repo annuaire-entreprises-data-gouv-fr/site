@@ -5,9 +5,9 @@ import { IEtablissementsList } from '../etablissements-list';
 import { IEtablissement, IUniteLegale } from '../types';
 
 export enum ISTATUTDIFFUSION {
-  PROTECTED = 'partiellement diffusible',
+  PROTECTED = 'protégé en diffusion',
   PARTIAL = 'partiellement diffusible',
-  NONDIFF = 'non-diffusible',
+  NON_DIFF_STRICT = 'non-diffusible',
   DIFFUSIBLE = 'diffusible',
 }
 
@@ -31,15 +31,29 @@ export const estDiffusible = (
   );
 };
 /**
- * Only strict non-diffusible. Exclude partially diffusible and diffusible
+ * Only strict non-diffusible. Exclude partially diffusible, protected and diffusible
  * @param uniteLegaleOrEtablissement
  * @returns
  */
-export const estNonDiffusible = (
+export const estNonDiffusibleStrict = (
   uniteLegaleOrEtablissement: IUniteLegaleOrEtablissement
 ) => {
   return (
-    uniteLegaleOrEtablissement.statutDiffusion === ISTATUTDIFFUSION.NONDIFF
+    uniteLegaleOrEtablissement.statutDiffusion ===
+    ISTATUTDIFFUSION.NON_DIFF_STRICT
+  );
+};
+
+/**
+ * Only people that asks us to remove their data
+ * @param uniteLegaleOrEtablissement
+ * @returns
+ */
+export const estNonDiffusibleProtected = (
+  uniteLegaleOrEtablissement: IUniteLegaleOrEtablissement
+) => {
+  return (
+    uniteLegaleOrEtablissement.statutDiffusion === ISTATUTDIFFUSION.PROTECTED
   );
 };
 
@@ -124,18 +138,10 @@ const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {
     return uniteLegale.nomComplet;
   }
 
-  if (uniteLegale.complements.estEntrepreneurIndividuel) {
-    if (estDiffusible(uniteLegale)) {
-      return uniteLegale.nomComplet;
-    }
-    return defaultNonDiffusiblePlaceHolder;
-  } else {
-    if (!estDiffusible(uniteLegale)) {
-      return defaultNonDiffusiblePlaceHolder;
-    }
-
+  if (estDiffusible(uniteLegale)) {
     return uniteLegale.nomComplet;
   }
+  return defaultNonDiffusiblePlaceHolder;
 };
 
 const formatAdresseForDiffusion = (

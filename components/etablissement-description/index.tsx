@@ -1,6 +1,6 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
-import { estNonDiffusible } from '#models/core/diffusion';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
@@ -47,7 +47,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
 
   return (
     <>
-      {!estNonDiffusible(uniteLegale) && (
+      {!estNonDiffusibleStrict(uniteLegale) && (
         <>
           <span>
             Cet{' '}

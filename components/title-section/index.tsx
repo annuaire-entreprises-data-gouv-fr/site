@@ -6,7 +6,7 @@ import { SaveFavourite } from '#components/save-favourite';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
 import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
-import { estDiffusible, estNonDiffusible } from '#models/core/diffusion';
+import { estDiffusible, estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatIntFr } from '#utils/helpers';
@@ -66,7 +66,7 @@ const Title: React.FC<IProps> = ({
       label={uniteLegale.nomComplet}
       siren={uniteLegale.siren}
     />
-    {estNonDiffusible(uniteLegale) ? (
+    {estNonDiffusibleStrict(uniteLegale) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
     ) : (
       <UniteLegaleDescription uniteLegale={uniteLegale} session={session} />

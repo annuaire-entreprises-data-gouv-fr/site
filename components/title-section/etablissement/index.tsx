@@ -4,7 +4,7 @@ import IsActiveTag from '#components-ui/is-active-tag';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import { EtablissementDescription } from '#components/etablissement-description';
-import { estNonDiffusible } from '#models/core/diffusion';
+import { estDiffusible, estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import {
@@ -60,7 +60,7 @@ const TitleEtablissementWithDenomination: React.FC<{
       <span className={styles.sirenOrSiret}>
         {formatSiret(etablissement.siret)}
       </span>
-      {estNonDiffusible(etablissement) && <Tag color="new">non-diffusible</Tag>}
+      {!estDiffusible(etablissement) && <Tag color="new">non-diffusible</Tag>}
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}
         statutDiffusion={etablissement.statutDiffusion}
@@ -111,7 +111,7 @@ const TitleEtablissementWithDenomination: React.FC<{
       }
     />
 
-    {estNonDiffusible(etablissement) ? (
+    {estNonDiffusibleStrict(etablissement) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
     ) : (
       <EtablissementDescription

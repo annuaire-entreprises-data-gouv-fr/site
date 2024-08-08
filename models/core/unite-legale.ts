@@ -78,8 +78,9 @@ class UniteLegaleBuilder {
     // determine TVA
     uniteLegale.tva = getTvaUniteLegale(uniteLegale);
 
-    if (isProtectedSiren(uniteLegale.siren)) {
+    if (isProtectedSiren(uniteLegale.siren) && estDiffusible(uniteLegale)) {
       uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+
       uniteLegale.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
 
       const allProtected = uniteLegale.etablissements.all.map((e) => {
@@ -316,7 +317,7 @@ const fetchUniteLegaleFromInsee = async (
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       const uniteLegale = createDefaultUniteLegale(siren);
-      uniteLegale.statutDiffusion = ISTATUTDIFFUSION.NONDIFF;
+      uniteLegale.statutDiffusion = ISTATUTDIFFUSION.NON_DIFF_STRICT;
       uniteLegale.nomComplet = 'Entreprise non-diffusible';
 
       return uniteLegale;

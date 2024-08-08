@@ -12,7 +12,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
-import { estNonDiffusible } from '#models/core/diffusion';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
@@ -64,7 +64,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
           ficheType={FICHE.INFORMATION}
           session={session}
         />
-        {estNonDiffusible(uniteLegale) ? (
+        {estNonDiffusibleStrict(uniteLegale) ? (
           <NonDiffusibleSection />
         ) : (
           <>
