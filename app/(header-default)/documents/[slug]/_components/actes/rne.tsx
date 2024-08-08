@@ -77,7 +77,7 @@ export function ActesTable({ actes }: IActesTableProps) {
         <ul>
           {(a?.detailsDocuments || []).map(({ nom, label }) => (
             <li key={nom}>
-              <b>{nom}</b>
+              <strong>{nom}</strong>
               {label && (
                 <>
                   {' - '}
