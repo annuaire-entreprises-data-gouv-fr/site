@@ -18,14 +18,12 @@ export const generateMetadata = async (
 ): Promise<Metadata> => {
   const { slug, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-  const session = await getSession();
 
   return {
     title: `Justificatif d’immatriculation - ${uniteLegalePageTitle(
-      uniteLegale,
-      session
+      uniteLegale
     )}`,
-    description: uniteLegalePageDescription(uniteLegale, session),
+    description: uniteLegalePageDescription(uniteLegale),
     robots: 'follow, noindex',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/justificatif/${uniteLegale.siren}`,

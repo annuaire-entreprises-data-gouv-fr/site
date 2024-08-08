@@ -5,10 +5,7 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IDataAssociation } from '#models/association/types';
-import {
-  getAdresseUniteLegale,
-  getPersonnalDataAssociation,
-} from '#models/core/statut-diffusion';
+import { getPersonnalDataAssociation } from '#models/core/diffusion';
 import { IAssociation } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { Warning } from '../alerts';
@@ -43,7 +40,7 @@ const AssociationAdressAlert: React.FC<{
               ) || <NonRenseigne />}
             </li>
             <li>
-              <INSEE /> : {getAdresseUniteLegale(uniteLegale, null)}
+              <INSEE /> : {uniteLegale.siege.adresse}
             </li>
           </ul>
           Si vous êtes membre de cette association. Contactez l’administration

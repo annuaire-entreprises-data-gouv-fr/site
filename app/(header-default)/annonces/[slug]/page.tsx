@@ -4,7 +4,7 @@ import AnnoncesJOAFESection from '#components/annonces-section/annonces/joafe';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { estDiffusible } from '#models/core/statut-diffusion';
+import { estDiffusible } from '#models/core/diffusion';
 import { isAssociation } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import {
@@ -23,14 +23,12 @@ export const generateMetadata = async (
   const { slug, isBot } = extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-  const session = await getSession();
 
   return {
     title: `Annonces légales (BODACC, JOAFE) - ${uniteLegalePageTitle(
-      uniteLegale,
-      session
+      uniteLegale
     )}`,
-    description: uniteLegalePageDescription(uniteLegale, session),
+    description: uniteLegalePageDescription(uniteLegale),
     robots: 'noindex',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/annonces/${uniteLegale.siren}`,

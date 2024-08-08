@@ -18,15 +18,11 @@ export const generateMetadata = async (
 ): Promise<Metadata> => {
   const { slug, page, isBot } = extractParamsAppRouter(props);
 
-  const session = await getSession();
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
   return {
-    title: `Conventions collectives - ${uniteLegalePageTitle(
-      uniteLegale,
-      session
-    )}`,
-    description: uniteLegalePageDescription(uniteLegale, session),
+    title: `Conventions collectives - ${uniteLegalePageTitle(uniteLegale)}`,
+    description: uniteLegalePageDescription(uniteLegale),
     robots: 'noindex',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/divers/${uniteLegale.siren}`,

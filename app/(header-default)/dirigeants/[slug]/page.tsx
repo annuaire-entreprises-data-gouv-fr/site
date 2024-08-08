@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { estDiffusible } from '#models/core/statut-diffusion';
+import { estDiffusible } from '#models/core/diffusion';
 import { isAssociation, isServicePublic } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import {
@@ -23,15 +23,11 @@ export const generateMetadata = async (
 ): Promise<Metadata> => {
   const { slug, page, isBot } = extractParamsAppRouter(props);
 
-  const session = await getSession();
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
   return {
-    title: `Dirigeants de la structure - ${uniteLegalePageTitle(
-      uniteLegale,
-      session
-    )}`,
-    description: uniteLegalePageDescription(uniteLegale, session),
+    title: `Dirigeants de la structure - ${uniteLegalePageTitle(uniteLegale)}`,
+    description: uniteLegalePageDescription(uniteLegale),
     robots: 'noindex',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`,

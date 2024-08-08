@@ -11,6 +11,7 @@ import { getGeoLoc } from '#models/geo-loc';
 import { Siret, extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
+import getSession from '#utils/server-side-helper/app/get-session';
 import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
 import {
@@ -19,7 +20,11 @@ import {
   isAPINotResponding,
 } from '../api-not-responding';
 import { FetchRessourceException, IExceptionContext } from '../exceptions';
-import { ISTATUTDIFFUSION, estDiffusible } from './statut-diffusion';
+import {
+  ISTATUTDIFFUSION,
+  anonymiseEtablissement,
+  estDiffusible,
+} from './diffusion';
 import {
   IEtablissement,
   IEtablissementWithUniteLegale,
@@ -42,11 +47,12 @@ const getEtablissementFromSlug = async (
 
   const siren = extractSirenFromSiret(siret);
 
-  if (isProtectedSiren(siren)) {
+  if (isProtectedSiren(siren) && estDiffusible(etablissement)) {
     etablissement.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
   }
 
-  return etablissement;
+  const session = await getSession();
+  return anonymiseEtablissement(etablissement, session);
 };
 
 /**
@@ -197,7 +203,9 @@ const getEtablissementWithUniteLegaleFromSlug = async (
   slug: string,
   isBot = false
 ): Promise<IEtablissementWithUniteLegale> => {
-  const etablissement = await getEtablissementFromSlug(slug, { isBot });
+  const etablissement = await getEtablissementFromSlug(slug, {
+    isBot,
+  });
   const uniteLegale = await getUniteLegaleFromSlug(etablissement.siren, {
     isBot,
   });

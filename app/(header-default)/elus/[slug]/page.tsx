@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { getNomComplet } from '#models/core/statut-diffusion';
 import { uniteLegalePageDescription } from '#utils/helpers';
 import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
 import extractParamsAppRouter, {
@@ -15,14 +14,11 @@ export const generateMetadata = async (
 ): Promise<Metadata> => {
   const { slug, page, isBot } = extractParamsAppRouter(props);
 
-  const session = await getSession();
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
   return {
-    title: `Élus de ${getNomComplet(uniteLegale, session)} - ${
-      uniteLegale.siren
-    }`,
-    description: uniteLegalePageDescription(uniteLegale, session),
+    title: `Élus de ${uniteLegale.nomComplet} - ${uniteLegale.siren}`,
+    description: uniteLegalePageDescription(uniteLegale),
     robots: 'noindex',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/elus/${uniteLegale.siren}`,

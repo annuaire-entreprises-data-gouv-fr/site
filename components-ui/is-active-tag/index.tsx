@@ -1,8 +1,11 @@
 import React from 'react';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
+import {
+  ISTATUTDIFFUSION,
+  estNonDiffusibleStrict,
+} from '#models/core/diffusion';
 import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
-import { ISTATUTDIFFUSION } from '#models/core/statut-diffusion';
 import { formatDate } from '#utils/helpers';
 
 const classFromState = (state: IETATADMINSTRATIF) => {
@@ -37,7 +40,7 @@ const IsActiveTag: React.FC<{
 }> = ({ etatAdministratif, statutDiffusion, since, size = 'medium' }) => {
   if (
     etatAdministratif === IETATADMINSTRATIF.INCONNU ||
-    statutDiffusion === ISTATUTDIFFUSION.NONDIFF
+    estNonDiffusibleStrict({ statutDiffusion })
   ) {
     return (
       <InformationTooltip

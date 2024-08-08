@@ -61,11 +61,10 @@ export const cachedGetUniteLegale = cache(
   async (slug: string, isBot: boolean, page = 0) => {
     const sirenSlug = extractSirenOrSiretSlugFromUrl(slug);
     try {
-      const uniteLegale = await getUniteLegaleFromSlug(sirenSlug, {
+      return await getUniteLegaleFromSlug(sirenSlug, {
         isBot,
         page,
       });
-      return uniteLegale;
     } catch (e) {
       handleException(e, sirenSlug);
       throw e;

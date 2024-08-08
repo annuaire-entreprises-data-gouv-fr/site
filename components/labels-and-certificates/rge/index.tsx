@@ -9,7 +9,6 @@ import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IRGECertification } from '#models/certifications/rge';
-import { getNomComplet } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { certificatLogo } from './map-certicat-to-logo';
@@ -58,7 +57,7 @@ export const CertificationsRGESection: React.FC<{
         } = certificationsRGE.companyInfo;
 
         const data = [
-          ['Dénomination', getNomComplet(uniteLegale, session)],
+          ['Dénomination', uniteLegale.nomComplet],
           ['Adresse', adresse],
           [
             'Téléphone',

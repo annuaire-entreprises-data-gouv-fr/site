@@ -12,7 +12,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
-import { estNonDiffusible } from '#models/core/statut-diffusion';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
@@ -36,10 +36,9 @@ export const generateMetadata = async (
   const { slug, page, isBot } = extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
-  const session = await getSession();
   return {
-    title: uniteLegalePageTitle(uniteLegale, session),
-    description: uniteLegalePageDescription(uniteLegale, session),
+    title: uniteLegalePageTitle(uniteLegale),
+    description: uniteLegalePageDescription(uniteLegale),
     robots: shouldNotIndex(uniteLegale) ? 'noindex, nofollow' : 'index, follow',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${
@@ -65,7 +64,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
           ficheType={FICHE.INFORMATION}
           session={session}
         />
-        {estNonDiffusible(uniteLegale) ? (
+        {estNonDiffusibleStrict(uniteLegale) ? (
           <NonDiffusibleSection />
         ) : (
           <>

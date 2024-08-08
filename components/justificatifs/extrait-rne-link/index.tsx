@@ -2,7 +2,7 @@ import React from 'react';
 import {
   estDiffusible,
   nonDiffusibleDataFormatter,
-} from '#models/core/statut-diffusion';
+} from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
