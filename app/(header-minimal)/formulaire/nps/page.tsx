@@ -1,6 +1,7 @@
 import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
 import constants from '#models/constants';
+import { getAgentEmail, getAgentUserType } from '#models/user/helpers';
 import { isLoggedIn } from '#models/user/rights';
 import { randomId } from '#utils/helpers';
 import getSession from '#utils/server-side-helper/app/get-session';
@@ -102,7 +103,7 @@ const FeedBackPage: NextPageWithLayout = async () => {
                   aria-hidden
                   type="hidden"
                   name="radio-set-visitor-type"
-                  value={`${session?.user?.userType}`}
+                  value={getAgentUserType(session) || ''}
                   tabIndex={-1}
                 />
               ) : (
@@ -172,7 +173,9 @@ const FeedBackPage: NextPageWithLayout = async () => {
                   id="email"
                   name="email"
                   type="email"
-                  defaultValue={isLoggedIn(session) ? session?.user?.email : ''}
+                  defaultValue={
+                    isLoggedIn(session) ? getAgentEmail(session) : ''
+                  }
                 />
               </div>
             </fieldset>

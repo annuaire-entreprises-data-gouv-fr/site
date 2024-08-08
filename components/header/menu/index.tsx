@@ -1,6 +1,7 @@
 import FloatingModal from '#components-ui/floating-modal';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
+import { getAgentDisplayName, getAgentLabel } from '#models/user/helpers';
 import { isLoggedIn } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { EspaceAgentLink } from './espace-agent-link';
@@ -16,9 +17,7 @@ const Menu: React.FC<{
       <div>
         <Icon slug="accountLine">
           <span className={styles.menuText}>
-            {session?.user?.fullName ||
-              session?.user?.email ||
-              'Utilisateur inconnu'}
+            {getAgentDisplayName(session)}
             &nbsp;(
             <strong
               style={{
@@ -26,7 +25,7 @@ const Menu: React.FC<{
                 color: constants.colors.espaceAgent,
               }}
             >
-              agent public
+              {getAgentLabel(session)}
             </strong>
             )
           </span>

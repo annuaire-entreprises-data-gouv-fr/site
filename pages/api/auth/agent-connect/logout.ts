@@ -1,4 +1,4 @@
-import { agentConnectLogoutUrl } from '#clients/auth/agent-connect/strategy';
+import { agentConnectLogoutUrl } from '#clients/authentication/agent-connect/strategy';
 import { Exception } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { setPathFrom } from '#utils/session';
