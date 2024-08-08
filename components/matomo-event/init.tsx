@@ -1,4 +1,3 @@
-import { getAgentUserType } from '#models/user/helpers';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 
@@ -12,9 +11,7 @@ export function MatomoInit({ session }: { session: ISession | null }) {
               var _paq = window._paq || [];
               ${
                 hasRights(session, EScope.isAgent)
-                  ? `_paq.push(['setCustomDimension', '1', '${getAgentUserType(
-                      session
-                    )}']);`
+                  ? `_paq.push(['setCustomDimension', '1', '${session?.user?.userType}']);`
                   : ''
               }
               _paq.push(['trackPageView']);
