@@ -13,6 +13,7 @@ import { IDataFetchingState } from '#models/data-fetching';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import ProtectedBeneficiairesSection from './agent-section';
 
 type IProps = {
   immatriculationRNE:
@@ -89,36 +90,77 @@ const BeneficiairesSection: React.FC<{
 
   return (
     <>
-      <Section
-        title="Bénéficiaire(s) effectif(s)"
-        id="beneficiaires"
-        isProtected
-        sources={[EAdministration.INPI]}
-      >
-        Dans quel cadre juridique accédez vous a ces données ? Parler ici des
-        CGUs
-        <MultiChoice
-          idPrefix="user-type"
-          values={[
-            {
-              label: 'Aides publiques',
-              onClick: () => setUseCase('aides'),
-              checked: useCase === 'aides',
-            },
-            {
-              label: 'Marchés publics',
-              onClick: () => setUseCase('marchés'),
-              checked: useCase === 'marchés',
-            },
-            {
-              label: 'Lutte contre la fraude',
-              onClick: () => setUseCase('fraude'),
-              checked: useCase === 'fraude',
-            },
-          ]}
+      {!useCase ? (
+        <Section
+          title="Bénéficiaire(s) effectif(s)"
+          id="beneficiaires"
+          isProtected
+          sources={[EAdministration.INPI]}
+        >
+          <p>
+            Depuis le 31 juillet 2024, les{' '}
+            <a href="/faq/registre-des-beneficiaires-effectifs">
+              bénéficiaires effectifs ne sont plus librement accessibles
+            </a>
+            .
+          </p>
+          <p>
+            Les agents publics peuvent y accéder uniquement dans les cas
+            d’usages justifiant d’un intérêt légitime. En déclarant le cadre
+            juridique dans lequel vous accédez à ces données, vous vous engagez{' '}
+            <a href="/cgu">
+              à respecter nos conditions générales d’utilisations
+            </a>
+            .
+          </p>
+          <p>
+            Toute demande d’accès aux données est tracée et envoyée à la
+            comission européeene.
+          </p>
+          <label>Dans quel cadre souhaitez vous accéder à ces données ?</label>
+          <br />
+          <MultiChoice
+            idPrefix="user-type"
+            values={[
+              {
+                label: 'Aides publiques',
+                onClick: () => setUseCase('aides'),
+                checked: useCase === 'aides',
+              },
+              {
+                label: 'Marchés publics',
+                onClick: () => setUseCase('marchés'),
+                checked: useCase === 'marchés',
+              },
+              {
+                label: 'Lutte contre la fraude',
+                onClick: () => setUseCase('fraude'),
+                checked: useCase === 'fraude',
+              },
+              {
+                label: 'Autre cas d’usage',
+                onClick: () => setUseCase('autre'),
+                checked: useCase === 'autre',
+              },
+            ]}
+          />
+        </Section>
+      ) : useCase === 'autre' ? (
+        <Section
+          title="Bénéficiaire(s) effectif(s)"
+          id="beneficiaires"
+          isProtected
+          sources={[EAdministration.INPI]}
+        >
+          Les informations des bénénficiaires effectifs ne sont pas accesibles
+        </Section>
+      ) : (
+        <ProtectedBeneficiairesSection
+          uniteLegale={uniteLegale}
+          useCase={useCase}
+          session={session}
         />
-      </Section>
-      {/* <ProtectedBeneficiairesSection uniteLegale={uniteLegale} /> */}
+      )}
     </>
   );
 };
