@@ -42,8 +42,8 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "5021",
-              "5003"
+              "5003",
+              "5021"
             ],
             "idOrganismeFormation": [],
             "idRge": [],
@@ -93,8 +93,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "5021",
-                  "5003"
+                  "5003",
+                  "5021"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [],
@@ -136,8 +136,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "5021",
-                  "5003"
+                  "5003",
+                  "5021"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [],
@@ -150,8 +150,8 @@
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 1,
-          "nombreEtablissements": 3011,
+          "nombreEtablissementsOuverts": 2905,
+          "nombreEtablissements": 3012,
           "usePagination": true,
           "currentEtablissementPage": 1
         },
@@ -160,7 +160,7 @@
         "dateCreation": "1983-03-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-06-13T09:48:46",
+        "dateMiseAJourInsee": "2024-07-22T15:24:16",
         "dateMiseAJourInpi": "",
         "dateDebutActivite": "",
         "trancheEffectif": "53",
@@ -331,14 +331,6 @@
               "lieuNaissance": ""
             },
             {
-              "sexe": "F",
-              "nom": "BOËLLE",
-              "prenom": "Sandrine",
-              "role": null,
-              "dateNaissancePartial": "1961-05",
-              "lieuNaissance": ""
-            },
-            {
               "sexe": "M",
               "nom": "BOHBOT",
               "prenom": "Jack-yves",
@@ -387,11 +379,27 @@
               "lieuNaissance": ""
             },
             {
+              "sexe": "F",
+              "nom": "BOËLLE",
+              "prenom": "Sandrine",
+              "role": null,
+              "dateNaissancePartial": "1961-05",
+              "lieuNaissance": ""
+            },
+            {
               "sexe": "M",
               "nom": "BROSSAT",
               "prenom": "Ian",
               "role": null,
               "dateNaissancePartial": "1980-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BROSSEL",
+              "prenom": "Colombe",
+              "role": null,
+              "dateNaissancePartial": "1976-04",
               "lieuNaissance": ""
             },
             {
@@ -531,6 +539,14 @@
               "lieuNaissance": ""
             },
             {
+              "sexe": "F",
+              "nom": "D'HAUTESERRE",
+              "prenom": "Jeanne",
+              "role": null,
+              "dateNaissancePartial": "1953-07",
+              "lieuNaissance": ""
+            },
+            {
               "sexe": "M",
               "nom": "DAGNAUD",
               "prenom": "François",
@@ -584,14 +600,6 @@
               "prenom": "Inès",
               "role": null,
               "dateNaissancePartial": "1987-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "D'HAUTESERRE",
-              "prenom": "Jeanne",
-              "role": null,
-              "dateNaissancePartial": "1953-07",
               "lieuNaissance": ""
             },
             {
@@ -651,14 +659,6 @@
               "lieuNaissance": ""
             },
             {
-              "sexe": "M",
-              "nom": "FÉRAUD",
-              "prenom": "Rémi",
-              "role": null,
-              "dateNaissancePartial": "1971-08",
-              "lieuNaissance": ""
-            },
-            {
               "sexe": "F",
               "nom": "FILOCHE",
               "prenom": "Léa",
@@ -680,6 +680,14 @@
               "prenom": "Ségolène",
               "role": null,
               "dateNaissancePartial": "1994-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FÉRAUD",
+              "prenom": "Rémi",
+              "role": null,
+              "dateNaissancePartial": "1971-08",
               "lieuNaissance": ""
             },
             {
@@ -780,7 +788,7 @@
             },
             {
               "sexe": "M",
-              "nom": "GRÉGOIRE",
+              "nom": "GREGOIRE",
               "prenom": "Emmanuel",
               "role": "1er adjoint au Maire",
               "dateNaissancePartial": "1977-12",
@@ -1179,14 +1187,6 @@
               "lieuNaissance": ""
             },
             {
-              "sexe": "M",
-              "nom": "PÉCHENARD",
-              "prenom": "Frédéric",
-              "role": null,
-              "dateNaissancePartial": "1957-03",
-              "lieuNaissance": ""
-            },
-            {
               "sexe": "F",
               "nom": "PETIT",
               "prenom": "Carine",
@@ -1244,6 +1244,14 @@
             },
             {
               "sexe": "M",
+              "nom": "PÉCHENARD",
+              "prenom": "Frédéric",
+              "role": null,
+              "dateNaissancePartial": "1957-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
               "nom": "RABADAN",
               "prenom": "Pierre",
               "role": "31ème adjoint au Maire",
@@ -1276,14 +1284,6 @@
             },
             {
               "sexe": "F",
-              "nom": "RÉMY-LELEU",
-              "prenom": "Raphaëlle",
-              "role": null,
-              "dateNaissancePartial": "1992-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
               "nom": "RIVIER",
               "prenom": "Emmanuelle",
               "role": null,
@@ -1304,6 +1304,14 @@
               "prenom": "Jean-luc",
               "role": "33ème adjoint au Maire",
               "dateNaissancePartial": "1959-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "RÉMY-LELEU",
+              "prenom": "Raphaëlle",
+              "role": null,
+              "dateNaissancePartial": "1992-01",
               "lieuNaissance": ""
             },
             {
@@ -1459,14 +1467,6 @@
               "lieuNaissance": ""
             },
             {
-              "sexe": "M",
-              "nom": "VÉRON",
-              "prenom": "Aurélien",
-              "role": null,
-              "dateNaissancePartial": "1969-04",
-              "lieuNaissance": ""
-            },
-            {
               "sexe": "F",
               "nom": "VERSINI",
               "prenom": "Dominique",
@@ -1480,6 +1480,14 @@
               "prenom": "Patrick",
               "role": null,
               "dateNaissancePartial": "1976-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "VÉRON",
+              "prenom": "Aurélien",
+              "role": null,
+              "dateNaissancePartial": "1969-04",
               "lieuNaissance": ""
             },
             {
@@ -1508,8 +1516,8 @@
           "9999"
         ],
         "matchingEtablissements": [],
-        "nombreEtablissements": 3011,
-        "nombreEtablissementsOuverts": 2904,
+        "nombreEtablissements": 3012,
+        "nombreEtablissementsOuverts": 2905,
         "dirigeants": []
       }
     ]

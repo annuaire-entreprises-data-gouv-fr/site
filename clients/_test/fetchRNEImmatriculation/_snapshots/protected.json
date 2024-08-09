@@ -26,15 +26,7 @@
         "dateNaissanceFull": ""
       }
     ],
-    "beneficiaires": [
-      {
-        "type": "",
-        "nom": "ESTOURNET",
-        "prenoms": "PIERRE",
-        "dateNaissancePartial": "1985-12",
-        "nationalite": "Française"
-      }
-    ],
+    "beneficiaires": [],
     "observations": [],
     "metadata": {
       "isFallback": false

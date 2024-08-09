@@ -28,20 +28,11 @@
       {
         "nom": "POUYANNE (POUYANNE)",
         "prenom": "DAVID, JEAN, CLAUDE",
-        "role": "Gérant",
         "dateNaissancePartial": "1965-10",
         "dateNaissanceFull": ""
       }
     ],
-    "beneficiaires": [
-      {
-        "type": "",
-        "nom": "POUYANNE",
-        "prenoms": "DAVID, JEAN-CLAUDE",
-        "dateNaissancePartial": "1965-10",
-        "nationalite": "Française"
-      }
-    ],
+    "beneficiaires": [],
     "observations": [
       {
         "numObservation": "12767",

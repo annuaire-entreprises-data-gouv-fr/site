@@ -16,6 +16,7 @@
     "dateCreation": "2013-12-18",
     "dateDissolution": "0001-01-01",
     "eligibiliteCEC": true,
+    "impotCommerciaux": false,
     "adresseSiege": "16 RUE DE TOLBIAC, 75013 PARIS 13E",
     "adresseGestion": "38  RUE DUNOIS, 75647 PARIS CEDEX 13, FRANCE",
     "adresseInconsistency": false,
