@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
@@ -7,17 +6,10 @@ import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import { IBeneficiaire, IImmatriculationRNE } from '#models/immatriculation';
+import { IBeneficairesEffectif } from '#models/espace-agent/beneficiaires';
+import { ISession } from '#models/user/session';
 import { formatDatePartial } from '#utils/helpers';
-
-type IBeneficiairesContentProps = {
-  immatriculationRNE: IImmatriculationRNE;
-  uniteLegale: IUniteLegale;
-};
-
-function hasSeveralBeneficiaires(immatriculationRNE: IImmatriculationRNE) {
-  return immatriculationRNE.beneficiaires.length > 1;
-}
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 /**
  * Dirigeants section
@@ -26,7 +18,17 @@ function hasSeveralBeneficiaires(immatriculationRNE: IImmatriculationRNE) {
  */
 const ProtectedBeneficiairesSection: React.FC<{
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
+  useCase: string;
+  session: ISession | null;
+}> = ({ uniteLegale, useCase, session }) => {
+  // await setAgentsetUseCase(session, useCase);
+
+  const beneficiaires = useAPIRouteData(
+    'espace-agent/beneficiaires',
+    uniteLegale.siren,
+    session
+  );
+
   return (
     <>
       <HorizontalSeparator />
@@ -40,12 +42,12 @@ const ProtectedBeneficiairesSection: React.FC<{
             <strong>Registre National des Entreprises (RNE)</strong>
           </>
         }
-        data={immatriculationRNE}
+        data={beneficiaires}
         isProtected
       >
-        {(immatriculationRNE) => (
+        {(beneficiaires) => (
           <BénéficiairesContent
-            immatriculationRNE={immatriculationRNE}
+            beneficiaires={beneficiaires}
             uniteLegale={uniteLegale}
           />
         )}
@@ -55,30 +57,32 @@ const ProtectedBeneficiairesSection: React.FC<{
 };
 
 function BénéficiairesContent({
-  immatriculationRNE,
+  beneficiaires,
   uniteLegale,
-}: IBeneficiairesContentProps) {
-  const { beneficiaires } = immatriculationRNE;
-
-  const formatInfos = (beneficiaire: IBeneficiaire) => [
-    beneficiaire.nationalite,
+}: {
+  beneficiaires: IBeneficairesEffectif[];
+  uniteLegale: IUniteLegale;
+}) {
+  const formatInfos = (beneficiaire: IBeneficairesEffectif) => [
     <>
       {beneficiaire.prenoms}
       {beneficiaire.prenoms && ' '}
       {(beneficiaire.nom || '').toUpperCase()}, né(e) en{' '}
-      {formatDatePartial(beneficiaire.dateNaissancePartial)}
+      {formatDatePartial(
+        `${beneficiaire.anneeNaissance}-${beneficiaire.moisNaissance}-00`
+      )}
+      {beneficiaire.nationalite && ` (${beneficiaire.nationalite})`}
     </>,
+    beneficiaire.paysResidence,
+    <i>Détail des modalités</i>,
   ];
 
-  const plural = hasSeveralBeneficiaires(immatriculationRNE) ? 's' : '';
+  const plural = beneficiaires.length > 1 ? 's' : '';
 
   return (
     <>
-      {immatriculationRNE.beneficiaires.length === 0 ? null : (
+      {beneficiaires.length === 0 ? null : (
         <>
-          {immatriculationRNE.metadata.isFallback && (
-            <InpiPartiallyDownWarning />
-          )}
           <p>
             Cette entreprise possède {beneficiaires.length}{' '}
             <a
@@ -99,7 +103,7 @@ function BénéficiairesContent({
             &nbsp;:
           </p>
           <FullTable
-            head={['Nationalité', 'Détails']}
+            head={['Bénéficiaire', 'Pays de résidence', 'Modalité de controle']}
             body={beneficiaires.map((beneficiaire) =>
               formatInfos(beneficiaire)
             )}

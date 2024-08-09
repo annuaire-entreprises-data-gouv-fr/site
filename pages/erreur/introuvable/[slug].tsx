@@ -1,8 +1,8 @@
+import { GetServerSideProps } from 'next';
 import { INPI, INSEE } from '#components/administrations';
 import MatomoEvent from '#components/matomo-event';
 import Meta from '#components/meta/meta-client';
 import { formatIntFr, formatSiret, isLuhnValid } from '#utils/helpers';
-import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 type SirenOrSiretNotFoundPageProps = {
