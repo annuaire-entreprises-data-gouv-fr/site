@@ -37,3 +37,12 @@ export function getAgentContactInfo(
     name: session?.user?.fullName || '',
   };
 }
+
+export function setAgentUseCase(session: ISession | null, useCase: string) {
+  // if (session) {
+  //   session?.user.useCase = useCase;
+  //   await session.save();
+  // } else {
+  //   logWarningInSentry();
+  // }
+}

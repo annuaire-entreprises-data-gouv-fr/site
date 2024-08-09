@@ -15,7 +15,7 @@ export const NotLuhnValidAlert: React.FC<{
       <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
       <Error full>
         Ce numéro d’identification “{formatIntFr(uniteLegale.siren)}”{' '}
-        <b>ne respecte pas</b>{' '}
+        <strong>ne respecte pas</strong>{' '}
         <a
           href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
           target="_blank"
@@ -24,9 +24,9 @@ export const NotLuhnValidAlert: React.FC<{
         >
           l’algorithme de vérification
         </a>{' '}
-        des numéros SIREN/SIRET. C’est une situation <b>très inhabituelle</b> et
-        nous vous invitons à considérer les informations sur cette page avec
-        vigilance.
+        des numéros SIREN/SIRET. C’est une situation{' '}
+        <strong>très inhabituelle</strong> et nous vous invitons à considérer
+        les informations sur cette page avec vigilance.
       </Error>
     </>
   );

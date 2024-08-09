@@ -111,7 +111,7 @@ export const AgentActesAssociation: React.FC<{
                       formatDate(date_depot),
                       annee_validite,
                       <>
-                        <b>{nom}</b>
+                        <strong>{nom}</strong>
                         <br />
                         {commentaire && <i>{commentaire}</i>}
                       </>,
