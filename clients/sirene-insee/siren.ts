@@ -8,7 +8,6 @@ import {
   IUniteLegale,
 } from '#models/core/types';
 import {
-  agregateTripleFields,
   formatFirstNames,
   formatNameFull,
   isEntrepreneurIndividuelFromNatureJuridique,
@@ -60,9 +59,10 @@ type IPeriodeUniteLegale = {
   caractereEmployeurUniteLegale: string;
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
-  denominationUsuelle1UniteLegale: string;
-  denominationUsuelle2UniteLegale: string;
-  denominationUsuelle3UniteLegale: string;
+  // deprecated :
+  // denominationUsuelle1UniteLegale: string;
+  // denominationUsuelle2UniteLegale: string;
+  // denominationUsuelle3UniteLegale: string;
 };
 
 const clientUniteLegaleInsee = async (
@@ -93,7 +93,6 @@ const mapToDomainObject = (
     anneeEffectifsUniteLegale,
     statutDiffusionUniteLegale,
     prenomUsuelUniteLegale,
-    sexeUniteLegale,
     identifiantAssociationUniteLegale,
     categorieEntreprise,
     anneeCategorieEntreprise,
@@ -111,9 +110,6 @@ const mapToDomainObject = (
     caractereEmployeurUniteLegale,
     nomUniteLegale,
     nomUsageUniteLegale,
-    denominationUsuelle1UniteLegale,
-    denominationUsuelle2UniteLegale,
-    denominationUsuelle3UniteLegale,
   } = periodesUniteLegale[0];
 
   const siege = createDefaultEtablissement();
@@ -140,14 +136,6 @@ const mapToDomainObject = (
     )
   );
 
-  // pre 2008 denomination https://www.sirene.fr/sirene/public/variable/denominationUsuelleEtablissement
-  const denominationUsuelle =
-    agregateTripleFields(
-      denominationUsuelle1UniteLegale,
-      denominationUsuelle2UniteLegale,
-      denominationUsuelle3UniteLegale
-    ) || '';
-
   // EI names and firstName
   // remove trailing whitespace in case name or firstname is missing
   const names = `${formatFirstNames([prenomUsuelUniteLegale])} ${formatNameFull(
@@ -156,8 +144,8 @@ const mapToDomainObject = (
   )}`.trim();
 
   const nomComplet = `${denominationUniteLegale || names || 'Nom inconnu'}${
-    denominationUsuelle ? ` (${denominationUsuelle})` : ''
-  }${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
+    sigleUniteLegale ? ` (${sigleUniteLegale})` : ''
+  }`;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
 
