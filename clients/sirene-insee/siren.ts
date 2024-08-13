@@ -5,9 +5,11 @@ import { estActif } from '#models/core/etat-administratif';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
+  IEtablissement,
   IUniteLegale,
 } from '#models/core/types';
 import {
+  agregateTripleFields,
   formatFirstNames,
   formatNameFull,
   isEntrepreneurIndividuelFromNatureJuridique,
@@ -24,6 +26,7 @@ import {
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
 } from '../../utils/helpers/insee-variables';
+import { clientSiegeInsee } from './siret';
 
 type IInseeUniteLegaleResponse = {
   uniteLegale: {
@@ -59,10 +62,9 @@ type IPeriodeUniteLegale = {
   caractereEmployeurUniteLegale: string;
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
-  // deprecated :
-  // denominationUsuelle1UniteLegale: string;
-  // denominationUsuelle2UniteLegale: string;
-  // denominationUsuelle3UniteLegale: string;
+  denominationUsuelle1UniteLegale: string;
+  denominationUsuelle2UniteLegale: string;
+  denominationUsuelle3UniteLegale: string;
 };
 
 const clientUniteLegaleInsee = async (
@@ -70,18 +72,22 @@ const clientUniteLegaleInsee = async (
   options: InseeClientOptions
 ) => {
   const { useCache, useFallback } = options;
-  const data = await inseeClientGet<IInseeUniteLegaleResponse>(
-    routes.sireneInsee.siren + siren,
-    { useCache },
-    useFallback
-  );
+  const [dataUniteLegale, siege] = await Promise.all([
+    inseeClientGet<IInseeUniteLegaleResponse>(
+      routes.sireneInsee.siren + siren,
+      { useCache },
+      useFallback
+    ),
+    clientSiegeInsee(siren, options).catch(() => null),
+  ]);
 
-  return mapToDomainObject(siren, data);
+  return mapToDomainObject(siren, dataUniteLegale, siege);
 };
 
 const mapToDomainObject = (
   originalSiren: Siren,
-  response: IInseeUniteLegaleResponse
+  response: IInseeUniteLegaleResponse,
+  siege: IEtablissement | null
 ): IUniteLegale => {
   const {
     siren,
@@ -110,24 +116,30 @@ const mapToDomainObject = (
     caractereEmployeurUniteLegale,
     nomUniteLegale,
     nomUsageUniteLegale,
+    denominationUsuelle1UniteLegale,
+    denominationUsuelle2UniteLegale,
+    denominationUsuelle3UniteLegale,
   } = periodesUniteLegale[0];
 
-  const siege = createDefaultEtablissement();
+  const libelleActivitePrincipaleUniteLegale = libelleFromCodeNAF(
+    activitePrincipaleUniteLegale,
+    nomenclatureActivitePrincipaleUniteLegale,
+    false
+  );
 
-  if (periodesUniteLegale && periodesUniteLegale.length > 0) {
-    siege.siren = siren;
-    //@ts-ignore
-    siege.siret = siren + nicSiegeUniteLegale;
-    siege.nic = nicSiegeUniteLegale;
-    siege.dateCreation = dateDebut;
-    siege.activitePrincipale = activitePrincipaleUniteLegale;
-    siege.libelleActivitePrincipale = libelleFromCodeNAF(
-      activitePrincipaleUniteLegale,
-      nomenclatureActivitePrincipaleUniteLegale,
-      false
-    );
-    siege.estSiege = true;
-    siege.trancheEffectif = '';
+  if (!siege) {
+    siege = createDefaultEtablissement();
+
+    if (periodesUniteLegale && periodesUniteLegale.length > 0) {
+      siege.siren = siren;
+      siege.siret = (siren + nicSiegeUniteLegale) as Siret;
+      siege.nic = nicSiegeUniteLegale;
+      siege.dateCreation = dateDebut;
+      siege.activitePrincipale = activitePrincipaleUniteLegale;
+      siege.libelleActivitePrincipale = libelleActivitePrincipaleUniteLegale;
+      siege.estSiege = true;
+      siege.trancheEffectif = '';
+    }
   }
 
   const allSiegesSiret = Array.from(
@@ -135,6 +147,19 @@ const mapToDomainObject = (
       periodesUniteLegale.map((e) => (siren + e.nicSiegeUniteLegale) as Siret)
     )
   );
+
+  /**
+   *   either siege nom commercial or pre 2008 unite legale nom commercial
+   *  https://www.sirene.fr/sirene/public/variable/denominationUsuelleEtablissement
+   */
+  const denominationUsuelle =
+    siege.denomination ||
+    agregateTripleFields(
+      denominationUsuelle1UniteLegale,
+      denominationUsuelle2UniteLegale,
+      denominationUsuelle3UniteLegale
+    ) ||
+    '';
 
   // EI names and firstName
   // remove trailing whitespace in case name or firstname is missing
@@ -144,8 +169,8 @@ const mapToDomainObject = (
   )}`.trim();
 
   const nomComplet = `${denominationUniteLegale || names || 'Nom inconnu'}${
-    sigleUniteLegale ? ` (${sigleUniteLegale})` : ''
-  }`;
+    denominationUsuelle ? ` (${denominationUsuelle})` : ''
+  }${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
 
@@ -172,8 +197,8 @@ const mapToDomainObject = (
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
       categorieJuridiqueUniteLegale
     ),
-    activitePrincipale: siege.activitePrincipale,
-    libelleActivitePrincipale: siege.libelleActivitePrincipale,
+    activitePrincipale: activitePrincipaleUniteLegale,
+    libelleActivitePrincipale: libelleActivitePrincipaleUniteLegale,
     etablissements: createEtablissementsList([siege]),
     dateCreation: parseDateCreationInsee(dateCreationUniteLegale),
     dateDerniereMiseAJour: new Date().toISOString(),
