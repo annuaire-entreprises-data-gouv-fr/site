@@ -27,7 +27,6 @@
       {
         "nom": "Wahl",
         "prenom": "PHILIPPE",
-        "role": "Président",
         "dateNaissancePartial": "1956-03",
         "dateNaissanceFull": ""
       },
@@ -47,21 +46,18 @@
       {
         "nom": "Lautridou",
         "prenom": "JEAN-YVES",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1962-06",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Carnet (Gaubert)",
         "prenom": "HELENE",
-        "role": "Administrateur représentant des usagers",
         "dateNaissancePartial": "1952-02",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Jonon (De Sio)",
         "prenom": "BRIGITTE",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1960-08",
         "dateNaissanceFull": ""
       },
@@ -88,28 +84,24 @@
       {
         "nom": "Renaud",
         "prenom": "YVES",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1956-01",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Dumans",
         "prenom": "JACQUES",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1954-12",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Bard",
         "prenom": "ALAIN",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1961-11",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Rivard (Pianet)",
         "prenom": "ANNETTE",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1967-05",
         "dateNaissanceFull": ""
       },
@@ -156,14 +148,12 @@
       {
         "nom": "Reis",
         "prenom": "HUGO",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1972-03",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Le Brun",
         "prenom": "AGNES",
-        "role": "Administrateur représentant des communes et de leurs groupements",
         "dateNaissancePartial": "1961-12",
         "dateNaissanceFull": ""
       },
@@ -191,7 +181,6 @@
       {
         "nom": "Neves Da Rocha",
         "prenom": "RUBEN, JOSE",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1974-06",
         "dateNaissanceFull": ""
       },
@@ -233,42 +222,36 @@
       {
         "nom": "Chevet-Dehail",
         "prenom": "STEPHANE",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1975-06",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Joseph",
         "prenom": "SYLVIE",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1961-07",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Baudry",
         "prenom": "IRENE",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1976-05",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Haspot",
         "prenom": "FRANCK",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1967-10",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Fleurence (Legain)",
         "prenom": "ISABELLE",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1964-09",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Fimbel",
         "prenom": "FLORENCE",
-        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1964-09",
         "dateNaissanceFull": ""
       },

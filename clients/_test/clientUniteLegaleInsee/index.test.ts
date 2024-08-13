@@ -16,6 +16,7 @@ function expectClientToMatchSnapshotWithSiren(siren: Siren) {
       __dirname,
       args: [
         siren,
+        1,
         {
           useFallback: false,
           useCache: false,
