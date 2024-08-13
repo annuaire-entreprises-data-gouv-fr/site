@@ -197,6 +197,8 @@ export const createDefaultUniteLegaleComplements =
   };
 
 export interface IEtablissementComplements {
+  // this is used to determined if etablissement belongs to an EI - useful to determinie wether we should use insee
+  estEntrepreneurIndividuel: boolean;
   idFiness: string[];
   idBio: string[];
   idcc: string[];
@@ -208,6 +210,7 @@ export interface IEtablissementComplements {
 export const createDefaultEtablissementComplements =
   (): IEtablissementComplements => {
     return {
+      estEntrepreneurIndividuel: false,
       idFiness: [],
       idBio: [],
       idcc: [],
