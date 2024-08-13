@@ -6,7 +6,6 @@ import {
 import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
 import { InseeClientOptions } from '#clients/sirene-insee';
 import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
-import { clientAllEtablissementsInsee } from '#clients/sirene-insee/siret';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { Siren, verifySiren } from '#utils/helpers';
@@ -283,27 +282,7 @@ const fetchUniteLegaleFromInsee = async (
   inseeOptions: InseeClientOptions
 ) => {
   try {
-    // INSEE requires three calls to get uniteLegale with etablissements and siege
-    const [uniteLegaleInsee, allEtablissementsInsee] = await Promise.all([
-      clientUniteLegaleInsee(siren, inseeOptions),
-      // better empty etablissement list than failing UL
-      clientAllEtablissementsInsee(siren, page, inseeOptions).catch(
-        (e) => null
-      ),
-    ]);
-
-    const etablissements =
-      allEtablissementsInsee?.etablissements || uniteLegaleInsee.etablissements;
-
-    const { currentEtablissementPage = 0, nombreEtablissements = 1 } =
-      etablissements;
-
-    return {
-      ...uniteLegaleInsee,
-      etablissements,
-      currentEtablissementPage,
-      nombreEtablissements,
-    };
+    return await clientUniteLegaleInsee(siren, page, inseeOptions);
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       const uniteLegale = createDefaultUniteLegale(siren);

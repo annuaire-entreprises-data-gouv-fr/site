@@ -8,7 +8,12 @@ import { InseeClientOptions } from '#clients/sirene-insee';
 import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getGeoLoc } from '#models/geo-loc';
-import { Siret, extractSirenFromSiret, verifySiret } from '#utils/helpers';
+import {
+  Siret,
+  extractNicFromSiret,
+  extractSirenFromSiret,
+  verifySiret,
+} from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
@@ -235,11 +240,12 @@ const getEtablissementWithLatLongFromSlug = async (
 /**
  * Create a default etablissement that will be displayed as non diffusible
  */
-const createNonDiffusibleEtablissement = (siret: Siret) => {
+export const createNonDiffusibleEtablissement = (siret: Siret) => {
   const etablissement = createDefaultEtablissement();
   etablissement.siret = siret;
   etablissement.siren = extractSirenFromSiret(siret);
-
+  etablissement.nic = extractNicFromSiret(siret);
+  etablissement.statutDiffusion = ISTATUTDIFFUSION.NON_DIFF_STRICT;
   return etablissement;
 };
 
