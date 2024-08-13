@@ -169,8 +169,8 @@ const mapToDomainObject = (
   )}`.trim();
 
   const nomComplet = `${denominationUniteLegale || names || 'Nom inconnu'}${
-    sigleUniteLegale ? ` (${sigleUniteLegale})` : ''
-  }`;
+    denominationUsuelle ? ` (${denominationUsuelle})` : ''
+  }${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
 
