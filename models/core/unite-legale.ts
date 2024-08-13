@@ -6,10 +6,7 @@ import {
 import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
 import { InseeClientOptions } from '#clients/sirene-insee';
 import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
-import {
-  clientAllEtablissementsInsee,
-  clientSiegeInsee,
-} from '#clients/sirene-insee/siret';
+import { clientAllEtablissementsInsee } from '#clients/sirene-insee/siret';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { Siren, verifySiren } from '#utils/helpers';
@@ -287,29 +284,22 @@ const fetchUniteLegaleFromInsee = async (
 ) => {
   try {
     // INSEE requires three calls to get uniteLegale with etablissements and siege
-    const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
-      await Promise.all([
-        clientUniteLegaleInsee(siren, inseeOptions),
-        // better empty etablissement than failing UL
-        clientAllEtablissementsInsee(siren, page, inseeOptions).catch(
-          (e) => null
-        ),
-        // better empty etablissement than failing UL especially for
-        clientSiegeInsee(siren, inseeOptions).catch(() => null),
-      ]);
-
-    const siege = siegeInsee || uniteLegaleInsee.siege;
+    const [uniteLegaleInsee, allEtablissementsInsee] = await Promise.all([
+      clientUniteLegaleInsee(siren, inseeOptions),
+      // better empty etablissement list than failing UL
+      clientAllEtablissementsInsee(siren, page, inseeOptions).catch(
+        (e) => null
+      ),
+    ]);
 
     const etablissements =
-      allEtablissementsInsee?.etablissements ||
-      createEtablissementsList([siege]);
+      allEtablissementsInsee?.etablissements || uniteLegaleInsee.etablissements;
 
     const { currentEtablissementPage = 0, nombreEtablissements = 1 } =
       etablissements;
 
     return {
       ...uniteLegaleInsee,
-      siege,
       etablissements,
       currentEtablissementPage,
       nombreEtablissements,
