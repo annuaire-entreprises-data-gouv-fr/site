@@ -132,8 +132,7 @@ const mapToDomainObject = (
 
     if (periodesUniteLegale && periodesUniteLegale.length > 0) {
       siege.siren = siren;
-      //@ts-ignore
-      siege.siret = siren + nicSiegeUniteLegale;
+      siege.siret = (siren + nicSiegeUniteLegale) as Siret;
       siege.nic = nicSiegeUniteLegale;
       siege.dateCreation = dateDebut;
       siege.activitePrincipale = activitePrincipaleUniteLegale;
@@ -170,8 +169,8 @@ const mapToDomainObject = (
   )}`.trim();
 
   const nomComplet = `${denominationUniteLegale || names || 'Nom inconnu'}${
-    denominationUsuelle ? ` (${denominationUsuelle})` : ''
-  }${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
+    sigleUniteLegale ? ` (${sigleUniteLegale})` : ''
+  }`;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
 

@@ -48,6 +48,10 @@ const AdministrationDescription: React.FC<{
           )}
           {contact && (
             <p>
+              <a href={`/donnees/sources#${slug}`}>
+                → Télécharger ou réutiliser ces données
+              </a>
+              <br />
               <a rel="noreferrer noopener" target="_blank" href={contact}>
                 → Contacter cette{' '}
                 {estServicePublic ? 'administration' : 'organisation'}
