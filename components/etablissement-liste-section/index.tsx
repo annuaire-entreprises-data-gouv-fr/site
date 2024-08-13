@@ -9,15 +9,12 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { ISession } from '#models/user/session';
-import { Siret, formatDate, formatSiret } from '#utils/helpers';
+import { formatDate, formatSiret } from '#utils/helpers';
 
 const EtablissementTable: React.FC<{
   label?: string;
   etablissements: IEtablissement[];
-  sieges: Siret[];
-  session: ISession | null;
-}> = ({ label, etablissements, sieges = [], session }) => {
+}> = ({ label, etablissements }) => {
   const plural = etablissements.length > 1 ? 's' : '';
   return (
     <>
@@ -63,9 +60,11 @@ const EtablissementTable: React.FC<{
                   )}
                   <>{etablissement.adresse}</>
                 </span>
-                {etablissement.estSiege && <Tag color="info">siège social</Tag>}
-                {sieges.indexOf(etablissement.siret) > 0 &&
-                  !etablissement.estSiege && <Tag>ancien siège social</Tag>}
+                {etablissement.estSiege ? (
+                  <Tag color="info">siège social</Tag>
+                ) : etablissement.ancienSiege ? (
+                  <Tag>ancien siège social</Tag>
+                ) : null}
               </>
             )}
           </>,
@@ -87,8 +86,7 @@ const EtablissementTable: React.FC<{
 
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}> = ({ uniteLegale }) => {
   const {
     usePagination,
     nombreEtablissements,
@@ -127,8 +125,6 @@ const EtablissementListeSection: React.FC<{
           <>
             <EtablissementTable
               etablissements={uniteLegale.etablissements.all}
-              sieges={uniteLegale.allSiegesSiret}
-              session={session}
             />
             <PageCounter
               currentPage={currentEtablissementPage || 1}
@@ -139,34 +135,22 @@ const EtablissementListeSection: React.FC<{
         ) : (
           <>
             {uniteLegale.etablissements.open.length > 0 && (
-              <>
-                <EtablissementTable
-                  label="actif"
-                  etablissements={uniteLegale.etablissements.open}
-                  sieges={uniteLegale.allSiegesSiret}
-                  session={session}
-                />
-              </>
+              <EtablissementTable
+                label="actif"
+                etablissements={uniteLegale.etablissements.open}
+              />
             )}
             {uniteLegale.etablissements.unknown.length > 0 && (
-              <>
-                <EtablissementTable
-                  label="non-diffusible"
-                  etablissements={uniteLegale.etablissements.unknown}
-                  sieges={uniteLegale.allSiegesSiret}
-                  session={session}
-                />
-              </>
+              <EtablissementTable
+                label="non-diffusible"
+                etablissements={uniteLegale.etablissements.unknown}
+              />
             )}
             {uniteLegale.etablissements.closed.length > 0 && (
-              <>
-                <EtablissementTable
-                  label="fermé"
-                  etablissements={uniteLegale.etablissements.closed}
-                  sieges={uniteLegale.allSiegesSiret}
-                  session={session}
-                />
-              </>
+              <EtablissementTable
+                label="fermé"
+                etablissements={uniteLegale.etablissements.closed}
+              />
             )}
           </>
         )}

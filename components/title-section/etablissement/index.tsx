@@ -76,8 +76,7 @@ const TitleEtablissementWithDenomination: React.FC<{
             siège social
           </Tag>
         </>
-      ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 &&
-        !etablissement.estSiege ? (
+      ) : etablissement.ancienSiege ? (
         <>
           un<Tag size="small">ancien siège social</Tag>
         </>

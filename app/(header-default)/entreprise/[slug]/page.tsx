@@ -95,10 +95,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
                 session={session}
               />
             )}
-            <EtablissementListeSection
-              uniteLegale={uniteLegale}
-              session={session}
-            />
+            <EtablissementListeSection uniteLegale={uniteLegale} />
           </>
         )}
       </div>

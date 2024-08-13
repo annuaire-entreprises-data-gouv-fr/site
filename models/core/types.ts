@@ -25,6 +25,7 @@ export interface IEtablissement {
   etatAdministratif: IETATADMINSTRATIF;
   statutDiffusion: ISTATUTDIFFUSION;
   estSiege: boolean;
+  ancienSiege: boolean;
   dateCreation: string;
   dateDerniereMiseAJour: string;
   dateMiseAJourInsee: string;

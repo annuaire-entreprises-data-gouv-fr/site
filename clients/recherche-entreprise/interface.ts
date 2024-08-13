@@ -47,6 +47,7 @@ export type IDirigeant = {
 };
 
 export type IEtablissementCore = {
+  ancien_siege: boolean;
   activite_principale: string;
   adresse: string;
   commune: string;

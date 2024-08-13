@@ -90,7 +90,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
             C’est
             {etablissement.estSiege ? (
               <strong> le siège social</strong>
-            ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 ? (
+            ) : etablissement.ancienSiege ? (
               <> un ancien siège social</>
             ) : (
               <> un établissement secondaire</>
