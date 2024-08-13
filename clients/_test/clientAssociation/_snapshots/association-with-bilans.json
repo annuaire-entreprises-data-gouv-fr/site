@@ -26,6 +26,7 @@
     "dateCreation": "1985-10-16",
     "dateDissolution": "0001-01-01",
     "eligibiliteCEC": true,
+    "impotCommerciaux": false,
     "adresseSiege": "RUE JULES FERRY, 64110 MAZÈRES-LEZONS",
     "adresseGestion": "RUE JULES FERRY, 64110 MAZÈRES-LEZONS, FRANCE",
     "adresseInconsistency": false,
