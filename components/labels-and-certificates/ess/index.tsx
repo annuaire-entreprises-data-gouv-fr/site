@@ -27,7 +27,7 @@ const ESSNotFound = () => (
   <>
     Cette structure <strong>n’apparait pas</strong> dans la liste des
     entreprises de <ESSFAQLink /> tenue par <ESSFrance />, tandis que l’
-    <INSEE /> indique qu’elle releve du champ de l’ESS, ce qui est inhabituel.
+    <INSEE /> indique qu’elle relève du champ de l’ESS, ce qui est inhabituel.
     <p>Il existe plusieurs explications possibles :</p>
     <ul>
       <li>soit c’est une société commerciale de l’ESS</li>
