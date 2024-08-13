@@ -9,7 +9,6 @@ import {
 import { estActif } from '#models/core/etat-administratif';
 import { IEtablissement, createDefaultEtablissement } from '#models/core/types';
 import {
-  Siren,
   Siret,
   agregateTripleFields,
   extractSirenFromSiret,
@@ -149,25 +148,6 @@ const clientEtablissementInsee = async (
     );
   }
   return mapEtablissementToDomainObject(etablissement, siret);
-};
-
-const clientSiegeInsee = async (
-  siren: Siren,
-  options: InseeClientOptions
-): Promise<IEtablissement> => {
-  const { useCache, useFallback } = options;
-  const { etablissements } = await inseeClientGet<IInseeEtablissementResponse>(
-    routes.sireneInsee.siret,
-    {
-      params: {
-        q: `etablissementSiege:true AND siren:${siren}`,
-      },
-      useCache,
-    },
-    useFallback
-  );
-
-  return mapEtablissementToDomainObject(etablissements[0]);
 };
 
 const mapEtablissementToDomainObject = (
@@ -314,12 +294,7 @@ const stubbedClientEtablissementInsee = stubClientWithSnapshots({
   clientEtablissementInsee,
 });
 
-const stubbedClientSiegeInsee = stubClientWithSnapshots({
-  clientSiegeInsee,
-});
-
 export {
   stubbedClientAllEtablissementsInsee as clientAllEtablissementsInsee,
   stubbedClientEtablissementInsee as clientEtablissementInsee,
-  stubbedClientSiegeInsee as clientSiegeInsee,
 };

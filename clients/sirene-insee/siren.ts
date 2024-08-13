@@ -1,11 +1,12 @@
+import { HttpForbiddenError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
+import { createNonDiffusibleEtablissement } from '#models/core/etablissement';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { estActif } from '#models/core/etat-administratif';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
-  IEtablissement,
   IUniteLegale,
 } from '#models/core/types';
 import {
@@ -26,7 +27,10 @@ import {
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
 } from '../../utils/helpers/insee-variables';
-import { clientSiegeInsee } from './siret';
+import {
+  clientAllEtablissementsInsee,
+  clientEtablissementInsee,
+} from './siret';
 
 type IInseeUniteLegaleResponse = {
   uniteLegale: {
@@ -67,28 +71,75 @@ type IPeriodeUniteLegale = {
   denominationUsuelle3UniteLegale: string;
 };
 
+type TmpUniteLegale = {
+  uniteLegale: IUniteLegale;
+  tmpUniteLegale: {
+    denomination: string;
+    denominationUsuelle: string;
+    sigle: string;
+  };
+};
+
 const clientUniteLegaleInsee = async (
+  siren: Siren,
+  page = 1,
+  options: InseeClientOptions
+): Promise<IUniteLegale> => {
+  const { uniteLegale, tmpUniteLegale } = await clientTmpUniteLegale(
+    siren,
+    options
+  );
+
+  const siretSiege = uniteLegale.siege.siret;
+
+  const [realSiege, allEtablissements] = await Promise.all([
+    clientEtablissementInsee(siretSiege, options).catch((e) => {
+      if (e instanceof HttpForbiddenError) {
+        return createNonDiffusibleEtablissement(uniteLegale.siege.siret);
+      }
+      return null;
+    }), // better empty etablissement list than failing UL
+    clientAllEtablissementsInsee(siren, page, options).catch((e) => null),
+  ]);
+
+  const siege = realSiege || uniteLegale.siege;
+
+  const denominationUsuelle =
+    siege?.denomination || tmpUniteLegale.denominationUsuelle || '';
+
+  const nomComplet = `${tmpUniteLegale.denomination}${
+    denominationUsuelle ? ` (${denominationUsuelle})` : ''
+  }${tmpUniteLegale.sigle ? ` (${tmpUniteLegale.sigle})` : ''}`;
+
+  const etablissements =
+    allEtablissements?.etablissements || createEtablissementsList([siege]);
+
+  return {
+    ...uniteLegale,
+    siege,
+    nomComplet,
+    etablissements,
+  };
+};
+
+const clientTmpUniteLegale = async (
   siren: Siren,
   options: InseeClientOptions
 ) => {
   const { useCache, useFallback } = options;
-  const [dataUniteLegale, siege] = await Promise.all([
-    inseeClientGet<IInseeUniteLegaleResponse>(
-      routes.sireneInsee.siren + siren,
-      { useCache },
-      useFallback
-    ),
-    clientSiegeInsee(siren, options).catch(() => null),
-  ]);
+  const dataUniteLegale = await inseeClientGet<IInseeUniteLegaleResponse>(
+    routes.sireneInsee.siren + siren,
+    { useCache },
+    useFallback
+  );
 
-  return mapToDomainObject(siren, dataUniteLegale, siege);
+  return mapToDomainObject(siren, dataUniteLegale);
 };
 
 const mapToDomainObject = (
   originalSiren: Siren,
-  response: IInseeUniteLegaleResponse,
-  siege: IEtablissement | null
-): IUniteLegale => {
+  response: IInseeUniteLegaleResponse
+): TmpUniteLegale => {
   const {
     siren,
     sigleUniteLegale,
@@ -127,19 +178,17 @@ const mapToDomainObject = (
     false
   );
 
-  if (!siege) {
-    siege = createDefaultEtablissement();
+  const siege = createDefaultEtablissement();
 
-    if (periodesUniteLegale && periodesUniteLegale.length > 0) {
-      siege.siren = siren;
-      siege.siret = (siren + nicSiegeUniteLegale) as Siret;
-      siege.nic = nicSiegeUniteLegale;
-      siege.dateCreation = dateDebut;
-      siege.activitePrincipale = activitePrincipaleUniteLegale;
-      siege.libelleActivitePrincipale = libelleActivitePrincipaleUniteLegale;
-      siege.estSiege = true;
-      siege.trancheEffectif = '';
-    }
+  if (periodesUniteLegale && periodesUniteLegale.length > 0) {
+    siege.nic = nicSiegeUniteLegale;
+    siege.siren = siren;
+    siege.siret = (siren + nicSiegeUniteLegale) as Siret;
+    siege.dateCreation = dateDebut;
+    siege.activitePrincipale = '';
+    siege.libelleActivitePrincipale = '';
+    siege.estSiege = true;
+    siege.trancheEffectif = '';
   }
 
   const allSiegesSiret = Array.from(
@@ -152,7 +201,7 @@ const mapToDomainObject = (
    *   either siege nom commercial or pre 2008 unite legale nom commercial
    *  https://www.sirene.fr/sirene/public/variable/denominationUsuelleEtablissement
    */
-  const denominationUsuelle =
+  const denominationUsuelleUniteLegale =
     siege.denomination ||
     agregateTripleFields(
       denominationUsuelle1UniteLegale,
@@ -167,10 +216,6 @@ const mapToDomainObject = (
     nomUniteLegale,
     nomUsageUniteLegale
   )}`.trim();
-
-  const nomComplet = `${denominationUniteLegale || names || 'Nom inconnu'}${
-    denominationUsuelle ? ` (${denominationUsuelle})` : ''
-  }${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
 
@@ -188,44 +233,51 @@ const mapToDomainObject = (
   );
 
   return {
-    ...defaultUniteLegale,
-    siren,
-    oldSiren: originalSiren,
-    siege,
-    allSiegesSiret,
-    natureJuridique: categorieJuridiqueUniteLegale || '',
-    libelleNatureJuridique: libelleFromCategoriesJuridiques(
-      categorieJuridiqueUniteLegale
-    ),
-    activitePrincipale: activitePrincipaleUniteLegale,
-    libelleActivitePrincipale: libelleActivitePrincipaleUniteLegale,
-    etablissements: createEtablissementsList([siege]),
-    dateCreation: parseDateCreationInsee(dateCreationUniteLegale),
-    dateDerniereMiseAJour: new Date().toISOString(),
-    dateMiseAJourInsee: dateDernierTraitement,
-    dateMiseAJourInpi: '',
-    dateDebutActivite: dateDebut,
-    dateFermeture: !estActif({ etatAdministratif }) ? dateDebut : '',
-    etatAdministratif,
-    statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
-      statutDiffusionUniteLegale,
-      siren
-    ),
-    nomComplet,
-    chemin: siren,
-    trancheEffectif:
-      trancheEffectifsUniteLegale ??
-      (caractereEmployeurUniteLegale === 'N' ? 'N' : null),
-    anneeTrancheEffectif: anneeEffectifsUniteLegale,
-    categorieEntreprise,
-    anneeCategorieEntreprise,
-    complements: {
-      ...defaultUniteLegale.complements,
-      estEntrepreneurIndividuel,
-      estEss: economieSocialeSolidaireUniteLegale === 'O',
+    uniteLegale: {
+      ...defaultUniteLegale,
+      siren,
+      oldSiren: originalSiren,
+      siege,
+      allSiegesSiret,
+      natureJuridique: categorieJuridiqueUniteLegale || '',
+      libelleNatureJuridique: libelleFromCategoriesJuridiques(
+        categorieJuridiqueUniteLegale
+      ),
+      activitePrincipale: activitePrincipaleUniteLegale,
+      libelleActivitePrincipale: libelleActivitePrincipaleUniteLegale,
+      etablissements: createEtablissementsList([siege]),
+      dateCreation: parseDateCreationInsee(dateCreationUniteLegale),
+      dateDerniereMiseAJour: new Date().toISOString(),
+      dateMiseAJourInsee: dateDernierTraitement,
+      dateMiseAJourInpi: '',
+      dateDebutActivite: dateDebut,
+      dateFermeture: !estActif({ etatAdministratif }) ? dateDebut : '',
+      etatAdministratif,
+      statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
+        statutDiffusionUniteLegale,
+        siren
+      ),
+      nomComplet: '',
+      chemin: siren,
+      trancheEffectif:
+        trancheEffectifsUniteLegale ??
+        (caractereEmployeurUniteLegale === 'N' ? 'N' : null),
+      anneeTrancheEffectif: anneeEffectifsUniteLegale,
+      categorieEntreprise,
+      anneeCategorieEntreprise,
+      complements: {
+        ...defaultUniteLegale.complements,
+        estEntrepreneurIndividuel,
+        estEss: economieSocialeSolidaireUniteLegale === 'O',
+      },
+      association: {
+        idAssociation: identifiantAssociationUniteLegale || null,
+      },
     },
-    association: {
-      idAssociation: identifiantAssociationUniteLegale || null,
+    tmpUniteLegale: {
+      denominationUsuelle: denominationUsuelleUniteLegale,
+      denomination: denominationUniteLegale || names || 'Nom inconnu',
+      sigle: sigleUniteLegale,
     },
   };
 };

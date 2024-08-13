@@ -33,7 +33,7 @@ const ping = async (slug: string | string[]) => {
       // fetch IRM and disable cache
       return await fetchRNEImmatriculation(sirenDanone, useCache);
     case 'api-sirene-insee':
-      return await clientUniteLegaleInsee(sirenGanymede, {
+      return await clientUniteLegaleInsee(sirenGanymede, 1, {
         useCache,
         useFallback: false,
       });
