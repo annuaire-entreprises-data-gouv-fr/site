@@ -23,16 +23,28 @@ describe('Siren / Siret redirections', () => {
     cy.url().should('include', '/entreprise/123456789');
   });
 
+  it('Not found redirection', () => {
+    cy.visit('/');
+
+    cy.get('.fr-search-bar > input')
+      .type('123 456 789 00003')
+      .should('have.value', '123 456 789 00003');
+
+    cy.get('.fr-search-bar > button').click();
+
+    cy.url().should('include', '/erreur/introuvable/12345678900003');
+  });
+
   it('Unformatted siret redirection', () => {
     cy.visit('/');
 
     cy.get('.fr-search-bar > input')
-      .type('123 456 789 0 0003')
-      .should('have.value', '123 456 789 0 0003');
+      .type('487 444 697 00428')
+      .should('have.value', '487 444 697 00428');
 
     cy.get('.fr-search-bar > button').click();
 
-    cy.url().should('include', '/etablissement/12345678900003');
+    cy.url().should('include', '/etablissement/48744469700428');
   });
 
   it('Entreprise/etablissement page redirection', () => {
