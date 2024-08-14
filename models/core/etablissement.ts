@@ -167,7 +167,7 @@ const fetchEtablissmentFromInsee = async (
     }
 
     if (!options.useFallback) {
-      return await clientEtablissementInsee(siret, {
+      return await fetchEtablissmentFromInsee(siret, {
         ...options,
         useFallback: true,
       });
@@ -189,34 +189,33 @@ const fetchEtablissmentFromInsee = async (
 
 const fetchEtablissementFromRechercheEntreprise = async (
   siret: Siret,
-  useCache = false
+  useCache = false,
+  useFallback = false
 ): Promise<IEtablissement | IAPINotRespondingError> => {
   try {
     return await clientEtablissementRechercheEntreprise(siret, useCache);
-  } catch (firstFallback: any) {
-    if (!(firstFallback instanceof HttpNotFound)) {
-      try {
-        const useFallback = true;
-        return await clientEtablissementRechercheEntreprise(
-          siret,
-          useCache,
-          useFallback
-        );
-      } catch (eFallback: any) {
-        if (!(eFallback instanceof HttpNotFound)) {
-          logFatalErrorInSentry(
-            new FetchEtablissementException({
-              message: 'Fail to fetch from Search API',
-              cause: firstFallback,
-              administration: EAdministration.DINUM,
-              context: {
-                siret,
-              },
-            })
-          );
-        }
-      }
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      return APINotRespondingFactory(EAdministration.DINUM, 404);
     }
+    if (!useFallback) {
+      return await fetchEtablissementFromRechercheEntreprise(
+        siret,
+        useCache,
+        true
+      );
+    }
+
+    logFatalErrorInSentry(
+      new FetchEtablissementException({
+        message: 'Fail to fetch from Search API',
+        cause: e,
+        administration: EAdministration.DINUM,
+        context: {
+          siret,
+        },
+      })
+    );
 
     return APINotRespondingFactory(EAdministration.DINUM, 500);
   }

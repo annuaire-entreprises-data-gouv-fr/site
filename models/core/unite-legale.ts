@@ -16,6 +16,7 @@ import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
 import {
   APINotRespondingFactory,
+  IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
 } from '../api-not-responding';
@@ -230,8 +231,9 @@ class UniteLegaleBuilder {
 const fetchUniteLegaleFromRechercheEntreprise = async (
   siren: Siren,
   pageEtablissements: number,
-  useCache: boolean
-) => {
+  useCache: boolean,
+  useFallback = false
+): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
     const useFallback = false;
     return await clientUniteLegaleRechercheEntreprise(
@@ -244,34 +246,26 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DINUM, 404);
     }
-    if (!(e instanceof HttpNotFound)) {
-      try {
-        const forceFallback = true;
-        return await clientUniteLegaleRechercheEntreprise(
-          siren,
-          pageEtablissements,
-          forceFallback,
-          useCache
-        );
-      } catch (eFallback: any) {
-        if (eFallback instanceof HttpNotFound) {
-          return APINotRespondingFactory(EAdministration.DINUM, 404);
-        }
-        if (!(eFallback instanceof HttpNotFound)) {
-          logFatalErrorInSentry(
-            new FetchRessourceException({
-              cause: eFallback,
-              ressource: 'UniteLegale',
-              administration: EAdministration.DINUM,
-              context: {
-                siren,
-              },
-            })
-          );
-        }
-      }
+    if (!useFallback) {
+      const forceFallback = true;
+      return await fetchUniteLegaleFromRechercheEntreprise(
+        siren,
+        pageEtablissements,
+        forceFallback,
+        useCache
+      );
     }
-    // we dont care about the type of exception here as HttpNotFound and HttpServerError will both be useless to us
+    logFatalErrorInSentry(
+      new FetchRessourceException({
+        cause: e,
+        ressource: 'UniteLegale',
+        administration: EAdministration.DINUM,
+        context: {
+          siren,
+        },
+      })
+    );
+
     return APINotRespondingFactory(EAdministration.DINUM, 500);
   }
 };
@@ -283,7 +277,7 @@ const fetchUniteLegaleFromInsee = async (
   siren: Siren,
   page = 1,
   inseeOptions: InseeClientOptions
-) => {
+): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
     return await clientUniteLegaleInsee(siren, page, inseeOptions);
   } catch (e: any) {
@@ -299,7 +293,7 @@ const fetchUniteLegaleFromInsee = async (
     }
 
     if (!inseeOptions.useFallback) {
-      return await clientUniteLegaleInsee(siren, page, {
+      return await fetchUniteLegaleFromInsee(siren, page, {
         ...inseeOptions,
         useFallback: true,
       });

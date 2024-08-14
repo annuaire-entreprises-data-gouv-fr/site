@@ -4,7 +4,7 @@ import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot'
 import simplifyParams from './simplify-params';
 
 describe('clientUniteLegaleInsee', () => {
-  (['908595879', '883010316'] as Siren[]).forEach(
+  (['908595879', '883010316', '300025764'] as Siren[]).forEach(
     expectClientToMatchSnapshotWithSiren
   );
 });
