@@ -50,8 +50,7 @@ const EtablissementSection: React.FC<IProps> = ({
             <>
               {etablissement.estSiege ? (
                 <Tag color="info">siège social</Tag>
-              ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) >
-                -1 ? (
+              ) : etablissement.ancienSiege ? (
                 <Tag>ancien siège social</Tag>
               ) : (
                 <Tag>secondaire</Tag>

@@ -99,7 +99,7 @@ const clientUniteLegaleInsee = async (
       }
       return null;
     }), // better empty etablissement list than failing UL
-    clientAllEtablissementsInsee(siren, page, options).catch((e) => null),
+    clientAllEtablissementsInsee(siren, page, options).catch(() => null),
   ]);
 
   const siege = realSiege || uniteLegale.siege;
@@ -111,8 +111,17 @@ const clientUniteLegaleInsee = async (
     denominationUsuelle ? ` (${denominationUsuelle})` : ''
   }${tmpUniteLegale.sigle ? ` (${tmpUniteLegale.sigle})` : ''}`;
 
-  const etablissements =
-    allEtablissements?.etablissements || createEtablissementsList([siege]);
+  const etablissementsList = allEtablissements?.list || [siege];
+  etablissementsList.forEach(
+    (e) =>
+      (e.ancienSiege = uniteLegale.anciensSiegesSirets.indexOf(e.siret) > -1)
+  );
+
+  const etablissements = createEtablissementsList(
+    etablissementsList,
+    allEtablissements?.page || 1,
+    allEtablissements?.count || 1
+  );
 
   return {
     ...uniteLegale,
@@ -191,12 +200,6 @@ const mapToDomainObject = (
     siege.trancheEffectif = '';
   }
 
-  const allSiegesSiret = Array.from(
-    new Set(
-      periodesUniteLegale.map((e) => (siren + e.nicSiegeUniteLegale) as Siret)
-    )
-  );
-
   /**
    *   either siege nom commercial or pre 2008 unite legale nom commercial
    *  https://www.sirene.fr/sirene/public/variable/denominationUsuelleEtablissement
@@ -238,7 +241,13 @@ const mapToDomainObject = (
       siren,
       oldSiren: originalSiren,
       siege,
-      allSiegesSiret,
+      anciensSiegesSirets: Array.from(
+        new Set(
+          periodesUniteLegale
+            .map((e) => (siren + e.nicSiegeUniteLegale) as Siret)
+            .filter((e) => e !== siege.siret)
+        )
+      ),
       natureJuridique: categorieJuridiqueUniteLegale || '',
       libelleNatureJuridique: libelleFromCategoriesJuridiques(
         categorieJuridiqueUniteLegale

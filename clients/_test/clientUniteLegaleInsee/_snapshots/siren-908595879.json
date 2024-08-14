@@ -14,7 +14,7 @@
       "denomination": "",
       "nic": "00010",
       "dateCreation": "2022-01-01",
-      "dateDerniereMiseAJour": "2024-08-13T14:42:14.566Z",
+      "dateDerniereMiseAJour": "2024-08-14T13:22:31.528Z",
       "dateMiseAJourInsee": "2024-03-29T23:18:52.426",
       "dateDebutActivite": "",
       "dateFermeture": null,
@@ -39,10 +39,8 @@
       },
       "anneeTrancheEffectif": null
     },
-    "allSiegesSiret": [
-      "90859587900010"
-    ],
     "tva": null,
+    "anciensSiegesSirets": [],
     "statutDiffusion": "diffusible",
     "etatAdministratif": "en activité",
     "nomComplet": "SEVERNAYA",
@@ -62,7 +60,7 @@
           "denomination": "",
           "nic": "00010",
           "dateCreation": "2022-01-01",
-          "dateDerniereMiseAJour": "2024-08-13T14:42:14.598Z",
+          "dateDerniereMiseAJour": "2024-08-14T13:22:31.559Z",
           "dateMiseAJourInsee": "2024-03-29T23:18:52.426",
           "dateDebutActivite": "",
           "dateFermeture": null,
@@ -85,7 +83,8 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": null
+          "anneeTrancheEffectif": null,
+          "ancienSiege": false
         }
       ],
       "open": [
@@ -100,7 +99,7 @@
           "denomination": "",
           "nic": "00010",
           "dateCreation": "2022-01-01",
-          "dateDerniereMiseAJour": "2024-08-13T14:42:14.598Z",
+          "dateDerniereMiseAJour": "2024-08-14T13:22:31.559Z",
           "dateMiseAJourInsee": "2024-03-29T23:18:52.426",
           "dateDebutActivite": "",
           "dateFermeture": null,
@@ -123,7 +122,8 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": null
+          "anneeTrancheEffectif": null,
+          "ancienSiege": false
         }
       ],
       "unknown": [],

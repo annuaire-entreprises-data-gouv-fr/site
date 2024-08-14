@@ -16,6 +16,7 @@ import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
 import {
   APINotRespondingFactory,
+  IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
 } from '../api-not-responding';
@@ -161,20 +162,10 @@ class UniteLegaleBuilder {
       return uniteLegaleRechercheEntreprise;
     }
 
-    /**
-     * Siren in Sirene API, not in stocks
-     */
-    if (
-      isAPI404(uniteLegaleRechercheEntreprise) &&
-      !isAPINotResponding(uniteLegaleInsee)
-    ) {
-      return uniteLegaleInsee;
-    }
-
-    /***
-     * Sirene Insee failed
-     */
     if (isAPINotResponding(uniteLegaleInsee)) {
+      /***
+       * Sirene Insee failed
+       */
       if (isAPI404(uniteLegaleRechercheEntreprise)) {
         throw new SirenNotFoundError(this._siren);
       } else if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
@@ -182,13 +173,26 @@ class UniteLegaleBuilder {
       } else {
         return uniteLegaleRechercheEntreprise;
       }
-    }
-
-    /**
-     * Recherche failed
-     */
-    if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-      return uniteLegaleInsee;
+    } else {
+      /**
+       * Sirene succeed but siren not in recherhce or recherche failed
+       */
+      if (
+        isAPINotResponding(uniteLegaleRechercheEntreprise) ||
+        isAPI404(uniteLegaleRechercheEntreprise)
+      ) {
+        logWarningInSentry(
+          new FetchRessourceException({
+            ressource: 'UniteLegaleRecherche',
+            administration: EAdministration.DINUM,
+            message: 'Fail to find siren in recherche API',
+            context: {
+              siren: this._siren,
+            },
+          })
+        );
+        return uniteLegaleInsee;
+      }
     }
 
     /**
@@ -227,8 +231,9 @@ class UniteLegaleBuilder {
 const fetchUniteLegaleFromRechercheEntreprise = async (
   siren: Siren,
   pageEtablissements: number,
-  useCache: boolean
-) => {
+  useCache: boolean,
+  useFallback = false
+): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
     const useFallback = false;
     return await clientUniteLegaleRechercheEntreprise(
@@ -241,34 +246,26 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DINUM, 404);
     }
-    if (!(e instanceof HttpNotFound)) {
-      try {
-        const forceFallback = true;
-        return await clientUniteLegaleRechercheEntreprise(
-          siren,
-          pageEtablissements,
-          forceFallback,
-          useCache
-        );
-      } catch (eFallback: any) {
-        if (eFallback instanceof HttpNotFound) {
-          return APINotRespondingFactory(EAdministration.DINUM, 404);
-        }
-        if (!(eFallback instanceof HttpNotFound)) {
-          logFatalErrorInSentry(
-            new FetchRessourceException({
-              cause: eFallback,
-              ressource: 'UniteLegale',
-              administration: EAdministration.DINUM,
-              context: {
-                siren,
-              },
-            })
-          );
-        }
-      }
+    if (!useFallback) {
+      const forceFallback = true;
+      return await fetchUniteLegaleFromRechercheEntreprise(
+        siren,
+        pageEtablissements,
+        forceFallback,
+        useCache
+      );
     }
-    // we dont care about the type of exception here as HttpNotFound and HttpServerError will both be useless to us
+    logFatalErrorInSentry(
+      new FetchRessourceException({
+        cause: e,
+        ressource: 'UniteLegale',
+        administration: EAdministration.DINUM,
+        context: {
+          siren,
+        },
+      })
+    );
+
     return APINotRespondingFactory(EAdministration.DINUM, 500);
   }
 };
@@ -280,7 +277,7 @@ const fetchUniteLegaleFromInsee = async (
   siren: Siren,
   page = 1,
   inseeOptions: InseeClientOptions
-) => {
+): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
     return await clientUniteLegaleInsee(siren, page, inseeOptions);
   } catch (e: any) {
@@ -293,6 +290,13 @@ const fetchUniteLegaleFromInsee = async (
     }
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INSEE, 404);
+    }
+
+    if (!inseeOptions.useFallback) {
+      return await fetchUniteLegaleFromInsee(siren, page, {
+        ...inseeOptions,
+        useFallback: true,
+      });
     }
 
     logWarningInSentry(

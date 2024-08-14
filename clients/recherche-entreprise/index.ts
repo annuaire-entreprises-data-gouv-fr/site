@@ -334,6 +334,7 @@ const mapToEtablissement = (
     liste_enseignes,
     etat_administratif,
     est_siege = false,
+    ancien_siege = false,
     nom_commercial = '',
     activite_principale = '',
     date_creation = '',
@@ -382,6 +383,7 @@ const mapToEtablissement = (
     latitude,
     longitude,
     estSiege: est_siege,
+    ancienSiege: ancien_siege,
     etatAdministratif,
     statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
       statut_diffusion_etablissement || 'O',

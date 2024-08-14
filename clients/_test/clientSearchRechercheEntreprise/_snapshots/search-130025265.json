@@ -46,10 +46,11 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "DIRECTION INTERMINISTERIELLE DU NUMERIQUE (DINUM)",
@@ -92,7 +93,8 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -130,7 +132,8 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],

@@ -2,10 +2,6 @@ import { HttpNotFound, HttpServerError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
-import {
-  IEtablissementsList,
-  createEtablissementsList,
-} from '#models/core/etablissements-list';
 import { estActif } from '#models/core/etat-administratif';
 import { IEtablissement, createDefaultEtablissement } from '#models/core/types';
 import {
@@ -97,7 +93,11 @@ const clientAllEtablissementsInsee = async (
   siren: string,
   page = 1,
   options: InseeClientOptions
-): Promise<IEtablissementsList> => {
+): Promise<{
+  list: IEtablissement[];
+  page: number;
+  count: number;
+}> => {
   const etablissementsPerPage = constants.resultsPerPage.etablissements;
   const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
 
@@ -121,11 +121,9 @@ const clientAllEtablissementsInsee = async (
   );
 
   return {
-    etablissements: createEtablissementsList(
-      allEtablissements,
-      page,
-      header.total
-    ),
+    list: allEtablissements,
+    page,
+    count: header.total,
   };
 };
 

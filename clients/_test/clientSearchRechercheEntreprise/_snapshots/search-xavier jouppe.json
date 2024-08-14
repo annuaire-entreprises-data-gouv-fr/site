@@ -46,10 +46,11 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": null
+          "anneeTrancheEffectif": null,
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "SCI DE LASLAUDIE",
@@ -92,7 +93,8 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": null
+              "anneeTrancheEffectif": null,
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -130,7 +132,8 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": null
+              "anneeTrancheEffectif": null,
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -277,10 +280,11 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "cessée",
         "nomComplet": "GANYMEDE",
@@ -323,7 +327,8 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [],
@@ -363,7 +368,8 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "nombreEtablissementsOuverts": 0,

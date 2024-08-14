@@ -15,13 +15,17 @@ import {
   verifySiret,
 } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
-import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
+import logErrorInSentry, {
+  logFatalErrorInSentry,
+  logWarningInSentry,
+} from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
+  isAPI404,
   isAPINotResponding,
 } from '../api-not-responding';
 import { FetchRessourceException, IExceptionContext } from '../exceptions';
@@ -81,6 +85,9 @@ const fetchFromClients = async (
   );
 
   if (!useInsee) {
+    if (isAPI404(etablissementRechercheEntreprise)) {
+      throw new SiretNotFoundError(siret);
+    }
     if (isAPINotResponding(etablissementRechercheEntreprise)) {
       throw new HttpServerError('Recherche failed, return 500');
     }
@@ -92,35 +99,57 @@ const fetchFromClients = async (
     useCache,
   });
 
+  /**
+   * Nowhere to be found
+   */
+  if (
+    isAPI404(etablissementRechercheEntreprise) &&
+    isAPI404(etablissementInsee)
+  ) {
+    throw new SiretNotFoundError(siret);
+  }
+
   if (isAPINotResponding(etablissementInsee)) {
-    if (isAPINotResponding(etablissementRechercheEntreprise)) {
-      const etablissmentInseeFallbacked = await fetchEtablissmentFromInsee(
-        siret,
-        {
-          useFallback: true,
-          useCache,
-        }
-      );
-      if (isAPINotResponding(etablissmentInseeFallbacked)) {
-        throw new HttpServerError('Sirene Insee fallback failed, return 500');
-      }
-      return etablissmentInseeFallbacked;
+    /***
+     * Sirene Insee failed
+     */
+    if (isAPI404(etablissementRechercheEntreprise)) {
+      throw new SiretNotFoundError(siret);
+    } else if (isAPINotResponding(etablissementRechercheEntreprise)) {
+      throw new HttpServerError('Both API failed');
     } else {
       return etablissementRechercheEntreprise;
     }
   } else {
-    if (isAPINotResponding(etablissementRechercheEntreprise)) {
+    /**
+     * Sirene succeed but siret is not in recherhce or recherche failed
+     */
+    if (
+      isAPINotResponding(etablissementRechercheEntreprise) ||
+      isAPI404(etablissementRechercheEntreprise)
+    ) {
+      logWarningInSentry(
+        new FetchRessourceException({
+          ressource: 'UniteLegaleRecherche',
+          administration: EAdministration.DINUM,
+          message: 'Fail to find siret in recherche API',
+          context: {
+            siret,
+          },
+        })
+      );
       return etablissementInsee;
-    } else {
-      return {
-        ...etablissementInsee,
-        complements: {
-          ...etablissementInsee?.complements,
-          ...etablissementRechercheEntreprise.complements,
-        },
-      };
     }
   }
+
+  // default case
+  return {
+    ...etablissementInsee,
+    complements: {
+      ...etablissementInsee?.complements,
+      ...etablissementRechercheEntreprise.complements,
+    },
+  };
 };
 
 const fetchEtablissmentFromInsee = async (
@@ -135,6 +164,13 @@ const fetchEtablissmentFromInsee = async (
     }
     if (e instanceof HttpNotFound) {
       throw new SiretNotFoundError(siret);
+    }
+
+    if (!options.useFallback) {
+      return await fetchEtablissmentFromInsee(siret, {
+        ...options,
+        useFallback: true,
+      });
     }
 
     logErrorInSentry(
@@ -153,34 +189,33 @@ const fetchEtablissmentFromInsee = async (
 
 const fetchEtablissementFromRechercheEntreprise = async (
   siret: Siret,
-  useCache = false
+  useCache = false,
+  useFallback = false
 ): Promise<IEtablissement | IAPINotRespondingError> => {
   try {
     return await clientEtablissementRechercheEntreprise(siret, useCache);
-  } catch (firstFallback: any) {
-    if (!(firstFallback instanceof HttpNotFound)) {
-      try {
-        const useFallback = true;
-        return await clientEtablissementRechercheEntreprise(
-          siret,
-          useCache,
-          useFallback
-        );
-      } catch (eFallback: any) {
-        if (!(eFallback instanceof HttpNotFound)) {
-          logFatalErrorInSentry(
-            new FetchEtablissementException({
-              message: 'Fail to fetch from Search API',
-              cause: firstFallback,
-              administration: EAdministration.DINUM,
-              context: {
-                siret,
-              },
-            })
-          );
-        }
-      }
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      return APINotRespondingFactory(EAdministration.DINUM, 404);
     }
+    if (!useFallback) {
+      return await fetchEtablissementFromRechercheEntreprise(
+        siret,
+        useCache,
+        true
+      );
+    }
+
+    logFatalErrorInSentry(
+      new FetchEtablissementException({
+        message: 'Fail to fetch from Search API',
+        cause: e,
+        administration: EAdministration.DINUM,
+        context: {
+          siret,
+        },
+      })
+    );
 
     return APINotRespondingFactory(EAdministration.DINUM, 500);
   }
@@ -211,20 +246,28 @@ const getEtablissementWithUniteLegaleFromSlug = async (
   const etablissement = await getEtablissementFromSlug(slug, {
     isBot,
   });
+
   const uniteLegale = await getUniteLegaleFromSlug(etablissement.siren, {
     isBot,
   });
+
+  // only for insee as recherche already holds ancienSiege at etablissement level
+  if (uniteLegale.anciensSiegesSirets.indexOf(etablissement.siret)) {
+    etablissement.ancienSiege = true;
+  }
 
   return { etablissement, uniteLegale };
 };
 
 /**
  * Download Etablissement and the Latitude/longitude
+ *
  */
 const getEtablissementWithLatLongFromSlug = async (
   slug: string
 ): Promise<IEtablissement> => {
   const etablissement = await getEtablissementFromSlug(slug);
+
   if (!etablissement.latitude || !etablissement.longitude) {
     const { lat, long } = await getGeoLoc(etablissement);
     etablissement.latitude = lat;

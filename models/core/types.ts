@@ -25,6 +25,7 @@ export interface IEtablissement {
   etatAdministratif: IETATADMINSTRATIF;
   statutDiffusion: ISTATUTDIFFUSION;
   estSiege: boolean;
+  ancienSiege: boolean;
   dateCreation: string;
   dateDerniereMiseAJour: string;
   dateMiseAJourInsee: string;
@@ -87,7 +88,8 @@ export interface IUniteLegale extends IEtablissementsList {
   oldSiren: Siren;
   tva: ITVAIntracommunautaire | null;
   siege: IEtablissement;
-  allSiegesSiret: Siret[];
+  // only used to pass information from unitelegale to the etablissement in insee response. Prefer etablissement.ancienSiege
+  anciensSiegesSirets: Siret[];
   natureJuridique: string;
   libelleNatureJuridique: string;
   activitePrincipale: string;
@@ -123,8 +125,8 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     siren,
     oldSiren: siren,
     siege,
-    allSiegesSiret: [],
     tva: null,
+    anciensSiegesSirets: [],
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif: IETATADMINSTRATIF.INCONNU,
     nomComplet: '',

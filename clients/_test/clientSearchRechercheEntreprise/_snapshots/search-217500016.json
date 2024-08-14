@@ -51,10 +51,11 @@
               "0755710Z"
             ]
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "VILLE DE PARIS",
@@ -102,7 +103,8 @@
                   "0755710Z"
                 ]
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -145,7 +147,8 @@
                   "0755710Z"
                 ]
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],

@@ -48,10 +48,11 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": null
+          "anneeTrancheEffectif": null,
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "SEVERNAYA",
@@ -96,7 +97,8 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": null
+              "anneeTrancheEffectif": null,
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -136,7 +138,8 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": null
+              "anneeTrancheEffectif": null,
+              "ancienSiege": false
             }
           ],
           "unknown": [],

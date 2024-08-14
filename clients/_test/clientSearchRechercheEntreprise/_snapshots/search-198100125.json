@@ -50,10 +50,11 @@
               "0810012Y"
             ]
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "LYCEE POLYVALENT JEAN JAURES",
@@ -100,7 +101,8 @@
                   "0810012Y"
                 ]
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -142,7 +144,8 @@
                   "0810012Y"
                 ]
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],
