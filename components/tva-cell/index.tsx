@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
@@ -125,8 +124,9 @@ const VerifyTVA: React.FC<{
                 tabIndex={0}
                 label={
                   <>
-                    Attention, cette structure a plusieurs activités différentes
-                    .<br />
+                    Attention, cette structure a plusieurs activités
+                    différentes.
+                    <br />
                     Elle peut posséder un numéro de TVA Intracommunautaire pour
                     chacune de ces activités.
                     <br />
