@@ -77,7 +77,6 @@ type TmpUniteLegale = {
     denomination: string;
     denominationUsuelle: string;
     sigle: string;
-    allSiegesSiret: Siret[];
   };
 };
 
@@ -114,7 +113,8 @@ const clientUniteLegaleInsee = async (
 
   const etablissementsList = allEtablissements?.list || [siege];
   etablissementsList.forEach(
-    (e) => (e.ancienSiege = tmpUniteLegale.allSiegesSiret.indexOf(e.siret) > -1)
+    (e) =>
+      (e.ancienSiege = uniteLegale.anciensSiegesSirets.indexOf(e.siret) > -1)
   );
 
   const etablissements = createEtablissementsList(
@@ -241,6 +241,13 @@ const mapToDomainObject = (
       siren,
       oldSiren: originalSiren,
       siege,
+      anciensSiegesSirets: Array.from(
+        new Set(
+          periodesUniteLegale
+            .map((e) => (siren + e.nicSiegeUniteLegale) as Siret)
+            .filter((e) => e !== siege.siret)
+        )
+      ),
       natureJuridique: categorieJuridiqueUniteLegale || '',
       libelleNatureJuridique: libelleFromCategoriesJuridiques(
         categorieJuridiqueUniteLegale
@@ -280,13 +287,6 @@ const mapToDomainObject = (
       denominationUsuelle: denominationUsuelleUniteLegale,
       denomination: denominationUniteLegale || names || 'Nom inconnu',
       sigle: sigleUniteLegale,
-      allSiegesSiret: Array.from(
-        new Set(
-          periodesUniteLegale.map(
-            (e) => (siren + e.nicSiegeUniteLegale) as Siret
-          )
-        )
-      ),
     },
   };
 };

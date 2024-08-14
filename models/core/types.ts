@@ -88,6 +88,8 @@ export interface IUniteLegale extends IEtablissementsList {
   oldSiren: Siren;
   tva: ITVAIntracommunautaire | null;
   siege: IEtablissement;
+  // only used to pass information from unitelegale to the etablissement in insee response. Prefer etablissement.ancienSiege
+  anciensSiegesSirets: Siret[];
   natureJuridique: string;
   libelleNatureJuridique: string;
   activitePrincipale: string;
@@ -124,6 +126,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     oldSiren: siren,
     siege,
     tva: null,
+    anciensSiegesSirets: [],
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif: IETATADMINSTRATIF.INCONNU,
     nomComplet: '',
