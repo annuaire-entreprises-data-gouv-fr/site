@@ -4,89 +4,45 @@
     "page": 1
   },
   "result": {
-    "etablissements": {
-      "all": [
-        {
-          "siren": "908595879",
-          "siret": "90859587900010",
-          "oldSiret": "90859587900010",
-          "etatAdministratif": "en activité",
-          "statutDiffusion": "diffusible",
-          "estSiege": true,
-          "enseigne": "",
-          "denomination": "",
-          "nic": "00010",
-          "dateCreation": "2022-01-01",
-          "dateDerniereMiseAJour": "2024-08-13T14:42:14.541Z",
-          "dateMiseAJourInsee": "2024-03-29T23:18:52.426",
-          "dateDebutActivite": "",
-          "dateFermeture": null,
-          "adresse": "10 RUE DE PENTHIEVRE, 75008 PARIS",
-          "adressePostale": "10 RUE DE PENTHIEVRE, 75008 PARIS",
-          "codePostal": "75008",
-          "commune": "PARIS",
-          "activitePrincipale": "70.21Z",
-          "libelleActivitePrincipale": "Conseil en relations publiques et communication",
-          "trancheEffectif": null,
-          "libelleTrancheEffectif": "",
-          "latitude": "",
-          "longitude": "",
-          "complements": {
-            "estEntrepreneurIndividuel": false,
-            "idFiness": [],
-            "idBio": [],
-            "idcc": [],
-            "idOrganismeFormation": [],
-            "idRge": [],
-            "idUai": []
-          },
-          "anneeTrancheEffectif": null
-        }
-      ],
-      "open": [
-        {
-          "siren": "908595879",
-          "siret": "90859587900010",
-          "oldSiret": "90859587900010",
-          "etatAdministratif": "en activité",
-          "statutDiffusion": "diffusible",
-          "estSiege": true,
-          "enseigne": "",
-          "denomination": "",
-          "nic": "00010",
-          "dateCreation": "2022-01-01",
-          "dateDerniereMiseAJour": "2024-08-13T14:42:14.541Z",
-          "dateMiseAJourInsee": "2024-03-29T23:18:52.426",
-          "dateDebutActivite": "",
-          "dateFermeture": null,
-          "adresse": "10 RUE DE PENTHIEVRE, 75008 PARIS",
-          "adressePostale": "10 RUE DE PENTHIEVRE, 75008 PARIS",
-          "codePostal": "75008",
-          "commune": "PARIS",
-          "activitePrincipale": "70.21Z",
-          "libelleActivitePrincipale": "Conseil en relations publiques et communication",
-          "trancheEffectif": null,
-          "libelleTrancheEffectif": "",
-          "latitude": "",
-          "longitude": "",
-          "complements": {
-            "estEntrepreneurIndividuel": false,
-            "idFiness": [],
-            "idBio": [],
-            "idcc": [],
-            "idOrganismeFormation": [],
-            "idRge": [],
-            "idUai": []
-          },
-          "anneeTrancheEffectif": null
-        }
-      ],
-      "unknown": [],
-      "closed": [],
-      "nombreEtablissementsOuverts": 1,
-      "nombreEtablissements": 1,
-      "usePagination": false,
-      "currentEtablissementPage": 1
-    }
+    "list": [
+      {
+        "siren": "908595879",
+        "siret": "90859587900010",
+        "oldSiret": "90859587900010",
+        "etatAdministratif": "en activité",
+        "statutDiffusion": "diffusible",
+        "estSiege": true,
+        "enseigne": "",
+        "denomination": "",
+        "nic": "00010",
+        "dateCreation": "2022-01-01",
+        "dateDerniereMiseAJour": "2024-08-14T11:36:12.864Z",
+        "dateMiseAJourInsee": "2024-03-29T23:18:52.426",
+        "dateDebutActivite": "",
+        "dateFermeture": null,
+        "adresse": "10 RUE DE PENTHIEVRE, 75008 PARIS",
+        "adressePostale": "10 RUE DE PENTHIEVRE, 75008 PARIS",
+        "codePostal": "75008",
+        "commune": "PARIS",
+        "activitePrincipale": "70.21Z",
+        "libelleActivitePrincipale": "Conseil en relations publiques et communication",
+        "trancheEffectif": null,
+        "libelleTrancheEffectif": "",
+        "latitude": "",
+        "longitude": "",
+        "complements": {
+          "estEntrepreneurIndividuel": false,
+          "idFiness": [],
+          "idBio": [],
+          "idcc": [],
+          "idOrganismeFormation": [],
+          "idRge": [],
+          "idUai": []
+        },
+        "anneeTrancheEffectif": null
+      }
+    ],
+    "page": 1,
+    "count": 1
   }
 }

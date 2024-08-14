@@ -46,10 +46,11 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "cessée",
         "nomComplet": "GANYMEDE",
@@ -92,7 +93,8 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [],
@@ -132,7 +134,8 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "nombreEtablissementsOuverts": 0,

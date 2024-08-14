@@ -50,10 +50,11 @@
             ],
             "idUai": []
           },
-          "anneeTrancheEffectif": null
+          "anneeTrancheEffectif": null,
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "COMMUNAUTE D'AGGLOMERATION SAINTES - GRANDES RIVES - L'AGGLO",
@@ -100,7 +101,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": null
+              "anneeTrancheEffectif": null,
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -142,7 +144,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": null
+              "anneeTrancheEffectif": null,
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -748,7 +751,8 @@
               ],
               "idUai": []
             },
-            "anneeTrancheEffectif": null
+            "anneeTrancheEffectif": null,
+            "ancienSiege": false
           }
         ],
         "nombreEtablissements": 54,
@@ -798,10 +802,11 @@
             ],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "DEPARTEMENT DE LA HAUTE GARONNE",
@@ -850,7 +855,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -894,7 +900,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -1413,7 +1420,8 @@
               ],
               "idUai": []
             },
-            "anneeTrancheEffectif": "2021"
+            "anneeTrancheEffectif": "2021",
+            "ancienSiege": false
           }
         ],
         "nombreEtablissements": 72,
@@ -1462,10 +1470,11 @@
             ],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "DEPARTEMENT DU PUY DE DOME",
@@ -1513,7 +1522,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -1556,7 +1566,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -2147,7 +2158,8 @@
               ],
               "idUai": []
             },
-            "anneeTrancheEffectif": "2021"
+            "anneeTrancheEffectif": "2021",
+            "ancienSiege": false
           }
         ],
         "nombreEtablissements": 40,
@@ -2195,10 +2207,11 @@
             ],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "CARCASSONNE AGGLO",
@@ -2245,7 +2258,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -2287,7 +2301,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -3405,7 +3420,8 @@
               ],
               "idUai": []
             },
-            "anneeTrancheEffectif": "2021"
+            "anneeTrancheEffectif": "2021",
+            "ancienSiege": false
           }
         ],
         "nombreEtablissements": 26,
@@ -3453,10 +3469,11 @@
             ],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "GRAND ANGOULEME",
@@ -3503,7 +3520,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -3545,7 +3563,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -4184,7 +4203,8 @@
               ],
               "idUai": []
             },
-            "anneeTrancheEffectif": "2021"
+            "anneeTrancheEffectif": "2021",
+            "ancienSiege": false
           }
         ],
         "nombreEtablissements": 19,
@@ -4232,10 +4252,11 @@
             ],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "OUEST AVEYRON COMMUNAUTE",
@@ -4282,7 +4303,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -4324,7 +4346,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -4833,7 +4856,8 @@
               ],
               "idUai": []
             },
-            "anneeTrancheEffectif": "2021"
+            "anneeTrancheEffectif": "2021",
+            "ancienSiege": false
           }
         ],
         "nombreEtablissements": 13,
@@ -4883,10 +4907,11 @@
             ],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "COMMUNAUTE DE COMMUNES D'ERDRE GESVRES (CCEG)",
@@ -4935,7 +4960,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -4979,7 +5005,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -5362,7 +5389,8 @@
               ],
               "idUai": []
             },
-            "anneeTrancheEffectif": "2021"
+            "anneeTrancheEffectif": "2021",
+            "ancienSiege": false
           }
         ],
         "nombreEtablissements": 28,
@@ -5410,10 +5438,11 @@
             ],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "COMMUNAUTE DE COMMUNES DE L ILE D OLERON",
@@ -5460,7 +5489,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -5502,7 +5532,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -5836,7 +5867,8 @@
               ],
               "idUai": []
             },
-            "anneeTrancheEffectif": "2021"
+            "anneeTrancheEffectif": "2021",
+            "ancienSiege": false
           }
         ],
         "nombreEtablissements": 11,
@@ -5884,10 +5916,11 @@
             ],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "COMMUNAUTE D AGGLOMERATION BEZIERS MEDITERRANEE (CABM)",
@@ -5934,7 +5967,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -5976,7 +6010,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -6509,7 +6544,8 @@
               ],
               "idUai": []
             },
-            "anneeTrancheEffectif": "2021"
+            "anneeTrancheEffectif": "2021",
+            "ancienSiege": false
           }
         ],
         "nombreEtablissements": 10,
@@ -6557,10 +6593,11 @@
             ],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021"
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
         },
-        "allSiegesSiret": [],
         "tva": null,
+        "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "CC DU CRESTOIS ET DU PAYS DE SAILLANS COEUR DE DROME",
@@ -6607,7 +6644,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "open": [
@@ -6649,7 +6687,8 @@
                 ],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021"
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
             }
           ],
           "unknown": [],
@@ -7030,7 +7069,8 @@
               ],
               "idUai": []
             },
-            "anneeTrancheEffectif": "2021"
+            "anneeTrancheEffectif": "2021",
+            "ancienSiege": false
           }
         ],
         "nombreEtablissements": 7,
