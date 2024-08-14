@@ -1,6 +1,6 @@
-import { ReactElement } from 'react';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import { ReactElement } from 'react';
 import { IEtablissementsList } from '../etablissements-list';
 import { IEtablissement, IUniteLegale } from '../types';
 
@@ -67,15 +67,21 @@ export const anonymiseUniteLegale = (
   uniteLegale: IUniteLegale,
   session: ISession | null
 ) => {
-  if (canSeeNonDiffusible(session) || estDiffusible(uniteLegale)) {
+  if (canSeeNonDiffusible(session)) {
+    return uniteLegale;
+  }
+
+  // a single etablissement can be non-diffusible with UL being diffusible
+  uniteLegale.etablissements = anonymiseEtablissements(
+    uniteLegale.etablissements,
+    session
+  );
+
+  if (estDiffusible(uniteLegale)) {
     return uniteLegale;
   } else {
     uniteLegale.nomComplet = getNomComplet(uniteLegale, session);
     uniteLegale.siege = anonymiseEtablissement(uniteLegale.siege, session);
-    uniteLegale.etablissements = anonymiseEtablissements(
-      uniteLegale.etablissements,
-      session
-    );
     return uniteLegale;
   }
 };
