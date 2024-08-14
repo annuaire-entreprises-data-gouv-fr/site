@@ -1,0 +1,274 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "48744469700428",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "487444697",
+        "oldSiren": "487444697",
+        "siege": {
+          "siren": "487444697",
+          "siret": "48744469700428",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": "",
+          "denomination": "SOLARSUD",
+          "nic": "00428",
+          "dateCreation": "2019-03-11",
+          "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
+          "dateDebutActivite": "2024-04-09",
+          "dateFermeture": "",
+          "adresse": "22 RUE MAISON BLANCHE 24330 BOULAZAC ISLE MANOIRE",
+          "adressePostale": "SOLARSUD, 22 RUE MAISON BLANCHE 24330 BOULAZAC ISLE MANOIRE",
+          "codePostal": "24330",
+          "commune": "BOULAZAC ISLE MANOIRE",
+          "activitePrincipale": "43.21A",
+          "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
+          "trancheEffectif": "N",
+          "libelleTrancheEffectif": "",
+          "latitude": "45.150722",
+          "longitude": "0.788652",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "2609",
+              "1597",
+              "2420"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [
+              "43SPVRGE"
+            ],
+            "idUai": []
+          },
+          "anneeTrancheEffectif": "2021",
+          "ancienSiege": false
+        },
+        "tva": null,
+        "anciensSiegesSirets": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "ESSOR ENERGIES (SOLARSUD)",
+        "chemin": "essor-energies-487444697",
+        "natureJuridique": "5499",
+        "libelleNatureJuridique": "Société à responsabilité limitée (sans autre indication)",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "487444697",
+              "siret": "48744469700428",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": "SOLARSUD",
+              "nic": "00428",
+              "dateCreation": "2019-03-11",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2024-04-09",
+              "dateFermeture": "",
+              "adresse": "22 RUE MAISON BLANCHE 24330 BOULAZAC ISLE MANOIRE",
+              "adressePostale": "SOLARSUD, 22 RUE MAISON BLANCHE 24330 BOULAZAC ISLE MANOIRE",
+              "codePostal": "24330",
+              "commune": "BOULAZAC ISLE MANOIRE",
+              "activitePrincipale": "43.21A",
+              "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
+              "trancheEffectif": "N",
+              "libelleTrancheEffectif": "",
+              "latitude": "45.150722",
+              "longitude": "0.788652",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "2609",
+                  "1597",
+                  "2420"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "43SPVRGE"
+                ],
+                "idUai": []
+              },
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
+            }
+          ],
+          "open": [
+            {
+              "siren": "487444697",
+              "siret": "48744469700428",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": "SOLARSUD",
+              "nic": "00428",
+              "dateCreation": "2019-03-11",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2024-04-09",
+              "dateFermeture": "",
+              "adresse": "22 RUE MAISON BLANCHE 24330 BOULAZAC ISLE MANOIRE",
+              "adressePostale": "SOLARSUD, 22 RUE MAISON BLANCHE 24330 BOULAZAC ISLE MANOIRE",
+              "codePostal": "24330",
+              "commune": "BOULAZAC ISLE MANOIRE",
+              "activitePrincipale": "43.21A",
+              "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
+              "trancheEffectif": "N",
+              "libelleTrancheEffectif": "",
+              "latitude": "45.150722",
+              "longitude": "0.788652",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "2609",
+                  "1597",
+                  "2420"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "43SPVRGE"
+                ],
+                "idUai": []
+              },
+              "anneeTrancheEffectif": "2021",
+              "ancienSiege": false
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 29,
+          "nombreEtablissements": 42,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "35.11Z",
+        "libelleActivitePrincipale": "Production d’électricité",
+        "dateCreation": "2005-12-06",
+        "dateFermeture": "",
+        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2024-05-09T05:09:57",
+        "dateMiseAJourInpi": "2024-05-18T17:02:54",
+        "dateDebutActivite": "",
+        "trancheEffectif": "11",
+        "anneeCategorieEntreprise": "2021",
+        "categorieEntreprise": "ETI",
+        "anneeTrancheEffectif": "2021",
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": true,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": false,
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "listeIdcc": [
+          "2609",
+          "1597",
+          "2420"
+        ],
+        "matchingEtablissements": [
+          {
+            "siren": "487444697",
+            "siret": "48744469700428",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": "",
+            "denomination": "SOLARSUD",
+            "nic": "00428",
+            "dateCreation": "2019-03-11",
+            "dateDerniereMiseAJour": "",
+            "dateMiseAJourInsee": "",
+            "dateDebutActivite": "2024-04-09",
+            "dateFermeture": "",
+            "adresse": "22 RUE MAISON BLANCHE 24330 BOULAZAC ISLE MANOIRE",
+            "adressePostale": "SOLARSUD, 22 RUE MAISON BLANCHE 24330 BOULAZAC ISLE MANOIRE",
+            "codePostal": "24330",
+            "commune": "BOULAZAC ISLE MANOIRE",
+            "activitePrincipale": "43.21A",
+            "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
+            "trancheEffectif": "N",
+            "libelleTrancheEffectif": "",
+            "latitude": "45.150722",
+            "longitude": "0.788652",
+            "complements": {
+              "estEntrepreneurIndividuel": false,
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "2609",
+                "1597",
+                "2420"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [
+                "43SPVRGE"
+              ],
+              "idUai": []
+            },
+            "anneeTrancheEffectif": "2021",
+            "ancienSiege": false
+          }
+        ],
+        "nombreEtablissements": 42,
+        "nombreEtablissementsOuverts": 29,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "POUYANNE (POUYANNE)",
+            "prenom": "David",
+            "role": null,
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "POUYANNE",
+            "prenom": "David",
+            "role": "Gérant",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          }
+        ]
+      }
+    ]
+  }
+}
