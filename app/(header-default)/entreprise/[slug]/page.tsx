@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
@@ -10,8 +10,8 @@ import ServicePublicSection from '#components/service-public-section';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
+import { UniteLegaleImmatriculationSection } from '#components/unite-legale-immatriculation-section';
 import UniteLegaleSection from '#components/unite-legale-section';
-import UsefulShortcuts from '#components/useful-shortcuts';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import {
   isAssociation,
@@ -29,6 +29,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -75,6 +76,9 @@ export default async function UniteLegalePage(props: AppRouterProps) {
                 session={session}
               />
             )}
+            {uniteLegale.immatriculation && (
+              <UniteLegaleImmatriculationSection uniteLegale={uniteLegale} />
+            )}
             {isCollectiviteTerritoriale(uniteLegale) && (
               <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
             )}
@@ -85,7 +89,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
             {!isBot && isAssociation(uniteLegale) && (
               <AssociationSection uniteLegale={uniteLegale} session={session} />
             )}
-            <UsefulShortcuts uniteLegale={uniteLegale} />
+            <HorizontalSeparator />
             {uniteLegale.siege && (
               <EtablissementSection
                 uniteLegale={uniteLegale}

@@ -109,6 +109,7 @@ export interface IUniteLegale extends IEtablissementsList {
   categorieEntreprise: string | null;
   anneeCategorieEntreprise: string | null;
   complements: IUniteLegaleComplements;
+  immatriculation: IUniteLegaleImmatriculation | null;
   association: {
     idAssociation: IdRna | string | null;
   };
@@ -154,8 +155,22 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
       codeColter: null,
     },
     listeIdcc: [],
+    immatriculation: null,
   };
 };
+
+export interface IUniteLegaleImmatriculation {
+  dateDebutActivite: string;
+  dateImmatriculation: string;
+  dateRadiation: string;
+  duree: number;
+  natureEntreprise: string[];
+  dateCloture: string;
+  isPersonneMorale: boolean;
+  capital: number;
+  estCapitalVariable: boolean;
+  devisCapital: string;
+}
 
 export interface IUniteLegaleComplements {
   estBio: boolean;

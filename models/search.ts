@@ -46,7 +46,7 @@ const search = async (
     const escapedSearchTerm = removeSpecialChars(searchTerm);
     return await clientSearchRechercheEntreprise({
       searchTerms: escapedSearchTerm,
-      page,
+      pageResultatsRecherche: page,
       searchFilterParams,
     });
   } catch (e: any) {
@@ -78,7 +78,7 @@ const search = async (
       const escapedSearchTerm = removeSpecialChars(searchTerm);
       return await clientSearchRechercheEntreprise({
         searchTerms: escapedSearchTerm,
-        page,
+        pageResultatsRecherche: page,
         searchFilterParams,
         fallbackOnStaging: true,
       });

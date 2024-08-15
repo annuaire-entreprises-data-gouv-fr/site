@@ -1,6 +1,6 @@
-import React from 'react';
+import { OpenClosedTag } from '#components-ui/badge/frequent';
 import FAQLink from '#components-ui/faq-link';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import InformationTooltip from '#components-ui/information-tooltip';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
 import { ProtectedCertificatesBadgesSection } from '#components/badges-section/labels-and-certificates/protected-certificats';
 import EORICell from '#components/eori-cell';
@@ -21,6 +21,7 @@ import { ISession } from '#models/user/session';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
+import React from 'react';
 import {
   LabelsAndCertificatesBadgesSection,
   checkHasLabelsAndCertificates,
@@ -85,21 +86,55 @@ const UniteLegaleSection: React.FC<{
       libelleCategorieEntreprise(uniteLegale),
     ],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
-    [
-      'Dernière modification à l’Insee',
-      formatDate(uniteLegale.dateMiseAJourInsee),
-    ],
-    ...(uniteLegale.dateMiseAJourInpi
-      ? [
-          [
-            'Dernière modification à l’Inpi',
-            formatDate(uniteLegale.dateMiseAJourInpi),
-          ],
-        ]
-      : []),
     ...(!estActif(uniteLegale)
       ? [['Date de fermeture', formatDate(uniteLegale.dateFermeture)]]
       : []),
+    ['', <br />],
+    [
+      'Inscription aux registres',
+      <>
+        {uniteLegale.dateMiseAJourInsee && (
+          <InformationTooltip
+            tabIndex={undefined}
+            label={`Cette structure est inscrite dans la base Sirene.
+              Elle a été mise à jour le ${formatDate(
+                uniteLegale.dateMiseAJourInsee
+              )}`}
+          >
+            <OpenClosedTag
+              isVerified={!uniteLegale.dateFermeture}
+              label={
+                uniteLegale.dateFermeture ? 'Fermée' : 'Inscrite' + ' à l’Insee'
+              }
+            />
+          </InformationTooltip>
+        )}
+        {uniteLegale.dateMiseAJourInpi && (
+          <>
+            <br />{' '}
+            <InformationTooltip
+              tabIndex={undefined}
+              label={`Cette structure est immatriculée au Registre National des Entreprises (RNE), depuis le ${formatDate(
+                uniteLegale.immatriculation?.dateImmatriculation
+              )}. Elle a été mise à jour le ${formatDate(
+                uniteLegale.dateMiseAJourInpi
+              )}`}
+            >
+              <a href="#immatriculation-rne">
+                <OpenClosedTag
+                  isVerified={!uniteLegale.immatriculation?.dateRadiation}
+                  label={
+                    uniteLegale.immatriculation?.dateRadiation
+                      ? 'Radiée'
+                      : 'Immatriculée ' + 'auprès de l’Inpi'
+                  }
+                />
+              </a>
+            </InformationTooltip>
+          </>
+        )}
+      </>,
+    ],
     ['', <br />],
     [
       'Convention(s) collective(s)',
@@ -142,7 +177,7 @@ const UniteLegaleSection: React.FC<{
           <li>
             Annonce de création au JOAFE :{' '}
             <a
-              href={`/justificatif/${uniteLegale.siren}`}
+              href={`/documents/${uniteLegale.siren}`}
               rel="noreferrer noopener"
               target="_blank"
             >
@@ -168,6 +203,27 @@ const UniteLegaleSection: React.FC<{
         )}
       </ul>,
     ],
+    ['', <br />],
+    [
+      'Dirigeant(s)',
+      <a key="dirigeant" href={`/dirigeants/${uniteLegale.siren}`}>
+        → voir les dirigeants
+      </a>,
+    ],
+    [
+      'Siège social',
+      <a key="siege" href={`/etablissement/${uniteLegale.siege.siret}`}>
+        → voir le détail du siège social
+      </a>,
+    ],
+    [
+      'Liste des établissements',
+      <a href={`#etablissements`}>
+        → voir les {uniteLegale.etablissements.nombreEtablissements}{' '}
+        établissement
+        {uniteLegale.etablissements.nombreEtablissements > 0 ? 's' : ''}
+      </a>,
+    ],
   ];
 
   return (
@@ -190,7 +246,6 @@ const UniteLegaleSection: React.FC<{
       >
         <TwoColumnTable body={data} />
       </Section>
-      <HorizontalSeparator />
     </div>
   );
 };

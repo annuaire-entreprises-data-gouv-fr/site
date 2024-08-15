@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { PrintNever } from '#components-ui/print-visibility';
 import {
   checkHasLabelsAndCertificates,
@@ -11,6 +10,7 @@ import {
 } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import Link from 'next/link';
 import styles from './styles.module.css';
 import TabLink from './tab-link';
 
@@ -26,7 +26,6 @@ export enum FICHE {
   DIVERS = 'conventions collectives',
   ELUS = 'élus',
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
-  JUSTIFICATIFS = 'justificatifs',
   ETABLISSEMENT = 'fiche établissement',
 }
 
@@ -49,13 +48,6 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay: true,
       width: '80px',
-    },
-    {
-      ficheType: FICHE.JUSTIFICATIFS,
-      label: 'Justificatif d’immatriculation',
-      pathPrefix: '/justificatif/',
-      noFollow: false,
-      shouldDisplay: true,
     },
     {
       ficheType: FICHE.ELUS,
@@ -89,10 +81,13 @@ export const Tabs: React.FC<{
     },
     {
       ficheType: FICHE.ANNONCES,
-      label: 'Annonces',
+      label: `Annonces${
+        uniteLegale.dateMiseAJourInpi ? ' et observations' : ''
+      }`,
       pathPrefix: '/annonces/',
       noFollow: false,
       shouldDisplay: true,
+      width: '130px',
     },
     {
       ficheType: FICHE.CERTIFICATS,

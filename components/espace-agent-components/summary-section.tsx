@@ -34,8 +34,12 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
                 commerciale, artisanale, agricole ou indépendante est
                 enregistrée au RNE.
               </FAQLink>,
-              <a href={`/justificatif/${uniteLegale.siren}`}>
-                → Consulter la page justificatif d’immatriculation
+              <a
+                href={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
+              >
+                <Icon slug="download">
+                  Télécharger l’extrait d’immatriculation au RNE
+                </Icon>
               </a>,
             ],
             [
@@ -44,16 +48,6 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
               <a href={`/dirigeants/${uniteLegale.siren}`}>
                 → Consulter la page dirigeants & le registre des bénéficiaires
                 effectifs
-              </a>,
-            ],
-            [
-              '',
-              <a
-                href={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
-              >
-                <Icon slug="download">
-                  Télécharger l’extrait d’immatriculation au RNE
-                </Icon>
               </a>,
             ],
             ['', <br />],

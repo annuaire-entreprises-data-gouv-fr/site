@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react';
 import constants from '#models/constants';
+import { PropsWithChildren } from 'react';
 import { Badge, IPartialBadgeProps } from '.';
 
 export const LabelAndCertificateBadge = ({

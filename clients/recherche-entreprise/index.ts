@@ -42,11 +42,12 @@ import {
 
 type ClientSearchRechercheEntreprise = {
   searchTerms: string;
-  page: number;
+  pageResultatsRecherche: number;
   searchFilterParams?: SearchFilterParams;
   fallbackOnStaging?: boolean;
   useCache?: boolean;
   inclureEtablissements?: boolean;
+  inclureImmatriculation?: boolean;
   pageEtablissements?: number;
 };
 
@@ -55,11 +56,12 @@ type ClientSearchRechercheEntreprise = {
  */
 const clientSearchRechercheEntreprise = async ({
   searchTerms,
-  page,
   searchFilterParams,
   fallbackOnStaging = false,
   useCache = false,
   inclureEtablissements = false,
+  inclureImmatriculation = false,
+  pageResultatsRecherche,
   pageEtablissements = 1,
 }: ClientSearchRechercheEntreprise): Promise<ISearchResults> => {
   const encodedTerms = encodeURIComponent(searchTerms);
@@ -77,7 +79,7 @@ const clientSearchRechercheEntreprise = async ({
   }
 
   let url = route;
-  url += `?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${
+  url += `?per_page=10&page=${pageResultatsRecherche}&q=${encodedTerms}&limite_matching_etablissements=3${
     searchFilterParams?.toApiURI() || ''
   }`;
   url += `&include_admin=slug`;
@@ -85,6 +87,11 @@ const clientSearchRechercheEntreprise = async ({
   if (inclureEtablissements) {
     url += `,etablissements`;
   }
+
+  if (inclureImmatriculation) {
+    url += `,immatriculation`;
+  }
+
   if (inclureEtablissements && pageEtablissements) {
     url += `&page_etablissements=${pageEtablissements}`;
   }
@@ -95,6 +102,7 @@ const clientSearchRechercheEntreprise = async ({
     ? constants.timeout.XL
     : constants.timeout.L;
 
+  console.log(url);
   const results = await httpGet<ISearchResponse>(url, {
     timeout,
     headers: { referer: 'annuaire-entreprises-site' },
@@ -146,6 +154,17 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       liste_idcc = [],
       est_siae = false,
       type_siae = '',
+    },
+    immatriculation: {
+      date_debut_activite = '',
+      date_immatriculation = '',
+      date_radiation = '',
+      duree_personne_morale,
+      nature_entreprise = [],
+      date_cloture_exercice = '',
+      capital_social,
+      capital_variable = false,
+      devise_capital = '',
     },
     matching_etablissements,
     categorie_entreprise,
@@ -249,6 +268,18 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       estUai: est_uai,
       estEntrepriseInclusive: est_siae,
       typeEntrepriseInclusive: type_siae,
+    },
+    immatriculation: {
+      dateDebutActivite: date_debut_activite,
+      dateImmatriculation: date_immatriculation,
+      dateRadiation: date_radiation,
+      duree: duree_personne_morale,
+      natureEntreprise: nature_entreprise || [],
+      dateCloture: date_cloture_exercice,
+      isPersonneMorale: !!capital_social,
+      capital: capital_social,
+      estCapitalVariable: capital_variable,
+      devisCapital: devise_capital,
     },
     association: {
       idAssociation: identifiant_association,
