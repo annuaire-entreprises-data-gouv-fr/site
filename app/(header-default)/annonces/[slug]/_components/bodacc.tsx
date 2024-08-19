@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import routes from '#clients/routes';
 import { Info } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
@@ -12,6 +11,7 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { formatDate } from '#utils/helpers';
 import { useFetchBODACC } from 'hooks';
+import React from 'react';
 
 const AnnoncesBodacc: React.FC<{
   uniteLegale: IUniteLegale;
@@ -20,6 +20,7 @@ const AnnoncesBodacc: React.FC<{
 
   return (
     <AsyncDataSectionClient
+      id="annonces-bodacc"
       title="Annonces BODACC"
       sources={[EAdministration.DILA]}
       data={bodacc}

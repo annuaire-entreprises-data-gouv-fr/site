@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { Info } from '#components-ui/alerts';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
@@ -8,6 +7,7 @@ import { formatIntFr } from '#utils/helpers';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
+import { Metadata } from 'next';
 import { InpiPDFDownloader } from './_components/inpi-pdf-downloader';
 
 export const generateMetadata = async (
@@ -30,9 +30,7 @@ const InpiPDF = (props: AppRouterProps) => {
   return (
     <>
       <br />
-      <a href={`/justificatif/${slug}`}>
-        ← Retour à la page justificatif d’immatriculation
-      </a>
+      <a href={`/entreprise/${slug}`}>← Retour à la fiche resumée</a>
       <div className="content-container">
         <h1>Téléchargement du justificatif d’immatriculation</h1>
 

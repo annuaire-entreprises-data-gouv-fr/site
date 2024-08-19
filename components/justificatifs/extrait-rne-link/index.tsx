@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   estDiffusible,
   nonDiffusibleDataFormatter,
@@ -6,11 +5,13 @@ import {
 import { IUniteLegale } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import React from 'react';
 
 const ExtraitRNELink: React.FC<{
   uniteLegale: IUniteLegale;
+  label: string;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}> = ({ uniteLegale, label, session }) => {
   return estDiffusible(uniteLegale) ||
     hasRights(session, EScope.nonDiffusible) ? (
     <a
@@ -18,7 +19,7 @@ const ExtraitRNELink: React.FC<{
       rel="noopener"
       href={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
     >
-      télécharger
+      {label || 'télécharger'}
     </a>
   ) : (
     <a href="/faq/justificatif-immatriculation-non-diffusible">

@@ -10,8 +10,6 @@ import ServicePublicSection from '#components/service-public-section';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { UniteLegaleImmatriculationSection } from '#components/unite-legale-immatriculation-section';
-import UniteLegaleSection from '#components/unite-legale-section';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import {
   isAssociation,
@@ -29,6 +27,8 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { UniteLegaleImmatriculationSection } from 'app/(header-default)/entreprise/[slug]/_components/immatriculation-section';
+import UniteLegaleSummarySection from 'app/(header-default)/entreprise/[slug]/_components/summary-section';
 import { Metadata } from 'next';
 
 export const generateMetadata = async (
@@ -69,7 +69,10 @@ export default async function UniteLegalePage(props: AppRouterProps) {
           <NonDiffusibleSection />
         ) : (
           <>
-            <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
+            <UniteLegaleSummarySection
+              uniteLegale={uniteLegale}
+              session={session}
+            />
             {hasRights(session, EScope.isAgent) && (
               <EspaceAgentSummarySection
                 uniteLegale={uniteLegale}
@@ -77,7 +80,10 @@ export default async function UniteLegalePage(props: AppRouterProps) {
               />
             )}
             {uniteLegale.immatriculation && (
-              <UniteLegaleImmatriculationSection uniteLegale={uniteLegale} />
+              <UniteLegaleImmatriculationSection
+                uniteLegale={uniteLegale}
+                session={session}
+              />
             )}
             {isCollectiviteTerritoriale(uniteLegale) && (
               <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />

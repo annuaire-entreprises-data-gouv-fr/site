@@ -52,16 +52,31 @@ const AnnoncesPage = async (props: AppRouterProps) => {
         {estDiffusible(uniteLegale) ||
         hasRights(session, EScope.nonDiffusible) ? (
           <>
+            <ul>
+              <li>
+                <a href="#annonces-bodacc">Annonces au BODACC</a>
+              </li>
+              {uniteLegale.dateMiseAJourInpi && (
+                <li>
+                  <a href="#observations-rne">Observations au RNE</a>
+                </li>
+              )}
+              {isAssociation(uniteLegale) && (
+                <li>
+                  <a href="#annonces-joafe">Annonces au JOAFE</a>
+                </li>
+              )}
+            </ul>
             <AnnoncesBodacc uniteLegale={uniteLegale} />
             {uniteLegale.dateMiseAJourInpi && (
               <ObservationsRNE uniteLegale={uniteLegale} session={session} />
             )}
+            {isAssociation(uniteLegale) && (
+              <AnnoncesJOAFESection uniteLegale={uniteLegale} />
+            )}
           </>
         ) : (
           <DonneesPriveesSection />
-        )}
-        {isAssociation(uniteLegale) && (
-          <AnnoncesJOAFESection uniteLegale={uniteLegale} />
         )}
       </div>
     </>

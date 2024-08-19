@@ -279,7 +279,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       isPersonneMorale: !!capital_social,
       capital: capital_social,
       estCapitalVariable: capital_variable,
-      devisCapital: devise_capital,
+      deviseCapital: devise_capital,
     },
     association: {
       idAssociation: identifiant_association,

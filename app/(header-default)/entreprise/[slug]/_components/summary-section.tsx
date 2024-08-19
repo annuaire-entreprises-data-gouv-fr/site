@@ -1,11 +1,7 @@
-import { OpenClosedTag } from '#components-ui/badge/frequent';
 import FAQLink from '#components-ui/faq-link';
-import InformationTooltip from '#components-ui/information-tooltip';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
 import { ProtectedCertificatesBadgesSection } from '#components/badges-section/labels-and-certificates/protected-certificats';
 import EORICell from '#components/eori-cell';
-import AvisSituationLink from '#components/justificatifs/avis-situation-link';
-import ExtraitRNELink from '#components/justificatifs/extrait-rne-link';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
@@ -27,9 +23,14 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
   labelsAndCertificatesSources,
-} from '../badges-section/labels-and-certificates';
+} from '../../../../../components/badges-section/labels-and-certificates';
+import {
+  UniteLegaleInscriptionRNA,
+  UniteLegaleInscriptionRNE,
+  UniteLegaleInscriptionSirene,
+} from './inscriptions';
 
-const UniteLegaleSection: React.FC<{
+const UniteLegaleSummarySection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
@@ -37,6 +38,27 @@ const UniteLegaleSection: React.FC<{
   const conventionsCollectives = uniteLegale.listeIdcc;
 
   const data = [
+    [
+      'État des inscriptions',
+      <>
+        {uniteLegale.dateMiseAJourInsee && (
+          <UniteLegaleInscriptionSirene
+            uniteLegale={uniteLegale}
+            session={session}
+          />
+        )}
+        {uniteLegale.dateMiseAJourInpi && (
+          <UniteLegaleInscriptionRNE
+            uniteLegale={uniteLegale}
+            session={session}
+          />
+        )}
+        {uniteLegale.association.idAssociation && (
+          <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
+        )}
+      </>,
+    ],
+    ['', <br />],
     ['Dénomination', uniteLegale.nomComplet],
     ['SIREN', formatIntFr(uniteLegale.siren)],
     [
@@ -91,52 +113,6 @@ const UniteLegaleSection: React.FC<{
       : []),
     ['', <br />],
     [
-      'Inscription aux registres',
-      <>
-        {uniteLegale.dateMiseAJourInsee && (
-          <InformationTooltip
-            tabIndex={undefined}
-            label={`Cette structure est inscrite dans la base Sirene.
-              Elle a été mise à jour le ${formatDate(
-                uniteLegale.dateMiseAJourInsee
-              )}`}
-          >
-            <OpenClosedTag
-              isVerified={!uniteLegale.dateFermeture}
-              label={
-                uniteLegale.dateFermeture ? 'Fermée' : 'Inscrite' + ' à l’Insee'
-              }
-            />
-          </InformationTooltip>
-        )}
-        {uniteLegale.dateMiseAJourInpi && (
-          <>
-            <br />{' '}
-            <InformationTooltip
-              tabIndex={undefined}
-              label={`Cette structure est immatriculée au Registre National des Entreprises (RNE), depuis le ${formatDate(
-                uniteLegale.immatriculation?.dateImmatriculation
-              )}. Elle a été mise à jour le ${formatDate(
-                uniteLegale.dateMiseAJourInpi
-              )}`}
-            >
-              <a href="#immatriculation-rne">
-                <OpenClosedTag
-                  isVerified={!uniteLegale.immatriculation?.dateRadiation}
-                  label={
-                    uniteLegale.immatriculation?.dateRadiation
-                      ? 'Radiée'
-                      : 'Immatriculée ' + 'auprès de l’Inpi'
-                  }
-                />
-              </a>
-            </InformationTooltip>
-          </>
-        )}
-      </>,
-    ],
-    ['', <br />],
-    [
       'Convention(s) collective(s)',
       <ConventionCollectivesBadgesSection
         conventionCollectives={conventionsCollectives}
@@ -169,61 +145,6 @@ const UniteLegaleSection: React.FC<{
         ]
       : //  open data and no certif : we can hide the whole line
         []),
-    ['', <br />],
-    [
-      'Justificatif(s) d’existence',
-      <ul>
-        {isAssociation(uniteLegale) && (
-          <li>
-            Annonce de création au JOAFE :{' '}
-            <a
-              href={`/documents/${uniteLegale.siren}`}
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              télécharger
-            </a>
-          </li>
-        )}
-        {uniteLegale.dateMiseAJourInpi && (
-          <li>
-            Extrait RNE (<a href="/faq/extrait-kbis">équivalent KBIS/D1</a>) :{' '}
-            <ExtraitRNELink uniteLegale={uniteLegale} session={session} />
-          </li>
-        )}
-        {uniteLegale.dateMiseAJourInsee && (
-          <li>
-            Avis de situation Insee :{' '}
-            <AvisSituationLink
-              session={session}
-              etablissement={uniteLegale.siege}
-              label="télécharger"
-            />
-          </li>
-        )}
-      </ul>,
-    ],
-    ['', <br />],
-    [
-      'Dirigeant(s)',
-      <a key="dirigeant" href={`/dirigeants/${uniteLegale.siren}`}>
-        → voir les dirigeants
-      </a>,
-    ],
-    [
-      'Siège social',
-      <a key="siege" href={`/etablissement/${uniteLegale.siege.siret}`}>
-        → voir le détail du siège social
-      </a>,
-    ],
-    [
-      'Liste des établissements',
-      <a href={`#etablissements`}>
-        → voir les {uniteLegale.etablissements.nombreEtablissements}{' '}
-        établissement
-        {uniteLegale.etablissements.nombreEtablissements > 0 ? 's' : ''}
-      </a>,
-    ],
   ];
 
   return (
@@ -250,4 +171,4 @@ const UniteLegaleSection: React.FC<{
   );
 };
 
-export default UniteLegaleSection;
+export default UniteLegaleSummarySection;

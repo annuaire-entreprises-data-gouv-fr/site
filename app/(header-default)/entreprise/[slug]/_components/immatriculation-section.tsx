@@ -1,14 +1,46 @@
+import FAQLink from '#components-ui/faq-link';
 import { INPI } from '#components/administrations';
+import { DataInpiLinkWithExplanations } from '#components/justificatifs/data-inpi-link';
 import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatDate } from '#utils/helpers';
+
+const formatCapitalSocial = (
+  immatriculation: IUniteLegale['immatriculation']
+) => {
+  if (immatriculation?.capital) {
+    try {
+      return `${new Intl.NumberFormat('fr-FR', {
+        style: 'currency',
+        currency: immatriculation?.deviseCapital ?? 'EUR',
+      }).format(immatriculation?.capital)} ${
+        immatriculation.estCapitalVariable ? 'variable' : 'fixe'
+      }`;
+    } catch {
+      return `${immatriculation?.capital} ${immatriculation?.deviseCapital} ${
+        immatriculation.estCapitalVariable ? 'variable' : 'fixe'
+      }`;
+    }
+  }
+  return '';
+};
+
+const formatDateCloture = (DDMM: string) => {
+  if (DDMM && DDMM.length === 4) {
+    return `${DDMM.slice(0, 2)}/${DDMM.slice(2)}`;
+  }
+  return DDMM;
+};
 
 export const UniteLegaleImmatriculationSection = ({
   uniteLegale,
+  session,
 }: {
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 }) => {
   const immatriculation = uniteLegale.immatriculation;
   return (
@@ -41,18 +73,35 @@ export const UniteLegaleImmatriculationSection = ({
                     ],
                     [
                       'Nature de l’entreprise',
-                      immatriculation?.natureEntreprise,
+                      (immatriculation?.natureEntreprise || []).join(', '),
                     ],
                     ...(immatriculation?.isPersonneMorale
                       ? [
-                          ['Capital social', immatriculation?.capital],
                           [
-                            'Clôture de l’exercice comptable',
-                            immatriculation?.dateCloture,
+                            <FAQLink tooltipLabel="Capital social">
+                              Le capital social d’une société est constitué des
+                              apports (en argent ou en nature) de ses
+                              actionnaires.
+                              <br />
+                              Il peut être fixe ou variable. La modification
+                              d’un capital fixe nécessite une modification des
+                              statuts tandis que le capital variable peut varier
+                              dans certaines limites sans modification des
+                              statuts.
+                            </FAQLink>,
+                            formatCapitalSocial(immatriculation),
                           ],
                           [
+                            'Clôture de l’exercice comptable',
+                            formatDateCloture(immatriculation?.dateCloture),
+                          ],
+                        ]
+                      : []),
+                    ...(immatriculation?.duree
+                      ? [
+                          [
                             'Durée de la personne morale',
-                            immatriculation?.duree,
+                            `${immatriculation?.duree} ans`,
                           ],
                         ]
                       : []),
@@ -67,6 +116,10 @@ export const UniteLegaleImmatriculationSection = ({
                   ]
                 : []),
             ]}
+          />
+          <DataInpiLinkWithExplanations
+            uniteLegale={uniteLegale}
+            session={session}
           />
         </>
       )}

@@ -16,14 +16,14 @@ export const ObservationsRNE: React.FC<{
 
   return (
     <AsyncDataSectionClient
-      id="rne"
+      id="observations-rne"
       title="Observations au RNE"
       sources={[EAdministration.INPI]}
       data={immatriculationRNE}
       notFoundInfo={
         <>
           Cette structure ne possède pas de fiche d’immatriculation au{' '}
-          <strong>Registre National des Entreprises (RNE)</strong>
+          <strong>Registre National des Entreprises (RNE)</strong>.
         </>
       }
     >
@@ -50,7 +50,7 @@ export const ObservationsRNE: React.FC<{
         ) : (
           <>
             Cette structure ne possède pas d’observations au{' '}
-            <strong>Registre National des Entreprises (RNE)</strong>
+            <strong>Registre National des Entreprises (RNE)</strong>.
           </>
         )
       }

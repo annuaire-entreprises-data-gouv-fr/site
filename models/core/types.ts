@@ -169,7 +169,7 @@ export interface IUniteLegaleImmatriculation {
   isPersonneMorale: boolean;
   capital: number;
   estCapitalVariable: boolean;
-  devisCapital: string;
+  deviseCapital: string;
 }
 
 export interface IUniteLegaleComplements {
