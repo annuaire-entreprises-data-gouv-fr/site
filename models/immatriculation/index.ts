@@ -19,11 +19,6 @@ export interface IActesRNE {
   hasBilanConsolide: boolean;
 }
 
-export interface IImmatriculation {
-  downloadLink: string;
-  siteLink: string;
-}
-
 export interface IEtatCivil {
   sexe: 'M' | 'F' | null;
   nom: string;
@@ -65,17 +60,17 @@ export interface IPersonneMorale {
 
 export type IDirigeant = IEtatCivil | IPersonneMorale;
 
-export interface IImmatriculationRNE extends IImmatriculation {
+export interface IImmatriculationRNE {
   siren: Siren;
   identite: IIdentite;
   dirigeants: IDirigeant[];
   beneficiaires: IBeneficiaire[];
-  metadata: {
-    isFallback: boolean;
-  };
   observations: {
     numObservation: string;
     dateAjout: string;
     description: string;
   }[];
+  metadata: {
+    isFallback: boolean;
+  };
 }

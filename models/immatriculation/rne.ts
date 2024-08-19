@@ -1,7 +1,6 @@
 import { fetchRNEImmatriculation } from '#clients/api-proxy/rne';
 import { clientDocuments } from '#clients/api-proxy/rne/documents';
 import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
@@ -31,8 +30,6 @@ export const getImmatriculationRNE = async (
 
     return {
       siren,
-      downloadLink: `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
-      siteLink: `${routes.rne.portail.entreprise}${siren}`,
       identite,
       dirigeants,
       beneficiaires,
