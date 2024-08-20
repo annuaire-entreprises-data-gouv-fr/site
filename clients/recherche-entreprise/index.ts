@@ -55,11 +55,11 @@ type ClientSearchRechercheEntreprise = {
  */
 const clientSearchRechercheEntreprise = async ({
   searchTerms,
-  page,
   searchFilterParams,
   fallbackOnStaging = false,
   useCache = false,
   inclureEtablissements = false,
+  page = 1,
   pageEtablissements = 1,
 }: ClientSearchRechercheEntreprise): Promise<ISearchResults> => {
   const encodedTerms = encodeURIComponent(searchTerms);
