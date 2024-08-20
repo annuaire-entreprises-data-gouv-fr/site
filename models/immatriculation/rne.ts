@@ -23,7 +23,6 @@ export const getImmatriculationRNE = async (
     const {
       identite,
       metadata,
-      dirigeants,
       beneficiaires,
       observations = [],
     } = await fetchRNEImmatriculation(siren);
@@ -31,7 +30,7 @@ export const getImmatriculationRNE = async (
     return {
       siren,
       identite,
-      dirigeants,
+      dirigeants: [],
       beneficiaires,
       observations,
       metadata,

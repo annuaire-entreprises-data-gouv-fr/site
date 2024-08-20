@@ -61,7 +61,7 @@ const clientSearchRechercheEntreprise = async ({
   useCache = false,
   inclureEtablissements = false,
   inclureImmatriculation = false,
-  pageResultatsRecherche,
+  pageResultatsRecherche = 1,
   pageEtablissements = 1,
 }: ClientSearchRechercheEntreprise): Promise<ISearchResults> => {
   const encodedTerms = encodeURIComponent(searchTerms);
@@ -82,6 +82,7 @@ const clientSearchRechercheEntreprise = async ({
   url += `?per_page=10&page=${pageResultatsRecherche}&q=${encodedTerms}&limite_matching_etablissements=3${
     searchFilterParams?.toApiURI() || ''
   }`;
+
   url += `&include_admin=slug`;
 
   if (inclureEtablissements) {
@@ -102,7 +103,6 @@ const clientSearchRechercheEntreprise = async ({
     ? constants.timeout.XL
     : constants.timeout.L;
 
-  console.log(url);
   const results = await httpGet<ISearchResponse>(url, {
     timeout,
     headers: { referer: 'annuaire-entreprises-site' },

@@ -1,14 +1,43 @@
 'use client';
 
 import BreakPageForPrint from '#components-ui/print-break-page';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
-import { isDataSuccess } from '#models/data-fetching';
+import {
+  IDataFetchingState,
+  isDataLoading,
+  isDataSuccess,
+  isUnauthorized,
+} from '#models/data-fetching';
+import { IDirigeants } from '#models/immatriculation';
 import { ISession } from '#models/user/session';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import BeneficiairesSection from './beneficiaires';
-import DirigeantsProtectedSection from './protected-dirigeants';
+import RCSRNEComparison from './rcs-rne-comparison';
 import DirigeantsSection from './rne-dirigeants';
 import DirigeantSummary from './summary';
+
+export type IDirigeantsFetching =
+  | IDirigeants
+  | IAPINotRespondingError
+  | IDataFetchingState;
+
+function mergeDirigeants(
+  dirigeantsRNE: IDirigeantsFetching,
+  dirigeantsRCS: IDirigeantsFetching
+) {
+  if (isUnauthorized(dirigeantsRCS)) {
+    return { dirigeants: dirigeantsRNE, isProtected: false };
+  } else {
+    if (isDataLoading(dirigeantsRCS) || isDataLoading(dirigeantsRNE)) {
+      return { dirigeants: IDataFetchingState.LOADING, isProtected: false };
+    }
+    if (isDataSuccess(dirigeantsRCS)) {
+      return { dirigeants: dirigeantsRCS, isProtected: true };
+    }
+  }
+  return { dirigeants: dirigeantsRNE, isProtected: false };
+}
 
 export function DirigeantInformation({
   uniteLegale,
@@ -17,7 +46,11 @@ export function DirigeantInformation({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
-  const immatriculationRNE = useAPIRouteData('rne', uniteLegale.siren, session);
+  const dirigeantsRNE = useAPIRouteData(
+    'rne-dirigeants',
+    uniteLegale.siren,
+    session
+  );
 
   const mandatairesRCS = useAPIRouteData(
     'espace-agent/rcs-mandataires',
@@ -25,32 +58,33 @@ export function DirigeantInformation({
     session
   );
 
-  const hasMandataireRCS = isDataSuccess(mandatairesRCS);
+  const { dirigeants, isProtected } = mergeDirigeants(
+    dirigeantsRNE,
+    mandatairesRCS
+  );
 
   return (
     <>
-      <DirigeantSummary
+      <DirigeantSummary uniteLegale={uniteLegale} dirigeants={dirigeants} />
+      <DirigeantsSection
         uniteLegale={uniteLegale}
-        immatriculationRNE={immatriculationRNE}
+        dirigeants={dirigeants}
+        isProtected={isProtected}
+        warning={
+          <>
+            {/* {metadata.isFallback && dirigeants.length > 0 && (
+                <InpiPartiallyDownWarning />
+              )} */}
+            <RCSRNEComparison
+              dirigeantsRCS={mandatairesRCS}
+              dirigeantsRNE={dirigeantsRNE}
+              uniteLegale={uniteLegale}
+            />
+          </>
+        }
       />
-      {hasMandataireRCS ? (
-        <DirigeantsProtectedSection
-          uniteLegale={uniteLegale}
-          immatriculationRNE={immatriculationRNE}
-          mandatairesRCS={mandatairesRCS}
-        />
-      ) : (
-        <DirigeantsSection
-          uniteLegale={uniteLegale}
-          immatriculationRNE={immatriculationRNE}
-        />
-      )}
-
       <BreakPageForPrint />
-      <BeneficiairesSection
-        immatriculationRNE={immatriculationRNE}
-        uniteLegale={uniteLegale}
-      />
+      <BeneficiairesSection uniteLegale={uniteLegale} />
     </>
   );
 }

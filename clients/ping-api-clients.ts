@@ -51,7 +51,7 @@ const ping = async (slug: string | string[]) => {
     case 'api-recherche':
       return await clientSearchRechercheEntreprise({
         searchTerms: 'test',
-        page: 1,
+        pageResultatsRecherche: 1,
         searchFilterParams: undefined,
         fallbackOnStaging: false,
         useCache,

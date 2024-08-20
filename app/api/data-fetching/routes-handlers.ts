@@ -7,6 +7,7 @@ import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
 import { getConformiteEntreprise } from '#models/espace-agent/conformite';
 import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
+import { getDirigeantsRNE } from '#models/immatriculation/dirigeants';
 import {
   getDocumentsRNEProtected,
   getImmatriculationRNE,
@@ -23,6 +24,7 @@ export const APIRoutesHandlers = {
   'espace-agent/rcs-mandataires': getMandatairesRCS,
   'espace-agent/rne/documents': getDocumentsRNEProtected,
   'espace-agent/association-protected': getAssociationProtected,
+  'rne-dirigeants': getDirigeantsRNE,
   rne: getImmatriculationRNE,
   association: getAssociationFromSlug,
   'verify-tva': buildAndVerifyTVA,

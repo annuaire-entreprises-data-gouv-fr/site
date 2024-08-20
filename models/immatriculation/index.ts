@@ -58,18 +58,26 @@ export interface IPersonneMorale {
   role: string;
 }
 
-export type IDirigeant = IEtatCivil | IPersonneMorale;
-
 export interface IImmatriculationRNE {
   siren: Siren;
   identite: IIdentite;
-  dirigeants: IDirigeant[];
   beneficiaires: IBeneficiaire[];
+  dirigeants: (IEtatCivil | IPersonneMorale)[];
   observations: {
     numObservation: string;
     dateAjout: string;
     description: string;
   }[];
+  metadata: {
+    isFallback: boolean;
+  };
+}
+
+export interface IDirigeants {
+  data: (IEtatCivil | IPersonneMorale)[];
+}
+
+export interface IDirigeantsRNE extends IDirigeants {
   metadata: {
     isFallback: boolean;
   };

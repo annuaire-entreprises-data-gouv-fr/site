@@ -1,6 +1,5 @@
 import { HttpBadRequestError, HttpNotFound } from '#clients/exceptions';
 import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
-import { IDirigeant } from '#models/immatriculation';
 import SearchFilterParams from '#models/search-filter-params';
 import { removeSpecialChars } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
@@ -12,13 +11,14 @@ import {
   IsLikelyASirenOrSiretException,
   NotEnoughParamsException,
 } from './core/types';
+import { IDirigeants } from './immatriculation';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
   nombreEtablissementsOuverts: number;
   chemin: string;
   matchingEtablissements: IEtablissement[];
-  dirigeants: IDirigeant[];
+  dirigeants: IDirigeants['data'];
 }
 
 export interface ISearchResults {
