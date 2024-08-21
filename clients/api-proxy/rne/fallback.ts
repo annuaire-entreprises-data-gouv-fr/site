@@ -6,12 +6,12 @@ import { Siren } from '#utils/helpers';
 import { clientAPIProxy } from '../client';
 
 /**
- * RNE through the API proxy - API RNE
+ * RNE through the API proxy - scrapping site as fallback
  * @param siren
  */
-const fetchRNEImmatriculation = async (siren: Siren, useCache = true) =>
+const fetchRNEImmatriculationFallback = async (siren: Siren, useCache = true) =>
   clientAPIProxy<IImmatriculationRNE>(
-    routes.proxy.rne.immatriculation.default + siren,
+    routes.proxy.rne.immatriculation.fallback + siren,
     {
       timeout: constants.timeout.XXXL,
       useCache,
@@ -19,7 +19,7 @@ const fetchRNEImmatriculation = async (siren: Siren, useCache = true) =>
   );
 
 const stubbedClient = stubClientWithSnapshots({
-  fetchRNEImmatriculation,
+  fetchRNEImmatriculationFallback,
 });
 
-export { stubbedClient as fetchRNEImmatriculation };
+export { stubbedClient as fetchRNEImmatriculationFallback };
