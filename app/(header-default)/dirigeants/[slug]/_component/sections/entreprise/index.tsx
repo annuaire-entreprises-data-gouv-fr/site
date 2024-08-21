@@ -71,16 +71,11 @@ export function DirigeantInformation({
         dirigeants={dirigeants}
         isProtected={isProtected}
         warning={
-          <>
-            {/* {metadata.isFallback && dirigeants.length > 0 && (
-                <InpiPartiallyDownWarning />
-              )} */}
-            <RCSRNEComparison
-              dirigeantsRCS={mandatairesRCS}
-              dirigeantsRNE={dirigeantsRNE}
-              uniteLegale={uniteLegale}
-            />
-          </>
+          <RCSRNEComparison
+            dirigeantsRCS={mandatairesRCS}
+            dirigeantsRNE={dirigeantsRNE}
+            uniteLegale={uniteLegale}
+          />
         }
       />
       <BreakPageForPrint />

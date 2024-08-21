@@ -75,10 +75,7 @@ export interface IImmatriculationRNE {
 
 export interface IDirigeants {
   data: (IEtatCivil | IPersonneMorale)[];
-}
-
-export interface IDirigeantsRNE extends IDirigeants {
-  metadata: {
+  metadata?: {
     isFallback: boolean;
   };
 }

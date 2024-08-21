@@ -1,5 +1,6 @@
 'use client';
 
+import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { Tag } from '#components-ui/tag';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
@@ -31,11 +32,12 @@ export const ObservationsRNE: React.FC<{
         immatriculationRNE.observations &&
         immatriculationRNE.observations.length > 0 ? (
           <>
-            <br />
+            {immatriculationRNE.metadata.isFallback && (
+              <InpiPartiallyDownWarning />
+            )}
             <p>
-              Cette structure possède également{' '}
-              {immatriculationRNE.observations.length} observation(s) au{' '}
-              <strong>RNE</strong>
+              Cette structure possède {immatriculationRNE.observations.length}{' '}
+              observation(s) au <strong>RNE</strong>
               &nbsp;:
             </p>
             <FullTable

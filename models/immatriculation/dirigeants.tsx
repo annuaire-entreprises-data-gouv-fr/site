@@ -6,7 +6,7 @@ import {
   IAPINotRespondingError,
 } from '#models/api-not-responding';
 import { verifySiren } from '#utils/helpers';
-import { IDirigeantsRNE } from '.';
+import { IDirigeants } from '.';
 
 /*
  * Request Immatriculation from INPI's RNE
@@ -14,7 +14,7 @@ import { IDirigeantsRNE } from '.';
  */
 export const getDirigeantsRNE = async (
   maybeSiren: string
-): Promise<IAPINotRespondingError | IDirigeantsRNE> => {
+): Promise<IAPINotRespondingError | IDirigeants> => {
   const siren = verifySiren(maybeSiren);
 
   try {

@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import { Info } from '#components-ui/alerts';
+import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { INPI } from '#components/administrations';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
@@ -48,6 +49,7 @@ function DirigeantsSection({
         const plural = dirigeants.data.length > 1 ? 's' : '';
         return (
           <>
+            {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}
             {warning ? warning : null}
             {isProtected ? (
               <Info>
