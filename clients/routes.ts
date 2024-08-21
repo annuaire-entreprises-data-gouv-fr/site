@@ -136,7 +136,8 @@ const routes = {
     rne: {
       immatriculation: {
         default: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
-        fallback: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
+        fallback:
+          'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/fallback',
       },
       documents: {
         list: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/documents/',
