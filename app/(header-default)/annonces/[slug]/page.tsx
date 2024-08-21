@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -15,7 +16,6 @@ import extractParamsAppRouter, {
 import getSession from '#utils/server-side-helper/app/get-session';
 import AnnoncesBodacc from 'app/(header-default)/annonces/[slug]/_components/bodacc';
 import AnnoncesJOAFESection from 'app/(header-default)/annonces/[slug]/_components/joafe';
-import { Metadata } from 'next';
 import { ObservationsRNE } from './_components/observations-rne';
 
 export const generateMetadata = async (

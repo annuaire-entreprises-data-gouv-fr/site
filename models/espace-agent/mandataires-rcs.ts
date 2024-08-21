@@ -14,10 +14,10 @@ export const getMandatairesRCS = async (
   const siren = verifySiren(maybeSiren);
   try {
     const mandatairesRCS = await clientApiEntrepriseMandatairesRCS(siren);
-    if (mandatairesRCS.length === 0) {
+    if (mandatairesRCS.data.length === 0) {
       return APINotRespondingFactory(EAdministration.INFOGREFFE, 404);
     }
-    return { data: mandatairesRCS };
+    return mandatairesRCS;
   } catch (error) {
     return handleApiEntrepriseError(error, {
       siren,

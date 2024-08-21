@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   estDiffusible,
   nonDiffusibleDataFormatter,
@@ -5,11 +6,10 @@ import {
 import { IUniteLegale } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import React from 'react';
 
 const ExtraitRNELink: React.FC<{
   uniteLegale: IUniteLegale;
-  label: string;
+  label?: string;
   session: ISession | null;
 }> = ({ uniteLegale, label, session }) => {
   return estDiffusible(uniteLegale) ||

@@ -1,6 +1,6 @@
+import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import { INPI, INSEE } from '#components/administrations';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Comment retrouver les données contenues dans un extrait KBIS ou D1 ?',

@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 import {
-  IDirigeant,
+  IDirigeants,
   IEtatCivil,
   IPersonneMorale,
 } from '#models/immatriculation';
@@ -38,10 +38,7 @@ export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
  * GET documents from API Entreprise
  */
 export const clientApiEntrepriseMandatairesRCS = async (siren: Siren) => {
-  return await clientAPIEntreprise<
-    IAPIEntrepriseMandatairesRCS,
-    Array<IDirigeant>
-  >(
+  return await clientAPIEntreprise<IAPIEntrepriseMandatairesRCS, IDirigeants>(
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.mandatairesRCS.replace('{siren}', siren)}`,
@@ -51,24 +48,26 @@ export const clientApiEntrepriseMandatairesRCS = async (siren: Siren) => {
 
 const mapToDomainObject = (
   response: IAPIEntrepriseMandatairesRCS
-): Array<IDirigeant> => {
-  return response.data.map(({ data: dirigeant }) => {
-    if (dirigeant.type === 'personne_physique') {
+): IDirigeants => {
+  return {
+    data: response.data.map(({ data: dirigeant }) => {
+      if (dirigeant.type === 'personne_physique') {
+        return {
+          sexe: null,
+          nom: dirigeant.nom,
+          prenom: dirigeant.prenom,
+          role: dirigeant.fonction,
+          lieuNaissance: dirigeant.lieu_naissance,
+          dateNaissance: dirigeant.date_naissance,
+          dateNaissancePartial: dirigeant.date_naissance?.slice(0, 7),
+        } as IEtatCivil;
+      }
       return {
-        sexe: null,
-        nom: dirigeant.nom,
-        prenom: dirigeant.prenom,
+        siren: dirigeant.numero_identification,
+        denomination: dirigeant.raison_sociale,
+        natureJuridique: null,
         role: dirigeant.fonction,
-        lieuNaissance: dirigeant.lieu_naissance,
-        dateNaissance: dirigeant.date_naissance,
-        dateNaissancePartial: dirigeant.date_naissance?.slice(0, 7),
-      } as IEtatCivil;
-    }
-    return {
-      siren: dirigeant.numero_identification,
-      denomination: dirigeant.raison_sociale,
-      natureJuridique: null,
-      role: dirigeant.fonction,
-    } as IPersonneMorale;
-  });
+      } as IPersonneMorale;
+    }),
+  };
 };

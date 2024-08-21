@@ -88,7 +88,7 @@ function DirigeantsSection({
                 </p>
 
                 <DirigeantContent
-                  dirigeants={dirigeants.data}
+                  dirigeants={dirigeants}
                   uniteLegale={uniteLegale}
                 />
               </>

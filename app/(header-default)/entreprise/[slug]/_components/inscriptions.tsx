@@ -1,3 +1,4 @@
+import React, { PropsWithChildren } from 'react';
 import { OpenClosedTag } from '#components-ui/badge/frequent';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
@@ -7,7 +8,6 @@ import { estActif } from '#models/core/etat-administratif';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatDate } from '#utils/helpers';
-import React, { PropsWithChildren } from 'react';
 import styles from './style.module.css';
 
 const Wrapper: React.FC<PropsWithChildren<{ link: JSX.Element }>> = ({

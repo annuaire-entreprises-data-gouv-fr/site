@@ -1,10 +1,10 @@
+import React from 'react';
 import { Warning } from '#components-ui/alerts';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import React from 'react';
 
 type IProps = {
   uniteLegale: IUniteLegale;

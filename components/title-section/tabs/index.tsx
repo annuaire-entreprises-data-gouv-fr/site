@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { PrintNever } from '#components-ui/print-visibility';
 import {
   checkHasLabelsAndCertificates,
@@ -10,7 +11,6 @@ import {
 } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import Link from 'next/link';
 import styles from './styles.module.css';
 import TabLink from './tab-link';
 

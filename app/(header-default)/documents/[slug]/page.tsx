@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
@@ -14,7 +15,6 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
 import ActesSection from './_components/actes';
 import CarteProfessionnelleTPSection from './_components/carte-professionnelle-TP-section';
 import JustificatifsSection from './_components/justificatifs';

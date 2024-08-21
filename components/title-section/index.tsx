@@ -1,3 +1,4 @@
+import React from 'react';
 import IsActiveTag from '#components-ui/is-active-tag';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
@@ -9,7 +10,6 @@ import { estDiffusible, estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatIntFr } from '#utils/helpers';
-import React from 'react';
 import TitleAlerts from './alerts';
 import styles from './styles.module.css';
 import { FICHE, Tabs } from './tabs';

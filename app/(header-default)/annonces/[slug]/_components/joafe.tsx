@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import routes from '#clients/routes';
 import AssociationCreationNotFoundAlert from '#components-ui/alerts-with-explanations/association-creation-not-found-alert';
 import ButtonLink from '#components-ui/button';
@@ -11,7 +12,6 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IAssociation } from '#models/core/types';
 import { formatDate } from '#utils/helpers';
 import { useFetchJOAFE } from 'hooks';
-import React from 'react';
 
 const AnnoncesJOAFESection: React.FC<{
   uniteLegale: IAssociation;
