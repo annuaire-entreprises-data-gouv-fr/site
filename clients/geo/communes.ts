@@ -8,11 +8,12 @@ type IGeoCommuneResponse = {
   codesPostaux: string[];
   nom: string;
   code: string;
+  departement?: { code: string; nom: string };
 };
 
 const clientCommunesByName = async (slug: string): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoCommuneResponse[]>(
-    `${routes.geo.communes}&nom=${slug}`,
+    `${routes.geo.communes}&nom=${slug}&fields=departement`,
     {
       timeout: constants.timeout.L,
     }
@@ -43,7 +44,11 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
               {
                 type: 'insee',
                 value: commune.code,
-                label: `${commune.nom} (Toute la ville)`,
+                label: `${commune.nom}${
+                  commune.departement?.code
+                    ? ` (${commune.departement?.code})`
+                    : ''
+                } - toute la ville`,
               } as IGeoElement,
             ]
           : []),
