@@ -55,10 +55,10 @@ more:
   - label: Consulter le site du BODACC
     href: https://www.bodacc.fr/pages/home/
   - label: 'SIREN'
-    href: '/definitions/siren'
+    href: '/definitions/numero-siren'
 
   - label: 'SIRET'
-    href: '/definitions/siret'
+    href: '/definitions/numero-siret'
 
   - label: 'Kbis'
     href: '/definitions/kbis'

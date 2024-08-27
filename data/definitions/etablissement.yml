@@ -50,10 +50,10 @@ body: |
 
 more:
   - label: 'SIRET'
-    href: '/definitions/siret'
+    href: '/definitions/numero-siret'
 
   - label: 'SIREN'
-    href: '/definitions/siren'
+    href: '/definitions/numero-siren'
 
   - label: 'Kbis'
     href: '/definitions/kbis'
