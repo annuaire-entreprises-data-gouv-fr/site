@@ -10,13 +10,13 @@ cta:
 
 more:
   - label: 'Entreprise individuelle'
-    href: '/definition/entreprise-individuelle'
+    href: '/definitions/entreprise-individuelle'
 
   - label: 'Personne physique'
-    href: '/definition/personne-physique'
+    href: '/definitions/personne-physique'
 
   - label: 'Personne morale'
-    href: '/definition/personnne-morale'
+    href: '/definitions/personnne-morale'
 
 body: |
   ## **Entreprise non diffusible : définition**
