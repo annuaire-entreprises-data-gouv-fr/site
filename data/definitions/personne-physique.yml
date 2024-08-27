@@ -43,10 +43,10 @@ body: |
 
 more:
   - label: 'Personne morale'
-    href: '/definition/personne-morale'
+    href: '/definitions/personne-morale'
 
   - label: 'SIREN'
-    href: '/definition/siren'
+    href: '/definitions/siren'
 
   - label: 'Entreprise non diffusible'
-    href: '/definition/entreprise-non-diffusible'
+    href: '/definitions/entreprise-non-diffusible'

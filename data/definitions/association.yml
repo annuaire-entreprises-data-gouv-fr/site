@@ -56,10 +56,10 @@ body: |
 
 more:
   - label: 'Société à mission'
-    href: '/definition/societe-a-mission'
+    href: '/definitions/societe-a-mission'
 
   - label: 'SIREN'
-    href: '/definition/siren'
+    href: '/definitions/siren'
 
   - label: 'SIRET'
-    href: '/definition/siret'
+    href: '/definitions/siret'

@@ -49,10 +49,10 @@ body: |
 
 more:
   - label: 'SIREN'
-    href: '/definition/siren'
+    href: '/definitions/siren'
 
   - label: 'Numéro de TVA intracommunautaire'
-    href: '/definition/numero-tva-intracommunautaire'
+    href: '/definitions/numero-tva-intracommunautaire'
 
   - label: 'Kbis'
-    href: '/definition/kbis'
+    href: '/definitions/kbis'

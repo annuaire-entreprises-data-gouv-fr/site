@@ -53,10 +53,10 @@ body: |
 
 more:
   - label: 'Économie Sociale et Solidaire (ESS)'
-    href: '/definition/economie-sociale-et-solidaire-ess'
+    href: '/definitions/economie-sociale-et-solidaire-ess'
 
   - label: 'Label RGE (Reconnu Garant de l’Environnement)'
-    href: '/definition/label-rge-reconnu-garant-de-l-environnement'
+    href: '/definitions/label-rge-reconnu-garant-de-l-environnement'
 
   - label: 'Label « Professionnel du bio »'
-    href: '/definition/label-professionnel-du-bio'
+    href: '/definitions/label-professionnel-du-bio'

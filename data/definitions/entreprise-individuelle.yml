@@ -5,13 +5,13 @@ seo:
   description: Une entreprise individuelle est une forme d'entreprise simplifiée qui regroupe les statuts d'entrepreneur individuel, de micro-entrepreneur et anciennement d'auto-entrepreneur.
 more:
   - label: 'Personne physique'
-    href: '/definition/personne-physique'
+    href: '/definitions/personne-physique'
 
   - label: 'SIREN'
-    href: '/definition/siren'
+    href: '/definitions/siren'
 
   - label: 'Entreprise non diffusible'
-    href: '/definition/entreprise-non-diffusible'
+    href: '/definitions/entreprise-non-diffusible'
 
 body: |
 

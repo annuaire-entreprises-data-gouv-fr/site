@@ -31,10 +31,10 @@ body: |
 
 more:
   - label: 'Établissement'
-    href: '/definition/etablissement'
+    href: '/definitions/etablissement'
 
   - label: 'SIRET'
-    href: '/definition/siret'
+    href: '/definitions/siret'
 
   - label: 'SIREN'
-    href: '/definition/siren'
+    href: '/definitions/siren'
