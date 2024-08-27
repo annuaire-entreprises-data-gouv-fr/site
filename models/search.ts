@@ -11,7 +11,7 @@ import {
   IsLikelyASirenOrSiretException,
   NotEnoughParamsException,
 } from './core/types';
-import { IDirigeants } from './immatriculation';
+import { IDirigeants } from './rne/types';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;

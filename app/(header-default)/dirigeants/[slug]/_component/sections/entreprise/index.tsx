@@ -9,7 +9,7 @@ import {
   isDataSuccess,
   isUnauthorized,
 } from '#models/data-fetching';
-import { IDirigeants } from '#models/immatriculation';
+import { IDirigeants } from '#models/rne/types';
 import { ISession } from '#models/user/session';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import BeneficiairesSection from './beneficiaires';

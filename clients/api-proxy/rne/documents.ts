@@ -1,7 +1,7 @@
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
-import { IActesRNE } from '#models/immatriculation';
+import { IActesRNE } from '#models/rne/types';
 import { Siren } from '#utils/helpers';
 import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-request-caller-infos';
 import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';

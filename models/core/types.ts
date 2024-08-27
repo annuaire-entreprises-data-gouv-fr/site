@@ -1,10 +1,11 @@
 /** COMMON TYPES */
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
   createEtablissementsList,
   IEtablissementsList,
 } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
-import { IEtatCivil } from '#models/immatriculation';
+import { IEtatCivil } from '#models/rne/types';
 import { IdRna, Siren, Siret } from '#utils/helpers';
 import { EAdministration } from '../administrations/EAdministration';
 import {
@@ -109,7 +110,7 @@ export interface IUniteLegale extends IEtablissementsList {
   categorieEntreprise: string | null;
   anneeCategorieEntreprise: string | null;
   complements: IUniteLegaleComplements;
-  immatriculation: IUniteLegaleImmatriculation | null;
+  immatriculation: IUniteLegaleImmatriculation | IAPINotRespondingError | null;
   association: {
     idAssociation: IdRna | string | null;
   };
@@ -163,13 +164,11 @@ export interface IUniteLegaleImmatriculation {
   dateDebutActivite: string;
   dateImmatriculation: string;
   dateRadiation: string;
-  duree: number;
+  duree: number | string;
   natureEntreprise: string[];
   dateCloture: string;
   isPersonneMorale: boolean;
-  capital: number;
-  estCapitalVariable: boolean;
-  deviseCapital: string;
+  capital: string;
 }
 
 export interface IUniteLegaleComplements {

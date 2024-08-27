@@ -8,26 +8,6 @@ import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatDate } from '#utils/helpers';
 
-const formatCapitalSocial = (
-  immatriculation: IUniteLegale['immatriculation']
-) => {
-  if (immatriculation?.capital) {
-    try {
-      return `${new Intl.NumberFormat('fr-FR', {
-        style: 'currency',
-        currency: immatriculation?.deviseCapital ?? 'EUR',
-      }).format(immatriculation?.capital)} ${
-        immatriculation.estCapitalVariable ? 'variable' : 'fixe'
-      }`;
-    } catch {
-      return `${immatriculation?.capital} ${immatriculation?.deviseCapital} ${
-        immatriculation.estCapitalVariable ? 'variable' : 'fixe'
-      }`;
-    }
-  }
-  return '';
-};
-
 const formatDateCloture = (DDMM: string) => {
   if (DDMM && DDMM.length === 4) {
     return `${DDMM.slice(0, 2)}/${DDMM.slice(2)}`;
@@ -89,7 +69,7 @@ export const UniteLegaleImmatriculationSection = ({
                               dans certaines limites sans modification des
                               statuts.
                             </FAQLink>,
-                            formatCapitalSocial(immatriculation),
+                            immatriculation?.capital,
                           ],
                           [
                             'Clôture de l’exercice comptable',

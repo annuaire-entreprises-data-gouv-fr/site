@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next';
 import { Info } from '#components-ui/alerts';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import Meta from '#components/meta/meta-client';
@@ -6,7 +5,7 @@ import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import { Exception } from '#models/exceptions';
-import { IEtatCivil } from '#models/immatriculation';
+import { IEtatCivil } from '#models/rne/types';
 import { ISearchResults, searchWithoutProtectedSiren } from '#models/search';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import {
@@ -19,6 +18,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-helper/page/post-server-side-props';
+import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {

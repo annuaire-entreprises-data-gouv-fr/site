@@ -13,14 +13,18 @@ export const ObservationsRNE: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const immatriculationRNE = useAPIRouteData('rne', uniteLegale.siren, session);
+  const observations = useAPIRouteData(
+    'observations',
+    uniteLegale.siren,
+    session
+  );
 
   return (
     <AsyncDataSectionClient
       id="observations-rne"
       title="Observations au RNE"
       sources={[EAdministration.INPI]}
-      data={immatriculationRNE}
+      data={observations}
       notFoundInfo={
         <>
           Cette structure ne possède pas de fiche d’immatriculation au{' '}
@@ -28,21 +32,18 @@ export const ObservationsRNE: React.FC<{
         </>
       }
     >
-      {(immatriculationRNE) =>
-        immatriculationRNE.observations &&
-        immatriculationRNE.observations.length > 0 ? (
+      {(observations) =>
+        observations && observations.length > 0 ? (
           <>
-            {immatriculationRNE.metadata.isFallback && (
-              <InpiPartiallyDownWarning />
-            )}
+            {metadata.isFallback && <InpiPartiallyDownWarning />}
             <p>
-              Cette structure possède {immatriculationRNE.observations.length}{' '}
-              observation(s) au <strong>RNE</strong>
+              Cette structure possède {observations.length} observation(s) au{' '}
+              <strong>RNE</strong>
               &nbsp;:
             </p>
             <FullTable
               head={['Date d’ajout', 'Numéro d’observation', 'Description']}
-              body={immatriculationRNE.observations.map((o) => [
+              body={observations.map((o) => [
                 o.dateAjout,
                 o.numObservation ? <Tag>{o.numObservation}</Tag> : '',
                 o.description,

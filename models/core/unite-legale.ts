@@ -8,6 +8,7 @@ import { InseeClientOptions } from '#clients/sirene-insee';
 import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
+import { getImmatriculation } from '#models/rne/immatriculation';
 import { Siren, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
@@ -31,6 +32,8 @@ import {
   IUniteLegale,
   SirenNotFoundError,
   createDefaultUniteLegale,
+  isAssociation,
+  isServicePublic,
 } from './types';
 
 /**
@@ -94,6 +97,14 @@ class UniteLegaleBuilder {
     ) {
       uniteLegale.etatAdministratif =
         IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;
+    }
+
+    // for some reason we didnot get immatriculation from Recherche Entreprise
+    if (isAPI404(uniteLegale.immatriculation)) {
+      if (!isServicePublic(uniteLegale) && !isAssociation(uniteLegale)) {
+        const immatriculation = await getImmatriculation(this._siren);
+        uniteLegale.immatriculation = immatriculation;
+      }
     }
 
     return uniteLegale;

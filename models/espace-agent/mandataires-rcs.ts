@@ -4,7 +4,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { IDirigeants } from '#models/immatriculation';
+import { IDirigeants } from '#models/rne/types';
 import { verifySiren } from '#utils/helpers';
 import { handleApiEntrepriseError } from './utils';
 

@@ -7,11 +7,11 @@ import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
 import { getConformiteEntreprise } from '#models/espace-agent/conformite';
 import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
-import { getDirigeantsRNE } from '#models/immatriculation/dirigeants';
+import { getDirigeantsRNE } from '#models/rne/dirigeants';
 import {
   getDocumentsRNEProtected,
   getImmatriculationRNE,
-} from '#models/immatriculation/rne';
+} from '#models/rne/immatriculation';
 import { buildAndVerifyTVA } from '#models/tva/verify';
 import { UnwrapPromise } from 'types';
 

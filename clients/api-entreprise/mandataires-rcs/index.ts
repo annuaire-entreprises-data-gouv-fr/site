@@ -1,9 +1,5 @@
 import routes from '#clients/routes';
-import {
-  IDirigeants,
-  IEtatCivil,
-  IPersonneMorale,
-} from '#models/immatriculation';
+import { IDirigeants, IEtatCivil, IPersonneMorale } from '#models/rne/types';
 import { Siren } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<

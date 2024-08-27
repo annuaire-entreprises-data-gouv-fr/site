@@ -1,10 +1,6 @@
 import { FullTable } from '#components/table/full';
 import { IUniteLegale } from '#models/core/types';
-import {
-  IDirigeants,
-  IEtatCivil,
-  IPersonneMorale,
-} from '#models/immatriculation';
+import { IDirigeants, IEtatCivil, IPersonneMorale } from '#models/rne/types';
 import { formatDateLong, formatDatePartial, formatIntFr } from '#utils/helpers';
 import { isPersonneMorale } from '../is-personne-morale';
 

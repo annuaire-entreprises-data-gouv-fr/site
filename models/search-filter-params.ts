@@ -1,5 +1,5 @@
 import { IIconsSlug } from '#components-ui/icon';
-import { IEtatCivil } from '#models/immatriculation';
+import { IEtatCivil } from '#models/rne/types';
 
 export interface IParams {
   ageMax?: number | string;

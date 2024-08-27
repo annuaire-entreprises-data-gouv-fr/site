@@ -1,5 +1,3 @@
-import { Siren } from '#utils/helpers';
-
 interface IActeRNE {
   id: string;
   dateDepot: string;
@@ -27,28 +25,7 @@ export interface IEtatCivil {
   lieuNaissance: string;
   dateNaissancePartial?: string;
   dateNaissance?: string;
-}
-
-export interface IBeneficiaire {
-  type: string;
-  nom: string;
-  prenoms: string;
-  dateNaissancePartial: string;
-  nationalite: string;
-  dateGreffe: string;
-}
-export interface IIdentite {
-  denomination: string;
-  dateImmatriculation: string;
-  dateDebutActiv: string;
-  dateRadiation: string;
-  dateCessationActivite: string;
-  isPersonneMorale: boolean;
-  dateClotureExercice: string;
-  dureePersonneMorale: string;
-  capital: string;
-  libelleNatureJuridique: string;
-  natureEntreprise?: string;
+  nationalite?: string;
 }
 
 export interface IPersonneMorale {
@@ -58,11 +35,7 @@ export interface IPersonneMorale {
   role: string;
 }
 
-export interface IImmatriculationRNE {
-  siren: Siren;
-  identite: IIdentite;
-  beneficiaires: IBeneficiaire[];
-  dirigeants: (IEtatCivil | IPersonneMorale)[];
+export interface IObservations {
   observations: {
     numObservation: string;
     dateAjout: string;

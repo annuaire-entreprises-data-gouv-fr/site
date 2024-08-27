@@ -31,7 +31,7 @@ export type IResult = {
   matching_etablissements: IMatchingEtablissement[];
   etablissements?: IMatchingEtablissement[];
   complements: IComplements;
-  immatriculation: IImmatriculation;
+  immatriculation: IImmatriculationResponse;
   caractere_employeur: string;
   slug: string;
 };
@@ -40,6 +40,8 @@ export type IDirigeant = {
   nom: string;
   prenoms: string;
   annee_de_naissance: string;
+  date_de_naissance: string;
+  nationalite: string;
   qualite: string;
   type_dirigeant: string;
   siren: string;
@@ -122,7 +124,7 @@ export type IComplements = {
   liste_idcc: string[];
 };
 
-export type IImmatriculation = {
+export type IImmatriculationResponse = {
   date_debut_activite: string | null;
   date_immatriculation: string | null;
   date_radiation: string | null;
