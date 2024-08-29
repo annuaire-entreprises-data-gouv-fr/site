@@ -1,5 +1,4 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { Icon } from '#components-ui/icon/wrapper';
 import { Loader } from '#components-ui/loader';
 import { INPI, INSEE, MI } from '#components/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
@@ -69,13 +68,9 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
         </a>
       );
 
-      const beneficiairesCount = 0;
       summaries.push(
         <a href="#beneficiaires">
-          <Icon slug="alertFill" color="#ff9c00">
-            {beneficiairesCount} bénéficiaires inscrits à Référentiel des
-            Bénéficiaires Effectifs
-          </Icon>
+          État inconnu au Registre des Bénéficiaires Effectifs (RBE)
         </a>
       );
     }

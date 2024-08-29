@@ -15,7 +15,7 @@ import { verifySiren } from '#utils/helpers';
  * Request Immatriculation from INPI's RNE
  * @param siren
  */
-export const getImmatriculation = async (
+export const getRNEImmatriculation = async (
   maybeSiren: string
 ): Promise<IAPINotRespondingError | IUniteLegaleImmatriculation> => {
   const siren = verifySiren(maybeSiren);

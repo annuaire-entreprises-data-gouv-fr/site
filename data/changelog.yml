@@ -11,6 +11,15 @@
 #   site: true
 
 ---
+- date: 29/08/2024
+  target:
+    site: true
+  body: |
+    L’onglet justificatif disparait ! Les informations qu’il contenait sont toujours présentes mais changent de place :
+
+    - les information d’immatriculation au RNE (date d’immatriculation, capital social, nature d'entreprise) sont déplacées dans l’onglet “Fiche résumé”
+    - les justificatifs d’existence (annonce JOAFE,  avis Sirene ou extrait RNE) sont déplacés dans l’onglet “Documents”
+    - les observations au RNE (uniquement pour les entreprises) sont déplacées dans l’onglet “Annonces”, renommé “Annonces & observations”
 - date: 31/07/2024
   target:
     agent: true

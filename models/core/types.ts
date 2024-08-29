@@ -164,6 +164,7 @@ export interface IUniteLegaleImmatriculation {
   dateDebutActivite: string;
   dateImmatriculation: string;
   dateRadiation: string;
+  dateFin: string;
   duree: number | string;
   natureEntreprise: string[];
   dateCloture: string;

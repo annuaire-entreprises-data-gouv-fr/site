@@ -81,7 +81,11 @@ export const UniteLegaleImmatriculationSection = ({
                       ? [
                           [
                             'Durée de la personne morale',
-                            `${immatriculation?.duree} ans`,
+                            `${immatriculation?.duree} ans${
+                              immatriculation?.dateFin
+                                ? `, jusqu’au ${immatriculation?.dateFin}`
+                                : ''
+                            }`,
                           ],
                         ]
                       : []),

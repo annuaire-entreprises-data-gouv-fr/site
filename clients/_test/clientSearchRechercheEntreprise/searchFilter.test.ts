@@ -6,7 +6,7 @@ import simplifyParams from './simplify-params';
 
 const defaultParams = {
   searchTerms: '',
-  page: 1,
+  pageResultatsRecherche: 1,
   searchFilterParams: new SearchFilterParams({}),
 };
 

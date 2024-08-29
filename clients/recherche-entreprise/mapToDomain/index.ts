@@ -13,6 +13,7 @@ import {
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
 } from '#utils/helpers/insee-variables';
+import { getCapital, getDateFin } from '#utils/helpers/rne-variables';
 import {
   IDirigeant,
   IMatchingEtablissement,
@@ -20,37 +21,22 @@ import {
   ISiege,
 } from '../interface';
 
-const formatCapital = (
-  capital: number,
-  devise: string,
-  estVariable: boolean
-) => {
-  if (capital) {
-    try {
-      return `${new Intl.NumberFormat('fr-FR', {
-        style: 'currency',
-        currency: devise ?? 'EUR',
-      }).format(capital)} ${estVariable ? 'variable' : 'fixe'}`;
-    } catch {
-      return `${capital} ${devise} ${estVariable ? 'variable' : 'fixe'}`;
-    }
-  }
-  return '';
-};
-
-export const mapToImmatriculation = (i: IResult['immatriculation']) => {
+export const mapToImmatriculation = (i: IResult['immatriculation'] | null) => {
+  const duree = i?.duree_personne_morale ?? 0;
+  const dateImmatriculation = i?.date_immatriculation ?? '';
   return {
-    dateDebutActivite: i.date_debut_activite ?? '',
-    dateImmatriculation: i.date_immatriculation ?? '',
-    dateRadiation: i.date_radiation ?? '',
-    duree: i.duree_personne_morale ?? 0,
-    natureEntreprise: i.nature_entreprise || [],
-    dateCloture: i.date_cloture_exercice ?? '',
-    isPersonneMorale: !!i.capital_social,
-    capital: formatCapital(
-      i.capital_social ?? 0,
-      i.devise_capital ?? '',
-      i.capital_variable ?? false
+    dateDebutActivite: i?.date_debut_activite ?? '',
+    dateRadiation: i?.date_radiation ?? '',
+    dateImmatriculation,
+    duree,
+    dateFin: getDateFin(duree, dateImmatriculation),
+    natureEntreprise: i?.nature_entreprise || [],
+    dateCloture: i?.date_cloture_exercice ?? '',
+    isPersonneMorale: !!i?.capital_social,
+    capital: getCapital(
+      i?.capital_social ?? 0,
+      i?.devise_capital ?? '',
+      i?.capital_variable ?? false
     ),
   };
 };

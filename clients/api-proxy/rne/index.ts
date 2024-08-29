@@ -1,8 +1,9 @@
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
-import { IObservations } from '#models/rne/types';
+import { IDirigeants, IObservations } from '#models/rne/types';
 import { Siren } from '#utils/helpers';
+import { getDateFin } from '#utils/helpers/rne-variables';
 import { clientAPIProxy } from '../client';
 
 type IRNEProxyResponse = {
@@ -15,11 +16,12 @@ type IRNEProxyResponse = {
     dateCessationActivite: string;
     isPersonneMorale: boolean;
     dateClotureExercice: string;
-    dureePersonneMorale: string;
+    dureePersonneMorale: number;
     capital: string;
     libelleNatureJuridique: string;
   };
   observations: IObservations[];
+  dirigeants: IDirigeants['data'];
 };
 
 /**
@@ -55,7 +57,11 @@ const fetchRNEImmatriculationFallback = async (
   return mapToDomainObject(response);
 };
 
-const mapToDomainObject = ({ observations, identite }: IRNEProxyResponse) => {
+const mapToDomainObject = ({
+  observations,
+  identite,
+  dirigeants,
+}: IRNEProxyResponse) => {
   return {
     observations,
     immatriculation: {
@@ -63,11 +69,16 @@ const mapToDomainObject = ({ observations, identite }: IRNEProxyResponse) => {
       dateImmatriculation: identite.dateImmatriculation,
       dateDebutActivite: identite.dateDebutActiv,
       dateRadiation: identite.dateRadiation,
+      dateFin: getDateFin(
+        identite.dureePersonneMorale,
+        identite.dateImmatriculation
+      ),
       isPersonneMorale: identite.isPersonneMorale,
       dateCloture: identite.dateClotureExercice,
       duree: identite.dureePersonneMorale,
       capital: identite.capital,
     },
+    dirigeants,
   };
 };
 

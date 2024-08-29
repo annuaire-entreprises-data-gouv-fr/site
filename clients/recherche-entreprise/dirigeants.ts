@@ -11,7 +11,7 @@ export const clientDirigeantsRechercheEntreprise = async (
     inclureEtablissements: false,
     inclureImmatriculation: false,
     pageEtablissements: 1,
-    useCache: true,
+    useCache: false,
     fallbackOnStaging: false,
   });
 
