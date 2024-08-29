@@ -4,13 +4,13 @@ seo:
   description: Une personne morale est une entité juridique souvent composée de plusieurs personnes physiques alliées pour réaliser une activité commune.
 more:
   - label: 'Personne physique'
-    href: '/definition/personne-physique'
+    href: '/definitions/personne-physique'
 
   - label: 'Kbis'
-    href: '/definition/kbis'
+    href: '/definitions/kbis'
 
   - label: 'SIREN'
-    href: '/definition/siren'
+    href: '/definitions/numero-siren'
 body: |
   ## **La personne morale : définition**
 

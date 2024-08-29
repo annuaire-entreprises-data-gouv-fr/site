@@ -48,8 +48,8 @@ more:
   - label: Comment télécharger un extrait Kbis ?
     href: '/faq/extrait-kbis'
   - label: 'Personne morale'
-    href: '/definition/personne-morale'
+    href: '/definitions/personne-morale'
   - label: 'SIRET'
-    href: '/definition/siret'
+    href: '/definitions/numero-siret'
   - label: 'SIREN'
-    href: '/definition/siren'
+    href: '/definitions/numero-siren'

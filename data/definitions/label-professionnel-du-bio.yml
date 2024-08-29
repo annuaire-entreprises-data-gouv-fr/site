@@ -12,13 +12,13 @@ seo:
 
 more:
   - label: "Label RGE (Reconnu garant de l'environnement)"
-    href: '/definition/label-rge-reconnu-garant-de-l-environnement'
+    href: '/faq/reconnu-garant-environnement'
 
   - label: 'Économie sociale et solidaire (ESS)'
-    href: '/definition/economie-sociale-et-solidaire-ess'
+    href: '/definitions/economie-sociale-et-solidaire-ess'
 
   - label: 'Société à mission'
-    href: '/definition/societe-a-mission'
+    href: '/definitions/societe-a-mission'
 
 body: |
   ## **Produit bio : définition**

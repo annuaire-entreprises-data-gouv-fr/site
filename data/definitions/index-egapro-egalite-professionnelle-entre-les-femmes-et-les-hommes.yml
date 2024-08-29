@@ -7,13 +7,13 @@ seo:
 more:
   ## 4. SECTION « Définition liées » ou « Sur le même sujet » en fin de page
   - label: "Label RGE (Reconnu Garant de l'Environnement"
-    href: '/definition/label-rge-reconnu-garant-de-l-environnement'
+    href: '/faq/reconnu-garant-environnement'
 
   - label: 'Économie Sociale et Solidaire (ESS)'
-    href: '/definition/economie-sociale-et-solidaire-ess'
+    href: '/definitions/economie-sociale-et-solidaire-ess'
 
   - label: 'Label « Professionnel du Bio »'
-    href: '/label-professionnel-du-bio'
+    href: '/definitions/label-professionnel-du-bio'
 
 body: |
   ## **Index Egapro : définition**
