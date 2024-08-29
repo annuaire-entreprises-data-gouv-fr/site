@@ -50,7 +50,7 @@ export default async function clientAPIEntreprise<T, U>(
     timeout: constants.timeout.XXXL,
     params: {
       object: 'espace-agent-public',
-      context: 'annuaire-entreprises',
+      context: `annuaire-entreprises | ${callerInfos.useCase}`,
       recipient: callerInfos.siret || '13002526500013',
     },
     useCache,

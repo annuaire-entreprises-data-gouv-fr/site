@@ -6,7 +6,7 @@ export async function sensitiveRequestCallerInfos(): Promise<ISensitiveCaller> {
   const session = await getSession();
 
   if (session?.user) {
-    const { email, siret = null, scopes = [] } = session.user;
+    const { email, siret = null, scopes = [], useCase } = session.user;
 
     if (!email) {
       throw new HttpUnauthorizedError('Sensitive requests require an email');
@@ -18,6 +18,7 @@ export async function sensitiveRequestCallerInfos(): Promise<ISensitiveCaller> {
       email,
       siret,
       scopes,
+      useCase,
       domain,
     };
   }

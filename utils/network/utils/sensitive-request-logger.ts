@@ -28,6 +28,7 @@ export type ISensitiveCaller = {
   siret: string | null;
   scopes: string[];
   domain: string;
+  useCase?: string;
 };
 
 /**

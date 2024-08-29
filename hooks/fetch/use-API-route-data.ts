@@ -28,45 +28,50 @@ export function useAPIRouteData<T extends APIPath>(
   >(IDataFetchingState.LOADING);
 
   useEffect(() => {
-    if (!hasRights(session, APIRoutesScopes[route])) {
-      setResponse(IDataFetchingState.UNAUTHORIZED);
-      return;
-    }
-
-    const fetchAndTreatResponse = async () => {
-      try {
-        setResponse(
-          await httpGet<RouteResponse<T>>(
-            '/api/data-fetching/' + route + '/' + slug
-          )
-        );
-      } catch (e: unknown) {
-        if (e instanceof RequestAbortedDuringUnloadException) {
-          return;
-        }
-        if (e instanceof FailToFetchError) {
-          e.context.slug = slug;
-          e.context.page = '/api/data-fetching/' + route;
-          if (!e.status || [408, 504, 429, 401].includes(e.status)) {
-            logWarningInSentry(e);
-            setResponse(IDataFetchingState.CONNECTIVITY_ERROR);
-            return;
-          }
-          logErrorInSentry(e);
-          setResponse(IDataFetchingState.MODEL_ERROR);
-          return;
-        }
-        logErrorInSentry(
-          new InternalError({
-            cause: e,
-            message: 'Unhandled error',
-          })
-        );
-        setResponse(IDataFetchingState.MODEL_ERROR);
+    const fetchData = async () => {
+      const response = await fetchAPIRoute<T>(route, slug, session);
+      if (response) {
+        setResponse(response);
       }
     };
-
-    fetchAndTreatResponse();
+    fetchData();
   }, [slug, route, session]);
   return response;
+}
+
+export async function fetchAPIRoute<T extends APIPath>(
+  route: T,
+  slug: string,
+  session: ISession | null
+): Promise<RouteResponse<T> | IDataFetchingState | undefined> {
+  if (!hasRights(session, APIRoutesScopes[route])) {
+    return IDataFetchingState.UNAUTHORIZED;
+  }
+
+  try {
+    return await httpGet<RouteResponse<T>>(
+      '/api/data-fetching/' + route + '/' + slug
+    );
+  } catch (e: unknown) {
+    if (e instanceof RequestAbortedDuringUnloadException) {
+      return;
+    }
+    if (e instanceof FailToFetchError) {
+      e.context.slug = slug;
+      e.context.page = '/api/data-fetching/' + route;
+      if (!e.status || [408, 504, 429, 401].includes(e.status)) {
+        logWarningInSentry(e);
+        return IDataFetchingState.CONNECTIVITY_ERROR;
+      }
+      logErrorInSentry(e);
+      return IDataFetchingState.MODEL_ERROR;
+    }
+    logErrorInSentry(
+      new InternalError({
+        cause: e,
+        message: 'Unhandled error',
+      })
+    );
+    return IDataFetchingState.MODEL_ERROR;
+  }
 }

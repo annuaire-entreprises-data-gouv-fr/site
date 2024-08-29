@@ -33,6 +33,13 @@ const isFromMCP = (idp_id: string) => {
   }
 };
 
+export enum UseCase {
+  autre = "Autre cas d'usage",
+  aides = 'Aides publiques',
+  marches = 'Marchés publics',
+  fraude = 'Détection de la fraude',
+}
+
 export type IAgentInfo = {
   email: string;
   familyName: string;
@@ -43,6 +50,7 @@ export type IAgentInfo = {
   userType: string;
   isPrestataire: boolean;
   isMCP: boolean;
+  useCase?: UseCase;
 };
 
 export const getAgent = async (

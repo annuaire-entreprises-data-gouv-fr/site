@@ -14,6 +14,7 @@ import {
 } from '#models/immatriculation/rne';
 import { buildAndVerifyTVA } from '#models/tva/verify';
 import { UnwrapPromise } from 'types';
+import saveAgentUseCase from './[...slug]/save-use-case';
 
 export const APIRoutesHandlers = {
   'espace-agent/carte-professionnelle-TP': getCarteProfessionnelleTravauxPublic,
@@ -29,6 +30,7 @@ export const APIRoutesHandlers = {
   association: getAssociationFromSlug,
   'verify-tva': buildAndVerifyTVA,
   'eori-validation': getEORIValidation,
+  'espace-agent/save-use-case': saveAgentUseCase,
 } as const;
 
 export type APIPath = keyof typeof APIRoutesHandlers;

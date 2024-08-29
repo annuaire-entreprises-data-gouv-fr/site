@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
@@ -10,6 +9,7 @@ import { IBeneficairesEffectif } from '#models/espace-agent/beneficiaires';
 import { ISession } from '#models/user/session';
 import { formatDatePartial } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import ResetUseCase from './reset-use-case';
 
 /**
  * Dirigeants section
@@ -18,11 +18,9 @@ import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
  */
 const ProtectedBeneficiairesSection: React.FC<{
   uniteLegale: IUniteLegale;
-  useCase: string;
   session: ISession | null;
-}> = ({ uniteLegale, useCase, session }) => {
-  // await setAgentsetUseCase(session, useCase);
-
+  onUseCaseReset: () => void;
+}> = ({ uniteLegale, session, onUseCaseReset }) => {
   const beneficiaires = useAPIRouteData(
     'espace-agent/beneficiaires',
     uniteLegale.siren,
@@ -31,7 +29,6 @@ const ProtectedBeneficiairesSection: React.FC<{
 
   return (
     <>
-      <HorizontalSeparator />
       <AsyncDataSectionClient
         id="beneficiaires"
         title="Bénéficiaire(s) effectif(s)"
@@ -46,10 +43,13 @@ const ProtectedBeneficiairesSection: React.FC<{
         isProtected
       >
         {(beneficiaires) => (
-          <BénéficiairesContent
-            beneficiaires={beneficiaires}
-            uniteLegale={uniteLegale}
-          />
+          <>
+            <ResetUseCase session={session} onUseCaseReset={onUseCaseReset} />
+            <BénéficiairesContent
+              beneficiaires={beneficiaires}
+              uniteLegale={uniteLegale}
+            />
+          </>
         )}
       </AsyncDataSectionClient>
     </>

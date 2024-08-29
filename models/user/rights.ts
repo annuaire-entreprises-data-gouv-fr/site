@@ -1,4 +1,5 @@
-import { getAgentScopes } from './helpers';
+import { UseCase } from './agent';
+import { agentUseCaseIs, getAgentScopes } from './helpers';
 import { ISession } from './session';
 
 export enum EScope {
@@ -10,7 +11,7 @@ export enum EScope {
   protectedCertificats = 'opendata',
   associationProtected = 'opendata',
   mandatairesRCS = 'opendata',
-  beneficiaires = 'opendata',
+  beneficiaires = 'beneficiaires',
   carteProfessionnelleTravauxPublics = 'opendata',
   nonDiffusible = 'nonDiffusible',
   isAgent = 'isAgent',
@@ -33,9 +34,16 @@ export function hasRights(session: ISession | null, rightScope: EScope) {
     case EScope.protectedCertificats:
     case EScope.carteProfessionnelleTravauxPublics:
     case EScope.mandatairesRCS:
-    case EScope.beneficiaires:
     case EScope.associationProtected:
       return userScopes.includes('opendata');
+    case EScope.beneficiaires:
+      return (
+        userScopes.includes('opendata') &&
+        agentUseCaseIs(
+          [UseCase.marches, UseCase.aides, UseCase.fraude],
+          session
+        )
+      );
     case EScope.nonDiffusible:
       return userScopes.includes('nonDiffusible');
     case EScope.isAgent:
@@ -48,3 +56,5 @@ export function hasRights(session: ISession | null, rightScope: EScope) {
 export function isLoggedIn(session: ISession | null) {
   return getAgentScopes(session).length > 0;
 }
+
+// TODO : add a route to save usecase in session
