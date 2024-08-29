@@ -279,7 +279,6 @@ const mapToDomainObject = (
         estEntrepreneurIndividuel,
         estEss: economieSocialeSolidaireUniteLegale === 'O',
       },
-      immatriculation: null,
       association: {
         idAssociation: identifiantAssociationUniteLegale || null,
       },

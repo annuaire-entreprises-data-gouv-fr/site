@@ -11,8 +11,9 @@ export const APIRoutesScopes: Record<APIPath, EScope> = {
   'espace-agent/rcs-mandataires': EScope.mandatairesRCS,
   'espace-agent/rne/documents': EScope.documentsRne,
   'espace-agent/association-protected': EScope.associationProtected,
+  // public routes
   'rne-dirigeants': EScope.none,
-  rne: EScope.none,
+  observations: EScope.none,
   association: EScope.none,
   'verify-tva': EScope.none,
   'eori-validation': EScope.none,

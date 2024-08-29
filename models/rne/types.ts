@@ -36,7 +36,7 @@ export interface IPersonneMorale {
 }
 
 export interface IObservations {
-  observations: {
+  data: {
     numObservation: string;
     dateAjout: string;
     description: string;

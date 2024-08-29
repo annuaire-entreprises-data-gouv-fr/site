@@ -1,5 +1,7 @@
-import { fetchRNEImmatriculation } from '#clients/api-proxy/rne';
-import { fetchRNEImmatriculationFallback } from '#clients/api-proxy/rne/fallback';
+import {
+  clientRNEImmatriculation,
+  clientRNEImmatriculationFallback,
+} from '#clients/api-proxy/rne';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
@@ -13,20 +15,22 @@ import { IObservations } from './types';
  * Request observations from INPI's RNE
  * @param siren
  */
-export const getObservations = async (
+export const getRNEObservations = async (
   maybeSiren: string
 ): Promise<IAPINotRespondingError | IObservations> => {
   const siren = verifySiren(maybeSiren);
 
   try {
-    return await fetchRNEImmatriculation(siren);
+    const { observations } = await clientRNEImmatriculation(siren);
+    return { data: observations, metadata: { isFallback: false } };
   } catch (eDefaultTry: any) {
     if (eDefaultTry instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }
 
     try {
-      return await fetchRNEImmatriculationFallback(siren);
+      const { observations } = await clientRNEImmatriculationFallback(siren);
+      return { data: observations, metadata: { isFallback: true } };
     } catch (eFallback: any) {
       if (eFallback instanceof HttpNotFound) {
         return APINotRespondingFactory(EAdministration.INPI, 404);

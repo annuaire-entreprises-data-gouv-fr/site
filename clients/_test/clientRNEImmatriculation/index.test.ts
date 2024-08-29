@@ -1,16 +1,18 @@
-import { fetchRNEImmatriculation } from '#clients/api-proxy/rne';
-import { fetchRNEImmatriculationFallback } from '#clients/api-proxy/rne/fallback';
+import {
+  clientRNEImmatriculation,
+  clientRNEImmatriculationFallback,
+} from '#clients/api-proxy/rne';
 import { Siren } from '#utils/helpers';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 
 const TIMEOUT_RNE = 90000;
 
-describe('fetchRNEImmatriculation', () => {
+describe('clientRNEImmatriculation', () => {
   it(
     'Should match snapshot for protected uniteLegale with the characteristics (PROTECTED)',
     async () => {
       await expectClientToMatchSnapshot({
-        client: fetchRNEImmatriculation,
+        client: clientRNEImmatriculation,
         args: ['908595879' as Siren],
         __dirname,
         snaphotFile: 'protected.json',
@@ -23,7 +25,7 @@ describe('fetchRNEImmatriculation', () => {
     'Should match snapshot for protected uniteLegale with the characteristics (RGE)',
     async () => {
       await expectClientToMatchSnapshot({
-        client: fetchRNEImmatriculation,
+        client: clientRNEImmatriculation,
         args: ['487444697' as Siren],
         __dirname,
         snaphotFile: 'rge.json',
@@ -36,7 +38,7 @@ describe('fetchRNEImmatriculation', () => {
     'Should match snapshot for 356000000 siret',
     async () => {
       await expectClientToMatchSnapshot({
-        client: fetchRNEImmatriculation,
+        client: clientRNEImmatriculation,
         args: ['356000000' as Siren],
         __dirname,
         snaphotFile: 'siret-356000000.json',
@@ -46,12 +48,12 @@ describe('fetchRNEImmatriculation', () => {
   );
 });
 
-describe('fetchRNEImmatriculationFallback', () => {
+describe('clientRNEImmatriculationFallback', () => {
   it(
     'Should match snapshot for protected uniteLegale with the characteristics (RGE)',
     async () => {
       await expectClientToMatchSnapshot({
-        client: fetchRNEImmatriculationFallback,
+        client: clientRNEImmatriculationFallback,
         args: ['487444697' as Siren],
         __dirname,
         snaphotFile: 'rge.json',

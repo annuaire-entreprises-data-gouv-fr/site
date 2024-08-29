@@ -22,6 +22,10 @@ import {
 } from '../interface';
 
 export const mapToImmatriculation = (i: IResult['immatriculation'] | null) => {
+  if (!i) {
+    return null;
+  }
+
   const duree = i?.duree_personne_morale ?? 0;
   const dateImmatriculation = i?.date_immatriculation ?? '';
   return {

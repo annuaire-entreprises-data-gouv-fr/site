@@ -1,4 +1,4 @@
-import { fetchRNEImmatriculation } from '#clients/api-proxy/rne';
+import { clientRNEImmatriculation } from '#clients/api-proxy/rne';
 import { HttpNotFound } from '#clients/exceptions';
 import { clientDirigeantsRechercheEntreprise } from '#clients/recherche-entreprise/dirigeants';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -19,7 +19,7 @@ export const getDirigeantsRNE = async (
   const siren = verifySiren(maybeSiren);
 
   try {
-    const { dirigeants } = await fetchRNEImmatriculation(siren);
+    const { dirigeants } = await clientRNEImmatriculation(siren);
     return { data: dirigeants, metadata: { isFallback: false } };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {

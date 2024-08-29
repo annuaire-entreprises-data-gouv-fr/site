@@ -23,6 +23,7 @@ export const UniteLegaleImmatriculationSection = ({
   session: ISession | null;
 }) => {
   const immatriculation = uniteLegale.immatriculation;
+
   return (
     <DataSection
       title="Immatricuation au RNE"

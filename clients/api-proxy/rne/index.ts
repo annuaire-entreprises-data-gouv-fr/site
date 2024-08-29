@@ -20,7 +20,7 @@ type IRNEProxyResponse = {
     capital: string;
     libelleNatureJuridique: string;
   };
-  observations: IObservations[];
+  observations: IObservations['data'];
   dirigeants: IDirigeants['data'];
 };
 
@@ -28,11 +28,11 @@ type IRNEProxyResponse = {
  * RNE through the API proxy - API RNE
  * @param siren
  */
-const fetchRNEImmatriculation = async (siren: Siren, useCache = true) => {
+const clientRNEImmatriculation = async (siren: Siren, useCache = true) => {
   const response = await clientAPIProxy<IRNEProxyResponse>(
     routes.proxy.rne.immatriculation.default + siren,
     {
-      timeout: constants.timeout.XXXL,
+      timeout: constants.timeout.XS,
       useCache,
     }
   );
@@ -43,7 +43,7 @@ const fetchRNEImmatriculation = async (siren: Siren, useCache = true) => {
  * RNE through the API proxy - scrapping site as fallback
  * @param siren
  */
-const fetchRNEImmatriculationFallback = async (
+const clientRNEImmatriculationFallback = async (
   siren: Siren,
   useCache = true
 ) => {
@@ -83,13 +83,13 @@ const mapToDomainObject = ({
 };
 
 const stubbedClient = stubClientWithSnapshots({
-  fetchRNEImmatriculation,
+  clientRNEImmatriculation,
 });
 const stubbedClientFallback = stubClientWithSnapshots({
-  fetchRNEImmatriculationFallback,
+  clientRNEImmatriculationFallback,
 });
 
 export {
-  stubbedClient as fetchRNEImmatriculation,
-  stubbedClientFallback as fetchRNEImmatriculationFallback,
+  stubbedClient as clientRNEImmatriculation,
+  stubbedClientFallback as clientRNEImmatriculationFallback,
 };

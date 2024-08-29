@@ -1,8 +1,7 @@
 /** COMMON TYPES */
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
-  createEtablissementsList,
   IEtablissementsList,
+  createEtablissementsList,
 } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
 import { IEtatCivil } from '#models/rne/types';
@@ -110,7 +109,7 @@ export interface IUniteLegale extends IEtablissementsList {
   categorieEntreprise: string | null;
   anneeCategorieEntreprise: string | null;
   complements: IUniteLegaleComplements;
-  immatriculation: IUniteLegaleImmatriculation | IAPINotRespondingError | null;
+  immatriculation: IUniteLegaleImmatriculation | null;
   association: {
     idAssociation: IdRna | string | null;
   };

@@ -32,18 +32,18 @@ export const ObservationsRNE: React.FC<{
         </>
       }
     >
-      {(observations) =>
-        observations && observations.length > 0 ? (
+      {({ data, metadata }) =>
+        data.length > 0 ? (
           <>
             {metadata.isFallback && <InpiPartiallyDownWarning />}
             <p>
-              Cette structure possède {observations.length} observation(s) au{' '}
+              Cette structure possède {data.length} observation(s) au{' '}
               <strong>RNE</strong>
               &nbsp;:
             </p>
             <FullTable
               head={['Date d’ajout', 'Numéro d’observation', 'Description']}
-              body={observations.map((o) => [
+              body={data.map((o) => [
                 o.dateAjout,
                 o.numObservation ? <Tag>{o.numObservation}</Tag> : '',
                 o.description,

@@ -9,7 +9,7 @@ import { getConformiteEntreprise } from '#models/espace-agent/conformite';
 import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
 import { getDocumentsRNEProtected } from '#models/espace-agent/rne-protected/documents';
 import { getDirigeantsRNE } from '#models/rne/dirigeants';
-import { getRNEImmatriculation } from '#models/rne/immatriculation';
+import { getRNEObservations } from '#models/rne/observations';
 import { buildAndVerifyTVA } from '#models/tva/verify';
 import { UnwrapPromise } from 'types';
 
@@ -23,7 +23,7 @@ export const APIRoutesHandlers = {
   'espace-agent/rne/documents': getDocumentsRNEProtected,
   'espace-agent/association-protected': getAssociationProtected,
   'rne-dirigeants': getDirigeantsRNE,
-  rne: getRNEImmatriculation,
+  observations: getRNEObservations,
   association: getAssociationFromSlug,
   'verify-tva': buildAndVerifyTVA,
   'eori-validation': getEORIValidation,

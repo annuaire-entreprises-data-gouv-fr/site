@@ -99,15 +99,10 @@ export const DefaultStructureBadge = ({
 );
 
 export const OpenClosedTag: React.FC<
-  PropsWithChildren<{ isVerified?: boolean; label: string }>
-> = ({ label = '', isVerified = true, children }) => (
+  PropsWithChildren<{ icon: 'open' | 'closed' | 'questionFill'; label: string }>
+> = ({ label = '', icon, children }) => (
   <div className="layout-left">
-    <Badge
-      icon={isVerified ? 'open' : 'closed'}
-      label={label}
-      backgroundColor="#ddd"
-      fontColor="var(--text-default-grey)"
-    />
+    <Badge icon={icon} label={label} backgroundColor="#ddd" fontColor="#666" />
     {children}
   </div>
 );

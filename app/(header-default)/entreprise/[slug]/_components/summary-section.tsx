@@ -1,4 +1,3 @@
-import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
 import { ProtectedCertificatesBadgesSection } from '#components/badges-section/labels-and-certificates/protected-certificats';
@@ -18,6 +17,7 @@ import { ISession } from '#models/user/session';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
+import React from 'react';
 import {
   LabelsAndCertificatesBadgesSection,
   checkHasLabelsAndCertificates,
@@ -41,21 +41,15 @@ const UniteLegaleSummarySection: React.FC<{
     [
       'État des inscriptions',
       <>
-        {uniteLegale.dateMiseAJourInsee && (
-          <UniteLegaleInscriptionSirene
-            uniteLegale={uniteLegale}
-            session={session}
-          />
-        )}
-        {uniteLegale.dateMiseAJourInpi && (
-          <UniteLegaleInscriptionRNE
-            uniteLegale={uniteLegale}
-            session={session}
-          />
-        )}
-        {uniteLegale.association.idAssociation && (
-          <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
-        )}
+        <UniteLegaleInscriptionSirene
+          uniteLegale={uniteLegale}
+          session={session}
+        />
+        <UniteLegaleInscriptionRNE
+          uniteLegale={uniteLegale}
+          session={session}
+        />
+        <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
       </>,
     ],
     ['', <br />],
