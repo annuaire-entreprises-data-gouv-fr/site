@@ -1,13 +1,10 @@
+import { useState } from 'react';
 import { MultiChoice } from '#components-ui/multi-choice';
 import { UseCase } from '#models/user/agent';
-import { ISession } from '#models/user/session';
-import { useState } from 'react';
 
 export function AskUseCase({
-  session,
   onUseCaseChanged,
 }: {
-  session: ISession | null;
   onUseCaseChanged: (useCase: UseCase) => void;
 }) {
   const [useCase, setUseCase] = useState<UseCase>();

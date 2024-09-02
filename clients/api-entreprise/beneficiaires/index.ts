@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import { IBeneficairesEffectif } from '#models/espace-agent/beneficiaires';
+import { UseCase } from '#models/user/agent';
 import { Siren, formatNameFull } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
@@ -24,7 +25,10 @@ export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
 /**
  * GET beneficiaires effectfs from API Entreprise
  */
-export const clientApiEntrepriseBeneficiaires = async (siren: Siren) => {
+export const clientApiEntrepriseBeneficiaires = async (
+  siren: Siren,
+  useCase: UseCase
+) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseBeneficiaires,
     Array<IBeneficairesEffectif>

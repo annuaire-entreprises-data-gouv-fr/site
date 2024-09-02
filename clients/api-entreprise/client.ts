@@ -1,6 +1,7 @@
 import { HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
 import { Information } from '#models/exceptions';
+import { UseCase } from '#models/user/agent';
 import { httpGet } from '#utils/network';
 import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-request-caller-infos';
 import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
@@ -21,7 +22,10 @@ export type IAPIEntrepriseResponse<T> = {
  */
 export default async function clientAPIEntreprise<T, U>(
   route: string,
-  mapToDomainObject: (e: T) => U
+  mapToDomainObject: (e: T) => U,
+  options?: {
+    useCase?: UseCase;
+  }
 ) {
   const callerInfos = await sensitiveRequestCallerInfos();
   sensitiveRequestLogger(route, callerInfos);
@@ -50,7 +54,7 @@ export default async function clientAPIEntreprise<T, U>(
     timeout: constants.timeout.XXXL,
     params: {
       object: 'espace-agent-public',
-      context: `annuaire-entreprises | ${callerInfos.useCase}`,
+      context: options?.useCase ? options.useCase : 'annuaire-entreprises',
       recipient: callerInfos.siret || '13002526500013',
     },
     useCache,

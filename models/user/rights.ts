@@ -1,5 +1,4 @@
-import { UseCase } from './agent';
-import { agentUseCaseIs, getAgentScopes } from './helpers';
+import { getAgentScopes } from './helpers';
 import { ISession } from './session';
 
 export enum EScope {
@@ -37,13 +36,7 @@ export function hasRights(session: ISession | null, rightScope: EScope) {
     case EScope.associationProtected:
       return userScopes.includes('opendata');
     case EScope.beneficiaires:
-      return (
-        userScopes.includes('opendata') &&
-        agentUseCaseIs(
-          [UseCase.marches, UseCase.aides, UseCase.fraude],
-          session
-        )
-      );
+      return userScopes.includes('opendata');
     case EScope.nonDiffusible:
       return userScopes.includes('nonDiffusible');
     case EScope.isAgent:

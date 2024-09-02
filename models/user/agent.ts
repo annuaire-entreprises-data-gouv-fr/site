@@ -50,7 +50,6 @@ export type IAgentInfo = {
   userType: string;
   isPrestataire: boolean;
   isMCP: boolean;
-  useCase?: UseCase;
 };
 
 export const getAgent = async (

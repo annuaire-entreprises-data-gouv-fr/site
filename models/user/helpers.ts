@@ -1,6 +1,4 @@
 import { IAgentContactInfo } from '#components/feedback-modal/type';
-import { InternalError } from '#models/exceptions';
-import { UseCase } from './agent';
 import { EScope, hasRights } from './rights';
 import { ISession } from './session';
 
@@ -38,35 +36,4 @@ export function getAgentContactInfo(
     email,
     name: session?.user?.fullName || '',
   };
-}
-
-export function setAgentUseCase<S extends ISession>(
-  UseCase: UseCase,
-  session: S
-): S {
-  if (!session || !session.user) {
-    throw new InternalError({
-      message: 'Failed to set use case',
-      cause: new Error('User not found in session'),
-    });
-  }
-  session.user.useCase = UseCase;
-  return session;
-}
-
-export function resetAgentUseCase<S extends ISession>(session: S): S {
-  if (!session || !session.user) {
-    throw new InternalError({
-      message: 'Failed to set use case',
-      cause: new Error('User not found in session'),
-    });
-  }
-  delete session.user.useCase;
-  return session;
-}
-
-export function agentUseCaseIs(useCases: UseCase[], session: ISession | null) {
-  return session?.user?.useCase
-    ? useCases.includes(session.user.useCase)
-    : false;
 }

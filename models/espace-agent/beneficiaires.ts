@@ -4,6 +4,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
+import { UseCase } from '#models/user/agent';
 import { verifySiren } from '#utils/helpers';
 import { handleApiEntrepriseError } from './utils';
 
@@ -69,11 +70,15 @@ export type IBeneficairesEffectif = {
 };
 
 export const getBeneficiaires = async (
-  maybeSiren: string
+  maybeSiren: string,
+  useCase: UseCase
 ): Promise<Array<IBeneficairesEffectif> | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
   try {
-    const beneficiaires = await clientApiEntrepriseBeneficiaires(siren);
+    const beneficiaires = await clientApiEntrepriseBeneficiaires(
+      siren,
+      useCase
+    );
     if (beneficiaires.length === 0) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }

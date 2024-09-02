@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Warning } from '#components-ui/alerts';
 import { INPI } from '#components/administrations';
 import AgentWall from '#components/espace-agent-components/agent-wall';
@@ -7,14 +8,10 @@ import { Section } from '#components/section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
-import { resetAgentUseCase, setAgentUseCase } from '#models/user/helpers';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { fetchAPIRoute } from 'hooks/fetch/use-API-route-data';
-import { useMemo, useState } from 'react';
 import ProtectedBeneficiairesSection from './agent-section';
 import { AskUseCase } from './ask-use-case';
-import ResetUseCase from './reset-use-case';
 
 const WarningRBE = () => (
   <Warning>
@@ -54,10 +51,10 @@ const WarningRBE = () => (
 const BeneficiairesSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ uniteLegale, session: baseSession }) => {
-  const { session, saveUseCase, resetUseCase } = useUseCase(baseSession);
+}> = ({ uniteLegale, session }) => {
+  const [useCase, setUseCase] = useState<UseCase>();
 
-  if (!hasRights(session, EScope.isAgent)) {
+  if (!hasRights(session, EScope.beneficiaires)) {
     return (
       <AgentWall
         title="Bénéficiaire(s) effectif(s)"
@@ -81,12 +78,12 @@ const BeneficiairesSection: React.FC<{
     );
   }
 
-  if (hasRights(session, EScope.beneficiaires)) {
+  if ([UseCase.aides, UseCase.marches, UseCase.fraude].includes(useCase!)) {
     return (
       <ProtectedBeneficiairesSection
         uniteLegale={uniteLegale}
         session={session}
-        onUseCaseReset={resetUseCase}
+        useCase={useCase!}
       />
     );
   }
@@ -115,46 +112,18 @@ const BeneficiairesSection: React.FC<{
         Toute demande d’accès aux données est tracée et envoyée à la comission
         européeene.
       </p>
-      {session && session?.user?.useCase === UseCase.autre ? (
+      {useCase === UseCase.autre ? (
         <>
           <strong>
             Les informations des bénénficiaires effectifs ne sont pas
             accessibles.
           </strong>
-          <ResetUseCase session={session} onUseCaseReset={resetUseCase} />
         </>
       ) : (
-        <AskUseCase session={session} onUseCaseChanged={saveUseCase} />
+        <AskUseCase onUseCaseChanged={setUseCase} />
       )}
     </Section>
   );
 };
-
-function useUseCase(baseSession: ISession | null) {
-  const [useCase, setUseCase] = useState(baseSession?.user?.useCase || null);
-
-  function saveUseCase(useCase: UseCase) {
-    fetchAPIRoute('espace-agent/save-use-case', useCase, session).then(() =>
-      setUseCase(useCase)
-    );
-  }
-
-  function resetUseCase() {
-    setUseCase(null);
-  }
-
-  const session = useMemo(() => {
-    if (!baseSession) {
-      return null;
-    }
-    if (useCase) {
-      return { ...setAgentUseCase(useCase, baseSession) };
-    } else {
-      return { ...resetAgentUseCase(baseSession) };
-    }
-  }, [baseSession, useCase]);
-
-  return { session, saveUseCase, resetUseCase };
-}
 
 export default BeneficiairesSection;

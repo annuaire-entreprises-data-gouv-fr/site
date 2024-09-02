@@ -12,7 +12,6 @@ export const APIRoutesScopes: Record<APIPath, EScope> = {
   'espace-agent/beneficiaires': EScope.beneficiaires,
   'espace-agent/rne/documents': EScope.documentsRne,
   'espace-agent/association-protected': EScope.associationProtected,
-  'espace-agent/save-use-case': EScope.isAgent,
   rne: EScope.none,
   association: EScope.none,
   'verify-tva': EScope.none,

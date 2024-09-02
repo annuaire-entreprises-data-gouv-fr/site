@@ -10,7 +10,7 @@ import {
 } from '../utils';
 
 async function getRoute(
-  _request: Request,
+  request: Request,
   params: { params: { slug: Array<string> } },
   session: ISession
 ) {
@@ -29,7 +29,10 @@ async function getRoute(
     );
   }
 
-  const response = await handler(slug);
+  const response = await handler(
+    slug,
+    Object.fromEntries(new URL(request.url).searchParams)
+  );
 
   return Response.json(response);
 }

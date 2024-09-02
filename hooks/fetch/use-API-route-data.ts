@@ -12,16 +12,23 @@ import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { APIPath, RouteResponse } from 'app/api/data-fetching/routes-handlers';
 import { APIRoutesScopes } from 'app/api/data-fetching/routes-scopes';
 
+type Options = {
+  params?: URLSearchParams;
+};
+
 /**
  * Hook to fetch data from internal API
  * @param route : route to fetch (from {@link APIPath})
  * @param slug : slug parameter for the route
+ * @param session : user session, used to check rights
+ * @param options : options for the fetch. **Important**: the object should be memoized, otherwise the hook will fetch the data at each render
  * @returns {IDataFetchingState | RouteResponse<T>} - The API loading state or the fetched data
  */
 export function useAPIRouteData<T extends APIPath>(
   route: T,
   slug: string,
-  session: ISession | null
+  session: ISession | null,
+  options?: Options
 ): RouteResponse<T> | IDataFetchingState {
   const [response, setResponse] = useState<
     IDataFetchingState | RouteResponse<T>
@@ -29,20 +36,21 @@ export function useAPIRouteData<T extends APIPath>(
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetchAPIRoute<T>(route, slug, session);
+      const response = await fetchAPIRoute<T>(route, slug, session, options);
       if (response) {
         setResponse(response);
       }
     };
     fetchData();
-  }, [slug, route, session]);
+  }, [slug, route, session, options]);
   return response;
 }
 
-export async function fetchAPIRoute<T extends APIPath>(
+async function fetchAPIRoute<T extends APIPath>(
   route: T,
   slug: string,
-  session: ISession | null
+  session: ISession | null,
+  options?: Options
 ): Promise<RouteResponse<T> | IDataFetchingState | undefined> {
   if (!hasRights(session, APIRoutesScopes[route])) {
     return IDataFetchingState.UNAUTHORIZED;
@@ -50,7 +58,8 @@ export async function fetchAPIRoute<T extends APIPath>(
 
   try {
     return await httpGet<RouteResponse<T>>(
-      '/api/data-fetching/' + route + '/' + slug
+      '/api/data-fetching/' + route + '/' + slug,
+      options
     );
   } catch (e: unknown) {
     if (e instanceof RequestAbortedDuringUnloadException) {

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import routes from '#clients/routes';
 import { INPI } from '#components/administrations';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
@@ -6,10 +7,10 @@ import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { IBeneficairesEffectif } from '#models/espace-agent/beneficiaires';
+import { UseCase } from '#models/user/agent';
 import { ISession } from '#models/user/session';
 import { formatDatePartial } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import ResetUseCase from './reset-use-case';
 
 /**
  * Dirigeants section
@@ -19,12 +20,19 @@ import ResetUseCase from './reset-use-case';
 const ProtectedBeneficiairesSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
-  onUseCaseReset: () => void;
-}> = ({ uniteLegale, session, onUseCaseReset }) => {
+  useCase: UseCase;
+}> = ({ uniteLegale, session, useCase }) => {
+  const params = useMemo(
+    () => ({
+      params: new URLSearchParams({ useCase }),
+    }),
+    [useCase]
+  );
   const beneficiaires = useAPIRouteData(
     'espace-agent/beneficiaires',
     uniteLegale.siren,
-    session
+    session,
+    params
   );
 
   return (
@@ -44,7 +52,6 @@ const ProtectedBeneficiairesSection: React.FC<{
       >
         {(beneficiaires) => (
           <>
-            <ResetUseCase session={session} onUseCaseReset={onUseCaseReset} />
             <BénéficiairesContent
               beneficiaires={beneficiaires}
               uniteLegale={uniteLegale}
