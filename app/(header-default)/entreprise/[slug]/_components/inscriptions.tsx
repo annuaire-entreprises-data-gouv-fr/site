@@ -186,7 +186,7 @@ export const UniteLegaleInscriptionRNA = ({
     >
       <InformationTooltip
         tabIndex={undefined}
-        label="Cette structure est inscrite au Registre National des Association (RNA)."
+        label="Cette structure est inscrite au Registre National des Associations (RNA)."
       >
         <a href="#association-section">
           <OpenClosedTag
