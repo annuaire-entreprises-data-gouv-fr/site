@@ -112,7 +112,7 @@ const PersonnePage = async (props: AppRouterProps) => {
 
       {results.results.length > 0 ? (
         <FullTable
-          head={['Siren', 'Détails', '', 'Dirigeant(s) ou élu(s)']}
+          head={['Siren', 'Détails', '', 'Dirigeant(s)']}
           body={results.results.map((result) => [
             <a href={result.chemin}>{formatIntFr(result.siren)}</a>,
             <>
