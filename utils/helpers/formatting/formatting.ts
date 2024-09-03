@@ -351,7 +351,7 @@ export const agregateTripleFields = (
 };
 
 export const formatFirstNames = (firstNames: string, separator: string) => {
-  const formatted = firstNames
+  const formatted = (firstNames || '')
     .split(separator)
     .map(capitalize)
     .filter((name) => !!name);
