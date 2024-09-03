@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { Info } from '#components-ui/alerts';
+import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
@@ -83,7 +84,12 @@ const PersonnePage = async (props: AppRouterProps) => {
         {age ? ` (${age} ans)` : ''}
       </h1>
       <p>
-        Etat civil :{' '}
+        <FAQLink tooltipLabel="Etat civil">
+          Ceci est un état civil partiel. Il est composé du mois et de l’année
+          de naissance ainsi que des prénoms et du nom. Cet état civil peut ne
+          pas contenir les prénoms secondaires.
+        </FAQLink>{' '}
+        :{' '}
         <strong>
           {prenoms} {nom}
         </strong>
@@ -91,7 +97,7 @@ const PersonnePage = async (props: AppRouterProps) => {
       </p>
       <Info>
         Le jour de naissance n’étant pas une donnée publique et les prénoms
-        secondaires n’étant pas toujours renseignés. Cette page peut comporter
+        secondaires n’étant pas toujours renseignés, cette page peut comporter
         de rares cas <strong>d’homonymie</strong>.
         <br />
         Si <strong>vous ne retrouvez pas une entreprise</strong> qui devrait se
