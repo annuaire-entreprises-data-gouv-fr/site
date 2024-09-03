@@ -112,7 +112,7 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
                 {isPersonneMorale(dirigeantOrElu) ? (
                   <>
                     {dirigeantOrElu.siren ? (
-                      <a href={`/dirigeants/${dirigeantOrElu.siren}`}>
+                      <a href={`/dirigeants/${dirigeantOrElu.siren}`} aria-label={`Voir les dirigeants de cette entreprise (siren ${dirigeantOrElu.siren})`}>
                         {dirigeantOrElu.denomination}
                       </a>
                     ) : (
