@@ -1,17 +1,22 @@
 import { HttpBadRequestError, HttpNotFound } from '#clients/exceptions';
 import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
+import { Exception } from '#models/exceptions';
 import { IDirigeant } from '#models/immatriculation';
-import SearchFilterParams from '#models/search-filter-params';
-import { removeSpecialChars } from '#utils/helpers';
+import SearchFilterParams from '#models/search/search-filter-params';
+import {
+  formatMonthIntervalFromPartialDate,
+  removeSpecialChars,
+} from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
+import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
 import {
   FetchRechercheEntrepriseException,
   IEtablissement,
   IUniteLegale,
   IsLikelyASirenOrSiretException,
   NotEnoughParamsException,
-} from './core/types';
+} from '../core/types';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
@@ -116,6 +121,77 @@ export const searchWithoutProtectedSiren = async (
       return false;
     }
     return true;
+  });
+
+  return results;
+};
+
+/**
+ * Research a personn's companies
+ *
+ * @param name
+ * @param firstName
+ * @param partialDate
+ * @param sirenFrom
+ * @param page
+ * @returns
+ */
+export const searchPersonCompanies = async (
+  name: string,
+  prenom: string,
+  prenoms: string,
+  partialDate: string,
+  sirenFrom: string,
+  page: number
+): Promise<ISearchResults> => {
+  const monthInterval = formatMonthIntervalFromPartialDate(partialDate);
+
+  const [dmin, dmax] =
+    typeof monthInterval === 'string' ? ['', ''] : monthInterval;
+
+  if (!dmin || !dmax) {
+    logWarningInSentry(
+      new Exception({
+        name: 'SearchDirigeantBadParams',
+        message: 'No date bounds in page personne',
+        context: {
+          siren: sirenFrom,
+        },
+      })
+    );
+    return {
+      results: [],
+      resultCount: 0,
+      currentPage: 1,
+      pageCount: 1,
+    };
+  }
+  // search with only first firstName
+  const searchFilterParams = new SearchFilterParams({
+    n: name,
+    fn: prenom,
+    dmin,
+    dmax,
+  });
+
+  const results = await searchWithoutProtectedSiren(
+    '',
+    page,
+    searchFilterParams
+  );
+
+  results.results = results.results.filter((result) => {
+    // return either exact match on all firstnames match prenoms or the structures with only one first name matching prenom
+    const hasFirstNames = result.dirigeants.find(
+      (d) =>
+        !isPersonneMorale(d) && (d.prenoms === prenoms || d.prenoms === prenom)
+    );
+    if (hasFirstNames) {
+      return true;
+    } else {
+      results.resultCount -= 1;
+      return false;
+    }
   });
 
   return results;

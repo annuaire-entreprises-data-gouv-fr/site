@@ -129,7 +129,7 @@ const EtablissementListeSection: React.FC<{
             <PageCounter
               currentPage={currentEtablissementPage || 1}
               totalPages={totalPages}
-              anchor="#etablissements"
+              urlComplement="#etablissements"
             />
           </>
         ) : (

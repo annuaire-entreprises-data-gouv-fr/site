@@ -12,7 +12,7 @@ import {
 } from '#models/core/types';
 import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import { ISearchResults } from '#models/search';
-import SearchFilterParams from '#models/search-filter-params';
+import SearchFilterParams from '#models/search/search-filter-params';
 import {
   Siret,
   extractNicFromSiret,
@@ -287,6 +287,7 @@ const mapToDirigeantModel = (
     prenoms = '',
     nom = '',
     qualite = '',
+    date_de_naissance = '',
   } = dirigeant;
 
   if (!!siren) {
@@ -300,9 +301,9 @@ const mapToDirigeantModel = (
   return {
     sexe: null,
     nom: (nom || '').toUpperCase(),
-    prenom: formatFirstNames((prenoms || '').split(' '), 1),
+    ...formatFirstNames(prenoms || '', ' '),
     role: qualite,
-    dateNaissancePartial: '',
+    dateNaissancePartial: date_de_naissance,
     lieuNaissance: '',
   };
 };
@@ -313,7 +314,7 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
   return {
     sexe,
     nom: (nom || '').toUpperCase(),
-    prenom: formatFirstNames((prenoms || '').split(' '), 1),
+    ...formatFirstNames(prenoms || '', ' '),
     role: fonction,
     dateNaissancePartial: annee_de_naissance,
     lieuNaissance: '',

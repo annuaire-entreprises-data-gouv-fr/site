@@ -10,7 +10,7 @@ import StructuredDataSearchAction from '#components/structured-data/search';
 import { searchWithoutProtectedSiren } from '#models/search';
 import SearchFilterParams, {
   hasSearchParam,
-} from '#models/search-filter-params';
+} from '#models/search/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
 

@@ -1,5 +1,4 @@
 'use client';
-import { PropsWithChildren, useId, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import ButtonClose from '#components-ui/button/button-close';
 import FloatingModal from '#components-ui/floating-modal';
@@ -9,8 +8,9 @@ import {
   IParams,
   ISearchFilter,
   buildSearchQuery,
-} from '#models/search-filter-params';
+} from '#models/search/search-filter-params';
 import { useOutsideClick } from 'hooks';
+import { PropsWithChildren, useId, useState } from 'react';
 import ActiveFilterLabel from './active-filter-label';
 import styles from './style.module.css';
 
