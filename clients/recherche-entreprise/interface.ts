@@ -39,6 +39,7 @@ export type IDirigeant = {
   nom: string;
   prenoms: string;
   annee_de_naissance: string;
+  date_de_naissance: string;
   qualite: string;
   type_dirigeant: string;
   siren: string;

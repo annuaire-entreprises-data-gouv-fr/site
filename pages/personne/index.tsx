@@ -1,15 +1,18 @@
+import { GetServerSideProps } from 'next';
 import { Info } from '#components-ui/alerts';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import { Icon } from '#components-ui/icon/wrapper';
+import InformationTooltip from '#components-ui/information-tooltip';
+import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
 import Meta from '#components/meta/meta-client';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import { FullTable } from '#components/table/full';
-import UniteLegaleBadge from '#components/unite-legale-badge';
 import { IEtatCivil } from '#models/immatriculation';
 import { ISearchResults, searchPersonCompanies } from '#models/search';
 import {
   convertDateToAge,
   formatDatePartial,
+  formatFirstNames,
   formatIntFr,
   parseIntWithDefaultValue,
 } from '#utils/helpers';
@@ -18,7 +21,6 @@ import {
   postServerSideProps,
 } from '#utils/server-side-helper/page/post-server-side-props';
 import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
-import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -26,9 +28,9 @@ interface IProps extends IPropsWithMetadata {
   personne: IEtatCivil;
   sirenFrom: string;
   partialDate: string;
-  fn: string;
-  firstName: string;
-  n: string;
+  prenoms: string;
+  prenom: string;
+  nom: string;
   age: number;
 }
 
@@ -36,9 +38,9 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
   results,
   sirenFrom,
   partialDate,
-  fn,
-  firstName,
-  n,
+  prenoms,
+  prenom,
+  nom,
   age,
 }) => (
   <>
@@ -55,54 +57,80 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
         </a>
       )}
       <h1>
-        Liste des structures associées à {fn} {n}
-        {age ? ` (${age} ans)` : ''}
+        {results.resultCount} structures associées à {prenom} {nom}
+        {age ? ` (${age} ans)` : ''}.
       </h1>
-      <Info>
-        Cette page liste toutes les structures associées à{' '}
+      <p>
+        Etat civil :{' '}
         <strong>
-          {fn} {n}
+          {prenoms} {nom}
         </strong>
-        , né(e) en {formatDatePartial(partialDate)}.
+        , né(e) en {formatDatePartial(partialDate)}
+      </p>
+      <Info>
+        Le jour de naissance n’étant pas une donnée publique et les prénoms
+        secondaires n’étant pas toujours renseignés. Cette page peut comporter
+        de rares cas <strong>d’homonymie</strong>.
         <br />
-        Le jour de naissance n’étant pas une donnée publique, cette page peut
-        comporter de très rares cas <strong>d’homonymie</strong>.
-        <br />
-        <br />
-        Enfin, si <strong>vous ne retrouvez pas une entreprise</strong> qui
-        devrait se trouver dans la liste , vous pouvez{' '}
-        <a href={`/rechercher?fn=${fn}&n=${n}`}>
-          élargir la recherche à toutes les structures liées à une personne
-          appelée «&nbsp;
-          {fn} {n}
-          &nbsp;», sans filtre d’âge.
+        Si <strong>vous ne retrouvez pas une entreprise</strong> qui devrait se
+        trouver dans la liste, vous pouvez effectuer une recherche{' '}
+        <a href={`/rechercher?fn=${prenoms}&n=${nom}`}>sans filtre d’âge</a> ou{' '}
+        <a href={`/rechercher?fn=${prenom}&n=${nom}`}>
+          sans prénom secondaire et sans filtre d’age
         </a>
+        .
       </Info>
-      <HorizontalSeparator />
-      <div>
-        {results.currentPage > 1 && `Page ${results.currentPage} de `}
-        {results.resultCount} résultat(s) trouvé(s).
-      </div>
       <br />
       <FullTable
-        head={[
-          'Siren',
-          'Type',
-          'Dénomination',
-          'Adresse',
-          'Dirigeant(s) ou élu(s)',
-        ]}
+        head={['Siren', 'Détails', '', 'Dirigeant(s) ou élu(s)']}
         body={results.results.map((result) => [
           <a href={result.chemin}>{formatIntFr(result.siren)}</a>,
-          <UniteLegaleBadge uniteLegale={result} />,
-          <>{result.nomComplet}</>,
-          <>{result.siege.adresse}</>,
+          <>
+            {result.nomComplet}
+            <br />
+            {result.siege.adresse}
+          </>,
+          <>
+            {result.dirigeants.find(
+              (d) =>
+                !isPersonneMorale(d) &&
+                d.prenoms !== prenoms &&
+                d.prenom === prenom &&
+                d.nom.toLowerCase() === nom.toLowerCase()
+            ) ? (
+              <InformationTooltip
+                label={`Il est probable que ${prenoms} ${nom} et ${prenom} ${nom} soient la même personne mais ce n’est pas possible d’en être certain.`}
+                tabIndex={undefined}
+              >
+                <Icon slug="information" color="orange" />
+              </InformationTooltip>
+            ) : null}
+          </>,
           <div>
             {result.dirigeants.map((dirigeantOrElu) => (
               <div>
-                {isPersonneMorale(dirigeantOrElu)
-                  ? `${dirigeantOrElu.denomination}`
-                  : `${dirigeantOrElu.prenom} ${dirigeantOrElu.nom}`}
+                {isPersonneMorale(dirigeantOrElu) ? (
+                  <>
+                    {dirigeantOrElu.siren ? (
+                      <a href={`/dirigeants/${dirigeantOrElu.siren}`}>
+                        {dirigeantOrElu.denomination}
+                      </a>
+                    ) : (
+                      dirigeantOrElu.denomination
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {dirigeantOrElu.dateNaissancePartial ? (
+                      <SeePersonPageLink
+                        person={dirigeantOrElu}
+                        label={`${dirigeantOrElu.prenoms} ${dirigeantOrElu.nom}`}
+                      />
+                    ) : (
+                      `${dirigeantOrElu.prenom} ${dirigeantOrElu.nom}`
+                    )}
+                  </>
+                )}
               </div>
             ))}
           </div>,
@@ -113,7 +141,7 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
           totalPages={results.pageCount}
           searchTerm=""
           currentPage={results.currentPage}
-          urlComplement={`&fn=${fn}&n=${n}&partialDate=${partialDate}&sirenFrom=${sirenFrom}`}
+          urlComplement={`&fn=${prenoms}&n=${nom}&partialDate=${partialDate}&sirenFrom=${sirenFrom}`}
         />
       )}
       <br />
@@ -130,13 +158,14 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const fn = (context.query.fn || '') as string;
     const n = (context.query.n || '') as string;
 
-    const firstName = fn.split(', ')[0];
+    const { prenom, prenoms } = formatFirstNames(fn, ', ');
 
     const page = parseIntWithDefaultValue(pageParam, 1);
 
     const results = await searchPersonCompanies(
       n,
-      firstName,
+      prenom,
+      prenoms,
       partialDate,
       sirenFrom,
       page
@@ -144,9 +173,9 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
 
     return {
       props: {
-        fn,
-        firstName,
-        n,
+        prenom,
+        prenoms,
+        nom: n,
         results,
         sirenFrom,
         partialDate: partialDate,

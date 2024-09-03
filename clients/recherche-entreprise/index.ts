@@ -72,8 +72,6 @@ const clientSearchRechercheEntreprise = async ({
 
   const filters = searchFilterParams?.toApiURI();
 
-  console.log(filters);
-
   if (!filters && (!encodedTerms || encodedTerms.length < 3)) {
     throw new NotEnoughParamsException();
   }
@@ -289,6 +287,7 @@ const mapToDirigeantModel = (
     prenoms = '',
     nom = '',
     qualite = '',
+    date_de_naissance = '',
   } = dirigeant;
 
   if (!!siren) {
@@ -302,9 +301,9 @@ const mapToDirigeantModel = (
   return {
     sexe: null,
     nom: (nom || '').toUpperCase(),
-    prenom: formatFirstNames((prenoms || '').split(' '), 1),
+    ...formatFirstNames(prenoms || '', ' '),
     role: qualite,
-    dateNaissancePartial: '',
+    dateNaissancePartial: date_de_naissance,
     lieuNaissance: '',
   };
 };
@@ -315,7 +314,7 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
   return {
     sexe,
     nom: (nom || '').toUpperCase(),
-    prenom: formatFirstNames((prenoms || '').split(' '), 1),
+    ...formatFirstNames(prenoms || '', ' '),
     role: fonction,
     dateNaissancePartial: annee_de_naissance,
     lieuNaissance: '',

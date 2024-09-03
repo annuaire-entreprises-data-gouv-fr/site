@@ -9,6 +9,7 @@ import {
 } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
+import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
 import {
   FetchRechercheEntrepriseException,
   IEtablissement,
@@ -137,7 +138,8 @@ export const searchWithoutProtectedSiren = async (
  */
 export const searchPersonCompanies = async (
   name: string,
-  firstName: string,
+  prenom: string,
+  prenoms: string,
   partialDate: string,
   sirenFrom: string,
   page: number
@@ -147,9 +149,10 @@ export const searchPersonCompanies = async (
   const [dmin, dmax] =
     typeof monthInterval === 'string' ? ['', ''] : monthInterval;
 
+  // search with only first firstName
   const searchFilterParams = new SearchFilterParams({
     n: name,
-    fn: firstName,
+    fn: prenom,
     dmin,
     dmax,
   });
@@ -166,5 +169,27 @@ export const searchPersonCompanies = async (
     );
   }
 
-  return await searchWithoutProtectedSiren('', page, searchFilterParams);
+  const results = await searchWithoutProtectedSiren(
+    '',
+    page,
+    searchFilterParams
+  );
+
+  let hasLooseMatch = false;
+
+  results.results = results.results.filter((result) => {
+    // return either exact match on all firstnames match prenoms or the structures with only one first name matching prenom
+    const hasFirstNames = result.dirigeants.find(
+      (d) =>
+        !isPersonneMorale(d) && (d.prenoms === prenoms || d.prenoms === prenom)
+    );
+    if (hasFirstNames) {
+      return true;
+    } else {
+      results.resultCount -= 1;
+      return false;
+    }
+  });
+
+  return results;
 };

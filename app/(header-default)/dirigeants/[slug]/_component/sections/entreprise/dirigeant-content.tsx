@@ -1,3 +1,4 @@
+import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
 import { FullTable } from '#components/table/full';
 import { IUniteLegale } from '#models/core/types';
 import {
@@ -67,11 +68,10 @@ export function DirigeantContent({
         </>,
         ...(dirigeant.dateNaissancePartial
           ? [
-              <a
-                href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&partialDate=${dirigeant.dateNaissancePartial}&sirenFrom=${uniteLegale.siren}`}
-              >
-                → voir ses entreprises
-              </a>,
+              <SeePersonPageLink
+                person={dirigeant}
+                sirenFrom={uniteLegale.siren}
+              />,
             ]
           : []),
       ];

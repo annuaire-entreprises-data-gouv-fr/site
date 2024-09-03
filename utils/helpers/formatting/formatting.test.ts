@@ -2,6 +2,7 @@ import {
   escapeString,
   formatAdresse,
   formatCurrency,
+  formatFirstNames,
   removeSpecialChars,
 } from './formatting';
 
@@ -114,6 +115,21 @@ describe('Check escapeString', () => {
 
 describe('Check removeSpecialChars', () => {
   expect(removeSpecialChars("ksㅤdn'fk'jdnsfㅤé")).toBe("ksㅤdn'fk'jdnsfㅤe");
+});
+
+describe('Check formatFirstNames', () => {
+  expect(formatFirstNames('Xavier, marie, Erwan', ', ')).toStrictEqual({
+    prenom: 'Xavier',
+    prenoms: 'Xavier, Marie, Erwan',
+  });
+  expect(formatFirstNames('Xavier marie Erwan', ' ')).toStrictEqual({
+    prenom: 'Xavier',
+    prenoms: 'Xavier, Marie, Erwan',
+  });
+  expect(formatFirstNames('', ', ')).toStrictEqual({
+    prenom: '',
+    prenoms: '',
+  });
 });
 
 export {};

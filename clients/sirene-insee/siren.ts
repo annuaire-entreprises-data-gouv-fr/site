@@ -215,10 +215,9 @@ const mapToDomainObject = (
 
   // EI names and firstName
   // remove trailing whitespace in case name or firstname is missing
-  const names = `${formatFirstNames([prenomUsuelUniteLegale])} ${formatNameFull(
-    nomUniteLegale,
-    nomUsageUniteLegale
-  )}`.trim();
+  const names = `${
+    formatFirstNames(prenomUsuelUniteLegale, '').prenom
+  } ${formatNameFull(nomUniteLegale, nomUsageUniteLegale)}`.trim();
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
 
