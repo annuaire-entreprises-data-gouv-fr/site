@@ -152,9 +152,10 @@ const PersonnePage = async (props: AppRouterProps) => {
                           {' '}
                           (
                           <FAQLink tooltipLabel={<i>possible homonymie</i>}>
-                            Il est probable que {prenoms} {nom} et {prenom}{' '}
-                            {nom} soient la même personne mais cela peut aussi
-                            être des homonymes.
+                            Il est probable que {dirigeantOrElu.prenoms}{' '}
+                            {dirigeantOrElu.nom} et {prenoms} {nom} soient la
+                            même personne mais cela peut aussi être des
+                            homonymes.
                           </FAQLink>
                           )
                           <br />
