@@ -9,11 +9,15 @@ import {
   RequestAbortedDuringUnloadException,
 } from '#utils/network/frontend';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
-import { APIPath, RouteResponse } from 'app/api/data-fetching/routes-handlers';
+import {
+  APIPath,
+  RouteParams,
+  RouteResponse,
+} from 'app/api/data-fetching/routes-handlers';
 import { APIRoutesScopes } from 'app/api/data-fetching/routes-scopes';
 
-type Options = {
-  params?: URLSearchParams;
+type Options<T extends APIPath> = {
+  params?: RouteParams<T>;
 };
 
 /**
@@ -28,7 +32,7 @@ export function useAPIRouteData<T extends APIPath>(
   route: T,
   slug: string,
   session: ISession | null,
-  options?: Options
+  options?: Options<T>
 ): RouteResponse<T> | IDataFetchingState {
   const [response, setResponse] = useState<
     IDataFetchingState | RouteResponse<T>
@@ -50,7 +54,7 @@ async function fetchAPIRoute<T extends APIPath>(
   route: T,
   slug: string,
   session: ISession | null,
-  options?: Options
+  options?: Options<T>
 ): Promise<RouteResponse<T> | IDataFetchingState | undefined> {
   if (!hasRights(session, APIRoutesScopes[route])) {
     return IDataFetchingState.UNAUTHORIZED;

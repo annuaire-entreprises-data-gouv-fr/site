@@ -4,7 +4,7 @@ import { APIRouteError } from './utils';
 
 export default function getBeneficiairesController(
   slug: string,
-  params: Record<string, string>
+  params: { useCase: UseCase }
 ) {
   if (!('useCase' in params) || params.useCase in UseCase) {
     throw new APIRouteError(
@@ -13,7 +13,7 @@ export default function getBeneficiairesController(
       400
     );
   }
-  return getBeneficiaires(slug, params.useCase as UseCase);
+  return getBeneficiaires(slug, params.useCase);
 }
 
 export const beneficiaireRoute = 'espace-agent/beneficiaires';

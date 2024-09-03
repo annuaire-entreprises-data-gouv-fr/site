@@ -38,3 +38,7 @@ export type APIPath = keyof typeof APIRoutesHandlers;
 export type RouteResponse<T> = T extends APIPath
   ? UnwrapPromise<ReturnType<(typeof APIRoutesHandlers)[T]>>
   : never;
+
+export type RouteParams<T> = T extends APIPath
+  ? Parameters<(typeof APIRoutesHandlers)[T]>[1]
+  : never;

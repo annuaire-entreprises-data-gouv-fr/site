@@ -28,11 +28,11 @@ async function getRoute(
       403
     );
   }
+  const searchParams = Object.fromEntries(
+    new URL(request.url).searchParams
+  ) as Parameters<typeof handler>[1];
 
-  const response = await handler(
-    slug,
-    Object.fromEntries(new URL(request.url).searchParams)
-  );
+  const response = await handler(slug, searchParams!);
 
   return Response.json(response);
 }

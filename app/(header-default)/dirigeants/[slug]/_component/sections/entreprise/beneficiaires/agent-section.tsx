@@ -24,7 +24,7 @@ const ProtectedBeneficiairesSection: React.FC<{
 }> = ({ uniteLegale, session, useCase }) => {
   const params = useMemo(
     () => ({
-      params: new URLSearchParams({ useCase }),
+      params: { useCase },
     }),
     [useCase]
   );
