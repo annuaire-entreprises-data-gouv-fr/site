@@ -1,5 +1,5 @@
 import SearchFilters from '#components/advanced-search/search-filters';
-import { buildSearchQuery, IParams } from '#models/search-filter-params';
+import { buildSearchQuery, IParams } from '#models/search/search-filter-params';
 import MapOrListSwitch from './map-or-list';
 import styles from './style.module.css';
 

@@ -12,7 +12,7 @@ import {
 } from '#models/core/types';
 import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import { ISearchResults } from '#models/search';
-import SearchFilterParams from '#models/search-filter-params';
+import SearchFilterParams from '#models/search/search-filter-params';
 import {
   Siret,
   extractNicFromSiret,
@@ -71,6 +71,8 @@ const clientSearchRechercheEntreprise = async ({
       : routes.rechercheEntreprise.rechercheUniteLegale);
 
   const filters = searchFilterParams?.toApiURI();
+
+  console.log(filters);
 
   if (!filters && (!encodedTerms || encodedTerms.length < 3)) {
     throw new NotEnoughParamsException();

@@ -1,5 +1,5 @@
 import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
-import SearchFilterParams from '#models/search-filter-params';
+import SearchFilterParams from '#models/search/search-filter-params';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 import simplifyParams from './simplify-params';
 

@@ -1,16 +1,18 @@
 'use client';
 
-import React from 'react';
 import { FilterMenu } from '#components-ui/filter-menu';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import { Select } from '#components-ui/select';
 import { MultiSelect } from '#components-ui/select/multi-select';
-import SearchFilterParams, { IParams } from '#models/search-filter-params';
+import SearchFilterParams, {
+  IParams,
+} from '#models/search/search-filter-params';
 import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
 import { codesEffectifsOptions } from '#utils/helpers/formatting/codes-effectifs';
 import { categoriesJuridiques } from '#utils/helpers/formatting/metadata/categories-juridiques';
 import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
+import React from 'react';
 import { FilterFinances } from './filter-finances';
 import { FilterGeo } from './filter-geo';
 import { FilterStructure } from './filter-structure';

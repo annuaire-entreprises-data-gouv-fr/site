@@ -21,7 +21,7 @@ const safe =
       } catch {}
       logErrorInSentry(
         new InternalError({
-          message: 'Formatting error in view',
+          message: 'Formatting error',
           cause: e,
           context: {
             details: argsAsString,
@@ -141,6 +141,21 @@ export const formatMonthIntervalFromPartialDate = safe((dPartial: string) => {
   ).getDate();
 
   return [`${dPartial}-01`, `${dPartial}-${lastDayOfMonth}`] as const;
+});
+
+/**
+ * Takes a YYYY-MM-DD and convert it to an age
+ */
+export const convertDateToAge = safe((d: string) => {
+  const ageMilliseconds = Date.now() - new Date(d).getTime();
+
+  if (isNaN(ageMilliseconds)) {
+    return '';
+  }
+
+  // this is an approximation of age
+  const age = Math.floor(ageMilliseconds / 31557600000);
+  return age;
 });
 
 export const formatAge = safe((date: string | Date) => {

@@ -1,39 +1,45 @@
-import { GetServerSideProps } from 'next';
 import { Info } from '#components-ui/alerts';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import Meta from '#components/meta/meta-client';
-import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import { Exception } from '#models/exceptions';
+import { FullTable } from '#components/table/full';
+import UniteLegaleBadge from '#components/unite-legale-badge';
 import { IEtatCivil } from '#models/immatriculation';
-import { ISearchResults, searchWithoutProtectedSiren } from '#models/search';
-import SearchFilterParams, { IParams } from '#models/search-filter-params';
+import { ISearchResults, searchPersonCompanies } from '#models/search';
 import {
+  convertDateToAge,
   formatDatePartial,
-  formatMonthIntervalFromPartialDate,
+  formatIntFr,
   parseIntWithDefaultValue,
 } from '#utils/helpers';
-import { logWarningInSentry } from '#utils/sentry';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-helper/page/post-server-side-props';
+import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
+import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   results: ISearchResults;
   personne: IEtatCivil;
-  searchParams: IParams;
   sirenFrom: string;
-  labelDatePartial: string;
+  partialDate: string;
+  fn: string;
+  firstName: string;
+  n: string;
+  age: number;
 }
 
 const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
   results,
-  searchParams,
   sirenFrom,
-  labelDatePartial,
+  partialDate,
+  fn,
+  firstName,
+  n,
+  age,
 }) => (
   <>
     <Meta
@@ -49,17 +55,15 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
         </a>
       )}
       <h1>
-        Liste des structures associées à {searchParams.fn} {searchParams.n}
-        {searchParams.ageMax || searchParams.ageMin
-          ? ` (${searchParams.ageMax || searchParams.ageMin} ans)`
-          : ''}
+        Liste des structures associées à {fn} {n}
+        {age ? ` (${age} ans)` : ''}
       </h1>
       <Info>
         Cette page liste toutes les structures associées à{' '}
         <strong>
-          {searchParams.fn} {searchParams.n}
+          {fn} {n}
         </strong>
-        , né(e) en {labelDatePartial}.
+        , né(e) en {formatDatePartial(partialDate)}.
         <br />
         Le jour de naissance n’étant pas une donnée publique, cette page peut
         comporter de très rares cas <strong>d’homonymie</strong>.
@@ -67,25 +71,49 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
         <br />
         Enfin, si <strong>vous ne retrouvez pas une entreprise</strong> qui
         devrait se trouver dans la liste , vous pouvez{' '}
-        <a href={`/rechercher?fn=${searchParams.fn}&n=${searchParams.n}`}>
+        <a href={`/rechercher?fn=${fn}&n=${n}`}>
           élargir la recherche à toutes les structures liées à une personne
           appelée «&nbsp;
-          {searchParams.fn} {searchParams.n}
+          {fn} {n}
           &nbsp;», sans filtre d’âge.
         </a>
       </Info>
       <HorizontalSeparator />
-      <span>
+      <div>
         {results.currentPage > 1 && `Page ${results.currentPage} de `}
         {results.resultCount} résultat(s) trouvé(s).
-      </span>
-      <ResultsList results={results.results} />
+      </div>
+      <br />
+      <FullTable
+        head={[
+          'Siren',
+          'Type',
+          'Dénomination',
+          'Adresse',
+          'Dirigeant(s) ou élu(s)',
+        ]}
+        body={results.results.map((result) => [
+          <a href={result.chemin}>{formatIntFr(result.siren)}</a>,
+          <UniteLegaleBadge uniteLegale={result} />,
+          <>{result.nomComplet}</>,
+          <>{result.siege.adresse}</>,
+          <div>
+            {result.dirigeants.map((dirigeantOrElu) => (
+              <div>
+                {isPersonneMorale(dirigeantOrElu)
+                  ? `${dirigeantOrElu.denomination}`
+                  : `${dirigeantOrElu.prenom} ${dirigeantOrElu.nom}`}
+              </div>
+            ))}
+          </div>,
+        ])}
+      />
       {results.pageCount > 0 && (
         <PageCounter
           totalPages={results.pageCount}
           searchTerm=""
           currentPage={results.currentPage}
-          searchFilterParams={searchParams}
+          urlComplement={`&fn=${fn}&n=${n}&partialDate=${partialDate}&sirenFrom=${sirenFrom}`}
         />
       )}
       <br />
@@ -96,58 +124,33 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     // get params from query string
-    const searchTerm = (context.query.terme || '') as string;
     const pageParam = (context.query.page || '') as string;
     const sirenFrom = (context.query.sirenFrom || '') as string;
     const partialDate = (context.query.partialDate || '') as string;
+    const fn = (context.query.fn || '') as string;
+    const n = (context.query.n || '') as string;
 
-    if (!searchTerm && !pageParam && !partialDate) {
-      return {
-        redirect: { destination: '/404' },
-      };
-    }
+    const firstName = fn.split(', ')[0];
 
     const page = parseIntWithDefaultValue(pageParam, 1);
 
-    const monthInterval = formatMonthIntervalFromPartialDate(partialDate) ?? [
-      '',
-      '',
-    ];
-    const [dmin, dmax] =
-      typeof monthInterval === 'string' ? ['', ''] : monthInterval;
-
-    const searchFilterParams = new SearchFilterParams({
-      ...context.query,
-      dmin,
-      dmax,
-    });
-
-    const results = await searchWithoutProtectedSiren(
-      searchTerm,
-      page,
-      searchFilterParams
+    const results = await searchPersonCompanies(
+      n,
+      firstName,
+      partialDate,
+      sirenFrom,
+      page
     );
-
-    const searchParams = searchFilterParams.toJSON();
-
-    if (!dmin || !dmax) {
-      logWarningInSentry(
-        new Exception({
-          name: 'SearchDirigeantBadParams',
-          message: 'No date bounds in page personne',
-          context: {
-            siren: sirenFrom,
-          },
-        })
-      );
-    }
 
     return {
       props: {
+        fn,
+        firstName,
+        n,
         results,
-        searchParams,
         sirenFrom,
-        labelDatePartial: formatDatePartial(dmin || dmax),
+        partialDate: partialDate,
+        age: convertDateToAge(partialDate),
       },
     };
   }

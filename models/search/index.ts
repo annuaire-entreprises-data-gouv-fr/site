@@ -1,8 +1,12 @@
 import { HttpBadRequestError, HttpNotFound } from '#clients/exceptions';
 import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
+import { Exception } from '#models/exceptions';
 import { IDirigeant } from '#models/immatriculation';
-import SearchFilterParams from '#models/search-filter-params';
-import { removeSpecialChars } from '#utils/helpers';
+import SearchFilterParams from '#models/search/search-filter-params';
+import {
+  formatMonthIntervalFromPartialDate,
+  removeSpecialChars,
+} from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
 import {
@@ -11,7 +15,7 @@ import {
   IUniteLegale,
   IsLikelyASirenOrSiretException,
   NotEnoughParamsException,
-} from './core/types';
+} from '../core/types';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
@@ -119,4 +123,48 @@ export const searchWithoutProtectedSiren = async (
   });
 
   return results;
+};
+
+/**
+ * Research a personn's companies
+ *
+ * @param name
+ * @param firstName
+ * @param partialDate
+ * @param sirenFrom
+ * @param page
+ * @returns
+ */
+export const searchPersonCompanies = async (
+  name: string,
+  firstName: string,
+  partialDate: string,
+  sirenFrom: string,
+  page: number
+): Promise<ISearchResults> => {
+  const monthInterval = formatMonthIntervalFromPartialDate(partialDate);
+
+  const [dmin, dmax] =
+    typeof monthInterval === 'string' ? ['', ''] : monthInterval;
+
+  const searchFilterParams = new SearchFilterParams({
+    n: name,
+    fn: firstName,
+    dmin,
+    dmax,
+  });
+
+  if (!dmin || !dmax) {
+    logWarningInSentry(
+      new Exception({
+        name: 'SearchDirigeantBadParams',
+        message: 'No date bounds in page personne',
+        context: {
+          siren: sirenFrom,
+        },
+      })
+    );
+  }
+
+  return await searchWithoutProtectedSiren('', page, searchFilterParams);
 };

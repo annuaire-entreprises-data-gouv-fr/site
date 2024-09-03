@@ -1,5 +1,6 @@
 import { IIconsSlug } from '#components-ui/icon';
 import { IEtatCivil } from '#models/immatriculation';
+import { convertDateToAge } from '#utils/helpers';
 
 export interface IParams {
   ageMax?: number | string;
@@ -58,8 +59,8 @@ class SearchFilterParams {
 
     this.params = {
       // careful dmin determine ageMax and vice versa
-      ageMax: getAge(realDmin),
-      ageMin: getAge(realDmax),
+      ageMax: convertDateToAge(realDmin),
+      ageMin: convertDateToAge(realDmax),
       cp_dep_label,
       cp_dep_type,
       cp_dep,
@@ -269,21 +270,6 @@ class SearchFilterParams {
     return f;
   };
 }
-
-const getAge = (d: string) => {
-  try {
-    const ageMilliseconds = Date.now() - new Date(d).getTime();
-
-    // this is an approximation of age
-    const age = Math.floor(ageMilliseconds / 31557600000);
-    if (isNaN(ageMilliseconds)) {
-      return '';
-    }
-    return age;
-  } catch {
-    return '';
-  }
-};
 
 const serializeParams = (
   params: IParams | object,
