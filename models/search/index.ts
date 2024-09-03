@@ -175,8 +175,6 @@ export const searchPersonCompanies = async (
     searchFilterParams
   );
 
-  let hasLooseMatch = false;
-
   results.results = results.results.filter((result) => {
     // return either exact match on all firstnames match prenoms or the structures with only one first name matching prenom
     const hasFirstNames = result.dirigeants.find(

@@ -1,5 +1,4 @@
 import { IIconsSlug } from '#components-ui/icon';
-import { IEtatCivil } from '#models/immatriculation';
 import { convertDateToAge } from '#utils/helpers';
 
 export interface IParams {
@@ -129,17 +128,6 @@ class SearchFilterParams {
       resultat_net_max: this.params.res_max,
       resultat_net_min: this.params.res_min,
     });
-  }
-
-  public getPersonne(): IEtatCivil {
-    return {
-      nom: this.params.n?.trim() || '',
-      prenom: this.params.fn?.trim() || '',
-      sexe: null,
-      dateNaissancePartial: this.params.dmin || '',
-      lieuNaissance: '',
-      role: '',
-    };
   }
 
   public extractFilters = () => {

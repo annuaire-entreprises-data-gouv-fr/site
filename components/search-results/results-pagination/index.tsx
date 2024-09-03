@@ -1,5 +1,5 @@
-import { buildSearchQuery, IParams } from '#models/search/search-filter-params';
 import React from 'react';
+import { buildSearchQuery, IParams } from '#models/search/search-filter-params';
 import pagesArray from './pages-array';
 
 type IProps = {

@@ -1,6 +1,6 @@
+import React from 'react';
 import { AdvancedSearch } from '#components/advanced-search';
 import { IParams } from '#models/search/search-filter-params';
-import React from 'react';
 import { HeaderServer } from './header-server';
 
 type IProps = {

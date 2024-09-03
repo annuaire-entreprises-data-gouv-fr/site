@@ -7,7 +7,7 @@ export const SeePersonPageLink = ({
   sirenFrom,
 }: {
   person: IEtatCivil;
-  label: string;
+  label?: string;
   sirenFrom?: Siren;
 }) => (
   <a

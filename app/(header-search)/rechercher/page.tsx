@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
@@ -12,7 +13,6 @@ import SearchFilterParams, {
 } from '#models/search/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Rechercher une entreprise, un service public ou une association',

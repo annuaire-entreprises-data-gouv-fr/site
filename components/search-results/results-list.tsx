@@ -1,3 +1,4 @@
+import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
@@ -6,7 +7,6 @@ import { isCollectiviteTerritoriale } from '#models/core/types';
 import { IDirigeant } from '#models/immatriculation';
 import { ISearchResult } from '#models/search';
 import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
-import React from 'react';
 import styles from './style.module.css';
 
 type IProps = {
