@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
 import { Info } from '#components-ui/alerts';
 import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
 import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -112,29 +110,13 @@ const PersonnePage = async (props: AppRouterProps) => {
 
       {results.results.length > 0 ? (
         <FullTable
-          head={['Siren', 'Détails', '', 'Dirigeant(s)']}
+          head={['Siren', 'Détails', 'Dirigeant(s)']}
           body={results.results.map((result) => [
             <a href={result.chemin}>{formatIntFr(result.siren)}</a>,
             <>
               {result.nomComplet}
               <br />
               {result.siege.adresse}
-            </>,
-            <>
-              {result.dirigeants.find(
-                (d) =>
-                  !isPersonneMorale(d) &&
-                  d.prenoms !== prenoms &&
-                  d.prenom === prenom &&
-                  d.nom.toLowerCase() === nom.toLowerCase()
-              ) ? (
-                <InformationTooltip
-                  label={`Il est probable que ${prenoms} ${nom} et ${prenom} ${nom} soient la même personne mais ce n’est pas possible d’en être certain.`}
-                  tabIndex={undefined}
-                >
-                  <Icon slug="information" color="orange" />
-                </InformationTooltip>
-              ) : null}
             </>,
             <div>
               {result.dirigeants.map((dirigeantOrElu) => (
@@ -162,6 +144,22 @@ const PersonnePage = async (props: AppRouterProps) => {
                       ) : (
                         `${dirigeantOrElu.prenom} ${dirigeantOrElu.nom}`
                       )}
+                      {!isPersonneMorale(dirigeantOrElu) &&
+                      dirigeantOrElu.prenoms !== prenoms &&
+                      dirigeantOrElu.prenom === prenom &&
+                      dirigeantOrElu.nom.toLowerCase() === nom.toLowerCase() ? (
+                        <>
+                          {' '}
+                          (
+                          <FAQLink tooltipLabel={<i>possible homonymie</i>}>
+                            Il est probable que {prenoms} {nom} et {prenom}{' '}
+                            {nom} soient la même personne mais cela peut aussi
+                            être des homonymes.
+                          </FAQLink>
+                          )
+                          <br />
+                        </>
+                      ) : null}{' '}
                     </>
                   )}
                 </div>
