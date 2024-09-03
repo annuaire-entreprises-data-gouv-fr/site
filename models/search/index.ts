@@ -149,14 +149,6 @@ export const searchPersonCompanies = async (
   const [dmin, dmax] =
     typeof monthInterval === 'string' ? ['', ''] : monthInterval;
 
-  // search with only first firstName
-  const searchFilterParams = new SearchFilterParams({
-    n: name,
-    fn: prenom,
-    dmin,
-    dmax,
-  });
-
   if (!dmin || !dmax) {
     logWarningInSentry(
       new Exception({
@@ -167,7 +159,20 @@ export const searchPersonCompanies = async (
         },
       })
     );
+    return {
+      results: [],
+      resultCount: 0,
+      currentPage: 1,
+      pageCount: 1,
+    };
   }
+  // search with only first firstName
+  const searchFilterParams = new SearchFilterParams({
+    n: name,
+    fn: prenom,
+    dmin,
+    dmax,
+  });
 
   const results = await searchWithoutProtectedSiren(
     '',
