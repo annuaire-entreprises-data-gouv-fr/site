@@ -38,13 +38,12 @@ export const UniteLegaleInscriptionSirene = ({
   return (
     <Wrapper
       link={
-        <Icon slug="download">
-          <AvisSituationLink
-            session={session}
-            etablissement={uniteLegale.siege}
-            label="Avis de situation Sirene"
-          />
-        </Icon>
+        <AvisSituationLink
+          session={session}
+          etablissement={uniteLegale.siege}
+          label="Avis de situation"
+          button={true}
+        />
       }
     >
       <InformationTooltip
@@ -119,14 +118,11 @@ export const UniteLegaleInscriptionRNE = ({
   return (
     <Wrapper
       link={
-        <Icon slug="download">
-          <ExtraitRNELink
-            uniteLegale={uniteLegale}
-            session={session}
-            label="Extrait RNE"
-          />{' '}
-          (<a href="/faq/extrait-kbis">équivalent KBIS/D1</a>)
-        </Icon>
+        <ExtraitRNELink
+          uniteLegale={uniteLegale}
+          session={session}
+          label="Extrait RNE"
+        />
       }
     >
       <InformationTooltip

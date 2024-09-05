@@ -39,7 +39,18 @@ const UniteLegaleSummarySection: React.FC<{
 
   const data = [
     [
-      'État des inscriptions',
+      <FAQLink tooltipLabel="État des inscriptions">
+        Toutes les structures référencées sur notre site sont inscrites à un ou
+        plusieurs référentiels publics (base Sirene, RNE, RNA).
+        <br />
+        <br />
+        {uniteLegale.dateMiseAJourInpi && (
+          <>
+            L’Extrait RNE est le justificatif d’immatriculation de l’entreprise.
+            Il contient les mêmes données qu’un extrait KBIS/D1.
+          </>
+        )}
+      </FAQLink>,
       <>
         <UniteLegaleInscriptionSirene
           uniteLegale={uniteLegale}

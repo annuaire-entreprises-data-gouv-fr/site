@@ -5,7 +5,7 @@ import React, { PropsWithChildren } from 'react';
 import styles from './style.module.css';
 
 const FAQLink: React.FC<
-  PropsWithChildren<{ tooltipLabel: string; to?: string }>
+  PropsWithChildren<{ tooltipLabel: string | JSX.Element; to?: string }>
 > = ({ to, tooltipLabel, children }) => (
   <InformationTooltip
     label={children}

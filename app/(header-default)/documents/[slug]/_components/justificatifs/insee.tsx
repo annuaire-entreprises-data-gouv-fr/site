@@ -1,4 +1,3 @@
-import React from 'react';
 import ButtonLink from '#components-ui/button';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { Tag } from '#components-ui/tag';
@@ -12,6 +11,7 @@ import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
+import React from 'react';
 
 const AvisSituationTable: React.FC<{
   etablissements: IEtablissement[];
