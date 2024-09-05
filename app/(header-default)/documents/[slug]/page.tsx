@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { PrintNever } from '#components-ui/print-visibility';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
 import Title from '#components/title-section';
@@ -12,7 +13,6 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
 import ActesSection from './_components/actes';
 import CarteProfessionnelleTPSection from './_components/carte-professionnelle-TP-section';
 import { SummaryDocuments } from './_components/summary-documents';

@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
@@ -28,7 +29,6 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps

@@ -1,9 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
 import constants from '#models/constants';
 import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { useEffect } from 'react';
 import styles from './style.module.css';
 export default function LoadBar({ session }: { session: ISession | null }) {
   useEffect(() => {

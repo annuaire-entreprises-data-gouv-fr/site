@@ -1,11 +1,11 @@
 'use client';
 
+import { useMemo, useState } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
 import { changelogData } from '#models/historique-modifications';
 import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { useMemo, useState } from 'react';
 
 export default function ChangelogWithFilters({
   session,

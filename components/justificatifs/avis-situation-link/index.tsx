@@ -1,3 +1,4 @@
+import React from 'react';
 import routes from '#clients/routes';
 import FAQLink from '#components-ui/faq-link';
 import {
@@ -8,7 +9,6 @@ import {
 import { IEtablissement } from '#models/core/types';
 import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import React from 'react';
 
 const AvisSituationLink: React.FC<{
   etablissement: IEtablissement;

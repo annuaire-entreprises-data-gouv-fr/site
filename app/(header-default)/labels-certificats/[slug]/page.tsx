@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import {
   checkHasLabelsAndCertificates,
@@ -27,7 +28,6 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
