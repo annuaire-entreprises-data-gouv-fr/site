@@ -18,7 +18,7 @@ import { CertificationSocieteMission } from '#components/labels-and-certificates
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { getCertificationsFromSlug } from '#models/certifications';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -83,7 +83,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
           session={session}
         />
         {!checkHasLabelsAndCertificates(uniteLegale) &&
-          !hasRights(session, EScope.protectedCertificats) && (
+          !hasRights(session, AppScope.protectedCertificats) && (
             <p>Cette structure ne possède aucun label ou certificat.</p>
           )}
         {estEss && <CertificationESSSection ess={ess} />}
@@ -101,7 +101,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
             session={session}
           />
         )}
-        {hasRights(session, EScope.protectedCertificats) && (
+        {hasRights(session, AppScope.protectedCertificats) && (
           <>
             <QualibatSection session={session} uniteLegale={uniteLegale} />
             <QualifelecSection session={session} uniteLegale={uniteLegale} />

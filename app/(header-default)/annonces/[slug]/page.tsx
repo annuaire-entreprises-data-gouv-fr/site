@@ -6,7 +6,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { estDiffusible } from '#models/core/diffusion';
 import { isAssociation } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -49,7 +49,7 @@ const AnnoncesPage = async (props: AppRouterProps) => {
           session={session}
         />
         {estDiffusible(uniteLegale) ||
-        hasRights(session, EScope.nonDiffusible) ? (
+        hasRights(session, AppScope.nonDiffusible) ? (
           <AnnoncesBodacc uniteLegale={uniteLegale} />
         ) : (
           <DonneesPriveesSection />

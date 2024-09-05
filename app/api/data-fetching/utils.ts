@@ -66,7 +66,7 @@ export class APIRouteError extends Exception {
   constructor(
     message: string,
     context: { route: string; slug: string },
-    public status: 404 | 403 | 500 | 401,
+    public status: 400 | 404 | 403 | 500 | 401,
     cause?: any
   ) {
     super({

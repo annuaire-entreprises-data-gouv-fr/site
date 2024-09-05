@@ -1,5 +1,5 @@
 import { IAgentContactInfo } from '#components/feedback-modal/type';
-import { EScope, hasRights } from './rights';
+import { AppScope, hasRights } from './rights';
 import { ISession } from './session';
 
 export function getAgentEmail(session: ISession | null) {
@@ -14,7 +14,7 @@ export function getAgentLabel(session: ISession | null) {
   return session?.user?.isPrestataire ? 'externe' : 'agent public';
 }
 
-export function getAgentScopes(session: ISession | null) {
+export function getIAgentScope(session: ISession | null) {
   return session?.user?.scopes || [];
 }
 
@@ -29,7 +29,7 @@ export function getAgentContactInfo(
 ): IAgentContactInfo | null {
   const email = getAgentEmail(session);
 
-  if (!hasRights(session, EScope.isAgent) || !email) {
+  if (!hasRights(session, AppScope.isAgent) || !email) {
     return null;
   }
   return {

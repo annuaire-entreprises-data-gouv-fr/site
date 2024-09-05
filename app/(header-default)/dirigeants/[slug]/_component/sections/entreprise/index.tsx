@@ -1,5 +1,6 @@
 'use client';
 
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { IUniteLegale } from '#models/core/types';
 import { isDataSuccess } from '#models/data-fetching';
@@ -47,10 +48,8 @@ export function DirigeantInformation({
       )}
 
       <BreakPageForPrint />
-      <BeneficiairesSection
-        immatriculationRNE={immatriculationRNE}
-        uniteLegale={uniteLegale}
-      />
+      <HorizontalSeparator />
+      <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
     </>
   );
 }

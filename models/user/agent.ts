@@ -1,7 +1,7 @@
 import { IAgentConnectUserInfo } from '#clients/authentication/agent-connect/strategy';
 import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
-import { IScope, getUserScopes } from './scopes';
+import { IAgentScope, getAgentScopes } from './scopes';
 
 const isLikelyPrestataire = (email: string | undefined) => {
   try {
@@ -33,13 +33,20 @@ const isFromMCP = (idp_id: string) => {
   }
 };
 
+export enum UseCase {
+  autre = "Autre cas d'usage",
+  aides = 'Aides publiques',
+  marches = 'Marchés publics',
+  fraude = 'Détection de la fraude',
+}
+
 export type IAgentInfo = {
   email: string;
   familyName: string;
   firstName: string;
   fullName: string;
   siret: string;
-  scopes: IScope[];
+  scopes: IAgentScope[];
   userType: string;
   isPrestataire: boolean;
   isMCP: boolean;
@@ -48,7 +55,7 @@ export type IAgentInfo = {
 export const getAgent = async (
   userInfo: IAgentConnectUserInfo
 ): Promise<IAgentInfo> => {
-  const { scopes, userType } = await getUserScopes(userInfo?.email);
+  const { scopes, userType } = await getAgentScopes(userInfo?.email);
 
   const isPrestataire = isLikelyPrestataire(userInfo?.email);
   const isMCP = isFromMCP(userInfo.idp_id);

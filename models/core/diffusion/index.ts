@@ -1,4 +1,4 @@
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { ReactElement } from 'react';
 import { IEtablissementsList } from '../etablissements-list';
@@ -16,7 +16,7 @@ type IUniteLegaleOrEtablissement = {
 };
 
 const canSeeNonDiffusible = (session: ISession | null) =>
-  hasRights(session, EScope.nonDiffusible);
+  hasRights(session, AppScope.nonDiffusible);
 
 /**
  * Only diffusible. Exclude partially diffusible and non-diffusible

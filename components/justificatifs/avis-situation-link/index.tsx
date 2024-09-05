@@ -7,7 +7,7 @@ import {
   nonDiffusibleDataFormatter,
 } from '#models/core/diffusion';
 import { IEtablissement } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 
 const AvisSituationLink: React.FC<{
@@ -28,7 +28,7 @@ const AvisSituationLink: React.FC<{
   if (estDiffusible(etablissement)) {
     return link;
   } else {
-    if (hasRights(session, EScope.isAgent)) {
+    if (hasRights(session, AppScope.isAgent)) {
       if (estNonDiffusibleProtected(etablissement)) {
         return link;
       } else {

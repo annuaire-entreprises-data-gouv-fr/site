@@ -13,6 +13,9 @@ import {
 } from '#models/immatriculation/rne';
 import { buildAndVerifyTVA } from '#models/tva/verify';
 import { UnwrapPromise } from 'types';
+import getBeneficiairesController, {
+  beneficiaireRoute,
+} from './get-beneficiaires-controller';
 
 export const APIRoutesHandlers = {
   'espace-agent/carte-professionnelle-TP': getCarteProfessionnelleTravauxPublic,
@@ -21,6 +24,7 @@ export const APIRoutesHandlers = {
   'espace-agent/qualibat': getQualibat,
   'espace-agent/qualifelec': getQualifelec,
   'espace-agent/rcs-mandataires': getMandatairesRCS,
+  [beneficiaireRoute]: getBeneficiairesController,
   'espace-agent/rne/documents': getDocumentsRNEProtected,
   'espace-agent/association-protected': getAssociationProtected,
   rne: getImmatriculationRNE,
@@ -33,4 +37,8 @@ export type APIPath = keyof typeof APIRoutesHandlers;
 
 export type RouteResponse<T> = T extends APIPath
   ? UnwrapPromise<ReturnType<(typeof APIRoutesHandlers)[T]>>
+  : never;
+
+export type RouteParams<T> = T extends APIPath
+  ? Parameters<(typeof APIRoutesHandlers)[T]>[1]
   : never;

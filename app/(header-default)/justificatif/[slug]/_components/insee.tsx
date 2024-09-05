@@ -9,7 +9,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { estDiffusible } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
 
@@ -69,7 +69,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, session }) => (
     sources={[EAdministration.INSEE]}
   >
     {!estDiffusible(uniteLegale) &&
-    !hasRights(session, EScope.nonDiffusible) ? (
+    !hasRights(session, AppScope.nonDiffusible) ? (
       <AvisSituationNonDiffusible />
     ) : (
       <>
