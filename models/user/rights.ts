@@ -1,7 +1,10 @@
-import { getAgentScopes } from './helpers';
+import { getIAgentScope } from './helpers';
 import { ISession } from './session';
 
-export enum EScope {
+/**
+ * Application scopes designate specific parts or section of the UI / app
+ */
+export enum AppScope {
   none = 'none',
   actesRne = 'rne',
   bilansRne = 'rne',
@@ -17,29 +20,29 @@ export enum EScope {
 }
 
 /**
- * Has rights to access a view
+ * Does the user have the right to access a view
  */
-export function hasRights(session: ISession | null, rightScope: EScope) {
-  const userScopes = getAgentScopes(session);
+export function hasRights(session: ISession | null, rightScope: AppScope) {
+  const userScopes = getIAgentScope(session);
   switch (rightScope) {
-    case EScope.none:
+    case AppScope.none:
       return true;
-    case EScope.actesRne:
-    case EScope.bilansRne:
-    case EScope.documentsRne:
+    case AppScope.actesRne:
+    case AppScope.bilansRne:
+    case AppScope.documentsRne:
       return userScopes.includes('rne');
-    case EScope.conformite:
+    case AppScope.conformite:
       return userScopes.includes('conformite');
-    case EScope.protectedCertificats:
-    case EScope.carteProfessionnelleTravauxPublics:
-    case EScope.mandatairesRCS:
-    case EScope.associationProtected:
+    case AppScope.protectedCertificats:
+    case AppScope.carteProfessionnelleTravauxPublics:
+    case AppScope.mandatairesRCS:
+    case AppScope.associationProtected:
       return userScopes.includes('opendata');
-    case EScope.beneficiaires:
-      return userScopes.includes('opendata');
-    case EScope.nonDiffusible:
+    case AppScope.beneficiaires:
+      return userScopes.includes('beneficiaires');
+    case AppScope.nonDiffusible:
       return userScopes.includes('nonDiffusible');
-    case EScope.isAgent:
+    case AppScope.isAgent:
       return userScopes.includes('agent');
     default:
       return false;
@@ -47,7 +50,5 @@ export function hasRights(session: ISession | null, rightScope: EScope) {
 }
 
 export function isLoggedIn(session: ISession | null) {
-  return getAgentScopes(session).length > 0;
+  return getIAgentScope(session).length > 0;
 }
-
-// TODO : add a route to save usecase in session

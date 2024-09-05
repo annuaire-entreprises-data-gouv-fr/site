@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import AnnoncesBodacc from '#components/annonces-section/annonces/bodacc';
 import AnnoncesJOAFESection from '#components/annonces-section/annonces/joafe';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
@@ -6,7 +5,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { estDiffusible } from '#models/core/diffusion';
 import { isAssociation } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -16,6 +15,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -49,7 +49,7 @@ const AnnoncesPage = async (props: AppRouterProps) => {
           session={session}
         />
         {estDiffusible(uniteLegale) ||
-        hasRights(session, EScope.nonDiffusible) ? (
+        hasRights(session, AppScope.nonDiffusible) ? (
           <AnnoncesBodacc uniteLegale={uniteLegale} />
         ) : (
           <DonneesPriveesSection />

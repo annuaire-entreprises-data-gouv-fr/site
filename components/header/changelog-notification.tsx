@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import { changelogData } from '#models/historique-modifications';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { formatDate } from '#utils/helpers';
 import { useStorage } from 'hooks';
 import useSession from 'hooks/use-session';
+import { useEffect } from 'react';
 import style from './changelog-notification.module.css';
 
 const NEW_SINCE_LAST_VISIT_ID = 'new-since-last-visit';
@@ -21,7 +21,7 @@ function convertToISO(frenchDate: string) {
 
 export default function ChangelogNotification() {
   const session = useSession();
-  const isAgent = hasRights(session, EScope.isAgent);
+  const isAgent = hasRights(session, AppScope.isAgent);
 
   const dateOfLastNews = siteChangelog.find(
     ({ target }) => target.site || (isAgent && target.agent)

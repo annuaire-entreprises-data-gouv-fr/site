@@ -36,7 +36,8 @@ export const clientApiEntrepriseBeneficiaires = async (
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.beneficiaires.replace('{siren}', siren)}`,
-    mapToDomainObject
+    mapToDomainObject,
+    { useCase }
   );
 };
 

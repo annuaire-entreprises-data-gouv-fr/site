@@ -1,19 +1,19 @@
-import { EScope } from '#models/user/rights';
+import { AppScope } from '#models/user/rights';
 import { APIPath } from './routes-handlers';
 
-export const APIRoutesScopes: Record<APIPath, EScope> = {
+export const APIRoutesScopes: Record<APIPath, AppScope> = {
   'espace-agent/carte-professionnelle-TP':
-    EScope.carteProfessionnelleTravauxPublics,
-  'espace-agent/conformite': EScope.conformite,
-  'espace-agent/opqibi': EScope.protectedCertificats,
-  'espace-agent/qualibat': EScope.protectedCertificats,
-  'espace-agent/qualifelec': EScope.protectedCertificats,
-  'espace-agent/rcs-mandataires': EScope.mandatairesRCS,
-  'espace-agent/beneficiaires': EScope.beneficiaires,
-  'espace-agent/rne/documents': EScope.documentsRne,
-  'espace-agent/association-protected': EScope.associationProtected,
-  rne: EScope.none,
-  association: EScope.none,
-  'verify-tva': EScope.none,
-  'eori-validation': EScope.none,
+    AppScope.carteProfessionnelleTravauxPublics,
+  'espace-agent/conformite': AppScope.conformite,
+  'espace-agent/opqibi': AppScope.protectedCertificats,
+  'espace-agent/qualibat': AppScope.protectedCertificats,
+  'espace-agent/qualifelec': AppScope.protectedCertificats,
+  'espace-agent/rcs-mandataires': AppScope.mandatairesRCS,
+  'espace-agent/beneficiaires': AppScope.beneficiaires,
+  'espace-agent/rne/documents': AppScope.documentsRne,
+  'espace-agent/association-protected': AppScope.associationProtected,
+  rne: AppScope.none,
+  association: AppScope.none,
+  'verify-tva': AppScope.none,
+  'eori-validation': AppScope.none,
 };

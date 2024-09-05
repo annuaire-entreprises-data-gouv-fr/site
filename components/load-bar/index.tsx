@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
 import constants from '#models/constants';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import { useEffect } from 'react';
 import styles from './style.module.css';
 export default function LoadBar({ session }: { session: ISession | null }) {
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function LoadBar({ session }: { session: ISession | null }) {
       id="loader-bar"
       className={styles['load-bar']}
       style={{
-        background: hasRights(session, EScope.isAgent)
+        background: hasRights(session, AppScope.isAgent)
           ? constants.colors.espaceAgent
           : 'transparent',
       }}

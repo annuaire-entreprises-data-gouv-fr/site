@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { PrintNever } from '#components-ui/print-visibility';
 import {
   checkHasLabelsAndCertificates,
@@ -9,8 +8,9 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import Link from 'next/link';
 import styles from './styles.module.css';
 import TabLink from './tab-link';
 
@@ -103,7 +103,7 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay:
         checkHasLabelsAndCertificates(uniteLegale) ||
-        hasRights(session, EScope.protectedCertificats),
+        hasRights(session, AppScope.protectedCertificats),
       width: checkHasQuality(uniteLegale) ? '200px' : '110px',
     },
     {

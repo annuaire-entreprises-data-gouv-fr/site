@@ -3,12 +3,11 @@
 import { useState } from 'react';
 import { Warning } from '#components-ui/alerts';
 import { INPI } from '#components/administrations';
-import AgentWall from '#components/espace-agent-components/agent-wall';
 import { Section } from '#components/section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import ProtectedBeneficiairesSection from './agent-section';
 import { AskUseCase } from './ask-use-case';
@@ -54,28 +53,33 @@ const BeneficiairesSection: React.FC<{
 }> = ({ uniteLegale, session }) => {
   const [useCase, setUseCase] = useState<UseCase>();
 
-  if (!hasRights(session, EScope.beneficiaires)) {
+  if (!hasRights(session, AppScope.beneficiaires)) {
     return (
-      <AgentWall
-        title="Bénéficiaire(s) effectif(s)"
-        id="beneficiaires"
-        sectionIntro={
-          <>
-            <WarningRBE />
-            <br />
-          </>
-        }
-        sources={[EAdministration.INPI]}
-        conditionExplanation={
-          <>
-            Disponible pour les <strong>administrations légitimes</strong>{' '}
-            (attribution d’
-            <strong>aides publiques</strong>, <strong>marchés publics</strong>{' '}
-            et <strong>lutte contre la fraude</strong>).
-          </>
-        }
-      />
+      <Section title="Bénéficiaire(s) effectif(s)" id="beneficiaires">
+        <WarningRBE />
+      </Section>
     );
+    // return (
+    //   <AgentWall
+    //     title="Bénéficiaire(s) effectif(s)"
+    //     id="beneficiaires"
+    //     sectionIntro={
+    //       <>
+    //         <WarningRBE />
+    //         <br />
+    //       </>
+    //     }
+    //     sources={[EAdministration.INPI]}
+    //     conditionExplanation={
+    //       <>
+    //         Disponible pour les <strong>administrations légitimes</strong>{' '}
+    //         (attribution d’
+    //         <strong>aides publiques</strong>, <strong>marchés publics</strong>{' '}
+    //         et <strong>lutte contre la fraude</strong>).
+    //       </>
+    //     }
+    //   />
+    // );
   }
 
   if ([UseCase.aides, UseCase.marches, UseCase.fraude].includes(useCase!)) {
@@ -115,7 +119,7 @@ const BeneficiairesSection: React.FC<{
       {useCase === UseCase.autre ? (
         <>
           <strong>
-            Les informations des bénénficiaires effectifs ne sont pas
+            Les informations des bénénficiaires effectifs ne vous sont pas
             accessibles.
           </strong>
         </>

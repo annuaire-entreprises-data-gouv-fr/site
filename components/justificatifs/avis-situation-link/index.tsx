@@ -1,4 +1,3 @@
-import React from 'react';
 import routes from '#clients/routes';
 import FAQLink from '#components-ui/faq-link';
 import {
@@ -7,8 +6,9 @@ import {
   nonDiffusibleDataFormatter,
 } from '#models/core/diffusion';
 import { IEtablissement } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import React from 'react';
 
 const AvisSituationLink: React.FC<{
   etablissement: IEtablissement;
@@ -28,7 +28,7 @@ const AvisSituationLink: React.FC<{
   if (estDiffusible(etablissement)) {
     return link;
   } else {
-    if (hasRights(session, EScope.isAgent)) {
+    if (hasRights(session, AppScope.isAgent)) {
       if (estNonDiffusibleProtected(etablissement)) {
         return link;
       } else {

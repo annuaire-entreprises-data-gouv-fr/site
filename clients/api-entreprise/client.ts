@@ -59,5 +59,6 @@ export default async function clientAPIEntreprise<T, U>(
     },
     useCache,
   });
+
   return mapToDomainObject(response);
 }
