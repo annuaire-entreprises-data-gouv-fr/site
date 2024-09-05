@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import AnnoncesBodacc from '#components/annonces-section/annonces/bodacc';
 import AnnoncesJOAFESection from '#components/annonces-section/annonces/joafe';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
@@ -15,7 +16,6 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
