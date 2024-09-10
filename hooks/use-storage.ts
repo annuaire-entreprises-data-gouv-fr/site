@@ -7,8 +7,8 @@ function isStorageAvailable(type: 'session' | 'local') {
     return false;
   }
 
-  const store = getStore(type);
   try {
+    const store = getStore(type);
     store.setItem(test, test);
     store.removeItem(test);
     return true;
