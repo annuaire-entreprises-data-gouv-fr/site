@@ -52,7 +52,7 @@ export const EntrepriseInclusiveSection: React.FC<{
                 department,
               }) => {
                 return [
-                  <a href={`/etablissement/${siret}`}>{formatSiret(siret)}</a>,
+                  <a href={`/etablissements/${siret}`}>{formatSiret(siret)}</a>,
                   category,
                   type,
                   <>

@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { DataSectionClient } from '#components/section/data-section';
@@ -13,6 +12,7 @@ import { ISession } from '#models/user/session';
 import { formatDate, formatSiret } from '#utils/helpers';
 import { extractAssociationEtablissements } from '#utils/helpers/association';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { useMemo, useState } from 'react';
 
 const NoDocument = () => (
   <>Aucun document n’a été retrouvé pour cette association.</>
@@ -105,7 +105,7 @@ export const AgentActesAssociation: React.FC<{
                       etablissement,
                       url,
                     }) => [
-                      <a href={`/etablissement/${etablissement.siret}`}>
+                      <a href={`/etablissements/${etablissement.siret}`}>
                         {formatSiret(etablissement.siret)}
                       </a>,
                       formatDate(date_depot),

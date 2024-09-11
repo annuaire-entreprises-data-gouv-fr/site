@@ -5,6 +5,16 @@
     "permanent": true
   },
   {
+    "source": "/etablissement/qr/:slug",
+    "destination": "/etablissements/:slug",
+    "permanent": true
+  },
+  {
+    "source": "/carte/:slug",
+    "destination": "/etablissements/:slug",
+    "permanent": true
+  },
+  {
     "source": "/faq/tva-intracommunautaire",
     "destination": "/definitions/tva-intracommunautaire",
     "permanent": true

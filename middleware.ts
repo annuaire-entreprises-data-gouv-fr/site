@@ -16,17 +16,18 @@ const shouldRedirect = (path: string, search: string, url: string) => {
     if (path.startsWith('/entreprise/')) {
       const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(path);
       if (isLikelyASiret(sirenOrSiretSlug)) {
-        return new URL(`/etablissement/${sirenOrSiretSlug}`, url);
+        return new URL(`/etablissements/${sirenOrSiretSlug}`, url);
       } else if (!isLikelyASiren(sirenOrSiretSlug)) {
         return new URL(`/404`, url);
       }
     }
 
-    if (path.startsWith('/etablissement/')) {
+    if (path.startsWith('/etablissements/')) {
       const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(path);
-      if (isLikelyASiren(sirenOrSiretSlug)) {
-        return new URL(`/entreprise/${sirenOrSiretSlug}`, url);
-      } else if (!isLikelyASiret(sirenOrSiretSlug)) {
+      if (
+        !isLikelyASiret(sirenOrSiretSlug) &&
+        !isLikelyASiren(sirenOrSiretSlug)
+      ) {
         return new URL(`/404`, url);
       }
     }
@@ -39,7 +40,10 @@ const shouldRedirect = (path: string, search: string, url: string) => {
       const sirenOrSiretParam = extractSirenOrSiretSlugFromUrl(slug);
 
       if (isLikelyASiret(sirenOrSiretParam)) {
-        return new URL(`/etablissement/${sirenOrSiretParam}?redirected=1`, url);
+        return new URL(
+          `/etablissements/${sirenOrSiretParam}?redirected=1`,
+          url
+        );
       } else if (isLikelyASiren(sirenOrSiretParam)) {
         return new URL(`/entreprise/${sirenOrSiretParam}?redirected=1`, url);
       }

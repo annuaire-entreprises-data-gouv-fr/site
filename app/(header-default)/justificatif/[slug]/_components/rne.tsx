@@ -1,4 +1,3 @@
-import React from 'react';
 import routes from '#clients/routes';
 import { OpenClosedTag } from '#components-ui/badge/frequent';
 import ButtonLink from '#components-ui/button';
@@ -19,6 +18,7 @@ import {
 import { IUniteLegale } from '#models/core/types';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { formatDate, formatIntFr } from '#utils/helpers';
+import React from 'react';
 
 type IProps = {
   immatriculation: IImmatriculationRNE | IAPINotRespondingError;
@@ -192,7 +192,7 @@ const ImmatriculationRNETable: React.FC<{
     ],
     [
       'Siège social',
-      <a key="siege" href={`/etablissement/${uniteLegale.siege.siret}`}>
+      <a key="siege" href={`/etablissements/${uniteLegale.siege.siret}`}>
         → voir le détail du siège social
       </a>,
     ],

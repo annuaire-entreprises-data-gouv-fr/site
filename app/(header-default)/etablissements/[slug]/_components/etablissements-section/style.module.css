@@ -1,0 +1,15 @@
+.etablissementListWrapper {
+  display: flex;
+  max-height: 80vh;
+  gap: 10px;
+}
+
+.etablissementListWrapper > div:first-of-type {
+  overflow: scroll;
+  min-width: 50%;
+}
+
+.etablissementListAtom {
+  padding: 10px 0;
+  border-bottom: 2px solid var(--annuaire-colors-pastelBlue);
+}

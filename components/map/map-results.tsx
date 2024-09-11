@@ -69,7 +69,9 @@ export default function MapWithResults({
         const coordsEtab = checkLatLng(match.latitude, match.longitude);
         if (coordsEtab) {
           var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
-            `<div><strong><a href="/etablissement/${match.siret}">${formatSiret(
+            `<div><strong><a href="/etablissements/${
+              match.siret
+            }">${formatSiret(
               match.siret
             )}</a></strong><br/>Etablissement secondaire de <a href="/entreprise/${
               match.siren

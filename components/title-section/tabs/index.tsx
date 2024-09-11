@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { PrintNever } from '#components-ui/print-visibility';
 import {
   checkHasLabelsAndCertificates,
@@ -27,7 +26,7 @@ export enum FICHE {
   ELUS = 'élus',
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
   JUSTIFICATIFS = 'justificatifs',
-  ETABLISSEMENT = 'fiche établissement',
+  ETABLISSEMENTS = 'listes des établissements',
 }
 
 export const Tabs: React.FC<{
@@ -49,6 +48,14 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay: true,
       width: '80px',
+    },
+    {
+      ficheType: FICHE.ETABLISSEMENTS,
+      label: `Liste des établissements`,
+      fullPath: `/etablissements/${uniteLegale.siren}`,
+      noFollow: false,
+      shouldDisplay: true,
+      width: '130px',
     },
     {
       ficheType: FICHE.JUSTIFICATIFS,
@@ -146,19 +153,6 @@ export const Tabs: React.FC<{
               />
             )
           )}
-        {currentFicheType === FICHE.ETABLISSEMENT && (
-          <>
-            <div style={{ flexGrow: 1 }} />
-            <Link
-              className={styles.activeLink + ' no-style-link'}
-              key="etablissement"
-              href=""
-              style={{ width: '120px' }}
-            >
-              <h2>Fiche établissement</h2>
-            </Link>
-          </>
-        )}
       </div>
     </PrintNever>
   );

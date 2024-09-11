@@ -1,6 +1,6 @@
 describe(`FAQ contextual links`, () => {
   it('Adresse link', () => {
-    cy.visit(`/etablissement/88087814500015`);
+    cy.visit(`/etablissements/88087814500015`);
     cy.contains('Adresse').click();
     cy.url().should('include', '/faq/modifier-adresse');
   });
