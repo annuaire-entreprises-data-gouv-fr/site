@@ -42,8 +42,6 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "2609",
-              "1597",
               "2420"
             ],
             "idOrganismeFormation": [],
@@ -95,8 +93,6 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "2609",
-                  "1597",
                   "2420"
                 ],
                 "idOrganismeFormation": [],
@@ -140,8 +136,6 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "2609",
-                  "1597",
                   "2420"
                 ],
                 "idOrganismeFormation": [],
@@ -199,8 +193,6 @@
           "codeColter": null
         },
         "listeIdcc": [
-          "2609",
-          "1597",
           "2420"
         ],
         "matchingEtablissements": [],
@@ -211,16 +203,18 @@
             "sexe": null,
             "nom": "POUYANNE (POUYANNE)",
             "prenom": "David",
+            "prenoms": "David, Jean, Claude",
             "role": null,
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1965-10",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "POUYANNE",
             "prenom": "David",
+            "prenoms": "David, Jean-claude",
             "role": "Gérant",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1965-10",
             "lieuNaissance": ""
           }
         ]

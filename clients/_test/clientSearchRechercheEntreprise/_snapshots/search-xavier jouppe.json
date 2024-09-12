@@ -189,56 +189,63 @@
             "sexe": null,
             "nom": "JOUPPE (BARTHE)",
             "prenom": "Marie-christine",
+            "prenoms": "Marie-christine, Germaine, Odette",
             "role": "Gérant et associé indéfiniment responsable",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1964-03",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Bernard",
+            "prenoms": "Bernard",
             "role": "Gérant et associé indéfiniment responsable",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1961-06",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Guillaume",
+            "prenoms": "Guillaume",
             "role": "Associé indéfiniment responsable",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1988-05",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Jean-brieuc",
+            "prenoms": "Jean-brieuc",
             "role": "Associé indéfiniment responsable",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1996-10",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Mayeul",
+            "prenoms": "Mayeul",
             "role": "Associé indéfiniment responsable",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1992-02",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Sigolene",
+            "prenoms": "Sigolene",
             "role": "Associé indéfiniment responsable",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1995-06",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Xavier",
+            "prenoms": "Xavier",
             "role": "Associé indéfiniment responsable",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1990-02",
             "lieuNaissance": ""
           }
         ]
@@ -423,8 +430,9 @@
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Xavier",
+            "prenoms": "Xavier, Marie, Erwan",
             "role": "Liquidateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1990-02",
             "lieuNaissance": ""
           }
         ]

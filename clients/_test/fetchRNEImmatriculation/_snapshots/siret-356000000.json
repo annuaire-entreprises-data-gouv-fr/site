@@ -12,7 +12,7 @@
       "dateCessationActivite": "",
       "isPersonneMorale": true,
       "dateClotureExercice": "3112",
-      "dureePersonneMorale": "99 ans",
+      "dureePersonneMorale": 99,
       "capital": "5 857 785 892 EUR (fixe)",
       "libelleNatureJuridique": "SA nationale à conseil d'administration",
       "natureEntreprise": "Commerciale"

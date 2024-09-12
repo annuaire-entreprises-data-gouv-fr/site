@@ -189,8 +189,9 @@
             "sexe": null,
             "nom": "DUBIGNY",
             "prenom": "Raphael",
+            "prenoms": "Raphael",
             "role": null,
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": null,
             "lieuNaissance": ""
           }
         ]
