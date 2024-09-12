@@ -1,10 +1,25 @@
 import { agentConnectAuthenticate } from '#clients/authentication/agent-connect/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { Exception } from '#models/exceptions';
-import { getAgent } from '#models/user/agent';
+import { IAgentInfo, getAgent } from '#models/user/agent';
+import { logInGrist } from '#utils/integrations/grist';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
 import withSession from '#utils/session/with-session';
+
+const logConnexion = (agent: IAgentInfo) => {
+  // log connexion in grist - no need to await
+  logInGrist('logs-connexion', [
+    {
+      type: agent.userType,
+      userID: agent.userId,
+      idpID: agent.idpId,
+      siret: agent.siret,
+      domain: agent.domain,
+      date: new Date().toISOString(),
+    },
+  ]);
+};
 
 export default withSession(async function callbackRoute(req, res) {
   try {
@@ -14,6 +29,8 @@ export default withSession(async function callbackRoute(req, res) {
     await setAgentSession(agent, session);
 
     const pathFrom = decodeURIComponent(getPathFrom(session) || '');
+
+    logConnexion(agent);
 
     if (pathFrom) {
       await cleanPathFrom(session);
