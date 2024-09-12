@@ -2,6 +2,7 @@ import { agentConnectAuthenticate } from '#clients/authentication/agent-connect/
 import { HttpForbiddenError } from '#clients/exceptions';
 import { Exception } from '#models/exceptions';
 import { IAgentInfo, getAgent } from '#models/user/agent';
+import { formatDatePartial } from '#utils/helpers';
 import { logInGrist } from '#utils/integrations/grist';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
@@ -9,6 +10,7 @@ import withSession from '#utils/session/with-session';
 
 const logConnexion = (agent: IAgentInfo) => {
   // log connexion in grist - no need to await
+  const date = new Date().toISOString();
   logInGrist('logs-connexion', [
     {
       type: agent.userType,
@@ -16,7 +18,8 @@ const logConnexion = (agent: IAgentInfo) => {
       idpID: agent.idpId,
       siret: agent.siret,
       domain: agent.domain,
-      date: new Date().toISOString(),
+      date,
+      mois: formatDatePartial(date),
     },
   ]);
 };
