@@ -24,12 +24,18 @@ describe(
     });
 
     it('Connexion', () => {
+      cy.clearCookies({
+        domain: 'fca.integ01.dev-agentconnect.fr',
+      });
+      cy.clearCookies({
+        domain: 'app-sandbox.moncomptepro.beta.gouv.fr',
+      });
       cy.clearCookies();
       cy.visit(`/lp/agent-public`);
-      cy.contains('button', 'AgentConnect').click();
+      cy.contains('button', 'ProConnect').click();
       cy.origin('fca.integ01.dev-agentconnect.fr', () => {
         cy.get('input[type="email"]').clear().type('user@yopmail.com');
-        cy.contains('button', 'Se connecter').click();
+        cy.get('button[type="submit"]').click();
       });
 
       cy.origin('app-sandbox.moncomptepro.beta.gouv.fr', () => {

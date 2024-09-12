@@ -10,6 +10,7 @@ export default withSession(async function callbackRoute(req, res) {
   try {
     const userInfo = await agentConnectAuthenticate(req);
     const agent = await getAgent(userInfo);
+
     const session = req.session;
     await setAgentSession(agent, session);
 

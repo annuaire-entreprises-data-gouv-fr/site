@@ -6,7 +6,7 @@ export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
   cookieName: 'annuaire-entreprises-user-session',
   cookieOptions: {
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === 'production' && !process.env.CI,
   },
   ttl: 604800, // a week
 };
@@ -48,6 +48,7 @@ export const getPathFrom = (session: IronSession<ISession>) => session.pathFrom;
 
 export const cleanPathFrom = async (session: IronSession<ISession>) => {
   delete session.pathFrom;
+  await session.save();
 };
 export const setHidePersonalDataRequestFCSession = async (
   firstName: string | undefined,

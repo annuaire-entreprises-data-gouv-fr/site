@@ -16,7 +16,7 @@
     "test:end2end:run:mock": "NEXT_PUBLIC_END2END_MOCKING=enabled run-p dev test:end2end:run",
     "test:end2end:open:mock": "NEXT_PUBLIC_END2END_MOCKING=enabled run-p dev test:end2end:open",
     "test:end2end:run": "cypress run",
-    "test:end2end:open": "cypress open",
+    "test:end2end:open": "cypress open --e2e --browser=electron",
     "test:unit": "jest --runInBand --testPathIgnorePatterns=clients",
     "test:api-clients": "jest clients --silent",
     "test:api-clients:update-snapshots": "jest clients --silent -u",
