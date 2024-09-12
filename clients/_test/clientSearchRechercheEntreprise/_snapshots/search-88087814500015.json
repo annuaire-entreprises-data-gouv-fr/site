@@ -227,8 +227,9 @@
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Xavier",
+            "prenoms": "Xavier, Marie, Erwan",
             "role": "Liquidateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1990-02",
             "lieuNaissance": ""
           }
         ]

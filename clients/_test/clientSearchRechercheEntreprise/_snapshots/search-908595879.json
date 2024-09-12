@@ -197,8 +197,9 @@
             "sexe": null,
             "nom": "ESTOURNET",
             "prenom": "Pierre",
+            "prenoms": "Pierre",
             "role": "Président de SAS",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1985-12",
             "lieuNaissance": ""
           }
         ]

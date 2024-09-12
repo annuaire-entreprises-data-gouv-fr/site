@@ -42,8 +42,8 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "1596",
-              "2609"
+              "2609",
+              "1596"
             ],
             "idOrganismeFormation": [],
             "idRge": [
@@ -102,8 +102,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "1596",
-                  "2609"
+                  "2609",
+                  "1596"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -154,8 +154,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "1596",
-                  "2609"
+                  "2609",
+                  "1596"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -220,8 +220,8 @@
           "codeColter": null
         },
         "listeIdcc": [
-          "1596",
-          "2609"
+          "2609",
+          "1596"
         ],
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
@@ -231,8 +231,9 @@
             "sexe": null,
             "nom": "BERTRAND",
             "prenom": "Lionel",
+            "prenoms": "Lionel, Andre",
             "role": null,
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1981-04",
             "lieuNaissance": ""
           }
         ]
