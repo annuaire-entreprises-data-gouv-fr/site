@@ -5,7 +5,7 @@ import { IAgentScope, getAgentScopes } from './scopes';
 
 const isLikelyPrestataire = (domain: string) => {
   try {
-    if (domain === 'beta.gouv.fr') {
+    if (domain === '@beta.gouv.fr') {
       return true;
     } else {
       if (!!domain.match(/[.@-]*(ext)(ernal|ernes|erne)*[.@-]/g)) {
