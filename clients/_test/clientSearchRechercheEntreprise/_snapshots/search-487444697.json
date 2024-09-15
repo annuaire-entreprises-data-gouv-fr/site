@@ -41,9 +41,7 @@
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
-            "idcc": [
-              "2420"
-            ],
+            "idcc": [],
             "idOrganismeFormation": [],
             "idRge": [
               "43SPVRGE"
@@ -92,9 +90,7 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "2420"
-                ],
+                "idcc": [],
                 "idOrganismeFormation": [],
                 "idRge": [
                   "43SPVRGE"
@@ -135,9 +131,7 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "2420"
-                ],
+                "idcc": [],
                 "idOrganismeFormation": [],
                 "idRge": [
                   "43SPVRGE"
@@ -161,7 +155,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-05-09T05:09:57",
-        "dateMiseAJourInpi": "2024-05-18T17:02:54",
+        "dateMiseAJourInpi": "2024-07-06T02:12:25",
         "dateDebutActivite": "",
         "trancheEffectif": "11",
         "anneeCategorieEntreprise": "2021",
@@ -192,9 +186,7 @@
         "colter": {
           "codeColter": null
         },
-        "listeIdcc": [
-          "2420"
-        ],
+        "listeIdcc": [],
         "matchingEtablissements": [],
         "nombreEtablissements": 42,
         "nombreEtablissementsOuverts": 29,
