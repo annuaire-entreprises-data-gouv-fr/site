@@ -176,7 +176,7 @@
           "estServicePublic": true,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": true,
-          "statutEntrepreneurSpectacle": "invalide",
+          "statutEntrepreneurSpectacle": "valide",
           "estFiness": true,
           "egaproRenseignee": false,
           "estRge": false,
