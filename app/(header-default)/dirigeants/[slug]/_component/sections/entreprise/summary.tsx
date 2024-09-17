@@ -1,18 +1,11 @@
 import { HttpNotFound } from '#clients/exceptions';
 import { Loader } from '#components-ui/loader';
 import { INPI, INSEE, MI } from '#components/administrations';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
+import { isAPINotResponding } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
-import {
-  IDataFetchingState,
-  hasAnyError,
-  isDataLoading,
-} from '#models/data-fetching';
-import { IImmatriculationRNE } from '#models/immatriculation';
+import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { useTimeout } from 'hooks';
+import { IDirigeantsFetching } from '.';
 
 const NoDirigeantAssociation = ({ idAssociation = '' }) => (
   <>
@@ -46,20 +39,17 @@ const NoDirigeantDefault = () => (
 );
 
 type IDirigeantSummaryProps = {
-  immatriculationRNE:
-    | IImmatriculationRNE
-    | IAPINotRespondingError
-    | IDataFetchingState;
+  dirigeants: IDirigeantsFetching;
   uniteLegale: IUniteLegale;
 };
 
 const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   uniteLegale,
-  immatriculationRNE,
+  dirigeants,
 }) => {
   const summaries = [];
   const after100ms = useTimeout(100);
-  if (isDataLoading(immatriculationRNE)) {
+  if (isDataLoading(dirigeants)) {
     if (!after100ms) {
       return null;
     }
@@ -69,8 +59,8 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
       </span>
     );
   } else {
-    if (!hasAnyError(immatriculationRNE)) {
-      const dirigeantsCount = (immatriculationRNE?.dirigeants || []).length;
+    if (!hasAnyError(dirigeants)) {
+      const dirigeantsCount = (dirigeants.data || []).length;
       summaries.push(
         <a href="#rne-dirigeants">
           {dirigeantsCount} dirigeants inscrits au Registre National des
@@ -93,8 +83,8 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
         />
       );
     } else if (
-      isAPINotResponding(immatriculationRNE) &&
-      !(immatriculationRNE instanceof HttpNotFound)
+      isAPINotResponding(dirigeants) &&
+      !(dirigeants instanceof HttpNotFound)
     ) {
       return null;
     }

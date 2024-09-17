@@ -1,0 +1,63 @@
+{
+  "args": [
+    "487444697"
+  ],
+  "result": {
+    "observations": [
+      {
+        "numObservation": "F24/001909",
+        "dateAjout": "16/04/2024",
+        "description": "Jugement du Tribunal de Commerce de Périgueux en date du 09/04/2024 prononçant la liquidation judiciaire immédiate. Liquidateur judiciaire : Maître LEURET Nicolas 78 rue Victor Hugo 24000 Périgueux. Date de cessation des paiements : 29/03/2024"
+      },
+      {
+        "numObservation": "F24/020887",
+        "dateAjout": "15/04/2024",
+        "description": "Jugement du Tribunal de Commerce de Périgueux en date du 09/04/2024 prononçant la liquidation judiciaire. Liquidateur judiciaire : SCP LGA prise en la personne de Me Nicolas LEURET le mercurial 78 rue Victor Hugo 24000 Périgueux. Date de cessation des paiements : 29/03/2024"
+      },
+      {
+        "numObservation": "3001",
+        "dateAjout": "12/04/2024",
+        "description": "(Ouverture d'une procédure de) Liquidation judiciaire En date du 09/04/2024, le Tribunal de Commerce de Périgueux a ouvert une procédure de liquidation judiciaire , et a nommé en qualité de Liquidateur : Maître Nicolas LEURET - SELARL LGA - 78, rue Victor Hugo - 24000 PérigueuxLa date de cessation des paiements a été fixée au 29/03/2024 Les déclarations de créances (sommes réclamées + pièces justificatives) sont à déposer auprès du mandataire judiciaire dans les deux mois à compter de la publication du jugement d'ouverture au b.o.d.a.c.c (bulletin officiel des annonces civile et commercial)Date d'effet : 09/04/2024"
+      },
+      {
+        "numObservation": "8588",
+        "dateAjout": "06/12/2023",
+        "description": "Continuation de la société malgré un actif net devenu inférieur à la moitié du capital social. Décision du 01/12/2023"
+      },
+      {
+        "numObservation": "12767",
+        "dateAjout": "08/03/2023",
+        "description": "Radiation du RCS de Bordeaux le 07/03/2023"
+      }
+    ],
+    "immatriculation": {
+      "natureEntreprise": [
+        "Commerciale",
+        "Artisanale",
+        "Gestion de biens"
+      ],
+      "dateImmatriculation": null,
+      "dateDebutActivite": "2005-12-06",
+      "dateRadiation": null,
+      "dateFin": "",
+      "isPersonneMorale": true,
+      "dateCloture": "3112",
+      "duree": null,
+      "capital": "2099975 EUR"
+    },
+    "dirigeants": [
+      {
+        "nom": "POUYANNE",
+        "prenom": "DAVID, JEAN-CLAUDE",
+        "role": "Gérant",
+        "dateNaissancePartial": "1965-10"
+      },
+      {
+        "nom": "POUYANNE (POUYANNE)",
+        "prenom": "DAVID, JEAN, CLAUDE",
+        "role": "Gérant",
+        "dateNaissancePartial": "1965-10"
+      }
+    ]
+  }
+}

@@ -11,8 +11,9 @@ export const clientUniteLegaleRechercheEntreprise = async (
 ): Promise<IUniteLegale> => {
   const { results } = await clientSearchRechercheEntreprise({
     searchTerms: siren,
-    page: 1,
+    pageResultatsRecherche: 1,
     inclureEtablissements: true,
+    inclureImmatriculation: true,
     pageEtablissements,
     useCache,
     fallbackOnStaging,

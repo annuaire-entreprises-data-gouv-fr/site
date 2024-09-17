@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "xavier jouppe",
     "searchFilterParams": ""
   },
@@ -181,6 +181,19 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": {
+          "dateDebutActivite": "2010-07-02",
+          "dateRadiation": "",
+          "dateImmatriculation": "2010-07-05",
+          "duree": 99,
+          "dateFin": "05/07/2109",
+          "natureEntreprise": [
+            "Commerciale"
+          ],
+          "dateCloture": "",
+          "isPersonneMorale": true,
+          "capital": "250 000,00 € (fixe)"
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
@@ -191,6 +204,7 @@
             "prenom": "Marie-christine",
             "prenoms": "Marie-christine, Germaine, Odette",
             "role": "Gérant et associé indéfiniment responsable",
+            "nationalite": "Française",
             "dateNaissancePartial": "1964-03",
             "lieuNaissance": ""
           },
@@ -200,6 +214,7 @@
             "prenom": "Bernard",
             "prenoms": "Bernard",
             "role": "Gérant et associé indéfiniment responsable",
+            "nationalite": "Française",
             "dateNaissancePartial": "1961-06",
             "lieuNaissance": ""
           },
@@ -209,6 +224,7 @@
             "prenom": "Guillaume",
             "prenoms": "Guillaume",
             "role": "Associé indéfiniment responsable",
+            "nationalite": "Française",
             "dateNaissancePartial": "1988-05",
             "lieuNaissance": ""
           },
@@ -218,6 +234,7 @@
             "prenom": "Jean-brieuc",
             "prenoms": "Jean-brieuc",
             "role": "Associé indéfiniment responsable",
+            "nationalite": "Française",
             "dateNaissancePartial": "1996-10",
             "lieuNaissance": ""
           },
@@ -227,6 +244,7 @@
             "prenom": "Mayeul",
             "prenoms": "Mayeul",
             "role": "Associé indéfiniment responsable",
+            "nationalite": "Française",
             "dateNaissancePartial": "1992-02",
             "lieuNaissance": ""
           },
@@ -236,6 +254,7 @@
             "prenom": "Sigolene",
             "prenoms": "Sigolene",
             "role": "Associé indéfiniment responsable",
+            "nationalite": "Française",
             "dateNaissancePartial": "1995-06",
             "lieuNaissance": ""
           },
@@ -245,6 +264,7 @@
             "prenom": "Xavier",
             "prenoms": "Xavier",
             "role": "Associé indéfiniment responsable",
+            "nationalite": "Française",
             "dateNaissancePartial": "1990-02",
             "lieuNaissance": ""
           }
@@ -422,6 +442,19 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": {
+          "dateDebutActivite": "2020-01-13",
+          "dateRadiation": "2022-11-14",
+          "dateImmatriculation": "2020-01-23",
+          "duree": 99,
+          "dateFin": "23/01/2119",
+          "natureEntreprise": [
+            "Commerciale"
+          ],
+          "dateCloture": "3112",
+          "isPersonneMorale": true,
+          "capital": "1 000,00 € (fixe)"
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 0,
@@ -432,6 +465,7 @@
             "prenom": "Xavier",
             "prenoms": "Xavier, Marie, Erwan",
             "role": "Liquidateur",
+            "nationalite": "Française",
             "dateNaissancePartial": "1990-02",
             "lieuNaissance": ""
           }

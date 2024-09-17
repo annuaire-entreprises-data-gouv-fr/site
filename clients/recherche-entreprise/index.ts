@@ -5,23 +5,12 @@ import constants from '#models/constants';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import {
-  IEtablissement,
   NotEnoughParamsException,
-  createDefaultEtablissement,
   createDefaultUniteLegale,
 } from '#models/core/types';
-import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import { ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search/search-filter-params';
-import {
-  Siret,
-  extractNicFromSiret,
-  extractSirenFromSiret,
-  formatFirstNames,
-  parseIntWithDefaultValue,
-  verifySiren,
-  verifySiret,
-} from '#utils/helpers';
+import { parseIntWithDefaultValue, verifySiren } from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAFWithoutNomenclature,
@@ -32,21 +21,23 @@ import {
   statuDiffusionFromStatutDiffusionInsee,
 } from '#utils/helpers/insee-variables';
 import { httpGet } from '#utils/network';
+import { IResult, ISearchResponse } from './interface';
 import {
-  IDirigeant,
-  IMatchingEtablissement,
-  IResult,
-  ISearchResponse,
-  ISiege,
-} from './interface';
+  mapToDirigeantModel,
+  mapToElusModel,
+  mapToEtablissement,
+  mapToImmatriculation,
+  mapToSiege,
+} from './mapToDomain';
 
 type ClientSearchRechercheEntreprise = {
   searchTerms: string;
-  page: number;
+  pageResultatsRecherche: number;
   searchFilterParams?: SearchFilterParams;
   fallbackOnStaging?: boolean;
   useCache?: boolean;
   inclureEtablissements?: boolean;
+  inclureImmatriculation?: boolean;
   pageEtablissements?: number;
 };
 
@@ -59,7 +50,8 @@ const clientSearchRechercheEntreprise = async ({
   fallbackOnStaging = false,
   useCache = false,
   inclureEtablissements = false,
-  page = 1,
+  inclureImmatriculation = false,
+  pageResultatsRecherche = 1,
   pageEtablissements = 1,
 }: ClientSearchRechercheEntreprise): Promise<ISearchResults> => {
   const encodedTerms = encodeURIComponent(searchTerms);
@@ -77,14 +69,20 @@ const clientSearchRechercheEntreprise = async ({
   }
 
   let url = route;
-  url += `?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${
+  url += `?per_page=10&page=${pageResultatsRecherche}&q=${encodedTerms}&limite_matching_etablissements=3${
     searchFilterParams?.toApiURI() || ''
   }`;
+
   url += `&include_admin=slug`;
 
   if (inclureEtablissements) {
     url += `,etablissements`;
   }
+
+  if (inclureImmatriculation) {
+    url += `,immatriculation`;
+  }
+
   if (inclureEtablissements && pageEtablissements) {
     url += `&page_etablissements=${pageEtablissements}`;
   }
@@ -126,27 +124,8 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     nature_juridique,
     siege,
     dirigeants,
-    complements: {
-      collectivite_territoriale = null,
-      est_bio = false,
-      egapro_renseignee = false,
-      est_entrepreneur_individuel = false,
-      est_organisme_formation = false,
-      est_qualiopi = false,
-      est_entrepreneur_spectacle = false,
-      est_ess = false,
-      est_finess = false,
-      est_rge = false,
-      est_service_public = false,
-      est_uai = false,
-      est_societe_mission = false,
-      identifiant_association = null,
-      statut_entrepreneur_spectacle = '',
-      est_association = false,
-      liste_idcc = [],
-      est_siae = false,
-      type_siae = '',
-    },
+    complements,
+    immatriculation,
     matching_etablissements,
     categorie_entreprise,
     annee_categorie_entreprise = null,
@@ -163,6 +142,28 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     etat_administratif,
     nombre_etablissements_ouverts,
   } = result;
+
+  const {
+    collectivite_territoriale = null,
+    est_bio = false,
+    egapro_renseignee = false,
+    est_entrepreneur_individuel = false,
+    est_organisme_formation = false,
+    est_qualiopi = false,
+    est_entrepreneur_spectacle = false,
+    est_ess = false,
+    est_finess = false,
+    est_rge = false,
+    est_service_public = false,
+    est_uai = false,
+    est_societe_mission = false,
+    identifiant_association = null,
+    statut_entrepreneur_spectacle = '',
+    est_association = false,
+    liste_idcc = [],
+    est_siae = false,
+    type_siae = '',
+  } = complements || {};
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
 
@@ -250,6 +251,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       estEntrepriseInclusive: est_siae,
       typeEntrepriseInclusive: type_siae,
     },
+    immatriculation: mapToImmatriculation(immatriculation),
     association: {
       idAssociation: identifiant_association,
       data: null,
@@ -261,151 +263,6 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     dateMiseAJourInpi: date_mise_a_jour_rne || '',
     dateFermeture: date_fermeture ?? '',
     listeIdcc: liste_idcc || [],
-  };
-};
-
-const mapToSiege = (
-  siege: IResult['siege'],
-  est_entrepreneur_individuel: boolean
-) => {
-  if (!siege || Object.keys(siege).length === 0 || !siege.siret) {
-    return {
-      ...createDefaultEtablissement(),
-      siret: '' as Siret,
-    };
-  }
-  return mapToEtablissement(siege, est_entrepreneur_individuel);
-};
-
-const mapToDirigeantModel = (
-  dirigeant: IDirigeant
-): IEtatCivil | IPersonneMorale => {
-  const {
-    siren = '',
-    sigle = '',
-    denomination = '',
-    prenoms = '',
-    nom = '',
-    qualite = '',
-    date_de_naissance = '',
-  } = dirigeant;
-
-  if (!!siren) {
-    return {
-      siren,
-      denomination: `${denomination}${sigle ? ` (${sigle})` : ''}`,
-      role: qualite,
-    } as IPersonneMorale;
-  }
-
-  return {
-    sexe: null,
-    nom: (nom || '').toUpperCase(),
-    ...formatFirstNames(prenoms || '', ' '),
-    role: qualite,
-    dateNaissancePartial: date_de_naissance,
-    lieuNaissance: '',
-  };
-};
-
-const mapToElusModel = (eluRaw: any): IEtatCivil => {
-  const { nom, prenoms, annee_de_naissance, fonction, sexe } = eluRaw;
-
-  return {
-    sexe,
-    nom: (nom || '').toUpperCase(),
-    ...formatFirstNames(prenoms || '', ' '),
-    role: fonction,
-    dateNaissancePartial: annee_de_naissance,
-    lieuNaissance: '',
-  };
-};
-
-const mapToEtablissement = (
-  etablissement: ISiege | IMatchingEtablissement,
-  estEntrepreneurIndividuel: boolean
-): IEtablissement => {
-  const {
-    siret,
-    latitude = '0',
-    longitude = '0',
-    code_postal = '',
-    libelle_commune = '',
-    adresse,
-    liste_enseignes,
-    etat_administratif,
-    est_siege = false,
-    ancien_siege = false,
-    nom_commercial = '',
-    activite_principale = '',
-    date_creation = '',
-    date_debut_activite = '',
-    date_fermeture = '',
-    tranche_effectif_salarie = '',
-    caractere_employeur = '',
-    annee_tranche_effectif_salarie = '',
-    liste_finess = [],
-    liste_id_bio = [],
-    liste_idcc = [],
-    liste_id_organisme_formation = [],
-    liste_rge = [],
-    liste_uai = [],
-    statut_diffusion_etablissement,
-  } = etablissement;
-
-  const enseigne = (liste_enseignes || []).join(' ');
-
-  const adressePostale = adresse
-    ? `${
-        enseigne ? `${enseigne}, ` : nom_commercial ? `${nom_commercial}, ` : ''
-      }${adresse}`
-    : '';
-
-  const etatAdministratif = etatFromEtatAdministratifInsee(
-    etat_administratif,
-    siret
-  );
-
-  return {
-    ...createDefaultEtablissement(),
-    siren: extractSirenFromSiret(siret),
-    enseigne,
-    nic: extractNicFromSiret(siret),
-    siret: verifySiret(siret),
-    adresse,
-    codePostal: code_postal,
-    commune: libelle_commune,
-    adressePostale,
-    trancheEffectif:
-      caractere_employeur === 'N'
-        ? caractere_employeur
-        : tranche_effectif_salarie,
-    anneeTrancheEffectif: annee_tranche_effectif_salarie,
-    latitude,
-    longitude,
-    estSiege: est_siege,
-    ancienSiege: ancien_siege,
-    etatAdministratif,
-    statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
-      statut_diffusion_etablissement || 'O',
-      siret
-    ),
-    denomination: nom_commercial,
-    libelleActivitePrincipale:
-      libelleFromCodeNAFWithoutNomenclature(activite_principale),
-    activitePrincipale: activite_principale,
-    dateCreation: parseDateCreationInsee(date_creation),
-    dateDebutActivite: date_debut_activite ?? '',
-    dateFermeture: date_fermeture ?? '',
-    complements: {
-      estEntrepreneurIndividuel,
-      idFiness: liste_finess || [],
-      idBio: liste_id_bio || [],
-      idcc: liste_idcc || [],
-      idOrganismeFormation: liste_id_organisme_formation || [],
-      idRge: liste_rge || [],
-      idUai: liste_uai || [],
-    },
   };
 };
 

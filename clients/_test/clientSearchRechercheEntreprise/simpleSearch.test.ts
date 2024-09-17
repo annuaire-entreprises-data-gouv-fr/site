@@ -40,7 +40,8 @@ function itShouldMatchSnapshotForSearch(
       __dirname,
       args: [
         {
-          page: 1,
+          pageResultatsRecherche: 1,
+          inclureImmatriculation: true,
           searchFilterParams: new SearchFilterParams({}),
           searchTerms,
         },

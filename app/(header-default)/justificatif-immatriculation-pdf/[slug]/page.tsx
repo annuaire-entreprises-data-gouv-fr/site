@@ -30,9 +30,7 @@ const InpiPDF = (props: AppRouterProps) => {
   return (
     <>
       <br />
-      <a href={`/justificatif/${slug}`}>
-        ← Retour à la page justificatif d’immatriculation
-      </a>
+      <a href={`/entreprise/${slug}`}>← Retour à la fiche resumée</a>
       <div className="content-container">
         <h1>Téléchargement du justificatif d’immatriculation</h1>
 

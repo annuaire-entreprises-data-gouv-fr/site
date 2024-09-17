@@ -1,4 +1,3 @@
-import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
@@ -23,40 +22,6 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
       <Section title="Résumé pour les agents publics" isProtected>
         <TwoColumnTable
           body={[
-            [
-              <FAQLink
-                tooltipLabel="Immatriculation au RNE"
-                to="https://www.inpi.fr/le-registre-national-des-entreprises"
-              >
-                Depuis le 1er Janvier 2023, toute entreprise exerçant sur le
-                territoire français (sauf Polynésie française,
-                Nouvelle-Calédonie et Wallis et Futuna) une activité de nature
-                commerciale, artisanale, agricole ou indépendante est
-                enregistrée au RNE.
-              </FAQLink>,
-              <a href={`/justificatif/${uniteLegale.siren}`}>
-                → Consulter la page justificatif d’immatriculation
-              </a>,
-            ],
-            [
-              '',
-
-              <a href={`/dirigeants/${uniteLegale.siren}`}>
-                → Consulter la page dirigeants & le registre des bénéficiaires
-                effectifs
-              </a>,
-            ],
-            [
-              '',
-              <a
-                href={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
-              >
-                <Icon slug="download">
-                  Télécharger l’extrait d’immatriculation au RNE
-                </Icon>
-              </a>,
-            ],
-            ['', <br />],
             [
               'Documents juridiques',
               <a href={`/documents/${uniteLegale.siren}#actes`}>

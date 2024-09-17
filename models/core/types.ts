@@ -1,10 +1,10 @@
 /** COMMON TYPES */
 import {
-  createEtablissementsList,
   IEtablissementsList,
+  createEtablissementsList,
 } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
-import { IEtatCivil } from '#models/immatriculation';
+import { IEtatCivil } from '#models/rne/types';
 import { IdRna, Siren, Siret } from '#utils/helpers';
 import { EAdministration } from '../administrations/EAdministration';
 import {
@@ -109,6 +109,7 @@ export interface IUniteLegale extends IEtablissementsList {
   categorieEntreprise: string | null;
   anneeCategorieEntreprise: string | null;
   complements: IUniteLegaleComplements;
+  immatriculation: IUniteLegaleImmatriculation | null;
   association: {
     idAssociation: IdRna | string | null;
   };
@@ -154,8 +155,21 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
       codeColter: null,
     },
     listeIdcc: [],
+    immatriculation: null,
   };
 };
+
+export interface IUniteLegaleImmatriculation {
+  dateDebutActivite: string;
+  dateImmatriculation: string;
+  dateRadiation: string;
+  dateFin: string;
+  duree: number | string;
+  natureEntreprise: string[];
+  dateCloture: string;
+  isPersonneMorale: boolean;
+  capital: string;
+}
 
 export interface IUniteLegaleComplements {
   estBio: boolean;

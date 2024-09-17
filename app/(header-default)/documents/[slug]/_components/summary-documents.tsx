@@ -7,6 +7,9 @@ export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
       Documents disponibles pour cette structure :
     </strong>
     <ul>
+      <li>
+        <a href="#justificatifs">Justificatifs d’immatriculation</a>
+      </li>
       {hasRights(session, AppScope.conformite) && (
         <li>
           <a href="#conformite">Attestations de conformite</a>

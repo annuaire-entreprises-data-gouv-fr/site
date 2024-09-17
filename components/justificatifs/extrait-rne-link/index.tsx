@@ -1,3 +1,6 @@
+import React from 'react';
+import ButtonLink from '#components-ui/button';
+import { Icon } from '#components-ui/icon/wrapper';
 import {
   estDiffusible,
   nonDiffusibleDataFormatter,
@@ -5,21 +8,21 @@ import {
 import { IUniteLegale } from '#models/core/types';
 import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import React from 'react';
 
 const ExtraitRNELink: React.FC<{
   uniteLegale: IUniteLegale;
+  label?: string;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}> = ({ uniteLegale, label, session }) => {
   return estDiffusible(uniteLegale) ||
     hasRights(session, AppScope.nonDiffusible) ? (
-    <a
-      target="_blank"
-      rel="noopener"
-      href={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
+    <ButtonLink
+      small
+      alt
+      to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
     >
-      télécharger
-    </a>
+      <Icon slug="download">{label || 'télécharger'}</Icon>
+    </ButtonLink>
   ) : (
     <a href="/faq/justificatif-immatriculation-non-diffusible">
       {nonDiffusibleDataFormatter('document non-diffusible')}

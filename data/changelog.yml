@@ -11,6 +11,15 @@
 #   site: true
 
 ---
+- date: 29/08/2024
+  target:
+    site: true
+  body: |
+    L’onglet **justificatif** disparait ! Les informations qu’il contenait ont été réparties dans les autres onglets. L’objectif est d'afficher dès la première page certaines informations essentielles (capital social, nature d’entreprise) et d'alléger l’interface :
+
+    - les information d’immatriculation au RNE (date d’immatriculation, capital social, nature d'entreprise) sont déplacées dans l’onglet **Fiche résumé**
+    - les justificatifs d’existence (annonce JOAFE,  avis Sirene ou extrait RNE) sont déplacés dans l’onglet **Documents**
+    - les observations au RNE (uniquement pour les entreprises) sont déplacées dans l’onglet **Annonces**, renommé **Annonces & observations**
 - date: 31/07/2024
   target:
     agent: true

@@ -1,4 +1,4 @@
-import { IEtatCivil } from '#models/immatriculation';
+import { IEtatCivil } from '#models/rne/types';
 import { Siren } from '#utils/helpers';
 
 export const SeePersonPageLink = ({

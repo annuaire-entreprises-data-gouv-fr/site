@@ -1,5 +1,10 @@
 [
   {
+    "source": "/justificatif/:slug",
+    "destination": "/documents/:slug",
+    "permanent": true
+  },
+  {
     "source": "/api/qr/:slug",
     "destination": "/api/share/qr/:slug",
     "permanent": true

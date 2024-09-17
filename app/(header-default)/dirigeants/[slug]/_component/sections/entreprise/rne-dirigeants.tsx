@@ -1,33 +1,43 @@
 import routes from '#clients/routes';
+import { Info } from '#components-ui/alerts';
 import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { INPI } from '#components/administrations';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
-import { IDataFetchingState } from '#models/data-fetching';
-import { IImmatriculationRNE } from '#models/immatriculation';
+import { IDirigeantsFetching } from '.';
 import { DirigeantContent } from './dirigeant-content';
 
 type IProps = {
-  immatriculationRNE:
-    | IImmatriculationRNE
-    | IAPINotRespondingError
-    | IDataFetchingState;
+  dirigeants: IDirigeantsFetching;
   uniteLegale: IUniteLegale;
+  isProtected: boolean;
+  warning: JSX.Element;
 };
 
 /**
  * Dirigeants section
  */
-function DirigeantsSection({ uniteLegale, immatriculationRNE }: IProps) {
+function DirigeantsSection({
+  uniteLegale,
+  dirigeants,
+  isProtected,
+  warning,
+}: IProps) {
+  const sources = [EAdministration.INPI];
+
+  if (isProtected) {
+    sources.push(EAdministration.INFOGREFFE);
+  }
+
   return (
     <AsyncDataSectionClient
       id="rne-dirigeants"
       title="Dirigeant(s)"
-      sources={[EAdministration.INPI]}
-      data={immatriculationRNE}
+      sources={sources}
+      data={dirigeants}
+      isProtected={isProtected}
       notFoundInfo={
         <>
           Cette structure n’est pas enregistrée au{' '}
@@ -35,15 +45,27 @@ function DirigeantsSection({ uniteLegale, immatriculationRNE }: IProps) {
         </>
       }
     >
-      {(immatriculationRNE) => {
-        const plural = immatriculationRNE.dirigeants.length > 1 ? 's' : '';
+      {(dirigeants) => {
+        const plural = dirigeants.data.length > 1 ? 's' : '';
         return (
           <>
-            {immatriculationRNE.metadata.isFallback &&
-              immatriculationRNE.dirigeants.length > 0 && (
-                <InpiPartiallyDownWarning />
-              )}
-            {immatriculationRNE.dirigeants.length === 0 ? (
+            {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}
+            {warning ? warning : null}
+            {isProtected ? (
+              <Info>
+                Ces informations proviennent d’
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href={`${routes.infogreffe.portail.home}`}
+                  aria-label="Visiter le site d’Infogreffe, nouvelle fenêtre"
+                >
+                  Infogreffe
+                </a>{' '}
+                et incluent la date de naissance des dirigeant(e)s.
+              </Info>
+            ) : null}
+            {dirigeants.data.length === 0 ? (
               <p>
                 Cette entreprise est enregistrée au{' '}
                 <strong>Registre National des Entreprises (RNE)</strong>, mais
@@ -52,9 +74,8 @@ function DirigeantsSection({ uniteLegale, immatriculationRNE }: IProps) {
             ) : (
               <>
                 <p>
-                  Cette entreprise possède{' '}
-                  {immatriculationRNE.dirigeants.length} dirigeant{plural}{' '}
-                  enregistré{plural} au{' '}
+                  Cette entreprise possède {dirigeants.data.length} dirigeant
+                  {plural} enregistré{plural} au{' '}
                   <strong>Registre National des Entreprises (RNE)</strong> tenu
                   par l’
                   <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
@@ -67,7 +88,7 @@ function DirigeantsSection({ uniteLegale, immatriculationRNE }: IProps) {
                 </p>
 
                 <DirigeantContent
-                  dirigeants={immatriculationRNE.dirigeants}
+                  dirigeants={dirigeants}
                   uniteLegale={uniteLegale}
                 />
               </>

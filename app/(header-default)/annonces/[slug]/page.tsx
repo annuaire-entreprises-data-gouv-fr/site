@@ -1,6 +1,4 @@
 import { Metadata } from 'next';
-import AnnoncesBodacc from '#components/annonces-section/annonces/bodacc';
-import AnnoncesJOAFESection from '#components/annonces-section/annonces/joafe';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -16,6 +14,9 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import AnnoncesBodacc from 'app/(header-default)/annonces/[slug]/_components/bodacc';
+import AnnoncesJOAFESection from 'app/(header-default)/annonces/[slug]/_components/joafe';
+import { ObservationsRNE } from './_components/observations-rne';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -50,12 +51,32 @@ const AnnoncesPage = async (props: AppRouterProps) => {
         />
         {estDiffusible(uniteLegale) ||
         hasRights(session, AppScope.nonDiffusible) ? (
-          <AnnoncesBodacc uniteLegale={uniteLegale} />
+          <>
+            <ul>
+              <li>
+                <a href="#annonces-bodacc">Annonces au BODACC</a>
+              </li>
+              {uniteLegale.dateMiseAJourInpi && (
+                <li>
+                  <a href="#observations-rne">Observations au RNE</a>
+                </li>
+              )}
+              {isAssociation(uniteLegale) && (
+                <li>
+                  <a href="#annonces-joafe">Annonces au JOAFE</a>
+                </li>
+              )}
+            </ul>
+            <AnnoncesBodacc uniteLegale={uniteLegale} />
+            {uniteLegale.dateMiseAJourInpi && (
+              <ObservationsRNE uniteLegale={uniteLegale} session={session} />
+            )}
+            {isAssociation(uniteLegale) && (
+              <AnnoncesJOAFESection uniteLegale={uniteLegale} />
+            )}
+          </>
         ) : (
           <DonneesPriveesSection />
-        )}
-        {isAssociation(uniteLegale) && (
-          <AnnoncesJOAFESection uniteLegale={uniteLegale} />
         )}
       </div>
     </>

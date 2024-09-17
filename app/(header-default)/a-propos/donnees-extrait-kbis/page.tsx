@@ -52,8 +52,7 @@ export default function ExtraitKbis() {
             de l’entreprise concernée.
           </p>
           <p>
-            Une fois sur la page de l’entreprise, consultez l’onglet{' '}
-            <strong>justificatifs</strong> et retrouvez-y les données
+            Une fois sur la page de l’entreprise, retrouvez les données
             d’immatriculations issues du Registre National des Entreprises (RNE)
             tenu par l’
             <INPI />.
@@ -81,7 +80,7 @@ export default function ExtraitKbis() {
             <strong>NB :</strong> le lien se construit ainsi :
           </p>
           <code>
-            https://annuaire-entreprises.data.gouv.fr/justificatif/
+            https://annuaire-entreprises.data.gouv.fr/entreprise/
             <i>{'{insérer_le_numéro_siren}'}</i>
           </code>
           <h2>

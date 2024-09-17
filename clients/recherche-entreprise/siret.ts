@@ -9,8 +9,10 @@ export const clientEtablissementRechercheEntreprise = async (
 ): Promise<IEtablissement> => {
   const { results } = await clientSearchRechercheEntreprise({
     searchTerms: siret,
-    page: 1,
+    pageResultatsRecherche: 1,
     fallbackOnStaging: useFallback,
+    inclureEtablissements: false,
+    inclureImmatriculation: false,
     useCache,
   });
 

@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "130025265",
     "searchFilterParams": ""
   },
@@ -181,6 +181,7 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,

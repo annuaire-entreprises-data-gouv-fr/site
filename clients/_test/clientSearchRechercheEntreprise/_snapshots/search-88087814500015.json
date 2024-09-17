@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "88087814500015",
     "searchFilterParams": ""
   },
@@ -181,6 +181,19 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": {
+          "dateDebutActivite": "2020-01-13",
+          "dateRadiation": "2022-11-14",
+          "dateImmatriculation": "2020-01-23",
+          "duree": 99,
+          "dateFin": "23/01/2119",
+          "natureEntreprise": [
+            "Commerciale"
+          ],
+          "dateCloture": "3112",
+          "isPersonneMorale": true,
+          "capital": "1 000,00 € (fixe)"
+        },
         "matchingEtablissements": [
           {
             "siren": "880878145",
@@ -229,6 +242,7 @@
             "prenom": "Xavier",
             "prenoms": "Xavier, Marie, Erwan",
             "role": "Liquidateur",
+            "nationalite": "Française",
             "dateNaissancePartial": "1990-02",
             "lieuNaissance": ""
           }

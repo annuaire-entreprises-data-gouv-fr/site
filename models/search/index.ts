@@ -1,7 +1,14 @@
 import { HttpBadRequestError, HttpNotFound } from '#clients/exceptions';
 import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
+import {
+  FetchRechercheEntrepriseException,
+  IEtablissement,
+  IUniteLegale,
+  IsLikelyASirenOrSiretException,
+  NotEnoughParamsException,
+} from '#models/core/types';
 import { Exception } from '#models/exceptions';
-import { IDirigeant } from '#models/immatriculation';
+import { IDirigeants } from '#models/rne/types';
 import SearchFilterParams from '#models/search/search-filter-params';
 import {
   formatMonthIntervalFromPartialDate,
@@ -10,20 +17,13 @@ import {
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
 import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
-import {
-  FetchRechercheEntrepriseException,
-  IEtablissement,
-  IUniteLegale,
-  IsLikelyASirenOrSiretException,
-  NotEnoughParamsException,
-} from '../core/types';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
   nombreEtablissementsOuverts: number;
   chemin: string;
   matchingEtablissements: IEtablissement[];
-  dirigeants: IDirigeant[];
+  dirigeants: IDirigeants['data'];
 }
 
 export interface ISearchResults {
@@ -51,7 +51,7 @@ const search = async (
     const escapedSearchTerm = removeSpecialChars(searchTerm);
     return await clientSearchRechercheEntreprise({
       searchTerms: escapedSearchTerm,
-      page,
+      pageResultatsRecherche: page,
       searchFilterParams,
     });
   } catch (e: any) {
@@ -83,7 +83,7 @@ const search = async (
       const escapedSearchTerm = removeSpecialChars(searchTerm);
       return await clientSearchRechercheEntreprise({
         searchTerms: escapedSearchTerm,
-        page,
+        pageResultatsRecherche: page,
         searchFilterParams,
         fallbackOnStaging: true,
       });

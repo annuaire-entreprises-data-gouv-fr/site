@@ -8,7 +8,7 @@ import {
 } from '#utils/helpers';
 import { clientMarcheInclusion } from './api-inclusion';
 import { clientEORI } from './api-proxy/eori';
-import { fetchRNEImmatriculation } from './api-proxy/rne';
+import { clientRNEImmatriculation } from './api-proxy/rne';
 import { clientTVA } from './api-proxy/tva';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
 import { clientUniteLegaleRechercheEntreprise } from './recherche-entreprise/siren';
@@ -31,7 +31,7 @@ const ping = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-proxy-rne':
       // fetch IRM and disable cache
-      return await fetchRNEImmatriculation(sirenDanone, useCache);
+      return await clientRNEImmatriculation(sirenDanone, useCache);
     case 'api-sirene-insee':
       return await clientUniteLegaleInsee(sirenGanymede, 1, {
         useCache,
@@ -51,7 +51,7 @@ const ping = async (slug: string | string[]) => {
     case 'api-recherche':
       return await clientSearchRechercheEntreprise({
         searchTerms: 'test',
-        page: 1,
+        pageResultatsRecherche: 1,
         searchFilterParams: undefined,
         fallbackOnStaging: false,
         useCache,

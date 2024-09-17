@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "48744469700428",
     "searchFilterParams": ""
   },
@@ -187,6 +187,21 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": {
+          "dateDebutActivite": "2005-12-06",
+          "dateRadiation": "",
+          "dateImmatriculation": "2005-12-12",
+          "duree": 99,
+          "dateFin": "12/12/2104",
+          "natureEntreprise": [
+            "Gestion de biens",
+            "Artisanale non réglementée",
+            "Commerciale"
+          ],
+          "dateCloture": "3112",
+          "isPersonneMorale": true,
+          "capital": "2 099 975,00 € (fixe)"
+        },
         "matchingEtablissements": [
           {
             "siren": "487444697",
@@ -237,6 +252,7 @@
             "prenom": "David",
             "prenoms": "David, Jean, Claude",
             "role": null,
+            "nationalite": null,
             "dateNaissancePartial": "1965-10",
             "lieuNaissance": ""
           },
@@ -246,6 +262,7 @@
             "prenom": "David",
             "prenoms": "David, Jean-claude",
             "role": "Gérant",
+            "nationalite": "Française",
             "dateNaissancePartial": "1965-10",
             "lieuNaissance": ""
           }

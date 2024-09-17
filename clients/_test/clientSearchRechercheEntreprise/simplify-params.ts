@@ -1,5 +1,5 @@
 type IParams = {
-  page: number;
+  pageResultatsRecherche: number;
   searchTerms: string;
   searchFilterParams?: {
     toApiURI: () => string;
@@ -8,7 +8,7 @@ type IParams = {
 
 export default function simplifyParams(a: IParams) {
   return {
-    page: a.page,
+    pageResultatsRecherche: a.pageResultatsRecherche,
     searchTerms: a.searchTerms,
     searchFilterParams: a.searchFilterParams?.toApiURI() ?? '',
   };

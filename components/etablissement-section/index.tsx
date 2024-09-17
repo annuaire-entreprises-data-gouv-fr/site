@@ -157,6 +157,7 @@ const EtablissementSection: React.FC<IProps> = ({
           session={session}
           etablissement={etablissement}
           label="télécharger"
+          button={true}
         />
         {!usedInEntreprisePage && uniteLegale.dateMiseAJourInpi && (
           <>

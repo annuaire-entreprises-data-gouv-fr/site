@@ -1,16 +1,12 @@
 import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
 import { FullTable } from '#components/table/full';
 import { IUniteLegale } from '#models/core/types';
-import {
-  IDirigeant,
-  IEtatCivil,
-  IPersonneMorale,
-} from '#models/immatriculation';
+import { IDirigeants, IEtatCivil, IPersonneMorale } from '#models/rne/types';
 import { formatDateLong, formatDatePartial, formatIntFr } from '#utils/helpers';
 import { isPersonneMorale } from '../is-personne-morale';
 
 type IDirigeantContentProps = {
-  dirigeants: IDirigeant[];
+  dirigeants: IDirigeants;
   uniteLegale: IUniteLegale;
 };
 
@@ -82,7 +78,7 @@ export function DirigeantContent({
     <>
       <FullTable
         head={['Role', 'Details', 'Action']}
-        body={dirigeants.map((dirigeant) => formatDirigeant(dirigeant))}
+        body={dirigeants.data.map((dirigeant) => formatDirigeant(dirigeant))}
       />
     </>
   );

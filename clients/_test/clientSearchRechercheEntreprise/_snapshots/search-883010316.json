@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "883010316",
     "searchFilterParams": ""
   },
@@ -181,6 +181,17 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": {
+          "dateDebutActivite": "2018-05-06",
+          "dateRadiation": "2020-09-01",
+          "dateImmatriculation": "2018-05-06",
+          "duree": 0,
+          "dateFin": "",
+          "natureEntreprise": [],
+          "dateCloture": "",
+          "isPersonneMorale": false,
+          "capital": ""
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 0,
@@ -191,6 +202,7 @@
             "prenom": "Raphael",
             "prenoms": "Raphael",
             "role": null,
+            "nationalite": null,
             "dateNaissancePartial": null,
             "lieuNaissance": ""
           }

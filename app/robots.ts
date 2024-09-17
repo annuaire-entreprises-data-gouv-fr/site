@@ -22,7 +22,6 @@ export default function robots(): MetadataRoute.Robots {
         '/departements/',
         '/etablissement/',
         '/lp/',
-        '/justificatif/',
         '/documents/',
         '/donnees-financieres/',
         '/annonces/',
