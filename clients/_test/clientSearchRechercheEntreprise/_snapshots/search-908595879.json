@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "908595879",
     "searchFilterParams": ""
   },
@@ -189,6 +189,7 @@
         "listeIdcc": [
           "9999"
         ],
+        "immatriculation": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
@@ -199,6 +200,7 @@
             "prenom": "Pierre",
             "prenoms": "Pierre",
             "role": "Président de SAS",
+            "nationalite": "Française",
             "dateNaissancePartial": "1985-12",
             "lieuNaissance": ""
           }

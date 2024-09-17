@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "843701079",
     "searchFilterParams": ""
   },
@@ -223,6 +223,7 @@
           "2609",
           "1596"
         ],
+        "immatriculation": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
@@ -233,6 +234,7 @@
             "prenom": "Lionel",
             "prenoms": "Lionel, Andre",
             "role": null,
+            "nationalite": null,
             "dateNaissancePartial": "1981-04",
             "lieuNaissance": ""
           }

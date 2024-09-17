@@ -3,35 +3,6 @@
     "487444697"
   ],
   "result": {
-    "siren": "487444697",
-    "identite": {
-      "dateImmatriculation": null,
-      "dateDebutActiv": "2005-12-06",
-      "dateRadiation": null,
-      "dateCessationActivite": null,
-      "denomination": "ESSOR ENERGIES",
-      "dureePersonneMorale": null,
-      "dateClotureExercice": "3112",
-      "capital": "2099975 EUR",
-      "isPersonneMorale": true,
-      "libelleNatureJuridique": "SARL, Société à responsabilité limitée (sans autre indication)",
-      "natureEntreprise": "Commerciale, Artisanale, Gestion de biens"
-    },
-    "dirigeants": [
-      {
-        "nom": "POUYANNE",
-        "prenom": "DAVID, JEAN-CLAUDE",
-        "role": "Gérant",
-        "dateNaissancePartial": "1965-10"
-      },
-      {
-        "nom": "POUYANNE (POUYANNE)",
-        "prenom": "DAVID, JEAN, CLAUDE",
-        "role": "Gérant",
-        "dateNaissancePartial": "1965-10"
-      }
-    ],
-    "beneficiaires": [],
     "observations": [
       {
         "numObservation": "F24/001909",
@@ -59,8 +30,34 @@
         "description": "Radiation du RCS de Bordeaux le 07/03/2023"
       }
     ],
-    "metadata": {
-      "isFallback": true
-    }
+    "immatriculation": {
+      "natureEntreprise": [
+        "Commerciale",
+        "Artisanale",
+        "Gestion de biens"
+      ],
+      "dateImmatriculation": null,
+      "dateDebutActivite": "2005-12-06",
+      "dateRadiation": null,
+      "dateFin": "",
+      "isPersonneMorale": true,
+      "dateCloture": "3112",
+      "duree": null,
+      "capital": "2099975 EUR"
+    },
+    "dirigeants": [
+      {
+        "nom": "POUYANNE",
+        "prenom": "DAVID, JEAN-CLAUDE",
+        "role": "Gérant",
+        "dateNaissancePartial": "1965-10"
+      },
+      {
+        "nom": "POUYANNE (POUYANNE)",
+        "prenom": "DAVID, JEAN, CLAUDE",
+        "role": "Gérant",
+        "dateNaissancePartial": "1965-10"
+      }
+    ]
   }
 }

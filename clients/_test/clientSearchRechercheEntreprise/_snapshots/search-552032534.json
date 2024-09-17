@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "552032534",
     "searchFilterParams": ""
   },
@@ -195,6 +195,7 @@
         "listeIdcc": [
           "9999"
         ],
+        "immatriculation": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 17,
         "nombreEtablissementsOuverts": 2,
@@ -205,6 +206,7 @@
             "prenom": "Antoine",
             "prenoms": "Antoine",
             "role": "Directeur Général",
+            "nationalite": "Française",
             "dateNaissancePartial": "1964-12",
             "lieuNaissance": ""
           },
@@ -214,6 +216,7 @@
             "prenom": "Frederic",
             "prenoms": "Frederic",
             "role": "Administrateur",
+            "nationalite": "Française",
             "dateNaissancePartial": "1967-08",
             "lieuNaissance": ""
           },
@@ -223,6 +226,7 @@
             "prenom": "Valerie",
             "prenoms": "Valerie",
             "role": "Administrateur",
+            "nationalite": "Française",
             "dateNaissancePartial": "1962-11",
             "lieuNaissance": ""
           },
@@ -232,6 +236,7 @@
             "prenom": "Gilbert",
             "prenoms": "Gilbert",
             "role": "Administrateur",
+            "nationalite": "Canadienne",
             "dateNaissancePartial": "1960-02",
             "lieuNaissance": ""
           },
@@ -241,6 +246,7 @@
             "prenom": "Lise",
             "prenoms": "Lise",
             "role": "Administrateur",
+            "nationalite": "Danoise",
             "dateNaissancePartial": "1961-08",
             "lieuNaissance": ""
           },
@@ -250,6 +256,7 @@
             "prenom": "Patrice",
             "prenoms": "Patrice",
             "role": "Administrateur",
+            "nationalite": "Américaine",
             "dateNaissancePartial": "1964-09",
             "lieuNaissance": ""
           },
@@ -259,6 +266,7 @@
             "prenom": "Sanjiv",
             "prenoms": "Sanjiv",
             "role": "Administrateur",
+            "nationalite": "Indienne",
             "dateNaissancePartial": "1960-07",
             "lieuNaissance": ""
           },
@@ -268,6 +276,7 @@
             "prenom": "Bettina",
             "prenoms": "Bettina",
             "role": "Administrateur",
+            "nationalite": null,
             "dateNaissancePartial": "1962-07",
             "lieuNaissance": ""
           },
@@ -277,6 +286,7 @@
             "prenom": "Geraldine",
             "prenoms": "Geraldine",
             "role": "Administrateur",
+            "nationalite": "Française",
             "dateNaissancePartial": "1970-02",
             "lieuNaissance": ""
           },
@@ -286,6 +296,7 @@
             "prenom": "Susan-barbara",
             "prenoms": "Susan-barbara",
             "role": "Administrateur",
+            "nationalite": "Britannique",
             "dateNaissancePartial": "1957-05",
             "lieuNaissance": ""
           },
@@ -295,6 +306,7 @@
             "prenom": "Gilles",
             "prenoms": "Gilles",
             "role": "Administrateur",
+            "nationalite": "Française",
             "dateNaissancePartial": "1958-10",
             "lieuNaissance": ""
           },

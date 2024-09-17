@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "883010316",
     "searchFilterParams": ""
   },
@@ -181,6 +181,7 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 0,
@@ -191,6 +192,7 @@
             "prenom": "Raphael",
             "prenoms": "Raphael",
             "role": null,
+            "nationalite": null,
             "dateNaissancePartial": null,
             "lieuNaissance": ""
           }

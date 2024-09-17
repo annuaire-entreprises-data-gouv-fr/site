@@ -18,7 +18,8 @@ describe('Immatriculation RNE', () => {
     cy.contains('99 ans, jusqu’au 23/01/2119');
   });
 
-  it('Should display warning when not found in RNE', () => {});
-  cy.visit(`/entreprise/356000000`);
-  cy.contains('Non trouvée dans le RNE');
+  it('Should display warning when not found in RNE', () => {
+    cy.visit(`/entreprise/356000000`);
+    cy.contains('Non trouvée dans le RNE');
+  });
 });

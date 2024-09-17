@@ -14,7 +14,7 @@
       "denomination": "",
       "nic": "00015",
       "dateCreation": "2018-05-06",
-      "dateDerniereMiseAJour": "2024-08-21T14:06:59.627Z",
+      "dateDerniereMiseAJour": "2024-09-17T13:08:37.208Z",
       "dateMiseAJourInsee": "2024-03-30T08:06:53.621",
       "dateDebutActivite": "",
       "dateFermeture": "2020-09-01",
@@ -43,7 +43,7 @@
     "anciensSiegesSirets": [],
     "statutDiffusion": "diffusible",
     "etatAdministratif": "cessée",
-    "nomComplet": "Raphael DUBIGNY",
+    "nomComplet": "R DUBIGNY",
     "chemin": "883010316",
     "natureJuridique": "1000",
     "libelleNatureJuridique": "Entrepreneur individuel",
@@ -60,7 +60,7 @@
           "denomination": "",
           "nic": "00015",
           "dateCreation": "2018-05-06",
-          "dateDerniereMiseAJour": "2024-08-21T14:06:59.627Z",
+          "dateDerniereMiseAJour": "2024-09-17T13:08:37.209Z",
           "dateMiseAJourInsee": "2024-03-30T08:06:53.621",
           "dateDebutActivite": "",
           "dateFermeture": "2020-09-01",
@@ -101,7 +101,7 @@
           "denomination": "",
           "nic": "00015",
           "dateCreation": "2018-05-06",
-          "dateDerniereMiseAJour": "2024-08-21T14:06:59.627Z",
+          "dateDerniereMiseAJour": "2024-09-17T13:08:37.209Z",
           "dateMiseAJourInsee": "2024-03-30T08:06:53.621",
           "dateDebutActivite": "",
           "dateFermeture": "2020-09-01",
@@ -169,6 +169,7 @@
     "colter": {
       "codeColter": null
     },
-    "listeIdcc": []
+    "listeIdcc": [],
+    "immatriculation": null
   }
 }

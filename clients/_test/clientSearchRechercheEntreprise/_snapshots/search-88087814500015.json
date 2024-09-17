@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "88087814500015",
     "searchFilterParams": ""
   },
@@ -181,6 +181,7 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": null,
         "matchingEtablissements": [
           {
             "siren": "880878145",
@@ -229,6 +230,7 @@
             "prenom": "Xavier",
             "prenoms": "Xavier, Marie, Erwan",
             "role": "Liquidateur",
+            "nationalite": "Française",
             "dateNaissancePartial": "1990-02",
             "lieuNaissance": ""
           }

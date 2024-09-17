@@ -3,19 +3,19 @@
     "908595879"
   ],
   "result": {
-    "siren": "908595879",
-    "identite": {
-      "denomination": "SEVERNAYA",
+    "observations": [],
+    "immatriculation": {
+      "natureEntreprise": [
+        "Commerciale"
+      ],
       "dateImmatriculation": "2021-12-27",
-      "dateDebutActiv": "2022-01-01",
+      "dateDebutActivite": "2022-01-01",
       "dateRadiation": "",
-      "dateCessationActivite": "",
+      "dateFin": "27/12/2120",
       "isPersonneMorale": true,
-      "dateClotureExercice": "3112",
-      "dureePersonneMorale": 99,
-      "capital": "1 000 EUR (fixe)",
-      "libelleNatureJuridique": "SAS, société par actions simplifiée",
-      "natureEntreprise": "Commerciale"
+      "dateCloture": "3112",
+      "duree": 99,
+      "capital": "1 000 EUR (fixe)"
     },
     "dirigeants": [
       {
@@ -25,11 +25,6 @@
         "dateNaissancePartial": "1985-12",
         "dateNaissanceFull": ""
       }
-    ],
-    "beneficiaires": [],
-    "observations": [],
-    "metadata": {
-      "isFallback": false
-    }
+    ]
   }
 }
