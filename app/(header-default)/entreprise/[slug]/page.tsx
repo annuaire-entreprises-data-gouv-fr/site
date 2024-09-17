@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
@@ -29,7 +30,6 @@ import extractParamsAppRouter, {
 import getSession from '#utils/server-side-helper/app/get-session';
 import { UniteLegaleImmatriculationSection } from 'app/(header-default)/entreprise/[slug]/_components/immatriculation-section';
 import UniteLegaleSummarySection from 'app/(header-default)/entreprise/[slug]/_components/summary-section';
-import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps

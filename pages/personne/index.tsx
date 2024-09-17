@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import { Info } from '#components-ui/alerts';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import Meta from '#components/meta/meta-client';
@@ -18,7 +19,6 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-helper/page/post-server-side-props';
-import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
