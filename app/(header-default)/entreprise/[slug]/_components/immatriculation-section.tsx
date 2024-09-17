@@ -26,7 +26,7 @@ export const UniteLegaleImmatriculationSection = ({
 
   return (
     <DataSection
-      title="Immatricuation au RNE"
+      title="Immatriculation au RNE"
       id="immatriculation-rne"
       sources={[EAdministration.INPI]}
       data={immatriculation}
@@ -98,6 +98,12 @@ export const UniteLegaleImmatriculationSection = ({
                           ],
                         ]
                       : []),
+                    [
+                      'Dirigeants',
+                      <a href={`/dirigeants/${uniteLegale.siren}`}>
+                        → Consulter la liste des dirigeants
+                      </a>,
+                    ],
                   ]
                 : []),
             ]}

@@ -1,3 +1,4 @@
+import React, { PropsWithChildren } from 'react';
 import { OpenClosedTag } from '#components-ui/badge/frequent';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
@@ -11,7 +12,6 @@ import {
 } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatDate } from '#utils/helpers';
-import React, { PropsWithChildren } from 'react';
 import styles from './style.module.css';
 
 const Wrapper: React.FC<PropsWithChildren<{ link: JSX.Element }>> = ({
@@ -102,7 +102,7 @@ export const UniteLegaleInscriptionRNE = ({
           <InformationTooltip
             tabIndex={undefined}
             label={
-              'Cette structure est n’a pas été retrouvée sur le téléservice du Registre National des Entreprises (RNE) tenu par l’INPI. Pourtant, vu sa forme juridique, elle devrait y être inscrite. Vous pouvez essayer de la retrouver sur le site data.inpi.fr'
+              'Cette structure est n’a pas été retrouvée dans le Registre National des Entreprises (RNE) tenu par l’INPI. Pourtant, vu sa forme juridique, elle devrait y être inscrite. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site data.inpi.fr'
             }
           >
             <OpenClosedTag
