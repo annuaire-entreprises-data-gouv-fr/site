@@ -5,7 +5,7 @@ import { PrintNever } from '#components-ui/print-visibility';
 import { INPI } from '#components/administrations';
 import { estDiffusible } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 
 type IProps = { uniteLegale: IUniteLegale; session: ISession | null };
@@ -18,7 +18,7 @@ export const DataInpiLinkWithExplanations = ({
 
   if (
     !estDiffusible(uniteLegale) &&
-    !hasRights(session, EScope.nonDiffusible)
+    !hasRights(session, AppScope.nonDiffusible)
   ) {
     return (
       <>

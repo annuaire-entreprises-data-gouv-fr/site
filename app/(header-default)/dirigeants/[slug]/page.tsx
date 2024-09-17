@@ -4,7 +4,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { estDiffusible } from '#models/core/diffusion';
 import { isAssociation, isServicePublic } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -53,7 +53,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
         {isServicePublic(uniteLegale) ? (
           <ResponsablesServicePublicSection uniteLegale={uniteLegale} />
         ) : !estDiffusible(uniteLegale) &&
-          !hasRights(session, EScope.nonDiffusible) ? (
+          !hasRights(session, AppScope.nonDiffusible) ? (
           <DonneesPriveesSection />
         ) : isAssociation(uniteLegale) ? (
           <DirigeantsAssociationSection

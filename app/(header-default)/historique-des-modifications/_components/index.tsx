@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
 import { changelogData } from '#models/historique-modifications';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 
 export default function ChangelogWithFilters({
@@ -13,7 +13,7 @@ export default function ChangelogWithFilters({
   session: ISession | null;
 }) {
   const [showAgents, setShowAgents] = useState<boolean>(
-    hasRights(session, EScope.isAgent)
+    hasRights(session, AppScope.isAgent)
   );
   const [showPublic, setShowPublic] = useState<boolean>(true);
   const [showAPI, setShowAPI] = useState<boolean>(false);

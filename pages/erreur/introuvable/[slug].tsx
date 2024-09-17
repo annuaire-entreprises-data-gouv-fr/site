@@ -68,7 +68,7 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
             ).
           </p>
           <p>
-            De plus, ce numéro <b>ne respecte pas</b>{' '}
+            De plus, ce numéro <strong>ne respecte pas</strong>{' '}
             <a
               href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
               target="_blank"

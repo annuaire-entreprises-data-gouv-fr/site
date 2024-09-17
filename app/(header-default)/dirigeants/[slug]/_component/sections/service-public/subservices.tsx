@@ -57,7 +57,7 @@ function SubServicesDataSection({
                   service?.affectationPersonne.map((personne, index) => (
                     <>
                       {index !== 0 && ', '}
-                      <b>{personne.nom}</b> {personne.fonction}
+                      <strong>{personne.nom}</strong> {personne.fonction}
                     </>
                   ))
                 ) : (

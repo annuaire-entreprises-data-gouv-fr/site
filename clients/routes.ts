@@ -11,6 +11,8 @@ const routes = {
       vigilance: '/v4/urssaf/unites_legales/{siren}/attestation_vigilance',
       msa: '/v3/msa/etablissements/{siret}/conformite_cotisations',
     },
+    beneficiaires:
+      '/v3/inpi/rne/unites_legales/{siren}/beneficiaires_effectifs',
     carteProfessionnelleTravauxPublics:
       '/v3/fntp/unites_legales/{siren}/carte_professionnelle_travaux_publics',
     certifications: {

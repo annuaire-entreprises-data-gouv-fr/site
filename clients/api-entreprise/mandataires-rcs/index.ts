@@ -52,6 +52,7 @@ const mapToDomainObject = (
           sexe: null,
           nom: dirigeant.nom,
           prenom: dirigeant.prenom,
+          prenoms: dirigeant.prenom,
           role: dirigeant.fonction,
           lieuNaissance: dirigeant.lieu_naissance,
           dateNaissance: dirigeant.date_naissance,

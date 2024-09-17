@@ -69,9 +69,7 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
       );
 
       summaries.push(
-        <a href="#beneficiaires">
-          État inconnu au Registre des Bénéficiaires Effectifs (RBE)
-        </a>
+        <a href="#beneficiaires">Liste des bénéficiaires effectifs</a>
       );
     }
   }
@@ -96,7 +94,7 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   return (
     <nav role="navigation" aria-labelledby="dirigeant-summary-title">
       <strong id="dirigeant-summary-title">
-        Cette structure a pour dirigeant(s) :
+        Informations disponibles sur les dirigeant(s) :
       </strong>
       <ul>
         {summaries.map((summary, index) => (

@@ -17,7 +17,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import {
   shouldNotIndex,
   uniteLegalePageDescription,
@@ -73,7 +73,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
               uniteLegale={uniteLegale}
               session={session}
             />
-            {hasRights(session, EScope.isAgent) && (
+            {hasRights(session, AppScope.isAgent) && (
               <EspaceAgentSummarySection
                 uniteLegale={uniteLegale}
                 session={session}

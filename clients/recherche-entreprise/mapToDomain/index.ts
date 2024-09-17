@@ -83,7 +83,7 @@ export const mapToDirigeantModel = (
   return {
     sexe: null,
     nom: (nom || '').toUpperCase(),
-    prenom: formatFirstNames((prenoms || '').split(' '), 1),
+    ...formatFirstNames(prenoms || '', ' '),
     role: qualite,
     nationalite,
     dateNaissancePartial: date_de_naissance,
@@ -97,7 +97,7 @@ export const mapToElusModel = (eluRaw: any): IEtatCivil => {
   return {
     sexe,
     nom: (nom || '').toUpperCase(),
-    prenom: formatFirstNames((prenoms || '').split(' '), 1),
+    ...formatFirstNames(prenoms || '', ' '),
     role: fonction,
     dateNaissancePartial: annee_de_naissance,
     lieuNaissance: '',

@@ -149,7 +149,7 @@
         "dateFermeture": "2022-10-22",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-01-15T17:35:27",
+        "dateMiseAJourInpi": "2024-03-04T04:39:53",
         "dateDebutActivite": "",
         "trancheEffectif": "01",
         "anneeCategorieEntreprise": "2021",
@@ -227,8 +227,9 @@
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Xavier",
+            "prenoms": "Xavier, Marie, Erwan",
             "role": "Liquidateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1990-02",
             "lieuNaissance": ""
           }
         ]

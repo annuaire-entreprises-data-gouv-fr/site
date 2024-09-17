@@ -20,6 +20,12 @@ a.no-style-link {
   background-image: none !important;
 }
 
+ul.no-style {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 p,
 .section-container,
 h1,

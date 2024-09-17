@@ -155,7 +155,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-05-18T13:07:27",
+        "dateMiseAJourInpi": "2024-07-05T21:55:15",
         "dateDebutActivite": "",
         "trancheEffectif": "01",
         "anneeCategorieEntreprise": "2021",
@@ -311,16 +311,18 @@
             "sexe": null,
             "nom": "DANAN",
             "prenom": "Charles",
+            "prenoms": "Charles",
             "role": "Directeur Général",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1944-05",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "ROUSSET",
             "prenom": "Olivier",
+            "prenoms": "Olivier",
             "role": "Commissaire aux comptes suppléant",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1971-11",
             "lieuNaissance": ""
           },
           {
@@ -515,8 +517,9 @@
             "sexe": null,
             "nom": "HATEM",
             "prenom": "Franck",
+            "prenoms": "Franck",
             "role": "Gérant",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1952-06",
             "lieuNaissance": ""
           }
         ]
@@ -739,8 +742,9 @@
             "sexe": null,
             "nom": "CORBINEAU",
             "prenom": "Dominique",
+            "prenoms": "Dominique",
             "role": "Gérant",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1964-10",
             "lieuNaissance": ""
           }
         ]
@@ -777,7 +781,10 @@
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
-            "idcc": [],
+            "idcc": [
+              "1596",
+              "2609"
+            ],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
@@ -824,7 +831,10 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [],
+                "idcc": [
+                  "1596",
+                  "2609"
+                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
@@ -863,7 +873,10 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [],
+                "idcc": [
+                  "1596",
+                  "2609"
+                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
@@ -950,7 +963,10 @@
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
-              "idcc": [],
+              "idcc": [
+                "1596",
+                "2609"
+              ],
               "idOrganismeFormation": [],
               "idRge": [],
               "idUai": []
@@ -966,8 +982,9 @@
             "sexe": null,
             "nom": "TURK (TURK)",
             "prenom": "Suat",
+            "prenoms": "Suat",
             "role": "Gérant",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1980-08",
             "lieuNaissance": ""
           }
         ]
@@ -998,8 +1015,8 @@
           "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
           "trancheEffectif": "02",
           "libelleTrancheEffectif": "",
-          "latitude": "43.458122",
-          "longitude": "2.00451",
+          "latitude": "43.458121999999996",
+          "longitude": "2.0045100000000007",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -1047,8 +1064,8 @@
               "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
               "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
-              "latitude": "43.458122",
-              "longitude": "2.00451",
+              "latitude": "43.458121999999996",
+              "longitude": "2.0045100000000007",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -1088,8 +1105,8 @@
               "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
               "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
-              "latitude": "43.458122",
-              "longitude": "2.00451",
+              "latitude": "43.458121999999996",
+              "longitude": "2.0045100000000007",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -1117,8 +1134,8 @@
         "dateCreation": "2019-07-09",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-05-19T06:42:48",
+        "dateMiseAJourInsee": "2024-09-03T13:11:44.151",
+        "dateMiseAJourInpi": "2024-09-10T04:06:04",
         "dateDebutActivite": "",
         "trancheEffectif": "02",
         "anneeCategorieEntreprise": "2021",
@@ -1176,8 +1193,8 @@
             "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
             "trancheEffectif": "02",
             "libelleTrancheEffectif": "",
-            "latitude": "43.458122",
-            "longitude": "2.00451",
+            "latitude": "43.458121999999996",
+            "longitude": "2.0045100000000007",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
@@ -1200,8 +1217,9 @@
             "sexe": null,
             "nom": "DURET",
             "prenom": "Eric",
+            "prenoms": "Eric",
             "role": "Président de SAS",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1947-09",
             "lieuNaissance": ""
           }
         ]

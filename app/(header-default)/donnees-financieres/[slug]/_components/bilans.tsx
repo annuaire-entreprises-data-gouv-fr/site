@@ -75,13 +75,33 @@ const AgentBilansSection: React.FC<{
               :
             </p>
             <FullTable
-              head={['Date de dépôt', 'Année fiscale', 'Lien']}
+              head={[
+                'Date de dépôt',
+                'Année fiscale',
+                //@ts-ignore
+                <FAQLink tooltipLabel="Type">
+                  Une entreprise peut déposer différents types de bilans :
+                  <ul>
+                    <li>simplifié : un bilan allégée</li>
+                    <li>complet : le bilan classique</li>
+                    <li>
+                      consolidé : un bilan qui intègre les données des filiales
+                      d’un groupe
+                    </li>
+                  </ul>
+                </FAQLink>,
+                'Lien',
+              ]}
               body={documents.bilans.map((a) => [
                 formatDateLong(a.dateDepot),
+                getFiscalYear(a.dateCloture),
                 <>
-                  {getFiscalYear(a.dateCloture)}{' '}
-                  {a.typeBilan === 'K' && (
-                    <Tag color="info">bilan consolidé</Tag>
+                  {a.typeBilan === 'K' ? (
+                    <Tag color="info">consolidé</Tag>
+                  ) : a.typeBilan === 'C' ? (
+                    <Tag color="info">complet</Tag>
+                  ) : (
+                    <Tag color="info">simplifié</Tag>
                   )}
                 </>,
                 <ButtonLink

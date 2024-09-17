@@ -1,7 +1,7 @@
+import React, { PropsWithChildren } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import constants from '#models/constants';
-import React, { PropsWithChildren } from 'react';
 import styles from './style.module.css';
 
 const FAQLink: React.FC<

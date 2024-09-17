@@ -5,7 +5,7 @@ import { PrintNever } from '#components-ui/print-visibility';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -55,11 +55,12 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
         <HorizontalSeparator />
         <BreakPageForPrint />
         <PrintNever>
-          {hasRights(session, EScope.conformite) && (
+          <SummaryDocuments session={session} />
+          {hasRights(session, AppScope.conformite) && (
             <ConformiteSection session={session} uniteLegale={uniteLegale} />
           )}
           <ActesSection uniteLegale={uniteLegale} session={session} />
-          {hasRights(session, EScope.carteProfessionnelleTravauxPublics) && (
+          {hasRights(session, AppScope.carteProfessionnelleTravauxPublics) && (
             <CarteProfessionnelleTPSection
               session={session}
               uniteLegale={uniteLegale}

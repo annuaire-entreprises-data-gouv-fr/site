@@ -1,12 +1,11 @@
 import { IAgentConnectUserInfo } from '#clients/authentication/agent-connect/strategy';
 import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
-import { IScope, getUserScopes } from './scopes';
+import { IAgentScope, getAgentScopes } from './scopes';
 
-const isLikelyPrestataire = (email: string | undefined) => {
+const isLikelyPrestataire = (domain: string) => {
   try {
-    const domain = (email || '@').split('@')[1];
-    if (domain === 'beta.gouv.fr') {
+    if (domain === '@beta.gouv.fr') {
       return true;
     } else {
       if (!!domain.match(/[.@-]*(ext)(ernal|ernes|erne)*[.@-]/g)) {
@@ -33,31 +32,55 @@ const isFromMCP = (idp_id: string) => {
   }
 };
 
+export enum UseCase {
+  autre = "Autre cas d'usage",
+  aides = 'Aides publiques',
+  marches = 'Marchés publics',
+  fraude = 'Détection de la fraude',
+}
+
 export type IAgentInfo = {
+  userId: string;
+  idpId: string;
+  domain: string;
   email: string;
   familyName: string;
   firstName: string;
   fullName: string;
   siret: string;
-  scopes: IScope[];
+  scopes: IAgentScope[];
   userType: string;
   isPrestataire: boolean;
   isMCP: boolean;
 };
 
+const extractDomain = (email: string) => {
+  try {
+    return (email.match(/@(.*)/) || ['']).shift() || '';
+  } catch {
+    return '';
+  }
+};
+
 export const getAgent = async (
   userInfo: IAgentConnectUserInfo
 ): Promise<IAgentInfo> => {
-  const { scopes, userType } = await getUserScopes(userInfo?.email);
+  const { scopes, userType } = await getAgentScopes(userInfo?.email);
 
-  const isPrestataire = isLikelyPrestataire(userInfo?.email);
+  const domain = extractDomain(userInfo?.email || '');
+  const isPrestataire = isLikelyPrestataire(domain);
   const isMCP = isFromMCP(userInfo.idp_id);
 
+  const idpId = userInfo.idp_id ?? '';
   const email = userInfo.email ?? '';
   const familyName = userInfo.family_name ?? '';
   const firstName = userInfo.given_name ?? '';
+  const userId = userInfo.sub;
 
   return {
+    userId,
+    idpId,
+    domain,
     email,
     familyName,
     firstName,

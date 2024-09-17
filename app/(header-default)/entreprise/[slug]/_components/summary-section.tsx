@@ -13,7 +13,7 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
@@ -125,7 +125,7 @@ const UniteLegaleSummarySection: React.FC<{
       />,
     ],
     // agents : we dont know yet if there are labels and certifs
-    ...(hasRights(session, EScope.protectedCertificats)
+    ...(hasRights(session, AppScope.protectedCertificats)
       ? [
           ['', <br />],
           [

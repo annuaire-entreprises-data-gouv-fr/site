@@ -9,7 +9,7 @@ import {
   createDefaultUniteLegale,
 } from '#models/core/types';
 import { ISearchResults } from '#models/search';
-import SearchFilterParams from '#models/search-filter-params';
+import SearchFilterParams from '#models/search/search-filter-params';
 import { parseIntWithDefaultValue, verifySiren } from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,

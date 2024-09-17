@@ -1,6 +1,6 @@
 import MapWithResults from '#components/map/map-results';
 import { ISearchResults } from '#models/search';
-import { IParams } from '#models/search-filter-params';
+import { IParams } from '#models/search/search-filter-params';
 import ResultsCounter from '../results-counter';
 import ResultsList from '../results-list';
 import ResultsPagination from '../results-pagination';

@@ -21,6 +21,7 @@ export interface IEtatCivil {
   sexe: 'M' | 'F' | null;
   nom: string;
   prenom: string;
+  prenoms: string;
   role: string;
   lieuNaissance: string;
   dateNaissancePartial?: string;

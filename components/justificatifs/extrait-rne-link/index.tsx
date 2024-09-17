@@ -6,7 +6,7 @@ import {
   nonDiffusibleDataFormatter,
 } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 
 const ExtraitRNELink: React.FC<{
@@ -15,7 +15,7 @@ const ExtraitRNELink: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, label, session }) => {
   return estDiffusible(uniteLegale) ||
-    hasRights(session, EScope.nonDiffusible) ? (
+    hasRights(session, AppScope.nonDiffusible) ? (
     <ButtonLink
       small
       alt

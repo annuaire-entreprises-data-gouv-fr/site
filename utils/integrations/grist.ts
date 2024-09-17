@@ -25,6 +25,10 @@ const gristTables = {
     docId: 'hp8PLhMGY9sNWuzGDGe6yi',
     tableId: 'Agents_beta_testeurs',
   },
+  'logs-connexion': {
+    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
+    tableId: 'Logs_connexion',
+  },
 } as const;
 
 function getGristUrl(tableKey: keyof typeof gristTables) {

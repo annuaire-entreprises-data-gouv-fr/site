@@ -161,7 +161,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-06-22T05:26:24",
-        "dateMiseAJourInpi": "2024-06-25T10:22:46",
+        "dateMiseAJourInpi": "2024-06-29T04:09:43",
         "dateDebutActivite": "",
         "trancheEffectif": "42",
         "anneeCategorieEntreprise": "2021",
@@ -203,88 +203,99 @@
             "sexe": null,
             "nom": "BERNARD DE SAINT AFFRIQUE",
             "prenom": "Antoine",
+            "prenoms": "Antoine",
             "role": "Directeur Général",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1964-12",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "BOUTEBBA",
             "prenom": "Frederic",
+            "prenoms": "Frederic",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1967-08",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "CHAPOULAUD-FLOQUET",
             "prenom": "Valerie",
+            "prenoms": "Valerie",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1962-11",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "GHOSTINE",
             "prenom": "Gilbert",
+            "prenoms": "Gilbert",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1960-02",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "KINGO",
             "prenom": "Lise",
+            "prenoms": "Lise",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1961-08",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "LOUVET",
             "prenom": "Patrice",
+            "prenoms": "Patrice",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1964-09",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "MEHTA",
             "prenom": "Sanjiv",
+            "prenoms": "Sanjiv",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1960-07",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "THEISSIG (MOLITOR)",
             "prenom": "Bettina",
+            "prenoms": "Bettina",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1962-07",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "PICAUD (ROAUX)",
             "prenom": "Geraldine",
+            "prenoms": "Geraldine",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1970-02",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "ROBERTS",
             "prenom": "Susan-barbara",
+            "prenoms": "Susan-barbara",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1957-05",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "SCHNEPP",
             "prenom": "Gilles",
+            "prenoms": "Gilles",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "dateNaissancePartial": "1958-10",
             "lieuNaissance": ""
           },
           {

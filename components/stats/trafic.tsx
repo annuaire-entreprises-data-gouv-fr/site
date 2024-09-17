@@ -123,8 +123,8 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
           notre API de Recherche d’entreprises
         </a>
         . Ce chiffre inclut les appels provenant du site{' '}
-        <b>Annuaire des Entreprises</b> et les appels externes, provenant
-        d’acteurs privés ou publics.
+        <strong>Annuaire des Entreprises</strong> et les appels externes,
+        provenant d’acteurs privés ou publics.
       </p>
     </>
   );

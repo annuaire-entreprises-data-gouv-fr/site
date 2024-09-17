@@ -1,5 +1,6 @@
 'use client';
 
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
@@ -79,7 +80,8 @@ export function DirigeantInformation({
         }
       />
       <BreakPageForPrint />
-      <BeneficiairesSection uniteLegale={uniteLegale} />
+      <HorizontalSeparator />
+      <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
     </>
   );
 }
