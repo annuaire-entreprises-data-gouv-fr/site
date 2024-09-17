@@ -12,7 +12,7 @@ describe('Certifications', () => {
 
     it('Should display company phone number', () => {
       cy.visit(`/labels-certificats/487444697`);
-      cy.contains('09 82 26 64 14');
+      cy.contains('05 53 02 91 16');
     });
   });
   describe('ESS & Spectacles vivants', () => {
