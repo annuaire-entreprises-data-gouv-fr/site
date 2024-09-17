@@ -55,7 +55,6 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
         <HorizontalSeparator />
         <BreakPageForPrint />
         <PrintNever>
-          <SummaryDocuments session={session} />
           {hasRights(session, AppScope.conformite) && (
             <ConformiteSection session={session} uniteLegale={uniteLegale} />
           )}
