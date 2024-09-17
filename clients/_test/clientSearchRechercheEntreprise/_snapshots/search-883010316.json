@@ -181,7 +181,17 @@
           "codeColter": null
         },
         "listeIdcc": [],
-        "immatriculation": null,
+        "immatriculation": {
+          "dateDebutActivite": "2018-05-06",
+          "dateRadiation": "2020-09-01",
+          "dateImmatriculation": "2018-05-06",
+          "duree": 0,
+          "dateFin": "",
+          "natureEntreprise": [],
+          "dateCloture": "",
+          "isPersonneMorale": false,
+          "capital": ""
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 0,

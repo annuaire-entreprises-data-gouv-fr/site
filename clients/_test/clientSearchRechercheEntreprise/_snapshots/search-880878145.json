@@ -181,7 +181,19 @@
           "codeColter": null
         },
         "listeIdcc": [],
-        "immatriculation": null,
+        "immatriculation": {
+          "dateDebutActivite": "2020-01-13",
+          "dateRadiation": "2022-11-14",
+          "dateImmatriculation": "2020-01-23",
+          "duree": 99,
+          "dateFin": "23/01/2119",
+          "natureEntreprise": [
+            "Commerciale"
+          ],
+          "dateCloture": "3112",
+          "isPersonneMorale": true,
+          "capital": "1 000,00 € (fixe)"
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 0,

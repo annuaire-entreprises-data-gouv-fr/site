@@ -223,7 +223,19 @@
           "2609",
           "1596"
         ],
-        "immatriculation": null,
+        "immatriculation": {
+          "dateDebutActivite": "2018-11-12",
+          "dateRadiation": "",
+          "dateImmatriculation": "2018-11-12",
+          "duree": 99,
+          "dateFin": "12/11/2117",
+          "natureEntreprise": [
+            "Commerciale"
+          ],
+          "dateCloture": "3112",
+          "isPersonneMorale": true,
+          "capital": "5 000,00 € (fixe)"
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,

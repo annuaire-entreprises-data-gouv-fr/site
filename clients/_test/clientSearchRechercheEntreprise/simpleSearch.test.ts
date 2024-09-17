@@ -41,6 +41,7 @@ function itShouldMatchSnapshotForSearch(
       args: [
         {
           pageResultatsRecherche: 1,
+          inclureImmatriculation: true,
           searchFilterParams: new SearchFilterParams({}),
           searchTerms,
         },

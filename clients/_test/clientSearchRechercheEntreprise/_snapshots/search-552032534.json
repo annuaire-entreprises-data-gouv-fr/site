@@ -195,7 +195,19 @@
         "listeIdcc": [
           "9999"
         ],
-        "immatriculation": null,
+        "immatriculation": {
+          "dateDebutActivite": "",
+          "dateRadiation": "",
+          "dateImmatriculation": "1955-03-01",
+          "duree": 99,
+          "dateFin": "01/03/2054",
+          "natureEntreprise": [
+            "Commerciale"
+          ],
+          "dateCloture": "3112",
+          "isPersonneMorale": true,
+          "capital": "169 888 497,75 € (fixe)"
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 17,
         "nombreEtablissementsOuverts": 2,
