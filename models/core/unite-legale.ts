@@ -1,3 +1,4 @@
+import { clientUniteLegaleGreffe } from '#clients/api-proxy/greffe';
 import {
   HttpForbiddenError,
   HttpNotFound,
@@ -109,6 +110,7 @@ class UniteLegaleBuilder {
         this._page,
         useCache
       );
+    const uniteLegaleGreffe = await fetchUniteLegaleFromGreffe(this._siren);
 
     const useInsee = shouldUseInsee(
       uniteLegaleRechercheEntreprise,
@@ -149,7 +151,13 @@ class UniteLegaleBuilder {
       isAPI404(uniteLegaleRechercheEntreprise) &&
       isAPI404(uniteLegaleInsee)
     ) {
-      throw new SirenNotFoundError(this._siren);
+      const uniteLegaleGreffe = await fetchUniteLegaleFromGreffe(this._siren);
+
+      if (isAPINotResponding(uniteLegaleGreffe)) {
+        throw new SirenNotFoundError(this._siren);
+      } else {
+        return uniteLegaleGreffe;
+      }
     }
 
     /**
@@ -315,5 +323,34 @@ const fetchUniteLegaleFromInsee = async (
     );
 
     return APINotRespondingFactory(EAdministration.INSEE, 500);
+  }
+};
+
+/**
+ * Fetch Unite Legale from Greffe
+ */
+const fetchUniteLegaleFromGreffe = async (
+  siren: Siren
+): Promise<IUniteLegale | IAPINotRespondingError> => {
+  try {
+    return await clientUniteLegaleGreffe(siren);
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      return APINotRespondingFactory(EAdministration.INFOGREFFE, 404);
+    }
+
+    logWarningInSentry(
+      new FetchRessourceException({
+        ressource: 'UniteLegaleGreffe',
+        administration: EAdministration.INFOGREFFE,
+        message: `Fail to fetch from InfoGreffe API`,
+        cause: e,
+        context: {
+          siren,
+        },
+      })
+    );
+
+    return APINotRespondingFactory(EAdministration.INFOGREFFE, 500);
   }
 };
