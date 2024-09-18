@@ -185,7 +185,7 @@ const routes = {
   },
   tooling: {
     crisp: 'https://api.crisp.chat/v1/website/',
-    grist: 'https://grist.incubateur.net/api/docs/',
+    grist: 'https://grist.numerique.gouv.fr/api/docs/',
     matomo: {
       report: {
         copyPasteEvents:
