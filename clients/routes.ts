@@ -150,6 +150,8 @@ const routes = {
         },
       },
     },
+    greffe:
+      'https://www.api.infogreffe.fr/athena/detail-entreprises/detail_entreprises?numero_identification=',
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
     tva: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
@@ -185,7 +187,7 @@ const routes = {
   },
   tooling: {
     crisp: 'https://api.crisp.chat/v1/website/',
-    grist: 'https://grist.incubateur.net/api/docs/',
+    grist: 'https://grist.numerique.gouv.fr/api/docs/',
     matomo: {
       report: {
         copyPasteEvents:
