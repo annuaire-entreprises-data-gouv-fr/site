@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { Info } from '#components-ui/alerts';
 import TextWrapper from '#components-ui/text-wrapper';
 import { FullTable } from '#components/table/full';
 
@@ -25,39 +24,18 @@ export default function Budget() {
           transparents sur les ressources allouées et la manière dont elles sont
           employées.
         </p>
-        <h2>Principes</h2>
-        <p>
-          Nous suivons{' '}
-          <a href="https://beta.gouv.fr/manifeste">le manifeste beta.gouv</a>{' '}
-          dont nous rappelons les principes ici :
-        </p>
-        <div className="fr-highlight">
-          <ul>
-            <li>
-              Les besoins des utilisateurs sont prioritaires sur les besoins de
-              l’administration
-            </li>
-            <li>Le mode de gestion de l’équipe repose sur la confiance</li>
-            <li>
-              L’équipe adopte une approche itérative et d’amélioration en
-              continu
-            </li>
-          </ul>
-        </div>
-        <h2>Budget consommé</h2>
+        <h2>Financement</h2>
         <p>Répartition des sources de financements :</p>
         <ul>
           <li>
-            <strong>2021</strong> : le projet est une expérimentation financée à
-            100% par la{' '}
+            le projet est financé en majorité par la{' '}
             <a href="https://numerique.gouv.fr/" target="_blank" rel="noopener">
               Direction Interministérielle du Numérique (DINUM)
-            </a>
-            .
+            </a>{' '}
+            au titre de ses missions d’ouverture et de circulation de la donnée.
           </li>
           <li>
-            <strong>2022</strong> : la DINUM continue d’assurer le financement
-            du projet. Le projet bénéficie également du programme{' '}
+            le projet a bénéficié en 2022 du programme{' '}
             <a
               href="https://france-relance.transformation.gouv.fr/"
               target="_blank"
@@ -68,35 +46,73 @@ export default function Budget() {
             à hauteur de 145 536 €.
           </li>
         </ul>
+        <h2>Dépenses</h2>
         <p>Répartition des dépenses effectuées :</p>
         <FullTable
-          head={['Poste de dépense', '2021', '2022', '2023']}
+          head={[
+            'Poste de dépense',
+            '2021',
+            '2022',
+            '2023',
+            '2024 (prévisionnel)',
+          ]}
           body={[
-            ['Développement', '165 000 €', '213 000 €', '375 000 €'],
-            ['Déploiement', '5 000 €', '98 000 €', '157 000 €'],
-            ['Design', '25 000 €', '25 000 €', '43 000 €'],
-            ['Logiciels', '-', '12 000 €', '12 000 €'],
-            ['Hébergement', '1000 €', '3000 €', '3000 €'],
+            [
+              'Développement',
+              '165 000 €',
+              '213 000 €',
+              '375 000 €',
+              '433 000 €',
+            ],
+            ['Déploiement', '5 000 €', '98 000 €', '157 000 €', '255 000 €'],
+            ['Design', '25 000 €', '25 000 €', '43 000 €', '60 000 €'],
+            ['Logiciels', '-', '12 000 €', '12 000 €', '12 000'],
+            ['Sécurité', '-', '-', '-', '15 000 €'],
+            ['Hébergement', '1000 €', '3000 €', '3000 €', '25 000 €'],
             [
               <strong>Total TTC</strong>,
               <strong>196 000 €</strong>,
               <strong>350 000 €</strong>,
               <strong>590 000 €</strong>,
+              <strong>800 000 €</strong>,
             ],
           ]}
         ></FullTable>
-        <br />
-        <Info>
-          <strong>À propos de la TVA</strong>
-          <p>
-            Contrairement aux entreprises du secteur privé, les administrations
-            ne peuvent pas récupérer la TVA supportée sur leurs achats dans le
-            cadre de leur activité. Le montant TTC inclut la TVA au taux de 20%.
-            <br />
-            La TVA est collectée et reversée à l’État et diminue donc le montant
-            du budget utilisable sur le projet.
-          </p>
-        </Info>
+        <h2>Impact</h2>
+        <p>
+          Mise en regard de nos dépenses et de notre impact (les statistiques
+          2024 sont des estimations):
+        </p>
+        <FullTable
+          head={[
+            'Mesure d’impact',
+            '2021',
+            '2022',
+            '2023',
+            '2024 (prévisionnel)',
+          ]}
+          body={[
+            ['Pages “entreprise” consultées', '768k', '3M', '13M', '40M'],
+            [' ‣ € / page', '0,25 €', '0,11 €', '0,04 €', '0,02 €'],
+            ['Visiteurs uniques', '156k', '781k', '3,7M', '12M'],
+            [' ‣ € / visiteur unique', '1,2 €', '0,45 €', '0,15 €', '0,06 €'],
+            ['Agents publics', '-', '-', '-', '40k'],
+            [' ‣ € / agent public / an', '-', '-', '-', '20 €'],
+          ]}
+        ></FullTable>
+        <p>
+          Le détail de nos mesures d’impact est disponible sur notre{' '}
+          <a href="/a-propos/stats">page de statistiques</a>.
+        </p>
+        <h2>À propos de la TVA</h2>
+        <p>
+          Contrairement aux entreprises du secteur privé, les administrations ne
+          peuvent pas récupérer la TVA supportée sur leurs achats dans le cadre
+          de leur activité. Le montant TTC inclut la TVA au taux de 20%.
+          <br />
+          La TVA est collectée et reversée à l’État et diminue donc le montant
+          du budget utilisable sur le projet.
+        </p>
       </TextWrapper>
     </div>
   );
