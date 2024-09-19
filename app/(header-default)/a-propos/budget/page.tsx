@@ -37,14 +37,7 @@ export default function Budget() {
           </li>
           <li>
             le projet a bénéficié en 2022 du programme{' '}
-            <a
-              href="https://france-relance.transformation.gouv.fr/"
-              target="_blank"
-              rel="noopener"
-            >
-              France Relance
-            </a>{' '}
-            à hauteur de 145 536 €.
+            <strong>France Relance</strong> à hauteur de 145 536 €.
           </li>
         </ul>
         <h2>Dépenses</h2>
