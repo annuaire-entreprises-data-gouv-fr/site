@@ -47,7 +47,6 @@ export async function logInGrist(
   tableKey: keyof typeof gristTables,
   data: unknown[]
 ) {
-  return;
   await httpClient({
     method: 'POST',
     url: getGristUrl(tableKey),
@@ -65,7 +64,6 @@ export async function logInGrist(
 }
 
 export async function readFromGrist(tableKey: keyof typeof gristTables) {
-  return [];
   const { records } = await httpClient<IGristRecords>({
     method: 'GET',
     url: getGristUrl(tableKey),
