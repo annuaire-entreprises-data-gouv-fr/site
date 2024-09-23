@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { IMatomoStats } from '#clients/matomo';
+import { IMatomoStats, clientMatomoStats } from '#clients/matomo';
 import Meta from '#components/meta/meta-client';
 import { NpsStats } from '#components/stats/nps';
 import { TraficStats } from '#components/stats/trafic';
@@ -40,22 +40,22 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const {
-  //   visits,
-  //   monthlyNps,
-  //   userResponses,
-  //   mostCopied,
-  //   copyPasteAction,
-  //   redirectedSiren,
-  // } = await clientMatomoStats();
+  const {
+    visits,
+    monthlyNps,
+    userResponses,
+    mostCopied,
+    copyPasteAction,
+    redirectedSiren,
+  } = await clientMatomoStats();
   return {
     props: {
-      monthlyNps: [],
-      visits: [],
-      userResponses: [],
-      mostCopied: [],
-      copyPasteAction: [],
-      redirectedSiren: [],
+      monthlyNps,
+      visits,
+      userResponses,
+      mostCopied,
+      copyPasteAction,
+      redirectedSiren,
     },
     revalidate: 4 * 3600, // In seconds - 4 hours
   };
