@@ -1,6 +1,7 @@
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { FetchRessourceException, InternalError } from '#models/exceptions';
+import { readFromGrist } from '#utils/integrations/grist';
 import { httpGet } from '#utils/network';
 
 export type IMatomoStats = {
@@ -246,8 +247,7 @@ const createEventsCategoryUrl = (siteId: string) => {
  * Fetch from Grist and then aggregate event by month and userType
  */
 const getNpsRecords = async () => {
-  // const npsRecords = await readFromGrist('nps-feedbacks');
-  const npsRecords = [] as any[];
+  const npsRecords = await readFromGrist('nps-feedbacks');
 
   const months: {
     [monthKey: string]: { [userTypeKey: string]: number[] };
