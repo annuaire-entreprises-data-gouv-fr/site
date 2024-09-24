@@ -104,6 +104,17 @@ export const UniteLegaleImmatriculationSection = ({
                         → Consulter la liste des dirigeants
                       </a>,
                     ],
+                    [
+                      <FAQLink tooltipLabel="Annonces et observations">
+                        Les annonces BODACC et les observations au RNE assurent
+                        la publicité des actes enregistrés pour une entreprise
+                        (procédures collectives, ventes, créations,
+                        modification, radiation et dépôt des comptes)
+                      </FAQLink>,
+                      <a href={`/dirigeants/${uniteLegale.siren}`}>
+                        → Consulter les annonces
+                      </a>,
+                    ],
                   ]
                 : []),
             ]}

@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async () => {
       copyPasteAction,
       redirectedSiren,
     },
-    revalidate: 4 * 3600, // In seconds - 4 hours
+    revalidate: 4 * 3600, // In seconds - 12 hours
   };
 };
 
