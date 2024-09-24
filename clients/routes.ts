@@ -135,6 +135,7 @@ const routes = {
     },
   },
   proxy: {
+    ig: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/ig/',
     rne: {
       immatriculation: {
         default: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
@@ -150,8 +151,6 @@ const routes = {
         },
       },
     },
-    greffe:
-      'https://www.api.infogreffe.fr/athena/detail-entreprises/detail_entreprises?numero_identification=',
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
     tva: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/',

@@ -1,65 +1,69 @@
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
-import { IUniteLegale, createDefaultUniteLegale } from '#models/core/types';
+import {
+  IUniteLegale,
+  createDefaultEtablissement,
+  createDefaultUniteLegale,
+} from '#models/core/types';
 import { Siren } from '#utils/helpers';
+import { etatFromEtatAdministratifInsee } from '#utils/helpers/insee-variables';
 import httpClient from '#utils/network';
 
-type IAPIGreffeResponse = {
-  nom: string; // 'ADECWATTS';
-  numero_identification: string; // '925187106';
-  etat: string; // 'ACTIVE';
-  date_immatriculation: string; // '2024-06-10';
-  activite_naf: {
-    code: string; // '2640Z';
-    libelle: string; // 'Fabrication de produits électroniques grand public';
+type IIGResponse = {
+  siren: Siren;
+  nomComplet: string;
+  etat: string;
+  natureJuridique: string;
+  activitePrincipale: string;
+  libelleActivitePrincipale: string;
+  dateCreation: string;
+  siege: string;
+  association: {
+    idAssociation: string | null;
   };
-  date_radiation: string;
-  type_personne:'PM'|'PP';
-  jour_date_cloture: 31,
-  mois_date_cloture: 12,
+  immatriculation: {
+    dateImmatriculation: string;
+    dateRadiation: string;
+    dateDebutActiv: string;
+    dateCessationActivite: string;
+    isPersonneMorale: boolean;
+    denomination: string;
+    natureEntreprise: string;
+    dateClotureExercice: string;
+    dureePersonneMorale: number;
+    capital: string;
+    libelleNatureJuridique: string;
+  };
 };
 
 /**
  * Call EORI to validate a French EORI number
  * @param siret
  */
-const clientUniteLegaleGreffe = async (siren: Siren): Promise<IUniteLegale> => {
-  // return await clientAPIProxy<IEORIValidation>(routes.proxy.eori + siret, {
-  //   timeout: constants.timeout.L,
-  //   useCache: true,
-  // });
+const clientUniteLegaleIG = async (siren: Siren): Promise<IUniteLegale> => {
   return mapToDomainObject(
-    await httpClient<IAPIGreffeResponse>({
-      url: routes.proxy.greffe + siren,
+    await httpClient<IIGResponse>({
+      url: routes.proxy.ig + siren,
       useCache: false,
-      timeout: constants.timeout.XXXL,
+      timeout: constants.timeout.XL,
     }),
     siren
   );
 };
 
-const mapToDomainObject = (
-  r: IAPIGreffeResponse,
-  siren: Siren
-): IUniteLegale => {
+const mapToDomainObject = (r: IIGResponse, siren: Siren): IUniteLegale => {
   const defaultUniteLegale = createDefaultUniteLegale(siren);
   return {
     ...defaultUniteLegale,
-    immatriculation: {
-      dateImmatriculation: r.date_immatriculation || '',
-      dateRadiation: r.date_radiation || '',
-      dateCloture: '',
-      dateDebutActivite: '',
-      dateFin: '',
-      duree:'',
-      isPersonneMorale:
-    },
+    ...r,
+    siege: createDefaultEtablissement(),
+    etatAdministratif: etatFromEtatAdministratifInsee(r.etat, r.siren),
   };
 };
 
 const stubbedClient = stubClientWithSnapshots({
-  clientUniteLegaleGreffe,
+  clientUniteLegaleIG,
 });
 
-export { stubbedClient as clientUniteLegaleGreffe };
+export { stubbedClient as clientUniteLegaleIG };
