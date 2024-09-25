@@ -53,7 +53,7 @@ const LandingPageAgent = (props: AppRouterProps) => {
           <h3>Un accès simple et rapide</h3>
           <img src="/images/lp-agent/padlock-security 1.svg" alt="" />
           <p>
-            Le bouton AgentConnect vous permet d’accéder facilement à l’espace
+            Le bouton ProConnect vous permet d’accéder facilement à l’espace
             agent grâce à votre adresse email professionnelle.
           </p>
         </div>
