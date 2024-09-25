@@ -19,13 +19,13 @@ describe(
         // The mobile one is hidden but appears first in the DOM,
         // so we need to force the click
         .click({ force: true });
-      cy.contains('button', 'AgentConnect');
+      cy.contains('button', 'ProConnect');
     });
 
     it('Bouton agent connect sur les données protégées', () => {
       cy.visit('/documents/487444697');
       cy.contains('Réservé aux agents publics');
-      cy.contains('button', 'AgentConnect');
+      cy.contains('button', 'ProConnect');
     });
 
     // it('Connexion', () => {
