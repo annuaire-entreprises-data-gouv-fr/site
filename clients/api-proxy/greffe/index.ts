@@ -8,7 +8,7 @@ import {
 } from '#models/core/types';
 import { Siren } from '#utils/helpers';
 import { etatFromEtatAdministratifInsee } from '#utils/helpers/insee-variables';
-import httpClient from '#utils/network';
+import { clientAPIProxy } from '../client';
 
 type IIGResponse = {
   siren: Siren;
@@ -23,17 +23,15 @@ type IIGResponse = {
     idAssociation: string | null;
   };
   immatriculation: {
+    dateDebutActivite: string;
+    dateFin: string;
+    duree: 0;
+    natureEntreprise: string[];
+    dateCloture: string;
     dateImmatriculation: string;
     dateRadiation: string;
-    dateDebutActiv: string;
-    dateCessationActivite: string;
     isPersonneMorale: boolean;
-    denomination: string;
-    natureEntreprise: string;
-    dateClotureExercice: string;
-    dureePersonneMorale: number;
     capital: string;
-    libelleNatureJuridique: string;
   };
 };
 
@@ -43,8 +41,7 @@ type IIGResponse = {
  */
 const clientUniteLegaleIG = async (siren: Siren): Promise<IUniteLegale> => {
   return mapToDomainObject(
-    await httpClient<IIGResponse>({
-      url: routes.proxy.ig + siren,
+    await clientAPIProxy<IIGResponse>(routes.proxy.ig + siren, {
       useCache: false,
       timeout: constants.timeout.XL,
     }),

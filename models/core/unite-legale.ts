@@ -1,4 +1,4 @@
-import { clientUniteLegaleGreffe } from '#clients/api-proxy/greffe';
+import { clientUniteLegaleIG } from '#clients/api-proxy/greffe';
 import {
   HttpForbiddenError,
   HttpNotFound,
@@ -110,7 +110,6 @@ class UniteLegaleBuilder {
         this._page,
         useCache
       );
-    const uniteLegaleGreffe = await fetchUniteLegaleFromGreffe(this._siren);
 
     const useInsee = shouldUseInsee(
       uniteLegaleRechercheEntreprise,
@@ -127,7 +126,7 @@ class UniteLegaleBuilder {
 
     if (!useInsee) {
       if (isAPI404(uniteLegaleRechercheEntreprise)) {
-        throw new SirenNotFoundError(this._siren);
+        return this.fallBackOnIG();
       }
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
         throw new HttpServerError('Recherche failed, return 500');
@@ -151,13 +150,7 @@ class UniteLegaleBuilder {
       isAPI404(uniteLegaleRechercheEntreprise) &&
       isAPI404(uniteLegaleInsee)
     ) {
-      const uniteLegaleGreffe = await fetchUniteLegaleFromGreffe(this._siren);
-
-      if (isAPINotResponding(uniteLegaleGreffe)) {
-        throw new SirenNotFoundError(this._siren);
-      } else {
-        return uniteLegaleGreffe;
-      }
+      return this.fallBackOnIG();
     }
 
     /**
@@ -175,7 +168,7 @@ class UniteLegaleBuilder {
        * Sirene Insee failed
        */
       if (isAPI404(uniteLegaleRechercheEntreprise)) {
-        throw new SirenNotFoundError(this._siren);
+        return this.fallBackOnIG();
       } else if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
         throw new HttpServerError('Both API failed');
       } else {
@@ -227,6 +220,19 @@ class UniteLegaleBuilder {
       dateMiseAJourInpi: uniteLegaleRechercheEntreprise.dateMiseAJourInpi,
     };
   };
+
+  /**
+   * last resort - only when not found in other API
+   */
+  fallBackOnIG = async () => {
+    const uniteLegaleGreffe = await fetchUniteLegaleFromIG(this._siren);
+
+    if (isAPINotResponding(uniteLegaleGreffe)) {
+      throw new SirenNotFoundError(this._siren);
+    } else {
+      return uniteLegaleGreffe;
+    }
+  };
 }
 
 //=========================
@@ -244,6 +250,8 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
   useFallback = false
 ): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
+    return APINotRespondingFactory(EAdministration.DINUM, 404);
+
     const useFallback = false;
     return await clientUniteLegaleRechercheEntreprise(
       siren,
@@ -288,6 +296,8 @@ const fetchUniteLegaleFromInsee = async (
   inseeOptions: InseeClientOptions
 ): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
+    return APINotRespondingFactory(EAdministration.DINUM, 500);
+
     return await clientUniteLegaleInsee(siren, page, inseeOptions);
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
@@ -327,13 +337,13 @@ const fetchUniteLegaleFromInsee = async (
 };
 
 /**
- * Fetch Unite Legale from Greffe
+ * Fetch Unite Legale from IG
  */
-const fetchUniteLegaleFromGreffe = async (
+const fetchUniteLegaleFromIG = async (
   siren: Siren
 ): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
-    return await clientUniteLegaleGreffe(siren);
+    return await clientUniteLegaleIG(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INFOGREFFE, 404);
