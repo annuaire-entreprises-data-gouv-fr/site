@@ -76,7 +76,7 @@ const Privacy = () => (
           <tr>
             <td>
               Données relatives aux agents publics accédant au service numérique
-              via AgentConnect
+              via ProConnect
             </td>
             <td>Nom, prénom, adresse e-mail professionnelle</td>
           </tr>
@@ -148,7 +148,7 @@ const Privacy = () => (
           <tr>
             <td>
               Données relatives aux agents publics accédant au service numérique
-              via AgentConnect
+              via ProConnect
             </td>
             <td>
               Durant la durée de session de la personne concernée, au-delà les
@@ -224,7 +224,7 @@ const Privacy = () => (
       </li>
       <li>
         Les usagers du service et agents publics accédant au service via
-        AgentConnect, diffusion publique des données relatives aux représentants
+        ProConnect, diffusion publique des données relatives aux représentants
         et bénéficiaires effectifs des entreprises, associations et services
         publics et accès via un compte pour les agents publics.
       </li>

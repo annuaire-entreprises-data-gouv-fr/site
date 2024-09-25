@@ -52,7 +52,7 @@ const CGU: NextPageWithLayout = () => (
     <h3>4.1 Accès et connexion à l’espace agent public</h3>
     <p>
       L’Utilisateur s’authentifie et se connecte à l’espace agent public via le
-      fournisseur d’identité AgentConnect.
+      fournisseur d’identité ProConnect.
     </p>
     <p>
       Le Service ne propose aucun autre mode d’accès à cet espace agent public.
