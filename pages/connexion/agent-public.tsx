@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import ButtonAgentConnect from '#components-ui/button-agent-connect';
+import ButtonProConnect from '#components-ui/button-pro-connect';
 import connexionPicture from '#components-ui/illustrations/connexion';
 import { Tag } from '#components-ui/tag';
 import { LayoutConnexion } from '#components/layouts/layout-connexion';
@@ -20,22 +20,19 @@ const Login = () => {
         Accédez aux entreprises non-diffusibles, aux actes, aux statuts et aux
         bilans des entreprises, en continuant avec le bouton{' '}
         <a
-          href="https://agentconnect.gouv.fr/"
+          href="https://www.proconnect.gouv.fr/"
           target="_blank"
           rel="noopener noreferrer"
-          title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+          title="Qu’est-ce que ProConnect ? - nouvelle fenêtre"
         >
-          AgentConnect
+          ProConnect
         </a>
         .
         <p>
           Disponible pour toutes les administrations, sans création de compte.
         </p>
       </p>
-      <ButtonAgentConnect
-        useCurrentPathForRediction={false}
-        event="LOGIN_PAGE"
-      />
+      <ButtonProConnect useCurrentPathForRediction={false} event="LOGIN_PAGE" />
       <style jsx>{`
         h1,
         p {

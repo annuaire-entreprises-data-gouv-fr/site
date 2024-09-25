@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ButtonAgentConnect from '#components-ui/button-agent-connect';
+import { default as ButtonProConnect } from '#components-ui/button-pro-connect';
 import Container from '#components-ui/container';
 import { administrationsMetaData } from '#models/administrations';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
@@ -37,7 +37,7 @@ const LandingPageAgent = (props: AppRouterProps) => {
               .
             </p>
           </header>
-          <ButtonAgentConnect
+          <ButtonProConnect
             useCurrentPathForRediction={false}
             alternatePathForRedirection={pathFrom as string}
             event="BTN_LP_HERO"
@@ -109,7 +109,7 @@ const LandingPageAgent = (props: AppRouterProps) => {
           }}
         >
           <h2>Rejoignez les agents qui utilisent déjà l’espace agent !</h2>
-          <ButtonAgentConnect
+          <ButtonProConnect
             useCurrentPathForRediction={false}
             alternatePathForRedirection={pathFrom as string}
             event="BTN_LP_BOTTOM"
