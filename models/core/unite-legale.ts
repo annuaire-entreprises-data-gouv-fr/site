@@ -1,5 +1,6 @@
 import { clientUniteLegaleIG } from '#clients/api-proxy/greffe';
 import {
+  HttpBadRequestError,
   HttpForbiddenError,
   HttpNotFound,
   HttpServerError,
@@ -355,7 +356,8 @@ const fetchUniteLegaleFromIG = async (
   try {
     return await clientUniteLegaleIG(siren);
   } catch (e: any) {
-    if (e instanceof HttpNotFound) {
+    // not found or not a valid siren
+    if (e instanceof HttpNotFound || e instanceof HttpBadRequestError) {
       return APINotRespondingFactory(EAdministration.INFOGREFFE, 404);
     }
 
@@ -363,7 +365,7 @@ const fetchUniteLegaleFromIG = async (
       new FetchRessourceException({
         ressource: 'UniteLegaleGreffe',
         administration: EAdministration.INFOGREFFE,
-        message: `Fail to fetch from InfoGreffe API`,
+        message: `Fail to fetch from IG API`,
         cause: e,
         context: {
           siren,
