@@ -10,7 +10,7 @@ type IProps = {
   event: string;
 };
 
-const ButtonAgentConnect: React.FC<IProps> = ({
+const ButtonProConnect: React.FC<IProps> = ({
   alternatePathForRedirection,
   useCurrentPathForRediction,
   event = 'BTN_DEFAULT',
@@ -32,16 +32,15 @@ const ButtonAgentConnect: React.FC<IProps> = ({
       )}
       <div className="fr-connect-group">
         <button
-          className="fr-connect"
-          style={{ filter: 'drop-shadow(0px 2px 6px rgba(0, 0, 18, 0.16))' }}
+          className="fr-connect pro-connect"
           onClick={() => logConversionEvent(event)}
         >
           <span className="fr-connect__login">S’identifier avec</span>
-          <span className="fr-connect__brand">AgentConnect</span>
+          <span className="fr-connect__brand">ProConnect</span>
         </button>
       </div>
     </form>
   );
 };
 
-export default ButtonAgentConnect;
+export default ButtonProConnect;

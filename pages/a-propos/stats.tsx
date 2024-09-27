@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
+import { IMatomoStats, clientMatomoStats } from '#clients/matomo';
 import Meta from '#components/meta/meta-client';
 import { NpsStats } from '#components/stats/nps';
 import { TraficStats } from '#components/stats/trafic';
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async () => {
       copyPasteAction,
       redirectedSiren,
     },
-    revalidate: 4 * 3600, // In seconds - 4 hours
+    revalidate: 4 * 3600, // In seconds - 12 hours
   };
 };
 
