@@ -135,6 +135,7 @@ const routes = {
     },
   },
   proxy: {
+    ig: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/ig/',
     rne: {
       immatriculation: {
         default: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',

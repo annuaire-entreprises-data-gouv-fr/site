@@ -19,6 +19,20 @@ const NotInSireneAlert: React.FC<{
   if (!uniteLegale.dateMiseAJourInpi) {
     // does not exist in RNE either
     // should not exist in theory as UL come either from RNE or Sirene
+    if (uniteLegale.dateMiseAJourIG) {
+      // exist in IG !
+      return (
+        <Warning full>
+          Cette structure{' '}
+          <strong>
+            n’a pas été retrouvée dans le RNE ou dans la base Sirene
+          </strong>
+          , où elle devrait se trouver. En revanche elle a été retrouvée sur{' '}
+          <a href="https://www.infogreffe.fr/">Infogreffe</a>. C’est une
+          situation <strong>très inhabituelle</strong>.
+        </Warning>
+      );
+    }
     return null;
   }
 

@@ -25,6 +25,7 @@ import {
   labelsAndCertificatesSources,
 } from '../../../../../components/badges-section/labels-and-certificates';
 import {
+  UniteLegaleInscriptionIG,
   UniteLegaleInscriptionRNA,
   UniteLegaleInscriptionRNE,
   UniteLegaleInscriptionSirene,
@@ -60,6 +61,7 @@ const UniteLegaleSummarySection: React.FC<{
           uniteLegale={uniteLegale}
           session={session}
         />
+        <UniteLegaleInscriptionIG uniteLegale={uniteLegale} />
         <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
       </>,
     ],

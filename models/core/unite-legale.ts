@@ -1,3 +1,4 @@
+import { clientUniteLegaleIG } from '#clients/api-proxy/greffe';
 import {
   HttpForbiddenError,
   HttpNotFound,
@@ -10,7 +11,11 @@ import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { Siren, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
-import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
+import {
+  logFatalErrorInSentry,
+  logInfoInSentry,
+  logWarningInSentry,
+} from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
@@ -20,7 +25,7 @@ import {
   isAPI404,
   isAPINotResponding,
 } from '../api-not-responding';
-import { FetchRessourceException } from '../exceptions';
+import { FetchRessourceException, Information } from '../exceptions';
 import { getTvaUniteLegale } from '../tva';
 import {
   ISTATUTDIFFUSION,
@@ -125,7 +130,7 @@ class UniteLegaleBuilder {
 
     if (!useInsee) {
       if (isAPI404(uniteLegaleRechercheEntreprise)) {
-        throw new SirenNotFoundError(this._siren);
+        return this.fallBackOnIG();
       }
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
         throw new HttpServerError('Recherche failed, return 500');
@@ -149,7 +154,7 @@ class UniteLegaleBuilder {
       isAPI404(uniteLegaleRechercheEntreprise) &&
       isAPI404(uniteLegaleInsee)
     ) {
-      throw new SirenNotFoundError(this._siren);
+      return this.fallBackOnIG();
     }
 
     /**
@@ -167,7 +172,7 @@ class UniteLegaleBuilder {
        * Sirene Insee failed
        */
       if (isAPI404(uniteLegaleRechercheEntreprise)) {
-        throw new SirenNotFoundError(this._siren);
+        return this.fallBackOnIG();
       } else if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
         throw new HttpServerError('Both API failed');
       } else {
@@ -218,6 +223,29 @@ class UniteLegaleBuilder {
         uniteLegaleRechercheEntreprise.dateMiseAJourInsee,
       dateMiseAJourInpi: uniteLegaleRechercheEntreprise.dateMiseAJourInpi,
     };
+  };
+
+  /**
+   * last resort - only when not found in other API
+   */
+  fallBackOnIG = async () => {
+    const uniteLegaleGreffe = await fetchUniteLegaleFromIG(this._siren);
+
+    if (isAPINotResponding(uniteLegaleGreffe)) {
+      throw new SirenNotFoundError(this._siren);
+    } else {
+      logInfoInSentry(
+        new Information({
+          name: 'Fallback on IG',
+          message: `Not found in RNE or Sirene, but found in IG`,
+          context: {
+            siren: this._siren,
+          },
+        })
+      );
+
+      return uniteLegaleGreffe;
+    }
   };
 }
 
@@ -315,5 +343,34 @@ const fetchUniteLegaleFromInsee = async (
     );
 
     return APINotRespondingFactory(EAdministration.INSEE, 500);
+  }
+};
+
+/**
+ * Fetch Unite Legale from IG
+ */
+const fetchUniteLegaleFromIG = async (
+  siren: Siren
+): Promise<IUniteLegale | IAPINotRespondingError> => {
+  try {
+    return await clientUniteLegaleIG(siren);
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      return APINotRespondingFactory(EAdministration.INFOGREFFE, 404);
+    }
+
+    logWarningInSentry(
+      new FetchRessourceException({
+        ressource: 'UniteLegaleGreffe',
+        administration: EAdministration.INFOGREFFE,
+        message: `Fail to fetch from InfoGreffe API`,
+        cause: e,
+        context: {
+          siren,
+        },
+      })
+    );
+
+    return APINotRespondingFactory(EAdministration.INFOGREFFE, 500);
   }
 };

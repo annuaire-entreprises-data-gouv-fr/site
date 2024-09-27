@@ -96,8 +96,12 @@ export interface IUniteLegale extends IEtablissementsList {
   libelleActivitePrincipale: string;
   dateCreation: string;
   dateDerniereMiseAJour: string;
+  // should never be empty
   dateMiseAJourInsee: string;
+  // should not be empty for companies
   dateMiseAJourInpi: string;
+  // should only be filled when fallbacking on IG
+  dateMiseAJourIG: string;
   dateDebutActivite: string;
   dateFermeture: string;
   statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
@@ -142,6 +146,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     dateDerniereMiseAJour: '',
     dateMiseAJourInsee: '',
     dateMiseAJourInpi: '',
+    dateMiseAJourIG: '',
     dateDebutActivite: '',
     trancheEffectif: '',
     anneeCategorieEntreprise: null,

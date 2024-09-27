@@ -24,6 +24,64 @@ const Wrapper: React.FC<PropsWithChildren<{ link: JSX.Element }>> = ({
   </div>
 );
 
+export const UniteLegaleInscriptionIG = ({
+  uniteLegale,
+}: {
+  uniteLegale: IUniteLegale;
+}) => {
+  if (
+    !uniteLegale.dateMiseAJourInsee &&
+    !uniteLegale.dateMiseAJourInpi &&
+    uniteLegale.dateMiseAJourIG
+  ) {
+    return (
+      <Wrapper
+        link={
+          <a
+            rel="noreferre noopener"
+            target="_blank"
+            href={`https://www.infogreffe.fr/entreprise/danone/${uniteLegale.siren}`}
+          >
+            → Consulter la fiche Infogreffe
+          </a>
+        }
+      >
+        <InformationTooltip
+          tabIndex={undefined}
+          label={`Cette structure est enregistrée sur Infogreffe${
+            uniteLegale.immatriculation?.dateImmatriculation
+              ? `, depuis le ${formatDate(
+                  uniteLegale.immatriculation?.dateImmatriculation
+                )}`
+              : ''
+          }.`}
+        >
+          <>
+            {uniteLegale.immatriculation?.dateRadiation ? (
+              <OpenClosedTag icon="closed" label="Radiée sur Infogreffe">
+                le {formatDate(uniteLegale.immatriculation?.dateRadiation)}
+              </OpenClosedTag>
+            ) : (
+              <OpenClosedTag icon="open" label="Enregistrée sur Infogreffe">
+                {uniteLegale.immatriculation?.dateImmatriculation && (
+                  <>
+                    le{' '}
+                    {formatDate(
+                      uniteLegale.immatriculation?.dateImmatriculation
+                    )}
+                  </>
+                )}
+              </OpenClosedTag>
+            )}
+          </>
+        </InformationTooltip>
+      </Wrapper>
+    );
+  } else {
+    return null;
+  }
+};
+
 export const UniteLegaleInscriptionSirene = ({
   uniteLegale,
   session,
@@ -32,7 +90,19 @@ export const UniteLegaleInscriptionSirene = ({
   session: ISession | null;
 }) => {
   if (!uniteLegale.dateMiseAJourInsee) {
-    return null;
+    return (
+      <InformationTooltip
+        tabIndex={undefined}
+        label={
+          'Cette structure est n’a pas été retrouvée dans la base Sirene tenue par l’Insee. Pourtant, elle devrait s’y trouver. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site sirene.fr'
+        }
+      >
+        <OpenClosedTag
+          icon="questionFill"
+          label="Non trouvée dans Sirene (Insee)"
+        />
+      </InformationTooltip>
+    );
   }
 
   return (
