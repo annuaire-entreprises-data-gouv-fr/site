@@ -11,7 +11,11 @@ import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { Siren, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
-import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
+import {
+  logFatalErrorInSentry,
+  logInfoInSentry,
+  logWarningInSentry,
+} from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
@@ -21,7 +25,7 @@ import {
   isAPI404,
   isAPINotResponding,
 } from '../api-not-responding';
-import { FetchRessourceException } from '../exceptions';
+import { FetchRessourceException, Information } from '../exceptions';
 import { getTvaUniteLegale } from '../tva';
 import {
   ISTATUTDIFFUSION,
@@ -230,6 +234,16 @@ class UniteLegaleBuilder {
     if (isAPINotResponding(uniteLegaleGreffe)) {
       throw new SirenNotFoundError(this._siren);
     } else {
+      logInfoInSentry(
+        new Information({
+          name: 'Fallback on IG',
+          message: `Not found in RNE or Sirene, but found in IG`,
+          context: {
+            siren: this._siren,
+          },
+        })
+      );
+
       return uniteLegaleGreffe;
     }
   };
@@ -250,8 +264,6 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
   useFallback = false
 ): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
-    return APINotRespondingFactory(EAdministration.DINUM, 404);
-
     const useFallback = false;
     return await clientUniteLegaleRechercheEntreprise(
       siren,
@@ -296,8 +308,6 @@ const fetchUniteLegaleFromInsee = async (
   inseeOptions: InseeClientOptions
 ): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
-    return APINotRespondingFactory(EAdministration.DINUM, 500);
-
     return await clientUniteLegaleInsee(siren, page, inseeOptions);
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {

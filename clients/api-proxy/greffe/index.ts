@@ -6,7 +6,7 @@ import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
 } from '#models/core/types';
-import { Siren } from '#utils/helpers';
+import { Siren, formatDateYear } from '#utils/helpers';
 import { etatFromEtatAdministratifInsee } from '#utils/helpers/insee-variables';
 import { clientAPIProxy } from '../client';
 
@@ -55,6 +55,7 @@ const mapToDomainObject = (r: IIGResponse, siren: Siren): IUniteLegale => {
     ...defaultUniteLegale,
     ...r,
     siege: createDefaultEtablissement(),
+    dateMiseAJourIG: formatDateYear(new Date()) || '',
     etatAdministratif: etatFromEtatAdministratifInsee(r.etat, r.siren),
   };
 };
