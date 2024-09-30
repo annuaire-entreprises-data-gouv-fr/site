@@ -27,6 +27,7 @@ import {
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
 } from '../../utils/helpers/insee-variables';
+import { formatDenominationUsuelle } from './helpers';
 import {
   clientAllEtablissementsInsee,
   clientEtablissementInsee,
@@ -207,9 +208,9 @@ const mapToDomainObject = (
   const denominationUsuelleUniteLegale =
     siege.denomination ||
     agregateTripleFields(
-      denominationUsuelle1UniteLegale,
-      denominationUsuelle2UniteLegale,
-      denominationUsuelle3UniteLegale
+      formatDenominationUsuelle(denominationUsuelle1UniteLegale),
+      formatDenominationUsuelle(denominationUsuelle2UniteLegale),
+      formatDenominationUsuelle(denominationUsuelle3UniteLegale)
     ) ||
     '';
 
