@@ -20,7 +20,7 @@ export const getEORIValidation = async (
     const siret = verifySiret(eori);
     const data = await clientEORI(siret);
     if (!data) {
-      throw new Error('EOS response is empty');
+      return { eori, isValid: false };
     }
     return data;
   } catch (e: any) {
