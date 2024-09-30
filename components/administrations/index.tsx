@@ -58,6 +58,15 @@ export const MI = ({ queryString = '' }) => (
   </a>
 );
 
+export const DJEPVA = ({ queryString = '' }) => (
+  <a
+    href={`/administration/djepva${queryString}`}
+    title="Direction de la Jeunesse de l’Éducation Populaire et de la Vie Associative"
+  >
+    Direction de la Jeunesse de l’Éducation Populaire et de la Vie Associative
+  </a>
+);
+
 export const MEF = ({ queryString = '' }) => (
   <a
     href={`/administration/mef${queryString}`}
