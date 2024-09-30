@@ -4,13 +4,11 @@ import clientSearchRechercheEntreprise from '.';
 
 export const clientEtablissementRechercheEntreprise = async (
   siret: string,
-  useCache = false,
-  useFallback = false
+  useCache = false
 ): Promise<IEtablissement> => {
   const { results } = await clientSearchRechercheEntreprise({
     searchTerms: siret,
     pageResultatsRecherche: 1,
-    fallbackOnStaging: useFallback,
     inclureEtablissements: false,
     inclureImmatriculation: false,
     useCache,

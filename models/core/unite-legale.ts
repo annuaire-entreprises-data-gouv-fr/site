@@ -109,11 +109,13 @@ class UniteLegaleBuilder {
     // no cache for bot as they scrap so they tend not to call the same siren twice
     const useCache = !this._isBot;
 
+    const shouldRetry = true;
     const uniteLegaleRechercheEntreprise =
       await fetchUniteLegaleFromRechercheEntreprise(
         this._siren,
         this._page,
-        useCache
+        useCache,
+        shouldRetry
       );
 
     const useInsee = shouldUseInsee(
@@ -262,27 +264,25 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
   siren: Siren,
   pageEtablissements: number,
   useCache: boolean,
-  useFallback = false
+  shouldRetry: boolean
 ): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
-    const useFallback = false;
     return await clientUniteLegaleRechercheEntreprise(
       siren,
       pageEtablissements,
-      useFallback,
       useCache
     );
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DINUM, 404);
     }
-    if (!useFallback) {
-      const forceFallback = true;
+    if (shouldRetry) {
+      const shouldRetryAgain = false;
       return await fetchUniteLegaleFromRechercheEntreprise(
         siren,
         pageEtablissements,
-        forceFallback,
-        useCache
+        useCache,
+        shouldRetryAgain
       );
     }
     logFatalErrorInSentry(

@@ -12,7 +12,6 @@ export const clientDirigeantsRechercheEntreprise = async (
     inclureImmatriculation: false,
     pageEtablissements: 1,
     useCache: false,
-    fallbackOnStaging: false,
   });
 
   if (!results.length || !results[0]) {

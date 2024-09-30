@@ -177,8 +177,6 @@ const routes = {
   },
   rechercheEntreprise: {
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
-    rechercheUniteLegaleStaging:
-      'https://recherche-entreprises.api.gouv.fr/search',
     idcc: {
       metadata: 'https://recherche-entreprises.api.gouv.fr/idcc/metadata',
       siren: 'https://recherche-entreprises.api.gouv.fr/idcc',
