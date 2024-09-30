@@ -9,6 +9,10 @@ export function shouldUseInsee<T extends {}>(
   isEI: (r: T) => boolean,
   hasInconsistencies?: (r: T) => boolean
 ) {
+  if (process.env.INSEE_ENABLED === 'disabled') {
+    return false;
+  }
+
   const rechercheEntrepriseFailed = isAPINotResponding(
     rechercheEntrepriseResponse
   );
