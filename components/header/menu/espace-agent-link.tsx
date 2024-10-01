@@ -13,7 +13,10 @@ export const EspaceAgentLink = ({ pathFrom }: { pathFrom: string }) => (
     aria-label="Accéder à la page de connexion de l'espace agent public"
   >
     <Icon slug="accountLine">
-      <span className={styles.menuText}>Espace agent public</span>
+      <span className="fr-sr-only">Accéder à l’espace agent public</span>
+      <span aria-hidden className={styles.menuText}>
+        Espace agent public
+      </span>
     </Icon>
   </a>
 );
