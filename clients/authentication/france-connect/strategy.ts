@@ -51,7 +51,7 @@ export const getClient = async () => {
 
 export const FranceConnectAuthorizeUrl = async (req: any) => {
   const client = await getClient();
-  const session = await req.session;
+  const session = req.session;
   session.FC_CONNECT_CHECK = {
     state: generators.state(),
     nonce: generators.nonce(),

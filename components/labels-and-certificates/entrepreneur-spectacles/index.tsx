@@ -10,7 +10,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
-import { formatDateLong } from '#utils/helpers';
+import { formatDate, formatDateLong } from '#utils/helpers';
 
 export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
   entrepreneurSpectacles:
@@ -153,7 +153,7 @@ const Validity = ({ statut = '', dateDeValidite = '' }) => {
           label="La déclaration vaut récépissé. L'exercice de la profession est licite."
         >
           <Tag color="success">valide</Tag>
-          {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
+          {dateDeValidite ? ` depuis le ${formatDate(dateDeValidite)}` : ''}
         </InformationTooltip>
       );
     case 'en instruction':
