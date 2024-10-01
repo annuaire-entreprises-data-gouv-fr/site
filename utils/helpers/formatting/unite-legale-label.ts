@@ -73,7 +73,7 @@ export const uniteLegalePageTitle = (uniteLegale: IUniteLegale) => {
     uniteLegale.nomComplet
   }${city} - SIREN ${formatIntFr(
     uniteLegale.siren
-  )} | Annuaire des Entreprises`;
+  )} | L’Annuaire des Entreprises`;
 };
 
 export const uniteLegalePageDescription = (uniteLegale: IUniteLegale) =>
@@ -106,5 +106,5 @@ export const etablissementPageTitle = (
     uniteLegale.nomComplet
   }${city} - SIRET ${formatSiret(
     etablissement.siret
-  )} | Annuaire des Entreprises`;
+  )} | L’Annuaire des Entreprises`;
 };

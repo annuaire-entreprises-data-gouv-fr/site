@@ -39,7 +39,7 @@ export default function FAQPage() {
 }
 
 export const metadata: Metadata = {
-  title: "FAQ de l'Annuaire des Entreprises",
+  title: 'FAQ de l’Annuaire des Entreprises',
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/faq',
   },

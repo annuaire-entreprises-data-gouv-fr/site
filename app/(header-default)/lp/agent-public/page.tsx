@@ -6,7 +6,7 @@ import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
 import styles from './style.module.css';
 
 export const metadata: Metadata = {
-  title: 'Espace agent | Annuaire des Entreprises',
+  title: 'Espace agent | L’Annuaire des Entreprises',
   description:
     'Les informations des entreprises sont toutes dans l’espace agent !',
   robots: 'index, follow',

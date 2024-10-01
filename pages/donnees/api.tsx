@@ -25,7 +25,7 @@ const StatusPage: NextPageWithLayout<IProps> = ({
 }) => (
   <>
     <Meta
-      title="Statut des API utilisées par l'Annuaire des Entreprises"
+      title="Statut des API utilisées par l’Annuaire des Entreprises"
       noIndex
     />
     <div

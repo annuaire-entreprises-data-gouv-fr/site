@@ -42,7 +42,7 @@ reassurance:
       - Avis de situation
   - title: Comment ça marche ?
     body: |
-      Tous les entrepreneurs du spectacle vivant - quelle que soit leur forme juridique - possèdent un numéro SIRET et par conséquent une fiche sur l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).
+      Tous les entrepreneurs du spectacle vivant - quelle que soit leur forme juridique - possèdent un numéro SIRET et par conséquent une fiche sur [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).
 datasources:
   - insee
   - mc

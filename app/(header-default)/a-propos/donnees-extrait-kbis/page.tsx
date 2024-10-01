@@ -72,8 +72,8 @@ export default function ExtraitKbis() {
               <INPI /> à votre système d’information.
             </li>
             <li>
-              Intégrer le lien vers la page Annuaire des Entreprises dans votre
-              application.
+              Intégrer le lien vers la page de l’Annuaire des Entreprises dans
+              votre application.
             </li>
           </ol>
           <p>
