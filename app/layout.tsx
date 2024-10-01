@@ -22,7 +22,7 @@ export default async function HomeLayout({
         <link
           rel="search"
           type="application/opensearchdescription+xml"
-          title="Annuaire des Entreprises"
+          title="L'Annuaire des Entreprises"
           href="https://annuaire-entreprises.data.gouv.fr/opensearch.xml"
         />
       </head>

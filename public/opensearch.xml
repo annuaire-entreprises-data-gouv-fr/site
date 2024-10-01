@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-  <ShortName>Annuaire des Entreprises</ShortName>
+  <ShortName>L’Annuaire des Entreprises</ShortName>
   <Description>Rechercher une entreprise, une adssociation ou une administration publique</Description>
   <Image>/favicons/favicon.svg</Image>
   <Language>fr</Language>
   <InputEncoding>UTF-8</InputEncoding>
-  <Url type="text/html" template="https://annuaire-entreprises.data.gouv.fr/rechercher?terme={searchTerms}"/>
+  <Url type="text/html"
+    template="https://annuaire-entreprises.data.gouv.fr/rechercher?terme={searchTerms}" />
 </OpenSearchDescription>

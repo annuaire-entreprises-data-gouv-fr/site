@@ -9,7 +9,7 @@ const Login = () => {
   return (
     <>
       <Meta
-        title="Accédez à votre espace agent public sur Annuaire des Entreprises"
+        title="Accédez à votre espace agent public sur l’Annuaire des Entreprises"
         noIndex={true}
       />
       <h1>Espace agent public</h1>

@@ -173,7 +173,7 @@ const Footer = () => (
               </ul>
               <br />
               <strong className="fr-footer__top-cat">
-                Annuaire des Entreprises
+                L’Annuaire des Entreprises
               </strong>
               <ul className="fr-footer__top-list">
                 <li>

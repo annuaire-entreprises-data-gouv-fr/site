@@ -1,6 +1,6 @@
 label: définition
 seo:
-  title: Numéro de TVA intracommunautaire - définition - Annuaire des Entreprises
+  title: Numéro de TVA intracommunautaire - définition - L’Annuaire des Entreprises
   description: Le numéro de TVA intracommunautaire est un identifiant unique assigné par l’administration fiscale à toute entreprise assujettie à la TVA.
 administrations:
   - vies
@@ -66,7 +66,7 @@ body: |
 
   ## Une entreprise peut-elle avoir plusieurs numéros de TVA intracommunautaire ?
 
-  Une entreprise assujettie à la TVA possède un numéro de TVA pour chacun de ses codes d’activité (NAF/APE). Dans ce cas, le numéro de TVA affiché sur Annuaire des Entreprises est celui de son premier code d’activité.
+  Une entreprise assujettie à la TVA possède un numéro de TVA pour chacun de ses codes d’activité (NAF/APE). Dans ce cas, le numéro de TVA affiché sur l’Annuaire des Entreprises est celui de son premier code d’activité.
 more:
   - label: Consulter la page dédiée sur service-public.fr
     href: https://entreprendre.service-public.fr/vosdroits/F23570

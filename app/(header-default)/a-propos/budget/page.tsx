@@ -16,9 +16,8 @@ export default function Budget() {
       <TextWrapper>
         <h1>Budget</h1>
         <p>
-          L’
           <a href="https://annuaire-entreprises.data.gouv.fr">
-            <strong>Annuaire des Entreprises</strong>
+            <strong>L’Annuaire des Entreprises</strong>
           </a>{' '}
           est un service public numérique, c’est pourquoi nous sommes
           transparents sur les ressources allouées et la manière dont elles sont

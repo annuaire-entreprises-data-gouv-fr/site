@@ -16,7 +16,7 @@ export default function About() {
   return (
     <>
       <TextWrapper>
-        <h1>À propos de L’Annuaire des Entreprises</h1>
+        <h1>À propos de l’Annuaire des Entreprises</h1>
         <p>
           Ce site permet de retrouver toutes les données publiques détenues par
           l’administration sur une entreprise, une association ou une
