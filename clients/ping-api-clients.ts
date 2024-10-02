@@ -53,7 +53,6 @@ const ping = async (slug: string | string[]) => {
         searchTerms: 'test',
         pageResultatsRecherche: 1,
         searchFilterParams: undefined,
-        fallbackOnStaging: false,
         useCache,
         inclureEtablissements: false,
       });
@@ -67,7 +66,6 @@ export const pingAPIClient = async (slug: string | string[]) => {
     await ping(slug);
     return { test: true, status: 200 };
   } catch (e: any) {
-    console.log(e);
     if (e instanceof APISlugNotFound) {
       throw e;
     } else {

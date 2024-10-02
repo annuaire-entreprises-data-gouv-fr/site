@@ -87,7 +87,11 @@ const UniteLegaleSummarySection: React.FC<{
         un identifiant unique communautaire permettant d’identifier l’entreprise
         dans ses relations avec les autorités douanières.
       </FAQLink>,
-      <EORICell uniteLegale={uniteLegale} session={session} />,
+      uniteLegale.siege.siret ? (
+        <EORICell siret={uniteLegale.siege.siret} session={session} />
+      ) : (
+        ''
+      ),
     ],
     ['Activité principale (NAF/APE)', uniteLegale.libelleActivitePrincipale],
     ['Code NAF/APE', uniteLegale.activitePrincipale],

@@ -6,7 +6,6 @@ import clientSearchRechercheEntreprise from '.';
 export const clientUniteLegaleRechercheEntreprise = async (
   siren: Siren,
   pageEtablissements: number,
-  fallbackOnStaging = false,
   useCache = false
 ): Promise<IUniteLegale> => {
   const { results } = await clientSearchRechercheEntreprise({
@@ -16,7 +15,6 @@ export const clientUniteLegaleRechercheEntreprise = async (
     inclureImmatriculation: true,
     pageEtablissements,
     useCache,
-    fallbackOnStaging,
   });
 
   if (!results.length || !results[0]) {

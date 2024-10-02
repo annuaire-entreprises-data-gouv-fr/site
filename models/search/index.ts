@@ -78,14 +78,13 @@ const search = async (
       return { ...noResults, notEnoughParams: true };
     }
 
-    // attempt a fallback on staging
+    // retry
     try {
       const escapedSearchTerm = removeSpecialChars(searchTerm);
       return await clientSearchRechercheEntreprise({
         searchTerms: escapedSearchTerm,
         pageResultatsRecherche: page,
         searchFilterParams,
-        fallbackOnStaging: true,
       });
     } catch (eFallback: any) {
       if (eFallback instanceof HttpNotFound) {

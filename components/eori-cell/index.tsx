@@ -4,33 +4,31 @@ import InformationTooltip from '#components-ui/information-tooltip';
 import { Loader } from '#components-ui/loader';
 import { CopyPaste } from '#components/table/copy-paste';
 import { isAPINotResponding } from '#models/api-not-responding';
-import { IUniteLegale } from '#models/core/types';
 import {
   hasFetchError,
   isDataLoading,
   isUnauthorized,
 } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
-import { formatSiret } from '#utils/helpers';
+import { Siret, formatSiret } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 type IProps = {
-  uniteLegale: IUniteLegale;
+  siret: Siret;
   session: ISession | null;
 };
-export default function EORICell(props: IProps) {
-  const eoriValidation = useAPIRouteData(
-    'eori-validation',
-    props.uniteLegale.siege.siret,
-    props.session
-  );
-  if (isDataLoading(eoriValidation))
+export default function EORICell({ siret, session }: IProps) {
+  const eoriValidation = useAPIRouteData('eori-validation', siret, session);
+
+  if (isDataLoading(eoriValidation)) {
     return (
       <>
         <Loader />
         &nbsp;
       </>
     );
+  }
+
   if (hasFetchError(eoriValidation) || isUnauthorized(eoriValidation)) {
     return (
       <InformationTooltip
@@ -38,7 +36,7 @@ export default function EORICell(props: IProps) {
         label={
           <>
             Nous n’avons pas pu controler la validité du numéro EORI à cause
-            d’une erreur de connection. Vous pouvez essayer de rafraichir la
+            d’une erreur de connexion. Vous pouvez essayer de rafraichir la
             page, ou revenir plus tard.
           </>
         }
@@ -46,7 +44,7 @@ export default function EORICell(props: IProps) {
         left="5px"
       >
         <Icon slug="errorFill" color="#df0a00">
-          <em>Erreur de connection</em>
+          <em>Erreur de connexion</em>
         </Icon>
       </InformationTooltip>
     );

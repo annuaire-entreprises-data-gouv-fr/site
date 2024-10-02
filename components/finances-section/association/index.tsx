@@ -1,6 +1,6 @@
 'use client';
 
-import { MI } from '#components/administrations';
+import { DJEPVA } from '#components/administrations';
 import { LineChart } from '#components/chart/line';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
@@ -35,7 +35,7 @@ export const FinancesAssociationSection: React.FC<{
     <DataSectionClient
       notFoundInfo="Aucun indicateur financier n’a été retrouvé pour cette association."
       title="Indicateurs financiers"
-      sources={[EAdministration.MI, EAdministration.DJEPVA]}
+      sources={[EAdministration.DJEPVA]}
       data={data}
     >
       {(data) =>
@@ -47,19 +47,17 @@ export const FinancesAssociationSection: React.FC<{
           <>
             <p>
               Voici les résultats financiers déclarés par le siège social de
-              l’association.
+              l’association. Ils sont diffusés par la <DJEPVA />. Vous pouvez
+              aussi les retrouver sur l&apos;onglet “Comptes“ de{' '}
+              <a
+                target="_blank"
+                href={`https://www.data-asso.fr/annuaire/association/${uniteLegale.association.idAssociation}?docFields=documentsDac,documentsRna`}
+                rel="noopener noreferrer"
+              >
+                data-asso
+              </a>
+              .
             </p>
-            Ces résultats sont diffusés par le <MI />. Vous pouvez les retrouver
-            sur l&apos;onglet “Comptes“ de{' '}
-            <a
-              target="_blank"
-              href={`https://www.data-asso.fr/annuaire/association/${uniteLegale.association.idAssociation}?docFields=documentsDac,documentsRna`}
-              rel="noopener noreferrer"
-            >
-              data-asso
-            </a>
-            .
-            <br />
             <LineChart
               htmlLegendId={'finance-data-legend'}
               options={{

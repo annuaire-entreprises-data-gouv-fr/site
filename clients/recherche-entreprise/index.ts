@@ -34,7 +34,6 @@ type ClientSearchRechercheEntreprise = {
   searchTerms: string;
   pageResultatsRecherche: number;
   searchFilterParams?: SearchFilterParams;
-  fallbackOnStaging?: boolean;
   useCache?: boolean;
   inclureEtablissements?: boolean;
   inclureImmatriculation?: boolean;
@@ -47,7 +46,6 @@ type ClientSearchRechercheEntreprise = {
 const clientSearchRechercheEntreprise = async ({
   searchTerms,
   searchFilterParams,
-  fallbackOnStaging = false,
   useCache = false,
   inclureEtablissements = false,
   inclureImmatriculation = false,
@@ -58,9 +56,7 @@ const clientSearchRechercheEntreprise = async ({
 
   const route =
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
-    (fallbackOnStaging
-      ? routes.rechercheEntreprise.rechercheUniteLegaleStaging
-      : routes.rechercheEntreprise.rechercheUniteLegale);
+    routes.rechercheEntreprise.rechercheUniteLegale;
 
   const filters = searchFilterParams?.toApiURI();
 
@@ -89,9 +85,7 @@ const clientSearchRechercheEntreprise = async ({
 
   url += `&mtm_campaign=annuaire-entreprises-site`;
 
-  const timeout = fallbackOnStaging
-    ? constants.timeout.XL
-    : constants.timeout.L;
+  const timeout = constants.timeout.L;
 
   const results = await httpGet<ISearchResponse>(url, {
     timeout,
