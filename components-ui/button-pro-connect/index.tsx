@@ -3,27 +3,27 @@
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { logConversionEvent } from '#utils/matomo';
+import useReferrer from 'hooks/use-referrer';
 
 type IProps = {
-  useCurrentPathForRediction: boolean;
-  alternatePathForRedirection?: string;
+  shouldRedirectToReferer?: boolean;
   event: string;
 };
 
 const ButtonProConnect: React.FC<IProps> = ({
-  alternatePathForRedirection,
-  useCurrentPathForRediction,
+  shouldRedirectToReferer = false,
   event = 'BTN_DEFAULT',
 }) => {
-  let pathFrom = null;
+  const referrer = useReferrer();
   const currentPath = usePathname();
 
-  if (useCurrentPathForRediction) {
-    pathFrom = currentPath;
-  }
-  if (alternatePathForRedirection) {
-    pathFrom = alternatePathForRedirection;
-  }
+  const isFromSite =
+    referrer?.indexOf(
+      process.env.NEXT_PUBLIC_BASE_URL || 'https://annuaire-entreprises'
+    ) === 0;
+
+  const pathFrom =
+    shouldRedirectToReferer && isFromSite ? referrer : currentPath;
 
   return (
     <form action="/api/auth/agent-connect/login" method="get">

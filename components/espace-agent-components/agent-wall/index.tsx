@@ -55,7 +55,7 @@ const AgentWall: React.FC<{
               </>
             )}
           </p>
-          <ButtonProConnect useCurrentPathForRediction event="AGENT_WALL" />
+          <ButtonProConnect event="AGENT_WALL" />
         </FloatingModal>
         <div className={style['blur']} tab-index="-1" aria-hidden>
           <p>

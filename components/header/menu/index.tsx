@@ -9,9 +9,8 @@ import styles from './styles.module.css';
 
 const Menu: React.FC<{
   session: ISession | null;
-  pathFrom: string;
   useAgentCTA: boolean;
-}> = ({ session, pathFrom, useAgentCTA }) => {
+}> = ({ session, useAgentCTA }) => {
   return isLoggedIn(session) ? (
     <div className={styles.menuLogout + ' fr-link'} tabIndex={0}>
       <div>
@@ -40,16 +39,14 @@ const Menu: React.FC<{
       >
         <a
           aria-label="Se déconnecter de l'espace agent public"
-          href={`/api/auth/agent-connect/logout?pathFrom=${encodeURIComponent(
-            pathFrom
-          )}`}
+          href={'/api/auth/agent-connect/logout'}
         >
           <div>Se déconnecter</div>
         </a>
       </FloatingModal>
     </div>
   ) : useAgentCTA ? (
-    <EspaceAgentLink pathFrom={pathFrom} />
+    <EspaceAgentLink />
   ) : null;
 };
 

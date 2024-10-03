@@ -4,9 +4,9 @@ import { Icon } from '#components-ui/icon/wrapper';
 import { logConversionEvent } from '#utils/matomo';
 import styles from './styles.module.css';
 
-export const EspaceAgentLink = ({ pathFrom }: { pathFrom: string }) => (
+export const EspaceAgentLink = () => (
   <a
-    href={`/lp/agent-public?pathFrom=${encodeURIComponent(pathFrom)}`}
+    href={'/lp/agent-public'}
     className="fr-link"
     title="Se connecter à l'espace agent"
     onClick={() => logConversionEvent('HEADER_LOGIN')}

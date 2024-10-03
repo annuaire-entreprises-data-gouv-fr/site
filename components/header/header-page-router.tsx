@@ -1,4 +1,3 @@
-import { usePathname } from 'next/navigation';
 import useSession from 'hooks/use-session';
 import { HeaderCore } from './header-core';
 
@@ -19,7 +18,6 @@ export const HeaderPageRouter: React.FC<IProps> = ({
   currentSearchTerm = '',
 }) => {
   const session = useSession();
-  const pathFrom = usePathname();
 
   return (
     <HeaderCore
@@ -29,7 +27,6 @@ export const HeaderPageRouter: React.FC<IProps> = ({
       useAgentCTA={useAgentCTA}
       plugin={plugin}
       session={session}
-      pathFrom={pathFrom || ''}
       currentSearchTerm={currentSearchTerm}
     />
   );

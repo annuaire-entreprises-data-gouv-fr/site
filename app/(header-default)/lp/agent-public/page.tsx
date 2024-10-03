@@ -1,3 +1,5 @@
+import { IronSession } from 'iron-session';
+import { Metadata } from 'next';
 import { default as ButtonProConnect } from '#components-ui/button-pro-connect';
 import Container from '#components-ui/container';
 import { administrationsMetaData } from '#models/administrations';
@@ -5,8 +7,6 @@ import { isLoggedIn } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { IronSession } from 'iron-session';
-import { Metadata } from 'next';
 import styles from './style.module.css';
 
 export const metadata: Metadata = {
@@ -51,11 +51,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
           {isLoggedIn(session) ? (
             isLoggedInMessage(session)
           ) : (
-            <ButtonProConnect
-              useCurrentPathForRediction={false}
-              alternatePathForRedirection={pathFrom as string}
-              event="BTN_LP_HERO"
-            />
+            <ButtonProConnect shouldRedirectToReferer event="BTN_LP_HERO" />
           )}
         </div>
         <img src="/images/lp-agent/secure-folder 1.svg" alt="" />
@@ -127,11 +123,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
           {isLoggedIn(session) ? (
             isLoggedInMessage(session)
           ) : (
-            <ButtonProConnect
-              useCurrentPathForRediction={false}
-              alternatePathForRedirection={pathFrom as string}
-              event="BTN_LP_BOTTOM"
-            />
+            <ButtonProConnect shouldRedirectToReferer event="BTN_LP_BOTTOM" />
           )}
         </section>
       </Container>
