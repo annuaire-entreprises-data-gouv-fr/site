@@ -10,7 +10,7 @@ type IProps = {
   plugin?: JSX.Element;
   currentSearchTerm?: string;
 };
-export const Header: React.FC<IProps> = ({
+export const HeaderPageRouter: React.FC<IProps> = ({
   useLogo = false,
   useSearchBar = false,
   useMap = false,

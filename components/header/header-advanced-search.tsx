@@ -1,7 +1,7 @@
 import React from 'react';
 import { AdvancedSearch } from '#components/advanced-search';
 import { IParams } from '#models/search/search-filter-params';
-import { HeaderServer } from './header-server';
+import { HeaderAppRouter } from './header-app-router';
 
 type IProps = {
   currentSearchTerm?: string;
@@ -21,7 +21,7 @@ export const HeaderWithAdvancedSearch: React.FC<IProps> = ({
   useAgentCTA = false,
 }) => {
   return (
-    <HeaderServer
+    <HeaderAppRouter
       useMap={useMap}
       useLogo={useLogo}
       useSearchBar={useSearchBar}

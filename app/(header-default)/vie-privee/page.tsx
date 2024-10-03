@@ -174,7 +174,7 @@ const Privacy = () => (
     </ul>
     <p>
       Pour les exercer, contactez-nous à :{' '}
-      <a href="mailto:annuaire-entreprises@data.gouv.fr ">
+      <a href="mailto:annuaire-entreprises@data.gouv.fr">
         annuaire-entreprises@data.gouv.fr{' '}
       </a>
     </p>

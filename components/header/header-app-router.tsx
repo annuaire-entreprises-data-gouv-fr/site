@@ -11,7 +11,7 @@ type IProps = {
   currentSearchTerm?: string;
 };
 
-export const HeaderServer: React.FC<IProps> = async ({
+export const HeaderAppRouter: React.FC<IProps> = async ({
   useLogo = false,
   useSearchBar = false,
   useMap = false,
