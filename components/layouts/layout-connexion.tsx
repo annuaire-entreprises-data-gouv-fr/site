@@ -1,5 +1,5 @@
-import { Header } from '#components/header/header-page-router';
 import React, { PropsWithChildren } from 'react';
+import { HeaderPageRouter } from '#components/header/header-page-router';
 
 type IProps = {
   img: JSX.Element;
@@ -10,7 +10,7 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
   img,
 }) => (
   <div id="page-layout">
-    <Header
+    <HeaderPageRouter
       useSearchBar={false}
       useLogo={true}
       useMap={false}

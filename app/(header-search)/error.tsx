@@ -1,7 +1,7 @@
 'use client';
 
 import { SearchErrorExplanations } from '#components/error-explanations';
-import { Header } from '#components/header/header-page-router';
+import { HeaderPageRouter } from '#components/header/header-page-router';
 import {
   NextAppError,
   useLogFatalErrorAppClient,
@@ -12,7 +12,7 @@ export default function ErrorPage({ error }: { error: NextAppError }) {
 
   return (
     <>
-      <Header useSearchBar={true} useAgentCTA={true} useMap={false} />
+      <HeaderPageRouter useSearchBar={true} useAgentCTA={true} useMap={false} />
       <main className="fr-container">
         <div className="fr-container">
           <SearchErrorExplanations />

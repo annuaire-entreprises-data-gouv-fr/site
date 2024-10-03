@@ -1,7 +1,7 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import constants from '#models/constants';
 import { Exception } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
-import { NextApiRequest, NextApiResponse } from 'next';
 
 const button = (
   { query: { slug = '', light = '' } }: NextApiRequest,
