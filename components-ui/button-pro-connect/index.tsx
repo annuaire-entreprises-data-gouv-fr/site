@@ -1,29 +1,32 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { logConversionEvent } from '#utils/matomo';
 
 type IProps = {
-  useCurrentPathForRediction: boolean;
-  alternatePathForRedirection?: string;
+  shouldRedirectToReferer?: boolean;
   event: string;
 };
 
 const ButtonProConnect: React.FC<IProps> = ({
-  alternatePathForRedirection,
-  useCurrentPathForRediction,
+  shouldRedirectToReferer = false,
   event = 'BTN_DEFAULT',
 }) => {
-  let pathFrom = null;
+  const [referrer, setReferrer] = useState<string | null>(null);
   const currentPath = usePathname();
 
-  if (useCurrentPathForRediction) {
-    pathFrom = currentPath;
-  }
-  if (alternatePathForRedirection) {
-    pathFrom = alternatePathForRedirection;
-  }
+  useEffect(() => {
+    setReferrer(document.referrer);
+  }, []);
+
+  const isFromSite =
+    referrer?.indexOf(
+      process.env.NEXT_PUBLIC_BASE_URL || 'https://annuaire-entreprises'
+    ) === 0;
+
+  const pathFrom =
+    shouldRedirectToReferer && isFromSite ? referrer : currentPath;
 
   return (
     <form action="/api/auth/agent-connect/login" method="get">

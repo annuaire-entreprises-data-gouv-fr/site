@@ -6,7 +6,9 @@ import { AgentConnectionFailedException } from './callback';
 
 export default withSession(async function loginRoute(req, res) {
   try {
-    await setPathFrom(req.session, (req?.query?.pathFrom || '') as string);
+    const pathFrom =
+      (req?.query?.pathFrom as string) || req.headers.referer || '';
+    await setPathFrom(req.session, pathFrom);
     const url = await agentConnectAuthorizeUrl(req);
     res.redirect(url);
   } catch (e: any) {

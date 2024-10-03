@@ -6,7 +6,7 @@ import withSession from '#utils/session/with-session';
 
 export default withSession(async function logoutRoute(req, res) {
   try {
-    await setPathFrom(req.session, (req?.query?.pathFrom || '') as string);
+    await setPathFrom(req.session, req.headers.referer || '');
     const url = await agentConnectLogoutUrl(req);
     res.redirect(url);
   } catch (e: any) {
