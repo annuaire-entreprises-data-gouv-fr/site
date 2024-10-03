@@ -32,7 +32,7 @@ const AgentWall: React.FC<{
         >
           <h3>Vous êtes agent public ?</h3>
           <p>
-            Accédez immédiatement à ces données en continuant avec le bouton{' '}
+            Accédez immédiatement à ces données avec{' '}
             <a
               href="https://www.proconnect.gouv.fr/"
               target="_blank"
@@ -41,9 +41,7 @@ const AgentWall: React.FC<{
             >
               ProConnect
             </a>
-            .
-          </p>
-          <p>
+            .{' '}
             {conditionExplanation ? (
               conditionExplanation
             ) : (
