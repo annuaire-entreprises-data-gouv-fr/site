@@ -1,8 +1,12 @@
-import { Metadata } from 'next';
 import { default as ButtonProConnect } from '#components-ui/button-pro-connect';
 import Container from '#components-ui/container';
 import { administrationsMetaData } from '#models/administrations';
+import { isLoggedIn } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
+import getSession from '#utils/server-side-helper/app/get-session';
+import { IronSession } from 'iron-session';
+import { Metadata } from 'next';
 import styles from './style.module.css';
 
 export const metadata: Metadata = {
@@ -15,8 +19,15 @@ export const metadata: Metadata = {
   },
 };
 
-const LandingPageAgent = (props: AppRouterProps) => {
+const isLoggedInMessage = (session: IronSession<ISession> | null) => (
+  <div>
+    Vous êtes connecté avec : <strong>{session?.user?.email}</strong>
+  </div>
+);
+
+const LandingPageAgent = async (props: AppRouterProps) => {
   const { pathFrom } = props.searchParams;
+  const session = await getSession();
 
   return (
     <div className={styles['page']}>
@@ -37,11 +48,15 @@ const LandingPageAgent = (props: AppRouterProps) => {
               .
             </p>
           </header>
-          <ButtonProConnect
-            useCurrentPathForRediction={false}
-            alternatePathForRedirection={pathFrom as string}
-            event="BTN_LP_HERO"
-          />
+          {isLoggedIn(session) ? (
+            isLoggedInMessage(session)
+          ) : (
+            <ButtonProConnect
+              useCurrentPathForRediction={false}
+              alternatePathForRedirection={pathFrom as string}
+              event="BTN_LP_HERO"
+            />
+          )}
         </div>
         <img src="/images/lp-agent/secure-folder 1.svg" alt="" />
       </section>
@@ -109,11 +124,15 @@ const LandingPageAgent = (props: AppRouterProps) => {
           }}
         >
           <h2>Rejoignez les agents qui utilisent déjà l’espace agent !</h2>
-          <ButtonProConnect
-            useCurrentPathForRediction={false}
-            alternatePathForRedirection={pathFrom as string}
-            event="BTN_LP_BOTTOM"
-          />
+          {isLoggedIn(session) ? (
+            isLoggedInMessage(session)
+          ) : (
+            <ButtonProConnect
+              useCurrentPathForRediction={false}
+              alternatePathForRedirection={pathFrom as string}
+              event="BTN_LP_BOTTOM"
+            />
+          )}
         </section>
       </Container>
       <section>
