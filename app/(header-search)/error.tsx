@@ -1,7 +1,7 @@
 'use client';
 
 import { SearchErrorExplanations } from '#components/error-explanations';
-import { Header } from '#components/header';
+import { Header } from '#components/header/header-page-router';
 import {
   NextAppError,
   useLogFatalErrorAppClient,

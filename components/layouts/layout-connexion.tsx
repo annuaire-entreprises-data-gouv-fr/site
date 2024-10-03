@@ -1,5 +1,5 @@
+import { Header } from '#components/header/header-page-router';
 import React, { PropsWithChildren } from 'react';
-import { Header } from '#components/header';
 
 type IProps = {
   img: JSX.Element;
