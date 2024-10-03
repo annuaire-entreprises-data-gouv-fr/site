@@ -5,6 +5,12 @@
     "permanent": true
   },
   {
+    "source": "/connexion/agent-public",
+    "destination": "/lp/agent-public",
+    "permanent": true
+  },
+
+  {
     "source": "/api/qr/:slug",
     "destination": "/api/share/qr/:slug",
     "permanent": true
