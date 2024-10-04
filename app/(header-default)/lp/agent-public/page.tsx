@@ -1,3 +1,5 @@
+import { IronSession } from 'iron-session';
+import { Metadata } from 'next';
 import { default as ButtonProConnect } from '#components-ui/button-pro-connect';
 import Container from '#components-ui/container';
 import { administrationsMetaData } from '#models/administrations';
@@ -5,8 +7,6 @@ import { isLoggedIn } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { IronSession } from 'iron-session';
-import { Metadata } from 'next';
 import styles from './style.module.css';
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const isLoggedInMessage = (session: IronSession<ISession> | null) => (
   <div>
-    Vous êtes connecté avec : <strong>{session?.user?.email}</strong>
+    Vous êtes connecté en tant que : <strong>{session?.user?.email}</strong>
   </div>
 );
 

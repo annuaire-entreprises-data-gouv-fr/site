@@ -18,7 +18,11 @@ export default async function HomeLayout({
   return (
     <>
       <NPSBanner />
-      <HeaderAppRouter useSearchBar={false} useAgentCTA={true} />
+      <HeaderAppRouter
+        useSearchBar={false}
+        useAgentCTA={true}
+        useAgentBanner={false}
+      />
       <main className="fr-container">{children}</main>
       <SocialNetworks />
       <QuestionOrFeedback session={session} />

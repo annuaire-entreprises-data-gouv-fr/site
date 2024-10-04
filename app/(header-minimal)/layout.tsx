@@ -14,7 +14,11 @@ export default async function HomeLayout({
   const session = await getSession();
   return (
     <>
-      <HeaderAppRouter useSearchBar={false} useAgentCTA={false} />
+      <HeaderAppRouter
+        useSearchBar={false}
+        useAgentCTA={false}
+        useAgentBanner={false}
+      />
       <main className="fr-container">{children}</main>
       <QuestionOrFeedback session={session} />
     </>
