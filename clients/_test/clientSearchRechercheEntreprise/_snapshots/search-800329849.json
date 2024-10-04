@@ -158,10 +158,10 @@
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": "02",
-        "anneeCategorieEntreprise": "2021",
+        "trancheEffectif": "01",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2021",
+        "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
           "estEss": true,
