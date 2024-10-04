@@ -1,5 +1,4 @@
 import getSession from '#utils/server-side-helper/app/get-session';
-import usePathServer from 'hooks/use-path-server';
 import { HeaderCore } from './header-core';
 
 type IProps = {
@@ -22,7 +21,6 @@ export const HeaderAppRouter: React.FC<IProps> = async ({
   currentSearchTerm = '',
 }) => {
   const session = await getSession();
-  const pathFrom = usePathServer();
 
   return (
     <HeaderCore
@@ -33,7 +31,6 @@ export const HeaderAppRouter: React.FC<IProps> = async ({
       useAgentCTA={useAgentCTA}
       plugin={plugin}
       session={session}
-      pathFrom={pathFrom}
       currentSearchTerm={currentSearchTerm}
     />
   );

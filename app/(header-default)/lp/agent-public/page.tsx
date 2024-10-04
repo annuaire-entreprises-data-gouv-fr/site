@@ -51,11 +51,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
           {isLoggedIn(session) ? (
             isLoggedInMessage(session)
           ) : (
-            <ButtonProConnect
-              useCurrentPathForRediction={false}
-              alternatePathForRedirection={pathFrom as string}
-              event="BTN_LP_HERO"
-            />
+            <ButtonProConnect shouldRedirectToReferer event="BTN_LP_HERO" />
           )}
         </div>
         <img src="/images/lp-agent/secure-folder 1.svg" alt="" />
@@ -127,11 +123,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
           {isLoggedIn(session) ? (
             isLoggedInMessage(session)
           ) : (
-            <ButtonProConnect
-              useCurrentPathForRediction={false}
-              alternatePathForRedirection={pathFrom as string}
-              event="BTN_LP_BOTTOM"
-            />
+            <ButtonProConnect shouldRedirectToReferer event="BTN_LP_BOTTOM" />
           )}
         </section>
       </Container>

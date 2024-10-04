@@ -27,7 +27,6 @@ type IProps = {
   useInfoBanner?: boolean;
   session: ISession | null;
   plugin?: JSX.Element;
-  pathFrom: string;
 };
 
 export const HeaderCore: React.FC<IProps> = ({
@@ -39,7 +38,6 @@ export const HeaderCore: React.FC<IProps> = ({
   useMap = false,
   plugin = null,
   session,
-  pathFrom,
 }) => {
   return (
     <>
@@ -103,11 +101,7 @@ export const HeaderCore: React.FC<IProps> = ({
                       ) : null}
                       <div className={styles.menuMobile}>
                         <ChangelogNotificationWithoutSSR />
-                        <Menu
-                          session={session}
-                          useAgentCTA={useAgentCTA}
-                          pathFrom={pathFrom}
-                        />
+                        <Menu session={session} useAgentCTA={useAgentCTA} />
                       </div>
                     </div>
                     {useSearchBar ? (
@@ -123,11 +117,7 @@ export const HeaderCore: React.FC<IProps> = ({
                           <ChangelogNotificationWithoutSSR />
                         </li>
                         <li>
-                          <Menu
-                            session={session}
-                            useAgentCTA={useAgentCTA}
-                            pathFrom={pathFrom}
-                          />
+                          <Menu session={session} useAgentCTA={useAgentCTA} />
                         </li>
                       </ul>
                     </div>
