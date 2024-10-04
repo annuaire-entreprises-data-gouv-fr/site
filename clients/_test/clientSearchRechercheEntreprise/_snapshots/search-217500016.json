@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "42",
           "libelleTrancheEffectif": "",
-          "latitude": null,
-          "longitude": null,
+          "latitude": "48.856145",
+          "longitude": "2.351838",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -87,8 +87,8 @@
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "42",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "48.856145",
+              "longitude": "2.351838",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -131,8 +131,8 @@
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "42",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "48.856145",
+              "longitude": "2.351838",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -153,7 +153,7 @@
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 2904,
+          "nombreEtablissementsOuverts": 2905,
           "nombreEtablissements": 3012,
           "usePagination": true,
           "currentEtablissementPage": 1
@@ -163,14 +163,14 @@
         "dateCreation": "1983-03-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-09-09T15:02:51.868",
+        "dateMiseAJourInsee": "2024-09-09T15:02:51",
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "53",
-        "anneeCategorieEntreprise": "2021",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "GE",
-        "anneeTrancheEffectif": "2021",
+        "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -1686,7 +1686,7 @@
         "immatriculation": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 3012,
-        "nombreEtablissementsOuverts": 2904,
+        "nombreEtablissementsOuverts": 2905,
         "dirigeants": []
       }
     ]
