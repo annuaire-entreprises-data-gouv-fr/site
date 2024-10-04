@@ -140,14 +140,7 @@ export const HeaderCore: React.FC<IProps> = ({
         </PrintNever>
       </header>
       {useAgentBanner && hasRights(session, AppScope.isAgent) && (
-        <div
-          style={{
-            fontSize: '0.9rem',
-            backgroundColor: constants.colors.espaceAgentPastel,
-            padding: '10px 0',
-          }}
-          role="banner"
-        >
+        <div className={styles.agentBanner} role="banner">
           <PrintNever>
             <div className="fr-container">
               Votre compte <strong>agent public</strong> vous donne accès à des
