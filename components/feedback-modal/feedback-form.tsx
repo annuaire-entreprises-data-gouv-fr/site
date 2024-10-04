@@ -1,7 +1,7 @@
 'use client';
-import { useRef, useState } from 'react';
 import { HeightTransition } from '#components-ui/animation/height-transition';
 import '#components-ui/floating-modal/style.module.css';
+import { useRef, useState } from 'react';
 import { sendFeedback } from './actions';
 import FeedbackMessage from './feedback-message';
 import styles from './style.module.css';
@@ -78,6 +78,25 @@ export default function FeedbackForm({ onSubmit, agentContactInfo }: IProps) {
           />
           <label htmlFor="feedback-question">Une question ?</label>
         </fieldset>
+        <p>
+          Retrouvez-nous et posez-nous vos questions sur{' '}
+          <a
+            href="https://tchap.gouv.fr/#/room/#annuaire-entreprises:agent.dinum.tchap.gouv.fr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Tchap
+          </a>{' '}
+          et sur{' '}
+          <a
+            href="https://www.linkedin.com/company/annuaire-des-entreprises"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+          .
+        </p>
         {type && <FeedbackMessage type={type} isErrored={isErrored} />}
       </form>
     </HeightTransition>
