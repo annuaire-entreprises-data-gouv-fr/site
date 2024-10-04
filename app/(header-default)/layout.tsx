@@ -18,7 +18,11 @@ export default async function LayoutWithSearchBar({
   return (
     <>
       <NPSBanner />
-      <HeaderAppRouter useSearchBar={true} useAgentCTA={true} />
+      <HeaderAppRouter
+        useSearchBar={true}
+        useAgentCTA={true}
+        useAgentBanner={true}
+      />
       <main className="fr-container">{children}</main>
       <SocialNetworks />
       <QuestionOrFeedback session={session} />

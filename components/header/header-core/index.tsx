@@ -1,9 +1,12 @@
+import dynamic from 'next/dynamic';
+import React from 'react';
+import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
+import constants from '#models/constants';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import dynamic from 'next/dynamic';
-import React from 'react';
 import Menu from '../menu';
 import styles from './styles.module.css';
 
@@ -19,6 +22,7 @@ type IProps = {
   useLogo?: boolean;
   useSearchBar?: boolean;
   useAgentCTA?: boolean;
+  useAgentBanner?: boolean;
   useMap?: boolean;
   useInfoBanner?: boolean;
   session: ISession | null;
@@ -30,6 +34,7 @@ export const HeaderCore: React.FC<IProps> = ({
   useLogo = false,
   useSearchBar = false,
   useAgentCTA = false,
+  useAgentBanner = false,
   useMap = false,
   plugin = null,
   session,
@@ -124,6 +129,23 @@ export const HeaderCore: React.FC<IProps> = ({
           </form>
         </PrintNever>
       </header>
+      {useAgentBanner && hasRights(session, AppScope.isAgent) && (
+        <div className={styles.agentBanner} role="banner">
+          <PrintNever>
+            <div className="fr-container">
+              Votre compte <strong>agent public</strong> vous donne accès à des
+              données réservées à l’administration, identifiables par la mention
+              “{' '}
+              <strong style={{ color: constants.colors.espaceAgent }}>
+                <Icon size={12} slug="lockFill">
+                  Réservé(es) aux agents publics
+                </Icon>
+              </strong>{' '}
+              ”.
+            </div>
+          </PrintNever>
+        </div>
+      )}
     </>
   );
 };

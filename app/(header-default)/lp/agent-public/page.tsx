@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const isLoggedInMessage = (session: IronSession<ISession> | null) => (
   <div>
-    Vous êtes connecté avec : <strong>{session?.user?.email}</strong>
+    Vous êtes connecté en tant que : <strong>{session?.user?.email}</strong>
   </div>
 );
 

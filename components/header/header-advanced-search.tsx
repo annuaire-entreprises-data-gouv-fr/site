@@ -26,6 +26,7 @@ export const HeaderWithAdvancedSearch: React.FC<IProps> = ({
       useLogo={useLogo}
       useSearchBar={useSearchBar}
       useAgentCTA={useAgentCTA}
+      useAgentBanner={false}
       plugin={
         <AdvancedSearch
           searchParams={searchParams}

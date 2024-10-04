@@ -10,7 +10,7 @@
 }
 
 .headerSection > div:first-of-type {
-  margin: 40px 0 0;
+  margin: 0;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
