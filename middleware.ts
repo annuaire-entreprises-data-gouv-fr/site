@@ -81,7 +81,9 @@ export async function middleware(request: NextRequest) {
     // store redirection status in custom header as referrer seems missing from headers in RSC
     // isRedirected = params is present + previous page is coming from site
     const referer = requestHeaders.get('referer') || '';
-    const isFromSite = referer.indexOf('https://annuaire-entreprises') === 0;
+    const baseURL =
+      process.env.NEXT_PUBLIC_BASE_URL || 'https://annuaire-entreprises';
+    const isFromSite = referer.indexOf(baseURL) === 0;
 
     const isRedirected = paramIsPresent && isFromSite ? '1' : '0';
     requestHeaders.set('x-redirected', isRedirected);
