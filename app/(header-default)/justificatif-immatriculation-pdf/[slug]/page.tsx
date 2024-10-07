@@ -47,7 +47,7 @@ const InpiPDF = (props: AppRouterProps) => {
             Un téléchargement normal prend{' '}
             <strong>entre 10 et 20 secondes</strong>. <br />
             Mais quand le service est surchargé, le téléchargement peut
-            atteindre plusieurs minutes <strong>voire même échouer</strong>.
+            atteindre plusieurs minutes <strong>voire échouer</strong>.
           </Info>
           <p>
             Le téléchargement de l’extrait d’immatriculation au Répertoire

@@ -86,14 +86,6 @@ export default function FeedbackForm({ onSubmit, agentContactInfo }: IProps) {
             rel="noopener noreferrer"
           >
             Tchap
-          </a>{' '}
-          et sur{' '}
-          <a
-            href="https://www.linkedin.com/company/annuaire-des-entreprises"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn
           </a>
           .
         </p>

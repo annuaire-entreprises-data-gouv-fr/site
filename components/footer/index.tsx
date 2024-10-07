@@ -122,9 +122,9 @@ const Footer = () => (
                     className="fr-footer__top-link"
                     target="_blank"
                     rel="noreferrer noopener"
-                    href="https://mon-entreprise.fr"
+                    href="https://mon-entreprise.urssaf.fr/"
                   >
-                    mon-entreprise.fr
+                    mon-entreprise.urssaf.fr
                   </a>
                 </li>
                 <li className="fr-footer__content-item">
