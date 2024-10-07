@@ -39,7 +39,7 @@ export function DirigeantContent({
         const defaultDenom = dirigeant.denomination || dirigeant.siren;
         //@ts-ignore
         infos.push([
-          <a href={`/dirigeants/${dirigeant.siren}`}>
+          <a key={dirigeant.siren} href={`/dirigeants/${dirigeant.siren}`}>
             → voir les dirigeants de {defaultDenom}
           </a>,
         ]);

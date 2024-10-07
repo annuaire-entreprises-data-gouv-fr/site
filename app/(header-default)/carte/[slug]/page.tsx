@@ -8,7 +8,6 @@ import { getEtablissementWithLatLongFromSlug } from '#models/core/etablissement'
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
-import getSession from '#utils/server-side-helper/app/get-session';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -26,7 +25,6 @@ export const generateMetadata = async (
 
 const EtablissementMapPage = async (props: AppRouterProps) => {
   const { slug } = extractParamsAppRouter(props);
-  const session = await getSession();
   const etablissement = await getEtablissementWithLatLongFromSlug(slug);
 
   return (

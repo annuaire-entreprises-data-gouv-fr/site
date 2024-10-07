@@ -1,4 +1,3 @@
-import { IronSession } from 'iron-session';
 import { Metadata } from 'next';
 import { default as ButtonProConnect } from '#components-ui/button-pro-connect';
 import Container from '#components-ui/container';
@@ -19,14 +18,13 @@ export const metadata: Metadata = {
   },
 };
 
-const isLoggedInMessage = (session: IronSession<ISession> | null) => (
+const isLoggedInMessage = (session: ISession | null) => (
   <div>
     Vous êtes connecté en tant que : <strong>{session?.user?.email}</strong>
   </div>
 );
 
 const LandingPageAgent = async (props: AppRouterProps) => {
-  const { pathFrom } = props.searchParams;
   const session = await getSession();
 
   return (
