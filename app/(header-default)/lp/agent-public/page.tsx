@@ -26,7 +26,6 @@ const isLoggedInMessage = (session: IronSession<ISession> | null) => (
 );
 
 const LandingPageAgent = async (props: AppRouterProps) => {
-  const { pathFrom } = props.searchParams;
   const session = await getSession();
 
   return (

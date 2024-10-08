@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import React, { ReactElement } from 'react';
 import { diamond } from '#components-ui/logo-annuaire/logo-annuaire';
 import AdministrationDescription from '#components/administrations/administration-description';
 import { RenderMarkdownServerOnly } from '#components/markdown';
 import SearchBar from '#components/search-bar';
-import { InternalError } from '#models/exceptions';
 import { getAllLandingPages, getLandingPage } from '#models/landing-pages';
 import styles from './style.module.css';
 
@@ -20,10 +20,7 @@ export default (function LandingPage({
   const slug = params.slug;
   const landingPage = getLandingPage(slug);
   if (!landingPage) {
-    throw new InternalError({
-      message: 'Landing page not found',
-      context: params,
-    });
+    notFound();
   }
   const {
     title,
@@ -109,10 +106,7 @@ export const generateMetadata = function ({
 }): Metadata {
   const landingPage = getLandingPage(params.slug);
   if (!landingPage) {
-    throw new InternalError({
-      message: 'Landing page not found',
-      context: params,
-    });
+    notFound();
   }
   return {
     title: landingPage.seo.title || landingPage.title,
