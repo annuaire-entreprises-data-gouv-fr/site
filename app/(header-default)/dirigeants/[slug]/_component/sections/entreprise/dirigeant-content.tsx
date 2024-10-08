@@ -59,6 +59,8 @@ export function DirigeantContent({
                 dirigeant.dateNaissance
                   ? 'le ' + formatDateLong(dirigeant.dateNaissance)
                   : 'en ' + formatDatePartial(dirigeant.dateNaissancePartial)
+              }${
+                dirigeant.lieuNaissance ? `, à ${dirigeant.lieuNaissance}` : ''
               }`
             : ''}
         </>,

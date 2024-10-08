@@ -12,7 +12,6 @@ export const getMandatairesRCS = async (
   maybeSiren: string
 ): Promise<IDirigeants | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
-  console.log(maybeSiren);
   try {
     const mandatairesRCS = await clientApiEntrepriseMandatairesRCS(siren);
     if (mandatairesRCS.data.length === 0) {
