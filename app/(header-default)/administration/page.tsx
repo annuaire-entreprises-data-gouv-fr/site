@@ -3,8 +3,6 @@ import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
 import { administrationsMetaData } from '#models/administrations';
-import { IAdministrationMetaData } from '#models/administrations/types';
-import { NextPageWithLayout } from 'pages/_app';
 
 export const metadata: Metadata = {
   title: 'Liste des administrations partenaires de l’Annuaire des Entreprises',
@@ -13,9 +11,7 @@ export const metadata: Metadata = {
   },
 };
 
-const StatusPage: NextPageWithLayout<{
-  allAdministrations: IAdministrationMetaData[];
-}> = () => (
+const AllAdmnistrationsPage = () => (
   <TextWrapper>
     <h1>Administrations partenaires</h1>
     <p>
@@ -32,4 +28,4 @@ const StatusPage: NextPageWithLayout<{
   </TextWrapper>
 );
 
-export default StatusPage;
+export default AllAdmnistrationsPage;
