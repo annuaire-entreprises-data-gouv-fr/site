@@ -34,7 +34,7 @@ export default function AllDefinitionsPage() {
 }
 
 export const metadata: Metadata = {
-  title: "Definitions des termes utilisées sur l'Annuaire des Entreprises",
+  title: 'Definitions des termes utilisées sur l’Annuaire des Entreprises',
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/definitions',
   },

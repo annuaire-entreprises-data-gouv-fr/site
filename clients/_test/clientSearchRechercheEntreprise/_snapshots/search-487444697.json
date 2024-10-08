@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "487444697",
     "searchFilterParams": ""
   },
@@ -41,11 +41,7 @@
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
-            "idcc": [
-              "2609",
-              "1597",
-              "2420"
-            ],
+            "idcc": [],
             "idOrganismeFormation": [],
             "idRge": [
               "43SPVRGE"
@@ -94,11 +90,7 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "2609",
-                  "1597",
-                  "2420"
-                ],
+                "idcc": [],
                 "idOrganismeFormation": [],
                 "idRge": [
                   "43SPVRGE"
@@ -139,11 +131,7 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "2609",
-                  "1597",
-                  "2420"
-                ],
+                "idcc": [],
                 "idOrganismeFormation": [],
                 "idRge": [
                   "43SPVRGE"
@@ -167,12 +155,13 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-05-09T05:09:57",
-        "dateMiseAJourInpi": "2024-05-18T17:02:54",
+        "dateMiseAJourInpi": "2024-05-19T16:49:33",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "11",
-        "anneeCategorieEntreprise": "2021",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "ETI",
-        "anneeTrancheEffectif": "2021",
+        "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -198,11 +187,22 @@
         "colter": {
           "codeColter": null
         },
-        "listeIdcc": [
-          "2609",
-          "1597",
-          "2420"
-        ],
+        "listeIdcc": [],
+        "immatriculation": {
+          "dateDebutActivite": "2005-12-06",
+          "dateRadiation": "",
+          "dateImmatriculation": "2005-12-12",
+          "duree": 99,
+          "dateFin": "12/12/2104",
+          "natureEntreprise": [
+            "Gestion de biens",
+            "Artisanale non réglementée",
+            "Commerciale"
+          ],
+          "dateCloture": "3112",
+          "isPersonneMorale": true,
+          "capital": "2 099 975,00 € (fixe)"
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 42,
         "nombreEtablissementsOuverts": 29,
@@ -211,16 +211,20 @@
             "sexe": null,
             "nom": "POUYANNE (POUYANNE)",
             "prenom": "David",
+            "prenoms": "David, Jean, Claude",
             "role": null,
-            "dateNaissancePartial": "",
+            "nationalite": null,
+            "dateNaissancePartial": "1965-10",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "POUYANNE",
             "prenom": "David",
+            "prenoms": "David, Jean-claude",
             "role": "Gérant",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1965-10",
             "lieuNaissance": ""
           }
         ]

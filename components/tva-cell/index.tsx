@@ -31,20 +31,23 @@ const TVAInvalide = ({
 }) => (
   <i>
     Pas de{' '}
-    <FAQLink to="/faq/tva-intracommunautaire" tooltipLabel="n° TVA valide">
+    <FAQLink
+      to="/faq/tva-intracommunautaire"
+      tooltipLabel="n° TVA valide connu"
+    >
       Le numéro de TVA {'FR' + formatIntFr(number)} n’est pas validé par
       l’administration fiscale.
       <br />
       Plusieurs explications sont possibles :
       <ul>
-        <li>soit la structure n’est pas assujettie à la TVA</li>
+        <li>soit elle n’est pas assujettie à la TVA</li>
         <li>
           soit elle est assujettie, mais ce numéro a été invalidé par
           l’administration fiscale
         </li>
         {multipleNum && (
           <li>
-            soit elle est assujettie, mais nous ne connaissons pas son numéro
+            soit elle est assujettie et nous ne connaissons pas son numéro
           </li>
         )}
       </ul>

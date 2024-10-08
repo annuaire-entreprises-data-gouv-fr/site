@@ -40,8 +40,8 @@ const team = [
     role: 'UX designeure',
   },
   {
-    photoUrl: '/images/team/johan.jpg',
-    fullname: 'Johan Girod',
+    photoUrl: '/images/team/robin.jpg',
+    fullname: 'Robin Monnier',
     pronoun: 'un',
     role: 'lead développeur',
   },
@@ -54,7 +54,7 @@ const team = [
 ];
 
 export const metadata: Metadata = {
-  title: "Qui est l’équipe derrière l'Annuaire des Entreprises",
+  title: 'Qui est l’équipe derrière l’Annuaire des Entreprises',
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/equipe',
   },

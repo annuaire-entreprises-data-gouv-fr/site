@@ -148,25 +148,29 @@ const EtablissementSection: React.FC<IProps> = ({
           ['', <br />],
         ]
       : []),
-
     [
       'Justificatif(s) d’existence',
-      <>
-        Avis de situation Insee de cet établissement :{' '}
-        <AvisSituationLink
-          session={session}
-          etablissement={etablissement}
-          label="télécharger"
-        />
-        {!usedInEntreprisePage && uniteLegale.dateMiseAJourInpi && (
-          <>
-            <br />
-            Extrait RNE {uniteLegaleLabel} (
-            <a href="/faq/extrait-kbis">équivalent KBIS/D1</a>) :{' '}
-            <ExtraitRNELink uniteLegale={uniteLegale} session={session} />
-          </>
-        )}
-      </>,
+      etablissement.siret ? (
+        <>
+          Avis de situation Insee de cet établissement :{' '}
+          <AvisSituationLink
+            session={session}
+            etablissement={etablissement}
+            label="télécharger"
+            button={true}
+          />
+          {!usedInEntreprisePage && uniteLegale.dateMiseAJourInpi && (
+            <>
+              <br />
+              Extrait RNE {uniteLegaleLabel} (
+              <a href="/faq/extrait-kbis">équivalent KBIS/D1</a>) :{' '}
+              <ExtraitRNELink uniteLegale={uniteLegale} session={session} />
+            </>
+          )}
+        </>
+      ) : (
+        ''
+      ),
     ],
   ];
 

@@ -1,6 +1,6 @@
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { Error } from '../alerts';
+import { Warning } from '../alerts';
 
 const NoSiegeSocialAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
@@ -15,10 +15,10 @@ const NoSiegeSocialAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   }
 
   return (
-    <Error full>
-      Nous n’avons pas retrouvé d’information concernant le{' '}
+    <Warning full>
+      Nous ne disposons pas des informations concernant le{' '}
       <strong>siège social</strong> de cette structure.
-    </Error>
+    </Warning>
   );
 };
 export default NoSiegeSocialAlert;

@@ -1,0 +1,30 @@
+{
+  "args": [
+    "908595879"
+  ],
+  "result": {
+    "observations": [],
+    "immatriculation": {
+      "natureEntreprise": [
+        "Commerciale"
+      ],
+      "dateImmatriculation": "2021-12-27",
+      "dateDebutActivite": "2022-01-01",
+      "dateRadiation": "",
+      "dateFin": "27/12/2120",
+      "isPersonneMorale": true,
+      "dateCloture": "3112",
+      "duree": 99,
+      "capital": "1 000 EUR (fixe)"
+    },
+    "dirigeants": [
+      {
+        "nom": "Estournet",
+        "prenom": "PIERRE",
+        "role": "Président de SAS",
+        "dateNaissancePartial": "1985-12",
+        "dateNaissanceFull": ""
+      }
+    ]
+  }
+}

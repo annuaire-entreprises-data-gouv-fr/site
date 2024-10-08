@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "883010316",
     "searchFilterParams": ""
   },
@@ -149,7 +149,8 @@
         "dateFermeture": "2020-09-01",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-05-20T13:13:31",
+        "dateMiseAJourInpi": "2024-05-19T16:49:33",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": null,
         "anneeCategorieEntreprise": null,
@@ -181,6 +182,17 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": {
+          "dateDebutActivite": "2018-05-06",
+          "dateRadiation": "2020-09-01",
+          "dateImmatriculation": "2018-05-06",
+          "duree": 0,
+          "dateFin": "",
+          "natureEntreprise": [],
+          "dateCloture": "",
+          "isPersonneMorale": false,
+          "capital": ""
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 0,
@@ -189,8 +201,10 @@
             "sexe": null,
             "nom": "DUBIGNY",
             "prenom": "Raphael",
+            "prenoms": "Raphael",
             "role": null,
-            "dateNaissancePartial": "",
+            "nationalite": null,
+            "dateNaissancePartial": null,
             "lieuNaissance": ""
           }
         ]

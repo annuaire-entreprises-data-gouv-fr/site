@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import routes from '#clients/routes';
 import { isSiren } from '#utils/helpers';
 import 'dotenv/config';
 import fs from 'fs';
@@ -89,7 +90,7 @@ async function fetchAndSaveProtectedSiren() {
 async function fetchFromGrist(): Promise<string[]> {
   const gristData = await (
     await fetch(
-      `https://grist.incubateur.net/api/docs/${GRIST_DOC_ID}/tables/${GRIST_TABLE_ID}/records`,
+      `${routes.tooling.grist}${GRIST_DOC_ID}/tables/${GRIST_TABLE_ID}/records`,
       {
         headers: {
           Authorization: 'Bearer ' + process.env.GRIST_API_KEY,

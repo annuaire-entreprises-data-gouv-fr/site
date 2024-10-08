@@ -45,7 +45,7 @@ reassurance:
       - Etablissements scolaires associés pour les communes
   - title: Comment ça marche ?
     body: |
-      Les collectivités territoriales (communes, départements, régions) - quelle que soit leur taille - possèdent toutes un numéro SIRET et par conséquent une fiche sur l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).
+      Les collectivités territoriales (communes, départements, régions) - quelle que soit leur taille - possèdent toutes un numéro SIRET et par conséquent une fiche sur [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).
 datasources:
   - insee
   - mi

@@ -1,6 +1,3 @@
-import { getIronSession } from 'iron-session';
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
 import { Exception } from '#models/exceptions';
 import { ISession } from '#models/user/session';
 import {
@@ -10,6 +7,9 @@ import {
 } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { sessionOptions, setVisitTimestamp } from '#utils/session';
+import { getIronSession } from 'iron-session';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 const shouldRedirect = (path: string, search: string, url: string) => {
   try {
@@ -64,8 +64,6 @@ const shouldRedirect = (path: string, search: string, url: string) => {
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
-
   const redirection = shouldRedirect(
     request.nextUrl.pathname,
     request.nextUrl.search,
@@ -77,17 +75,9 @@ export async function middleware(request: NextRequest) {
   }
 
   /**
-   * pathname for /app router RSC
-   */
-
-  // https://github.com/vercel/next.js/issues/43704#issuecomment-1411186664
-  // Store current request url in a custom header, which you can read later
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-pathname', pathname);
-
-  /**
    * siren redirection logging
    */
+  const requestHeaders = new Headers(request.headers);
   const nextUrl = request.nextUrl;
   const paramIsPresent = nextUrl.search.indexOf('redirected=1') > -1;
 
@@ -95,7 +85,9 @@ export async function middleware(request: NextRequest) {
     // store redirection status in custom header as referrer seems missing from headers in RSC
     // isRedirected = params is present + previous page is coming from site
     const referer = requestHeaders.get('referer') || '';
-    const isFromSite = referer.indexOf('https://annuaire-entreprises') === 0;
+    const baseURL =
+      process.env.NEXT_PUBLIC_BASE_URL || 'https://annuaire-entreprises';
+    const isFromSite = referer.indexOf(baseURL) === 0;
 
     const isRedirected = paramIsPresent && isFromSite ? '1' : '0';
     requestHeaders.set('x-redirected', isRedirected);

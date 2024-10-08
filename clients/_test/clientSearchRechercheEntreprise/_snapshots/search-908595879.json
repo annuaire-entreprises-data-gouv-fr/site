@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "908595879",
     "searchFilterParams": ""
   },
@@ -155,12 +155,13 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-05-19T11:34:24",
+        "dateMiseAJourInpi": "2024-05-19T16:49:33",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": null,
-        "anneeCategorieEntreprise": null,
-        "categorieEntreprise": null,
-        "anneeTrancheEffectif": null,
+        "trancheEffectif": "01",
+        "anneeCategorieEntreprise": "2022",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -189,6 +190,19 @@
         "listeIdcc": [
           "9999"
         ],
+        "immatriculation": {
+          "dateDebutActivite": "2022-01-01",
+          "dateRadiation": "",
+          "dateImmatriculation": "2021-12-27",
+          "duree": 99,
+          "dateFin": "27/12/2120",
+          "natureEntreprise": [
+            "Commerciale"
+          ],
+          "dateCloture": "3112",
+          "isPersonneMorale": true,
+          "capital": "1 000,00 € (fixe)"
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
@@ -197,8 +211,10 @@
             "sexe": null,
             "nom": "ESTOURNET",
             "prenom": "Pierre",
+            "prenoms": "Pierre",
             "role": "Président de SAS",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1985-12",
             "lieuNaissance": ""
           }
         ]

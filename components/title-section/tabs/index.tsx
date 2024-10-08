@@ -25,7 +25,6 @@ export enum FICHE {
   DIVERS = 'conventions collectives',
   ELUS = 'élus',
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
-  JUSTIFICATIFS = 'justificatifs',
   ETABLISSEMENTS = 'listes des établissements',
 }
 
@@ -56,13 +55,6 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay: true,
       width: '130px',
-    },
-    {
-      ficheType: FICHE.JUSTIFICATIFS,
-      label: 'Justificatif d’immatriculation',
-      pathPrefix: '/justificatif/',
-      noFollow: false,
-      shouldDisplay: true,
     },
     {
       ficheType: FICHE.ELUS,
@@ -96,10 +88,13 @@ export const Tabs: React.FC<{
     },
     {
       ficheType: FICHE.ANNONCES,
-      label: 'Annonces',
+      label: `Annonces${
+        uniteLegale.dateMiseAJourInpi ? ' et observations' : ''
+      }`,
       pathPrefix: '/annonces/',
       noFollow: false,
       shouldDisplay: true,
+      width: '130px',
     },
     {
       ficheType: FICHE.CERTIFICATS,

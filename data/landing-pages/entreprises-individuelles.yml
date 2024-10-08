@@ -39,9 +39,9 @@ reassurance:
       - Code NAF / APE
       - Avis de situation
       - Extrait d’Immatriculation au RNE
-  - title: "Entrepreneurs : pourquoi utiliser l'Annuaire dans vos démarches ?"
+  - title: 'Entrepreneurs : pourquoi utiliser l’Annuaire dans vos démarches ?'
     body: |
-      L'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) centralise les informations qui sont le plus souvent demandées lors des démarches administratives des entrepreneurs et des indépendants.
+      [L'Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) centralise les informations qui sont le plus souvent demandées lors des démarches administratives des entrepreneurs et des indépendants.
 datasources:
   - insee
   - inpi
@@ -61,7 +61,7 @@ body: |
 
   ## Pourquoi je ne retrouve pas mon entreprise individuelle dans le moteur de recherche ?
 
-  Rendre les informations d’une entreprise individuelle non diffusibles a pour conséquence de **rendre l’entreprise introuvable sur le moteur de recherche de l'Annuaire des Entreprises**.
+  Rendre les informations d’une entreprise individuelle non diffusibles a pour conséquence de **rendre l’entreprise introuvable sur le moteur de recherche de l’Annuaire des Entreprises**.
 
 
   Plus d’informations [sur notre FAQ](https://annuaire-entreprises.data.gouv.fr/faq#independant).

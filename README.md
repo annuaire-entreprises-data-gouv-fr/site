@@ -12,7 +12,7 @@
 <a href="https://annuaire-entreprises.data.gouv.fr/historique-des-modifications"><img src="https://img.shields.io/badge/Page-changelog-blue.svg" alt="Changelog Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/a-propos/stats"><img src="https://img.shields.io/badge/Page-stats-blue.svg" alt="Statistiques Badge"></a>
 
-Dépôt du site [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr). Pour [l’API Recherche d’Entreprises](https://api.gouv.fr/les-api/api-recherche-entreprises), consultez le [dépôt de l’API](https://github.com/annuaire-entreprises-data-gouv-fr/search-api).
+Dépôt du site [L'Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr). Pour [l’API Recherche d’Entreprises](https://api.gouv.fr/les-api/api-recherche-entreprises), consultez le [dépôt de l’API](https://github.com/annuaire-entreprises-data-gouv-fr/search-api).
 
 Ce site met à disposition des citoyens et des agents les données ouvertes (open-data) des entreprises, associations et administrations dotées d'un n° SIREN/SIRET.
 
@@ -32,10 +32,10 @@ Pour protéger un siren et en limiter la diffusion [suivez la procédure](https:
 
 ## Dépôts liés 🏗
 
-Voici la liste des dépôts de code du projet [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
+Voici la liste des dépôts de code du projet [L'Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
 
-| Description                         | Accès                                                                       |
-| ----------------------------------- | --------------------------------------------------------------------------- |
+| Description                         | Accès                                                                             |
+| ----------------------------------- | --------------------------------------------------------------------------------- |
 | Le site Web                         | [par ici 👉](https://github.com/annuaire-entreprises-data-gouv-fr/site)           |
 | Les actions SEO                     | [par ici 👉](https://github.com/annuaire-entreprises-data-gouv-fr/seo)            |
 | L’API du Moteur de recherche        | [par ici 👉](https://github.com/annuaire-entreprises-data-gouv-fr/search-api)     |

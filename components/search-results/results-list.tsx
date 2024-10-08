@@ -1,12 +1,12 @@
-import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { estActif } from '#models/core/etat-administratif';
 import { isCollectiviteTerritoriale } from '#models/core/types';
-import { IDirigeant } from '#models/immatriculation';
+import { IDirigeants } from '#models/rne/types';
 import { ISearchResult } from '#models/search';
 import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
+import React from 'react';
 import styles from './style.module.css';
 
 type IProps = {
@@ -16,7 +16,7 @@ type IProps = {
 };
 
 const DirigeantsOrElusList: React.FC<{
-  dirigeantsOrElus: IDirigeant[];
+  dirigeantsOrElus: IDirigeants['data'];
 }> = ({ dirigeantsOrElus }) => {
   const displayMax = 5;
   const firstFive = dirigeantsOrElus.slice(0, displayMax);

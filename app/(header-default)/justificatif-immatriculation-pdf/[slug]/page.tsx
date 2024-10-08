@@ -30,9 +30,7 @@ const InpiPDF = (props: AppRouterProps) => {
   return (
     <>
       <br />
-      <a href={`/justificatif/${slug}`}>
-        ← Retour à la page justificatif d’immatriculation
-      </a>
+      <a href={`/entreprise/${slug}`}>← Retour à la fiche résumée</a>
       <div className="content-container">
         <h1>Téléchargement du justificatif d’immatriculation</h1>
 
@@ -49,11 +47,11 @@ const InpiPDF = (props: AppRouterProps) => {
             Un téléchargement normal prend{' '}
             <strong>entre 10 et 20 secondes</strong>. <br />
             Mais quand le service est surchargé, le téléchargement peut
-            atteindre plusieurs minutes <strong>voire même échouer</strong>.
+            atteindre plusieurs minutes <strong>voire échouer</strong>.
           </Info>
           <p>
             Le téléchargement de l’extrait d’immatriculation au Répertoire
-            National des Entreprises (RNE) a commencé pour le siren{' '}
+            National des Entreprises (RNE) a commencé pour le SIREN{' '}
             <a href={`/entreprise/${slug}`}>{formatIntFr(slug)}</a>.
           </p>
           <TwoColumnTable

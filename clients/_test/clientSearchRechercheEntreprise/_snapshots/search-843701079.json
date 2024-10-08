@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "843701079",
     "searchFilterParams": ""
   },
@@ -42,8 +42,8 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "1596",
-              "2609"
+              "2609",
+              "1596"
             ],
             "idOrganismeFormation": [],
             "idRge": [
@@ -102,8 +102,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "1596",
-                  "2609"
+                  "2609",
+                  "1596"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -154,8 +154,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "1596",
-                  "2609"
+                  "2609",
+                  "1596"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -188,12 +188,13 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-05-19T05:31:41",
+        "dateMiseAJourInpi": "2024-05-19T16:49:33",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": "02",
-        "anneeCategorieEntreprise": "2021",
+        "trancheEffectif": "03",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2021",
+        "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -220,9 +221,22 @@
           "codeColter": null
         },
         "listeIdcc": [
-          "1596",
-          "2609"
+          "2609",
+          "1596"
         ],
+        "immatriculation": {
+          "dateDebutActivite": "2018-11-12",
+          "dateRadiation": "",
+          "dateImmatriculation": "2018-11-12",
+          "duree": 99,
+          "dateFin": "12/11/2117",
+          "natureEntreprise": [
+            "Commerciale"
+          ],
+          "dateCloture": "3112",
+          "isPersonneMorale": true,
+          "capital": "5 000,00 € (fixe)"
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
@@ -231,8 +245,10 @@
             "sexe": null,
             "nom": "BERTRAND",
             "prenom": "Lionel",
+            "prenoms": "Lionel, Andre",
             "role": null,
-            "dateNaissancePartial": "",
+            "nationalite": null,
+            "dateNaissancePartial": "1981-04",
             "lieuNaissance": ""
           }
         ]

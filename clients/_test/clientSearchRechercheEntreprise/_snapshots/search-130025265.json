@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "130025265",
     "searchFilterParams": ""
   },
@@ -150,11 +150,12 @@
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
         "dateMiseAJourInpi": "",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": "22",
-        "anneeCategorieEntreprise": "2021",
-        "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2021",
+        "trancheEffectif": "32",
+        "anneeCategorieEntreprise": "2022",
+        "categorieEntreprise": "ETI",
+        "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -181,6 +182,7 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,

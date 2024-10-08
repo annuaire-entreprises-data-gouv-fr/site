@@ -21,7 +21,7 @@ export function isAPINotResponding<
 >(
   toBeDetermined: T | IAPINotRespondingError
 ): toBeDetermined is IAPINotRespondingError {
-  if ((toBeDetermined as IAPINotRespondingError).errorType) {
+  if ((toBeDetermined as IAPINotRespondingError)?.errorType) {
     return true;
   }
   return false;
@@ -31,8 +31,8 @@ export function isAPI404<T extends Exclude<unknown, IDataFetchingState>>(
   toBeDetermined: T | IAPINotRespondingError
 ): toBeDetermined is IAPINotRespondingError {
   if (
-    (toBeDetermined as IAPINotRespondingError).errorType &&
-    (toBeDetermined as IAPINotRespondingError).errorType === 404
+    (toBeDetermined as IAPINotRespondingError)?.errorType &&
+    (toBeDetermined as IAPINotRespondingError)?.errorType === 404
   ) {
     return true;
   }

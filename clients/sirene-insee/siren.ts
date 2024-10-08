@@ -11,7 +11,7 @@ import {
 } from '#models/core/types';
 import {
   agregateTripleFields,
-  formatFirstNames,
+  capitalize,
   formatNameFull,
   isEntrepreneurIndividuelFromNatureJuridique,
   Siren,
@@ -27,6 +27,7 @@ import {
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
 } from '../../utils/helpers/insee-variables';
+import { formatDenominationUsuelle } from './helpers';
 import {
   clientAllEtablissementsInsee,
   clientEtablissementInsee,
@@ -207,17 +208,18 @@ const mapToDomainObject = (
   const denominationUsuelleUniteLegale =
     siege.denomination ||
     agregateTripleFields(
-      denominationUsuelle1UniteLegale,
-      denominationUsuelle2UniteLegale,
-      denominationUsuelle3UniteLegale
+      formatDenominationUsuelle(denominationUsuelle1UniteLegale),
+      formatDenominationUsuelle(denominationUsuelle2UniteLegale),
+      formatDenominationUsuelle(denominationUsuelle3UniteLegale)
     ) ||
     '';
 
   // EI names and firstName
   // remove trailing whitespace in case name or firstname is missing
-  const names = `${
-    formatFirstNames(prenomUsuelUniteLegale, '').prenom
-  } ${formatNameFull(nomUniteLegale, nomUsageUniteLegale)}`.trim();
+  const names = `${capitalize(prenomUsuelUniteLegale)} ${formatNameFull(
+    nomUniteLegale,
+    nomUsageUniteLegale
+  )}`.trim();
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
 

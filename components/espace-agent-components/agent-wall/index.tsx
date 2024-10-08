@@ -1,4 +1,4 @@
-import ButtonAgentConnect from '#components-ui/button-agent-connect';
+import ButtonProConnect from '#components-ui/button-pro-connect';
 import FloatingModal from '#components-ui/floating-modal';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
@@ -32,18 +32,16 @@ const AgentWall: React.FC<{
         >
           <h3>Vous êtes agent public ?</h3>
           <p>
-            Accédez immédiatement à ces données en continuant avec le bouton{' '}
+            Accédez immédiatement à ces données avec{' '}
             <a
-              href="https://agentconnect.gouv.fr/"
+              href="https://www.proconnect.gouv.fr/"
               target="_blank"
               rel="noopener noreferrer"
-              title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+              title="Qu’est-ce que ProConnect ? - nouvelle fenêtre"
             >
-              AgentConnect
+              ProConnect
             </a>
-            .
-          </p>
-          <p>
+            .{' '}
             {conditionExplanation ? (
               conditionExplanation
             ) : (
@@ -57,7 +55,7 @@ const AgentWall: React.FC<{
               </>
             )}
           </p>
-          <ButtonAgentConnect useCurrentPathForRediction event="AGENT_WALL" />
+          <ButtonProConnect event="AGENT_WALL" />
         </FloatingModal>
         <div className={style['blur']} tab-index="-1" aria-hidden>
           <p>

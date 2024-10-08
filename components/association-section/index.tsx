@@ -155,6 +155,7 @@ const AssociationSection = ({
       <AsyncDataSectionClient
         title="Répertoire National des Associations"
         sources={[EAdministration.MI]}
+        id="association-section"
         data={association}
         notFoundInfo={<AssociationNotFound uniteLegale={uniteLegale} />}
       >

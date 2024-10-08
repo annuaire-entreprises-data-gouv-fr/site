@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { HeaderServer } from '#components/header/header-server';
+import { HeaderAppRouter } from '#components/header/header-app-router';
 import { meta } from '#components/meta/meta-server';
 import getSession from '#utils/server-side-helper/app/get-session';
 import QuestionOrFeedback from 'app/_component/question-or-feedback';
@@ -14,7 +14,11 @@ export default async function HomeLayout({
   const session = await getSession();
   return (
     <>
-      <HeaderServer useSearchBar={false} useAgentCTA={false} />
+      <HeaderAppRouter
+        useSearchBar={false}
+        useAgentCTA={false}
+        useAgentBanner={false}
+      />
       <main className="fr-container">{children}</main>
       <QuestionOrFeedback session={session} />
     </>

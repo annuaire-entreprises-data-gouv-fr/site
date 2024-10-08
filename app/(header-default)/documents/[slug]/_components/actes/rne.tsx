@@ -8,7 +8,7 @@ import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale, isServicePublic } from '#models/core/types';
-import { IActesRNE } from '#models/immatriculation';
+import { IActesRNE } from '#models/rne/types';
 import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';

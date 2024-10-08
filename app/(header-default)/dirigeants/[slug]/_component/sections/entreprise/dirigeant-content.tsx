@@ -1,16 +1,12 @@
 import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
 import { FullTable } from '#components/table/full';
 import { IUniteLegale } from '#models/core/types';
-import {
-  IDirigeant,
-  IEtatCivil,
-  IPersonneMorale,
-} from '#models/immatriculation';
+import { IDirigeants, IEtatCivil, IPersonneMorale } from '#models/rne/types';
 import { formatDateLong, formatDatePartial, formatIntFr } from '#utils/helpers';
 import { isPersonneMorale } from '../is-personne-morale';
 
 type IDirigeantContentProps = {
-  dirigeants: IDirigeant[];
+  dirigeants: IDirigeants;
   uniteLegale: IUniteLegale;
 };
 
@@ -43,7 +39,7 @@ export function DirigeantContent({
         const defaultDenom = dirigeant.denomination || dirigeant.siren;
         //@ts-ignore
         infos.push([
-          <a href={`/dirigeants/${dirigeant.siren}`}>
+          <a key={dirigeant.siren} href={`/dirigeants/${dirigeant.siren}`}>
             → voir les dirigeants de {defaultDenom}
           </a>,
         ]);
@@ -63,6 +59,8 @@ export function DirigeantContent({
                 dirigeant.dateNaissance
                   ? 'le ' + formatDateLong(dirigeant.dateNaissance)
                   : 'en ' + formatDatePartial(dirigeant.dateNaissancePartial)
+              }${
+                dirigeant.lieuNaissance ? `, à ${dirigeant.lieuNaissance}` : ''
               }`
             : ''}
         </>,
@@ -82,7 +80,7 @@ export function DirigeantContent({
     <>
       <FullTable
         head={['Role', 'Details', 'Action']}
-        body={dirigeants.map((dirigeant) => formatDirigeant(dirigeant))}
+        body={dirigeants.data.map((dirigeant) => formatDirigeant(dirigeant))}
       />
     </>
   );

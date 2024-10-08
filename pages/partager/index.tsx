@@ -13,8 +13,7 @@ const Partager: NextPageWithLayout = () => {
       <TextWrapper>
         <h1>Réutiliser & partager</h1>
         <p>
-          L’
-          <a href="/comment-ca-marche">Annuaire des Entreprises</a> permet de
+          <a href="/comment-ca-marche">L’Annuaire des Entreprises</a> permet de
           facilement retrouver l’ensemble des informations publiques disponibles
           sur une entreprise, une association ou une administration.
           <br />
@@ -169,7 +168,7 @@ const Partager: NextPageWithLayout = () => {
             <code>
               {`
 <a href="https://annuaire-entreprises.data.gouv.fr/">
-  Retrouvez votre numéro sur siren sur l'Annuaire des
+  Retrouvez votre numéro sur siren sur l’Annuaire des
   Entreprises
 </a>
             `}

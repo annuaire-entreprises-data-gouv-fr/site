@@ -6,7 +6,7 @@ import simplifyParams from './simplify-params';
 
 const defaultParams = {
   searchTerms: '',
-  page: 1,
+  pageResultatsRecherche: 1,
   searchFilterParams: new SearchFilterParams({}),
 };
 
@@ -53,6 +53,7 @@ describe('clientSearchRechercheEntreprise : use of search filters', () => {
 
 function postProcessResult(result: ISearchResults) {
   result.results.forEach((searchResult) => {
-    searchResult.dateDerniereMiseAJour = '2023-09-21T03:34:50';
+    searchResult.dateDerniereMiseAJour = '2024-09-21T03:34:50';
+    searchResult.dateMiseAJourInpi = '2024-09-21T03:34:50';
   });
 }

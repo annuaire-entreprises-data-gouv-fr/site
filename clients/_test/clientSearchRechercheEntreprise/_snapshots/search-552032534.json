@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "552032534",
     "searchFilterParams": ""
   },
@@ -161,12 +161,13 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-06-22T05:26:24",
-        "dateMiseAJourInpi": "2024-06-25T10:22:46",
+        "dateMiseAJourInpi": "2024-05-19T16:49:33",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "42",
-        "anneeCategorieEntreprise": "2021",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "GE",
-        "anneeTrancheEffectif": "2021",
+        "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -195,6 +196,19 @@
         "listeIdcc": [
           "9999"
         ],
+        "immatriculation": {
+          "dateDebutActivite": "",
+          "dateRadiation": "",
+          "dateImmatriculation": "1955-03-01",
+          "duree": 99,
+          "dateFin": "01/03/2054",
+          "natureEntreprise": [
+            "Commerciale"
+          ],
+          "dateCloture": "3112",
+          "isPersonneMorale": true,
+          "capital": "169 888 497,75 € (fixe)"
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 17,
         "nombreEtablissementsOuverts": 2,
@@ -203,88 +217,110 @@
             "sexe": null,
             "nom": "BERNARD DE SAINT AFFRIQUE",
             "prenom": "Antoine",
+            "prenoms": "Antoine",
             "role": "Directeur Général",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1964-12",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "BOUTEBBA",
             "prenom": "Frederic",
+            "prenoms": "Frederic",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1967-08",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "CHAPOULAUD-FLOQUET",
             "prenom": "Valerie",
+            "prenoms": "Valerie",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1962-11",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "GHOSTINE",
             "prenom": "Gilbert",
+            "prenoms": "Gilbert",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "nationalite": "Canadienne",
+            "dateNaissancePartial": "1960-02",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "KINGO",
             "prenom": "Lise",
+            "prenoms": "Lise",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "nationalite": "Danoise",
+            "dateNaissancePartial": "1961-08",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "LOUVET",
             "prenom": "Patrice",
+            "prenoms": "Patrice",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "nationalite": "Américaine",
+            "dateNaissancePartial": "1964-09",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "MEHTA",
             "prenom": "Sanjiv",
+            "prenoms": "Sanjiv",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "nationalite": "Indienne",
+            "dateNaissancePartial": "1960-07",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "THEISSIG (MOLITOR)",
             "prenom": "Bettina",
+            "prenoms": "Bettina",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "nationalite": null,
+            "dateNaissancePartial": "1962-07",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "PICAUD (ROAUX)",
             "prenom": "Geraldine",
+            "prenoms": "Geraldine",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1970-02",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "ROBERTS",
             "prenom": "Susan-barbara",
+            "prenoms": "Susan-barbara",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "nationalite": "Britannique",
+            "dateNaissancePartial": "1957-05",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "SCHNEPP",
             "prenom": "Gilles",
+            "prenoms": "Gilles",
             "role": "Administrateur",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1958-10",
             "lieuNaissance": ""
           },
           {

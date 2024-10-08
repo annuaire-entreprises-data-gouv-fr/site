@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "ganymede",
     "searchFilterParams": "&ca_min=100&resultat_net_max=100000"
   },
@@ -153,14 +153,15 @@
         "libelleActivitePrincipale": "Fonds de placement et entités financières similaires",
         "dateCreation": "1997-12-08",
         "dateFermeture": "",
-        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-05-18T13:07:27",
+        "dateMiseAJourInpi": "2024-09-21T03:34:50",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "01",
-        "anneeCategorieEntreprise": "2021",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2021",
+        "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -189,6 +190,7 @@
         "listeIdcc": [
           "0478"
         ],
+        "immatriculation": null,
         "matchingEtablissements": [
           {
             "siren": "414971929",
@@ -311,16 +313,20 @@
             "sexe": null,
             "nom": "DANAN",
             "prenom": "Charles",
+            "prenoms": "Charles",
             "role": "Directeur Général",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1944-05",
             "lieuNaissance": ""
           },
           {
             "sexe": null,
             "nom": "ROUSSET",
             "prenom": "Olivier",
+            "prenoms": "Olivier",
             "role": "Commissaire aux comptes suppléant",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1971-11",
             "lieuNaissance": ""
           },
           {
@@ -473,12 +479,13 @@
         "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques",
         "dateCreation": "2004-09-01",
         "dateFermeture": "",
-        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-05-18T16:24:56",
+        "dateMiseAJourInpi": "2024-09-21T03:34:50",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": null,
-        "anneeCategorieEntreprise": "2021",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
         "complements": {
@@ -507,6 +514,7 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
@@ -515,8 +523,10 @@
             "sexe": null,
             "nom": "HATEM",
             "prenom": "Franck",
+            "prenoms": "Franck",
             "role": "Gérant",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1952-06",
             "lieuNaissance": ""
           }
         ]
@@ -659,12 +669,13 @@
         "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers",
         "dateCreation": "2006-09-01",
         "dateFermeture": "",
-        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-05-18T17:27:53",
+        "dateMiseAJourInpi": "2024-09-21T03:34:50",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": null,
-        "anneeCategorieEntreprise": "2021",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
         "complements": {
@@ -693,6 +704,7 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": null,
         "matchingEtablissements": [
           {
             "siren": "491470597",
@@ -739,8 +751,10 @@
             "sexe": null,
             "nom": "CORBINEAU",
             "prenom": "Dominique",
+            "prenoms": "Dominique",
             "role": "Gérant",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1964-10",
             "lieuNaissance": ""
           }
         ]
@@ -777,7 +791,10 @@
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
-            "idcc": [],
+            "idcc": [
+              "1596",
+              "2609"
+            ],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
@@ -824,7 +841,10 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [],
+                "idcc": [
+                  "1596",
+                  "2609"
+                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
@@ -863,7 +883,10 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [],
+                "idcc": [
+                  "1596",
+                  "2609"
+                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
@@ -883,14 +906,15 @@
         "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs",
         "dateCreation": "2014-01-13",
         "dateFermeture": "",
-        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-06-27T12:21:00",
-        "dateMiseAJourInpi": "2024-06-27T12:21:04",
+        "dateMiseAJourInpi": "2024-09-21T03:34:50",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": null,
-        "anneeCategorieEntreprise": "2021",
+        "trancheEffectif": "NN",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": null,
+        "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -920,6 +944,7 @@
           "1596",
           "2609"
         ],
+        "immatriculation": null,
         "matchingEtablissements": [
           {
             "siren": "800069130",
@@ -950,7 +975,10 @@
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
-              "idcc": [],
+              "idcc": [
+                "1596",
+                "2609"
+              ],
               "idOrganismeFormation": [],
               "idRge": [],
               "idUai": []
@@ -966,8 +994,10 @@
             "sexe": null,
             "nom": "TURK (TURK)",
             "prenom": "Suat",
+            "prenoms": "Suat",
             "role": "Gérant",
-            "dateNaissancePartial": "",
+            "nationalite": "Turque",
+            "dateNaissancePartial": "1980-08",
             "lieuNaissance": ""
           }
         ]
@@ -1116,14 +1146,15 @@
         "libelleActivitePrincipale": "Agences immobilières",
         "dateCreation": "2019-07-09",
         "dateFermeture": "",
-        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-05-19T06:42:48",
+        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
+        "dateMiseAJourInsee": "2024-09-03T13:11:44",
+        "dateMiseAJourInpi": "2024-09-21T03:34:50",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "02",
-        "anneeCategorieEntreprise": "2021",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2021",
+        "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -1152,6 +1183,7 @@
         "listeIdcc": [
           "1527"
         ],
+        "immatriculation": null,
         "matchingEtablissements": [
           {
             "siren": "852504034",
@@ -1200,8 +1232,10 @@
             "sexe": null,
             "nom": "DURET",
             "prenom": "Eric",
+            "prenoms": "Eric",
             "role": "Président de SAS",
-            "dateNaissancePartial": "",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1947-09",
             "lieuNaissance": ""
           }
         ]

@@ -6,7 +6,7 @@ import HidePersonalDataPageClient from './_components';
 export const metadata: Metadata = {
   title: 'Demande de suppression de données personnelles',
   description:
-    "Demande de suppression de données personnelles de dirigeant d'entreprise sur l'Annuaire des Entreprises",
+    'Demande de suppression de données personnelles de dirigeant d’entreprise sur l’Annuaire des Entreprises',
   robots: 'index, follow',
 };
 

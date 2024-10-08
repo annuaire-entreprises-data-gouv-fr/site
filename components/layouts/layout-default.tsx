@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
-import { Header } from '#components/header';
+import { HeaderPageRouter } from '#components/header/header-page-router';
 import { WeNeedYouModal } from '#components/modal/we-need-you';
 import { Question } from '#components/question';
 import SocialNetworks from '#components/social-network';
@@ -19,7 +19,11 @@ export const LayoutDefault = ({
       <WeNeedYouModal />
       <NPSBanner />
 
-      <Header useSearchBar={searchBar} useMap={false} useAgentCTA={true} />
+      <HeaderPageRouter
+        useSearchBar={searchBar}
+        useMap={false}
+        useAgentCTA={true}
+      />
       <main className="fr-container">{children}</main>
       <SocialNetworks />
       <Question />

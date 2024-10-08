@@ -1,10 +1,10 @@
 /** COMMON TYPES */
 import {
-  createEtablissementsList,
   IEtablissementsList,
+  createEtablissementsList,
 } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
-import { IEtatCivil } from '#models/immatriculation';
+import { IEtatCivil } from '#models/rne/types';
 import { IdRna, Siren, Siret } from '#utils/helpers';
 import { EAdministration } from '../administrations/EAdministration';
 import {
@@ -96,8 +96,12 @@ export interface IUniteLegale extends IEtablissementsList {
   libelleActivitePrincipale: string;
   dateCreation: string;
   dateDerniereMiseAJour: string;
+  // should never be empty
   dateMiseAJourInsee: string;
+  // should not be empty for companies
   dateMiseAJourInpi: string;
+  // should only be filled when fallbacking on IG
+  dateMiseAJourIG: string;
   dateDebutActivite: string;
   dateFermeture: string;
   statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
@@ -109,6 +113,7 @@ export interface IUniteLegale extends IEtablissementsList {
   categorieEntreprise: string | null;
   anneeCategorieEntreprise: string | null;
   complements: IUniteLegaleComplements;
+  immatriculation: IUniteLegaleImmatriculation | null;
   association: {
     idAssociation: IdRna | string | null;
   };
@@ -141,6 +146,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     dateDerniereMiseAJour: '',
     dateMiseAJourInsee: '',
     dateMiseAJourInpi: '',
+    dateMiseAJourIG: '',
     dateDebutActivite: '',
     trancheEffectif: '',
     anneeCategorieEntreprise: null,
@@ -154,8 +160,21 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
       codeColter: null,
     },
     listeIdcc: [],
+    immatriculation: null,
   };
 };
+
+export interface IUniteLegaleImmatriculation {
+  dateDebutActivite: string;
+  dateImmatriculation: string;
+  dateRadiation: string;
+  dateFin: string;
+  duree: number | string;
+  natureEntreprise: string[];
+  dateCloture: string;
+  isPersonneMorale: boolean;
+  capital: string;
+}
 
 export interface IUniteLegaleComplements {
   estBio: boolean;

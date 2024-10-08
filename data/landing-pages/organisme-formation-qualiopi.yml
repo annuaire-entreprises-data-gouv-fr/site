@@ -8,7 +8,7 @@ filter:
   value: qualiopi
 seo:
   title: Moteur de recherche des organismes de formation certifiés Qualiopi
-  description: Retrouvez rapidement les organismes de formation certifiés Qualiopi, grâce au moteur de recherche de l'Annuaire des Entreprises.
+  description: Retrouvez rapidement les organismes de formation certifiés Qualiopi, grâce au moteur de recherche de l’Annuaire des Entreprises.
 reassurance:
   - title: Que signifie la certification Qualiopi ?
     body: |
@@ -24,7 +24,7 @@ reassurance:
       - Adresse
       - SIREN / SIRET
   - title: Comment ça marche ?
-    body: Tous les organismes certifiés Qualiopi - quelle que soit leur forme juridique - possèdent un numéro SIRET et par conséquent une fiche sur [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
+    body: Tous les organismes certifiés Qualiopi - quelle que soit leur forme juridique - possèdent un numéro SIRET et par conséquent une fiche sur [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
 datasources:
   - insee
   - mtpei

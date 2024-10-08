@@ -71,12 +71,12 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
           Un <strong>agent connecté</strong> est un agent public qui s’est
           identifié avec{' '}
           <a
-            href="https://agentconnect.gouv.fr/"
+            href="https://www.proconnect.gouv.fr/"
             target="_blank"
             rel="noopener noreferrer"
-            title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+            title="Qu’est-ce que ProConnect ? - nouvelle fenêtre"
           >
-            AgentConnect
+            ProConnect
           </a>{' '}
           pour{' '}
           <a href="https://annuaire-entreprises.data.gouv.fr/lp/agent-public">

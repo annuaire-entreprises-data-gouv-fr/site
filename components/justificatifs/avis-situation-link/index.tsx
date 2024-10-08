@@ -1,6 +1,8 @@
 import React from 'react';
 import routes from '#clients/routes';
+import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
+import { Icon } from '#components-ui/icon/wrapper';
 import {
   estDiffusible,
   estNonDiffusibleProtected,
@@ -14,8 +16,17 @@ const AvisSituationLink: React.FC<{
   etablissement: IEtablissement;
   session: ISession | null;
   label?: string;
-}> = ({ etablissement, label, session }) => {
-  const link = (
+  button?: boolean;
+}> = ({ etablissement, label, button = false, session }) => {
+  const link = button ? (
+    <ButtonLink
+      small
+      alt
+      to={`${routes.sireneInsee.avis}${etablissement.siret}`}
+    >
+      <Icon slug="download">{label || 'Avis de situation'}</Icon>
+    </ButtonLink>
+  ) : (
     <a
       target="_blank"
       rel="noopener noreferrer"

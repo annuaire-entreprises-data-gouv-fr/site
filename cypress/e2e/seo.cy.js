@@ -37,12 +37,6 @@ describe('SEO Index or noindex', () => {
     cy.get('meta[name="robots"][content*="follow"]').should('have.length', 1);
   });
 
-  it('cannot index justificatif page', () => {
-    cy.visit(`/justificatif/356000000`);
-    cy.get('meta[name="robots"][content*="noindex"]').should('have.length', 1);
-    cy.get('meta[name="robots"][content*="follow"]').should('have.length', 1);
-  });
-
   it('cannot index closed entreprise page', () => {
     cy.visit(`/entreprise/839517323`);
     cy.get('meta[name="robots"][content*="noindex"]').should('have.length', 1);

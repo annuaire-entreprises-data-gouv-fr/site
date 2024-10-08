@@ -135,6 +135,7 @@ const routes = {
     },
   },
   proxy: {
+    ig: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/ig/',
     rne: {
       immatriculation: {
         default: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
@@ -176,8 +177,6 @@ const routes = {
   },
   rechercheEntreprise: {
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
-    rechercheUniteLegaleStaging:
-      'https://recherche-entreprises.api.gouv.fr/search',
     idcc: {
       metadata: 'https://recherche-entreprises.api.gouv.fr/idcc/metadata',
       siren: 'https://recherche-entreprises.api.gouv.fr/idcc',
@@ -185,7 +184,7 @@ const routes = {
   },
   tooling: {
     crisp: 'https://api.crisp.chat/v1/website/',
-    grist: 'https://grist.incubateur.net/api/docs/',
+    grist: 'https://grist.numerique.gouv.fr/api/docs/',
     matomo: {
       report: {
         copyPasteEvents:

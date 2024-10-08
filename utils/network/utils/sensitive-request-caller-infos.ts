@@ -6,13 +6,11 @@ export async function sensitiveRequestCallerInfos(): Promise<ISensitiveCaller> {
   const session = await getSession();
 
   if (session?.user) {
-    const { email, siret = null, scopes = [] } = session.user;
+    const { email, domain, siret = null, scopes = [] } = session.user;
 
     if (!email) {
       throw new HttpUnauthorizedError('Sensitive requests require an email');
     }
-
-    const domain = (email.match(/@(.*)/) || ['']).shift() || '';
 
     return {
       email,
