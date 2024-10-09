@@ -1,6 +1,3 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { cache } from 'react';
 import Breadcrumb from '#components-ui/breadcrumb';
 import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
@@ -8,6 +5,9 @@ import { RenderMarkdownServerOnly } from '#components/markdown';
 import { allDefinitions, getDefinition } from '#models/article/definitions';
 import { Exception } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { cache } from 'react';
 
 type IParams = {
   slug: string;
@@ -38,7 +38,7 @@ export const generateMetadata = function ({
   return {
     title: definition.seo.title || definition.title,
     description: definition.seo.description,
-    robots: 'noindex, nofollow',
+    robots: 'index, follow',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`,
     },
