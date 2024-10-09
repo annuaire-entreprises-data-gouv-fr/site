@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo, useState } from 'react';
 import FAQLink from '#components-ui/faq-link';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
@@ -15,6 +14,7 @@ import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
 import { extractAssociationEtablissements } from '#utils/helpers/association';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { useMemo, useState } from 'react';
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -106,7 +106,7 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
                       courriel,
                     }) => [
                       <>
-                        <a href={`/etablissement/${etablissement.siret}`}>
+                        <a href={`/etablissements/${etablissement.siret}`}>
                           {formatSiret(etablissement.siret)}
                         </a>
                         {etablissement.siege && <Tag color="info">siège</Tag>}

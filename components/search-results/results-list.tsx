@@ -119,7 +119,7 @@ const ResultItem: React.FC<{
             <li key={etablissement.siret}>
               <a
                 className={styles['adress']}
-                href={`/etablissement/${etablissement.siret}`}
+                href={`/etablissements/${etablissement.siret}`}
               >
                 <AddressWithColouredZip
                   adress={etablissement.adressePostale}

@@ -3,7 +3,6 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
-import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
 import { NonDiffusibleSection } from '#components/non-diffusible-section';
@@ -105,7 +104,6 @@ export default async function UniteLegalePage(props: AppRouterProps) {
                 session={session}
               />
             )}
-            <EtablissementListeSection uniteLegale={uniteLegale} />
           </>
         )}
       </div>
