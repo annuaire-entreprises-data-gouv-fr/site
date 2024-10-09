@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import MatomoEventFromRedirected from '#components/matomo-event/search-redirected';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
@@ -14,6 +13,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { Metadata } from 'next';
 import { EtablissementsSection } from './_components/etablissements-section';
 
 // export const generateMetadata = async function (
@@ -57,6 +57,7 @@ export const generateMetadata = async (
 
 export default async function UniteLegalePage(props: AppRouterProps) {
   const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
+
   const session = await getSession();
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
   const {
@@ -72,6 +73,8 @@ export default async function UniteLegalePage(props: AppRouterProps) {
 
   const plural = nombreEtablissements > 1 ? 's' : '';
   const pluralBe = nombreEtablissementsOuverts > 1 ? 'sont' : 'est';
+
+  const etablissements = uniteLegale.etablissements.all;
 
   return (
     <>
@@ -99,8 +102,8 @@ export default async function UniteLegalePage(props: AppRouterProps) {
           . Cliquez sur un n° SIRET pour obtenir plus d’information :
         </p>
         <EtablissementsSection
+          etablissements={etablissements}
           uniteLegale={uniteLegale}
-          initialSelectedSiret={uniteLegale.siege.siret}
         />
       </div>
       <StructuredDataBreadcrumb uniteLegale={uniteLegale} />

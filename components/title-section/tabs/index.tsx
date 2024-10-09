@@ -54,7 +54,7 @@ export const Tabs: React.FC<{
       fullPath: `/etablissements/${uniteLegale.siren}`,
       noFollow: false,
       shouldDisplay: true,
-      width: '130px',
+      width: '120px',
     },
     {
       ficheType: FICHE.ELUS,
@@ -94,7 +94,7 @@ export const Tabs: React.FC<{
       pathPrefix: '/annonces/',
       noFollow: false,
       shouldDisplay: true,
-      width: '130px',
+      width: '120px',
     },
     {
       ficheType: FICHE.CERTIFICATS,
@@ -106,7 +106,7 @@ export const Tabs: React.FC<{
       shouldDisplay:
         checkHasLabelsAndCertificates(uniteLegale) ||
         hasRights(session, AppScope.protectedCertificats),
-      width: checkHasQuality(uniteLegale) ? '200px' : '110px',
+      width: checkHasQuality(uniteLegale) ? '200px' : '100px',
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
@@ -121,7 +121,7 @@ export const Tabs: React.FC<{
       pathPrefix: '/divers/',
       noFollow: false,
       shouldDisplay: (uniteLegale.listeIdcc || []).length > 0,
-      width: '130px',
+      width: '110px',
     },
   ];
   return (

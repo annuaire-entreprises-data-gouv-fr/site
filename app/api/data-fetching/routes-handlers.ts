@@ -1,4 +1,5 @@
 import { getAssociationFromSlug } from '#models/association';
+import { getEtablissementsFromSlug } from '#models/core/etablissement';
 import { getEORIValidation } from '#models/eori-validation';
 import { getAssociationProtected } from '#models/espace-agent/association-protected';
 import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte-professionnelle-travaux-publics';
@@ -31,6 +32,7 @@ export const APIRoutesHandlers = {
   association: getAssociationFromSlug,
   'verify-tva': buildAndVerifyTVA,
   'eori-validation': getEORIValidation,
+  etablissements: getEtablissementsFromSlug,
 } as const;
 
 export type APIPath = keyof typeof APIRoutesHandlers;

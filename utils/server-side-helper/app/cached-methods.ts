@@ -1,10 +1,9 @@
-import { redirect } from 'next/navigation';
-import { cache } from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import { Exception } from '#models/exceptions';
 import { extractSirenOrSiretSlugFromUrl } from '#utils/helpers';
 import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
-import { getEtablissementWithUniteLegaleFromSlug } from '../../../models/core/etablissement';
+import { redirect } from 'next/navigation';
+import { cache } from 'react';
 import {
   FetchRechercheEntrepriseException,
   NotASirenError,
@@ -72,11 +71,23 @@ export const cachedGetUniteLegale = cache(
   }
 );
 
-export const cachedEtablissementWithUniteLegale = cache(
+export const cachedEtablissement = cache(
   async (slug: string, isBot: boolean) => {
     const siretSlug = extractSirenOrSiretSlugFromUrl(slug);
     try {
-      return await getEtablissementWithUniteLegaleFromSlug(siretSlug, isBot);
+      return await getEtablissement(siretSlug, isBot);
+    } catch (e) {
+      handleException(e, siretSlug);
+      throw e;
+    }
+  }
+);
+
+export const cachedAllEtablissements = cache(
+  async (slug: string, isBot: boolean) => {
+    const siretSlug = extractSirenOrSiretSlugFromUrl(slug);
+    try {
+      return await getAllEtablissements(siretSlug, isBot);
     } catch (e) {
       handleException(e, siretSlug);
       throw e;
