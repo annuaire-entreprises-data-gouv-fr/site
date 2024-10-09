@@ -12,7 +12,6 @@ const cachedGetAdministrations = cache((slug: string) => {
   const slugs = slug.split('_');
 
   const administrations = Object.values(administrationsMetaData).filter(
-    //@ts-ignore
     (admin) => slugs.indexOf(admin.slug) > -1
   );
 
