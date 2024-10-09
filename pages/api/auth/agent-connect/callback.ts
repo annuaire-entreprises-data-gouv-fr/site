@@ -28,9 +28,9 @@ export default withSession(async function callbackRoute(req, res) {
 
       if (isNotServicePublic) {
         if (couldBeServicePublic) {
-          return res.redirect('/connexion/habilitation-requise');
+          return res.redirect('/connexion/habilitation/requise');
         } else {
-          return res.redirect('/connexion/echec-autorisation-requise');
+          return res.redirect('/connexion/habilitation/refuse');
         }
       }
     }
@@ -48,7 +48,7 @@ export default withSession(async function callbackRoute(req, res) {
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
     if (e instanceof HttpForbiddenError) {
-      res.redirect('/connexion/echec-authorisation-requise');
+      res.redirect('/connexion/habilitation/refuse');
     } else {
       res.redirect('/connexion/echec-connexion');
     }

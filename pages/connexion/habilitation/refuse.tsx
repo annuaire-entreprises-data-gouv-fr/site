@@ -1,22 +1,27 @@
 import connexionRefusedPicture from '#components-ui/illustrations/connexion-refused';
 import { LayoutConnexion } from '#components/layouts/layout-connexion';
 import Meta from '#components/meta/meta-client';
-import constants from '#models/constants';
 import { NextPageWithLayout } from 'pages/_app';
 import { ReactElement } from 'react';
 
 const ConnexionFailure: NextPageWithLayout = () => (
   <>
-    <Meta
-      title="Vous n’êtes pas autorisé(e) à accéder à cette partie du site"
-      noIndex={true}
-    />
-    <h1>Vous n’êtes pas autorisé(e) à accéder à cette partie du site</h1>
-    <p>Cet espace est réservé aux agents publics habilités.</p>
+    <Meta title="Accès à l’espace agent refusé" noIndex={true} />
+    <h1>L’accès à l’espace agent vous est refusé</h1>
+    <div>Seuls peuvent accéder à l’espace agent public :</div>
+    <ul>
+      <li>
+        les membres d’une administration, d’une collectivité ou d’un service
+        public
+      </li>
+      <li>
+        les membres d’une organisation privée dotée d’une mission de service
+        public
+      </li>
+    </ul>
     <p>
-      Vous êtes agent(e) du service public et vous souhaiter accéder au
-      service&nbsp;:{' '}
-      <a href={constants.links.parcours.contact}>contactez-nous.</a>
+      Votre organisation n’est pas un service public et par conséquent, l’accès
+      à l’espace agent vous est refusé.
     </p>
     <a href="/">← Retourner au moteur de recherche</a>
   </>
