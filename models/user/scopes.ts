@@ -39,7 +39,7 @@ const agentScope = [
  */
 export const getAgentScopes = async (
   userEmail: string
-): Promise<{ scopes: IAgentScope[]; userType: string }> => {
+): Promise<{ scopes: IAgentScope[]; userType: string; team: boolean }> => {
   const isTestAccount =
     userEmail === 'user@yopmail.com' &&
     (process.env.NODE_ENV !== 'production' ||
@@ -49,6 +49,7 @@ export const getAgentScopes = async (
     return {
       scopes: [...agentScope, 'conformite', 'beneficiaires'],
       userType: 'Super-agent connecté',
+      team: false,
     };
   }
 
@@ -58,5 +59,6 @@ export const getAgentScopes = async (
     scopes: [...agentScope, ...additionnalScopes],
     userType:
       additionnalScopes.length > 0 ? 'Super-agent connecté' : 'Agent connecté',
+    team: additionnalScopes.length > 0,
   };
 };

@@ -52,6 +52,7 @@ export type IAgentInfo = {
   userType: string;
   isPrestataire: boolean;
   isMCP: boolean;
+  belongToATeam: boolean;
 };
 
 const extractDomain = (email: string) => {
@@ -65,7 +66,7 @@ const extractDomain = (email: string) => {
 export const getAgent = async (
   userInfo: IAgentConnectUserInfo
 ): Promise<IAgentInfo> => {
-  const { scopes, userType } = await getAgentScopes(userInfo?.email);
+  const { scopes, userType, team } = await getAgentScopes(userInfo?.email);
 
   const domain = extractDomain(userInfo?.email || '');
   const isPrestataire = isLikelyPrestataire(domain);
@@ -90,5 +91,6 @@ export const getAgent = async (
     userType,
     isPrestataire,
     isMCP,
+    belongToATeam: team,
   };
 };
