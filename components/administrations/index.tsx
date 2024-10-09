@@ -67,6 +67,15 @@ export const DJEPVA = ({ queryString = '' }) => (
   </a>
 );
 
+export const DataSubvention = ({ queryString = '' }) => (
+  <a
+    href={`/administration/data-subvention${queryString}`}
+    title="Data Subvention"
+  >
+    Data Subvention
+  </a>
+);
+
 export const MEF = ({ queryString = '' }) => (
   <a
     href={`/administration/mef${queryString}`}

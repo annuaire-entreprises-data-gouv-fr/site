@@ -1,0 +1,14 @@
+slug: data-subvention
+short: Data.Subvention
+site: https://datasubvention.beta.gouv.fr/
+long: Data.Subvention
+logoType: portrait
+dataSources:
+  - label: Data.Subvention
+    apiSlug: data-subvention
+    data:
+      - label: Data.Subvention
+        targets:
+          - agent
+contact: https://datasubvention.beta.gouv.fr/contact/
+description: Un outil de consultation pour les agents de l'Etat porté par la DJEPVA et la DINUM pour éclaircir vos décisions et mieux connaître les associations
