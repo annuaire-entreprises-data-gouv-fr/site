@@ -10,6 +10,7 @@ import { getMandatairesRCS } from '#models/espace-agent/mandataires-rcs';
 import { getDocumentsRNEProtected } from '#models/espace-agent/rne-protected/documents';
 import { getDirigeantsRNE } from '#models/rne/dirigeants';
 import { getRNEObservations } from '#models/rne/observations';
+import { getSubventionsAssociationFromSlug } from '#models/subventions/association';
 import { buildAndVerifyTVA } from '#models/tva/verify';
 import { UnwrapPromise } from 'types';
 import getBeneficiairesController, {
@@ -31,6 +32,7 @@ export const APIRoutesHandlers = {
   association: getAssociationFromSlug,
   'verify-tva': buildAndVerifyTVA,
   'eori-validation': getEORIValidation,
+  'subventions-association': getSubventionsAssociationFromSlug,
 } as const;
 
 export type APIPath = keyof typeof APIRoutesHandlers;

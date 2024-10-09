@@ -40,6 +40,10 @@ const routes = {
   datagouv: {
     ess: 'https://tabular-api.data.gouv.fr/api/resources/57bc99ca-0432-4b46-8fcc-e76a35c9efaf/data/',
   },
+  apiDataSubvention: {
+    grants:
+      'https://api.datasubvention.beta.gouv.fr/association/{identifier}/grants',
+  },
   conventionsCollectives: {
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
     details: 'https://code.travail.gouv.fr/convention-collective/',

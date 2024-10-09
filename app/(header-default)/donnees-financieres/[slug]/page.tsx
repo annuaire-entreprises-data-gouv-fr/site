@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { FinancesAssociationSection } from '#components/finances-section/association';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
+import { SubventionsAssociationSection } from '#components/subventions-association-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { isAssociation } from '#models/core/types';
@@ -45,10 +46,16 @@ const FinancePage = async (props: AppRouterProps) => {
           session={session}
         />
         {isAssociation(uniteLegale) ? (
-          <FinancesAssociationSection
-            session={session}
-            uniteLegale={uniteLegale}
-          />
+          <>
+            <FinancesAssociationSection
+              session={session}
+              uniteLegale={uniteLegale}
+            />
+            <SubventionsAssociationSection
+              session={session}
+              uniteLegale={uniteLegale}
+            />
+          </>
         ) : (
           <>
             <FinancesSocieteSection uniteLegale={uniteLegale} />

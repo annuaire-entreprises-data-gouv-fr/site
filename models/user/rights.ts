@@ -17,6 +17,7 @@ export enum AppScope {
   carteProfessionnelleTravauxPublics = 'opendata',
   nonDiffusible = 'nonDiffusible',
   isAgent = 'isAgent',
+  subventionsAssociation = 'subventionsAssociation',
 }
 
 /**
