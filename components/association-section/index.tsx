@@ -2,7 +2,6 @@
 
 import AssociationAdressAlert from '#components-ui/alerts-with-explanations/association-adress';
 import FAQLink from '#components-ui/faq-link';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';
@@ -201,7 +200,6 @@ const AssociationSection = ({
           )
         }
       </AsyncDataSectionClient>
-      <HorizontalSeparator />
       <BreakPageForPrint />
     </>
   );

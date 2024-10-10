@@ -1,10 +1,10 @@
-import React from 'react';
 import { Warning } from '#components-ui/alerts';
-import IsActiveTag from '#components-ui/is-active-tag';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
+import IsActiveTag from '#components-ui/tag/is-active-tag';
+import { NonDiffusibleTag } from '#components-ui/tag/non-diffusible-tag';
 import { EtablissementDescription } from '#components/etablissement-description';
-import { estDiffusible, estNonDiffusibleStrict } from '#models/core/diffusion';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import {
@@ -12,6 +12,7 @@ import {
   formatSiret,
   uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
+import React from 'react';
 import { INSEE } from '../../administrations';
 import TitleAlerts from '../alerts';
 import { FICHE, Tabs } from '../tabs';
@@ -60,7 +61,7 @@ const TitleEtablissementWithDenomination: React.FC<{
       <span className={styles.sirenOrSiret}>
         {formatSiret(etablissement.siret)}
       </span>
-      {!estDiffusible(etablissement) && <Tag color="new">non-diffusible</Tag>}
+      <NonDiffusibleTag etablissementOrUniteLegale={etablissement} />
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}
         statutDiffusion={etablissement.statutDiffusion}

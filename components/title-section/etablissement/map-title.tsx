@@ -1,5 +1,5 @@
-import IsActiveTag from '#components-ui/is-active-tag';
 import { Tag } from '#components-ui/tag';
+import IsActiveTag from '#components-ui/tag/is-active-tag';
 import { IEtablissement } from '#models/core/types';
 import { formatSiret } from '#utils/helpers';
 

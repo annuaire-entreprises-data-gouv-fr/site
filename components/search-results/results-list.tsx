@@ -1,5 +1,5 @@
 import { Icon } from '#components-ui/icon/wrapper';
-import IsActiveTag from '#components-ui/is-active-tag';
+import IsActiveTag from '#components-ui/tag/is-active-tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { estActif } from '#models/core/etat-administratif';
 import { isCollectiviteTerritoriale } from '#models/core/types';

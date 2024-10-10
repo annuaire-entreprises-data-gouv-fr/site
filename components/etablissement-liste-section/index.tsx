@@ -1,6 +1,5 @@
-import React from 'react';
-import IsActiveTag from '#components-ui/is-active-tag';
 import { Tag } from '#components-ui/tag';
+import IsActiveTag from '#components-ui/tag/is-active-tag';
 import NonRenseigne from '#components/non-renseigne';
 import PageCounter from '#components/search-results/results-pagination';
 import { Section } from '#components/section';
@@ -10,6 +9,7 @@ import constants from '#models/constants';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { formatDate, formatSiret } from '#utils/helpers';
+import React from 'react';
 
 const EtablissementTable: React.FC<{
   label?: string;

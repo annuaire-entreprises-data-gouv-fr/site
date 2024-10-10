@@ -1,15 +1,15 @@
-import React from 'react';
-import IsActiveTag from '#components-ui/is-active-tag';
 import SocialMedia from '#components-ui/social-media';
-import { Tag } from '#components-ui/tag';
+import IsActiveTag from '#components-ui/tag/is-active-tag';
+import { NonDiffusibleTag } from '#components-ui/tag/non-diffusible-tag';
 import { SaveFavourite } from '#components/save-favourite';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
 import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
-import { estDiffusible, estNonDiffusibleStrict } from '#models/core/diffusion';
+import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatIntFr } from '#utils/helpers';
+import React from 'react';
 import TitleAlerts from './alerts';
 import styles from './styles.module.css';
 import { FICHE, Tabs } from './tabs';
@@ -48,7 +48,7 @@ const Title: React.FC<IProps> = ({
           &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}
         </span>
         <span>
-          {!estDiffusible(uniteLegale) && <Tag color="new">non-diffusible</Tag>}
+          <NonDiffusibleTag etablissementOrUniteLegale={uniteLegale} />
           <IsActiveTag
             etatAdministratif={uniteLegale.etatAdministratif}
             statutDiffusion={uniteLegale.statutDiffusion}
