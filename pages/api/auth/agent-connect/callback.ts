@@ -1,7 +1,7 @@
 import { agentConnectAuthenticate } from '#clients/authentication/agent-connect/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
+import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
 import { isServicePublic } from '#models/core/types';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { Exception } from '#models/exceptions';
 import { IAgentInfo, getAgent } from '#models/user/agent';
 import { extractSirenFromSiret } from '#utils/helpers';
@@ -53,10 +53,13 @@ const verifyAgentHabilitation = async (agent: IAgentInfo) => {
   }
 
   const siren = extractSirenFromSiret(agent.siret);
-  const uniteLegale = await getUniteLegaleFromSlug(siren, {
-    page: 0,
-    isBot: false,
-  });
+  // This doesn't work because it uses { cookies } from 'next/headers';
+  // It doesn't work in pages/api
+  // const uniteLegale = await getUniteLegaleFromSlug(siren, {
+  //   page: 0,
+  //   isBot: false,
+  // });
+  const uniteLegale = await clientUniteLegaleRechercheEntreprise(siren, 0);
 
   if (isServicePublic(uniteLegale)) {
     return;
