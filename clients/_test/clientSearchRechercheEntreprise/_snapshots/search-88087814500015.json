@@ -46,7 +46,7 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": "2021",
+          "anneeTrancheEffectif": null,
           "ancienSiege": false
         },
         "tva": null,
@@ -93,7 +93,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021",
+              "anneeTrancheEffectif": null,
               "ancienSiege": false
             }
           ],
@@ -134,7 +134,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": "2021",
+              "anneeTrancheEffectif": null,
               "ancienSiege": false
             }
           ],
@@ -230,7 +230,7 @@
               "idRge": [],
               "idUai": []
             },
-            "anneeTrancheEffectif": "2021",
+            "anneeTrancheEffectif": null,
             "ancienSiege": false
           }
         ],

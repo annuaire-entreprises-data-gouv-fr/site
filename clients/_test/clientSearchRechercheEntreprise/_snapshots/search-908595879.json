@@ -33,7 +33,7 @@
           "commune": "PARIS",
           "activitePrincipale": "70.21Z",
           "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
-          "trancheEffectif": null,
+          "trancheEffectif": "01",
           "libelleTrancheEffectif": "",
           "latitude": "48.873057",
           "longitude": "2.316605",
@@ -48,7 +48,7 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": null,
+          "anneeTrancheEffectif": "2022",
           "ancienSiege": false
         },
         "tva": null,
@@ -82,7 +82,7 @@
               "commune": "PARIS",
               "activitePrincipale": "70.21Z",
               "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
-              "trancheEffectif": null,
+              "trancheEffectif": "01",
               "libelleTrancheEffectif": "",
               "latitude": "48.873057",
               "longitude": "2.316605",
@@ -97,7 +97,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": null,
+              "anneeTrancheEffectif": "2022",
               "ancienSiege": false
             }
           ],
@@ -123,7 +123,7 @@
               "commune": "PARIS",
               "activitePrincipale": "70.21Z",
               "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
-              "trancheEffectif": null,
+              "trancheEffectif": "01",
               "libelleTrancheEffectif": "",
               "latitude": "48.873057",
               "longitude": "2.316605",
@@ -138,7 +138,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "anneeTrancheEffectif": null,
+              "anneeTrancheEffectif": "2022",
               "ancienSiege": false
             }
           ],
