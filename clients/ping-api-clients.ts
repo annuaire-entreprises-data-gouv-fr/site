@@ -8,6 +8,7 @@ import {
 } from '#utils/helpers';
 import { clientMarcheInclusion } from './api-inclusion';
 import { clientEORI } from './api-proxy/eori';
+import { clientUniteLegaleIG } from './api-proxy/greffe';
 import { clientRNEImmatriculation } from './api-proxy/rne';
 import { clientTVA } from './api-proxy/tva';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
@@ -29,6 +30,8 @@ const ping = async (slug: string | string[]) => {
   const useCache = false;
 
   switch (slug) {
+    case 'api-proxy-ig':
+      return await clientUniteLegaleIG(sirenDanone);
     case 'api-proxy-rne':
       // fetch IRM and disable cache
       return await clientRNEImmatriculation(sirenDanone, useCache);
