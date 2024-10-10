@@ -154,7 +154,6 @@ export const FinancesSocieteSection: React.FC<{
             <br />
             <FullTable
               head={[
-                //@ts-ignore
                 <FAQLink
                   tooltipLabel="Indicateurs"
                   to="/faq/donnees-financieres"

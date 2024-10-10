@@ -14,8 +14,9 @@ export function PDFFailed({ downloadLink }: { downloadLink: string }) {
         target="_blank"
         rel="noreferrer noopener"
         href={downloadLink}
-        //@ts-ignore
-        onClick={window.open(downloadLink, '_blank', 'noopener,noreferrer')}
+        onClick={() =>
+          window.open(downloadLink, '_blank', 'noopener,noreferrer')
+        }
       >
         cliquez ici pour re-lancer un téléchargement dans un nouvel onglet.
       </a>
