@@ -1002,7 +1002,7 @@
           "estRge": true,
           "estOrganismeFormation": true,
           "estSocieteMission": false,
-          "estQualiopi": true,
+          "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
           "estEntrepriseInclusive": false,
