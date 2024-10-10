@@ -1,9 +1,9 @@
 'use client';
 
-import { useRef, useState } from 'react';
 import { MultiChoice } from '#components-ui/multi-choice';
 import Question, { EQuestionType } from '#components/faq-parcours/question';
 import { FAQTargets, allFaqArticlesByTarget } from '#models/article/faq';
+import { useRef, useState } from 'react';
 
 type IProps = {
   question: EQuestionType;
@@ -13,7 +13,7 @@ export default function ParcoursQuestions({ question }: IProps) {
     ? question
     : null;
 
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLSpanElement | null>(null);
 
   const [userType, setUserType] = useState(initialQuestionType ? 'all' : '');
   const [questionType, setQuestionType] = useState<EQuestionType>(
@@ -22,7 +22,6 @@ export default function ParcoursQuestions({ question }: IProps) {
 
   const scroll = () => {
     if (scrollRef && scrollRef.current) {
-      //@ts-ignore
       scrollRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };

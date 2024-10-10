@@ -1,9 +1,9 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
 import { HttpNotFound } from '#clients/exceptions';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import Meta from '#components/meta/meta-client';
 import { administrationsMetaData } from '#models/administrations';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 const AdministrationError: NextPageWithLayout<{
@@ -37,11 +37,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  //@ts-ignore
-  const slug = params.slug as EAdministration;
+  const slug = params?.slug as EAdministration;
 
   const administrationEnum = Object.keys(administrationsMetaData).find(
-    //@ts-ignore
     (key) => administrationsMetaData[key].slug === slug
   );
   if (administrationEnum === undefined) {

@@ -78,7 +78,6 @@ const AgentBilansSection: React.FC<{
               head={[
                 'Date de dépôt',
                 'Année fiscale',
-                //@ts-ignore
                 <FAQLink tooltipLabel="Type">
                   Une entreprise peut déposer différents types de bilans :
                   <ul>

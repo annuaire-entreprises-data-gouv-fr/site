@@ -1,4 +1,3 @@
-/* eslint-disable import/order */
 'use client';
 
 import constants from '#models/constants';
@@ -16,7 +15,7 @@ export function MapEtablissement({
   etablissement: IEtablissement;
 }) {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<Map>(null);
+  const map = useRef<Map | null>(null);
 
   const coords = checkLatLng(etablissement.latitude, etablissement.longitude);
 
@@ -25,7 +24,6 @@ export function MapEtablissement({
 
     const zoom = etablissement ? 12 : 4.5;
 
-    //@ts-ignore
     map.current = new maplibregl.Map({
       //@ts-ignore
       container: mapContainer.current,
