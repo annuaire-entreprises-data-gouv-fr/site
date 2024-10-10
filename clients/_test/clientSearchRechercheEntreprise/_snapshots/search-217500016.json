@@ -51,7 +51,7 @@
               "0755710Z"
             ]
           },
-          "anneeTrancheEffectif": "2021",
+          "anneeTrancheEffectif": "2022",
           "ancienSiege": false
         },
         "tva": null,
@@ -103,7 +103,7 @@
                   "0755710Z"
                 ]
               },
-              "anneeTrancheEffectif": "2021",
+              "anneeTrancheEffectif": "2022",
               "ancienSiege": false
             }
           ],
@@ -147,13 +147,13 @@
                   "0755710Z"
                 ]
               },
-              "anneeTrancheEffectif": "2021",
+              "anneeTrancheEffectif": "2022",
               "ancienSiege": false
             }
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 2905,
+          "nombreEtablissementsOuverts": 2904,
           "nombreEtablissements": 3012,
           "usePagination": true,
           "currentEtablissementPage": 1
@@ -1686,7 +1686,7 @@
         "immatriculation": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 3012,
-        "nombreEtablissementsOuverts": 2905,
+        "nombreEtablissementsOuverts": 2904,
         "dirigeants": []
       }
     ]

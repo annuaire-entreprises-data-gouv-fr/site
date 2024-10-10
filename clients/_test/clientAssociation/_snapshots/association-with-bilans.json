@@ -8,7 +8,18 @@
     "libelleFamille": "interventions sociales",
     "mail": "direction@csmazeres.org",
     "siteWeb": "https://www.csmazeres.org",
-    "agrement": [],
+    "agrement": [
+      {
+        "type": "Jeunesse et Education Populaire (JEP)",
+        "numero": 64.0618,
+        "niveau": "local",
+        "attributeur": "DDJSP",
+        "date_attribution": "2006-11-21",
+        "id": 59915,
+        "origine_instructeur": false,
+        "dateAttribution": "2006-11-21"
+      }
+    ],
     "formeJuridique": "Association déclarée, reconnue d'utilité publique",
     "utilPublique": false,
     "regime": "loi1901",
