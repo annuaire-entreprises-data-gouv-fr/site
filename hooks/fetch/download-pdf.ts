@@ -15,7 +15,7 @@ export function usePDFDownloader(pdfLink: string) {
           return await httpGet<Blob>(pdfLink, { responseType: 'blob' });
         } catch (e: any) {
           if (isPdfNotFound(e?.message)) {
-            throw new HttpNotFound('Not heyhey found - 404');
+            throw new HttpNotFound('Not found - 404');
           }
           throw e;
         }
