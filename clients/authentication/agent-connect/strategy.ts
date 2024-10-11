@@ -1,6 +1,6 @@
-import { BaseClient, Issuer, generators } from 'openid-client';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { IReqWithSession } from '#utils/session/with-session';
+import { BaseClient, Issuer, generators } from 'openid-client';
 
 let _client = undefined as BaseClient | undefined;
 
@@ -80,7 +80,7 @@ export type IAgentConnectUserInfo = {
 export const agentConnectAuthenticate = async (req: IReqWithSession) => {
   const client = await getClient();
 
-  const params = client.callbackParams(req);
+  const params = client.callbackParams(req.nextUrl.toString());
 
   const tokenSet = await client.grant({
     grant_type: 'authorization_code',

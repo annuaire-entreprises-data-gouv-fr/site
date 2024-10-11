@@ -2,11 +2,12 @@ import { agentConnectAuthorizeUrl } from '#clients/authentication/agent-connect/
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { setPathFrom } from '#utils/session';
 import withSession from '#utils/session/with-session';
-import { AgentConnectionFailedException } from '../../../../pages/api/auth/agent-connect/callback';
+import { NextResponse } from 'next/server';
+import { redirectTo } from '../../utils';
+import { AgentConnectFailedException } from '../agent-connect-types';
 
-export default withSession(async function loginRoute(req, res) {
+export const GET = withSession(async function loginRoute(req) {
   try {
-    // Get the pathFrom from query params or headers
     const pathFrom =
       req.nextUrl.searchParams.get('pathFrom') ||
       req.headers.get('referer') ||
@@ -14,9 +15,9 @@ export default withSession(async function loginRoute(req, res) {
 
     await setPathFrom(req.session, pathFrom);
     const url = await agentConnectAuthorizeUrl(req);
-    res.redirect(url);
+    return NextResponse.redirect(url);
   } catch (e: any) {
-    logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
-    res.redirect('/connexion/echec-connexion');
+    logFatalErrorInSentry(new AgentConnectFailedException({ cause: e }));
+    return redirectTo(req, '/connexion/echec-connexion');
   }
 });

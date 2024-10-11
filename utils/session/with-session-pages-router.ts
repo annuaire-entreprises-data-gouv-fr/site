@@ -1,19 +1,20 @@
 import { ISession } from '#models/user/session';
 import { IronSession, getIronSession } from 'iron-session';
-import { cookies } from 'next/headers';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { sessionOptions } from '.';
 
-export type IReqWithSession = NextRequest & {
+type IReqWithSession = NextApiRequest & {
   session: IronSession<ISession>;
 };
-export default function withSession(
-  handler: (req: IReqWithSession, res: NextResponse) => Promise<any>
+
+export default function withSessionPagesRouter(
+  handler: (req: IReqWithSession, res: NextApiResponse) => Promise<any>
 ) {
-  return async (req: NextRequest, res: NextResponse) => {
+  return async (req: NextApiRequest, res: NextApiResponse) => {
     const reqWithSession = req as IReqWithSession;
     reqWithSession.session = await getIronSession<ISession>(
-      cookies(),
+      req,
+      res,
       sessionOptions
     );
     return handler(reqWithSession, res);
