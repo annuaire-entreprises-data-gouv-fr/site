@@ -21,7 +21,7 @@ export interface ISubvention {
 
 export const getSubventionsAssociationFromSlug = async (
   slug: string
-): Promise<ISubventions | IAPINotRespondingError | null> => {
+): Promise<ISubventions | IAPINotRespondingError> => {
   const uniteLegale = await getUniteLegaleFromSlug(slug, {
     isBot: false,
   });
