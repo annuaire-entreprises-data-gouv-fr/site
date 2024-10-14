@@ -1,6 +1,6 @@
-import { BaseClient, Issuer, generators } from 'openid-client';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { IReqWithSession } from '#utils/session/with-session';
+import { BaseClient, Issuer, generators } from 'openid-client';
 
 let _client = undefined as BaseClient | undefined;
 
