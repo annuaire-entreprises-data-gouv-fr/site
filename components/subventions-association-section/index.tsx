@@ -2,7 +2,6 @@
 
 import { Tag } from '#components-ui/tag';
 import { DataSubvention } from '#components/administrations';
-import AgentWallSubventionsAssociation from '#components/espace-agent-components/agent-wall/subventions-association';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -48,7 +47,7 @@ const SubventionDetails: React.FC<{ subventions: ISubventions }> = ({
   );
 };
 
-export const SubventionsAssociationSection: React.FC<{
+const SubventionsAssociation: React.FC<{
   uniteLegale: IAssociation;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
@@ -58,21 +57,11 @@ export const SubventionsAssociationSection: React.FC<{
     session
   );
 
-  if (!hasRights(session, AppScope.none)) {
-    return (
-      <AgentWallSubventionsAssociation
-        title="Détail des subventions"
-        id="detail-des-subventions"
-        uniteLegale={uniteLegale}
-      />
-    );
-  }
-
   return (
     <DataSectionClient
       id="detail-des-subventions"
       title="Détail des subventions"
-      sources={[EAdministration.DATA_SUBVENTION]}
+      sources={[EAdministration.DJEPVA]}
       notFoundInfo="Aucune demande de subvention n’a été trouvée pour cette association."
       data={subventions}
       isProtected
@@ -111,4 +100,18 @@ export const SubventionsAssociationSection: React.FC<{
       }
     </DataSectionClient>
   );
+};
+
+export const SubventionsAssociationSection: React.FC<{
+  uniteLegale: IAssociation;
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
+  if (!hasRights(session, AppScope.subventionsAssociation)) {
+    // for a start lets hide it first before Data subvention validation
+    return null;
+    // return (
+    // <AgentWall id="detail-des-subventions" title="Détail des subventions" />
+    // );
+  }
+  return <SubventionsAssociation uniteLegale={uniteLegale} session={session} />;
 };

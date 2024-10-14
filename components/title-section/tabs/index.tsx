@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { PrintNever } from '#components-ui/print-visibility';
 import {
   checkHasLabelsAndCertificates,
@@ -11,6 +10,7 @@ import {
 } from '#models/core/types';
 import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import Link from 'next/link';
 import styles from './styles.module.css';
 import TabLink from './tab-link';
 
@@ -87,7 +87,7 @@ export const Tabs: React.FC<{
       pathPrefix: '/annonces/',
       noFollow: false,
       shouldDisplay: true,
-      width: '130px',
+      width: uniteLegale.dateMiseAJourInpi ? '130px' : '90px',
     },
     {
       ficheType: FICHE.CERTIFICATS,

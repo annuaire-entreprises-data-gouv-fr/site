@@ -15,8 +15,9 @@ export const clientDataSubvention = async (
   const route = routes.apiDataSubvention.grants.replace('{identifier}', siren);
   const data = await httpGet<any>(route, {
     headers: { 'x-access-token': process.env.DATA_SUBVENTION_API_KEY },
-    timeout: constants.timeout.XXL,
+    timeout: constants.timeout.XXXL,
   });
+
   const msgNotFound = `No subvention data found for : ${siren}`;
 
   if (!data.subventions || data.subventions.length === 0) {
@@ -40,6 +41,10 @@ const mapToDomainObject = (grantItems: IGrantItem[]): ISubvention[] => {
       const status = grantItem.application.status?.value;
       const description = grantItem.application.dispositif?.value;
       const amount = grantItem.application.montants?.accorde?.value;
+
+      if (year === 2024) {
+        console.log(grantItem);
+      }
 
       const newSubvention: ISubvention = {
         year,

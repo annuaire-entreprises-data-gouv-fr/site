@@ -5,6 +5,7 @@ export type IAgentScope =
   | 'nonDiffusible'
   | 'conformite'
   | 'beneficiaires'
+  | 'subventions_association'
   | 'agent'
   | 'opendata';
 
@@ -15,6 +16,7 @@ export const isAgentScope = (str: string): str is IAgentScope => {
       'nonDiffusible',
       'conformite',
       'beneficiaires',
+      'subventions_association',
       'agent',
       'opendata',
     ].indexOf(str) > 0
@@ -24,7 +26,7 @@ export const isAgentScope = (str: string): str is IAgentScope => {
   return false;
 };
 
-const agentScope = [
+const defaultAgentScopes = [
   'agent',
   'nonDiffusible',
   'rne',
@@ -47,7 +49,12 @@ export const getAgentScopes = async (
 
   if (isTestAccount) {
     return {
-      scopes: [...agentScope, 'conformite', 'beneficiaires'],
+      scopes: [
+        ...defaultAgentScopes,
+        'conformite',
+        'beneficiaires',
+        'subventions_association',
+      ],
       userType: 'Super-agent connecté',
     };
   }
@@ -55,7 +62,7 @@ export const getAgentScopes = async (
   const additionnalScopes = await getAdditionnalIAgentScope(userEmail);
 
   return {
-    scopes: [...agentScope, ...additionnalScopes],
+    scopes: [...defaultAgentScopes, ...additionnalScopes],
     userType:
       additionnalScopes.length > 0 ? 'Super-agent connecté' : 'Agent connecté',
   };

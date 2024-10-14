@@ -41,6 +41,8 @@ export function hasRights(session: ISession | null, rightScope: AppScope) {
       return userScopes.includes('opendata');
     case AppScope.beneficiaires:
       return userScopes.includes('beneficiaires');
+    case AppScope.subventionsAssociation:
+      return userScopes.includes('subventions_association');
     case AppScope.nonDiffusible:
       return userScopes.includes('nonDiffusible');
     case AppScope.isAgent:

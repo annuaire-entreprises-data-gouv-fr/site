@@ -32,7 +32,7 @@ export const getSubventionsAssociationFromSlug = async (
     return await clientDataSubvention(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      return APINotRespondingFactory(EAdministration.DATA_SUBVENTION, 404);
+      return APINotRespondingFactory(EAdministration.DJEPVA, 404);
     }
     logErrorInSentry(
       new FetchRessourceException({
@@ -41,9 +41,9 @@ export const getSubventionsAssociationFromSlug = async (
         context: {
           siren,
         },
-        administration: EAdministration.DATA_SUBVENTION,
+        administration: EAdministration.DJEPVA,
       })
     );
-    return APINotRespondingFactory(EAdministration.DATA_SUBVENTION, 500);
+    return APINotRespondingFactory(EAdministration.DJEPVA, 500);
   }
 };

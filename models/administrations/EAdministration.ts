@@ -12,7 +12,6 @@ export enum EAdministration {
   MI = 'mi',
   VIES = 'vies',
   DJEPVA = 'djepva',
-  DATA_SUBVENTION = 'data-subvention',
   ESSFRANCE = 'ess-france',
   MARCHE_INCLUSION = 'marche-inclusion',
   INFOGREFFE = 'infogreffe',

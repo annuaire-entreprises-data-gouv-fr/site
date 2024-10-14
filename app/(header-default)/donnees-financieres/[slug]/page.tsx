@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { FinancesAssociationSection } from '#components/finances-section/association';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
@@ -14,6 +13,7 @@ import extractParamsAppRouter, {
 import getSession from '#utils/server-side-helper/app/get-session';
 import ComptesBodacc from 'app/(header-default)/donnees-financieres/[slug]/_components/bodacc';
 import { ComptesAssociationSection } from 'app/(header-default)/donnees-financieres/[slug]/_components/dca';
+import { Metadata } from 'next';
 import BilansSection from './_components';
 
 export const generateMetadata = async (
