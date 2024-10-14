@@ -1,7 +1,9 @@
 'use client';
 
+import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
-import { DataSubvention } from '#components/administrations';
+import { DJEPVA } from '#components/administrations';
+import NonRenseigne from '#components/non-renseigne';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -12,6 +14,19 @@ import { ISession } from '#models/user/session';
 import { formatCurrency } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { useMemo } from 'react';
+
+const DataSubventionLink = () => (
+  <FAQLink
+    tooltipLabel="data.subvention"
+    to="https://datasubvention.beta.gouv.fr/"
+  >
+    Data.subvention est un outil développé par la <DJEPVA />. Il recense les
+    subventions demandées et reçues par une association.
+    <br />
+    Les données sont issues de issues de Chorus et du Fonjep (Fonds de
+    coopération de la jeunesse et de l’éducation populaire).
+  </FAQLink>
+);
 
 const SubventionDetails: React.FC<{ subventions: ISubventions }> = ({
   subventions,
@@ -37,13 +52,17 @@ const SubventionDetails: React.FC<{ subventions: ISubventions }> = ({
   }, [subventions]);
 
   return (
-    <p>
-      Cette association a demandé {subventionStats.totalSubventions}{' '}
-      subvention(s) depuis {subventionStats.mostRecentYear} dont{' '}
-      <b>{subventionStats.totalApproved} accordée(s)</b> pour un total de{' '}
-      <b>{formatCurrency(subventionStats.totalAmount)}</b>. Ces données sont
-      collectées par <DataSubvention />.
-    </p>
+    <>
+      Depuis {subventionStats.mostRecentYear}, cette association compte{' '}
+      {subventionStats.totalSubventions} demandes de subventions référencées
+      dans <DataSubventionLink />.
+      <p>
+        Parmi ces subventions :{' '}
+        <b>{subventionStats.totalApproved} ont été accordées</b> pour un total
+        de <b>{formatCurrency(subventionStats.totalAmount)}</b>. Le reste a été
+        refusé, est en cours d’instruction ou se situe dans un état inconnu.
+      </p>
+    </>
   );
 };
 
@@ -69,18 +88,23 @@ const SubventionsAssociation: React.FC<{
       {(subventions) =>
         !subventions || subventions?.length === 0 ? (
           <>
-            Aucune demande de subvention n’a été trouvée pour cette association.
+            Aucune demande de subvention n’a été trouvée pour cette association
+            dans <DataSubventionLink />.
           </>
         ) : (
           <>
             <SubventionDetails subventions={subventions} />
             <FullTable
-              head={['Année', 'Dispositif', 'Montant', 'Label']}
+              head={['Année', 'Dispositif', 'Montant', 'État']}
               body={subventions.map((subvention) => [
                 <strong>{subvention.year}</strong>,
-                <strong>{subvention.description}</strong>,
+                subvention.description ? (
+                  <strong>{subvention.description}</strong>
+                ) : (
+                  <NonRenseigne />
+                ),
                 formatCurrency(subvention.amount),
-                subvention.label && (
+                subvention.label ? (
                   <Tag
                     color={
                       subvention.label === 'Accordé'
@@ -92,6 +116,8 @@ const SubventionsAssociation: React.FC<{
                   >
                     {subvention.label}
                   </Tag>
+                ) : (
+                  <Tag color="default">Inconnu</Tag>
                 ),
               ])}
             />
