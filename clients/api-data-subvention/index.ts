@@ -42,10 +42,6 @@ const mapToDomainObject = (grantItems: IGrantItem[]): ISubvention[] => {
       const description = grantItem.application.dispositif?.value;
       const amount = grantItem.application.montants?.accorde?.value;
 
-      if (year === 2024) {
-        console.log(grantItem);
-      }
-
       const newSubvention: ISubvention = {
         year,
         label,
