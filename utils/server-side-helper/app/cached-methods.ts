@@ -58,7 +58,7 @@ const handleException = (e: any, slug: string) => {
  *  Call this function to rely on react cache when using an unite legale
  */
 export const cachedGetUniteLegale = cache(
-  async (slug: string, isBot: boolean, page = 1) => {
+  async (slug: string, isBot: boolean, page = 0) => {
     const sirenSlug = extractSirenOrSiretSlugFromUrl(slug);
     try {
       return await getUniteLegaleFromSlug(sirenSlug, {
