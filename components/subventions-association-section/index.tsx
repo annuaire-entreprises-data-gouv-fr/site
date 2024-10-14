@@ -23,7 +23,7 @@ const DataSubventionLink = () => (
     Data.subvention est un outil développé par la <DJEPVA />. Il recense les
     subventions demandées et reçues par une association.
     <br />
-    Les données sont issues de issues de Chorus et du Fonjep (Fonds de
+    Les données sont issues de Chorus et du Fonjep (Fonds de
     coopération de la jeunesse et de l’éducation populaire).
   </FAQLink>
 );
