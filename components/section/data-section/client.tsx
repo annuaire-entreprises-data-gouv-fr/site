@@ -91,6 +91,7 @@ function useShowLoadingState<T>(
     if (!isDataLoading(data) && before100ms) {
       setDataLoadedBefore100ms(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   if (before100ms || dataLoadedBefore100ms) {
