@@ -2,9 +2,10 @@ import { agentConnectAuthenticate } from '#clients/authentication/agent-connect/
 import { HttpForbiddenError } from '#clients/exceptions';
 import { getAgent } from '#models/user/agent';
 import { logFatalErrorInSentry } from '#utils/sentry';
-import { redirectTo } from '#utils/server-side-helper/app/redirect-to';
+import { getURL } from '#utils/server-side-helper/app/get-url';
 import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
 import withSession from '#utils/session/with-session';
+import { NextResponse } from 'next/server';
 import { AgentConnectFailedException } from '../agent-connect-types';
 
 export const GET = withSession(async function callbackRoute(req) {
@@ -18,16 +19,18 @@ export const GET = withSession(async function callbackRoute(req) {
 
     if (pathFrom) {
       await cleanPathFrom(session);
-      return redirectTo(req, pathFrom);
+      return NextResponse.redirect(getURL(pathFrom));
     } else {
-      return redirectTo(req, '/');
+      return NextResponse.redirect(getURL('/'));
     }
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectFailedException({ cause: e }));
     if (e instanceof HttpForbiddenError) {
-      return redirectTo(req, '/connexion/echec-authorisation-requise');
+      return NextResponse.redirect(
+        getURL('/connexion/echec-authorisation-requise')
+      );
     } else {
-      return redirectTo(req, '/connexion/echec-connexion');
+      return NextResponse.redirect(getURL('/connexion/echec-connexion'));
     }
   }
 });

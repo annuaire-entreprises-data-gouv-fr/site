@@ -1,6 +1,6 @@
 import { agentConnectAuthorizeUrl } from '#clients/authentication/agent-connect/strategy';
 import { logFatalErrorInSentry } from '#utils/sentry';
-import { redirectTo } from '#utils/server-side-helper/app/redirect-to';
+import { getURL } from '#utils/server-side-helper/app/get-url';
 import { setPathFrom } from '#utils/session';
 import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
@@ -18,6 +18,6 @@ export const GET = withSession(async function loginRoute(req) {
     return NextResponse.redirect(url);
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectFailedException({ cause: e }));
-    return redirectTo(req, '/connexion/echec-connexion');
+    return NextResponse.redirect(getURL('/connexion/echec-connexion'));
   }
 });
