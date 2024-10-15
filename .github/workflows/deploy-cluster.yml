@@ -47,8 +47,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - environment: production-01
-            host: SSH_PRODUCTION_01
+          # - environment: production-01
+          #  host: SSH_PRODUCTION_01
           - environment: production-02
             host: SSH_PRODUCTION_02
           - environment: production-03
