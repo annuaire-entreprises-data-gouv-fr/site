@@ -1,9 +1,9 @@
-import { redirect } from 'next/navigation';
-import { cache } from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import { Exception } from '#models/exceptions';
 import { extractSirenOrSiretSlugFromUrl } from '#utils/helpers';
 import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
+import { redirect } from 'next/navigation';
+import { cache } from 'react';
 import { getEtablissementWithUniteLegaleFromSlug } from '../../../models/core/etablissement';
 import {
   FetchRechercheEntrepriseException,
@@ -58,7 +58,7 @@ const handleException = (e: any, slug: string) => {
  *  Call this function to rely on react cache when using an unite legale
  */
 export const cachedGetUniteLegale = cache(
-  async (slug: string, isBot: boolean, page = 0) => {
+  async (slug: string, isBot: boolean, page = 1) => {
     const sirenSlug = extractSirenOrSiretSlugFromUrl(slug);
     try {
       return await getUniteLegaleFromSlug(sirenSlug, {
