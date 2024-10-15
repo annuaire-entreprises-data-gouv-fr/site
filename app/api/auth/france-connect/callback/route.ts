@@ -1,6 +1,6 @@
 import { franceConnectAuthenticate } from '#clients/authentication/france-connect/strategy';
 import logErrorInSentry from '#utils/sentry';
-import { getURL } from '#utils/server-side-helper/app/get-url';
+import { getAbsoluteSiteUrl } from '#utils/server-side-helper/app/get-absolute-site-url';
 import { setHidePersonalDataRequestFCSession } from '#utils/session';
 import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
@@ -18,10 +18,14 @@ export const GET = withSession(async function callbackRoute(req) {
       req.session
     );
     return NextResponse.redirect(
-      getURL('/formulaire/supprimer-donnees-personnelles-entreprise')
+      getAbsoluteSiteUrl(
+        '/formulaire/supprimer-donnees-personnelles-entreprise'
+      )
     );
   } catch (e: any) {
     logErrorInSentry(new FranceConnectFailedException({ cause: e }));
-    return NextResponse.redirect(getURL('/connexion/echec-connexion'));
+    return NextResponse.redirect(
+      getAbsoluteSiteUrl('/connexion/echec-connexion')
+    );
   }
 });
