@@ -17,4 +17,5 @@ export const APIRoutesScopes: Record<APIPath, AppScope> = {
   association: AppScope.none,
   'verify-tva': AppScope.none,
   'eori-validation': AppScope.none,
+  'subventions-association': AppScope.subventionsAssociation,
 };
