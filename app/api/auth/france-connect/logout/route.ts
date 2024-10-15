@@ -1,9 +1,9 @@
 import { franceConnectLogoutUrl } from '#clients/authentication/france-connect/strategy';
 import logErrorInSentry from '#utils/sentry';
+import { redirectTo } from '#utils/server-side-helper/app/redirect-to';
 import { setPathFrom } from '#utils/session';
 import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
-import { redirectTo } from '../../utils';
 import { FranceConnectLogoutFailedException } from '../france-connect-types';
 
 export const GET = withSession(async function logoutRoute(req) {

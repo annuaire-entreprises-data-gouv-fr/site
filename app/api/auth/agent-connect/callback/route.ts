@@ -2,9 +2,9 @@ import { agentConnectAuthenticate } from '#clients/authentication/agent-connect/
 import { HttpForbiddenError } from '#clients/exceptions';
 import { getAgent } from '#models/user/agent';
 import { logFatalErrorInSentry } from '#utils/sentry';
+import { redirectTo } from '#utils/server-side-helper/app/redirect-to';
 import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
 import withSession from '#utils/session/with-session';
-import { redirectTo } from '../../utils';
 import { AgentConnectFailedException } from '../agent-connect-types';
 
 export const GET = withSession(async function callbackRoute(req) {

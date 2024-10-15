@@ -1,8 +1,8 @@
 import { franceConnectAuthenticate } from '#clients/authentication/france-connect/strategy';
 import logErrorInSentry from '#utils/sentry';
+import { redirectTo } from '#utils/server-side-helper/app/redirect-to';
 import { setHidePersonalDataRequestFCSession } from '#utils/session';
 import withSession from '#utils/session/with-session';
-import { redirectTo } from '../../utils';
 import { FranceConnectFailedException } from '../france-connect-types';
 
 export const GET = withSession(async function callbackRoute(req) {

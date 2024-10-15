@@ -1,9 +1,9 @@
 import { agentConnectAuthorizeUrl } from '#clients/authentication/agent-connect/strategy';
 import { logFatalErrorInSentry } from '#utils/sentry';
+import { redirectTo } from '#utils/server-side-helper/app/redirect-to';
 import { setPathFrom } from '#utils/session';
 import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
-import { redirectTo } from '../../utils';
 import { AgentConnectFailedException } from '../agent-connect-types';
 
 export const GET = withSession(async function loginRoute(req) {

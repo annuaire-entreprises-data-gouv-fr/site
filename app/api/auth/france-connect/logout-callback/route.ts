@@ -1,7 +1,7 @@
 import logErrorInSentry from '#utils/sentry';
+import { redirectTo } from '#utils/server-side-helper/app/redirect-to';
 import { getPathFrom } from '#utils/session';
 import withSession from '#utils/session/with-session';
-import { redirectTo } from '../../utils';
 import { FranceConnectLogoutFailedException } from '../france-connect-types';
 
 export const GET = withSession(async function logoutCallbackRoute(req) {
