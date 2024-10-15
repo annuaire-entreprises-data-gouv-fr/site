@@ -1,14 +1,16 @@
 import { FranceConnectAuthorizeUrl } from '#clients/authentication/france-connect/strategy';
 import { logFatalErrorInSentry } from '#utils/sentry';
+import { redirectTo } from '#utils/server-side-helper/app/redirect-to';
 import withSession from '#utils/session/with-session';
-import { FranceConnectFailedException } from './callback';
+import { NextResponse } from 'next/server';
+import { FranceConnectFailedException } from '../france-connect-types';
 
-export default withSession(async function loginRoute(req, res) {
+export const GET = withSession(async function loginRoute(req) {
   try {
     const url = await FranceConnectAuthorizeUrl(req);
-    res.redirect(url);
+    return NextResponse.redirect(url);
   } catch (e: any) {
     logFatalErrorInSentry(new FranceConnectFailedException({ cause: e }));
-    res.redirect('/connexion/echec-connexion');
+    return redirectTo(req, '/connexion/echec-connexion');
   }
 });

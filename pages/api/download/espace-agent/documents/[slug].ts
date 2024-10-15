@@ -7,9 +7,16 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import { AppScope, hasRights } from '#models/user/rights';
 import logErrorInSentry from '#utils/sentry';
-import withSession from '#utils/session/with-session';
+import withSessionPagesRouter from '#utils/session/with-session-pages-router';
 
-export default withSession(async function download(req, res) {
+// This can't be migrated to App Router
+// because responseLimit: false is not supported
+//
+// https://github.com/vercel/next.js/issues/57501
+// https://github.com/vercel/next.js/issues/55589
+//
+//
+export default withSessionPagesRouter(async function download(req, res) {
   const {
     query: { slug, type },
     session,

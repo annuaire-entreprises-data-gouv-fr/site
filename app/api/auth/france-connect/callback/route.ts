@@ -1,10 +1,11 @@
 import { franceConnectAuthenticate } from '#clients/authentication/france-connect/strategy';
-import { Exception } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
+import { redirectTo } from '#utils/server-side-helper/app/redirect-to';
 import { setHidePersonalDataRequestFCSession } from '#utils/session';
 import withSession from '#utils/session/with-session';
+import { FranceConnectFailedException } from '../france-connect-types';
 
-export default withSession(async function (req, res) {
+export const GET = withSession(async function callbackRoute(req) {
   try {
     const userInfo = await franceConnectAuthenticate(req);
     await setHidePersonalDataRequestFCSession(
@@ -15,18 +16,12 @@ export default withSession(async function (req, res) {
       userInfo.sub,
       req.session
     );
-    res.redirect('/formulaire/supprimer-donnees-personnelles-entreprise');
+    return redirectTo(
+      req,
+      '/formulaire/supprimer-donnees-personnelles-entreprise'
+    );
   } catch (e: any) {
     logErrorInSentry(new FranceConnectFailedException({ cause: e }));
-    res.redirect('/connexion/echec-connexion');
+    return redirectTo(req, '/connexion/echec-connexion');
   }
 });
-
-export class FranceConnectFailedException extends Exception {
-  constructor(args: { cause?: any }) {
-    super({
-      name: 'FranceConnectFailedException',
-      ...args,
-    });
-  }
-}

@@ -1,6 +1,6 @@
 # data-fetching folder
 
-This foder contains the data fetching routes called from the frontend app.
+This folder contains the data fetching routes called from the frontend app.
 
 Link between routes and model is done automatically with the `routes-handlers` module.
 Route protection is done with the `routes-scopes` module.
