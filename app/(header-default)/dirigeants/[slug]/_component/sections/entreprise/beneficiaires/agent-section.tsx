@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import routes from '#clients/routes';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
@@ -13,6 +12,7 @@ import { UseCase } from '#models/user/agent';
 import { ISession } from '#models/user/session';
 import { formatDatePartial } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { useMemo } from 'react';
 
 /**
  * Dirigeants section
@@ -295,11 +295,6 @@ function BénéficiairesContent({
           />
         </>
       )}
-      <style global jsx>{`
-        table > tbody > tr > td:first-of-type {
-          width: 30%;
-        }
-      `}</style>
     </>
   );
 }
