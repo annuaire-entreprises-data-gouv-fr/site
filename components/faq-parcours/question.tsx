@@ -1,10 +1,8 @@
-import { PropsWithChildren, useEffect, useRef, useState } from 'react';
-import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
 import { allDataToModify } from '#models/administrations/data-to-modify';
 import { IFaqArticle } from '#models/article/faq';
-import constants from '#models/constants';
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 export enum EQuestionType {
   LOADER = 'loader',
   NONE = 'none',
@@ -60,19 +58,23 @@ export default function Question({
             Si vous avez une question{' '}
             <strong>à propos des informations affichées sur le site</strong>, ou
             un problème lié au <strong>fonctionnement du site</strong>, vous
-            pouvez nous contacter :
+            pouvez nous contacter via le formulaire ci-dessous:
           </p>
           <div className="layout-center">
-            <ButtonLink
-              to={`${constants.links.mailto}?subject=%5B${userType}%5D%20Je%20ne%20trouve%20pas%20la%20r%C3%A9ponse%20a%20ma%20question&body=Bonjour%2C%20%0A%0AVoici%20ma%20question%20%3A%0AVoici%20le%20num%C3%A9ro%20Siren%20%2F%20Siret%20concern%C3%A9%20%3A`}
-            >
-              Écrivez-nous à {constants.links.mail}
-            </ButtonLink>
+            <iframe
+              title="Contact Form"
+              src={`https://plugins.crisp.chat/urn:crisp.im:contact-form:0/contact/${process.env.NEXT_PUBLIC_CRISP_WEBSITE_ID}`}
+              referrerPolicy="origin"
+              sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
+              width="100%"
+              height="600px"
+              frameBorder="0"
+            ></iframe>
           </div>
           <p>
             <strong>NB :</strong> si votre question concerne une structure en
-            particulier, pensez à nous indiquer le{' '}
-            <strong>siren ou le siret</strong> dans le corps du mail.
+            particulier, pensez à mentionner le{' '}
+            <strong>siren ou le siret</strong> dans votre message.
           </p>
         </Answer>
       );

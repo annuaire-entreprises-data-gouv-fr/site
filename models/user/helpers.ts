@@ -1,5 +1,3 @@
-import { IAgentContactInfo } from '#components/feedback-modal/type';
-import { AppScope, hasRights } from './rights';
 import { ISession } from './session';
 
 export function getAgentEmail(session: ISession | null) {
@@ -22,18 +20,4 @@ export function getAgentDisplayName(session: ISession | null) {
   return (
     session?.user?.fullName || session?.user?.email || 'Utilisateur inconnu'
   );
-}
-
-export function getAgentContactInfo(
-  session: ISession | null
-): IAgentContactInfo | null {
-  const email = getAgentEmail(session);
-
-  if (!hasRights(session, AppScope.isAgent) || !email) {
-    return null;
-  }
-  return {
-    email,
-    name: session?.user?.fullName || '',
-  };
 }
