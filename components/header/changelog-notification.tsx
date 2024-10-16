@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import { changelogData } from '#models/historique-modifications';
 import { AppScope, hasRights } from '#models/user/rights';
 import { formatDate } from '#utils/helpers';
 import { useStorage } from 'hooks';
 import useSession from 'hooks/use-session';
+import { useEffect } from 'react';
 import style from './changelog-notification.module.css';
 
 const NEW_SINCE_LAST_VISIT_ID = 'new-since-last-visit';
@@ -37,6 +37,7 @@ export default function ChangelogNotification() {
     if (window.location.pathname === '/historique-des-modifications') {
       saveDateOfLastNews(dateOfLastNews);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!previousDateOfLastNews) {
