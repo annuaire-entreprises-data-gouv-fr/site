@@ -34,7 +34,7 @@ const AccountPage = async () => {
       <h1>Votre compte agent public</h1>
       <p>
         Cette page présente la liste des données auxquelles votre compte agent
-        public vous donne accés.
+        public vous donne accès.
       </p>
       <p>
         Nos équipes sont en train de développer le formulaire qui vous permettra
