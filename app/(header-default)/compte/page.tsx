@@ -39,7 +39,7 @@ const AccountPage = async () => {
       <p>
         Nos équipes sont en train de développer le formulaire qui vous permettra
         de faire une demande d’accès aux données auxquelles vous n’avez pas
-        encore accès (avec conditions d’elligibilité).
+        encore accès (avec conditions d’éligibilité).
       </p>
       <FullTable
         head={['Données', 'Droit d’accés']}
