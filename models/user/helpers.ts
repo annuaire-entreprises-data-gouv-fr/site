@@ -17,15 +17,15 @@ export function getIAgentScope(session: ISession | null) {
 }
 
 export function getAgentFullName(session: ISession | null) {
-  const fullname = session?.user?.fullName;
-  const firstname = session?.user?.firstName;
-  const lastname = session?.user?.familyName;
+  const fullName = session?.user?.fullName;
+  const firstName = session?.user?.firstName;
+  const familyName = session?.user?.familyName;
 
-  if (fullname) {
-    return fullname.trim();
+  if (fullName) {
+    return fullName.trim();
   }
 
-  return [firstname, lastname].filter(Boolean).join(' ').trim();
+  return [firstName, familyName].filter(Boolean).join(' ').trim();
 }
 
 export function getAgentDisplayName(session: ISession | null) {
