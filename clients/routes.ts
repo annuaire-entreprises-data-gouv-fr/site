@@ -188,7 +188,6 @@ const routes = {
     },
   },
   tooling: {
-    crisp: 'https://api.crisp.chat/v1/website/',
     grist: 'https://grist.numerique.gouv.fr/api/docs/',
     matomo: {
       report: {

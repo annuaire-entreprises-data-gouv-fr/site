@@ -1,10 +1,10 @@
-import { PropsWithChildren, useEffect, useRef, useState } from 'react';
-import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
 import { allDataToModify } from '#models/administrations/data-to-modify';
 import { IFaqArticle } from '#models/article/faq';
-import constants from '#models/constants';
+import { getAgentDisplayName, getAgentEmail } from '#models/user/helpers';
+import { ISession } from '#models/user/session';
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 export enum EQuestionType {
   LOADER = 'loader',
   NONE = 'none',
@@ -17,6 +17,7 @@ type IProps = {
   setQuestionType: (type: EQuestionType) => void;
   userType: string;
   questions: IFaqArticle[];
+  session: ISession | null;
 };
 
 export default function Question({
@@ -24,8 +25,11 @@ export default function Question({
   setQuestionType,
   userType,
   questions = [],
+  session,
 }: IProps) {
   const bottomRef = useRef(null);
+  const email = getAgentEmail(session);
+  const name = getAgentDisplayName(session);
 
   const [dataToModify, selectDataToModify] = useState<any>('');
 
@@ -60,19 +64,30 @@ export default function Question({
             Si vous avez une question{' '}
             <strong>à propos des informations affichées sur le site</strong>, ou
             un problème lié au <strong>fonctionnement du site</strong>, vous
-            pouvez nous contacter :
+            pouvez nous contacter via le formulaire ci-dessous:
           </p>
           <div className="layout-center">
-            <ButtonLink
-              to={`${constants.links.mailto}?subject=%5B${userType}%5D%20Je%20ne%20trouve%20pas%20la%20r%C3%A9ponse%20a%20ma%20question&body=Bonjour%2C%20%0A%0AVoici%20ma%20question%20%3A%0AVoici%20le%20num%C3%A9ro%20Siren%20%2F%20Siret%20concern%C3%A9%20%3A`}
-            >
-              Écrivez-nous à {constants.links.mail}
-            </ButtonLink>
+            {/*
+            Custom JS and CSS has been added to this Crisp form.
+            It can be found at this address :
+            https://app.crisp.chat/website/064fca1b-bdd6-4a81-af56-9f38e40953ad/plugins/settings/b68ffdd2-ba6e-46a6-94bb-d0a9872ce09a/
+            */}
+            <iframe
+              title="Contact Form"
+              src={`https://plugins.crisp.chat/urn:crisp.im:contact-form:0/contact/064fca1b-bdd6-4a81-af56-9f38e40953ad?type=${userType}${
+                email ? `&email=${email}` : ''
+              }${name ? `&name=${name}` : ''}`}
+              referrerPolicy="origin"
+              sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
+              width="100%"
+              height="600px"
+              frameBorder="0"
+            ></iframe>
           </div>
           <p>
             <strong>NB :</strong> si votre question concerne une structure en
-            particulier, pensez à nous indiquer le{' '}
-            <strong>siren ou le siret</strong> dans le corps du mail.
+            particulier, pensez à mentionner le{' '}
+            <strong>siren ou le siret</strong> dans votre message.
           </p>
         </Answer>
       );

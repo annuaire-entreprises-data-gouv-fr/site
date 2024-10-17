@@ -3,12 +3,14 @@
 import { MultiChoice } from '#components-ui/multi-choice';
 import Question, { EQuestionType } from '#components/faq-parcours/question';
 import { FAQTargets, allFaqArticlesByTarget } from '#models/article/faq';
+import { ISession } from '#models/user/session';
 import { useRef, useState } from 'react';
 
 type IProps = {
   question: EQuestionType;
+  session: ISession | null;
 };
-export default function ParcoursQuestions({ question }: IProps) {
+export default function ParcoursQuestions({ question, session }: IProps) {
   const initialQuestionType = Object.values(EQuestionType).indexOf(question)
     ? question
     : null;
@@ -56,6 +58,7 @@ export default function ParcoursQuestions({ question }: IProps) {
             userType ? Object.values(allFaqArticlesByTarget[userType]) : []
           }
           userType={userType}
+          session={session}
         />
       )}
     </>

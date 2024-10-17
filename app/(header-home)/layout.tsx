@@ -1,20 +1,18 @@
-import { Metadata } from 'next';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { HeaderAppRouter } from '#components/header/header-app-router';
 import { meta } from '#components/meta/meta-server';
+import { Question } from '#components/question';
 import SocialNetworks from '#components/social-network';
-import getSession from '#utils/server-side-helper/app/get-session';
-import QuestionOrFeedback from 'app/_component/question-or-feedback';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = meta({});
 
-export default async function HomeLayout({
+export default function HomeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getSession();
   return (
     <>
       <NPSBanner />
@@ -25,7 +23,7 @@ export default async function HomeLayout({
       />
       <main className="fr-container">{children}</main>
       <SocialNetworks />
-      <QuestionOrFeedback session={session} />
+      <Question />
       <Footer />
     </>
   );
