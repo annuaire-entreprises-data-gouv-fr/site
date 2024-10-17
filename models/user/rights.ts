@@ -12,7 +12,7 @@ export enum AppScope {
   bilansRne = 'Bilans au RNE',
   documentsRne = 'Documents au RNE',
   protectedCertificats = 'Certificats Qualifelec, Qualibat et OPQIBI',
-  associationProtected = 'Actes, statuts et données des dirigeants des association',
+  associationProtected = 'Actes, statuts et données des dirigeants des associations',
   mandatairesRCS = 'État civil complet des dirigeants d’entreprise',
   carteProfessionnelleTravauxPublics = 'Carte professionnelle travaux publics (FNTP)',
   beneficiaires = 'Registre des Bénéficiaires Effectifs',
