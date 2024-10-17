@@ -42,7 +42,7 @@ const AccountPage = async () => {
         encore accès (avec conditions d’éligibilité).
       </p>
       <FullTable
-        head={['Données', 'Droit d’accés']}
+        head={['Données', 'Droit d’accès']}
         body={appRights.map(([a, b]) => {
           return [
             a,
