@@ -10,7 +10,7 @@
 
 .dialog {
   position: absolute;
-  padding: 1rem;
+  padding: 0.75rem;
   min-width: max-content;
   position: absolute;
   z-index: 10;
@@ -18,8 +18,8 @@
   will-change: transform, opacity;
 }
 
-.menuLogout:hover>.dialog,
-.menuLogout:focus-visible>.dialog,
+.menuLogout:hover > .dialog,
+.menuLogout:focus-visible > .dialog,
 .dialog:focus-visible,
 .dialog:hover {
   visibility: visible !important;
@@ -28,19 +28,20 @@
 
 .dialog a {
   display: block;
-  margin: -1rem;
-  padding: 1rem;
+  margin: -0.75rem;
+  padding: 0.75rem;
   color: var(--annuaire-colors-frBlue);
+}
+.dialog a:first-of-type {
+  margin-bottom: 0;
+}
+.dialog a:last-of-type {
+  margin-top: 0;
 }
 
 .dialog a:hover {
   text-decoration: underline;
-
-}
-
-.dialog:hover {
   background: #f8f8f8;
-
 }
 
 @media only screen and (min-width: 1px) and (max-width: 992px) {
@@ -53,16 +54,15 @@
     right: 0.5rem;
   }
 
-  .menuLogout:hover>.dialog,
-  .menuLogout:focus-visible>.dialog,
+  .menuLogout:hover > .dialog,
+  .menuLogout:focus-visible > .dialog,
   .dialog:focus-visible,
   .dialog:hover,
-  .menuLogout:focus>.dialog,
+  .menuLogout:focus > .dialog,
   .dialog:focus {
     visibility: visible !important;
     animation: appear-right 0.1s ease-in-out forwards;
   }
-
 }
 
 @media only screen and (min-width: 993px) {
@@ -76,8 +76,8 @@
     border-top-right-radius: 0;
   }
 
-  .menuLogout:hover>.dialog,
-  .menuLogout:focus-visible>.dialog,
+  .menuLogout:hover > .dialog,
+  .menuLogout:focus-visible > .dialog,
   .dialog:focus-visible,
   .dialog:hover {
     visibility: visible !important;

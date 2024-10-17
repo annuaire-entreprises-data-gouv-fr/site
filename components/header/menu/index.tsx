@@ -37,6 +37,9 @@ const Menu: React.FC<{
         role="dialog"
         className={styles.dialog}
       >
+        <a aria-label="Gestion de mon compte agent public" href={'/compte'}>
+          <div>Gestion du compte</div>
+        </a>
         <a
           aria-label="Se déconnecter de l'espace agent public"
           href={'/api/auth/agent-connect/logout'}
