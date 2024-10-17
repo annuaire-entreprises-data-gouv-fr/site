@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 17/10/2024
+  target:
+    agent: true
+  body: |
+    Les agents disposent désormais d’une page “Mon compte” pour [consulter leurs droits d’accès](/compte).
 - date: 17/09/2024
   target:
     site: true
