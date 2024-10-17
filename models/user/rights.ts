@@ -7,7 +7,7 @@ import { ISession } from './session';
 export enum AppScope {
   opendata = 'Données en open data',
   isAgent = 'Compte agent public',
-  nonDiffusible = 'Données des entreprises non-diffusibles',
+  nonDiffusible = 'Données des entreprises non diffusibles',
   actesRne = 'Actes au RNE',
   bilansRne = 'Bilans au RNE',
   documentsRne = 'Documents au RNE',
