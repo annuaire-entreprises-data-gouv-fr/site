@@ -18,7 +18,7 @@ const AccountPage = async () => {
   const session = await getSession();
 
   if (!hasRights(session, AppScope.isAgent)) {
-    return redirect(getAbsoluteSiteUrl('/lp/agent-public'));
+    return redirect('/lp/agent-public');
   }
 
   const appRights = [];
