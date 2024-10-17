@@ -5,19 +5,19 @@ import { ISession } from './session';
  * Application scopes designate specific parts or section of the UI / app
  */
 export enum AppScope {
-  none = 'none',
-  actesRne = 'rne',
-  bilansRne = 'rne',
-  documentsRne = 'rne',
-  conformite = 'conformite',
-  protectedCertificats = 'opendata',
-  associationProtected = 'opendata',
-  mandatairesRCS = 'opendata',
-  beneficiaires = 'beneficiaires',
-  carteProfessionnelleTravauxPublics = 'opendata',
-  nonDiffusible = 'nonDiffusible',
-  isAgent = 'isAgent',
-  subventionsAssociation = 'subventionsAssociation',
+  opendata = 'Données en open data',
+  isAgent = 'Compte agent public',
+  nonDiffusible = 'Données des entreprises non-diffusibles',
+  actesRne = 'Actes au RNE',
+  bilansRne = 'Bilans au RNE',
+  documentsRne = 'Documents au RNE',
+  protectedCertificats = 'Certificats Qualifelec, Qualibat et OPQIBI',
+  associationProtected = 'Actes, statuts et données des dirigeants des association',
+  mandatairesRCS = 'Etat civil complet des dirigeants d’entreprise',
+  carteProfessionnelleTravauxPublics = 'Carte professionnelle travaux publics (FNTP)',
+  beneficiaires = 'Registre des Bénéficiaires Effectifs',
+  conformite = 'Attestations de conformite fiscale (DGFiP) et sociale (Urssaf & MSA)',
+  subventionsAssociation = 'Données des subventions des association',
 }
 
 /**
@@ -26,7 +26,7 @@ export enum AppScope {
 export function hasRights(session: ISession | null, rightScope: AppScope) {
   const userScopes = getIAgentScope(session);
   switch (rightScope) {
-    case AppScope.none:
+    case AppScope.opendata:
       return true;
     case AppScope.actesRne:
     case AppScope.bilansRne:
