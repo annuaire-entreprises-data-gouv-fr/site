@@ -8,8 +8,8 @@ import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAssociation } from '#models/core/types';
+import { isUnauthorized } from '#models/data-fetching';
 import { ISubventions } from '#models/subventions/association';
-import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatCurrency } from '#utils/helpers';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
@@ -23,8 +23,8 @@ const DataSubventionLink = () => (
     Data.subvention est un outil développé par la <DJEPVA />. Il recense les
     subventions demandées et reçues par une association.
     <br />
-    Les données sont issues de Chorus et du Fonjep (Fonds de
-    coopération de la jeunesse et de l’éducation populaire).
+    Les données sont issues de Chorus et du Fonjep (Fonds de coopération de la
+    jeunesse et de l’éducation populaire).
   </FAQLink>
 );
 
@@ -66,7 +66,7 @@ const SubventionDetails: React.FC<{ subventions: ISubventions }> = ({
   );
 };
 
-const SubventionsAssociation: React.FC<{
+export const SubventionsAssociationSection: React.FC<{
   uniteLegale: IAssociation;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
@@ -75,6 +75,14 @@ const SubventionsAssociation: React.FC<{
     uniteLegale.siren,
     session
   );
+
+  if (isUnauthorized(subventions)) {
+    // for a start lets hide it first before Data subvention validation
+    return null;
+    // return (
+    // <AgentWall id="detail-des-subventions" title="Détail des subventions" />
+    // );
+  }
 
   return (
     <DataSectionClient
@@ -126,18 +134,4 @@ const SubventionsAssociation: React.FC<{
       }
     </DataSectionClient>
   );
-};
-
-export const SubventionsAssociationSection: React.FC<{
-  uniteLegale: IAssociation;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
-  if (!hasRights(session, AppScope.subventionsAssociation)) {
-    // for a start lets hide it first before Data subvention validation
-    return null;
-    // return (
-    // <AgentWall id="detail-des-subventions" title="Détail des subventions" />
-    // );
-  }
-  return <SubventionsAssociation uniteLegale={uniteLegale} session={session} />;
 };

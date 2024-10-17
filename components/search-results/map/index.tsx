@@ -13,7 +13,7 @@ const SearchResultsMap: React.FC<{
   results: ISearchResults;
   searchFilterParams?: IParams;
 }> = ({ results, searchTerm = '', searchFilterParams = {} }) => {
-  const height = 'calc(100vh - 265px)';
+  const height = 'calc(100vh - 230px)';
 
   if (searchTerm && results.notEnoughParams) {
     return (

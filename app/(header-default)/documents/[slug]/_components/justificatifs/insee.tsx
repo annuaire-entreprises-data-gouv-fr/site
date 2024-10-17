@@ -64,7 +64,7 @@ const AvisSituationNonDiffusible = () => (
 
 const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, session }) => (
   <Section
-    id="insee"
+    id="justificatifs-insee"
     title="Justificatif d’inscription à l’Insee"
     sources={[EAdministration.INSEE]}
   >
