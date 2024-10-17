@@ -17,7 +17,7 @@ export enum AppScope {
   carteProfessionnelleTravauxPublics = 'Carte professionnelle travaux publics (FNTP)',
   beneficiaires = 'Registre des Bénéficiaires Effectifs',
   conformite = 'Attestations de conformite fiscale (DGFiP) et sociale (Urssaf & MSA)',
-  subventionsAssociation = 'Données des subventions des association',
+  subventionsAssociation = 'Données des subventions des associations',
 }
 
 /**
