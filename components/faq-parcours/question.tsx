@@ -2,6 +2,8 @@ import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
 import { allDataToModify } from '#models/administrations/data-to-modify';
 import { IFaqArticle } from '#models/article/faq';
+import { getAgentDisplayName, getAgentEmail } from '#models/user/helpers';
+import { ISession } from '#models/user/session';
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 export enum EQuestionType {
   LOADER = 'loader',
@@ -15,6 +17,7 @@ type IProps = {
   setQuestionType: (type: EQuestionType) => void;
   userType: string;
   questions: IFaqArticle[];
+  session: ISession | null;
 };
 
 export default function Question({
@@ -22,8 +25,11 @@ export default function Question({
   setQuestionType,
   userType,
   questions = [],
+  session,
 }: IProps) {
   const bottomRef = useRef(null);
+  const email = getAgentEmail(session);
+  const name = getAgentDisplayName(session);
 
   const [dataToModify, selectDataToModify] = useState<any>('');
 
@@ -61,9 +67,16 @@ export default function Question({
             pouvez nous contacter via le formulaire ci-dessous:
           </p>
           <div className="layout-center">
+            {/*
+            Custom JS and CSS has been added to this Crisp form.
+            It can be found at this address :
+            https://app.crisp.chat/website/064fca1b-bdd6-4a81-af56-9f38e40953ad/plugins/settings/b68ffdd2-ba6e-46a6-94bb-d0a9872ce09a/
+            */}
             <iframe
               title="Contact Form"
-              src={`https://plugins.crisp.chat/urn:crisp.im:contact-form:0/contact/${process.env.NEXT_PUBLIC_CRISP_WEBSITE_ID}`}
+              src={`https://plugins.crisp.chat/urn:crisp.im:contact-form:0/contact/064fca1b-bdd6-4a81-af56-9f38e40953ad?type=${userType}${
+                email ? `&email=${email}` : ''
+              }${name ? `&name=${name}` : ''}`}
               referrerPolicy="origin"
               sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
               width="100%"
