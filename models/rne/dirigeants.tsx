@@ -20,7 +20,10 @@ export const getDirigeantsRNE = async (
 
   try {
     const { dirigeants } = await clientRNEImmatriculation(siren);
-    return { data: dirigeants, metadata: { isFallback: false } };
+    return {
+      data: dirigeants,
+      metadata: { isFallback: false, isProtected: false },
+    };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
@@ -28,7 +31,10 @@ export const getDirigeantsRNE = async (
 
     try {
       const dirigeants = await clientDirigeantsRechercheEntreprise(siren);
-      return { data: dirigeants, metadata: { isFallback: true } };
+      return {
+        data: dirigeants,
+        metadata: { isFallback: true, isProtected: false },
+      };
     } catch (eFallback) {
       if (eFallback instanceof HttpNotFound) {
         return APINotRespondingFactory(EAdministration.INPI, 404);

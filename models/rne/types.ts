@@ -49,7 +49,8 @@ export interface IObservations {
 
 export interface IDirigeants {
   data: (IEtatCivil | IPersonneMorale)[];
-  metadata?: {
+  metadata: {
     isFallback: boolean;
+    isProtected: boolean;
   };
 }

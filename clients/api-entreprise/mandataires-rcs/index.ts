@@ -66,5 +66,6 @@ const mapToDomainObject = (
         role: dirigeant.fonction,
       } as IPersonneMorale;
     }),
+    metadata: { isProtected: true, isFallback: false },
   };
 };

@@ -12,32 +12,27 @@ import { DirigeantContent } from './dirigeant-content';
 type IProps = {
   dirigeants: IDirigeantsFetching;
   uniteLegale: IUniteLegale;
-  isProtected: boolean;
   warning: JSX.Element;
 };
 
 /**
  * Dirigeants section
  */
-function DirigeantsSection({
-  uniteLegale,
-  dirigeants,
-  isProtected,
-  warning,
-}: IProps) {
-  const sources = [EAdministration.INPI];
-
-  if (isProtected) {
-    sources.push(EAdministration.INFOGREFFE);
-  }
-
+function DirigeantsSection({ uniteLegale, dirigeants, warning }: IProps) {
   return (
     <AsyncDataSectionClient
       id="rne-dirigeants"
       title="Dirigeant(s)"
-      sources={sources}
+      sources={[
+        EAdministration.INPI,
+        // @ts-ignore
+        ...(dirigeants?.metadata?.isProtected
+          ? [EAdministration.INFOGREFFE]
+          : []),
+      ]}
       data={dirigeants}
-      isProtected={isProtected}
+      // @ts-ignore
+      isProtected={dirigeants?.metadata?.isProtected}
       notFoundInfo={
         <>
           Cette structure n’est pas enregistrée au{' '}
@@ -51,7 +46,7 @@ function DirigeantsSection({
           <>
             {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}
             {warning ? warning : null}
-            {isProtected ? (
+            {dirigeants?.metadata?.isProtected ? (
               <Info>
                 Ces informations proviennent d’
                 <a

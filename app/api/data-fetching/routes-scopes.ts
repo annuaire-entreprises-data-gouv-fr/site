@@ -9,6 +9,7 @@ export const APIRoutesScopes: Record<APIPath, AppScope> = {
   'espace-agent/qualibat': AppScope.protectedCertificats,
   'espace-agent/qualifelec': AppScope.protectedCertificats,
   'espace-agent/rcs-mandataires': AppScope.mandatairesRCS,
+  'espace-agent/rcs-rne-dirigeants': AppScope.mandatairesRCS,
   'espace-agent/beneficiaires': AppScope.beneficiaires,
   'espace-agent/rne/documents': AppScope.documentsRne,
   'espace-agent/association-protected': AppScope.associationProtected,
