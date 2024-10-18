@@ -7,7 +7,8 @@ export type IAgentScope =
   | 'beneficiaires'
   | 'subventions_association'
   | 'agent'
-  | 'opendata';
+  | 'opendata'
+  | 'cibtp';
 
 export const isAgentScope = (str: string): str is IAgentScope => {
   if (
@@ -19,6 +20,7 @@ export const isAgentScope = (str: string): str is IAgentScope => {
       'subventions_association',
       'agent',
       'opendata',
+      'cibtp',
     ].indexOf(str) > 0
   ) {
     return true;

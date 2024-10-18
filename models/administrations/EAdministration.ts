@@ -23,4 +23,5 @@ export enum EAdministration {
   QUALIFELEC = 'qualifelec',
   QUALIBAT = 'qualibat',
   OPQIBI = 'opqibi',
+  CIBTP = 'cibtp',
 }

@@ -1,0 +1,14 @@
+slug: cibtp
+short: CIBTP
+long: CIBTP
+site: https://www.cibtp.fr/
+contact: https://www.cibtp.fr/contact
+estServicePublic: false
+logoType: portrait
+dataSources:
+  - label: Liste des entreprises CIBTP
+    apiSlug: api-entreprise
+    data:
+      - label: Certification CIBTP
+description: |
+  CIBTP est un organisme de droit privé à gestion paritaire chargé de la gestion des régimes spécifiques de congés payés et de chômage intempéries dans le secteur du Bâtiment et des Travaux Publics (BTP).

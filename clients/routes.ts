@@ -19,6 +19,8 @@ const routes = {
       qualifelec: '/v3/qualifelec/etablissements/{siret}/certificats',
       qualibat: '/v3/qualibat/etablissements/{siret}/certification_batiment',
       opqibi: '/v3/opqibi/unites_legales/{siren}/certification_ingenierie',
+      cibtp:
+        '/v3/cibtp/etablissements/{siret}/attestation_cotisations_conges_payes_chomage_intemperies',
     },
     mandatairesRCS:
       '/v3/infogreffe/rcs/unites_legales/{siren}/mandataires_sociaux',
