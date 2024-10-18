@@ -1,0 +1,17 @@
+export enum APIRoutesPaths {
+  EspaceAgentCarteProfessionnelleTP = 'espace-agent/carte-professionnelle-TP',
+  EspaceAgentConformite = 'espace-agent/conformite',
+  EspaceAgentOpqibi = 'espace-agent/opqibi',
+  EspaceAgentQualibat = 'espace-agent/qualibat',
+  EspaceAgentQualifelec = 'espace-agent/qualifelec',
+  EspaceAgentRcsMandataires = 'espace-agent/rcs-mandataires',
+  EspaceAgentBeneficiaires = 'espace-agent/beneficiaires',
+  EspaceAgentRneDocuments = 'espace-agent/rne/documents',
+  EspaceAgentAssociationProtected = 'espace-agent/association-protected',
+  RneDirigeants = 'rne-dirigeants',
+  Observations = 'observations',
+  Association = 'association',
+  VerifyTva = 'verify-tva',
+  EoriValidation = 'eori-validation',
+  SubventionsAssociation = 'subventions-association',
+}

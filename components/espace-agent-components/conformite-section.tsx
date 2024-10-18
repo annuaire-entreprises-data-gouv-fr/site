@@ -6,6 +6,7 @@ import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import Conformite from './conformite';
 
@@ -15,7 +16,7 @@ interface IProps {
 }
 function ConformiteSection({ uniteLegale, session }: IProps) {
   const conformite = useAPIRouteData(
-    'espace-agent/conformite',
+    APIRoutesPaths.EspaceAgentConformite,
     uniteLegale.siege.siret,
     session
   );

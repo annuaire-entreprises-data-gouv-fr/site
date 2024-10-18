@@ -16,6 +16,7 @@ import {
 import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const NoBilans = () => (
@@ -27,7 +28,7 @@ const AgentBilansSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const documents = useAPIRouteData(
-    'espace-agent/rne/documents',
+    APIRoutesPaths.EspaceAgentRneDocuments,
     uniteLegale.siren,
     session
   );

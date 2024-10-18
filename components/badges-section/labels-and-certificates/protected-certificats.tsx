@@ -7,6 +7,7 @@ import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
 import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import {
   LabelsAndCertificatesBadgesSection,
@@ -21,17 +22,17 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
 }> = ({ uniteLegale, session }) => {
   const hasOtherCertificates = checkHasLabelsAndCertificates(uniteLegale);
   const opqibi = useAPIRouteData(
-    'espace-agent/opqibi',
+    APIRoutesPaths.EspaceAgentOpqibi,
     uniteLegale.siren,
     session
   );
   const qualibat = useAPIRouteData(
-    'espace-agent/qualibat',
+    APIRoutesPaths.EspaceAgentQualibat,
     uniteLegale.siege.siret,
     session
   );
   const qualifelec = useAPIRouteData(
-    'espace-agent/qualifelec',
+    APIRoutesPaths.EspaceAgentQualifelec,
     uniteLegale.siege.siret,
     session
   );

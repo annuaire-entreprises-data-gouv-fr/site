@@ -8,6 +8,7 @@ import { IUniteLegale } from '#models/core/types';
 import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 export const OpqibiSection: React.FC<{
@@ -15,7 +16,7 @@ export const OpqibiSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const opqibi = useAPIRouteData(
-    'espace-agent/opqibi',
+    APIRoutesPaths.EspaceAgentOpqibi,
     uniteLegale.siren,
     session
   );

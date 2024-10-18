@@ -10,6 +10,7 @@ import { IUniteLegale } from '#models/core/types';
 import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { ITVAIntracommunautaire } from '#models/tva';
 import { Siren, formatIntFr } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const NoTVA = () => (
@@ -82,7 +83,7 @@ const VerifyTVA: React.FC<{
   siren: Siren;
 }> = ({ tva, siren }) => {
   const { tvaNumber, mayHaveMultipleTVANumber } = tva;
-  const verification = useAPIRouteData('verify-tva', siren, null);
+  const verification = useAPIRouteData(APIRoutesPaths.VerifyTva, siren, null);
   if (isDataLoading(verification)) {
     return (
       <>

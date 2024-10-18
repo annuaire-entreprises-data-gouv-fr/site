@@ -7,6 +7,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 export const ObservationsRNE: React.FC<{
@@ -14,7 +15,7 @@ export const ObservationsRNE: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const observations = useAPIRouteData(
-    'observations',
+    APIRoutesPaths.Observations,
     uniteLegale.siren,
     session
   );

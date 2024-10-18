@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { IDataFetchingState } from '#models/data-fetching';
 import { InternalError } from '#models/exceptions';
 import { hasRights } from '#models/user/rights';
@@ -9,26 +8,33 @@ import {
   RequestAbortedDuringUnloadException,
 } from '#utils/network/frontend';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
-import {
-  APIPath,
-  RouteParams,
-  RouteResponse,
-} from 'app/api/data-fetching/routes-handlers';
+import { APIRoutesHandlers } from 'app/api/data-fetching/routes-handlers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { APIRoutesScopes } from 'app/api/data-fetching/routes-scopes';
+import { useEffect, useState } from 'react';
+import { UnwrapPromise } from 'types';
 
-type Options<T extends APIPath> = {
+export type RouteResponse<T> = T extends APIRoutesPaths
+  ? UnwrapPromise<ReturnType<(typeof APIRoutesHandlers)[T]>>
+  : never;
+
+export type RouteParams<T> = T extends APIRoutesPaths
+  ? Parameters<(typeof APIRoutesHandlers)[T]>[1]
+  : never;
+
+type Options<T extends APIRoutesPaths> = {
   params?: RouteParams<T>;
 };
 
 /**
  * Hook to fetch data from internal API
- * @param route : route to fetch (from {@link APIPath})
+ * @param route : route to fetch (from {@link APIRoutesPaths})
  * @param slug : slug parameter for the route
  * @param session : user session, used to check rights
  * @param options : options for the fetch. **Important**: the object should be memoized, otherwise the hook will fetch the data at each render
  * @returns {IDataFetchingState | RouteResponse<T>} - The API loading state or the fetched data
  */
-export function useAPIRouteData<T extends APIPath>(
+export function useAPIRouteData<T extends APIRoutesPaths>(
   route: T,
   slug: string,
   session: ISession | null,
@@ -50,7 +56,7 @@ export function useAPIRouteData<T extends APIPath>(
   return response;
 }
 
-async function fetchAPIRoute<T extends APIPath>(
+async function fetchAPIRoute<T extends APIRoutesPaths>(
   route: T,
   slug: string,
   session: ISession | null,

@@ -12,6 +12,7 @@ import { isUnauthorized } from '#models/data-fetching';
 import { ISubventions } from '#models/subventions/association';
 import { ISession } from '#models/user/session';
 import { formatCurrency } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { useMemo } from 'react';
 
@@ -71,7 +72,7 @@ export const SubventionsAssociationSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const subventions = useAPIRouteData(
-    'subventions-association',
+    APIRoutesPaths.SubventionsAssociation,
     uniteLegale.siren,
     session
   );

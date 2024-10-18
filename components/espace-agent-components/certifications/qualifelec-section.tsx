@@ -7,6 +7,7 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatDate, formatDateLong } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 export function QualifelecSection({
@@ -17,7 +18,7 @@ export function QualifelecSection({
   session: ISession | null;
 }) {
   const qualifelec = useAPIRouteData(
-    'espace-agent/qualifelec',
+    APIRoutesPaths.EspaceAgentQualifelec,
     uniteLegale.siege.siret,
     session
   );

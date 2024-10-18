@@ -11,6 +11,7 @@ import { IBeneficairesEffectif } from '#models/espace-agent/beneficiaires';
 import { UseCase } from '#models/user/agent';
 import { ISession } from '#models/user/session';
 import { formatDatePartial } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { useMemo } from 'react';
 
@@ -31,7 +32,7 @@ const ProtectedBeneficiairesSection: React.FC<{
     [useCase]
   );
   const beneficiaires = useAPIRouteData(
-    'espace-agent/beneficiaires',
+    APIRoutesPaths.EspaceAgentBeneficiaires,
     uniteLegale.siren,
     session,
     params
