@@ -12,6 +12,7 @@ import {
 } from '#models/data-fetching';
 import { IDirigeants } from '#models/rne/types';
 import { ISession } from '#models/user/session';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import BeneficiairesSection from './beneficiaires';
 import RCSRNEComparison from './rcs-rne-comparison';
@@ -48,13 +49,13 @@ export function DirigeantInformation({
   session: ISession | null;
 }) {
   const dirigeantsRNE = useAPIRouteData(
-    'rne-dirigeants',
+    APIRoutesPaths.RneDirigeants,
     uniteLegale.siren,
     session
   );
 
   const mandatairesRCS = useAPIRouteData(
-    'espace-agent/rcs-mandataires',
+    APIRoutesPaths.EspaceAgentRcsMandataires,
     uniteLegale.siren,
     session
   );

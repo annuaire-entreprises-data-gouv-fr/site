@@ -6,6 +6,7 @@ import { AsyncDataSectionClient } from '#components/section/data-section/client'
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 export default function CarteProfessionnelleTPSection({
@@ -16,7 +17,7 @@ export default function CarteProfessionnelleTPSection({
   session: ISession | null;
 }) {
   const carteProfessionnelleTravauxPublics = useAPIRouteData(
-    'espace-agent/carte-professionnelle-TP',
+    APIRoutesPaths.EspaceAgentCarteProfessionnelleTP,
     uniteLegale.siege.siret,
     session
   );

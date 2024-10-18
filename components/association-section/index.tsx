@@ -11,6 +11,7 @@ import { getPersonnalDataAssociation } from '#models/core/diffusion';
 import { IAssociation, IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { AssociationNotFound } from './association-not-found';
 
@@ -144,7 +145,7 @@ const AssociationSection = ({
   const { idAssociation = '' } = uniteLegale.association;
 
   const association = useAPIRouteData(
-    'association',
+    APIRoutesPaths.Association,
     uniteLegale.siren,
     session
   );
