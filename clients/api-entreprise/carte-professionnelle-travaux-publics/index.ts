@@ -21,10 +21,7 @@ export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
   >(
     `${
       process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.carteProfessionnelleTravauxPublics.replace(
-      '{siren}',
-      siren
-    )}`,
+    }${routes.apiEntreprise.carteProfessionnelleTravauxPublics(siren)}`,
     mapToDomainObject
   );
 };

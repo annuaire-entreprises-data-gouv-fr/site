@@ -18,9 +18,9 @@ export const clientApiEntrepriseConformiteFiscale = async (siren: Siren) => {
     IAPIEntrepriseConformiteFiscale,
     IConformite
   >(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.conformite.fiscale.replace('{siren}', siren)}`,
+    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale(
+      siren
+    )}`,
     mapToDomainObject
   );
 };
