@@ -12,9 +12,7 @@ import { getDirigeantsRNE } from '#models/rne/dirigeants';
 import { getRNEObservations } from '#models/rne/observations';
 import { getSubventionsAssociationFromSlug } from '#models/subventions/association';
 import { buildAndVerifyTVA } from '#models/tva/verify';
-import getBeneficiairesController, {
-  beneficiaireRoute,
-} from './get-beneficiaires-controller';
+import getBeneficiairesController from './get-beneficiaires-controller';
 import { APIRoutesPaths } from './routes-paths';
 
 export const APIRoutesHandlers = {
@@ -25,7 +23,7 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentQualibat]: getQualibat,
   [APIRoutesPaths.EspaceAgentQualifelec]: getQualifelec,
   [APIRoutesPaths.EspaceAgentRcsMandataires]: getMandatairesRCS,
-  [beneficiaireRoute]: getBeneficiairesController,
+  [APIRoutesPaths.EspaceAgentBeneficiaires]: getBeneficiairesController,
   [APIRoutesPaths.EspaceAgentRneDocuments]: getDocumentsRNEProtected,
   [APIRoutesPaths.EspaceAgentAssociationProtected]: getAssociationProtected,
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,
