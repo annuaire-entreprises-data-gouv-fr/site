@@ -18,6 +18,7 @@ export enum AppScope {
   beneficiaires = 'Registre des Bénéficiaires Effectifs',
   conformite = 'Attestations de conformité fiscale (DGFiP) et sociale (Urssaf & MSA)',
   subventionsAssociation = 'Données des subventions des associations',
+  cibtp = 'Accès au certificat CIBTP',
 }
 
 /**
@@ -43,6 +44,8 @@ export function hasRights(session: ISession | null, rightScope: AppScope) {
       return userScopes.includes('beneficiaires');
     case AppScope.subventionsAssociation:
       return userScopes.includes('subventions_association');
+    case AppScope.cibtp:
+      return userScopes.includes('cibtp');
     case AppScope.nonDiffusible:
       return userScopes.includes('nonDiffusible');
     case AppScope.isAgent:

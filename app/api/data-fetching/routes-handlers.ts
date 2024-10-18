@@ -2,6 +2,7 @@ import { getAssociationFromSlug } from '#models/association';
 import { getEORIValidation } from '#models/eori-validation';
 import { getAssociationProtected } from '#models/espace-agent/association-protected';
 import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte-professionnelle-travaux-publics';
+import { getCibtp } from '#models/espace-agent/certificats/cibtp';
 import { getOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
@@ -21,6 +22,7 @@ export const APIRoutesHandlers = {
   'espace-agent/carte-professionnelle-TP': getCarteProfessionnelleTravauxPublic,
   'espace-agent/conformite': getConformiteEntreprise,
   'espace-agent/opqibi': getOpqibi,
+  'espace-agent/cibtp': getCibtp,
   'espace-agent/qualibat': getQualibat,
   'espace-agent/qualifelec': getQualifelec,
   'espace-agent/rcs-mandataires': getMandatairesRCS,

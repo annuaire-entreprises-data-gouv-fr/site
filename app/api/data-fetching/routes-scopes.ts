@@ -18,4 +18,5 @@ export const APIRoutesScopes: Record<APIPath, AppScope> = {
   'verify-tva': AppScope.opendata,
   'eori-validation': AppScope.opendata,
   'subventions-association': AppScope.subventionsAssociation,
+  'espace-agent/cibtp': AppScope.protectedCertificats,
 };

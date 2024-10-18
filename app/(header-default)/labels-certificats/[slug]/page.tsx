@@ -1,9 +1,9 @@
-import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/badges-section/labels-and-certificates';
+import { CibtpSection } from '#components/espace-agent-components/certifications/cibpt-section';
 import { OpqibiSection } from '#components/espace-agent-components/certifications/opqibi-section';
 import { QualibatSection } from '#components/espace-agent-components/certifications/qualibat-section';
 import { QualifelecSection } from '#components/espace-agent-components/certifications/qualifelec-section';
@@ -28,6 +28,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -106,6 +107,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
             <QualibatSection session={session} uniteLegale={uniteLegale} />
             <QualifelecSection session={session} uniteLegale={uniteLegale} />
             <OpqibiSection session={session} uniteLegale={uniteLegale} />
+            <CibtpSection session={session} uniteLegale={uniteLegale} />
           </>
         )}
         {estOrganismeFormation && (
