@@ -35,6 +35,8 @@ const routes = {
       annonce: 'https://www.bodacc.fr/annonce/detail-annonce/',
       recherche:
         'https://www.bodacc.fr/pages/annonces-commerciales/?sort=dateparution',
+      rechercheBySiren:
+        'https://www.bodacc.fr/pages/annonces-commerciales/?q.registre=registre:{siren}',
     },
   },
   datagouv: {

@@ -68,7 +68,10 @@ const AnnoncesBodacc: React.FC<{
                 consulter{' '}
                 <UniteLegalePageLink
                   uniteLegale={uniteLegale}
-                  href={`${routes.bodacc.site.recherche}/${uniteLegale.siren}`}
+                  href={routes.bodacc.site.rechercheBySiren.replace(
+                    '{siren}',
+                    uniteLegale.siren
+                  )}
                   siteName="le site du BODACC"
                 />
                 &nbsp;:
