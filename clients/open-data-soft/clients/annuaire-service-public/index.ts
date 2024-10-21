@@ -4,7 +4,7 @@ import routes from '#clients/routes';
 import { stubClient } from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { IServicePublic } from '#models/service-public';
-import { Siret } from '#utils/helpers';
+import { removeSpecialChars, Siret } from '#utils/helpers';
 
 interface IServicePublicRecord {
   adresse: string;
@@ -67,11 +67,7 @@ const clientAnnuaireServicePublicByName = async (
   const response = await queryAnnuaireServicePublic(`search(nom, "${name}")`);
 
   const record = response.records.find((record: IServicePublicRecord) => {
-    const nom = record.nom
-      .toUpperCase()
-      // Remove accents
-      .normalize('NFD')
-      .replace(/\p{Diacritic}/gu, '');
+    const nom = removeSpecialChars(record.nom.toUpperCase());
     return nom === name;
   });
   if (!record) {
