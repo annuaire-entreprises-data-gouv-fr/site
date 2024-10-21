@@ -44,7 +44,7 @@ const SearchResultPage = async function UniteLegalePage(props: AppRouterProps) {
         searchParams={searchFilterParamsJSON}
         currentSearchTerm={searchTerm}
       />
-      <main className="fr-container">
+      <main className="fr-container" id="contenu">
         <StructuredDataSearchAction />
         <HiddenH1 title="Résultats de recherche" />
         <div className="content-container">

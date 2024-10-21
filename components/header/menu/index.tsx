@@ -1,9 +1,11 @@
+'use client';
 import FloatingModal from '#components-ui/floating-modal';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
 import { getAgentDisplayName, getAgentLabel } from '#models/user/helpers';
 import { isLoggedIn } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import React, { useState } from 'react';
 import { EspaceAgentLink } from './espace-agent-link';
 import styles from './styles.module.css';
 
@@ -11,12 +13,55 @@ const Menu: React.FC<{
   session: ISession | null;
   useAgentCTA: boolean;
 }> = ({ session, useAgentCTA }) => {
-  return isLoggedIn(session) ? (
-    <div className={styles.menuLogout + ' fr-link'} tabIndex={0}>
-      <div>
-        <Icon slug="accountLine">
-          <span className={styles.menuText}>
-            {getAgentDisplayName(session)}
+  const userText = getAgentDisplayName(session);
+
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const logoutUrl = '/api/auth/agent-connect/logout';
+
+  function logout() {
+    window.location.href = logoutUrl;
+  }
+
+  const handleButtonKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setShowUserMenu(false);
+      e.preventDefault();
+    }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      setShowUserMenu(true);
+      e.preventDefault();
+    }
+    if ((e.key === 'Enter' || e.key === 'Space') && showUserMenu) {
+      setShowUserMenu(!showUserMenu);
+      e.preventDefault();
+      e.stopPropagation();
+      logout();
+    }
+  };
+
+  if (!isLoggedIn(session)) {
+    if (!useAgentCTA) {
+      return null;
+    }
+    return <EspaceAgentLink />;
+  }
+  return (
+    <div className={styles.menuLogout}>
+      <button
+        onKeyDown={handleButtonKeyDown}
+        className="fr-link"
+        onBlur={() => {
+          setShowUserMenu(false);
+        }}
+        onClick={() => setShowUserMenu(!showUserMenu)}
+        aria-haspopup="true"
+        aria-expanded={showUserMenu}
+        aria-controls="menu-user"
+      >
+        <span className="fr-sr-only">{userText}</span>
+        <span aria-hidden className={styles.menuText}>
+          <Icon slug="accountLine">
+            {userText}
             &nbsp;(
             <strong
               style={{
@@ -26,31 +71,45 @@ const Menu: React.FC<{
             >
               {getAgentLabel(session)}
             </strong>
-            )
-          </span>
-        </Icon>
-      </div>
+            ) &nbsp;
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              style={{
+                transform: showUserMenu ? 'rotate(180deg)' : '',
+                fill: 'var(--annuaire-colors-frBlue)',
+              }}
+              height="9"
+              viewBox="0 0 12 9"
+            >
+              <polygon points="1 0, 11 0, 6 8"></polygon>
+            </svg>
+          </Icon>
+        </span>
+      </button>
       <FloatingModal
-        id="feedback-modal"
-        aria-modal="false"
         elevation="low"
-        role="dialog"
-        className={styles.dialog}
+        role="menu"
+        className={styles.dialog + ' ' + (showUserMenu ? styles.opened : '')}
+        id="menu-user"
+        aria-label="Menu de déconnexion"
       >
         <a aria-label="Gestion de mon compte agent public" href={'/compte'}>
           <div>Mon compte</div>
         </a>
         <a
           aria-label="Se déconnecter de l'espace agent public"
-          href={'/api/auth/agent-connect/logout'}
+          href={logoutUrl}
+          tabIndex={-1}
+          className="fr-link no-style-link"
+          onMouseDown={logout}
+          role="menuitem"
         >
           <div>Se déconnecter</div>
         </a>
       </FloatingModal>
     </div>
-  ) : useAgentCTA ? (
-    <EspaceAgentLink />
-  ) : null;
+  );
 };
 
 export default Menu;

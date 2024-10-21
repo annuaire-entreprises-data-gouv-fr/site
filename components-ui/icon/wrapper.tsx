@@ -25,6 +25,7 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
   return (
     <span id={id} className={styles.icon + ' ' + className}>
       <span
+        aria-hidden
         style={{
           height: size + 'px',
           width: size + 'px',

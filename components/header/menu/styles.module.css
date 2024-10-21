@@ -1,13 +1,19 @@
 .menuLogout {
   position: relative;
-  z-index: 11;
-  cursor: pointer;
+  font-size: small;
 }
-
-.menuLogout:hover {
+.menuLogout > button {
+  margin: 0 !important;
+}
+.menuLogout > button:focus-visible + .dialog a {
+  outline: 2px solid #0476f5;
+}
+.menuLogout > button[aria-expanded='true'] {
   background-color: #eee;
 }
-
+.menuLogout > button[aria-expanded='true']:focus-visible {
+  outline: none;
+}
 .dialog {
   position: absolute;
   padding: 0.75rem;
@@ -21,7 +27,8 @@
 .menuLogout:hover > .dialog,
 .menuLogout:focus-visible > .dialog,
 .dialog:focus-visible,
-.dialog:hover {
+.dialog:hover,
+.dialog.opened {
   visibility: visible !important;
   animation: appear 0.15s ease-in-out forwards;
 }
@@ -31,6 +38,7 @@
   margin: -0.75rem;
   padding: 0.75rem;
   color: var(--annuaire-colors-frBlue);
+  margin: 0rem !important;
 }
 .dialog a:first-of-type {
   margin-bottom: 0;
@@ -40,8 +48,8 @@
 }
 
 .dialog a:hover {
-  text-decoration: underline;
   background: #f8f8f8;
+  text-decoration: underline !important;
 }
 
 @media only screen and (min-width: 1px) and (max-width: 992px) {
@@ -59,7 +67,8 @@
   .dialog:focus-visible,
   .dialog:hover,
   .menuLogout:focus > .dialog,
-  .dialog:focus {
+  .dialog:focus,
+  .dialog.opened {
     visibility: visible !important;
     animation: appear-right 0.1s ease-in-out forwards;
   }
@@ -79,7 +88,8 @@
   .menuLogout:hover > .dialog,
   .menuLogout:focus-visible > .dialog,
   .dialog:focus-visible,
-  .dialog:hover {
+  .dialog:hover,
+  .dialog.opened {
     visibility: visible !important;
     animation: appear-top 0.15s ease-in-out forwards;
   }
