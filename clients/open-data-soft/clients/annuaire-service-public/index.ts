@@ -71,7 +71,7 @@ const clientAnnuaireServicePublicByName = async (
       .toUpperCase()
       // Remove accents
       .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
+      .replace(/\p{Diacritic}/gu, '');
     return nom === name;
   });
   if (!record) {
