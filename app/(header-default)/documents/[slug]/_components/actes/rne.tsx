@@ -11,6 +11,7 @@ import { IUniteLegale, isServicePublic } from '#models/core/types';
 import { IActesRNE } from '#models/rne/types';
 import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 export const AgentActesRNE: React.FC<{
@@ -18,7 +19,7 @@ export const AgentActesRNE: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const documentsRne = useAPIRouteData(
-    'espace-agent/rne/documents',
+    APIRoutesPaths.EspaceAgentRneDocuments,
     uniteLegale.siren,
     session
   );

@@ -11,6 +11,7 @@ import {
 } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { Siret, formatSiret } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 type IProps = {
@@ -18,7 +19,11 @@ type IProps = {
   session: ISession | null;
 };
 export default function EORICell({ siret, session }: IProps) {
-  const eoriValidation = useAPIRouteData('eori-validation', siret, session);
+  const eoriValidation = useAPIRouteData(
+    APIRoutesPaths.EoriValidation,
+    siret,
+    session
+  );
 
   if (isDataLoading(eoriValidation)) {
     return (

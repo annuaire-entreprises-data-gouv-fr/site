@@ -1,21 +1,22 @@
 import { AppScope } from '#models/user/rights';
-import { APIPath } from './routes-handlers';
+import { APIRoutesPaths } from './routes-paths';
 
-export const APIRoutesScopes: Record<APIPath, AppScope> = {
-  'espace-agent/carte-professionnelle-TP':
+export const APIRoutesScopes: Record<APIRoutesPaths, AppScope> = {
+  [APIRoutesPaths.EspaceAgentCarteProfessionnelleTP]:
     AppScope.carteProfessionnelleTravauxPublics,
-  'espace-agent/conformite': AppScope.conformite,
-  'espace-agent/opqibi': AppScope.protectedCertificats,
-  'espace-agent/qualibat': AppScope.protectedCertificats,
-  'espace-agent/qualifelec': AppScope.protectedCertificats,
-  'espace-agent/rcs-mandataires': AppScope.mandatairesRCS,
-  'espace-agent/beneficiaires': AppScope.beneficiaires,
-  'espace-agent/rne/documents': AppScope.documentsRne,
-  'espace-agent/association-protected': AppScope.associationProtected,
-  'rne-dirigeants': AppScope.opendata,
-  observations: AppScope.opendata,
-  association: AppScope.opendata,
-  'verify-tva': AppScope.opendata,
-  'eori-validation': AppScope.opendata,
-  'subventions-association': AppScope.subventionsAssociation,
+  [APIRoutesPaths.EspaceAgentConformite]: AppScope.conformite,
+  [APIRoutesPaths.EspaceAgentOpqibi]: AppScope.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentQualibat]: AppScope.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentQualifelec]: AppScope.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentRcsMandataires]: AppScope.mandatairesRCS,
+  [APIRoutesPaths.EspaceAgentBeneficiaires]: AppScope.beneficiaires,
+  [APIRoutesPaths.EspaceAgentRneDocuments]: AppScope.documentsRne,
+  [APIRoutesPaths.EspaceAgentAssociationProtected]:
+    AppScope.associationProtected,
+  [APIRoutesPaths.RneDirigeants]: AppScope.opendata,
+  [APIRoutesPaths.Observations]: AppScope.opendata,
+  [APIRoutesPaths.Association]: AppScope.opendata,
+  [APIRoutesPaths.VerifyTva]: AppScope.opendata,
+  [APIRoutesPaths.EoriValidation]: AppScope.opendata,
+  [APIRoutesPaths.SubventionsAssociation]: AppScope.subventionsAssociation,
 };

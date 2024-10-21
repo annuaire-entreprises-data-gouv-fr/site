@@ -9,6 +9,7 @@ import constants from '#models/constants';
 import { IAssociation } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatCurrency } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const ColorCircle = ({ color }: { color: string }) => (
@@ -28,7 +29,11 @@ export const FinancesAssociationSection: React.FC<{
   uniteLegale: IAssociation;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const data = useAPIRouteData('association', uniteLegale.siren, session);
+  const data = useAPIRouteData(
+    APIRoutesPaths.Association,
+    uniteLegale.siren,
+    session
+  );
   if (!data) return null;
 
   return (
