@@ -16,7 +16,7 @@ import { Metadata } from 'next';
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug, page, isBot } = extractParamsAppRouter(props);
+  const { slug, page, isBot } = await extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
@@ -32,7 +32,7 @@ export const generateMetadata = async (
 
 export default async function ConventionCollectivePage(props: AppRouterProps) {
   const session = await getSession();
-  const { slug, page, isBot } = extractParamsAppRouter(props);
+  const { slug, page, isBot } = await extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
   const ccWithMetadata = await getAllIdccWithMetadata(uniteLegale.siren);

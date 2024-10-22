@@ -12,8 +12,9 @@ export default function withSession(
 ) {
   return async (req: NextRequest, res: NextResponse) => {
     const reqWithSession = req as IReqWithSession;
+    const cookieStore = await cookies();
     reqWithSession.session = await getIronSession<ISession>(
-      cookies(),
+      cookieStore,
       sessionOptions
     );
     return handler(reqWithSession, res);

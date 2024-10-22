@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { Info } from '#components-ui/alerts';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
@@ -8,12 +7,13 @@ import { formatIntFr } from '#utils/helpers';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
+import { Metadata } from 'next';
 import { InpiPDFDownloader } from './_components/inpi-pdf-downloader';
 
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug } = extractParamsAppRouter(props);
+  const { slug } = await extractParamsAppRouter(props);
 
   return {
     title: 'Télécharger le justificatif d’immatriculation',
@@ -25,7 +25,7 @@ export const generateMetadata = async (
 };
 
 const InpiPDF = (props: AppRouterProps) => {
-  const { slug } = extractParamsAppRouter(props);
+  const { slug } = await extractParamsAppRouter(props);
 
   return (
     <>

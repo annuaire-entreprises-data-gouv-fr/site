@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { Info } from '#components-ui/alerts';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
@@ -8,11 +7,12 @@ import { getEtablissementWithLatLongFromSlug } from '#models/core/etablissement'
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
+import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug } = extractParamsAppRouter(props);
+  const { slug } = await extractParamsAppRouter(props);
 
   return {
     title: `Voir le siret ${slug} sur la carte`,
@@ -24,7 +24,7 @@ export const generateMetadata = async (
 };
 
 const EtablissementMapPage = async (props: AppRouterProps) => {
-  const { slug } = extractParamsAppRouter(props);
+  const { slug } = await extractParamsAppRouter(props);
   const etablissement = await getEtablissementWithLatLongFromSlug(slug);
 
   return (

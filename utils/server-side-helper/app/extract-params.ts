@@ -1,20 +1,20 @@
-import { headers } from 'next/headers';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import isUserAgentABot from '#utils/user-agent';
+import { headers } from 'next/headers';
 
 export type AppRouterProps = {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-function extractParamsAppRouter({
+async function extractParamsAppRouter({
   params,
   searchParams,
 }: Partial<AppRouterProps>) {
   const slug = (params?.slug || '') as string;
 
   searchParams = searchParams ?? {};
-  const headersList = headers();
+  const headersList = await headers();
   const userAgent = headersList.get('user-agent') || '';
 
   // cf middleware
