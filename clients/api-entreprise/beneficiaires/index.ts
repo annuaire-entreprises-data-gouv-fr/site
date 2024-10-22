@@ -33,9 +33,9 @@ export const clientApiEntrepriseBeneficiaires = async (
     IAPIEntrepriseBeneficiaires,
     Array<IBeneficairesEffectif>
   >(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.beneficiaires.replace('{siren}', siren)}`,
+    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.beneficiaires(
+      siren
+    )}`,
     mapToDomainObject,
     { useCase }
   );

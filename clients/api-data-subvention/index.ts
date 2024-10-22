@@ -12,7 +12,7 @@ import { httpGet } from '#utils/network';
 export const clientDataSubvention = async (
   siren: Siren
 ): Promise<ISubventions> => {
-  const route = routes.apiDataSubvention.grants.replace('{identifier}', siren);
+  const route = routes.apiDataSubvention.grants(siren);
   const data = await httpGet<any>(route, {
     headers: { 'x-access-token': process.env.DATA_SUBVENTION_API_KEY },
     timeout: constants.timeout.XXXL,
