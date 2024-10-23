@@ -2,7 +2,12 @@
 
 import { MultiChoice } from '#components-ui/multi-choice';
 import Question, { EQuestionType } from '#components/faq-parcours/question';
-import { FAQTargets, allFaqArticlesByTarget } from '#models/article/faq';
+import {
+  EFAQTargets,
+  FAQTargets,
+  allFaqArticlesByTarget,
+} from '#models/article/faq';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { useRef, useState } from 'react';
 
@@ -17,7 +22,13 @@ export default function ParcoursQuestions({ question, session }: IProps) {
 
   const scrollRef = useRef<HTMLSpanElement | null>(null);
 
-  const [userType, setUserType] = useState(initialQuestionType ? 'all' : '');
+  const [userType, setUserType] = useState(
+    hasRights(session, AppScope.isAgent)
+      ? EFAQTargets.AGENT
+      : initialQuestionType
+      ? 'all'
+      : ''
+  );
   const [questionType, setQuestionType] = useState<EQuestionType>(
     initialQuestionType || EQuestionType.NONE
   );

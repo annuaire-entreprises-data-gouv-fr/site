@@ -16,6 +16,18 @@ export function getIAgentScope(session: ISession | null) {
   return session?.user?.scopes || [];
 }
 
+export function getAgentFullName(session: ISession | null) {
+  const fullName = session?.user?.fullName;
+  const firstName = session?.user?.firstName;
+  const familyName = session?.user?.familyName;
+
+  if (fullName) {
+    return fullName.trim();
+  }
+
+  return [firstName, familyName].filter(Boolean).join(' ').trim();
+}
+
 export function getAgentDisplayName(session: ISession | null) {
   return (
     session?.user?.fullName || session?.user?.email || 'Utilisateur inconnu'

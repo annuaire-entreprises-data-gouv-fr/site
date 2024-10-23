@@ -1,20 +1,31 @@
 'use client';
 
-import { useState } from 'react';
-import { useFormStatus } from 'react-dom';
 import { Loader } from '#components-ui/loader';
 import { isSiren } from '#utils/helpers';
+import { useState } from 'react';
 
-type IProps = {
-  formAction: (formData: FormData) => void;
+type RenseignerSirenProps = {
+  postFormData: (formData: FormData) => Promise<void>;
 };
 
-export function RenseignerSiren({ formAction }: IProps) {
-  const [siren, setSiren] = useState<string>('');
-  let validSiren = isSiren(siren);
+export function RenseignerSiren({ postFormData }: RenseignerSirenProps) {
+  const [siren, setSiren] = useState('');
+  const [loading, setLoading] = useState(false);
+  const validSiren = isSiren(siren);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append('siren', siren);
+    await postFormData(formData);
+
+    setLoading(false);
+  };
 
   return (
-    <form action={formAction}>
+    <form onSubmit={handleSubmit}>
       <fieldset
         className="fr-fieldset fr-grid-row"
         aria-label="SIREN de l'entreprise"
@@ -55,23 +66,15 @@ export function RenseignerSiren({ formAction }: IProps) {
           → Rechercher le SIREN de mon entreprise
         </a>
       </p>
-      <SubmitButton disabled={!validSiren} />
+      <p className="fr-mt-6w">
+        <button
+          className="fr-btn fr-btn--primary fr-mr-2w"
+          type="submit"
+          disabled={!validSiren || loading}
+        >
+          Valider et envoyer la demande {loading && <Loader />}
+        </button>
+      </p>
     </form>
-  );
-}
-
-export function SubmitButton({ disabled }: { disabled: boolean }) {
-  const { pending } = useFormStatus();
-
-  return (
-    <p className="fr-mt-6w">
-      <button
-        className="fr-btn fr-btn--primary fr-mr-2w"
-        type="submit"
-        disabled={disabled || pending}
-      >
-        Valider et envoyer la demande {pending && <Loader />}
-      </button>
-    </p>
   );
 }

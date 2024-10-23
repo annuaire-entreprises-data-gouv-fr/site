@@ -2,7 +2,8 @@ import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
 import { allDataToModify } from '#models/administrations/data-to-modify';
 import { IFaqArticle } from '#models/article/faq';
-import { getAgentDisplayName, getAgentEmail } from '#models/user/helpers';
+import { getAgentEmail, getAgentFullName } from '#models/user/helpers';
+import { AppScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 export enum EQuestionType {
@@ -29,7 +30,7 @@ export default function Question({
 }: IProps) {
   const bottomRef = useRef(null);
   const email = getAgentEmail(session);
-  const name = getAgentDisplayName(session);
+  const name = getAgentFullName(session);
 
   const [dataToModify, selectDataToModify] = useState<any>('');
 
@@ -64,7 +65,7 @@ export default function Question({
             Si vous avez une question{' '}
             <strong>à propos des informations affichées sur le site</strong>, ou
             un problème lié au <strong>fonctionnement du site</strong>, vous
-            pouvez nous contacter via le formulaire ci-dessous:
+            pouvez nous contacter via le formulaire ci-dessous :
           </p>
           <div className="layout-center">
             {/*
@@ -89,6 +90,19 @@ export default function Question({
             particulier, pensez à mentionner le{' '}
             <strong>siren ou le siret</strong> dans votre message.
           </p>
+          {hasRights(session, AppScope.isAgent) && (
+            <p>
+              Rejoignez notre salon{' '}
+              <a
+                href="https://tchap.gouv.fr/#/room/#annuaire-entreprises:agent.dinum.tchap.gouv.fr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Tchap
+              </a>{' '}
+              pour nous contacter ou être tenu au courant de nos nouveautés.
+            </p>
+          )}
         </Answer>
       );
     case EQuestionType.MODIFICATION:

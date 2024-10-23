@@ -1,5 +1,6 @@
 import { getBeneficiaires } from '#models/espace-agent/beneficiaires';
 import { UseCase } from '#models/user/agent';
+import { APIRoutesPaths } from './routes-paths';
 import { APIRouteError } from './utils';
 
 export default function getBeneficiairesController(
@@ -9,11 +10,9 @@ export default function getBeneficiairesController(
   if (!('useCase' in params) || params.useCase in UseCase) {
     throw new APIRouteError(
       'Invalid useCase',
-      { slug: params.useCase, route: beneficiaireRoute },
+      { slug: params.useCase, route: APIRoutesPaths.EspaceAgentBeneficiaires },
       400
     );
   }
   return getBeneficiaires(slug, params.useCase);
 }
-
-export const beneficiaireRoute = 'espace-agent/beneficiaires';

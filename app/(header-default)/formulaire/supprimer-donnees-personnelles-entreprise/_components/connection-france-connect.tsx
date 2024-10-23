@@ -3,7 +3,7 @@ import ButtonFranceConnect from '#components-ui/button-france-connect';
 import { ISession } from '#models/user/session';
 import { getHidePersonalDataRequestFCSession } from '#utils/session';
 
-export async function ConnectionFranceConnect({
+export function ConnectionFranceConnect({
   session,
 }: {
   session: ISession | null;

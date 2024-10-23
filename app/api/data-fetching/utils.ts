@@ -3,6 +3,7 @@ import { ISession } from '#models/user/session';
 import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
 import { userAgent } from 'next/server';
 import getSession from '../../../utils/server-side-helper/app/get-session';
+import { APIRoutesPaths } from './routes-paths';
 
 type RouteHandler = (
   request: Request,
@@ -82,7 +83,7 @@ export class APIRouteError extends Exception {
 export function getRouteAndSlug(context: { params: { slug: Array<string> } }) {
   try {
     const slug = context.params.slug.at(-1) as string;
-    const route = context.params.slug.slice(0, -1).join('/');
+    const route = context.params.slug.slice(0, -1).join('/') as APIRoutesPaths;
     return { route, slug };
   } catch (e) {
     throw new APIRouteError('Invalid route', { route: '', slug: '' }, 404, e);

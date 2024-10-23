@@ -1,21 +1,24 @@
 import { ApplicationRights } from '#models/user/rights';
-import { APIPath } from './routes-handlers';
+import { APIRoutesPaths } from './routes-paths';
 
-export const APIRoutesScopes: Record<APIPath, ApplicationRights> = {
-  'espace-agent/carte-professionnelle-TP':
+export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
+  [APIRoutesPaths.EspaceAgentCarteProfessionnelleTP]:
     ApplicationRights.carteProfessionnelleTravauxPublics,
-  'espace-agent/conformite': ApplicationRights.conformite,
-  'espace-agent/opqibi': ApplicationRights.protectedCertificats,
-  'espace-agent/qualibat': ApplicationRights.protectedCertificats,
-  'espace-agent/qualifelec': ApplicationRights.protectedCertificats,
-  'espace-agent/rcs-mandataires': ApplicationRights.mandatairesRCS,
-  'espace-agent/beneficiaires': ApplicationRights.beneficiaires,
-  'espace-agent/rne/documents': ApplicationRights.documentsRne,
-  'espace-agent/association-protected': ApplicationRights.associationProtected,
-  'rne-dirigeants': ApplicationRights.opendata,
-  observations: ApplicationRights.opendata,
-  association: ApplicationRights.opendata,
-  'verify-tva': ApplicationRights.opendata,
-  'eori-validation': ApplicationRights.opendata,
-  'subventions-association': ApplicationRights.subventionsAssociation,
+  [APIRoutesPaths.EspaceAgentConformite]: ApplicationRights.conformite,
+  [APIRoutesPaths.EspaceAgentOpqibi]: ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentQualibat]: ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentQualifelec]:
+    ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentRcsMandataires]: ApplicationRights.mandatairesRCS,
+  [APIRoutesPaths.EspaceAgentBeneficiaires]: ApplicationRights.beneficiaires,
+  [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
+  [APIRoutesPaths.EspaceAgentAssociationProtected]:
+    ApplicationRights.associationProtected,
+  [APIRoutesPaths.RneDirigeants]: ApplicationRights.opendata,
+  [APIRoutesPaths.Observations]: ApplicationRights.opendata,
+  [APIRoutesPaths.Association]: ApplicationRights.opendata,
+  [APIRoutesPaths.VerifyTva]: ApplicationRights.opendata,
+  [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
+  [APIRoutesPaths.SubventionsAssociation]:
+    ApplicationRights.subventionsAssociation,
 };

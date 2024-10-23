@@ -35,8 +35,8 @@
           "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
           "trancheEffectif": "01",
           "libelleTrancheEffectif": "",
-          "latitude": "43.926703",
-          "longitude": "4.784775",
+          "latitude": "43.926702999999996",
+          "longitude": "4.784774999999998",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -84,8 +84,8 @@
               "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
               "trancheEffectif": "01",
               "libelleTrancheEffectif": "",
-              "latitude": "43.926703",
-              "longitude": "4.784775",
+              "latitude": "43.926702999999996",
+              "longitude": "4.784774999999998",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -125,8 +125,8 @@
               "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
               "trancheEffectif": "01",
               "libelleTrancheEffectif": "",
-              "latitude": "43.926703",
-              "longitude": "4.784775",
+              "latitude": "43.926702999999996",
+              "longitude": "4.784774999999998",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -154,7 +154,7 @@
         "dateCreation": "1997-12-08",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-03-22T14:26:06",
+        "dateMiseAJourInsee": "2024-10-17T05:12:35.813",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -194,45 +194,6 @@
         "matchingEtablissements": [
           {
             "siren": "414971929",
-            "siret": "41497192900040",
-            "oldSiret": "",
-            "etatAdministratif": "en activité",
-            "statutDiffusion": "diffusible",
-            "estSiege": true,
-            "enseigne": "",
-            "denomination": null,
-            "nic": "00040",
-            "dateCreation": "2013-07-01",
-            "dateDerniereMiseAJour": "",
-            "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2022-07-18",
-            "dateFermeture": "",
-            "adresse": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
-            "adressePostale": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
-            "codePostal": "84000",
-            "commune": "AVIGNON",
-            "activitePrincipale": "64.30Z",
-            "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
-            "trancheEffectif": "01",
-            "libelleTrancheEffectif": "",
-            "latitude": "43.926703",
-            "longitude": "4.784775",
-            "complements": {
-              "estEntrepreneurIndividuel": false,
-              "idFiness": [],
-              "idBio": [],
-              "idcc": [
-                "0478"
-              ],
-              "idOrganismeFormation": [],
-              "idRge": [],
-              "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
-          },
-          {
-            "siren": "414971929",
             "siret": "41497192900024",
             "oldSiret": "",
             "etatAdministratif": "en activité",
@@ -267,6 +228,45 @@
             },
             "anneeTrancheEffectif": null,
             "ancienSiege": true
+          },
+          {
+            "siren": "414971929",
+            "siret": "41497192900040",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": "",
+            "denomination": null,
+            "nic": "00040",
+            "dateCreation": "2013-07-01",
+            "dateDerniereMiseAJour": "",
+            "dateMiseAJourInsee": "",
+            "dateDebutActivite": "2022-07-18",
+            "dateFermeture": "",
+            "adresse": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
+            "adressePostale": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
+            "codePostal": "84000",
+            "commune": "AVIGNON",
+            "activitePrincipale": "64.30Z",
+            "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
+            "trancheEffectif": "01",
+            "libelleTrancheEffectif": "",
+            "latitude": "43.926702999999996",
+            "longitude": "4.784774999999998",
+            "complements": {
+              "estEntrepreneurIndividuel": false,
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "0478"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
+            "anneeTrancheEffectif": "2022",
+            "ancienSiege": false
           },
           {
             "siren": "414971929",
@@ -336,7 +336,7 @@
           },
           {
             "siren": "702621590",
-            "denomination": "ARESXPERT AUDIT",
+            "denomination": "TALENZ ARES AUDIT",
             "role": "Commissaire aux comptes titulaire"
           }
         ]
