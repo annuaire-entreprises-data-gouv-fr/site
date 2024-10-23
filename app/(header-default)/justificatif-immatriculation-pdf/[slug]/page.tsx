@@ -8,6 +8,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import { Metadata } from 'next';
+import { use } from 'react';
 import { InpiPDFDownloader } from './_components/inpi-pdf-downloader';
 
 export const generateMetadata = async (
@@ -24,8 +25,8 @@ export const generateMetadata = async (
   };
 };
 
-const InpiPDF = (props: AppRouterProps) => {
-  const { slug } = await extractParamsAppRouter(props);
+export default function InpiPDF({ params }: AppRouterProps) {
+  const { slug } = use(params);
 
   return (
     <>
@@ -63,6 +64,4 @@ const InpiPDF = (props: AppRouterProps) => {
       </div>
     </>
   );
-};
-
-export default InpiPDF;
+}

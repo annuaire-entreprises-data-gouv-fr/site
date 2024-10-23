@@ -5,13 +5,13 @@ import { RenderMarkdownServerOnly } from '#components/markdown';
 import { allDefinitions, getDefinition } from '#models/article/definitions';
 import { Exception } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
+import {
+  AppRouterProps,
+  IParams,
+} from '#utils/server-side-helper/app/extract-params';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { cache } from 'react';
-
-type IParams = {
-  slug: string;
-};
+import { cache, use } from 'react';
 
 const cachedGetDefinition = cache((slug: string) => {
   const definition = getDefinition(slug);
@@ -28,12 +28,9 @@ const cachedGetDefinition = cache((slug: string) => {
   return definition;
 });
 
-export const generateMetadata = function ({
-  params,
-}: {
-  params: IParams;
-}): Metadata {
-  const definition = cachedGetDefinition(params.slug);
+export const generateMetadata = ({ params }: AppRouterProps): Metadata => {
+  const { slug } = use(params);
+  const definition = cachedGetDefinition(slug);
 
   return {
     title: definition.seo.title || definition.title,
@@ -45,8 +42,9 @@ export const generateMetadata = function ({
   };
 };
 
-export default (function DefinitionPage({ params }: { params: IParams }) {
-  const definition = cachedGetDefinition(params.slug);
+export default function DefinitionPage({ params }: AppRouterProps) {
+  const { slug } = use(params);
+  const definition = cachedGetDefinition(slug);
 
   return (
     <TextWrapper>
@@ -80,7 +78,7 @@ export default (function DefinitionPage({ params }: { params: IParams }) {
       ) : null}
     </TextWrapper>
   );
-});
+}
 
 export async function generateStaticParams(): Promise<Array<IParams>> {
   return allDefinitions.map(({ slug }) => {

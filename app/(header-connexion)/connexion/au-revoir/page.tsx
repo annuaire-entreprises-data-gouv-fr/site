@@ -1,7 +1,6 @@
 import { ConnexionSubLayout } from '#components-ui/connexion-layout';
 import logoutPicture from '#components-ui/illustrations/logout';
 import { Metadata } from 'next';
-import { NextPageWithLayout } from 'pages/_app';
 
 export const metadata: Metadata = {
   title: 'Vous êtes bien deconnecté',
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow',
 };
 
-const ConnexionGoodbye: NextPageWithLayout = () => {
+export default function ConnexionGoodbyePage() {
   return (
     <ConnexionSubLayout img={logoutPicture}>
       <h1>Vous êtes bien déconnecté(e)</h1>
@@ -19,6 +18,4 @@ const ConnexionGoodbye: NextPageWithLayout = () => {
       <a href="/">← Revenir au moteur de recherche</a>
     </ConnexionSubLayout>
   );
-};
-
-export default ConnexionGoodbye;
+}

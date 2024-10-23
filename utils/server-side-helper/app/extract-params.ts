@@ -3,27 +3,28 @@ import isUserAgentABot from '#utils/user-agent';
 import { headers } from 'next/headers';
 
 export type AppRouterProps = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 async function extractParamsAppRouter({
   params,
   searchParams,
 }: Partial<AppRouterProps>) {
-  const slug = (params?.slug || '') as string;
+  const resolvedParams = await params;
+  const slug = (resolvedParams?.slug || '') as string;
 
-  searchParams = searchParams ?? {};
+  const resolvedSearchParams = (await searchParams) || {};
   const headersList = await headers();
   const userAgent = headersList.get('user-agent') || '';
 
   // cf middleware
   const isRedirected = headersList.get('x-redirected') === '1';
 
-  const pageParam = (searchParams.page || '') as string;
+  const pageParam = (resolvedSearchParams.page || '') as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
 
-  const isABotParam = (searchParams.isABot || '') as string;
+  const isABotParam = (resolvedSearchParams.isABot || '') as string;
   const isABotUA = isUserAgentABot(userAgent);
 
   const isBot = !!isABotParam || isABotUA;
