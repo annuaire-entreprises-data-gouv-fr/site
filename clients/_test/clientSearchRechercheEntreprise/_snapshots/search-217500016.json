@@ -153,8 +153,8 @@
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 2904,
-          "nombreEtablissements": 3012,
+          "nombreEtablissementsOuverts": 2905,
+          "nombreEtablissements": 3013,
           "usePagination": true,
           "currentEtablissementPage": 1
         },
@@ -163,7 +163,7 @@
         "dateCreation": "1983-03-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-10-10T09:27:02.788",
+        "dateMiseAJourInsee": "2024-10-21T12:45:44.362",
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -1685,8 +1685,8 @@
         ],
         "immatriculation": null,
         "matchingEtablissements": [],
-        "nombreEtablissements": 3012,
-        "nombreEtablissementsOuverts": 2904,
+        "nombreEtablissements": 3013,
+        "nombreEtablissementsOuverts": 2905,
         "dirigeants": []
       }
     ]
