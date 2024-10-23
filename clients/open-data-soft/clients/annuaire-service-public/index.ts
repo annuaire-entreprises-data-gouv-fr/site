@@ -50,7 +50,6 @@ function queryAnnuaireServicePublic(whereQuery: string) {
       url: routes.annuaireServicePublic.ods.search,
       config: {
         params: { where: whereQuery },
-        useCache: true,
         timeout: constants.timeout.XXXL,
       },
     },

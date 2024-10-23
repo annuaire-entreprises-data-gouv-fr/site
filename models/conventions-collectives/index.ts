@@ -30,7 +30,7 @@ export const getAllIdccWithMetadata = async (
   siren: Siren
 ): Promise<ICCWithMetadata[] | IAPINotRespondingError> => {
   try {
-    const allIdcc = await clientIdccRechercheEntreprise(siren, true);
+    const allIdcc = await clientIdccRechercheEntreprise(siren);
 
     const metadata = [] as ICCWithMetadata[];
 

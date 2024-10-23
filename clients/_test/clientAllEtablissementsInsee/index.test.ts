@@ -20,14 +20,7 @@ function expectClientToMatchSnapshotWithSiren(siren: string, page = 1) {
     await expectClientToMatchSnapshot({
       __dirname,
       client: clientAllEtablissementsInsee,
-      args: [
-        siren,
-        page,
-        {
-          useFallback: false,
-          useCache: false,
-        },
-      ],
+      args: [siren, page, false],
       snaphotFile: `siren-${siren}${page !== 1 ? '-page-' + page : ''}.json`,
       simplifyParams,
     });

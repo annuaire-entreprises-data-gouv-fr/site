@@ -42,7 +42,6 @@ type IIGResponse = {
 const clientUniteLegaleIG = async (siren: Siren): Promise<IUniteLegale> => {
   return mapToDomainObject(
     await clientAPIProxy<IIGResponse>(routes.proxy.ig + siren, {
-      useCache: false,
       timeout: constants.timeout.XL,
     }),
     siren

@@ -1,17 +1,10 @@
+import constants from '#models/constants';
+import Axios, { AxiosInstance } from 'axios';
 import http from 'http';
 import https from 'https';
-import Axios from 'axios';
-import {
-  AxiosCacheInstance,
-  buildStorage,
-  setupCache,
-} from 'axios-cache-interceptor';
-import constants from '#models/constants';
 import { IDefaultRequestConfig } from '..';
-import { CACHE_TIMEOUT, defaultCacheConfig } from './cache-config';
 import errorInterceptor from './error-interceptor';
 import { addStartTimeInterceptor, logInterceptor } from './log-interceptor';
-import { RedisStorage } from './redis/redis-storage';
 
 /**
  * Limit the number of sockets allocated per distant hosts and to reuse sockets
@@ -23,29 +16,17 @@ const agentOptions = {
   maxFreeSockets: 128, // Maximum number of sockets to leave open in a free state. Only relevant if keepAlive is set to true. Defaults to 256.
 };
 
-const redisStorage = RedisStorage.isRedisEnabled
-  ? new RedisStorage(CACHE_TIMEOUT)
-  : undefined;
-
 /**
  * Returns a cache-enabled axios instance
  */
-export const axiosInstanceFactory = (
-  timeout = constants.timeout.L
-): AxiosCacheInstance => {
+const axiosInstanceFactory = (timeout = constants.timeout.L): AxiosInstance => {
   const axiosOptions = {
     timeout,
     httpsAgent: new https.Agent(agentOptions),
     httpAgent: new http.Agent(agentOptions),
   };
 
-  const axiosInstance = setupCache(Axios.create(axiosOptions), {
-    storage: redisStorage ? buildStorage(redisStorage) : undefined,
-    // ignore cache-control headers as some API like sirene return 'no-cache' headers
-    headerInterpreter: () => CACHE_TIMEOUT,
-    // eslint-disable-next-line no-console
-    debug: console.info,
-  });
+  const axiosInstance = Axios.create(axiosOptions);
 
   //@ts-ignore
   axiosInstance.interceptors.request.use(addStartTimeInterceptor, (err) =>
@@ -58,12 +39,11 @@ export const axiosInstanceFactory = (
   return axiosInstance;
 };
 
-const axiosInstanceWithCache = axiosInstanceFactory();
+const axiosInstance = axiosInstanceFactory();
 
 async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
-  const response = await axiosInstanceWithCache({
+  const response = await axiosInstance({
     timeout: constants.timeout.L,
-    cache: config.useCache ? defaultCacheConfig : false,
     ...config,
     headers: {
       'User-Agent': 'annuaire-entreprises-site',

@@ -15,12 +15,11 @@ import { IAssociationResponse } from './types';
  */
 const clientAssociation = async (
   rnaOrSiren: IdRna | Siren,
-  siretSiege: string,
-  useCache = true
+  siretSiege: string
 ) => {
   const response = await clientAPIProxy<IAssociationResponse>(
     routes.proxy.association + rnaOrSiren,
-    { timeout: constants.timeout.L, useCache }
+    { timeout: constants.timeout.L }
   );
 
   if (response.identite && Object.keys(response.identite).length === 1) {

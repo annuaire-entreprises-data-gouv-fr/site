@@ -11,7 +11,7 @@ import { clientAPIProxy } from '../client';
  * RNE through the API proxy
  * @param siren
  */
-const fetchDocumentsFromRNE = async (siren: Siren, useCache = true) => {
+const fetchDocumentsFromRNE = async (siren: Siren) => {
   const route = routes.proxy.rne.documents.list + siren;
 
   const callerInfos = await sensitiveRequestCallerInfos();
@@ -19,7 +19,6 @@ const fetchDocumentsFromRNE = async (siren: Siren, useCache = true) => {
 
   return await clientAPIProxy<IActesRNE>(route, {
     timeout: constants.timeout.XXXXL,
-    useCache,
   });
 };
 

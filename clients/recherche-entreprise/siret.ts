@@ -3,15 +3,13 @@ import { IEtablissement } from '#models/core/types';
 import clientSearchRechercheEntreprise from '.';
 
 export const clientEtablissementRechercheEntreprise = async (
-  siret: string,
-  useCache = false
+  siret: string
 ): Promise<IEtablissement> => {
   const { results } = await clientSearchRechercheEntreprise({
     searchTerms: siret,
     pageResultatsRecherche: 1,
     inclureEtablissements: false,
     inclureImmatriculation: false,
-    useCache,
   });
 
   if (

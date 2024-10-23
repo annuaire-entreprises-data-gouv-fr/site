@@ -1,7 +1,6 @@
 export type IDefaultRequestConfig = {
   url?: string;
   timeout?: number;
-  useCache?: boolean;
   params?: any;
   headers?: any;
   method?: 'POST' | 'GET' | 'PATCH';

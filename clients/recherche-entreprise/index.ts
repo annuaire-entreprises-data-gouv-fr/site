@@ -34,7 +34,6 @@ type ClientSearchRechercheEntreprise = {
   searchTerms: string;
   pageResultatsRecherche: number;
   searchFilterParams?: SearchFilterParams;
-  useCache?: boolean;
   inclureEtablissements?: boolean;
   inclureImmatriculation?: boolean;
   pageEtablissements?: number;
@@ -46,7 +45,6 @@ type ClientSearchRechercheEntreprise = {
 const clientSearchRechercheEntreprise = async ({
   searchTerms,
   searchFilterParams,
-  useCache = false,
   inclureEtablissements = false,
   inclureImmatriculation = false,
   pageResultatsRecherche = 1,
@@ -90,7 +88,6 @@ const clientSearchRechercheEntreprise = async ({
   const results = await httpGet<ISearchResponse>(url, {
     timeout,
     headers: { referer: 'annuaire-entreprises-site' },
-    useCache,
   });
 
   if (!results.results || results.results.length === 0) {
