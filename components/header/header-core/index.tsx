@@ -1,12 +1,12 @@
-import dynamic from 'next/dynamic';
-import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import dynamic from 'next/dynamic';
+import React from 'react';
 import Menu from '../menu';
 import styles from './styles.module.css';
 
@@ -129,7 +129,7 @@ export const HeaderCore: React.FC<IProps> = ({
           </form>
         </PrintNever>
       </header>
-      {useAgentBanner && hasRights(session, AppScope.isAgent) && (
+      {useAgentBanner && hasRights(session, ApplicationRights.isAgent) && (
         <div className={styles.agentBanner} role="banner">
           <PrintNever>
             <div className="fr-container">

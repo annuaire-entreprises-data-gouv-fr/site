@@ -1,10 +1,9 @@
-import { Metadata } from 'next';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { estDiffusible } from '#models/core/diffusion';
 import { isAssociation, isServicePublic } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -14,6 +13,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { Metadata } from 'next';
 import DirigeantsAssociationSection from './_component/sections/association/dirigeants';
 import { DirigeantInformation } from './_component/sections/entreprise';
 import ResponsablesServicePublicSection from './_component/sections/service-public';
@@ -53,7 +53,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
         {isServicePublic(uniteLegale) ? (
           <ResponsablesServicePublicSection uniteLegale={uniteLegale} />
         ) : !estDiffusible(uniteLegale) &&
-          !hasRights(session, AppScope.nonDiffusible) ? (
+          !hasRights(session, ApplicationRights.nonDiffusible) ? (
           <DonneesPriveesSection />
         ) : isAssociation(uniteLegale) ? (
           <DirigeantsAssociationSection

@@ -5,7 +5,7 @@ import {
 import { HttpBadRequestError, HttpForbiddenError } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import logErrorInSentry from '#utils/sentry';
 import withSessionPagesRouter from '#utils/session/with-session-pages-router';
 
@@ -23,7 +23,7 @@ export default withSessionPagesRouter(async function download(req, res) {
   } = req;
 
   try {
-    if (!hasRights(session, AppScope.documentsRne)) {
+    if (!hasRights(session, ApplicationRights.documentsRne)) {
       throw new HttpForbiddenError('Unauthorized account');
     }
 

@@ -1,4 +1,4 @@
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 
 export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
@@ -10,7 +10,7 @@ export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
       <li>
         <a href="#justificatifs">Justificatifs d’immatriculation</a>
       </li>
-      {hasRights(session, AppScope.conformite) && (
+      {hasRights(session, ApplicationRights.conformite) && (
         <li>
           <a href="#conformite">Attestations de conformite</a>
         </li>
@@ -18,7 +18,10 @@ export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
       <li>
         <a href="#actes">Actes et statuts</a>
       </li>
-      {hasRights(session, AppScope.carteProfessionnelleTravauxPublics) && (
+      {hasRights(
+        session,
+        ApplicationRights.carteProfessionnelleTravauxPublics
+      ) && (
         <li>
           <a href="#carte-professionnelle-travaux-publics">
             Carte professionnelle travaux publics

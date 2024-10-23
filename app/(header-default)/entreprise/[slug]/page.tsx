@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
@@ -17,7 +16,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import {
   shouldNotIndex,
   uniteLegalePageDescription,
@@ -30,6 +29,7 @@ import extractParamsAppRouter, {
 import getSession from '#utils/server-side-helper/app/get-session';
 import { UniteLegaleImmatriculationSection } from 'app/(header-default)/entreprise/[slug]/_components/immatriculation-section';
 import UniteLegaleSummarySection from 'app/(header-default)/entreprise/[slug]/_components/summary-section';
+import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -73,7 +73,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
               uniteLegale={uniteLegale}
               session={session}
             />
-            {hasRights(session, AppScope.isAgent) && (
+            {hasRights(session, ApplicationRights.isAgent) && (
               <EspaceAgentSummarySection
                 uniteLegale={uniteLegale}
                 session={session}

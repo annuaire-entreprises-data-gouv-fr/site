@@ -1,7 +1,7 @@
 import AgentWallAssociationProtected from '#components/espace-agent-components/agent-wall/association';
 import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
 import { IUniteLegale, isAssociation } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { AgentActesAssociation } from './associations';
 import { AgentActesRNE } from './rne';
@@ -10,7 +10,7 @@ const ActesSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  if (!hasRights(session, AppScope.actesRne)) {
+  if (!hasRights(session, ApplicationRights.actesRne)) {
     if (isAssociation(uniteLegale)) {
       return (
         <AgentWallAssociationProtected

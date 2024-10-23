@@ -4,7 +4,7 @@ import { ISession } from './session';
 /**
  * Application scopes designate specific parts or section of the UI / app
  */
-export enum AppScope {
+export enum ApplicationRights {
   opendata = 'Données en open data',
   isAgent = 'Compte agent public',
   nonDiffusible = 'Données des entreprises non diffusibles',
@@ -23,29 +23,29 @@ export enum AppScope {
 /**
  * Does the user have the right to access a view
  */
-export function hasRights(session: ISession | null, rightScope: AppScope) {
+export function hasRights(session: ISession | null, right: ApplicationRights) {
   const userScopes = getIAgentScope(session);
-  switch (rightScope) {
-    case AppScope.opendata:
+  switch (right) {
+    case ApplicationRights.opendata:
       return true;
-    case AppScope.actesRne:
-    case AppScope.bilansRne:
-    case AppScope.documentsRne:
+    case ApplicationRights.actesRne:
+    case ApplicationRights.bilansRne:
+    case ApplicationRights.documentsRne:
       return userScopes.includes('rne');
-    case AppScope.conformite:
+    case ApplicationRights.conformite:
       return userScopes.includes('conformite');
-    case AppScope.protectedCertificats:
-    case AppScope.carteProfessionnelleTravauxPublics:
-    case AppScope.mandatairesRCS:
-    case AppScope.associationProtected:
+    case ApplicationRights.protectedCertificats:
+    case ApplicationRights.carteProfessionnelleTravauxPublics:
+    case ApplicationRights.mandatairesRCS:
+    case ApplicationRights.associationProtected:
       return userScopes.includes('opendata');
-    case AppScope.beneficiaires:
+    case ApplicationRights.beneficiaires:
       return userScopes.includes('beneficiaires');
-    case AppScope.subventionsAssociation:
+    case ApplicationRights.subventionsAssociation:
       return userScopes.includes('subventions_association');
-    case AppScope.nonDiffusible:
+    case ApplicationRights.nonDiffusible:
       return userScopes.includes('nonDiffusible');
-    case AppScope.isAgent:
+    case ApplicationRights.isAgent:
       return userScopes.includes('agent');
     default:
       return false;

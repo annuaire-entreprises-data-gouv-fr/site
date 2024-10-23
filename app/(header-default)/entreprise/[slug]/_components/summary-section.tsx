@@ -1,4 +1,3 @@
-import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
 import { ProtectedCertificatesBadgesSection } from '#components/badges-section/labels-and-certificates/protected-certificats';
@@ -13,11 +12,12 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
+import React from 'react';
 import {
   LabelsAndCertificatesBadgesSection,
   checkHasLabelsAndCertificates,
@@ -131,7 +131,7 @@ const UniteLegaleSummarySection: React.FC<{
       />,
     ],
     // agents : we dont know yet if there are labels and certifs
-    ...(hasRights(session, AppScope.protectedCertificats)
+    ...(hasRights(session, ApplicationRights.protectedCertificats)
       ? [
           ['', <br />],
           [

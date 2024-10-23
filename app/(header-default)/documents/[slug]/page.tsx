@@ -1,11 +1,10 @@
-import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -15,6 +14,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { Metadata } from 'next';
 import ActesSection from './_components/actes';
 import CarteProfessionnelleTPSection from './_components/carte-professionnelle-TP-section';
 import JustificatifsSection from './_components/justificatifs';
@@ -55,11 +55,14 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
         <HorizontalSeparator />
         <BreakPageForPrint />
         <PrintNever>
-          {hasRights(session, AppScope.conformite) && (
+          {hasRights(session, ApplicationRights.conformite) && (
             <ConformiteSection session={session} uniteLegale={uniteLegale} />
           )}
           <ActesSection uniteLegale={uniteLegale} session={session} />
-          {hasRights(session, AppScope.carteProfessionnelleTravauxPublics) && (
+          {hasRights(
+            session,
+            ApplicationRights.carteProfessionnelleTravauxPublics
+          ) && (
             <CarteProfessionnelleTPSection
               session={session}
               uniteLegale={uniteLegale}

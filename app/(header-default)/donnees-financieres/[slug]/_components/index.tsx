@@ -1,6 +1,6 @@
 import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
 import { IUniteLegale } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import AgentBilansSection from './bilans';
 
@@ -8,7 +8,7 @@ const BilansSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  if (!hasRights(session, AppScope.bilansRne)) {
+  if (!hasRights(session, ApplicationRights.bilansRne)) {
     return (
       <AgentWallDocuments
         title="Bilans"

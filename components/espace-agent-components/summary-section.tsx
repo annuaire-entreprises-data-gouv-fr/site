@@ -4,7 +4,7 @@ import { PrintNever } from '#components-ui/print-visibility';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { IUniteLegale } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { NextPageWithLayout } from 'pages/_app';
 
@@ -41,7 +41,7 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
                 <Icon slug="download">Télécharger les bilans</Icon>
               </a>,
             ],
-            ...(hasRights(session, AppScope.conformite)
+            ...(hasRights(session, ApplicationRights.conformite)
               ? [
                   ['', <br />],
                   [

@@ -2,7 +2,7 @@
 
 import { Icon } from '#components-ui/icon/wrapper';
 import { changelogData } from '#models/historique-modifications';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { formatDate } from '#utils/helpers';
 import { useStorage } from 'hooks';
 import useSession from 'hooks/use-session';
@@ -21,7 +21,7 @@ function convertToISO(frenchDate: string) {
 
 export default function ChangelogNotification() {
   const session = useSession();
-  const isAgent = hasRights(session, AppScope.isAgent);
+  const isAgent = hasRights(session, ApplicationRights.isAgent);
 
   const dateOfLastNews = siteChangelog.find(
     ({ target }) => target.site || (isAgent && target.agent)

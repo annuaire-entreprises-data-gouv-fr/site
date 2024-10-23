@@ -1,7 +1,6 @@
 import { Badge } from '#components-ui/badge';
 import { FullTable } from '#components/table/full';
-import { AppScope, hasRights } from '#models/user/rights';
-import { getAbsoluteSiteUrl } from '#utils/server-side-helper/app/get-absolute-site-url';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
@@ -17,14 +16,14 @@ export const metadata: Metadata = {
 const AccountPage = async () => {
   const session = await getSession();
 
-  if (!hasRights(session, AppScope.isAgent)) {
+  if (!hasRights(session, ApplicationRights.isAgent)) {
     return redirect('/lp/agent-public');
   }
 
   const appRights = [];
-  for (const value in AppScope) {
-    const scope = AppScope[value as keyof typeof AppScope];
-    if (!(scope === AppScope.isAgent)) {
+  for (const value in ApplicationRights) {
+    const scope = ApplicationRights[value as keyof typeof ApplicationRights];
+    if (!(scope === ApplicationRights.isAgent)) {
       appRights.push([scope, hasRights(session, scope)]);
     }
   }
