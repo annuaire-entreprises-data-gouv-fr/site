@@ -2,8 +2,10 @@ import { parseIntWithDefaultValue } from '#utils/helpers';
 import isUserAgentABot from '#utils/user-agent';
 import { headers } from 'next/headers';
 
+export type IParams = { slug: string };
+
 export type AppRouterProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<IParams>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
