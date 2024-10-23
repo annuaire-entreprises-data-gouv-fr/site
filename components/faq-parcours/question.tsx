@@ -3,7 +3,7 @@ import TextWrapper from '#components-ui/text-wrapper';
 import { allDataToModify } from '#models/administrations/data-to-modify';
 import { IFaqArticle } from '#models/article/faq';
 import { getAgentEmail, getAgentFullName } from '#models/user/helpers';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 export enum EQuestionType {
@@ -90,7 +90,7 @@ export default function Question({
             particulier, pensez à mentionner le{' '}
             <strong>siren ou le siret</strong> dans votre message.
           </p>
-          {hasRights(session, AppScope.isAgent) && (
+          {hasRights(session, ApplicationRights.isAgent) && (
             <p>
               Rejoignez notre salon{' '}
               <a
