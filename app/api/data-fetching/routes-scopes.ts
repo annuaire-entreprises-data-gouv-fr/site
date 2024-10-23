@@ -1,22 +1,24 @@
-import { AppScope } from '#models/user/rights';
+import { ApplicationRights } from '#models/user/rights';
 import { APIRoutesPaths } from './routes-paths';
 
-export const APIRoutesScopes: Record<APIRoutesPaths, AppScope> = {
+export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.EspaceAgentCarteProfessionnelleTP]:
-    AppScope.carteProfessionnelleTravauxPublics,
-  [APIRoutesPaths.EspaceAgentConformite]: AppScope.conformite,
-  [APIRoutesPaths.EspaceAgentOpqibi]: AppScope.protectedCertificats,
-  [APIRoutesPaths.EspaceAgentQualibat]: AppScope.protectedCertificats,
-  [APIRoutesPaths.EspaceAgentQualifelec]: AppScope.protectedCertificats,
-  [APIRoutesPaths.EspaceAgentRcsMandataires]: AppScope.mandatairesRCS,
-  [APIRoutesPaths.EspaceAgentBeneficiaires]: AppScope.beneficiaires,
-  [APIRoutesPaths.EspaceAgentRneDocuments]: AppScope.documentsRne,
+    ApplicationRights.carteProfessionnelleTravauxPublics,
+  [APIRoutesPaths.EspaceAgentConformite]: ApplicationRights.conformite,
+  [APIRoutesPaths.EspaceAgentOpqibi]: ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentQualibat]: ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentQualifelec]:
+    ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentRcsMandataires]: ApplicationRights.mandatairesRCS,
+  [APIRoutesPaths.EspaceAgentBeneficiaires]: ApplicationRights.beneficiaires,
+  [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
   [APIRoutesPaths.EspaceAgentAssociationProtected]:
-    AppScope.associationProtected,
-  [APIRoutesPaths.RneDirigeants]: AppScope.opendata,
-  [APIRoutesPaths.Observations]: AppScope.opendata,
-  [APIRoutesPaths.Association]: AppScope.opendata,
-  [APIRoutesPaths.VerifyTva]: AppScope.opendata,
-  [APIRoutesPaths.EoriValidation]: AppScope.opendata,
-  [APIRoutesPaths.SubventionsAssociation]: AppScope.subventionsAssociation,
+    ApplicationRights.associationProtected,
+  [APIRoutesPaths.RneDirigeants]: ApplicationRights.opendata,
+  [APIRoutesPaths.Observations]: ApplicationRights.opendata,
+  [APIRoutesPaths.Association]: ApplicationRights.opendata,
+  [APIRoutesPaths.VerifyTva]: ApplicationRights.opendata,
+  [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
+  [APIRoutesPaths.SubventionsAssociation]:
+    ApplicationRights.subventionsAssociation,
 };

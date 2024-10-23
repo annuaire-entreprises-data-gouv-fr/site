@@ -7,7 +7,7 @@ import {
   FAQTargets,
   allFaqArticlesByTarget,
 } from '#models/article/faq';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { useRef, useState } from 'react';
 
@@ -23,7 +23,7 @@ export default function ParcoursQuestions({ question, session }: IProps) {
   const scrollRef = useRef<HTMLSpanElement | null>(null);
 
   const [userType, setUserType] = useState(
-    hasRights(session, AppScope.isAgent)
+    hasRights(session, ApplicationRights.isAgent)
       ? EFAQTargets.AGENT
       : initialQuestionType
       ? 'all'

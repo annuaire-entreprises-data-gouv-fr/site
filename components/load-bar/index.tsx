@@ -1,14 +1,19 @@
 'use client';
 
-import { useEffect } from 'react';
 import constants from '#models/constants';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import { useEffect } from 'react';
 import styles from './style.module.css';
+
 export default function LoadBar({ session }: { session: ISession | null }) {
   useEffect(() => {
     const loadBar = loadBarFactory();
     if (typeof window !== 'undefined') {
+      ['cancelloadbar', 'runloadbar', 'beforeunload'].forEach((e) =>
+        window.addEventListener(e, () => console.error(e))
+      );
+
       window.addEventListener(
         'beforeunload',
         loadBar.runWithDelay.bind(loadBar)
@@ -17,12 +22,13 @@ export default function LoadBar({ session }: { session: ISession | null }) {
       window.addEventListener('cancelloadbar', loadBar.cancel.bind(loadBar));
     }
   }, []);
+
   return (
     <div
       id="loader-bar"
       className={styles['load-bar']}
       style={{
-        background: hasRights(session, AppScope.isAgent)
+        background: hasRights(session, ApplicationRights.isAgent)
           ? constants.colors.espaceAgent
           : 'transparent',
       }}

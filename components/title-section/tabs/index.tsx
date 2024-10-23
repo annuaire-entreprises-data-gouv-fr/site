@@ -8,7 +8,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import Link from 'next/link';
 import styles from './styles.module.css';
@@ -98,7 +98,7 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay:
         checkHasLabelsAndCertificates(uniteLegale) ||
-        hasRights(session, AppScope.protectedCertificats),
+        hasRights(session, ApplicationRights.protectedCertificats),
       width: checkHasQuality(uniteLegale) ? '200px' : '110px',
     },
     {
