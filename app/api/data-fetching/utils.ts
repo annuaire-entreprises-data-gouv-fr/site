@@ -41,7 +41,7 @@ export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
     const session = await getSession();
     if (!userVisitedAPageRecently(session)) {
       throw new APIRouteError(
-        'Antiscrap activated : user has not visited a page recently',
+        'Antiscrap activated : user tries to scrap',
         routeAndSlug,
         401
       );
