@@ -54,10 +54,9 @@ Nous utilisons [Commit-lint](https://commitlint.js.org/#/) avec [conventional-co
 
 #### Prérequis
 
-Le projet nécessite node > 18 et redis installé pour être lancé en local.
+Le projet nécessite node > 18 installé pour être lancé en local.
 
 - [Installer Node](https://nodejs.org/en/download/package-manager)
-- [Installer Redis](https://redis.io/docs/getting-started/installation/)
 
 ```bash
 # Installation

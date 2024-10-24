@@ -14,14 +14,7 @@ function expectClientToMatchSnapshotWithSiren(siren: Siren) {
     await expectClientToMatchSnapshot({
       client: clientUniteLegaleInsee,
       __dirname,
-      args: [
-        siren,
-        1,
-        {
-          useFallback: false,
-          useCache: false,
-        },
-      ],
+      args: [siren, 1, false],
       snaphotFile: `siren-${siren}.json`,
       postProcessResult: (result) => {
         result.dateDerniereMiseAJour = '2023-10-5';

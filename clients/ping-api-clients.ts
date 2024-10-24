@@ -27,28 +27,23 @@ const ping = async (slug: string | string[]) => {
   const sirenDanone = verifySiren('552032534');
   const sirenInclusion = verifySiren('419437629');
 
-  const useCache = false;
-
   switch (slug) {
     case 'api-proxy-ig':
       return await clientUniteLegaleIG(sirenDanone);
     case 'api-proxy-rne':
       // fetch IRM and disable cache
-      return await clientRNEImmatriculation(sirenDanone, useCache);
+      return await clientRNEImmatriculation(sirenDanone);
     case 'api-sirene-insee':
-      return await clientUniteLegaleInsee(sirenGanymede, 1, {
-        useCache,
-        useFallback: false,
-      });
+      return await clientUniteLegaleInsee(sirenGanymede, 1, false);
     case 'api-sirene-donnees-ouvertes':
       return await clientUniteLegaleRechercheEntreprise(sirenGanymede, 1);
     case 'api-association':
-      return await clientAssociation(verifyIdRna('W551000280'), '', useCache);
+      return await clientAssociation(verifyIdRna('W551000280'), '');
     case 'api-marche-inclusion':
       return await clientMarcheInclusion(sirenInclusion);
     case 'api-tva':
       const tva = verifyTVANumber(tvaNumber(sirenDanone));
-      return await clientTVA(tva, useCache);
+      return await clientTVA(tva);
     case 'api-eori':
       return await clientEORI(siretGanymede);
     case 'api-recherche':
@@ -56,7 +51,6 @@ const ping = async (slug: string | string[]) => {
         searchTerms: 'test',
         pageResultatsRecherche: 1,
         searchFilterParams: undefined,
-        useCache,
         inclureEtablissements: false,
       });
     default:

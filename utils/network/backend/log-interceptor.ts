@@ -28,7 +28,6 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
       response?.config?.url || '',
       response?.status,
       //@ts-ignore
-      response?.cached,
       startTime ? endTime - startTime : undefined,
       (response?.config?.method || '').toUpperCase()
     )

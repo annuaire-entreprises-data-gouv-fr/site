@@ -44,9 +44,6 @@ export default async function clientAPIEntreprise<T, U>(
     throw new HttpUnauthorizedError('Missing API Entreprise credentials');
   }
 
-  // never cache any API Entreprise request
-  const useCache = false;
-
   const response = await httpGet<T>(route, {
     headers: {
       Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
@@ -57,7 +54,6 @@ export default async function clientAPIEntreprise<T, U>(
       context: options?.useCase ? options.useCase : 'annuaire-entreprises',
       recipient: callerInfos.siret || '13002526500013',
     },
-    useCache,
   });
 
   return mapToDomainObject(response);

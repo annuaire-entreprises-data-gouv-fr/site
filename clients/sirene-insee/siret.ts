@@ -11,7 +11,7 @@ import {
   formatAdresse,
 } from '#utils/helpers';
 import { libelleFromCodeNAF } from '#utils/helpers/formatting/labels';
-import { InseeClientOptions, inseeClientGet } from '.';
+import { inseeClientGet } from '.';
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
@@ -92,7 +92,7 @@ interface IInseeetablissementUniteLegale {
 const clientAllEtablissementsInsee = async (
   siren: string,
   page = 1,
-  options: InseeClientOptions
+  useFallback: boolean
 ): Promise<{
   list: IEtablissement[];
   page: number;
@@ -101,7 +101,6 @@ const clientAllEtablissementsInsee = async (
   const etablissementsPerPage = constants.resultsPerPage.etablissements;
   const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
 
-  const { useCache, useFallback } = options;
   const { header, etablissements } =
     await inseeClientGet<IInseeEtablissementsResponse>(
       routes.sireneInsee.siret,
@@ -111,7 +110,6 @@ const clientAllEtablissementsInsee = async (
           nombre: etablissementsPerPage,
           debut: cursor,
         },
-        useCache,
       },
       useFallback
     );
@@ -127,14 +125,12 @@ const clientAllEtablissementsInsee = async (
   };
 };
 
-const clientEtablissementInsee = async (
-  siret: Siret,
-  options: InseeClientOptions
-) => {
+const clientEtablissementInsee = async (siret: Siret, useFallback: boolean) => {
   const { etablissement, etablissements } =
     await inseeClientGet<IInseeEtablissementResponse>(
       routes.sireneInsee.siret + siret,
-      options
+      {},
+      useFallback
     );
 
   if (!etablissement && etablissements) {

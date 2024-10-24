@@ -42,13 +42,10 @@ export class TVAUserException extends Error {
  * @param tva
  * @returns TVA number if valid else null
  */
-const clientTVA = async (
-  tva: TVANumber,
-  useCache = true
-): Promise<string | null> => {
+const clientTVA = async (tva: TVANumber): Promise<string | null> => {
   const url = `${routes.proxy.tva}${tva}`;
 
-  const data = await clientAPIProxy<IVIESResponse>(url, { useCache });
+  const data = await clientAPIProxy<IVIESResponse>(url, {});
 
   if (data.userError && ['VALID', 'INVALID'].indexOf(data.userError) === -1) {
     throw new TVAUserException(data.userError);

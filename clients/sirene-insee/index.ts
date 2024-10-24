@@ -3,11 +3,6 @@ import constants from '#models/constants';
 import { IDefaultRequestConfig } from '#utils/network';
 import { httpClientOAuth } from '#utils/network/backend/0auth';
 
-export type InseeClientOptions = {
-  useFallback: boolean;
-  useCache: boolean;
-};
-
 /**
  * Insee client
  *

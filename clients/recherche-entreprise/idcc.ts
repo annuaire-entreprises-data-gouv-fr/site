@@ -4,13 +4,10 @@ import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
 export const clientIdccRechercheEntreprise = async (
-  siren: Siren,
-  useCache = false
+  siren: Siren
 ): Promise<IConventionsCollectives> => {
   const url = `${routes.rechercheEntreprise.idcc.siren}/${siren}`;
-  const data = await httpGet<IConventionsCollectives>(url, {
-    useCache,
-  });
+  const data = await httpGet<IConventionsCollectives>(url, {});
 
   return data;
 };

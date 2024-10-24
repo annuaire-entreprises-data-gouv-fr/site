@@ -43,7 +43,6 @@ export class httpClientOAuth {
           grant_type: 'client_credentials',
           validity_period: 604800,
         },
-        useCache: false,
       });
       this._token = {
         data,
@@ -87,7 +86,6 @@ export class httpClientOAuth {
         ...config.headers,
         Authorization: `Bearer ${token.data.access_token}`,
       },
-      useCache: config.useCache || false,
     });
   };
 }

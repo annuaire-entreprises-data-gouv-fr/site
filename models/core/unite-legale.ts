@@ -6,7 +6,6 @@ import {
   HttpServerError,
 } from '#clients/exceptions';
 import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
-import { InseeClientOptions } from '#clients/sirene-insee';
 import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
@@ -106,15 +105,11 @@ class UniteLegaleBuilder {
   };
 
   fetchFromClients = async (): Promise<IUniteLegale> => {
-    // no cache for bot as they scrap so they tend not to call the same siren twice
-    const useCache = !this._isBot;
-
     const shouldRetry = true;
     const uniteLegaleRechercheEntreprise =
       await fetchUniteLegaleFromRechercheEntreprise(
         this._siren,
         this._page,
-        useCache,
         shouldRetry
       );
 
@@ -144,10 +139,7 @@ class UniteLegaleBuilder {
     const uniteLegaleInsee = await fetchUniteLegaleFromInsee(
       this._siren,
       this._page,
-      {
-        useFallback: false,
-        useCache,
-      }
+      false
     );
 
     /**
@@ -263,14 +255,12 @@ class UniteLegaleBuilder {
 const fetchUniteLegaleFromRechercheEntreprise = async (
   siren: Siren,
   pageEtablissements: number,
-  useCache: boolean,
   shouldRetry: boolean
 ): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
     return await clientUniteLegaleRechercheEntreprise(
       siren,
-      pageEtablissements,
-      useCache
+      pageEtablissements
     );
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
@@ -281,7 +271,6 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
       return await fetchUniteLegaleFromRechercheEntreprise(
         siren,
         pageEtablissements,
-        useCache,
         shouldRetryAgain
       );
     }
@@ -306,10 +295,10 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
 const fetchUniteLegaleFromInsee = async (
   siren: Siren,
   page = 1,
-  inseeOptions: InseeClientOptions
+  useFallback: boolean
 ): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {
-    return await clientUniteLegaleInsee(siren, page, inseeOptions);
+    return await clientUniteLegaleInsee(siren, page, useFallback);
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       const uniteLegale = createDefaultUniteLegale(siren);
@@ -322,11 +311,8 @@ const fetchUniteLegaleFromInsee = async (
       return APINotRespondingFactory(EAdministration.INSEE, 404);
     }
 
-    if (!inseeOptions.useFallback) {
-      return await fetchUniteLegaleFromInsee(siren, page, {
-        ...inseeOptions,
-        useFallback: true,
-      });
+    if (!useFallback) {
+      return await fetchUniteLegaleFromInsee(siren, page, true);
     }
 
     logWarningInSentry(
@@ -334,7 +320,7 @@ const fetchUniteLegaleFromInsee = async (
         ressource: 'UniteLegaleInsee',
         administration: EAdministration.INSEE,
         message: `Fail to fetch from INSEE ${
-          inseeOptions.useFallback ? 'fallback' : ''
+          useFallback ? 'fallback' : ''
         } API`,
         cause: e,
         context: {
