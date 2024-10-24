@@ -1,5 +1,5 @@
 import logErrorInSentry from '#utils/sentry';
-import { getAbsoluteSiteUrl } from '#utils/server-side-helper/app/get-absolute-site-url';
+import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { cleanAgentSession, cleanPathFrom, getPathFrom } from '#utils/session';
 import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
@@ -12,12 +12,12 @@ export const GET = withSession(async function logoutCallbackRoute(req) {
     await cleanAgentSession(session);
     if (pathFrom) {
       await cleanPathFrom(session);
-      return NextResponse.redirect(getAbsoluteSiteUrl(pathFrom));
+      return NextResponse.redirect(getBaseUrl() + pathFrom);
     } else {
-      return NextResponse.redirect(getAbsoluteSiteUrl('/connexion/au-revoir'));
+      return NextResponse.redirect(getBaseUrl() + '/connexion/au-revoir');
     }
   } catch (e: any) {
     logErrorInSentry(new AgentConnectLogoutFailedException({ cause: e }));
-    return NextResponse.redirect(getAbsoluteSiteUrl('/connexion/au-revoir'));
+    return NextResponse.redirect(getBaseUrl() + '/connexion/au-revoir');
   }
 });

@@ -1,5 +1,6 @@
 import { IAgentInfo } from '#models/user/agent';
 import { ISession } from '#models/user/session';
+import { isAbsoluteUrl } from '#utils/server-side-helper/app/is-absolute-url';
 import type { IronSession, SessionOptions } from 'iron-session';
 
 export const sessionOptions: SessionOptions = {
@@ -41,7 +42,7 @@ export const setPathFrom = async (
   session: IronSession<ISession>,
   pathFrom: string
 ) => {
-  if (pathFrom) {
+  if (pathFrom && !isAbsoluteUrl(pathFrom)) {
     session.pathFrom = pathFrom;
     await session.save();
   }
