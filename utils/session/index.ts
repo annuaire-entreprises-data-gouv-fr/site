@@ -42,9 +42,13 @@ export const setPathFrom = async (
   session: IronSession<ISession>,
   pathFrom: string
 ) => {
-  if (pathFrom && !isAbsoluteUrl(pathFrom)) {
-    session.pathFrom = pathFrom;
-    await session.save();
+  if (pathFrom) {
+    if (!isAbsoluteUrl(pathFrom)) {
+      session.pathFrom = pathFrom;
+      await session.save();
+    } else {
+      throw new Error('Absolute URL not allowed');
+    }
   }
 };
 
