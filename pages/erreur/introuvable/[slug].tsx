@@ -19,29 +19,10 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
   SirenOrSiretNotFoundPageProps
 > = ({ slug = '' }) => {
   const slugIsSiren = isSiren(slug);
-  const slugIsSiret = isSiret(slug);
-  const isSirenOrSiret = slugIsSiren || slugIsSiret;
-
   const type = slugIsSiren ? 'SIREN' : 'SIRET';
   const formatted = slugIsSiren ? formatIntFr(slug) : formatSiret(slug);
 
-  if (!isSirenOrSiret) {
-    return (
-      <>
-        <Meta title="Numéro d’identification invalide" noIndex={true} />
-        <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
-        <h1>
-          Le numéro saisi ne peux correspondre ni à un SIREN ni à un SIRET.
-        </h1>
-        <div>
-          <p>
-            Un SIREN est un numéro à 9 chiffres et un SIRET est un numéro à 15
-            chiffres.
-          </p>
-        </div>
-      </>
-    );
-  } else if (isLuhnValid(slug)) {
+  if (isLuhnValid(slug)) {
     return (
       <>
         <Meta title="Numéro d’identification introuvable" noIndex={true} />
@@ -124,6 +105,15 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
 export const getServerSideProps: GetServerSideProps = async (context) => {
   context.res.statusCode = 404;
   const slug = (context?.params?.slug || '') as string;
+
+  if (!isSiren(slug) && !isSiret(slug)) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    };
+  }
 
   return { props: { slug } };
 };
