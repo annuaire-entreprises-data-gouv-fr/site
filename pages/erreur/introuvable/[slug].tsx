@@ -1,8 +1,14 @@
-import { GetServerSideProps } from 'next';
 import { INPI, INSEE } from '#components/administrations';
 import MatomoEvent from '#components/matomo-event';
 import Meta from '#components/meta/meta-client';
-import { formatIntFr, formatSiret, isLuhnValid } from '#utils/helpers';
+import {
+  formatIntFr,
+  formatSiret,
+  isLuhnValid,
+  isSiren,
+  isSiret,
+} from '#utils/helpers';
+import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 type SirenOrSiretNotFoundPageProps = {
@@ -12,11 +18,30 @@ type SirenOrSiretNotFoundPageProps = {
 const SirenOrSiretNotFoundPage: NextPageWithLayout<
   SirenOrSiretNotFoundPageProps
 > = ({ slug = '' }) => {
-  const isSiren = slug.length === 9;
-  const type = isSiren ? 'SIREN' : 'SIRET';
-  const formatted = isSiren ? formatIntFr(slug) : formatSiret(slug);
+  const slugIsSiren = isSiren(slug);
+  const slugIsSiret = isSiret(slug);
+  const isSirenOrSiret = slugIsSiren || slugIsSiret;
 
-  if (isLuhnValid(slug)) {
+  const type = slugIsSiren ? 'SIREN' : 'SIRET';
+  const formatted = slugIsSiren ? formatIntFr(slug) : formatSiret(slug);
+
+  if (!isSirenOrSiret) {
+    return (
+      <>
+        <Meta title="Numéro d’identification invalide" noIndex={true} />
+        <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
+        <h1>
+          Le numéro saisi ne peux correspondre ni à un SIREN ni à un SIRET.
+        </h1>
+        <div>
+          <p>
+            Un SIREN est un numéro à 9 chiffres et un SIRET est un numéro à 15
+            chiffres.
+          </p>
+        </div>
+      </>
+    );
+  } else if (isLuhnValid(slug)) {
     return (
       <>
         <Meta title="Numéro d’identification introuvable" noIndex={true} />
