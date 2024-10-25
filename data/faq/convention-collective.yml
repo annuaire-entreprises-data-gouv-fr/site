@@ -1,5 +1,5 @@
 # administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
-# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# faqTargets: la liste des cibles à choisir parmi : agent | particulier | entreprise | independant | association | all
 # title: titre
 # seo: description et titre pour le SEO
 #   description:

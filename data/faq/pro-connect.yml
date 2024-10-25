@@ -1,0 +1,54 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
+# faqTargets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
+# body: corps de texte (markdown)
+administrations:
+  - dinum
+faqTargets:
+  - agent
+title: Comment se connecter avec ProConnect ?
+seo:
+  description: ProConnect est la solution d’authentification de l’Etat qui simplifie l’accès de tous les professionnels à ses services numériques
+  title: Comment se connecter avec ProConnect ?
+cta:
+  label: Se connecter à l’espace agent public avec ProConnect
+  to: https://annuaire-entreprises.data.gouv.fr/lp/agent-public
+more:
+  - label: En savoir plus sur ProConnect
+    href: https://www.proconnect.gouv.fr/
+body: |
+  ## Qu’est-ce que ProConnect ?
+
+  ProConnect est la solution officielle d’authentification de l’Etat qui simplifie l’accès de tous les professionnels à ses services numériques.
+
+  Unifiée et sécurisée, elle vous identifie en tant que professionnel du secteur public ou privé. 
+
+  Ce nouveau service s’inscrit dans la stratégie d’interopérabilité portée par la [Direction Interministérielle du Numérique (DINUM)](https://www.numerique.gouv.fr/) visant à simplifier la gestion de multiples identifiants.
+
+  **NB: Pour les agents publics, ProConnect succède à AgentConnect.**
+
+  ## ProConnect sur l’Annuaire des Entreprises
+
+  Sur l’Annuaire des Entreprises, ProConnect permet aux agents publics d’accèder à des informations complémentaires sur les entreprises, afin de mener a bien leurs missions.
+
+  ## S’identifier avec ProConnect
+
+  Pour accéder aux informations protégées des entreprises, associations et administrations, les agents publics doivent s’identifier via ProConnect  sur L’Annuaire des Entreprises.
+
+  Pour ce faire, les étapes à suivre sont simples :
+  - Repérez le bouton « S’identifier avec ProConnect » avec la mention « PRO » en jaune
+  - Cliquez sur ce bouton
+  - Renseignez votre adresse email professionnelle
+  - Votre identité et votre éligibilité sont examinées
+  - Accédez aux services partenaires, après la validation de votre identité
+
+  ProConnect s’inscrit dans la démarche de [La Suite numérique](https://lasuite.numerique.gouv.fr/) qui fédère tous les agents et professionnels de la sphère publique autour de services interconnectés.
