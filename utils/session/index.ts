@@ -1,6 +1,6 @@
-import type { IronSession, SessionOptions } from 'iron-session';
 import { IAgentInfo } from '#models/user/agent';
 import { ISession } from '#models/user/session';
+import type { IronSession, SessionOptions } from 'iron-session';
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
@@ -48,6 +48,7 @@ export const getPathFrom = (session: IronSession<ISession>) => session.pathFrom;
 
 export const cleanPathFrom = async (session: IronSession<ISession>) => {
   delete session.pathFrom;
+  await session.save();
 };
 export const setHidePersonalDataRequestFCSession = async (
   firstName: string | undefined,
