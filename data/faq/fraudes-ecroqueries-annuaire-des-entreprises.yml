@@ -18,17 +18,17 @@ faqTargets:
   - entreprise
   - independant
   - association
-title: Fraudes et tentatives d’escroquerie au nom de l’Annuaire des Entreprises
+title: Fraudes et tentatives d’escroquerie au nom de L’Annuaire des Entreprises
 seo:
-  description: Fraudes et tentatives d’escroquerie au nom de l’Annuaire des Entreprises
-  title: L'Annuaire des Entreprises ne vous prélevera jamais d'argent. Explications.
+  description: L'Annuaire des Entreprises ne vous prélèvera jamais d'argent.
+  title: Fraudes et tentatives d’escroquerie au nom de L’Annuaire des Entreprises
 more:
   - label: 'Prélèvements bancaires : comment vous opposer à des prélèvements indus ?'
     href: https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/prelevements-bancaires-comment-vous-opposer-des-prelevements-indus
   - label: Fiche détaillée "escroquerie" sur service-publis.fr
     href: https://www.service-public.fr/particuliers/vosdroits/F1520
 body: |
-  L’Annuaire des Entreprises ne vous **prélevera jamais d’argent**. 
+  L’Annuaire des Entreprises ne vous **prélèvera jamais d’argent**. 
 
   Si vous constatez un prélèvement ou une tentative de prélèvement **en notre nom**, il s’agit très **probablement d’une fraude**. 
 
