@@ -8,8 +8,8 @@ import { AgentConnectLogoutFailedException } from '../agent-connect-types';
 export const GET = withSession(async function logoutCallbackRoute(req) {
   try {
     const session = req.session;
-    await cleanAgentSession(session);
     const pathFrom = getPathFrom(session);
+    await cleanAgentSession(session);
     if (pathFrom) {
       await cleanPathFrom(session);
       return NextResponse.redirect(getAbsoluteSiteUrl(pathFrom));
