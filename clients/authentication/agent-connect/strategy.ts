@@ -1,3 +1,6 @@
+// Documentation ProConnect
+// https://github.com/numerique-gouv/proconnect-documentation/blob/main/doc_fs/implementation_technique.md
+
 import { HttpForbiddenError } from '#clients/exceptions';
 import { IReqWithSession } from '#utils/session/with-session';
 import { BaseClient, Issuer, generators } from 'openid-client';
@@ -28,13 +31,14 @@ export const getClient = async () => {
     ) {
       throw new Error('AGENT CONNECT ENV variables are not defined');
     }
-    const agentConnectIssuer = await Issuer.discover(ISSUER_URL as string);
+    const agentConnectIssuer = await Issuer.discover(ISSUER_URL);
 
     _client = new agentConnectIssuer.Client({
-      client_id: CLIENT_ID as string,
-      client_secret: CLIENT_SECRET as string,
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
       redirect_uris: [REDIRECT_URI],
-      post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI as string],
+      post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
+      id_token_signed_response_alg: 'RS256',
       userinfo_signed_response_alg: 'RS256',
     });
 
@@ -55,9 +59,15 @@ export const agentConnectAuthorizeUrl = async (req: IReqWithSession) => {
   return client.authorizationUrl({
     scope: SCOPES,
     acr_values: 'eidas1',
-    response_type: 'code',
     nonce,
     state,
+    claims: {
+      id_token: {
+        amr: {
+          essential: true,
+        },
+      },
+    },
   });
 };
 
@@ -82,11 +92,9 @@ export const agentConnectAuthenticate = async (req: IReqWithSession) => {
 
   const params = client.callbackParams(req.nextUrl.toString());
 
-  const tokenSet = await client.grant({
-    grant_type: 'authorization_code',
-    code: params.code,
-    redirect_uri: REDIRECT_URI,
-    scope: SCOPES,
+  const tokenSet = await client.callback(REDIRECT_URI, params, {
+    nonce: req.session.nonce,
+    state: req.session.state,
   });
 
   const accessToken = tokenSet.access_token;
@@ -95,6 +103,8 @@ export const agentConnectAuthenticate = async (req: IReqWithSession) => {
   }
 
   const userInfo = (await client.userinfo(tokenSet)) as IAgentConnectUserInfo;
+  req.session.nonce = undefined;
+  req.session.state = undefined;
   req.session.idToken = tokenSet.id_token;
   await req.session.save();
 
