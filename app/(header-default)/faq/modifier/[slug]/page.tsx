@@ -13,7 +13,6 @@ import {
 } from '#utils/server-side-helper/app/extract-params';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { use } from 'react';
 
 // should not happen since we declared generateStaticParams
 const redirectFAQPageNotFound = (slug: string) => {
@@ -95,8 +94,10 @@ export async function generateStaticParams(): Promise<Array<IParams>> {
     });
 }
 
-export const generateMetadata = ({ params }: AppRouterProps): Metadata => {
-  const { slug } = use(params);
+export const generateMetadata = async ({
+  params,
+}: AppRouterProps): Promise<Metadata> => {
+  const { slug } = await params;
   const dataToModify = getDataToModify(slug);
   if (!dataToModify) {
     return redirectFAQPageNotFound(slug);

@@ -28,8 +28,10 @@ const cachedGetDefinition = cache((slug: string) => {
   return definition;
 });
 
-export const generateMetadata = ({ params }: AppRouterProps): Metadata => {
-  const { slug } = use(params);
+export const generateMetadata = async ({
+  params,
+}: AppRouterProps): Promise<Metadata> => {
+  const { slug } = await params;
   const definition = cachedGetDefinition(slug);
 
   return {
