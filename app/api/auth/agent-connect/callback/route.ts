@@ -1,4 +1,4 @@
-import { agentConnectAuthenticate } from '#clients/authentication/agent-connect/strategy';
+import { proConnectAuthenticate } from '#clients/authentication/pro-connect/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { getAgent } from '#models/user/agent';
 import { logFatalErrorInSentry } from '#utils/sentry';
@@ -10,7 +10,7 @@ import { AgentConnectFailedException } from '../agent-connect-types';
 
 export const GET = withSession(async function callbackRoute(req) {
   try {
-    const userInfo = await agentConnectAuthenticate(req);
+    const userInfo = await proConnectAuthenticate(req);
     const agent = await getAgent(userInfo);
     const session = req.session;
     await setAgentSession(agent, session);
