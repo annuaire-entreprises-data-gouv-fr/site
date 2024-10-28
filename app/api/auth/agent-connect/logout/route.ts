@@ -8,7 +8,14 @@ import { AgentConnectLogoutFailedException } from '../agent-connect-types';
 
 export const GET = withSession(async function logoutRoute(req) {
   try {
-    await setPathFrom(req.session, req.headers.get('referer') || '');
+    const referer = req.headers.get('referer') || '';
+    const baseURL = getBaseUrl();
+    const isFromSite = referer.indexOf(baseURL) === 0;
+
+    await setPathFrom(
+      req.session,
+      (isFromSite && new URL(referer).pathname) || ''
+    );
     const url = await agentConnectLogoutUrl(req);
     return NextResponse.redirect(url);
   } catch (e: any) {

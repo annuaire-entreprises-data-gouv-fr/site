@@ -1,8 +1,9 @@
 'use client';
 
+import { logConversionEvent } from '#utils/matomo';
+import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { logConversionEvent } from '#utils/matomo';
 
 type IProps = {
   shouldRedirectToReferer?: boolean;
@@ -20,13 +21,13 @@ const ButtonProConnect: React.FC<IProps> = ({
     setReferrer(document.referrer);
   }, []);
 
-  const isFromSite =
-    referrer?.indexOf(
-      process.env.NEXT_PUBLIC_BASE_URL || 'https://annuaire-entreprises'
-    ) === 0;
+  const baseURL = getBaseUrl();
+  const isFromSite = referrer?.indexOf(baseURL) === 0;
 
   const pathFrom =
-    shouldRedirectToReferer && isFromSite ? referrer : currentPath;
+    shouldRedirectToReferer && isFromSite
+      ? new URL(referrer).pathname
+      : currentPath;
 
   return (
     <form action="/api/auth/agent-connect/login" method="get">

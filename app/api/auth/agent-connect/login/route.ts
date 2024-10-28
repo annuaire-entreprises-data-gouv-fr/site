@@ -8,9 +8,13 @@ import { AgentConnectFailedException } from '../agent-connect-types';
 
 export const GET = withSession(async function loginRoute(req) {
   try {
+    const referer = req.headers.get('referer') || '';
+    const baseURL = getBaseUrl();
+    const isFromSite = referer.indexOf(baseURL) === 0;
+
     const pathFrom =
       req.nextUrl.searchParams.get('pathFrom') ||
-      req.headers.get('referer') ||
+      (isFromSite && new URL(referer).pathname) ||
       '';
 
     await setPathFrom(req.session, pathFrom);
