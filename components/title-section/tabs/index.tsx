@@ -10,7 +10,6 @@ import {
 } from '#models/core/types';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import Link from 'next/link';
 import styles from './styles.module.css';
 import TabLink from './tab-link';
 
@@ -144,14 +143,14 @@ export const Tabs: React.FC<{
         {currentFicheType === FICHE.ETABLISSEMENT && (
           <>
             <div style={{ flexGrow: 1 }} />
-            <Link
+            <a
               className={styles.activeLink + ' no-style-link'}
               key="etablissement"
               href=""
               style={{ width: '120px' }}
             >
               <h2>Fiche établissement</h2>
-            </Link>
+            </a>
           </>
         )}
       </div>
