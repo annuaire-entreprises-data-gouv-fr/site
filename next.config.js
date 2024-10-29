@@ -1,5 +1,6 @@
 const { withSentryConfig } = require('@sentry/nextjs');
 const redirects = require('./redirects.json');
+const nextBuildId = require('next-build-id');
 
 const WITH_SENTRY =
   !!process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.NODE_ENV === 'production';
@@ -25,6 +26,8 @@ const nextjsConfig = {
     });
     return config;
   },
+  // https://github.com/nexdrew/next-build-id
+  generateBuildId: () => nextBuildId({ dir: __dirname }),
   async redirects() {
     return redirects;
   },
