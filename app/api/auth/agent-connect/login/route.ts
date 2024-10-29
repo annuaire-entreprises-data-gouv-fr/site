@@ -1,4 +1,4 @@
-import { agentConnectAuthorizeUrl } from '#clients/authentication/agent-connect/strategy';
+import { proConnectAuthorizeUrl } from '#clients/authentication/pro-connect/strategy';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { setPathFrom } from '#utils/session';
@@ -18,7 +18,7 @@ export const GET = withSession(async function loginRoute(req) {
       '';
 
     await setPathFrom(req.session, pathFrom);
-    const url = await agentConnectAuthorizeUrl(req);
+    const url = await proConnectAuthorizeUrl(req);
     return NextResponse.redirect(url);
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectFailedException({ cause: e }));

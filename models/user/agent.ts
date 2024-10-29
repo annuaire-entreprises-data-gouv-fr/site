@@ -1,4 +1,4 @@
-import { IAgentConnectUserInfo } from '#clients/authentication/agent-connect/strategy';
+import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
 import { IAgentScope, getAgentScopes } from './scopes';
@@ -63,7 +63,7 @@ const extractDomain = (email: string) => {
 };
 
 export const getAgent = async (
-  userInfo: IAgentConnectUserInfo
+  userInfo: IProConnectUserInfo
 ): Promise<IAgentInfo> => {
   const { scopes, userType } = await getAgentScopes(userInfo?.email);
 

@@ -1,4 +1,4 @@
-import { agentConnectLogoutUrl } from '#clients/authentication/agent-connect/strategy';
+import { proConnectLogoutUrl } from '#clients/authentication/pro-connect/strategy';
 import logErrorInSentry from '#utils/sentry';
 import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { setPathFrom } from '#utils/session';
@@ -16,7 +16,7 @@ export const GET = withSession(async function logoutRoute(req) {
       req.session,
       (isFromSite && new URL(referer).pathname) || ''
     );
-    const url = await agentConnectLogoutUrl(req);
+    const url = await proConnectLogoutUrl(req);
     return NextResponse.redirect(url);
   } catch (e: any) {
     logErrorInSentry(new AgentConnectLogoutFailedException({ cause: e }));

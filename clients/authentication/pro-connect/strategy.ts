@@ -7,12 +7,12 @@ import { BaseClient, Issuer, generators } from 'openid-client';
 
 let _client = undefined as BaseClient | undefined;
 
+// LEGACY
+// Pro Connect was called Agent Connect in the past
 const CLIENT_ID = process.env.AGENTCONNECT_CLIENT_ID;
 const CLIENT_SECRET = process.env.AGENTCONNECT_CLIENT_SECRET;
 const ISSUER_URL = process.env.AGENTCONNECT_URL_DISCOVER;
-
 const REDIRECT_URI = process.env.AGENTCONNECT_REDIRECT_URI;
-
 const POST_LOGOUT_REDIRECT_URI =
   process.env.AGENTCONNECT_POST_LOGOUT_REDIRECT_URI;
 
@@ -29,11 +29,11 @@ export const getClient = async () => {
       !REDIRECT_URI ||
       !POST_LOGOUT_REDIRECT_URI
     ) {
-      throw new Error('AGENT CONNECT ENV variables are not defined');
+      throw new Error('PRO CONNECT ENV variables are not defined');
     }
-    const agentConnectIssuer = await Issuer.discover(ISSUER_URL);
+    const proConnectIssuer = await Issuer.discover(ISSUER_URL);
 
-    _client = new agentConnectIssuer.Client({
+    _client = new proConnectIssuer.Client({
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
       redirect_uris: [REDIRECT_URI],
@@ -46,7 +46,7 @@ export const getClient = async () => {
   }
 };
 
-export const agentConnectAuthorizeUrl = async (req: IReqWithSession) => {
+export const proConnectAuthorizeUrl = async (req: IReqWithSession) => {
   const client = await getClient();
 
   const nonce = generators.nonce();
@@ -71,7 +71,7 @@ export const agentConnectAuthorizeUrl = async (req: IReqWithSession) => {
   });
 };
 
-export type IAgentConnectUserInfo = {
+export type IProConnectUserInfo = {
   sub: string;
   email: string;
   email_verified: boolean;
@@ -87,7 +87,7 @@ export type IAgentConnectUserInfo = {
   idp_id: string;
 };
 
-export const agentConnectAuthenticate = async (req: IReqWithSession) => {
+export const proConnectAuthenticate = async (req: IReqWithSession) => {
   const client = await getClient();
 
   const params = client.callbackParams(req.nextUrl.toString());
@@ -102,7 +102,7 @@ export const agentConnectAuthenticate = async (req: IReqWithSession) => {
     throw new HttpForbiddenError('No access token');
   }
 
-  const userInfo = (await client.userinfo(tokenSet)) as IAgentConnectUserInfo;
+  const userInfo = (await client.userinfo(tokenSet)) as IProConnectUserInfo;
   req.session.nonce = undefined;
   req.session.state = undefined;
   req.session.idToken = tokenSet.id_token;
@@ -111,7 +111,7 @@ export const agentConnectAuthenticate = async (req: IReqWithSession) => {
   return userInfo;
 };
 
-export const agentConnectLogoutUrl = async (req: IReqWithSession) => {
+export const proConnectLogoutUrl = async (req: IReqWithSession) => {
   const client = await getClient();
   return client.endSessionUrl({
     id_token_hint: req.session.idToken,
