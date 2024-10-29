@@ -3,6 +3,8 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/badges-section/labels-and-certificates';
+import { CibtpSection } from '#components/espace-agent-components/certifications/cibtp-section';
+import { CnetpSection } from '#components/espace-agent-components/certifications/cnetp-section';
 import { OpqibiSection } from '#components/espace-agent-components/certifications/opqibi-section';
 import { QualibatSection } from '#components/espace-agent-components/certifications/qualibat-section';
 import { QualifelecSection } from '#components/espace-agent-components/certifications/qualifelec-section';
@@ -106,6 +108,8 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
             <QualibatSection session={session} uniteLegale={uniteLegale} />
             <QualifelecSection session={session} uniteLegale={uniteLegale} />
             <OpqibiSection session={session} uniteLegale={uniteLegale} />
+            <CibtpSection session={session} uniteLegale={uniteLegale} />
+            <CnetpSection session={session} uniteLegale={uniteLegale} />
           </>
         )}
         {estOrganismeFormation && (

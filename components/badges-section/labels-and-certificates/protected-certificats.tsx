@@ -36,11 +36,23 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
     uniteLegale.siege.siret,
     session
   );
+  const cibtp = useAPIRouteData(
+    APIRoutesPaths.EspaceAgentCibtp,
+    uniteLegale.siege.siret,
+    session
+  );
+  const cnetp = useAPIRouteData(
+    APIRoutesPaths.EspaceAgentCnetp,
+    uniteLegale.siren,
+    session
+  );
 
   if (
     isAPINotResponding(opqibi) &&
     isAPINotResponding(qualibat) &&
-    isAPINotResponding(qualifelec)
+    isAPINotResponding(qualifelec) &&
+    isAPINotResponding(cibtp) &&
+    isAPINotResponding(cnetp)
   ) {
     return hasOtherCertificates ? (
       <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />
@@ -52,7 +64,9 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
   if (
     isDataLoading(opqibi) ||
     isDataLoading(qualibat) ||
-    isDataLoading(qualifelec)
+    isDataLoading(qualifelec) ||
+    isDataLoading(cibtp) ||
+    isDataLoading(cnetp)
   ) {
     return <Loader />;
   }
@@ -90,6 +104,22 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
               informationTooltipLabel="Cette structure est certifiée par QUALIFELEC, attestant de ses qualifications dans le domaine du génie électrique et énergétique"
               label="QUALIFELEC - Génie électrique"
               sectionId="qualifelec"
+              siren={uniteLegale.siren}
+            />
+          )}
+          {!hasAnyError(cibtp) && (
+            <LabelWithLinkToSection
+              informationTooltipLabel="Cette structure a un certificat CIBTP, attestant qu'elle est en règle de ses cotisations congés payés et chômage-intempéries"
+              label="CIBTP - Bâtiment et travaux publics"
+              sectionId="cibtp"
+              siren={uniteLegale.siege.siret}
+            />
+          )}
+          {!hasAnyError(cnetp) && (
+            <LabelWithLinkToSection
+              informationTooltipLabel="Cette structure a un certificat CNETP, attestant qu'elle est en règle de ses cotisations congés payés et chômage-intempéries"
+              label="CNETP - Entreprises de travaux publics"
+              sectionId="cnetp"
               siren={uniteLegale.siren}
             />
           )}

@@ -2,6 +2,8 @@ export enum APIRoutesPaths {
   EspaceAgentCarteProfessionnelleTP = 'espace-agent/carte-professionnelle-TP',
   EspaceAgentConformite = 'espace-agent/conformite',
   EspaceAgentOpqibi = 'espace-agent/opqibi',
+  EspaceAgentCibtp = 'espace-agent/cibtp',
+  EspaceAgentCnetp = 'espace-agent/cnetp',
   EspaceAgentQualibat = 'espace-agent/qualibat',
   EspaceAgentQualifelec = 'espace-agent/qualifelec',
   EspaceAgentRcsMandataires = 'espace-agent/rcs-mandataires',
