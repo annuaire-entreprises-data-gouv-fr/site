@@ -45,7 +45,9 @@ describe(
         cy.contains('DINUM').click();
       });
 
-      cy.visit(`/`);
+      cy.location().should((loc) => {
+        expect(loc.pathname).to.eq('/lp/agent-public');
+      });
       cy.contains('user@yopmail.com');
     });
 

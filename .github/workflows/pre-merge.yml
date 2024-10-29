@@ -98,6 +98,7 @@ jobs:
     needs: [dependencies]
     env:
       NEXT_PUBLIC_END2END_MOCKING: enabled
+      NEXT_PUBLIC_BASE_URL: http://localhost:3000
       AGENTCONNECT_CLIENT_ID: ${{ secrets.AGENTCONNECT_CLIENT_ID }}
       AGENTCONNECT_CLIENT_SECRET: ${{ secrets.AGENTCONNECT_CLIENT_SECRET }}
       AGENTCONNECT_URL_DISCOVER: https://fca.integ01.dev-agentconnect.fr/api/v2/.well-known/openid-configuration
