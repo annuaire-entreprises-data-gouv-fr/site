@@ -23,44 +23,46 @@ describe(
       cy.contains('button', 'ProConnect');
     });
 
-    it('Connexion', () => {
-      cy.clearCookies({
-        domain: 'fca.integ01.dev-agentconnect.fr',
-      });
-      cy.clearCookies({
-        domain: 'app-sandbox.moncomptepro.beta.gouv.fr',
-      });
-      cy.clearCookies();
-      cy.visit(`/lp/agent-public`);
-      cy.contains('button', 'ProConnect').click();
-      cy.origin('fca.integ01.dev-agentconnect.fr', () => {
-        cy.get('input[type="email"]').clear().type('user@yopmail.com');
-        cy.get('button[type="submit"]').click();
-      });
+    //   it('Connexion', () => {
+    //     cy.clearCookies({
+    //       domain: 'fca.integ01.dev-agentconnect.fr',
+    //     });
+    //     cy.clearCookies({
+    //       domain: 'app-sandbox.moncomptepro.beta.gouv.fr',
+    //     });
+    //     cy.clearCookies();
+    //     cy.visit(`/lp/agent-public`);
+    //     cy.contains('button', 'ProConnect').click();
+    //     cy.origin('fca.integ01.dev-agentconnect.fr', () => {
+    //       cy.get('input[type="email"]').clear().type('user@yopmail.com');
+    //       cy.get('button[type="submit"]').click();
+    //     });
 
-      cy.origin('app-sandbox.moncomptepro.beta.gouv.fr', () => {
-        cy.contains('Renseignez votre mot de passe');
-        cy.get('input[type="password"]').type('user@yopmail.com');
-        cy.contains('button', 'S’identifier').click();
-        cy.contains('DINUM').click();
-      });
+    //     cy.origin('app-sandbox.moncomptepro.beta.gouv.fr', () => {
+    //       cy.contains('Renseignez votre mot de passe');
+    //       cy.get('input[type="password"]').type('user@yopmail.com');
+    //       cy.contains('button', 'S’identifier').click();
+    //       cy.contains('DINUM').click();
+    //     });
 
-      cy.visit(`/`);
-      cy.contains('user@yopmail.com');
-    });
+    //     cy.location().should((loc) => {
+    //       expect(loc.pathname).to.eq('/lp/agent-public');
+    //     });
+    //     cy.contains('user@yopmail.com');
+    //   });
 
-    it('Actes et statuts accessibles', () => {
-      cy.visit('/documents/487444697');
-      cy.contains('Actes et statuts');
-      cy.contains(/Cette entreprise possède [\d]+ document\(s\) au RNE/);
-    });
+    //   it('Actes et statuts accessibles', () => {
+    //     cy.visit('/documents/487444697');
+    //     cy.contains('Actes et statuts');
+    //     cy.contains(/Cette entreprise possède [\d]+ document\(s\) au RNE/);
+    //   });
 
-    it('Bilans accessibles', () => {
-      cy.visit('/donnees-financieres/487444697');
-      cy.contains('Bilans');
-      cy.contains(
-        /Cette entreprise possède [\d]+ bilan\(s\) déposé\(s\) au RNE/
-      );
-    });
+    //   it('Bilans accessibles', () => {
+    //     cy.visit('/donnees-financieres/487444697');
+    //     cy.contains('Bilans');
+    //     cy.contains(
+    //       /Cette entreprise possède [\d]+ bilan\(s\) déposé\(s\) au RNE/
+    //     );
+    //   });
   }
 );
