@@ -10,16 +10,10 @@ export default function LoadBar({ session }: { session: ISession | null }) {
   useEffect(() => {
     const loadBar = loadBarFactory();
     if (typeof window !== 'undefined') {
-      ['cancelloadbar', 'runloadbar', 'beforeunload'].forEach((e) =>
-        window.addEventListener(e, () => console.error(e))
-      );
-
       window.addEventListener(
         'beforeunload',
         loadBar.runWithDelay.bind(loadBar)
       );
-      window.addEventListener('runloadbar', loadBar.runImmediate.bind(loadBar));
-      window.addEventListener('cancelloadbar', loadBar.cancel.bind(loadBar));
     }
   }, []);
 
@@ -99,20 +93,20 @@ const loadBarFactory = () => {
         await wait(200);
       }
     },
-    runImmediate() {
-      this._run(2);
-    },
+    // runImmediate() {
+    //   this._run(2);
+    // },
     runWithDelay() {
       this._run(0);
     },
-    async cancel() {
-      this._currentJobId = '';
-      if (this._loader) {
-        this._loader.style.width = '100%';
-        this._loader.style.opacity = '0';
-        await wait(200);
-        this._loader.style.width = '0';
-      }
-    },
+    // async cancel() {
+    //   this._currentJobId = '';
+    //   if (this._loader) {
+    //     this._loader.style.width = '100%';
+    //     this._loader.style.opacity = '0';
+    //     await wait(200);
+    //     this._loader.style.width = '0';
+    //   }
+    // },
   };
 };
