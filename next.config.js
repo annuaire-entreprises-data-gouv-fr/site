@@ -27,7 +27,9 @@ const nextjsConfig = {
     return config;
   },
   // https://github.com/nexdrew/next-build-id
-  generateBuildId: () => nextBuildId({ dir: __dirname }),
+  // if Scalingo is deploying, SOURCE_VERSION is set to be the lastest git commit hash
+  generateBuildId: () =>
+    process.env.SOURCE_VERSION || nextBuildId({ dir: __dirname }),
   async redirects() {
     return redirects;
   },
