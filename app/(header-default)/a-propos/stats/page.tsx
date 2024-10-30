@@ -1,9 +1,9 @@
-import { GetStaticProps } from 'next';
 import { IMatomoStats, clientMatomoStats } from '#clients/matomo';
 import Meta from '#components/meta/meta-client';
 import { NpsStats } from '#components/stats/nps';
 import { TraficStats } from '#components/stats/trafic';
 import { UsageStats } from '#components/stats/usage';
+import { GetStaticProps } from 'next';
 import { NextPageWithLayout } from '../_app';
 
 const StatsPage: NextPageWithLayout<IMatomoStats> = ({
