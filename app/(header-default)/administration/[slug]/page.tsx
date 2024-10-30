@@ -27,13 +27,13 @@ const cachedGetAdministrations = cache((slug: string) => {
   };
 });
 
-export const generateMetadata = async ({
-  params,
-}: AppRouterProps): Promise<Metadata> => {
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug as EAdministration;
+export const generateMetadata = async (
+  props: AppRouterProps
+): Promise<Metadata> => {
+  const params = await props.params;
+  const slug = params.slug as EAdministration;
 
-  const { title } = cachedGetAdministrations(slug as EAdministration);
+  const { title } = cachedGetAdministrations(slug);
 
   return {
     title,
@@ -44,9 +44,9 @@ export const generateMetadata = async ({
   };
 };
 
-export default async function AdministrationPage({ params }: AppRouterProps) {
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug as EAdministration;
+export default async function AdministrationPage(props: AppRouterProps) {
+  const params = await props.params;
+  const slug = params.slug as EAdministration;
 
   const { administrations, articles } = cachedGetAdministrations(slug);
 
