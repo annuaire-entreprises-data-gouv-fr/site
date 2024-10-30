@@ -1,12 +1,12 @@
-import type { NextPage } from 'next';
-import type { AppProps } from 'next/app';
-import type { ReactElement, ReactNode } from 'react';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
 import ErrorBoundary from '#components/error-boundary/index';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import { ISession } from '#models/user/session';
 import { marianne } from 'app/fonts';
-import { SessionProvider } from 'hooks/use-session';
+import { SessionProvider } from 'hooks/use-page-router-session';
+import type { NextPage } from 'next';
+import type { AppProps } from 'next/app';
+import type { ReactElement, ReactNode } from 'react';
 import '../style/dsfr.min.css';
 import '../style/globals.css';
 
