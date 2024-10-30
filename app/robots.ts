@@ -19,6 +19,7 @@ export default function robots(): MetadataRoute.Robots {
         '/entreprise/',
         '/administration/',
         '/faq/',
+        '/definitions/',
         '/departements/',
         '/etablissements/',
         '/lp/',

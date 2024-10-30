@@ -1,6 +1,6 @@
 import ButtonLink from '#components-ui/button';
-import IsActiveTag from '#components-ui/is-active-tag';
 import { Tag } from '#components-ui/tag';
+import IsActiveTag from '#components-ui/tag/is-active-tag';
 import { INSEE } from '#components/administrations';
 import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { Section } from '#components/section';
@@ -8,7 +8,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { estDiffusible } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
 import React from 'react';
@@ -64,12 +64,12 @@ const AvisSituationNonDiffusible = () => (
 
 const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, session }) => (
   <Section
-    id="insee"
+    id="justificatifs-insee"
     title="Justificatif d’inscription à l’Insee"
     sources={[EAdministration.INSEE]}
   >
     {!estDiffusible(uniteLegale) &&
-    !hasRights(session, AppScope.nonDiffusible) ? (
+    !hasRights(session, ApplicationRights.nonDiffusible) ? (
       <AvisSituationNonDiffusible />
     ) : (
       <>

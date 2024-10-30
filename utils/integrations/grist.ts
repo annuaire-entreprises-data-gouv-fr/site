@@ -1,6 +1,8 @@
 import routes from '#clients/routes';
 import constants from '#models/constants';
+import { Exception } from '#models/exceptions';
 import httpClient from '#utils/network';
+import logErrorInSentry from '#utils/sentry';
 
 type IGristRecords = {
   records: {
@@ -47,31 +49,59 @@ export async function logInGrist(
   tableKey: keyof typeof gristTables,
   data: unknown[]
 ) {
-  await httpClient({
-    method: 'POST',
-    url: getGristUrl(tableKey),
-    headers: {
-      ContentType: 'application/json',
-      Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
-    },
-    data: {
-      records: data.map((d) => {
-        return { fields: d };
-      }),
-    },
-    timeout: constants.timeout.XXL,
-  });
+  try {
+    await httpClient({
+      method: 'POST',
+      url: getGristUrl(tableKey),
+      headers: {
+        ContentType: 'application/json',
+        Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
+      },
+      data: {
+        records: data.map((d) => {
+          return { fields: d };
+        }),
+      },
+      timeout: constants.timeout.XXL,
+    });
+  } catch (error) {
+    logErrorInSentry(new LogInGristException({ cause: error }));
+    throw error;
+  }
 }
 
 export async function readFromGrist(tableKey: keyof typeof gristTables) {
-  const { records } = await httpClient<IGristRecords>({
-    method: 'GET',
-    url: getGristUrl(tableKey),
-    headers: {
-      Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
-    },
-    timeout: constants.timeout.XXL,
-  });
+  try {
+    const { records } = await httpClient<IGristRecords>({
+      method: 'GET',
+      url: getGristUrl(tableKey),
+      headers: {
+        Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
+      },
+      timeout: constants.timeout.XXL,
+    });
 
-  return records.map((r) => r.fields);
+    return records.map((r) => r.fields);
+  } catch (error) {
+    logErrorInSentry(new ReadFromGristException({ cause: error }));
+    throw error;
+  }
+}
+
+class LogInGristException extends Exception {
+  constructor(args: { cause?: any }) {
+    super({
+      ...args,
+      name: 'LogInGristException',
+    });
+  }
+}
+
+class ReadFromGristException extends Exception {
+  constructor(args: { cause?: any }) {
+    super({
+      ...args,
+      name: 'ReadFromGristException',
+    });
+  }
 }

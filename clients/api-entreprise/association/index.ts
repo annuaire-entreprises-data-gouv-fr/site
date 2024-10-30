@@ -12,9 +12,9 @@ export async function clientApiEntrepriseAssociation(siren: Siren) {
     IAPIEntrepriseAssociation,
     IAssociationProtected
   >(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.association.replace('{siren}', siren)}`,
+    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.association(
+      siren
+    )}`,
     mapToDomainObject
   );
 }

@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
@@ -16,7 +15,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import {
   shouldNotIndex,
   uniteLegalePageDescription,
@@ -29,11 +28,12 @@ import extractParamsAppRouter, {
 import getSession from '#utils/server-side-helper/app/get-session';
 import { UniteLegaleImmatriculationSection } from 'app/(header-default)/entreprise/[slug]/_components/immatriculation-section';
 import UniteLegaleSummarySection from 'app/(header-default)/entreprise/[slug]/_components/summary-section';
+import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug, page, isBot } = extractParamsAppRouter(props);
+  const { slug, page, isBot } = await extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
   return {
@@ -49,7 +49,9 @@ export const generateMetadata = async (
 };
 
 export default async function UniteLegalePage(props: AppRouterProps) {
-  const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
+  const { slug, page, isBot, isRedirected } = await extractParamsAppRouter(
+    props
+  );
   const session = await getSession();
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
@@ -72,7 +74,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
               uniteLegale={uniteLegale}
               session={session}
             />
-            {hasRights(session, AppScope.isAgent) && (
+            {hasRights(session, ApplicationRights.isAgent) && (
               <EspaceAgentSummarySection
                 uniteLegale={uniteLegale}
                 session={session}

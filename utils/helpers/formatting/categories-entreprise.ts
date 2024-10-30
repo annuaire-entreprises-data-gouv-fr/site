@@ -16,7 +16,6 @@ export const categoriesEntreprisesOptions = [
 ];
 
 export const categoriesEntreprise = (code: string) => {
-  //@ts-ignore
   const categorie = categoriesEntreprisesMap[code];
   if (categorie) {
     return categorie;
@@ -26,10 +25,9 @@ export const categoriesEntreprise = (code: string) => {
 
 const formatAsMap = () => {
   return categoriesEntreprisesOptions.reduce((aggregator, code) => {
-    //@ts-ignore
     aggregator[code.value] = code.label;
     return aggregator;
-  }, {});
+  }, {} as { [key: string]: string });
 };
 
 const categoriesEntreprisesMap = formatAsMap();

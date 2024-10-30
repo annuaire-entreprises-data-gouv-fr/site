@@ -1,8 +1,8 @@
-import { randomBytes } from 'crypto';
-import { BaseClient, Issuer, generators } from 'openid-client';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { InternalError } from '#models/exceptions';
 import { getHidePersonalDataRequestFCSession } from '#utils/session';
+import { randomBytes } from 'crypto';
+import { BaseClient, Issuer, generators } from 'openid-client';
 
 let _client = undefined as BaseClient | undefined;
 
@@ -49,9 +49,9 @@ export const getClient = async () => {
   }
 };
 
-export const FranceConnectAuthorizeUrl = async (req: any) => {
+export const franceConnectAuthorizeUrl = async (req: any) => {
   const client = await getClient();
-  const session = await req.session;
+  const session = req.session;
   session.FC_CONNECT_CHECK = {
     state: generators.state(),
     nonce: generators.nonce(),

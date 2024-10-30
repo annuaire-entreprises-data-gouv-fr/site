@@ -8,7 +8,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import styles from './styles.module.css';
 import TabLink from './tab-link';
@@ -94,7 +94,7 @@ export const Tabs: React.FC<{
       pathPrefix: '/annonces/',
       noFollow: false,
       shouldDisplay: true,
-      width: '120px',
+      width: uniteLegale.dateMiseAJourInpi ? '130px' : '90px',
     },
     {
       ficheType: FICHE.CERTIFICATS,
@@ -105,7 +105,7 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay:
         checkHasLabelsAndCertificates(uniteLegale) ||
-        hasRights(session, AppScope.protectedCertificats),
+        hasRights(session, ApplicationRights.protectedCertificats),
       width: checkHasQuality(uniteLegale) ? '200px' : '100px',
     },
     {

@@ -64,107 +64,106 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
         )}
       </ol>
       {allAdministrations.map(
-        ({ dataSources, administrationEnum, contact, slug, long, short }) =>
-          dataSources.length > 0 && (
-            <React.Fragment key={slug}>
-              <h2 id={slug}>{long}</h2>
-              {dataSources.map(
-                ({ label, datagouvLink, data, apiSlug }, sourceIndex) => {
-                  const api = allAPI[apiSlug];
-                  const isProtected = api?.isProtected;
+        ({ dataSources, administrationEnum, contact, slug, long, short }) => (
+          <React.Fragment key={slug}>
+            <h2 id={slug}>{long}</h2>
+            {dataSources.map(
+              ({ label, datagouvLink, data, apiSlug }, sourceIndex) => {
+                const api = allAPI[apiSlug];
+                const isProtected = api?.isProtected;
 
-                  return (
-                    <Section
-                      id={`${slug}-${sourceIndex}`}
-                      title={label}
-                      sources={[administrationEnum]}
-                      isProtected={isProtected}
-                    >
-                      <TwoColumnTable
-                        body={[
-                          [
-                            'Données',
-                            (data || []).map(({ label }) => (
-                              <Tag key={label}>{label}</Tag>
-                            )),
-                          ],
-                          ...(isProtected
-                            ? []
-                            : [
-                                [
-                                  'Source de données',
-                                  datagouvLink ? (
-                                    <a
-                                      target="_blank"
-                                      rel="noreferrer noopener"
-                                      href={datagouvLink}
-                                    >
-                                      Consulter le jeu de données
-                                    </a>
-                                  ) : (
-                                    <i>
-                                      Non renseigné ou non publié sur
-                                      data.gouv.fr
-                                    </i>
-                                  ),
-                                ],
-                              ]),
-                          ...(api
-                            ? [
-                                [
-                                  'API utilisée',
-                                  <>
-                                    <strong>{api.apiName}</strong>
-                                    {api.apiDocumentationLink && (
-                                      <>
-                                        {' ('}
-                                        <a
-                                          href={api.apiDocumentationLink}
-                                          target="_blank"
-                                          rel="noreferrer noopener"
-                                        >
-                                          documentation
-                                        </a>
-                                        )
-                                      </>
-                                    )}
-                                  </>,
-                                ],
-                              ]
-                            : []),
-                          ...(api && api.updownIoId
-                            ? [
-                                [
-                                  'Taux de disponibilité de l’API',
+                return (
+                  <Section
+                    key={label}
+                    id={`${slug}-${sourceIndex}`}
+                    title={label}
+                    sources={[administrationEnum]}
+                    isProtected={isProtected}
+                  >
+                    <TwoColumnTable
+                      body={[
+                        [
+                          'Données',
+                          (data || []).map(({ label }) => (
+                            <Tag key={label}>{label}</Tag>
+                          )),
+                        ],
+                        ...(isProtected
+                          ? []
+                          : [
+                              [
+                                'Source de données',
+                                datagouvLink ? (
                                   <a
-                                    href={'/donnees/api#' + api.apiSlug}
                                     target="_blank"
                                     rel="noreferrer noopener"
+                                    href={datagouvLink}
                                   >
-                                    Consulter le taux de disponibilité
-                                  </a>,
-                                ],
+                                    Consulter le jeu de données
+                                  </a>
+                                ) : (
+                                  <i>
+                                    Non renseigné ou non publié sur data.gouv.fr
+                                  </i>
+                                ),
+                              ],
+                            ]),
+                        ...(api
+                          ? [
+                              [
+                                'API utilisée',
+                                <>
+                                  <strong>{api.apiName}</strong>
+                                  {api.apiDocumentationLink && (
+                                    <>
+                                      {' ('}
+                                      <a
+                                        href={api.apiDocumentationLink}
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                      >
+                                        documentation
+                                      </a>
+                                      )
+                                    </>
+                                  )}
+                                </>,
+                              ],
+                            ]
+                          : []),
+                        ...(api && api.updownIoId
+                          ? [
+                              [
+                                'Taux de disponibilité de l’API',
+                                <a
+                                  href={'/donnees/api#' + api.apiSlug}
+                                  target="_blank"
+                                  rel="noreferrer noopener"
+                                >
+                                  Consulter le taux de disponibilité
+                                </a>,
+                              ],
+                            ]
+                          : []),
+                        ...[
+                          contact
+                            ? [
+                                'Administration responsable',
+                                <a href={contact}>
+                                  <Icon slug="mail">Contacter ({short})</Icon>
+                                </a>,
                               ]
-                            : []),
-                          ...[
-                            contact
-                              ? [
-                                  'Administration responsable',
-                                  <a href={contact}>
-                                    <Icon slug="mail">Contacter ({short})</Icon>
-                                  </a>,
-                                ]
-                              : [],
-                          ],
-                        ]}
-                      />
-                    </Section>
-                  );
-                }
-              )}
-              <HorizontalSeparator />
-            </React.Fragment>
-          )
+                            : [],
+                        ],
+                      ]}
+                    />
+                  </Section>
+                );
+              }
+            )}
+            <HorizontalSeparator />
+          </React.Fragment>
+        )
       )}
     </div>
   </>
@@ -173,7 +172,9 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      allAdministrations: Object.values(administrationsMetaData),
+      allAdministrations: Object.values(administrationsMetaData).filter(
+        (administration) => administration.dataSources.length > 0
+      ),
       allAPI: allAPI,
     },
   };

@@ -13,7 +13,6 @@ export function loadAll<T extends IArticle>(
     .filter((k: string) => k.indexOf('./') === 0)
     .forEach((key: string, index: number) => {
       const slug = key.replace('.yml', '').replace('./', '');
-      //@ts-ignore
       articles.push({ ...values[index], slug });
     });
 

@@ -70,27 +70,3 @@ export const cachedGetUniteLegale = cache(
     }
   }
 );
-
-export const cachedEtablissement = cache(
-  async (slug: string, isBot: boolean) => {
-    const siretSlug = extractSirenOrSiretSlugFromUrl(slug);
-    try {
-      return await getEtablissement(siretSlug, isBot);
-    } catch (e) {
-      handleException(e, siretSlug);
-      throw e;
-    }
-  }
-);
-
-export const cachedAllEtablissements = cache(
-  async (slug: string, isBot: boolean) => {
-    const siretSlug = extractSirenOrSiretSlugFromUrl(slug);
-    try {
-      return await getAllEtablissements(siretSlug, isBot);
-    } catch (e) {
-      handleException(e, siretSlug);
-      throw e;
-    }
-  }
-);

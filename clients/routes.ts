@@ -5,23 +5,30 @@ const routes = {
     },
   },
   apiEntreprise: {
-    association: '/v4/djepva/api-association/associations/{siren}',
+    association: (siren: string) =>
+      `/v4/djepva/api-association/associations/${siren}`,
     conformite: {
-      fiscale: '/v4/dgfip/unites_legales/{siren}/attestation_fiscale',
-      vigilance: '/v4/urssaf/unites_legales/{siren}/attestation_vigilance',
-      msa: '/v3/msa/etablissements/{siret}/conformite_cotisations',
+      fiscale: (siren: string) =>
+        `/v4/dgfip/unites_legales/${siren}/attestation_fiscale`,
+      vigilance: (siren: string) =>
+        `/v4/urssaf/unites_legales/${siren}/attestation_vigilance`,
+      msa: (siret: string) =>
+        `/v3/msa/etablissements/${siret}/conformite_cotisations`,
     },
-    beneficiaires:
-      '/v3/inpi/rne/unites_legales/{siren}/beneficiaires_effectifs',
-    carteProfessionnelleTravauxPublics:
-      '/v3/fntp/unites_legales/{siren}/carte_professionnelle_travaux_publics',
+    beneficiaires: (siren: string) =>
+      `/v3/inpi/rne/unites_legales/${siren}/beneficiaires_effectifs`,
+    carteProfessionnelleTravauxPublics: (siren: string) =>
+      `/v3/fntp/unites_legales/${siren}/carte_professionnelle_travaux_publics`,
     certifications: {
-      qualifelec: '/v3/qualifelec/etablissements/{siret}/certificats',
-      qualibat: '/v3/qualibat/etablissements/{siret}/certification_batiment',
-      opqibi: '/v3/opqibi/unites_legales/{siren}/certification_ingenierie',
+      qualifelec: (siret: string) =>
+        `/v3/qualifelec/etablissements/${siret}/certificats`,
+      qualibat: (siret: string) =>
+        `/v3/qualibat/etablissements/${siret}/certification_batiment`,
+      opqibi: (siren: string) =>
+        `/v3/opqibi/unites_legales/${siren}/certification_ingenierie`,
     },
-    mandatairesRCS:
-      '/v3/infogreffe/rcs/unites_legales/{siren}/mandataires_sociaux',
+    mandatairesRCS: (siren: string) =>
+      `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,
   },
   ban: 'https://api-adresse.data.gouv.fr/search/?q=',
   bodacc: {
@@ -35,10 +42,17 @@ const routes = {
       annonce: 'https://www.bodacc.fr/annonce/detail-annonce/',
       recherche:
         'https://www.bodacc.fr/pages/annonces-commerciales/?sort=dateparution',
+      rechercheBySiren: (siren: string) =>
+        `https://www.bodacc.fr/pages/annonces-commerciales/?q.registre=registre:${siren}`,
     },
   },
   datagouv: {
     ess: 'https://tabular-api.data.gouv.fr/api/resources/57bc99ca-0432-4b46-8fcc-e76a35c9efaf/data/',
+  },
+  apiDataSubvention: {
+    documentation: 'https://api.datasubvention.beta.gouv.fr/docs',
+    grants: (siren: string) =>
+      `https://api.datasubvention.beta.gouv.fr/association/${siren}/grants`,
   },
   conventionsCollectives: {
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
@@ -183,7 +197,6 @@ const routes = {
     },
   },
   tooling: {
-    crisp: 'https://api.crisp.chat/v1/website/',
     grist: 'https://grist.numerique.gouv.fr/api/docs/',
     matomo: {
       report: {

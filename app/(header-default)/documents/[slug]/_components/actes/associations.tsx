@@ -11,6 +11,7 @@ import { isDataSuccess } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { formatDate, formatSiret } from '#utils/helpers';
 import { extractAssociationEtablissements } from '#utils/helpers/association';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { useMemo, useState } from 'react';
 
@@ -25,7 +26,7 @@ export const AgentActesAssociation: React.FC<{
   const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
 
   const associationProtected = useAPIRouteData(
-    'espace-agent/association-protected',
+    APIRoutesPaths.EspaceAgentAssociationProtected,
     uniteLegale.siren,
     session
   );

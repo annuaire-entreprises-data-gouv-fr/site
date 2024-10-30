@@ -1,26 +1,27 @@
 import { hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { APIPath, APIRoutesHandlers } from '../routes-handlers';
+import { APIRoutesHandlers } from '../routes-handlers';
 import { APIRoutesScopes } from '../routes-scopes';
 import {
   APIRouteError,
   getRouteAndSlug,
+  IContext,
   withHandleError,
   withIgnoreBot,
 } from '../utils';
 
 async function getRoute(
   request: Request,
-  params: { params: { slug: Array<string> } },
+  context: IContext,
   session: ISession
 ) {
-  const { slug, route } = getRouteAndSlug(params);
+  const { slug, route } = await getRouteAndSlug(context);
 
   if (!(route in APIRoutesHandlers)) {
     throw new APIRouteError('API route not found', { route, slug }, 404);
   }
-  const handler = APIRoutesHandlers[route as APIPath];
-  const scope = APIRoutesScopes[route as APIPath];
+  const handler = APIRoutesHandlers[route];
+  const scope = APIRoutesScopes[route];
   if (!hasRights(session, scope)) {
     throw new APIRouteError(
       'User does not have the required scope for this API route',

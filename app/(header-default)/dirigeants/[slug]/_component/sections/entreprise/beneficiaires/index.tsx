@@ -1,14 +1,14 @@
 'use client';
 
-import { useState } from 'react';
 import { Warning } from '#components-ui/alerts';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import { useState } from 'react';
 import ProtectedBeneficiairesSection from './agent-section';
 import { AskUseCase } from './ask-use-case';
 
@@ -53,7 +53,7 @@ const BeneficiairesSection: React.FC<{
 }> = ({ uniteLegale, session }) => {
   const [useCase, setUseCase] = useState<UseCase>();
 
-  if (!hasRights(session, AppScope.beneficiaires)) {
+  if (!hasRights(session, ApplicationRights.beneficiaires)) {
     return (
       <Section title="Bénéficiaire(s) effectif(s)" id="beneficiaires">
         <WarningRBE />

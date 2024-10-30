@@ -5,7 +5,7 @@ import { httpGet } from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchExternalData } from './use-fetch-data';
 
-const is404 = (msg: string) => msg.indexOf('Siren non existant') !== 0;
+const isPdfNotFound = (msg: string) => msg.indexOf('Siren non existant') === 0;
 
 export function usePDFDownloader(pdfLink: string) {
   return useFetchExternalData(
@@ -14,7 +14,7 @@ export function usePDFDownloader(pdfLink: string) {
         try {
           return await httpGet<Blob>(pdfLink, { responseType: 'blob' });
         } catch (e: any) {
-          if (is404(e?.message)) {
+          if (isPdfNotFound(e?.message)) {
             throw new HttpNotFound('Not found - 404');
           }
           throw e;

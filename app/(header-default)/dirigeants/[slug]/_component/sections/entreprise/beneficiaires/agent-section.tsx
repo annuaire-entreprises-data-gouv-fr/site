@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import routes from '#clients/routes';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
@@ -12,7 +11,9 @@ import { IBeneficairesEffectif } from '#models/espace-agent/beneficiaires';
 import { UseCase } from '#models/user/agent';
 import { ISession } from '#models/user/session';
 import { formatDatePartial } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { useMemo } from 'react';
 
 /**
  * Dirigeants section
@@ -31,7 +32,7 @@ const ProtectedBeneficiairesSection: React.FC<{
     [useCase]
   );
   const beneficiaires = useAPIRouteData(
-    'espace-agent/beneficiaires',
+    APIRoutesPaths.EspaceAgentBeneficiaires,
     uniteLegale.siren,
     session,
     params
@@ -295,11 +296,6 @@ function BénéficiairesContent({
           />
         </>
       )}
-      <style global jsx>{`
-        table > tbody > tr > td:first-of-type {
-          width: 30%;
-        }
-      `}</style>
     </>
   );
 }

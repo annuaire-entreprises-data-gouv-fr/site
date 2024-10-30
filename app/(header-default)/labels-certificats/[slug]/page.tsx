@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import {
   checkHasLabelsAndCertificates,
@@ -18,7 +17,7 @@ import { CertificationSocieteMission } from '#components/labels-and-certificates
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { getCertificationsFromSlug } from '#models/certifications';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -28,11 +27,12 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug, isBot } = extractParamsAppRouter(props);
+  const { slug, isBot } = await extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
@@ -50,7 +50,7 @@ export const generateMetadata = async (
 
 const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
   const session = await getSession();
-  const { slug, isBot } = extractParamsAppRouter(props);
+  const { slug, isBot } = await extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
   const {
@@ -83,7 +83,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
           session={session}
         />
         {!checkHasLabelsAndCertificates(uniteLegale) &&
-          !hasRights(session, AppScope.protectedCertificats) && (
+          !hasRights(session, ApplicationRights.protectedCertificats) && (
             <p>Cette structure ne possède aucun label ou certificat.</p>
           )}
         {estEss && <CertificationESSSection ess={ess} />}
@@ -101,7 +101,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
             session={session}
           />
         )}
-        {hasRights(session, AppScope.protectedCertificats) && (
+        {hasRights(session, ApplicationRights.protectedCertificats) && (
           <>
             <QualibatSection session={session} uniteLegale={uniteLegale} />
             <QualifelecSection session={session} uniteLegale={uniteLegale} />

@@ -1,0 +1,45 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
+# faqTargets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
+administrations:
+  - all
+faqTargets:
+  - particulier
+  - entreprise
+  - independant
+  - association
+title: Fraudes et tentatives d’escroquerie au nom de L’Annuaire des Entreprises
+seo:
+  description: L'Annuaire des Entreprises ne vous prélèvera jamais d'argent.
+  title: Fraudes et tentatives d’escroquerie au nom de L’Annuaire des Entreprises
+more:
+  - label: 'Prélèvements bancaires : comment vous opposer à des prélèvements indus ?'
+    href: https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/prelevements-bancaires-comment-vous-opposer-des-prelevements-indus
+  - label: Fiche "Escroquerie" sur service-public.fr
+    href: https://www.service-public.fr/particuliers/vosdroits/F1520
+  - label: Fiche "Comment porter plainte ?" sur service-public.fr
+    href: https://www.service-public.fr/particuliers/vosdroits/F1435
+  - label: Fiche "Arnaque sur internet" sur service-public.fr
+    href: https://www.service-public.fr/particuliers/vosdroits/N31138
+body: |
+  L’Annuaire des Entreprises ne vous **prélèvera jamais d’argent**. 
+
+  Si vous constatez un prélèvement ou une tentative de prélèvement **en notre nom**, il s’agit très **probablement d’une fraude**. 
+
+  Des personnes malveillantes peuvent utiliser de manière illégitime l’identité de l'Annuaire des Entreprises pour effectuer des prélèvements frauduleux.
+
+  ## Que faire en cas de prélèvement anormal sur mon compte bancaire ?
+
+  En cas de prélèvement anormal sur votre compte bancaire, **demandez immédiatement à votre banque de le bloquer**. Selon les cas, elle peut être amenée à vous rembourser des prélèvements faits sans votre autorisation.
+
+  Vous pouvez [également porter plainte](https://www.service-public.fr/particuliers/vosdroits/F1435) dans un commissariat de police ou à la gendarmerie.

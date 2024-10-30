@@ -1,5 +1,5 @@
 import { getAgentUserType } from '#models/user/helpers';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 
 const TRACKER_BASE_URL = 'https://stats.data.gouv.fr';
@@ -11,7 +11,7 @@ export function MatomoInit({ session }: { session: ISession | null }) {
           __html: `
               var _paq = window._paq || [];
               ${
-                hasRights(session, AppScope.isAgent)
+                hasRights(session, ApplicationRights.isAgent)
                   ? `_paq.push(['setCustomDimension', '1', '${getAgentUserType(
                       session
                     )}']);`

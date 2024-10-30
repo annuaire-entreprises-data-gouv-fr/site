@@ -1,0 +1,52 @@
+name: 'Deploy : staging [CD]'
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy-website-staging:
+    name: Deploy website to staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ./deploy.key
+          sudo chmod 600 ./deploy.key
+          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_MACHINE_USER_PRIVATE_KEY}}
+          SSH_HOST: ${{ secrets.SSH_HOST_STAGING_V2 }}
+
+      - name: Deploy website to staging
+        run: ssh -i ./deploy.key www-data@$SSH_HOST 'python3 /opt/scripts/app-deploy-release/deploy.py /opt/git/releases/annuaire-entreprises-site https://github.com/annuaire-entreprises-data-gouv-fr/site.git website --version main --versions_to_keep=5 1> >(tee --append /var/log/deploy_annuaire-entreprises-site)'
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST_STAGING_V2 }}
+
+      - name: Notify staging failure only
+        if: failure()
+        uses: ./.github/actions/notify
+        with:
+          message: '🚨 ${{ github.event.repository.name }} : deploy to staging failed'
+          hook: ${{ secrets.TCHAP_HOOK }}
+          id: ${{ secrets.TCHAP_ROOM_ID }}
+
+  notify-deploy-success:
+    name: Notify successful deployment
+    runs-on: ubuntu-latest
+    needs: [deploy-website-staging]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Notify deploy success
+        uses: ./.github/actions/notify
+        with:
+          message: '✅ ${{ github.event.repository.name }} : successfully deploy production cluster'
+          hook: ${{ secrets.TCHAP_HOOK }}
+          id: ${{ secrets.TCHAP_ROOM_ID }}

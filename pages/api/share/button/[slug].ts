@@ -1,15 +1,21 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import constants from '#models/constants';
 import { Exception } from '#models/exceptions';
+import { isSiren, isSiret } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const button = (
   { query: { slug = '', light = '' } }: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const isSiren = slug.length === 9;
+  const isSirenOrSiret =
+    typeof slug === 'string' && (isSiren(slug) || isSiret(slug));
+  if (!isSirenOrSiret) {
+    res.status(403).json({ message: 'Slug must be a siren or a siret' });
+  }
+
   const path = `${
-    isSiren ? 'entreprise' : 'etablissement'
+    isSiren(slug as string) ? 'entreprise' : 'etablissement'
   }/${slug}?mtm_campaign=button-iframe`;
   const uri = encodeURI(`https://annuaire-entreprises.data.gouv.fr/${path}`);
 

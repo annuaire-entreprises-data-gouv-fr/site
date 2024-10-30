@@ -1,6 +1,7 @@
-import type { IronSession, SessionOptions } from 'iron-session';
 import { IAgentInfo } from '#models/user/agent';
 import { ISession } from '#models/user/session';
+import { isAbsoluteUrl } from '#utils/server-side-helper/app/is-absolute-url';
+import type { IronSession, SessionOptions } from 'iron-session';
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
@@ -13,8 +14,12 @@ export const sessionOptions: SessionOptions = {
 
 export async function setVisitTimestamp(session: IronSession<ISession>) {
   session.lastVisitTimestamp = new Date().getTime();
-  return session.save();
+  await session.save();
 }
+
+/**
+ * Utils for AgentConnect session
+ */
 
 export const setAgentSession = async (
   agent: IAgentInfo,
@@ -25,13 +30,12 @@ export const setAgentSession = async (
 };
 
 export const cleanAgentSession = async (session: IronSession<ISession>) => {
-  session.user = null;
+  session.destroy();
   await session.save();
 };
 
 /**
- * Store Siren for redirections
- * @param session
+ * Utils for AgentConnect redirection
  */
 
 export const setPathFrom = async (
@@ -39,8 +43,12 @@ export const setPathFrom = async (
   pathFrom: string
 ) => {
   if (pathFrom) {
-    session.pathFrom = pathFrom;
-    await session.save();
+    if (!isAbsoluteUrl(pathFrom)) {
+      session.pathFrom = pathFrom;
+      await session.save();
+    } else {
+      throw new Error('Absolute URL not allowed');
+    }
   }
 };
 
@@ -48,7 +56,13 @@ export const getPathFrom = (session: IronSession<ISession>) => session.pathFrom;
 
 export const cleanPathFrom = async (session: IronSession<ISession>) => {
   delete session.pathFrom;
+  await session.save();
 };
+
+/**
+ * Utils for FranceConnect session
+ */
+
 export const setHidePersonalDataRequestFCSession = async (
   firstName: string | undefined,
   familyName: string | undefined,

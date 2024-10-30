@@ -32,7 +32,7 @@ export const clientApiEntrepriseOpqibi = async (siren: Siren) => {
   return await clientAPIEntreprise(
     `${
       process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.certifications.opqibi.replace('{siren}', siren)}`,
+    }${routes.apiEntreprise.certifications.opqibi(siren)}`,
     mapToDomainObject
   );
 };

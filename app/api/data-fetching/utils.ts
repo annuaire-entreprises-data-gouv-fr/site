@@ -1,17 +1,17 @@
-import { userAgent } from 'next/server';
 import { Exception } from '#models/exceptions';
 import { ISession } from '#models/user/session';
 import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
+import { userAgent } from 'next/server';
 import getSession from '../../../utils/server-side-helper/app/get-session';
+import { APIRoutesPaths } from './routes-paths';
 
-type RouteHandler = (
-  request: Request,
-  params: { params: { slug: Array<string> } }
-) => Promise<Response>;
+export type IContext = { params: Promise<{ slug: Array<string> }> };
+
+type RouteHandler = (request: Request, context: IContext) => Promise<Response>;
 
 type RouteHandlerWithSession = (
   request: Request,
-  params: { params: { slug: Array<string> } },
+  context: IContext,
   session: ISession
 ) => Promise<Response>;
 
@@ -25,9 +25,9 @@ type RouteHandlerWithSession = (
  * @returns
  */
 export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
-  return async function (request, params) {
+  return async function (request, context) {
     const { isBot } = userAgent(request);
-    const routeAndSlug = getRouteAndSlug(params);
+    const routeAndSlug = await getRouteAndSlug(context);
 
     if (isBot) {
       throw new APIRouteError(
@@ -40,13 +40,13 @@ export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
     const session = await getSession();
     if (!userVisitedAPageRecently(session)) {
       throw new APIRouteError(
-        'Antiscrap activated : user has not visited a page recently',
+        'Antiscrap activated : user tries to scrap',
         routeAndSlug,
         401
       );
     }
 
-    return handler(request, params, session);
+    return handler(request, context, session);
   };
 }
 
@@ -79,10 +79,13 @@ export class APIRouteError extends Exception {
   }
 }
 
-export function getRouteAndSlug(params: { params: { slug: Array<string> } }) {
+export async function getRouteAndSlug(context: {
+  params: Promise<{ slug: Array<string> }>;
+}) {
   try {
-    const slug = params.params.slug.at(-1) as string;
-    const route = params.params.slug.slice(0, -1).join('/');
+    const params = await context.params;
+    const slug = params.slug.at(-1) as string;
+    const route = params.slug.slice(0, -1).join('/') as APIRoutesPaths;
     return { route, slug };
   } catch (e) {
     throw new APIRouteError('Invalid route', { route: '', slug: '' }, 404, e);
@@ -90,10 +93,10 @@ export function getRouteAndSlug(params: { params: { slug: Array<string> } }) {
 }
 
 export function withHandleError(handler: RouteHandler): RouteHandler {
-  return async function (request, params) {
+  return async function (request, context) {
     try {
-      return await handler(request, params);
-    } catch (e: any) {
+      return await handler(request, context);
+    } catch (e) {
       if (e instanceof APIRouteError) {
         logInfoInSentry(e);
         return new Response(e.message, { status: e.status });
@@ -101,7 +104,7 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
 
       let routeAndSlug;
       try {
-        routeAndSlug = getRouteAndSlug(params);
+        routeAndSlug = await getRouteAndSlug(context);
       } catch (e) {
         routeAndSlug = { route: '', slug: '' };
       }

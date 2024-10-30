@@ -13,6 +13,7 @@ import { isDataSuccess, isUnauthorized } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
 import { extractAssociationEtablissements } from '#utils/helpers/association';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { useMemo, useState } from 'react';
 
@@ -31,7 +32,7 @@ const NoDirigeants = () => (
 function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
   const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
   const associationProtected = useAPIRouteData(
-    'espace-agent/association-protected',
+    APIRoutesPaths.EspaceAgentAssociationProtected,
     uniteLegale.siren,
     session
   );
@@ -58,7 +59,6 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
       id="rna-dirigeants"
       title="Dirigeants des associations"
       isProtected
-      // @ts-ignore
       notFoundInfo={<NoDirigeants />}
       sources={[EAdministration.MI, EAdministration.DJEPVA]}
       data={associationProtected}

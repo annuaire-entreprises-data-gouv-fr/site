@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import Breadcrumb from '#components-ui/breadcrumb';
 import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
@@ -6,17 +5,31 @@ import {
   allDataToModify,
   getDataToModify,
 } from '#models/administrations/data-to-modify';
-import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
-import { redirectFAQPageNotFound } from '#utils/server-side-helper/app/redirect-faq-not-found';
+import { Exception } from '#models/exceptions';
+import { logWarningInSentry } from '#utils/sentry';
+import {
+  AppRouterProps,
+  IParams,
+} from '#utils/server-side-helper/app/extract-params';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
-type IParams = {
-  slug: string;
+// should not happen since we declared generateStaticParams
+const redirectFAQPageNotFound = (slug: string) => {
+  logWarningInSentry(
+    new Exception({
+      name: 'FAQPageNotFound',
+      context: { slug },
+    })
+  );
+  notFound();
 };
 
-export default async function FAQArticle(props: AppRouterProps) {
-  const dataToModify = getDataToModify(props.params.slug);
+export default async function FAQArticle({ params }: AppRouterProps) {
+  const { slug } = await params;
+  const dataToModify = getDataToModify(slug);
   if (!dataToModify) {
-    return redirectFAQPageNotFound(props.params.slug);
+    return redirectFAQPageNotFound(slug);
   }
   return (
     <>
@@ -81,10 +94,13 @@ export async function generateStaticParams(): Promise<Array<IParams>> {
     });
 }
 
-export const generateMetadata = function (props: AppRouterProps): Metadata {
-  const dataToModify = getDataToModify(props.params.slug);
+export const generateMetadata = async ({
+  params,
+}: AppRouterProps): Promise<Metadata> => {
+  const { slug } = await params;
+  const dataToModify = getDataToModify(slug);
   if (!dataToModify) {
-    return redirectFAQPageNotFound(props.params.slug);
+    return redirectFAQPageNotFound(slug);
   }
   return {
     title: dataToModify.label,

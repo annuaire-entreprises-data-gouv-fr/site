@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import AssociationCreationNotFoundAlert from '#components-ui/alerts-with-explanations/association-creation-not-found-alert';
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
@@ -10,6 +9,7 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IAssociation } from '#models/core/types';
 import { formatDate, formatIntFr } from '#utils/helpers';
 import { useFetchJOAFE } from 'hooks';
+import React from 'react';
 import { TwoColumnTable } from '../../../../../../components/table/simple';
 
 type IProps = {
@@ -23,7 +23,7 @@ export const JustificatifImmatriculationJOAFE: React.FC<IProps> = ({
 
   return (
     <AsyncDataSectionClient
-      id="joafe"
+      id="justificatifs"
       title="Enregistrement au JOAFE"
       sources={[EAdministration.DILA]}
       data={annoncesJOAFE}

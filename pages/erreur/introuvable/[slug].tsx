@@ -1,8 +1,14 @@
-import { GetServerSideProps } from 'next';
 import { INPI, INSEE } from '#components/administrations';
 import MatomoEvent from '#components/matomo-event';
 import Meta from '#components/meta/meta-client';
-import { formatIntFr, formatSiret, isLuhnValid } from '#utils/helpers';
+import {
+  formatIntFr,
+  formatSiret,
+  isLuhnValid,
+  isSiren,
+  isSiret,
+} from '#utils/helpers';
+import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 type SirenOrSiretNotFoundPageProps = {
@@ -12,9 +18,9 @@ type SirenOrSiretNotFoundPageProps = {
 const SirenOrSiretNotFoundPage: NextPageWithLayout<
   SirenOrSiretNotFoundPageProps
 > = ({ slug = '' }) => {
-  const isSiren = slug.length === 9;
-  const type = isSiren ? 'SIREN' : 'SIRET';
-  const formatted = isSiren ? formatIntFr(slug) : formatSiret(slug);
+  const slugIsSiren = isSiren(slug);
+  const type = slugIsSiren ? 'SIREN' : 'SIRET';
+  const formatted = slugIsSiren ? formatIntFr(slug) : formatSiret(slug);
 
   if (isLuhnValid(slug)) {
     return (
@@ -99,6 +105,15 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
 export const getServerSideProps: GetServerSideProps = async (context) => {
   context.res.statusCode = 404;
   const slug = (context?.params?.slug || '') as string;
+
+  if (!isSiren(slug) && !isSiret(slug)) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    };
+  }
 
   return { props: { slug } };
 };

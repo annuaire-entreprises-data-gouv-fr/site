@@ -1,4 +1,3 @@
-import React from 'react';
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
 import {
@@ -6,8 +5,9 @@ import {
   nonDiffusibleDataFormatter,
 } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import React from 'react';
 
 const ExtraitRNELink: React.FC<{
   uniteLegale: IUniteLegale;
@@ -15,7 +15,7 @@ const ExtraitRNELink: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, label, session }) => {
   return estDiffusible(uniteLegale) ||
-    hasRights(session, AppScope.nonDiffusible) ? (
+    hasRights(session, ApplicationRights.nonDiffusible) ? (
     <ButtonLink
       small
       alt

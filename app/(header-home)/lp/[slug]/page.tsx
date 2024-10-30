@@ -1,29 +1,24 @@
-import { Metadata } from 'next';
-import React, { ReactElement } from 'react';
 import { diamond } from '#components-ui/logo-annuaire/logo-annuaire';
 import AdministrationDescription from '#components/administrations/administration-description';
 import { RenderMarkdownServerOnly } from '#components/markdown';
 import SearchBar from '#components/search-bar';
-import { InternalError } from '#models/exceptions';
 import { getAllLandingPages, getLandingPage } from '#models/landing-pages';
+import {
+  AppRouterProps,
+  IParams,
+} from '#utils/server-side-helper/app/extract-params';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import React, { use } from 'react';
 import styles from './style.module.css';
 
-type IParams = {
-  slug: string;
-};
+export default function LandingPage(props: AppRouterProps) {
+  const params = use(props.params);
 
-export default (function LandingPage({
-  params,
-}: {
-  params: IParams;
-}): ReactElement {
   const slug = params.slug;
   const landingPage = getLandingPage(slug);
   if (!landingPage) {
-    throw new InternalError({
-      message: 'Landing page not found',
-      context: params,
-    });
+    notFound();
   }
   const {
     title,
@@ -92,7 +87,7 @@ export default (function LandingPage({
       </div>
     </>
   );
-});
+}
 
 export async function generateStaticParams(): Promise<Array<IParams>> {
   return getAllLandingPages().map(({ slug }) => {
@@ -102,24 +97,20 @@ export async function generateStaticParams(): Promise<Array<IParams>> {
   });
 }
 
-export const generateMetadata = function ({
+export const generateMetadata = async ({
   params,
-}: {
-  params: IParams;
-}): Metadata {
-  const landingPage = getLandingPage(params.slug);
+}: AppRouterProps): Promise<Metadata> => {
+  const { slug } = await params;
+  const landingPage = getLandingPage(slug);
   if (!landingPage) {
-    throw new InternalError({
-      message: 'Landing page not found',
-      context: params,
-    });
+    notFound();
   }
   return {
     title: landingPage.seo.title || landingPage.title,
     description: landingPage.seo.description,
     robots: 'index, follow',
     alternates: {
-      canonical: `https://annuaire-entreprises.data.gouv.fr/lp/${params.slug}`,
+      canonical: `https://annuaire-entreprises.data.gouv.fr/lp/${slug}`,
     },
   };
 };

@@ -25,7 +25,7 @@ export const clientApiEntrepriseConformiteVigilance = async (siren: Siren) => {
   >(
     `${
       process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.conformite.vigilance.replace('{siren}', siren)}`,
+    }${routes.apiEntreprise.conformite.vigilance(siren)}`,
     mapToDomainObject
   );
 };

@@ -1,21 +1,14 @@
-import dynamic from 'next/dynamic';
-import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
-import { AppScope, hasRights } from '#models/user/rights';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import React from 'react';
+import ChangelogNotification from '../changelog-notification';
 import Menu from '../menu';
 import styles from './styles.module.css';
-
-const ChangelogNotificationWithoutSSR = dynamic(
-  () => import('../changelog-notification'),
-  {
-    ssr: false,
-  }
-);
 
 type IProps = {
   currentSearchTerm?: string;
@@ -100,7 +93,7 @@ export const HeaderCore: React.FC<IProps> = ({
                         </div>
                       ) : null}
                       <div className={styles.menuMobile}>
-                        <ChangelogNotificationWithoutSSR />
+                        <ChangelogNotification />
                         <Menu session={session} useAgentCTA={useAgentCTA} />
                       </div>
                     </div>
@@ -114,7 +107,7 @@ export const HeaderCore: React.FC<IProps> = ({
                     <div className="fr-header__tools-links">
                       <ul className="fr-links-group">
                         <li>
-                          <ChangelogNotificationWithoutSSR />
+                          <ChangelogNotification />
                         </li>
                         <li>
                           <Menu session={session} useAgentCTA={useAgentCTA} />
@@ -129,7 +122,7 @@ export const HeaderCore: React.FC<IProps> = ({
           </form>
         </PrintNever>
       </header>
-      {useAgentBanner && hasRights(session, AppScope.isAgent) && (
+      {useAgentBanner && hasRights(session, ApplicationRights.isAgent) && (
         <div className={styles.agentBanner} role="banner">
           <PrintNever>
             <div className="fr-container">
