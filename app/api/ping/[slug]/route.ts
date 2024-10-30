@@ -1,25 +1,35 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { APISlugNotFound, pingAPIClient } from '#clients/ping-api-clients';
 
-const ping = async (
-  { query: { slug } }: NextApiRequest,
-  res: NextApiResponse
-) => {
+export async function GET(
+  req: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
   try {
+    const { slug } = await params;
     const { test, status = 500 } = await pingAPIClient(slug || '');
 
     if (test) {
-      res.status(200).json({ message: 'ok' });
+      return new Response(JSON.stringify({ message: 'ok' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
     } else {
-      res.status(500).json({ message: 'ko', status });
+      return new Response(JSON.stringify({ message: 'ko', status }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
   } catch (e: any) {
     if (e instanceof APISlugNotFound) {
-      res.status(404).json(e);
+      return new Response(JSON.stringify(e), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      });
     } else {
-      res.status(500).json(e);
+      return new Response(JSON.stringify(e), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
   }
-};
-
-export default ping;
+}

@@ -2,7 +2,7 @@ import { Exception } from '#models/exceptions';
 import { isSiren, isSiret } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { createCanvas, loadImage } from 'canvas';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 import QRCode from 'qrcode';
 
 async function createQRCode(dataForQRcode: string) {
@@ -29,31 +29,41 @@ async function createQRCode(dataForQRcode: string) {
   return canvas.toDataURL('image/png');
 }
 
-const qrCode = async (
-  { query: { slug } }: NextApiRequest,
-  res: NextApiResponse
-) => {
+export async function GET(
+  req: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
+
   const isSirenOrSiret =
     typeof slug === 'string' && (isSiren(slug) || isSiret(slug));
   if (!isSirenOrSiret) {
-    res.status(403).json({ message: 'Slug must be a siren or a siret' });
+    return NextResponse.json(
+      { message: 'Slug must be a siren or a siret' },
+      { status: 403 }
+    );
   }
 
   const path = `${
     isSiren(slug as string) ? 'entreprise' : 'etablissement'
-  }/${slug}?mtm_campaign=qr-code`;
-  const uri = encodeURI(`https://annuaire-entreprises.data.gouv.fr/${path}`);
+  }/${slug}`;
+  const uri = encodeURI(
+    `https://annuaire-entreprises.data.gouv.fr/${path}?mtm_campaign=qr-code`
+  );
 
   try {
     const urlAsImg = await createQRCode(uri);
 
     const base64Data = urlAsImg.replace(/^data:image\/png;base64,/, '');
     var img = Buffer.from(base64Data, 'base64');
-    res.writeHead(200, {
-      'Content-Type': 'image/png',
-      'Content-Length': img.length,
+
+    return new Response(img, {
+      status: 200,
+      headers: {
+        'Content-Type': 'image/png',
+        'Content-Length': img.length.toString(),
+      },
     });
-    res.end(img);
   } catch (e: any) {
     logErrorInSentry(
       new Exception({
@@ -65,8 +75,6 @@ const qrCode = async (
       })
     );
 
-    res.status(500).json({ message: e });
+    return NextResponse.json({ message: e }, { status: 500 });
   }
-};
-
-export default qrCode;
+}
