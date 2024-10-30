@@ -4,6 +4,7 @@ long: Qualifelec
 site: https://www.qualifelec.fr/
 contact: https://www.qualifelec.fr/contact/
 estServicePublic: false
+logoType: portrait
 dataSources:
   - label: Liste des entreprises Qualifelec
     apiSlug: api-entreprise
