@@ -19,7 +19,7 @@ import BilansSection from './_components';
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug, isBot } = extractParamsAppRouter(props);
+  const { slug, isBot } = await extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
@@ -34,7 +34,7 @@ export const generateMetadata = async (
 
 const FinancePage = async (props: AppRouterProps) => {
   const session = await getSession();
-  const { slug, isBot } = extractParamsAppRouter(props);
+  const { slug, isBot } = await extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
   return (

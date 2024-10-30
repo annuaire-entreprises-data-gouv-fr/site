@@ -1,12 +1,12 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { cache } from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
 import { administrationsMetaData } from '#models/administrations';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { getFaqArticlesByTag } from '#models/article/faq';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { cache } from 'react';
 
 const cachedGetAdministrations = cache((slug: string) => {
   const slugs = slug.split('_');
@@ -30,7 +30,9 @@ const cachedGetAdministrations = cache((slug: string) => {
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const slug = props.params.slug as EAdministration;
+  const params = await props.params;
+  const slug = params.slug as EAdministration;
+
   const { title } = cachedGetAdministrations(slug);
 
   return {
@@ -42,8 +44,9 @@ export const generateMetadata = async (
   };
 };
 
-const AdministrationPage = (props: AppRouterProps) => {
-  const slug = props.params.slug as EAdministration;
+export default async function AdministrationPage(props: AppRouterProps) {
+  const params = await props.params;
+  const slug = params.slug as EAdministration;
 
   const { administrations, articles } = cachedGetAdministrations(slug);
 
@@ -72,6 +75,4 @@ const AdministrationPage = (props: AppRouterProps) => {
       )}
     </TextWrapper>
   );
-};
-
-export default AdministrationPage;
+}

@@ -5,16 +5,17 @@ import { APIRoutesScopes } from '../routes-scopes';
 import {
   APIRouteError,
   getRouteAndSlug,
+  IContext,
   withHandleError,
   withIgnoreBot,
 } from '../utils';
 
 async function getRoute(
   request: Request,
-  params: { params: { slug: Array<string> } },
+  context: IContext,
   session: ISession
 ) {
-  const { slug, route } = getRouteAndSlug(params);
+  const { slug, route } = await getRouteAndSlug(context);
 
   if (!(route in APIRoutesHandlers)) {
     throw new APIRouteError('API route not found', { route, slug }, 404);
