@@ -1,45 +1,11 @@
 import { IMatomoStats, clientMatomoStats } from '#clients/matomo';
-import Meta from '#components/meta/meta-client';
 import { NpsStats } from '#components/stats/nps';
 import { TraficStats } from '#components/stats/trafic';
 import { UsageStats } from '#components/stats/usage';
-import { GetStaticProps } from 'next';
-import { NextPageWithLayout } from '../_app';
 
-const StatsPage: NextPageWithLayout<IMatomoStats> = ({
-  monthlyNps,
-  visits,
-  mostCopied,
-  copyPasteAction,
-  redirectedSiren,
-}) => (
-  <>
-    <Meta
-      title="Statistiques d’utilisation de l’Annuaire des Entreprises"
-      canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/stats"
-      noIndex={true}
-    />
-    <h1>Statistiques d’utilisation</h1>
-    <p>
-      Découvrez nos statistiques d’utilisation. Toutes les données recueillies
-      sont <a href="/vie-privee">anonymisées</a>.
-    </p>
-    <h2>Utilisation du service</h2>
-    <TraficStats visits={visits} />
-    <br />
-    <h2>Comment est utilisé l’Annuaire des Entreprises ?</h2>
-    <UsageStats
-      copyPasteAction={copyPasteAction}
-      redirectedSiren={redirectedSiren}
-      mostCopied={mostCopied}
-    />
-    <h2>Satisfaction des utilisateurs</h2>
-    <NpsStats monthlyNps={monthlyNps} />
-    <br />
-  </>
-);
+export const revalidate = 14400; // 4 * 3600 = 4 hours;
 
-export const getStaticProps: GetStaticProps = async () => {
+async function fetchStats(): Promise<IMatomoStats> {
   const {
     visits,
     monthlyNps,
@@ -49,16 +15,46 @@ export const getStaticProps: GetStaticProps = async () => {
     redirectedSiren,
   } = await clientMatomoStats();
   return {
-    props: {
-      monthlyNps,
-      visits,
-      userResponses,
-      mostCopied,
-      copyPasteAction,
-      redirectedSiren,
-    },
-    revalidate: 4 * 3600, // In seconds - 12 hours
+    visits,
+    monthlyNps,
+    userResponses,
+    mostCopied,
+    copyPasteAction,
+    redirectedSiren,
   };
-};
+}
 
-export default StatsPage;
+export async function generateMetadata() {
+  return {
+    title: 'Statistiques d’utilisation de l’Annuaire des Entreprises',
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/stats',
+    robots: { noindex: true },
+  };
+}
+
+export default async function StatsPage() {
+  const { monthlyNps, visits, mostCopied, copyPasteAction, redirectedSiren } =
+    await fetchStats();
+
+  return (
+    <>
+      <h1>Statistiques d’utilisation</h1>
+      <p>
+        Découvrez nos statistiques d’utilisation. Toutes les données recueillies
+        sont <a href="/vie-privee">anonymisées</a>.
+      </p>
+      <h2>Utilisation du service</h2>
+      <TraficStats visits={visits} />
+      <br />
+      <h2>Comment est utilisé l’Annuaire des Entreprises ?</h2>
+      <UsageStats
+        copyPasteAction={copyPasteAction}
+        redirectedSiren={redirectedSiren}
+        mostCopied={mostCopied}
+      />
+      <h2>Satisfaction des utilisateurs</h2>
+      <NpsStats monthlyNps={monthlyNps} />
+      <br />
+    </>
+  );
+}
