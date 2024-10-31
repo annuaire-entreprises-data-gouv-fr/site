@@ -31,6 +31,11 @@ export default function ChangelogNotification({
     null
   );
 
+  // on fisrt render should always be hidden to avoid hydration errors
+  useEffect(() => {
+    setShouldDisplayNotif(false);
+  }, []);
+
   useEffect(() => {
     const pageIsChangelog =
       window.location.pathname === '/historique-des-modifications';
