@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow',
 };
 
-export default function ConnexionFailurePage() {
+const ConnexionFailure = () => {
   return (
     <ConnexionSubLayout img={connexionFailedPicture}>
       <h1>Votre tentative de connexion a échouée</h1>
@@ -23,4 +23,6 @@ export default function ConnexionFailurePage() {
       <a href="/">← Retourner au moteur de recherche</a>
     </ConnexionSubLayout>
   );
-}
+};
+
+export default ConnexionFailure;

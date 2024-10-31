@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { NonDiffusibleSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
@@ -15,12 +16,11 @@ import extractParamsAppRouter, {
 import getSession from '#utils/server-side-helper/app/get-session';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
-import { Metadata } from 'next';
 
-export const generateMetadata = async (
+export const generateMetadata = async function (
   props: AppRouterProps
-): Promise<Metadata> => {
-  const { slug, isBot } = await extractParamsAppRouter(props);
+): Promise<Metadata> {
+  const { slug, isBot } = extractParamsAppRouter(props);
   const { uniteLegale, etablissement } =
     await cachedEtablissementWithUniteLegale(slug, isBot);
 
@@ -38,8 +38,8 @@ export const generateMetadata = async (
   };
 };
 
-export default async function EtablissementPage(props: AppRouterProps) {
-  const { slug, isBot, isRedirected } = await extractParamsAppRouter(props);
+export default (async function EtablissementPage(props: AppRouterProps) {
+  const { slug, isBot, isRedirected } = extractParamsAppRouter(props);
   const { etablissement, uniteLegale } =
     await cachedEtablissementWithUniteLegale(slug, isBot);
 
@@ -77,4 +77,4 @@ export default async function EtablissementPage(props: AppRouterProps) {
       </div>
     </>
   );
-}
+});

@@ -1,8 +1,8 @@
+import { Metadata } from 'next';
 import { LogoAnnuaireWithEasterEgg } from '#components-ui/logo-annuaire/logo-with-easter-egg';
 import Favourites from '#components/favourites';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title:
@@ -15,51 +15,51 @@ export const metadata: Metadata = {
   },
 };
 
-export default function IndexPage() {
-  return (
-    <>
-      <StructuredDataSearchAction />
-      <div className="layout-center">
-        <form
+const Index = () => (
+  <>
+    <StructuredDataSearchAction />
+    <div className="layout-center">
+      <form
+        style={{
+          marginBottom: '16vh',
+          marginTop: '11vh',
+          maxWidth: '900px',
+        }}
+        id="search-bar-form"
+        action={'/rechercher'}
+        method="get"
+      >
+        <LogoAnnuaireWithEasterEgg />
+        <h2 style={{ textAlign: 'center', marginTop: '30px' }}>
+          Vérifiez les informations légales publiques des entreprises,
+          associations et services publics en France
+        </h2>
+        <div
           style={{
-            marginBottom: '16vh',
-            marginTop: '11vh',
-            maxWidth: '900px',
+            margin: 'auto',
+            marginTop: '30px',
+            flexDirection: 'column',
+            width: '100%',
+            maxWidth: '450px',
           }}
-          id="search-bar-form"
-          action={'/rechercher'}
-          method="get"
         >
-          <LogoAnnuaireWithEasterEgg />
-          <h2 style={{ textAlign: 'center', marginTop: '30px' }}>
-            Vérifiez les informations légales publiques des entreprises,
-            associations et services publics en France
-          </h2>
-          <div
-            style={{
-              margin: 'auto',
-              marginTop: '30px',
-              flexDirection: 'column',
-              width: '100%',
-              maxWidth: '450px',
-            }}
-          >
-            <SearchBar
-              placeholder="Nom, adresse, n° SIRET/SIREN..."
-              defaultValue=""
-              autoFocus={true}
-            />
-          </div>
+          <SearchBar
+            placeholder="Nom, adresse, n° SIRET/SIREN..."
+            defaultValue=""
+            autoFocus={true}
+          />
+        </div>
 
-          <br />
-          <div className="layout-center">
-            <a href="/rechercher">→ Effectuer une recherche avancée</a>
-          </div>
-        </form>
-      </div>
-      <div style={{ height: '25vh', maxHeight: '150px' }}>
-        <Favourites />
-      </div>
-    </>
-  );
-}
+        <br />
+        <div className="layout-center">
+          <a href="/rechercher">→ Effectuer une recherche avancée</a>
+        </div>
+      </form>
+    </div>
+    <div style={{ height: '25vh', maxHeight: '150px' }}>
+      <Favourites />
+    </div>
+  </>
+);
+
+export default Index;

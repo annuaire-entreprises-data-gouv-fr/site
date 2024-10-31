@@ -34,7 +34,7 @@ import { Metadata } from 'next';
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug, isBot } = await extractParamsAppRouter(props);
+  const { slug, isBot } = extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
@@ -52,7 +52,7 @@ export const generateMetadata = async (
 
 const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
   const session = await getSession();
-  const { slug, isBot } = await extractParamsAppRouter(props);
+  const { slug, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
   const {

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow',
 };
 
-export default function ConnexionRefusedPage() {
+const ConnexionRefused = () => {
   return (
     <ConnexionSubLayout img={connexionRefusedPicture}>
       <h1>Vous n’êtes pas autorisé(e) à accéder à cette partie du site</h1>
@@ -25,4 +25,6 @@ export default function ConnexionRefusedPage() {
       <a href="/">← Retourner au moteur de recherche</a>
     </ConnexionSubLayout>
   );
-}
+};
+
+export default ConnexionRefused;

@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import Breadcrumb from '#components-ui/breadcrumb';
 import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
@@ -7,12 +9,11 @@ import {
 } from '#models/administrations/data-to-modify';
 import { Exception } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
-import {
-  AppRouterProps,
-  IParams,
-} from '#utils/server-side-helper/app/extract-params';
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
+
+type IParams = {
+  slug: string;
+};
 
 // should not happen since we declared generateStaticParams
 const redirectFAQPageNotFound = (slug: string) => {
@@ -25,11 +26,10 @@ const redirectFAQPageNotFound = (slug: string) => {
   notFound();
 };
 
-export default async function FAQArticle({ params }: AppRouterProps) {
-  const { slug } = await params;
-  const dataToModify = getDataToModify(slug);
+export default async function FAQArticle(props: AppRouterProps) {
+  const dataToModify = getDataToModify(props.params.slug);
   if (!dataToModify) {
-    return redirectFAQPageNotFound(slug);
+    return redirectFAQPageNotFound(props.params.slug);
   }
   return (
     <>
@@ -94,13 +94,10 @@ export async function generateStaticParams(): Promise<Array<IParams>> {
     });
 }
 
-export const generateMetadata = async ({
-  params,
-}: AppRouterProps): Promise<Metadata> => {
-  const { slug } = await params;
-  const dataToModify = getDataToModify(slug);
+export const generateMetadata = function (props: AppRouterProps): Metadata {
+  const dataToModify = getDataToModify(props.params.slug);
   if (!dataToModify) {
-    return redirectFAQPageNotFound(slug);
+    return redirectFAQPageNotFound(props.params.slug);
   }
   return {
     title: dataToModify.label,

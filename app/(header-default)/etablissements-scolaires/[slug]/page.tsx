@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { EtablissementsScolairesSection } from '#components/education-nationale';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -11,12 +12,11 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug, isBot } = await extractParamsAppRouter(props);
+  const { slug, isBot } = extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
@@ -32,7 +32,7 @@ export const generateMetadata = async (
 
 const EtablissementsScolairesPage = async (props: AppRouterProps) => {
   const session = await getSession();
-  const { slug, isBot, page } = await extractParamsAppRouter(props);
+  const { slug, isBot, page } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
   const etablissementsScolaires = await getEtablissementsScolaires(
     uniteLegale.siren,

@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   },
 };
 
-type SearchParams = Promise<{ question?: string }>;
-
-export default async function Parcours(props: { searchParams: SearchParams }) {
-  const searchParams = await props.searchParams;
-
+export default async function Parcours({
+  searchParams,
+}: {
+  searchParams?: { question?: string };
+}) {
   const question = (searchParams?.question ?? '') as EQuestionType;
   const session = await getSession();
 

@@ -1,22 +1,21 @@
 import { ISession } from '#models/user/session';
 import { IronSession, getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { sessionOptions } from '.';
 
 export type IReqWithSession = NextRequest & {
   session: IronSession<ISession>;
 };
 export default function withSession(
-  handler: (req: IReqWithSession) => Promise<any>
+  handler: (req: IReqWithSession, res: NextResponse) => Promise<any>
 ) {
-  return async (req: NextRequest) => {
+  return async (req: NextRequest, res: NextResponse) => {
     const reqWithSession = req as IReqWithSession;
-    const cookieStore = await cookies();
     reqWithSession.session = await getIronSession<ISession>(
-      cookieStore,
+      cookies(),
       sessionOptions
     );
-    return handler(reqWithSession);
+    return handler(reqWithSession, res);
   };
 }

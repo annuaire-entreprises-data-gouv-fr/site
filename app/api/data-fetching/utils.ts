@@ -5,13 +5,14 @@ import { userAgent } from 'next/server';
 import getSession from '../../../utils/server-side-helper/app/get-session';
 import { APIRoutesPaths } from './routes-paths';
 
-export type IContext = { params: Promise<{ slug: Array<string> }> };
-
-type RouteHandler = (request: Request, context: IContext) => Promise<Response>;
+type RouteHandler = (
+  request: Request,
+  context: { params: { slug: Array<string> } }
+) => Promise<Response>;
 
 type RouteHandlerWithSession = (
   request: Request,
-  context: IContext,
+  context: { params: { slug: Array<string> } },
   session: ISession
 ) => Promise<Response>;
 
@@ -27,7 +28,7 @@ type RouteHandlerWithSession = (
 export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
   return async function (request, context) {
     const { isBot } = userAgent(request);
-    const routeAndSlug = await getRouteAndSlug(context);
+    const routeAndSlug = getRouteAndSlug(context);
 
     if (isBot) {
       throw new APIRouteError(
@@ -79,13 +80,10 @@ export class APIRouteError extends Exception {
   }
 }
 
-export async function getRouteAndSlug(context: {
-  params: Promise<{ slug: Array<string> }>;
-}) {
+export function getRouteAndSlug(context: { params: { slug: Array<string> } }) {
   try {
-    const params = await context.params;
-    const slug = params.slug.at(-1) as string;
-    const route = params.slug.slice(0, -1).join('/') as APIRoutesPaths;
+    const slug = context.params.slug.at(-1) as string;
+    const route = context.params.slug.slice(0, -1).join('/') as APIRoutesPaths;
     return { route, slug };
   } catch (e) {
     throw new APIRouteError('Invalid route', { route: '', slug: '' }, 404, e);
@@ -104,7 +102,7 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
 
       let routeAndSlug;
       try {
-        routeAndSlug = await getRouteAndSlug(context);
+        routeAndSlug = getRouteAndSlug(context);
       } catch (e) {
         routeAndSlug = { route: '', slug: '' };
       }

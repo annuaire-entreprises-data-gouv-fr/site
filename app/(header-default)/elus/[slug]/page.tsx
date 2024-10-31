@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { uniteLegalePageDescription } from '#utils/helpers';
@@ -7,12 +8,11 @@ import extractParamsAppRouter, {
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
 import ElusSection from 'app/(header-default)/elus/_component/section/elus-section';
-import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug, page, isBot } = await extractParamsAppRouter(props);
+  const { slug, page, isBot } = extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
@@ -27,7 +27,7 @@ export const generateMetadata = async (
 };
 
 const ElusPage = async (props: AppRouterProps) => {
-  const { slug, isBot } = await extractParamsAppRouter(props);
+  const { slug, isBot } = extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
   const session = await getSession();

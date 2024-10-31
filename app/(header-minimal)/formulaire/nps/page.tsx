@@ -5,6 +5,7 @@ import { getAgentEmail, getAgentUserType } from '#models/user/helpers';
 import { isLoggedIn } from '#models/user/rights';
 import { randomId } from '#utils/helpers';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { NextPageWithLayout } from 'pages/_app';
 import styles from './style.module.css';
 
 const visitorTypes = [
@@ -42,7 +43,7 @@ export const metadata = {
   },
 };
 
-const FeedBackPage = async () => {
+const FeedBackPage: NextPageWithLayout = async () => {
   const uuid = randomId();
   const session = await getSession();
   return (
