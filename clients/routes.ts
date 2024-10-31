@@ -26,6 +26,10 @@ const routes = {
         `/v3/qualibat/etablissements/${siret}/certification_batiment`,
       opqibi: (siren: string) =>
         `/v3/opqibi/unites_legales/${siren}/certification_ingenierie`,
+      cibtp: (siret: string) =>
+        `/v3/cibtp/etablissements/${siret}/attestation_cotisations_conges_payes_chomage_intemperies`,
+      cnetp: (siren: string) =>
+        `/v3/cnetp/unites_legales/${siren}/attestation_cotisations_conges_payes_chomage_intemperies?context=Test+de+l%27API&object=Test+de+l%27API&recipient=10000001700010`,
     },
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,

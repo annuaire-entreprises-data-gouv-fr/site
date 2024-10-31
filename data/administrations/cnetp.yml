@@ -1,0 +1,14 @@
+slug: cnetp
+short: CNETP
+long: CNETP
+site: https://www.cnetp.org/
+contact: https://www.cnetp.org/noscoordonnees/
+estServicePublic: false
+logoType: portrait
+dataSources:
+  - label: Liste des entreprises CNETP
+    apiSlug: api-entreprise
+    data:
+      - label: Certification CNETP
+description: |
+  Le CNETP est un organisme de droit privé à gestion paritaire chargé de la gestion des régimes spécifiques de congés payés et de chômage intempéries dans le secteur des Entreprises de Travaux Publics (ETP).
