@@ -2,6 +2,7 @@ import { IMatomoStats, clientMatomoStats } from '#clients/matomo';
 import { NpsStats } from '#components/stats/nps';
 import { TraficStats } from '#components/stats/trafic';
 import { UsageStats } from '#components/stats/usage';
+import { Metadata } from 'next';
 
 export const revalidate = 14400; // 4 * 3600 = 4 hours;
 
@@ -24,13 +25,13 @@ async function fetchStats(): Promise<IMatomoStats> {
   };
 }
 
-export async function generateMetadata() {
-  return {
-    title: 'Statistiques d’utilisation de l’Annuaire des Entreprises',
+export const metadata: Metadata = {
+  title: 'Statistiques d’utilisation de l’Annuaire des Entreprises',
+  alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/stats',
-    robots: { noindex: true },
-  };
-}
+  },
+  robots: 'noindex, nofollow',
+};
 
 export default async function StatsPage() {
   const { monthlyNps, visits, mostCopied, copyPasteAction, redirectedSiren } =

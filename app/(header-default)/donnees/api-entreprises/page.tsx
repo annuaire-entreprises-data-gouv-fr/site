@@ -1,13 +1,13 @@
 import { DINUM, INPI, INSEE } from '#components/administrations';
+import { Metadata } from 'next';
 
-export async function generateMetadata() {
-  return {
-    title: 'API Recherche d’entreprises & API Entreprise',
+export const metadata: Metadata = {
+  title: 'API Recherche d’entreprises & API Entreprise',
+  alternates: {
     canonical:
       'https://annuaire-entreprises.data.gouv.fr/donnees/acceder-par-api',
-    robots: { noindex: false },
-  };
-}
+  },
+};
 
 export default function AccesByAPIPage() {
   return (

@@ -6,6 +6,7 @@ import {
   IMonitoringWithMetaData,
   getMonitorsByAdministration,
 } from '#models/monitoring';
+import { Metadata } from 'next';
 import React from 'react';
 
 export const revalidate = 30;
@@ -25,12 +26,10 @@ async function fetchStatusData(): Promise<IProps> {
   };
 }
 
-export async function generateMetadata() {
-  return {
-    title: 'Statut des API utilisées par l’Annuaire des Entreprises',
-    robots: { noindex: true },
-  };
-}
+export const metadata: Metadata = {
+  title: 'Statut des API utilisées par l’Annuaire des Entreprises',
+  robots: 'noindex, nofollow',
+};
 
 export default async function StatusPage() {
   const { monitors, administrationsMetaData } = await fetchStatusData();

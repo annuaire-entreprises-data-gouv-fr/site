@@ -1,12 +1,13 @@
 import { Icon } from '#components-ui/icon/wrapper';
 import TextWrapper from 'components-ui/text-wrapper';
+import { Metadata } from 'next';
 
-export async function generateMetadata() {
-  return {
-    title: 'Réutiliser ou partager l’Annuaire des Entreprises',
+export const metadata: Metadata = {
+  title: 'Réutiliser ou partager l’Annuaire des Entreprises',
+  alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/partager',
-  };
-}
+  },
+};
 
 export default function PartagerPage() {
   return (

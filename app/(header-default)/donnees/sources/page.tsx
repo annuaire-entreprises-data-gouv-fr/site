@@ -5,17 +5,17 @@ import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { administrationsMetaData, allAPI } from '#models/administrations';
 import constants from '#models/constants';
+import { Metadata } from 'next';
 import React from 'react';
 
-export async function generateMetadata() {
-  return {
-    title: 'Sources des données utilisées dans l’Annuaire des Entreprises',
+export const metadata: Metadata = {
+  title: 'Sources des données utilisées dans l’Annuaire des Entreprises',
+  alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/donnees/sources',
-  };
-}
+  },
+};
 
 export default function DataSourcesPage() {
-  // TO CHECK
   const allAdministrations = Object.values(administrationsMetaData).filter(
     (administration) => administration.dataSources.length > 0
   );
