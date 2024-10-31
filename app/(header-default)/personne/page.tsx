@@ -15,10 +15,9 @@ import {
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
 import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
 import { Metadata } from 'next';
-import { use } from 'react';
 
-export default function extractParamsPersonne(props: AppRouterProps) {
-  const searchParams = use(props.searchParams);
+async function extractParamsPersonne(props: AppRouterProps) {
+  const searchParams = await props.searchParams;
 
   const pageParam = (searchParams.page || '') as string;
   const sirenFrom = (searchParams.sirenFrom || '') as string;
@@ -36,10 +35,10 @@ export default function extractParamsPersonne(props: AppRouterProps) {
   };
 }
 
-export const generateMetadata = async (
+export async function generateMetadata(
   props: AppRouterProps
-): Promise<Metadata> => {
-  const { urlComplements } = extractParamsPersonne(props);
+): Promise<Metadata> {
+  const { urlComplements } = await extractParamsPersonne(props);
   return {
     title: 'Liste des structures associées à un individu',
     robots: 'follow, noindex',
@@ -47,11 +46,11 @@ export const generateMetadata = async (
       canonical: `https://annuaire-entreprises.data.gouv.fr/personne?${urlComplements}`,
     },
   };
-};
+}
 
-const PersonnePage = async (props: AppRouterProps) => {
+export default async function PersonnePage(props: AppRouterProps) {
   const { urlComplements, fn, nom, pageParam, sirenFrom, partialDate } =
-    extractParamsPersonne(props);
+    await extractParamsPersonne(props);
 
   const { prenom, prenoms } = formatFirstNames(fn, ', ');
 
@@ -188,4 +187,4 @@ const PersonnePage = async (props: AppRouterProps) => {
       <br />
     </div>
   );
-};
+}
