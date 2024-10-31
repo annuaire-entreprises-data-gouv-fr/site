@@ -47,6 +47,6 @@ jobs:
       - name: Notify deploy success
         uses: ./.github/actions/notify
         with:
-          message: '✅ ${{ github.event.repository.name }} : successfully deploy production cluster'
+          message: '✅ ${{ github.event.repository.name }} : successfully deploy staging cluster'
           hook: ${{ secrets.TCHAP_HOOK }}
           id: ${{ secrets.TCHAP_ROOM_ID }}

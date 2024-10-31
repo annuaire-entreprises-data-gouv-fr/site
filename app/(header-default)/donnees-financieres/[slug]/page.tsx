@@ -58,7 +58,10 @@ const FinancePage = async (props: AppRouterProps) => {
           </>
         ) : (
           <>
-            <FinancesSocieteSection uniteLegale={uniteLegale} />
+            <FinancesSocieteSection
+              uniteLegale={uniteLegale}
+              session={session}
+            />
             <HorizontalSeparator />
             <BilansSection uniteLegale={uniteLegale} session={session} />
           </>
