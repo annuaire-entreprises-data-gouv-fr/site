@@ -9,7 +9,7 @@ const getUrl = (slug: string) => {
   if (hasSirenFormat(slug)) {
     return `https://annuaire-entreprises.data.gouv.fr/entreprise/${slug}?mtm_campaign=qr-code`;
   }
-  return `https://annuaire-entreprises.data.gouv.fr/etablissement/${slug}?mtm_campaign=qr-code`;
+  return `https://annuaire-entreprises.data.gouv.fr/etablissements/${slug}?mtm_campaign=qr-code`;
 };
 
 async function createQRCode(dataForQRcode: string) {

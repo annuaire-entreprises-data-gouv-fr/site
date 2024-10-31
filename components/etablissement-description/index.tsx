@@ -99,25 +99,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
             <a href={`/entreprise/${uniteLegale.chemin}`}>
               {uniteLegale.nomComplet}
             </a>
-            {uniteLegale.etablissements.all.length > 1 ? (
-              <>
-                , qui possède{' '}
-                <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
-                  {uniteLegale.etablissements.nombreEtablissements - 1} autre(s)
-                  établissement(s)
-                </a>
-              </>
-            ) : (
-              <>
-                {' et '}
-                <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
-                  son unique établissement
-                </a>
-              </>
-            )}
-            .
-          </span>
-          <p>
+            {'. '}
             {etablissement.libelleActivitePrincipale && (
               <>
                 Son domaine d’activité est :{' '}
@@ -134,7 +116,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
               </>
             )}
             .
-          </p>
+          </span>
         </>
       )}
     </>

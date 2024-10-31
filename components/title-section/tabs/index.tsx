@@ -25,7 +25,7 @@ export enum FICHE {
   DIVERS = 'conventions collectives',
   ELUS = 'élus',
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
-  ETABLISSEMENT = 'fiche établissement',
+  ETABLISSEMENTS = 'listes des établissements',
 }
 
 export const Tabs: React.FC<{
@@ -47,6 +47,14 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay: true,
       width: '80px',
+    },
+    {
+      ficheType: FICHE.ETABLISSEMENTS,
+      label: `Liste des établissements`,
+      fullPath: `/etablissements/${uniteLegale.siren}`,
+      noFollow: false,
+      shouldDisplay: true,
+      width: '120px',
     },
     {
       ficheType: FICHE.ELUS,
@@ -98,7 +106,7 @@ export const Tabs: React.FC<{
       shouldDisplay:
         checkHasLabelsAndCertificates(uniteLegale) ||
         hasRights(session, ApplicationRights.protectedCertificats),
-      width: checkHasQuality(uniteLegale) ? '200px' : '110px',
+      width: checkHasQuality(uniteLegale) ? '200px' : '100px',
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
@@ -113,7 +121,7 @@ export const Tabs: React.FC<{
       pathPrefix: '/divers/',
       noFollow: false,
       shouldDisplay: (uniteLegale.listeIdcc || []).length > 0,
-      width: '130px',
+      width: '110px',
     },
   ];
   return (
@@ -140,19 +148,6 @@ export const Tabs: React.FC<{
               />
             )
           )}
-        {currentFicheType === FICHE.ETABLISSEMENT && (
-          <>
-            <div style={{ flexGrow: 1 }} />
-            <a
-              className={styles.activeLink + ' no-style-link'}
-              key="etablissement"
-              href=""
-              style={{ width: '120px' }}
-            >
-              <h2>Fiche établissement</h2>
-            </a>
-          </>
-        )}
       </div>
     </PrintNever>
   );

@@ -12,6 +12,7 @@ import {
   Siret,
   extractNicFromSiret,
   extractSirenFromSiret,
+  isSiren,
   verifySiret,
 } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
@@ -290,6 +291,15 @@ export const createNonDiffusibleEtablissement = (siret: Siret) => {
   etablissement.nic = extractNicFromSiret(siret);
   etablissement.statutDiffusion = ISTATUTDIFFUSION.NON_DIFF_STRICT;
   return etablissement;
+};
+
+export const getEtablissementsFromSlug = (slug: string) => {
+  let etablissements = [];
+  if (isSiren(slug)) {
+    etablissements = await getAllEtablissements(slug);
+  } else {
+    etablissements = [await getEtablissement(slug)];
+  }
 };
 
 export {

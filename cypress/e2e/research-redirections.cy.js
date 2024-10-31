@@ -44,15 +44,12 @@ describe('Siren / Siret redirections', () => {
 
     cy.get('.fr-search-bar > button').click();
 
-    cy.url().should('include', '/etablissement/48744469700428');
+    cy.url().should('include', '/etablissements/48744469700428');
   });
 
   it('Entreprise/etablissement page redirection', () => {
     cy.visit('/entreprise/48744469700428');
-    cy.url().should('include', '/etablissement/48744469700428');
-
-    cy.visit('/etablissement/487444697');
-    cy.url().should('include', '/entreprise/487444697');
+    cy.url().should('include', '/etablissements/48744469700428');
   });
 
   it('Allow search request with 9 or plus digits', () => {

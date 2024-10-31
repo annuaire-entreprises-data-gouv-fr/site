@@ -106,7 +106,7 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
                       courriel,
                     }) => [
                       <>
-                        <a href={`/etablissement/${etablissement.siret}`}>
+                        <a href={`/etablissements/${etablissement.siret}`}>
                           {formatSiret(etablissement.siret)}
                         </a>
                         {etablissement.siege && <Tag color="info">siège</Tag>}

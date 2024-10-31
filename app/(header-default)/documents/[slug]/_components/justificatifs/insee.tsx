@@ -20,7 +20,7 @@ const AvisSituationTable: React.FC<{
   <FullTable
     head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
     body={etablissements.map((etablissement: IEtablissement) => [
-      <a href={`/etablissement/${etablissement.siret}`}>
+      <a href={`/etablissements/${etablissement.siret}`}>
         {formatSiret(etablissement.siret)}
       </a>,
       <>

@@ -106,7 +106,7 @@ export const AgentActesAssociation: React.FC<{
                       etablissement,
                       url,
                     }) => [
-                      <a href={`/etablissement/${etablissement.siret}`}>
+                      <a href={`/etablissements/${etablissement.siret}`}>
                         {formatSiret(etablissement.siret)}
                       </a>,
                       formatDate(date_depot),
