@@ -1,0 +1,88 @@
+{
+  "args": [
+    "13002526500013"
+  ],
+  "result": {
+    "affectationPersonne": [
+      {
+        "nom": "Stéphanie SCHAER",
+        "fonction": "Directrice",
+        "lienTexteAffectation": {
+          "libelle": "JORF n°0224 du 27 septembre 2022",
+          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000046331329"
+        }
+      },
+      {
+        "nom": "Jérémie VALLET",
+        "fonction": "Adjoint à la directrice",
+        "lienTexteAffectation": {
+          "libelle": "JORF n°0126 du 2 juin 2023",
+          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000047619252"
+        }
+      },
+      {
+        "nom": "Floriane BEAUDRON",
+        "fonction": "Cheffe de la mission communication",
+        "lienTexteAffectation": {
+          "libelle": "JORF n°0236 du 11 octobre 2023",
+          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000048186298"
+        }
+      },
+      {
+        "nom": "Perica SUCEVIC",
+        "fonction": "Préfigurateur de la mission juridique",
+        "lienTexteAffectation": {
+          "libelle": "JORF n°0236 du 11 octobre 2023",
+          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000048186298"
+        }
+      },
+      {
+        "nom": "Emmanuelle MERLIN",
+        "fonction": "Cheffe de la mission Europe et International",
+        "lienTexteAffectation": {
+          "libelle": "JORF n°0236 du 11 octobre 2023",
+          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000048186298"
+        }
+      }
+    ],
+    "liens": {
+      "sitesInternet": [
+        {
+          "libelle": "Site officiel (numerique.gouv.fr)",
+          "valeur": "https://www.numerique.gouv.fr"
+        }
+      ],
+      "formulaireContact": {
+        "libelle": "Accéder au formulaire de contact",
+        "valeur": "https://www.numerique.gouv.fr/contact/"
+      },
+      "annuaireServicePublic": {
+        "libelle": "Informations supplémentaires (annuaire du service-public)",
+        "valeur": "https://lannuaire.service-public.fr/gouvernement/d1a97841-b4bf-46df-a089-1003e4e266b4"
+      },
+      "organigramme": {
+        "libelle": "Organigramme de la direction interministérielle du numérique",
+        "valeur": "https://www.numerique.gouv.fr/dinum/"
+      }
+    },
+    "telephone": null,
+    "urlServicePublic": "https://lannuaire.service-public.fr/gouvernement/d1a97841-b4bf-46df-a089-1003e4e266b4",
+    "adresseCourriel": null,
+    "sigle": null,
+    "categorie": "SI",
+    "mission": "La Direction interministérielle du numérique (DINUM) accompagne les ministères dans leur transformation numérique, conseille le gouvernement et développe des services et ressources partagées comme le réseau interministériel de l’État, FranceConnect, data.gouv.fr ou api.gouv.fr. Elle pilote, avec l’appui des ministères, le programme Tech.gouv d’accélération de la transformation numérique du service public. Créée par le décret du 25 octobre 2019, la DINUM a pris la suite de la Direction interministérielle du numérique et du système d’information et de communication de l’État (DINSIC).",
+    "formulaireContact": "https://www.numerique.gouv.fr/contact/",
+    "adressePostale": "75334 Paris Cedex 07",
+    "typeOrganisme": "Administration centrale (ou Ministère)",
+    "nom": "Direction interministérielle du numérique (DINUM)",
+    "subServicesId": [
+      "da23723e-a4aa-4fad-8619-2e16d5e41b90",
+      "c21fa08e-f09e-4312-a6d8-400e812454c4",
+      "db2b74d4-4dbc-4d7d-ba1b-5762e2cb06b8",
+      "b81d5686-a935-4964-b9b0-735c1222b63a",
+      "e5299ba4-7aa4-4f95-aa82-7e765d5648fe",
+      "a28dd434-aeb9-4ea6-9fad-b515b1493844"
+    ],
+    "lastModified": "2023-10-18T23:19:19.590091+00:00"
+  }
+}
