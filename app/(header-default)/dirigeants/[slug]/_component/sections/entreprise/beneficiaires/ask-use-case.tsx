@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { MultiChoice } from '#components-ui/multi-choice';
 import { UseCase } from '#models/user/agent';
+import { useState } from 'react';
 
 export function AskUseCase({
   onUseCaseChanged,
@@ -15,7 +15,7 @@ export function AskUseCase({
   return (
     <>
       <form>
-        <label>Dans quel cadre souhaitez vous accéder à ces données ?</label>
+        <label>Dans quel cadre souhaitez-vous accéder à ces données ?</label>
         <br />
         <MultiChoice
           idPrefix="user-type"

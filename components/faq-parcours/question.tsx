@@ -95,7 +95,7 @@ export default function Question({
               referrerPolicy="origin"
               sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
               width="100%"
-              height="600px"
+              height="660px"
               frameBorder="0"
             ></iframe>
           </div>

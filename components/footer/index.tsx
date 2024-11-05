@@ -144,7 +144,7 @@ const Footer = () => (
                     rel="noreferrer noopener"
                     href="https://conseillers-entreprises.service-public.fr"
                   >
-                    Conseillers Entreprises
+                    conseillers-entreprises.service-public.fr
                   </a>
                 </li>
               </ul>
@@ -181,7 +181,7 @@ const Footer = () => (
                     className="fr-footer__top-link"
                     href="/a-propos/comment-ca-marche"
                   >
-                    A propos
+                    À propos
                   </a>
                 </li>
                 <li>
