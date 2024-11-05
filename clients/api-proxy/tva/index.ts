@@ -51,7 +51,7 @@ const clientTVA = async (
 
   const data = await clientAPIProxy<IVIESResponse>(url, {
     useCache,
-    timeout: constants.timeout.XL,
+    timeout: constants.timeout.XXL,
   });
 
   if (data.userError && ['VALID', 'INVALID'].indexOf(data.userError) === -1) {
