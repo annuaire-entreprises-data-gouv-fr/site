@@ -110,16 +110,16 @@ const BeneficiairesSection: React.FC<{
         Les agents publics peuvent y accéder uniquement dans les cas d’usages
         justifiant d’un intérêt légitime. En déclarant le cadre juridique dans
         lequel vous accédez à ces données, vous vous engagez{' '}
-        <a href="/cgu">à respecter nos conditions générales d’utilisations</a>.
+        <a href="/cgu">à respecter nos conditions générales d’utilisation</a>.
       </p>
       <p>
-        Toute demande d’accès aux données est tracée et envoyée à la comission
+        Toute demande d’accès aux données est tracée et envoyée à la commission
         européeene.
       </p>
       {useCase === UseCase.autre ? (
         <>
           <strong>
-            Les informations des bénénficiaires effectifs ne vous sont pas
+            Les informations des bénéficiaires effectifs ne vous sont pas
             accessibles.
           </strong>
         </>

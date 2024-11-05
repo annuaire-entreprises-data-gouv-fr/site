@@ -23,7 +23,7 @@ type IProps = {
 };
 
 const NoDirigeants = () => (
-  <>Aucun(e) dirigeant(e) n’a été retrouvé pour cette association.</>
+  <>Aucun(e) dirigeant(e) n’a été retrouvé(e) pour cette association.</>
 );
 
 /**
@@ -87,7 +87,7 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
                 }
               />
               <FullTable
-                head={['Etablissement', 'Role', 'Détails']}
+                head={['Établissement', 'Rôle', 'Détails']}
                 body={associationProtected.dirigeants
                   .filter((d) =>
                     selectedSiret.length > 0
