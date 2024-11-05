@@ -4,30 +4,7 @@ import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { INomCertificat, IRGECertification } from '#models/certifications/rge';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
-
-export const certificatsLogo = {
-  qualibat: 'qualibat.jpg',
-  qualifelec: 'qualifelec.jpg',
-  qualipac: 'qualiPAC.jpg',
-  qualibois: 'qualiBois.jpg',
-  opqibi: 'opqibi.jpg',
-  'chauffage +': 'chauffage.jpg',
-  qualipv: 'qualiPV.jpg',
-  ventilation: 'ventillation.jpg',
-  qualisol: 'qualisol.jpg',
-  certibat: 'certibat.jpg',
-  habitat: 'NF.jpg',
-  qualiforage: 'aualiForage.jpg',
-};
-
-const getLogoSlug = (nomCertificat: string) => {
-  for (let keyToMatch of Object.keys(certificatsLogo)) {
-    if ((nomCertificat || '').toLowerCase().indexOf(keyToMatch) !== -1) {
-      //@ts-ignore
-      return certificatsLogo[keyToMatch] || '';
-    }
-  }
-};
+import { getCertificatLogoPath } from '../../utils/helpers/certifications/certificats-logo';
 
 type IRGEResponse = {
   results: {
@@ -114,7 +91,7 @@ const mapToDomainObject = (rge: IRGEResponse) => {
         url_qualification = '',
       } = result;
       certifications.push({
-        logoSlug: getLogoSlug(nom_certificat),
+        logoPath: getCertificatLogoPath(nom_certificat),
         codeQualification: code_qualification,
         domaines: [domaine],
         nomCertificat: nom_certificat,
