@@ -1,4 +1,4 @@
-# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
+# administrations: la liste des administrations concernées (pour connaître la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
 # faqTargets: la liste des cibles à choisir parmi : agent | particulier | entreprise | independant | association | all
 # title: titre
 # seo: description et titre pour le SEO
@@ -7,7 +7,7 @@
 # body: corps de texte (markdown)
 # cta:
 #   label: libellé du CTA
-#   to: url (externe (https://) ou interne en commencant par /)
+#   to: url (externe (https://) ou interne en commençant par /)
 # more:
 #   - label: libellé
 #     href: url
@@ -15,7 +15,7 @@ administrations:
   - mc
 faqTargets:
   - none
-title: Qu’est ce que le label « Entrepreneur de spectacles vivants » ?
+title: Qu’est-ce que le label « Entrepreneur de spectacles vivants » ?
 seo:
   description: “Entrepreneur de spectacles vivants” désigne toute structure (entrepreneur individuel, particulier-employeur, société, association, commune) qui exerce une activité d'exploitation de lieux de spectacles, de production ou de diffusion de spectacles.
 body: |
