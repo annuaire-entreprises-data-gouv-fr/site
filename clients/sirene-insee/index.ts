@@ -34,7 +34,7 @@ export class httpInseeClient {
         !this.password) &&
       process.env.NODE_ENV === 'production'
     ) {
-      throw new HttpServerError('Client id or client secret is undefined');
+      throw new HttpServerError('An insee env variable is undefined');
     }
     this._token = null;
   }
