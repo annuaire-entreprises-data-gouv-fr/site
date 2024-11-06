@@ -1,4 +1,3 @@
-import React from 'react';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
@@ -21,6 +20,7 @@ import {
   uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
+import React from 'react';
 
 type IProps = {
   session: ISession | null;
@@ -104,7 +104,7 @@ const EtablissementSection: React.FC<IProps> = ({
       etablissement.libelleActivitePrincipale,
     ],
     ['Code NAF/APE de l’établissement', etablissement.activitePrincipale],
-    ['Nature juridique', uniteLegale.libelleNatureJuridique],
+    ['Forme juridique', uniteLegale.libelleNatureJuridique],
     [
       'Tranche d’effectif salarié',
       libelleTrancheEffectif(
