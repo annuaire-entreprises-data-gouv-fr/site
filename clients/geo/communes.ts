@@ -48,7 +48,7 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
                   commune.departement?.code
                     ? ` (${commune.departement?.code})`
                     : ''
-                } - toute la ville`,
+                } — toute la commune`,
               } as IGeoElement,
             ]
           : []),
