@@ -45,26 +45,24 @@ export const clientApiEntrepriseMandatairesRCS = async (siren: Siren) => {
 const mapToDomainObject = (
   response: IAPIEntrepriseMandatairesRCS
 ): IDirigeants => {
-  return {
-    data: response.data.map(({ data: dirigeant }) => {
-      if (dirigeant.type === 'personne_physique') {
-        return {
-          sexe: null,
-          nom: dirigeant.nom,
-          prenom: dirigeant.prenom,
-          prenoms: dirigeant.prenom,
-          role: dirigeant.fonction,
-          lieuNaissance: dirigeant.lieu_naissance,
-          dateNaissance: dirigeant.date_naissance,
-          dateNaissancePartial: dirigeant.date_naissance?.slice(0, 7),
-        } as IEtatCivil;
-      }
+  return response.data.map(({ data: dirigeant }) => {
+    if (dirigeant.type === 'personne_physique') {
       return {
-        siren: dirigeant.numero_identification,
-        denomination: dirigeant.raison_sociale,
-        natureJuridique: null,
+        sexe: null,
+        nom: dirigeant.nom,
+        prenom: dirigeant.prenom,
+        prenoms: dirigeant.prenom,
         role: dirigeant.fonction,
-      } as IPersonneMorale;
-    }),
-  };
+        lieuNaissance: dirigeant.lieu_naissance,
+        dateNaissance: dirigeant.date_naissance,
+        dateNaissancePartial: dirigeant.date_naissance?.slice(0, 7),
+      } as IEtatCivil;
+    }
+    return {
+      siren: dirigeant.numero_identification,
+      denomination: dirigeant.raison_sociale,
+      natureJuridique: null,
+      role: dirigeant.fonction,
+    } as IPersonneMorale;
+  });
 };

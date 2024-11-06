@@ -16,7 +16,7 @@ type IProps = {
 };
 
 const DirigeantsOrElusList: React.FC<{
-  dirigeantsOrElus: IDirigeants['data'];
+  dirigeantsOrElus: IDirigeants;
 }> = ({ dirigeantsOrElus }) => {
   const displayMax = 5;
   const firstFive = dirigeantsOrElus.slice(0, displayMax);

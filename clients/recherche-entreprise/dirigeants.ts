@@ -4,7 +4,7 @@ import clientSearchRechercheEntreprise from '.';
 
 export const clientDirigeantsRechercheEntreprise = async (
   siren: Siren
-): Promise<IDirigeants['data']> => {
+): Promise<IDirigeants> => {
   const { results } = await clientSearchRechercheEntreprise({
     searchTerms: siren,
     pageResultatsRecherche: 1,

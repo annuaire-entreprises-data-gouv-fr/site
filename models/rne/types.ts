@@ -23,10 +23,13 @@ export interface IEtatCivil {
   prenom: string;
   prenoms: string;
   role: string;
+  roles?: IRole[];
   lieuNaissance: string;
   dateNaissancePartial?: string;
   dateNaissance?: string;
   nationalite?: string;
+  isInInpi?: boolean;
+  isInIg?: boolean;
 }
 
 export interface IPersonneMorale {
@@ -34,22 +37,35 @@ export interface IPersonneMorale {
   denomination: string;
   natureJuridique: string | null;
   role: string;
+  roles?: IRole[];
+  isInInpi?: boolean;
+  isInIg?: boolean;
 }
 
-export interface IObservations {
-  data: {
-    numObservation: string;
-    dateAjout: string;
-    description: string;
-  }[];
+export type IObservations = {
+  numObservation: string;
+  dateAjout: string;
+  description: string;
+}[];
+
+export interface IObservationsWithMetadata {
+  data: IObservations;
   metadata: {
     isFallback: boolean;
   };
 }
 
-export interface IDirigeants {
-  data: (IEtatCivil | IPersonneMorale)[];
-  metadata?: {
+export type IDirigeants = (IEtatCivil | IPersonneMorale)[];
+
+export interface IDirigeantsWithMetadata {
+  data: IDirigeants;
+  metadata: {
     isFallback: boolean;
   };
+}
+
+export interface IRole {
+  label: string;
+  isInInpi?: boolean;
+  isInIg?: boolean;
 }

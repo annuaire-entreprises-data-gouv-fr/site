@@ -20,8 +20,8 @@ type IRNEProxyResponse = {
     capital: string;
     libelleNatureJuridique: string;
   };
-  observations: IObservations['data'];
-  dirigeants: IDirigeants['data'];
+  observations: IObservations;
+  dirigeants: IDirigeants;
 };
 
 /**

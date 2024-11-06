@@ -6,7 +6,7 @@ export enum APIRoutesPaths {
   EspaceAgentCnetp = 'espace-agent/cnetp',
   EspaceAgentQualibat = 'espace-agent/qualibat',
   EspaceAgentQualifelec = 'espace-agent/qualifelec',
-  EspaceAgentRcsMandataires = 'espace-agent/rcs-mandataires',
+  EspaceAgentDirigeantsProtected = 'espace-agent/dirigeants-protected',
   EspaceAgentBeneficiaires = 'espace-agent/beneficiaires',
   EspaceAgentRneDocuments = 'espace-agent/rne/documents',
   EspaceAgentAssociationProtected = 'espace-agent/association-protected',

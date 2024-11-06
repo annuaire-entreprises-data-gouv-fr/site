@@ -23,7 +23,7 @@ export interface ISearchResult extends IUniteLegale {
   nombreEtablissementsOuverts: number;
   chemin: string;
   matchingEtablissements: IEtablissement[];
-  dirigeants: IDirigeants['data'];
+  dirigeants: IDirigeants;
 }
 
 export interface ISearchResults {

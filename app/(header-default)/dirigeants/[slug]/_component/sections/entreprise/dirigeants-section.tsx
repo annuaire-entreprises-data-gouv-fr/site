@@ -7,35 +7,30 @@ import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { IDirigeantsFetching } from '.';
-import { DirigeantContent } from './dirigeant-content';
+import DirigeantsContent from './dirigeants-content';
 
 type IProps = {
   dirigeants: IDirigeantsFetching;
   uniteLegale: IUniteLegale;
   isProtected: boolean;
-  warning: JSX.Element;
 };
 
 /**
  * Dirigeants section
  */
-function DirigeantsSection({
+export default function DirigeantsSection({
   uniteLegale,
   dirigeants,
   isProtected,
-  warning,
 }: IProps) {
-  const sources = [EAdministration.INPI];
-
-  if (isProtected) {
-    sources.push(EAdministration.INFOGREFFE);
-  }
-
   return (
     <AsyncDataSectionClient
-      id="rne-dirigeants"
+      id="dirigeants-section"
       title="Dirigeant(s)"
-      sources={sources}
+      sources={[
+        EAdministration.INPI,
+        ...(isProtected ? [EAdministration.INFOGREFFE] : []),
+      ]}
       data={dirigeants}
       isProtected={isProtected}
       notFoundInfo={
@@ -50,10 +45,9 @@ function DirigeantsSection({
         return (
           <>
             {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}
-            {warning ? warning : null}
             {isProtected ? (
               <Info>
-                Ces informations proviennent d’
+                Ces informations proviennent en partie d’
                 <a
                   rel="noopener"
                   target="_blank"
@@ -87,7 +81,7 @@ function DirigeantsSection({
                   &nbsp;:
                 </p>
 
-                <DirigeantContent
+                <DirigeantsContent
                   dirigeants={dirigeants}
                   uniteLegale={uniteLegale}
                 />
@@ -99,5 +93,3 @@ function DirigeantsSection({
     </AsyncDataSectionClient>
   );
 }
-
-export default DirigeantsSection;

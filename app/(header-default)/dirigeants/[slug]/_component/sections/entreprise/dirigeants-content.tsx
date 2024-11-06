@@ -1,23 +1,71 @@
+import FAQLink from '#components-ui/faq-link';
 import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
 import { FullTable } from '#components/table/full';
 import { IUniteLegale } from '#models/core/types';
-import { IDirigeants, IEtatCivil, IPersonneMorale } from '#models/rne/types';
+import {
+  IDirigeantsWithMetadata,
+  IEtatCivil,
+  IPersonneMorale,
+} from '#models/rne/types';
 import { formatDateLong, formatDatePartial, formatIntFr } from '#utils/helpers';
 import { isPersonneMorale } from '../is-personne-morale';
 
 type IDirigeantContentProps = {
-  dirigeants: IDirigeants;
+  dirigeants: IDirigeantsWithMetadata;
   uniteLegale: IUniteLegale;
 };
 
-export function DirigeantContent({
+const dataSourceTooltip = ({
+  dataType,
+  isInIg,
+  isInInpi,
+}: {
+  dataType: string;
+  isInIg?: boolean;
+  isInInpi?: boolean;
+}) => {
+  if (!isInIg && !isInInpi) {
+    return <></>;
+  }
+
+  return (
+    <>
+      {!isInIg && (
+        <>
+          {' '}
+          <FAQLink tooltipLabel={<></>}>
+            Ce {dataType} n‘apparait pas dans les données d‘Infogreffe.
+          </FAQLink>
+        </>
+      )}
+      {!isInInpi && (
+        <>
+          {' '}
+          <FAQLink tooltipLabel={<></>}>
+            Ce {dataType} n‘apparait pas dans les données de l‘INPI.
+          </FAQLink>
+        </>
+      )}
+    </>
+  );
+};
+
+export default function DirigeantsContent({
   dirigeants,
   uniteLegale,
 }: IDirigeantContentProps) {
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
     if (isPersonneMorale(dirigeant)) {
       const infos = [
-        dirigeant.role,
+        dirigeant.roles?.map((role) => (
+          <>
+            <span>{role.label}</span>
+            {dataSourceTooltip({
+              ...role,
+              dataType: 'rôle',
+            })}
+          </>
+        )) || <>{dirigeant.role}</>,
         <>
           <strong>{dirigeant.denomination}</strong>
           {dirigeant.siren ? (
@@ -32,6 +80,10 @@ export function DirigeantContent({
           )}
           <br />
           {dirigeant.natureJuridique}
+          {dataSourceTooltip({
+            ...dirigeant,
+            dataType: 'dirigeant',
+          })}
         </>,
       ];
 
@@ -50,7 +102,15 @@ export function DirigeantContent({
       }${(dirigeant.nom || '').toUpperCase()}`;
 
       return [
-        dirigeant.role,
+        dirigeant.roles?.map((role) => (
+          <>
+            <span>{role.label}</span>
+            {dataSourceTooltip({
+              ...role,
+              dataType: 'rôle',
+            })}
+          </>
+        )) || <>{dirigeant.role}</>,
         <>
           {nomComplet}
           {dirigeant.dateNaissance || dirigeant.dateNaissancePartial
@@ -62,6 +122,10 @@ export function DirigeantContent({
                 dirigeant.lieuNaissance ? `, à ${dirigeant.lieuNaissance}` : ''
               }`
             : ''}
+          {dataSourceTooltip({
+            ...dirigeant,
+            dataType: 'dirigeant',
+          })}
         </>,
         ...(dirigeant.dateNaissancePartial
           ? [

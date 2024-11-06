@@ -9,7 +9,7 @@ import {
   IAPINotRespondingError,
 } from '#models/api-not-responding';
 import { verifySiren } from '#utils/helpers';
-import { IObservations } from './types';
+import { IObservationsWithMetadata } from './types';
 
 /*
  * Request observations from INPI's RNE
@@ -17,7 +17,7 @@ import { IObservations } from './types';
  */
 export const getRNEObservations = async (
   maybeSiren: string
-): Promise<IAPINotRespondingError | IObservations> => {
+): Promise<IAPINotRespondingError | IObservationsWithMetadata> => {
   const siren = verifySiren(maybeSiren);
 
   try {

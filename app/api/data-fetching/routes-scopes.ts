@@ -9,9 +9,10 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.EspaceAgentQualibat]: ApplicationRights.protectedCertificats,
   [APIRoutesPaths.EspaceAgentQualifelec]:
     ApplicationRights.protectedCertificats,
-  [APIRoutesPaths.EspaceAgentRcsMandataires]: ApplicationRights.mandatairesRCS,
   [APIRoutesPaths.EspaceAgentBeneficiaires]: ApplicationRights.beneficiaires,
   [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
+  [APIRoutesPaths.EspaceAgentDirigeantsProtected]:
+    ApplicationRights.mandatairesRCS,
   [APIRoutesPaths.EspaceAgentAssociationProtected]:
     ApplicationRights.associationProtected,
   [APIRoutesPaths.RneDirigeants]: ApplicationRights.opendata,
