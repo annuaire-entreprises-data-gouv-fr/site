@@ -40,6 +40,7 @@ export interface IRGECertification {
     workingWithIndividual: boolean;
   };
   certifications: {
+    logoPath: string;
     codeQualification: string;
     nomCertificat: INomCertificat;
     domaines: string[];
