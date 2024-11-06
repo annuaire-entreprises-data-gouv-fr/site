@@ -1,7 +1,12 @@
 import { clientApiEntrepriseQualifelec } from '#clients/api-entreprise/qualifelec';
-import { IAPINotRespondingError } from '#models/api-not-responding';
+import { EAdministration } from '#models/administrations/EAdministration';
+import {
+  APINotRespondingFactory,
+  IAPINotRespondingError,
+} from '#models/api-not-responding';
 import { verifySiret } from '#utils/helpers';
 import { handleApiEntrepriseError } from '../utils';
+
 export type IQualifelec = Array<{
   documentUrl: string;
   numero: number;
@@ -44,7 +49,13 @@ export const getQualifelec = async (
   maybeSiret: string
 ): Promise<IQualifelec | IAPINotRespondingError> => {
   const siret = verifySiret(maybeSiret);
-  return clientApiEntrepriseQualifelec(siret).catch((error) =>
-    handleApiEntrepriseError(error, { siret, apiResource: 'Qualifelec' })
-  );
+  return clientApiEntrepriseQualifelec(siret)
+    .then((response) =>
+      response.length === 0
+        ? APINotRespondingFactory(EAdministration.QUALIFELEC, 404)
+        : response
+    )
+    .catch((error) =>
+      handleApiEntrepriseError(error, { siret, apiResource: 'Qualifelec' })
+    );
 };

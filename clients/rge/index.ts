@@ -4,6 +4,7 @@ import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { INomCertificat, IRGECertification } from '#models/certifications/rge';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
+import { getCertificatLogoPath } from '../../utils/helpers/certifications/certificats-logo';
 
 type IRGEResponse = {
   results: {
@@ -90,6 +91,7 @@ const mapToDomainObject = (rge: IRGEResponse) => {
         url_qualification = '',
       } = result;
       certifications.push({
+        logoPath: getCertificatLogoPath(nom_certificat),
         codeQualification: code_qualification,
         domaines: [domaine],
         nomCertificat: nom_certificat,

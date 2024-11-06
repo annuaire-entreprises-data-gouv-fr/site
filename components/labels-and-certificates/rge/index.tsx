@@ -11,7 +11,6 @@ import { IRGECertification } from '#models/certifications/rge';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import React from 'react';
-import { certificatLogo } from './map-certicat-to-logo';
 
 const renovLink = (slug: string) => {
   try {
@@ -115,13 +114,10 @@ export const CertificationsRGESection: React.FC<{
               head={['Certificat', 'Domaine(s) certifié(s)', 'Lien']}
               body={certificationsRGE.certifications.map((certification) => [
                 <div className="font-small layout-left">
-                  {certification.nomCertificat in certificatLogo && (
+                  {certification.logoPath && (
                     <div style={{ width: 72 }}>
                       <img
-                        src={`/images/rge/logo-rge-${
-                          //@ts-ignore
-                          certificatLogo[certification.nomCertificat]
-                        }`}
+                        src={certification.logoPath}
                         alt={`Logo ${certification.nomCertificat}`}
                         title={`Logo ${certification.nomCertificat}`}
                         width="100%"

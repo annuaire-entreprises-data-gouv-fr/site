@@ -56,12 +56,10 @@ export const getAssociationProtected = async (
   maybeSiren: string
 ): Promise<IAssociationProtected | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
-  const response = clientApiEntrepriseAssociation(siren).catch((error) =>
+  return clientApiEntrepriseAssociation(siren).catch((error) =>
     handleApiEntrepriseError(error, {
       siren,
       apiResource: 'AssociationProtected',
     })
   );
-
-  return response;
 };
