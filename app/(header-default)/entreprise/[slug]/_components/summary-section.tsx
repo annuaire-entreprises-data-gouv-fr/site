@@ -99,7 +99,7 @@ const UniteLegaleSummarySection: React.FC<{
       <a href="/faq/modifier-adresse">Adresse postale</a>,
       uniteLegale.siege.adressePostale,
     ],
-    ['Nature juridique', uniteLegale.libelleNatureJuridique],
+    ['Forme juridique', uniteLegale.libelleNatureJuridique],
     [
       'Tranche effectif salarié de la structure',
       libelleTrancheEffectif(
