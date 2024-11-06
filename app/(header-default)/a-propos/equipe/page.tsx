@@ -1,5 +1,5 @@
-import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
+import { Metadata } from 'next';
 import styles from './style.module.css';
 
 const team = [
@@ -94,7 +94,7 @@ export default function Equipe() {
 
         <h2>Notre méthode</h2>
         <p>
-          L’Annuaire des Entreprises est un site de l’Etat qui s’inspire des{' '}
+          L’Annuaire des Entreprises est un site de l’État qui s’inspire des{' '}
           <a href="https://beta.gouv.fr/manifeste">méthodes agiles</a>{' '}
           développées au sein de <a href="https://beta.gouv.fr/">beta.gouv</a>.
         </p>

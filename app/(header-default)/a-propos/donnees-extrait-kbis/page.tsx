@@ -1,6 +1,6 @@
-import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import { INPI, INSEE } from '#components/administrations';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Comment retrouver les données contenues dans un extrait KBIS ou D1 ?',
@@ -27,7 +27,7 @@ export default function ExtraitKbis() {
           (Répertoire des Métiers) dans les démarches administratives des
           personnes morales.
         </p>
-        <h2>Qu’est ce qu’un extrait KBIS / D1 ?</h2>
+        <h2>Qu’est-ce qu’un extrait KBIS / D1 ?</h2>
         <p>
           L’extrait d’immatriculation est une preuve de l’immatriculation d’une
           entreprise auprès de son Centre de Formalité des Entreprises (CFE).
@@ -53,7 +53,7 @@ export default function ExtraitKbis() {
           </p>
           <p>
             Une fois sur la page de l’entreprise, retrouvez les données
-            d’immatriculations issues du Registre National des Entreprises (RNE)
+            d’immatriculation issues du Registre National des Entreprises (RNE)
             tenu par l’
             <INPI />.
           </p>
@@ -62,7 +62,7 @@ export default function ExtraitKbis() {
             système d’information ?
           </h2>
           <p>
-            Vous travailler sur un système d’information et vous avez besoin de
+            Vous travaillez sur un système d’information et vous avez besoin de
             rendre disponible ces données dans votre site ou votre back-office ?
             Deux choix s’offrent à vous :
           </p>
@@ -111,7 +111,7 @@ export default function ExtraitKbis() {
           <p>
             Il existe une API spéciale, <strong>API Entreprise</strong> réservée
             aux administrations et à certaines entreprises éligibles, qui permet
-            d’accéder aux informations des entreprises détenue par
+            d’accéder aux informations des entreprises détenues par
             l’administration :
           </p>
           <ul>
