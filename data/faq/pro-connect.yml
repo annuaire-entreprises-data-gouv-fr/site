@@ -1,4 +1,4 @@
-# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
+# administrations: la liste des administrations concernées (pour connaître la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
 # faqTargets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
 # title: titre
 # seo: description et titre pour le SEO
@@ -6,7 +6,7 @@
 #   title: si pas de titre spécifié, le titre principal sera utilisé
 # cta:
 #   label: libellé du CTA
-#   to: url (externe (https://) ou interne en commencant par /)
+#   to: url (externe (https://) ou interne en commençant par /)
 # more:
 #   - label: libellé
 #     href: url

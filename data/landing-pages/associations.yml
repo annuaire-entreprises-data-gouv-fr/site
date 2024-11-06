@@ -14,7 +14,7 @@
 #     body: body block 2
 #   - title: titre bloc 3
 #     body: body block 3
-# datasources: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
+# datasources: la liste des administrations concernées (pour connaître la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
 # body: le corps du texte, en markdown
 slug: associations
 title: une association

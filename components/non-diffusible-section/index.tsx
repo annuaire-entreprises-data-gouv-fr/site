@@ -3,7 +3,7 @@ import { INSEE } from '#components/administrations';
 import { Section } from '#components/section';
 
 export const NonDiffusibleSection = () => (
-  <Section title="Qu’est ce qu’une entreprise non-diffusible ?">
+  <Section title="Qu’est-ce qu’une entreprise non-diffusible ?">
     <p>
       Certaines entreprises demandent à ne pas figurer sur les listes de
       diffusion publique en vertu de{' '}
