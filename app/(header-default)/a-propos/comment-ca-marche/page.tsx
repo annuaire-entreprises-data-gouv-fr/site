@@ -1,6 +1,6 @@
-import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import { administrationsMetaData } from '#models/administrations';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Comment ça marche ?',
@@ -177,10 +177,10 @@ export default function About() {
           </p>
           <h2>
             Utilisation du site dans le cadre de démarches et de vérifications
-            administratives administratives
+            administratives
           </h2>
           <p>
-            L’Annuaire des Entreprises est un des services clefs mis en oeuvre
+            L’Annuaire des Entreprises est un des services clefs mis en œuvre
             par l’Etat pour faciliter les démarches des entreprises. Parmi ses
             fonctionnalités, on peut citer :
           </p>

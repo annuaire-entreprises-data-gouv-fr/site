@@ -1,8 +1,8 @@
-import { Metadata } from 'next';
-import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
 import { administrationsMetaData } from '#models/administrations';
+import { Metadata } from 'next';
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Liste des administrations partenaires de l’Annuaire des Entreprises',
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
 };
 
-const AllAdmnistrationsPage = () => (
+const AllAdministrationsPage = () => (
   <TextWrapper>
     <h1>Administrations partenaires</h1>
     <p>
@@ -28,4 +28,4 @@ const AllAdmnistrationsPage = () => (
   </TextWrapper>
 );
 
-export default AllAdmnistrationsPage;
+export default AllAdministrationsPage;

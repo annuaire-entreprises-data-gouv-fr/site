@@ -1,6 +1,6 @@
-import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import { FullTable } from '#components/table/full';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Budget de l’Annuaire des Entreprises',
@@ -93,7 +93,7 @@ export default function Budget() {
           ]}
           body={[
             [
-              'Fiche “entreprise” consultées',
+              'Fiches “entreprise” consultées',
               '768 000',
               '2 788 000',
               '12 934 000',
@@ -113,8 +113,8 @@ export default function Budget() {
         <br />
         <p>
           En 2024, la DINUM a créé un{' '}
-          <a href="/lp/agent-public">compte pour les agents public</a>. Ce
-          compte permet aux agents publics d’accèder à des données
+          <a href="/lp/agent-public">compte pour les agents publics</a>. Ce
+          compte permet aux agents publics d’accéder à des données
           complémentaires sur les entreprises. Cela{' '}
           <strong>facilite leur travail</strong> et leur{' '}
           <strong>

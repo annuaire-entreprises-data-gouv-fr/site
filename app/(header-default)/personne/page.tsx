@@ -104,7 +104,7 @@ export default async function PersonnePage(props: AppRouterProps) {
         trouver dans la liste, vous pouvez effectuer une recherche{' '}
         <a href={`/rechercher?fn=${prenoms}&n=${nom}`}>sans filtre d’âge</a> ou{' '}
         <a href={`/rechercher?fn=${prenom}&n=${nom}`}>
-          sans prénom secondaire et sans filtre d’age
+          sans prénom secondaire et sans filtre d’âge
         </a>
         .
       </Info>
