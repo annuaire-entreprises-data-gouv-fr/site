@@ -19,7 +19,7 @@ const clientAssociation = async (
 ) => {
   const response = await clientAPIProxy<IAssociationResponse>(
     routes.proxy.association + rnaOrSiren,
-    { timeout: constants.timeout.L }
+    { timeout: constants.timeout.XL }
   );
 
   if (response.identite && Object.keys(response.identite).length === 1) {

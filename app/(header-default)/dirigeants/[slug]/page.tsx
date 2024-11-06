@@ -21,7 +21,7 @@ import ResponsablesServicePublicSection from './_component/sections/service-publ
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug, page, isBot } = extractParamsAppRouter(props);
+  const { slug, page, isBot } = await extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
@@ -36,7 +36,7 @@ export const generateMetadata = async (
 };
 
 const DirigeantsPage = async (props: AppRouterProps) => {
-  const { slug, isBot } = extractParamsAppRouter(props);
+  const { slug, isBot } = await extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 

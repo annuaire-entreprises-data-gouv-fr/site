@@ -1,58 +1,63 @@
 'use client';
 
 import { Icon } from '#components-ui/icon/wrapper';
-import { changelogData } from '#models/historique-modifications';
+import { lastDates } from '#models/historique-modifications';
 import { ApplicationRights, hasRights } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 import { formatDate } from '#utils/helpers';
 import { useStorage } from 'hooks';
-import useSession from 'hooks/use-session';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import style from './changelog-notification.module.css';
 
 const NEW_SINCE_LAST_VISIT_ID = 'new-since-last-visit';
-const siteChangelog = changelogData.filter(
-  ({ target }) => !(target.api === true && Object.keys(target.api).length === 1)
-);
 
 function convertToISO(frenchDate: string) {
   const [day, month, year] = frenchDate.split('/');
   return `${year}-${month}-${day}`;
 }
 
-export default function ChangelogNotification() {
-  const session = useSession();
+export default function ChangelogNotification({
+  session,
+}: {
+  session: ISession | null;
+}) {
   const isAgent = hasRights(session, ApplicationRights.isAgent);
+  const lastRelevantChangelog = isAgent ? lastDates.agent : lastDates.site;
+  const [shouldDisplayNotif, setShouldDisplayNotif] = useState(false);
 
-  const dateOfLastNews = siteChangelog.find(
-    ({ target }) => target.site || (isAgent && target.agent)
-  )?.date;
-
-  const [previousDateOfLastNews, saveDateOfLastNews] = useStorage(
+  const [lastChangelogViewed, saveLastChangelogViewed] = useStorage(
     'local',
     NEW_SINCE_LAST_VISIT_ID,
     null
   );
 
+  // on fisrt render should always be hidden to avoid hydration errors
   useEffect(() => {
-    if (window.location.pathname === '/historique-des-modifications') {
-      saveDateOfLastNews(dateOfLastNews);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setShouldDisplayNotif(false);
   }, []);
 
-  if (!previousDateOfLastNews) {
-    saveDateOfLastNews(formatDate(new Date()));
-  }
+  useEffect(() => {
+    const pageIsChangelog =
+      window.location.pathname === '/historique-des-modifications';
 
-  if (
-    !previousDateOfLastNews ||
-    !dateOfLastNews ||
-    convertToISO(previousDateOfLastNews) >= convertToISO(dateOfLastNews)
-  ) {
-    return null;
-  }
+    if (pageIsChangelog) {
+      saveLastChangelogViewed(lastRelevantChangelog);
+    }
 
-  return (
+    if (!lastChangelogViewed) {
+      saveLastChangelogViewed(formatDate(new Date()));
+    }
+
+    if (
+      lastChangelogViewed &&
+      lastRelevantChangelog &&
+      convertToISO(lastChangelogViewed) < convertToISO(lastRelevantChangelog)
+    ) {
+      setShouldDisplayNotif(true);
+    }
+  }, [lastChangelogViewed, lastRelevantChangelog, saveLastChangelogViewed]);
+
+  return shouldDisplayNotif ? (
     <a
       href="/historique-des-modifications"
       className={style.changelogNotification + ' fr-link'}
@@ -62,5 +67,5 @@ export default function ChangelogNotification() {
         <span className={style.notificationText}>Nouveautés</span>
       </Icon>
     </a>
-  );
+  ) : null;
 }

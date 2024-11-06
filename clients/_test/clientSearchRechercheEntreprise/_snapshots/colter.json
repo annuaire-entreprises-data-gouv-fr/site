@@ -1804,7 +1804,7 @@
           "estRge": true,
           "estOrganismeFormation": true,
           "estSocieteMission": false,
-          "estQualiopi": false,
+          "estQualiopi": true,
           "estAssociation": false,
           "estUai": false,
           "estEntrepriseInclusive": false,
@@ -5874,6 +5874,641 @@
         "dirigeants": []
       },
       {
+        "siren": "200018406",
+        "oldSiren": "200018406",
+        "siege": {
+          "siren": "200018406",
+          "siret": "20001840600096",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": "",
+          "denomination": null,
+          "nic": "00096",
+          "dateCreation": "2022-01-12",
+          "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
+          "dateDebutActivite": "2022-01-12",
+          "dateFermeture": "",
+          "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
+          "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
+          "codePostal": "41200",
+          "commune": "ROMORANTIN-LANTHENAY",
+          "activitePrincipale": "84.11Z",
+          "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+          "trancheEffectif": "21",
+          "libelleTrancheEffectif": "",
+          "latitude": "47.357427",
+          "longitude": "1.747963",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "5021"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [
+              "1911"
+            ],
+            "idUai": []
+          },
+          "anneeTrancheEffectif": "2022",
+          "ancienSiege": false
+        },
+        "tva": null,
+        "anciensSiegesSirets": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "COMMUNAUTE DE COMMUNES DU ROMORANTINAIS ET DU MONESTOIS",
+        "chemin": "communaute-de-communes-du-romorantinais-et-du-monestois-200018406",
+        "natureJuridique": "7346",
+        "libelleNatureJuridique": "Communauté de communes",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "200018406",
+              "siret": "20001840600096",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00096",
+              "dateCreation": "2022-01-12",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2022-01-12",
+              "dateFermeture": "",
+              "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
+              "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
+              "codePostal": "41200",
+              "commune": "ROMORANTIN-LANTHENAY",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "21",
+              "libelleTrancheEffectif": "",
+              "latitude": "47.357427",
+              "longitude": "1.747963",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              },
+              "anneeTrancheEffectif": "2022",
+              "ancienSiege": false
+            }
+          ],
+          "open": [
+            {
+              "siren": "200018406",
+              "siret": "20001840600096",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00096",
+              "dateCreation": "2022-01-12",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2022-01-12",
+              "dateFermeture": "",
+              "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
+              "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
+              "codePostal": "41200",
+              "commune": "ROMORANTIN-LANTHENAY",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "21",
+              "libelleTrancheEffectif": "",
+              "latitude": "47.357427",
+              "longitude": "1.747963",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              },
+              "anneeTrancheEffectif": "2022",
+              "ancienSiege": false
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 10,
+          "nombreEtablissements": 11,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "84.11Z",
+        "libelleActivitePrincipale": "Administration publique générale",
+        "dateCreation": "2008-12-29",
+        "dateFermeture": "",
+        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
+        "dateMiseAJourInsee": "2024-10-10T15:29:01",
+        "dateMiseAJourInpi": "2024-09-21T03:34:50",
+        "dateMiseAJourIG": "",
+        "dateDebutActivite": "",
+        "trancheEffectif": "21",
+        "anneeCategorieEntreprise": "2022",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2022",
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": true,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": true,
+          "egaproRenseignee": false,
+          "estRge": true,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": false,
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": "200018406",
+          "codeInsee": null,
+          "niveau": "epci",
+          "elus": [
+            {
+              "sexe": "F",
+              "nom": "FOISSARD NÉE BEN AIOUN",
+              "prenom": "Maryse",
+              "prenoms": "Maryse",
+              "role": null,
+              "dateNaissancePartial": "1992-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GARNIER",
+              "prenom": "Nicolas",
+              "prenoms": "Nicolas",
+              "role": "2eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1975-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DE CARFORT",
+              "prenom": "Claude",
+              "prenoms": "Claude",
+              "role": null,
+              "dateNaissancePartial": "1949-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DOUCET-LAUVERJAT",
+              "prenom": "Sylvie",
+              "prenoms": "Sylvie",
+              "role": "6eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1975-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CHANTIER",
+              "prenom": "Gilles",
+              "prenoms": "Gilles",
+              "role": null,
+              "dateNaissancePartial": "1950-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CARRE",
+              "prenom": "Michel",
+              "prenoms": "Michel",
+              "role": null,
+              "dateNaissancePartial": "1952-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GILOT-LECLERC",
+              "prenom": "Françoise",
+              "prenoms": "Françoise",
+              "role": "9eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1949-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "PENÊT",
+              "prenom": "Benoît",
+              "prenoms": "Benoît",
+              "role": null,
+              "dateNaissancePartial": "1991-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "RETIF",
+              "prenom": "Dominique",
+              "prenoms": "Dominique",
+              "role": null,
+              "dateNaissancePartial": "1958-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "HERISSET",
+              "prenom": "Joël",
+              "prenoms": "Joël",
+              "role": null,
+              "dateNaissancePartial": "1959-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "THUÉ",
+              "prenom": "Gérard",
+              "prenoms": "Gérard",
+              "role": null,
+              "dateNaissancePartial": "1950-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BLANCHARD",
+              "prenom": "Pierre",
+              "prenoms": "Pierre",
+              "role": null,
+              "dateNaissancePartial": "1984-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "THORIN",
+              "prenom": "Christophe",
+              "prenoms": "Christophe",
+              "role": "13eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1969-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BERTRAND",
+              "prenom": "Aurélien",
+              "prenoms": "Aurélien",
+              "role": "4eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1991-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "COGNET",
+              "prenom": "Jacqueline",
+              "prenoms": "Jacqueline",
+              "role": null,
+              "dateNaissancePartial": "1944-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CORDIER",
+              "prenom": "Thierry",
+              "prenoms": "Thierry",
+              "role": null,
+              "dateNaissancePartial": "1959-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BARRY",
+              "prenom": "Angélique",
+              "prenoms": "Angélique",
+              "role": null,
+              "dateNaissancePartial": "1975-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DE REDON",
+              "prenom": "Louis",
+              "prenoms": "Louis",
+              "role": null,
+              "dateNaissancePartial": "1981-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DEGRAIS",
+              "prenom": "Anne",
+              "prenoms": "Anne",
+              "role": null,
+              "dateNaissancePartial": "1967-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DUVAL",
+              "prenom": "Michel",
+              "prenoms": "Michel",
+              "role": null,
+              "dateNaissancePartial": "1948-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "ESCAMEZ",
+              "prenom": "Stéphanie",
+              "prenoms": "Stéphanie",
+              "role": "14eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1974-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GAVEAU",
+              "prenom": "Stéphane",
+              "prenoms": "Stéphane",
+              "role": "12eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1970-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GIRAUDET",
+              "prenom": "Dominique",
+              "prenoms": "Dominique",
+              "role": null,
+              "dateNaissancePartial": "1957-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GUIMONET",
+              "prenom": "Michel",
+              "prenoms": "Michel",
+              "role": "7eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1955-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GUÉNIN",
+              "prenom": "Didier",
+              "prenoms": "Didier",
+              "role": null,
+              "dateNaissancePartial": "1963-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "HARNOIS",
+              "prenom": "Bruno",
+              "prenoms": "Bruno",
+              "role": "3eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1968-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "HOUGNON",
+              "prenom": "Raphaël",
+              "prenoms": "Raphaël",
+              "role": null,
+              "dateNaissancePartial": "1975-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LEROY",
+              "prenom": "Roger",
+              "prenoms": "Roger",
+              "role": "8eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1959-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LORGEOUX",
+              "prenom": "Jeanny",
+              "prenoms": "Jeanny",
+              "role": "Président du conseil communautaire",
+              "dateNaissancePartial": "1950-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "MARCHAND",
+              "prenom": "Vanessa",
+              "prenoms": "Vanessa",
+              "role": null,
+              "dateNaissancePartial": "1977-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "NAUDION",
+              "prenom": "Claude",
+              "prenoms": "Claude",
+              "role": null,
+              "dateNaissancePartial": "1952-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "ORTH",
+              "prenom": "Catherine",
+              "prenoms": "Catherine",
+              "role": null,
+              "dateNaissancePartial": "1959-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "PAUCHARD",
+              "prenom": "Anicette",
+              "prenoms": "Anicette",
+              "role": null,
+              "dateNaissancePartial": "1957-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "ROGER",
+              "prenom": "Nicole",
+              "prenoms": "Nicole",
+              "role": "1er Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1948-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SABOURDY",
+              "prenom": "Cédric",
+              "prenoms": "Cédric",
+              "role": "5eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1979-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SEGUIN",
+              "prenom": "Philippe",
+              "prenoms": "Philippe",
+              "role": null,
+              "dateNaissancePartial": "1960-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SOURIOUX",
+              "prenom": "Romain",
+              "prenoms": "Romain",
+              "role": "11eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1989-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BARBÉ",
+              "prenom": "Pierre",
+              "prenoms": "Pierre",
+              "role": null,
+              "dateNaissancePartial": "1938-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "ANTOINE",
+              "prenom": "Nelly",
+              "prenoms": "Nelly",
+              "role": null,
+              "dateNaissancePartial": "1958-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GASC",
+              "prenom": "Thibaut",
+              "prenoms": "Thibaut",
+              "role": null,
+              "dateNaissancePartial": "1973-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LAUMONIER",
+              "prenom": "Gérald",
+              "prenoms": "Gérald",
+              "role": null,
+              "dateNaissancePartial": "1972-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MARECHAL",
+              "prenom": "Bruno",
+              "prenoms": "Bruno",
+              "role": "10eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1963-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "PERSEGOL",
+              "prenom": "Léa",
+              "prenoms": "Léa",
+              "role": null,
+              "dateNaissancePartial": "1989-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BESSONNIER",
+              "prenom": "Hubert",
+              "prenoms": "Hubert",
+              "role": null,
+              "dateNaissancePartial": "1952-01",
+              "lieuNaissance": ""
+            }
+          ]
+        },
+        "listeIdcc": [
+          "5021"
+        ],
+        "immatriculation": null,
+        "matchingEtablissements": [
+          {
+            "siren": "200018406",
+            "siret": "20001840600096",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": "",
+            "denomination": null,
+            "nic": "00096",
+            "dateCreation": "2022-01-12",
+            "dateDerniereMiseAJour": "",
+            "dateMiseAJourInsee": "",
+            "dateDebutActivite": "2022-01-12",
+            "dateFermeture": "",
+            "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
+            "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
+            "codePostal": "41200",
+            "commune": "ROMORANTIN-LANTHENAY",
+            "activitePrincipale": "84.11Z",
+            "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+            "trancheEffectif": "21",
+            "libelleTrancheEffectif": "",
+            "latitude": "47.357427",
+            "longitude": "1.747963",
+            "complements": {
+              "estEntrepreneurIndividuel": false,
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "5021"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [
+                "1911"
+              ],
+              "idUai": []
+            },
+            "anneeTrancheEffectif": "2022",
+            "ancienSiege": false
+          }
+        ],
+        "nombreEtablissements": 11,
+        "nombreEtablissementsOuverts": 10,
+        "dirigeants": []
+      },
+      {
         "siren": "241700624",
         "oldSiren": "241700624",
         "siege": {
@@ -6362,641 +6997,6 @@
             "libelleTrancheEffectif": "",
             "latitude": "45.936181",
             "longitude": "-1.303525",
-            "complements": {
-              "estEntrepreneurIndividuel": false,
-              "idFiness": [],
-              "idBio": [],
-              "idcc": [
-                "5021"
-              ],
-              "idOrganismeFormation": [],
-              "idRge": [
-                "1911"
-              ],
-              "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
-          }
-        ],
-        "nombreEtablissements": 11,
-        "nombreEtablissementsOuverts": 10,
-        "dirigeants": []
-      },
-      {
-        "siren": "200018406",
-        "oldSiren": "200018406",
-        "siege": {
-          "siren": "200018406",
-          "siret": "20001840600096",
-          "oldSiret": "",
-          "etatAdministratif": "en activité",
-          "statutDiffusion": "diffusible",
-          "estSiege": true,
-          "enseigne": "",
-          "denomination": null,
-          "nic": "00096",
-          "dateCreation": "2022-01-12",
-          "dateDerniereMiseAJour": "",
-          "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2022-01-12",
-          "dateFermeture": "",
-          "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-          "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-          "codePostal": "41200",
-          "commune": "ROMORANTIN-LANTHENAY",
-          "activitePrincipale": "84.11Z",
-          "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-          "trancheEffectif": "21",
-          "libelleTrancheEffectif": "",
-          "latitude": "47.357427",
-          "longitude": "1.747963",
-          "complements": {
-            "estEntrepreneurIndividuel": false,
-            "idFiness": [],
-            "idBio": [],
-            "idcc": [
-              "5021"
-            ],
-            "idOrganismeFormation": [],
-            "idRge": [
-              "1911"
-            ],
-            "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
-        },
-        "tva": null,
-        "anciensSiegesSirets": [],
-        "statutDiffusion": "diffusible",
-        "etatAdministratif": "en activité",
-        "nomComplet": "COMMUNAUTE DE COMMUNES DU ROMORANTINAIS ET DU MONESTOIS",
-        "chemin": "communaute-de-communes-du-romorantinais-et-du-monestois-200018406",
-        "natureJuridique": "7346",
-        "libelleNatureJuridique": "Communauté de communes",
-        "etablissements": {
-          "all": [
-            {
-              "siren": "200018406",
-              "siret": "20001840600096",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00096",
-              "dateCreation": "2022-01-12",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2022-01-12",
-              "dateFermeture": "",
-              "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-              "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-              "codePostal": "41200",
-              "commune": "ROMORANTIN-LANTHENAY",
-              "activitePrincipale": "84.11Z",
-              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "21",
-              "libelleTrancheEffectif": "",
-              "latitude": "47.357427",
-              "longitude": "1.747963",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "idFiness": [],
-                "idBio": [],
-                "idcc": [
-                  "5021"
-                ],
-                "idOrganismeFormation": [],
-                "idRge": [
-                  "1911"
-                ],
-                "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
-            }
-          ],
-          "open": [
-            {
-              "siren": "200018406",
-              "siret": "20001840600096",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00096",
-              "dateCreation": "2022-01-12",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2022-01-12",
-              "dateFermeture": "",
-              "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-              "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-              "codePostal": "41200",
-              "commune": "ROMORANTIN-LANTHENAY",
-              "activitePrincipale": "84.11Z",
-              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "21",
-              "libelleTrancheEffectif": "",
-              "latitude": "47.357427",
-              "longitude": "1.747963",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "idFiness": [],
-                "idBio": [],
-                "idcc": [
-                  "5021"
-                ],
-                "idOrganismeFormation": [],
-                "idRge": [
-                  "1911"
-                ],
-                "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
-            }
-          ],
-          "unknown": [],
-          "closed": [],
-          "nombreEtablissementsOuverts": 10,
-          "nombreEtablissements": 11,
-          "usePagination": false,
-          "currentEtablissementPage": 1
-        },
-        "activitePrincipale": "84.11Z",
-        "libelleActivitePrincipale": "Administration publique générale",
-        "dateCreation": "2008-12-29",
-        "dateFermeture": "",
-        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-10-10T15:29:01.044",
-        "dateMiseAJourInpi": "2024-09-21T03:34:50",
-        "dateMiseAJourIG": "",
-        "dateDebutActivite": "",
-        "trancheEffectif": "21",
-        "anneeCategorieEntreprise": "2022",
-        "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2022",
-        "complements": {
-          "estBio": false,
-          "estEss": false,
-          "estServicePublic": true,
-          "estEntrepreneurIndividuel": false,
-          "estEntrepreneurSpectacle": false,
-          "statutEntrepreneurSpectacle": null,
-          "estFiness": true,
-          "egaproRenseignee": false,
-          "estRge": true,
-          "estOrganismeFormation": false,
-          "estSocieteMission": false,
-          "estQualiopi": false,
-          "estAssociation": false,
-          "estUai": false,
-          "estEntrepriseInclusive": false,
-          "typeEntrepriseInclusive": null
-        },
-        "association": {
-          "idAssociation": null,
-          "data": null
-        },
-        "colter": {
-          "codeColter": "200018406",
-          "codeInsee": null,
-          "niveau": "epci",
-          "elus": [
-            {
-              "sexe": "F",
-              "nom": "FOISSARD NÉE BEN AIOUN",
-              "prenom": "Maryse",
-              "prenoms": "Maryse",
-              "role": null,
-              "dateNaissancePartial": "1992-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "GARNIER",
-              "prenom": "Nicolas",
-              "prenoms": "Nicolas",
-              "role": "2eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1975-11",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "DE CARFORT",
-              "prenom": "Claude",
-              "prenoms": "Claude",
-              "role": null,
-              "dateNaissancePartial": "1949-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "DOUCET-LAUVERJAT",
-              "prenom": "Sylvie",
-              "prenoms": "Sylvie",
-              "role": "6eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1975-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "CHANTIER",
-              "prenom": "Gilles",
-              "prenoms": "Gilles",
-              "role": null,
-              "dateNaissancePartial": "1950-07",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "CARRE",
-              "prenom": "Michel",
-              "prenoms": "Michel",
-              "role": null,
-              "dateNaissancePartial": "1952-11",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "GILOT-LECLERC",
-              "prenom": "Françoise",
-              "prenoms": "Françoise",
-              "role": "9eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1949-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "PENÊT",
-              "prenom": "Benoît",
-              "prenoms": "Benoît",
-              "role": null,
-              "dateNaissancePartial": "1991-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "RETIF",
-              "prenom": "Dominique",
-              "prenoms": "Dominique",
-              "role": null,
-              "dateNaissancePartial": "1958-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "HERISSET",
-              "prenom": "Joël",
-              "prenoms": "Joël",
-              "role": null,
-              "dateNaissancePartial": "1959-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "THUÉ",
-              "prenom": "Gérard",
-              "prenoms": "Gérard",
-              "role": null,
-              "dateNaissancePartial": "1950-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BLANCHARD",
-              "prenom": "Pierre",
-              "prenoms": "Pierre",
-              "role": null,
-              "dateNaissancePartial": "1984-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "THORIN",
-              "prenom": "Christophe",
-              "prenoms": "Christophe",
-              "role": "13eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1969-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BERTRAND",
-              "prenom": "Aurélien",
-              "prenoms": "Aurélien",
-              "role": "4eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1991-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "COGNET",
-              "prenom": "Jacqueline",
-              "prenoms": "Jacqueline",
-              "role": null,
-              "dateNaissancePartial": "1944-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "CORDIER",
-              "prenom": "Thierry",
-              "prenoms": "Thierry",
-              "role": null,
-              "dateNaissancePartial": "1959-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "BARRY",
-              "prenom": "Angélique",
-              "prenoms": "Angélique",
-              "role": null,
-              "dateNaissancePartial": "1975-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "DE REDON",
-              "prenom": "Louis",
-              "prenoms": "Louis",
-              "role": null,
-              "dateNaissancePartial": "1981-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "DEGRAIS",
-              "prenom": "Anne",
-              "prenoms": "Anne",
-              "role": null,
-              "dateNaissancePartial": "1967-02",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "DUVAL",
-              "prenom": "Michel",
-              "prenoms": "Michel",
-              "role": null,
-              "dateNaissancePartial": "1948-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "ESCAMEZ",
-              "prenom": "Stéphanie",
-              "prenoms": "Stéphanie",
-              "role": "14eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1974-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "GAVEAU",
-              "prenom": "Stéphane",
-              "prenoms": "Stéphane",
-              "role": "12eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1970-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "GIRAUDET",
-              "prenom": "Dominique",
-              "prenoms": "Dominique",
-              "role": null,
-              "dateNaissancePartial": "1957-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "GUIMONET",
-              "prenom": "Michel",
-              "prenoms": "Michel",
-              "role": "7eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1955-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "GUÉNIN",
-              "prenom": "Didier",
-              "prenoms": "Didier",
-              "role": null,
-              "dateNaissancePartial": "1963-07",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "HARNOIS",
-              "prenom": "Bruno",
-              "prenoms": "Bruno",
-              "role": "3eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1968-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "HOUGNON",
-              "prenom": "Raphaël",
-              "prenoms": "Raphaël",
-              "role": null,
-              "dateNaissancePartial": "1975-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "LEROY",
-              "prenom": "Roger",
-              "prenoms": "Roger",
-              "role": "8eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1959-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "LORGEOUX",
-              "prenom": "Jeanny",
-              "prenoms": "Jeanny",
-              "role": "Président du conseil communautaire",
-              "dateNaissancePartial": "1950-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "MARCHAND",
-              "prenom": "Vanessa",
-              "prenoms": "Vanessa",
-              "role": null,
-              "dateNaissancePartial": "1977-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "NAUDION",
-              "prenom": "Claude",
-              "prenoms": "Claude",
-              "role": null,
-              "dateNaissancePartial": "1952-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "ORTH",
-              "prenom": "Catherine",
-              "prenoms": "Catherine",
-              "role": null,
-              "dateNaissancePartial": "1959-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "PAUCHARD",
-              "prenom": "Anicette",
-              "prenoms": "Anicette",
-              "role": null,
-              "dateNaissancePartial": "1957-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "ROGER",
-              "prenom": "Nicole",
-              "prenoms": "Nicole",
-              "role": "1er Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1948-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "SABOURDY",
-              "prenom": "Cédric",
-              "prenoms": "Cédric",
-              "role": "5eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1979-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "SEGUIN",
-              "prenom": "Philippe",
-              "prenoms": "Philippe",
-              "role": null,
-              "dateNaissancePartial": "1960-02",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "SOURIOUX",
-              "prenom": "Romain",
-              "prenoms": "Romain",
-              "role": "11eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1989-11",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BARBÉ",
-              "prenom": "Pierre",
-              "prenoms": "Pierre",
-              "role": null,
-              "dateNaissancePartial": "1938-08",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "ANTOINE",
-              "prenom": "Nelly",
-              "prenoms": "Nelly",
-              "role": null,
-              "dateNaissancePartial": "1958-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "GASC",
-              "prenom": "Thibaut",
-              "prenoms": "Thibaut",
-              "role": null,
-              "dateNaissancePartial": "1973-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "LAUMONIER",
-              "prenom": "Gérald",
-              "prenoms": "Gérald",
-              "role": null,
-              "dateNaissancePartial": "1972-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "MARECHAL",
-              "prenom": "Bruno",
-              "prenoms": "Bruno",
-              "role": "10eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1963-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "PERSEGOL",
-              "prenom": "Léa",
-              "prenoms": "Léa",
-              "role": null,
-              "dateNaissancePartial": "1989-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BESSONNIER",
-              "prenom": "Hubert",
-              "prenoms": "Hubert",
-              "role": null,
-              "dateNaissancePartial": "1952-01",
-              "lieuNaissance": ""
-            }
-          ]
-        },
-        "listeIdcc": [
-          "5021"
-        ],
-        "immatriculation": null,
-        "matchingEtablissements": [
-          {
-            "siren": "200018406",
-            "siret": "20001840600096",
-            "oldSiret": "",
-            "etatAdministratif": "en activité",
-            "statutDiffusion": "diffusible",
-            "estSiege": true,
-            "enseigne": "",
-            "denomination": null,
-            "nic": "00096",
-            "dateCreation": "2022-01-12",
-            "dateDerniereMiseAJour": "",
-            "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2022-01-12",
-            "dateFermeture": "",
-            "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-            "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-            "codePostal": "41200",
-            "commune": "ROMORANTIN-LANTHENAY",
-            "activitePrincipale": "84.11Z",
-            "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-            "trancheEffectif": "21",
-            "libelleTrancheEffectif": "",
-            "latitude": "47.357427",
-            "longitude": "1.747963",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],

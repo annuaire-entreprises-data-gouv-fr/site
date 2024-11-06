@@ -1,6 +1,6 @@
-import { agentConnectAuthorizeUrl } from '#clients/authentication/agent-connect/strategy';
+import { proConnectAuthorizeUrl } from '#clients/authentication/pro-connect/strategy';
 import { logFatalErrorInSentry } from '#utils/sentry';
-import { getAbsoluteSiteUrl } from '#utils/server-side-helper/app/get-absolute-site-url';
+import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { setPathFrom } from '#utils/session';
 import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
@@ -8,18 +8,20 @@ import { AgentConnectFailedException } from '../agent-connect-types';
 
 export const GET = withSession(async function loginRoute(req) {
   try {
+    const referer = req.headers.get('referer') || '';
+    const baseURL = getBaseUrl();
+    const isFromSite = referer.indexOf(baseURL) === 0;
+
     const pathFrom =
       req.nextUrl.searchParams.get('pathFrom') ||
-      req.headers.get('referer') ||
+      (isFromSite && new URL(referer).pathname) ||
       '';
 
     await setPathFrom(req.session, pathFrom);
-    const url = await agentConnectAuthorizeUrl(req);
+    const url = await proConnectAuthorizeUrl(req);
     return NextResponse.redirect(url);
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectFailedException({ cause: e }));
-    return NextResponse.redirect(
-      getAbsoluteSiteUrl('/connexion/echec-connexion')
-    );
+    return NextResponse.redirect(getBaseUrl() + '/connexion/echec-connexion');
   }
 });

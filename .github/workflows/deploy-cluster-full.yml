@@ -1,4 +1,4 @@
-name: Deployment to staging and then to production - not continuous deployment
+name: 'Deploy : production'
 
 on:
   workflow_dispatch:

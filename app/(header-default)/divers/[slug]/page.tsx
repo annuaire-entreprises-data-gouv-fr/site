@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import ConventionsCollectivesSection from '#components/conventions-collectives-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -12,11 +11,12 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { Metadata } from 'next';
 
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug, page, isBot } = extractParamsAppRouter(props);
+  const { slug, page, isBot } = await extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
@@ -32,19 +32,19 @@ export const generateMetadata = async (
 
 export default async function ConventionCollectivePage(props: AppRouterProps) {
   const session = await getSession();
-  const { slug, page, isBot } = extractParamsAppRouter(props);
+  const { slug, page, isBot } = await extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
   const ccWithMetadata = await getAllIdccWithMetadata(uniteLegale.siren);
 
   return (
-    <>
+    <div className="content-container">
       <Title
         ficheType={FICHE.DIVERS}
         uniteLegale={uniteLegale}
         session={session}
       />
       <ConventionsCollectivesSection ccWithMetadata={ccWithMetadata} />
-    </>
+    </div>
   );
 }

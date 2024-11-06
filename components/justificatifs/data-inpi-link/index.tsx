@@ -48,7 +48,6 @@ export const DataInpiLinkWithExplanations = ({
       <ul className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center">
         <li>
           <ButtonLink
-            nofollow={true}
             to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
           >
             <Icon slug="download">

@@ -1,4 +1,4 @@
-import useSession from 'hooks/use-session';
+import usePageRouterSession from 'hooks/use-page-router-session';
 import { HeaderCore } from './header-core';
 
 type IProps = {
@@ -17,7 +17,7 @@ export const HeaderPageRouter: React.FC<IProps> = ({
   plugin,
   currentSearchTerm = '',
 }) => {
-  const session = useSession();
+  const session = usePageRouterSession();
 
   return (
     <HeaderCore

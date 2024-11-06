@@ -6,6 +6,7 @@ import {
   isLikelyASiret,
 } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
+import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { sessionOptions, setVisitTimestamp } from '#utils/session';
 import { getIronSession } from 'iron-session';
 import type { NextRequest } from 'next/server';
@@ -81,9 +82,7 @@ export async function middleware(request: NextRequest) {
     // store redirection status in custom header as referrer seems missing from headers in RSC
     // isRedirected = params is present + previous page is coming from site
     const referer = requestHeaders.get('referer') || '';
-    const baseURL =
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      'https://annuaire-entreprises.data.gouv.fr';
+    const baseURL = getBaseUrl();
     const isFromSite = referer.indexOf(baseURL) === 0;
 
     const isRedirected = paramIsPresent && isFromSite ? '1' : '0';

@@ -1,3 +1,4 @@
+import { Warning } from '#components-ui/alerts';
 import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
 import { allDataToModify } from '#models/administrations/data-to-modify';
@@ -50,6 +51,19 @@ export default function Question({
       return (
         <Answer>
           <strong>Je ne trouve pas la réponse à ma question</strong>.
+          {userType !== 'agent' &&
+            !hasRights(session, ApplicationRights.isAgent) && (
+              <Warning>
+                <strong>Attention à la fraude :</strong> l’Annuaire des
+                Entreprise est un service public <strong>gratuit</strong> et ne
+                vous demandera <strong>jamais</strong> d’argent. Pour en savoir
+                plus, consultez{' '}
+                <a href="/faq/fraudes-ecroqueries-annuaire-des-entreprises">
+                  notre fiche explicative
+                </a>
+                .
+              </Warning>
+            )}
           {userType === 'independant' && (
             <p>
               Si vous possédez une <strong>entreprise individuelle</strong> dont
@@ -81,7 +95,7 @@ export default function Question({
               referrerPolicy="origin"
               sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
               width="100%"
-              height="600px"
+              height="660px"
               frameBorder="0"
             ></iframe>
           </div>

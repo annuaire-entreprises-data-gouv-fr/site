@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { Info } from '#components-ui/alerts';
 import FAQLink from '#components-ui/faq-link';
 import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
@@ -15,13 +14,16 @@ import {
 } from '#utils/helpers';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
 import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
+import { Metadata } from 'next';
 
-const extractParamsPersonne = (props: AppRouterProps) => {
-  const pageParam = (props.searchParams.page || '') as string;
-  const sirenFrom = (props.searchParams.sirenFrom || '') as string;
-  const partialDate = (props.searchParams.partialDate || '') as string;
-  const fn = (props.searchParams.fn || '') as string;
-  const nom = (props.searchParams.n || '') as string;
+async function extractParamsPersonne(props: AppRouterProps) {
+  const searchParams = await props.searchParams;
+
+  const pageParam = (searchParams.page || '') as string;
+  const sirenFrom = (searchParams.sirenFrom || '') as string;
+  const partialDate = (searchParams.partialDate || '') as string;
+  const fn = (searchParams.fn || '') as string;
+  const nom = (searchParams.n || '') as string;
 
   return {
     pageParam,
@@ -31,12 +33,12 @@ const extractParamsPersonne = (props: AppRouterProps) => {
     fn,
     urlComplements: `fn=${fn}&n=${nom}&partialDate=${partialDate}&sirenFrom=${sirenFrom}`,
   };
-};
+}
 
-export const generateMetadata = async (
+export async function generateMetadata(
   props: AppRouterProps
-): Promise<Metadata> => {
-  const { urlComplements } = extractParamsPersonne(props);
+): Promise<Metadata> {
+  const { urlComplements } = await extractParamsPersonne(props);
   return {
     title: 'Liste des structures associées à un individu',
     robots: 'follow, noindex',
@@ -44,11 +46,11 @@ export const generateMetadata = async (
       canonical: `https://annuaire-entreprises.data.gouv.fr/personne?${urlComplements}`,
     },
   };
-};
+}
 
-const PersonnePage = async (props: AppRouterProps) => {
+export default async function PersonnePage(props: AppRouterProps) {
   const { urlComplements, fn, nom, pageParam, sirenFrom, partialDate } =
-    extractParamsPersonne(props);
+    await extractParamsPersonne(props);
 
   const { prenom, prenoms } = formatFirstNames(fn, ', ');
 
@@ -185,6 +187,4 @@ const PersonnePage = async (props: AppRouterProps) => {
       <br />
     </div>
   );
-};
-
-export default PersonnePage;
+}

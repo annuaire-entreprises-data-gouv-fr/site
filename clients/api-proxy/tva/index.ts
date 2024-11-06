@@ -1,6 +1,7 @@
 import { clientAPIProxy } from '#clients/api-proxy/client';
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
+import constants from '#models/constants';
 import { TVANumber } from '#utils/helpers';
 
 type IVIESResponse = {
@@ -45,7 +46,9 @@ export class TVAUserException extends Error {
 const clientTVA = async (tva: TVANumber): Promise<string | null> => {
   const url = `${routes.proxy.tva}${tva}`;
 
-  const data = await clientAPIProxy<IVIESResponse>(url, {});
+  const data = await clientAPIProxy<IVIESResponse>(url, {
+    timeout: constants.timeout.XXL,
+  });
 
   if (data.userError && ['VALID', 'INVALID'].indexOf(data.userError) === -1) {
     throw new TVAUserException(data.userError);

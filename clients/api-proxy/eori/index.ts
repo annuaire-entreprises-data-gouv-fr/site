@@ -11,7 +11,7 @@ import { clientAPIProxy } from '../client';
  */
 const clientEORI = async (siret: Siret): Promise<IEORIValidation> => {
   return await clientAPIProxy<IEORIValidation>(routes.proxy.eori + siret, {
-    timeout: constants.timeout.L,
+    timeout: constants.timeout.XXL,
   });
 };
 

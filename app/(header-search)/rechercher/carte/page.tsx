@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import { HeaderWithAdvancedSearch } from '#components/header/header-advanced-search';
 import SearchResultsMap from '#components/search-results/map';
@@ -7,6 +6,7 @@ import { searchWithoutProtectedSiren } from '#models/search';
 import SearchFilterParams from '#models/search/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Rechercher une entreprise sur la carte',
@@ -16,13 +16,12 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow',
 };
 
-const MapSearchResultPage = async function UniteLegalePage(
-  props: AppRouterProps
-) {
-  const searchTerm = (props.searchParams.terme || '') as string;
-  const pageParam = (props.searchParams.page || '') as string;
+export default async function MapSearchResultPage(props: AppRouterProps) {
+  const searchParams = await props.searchParams;
+  const searchTerm = (searchParams.terme || '') as string;
+  const pageParam = (searchParams.page || '') as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
-  const searchFilterParams = new SearchFilterParams(props.searchParams);
+  const searchFilterParams = new SearchFilterParams(searchParams);
 
   const results = await searchWithoutProtectedSiren(
     searchTerm,
@@ -51,6 +50,4 @@ const MapSearchResultPage = async function UniteLegalePage(
       </main>
     </>
   );
-};
-
-export default MapSearchResultPage;
+}

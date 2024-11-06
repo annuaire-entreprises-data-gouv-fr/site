@@ -10,9 +10,9 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/core/types';
 import { ApplicationRights, hasRights } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
 import { useFetchFinancesSociete } from 'hooks';
-import useSession from 'hooks/use-session';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -22,8 +22,8 @@ const colorCA = constants.chartColors[4];
 
 export const FinancesSocieteSection: React.FC<{
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
-  const session = useSession();
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
   const financesSociete = useFetchFinancesSociete(uniteLegale);
 
   return (

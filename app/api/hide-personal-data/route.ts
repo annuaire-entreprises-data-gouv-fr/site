@@ -31,7 +31,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { isBot } = extractParamsAppRouter({});
+    const { isBot } = await extractParamsAppRouter({});
 
     const uniteLegale = await getUniteLegaleFromSlug(siren, {
       isBot,

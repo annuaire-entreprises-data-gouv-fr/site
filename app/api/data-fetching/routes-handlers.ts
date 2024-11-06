@@ -2,6 +2,8 @@ import { getAssociationFromSlug } from '#models/association';
 import { getEORIValidation } from '#models/eori-validation';
 import { getAssociationProtected } from '#models/espace-agent/association-protected';
 import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte-professionnelle-travaux-publics';
+import { getCibtp } from '#models/espace-agent/certificats/cibtp';
+import { getCnetp } from '#models/espace-agent/certificats/cnetp';
 import { getOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
@@ -20,6 +22,8 @@ export const APIRoutesHandlers = {
     getCarteProfessionnelleTravauxPublic,
   [APIRoutesPaths.EspaceAgentConformite]: getConformiteEntreprise,
   [APIRoutesPaths.EspaceAgentOpqibi]: getOpqibi,
+  [APIRoutesPaths.EspaceAgentCibtp]: getCibtp,
+  [APIRoutesPaths.EspaceAgentCnetp]: getCnetp,
   [APIRoutesPaths.EspaceAgentQualibat]: getQualibat,
   [APIRoutesPaths.EspaceAgentQualifelec]: getQualifelec,
   [APIRoutesPaths.EspaceAgentRcsMandataires]: getMandatairesRCS,

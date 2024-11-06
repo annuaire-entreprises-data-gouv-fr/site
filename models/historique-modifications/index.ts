@@ -40,3 +40,14 @@ const loadData = (): IChangelog[] => {
 };
 
 export const changelogData = loadData();
+
+const loadLastDates = () => {
+  const agent = changelogData.find(({ target }) => target.agent)?.date;
+  const site = changelogData.find(({ target }) => target.site)?.date;
+  return {
+    agent,
+    site,
+  };
+};
+
+export const lastDates = loadLastDates();
