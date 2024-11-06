@@ -188,10 +188,10 @@ const routes = {
     },
   },
   sireneInsee: {
-    auth: 'https://api.insee.fr/token',
+    auth: 'https://auth.insee.net/auth/realms/apim-gravitee/protocol/openid-connect/token',
     avis: 'https://api-avis-situation-sirene.insee.fr/identification/pdf/',
-    siren: 'https://api.insee.fr/entreprises/sirene/V3.11/siren/',
-    siret: 'https://api.insee.fr/entreprises/sirene/V3.11/siret/',
+    siren: 'https://api.insee.fr/api-sirene/prive/3.11/siren/',
+    siret: 'https://api.insee.fr/api-sirene/prive/3.11/siret/',
   },
   rechercheEntreprise: {
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
