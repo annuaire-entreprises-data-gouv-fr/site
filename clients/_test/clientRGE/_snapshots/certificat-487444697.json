@@ -14,6 +14,7 @@
     },
     "certifications": [
       {
+        "logoPath": "/images/rge/logo-rge-qualifelec.jpg",
         "codeQualification": "43SPVRGE",
         "domaines": [
           "Panneaux solaires photovoltaïques"

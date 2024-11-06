@@ -14,6 +14,7 @@
     },
     "certifications": [
       {
+        "logoPath": "/images/rge/logo-rge-qualibat.jpg",
         "codeQualification": "3111D111",
         "domaines": [
           "Isolation par l'intérieur des murs ou rampants de toitures  ou plafonds",
