@@ -21,7 +21,7 @@ import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAF,
 } from '#utils/helpers/formatting/labels';
-import { inseeClientGet, InseeClientOptions } from '.';
+import { inseeClientGet } from '.';
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
@@ -84,23 +84,23 @@ type TmpUniteLegale = {
 const clientUniteLegaleInsee = async (
   siren: Siren,
   page = 1,
-  options: InseeClientOptions
+  useFallback: boolean
 ): Promise<IUniteLegale> => {
   const { uniteLegale, tmpUniteLegale } = await clientTmpUniteLegale(
     siren,
-    options
+    useFallback
   );
 
   const siretSiege = uniteLegale.siege.siret;
 
   const [realSiege, allEtablissements] = await Promise.all([
-    clientEtablissementInsee(siretSiege, options).catch((e) => {
+    clientEtablissementInsee(siretSiege, useFallback).catch((e) => {
       if (e instanceof HttpForbiddenError) {
         return createNonDiffusibleEtablissement(uniteLegale.siege.siret);
       }
       return null;
     }), // better empty etablissement list than failing UL
-    clientAllEtablissementsInsee(siren, page, options).catch(() => null),
+    clientAllEtablissementsInsee(siren, page, useFallback).catch(() => null),
   ]);
 
   const siege = realSiege || uniteLegale.siege;
@@ -132,14 +132,10 @@ const clientUniteLegaleInsee = async (
   };
 };
 
-const clientTmpUniteLegale = async (
-  siren: Siren,
-  options: InseeClientOptions
-) => {
-  const { useCache, useFallback } = options;
+const clientTmpUniteLegale = async (siren: Siren, useFallback: boolean) => {
   const dataUniteLegale = await inseeClientGet<IInseeUniteLegaleResponse>(
     routes.sireneInsee.siren + siren,
-    { useCache },
+    {},
     useFallback
   );
 

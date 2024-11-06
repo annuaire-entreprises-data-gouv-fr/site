@@ -27,7 +27,6 @@ const errorInterceptor = (error: AxiosError) => {
       formatLog(
         url,
         status,
-        false,
         startTime ? endTime - startTime : undefined,
         error.request?.method
       )

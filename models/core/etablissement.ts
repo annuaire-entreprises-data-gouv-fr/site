@@ -4,7 +4,6 @@ import {
   HttpServerError,
 } from '#clients/exceptions';
 import { clientEtablissementRechercheEntreprise } from '#clients/recherche-entreprise/siret';
-import { InseeClientOptions } from '#clients/sirene-insee';
 import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getGeoLoc } from '#models/geo-loc';
@@ -72,10 +71,9 @@ const fetchFromClients = async (
   isBot = false
 ): Promise<IEtablissement> => {
   // no cache for bot as they scrap so they tend not to call the same siren twice
-  const useCache = !isBot;
 
   const etablissementRechercheEntreprise =
-    await fetchEtablissementFromRechercheEntreprise(siret, useCache);
+    await fetchEtablissementFromRechercheEntreprise(siret);
 
   const useInsee = shouldUseInsee(
     etablissementRechercheEntreprise,
@@ -94,10 +92,7 @@ const fetchFromClients = async (
     return etablissementRechercheEntreprise;
   }
 
-  const etablissementInsee = await fetchEtablissmentFromInsee(siret, {
-    useFallback: false,
-    useCache,
-  });
+  const etablissementInsee = await fetchEtablissmentFromInsee(siret, false);
 
   /**
    * Nowhere to be found
@@ -154,10 +149,10 @@ const fetchFromClients = async (
 
 const fetchEtablissmentFromInsee = async (
   siret: Siret,
-  options: InseeClientOptions
+  useFallback: boolean
 ): Promise<IEtablissement | IAPINotRespondingError> => {
   try {
-    return await clientEtablissementInsee(siret, options);
+    return await clientEtablissementInsee(siret, useFallback);
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleEtablissement(siret);
@@ -166,11 +161,8 @@ const fetchEtablissmentFromInsee = async (
       throw new SiretNotFoundError(siret);
     }
 
-    if (!options.useFallback) {
-      return await fetchEtablissmentFromInsee(siret, {
-        ...options,
-        useFallback: true,
-      });
+    if (!useFallback) {
+      return await fetchEtablissmentFromInsee(siret, true);
     }
 
     logErrorInSentry(
@@ -189,21 +181,16 @@ const fetchEtablissmentFromInsee = async (
 
 const fetchEtablissementFromRechercheEntreprise = async (
   siret: Siret,
-  useCache = false,
   useFallback = false
 ): Promise<IEtablissement | IAPINotRespondingError> => {
   try {
-    return await clientEtablissementRechercheEntreprise(siret, useCache);
+    return await clientEtablissementRechercheEntreprise(siret);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DINUM, 404);
     }
     if (!useFallback) {
-      return await fetchEtablissementFromRechercheEntreprise(
-        siret,
-        useCache,
-        true
-      );
+      return await fetchEtablissementFromRechercheEntreprise(siret, true);
     }
 
     logFatalErrorInSentry(
