@@ -47,6 +47,10 @@ export const GET = withSession(async function callbackRoute(req) {
     }
   }
 });
+/**
+ * Checks if user is either an agent or has habilitation
+ * Otherwise raise an exception : HttpForbiddenError or AgentConnectCouldBeAServicePublicException
+ */
 const verifyAgentHabilitation = async (agent: IAgentInfo) => {
   if (agent.hasHabilitation) {
     return;
