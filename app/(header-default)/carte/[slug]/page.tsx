@@ -3,7 +3,7 @@ import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
 import { MapTitleEtablissement } from '#components/title-section/etablissement/map-title';
 import { estDiffusible } from '#models/core/diffusion';
-import { getEtablissementWithLatLongFromSlug } from '#models/core/etablissement';
+import { cachedEtablissementWithLatLong } from '#utils/server-side-helper/app/cached-methods';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
@@ -25,7 +25,7 @@ export const generateMetadata = async (
 
 const EtablissementMapPage = async (props: AppRouterProps) => {
   const { slug } = await extractParamsAppRouter(props);
-  const etablissement = await getEtablissementWithLatLongFromSlug(slug);
+  const etablissement = await cachedEtablissementWithLatLong(slug);
 
   return (
     <>

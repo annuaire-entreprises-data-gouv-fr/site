@@ -14,7 +14,7 @@
       "denomination": "",
       "nic": "00010",
       "dateCreation": "2022-01-01",
-      "dateDerniereMiseAJour": "2024-09-17T13:26:52.447Z",
+      "dateDerniereMiseAJour": "2024-11-07T13:36:29.313Z",
       "dateMiseAJourInsee": "2024-03-29T23:18:52.426",
       "dateDebutActivite": "",
       "dateFermeture": null,
@@ -24,7 +24,7 @@
       "commune": "PARIS",
       "activitePrincipale": "70.21Z",
       "libelleActivitePrincipale": "Conseil en relations publiques et communication",
-      "trancheEffectif": null,
+      "trancheEffectif": "01",
       "libelleTrancheEffectif": "",
       "latitude": "",
       "longitude": "",
@@ -37,7 +37,7 @@
         "idRge": [],
         "idUai": []
       },
-      "anneeTrancheEffectif": null
+      "anneeTrancheEffectif": "2022"
     },
     "tva": null,
     "anciensSiegesSirets": [],
@@ -60,7 +60,7 @@
           "denomination": "",
           "nic": "00010",
           "dateCreation": "2022-01-01",
-          "dateDerniereMiseAJour": "2024-09-17T13:26:52.602Z",
+          "dateDerniereMiseAJour": "2024-11-07T13:36:29.356Z",
           "dateMiseAJourInsee": "2024-03-29T23:18:52.426",
           "dateDebutActivite": "",
           "dateFermeture": null,
@@ -70,7 +70,7 @@
           "commune": "PARIS",
           "activitePrincipale": "70.21Z",
           "libelleActivitePrincipale": "Conseil en relations publiques et communication",
-          "trancheEffectif": null,
+          "trancheEffectif": "01",
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
@@ -83,7 +83,7 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": null,
+          "anneeTrancheEffectif": "2022",
           "ancienSiege": false
         }
       ],
@@ -99,7 +99,7 @@
           "denomination": "",
           "nic": "00010",
           "dateCreation": "2022-01-01",
-          "dateDerniereMiseAJour": "2024-09-17T13:26:52.602Z",
+          "dateDerniereMiseAJour": "2024-11-07T13:36:29.356Z",
           "dateMiseAJourInsee": "2024-03-29T23:18:52.426",
           "dateDebutActivite": "",
           "dateFermeture": null,
@@ -109,7 +109,7 @@
           "commune": "PARIS",
           "activitePrincipale": "70.21Z",
           "libelleActivitePrincipale": "Conseil en relations publiques et communication",
-          "trancheEffectif": null,
+          "trancheEffectif": "01",
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
@@ -122,7 +122,7 @@
             "idRge": [],
             "idUai": []
           },
-          "anneeTrancheEffectif": null,
+          "anneeTrancheEffectif": "2022",
           "ancienSiege": false
         }
       ],
@@ -140,11 +140,12 @@
     "dateDerniereMiseAJour": "2023-10-5",
     "dateMiseAJourInsee": "2024-03-22",
     "dateMiseAJourInpi": "",
+    "dateMiseAJourIG": "",
     "dateDebutActivite": "2022-01-01",
-    "trancheEffectif": null,
-    "anneeCategorieEntreprise": null,
-    "categorieEntreprise": null,
-    "anneeTrancheEffectif": null,
+    "trancheEffectif": "01",
+    "anneeCategorieEntreprise": "2022",
+    "categorieEntreprise": "PME",
+    "anneeTrancheEffectif": "2022",
     "complements": {
       "estEntrepreneurIndividuel": false,
       "estEss": false,

@@ -280,7 +280,6 @@ export const createNonDiffusibleEtablissement = (siret: Siret) => {
 };
 
 export {
-  getEtablissementFromSlug,
   getEtablissementWithLatLongFromSlug,
   getEtablissementWithUniteLegaleFromSlug,
 };
