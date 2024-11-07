@@ -17,3 +17,12 @@ export class AgentConnectFailedException extends Exception {
     });
   }
 }
+
+export class AgentConnectCouldBeAServicePublicException extends Exception {
+  constructor(args: { cause?: any }) {
+    super({
+      name: 'AgentConnectCouldBeAServicePublicException',
+      ...args,
+    });
+  }
+}
