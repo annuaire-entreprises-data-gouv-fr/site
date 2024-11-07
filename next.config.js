@@ -40,6 +40,21 @@ const nextjsConfig = {
   async redirects() {
     return redirects;
   },
+  async headers() {
+    return [
+      {
+        source: '/_next/static/chunks/:path*',
+        headers: [
+          {
+            key: 'X-Debug-Chunk-Load',
+            value: `Instance-Number-${
+              process.env.INSTANCE_NUMBER
+            }-Date-${new Date().toISOString()}`,
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = WITH_SENTRY
