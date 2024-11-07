@@ -73,13 +73,13 @@ const verifyAgentHabilitation = async (agent: IAgentInfo) => {
     return;
   }
 
-  const couldBeServicePublic =
-    uniteLegale.natureJuridique.startsWith('4') ||
-    uniteLegale.natureJuridique.startsWith('8');
+  //const couldBeServicePublic =
+  //  uniteLegale.natureJuridique.startsWith('4') ||
+  //  uniteLegale.natureJuridique.startsWith('8');
 
-  if (couldBeServicePublic) {
-    throw new AgentConnectCouldBeAServicePublicException({});
-  }
+  //if (couldBeServicePublic) {
+  //  throw new AgentConnectCouldBeAServicePublicException({});
+  //}
 
   throw new HttpForbiddenError('Organization is not a service public');
 };
