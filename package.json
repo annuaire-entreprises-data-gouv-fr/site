@@ -26,7 +26,7 @@
   "dependencies": {
     "@react-spring/web": "^9.7.5",
     "@sentry/browser": "^8.35.0",
-    "@sentry/nextjs": "^8.35.0",
+    "@sentry/nextjs": "^8.36.0",
     "@vcarl/remark-headings": "^0.1.0",
     "axios": "^1.6.5",
     "axios-cache-interceptor": "^1.5.1",

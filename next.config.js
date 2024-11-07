@@ -1,3 +1,4 @@
+// @ts-check
 const { withSentryConfig } = require('@sentry/nextjs');
 const redirects = require('./redirects.json');
 const nextBuildId = require('next-build-id');
@@ -33,25 +34,49 @@ const nextjsConfig = {
   async redirects() {
     return redirects;
   },
-  ...(WITH_SENTRY
-    ? {
-        sentry: {
-          widenClientFileUpload: true,
-          ...(DISABLE_SOURCEMAP_UPLOAD
-            ? {
-                disableServerWebpackPlugin: true,
-                disableClientWebpackPlugin: true,
-              }
-            : {}),
-        },
-      }
-    : {}),
 };
 
 module.exports = WITH_SENTRY
   ? withSentryConfig(nextjsConfig, {
-      silent: true,
-      hideSourceMaps: false,
-      ignore: [],
+      // Only print logs for uploading source maps in CI
+      silent: !process.env.CI,
+
+      // For all available options, see:
+      // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+
+      /**
+       * Options related to react component name annotations.
+       * Disabled by default, unless a value is set for this option.
+       * When enabled, your app's DOM will automatically be annotated during build-time with their respective component names.
+       * This will unlock the capability to search for Replays in Sentry by component name, as well as see component names in breadcrumbs and performance monitoring.
+       * Please note that this feature is not currently supported by the esbuild bundler plugins, and will only annotate React components
+       */
+      reactComponentAnnotation: {
+        enabled: true,
+      },
+      /**
+       * Suppresses all Sentry SDK build logs.
+       *
+       * Defaults to `false`.
+       */
+      telemetry: true,
+      /**
+       * Include Next.js-internal code and code from dependencies when uploading source maps.
+       *
+       * Note: Enabling this option can lead to longer build times.
+       * Disabling this option will leave you without readable stacktraces for dependencies and Next.js-internal code.
+       *
+       * Defaults to `false`.
+       */
+      widenClientFileUpload: true,
+      /**
+       * Options for source maps uploading.
+       */
+      sourcemaps: {
+        /**
+         * Disable any functionality related to source maps upload.
+         */
+        disable: DISABLE_SOURCEMAP_UPLOAD,
+      },
     })
   : nextjsConfig;
