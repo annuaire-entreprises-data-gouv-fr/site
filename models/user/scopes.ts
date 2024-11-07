@@ -45,7 +45,11 @@ const defaultAgentScopes = [
  */
 export const getAgentScopes = async (
   userEmail: string
-): Promise<{ scopes: IAgentScope[]; userType: string }> => {
+): Promise<{
+  scopes: IAgentScope[];
+  userType: string;
+  hasHabilitation: boolean;
+}> => {
   const isTestAccount =
     userEmail === 'user@yopmail.com' &&
     (process.env.NODE_ENV !== 'production' ||
@@ -60,6 +64,7 @@ export const getAgentScopes = async (
         'subventions_association',
       ],
       userType: 'Super-agent connecté',
+      hasHabilitation: true,
     };
   }
 
@@ -69,5 +74,6 @@ export const getAgentScopes = async (
     scopes: [...defaultAgentScopes, ...additionnalScopes],
     userType:
       additionnalScopes.length > 0 ? 'Super-agent connecté' : 'Agent connecté',
+    hasHabilitation: additionnalScopes.length > 0,
   };
 };

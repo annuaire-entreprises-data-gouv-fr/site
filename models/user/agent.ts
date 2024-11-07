@@ -52,6 +52,7 @@ export type IAgentInfo = {
   userType: string;
   isPrestataire: boolean;
   isMCP: boolean;
+  hasHabilitation: boolean;
 };
 
 const extractDomain = (email: string) => {
@@ -65,7 +66,9 @@ const extractDomain = (email: string) => {
 export const getAgent = async (
   userInfo: IProConnectUserInfo
 ): Promise<IAgentInfo> => {
-  const { scopes, userType } = await getAgentScopes(userInfo?.email);
+  const { scopes, userType, hasHabilitation } = await getAgentScopes(
+    userInfo?.email
+  );
 
   const domain = extractDomain(userInfo?.email || '');
   const isPrestataire = isLikelyPrestataire(domain);
@@ -90,5 +93,6 @@ export const getAgent = async (
     userType,
     isPrestataire,
     isMCP,
+    hasHabilitation,
   };
 };
