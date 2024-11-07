@@ -6,7 +6,7 @@
     {
       "type": "insee",
       "value": "06088",
-      "label": "Nice (06) - toute la ville"
+      "label": "Nice (06) — toute la commune"
     },
     {
       "label": "Nice (06000)",
@@ -31,12 +31,12 @@
     {
       "type": "insee",
       "value": "21454",
-      "label": "Nicey (21) - toute la ville"
+      "label": "Nicey (21) — toute la commune"
     },
     {
       "type": "insee",
       "value": "55384",
-      "label": "Nicey-sur-Aire (55) - toute la ville"
+      "label": "Nicey-sur-Aire (55) — toute la commune"
     }
   ]
 }
