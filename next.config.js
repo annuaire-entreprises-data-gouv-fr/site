@@ -20,11 +20,17 @@ WARNING: Building without uploading sourcemap to Sentry
 `);
 }
 const nextjsConfig = {
-  webpack: function (config) {
+  webpack: (config, { isServer }) => {
     config.module.rules.push({
       test: /\.ya?ml$/,
       use: 'js-yaml-loader',
     });
+    // https://github.com/open-telemetry/opentelemetry-js/issues/4173
+    // "Critical dependency: the request of a dependency is an expression"
+    // This ignores warnings we can't fix.
+    if (isServer) {
+      config.ignoreWarnings = [{ module: /opentelemetry/ }];
+    }
     return config;
   },
   // https://github.com/nexdrew/next-build-id
