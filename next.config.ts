@@ -1,6 +1,7 @@
-// @ts-check
-const { withSentryConfig } = require('@sentry/nextjs');
-const redirects = require('./redirects.json');
+import { withSentryConfig } from '@sentry/nextjs';
+import { NextConfig } from 'next';
+import redirects from './redirects.json';
+
 const nextBuildId = require('next-build-id');
 
 const WITH_SENTRY =
@@ -19,7 +20,7 @@ WARNING: Building without uploading sourcemap to Sentry
 
 `);
 }
-const nextjsConfig = {
+const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
     config.module.rules.push({
       test: /\.ya?ml$/,
@@ -43,6 +44,7 @@ const nextjsConfig = {
   async headers() {
     return [
       {
+        source: '/(.*)',
         headers: [
           {
             key: 'X-Debug-Deployment',
@@ -56,8 +58,8 @@ const nextjsConfig = {
   },
 };
 
-module.exports = WITH_SENTRY
-  ? withSentryConfig(nextjsConfig, {
+export default WITH_SENTRY
+  ? withSentryConfig(nextConfig, {
       // For all available options, see:
       // https://github.com/getsentry/sentry-webpack-plugin#options
       org: process.env.SENTRY_ORG,
@@ -103,4 +105,4 @@ module.exports = WITH_SENTRY
         disable: DISABLE_SOURCEMAP_UPLOAD,
       },
     })
-  : nextjsConfig;
+  : nextConfig;
