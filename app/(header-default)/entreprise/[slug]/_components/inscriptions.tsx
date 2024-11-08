@@ -1,4 +1,3 @@
-import React, { PropsWithChildren } from 'react';
 import { OpenClosedTag } from '#components-ui/badge/frequent';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
@@ -12,6 +11,7 @@ import {
 } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { formatDate } from '#utils/helpers';
+import React, { PropsWithChildren } from 'react';
 import styles from './style.module.css';
 
 const Wrapper: React.FC<PropsWithChildren<{ link: JSX.Element }>> = ({
@@ -252,7 +252,7 @@ export const UniteLegaleInscriptionRNA = ({
     >
       <InformationTooltip
         tabIndex={undefined}
-        label="Cette structure est inscrite au Registre National des Associations (RNA)."
+        label="Cette structure est inscrite au Répertoire National des Associations (RNA)."
       >
         <a href="#association-section">
           <OpenClosedTag

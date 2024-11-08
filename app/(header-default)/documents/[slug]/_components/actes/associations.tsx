@@ -57,7 +57,7 @@ export const AgentActesAssociation: React.FC<{
               <h3>
                 Documents au{' '}
                 <FAQLink tooltipLabel="RNA">
-                  Registre National des Associations
+                  Répertoire National des Associations
                 </FAQLink>
               </h3>
               <FullTable

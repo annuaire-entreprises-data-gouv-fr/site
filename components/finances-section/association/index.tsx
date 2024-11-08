@@ -52,16 +52,7 @@ export const FinancesAssociationSection: React.FC<{
           <>
             <p>
               Voici les résultats financiers déclarés par le siège social de
-              l’association. Ils sont diffusés par la <DJEPVA />. Vous pouvez
-              aussi les retrouver sur l&apos;onglet “Comptes“ de{' '}
-              <a
-                target="_blank"
-                href={`https://www.data-asso.fr/annuaire/association/${uniteLegale.association.idAssociation}?docFields=documentsDac,documentsRna`}
-                rel="noopener noreferrer"
-              >
-                data-asso
-              </a>
-              .
+              l’association. Ils sont diffusés par la <DJEPVA />.
             </p>
             <LineChart
               htmlLegendId={'finance-data-legend'}

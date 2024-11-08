@@ -3,6 +3,7 @@
 import AssociationAdressAlert from '#components-ui/alerts-with-explanations/association-adress';
 import FAQLink from '#components-ui/faq-link';
 import BreakPageForPrint from '#components-ui/print-break-page';
+import { DJEPVA, MI } from '#components/administrations';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -71,7 +72,10 @@ const getTableData = (
       impotCommerciaux ? 'Oui' : 'Non',
     ],
     [
-      'Agrément(s)',
+      <FAQLink tooltipLabel="Agrément(s) déclaré(s)">
+        Liste des agrément(s) déclaré(s) par l’association lors d’une demande de
+        subvention
+      </FAQLink>,
       agrement.length > 0
         ? agrement.map((agr) => {
             return (
@@ -154,7 +158,7 @@ const AssociationSection = ({
     <>
       <AsyncDataSectionClient
         title="Répertoire National des Associations"
-        sources={[EAdministration.MI]}
+        sources={[EAdministration.MI, EAdministration.DJEPVA]}
         id="association-section"
         data={association}
         notFoundInfo={<AssociationNotFound uniteLegale={uniteLegale} />}
@@ -171,8 +175,14 @@ const AssociationSection = ({
               />
               <p>
                 Cette structure est inscrite au{' '}
-                <strong>Répertoire National des Associations (RNA)</strong>,
-                avec les informations suivantes&nbsp;:
+                <strong>Répertoire National des Associations (RNA)</strong>. Les
+                informations de cette section sont issues du RNA tenu par le{' '}
+                <MI /> et de{' '}
+                <a href="https://lecompteasso.associations.gouv.fr/">
+                  LeCompteAsso
+                </a>
+                , tenu par la <DJEPVA />
+                &nbsp;:
               </p>
               <TwoColumnTable
                 body={getTableData(
@@ -182,21 +192,6 @@ const AssociationSection = ({
                   session
                 )}
               />
-              {idAssociation && (
-                <>
-                  <br />
-                  Retrouvez plus d&apos;informations (comptes, effectifs et
-                  documents administratifs) sur la{' '}
-                  <a
-                    target="_blank"
-                    href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
-                    rel="noopener noreferrer"
-                  >
-                    fiche data-asso de cette association
-                  </a>
-                  .
-                </>
-              )}
             </>
           )
         }

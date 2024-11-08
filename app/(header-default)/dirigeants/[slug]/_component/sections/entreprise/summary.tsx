@@ -1,33 +1,11 @@
 import { HttpNotFound } from '#clients/exceptions';
 import { Loader } from '#components-ui/loader';
-import { INPI, INSEE, MI } from '#components/administrations';
+import { INPI, INSEE } from '#components/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
 import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { useTimeout } from 'hooks';
 import { IDirigeantsFetching } from '.';
-
-const NoDirigeantAssociation = ({ idAssociation = '' }) => (
-  <>
-    <p>
-      Cette association n’a pas de dirigeant(e) enregistré(e) auprès de l’
-      <INSEE /> ou auprès de l’
-      <INPI />
-    </p>
-    <p>
-      Si des dirigeants ont été déclarés auprès du <MI /> vous les retrouverez
-      sur l&apos;onglet “personnes physiques“ de{' '}
-      <a
-        target="_blank"
-        href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
-        rel="noopener noreferrer"
-      >
-        sa fiche data-asso
-      </a>
-      .
-    </p>
-  </>
-);
 
 const NoDirigeantDefault = () => (
   <p>
@@ -77,11 +55,7 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   const hasNoDirigeant = summaries.length === 0;
   if (hasNoDirigeant) {
     if (uniteLegale.association.idAssociation) {
-      return (
-        <NoDirigeantAssociation
-          idAssociation={uniteLegale.association.idAssociation}
-        />
-      );
+      return null;
     } else if (
       isAPINotResponding(dirigeants) &&
       !(dirigeants instanceof HttpNotFound)

@@ -72,7 +72,7 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
               Cette association possède {associationProtected.dirigeants.length}{' '}
               dirigeant(s) enregistré(s) au{' '}
               <FAQLink tooltipLabel="RNA">
-                Registre National des Associations
+                Répertoire National des Associations
               </FAQLink>{' '}
               :
               <TableFilter
