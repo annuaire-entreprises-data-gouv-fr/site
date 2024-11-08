@@ -56,9 +56,9 @@ export const GET = withSession(async function callbackRoute(req) {
  * Otherwise raise an exception : HttpForbiddenError or AgentConnectCouldBeAServicePublicException
  */
 const verifyAgentHabilitation = async (agent: IAgentInfo) => {
-  if (agent.hasHabilitation) {
-    return;
-  }
+  // if (agent.hasHabilitation) {
+  //   return;
+  // }
 
   const { isMCP } = agent;
 
@@ -73,6 +73,7 @@ const verifyAgentHabilitation = async (agent: IAgentInfo) => {
       page: 0,
       isBot: false,
     });
+    throw new Error('');
 
     if (isServicePublic(uniteLegale)) {
       return;
@@ -83,7 +84,6 @@ const verifyAgentHabilitation = async (agent: IAgentInfo) => {
       message: 'Siren verification failed',
       context: {
         siret: agent.siret,
-        domain: agent.domain,
         details: agent.idpId,
       },
     });
