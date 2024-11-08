@@ -33,7 +33,11 @@ export const GET = withSession(async function callbackRoute(req) {
       return NextResponse.redirect(getBaseUrl() + '/');
     }
   } catch (e: any) {
-    logFatalErrorInSentry(new AgentConnectFailedException({ cause: e }));
+    if (e instanceof AgentConnectFailedException) {
+      logFatalErrorInSentry(e);
+    } else {
+      logFatalErrorInSentry(new AgentConnectFailedException({ cause: e }));
+    }
     if (e instanceof AgentConnectCouldBeAServicePublicException) {
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/requise'
@@ -63,16 +67,27 @@ const verifyAgentHabilitation = async (agent: IAgentInfo) => {
     throw new HttpForbiddenError('MCP user must have a siret');
   }
 
-  const siren = extractSirenFromSiret(agent.siret);
-  const uniteLegale = await getUniteLegaleFromSlug(siren, {
-    page: 0,
-    isBot: false,
-  });
+  try {
+    const siren = extractSirenFromSiret(agent.siret);
+    const uniteLegale = await getUniteLegaleFromSlug(siren, {
+      page: 0,
+      isBot: false,
+    });
 
-  if (isServicePublic(uniteLegale)) {
-    return;
+    if (isServicePublic(uniteLegale)) {
+      return;
+    }
+  } catch (e) {
+    throw new AgentConnectFailedException({
+      cause: e,
+      message: 'Siren verification failed',
+      context: {
+        siret: agent.siret,
+        domain: agent.domain,
+        details: agent.idpId,
+      },
+    });
   }
-
   //const couldBeServicePublic =
   //  uniteLegale.natureJuridique.startsWith('4') ||
   //  uniteLegale.natureJuridique.startsWith('8');

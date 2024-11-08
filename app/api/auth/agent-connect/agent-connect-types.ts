@@ -1,4 +1,4 @@
-import { Exception } from '#models/exceptions';
+import { Exception, IExceptionContext } from '#models/exceptions';
 
 export class AgentConnectLogoutFailedException extends Exception {
   constructor(args: { cause?: any }) {
@@ -10,7 +10,11 @@ export class AgentConnectLogoutFailedException extends Exception {
 }
 
 export class AgentConnectFailedException extends Exception {
-  constructor(args: { cause?: any }) {
+  constructor(args: {
+    cause: any;
+    message?: string;
+    context?: IExceptionContext;
+  }) {
     super({
       name: 'AgentConnectionFailedException',
       ...args,
