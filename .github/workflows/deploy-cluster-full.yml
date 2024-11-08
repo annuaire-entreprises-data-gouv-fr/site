@@ -12,7 +12,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
@@ -52,7 +52,7 @@ jobs:
           - environment: production-03
             host: SSH_PRODUCTION_03
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up SSH
         run: |
@@ -84,7 +84,7 @@ jobs:
     needs: [deploy-website-production]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Notify deploy success
         uses: ./.github/actions/notify
         with:
