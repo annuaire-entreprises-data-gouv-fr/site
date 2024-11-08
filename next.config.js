@@ -43,10 +43,9 @@ const nextjsConfig = {
   async headers() {
     return [
       {
-        source: '/_next/static/chunks/:path*',
         headers: [
           {
-            key: 'X-Debug-Chunk-Load',
+            key: 'X-Debug-Deployment',
             value: `Instance-Number-${
               process.env.INSTANCE_NUMBER
             }-Date-${new Date().toISOString()}`,
