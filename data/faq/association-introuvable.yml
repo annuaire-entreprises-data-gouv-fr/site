@@ -34,7 +34,7 @@ body: |
 
   Elle doit en faire la demande auprès de l’administration. 
 
-  Pour retrouver une association qui n'a pas de numéro SIRET, consultez [https://www.data-asso.fr](https://www.data-asso.fr) qui regroupe toutes les associations françaises déclarées, avec ou sans numéro SIRET.
+  Pour retrouver une association qui n'a pas de numéro SIRET, consultez [le Répertoire National des Associations(RNA)](https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/) qui regroupe toutes les associations françaises déclarées, avec ou sans numéro SIRET.
 
   **NB :** Le RNA (Répertoire National des Associations) est le fichier national recensant l'ensemble des informations sur les associations basées en France. Il est développé et maintenu par le ministère de l'Intérieur.
 more:
