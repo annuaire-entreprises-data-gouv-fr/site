@@ -39,6 +39,19 @@ const nextConfig: NextConfig = {
   async redirects() {
     return redirects;
   },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default WITH_SENTRY
