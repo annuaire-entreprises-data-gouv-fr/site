@@ -11,8 +11,14 @@ const team = [
   },
   {
     photoUrl: '/images/team/hajar.jpg',
-    fullname: 'Hajar AIT EL KADI',
+    fullname: 'Hajar Ait El Kadi',
     pronoun: 'une',
+    role: 'data engineer',
+  },
+  {
+    photoUrl: '/images/team/hadrien.jpg',
+    fullname: 'Hadrien Bossard',
+    pronoun: 'un',
     role: 'data engineer',
   },
   {

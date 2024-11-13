@@ -1,6 +1,6 @@
-import { PropsWithChildren } from 'react';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
+import { PropsWithChildren } from 'react';
 import AgentWall from '.';
 
 const AgentWallAssociationProtected: React.FC<

@@ -1,7 +1,6 @@
-// @ts-check
-const { withSentryConfig } = require('@sentry/nextjs');
-const redirects = require('./redirects.json');
-const nextBuildId = require('next-build-id');
+import { withSentryConfig } from '@sentry/nextjs';
+import { NextConfig } from 'next';
+import redirects from './redirects.json';
 
 const WITH_SENTRY =
   !!process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.NODE_ENV === 'production';
@@ -19,7 +18,7 @@ WARNING: Building without uploading sourcemap to Sentry
 
 `);
 }
-const nextjsConfig = {
+const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
     config.module.rules.push({
       test: /\.ya?ml$/,
@@ -35,20 +34,24 @@ const nextjsConfig = {
   },
   // https://github.com/nexdrew/next-build-id
   // If Scalingo is deploying, SOURCE_VERSION is set to the latest Git commit hash
-  generateBuildId: () =>
-    process.env.SOURCE_VERSION || nextBuildId({ dir: __dirname }),
+  // if deploying on docker, SOURCE_VERSION has to be set to the latest Git commit hash during provisionning
+  generateBuildId: () => process.env.SOURCE_VERSION || null,
   async redirects() {
     return redirects;
   },
 };
 
-module.exports = WITH_SENTRY
-  ? withSentryConfig(nextjsConfig, {
+export default WITH_SENTRY
+  ? withSentryConfig(nextConfig, {
+      // For all available options, see:
+      // https://github.com/getsentry/sentry-webpack-plugin#options
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+      sentryUrl: process.env.SENTRY_URL,
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+
       // Only print logs for uploading source maps in CI
       silent: !process.env.CI,
-
-      // For all available options, see:
-      // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 
       /**
        * Options related to react component name annotations.
@@ -85,4 +88,4 @@ module.exports = WITH_SENTRY
         disable: DISABLE_SOURCEMAP_UPLOAD,
       },
     })
-  : nextjsConfig;
+  : nextConfig;

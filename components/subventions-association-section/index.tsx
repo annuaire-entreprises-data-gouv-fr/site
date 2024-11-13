@@ -1,6 +1,7 @@
 'use client';
 
 import FAQLink from '#components-ui/faq-link';
+import { Select } from '#components-ui/select';
 import { Tag } from '#components-ui/tag';
 import { DJEPVA } from '#components/administrations';
 import NonRenseigne from '#components/non-renseigne';
@@ -8,13 +9,13 @@ import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAssociation } from '#models/core/types';
-import { isUnauthorized } from '#models/data-fetching';
-import { ISubventions } from '#models/subventions/association';
+import { isDataSuccess, isUnauthorized } from '#models/data-fetching';
+import { ISubvention, ISubventions } from '#models/subventions/association';
 import { ISession } from '#models/user/session';
 import { formatCurrency } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { useMemo } from 'react';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 
 const DataSubventionLink = () => (
   <FAQLink
@@ -71,11 +72,39 @@ export const SubventionsAssociationSection: React.FC<{
   uniteLegale: IAssociation;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
+  const [selectedYear, setSelectedYear] = useState<string>('');
+  const [filteredSubventions, setFilteredSubventions] = useState<ISubvention[]>(
+    []
+  );
+
   const subventions = useAPIRouteData(
     APIRoutesPaths.SubventionsAssociation,
     uniteLegale.siren,
     session
   );
+
+  const allYears = useMemo(() => {
+    if (!isDataSuccess(subventions)) {
+      return [];
+    }
+    return [...new Set(subventions.map((s) => s.year.toString()))].map((y) => {
+      return {
+        value: y,
+        label: y,
+      };
+    });
+  }, [subventions]);
+
+  useEffect(() => {
+    if (isDataSuccess(subventions)) {
+      if (selectedYear === '') {
+        return setFilteredSubventions(subventions);
+      }
+      setFilteredSubventions(
+        subventions.filter((s) => s.year.toString() === selectedYear)
+      );
+    }
+  }, [subventions, selectedYear]);
 
   if (isUnauthorized(subventions)) {
     // for a start lets hide it first before Data subvention validation
@@ -103,9 +132,20 @@ export const SubventionsAssociationSection: React.FC<{
         ) : (
           <>
             <SubventionDetails subventions={subventions} />
+            <div className="layout-right">
+              <Select
+                options={allYears}
+                name="Filtrer par année"
+                defaultValue={selectedYear}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setSelectedYear(e.target.value);
+                }}
+                placeholder="Toutes les années"
+              />
+            </div>
             <FullTable
               head={['Année', 'Dispositif', 'Montant', 'État']}
-              body={subventions.map((subvention) => [
+              body={filteredSubventions.map((subvention) => [
                 <strong>{subvention.year}</strong>,
                 subvention.description ? (
                   <strong>{subvention.description}</strong>

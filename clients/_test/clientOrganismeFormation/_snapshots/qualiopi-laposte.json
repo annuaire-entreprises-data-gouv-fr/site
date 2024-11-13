@@ -5,18 +5,6 @@
   "result": {
     "records": [
       {
-        "nda": "11755762075",
-        "exNda": "11755762075",
-        "region": "Île-de-France",
-        "dateDeclaration": "31/05/2024",
-        "specialite": "Transport, manutention, magasinage/Commerce, vente",
-        "stagiaires": 309,
-        "formateurs": 77,
-        "certifications": [
-          "Actions de formations"
-        ]
-      },
-      {
         "nda": "11755565775",
         "exNda": "11755565775",
         "region": "Île-de-France",
@@ -24,6 +12,18 @@
         "specialite": "Développement des capacités comportementales et relationnelles",
         "stagiaires": 111172,
         "formateurs": 400,
+        "certifications": [
+          "Actions de formations"
+        ]
+      },
+      {
+        "nda": "11755762075",
+        "exNda": "11755762075",
+        "region": "Île-de-France",
+        "dateDeclaration": "31/05/2024",
+        "specialite": "Transport, manutention, magasinage/Commerce, vente",
+        "stagiaires": 309,
+        "formateurs": 77,
         "certifications": [
           "Actions de formations"
         ]
