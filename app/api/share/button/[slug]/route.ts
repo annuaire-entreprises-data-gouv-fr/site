@@ -2,30 +2,34 @@ import constants from '#models/constants';
 import { Exception } from '#models/exceptions';
 import { isSiren, isSiret } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 
-const button = (
-  { query: { slug = '', light = '' } }: NextApiRequest,
-  res: NextApiResponse
-) => {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
+  const light = req.nextUrl.searchParams.get('light');
+
   const isSirenOrSiret =
     typeof slug === 'string' && (isSiren(slug) || isSiret(slug));
   if (!isSirenOrSiret) {
-    res.status(403).json({ message: 'Slug must be a siren or a siret' });
+    return NextResponse.json(
+      { message: 'Slug must be a siren or a siret' },
+      { status: 403 }
+    );
   }
 
-  const path = `${
-    isSiren(slug as string) ? 'entreprise' : 'etablissement'
-  }/${slug}?mtm_campaign=button-iframe`;
-  const uri = encodeURI(`https://annuaire-entreprises.data.gouv.fr/${path}`);
+  const path = `${isSiren(slug) ? 'entreprise' : 'etablissement'}/${slug}`;
+  const uri = encodeURI(
+    `https://annuaire-entreprises.data.gouv.fr/${path}?mtm_campaign=button-iframe`
+  );
 
   const fontColor = !light ? '#fff' : constants.colors.frBlue;
   const backgroundColor = !light ? constants.colors.frBlue : '#fff';
   const hoverBackgroundColor = !light ? '#000060' : '#f0f0ff';
 
-  try {
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.status(200).send(`
+  const html = `
     <!DOCTYPE html>
     <html lang="fr">
       <head>
@@ -164,7 +168,13 @@ const button = (
           </div>
       </body>
     </html>
-    `);
+  `;
+
+  try {
+    return new NextResponse(html, {
+      status: 200,
+      headers: { 'Content-Type': 'text/html; charset=utf-8' },
+    });
   } catch (e: any) {
     logErrorInSentry(
       new Exception({
@@ -175,8 +185,6 @@ const button = (
         },
       })
     );
-    res.status(500).json({ message: e });
+    return NextResponse.json({ message: e }, { status: 500 });
   }
-};
-
-export default button;
+}

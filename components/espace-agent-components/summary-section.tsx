@@ -6,17 +6,13 @@ import { TwoColumnTable } from '#components/table/simple';
 import { IUniteLegale } from '#models/core/types';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps {
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }
 
-export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
-  uniteLegale,
-  session,
-}) => {
+export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => {
   return (
     <PrintNever>
       <Section title="Résumé pour les agents publics" isProtected>

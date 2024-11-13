@@ -1,6 +1,5 @@
-import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
-import { NextPageWithLayout } from '../../../pages/_app';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Conditions générales d’utilisation',
@@ -10,7 +9,7 @@ export const metadata: Metadata = {
   },
 };
 
-const CGU: NextPageWithLayout = () => (
+const CGU = () => (
   <TextWrapper>
     <h1>Conditions générales d’utilisation</h1>
     <p>

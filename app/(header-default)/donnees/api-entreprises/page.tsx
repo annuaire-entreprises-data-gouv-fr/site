@@ -1,13 +1,16 @@
 import { DINUM, INPI, INSEE } from '#components/administrations';
-import Meta from '#components/meta/meta-client';
+import { Metadata } from 'next';
 
-const AccesByAPIPage = () => (
-  <>
-    <Meta
-      title="API Recherche d’entreprises & API Entreprise"
-      noIndex={false}
-      canonical="https://annuaire-entreprises.data.gouv.fr/donnees/acceder-par-api"
-    />
+export const metadata: Metadata = {
+  title: 'API Recherche d’entreprises & API Entreprise',
+  alternates: {
+    canonical:
+      'https://annuaire-entreprises.data.gouv.fr/donnees/acceder-par-api',
+  },
+};
+
+export default function AccesByAPIPage() {
+  return (
     <div className="content-container">
       <h1>API Recherche d’entreprises & API Entreprise</h1>
       <p>
@@ -63,7 +66,7 @@ const AccesByAPIPage = () => (
       <p>
         C’est l’API qui permet{' '}
         <strong>
-          aux services publics (administrations centrales, collecitvités,
+          aux services publics (administrations centrales, collectivités,
           services déconcentrés etc.)
         </strong>{' '}
         d’échanger entre eux les <strong>données restreintes</strong> des
@@ -157,7 +160,5 @@ const AccesByAPIPage = () => (
         </table>
       </div>
     </div>
-  </>
-);
-
-export default AccesByAPIPage;
+  );
+}

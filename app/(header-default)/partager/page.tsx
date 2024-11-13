@@ -1,15 +1,17 @@
 import { Icon } from '#components-ui/icon/wrapper';
-import Meta from '#components/meta/meta-client';
 import TextWrapper from 'components-ui/text-wrapper';
-import { NextPageWithLayout } from 'pages/_app';
+import { Metadata } from 'next';
 
-const Partager: NextPageWithLayout = () => {
+export const metadata: Metadata = {
+  title: 'Réutiliser ou partager l’Annuaire des Entreprises',
+  alternates: {
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/partager',
+  },
+};
+
+export default function PartagerPage() {
   return (
     <>
-      <Meta
-        title="Réutiliser ou partager l’Annuaire des Entreprises"
-        canonical="https://annuaire-entreprises.data.gouv.fr/partager"
-      />
       <TextWrapper>
         <h1>Réutiliser & partager</h1>
         <p>
@@ -205,6 +207,4 @@ const Partager: NextPageWithLayout = () => {
       </TextWrapper>
     </>
   );
-};
-
-export default Partager;
+}

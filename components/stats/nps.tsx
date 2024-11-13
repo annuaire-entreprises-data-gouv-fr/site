@@ -1,10 +1,11 @@
-import { ChartData } from 'chart.js';
-import { ChangeEvent, useState } from 'react';
+'use client';
 import { IMatomoStats } from '#clients/matomo';
 import { Select } from '#components-ui/select';
 import { LineChart } from '#components/chart/line';
 import { StackedBarChart } from '#components/chart/stack-bar';
 import constants from '#models/constants';
+import { ChartData } from 'chart.js';
+import { ChangeEvent, useState } from 'react';
 
 export const NpsStats: React.FC<{
   monthlyNps: IMatomoStats['monthlyNps'];

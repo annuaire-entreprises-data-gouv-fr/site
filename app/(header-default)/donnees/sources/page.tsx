@@ -1,32 +1,26 @@
-import { GetStaticProps } from 'next';
-import React from 'react';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
-import Meta from '#components/meta/meta-client';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { administrationsMetaData, allAPI } from '#models/administrations';
-import {
-  IAPIMonitorMetaData,
-  IAdministrationMetaData,
-} from '#models/administrations/types';
 import constants from '#models/constants';
-import { NextPageWithLayout } from 'pages/_app';
+import { Metadata } from 'next';
+import React from 'react';
 
-interface IProps {
-  allAdministrations: IAdministrationMetaData[];
-  allAPI: { [apiSlug: string]: IAPIMonitorMetaData };
-}
+export const metadata: Metadata = {
+  title: 'Sources des données utilisées dans l’Annuaire des Entreprises',
+  alternates: {
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/donnees/sources',
+  },
+};
 
-const DataSourcesPage: NextPageWithLayout<IProps> = ({
-  allAdministrations,
-}) => (
-  <>
-    <Meta
-      title="Sources des données utilisées dans l’Annuaire des Entreprises"
-      canonical="https://annuaire-entreprises.data.gouv.fr/donnees/sources"
-    />
+export default function DataSourcesPage() {
+  const allAdministrations = Object.values(administrationsMetaData).filter(
+    (administration) => administration.dataSources.length > 0
+  );
+
+  return (
     <div className="content-container">
       <h1>Sources de données</h1>
       <p>
@@ -48,7 +42,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
             const isProtected = api?.isProtected;
 
             return (
-              <li key={source.label + '-' + slug}>
+              <li key={`${source.label}-${slug}`}>
                 <a href={`#${slug}-${sourceIndex}`}>
                   {isProtected ? (
                     <Icon slug="lockFill" color={constants.colors.espaceAgent}>
@@ -136,7 +130,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
                               [
                                 'Taux de disponibilité de l’API',
                                 <a
-                                  href={'/donnees/api#' + api.apiSlug}
+                                  href={`/donnees/api#${api.apiSlug}`}
                                   target="_blank"
                                   rel="noreferrer noopener"
                                 >
@@ -145,16 +139,16 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
                               ],
                             ]
                           : []),
-                        ...[
-                          contact
-                            ? [
+                        ...(contact
+                          ? [
+                              [
                                 'Administration responsable',
                                 <a href={contact}>
                                   <Icon slug="mail">Contacter ({short})</Icon>
                                 </a>,
-                              ]
-                            : [],
-                        ],
+                              ],
+                            ]
+                          : []),
                       ]}
                     />
                   </Section>
@@ -166,18 +160,5 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
         )
       )}
     </div>
-  </>
-);
-
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {
-      allAdministrations: Object.values(administrationsMetaData).filter(
-        (administration) => administration.dataSources.length > 0
-      ),
-      allAPI: allAPI,
-    },
-  };
-};
-
-export default DataSourcesPage;
+  );
+}
