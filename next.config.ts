@@ -34,24 +34,10 @@ const nextConfig: NextConfig = {
   },
   // https://github.com/nexdrew/next-build-id
   // If Scalingo is deploying, SOURCE_VERSION is set to the latest Git commit hash
+  // if deploying on docker, SOURCE_VERSION has to be set to the latest Git commit hash during provisionning
   generateBuildId: () => process.env.SOURCE_VERSION || null,
   async redirects() {
     return redirects;
-  },
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Debug-Deployment',
-            value: `Instance-Number-${
-              process.env.INSTANCE_NUMBER
-            }-Date-${new Date().toISOString()}`,
-          },
-        ],
-      },
-    ];
   },
 };
 
