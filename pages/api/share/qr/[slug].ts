@@ -1,16 +1,9 @@
+import { Exception } from '#models/exceptions';
+import { isSiren, isSiret } from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
 import { createCanvas, loadImage } from 'canvas';
 import { NextApiRequest, NextApiResponse } from 'next';
 import QRCode from 'qrcode';
-import { Exception } from '#models/exceptions';
-import { hasSirenFormat } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-
-const getUrl = (slug: string) => {
-  if (hasSirenFormat(slug)) {
-    return `https://annuaire-entreprises.data.gouv.fr/entreprise/${slug}?mtm_campaign=qr-code`;
-  }
-  return `https://annuaire-entreprises.data.gouv.fr/etablissement/${slug}?mtm_campaign=qr-code`;
-};
 
 async function createQRCode(dataForQRcode: string) {
   const image =
@@ -40,10 +33,19 @@ const qrCode = async (
   { query: { slug } }: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const url = getUrl(slug as string);
+  const isSirenOrSiret =
+    typeof slug === 'string' && (isSiren(slug) || isSiret(slug));
+  if (!isSirenOrSiret) {
+    res.status(403).json({ message: 'Slug must be a siren or a siret' });
+  }
+
+  const path = `${
+    isSiren(slug as string) ? 'entreprise' : 'etablissement'
+  }/${slug}?mtm_campaign=qr-code`;
+  const uri = encodeURI(`https://annuaire-entreprises.data.gouv.fr/${path}`);
 
   try {
-    const urlAsImg = await createQRCode(url);
+    const urlAsImg = await createQRCode(uri);
 
     const base64Data = urlAsImg.replace(/^data:image\/png;base64,/, '');
     var img = Buffer.from(base64Data, 'base64');
