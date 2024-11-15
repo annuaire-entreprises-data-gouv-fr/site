@@ -1,4 +1,4 @@
-import { withSentryConfig } from '@sentry/nextjs';
+import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import { NextConfig } from 'next';
 import redirects from './redirects.json';
 
@@ -32,60 +32,28 @@ const nextConfig: NextConfig = {
     }
     return config;
   },
-  // https://github.com/nexdrew/next-build-id
-  // If Scalingo is deploying, SOURCE_VERSION is set to the latest Git commit hash
-  // if deploying on docker, SOURCE_VERSION has to be set to the latest Git commit hash during provisionning
   generateBuildId: () => process.env.SOURCE_VERSION || null,
   async redirects() {
     return redirects;
   },
 };
 
+const sentryBuildOptions: SentryBuildOptions = {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  sentryUrl: process.env.SENTRY_URL,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  // silent: !process.env.CI,
+  reactComponentAnnotation: {
+    enabled: true,
+  },
+  telemetry: false,
+  widenClientFileUpload: true,
+  sourcemaps: {
+    disable: DISABLE_SOURCEMAP_UPLOAD,
+  },
+};
+
 export default WITH_SENTRY
-  ? withSentryConfig(nextConfig, {
-      // For all available options, see:
-      // https://github.com/getsentry/sentry-webpack-plugin#options
-      org: process.env.SENTRY_ORG,
-      project: process.env.SENTRY_PROJECT,
-      sentryUrl: process.env.SENTRY_URL,
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-
-      // Only print logs for uploading source maps in CI
-      silent: !process.env.CI,
-
-      /**
-       * Options related to react component name annotations.
-       * Disabled by default, unless a value is set for this option.
-       * When enabled, your app's DOM will automatically be annotated during build-time with their respective component names.
-       * This will unlock the capability to search for Replays in Sentry by component name, as well as see component names in breadcrumbs and performance monitoring.
-       * Please note that this feature is not currently supported by the esbuild bundler plugins, and will only annotate React components
-       */
-      reactComponentAnnotation: {
-        enabled: true,
-      },
-      /**
-       * Suppresses all Sentry SDK build logs.
-       *
-       * Defaults to `false`.
-       */
-      telemetry: true,
-      /**
-       * Include Next.js-internal code and code from dependencies when uploading source maps.
-       *
-       * Note: Enabling this option can lead to longer build times.
-       * Disabling this option will leave you without readable stacktraces for dependencies and Next.js-internal code.
-       *
-       * Defaults to `false`.
-       */
-      widenClientFileUpload: true,
-      /**
-       * Options for source maps uploading.
-       */
-      sourcemaps: {
-        /**
-         * Disable any functionality related to source maps upload.
-         */
-        disable: DISABLE_SOURCEMAP_UPLOAD,
-      },
-    })
+  ? withSentryConfig(nextConfig, sentryBuildOptions)
   : nextConfig;
