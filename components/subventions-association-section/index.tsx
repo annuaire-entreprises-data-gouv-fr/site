@@ -1,5 +1,6 @@
 'use client';
 
+import routes from '#clients/routes';
 import FAQLink from '#components-ui/faq-link';
 import { Select } from '#components-ui/select';
 import { Tag } from '#components-ui/tag';
@@ -7,6 +8,7 @@ import { DJEPVA } from '#components/administrations';
 import NonRenseigne from '#components/non-renseigne';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
+import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAssociation } from '#models/core/types';
 import { isDataSuccess, isUnauthorized } from '#models/data-fetching';
@@ -30,9 +32,10 @@ const DataSubventionLink = () => (
   </FAQLink>
 );
 
-const SubventionDetails: React.FC<{ subventions: ISubventions }> = ({
-  subventions,
-}) => {
+const SubventionDetails: React.FC<{
+  subventions: ISubventions;
+  uniteLegale: IAssociation;
+}> = ({ subventions, uniteLegale }) => {
   const subventionStats = useMemo(() => {
     const totalSubventions = subventions.length;
     const mostRecentYear = subventions[totalSubventions - 1]?.year;
@@ -41,7 +44,7 @@ const SubventionDetails: React.FC<{ subventions: ISubventions }> = ({
     );
     const totalApproved = approvedSubventions.length;
     const totalAmount = approvedSubventions.reduce(
-      (acc, subvention) => acc + subvention.amount,
+      (acc, subvention) => acc + subvention.amount || 0,
       0
     );
 
@@ -63,6 +66,14 @@ const SubventionDetails: React.FC<{ subventions: ISubventions }> = ({
         <b>{subventionStats.totalApproved} ont été accordées</b> pour un total
         de <b>{formatCurrency(subventionStats.totalAmount)}</b>. Le reste a été
         refusé, est en cours d’instruction ou se situe dans un état inconnu.
+        <p></p>
+        Pour en savoir plus, vous pouvez consulter{' '}
+        <UniteLegalePageLink
+          uniteLegale={uniteLegale}
+          href={routes.dataSubvention.pageBySiren(uniteLegale.siren)}
+          siteName="le site de Data.Subvention"
+        />
+        .
       </p>
     </>
   );
@@ -131,7 +142,10 @@ export const SubventionsAssociationSection: React.FC<{
           </>
         ) : (
           <>
-            <SubventionDetails subventions={subventions} />
+            <SubventionDetails
+              subventions={subventions}
+              uniteLegale={uniteLegale}
+            />
             <div className="layout-right">
               <Select
                 options={allYears}
