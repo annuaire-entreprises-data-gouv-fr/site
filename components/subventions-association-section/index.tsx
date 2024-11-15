@@ -8,13 +8,12 @@ import { DJEPVA } from '#components/administrations';
 import NonRenseigne from '#components/non-renseigne';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
-import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAssociation } from '#models/core/types';
 import { isDataSuccess, isUnauthorized } from '#models/data-fetching';
 import { ISubvention, ISubventions } from '#models/subventions/association';
 import { ISession } from '#models/user/session';
-import { formatCurrency } from '#utils/helpers';
+import { formatCurrency, Siren } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { ChangeEvent, useEffect, useMemo, useState } from 'react';
@@ -34,8 +33,8 @@ const DataSubventionLink = () => (
 
 const SubventionDetails: React.FC<{
   subventions: ISubventions;
-  uniteLegale: IAssociation;
-}> = ({ subventions, uniteLegale }) => {
+  siren: Siren;
+}> = ({ subventions, siren }) => {
   const subventionStats = useMemo(() => {
     const totalSubventions = subventions.length;
     const mostRecentYear = subventions[totalSubventions - 1]?.year;
@@ -68,11 +67,14 @@ const SubventionDetails: React.FC<{
         refusé, est en cours d’instruction ou se situe dans un état inconnu.
         <p></p>
         Pour en savoir plus, vous pouvez consulter{' '}
-        <UniteLegalePageLink
-          uniteLegale={uniteLegale}
-          href={routes.dataSubvention.pageBySiren(uniteLegale.siren)}
-          siteName="le site de Data.Subvention"
-        />
+        <a
+          href={routes.dataSubvention.pageBySirenOrIdRna(siren)}
+          aria-label={`Voir la page de l’association sur le site de Data.Subvention`}
+          rel="noreferrer noopener"
+          target="_blank"
+        >
+          la page de l’association sur le site de Data.Subvention
+        </a>
         .
       </p>
     </>
@@ -144,7 +146,7 @@ export const SubventionsAssociationSection: React.FC<{
           <>
             <SubventionDetails
               subventions={subventions}
-              uniteLegale={uniteLegale}
+              siren={uniteLegale.siren}
             />
             <div className="layout-right">
               <Select
