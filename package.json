@@ -35,7 +35,7 @@
     "dotenv": "^16.4.5",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.15",
-    "iron-session": "^8.0.3",
+    "iron-session": "^8.0.4",
     "js-yaml-loader": "~1.2.2",
     "maplibre-gl": "^4.7.1",
     "matomo-tracker": "~2.2.4",
