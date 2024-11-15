@@ -10,12 +10,12 @@
 
 .dialog {
   position: absolute;
-  padding: 0.75rem;
   min-width: max-content;
   position: absolute;
   z-index: 10;
   visibility: hidden;
   will-change: transform, opacity;
+  padding: 0.75rem !important;
 }
 
 .menuLogout:hover > .dialog,
