@@ -69,11 +69,11 @@ const SubventionDetails: React.FC<{
         Pour en savoir plus, vous pouvez consulter{' '}
         <a
           href={routes.dataSubvention.pageBySirenOrIdRna(siren)}
-          aria-label={`Voir la page de l’association sur le site de Data.Subvention`}
+          aria-label={`Voir la page de l’association sur le site de data.subvention`}
           rel="noreferrer noopener"
           target="_blank"
         >
-          la page de l’association sur le site de Data.Subvention
+          la page de l’association sur le site de data.subvention
         </a>
         .
       </p>
