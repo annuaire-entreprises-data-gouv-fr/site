@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Exception } from '#models/exceptions';
 import { logInfoInSentry } from '#utils/sentry';
 import { useStorage } from 'hooks';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
 const NPS_MODAL_ID = 'nps-modal-2';
@@ -66,7 +66,7 @@ export const NPSBanner: React.FC<{}> = () => {
       >
         <div className="fr-container">
           <a onClick={close} href="/formulaire/nps" target="_blank">
-            👍👎 Quel est votre avis sur ce site ?
+            👍👎 Quel est votre avis sur l‘Annuaire des Entreprises ?
           </a>
           <button onClick={close}>
             <strong>Ne plus afficher ce message ✕</strong>

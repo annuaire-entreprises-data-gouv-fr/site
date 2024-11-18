@@ -8,7 +8,7 @@ apiMonitors:
     apiSlug: rna
     updownIoId: phbs
     apiDocumentationLink: https://www.associations.gouv.fr/les-api-et-autres-outils.html
-  - label: API Data.Subvention
+  - label: API data.subvention
     apiSlug: data-subvention
     isProtected: true
     apiDocumentationLink: https://datasubvention.beta.gouv.fr/api/

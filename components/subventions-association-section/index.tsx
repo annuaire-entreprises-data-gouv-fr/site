@@ -1,5 +1,6 @@
 'use client';
 
+import routes from '#clients/routes';
 import FAQLink from '#components-ui/faq-link';
 import { Select } from '#components-ui/select';
 import { Tag } from '#components-ui/tag';
@@ -12,7 +13,7 @@ import { IAssociation } from '#models/core/types';
 import { isDataSuccess, isUnauthorized } from '#models/data-fetching';
 import { ISubvention, ISubventions } from '#models/subventions/association';
 import { ISession } from '#models/user/session';
-import { formatCurrency } from '#utils/helpers';
+import { formatCurrency, Siren } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { ChangeEvent, useEffect, useMemo, useState } from 'react';
@@ -30,9 +31,10 @@ const DataSubventionLink = () => (
   </FAQLink>
 );
 
-const SubventionDetails: React.FC<{ subventions: ISubventions }> = ({
-  subventions,
-}) => {
+const SubventionDetails: React.FC<{
+  subventions: ISubventions;
+  siren: Siren;
+}> = ({ subventions, siren }) => {
   const subventionStats = useMemo(() => {
     const totalSubventions = subventions.length;
     const mostRecentYear = subventions[totalSubventions - 1]?.year;
@@ -41,7 +43,7 @@ const SubventionDetails: React.FC<{ subventions: ISubventions }> = ({
     );
     const totalApproved = approvedSubventions.length;
     const totalAmount = approvedSubventions.reduce(
-      (acc, subvention) => acc + subvention.amount,
+      (acc, subvention) => acc + subvention.amount || 0,
       0
     );
 
@@ -63,6 +65,17 @@ const SubventionDetails: React.FC<{ subventions: ISubventions }> = ({
         <b>{subventionStats.totalApproved} ont été accordées</b> pour un total
         de <b>{formatCurrency(subventionStats.totalAmount)}</b>. Le reste a été
         refusé, est en cours d’instruction ou se situe dans un état inconnu.
+        <p></p>
+        Pour en savoir plus, vous pouvez consulter{' '}
+        <a
+          href={routes.dataSubvention.pageBySirenOrIdRna(siren)}
+          aria-label={`Voir la page de l’association sur le site de data.subvention`}
+          rel="noreferrer noopener"
+          target="_blank"
+        >
+          la page de l’association sur le site de data.subvention
+        </a>
+        .
       </p>
     </>
   );
@@ -131,7 +144,10 @@ export const SubventionsAssociationSection: React.FC<{
           </>
         ) : (
           <>
-            <SubventionDetails subventions={subventions} />
+            <SubventionDetails
+              subventions={subventions}
+              siren={uniteLegale.siren}
+            />
             <div className="layout-right">
               <Select
                 options={allYears}
