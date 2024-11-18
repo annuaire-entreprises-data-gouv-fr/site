@@ -31,7 +31,7 @@ const Menu: React.FC<{
         </Icon>
       </div>
       <FloatingModal
-        id="feedback-modal"
+        id="menu-modal"
         aria-modal="false"
         elevation="low"
         role="dialog"
