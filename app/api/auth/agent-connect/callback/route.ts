@@ -60,11 +60,8 @@ const verifyAgentHabilitation = async (agent: IAgentInfo) => {
     return;
   }
 
-  const { isMCP } = agent;
-
-  // MCP should always return a siret
-  if (isMCP && !agent.siret) {
-    throw new HttpForbiddenError('MCP user must have a siret');
+  if (!agent.siret) {
+    throw new HttpForbiddenError('The user doesn‘t have a siret');
   }
 
   try {
