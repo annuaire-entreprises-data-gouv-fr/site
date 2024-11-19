@@ -30,3 +30,27 @@ export class AgentConnectCouldBeAServicePublicException extends Exception {
     });
   }
 }
+
+export class AgentConnectMCPNoSiretException extends Exception {
+  constructor(message: string, userId: string) {
+    super({
+      name: 'AgentConnectMCPNoSiretException',
+      message,
+      context: {
+        details: userId,
+      },
+    });
+  }
+}
+
+export class AgentConnectProviderNoSiretException extends Exception {
+  constructor(message: string, idpId: string) {
+    super({
+      name: 'AgentConnectProviderNoSiretException',
+      message,
+      context: {
+        details: idpId,
+      },
+    });
+  }
+}
