@@ -7,7 +7,7 @@ import {
 } from '#models/api-not-responding';
 import { InternalError } from '#models/exceptions';
 import { getDirigeantsRNE } from '#models/rne/dirigeants';
-import { IDirigeantsWithMetadata } from '#models/rne/types';
+import { IDirigeantsWithMetadataAfterInpiIgMerge } from '#models/rne/types';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { getMandatairesRCS } from './mandataires-rcs';
@@ -15,7 +15,9 @@ import { mergeDirigeants } from './utils';
 
 export const getDirigeantsProtected = async (
   maybeSiren: string
-): Promise<IDirigeantsWithMetadata | IAPINotRespondingError> => {
+): Promise<
+  IDirigeantsWithMetadataAfterInpiIgMerge | IAPINotRespondingError
+> => {
   const siren = verifySiren(maybeSiren);
 
   const [dirigeantsRCS, dirigeantsRNE] = await Promise.all([

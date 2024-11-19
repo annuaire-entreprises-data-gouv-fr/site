@@ -1,27 +1,82 @@
+import FAQLink from '#components-ui/faq-link';
 import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
 import { FullTable } from '#components/table/full';
 import { IUniteLegale } from '#models/core/types';
 import {
-  IDirigeantsWithMetadata,
-  IEtatCivil,
-  IPersonneMorale,
+  IDirigeantsWithMetadataAfterInpiIgMerge,
+  IEtatCivilAfterInpiIgMerge,
+  IPersonneMoraleAfterInpiIgMerge,
 } from '#models/rne/types';
 import { formatDateLong, formatDatePartial, formatIntFr } from '#utils/helpers';
-import { isPersonneMorale } from '../is-personne-morale';
 
 type IDirigeantContentProps = {
-  dirigeants: IDirigeantsWithMetadata;
+  dirigeants: IDirigeantsWithMetadataAfterInpiIgMerge;
   uniteLegale: IUniteLegale;
 };
 
-export default function DirigeantsContent({
+const isPersonneMorale = (
+  toBeDetermined: IEtatCivilAfterInpiIgMerge | IPersonneMoraleAfterInpiIgMerge
+): toBeDetermined is IPersonneMoraleAfterInpiIgMerge => {
+  if (
+    (toBeDetermined as IPersonneMoraleAfterInpiIgMerge).siren ||
+    (toBeDetermined as IPersonneMoraleAfterInpiIgMerge).denomination
+  ) {
+    return true;
+  }
+  return false;
+};
+
+const DisambiguationTooltip = ({
+  dataType,
+  isInIg,
+  isInInpi,
+}: {
+  dataType: string;
+  isInIg?: boolean;
+  isInInpi?: boolean;
+}) => {
+  if (!isInIg && !isInInpi) {
+    return null;
+  }
+
+  return (
+    <>
+      <br />
+      {'('}
+      {!isInIg && (
+        <FAQLink tooltipLabel="incohérence possible">
+          Ce {dataType} n‘apparait pas dans les données d‘Infogreffe.
+        </FAQLink>
+      )}
+      {!isInInpi && (
+        <FAQLink tooltipLabel="incohérence possible">
+          Ce {dataType} n‘apparait pas dans les données de l‘INPI.
+        </FAQLink>
+      )}
+      {')'}
+    </>
+  );
+};
+
+export default function DirigeantsContentProtected({
   dirigeants,
   uniteLegale,
 }: IDirigeantContentProps) {
-  const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
+  const formatDirigeant = (
+    dirigeant: IEtatCivilAfterInpiIgMerge | IPersonneMoraleAfterInpiIgMerge
+  ) => {
     if (isPersonneMorale(dirigeant)) {
       const infos = [
-        <>{dirigeant.role}</>,
+        dirigeant.roles?.map((role) => (
+          <>
+            <span>{role.label}</span>
+            <DisambiguationTooltip
+              dataType="rôle"
+              isInIg={role.isInIg}
+              isInInpi={role.isInInpi}
+            />
+          </>
+        )),
         <>
           <strong>{dirigeant.denomination}</strong>
           {dirigeant.siren ? (
@@ -40,6 +95,11 @@ export default function DirigeantsContent({
               {dirigeant.natureJuridique}
             </>
           )}
+          <DisambiguationTooltip
+            dataType="dirigeant"
+            isInIg={dirigeant.isInIg}
+            isInInpi={dirigeant.isInInpi}
+          />
         </>,
       ];
 
@@ -58,7 +118,16 @@ export default function DirigeantsContent({
       }${(dirigeant.nom || '').toUpperCase()}`;
 
       return [
-        <>{dirigeant.role}</>,
+        dirigeant.roles?.map((role) => (
+          <>
+            <span>{role.label}</span>
+            <DisambiguationTooltip
+              dataType="rôle"
+              isInIg={role.isInIg}
+              isInInpi={role.isInInpi}
+            />
+          </>
+        )),
         <>
           {nomComplet}
           {dirigeant.dateNaissance || dirigeant.dateNaissancePartial
@@ -70,6 +139,11 @@ export default function DirigeantsContent({
                 dirigeant.lieuNaissance ? `, à ${dirigeant.lieuNaissance}` : ''
               }`
             : ''}
+          <DisambiguationTooltip
+            dataType="dirigeant"
+            isInIg={dirigeant.isInIg}
+            isInInpi={dirigeant.isInInpi}
+          />
         </>,
         ...(dirigeant.dateNaissancePartial
           ? [

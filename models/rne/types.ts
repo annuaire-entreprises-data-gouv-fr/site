@@ -23,7 +23,6 @@ export interface IEtatCivil {
   prenom: string;
   prenoms: string;
   role: string;
-  roles?: IRole[];
   lieuNaissance: string;
   dateNaissancePartial?: string;
   dateNaissance?: string;
@@ -32,15 +31,22 @@ export interface IEtatCivil {
   isInIg?: boolean;
 }
 
+export type IEtatCivilAfterInpiIgMerge = Omit<IEtatCivil, 'role'> & {
+  roles: IRole[];
+};
+
 export interface IPersonneMorale {
   siren: string;
   denomination: string;
   natureJuridique: string | null;
   role: string;
-  roles?: IRole[];
   isInInpi?: boolean;
   isInIg?: boolean;
 }
+
+export type IPersonneMoraleAfterInpiIgMerge = Omit<IPersonneMorale, 'role'> & {
+  roles: IRole[];
+};
 
 export type IObservations = {
   numObservation: string;
@@ -56,9 +62,20 @@ export interface IObservationsWithMetadata {
 }
 
 export type IDirigeants = (IEtatCivil | IPersonneMorale)[];
+export type IDirigeantsAfterInpiIgMerge = (
+  | IEtatCivilAfterInpiIgMerge
+  | IPersonneMoraleAfterInpiIgMerge
+)[];
 
 export interface IDirigeantsWithMetadata {
   data: IDirigeants;
+  metadata: {
+    isFallback: boolean;
+  };
+}
+
+export interface IDirigeantsWithMetadataAfterInpiIgMerge {
+  data: IDirigeantsAfterInpiIgMerge;
   metadata: {
     isFallback: boolean;
   };

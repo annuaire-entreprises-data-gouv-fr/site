@@ -1,5 +1,7 @@
 'use client';
+
 import routes from '#clients/routes';
+import { Info } from '#components-ui/alerts';
 import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { INPI } from '#components/administrations';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
@@ -9,7 +11,7 @@ import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import DirigeantsContent from './dirigeants-content';
+import DirigeantsContentProtected from './dirigeants-content-protected';
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -17,22 +19,25 @@ type IProps = {
 };
 
 /**
- * Dirigeants section
+ * Dirigeants section protected
  */
-export default function DirigeantsSection({ uniteLegale, session }: IProps) {
+export default function DirigeantsSectionProtected({
+  uniteLegale,
+  session,
+}: IProps) {
   const dirigeants = useAPIRouteData(
-    APIRoutesPaths.RneDirigeants,
+    APIRoutesPaths.EspaceAgentDirigeantsProtected,
     uniteLegale.siren,
     session
   );
 
   return (
     <AsyncDataSectionClient
-      id="dirigeants-section"
+      id="dirigeants-section-protected"
       title="Dirigeant(s)"
-      sources={[EAdministration.INPI]}
+      sources={[EAdministration.INPI, EAdministration.INFOGREFFE]}
       data={dirigeants}
-      isProtected={false}
+      isProtected={true}
       notFoundInfo={
         <>
           Cette structure n’est pas enregistrée au{' '}
@@ -45,6 +50,12 @@ export default function DirigeantsSection({ uniteLegale, session }: IProps) {
         return (
           <>
             {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}
+            <Info>
+              Ces informations proviennent du RNE et sont issues d‘une
+              comparaison entre Infogreffe (qui procure les dates de naissance
+              complètes) et l‘INPI.
+            </Info>
+
             {dirigeants.data.length === 0 ? (
               <p>
                 Cette entreprise est enregistrée au{' '}
@@ -67,7 +78,7 @@ export default function DirigeantsSection({ uniteLegale, session }: IProps) {
                   &nbsp;:
                 </p>
 
-                <DirigeantsContent
+                <DirigeantsContentProtected
                   dirigeants={dirigeants}
                   uniteLegale={uniteLegale}
                 />

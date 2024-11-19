@@ -4,6 +4,7 @@ import { APINotRespondingFactory } from '#models/api-not-responding';
 import { FetchRessourceException, IExceptionContext } from '#models/exceptions';
 import {
   IDirigeants,
+  IDirigeantsAfterInpiIgMerge,
   IEtatCivil,
   IPersonneMorale,
   IRole,
@@ -33,7 +34,7 @@ export function handleApiEntrepriseError(
 export const mergeDirigeants = (
   dirigeantsRCS: IDirigeants,
   dirigeantsRNE: IDirigeants
-): IDirigeants => {
+): IDirigeantsAfterInpiIgMerge => {
   const mergedDirigeants: Record<string, IEtatCivil | IPersonneMorale> = {};
   const mergedRoles: Record<string, Record<string, IRole>> = {};
 
