@@ -15,7 +15,7 @@ type IDirigeantContentProps = {
   uniteLegale: IUniteLegale;
 };
 
-const dataSourceTooltip = ({
+const DisambiguationTooltip = ({
   dataType,
   isInIg,
   isInInpi,
@@ -25,27 +25,24 @@ const dataSourceTooltip = ({
   isInInpi?: boolean;
 }) => {
   if (!isInIg && !isInInpi) {
-    return <></>;
+    return null;
   }
 
   return (
     <>
+      <br />
+      {'('}
       {!isInIg && (
-        <>
-          {' '}
-          <FAQLink tooltipLabel={<></>}>
-            Ce {dataType} n‘apparait pas dans les données d‘Infogreffe.
-          </FAQLink>
-        </>
+        <FAQLink tooltipLabel="incohérence possible">
+          Ce {dataType} n‘apparait pas dans les données d‘Infogreffe.
+        </FAQLink>
       )}
       {!isInInpi && (
-        <>
-          {' '}
-          <FAQLink tooltipLabel={<></>}>
-            Ce {dataType} n‘apparait pas dans les données de l‘INPI.
-          </FAQLink>
-        </>
+        <FAQLink tooltipLabel="incohérence possible">
+          Ce {dataType} n‘apparait pas dans les données de l‘INPI.
+        </FAQLink>
       )}
+      {')'}
     </>
   );
 };
@@ -60,10 +57,11 @@ export default function DirigeantsContent({
         dirigeant.roles?.map((role) => (
           <>
             <span>{role.label}</span>
-            {dataSourceTooltip({
-              ...role,
-              dataType: 'rôle',
-            })}
+            <DisambiguationTooltip
+              dataType="rôle"
+              isInIg={role.isInIg}
+              isInInpi={role.isInInpi}
+            />
           </>
         )) || <>{dirigeant.role}</>,
         <>
@@ -78,12 +76,17 @@ export default function DirigeantsContent({
           ) : (
             ''
           )}
-          <br />
-          {dirigeant.natureJuridique}
-          {dataSourceTooltip({
-            ...dirigeant,
-            dataType: 'dirigeant',
-          })}
+          {dirigeant.natureJuridique && (
+            <>
+              <br />
+              {dirigeant.natureJuridique}
+            </>
+          )}
+          <DisambiguationTooltip
+            dataType="dirigeant"
+            isInIg={dirigeant.isInIg}
+            isInInpi={dirigeant.isInInpi}
+          />
         </>,
       ];
 
@@ -105,10 +108,11 @@ export default function DirigeantsContent({
         dirigeant.roles?.map((role) => (
           <>
             <span>{role.label}</span>
-            {dataSourceTooltip({
-              ...role,
-              dataType: 'rôle',
-            })}
+            <DisambiguationTooltip
+              dataType="rôle"
+              isInIg={role.isInIg}
+              isInInpi={role.isInInpi}
+            />
           </>
         )) || <>{dirigeant.role}</>,
         <>
@@ -122,10 +126,11 @@ export default function DirigeantsContent({
                 dirigeant.lieuNaissance ? `, à ${dirigeant.lieuNaissance}` : ''
               }`
             : ''}
-          {dataSourceTooltip({
-            ...dirigeant,
-            dataType: 'dirigeant',
-          })}
+          <DisambiguationTooltip
+            dataType="dirigeant"
+            isInIg={dirigeant.isInIg}
+            isInInpi={dirigeant.isInInpi}
+          />
         </>,
         ...(dirigeant.dateNaissancePartial
           ? [
