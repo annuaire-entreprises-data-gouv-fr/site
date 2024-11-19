@@ -8,22 +8,11 @@ import {
   IPersonneMoraleAfterInpiIgMerge,
 } from '#models/rne/types';
 import { formatDateLong, formatDatePartial, formatIntFr } from '#utils/helpers';
+import { isPersonneMorale } from '../is-personne-morale';
 
 type IDirigeantContentProps = {
   dirigeants: IDirigeantsWithMetadataAfterInpiIgMerge;
   uniteLegale: IUniteLegale;
-};
-
-const isPersonneMorale = (
-  toBeDetermined: IEtatCivilAfterInpiIgMerge | IPersonneMoraleAfterInpiIgMerge
-): toBeDetermined is IPersonneMoraleAfterInpiIgMerge => {
-  if (
-    (toBeDetermined as IPersonneMoraleAfterInpiIgMerge).siren ||
-    (toBeDetermined as IPersonneMoraleAfterInpiIgMerge).denomination
-  ) {
-    return true;
-  }
-  return false;
 };
 
 const DisambiguationTooltip = ({
