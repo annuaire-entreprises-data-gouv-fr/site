@@ -47,16 +47,9 @@ export default function DirigeantsSection({
             {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}
             {isProtected ? (
               <Info>
-                Ces informations proviennent en partie d’
-                <a
-                  rel="noopener"
-                  target="_blank"
-                  href={`${routes.infogreffe.portail.home}`}
-                  aria-label="Visiter le site d’Infogreffe, nouvelle fenêtre"
-                >
-                  Infogreffe
-                </a>{' '}
-                et incluent la date de naissance des dirigeant(e)s.
+                Ces informations proviennent du RNE et sont issues d‘une
+                comparaison entre Infogreffe (qui procure les dates de naissance
+                complètes) et l‘INPI.
               </Info>
             ) : null}
             {dirigeants.data.length === 0 ? (
