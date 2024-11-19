@@ -2,11 +2,14 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
+  isAPI404,
+  isAPINotResponding,
 } from '#models/api-not-responding';
-import { hasAnyError, isDataSuccess } from '#models/data-fetching';
+import { InternalError } from '#models/exceptions';
 import { getDirigeantsRNE } from '#models/rne/dirigeants';
 import { IDirigeantsWithMetadata } from '#models/rne/types';
 import { verifySiren } from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
 import { getMandatairesRCS } from './mandataires-rcs';
 import { mergeDirigeants } from './utils';
 
@@ -20,21 +23,39 @@ export const getDirigeantsProtected = async (
     getDirigeantsRNE(siren),
   ]);
 
-  const dirigeantMerged = mergeDirigeants(
-    isDataSuccess(dirigeantsRCS) ? dirigeantsRCS : [],
-    isDataSuccess(dirigeantsRNE) ? dirigeantsRNE.data : []
-  );
-
-  if (hasAnyError(dirigeantsRCS) && hasAnyError(dirigeantsRNE)) {
+  if (isAPI404(dirigeantsRCS) && isAPI404(dirigeantsRNE)) {
     return APINotRespondingFactory(EAdministration.INPI, 404);
   }
 
-  return {
-    data: dirigeantMerged,
-    metadata: {
-      isFallback: Boolean(
-        isDataSuccess(dirigeantsRNE) && dirigeantsRNE.metadata.isFallback
-      ),
-    },
-  };
+  if (isAPINotResponding(dirigeantsRCS) && isAPINotResponding(dirigeantsRNE)) {
+    return APINotRespondingFactory(EAdministration.INPI, 500);
+  }
+
+  try {
+    const dirigeantMerged = mergeDirigeants(
+      !isAPINotResponding(dirigeantsRCS) ? dirigeantsRCS : [],
+      !isAPINotResponding(dirigeantsRNE) ? dirigeantsRNE.data : []
+    );
+
+    return {
+      data: dirigeantMerged,
+      metadata: {
+        isFallback: Boolean(
+          !isAPINotResponding(dirigeantsRNE) &&
+            dirigeantsRNE.metadata.isFallback
+        ),
+      },
+    };
+  } catch (e: any) {
+    logErrorInSentry(
+      new InternalError({
+        message: 'mergeDirigeants',
+        cause: e,
+        context: {
+          details: siren,
+        },
+      })
+    );
+    return APINotRespondingFactory(EAdministration.INPI, 500);
+  }
 };
