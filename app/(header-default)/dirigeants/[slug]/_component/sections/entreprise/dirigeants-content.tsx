@@ -6,8 +6,9 @@ import {
   IEtatCivil,
   IPersonneMorale,
 } from '#models/rne/types';
-import { formatDateLong, formatDatePartial, formatIntFr } from '#utils/helpers';
 import { isPersonneMorale } from '../is-personne-morale';
+import EtatCivilInfos from './EtatCivilInfos';
+import PersonneMoraleInfos from './PersonneMoraleInfos';
 
 type IDirigeantContentProps = {
   dirigeants: IDirigeantsWithMetadata;
@@ -22,25 +23,7 @@ export default function DirigeantsContent({
     if (isPersonneMorale(dirigeant)) {
       const infos = [
         <>{dirigeant.role}</>,
-        <>
-          <strong>{dirigeant.denomination}</strong>
-          {dirigeant.siren ? (
-            <>
-              {' - '}
-              <a href={`/entreprise/${dirigeant.siren}`}>
-                {formatIntFr(dirigeant.siren)}
-              </a>
-            </>
-          ) : (
-            ''
-          )}
-          {dirigeant.natureJuridique && (
-            <>
-              <br />
-              {dirigeant.natureJuridique}
-            </>
-          )}
-        </>,
+        <PersonneMoraleInfos dirigeant={dirigeant} />,
       ];
 
       if (dirigeant.siren) {
@@ -53,42 +36,24 @@ export default function DirigeantsContent({
       }
       return infos;
     } else {
-      const nomComplet = `${dirigeant.prenom || ''}${
-        dirigeant.prenom && dirigeant.nom ? ' ' : ''
-      }${(dirigeant.nom || '').toUpperCase()}`;
-
-      return [
+      const infos = [
         <>{dirigeant.role}</>,
-        <>
-          {nomComplet}
-          {dirigeant.dateNaissance || dirigeant.dateNaissancePartial
-            ? `, né(e) ${
-                dirigeant.dateNaissance
-                  ? 'le ' + formatDateLong(dirigeant.dateNaissance)
-                  : 'en ' + formatDatePartial(dirigeant.dateNaissancePartial)
-              }${
-                dirigeant.lieuNaissance ? `, à ${dirigeant.lieuNaissance}` : ''
-              }`
-            : ''}
-        </>,
-        ...(dirigeant.dateNaissancePartial
-          ? [
-              <SeePersonPageLink
-                person={dirigeant}
-                sirenFrom={uniteLegale.siren}
-              />,
-            ]
-          : []),
+        <EtatCivilInfos dirigeant={dirigeant} />,
       ];
+
+      if (dirigeant.dateNaissancePartial) {
+        infos.push(
+          <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />
+        );
+      }
+      return infos;
     }
   };
 
   return (
-    <>
-      <FullTable
-        head={['Role', 'Details', 'Action']}
-        body={dirigeants.data.map((dirigeant) => formatDirigeant(dirigeant))}
-      />
-    </>
+    <FullTable
+      head={['Role', 'Details', 'Action']}
+      body={dirigeants.data.map((dirigeant) => formatDirigeant(dirigeant))}
+    />
   );
 }

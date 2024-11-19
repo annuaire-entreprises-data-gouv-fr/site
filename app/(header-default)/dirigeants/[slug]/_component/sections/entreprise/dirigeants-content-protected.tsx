@@ -7,8 +7,9 @@ import {
   IEtatCivilAfterInpiIgMerge,
   IPersonneMoraleAfterInpiIgMerge,
 } from '#models/rne/types';
-import { formatDateLong, formatDatePartial, formatIntFr } from '#utils/helpers';
 import { isPersonneMorale } from '../is-personne-morale';
+import EtatCivilInfos from './EtatCivilInfos';
+import PersonneMoraleInfos from './PersonneMoraleInfos';
 
 type IDirigeantContentProps = {
   dirigeants: IDirigeantsWithMetadataAfterInpiIgMerge;
@@ -67,23 +68,7 @@ export default function DirigeantsContentProtected({
           </>
         )),
         <>
-          <strong>{dirigeant.denomination}</strong>
-          {dirigeant.siren ? (
-            <>
-              {' - '}
-              <a href={`/entreprise/${dirigeant.siren}`}>
-                {formatIntFr(dirigeant.siren)}
-              </a>
-            </>
-          ) : (
-            ''
-          )}
-          {dirigeant.natureJuridique && (
-            <>
-              <br />
-              {dirigeant.natureJuridique}
-            </>
-          )}
+          <PersonneMoraleInfos dirigeant={dirigeant} />,
           <DisambiguationTooltip
             dataType="dirigeant"
             isInIg={dirigeant.isInIg}
@@ -102,11 +87,7 @@ export default function DirigeantsContentProtected({
       }
       return infos;
     } else {
-      const nomComplet = `${dirigeant.prenom || ''}${
-        dirigeant.prenom && dirigeant.nom ? ' ' : ''
-      }${(dirigeant.nom || '').toUpperCase()}`;
-
-      return [
+      const infos = [
         dirigeant.roles?.map((role) => (
           <>
             <span>{role.label}</span>
@@ -118,40 +99,28 @@ export default function DirigeantsContentProtected({
           </>
         )),
         <>
-          {nomComplet}
-          {dirigeant.dateNaissance || dirigeant.dateNaissancePartial
-            ? `, né(e) ${
-                dirigeant.dateNaissance
-                  ? 'le ' + formatDateLong(dirigeant.dateNaissance)
-                  : 'en ' + formatDatePartial(dirigeant.dateNaissancePartial)
-              }${
-                dirigeant.lieuNaissance ? `, à ${dirigeant.lieuNaissance}` : ''
-              }`
-            : ''}
+          <EtatCivilInfos dirigeant={dirigeant} />
           <DisambiguationTooltip
             dataType="dirigeant"
             isInIg={dirigeant.isInIg}
             isInInpi={dirigeant.isInInpi}
           />
         </>,
-        ...(dirigeant.dateNaissancePartial
-          ? [
-              <SeePersonPageLink
-                person={dirigeant}
-                sirenFrom={uniteLegale.siren}
-              />,
-            ]
-          : []),
       ];
+
+      if (dirigeant.dateNaissancePartial) {
+        infos.push(
+          <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />
+        );
+      }
+      return infos;
     }
   };
 
   return (
-    <>
-      <FullTable
-        head={['Role', 'Details', 'Action']}
-        body={dirigeants.data.map((dirigeant) => formatDirigeant(dirigeant))}
-      />
-    </>
+    <FullTable
+      head={['Role', 'Details', 'Action']}
+      body={dirigeants.data.map((dirigeant) => formatDirigeant(dirigeant))}
+    />
   );
 }
