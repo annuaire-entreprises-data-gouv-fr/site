@@ -11,7 +11,7 @@ import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import DirigeantsContentProtected from './dirigeants-content-protected';
+import DirigeantsContentProtected from './content';
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -50,10 +50,12 @@ export default function DirigeantsSectionProtected({
         return (
           <>
             {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}
+
             <Info>
               Ces informations proviennent du RNE et sont issues d‘une
-              comparaison entre Infogreffe (qui procure les dates de naissance
-              complètes) et l‘INPI.
+              comparaison entre les données issues de l’
+              <INPI /> et celles d’Infogreffe (qui procure les dates de
+              naissance complètes).
             </Info>
 
             {dirigeants.data.length === 0 ? (

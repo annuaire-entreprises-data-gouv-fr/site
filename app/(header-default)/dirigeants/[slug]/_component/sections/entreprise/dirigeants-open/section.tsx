@@ -9,7 +9,7 @@ import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import DirigeantsContent from './dirigeants-content';
+import DirigeantsContent from './content';
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -64,7 +64,13 @@ export default function DirigeantsSection({ uniteLegale, session }: IProps) {
                     uniteLegale={uniteLegale}
                     siteName="le site de l’INPI"
                   />
-                  &nbsp;:
+                  .
+                </p>
+                <p>
+                  <strong>NB :</strong> si vous êtes agent public, vous pouvez
+                  accéder à l’etat civil complet (lieu et date de naissance
+                  complète) en vous connectant à{' '}
+                  <a href="/lp/agent-public">l’espace agent public</a>.
                 </p>
 
                 <DirigeantsContent
