@@ -38,7 +38,13 @@ const createUniqueKey = (dirigeant: IEtatCivil | IPersonneMorale): string => {
     return `pm-${dirigeant.siren}`;
   } else {
     const cleanedPrenom = removeSpecialChars(dirigeant.prenom).toUpperCase();
-    const cleanedNom = removeSpecialChars(dirigeant.nom).toUpperCase();
+
+    const hasNomDeNaissanceMatch = dirigeant.nom.match(/\(([^)]+)\)/);
+    const nom = hasNomDeNaissanceMatch
+      ? hasNomDeNaissanceMatch[1]
+      : dirigeant.nom;
+    const cleanedNom = removeSpecialChars(nom).toUpperCase();
+
     const partialDate =
       dirigeant.dateNaissancePartial ||
       dirigeant.dateNaissance?.slice(0, 7) ||
