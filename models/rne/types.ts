@@ -29,6 +29,12 @@ export interface IEtatCivil {
   nationalite?: string;
 }
 
+export type IEtatCivilMergedIGInpi = IEtatCivil & {
+  roles: IRole[];
+  isInInpi?: boolean;
+  isInIg?: boolean;
+};
+
 export interface IPersonneMorale {
   siren: string;
   denomination: string;
@@ -36,20 +42,47 @@ export interface IPersonneMorale {
   role: string;
 }
 
-export interface IObservations {
-  data: {
-    numObservation: string;
-    dateAjout: string;
-    description: string;
-  }[];
+export type IPersonneMoraleMergedIGInpi = IPersonneMorale & {
+  isInInpi?: boolean;
+  isInIg?: boolean;
+  roles?: IRole[];
+};
+
+export type IObservations = {
+  numObservation: string;
+  dateAjout: string;
+  description: string;
+}[];
+
+export interface IObservationsWithMetadata {
+  data: IObservations;
   metadata: {
     isFallback: boolean;
   };
 }
 
-export interface IDirigeants {
-  data: (IEtatCivil | IPersonneMorale)[];
-  metadata?: {
+export type IDirigeants = (IEtatCivil | IPersonneMorale)[];
+export type IDirigeantsMergedIGInpi = (
+  | IEtatCivilMergedIGInpi
+  | IPersonneMoraleMergedIGInpi
+)[];
+
+export interface IDirigeantsWithMetadata {
+  data: IDirigeants;
+  metadata: {
     isFallback: boolean;
   };
+}
+
+export interface IDirigeantsWithMetadataMergedIGInpi {
+  data: IDirigeantsMergedIGInpi;
+  metadata: {
+    isFallback: boolean;
+  };
+}
+
+export interface IRole {
+  label: string;
+  isInInpi?: boolean;
+  isInIg?: boolean;
 }

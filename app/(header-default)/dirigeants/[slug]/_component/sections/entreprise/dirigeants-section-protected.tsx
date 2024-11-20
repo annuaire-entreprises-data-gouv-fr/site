@@ -1,3 +1,5 @@
+'use client';
+
 import routes from '#clients/routes';
 import { Info } from '#components-ui/alerts';
 import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
@@ -6,38 +8,36 @@ import { AsyncDataSectionClient } from '#components/section/data-section/client'
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import { IDirigeantsFetching } from '.';
-import { DirigeantContent } from './dirigeant-content';
+import { ISession } from '#models/user/session';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import DirigeantsContentProtected from './dirigeants-content-protected';
 
 type IProps = {
-  dirigeants: IDirigeantsFetching;
   uniteLegale: IUniteLegale;
-  isProtected: boolean;
-  warning: JSX.Element;
+  session: ISession | null;
 };
 
 /**
- * Dirigeants section
+ * Dirigeants section protected
  */
-function DirigeantsSection({
+export default function DirigeantsSectionProtected({
   uniteLegale,
-  dirigeants,
-  isProtected,
-  warning,
+  session,
 }: IProps) {
-  const sources = [EAdministration.INPI];
-
-  if (isProtected) {
-    sources.push(EAdministration.INFOGREFFE);
-  }
+  const dirigeants = useAPIRouteData(
+    APIRoutesPaths.EspaceAgentDirigeantsProtected,
+    uniteLegale.siren,
+    session
+  );
 
   return (
     <AsyncDataSectionClient
-      id="rne-dirigeants"
+      id="dirigeants-section-protected"
       title="Dirigeant(s)"
-      sources={sources}
+      sources={[EAdministration.INPI, EAdministration.INFOGREFFE]}
       data={dirigeants}
-      isProtected={isProtected}
+      isProtected={true}
       notFoundInfo={
         <>
           Cette structure n’est pas enregistrée au{' '}
@@ -50,21 +50,12 @@ function DirigeantsSection({
         return (
           <>
             {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}
-            {warning ? warning : null}
-            {isProtected ? (
-              <Info>
-                Ces informations proviennent d’
-                <a
-                  rel="noopener"
-                  target="_blank"
-                  href={`${routes.infogreffe.portail.home}`}
-                  aria-label="Visiter le site d’Infogreffe, nouvelle fenêtre"
-                >
-                  Infogreffe
-                </a>{' '}
-                et incluent la date de naissance des dirigeant(e)s.
-              </Info>
-            ) : null}
+            <Info>
+              Ces informations proviennent du RNE et sont issues d‘une
+              comparaison entre Infogreffe (qui procure les dates de naissance
+              complètes) et l‘INPI.
+            </Info>
+
             {dirigeants.data.length === 0 ? (
               <p>
                 Cette entreprise est enregistrée au{' '}
@@ -87,7 +78,7 @@ function DirigeantsSection({
                   &nbsp;:
                 </p>
 
-                <DirigeantContent
+                <DirigeantsContentProtected
                   dirigeants={dirigeants}
                   uniteLegale={uniteLegale}
                 />
@@ -99,5 +90,3 @@ function DirigeantsSection({
     </AsyncDataSectionClient>
   );
 }
-
-export default DirigeantsSection;

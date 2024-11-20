@@ -1,3 +1,5 @@
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import BreakPageForPrint from '#components-ui/print-break-page';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -15,7 +17,10 @@ import extractParamsAppRouter, {
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import DirigeantsAssociationSection from './_component/sections/association/dirigeants';
-import { DirigeantInformation } from './_component/sections/entreprise';
+import BeneficiairesSection from './_component/sections/entreprise/beneficiaires';
+import DirigeantsSection from './_component/sections/entreprise/dirigeants-section';
+import DirigeantsSectionProtected from './_component/sections/entreprise/dirigeants-section-protected';
+import DirigeantSummary from './_component/sections/entreprise/summary';
 import ResponsablesServicePublicSection from './_component/sections/service-public';
 
 export const generateMetadata = async (
@@ -41,6 +46,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
   const session = await getSession();
+  const isProtected = hasRights(session, ApplicationRights.mandatairesRCS);
 
   return (
     <>
@@ -50,6 +56,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
           ficheType={FICHE.DIRIGEANTS}
           session={session}
         />
+        <DirigeantSummary uniteLegale={uniteLegale} />
         {isServicePublic(uniteLegale) ? (
           <ResponsablesServicePublicSection uniteLegale={uniteLegale} />
         ) : !estDiffusible(uniteLegale) &&
@@ -61,7 +68,19 @@ const DirigeantsPage = async (props: AppRouterProps) => {
             session={session}
           />
         ) : (
-          <DirigeantInformation uniteLegale={uniteLegale} session={session} />
+          <>
+            {isProtected ? (
+              <DirigeantsSectionProtected
+                uniteLegale={uniteLegale}
+                session={session}
+              />
+            ) : (
+              <DirigeantsSection uniteLegale={uniteLegale} session={session} />
+            )}
+            <BreakPageForPrint />
+            <HorizontalSeparator />
+            <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
+          </>
         )}
       </div>
     </>

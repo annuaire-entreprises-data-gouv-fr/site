@@ -8,11 +8,5 @@ import { IEtatCivil, IPersonneMorale } from '#models/rne/types';
 export const isPersonneMorale = (
   toBeDetermined: IEtatCivil | IPersonneMorale
 ): toBeDetermined is IPersonneMorale => {
-  if (
-    (toBeDetermined as IPersonneMorale).siren ||
-    (toBeDetermined as IPersonneMorale).denomination
-  ) {
-    return true;
-  }
-  return false;
+  return 'siren' in toBeDetermined || 'denomination' in toBeDetermined;
 };
