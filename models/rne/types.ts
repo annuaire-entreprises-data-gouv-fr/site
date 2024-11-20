@@ -31,8 +31,8 @@ export interface IEtatCivil {
 
 export type IEtatCivilMergedIGInpi = IEtatCivil & {
   roles: IRole[];
-  isInInpi?: boolean;
-  isInIg?: boolean;
+  isInInpi: boolean;
+  isInIg: boolean;
 };
 
 export interface IPersonneMorale {
@@ -43,9 +43,9 @@ export interface IPersonneMorale {
 }
 
 export type IPersonneMoraleMergedIGInpi = IPersonneMorale & {
-  isInInpi?: boolean;
-  isInIg?: boolean;
-  roles?: IRole[];
+  roles: IRole[];
+  isInInpi: boolean;
+  isInIg: boolean;
 };
 
 export type IObservations = {

@@ -7,6 +7,7 @@ import {
   IEtatCivilMergedIGInpi,
   IPersonneMoraleMergedIGInpi,
 } from '#models/rne/types';
+import React from 'react';
 import { isPersonneMorale } from '../../is-personne-morale';
 import EtatCivilInfos from '../EtatCivilInfos';
 import PersonneMoraleInfos from '../PersonneMoraleInfos';
@@ -25,7 +26,7 @@ const DisambiguationTooltip = ({
   isInIg?: boolean;
   isInInpi?: boolean;
 }) => {
-  if (!isInIg && !isInInpi) {
+  if (isInIg && isInInpi) {
     return null;
   }
 
@@ -57,15 +58,16 @@ export default function DirigeantsContentProtected({
   ) => {
     if (isPersonneMorale(dirigeant)) {
       const infos = [
-        dirigeant.roles?.map((role) => (
-          <>
+        dirigeant.roles?.map((role, index) => (
+          <React.Fragment key={index}>
             <span>{role.label}</span>
             <DisambiguationTooltip
               dataType="rôle"
               isInIg={role.isInIg}
               isInInpi={role.isInInpi}
             />
-          </>
+            {index < dirigeant.roles.length - 1 && ', '}
+          </React.Fragment>
         )),
         <>
           <PersonneMoraleInfos dirigeant={dirigeant} />,
@@ -88,15 +90,16 @@ export default function DirigeantsContentProtected({
       return infos;
     } else {
       const infos = [
-        dirigeant.roles?.map((role) => (
-          <>
+        dirigeant.roles?.map((role, index) => (
+          <React.Fragment key={index}>
             <span>{role.label}</span>
             <DisambiguationTooltip
               dataType="rôle"
               isInIg={role.isInIg}
               isInInpi={role.isInInpi}
             />
-          </>
+            {index < dirigeant.roles.length - 1 && ', '}
+          </React.Fragment>
         )),
         <>
           <EtatCivilInfos dirigeant={dirigeant} />
