@@ -49,9 +49,7 @@ const sentryBuildOptions: SentryBuildOptions = {
   },
   telemetry: false,
   widenClientFileUpload: true,
-  sourcemaps: {
-    disable: DISABLE_SOURCEMAP_UPLOAD,
-  },
+
   release: {
     create: true,
     finalize: true,
@@ -63,6 +61,6 @@ const sentryBuildOptions: SentryBuildOptions = {
   },
 };
 
-export default WITH_SENTRY
+export default WITH_SENTRY && !DISABLE_SOURCEMAP_UPLOAD
   ? withSentryConfig(nextConfig, sentryBuildOptions)
   : nextConfig;
