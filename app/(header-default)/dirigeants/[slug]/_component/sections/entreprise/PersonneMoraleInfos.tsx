@@ -1,13 +1,10 @@
-import {
-  IPersonneMorale,
-  IPersonneMoraleAfterInpiIgMerge,
-} from '#models/rne/types';
+import { IPersonneMorale } from '#models/rne/types';
 import { formatIntFr } from '#utils/helpers';
 
 export default function PersonneMoraleInfos({
   dirigeant,
 }: {
-  dirigeant: IPersonneMorale | IPersonneMoraleAfterInpiIgMerge;
+  dirigeant: IPersonneMorale;
 }) {
   return (
     <>

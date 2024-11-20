@@ -4,9 +4,11 @@ import { APINotRespondingFactory } from '#models/api-not-responding';
 import { FetchRessourceException, IExceptionContext } from '#models/exceptions';
 import {
   IDirigeants,
-  IDirigeantsAfterInpiIgMerge,
+  IDirigeantsMergedIGInpi,
   IEtatCivil,
+  IEtatCivilMergedIGInpi,
   IPersonneMorale,
+  IPersonneMoraleMergedIGInpi,
   IRole,
 } from '#models/rne/types';
 import { removeSpecialChars } from '#utils/helpers';
@@ -31,31 +33,35 @@ export function handleApiEntrepriseError(
   return APINotRespondingFactory(EAdministration.DINUM, e.status || 500);
 }
 
+const createUniqueKey = (dirigeant: IEtatCivil | IPersonneMorale): string => {
+  if ('siren' in dirigeant) {
+    return `pm-${dirigeant.siren}`;
+  } else {
+    const cleanedPrenom = removeSpecialChars(dirigeant.prenom).toUpperCase();
+    const cleanedNom = removeSpecialChars(dirigeant.nom).toUpperCase();
+    const partialDate =
+      dirigeant.dateNaissancePartial ||
+      dirigeant.dateNaissance?.slice(0, 7) ||
+      '';
+    return `pf-${cleanedPrenom}-${cleanedNom}-${partialDate}`;
+  }
+};
+
 export const mergeDirigeants = (
   dirigeantsRCS: IDirigeants,
   dirigeantsRNE: IDirigeants
-): IDirigeantsAfterInpiIgMerge => {
-  const mergedDirigeants: Record<string, IEtatCivil | IPersonneMorale> = {};
+): IDirigeantsMergedIGInpi => {
+  const mergedDirigeants: Record<
+    string,
+    IEtatCivilMergedIGInpi | IPersonneMoraleMergedIGInpi
+  > = {};
   const mergedRoles: Record<string, Record<string, IRole>> = {};
-
-  const createUniqueKey = (dirigeant: IEtatCivil | IPersonneMorale): string => {
-    if ('siren' in dirigeant) {
-      return `pm-${dirigeant.siren}`;
-    } else {
-      const cleanedPrenom = removeSpecialChars(dirigeant.prenom).toUpperCase();
-      const cleanedNom = removeSpecialChars(dirigeant.nom).toUpperCase();
-      const partialDate =
-        dirigeant.dateNaissancePartial ||
-        dirigeant.dateNaissance?.slice(0, 7) ||
-        '';
-      return `pf-${cleanedPrenom}-${cleanedNom}-${partialDate}`;
-    }
-  };
 
   const dirigeants = [
     ...dirigeantsRCS.map((d) => ({ ...d, isInIg: true, isInInpi: false })),
     ...dirigeantsRNE.map((d) => ({ ...d, isInIg: false, isInInpi: true })),
-  ];
+  ] as (IEtatCivilMergedIGInpi | IPersonneMoraleMergedIGInpi)[];
+
   for (const dirigeant of dirigeants) {
     const { isInInpi, isInIg, role } = dirigeant;
     const currentDirigeantKey = createUniqueKey(dirigeant);

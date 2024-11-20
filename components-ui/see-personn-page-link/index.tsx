@@ -1,4 +1,4 @@
-import { IEtatCivil, IEtatCivilAfterInpiIgMerge } from '#models/rne/types';
+import { IEtatCivil, IEtatCivilMergedIGInpi } from '#models/rne/types';
 import { Siren } from '#utils/helpers';
 
 export const SeePersonPageLink = ({
@@ -6,7 +6,7 @@ export const SeePersonPageLink = ({
   label,
   sirenFrom,
 }: {
-  person: IEtatCivil | IEtatCivilAfterInpiIgMerge;
+  person: IEtatCivil | IEtatCivilMergedIGInpi;
   label?: string;
   sirenFrom?: Siren;
 }) => (

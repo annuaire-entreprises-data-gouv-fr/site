@@ -1,10 +1,10 @@
-import { IEtatCivil, IEtatCivilAfterInpiIgMerge } from '#models/rne/types';
+import { IEtatCivil } from '#models/rne/types';
 import { formatDateLong, formatDatePartial } from '#utils/helpers';
 
 export default function EtatCivilInfos({
   dirigeant,
 }: {
-  dirigeant: IEtatCivil | IEtatCivilAfterInpiIgMerge;
+  dirigeant: IEtatCivil;
 }) {
   const nomComplet = `${dirigeant.prenom || ''}${
     dirigeant.prenom && dirigeant.nom ? ' ' : ''

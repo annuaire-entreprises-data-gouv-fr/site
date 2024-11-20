@@ -27,12 +27,12 @@ export interface IEtatCivil {
   dateNaissancePartial?: string;
   dateNaissance?: string;
   nationalite?: string;
-  isInInpi?: boolean;
-  isInIg?: boolean;
 }
 
-export type IEtatCivilAfterInpiIgMerge = Omit<IEtatCivil, 'role'> & {
+export type IEtatCivilMergedIGInpi = IEtatCivil & {
   roles: IRole[];
+  isInInpi?: boolean;
+  isInIg?: boolean;
 };
 
 export interface IPersonneMorale {
@@ -40,12 +40,12 @@ export interface IPersonneMorale {
   denomination: string;
   natureJuridique: string | null;
   role: string;
-  isInInpi?: boolean;
-  isInIg?: boolean;
 }
 
-export type IPersonneMoraleAfterInpiIgMerge = Omit<IPersonneMorale, 'role'> & {
-  roles: IRole[];
+export type IPersonneMoraleMergedIGInpi = IPersonneMorale & {
+  isInInpi?: boolean;
+  isInIg?: boolean;
+  roles?: IRole[];
 };
 
 export type IObservations = {
@@ -62,9 +62,9 @@ export interface IObservationsWithMetadata {
 }
 
 export type IDirigeants = (IEtatCivil | IPersonneMorale)[];
-export type IDirigeantsAfterInpiIgMerge = (
-  | IEtatCivilAfterInpiIgMerge
-  | IPersonneMoraleAfterInpiIgMerge
+export type IDirigeantsMergedIGInpi = (
+  | IEtatCivilMergedIGInpi
+  | IPersonneMoraleMergedIGInpi
 )[];
 
 export interface IDirigeantsWithMetadata {
@@ -74,8 +74,8 @@ export interface IDirigeantsWithMetadata {
   };
 }
 
-export interface IDirigeantsWithMetadataAfterInpiIgMerge {
-  data: IDirigeantsAfterInpiIgMerge;
+export interface IDirigeantsWithMetadataMergedIGInpi {
+  data: IDirigeantsMergedIGInpi;
   metadata: {
     isFallback: boolean;
   };

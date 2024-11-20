@@ -3,16 +3,16 @@ import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
 import { FullTable } from '#components/table/full';
 import { IUniteLegale } from '#models/core/types';
 import {
-  IDirigeantsWithMetadataAfterInpiIgMerge,
-  IEtatCivilAfterInpiIgMerge,
-  IPersonneMoraleAfterInpiIgMerge,
+  IDirigeantsWithMetadataMergedIGInpi,
+  IEtatCivilMergedIGInpi,
+  IPersonneMoraleMergedIGInpi,
 } from '#models/rne/types';
 import { isPersonneMorale } from '../is-personne-morale';
 import EtatCivilInfos from './EtatCivilInfos';
 import PersonneMoraleInfos from './PersonneMoraleInfos';
 
 type IDirigeantContentProps = {
-  dirigeants: IDirigeantsWithMetadataAfterInpiIgMerge;
+  dirigeants: IDirigeantsWithMetadataMergedIGInpi;
   uniteLegale: IUniteLegale;
 };
 
@@ -53,7 +53,7 @@ export default function DirigeantsContentProtected({
   uniteLegale,
 }: IDirigeantContentProps) {
   const formatDirigeant = (
-    dirigeant: IEtatCivilAfterInpiIgMerge | IPersonneMoraleAfterInpiIgMerge
+    dirigeant: IEtatCivilMergedIGInpi | IPersonneMoraleMergedIGInpi
   ) => {
     if (isPersonneMorale(dirigeant)) {
       const infos = [

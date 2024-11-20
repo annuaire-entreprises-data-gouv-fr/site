@@ -1,9 +1,4 @@
-import {
-  IEtatCivil,
-  IEtatCivilAfterInpiIgMerge,
-  IPersonneMorale,
-  IPersonneMoraleAfterInpiIgMerge,
-} from '#models/rne/types';
+import { IEtatCivil, IPersonneMorale } from '#models/rne/types';
 
 /**
  * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
@@ -11,11 +6,7 @@ import {
  * @returns
  */
 export const isPersonneMorale = (
-  toBeDetermined:
-    | IEtatCivil
-    | IPersonneMorale
-    | IEtatCivilAfterInpiIgMerge
-    | IPersonneMoraleAfterInpiIgMerge
-): toBeDetermined is IPersonneMorale | IPersonneMoraleAfterInpiIgMerge => {
+  toBeDetermined: IEtatCivil | IPersonneMorale
+): toBeDetermined is IPersonneMorale => {
   return 'siren' in toBeDetermined || 'denomination' in toBeDetermined;
 };

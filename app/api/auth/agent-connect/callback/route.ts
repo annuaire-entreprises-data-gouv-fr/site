@@ -19,7 +19,7 @@ export const GET = withSession(async function callbackRoute(req) {
     const userInfo = await proConnectAuthenticate(req);
     const agent = await getAgent(userInfo);
 
-    // await verifyAgentHabilitation(agent);
+    await verifyAgentHabilitation(agent);
 
     const session = req.session;
     await setAgentSession(agent, session);
