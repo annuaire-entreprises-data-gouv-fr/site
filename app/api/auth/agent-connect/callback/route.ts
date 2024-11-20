@@ -12,6 +12,8 @@ import { NextResponse } from 'next/server';
 import {
   AgentConnectCouldBeAServicePublicException,
   AgentConnectFailedException,
+  AgentConnectMCPNoSiretException,
+  AgentConnectProviderNoSiretException,
 } from '../agent-connect-types';
 
 export const GET = withSession(async function callbackRoute(req) {
@@ -19,7 +21,7 @@ export const GET = withSession(async function callbackRoute(req) {
     const userInfo = await proConnectAuthenticate(req);
     const agent = await getAgent(userInfo);
 
-    // await verifyAgentHabilitation(agent);
+    await verifyAgentHabilitation(agent);
 
     const session = req.session;
     await setAgentSession(agent, session);
@@ -33,7 +35,11 @@ export const GET = withSession(async function callbackRoute(req) {
       return NextResponse.redirect(getBaseUrl() + '/');
     }
   } catch (e: any) {
-    if (e instanceof AgentConnectFailedException) {
+    if (
+      e instanceof AgentConnectFailedException ||
+      e instanceof AgentConnectProviderNoSiretException ||
+      e instanceof AgentConnectMCPNoSiretException
+    ) {
       logFatalErrorInSentry(e);
     } else {
       logFatalErrorInSentry(new AgentConnectFailedException({ cause: e }));
@@ -60,11 +66,18 @@ const verifyAgentHabilitation = async (agent: IAgentInfo) => {
     return;
   }
 
-  const { isMCP } = agent;
+  if (!agent.siret) {
+    if (agent.isMCP) {
+      throw new AgentConnectMCPNoSiretException(
+        'The user doesn‘t have a siret',
+        agent.userId
+      );
+    }
 
-  // MCP should always return a siret
-  if (isMCP && !agent.siret) {
-    throw new HttpForbiddenError('MCP user must have a siret');
+    throw new AgentConnectProviderNoSiretException(
+      'The provider doesn‘t provide a siret and is not mapped to a siret',
+      agent.idpId
+    );
   }
 
   try {

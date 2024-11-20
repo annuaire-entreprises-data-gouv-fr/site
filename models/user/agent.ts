@@ -1,6 +1,7 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
+import getSiretFromIdpTemporary from './getSiretFromIdpTemporary';
 import { IAgentScope, getAgentScopes } from './scopes';
 
 const isLikelyPrestataire = (domain: string) => {
@@ -79,6 +80,7 @@ export const getAgent = async (
   const familyName = userInfo.family_name ?? '';
   const firstName = userInfo.given_name ?? '';
   const userId = userInfo.sub;
+  const siret = userInfo.siret ?? getSiretFromIdpTemporary(idpId);
 
   return {
     userId,
@@ -88,7 +90,7 @@ export const getAgent = async (
     familyName,
     firstName,
     fullName: familyName ? `${firstName} ${familyName}` : '',
-    siret: userInfo.siret ?? '',
+    siret,
     scopes,
     userType,
     isPrestataire,
