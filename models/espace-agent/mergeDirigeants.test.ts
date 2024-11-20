@@ -154,6 +154,44 @@ describe('mergeDirigeants', () => {
     );
   });
 
+  it('same dirigeant but one with birth name, same role, two sources', () => {
+    const dirigeantsRCS: IDirigeants = [
+      {
+        sexe: 'M',
+        nom: 'Doe',
+        prenom: 'John',
+        prenoms: 'John',
+        role: 'Président',
+        lieuNaissance: 'Paris',
+        dateNaissance: '1980-01-01',
+      },
+    ];
+
+    const dirigeantsRNE: IDirigeants = [
+      {
+        sexe: 'M',
+        nom: 'Smith (Doe)',
+        prenom: 'John',
+        prenoms: 'John',
+        role: 'PRESIDENT',
+        lieuNaissance: 'Paris',
+        dateNaissance: '1980-01-01',
+      },
+    ];
+
+    const merged = mergeDirigeants(dirigeantsRCS, dirigeantsRNE);
+
+    expect(merged).toHaveLength(1);
+    expect(merged[0]).toEqual(
+      expect.objectContaining({ isInIg: true, isInInpi: true })
+    );
+    expect(merged[0].roles).toEqual(
+      expect.arrayContaining([
+        { label: 'PRESIDENT', isInIg: true, isInInpi: true },
+      ])
+    );
+  });
+
   it('two dirigeants (one company and one person), two sources', () => {
     const dirigeantsRCS: IDirigeants = [
       {
