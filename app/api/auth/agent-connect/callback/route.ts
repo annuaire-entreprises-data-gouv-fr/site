@@ -48,6 +48,10 @@ export const GET = withSession(async function callbackRoute(req) {
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/requise'
       );
+    } else if (e instanceof AgentConnectProviderNoSiretException) {
+      return NextResponse.redirect(
+        getBaseUrl() + '/connexion/habilitation/administration-inconnue'
+      );
     } else if (e instanceof HttpForbiddenError) {
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/refusee'

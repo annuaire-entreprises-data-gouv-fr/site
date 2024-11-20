@@ -6,9 +6,9 @@ import {
   IEtatCivil,
   IPersonneMorale,
 } from '#models/rne/types';
-import { isPersonneMorale } from '../is-personne-morale';
-import EtatCivilInfos from './EtatCivilInfos';
-import PersonneMoraleInfos from './PersonneMoraleInfos';
+import { isPersonneMorale } from '../../is-personne-morale';
+import EtatCivilInfos from '../EtatCivilInfos';
+import PersonneMoraleInfos from '../PersonneMoraleInfos';
 
 type IDirigeantContentProps = {
   dirigeants: IDirigeantsWithMetadata;

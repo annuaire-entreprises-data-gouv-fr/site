@@ -8,9 +8,9 @@ import {
   IPersonneMoraleMergedIGInpi,
 } from '#models/rne/types';
 import React from 'react';
-import { isPersonneMorale } from '../is-personne-morale';
-import EtatCivilInfos from './EtatCivilInfos';
-import PersonneMoraleInfos from './PersonneMoraleInfos';
+import { isPersonneMorale } from '../../is-personne-morale';
+import EtatCivilInfos from '../EtatCivilInfos';
+import PersonneMoraleInfos from '../PersonneMoraleInfos';
 
 type IDirigeantContentProps = {
   dirigeants: IDirigeantsWithMetadataMergedIGInpi;

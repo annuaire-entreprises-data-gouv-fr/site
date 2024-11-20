@@ -18,8 +18,8 @@ import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import DirigeantsAssociationSection from './_component/sections/association/dirigeants';
 import BeneficiairesSection from './_component/sections/entreprise/beneficiaires';
-import DirigeantsSection from './_component/sections/entreprise/dirigeants-section';
-import DirigeantsSectionProtected from './_component/sections/entreprise/dirigeants-section-protected';
+import DirigeantsSection from './_component/sections/entreprise/dirigeants-open/section';
+import DirigeantsSectionProtected from './_component/sections/entreprise/dirigeants-protected/section';
 import DirigeantSummary from './_component/sections/entreprise/summary';
 import ResponsablesServicePublicSection from './_component/sections/service-public';
 

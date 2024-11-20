@@ -1,11 +1,11 @@
 import { HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
-import { Information } from '#models/exceptions';
+import { InternalError } from '#models/exceptions';
 import { UseCase } from '#models/user/agent';
 import { httpGet } from '#utils/network';
 import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-request-caller-infos';
 import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
-import { logInfoInSentry } from '#utils/sentry';
+import { logFatalErrorInSentry } from '#utils/sentry';
 
 export type IAPIEntrepriseResponse<T> = {
   data: T;
@@ -31,13 +31,13 @@ export default async function clientAPIEntreprise<T, U>(
   sensitiveRequestLogger(route, callerInfos);
 
   if (!callerInfos.siret) {
-    logInfoInSentry(
-      new Information({
-        name: 'NoRecipientSiretForAgent',
-        message: 'Fallback on Dinum siret',
+    logFatalErrorInSentry(
+      new InternalError({
+        message: 'Missing recipient siret',
         context: { domain: callerInfos.domain },
       })
     );
+    throw new HttpUnauthorizedError('Missing recipient siret');
   }
 
   if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
@@ -52,7 +52,7 @@ export default async function clientAPIEntreprise<T, U>(
     params: {
       object: 'espace-agent-public',
       context: options?.useCase ? options.useCase : 'annuaire-entreprises',
-      recipient: callerInfos.siret || '13002526500013',
+      recipient: callerInfos.siret,
     },
   });
 
