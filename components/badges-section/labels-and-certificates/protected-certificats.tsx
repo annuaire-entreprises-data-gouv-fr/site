@@ -112,7 +112,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
               informationTooltipLabel="Cette structure a un certificat CIBTP, attestant qu'elle est en règle de ses cotisations congés payés et chômage-intempéries"
               label="CIBTP - Bâtiment et travaux publics"
               sectionId="cibtp"
-              siren={uniteLegale.siege.siret}
+              siren={uniteLegale.siren}
             />
           )}
           {!hasAnyError(cnetp) && (

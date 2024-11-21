@@ -22,6 +22,6 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
   [APIRoutesPaths.SubventionsAssociation]:
     ApplicationRights.subventionsAssociation,
-  [APIRoutesPaths.EspaceAgentCibtp]: ApplicationRights.protectedCertificats,
-  [APIRoutesPaths.EspaceAgentCnetp]: ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentCibtp]: ApplicationRights.cibtp,
+  [APIRoutesPaths.EspaceAgentCnetp]: ApplicationRights.cnetp,
 };

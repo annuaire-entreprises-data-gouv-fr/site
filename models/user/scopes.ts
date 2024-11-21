@@ -62,6 +62,8 @@ export const getAgentScopes = async (
         'conformite',
         'beneficiaires',
         'subventions_association',
+        'cibtp',
+        'cnetp',
       ],
       userType: 'Super-agent connecté',
       hasHabilitation: true,
