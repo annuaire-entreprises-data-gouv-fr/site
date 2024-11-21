@@ -994,7 +994,7 @@
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
-          "estFiness": false,
+          "estFiness": true,
           "egaproRenseignee": false,
           "estRge": true,
           "estOrganismeFormation": false,
@@ -6524,7 +6524,7 @@
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 10,
+          "nombreEtablissementsOuverts": 9,
           "nombreEtablissements": 11,
           "usePagination": false,
           "currentEtablissementPage": 1
@@ -6534,7 +6534,7 @@
         "dateCreation": "2008-12-29",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-11-04T09:47:29.942",
+        "dateMiseAJourInsee": "2024-11-15T10:45:32.324",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -7015,7 +7015,7 @@
           }
         ],
         "nombreEtablissements": 11,
-        "nombreEtablissementsOuverts": 10,
+        "nombreEtablissementsOuverts": 9,
         "dirigeants": []
       },
       {
