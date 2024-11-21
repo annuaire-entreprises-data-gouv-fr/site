@@ -81,7 +81,7 @@ export const getAgent = async (
   const firstName = userInfo.given_name ?? '';
   const userId = userInfo.sub;
   const siret =
-    (userInfo.siret ?? '').replaceAll(' ', '') ??
+    (userInfo.siret || '').replaceAll(' ', '') ||
     getSiretFromIdpTemporary(idpId);
 
   return {
