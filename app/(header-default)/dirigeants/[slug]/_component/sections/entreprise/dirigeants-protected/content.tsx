@@ -7,8 +7,8 @@ import {
   IEtatCivilMergedIGInpi,
   IPersonneMoraleMergedIGInpi,
 } from '#models/rne/types';
+import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
 import React from 'react';
-import { isPersonneMorale } from '../../is-personne-morale';
 import EtatCivilInfos from '../EtatCivilInfos';
 import PersonneMoraleInfos from '../PersonneMoraleInfos';
 

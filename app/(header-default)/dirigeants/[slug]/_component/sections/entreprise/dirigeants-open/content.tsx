@@ -6,7 +6,7 @@ import {
   IEtatCivil,
   IPersonneMorale,
 } from '#models/rne/types';
-import { isPersonneMorale } from '../../is-personne-morale';
+import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
 import EtatCivilInfos from '../EtatCivilInfos';
 import PersonneMoraleInfos from '../PersonneMoraleInfos';
 

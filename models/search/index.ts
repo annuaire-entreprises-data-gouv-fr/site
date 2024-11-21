@@ -14,9 +14,9 @@ import {
   formatMonthIntervalFromPartialDate,
   removeSpecialChars,
 } from '#utils/helpers';
+import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
-import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
