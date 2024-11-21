@@ -12,8 +12,8 @@ import {
   formatIntFr,
   parseIntWithDefaultValue,
 } from '#utils/helpers';
+import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
-import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
 import { Metadata } from 'next';
 
 async function extractParamsPersonne(props: AppRouterProps) {

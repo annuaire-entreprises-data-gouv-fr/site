@@ -12,6 +12,7 @@ import {
   IRole,
 } from '#models/rne/types';
 import { removeSpecialChars } from '#utils/helpers';
+import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
 import logErrorInSentry from '#utils/sentry';
 
 export function handleApiEntrepriseError(
@@ -82,8 +83,15 @@ export const mergeDirigeants = (
       mergedRoles[currentDirigeantKey] = {};
     } else if (isInInpi) {
       foundDirigeant.isInInpi = true;
+      if (!isPersonneMorale(dirigeant) && !isPersonneMorale(foundDirigeant)) {
+        foundDirigeant.nom = dirigeant.nom;
+      }
     } else if (isInIg) {
       foundDirigeant.isInIg = true;
+      if (!isPersonneMorale(dirigeant) && !isPersonneMorale(foundDirigeant)) {
+        foundDirigeant.dateNaissance = dirigeant.dateNaissance;
+        foundDirigeant.lieuNaissance = dirigeant.lieuNaissance;
+      }
     }
 
     const cleanedRole = removeSpecialChars(role).toUpperCase();

@@ -5,7 +5,7 @@ import { estActif } from '#models/core/etat-administratif';
 import { isCollectiviteTerritoriale } from '#models/core/types';
 import { IDirigeants } from '#models/rne/types';
 import { ISearchResult } from '#models/search';
-import { isPersonneMorale } from 'app/(header-default)/dirigeants/[slug]/_component/sections/is-personne-morale';
+import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
 import React from 'react';
 import styles from './style.module.css';
 
