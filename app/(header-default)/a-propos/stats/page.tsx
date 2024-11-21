@@ -3,9 +3,8 @@ import { NpsStats } from '#components/stats/nps';
 import { TraficStats } from '#components/stats/trafic';
 import { UsageStats } from '#components/stats/usage';
 import { Metadata } from 'next';
-import { unstable_cache } from 'next/cache';
 
-export const revalidate = 43200; // 12 * 3600 = 12 hours;
+export const revalidate = 14400; // 4 * 3600 = 4 hours;
 
 async function fetchStats(): Promise<IMatomoStats> {
   const {
@@ -36,9 +35,7 @@ export const metadata: Metadata = {
 
 export default async function StatsPage() {
   const { monthlyNps, visits, mostCopied, copyPasteAction, redirectedSiren } =
-    await unstable_cache(() => fetchStats(), ['stats'], {
-      revalidate: 43200,
-    })();
+    await fetchStats();
 
   return (
     <>
