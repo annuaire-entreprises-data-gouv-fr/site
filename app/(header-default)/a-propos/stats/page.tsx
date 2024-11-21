@@ -4,6 +4,7 @@ import { TraficStats } from '#components/stats/trafic';
 import { UsageStats } from '#components/stats/usage';
 import { Metadata } from 'next';
 
+export const dynamic = 'force-static';
 export const revalidate = 14400; // 4 * 3600 = 4 hours;
 
 async function fetchStats(): Promise<IMatomoStats> {

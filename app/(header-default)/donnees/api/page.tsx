@@ -9,6 +9,7 @@ import {
 import { Metadata } from 'next';
 import React from 'react';
 
+export const dynamic = 'force-static';
 export const revalidate = 30;
 
 interface IProps {
