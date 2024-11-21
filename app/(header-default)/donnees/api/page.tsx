@@ -7,8 +7,10 @@ import {
   getMonitorsByAdministration,
 } from '#models/monitoring';
 import { Metadata } from 'next';
-import { unstable_cache } from 'next/cache';
 import React from 'react';
+
+export const dynamic = 'force-static';
+export const revalidate = 30;
 
 interface IProps {
   monitors: {
@@ -31,13 +33,7 @@ export const metadata: Metadata = {
 };
 
 export default async function StatusPage() {
-  const { monitors, administrationsMetaData } = await unstable_cache(
-    () => fetchStatusData(),
-    ['monitoring'],
-    {
-      revalidate: 45,
-    }
-  )();
+  const { monitors, administrationsMetaData } = await fetchStatusData();
 
   return (
     <>
