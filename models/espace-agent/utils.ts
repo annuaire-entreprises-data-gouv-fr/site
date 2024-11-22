@@ -138,16 +138,18 @@ export const mergeDirigeants = (
     }
 
     const foundCleanedRole = mergedRoles[currentDirigeantKey][role];
-    if (!foundCleanedRole) {
-      mergedRoles[currentDirigeantKey][role] = {
-        label: role,
-        isInInpi,
-        isInIg,
-      };
-    } else if (isInInpi) {
-      foundCleanedRole.isInInpi = true;
-    } else if (isInIg) {
-      foundCleanedRole.isInIg = true;
+    if (role !== '') {
+      if (!foundCleanedRole) {
+        mergedRoles[currentDirigeantKey][role] = {
+          label: role,
+          isInInpi,
+          isInIg,
+        };
+      } else if (isInInpi) {
+        foundCleanedRole.isInInpi = true;
+      } else if (isInIg) {
+        foundCleanedRole.isInIg = true;
+      }
     }
   }
 
