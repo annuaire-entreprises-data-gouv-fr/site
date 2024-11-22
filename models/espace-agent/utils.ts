@@ -34,15 +34,24 @@ export function handleApiEntrepriseError(
   return APINotRespondingFactory(EAdministration.DINUM, e.status || 500);
 }
 
-const cleanString = (nom: string) => {
-  return removeSpecialChars(nom).toUpperCase();
+const cleanString = (str: string | null) => {
+  if (!str) {
+    return '';
+  }
+  return removeSpecialChars(str).toUpperCase();
 };
 
 const cleanPrenoms = (prenoms: string) => {
+  if (!prenoms) {
+    return '';
+  }
   return removeSpecialChars(prenoms).split(/, | /).map(capitalize).join(', ');
 };
 
-const cleanRole = (role: string) => {
+const cleanRole = (role: string | null) => {
+  if (!role) {
+    return '';
+  }
   return removeSpecialChars(role).toUpperCase();
 };
 
@@ -87,16 +96,16 @@ export const mergeDirigeants = (
     if (!isPersonneMorale(dirigeant)) {
       return {
         ...dirigeant,
-        prenoms: cleanPrenoms(dirigeant.prenoms || ''),
-        nom: cleanString(dirigeant.nom || ''),
-        role: cleanRole(dirigeant.role || ''),
+        prenoms: cleanPrenoms(dirigeant.prenoms),
+        nom: cleanString(dirigeant.nom),
+        role: cleanRole(dirigeant.role),
       };
     } else {
       return {
         ...dirigeant,
-        denomination: cleanString(dirigeant.denomination || ''),
-        natureJuridique: cleanString(dirigeant.natureJuridique || ''),
-        role: cleanRole(dirigeant.role || ''),
+        denomination: cleanString(dirigeant.denomination),
+        natureJuridique: cleanString(dirigeant.natureJuridique),
+        role: cleanRole(dirigeant.role),
       };
     }
   }) as (IEtatCivilMergedIGInpi | IPersonneMoraleMergedIGInpi)[];
