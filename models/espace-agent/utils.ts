@@ -38,19 +38,22 @@ const createUniqueKey = (dirigeant: IEtatCivil | IPersonneMorale): string => {
   if ('siren' in dirigeant) {
     return `pm-${dirigeant.siren}`;
   } else {
-    const cleanedPrenom = removeSpecialChars(dirigeant.prenom).toUpperCase();
+    const prenoms = dirigeant.prenoms || '';
+    const nom = dirigeant.nom || '';
 
-    const hasNomDeNaissanceMatch = dirigeant.nom.match(/\(([^)]+)\)/);
-    const nom = hasNomDeNaissanceMatch
+    const cleanedPrenoms = removeSpecialChars(prenoms).toUpperCase();
+    const hasNomDeNaissanceMatch = nom.match(/\(([^)]+)\)/);
+    const nomDeNaissance = hasNomDeNaissanceMatch
       ? hasNomDeNaissanceMatch[1]
-      : dirigeant.nom;
-    const cleanedNom = removeSpecialChars(nom).toUpperCase();
+      : nom;
+    const cleanedNomDeNaissance =
+      removeSpecialChars(nomDeNaissance).toUpperCase();
 
     const partialDate =
       dirigeant.dateNaissancePartial ||
       dirigeant.dateNaissance?.slice(0, 7) ||
       '';
-    return `pf-${cleanedPrenom}-${cleanedNom}-${partialDate}`;
+    return `pf-${cleanedPrenoms}-${cleanedNomDeNaissance}-${partialDate}`;
   }
 };
 
