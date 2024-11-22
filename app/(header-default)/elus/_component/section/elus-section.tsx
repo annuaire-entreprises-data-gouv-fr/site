@@ -1,4 +1,3 @@
-import React from 'react';
 import NonRenseigne from '#components/non-renseigne';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
@@ -6,6 +5,7 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { isCollectiviteTerritoriale, IUniteLegale } from '#models/core/types';
 import { IEtatCivil } from '#models/rne/types';
 import { capitalize, formatDatePartial } from '#utils/helpers';
+import React from 'react';
 
 /**
  * Elus section
@@ -70,7 +70,7 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
 export default ElusSection;
 
 type IElu = {
-  role?: string;
+  role: string | null;
 };
 function sortByRole(a: IElu, b: IElu): -1 | 1 | 0 {
   const roleA = a.role;
