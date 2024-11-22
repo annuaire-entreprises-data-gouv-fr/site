@@ -73,7 +73,9 @@ export const mergeDirigeants = (
   ] as (IEtatCivilMergedIGInpi | IPersonneMoraleMergedIGInpi)[];
 
   for (const dirigeant of dirigeants) {
-    const { isInInpi, isInIg, role } = dirigeant;
+    const { isInInpi, isInIg } = dirigeant;
+    const role = dirigeant.role || '';
+
     const currentDirigeantKey = createUniqueKey(dirigeant);
 
     const foundDirigeant = mergedDirigeants[currentDirigeantKey];

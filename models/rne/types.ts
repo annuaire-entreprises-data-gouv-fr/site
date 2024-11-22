@@ -22,7 +22,7 @@ export interface IEtatCivil {
   nom: string;
   prenom: string;
   prenoms: string;
-  role: string;
+  role: string | null;
   lieuNaissance: string;
   dateNaissancePartial?: string;
   dateNaissance?: string;
@@ -39,7 +39,7 @@ export interface IPersonneMorale {
   siren: string;
   denomination: string;
   natureJuridique: string | null;
-  role: string;
+  role: string | null;
 }
 
 export type IPersonneMoraleMergedIGInpi = IPersonneMorale & {
