@@ -226,7 +226,7 @@ describe('mergeDirigeants', () => {
           ],
         }),
         expect.objectContaining({
-          nom: 'Doe',
+          nom: 'DOE',
           prenom: 'John',
           roles: [{ label: 'PRESIDENT', isInIg: false, isInInpi: true }],
         }),
@@ -265,12 +265,12 @@ describe('mergeDirigeants', () => {
     expect(merged).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          nom: 'Smith',
+          nom: 'SMITH',
           prenom: 'Jane',
           roles: [{ label: 'CTO', isInIg: true, isInInpi: false }],
         }),
         expect.objectContaining({
-          nom: 'Doe',
+          nom: 'DOE',
           prenom: 'John',
           roles: [{ label: 'CEO', isInIg: false, isInInpi: true }],
         }),
