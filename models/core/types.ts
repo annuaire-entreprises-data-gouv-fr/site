@@ -121,6 +121,10 @@ export interface IUniteLegale extends IEtablissementsList {
     codeColter: string | null;
   };
   listeIdcc: string[];
+  // date of last update in index
+  lastModified: {
+    [source: string]: string; // YYYY-MM-DD
+  };
 }
 
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
@@ -161,6 +165,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     },
     listeIdcc: [],
     immatriculation: null,
+    lastModified: {},
   };
 };
 

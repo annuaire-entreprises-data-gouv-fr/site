@@ -25,8 +25,9 @@ export function DataSection<T extends Exclude<unknown, IDataFetchingState>>({
   if (notFoundInfo === null && isAPI404(data)) {
     return null;
   }
+
   //@ts-ignore
-  const lastModified = data?.lastModified || null;
+  const lastModified = props?.lastModified ?? data?.lastModified ?? null;
 
   return (
     <Section {...props} lastModified={lastModified}>

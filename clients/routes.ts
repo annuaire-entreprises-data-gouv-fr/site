@@ -203,6 +203,8 @@ const routes = {
       metadata: 'https://recherche-entreprises.api.gouv.fr/idcc/metadata',
       siren: 'https://recherche-entreprises.api.gouv.fr/idcc',
     },
+    lastModified:
+      'https://recherche-entreprises.api.gouv.fr/sources/last_modified',
   },
   tooling: {
     grist: 'https://grist.numerique.gouv.fr/api/docs/',

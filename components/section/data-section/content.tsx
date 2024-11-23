@@ -34,6 +34,7 @@ export function DataSectionContent<
 
     const administrationMetaData =
       administrationsMetaData[data.administration] || {};
+
     return (
       <>
         <AdministrationNotRespondingMessage
