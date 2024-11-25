@@ -175,8 +175,10 @@ const routes = {
     },
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
-    tva: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
-    eori: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/eori/',
+    tva: (tvaNumber: string) =>
+      `https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/${tvaNumber}`,
+    eori: (siret: string) =>
+      `https://annuaire-entreprises-api-proxy.api.gouv.fr/eori/${siret}`,
   },
   rne: {
     portail: {

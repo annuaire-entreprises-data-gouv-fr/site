@@ -1,6 +1,5 @@
 import { clientAPIProxy } from '#clients/api-proxy/client';
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { TVANumber } from '#utils/helpers';
 
@@ -43,8 +42,8 @@ export class TVAUserException extends Error {
  * @param tva
  * @returns TVA number if valid else null
  */
-const clientTVA = async (tva: TVANumber): Promise<string | null> => {
-  const url = `${routes.proxy.tva}${tva}`;
+export const clientTVA = async (tva: TVANumber): Promise<string | null> => {
+  const url = routes.proxy.tva(tva);
 
   const data = await clientAPIProxy<IVIESResponse>(url, {
     timeout: constants.timeout.XXL,
@@ -56,9 +55,3 @@ const clientTVA = async (tva: TVANumber): Promise<string | null> => {
 
   return data.isValid ? data.vatNumber : null;
 };
-
-const stubbedClient = stubClientWithSnapshots({
-  clientTVA,
-});
-
-export { stubbedClient as clientTVA };
