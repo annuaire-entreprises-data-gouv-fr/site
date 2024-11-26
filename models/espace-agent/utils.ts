@@ -11,7 +11,6 @@ import {
   IPersonneMoraleMergedIGInpi,
   IRole,
 } from '#models/rne/types';
-import { capitalize, removeSpecialChars } from '#utils/helpers';
 import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
 import logErrorInSentry from '#utils/sentry';
 
@@ -34,27 +33,6 @@ export function handleApiEntrepriseError(
   return APINotRespondingFactory(EAdministration.DINUM, e.status || 500);
 }
 
-const cleanString = (str: string | null) => {
-  if (!str) {
-    return '';
-  }
-  return removeSpecialChars(str).toUpperCase();
-};
-
-const cleanPrenoms = (prenoms: string) => {
-  if (!prenoms) {
-    return '';
-  }
-  return removeSpecialChars(prenoms).split(/, | /).map(capitalize).join(', ');
-};
-
-const cleanRole = (role: string | null) => {
-  if (!role) {
-    return '';
-  }
-  return removeSpecialChars(role).toUpperCase();
-};
-
 const createUniqueKey = (dirigeant: IEtatCivil | IPersonneMorale): string => {
   if ('siren' in dirigeant) {
     return `pm-${dirigeant.siren}`;
@@ -62,18 +40,16 @@ const createUniqueKey = (dirigeant: IEtatCivil | IPersonneMorale): string => {
     const prenoms = dirigeant.prenoms || '';
     const nom = dirigeant.nom || '';
 
-    const cleanedPrenoms = cleanPrenoms(prenoms);
     const hasNomDeNaissanceMatch = nom.match(/\(([^)]+)\)/);
     const nomDeNaissance = hasNomDeNaissanceMatch
       ? hasNomDeNaissanceMatch[1]
       : nom;
-    const cleanedNomDeNaissance = cleanString(nomDeNaissance);
 
     const partialDate =
       dirigeant.dateNaissancePartial ||
       dirigeant.dateNaissance?.slice(0, 7) ||
       '';
-    return `pf-${cleanedPrenoms}-${cleanedNomDeNaissance}-${partialDate}`;
+    return `pf-${prenoms}-${nomDeNaissance}-${partialDate}`;
   }
 };
 
@@ -92,25 +68,7 @@ export const mergeDirigeants = (
     ...dirigeantsRNE.map((d) => ({ ...d, isInIg: false, isInInpi: true })),
   ] as (IEtatCivilMergedIGInpi | IPersonneMoraleMergedIGInpi)[];
 
-  const cleanedDirigeants = dirigeants.map((dirigeant) => {
-    if (!isPersonneMorale(dirigeant)) {
-      return {
-        ...dirigeant,
-        prenoms: cleanPrenoms(dirigeant.prenoms),
-        nom: cleanString(dirigeant.nom),
-        role: cleanRole(dirigeant.role),
-      };
-    } else {
-      return {
-        ...dirigeant,
-        denomination: cleanString(dirigeant.denomination),
-        natureJuridique: cleanString(dirigeant.natureJuridique),
-        role: cleanRole(dirigeant.role),
-      };
-    }
-  }) as (IEtatCivilMergedIGInpi | IPersonneMoraleMergedIGInpi)[];
-
-  for (const dirigeant of cleanedDirigeants) {
+  for (const dirigeant of dirigeants) {
     const { isInInpi, isInIg } = dirigeant;
     const role = dirigeant.role || '';
 

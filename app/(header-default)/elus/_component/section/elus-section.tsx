@@ -22,9 +22,9 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
   }
 
   const formatElus = (elu: IEtatCivil) => {
-    const nomComplet = `${elu.prenom || ''}${
-      elu.prenom && elu.nom ? ' ' : ''
-    }${(elu.nom || '').toUpperCase()}`;
+    const nomComplet = `${elu.prenoms}${elu.prenoms && elu.nom ? ' ' : ''}${
+      elu.nom
+    }`;
 
     const infos = [
       elu.role ?? <NonRenseigne />,

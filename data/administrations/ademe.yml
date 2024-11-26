@@ -7,7 +7,7 @@ contact: https://www.ademe.fr/contact/
 apiMonitors:
   - apiName: API Professionnels RGE
     apiSlug: rge
-    apiDocumentationLink: https://api.gouv.fr/les-api/api_professionnels_rge
+    apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-professionnels-rge
     updownIoId: urb0
 dataSources:
   - label: Liste des Entreprises RGE

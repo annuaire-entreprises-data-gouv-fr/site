@@ -21,8 +21,8 @@ describe('Dirigeants and Elus search', () => {
   });
   it('Search a dirigeant with main search bar', () => {
     cy.visit('/rechercher?terme=xavier+jouppe');
-    cy.contains('SCI DE LASLAUDIE').should('be.visible');
-    cy.contains('Bernard JOUPPE').should('be.visible');
+    cy.contains('GANYMEDE').should('be.visible');
+    cy.contains('Xavier JOUPPE').should('be.visible');
   });
 });
 
