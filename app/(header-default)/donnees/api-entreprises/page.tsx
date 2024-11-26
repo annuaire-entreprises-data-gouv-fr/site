@@ -104,7 +104,7 @@ export default function AccesByAPIPage() {
       <ul>
         <li>
           l’
-          <a href="https://www.data.gouv.fr/fr/dataservices/api-sirene-1/">
+          <a href="https://www.data.gouv.fr/fr/dataservices/api-sirene/">
             API Sirene
           </a>{' '}
           de l’
