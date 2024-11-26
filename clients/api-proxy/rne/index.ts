@@ -14,8 +14,7 @@ type IRNEEtatCivilProxyResponse = {
   nom: string;
   prenom: string;
   role: string;
-  dateNaissanceFull: string;
-  dateNaissancePartiel: string;
+  dateNaissancePartial: string;
 };
 type IRNEPersonneMoraleProxyResponse = {
   denomination: string;
@@ -92,9 +91,11 @@ const mapToDomainObject = ({
       return {
         sexe: null,
         nom: formatLastName(etatCivil.nom),
+        dateNaissance: '',
+        dateNaissancePartial: etatCivil.dateNaissancePartial,
         prenom,
         prenoms,
-        role: etatCivil.role,
+        role: (etatCivil.role || '').toUpperCase(),
       } as IEtatCivil;
     }
     const personneMorale = dirigeant as IRNEPersonneMoraleProxyResponse;
@@ -103,7 +104,7 @@ const mapToDomainObject = ({
       siren: personneMorale.siren,
       denomination: personneMorale.denomination,
       natureJuridique: personneMorale.natureJuridique,
-      role: personneMorale.role,
+      role: (personneMorale.role || '').toUpperCase(),
     } as IPersonneMorale;
   });
 
