@@ -1,6 +1,6 @@
+import { Exception, FetchRessourceException } from '#models/exceptions';
 import * as Sentry from '@sentry/nextjs';
 import { SeverityLevel } from '@sentry/nextjs';
-import { Exception, FetchRessourceException } from '#models/exceptions';
 
 // scope allows to log stuff in tags in sentry
 function getScope(exception: Exception, scope: Sentry.Scope) {
@@ -31,7 +31,11 @@ const logInSentryFactory =
         Sentry.captureException(exception, scope);
       });
     } else {
-      console.error(exception, JSON.stringify(exception.context));
+      if (['fatal', 'error'].indexOf(severity) > -1) {
+        console.error(exception, JSON.stringify(exception.context));
+      } else {
+        console.warn(exception, JSON.stringify(exception.context));
+      }
     }
   };
 
