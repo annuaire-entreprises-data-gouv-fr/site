@@ -144,7 +144,7 @@ export default function About() {
             propre API pour son moteur de recherche et la met également à
             disposition gratuitement :{' '}
             <a
-              href="https://www.data.gouv.fr/fr/dataservices/api-recherche-entreprises"
+              href="https://www.data.gouv.fr/fr/dataservices/api-recherche-dentreprises/"
               target="_blank"
               rel="noopener noreferrer"
             >
