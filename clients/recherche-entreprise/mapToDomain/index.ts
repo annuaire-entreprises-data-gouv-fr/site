@@ -6,6 +6,7 @@ import {
   extractSirenFromSiret,
   formatFirstNames,
   formatLastName,
+  formatRole,
   verifySiret,
 } from '#utils/helpers';
 import { libelleFromCodeNAFWithoutNomenclature } from '#utils/helpers/formatting/labels';
@@ -75,7 +76,7 @@ export const mapToDirigeantModel = (
     return {
       siren,
       denomination: `${denomination}${sigle ? ` (${sigle})` : ''}`,
-      role: qualite,
+      role: formatRole(qualite),
     } as IPersonneMorale;
   }
   const { prenom, prenoms } = formatFirstNames(dirigeant.prenoms, ' ');
@@ -85,7 +86,7 @@ export const mapToDirigeantModel = (
     nom: formatLastName(nom),
     prenom,
     prenoms,
-    role: qualite,
+    role: formatRole(qualite),
     nationalite,
     dateNaissancePartial: date_de_naissance,
   };

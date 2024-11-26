@@ -7,7 +7,12 @@ import {
   IObservations,
   IPersonneMorale,
 } from '#models/rne/types';
-import { formatFirstNames, formatLastName, Siren } from '#utils/helpers';
+import {
+  formatFirstNames,
+  formatLastName,
+  formatRole,
+  Siren,
+} from '#utils/helpers';
 import { clientAPIProxy } from '../client';
 
 type IRNEEtatCivilProxyResponse = {
@@ -95,7 +100,7 @@ const mapToDomainObject = ({
         dateNaissancePartial: etatCivil.dateNaissancePartial,
         prenom,
         prenoms,
-        role: (etatCivil.role || '').toUpperCase(),
+        role: formatRole(etatCivil.role),
       } as IEtatCivil;
     }
     const personneMorale = dirigeant as IRNEPersonneMoraleProxyResponse;
@@ -104,7 +109,7 @@ const mapToDomainObject = ({
       siren: personneMorale.siren,
       denomination: personneMorale.denomination,
       natureJuridique: personneMorale.natureJuridique,
-      role: (personneMorale.role || '').toUpperCase(),
+      role: formatRole(personneMorale.role),
     } as IPersonneMorale;
   });
 

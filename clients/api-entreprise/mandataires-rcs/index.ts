@@ -1,6 +1,11 @@
 import routes from '#clients/routes';
 import { IDirigeants, IEtatCivil, IPersonneMorale } from '#models/rne/types';
-import { formatFirstNames, formatLastName, Siren } from '#utils/helpers';
+import {
+  formatFirstNames,
+  formatLastName,
+  formatRole,
+  Siren,
+} from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
   Array<
@@ -54,7 +59,7 @@ const mapToDomainObject = (
         nom: formatLastName(dirigeant.nom),
         prenom,
         prenoms,
-        role: dirigeant.fonction,
+        role: formatRole(dirigeant.fonction),
         lieuNaissance: dirigeant.lieu_naissance,
         dateNaissance: dirigeant.date_naissance,
         dateNaissancePartial: dirigeant.date_naissance?.slice(0, 7),
@@ -64,7 +69,7 @@ const mapToDomainObject = (
       siren: dirigeant.numero_identification,
       denomination: dirigeant.raison_sociale,
       natureJuridique: null,
-      role: dirigeant.fonction,
+      role: formatRole(dirigeant.fonction),
     } as IPersonneMorale;
   });
 };

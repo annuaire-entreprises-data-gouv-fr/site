@@ -376,3 +376,10 @@ export const formatNameFull = (nomPatronymique = '', nomUsage = '') => {
   }
   return nomUsage || nomPatronymique || '';
 };
+
+export const formatRole = (role: string) => {
+  if (!role) {
+    return '';
+  }
+  return removeSpecialChars(role).toUpperCase();
+};
