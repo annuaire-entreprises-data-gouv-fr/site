@@ -52,7 +52,9 @@ export function useAPIRouteData<T extends APIRoutesPaths>(
       }
     };
     fetchData();
-  }, [slug, route, session, options]);
+    // remove options as it trigger infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug, route, session]);
   return response;
 }
 
