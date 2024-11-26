@@ -25,10 +25,12 @@ export default function DirigeantsSectionProtected({
   uniteLegale,
   session,
 }: IProps) {
+  const isEI = uniteLegale.complements.estEntrepreneurIndividuel;
   const dirigeants = useAPIRouteData(
     APIRoutesPaths.EspaceAgentDirigeantsProtected,
     uniteLegale.siren,
-    session
+    session,
+    { params: { isEI } }
   );
 
   return (

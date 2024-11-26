@@ -14,7 +14,8 @@ import { getMandatairesRCS } from './mandataires-rcs';
 import { mergeDirigeants } from './utils';
 
 export const getDirigeantsProtected = async (
-  maybeSiren: string
+  maybeSiren: string,
+  params: { isEI: boolean }
 ): Promise<IDirigeantsWithMetadataMergedIGInpi | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
 
@@ -31,11 +32,24 @@ export const getDirigeantsProtected = async (
     return APINotRespondingFactory(EAdministration.INPI, 500);
   }
 
+  // EI can either be in RCS or not, we dont know in advance.
+  const rcsNotRelevant =
+    params.isEI &&
+    (isAPINotResponding(dirigeantsRCS) || dirigeantsRCS.length === 0);
+
   try {
-    const dirigeantMerged = mergeDirigeants(
-      !isAPINotResponding(dirigeantsRCS) ? dirigeantsRCS : [],
-      !isAPINotResponding(dirigeantsRNE) ? dirigeantsRNE.data : []
-    );
+    const rneData = !isAPINotResponding(dirigeantsRNE)
+      ? dirigeantsRNE.data
+      : [];
+
+    // If RCS is not relevant lets trick the system and ignore comparison
+    const rcsData = rcsNotRelevant
+      ? rneData
+      : !isAPINotResponding(dirigeantsRCS)
+      ? dirigeantsRCS
+      : [];
+
+    const dirigeantMerged = mergeDirigeants(rcsData, rneData);
 
     return {
       data: dirigeantMerged,
