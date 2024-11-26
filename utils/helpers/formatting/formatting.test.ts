@@ -3,6 +3,7 @@ import {
   formatAdresse,
   formatCurrency,
   formatFirstNames,
+  formatLastName,
   removeSpecialChars,
 } from './formatting';
 
@@ -130,6 +131,8 @@ describe('Check formatFirstNames', () => {
     prenom: '',
     prenoms: '',
   });
+  expect(formatLastName('Monnier')).toStrictEqual('MONNIER');
+  expect(formatLastName('')).toStrictEqual('');
 });
 
 export {};

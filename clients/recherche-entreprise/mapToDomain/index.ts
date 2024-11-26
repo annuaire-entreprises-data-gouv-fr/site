@@ -5,6 +5,7 @@ import {
   extractNicFromSiret,
   extractSirenFromSiret,
   formatFirstNames,
+  formatLastName,
   verifySiret,
 } from '#utils/helpers';
 import { libelleFromCodeNAFWithoutNomenclature } from '#utils/helpers/formatting/labels';
@@ -65,39 +66,40 @@ export const mapToDirigeantModel = (
     siren = '',
     sigle = '',
     denomination = '',
-    prenoms = '',
     nom = '',
     qualite = '',
     date_de_naissance = '',
     nationalite = '',
   } = dirigeant;
-
-  if (!!siren) {
+  if (!!dirigeant.siren) {
     return {
       siren,
       denomination: `${denomination}${sigle ? ` (${sigle})` : ''}`,
       role: qualite,
     } as IPersonneMorale;
   }
+  const { prenom, prenoms } = formatFirstNames(dirigeant.prenoms, ' ');
 
   return {
     sexe: null,
-    nom: (nom || '').toUpperCase(),
-    ...formatFirstNames(prenoms || '', ' '),
+    nom: formatLastName(nom),
+    prenom,
+    prenoms,
     role: qualite,
     nationalite,
     dateNaissancePartial: date_de_naissance,
-    lieuNaissance: '',
   };
 };
 
 export const mapToElusModel = (eluRaw: any): IEtatCivil => {
-  const { nom, prenoms, annee_de_naissance, fonction, sexe } = eluRaw;
+  const { nom, annee_de_naissance, fonction, sexe } = eluRaw;
+  const { prenom, prenoms } = formatFirstNames(eluRaw.prenoms, ' ');
 
   return {
     sexe,
-    nom: (nom || '').toUpperCase(),
-    ...formatFirstNames(prenoms || '', ' '),
+    nom: formatLastName(nom),
+    prenom,
+    prenoms,
     role: fonction,
     dateNaissancePartial: annee_de_naissance,
     lieuNaissance: '',
