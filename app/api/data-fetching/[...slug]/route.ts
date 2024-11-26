@@ -33,6 +33,7 @@ async function getRoute(
     new URL(request.url).searchParams
   ) as Parameters<typeof handler>[1];
 
+  //@ts-ignore
   const response = await handler(slug, searchParams!);
 
   return Response.json(response);
