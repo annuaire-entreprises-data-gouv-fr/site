@@ -81,7 +81,7 @@ export default function AccesByAPIPage() {
       <ul>
         <li>
           Conditions d’accès :{' '}
-          <a href="https://www.data.gouv.fr/fr/dataservices/api-entreprise/demande-acces">
+          <a href="https://api.gouv.fr/les-api/api-entreprise/demande-acces">
             API sous habilitation
           </a>
         </li>
