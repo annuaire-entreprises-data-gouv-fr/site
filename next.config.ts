@@ -36,6 +36,26 @@ const nextConfig: NextConfig = {
   async redirects() {
     return redirects;
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data:",
+              "frame-src 'self' https://plugins.crisp.chat/",
+              "connect-src 'self' https://errors.data.gouv.fr",
+            ].join('; '),
+          },
+        ],
+      },
+    ];
+  },
 };
 
 const sentryBuildOptions: SentryBuildOptions = {
