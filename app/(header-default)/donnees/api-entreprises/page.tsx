@@ -40,7 +40,7 @@ export default function AccesByAPIPage() {
       <ul>
         <li>Conditions d’accès : API ouverte</li>
         <li>
-          <a href="https://www.data.gouv.fr/fr/dataservices/api-recherche-entreprises">
+          <a href="https://www.data.gouv.fr/fr/dataservices/api-recherche-dentreprises/">
             Page officielle
           </a>
         </li>
