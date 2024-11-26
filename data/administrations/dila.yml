@@ -11,7 +11,7 @@ apiMonitors:
     updownIoId: wd04
   - apiName: API Annonces et comptes annuels des associations (JOAFE)
     apiSlug: joafe
-    apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-annonces-comptes-annuels-associations-joafe
+    apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-annonces-officielles-et-comptes-annuels-des-associations/
     updownIoId: 8pjy
   - apiName: API Annuaire des services publics
     apiSlug: annuaire-administration
