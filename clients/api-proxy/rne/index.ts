@@ -4,12 +4,10 @@ import constants from '#models/constants';
 import {
   IDirigeants,
   IEtatCivil,
-  IIdentite,
   IObservations,
   IPersonneMorale,
 } from '#models/rne/types';
 import { formatFirstNames, formatLastName, Siren } from '#utils/helpers';
-import { getDateFin } from '#utils/helpers/rne-variables';
 import { clientAPIProxy } from '../client';
 
 type IRNEEtatCivilProxyResponse = {
@@ -80,11 +78,9 @@ const clientRNEImmatriculationFallback = async (siren: Siren) => {
 
 const mapToDomainObject = ({
   observations,
-  identite,
   dirigeants,
 }: IRNEProxyResponse): {
   observations: IObservations;
-  immatriculation: IIdentite;
   dirigeants: IDirigeants;
 } => {
   const newDirigeants = dirigeants.map((dirigeant) => {
@@ -113,22 +109,6 @@ const mapToDomainObject = ({
 
   return {
     observations,
-    immatriculation: {
-      capital: identite.capital,
-      dateCessationActivite: getDateFin(
-        identite.dureePersonneMorale,
-        identite.dateImmatriculation
-      ),
-      dateClotureExercice: identite.dateClotureExercice,
-      dateDebutActivite: identite.dateDebutActiv,
-      dateImmatriculation: identite.dateImmatriculation,
-      dateRadiation: identite.dateRadiation,
-      denomination: identite.denomination,
-      dureePersonneMorale: identite.dureePersonneMorale,
-      isPersonneMorale: identite.isPersonneMorale,
-      libelleNatureJuridique: identite.libelleNatureJuridique,
-      natureEntreprise: identite.natureEntreprise,
-    },
     dirigeants: newDirigeants,
   };
 };
