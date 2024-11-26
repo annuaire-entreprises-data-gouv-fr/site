@@ -9,7 +9,7 @@ import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entrepr
 import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
-import { Siren, verifySiren } from '#utils/helpers';
+import { Siren, isLuhnValid, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logFatalErrorInSentry,
@@ -224,6 +224,10 @@ class UniteLegaleBuilder {
    * last resort - only when not found in other API
    */
   fallBackOnIG = async () => {
+    if (!isLuhnValid(this._siren)) {
+      throw new SirenNotFoundError(this._siren);
+    }
+
     const uniteLegaleGreffe = await fetchUniteLegaleFromIG(this._siren);
 
     if (isAPINotResponding(uniteLegaleGreffe)) {

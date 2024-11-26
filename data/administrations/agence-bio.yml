@@ -7,7 +7,7 @@ contact: https://www.agencebio.org/pied-de-page/contact/
 apiMonitors:
   - apiName: API Professionnels du Bio
     apiSlug: bio
-    apiDocumentationLink: https://api.gouv.fr/les-api/api-professionnels-bio
+    apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-professionnels-bio
     updownIoId: w3tx
 dataSources:
   - label: Liste des professionnels engagés en BIO
