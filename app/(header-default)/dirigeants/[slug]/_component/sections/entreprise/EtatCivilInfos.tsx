@@ -6,8 +6,8 @@ export default function EtatCivilInfos({
 }: {
   dirigeant: IEtatCivil;
 }) {
-  const nomComplet = `${dirigeant.prenom || ''}${
-    dirigeant.prenom && dirigeant.nom ? ' ' : ''
+  const nomComplet = `${dirigeant.prenoms || ''}${
+    dirigeant.prenoms && dirigeant.nom ? ' ' : ''
   }${(dirigeant.nom || '').toUpperCase()}`;
 
   return (
