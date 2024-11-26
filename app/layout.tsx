@@ -15,7 +15,9 @@ if (
   // Mock server for Cypress, must be put here according to :
   // https://github.com/mswjs/examples/pull/101/files
   const { mockServer } = require('#cypress/mocks/server');
-  mockServer.listen();
+  mockServer.listen({
+    onUnhandledRequest: 'bypass',
+  });
 }
 
 export const metadata: Metadata = meta({});
