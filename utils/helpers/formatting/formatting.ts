@@ -353,13 +353,21 @@ export const agregateTripleFields = (
 export const formatFirstNames = (firstNames: string, separator: ', ' | ' ') => {
   const formatted = (firstNames || '')
     .split(separator)
-    .map(capitalize)
+    .map((prenom) => {
+      return prenom.split('-').map(capitalize).join('-');
+    })
     .filter((name) => !!name);
 
   return {
     prenom: formatted.length > 0 ? formatted[0] : '',
     prenoms: formatted.join(', '),
   };
+};
+
+export const formatLastName = (lastname: string) => {
+  const nom = (lastname || '').toUpperCase();
+
+  return nom;
 };
 
 export const formatNameFull = (nomPatronymique = '', nomUsage = '') => {
