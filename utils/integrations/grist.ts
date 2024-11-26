@@ -54,7 +54,7 @@ export async function logInGrist(
       method: 'POST',
       url: getGristUrl(tableKey),
       headers: {
-        ContentType: 'application/json',
+        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
       },
       data: {
