@@ -49,8 +49,8 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://stats.data.gouv.fr/",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data:",
-              "frame-src 'self' https://plugins.crisp.chat/",
-              "connect-src 'self' https://errors.data.gouv.fr https://bodacc-datadila.opendatasoft.com/ https://api-lannuaire.service-public.fr",
+              "frame-src 'self' https://stats.data.gouv.fr/ https://plugins.crisp.chat/",
+              "connect-src 'self' https://stats.data.gouv.fr/ https://errors.data.gouv.fr https://bodacc-datadila.opendatasoft.com/ https://api-lannuaire.service-public.fr",
             ].join('; '),
           },
           {
