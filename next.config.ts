@@ -1,4 +1,3 @@
-import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import { NextConfig } from 'next';
 import redirects from './redirects.json';
@@ -36,56 +35,6 @@ const nextConfig: NextConfig = {
   generateBuildId: () => process.env.SOURCE_VERSION || null,
   async redirects() {
     return redirects;
-  },
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://stats.data.gouv.fr/",
-              "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data:",
-              "frame-src 'self' https://stats.data.gouv.fr/ https://plugins.crisp.chat/",
-              "connect-src 'self' https://stats.data.gouv.fr/ https://errors.data.gouv.fr/ https://bodacc-datadila.opendatasoft.com/ https://data.economie.gouv.fr/ https://journal-officiel-datadila.opendatasoft.com/ https://api-lannuaire.service-public.fr/ https://data.culture.gouv.fr/",
-            ].join('; '),
-          },
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: getBaseUrl(),
-          },
-          {
-            key: 'Access-Control-Allow-Methods',
-            value: 'GET',
-          },
-          {
-            key: 'Access-Control-Max-Age',
-            value: '86400',
-          },
-        ],
-      },
-      {
-        source: '/api/share/button:id(\\d+)',
-        headers: [
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: '*',
-          },
-        ],
-      },
-      {
-        source: '/api/(feedback/nps|hide-personal-data)',
-        headers: [
-          {
-            key: 'Access-Control-Allow-Methods',
-            value: 'POST,OPTIONS',
-          },
-        ],
-      },
-    ];
   },
 };
 
