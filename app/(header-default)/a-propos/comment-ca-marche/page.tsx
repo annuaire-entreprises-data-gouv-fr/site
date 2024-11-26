@@ -144,7 +144,7 @@ export default function About() {
             propre API pour son moteur de recherche et la met également à
             disposition gratuitement :{' '}
             <a
-              href="https://api.gouv.fr/les-api/api-recherche-entreprises"
+              href="https://www.data.gouv.fr/fr/dataservices/api-recherche-entreprises"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -236,7 +236,7 @@ export default function About() {
             <li>les certifications professionnelles</li>
             <li>... et bien d’autres</li>
           </ul>
-          <a href="https://api.gouv.fr/les-api/api-entreprise">
+          <a href="https://www.data.gouv.fr/fr/dataservices/api-entreprise">
             ⇢ En savoir plus sur API Entreprise
           </a>
         </div>

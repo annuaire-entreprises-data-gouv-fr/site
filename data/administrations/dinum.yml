@@ -13,11 +13,11 @@ apiMonitors:
     updownIoId: fpag
   - apiName: API Recherche d’entreprises
     apiSlug: recherche-entreprise
-    apiDocumentationLink: https://api.gouv.fr/les-api/api-recherche-entreprises
+    apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-recherche-entreprises
     updownIoId: f965
   - apiName: API Base Adresse Nationale
     apiSlug: ban
-    apiDocumentationLink: https://api.gouv.fr/les-api/base-adresse-nationale
+    apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-base-dadresse-nationale-ban/
     updownIoId: 58pf
 dataSources:
   - label: Base Adresse Nationale

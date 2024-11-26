@@ -127,7 +127,7 @@ export default function ExtraitKbis() {
             <a
               target="_blank"
               rel="noreferrer noopener"
-              href="https://api.gouv.fr/les-api/api-entreprise"
+              href="https://www.data.gouv.fr/fr/dataservices/api-entreprise"
             >
               ⇢ En savoir plus sur API Entreprise
             </a>

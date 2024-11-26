@@ -5,7 +5,7 @@ logoType: portrait
 long: Institut national de la statistique et des études économiques (Insee)
 contact: https://www.insee.fr/fr/information/1302169
 apiMonitors:
-  - apiDocumentationLink: https://api.gouv.fr/les-api/sirene_v3
+  - apiDocumentationLink: https://www.data.gouv.fr/fr/api-sirene
     apiSlug: sirene
     apiName: API Répertoire Sirene
     updownIoId: swog

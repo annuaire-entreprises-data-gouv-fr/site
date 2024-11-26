@@ -6,7 +6,7 @@ logoType: paysage
 contact: https://lemarche.inclusion.beta.gouv.fr/contact/
 apiMonitors:
   - apiName: API Marché de l’Inclusion
-    apigouvlink: https://api.gouv.fr/les-api/api-structures-inclusion
+    apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-structures-inclusion
     apiSlug: marche-inclusion
     updownIoId: 4yxy
 dataSources:
