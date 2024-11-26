@@ -86,17 +86,3 @@ export interface IRole {
   isInInpi?: boolean;
   isInIg?: boolean;
 }
-
-export interface IIdentite {
-  capital: string;
-  dateCessationActivite: string;
-  dateClotureExercice: string;
-  dateDebutActivite: string;
-  dateImmatriculation: string;
-  dateRadiation: string;
-  denomination: string;
-  dureePersonneMorale: number;
-  isPersonneMorale: boolean;
-  libelleNatureJuridique: string;
-  natureEntreprise: string;
-}
