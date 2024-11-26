@@ -1,3 +1,4 @@
+import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import { NextConfig } from 'next';
 import redirects from './redirects.json';
@@ -51,6 +52,36 @@ const nextConfig: NextConfig = {
               "frame-src 'self' https://plugins.crisp.chat/",
               "connect-src 'self' https://errors.data.gouv.fr",
             ].join('; '),
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: getBaseUrl(),
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET',
+          },
+          {
+            key: 'Access-Control-Max-Age',
+            value: '86400',
+          },
+        ],
+      },
+      {
+        source: '/api/share/button:id(\\d+)',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
+        ],
+      },
+      {
+        source: '/api/(feedback/nps|hide-personal-data)',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'POST,OPTIONS',
           },
         ],
       },
