@@ -1,4 +1,5 @@
 import { Icon } from '#components-ui/icon/wrapper';
+import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import TextWrapper from 'components-ui/text-wrapper';
 import { Metadata } from 'next';
 
@@ -70,14 +71,14 @@ export default function PartagerPage() {
             width="300"
             height="70"
             style={{ border: 'none', maxWidth: '100%' }}
-            src="https://annuaire-entreprises.data.gouv.fr/api/share/button/510973431"
+            src={`${getBaseUrl()}/api/share/button/510973431`}
           ></iframe>
           <div />
           <iframe
             width="300"
             height="70"
             style={{ border: 'none', maxWidth: '100%' }}
-            src="https://annuaire-entreprises.data.gouv.fr/api/share/button/510973431?light=true"
+            src={`${getBaseUrl()}/api/share/button/510973431?light=true`}
           ></iframe>
           <h3>Comment ajouter un lien sur mon site ?</h3>
           <p>
