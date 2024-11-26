@@ -10,7 +10,7 @@
     "prepare": "npx simple-git-hooks; npm run script:fetch-protected-siren",
     "start:dev:next": "NODE_ENV=development next dev",
     "dev": "run-p start:dev:*",
-    "build": "NODE_ENV=production next build || NODE_ENV=production SENTRY_DISABLE_SOURCEMAP_UPLOAD=true next build",
+    "build": "NODE_ENV=production BUILD_PHASE=true next build || NODE_ENV=production BUILD_PHASE=true SENTRY_DISABLE_SOURCEMAP_UPLOAD=true next build",
     "start": "NODE_ENV=production && next start",
     "test:end2end:run:mock": "NEXT_PUBLIC_END2END_MOCKING=enabled run-p dev test:end2end:run",
     "test:end2end:open:mock": "NEXT_PUBLIC_END2END_MOCKING=enabled run-p dev test:end2end:open",
