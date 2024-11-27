@@ -33,10 +33,21 @@ const shouldRedirect = (path: string, search: string, url: string) => {
     }
 
     if (path.startsWith('/rechercher')) {
-      const slug = (search.match(/terme=([^&]*)/g) || [''])[0].replaceAll(
-        /[+]|(%20)/g,
+      let slug = (search.match(/terme=([^&]*)/g) || [''])[0].replaceAll(
+        /[+]|(%20|%22)/g,
         ''
       );
+
+      if (slug.match(/terme=FR/g)) {
+        if (slug.match(/terme=FR\d{14}/g)) {
+          // remove EORI number prefix when relevant
+          slug = slug.replace('terme=FR', '');
+        } else {
+          // remove TVA number prefix when relevant
+          slug = slug.replace(/terme=FR\d{2}/g, '');
+        }
+      }
+
       const sirenOrSiretParam = extractSirenOrSiretSlugFromUrl(slug);
 
       if (isLikelyASiret(sirenOrSiretParam)) {
