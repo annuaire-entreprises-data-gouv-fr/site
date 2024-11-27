@@ -46,6 +46,7 @@ export const getDirigeantsProtected = async (
       : [];
     const rcsData = !isAPINotResponding(dirigeantsRCS) ? dirigeantsRCS : [];
 
+    // EI data is not standardised. It lacks birthdate in RNE and is randomly populated in IG
     let dirigeantMerged: IDirigeantsMergedIGInpi = [];
     if (params.isEI) {
       if (rcsData.length === 0) {
