@@ -7,7 +7,10 @@ import {
 } from '#models/api-not-responding';
 import { InternalError } from '#models/exceptions';
 import { getDirigeantsRNE } from '#models/rne/dirigeants';
-import { IDirigeantsWithMetadataMergedIGInpi } from '#models/rne/types';
+import {
+  IDirigeantsMergedIGInpi,
+  IDirigeantsWithMetadataMergedIGInpi,
+} from '#models/rne/types';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { getMandatairesRCS } from './mandataires-rcs';
@@ -41,15 +44,20 @@ export const getDirigeantsProtected = async (
     const rneData = !isAPINotResponding(dirigeantsRNE)
       ? dirigeantsRNE.data
       : [];
+    const rcsData = !isAPINotResponding(dirigeantsRCS) ? dirigeantsRCS : [];
 
-    // If RCS is not relevant lets trick the system and ignore comparison
-    const rcsData = rcsNotRelevant
-      ? rneData
-      : !isAPINotResponding(dirigeantsRCS)
-      ? dirigeantsRCS
-      : [];
-
-    const dirigeantMerged = mergeDirigeants(rcsData, rneData);
+    let dirigeantMerged: IDirigeantsMergedIGInpi = [];
+    if (params.isEI) {
+      if (rcsData.length === 0) {
+        // Ignore IG
+        dirigeantMerged = mergeDirigeants(rneData, rneData);
+      } else {
+        // Ignore INPI
+        dirigeantMerged = mergeDirigeants(rcsData, rcsData);
+      }
+    } else {
+      dirigeantMerged = mergeDirigeants(rneData, rcsData);
+    }
 
     return {
       data: dirigeantMerged,
