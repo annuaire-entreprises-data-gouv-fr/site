@@ -117,7 +117,7 @@ describe('Siren or siret extraction from rechercher url', () => {
 
     expect(
       extractSirenOrSiretFromRechercherUrl(
-        '/rechercher?terme=dfgdfg-880878145000156'
+        '/rechercher?terme=dfgdfg-8808+7814500+0156'
       )
     ).toBe('88087814500015');
   });
@@ -135,7 +135,7 @@ describe('Siren or siret extraction from rechercher url', () => {
     ).toBe('850285594');
 
     expect(
-      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=FR7085028559')
+      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=FR70850285')
     ).toBe('');
   });
 });
