@@ -1,6 +1,7 @@
 import { Exception } from '#models/exceptions';
 import { ISession } from '#models/user/session';
 import {
+  extractSirenOrSiretFromRechercherUrl,
   extractSirenOrSiretSlugFromUrl,
   isLikelyASiren,
   isLikelyASiret,
@@ -33,11 +34,7 @@ const shouldRedirect = (path: string, search: string, url: string) => {
     }
 
     if (path.startsWith('/rechercher')) {
-      const slug = (search.match(/terme=([^&]*)/g) || [''])[0].replaceAll(
-        /[+]|(%20)/g,
-        ''
-      );
-      const sirenOrSiretParam = extractSirenOrSiretSlugFromUrl(slug);
+      const sirenOrSiretParam = extractSirenOrSiretFromRechercherUrl(search);
 
       if (isLikelyASiret(sirenOrSiretParam)) {
         return new URL(`/etablissement/${sirenOrSiretParam}?redirected=1`, url);

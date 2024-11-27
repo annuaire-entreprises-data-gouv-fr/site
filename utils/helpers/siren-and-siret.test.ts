@@ -1,4 +1,5 @@
 import {
+  extractSirenOrSiretFromRechercherUrl,
   extractSirenOrSiretSlugFromUrl,
   isLuhnValid,
   isSiren,
@@ -98,4 +99,45 @@ describe('Siren or siret extraction from url', () => {
     ).toBe('88087814500015');
   });
 });
+
+describe('Siren or siret extraction from rechercher url', () => {
+  test('It works with siren or siret', () => {
+    expect(
+      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=880878145')
+    ).toBe('880878145');
+    expect(
+      extractSirenOrSiretFromRechercherUrl('/rechercher?bla=bar&terme=8808799')
+    ).toBe('');
+  });
+
+  test('It works with siret', () => {
+    expect(
+      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=88087814500015')
+    ).toBe('88087814500015');
+
+    expect(
+      extractSirenOrSiretFromRechercherUrl(
+        '/rechercher?terme=dfgdfg-8808+7814500+0156'
+      )
+    ).toBe('88087814500015');
+  });
+  test('It works with VAT and EORI', () => {
+    expect(
+      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=FR88087814500015')
+    ).toBe('88087814500015');
+
+    expect(
+      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=FR27552032534')
+    ).toBe('552032534');
+
+    expect(
+      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=FR70850285594%22')
+    ).toBe('850285594');
+
+    expect(
+      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=FR70850285')
+    ).toBe('');
+  });
+});
+
 export {};
