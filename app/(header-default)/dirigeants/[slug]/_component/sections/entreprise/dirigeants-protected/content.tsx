@@ -28,7 +28,7 @@ export default function DirigeantsContentProtected({
       const infos = [
         <RolesInfos roles={dirigeant.roles} />,
         <>
-          <PersonneMoraleInfos dirigeant={dirigeant} />,
+          <PersonneMoraleInfos dirigeant={dirigeant} />
           <DisambiguationTooltip
             dataType="dirigeant"
             isInIg={dirigeant.isInIg}
