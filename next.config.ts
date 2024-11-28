@@ -50,7 +50,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data:",
               "frame-src 'self' https://stats.data.gouv.fr/ https://plugins.crisp.chat/",
-              "connect-src 'self' https://stats.data.gouv.fr/ https://errors.data.gouv.fr/ https://bodacc-datadila.opendatasoft.com/ https://data.economie.gouv.fr/ https://journal-officiel-datadila.opendatasoft.com/ https://api-lannuaire.service-public.fr/ https://data.culture.gouv.fr/",
+              "connect-src 'self' https://stats.data.gouv.fr/ https://errors.data.gouv.fr/ https://bodacc-datadila.opendatasoft.com/ https://data.economie.gouv.fr/ https://journal-officiel-datadila.opendatasoft.com/ https://api-lannuaire.service-public.fr/ https://data.culture.gouv.fr/ https://data.inpi.fr",
             ].join('; '),
           },
           {
