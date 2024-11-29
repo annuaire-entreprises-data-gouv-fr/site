@@ -10,12 +10,15 @@ export const GET = withSession(async function logoutCallbackRoute(req) {
     const session = req.session;
     const pathFrom = getPathFrom(session);
     await cleanAgentSession(session);
+
+    let path = '/connexion/au-revoir';
     if (pathFrom) {
       await cleanPathFrom(session);
-      return NextResponse.redirect(getBaseUrl() + pathFrom);
-    } else {
-      return NextResponse.redirect(getBaseUrl() + '/connexion/au-revoir');
+      path = pathFrom;
     }
+    const response = NextResponse.redirect(getBaseUrl() + path);
+    response.cookies.delete('has-refresh-token');
+    return response;
   } catch (e: any) {
     logErrorInSentry(new AgentConnectLogoutFailedException({ cause: e }));
     return NextResponse.redirect(getBaseUrl() + '/connexion/au-revoir');

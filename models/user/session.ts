@@ -20,3 +20,7 @@ export type ISession = {
     sub: string;
   };
 };
+
+export type IRefreshToken = {
+  user: IAgentInfo | null;
+};

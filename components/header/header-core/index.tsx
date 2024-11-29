@@ -1,6 +1,7 @@
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import LoadBar from '#components/load-bar';
+import RefreshSession from '#components/refresh-session';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
 import { ApplicationRights, hasRights } from '#models/user/rights';
@@ -34,6 +35,7 @@ export const HeaderCore: React.FC<IProps> = ({
 }) => {
   return (
     <>
+      <RefreshSession session={session} />
       <LoadBar session={session} />
       <header
         role="banner"

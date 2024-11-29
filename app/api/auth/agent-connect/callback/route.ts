@@ -6,8 +6,13 @@ import { getAgent, IAgentInfo } from '#models/user/agent';
 import { extractSirenFromSiret } from '#utils/helpers';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
-import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
-import withSession from '#utils/session/with-session';
+import {
+  cleanPathFrom,
+  getPathFrom,
+  setAgentSession,
+  setRefreshToken,
+} from '#utils/session';
+import withSessionAndRefreshToken from '#utils/session/with-session-and-refresh-token';
 import { NextResponse } from 'next/server';
 import {
   AgentConnectCouldBeAServicePublicException,
@@ -16,7 +21,9 @@ import {
   AgentConnectProviderNoSiretException,
 } from '../agent-connect-types';
 
-export const GET = withSession(async function callbackRoute(req) {
+export const GET = withSessionAndRefreshToken(async function callbackRoute(
+  req
+) {
   try {
     const userInfo = await proConnectAuthenticate(req);
     const agent = await getAgent(userInfo);
@@ -26,14 +33,24 @@ export const GET = withSession(async function callbackRoute(req) {
     const session = req.session;
     await setAgentSession(agent, session);
 
+    const refreshToken = req.refreshToken;
+    await setRefreshToken(agent, refreshToken);
+
     const pathFrom = decodeURIComponent(getPathFrom(session) || '');
 
+    let path = '/';
     if (pathFrom) {
       await cleanPathFrom(session);
-      return NextResponse.redirect(getBaseUrl() + pathFrom);
-    } else {
-      return NextResponse.redirect(getBaseUrl() + '/');
+      path = pathFrom;
     }
+
+    const response = NextResponse.redirect(getBaseUrl() + path);
+    response.cookies.set('has-refresh-token', 'true', {
+      maxAge: 3600 * 24 * 30,
+      path: '/',
+    });
+
+    return response;
   } catch (e: any) {
     if (
       e instanceof AgentConnectFailedException ||

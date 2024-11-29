@@ -1,5 +1,5 @@
 import { IAgentInfo } from '#models/user/agent';
-import { ISession } from '#models/user/session';
+import { IRefreshToken, ISession } from '#models/user/session';
 import { isAbsoluteUrl } from '#utils/server-side-helper/app/is-absolute-url';
 import type { IronSession, SessionOptions } from 'iron-session';
 
@@ -9,13 +9,31 @@ export const sessionOptions: SessionOptions = {
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
   },
-  ttl: 604800, // a week
+  ttl: 86400, // a day
+};
+
+export const refreshTokenOptions: SessionOptions = {
+  password: process.env.IRON_SESSION_PWD as string,
+  cookieName: 'annuaire-entreprises-refresh-token',
+  cookieOptions: {
+    secure: process.env.NODE_ENV === 'production',
+    path: '/api/auth/agent-connect/refresh',
+  },
+  ttl: 3600 * 24 * 30, // a month
 };
 
 export async function setVisitTimestamp(session: IronSession<ISession>) {
   session.lastVisitTimestamp = new Date().getTime();
   await session.save();
 }
+
+export const setRefreshToken = async (
+  agent: IAgentInfo,
+  refreshToken: IronSession<IRefreshToken>
+) => {
+  refreshToken.user = agent;
+  await refreshToken.save();
+};
 
 /**
  * Utils for AgentConnect session
