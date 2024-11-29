@@ -18,15 +18,14 @@ export default function MapWithResults({
   height: string;
   shouldColorZipCode: boolean;
 }) {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<Map>(null);
+  const mapContainer = useRef<HTMLDivElement | null>(null);
+  const map = useRef<Map | null>(null);
 
   useEffect(() => {
+    if (!mapContainer.current) return;
     if (map.current) return; // stops map from intializing more than once
 
-    //@ts-ignore
     map.current = new maplibregl.Map({
-      //@ts-ignore
       container: mapContainer.current,
       style: `https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json`,
       center: [2, 47],
@@ -53,11 +52,12 @@ export default function MapWithResults({
         );
 
         new maplibregl.Marker({ color: constants.colors.frBlue })
-          //@ts-ignore
-          .setLngLat([result.siege.longitude, result.siege.latitude])
+          .setLngLat([
+            parseInt(result.siege.longitude),
+            parseInt(result.siege.latitude),
+          ])
           .setPopup(popup)
-          //@ts-ignore
-          .addTo(map.current);
+          .addTo(map.current!);
       }
 
       result.matchingEtablissements.forEach((match) => {
@@ -78,15 +78,13 @@ export default function MapWithResults({
           new maplibregl.Marker({
             color: shouldColorZipCode ? 'yellow' : constants.colors.pastelBlue,
           })
-            //@ts-ignore
-            .setLngLat([match.longitude, match.latitude])
+            .setLngLat([parseInt(match.longitude), parseInt(match.latitude)])
             .setPopup(popup)
-            //@ts-ignore
-            .addTo(map.current);
+            .addTo(map.current!);
         }
       });
     });
-  }, [results, shouldColorZipCode]);
+  }, [results, shouldColorZipCode, mapContainer]);
 
   return (
     <div

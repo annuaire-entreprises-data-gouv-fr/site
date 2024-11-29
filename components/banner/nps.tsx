@@ -1,6 +1,7 @@
 'use client';
 
 import { PrintNever } from '#components-ui/print-visibility';
+import ClientOnly from '#components/client-only';
 import { Exception } from '#models/exceptions';
 import { logInfoInSentry } from '#utils/sentry';
 import { useStorage } from 'hooks';
@@ -56,23 +57,27 @@ export const NPSBanner: React.FC<{}> = () => {
     setIsVisible(false);
   };
 
-  return isVisible ? (
-    <PrintNever>
-      <div
-        id={NPS_MODAL_ID}
-        role="dialog"
-        aria-label="Donnez-nous votre avis"
-        className={styles.npsModal}
-      >
-        <div className="fr-container">
-          <a onClick={close} href="/formulaire/nps" target="_blank">
-            👍👎 Quel est votre avis sur l‘Annuaire des Entreprises ?
-          </a>
-          <button onClick={close}>
-            <strong>Ne plus afficher ce message ✕</strong>
-          </button>
-        </div>
-      </div>
-    </PrintNever>
-  ) : null;
+  return (
+    <ClientOnly>
+      {isVisible ? (
+        <PrintNever>
+          <div
+            id={NPS_MODAL_ID}
+            role="dialog"
+            aria-label="Donnez-nous votre avis"
+            className={styles.npsModal}
+          >
+            <div className="fr-container">
+              <a onClick={close} href="/formulaire/nps" target="_blank">
+                👍👎 Quel est votre avis sur l‘Annuaire des Entreprises ?
+              </a>
+              <button onClick={close}>
+                <strong>Ne plus afficher ce message ✕</strong>
+              </button>
+            </div>
+          </div>
+        </PrintNever>
+      ) : null}
+    </ClientOnly>
+  );
 };
