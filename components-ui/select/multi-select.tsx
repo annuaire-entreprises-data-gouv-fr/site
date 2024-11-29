@@ -1,4 +1,4 @@
-import ReactSelect, { GroupBase, OptionsOrGroups, Props } from 'react-select';
+import ReactSelect, { MultiValue, Props } from 'react-select';
 import { ISelectOptions } from './type';
 
 type MultiSelectProps = {
@@ -44,7 +44,7 @@ export const MultiSelect = ({
     return null;
   };
 
-  const onUpdate = (options: ISelectOptions[]) => {
+  const handleChange = (options: MultiValue<ISelectOptions>) => {
     if (onChange) {
       onChange(options.map((o) => o.value));
     }
@@ -60,11 +60,10 @@ export const MultiSelect = ({
         menuPosition={menuPosition}
         menuPlacement="auto"
         name={name}
-        options={options as OptionsOrGroups<{}, GroupBase<{}>>}
+        options={options}
         noOptionsMessage={() => 'Liste vide'}
         placeholder={placeholder}
-        //@ts-ignore
-        onChange={onUpdate}
+        onChange={handleChange}
         styles={{
           clearIndicator: (base) => ({ ...base, color: '#000' }),
           placeholder: (base) => ({ ...base, color: '#161616' }),
