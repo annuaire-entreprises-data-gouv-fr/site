@@ -1,3 +1,4 @@
+import ClientOnly from '#components/client-only';
 import ReactSelect, { MultiValue, Props } from 'react-select';
 import { ISelectOptions } from './type';
 
@@ -51,49 +52,51 @@ export const MultiSelect = ({
   };
 
   return (
-    <div style={{ marginBottom: 16, width: '100%', maxWidth }}>
-      <ReactSelect
-        defaultValue={getDefaultValue()}
-        id="react-select-section-naf"
-        instanceId={instanceId}
-        isMulti
-        menuPosition={menuPosition}
-        menuPlacement="auto"
-        name={name}
-        options={options}
-        noOptionsMessage={() => 'Liste vide'}
-        placeholder={placeholder}
-        onChange={handleChange}
-        styles={{
-          clearIndicator: (base) => ({ ...base, color: '#000' }),
-          placeholder: (base) => ({ ...base, color: '#161616' }),
-          control: (baseStyles, state) => ({
-            ...baseStyles,
-            boxShadow: '0 !important',
-            outline: state.isFocused ? '2px solid #0476f5' : '',
-            outlineOffset: state.isFocused ? '2px' : '',
-            backgroundColor: '#eeeeee',
-            border: 'none',
-            borderRadius: '0.25rem 0.25rem 0 0',
-            borderBottom: '2px solid black',
-            '&:hover': {
+    <ClientOnly>
+      <div style={{ marginBottom: 16, width: '100%', maxWidth }}>
+        <ReactSelect
+          defaultValue={getDefaultValue()}
+          id="react-select-section-naf"
+          instanceId={instanceId}
+          isMulti
+          menuPosition={menuPosition}
+          menuPlacement="auto"
+          name={name}
+          options={options}
+          noOptionsMessage={() => 'Liste vide'}
+          placeholder={placeholder}
+          onChange={handleChange}
+          styles={{
+            clearIndicator: (base) => ({ ...base, color: '#000' }),
+            placeholder: (base) => ({ ...base, color: '#161616' }),
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              boxShadow: '0 !important',
+              outline: state.isFocused ? '2px solid #0476f5' : '',
+              outlineOffset: state.isFocused ? '2px' : '',
+              backgroundColor: '#eeeeee',
+              border: 'none',
+              borderRadius: '0.25rem 0.25rem 0 0',
               borderBottom: '2px solid black',
-            },
-          }),
-          dropdownIndicator: (base) => ({
-            ...base,
-            color: 'black',
-            '&:hover': {
+              '&:hover': {
+                borderBottom: '2px solid black',
+              },
+            }),
+            dropdownIndicator: (base) => ({
+              ...base,
               color: 'black',
-            },
-          }),
-          menuPortal: (base) => ({
-            ...base,
-            zIndex: 2,
-          }),
-          multiValue: (base) => ({ ...base, backgroundColor: '#FFF' }),
-        }}
-      />
-    </div>
+              '&:hover': {
+                color: 'black',
+              },
+            }),
+            menuPortal: (base) => ({
+              ...base,
+              zIndex: 2,
+            }),
+            multiValue: (base) => ({ ...base, backgroundColor: '#FFF' }),
+          }}
+        />
+      </div>
+    </ClientOnly>
   );
 };
