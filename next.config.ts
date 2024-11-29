@@ -1,3 +1,4 @@
+import getContentSecurityPolicy from '#utils/headers/content-security-policy';
 import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
 import { NextConfig } from 'next';
@@ -44,14 +45,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://stats.data.gouv.fr/",
-              "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data:",
-              "frame-src 'self' https://stats.data.gouv.fr/ https://plugins.crisp.chat/",
-              "connect-src 'self' https://stats.data.gouv.fr/ https://errors.data.gouv.fr/ https://bodacc-datadila.opendatasoft.com/ https://data.economie.gouv.fr/ https://journal-officiel-datadila.opendatasoft.com/ https://api-lannuaire.service-public.fr/ https://data.culture.gouv.fr/ https://data.inpi.fr",
-            ].join('; '),
+            value: getContentSecurityPolicy(),
           },
           {
             key: 'Access-Control-Allow-Origin',
