@@ -38,7 +38,7 @@ export const metadata = {
   title: 'Quel est votre avis sur l’Annuaire des Entreprises ?',
   robots: 'noindex, nofollow',
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/formulaire/merci',
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/formulaire/nps',
   },
 };
 
