@@ -202,10 +202,9 @@
             "nom": "DUBIGNY",
             "prenom": "Raphael",
             "prenoms": "Raphael",
-            "role": null,
+            "role": "",
             "nationalite": null,
-            "dateNaissancePartial": null,
-            "lieuNaissance": ""
+            "dateNaissancePartial": null
           }
         ]
       }

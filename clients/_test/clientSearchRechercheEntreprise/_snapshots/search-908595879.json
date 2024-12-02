@@ -212,10 +212,9 @@
             "nom": "ESTOURNET",
             "prenom": "Pierre",
             "prenoms": "Pierre",
-            "role": "Président de SAS",
+            "role": "PRESIDENT DE SAS",
             "nationalite": "Française",
-            "dateNaissancePartial": "1985-12",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1985-12"
           }
         ]
       }
