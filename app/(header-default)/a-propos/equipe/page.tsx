@@ -29,7 +29,7 @@ const team = [
   },
   {
     photoUrl: '/images/team/adrien.jpg',
-    fullname: 'Aadrien Touzouli',
+    fullname: 'Adrien Touzouli',
     pronoun: 'un',
     role: 'devops',
   },
