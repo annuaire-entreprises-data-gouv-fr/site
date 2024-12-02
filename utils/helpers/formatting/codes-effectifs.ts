@@ -28,11 +28,13 @@ export const codesEffectifsOptions = [
 ];
 
 const formatAsMap = () => {
-  return codesEffectifsOptions.reduce((aggregator, code) => {
-    //@ts-ignore
-    aggregator[code.value] = code.label;
-    return aggregator;
-  }, {});
+  return codesEffectifsOptions.reduce<Record<string, string>>(
+    (aggregator, code) => {
+      aggregator[code.value] = code.label;
+      return aggregator;
+    },
+    {}
+  );
 };
 
 const codesEffectifs = formatAsMap();
@@ -46,8 +48,7 @@ export const libelleTrancheEffectif = (
     return 'Unité non employeuse';
   }
 
-  //@ts-ignore
-  const libelle = codesEffectifs[trancheEffectif];
+  const libelle = trancheEffectif ? codesEffectifs[trancheEffectif] : null;
 
   if (!libelle) {
     return null;
@@ -71,8 +72,7 @@ export const libelleEffectifForDescription = (uniteLegale: IUniteLegale) => {
     return ' Elle n’emploie pas de salariés.';
   }
 
-  //@ts-ignore
-  const libelle = codesEffectifs[trancheEffectif];
+  const libelle = trancheEffectif ? codesEffectifs[trancheEffectif] : null;
 
   const shouldAddYear =
     !anneeCategorieEntreprise && !categorieEntreprise && !!anneeTrancheEffectif;

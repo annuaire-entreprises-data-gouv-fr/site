@@ -1,4 +1,4 @@
-export const codesVoies = {
+export const codesVoies: Record<string, string> = {
   AIRE: 'Aire',
   ALL: 'Allée',
   AV: 'Avenue',

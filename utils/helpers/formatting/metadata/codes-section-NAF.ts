@@ -1,4 +1,4 @@
-export const codesSectionNAF = {
+export const codesSectionNAF: Record<string, string> = {
   A: 'Agriculture, sylviculture et pêche',
   B: 'Industries extractives',
   C: 'Industrie manufacturière',

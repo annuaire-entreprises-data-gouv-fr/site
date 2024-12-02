@@ -1,4 +1,4 @@
-export const departements = {
+export const departements: Record<string, string> = {
   '01': 'Ain',
   '02': 'Aisne',
   '03': 'Allier',

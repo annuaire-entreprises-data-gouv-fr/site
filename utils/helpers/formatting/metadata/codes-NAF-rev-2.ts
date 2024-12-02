@@ -1,4 +1,4 @@
-export const codesNAFRev2 = {
+export const codesNAFRev2: Record<string, string> = {
   '01.11Z':
     'Culture de céréales (à l’exception du riz), de légumineuses et de graines oléagineuses',
   '01.12Z': 'Culture du riz',
