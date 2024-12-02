@@ -26,6 +26,8 @@ const cspDirectives = {
     'https://data.inpi.fr/',
     'https://openmaptiles.geo.data.gouv.fr/',
     'https://openmaptiles.data.gouv.fr/',
+    'https://geo.api.gouv.fr',
+    'https://api-adresse.data.gouv.fr',
   ],
 };
 
