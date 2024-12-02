@@ -54,7 +54,7 @@ export default async function AdministrationPage(props: AppRouterProps) {
     <TextWrapper>
       <h1>D’où viennent les informations de cette section ?</h1>
       {administrations.map(({ slug }) => (
-        <AdministrationDescription slug={slug} />
+        <AdministrationDescription slug={slug} key={slug} />
       ))}
       {articles && (
         <>

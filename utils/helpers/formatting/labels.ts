@@ -40,7 +40,6 @@ export const libelleFromDepartement = (
   codeDepartement: string,
   addCode = true
 ) => {
-  //@ts-ignore
   const label = departements[codeDepartement];
 
   if (label) {
@@ -71,7 +70,6 @@ export const libelleFromCodeNAF = (
 ) => {
   const codes = getNomenclature(nomenclature);
 
-  //@ts-ignore
   const codeLabel = code ? codes[code] : undefined;
   const label = codeLabel || libelleFromCodeNAFWithoutNomenclature(code);
 
@@ -79,7 +77,6 @@ export const libelleFromCodeNAF = (
 };
 
 export const libelleFromCodeSectionNaf = (code: string) => {
-  //@ts-ignore
   const label = codesSectionNAF[code];
   return label ? label : 'Section inconnue';
 };
@@ -94,7 +91,6 @@ export const libelleFromCodeNAFWithoutNomenclature = (
     codesNAF1993,
     codesNAP,
   ]) {
-    //@ts-ignore
     const label = nomenclature[code];
     if (label) {
       return addCode && code ? `${label} (${code})` : label;
@@ -104,12 +100,8 @@ export const libelleFromCodeNAFWithoutNomenclature = (
 };
 
 export const libelleFromCategoriesJuridiques = (categorie: string) =>
-  //@ts-ignore
-  categoriesJuridiques[categorie] || null;
+  categoriesJuridiques[categorie];
 
-export const libelleFromTypeVoie = (
-  codeVoie: string | null | undefined = ''
-) => {
-  //@ts-ignore
+export const libelleFromTypeVoie = (codeVoie: string) => {
   return codesVoies[codeVoie] || codeVoie;
 };

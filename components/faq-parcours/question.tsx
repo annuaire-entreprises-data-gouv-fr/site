@@ -6,7 +6,7 @@ import { IFaqArticle } from '#models/article/faq';
 import { getAgentEmail, getAgentFullName } from '#models/user/helpers';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { PropsWithChildren } from 'react';
 export enum EQuestionType {
   LOADER = 'loader',
   NONE = 'none',
@@ -29,22 +29,8 @@ export default function Question({
   questions = [],
   session,
 }: IProps) {
-  const bottomRef = useRef(null);
   const email = getAgentEmail(session);
   const name = getAgentFullName(session);
-
-  const [dataToModify, selectDataToModify] = useState<any>('');
-
-  useEffect(() => {
-    selectDataToModify('');
-  }, [questionType]);
-
-  useEffect(() => {
-    if (bottomRef && bottomRef.current) {
-      //@ts-ignore
-      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [dataToModify]);
 
   switch (questionType) {
     case EQuestionType.CONTACT:
@@ -202,7 +188,6 @@ export default function Question({
               ...questions.map(({ title, slug }) => {
                 return {
                   href: `/faq/${slug}`,
-                  //@ts-ignore
                   label: title,
                 };
               }),

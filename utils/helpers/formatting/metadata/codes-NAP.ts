@@ -1,4 +1,4 @@
-export const codesNAP = {
+export const codesNAP: Record<string, string> = {
   '01.00': 'Cultures générales',
   '01.07': "Cultures générales associées à d'autres activités agricoles",
   '01.10': 'Production de légumes frais, de fleurs; pépinières',

@@ -1,4 +1,4 @@
-export const codesNAF1993 = {
+export const codesNAF1993: Record<string, string> = {
   '01.1A': 'Culture de céréales ; cultures industrielles',
   '01.1C': 'Culture de légumes ; maraîchage',
   '01.1D': 'Horticulture ; pépinières',

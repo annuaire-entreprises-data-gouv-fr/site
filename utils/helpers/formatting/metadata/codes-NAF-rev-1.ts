@@ -1,4 +1,4 @@
-export const codesNAFRev1 = {
+export const codesNAFRev1: Record<string, string> = {
   '01.1Ap': 'Culture de céréales ; cultures industrielles',
   '01.1Cp': 'Culture de légumes ; maraîchage',
   '01.1Dp': 'Horticulture ; pépinières',

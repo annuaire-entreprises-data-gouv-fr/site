@@ -62,8 +62,7 @@ const SearchFilters: React.FC<{
       .filter((k) => k.length === 4)
       .map((categorie) => ({
         value: categorie,
-        label:
-          categoriesJuridiques[categorie as keyof typeof categoriesJuridiques],
+        label: categoriesJuridiques[categorie],
       }));
 
   return (
