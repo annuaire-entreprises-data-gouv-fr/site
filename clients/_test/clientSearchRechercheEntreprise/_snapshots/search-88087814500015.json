@@ -231,7 +231,7 @@
               "idUai": []
             },
             "anneeTrancheEffectif": null,
-            "ancienSiege": false
+            "ancienSiege": true
           }
         ],
         "nombreEtablissements": 1,
@@ -242,10 +242,9 @@
             "nom": "JOUPPE",
             "prenom": "Xavier",
             "prenoms": "Xavier, Marie, Erwan",
-            "role": "Liquidateur",
+            "role": "LIQUIDATEUR",
             "nationalite": "Française",
-            "dateNaissancePartial": "1990-02",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1990-02"
           }
         ]
       }

@@ -30,33 +30,24 @@
         "description": "Radiation du RCS de Bordeaux le 07/03/2023"
       }
     ],
-    "immatriculation": {
-      "natureEntreprise": [
-        "Commerciale",
-        "Artisanale",
-        "Gestion de biens"
-      ],
-      "dateImmatriculation": null,
-      "dateDebutActivite": "2005-12-06",
-      "dateRadiation": null,
-      "dateFin": "",
-      "isPersonneMorale": true,
-      "dateCloture": "31/12",
-      "duree": null,
-      "capital": "2099975 EUR"
-    },
     "dirigeants": [
       {
+        "sexe": null,
         "nom": "POUYANNE",
-        "prenom": "DAVID, JEAN-CLAUDE",
-        "role": "Gérant",
-        "dateNaissancePartial": "1965-10"
+        "dateNaissance": "",
+        "dateNaissancePartial": "1965-10",
+        "prenom": "David",
+        "prenoms": "David, Jean-Claude",
+        "role": "GERANT"
       },
       {
+        "sexe": null,
         "nom": "POUYANNE (POUYANNE)",
-        "prenom": "DAVID, JEAN, CLAUDE",
-        "role": "Gérant",
-        "dateNaissancePartial": "1965-10"
+        "dateNaissance": "",
+        "dateNaissancePartial": "1965-10",
+        "prenom": "David",
+        "prenoms": "David, Jean, Claude",
+        "role": "GERANT"
       }
     ]
   }

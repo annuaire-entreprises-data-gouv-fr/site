@@ -229,7 +229,7 @@
               "idUai": []
             },
             "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            "ancienSiege": true
           },
           {
             "siren": "414971929",
@@ -314,30 +314,28 @@
             "nom": "DANAN",
             "prenom": "Charles",
             "prenoms": "Charles",
-            "role": "Directeur Général",
+            "role": "DIRECTEUR GENERAL",
             "nationalite": "Française",
-            "dateNaissancePartial": "1944-05",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1944-05"
           },
           {
             "sexe": null,
             "nom": "ROUSSET",
             "prenom": "Olivier",
             "prenoms": "Olivier",
-            "role": "Commissaire aux comptes suppléant",
+            "role": "COMMISSAIRE AUX COMPTES SUPPLEANT",
             "nationalite": "Française",
-            "dateNaissancePartial": "1971-11",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1971-11"
           },
           {
             "siren": "432345783",
             "denomination": "PROMETHEE GROUP",
-            "role": "Président de SAS"
+            "role": "PRESIDENT DE SAS"
           },
           {
             "siren": "702621590",
             "denomination": "TALENZ ARES AUDIT",
-            "role": "Commissaire aux comptes titulaire"
+            "role": "COMMISSAIRE AUX COMPTES TITULAIRE"
           }
         ]
       },
@@ -524,10 +522,9 @@
             "nom": "HATEM",
             "prenom": "Franck",
             "prenoms": "Franck",
-            "role": "Gérant",
+            "role": "GERANT",
             "nationalite": "Française",
-            "dateNaissancePartial": "1952-06",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1952-06"
           }
         ]
       },
@@ -741,7 +738,7 @@
               "idUai": []
             },
             "anneeTrancheEffectif": null,
-            "ancienSiege": false
+            "ancienSiege": true
           }
         ],
         "nombreEtablissements": 3,
@@ -752,10 +749,9 @@
             "nom": "CORBINEAU",
             "prenom": "Dominique",
             "prenoms": "Dominique",
-            "role": "Gérant",
+            "role": "GERANT",
             "nationalite": "Française",
-            "dateNaissancePartial": "1964-10",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1964-10"
           }
         ]
       },
@@ -791,7 +787,10 @@
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
-            "idcc": [],
+            "idcc": [
+              "2609",
+              "1596"
+            ],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
@@ -838,7 +837,10 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [],
+                "idcc": [
+                  "2609",
+                  "1596"
+                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
@@ -877,7 +879,10 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [],
+                "idcc": [
+                  "2609",
+                  "1596"
+                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
@@ -931,7 +936,10 @@
         "colter": {
           "codeColter": null
         },
-        "listeIdcc": [],
+        "listeIdcc": [
+          "2609",
+          "1596"
+        ],
         "immatriculation": null,
         "matchingEtablissements": [
           {
@@ -963,13 +971,16 @@
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
-              "idcc": [],
+              "idcc": [
+                "2609",
+                "1596"
+              ],
               "idOrganismeFormation": [],
               "idRge": [],
               "idUai": []
             },
             "anneeTrancheEffectif": null,
-            "ancienSiege": false
+            "ancienSiege": true
           }
         ],
         "nombreEtablissements": 2,
@@ -980,10 +991,9 @@
             "nom": "TURK (TURK)",
             "prenom": "Suat",
             "prenoms": "Suat",
-            "role": "Gérant",
+            "role": "GERANT",
             "nationalite": "Turque",
-            "dateNaissancePartial": "1980-08",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1980-08"
           }
         ]
       },
@@ -1207,7 +1217,7 @@
               "idUai": []
             },
             "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            "ancienSiege": true
           }
         ],
         "nombreEtablissements": 1,
@@ -1218,10 +1228,9 @@
             "nom": "DURET",
             "prenom": "Eric",
             "prenoms": "Eric",
-            "role": "Président de SAS",
+            "role": "PRESIDENT DE SAS",
             "nationalite": "Française",
-            "dateNaissancePartial": "1947-09",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1947-09"
           }
         ]
       }
