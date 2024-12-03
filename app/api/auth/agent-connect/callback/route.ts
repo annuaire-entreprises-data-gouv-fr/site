@@ -35,7 +35,7 @@ export const GET = withSession(async function callbackRoute(req) {
     }
 
     const response = NextResponse.redirect(getBaseUrl() + path);
-    response.cookies.set('logged-in', 'true', {
+    response.cookies.set('user-was-logged-in', 'true', {
       maxAge: 60 * 60 * 24 * 30,
       path: '/',
     });
