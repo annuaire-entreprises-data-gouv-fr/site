@@ -20,7 +20,6 @@ export interface ILandingPage {
 
 const loadAllLandingPages = () => {
   const landingPages = [] as ILandingPage[];
-  //@ts-ignore
   const landingPagesFolderContext = require.context(
     '/data/landing-pages',
     false,

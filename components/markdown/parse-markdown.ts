@@ -1,7 +1,6 @@
 import remarkHeadings from '@vcarl/remark-headings';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeStringify from 'rehype-stringify';
-// @ts-ignore
 import remarkHeadingId from 'remark-heading-id';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';

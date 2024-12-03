@@ -43,10 +43,8 @@ export function MapEtablissement({
     );
 
     new maplibregl.Marker({ color: constants.colors.frBlue })
-      //@ts-ignore
       .setLngLat(coords)
       .setPopup(popup)
-      //@ts-ignore
       .addTo(map.current);
   }, [etablissement, coords]);
 

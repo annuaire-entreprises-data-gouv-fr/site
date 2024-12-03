@@ -55,13 +55,14 @@ const loadMetadata = (): IAdministrationsMetaData => {
  * @returns
  */
 const loadAllAPI = () =>
-  Object.values(administrationsMetaData).reduce((acc, administration) => {
+  Object.values(administrationsMetaData).reduce<
+    Record<string, IAPIMonitorMetaData>
+  >((acc, administration) => {
     (administration.apiMonitors || []).forEach((monitor) => {
-      //@ts-ignore
       acc[monitor.apiSlug] = monitor;
     });
     return acc;
-  }, {}) as { [id: string]: IAPIMonitorMetaData };
+  }, {});
 
 export const administrationsMetaData: IAdministrationsMetaData = loadMetadata();
 
