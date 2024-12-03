@@ -18,7 +18,7 @@ export const GET = withSession(async function logoutCallbackRoute(req) {
     }
 
     const response = NextResponse.redirect(getBaseUrl() + pathFrom);
-    response.cookies.delete('logged-in');
+    response.cookies.delete('user-was-logged-in');
     return response;
   } catch (e: any) {
     logErrorInSentry(new AgentConnectLogoutFailedException({ cause: e }));

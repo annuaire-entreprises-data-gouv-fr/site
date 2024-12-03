@@ -17,15 +17,15 @@ export default function ReconnectBanner({
 }: {
   session: ISession | null;
 }) {
-  const [hasLoggedIn, setHasLoggedIn] = useState(false);
-  const loggedIn = isLoggedIn(session);
+  const [wasLoggedIn, setWasLoggedIn] = useState(false);
+  const currentlyLoggedIn = isLoggedIn(session);
 
   const [referrer, setReferrer] = useState<string | null>(null);
   const currentPath = usePathname();
 
   useEffect(() => {
     setReferrer(document.referrer);
-    setHasLoggedIn(getCookieBrowser('logged-in') === 'true');
+    setWasLoggedIn(getCookieBrowser('user-was-logged-in') === 'true');
   }, []);
 
   const baseURL = getBaseUrl();
@@ -34,11 +34,11 @@ export default function ReconnectBanner({
   const pathFrom = isFromSite ? new URL(referrer).pathname : currentPath;
 
   const handleClose = () => {
-    deleteCookieBrowser('logged-in');
-    setHasLoggedIn(false);
+    deleteCookieBrowser('user-was-logged-in');
+    setWasLoggedIn(false);
   };
 
-  return hasLoggedIn && !loggedIn ? (
+  return wasLoggedIn && !currentlyLoggedIn ? (
     <PrintNever>
       <div
         id="reconnect"
