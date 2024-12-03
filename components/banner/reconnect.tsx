@@ -40,7 +40,7 @@ export default function ReconnectBanner({
     setWasLoggedIn(false);
   };
 
-  return true || (wasLoggedIn && !currentlyLoggedIn) ? (
+  return wasLoggedIn && !currentlyLoggedIn ? (
     <PrintNever>
       <div
         id="reconnect"
