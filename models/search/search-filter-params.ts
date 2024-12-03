@@ -213,7 +213,7 @@ class SearchFilterParams {
       f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre${plural} administratif${plural}`;
     }
 
-    const structureLabels = {
+    const structureLabels: Record<string, string> = {
       ess: 'Qualité : ESS',
       rge: 'Certifié : RGE',
       esv: 'Label : Entrepreneur de spectacle vivant',
@@ -231,7 +231,6 @@ class SearchFilterParams {
 
     if (this.params.type) {
       f.structureFilter.label =
-        //@ts-ignore
         structureLabels[this.params.type] || 'filtre sur le type';
     }
     if (this.params.label && this.params.type) {
@@ -239,7 +238,6 @@ class SearchFilterParams {
     }
     if (this.params.label) {
       f.structureFilter.label +=
-        //@ts-ignore
         structureLabels[this.params.label] || 'filtre sur le label';
     }
 

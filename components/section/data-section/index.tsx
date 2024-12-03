@@ -21,7 +21,6 @@ export function DataSection<T extends Exclude<unknown, IDataFetchingState>>({
   additionalInfoOnError,
   ...props
 }: IDataSectionProps<T>) {
-  //@ts-ignore
   if (notFoundInfo === null && isAPI404(data)) {
     return null;
   }

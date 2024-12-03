@@ -27,7 +27,6 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
     formatLog(
       response?.config?.url || '',
       response?.status,
-      //@ts-ignore
       startTime ? endTime - startTime : undefined,
       (response?.config?.method || '').toUpperCase()
     )
