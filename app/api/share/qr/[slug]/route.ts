@@ -75,6 +75,9 @@ export async function GET(
       })
     );
 
-    return NextResponse.json({ message: e }, { status: 500 });
+    return NextResponse.json(
+      { message: 'Une erreur est survenue.' },
+      { status: 500 }
+    );
   }
 }
