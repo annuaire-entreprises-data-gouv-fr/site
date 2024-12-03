@@ -28,12 +28,18 @@ export const GET = withSession(async function callbackRoute(req) {
 
     const pathFrom = decodeURIComponent(getPathFrom(session) || '');
 
+    let path = '/';
     if (pathFrom) {
       await cleanPathFrom(session);
-      return NextResponse.redirect(getBaseUrl() + pathFrom);
-    } else {
-      return NextResponse.redirect(getBaseUrl() + '/');
+      path = pathFrom;
     }
+
+    const response = NextResponse.redirect(getBaseUrl() + path);
+    response.cookies.set('logged-in', 'true', {
+      maxAge: 60 * 60 * 24 * 30,
+      path: '/',
+    });
+    return response;
   } catch (e: any) {
     if (
       e instanceof AgentConnectFailedException ||
