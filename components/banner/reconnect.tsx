@@ -1,6 +1,8 @@
 'use client';
 
+import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
+import constants from '#models/constants';
 import { isLoggedIn } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import {
@@ -38,22 +40,30 @@ export default function ReconnectBanner({
     setWasLoggedIn(false);
   };
 
-  return wasLoggedIn && !currentlyLoggedIn ? (
+  return true || (wasLoggedIn && !currentlyLoggedIn) ? (
     <PrintNever>
       <div
         id="reconnect"
         role="dialog"
         aria-label="Voulez-vous vous reconnecter ?"
         className={styles.npsModal}
+        style={{
+          backgroundColor: constants.colors.espaceAgentPastel,
+          borderColor: constants.colors.espaceAgent,
+        }}
       >
         <div className="fr-container">
-          <a
-            href={`/api/auth/agent-connect/login${
-              pathFrom ? `?pathFrom=${pathFrom}` : ''
-            }`}
-          >
-            Votre session a expiré, voulez-vous vous reconnecter ?
-          </a>
+          <Icon slug="lockFill" color={constants.colors.espaceAgent}>
+            Pour des raisons de sécurité, vous devez vous reconnecter chaque
+            jour.{' '}
+            <a
+              href={`/api/auth/agent-connect/login${
+                pathFrom ? `?pathFrom=${pathFrom}` : ''
+              }`}
+            >
+              Voulez-vous vous reconnecter ?
+            </a>
+          </Icon>
           <button onClick={handleClose}>
             <strong>Ne plus afficher ce message ✕</strong>
           </button>
