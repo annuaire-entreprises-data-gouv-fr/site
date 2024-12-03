@@ -1,5 +1,6 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { InternalError } from '#models/exceptions';
+import { isLuhnValid } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
 import getSiretFromIdpTemporary from './getSiretFromIdpTemporary';
 import { IAgentScope, getAgentScopes } from './scopes';
@@ -64,6 +65,20 @@ const extractDomain = (email: string) => {
   }
 };
 
+/**
+ * Get siret or idpId fallback siret
+ * @param siret
+ * @param idpId
+ * @returns
+ */
+const getSiretOrFallbackOnIdpId = (siret: string, idpId: string) => {
+  const cleantSiret = (siret || '').replaceAll(' ', '');
+  if (cleantSiret && isLuhnValid(cleantSiret)) {
+    return cleantSiret;
+  }
+  return getSiretFromIdpTemporary(idpId);
+};
+
 export const getAgent = async (
   userInfo: IProConnectUserInfo
 ): Promise<IAgentInfo> => {
@@ -80,9 +95,7 @@ export const getAgent = async (
   const familyName = userInfo.family_name ?? '';
   const firstName = userInfo.given_name ?? '';
   const userId = userInfo.sub;
-  const siret =
-    (userInfo.siret || '').replaceAll(' ', '') ||
-    getSiretFromIdpTemporary(idpId);
+  const siret = getSiretOrFallbackOnIdpId(userInfo.siret, idpId);
 
   return {
     userId,
