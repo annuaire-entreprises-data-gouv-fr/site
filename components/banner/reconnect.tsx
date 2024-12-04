@@ -9,7 +9,6 @@ import {
   deleteCookieBrowser,
   getCookieBrowser,
 } from '#utils/cookies/browser-cookies';
-import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
@@ -22,18 +21,11 @@ export default function ReconnectBanner({
   const [wasLoggedIn, setWasLoggedIn] = useState(false);
   const currentlyLoggedIn = isLoggedIn(session);
 
-  const [referrer, setReferrer] = useState<string | null>(null);
   const currentPath = usePathname();
 
   useEffect(() => {
-    setReferrer(document.referrer);
     setWasLoggedIn(getCookieBrowser('user-was-logged-in') === 'true');
   }, []);
-
-  const baseURL = getBaseUrl();
-  const isFromSite = referrer?.indexOf(baseURL) === 0;
-
-  const pathFrom = isFromSite ? new URL(referrer).pathname : currentPath;
 
   const handleClose = () => {
     deleteCookieBrowser('user-was-logged-in');
@@ -56,11 +48,7 @@ export default function ReconnectBanner({
           <Icon slug="lockFill" color={constants.colors.espaceAgent}>
             Pour des raisons de sécurité, vous devez vous reconnecter chaque
             jour.{' '}
-            <a
-              href={`/api/auth/agent-connect/login${
-                pathFrom ? `?pathFrom=${pathFrom}` : ''
-              }`}
-            >
+            <a href={`/api/auth/agent-connect/login?pathFrom=${currentPath}`}>
               Voulez-vous vous reconnecter ?
             </a>
           </Icon>
