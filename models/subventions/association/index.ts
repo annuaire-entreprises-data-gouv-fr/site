@@ -16,7 +16,7 @@ export interface ISubvention {
   label: string;
   status: string;
   description: string;
-  amount: number;
+  amount: number | undefined;
 }
 
 export const getSubventionsAssociationFromSlug = async (

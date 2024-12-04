@@ -5,9 +5,8 @@ export type IAgentScope =
   | 'nonDiffusible'
   | 'conformite'
   | 'beneficiaires'
-  | 'subventions_association'
   | 'agent'
-  | 'opendata'
+  | 'pseudo_opendata'
   | 'cibtp'
   | 'cnetp';
 
@@ -18,9 +17,8 @@ export const isAgentScope = (str: string): str is IAgentScope => {
       'nonDiffusible',
       'conformite',
       'beneficiaires',
-      'subventions_association',
       'agent',
-      'opendata',
+      'pseudo_opendata',
       'cibtp',
       'cnetp',
     ].indexOf(str) > 0
@@ -34,7 +32,7 @@ const defaultAgentScopes = [
   'agent',
   'nonDiffusible',
   'rne',
-  'opendata',
+  'pseudo_opendata',
 ] as IAgentScope[];
 
 /**
@@ -61,7 +59,6 @@ export const getAgentScopes = async (
         ...defaultAgentScopes,
         'conformite',
         'beneficiaires',
-        'subventions_association',
         'cibtp',
         'cnetp',
       ],

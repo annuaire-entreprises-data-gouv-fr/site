@@ -39,12 +39,12 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
     case ApplicationRights.protectedCertificats:
     case ApplicationRights.carteProfessionnelleTravauxPublics:
     case ApplicationRights.mandatairesRCS:
+    case ApplicationRights.subventionsAssociation:
     case ApplicationRights.associationProtected:
-      return userScopes.includes('opendata');
+      // not open data but available for allagents
+      return userScopes.includes('pseudo_opendata');
     case ApplicationRights.beneficiaires:
       return userScopes.includes('beneficiaires');
-    case ApplicationRights.subventionsAssociation:
-      return userScopes.includes('subventions_association');
     case ApplicationRights.cibtp:
       return userScopes.includes('cibtp');
     case ApplicationRights.cnetp:

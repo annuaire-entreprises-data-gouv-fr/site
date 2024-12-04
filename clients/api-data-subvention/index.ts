@@ -36,10 +36,10 @@ const mapToDomainObject = (grantItems: IGrantItem[]): ISubvention[] => {
   return grantItems
     .filter((grantItem) => Boolean(grantItem.application))
     .reduce((subventions: ISubvention[], grantItem) => {
-      const year = grantItem.application.annee_demande?.value;
-      const label = grantItem.application.statut_label?.value;
-      const status = grantItem.application.status?.value;
-      const description = grantItem.application.dispositif?.value;
+      const year = grantItem.application.annee_demande?.value ?? 0;
+      const label = grantItem.application.statut_label?.value ?? '';
+      const status = grantItem.application.status?.value ?? '';
+      const description = grantItem.application.dispositif?.value ?? '';
       const amount = grantItem.application.montants?.accorde?.value;
 
       const newSubvention: ISubvention = {

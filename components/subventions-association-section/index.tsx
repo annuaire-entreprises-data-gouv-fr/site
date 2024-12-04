@@ -5,6 +5,7 @@ import FAQLink from '#components-ui/faq-link';
 import { Select } from '#components-ui/select';
 import { Tag } from '#components-ui/tag';
 import { DJEPVA } from '#components/administrations';
+import AgentWall from '#components/espace-agent-components/agent-wall';
 import NonRenseigne from '#components/non-renseigne';
 import { DataSectionClient } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
@@ -43,7 +44,7 @@ const SubventionDetails: React.FC<{
     );
     const totalApproved = approvedSubventions.length;
     const totalAmount = approvedSubventions.reduce(
-      (acc, subvention) => acc + subvention.amount || 0,
+      (acc, subvention) => acc + (subvention?.amount || 0),
       0
     );
 
@@ -65,7 +66,8 @@ const SubventionDetails: React.FC<{
         <b>{subventionStats.totalApproved} ont été accordées</b> pour un total
         de <b>{formatCurrency(subventionStats.totalAmount)}</b>. Le reste a été
         refusé, est en cours d’instruction ou se situe dans un état inconnu.
-        <p></p>
+      </p>
+      <p>
         Pour en savoir plus, vous pouvez consulter{' '}
         <a
           href={routes.dataSubvention.pageBySirenOrIdRna(siren)}
@@ -85,7 +87,8 @@ export const SubventionsAssociationSection: React.FC<{
   uniteLegale: IAssociation;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const [selectedYear, setSelectedYear] = useState<string>('');
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedStatus, setSelectedStatus] = useState<string>('');
   const [filteredSubventions, setFilteredSubventions] = useState<ISubvention[]>(
     []
   );
@@ -100,31 +103,60 @@ export const SubventionsAssociationSection: React.FC<{
     if (!isDataSuccess(subventions)) {
       return [];
     }
-    return [...new Set(subventions.map((s) => s.year.toString()))].map((y) => {
+    return [
+      ...new Set(
+        subventions
+          .filter((s) => (selectedStatus ? s.label === selectedStatus : true))
+          .map((s) => s.year)
+      ),
+    ].map((y) => {
+      return {
+        value: y,
+        label: y.toString(),
+      };
+    });
+  }, [subventions, selectedStatus]);
+
+  const allStatuses = useMemo(() => {
+    if (!isDataSuccess(subventions)) {
+      return [];
+    }
+    return [
+      ...new Set(
+        subventions
+          .filter(
+            (s) =>
+              (selectedYear ? s.year === selectedYear : true) && s.label !== ''
+          )
+          .map((s) => s.label)
+      ),
+    ].map((y) => {
       return {
         value: y,
         label: y,
       };
     });
-  }, [subventions]);
+  }, [subventions, selectedYear]);
 
   useEffect(() => {
     if (isDataSuccess(subventions)) {
-      if (selectedYear === '') {
+      if (selectedYear === null && selectedStatus === '') {
         return setFilteredSubventions(subventions);
       }
       setFilteredSubventions(
-        subventions.filter((s) => s.year.toString() === selectedYear)
+        subventions.filter(
+          (s) =>
+            (selectedYear ? s.year === selectedYear : true) &&
+            (selectedStatus ? s.label === selectedStatus : true)
+        )
       );
     }
-  }, [subventions, selectedYear]);
+  }, [subventions, selectedYear, selectedStatus]);
 
   if (isUnauthorized(subventions)) {
-    // for a start lets hide it first before Data subvention validation
-    return null;
-    // return (
-    // <AgentWall id="detail-des-subventions" title="Détail des subventions" />
-    // );
+    return (
+      <AgentWall id="detail-des-subventions" title="Détail des subventions" />
+    );
   }
 
   return (
@@ -149,16 +181,32 @@ export const SubventionsAssociationSection: React.FC<{
               siren={uniteLegale.siren}
             />
             <div className="layout-right">
-              <Select
-                options={allYears}
-                name="Filtrer par année"
-                defaultValue={selectedYear}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  setSelectedYear(e.target.value);
-                }}
-                placeholder="Toutes les années"
-              />
+              <ul className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center">
+                <li style={{ marginRight: '10px' }}>
+                  <Select
+                    options={allYears}
+                    name="Filtrer par année"
+                    defaultValue={''}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      setSelectedYear(parseInt(e.target.value, 10));
+                    }}
+                    placeholder="Toutes les années"
+                  />
+                </li>
+                <li>
+                  <Select
+                    options={allStatuses}
+                    name="Filtrer par état"
+                    defaultValue={''}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      setSelectedStatus(e.target.value);
+                    }}
+                    placeholder="Tous les états"
+                  />
+                </li>
+              </ul>
             </div>
+
             <FullTable
               head={['Année', 'Dispositif', 'Montant', 'État']}
               body={filteredSubventions.map((subvention) => [
@@ -168,7 +216,11 @@ export const SubventionsAssociationSection: React.FC<{
                 ) : (
                   <NonRenseigne />
                 ),
-                formatCurrency(subvention.amount),
+                typeof subvention.amount === 'undefined' ? (
+                  <NonRenseigne />
+                ) : (
+                  formatCurrency(subvention.amount)
+                ),
                 subvention.label ? (
                   <Tag
                     color={
