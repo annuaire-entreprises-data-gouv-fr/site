@@ -1,5 +1,6 @@
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
+import ReconnectBanner from '#components/banner/reconnect';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
@@ -34,6 +35,7 @@ export const HeaderCore: React.FC<IProps> = ({
 }) => {
   return (
     <>
+      <ReconnectBanner session={session} />
       <LoadBar session={session} />
       <header
         role="banner"
