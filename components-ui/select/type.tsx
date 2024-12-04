@@ -1,4 +1,4 @@
 export type ISelectOptions = {
-  value: string | number;
+  value: string;
   label: string | undefined;
 };

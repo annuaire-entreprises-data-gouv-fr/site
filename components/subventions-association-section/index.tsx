@@ -111,7 +111,7 @@ export const SubventionsAssociationSection: React.FC<{
       ),
     ].map((y) => {
       return {
-        value: y,
+        value: y.toString(),
         label: y.toString(),
       };
     });
