@@ -72,9 +72,9 @@ const extractDomain = (email: string) => {
  * @returns
  */
 const getSiretOrFallbackOnIdpId = (siret: string, idpId: string) => {
-  const cleantSiret = (siret || '').replaceAll(' ', '');
-  if (cleantSiret && isLuhnValid(cleantSiret)) {
-    return cleantSiret;
+  const cleanedSiret = (siret || '').replaceAll(' ', '');
+  if (cleanedSiret && isLuhnValid(cleanedSiret)) {
+    return cleanedSiret;
   }
   return getSiretFromIdpTemporary(idpId);
 };
