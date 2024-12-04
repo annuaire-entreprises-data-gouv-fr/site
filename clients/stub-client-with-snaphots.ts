@@ -86,6 +86,7 @@ async function loadSimplifyParams(clientName: string) {
 // Load all snapshots .json files in the folder /_test/<clientName>/_snapshots/*.json
 // using require.context webpack feature
 async function loadSnapshots(clientName: string) {
+  //@ts-ignore
   const snapshotContext = require.context(
     `#clients/_test/`,
     true,
