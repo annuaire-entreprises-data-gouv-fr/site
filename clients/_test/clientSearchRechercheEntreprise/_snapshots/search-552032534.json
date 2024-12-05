@@ -5,325 +5,246 @@
     "searchFilterParams": ""
   },
   "result": {
-    "currentPage": 1,
-    "resultCount": 1,
-    "pageCount": 1,
     "results": [
       {
         "siren": "552032534",
-        "oldSiren": "552032534",
+        "nom_complet": "DANONE",
+        "nom_raison_sociale": "DANONE",
+        "sigle": null,
+        "nombre_etablissements": 17,
+        "nombre_etablissements_ouverts": 2,
         "siege": {
-          "siren": "552032534",
-          "siret": "55203253400646",
-          "oldSiret": "",
-          "etatAdministratif": "en activité",
-          "statutDiffusion": "diffusible",
-          "estSiege": true,
-          "enseigne": "",
-          "denomination": null,
-          "nic": "00646",
-          "dateCreation": "2003-10-20",
-          "dateDerniereMiseAJour": "",
-          "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2008-01-01",
-          "dateFermeture": "",
+          "activite_principale": "70.10Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
           "adresse": "17 BOULEVARD HAUSSMANN 75009 PARIS",
-          "adressePostale": "17 BOULEVARD HAUSSMANN 75009 PARIS",
-          "codePostal": "75009",
-          "commune": "PARIS",
-          "activitePrincipale": "70.10Z",
-          "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
-          "trancheEffectif": "42",
-          "libelleTrancheEffectif": "",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "75009",
+          "commune": "75109",
+          "complement_adresse": null,
+          "coordonnees": "48.872565,2.334926",
+          "date_creation": "2003-10-20",
+          "date_debut_activite": "2008-01-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-06-22T05:26:24",
+          "departement": "75",
+          "distribution_speciale": null,
+          "epci": "200054781",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "17 Boulevard Haussmann 75009 Paris",
+          "geo_id": "75109_4485_00017",
+          "indice_repetition": null,
           "latitude": "48.872565",
+          "libelle_cedex": null,
+          "libelle_commune": "PARIS",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "HAUSSMANN",
+          "liste_enseignes": null,
+          "liste_finess": [
+            "750073181"
+          ],
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "9999"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": null,
+          "liste_uai": null,
           "longitude": "2.334926",
-          "complements": {
-            "estEntrepreneurIndividuel": false,
-            "idFiness": [
-              "750073181"
-            ],
-            "idBio": [],
-            "idcc": [
-              "9999"
-            ],
-            "idOrganismeFormation": [],
-            "idRge": [],
-            "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          "nom_commercial": null,
+          "numero_voie": "17",
+          "region": "11",
+          "siret": "55203253400646",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "42",
+          "type_voie": "BOULEVARD"
         },
-        "tva": null,
-        "anciensSiegesSirets": [],
-        "statutDiffusion": "diffusible",
-        "etatAdministratif": "en activité",
-        "nomComplet": "DANONE",
-        "chemin": "danone-552032534",
-        "natureJuridique": "5599",
-        "libelleNatureJuridique": "SA à conseil d'administration (s.a.i.)",
-        "etablissements": {
-          "all": [
-            {
-              "siren": "552032534",
-              "siret": "55203253400646",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00646",
-              "dateCreation": "2003-10-20",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2008-01-01",
-              "dateFermeture": "",
-              "adresse": "17 BOULEVARD HAUSSMANN 75009 PARIS",
-              "adressePostale": "17 BOULEVARD HAUSSMANN 75009 PARIS",
-              "codePostal": "75009",
-              "commune": "PARIS",
-              "activitePrincipale": "70.10Z",
-              "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
-              "trancheEffectif": "42",
-              "libelleTrancheEffectif": "",
-              "latitude": "48.872565",
-              "longitude": "2.334926",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "idFiness": [
-                  "750073181"
-                ],
-                "idBio": [],
-                "idcc": [
-                  "9999"
-                ],
-                "idOrganismeFormation": [],
-                "idRge": [],
-                "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
-            }
-          ],
-          "open": [
-            {
-              "siren": "552032534",
-              "siret": "55203253400646",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00646",
-              "dateCreation": "2003-10-20",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2008-01-01",
-              "dateFermeture": "",
-              "adresse": "17 BOULEVARD HAUSSMANN 75009 PARIS",
-              "adressePostale": "17 BOULEVARD HAUSSMANN 75009 PARIS",
-              "codePostal": "75009",
-              "commune": "PARIS",
-              "activitePrincipale": "70.10Z",
-              "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
-              "trancheEffectif": "42",
-              "libelleTrancheEffectif": "",
-              "latitude": "48.872565",
-              "longitude": "2.334926",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "idFiness": [
-                  "750073181"
-                ],
-                "idBio": [],
-                "idcc": [
-                  "9999"
-                ],
-                "idOrganismeFormation": [],
-                "idRge": [],
-                "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
-            }
-          ],
-          "unknown": [],
-          "closed": [],
-          "nombreEtablissementsOuverts": 2,
-          "nombreEtablissements": 17,
-          "usePagination": false,
-          "currentEtablissementPage": 1
-        },
-        "activitePrincipale": "70.10Z",
-        "libelleActivitePrincipale": "Activités des sièges sociaux",
-        "dateCreation": "1955-01-01",
-        "dateFermeture": "",
-        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-06-22T05:26:24",
-        "dateMiseAJourInpi": "2024-05-19T16:49:33",
-        "dateMiseAJourIG": "",
-        "dateDebutActivite": "",
-        "trancheEffectif": "42",
-        "anneeCategorieEntreprise": "2022",
-        "categorieEntreprise": "GE",
-        "anneeTrancheEffectif": "2022",
-        "complements": {
-          "estBio": false,
-          "estEss": false,
-          "estServicePublic": false,
-          "estEntrepreneurIndividuel": false,
-          "estEntrepreneurSpectacle": false,
-          "statutEntrepreneurSpectacle": null,
-          "estFiness": true,
-          "egaproRenseignee": true,
-          "estRge": false,
-          "estOrganismeFormation": false,
-          "estSocieteMission": false,
-          "estQualiopi": false,
-          "estAssociation": false,
-          "estUai": false,
-          "estEntrepriseInclusive": false,
-          "typeEntrepriseInclusive": null
-        },
-        "association": {
-          "idAssociation": null,
-          "data": null
-        },
-        "colter": {
-          "codeColter": null
-        },
-        "listeIdcc": [
-          "9999"
-        ],
-        "immatriculation": {
-          "dateDebutActivite": "",
-          "dateRadiation": "",
-          "dateImmatriculation": "1955-03-01",
-          "duree": 99,
-          "dateFin": "01/03/2054",
-          "natureEntreprise": [
-            "Commerciale"
-          ],
-          "dateCloture": "3112",
-          "isPersonneMorale": true,
-          "capital": "169 888 497,75 € (fixe)"
-        },
-        "matchingEtablissements": [],
-        "nombreEtablissements": 17,
-        "nombreEtablissementsOuverts": 2,
+        "activite_principale": "70.10Z",
+        "categorie_entreprise": "GE",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "1955-01-01",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-04T15:43:10",
+        "date_mise_a_jour_insee": "2024-06-22T05:26:24",
+        "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
           {
-            "sexe": null,
             "nom": "BERNARD DE SAINT AFFRIQUE",
-            "prenom": "Antoine",
-            "prenoms": "Antoine",
-            "role": "DIRECTEUR GENERAL",
+            "prenoms": "ANTOINE",
+            "annee_de_naissance": "1964",
+            "date_de_naissance": "1964-12",
+            "qualite": "Directeur Général",
             "nationalite": "Française",
-            "dateNaissancePartial": "1964-12"
+            "type_dirigeant": "personne physique"
           },
           {
-            "sexe": null,
             "nom": "BOUTEBBA",
-            "prenom": "Frederic",
-            "prenoms": "Frederic",
-            "role": "ADMINISTRATEUR",
+            "prenoms": "FREDERIC",
+            "annee_de_naissance": "1967",
+            "date_de_naissance": "1967-08",
+            "qualite": "Administrateur",
             "nationalite": "Française",
-            "dateNaissancePartial": "1967-08"
+            "type_dirigeant": "personne physique"
           },
           {
-            "sexe": null,
             "nom": "CHAPOULAUD-FLOQUET",
-            "prenom": "Valerie",
-            "prenoms": "Valerie",
-            "role": "ADMINISTRATEUR",
+            "prenoms": "VALERIE",
+            "annee_de_naissance": "1962",
+            "date_de_naissance": "1962-11",
+            "qualite": "Administrateur",
             "nationalite": "Française",
-            "dateNaissancePartial": "1962-11"
+            "type_dirigeant": "personne physique"
           },
           {
-            "sexe": null,
             "nom": "GHOSTINE",
-            "prenom": "Gilbert",
-            "prenoms": "Gilbert",
-            "role": "ADMINISTRATEUR",
+            "prenoms": "GILBERT",
+            "annee_de_naissance": "1960",
+            "date_de_naissance": "1960-02",
+            "qualite": "Administrateur",
             "nationalite": "Canadienne",
-            "dateNaissancePartial": "1960-02"
+            "type_dirigeant": "personne physique"
           },
           {
-            "sexe": null,
             "nom": "KINGO",
-            "prenom": "Lise",
-            "prenoms": "Lise",
-            "role": "ADMINISTRATEUR",
+            "prenoms": "LISE",
+            "annee_de_naissance": "1961",
+            "date_de_naissance": "1961-08",
+            "qualite": "Administrateur",
             "nationalite": "Danoise",
-            "dateNaissancePartial": "1961-08"
+            "type_dirigeant": "personne physique"
           },
           {
-            "sexe": null,
             "nom": "LOUVET",
-            "prenom": "Patrice",
-            "prenoms": "Patrice",
-            "role": "ADMINISTRATEUR",
+            "prenoms": "PATRICE",
+            "annee_de_naissance": "1964",
+            "date_de_naissance": "1964-09",
+            "qualite": "Administrateur",
             "nationalite": "Américaine",
-            "dateNaissancePartial": "1964-09"
+            "type_dirigeant": "personne physique"
           },
           {
-            "sexe": null,
             "nom": "MEHTA",
-            "prenom": "Sanjiv",
-            "prenoms": "Sanjiv",
-            "role": "ADMINISTRATEUR",
+            "prenoms": "SANJIV",
+            "annee_de_naissance": "1960",
+            "date_de_naissance": "1960-07",
+            "qualite": "Administrateur",
             "nationalite": "Indienne",
-            "dateNaissancePartial": "1960-07"
+            "type_dirigeant": "personne physique"
           },
           {
-            "sexe": null,
             "nom": "THEISSIG (MOLITOR)",
-            "prenom": "Bettina",
-            "prenoms": "Bettina",
-            "role": "ADMINISTRATEUR",
+            "prenoms": "BETTINA",
+            "annee_de_naissance": "1962",
+            "date_de_naissance": "1962-07",
+            "qualite": "Administrateur",
             "nationalite": null,
-            "dateNaissancePartial": "1962-07"
+            "type_dirigeant": "personne physique"
           },
           {
-            "sexe": null,
             "nom": "PICAUD (ROAUX)",
-            "prenom": "Geraldine",
-            "prenoms": "Geraldine",
-            "role": "ADMINISTRATEUR",
+            "prenoms": "GERALDINE",
+            "annee_de_naissance": "1970",
+            "date_de_naissance": "1970-02",
+            "qualite": "Administrateur",
             "nationalite": "Française",
-            "dateNaissancePartial": "1970-02"
+            "type_dirigeant": "personne physique"
           },
           {
-            "sexe": null,
             "nom": "ROBERTS",
-            "prenom": "Susan-Barbara",
-            "prenoms": "Susan-Barbara",
-            "role": "ADMINISTRATEUR",
+            "prenoms": "SUSAN-BARBARA",
+            "annee_de_naissance": "1957",
+            "date_de_naissance": "1957-05",
+            "qualite": "Administrateur",
             "nationalite": "Britannique",
-            "dateNaissancePartial": "1957-05"
+            "type_dirigeant": "personne physique"
           },
           {
-            "sexe": null,
             "nom": "SCHNEPP",
-            "prenom": "Gilles",
-            "prenoms": "Gilles",
-            "role": "ADMINISTRATEUR",
+            "prenoms": "GILLES",
+            "annee_de_naissance": "1958",
+            "date_de_naissance": "1958-10",
+            "qualite": "Administrateur",
             "nationalite": "Française",
-            "dateNaissancePartial": "1958-10"
+            "type_dirigeant": "personne physique"
           },
           {
             "siren": "344366315",
             "denomination": "ERNST & YOUNG AUDIT",
-            "role": "COMMISSAIRE AUX COMPTES TITULAIRE"
+            "qualite": "Commissaire aux comptes titulaire",
+            "type_dirigeant": "personne morale"
           },
           {
             "siren": "387953961",
             "denomination": "MAZARS ET ASSOCIÉS",
-            "role": "COMMISSAIRE AUX COMPTES TITULAIRE"
+            "qualite": "Commissaire aux comptes titulaire",
+            "type_dirigeant": "personne morale"
           }
-        ]
+        ],
+        "etat_administratif": "A",
+        "nature_juridique": "5599",
+        "section_activite_principale": "M",
+        "tranche_effectif_salarie": "42",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [],
+        "immatriculation": {
+          "date_debut_activite": null,
+          "date_immatriculation": "1955-03-01",
+          "date_radiation": null,
+          "duree_personne_morale": 99,
+          "nature_entreprise": [
+            "Commerciale"
+          ],
+          "date_cloture_exercice": "3112",
+          "capital_social": 169888497.75,
+          "capital_variable": false,
+          "devise_capital": "EUR",
+          "indicateur_associe_unique": false
+        },
+        "finances": {
+          "2022": {
+            "ca": 24281000000,
+            "resultat_net": 0
+          }
+        },
+        "complements": {
+          "collectivite_territoriale": null,
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "9999"
+          ],
+          "egapro_renseignee": true,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": false,
+          "est_ess": false,
+          "est_finess": true,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": false,
+          "est_service_public": false,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": null,
+          "type_siae": null
+        },
+        "slug": "danone-552032534",
+        "dateDerniereMiseAJour": "2023-09-21T03:34:50"
       }
-    ]
+    ],
+    "total_results": 1,
+    "page": 1,
+    "per_page": 10,
+    "total_pages": 1
   }
 }
