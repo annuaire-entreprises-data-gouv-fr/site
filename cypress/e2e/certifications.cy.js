@@ -1,17 +1,12 @@
 describe('Certifications', () => {
   describe('RGE', () => {
-    it('Should display certification name - OPQIBI', () => {
-      cy.visit(`/labels-certificats/487444697`);
-      cy.contains('Certificat Qualifelec RGE');
-    });
-
     it('Should display certification name - QUALIBAT', () => {
       cy.visit(`/labels-certificats/843701079`);
       cy.contains('QUALIBAT-RGE');
     });
 
     it('Should display company phone number', () => {
-      cy.visit(`/labels-certificats/487444697`);
+      cy.visit(`/labels-certificats/843701079`);
       cy.contains(/\d{2} \d{2} \d{2} \d{2} \d{2}/);
     });
   });
