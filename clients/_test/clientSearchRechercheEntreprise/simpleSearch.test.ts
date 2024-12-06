@@ -38,6 +38,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
     'la poste',
     'aga',
     'ag',
+    '302474648',
   ].forEach((s) => itShouldMatchSnapshotForSearch(s, 1));
 });
 

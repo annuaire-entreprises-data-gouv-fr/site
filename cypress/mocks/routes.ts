@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import { http } from 'msw';
+import { apiBioHandler } from './handlers/api-bio';
 import { eoriHandler } from './handlers/eori';
 import { rechercheEntrepriseHandler } from './handlers/recherche-entreprises';
 import { rgeHandler } from './handlers/rge';
@@ -13,4 +14,5 @@ export const routesHandlers = [
     rechercheEntrepriseHandler
   ),
   http.get(`${routes.certifications.rge.api}`, rgeHandler),
+  http.get(`${routes.certifications.bio.api}`, apiBioHandler),
 ];
