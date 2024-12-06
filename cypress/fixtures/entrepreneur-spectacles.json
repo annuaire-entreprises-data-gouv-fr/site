@@ -1,0 +1,39 @@
+{
+  "nhits": 1,
+  "parameters": {
+    "dataset": "declarations-des-entrepreneurs-de-spectacles-vivants",
+    "q": "#startswith(siren_personne_physique_siret_personne_morale,\"800329849\")",
+    "rows": 10,
+    "start": 0,
+    "sort": ["date_de_depot_de_la_declaration_inscrite_sur_le_recepisse"],
+    "format": "json",
+    "timezone": "UTC"
+  },
+  "records": [
+    {
+      "datasetid": "declarations-des-entrepreneurs-de-spectacles-vivants",
+      "recordid": "6ceff87c751f0afbb0b680944f2ed2b81efa34fb",
+      "fields": {
+        "geoloc_cp": [48.8283577313, 2.36214011885],
+        "code_postal_de_l_etablissement_principal_personne_morale_ou_de_la_personne_physique": "75013",
+        "type": "Renouvellement",
+        "siren_personne_physique_siret_personne_morale": "80032984900023",
+        "date_de_validite_du_recepisse_sauf_opposition_de_l_administration": "2021-07-11",
+        "code_naf_ape": "90.01Z - Arts du spectacle vivant",
+        "region": "Île-de-France",
+        "raison_sociale_personne_morale_ou_nom_personne_physique": "THEATRE STEPHANE GILDAS",
+        "departement": "Paris",
+        "numero_de_recepisse": "PLATESV-R-2021-006658",
+        "categorie": 2,
+        "date_de_depot_de_la_declaration_inscrite_sur_le_recepisse": "2021-05-27",
+        "type_de_declarant": "Personne morale",
+        "statut_du_recepisse": "Valide"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.36214011885, 48.8283577313]
+      },
+      "record_timestamp": "2024-12-06T05:30:02.065Z"
+    }
+  ]
+}
