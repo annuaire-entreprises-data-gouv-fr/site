@@ -1,6 +1,6 @@
 describe('Certifications', () => {
-  describe('RGE', () => {
-    it('Should display certification name - QUALIBAT', () => {
+  describe('QUALIBAT-RGE', () => {
+    it('Should display QUALIBAT-RGE', () => {
       cy.visit(`/labels-certificats/843701079`);
       cy.contains('QUALIBAT-RGE');
     });

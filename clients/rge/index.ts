@@ -1,6 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { INomCertificat, IRGECertification } from '#models/certifications/rge';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
@@ -30,7 +29,7 @@ type IRGEResponse = {
  * Reconnu Garant de l'Environnement (RGE)
  * https://france-renov.gouv.fr/annuaire-rge
  */
-const clientRGE = async (siren: Siren): Promise<IRGECertification> => {
+export const clientRGE = async (siren: Siren): Promise<IRGECertification> => {
   const route = routes.certifications.rge.api;
   const data = await httpGet<IRGEResponse>(route, {
     params: { qs: `siret:${siren}*` },
@@ -106,6 +105,3 @@ const mapToDomainObject = (rge: IRGEResponse) => {
     certifications,
   };
 };
-
-const stubbedClientRGE = stubClientWithSnapshots({ clientRGE });
-export { stubbedClientRGE as clientRGE };
