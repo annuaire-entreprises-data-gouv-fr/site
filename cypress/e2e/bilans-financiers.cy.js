@@ -1,5 +1,5 @@
 describe('Bilans financiers', () => {
-  it('Should display Donées financières section', () => {
+  it('Should display Données financières section', () => {
     cy.visit('/entreprise/487444697');
     cy.contains('Données financières');
   });

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'API Recherche d’entreprises & API Entreprise',
   alternates: {
     canonical:
-      'https://annuaire-entreprises.data.gouv.fr/donnees/acceder-par-api',
+      'https://annuaire-entreprises.data.gouv.fr/donnees/api-entreprises',
   },
 };
 
