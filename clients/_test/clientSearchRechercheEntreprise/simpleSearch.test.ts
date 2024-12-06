@@ -39,6 +39,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
     'aga',
     'ag',
     '302474648',
+    '533744991',
   ].forEach((s) => itShouldMatchSnapshotForSearch(s, 1));
 });
 

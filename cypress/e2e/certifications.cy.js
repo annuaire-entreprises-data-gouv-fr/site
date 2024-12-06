@@ -25,6 +25,14 @@ describe('Certifications', () => {
       cy.contains('SAS NATURALIA SAINT OUEN PERI').should('be.visible');
     });
   });
+  describe('Entreprise Sociale Inclusive', () => {
+    it('Should display Entreprise Sociale Inclusive', () => {
+      cy.visit(`/labels-certificats/533744991`);
+      cy.contains('Entreprise Sociale Inclusive').should('be.visible');
+      cy.contains('Type de structure').should('be.visible');
+      cy.contains("Entreprise d'insertion (EI)").should('be.visible');
+    });
+  });
   describe('Egapro', () => {
     it('Should display Égalité professionnelle', () => {
       cy.visit(`/labels-certificats/356000000`);

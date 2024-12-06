@@ -6,7 +6,7 @@ import {
   verifySiret,
   verifyTVANumber,
 } from '#utils/helpers';
-import { clientMarcheInclusion } from './api-inclusion';
+import { clientAPIInclusion } from './api-inclusion';
 import { clientEORI } from './api-proxy/eori';
 import { clientUniteLegaleIG } from './api-proxy/greffe';
 import { clientRNEImmatriculation } from './api-proxy/rne';
@@ -40,7 +40,7 @@ const ping = async (slug: string | string[]) => {
     case 'api-association':
       return await clientAssociation(verifyIdRna('W551000280'), '');
     case 'api-marche-inclusion':
-      return await clientMarcheInclusion(sirenInclusion);
+      return await clientAPIInclusion(sirenInclusion);
     case 'api-tva':
       const tva = verifyTVANumber(tvaNumber(sirenDanone));
       return await clientTVA(tva);
