@@ -69,7 +69,7 @@ const Title: React.FC<IProps> = ({
     {estNonDiffusibleStrict(uniteLegale) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
     ) : (
-      <UniteLegaleDescription uniteLegale={uniteLegale} session={session} />
+      <UniteLegaleDescription uniteLegale={uniteLegale} />
     )}
 
     <Tabs

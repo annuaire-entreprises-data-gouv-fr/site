@@ -1,6 +1,6 @@
 import { clientMarcheInclusion } from '#clients/api-inclusion';
+import { clientInclusionKindMetadata } from '#clients/api-inclusion/inclusion-kind';
 import { HttpNotFound } from '#clients/exceptions';
-import { clientInclusionKindMetadata } from '#clients/metadata-store/inclusion-kind';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
