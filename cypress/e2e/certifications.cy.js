@@ -17,6 +17,14 @@ describe('Certifications', () => {
       cy.contains('Numéro de récépissé');
     });
   });
+  describe('Professionnel du Bio', () => {
+    it('Should display Professionnel du Bio', () => {
+      cy.visit(`/labels-certificats/302474648`);
+      cy.contains('Professionnel du Bio').should('be.visible');
+      cy.contains('Détail établissement').should('be.visible');
+      cy.contains('SAS NATURALIA SAINT OUEN PERI').should('be.visible');
+    });
+  });
   describe('Egapro', () => {
     it('Should display Égalité professionnelle', () => {
       cy.visit(`/labels-certificats/356000000`);
