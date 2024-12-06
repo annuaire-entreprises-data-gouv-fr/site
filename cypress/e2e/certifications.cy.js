@@ -2,19 +2,24 @@ describe('Certifications', () => {
   describe('QUALIBAT-RGE', () => {
     it('Should display QUALIBAT-RGE', () => {
       cy.visit(`/labels-certificats/843701079`);
-      cy.contains('QUALIBAT-RGE');
-    });
-
-    it('Should display company phone number', () => {
-      cy.visit(`/labels-certificats/843701079`);
-      cy.contains(/\d{2} \d{2} \d{2} \d{2} \d{2}/);
+      cy.contains('QUALIBAT-RGE').should('be.visible');
+      cy.contains('Domaine(s) certifié(s)').should('be.visible');
+      cy.contains(
+        "Isolation par l'intérieur des murs ou rampants de toitures ou plafonds"
+      ).should('be.visible');
+      cy.contains(/\d{2} \d{2} \d{2} \d{2} \d{2}/).should('be.visible');
     });
   });
   describe('ESS & Spectacles vivants', () => {
     it('Should display ESS and spectacles vivants', () => {
       cy.visit(`/labels-certificats/800329849`);
-      cy.contains('ESS');
-      cy.contains('Numéro de récépissé');
+      cy.contains('ESS - Entreprise Sociale et Solidaire').should('be.visible');
+      cy.contains(
+        'Cette structure apparait dans la liste des entreprises de l’Economie Sociale et Solidaire'
+      ).should('be.visible');
+      cy.contains('Entrepreneur de spectacles vivants').should('be.visible');
+      cy.contains('Numéro de récépissé').should('be.visible');
+      cy.contains('PLATESV-R-2021-006658').should('be.visible');
     });
   });
   describe('Professionnel du Bio', () => {

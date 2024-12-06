@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
 import { Siren } from '#utils/helpers';
 import odsClient from '../..';
@@ -22,7 +21,7 @@ type ISpectaclesVivantsRecord = {
   statut_du_recepisse: string; //"Valide"
 };
 
-const clientEntrepreneurSpectacles = async (
+export const clientEntrepreneurSpectacles = async (
   siren: Siren
 ): Promise<IEntrepreneurSpectaclesCertification> => {
   // siret column is an int. Does not support string search query so fallback on either exactmatch or int range
@@ -59,9 +58,3 @@ const clientEntrepreneurSpectacles = async (
     lastModified: response.lastModified,
   };
 };
-
-const stubbedClient = stubClientWithSnapshots({
-  clientEntrepreneurSpectacles,
-});
-
-export { stubbedClient as clientEntrepreneurSpectacles };
