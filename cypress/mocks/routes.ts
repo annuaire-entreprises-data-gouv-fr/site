@@ -2,6 +2,7 @@ import routes from '#clients/routes';
 import { http } from 'msw';
 import { eoriHandler } from './handlers/eori';
 import { rechercheEntrepriseHandler } from './handlers/recherche-entreprises';
+import { rgeHandler } from './handlers/rge';
 import { tvaHandler } from './handlers/tva';
 
 export const routesHandlers = [
@@ -11,4 +12,5 @@ export const routesHandlers = [
     `${routes.rechercheEntreprise.rechercheUniteLegale}`,
     rechercheEntrepriseHandler
   ),
+  http.get(`${routes.certifications.rge.api}`, rgeHandler),
 ];
