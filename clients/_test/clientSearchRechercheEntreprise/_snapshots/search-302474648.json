@@ -12,7 +12,7 @@
         "nom_raison_sociale": "NATURALIA FRANCE",
         "sigle": null,
         "nombre_etablissements": 250,
-        "nombre_etablissements_ouverts": 179,
+        "nombre_etablissements_ouverts": 178,
         "siege": {
           "activite_principale": "47.29Z",
           "activite_principale_registre_metier": null,
@@ -70,8 +70,8 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "1973-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-05T16:51:48",
-        "date_mise_a_jour_insee": "2024-10-25T05:13:47",
+        "date_mise_a_jour": "2024-12-09T17:41:59",
+        "date_mise_a_jour_insee": "2024-12-06T05:09:42.450",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
           {
