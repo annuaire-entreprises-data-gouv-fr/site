@@ -151,7 +151,8 @@ const routes = {
     entrepriseInclusive: {
       site: 'https://lemarche.inclusion.beta.gouv.fr/prestataires/',
       api: {
-        siren: 'https://lemarche.inclusion.beta.gouv.fr/api/siae/siren/',
+        getBySiren: (siren: string) =>
+          `https://lemarche.inclusion.beta.gouv.fr/api/siae/siren/${siren}`,
         metadata: 'https://lemarche.inclusion.beta.gouv.fr/api/siae/kinds',
       },
     },

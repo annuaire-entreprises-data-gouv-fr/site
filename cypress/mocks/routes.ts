@@ -20,7 +20,7 @@ export const routesHandlers = [
   http.get(routes.certifications.rge.api, rgeHandler),
   http.get(routes.certifications.bio.api, apiBioHandler),
   http.get(
-    routes.certifications.entrepriseInclusive.api.siren,
+    routes.certifications.entrepriseInclusive.api.getBySiren('*'),
     apiInclusionHandler
   ),
   http.get(
