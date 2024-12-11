@@ -31,10 +31,10 @@ import {
 
 type ClientSearchRechercheEntreprise = {
   searchTerms: string;
-  pageResultatsRecherche: number;
   searchFilterParams?: SearchFilterParams;
   inclureEtablissements?: boolean;
   inclureImmatriculation?: boolean;
+  pageResultatsRecherche?: number;
   pageEtablissements?: number;
 };
 

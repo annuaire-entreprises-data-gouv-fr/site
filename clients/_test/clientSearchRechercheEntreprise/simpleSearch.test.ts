@@ -1,4 +1,4 @@
-import { clientSearchRechercheEntrepriseRaw } from '#clients/recherche-entreprise';
+import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
 import SearchFilterParams from '#models/search/search-filter-params';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 import simplifyParams from './simplify-params';
@@ -53,7 +53,7 @@ function itShouldMatchSnapshotForSearch(
       : ''
   }`, async () => {
     await expectClientToMatchSnapshot({
-      client: clientSearchRechercheEntrepriseRaw,
+      client: clientSearchRechercheEntreprise,
       __dirname,
       args: [
         {

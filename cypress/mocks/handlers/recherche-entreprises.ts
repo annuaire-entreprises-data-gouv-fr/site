@@ -1,34 +1,36 @@
+import fs from 'fs';
 import { HttpResponse, HttpResponseResolver } from 'msw';
+import path from 'path';
 
-async function loadSnapshots(clientName: string) {
-  const snapshotContext = require.context(
-    `#clients/_test/`,
-    true,
-    /\.json$/,
-    'lazy'
-  );
-  const snapshots = await Promise.all(
-    snapshotContext
-      .keys()
-      .filter((fileName: string) =>
-        fileName.includes(`/${clientName}/_snapshots/`)
-      )
-      .map((fileName: string) => {
-        const snapshot = snapshotContext(fileName);
-        return snapshot;
-      })
-  );
-  return snapshots;
+function getSnapshots() {
+  try {
+    const folderPath = `./cypress/fixtures/recherche-entreprise`;
+    const files = fs.readdirSync(folderPath);
+
+    const jsonFiles = files.filter((file) => file.endsWith('.json'));
+
+    const jsonData = jsonFiles.map((file) => {
+      const filePath = path.join(folderPath, file);
+      const content = fs.readFileSync(filePath, 'utf8');
+      return JSON.parse(content);
+    });
+
+    return jsonData;
+  } catch (error) {
+    console.error('Error reading JSON files:', error);
+    return [];
+  }
 }
 
 export const rechercheEntrepriseHandler: HttpResponseResolver = async ({
   request,
 }) => {
-  const snapshots = await loadSnapshots('clientSearchRechercheEntreprise');
   const q = new URL(request.url).searchParams.get('q');
 
-  const snapshot = snapshots.find((snapshot: any) => {
-    return snapshot.args.searchTerms === q;
+  const snapshots = await getSnapshots();
+
+  const snapshot = snapshots.find((snapshot) => {
+    return snapshot.searchTerms === q;
   });
 
   if (!snapshot) {
