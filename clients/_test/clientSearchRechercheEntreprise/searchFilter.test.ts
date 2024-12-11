@@ -1,5 +1,5 @@
-import { clientSearchRechercheEntrepriseRaw } from '#clients/recherche-entreprise';
-import { ISearchResponse } from '#clients/recherche-entreprise/interface';
+import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
+import { ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search/search-filter-params';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 import simplifyParams from './simplify-params';
@@ -10,11 +10,10 @@ const defaultParams = {
   searchFilterParams: new SearchFilterParams({}),
 };
 
-// Not used in E2E tests.
 describe('clientSearchRechercheEntreprise : use of search filters', () => {
   it('Should match snapshot for collectivité territoriale', async () => {
     await expectClientToMatchSnapshot({
-      client: clientSearchRechercheEntrepriseRaw,
+      client: clientSearchRechercheEntreprise,
       __dirname,
       args: [
         {
@@ -31,10 +30,9 @@ describe('clientSearchRechercheEntreprise : use of search filters', () => {
     });
   });
 
-  // Not used in E2E tests.
   it('Should match snapshot for CA & resultat filter', async () => {
     await expectClientToMatchSnapshot({
-      client: clientSearchRechercheEntrepriseRaw,
+      client: clientSearchRechercheEntreprise,
       __dirname,
       args: [
         {
@@ -55,7 +53,7 @@ describe('clientSearchRechercheEntreprise : use of search filters', () => {
 
 it('Should match snapshot for term < 3 and filters', async () => {
   await expectClientToMatchSnapshot({
-    client: clientSearchRechercheEntrepriseRaw,
+    client: clientSearchRechercheEntreprise,
     __dirname,
     args: [
       {
@@ -73,7 +71,7 @@ it('Should match snapshot for term < 3 and filters', async () => {
   });
 });
 
-function postProcessResult(result: ISearchResponse) {
+function postProcessResult(result: ISearchResults) {
   result.results.forEach((searchResult) => {
     // @ts-ignore
     searchResult.dateDerniereMiseAJour = '2024-09-21T03:34:50';

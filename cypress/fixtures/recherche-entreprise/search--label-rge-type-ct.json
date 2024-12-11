@@ -1,0 +1,5681 @@
+{
+  "searchTerms": "",
+  "result": {
+    "results": [
+      {
+        "siren": "200036473",
+        "nom_complet": "COMMUNAUTE D'AGGLOMERATION SAINTES - GRANDES RIVES - L'AGGLO",
+        "nom_raison_sociale": "COMMUNAUTE D'AGGLOMERATION SAINTES - GRANDES RIVES - L'AGGLO",
+        "sigle": null,
+        "nombre_etablissements": 54,
+        "nombre_etablissements_ouverts": 52,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "12 BOULEVARD GUILLET MAILLET 17100 SAINTES",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "17100",
+          "commune": "17415",
+          "complement_adresse": null,
+          "coordonnees": "45.748197,-0.626794",
+          "date_creation": "2022-06-22",
+          "date_debut_activite": "2022-06-22",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T06:28:34",
+          "departement": "17",
+          "distribution_speciale": null,
+          "epci": "200036473",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "12 Boulevard Guillet Maillet 17100 Saintes",
+          "geo_id": "17415_1760_00012",
+          "indice_repetition": null,
+          "latitude": "45.748197",
+          "libelle_cedex": null,
+          "libelle_commune": "SAINTES",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "GUILLET MAILLET",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "5021"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "-0.626794",
+          "nom_commercial": null,
+          "numero_voie": "12",
+          "region": "75",
+          "siret": "20003647300110",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "41",
+          "type_voie": "BOULEVARD"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "ETI",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "2013-01-01",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:11:32",
+        "date_mise_a_jour_insee": "2024-07-04T16:28:36",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7348",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "41",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "12 BOULEVARD GUILLET MAILLET 17100 SAINTES",
+            "caractere_employeur": "O",
+            "code_postal": "17100",
+            "commune": "17415",
+            "date_creation": "2022-06-22",
+            "date_debut_activite": "2022-06-22",
+            "date_fermeture": null,
+            "epci": "200036473",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "17415_1760_00012",
+            "latitude": "45.748197",
+            "libelle_commune": "SAINTES",
+            "liste_enseignes": null,
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "5021"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "-0.626794",
+            "nom_commercial": null,
+            "region": "75",
+            "siret": "20003647300110",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "41"
+          }
+        ],
+        "immatriculation": null,
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "200036473",
+            "code_insee": null,
+            "elus": [
+              {
+                "nom": "ROUX",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1955-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PERRIN",
+                "prenoms": "Gerard",
+                "annee_de_naissance": "1952-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MARCHAIS",
+                "prenoms": "Jean-Luc",
+                "annee_de_naissance": "1963-08",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "FOURRÉ",
+                "prenoms": "Jean-Luc",
+                "annee_de_naissance": "1951-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GRELET",
+                "prenoms": "Annie",
+                "annee_de_naissance": "1957-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PANNAUD",
+                "prenoms": "Eric",
+                "annee_de_naissance": "1965-09",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "JALLAIS",
+                "prenoms": "Pierre-Henri",
+                "annee_de_naissance": "1976-06",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "SERRA-DAVISSEAU",
+                "prenoms": "Anne-Sophie",
+                "annee_de_naissance": "1980-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ROUGER",
+                "prenoms": "Jean-Michel",
+                "annee_de_naissance": "1952-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DE MINIAC",
+                "prenoms": "Joseph Daniel",
+                "annee_de_naissance": "1944-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DESCHAMPS",
+                "prenoms": "Aurore",
+                "annee_de_naissance": "1989-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MARGAT",
+                "prenoms": "Alain",
+                "annee_de_naissance": "1951-06",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BIGOT",
+                "prenoms": "Eric",
+                "annee_de_naissance": "1968-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "TOUZINAUD",
+                "prenoms": "Gaby",
+                "annee_de_naissance": "1953-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "TAILLASSON",
+                "prenoms": "Stéphane",
+                "annee_de_naissance": "1969-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GILLARD",
+                "prenoms": "Pascal",
+                "annee_de_naissance": "1958-12",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "CHAIGNEAU",
+                "prenoms": "Bernard",
+                "annee_de_naissance": "1952-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DREY",
+                "prenoms": "Marie-France",
+                "annee_de_naissance": "1951-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GRELLIER",
+                "prenoms": "Francis",
+                "annee_de_naissance": "1951-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "GRENOT",
+                "prenoms": "Alexandre",
+                "annee_de_naissance": "1982-05",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "GARDELLE",
+                "prenoms": "Jérôme",
+                "annee_de_naissance": "1976-05",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "RAGONNEAUD",
+                "prenoms": "Jacki",
+                "annee_de_naissance": "1940-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "POTTIER",
+                "prenoms": "Agnès",
+                "annee_de_naissance": "1957-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ROUET",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1951-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DELHOUME",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1961-02",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "TUAL",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1946-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MIRANDE",
+                "prenoms": "Martine",
+                "annee_de_naissance": "1953-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MUSSEAU",
+                "prenoms": "David",
+                "annee_de_naissance": "1969-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "COMBEAU",
+                "prenoms": "Bernard",
+                "annee_de_naissance": "1954-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BASSO-FIN",
+                "prenoms": "Christelle",
+                "annee_de_naissance": "1967-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LESPINASSE",
+                "prenoms": "Amanda",
+                "annee_de_naissance": "1974-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ROUAN",
+                "prenoms": "Frederic",
+                "annee_de_naissance": "1971-08",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "AUDOUIN",
+                "prenoms": "Jean-Marc",
+                "annee_de_naissance": "1959-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "HERVÉ",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1950-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ABELIN-DRAPRON",
+                "prenoms": "Véronique",
+                "annee_de_naissance": "1978-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "AUDOUIN",
+                "prenoms": "Caroline",
+                "annee_de_naissance": "1979-05",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "BARON",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1962-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BENCHIMOL LAURIBE",
+                "prenoms": "Renée",
+                "annee_de_naissance": "1959-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BERDAÏ",
+                "prenoms": "Ammar",
+                "annee_de_naissance": "1954-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BETIZEAU",
+                "prenoms": "Florence",
+                "annee_de_naissance": "1962-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CALLAUD",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1956-01",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "CAMBON",
+                "prenoms": "Véronique",
+                "annee_de_naissance": "1963-08",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CATROU",
+                "prenoms": "Rémy",
+                "annee_de_naissance": "1958-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CHEMINADE",
+                "prenoms": "Marie-Line",
+                "annee_de_naissance": "1968-09",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CREACHCADEC",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1951-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DAVIET",
+                "prenoms": "Laurent",
+                "annee_de_naissance": "1970-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DELCROIX",
+                "prenoms": "Charles",
+                "annee_de_naissance": "1972-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DEREN",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1948-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DIETZ",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1968-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DRAPRON",
+                "prenoms": "Bruno",
+                "annee_de_naissance": "1970-03",
+                "fonction": "Président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "EHLINGER",
+                "prenoms": "François",
+                "annee_de_naissance": "1949-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MACHON",
+                "prenoms": "Jean-Philippe",
+                "annee_de_naissance": "1953-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MAUDOUX",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1960-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PARISI",
+                "prenoms": "Evelyne",
+                "annee_de_naissance": "1962-06",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "ROUDIER",
+                "prenoms": "Jean-Pierre",
+                "annee_de_naissance": "1962-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "TERRIEN",
+                "prenoms": "Joël",
+                "annee_de_naissance": "1951-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "TORCHUT",
+                "prenoms": "Véronique",
+                "annee_de_naissance": "1961-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "TOUSSAINT",
+                "prenoms": "Charlotte",
+                "annee_de_naissance": "1980-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "VIOLLET",
+                "prenoms": "Céline",
+                "annee_de_naissance": "1979-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CHURLAUD",
+                "prenoms": "Sylvie",
+                "annee_de_naissance": "1963-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PAYET",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1961-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "TRAIN",
+                "prenoms": "Eliane",
+                "annee_de_naissance": "1953-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LIBOUREL",
+                "prenoms": "Françoise",
+                "annee_de_naissance": "1946-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BARUSSEAU",
+                "prenoms": "Fabrice",
+                "annee_de_naissance": "1970-06",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              }
+            ],
+            "niveau": "epci"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "2149",
+            "5021"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": true,
+          "est_ess": false,
+          "est_finess": false,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": "valide",
+          "type_siae": null
+        },
+        "slug": "communaute-d-agglomeration-saintes-grandes-rives-l-agglo-200036473"
+      },
+      {
+        "siren": "226300010",
+        "nom_complet": "DEPARTEMENT DU PUY DE DOME",
+        "nom_raison_sociale": "DEPARTEMENT DU PUY DE DOME",
+        "sigle": null,
+        "nombre_etablissements": 43,
+        "nombre_etablissements_ouverts": 30,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "24 RUE SAINT-ESPRIT 63000 CLERMONT-FERRAND",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "63000",
+          "commune": "63113",
+          "complement_adresse": null,
+          "coordonnees": "45.776248,3.085147",
+          "date_creation": "1983-03-01",
+          "date_debut_activite": "2008-01-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T10:56:45",
+          "departement": "63",
+          "distribution_speciale": null,
+          "epci": "246300701",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "24 rue Saint-Esprit 63000 Clermont-Ferrand",
+          "geo_id": "63113_4055_00024",
+          "indice_repetition": null,
+          "latitude": "45.776248",
+          "libelle_cedex": null,
+          "libelle_commune": "CLERMONT-FERRAND",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "SAINT-ESPRIT",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "9999",
+            "5021"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "3.085147",
+          "nom_commercial": null,
+          "numero_voie": "24",
+          "region": "84",
+          "siret": "22630001000015",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "42",
+          "type_voie": "RUE"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "ETI",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "1982-01-01",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:12:18",
+        "date_mise_a_jour_insee": "2024-09-10T08:22:10",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7220",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "51",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "24 RUE SAINT-ESPRIT 63000 CLERMONT-FERRAND",
+            "caractere_employeur": "O",
+            "code_postal": "63000",
+            "commune": "63113",
+            "date_creation": "1983-03-01",
+            "date_debut_activite": "2008-01-01",
+            "date_fermeture": null,
+            "epci": "246300701",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "63113_4055_00024",
+            "latitude": "45.776248",
+            "libelle_commune": "CLERMONT-FERRAND",
+            "liste_enseignes": null,
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "9999",
+              "5021"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "3.085147",
+            "nom_commercial": null,
+            "region": "84",
+            "siret": "22630001000015",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "42"
+          }
+        ],
+        "immatriculation": null,
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "63D",
+            "code_insee": "63",
+            "elus": [
+              {
+                "nom": "MAGNET",
+                "prenoms": "Fabrice",
+                "annee_de_naissance": "1973-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MONNET",
+                "prenoms": "Karina",
+                "annee_de_naissance": "1978-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PRUNIER",
+                "prenoms": "Valérie",
+                "annee_de_naissance": "1969-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "SAUVADE",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1961-01",
+                "fonction": "7ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "RIOL",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1957-07",
+                "fonction": "9ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "SZCZEPANIAK",
+                "prenoms": "Eléonore",
+                "annee_de_naissance": "1956-05",
+                "fonction": "4ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "CUZIN",
+                "prenoms": "Jean-Paul",
+                "annee_de_naissance": "1957-02",
+                "fonction": "1er Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "PICARD",
+                "prenoms": "Anne-Marie",
+                "annee_de_naissance": "1953-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GLACE LE GARS",
+                "prenoms": "Jocelyne",
+                "annee_de_naissance": "1954-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GRAND",
+                "prenoms": "Jacky",
+                "annee_de_naissance": "1953-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BESSEYRE",
+                "prenoms": "Fabien",
+                "annee_de_naissance": "1976-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BRUN",
+                "prenoms": "Pascale",
+                "annee_de_naissance": "1956-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BETHUNE",
+                "prenoms": "Colette",
+                "annee_de_naissance": "1959-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "NEUVY",
+                "prenoms": "Flavien",
+                "annee_de_naissance": "1972-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LUNOT",
+                "prenoms": "Jean-Pierre",
+                "annee_de_naissance": "1966-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MARCHIS",
+                "prenoms": "Marie-Anne",
+                "annee_de_naissance": "1967-03",
+                "fonction": "10ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "CHAUVIN",
+                "prenoms": "Lionel",
+                "annee_de_naissance": "1971-11",
+                "fonction": "Président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "MALTRAIT",
+                "prenoms": "Anne-Marie",
+                "annee_de_naissance": "1947-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BERNARD",
+                "prenoms": "Valérie",
+                "annee_de_naissance": "1966-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "SRIKAH",
+                "prenoms": "Karim",
+                "annee_de_naissance": "1978-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "COURTADON",
+                "prenoms": "Gérald",
+                "annee_de_naissance": "1966-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FERREIRA DE SOUSA",
+                "prenoms": "Manuela",
+                "annee_de_naissance": "1975-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MAISONNET",
+                "prenoms": "Sylvie",
+                "annee_de_naissance": "1963-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "VEYSSIERE",
+                "prenoms": "Rémi",
+                "annee_de_naissance": "1989-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BALDY",
+                "prenoms": "Damien",
+                "annee_de_naissance": "1980-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BRIAT",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1952-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GALPIER",
+                "prenoms": "Sébastien",
+                "annee_de_naissance": "1988-07",
+                "fonction": "13ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "KHEMISTI GALPIER",
+                "prenoms": "Sylviane",
+                "annee_de_naissance": "1960-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LEGER",
+                "prenoms": "Sylvie",
+                "annee_de_naissance": "1977-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "RAYNAUD",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1953-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MIELVAQUE",
+                "prenoms": "Corinne",
+                "annee_de_naissance": "1973-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PRONONCE",
+                "prenoms": "Hervé",
+                "annee_de_naissance": "1967-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GUÉDOUAH-VALLÉE",
+                "prenoms": "Emilie",
+                "annee_de_naissance": "1982-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PICHOT",
+                "prenoms": "Serge",
+                "annee_de_naissance": "1966-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BARRAUD",
+                "prenoms": "Bertrand",
+                "annee_de_naissance": "1966-05",
+                "fonction": "11ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "VALLEE",
+                "prenoms": "Isabelle",
+                "annee_de_naissance": "1973-01",
+                "fonction": "6ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "BERNARD",
+                "prenoms": "Célia",
+                "annee_de_naissance": "1976-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DAUDUIT",
+                "prenoms": "Cédric",
+                "annee_de_naissance": "1977-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GOLD",
+                "prenoms": "Éric",
+                "annee_de_naissance": "1964-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "VIRLOGEUX",
+                "prenoms": "Alexandra",
+                "annee_de_naissance": "1974-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PETEL",
+                "prenoms": "Gilles",
+                "annee_de_naissance": "1956-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PHAM",
+                "prenoms": "Catherine",
+                "annee_de_naissance": "1954-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BURIAS",
+                "prenoms": "Aude",
+                "annee_de_naissance": "1982-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DUBOURGNOUX",
+                "prenoms": "Eric",
+                "annee_de_naissance": "1959-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BONY",
+                "prenoms": "Martine",
+                "annee_de_naissance": "1959-04",
+                "fonction": "2ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "BOYER",
+                "prenoms": "Jean-Marc",
+                "annee_de_naissance": "1954-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DERRÉ",
+                "prenoms": "Joël-Michel",
+                "annee_de_naissance": "1965-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PASSARIEU",
+                "prenoms": "Valérie",
+                "annee_de_naissance": "1966-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "FLORI-DUTOUR",
+                "prenoms": "Stéphanie",
+                "annee_de_naissance": "1960-07",
+                "fonction": "14ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "PERRET",
+                "prenoms": "Jean-Philippe",
+                "annee_de_naissance": "1977-03",
+                "fonction": "5ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "GAUMET",
+                "prenoms": "Jérôme",
+                "annee_de_naissance": "1968-02",
+                "fonction": "3ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "LELONG",
+                "prenoms": "Jocelyne",
+                "annee_de_naissance": "1958-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BONNET",
+                "prenoms": "Grégory",
+                "annee_de_naissance": "1977-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "RAINEAU",
+                "prenoms": "Clémentine",
+                "annee_de_naissance": "1969-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MANUBY",
+                "prenoms": "Audrey",
+                "annee_de_naissance": "1989-02",
+                "fonction": "8ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "ROUGHEOL",
+                "prenoms": "Cédric",
+                "annee_de_naissance": "1977-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CROZET",
+                "prenoms": "Elisabeth",
+                "annee_de_naissance": "1976-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GAY",
+                "prenoms": "Lionel",
+                "annee_de_naissance": "1967-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BOUDON",
+                "prenoms": "Hélène",
+                "annee_de_naissance": "1981-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CHAMBON",
+                "prenoms": "Olivier",
+                "annee_de_naissance": "1975-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DESFORGES",
+                "prenoms": "Antoine",
+                "annee_de_naissance": "1986-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ESPINASSE",
+                "prenoms": "Jeanne",
+                "annee_de_naissance": "1977-10",
+                "fonction": null,
+                "sexe": "F"
+              }
+            ],
+            "niveau": "departement"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "5021",
+            "9999"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": false,
+          "est_ess": false,
+          "est_finess": true,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": null,
+          "type_siae": null
+        },
+        "slug": "departement-du-puy-de-dome-226300010"
+      },
+      {
+        "siren": "223100017",
+        "nom_complet": "DEPARTEMENT DE LA HAUTE GARONNE",
+        "nom_raison_sociale": "DEPARTEMENT DE LA HAUTE GARONNE",
+        "sigle": null,
+        "nombre_etablissements": 72,
+        "nombre_etablissements_ouverts": 29,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "31000",
+          "commune": "31555",
+          "complement_adresse": null,
+          "coordonnees": "43.615663,1.436756",
+          "date_creation": "1999-05-17",
+          "date_debut_activite": "2015-01-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T11:21:57",
+          "departement": "31",
+          "distribution_speciale": null,
+          "epci": "243100518",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "1 Boulevard de la Marquette 31000 Toulouse",
+          "geo_id": "31555_5716_00001",
+          "indice_repetition": null,
+          "latitude": "43.615663",
+          "libelle_cedex": null,
+          "libelle_commune": "TOULOUSE",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "DE LA MARQUETTE",
+          "liste_enseignes": null,
+          "liste_finess": [
+            "310796198"
+          ],
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "5021"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "1.436756",
+          "nom_commercial": null,
+          "numero_voie": "1",
+          "region": "76",
+          "siret": "22310001700423",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "52",
+          "type_voie": "BOULEVARD"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "GE",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "1983-03-01",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:12:18",
+        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7220",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "52",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
+            "caractere_employeur": "O",
+            "code_postal": "31000",
+            "commune": "31555",
+            "date_creation": "1999-05-17",
+            "date_debut_activite": "2015-01-01",
+            "date_fermeture": null,
+            "epci": "243100518",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "31555_5716_00001",
+            "latitude": "43.615663",
+            "libelle_commune": "TOULOUSE",
+            "liste_enseignes": null,
+            "liste_finess": [
+              "310796198"
+            ],
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "5021"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "1.436756",
+            "nom_commercial": null,
+            "region": "76",
+            "siret": "22310001700423",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "52"
+          }
+        ],
+        "immatriculation": null,
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "31D",
+            "code_insee": "31",
+            "elus": [
+              {
+                "nom": "VEZAT-BARONIA",
+                "prenoms": "Maryse",
+                "annee_de_naissance": "1957-09",
+                "fonction": "1er Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "VINCINI",
+                "prenoms": "Sebastien",
+                "annee_de_naissance": "1978-03",
+                "fonction": "Président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "ARTIGUES",
+                "prenoms": "Roselyne",
+                "annee_de_naissance": "1953-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "RIVAL",
+                "prenoms": "Patrice",
+                "annee_de_naissance": "1951-05",
+                "fonction": "12ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "BOUREAU",
+                "prenoms": "Pascal",
+                "annee_de_naissance": "1957-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MALRIC",
+                "prenoms": "Line",
+                "annee_de_naissance": "1964-10",
+                "fonction": "5ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "BAGNERIS",
+                "prenoms": "Bernard",
+                "annee_de_naissance": "1959-11",
+                "fonction": "8ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "LUMEAU-PRECEPTIS",
+                "prenoms": "Aude",
+                "annee_de_naissance": "1973-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DENOUVION",
+                "prenoms": "Victor",
+                "annee_de_naissance": "1991-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FLOUREUSSES",
+                "prenoms": "Sandrine",
+                "annee_de_naissance": "1967-03",
+                "fonction": "9ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "BAYLAC",
+                "prenoms": "Sandrine",
+                "annee_de_naissance": "1973-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GOJARD",
+                "prenoms": "Loic",
+                "annee_de_naissance": "1983-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ARSÉGUEL",
+                "prenoms": "Patrice",
+                "annee_de_naissance": "1964-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "POUMIROL",
+                "prenoms": "Emilienne",
+                "annee_de_naissance": "1950-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LAFFONT",
+                "prenoms": "Didier",
+                "annee_de_naissance": "1958-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "VOLTO",
+                "prenoms": "Véronique",
+                "annee_de_naissance": "1963-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BOUTELOUP",
+                "prenoms": "Jerome",
+                "annee_de_naissance": "1976-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "TOUZET",
+                "prenoms": "Sophie",
+                "annee_de_naissance": "1973-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GEIL-GOMEZ",
+                "prenoms": "Sabine",
+                "annee_de_naissance": "1960-03",
+                "fonction": "15ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "DEUILHÉ",
+                "prenoms": "Serge",
+                "annee_de_naissance": "1970-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LECLERC",
+                "prenoms": "Marie Claude",
+                "annee_de_naissance": "1948-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "SUAUD",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1968-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "VIEU",
+                "prenoms": "Annie",
+                "annee_de_naissance": "1959-05",
+                "fonction": "11ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "HEBRARD",
+                "prenoms": "Gilbert",
+                "annee_de_naissance": "1947-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SIORAT",
+                "prenoms": "Florence Anne",
+                "annee_de_naissance": "1963-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DUCLOS",
+                "prenoms": "Jean-Yves",
+                "annee_de_naissance": "1970-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LAURENTIES BARRERE",
+                "prenoms": "Céline",
+                "annee_de_naissance": "1973-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "HARDY",
+                "prenoms": "Isabelle",
+                "annee_de_naissance": "1968-08",
+                "fonction": "7ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "KLOTZ",
+                "prenoms": "Julien",
+                "annee_de_naissance": "1972-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "COURADE",
+                "prenoms": "Christine",
+                "annee_de_naissance": "1960-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "FABRE",
+                "prenoms": "Jean-Michel",
+                "annee_de_naissance": "1960-07",
+                "fonction": "6ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "BOYER",
+                "prenoms": "Anne Fanny",
+                "annee_de_naissance": "1966-05",
+                "fonction": "13ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "GABRIELI",
+                "prenoms": "Alain",
+                "annee_de_naissance": "1964-03",
+                "fonction": "10ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "GOFFRE PEDROSA",
+                "prenoms": "Ines",
+                "annee_de_naissance": "1992-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "TARAVELLA",
+                "prenoms": "Aurélien",
+                "annee_de_naissance": "1977-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FELLAH",
+                "prenoms": "Mourad",
+                "annee_de_naissance": "1975-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SAINT-AUBAIN",
+                "prenoms": "Anais Alice Maïthé",
+                "annee_de_naissance": "1986-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "EL KOUACHERI",
+                "prenoms": "Zohra",
+                "annee_de_naissance": "1964-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LLORCA",
+                "prenoms": "Jean-Louis",
+                "annee_de_naissance": "1949-02",
+                "fonction": "14ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "DEGERS",
+                "prenoms": "Laurence",
+                "annee_de_naissance": "1968-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "SIMION",
+                "prenoms": "Arnaud",
+                "annee_de_naissance": "1968-05",
+                "fonction": "4ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "FARCY",
+                "prenoms": "Marie-Claude",
+                "annee_de_naissance": "1960-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GIBERT",
+                "prenoms": "Vincent",
+                "annee_de_naissance": "1984-07",
+                "fonction": "2ème Vice-président du conseil départemental",
+                "sexe": "M"
+              },
+              {
+                "nom": "HONVAULT",
+                "prenoms": "Caroline",
+                "annee_de_naissance": "1979-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PÉRÉ",
+                "prenoms": "Marc",
+                "annee_de_naissance": "1962-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DE SCORRAILLE",
+                "prenoms": "Jean-Baptiste",
+                "annee_de_naissance": "1963-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LAMANT",
+                "prenoms": "Sophie",
+                "annee_de_naissance": "1966-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LUBAC",
+                "prenoms": "Christophe",
+                "annee_de_naissance": "1977-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MASELLA",
+                "prenoms": "Lauriane Mélanie",
+                "annee_de_naissance": "1990-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CROQUETTE",
+                "prenoms": "Martine",
+                "annee_de_naissance": "1952-05",
+                "fonction": "3ème Vice-président du conseil départemental",
+                "sexe": "F"
+              },
+              {
+                "nom": "FOUCHIER",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1962-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BARRIERE",
+                "prenoms": "Karine",
+                "annee_de_naissance": "1974-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DUMOULIN",
+                "prenoms": "Jean-Marc",
+                "annee_de_naissance": "1959-02",
+                "fonction": null,
+                "sexe": "M"
+              }
+            ],
+            "niveau": "departement"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "5021"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": true,
+          "est_ess": false,
+          "est_finess": true,
+          "est_organisme_formation": true,
+          "est_qualiopi": true,
+          "liste_id_organisme_formation": [
+            "7331P005131"
+          ],
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": "valide",
+          "type_siae": null
+        },
+        "slug": "departement-de-la-haute-garonne-223100017"
+      },
+      {
+        "siren": "200035715",
+        "nom_complet": "CARCASSONNE AGGLO",
+        "nom_raison_sociale": "CARCASSONNE AGGLO",
+        "sigle": null,
+        "nombre_etablissements": 26,
+        "nombre_etablissements_ouverts": 25,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "1 RUE PIERRE GERMAIN 11000 CARCASSONNE",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "11000",
+          "commune": "11069",
+          "complement_adresse": null,
+          "coordonnees": "43.212966,2.357944",
+          "date_creation": "2013-01-01",
+          "date_debut_activite": "2013-01-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T17:03:16",
+          "departement": "11",
+          "distribution_speciale": null,
+          "epci": "200035715",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "1 Rue Pierre Germain 11000 Carcassonne",
+          "geo_id": "11069_3550_00001",
+          "indice_repetition": null,
+          "latitude": "43.212966",
+          "libelle_cedex": null,
+          "libelle_commune": "CARCASSONNE",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "PIERRE GERMAIN",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "5021"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "2.357944",
+          "nom_commercial": null,
+          "numero_voie": "1",
+          "region": "76",
+          "siret": "20003571500016",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "41",
+          "type_voie": "RUE"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "ETI",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "2013-01-01",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:11:32",
+        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7348",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "41",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "1 RUE PIERRE GERMAIN 11000 CARCASSONNE",
+            "caractere_employeur": "O",
+            "code_postal": "11000",
+            "commune": "11069",
+            "date_creation": "2013-01-01",
+            "date_debut_activite": "2013-01-01",
+            "date_fermeture": null,
+            "epci": "200035715",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "11069_3550_00001",
+            "latitude": "43.212966",
+            "libelle_commune": "CARCASSONNE",
+            "liste_enseignes": null,
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "5021"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "2.357944",
+            "nom_commercial": null,
+            "region": "76",
+            "siret": "20003571500016",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "41"
+          }
+        ],
+        "immatriculation": null,
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "200035715",
+            "code_insee": null,
+            "elus": [
+              {
+                "nom": "OMS",
+                "prenoms": "Jean-Pierre",
+                "annee_de_naissance": "1956-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ADIVÈZE",
+                "prenoms": "Marc",
+                "annee_de_naissance": "1964-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BANQUET",
+                "prenoms": "Regis",
+                "annee_de_naissance": "1962-08",
+                "fonction": "Président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "SIE",
+                "prenoms": "Didier",
+                "annee_de_naissance": "1961-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PECH",
+                "prenoms": "André",
+                "annee_de_naissance": "1948-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PISTRE",
+                "prenoms": "Jean-Claude",
+                "annee_de_naissance": "1950-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SALIEGE",
+                "prenoms": "Georges",
+                "annee_de_naissance": "1948-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ESTIVAL",
+                "prenoms": "Alain",
+                "annee_de_naissance": "1954-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "TOUSTOU",
+                "prenoms": "Henri",
+                "annee_de_naissance": "1956-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FABRE",
+                "prenoms": "Jacques",
+                "annee_de_naissance": "1953-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FOURCADE",
+                "prenoms": "Robert Christian Victor",
+                "annee_de_naissance": "1947-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FALCOU",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1973-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PECHAIRE",
+                "prenoms": "Dorothée",
+                "annee_de_naissance": "1967-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CLERGUE",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1969-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BUSTO",
+                "prenoms": "Claude",
+                "annee_de_naissance": "1983-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ALBAREL",
+                "prenoms": "Arnaud",
+                "annee_de_naissance": "1973-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ARIAS",
+                "prenoms": "Placide",
+                "annee_de_naissance": "1953-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "AUDIER",
+                "prenoms": "Jean-Bernard",
+                "annee_de_naissance": "1954-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BARDOU",
+                "prenoms": "Magali",
+                "annee_de_naissance": "1969-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BARTHÈS",
+                "prenoms": "Any",
+                "annee_de_naissance": "1948-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BELMAS",
+                "prenoms": "Jean-Claude",
+                "annee_de_naissance": "1952-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BERNARD",
+                "prenoms": "Marie-Christine",
+                "annee_de_naissance": "1953-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BIGOT",
+                "prenoms": "Xavier",
+                "annee_de_naissance": "1981-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BLASQUEZ",
+                "prenoms": "Lélis",
+                "annee_de_naissance": "1943-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BOUTALEB",
+                "prenoms": "Nahima",
+                "annee_de_naissance": "1973-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BUSTOS",
+                "prenoms": "David",
+                "annee_de_naissance": "1980-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BÈS",
+                "prenoms": "Jean-Louis",
+                "annee_de_naissance": "1964-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CAMBON",
+                "prenoms": "Didier",
+                "annee_de_naissance": "1956-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CHESA",
+                "prenoms": "Isabelle",
+                "annee_de_naissance": "1965-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DENUX",
+                "prenoms": "Monique",
+                "annee_de_naissance": "1954-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DOUTRES",
+                "prenoms": "Annie",
+                "annee_de_naissance": "1952-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DUTHU",
+                "prenoms": "Jean-Luc",
+                "annee_de_naissance": "1962-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FLAMANT",
+                "prenoms": "Lucien",
+                "annee_de_naissance": "1971-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GASC",
+                "prenoms": "Laurence",
+                "annee_de_naissance": "1966-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GIOVANNETTI",
+                "prenoms": "Delphine",
+                "annee_de_naissance": "1968-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GODEFROY",
+                "prenoms": "Liliane",
+                "annee_de_naissance": "1956-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ICHÉ",
+                "prenoms": "Daniel",
+                "annee_de_naissance": "1948-08",
+                "fonction": "15eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "JORDAN",
+                "prenoms": "Edouard",
+                "annee_de_naissance": "1987-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "JULIEN",
+                "prenoms": "Ingrid",
+                "annee_de_naissance": "1972-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "KERRINCKX",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1961-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LAREDJ",
+                "prenoms": "Yazid",
+                "annee_de_naissance": "1980-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LARRAT",
+                "prenoms": "Gérard",
+                "annee_de_naissance": "1941-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LARROUX",
+                "prenoms": "Morgane",
+                "annee_de_naissance": "1989-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LECINA",
+                "prenoms": "Jean-Pierre",
+                "annee_de_naissance": "1965-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LETAO",
+                "prenoms": "Elodie",
+                "annee_de_naissance": "1981-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LEUBA",
+                "prenoms": "Robert",
+                "annee_de_naissance": "1956-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MIGNOT-SAMITIER",
+                "prenoms": "Marie-Christine",
+                "annee_de_naissance": "1949-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MONTAGNÉ",
+                "prenoms": "Edgar",
+                "annee_de_naissance": "1988-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MONTUSSAC",
+                "prenoms": "Marie-Aude",
+                "annee_de_naissance": "1970-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "OUDDANE",
+                "prenoms": "Julien",
+                "annee_de_naissance": "1979-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "QUINTILLA-MENDEGRIS",
+                "prenoms": "Anne",
+                "annee_de_naissance": "1961-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "RIVEL",
+                "prenoms": "Tamara",
+                "annee_de_naissance": "1963-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "TRIAY",
+                "prenoms": "Emilie",
+                "annee_de_naissance": "1986-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ZORZETTO",
+                "prenoms": "Claude",
+                "annee_de_naissance": "1956-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PITON",
+                "prenoms": "Yolande",
+                "annee_de_naissance": "1951-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BARLAUD",
+                "prenoms": "Ludovic",
+                "annee_de_naissance": "1973-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BERNÈDE",
+                "prenoms": "Jean-Paul",
+                "annee_de_naissance": "1956-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "RABOUL",
+                "prenoms": "Geneviève",
+                "annee_de_naissance": "1958-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "SCHMITH",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1960-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CARVAJAL",
+                "prenoms": "Toni",
+                "annee_de_naissance": "1976-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BUSQUE",
+                "prenoms": "Emile-Raphael",
+                "annee_de_naissance": "1946-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DHOMPS",
+                "prenoms": "Fabrice",
+                "annee_de_naissance": "1980-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GAUDAN",
+                "prenoms": "Marie-Pierre",
+                "annee_de_naissance": "1967-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "JUSTE",
+                "prenoms": "Jean-François",
+                "annee_de_naissance": "1952-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GUICHOU",
+                "prenoms": "Jean-Régis",
+                "annee_de_naissance": "1960-01",
+                "fonction": "11eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "RAPPENEAU",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1970-11",
+                "fonction": "8eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "AGUILHON",
+                "prenoms": "Jean-Louis",
+                "annee_de_naissance": "1956-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MICHEAU",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1990-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GARINO",
+                "prenoms": "Alain",
+                "annee_de_naissance": "1960-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DELGADO",
+                "prenoms": "Fernand",
+                "annee_de_naissance": "1970-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MAGRO",
+                "prenoms": "Christian",
+                "annee_de_naissance": "1970-10",
+                "fonction": "10eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "RAGGINI",
+                "prenoms": "Emile",
+                "annee_de_naissance": "1945-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MILHAU",
+                "prenoms": "René",
+                "annee_de_naissance": "1955-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LUCET",
+                "prenoms": "Charles",
+                "annee_de_naissance": "1975-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "JORDY",
+                "prenoms": "Jean-Marie",
+                "annee_de_naissance": "1950-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DELAUR",
+                "prenoms": "Gilles",
+                "annee_de_naissance": "1962-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "POMMIES",
+                "prenoms": "Régis",
+                "annee_de_naissance": "1958-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DUCLOS",
+                "prenoms": "Bernadette",
+                "annee_de_naissance": "1960-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MAZET",
+                "prenoms": "Rolland",
+                "annee_de_naissance": "1964-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "POISSY",
+                "prenoms": "Stéphane",
+                "annee_de_naissance": "1959-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GUIRAUD",
+                "prenoms": "Gerard",
+                "annee_de_naissance": "1955-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PELIX",
+                "prenoms": "Jean-Pierre",
+                "annee_de_naissance": "1950-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LACUBE",
+                "prenoms": "Claude",
+                "annee_de_naissance": "1966-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LAURET",
+                "prenoms": "Bernard",
+                "annee_de_naissance": "1952-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CAVERIVIÈRE",
+                "prenoms": "Christian",
+                "annee_de_naissance": "1954-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "VALLIER",
+                "prenoms": "Gérard",
+                "annee_de_naissance": "1955-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LECINA",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1964-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DIMON",
+                "prenoms": "Jacques",
+                "annee_de_naissance": "1954-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MARTINET",
+                "prenoms": "Geneviève",
+                "annee_de_naissance": "1958-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "VALLIERE",
+                "prenoms": "Pascal",
+                "annee_de_naissance": "1965-04",
+                "fonction": "2eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "GILS",
+                "prenoms": "Denise",
+                "annee_de_naissance": "1949-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "FAU",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1963-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ROBERT",
+                "prenoms": "Christian",
+                "annee_de_naissance": "1954-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DHUMEZ",
+                "prenoms": "Patricia",
+                "annee_de_naissance": "1965-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PEANY",
+                "prenoms": "Christine",
+                "annee_de_naissance": "1967-10",
+                "fonction": "13eme Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "BONNET",
+                "prenoms": "André",
+                "annee_de_naissance": "1955-08",
+                "fonction": "9eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BEDOS",
+                "prenoms": "Xavier",
+                "annee_de_naissance": "1962-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "YAGUES",
+                "prenoms": "Bernard Francois Pierre",
+                "annee_de_naissance": "1967-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MASCARAQUE",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1964-05",
+                "fonction": "5eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "COMBETTES",
+                "prenoms": "Roland",
+                "annee_de_naissance": "1957-12",
+                "fonction": "3eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "RUFFEL",
+                "prenoms": "Henri",
+                "annee_de_naissance": "1950-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "POUZENS",
+                "prenoms": "Jean-Paul",
+                "annee_de_naissance": "1957-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BÉRARD",
+                "prenoms": "Serge Michel Claude",
+                "annee_de_naissance": "1957-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "VIÉ",
+                "prenoms": "Christian",
+                "annee_de_naissance": "1957-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "JEAN",
+                "prenoms": "Jean-Michel",
+                "annee_de_naissance": "1954-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ESCANUELA",
+                "prenoms": "Martine Marie",
+                "annee_de_naissance": "1966-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PERALLON",
+                "prenoms": "Jacques",
+                "annee_de_naissance": "1952-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GROS",
+                "prenoms": "Christiane",
+                "annee_de_naissance": "1947-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "SAÏSSET",
+                "prenoms": "Jean-François",
+                "annee_de_naissance": "1956-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CARBONNEL",
+                "prenoms": "Didier",
+                "annee_de_naissance": "1962-07",
+                "fonction": "7eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "GARINO",
+                "prenoms": "Jeannine",
+                "annee_de_naissance": "1964-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LAROCHE",
+                "prenoms": "Laetitia",
+                "annee_de_naissance": "1972-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MÉNASSI",
+                "prenoms": "Eric",
+                "annee_de_naissance": "1967-04",
+                "fonction": "1er Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "MARTEL",
+                "prenoms": "Jean",
+                "annee_de_naissance": "1950-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "AUDIER",
+                "prenoms": "Christian",
+                "annee_de_naissance": "1948-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ZOCCARATO",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1965-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ARNAUD",
+                "prenoms": "Magali",
+                "annee_de_naissance": "1966-02",
+                "fonction": "4eme Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "PUJOL",
+                "prenoms": "André",
+                "annee_de_naissance": "1954-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CAZEAUX",
+                "prenoms": "Marie-José",
+                "annee_de_naissance": "1948-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ARIBAUD",
+                "prenoms": "Jean-Louis",
+                "annee_de_naissance": "1951-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PROUST",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1950-10",
+                "fonction": "6eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "MARTY",
+                "prenoms": "Alain",
+                "annee_de_naissance": "1951-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BIZOT",
+                "prenoms": "Jean-Louis",
+                "annee_de_naissance": "1959-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GIACOMEL",
+                "prenoms": "Bruno",
+                "annee_de_naissance": "1969-01",
+                "fonction": "12eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "RIGAUD",
+                "prenoms": "Hélène",
+                "annee_de_naissance": "1958-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GINIES",
+                "prenoms": "Alain",
+                "annee_de_naissance": "1958-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "TURCHETTO",
+                "prenoms": "Aurélien",
+                "annee_de_naissance": "1981-06",
+                "fonction": "14eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "COMBES",
+                "prenoms": "Georges",
+                "annee_de_naissance": "1946-05",
+                "fonction": null,
+                "sexe": "M"
+              }
+            ],
+            "niveau": "epci"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "5021",
+            "9999"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": true,
+          "est_ess": false,
+          "est_finess": false,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": "invalide",
+          "type_siae": null
+        },
+        "slug": "carcassonne-agglo-200035715"
+      },
+      {
+        "siren": "241700640",
+        "nom_complet": "AGGLOMERATION ROYAN ATLANTIQUE",
+        "nom_raison_sociale": "AGGLOMERATION ROYAN ATLANTIQUE",
+        "sigle": null,
+        "nombre_etablissements": 26,
+        "nombre_etablissements_ouverts": 20,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "107 AVENUE DE ROCHEFORT 17200 ROYAN",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "17200",
+          "commune": "17306",
+          "complement_adresse": null,
+          "coordonnees": "45.638664,-1.025321",
+          "date_creation": "1999-11-02",
+          "date_debut_activite": "2008-01-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T02:30:29",
+          "departement": "17",
+          "distribution_speciale": null,
+          "epci": "241700640",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "107 Avenue de Rochefort 17200 Royan",
+          "geo_id": "17306_3110_00107",
+          "indice_repetition": null,
+          "latitude": "45.638664",
+          "libelle_cedex": null,
+          "libelle_commune": "ROYAN",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "DE ROCHEFORT",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "5021"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "-1.025321",
+          "nom_commercial": null,
+          "numero_voie": "107",
+          "region": "75",
+          "siret": "24170064000048",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "22",
+          "type_voie": "AVENUE"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "PME",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "1995-12-28",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:12:20",
+        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7348",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "31",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "107 AVENUE DE ROCHEFORT 17200 ROYAN",
+            "caractere_employeur": "O",
+            "code_postal": "17200",
+            "commune": "17306",
+            "date_creation": "1999-11-02",
+            "date_debut_activite": "2008-01-01",
+            "date_fermeture": null,
+            "epci": "241700640",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "17306_3110_00107",
+            "latitude": "45.638664",
+            "libelle_commune": "ROYAN",
+            "liste_enseignes": null,
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "5021"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "-1.025321",
+            "nom_commercial": null,
+            "region": "75",
+            "siret": "24170064000048",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "22"
+          }
+        ],
+        "immatriculation": null,
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "241700640",
+            "code_insee": null,
+            "elus": [
+              {
+                "nom": "BOULON",
+                "prenoms": "Joëlle",
+                "annee_de_naissance": "1952-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MADRANGES",
+                "prenoms": "Gilles",
+                "annee_de_naissance": "1954-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PERAUDEAU",
+                "prenoms": "Marie-Christine",
+                "annee_de_naissance": "1964-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MAIGRE",
+                "prenoms": "Robert",
+                "annee_de_naissance": "1954-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PINET",
+                "prenoms": "Nelly",
+                "annee_de_naissance": "1948-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GROCH",
+                "prenoms": "Marie-Noëlle",
+                "annee_de_naissance": "1958-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LYS",
+                "prenoms": "Jacques",
+                "annee_de_naissance": "1956-01",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "GIRERD",
+                "prenoms": "Maurice",
+                "annee_de_naissance": "1942-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BAZIN",
+                "prenoms": "Angèle",
+                "annee_de_naissance": "1978-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "SAINTLOS",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1968-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DUJEAN",
+                "prenoms": "Bruno",
+                "annee_de_naissance": "1956-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MARTIN",
+                "prenoms": "Olivier",
+                "annee_de_naissance": "1966-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BORDAGE",
+                "prenoms": "Graziella",
+                "annee_de_naissance": "1963-09",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "PORTIER",
+                "prenoms": "Myriam",
+                "annee_de_naissance": "1960-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DURET",
+                "prenoms": "Frédéric",
+                "annee_de_naissance": "1970-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BARRAUD",
+                "prenoms": "Vincent",
+                "annee_de_naissance": "1958-11",
+                "fonction": "Président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "LAUMONIER",
+                "prenoms": "Bernard",
+                "annee_de_naissance": "1950-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "POURPOINT",
+                "prenoms": "Bernard",
+                "annee_de_naissance": "1952-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BASCLE",
+                "prenoms": "Marie",
+                "annee_de_naissance": "1960-05",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CANOVA",
+                "prenoms": "Annick",
+                "annee_de_naissance": "1953-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "RENOUX",
+                "prenoms": "Eric",
+                "annee_de_naissance": "1975-03",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BANETTE",
+                "prenoms": "Pascal",
+                "annee_de_naissance": "1957-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FRIBOURG",
+                "prenoms": "Françoise",
+                "annee_de_naissance": "1955-05",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CRETIN",
+                "prenoms": "Emmanuel",
+                "annee_de_naissance": "1967-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "COTIER",
+                "prenoms": "Stéphane",
+                "annee_de_naissance": "1971-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BERGEROT",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1951-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CAU",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1963-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CIRAUD-LANOUE",
+                "prenoms": "Eliane",
+                "annee_de_naissance": "1950-01",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CUSSAC",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1956-08",
+                "fonction": "12eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "DAVID",
+                "prenoms": "Nadine",
+                "annee_de_naissance": "1960-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DURESSAY",
+                "prenoms": "Julien",
+                "annee_de_naissance": "1977-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FILOCHE",
+                "prenoms": "Gérard",
+                "annee_de_naissance": "1954-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GACHET BARRIÈRE",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1958-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GUIARD",
+                "prenoms": "Jacques",
+                "annee_de_naissance": "1949-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ISENDICK MALTERRE",
+                "prenoms": "Liliane",
+                "annee_de_naissance": "1950-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LAFARIE",
+                "prenoms": "Thomas",
+                "annee_de_naissance": "1980-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MARENGO",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1952-12",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "MOALLIC",
+                "prenoms": "Denis",
+                "annee_de_naissance": "1948-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ROGISTER",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1949-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SIMONNET",
+                "prenoms": "Didier",
+                "annee_de_naissance": "1959-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GOUGNON",
+                "prenoms": "Lysiane",
+                "annee_de_naissance": "1956-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DOHIN-PROST",
+                "prenoms": "Gwennaëlle",
+                "annee_de_naissance": "1985-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "FRANQUE DE LUXEMBOURG",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1956-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "NOISEUX",
+                "prenoms": "Corinne",
+                "annee_de_naissance": "1966-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "RICHAUD",
+                "prenoms": "François",
+                "annee_de_naissance": "1943-04",
+                "fonction": "11eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "SALLÉ",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1946-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BAUDIN",
+                "prenoms": "Claude",
+                "annee_de_naissance": "1947-07",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "PRUD'HOMME",
+                "prenoms": "Isabelle",
+                "annee_de_naissance": "1960-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ROY",
+                "prenoms": "Serge",
+                "annee_de_naissance": "1950-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BIZET",
+                "prenoms": "Isabelle",
+                "annee_de_naissance": "1966-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PITARD",
+                "prenoms": "Christian",
+                "annee_de_naissance": "1953-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ADOLPHE",
+                "prenoms": "Mariette",
+                "annee_de_naissance": "1957-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DANIEL",
+                "prenoms": "Jean-François",
+                "annee_de_naissance": "1959-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DORIDOT",
+                "prenoms": "Jean-Christophe",
+                "annee_de_naissance": "1966-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FERCHAUD",
+                "prenoms": "Pascal",
+                "annee_de_naissance": "1958-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "RATISKOL",
+                "prenoms": "Elisa",
+                "annee_de_naissance": "1980-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CARRÉ",
+                "prenoms": "Michele",
+                "annee_de_naissance": "1949-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GRASSET",
+                "prenoms": "Alain",
+                "annee_de_naissance": "1951-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MATET",
+                "prenoms": "Nicolas",
+                "annee_de_naissance": "1959-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "OSTA AMIGO",
+                "prenoms": "Laurence",
+                "annee_de_naissance": "1965-09",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "LIBELLI",
+                "prenoms": "Patrice",
+                "annee_de_naissance": "1959-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PUGENS",
+                "prenoms": "Véronique",
+                "annee_de_naissance": "1954-07",
+                "fonction": null,
+                "sexe": "F"
+              }
+            ],
+            "niveau": "epci"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "5021"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": false,
+          "est_ess": false,
+          "est_finess": false,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": null,
+          "type_siae": null
+        },
+        "slug": "agglomeration-royan-atlantique-241700640"
+      },
+      {
+        "siren": "200071827",
+        "nom_complet": "GRAND ANGOULEME",
+        "nom_raison_sociale": "GRAND ANGOULEME",
+        "sigle": null,
+        "nombre_etablissements": 19,
+        "nombre_etablissements_ouverts": 16,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "25 BOULEVARD BESSON BEY 16000 ANGOULEME",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "16000",
+          "commune": "16015",
+          "complement_adresse": null,
+          "coordonnees": "45.6586,0.160605",
+          "date_creation": "2017-01-01",
+          "date_debut_activite": "2017-01-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T16:46:35",
+          "departement": "16",
+          "distribution_speciale": null,
+          "epci": "200071827",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "25 Boulevard Besson Bey 16000 Angoulême",
+          "geo_id": "16015_0585_00025",
+          "indice_repetition": null,
+          "latitude": "45.6586",
+          "libelle_cedex": null,
+          "libelle_commune": "ANGOULEME",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "BESSON BEY",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "5021"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "0.160605",
+          "nom_commercial": null,
+          "numero_voie": "25",
+          "region": "75",
+          "siret": "20007182700014",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "41",
+          "type_voie": "BOULEVARD"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "ETI",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "2017-01-01",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:11:35",
+        "date_mise_a_jour_insee": "2024-07-26T14:47:25",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7348",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "41",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "25 BOULEVARD BESSON BEY 16000 ANGOULEME",
+            "caractere_employeur": "O",
+            "code_postal": "16000",
+            "commune": "16015",
+            "date_creation": "2017-01-01",
+            "date_debut_activite": "2017-01-01",
+            "date_fermeture": null,
+            "epci": "200071827",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "16015_0585_00025",
+            "latitude": "45.6586",
+            "libelle_commune": "ANGOULEME",
+            "liste_enseignes": null,
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "5021"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "0.160605",
+            "nom_commercial": null,
+            "region": "75",
+            "siret": "20007182700014",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "41"
+          }
+        ],
+        "immatriculation": null,
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "200071827",
+            "code_insee": null,
+            "elus": [
+              {
+                "nom": "ARLOT",
+                "prenoms": "Véronique",
+                "annee_de_naissance": "1960-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BONNEFONT",
+                "prenoms": "Xavier",
+                "annee_de_naissance": "1979-12",
+                "fonction": "Président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "COUTANT",
+                "prenoms": "Françoise",
+                "annee_de_naissance": "1966-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DESAPHY",
+                "prenoms": "Gérard",
+                "annee_de_naissance": "1962-12",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "DUBOIS",
+                "prenoms": "Valérie",
+                "annee_de_naissance": "1966-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ELIE",
+                "prenoms": "François",
+                "annee_de_naissance": "1962-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FORT",
+                "prenoms": "Sophie",
+                "annee_de_naissance": "1970-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "JOUINEAU",
+                "prenoms": "Sandrine",
+                "annee_de_naissance": "1976-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LEFEVRE",
+                "prenoms": "Gérard",
+                "annee_de_naissance": "1949-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MANZANAS",
+                "prenoms": "Raphaël",
+                "annee_de_naissance": "1989-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MONIER",
+                "prenoms": "Pascal",
+                "annee_de_naissance": "1966-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PIERRE-JUSTIN",
+                "prenoms": "Gilbert",
+                "annee_de_naissance": "1957-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PINVILLE",
+                "prenoms": "Martine",
+                "annee_de_naissance": "1958-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "POUSSET",
+                "prenoms": "Jean-Philippe",
+                "annee_de_naissance": "1968-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "REVEL",
+                "prenoms": "Catherine",
+                "annee_de_naissance": "1954-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "VERGNAUD",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1965-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "WILLAUMEZ-GUILLEMETEAU",
+                "prenoms": "Anne-Laure",
+                "annee_de_naissance": "1969-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "YOU",
+                "prenoms": "Vincent",
+                "annee_de_naissance": "1972-08",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "ZOUNGRANA",
+                "prenoms": "Zalissa",
+                "annee_de_naissance": "1979-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DOYEN-MORANGE",
+                "prenoms": "Chantal",
+                "annee_de_naissance": "1964-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "COURARI",
+                "prenoms": "Jean-Claude",
+                "annee_de_naissance": "1949-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ANDRIEUX",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1948-06",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BUISSON",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1961-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DULAIS",
+                "prenoms": "Nathalie",
+                "annee_de_naissance": "1966-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "AVERLAN",
+                "prenoms": "Joëlle",
+                "annee_de_naissance": "1950-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LAVILLE",
+                "prenoms": "Michaël",
+                "annee_de_naissance": "1972-08",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "PEREZ",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1958-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BONNET",
+                "prenoms": "Jacky",
+                "annee_de_naissance": "1962-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DAURÉ",
+                "prenoms": "Jean-François",
+                "annee_de_naissance": "1958-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FOURRIER",
+                "prenoms": "Maud",
+                "annee_de_naissance": "1981-11",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "SEMANE",
+                "prenoms": "Zahra",
+                "annee_de_naissance": "1973-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DELAGE",
+                "prenoms": "Françoise",
+                "annee_de_naissance": "1951-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GINGAST",
+                "prenoms": "Hélène",
+                "annee_de_naissance": "1970-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DEZIER",
+                "prenoms": "Gérard",
+                "annee_de_naissance": "1947-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "MEYER",
+                "prenoms": "Corinne Jeanine",
+                "annee_de_naissance": "1969-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "RIOU",
+                "prenoms": "Mireille",
+                "annee_de_naissance": "1960-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "RIGONDEAUD",
+                "prenoms": "Martine Hélène",
+                "annee_de_naissance": "1996-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ZIAT",
+                "prenoms": "Hassane",
+                "annee_de_naissance": "1966-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BOISSIER DESCOMBES",
+                "prenoms": "Didier",
+                "annee_de_naissance": "1954-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GERMANEAU",
+                "prenoms": "Michel Jean",
+                "annee_de_naissance": "1964-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FOUCHIER",
+                "prenoms": "Jean Luc",
+                "annee_de_naissance": "1960-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LAURENT",
+                "prenoms": "Francis Jean Marcel",
+                "annee_de_naissance": "1953-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "REVEREAULT",
+                "prenoms": "Jean",
+                "annee_de_naissance": "1955-06",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "COUTURIER",
+                "prenoms": "Barbara",
+                "annee_de_naissance": "1963-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GERARDI",
+                "prenoms": "Bertrand",
+                "annee_de_naissance": "1946-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DAVID",
+                "prenoms": "Serge",
+                "annee_de_naissance": "1955-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BIOJOUT",
+                "prenoms": "Eric",
+                "annee_de_naissance": "1964-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "AFGOUN",
+                "prenoms": "Sabrina",
+                "annee_de_naissance": "1970-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ROY",
+                "prenoms": "Gérard",
+                "annee_de_naissance": "1948-06",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "MARC",
+                "prenoms": "Annie",
+                "annee_de_naissance": "1969-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PERONNET",
+                "prenoms": "Yannick",
+                "annee_de_naissance": "1961-09",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "GODICHAUD",
+                "prenoms": "Fabienne",
+                "annee_de_naissance": "1960-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CHEMINADE",
+                "prenoms": "Séverine",
+                "annee_de_naissance": "1977-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "FOURNIÉ",
+                "prenoms": "Jean-Jacques",
+                "annee_de_naissance": "1966-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MIEGE-DECLERCQ",
+                "prenoms": "Benoît",
+                "annee_de_naissance": "1975-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "VEAUX",
+                "prenoms": "Roland",
+                "annee_de_naissance": "1947-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MARTIAL",
+                "prenoms": "Jean-Luc",
+                "annee_de_naissance": "1955-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CROS",
+                "prenoms": "Frédéric",
+                "annee_de_naissance": "1966-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DAHMANI",
+                "prenoms": "Fadilla",
+                "annee_de_naissance": "1964-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GRIMAL",
+                "prenoms": "Jérôme",
+                "annee_de_naissance": "1971-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "NEBOUT",
+                "prenoms": "François",
+                "annee_de_naissance": "1947-12",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BRÉARD",
+                "prenoms": "Catherine",
+                "annee_de_naissance": "1954-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BAPTISTE",
+                "prenoms": "Brigitte",
+                "annee_de_naissance": "1956-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DUROCHER",
+                "prenoms": "Denis",
+                "annee_de_naissance": "1963-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MOUFFLET",
+                "prenoms": "Isabelle",
+                "annee_de_naissance": "1968-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CHIRON",
+                "prenoms": "Monique",
+                "annee_de_naissance": "1946-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MOTEAU",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1959-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "HUREAU",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1954-10",
+                "fonction": null,
+                "sexe": "M"
+              }
+            ],
+            "niveau": "epci"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "1486",
+            "5021"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": false,
+          "est_ess": false,
+          "est_finess": false,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": null,
+          "type_siae": null
+        },
+        "slug": "grand-angouleme-200071827"
+      },
+      {
+        "siren": "200069383",
+        "nom_complet": "OUEST AVEYRON COMMUNAUTE",
+        "nom_raison_sociale": "OUEST AVEYRON COMMUNAUTE",
+        "sigle": null,
+        "nombre_etablissements": 13,
+        "nombre_etablissements_ouverts": 13,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "BATIMENT INTERACTIS CHEMIN DES 13 PIERRES 12200 VILLEFRANCHE-DE-ROUERGUE",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "12200",
+          "commune": "12300",
+          "complement_adresse": "BATIMENT INTERACTIS",
+          "coordonnees": "44.357175,2.02648",
+          "date_creation": "2017-01-01",
+          "date_debut_activite": "2017-01-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T11:40:04",
+          "departement": "12",
+          "distribution_speciale": null,
+          "epci": "200069383",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "Chemin des 13 Pierres 12200 Villefranche-de-Rouergue",
+          "geo_id": "12300_3000",
+          "indice_repetition": null,
+          "latitude": "44.357175",
+          "libelle_cedex": null,
+          "libelle_commune": "VILLEFRANCHE-DE-ROUERGUE",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "DES 13 PIERRES",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "5021"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "2.02648",
+          "nom_commercial": null,
+          "numero_voie": null,
+          "region": "76",
+          "siret": "20006938300012",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "21",
+          "type_voie": "CHEMIN"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "PME",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "2017-01-01",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:11:35",
+        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7346",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "21",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "BATIMENT INTERACTIS CHEMIN DES 13 PIERRES 12200 VILLEFRANCHE-DE-ROUERGUE",
+            "caractere_employeur": "O",
+            "code_postal": "12200",
+            "commune": "12300",
+            "date_creation": "2017-01-01",
+            "date_debut_activite": "2017-01-01",
+            "date_fermeture": null,
+            "epci": "200069383",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "12300_3000",
+            "latitude": "44.357175",
+            "libelle_commune": "VILLEFRANCHE-DE-ROUERGUE",
+            "liste_enseignes": null,
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "5021"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "2.02648",
+            "nom_commercial": null,
+            "region": "76",
+            "siret": "20006938300012",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "21"
+          }
+        ],
+        "immatriculation": null,
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "200069383",
+            "code_insee": null,
+            "elus": [
+              {
+                "nom": "DOUCET",
+                "prenoms": "Marie-José",
+                "annee_de_naissance": "1966-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DE ANDRADE",
+                "prenoms": "Marie-Isabelle",
+                "annee_de_naissance": "1970-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ALLEMAND",
+                "prenoms": "Gilles",
+                "annee_de_naissance": "1967-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DESTRUEL",
+                "prenoms": "Emmanuel",
+                "annee_de_naissance": "1969-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "RIGAL",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1965-09",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "VABRE",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1965-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SALESSES",
+                "prenoms": "Fabienne",
+                "annee_de_naissance": "1962-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MARTY",
+                "prenoms": "Guy",
+                "annee_de_naissance": "1955-08",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "DELPECH",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1953-05",
+                "fonction": "Président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "MARTY",
+                "prenoms": "Benoît",
+                "annee_de_naissance": "1968-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GUILHEN",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1958-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DELERIS",
+                "prenoms": "Suzanne",
+                "annee_de_naissance": "1955-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "POUZOULET-LIGUE",
+                "prenoms": "Didier",
+                "annee_de_naissance": "1961-11",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "SAINT-AFFRE",
+                "prenoms": "Christian",
+                "annee_de_naissance": "1951-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MARTIN",
+                "prenoms": "Olivier",
+                "annee_de_naissance": "1967-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DEGA",
+                "prenoms": "Christophe",
+                "annee_de_naissance": "1971-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LASCHON",
+                "prenoms": "Isabelle",
+                "annee_de_naissance": "1970-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "TEULIER",
+                "prenoms": "Daniel",
+                "annee_de_naissance": "1959-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MOYA",
+                "prenoms": "Catherine",
+                "annee_de_naissance": "1960-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "COLONGES",
+                "prenoms": "Gérard",
+                "annee_de_naissance": "1952-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CLAPIER",
+                "prenoms": "Suzette",
+                "annee_de_naissance": "1955-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "AGRECH",
+                "prenoms": "Gérard",
+                "annee_de_naissance": "1947-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DATCHARY",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1952-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "RUSCASSIÉ",
+                "prenoms": "Gilles",
+                "annee_de_naissance": "1964-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CHANUT",
+                "prenoms": "Christian",
+                "annee_de_naissance": "1952-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ANDURAND",
+                "prenoms": "Jacques",
+                "annee_de_naissance": "1951-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BAYOL",
+                "prenoms": "Stéphanie",
+                "annee_de_naissance": "1972-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BOUYSSIÉ",
+                "prenoms": "Jean-Michel",
+                "annee_de_naissance": "1961-09",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BRUGIER",
+                "prenoms": "Guy",
+                "annee_de_naissance": "1962-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BUGAREL",
+                "prenoms": "Jean-Marie",
+                "annee_de_naissance": "1980-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CANTOURNET",
+                "prenoms": "Eric",
+                "annee_de_naissance": "1966-12",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "CARRIÉ",
+                "prenoms": "Jean-Claude",
+                "annee_de_naissance": "1972-07",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "COMBE-CAYLA",
+                "prenoms": "Pascale",
+                "annee_de_naissance": "1964-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CUVELIER",
+                "prenoms": "Carine",
+                "annee_de_naissance": "1981-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DESPEYROUX",
+                "prenoms": "Vanessa",
+                "annee_de_naissance": "1973-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DO ROZARIO",
+                "prenoms": "Georges",
+                "annee_de_naissance": "1946-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FOURSAC",
+                "prenoms": "Laurent",
+                "annee_de_naissance": "1967-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GONZALEZ",
+                "prenoms": "Arnaud",
+                "annee_de_naissance": "1979-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "JANODET",
+                "prenoms": "Alix",
+                "annee_de_naissance": "1952-06",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "MANDROU-TAOUBI",
+                "prenoms": "Françoise",
+                "annee_de_naissance": "1956-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ORCIBAL",
+                "prenoms": "Jean-Sébastien",
+                "annee_de_naissance": "1979-01",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "PARRA",
+                "prenoms": "Carine",
+                "annee_de_naissance": "1979-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PEZET",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1972-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "POURCEL",
+                "prenoms": "Frédéric",
+                "annee_de_naissance": "1975-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "RAZAVI",
+                "prenoms": "Martine",
+                "annee_de_naissance": "1958-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ROUX",
+                "prenoms": "Veronique",
+                "annee_de_naissance": "1958-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "TRANIER",
+                "prenoms": "Laurent",
+                "annee_de_naissance": "1977-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GUITARD",
+                "prenoms": "Béatrice",
+                "annee_de_naissance": "1975-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "MASBOU",
+                "prenoms": "Jean-Pierre",
+                "annee_de_naissance": "1956-07",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "SAVIGNAC",
+                "prenoms": "Annabelle",
+                "annee_de_naissance": "1972-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BOULPICANTE",
+                "prenoms": "Valérie",
+                "annee_de_naissance": "1968-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "RICHER",
+                "prenoms": "Jean-Marc",
+                "annee_de_naissance": "1954-02",
+                "fonction": null,
+                "sexe": "M"
+              }
+            ],
+            "niveau": "epci"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "5021"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": true,
+          "est_ess": false,
+          "est_finess": false,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": "valide",
+          "type_siae": null
+        },
+        "slug": "ouest-aveyron-communaute-200069383"
+      },
+      {
+        "siren": "244400503",
+        "nom_complet": "COMMUNAUTE DE COMMUNES D'ERDRE GESVRES (CCEG)",
+        "nom_raison_sociale": "COMMUNAUTE DE COMMUNES D'ERDRE GESVRES",
+        "sigle": "CCEG",
+        "nombre_etablissements": 28,
+        "nombre_etablissements_ouverts": 11,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "PARC ACTIVITES GRANDD'HAIE 1 RUE MARIE CURIE 44119 GRANDCHAMP-DES-FONTAINES",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "44119",
+          "commune": "44066",
+          "complement_adresse": "PARC ACTIVITES GRANDD'HAIE",
+          "coordonnees": "47.374716,-1.646571",
+          "date_creation": "2002-11-12",
+          "date_debut_activite": "2008-01-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T16:26:37",
+          "departement": "44",
+          "distribution_speciale": null,
+          "epci": "244400503",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "1 Rue  marie curie 44119 Grandchamp-des-Fontaines",
+          "geo_id": "44066_0155_00001",
+          "indice_repetition": null,
+          "latitude": "47.374716",
+          "libelle_cedex": null,
+          "libelle_commune": "GRANDCHAMP-DES-FONTAINES",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "MARIE CURIE",
+          "liste_enseignes": null,
+          "liste_finess": [
+            "440050896"
+          ],
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "9999"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "-1.646571",
+          "nom_commercial": null,
+          "numero_voie": "1",
+          "region": "52",
+          "siret": "24440050300110",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "22",
+          "type_voie": "RUE"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "PME",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "1994-12-13",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:12:22",
+        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7346",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "22",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "PARC ACTIVITES GRANDD'HAIE 1 RUE MARIE CURIE 44119 GRANDCHAMP-DES-FONTAINES",
+            "caractere_employeur": "O",
+            "code_postal": "44119",
+            "commune": "44066",
+            "date_creation": "2002-11-12",
+            "date_debut_activite": "2008-01-01",
+            "date_fermeture": null,
+            "epci": "244400503",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "44066_0155_00001",
+            "latitude": "47.374716",
+            "libelle_commune": "GRANDCHAMP-DES-FONTAINES",
+            "liste_enseignes": null,
+            "liste_finess": [
+              "440050896"
+            ],
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "9999"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "-1.646571",
+            "nom_commercial": null,
+            "region": "52",
+            "siret": "24440050300110",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "22"
+          }
+        ],
+        "immatriculation": null,
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "244400503",
+            "code_insee": null,
+            "elus": [
+              {
+                "nom": "EUZÉNAT",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1976-12",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BIDET",
+                "prenoms": "Stephanie",
+                "annee_de_naissance": "1979-03",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "LABARRE",
+                "prenoms": "Claude",
+                "annee_de_naissance": "1954-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PERRAY",
+                "prenoms": "Mikael",
+                "annee_de_naissance": "1970-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LAUNAY",
+                "prenoms": "Hélène",
+                "annee_de_naissance": "1971-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LE PISSART",
+                "prenoms": "Claudine",
+                "annee_de_naissance": "1975-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "OUVRARD",
+                "prenoms": "François",
+                "annee_de_naissance": "1960-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "THIBAUD",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1954-04",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "CHARTIER",
+                "prenoms": "Isabelle",
+                "annee_de_naissance": "1976-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "JOUTARD",
+                "prenoms": "Jean-Pierre",
+                "annee_de_naissance": "1956-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PINEL",
+                "prenoms": "Patrice",
+                "annee_de_naissance": "1969-04",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "PLOQUIN",
+                "prenoms": "Olivier",
+                "annee_de_naissance": "1968-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BOQUIEN",
+                "prenoms": "Denys",
+                "annee_de_naissance": "1957-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DAUVÉ",
+                "prenoms": "Yves",
+                "annee_de_naissance": "1959-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GUÉRON",
+                "prenoms": "Lydie",
+                "annee_de_naissance": "1963-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LE RIBOTER",
+                "prenoms": "Christine",
+                "annee_de_naissance": "1968-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LEFEUVRE",
+                "prenoms": "Sylvain",
+                "annee_de_naissance": "1972-12",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "NAUD",
+                "prenoms": "Jean-Paul",
+                "annee_de_naissance": "1959-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BESNIER",
+                "prenoms": "Jean-Luc",
+                "annee_de_naissance": "1963-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PABOIS",
+                "prenoms": "Chrystophe",
+                "annee_de_naissance": "1970-01",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "RIVIERE",
+                "prenoms": "Magali",
+                "annee_de_naissance": "1972-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BOISLÈVE",
+                "prenoms": "Frédéric",
+                "annee_de_naissance": "1979-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CHARRIER",
+                "prenoms": "Jean-François",
+                "annee_de_naissance": "1964-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MAINGUET",
+                "prenoms": "Karine",
+                "annee_de_naissance": "1973-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "NOURRY",
+                "prenoms": "Barbara",
+                "annee_de_naissance": "1976-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CHEVALIER",
+                "prenoms": "Christine",
+                "annee_de_naissance": "1959-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "COUFFY-MORICE",
+                "prenoms": "Marie-Laure",
+                "annee_de_naissance": "1966-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GAILLARD",
+                "prenoms": "Anne-Marie",
+                "annee_de_naissance": "1949-07",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LE MÉTAYER",
+                "prenoms": "Julien",
+                "annee_de_naissance": "1980-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MOREAU",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1956-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GUILLEMINE",
+                "prenoms": "Laurence",
+                "annee_de_naissance": "1974-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "VEYRAND",
+                "prenoms": "Bruno",
+                "annee_de_naissance": "1978-06",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "LERAT",
+                "prenoms": "Yvon",
+                "annee_de_naissance": "1949-08",
+                "fonction": "Président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "RENOUX",
+                "prenoms": "Emmanuel",
+                "annee_de_naissance": "1972-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "RINCÉ",
+                "prenoms": "Claude",
+                "annee_de_naissance": "1957-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PLONÉIS-MENAGER",
+                "prenoms": "Sandrine",
+                "annee_de_naissance": "1968-11",
+                "fonction": null,
+                "sexe": "F"
+              }
+            ],
+            "niveau": "epci"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "9999"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": true,
+          "est_ess": false,
+          "est_finess": true,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": "valide",
+          "type_siae": null
+        },
+        "slug": "communaute-de-communes-d-erdre-gesvres-cceg-244400503"
+      },
+      {
+        "siren": "241700624",
+        "nom_complet": "COMMUNAUTE DE COMMUNES DE L ILE D OLERON",
+        "nom_raison_sociale": "COMMUNAUTE DE COMMUNES DE L ILE D OLERON",
+        "sigle": null,
+        "nombre_etablissements": 11,
+        "nombre_etablissements_ouverts": 10,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "17310",
+          "commune": "17385",
+          "complement_adresse": null,
+          "coordonnees": "45.936181,-1.303525",
+          "date_creation": "1998-02-13",
+          "date_debut_activite": "2008-01-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T09:41:46",
+          "departement": "17",
+          "distribution_speciale": null,
+          "epci": "241700624",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "59 Route des Allées 17310 Saint-Pierre-d'Oléron",
+          "geo_id": "17385_0041_00059",
+          "indice_repetition": null,
+          "latitude": "45.936181",
+          "libelle_cedex": null,
+          "libelle_commune": "SAINT-PIERRE-D'OLERON",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "DES ALLEES",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "5021"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "-1.303525",
+          "nom_commercial": null,
+          "numero_voie": "59",
+          "region": "75",
+          "siret": "24170062400026",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "22",
+          "type_voie": "ROUTE"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "PME",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "1995-12-26",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:12:20",
+        "date_mise_a_jour_insee": "2024-05-07T08:05:08",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7346",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "22",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+            "caractere_employeur": "O",
+            "code_postal": "17310",
+            "commune": "17385",
+            "date_creation": "1998-02-13",
+            "date_debut_activite": "2008-01-01",
+            "date_fermeture": null,
+            "epci": "241700624",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "17385_0041_00059",
+            "latitude": "45.936181",
+            "libelle_commune": "SAINT-PIERRE-D'OLERON",
+            "liste_enseignes": null,
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "5021"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "-1.303525",
+            "nom_commercial": null,
+            "region": "75",
+            "siret": "24170062400026",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "22"
+          }
+        ],
+        "immatriculation": null,
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "241700624",
+            "code_insee": null,
+            "elus": [
+              {
+                "nom": "BENITO ET GARCIA",
+                "prenoms": "Richard",
+                "annee_de_naissance": "1949-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FERREIRA",
+                "prenoms": "François",
+                "annee_de_naissance": "1959-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "HUMBERT",
+                "prenoms": "Micheline",
+                "annee_de_naissance": "1948-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "JOUTEUX",
+                "prenoms": "Françoise",
+                "annee_de_naissance": "1951-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PARENT",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1947-01",
+                "fonction": "Président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BOUGNARD",
+                "prenoms": "Valérie",
+                "annee_de_naissance": "1969-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BRECHKOFF",
+                "prenoms": "Thibault",
+                "annee_de_naissance": "1992-09",
+                "fonction": "5eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BRIES",
+                "prenoms": "Sylvie",
+                "annee_de_naissance": "1970-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LAVAUD",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1963-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "HUOT",
+                "prenoms": "Joseph",
+                "annee_de_naissance": "1947-02",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "JOYEUX",
+                "prenoms": "Nathalie",
+                "annee_de_naissance": "1985-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DELHUMEAU-JAUD",
+                "prenoms": "Fabienne",
+                "annee_de_naissance": "1957-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LIVENAIS",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1950-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MAZERAT",
+                "prenoms": "Adrien",
+                "annee_de_naissance": "1988-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MORANDEAU",
+                "prenoms": "Yannick",
+                "annee_de_naissance": "1953-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "RABELLE",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1950-04",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "COIFFÉ",
+                "prenoms": "Luc",
+                "annee_de_naissance": "1961-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DELISÉE",
+                "prenoms": "Martine",
+                "annee_de_naissance": "1959-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "FROUGIER",
+                "prenoms": "Sylvie",
+                "annee_de_naissance": "1961-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GAZEU",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1958-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GUILBERT",
+                "prenoms": "Éric",
+                "annee_de_naissance": "1961-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SUEUR",
+                "prenoms": "Christophe",
+                "annee_de_naissance": "1966-08",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "VATON",
+                "prenoms": "Rodolphe",
+                "annee_de_naissance": "1957-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "VITET",
+                "prenoms": "Françoise",
+                "annee_de_naissance": "1956-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GAILLOT",
+                "prenoms": "Bruno",
+                "annee_de_naissance": "1955-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "VILLAUTREIX",
+                "prenoms": "Marie-Josée",
+                "annee_de_naissance": "1963-05",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CHARTIER",
+                "prenoms": "Chantal",
+                "annee_de_naissance": "1955-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ROBILLARD",
+                "prenoms": "Patrice",
+                "annee_de_naissance": "1950-08",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "CHEVRIER",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1954-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "MONNEREAU",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1953-02",
+                "fonction": null,
+                "sexe": "M"
+              }
+            ],
+            "niveau": "epci"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "9999",
+            "5021"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": false,
+          "est_ess": false,
+          "est_finess": false,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": null,
+          "type_siae": null
+        },
+        "slug": "communaute-de-communes-de-l-ile-d-oleron-241700624"
+      },
+      {
+        "siren": "200018406",
+        "nom_complet": "COMMUNAUTE DE COMMUNES DU ROMORANTINAIS ET DU MONESTOIS",
+        "nom_raison_sociale": "COMMUNAUTE DE COMMUNES DU ROMORANTINAIS ET DU MONESTOIS",
+        "sigle": null,
+        "nombre_etablissements": 11,
+        "nombre_etablissements_ouverts": 9,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "41200",
+          "commune": "41194",
+          "complement_adresse": "PORTE DES BELIERS",
+          "coordonnees": "47.357427,1.747963",
+          "date_creation": "2022-01-12",
+          "date_debut_activite": "2022-01-12",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T08:02:11",
+          "departement": "41",
+          "distribution_speciale": null,
+          "epci": "200018406",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "Rue Normant 41200 Romorantin-Lanthenay",
+          "geo_id": "41194_1276",
+          "indice_repetition": null,
+          "latitude": "47.357427",
+          "libelle_cedex": null,
+          "libelle_commune": "ROMORANTIN-LANTHENAY",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "NORMANT",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "5021"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "1.747963",
+          "nom_commercial": null,
+          "numero_voie": null,
+          "region": "24",
+          "siret": "20001840600096",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "21",
+          "type_voie": "RUE"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "PME",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "2008-12-29",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:11:31",
+        "date_mise_a_jour_insee": "2024-11-15T10:45:32",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7346",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "21",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
+            "caractere_employeur": "O",
+            "code_postal": "41200",
+            "commune": "41194",
+            "date_creation": "2022-01-12",
+            "date_debut_activite": "2022-01-12",
+            "date_fermeture": null,
+            "epci": "200018406",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "41194_1276",
+            "latitude": "47.357427",
+            "libelle_commune": "ROMORANTIN-LANTHENAY",
+            "liste_enseignes": null,
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "5021"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "1.747963",
+            "nom_commercial": null,
+            "region": "24",
+            "siret": "20001840600096",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "21"
+          }
+        ],
+        "immatriculation": null,
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "200018406",
+            "code_insee": null,
+            "elus": [
+              {
+                "nom": "FOISSARD NÉE BEN AIOUN",
+                "prenoms": "Maryse",
+                "annee_de_naissance": "1992-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GARNIER",
+                "prenoms": "Nicolas",
+                "annee_de_naissance": "1975-11",
+                "fonction": "2eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "DE CARFORT",
+                "prenoms": "Claude",
+                "annee_de_naissance": "1949-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DOUCET-LAUVERJAT",
+                "prenoms": "Sylvie",
+                "annee_de_naissance": "1975-10",
+                "fonction": "6eme Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CHANTIER",
+                "prenoms": "Gilles",
+                "annee_de_naissance": "1950-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "CARRE",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1952-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GILOT-LECLERC",
+                "prenoms": "Françoise",
+                "annee_de_naissance": "1949-06",
+                "fonction": "9eme Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "PENÊT",
+                "prenoms": "Benoît",
+                "annee_de_naissance": "1991-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "RETIF",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1958-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "HERISSET",
+                "prenoms": "Joël",
+                "annee_de_naissance": "1959-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "THUÉ",
+                "prenoms": "Gérard",
+                "annee_de_naissance": "1950-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BLANCHARD",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1984-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "THORIN",
+                "prenoms": "Christophe",
+                "annee_de_naissance": "1969-03",
+                "fonction": "13eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BERTRAND",
+                "prenoms": "Aurélien",
+                "annee_de_naissance": "1991-12",
+                "fonction": "4eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "COGNET",
+                "prenoms": "Jacqueline",
+                "annee_de_naissance": "1944-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CORDIER",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1959-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BARRY",
+                "prenoms": "Angélique",
+                "annee_de_naissance": "1975-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DE REDON",
+                "prenoms": "Louis",
+                "annee_de_naissance": "1981-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DEGRAIS",
+                "prenoms": "Anne",
+                "annee_de_naissance": "1967-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DUVAL",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1948-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ESCAMEZ",
+                "prenoms": "Stéphanie",
+                "annee_de_naissance": "1974-12",
+                "fonction": "14eme Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "GAVEAU",
+                "prenoms": "Stéphane",
+                "annee_de_naissance": "1970-09",
+                "fonction": "12eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "GIRAUDET",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1957-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GUIMONET",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1955-04",
+                "fonction": "7eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "GUÉNIN",
+                "prenoms": "Didier",
+                "annee_de_naissance": "1963-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "HARNOIS",
+                "prenoms": "Bruno",
+                "annee_de_naissance": "1968-06",
+                "fonction": "3eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "HOUGNON",
+                "prenoms": "Raphaël",
+                "annee_de_naissance": "1975-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LEROY",
+                "prenoms": "Roger",
+                "annee_de_naissance": "1959-03",
+                "fonction": "8eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "LORGEOUX",
+                "prenoms": "Jeanny",
+                "annee_de_naissance": "1950-01",
+                "fonction": "Président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "MARCHAND",
+                "prenoms": "Vanessa",
+                "annee_de_naissance": "1977-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "NAUDION",
+                "prenoms": "Claude",
+                "annee_de_naissance": "1952-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ORTH",
+                "prenoms": "Catherine",
+                "annee_de_naissance": "1959-10",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PAUCHARD",
+                "prenoms": "Anicette",
+                "annee_de_naissance": "1957-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ROGER",
+                "prenoms": "Nicole",
+                "annee_de_naissance": "1948-01",
+                "fonction": "1er Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "SABOURDY",
+                "prenoms": "Cédric",
+                "annee_de_naissance": "1979-05",
+                "fonction": "5eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "SEGUIN",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1960-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SOURIOUX",
+                "prenoms": "Romain",
+                "annee_de_naissance": "1989-11",
+                "fonction": "11eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BARBÉ",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1938-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ANTOINE",
+                "prenoms": "Nelly",
+                "annee_de_naissance": "1958-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GASC",
+                "prenoms": "Thibaut",
+                "annee_de_naissance": "1973-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "LAUMONIER",
+                "prenoms": "Gérald",
+                "annee_de_naissance": "1972-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MARECHAL",
+                "prenoms": "Bruno",
+                "annee_de_naissance": "1963-10",
+                "fonction": "10eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "PERSEGOL",
+                "prenoms": "Léa",
+                "annee_de_naissance": "1989-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BESSONNIER",
+                "prenoms": "Hubert",
+                "annee_de_naissance": "1952-01",
+                "fonction": null,
+                "sexe": "M"
+              }
+            ],
+            "niveau": "epci"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "5021"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": false,
+          "est_ess": false,
+          "est_finess": true,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": null,
+          "type_siae": null
+        },
+        "slug": "communaute-de-communes-du-romorantinais-et-du-monestois-200018406"
+      }
+    ],
+    "total_results": 19,
+    "page": 1,
+    "per_page": 10,
+    "total_pages": 2
+  }
+}
