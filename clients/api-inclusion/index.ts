@@ -9,7 +9,7 @@ import { httpGet } from '#utils/network';
  * https://lemarche.inclusion.beta.gouv.fr/api/docs/
  */
 export const clientAPIInclusion = async (siren: Siren) => {
-  const url = routes.certifications.entrepriseInclusive.api.siren + siren;
+  const url = routes.certifications.entrepriseInclusive.api.getBySiren(siren);
   const response = await httpGet<APIInclusionResponse[]>(url, {
     params: { token: process.env.API_MARCHE_INCLUSION_TOKEN },
   });
