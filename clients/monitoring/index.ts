@@ -25,7 +25,7 @@ export type IUpdownIODowntimes = {
 };
 
 export const clientMonitoring = async (slug: string): Promise<IMonitoring> => {
-  const url = routes.tooling.monitoring(slug);
+  const url = routes.tooling.monitoring.getBySlug(slug);
   const response = await httpGet<IUpdownIODowntimes[]>(url, {
     headers: {
       'Accept-Encoding': 'gzip',

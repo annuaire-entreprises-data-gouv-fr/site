@@ -28,5 +28,5 @@ export const routesHandlers = [
     entrepreneurSpectaclesHandler
   ),
   http.get(routes.datagouv.ess, apiDataGouvEssHandler),
-  http.get(routes.tooling.monitoring('*'), upDownIoHandler),
+  http.get(routes.tooling.monitoring.getBySlug('*'), upDownIoHandler),
 ];
