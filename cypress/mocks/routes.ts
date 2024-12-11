@@ -1,6 +1,7 @@
 import routes from '#clients/routes';
 import { http } from 'msw';
 import { apiBioHandler } from './handlers/api-bio';
+import { apiDataGouvEssHandler } from './handlers/api-data-gouv-ess';
 import { apiInclusionHandler } from './handlers/api-inclusion';
 import { entrepreneurSpectaclesHandler } from './handlers/entrepreneur-spectacles';
 import { eoriHandler } from './handlers/eori';
@@ -25,4 +26,5 @@ export const routesHandlers = [
     `${routes.certifications.entrepreneurSpectacles.ods.search}`,
     entrepreneurSpectaclesHandler
   ),
+  http.get(`${routes.datagouv.ess}`, apiDataGouvEssHandler),
 ];
