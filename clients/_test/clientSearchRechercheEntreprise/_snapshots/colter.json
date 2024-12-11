@@ -70,7 +70,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "2013-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-04T13:13:23",
+        "date_mise_a_jour": "2024-12-10T13:11:32",
         "date_mise_a_jour_insee": "2024-07-04T16:28:36",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
@@ -667,7 +667,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "1982-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-04T13:14:11",
+        "date_mise_a_jour": "2024-12-10T13:12:18",
         "date_mise_a_jour_insee": "2024-09-10T08:22:10",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
@@ -1206,7 +1206,7 @@
           "complement_adresse": null,
           "coordonnees": "43.615663,1.436756",
           "date_creation": "1999-05-17",
-          "date_debut_activite": "2008-01-01",
+          "date_debut_activite": "2015-01-01",
           "date_fermeture": null,
           "date_mise_a_jour": null,
           "date_mise_a_jour_insee": "2024-03-30T11:21:57",
@@ -1224,9 +1224,7 @@
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
           "libelle_voie": "DE LA MARQUETTE",
-          "liste_enseignes": [
-            "CONSEIL GENERAL"
-          ],
+          "liste_enseignes": null,
           "liste_finess": [
             "310796198"
           ],
@@ -1254,7 +1252,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "1983-03-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-04T13:14:11",
+        "date_mise_a_jour": "2024-12-10T13:12:18",
         "date_mise_a_jour_insee": "2024-03-22T14:26:06",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
@@ -1274,7 +1272,7 @@
             "code_postal": "31000",
             "commune": "31555",
             "date_creation": "1999-05-17",
-            "date_debut_activite": "2008-01-01",
+            "date_debut_activite": "2015-01-01",
             "date_fermeture": null,
             "epci": "243100518",
             "est_siege": true,
@@ -1282,9 +1280,7 @@
             "geo_id": "31555_5716_00001",
             "latitude": "43.615663",
             "libelle_commune": "TOULOUSE",
-            "liste_enseignes": [
-              "CONSEIL GENERAL"
-            ],
+            "liste_enseignes": null,
             "liste_finess": [
               "310796198"
             ],
@@ -1778,7 +1774,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "2013-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-04T13:13:23",
+        "date_mise_a_jour": "2024-12-10T13:11:32",
         "date_mise_a_jour_insee": "2024-03-22T14:26:06",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
@@ -2822,7 +2818,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "1995-12-28",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-04T13:14:11",
+        "date_mise_a_jour": "2024-12-10T13:12:20",
         "date_mise_a_jour_insee": "2024-03-22T14:26:06",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
@@ -3403,7 +3399,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "2017-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-04T13:13:26",
+        "date_mise_a_jour": "2024-12-10T13:11:35",
         "date_mise_a_jour_insee": "2024-07-26T14:47:25",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
@@ -4027,7 +4023,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "2017-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-04T13:13:26",
+        "date_mise_a_jour": "2024-12-10T13:11:35",
         "date_mise_a_jour_insee": "2024-03-22T14:26:06",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
@@ -4540,7 +4536,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "1994-12-13",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-04T13:14:14",
+        "date_mise_a_jour": "2024-12-10T13:12:22",
         "date_mise_a_jour_insee": "2024-03-22T14:26:06",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
@@ -4878,12 +4874,370 @@
         "dateMiseAJourInpi": "2024-09-21T03:34:50"
       },
       {
+        "siren": "241700624",
+        "nom_complet": "COMMUNAUTE DE COMMUNES DE L ILE D OLERON",
+        "nom_raison_sociale": "COMMUNAUTE DE COMMUNES DE L ILE D OLERON",
+        "sigle": null,
+        "nombre_etablissements": 11,
+        "nombre_etablissements_ouverts": 10,
+        "siege": {
+          "activite_principale": "84.11Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "17310",
+          "commune": "17385",
+          "complement_adresse": null,
+          "coordonnees": "45.936181,-1.303525",
+          "date_creation": "1998-02-13",
+          "date_debut_activite": "2008-01-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-03-30T09:41:46",
+          "departement": "17",
+          "distribution_speciale": null,
+          "epci": "241700624",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "59 Route des Allées 17310 Saint-Pierre-d'Oléron",
+          "geo_id": "17385_0041_00059",
+          "indice_repetition": null,
+          "latitude": "45.936181",
+          "libelle_cedex": null,
+          "libelle_commune": "SAINT-PIERRE-D'OLERON",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "DES ALLEES",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "5021"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": [
+            "1911"
+          ],
+          "liste_uai": null,
+          "longitude": "-1.303525",
+          "nom_commercial": null,
+          "numero_voie": "59",
+          "region": "75",
+          "siret": "24170062400026",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "22",
+          "type_voie": "ROUTE"
+        },
+        "activite_principale": "84.11Z",
+        "categorie_entreprise": "PME",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "1995-12-26",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T13:12:20",
+        "date_mise_a_jour_insee": "2024-05-07T08:05:08",
+        "date_mise_a_jour_rne": null,
+        "dirigeants": [],
+        "etat_administratif": "A",
+        "nature_juridique": "7346",
+        "section_activite_principale": "O",
+        "tranche_effectif_salarie": "22",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "84.11Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+            "caractere_employeur": "O",
+            "code_postal": "17310",
+            "commune": "17385",
+            "date_creation": "1998-02-13",
+            "date_debut_activite": "2008-01-01",
+            "date_fermeture": null,
+            "epci": "241700624",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "17385_0041_00059",
+            "latitude": "45.936181",
+            "libelle_commune": "SAINT-PIERRE-D'OLERON",
+            "liste_enseignes": null,
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "5021"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": [
+              "1911"
+            ],
+            "liste_uai": null,
+            "longitude": "-1.303525",
+            "nom_commercial": null,
+            "region": "75",
+            "siret": "24170062400026",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "22"
+          }
+        ],
+        "finances": null,
+        "complements": {
+          "collectivite_territoriale": {
+            "code": "241700624",
+            "code_insee": null,
+            "elus": [
+              {
+                "nom": "BENITO ET GARCIA",
+                "prenoms": "Richard",
+                "annee_de_naissance": "1949-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "FERREIRA",
+                "prenoms": "François",
+                "annee_de_naissance": "1959-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "HUMBERT",
+                "prenoms": "Micheline",
+                "annee_de_naissance": "1948-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "JOUTEUX",
+                "prenoms": "Françoise",
+                "annee_de_naissance": "1951-04",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "PARENT",
+                "prenoms": "Michel",
+                "annee_de_naissance": "1947-01",
+                "fonction": "Président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BOUGNARD",
+                "prenoms": "Valérie",
+                "annee_de_naissance": "1969-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BRECHKOFF",
+                "prenoms": "Thibault",
+                "annee_de_naissance": "1992-09",
+                "fonction": "5eme Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "BRIES",
+                "prenoms": "Sylvie",
+                "annee_de_naissance": "1970-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LAVAUD",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1963-07",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "HUOT",
+                "prenoms": "Joseph",
+                "annee_de_naissance": "1947-02",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "JOYEUX",
+                "prenoms": "Nathalie",
+                "annee_de_naissance": "1985-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "DELHUMEAU-JAUD",
+                "prenoms": "Fabienne",
+                "annee_de_naissance": "1957-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "LIVENAIS",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1950-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MAZERAT",
+                "prenoms": "Adrien",
+                "annee_de_naissance": "1988-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "MORANDEAU",
+                "prenoms": "Yannick",
+                "annee_de_naissance": "1953-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "RABELLE",
+                "prenoms": "Dominique",
+                "annee_de_naissance": "1950-04",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "COIFFÉ",
+                "prenoms": "Luc",
+                "annee_de_naissance": "1961-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DELISÉE",
+                "prenoms": "Martine",
+                "annee_de_naissance": "1959-02",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "FROUGIER",
+                "prenoms": "Sylvie",
+                "annee_de_naissance": "1961-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GAZEU",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1958-05",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "GUILBERT",
+                "prenoms": "Éric",
+                "annee_de_naissance": "1961-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SUEUR",
+                "prenoms": "Christophe",
+                "annee_de_naissance": "1966-08",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "VATON",
+                "prenoms": "Rodolphe",
+                "annee_de_naissance": "1957-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "VITET",
+                "prenoms": "Françoise",
+                "annee_de_naissance": "1956-09",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "GAILLOT",
+                "prenoms": "Bruno",
+                "annee_de_naissance": "1955-03",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "VILLAUTREIX",
+                "prenoms": "Marie-Josée",
+                "annee_de_naissance": "1963-05",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "F"
+              },
+              {
+                "nom": "CHARTIER",
+                "prenoms": "Chantal",
+                "annee_de_naissance": "1955-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "ROBILLARD",
+                "prenoms": "Patrice",
+                "annee_de_naissance": "1950-08",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "CHEVRIER",
+                "prenoms": "Philippe",
+                "annee_de_naissance": "1954-10",
+                "fonction": "Vice-président du conseil communautaire",
+                "sexe": "M"
+              },
+              {
+                "nom": "MONNEREAU",
+                "prenoms": "Patrick",
+                "annee_de_naissance": "1953-02",
+                "fonction": null,
+                "sexe": "M"
+              }
+            ],
+            "niveau": "epci"
+          },
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "9999",
+            "5021"
+          ],
+          "egapro_renseignee": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": false,
+          "est_ess": false,
+          "est_finess": false,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": true,
+          "est_service_public": true,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": null,
+          "type_siae": null
+        },
+        "slug": "communaute-de-communes-de-l-ile-d-oleron-241700624",
+        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
+        "dateMiseAJourInpi": "2024-09-21T03:34:50"
+      },
+      {
         "siren": "200018406",
         "nom_complet": "COMMUNAUTE DE COMMUNES DU ROMORANTINAIS ET DU MONESTOIS",
         "nom_raison_sociale": "COMMUNAUTE DE COMMUNES DU ROMORANTINAIS ET DU MONESTOIS",
         "sigle": null,
         "nombre_etablissements": 11,
-        "nombre_etablissements_ouverts": 10,
+        "nombre_etablissements_ouverts": 9,
         "siege": {
           "activite_principale": "84.11Z",
           "activite_principale_registre_metier": null,
@@ -4941,7 +5295,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "2008-12-29",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-04T13:13:22",
+        "date_mise_a_jour": "2024-12-10T13:11:31",
         "date_mise_a_jour_insee": "2024-11-15T10:45:32",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
@@ -5329,364 +5683,6 @@
           "type_siae": null
         },
         "slug": "communaute-de-communes-du-romorantinais-et-du-monestois-200018406",
-        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInpi": "2024-09-21T03:34:50"
-      },
-      {
-        "siren": "241700624",
-        "nom_complet": "COMMUNAUTE DE COMMUNES DE L ILE D OLERON",
-        "nom_raison_sociale": "COMMUNAUTE DE COMMUNES DE L ILE D OLERON",
-        "sigle": null,
-        "nombre_etablissements": 11,
-        "nombre_etablissements_ouverts": 10,
-        "siege": {
-          "activite_principale": "84.11Z",
-          "activite_principale_registre_metier": null,
-          "annee_tranche_effectif_salarie": "2022",
-          "adresse": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
-          "caractere_employeur": "O",
-          "cedex": null,
-          "code_pays_etranger": null,
-          "code_postal": "17310",
-          "commune": "17385",
-          "complement_adresse": null,
-          "coordonnees": "45.936181,-1.303525",
-          "date_creation": "1998-02-13",
-          "date_debut_activite": "2008-01-01",
-          "date_fermeture": null,
-          "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-03-30T09:41:46",
-          "departement": "17",
-          "distribution_speciale": null,
-          "epci": "241700624",
-          "est_siege": true,
-          "etat_administratif": "A",
-          "geo_adresse": "59 Route des Allées 17310 Saint-Pierre-d'Oléron",
-          "geo_id": "17385_0041_00059",
-          "indice_repetition": null,
-          "latitude": "45.936181",
-          "libelle_cedex": null,
-          "libelle_commune": "SAINT-PIERRE-D'OLERON",
-          "libelle_commune_etranger": null,
-          "libelle_pays_etranger": null,
-          "libelle_voie": "DES ALLEES",
-          "liste_enseignes": null,
-          "liste_finess": null,
-          "liste_id_bio": null,
-          "liste_idcc": [
-            "5021"
-          ],
-          "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
-          "liste_uai": null,
-          "longitude": "-1.303525",
-          "nom_commercial": null,
-          "numero_voie": "59",
-          "region": "75",
-          "siret": "24170062400026",
-          "statut_diffusion_etablissement": "O",
-          "tranche_effectif_salarie": "22",
-          "type_voie": "ROUTE"
-        },
-        "activite_principale": "84.11Z",
-        "categorie_entreprise": "PME",
-        "caractere_employeur": null,
-        "annee_categorie_entreprise": "2022",
-        "date_creation": "1995-12-26",
-        "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-04T13:14:11",
-        "date_mise_a_jour_insee": "2024-05-07T08:05:08",
-        "date_mise_a_jour_rne": null,
-        "dirigeants": [],
-        "etat_administratif": "A",
-        "nature_juridique": "7346",
-        "section_activite_principale": "O",
-        "tranche_effectif_salarie": "22",
-        "annee_tranche_effectif_salarie": "2022",
-        "statut_diffusion": "O",
-        "matching_etablissements": [
-          {
-            "activite_principale": "84.11Z",
-            "ancien_siege": false,
-            "annee_tranche_effectif_salarie": "2022",
-            "adresse": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
-            "caractere_employeur": "O",
-            "code_postal": "17310",
-            "commune": "17385",
-            "date_creation": "1998-02-13",
-            "date_debut_activite": "2008-01-01",
-            "date_fermeture": null,
-            "epci": "241700624",
-            "est_siege": true,
-            "etat_administratif": "A",
-            "geo_id": "17385_0041_00059",
-            "latitude": "45.936181",
-            "libelle_commune": "SAINT-PIERRE-D'OLERON",
-            "liste_enseignes": null,
-            "liste_finess": null,
-            "liste_id_bio": null,
-            "liste_idcc": [
-              "5021"
-            ],
-            "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
-            "liste_uai": null,
-            "longitude": "-1.303525",
-            "nom_commercial": null,
-            "region": "75",
-            "siret": "24170062400026",
-            "statut_diffusion_etablissement": "O",
-            "tranche_effectif_salarie": "22"
-          }
-        ],
-        "finances": null,
-        "complements": {
-          "collectivite_territoriale": {
-            "code": "241700624",
-            "code_insee": null,
-            "elus": [
-              {
-                "nom": "BENITO ET GARCIA",
-                "prenoms": "Richard",
-                "annee_de_naissance": "1949-07",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "FERREIRA",
-                "prenoms": "François",
-                "annee_de_naissance": "1959-09",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "HUMBERT",
-                "prenoms": "Micheline",
-                "annee_de_naissance": "1948-12",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "JOUTEUX",
-                "prenoms": "Françoise",
-                "annee_de_naissance": "1951-04",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "PARENT",
-                "prenoms": "Michel",
-                "annee_de_naissance": "1947-01",
-                "fonction": "Président du conseil communautaire",
-                "sexe": "M"
-              },
-              {
-                "nom": "BOUGNARD",
-                "prenoms": "Valérie",
-                "annee_de_naissance": "1969-11",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "BRECHKOFF",
-                "prenoms": "Thibault",
-                "annee_de_naissance": "1992-09",
-                "fonction": "5eme Vice-président du conseil communautaire",
-                "sexe": "M"
-              },
-              {
-                "nom": "BRIES",
-                "prenoms": "Sylvie",
-                "annee_de_naissance": "1970-05",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "LAVAUD",
-                "prenoms": "Philippe",
-                "annee_de_naissance": "1963-07",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "HUOT",
-                "prenoms": "Joseph",
-                "annee_de_naissance": "1947-02",
-                "fonction": "Vice-président du conseil communautaire",
-                "sexe": "M"
-              },
-              {
-                "nom": "JOYEUX",
-                "prenoms": "Nathalie",
-                "annee_de_naissance": "1985-02",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "DELHUMEAU-JAUD",
-                "prenoms": "Fabienne",
-                "annee_de_naissance": "1957-06",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "LIVENAIS",
-                "prenoms": "Patrick",
-                "annee_de_naissance": "1950-05",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "MAZERAT",
-                "prenoms": "Adrien",
-                "annee_de_naissance": "1988-02",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "MORANDEAU",
-                "prenoms": "Yannick",
-                "annee_de_naissance": "1953-10",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "RABELLE",
-                "prenoms": "Dominique",
-                "annee_de_naissance": "1950-04",
-                "fonction": "Vice-président du conseil communautaire",
-                "sexe": "F"
-              },
-              {
-                "nom": "COIFFÉ",
-                "prenoms": "Luc",
-                "annee_de_naissance": "1961-08",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "DELISÉE",
-                "prenoms": "Martine",
-                "annee_de_naissance": "1959-02",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "FROUGIER",
-                "prenoms": "Sylvie",
-                "annee_de_naissance": "1961-08",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "GAZEU",
-                "prenoms": "Patrick",
-                "annee_de_naissance": "1958-05",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "GUILBERT",
-                "prenoms": "Éric",
-                "annee_de_naissance": "1961-01",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "SUEUR",
-                "prenoms": "Christophe",
-                "annee_de_naissance": "1966-08",
-                "fonction": "Vice-président du conseil communautaire",
-                "sexe": "M"
-              },
-              {
-                "nom": "VATON",
-                "prenoms": "Rodolphe",
-                "annee_de_naissance": "1957-11",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "VITET",
-                "prenoms": "Françoise",
-                "annee_de_naissance": "1956-09",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "GAILLOT",
-                "prenoms": "Bruno",
-                "annee_de_naissance": "1955-03",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "VILLAUTREIX",
-                "prenoms": "Marie-Josée",
-                "annee_de_naissance": "1963-05",
-                "fonction": "Vice-président du conseil communautaire",
-                "sexe": "F"
-              },
-              {
-                "nom": "CHARTIER",
-                "prenoms": "Chantal",
-                "annee_de_naissance": "1955-03",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "ROBILLARD",
-                "prenoms": "Patrice",
-                "annee_de_naissance": "1950-08",
-                "fonction": "Vice-président du conseil communautaire",
-                "sexe": "M"
-              },
-              {
-                "nom": "CHEVRIER",
-                "prenoms": "Philippe",
-                "annee_de_naissance": "1954-10",
-                "fonction": "Vice-président du conseil communautaire",
-                "sexe": "M"
-              },
-              {
-                "nom": "MONNEREAU",
-                "prenoms": "Patrick",
-                "annee_de_naissance": "1953-02",
-                "fonction": null,
-                "sexe": "M"
-              }
-            ],
-            "niveau": "epci"
-          },
-          "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "9999",
-            "5021"
-          ],
-          "egapro_renseignee": false,
-          "est_association": false,
-          "est_bio": false,
-          "est_entrepreneur_individuel": false,
-          "est_entrepreneur_spectacle": false,
-          "est_ess": false,
-          "est_finess": false,
-          "est_organisme_formation": false,
-          "est_qualiopi": false,
-          "liste_id_organisme_formation": null,
-          "est_rge": true,
-          "est_service_public": true,
-          "est_siae": false,
-          "est_societe_mission": false,
-          "est_uai": false,
-          "identifiant_association": null,
-          "statut_entrepreneur_spectacle": null,
-          "type_siae": null
-        },
-        "slug": "communaute-de-communes-de-l-ile-d-oleron-241700624",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
         "dateMiseAJourInpi": "2024-09-21T03:34:50"
       }
