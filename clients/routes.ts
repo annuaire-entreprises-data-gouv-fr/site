@@ -219,7 +219,8 @@ const routes = {
       },
       tracker: 'https://stats.data.gouv.fr/piwik.php',
     },
-    monitoring: 'https://updown.io/api/checks/',
+    monitoring: (slug: string) =>
+      `https://updown.io/api/checks/${slug}/downtimes`,
   },
 };
 

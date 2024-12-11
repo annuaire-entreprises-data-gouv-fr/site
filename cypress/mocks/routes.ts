@@ -8,6 +8,7 @@ import { eoriHandler } from './handlers/eori';
 import { rechercheEntrepriseHandler } from './handlers/recherche-entreprises';
 import { rgeHandler } from './handlers/rge';
 import { tvaHandler } from './handlers/tva';
+import { upDownIoHandler } from './handlers/up-down-io';
 
 export const routesHandlers = [
   http.get(routes.proxy.tva('*'), tvaHandler),
@@ -27,4 +28,5 @@ export const routesHandlers = [
     entrepreneurSpectaclesHandler
   ),
   http.get(routes.datagouv.ess, apiDataGouvEssHandler),
+  http.get(routes.tooling.monitoring('*'), upDownIoHandler),
 ];
