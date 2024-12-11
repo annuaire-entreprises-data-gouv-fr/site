@@ -25,6 +25,16 @@ export default function ReconnectBanner({
 
   useEffect(() => {
     setWasLoggedIn(getCookieBrowser('user-was-logged-in') === 'true');
+
+    const onBeforeUnload = () => {
+      deleteCookieBrowser('user-was-logged-in');
+    };
+
+    window.addEventListener('beforeunload', onBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', onBeforeUnload);
+    };
   }, []);
 
   const handleClose = () => {
@@ -46,8 +56,8 @@ export default function ReconnectBanner({
       >
         <div className="fr-container">
           <Icon slug="lockFill" color={constants.colors.espaceAgent}>
-            Pour des raisons de sécurité, vous devez vous reconnecter chaque
-            jour.{' '}
+            Pour des raisons de sécurité, vous avez été automatiquement
+            déconnecté après 24 heures.{' '}
             <a href={`/api/auth/agent-connect/login?pathFrom=${currentPath}`}>
               Voulez-vous vous reconnecter ?
             </a>
