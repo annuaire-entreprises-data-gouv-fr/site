@@ -16,21 +16,21 @@ import { ITVAIntracommunautaire } from '../tva';
 import { ISTATUTDIFFUSION } from './diffusion';
 
 export interface IEtablissement {
-  enseigne: string | null;
-  denomination: string | null;
   siren: Siren;
   siret: Siret;
   oldSiret: Siret;
-  nic: string;
   etatAdministratif: IETATADMINSTRATIF;
   statutDiffusion: ISTATUTDIFFUSION;
   estSiege: boolean;
   ancienSiege: boolean;
+  enseigne: string | null;
+  denomination: string | null;
+  nic: string;
   dateCreation: string;
   dateDerniereMiseAJour: string;
   dateMiseAJourInsee: string;
-  dateFermeture: string | null;
   dateDebutActivite: string;
+  dateFermeture: string | null;
   adresse: string;
   adressePostale: string;
   codePostal: string;
