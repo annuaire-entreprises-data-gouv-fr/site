@@ -1,0 +1,217 @@
+{
+  "subventions": [
+    {
+      "application": {
+        "siret": {
+          "value": "79771522400029",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "service_instructeur": {
+          "value": "Ville de Paris",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "actions_proposee": [
+          {
+            "intitule": {
+              "value": "Développement de l'application mobile pour résoudre des défis d'entrepreneurs sociaux en ligne",
+              "provider": "Ville de Paris",
+              "last_update": "2024-04-08T00:00:00.000Z",
+              "type": "string"
+            }
+          }
+        ],
+        "statut_label": {
+          "value": "Accordé",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "status": {
+          "value": "Accordé",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "montants": {
+          "accorde": {
+            "value": 40000,
+            "provider": "Ville de Paris",
+            "last_update": "2024-04-08T00:00:00.000Z",
+            "type": "number"
+          }
+        },
+        "date_commision": {
+          "value": "1970-01-01T00:00:02.015Z",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "object"
+        },
+        "financeur_principal": {
+          "value": "Ville de Paris",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "annee_demande": {
+          "value": 2015,
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "number"
+        },
+        "pluriannualite": {
+          "value": "Non",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        }
+      },
+      "payments": null
+    },
+    {
+      "application": {
+        "siret": {
+          "value": "79771522400029",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "service_instructeur": {
+          "value": "Ville de Paris",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "actions_proposee": [
+          {
+            "intitule": {
+              "value": "Subvention",
+              "provider": "Ville de Paris",
+              "last_update": "2024-04-08T00:00:00.000Z",
+              "type": "string"
+            }
+          }
+        ],
+        "statut_label": {
+          "value": "Refusé",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "status": {
+          "value": "Refusé",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "montants": {
+          "accorde": {
+            "value": 0,
+            "provider": "Ville de Paris",
+            "last_update": "2024-04-08T00:00:00.000Z",
+            "type": "number"
+          }
+        },
+        "date_commision": {
+          "value": "1970-01-01T00:00:02.016Z",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "object"
+        },
+        "financeur_principal": {
+          "value": "Ville de Paris",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "annee_demande": {
+          "value": 2016,
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "number"
+        },
+        "pluriannualite": {
+          "value": "Non",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        }
+      },
+      "payments": null
+    },
+    {
+      "application": {
+        "siret": {
+          "value": "79771522400029",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "service_instructeur": {
+          "value": "Ville de Paris",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "actions_proposee": [
+          {
+            "intitule": {
+              "value": "Subvention",
+              "provider": "Ville de Paris",
+              "last_update": "2024-04-08T00:00:00.000Z",
+              "type": "string"
+            }
+          }
+        ],
+        "statut_label": {
+          "value": "Refusé",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "status": {
+          "value": "Refusé",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "montants": {
+          "accorde": {
+            "value": 0,
+            "provider": "Ville de Paris",
+            "last_update": "2024-04-08T00:00:00.000Z",
+            "type": "number"
+          }
+        },
+        "date_commision": {
+          "value": "1970-01-01T00:00:02.018Z",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "object"
+        },
+        "financeur_principal": {
+          "value": "Ville de Paris",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        },
+        "annee_demande": {
+          "value": 2018,
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "number"
+        },
+        "pluriannualite": {
+          "value": "Non",
+          "provider": "Ville de Paris",
+          "last_update": "2024-04-08T00:00:00.000Z",
+          "type": "string"
+        }
+      },
+      "payments": null
+    }
+  ]
+}

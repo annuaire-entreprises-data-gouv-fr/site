@@ -1,4 +1,4 @@
-import { clientDataSubvention } from '#clients/api-data-subvention';
+import { clientApiDataSubvention } from '#clients/api-data-subvention';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
@@ -29,7 +29,7 @@ export const getSubventionsAssociationFromSlug = async (
   const { siren } = uniteLegale;
 
   try {
-    return await clientDataSubvention(siren);
+    return await clientApiDataSubvention(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DJEPVA, 404);

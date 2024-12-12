@@ -1,38 +1,61 @@
-/// <reference types="cypress" />
 // ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
 // For more comprehensive examples of custom
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
 //
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
-export {};
+import { ISession } from '#models/user/session';
+import { sealData } from 'iron-session';
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(): Chainable<void>;
+    }
+  }
+}
+
+const generateSessionCookie = async () => {
+  const session: ISession = {
+    user: {
+      idpId: '123456789',
+      userId: '123456789',
+      domain: 'yopmail.com',
+      siret: '12345678912345',
+      isMCP: false,
+      isPrestataire: false,
+      familyName: 'John Doe',
+      firstName: 'John Doe',
+      fullName: 'John Doe',
+      email: 'user@yopmail.com',
+      scopes: [
+        'conformite',
+        'beneficiaires',
+        'cibtp',
+        'cnetp',
+        'agent',
+        'nonDiffusible',
+        'rne',
+        'pseudo_opendata',
+      ],
+      userType: 'Super-agent connecté',
+      hasHabilitation: true,
+    },
+  };
+
+  return sealData(session, {
+    password: process.env.IRON_SESSION_PASSWORD || '',
+  });
+};
+
+Cypress.Commands.add('login', () => {
+  cy.then(() => {
+    return generateSessionCookie();
+  }).then((validSessionCookie) => {
+    cy.setCookie('annuaire-entreprises-user-session-3', validSessionCookie, {
+      path: '/',
+      secure: process.env.NODE_ENV === 'production',
+    });
+  });
+});

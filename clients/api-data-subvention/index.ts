@@ -9,7 +9,7 @@ import { httpGet } from '#utils/network';
  * Data Subvention
  * https://api.datasubvention.beta.gouv.fr/
  */
-export const clientDataSubvention = async (
+export const clientApiDataSubvention = async (
   siren: Siren
 ): Promise<ISubventions> => {
   const route = routes.apiDataSubvention.grants(siren);
