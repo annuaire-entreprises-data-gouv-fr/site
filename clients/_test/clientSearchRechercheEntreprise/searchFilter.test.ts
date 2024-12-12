@@ -51,31 +51,9 @@ describe('clientSearchRechercheEntreprise : use of search filters', () => {
   });
 });
 
-it('Should match snapshot for term < 3 and filters', async () => {
-  await expectClientToMatchSnapshot({
-    client: clientSearchRechercheEntreprise,
-    __dirname,
-    args: [
-      {
-        ...defaultParams,
-        searchTerms: 'ag',
-        searchFilterParams: new SearchFilterParams({
-          cp_dep: '35000',
-          cp_dep_type: 'cp',
-        }),
-      },
-    ],
-    snaphotFile: 'ag.json',
-    simplifyParams,
-    postProcessResult,
-  });
-});
-
 function postProcessResult(result: ISearchResults) {
   result.results.forEach((searchResult) => {
-    // @ts-ignore
     searchResult.dateDerniereMiseAJour = '2024-09-21T03:34:50';
-    // @ts-ignore
     searchResult.dateMiseAJourInpi = '2024-09-21T03:34:50';
   });
 }

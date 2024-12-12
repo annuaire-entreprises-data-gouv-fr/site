@@ -56,7 +56,7 @@ describe('clientRNEImmatriculationFallback', () => {
         client: clientRNEImmatriculationFallback,
         args: ['487444697' as Siren],
         __dirname,
-        snaphotFile: 'rge.json',
+        snaphotFile: 'rge-fallback.json',
       });
     },
     TIMEOUT_RNE

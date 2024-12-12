@@ -16,10 +16,20 @@ function expectClientToMatchSnapshotWithSiren(siren: Siren) {
       __dirname,
       args: [siren, 1, false],
       snaphotFile: `siren-${siren}.json`,
+      simplifyParams,
       postProcessResult: (result) => {
         result.dateDerniereMiseAJour = '2023-10-5';
+        result.siege.dateDerniereMiseAJour = '2024-12-11T16:09:17.144Z';
+        result.etablissements.all.forEach((etablissement) => {
+          etablissement.dateDerniereMiseAJour = '2024-12-11T16:09:17.144Z';
+        });
+        result.etablissements.open.forEach((etablissement) => {
+          etablissement.dateDerniereMiseAJour = '2024-12-11T16:09:17.144Z';
+        });
+        result.etablissements.closed.forEach((etablissement) => {
+          etablissement.dateDerniereMiseAJour = '2024-12-11T16:09:17.144Z';
+        });
       },
-      simplifyParams,
     });
   });
 }

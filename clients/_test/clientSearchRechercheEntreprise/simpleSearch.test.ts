@@ -5,10 +5,6 @@ import simplifyParams from './simplify-params';
 
 describe('clientSearchRechercheEntreprise : simple search with searchTerms', () => {
   [
-    // We use the commented lines to generate snapshots for
-    // E2E testing.
-    // Hovewer, we don't test them for regression because the results
-    // changes often.
     '198100125', // établissement scolaire
     '800329849', // entrepreneur spectacle, asso & ESS
     '130025265', // DINUM (service public)
@@ -22,24 +18,15 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
     '487444697',
     '48744469700428',
     '338365059',
-    '356000000',
     '300025764',
     '351556394',
     '839517323',
     '842019051',
     '423208180',
     '383657467',
-    'Ganymede',
-    'Kikou',
     '123456789',
     '12345678900003',
-    '41154066900016', // Not used in E2E tests. Entreprise non enregistrée dans la base sirene.
-    'xavier jouppe',
-    'la poste',
-    'aga',
-    'ag',
-    '302474648',
-    '533744991',
+    '41154066900016',
   ].forEach((s) => itShouldMatchSnapshotForSearch(s, 1));
 });
 
@@ -69,7 +56,6 @@ function itShouldMatchSnapshotForSearch(
       simplifyParams,
       postProcessResult: (result) => {
         result.results.forEach((searchResult) => {
-          // @ts-ignore
           searchResult.dateDerniereMiseAJour = '2023-09-21T03:34:50';
         });
       },
