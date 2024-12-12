@@ -12,12 +12,13 @@
         "etatAdministratif": "en activité",
         "statutDiffusion": "diffusible",
         "estSiege": true,
+        "ancienSiege": false,
         "enseigne": "",
         "denomination": "",
         "nic": "00010",
         "dateCreation": "2022-01-01",
-        "dateDerniereMiseAJour": "2024-11-07T13:36:29.222Z",
-        "dateMiseAJourInsee": "2024-03-29T23:18:52.426",
+        "dateDerniereMiseAJour": "2024-12-11T16:09:12.625Z",
+        "dateMiseAJourInsee": "2024-03-29T23:18:52.427",
         "dateDebutActivite": "",
         "dateFermeture": null,
         "adresse": "10 RUE DE PENTHIEVRE, 75008 PARIS",
@@ -27,7 +28,7 @@
         "activitePrincipale": "70.21Z",
         "libelleActivitePrincipale": "Conseil en relations publiques et communication",
         "trancheEffectif": "01",
-        "libelleTrancheEffectif": "",
+        "anneeTrancheEffectif": "2022",
         "latitude": "",
         "longitude": "",
         "complements": {
@@ -38,8 +39,7 @@
           "idOrganismeFormation": [],
           "idRge": [],
           "idUai": []
-        },
-        "anneeTrancheEffectif": "2022"
+        }
       }
     ],
     "page": 1,

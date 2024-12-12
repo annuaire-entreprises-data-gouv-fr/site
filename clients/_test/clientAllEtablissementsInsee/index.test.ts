@@ -23,6 +23,11 @@ function expectClientToMatchSnapshotWithSiren(siren: string, page = 1) {
       args: [siren, page, false],
       snaphotFile: `siren-${siren}${page !== 1 ? '-page-' + page : ''}.json`,
       simplifyParams,
+      postProcessResult: (result) => {
+        result.list.forEach((etablissement) => {
+          etablissement.dateDerniereMiseAJour = '2024-12-11T16:09:12.625Z';
+        });
+      },
     });
   });
 }
