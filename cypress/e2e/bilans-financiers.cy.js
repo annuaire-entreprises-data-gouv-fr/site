@@ -31,3 +31,15 @@ describe('Bilans financiers', () => {
     cy.contains('338365059_31122022');
   });
 });
+
+describe('Bilans financiers (authenticated)', () => {
+  beforeEach(() => {
+    cy.login();
+  });
+  it('Should display "Détail des subventions"', () => {
+    cy.visit('/donnees-financieres/338365059');
+    cy.contains('Détail des subventions').should('be.visible');
+    cy.contains('État').should('be.visible');
+    cy.contains('Refusé').should('be.visible');
+  });
+});

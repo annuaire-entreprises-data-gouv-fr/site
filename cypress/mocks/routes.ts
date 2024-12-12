@@ -2,6 +2,7 @@ import routes from '#clients/routes';
 import { http } from 'msw';
 import { apiBioHandler } from './handlers/api-bio';
 import { apiDataGouvEssHandler } from './handlers/api-data-gouv-ess';
+import { apiDataSubventionHandler } from './handlers/api-data-subvention';
 import { apiInclusionHandler } from './handlers/api-inclusion';
 import { entrepreneurSpectaclesHandler } from './handlers/entrepreneur-spectacles';
 import { eoriHandler } from './handlers/eori';
@@ -29,4 +30,5 @@ export const routesHandlers = [
   ),
   http.get(routes.datagouv.ess, apiDataGouvEssHandler),
   http.get(routes.tooling.monitoring.getBySlug('*'), upDownIoHandler),
+  http.get(routes.apiDataSubvention.grants('*'), apiDataSubventionHandler),
 ];
