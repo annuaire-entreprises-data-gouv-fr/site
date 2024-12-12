@@ -150,7 +150,7 @@
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 9269,
+          "nombreEtablissementsOuverts": 9268,
           "nombreEtablissements": 13046,
           "usePagination": true,
           "currentEtablissementPage": 1
@@ -160,7 +160,7 @@
         "dateCreation": "1991-01-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-12-02T12:03:16.542",
+        "dateMiseAJourInsee": "2024-12-09T08:56:15.107",
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -200,7 +200,7 @@
         "immatriculation": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 13046,
-        "nombreEtablissementsOuverts": 9269,
+        "nombreEtablissementsOuverts": 9268,
         "dirigeants": []
       }
     ]
