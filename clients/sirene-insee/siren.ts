@@ -1,6 +1,5 @@
 import { HttpForbiddenError } from '#clients/exceptions';
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { createNonDiffusibleEtablissement } from '#models/core/etablissement';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { estActif } from '#models/core/etat-administratif';
@@ -81,7 +80,7 @@ type TmpUniteLegale = {
   };
 };
 
-const clientUniteLegaleInsee = async (
+export const clientUniteLegaleInsee = async (
   siren: Siren,
   page = 1,
   useFallback: boolean
@@ -287,8 +286,3 @@ const mapToDomainObject = (
     },
   };
 };
-
-const stubbedClient = stubClientWithSnapshots({
-  clientUniteLegaleInsee,
-});
-export { stubbedClient as clientUniteLegaleInsee };
