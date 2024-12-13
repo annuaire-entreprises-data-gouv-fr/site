@@ -46,7 +46,7 @@ const generateSessionCookie = async () => {
   };
 
   return sealData(session, {
-    password: sessionOptions.password,
+    password: Cypress.env('IRON_SESSION_PWD'),
   });
 };
 
@@ -54,8 +54,6 @@ Cypress.Commands.add('login', () => {
   cy.then(() => {
     return generateSessionCookie();
   }).then((validSessionCookie) => {
-    cy.setCookie(sessionOptions.cookieName, validSessionCookie, {
-      secure: sessionOptions.cookieOptions?.secure,
-    });
+    cy.setCookie(sessionOptions.cookieName, validSessionCookie);
   });
 });
