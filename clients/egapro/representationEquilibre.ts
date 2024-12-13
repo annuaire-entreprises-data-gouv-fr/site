@@ -1,25 +1,15 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IEgapro } from '#models/certifications/egapro';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import {
+  IEgaproRepresentation,
   IEgaproRepresentationItem,
   IEgaproRepresentationResponse,
 } from './types';
 
-type IEgaproRepresentation = {
-  years: string[];
-  scores: {
-    pourcentageFemmesCadres: number[];
-    pourcentageHommesCadres: number[];
-    pourcentageFemmesMembres: number[];
-    pourcentageHommesMembres: number[];
-  };
-};
-
-const clientEgaproRepresentationEquilibre = async (
+export const clientEgaproRepresentationEquilibre = async (
   siren: Siren
 ): Promise<IEgapro['representation']> => {
   const responseSearchApi = await httpGet<IEgaproRepresentationResponse>(
@@ -73,8 +63,3 @@ const mapToDomainObject = (
 
   return formatted;
 };
-
-const stubbedClientEgaproRepresentationEquilibre = stubClient({
-  clientEgaproRepresentationEquilibre,
-});
-export { stubbedClientEgaproRepresentationEquilibre as clientEgaproRepresentationEquilibre };
