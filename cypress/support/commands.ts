@@ -6,6 +6,7 @@
 //
 //
 import { ISession } from '#models/user/session';
+import { sessionOptions } from '#utils/session';
 import { sealData } from 'iron-session';
 
 declare global {
@@ -45,7 +46,7 @@ const generateSessionCookie = async () => {
   };
 
   return sealData(session, {
-    password: process.env.IRON_SESSION_PASSWORD || '',
+    password: sessionOptions.password,
   });
 };
 
@@ -53,9 +54,8 @@ Cypress.Commands.add('login', () => {
   cy.then(() => {
     return generateSessionCookie();
   }).then((validSessionCookie) => {
-    cy.setCookie('annuaire-entreprises-user-session-3', validSessionCookie, {
-      path: '/',
-      secure: process.env.NODE_ENV === 'production',
+    cy.setCookie(sessionOptions.cookieName, validSessionCookie, {
+      secure: sessionOptions.cookieOptions?.secure,
     });
   });
 });
