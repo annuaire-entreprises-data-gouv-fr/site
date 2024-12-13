@@ -39,11 +39,11 @@ describe('Certifications', () => {
     });
   });
   describe('Egapro', () => {
-    it('Should display Égalité professionnelle', () => {
+    it('Should display Égalité professionnelle - Egapro', () => {
       cy.visit(`/labels-certificats/356000000`);
-      cy.contains('Égalité professionnelle');
-      cy.contains('Femmes parmi les cadres dirigeants');
-      cy.contains('94');
+      cy.contains('Égalité professionnelle - Egapro').should('be.visible');
+      cy.contains('Femmes parmi les cadres dirigeants').should('be.visible');
+      cy.contains('25').should('be.visible');
     });
   });
   describe('Qualiopi', () => {
