@@ -129,8 +129,7 @@ jobs:
           start: npm start
           record: false
         env:
-          PORT: 3000
-          NEXT_PUBLIC_END2END_MOCKING: enabled
+          CYPRESS_IRON_SESSION_PWD: ${{ secrets.IRON_SESSION_PWD }}
       - name: Upload screenshots 📸
         uses: actions/upload-artifact@v4
         # add the line below to store screenshots only on failures
