@@ -4,6 +4,7 @@ import { apiBioHandler } from './handlers/api-bio';
 import { apiDataGouvEssHandler } from './handlers/api-data-gouv-ess';
 import { apiDataSubventionHandler } from './handlers/api-data-subvention';
 import { apiInclusionHandler } from './handlers/api-inclusion';
+import { baseAdresseNationaleHandler } from './handlers/base-adresse-nationale';
 import { educationNationaleHandler } from './handlers/education-nationale';
 import { egaproHandler, egaproRepresentationHandler } from './handlers/egapro';
 import { entrepreneurSpectaclesHandler } from './handlers/entrepreneur-spectacles';
@@ -36,4 +37,5 @@ export const routesHandlers = [
   http.get(routes.egapro.index, egaproHandler),
   http.get(routes.egapro.representation, egaproRepresentationHandler),
   http.get(routes.educationNationale.search, educationNationaleHandler),
+  http.get(routes.ban, baseAdresseNationaleHandler),
 ];

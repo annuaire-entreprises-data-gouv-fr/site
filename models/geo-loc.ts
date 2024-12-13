@@ -1,4 +1,4 @@
-import { clientBanGeoLoc } from '#clients/base-adresse';
+import { clientBanGeoLoc } from '#clients/base-adresse-nationale';
 import { estDiffusible } from './core/diffusion';
 import { IEtablissement } from './core/types';
 
