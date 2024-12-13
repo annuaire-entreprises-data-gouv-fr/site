@@ -1,29 +1,21 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { IGeoLoc } from '#models/geo-loc';
 import { httpGet } from '#utils/network';
-
-type IBANResponse = {
-  features: {
-    geometry: {
-      coordinates: number[];
-    };
-    properties: { label: string };
-  }[];
-};
+import { IBANResponse } from './types';
 
 /**
  * GET address for geoloc
  */
-const clientBanGeoLoc = async (adresse: string): Promise<IGeoLoc> => {
+export const clientBanGeoLoc = async (adresse: string): Promise<IGeoLoc> => {
   // remove all characters that are not digits or letters at the begining of adress as it triggers a 400
   const sanitizedAdress = adresse
     .replace(/^[^a-zA-Z0-9]*/, '')
     .replaceAll(' ', '+');
 
-  const route = `${routes.ban}${sanitizedAdress}`;
+  const query = `q=${sanitizedAdress}`;
+  const route = `${routes.ban}?${query}`;
   const response = await httpGet<IBANResponse>(route, {
     timeout: constants.timeout.L,
   });
@@ -43,7 +35,3 @@ const mapToDomainObject = (response: IBANResponse): IGeoLoc => {
     geoCodedAdress: features[0].properties.label,
   };
 };
-
-const stubbedClientBanGeoLoc = stubClientWithSnapshots({ clientBanGeoLoc });
-
-export { stubbedClientBanGeoLoc as clientBanGeoLoc };

@@ -34,7 +34,7 @@ const routes = {
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,
   },
-  ban: 'https://api-adresse.data.gouv.fr/search/?q=',
+  ban: 'https://api-adresse.data.gouv.fr/search',
   bodacc: {
     ods: {
       metadata:

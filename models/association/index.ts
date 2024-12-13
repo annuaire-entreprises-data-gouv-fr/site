@@ -1,5 +1,5 @@
 import { clientAssociation } from '#clients/api-proxy/association';
-import { clientBanGeoLoc } from '#clients/base-adresse';
+import { clientBanGeoLoc } from '#clients/base-adresse-nationale';
 import { HttpNotFound } from '#clients/exceptions';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { removeSpecialChars, Siren } from '#utils/helpers';
