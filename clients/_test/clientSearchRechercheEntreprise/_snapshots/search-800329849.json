@@ -19,6 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00023",
@@ -34,7 +35,7 @@
           "activitePrincipale": "90.01Z",
           "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
           "trancheEffectif": "N",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "48.829633",
           "longitude": "2.374801",
           "complements": {
@@ -47,9 +48,7 @@
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -68,6 +67,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00023",
@@ -83,7 +83,7 @@
               "activitePrincipale": "90.01Z",
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
               "trancheEffectif": "N",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "48.829633",
               "longitude": "2.374801",
               "complements": {
@@ -96,9 +96,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -109,6 +107,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00023",
@@ -124,7 +123,7 @@
               "activitePrincipale": "90.01Z",
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
               "trancheEffectif": "N",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "48.829633",
               "longitude": "2.374801",
               "complements": {
@@ -137,9 +136,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],

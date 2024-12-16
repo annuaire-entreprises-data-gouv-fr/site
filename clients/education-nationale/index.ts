@@ -1,6 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IEtablissementsScolaires } from '#models/etablissements-scolaires';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
@@ -12,7 +11,7 @@ import { IEducationNationaleRecord, IEducationNationaleRecords } from './types';
  * https://www.education.gouv.fr/annuaire
  * https://api.gouv.fr/documentation/api-annuaire-education
  */
-const clientEducationNationale = async (siren: Siren, page: number) => {
+export const clientEducationNationale = async (siren: Siren, page: number) => {
   const rows = 30;
   const data = await httpGet<IEducationNationaleRecords>(
     routes.educationNationale.search,
@@ -57,9 +56,3 @@ const mapToDomainObject = (
       zoneMapping[fields.libelle_academie as keyof typeof zoneMapping] || '',
   }));
 };
-
-const stubbedClientEducationNationale = stubClient({
-  clientEducationNationale,
-});
-
-export { stubbedClientEducationNationale as clientEducationNationale };

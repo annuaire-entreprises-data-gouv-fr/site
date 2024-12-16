@@ -19,6 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00010",
@@ -34,7 +35,7 @@
           "activitePrincipale": "70.21Z",
           "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
           "trancheEffectif": "01",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "48.873057",
           "longitude": "2.316605",
           "complements": {
@@ -47,9 +48,7 @@
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -68,6 +67,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00010",
@@ -83,7 +83,7 @@
               "activitePrincipale": "70.21Z",
               "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
               "trancheEffectif": "01",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "48.873057",
               "longitude": "2.316605",
               "complements": {
@@ -96,9 +96,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -109,6 +107,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00010",
@@ -124,7 +123,7 @@
               "activitePrincipale": "70.21Z",
               "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
               "trancheEffectif": "01",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "48.873057",
               "longitude": "2.316605",
               "complements": {
@@ -137,9 +136,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -212,10 +209,9 @@
             "nom": "ESTOURNET",
             "prenom": "Pierre",
             "prenoms": "Pierre",
-            "role": "Président de SAS",
+            "role": "PRESIDENT DE SAS",
             "nationalite": "Française",
-            "dateNaissancePartial": "1985-12",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1985-12"
           }
         ]
       }

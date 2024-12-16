@@ -134,3 +134,29 @@ export const extractSirenOrSiretSlugFromUrl = (slug: string) => {
   const match = slug.match(/\d{14}|\d{9}/g);
   return match ? match[match.length - 1] : '';
 };
+
+/**
+ * Extract a siren/siret-like string from a rechercher url. Return empty string if nothing matches
+ * @param rechercherUrl
+ * @returns siren, siret or empty string
+ */
+export const extractSirenOrSiretFromRechercherUrl = (rechercherUrl: string) => {
+  if (!rechercherUrl) {
+    return '';
+  }
+
+  let cleanedUrl = (rechercherUrl.match(/terme=([^&]*)/g) || [
+    '',
+  ])[0].replaceAll(/[+]|(%20|%22)/g, '');
+
+  if (cleanedUrl.match(/terme=FR/g)) {
+    if (cleanedUrl.match(/terme=FR\d{14}$/g)) {
+      // remove EORI number prefix when relevant
+      cleanedUrl = cleanedUrl.replace('terme=FR', '');
+    } else if (cleanedUrl.match(/terme=FR\d{11}$/g)) {
+      // remove TVA number prefix when relevant
+      cleanedUrl = cleanedUrl.replace(/terme=FR\d{2}/g, '');
+    }
+  }
+  return extractSirenOrSiretSlugFromUrl(cleanedUrl);
+};

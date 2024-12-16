@@ -34,7 +34,7 @@ const routes = {
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,
   },
-  ban: 'https://api-adresse.data.gouv.fr/search/?q=',
+  ban: 'https://api-adresse.data.gouv.fr/search',
   bodacc: {
     ods: {
       metadata:
@@ -151,7 +151,8 @@ const routes = {
     entrepriseInclusive: {
       site: 'https://lemarche.inclusion.beta.gouv.fr/prestataires/',
       api: {
-        siren: 'https://lemarche.inclusion.beta.gouv.fr/api/siae/siren/',
+        getBySiren: (siren: string) =>
+          `https://lemarche.inclusion.beta.gouv.fr/api/siae/siren/${siren}`,
         metadata: 'https://lemarche.inclusion.beta.gouv.fr/api/siae/kinds',
       },
     },
@@ -175,8 +176,10 @@ const routes = {
     },
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
-    tva: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
-    eori: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/eori/',
+    tva: (tvaNumber: string) =>
+      `https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/${tvaNumber}`,
+    eori: (siret: string) =>
+      `https://annuaire-entreprises-api-proxy.api.gouv.fr/eori/${siret}`,
   },
   rne: {
     portail: {
@@ -219,7 +222,10 @@ const routes = {
       },
       tracker: 'https://stats.data.gouv.fr/piwik.php',
     },
-    monitoring: 'https://updown.io/api/checks/',
+    monitoring: {
+      getBySlug: (slug: string) =>
+        `https://updown.io/api/checks/${slug}/downtimes`,
+    },
   },
 };
 

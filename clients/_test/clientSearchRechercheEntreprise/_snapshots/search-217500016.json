@@ -19,6 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "MAIRIE",
           "denomination": null,
           "nic": "00019",
@@ -34,7 +35,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "42",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "48.856145",
           "longitude": "2.351838",
           "complements": {
@@ -42,17 +43,15 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "5003",
-              "5021"
+              "5021",
+              "5003"
             ],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": [
               "0755710Z"
             ]
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -71,6 +70,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "MAIRIE",
               "denomination": null,
               "nic": "00019",
@@ -86,7 +86,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "42",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "48.856145",
               "longitude": "2.351838",
               "complements": {
@@ -94,17 +94,15 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "5003",
-                  "5021"
+                  "5021",
+                  "5003"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": [
                   "0755710Z"
                 ]
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -115,6 +113,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "MAIRIE",
               "denomination": null,
               "nic": "00019",
@@ -130,7 +129,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "42",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "48.856145",
               "longitude": "2.351838",
               "complements": {
@@ -138,17 +137,15 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "5003",
-                  "5021"
+                  "5021",
+                  "5003"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": [
                   "0755710Z"
                 ]
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -163,7 +160,7 @@
         "dateCreation": "1983-03-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-11-18T16:40:16.142",
+        "dateMiseAJourInsee": "2024-11-18T16:40:16",
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -219,8 +216,8 @@
             {
               "sexe": "M",
               "nom": "AQUA",
-              "prenom": "Jean-noël",
-              "prenoms": "Jean-noël",
+              "prenom": "Jean-Noël",
+              "prenoms": "Jean-Noël",
               "role": null,
               "dateNaissancePartial": "1974-01",
               "lieuNaissance": ""
@@ -291,8 +288,8 @@
             {
               "sexe": "M",
               "nom": "BERNARD",
-              "prenom": "René-françois",
-              "prenoms": "René-françois",
+              "prenom": "René-François",
+              "prenoms": "René-François",
               "role": null,
               "dateNaissancePartial": "1950-11",
               "lieuNaissance": ""
@@ -300,8 +297,8 @@
             {
               "sexe": "M",
               "nom": "BERTHAULT",
-              "prenom": "Jean-didier",
-              "prenoms": "Jean-didier",
+              "prenom": "Jean-Didier",
+              "prenoms": "Jean-Didier",
               "role": null,
               "dateNaissancePartial": "1971-10",
               "lieuNaissance": ""
@@ -354,8 +351,8 @@
             {
               "sexe": "M",
               "nom": "BOHBOT",
-              "prenom": "Jack-yves",
-              "prenoms": "Jack-yves",
+              "prenom": "Jack-Yves",
+              "prenoms": "Jack-Yves",
               "role": null,
               "dateNaissancePartial": "1956-04",
               "lieuNaissance": ""
@@ -390,8 +387,8 @@
             {
               "sexe": "M",
               "nom": "BOURNAZEL",
-              "prenom": "Pierre-yves",
-              "prenoms": "Pierre-yves",
+              "prenom": "Pierre-Yves",
+              "prenoms": "Pierre-Yves",
               "role": null,
               "dateNaissancePartial": "1977-08",
               "lieuNaissance": ""
@@ -399,8 +396,8 @@
             {
               "sexe": "F",
               "nom": "BOUX",
-              "prenom": "Anne-claire",
-              "prenoms": "Anne-claire",
+              "prenom": "Anne-Claire",
+              "prenoms": "Anne-Claire",
               "role": "6ème adjoint au Maire",
               "dateNaissancePartial": "1987-03",
               "lieuNaissance": ""
@@ -480,8 +477,8 @@
             {
               "sexe": "F",
               "nom": "CARRERE-GEE",
-              "prenom": "Marie-claire",
-              "prenoms": "Marie-claire",
+              "prenom": "Marie-Claire",
+              "prenoms": "Marie-Claire",
               "role": null,
               "dateNaissancePartial": "1963-03",
               "lieuNaissance": ""
@@ -579,8 +576,8 @@
             {
               "sexe": "M",
               "nom": "COURTOIS",
-              "prenom": "Daniel-georges",
-              "prenoms": "Daniel-georges",
+              "prenom": "Daniel-Georges",
+              "prenoms": "Daniel-Georges",
               "role": null,
               "dateNaissancePartial": "1956-08",
               "lieuNaissance": ""
@@ -624,8 +621,8 @@
             {
               "sexe": "M",
               "nom": "DAVIAUD",
-              "prenom": "Jean-philippe",
-              "prenoms": "Jean-philippe",
+              "prenom": "Jean-Philippe",
+              "prenoms": "Jean-Philippe",
               "role": null,
               "dateNaissancePartial": "1965-09",
               "lieuNaissance": ""
@@ -660,8 +657,8 @@
             {
               "sexe": "M",
               "nom": "DIDIER",
-              "prenom": "François-marie",
-              "prenoms": "François-marie",
+              "prenom": "François-Marie",
+              "prenoms": "François-Marie",
               "role": null,
               "dateNaissancePartial": "1980-10",
               "lieuNaissance": ""
@@ -669,8 +666,8 @@
             {
               "sexe": "F",
               "nom": "DOUCERÉ",
-              "prenom": "Marie-caroline",
-              "prenoms": "Marie-caroline",
+              "prenom": "Marie-Caroline",
+              "prenoms": "Marie-Caroline",
               "role": null,
               "dateNaissancePartial": "1978-08",
               "lieuNaissance": ""
@@ -804,8 +801,8 @@
             {
               "sexe": "M",
               "nom": "GILLET",
-              "prenom": "Jean-philippe",
-              "prenoms": "Jean-philippe",
+              "prenom": "Jean-Philippe",
+              "prenoms": "Jean-Philippe",
               "role": null,
               "dateNaissancePartial": "1964-11",
               "lieuNaissance": ""
@@ -1056,8 +1053,8 @@
             {
               "sexe": "M",
               "nom": "LECOQ",
-              "prenom": "Jean-pierre",
-              "prenoms": "Jean-pierre",
+              "prenom": "Jean-Pierre",
+              "prenoms": "Jean-Pierre",
               "role": null,
               "dateNaissancePartial": "1954-07",
               "lieuNaissance": ""
@@ -1101,8 +1098,8 @@
             {
               "sexe": "F",
               "nom": "LEMARDELEY",
-              "prenom": "Marie-christine",
-              "prenoms": "Marie-christine",
+              "prenom": "Marie-Christine",
+              "prenoms": "Marie-Christine",
               "role": "18ème adjoint au Maire",
               "dateNaissancePartial": "1953-02",
               "lieuNaissance": ""
@@ -1209,8 +1206,8 @@
             {
               "sexe": "M",
               "nom": "MARTINS",
-              "prenom": "Jean-françois",
-              "prenoms": "Jean-françois",
+              "prenom": "Jean-François",
+              "prenoms": "Jean-François",
               "role": null,
               "dateNaissancePartial": "1981-12",
               "lieuNaissance": ""
@@ -1290,8 +1287,8 @@
             {
               "sexe": "M",
               "nom": "OLIVIER",
-              "prenom": "Jean-baptiste",
-              "prenoms": "Jean-baptiste",
+              "prenom": "Jean-Baptiste",
+              "prenoms": "Jean-Baptiste",
               "role": null,
               "dateNaissancePartial": "1979-08",
               "lieuNaissance": ""
@@ -1407,8 +1404,8 @@
             {
               "sexe": "F",
               "nom": "RAYMOND-ROSSI",
-              "prenom": "Marie-josé",
-              "prenoms": "Marie-josé",
+              "prenom": "Marie-José",
+              "prenoms": "Marie-José",
               "role": null,
               "dateNaissancePartial": "1960-06",
               "lieuNaissance": ""
@@ -1443,8 +1440,8 @@
             {
               "sexe": "M",
               "nom": "ROMERO-MICHEL",
-              "prenom": "Jean-luc",
-              "prenoms": "Jean-luc",
+              "prenom": "Jean-Luc",
+              "prenoms": "Jean-Luc",
               "role": "33ème adjoint au Maire",
               "dateNaissancePartial": "1959-06",
               "lieuNaissance": ""
@@ -1605,8 +1602,8 @@
             {
               "sexe": "F",
               "nom": "TYSSANDIER",
-              "prenom": "Anne-claire",
-              "prenoms": "Anne-claire",
+              "prenom": "Anne-Claire",
+              "prenoms": "Anne-Claire",
               "role": null,
               "dateNaissancePartial": "1981-09",
               "lieuNaissance": ""
@@ -1677,8 +1674,8 @@
           ]
         },
         "listeIdcc": [
-          "5021",
           "5003",
+          "5021",
           "5022",
           "1043",
           "9999"

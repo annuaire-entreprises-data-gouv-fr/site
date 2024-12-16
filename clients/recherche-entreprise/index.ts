@@ -1,6 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
@@ -32,24 +31,24 @@ import {
 
 type ClientSearchRechercheEntreprise = {
   searchTerms: string;
-  pageResultatsRecherche: number;
   searchFilterParams?: SearchFilterParams;
   inclureEtablissements?: boolean;
   inclureImmatriculation?: boolean;
+  pageResultatsRecherche?: number;
   pageEtablissements?: number;
 };
 
 /**
- * Get results for searchTerms from Sirene ouverte API
+ * Get raw results for searchTerms from Sirene open API
  */
-const clientSearchRechercheEntreprise = async ({
+export const clientSearchRechercheEntrepriseRaw = async ({
   searchTerms,
   searchFilterParams,
   inclureEtablissements = false,
   inclureImmatriculation = false,
   pageResultatsRecherche = 1,
   pageEtablissements = 1,
-}: ClientSearchRechercheEntreprise): Promise<ISearchResults> => {
+}: ClientSearchRechercheEntreprise): Promise<ISearchResponse> => {
   const encodedTerms = encodeURIComponent(searchTerms);
 
   const route =
@@ -88,6 +87,28 @@ const clientSearchRechercheEntreprise = async ({
   const results = await httpGet<ISearchResponse>(url, {
     timeout,
     headers: { referer: 'annuaire-entreprises-site' },
+  });
+  return results;
+};
+
+/**
+ * Get results for searchTerms from Sirene open API and map to domain
+ */
+const clientSearchRechercheEntreprise = async ({
+  searchTerms,
+  searchFilterParams,
+  inclureEtablissements = false,
+  inclureImmatriculation = false,
+  pageResultatsRecherche = 1,
+  pageEtablissements = 1,
+}: ClientSearchRechercheEntreprise): Promise<ISearchResults> => {
+  const results = await clientSearchRechercheEntrepriseRaw({
+    searchTerms,
+    searchFilterParams,
+    inclureEtablissements,
+    inclureImmatriculation,
+    pageResultatsRecherche,
+    pageEtablissements,
   });
 
   if (!results.results || results.results.length === 0) {
@@ -257,6 +278,4 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
   };
 };
 
-export default stubClientWithSnapshots({
-  clientSearchRechercheEntreprise,
-});
+export default clientSearchRechercheEntreprise;

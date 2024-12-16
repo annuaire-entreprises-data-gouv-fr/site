@@ -5,11 +5,11 @@ import type { IronSession, SessionOptions } from 'iron-session';
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
-  cookieName: 'annuaire-entreprises-user-session-2',
+  cookieName: 'annuaire-entreprises-user-session-3',
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
   },
-  ttl: 604800, // a week
+  ttl: 86400, // a day
 };
 
 export async function setVisitTimestamp(session: IronSession<ISession>) {

@@ -1,6 +1,11 @@
 import routes from '#clients/routes';
 import { IDirigeants, IEtatCivil, IPersonneMorale } from '#models/rne/types';
-import { Siren } from '#utils/helpers';
+import {
+  formatFirstNames,
+  formatLastName,
+  formatRole,
+  Siren,
+} from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
   Array<
@@ -47,12 +52,14 @@ const mapToDomainObject = (
 ): IDirigeants => {
   return response.data.map(({ data: dirigeant }) => {
     if (dirigeant.type === 'personne_physique') {
+      const { prenom, prenoms } = formatFirstNames(dirigeant.prenom, ' ');
+
       return {
         sexe: null,
-        nom: dirigeant.nom,
-        prenom: dirigeant.prenom,
-        prenoms: dirigeant.prenom,
-        role: dirigeant.fonction,
+        nom: formatLastName(dirigeant.nom),
+        prenom,
+        prenoms,
+        role: formatRole(dirigeant.fonction),
         lieuNaissance: dirigeant.lieu_naissance,
         dateNaissance: dirigeant.date_naissance,
         dateNaissancePartial: dirigeant.date_naissance?.slice(0, 7),
@@ -62,7 +69,7 @@ const mapToDomainObject = (
       siren: dirigeant.numero_identification,
       denomination: dirigeant.raison_sociale,
       natureJuridique: null,
-      role: dirigeant.fonction,
+      role: formatRole(dirigeant.fonction),
     } as IPersonneMorale;
   });
 };

@@ -19,6 +19,7 @@
           "etatAdministratif": "fermé",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00015",
@@ -34,7 +35,7 @@
           "activitePrincipale": "62.02A",
           "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
           "trancheEffectif": "N",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": null,
           "latitude": "48.870938",
           "longitude": "2.305917",
           "complements": {
@@ -45,9 +46,7 @@
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          },
-          "anneeTrancheEffectif": null,
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -66,6 +65,7 @@
               "etatAdministratif": "fermé",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00015",
@@ -81,7 +81,7 @@
               "activitePrincipale": "62.02A",
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
               "trancheEffectif": "N",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": null,
               "latitude": "48.870938",
               "longitude": "2.305917",
               "complements": {
@@ -92,9 +92,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": null,
-              "ancienSiege": false
+              }
             }
           ],
           "open": [],
@@ -107,6 +105,7 @@
               "etatAdministratif": "fermé",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00015",
@@ -122,7 +121,7 @@
               "activitePrincipale": "62.02A",
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
               "trancheEffectif": "N",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": null,
               "latitude": "48.870938",
               "longitude": "2.305917",
               "complements": {
@@ -133,9 +132,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": null,
-              "ancienSiege": false
+              }
             }
           ],
           "nombreEtablissementsOuverts": 0,
@@ -204,10 +201,9 @@
             "nom": "JOUPPE",
             "prenom": "Xavier",
             "prenoms": "Xavier, Marie, Erwan",
-            "role": "Liquidateur",
+            "role": "LIQUIDATEUR",
             "nationalite": "Française",
-            "dateNaissancePartial": "1990-02",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1990-02"
           }
         ]
       }

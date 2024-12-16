@@ -1,0 +1,230 @@
+{
+  "args": {
+    "pageResultatsRecherche": 1,
+    "searchTerms": "423208180",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "423208180",
+        "oldSiren": "423208180",
+        "siege": {
+          "siren": "423208180",
+          "siret": "42320818000012",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "ancienSiege": false,
+          "enseigne": "",
+          "denomination": null,
+          "nic": "00012",
+          "dateCreation": "1999-04-07",
+          "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
+          "dateDebutActivite": "2008-01-01",
+          "dateFermeture": "",
+          "adresse": "ESPACE SOLEIL BAT C ROUTE DE GRUISSAN 11100 NARBONNE",
+          "adressePostale": "ESPACE SOLEIL BAT C ROUTE DE GRUISSAN 11100 NARBONNE",
+          "codePostal": "11100",
+          "commune": "NARBONNE",
+          "activitePrincipale": "68.20B",
+          "libelleActivitePrincipale": "Location de terrains et d’autres biens immobiliers (68.20B)",
+          "trancheEffectif": "N",
+          "anneeTrancheEffectif": null,
+          "latitude": "43.154121",
+          "longitude": "3.050857",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
+        },
+        "tva": null,
+        "anciensSiegesSirets": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "GANYMEDE",
+        "chemin": "ganymede-423208180",
+        "natureJuridique": "6540",
+        "libelleNatureJuridique": "Société civile immobilière",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "423208180",
+              "siret": "42320818000012",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00012",
+              "dateCreation": "1999-04-07",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2008-01-01",
+              "dateFermeture": "",
+              "adresse": "ESPACE SOLEIL BAT C ROUTE DE GRUISSAN 11100 NARBONNE",
+              "adressePostale": "ESPACE SOLEIL BAT C ROUTE DE GRUISSAN 11100 NARBONNE",
+              "codePostal": "11100",
+              "commune": "NARBONNE",
+              "activitePrincipale": "68.20B",
+              "libelleActivitePrincipale": "Location de terrains et d’autres biens immobiliers (68.20B)",
+              "trancheEffectif": "N",
+              "anneeTrancheEffectif": null,
+              "latitude": "43.154121",
+              "longitude": "3.050857",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              }
+            }
+          ],
+          "open": [
+            {
+              "siren": "423208180",
+              "siret": "42320818000012",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00012",
+              "dateCreation": "1999-04-07",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2008-01-01",
+              "dateFermeture": "",
+              "adresse": "ESPACE SOLEIL BAT C ROUTE DE GRUISSAN 11100 NARBONNE",
+              "adressePostale": "ESPACE SOLEIL BAT C ROUTE DE GRUISSAN 11100 NARBONNE",
+              "codePostal": "11100",
+              "commune": "NARBONNE",
+              "activitePrincipale": "68.20B",
+              "libelleActivitePrincipale": "Location de terrains et d’autres biens immobiliers (68.20B)",
+              "trancheEffectif": "N",
+              "anneeTrancheEffectif": null,
+              "latitude": "43.154121",
+              "longitude": "3.050857",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              }
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 1,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "68.20B",
+        "libelleActivitePrincipale": "Location de terrains et d’autres biens immobiliers",
+        "dateCreation": "1999-04-07",
+        "dateFermeture": "",
+        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2024-03-22T14:26:06",
+        "dateMiseAJourInpi": "2024-05-19T16:49:33",
+        "dateMiseAJourIG": "",
+        "dateDebutActivite": "",
+        "trancheEffectif": null,
+        "anneeCategorieEntreprise": null,
+        "categorieEntreprise": null,
+        "anneeTrancheEffectif": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": false,
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "listeIdcc": [],
+        "immatriculation": {
+          "dateDebutActivite": "1999-04-07",
+          "dateRadiation": "",
+          "dateImmatriculation": "1999-06-21",
+          "duree": 50,
+          "dateFin": "21/06/2049",
+          "natureEntreprise": [
+            "Commerciale"
+          ],
+          "dateCloture": "",
+          "isPersonneMorale": true,
+          "capital": "36 000,00 € (fixe)"
+        },
+        "matchingEtablissements": [],
+        "nombreEtablissements": 1,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "CESAR (ARNAL)",
+            "prenom": "Nicole",
+            "prenoms": "Nicole",
+            "role": "ASSOCIE INDEFINIMENT RESPONSABLE",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1941-09"
+          },
+          {
+            "sexe": null,
+            "nom": "CHIFFRE",
+            "prenom": "Alain",
+            "prenoms": "Alain",
+            "role": "ASSOCIE INDEFINIMENT RESPONSABLE",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1944-12"
+          },
+          {
+            "sexe": null,
+            "nom": "GUILLOTTE",
+            "prenom": "Jean-Philippe",
+            "prenoms": "Jean-Philippe",
+            "role": "GERANT ET ASSOCIE INDEFINIMENT RESPONSABLE",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1971-08"
+          }
+        ]
+      }
+    ]
+  }
+}

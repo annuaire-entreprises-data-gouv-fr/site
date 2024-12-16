@@ -22,8 +22,8 @@ export interface IEtatCivil {
   nom: string;
   prenom: string;
   prenoms: string;
-  role: string;
-  lieuNaissance: string;
+  role: string | null;
+  lieuNaissance?: string;
   dateNaissancePartial?: string;
   dateNaissance?: string;
   nationalite?: string;
@@ -39,7 +39,7 @@ export interface IPersonneMorale {
   siren: string;
   denomination: string;
   natureJuridique: string | null;
-  role: string;
+  role: string | null;
 }
 
 export type IPersonneMoraleMergedIGInpi = IPersonneMorale & {
@@ -49,9 +49,9 @@ export type IPersonneMoraleMergedIGInpi = IPersonneMorale & {
 };
 
 export type IObservations = {
-  numObservation: string;
   dateAjout: string;
   description: string;
+  numObservation: string;
 }[];
 
 export interface IObservationsWithMetadata {

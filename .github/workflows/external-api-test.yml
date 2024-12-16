@@ -23,6 +23,7 @@ env:
   REDIS_ENABLED: disabled
   PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
   IRON_SESSION_PWD: ${{ secrets.IRON_SESSION_PWD }}
+  GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
 
 jobs:
   dependencies:

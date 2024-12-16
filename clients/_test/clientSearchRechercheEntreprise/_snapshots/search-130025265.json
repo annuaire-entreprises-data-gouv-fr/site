@@ -19,6 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00013",
@@ -34,7 +35,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "N",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "48.850699",
           "longitude": "2.308628",
           "complements": {
@@ -45,9 +46,7 @@
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -66,6 +65,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00013",
@@ -81,7 +81,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "N",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "48.850699",
               "longitude": "2.308628",
               "complements": {
@@ -92,9 +92,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -105,6 +103,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00013",
@@ -120,7 +119,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "N",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "48.850699",
               "longitude": "2.308628",
               "complements": {
@@ -131,9 +130,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],

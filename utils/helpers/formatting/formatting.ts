@@ -36,20 +36,20 @@ const safe =
 const castDate = (date: string | Date) =>
   typeof date === 'string' ? new Date(date) : date;
 
-const longDateOptions = {
+const longDateOptions: Intl.DateTimeFormatOptions = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
   timeZone,
 };
 
-const longDatePartial = {
+const longDatePartial: Intl.DateTimeFormatOptions = {
   year: 'numeric',
   month: 'long',
   timeZone,
 };
 
-const yearOption = {
+const yearOption: Intl.DateTimeFormatOptions = {
   year: 'numeric',
   timeZone,
 };
@@ -94,7 +94,6 @@ export const formatDateYear = safe(
     if (!date) {
       return undefined;
     }
-    //@ts-ignore
     return new Intl.DateTimeFormat('fr-FR', yearOption).format(castDate(date));
   }
 );
@@ -103,7 +102,6 @@ export const formatDatePartial = safe((date: string | Date | undefined) => {
   if (!date) {
     return undefined;
   }
-  //@ts-ignore
   return new Intl.DateTimeFormat('fr-FR', longDatePartial).format(
     castDate(date)
   );
@@ -113,7 +111,6 @@ export const formatDateLong = safe((date: string | Date) => {
   if (!date) {
     return undefined;
   }
-  //@ts-ignore
   return new Intl.DateTimeFormat('fr-FR', longDateOptions).format(
     castDate(date)
   );
@@ -320,7 +317,7 @@ export const formatAdresse = ({
     return '';
   }
 
-  const fullLibelleFromTypeVoie = libelleFromTypeVoie(typeVoie);
+  const fullLibelleFromTypeVoie = libelleFromTypeVoie(typeVoie || '');
 
   return [
     wrapWord(complement, ', '),
@@ -353,7 +350,9 @@ export const agregateTripleFields = (
 export const formatFirstNames = (firstNames: string, separator: ', ' | ' ') => {
   const formatted = (firstNames || '')
     .split(separator)
-    .map(capitalize)
+    .map((prenom) => {
+      return prenom.split('-').map(capitalize).join('-');
+    })
     .filter((name) => !!name);
 
   return {
@@ -362,9 +361,22 @@ export const formatFirstNames = (firstNames: string, separator: ', ' | ' ') => {
   };
 };
 
+export const formatLastName = (lastname: string) => {
+  const nom = (lastname || '').toUpperCase();
+
+  return nom;
+};
+
 export const formatNameFull = (nomPatronymique = '', nomUsage = '') => {
   if (nomUsage && nomPatronymique) {
     return `${nomUsage} (${nomPatronymique})`;
   }
   return nomUsage || nomPatronymique || '';
+};
+
+export const formatRole = (role: string) => {
+  if (!role) {
+    return '';
+  }
+  return removeSpecialChars(role).toUpperCase();
 };

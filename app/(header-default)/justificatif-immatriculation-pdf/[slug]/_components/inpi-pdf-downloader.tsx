@@ -15,8 +15,7 @@ import { PDFNotFound } from './pdf-not-found';
 function saveAsPdf(blob: Blob, siren: string) {
   var url = window.URL.createObjectURL(blob);
   var a = document.createElement('a');
-  //@ts-ignore
-  a.style = 'display: none';
+  a.style.display = 'none';
   a.href = url;
   a.download = 'extrait_immatriculation_inpi_' + siren + '.pdf';
   document.body.appendChild(a);

@@ -19,6 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": "SOLARSUD",
           "nic": "00428",
@@ -34,7 +35,7 @@
           "activitePrincipale": "43.21A",
           "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
           "trancheEffectif": "N",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "45.150722",
           "longitude": "0.788652",
           "complements": {
@@ -43,13 +44,9 @@
             "idBio": [],
             "idcc": [],
             "idOrganismeFormation": [],
-            "idRge": [
-              "43SPVRGE"
-            ],
+            "idRge": [],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -68,6 +65,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": "SOLARSUD",
               "nic": "00428",
@@ -83,7 +81,7 @@
               "activitePrincipale": "43.21A",
               "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
               "trancheEffectif": "N",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "45.150722",
               "longitude": "0.788652",
               "complements": {
@@ -92,13 +90,9 @@
                 "idBio": [],
                 "idcc": [],
                 "idOrganismeFormation": [],
-                "idRge": [
-                  "43SPVRGE"
-                ],
+                "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -109,6 +103,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": "SOLARSUD",
               "nic": "00428",
@@ -124,7 +119,7 @@
               "activitePrincipale": "43.21A",
               "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
               "trancheEffectif": "N",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "45.150722",
               "longitude": "0.788652",
               "complements": {
@@ -133,13 +128,9 @@
                 "idBio": [],
                 "idcc": [],
                 "idOrganismeFormation": [],
-                "idRge": [
-                  "43SPVRGE"
-                ],
+                "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -171,7 +162,7 @@
           "statutEntrepreneurSpectacle": null,
           "estFiness": false,
           "egaproRenseignee": false,
-          "estRge": true,
+          "estRge": false,
           "estOrganismeFormation": false,
           "estSocieteMission": false,
           "estQualiopi": false,
@@ -211,6 +202,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
+            "ancienSiege": false,
             "enseigne": "",
             "denomination": "SOLARSUD",
             "nic": "00428",
@@ -226,7 +218,7 @@
             "activitePrincipale": "43.21A",
             "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
             "trancheEffectif": "N",
-            "libelleTrancheEffectif": "",
+            "anneeTrancheEffectif": "2022",
             "latitude": "45.150722",
             "longitude": "0.788652",
             "complements": {
@@ -235,13 +227,9 @@
               "idBio": [],
               "idcc": [],
               "idOrganismeFormation": [],
-              "idRge": [
-                "43SPVRGE"
-              ],
+              "idRge": [],
               "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            }
           }
         ],
         "nombreEtablissements": 42,
@@ -252,20 +240,18 @@
             "nom": "POUYANNE (POUYANNE)",
             "prenom": "David",
             "prenoms": "David, Jean, Claude",
-            "role": null,
+            "role": "",
             "nationalite": null,
-            "dateNaissancePartial": "1965-10",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1965-10"
           },
           {
             "sexe": null,
             "nom": "POUYANNE",
             "prenom": "David",
-            "prenoms": "David, Jean-claude",
-            "role": "Gérant",
+            "prenoms": "David, Jean-Claude",
+            "role": "GERANT",
             "nationalite": "Française",
-            "dateNaissancePartial": "1965-10",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1965-10"
           }
         ]
       }

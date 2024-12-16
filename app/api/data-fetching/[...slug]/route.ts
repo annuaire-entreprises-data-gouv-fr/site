@@ -1,3 +1,4 @@
+import { UseCase } from '#models/user/agent';
 import { hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { APIRoutesHandlers } from '../routes-handlers';
@@ -29,11 +30,14 @@ async function getRoute(
       403
     );
   }
-  const searchParams = Object.fromEntries(
-    new URL(request.url).searchParams
-  ) as Parameters<typeof handler>[1];
+  const searchParams = Object.fromEntries(new URL(request.url).searchParams);
 
-  const response = await handler(slug, searchParams!);
+  const validatedParams = {
+    isEI: searchParams.isEI === 'true',
+    useCase: searchParams.useCase as UseCase,
+  };
+
+  const response = await handler(slug, validatedParams);
 
   return Response.json(response);
 }

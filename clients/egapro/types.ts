@@ -71,3 +71,13 @@ export type IEgaproScore = {
   notes_promotions: number | null;
   notes_remunerations: number | null;
 };
+
+export type IEgaproRepresentation = {
+  years: string[];
+  scores: {
+    pourcentageFemmesCadres: number[];
+    pourcentageHommesCadres: number[];
+    pourcentageFemmesMembres: number[];
+    pourcentageHommesMembres: number[];
+  };
+};

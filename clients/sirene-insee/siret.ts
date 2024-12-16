@@ -1,6 +1,5 @@
 import { HttpNotFound, HttpServerError } from '#clients/exceptions';
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { estActif } from '#models/core/etat-administratif';
 import { IEtablissement, createDefaultEtablissement } from '#models/core/types';
@@ -89,7 +88,7 @@ interface IInseeetablissementUniteLegale {
   nomUniteLegale: string;
 }
 
-const clientAllEtablissementsInsee = async (
+export const clientAllEtablissementsInsee = async (
   siren: string,
   page = 1,
   useFallback: boolean
@@ -125,7 +124,10 @@ const clientAllEtablissementsInsee = async (
   };
 };
 
-const clientEtablissementInsee = async (siret: Siret, useFallback: boolean) => {
+export const clientEtablissementInsee = async (
+  siret: Siret,
+  useFallback: boolean
+) => {
   const { etablissement, etablissements } =
     await inseeClientGet<IInseeEtablissementResponse>(
       routes.sireneInsee.siret + siret,
@@ -278,17 +280,4 @@ const mapEtablissementToDomainObject = (
     codePostal,
     commune: libelleCommuneEtablissement,
   };
-};
-
-const stubbedClientAllEtablissementsInsee = stubClientWithSnapshots({
-  clientAllEtablissementsInsee,
-});
-
-const stubbedClientEtablissementInsee = stubClientWithSnapshots({
-  clientEtablissementInsee,
-});
-
-export {
-  stubbedClientAllEtablissementsInsee as clientAllEtablissementsInsee,
-  stubbedClientEtablissementInsee as clientEtablissementInsee,
 };

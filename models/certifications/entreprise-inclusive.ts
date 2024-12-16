@@ -1,4 +1,4 @@
-import { clientMarcheInclusion } from '#clients/api-inclusion';
+import { clientAPIInclusion } from '#clients/api-inclusion';
 import { clientInclusionKindMetadata } from '#clients/api-inclusion/inclusion-kind';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -26,9 +26,7 @@ export const getEntrepriseInclusive = async (
     if (!uniteLegale.complements.estEntrepriseInclusive) {
       throw new HttpNotFound('Not an entreprise inclusive');
     }
-    const entrepriseInclusiveList = await clientMarcheInclusion(
-      uniteLegale.siren
-    );
+    const entrepriseInclusiveList = await clientAPIInclusion(uniteLegale.siren);
     return await Promise.all(
       entrepriseInclusiveList.map(async ({ kind, ...rest }) => {
         const kindLabel = await clientInclusionKindMetadata(kind);

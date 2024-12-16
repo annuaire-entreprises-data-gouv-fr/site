@@ -16,21 +16,21 @@ import { ITVAIntracommunautaire } from '../tva';
 import { ISTATUTDIFFUSION } from './diffusion';
 
 export interface IEtablissement {
-  enseigne: string | null;
-  denomination: string | null;
   siren: Siren;
   siret: Siret;
   oldSiret: Siret;
-  nic: string;
   etatAdministratif: IETATADMINSTRATIF;
   statutDiffusion: ISTATUTDIFFUSION;
   estSiege: boolean;
   ancienSiege: boolean;
+  enseigne: string | null;
+  denomination: string | null;
+  nic: string;
   dateCreation: string;
   dateDerniereMiseAJour: string;
   dateMiseAJourInsee: string;
-  dateFermeture: string | null;
   dateDebutActivite: string;
+  dateFermeture: string | null;
   adresse: string;
   adressePostale: string;
   codePostal: string;
@@ -52,15 +52,13 @@ export interface IEtablissementWithUniteLegale {
 /** BASIC CONSTRUCTORS */
 export const createDefaultEtablissement = (): IEtablissement => {
   return {
-    //@ts-ignore
-    siren: '',
-    //@ts-ignore
-    siret: '',
-    //@ts-ignore
-    oldSiret: '',
+    siren: '' as Siren,
+    siret: '' as Siret,
+    oldSiret: '' as Siret,
     etatAdministratif: IETATADMINSTRATIF.INCONNU,
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     estSiege: false,
+    ancienSiege: false,
     enseigne: null,
     denomination: null,
     nic: '',
@@ -76,7 +74,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     trancheEffectif: '',
-    libelleTrancheEffectif: '',
+    anneeTrancheEffectif: '',
     latitude: '',
     longitude: '',
     complements: createDefaultEtablissementComplements(),

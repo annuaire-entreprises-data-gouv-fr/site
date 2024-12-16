@@ -5,10 +5,6 @@ import simplifyParams from './simplify-params';
 
 describe('clientSearchRechercheEntreprise : simple search with searchTerms', () => {
   [
-    // We use the commented lines to generate snapshots for
-    // E2E testing.
-    // Hovewer, we don't test them for regression because the results
-    // changes often.
     '198100125', // établissement scolaire
     '800329849', // entrepreneur spectacle, asso & ESS
     '130025265', // DINUM (service public)
@@ -20,9 +16,17 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
     '908595879',
     '552032534',
     '487444697',
-    '41154066900016', // Entreprise non enregistrée dans la base sirene
     '48744469700428',
-    'xavier jouppe',
+    '338365059',
+    '300025764',
+    '351556394',
+    '839517323',
+    '842019051',
+    '423208180',
+    '383657467',
+    '123456789',
+    '12345678900003',
+    '41154066900016',
   ].forEach((s) => itShouldMatchSnapshotForSearch(s, 1));
 });
 

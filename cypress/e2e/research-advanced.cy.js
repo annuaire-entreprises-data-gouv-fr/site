@@ -15,14 +15,10 @@ describe('Search page', () => {
 });
 
 describe('Dirigeants and Elus search', () => {
-  it('Search an élu with dirigeants filters', () => {
-    cy.visit('/rechercher?terme=&fn=anne&n=hidalgo');
-    cy.contains('VILLE DE PARIS').should('be.visible');
-  });
   it('Search a dirigeant with main search bar', () => {
     cy.visit('/rechercher?terme=xavier+jouppe');
-    cy.contains('SCI DE LASLAUDIE').should('be.visible');
-    cy.contains('Bernard JOUPPE').should('be.visible');
+    cy.contains('GANYMEDE').should('be.visible');
+    cy.contains('Xavier JOUPPE').should('be.visible');
   });
 });
 

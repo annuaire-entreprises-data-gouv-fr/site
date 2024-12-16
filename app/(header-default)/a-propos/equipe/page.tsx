@@ -28,6 +28,18 @@ const team = [
     role: 'responsable du support utilisateur',
   },
   {
+    photoUrl: '/images/team/adrien.jpg',
+    fullname: 'Adrien Touzouli',
+    pronoun: 'un',
+    role: 'devops',
+  },
+  {
+    photoUrl: '/images/team/kevin.jpg',
+    fullname: 'Kevin Masseix',
+    pronoun: 'un',
+    role: 'devops',
+  },
+  {
     photoUrl: '/images/team/jonathan.jpg',
     fullname: 'Jonathan Louis',
     pronoun: 'un',
@@ -50,12 +62,6 @@ const team = [
     fullname: 'Robin Monnier',
     pronoun: 'un',
     role: 'lead développeur',
-  },
-  {
-    photoUrl: '/images/team/kevin.jpg',
-    fullname: 'Kevin Masseix',
-    pronoun: 'un',
-    role: 'devops',
   },
 ];
 

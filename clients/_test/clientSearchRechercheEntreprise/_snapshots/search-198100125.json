@@ -19,6 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00014",
@@ -34,7 +35,7 @@
           "activitePrincipale": "85.31Z",
           "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
           "trancheEffectif": "22",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "46.8030906",
           "longitude": "4.4244097",
           "complements": {
@@ -49,9 +50,7 @@
             "idUai": [
               "0810012Y"
             ]
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -70,6 +69,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00014",
@@ -85,7 +85,7 @@
               "activitePrincipale": "85.31Z",
               "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
               "trancheEffectif": "22",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "46.8030906",
               "longitude": "4.4244097",
               "complements": {
@@ -100,9 +100,7 @@
                 "idUai": [
                   "0810012Y"
                 ]
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -113,6 +111,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00014",
@@ -128,7 +127,7 @@
               "activitePrincipale": "85.31Z",
               "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
               "trancheEffectif": "22",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "46.8030906",
               "longitude": "4.4244097",
               "complements": {
@@ -143,9 +142,7 @@
                 "idUai": [
                   "0810012Y"
                 ]
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],

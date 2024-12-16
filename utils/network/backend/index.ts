@@ -33,7 +33,6 @@ const axiosInstanceFactory = (timeout = constants.timeout.L): AxiosInstance => {
     Promise.reject(err)
   );
 
-  //@ts-ignore
   axiosInstance.interceptors.response.use(logInterceptor, errorInterceptor);
 
   return axiosInstance;

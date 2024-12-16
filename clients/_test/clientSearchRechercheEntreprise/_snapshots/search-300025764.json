@@ -1,6 +1,6 @@
 {
   "args": {
-    "page": 1,
+    "pageResultatsRecherche": 1,
     "searchTerms": "300025764",
     "searchFilterParams": ""
   },
@@ -19,6 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "partiellement diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "[NON-DIFFUSIBLE] [NON-DIFFUSIBLE] [NON-DIFFUSIBLE]",
           "denomination": "[NON-DIFFUSIBLE]",
           "nic": "00048",
@@ -34,7 +35,7 @@
           "activitePrincipale": "68.20A",
           "libelleActivitePrincipale": "Location de logements (68.20A)",
           "trancheEffectif": "N",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": null,
           "latitude": null,
           "longitude": null,
           "complements": {
@@ -45,9 +46,7 @@
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          },
-          "anneeTrancheEffectif": null,
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -66,6 +65,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "partiellement diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "[NON-DIFFUSIBLE] [NON-DIFFUSIBLE] [NON-DIFFUSIBLE]",
               "denomination": "[NON-DIFFUSIBLE]",
               "nic": "00048",
@@ -81,7 +81,7 @@
               "activitePrincipale": "68.20A",
               "libelleActivitePrincipale": "Location de logements (68.20A)",
               "trancheEffectif": "N",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": null,
               "latitude": null,
               "longitude": null,
               "complements": {
@@ -92,9 +92,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": null,
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -105,6 +103,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "partiellement diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "[NON-DIFFUSIBLE] [NON-DIFFUSIBLE] [NON-DIFFUSIBLE]",
               "denomination": "[NON-DIFFUSIBLE]",
               "nic": "00048",
@@ -120,7 +119,7 @@
               "activitePrincipale": "68.20A",
               "libelleActivitePrincipale": "Location de logements (68.20A)",
               "trancheEffectif": "N",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": null,
               "latitude": null,
               "longitude": null,
               "complements": {
@@ -131,9 +130,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": null,
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -149,10 +146,11 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-01-14T12:34:27",
+        "dateMiseAJourInpi": "2024-05-19T16:49:33",
+        "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": null,
-        "anneeCategorieEntreprise": "2021",
+        "anneeCategorieEntreprise": "2022",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
         "complements": {
@@ -181,6 +179,20 @@
           "codeColter": null
         },
         "listeIdcc": [],
+        "immatriculation": {
+          "dateDebutActivite": "1981-10-01",
+          "dateRadiation": "",
+          "dateImmatriculation": "1981-10-01",
+          "duree": 0,
+          "dateFin": "",
+          "natureEntreprise": [
+            "Gestion de biens",
+            "Libérale non réglementée"
+          ],
+          "dateCloture": "",
+          "isPersonneMorale": false,
+          "capital": ""
+        },
         "matchingEtablissements": [],
         "nombreEtablissements": 2,
         "nombreEtablissementsOuverts": 1,
@@ -188,10 +200,11 @@
           {
             "sexe": null,
             "nom": "[NON-DIFFUSIBLE]",
-            "prenom": "[non-diffusible]",
-            "role": null,
-            "dateNaissancePartial": "",
-            "lieuNaissance": ""
+            "prenom": "[non-Diffusible]",
+            "prenoms": "[non-Diffusible]",
+            "role": "",
+            "nationalite": null,
+            "dateNaissancePartial": null
           }
         ]
       }

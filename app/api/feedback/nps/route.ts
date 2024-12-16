@@ -38,17 +38,9 @@ const logAllEvents = async (req: Request) => {
 
     // tchap : only if text
     if (text) {
-      let commentaire = text ? `\nCommentaire : ${text}` : '';
-
-      commentaire += hasEmail
-        ? `\nEmail : ${email} (<a href="mailto:${email}?subject=${encodeURIComponent(
-            `Réponse à votre message`
-          )}&body=${encodeURIComponent(
-            `Bonjour,\n Merci pour votre message : “ ${text} ” \nBonne journée,`
-          )}>répondre</a>)`
-        : '';
-
-      const tchapText = `Note : ${mood}/10 \nVisiteur : ${visitorType} \nOrigine : ${origin}${commentaire}`;
+      const tchapText = `Note : ${mood}/10 \nVisiteur : ${visitorType} \nOrigine : ${origin}\nCommentaire : ${text}${
+        hasEmail ? `\nEmail : ${email}` : ''
+      }`;
       logInTchap(tchapText);
     }
   } catch (e: any) {

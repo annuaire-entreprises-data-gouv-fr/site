@@ -7,7 +7,6 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}
-  cancel-in-progress: true
 
 jobs:
   deploy-website-staging:

@@ -19,6 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00646",
@@ -34,7 +35,7 @@
           "activitePrincipale": "70.10Z",
           "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
           "trancheEffectif": "42",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "48.872565",
           "longitude": "2.334926",
           "complements": {
@@ -49,9 +50,7 @@
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -70,6 +69,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00646",
@@ -85,7 +85,7 @@
               "activitePrincipale": "70.10Z",
               "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
               "trancheEffectif": "42",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "48.872565",
               "longitude": "2.334926",
               "complements": {
@@ -100,9 +100,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -113,6 +111,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00646",
@@ -128,7 +127,7 @@
               "activitePrincipale": "70.10Z",
               "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
               "trancheEffectif": "42",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "48.872565",
               "longitude": "2.334926",
               "complements": {
@@ -143,9 +142,7 @@
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -218,120 +215,109 @@
             "nom": "BERNARD DE SAINT AFFRIQUE",
             "prenom": "Antoine",
             "prenoms": "Antoine",
-            "role": "Directeur Général",
+            "role": "DIRECTEUR GENERAL",
             "nationalite": "Française",
-            "dateNaissancePartial": "1964-12",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1964-12"
           },
           {
             "sexe": null,
             "nom": "BOUTEBBA",
             "prenom": "Frederic",
             "prenoms": "Frederic",
-            "role": "Administrateur",
+            "role": "ADMINISTRATEUR",
             "nationalite": "Française",
-            "dateNaissancePartial": "1967-08",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1967-08"
           },
           {
             "sexe": null,
             "nom": "CHAPOULAUD-FLOQUET",
             "prenom": "Valerie",
             "prenoms": "Valerie",
-            "role": "Administrateur",
+            "role": "ADMINISTRATEUR",
             "nationalite": "Française",
-            "dateNaissancePartial": "1962-11",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1962-11"
           },
           {
             "sexe": null,
             "nom": "GHOSTINE",
             "prenom": "Gilbert",
             "prenoms": "Gilbert",
-            "role": "Administrateur",
+            "role": "ADMINISTRATEUR",
             "nationalite": "Canadienne",
-            "dateNaissancePartial": "1960-02",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1960-02"
           },
           {
             "sexe": null,
             "nom": "KINGO",
             "prenom": "Lise",
             "prenoms": "Lise",
-            "role": "Administrateur",
+            "role": "ADMINISTRATEUR",
             "nationalite": "Danoise",
-            "dateNaissancePartial": "1961-08",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1961-08"
           },
           {
             "sexe": null,
             "nom": "LOUVET",
             "prenom": "Patrice",
             "prenoms": "Patrice",
-            "role": "Administrateur",
+            "role": "ADMINISTRATEUR",
             "nationalite": "Américaine",
-            "dateNaissancePartial": "1964-09",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1964-09"
           },
           {
             "sexe": null,
             "nom": "MEHTA",
             "prenom": "Sanjiv",
             "prenoms": "Sanjiv",
-            "role": "Administrateur",
+            "role": "ADMINISTRATEUR",
             "nationalite": "Indienne",
-            "dateNaissancePartial": "1960-07",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1960-07"
           },
           {
             "sexe": null,
             "nom": "THEISSIG (MOLITOR)",
             "prenom": "Bettina",
             "prenoms": "Bettina",
-            "role": "Administrateur",
+            "role": "ADMINISTRATEUR",
             "nationalite": null,
-            "dateNaissancePartial": "1962-07",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1962-07"
           },
           {
             "sexe": null,
             "nom": "PICAUD (ROAUX)",
             "prenom": "Geraldine",
             "prenoms": "Geraldine",
-            "role": "Administrateur",
+            "role": "ADMINISTRATEUR",
             "nationalite": "Française",
-            "dateNaissancePartial": "1970-02",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1970-02"
           },
           {
             "sexe": null,
             "nom": "ROBERTS",
-            "prenom": "Susan-barbara",
-            "prenoms": "Susan-barbara",
-            "role": "Administrateur",
+            "prenom": "Susan-Barbara",
+            "prenoms": "Susan-Barbara",
+            "role": "ADMINISTRATEUR",
             "nationalite": "Britannique",
-            "dateNaissancePartial": "1957-05",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1957-05"
           },
           {
             "sexe": null,
             "nom": "SCHNEPP",
             "prenom": "Gilles",
             "prenoms": "Gilles",
-            "role": "Administrateur",
+            "role": "ADMINISTRATEUR",
             "nationalite": "Française",
-            "dateNaissancePartial": "1958-10",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1958-10"
           },
           {
             "siren": "344366315",
             "denomination": "ERNST & YOUNG AUDIT",
-            "role": "Commissaire aux comptes titulaire"
+            "role": "COMMISSAIRE AUX COMPTES TITULAIRE"
           },
           {
             "siren": "387953961",
             "denomination": "MAZARS ET ASSOCIÉS",
-            "role": "Commissaire aux comptes titulaire"
+            "role": "COMMISSAIRE AUX COMPTES TITULAIRE"
           }
         ]
       }

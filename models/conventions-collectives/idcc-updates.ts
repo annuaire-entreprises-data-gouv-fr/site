@@ -1,4 +1,4 @@
-const CC_UPDATES = {
+const CC_UPDATES: Record<string, string[]> = {
   '0054': ['3248'],
   '0650': ['3248'],
   '0714': ['3248'],
@@ -88,7 +88,6 @@ const CC_UPDATES = {
  * @returns
  */
 export const idccUpdates = (idcc: string): string[] => {
-  //@ts-ignore
   const updates = CC_UPDATES[idcc];
   return updates || [];
 };

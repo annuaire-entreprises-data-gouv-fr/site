@@ -6,7 +6,7 @@
   },
   "result": {
     "currentPage": 1,
-    "resultCount": 16,
+    "resultCount": 19,
     "pageCount": 2,
     "results": [
       {
@@ -19,6 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00110",
@@ -34,7 +35,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "41",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "45.748197",
           "longitude": "-0.626794",
           "complements": {
@@ -49,9 +50,7 @@
               "1911"
             ],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -70,6 +69,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00110",
@@ -85,7 +85,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "41",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "45.748197",
               "longitude": "-0.626794",
               "complements": {
@@ -100,9 +100,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -113,6 +111,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00110",
@@ -128,7 +127,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "41",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "45.748197",
               "longitude": "-0.626794",
               "complements": {
@@ -143,9 +142,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -216,8 +213,8 @@
             {
               "sexe": "M",
               "nom": "MARCHAIS",
-              "prenom": "Jean-luc",
-              "prenoms": "Jean-luc",
+              "prenom": "Jean-Luc",
+              "prenoms": "Jean-Luc",
               "role": "Vice-président du conseil communautaire",
               "dateNaissancePartial": "1963-08",
               "lieuNaissance": ""
@@ -225,8 +222,8 @@
             {
               "sexe": "M",
               "nom": "FOURRÉ",
-              "prenom": "Jean-luc",
-              "prenoms": "Jean-luc",
+              "prenom": "Jean-Luc",
+              "prenoms": "Jean-Luc",
               "role": null,
               "dateNaissancePartial": "1951-09",
               "lieuNaissance": ""
@@ -252,8 +249,8 @@
             {
               "sexe": "M",
               "nom": "JALLAIS",
-              "prenom": "Pierre-henri",
-              "prenoms": "Pierre-henri",
+              "prenom": "Pierre-Henri",
+              "prenoms": "Pierre-Henri",
               "role": "Vice-président du conseil communautaire",
               "dateNaissancePartial": "1976-06",
               "lieuNaissance": ""
@@ -261,8 +258,8 @@
             {
               "sexe": "F",
               "nom": "SERRA-DAVISSEAU",
-              "prenom": "Anne-sophie",
-              "prenoms": "Anne-sophie",
+              "prenom": "Anne-Sophie",
+              "prenoms": "Anne-Sophie",
               "role": null,
               "dateNaissancePartial": "1980-12",
               "lieuNaissance": ""
@@ -270,8 +267,8 @@
             {
               "sexe": "M",
               "nom": "ROUGER",
-              "prenom": "Jean-michel",
-              "prenoms": "Jean-michel",
+              "prenom": "Jean-Michel",
+              "prenoms": "Jean-Michel",
               "role": null,
               "dateNaissancePartial": "1952-04",
               "lieuNaissance": ""
@@ -351,8 +348,8 @@
             {
               "sexe": "F",
               "nom": "DREY",
-              "prenom": "Marie-france",
-              "prenoms": "Marie-france",
+              "prenom": "Marie-France",
+              "prenoms": "Marie-France",
               "role": null,
               "dateNaissancePartial": "1951-10",
               "lieuNaissance": ""
@@ -486,8 +483,8 @@
             {
               "sexe": "M",
               "nom": "AUDOUIN",
-              "prenom": "Jean-marc",
-              "prenoms": "Jean-marc",
+              "prenom": "Jean-Marc",
+              "prenoms": "Jean-Marc",
               "role": null,
               "dateNaissancePartial": "1959-05",
               "lieuNaissance": ""
@@ -585,8 +582,8 @@
             {
               "sexe": "F",
               "nom": "CHEMINADE",
-              "prenom": "Marie-line",
-              "prenoms": "Marie-line",
+              "prenom": "Marie-Line",
+              "prenoms": "Marie-Line",
               "role": "Vice-président du conseil communautaire",
               "dateNaissancePartial": "1968-09",
               "lieuNaissance": ""
@@ -657,8 +654,8 @@
             {
               "sexe": "M",
               "nom": "MACHON",
-              "prenom": "Jean-philippe",
-              "prenoms": "Jean-philippe",
+              "prenom": "Jean-Philippe",
+              "prenoms": "Jean-Philippe",
               "role": null,
               "dateNaissancePartial": "1953-10",
               "lieuNaissance": ""
@@ -684,8 +681,8 @@
             {
               "sexe": "M",
               "nom": "ROUDIER",
-              "prenom": "Jean-pierre",
-              "prenoms": "Jean-pierre",
+              "prenom": "Jean-Pierre",
+              "prenoms": "Jean-Pierre",
               "role": null,
               "dateNaissancePartial": "1962-11",
               "lieuNaissance": ""
@@ -774,8 +771,8 @@
           ]
         },
         "listeIdcc": [
-          "5021",
-          "2149"
+          "2149",
+          "5021"
         ],
         "immatriculation": null,
         "matchingEtablissements": [
@@ -786,6 +783,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
+            "ancienSiege": false,
             "enseigne": "",
             "denomination": null,
             "nic": "00110",
@@ -801,7 +799,7 @@
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
             "trancheEffectif": "41",
-            "libelleTrancheEffectif": "",
+            "anneeTrancheEffectif": "2022",
             "latitude": "45.748197",
             "longitude": "-0.626794",
             "complements": {
@@ -816,9 +814,7 @@
                 "1911"
               ],
               "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            }
           }
         ],
         "nombreEtablissements": 54,
@@ -835,6 +831,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00015",
@@ -850,7 +847,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "42",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "45.776248",
           "longitude": "3.085147",
           "complements": {
@@ -866,9 +863,7 @@
               "1911"
             ],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -887,6 +882,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00015",
@@ -902,7 +898,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "42",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "45.776248",
               "longitude": "3.085147",
               "complements": {
@@ -918,9 +914,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -931,6 +925,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00015",
@@ -946,7 +941,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "42",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "45.776248",
               "longitude": "3.085147",
               "complements": {
@@ -962,9 +957,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -1071,8 +1064,8 @@
             {
               "sexe": "M",
               "nom": "CUZIN",
-              "prenom": "Jean-paul",
-              "prenoms": "Jean-paul",
+              "prenom": "Jean-Paul",
+              "prenoms": "Jean-Paul",
               "role": "1er Vice-président du conseil départemental",
               "dateNaissancePartial": "1957-02",
               "lieuNaissance": ""
@@ -1080,8 +1073,8 @@
             {
               "sexe": "F",
               "nom": "PICARD",
-              "prenom": "Anne-marie",
-              "prenoms": "Anne-marie",
+              "prenom": "Anne-Marie",
+              "prenoms": "Anne-Marie",
               "role": null,
               "dateNaissancePartial": "1953-05",
               "lieuNaissance": ""
@@ -1143,8 +1136,8 @@
             {
               "sexe": "M",
               "nom": "LUNOT",
-              "prenom": "Jean-pierre",
-              "prenoms": "Jean-pierre",
+              "prenom": "Jean-Pierre",
+              "prenoms": "Jean-Pierre",
               "role": null,
               "dateNaissancePartial": "1966-05",
               "lieuNaissance": ""
@@ -1152,8 +1145,8 @@
             {
               "sexe": "F",
               "nom": "MARCHIS",
-              "prenom": "Marie-anne",
-              "prenoms": "Marie-anne",
+              "prenom": "Marie-Anne",
+              "prenoms": "Marie-Anne",
               "role": "10ème Vice-président du conseil départemental",
               "dateNaissancePartial": "1967-03",
               "lieuNaissance": ""
@@ -1170,8 +1163,8 @@
             {
               "sexe": "F",
               "nom": "MALTRAIT",
-              "prenom": "Anne-marie",
-              "prenoms": "Anne-marie",
+              "prenom": "Anne-Marie",
+              "prenoms": "Anne-Marie",
               "role": null,
               "dateNaissancePartial": "1947-03",
               "lieuNaissance": ""
@@ -1422,8 +1415,8 @@
             {
               "sexe": "M",
               "nom": "BOYER",
-              "prenom": "Jean-marc",
-              "prenoms": "Jean-marc",
+              "prenom": "Jean-Marc",
+              "prenoms": "Jean-Marc",
               "role": null,
               "dateNaissancePartial": "1954-02",
               "lieuNaissance": ""
@@ -1431,8 +1424,8 @@
             {
               "sexe": "M",
               "nom": "DERRÉ",
-              "prenom": "Joël-michel",
-              "prenoms": "Joël-michel",
+              "prenom": "Joël-Michel",
+              "prenoms": "Joël-Michel",
               "role": null,
               "dateNaissancePartial": "1965-09",
               "lieuNaissance": ""
@@ -1458,8 +1451,8 @@
             {
               "sexe": "M",
               "nom": "PERRET",
-              "prenom": "Jean-philippe",
-              "prenoms": "Jean-philippe",
+              "prenom": "Jean-Philippe",
+              "prenoms": "Jean-Philippe",
               "role": "5ème Vice-président du conseil départemental",
               "dateNaissancePartial": "1977-03",
               "lieuNaissance": ""
@@ -1587,6 +1580,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
+            "ancienSiege": false,
             "enseigne": "",
             "denomination": null,
             "nic": "00015",
@@ -1602,7 +1596,7 @@
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
             "trancheEffectif": "42",
-            "libelleTrancheEffectif": "",
+            "anneeTrancheEffectif": "2022",
             "latitude": "45.776248",
             "longitude": "3.085147",
             "complements": {
@@ -1618,9 +1612,7 @@
                 "1911"
               ],
               "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            }
           }
         ],
         "nombreEtablissements": 43,
@@ -1637,22 +1629,23 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": "CONSEIL GENERAL",
+          "ancienSiege": false,
+          "enseigne": "",
           "denomination": null,
           "nic": "00423",
           "dateCreation": "1999-05-17",
           "dateDerniereMiseAJour": "",
           "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2008-01-01",
+          "dateDebutActivite": "2015-01-01",
           "dateFermeture": "",
           "adresse": "1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
-          "adressePostale": "CONSEIL GENERAL, 1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
+          "adressePostale": "1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
           "codePostal": "31000",
           "commune": "TOULOUSE",
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "52",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "43.615663",
           "longitude": "1.436756",
           "complements": {
@@ -1669,9 +1662,7 @@
               "1911"
             ],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -1690,22 +1681,23 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": "CONSEIL GENERAL",
+              "ancienSiege": false,
+              "enseigne": "",
               "denomination": null,
               "nic": "00423",
               "dateCreation": "1999-05-17",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2008-01-01",
+              "dateDebutActivite": "2015-01-01",
               "dateFermeture": "",
               "adresse": "1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
-              "adressePostale": "CONSEIL GENERAL, 1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
+              "adressePostale": "1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
               "codePostal": "31000",
               "commune": "TOULOUSE",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "52",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "43.615663",
               "longitude": "1.436756",
               "complements": {
@@ -1722,9 +1714,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -1735,22 +1725,23 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": "CONSEIL GENERAL",
+              "ancienSiege": false,
+              "enseigne": "",
               "denomination": null,
               "nic": "00423",
               "dateCreation": "1999-05-17",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2008-01-01",
+              "dateDebutActivite": "2015-01-01",
               "dateFermeture": "",
               "adresse": "1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
-              "adressePostale": "CONSEIL GENERAL, 1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
+              "adressePostale": "1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
               "codePostal": "31000",
               "commune": "TOULOUSE",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "52",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "43.615663",
               "longitude": "1.436756",
               "complements": {
@@ -1767,9 +1758,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -2047,8 +2036,8 @@
             {
               "sexe": "M",
               "nom": "DUCLOS",
-              "prenom": "Jean-yves",
-              "prenoms": "Jean-yves",
+              "prenom": "Jean-Yves",
+              "prenoms": "Jean-Yves",
               "role": null,
               "dateNaissancePartial": "1970-08",
               "lieuNaissance": ""
@@ -2092,8 +2081,8 @@
             {
               "sexe": "M",
               "nom": "FABRE",
-              "prenom": "Jean-michel",
-              "prenoms": "Jean-michel",
+              "prenom": "Jean-Michel",
+              "prenoms": "Jean-Michel",
               "role": "6ème Vice-président du conseil départemental",
               "dateNaissancePartial": "1960-07",
               "lieuNaissance": ""
@@ -2164,8 +2153,8 @@
             {
               "sexe": "M",
               "nom": "LLORCA",
-              "prenom": "Jean-louis",
-              "prenoms": "Jean-louis",
+              "prenom": "Jean-Louis",
+              "prenoms": "Jean-Louis",
               "role": "14ème Vice-président du conseil départemental",
               "dateNaissancePartial": "1949-02",
               "lieuNaissance": ""
@@ -2191,8 +2180,8 @@
             {
               "sexe": "F",
               "nom": "FARCY",
-              "prenom": "Marie-claude",
-              "prenoms": "Marie-claude",
+              "prenom": "Marie-Claude",
+              "prenoms": "Marie-Claude",
               "role": null,
               "dateNaissancePartial": "1960-07",
               "lieuNaissance": ""
@@ -2227,8 +2216,8 @@
             {
               "sexe": "M",
               "nom": "DE SCORRAILLE",
-              "prenom": "Jean-baptiste",
-              "prenoms": "Jean-baptiste",
+              "prenom": "Jean-Baptiste",
+              "prenoms": "Jean-Baptiste",
               "role": null,
               "dateNaissancePartial": "1963-07",
               "lieuNaissance": ""
@@ -2290,8 +2279,8 @@
             {
               "sexe": "M",
               "nom": "DUMOULIN",
-              "prenom": "Jean-marc",
-              "prenoms": "Jean-marc",
+              "prenom": "Jean-Marc",
+              "prenoms": "Jean-Marc",
               "role": null,
               "dateNaissancePartial": "1959-02",
               "lieuNaissance": ""
@@ -2310,22 +2299,23 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
-            "enseigne": "CONSEIL GENERAL",
+            "ancienSiege": false,
+            "enseigne": "",
             "denomination": null,
             "nic": "00423",
             "dateCreation": "1999-05-17",
             "dateDerniereMiseAJour": "",
             "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2008-01-01",
+            "dateDebutActivite": "2015-01-01",
             "dateFermeture": "",
             "adresse": "1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
-            "adressePostale": "CONSEIL GENERAL, 1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
+            "adressePostale": "1 BOULEVARD DE LA MARQUETTE 31000 TOULOUSE",
             "codePostal": "31000",
             "commune": "TOULOUSE",
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
             "trancheEffectif": "52",
-            "libelleTrancheEffectif": "",
+            "anneeTrancheEffectif": "2022",
             "latitude": "43.615663",
             "longitude": "1.436756",
             "complements": {
@@ -2342,9 +2332,7 @@
                 "1911"
               ],
               "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            }
           }
         ],
         "nombreEtablissements": 72,
@@ -2361,6 +2349,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00016",
@@ -2376,7 +2365,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "41",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "43.212966",
           "longitude": "2.357944",
           "complements": {
@@ -2391,9 +2380,7 @@
               "1911"
             ],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -2412,6 +2399,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00016",
@@ -2427,7 +2415,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "41",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "43.212966",
               "longitude": "2.357944",
               "complements": {
@@ -2442,9 +2430,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -2455,6 +2441,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00016",
@@ -2470,7 +2457,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "41",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "43.212966",
               "longitude": "2.357944",
               "complements": {
@@ -2485,9 +2472,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -2540,8 +2525,8 @@
             {
               "sexe": "M",
               "nom": "OMS",
-              "prenom": "Jean-pierre",
-              "prenoms": "Jean-pierre",
+              "prenom": "Jean-Pierre",
+              "prenoms": "Jean-Pierre",
               "role": null,
               "dateNaissancePartial": "1956-03",
               "lieuNaissance": ""
@@ -2585,8 +2570,8 @@
             {
               "sexe": "M",
               "nom": "PISTRE",
-              "prenom": "Jean-claude",
-              "prenoms": "Jean-claude",
+              "prenom": "Jean-Claude",
+              "prenoms": "Jean-Claude",
               "role": null,
               "dateNaissancePartial": "1950-05",
               "lieuNaissance": ""
@@ -2693,8 +2678,8 @@
             {
               "sexe": "M",
               "nom": "AUDIER",
-              "prenom": "Jean-bernard",
-              "prenoms": "Jean-bernard",
+              "prenom": "Jean-Bernard",
+              "prenoms": "Jean-Bernard",
               "role": null,
               "dateNaissancePartial": "1954-09",
               "lieuNaissance": ""
@@ -2720,8 +2705,8 @@
             {
               "sexe": "M",
               "nom": "BELMAS",
-              "prenom": "Jean-claude",
-              "prenoms": "Jean-claude",
+              "prenom": "Jean-Claude",
+              "prenoms": "Jean-Claude",
               "role": null,
               "dateNaissancePartial": "1952-08",
               "lieuNaissance": ""
@@ -2729,8 +2714,8 @@
             {
               "sexe": "F",
               "nom": "BERNARD",
-              "prenom": "Marie-christine",
-              "prenoms": "Marie-christine",
+              "prenom": "Marie-Christine",
+              "prenoms": "Marie-Christine",
               "role": null,
               "dateNaissancePartial": "1953-01",
               "lieuNaissance": ""
@@ -2774,8 +2759,8 @@
             {
               "sexe": "M",
               "nom": "BÈS",
-              "prenom": "Jean-louis",
-              "prenoms": "Jean-louis",
+              "prenom": "Jean-Louis",
+              "prenoms": "Jean-Louis",
               "role": null,
               "dateNaissancePartial": "1964-11",
               "lieuNaissance": ""
@@ -2819,8 +2804,8 @@
             {
               "sexe": "M",
               "nom": "DUTHU",
-              "prenom": "Jean-luc",
-              "prenoms": "Jean-luc",
+              "prenom": "Jean-Luc",
+              "prenoms": "Jean-Luc",
               "role": null,
               "dateNaissancePartial": "1962-05",
               "lieuNaissance": ""
@@ -2927,8 +2912,8 @@
             {
               "sexe": "M",
               "nom": "LECINA",
-              "prenom": "Jean-pierre",
-              "prenoms": "Jean-pierre",
+              "prenom": "Jean-Pierre",
+              "prenoms": "Jean-Pierre",
               "role": null,
               "dateNaissancePartial": "1965-12",
               "lieuNaissance": ""
@@ -2954,8 +2939,8 @@
             {
               "sexe": "F",
               "nom": "MIGNOT-SAMITIER",
-              "prenom": "Marie-christine",
-              "prenoms": "Marie-christine",
+              "prenom": "Marie-Christine",
+              "prenoms": "Marie-Christine",
               "role": null,
               "dateNaissancePartial": "1949-04",
               "lieuNaissance": ""
@@ -2972,8 +2957,8 @@
             {
               "sexe": "F",
               "nom": "MONTUSSAC",
-              "prenom": "Marie-aude",
-              "prenoms": "Marie-aude",
+              "prenom": "Marie-Aude",
+              "prenoms": "Marie-Aude",
               "role": null,
               "dateNaissancePartial": "1970-03",
               "lieuNaissance": ""
@@ -3044,8 +3029,8 @@
             {
               "sexe": "M",
               "nom": "BERNÈDE",
-              "prenom": "Jean-paul",
-              "prenoms": "Jean-paul",
+              "prenom": "Jean-Paul",
+              "prenoms": "Jean-Paul",
               "role": null,
               "dateNaissancePartial": "1956-02",
               "lieuNaissance": ""
@@ -3080,8 +3065,8 @@
             {
               "sexe": "M",
               "nom": "BUSQUE",
-              "prenom": "Emile-raphael",
-              "prenoms": "Emile-raphael",
+              "prenom": "Emile-Raphael",
+              "prenoms": "Emile-Raphael",
               "role": null,
               "dateNaissancePartial": "1946-10",
               "lieuNaissance": ""
@@ -3098,8 +3083,8 @@
             {
               "sexe": "F",
               "nom": "GAUDAN",
-              "prenom": "Marie-pierre",
-              "prenoms": "Marie-pierre",
+              "prenom": "Marie-Pierre",
+              "prenoms": "Marie-Pierre",
               "role": null,
               "dateNaissancePartial": "1967-07",
               "lieuNaissance": ""
@@ -3107,8 +3092,8 @@
             {
               "sexe": "M",
               "nom": "JUSTE",
-              "prenom": "Jean-françois",
-              "prenoms": "Jean-françois",
+              "prenom": "Jean-François",
+              "prenoms": "Jean-François",
               "role": null,
               "dateNaissancePartial": "1952-06",
               "lieuNaissance": ""
@@ -3116,8 +3101,8 @@
             {
               "sexe": "M",
               "nom": "GUICHOU",
-              "prenom": "Jean-régis",
-              "prenoms": "Jean-régis",
+              "prenom": "Jean-Régis",
+              "prenoms": "Jean-Régis",
               "role": "11eme Vice-président du conseil communautaire",
               "dateNaissancePartial": "1960-01",
               "lieuNaissance": ""
@@ -3134,8 +3119,8 @@
             {
               "sexe": "M",
               "nom": "AGUILHON",
-              "prenom": "Jean-louis",
-              "prenoms": "Jean-louis",
+              "prenom": "Jean-Louis",
+              "prenoms": "Jean-Louis",
               "role": null,
               "dateNaissancePartial": "1956-09",
               "lieuNaissance": ""
@@ -3206,8 +3191,8 @@
             {
               "sexe": "M",
               "nom": "JORDY",
-              "prenom": "Jean-marie",
-              "prenoms": "Jean-marie",
+              "prenom": "Jean-Marie",
+              "prenoms": "Jean-Marie",
               "role": null,
               "dateNaissancePartial": "1950-10",
               "lieuNaissance": ""
@@ -3269,8 +3254,8 @@
             {
               "sexe": "M",
               "nom": "PELIX",
-              "prenom": "Jean-pierre",
-              "prenoms": "Jean-pierre",
+              "prenom": "Jean-Pierre",
+              "prenoms": "Jean-Pierre",
               "role": null,
               "dateNaissancePartial": "1950-03",
               "lieuNaissance": ""
@@ -3449,8 +3434,8 @@
             {
               "sexe": "M",
               "nom": "POUZENS",
-              "prenom": "Jean-paul",
-              "prenoms": "Jean-paul",
+              "prenom": "Jean-Paul",
+              "prenoms": "Jean-Paul",
               "role": null,
               "dateNaissancePartial": "1957-01",
               "lieuNaissance": ""
@@ -3476,8 +3461,8 @@
             {
               "sexe": "M",
               "nom": "JEAN",
-              "prenom": "Jean-michel",
-              "prenoms": "Jean-michel",
+              "prenom": "Jean-Michel",
+              "prenoms": "Jean-Michel",
               "role": null,
               "dateNaissancePartial": "1954-06",
               "lieuNaissance": ""
@@ -3512,8 +3497,8 @@
             {
               "sexe": "M",
               "nom": "SAÏSSET",
-              "prenom": "Jean-françois",
-              "prenoms": "Jean-françois",
+              "prenom": "Jean-François",
+              "prenoms": "Jean-François",
               "role": null,
               "dateNaissancePartial": "1956-10",
               "lieuNaissance": ""
@@ -3602,8 +3587,8 @@
             {
               "sexe": "F",
               "nom": "CAZEAUX",
-              "prenom": "Marie-josé",
-              "prenoms": "Marie-josé",
+              "prenom": "Marie-José",
+              "prenoms": "Marie-José",
               "role": null,
               "dateNaissancePartial": "1948-12",
               "lieuNaissance": ""
@@ -3611,8 +3596,8 @@
             {
               "sexe": "M",
               "nom": "ARIBAUD",
-              "prenom": "Jean-louis",
-              "prenoms": "Jean-louis",
+              "prenom": "Jean-Louis",
+              "prenoms": "Jean-Louis",
               "role": null,
               "dateNaissancePartial": "1951-12",
               "lieuNaissance": ""
@@ -3638,8 +3623,8 @@
             {
               "sexe": "M",
               "nom": "BIZOT",
-              "prenom": "Jean-louis",
-              "prenoms": "Jean-louis",
+              "prenom": "Jean-Louis",
+              "prenoms": "Jean-Louis",
               "role": null,
               "dateNaissancePartial": "1959-07",
               "lieuNaissance": ""
@@ -3692,8 +3677,8 @@
           ]
         },
         "listeIdcc": [
-          "9999",
-          "5021"
+          "5021",
+          "9999"
         ],
         "immatriculation": null,
         "matchingEtablissements": [
@@ -3704,6 +3689,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
+            "ancienSiege": false,
             "enseigne": "",
             "denomination": null,
             "nic": "00016",
@@ -3719,7 +3705,7 @@
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
             "trancheEffectif": "41",
-            "libelleTrancheEffectif": "",
+            "anneeTrancheEffectif": "2022",
             "latitude": "43.212966",
             "longitude": "2.357944",
             "complements": {
@@ -3734,13 +3720,804 @@
                 "1911"
               ],
               "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            }
           }
         ],
         "nombreEtablissements": 26,
         "nombreEtablissementsOuverts": 25,
+        "dirigeants": []
+      },
+      {
+        "siren": "241700640",
+        "oldSiren": "241700640",
+        "siege": {
+          "siren": "241700640",
+          "siret": "24170064000048",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "ancienSiege": false,
+          "enseigne": "",
+          "denomination": null,
+          "nic": "00048",
+          "dateCreation": "1999-11-02",
+          "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
+          "dateDebutActivite": "2008-01-01",
+          "dateFermeture": "",
+          "adresse": "107 AVENUE DE ROCHEFORT 17200 ROYAN",
+          "adressePostale": "107 AVENUE DE ROCHEFORT 17200 ROYAN",
+          "codePostal": "17200",
+          "commune": "ROYAN",
+          "activitePrincipale": "84.11Z",
+          "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+          "trancheEffectif": "22",
+          "anneeTrancheEffectif": "2022",
+          "latitude": "45.638664",
+          "longitude": "-1.025321",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "5021"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [
+              "1911"
+            ],
+            "idUai": []
+          }
+        },
+        "tva": null,
+        "anciensSiegesSirets": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "AGGLOMERATION ROYAN ATLANTIQUE",
+        "chemin": "agglomeration-royan-atlantique-241700640",
+        "natureJuridique": "7348",
+        "libelleNatureJuridique": "Communauté d'agglomération",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "241700640",
+              "siret": "24170064000048",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00048",
+              "dateCreation": "1999-11-02",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2008-01-01",
+              "dateFermeture": "",
+              "adresse": "107 AVENUE DE ROCHEFORT 17200 ROYAN",
+              "adressePostale": "107 AVENUE DE ROCHEFORT 17200 ROYAN",
+              "codePostal": "17200",
+              "commune": "ROYAN",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "22",
+              "anneeTrancheEffectif": "2022",
+              "latitude": "45.638664",
+              "longitude": "-1.025321",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              }
+            }
+          ],
+          "open": [
+            {
+              "siren": "241700640",
+              "siret": "24170064000048",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00048",
+              "dateCreation": "1999-11-02",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2008-01-01",
+              "dateFermeture": "",
+              "adresse": "107 AVENUE DE ROCHEFORT 17200 ROYAN",
+              "adressePostale": "107 AVENUE DE ROCHEFORT 17200 ROYAN",
+              "codePostal": "17200",
+              "commune": "ROYAN",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "22",
+              "anneeTrancheEffectif": "2022",
+              "latitude": "45.638664",
+              "longitude": "-1.025321",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              }
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 20,
+          "nombreEtablissements": 26,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "84.11Z",
+        "libelleActivitePrincipale": "Administration publique générale",
+        "dateCreation": "1995-12-28",
+        "dateFermeture": "",
+        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
+        "dateMiseAJourInsee": "2024-03-22T14:26:06",
+        "dateMiseAJourInpi": "2024-09-21T03:34:50",
+        "dateMiseAJourIG": "",
+        "dateDebutActivite": "",
+        "trancheEffectif": "31",
+        "anneeCategorieEntreprise": "2022",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2022",
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": true,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": true,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": false,
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": "241700640",
+          "codeInsee": null,
+          "niveau": "epci",
+          "elus": [
+            {
+              "sexe": "F",
+              "nom": "BOULON",
+              "prenom": "Joëlle",
+              "prenoms": "Joëlle",
+              "role": null,
+              "dateNaissancePartial": "1952-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MADRANGES",
+              "prenom": "Gilles",
+              "prenoms": "Gilles",
+              "role": null,
+              "dateNaissancePartial": "1954-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "PERAUDEAU",
+              "prenom": "Marie-Christine",
+              "prenoms": "Marie-Christine",
+              "role": null,
+              "dateNaissancePartial": "1964-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MAIGRE",
+              "prenom": "Robert",
+              "prenoms": "Robert",
+              "role": null,
+              "dateNaissancePartial": "1954-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "PINET",
+              "prenom": "Nelly",
+              "prenoms": "Nelly",
+              "role": null,
+              "dateNaissancePartial": "1948-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GROCH",
+              "prenom": "Marie-Noëlle",
+              "prenoms": "Marie-Noëlle",
+              "role": null,
+              "dateNaissancePartial": "1958-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LYS",
+              "prenom": "Jacques",
+              "prenoms": "Jacques",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1956-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GIRERD",
+              "prenom": "Maurice",
+              "prenoms": "Maurice",
+              "role": null,
+              "dateNaissancePartial": "1942-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BAZIN",
+              "prenom": "Angèle",
+              "prenoms": "Angèle",
+              "role": null,
+              "dateNaissancePartial": "1978-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SAINTLOS",
+              "prenom": "Thierry",
+              "prenoms": "Thierry",
+              "role": null,
+              "dateNaissancePartial": "1968-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DUJEAN",
+              "prenom": "Bruno",
+              "prenoms": "Bruno",
+              "role": null,
+              "dateNaissancePartial": "1956-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MARTIN",
+              "prenom": "Olivier",
+              "prenoms": "Olivier",
+              "role": null,
+              "dateNaissancePartial": "1966-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BORDAGE",
+              "prenom": "Graziella",
+              "prenoms": "Graziella",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1963-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "PORTIER",
+              "prenom": "Myriam",
+              "prenoms": "Myriam",
+              "role": null,
+              "dateNaissancePartial": "1960-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DURET",
+              "prenom": "Frédéric",
+              "prenoms": "Frédéric",
+              "role": null,
+              "dateNaissancePartial": "1970-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BARRAUD",
+              "prenom": "Vincent",
+              "prenoms": "Vincent",
+              "role": "Président du conseil communautaire",
+              "dateNaissancePartial": "1958-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LAUMONIER",
+              "prenom": "Bernard",
+              "prenoms": "Bernard",
+              "role": null,
+              "dateNaissancePartial": "1950-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "POURPOINT",
+              "prenom": "Bernard",
+              "prenoms": "Bernard",
+              "role": null,
+              "dateNaissancePartial": "1952-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BASCLE",
+              "prenom": "Marie",
+              "prenoms": "Marie",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1960-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "CANOVA",
+              "prenom": "Annick",
+              "prenoms": "Annick",
+              "role": null,
+              "dateNaissancePartial": "1953-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "RENOUX",
+              "prenom": "Eric",
+              "prenoms": "Eric",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1975-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BANETTE",
+              "prenom": "Pascal",
+              "prenoms": "Pascal",
+              "role": null,
+              "dateNaissancePartial": "1957-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "FRIBOURG",
+              "prenom": "Françoise",
+              "prenoms": "Françoise",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1955-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CRETIN",
+              "prenom": "Emmanuel",
+              "prenoms": "Emmanuel",
+              "role": null,
+              "dateNaissancePartial": "1967-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "COTIER",
+              "prenom": "Stéphane",
+              "prenoms": "Stéphane",
+              "role": null,
+              "dateNaissancePartial": "1971-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BERGEROT",
+              "prenom": "Dominique",
+              "prenoms": "Dominique",
+              "role": null,
+              "dateNaissancePartial": "1951-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CAU",
+              "prenom": "Philippe",
+              "prenoms": "Philippe",
+              "role": null,
+              "dateNaissancePartial": "1963-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "CIRAUD-LANOUE",
+              "prenom": "Eliane",
+              "prenoms": "Eliane",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1950-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CUSSAC",
+              "prenom": "Philippe",
+              "prenoms": "Philippe",
+              "role": "12eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1956-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DAVID",
+              "prenom": "Nadine",
+              "prenoms": "Nadine",
+              "role": null,
+              "dateNaissancePartial": "1960-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DURESSAY",
+              "prenom": "Julien",
+              "prenoms": "Julien",
+              "role": null,
+              "dateNaissancePartial": "1977-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FILOCHE",
+              "prenom": "Gérard",
+              "prenoms": "Gérard",
+              "role": null,
+              "dateNaissancePartial": "1954-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GACHET BARRIÈRE",
+              "prenom": "Dominique",
+              "prenoms": "Dominique",
+              "role": null,
+              "dateNaissancePartial": "1958-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GUIARD",
+              "prenom": "Jacques",
+              "prenoms": "Jacques",
+              "role": null,
+              "dateNaissancePartial": "1949-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "ISENDICK MALTERRE",
+              "prenom": "Liliane",
+              "prenoms": "Liliane",
+              "role": null,
+              "dateNaissancePartial": "1950-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LAFARIE",
+              "prenom": "Thomas",
+              "prenoms": "Thomas",
+              "role": null,
+              "dateNaissancePartial": "1980-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MARENGO",
+              "prenom": "Patrick",
+              "prenoms": "Patrick",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1952-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MOALLIC",
+              "prenom": "Denis",
+              "prenoms": "Denis",
+              "role": null,
+              "dateNaissancePartial": "1948-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "ROGISTER",
+              "prenom": "Thierry",
+              "prenoms": "Thierry",
+              "role": null,
+              "dateNaissancePartial": "1949-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SIMONNET",
+              "prenom": "Didier",
+              "prenoms": "Didier",
+              "role": null,
+              "dateNaissancePartial": "1959-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GOUGNON",
+              "prenom": "Lysiane",
+              "prenoms": "Lysiane",
+              "role": null,
+              "dateNaissancePartial": "1956-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DOHIN-PROST",
+              "prenom": "Gwennaëlle",
+              "prenoms": "Gwennaëlle",
+              "role": null,
+              "dateNaissancePartial": "1985-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FRANQUE DE LUXEMBOURG",
+              "prenom": "Dominique",
+              "prenoms": "Dominique",
+              "role": null,
+              "dateNaissancePartial": "1956-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "NOISEUX",
+              "prenom": "Corinne",
+              "prenoms": "Corinne",
+              "role": null,
+              "dateNaissancePartial": "1966-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "RICHAUD",
+              "prenom": "François",
+              "prenoms": "François",
+              "role": "11eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1943-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SALLÉ",
+              "prenom": "Pierre",
+              "prenoms": "Pierre",
+              "role": null,
+              "dateNaissancePartial": "1946-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BAUDIN",
+              "prenom": "Claude",
+              "prenoms": "Claude",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1947-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "PRUD'HOMME",
+              "prenom": "Isabelle",
+              "prenoms": "Isabelle",
+              "role": null,
+              "dateNaissancePartial": "1960-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "ROY",
+              "prenom": "Serge",
+              "prenoms": "Serge",
+              "role": null,
+              "dateNaissancePartial": "1950-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BIZET",
+              "prenom": "Isabelle",
+              "prenoms": "Isabelle",
+              "role": null,
+              "dateNaissancePartial": "1966-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "PITARD",
+              "prenom": "Christian",
+              "prenoms": "Christian",
+              "role": null,
+              "dateNaissancePartial": "1953-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "ADOLPHE",
+              "prenom": "Mariette",
+              "prenoms": "Mariette",
+              "role": null,
+              "dateNaissancePartial": "1957-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DANIEL",
+              "prenom": "Jean-François",
+              "prenoms": "Jean-François",
+              "role": null,
+              "dateNaissancePartial": "1959-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DORIDOT",
+              "prenom": "Jean-Christophe",
+              "prenoms": "Jean-Christophe",
+              "role": null,
+              "dateNaissancePartial": "1966-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FERCHAUD",
+              "prenom": "Pascal",
+              "prenoms": "Pascal",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1958-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "RATISKOL",
+              "prenom": "Elisa",
+              "prenoms": "Elisa",
+              "role": null,
+              "dateNaissancePartial": "1980-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "CARRÉ",
+              "prenom": "Michele",
+              "prenoms": "Michele",
+              "role": null,
+              "dateNaissancePartial": "1949-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GRASSET",
+              "prenom": "Alain",
+              "prenoms": "Alain",
+              "role": null,
+              "dateNaissancePartial": "1951-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MATET",
+              "prenom": "Nicolas",
+              "prenoms": "Nicolas",
+              "role": null,
+              "dateNaissancePartial": "1959-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "OSTA AMIGO",
+              "prenom": "Laurence",
+              "prenoms": "Laurence",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1965-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LIBELLI",
+              "prenom": "Patrice",
+              "prenoms": "Patrice",
+              "role": null,
+              "dateNaissancePartial": "1959-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "PUGENS",
+              "prenom": "Véronique",
+              "prenoms": "Véronique",
+              "role": null,
+              "dateNaissancePartial": "1954-07",
+              "lieuNaissance": ""
+            }
+          ]
+        },
+        "listeIdcc": [
+          "5021"
+        ],
+        "immatriculation": null,
+        "matchingEtablissements": [
+          {
+            "siren": "241700640",
+            "siret": "24170064000048",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "ancienSiege": false,
+            "enseigne": "",
+            "denomination": null,
+            "nic": "00048",
+            "dateCreation": "1999-11-02",
+            "dateDerniereMiseAJour": "",
+            "dateMiseAJourInsee": "",
+            "dateDebutActivite": "2008-01-01",
+            "dateFermeture": "",
+            "adresse": "107 AVENUE DE ROCHEFORT 17200 ROYAN",
+            "adressePostale": "107 AVENUE DE ROCHEFORT 17200 ROYAN",
+            "codePostal": "17200",
+            "commune": "ROYAN",
+            "activitePrincipale": "84.11Z",
+            "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+            "trancheEffectif": "22",
+            "anneeTrancheEffectif": "2022",
+            "latitude": "45.638664",
+            "longitude": "-1.025321",
+            "complements": {
+              "estEntrepreneurIndividuel": false,
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "5021"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [
+                "1911"
+              ],
+              "idUai": []
+            }
+          }
+        ],
+        "nombreEtablissements": 26,
+        "nombreEtablissementsOuverts": 20,
         "dirigeants": []
       },
       {
@@ -3753,6 +4530,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00014",
@@ -3768,7 +4546,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "41",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "45.6586",
           "longitude": "0.160605",
           "complements": {
@@ -3783,9 +4561,7 @@
               "1911"
             ],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -3804,6 +4580,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00014",
@@ -3819,7 +4596,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "41",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "45.6586",
               "longitude": "0.160605",
               "complements": {
@@ -3834,9 +4611,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -3847,6 +4622,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00014",
@@ -3862,7 +4638,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "41",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "45.6586",
               "longitude": "0.160605",
               "complements": {
@@ -3877,9 +4653,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -4049,8 +4823,8 @@
             {
               "sexe": "M",
               "nom": "POUSSET",
-              "prenom": "Jean-philippe",
-              "prenoms": "Jean-philippe",
+              "prenom": "Jean-Philippe",
+              "prenoms": "Jean-Philippe",
               "role": null,
               "dateNaissancePartial": "1968-07",
               "lieuNaissance": ""
@@ -4076,8 +4850,8 @@
             {
               "sexe": "F",
               "nom": "WILLAUMEZ-GUILLEMETEAU",
-              "prenom": "Anne-laure",
-              "prenoms": "Anne-laure",
+              "prenom": "Anne-Laure",
+              "prenoms": "Anne-Laure",
               "role": "Vice-président du conseil communautaire",
               "dateNaissancePartial": "1969-10",
               "lieuNaissance": ""
@@ -4112,8 +4886,8 @@
             {
               "sexe": "M",
               "nom": "COURARI",
-              "prenom": "Jean-claude",
-              "prenoms": "Jean-claude",
+              "prenom": "Jean-Claude",
+              "prenoms": "Jean-Claude",
               "role": null,
               "dateNaissancePartial": "1949-09",
               "lieuNaissance": ""
@@ -4184,8 +4958,8 @@
             {
               "sexe": "M",
               "nom": "DAURÉ",
-              "prenom": "Jean-françois",
-              "prenoms": "Jean-françois",
+              "prenom": "Jean-François",
+              "prenoms": "Jean-François",
               "role": null,
               "dateNaissancePartial": "1958-09",
               "lieuNaissance": ""
@@ -4409,8 +5183,8 @@
             {
               "sexe": "M",
               "nom": "FOURNIÉ",
-              "prenom": "Jean-jacques",
-              "prenoms": "Jean-jacques",
+              "prenom": "Jean-Jacques",
+              "prenoms": "Jean-Jacques",
               "role": null,
               "dateNaissancePartial": "1966-08",
               "lieuNaissance": ""
@@ -4436,8 +5210,8 @@
             {
               "sexe": "M",
               "nom": "MARTIAL",
-              "prenom": "Jean-luc",
-              "prenoms": "Jean-luc",
+              "prenom": "Jean-Luc",
+              "prenoms": "Jean-Luc",
               "role": null,
               "dateNaissancePartial": "1955-12",
               "lieuNaissance": ""
@@ -4544,8 +5318,8 @@
           ]
         },
         "listeIdcc": [
-          "5021",
-          "1486"
+          "1486",
+          "5021"
         ],
         "immatriculation": null,
         "matchingEtablissements": [
@@ -4556,6 +5330,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
+            "ancienSiege": false,
             "enseigne": "",
             "denomination": null,
             "nic": "00014",
@@ -4571,7 +5346,7 @@
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
             "trancheEffectif": "41",
-            "libelleTrancheEffectif": "",
+            "anneeTrancheEffectif": "2022",
             "latitude": "45.6586",
             "longitude": "0.160605",
             "complements": {
@@ -4586,9 +5361,7 @@
                 "1911"
               ],
               "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            }
           }
         ],
         "nombreEtablissements": 19,
@@ -4605,6 +5378,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00012",
@@ -4620,7 +5394,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "21",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "44.357175",
           "longitude": "2.02648",
           "complements": {
@@ -4635,9 +5409,7 @@
               "1911"
             ],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -4656,6 +5428,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00012",
@@ -4671,7 +5444,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "21",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "44.357175",
               "longitude": "2.02648",
               "complements": {
@@ -4686,9 +5459,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -4699,6 +5470,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00012",
@@ -4714,7 +5486,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "21",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "44.357175",
               "longitude": "2.02648",
               "complements": {
@@ -4729,9 +5501,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -4784,8 +5554,8 @@
             {
               "sexe": "F",
               "nom": "DOUCET",
-              "prenom": "Marie-josé",
-              "prenoms": "Marie-josé",
+              "prenom": "Marie-José",
+              "prenoms": "Marie-José",
               "role": null,
               "dateNaissancePartial": "1966-06",
               "lieuNaissance": ""
@@ -4793,8 +5563,8 @@
             {
               "sexe": "F",
               "nom": "DE ANDRADE",
-              "prenom": "Marie-isabelle",
-              "prenoms": "Marie-isabelle",
+              "prenom": "Marie-Isabelle",
+              "prenoms": "Marie-Isabelle",
               "role": null,
               "dateNaissancePartial": "1970-03",
               "lieuNaissance": ""
@@ -5027,8 +5797,8 @@
             {
               "sexe": "M",
               "nom": "BOUYSSIÉ",
-              "prenom": "Jean-michel",
-              "prenoms": "Jean-michel",
+              "prenom": "Jean-Michel",
+              "prenoms": "Jean-Michel",
               "role": "Vice-président du conseil communautaire",
               "dateNaissancePartial": "1961-09",
               "lieuNaissance": ""
@@ -5045,8 +5815,8 @@
             {
               "sexe": "M",
               "nom": "BUGAREL",
-              "prenom": "Jean-marie",
-              "prenoms": "Jean-marie",
+              "prenom": "Jean-Marie",
+              "prenoms": "Jean-Marie",
               "role": null,
               "dateNaissancePartial": "1980-07",
               "lieuNaissance": ""
@@ -5063,8 +5833,8 @@
             {
               "sexe": "M",
               "nom": "CARRIÉ",
-              "prenom": "Jean-claude",
-              "prenoms": "Jean-claude",
+              "prenom": "Jean-Claude",
+              "prenoms": "Jean-Claude",
               "role": "Vice-président du conseil communautaire",
               "dateNaissancePartial": "1972-07",
               "lieuNaissance": ""
@@ -5144,8 +5914,8 @@
             {
               "sexe": "M",
               "nom": "ORCIBAL",
-              "prenom": "Jean-sébastien",
-              "prenoms": "Jean-sébastien",
+              "prenom": "Jean-Sébastien",
+              "prenoms": "Jean-Sébastien",
               "role": "Vice-président du conseil communautaire",
               "dateNaissancePartial": "1979-01",
               "lieuNaissance": ""
@@ -5216,8 +5986,8 @@
             {
               "sexe": "M",
               "nom": "MASBOU",
-              "prenom": "Jean-pierre",
-              "prenoms": "Jean-pierre",
+              "prenom": "Jean-Pierre",
+              "prenoms": "Jean-Pierre",
               "role": "Vice-président du conseil communautaire",
               "dateNaissancePartial": "1956-07",
               "lieuNaissance": ""
@@ -5243,8 +6013,8 @@
             {
               "sexe": "M",
               "nom": "RICHER",
-              "prenom": "Jean-marc",
-              "prenoms": "Jean-marc",
+              "prenom": "Jean-Marc",
+              "prenoms": "Jean-Marc",
               "role": null,
               "dateNaissancePartial": "1954-02",
               "lieuNaissance": ""
@@ -5263,6 +6033,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
+            "ancienSiege": false,
             "enseigne": "",
             "denomination": null,
             "nic": "00012",
@@ -5278,7 +6049,7 @@
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
             "trancheEffectif": "21",
-            "libelleTrancheEffectif": "",
+            "anneeTrancheEffectif": "2022",
             "latitude": "44.357175",
             "longitude": "2.02648",
             "complements": {
@@ -5293,9 +6064,7 @@
                 "1911"
               ],
               "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            }
           }
         ],
         "nombreEtablissements": 13,
@@ -5312,6 +6081,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00110",
@@ -5327,7 +6097,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "22",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "47.374716",
           "longitude": "-1.646571",
           "complements": {
@@ -5344,9 +6114,7 @@
               "1911"
             ],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -5365,6 +6133,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00110",
@@ -5380,7 +6149,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "22",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "47.374716",
               "longitude": "-1.646571",
               "complements": {
@@ -5397,9 +6166,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -5410,6 +6177,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00110",
@@ -5425,7 +6193,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "22",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "47.374716",
               "longitude": "-1.646571",
               "complements": {
@@ -5442,9 +6210,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -5578,8 +6344,8 @@
             {
               "sexe": "M",
               "nom": "JOUTARD",
-              "prenom": "Jean-pierre",
-              "prenoms": "Jean-pierre",
+              "prenom": "Jean-Pierre",
+              "prenoms": "Jean-Pierre",
               "role": null,
               "dateNaissancePartial": "1956-07",
               "lieuNaissance": ""
@@ -5650,8 +6416,8 @@
             {
               "sexe": "M",
               "nom": "NAUD",
-              "prenom": "Jean-paul",
-              "prenoms": "Jean-paul",
+              "prenom": "Jean-Paul",
+              "prenoms": "Jean-Paul",
               "role": null,
               "dateNaissancePartial": "1959-12",
               "lieuNaissance": ""
@@ -5659,8 +6425,8 @@
             {
               "sexe": "M",
               "nom": "BESNIER",
-              "prenom": "Jean-luc",
-              "prenoms": "Jean-luc",
+              "prenom": "Jean-Luc",
+              "prenoms": "Jean-Luc",
               "role": null,
               "dateNaissancePartial": "1963-05",
               "lieuNaissance": ""
@@ -5695,8 +6461,8 @@
             {
               "sexe": "M",
               "nom": "CHARRIER",
-              "prenom": "Jean-françois",
-              "prenoms": "Jean-françois",
+              "prenom": "Jean-François",
+              "prenoms": "Jean-François",
               "role": null,
               "dateNaissancePartial": "1964-06",
               "lieuNaissance": ""
@@ -5731,8 +6497,8 @@
             {
               "sexe": "F",
               "nom": "COUFFY-MORICE",
-              "prenom": "Marie-laure",
-              "prenoms": "Marie-laure",
+              "prenom": "Marie-Laure",
+              "prenoms": "Marie-Laure",
               "role": null,
               "dateNaissancePartial": "1966-05",
               "lieuNaissance": ""
@@ -5740,8 +6506,8 @@
             {
               "sexe": "F",
               "nom": "GAILLARD",
-              "prenom": "Anne-marie",
-              "prenoms": "Anne-marie",
+              "prenom": "Anne-Marie",
+              "prenoms": "Anne-Marie",
               "role": null,
               "dateNaissancePartial": "1949-07",
               "lieuNaissance": ""
@@ -5832,6 +6598,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
+            "ancienSiege": false,
             "enseigne": "",
             "denomination": null,
             "nic": "00110",
@@ -5847,7 +6614,7 @@
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
             "trancheEffectif": "22",
-            "libelleTrancheEffectif": "",
+            "anneeTrancheEffectif": "2022",
             "latitude": "47.374716",
             "longitude": "-1.646571",
             "complements": {
@@ -5864,9 +6631,7 @@
                 "1911"
               ],
               "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            }
           }
         ],
         "nombreEtablissements": 28,
@@ -5883,6 +6648,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00026",
@@ -5898,7 +6664,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "22",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "45.936181",
           "longitude": "-1.303525",
           "complements": {
@@ -5913,9 +6679,7 @@
               "1911"
             ],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -5934,6 +6698,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00026",
@@ -5949,7 +6714,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "22",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "45.936181",
               "longitude": "-1.303525",
               "complements": {
@@ -5964,9 +6729,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -5977,6 +6740,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00026",
@@ -5992,7 +6756,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "22",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "45.936181",
               "longitude": "-1.303525",
               "complements": {
@@ -6007,9 +6771,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -6287,8 +7049,8 @@
             {
               "sexe": "F",
               "nom": "VILLAUTREIX",
-              "prenom": "Marie-josée",
-              "prenoms": "Marie-josée",
+              "prenom": "Marie-Josée",
+              "prenoms": "Marie-Josée",
               "role": "Vice-président du conseil communautaire",
               "dateNaissancePartial": "1963-05",
               "lieuNaissance": ""
@@ -6344,6 +7106,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
+            "ancienSiege": false,
             "enseigne": "",
             "denomination": null,
             "nic": "00026",
@@ -6359,7 +7122,7 @@
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
             "trancheEffectif": "22",
-            "libelleTrancheEffectif": "",
+            "anneeTrancheEffectif": "2022",
             "latitude": "45.936181",
             "longitude": "-1.303525",
             "complements": {
@@ -6374,9 +7137,7 @@
                 "1911"
               ],
               "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            }
           }
         ],
         "nombreEtablissements": 11,
@@ -6393,6 +7154,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00096",
@@ -6408,7 +7170,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "21",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "47.357427",
           "longitude": "1.747963",
           "complements": {
@@ -6423,9 +7185,7 @@
               "1911"
             ],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -6444,6 +7204,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00096",
@@ -6459,7 +7220,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "21",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "47.357427",
               "longitude": "1.747963",
               "complements": {
@@ -6474,9 +7235,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -6487,6 +7246,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00096",
@@ -6502,7 +7262,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "21",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "47.357427",
               "longitude": "1.747963",
               "complements": {
@@ -6517,9 +7277,7 @@
                   "1911"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -6534,7 +7292,7 @@
         "dateCreation": "2008-12-29",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-11-15T10:45:32.324",
+        "dateMiseAJourInsee": "2024-11-15T10:45:32",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -6979,6 +7737,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
+            "ancienSiege": false,
             "enseigne": "",
             "denomination": null,
             "nic": "00096",
@@ -6994,7 +7753,7 @@
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
             "trancheEffectif": "21",
-            "libelleTrancheEffectif": "",
+            "anneeTrancheEffectif": "2022",
             "latitude": "47.357427",
             "longitude": "1.747963",
             "complements": {
@@ -7009,747 +7768,11 @@
                 "1911"
               ],
               "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
+            }
           }
         ],
         "nombreEtablissements": 11,
         "nombreEtablissementsOuverts": 9,
-        "dirigeants": []
-      },
-      {
-        "siren": "243400769",
-        "oldSiren": "243400769",
-        "siege": {
-          "siren": "243400769",
-          "siret": "24340076900093",
-          "oldSiret": "",
-          "etatAdministratif": "en activité",
-          "statutDiffusion": "diffusible",
-          "estSiege": true,
-          "enseigne": "",
-          "denomination": null,
-          "nic": "00093",
-          "dateCreation": "2011-07-15",
-          "dateDerniereMiseAJour": "",
-          "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2011-07-15",
-          "dateFermeture": "",
-          "adresse": "QUAI OUEST 39 BOULEVARD DE VERDUN 34500 BEZIERS",
-          "adressePostale": "QUAI OUEST 39 BOULEVARD DE VERDUN 34500 BEZIERS",
-          "codePostal": "34500",
-          "commune": "BEZIERS",
-          "activitePrincipale": "84.11Z",
-          "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-          "trancheEffectif": "41",
-          "libelleTrancheEffectif": "",
-          "latitude": "43.336121",
-          "longitude": "3.224549",
-          "complements": {
-            "estEntrepreneurIndividuel": false,
-            "idFiness": [],
-            "idBio": [],
-            "idcc": [
-              "5021"
-            ],
-            "idOrganismeFormation": [],
-            "idRge": [
-              "1911"
-            ],
-            "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
-        },
-        "tva": null,
-        "anciensSiegesSirets": [],
-        "statutDiffusion": "diffusible",
-        "etatAdministratif": "en activité",
-        "nomComplet": "COMMUNAUTE D AGGLOMERATION BEZIERS MEDITERRANEE (CABM)",
-        "chemin": "communaute-d-agglomeration-beziers-mediterranee-cabm-243400769",
-        "natureJuridique": "7348",
-        "libelleNatureJuridique": "Communauté d'agglomération",
-        "etablissements": {
-          "all": [
-            {
-              "siren": "243400769",
-              "siret": "24340076900093",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00093",
-              "dateCreation": "2011-07-15",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2011-07-15",
-              "dateFermeture": "",
-              "adresse": "QUAI OUEST 39 BOULEVARD DE VERDUN 34500 BEZIERS",
-              "adressePostale": "QUAI OUEST 39 BOULEVARD DE VERDUN 34500 BEZIERS",
-              "codePostal": "34500",
-              "commune": "BEZIERS",
-              "activitePrincipale": "84.11Z",
-              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "41",
-              "libelleTrancheEffectif": "",
-              "latitude": "43.336121",
-              "longitude": "3.224549",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "idFiness": [],
-                "idBio": [],
-                "idcc": [
-                  "5021"
-                ],
-                "idOrganismeFormation": [],
-                "idRge": [
-                  "1911"
-                ],
-                "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
-            }
-          ],
-          "open": [
-            {
-              "siren": "243400769",
-              "siret": "24340076900093",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00093",
-              "dateCreation": "2011-07-15",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2011-07-15",
-              "dateFermeture": "",
-              "adresse": "QUAI OUEST 39 BOULEVARD DE VERDUN 34500 BEZIERS",
-              "adressePostale": "QUAI OUEST 39 BOULEVARD DE VERDUN 34500 BEZIERS",
-              "codePostal": "34500",
-              "commune": "BEZIERS",
-              "activitePrincipale": "84.11Z",
-              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "41",
-              "libelleTrancheEffectif": "",
-              "latitude": "43.336121",
-              "longitude": "3.224549",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "idFiness": [],
-                "idBio": [],
-                "idcc": [
-                  "5021"
-                ],
-                "idOrganismeFormation": [],
-                "idRge": [
-                  "1911"
-                ],
-                "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
-            }
-          ],
-          "unknown": [],
-          "closed": [],
-          "nombreEtablissementsOuverts": 8,
-          "nombreEtablissements": 10,
-          "usePagination": false,
-          "currentEtablissementPage": 1
-        },
-        "activitePrincipale": "84.11Z",
-        "libelleActivitePrincipale": "Administration publique générale",
-        "dateCreation": "2001-12-31",
-        "dateFermeture": "",
-        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-09-21T03:34:50",
-        "dateMiseAJourIG": "",
-        "dateDebutActivite": "",
-        "trancheEffectif": "41",
-        "anneeCategorieEntreprise": "2022",
-        "categorieEntreprise": "ETI",
-        "anneeTrancheEffectif": "2022",
-        "complements": {
-          "estBio": false,
-          "estEss": false,
-          "estServicePublic": true,
-          "estEntrepreneurIndividuel": false,
-          "estEntrepreneurSpectacle": true,
-          "statutEntrepreneurSpectacle": "valide",
-          "estFiness": false,
-          "egaproRenseignee": false,
-          "estRge": true,
-          "estOrganismeFormation": false,
-          "estSocieteMission": false,
-          "estQualiopi": false,
-          "estAssociation": false,
-          "estUai": false,
-          "estEntrepriseInclusive": false,
-          "typeEntrepriseInclusive": null
-        },
-        "association": {
-          "idAssociation": null,
-          "data": null
-        },
-        "colter": {
-          "codeColter": "243400769",
-          "codeInsee": null,
-          "niveau": "epci",
-          "elus": [
-            {
-              "sexe": "M",
-              "nom": "PASTOR",
-              "prenom": "Christophe",
-              "prenoms": "Christophe",
-              "role": "8eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1974-11",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BIOLA",
-              "prenom": "Alain",
-              "prenoms": "Alain",
-              "role": "9eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1951-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "ALAMI",
-              "prenom": "Najih",
-              "prenoms": "Najih",
-              "role": null,
-              "dateNaissancePartial": "1980-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "ANDRIEU",
-              "prenom": "Marc",
-              "prenoms": "Marc",
-              "role": null,
-              "dateNaissancePartial": "1969-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "AYCART",
-              "prenom": "Jean-louis",
-              "prenoms": "Jean-louis",
-              "role": null,
-              "dateNaissancePartial": "1960-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BONAMY",
-              "prenom": "Oscar",
-              "prenoms": "Oscar",
-              "role": null,
-              "dateNaissancePartial": "1995-02",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "COSSANGE",
-              "prenom": "Nicolas",
-              "prenoms": "Nicolas",
-              "role": null,
-              "dateNaissancePartial": "1985-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "DE SAINT-PIERRE",
-              "prenom": "Georgia",
-              "prenoms": "Georgia",
-              "role": null,
-              "dateNaissancePartial": "1948-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "FIRMIN",
-              "prenom": "Bénédicte",
-              "prenoms": "Bénédicte",
-              "role": null,
-              "dateNaissancePartial": "1952-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "FORT",
-              "prenom": "Émile",
-              "prenoms": "Émile",
-              "role": null,
-              "dateNaissancePartial": "1944-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "FREY",
-              "prenom": "Alberte",
-              "prenoms": "Alberte",
-              "role": null,
-              "dateNaissancePartial": "1971-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "FUCHS",
-              "prenom": "Alexandra",
-              "prenoms": "Alexandra",
-              "role": null,
-              "dateNaissancePartial": "1988-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "HERAIL",
-              "prenom": "Michel",
-              "prenoms": "Michel",
-              "role": null,
-              "dateNaissancePartial": "1948-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "HUC",
-              "prenom": "Christophe",
-              "prenoms": "Christophe",
-              "role": null,
-              "dateNaissancePartial": "1971-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "LAFARE",
-              "prenom": "Laétitia",
-              "prenoms": "Laétitia",
-              "role": null,
-              "dateNaissancePartial": "1974-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "MARTINEZ",
-              "prenom": "Yvon",
-              "prenoms": "Yvon",
-              "role": null,
-              "dateNaissancePartial": "1957-02",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "MOULIN",
-              "prenom": "Michel",
-              "prenoms": "Michel",
-              "role": null,
-              "dateNaissancePartial": "1945-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "MÉNARD",
-              "prenom": "Emmanuelle",
-              "prenoms": "Emmanuelle",
-              "role": null,
-              "dateNaissancePartial": "1968-08",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "MÉNARD",
-              "prenom": "Robert",
-              "prenoms": "Robert",
-              "role": "Président du conseil communautaire",
-              "dateNaissancePartial": "1953-07",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "NAVARRO",
-              "prenom": "Fanny",
-              "prenoms": "Fanny",
-              "role": null,
-              "dateNaissancePartial": "1978-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "PECH",
-              "prenom": "Aina-marie",
-              "prenoms": "Aina-marie",
-              "role": null,
-              "dateNaissancePartial": "1989-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "PELAEZ",
-              "prenom": "Perrine",
-              "prenoms": "Perrine",
-              "role": null,
-              "dateNaissancePartial": "1984-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "PISSARRO",
-              "prenom": "Élisabeth",
-              "prenoms": "Élisabeth",
-              "role": null,
-              "dateNaissancePartial": "1950-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "RUL",
-              "prenom": "Laurence",
-              "prenoms": "Laurence",
-              "role": null,
-              "dateNaissancePartial": "1985-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "SAEZ",
-              "prenom": "Sébastien",
-              "prenoms": "Sébastien",
-              "role": null,
-              "dateNaissancePartial": "1983-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "SAYSSET",
-              "prenom": "Mélanie",
-              "prenoms": "Mélanie",
-              "role": null,
-              "dateNaissancePartial": "1984-08",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "SPINA",
-              "prenom": "Christophe",
-              "prenoms": "Christophe",
-              "role": null,
-              "dateNaissancePartial": "1975-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "VALETTE",
-              "prenom": "Marc",
-              "prenoms": "Marc",
-              "role": null,
-              "dateNaissancePartial": "1964-07",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "ZÉNON",
-              "prenom": "Luc",
-              "prenoms": "Luc",
-              "role": null,
-              "dateNaissancePartial": "1955-07",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "ABELLA",
-              "prenom": "Gérard",
-              "prenoms": "Gérard",
-              "role": "2eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1955-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "LORIZ GOMEZ",
-              "prenom": "Sylviane",
-              "prenoms": "Sylviane",
-              "role": null,
-              "dateNaissancePartial": "1943-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BRESSON",
-              "prenom": "Didier",
-              "prenoms": "Didier",
-              "role": "5eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1954-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "GELLY",
-              "prenom": "Bertrand",
-              "prenoms": "Bertrand",
-              "role": "7eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1973-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BOYER",
-              "prenom": "Gérard",
-              "prenoms": "Gérard",
-              "role": "10eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1955-11",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "LLOP",
-              "prenom": "Christophe",
-              "prenoms": "Christophe",
-              "role": null,
-              "dateNaissancePartial": "1962-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "GELY",
-              "prenom": "Robert",
-              "prenoms": "Robert",
-              "role": "1er Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1959-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "MONTARON SANMARTI",
-              "prenom": "Catherine",
-              "prenoms": "Catherine",
-              "role": null,
-              "dateNaissancePartial": "1966-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "RAMADE",
-              "prenom": "Alain",
-              "prenoms": "Alain",
-              "role": null,
-              "dateNaissancePartial": "1952-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "ALLINGRI",
-              "prenom": "Claude",
-              "prenoms": "Claude",
-              "role": "4eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1967-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "AURIOL",
-              "prenom": "Bernard",
-              "prenoms": "Bernard",
-              "role": null,
-              "dateNaissancePartial": "1953-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "GIMENO",
-              "prenom": "Marie",
-              "prenoms": "Marie",
-              "role": null,
-              "dateNaissancePartial": "1959-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "GRATALOUP",
-              "prenom": "Olivier",
-              "prenoms": "Olivier",
-              "role": null,
-              "dateNaissancePartial": "1970-07",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "CIANNI",
-              "prenom": "Cathy",
-              "prenoms": "Cathy",
-              "role": null,
-              "dateNaissancePartial": "1953-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "DUPIN",
-              "prenom": "Jacques",
-              "prenoms": "Jacques",
-              "role": null,
-              "dateNaissancePartial": "1951-08",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "LACAS",
-              "prenom": "Frédéric",
-              "prenoms": "Frédéric",
-              "role": null,
-              "dateNaissancePartial": "1959-02",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "PESTEIL",
-              "prenom": "Roselyne",
-              "prenoms": "Roselyne",
-              "role": null,
-              "dateNaissancePartial": "1952-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "SEIGNOUREL DE PASTORS",
-              "prenom": "Françoise",
-              "prenoms": "Françoise",
-              "role": null,
-              "dateNaissancePartial": "1963-11",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "THOMAS",
-              "prenom": "Christophe",
-              "prenoms": "Christophe",
-              "role": "3eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1960-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "VISTE",
-              "prenom": "Claude",
-              "prenoms": "Claude",
-              "role": null,
-              "dateNaissancePartial": "1947-11",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BALLESTER",
-              "prenom": "Daniel",
-              "prenoms": "Daniel",
-              "role": null,
-              "dateNaissancePartial": "1959-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "TAILLADE",
-              "prenom": "Florence",
-              "prenoms": "Florence",
-              "role": null,
-              "dateNaissancePartial": "1955-02",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "LOUP",
-              "prenom": "Michel",
-              "prenoms": "Michel",
-              "role": null,
-              "dateNaissancePartial": "1960-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "D'AMATO",
-              "prenom": "Alain",
-              "prenoms": "Alain",
-              "role": null,
-              "dateNaissancePartial": "1970-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "DUBOIS",
-              "prenom": "Céline",
-              "prenoms": "Céline",
-              "role": null,
-              "dateNaissancePartial": "1972-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "SOLANS",
-              "prenom": "Fabrice",
-              "prenoms": "Fabrice",
-              "role": "6eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1970-07",
-              "lieuNaissance": ""
-            }
-          ]
-        },
-        "listeIdcc": [
-          "5021"
-        ],
-        "immatriculation": null,
-        "matchingEtablissements": [
-          {
-            "siren": "243400769",
-            "siret": "24340076900093",
-            "oldSiret": "",
-            "etatAdministratif": "en activité",
-            "statutDiffusion": "diffusible",
-            "estSiege": true,
-            "enseigne": "",
-            "denomination": null,
-            "nic": "00093",
-            "dateCreation": "2011-07-15",
-            "dateDerniereMiseAJour": "",
-            "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2011-07-15",
-            "dateFermeture": "",
-            "adresse": "QUAI OUEST 39 BOULEVARD DE VERDUN 34500 BEZIERS",
-            "adressePostale": "QUAI OUEST 39 BOULEVARD DE VERDUN 34500 BEZIERS",
-            "codePostal": "34500",
-            "commune": "BEZIERS",
-            "activitePrincipale": "84.11Z",
-            "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-            "trancheEffectif": "41",
-            "libelleTrancheEffectif": "",
-            "latitude": "43.336121",
-            "longitude": "3.224549",
-            "complements": {
-              "estEntrepreneurIndividuel": false,
-              "idFiness": [],
-              "idBio": [],
-              "idcc": [
-                "5021"
-              ],
-              "idOrganismeFormation": [],
-              "idRge": [
-                "1911"
-              ],
-              "idUai": []
-            },
-            "anneeTrancheEffectif": "2022",
-            "ancienSiege": false
-          }
-        ],
-        "nombreEtablissements": 10,
-        "nombreEtablissementsOuverts": 8,
         "dirigeants": []
       }
     ]

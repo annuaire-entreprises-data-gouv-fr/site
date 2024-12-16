@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'API Recherche d’entreprises & API Entreprise',
   alternates: {
     canonical:
-      'https://annuaire-entreprises.data.gouv.fr/donnees/acceder-par-api',
+      'https://annuaire-entreprises.data.gouv.fr/donnees/api-entreprises',
   },
 };
 
@@ -40,7 +40,7 @@ export default function AccesByAPIPage() {
       <ul>
         <li>Conditions d’accès : API ouverte</li>
         <li>
-          <a href="https://api.gouv.fr/les-api/api-recherche-entreprises">
+          <a href="https://www.data.gouv.fr/fr/dataservices/api-recherche-dentreprises/">
             Page officielle
           </a>
         </li>
@@ -103,7 +103,11 @@ export default function AccesByAPIPage() {
       </p>
       <ul>
         <li>
-          l’<a href="https://api.gouv.fr/les-api/sirene_v3">API Sirene</a> de l’
+          l’
+          <a href="https://www.data.gouv.fr/fr/dataservices/api-sirene/">
+            API Sirene
+          </a>{' '}
+          de l’
           <INSEE />, pour accéder au répertoire Sirene.
         </li>
         <li>

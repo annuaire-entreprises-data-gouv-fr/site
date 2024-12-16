@@ -13,11 +13,11 @@
     "noEmit": true,
     "paths": {
       "#clients/*": ["./clients/*"],
+      "#cypress/*": ["./cypress/*"],
       "#components/*": ["./components/*"],
       "#components-ui/*": ["./components-ui/*"],
       "#models/*": ["./models/*"],
-      "#utils/*": ["./utils/*"],
-      "#clients-mocks/*": ["./clients-mocks/*"]
+      "#utils/*": ["./utils/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,

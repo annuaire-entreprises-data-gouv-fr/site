@@ -1,0 +1,159 @@
+{
+  "searchTerms": "302474648",
+  "result": {
+    "results": [
+      {
+        "siren": "302474648",
+        "nom_complet": "NATURALIA FRANCE (NATURALIA FRANCE)",
+        "nom_raison_sociale": "NATURALIA FRANCE",
+        "sigle": null,
+        "nombre_etablissements": 250,
+        "nombre_etablissements_ouverts": 178,
+        "siege": {
+          "activite_principale": "47.29Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "14 A 16 14 RUE MARC BLOCH 92110 CLICHY",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "92110",
+          "commune": "92024",
+          "complement_adresse": "14 A 16",
+          "coordonnees": "48.911559,2.31084",
+          "date_creation": "2011-06-14",
+          "date_debut_activite": "2011-06-14",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2024-10-01T13:07:03",
+          "departement": "92",
+          "distribution_speciale": null,
+          "epci": "200054781",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "14 Rue Marc Bloch 92110 Clichy",
+          "geo_id": "92024_6121_00014",
+          "indice_repetition": null,
+          "latitude": "48.911559",
+          "libelle_cedex": null,
+          "libelle_commune": "CLICHY",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "MARC BLOCH",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": [
+            "112492"
+          ],
+          "liste_idcc": [
+            "1505"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": null,
+          "liste_uai": null,
+          "longitude": "2.31084",
+          "nom_commercial": null,
+          "numero_voie": "14",
+          "region": "11",
+          "siret": "30247464800664",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "21",
+          "type_voie": "RUE"
+        },
+        "activite_principale": "47.29Z",
+        "categorie_entreprise": "GE",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "1973-01-01",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2024-12-10T17:42:26",
+        "date_mise_a_jour_insee": "2024-12-06T05:09:42.450",
+        "date_mise_a_jour_rne": "2024-05-19T16:49:33",
+        "dirigeants": [
+          {
+            "nom": "JOLIVET",
+            "prenoms": "RICHARD DANIEL ALEXANDRE",
+            "annee_de_naissance": "1973",
+            "date_de_naissance": "1973-08",
+            "qualite": null,
+            "nationalite": null,
+            "type_dirigeant": "personne physique"
+          },
+          {
+            "nom": "SENECLAUZE",
+            "prenoms": "GUILLAUME",
+            "annee_de_naissance": "1965",
+            "date_de_naissance": "1965-10",
+            "qualite": null,
+            "nationalite": null,
+            "type_dirigeant": "personne physique"
+          },
+          {
+            "siren": "775726417",
+            "denomination": "KPMG S.A",
+            "qualite": "Commissaire aux comptes titulaire",
+            "type_dirigeant": "personne morale"
+          }
+        ],
+        "etat_administratif": "A",
+        "nature_juridique": "5710",
+        "section_activite_principale": "G",
+        "tranche_effectif_salarie": "42",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [],
+        "immatriculation": {
+          "date_debut_activite": null,
+          "date_immatriculation": null,
+          "date_radiation": null,
+          "duree_personne_morale": 30,
+          "nature_entreprise": [
+            "Commerciale",
+            "Libérale réglementée"
+          ],
+          "date_cloture_exercice": null,
+          "capital_social": 240000,
+          "capital_variable": false,
+          "devise_capital": "EUR",
+          "indicateur_associe_unique": false
+        },
+        "finances": {
+          "2022": {
+            "ca": 305579122,
+            "resultat_net": -25031062
+          }
+        },
+        "complements": {
+          "collectivite_territoriale": null,
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "1505"
+          ],
+          "egapro_renseignee": true,
+          "est_association": false,
+          "est_bio": true,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": false,
+          "est_ess": false,
+          "est_finess": false,
+          "est_organisme_formation": false,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": null,
+          "est_rge": false,
+          "est_service_public": false,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": null,
+          "type_siae": null
+        },
+        "slug": "naturalia-france-naturalia-france-302474648"
+      }
+    ],
+    "total_results": 1,
+    "page": 1,
+    "per_page": 10,
+    "total_pages": 1
+  }
+}

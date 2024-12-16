@@ -11,7 +11,6 @@ import {
   IPersonneMoraleMergedIGInpi,
   IRole,
 } from '#models/rne/types';
-import { removeSpecialChars } from '#utils/helpers';
 import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
 import logErrorInSentry from '#utils/sentry';
 
@@ -38,19 +37,19 @@ const createUniqueKey = (dirigeant: IEtatCivil | IPersonneMorale): string => {
   if ('siren' in dirigeant) {
     return `pm-${dirigeant.siren}`;
   } else {
-    const cleanedPrenom = removeSpecialChars(dirigeant.prenom).toUpperCase();
+    const prenoms = dirigeant.prenoms || '';
+    const nom = dirigeant.nom || '';
 
-    const hasNomDeNaissanceMatch = dirigeant.nom.match(/\(([^)]+)\)/);
-    const nom = hasNomDeNaissanceMatch
+    const hasNomDeNaissanceMatch = nom.match(/\(([^)]+)\)/);
+    const nomDeNaissance = hasNomDeNaissanceMatch
       ? hasNomDeNaissanceMatch[1]
-      : dirigeant.nom;
-    const cleanedNom = removeSpecialChars(nom).toUpperCase();
+      : nom;
 
     const partialDate =
       dirigeant.dateNaissancePartial ||
       dirigeant.dateNaissance?.slice(0, 7) ||
       '';
-    return `pf-${cleanedPrenom}-${cleanedNom}-${partialDate}`;
+    return `pf-${prenoms}-${nomDeNaissance}-${partialDate}`;
   }
 };
 
@@ -70,7 +69,9 @@ export const mergeDirigeants = (
   ] as (IEtatCivilMergedIGInpi | IPersonneMoraleMergedIGInpi)[];
 
   for (const dirigeant of dirigeants) {
-    const { isInInpi, isInIg, role } = dirigeant;
+    const { isInInpi, isInIg } = dirigeant;
+    const role = dirigeant.role || '';
+
     const currentDirigeantKey = createUniqueKey(dirigeant);
 
     const foundDirigeant = mergedDirigeants[currentDirigeantKey];
@@ -94,18 +95,19 @@ export const mergeDirigeants = (
       }
     }
 
-    const cleanedRole = removeSpecialChars(role).toUpperCase();
-    const foundCleanedRole = mergedRoles[currentDirigeantKey][cleanedRole];
-    if (!foundCleanedRole) {
-      mergedRoles[currentDirigeantKey][cleanedRole] = {
-        label: cleanedRole,
-        isInInpi,
-        isInIg,
-      };
-    } else if (isInInpi) {
-      foundCleanedRole.isInInpi = true;
-    } else if (isInIg) {
-      foundCleanedRole.isInIg = true;
+    const foundCleanedRole = mergedRoles[currentDirigeantKey][role];
+    if (role !== '') {
+      if (!foundCleanedRole) {
+        mergedRoles[currentDirigeantKey][role] = {
+          label: role,
+          isInInpi,
+          isInIg,
+        };
+      } else if (isInInpi) {
+        foundCleanedRole.isInInpi = true;
+      } else if (isInIg) {
+        foundCleanedRole.isInIg = true;
+      }
     }
   }
 

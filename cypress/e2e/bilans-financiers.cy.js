@@ -1,5 +1,5 @@
 describe('Bilans financiers', () => {
-  it('Should display Donées financières section', () => {
+  it('Should display Données financières section', () => {
     cy.visit('/entreprise/487444697');
     cy.contains('Données financières');
   });
@@ -29,5 +29,17 @@ describe('Bilans financiers', () => {
     );
     // Displays compte number
     cy.contains('338365059_31122022');
+  });
+});
+
+describe('Bilans financiers (authenticated)', () => {
+  beforeEach(() => {
+    cy.login();
+  });
+  it('Should display "Détail des subventions"', () => {
+    cy.visit('/donnees-financieres/338365059');
+    cy.contains('Détail des subventions').should('be.visible');
+    cy.contains('État').should('be.visible');
+    cy.contains('Refusé').should('be.visible');
   });
 });

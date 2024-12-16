@@ -1,4 +1,4 @@
-import { clientBanGeoLoc } from '#clients/base-adresse';
+import { clientBanGeoLoc } from '#clients/base-adresse-nationale';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 
 describe('clientBanGeoLoc', () => {

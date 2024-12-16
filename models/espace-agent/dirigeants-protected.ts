@@ -7,14 +7,18 @@ import {
 } from '#models/api-not-responding';
 import { InternalError } from '#models/exceptions';
 import { getDirigeantsRNE } from '#models/rne/dirigeants';
-import { IDirigeantsWithMetadataMergedIGInpi } from '#models/rne/types';
+import {
+  IDirigeantsMergedIGInpi,
+  IDirigeantsWithMetadataMergedIGInpi,
+} from '#models/rne/types';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { getMandatairesRCS } from './mandataires-rcs';
 import { mergeDirigeants } from './utils';
 
 export const getDirigeantsProtected = async (
-  maybeSiren: string
+  maybeSiren: string,
+  params: { isEI: boolean }
 ): Promise<IDirigeantsWithMetadataMergedIGInpi | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
 
@@ -31,11 +35,30 @@ export const getDirigeantsProtected = async (
     return APINotRespondingFactory(EAdministration.INPI, 500);
   }
 
+  // EI can either be in RCS or not, we dont know in advance.
+  const rcsNotRelevant =
+    params.isEI &&
+    (isAPINotResponding(dirigeantsRCS) || dirigeantsRCS.length === 0);
+
   try {
-    const dirigeantMerged = mergeDirigeants(
-      !isAPINotResponding(dirigeantsRCS) ? dirigeantsRCS : [],
-      !isAPINotResponding(dirigeantsRNE) ? dirigeantsRNE.data : []
-    );
+    const rneData = !isAPINotResponding(dirigeantsRNE)
+      ? dirigeantsRNE.data
+      : [];
+    const rcsData = !isAPINotResponding(dirigeantsRCS) ? dirigeantsRCS : [];
+
+    // EI data is not standardised. It lacks birthdate in RNE and is randomly populated in IG
+    let dirigeantMerged: IDirigeantsMergedIGInpi = [];
+    if (params.isEI) {
+      if (rcsData.length === 0) {
+        // Ignore IG
+        dirigeantMerged = mergeDirigeants(rneData, rneData);
+      } else {
+        // Ignore INPI
+        dirigeantMerged = mergeDirigeants(rcsData, rcsData);
+      }
+    } else {
+      dirigeantMerged = mergeDirigeants(rneData, rcsData);
+    }
 
     return {
       data: dirigeantMerged,

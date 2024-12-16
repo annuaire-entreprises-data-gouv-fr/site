@@ -19,6 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
+          "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
           "nic": "00017",
@@ -34,7 +35,7 @@
           "activitePrincipale": "43.91A",
           "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
           "trancheEffectif": "03",
-          "libelleTrancheEffectif": "",
+          "anneeTrancheEffectif": "2022",
           "latitude": "44.075685",
           "longitude": "1.943401",
           "complements": {
@@ -42,8 +43,8 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "2609",
-              "1596"
+              "1596",
+              "2609"
             ],
             "idOrganismeFormation": [],
             "idRge": [
@@ -58,9 +59,7 @@
               "7131D112"
             ],
             "idUai": []
-          },
-          "anneeTrancheEffectif": "2022",
-          "ancienSiege": false
+          }
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -79,6 +78,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00017",
@@ -94,7 +94,7 @@
               "activitePrincipale": "43.91A",
               "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
               "trancheEffectif": "03",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "44.075685",
               "longitude": "1.943401",
               "complements": {
@@ -102,8 +102,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "2609",
-                  "1596"
+                  "1596",
+                  "2609"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -118,9 +118,7 @@
                   "7131D112"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "open": [
@@ -131,6 +129,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
+              "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
               "nic": "00017",
@@ -146,7 +145,7 @@
               "activitePrincipale": "43.91A",
               "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
               "trancheEffectif": "03",
-              "libelleTrancheEffectif": "",
+              "anneeTrancheEffectif": "2022",
               "latitude": "44.075685",
               "longitude": "1.943401",
               "complements": {
@@ -154,8 +153,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "2609",
-                  "1596"
+                  "1596",
+                  "2609"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -170,9 +169,7 @@
                   "7131D112"
                 ],
                 "idUai": []
-              },
-              "anneeTrancheEffectif": "2022",
-              "ancienSiege": false
+              }
             }
           ],
           "unknown": [],
@@ -221,8 +218,8 @@
           "codeColter": null
         },
         "listeIdcc": [
-          "2609",
-          "1596"
+          "1596",
+          "2609"
         ],
         "immatriculation": {
           "dateDebutActivite": "2018-11-12",
@@ -246,10 +243,9 @@
             "nom": "BERTRAND",
             "prenom": "Lionel",
             "prenoms": "Lionel, Andre",
-            "role": null,
+            "role": "",
             "nationalite": null,
-            "dateNaissancePartial": "1981-04",
-            "lieuNaissance": ""
+            "dateNaissancePartial": "1981-04"
           }
         ]
       }

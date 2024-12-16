@@ -11,6 +11,19 @@
 #   site: true
 
 ---
+- date: 18/11/2024
+  target:
+    agent: true
+  body: |
+    Désormais et pour des raisons de sécurité, les utilisateurs de l’espace agent public doivent se reconnecter tous les jours.
+- date: 18/11/2024
+  target:
+    agent: true
+  body: |
+    Les agents ont désormais accès aux données des subventions accordées aux associations. La donnée provient de [Data.subvention](https://datasubvention.beta.gouv.fr/). Elle est issue de Chorus et du Fonjep (Fonds de coopération de la
+    jeunesse et de l’éducation populaire).
+
+    Ces nouvelles informations peuvent être retrouvées dans l’onglet “données financières” d’une association.
 - date: 17/10/2024
   target:
     agent: true

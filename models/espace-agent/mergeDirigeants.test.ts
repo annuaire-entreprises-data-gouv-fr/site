@@ -6,19 +6,19 @@ describe('mergeDirigeants', () => {
     const dirigeantsRCS: IDirigeants = [
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
-        role: 'PRESIDENT',
+        role: 'Président',
         lieuNaissance: 'Paris',
         dateNaissance: '1980-01-01',
       },
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
-        role: 'DIRECTEUR GENERAL',
+        role: 'Directeur Général',
         lieuNaissance: 'Paris',
         dateNaissance: '1980-01-01',
       },
@@ -34,8 +34,8 @@ describe('mergeDirigeants', () => {
     );
     expect(merged[0].roles).toEqual(
       expect.arrayContaining([
-        { label: 'PRESIDENT', isInIg: true, isInInpi: false },
-        { label: 'DIRECTEUR GENERAL', isInIg: true, isInInpi: false },
+        { label: 'Président', isInIg: true, isInInpi: false },
+        { label: 'Directeur Général', isInIg: true, isInInpi: false },
       ])
     );
   });
@@ -44,10 +44,10 @@ describe('mergeDirigeants', () => {
     const dirigeantsRCS: IDirigeants = [
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
-        role: 'PRESIDENT',
+        role: 'Président',
         lieuNaissance: 'Paris',
         dateNaissance: '1980-01-01',
       },
@@ -56,10 +56,10 @@ describe('mergeDirigeants', () => {
     const dirigeantsRNE: IDirigeants = [
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
-        role: 'DIRECTEUR GENERAL',
+        role: 'Directeur Général',
         lieuNaissance: 'Paris',
         dateNaissance: '1980-01-01',
       },
@@ -73,8 +73,8 @@ describe('mergeDirigeants', () => {
     );
     expect(merged[0].roles).toEqual(
       expect.arrayContaining([
-        { label: 'PRESIDENT', isInIg: true, isInInpi: false },
-        { label: 'DIRECTEUR GENERAL', isInIg: false, isInInpi: true },
+        { label: 'Président', isInIg: true, isInInpi: false },
+        { label: 'Directeur Général', isInIg: false, isInInpi: true },
       ])
     );
   });
@@ -83,7 +83,7 @@ describe('mergeDirigeants', () => {
     const dirigeantsRCS: IDirigeants = [
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
         role: 'Président',
@@ -92,10 +92,10 @@ describe('mergeDirigeants', () => {
       },
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
-        role: 'PRESIDENT',
+        role: 'Président',
         lieuNaissance: 'Paris',
         dateNaissance: '1980-01-01',
       },
@@ -111,7 +111,7 @@ describe('mergeDirigeants', () => {
     );
     expect(merged[0].roles).toEqual(
       expect.arrayContaining([
-        { label: 'PRESIDENT', isInIg: true, isInInpi: false },
+        { label: 'Président', isInIg: true, isInInpi: false },
       ])
     );
   });
@@ -120,7 +120,7 @@ describe('mergeDirigeants', () => {
     const dirigeantsRCS: IDirigeants = [
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
         role: 'Président',
@@ -132,10 +132,10 @@ describe('mergeDirigeants', () => {
     const dirigeantsRNE: IDirigeants = [
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
-        role: 'PRESIDENT',
+        role: 'Président',
         lieuNaissance: 'Paris',
         dateNaissance: '1980-01-01',
       },
@@ -149,7 +149,7 @@ describe('mergeDirigeants', () => {
     );
     expect(merged[0].roles).toEqual(
       expect.arrayContaining([
-        { label: 'PRESIDENT', isInIg: true, isInInpi: true },
+        { label: 'Président', isInIg: true, isInInpi: true },
       ])
     );
   });
@@ -158,7 +158,7 @@ describe('mergeDirigeants', () => {
     const dirigeantsRCS: IDirigeants = [
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
         role: 'Président',
@@ -170,10 +170,10 @@ describe('mergeDirigeants', () => {
     const dirigeantsRNE: IDirigeants = [
       {
         sexe: 'M',
-        nom: 'Smith (Doe)',
+        nom: 'SMITH (DOE)',
         prenom: 'John',
         prenoms: 'John',
-        role: 'PRESIDENT',
+        role: 'Président',
         lieuNaissance: 'Paris',
         dateNaissance: '1980-01-01',
       },
@@ -187,7 +187,7 @@ describe('mergeDirigeants', () => {
     );
     expect(merged[0].roles).toEqual(
       expect.arrayContaining([
-        { label: 'PRESIDENT', isInIg: true, isInInpi: true },
+        { label: 'Président', isInIg: true, isInInpi: true },
       ])
     );
   });
@@ -198,17 +198,17 @@ describe('mergeDirigeants', () => {
         siren: '123456789',
         denomination: 'Company A',
         natureJuridique: 'SARL',
-        role: 'DIRECTEUR GENERAL',
+        role: 'Directeur Général',
       },
     ];
 
     const dirigeantsRNE: IDirigeants = [
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
-        role: 'PRESIDENT',
+        role: 'Président',
         lieuNaissance: 'Paris',
         dateNaissance: '1980-01-01',
       },
@@ -222,13 +222,13 @@ describe('mergeDirigeants', () => {
         expect.objectContaining({
           siren: '123456789',
           roles: [
-            { label: 'DIRECTEUR GENERAL', isInIg: true, isInInpi: false },
+            { label: 'Directeur Général', isInIg: true, isInInpi: false },
           ],
         }),
         expect.objectContaining({
-          nom: 'Doe',
-          prenom: 'John',
-          roles: [{ label: 'PRESIDENT', isInIg: false, isInInpi: true }],
+          nom: 'DOE',
+          prenoms: 'John',
+          roles: [{ label: 'Président', isInIg: false, isInInpi: true }],
         }),
       ])
     );
@@ -238,7 +238,7 @@ describe('mergeDirigeants', () => {
     const dirigeantsRCS: IDirigeants = [
       {
         sexe: 'F',
-        nom: 'Smith',
+        nom: 'SMITH',
         prenom: 'Jane',
         prenoms: 'Jane',
         role: 'CTO',
@@ -250,7 +250,7 @@ describe('mergeDirigeants', () => {
     const dirigeantsRNE: IDirigeants = [
       {
         sexe: 'M',
-        nom: 'Doe',
+        nom: 'DOE',
         prenom: 'John',
         prenoms: 'John',
         role: 'CEO',
@@ -265,13 +265,15 @@ describe('mergeDirigeants', () => {
     expect(merged).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          nom: 'Smith',
+          nom: 'SMITH',
           prenom: 'Jane',
+          prenoms: 'Jane',
           roles: [{ label: 'CTO', isInIg: true, isInInpi: false }],
         }),
         expect.objectContaining({
-          nom: 'Doe',
+          nom: 'DOE',
           prenom: 'John',
+          prenoms: 'John',
           roles: [{ label: 'CEO', isInIg: false, isInInpi: true }],
         }),
       ])
