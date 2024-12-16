@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import { stubClient } from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -9,9 +8,11 @@ type IGeoEpciResponse = {
   code: string;
 };
 
-const clientEpcisBySiren = async (siren: string): Promise<IGeoElement[]> => {
+export const clientEpcisBySiren = async (
+  siren: string
+): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoEpciResponse[]>(
-    `${routes.geo.epcis}&code=${siren}`,
+    `${routes.geo.epcis}?fields=nom,code&code=${siren}`,
     {
       timeout: constants.timeout.L,
     }
@@ -20,9 +21,11 @@ const clientEpcisBySiren = async (siren: string): Promise<IGeoElement[]> => {
   return mapToDomainObject(response || []);
 };
 
-const clientEpcisByName = async (term: string): Promise<IGeoElement[]> => {
+export const clientEpcisByName = async (
+  term: string
+): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoEpciResponse[]>(
-    `${routes.geo.epcis}&nom=${term}`,
+    `${routes.geo.epcis}?fields=nom,code&nom=${term}`,
     {
       timeout: constants.timeout.L,
     }
@@ -40,7 +43,3 @@ const mapToDomainObject = (response: IGeoEpciResponse[]): IGeoElement[] => {
     };
   });
 };
-
-// This API can timeout, so we need to stub it
-const stubbedClientEpcisByName = stubClient({ clientEpcisByName });
-export { stubbedClientEpcisByName as clientEpcisByName, clientEpcisBySiren };

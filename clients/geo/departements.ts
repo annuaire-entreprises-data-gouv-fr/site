@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import { stubClient } from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -9,11 +8,11 @@ type IGeoDepartementResponse = {
   code: string;
 };
 
-const clientDepartementsByName = async (
+export const clientDepartementsByName = async (
   slug: string
 ): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoDepartementResponse[]>(
-    `${routes.geo.departements}&nom=${slug}`,
+    `${routes.geo.departements}?fields=code&format=json&zone=metro,drom,com&nom=${slug}`,
     {
       timeout: constants.timeout.L,
     }
@@ -21,11 +20,11 @@ const clientDepartementsByName = async (
   return mapToDomainObject(response || []);
 };
 
-const clientDepartementByCode = async (
+export const clientDepartementByCode = async (
   code: string
 ): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoDepartementResponse[]>(
-    `${routes.geo.departements}&code=${code}`,
+    `${routes.geo.departements}?fields=code&format=json&zone=metro,drom,com&code=${code}`,
     {
       timeout: constants.timeout.L,
     }
@@ -43,11 +42,4 @@ const mapToDomainObject = (
       type: 'dep',
     };
   });
-};
-
-// We need to stub this API because it can timeout
-const stubbedClientDepartementByName = stubClient({ clientDepartementsByName });
-export {
-  clientDepartementByCode,
-  stubbedClientDepartementByName as clientDepartementsByName,
 };

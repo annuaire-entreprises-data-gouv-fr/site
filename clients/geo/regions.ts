@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import { stubClient } from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -9,9 +8,11 @@ type IGeoRegionResponse = {
   code: string;
 };
 
-const clientRegionsByName = async (term: string): Promise<IGeoElement[]> => {
+export const clientRegionsByName = async (
+  term: string
+): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoRegionResponse[]>(
-    `${routes.geo.regions}&nom=${term}`,
+    `${routes.geo.regions}?fields=nom,code&nom=${term}`,
     {
       timeout: constants.timeout.L,
     }
@@ -29,7 +30,3 @@ const mapToDomainObject = (response: IGeoRegionResponse[]): IGeoElement[] => {
     };
   });
 };
-
-// This API can timeout, so we need to stub it
-const stubbedClientRegionsByName = stubClient({ clientRegionsByName });
-export { stubbedClientRegionsByName as clientRegionsByName };
