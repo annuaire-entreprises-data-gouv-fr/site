@@ -3,6 +3,12 @@ import { http } from 'msw';
 import { apiBioHandler } from './handlers/api-bio';
 import { apiDataGouvEssHandler } from './handlers/api-data-gouv-ess';
 import { apiDataSubventionHandler } from './handlers/api-data-subvention';
+import {
+  apiGeoCommunesHandler,
+  apiGeoDepartementsHandler,
+  apiGeoEpcisHandler,
+  apiGeoRegionsHandler,
+} from './handlers/api-geo';
 import { apiInclusionHandler } from './handlers/api-inclusion';
 import {
   apiSireneInseeAuthHandler,
@@ -53,4 +59,8 @@ export const routesHandlers = [
   http.post(routes.sireneInsee.auth, apiSireneInseeAuthHandler),
   http.get(routes.sireneInsee.getBySiret('*'), apiSireneInseeSiretHandler),
   http.get(routes.sireneInsee.getBySiren('*'), apiSireneInseeSirenHandler),
+  http.get(routes.geo.communes, apiGeoCommunesHandler),
+  http.get(routes.geo.departements, apiGeoDepartementsHandler),
+  http.get(routes.geo.regions, apiGeoRegionsHandler),
+  http.get(routes.geo.epcis, apiGeoEpcisHandler),
 ];
