@@ -16,7 +16,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { getSourcesLastModifiedDates } from '#models/sources-last-modified';
+import { getRechercheEntrepriseSourcesLastModified } from '#models/recherche-entreprise-modified';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import {
   shouldNotIndex,
@@ -57,7 +57,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
   const session = await getSession();
   const [uniteLegale, sourcesLastModified] = await Promise.all([
     cachedGetUniteLegale(slug, isBot, page),
-    getSourcesLastModifiedDates(),
+    getRechercheEntrepriseSourcesLastModified(),
   ]);
 
   return (
@@ -88,7 +88,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
             {uniteLegale.dateMiseAJourInpi && (
               <UniteLegaleImmatriculationSection
                 uniteLegale={uniteLegale}
-                sourcesLastModified={sourcesLastModified}
+                rneLastModified={sourcesLastModified.rne}
                 session={session}
               />
             )}

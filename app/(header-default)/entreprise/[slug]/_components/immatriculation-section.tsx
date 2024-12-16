@@ -5,7 +5,6 @@ import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import { ISourcesLastModified } from '#models/sources-last-modified';
 import { ISession } from '#models/user/session';
 import { formatDate } from '#utils/helpers';
 
@@ -18,11 +17,11 @@ const formatDateCloture = (DDMM: string) => {
 
 export const UniteLegaleImmatriculationSection = ({
   uniteLegale,
-  sourcesLastModified,
+  rneLastModified,
   session,
 }: {
   uniteLegale: IUniteLegale;
-  sourcesLastModified: ISourcesLastModified;
+  rneLastModified: string | null;
   session: ISession | null;
 }) => {
   const immatriculation = uniteLegale.immatriculation;
@@ -36,7 +35,7 @@ export const UniteLegaleImmatriculationSection = ({
       title="Immatriculation au RNE"
       id="immatriculation-rne"
       sources={[EAdministration.INPI]}
-      lastModified={sourcesLastModified.rne}
+      lastModified={rneLastModified}
     >
       <p>
         Cette structure est une entreprise immatriculée au{' '}
