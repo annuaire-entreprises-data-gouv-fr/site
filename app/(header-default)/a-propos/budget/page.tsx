@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/budget',
   },
-  robots: 'noindex, nofollow',
+  robots: 'noindex, follow',
 };
 
 export default function Budget() {

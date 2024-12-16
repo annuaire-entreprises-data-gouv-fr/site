@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/stats',
   },
-  robots: 'noindex, nofollow',
+  robots: 'noindex, follow',
 };
 
 export default async function StatsPage() {
