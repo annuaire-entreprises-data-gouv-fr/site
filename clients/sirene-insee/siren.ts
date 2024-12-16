@@ -133,7 +133,7 @@ export const clientUniteLegaleInsee = async (
 
 const clientTmpUniteLegale = async (siren: Siren, useFallback: boolean) => {
   const dataUniteLegale = await inseeClientGet<IInseeUniteLegaleResponse>(
-    routes.sireneInsee.siren + siren,
+    routes.sireneInsee.getBySiren(siren),
     {},
     useFallback
   );

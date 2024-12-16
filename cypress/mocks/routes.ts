@@ -44,6 +44,6 @@ export const routesHandlers = [
   http.get(routes.educationNationale.search, educationNationaleHandler),
   http.get(routes.ban, baseAdresseNationaleHandler),
   http.post(routes.sireneInsee.auth, apiSireneInseeAuthHandler),
-  http.get(routes.sireneInsee.siret, apiSireneInseeSiretHandler),
-  http.get(routes.sireneInsee.siren, apiSireneInseeSirenHandler),
+  http.get(routes.sireneInsee.getBySiret('*'), apiSireneInseeSiretHandler),
+  http.get(routes.sireneInsee.getBySiren('*'), apiSireneInseeSirenHandler),
 ];
