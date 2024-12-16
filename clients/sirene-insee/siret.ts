@@ -102,7 +102,7 @@ export const clientAllEtablissementsInsee = async (
 
   const { header, etablissements } =
     await inseeClientGet<IInseeEtablissementsResponse>(
-      routes.sireneInsee.siret,
+      routes.sireneInsee.getBySiret(''),
       {
         params: {
           q: `siren:${siren}`,
@@ -130,7 +130,7 @@ export const clientEtablissementInsee = async (
 ) => {
   const { etablissement, etablissements } =
     await inseeClientGet<IInseeEtablissementResponse>(
-      routes.sireneInsee.siret + siret,
+      routes.sireneInsee.getBySiret(siret),
       {},
       useFallback
     );

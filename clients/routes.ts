@@ -197,8 +197,10 @@ const routes = {
   sireneInsee: {
     auth: 'https://auth.insee.net/auth/realms/apim-gravitee/protocol/openid-connect/token',
     avis: 'https://api-avis-situation-sirene.insee.fr/identification/pdf/',
-    siren: 'https://api.insee.fr/api-sirene/prive/3.11/siren/',
-    siret: 'https://api.insee.fr/api-sirene/prive/3.11/siret/',
+    getBySiren: (siren: string) =>
+      `https://api.insee.fr/api-sirene/prive/3.11/siren/${siren}`,
+    getBySiret: (siret: string) =>
+      `https://api.insee.fr/api-sirene/prive/3.11/siret/${siret}`,
   },
   rechercheEntreprise: {
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
