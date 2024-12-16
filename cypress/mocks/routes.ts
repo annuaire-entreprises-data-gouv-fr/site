@@ -9,19 +9,26 @@ import {
   apiSireneInseeSirenHandler,
   apiSireneInseeSiretHandler,
 } from './handlers/api-sirene-insee';
+import { associationHandler } from './handlers/association';
 import { baseAdresseNationaleHandler } from './handlers/base-adresse-nationale';
 import { educationNationaleHandler } from './handlers/education-nationale';
 import { egaproHandler, egaproRepresentationHandler } from './handlers/egapro';
 import { entrepreneurSpectaclesHandler } from './handlers/entrepreneur-spectacles';
 import { eoriHandler } from './handlers/eori';
+import { igHandler } from './handlers/ig';
 import { rechercheEntrepriseHandler } from './handlers/recherche-entreprises';
 import { rgeHandler } from './handlers/rge';
+import { rneDefaultHandler, rneFallbackHandler } from './handlers/rne';
 import { tvaHandler } from './handlers/tva';
 import { upDownIoHandler } from './handlers/up-down-io';
 
 export const routesHandlers = [
   http.get(routes.proxy.tva('*'), tvaHandler),
   http.get(routes.proxy.eori('*'), eoriHandler),
+  http.get(routes.proxy.ig('*'), igHandler),
+  http.get(routes.proxy.association('*'), associationHandler),
+  http.get(routes.proxy.rne.immatriculation.default('*'), rneDefaultHandler),
+  http.get(routes.proxy.rne.immatriculation.fallback('*'), rneFallbackHandler),
   http.get(
     routes.rechercheEntreprise.rechercheUniteLegale,
     rechercheEntrepriseHandler
