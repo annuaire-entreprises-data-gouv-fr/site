@@ -158,12 +158,14 @@ const routes = {
     },
   },
   proxy: {
-    ig: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/ig/',
+    ig: (siren: string) =>
+      `https://annuaire-entreprises-api-proxy.api.gouv.fr/ig/${siren}`,
     rne: {
       immatriculation: {
-        default: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
-        fallback:
-          'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/fallback/',
+        default: (siren: string) =>
+          `https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/${siren}`,
+        fallback: (siren: string) =>
+          `https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/fallback/${siren}`,
       },
       documents: {
         list: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/documents/',
@@ -174,8 +176,8 @@ const routes = {
         },
       },
     },
-    association:
-      'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
+    association: (rnaOrSiren: string) =>
+      `https://annuaire-entreprises-api-proxy.api.gouv.fr/association/${rnaOrSiren}`,
     tva: (tvaNumber: string) =>
       `https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/${tvaNumber}`,
     eori: (siret: string) =>
