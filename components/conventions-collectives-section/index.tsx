@@ -1,4 +1,3 @@
-import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
@@ -11,6 +10,7 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { ICCWithMetadata } from '#models/conventions-collectives';
 import { capitalize, formatSiret } from '#utils/helpers';
+import React from 'react';
 
 function CCUnknown({ ccWithMetadata }: { ccWithMetadata: ICCWithMetadata[] }) {
   const unknown = ccWithMetadata.filter((e) => e.unknown);
@@ -43,7 +43,8 @@ function CCUnknown({ ccWithMetadata }: { ccWithMetadata: ICCWithMetadata[] }) {
 
 const ConventionsCollectivesSection: React.FC<{
   ccWithMetadata: ICCWithMetadata[] | IAPINotRespondingError;
-}> = ({ ccWithMetadata }) => {
+  ccLastModified: string | null;
+}> = ({ ccWithMetadata, ccLastModified }) => {
   return (
     <DataSection
       title="Conventions collectives"
@@ -62,6 +63,7 @@ const ConventionsCollectivesSection: React.FC<{
         </div>
       }
       data={ccWithMetadata}
+      lastModified={ccLastModified}
     >
       {(ccWithMetadata) => {
         const plural = ccWithMetadata.length > 0 ? 's' : '';

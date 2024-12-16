@@ -2,6 +2,7 @@ import ConventionsCollectivesSection from '#components/conventions-collectives-s
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { getAllIdccWithMetadata } from '#models/conventions-collectives';
+import { getRechercheEntrepriseSourcesLastModified } from '#models/recherche-entreprise-modified';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -33,7 +34,11 @@ export const generateMetadata = async (
 export default async function ConventionCollectivePage(props: AppRouterProps) {
   const session = await getSession();
   const { slug, page, isBot } = await extractParamsAppRouter(props);
-  const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
+
+  const [uniteLegale, sourcesLastModified] = await Promise.all([
+    cachedGetUniteLegale(slug, isBot, page),
+    getRechercheEntrepriseSourcesLastModified(),
+  ]);
 
   const ccWithMetadata = await getAllIdccWithMetadata(uniteLegale.siren);
 
@@ -44,7 +49,10 @@ export default async function ConventionCollectivePage(props: AppRouterProps) {
         uniteLegale={uniteLegale}
         session={session}
       />
-      <ConventionsCollectivesSection ccWithMetadata={ccWithMetadata} />
+      <ConventionsCollectivesSection
+        ccWithMetadata={ccWithMetadata}
+        ccLastModified={sourcesLastModified.idcc}
+      />
     </div>
   );
 }
