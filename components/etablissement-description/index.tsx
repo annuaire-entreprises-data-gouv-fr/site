@@ -1,4 +1,3 @@
-import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
@@ -11,6 +10,7 @@ import {
   uniteLegaleLabel,
   uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
+import React from 'react';
 
 type IProps = {
   etablissement: IEtablissement;
@@ -99,11 +99,11 @@ export const EtablissementDescription: React.FC<IProps> = ({
             <a href={`/entreprise/${uniteLegale.chemin}`}>
               {uniteLegale.nomComplet}
             </a>
-            {uniteLegale.etablissements.all.length > 1 ? (
+            {uniteLegale.etablissements.length > 1 ? (
               <>
                 , qui possède{' '}
                 <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
-                  {uniteLegale.etablissements.nombreEtablissements - 1} autre(s)
+                  {uniteLegale.nombreEtablissements - 1} autre(s)
                   établissement(s)
                 </a>
               </>

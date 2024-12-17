@@ -7,7 +7,6 @@ import {
 } from '#clients/exceptions';
 import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
 import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
-import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { Siren, isLuhnValid, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
@@ -85,17 +84,16 @@ class UniteLegaleBuilder {
 
       uniteLegale.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
 
-      const allProtected = uniteLegale.etablissements.all.map((e) => {
+      uniteLegale.etablissements = uniteLegale.etablissements.map((e) => {
         e.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
         return e;
       });
-      uniteLegale.etablissements = createEtablissementsList(allProtected);
     }
 
     // en sommeil
     if (
       estActif(uniteLegale) &&
-      uniteLegale.etablissements.nombreEtablissementsOuverts === 0
+      uniteLegale.nombreEtablissementsOuverts === 0
     ) {
       uniteLegale.etatAdministratif =
         IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;

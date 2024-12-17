@@ -212,7 +212,6 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
           mapToEtablissement(e, est_entrepreneur_individuel)
         )
       : [etablissementSiege],
-    pageEtablissements,
     result.nombre_etablissements,
     result.nombre_etablissements_ouverts
   );
@@ -221,9 +220,8 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     ...createDefaultUniteLegale(siren),
     siege: etablissementSiege,
     matchingEtablissements,
-    nombreEtablissements: result.nombre_etablissements || 1,
-    nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
-    etablissements: etablissementsList,
+    ...etablissementsList,
+    currentEtablissementPage: pageEtablissements,
     etatAdministratif,
     statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
       statut_diffusion || 'O',

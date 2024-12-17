@@ -4,17 +4,11 @@ import { estActif } from './etat-administratif';
 import { IEtablissement } from './types';
 
 export interface IEtablissementsList {
-  etablissements: {
-    all: IEtablissement[];
-    open: IEtablissement[];
-    closed: IEtablissement[];
-    unknown: IEtablissement[];
-    nombreEtablissements: number;
-    nombreEtablissementsOuverts: number;
-    // pagination
-    currentEtablissementPage: number;
-    usePagination: boolean;
-  };
+  etablissements: IEtablissement[];
+  nombreEtablissements: number;
+  nombreEtablissementsOuverts: number;
+  currentEtablissementPage: number;
+  usePagination: boolean;
 }
 
 /**
@@ -28,18 +22,10 @@ export interface IEtablissementsList {
  */
 export const createEtablissementsList = (
   all: IEtablissement[],
-  currentEtablissementPage = 0,
   realTotal?: number,
   realOpen?: number
 ) => {
-  const open = all
-    .filter((e) => estActif(e) && !estNonDiffusibleStrict(e))
-    .sort((a) => (a.estSiege ? -1 : 1));
-
-  const closed = all.filter((e) => !estActif(e) && !estNonDiffusibleStrict(e));
-
-  const unknown = all.filter((e) => estNonDiffusibleStrict(e));
-
+  const open = getOpenEtablissementsList(all);
   // real total and open can exceede all.length if we need pagination
   const nombreEtablissements = realTotal ?? all.length;
   const nombreEtablissementsOuverts = realOpen ?? open.length;
@@ -48,14 +34,13 @@ export const createEtablissementsList = (
     nombreEtablissements > constants.resultsPerPage.etablissements;
 
   return {
-    all,
-    open,
-    unknown,
-    closed,
-    nombreEtablissementsOuverts,
+    etablissements: all,
     nombreEtablissements,
+    nombreEtablissementsOuverts,
     // pagination
     usePagination,
-    currentEtablissementPage,
   };
 };
+
+export const getOpenEtablissementsList = (all: IEtablissement[]) =>
+  all.filter((e) => estActif(e) && !estNonDiffusibleStrict(e));

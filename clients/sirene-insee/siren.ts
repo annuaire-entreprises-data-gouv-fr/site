@@ -119,7 +119,6 @@ export const clientUniteLegaleInsee = async (
 
   const etablissements = createEtablissementsList(
     etablissementsList,
-    allEtablissements?.page || 1,
     allEtablissements?.count || 1
   );
 
@@ -127,7 +126,8 @@ export const clientUniteLegaleInsee = async (
     ...uniteLegale,
     siege,
     nomComplet,
-    etablissements,
+    ...etablissements,
+    currentEtablissementPage: allEtablissements?.page || 1,
   };
 };
 
@@ -250,7 +250,7 @@ const mapToDomainObject = (
       ),
       activitePrincipale: activitePrincipaleUniteLegale,
       libelleActivitePrincipale: libelleActivitePrincipaleUniteLegale,
-      etablissements: createEtablissementsList([siege]),
+      ...createEtablissementsList([siege]),
       dateCreation: parseDateCreationInsee(dateCreationUniteLegale),
       dateDerniereMiseAJour: new Date().toISOString(),
       dateMiseAJourInsee: dateDernierTraitement,

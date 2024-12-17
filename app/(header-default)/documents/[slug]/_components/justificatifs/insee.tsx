@@ -87,42 +87,10 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, session }) => (
           />
           .
         </p>
-        {uniteLegale.etablissements.usePagination ? (
-          <AvisSituationTable
-            etablissements={uniteLegale.etablissements.all}
-            session={session}
-          />
-        ) : (
-          <>
-            {uniteLegale.etablissements.open.length > 0 && (
-              <>
-                <h3>Etablissement(s) en activité :</h3>
-                <AvisSituationTable
-                  etablissements={uniteLegale.etablissements.open}
-                  session={session}
-                />
-              </>
-            )}
-            {uniteLegale.etablissements.unknown.length > 0 && (
-              <>
-                <h3>Etablissement(s) non-diffusible(s) :</h3>
-                <AvisSituationTable
-                  etablissements={uniteLegale.etablissements.unknown}
-                  session={session}
-                />
-              </>
-            )}
-            {uniteLegale.etablissements.closed.length > 0 && (
-              <>
-                <h3>Etablissement(s) fermé(s) :</h3>
-                <AvisSituationTable
-                  etablissements={uniteLegale.etablissements.closed}
-                  session={session}
-                />
-              </>
-            )}
-          </>
-        )}
+        <AvisSituationTable
+          etablissements={uniteLegale.etablissements}
+          session={session}
+        />
       </>
     )}
   </Section>

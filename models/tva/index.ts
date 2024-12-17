@@ -1,3 +1,4 @@
+import { getOpenEtablissementsList } from '#models/core/etablissements-list';
 import { estActif } from '#models/core/etat-administratif';
 import { IEtablissement, IUniteLegale } from '../core/types';
 import { tvaNumber } from './utils';
@@ -23,11 +24,14 @@ export const getTvaUniteLegale = (
   if (!estActif(uniteLegale)) {
     return null;
   }
+
   return {
     tvaNumber: tvaNumber(uniteLegale.siren),
     mayHaveMultipleTVANumber: {
-      allTime: haveMultipleNafs(uniteLegale.etablissements.all),
-      currentlyActive: haveMultipleNafs(uniteLegale.etablissements.open),
+      allTime: haveMultipleNafs(uniteLegale.etablissements),
+      currentlyActive: haveMultipleNafs(
+        getOpenEtablissementsList(uniteLegale.etablissements)
+      ),
     },
   };
 };

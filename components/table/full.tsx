@@ -23,7 +23,7 @@ export const FullTable: React.FC<ISectionProps> = ({
           ))}
         </tr>
       </thead>
-      <tbody>
+      <tbody className={styles.stripes}>
         {body.map((row, bodyIndex) => (
           <tr key={'row-' + bodyIndex} className={styles.row}>
             {row.map((cell, rowIndex) => (

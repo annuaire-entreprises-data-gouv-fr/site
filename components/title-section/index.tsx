@@ -55,7 +55,7 @@ const Title: React.FC<IProps> = ({
           />
         </span>
       </div>
-      {uniteLegale.etablissements.all && (
+      {uniteLegale.etablissements && (
         <div className={styles.subSubTitle}>
           <UniteLegaleEtablissementCountDescription uniteLegale={uniteLegale} />
         </div>

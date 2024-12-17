@@ -1,7 +1,6 @@
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { ReactElement } from 'react';
-import { IEtablissementsList } from '../etablissements-list';
 import { IEtablissement, IUniteLegale } from '../types';
 
 export enum ISTATUTDIFFUSION {
@@ -72,9 +71,8 @@ export const anonymiseUniteLegale = (
   }
 
   // a single etablissement can be non-diffusible with UL being diffusible
-  uniteLegale.etablissements = anonymiseEtablissements(
-    uniteLegale.etablissements,
-    session
+  uniteLegale.etablissements = uniteLegale.etablissements.map((e) =>
+    anonymiseEtablissement(e, session)
   );
 
   if (estDiffusible(uniteLegale)) {
@@ -116,20 +114,6 @@ export const anonymiseEtablissement = (
     etablissement.denomination = defaultNonDiffusiblePlaceHolder;
     return etablissement;
   }
-};
-
-const anonymiseEtablissements = (
-  etablissements: IEtablissementsList['etablissements'],
-  session: ISession | null
-) => {
-  const anonymiser = (e: IEtablissement) => anonymiseEtablissement(e, session);
-
-  etablissements.all = etablissements.all.map(anonymiser);
-  etablissements.open = etablissements.open.map(anonymiser);
-  etablissements.unknown = etablissements.unknown.map(anonymiser);
-  etablissements.closed = etablissements.closed.map(anonymiser);
-
-  return etablissements;
 };
 
 export const nonDiffusibleDataFormatter = (e: string) =>

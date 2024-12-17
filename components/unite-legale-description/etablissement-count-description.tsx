@@ -1,11 +1,11 @@
-import React from 'react';
 import { IUniteLegale } from '#models/core/types';
+import React from 'react';
 
 export const UniteLegaleEtablissementCountDescription: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const { nombreEtablissements, nombreEtablissementsOuverts, usePagination } =
-    uniteLegale.etablissements;
+    uniteLegale;
 
   const hasOpenEtablissements = nombreEtablissementsOuverts > 0;
 
