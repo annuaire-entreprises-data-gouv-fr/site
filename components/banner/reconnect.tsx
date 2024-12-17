@@ -18,30 +18,38 @@ export default function ReconnectBanner({
 }: {
   session: ISession | null;
 }) {
-  const [wasLoggedIn, setWasLoggedIn] = useState(false);
+  const [shouldDisplayBanner, setShouldDisplayBanner] = useState(false);
   const currentlyLoggedIn = isLoggedIn(session);
   const currentPath = usePathname();
-  const shouldDisplayBanner = wasLoggedIn && !currentlyLoggedIn;
 
   useEffect(() => {
-    setWasLoggedIn(getCookieBrowser('user-was-logged-in') === 'true');
+    const wasLoggedIn = getCookieBrowser('user-was-logged-in') === 'true';
+    const shouldDisplayBanner = wasLoggedIn && !currentlyLoggedIn;
+    setShouldDisplayBanner(shouldDisplayBanner);
+  }, [currentlyLoggedIn]);
 
+  /**
+   * Remove cookie on close or unmount
+   */
+  useEffect(() => {
     const onBeforeUnload = () => {
       deleteCookieBrowser('user-was-logged-in');
     };
 
-    window.addEventListener('beforeunload', onBeforeUnload);
+    if (shouldDisplayBanner) {
+      // on page unload
+      window.addEventListener('beforeunload', onBeforeUnload);
 
-    return () => {
-      if (shouldDisplayBanner) {
+      return () => {
         window.removeEventListener('beforeunload', onBeforeUnload);
-      }
-    };
+      };
+    }
   }, [shouldDisplayBanner]);
 
   const handleClose = () => {
+    // on component closed
     deleteCookieBrowser('user-was-logged-in');
-    setWasLoggedIn(false);
+    setShouldDisplayBanner(false);
   };
 
   return shouldDisplayBanner ? (
