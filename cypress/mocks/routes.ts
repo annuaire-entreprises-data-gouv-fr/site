@@ -10,7 +10,10 @@ import {
   apiGeoEpcisHandler,
   apiGeoRegionsHandler,
 } from './handlers/api-geo';
-import { apiInclusionHandler } from './handlers/api-inclusion';
+import {
+  apiInclusionHandler,
+  apiInclusionMetadataHandler,
+} from './handlers/api-inclusion';
 import {
   apiSireneInseeAuthHandler,
   apiSireneInseeSirenHandler,
@@ -50,6 +53,10 @@ export const routesHandlers = [
   http.get(
     routes.certifications.entrepriseInclusive.api.getBySiren('*'),
     apiInclusionHandler
+  ),
+  http.get(
+    routes.certifications.entrepriseInclusive.api.metadata,
+    apiInclusionMetadataHandler
   ),
   http.get(routes.datagouv.ess, apiDataGouvEssHandler),
   http.get(routes.tooling.monitoring.getBySlug('*'), upDownIoHandler),

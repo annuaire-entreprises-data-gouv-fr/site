@@ -17,7 +17,7 @@ if (
   // https://github.com/mswjs/examples/pull/101/files
   const { mockServer } = require('#cypress/mocks/server');
   mockServer.listen({
-    onUnhandledRequest: 'warn',
+    onUnhandledRequest: 'error',
   });
 }
 
