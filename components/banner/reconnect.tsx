@@ -20,8 +20,8 @@ export default function ReconnectBanner({
 }) {
   const [wasLoggedIn, setWasLoggedIn] = useState(false);
   const currentlyLoggedIn = isLoggedIn(session);
-
   const currentPath = usePathname();
+  const shouldDisplayBanner = wasLoggedIn && !currentlyLoggedIn;
 
   useEffect(() => {
     setWasLoggedIn(getCookieBrowser('user-was-logged-in') === 'true');
@@ -33,16 +33,18 @@ export default function ReconnectBanner({
     window.addEventListener('beforeunload', onBeforeUnload);
 
     return () => {
-      window.removeEventListener('beforeunload', onBeforeUnload);
+      if (shouldDisplayBanner) {
+        window.removeEventListener('beforeunload', onBeforeUnload);
+      }
     };
-  }, []);
+  }, [shouldDisplayBanner]);
 
   const handleClose = () => {
     deleteCookieBrowser('user-was-logged-in');
     setWasLoggedIn(false);
   };
 
-  return wasLoggedIn && !currentlyLoggedIn ? (
+  return shouldDisplayBanner ? (
     <PrintNever>
       <div
         id="reconnect"
