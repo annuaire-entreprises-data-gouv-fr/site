@@ -1,0 +1,57 @@
+{
+  "count": 10,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": "EI",
+      "name": "Entreprise d'insertion",
+      "parent": "Insertion"
+    },
+    {
+      "id": "AI",
+      "name": "Association intermédiaire",
+      "parent": "Insertion"
+    },
+    {
+      "id": "ACI",
+      "name": "Atelier chantier d'insertion",
+      "parent": "Insertion"
+    },
+    {
+      "id": "ETTI",
+      "name": "Entreprise de travail temporaire d'insertion",
+      "parent": "Insertion"
+    },
+    {
+      "id": "EITI",
+      "name": "Entreprise d'insertion par le travail indépendant",
+      "parent": "Insertion"
+    },
+    {
+      "id": "GEIQ",
+      "name": "Groupement d'employeurs pour l'insertion et la qualification",
+      "parent": "Insertion"
+    },
+    {
+      "id": "SEP",
+      "name": "Produits et services réalisés en prison",
+      "parent": "Insertion"
+    },
+    {
+      "id": "EA",
+      "name": "Entreprise adaptée",
+      "parent": "Handicap"
+    },
+    {
+      "id": "EATT",
+      "name": "Entreprise adaptée de travail temporaire",
+      "parent": "Handicap"
+    },
+    {
+      "id": "ESAT",
+      "name": "Etablissement et service d'aide par le travail",
+      "parent": "Handicap"
+    }
+  ]
+}
