@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IAnnoncesAssociation } from '#models/annonces';
 import constants from '#models/constants';
 import { IdRna, Siren, formatDateLong } from '#utils/helpers';
@@ -63,7 +62,9 @@ type IDCAField = {
   dca_datevalidation: string;
 };
 
-const clientJOAFE = async (idRna: string): Promise<IAnnoncesAssociation> => {
+export const clientJOAFE = async (
+  idRna: string
+): Promise<IAnnoncesAssociation> => {
   const searchUrl = `${routes.journalOfficielAssociations.ods.search}&q=numero_rna=${idRna}&refine.source=joafe&sort=dateparution`;
   const metaDataUrl = routes.journalOfficielAssociations.ods.metadata;
   const response = await odsClient(
@@ -88,7 +89,7 @@ const clientJOAFE = async (idRna: string): Promise<IAnnoncesAssociation> => {
 /**
  * DCA Dépôt des Compotes des Associations
  **/
-const clientDCA = async (
+export const clientDCA = async (
   siren: Siren,
   idRna: IdRna | string
 ): Promise<IAnnoncesAssociation> => {
@@ -114,12 +115,3 @@ const clientDCA = async (
     lastModified: response.lastModified,
   };
 };
-
-const stubbedClientDCA = stubClient({
-  clientDCA,
-});
-const stubbedClientJOAFE = stubClient({
-  clientJOAFE,
-});
-
-export { stubbedClientDCA as clientDCA, stubbedClientJOAFE as clientJOAFE };
