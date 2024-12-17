@@ -1,3 +1,5 @@
+import routes from '#clients/routes';
+
 describe('Bilans financiers', () => {
   it('Should display Données financières section', () => {
     cy.visit('/entreprise/487444697');
@@ -5,6 +7,12 @@ describe('Bilans financiers', () => {
   });
 
   it('Should hide bilans when partially confidential', () => {
+    cy.intercept('GET', `${routes.donneesFinancieres.ods.search}*`, {
+      fixture: '../fixtures/donnees-financieres-confidential.json',
+    });
+    cy.intercept('GET', `${routes.donneesFinancieres.ods.metadata}*`, {
+      fixture: '../fixtures/ods-metadata.json',
+    });
     cy.visit('/donnees-financieres/487444697');
     cy.contains(
       'Les bilans de cette structure sont accompagnés d’une déclaration de confidentialité.'
@@ -12,6 +20,12 @@ describe('Bilans financiers', () => {
   });
 
   it('Should display indicateurs financiers', () => {
+    cy.intercept('GET', `${routes.donneesFinancieres.ods.search}*`, {
+      fixture: '../fixtures/donnees-financieres.json',
+    });
+    cy.intercept('GET', `${routes.donneesFinancieres.ods.metadata}*`, {
+      fixture: '../fixtures/ods-metadata.json',
+    });
     cy.visit('/donnees-financieres/552032534');
     cy.contains('Date de clôture');
     cy.contains('31/12/2019');

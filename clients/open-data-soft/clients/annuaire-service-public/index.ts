@@ -1,7 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import odsClient from '#clients/open-data-soft';
 import routes from '#clients/routes';
-import { stubClient } from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { IServicePublic } from '#models/service-public';
 import { removeSpecialChars, Siret } from '#utils/helpers';
@@ -57,7 +56,7 @@ function queryAnnuaireServicePublic(whereQuery: string) {
   );
 }
 
-const clientAnnuaireServicePublicByName = async (
+export const clientAnnuaireServicePublicByName = async (
   name: string
 ): Promise<IServicePublic> => {
   //  Query by name, it allows to find DINUM or ONF for instance.
@@ -78,7 +77,7 @@ const clientAnnuaireServicePublicByName = async (
   };
 };
 
-const clientAnnuaireServicePublicByIds = async (
+export const clientAnnuaireServicePublicByIds = async (
   ids: string[]
 ): Promise<IServicePublic[]> => {
   const query = `id="${ids.join('" OR id="')}"`;
@@ -91,7 +90,7 @@ const clientAnnuaireServicePublicByIds = async (
   return response.records.map(mapToDomainObject);
 };
 
-const clientAnnuaireServicePublicBySiret = async (
+export const clientAnnuaireServicePublicBySiret = async (
   siret: Siret
 ): Promise<IServicePublic> => {
   let response = await queryAnnuaireServicePublic(`siret="${siret}"`);
@@ -264,20 +263,3 @@ function mapToLiens(record: IServicePublicRecord) {
 
   return liens;
 }
-
-const stubbedClientAnnuaireServicePublicByIds = stubClient({
-  clientAnnuaireServicePublicByIds,
-});
-
-const stubbedClientAnnuaireServicePublicBySiret = stubClient({
-  clientAnnuaireServicePublicBySiret,
-});
-
-const stubbedClientAnnuaireServicePublicByName = stubClient({
-  clientAnnuaireServicePublicByName,
-});
-export {
-  stubbedClientAnnuaireServicePublicByIds as clientAnnuaireServicePublicByIds,
-  stubbedClientAnnuaireServicePublicByName as clientAnnuaireServicePublicByName,
-  stubbedClientAnnuaireServicePublicBySiret as clientAnnuaireServicePublicBySiret,
-};

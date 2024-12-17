@@ -1,6 +1,5 @@
 import odsClient from '#clients/open-data-soft';
 import routes from '#clients/routes';
-import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IAnnoncesBodacc } from '#models/annonces';
 import { Exception } from '#models/exceptions';
 import { Siren, formatDate } from '#utils/helpers';
@@ -47,7 +46,7 @@ interface IBodaccB extends IBodaccCoreRecord {
   radiationaurcs?: string; // "{\"radiationPM\": \"O\"}"
 }
 
-const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
+export const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
   const searchUrl = `${routes.bodacc.ods.search}&q=registre%3A${siren}&sort=dateparution&facet=publicationavis&facet=publicationavis_facette&facet=typeavis&facet=typeavis_lib&facet=familleavis&facet=familleavis_lib&facet=numerodepartement&facet=departement_nom_officiel`;
   const metaDataUrl = routes.bodacc.ods.metadata;
   const response = await odsClient({ url: searchUrl }, metaDataUrl);
@@ -179,9 +178,3 @@ class BodaccParsingException extends Exception {
     super({ name: 'BodaccParsingException', ...args });
   }
 }
-
-const stubbedClientBodacc = stubClient({
-  clientBodacc,
-});
-
-export default stubbedClientBodacc;
