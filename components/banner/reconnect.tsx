@@ -32,23 +32,13 @@ export default function ReconnectBanner({
    * Remove cookie on close or unmount
    */
   useEffect(() => {
-    const onBeforeUnload = () => {
-      deleteCookieBrowser('user-was-logged-in');
-    };
-
     if (shouldDisplayBanner) {
-      // on page unload
-      window.addEventListener('beforeunload', onBeforeUnload);
-
-      return () => {
-        window.removeEventListener('beforeunload', onBeforeUnload);
-      };
+      // no more display banner
+      deleteCookieBrowser('user-was-logged-in');
     }
   }, [shouldDisplayBanner]);
 
   const handleClose = () => {
-    // on component closed
-    deleteCookieBrowser('user-was-logged-in');
     setShouldDisplayBanner(false);
   };
 
