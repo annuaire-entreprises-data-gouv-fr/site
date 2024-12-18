@@ -13,6 +13,20 @@ export class HttpNotFound extends HttpError {
   }
 }
 
+export class HttpUnprocessableEntity extends HttpError {
+  constructor(public message: string) {
+    super(message, 422);
+    this.name = 'HttpUnprocessableEntity';
+  }
+}
+
+export class HttpConflict extends HttpError {
+  constructor(public message: string) {
+    super(message, 409);
+    this.name = 'HttpConflict';
+  }
+}
+
 export class HttpBadRequestError extends HttpError {
   constructor(public message: string) {
     super(message, 400);

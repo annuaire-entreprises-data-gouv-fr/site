@@ -1,5 +1,6 @@
 import {
   HttpBadRequestError,
+  HttpConflict,
   HttpConnectionReset,
   HttpForbiddenError,
   HttpNotFound,
@@ -7,6 +8,7 @@ import {
   HttpTimeoutError,
   HttpTooManyRequests,
   HttpUnauthorizedError,
+  HttpUnprocessableEntity,
 } from '#clients/exceptions';
 
 export const httpErrorHandler = (
@@ -33,6 +35,12 @@ export const httpErrorHandler = (
     }
     case 408: {
       throw new HttpTimeoutError('Timeout');
+    }
+    case 409: {
+      throw new HttpConflict('Conflict');
+    }
+    case 422: {
+      throw new HttpUnprocessableEntity(message || 'Unprocessable Entity');
     }
     case 504: {
       throw new HttpTimeoutError('Timeout');
