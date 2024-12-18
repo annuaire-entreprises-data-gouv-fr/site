@@ -1,13 +1,20 @@
+'use client';
+
 import { Section } from '#components/section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/core/types';
-import React from 'react';
+import React, { useState } from 'react';
+import { EtablissementFilters } from './filters';
 import { EtablissementTable } from './table';
 
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
+  const [filteredEtablissements, setFilteredEtablissements] = useState(
+    uniteLegale.etablissements
+  );
+
   const {
     usePagination,
     nombreEtablissements,
@@ -21,8 +28,6 @@ const EtablissementListeSection: React.FC<{
 
   const plural = nombreEtablissements > 1 ? 's' : '';
   const pluralBe = nombreEtablissementsOuverts > 1 ? 'sont' : 'est';
-
-  const filteredEtablissements = uniteLegale.etablissements;
 
   return (
     <div id="etablissements">
@@ -44,8 +49,11 @@ const EtablissementListeSection: React.FC<{
         sources={[EAdministration.INSEE]}
         lastModified={uniteLegale.dateDerniereMiseAJour}
       >
-        <EtablissementFilters etablissements={filteredEtablissements} />
-        <EtablissementTable uniteLegale={uniteLegale} />
+        <EtablissementFilters
+          allEtablissements={uniteLegale.etablissements}
+          setFilteredEtablissements={setFilteredEtablissements}
+        />
+        <EtablissementTable etablissements={filteredEtablissements} />
       </Section>
     </div>
   );

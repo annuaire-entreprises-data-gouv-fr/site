@@ -1,57 +1,47 @@
-import FAQLink from '#components-ui/faq-link';
+'use client';
+
+import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
 import IsActiveTag from '#components-ui/tag/is-active-tag';
 import { NonDiffusibleTag } from '#components-ui/tag/non-diffusible-tag';
 import { FullTable } from '#components/table/full';
-import { estNonDiffusibleStrict } from '#models/core/diffusion';
-import { IEtablissement, IUniteLegale } from '#models/core/types';
-import {
-  formatDate,
-  formatSiret,
-  uniteLegaleLabelWithPronounContracted,
-} from '#utils/helpers';
+import { estDiffusible, estNonDiffusibleStrict } from '#models/core/diffusion';
+import { estActif } from '#models/core/etat-administratif';
+import { IEtablissement } from '#models/core/types';
+import { formatDate, formatSiret } from '#utils/helpers';
 
 export const EtablissementTable: React.FC<{
-  uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
-  const etablissements = uniteLegale.etablissements;
+  etablissements: IEtablissement[];
+}> = ({ etablissements }) => {
+  etablissements
+    .sort((e) => (estActif(e) ? -1 : 1))
+    .sort((e) => (e.estSiege ? -1 : 1));
+
   return (
     <FullTable
-      head={['Établissement', 'Création', 'État']}
+      head={['Établissement (siret, adresse, activité)', 'Création', 'État']}
       body={etablissements.map((etablissement: IEtablissement) => [
         <>
-          {estNonDiffusibleStrict(etablissement) ? (
-            <>
-              <a href="#">{formatSiret(etablissement.siret)} </a>
+          <div>
+            <a href="#">{formatSiret(etablissement.siret)}</a>
+            {etablissement.estSiege ? (
+              <Tag color="info">siège social</Tag>
+            ) : etablissement.ancienSiege ? (
+              <Tag>ancien siège social</Tag>
+            ) : null}
+            {!estDiffusible(etablissement) && (
               <NonDiffusibleTag etablissementOrUniteLegale={etablissement} />
-            </>
-          ) : (
+            )}
+          </div>
+          {!estNonDiffusibleStrict(etablissement) ? (
             <>
               <div>
-                <a href="#">{formatSiret(etablissement.siret)}</a>
+                {etablissement.libelleActivitePrincipale} (
+                {etablissement.activitePrincipale})
               </div>
-              <div>
-                {etablissement.adressePostale}
-                {etablissement.estSiege ? (
-                  <Tag color="info">siège social</Tag>
-                ) : etablissement.ancienSiege ? (
-                  <Tag>ancien siège social</Tag>
-                ) : null}
-              </div>
-              {etablissement.activitePrincipale !==
-                uniteLegale.activitePrincipale && (
-                <div>
-                  <FAQLink tooltipLabel={<strong>Activité spécifique</strong>}>
-                    Cet établissement a une activité différente de celui{' '}
-                    {uniteLegaleLabelWithPronounContracted(uniteLegale)}{' '}
-                    {uniteLegale.nomComplet}
-                  </FAQLink>
-                  {' : '}
-                  {etablissement.libelleActivitePrincipale}
-                </div>
-              )}
+              <Icon slug="mapPin">{etablissement.adressePostale}</Icon>
             </>
-          )}
+          ) : null}
         </>,
         (!estNonDiffusibleStrict(etablissement) &&
           formatDate(etablissement.dateCreation)) ||
