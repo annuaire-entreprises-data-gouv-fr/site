@@ -26,7 +26,7 @@ describe('mergeDirigeants', () => {
 
     const dirigeantsRNE: IDirigeants = [];
 
-    const merged = mergeDirigeants(dirigeantsRCS, dirigeantsRNE);
+    const merged = mergeDirigeants({ rcs: dirigeantsRCS, rne: dirigeantsRNE });
 
     expect(merged).toHaveLength(1);
     expect(merged[0]).toEqual(
@@ -65,7 +65,7 @@ describe('mergeDirigeants', () => {
       },
     ];
 
-    const merged = mergeDirigeants(dirigeantsRCS, dirigeantsRNE);
+    const merged = mergeDirigeants({ rcs: dirigeantsRCS, rne: dirigeantsRNE });
 
     expect(merged).toHaveLength(1);
     expect(merged[0]).toEqual(
@@ -103,7 +103,7 @@ describe('mergeDirigeants', () => {
 
     const dirigeantsRNE: IDirigeants = [];
 
-    const merged = mergeDirigeants(dirigeantsRCS, dirigeantsRNE);
+    const merged = mergeDirigeants({ rcs: dirigeantsRCS, rne: dirigeantsRNE });
 
     expect(merged).toHaveLength(1);
     expect(merged[0]).toEqual(
@@ -141,7 +141,7 @@ describe('mergeDirigeants', () => {
       },
     ];
 
-    const merged = mergeDirigeants(dirigeantsRCS, dirigeantsRNE);
+    const merged = mergeDirigeants({ rcs: dirigeantsRCS, rne: dirigeantsRNE });
 
     expect(merged).toHaveLength(1);
     expect(merged[0]).toEqual(
@@ -179,7 +179,7 @@ describe('mergeDirigeants', () => {
       },
     ];
 
-    const merged = mergeDirigeants(dirigeantsRCS, dirigeantsRNE);
+    const merged = mergeDirigeants({ rcs: dirigeantsRCS, rne: dirigeantsRNE });
 
     expect(merged).toHaveLength(1);
     expect(merged[0]).toEqual(
@@ -214,7 +214,7 @@ describe('mergeDirigeants', () => {
       },
     ];
 
-    const merged = mergeDirigeants(dirigeantsRCS, dirigeantsRNE);
+    const merged = mergeDirigeants({ rcs: dirigeantsRCS, rne: dirigeantsRNE });
 
     expect(merged).toHaveLength(2);
     expect(merged).toEqual(
@@ -259,7 +259,7 @@ describe('mergeDirigeants', () => {
       },
     ];
 
-    const merged = mergeDirigeants(dirigeantsRCS, dirigeantsRNE);
+    const merged = mergeDirigeants({ rcs: dirigeantsRCS, rne: dirigeantsRNE });
 
     expect(merged).toHaveLength(2);
     expect(merged).toEqual(
