@@ -1,14 +1,19 @@
 import { getAssociationFromSlug } from '#models/association';
 import { getEORIValidation } from '#models/eori-validation';
 import { getAssociationProtected } from '#models/espace-agent/association-protected';
+import { getBanqueDeFranceBilansProtected } from '#models/espace-agent/banque-de-france/bilans';
 import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte-professionnelle-travaux-publics';
 import { getCibtp } from '#models/espace-agent/certificats/cibtp';
 import { getCnetp } from '#models/espace-agent/certificats/cnetp';
 import { getOpqibi } from '#models/espace-agent/certificats/opqibi';
+import { getProbtp } from '#models/espace-agent/certificats/probtp';
 import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
 import { getConformiteEntreprise } from '#models/espace-agent/conformite';
+import { getDgfipChiffreAffairesProtected } from '#models/espace-agent/dgfip/chiffre-affaires';
+import { getDgfipLiassesFiscalesProtected } from '#models/espace-agent/dgfip/liasses-fiscales';
 import { getDirigeantsProtected } from '#models/espace-agent/dirigeants-protected';
+import { getRcpEffectifsAnnuelsProtected } from '#models/espace-agent/rcp/effectifs-annuels';
 import { getDocumentsRNEProtected } from '#models/espace-agent/rne-protected/documents';
 import { getDirigeantsRNE } from '#models/rne/dirigeants';
 import { getRNEObservations } from '#models/rne/observations';
@@ -26,10 +31,19 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentCnetp]: getCnetp,
   [APIRoutesPaths.EspaceAgentQualibat]: getQualibat,
   [APIRoutesPaths.EspaceAgentQualifelec]: getQualifelec,
+  [APIRoutesPaths.EspaceAgentProbtp]: getProbtp,
   [APIRoutesPaths.EspaceAgentDirigeantsProtected]: getDirigeantsProtected,
   [APIRoutesPaths.EspaceAgentBeneficiaires]: getBeneficiairesController,
   [APIRoutesPaths.EspaceAgentRneDocuments]: getDocumentsRNEProtected,
   [APIRoutesPaths.EspaceAgentAssociationProtected]: getAssociationProtected,
+  [APIRoutesPaths.EspaceAgentBanqueDeFranceBilansProtected]:
+    getBanqueDeFranceBilansProtected,
+  [APIRoutesPaths.EspaceAgentDgfipChiffreAffairesProtected]:
+    getDgfipChiffreAffairesProtected,
+  [APIRoutesPaths.EspaceAgentDgfipLiassesFiscalesProtected]:
+    getDgfipLiassesFiscalesProtected,
+  [APIRoutesPaths.EspaceAgentRcpEffectifsAnnuelsProtected]:
+    getRcpEffectifsAnnuelsProtected,
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,
   [APIRoutesPaths.Observations]: getRNEObservations,
   [APIRoutesPaths.Association]: getAssociationFromSlug,

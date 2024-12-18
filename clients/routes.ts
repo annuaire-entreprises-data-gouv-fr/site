@@ -7,14 +7,8 @@ const routes = {
   apiEntreprise: {
     association: (siren: string) =>
       `/v4/djepva/api-association/associations/${siren}`,
-    conformite: {
-      fiscale: (siren: string) =>
-        `/v4/dgfip/unites_legales/${siren}/attestation_fiscale`,
-      vigilance: (siren: string) =>
-        `/v4/urssaf/unites_legales/${siren}/attestation_vigilance`,
-      msa: (siret: string) =>
-        `/v3/msa/etablissements/${siret}/conformite_cotisations`,
-    },
+    banqueDeFranceBilans: (siren: string) =>
+      `/v3/banque_de_france/unites_legales/${siren}/bilans`,
     beneficiaires: (siren: string) =>
       `/v3/inpi/rne/unites_legales/${siren}/beneficiaires_effectifs`,
     carteProfessionnelleTravauxPublics: (siren: string) =>
@@ -31,8 +25,28 @@ const routes = {
       cnetp: (siren: string) =>
         `/v3/cnetp/unites_legales/${siren}/attestation_cotisations_conges_payes_chomage_intemperies?context=Test+de+l%27API&object=Test+de+l%27API&recipient=10000001700010`,
     },
+    conformite: {
+      fiscale: (siren: string) =>
+        `/v4/dgfip/unites_legales/${siren}/attestation_fiscale`,
+      vigilance: (siren: string) =>
+        `/v4/urssaf/unites_legales/${siren}/attestation_vigilance`,
+      msa: (siret: string) =>
+        `/v3/msa/etablissements/${siret}/conformite_cotisations`,
+      probtp: (siret: string) =>
+        `/v3/probtp/etablissements/${siret}/attestation_cotisations_retraite`,
+    },
+    dgfip: {
+      chiffreAffaires: (siret: string) =>
+        `/v3/dgfip/etablissements/${siret}/chiffres_affaires`,
+      liassesFiscales: (siren: string, year: number) =>
+        `/v3/dgfip/unites_legales/${siren}/liasses_fiscales/${year}`,
+    },
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,
+    rcp: {
+      effectifsAnnuels: (siren: string, year: number) =>
+        `/v3/gip_mds/unites_legales/${siren}/effectifs_annuels/${year}`,
+    },
   },
   ban: 'https://api-adresse.data.gouv.fr/search',
   bodacc: {

@@ -6,9 +6,12 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
     ApplicationRights.carteProfessionnelleTravauxPublics,
   [APIRoutesPaths.EspaceAgentConformite]: ApplicationRights.conformite,
   [APIRoutesPaths.EspaceAgentOpqibi]: ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentCibtp]: ApplicationRights.cibtp,
+  [APIRoutesPaths.EspaceAgentCnetp]: ApplicationRights.cnetp,
   [APIRoutesPaths.EspaceAgentQualibat]: ApplicationRights.protectedCertificats,
   [APIRoutesPaths.EspaceAgentQualifelec]:
     ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentProbtp]: ApplicationRights.protectedCertificats,
   [APIRoutesPaths.EspaceAgentBeneficiaires]: ApplicationRights.beneficiaires,
   [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
   [APIRoutesPaths.EspaceAgentDirigeantsProtected]:
@@ -22,6 +25,12 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
   [APIRoutesPaths.SubventionsAssociation]:
     ApplicationRights.subventionsAssociation,
-  [APIRoutesPaths.EspaceAgentCibtp]: ApplicationRights.cibtp,
-  [APIRoutesPaths.EspaceAgentCnetp]: ApplicationRights.cnetp,
+  [APIRoutesPaths.EspaceAgentBanqueDeFranceBilansProtected]:
+    ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentDgfipChiffreAffairesProtected]:
+    ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentDgfipLiassesFiscalesProtected]:
+    ApplicationRights.protectedCertificats,
+  [APIRoutesPaths.EspaceAgentRcpEffectifsAnnuelsProtected]:
+    ApplicationRights.protectedCertificats,
 };
