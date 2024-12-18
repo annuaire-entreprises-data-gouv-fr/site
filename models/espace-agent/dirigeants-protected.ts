@@ -35,11 +35,6 @@ export const getDirigeantsProtected = async (
     return APINotRespondingFactory(EAdministration.INPI, 500);
   }
 
-  // EI can either be in RCS or not, we dont know in advance.
-  const rcsNotRelevant =
-    params.isEI &&
-    (isAPINotResponding(dirigeantsRCS) || dirigeantsRCS.length === 0);
-
   try {
     const rneData = !isAPINotResponding(dirigeantsRNE)
       ? dirigeantsRNE.data
@@ -51,13 +46,13 @@ export const getDirigeantsProtected = async (
     if (params.isEI) {
       if (rcsData.length === 0) {
         // Ignore IG
-        dirigeantMerged = mergeDirigeants(rneData, rneData);
+        dirigeantMerged = mergeDirigeants({ rne: rneData, rcs: rneData });
       } else {
         // Ignore INPI
-        dirigeantMerged = mergeDirigeants(rcsData, rcsData);
+        dirigeantMerged = mergeDirigeants({ rne: rcsData, rcs: rcsData });
       }
     } else {
-      dirigeantMerged = mergeDirigeants(rneData, rcsData);
+      dirigeantMerged = mergeDirigeants({ rne: rneData, rcs: rcsData });
     }
 
     return {
