@@ -25,20 +25,10 @@ export default function ReconnectBanner({
 
   useEffect(() => {
     setWasLoggedIn(getCookieBrowser('user-was-logged-in') === 'true');
-
-    const onBeforeUnload = () => {
-      deleteCookieBrowser('user-was-logged-in');
-    };
-
-    window.addEventListener('beforeunload', onBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', onBeforeUnload);
-    };
+    deleteCookieBrowser('user-was-logged-in');
   }, []);
 
   const handleClose = () => {
-    deleteCookieBrowser('user-was-logged-in');
     setWasLoggedIn(false);
   };
 
