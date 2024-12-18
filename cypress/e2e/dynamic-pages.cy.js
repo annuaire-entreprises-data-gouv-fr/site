@@ -1,7 +1,8 @@
 describe(`Dirigeants and élus pages`, () => {
   it('Dirigeant page loads', () => {
-    cy.visit(`/dirigeants/356000000`);
-    cy.contains("L'ETAT").should('be.visible');
+    cy.visit(`/dirigeants/843701079`);
+    cy.contains('Details').should('be.visible');
+    cy.contains('Lionel, Andre BERTRAND').should('be.visible');
   });
 
   it('Elus page loads', () => {

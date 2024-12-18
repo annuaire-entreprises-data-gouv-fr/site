@@ -53,10 +53,13 @@ const createUniqueKey = (dirigeant: IEtatCivil | IPersonneMorale): string => {
   }
 };
 
-export const mergeDirigeants = (
-  dirigeantsRCS: IDirigeants,
-  dirigeantsRNE: IDirigeants
-): IDirigeantsMergedIGInpi => {
+export const mergeDirigeants = ({
+  rne: dirigeantsRNE,
+  rcs: dirigeantsRCS,
+}: {
+  rne: IDirigeants;
+  rcs: IDirigeants;
+}): IDirigeantsMergedIGInpi => {
   const mergedDirigeants: Record<
     string,
     IEtatCivilMergedIGInpi | IPersonneMoraleMergedIGInpi

@@ -88,12 +88,10 @@ const routes = {
     site: 'https://www.education.gouv.fr/annuaire',
   },
   geo: {
-    communes:
-      'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json',
-    departements:
-      'https://geo.api.gouv.fr/departements?fields=code&format=json&zone=metro,drom,com',
-    regions: 'https://geo.api.gouv.fr/regions?fields=nom,code',
-    epcis: 'https://geo.api.gouv.fr/epcis?fields=nom,code',
+    communes: 'https://geo.api.gouv.fr/communes',
+    departements: 'https://geo.api.gouv.fr/departements',
+    regions: 'https://geo.api.gouv.fr/regions',
+    epcis: 'https://geo.api.gouv.fr/epcis',
   },
   journalOfficielAssociations: {
     ods: {
@@ -158,12 +156,14 @@ const routes = {
     },
   },
   proxy: {
-    ig: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/ig/',
+    ig: (siren: string) =>
+      `https://annuaire-entreprises-api-proxy.api.gouv.fr/ig/${siren}`,
     rne: {
       immatriculation: {
-        default: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
-        fallback:
-          'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/fallback/',
+        default: (siren: string) =>
+          `https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/${siren}`,
+        fallback: (siren: string) =>
+          `https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/fallback/${siren}`,
       },
       documents: {
         list: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/documents/',
@@ -174,8 +174,8 @@ const routes = {
         },
       },
     },
-    association:
-      'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
+    association: (rnaOrSiren: string) =>
+      `https://annuaire-entreprises-api-proxy.api.gouv.fr/association/${rnaOrSiren}`,
     tva: (tvaNumber: string) =>
       `https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/${tvaNumber}`,
     eori: (siret: string) =>
@@ -197,8 +197,10 @@ const routes = {
   sireneInsee: {
     auth: 'https://auth.insee.net/auth/realms/apim-gravitee/protocol/openid-connect/token',
     avis: 'https://api-avis-situation-sirene.insee.fr/identification/pdf/',
-    siren: 'https://api.insee.fr/api-sirene/prive/3.11/siren/',
-    siret: 'https://api.insee.fr/api-sirene/prive/3.11/siret/',
+    getBySiren: (siren: string) =>
+      `https://api.insee.fr/api-sirene/prive/3.11/siren/${siren}`,
+    getBySiret: (siret: string) =>
+      `https://api.insee.fr/api-sirene/prive/3.11/siret/${siret}`,
   },
   rechercheEntreprise: {
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
@@ -206,6 +208,8 @@ const routes = {
       metadata: 'https://recherche-entreprises.api.gouv.fr/idcc/metadata',
       siren: 'https://recherche-entreprises.api.gouv.fr/idcc',
     },
+    lastModified:
+      'https://recherche-entreprises.api.gouv.fr/sources/last_modified',
   },
   tooling: {
     grist: 'https://grist.numerique.gouv.fr/api/docs/',

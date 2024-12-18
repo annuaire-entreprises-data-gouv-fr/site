@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import {
   IDirigeants,
@@ -14,51 +13,19 @@ import {
   Siren,
 } from '#utils/helpers';
 import { clientAPIProxy } from '../client';
-
-type IRNEEtatCivilProxyResponse = {
-  nom: string;
-  prenom: string;
-  role: string;
-  dateNaissancePartial: string;
-};
-type IRNEPersonneMoraleProxyResponse = {
-  denomination: string;
-  natureJuridique: string;
-  role: string;
-  siren: string;
-};
-type IRNEIdentiteProxyResponse = {
-  capital: string;
-  dateCessationActivite: string;
-  dateClotureExercice: string;
-  dateDebutActiv: string;
-  dateImmatriculation: string;
-  dateRadiation: string;
-  denomination: string;
-  dureePersonneMorale: number;
-  isPersonneMorale: boolean;
-  libelleNatureJuridique: string;
-  natureEntreprise: string;
-};
-export type IRNEObservationsProxyResponse = {
-  dateAjout: string;
-  description: string;
-  numObservation: string;
-}[];
-
-type IRNEProxyResponse = {
-  identite: IRNEIdentiteProxyResponse;
-  observations: IRNEObservationsProxyResponse;
-  dirigeants: (IRNEPersonneMoraleProxyResponse | IRNEEtatCivilProxyResponse)[];
-};
+import {
+  IRNEEtatCivilProxyResponse,
+  IRNEPersonneMoraleProxyResponse,
+  IRNEProxyResponse,
+} from './types';
 
 /**
  * RNE through the API proxy - API RNE
  * @param siren
  */
-const clientRNEImmatriculation = async (siren: Siren) => {
+export const clientRNEImmatriculation = async (siren: Siren) => {
   const response = await clientAPIProxy<IRNEProxyResponse>(
-    routes.proxy.rne.immatriculation.default + siren,
+    routes.proxy.rne.immatriculation.default(siren),
     {
       timeout: constants.timeout.XS,
     }
@@ -70,9 +37,9 @@ const clientRNEImmatriculation = async (siren: Siren) => {
  * RNE through the API proxy - scrapping site as fallback
  * @param siren
  */
-const clientRNEImmatriculationFallback = async (siren: Siren) => {
+export const clientRNEImmatriculationFallback = async (siren: Siren) => {
   const response = await clientAPIProxy<IRNEProxyResponse>(
-    routes.proxy.rne.immatriculation.fallback + siren,
+    routes.proxy.rne.immatriculation.fallback(siren),
     {
       timeout: constants.timeout.XXXL,
     }
@@ -117,16 +84,4 @@ const mapToDomainObject = ({
     observations,
     dirigeants: newDirigeants,
   };
-};
-
-const stubbedClient = stubClientWithSnapshots({
-  clientRNEImmatriculation,
-});
-const stubbedClientFallback = stubClientWithSnapshots({
-  clientRNEImmatriculationFallback,
-});
-
-export {
-  stubbedClient as clientRNEImmatriculation,
-  stubbedClientFallback as clientRNEImmatriculationFallback,
 };

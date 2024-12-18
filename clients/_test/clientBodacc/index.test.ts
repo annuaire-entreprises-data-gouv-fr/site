@@ -1,4 +1,4 @@
-import clientBodacc from '#clients/open-data-soft/clients/bodacc';
+import { clientBodacc } from '#clients/open-data-soft/clients/bodacc';
 import { IAnnoncesBodacc } from '#models/annonces';
 import { Siren } from '#utils/helpers';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';

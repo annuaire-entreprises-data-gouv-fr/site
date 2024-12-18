@@ -29,7 +29,7 @@ async function fetchStatusData(): Promise<IProps> {
 
 export const metadata: Metadata = {
   title: 'Statut des API utilisées par l’Annuaire des Entreprises',
-  robots: 'noindex, nofollow',
+  robots: 'noindex, follow',
 };
 
 export default async function StatusPage() {

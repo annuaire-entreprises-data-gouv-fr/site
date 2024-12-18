@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/equipe',
   },
-  robots: 'noindex, nofollow',
+  robots: 'noindex, follow',
 };
 
 export default function Equipe() {

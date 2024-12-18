@@ -3,7 +3,6 @@ import routes from '#clients/routes';
 import { IDataAssociation } from '#models/association/types';
 import constants from '#models/constants';
 import { IdRna, Siren, formatAdresse } from '#utils/helpers';
-import stubClientWithSnapshots from '../../stub-client-with-snaphots';
 import { clientAPIProxy } from '../client';
 import { IAssociationResponse } from './types';
 
@@ -13,12 +12,12 @@ import { IAssociationResponse } from './types';
  * Takes either a RNA or Siren, but Siren seems to work much better
  * @param idRna
  */
-const clientAssociation = async (
+export const clientAssociation = async (
   rnaOrSiren: IdRna | Siren,
   siretSiege: string
 ) => {
   const response = await clientAPIProxy<IAssociationResponse>(
-    routes.proxy.association + rnaOrSiren,
+    routes.proxy.association(rnaOrSiren),
     { timeout: constants.timeout.XL }
   );
 
@@ -129,9 +128,3 @@ const mapToDomainObject = (
       .sort((c, b) => c.year - b.year),
   };
 };
-
-const stubbedClient = stubClientWithSnapshots({
-  clientAssociation,
-});
-
-export { stubbedClient as clientAssociation };

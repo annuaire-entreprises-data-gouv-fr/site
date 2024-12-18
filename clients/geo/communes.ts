@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import { stubClient } from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -11,9 +10,12 @@ type IGeoCommuneResponse = {
   departement?: { code: string; nom: string };
 };
 
-const clientCommunesByName = async (slug: string): Promise<IGeoElement[]> => {
+export const clientCommunesByName = async (
+  slug: string
+): Promise<IGeoElement[]> => {
+  const query = `fields=codesPostaux&format=json&nom=${slug}&fields=departement`;
   const response = await httpGet<IGeoCommuneResponse[]>(
-    `${routes.geo.communes}&nom=${slug}&fields=departement`,
+    `${routes.geo.communes}?${query}`,
     {
       timeout: constants.timeout.L,
     }
@@ -22,9 +24,10 @@ const clientCommunesByName = async (slug: string): Promise<IGeoElement[]> => {
   return mapToDomainObject(response || []);
 };
 
-const clientCommuneByCp = async (cp: string): Promise<IGeoElement[]> => {
+export const clientCommuneByCp = async (cp: string): Promise<IGeoElement[]> => {
+  const query = `fields=codesPostaux&format=json&codePostal=${cp}`;
   const response = await httpGet<IGeoCommuneResponse[]>(
-    `${routes.geo.communes}&codePostal=${cp}`,
+    `${routes.geo.communes}?${query}`,
     {
       timeout: constants.timeout.L,
     }
@@ -64,11 +67,4 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
       ],
       []
     );
-};
-
-// We need to stub this API because it can timeout
-const stubbedClientCommunesByName = stubClient({ clientCommunesByName });
-export {
-  clientCommuneByCp,
-  stubbedClientCommunesByName as clientCommunesByName,
 };
