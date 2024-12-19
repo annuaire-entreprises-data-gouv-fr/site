@@ -77,7 +77,7 @@ export function ActesTable({ actes }: IActesTableProps) {
         formatDateLong(a.dateDepot),
         <ul>
           {(a?.detailsDocuments || []).map(({ nom, label }) => (
-            <li key={nom}>
+            <li key={`${nom}-${label}`}>
               <strong>{nom}</strong>
               {label && (
                 <>
