@@ -12,7 +12,9 @@ import { IUniteLegale } from '#models/core/types';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
+import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useFetchFinancesSociete } from 'hooks';
+import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -25,6 +27,11 @@ export const FinancesSocieteSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const financesSociete = useFetchFinancesSociete(uniteLegale);
+  const rcdEffectifsAnnuelsProtected = useAPIRouteData(
+    APIRoutesPaths.EspaceAgentRcdEffectifsAnnuelsProtected,
+    uniteLegale.siren,
+    session
+  );
 
   return (
     <AsyncDataSectionClient

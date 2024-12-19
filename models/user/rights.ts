@@ -20,6 +20,7 @@ export enum ApplicationRights {
   subventionsAssociation = 'Données des subventions des associations',
   cibtp = 'Accès au certificat CIBTP',
   cnetp = 'Accès au certificat CNETP',
+  rcd = 'Accès aux nombres d‘effectifs via le RCD',
 }
 
 /**
@@ -53,6 +54,8 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
       return userScopes.includes('nonDiffusible');
     case ApplicationRights.isAgent:
       return userScopes.includes('agent');
+    case ApplicationRights.rcd:
+      return userScopes.includes('rcd');
     default:
       return false;
   }
