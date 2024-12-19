@@ -24,4 +24,6 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
     ApplicationRights.subventionsAssociation,
   [APIRoutesPaths.EspaceAgentCibtp]: ApplicationRights.cibtp,
   [APIRoutesPaths.EspaceAgentCnetp]: ApplicationRights.cnetp,
+  [APIRoutesPaths.EspaceAgentDgfipChiffreAffairesProtected]:
+    ApplicationRights.dgfip,
 };
