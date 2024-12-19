@@ -33,6 +33,10 @@ const routes = {
       msa: (siret: string) =>
         `/v3/msa/etablissements/${siret}/conformite_cotisations`,
     },
+    dgfip: {
+      chiffreAffaires: (siret: string) =>
+        `/v3/dgfip/etablissements/${siret}/chiffres_affaires`,
+    },
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,
   },

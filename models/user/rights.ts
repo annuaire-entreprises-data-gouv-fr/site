@@ -21,6 +21,7 @@ export enum ApplicationRights {
   cibtp = 'Accès au certificat CIBTP',
   cnetp = 'Accès au certificat CNETP',
   probtp = 'Accès à l‘attestation PROBTP',
+  dgfip = 'Accès aux données de la DGFIP (chiffres d’affaires et liasses fiscales)',
 }
 
 /**
