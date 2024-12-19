@@ -1,0 +1,14 @@
+slug: probtp
+short: PROBTP
+long: PROBTP
+site: https://www.probtp.com/
+contact: https://www.probtp.com/contact.html
+estServicePublic: false
+logoType: portrait
+dataSources:
+  - label: Liste des entreprises ProBTP
+    apiSlug: api-entreprise
+    data:
+      - label: Attestation ProBTP
+description: |
+  ProBTP est un groupe de protection sociale dédié au secteur du Bâtiment et des Travaux Publics (BTP), offrant des solutions en matière de santé, prévoyance, retraite, épargne, et services aux salariés et entreprises du secteur.

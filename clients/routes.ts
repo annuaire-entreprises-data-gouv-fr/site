@@ -7,6 +7,24 @@ const routes = {
   apiEntreprise: {
     association: (siren: string) =>
       `/v4/djepva/api-association/associations/${siren}`,
+    beneficiaires: (siren: string) =>
+      `/v3/inpi/rne/unites_legales/${siren}/beneficiaires_effectifs`,
+    carteProfessionnelleTravauxPublics: (siren: string) =>
+      `/v3/fntp/unites_legales/${siren}/carte_professionnelle_travaux_publics`,
+    certifications: {
+      cibtp: (siret: string) =>
+        `/v3/cibtp/etablissements/${siret}/attestation_cotisations_conges_payes_chomage_intemperies`,
+      cnetp: (siren: string) =>
+        `/v3/cnetp/unites_legales/${siren}/attestation_cotisations_conges_payes_chomage_intemperies`,
+      opqibi: (siren: string) =>
+        `/v3/opqibi/unites_legales/${siren}/certification_ingenierie`,
+      qualibat: (siret: string) =>
+        `/v3/qualibat/etablissements/${siret}/certification_batiment`,
+      qualifelec: (siret: string) =>
+        `/v3/qualifelec/etablissements/${siret}/certificats`,
+      probtp: (siret: string) =>
+        `/v3/probtp/etablissements/${siret}/attestation_cotisations_retraite`,
+    },
     conformite: {
       fiscale: (siren: string) =>
         `/v4/dgfip/unites_legales/${siren}/attestation_fiscale`,
@@ -14,22 +32,6 @@ const routes = {
         `/v4/urssaf/unites_legales/${siren}/attestation_vigilance`,
       msa: (siret: string) =>
         `/v3/msa/etablissements/${siret}/conformite_cotisations`,
-    },
-    beneficiaires: (siren: string) =>
-      `/v3/inpi/rne/unites_legales/${siren}/beneficiaires_effectifs`,
-    carteProfessionnelleTravauxPublics: (siren: string) =>
-      `/v3/fntp/unites_legales/${siren}/carte_professionnelle_travaux_publics`,
-    certifications: {
-      qualifelec: (siret: string) =>
-        `/v3/qualifelec/etablissements/${siret}/certificats`,
-      qualibat: (siret: string) =>
-        `/v3/qualibat/etablissements/${siret}/certification_batiment`,
-      opqibi: (siren: string) =>
-        `/v3/opqibi/unites_legales/${siren}/certification_ingenierie`,
-      cibtp: (siret: string) =>
-        `/v3/cibtp/etablissements/${siret}/attestation_cotisations_conges_payes_chomage_intemperies`,
-      cnetp: (siren: string) =>
-        `/v3/cnetp/unites_legales/${siren}/attestation_cotisations_conges_payes_chomage_intemperies?context=Test+de+l%27API&object=Test+de+l%27API&recipient=10000001700010`,
     },
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,

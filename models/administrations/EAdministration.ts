@@ -25,4 +25,5 @@ export enum EAdministration {
   OPQIBI = 'opqibi',
   CIBTP = 'cibtp',
   CNETP = 'cnetp',
+  PROBTP = 'probtp',
 }

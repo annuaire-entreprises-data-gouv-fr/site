@@ -1,4 +1,4 @@
-import { clientApiEntrepriseCnetp } from '#clients/api-entreprise/cnetp';
+import { clientApiEntrepriseCnetp } from '#clients/api-entreprise/certificats/cnetp';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { verifySiren } from '#utils/helpers';
 import { handleApiEntrepriseError } from '../utils';
