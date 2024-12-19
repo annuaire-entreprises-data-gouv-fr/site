@@ -8,7 +8,8 @@ export type IAgentScope =
   | 'agent'
   | 'pseudo_opendata'
   | 'cibtp'
-  | 'cnetp';
+  | 'cnetp'
+  | 'dgfip';
 
 export const isAgentScope = (str: string): str is IAgentScope => {
   if (
@@ -21,6 +22,7 @@ export const isAgentScope = (str: string): str is IAgentScope => {
       'pseudo_opendata',
       'cibtp',
       'cnetp',
+      'dgfip',
     ].indexOf(str) > 0
   ) {
     return true;
@@ -61,6 +63,7 @@ export const getAgentScopes = async (
         'beneficiaires',
         'cibtp',
         'cnetp',
+        'dgfip',
       ],
       userType: 'Super-agent connecté',
       hasHabilitation: true,
