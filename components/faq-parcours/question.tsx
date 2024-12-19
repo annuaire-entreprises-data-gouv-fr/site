@@ -6,6 +6,7 @@ import { IFaqArticle } from '#models/article/faq';
 import { getAgentEmail, getAgentFullName } from '#models/user/helpers';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import { logMatomoEvent } from '#utils/matomo';
 import { PropsWithChildren } from 'react';
 export enum EQuestionType {
   LOADER = 'loader',
@@ -34,6 +35,7 @@ export default function Question({
 
   switch (questionType) {
     case EQuestionType.CONTACT:
+      logMatomoEvent('parcours', userType, 'contact');
       return (
         <Answer>
           <strong>Je ne trouve pas la réponse à ma question</strong>.
@@ -155,7 +157,12 @@ export default function Question({
               })
               .map((data) => {
                 return {
-                  href: `/faq/modifier/${data.slug}`,
+                  onClick: () => {
+                    if (typeof window !== 'undefined') {
+                      logMatomoEvent('parcours', userType, data.label);
+                      window.location.pathname = `/faq/modifier/${data.slug}`;
+                    }
+                  },
                   label: data.label,
                 };
               })}
@@ -187,7 +194,12 @@ export default function Question({
               },
               ...questions.map(({ title, slug }) => {
                 return {
-                  href: `/faq/${slug}`,
+                  onClick: () => {
+                    if (typeof window !== 'undefined') {
+                      logMatomoEvent('parcours', userType, title);
+                      window.location.pathname = `/faq/${slug}`;
+                    }
+                  },
                   label: title,
                 };
               }),
