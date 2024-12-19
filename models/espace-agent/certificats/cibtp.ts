@@ -1,4 +1,4 @@
-import { clientApiEntrepriseCibtp } from '#clients/api-entreprise/cibtp';
+import { clientApiEntrepriseCibtp } from '#clients/api-entreprise/certificats/cibtp';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { verifySiret } from '#utils/helpers';
 import { handleApiEntrepriseError } from '../utils';
