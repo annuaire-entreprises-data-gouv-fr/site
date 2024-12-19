@@ -1,12 +1,14 @@
 'use client';
 
+import { EtablissementsMap } from '#components/map/map-etablissement';
 import { Section } from '#components/section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/core/types';
+import { uniteLegaleLabelWithPronounContracted } from '#utils/helpers';
 import React, { useState } from 'react';
 import { EtablissementFilters } from './filters';
-import { EtablissementTable } from './table';
+import { EtablissementsTable } from './table';
 
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -14,6 +16,8 @@ const EtablissementListeSection: React.FC<{
   const [filteredEtablissements, setFilteredEtablissements] = useState(
     uniteLegale.etablissements
   );
+
+  const [showMap, toggleMap] = useState(false);
 
   const {
     usePagination,
@@ -30,32 +34,53 @@ const EtablissementListeSection: React.FC<{
   const pluralBe = nombreEtablissementsOuverts > 1 ? 'sont' : 'est';
 
   return (
-    <div id="etablissements">
+    <Section
+      id="etablissements"
+      title={`${nombreEtablissements} établissement${plural} de ${uniteLegale.nomComplet}`}
+      sources={[EAdministration.INSEE]}
+      lastModified={uniteLegale.dateDerniereMiseAJour}
+    >
       <p>
         Cette structure possède{' '}
         <strong>
           {nombreEtablissements} établissement{plural}
         </strong>
-        {nombreEtablissementsOuverts && !usePagination ? (
+        {nombreEtablissementsOuverts ? (
           <>
             {' '}
             dont {nombreEtablissementsOuverts} {pluralBe} en activité
           </>
         ) : null}
-        . Cliquez sur un n° SIRET pour obtenir plus d’information :
+        .
       </p>
-      <Section
-        title={`${nombreEtablissements} établissement${plural} de ${uniteLegale.nomComplet}`}
-        sources={[EAdministration.INSEE]}
-        lastModified={uniteLegale.dateDerniereMiseAJour}
-      >
-        <EtablissementFilters
-          allEtablissements={uniteLegale.etablissements}
-          setFilteredEtablissements={setFilteredEtablissements}
+      <p>
+        Sauf mention contraire, l’activité principale des établissements est
+        celle {uniteLegaleLabelWithPronounContracted(uniteLegale)}
+        {' : '}
+        <i>
+          {uniteLegale.libelleActivitePrincipale} (
+          {uniteLegale.activitePrincipale})
+        </i>
+        .
+      </p>
+      <p>
+        Cliquez sur un n° SIRET pour obtenir plus d’information, filtrez par
+        état administratif ou affichez sur une carte :
+      </p>
+      <EtablissementFilters
+        allEtablissements={uniteLegale.etablissements}
+        setFilteredEtablissements={setFilteredEtablissements}
+        toggleMap={() => toggleMap(!showMap)}
+      />
+      {showMap ? (
+        <EtablissementsMap etablissements={filteredEtablissements} />
+      ) : (
+        <EtablissementsTable
+          etablissements={filteredEtablissements}
+          uniteLegale={uniteLegale}
         />
-        <EtablissementTable etablissements={filteredEtablissements} />
-      </Section>
-    </div>
+      )}
+    </Section>
   );
 };
 export default EtablissementListeSection;

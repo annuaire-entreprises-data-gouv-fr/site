@@ -12,7 +12,8 @@ import styles from './styles.module.css';
 export const EtablissementFilters: React.FC<{
   allEtablissements: IEtablissement[];
   setFilteredEtablissements: (etablissements: IEtablissement[]) => void;
-}> = ({ allEtablissements, setFilteredEtablissements }) => {
+  toggleMap: () => void;
+}> = ({ allEtablissements, setFilteredEtablissements, toggleMap }) => {
   const [etatAdministratifFilter, setEtatAdministratifFilter] = useState(null);
   const [searchFilter, setSearchFilter] = useState('');
 
@@ -49,8 +50,8 @@ export const EtablissementFilters: React.FC<{
 
   return (
     <div className={styles.filterBar}>
-      <ButtonLink alt>
-        <Icon slug="mapPin">Afficher la carte</Icon>
+      <ButtonLink alt onClick={toggleMap}>
+        <Icon slug="mapPin">Afficher sur la carte</Icon>
       </ButtonLink>
       <div style={{ flexGrow: 1 }} />
 
