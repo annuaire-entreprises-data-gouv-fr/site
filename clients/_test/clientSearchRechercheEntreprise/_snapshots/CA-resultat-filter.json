@@ -6,9 +6,242 @@
   },
   "result": {
     "currentPage": 1,
-    "resultCount": 5,
+    "resultCount": 6,
     "pageCount": 1,
     "results": [
+      {
+        "siren": "817883150",
+        "oldSiren": "817883150",
+        "siege": {
+          "siren": "817883150",
+          "siret": "81788315000010",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "ancienSiege": false,
+          "enseigne": "",
+          "denomination": null,
+          "nic": "00010",
+          "dateCreation": "2016-01-15",
+          "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
+          "dateDebutActivite": "2017-06-01",
+          "dateFermeture": "",
+          "adresse": "3 RUE DE LA GAITE 75014 PARIS",
+          "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
+          "codePostal": "75014",
+          "commune": "PARIS",
+          "activitePrincipale": "70.22Z",
+          "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
+          "trancheEffectif": "01",
+          "anneeTrancheEffectif": "2022",
+          "latitude": "48.84074",
+          "longitude": "2.324549",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "1486"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
+        },
+        "tva": null,
+        "anciensSiegesSirets": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "GANYMEDE",
+        "chemin": "ganymede-817883150",
+        "natureJuridique": "5710",
+        "libelleNatureJuridique": "SAS, société par actions simplifiée",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "817883150",
+              "siret": "81788315000010",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00010",
+              "dateCreation": "2016-01-15",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2017-06-01",
+              "dateFermeture": "",
+              "adresse": "3 RUE DE LA GAITE 75014 PARIS",
+              "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
+              "codePostal": "75014",
+              "commune": "PARIS",
+              "activitePrincipale": "70.22Z",
+              "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
+              "trancheEffectif": "01",
+              "anneeTrancheEffectif": "2022",
+              "latitude": "48.84074",
+              "longitude": "2.324549",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "1486"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              }
+            }
+          ],
+          "open": [
+            {
+              "siren": "817883150",
+              "siret": "81788315000010",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00010",
+              "dateCreation": "2016-01-15",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2017-06-01",
+              "dateFermeture": "",
+              "adresse": "3 RUE DE LA GAITE 75014 PARIS",
+              "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
+              "codePostal": "75014",
+              "commune": "PARIS",
+              "activitePrincipale": "70.22Z",
+              "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
+              "trancheEffectif": "01",
+              "anneeTrancheEffectif": "2022",
+              "latitude": "48.84074",
+              "longitude": "2.324549",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "1486"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              }
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 1,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "70.22Z",
+        "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
+        "dateCreation": "2016-01-15",
+        "dateFermeture": "",
+        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
+        "dateMiseAJourInsee": "2024-03-22T14:26:06",
+        "dateMiseAJourInpi": "2024-09-21T03:34:50",
+        "dateMiseAJourIG": "",
+        "dateDebutActivite": "",
+        "trancheEffectif": "01",
+        "anneeCategorieEntreprise": "2022",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2022",
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": true,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": false,
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "listeIdcc": [
+          "1486"
+        ],
+        "immatriculation": null,
+        "matchingEtablissements": [
+          {
+            "siren": "817883150",
+            "siret": "81788315000010",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "ancienSiege": false,
+            "enseigne": "",
+            "denomination": null,
+            "nic": "00010",
+            "dateCreation": "2016-01-15",
+            "dateDerniereMiseAJour": "",
+            "dateMiseAJourInsee": "",
+            "dateDebutActivite": "2017-06-01",
+            "dateFermeture": "",
+            "adresse": "3 RUE DE LA GAITE 75014 PARIS",
+            "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
+            "codePostal": "75014",
+            "commune": "PARIS",
+            "activitePrincipale": "70.22Z",
+            "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
+            "trancheEffectif": "01",
+            "anneeTrancheEffectif": "2022",
+            "latitude": "48.84074",
+            "longitude": "2.324549",
+            "complements": {
+              "estEntrepreneurIndividuel": false,
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "1486"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            }
+          }
+        ],
+        "nombreEtablissements": 1,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "NÉGRIER",
+            "prenom": "Philippe",
+            "prenoms": "Philippe",
+            "role": "PRESIDENT DE SAS",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1966-01"
+          }
+        ]
+      },
       {
         "siren": "414971929",
         "oldSiren": "414971929",
