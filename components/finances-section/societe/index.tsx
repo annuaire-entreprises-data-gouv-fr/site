@@ -25,6 +25,11 @@ export const FinancesSocieteSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const financesSociete = useFetchFinancesSociete(uniteLegale);
+  const banqueDeFranceBilansProtected = useAPIRouteData(
+    APIRoutesPaths.EspaceAgentBanqueDeFranceBilansProtected,
+    uniteLegale.siren,
+    session
+  );
 
   return (
     <AsyncDataSectionClient

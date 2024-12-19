@@ -15,6 +15,8 @@ const routes = {
       msa: (siret: string) =>
         `/v3/msa/etablissements/${siret}/conformite_cotisations`,
     },
+    banqueDeFranceBilans: (siren: string) =>
+      `/v3/banque_de_france/unites_legales/${siren}/bilans`,
     beneficiaires: (siren: string) =>
       `/v3/inpi/rne/unites_legales/${siren}/beneficiaires_effectifs`,
     carteProfessionnelleTravauxPublics: (siren: string) =>
