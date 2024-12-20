@@ -39,6 +39,7 @@ const generateSessionCookie = async () => {
         'nonDiffusible',
         'rne',
         'pseudo_opendata',
+        'rcd',
       ],
       userType: 'Super-agent connecté',
       hasHabilitation: true,
