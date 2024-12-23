@@ -26,24 +26,34 @@ export const getSubventionsAssociationFromSlug = async (
     isBot: false,
   });
 
-  const { siren } = uniteLegale;
-
+  const {
+    siren,
+    association: { idAssociation },
+  } = uniteLegale;
   try {
-    return await clientApiDataSubvention(siren);
+    return await clientApiDataSubvention(idAssociation || siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DJEPVA, 404);
+    } else {
+      try {
+        return await clientApiDataSubvention(siren);
+      } catch (e: any) {
+        if (e instanceof HttpNotFound) {
+          return APINotRespondingFactory(EAdministration.DJEPVA, 404);
+        }
+        logErrorInSentry(
+          new FetchRessourceException({
+            ressource: 'DataSubvention',
+            cause: e,
+            context: {
+              siren,
+            },
+            administration: EAdministration.DJEPVA,
+          })
+        );
+        return APINotRespondingFactory(EAdministration.DJEPVA, 500);
+      }
     }
-    logErrorInSentry(
-      new FetchRessourceException({
-        ressource: 'DataSubvention',
-        cause: e,
-        context: {
-          siren,
-        },
-        administration: EAdministration.DJEPVA,
-      })
-    );
-    return APINotRespondingFactory(EAdministration.DJEPVA, 500);
   }
 };
