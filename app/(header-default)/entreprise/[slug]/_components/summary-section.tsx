@@ -16,7 +16,6 @@ import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
-import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import React from 'react';
 import {
   LabelsAndCertificatesBadgesSection,
@@ -30,6 +29,7 @@ import {
   UniteLegaleInscriptionRNE,
   UniteLegaleInscriptionSirene,
 } from './inscriptions';
+import { LibelleTrancheEffectif } from './libelle-tranche-effectif';
 
 const UniteLegaleSummarySection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -102,10 +102,7 @@ const UniteLegaleSummarySection: React.FC<{
     ['Forme juridique', uniteLegale.libelleNatureJuridique],
     [
       'Tranche effectif salarié de la structure',
-      libelleTrancheEffectif(
-        uniteLegale.trancheEffectif,
-        uniteLegale.anneeTrancheEffectif
-      ),
+      <LibelleTrancheEffectif uniteLegale={uniteLegale} session={session} />,
     ],
     [
       <FAQLink
