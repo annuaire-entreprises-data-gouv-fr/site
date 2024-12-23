@@ -50,7 +50,7 @@ function itShouldMatchSnapshotForSearch(
           searchTerms,
         },
       ],
-      snaphotFile: `search-${searchTerms}${
+      snapshotFile: `search-${searchTerms}${
         pageEtablissements !== 1 ? `-${pageEtablissements}` : ''
       }.json`,
       simplifyParams,

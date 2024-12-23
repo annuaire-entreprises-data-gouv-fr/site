@@ -8,7 +8,7 @@ describe('clientOrganismeFormation', () => {
       client: clientOrganismeFormation,
       args: ['356000000' as Siren],
       __dirname,
-      snaphotFile: 'qualiopi-laposte.json',
+      snapshotFile: 'qualiopi-laposte.json',
       postProcessResult: (result) => {
         result.lastModified = '2023-10-18T23:19:19.590091+00:00';
       },

@@ -8,7 +8,7 @@ describe('clientEntrepreneurSpectacles', () => {
       client: clientAnnuaireServicePublicByName,
       args: ['DIRECTION INTERMINISTERIELLE DU NUMERIQUE (DINUM)' as Siren],
       __dirname,
-      snaphotFile: 'dinum.json',
+      snapshotFile: 'dinum.json',
       postProcessResult: (result) => {
         result.lastModified = '2023-10-18T23:19:19.590091+00:00';
       },

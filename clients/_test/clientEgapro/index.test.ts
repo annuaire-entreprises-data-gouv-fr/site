@@ -7,7 +7,7 @@ describe('clientEgapro', () => {
     await expectClientToMatchSnapshot({
       client: clientEgapro,
       args: ['356000000' as Siren],
-      snaphotFile: 'egapro-laposte.json',
+      snapshotFile: 'egapro-laposte.json',
       __dirname,
     });
   });

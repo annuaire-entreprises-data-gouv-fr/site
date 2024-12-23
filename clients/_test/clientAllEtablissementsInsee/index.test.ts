@@ -21,7 +21,7 @@ function expectClientToMatchSnapshotWithSiren(siren: string, page = 1) {
       __dirname,
       client: clientAllEtablissementsInsee,
       args: [siren, page, false],
-      snaphotFile: `siren-${siren}${page !== 1 ? '-page-' + page : ''}.json`,
+      snapshotFile: `siren-${siren}${page !== 1 ? '-page-' + page : ''}.json`,
       simplifyParams,
       postProcessResult: (result) => {
         result.list.forEach((etablissement) => {

@@ -7,7 +7,7 @@ describe('clientEducationNationale', () => {
     await expectClientToMatchSnapshot({
       client: clientEducationNationale,
       args: ['198100125' as Siren, 1],
-      snaphotFile: 'lycée-jean-jaurès-carmaux.json',
+      snapshotFile: 'lycée-jean-jaurès-carmaux.json',
       __dirname,
     });
   });
