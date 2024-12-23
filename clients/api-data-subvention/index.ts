@@ -2,7 +2,7 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { ISubvention, ISubventions } from '#models/subventions/association';
-import { Siren } from '#utils/helpers';
+import { IdRna, Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
 /**
@@ -10,7 +10,7 @@ import { httpGet } from '#utils/network';
  * https://api.datasubvention.beta.gouv.fr/
  */
 export const clientApiDataSubvention = async (
-  siren: Siren
+  siren: Siren | IdRna | string
 ): Promise<ISubventions> => {
   const route = routes.apiDataSubvention.grants(siren);
   const data = await httpGet<any>(route, {

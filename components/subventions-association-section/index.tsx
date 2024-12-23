@@ -180,7 +180,7 @@ export const SubventionsAssociationSection: React.FC<{
               subventions={subventions}
               siren={uniteLegale.siren}
             />
-            <div className="layout-right">
+            <div className="layout-right" style={{ marginBottom: '20px' }}>
               <ul className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center">
                 <li style={{ marginRight: '10px' }}>
                   <Select
