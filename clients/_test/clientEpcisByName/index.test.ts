@@ -6,7 +6,7 @@ describe('clientEpcisByName', () => {
     await expectClientToMatchSnapshot({
       client: clientEpcisByName,
       args: ['Nice'],
-      snaphotFile: 'nice.json',
+      snapshotFile: 'nice.json',
       __dirname,
     });
   });

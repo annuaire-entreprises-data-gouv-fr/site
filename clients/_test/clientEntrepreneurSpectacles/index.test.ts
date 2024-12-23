@@ -8,7 +8,7 @@ describe('clientEntrepreneurSpectacles', () => {
       client: clientEntrepreneurSpectacles,
       args: ['800329849' as Siren],
       __dirname,
-      snaphotFile: 'entrepreneur-spectacles.json',
+      snapshotFile: 'entrepreneur-spectacles.json',
       postProcessResult: (result) => {
         result.lastModified = '2023-10-18T23:19:19.590091+00:00';
       },

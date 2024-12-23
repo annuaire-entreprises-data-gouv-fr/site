@@ -15,7 +15,7 @@ describe('clientRNEImmatriculation', () => {
         client: clientRNEImmatriculation,
         args: ['908595879' as Siren],
         __dirname,
-        snaphotFile: 'protected.json',
+        snapshotFile: 'protected.json',
       });
     },
     TIMEOUT_RNE
@@ -28,7 +28,7 @@ describe('clientRNEImmatriculation', () => {
         client: clientRNEImmatriculation,
         args: ['487444697' as Siren],
         __dirname,
-        snaphotFile: 'rge.json',
+        snapshotFile: 'rge.json',
       });
     },
     TIMEOUT_RNE
@@ -41,7 +41,7 @@ describe('clientRNEImmatriculation', () => {
         client: clientRNEImmatriculation,
         args: ['356000000' as Siren],
         __dirname,
-        snaphotFile: 'siret-356000000.json',
+        snapshotFile: 'siret-356000000.json',
       });
     },
     TIMEOUT_RNE
@@ -56,7 +56,7 @@ describe('clientRNEImmatriculationFallback', () => {
         client: clientRNEImmatriculationFallback,
         args: ['487444697' as Siren],
         __dirname,
-        snaphotFile: 'rge-fallback.json',
+        snapshotFile: 'rge-fallback.json',
       });
     },
     TIMEOUT_RNE

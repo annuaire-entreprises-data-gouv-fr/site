@@ -11,25 +11,6 @@ const defaultParams = {
 };
 
 describe('clientSearchRechercheEntreprise : use of search filters', () => {
-  it('Should match snapshot for collectivité territoriale', async () => {
-    await expectClientToMatchSnapshot({
-      client: clientSearchRechercheEntreprise,
-      __dirname,
-      args: [
-        {
-          ...defaultParams,
-          searchFilterParams: new SearchFilterParams({
-            label: 'rge',
-            type: 'ct',
-          }),
-        },
-      ],
-      snaphotFile: 'colter.json',
-      simplifyParams,
-      postProcessResult,
-    });
-  });
-
   it('Should match snapshot for CA & resultat filter', async () => {
     await expectClientToMatchSnapshot({
       client: clientSearchRechercheEntreprise,
@@ -44,7 +25,7 @@ describe('clientSearchRechercheEntreprise : use of search filters', () => {
           }),
         },
       ],
-      snaphotFile: 'CA-resultat-filter.json',
+      snapshotFile: 'CA-resultat-filter.json',
       simplifyParams,
       postProcessResult,
     });

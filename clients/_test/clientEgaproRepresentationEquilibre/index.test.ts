@@ -7,7 +7,7 @@ describe('clientEgaproRepresentationEquilibre', () => {
     await expectClientToMatchSnapshot({
       client: clientEgaproRepresentationEquilibre,
       args: ['356000000' as Siren],
-      snaphotFile: 'egapro-laposte.json',
+      snapshotFile: 'egapro-laposte.json',
       __dirname,
     });
   });

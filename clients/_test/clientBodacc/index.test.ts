@@ -8,7 +8,7 @@ describe('clientBODACC', () => {
     await expectClientToMatchSnapshot({
       client: clientBodacc,
       args: ['880878145' as Siren],
-      snaphotFile: 'ganymede-bodacc.json',
+      snapshotFile: 'ganymede-bodacc.json',
       __dirname,
       postProcessResult,
     });

@@ -6,7 +6,7 @@ describe('clientDepartementsByName', () => {
     await expectClientToMatchSnapshot({
       client: clientDepartementsByName,
       args: ['Nice'],
-      snaphotFile: 'nice.json',
+      snapshotFile: 'nice.json',
       __dirname,
     });
   });

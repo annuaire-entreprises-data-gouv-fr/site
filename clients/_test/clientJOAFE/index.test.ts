@@ -6,7 +6,7 @@ describe('clientJOAFE', () => {
     await expectClientToMatchSnapshot({
       client: clientJOAFE,
       args: ['W643000551'],
-      snaphotFile: 'association-joafe.json',
+      snapshotFile: 'association-joafe.json',
       __dirname,
       postProcessResult: (result) => {
         result.lastModified = '2023-10-18T23:19:19.590091+00:00';

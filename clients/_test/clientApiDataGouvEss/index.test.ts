@@ -7,7 +7,7 @@ describe('clientAssociation', () => {
     await expectClientToMatchSnapshot({
       client: clientEss,
       args: ['800329849' as Siren],
-      snaphotFile: 'api-data-gouv-ess-800329849.json',
+      snapshotFile: 'api-data-gouv-ess-800329849.json',
       __dirname,
     });
   });

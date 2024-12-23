@@ -16,7 +16,7 @@ function expectClientToMatchSnapshotWithAddress(address: string) {
       client: clientBanGeoLoc,
       __dirname,
       args: [address],
-      snaphotFile: `address-${address}.json`,
+      snapshotFile: `address-${address}.json`,
     });
   });
 }
