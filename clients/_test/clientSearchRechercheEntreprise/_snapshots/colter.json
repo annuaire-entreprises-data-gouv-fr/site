@@ -7145,11 +7145,11 @@
         "dirigeants": []
       },
       {
-        "siren": "200018406",
-        "oldSiren": "200018406",
+        "siren": "200096956",
+        "oldSiren": "200096956",
         "siege": {
-          "siren": "200018406",
-          "siret": "20001840600096",
+          "siren": "200096956",
+          "siret": "20009695600012",
           "oldSiret": "",
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
@@ -7157,28 +7157,29 @@
           "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
-          "nic": "00096",
-          "dateCreation": "2022-01-12",
+          "nic": "00012",
+          "dateCreation": "2022-01-01",
           "dateDerniereMiseAJour": "",
           "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2022-01-12",
+          "dateDebutActivite": "2022-01-01",
           "dateFermeture": "",
-          "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-          "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-          "codePostal": "41200",
-          "commune": "ROMORANTIN-LANTHENAY",
+          "adresse": "8 RUE ANDRE DE CHENIER 47000 AGEN",
+          "adressePostale": "8 RUE ANDRE DE CHENIER 47000 AGEN",
+          "codePostal": "47000",
+          "commune": "AGEN",
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-          "trancheEffectif": "21",
+          "trancheEffectif": "42",
           "anneeTrancheEffectif": "2022",
-          "latitude": "47.357427",
-          "longitude": "1.747963",
+          "latitude": "44.202133",
+          "longitude": "0.614056",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "5021"
+              "5021",
+              "9999"
             ],
             "idOrganismeFormation": [],
             "idRge": [
@@ -7191,15 +7192,15 @@
         "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
-        "nomComplet": "COMMUNAUTE DE COMMUNES DU ROMORANTINAIS ET DU MONESTOIS",
-        "chemin": "communaute-de-communes-du-romorantinais-et-du-monestois-200018406",
-        "natureJuridique": "7346",
-        "libelleNatureJuridique": "Communauté de communes",
+        "nomComplet": "AGGLOMERATION D'AGEN",
+        "chemin": "agglomeration-d-agen-200096956",
+        "natureJuridique": "7348",
+        "libelleNatureJuridique": "Communauté d'agglomération",
         "etablissements": {
           "all": [
             {
-              "siren": "200018406",
-              "siret": "20001840600096",
+              "siren": "200096956",
+              "siret": "20009695600012",
               "oldSiret": "",
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
@@ -7207,28 +7208,29 @@
               "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
-              "nic": "00096",
-              "dateCreation": "2022-01-12",
+              "nic": "00012",
+              "dateCreation": "2022-01-01",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2022-01-12",
+              "dateDebutActivite": "2022-01-01",
               "dateFermeture": "",
-              "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-              "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-              "codePostal": "41200",
-              "commune": "ROMORANTIN-LANTHENAY",
+              "adresse": "8 RUE ANDRE DE CHENIER 47000 AGEN",
+              "adressePostale": "8 RUE ANDRE DE CHENIER 47000 AGEN",
+              "codePostal": "47000",
+              "commune": "AGEN",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "21",
+              "trancheEffectif": "42",
               "anneeTrancheEffectif": "2022",
-              "latitude": "47.357427",
-              "longitude": "1.747963",
+              "latitude": "44.202133",
+              "longitude": "0.614056",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "5021"
+                  "5021",
+                  "9999"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -7240,8 +7242,8 @@
           ],
           "open": [
             {
-              "siren": "200018406",
-              "siret": "20001840600096",
+              "siren": "200096956",
+              "siret": "20009695600012",
               "oldSiret": "",
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
@@ -7249,28 +7251,29 @@
               "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
-              "nic": "00096",
-              "dateCreation": "2022-01-12",
+              "nic": "00012",
+              "dateCreation": "2022-01-01",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2022-01-12",
+              "dateDebutActivite": "2022-01-01",
               "dateFermeture": "",
-              "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-              "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-              "codePostal": "41200",
-              "commune": "ROMORANTIN-LANTHENAY",
+              "adresse": "8 RUE ANDRE DE CHENIER 47000 AGEN",
+              "adressePostale": "8 RUE ANDRE DE CHENIER 47000 AGEN",
+              "codePostal": "47000",
+              "commune": "AGEN",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "21",
+              "trancheEffectif": "42",
               "anneeTrancheEffectif": "2022",
-              "latitude": "47.357427",
-              "longitude": "1.747963",
+              "latitude": "44.202133",
+              "longitude": "0.614056",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "5021"
+                  "5021",
+                  "9999"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -7282,23 +7285,23 @@
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 9,
-          "nombreEtablissements": 11,
+          "nombreEtablissementsOuverts": 10,
+          "nombreEtablissements": 10,
           "usePagination": false,
           "currentEtablissementPage": 1
         },
         "activitePrincipale": "84.11Z",
         "libelleActivitePrincipale": "Administration publique générale",
-        "dateCreation": "2008-12-29",
+        "dateCreation": "2022-01-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-11-15T10:45:32",
+        "dateMiseAJourInsee": "2024-03-22T14:26:06",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": "21",
+        "trancheEffectif": "42",
         "anneeCategorieEntreprise": "2022",
-        "categorieEntreprise": "PME",
+        "categorieEntreprise": "ETI",
         "anneeTrancheEffectif": "2022",
         "complements": {
           "estBio": false,
@@ -7307,7 +7310,7 @@
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
-          "estFiness": true,
+          "estFiness": false,
           "egaproRenseignee": false,
           "estRge": true,
           "estOrganismeFormation": false,
@@ -7323,416 +7326,786 @@
           "data": null
         },
         "colter": {
-          "codeColter": "200018406",
+          "codeColter": "200096956",
           "codeInsee": null,
           "niveau": "epci",
           "elus": [
             {
-              "sexe": "F",
-              "nom": "FOISSARD NÉE BEN AIOUN",
-              "prenom": "Maryse",
-              "prenoms": "Maryse",
-              "role": null,
-              "dateNaissancePartial": "1992-03",
-              "lieuNaissance": ""
-            },
-            {
               "sexe": "M",
-              "nom": "GARNIER",
+              "nom": "BENATTI",
               "prenom": "Nicolas",
               "prenoms": "Nicolas",
-              "role": "2eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1975-11",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "DE CARFORT",
-              "prenom": "Claude",
-              "prenoms": "Claude",
               "role": null,
-              "dateNaissancePartial": "1949-01",
+              "dateNaissancePartial": "1978-10",
               "lieuNaissance": ""
             },
             {
               "sexe": "F",
-              "nom": "DOUCET-LAUVERJAT",
-              "prenom": "Sylvie",
-              "prenoms": "Sylvie",
-              "role": "6eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1975-10",
+              "nom": "BRANDOLIN-ROBERT",
+              "prenom": "Clémence",
+              "prenoms": "Clémence",
+              "role": "13eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1983-07",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "CHANTIER",
-              "prenom": "Gilles",
-              "prenoms": "Gilles",
+              "nom": "BRUNEAU",
+              "prenom": "Laurent",
+              "prenoms": "Laurent",
               "role": null,
-              "dateNaissancePartial": "1950-07",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "CARRE",
-              "prenom": "Michel",
-              "prenoms": "Michel",
-              "role": null,
-              "dateNaissancePartial": "1952-11",
+              "dateNaissancePartial": "1977-11",
               "lieuNaissance": ""
             },
             {
               "sexe": "F",
-              "nom": "GILOT-LECLERC",
-              "prenom": "Françoise",
-              "prenoms": "Françoise",
-              "role": "9eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1949-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "PENÊT",
-              "prenom": "Benoît",
-              "prenoms": "Benoît",
+              "nom": "CUGURNO",
+              "prenom": "Emmanuelle",
+              "prenoms": "Emmanuelle",
               "role": null,
-              "dateNaissancePartial": "1991-03",
+              "dateNaissancePartial": "1976-07",
               "lieuNaissance": ""
             },
             {
-              "sexe": "M",
-              "nom": "RETIF",
-              "prenom": "Dominique",
-              "prenoms": "Dominique",
+              "sexe": "F",
+              "nom": "DELCROS",
+              "prenom": "Marjorie",
+              "prenoms": "Marjorie",
               "role": null,
-              "dateNaissancePartial": "1958-10",
+              "dateNaissancePartial": "1988-11",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "HERISSET",
-              "prenom": "Joël",
-              "prenoms": "Joël",
+              "nom": "DIONIS DU SÉJOUR",
+              "prenom": "Jean",
+              "prenoms": "Jean",
+              "role": "Président du conseil communautaire",
+              "dateNaissancePartial": "1956-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DUGAY",
+              "prenom": "Jean",
+              "prenoms": "Jean",
               "role": null,
-              "dateNaissancePartial": "1959-03",
+              "dateNaissancePartial": "1977-02",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "THUÉ",
-              "prenom": "Gérard",
-              "prenoms": "Gérard",
-              "role": null,
-              "dateNaissancePartial": "1950-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BLANCHARD",
+              "nom": "DUPONT",
               "prenom": "Pierre",
               "prenoms": "Pierre",
               "role": null,
-              "dateNaissancePartial": "1984-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "THORIN",
-              "prenom": "Christophe",
-              "prenoms": "Christophe",
-              "role": "13eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1969-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BERTRAND",
-              "prenom": "Aurélien",
-              "prenoms": "Aurélien",
-              "role": "4eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1991-12",
+              "dateNaissancePartial": "1984-06",
               "lieuNaissance": ""
             },
             {
               "sexe": "F",
-              "nom": "COGNET",
+              "nom": "DÉJEAN-SIMONITI",
+              "prenom": "Carole",
+              "prenoms": "Carole",
+              "role": null,
+              "dateNaissancePartial": "1977-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FELLAH",
+              "prenom": "Mohamed",
+              "prenoms": "Mohamed",
+              "role": null,
+              "dateNaissancePartial": "1975-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "FLORENTINY",
+              "prenom": "Claude",
+              "prenoms": "Claude",
+              "role": null,
+              "dateNaissancePartial": "1958-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "FRANÇOIS",
+              "prenom": "Maïté",
+              "prenoms": "Maïté",
+              "role": null,
+              "dateNaissancePartial": "1952-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GESLOT",
+              "prenom": "Mickaël",
+              "prenoms": "Mickaël",
+              "role": null,
+              "dateNaissancePartial": "1983-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "HECQUEFEUILLE",
+              "prenom": "Rose",
+              "prenoms": "Rose",
+              "role": null,
+              "dateNaissancePartial": "1957-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "IACHEMET",
+              "prenom": "Marie-Claude",
+              "prenoms": "Marie-Claude",
+              "role": null,
+              "dateNaissancePartial": "1962-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "KHERKHACH",
+              "prenom": "Baya",
+              "prenoms": "Baya",
+              "role": null,
+              "dateNaissancePartial": "1978-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "KLAJMAN",
+              "prenom": "Alain",
+              "prenoms": "Alain",
+              "role": null,
+              "dateNaissancePartial": "1963-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LAFFORE",
+              "prenom": "Jean-Pierre",
+              "prenoms": "Jean-Pierre",
+              "role": null,
+              "dateNaissancePartial": "1953-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LASMAK",
+              "prenom": "Naïma",
+              "prenoms": "Naïma",
+              "role": null,
+              "dateNaissancePartial": "1973-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LAUZZANA",
+              "prenom": "Nadège",
+              "prenoms": "Nadège",
+              "role": null,
+              "dateNaissancePartial": "1960-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "MAÏOROFF",
+              "prenom": "Laurence",
+              "prenoms": "Laurence",
+              "role": null,
+              "dateNaissancePartial": "1958-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "NKOLLO",
+              "prenom": "Jean-Marie",
+              "prenoms": "Jean-Marie",
+              "role": null,
+              "dateNaissancePartial": "1961-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SI TAYEB",
+              "prenom": "Farid",
+              "prenoms": "Farid",
+              "role": null,
+              "dateNaissancePartial": "1972-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "ZAMBONI",
+              "prenom": "Thomas",
+              "prenoms": "Thomas",
+              "role": null,
+              "dateNaissancePartial": "1985-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BONNET",
+              "prenom": "Paul",
+              "prenoms": "Paul",
+              "role": "15eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1965-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CAUSSE",
+              "prenom": "Jean-Marc",
+              "prenoms": "Jean-Marc",
+              "role": null,
+              "dateNaissancePartial": "1956-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BUISSON",
+              "prenom": "Patrick",
+              "prenoms": "Patrick",
+              "role": "4eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1961-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "ROUX",
+              "prenom": "Patrick",
+              "prenoms": "Patrick, Philippe",
+              "role": null,
+              "dateNaissancePartial": "1970-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "COULONGES",
+              "prenom": "Marie-Thérèse",
+              "prenoms": "Marie-Thérèse",
+              "role": null,
+              "dateNaissancePartial": "1956-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LAFUENTE",
+              "prenom": "Jean-Michel",
+              "prenoms": "Jean-Michel",
+              "role": null,
+              "dateNaissancePartial": "1957-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LEBEAU",
+              "prenom": "Françoise",
+              "prenoms": "Françoise",
+              "role": null,
+              "dateNaissancePartial": "1954-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LUGUET",
+              "prenom": "Pascale",
+              "prenoms": "Pascale",
+              "role": "5eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1966-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "PANTEIX",
+              "prenom": "Daniel",
+              "prenoms": "Daniel",
+              "role": null,
+              "dateNaissancePartial": "1954-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "AMELING",
+              "prenom": "Christian",
+              "prenoms": "Christian",
+              "role": null,
+              "dateNaissancePartial": "1954-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "ANNETTE-OGIER",
               "prenom": "Jacqueline",
               "prenoms": "Jacqueline",
               "role": null,
-              "dateNaissancePartial": "1944-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "CORDIER",
-              "prenom": "Thierry",
-              "prenoms": "Thierry",
-              "role": null,
-              "dateNaissancePartial": "1959-12",
+              "dateNaissancePartial": "1959-06",
               "lieuNaissance": ""
             },
             {
               "sexe": "F",
-              "nom": "BARRY",
-              "prenom": "Angélique",
-              "prenoms": "Angélique",
-              "role": null,
-              "dateNaissancePartial": "1975-12",
+              "nom": "LAMY",
+              "prenom": "Laurence",
+              "prenoms": "Laurence",
+              "role": "9eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1972-03",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "DE REDON",
-              "prenom": "Louis",
-              "prenoms": "Louis",
+              "nom": "RAYSSAC",
+              "prenom": "Pascal",
+              "prenoms": "Pascal",
               "role": null,
-              "dateNaissancePartial": "1981-05",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "DEGRAIS",
-              "prenom": "Anne",
-              "prenoms": "Anne",
-              "role": null,
-              "dateNaissancePartial": "1967-02",
+              "dateNaissancePartial": "1971-04",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "DUVAL",
-              "prenom": "Michel",
-              "prenoms": "Michel",
+              "nom": "PONSOLLE",
+              "prenom": "Joël",
+              "prenoms": "Joël",
               "role": null,
-              "dateNaissancePartial": "1948-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "ESCAMEZ",
-              "prenom": "Stéphanie",
-              "prenoms": "Stéphanie",
-              "role": "14eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1974-12",
+              "dateNaissancePartial": "1968-04",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "GAVEAU",
-              "prenom": "Stéphane",
-              "prenoms": "Stéphane",
-              "role": "12eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1970-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "GIRAUDET",
-              "prenom": "Dominique",
-              "prenoms": "Dominique",
-              "role": null,
-              "dateNaissancePartial": "1957-06",
+              "nom": "GRIMA",
+              "prenom": "Olivier",
+              "prenoms": "Olivier",
+              "role": "3eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1972-03",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "GUIMONET",
-              "prenom": "Michel",
-              "prenoms": "Michel",
-              "role": "7eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1955-04",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "GUÉNIN",
-              "prenom": "Didier",
-              "prenoms": "Didier",
+              "nom": "DAILLEDOUZE",
+              "prenom": "François",
+              "prenoms": "François",
               "role": null,
               "dateNaissancePartial": "1963-07",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "HARNOIS",
-              "prenom": "Bruno",
-              "prenoms": "Bruno",
-              "role": "3eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1968-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "HOUGNON",
-              "prenom": "Raphaël",
-              "prenoms": "Raphaël",
-              "role": null,
-              "dateNaissancePartial": "1975-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "LEROY",
-              "prenom": "Roger",
-              "prenoms": "Roger",
-              "role": "8eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1959-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "LORGEOUX",
-              "prenom": "Jeanny",
-              "prenoms": "Jeanny",
-              "role": "Président du conseil communautaire",
-              "dateNaissancePartial": "1950-01",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "MARCHAND",
-              "prenom": "Vanessa",
-              "prenoms": "Vanessa",
-              "role": null,
-              "dateNaissancePartial": "1977-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "NAUDION",
+              "nom": "LE BOT",
               "prenom": "Claude",
               "prenoms": "Claude",
               "role": null,
-              "dateNaissancePartial": "1952-12",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "ORTH",
-              "prenom": "Catherine",
-              "prenoms": "Catherine",
-              "role": null,
-              "dateNaissancePartial": "1959-10",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "PAUCHARD",
-              "prenom": "Anicette",
-              "prenoms": "Anicette",
-              "role": null,
-              "dateNaissancePartial": "1957-09",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "ROGER",
-              "prenom": "Nicole",
-              "prenoms": "Nicole",
-              "role": "1er Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1948-01",
+              "dateNaissancePartial": "1954-05",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "SABOURDY",
-              "prenom": "Cédric",
-              "prenoms": "Cédric",
-              "role": "5eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1979-05",
+              "nom": "DE SERMET",
+              "prenom": "Pascal",
+              "prenoms": "Pascal",
+              "role": "7eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1958-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "THEPAUT",
+              "prenom": "Annie",
+              "prenoms": "Annie",
+              "role": null,
+              "dateNaissancePartial": "1955-11",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "SEGUIN",
+              "nom": "GUATTA",
+              "prenom": "Joël",
+              "prenoms": "Joël",
+              "role": null,
+              "dateNaissancePartial": "1969-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BERTHOUMIEUX",
+              "prenom": "Serge",
+              "prenoms": "Serge",
+              "role": null,
+              "dateNaissancePartial": "1956-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "SALLES",
+              "prenom": "Marie-France",
+              "prenoms": "Marie-France",
+              "role": "8eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1953-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GILLY",
+              "prenom": "Jean",
+              "prenoms": "Jean, Marc",
+              "role": "11eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1959-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BENAZET",
+              "prenom": "Jean-Pierre",
+              "prenoms": "Jean-Pierre",
+              "role": null,
+              "dateNaissancePartial": "1951-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "COMBA",
+              "prenom": "Michelle",
+              "prenoms": "Michelle",
+              "role": null,
+              "dateNaissancePartial": "1961-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DUBOS",
+              "prenom": "Bruno",
+              "prenoms": "Bruno",
+              "role": "6eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1976-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "OLIVIER",
+              "prenom": "Vincent",
+              "prenoms": "Vincent",
+              "role": null,
+              "dateNaissancePartial": "1972-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "VEYRET",
+              "prenom": "Laurianne",
+              "prenoms": "Laurianne",
+              "role": null,
+              "dateNaissancePartial": "1984-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "VERDIÉ",
+              "prenom": "Yohan",
+              "prenoms": "Yohan",
+              "role": null,
+              "dateNaissancePartial": "1982-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BACQUA",
+              "prenom": "Éric",
+              "prenoms": "Éric",
+              "role": null,
+              "dateNaissancePartial": "1965-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BARATTO",
+              "prenom": "Isabelle",
+              "prenoms": "Isabelle",
+              "role": null,
+              "dateNaissancePartial": "1965-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CONSTANS",
+              "prenom": "Rémi",
+              "prenoms": "Rémi",
+              "role": "14eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1947-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DEGRYSE",
               "prenom": "Philippe",
               "prenoms": "Philippe",
               "role": null,
-              "dateNaissancePartial": "1960-02",
+              "dateNaissancePartial": "1963-09",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "SOURIOUX",
-              "prenom": "Romain",
-              "prenoms": "Romain",
-              "role": "11eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1989-11",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "BARBÉ",
-              "prenom": "Pierre",
-              "prenoms": "Pierre",
-              "role": null,
-              "dateNaissancePartial": "1938-08",
+              "nom": "TANDONNET",
+              "prenom": "Henri",
+              "prenoms": "Henri",
+              "role": "1er Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1949-12",
               "lieuNaissance": ""
             },
             {
               "sexe": "F",
-              "nom": "ANTOINE",
-              "prenom": "Nelly",
-              "prenoms": "Nelly",
+              "nom": "BARAILLES",
+              "prenom": "Brigitte",
+              "prenoms": "Brigitte",
               "role": null,
-              "dateNaissancePartial": "1958-04",
+              "dateNaissancePartial": "1952-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "FAGET",
+              "prenom": "Cécile",
+              "prenoms": "Cécile",
+              "role": null,
+              "dateNaissancePartial": "1976-04",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "GASC",
-              "prenom": "Thibaut",
-              "prenoms": "Thibaut",
+              "nom": "FRÉMY",
+              "prenom": "Gilles",
+              "prenoms": "Gilles",
               "role": null,
-              "dateNaissancePartial": "1973-05",
+              "dateNaissancePartial": "1970-05",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "LAUMONIER",
-              "prenom": "Gérald",
-              "prenoms": "Gérald",
-              "role": null,
-              "dateNaissancePartial": "1972-05",
+              "nom": "GARCIA",
+              "prenom": "Francis",
+              "prenoms": "Francis",
+              "role": "2eme Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1951-05",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "MARECHAL",
-              "prenom": "Bruno",
-              "prenoms": "Bruno",
+              "nom": "MEYNARD",
+              "prenom": "Daniel",
+              "prenoms": "Daniel",
+              "role": null,
+              "dateNaissancePartial": "1948-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MIRANDE",
+              "prenom": "Jean-Jacques",
+              "prenoms": "Jean-Jacques",
+              "role": null,
+              "dateNaissancePartial": "1955-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DELBREL",
+              "prenom": "Christian",
+              "prenoms": "Christian",
               "role": "10eme Vice-président du conseil communautaire",
-              "dateNaissancePartial": "1963-10",
+              "dateNaissancePartial": "1963-01",
               "lieuNaissance": ""
             },
             {
               "sexe": "F",
-              "nom": "PERSEGOL",
-              "prenom": "Léa",
-              "prenoms": "Léa",
+              "nom": "MEYNARD",
+              "prenom": "Marie-Françoise",
+              "prenoms": "Marie-Françoise",
               "role": null,
-              "dateNaissancePartial": "1989-05",
+              "dateNaissancePartial": "1954-06",
               "lieuNaissance": ""
             },
             {
               "sexe": "M",
-              "nom": "BESSONNIER",
-              "prenom": "Hubert",
-              "prenoms": "Hubert",
+              "nom": "RIERA",
+              "prenom": "François",
+              "prenoms": "François",
               "role": null,
-              "dateNaissancePartial": "1952-01",
+              "dateNaissancePartial": "1954-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DURRUTY",
+              "prenom": "Bernard",
+              "prenoms": "Bernard",
+              "role": null,
+              "dateNaissancePartial": "1960-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FOURNIER",
+              "prenom": "Patrice",
+              "prenoms": "Patrice",
+              "role": null,
+              "dateNaissancePartial": "1950-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GENOVESIO",
+              "prenom": "Cécile",
+              "prenoms": "Cécile",
+              "role": null,
+              "dateNaissancePartial": "1974-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "MILANI",
+              "prenom": "Dominique",
+              "prenoms": "Dominique",
+              "role": null,
+              "dateNaissancePartial": "1958-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MAURIN",
+              "prenom": "Philippe",
+              "prenoms": "Philippe",
+              "role": null,
+              "dateNaissancePartial": "1971-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "PROUZET",
+              "prenom": "Jean",
+              "prenoms": "Jean",
+              "role": null,
+              "dateNaissancePartial": "1957-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "VALETTE",
+              "prenom": "Thierry",
+              "prenoms": "Thierry",
+              "role": null,
+              "dateNaissancePartial": "1964-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MALCAYRAN",
+              "prenom": "Jean-Claude",
+              "prenoms": "Jean-Claude",
+              "role": null,
+              "dateNaissancePartial": "1958-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "ROBERT",
+              "prenom": "Jean-Marie",
+              "prenoms": "Jean-Marie",
+              "role": null,
+              "dateNaissancePartial": "1958-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SOFYS",
+              "prenom": "Philippe",
+              "prenoms": "Philippe",
+              "role": null,
+              "dateNaissancePartial": "1962-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "TOVO",
+              "prenom": "Mathieu",
+              "prenoms": "Mathieu",
+              "role": null,
+              "dateNaissancePartial": "1979-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SANCHEZ",
+              "prenom": "David",
+              "prenoms": "David",
+              "role": null,
+              "dateNaissancePartial": "1983-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DOUMERGUE",
+              "prenom": "Richard",
+              "prenoms": "Richard",
+              "role": null,
+              "dateNaissancePartial": "1957-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LABOURNERIE",
+              "prenom": "Nadine",
+              "prenoms": "Nadine",
+              "role": null,
+              "dateNaissancePartial": "1961-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LAMBROT",
+              "prenom": "Jean-Jacques",
+              "prenoms": "Jean-Jacques",
+              "role": null,
+              "dateNaissancePartial": "1955-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LABORIE",
+              "prenom": "Max",
+              "prenoms": "Max",
+              "role": null,
+              "dateNaissancePartial": "1962-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DREUIL",
+              "prenom": "Jean",
+              "prenoms": "Jean",
+              "role": null,
+              "dateNaissancePartial": "1952-11",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DELPECH",
+              "prenom": "Thierry",
+              "prenoms": "Thierry",
+              "role": null,
+              "dateNaissancePartial": "1963-08",
               "lieuNaissance": ""
             }
           ]
         },
         "listeIdcc": [
-          "5021"
+          "5021",
+          "9999"
         ],
         "immatriculation": null,
         "matchingEtablissements": [
           {
-            "siren": "200018406",
-            "siret": "20001840600096",
+            "siren": "200096956",
+            "siret": "20009695600012",
             "oldSiret": "",
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
@@ -7740,28 +8113,29 @@
             "ancienSiege": false,
             "enseigne": "",
             "denomination": null,
-            "nic": "00096",
-            "dateCreation": "2022-01-12",
+            "nic": "00012",
+            "dateCreation": "2022-01-01",
             "dateDerniereMiseAJour": "",
             "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2022-01-12",
+            "dateDebutActivite": "2022-01-01",
             "dateFermeture": "",
-            "adresse": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-            "adressePostale": "PORTE DES BELIERS RUE NORMANT 41200 ROMORANTIN-LANTHENAY",
-            "codePostal": "41200",
-            "commune": "ROMORANTIN-LANTHENAY",
+            "adresse": "8 RUE ANDRE DE CHENIER 47000 AGEN",
+            "adressePostale": "8 RUE ANDRE DE CHENIER 47000 AGEN",
+            "codePostal": "47000",
+            "commune": "AGEN",
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-            "trancheEffectif": "21",
+            "trancheEffectif": "42",
             "anneeTrancheEffectif": "2022",
-            "latitude": "47.357427",
-            "longitude": "1.747963",
+            "latitude": "44.202133",
+            "longitude": "0.614056",
             "complements": {
               "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [
-                "5021"
+                "5021",
+                "9999"
               ],
               "idOrganismeFormation": [],
               "idRge": [
@@ -7771,8 +8145,8 @@
             }
           }
         ],
-        "nombreEtablissements": 11,
-        "nombreEtablissementsOuverts": 9,
+        "nombreEtablissements": 10,
+        "nombreEtablissementsOuverts": 10,
         "dirigeants": []
       }
     ]
