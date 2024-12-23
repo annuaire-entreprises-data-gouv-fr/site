@@ -31,6 +31,10 @@ const routes = {
       cnetp: (siren: string) =>
         `/v3/cnetp/unites_legales/${siren}/attestation_cotisations_conges_payes_chomage_intemperies?context=Test+de+l%27API&object=Test+de+l%27API&recipient=10000001700010`,
     },
+    dgfip: {
+      chiffreAffaires: (siret: string) =>
+        `/v3/dgfip/etablissements/${siret}/chiffres_affaires`,
+    },
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,
   },

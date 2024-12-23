@@ -20,6 +20,7 @@ export enum ApplicationRights {
   subventionsAssociation = 'Données des subventions des associations',
   cibtp = 'Accès au certificat CIBTP',
   cnetp = 'Accès au certificat CNETP',
+  dgfip = 'Accès aux données de la DGFIP (chiffres d’affaires et liasses fiscales)',
 }
 
 /**
