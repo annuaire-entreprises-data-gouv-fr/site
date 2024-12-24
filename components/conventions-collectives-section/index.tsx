@@ -55,7 +55,7 @@ const ConventionsCollectivesSection: React.FC<{
           <a
             target="_blank"
             rel="noreferrer noopener"
-            href={routes.conventionsCollectives.site}
+            href={`${routes.conventionsCollectives.site}?src_url=https://annuaire-entreprises.data.gouv.fr`}
           >
             convention collective enregistrée
           </a>{' '}
@@ -84,7 +84,7 @@ const ConventionsCollectivesSection: React.FC<{
               <a
                 rel="noreferrer noopener"
                 target="_blank"
-                href="https://code.travail.gouv.fr/outils/convention-collective"
+                href="https://code.travail.gouv.fr/outils/convention-collective?src_url=https://annuaire-entreprises.data.gouv.fr"
               >
                 le site du Code du Travail Numérique.
               </a>
@@ -156,10 +156,12 @@ const ConventionsCollectivesSection: React.FC<{
                     <>
                       {idcc === '9999' ? (
                         <i>Sans convention collective</i>
+                      ) : unknown ? (
+                        <i>Convention collective inconnue</i>
                       ) : (
                         <ButtonLink
                           target="_blank"
-                          to={`${routes.conventionsCollectives.details}${idcc}`}
+                          to={`${routes.conventionsCollectives.details}${idcc}?src_url=https://annuaire-entreprises.data.gouv.fr`}
                           alt
                           aria-label={`Convention collective ${
                             title || idcc
