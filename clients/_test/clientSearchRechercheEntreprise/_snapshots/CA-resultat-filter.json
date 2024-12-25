@@ -1009,7 +1009,6 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "2609",
               "1596"
             ],
             "idOrganismeFormation": [],
@@ -1058,7 +1057,6 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "2609",
                   "1596"
                 ],
                 "idOrganismeFormation": [],
@@ -1099,7 +1097,6 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "2609",
                   "1596"
                 ],
                 "idOrganismeFormation": [],
@@ -1154,7 +1151,6 @@
           "codeColter": null
         },
         "listeIdcc": [
-          "2609",
           "1596"
         ],
         "immatriculation": null,
@@ -1190,7 +1186,6 @@
               "idFiness": [],
               "idBio": [],
               "idcc": [
-                "2609",
                 "1596"
               ],
               "idOrganismeFormation": [],

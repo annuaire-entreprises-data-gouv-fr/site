@@ -43,8 +43,9 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "1596",
-              "2609"
+              "2420",
+              "2609",
+              "1596"
             ],
             "idOrganismeFormation": [],
             "idRge": [
@@ -102,8 +103,9 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "1596",
-                  "2609"
+                  "2420",
+                  "2609",
+                  "1596"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -153,8 +155,9 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "1596",
-                  "2609"
+                  "2420",
+                  "2609",
+                  "1596"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -218,8 +221,9 @@
           "codeColter": null
         },
         "listeIdcc": [
-          "1596",
-          "2609"
+          "2420",
+          "2609",
+          "1596"
         ],
         "immatriculation": {
           "dateDebutActivite": "2018-11-12",

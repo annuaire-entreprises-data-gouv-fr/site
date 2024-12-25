@@ -855,8 +855,8 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "9999",
-              "5021"
+              "5021",
+              "9999"
             ],
             "idOrganismeFormation": [],
             "idRge": [
@@ -906,8 +906,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "9999",
-                  "5021"
+                  "5021",
+                  "9999"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -949,8 +949,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "9999",
-                  "5021"
+                  "5021",
+                  "9999"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -1604,8 +1604,8 @@
               "idFiness": [],
               "idBio": [],
               "idcc": [
-                "9999",
-                "5021"
+                "5021",
+                "9999"
               ],
               "idOrganismeFormation": [],
               "idRge": [
@@ -3677,8 +3677,8 @@
           ]
         },
         "listeIdcc": [
-          "5021",
-          "9999"
+          "9999",
+          "5021"
         ],
         "immatriculation": null,
         "matchingEtablissements": [
@@ -5318,8 +5318,8 @@
           ]
         },
         "listeIdcc": [
-          "1486",
-          "5021"
+          "5021",
+          "1486"
         ],
         "immatriculation": null,
         "matchingEtablissements": [
@@ -7094,8 +7094,8 @@
           ]
         },
         "listeIdcc": [
-          "9999",
-          "5021"
+          "5021",
+          "9999"
         ],
         "immatriculation": null,
         "matchingEtablissements": [
@@ -7178,8 +7178,8 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "5021",
-              "9999"
+              "9999",
+              "5021"
             ],
             "idOrganismeFormation": [],
             "idRge": [
@@ -7229,8 +7229,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "5021",
-                  "9999"
+                  "9999",
+                  "5021"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -7272,8 +7272,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "5021",
-                  "9999"
+                  "9999",
+                  "5021"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -8134,8 +8134,8 @@
               "idFiness": [],
               "idBio": [],
               "idcc": [
-                "5021",
-                "9999"
+                "9999",
+                "5021"
               ],
               "idOrganismeFormation": [],
               "idRge": [
