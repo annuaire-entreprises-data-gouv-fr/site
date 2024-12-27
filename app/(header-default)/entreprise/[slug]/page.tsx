@@ -3,7 +3,7 @@ import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
 import EtablissementListeSection from '#components/etablissement-liste-section';
-import EtablissementSection from '#components/etablissement-section';
+import { EtablissementSiegeSection } from '#components/etablissement-siege-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
 import { NonDiffusibleSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
@@ -99,15 +99,15 @@ export default async function UniteLegalePage(props: AppRouterProps) {
             )}
             <HorizontalSeparator />
             {uniteLegale.siege && (
-              <EtablissementSection
+              <EtablissementSiegeSection
                 uniteLegale={uniteLegale}
-                etablissement={uniteLegale.siege}
-                usedInEntreprisePage={true}
-                withDenomination={false}
                 session={session}
               />
             )}
-            <EtablissementListeSection uniteLegale={uniteLegale} />
+            <EtablissementListeSection
+              uniteLegale={uniteLegale}
+              session={session}
+            />
           </>
         )}
       </div>

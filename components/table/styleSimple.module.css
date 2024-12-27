@@ -25,7 +25,6 @@ table.two-column-table {
 .two-column-table th {
   border: none;
   padding: 3px;
-  background-color: #fff;
   padding-left: 30px;
 }
 
@@ -56,7 +55,6 @@ table.two-column-table > thead {
 td.cell {
   width: auto;
   padding: 5px 3px;
-  background-color: #fff;
   padding-left: 30px;
 }
 

@@ -5,10 +5,6 @@ import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
 import {
-  getEtablissementWithLatLongFromSlug,
-  getEtablissementWithUniteLegaleFromSlug,
-} from '../../../models/core/etablissement';
-import {
   FetchRechercheEntrepriseException,
   NotASirenError,
   NotASiretError,
@@ -74,25 +70,3 @@ export const cachedGetUniteLegale = cache(
     }
   }
 );
-
-export const cachedEtablissementWithUniteLegale = cache(
-  async (slug: string, isBot: boolean) => {
-    const siretSlug = extractSirenOrSiretSlugFromUrl(slug);
-    try {
-      return await getEtablissementWithUniteLegaleFromSlug(siretSlug, isBot);
-    } catch (e) {
-      handleException(e, siretSlug);
-      throw e;
-    }
-  }
-);
-
-export const cachedEtablissementWithLatLong = cache(async (slug: string) => {
-  const siretSlug = extractSirenOrSiretSlugFromUrl(slug);
-  try {
-    return await getEtablissementWithLatLongFromSlug(siretSlug);
-  } catch (e) {
-    handleException(e, siretSlug);
-    throw e;
-  }
-});

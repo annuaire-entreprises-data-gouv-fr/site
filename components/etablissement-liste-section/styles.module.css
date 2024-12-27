@@ -5,3 +5,30 @@
   gap: 10px;
   margin-bottom: 15px;
 }
+
+.tableDetails {
+  margin-left: 30px;
+  border-left: 1px solid var(--annuaire-colors-pastelBlue);
+  margin-bottom: 15px;
+}
+.tableDetailsLabel {
+  font-weight: bold;
+  margin-top: 15px;
+}
+.tableDetailsLabel:after {
+  margin-top: 5px;
+  background-color: var(--annuaire-colors-pastelBlue);
+  display: block;
+  content: '';
+  width: 30px;
+  margin-left: 15px;
+  height: 1px;
+}
+
+.tableDetails:after {
+  background-color: var(--annuaire-colors-pastelBlue);
+  display: block;
+  content: '';
+  width: 15px;
+  height: 1px;
+}

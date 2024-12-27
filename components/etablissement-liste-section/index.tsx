@@ -4,7 +4,8 @@ import { EtablissementsMap } from '#components/map/map-etablissement';
 import { Section } from '#components/section';
 import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
-import { IUniteLegale } from '#models/core/types';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { uniteLegaleLabelWithPronounContracted } from '#utils/helpers';
 import React, { useState } from 'react';
 import { EtablissementFilters } from './filters';
@@ -12,10 +13,14 @@ import { EtablissementsTable } from './table';
 
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
   const [filteredEtablissements, setFilteredEtablissements] = useState(
     uniteLegale.etablissements
   );
+
+  const [selectedEtablissement, setSelectedEtablissement] =
+    useState<IEtablissement | null>(null);
 
   const [showMap, toggleMap] = useState(false);
 
@@ -73,11 +78,18 @@ const EtablissementListeSection: React.FC<{
         toggleMap={() => toggleMap(!showMap)}
       />
       {showMap ? (
-        <EtablissementsMap etablissements={filteredEtablissements} />
+        <EtablissementsMap
+          filteredEtablissements={filteredEtablissements}
+          selectedEtablissement={selectedEtablissement}
+        />
       ) : (
         <EtablissementsTable
-          etablissements={filteredEtablissements}
+          filteredEtablissements={filteredEtablissements}
           uniteLegale={uniteLegale}
+          session={session}
+          showMap={() => toggleMap(!showMap)}
+          setSelectedEtablissement={setSelectedEtablissement}
+          selectedEtablissement={selectedEtablissement}
         />
       )}
     </Section>

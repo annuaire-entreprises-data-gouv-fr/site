@@ -20,8 +20,6 @@ export const EtablissementFilters: React.FC<{
   useEffect(() => {
     let newFiltered = allEtablissements;
 
-    console.log(etatAdministratifFilter, searchFilter);
-
     if (etatAdministratifFilter) {
       newFiltered = newFiltered.filter((e) => {
         if (etatAdministratifFilter === 'A') {
