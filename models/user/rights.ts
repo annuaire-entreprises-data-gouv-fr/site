@@ -22,6 +22,7 @@ export enum ApplicationRights {
   cnetp = 'Accès au certificat CNETP',
   probtp = 'Accès à l‘attestation PROBTP',
   effectifsAnnuels = 'Effectifs annuels (RCD)',
+  chiffreAffaires = 'Accès aux chiffres d’affaires (DGFiP)',
 }
 
 /**
@@ -38,12 +39,16 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
       return userScopes.includes('rne');
     case ApplicationRights.conformite:
       return userScopes.includes('conformite');
+    case ApplicationRights.chiffreAffaires:
+      return userScopes.includes('chiffre_affaires');
+    case ApplicationRights.effectifsAnnuels:
+      return userScopes.includes('effectifs_annuels');
     case ApplicationRights.protectedCertificats:
     case ApplicationRights.carteProfessionnelleTravauxPublics:
     case ApplicationRights.mandatairesRCS:
     case ApplicationRights.subventionsAssociation:
     case ApplicationRights.associationProtected:
-      // not open data but available for allagents
+      // not open data but available for all agents
       return userScopes.includes('pseudo_opendata');
     case ApplicationRights.beneficiaires:
       return userScopes.includes('beneficiaires');
@@ -57,8 +62,6 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
       return userScopes.includes('nonDiffusible');
     case ApplicationRights.isAgent:
       return userScopes.includes('agent');
-    case ApplicationRights.effectifsAnnuels:
-      return userScopes.includes('effectifs_annuels');
     default:
       return false;
   }

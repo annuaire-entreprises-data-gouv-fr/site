@@ -6,8 +6,8 @@ import {
   IAPINotRespondingError,
 } from '#models/api-not-responding';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import { FetchRessourceException } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
+import { FetchRessourceException, Information } from '#models/exceptions';
+import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
 
 export type ISubventions = ISubvention[];
 
@@ -26,24 +26,43 @@ export const getSubventionsAssociationFromSlug = async (
     isBot: false,
   });
 
-  const { siren } = uniteLegale;
-
+  const {
+    siren,
+    association: { idAssociation },
+  } = uniteLegale;
   try {
     return await clientApiDataSubvention(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DJEPVA, 404);
+    } else if (!idAssociation) {
+      return APINotRespondingFactory(EAdministration.DJEPVA, 500);
+    } else {
+      try {
+        const result = await clientApiDataSubvention(idAssociation);
+        logInfoInSentry(
+          new Information({
+            name: 'DataSubvention',
+            message: 'Fallback worked for data subvention',
+          })
+        );
+        return result;
+      } catch (e) {
+        if (e instanceof HttpNotFound) {
+          return APINotRespondingFactory(EAdministration.DJEPVA, 404);
+        }
+        logErrorInSentry(
+          new FetchRessourceException({
+            ressource: 'DataSubvention',
+            cause: e,
+            context: {
+              siren,
+            },
+            administration: EAdministration.DJEPVA,
+          })
+        );
+        return APINotRespondingFactory(EAdministration.DJEPVA, 500);
+      }
     }
-    logErrorInSentry(
-      new FetchRessourceException({
-        ressource: 'DataSubvention',
-        cause: e,
-        context: {
-          siren,
-        },
-        administration: EAdministration.DJEPVA,
-      })
-    );
-    return APINotRespondingFactory(EAdministration.DJEPVA, 500);
   }
 };

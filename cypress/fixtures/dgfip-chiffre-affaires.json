@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "data": {
+        "chiffre_affaires": 100000,
+        "date_fin_exercice": "2023-12-31"
+      },
+      "links": {},
+      "meta": {}
+    },
+    {
+      "data": {
+        "chiffre_affaires": 2000000,
+        "date_fin_exercice": "2022-12-31"
+      },
+      "links": {},
+      "meta": {}
+    },
+    {
+      "data": {
+        "chiffre_affaires": 3000000,
+        "date_fin_exercice": "2021-12-31"
+      },
+      "links": {},
+      "meta": {}
+    }
+  ],
+  "meta": {
+    "count": 3
+  },
+  "links": {}
+}
