@@ -17,6 +17,7 @@ type IProps = {
   useSearchBar?: boolean;
   useAgentCTA?: boolean;
   useAgentBanner?: boolean;
+  useReconnectBanner?: boolean;
   useMap?: boolean;
   useInfoBanner?: boolean;
   session: ISession | null;
@@ -29,13 +30,14 @@ export const HeaderCore: React.FC<IProps> = ({
   useSearchBar = false,
   useAgentCTA = false,
   useAgentBanner = false,
+  useReconnectBanner = true,
   useMap = false,
   plugin = null,
   session,
 }) => {
   return (
     <>
-      <ReconnectBanner session={session} />
+      {useReconnectBanner && <ReconnectBanner session={session} />}
       <LoadBar session={session} />
       <header
         role="banner"

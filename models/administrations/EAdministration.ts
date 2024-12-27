@@ -26,4 +26,5 @@ export enum EAdministration {
   CIBTP = 'cibtp',
   CNETP = 'cnetp',
   PROBTP = 'probtp',
+  GIP_MDS = 'gip-mds',
 }

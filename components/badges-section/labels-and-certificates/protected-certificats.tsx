@@ -1,9 +1,8 @@
 'use client';
 
-import { Icon } from '#components-ui/icon/wrapper';
 import { Loader } from '#components-ui/loader';
 import NonRenseigne from '#components/non-renseigne';
-import constants from '#models/constants';
+import { ProtectedInlineData } from '#components/protected-inline-data';
 import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { ISession } from '#models/user/session';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
@@ -140,22 +139,14 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
   return (
     <>
       <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />
-      <div
-        style={{
-          borderRadius: '30px',
-          border: `2px solid ${constants.colors.espaceAgentPastel}`,
-          paddingLeft: '8px',
-          display: 'inline-block',
-        }}
-      >
-        <Icon slug="lockFill" color={constants.colors.espaceAgent}>
-          {protectedCertificates.map((certificate, index) =>
-            !hasAnyError(certificate.data) ? (
-              <React.Fragment key={index}>{certificate.render}</React.Fragment>
-            ) : null
-          )}
-        </Icon>
-      </div>
+
+      <ProtectedInlineData>
+        {protectedCertificates.map((certificate, index) =>
+          !hasAnyError(certificate.data) ? (
+            <React.Fragment key={index}>{certificate.render}</React.Fragment>
+          ) : null
+        )}
+      </ProtectedInlineData>
     </>
   );
 };

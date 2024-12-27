@@ -16,7 +16,6 @@ import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
-import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import React from 'react';
 import {
   LabelsAndCertificatesBadgesSection,
@@ -24,6 +23,7 @@ import {
   checkHasQuality,
   labelsAndCertificatesSources,
 } from '../../../../../components/badges-section/labels-and-certificates';
+import { EffectifCell } from './effectif-cell';
 import {
   UniteLegaleInscriptionIG,
   UniteLegaleInscriptionRNA,
@@ -101,11 +101,8 @@ const UniteLegaleSummarySection: React.FC<{
     ],
     ['Forme juridique', uniteLegale.libelleNatureJuridique],
     [
-      'Tranche effectif salarié de la structure',
-      libelleTrancheEffectif(
-        uniteLegale.trancheEffectif,
-        uniteLegale.anneeTrancheEffectif
-      ),
+      'Effectif salarié',
+      <EffectifCell uniteLegale={uniteLegale} session={session} />,
     ],
     [
       <FAQLink
@@ -173,6 +170,9 @@ const UniteLegaleSummarySection: React.FC<{
             ? []
             : [EAdministration.INPI]),
           ...(conventionsCollectives.length > 0 ? [EAdministration.MTPEI] : []),
+          ...(hasRights(session, ApplicationRights.effectifsAnnuels)
+            ? [EAdministration.GIP_MDS]
+            : []),
         ]}
         lastModified={uniteLegale.dateDerniereMiseAJour}
       >
