@@ -118,20 +118,20 @@ export const MarcheInclusion = ({ queryString = '' }) => (
   </a>
 );
 
-<<<<<<< HEAD
 export const GIPMDS = ({ queryString = '' }) => (
   <a
     href={`/administration/gip-mds${queryString}`}
     title="Groupement d’intérêt public Modernisation des déclarations sociales"
   >
     GIP MDS
-=======
+  </a>
+);
+
 export const DGFiP = ({ queryString = '' }) => (
   <a
     href={`/administration/dgfip${queryString}`}
     title="Direction générale des Finances publiques"
   >
     DGFiP
->>>>>>> main
   </a>
 );

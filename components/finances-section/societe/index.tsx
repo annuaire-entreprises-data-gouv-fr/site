@@ -13,13 +13,8 @@ import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useFetchFinancesSociete } from 'hooks';
-<<<<<<< HEAD
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-=======
 import { FinancesSocieteProtectedSection } from '../societe-protected';
->>>>>>> main
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -32,11 +27,6 @@ export const FinancesSocieteSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const financesSociete = useFetchFinancesSociete(uniteLegale);
-  const rcdEffectifsAnnuelsProtected = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentRcdEffectifsAnnuelsProtected,
-    uniteLegale.siren,
-    session
-  );
 
   if (
     hasRights(session, ApplicationRights.chiffreAffaires) &&
