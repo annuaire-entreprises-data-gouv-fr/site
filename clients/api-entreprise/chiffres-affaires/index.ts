@@ -1,17 +1,17 @@
 import routes from '#clients/routes';
-import { IDgfipChiffreAffairesProtected } from '#models/espace-agent/dgfip/chiffre-affaires';
+import { IChiffreAffairesProtected } from '#models/espace-agent/chiffre-affaires';
 import { Siret } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import clientAPIEntreprise from '../client';
 import { IAPIEntrepriseDgfipChiffreAffaires } from './types';
 
 /**
- * GET association from API Entreprise
+ * GET CA from API Entreprise
  */
-export async function clientApiEntrepriseDgfipChiffreAffaires(siret: Siret) {
+export async function clientApiEntrepriseChiffreAffaires(siret: Siret) {
   return await clientAPIEntreprise<
     IAPIEntrepriseDgfipChiffreAffaires,
-    IDgfipChiffreAffairesProtected
+    IChiffreAffairesProtected
   >(
     `${
       process.env.API_ENTREPRISE_URL
@@ -22,9 +22,10 @@ export async function clientApiEntrepriseDgfipChiffreAffaires(siret: Siret) {
 
 const mapToDomainObject = (
   response: IAPIEntrepriseDgfipChiffreAffaires
-): IDgfipChiffreAffairesProtected => {
+): IChiffreAffairesProtected => {
   return response.data.map(({ data }) => ({
     chiffreAffaires: data.chiffre_affaires,
+    dateFinExercice: data.date_fin_exercice,
     year: getFiscalYear(data.date_fin_exercice),
   }));
 };

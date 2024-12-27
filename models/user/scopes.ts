@@ -10,7 +10,7 @@ const allAgentScopes = [
   'cibtp',
   'cnetp',
   'probtp',
-  'dgfip',
+  'chiffre_affaires',
 ] as const;
 
 export type IAgentScope = (typeof allAgentScopes)[number];
