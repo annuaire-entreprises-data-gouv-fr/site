@@ -31,6 +31,7 @@ import { eoriHandler } from './handlers/eori';
 import { igHandler } from './handlers/ig';
 import { journalOfficielAssociationsHandler } from './handlers/journal-officiel-associations';
 import { odsMetadataHandler } from './handlers/ods-metadata';
+import { effectifsHandler } from './handlers/rcd-effectifs-annuels';
 import { rechercheEntrepriseHandler } from './handlers/recherche-entreprises';
 import { rechercheEntrepriseIdccHandler } from './handlers/recherche-entreprises-idcc';
 import { rechercheEntrepriseIdccMetadataHandler } from './handlers/recherche-entreprises-idcc-metadata';
@@ -106,4 +107,5 @@ export const routesHandlers = [
     journalOfficielAssociationsHandler
   ),
   http.get(routes.journalOfficielAssociations.ods.metadata, odsMetadataHandler),
+  http.get(routes.apiEntreprise.effectifsa.annuels('*', '*'), effectifsHandler),
 ];

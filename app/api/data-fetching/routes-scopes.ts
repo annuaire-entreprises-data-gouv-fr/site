@@ -22,14 +22,16 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.Association]: ApplicationRights.opendata,
   [APIRoutesPaths.VerifyTva]: ApplicationRights.opendata,
   [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
-  // BTP
   [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
+  // BTP
   [APIRoutesPaths.EspaceAgentCibtp]: ApplicationRights.cibtp,
   [APIRoutesPaths.EspaceAgentCnetp]: ApplicationRights.cnetp,
   [APIRoutesPaths.EspaceAgentProbtp]: ApplicationRights.probtp,
   [APIRoutesPaths.EspaceAgentCarteProfessionnelleTP]:
     ApplicationRights.carteProfessionnelleTravauxPublics,
   // fiscal & social
+  [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]:
+    ApplicationRights.effectifsAnnuels,
   [APIRoutesPaths.EspaceAgentConformite]: ApplicationRights.conformite,
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
     ApplicationRights.chiffreAffaires,

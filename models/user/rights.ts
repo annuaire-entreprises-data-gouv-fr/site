@@ -21,6 +21,7 @@ export enum ApplicationRights {
   cibtp = 'Accès au certificat CIBTP',
   cnetp = 'Accès au certificat CNETP',
   probtp = 'Accès à l‘attestation PROBTP',
+  effectifsAnnuels = 'Effectifs annuels (RCD)',
   chiffreAffaires = 'Accès aux chiffres d’affaires (DGFiP)',
 }
 
@@ -40,6 +41,8 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
       return userScopes.includes('conformite');
     case ApplicationRights.chiffreAffaires:
       return userScopes.includes('chiffre_affaires');
+    case ApplicationRights.effectifsAnnuels:
+      return userScopes.includes('effectifs_annuels');
     case ApplicationRights.protectedCertificats:
     case ApplicationRights.carteProfessionnelleTravauxPublics:
     case ApplicationRights.mandatairesRCS:

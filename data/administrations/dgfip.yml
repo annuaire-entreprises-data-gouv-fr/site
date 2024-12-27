@@ -8,6 +8,10 @@ dataSources:
     apiSlug: api-entreprise
     data:
       - label: Attestation de conformité fiscale
+  - label: Chiffre d’affaires des entreprises
+    apiSlug: api-entreprise
+    data:
+      - label: Chiffre d’affaires
 logoType: portrait
 description: |
   La direction générale des Finances publiques (DGFiP) est la direction de l'administration française qui gère la fiscalité de l’État français et des collectivités territoriales. Elle gère l’imposition des particuliers et des entreprises, en définit les règles juridiques, en assure le recouvrement et en instruit les contentieux fiscaux.

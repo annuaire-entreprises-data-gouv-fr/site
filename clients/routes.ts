@@ -39,6 +39,10 @@ const routes = {
     },
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,
+    effectifs: {
+      annuels: (siren: string, year: number) =>
+        `/v3/gip_mds/unites_legales/${siren}/effectifs_annuels/${year}`,
+    },
   },
   ban: 'https://api-adresse.data.gouv.fr/search',
   bodacc: {
