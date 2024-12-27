@@ -105,8 +105,12 @@ export const EffectifCell = ({
   if (hasRights(session, ApplicationRights.effectifsAnnuels)) {
     return <EffectifProtected uniteLegale={uniteLegale} session={session} />;
   }
-  return libelleTrancheEffectif(
-    uniteLegale.trancheEffectif,
-    uniteLegale.anneeTrancheEffectif
+  return (
+    <>
+      {libelleTrancheEffectif(
+        uniteLegale.trancheEffectif,
+        uniteLegale.anneeTrancheEffectif
+      )}
+    </>
   );
 };
