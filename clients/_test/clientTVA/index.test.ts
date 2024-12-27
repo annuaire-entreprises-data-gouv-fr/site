@@ -19,7 +19,7 @@ describe('clientTVA', () => {
         client: clientTVA,
         args: [arg as TVANumber],
         __dirname,
-        snaphotFile: `tva-${arg}.json`,
+        snapshotFile: `tva-${arg}.json`,
       });
     }
   });

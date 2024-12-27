@@ -8,7 +8,7 @@ describe('clientRGE', () => {
       client: clientRGE,
       args: ['487444697' as Siren],
       __dirname,
-      snaphotFile: 'certificat-487444697.json',
+      snapshotFile: 'certificat-487444697.json',
     });
   });
   it('Should match snapshot QUALIBAT-RGE', async () => {
@@ -16,7 +16,7 @@ describe('clientRGE', () => {
       client: clientRGE,
       args: ['843701079' as Siren],
       __dirname,
-      snaphotFile: 'qualibat-rge.json',
+      snapshotFile: 'qualibat-rge.json',
     });
   });
 });

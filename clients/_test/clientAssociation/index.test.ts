@@ -8,7 +8,7 @@ describe('clientAssociation', () => {
     await expectClientToMatchSnapshot({
       client: clientAssociation,
       args: ['800329849' as Siren, '80032984900023'],
-      snaphotFile: 'association.json',
+      snapshotFile: 'association.json',
       simplifyParams,
       __dirname,
     });
@@ -18,7 +18,7 @@ describe('clientAssociation', () => {
       client: clientAssociation,
       args: ['338365059' as Siren, '33836505900017'],
       simplifyParams,
-      snaphotFile: 'association-with-bilans.json',
+      snapshotFile: 'association-with-bilans.json',
       __dirname,
     });
   });

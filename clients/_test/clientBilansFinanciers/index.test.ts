@@ -7,7 +7,7 @@ describe('clientBilansFinanciers', () => {
     await expectClientToMatchSnapshot({
       client: clientBilansFinanciers,
       args: ['487444697' as Siren],
-      snaphotFile: '487444697.json',
+      snapshotFile: '487444697.json',
       __dirname,
       postProcessResult: (result) => {
         result.lastModified = '2023-10-18T23:19:19.590091+00:00';
@@ -18,7 +18,7 @@ describe('clientBilansFinanciers', () => {
     await expectClientToMatchSnapshot({
       client: clientBilansFinanciers,
       args: ['552032534' as Siren],
-      snaphotFile: '552032534.json',
+      snapshotFile: '552032534.json',
       __dirname,
       postProcessResult: (result) => {
         result.lastModified = '2023-10-18T23:19:19.590091+00:00';

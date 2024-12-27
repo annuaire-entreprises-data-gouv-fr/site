@@ -1,10 +1,10 @@
-import path from 'path';
 import { HttpServerError, HttpTimeoutError } from '#clients/exceptions';
+import path from 'path';
 
 type IParams<T extends unknown[], U> = {
   client: (...args: T) => Promise<U>;
   args: T;
-  snaphotFile: string;
+  snapshotFile: string;
   simplifyParams?: (...args: T) => any;
   postProcessResult?: (result: U) => void;
   __dirname: string;
@@ -13,7 +13,7 @@ type IParams<T extends unknown[], U> = {
 export async function expectClientToMatchSnapshot<T extends unknown[], U>({
   client,
   args,
-  snaphotFile,
+  snapshotFile,
   simplifyParams = (...args: T) => args,
   postProcessResult,
 
@@ -51,5 +51,5 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
 
   expect(
     JSON.stringify({ args: simplifyParams(...args), result }, null, 2)
-  ).toMatchFile(path.join(__dirname, '_snapshots', snaphotFile));
+  ).toMatchFile(path.join(__dirname, '_snapshots', snapshotFile));
 }
