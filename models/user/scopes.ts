@@ -1,41 +1,25 @@
 import { getAdditionnalIAgentScope } from '#clients/authentication/super-agent-scopes';
 
-export type IAgentScope =
-  | 'rne'
-  | 'nonDiffusible'
-  | 'conformite'
-  | 'beneficiaires'
-  | 'agent'
-  | 'pseudo_opendata'
-  | 'cibtp'
-  | 'cnetp'
-  | 'probtp';
+const allAgentScopes = [
+  'rne',
+  'nonDiffusible',
+  'conformite',
+  'beneficiaires',
+  'agent',
+  'pseudo_opendata',
+  'cibtp',
+  'cnetp',
+  'probtp',
+] as const;
+
+export type IAgentScope = (typeof allAgentScopes)[number];
 
 export const isAgentScope = (str: string): str is IAgentScope => {
-  if (
-    [
-      'rne',
-      'nonDiffusible',
-      'conformite',
-      'beneficiaires',
-      'agent',
-      'pseudo_opendata',
-      'cibtp',
-      'cnetp',
-      'probtp',
-    ].indexOf(str) > 0
-  ) {
+  if (allAgentScopes.indexOf(str as IAgentScope) > 0) {
     return true;
   }
   return false;
 };
-
-const defaultAgentScopes = [
-  'agent',
-  'nonDiffusible',
-  'rne',
-  'pseudo_opendata',
-] as IAgentScope[];
 
 /**
  * Get Agent rights written as scopes. There is no 1-to-1 match between UI and scopes.
@@ -57,14 +41,7 @@ export const getAgentScopes = async (
 
   if (isTestAccount) {
     return {
-      scopes: [
-        ...defaultAgentScopes,
-        'conformite',
-        'beneficiaires',
-        'cibtp',
-        'cnetp',
-        'probtp',
-      ],
+      scopes: [...allAgentScopes],
       userType: 'Super-agent connecté',
       hasHabilitation: true,
     };
@@ -73,7 +50,15 @@ export const getAgentScopes = async (
   const additionnalScopes = await getAdditionnalIAgentScope(userEmail);
 
   return {
-    scopes: [...defaultAgentScopes, ...additionnalScopes],
+    scopes: [
+      // default agent scopes
+      'agent',
+      'nonDiffusible',
+      'rne',
+      'pseudo_opendata',
+      // additionnal scopes from super agent list
+      ...additionnalScopes,
+    ],
     userType:
       additionnalScopes.length > 0 ? 'Super-agent connecté' : 'Agent connecté',
     hasHabilitation: additionnalScopes.length > 0,
