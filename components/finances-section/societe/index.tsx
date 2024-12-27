@@ -9,10 +9,12 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/core/types';
+import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
 import { useFetchFinancesSociete } from 'hooks';
+import { FinancesSocieteProtectedSection } from '../societe-protected';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -25,6 +27,19 @@ export const FinancesSocieteSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const financesSociete = useFetchFinancesSociete(uniteLegale);
+
+  if (
+    hasRights(session, ApplicationRights.chiffreAffaires) &&
+    !isDataLoading(financesSociete) &&
+    hasAnyError(financesSociete)
+  ) {
+    return (
+      <FinancesSocieteProtectedSection
+        uniteLegale={uniteLegale}
+        session={session}
+      />
+    );
+  }
 
   return (
     <AsyncDataSectionClient

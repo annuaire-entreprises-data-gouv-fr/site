@@ -21,6 +21,7 @@ export enum ApplicationRights {
   cibtp = 'Accès au certificat CIBTP',
   cnetp = 'Accès au certificat CNETP',
   probtp = 'Accès à l‘attestation PROBTP',
+  chiffreAffaires = 'Accès aux chiffres d’affaires (DGFiP)',
 }
 
 /**
@@ -37,12 +38,14 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
       return userScopes.includes('rne');
     case ApplicationRights.conformite:
       return userScopes.includes('conformite');
+    case ApplicationRights.chiffreAffaires:
+      return userScopes.includes('chiffre_affaires');
     case ApplicationRights.protectedCertificats:
     case ApplicationRights.carteProfessionnelleTravauxPublics:
     case ApplicationRights.mandatairesRCS:
     case ApplicationRights.subventionsAssociation:
     case ApplicationRights.associationProtected:
-      // not open data but available for allagents
+      // not open data but available for all agents
       return userScopes.includes('pseudo_opendata');
     case ApplicationRights.beneficiaires:
       return userScopes.includes('beneficiaires');

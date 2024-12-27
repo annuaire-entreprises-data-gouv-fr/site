@@ -11,6 +11,7 @@ export enum APIRoutesPaths {
   EspaceAgentBeneficiaires = 'espace-agent/beneficiaires',
   EspaceAgentRneDocuments = 'espace-agent/rne/documents',
   EspaceAgentAssociationProtected = 'espace-agent/association-protected',
+  EspaceAgentChiffreAffairesProtected = 'espace-agent/chiffre-affaires-protected',
   RneDirigeants = 'rne-dirigeants',
   Observations = 'observations',
   Association = 'association',
