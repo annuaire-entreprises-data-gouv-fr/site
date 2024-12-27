@@ -8,6 +8,7 @@ import { getOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { getProbtp } from '#models/espace-agent/certificats/probtp';
 import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
+import { getChiffreAffairesProtected } from '#models/espace-agent/chiffre-affaires';
 import { getConformiteEntreprise } from '#models/espace-agent/conformite';
 import { getDirigeantsProtected } from '#models/espace-agent/dirigeants-protected';
 import { getDocumentsRNEProtected } from '#models/espace-agent/rne-protected/documents';
@@ -32,6 +33,8 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentBeneficiaires]: getBeneficiairesController,
   [APIRoutesPaths.EspaceAgentRneDocuments]: getDocumentsRNEProtected,
   [APIRoutesPaths.EspaceAgentAssociationProtected]: getAssociationProtected,
+  [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
+    getChiffreAffairesProtected,
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,
   [APIRoutesPaths.Observations]: getRNEObservations,
   [APIRoutesPaths.Association]: getAssociationFromSlug,

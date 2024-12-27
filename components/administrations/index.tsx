@@ -117,3 +117,12 @@ export const MarcheInclusion = ({ queryString = '' }) => (
     Marché de l’Inclusion
   </a>
 );
+
+export const DGFiP = ({ queryString = '' }) => (
+  <a
+    href={`/administration/dgfip${queryString}`}
+    title="Direction générale des Finances publiques"
+  >
+    DGFiP
+  </a>
+);

@@ -2,27 +2,35 @@ import { ApplicationRights } from '#models/user/rights';
 import { APIRoutesPaths } from './routes-paths';
 
 export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
-  [APIRoutesPaths.EspaceAgentCarteProfessionnelleTP]:
-    ApplicationRights.carteProfessionnelleTravauxPublics,
-  [APIRoutesPaths.EspaceAgentConformite]: ApplicationRights.conformite,
+  // person
+  [APIRoutesPaths.EspaceAgentBeneficiaires]: ApplicationRights.beneficiaires,
+  [APIRoutesPaths.EspaceAgentDirigeantsProtected]:
+    ApplicationRights.mandatairesRCS,
+  //association
+  [APIRoutesPaths.EspaceAgentAssociationProtected]:
+    ApplicationRights.associationProtected,
+  [APIRoutesPaths.SubventionsAssociation]:
+    ApplicationRights.subventionsAssociation,
+  // certificats
   [APIRoutesPaths.EspaceAgentOpqibi]: ApplicationRights.protectedCertificats,
-  [APIRoutesPaths.EspaceAgentCibtp]: ApplicationRights.cibtp,
-  [APIRoutesPaths.EspaceAgentCnetp]: ApplicationRights.cnetp,
   [APIRoutesPaths.EspaceAgentQualibat]: ApplicationRights.protectedCertificats,
   [APIRoutesPaths.EspaceAgentQualifelec]:
     ApplicationRights.protectedCertificats,
-  [APIRoutesPaths.EspaceAgentProbtp]: ApplicationRights.probtp,
-  [APIRoutesPaths.EspaceAgentBeneficiaires]: ApplicationRights.beneficiaires,
-  [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
-  [APIRoutesPaths.EspaceAgentDirigeantsProtected]:
-    ApplicationRights.mandatairesRCS,
-  [APIRoutesPaths.EspaceAgentAssociationProtected]:
-    ApplicationRights.associationProtected,
+  // pseudo open data & RNE
   [APIRoutesPaths.RneDirigeants]: ApplicationRights.opendata,
   [APIRoutesPaths.Observations]: ApplicationRights.opendata,
   [APIRoutesPaths.Association]: ApplicationRights.opendata,
   [APIRoutesPaths.VerifyTva]: ApplicationRights.opendata,
+  [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
+  // BTP
   [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
-  [APIRoutesPaths.SubventionsAssociation]:
-    ApplicationRights.subventionsAssociation,
+  [APIRoutesPaths.EspaceAgentCibtp]: ApplicationRights.cibtp,
+  [APIRoutesPaths.EspaceAgentCnetp]: ApplicationRights.cnetp,
+  [APIRoutesPaths.EspaceAgentProbtp]: ApplicationRights.probtp,
+  [APIRoutesPaths.EspaceAgentCarteProfessionnelleTP]:
+    ApplicationRights.carteProfessionnelleTravauxPublics,
+  // fiscal & social
+  [APIRoutesPaths.EspaceAgentConformite]: ApplicationRights.conformite,
+  [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
+    ApplicationRights.chiffreAffaires,
 };
