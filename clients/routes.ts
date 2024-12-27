@@ -206,7 +206,8 @@ const routes = {
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
     idcc: {
       metadata: 'https://recherche-entreprises.api.gouv.fr/idcc/metadata',
-      siren: 'https://recherche-entreprises.api.gouv.fr/idcc',
+      getBySiren: (siren: string) =>
+        `https://recherche-entreprises.api.gouv.fr/idcc/${siren}`,
     },
     lastModified:
       'https://recherche-entreprises.api.gouv.fr/sources/last_modified',

@@ -32,6 +32,8 @@ import { igHandler } from './handlers/ig';
 import { journalOfficielAssociationsHandler } from './handlers/journal-officiel-associations';
 import { odsMetadataHandler } from './handlers/ods-metadata';
 import { rechercheEntrepriseHandler } from './handlers/recherche-entreprises';
+import { rechercheEntrepriseIdccHandler } from './handlers/recherche-entreprises-idcc';
+import { rechercheEntrepriseIdccMetadataHandler } from './handlers/recherche-entreprises-idcc-metadata';
 import { rgeHandler } from './handlers/rge';
 import { rneDefaultHandler, rneFallbackHandler } from './handlers/rne';
 import { tvaHandler } from './handlers/tva';
@@ -47,6 +49,14 @@ export const routesHandlers = [
   http.get(
     routes.rechercheEntreprise.rechercheUniteLegale,
     rechercheEntrepriseHandler
+  ),
+  http.get(
+    routes.rechercheEntreprise.idcc.metadata,
+    rechercheEntrepriseIdccMetadataHandler
+  ),
+  http.get(
+    routes.rechercheEntreprise.idcc.getBySiren(':siren'),
+    rechercheEntrepriseIdccHandler
   ),
   http.get(routes.certifications.rge.api, rgeHandler),
   http.get(routes.certifications.bio.api, apiBioHandler),
