@@ -21,6 +21,7 @@ export enum ApplicationRights {
   cibtp = 'Accès au certificat CIBTP',
   cnetp = 'Accès au certificat CNETP',
   probtp = 'Accès à l‘attestation PROBTP',
+  effectifsAnnuels = 'Effectifs annuels (RCD)',
 }
 
 /**
@@ -56,6 +57,8 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
       return userScopes.includes('nonDiffusible');
     case ApplicationRights.isAgent:
       return userScopes.includes('agent');
+    case ApplicationRights.effectifsAnnuels:
+      return userScopes.includes('effectifs_annuels');
     default:
       return false;
   }

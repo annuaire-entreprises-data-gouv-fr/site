@@ -117,3 +117,12 @@ export const MarcheInclusion = ({ queryString = '' }) => (
     Marché de l’Inclusion
   </a>
 );
+
+export const GIPMDS = ({ queryString = '' }) => (
+  <a
+    href={`/administration/gip-mds${queryString}`}
+    title="Groupement d’intérêt public Modernisation des déclarations sociales"
+  >
+    GIP MDS
+  </a>
+);
