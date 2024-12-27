@@ -5,6 +5,7 @@ import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte
 import { getCibtp } from '#models/espace-agent/certificats/cibtp';
 import { getCnetp } from '#models/espace-agent/certificats/cnetp';
 import { getOpqibi } from '#models/espace-agent/certificats/opqibi';
+import { getProbtp } from '#models/espace-agent/certificats/probtp';
 import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
 import { getConformiteEntreprise } from '#models/espace-agent/conformite';
@@ -26,6 +27,7 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentCnetp]: getCnetp,
   [APIRoutesPaths.EspaceAgentQualibat]: getQualibat,
   [APIRoutesPaths.EspaceAgentQualifelec]: getQualifelec,
+  [APIRoutesPaths.EspaceAgentProbtp]: getProbtp,
   [APIRoutesPaths.EspaceAgentDirigeantsProtected]: getDirigeantsProtected,
   [APIRoutesPaths.EspaceAgentBeneficiaires]: getBeneficiairesController,
   [APIRoutesPaths.EspaceAgentRneDocuments]: getDocumentsRNEProtected,

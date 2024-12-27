@@ -77,7 +77,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
       render: (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure a un certificat CIBTP, attestant qu'elle est en règle de ses cotisations congés payés et chômage-intempéries"
-          label="CIBTP - Bâtiment et travaux publics"
+          label="CIBTP - cotisations congés et chômage"
           sectionId="cibtp"
           siren={uniteLegale.siren}
         />
@@ -92,8 +92,23 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
       render: (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure a un certificat CNETP, attestant qu'elle est en règle de ses cotisations congés payés et chômage-intempéries"
-          label="CNETP - Entreprises de travaux publics"
+          label="CNETP - cotisations congés et chômage"
           sectionId="cnetp"
+          siren={uniteLegale.siren}
+        />
+      ),
+    },
+    {
+      data: useAPIRouteData(
+        APIRoutesPaths.EspaceAgentProbtp,
+        uniteLegale.siege.siret,
+        session
+      ),
+      render: (
+        <LabelWithLinkToSection
+          informationTooltipLabel="Cette structure a un certificat ProBTP, attestant la régularité de ses cotisations de retraite complémentaire auprès de la Protection Sociale du Bâtiment et des Travaux publics"
+          label="ProBTP - cotisations retraite complémentaire"
+          sectionId="probtp"
           siren={uniteLegale.siren}
         />
       ),
