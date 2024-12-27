@@ -6,6 +6,7 @@ type IProps = {
   useSearchBar?: boolean;
   useAgentCTA?: boolean;
   useAgentBanner?: boolean;
+  useReconnectBanner?: boolean;
   useMap?: boolean;
   plugin?: JSX.Element;
   currentSearchTerm?: string;
@@ -17,6 +18,7 @@ export const HeaderAppRouter: React.FC<IProps> = async ({
   useMap = false,
   useAgentCTA = false,
   useAgentBanner = false,
+  useReconnectBanner = true,
   plugin,
   currentSearchTerm = '',
 }) => {
@@ -29,6 +31,7 @@ export const HeaderAppRouter: React.FC<IProps> = async ({
       useSearchBar={useSearchBar}
       useAgentBanner={useAgentBanner}
       useAgentCTA={useAgentCTA}
+      useReconnectBanner={useReconnectBanner}
       plugin={plugin}
       session={session}
       currentSearchTerm={currentSearchTerm}
