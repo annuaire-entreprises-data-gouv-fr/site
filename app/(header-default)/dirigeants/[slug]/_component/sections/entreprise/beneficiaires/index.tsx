@@ -1,64 +1,25 @@
 'use client';
 
-import { Warning } from '#components-ui/alerts';
-import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
+import UseCaseWrapper from '#components/use-case-wrapper';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/user/agent';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { useState } from 'react';
 import ProtectedBeneficiairesSection from './agent-section';
-import { AskUseCase } from './ask-use-case';
-
-const WarningRBE = () => (
-  <Warning>
-    À compter du 31 juillet 2024, le{' '}
-    <a href="/faq/registre-des-beneficiaires-effectifs">
-      registre des bénéficiaires effectifs n’est plus accessible sur le site
-    </a>
-    , en application de la{' '}
-    <a
-      href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000049761732"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      directive européenne 2024/1640 du 31 mai 2024
-    </a>
-    . Désormais, les{' '}
-    <a
-      href="https://www.inpi.fr/faq/qui-peut-acceder-aux-donnees-des-beneficiaires-effectifs"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      personnes en mesure de justifier d’un intérêt légitime
-    </a>{' '}
-    peuvent{' '}
-    <a
-      href="https://data.inpi.fr/content/editorial/acces_BE"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      effectuer une demande d’accès
-    </a>{' '}
-    au registre auprès de l’
-    <INPI />.
-  </Warning>
-);
+import { WarningRBE } from './warning-rbe';
 
 const BeneficiairesSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const [useCase, setUseCase] = useState<UseCase>();
-
   if (!hasRights(session, ApplicationRights.beneficiaires)) {
     return (
       <Section title="Bénéficiaire(s) effectif(s)" id="beneficiaires">
         <WarningRBE />
       </Section>
     );
+
     // return (
     //   <AgentWall
     //     title="Bénéficiaire(s) effectif(s)"
@@ -82,23 +43,8 @@ const BeneficiairesSection: React.FC<{
     // );
   }
 
-  if ([UseCase.aides, UseCase.marches, UseCase.fraude].includes(useCase!)) {
-    return (
-      <ProtectedBeneficiairesSection
-        uniteLegale={uniteLegale}
-        session={session}
-        useCase={useCase!}
-      />
-    );
-  }
-
-  return (
-    <Section
-      title="Bénéficiaire(s) effectif(s)"
-      id="beneficiaires"
-      isProtected
-      sources={[EAdministration.INPI]}
-    >
+  const introContent = (
+    <>
       <p>
         Depuis le 31 juillet 2024, les{' '}
         <a href="/faq/registre-des-beneficiaires-effectifs">
@@ -116,17 +62,24 @@ const BeneficiairesSection: React.FC<{
         Toute demande d’accès aux données est tracée et envoyée à la commission
         européeene.
       </p>
-      {useCase === UseCase.autre ? (
-        <>
-          <strong>
-            Les informations des bénéficiaires effectifs ne vous sont pas
-            accessibles.
-          </strong>
-        </>
-      ) : (
-        <AskUseCase onUseCaseChanged={setUseCase} />
+    </>
+  );
+
+  return (
+    <UseCaseWrapper
+      title="Bénéficiaire(s) effectif(s)"
+      id="beneficiaires"
+      sources={[EAdministration.INPI]}
+      introContent={introContent}
+    >
+      {(useCase) => (
+        <ProtectedBeneficiairesSection
+          uniteLegale={uniteLegale}
+          session={session}
+          useCase={useCase}
+        />
       )}
-    </Section>
+    </UseCaseWrapper>
   );
 };
 
