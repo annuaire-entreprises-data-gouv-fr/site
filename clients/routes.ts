@@ -40,7 +40,7 @@ const routes = {
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,
     effectifs: {
-      annuels: (siren: string, year: number) =>
+      annuels: (siren: string, year: string | number) =>
         `/v3/gip_mds/unites_legales/${siren}/effectifs_annuels/${year}`,
     },
   },
