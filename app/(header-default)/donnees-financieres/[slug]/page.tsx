@@ -1,6 +1,7 @@
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { FinancesAssociationSection } from '#components/finances-section/association';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
+import { FinancesSocieteBilansSection } from '#components/finances-section/societe-bilans';
 import { SubventionsAssociationSection } from '#components/subventions-association-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -59,6 +60,10 @@ const FinancePage = async (props: AppRouterProps) => {
         ) : (
           <>
             <FinancesSocieteSection
+              uniteLegale={uniteLegale}
+              session={session}
+            />
+            <FinancesSocieteBilansSection
               uniteLegale={uniteLegale}
               session={session}
             />

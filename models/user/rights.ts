@@ -22,6 +22,7 @@ export enum ApplicationRights {
   cnetp = 'Accès au certificat CNETP',
   probtp = 'Accès à l‘attestation PROBTP',
   effectifsAnnuels = 'Effectifs annuels (RCD)',
+  bilans = 'Accès aux bilans (Banque de France)',
   chiffreAffaires = 'Accès aux chiffres d’affaires (DGFiP)',
 }
 
@@ -37,6 +38,8 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
     case ApplicationRights.bilansRne:
     case ApplicationRights.documentsRne:
       return userScopes.includes('rne');
+    case ApplicationRights.bilans:
+      return userScopes.includes('bilans');
     case ApplicationRights.conformite:
       return userScopes.includes('conformite');
     case ApplicationRights.chiffreAffaires:

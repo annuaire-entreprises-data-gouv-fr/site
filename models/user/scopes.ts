@@ -11,6 +11,7 @@ const allAgentScopes = [
   'cnetp',
   'probtp',
   'effectifs_annuels',
+  'bilans',
   'chiffre_affaires',
 ] as const;
 

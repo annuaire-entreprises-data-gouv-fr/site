@@ -1,6 +1,6 @@
 import { IAPIEntrepriseResponse } from '../client';
 
-export type IAPIEntrepriseDgfipChiffreAffaires = IAPIEntrepriseResponse<
+export type IAPIEntrepriseChiffreAffaires = IAPIEntrepriseResponse<
   {
     data: FinancialData;
     links: Record<string, unknown>;
