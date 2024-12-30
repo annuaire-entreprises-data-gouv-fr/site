@@ -107,5 +107,5 @@ export const routesHandlers = [
     journalOfficielAssociationsHandler
   ),
   http.get(routes.journalOfficielAssociations.ods.metadata, odsMetadataHandler),
-  http.get(routes.apiEntreprise.effectifsa.annuels('*', '*'), effectifsHandler),
+  http.get(routes.apiEntreprise.effectifs.annuels('*', '*'), effectifsHandler),
 ];
