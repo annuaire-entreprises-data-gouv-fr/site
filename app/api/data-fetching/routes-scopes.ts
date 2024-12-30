@@ -30,9 +30,10 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.EspaceAgentCarteProfessionnelleTP]:
     ApplicationRights.carteProfessionnelleTravauxPublics,
   // fiscal & social
-  [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]:
-    ApplicationRights.effectifsAnnuels,
-  [APIRoutesPaths.EspaceAgentConformite]: ApplicationRights.conformite,
+  [APIRoutesPaths.EspaceAgentBilansProtected]: ApplicationRights.bilans,
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
     ApplicationRights.chiffreAffaires,
+  [APIRoutesPaths.EspaceAgentConformite]: ApplicationRights.conformite,
+  [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]:
+    ApplicationRights.effectifsAnnuels,
 };

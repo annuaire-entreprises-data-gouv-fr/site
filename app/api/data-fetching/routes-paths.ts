@@ -13,6 +13,7 @@ export enum APIRoutesPaths {
   EspaceAgentAssociationProtected = 'espace-agent/association-protected',
   EspaceAgentEffectifsAnnuelsProtected = 'espace-agent/effectifs-annuels-protected',
   EspaceAgentChiffreAffairesProtected = 'espace-agent/chiffre-affaires-protected',
+  EspaceAgentBilansProtected = 'espace-agent/banque-de-france-bilans-protected',
   RneDirigeants = 'rne-dirigeants',
   Observations = 'observations',
   Association = 'association',

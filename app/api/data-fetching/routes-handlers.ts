@@ -1,6 +1,7 @@
 import { getAssociationFromSlug } from '#models/association';
 import { getEORIValidation } from '#models/eori-validation';
 import { getAssociationProtected } from '#models/espace-agent/association-protected';
+import { getBilansProtected } from '#models/espace-agent/bilans';
 import { getCarteProfessionnelleTravauxPublic } from '#models/espace-agent/carte-professionnelle-travaux-publics';
 import { getCibtp } from '#models/espace-agent/certificats/cibtp';
 import { getCnetp } from '#models/espace-agent/certificats/cnetp';
@@ -36,6 +37,7 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentAssociationProtected]: getAssociationProtected,
   [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]:
     getEffectifsAnnuelsProtected,
+  [APIRoutesPaths.EspaceAgentBilansProtected]: getBilansProtected,
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
     getChiffreAffairesProtected,
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,

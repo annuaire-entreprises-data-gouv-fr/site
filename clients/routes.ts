@@ -37,6 +37,10 @@ const routes = {
       chiffreAffaires: (siret: string) =>
         `/v3/dgfip/etablissements/${siret}/chiffres_affaires`,
     },
+    banqueDeFrance: {
+      bilans: (siren: string) =>
+        `/v3/banque_de_france/unites_legales/${siren}/bilans`,
+    },
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,
     effectifs: {
