@@ -11,6 +11,7 @@ import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { useMemo } from 'react';
 import DirigeantsContentProtected from './content';
 
 type IProps = {
@@ -26,11 +27,17 @@ export default function DirigeantsSectionProtected({
   session,
 }: IProps) {
   const isEI = uniteLegale.complements.estEntrepreneurIndividuel;
+  const params = useMemo(
+    () => ({
+      params: { isEI },
+    }),
+    [isEI]
+  );
   const dirigeants = useAPIRouteData(
     APIRoutesPaths.EspaceAgentDirigeantsProtected,
     uniteLegale.siren,
     session,
-    { params: { isEI } }
+    params
   );
 
   return (

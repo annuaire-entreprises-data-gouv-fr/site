@@ -10,6 +10,7 @@ import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
 import { getChiffreAffairesProtected } from '#models/espace-agent/chiffre-affaires';
 import { getConformiteEntreprise } from '#models/espace-agent/conformite';
+import { getLiassesFiscalesProtected } from '#models/espace-agent/dgfip/liasses-fiscales';
 import { getDirigeantsProtected } from '#models/espace-agent/dirigeants-protected';
 import { getEffectifsAnnuelsProtected } from '#models/espace-agent/effectifs/annuels';
 import { getDocumentsRNEProtected } from '#models/espace-agent/rne-protected/documents';
@@ -38,6 +39,8 @@ export const APIRoutesHandlers = {
     getEffectifsAnnuelsProtected,
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
     getChiffreAffairesProtected,
+  [APIRoutesPaths.EspaceAgentLiassesFiscalesProtected]:
+    getLiassesFiscalesProtected,
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,
   [APIRoutesPaths.Observations]: getRNEObservations,
   [APIRoutesPaths.Association]: getAssociationFromSlug,

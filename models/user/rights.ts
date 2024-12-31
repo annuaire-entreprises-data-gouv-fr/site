@@ -23,6 +23,7 @@ export enum ApplicationRights {
   probtp = 'Accès à l‘attestation PROBTP',
   effectifsAnnuels = 'Effectifs annuels (RCD)',
   chiffreAffaires = 'Accès aux chiffres d’affaires (DGFiP)',
+  liassesFiscales = 'Accès aux liasses fiscales (DGFiP)',
 }
 
 /**
@@ -41,6 +42,8 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
       return userScopes.includes('conformite');
     case ApplicationRights.chiffreAffaires:
       return userScopes.includes('chiffre_affaires');
+    case ApplicationRights.liassesFiscales:
+      return userScopes.includes('liasses_fiscales');
     case ApplicationRights.effectifsAnnuels:
       return userScopes.includes('effectifs_annuels');
     case ApplicationRights.protectedCertificats:
