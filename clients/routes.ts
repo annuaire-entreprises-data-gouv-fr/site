@@ -36,6 +36,8 @@ const routes = {
     dgfip: {
       chiffreAffaires: (siret: string) =>
         `/v3/dgfip/etablissements/${siret}/chiffres_affaires`,
+      liassesFiscales: (siren: string, year: number) =>
+        `/v3/dgfip/unites_legales/${siren}/liasses_fiscales/${year}`,
     },
     mandatairesRCS: (siren: string) =>
       `/v3/infogreffe/rcs/unites_legales/${siren}/mandataires_sociaux`,

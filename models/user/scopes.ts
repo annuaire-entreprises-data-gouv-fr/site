@@ -1,6 +1,6 @@
 import { getAdditionnalIAgentScope } from '#clients/authentication/super-agent-scopes';
 
-const allAgentScopes = [
+export const allAgentScopes = [
   'rne',
   'nonDiffusible',
   'conformite',
@@ -12,6 +12,7 @@ const allAgentScopes = [
   'probtp',
   'effectifs_annuels',
   'chiffre_affaires',
+  'liasses_fiscales',
 ] as const;
 
 export type IAgentScope = (typeof allAgentScopes)[number];
