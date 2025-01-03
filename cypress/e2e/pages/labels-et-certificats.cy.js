@@ -1,4 +1,4 @@
-describe('Certifications', () => {
+describe('Label et certificats', () => {
   describe('QUALIBAT-RGE', () => {
     it('Should display QUALIBAT-RGE', () => {
       cy.visit(`/labels-certificats/843701079`);

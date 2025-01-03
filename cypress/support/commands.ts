@@ -40,7 +40,6 @@ const generateSessionCookie = async () => {
         'rne',
         'pseudo_opendata',
         'effectifs_annuels',
-        'dgfip',
       ],
       userType: 'Super-agent connecté',
       hasHabilitation: true,

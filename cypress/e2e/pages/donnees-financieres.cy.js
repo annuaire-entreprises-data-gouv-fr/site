@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 
-describe('Bilans financiers', () => {
+describe('Données financières', () => {
   it('Should display Données financières section', () => {
     cy.visit('/entreprise/487444697');
     cy.contains('Données financières');

@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 
-describe('Annonces BODACC', () => {
+describe('Annonces et observations', () => {
   beforeEach(() => {
     cy.intercept('GET', `${routes.bodacc.ods.search}*`, {
       fixture: '../fixtures/bodacc.json',
