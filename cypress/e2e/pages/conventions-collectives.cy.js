@@ -1,4 +1,4 @@
-describe('Conventions supprimées', () => {
+describe('Conventions collectives', () => {
   it('Should work for valid companies', () => {
     cy.visit('/divers/356000000');
     cy.contains("Convention d'entreprise La Poste - France Télécom");

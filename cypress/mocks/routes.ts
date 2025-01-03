@@ -22,6 +22,8 @@ import {
 import { associationHandler } from './handlers/association';
 import { baseAdresseNationaleHandler } from './handlers/base-adresse-nationale';
 import { bodaccHandler } from './handlers/bodacc';
+import { carteProfessionnelleTravauxPublicsHandler } from './handlers/carte-professionnelle-travaux-publics';
+import { conformiteHandler } from './handlers/conformite';
 import { dgefpHandler } from './handlers/dgefp';
 import { donneesFinancieresHandler } from './handlers/donnees-financieres';
 import { educationNationaleHandler } from './handlers/education-nationale';
@@ -30,11 +32,13 @@ import { entrepreneurSpectaclesHandler } from './handlers/entrepreneur-spectacle
 import { eoriHandler } from './handlers/eori';
 import { igHandler } from './handlers/ig';
 import { journalOfficielAssociationsHandler } from './handlers/journal-officiel-associations';
+import { mandatairesRcsHandler } from './handlers/mandataires-rcs';
 import { odsMetadataHandler } from './handlers/ods-metadata';
 import { effectifsHandler } from './handlers/rcd-effectifs-annuels';
 import { rechercheEntrepriseHandler } from './handlers/recherche-entreprises';
 import { rechercheEntrepriseIdccHandler } from './handlers/recherche-entreprises-idcc';
 import { rechercheEntrepriseIdccMetadataHandler } from './handlers/recherche-entreprises-idcc-metadata';
+import { rechercheEntrepriseLastModifiedHandler } from './handlers/recherche-entreprises-last-modified';
 import { rgeHandler } from './handlers/rge';
 import { rneDefaultHandler, rneFallbackHandler } from './handlers/rne';
 import { tvaHandler } from './handlers/tva';
@@ -47,6 +51,10 @@ export const routesHandlers = [
   http.get(routes.proxy.association('*'), associationHandler),
   http.get(routes.proxy.rne.immatriculation.default('*'), rneDefaultHandler),
   http.get(routes.proxy.rne.immatriculation.fallback('*'), rneFallbackHandler),
+  http.get(
+    routes.rechercheEntreprise.lastModified,
+    rechercheEntrepriseLastModifiedHandler
+  ),
   http.get(
     routes.rechercheEntreprise.rechercheUniteLegale,
     rechercheEntrepriseHandler
@@ -107,5 +115,41 @@ export const routesHandlers = [
     journalOfficielAssociationsHandler
   ),
   http.get(routes.journalOfficielAssociations.ods.metadata, odsMetadataHandler),
-  http.get(routes.apiEntreprise.effectifs.annuels('*', '*'), effectifsHandler),
+  http.get(
+    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.effectifs.annuels(
+      '*',
+      '*'
+    )}`,
+    effectifsHandler
+  ),
+  http.get(
+    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale(
+      '*'
+    )}`,
+    conformiteHandler
+  ),
+  http.get(
+    `${
+      process.env.API_ENTREPRISE_URL
+    }${routes.apiEntreprise.conformite.vigilance('*')}`,
+    conformiteHandler
+  ),
+  http.get(
+    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.msa(
+      '*'
+    )}`,
+    conformiteHandler
+  ),
+  http.get(
+    `${
+      process.env.API_ENTREPRISE_URL
+    }${routes.apiEntreprise.carteProfessionnelleTravauxPublics('*')}`,
+    carteProfessionnelleTravauxPublicsHandler
+  ),
+  http.get(
+    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.mandatairesRCS(
+      '*'
+    )}`,
+    mandatairesRcsHandler
+  ),
 ];
