@@ -202,7 +202,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
-            "ancienSiege": true,
+            "ancienSiege": false,
             "enseigne": "",
             "denomination": "SOLARSUD",
             "nic": "00428",
