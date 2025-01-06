@@ -42,6 +42,7 @@ export interface IEtablissement {
   latitude: string;
   longitude: string;
   complements: IEtablissementComplements;
+  listeIdcc: { idcc: string; title: string }[];
 }
 
 export interface IEtablissementWithUniteLegale {
@@ -78,6 +79,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     latitude: '',
     longitude: '',
     complements: createDefaultEtablissementComplements(),
+    listeIdcc: [],
   };
 };
 
@@ -118,7 +120,7 @@ export interface IUniteLegale extends IEtablissementsList {
   colter: {
     codeColter: string | null;
   };
-  listeIdcc: string[];
+  listeIdcc: { idcc: string; title: string }[];
 }
 
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
@@ -220,7 +222,6 @@ export interface IEtablissementComplements {
   estEntrepreneurIndividuel: boolean;
   idFiness: string[];
   idBio: string[];
-  idcc: string[];
   idOrganismeFormation: string[];
   idRge: string[];
   idUai: string[];
@@ -232,7 +233,6 @@ export const createDefaultEtablissementComplements =
       estEntrepreneurIndividuel: false,
       idFiness: [],
       idBio: [],
-      idcc: [],
       idOrganismeFormation: [],
       idRge: [],
       idUai: [],

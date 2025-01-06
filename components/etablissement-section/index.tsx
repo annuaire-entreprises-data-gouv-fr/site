@@ -134,13 +134,13 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
       : []),
     ['', <br />],
-    ...(etablissement.complements.idcc
+    ...(etablissement.listeIdcc
       ? [
           [
             'Convention collective de l’établissement',
             [
               <ConventionCollectivesBadgesSection
-                conventionCollectives={etablissement.complements.idcc}
+                conventionCollectives={etablissement.listeIdcc}
                 siren={uniteLegale.siren}
               />,
             ],
