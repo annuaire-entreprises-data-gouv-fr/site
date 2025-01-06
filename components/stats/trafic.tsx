@@ -29,8 +29,8 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
             {
               label:
                 statsType === 'agents'
-                  ? 'Nombre d’agents récurrents'
-                  : 'Nombre d’utilisateurs récurrents',
+                  ? 'Agents récurrents'
+                  : 'Utilisateurs récurrents',
               data: visits.map(
                 ({ label, visitorReturning, agentReturning }) => ({
                   y: statsType === 'agents' ? agentReturning : visitorReturning,
@@ -42,8 +42,8 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
             {
               label:
                 statsType === 'agents'
-                  ? 'Nombre de nouveaux agents'
-                  : 'Nombre de nouveaux utilisateurs',
+                  ? 'Agents occasionnels'
+                  : 'Utilisateurs occasionnels',
               data: visits.map(({ label, visitorUnknown, agentUnknown }) => ({
                 y: statsType === 'agents' ? agentUnknown : visitorUnknown,
                 x: label,
@@ -83,13 +83,14 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
           <a href="https://annuaire-entreprises.data.gouv.fr/lp/agent-public">
             avoir accès à des informations additionnelles (actes, statuts, etc.)
           </a>
+          .
         </li>
       </ul>
       <p>
-        Un utilisateur qui a déjà visité le site les mois précédents est un{' '}
-        <strong>utilisateur récurrent</strong>. À l’inverse, un utilisateur qui
-        visite le site pour la première fois est un{' '}
-        <strong>nouvel utilisateur</strong>.
+        Un utilisateur ou un agent connecté qui visite le site une fois dans le
+        mois a un usage <strong>occasionnel</strong>. À l’inverse, si il visite
+        le site plusieurs fois dans le mois, il a un usage{' '}
+        <strong>récurrent</strong>.
       </p>
       <div className="layout-right">
         <div>Afficher les données par&nbsp;</div>
@@ -110,7 +111,7 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
       </p>
       <ul>
         <li>
-          L’augmentation des <strong>nouveaux utilisateurs</strong> est un
+          L’augmentation des <strong>utilisateurs occasionnels</strong> est un
           marqueur de la notoriété du service
         </li>
         <li>
