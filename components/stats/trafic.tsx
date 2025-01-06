@@ -88,7 +88,7 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
       </ul>
       <p>
         Un utilisateur ou un agent connecté qui visite le site une fois dans le
-        mois a un usage <strong>occasionnel</strong>. À l’inverse, si il visite
+        mois a un usage <strong>occasionnel</strong>. À l’inverse, s'il visite
         le site plusieurs fois dans le mois, il a un usage{' '}
         <strong>récurrent</strong>.
       </p>
