@@ -274,7 +274,9 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     dateMiseAJourInsee: date_mise_a_jour_insee || '',
     dateMiseAJourInpi: date_mise_a_jour_rne || '',
     dateFermeture: date_fermeture ?? '',
-    listeIdcc: liste_idcc || [],
+    listeIdcc: (liste_idcc || []).map((idcc) => {
+      return { idcc, title: '' };
+    }),
   };
 };
 

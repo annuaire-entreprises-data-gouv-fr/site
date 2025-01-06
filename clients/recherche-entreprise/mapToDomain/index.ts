@@ -187,10 +187,13 @@ export const mapToEtablissement = (
       estEntrepreneurIndividuel,
       idFiness: liste_finess || [],
       idBio: liste_id_bio || [],
-      idcc: liste_idcc || [],
       idOrganismeFormation: liste_id_organisme_formation || [],
       idRge: liste_rge || [],
       idUai: liste_uai || [],
     },
+    listeIdcc: (liste_idcc || []).map((idcc) => {
+      // as etablissement will undergo a refacto, we prefer a simpler implem with no title
+      return { idcc, title: '' };
+    }),
   };
 };
