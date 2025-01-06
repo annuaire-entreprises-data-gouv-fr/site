@@ -26,6 +26,36 @@ export type ICCWithMetadata = {
   unknown: boolean;
 };
 
+/**
+ * Get title from metadata for a single idcc
+ * @param siren
+ * @param idcc
+ * @returns
+ */
+export const getIdccTitle = async (siren: Siren, idcc: string) => {
+  try {
+    const metadata = await clientIdccMetadata(idcc);
+    return { idcc, title: metadata.title || '' };
+  } catch (e: any) {
+    logErrorInSentry(
+      new FetchRessourceException({
+        cause: e,
+        ressource: 'Convention Collective',
+        context: {
+          siren,
+        },
+      })
+    );
+    // when metadata fails we intentionnally ignore failure
+    return { idcc, title: '' };
+  }
+};
+
+/**
+ * Get all idcc and their metadata for a given siren
+ * @param siren
+ * @returns
+ */
 export const getAllIdccWithMetadata = async (
   siren: Siren
 ): Promise<ICCWithMetadata[] | IAPINotRespondingError> => {

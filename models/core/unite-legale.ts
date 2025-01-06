@@ -7,6 +7,7 @@ import {
 } from '#clients/exceptions';
 import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
 import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
+import { getIdccTitle } from '#models/conventions-collectives';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { Siren, isLuhnValid, verifySiren } from '#utils/helpers';
@@ -100,6 +101,13 @@ class UniteLegaleBuilder {
       uniteLegale.etatAdministratif =
         IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;
     }
+
+    // idcc
+    uniteLegale.listeIdcc = await Promise.all(
+      uniteLegale.listeIdcc.map(async ({ idcc }) => {
+        return await getIdccTitle(uniteLegale.siren, idcc);
+      })
+    );
 
     return uniteLegale;
   };
