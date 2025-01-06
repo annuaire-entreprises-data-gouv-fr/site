@@ -5,6 +5,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Loader } from '#components-ui/loader';
 import { GIPMDS, INSEE } from '#components/administrations';
+import NonRenseigne from '#components/non-renseigne';
 import { ProtectedInlineData } from '#components/protected-inline-data';
 import { isAPI404 } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
@@ -77,7 +78,7 @@ export const EffectifProtected = ({
   return (
     <ul>
       <li>
-        Tranche statistiques (<INSEE />) :{' '}
+        Tranche statistique (<INSEE />) :{' '}
         {libelleTrancheEffectif(
           uniteLegale.trancheEffectif,
           uniteLegale.anneeTrancheEffectif
@@ -105,12 +106,9 @@ export const EffectifCell = ({
   if (hasRights(session, ApplicationRights.effectifsAnnuels)) {
     return <EffectifProtected uniteLegale={uniteLegale} session={session} />;
   }
-  return (
-    <>
-      {libelleTrancheEffectif(
-        uniteLegale.trancheEffectif,
-        uniteLegale.anneeTrancheEffectif
-      )}
-    </>
+  const effectif = libelleTrancheEffectif(
+    uniteLegale.trancheEffectif,
+    uniteLegale.anneeTrancheEffectif
   );
+  return effectif ?? <NonRenseigne />;
 };
