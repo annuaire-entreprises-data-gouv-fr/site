@@ -89,8 +89,9 @@ export default function TravauxPublicsSection({
               [
                 <FAQLink tooltipLabel="Carte de travaux publics ">
                   Carte professionnelle d’entrepreneur de travaux publics,
-                  délivrée à une entreprise en règle de ses obligations
-                  sociales, administratives et juridiques.
+                  délivrée par la Fédération Nationale des Travaux Publics
+                  (FNTP) à une entreprise en règle de ses obligations sociales,
+                  administratives et juridiques.
                 </FAQLink>,
                 <DocumentDownloader data={data.fntp} administration="FNTP" />,
               ],
