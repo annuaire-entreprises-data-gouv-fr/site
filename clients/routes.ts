@@ -18,12 +18,12 @@ const routes = {
         `/v3/cnetp/unites_legales/${siren}/attestation_cotisations_conges_payes_chomage_intemperies`,
       opqibi: (siren: string) =>
         `/v3/opqibi/unites_legales/${siren}/certification_ingenierie`,
+      probtp: (siret: string) =>
+        `/v3/probtp/etablissements/${siret}/attestation_cotisations_retraite`,
       qualibat: (siret: string) =>
         `/v3/qualibat/etablissements/${siret}/certification_batiment`,
       qualifelec: (siret: string) =>
         `/v3/qualifelec/etablissements/${siret}/certificats`,
-      probtp: (siret: string) =>
-        `/v3/probtp/etablissements/${siret}/attestation_cotisations_retraite`,
     },
     conformite: {
       fiscale: (siren: string) =>

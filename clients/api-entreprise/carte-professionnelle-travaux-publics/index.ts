@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { ICarteProfessionnelleTravauxPublics } from '#models/espace-agent/carte-professionnelle-travaux-publics';
+import { ICarteProfessionnelleTravauxPublics } from '#models/espace-agent/travaux-publics';
 import { Siren } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 

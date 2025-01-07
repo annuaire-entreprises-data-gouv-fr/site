@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { ICnetp } from '#models/espace-agent/certificats/cnetp';
+import { ICertificatTravauxPublics } from '#models/espace-agent/travaux-publics';
 import { Siren } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
@@ -20,7 +20,9 @@ export const clientApiEntrepriseCnetp = async (siren: Siren) => {
   );
 };
 
-const mapToDomainObject = ({ data }: IAPIEntrepriseCnetp): ICnetp => {
+const mapToDomainObject = ({
+  data,
+}: IAPIEntrepriseCnetp): ICertificatTravauxPublics => {
   return {
     documentUrl: data.document_url,
     expiresIn: data.expires_in,

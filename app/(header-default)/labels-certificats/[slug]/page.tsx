@@ -3,10 +3,7 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/badges-section/labels-and-certificates';
-import { CibtpSection } from '#components/espace-agent-components/certifications/cibtp-section';
-import { CnetpSection } from '#components/espace-agent-components/certifications/cnetp-section';
 import { OpqibiSection } from '#components/espace-agent-components/certifications/opqibi-section';
-import { ProbtpSection } from '#components/espace-agent-components/certifications/probtp-section';
 import { QualibatSection } from '#components/espace-agent-components/certifications/qualibat-section';
 import { QualifelecSection } from '#components/espace-agent-components/certifications/qualifelec-section';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
@@ -110,15 +107,6 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
             <QualifelecSection session={session} uniteLegale={uniteLegale} />
             <OpqibiSection session={session} uniteLegale={uniteLegale} />
           </>
-        )}
-        {hasRights(session, ApplicationRights.cibtp) && (
-          <CibtpSection session={session} uniteLegale={uniteLegale} />
-        )}
-        {hasRights(session, ApplicationRights.cnetp) && (
-          <CnetpSection session={session} uniteLegale={uniteLegale} />
-        )}
-        {hasRights(session, ApplicationRights.probtp) && (
-          <ProbtpSection session={session} uniteLegale={uniteLegale} />
         )}
         {estOrganismeFormation && (
           <OrganismeDeFormationSection

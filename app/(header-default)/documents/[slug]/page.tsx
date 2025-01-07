@@ -16,9 +16,9 @@ import extractParamsAppRouter, {
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import ActesSection from './_components/actes';
-import CarteProfessionnelleTPSection from './_components/carte-professionnelle-TP-section';
 import JustificatifsSection from './_components/justificatifs';
 import { SummaryDocuments } from './_components/summary-documents';
+import TravauxPublicsSection from './_components/travaux-publics-section';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -59,11 +59,8 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
             <ConformiteSection session={session} uniteLegale={uniteLegale} />
           )}
           <ActesSection uniteLegale={uniteLegale} session={session} />
-          {hasRights(
-            session,
-            ApplicationRights.carteProfessionnelleTravauxPublics
-          ) && (
-            <CarteProfessionnelleTPSection
+          {hasRights(session, ApplicationRights.travauxPublics) && (
+            <TravauxPublicsSection
               session={session}
               uniteLegale={uniteLegale}
             />

@@ -18,13 +18,11 @@ export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
       <li>
         <a href="#actes">Actes et statuts</a>
       </li>
-      {hasRights(
-        session,
-        ApplicationRights.carteProfessionnelleTravauxPublics
-      ) && (
+      {hasRights(session, ApplicationRights.travauxPublics) && (
         <li>
-          <a href="#carte-professionnelle-travaux-publics">
-            Carte professionnelle travaux publics
+          <a href="#travaux-publics">
+            Justificatifs et certificats relatifs aux entreprises de travaux
+            publics
           </a>
         </li>
       )}

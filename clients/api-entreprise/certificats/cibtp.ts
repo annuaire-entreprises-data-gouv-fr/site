@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { ICibtp } from '#models/espace-agent/certificats/cibtp';
+import { ICertificatTravauxPublics } from '#models/espace-agent/travaux-publics';
 import { Siret } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
@@ -20,7 +20,9 @@ export const clientApiEntrepriseCibtp = async (siret: Siret) => {
   );
 };
 
-const mapToDomainObject = ({ data }: IAPIEntrepriseCibtp): ICibtp => {
+const mapToDomainObject = ({
+  data,
+}: IAPIEntrepriseCibtp): ICertificatTravauxPublics => {
   return {
     documentUrl: data.document_url,
     expiresIn: data.expires_in,

@@ -5,6 +5,7 @@
 // ***********************************************
 //
 //
+import { allAgentScopes } from '#models/user/all-agent-scopes';
 import { ISession } from '#models/user/session';
 import { sessionOptions } from '#utils/session';
 import { sealData } from 'iron-session';
@@ -30,17 +31,7 @@ const generateSessionCookie = async () => {
       firstName: 'John Doe',
       fullName: 'John Doe',
       email: 'user@yopmail.com',
-      scopes: [
-        'conformite',
-        'beneficiaires',
-        'cibtp',
-        'cnetp',
-        'agent',
-        'nonDiffusible',
-        'rne',
-        'pseudo_opendata',
-        'effectifs_annuels',
-      ],
+      scopes: [...allAgentScopes],
       userType: 'Super-agent connecté',
       hasHabilitation: true,
     },
