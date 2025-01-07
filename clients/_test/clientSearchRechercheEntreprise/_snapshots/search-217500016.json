@@ -42,14 +42,20 @@
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
-            "idcc": [
-              "5021",
-              "5003"
-            ],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          }
+          },
+          "listeIdcc": [
+            {
+              "idcc": "5021",
+              "title": ""
+            },
+            {
+              "idcc": "5003",
+              "title": ""
+            }
+          ]
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -91,14 +97,20 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "5021",
-                  "5003"
-                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              }
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "5021",
+                  "title": ""
+                },
+                {
+                  "idcc": "5003",
+                  "title": ""
+                }
+              ]
             }
           ],
           "open": [
@@ -132,14 +144,20 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "5021",
-                  "5003"
-                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              }
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "5021",
+                  "title": ""
+                },
+                {
+                  "idcc": "5003",
+                  "title": ""
+                }
+              ]
             }
           ],
           "unknown": [],
@@ -1668,11 +1686,26 @@
           ]
         },
         "listeIdcc": [
-          "5021",
-          "5003",
-          "5022",
-          "1043",
-          "9999"
+          {
+            "idcc": "5021",
+            "title": ""
+          },
+          {
+            "idcc": "5003",
+            "title": ""
+          },
+          {
+            "idcc": "5022",
+            "title": ""
+          },
+          {
+            "idcc": "1043",
+            "title": ""
+          },
+          {
+            "idcc": "9999",
+            "title": ""
+          }
         ],
         "immatriculation": null,
         "matchingEtablissements": [],

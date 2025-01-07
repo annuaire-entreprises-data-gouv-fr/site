@@ -42,11 +42,11 @@
             "estEntrepreneurIndividuel": true,
             "idFiness": [],
             "idBio": [],
-            "idcc": [],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          }
+          },
+          "listeIdcc": []
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -88,11 +88,11 @@
                 "estEntrepreneurIndividuel": true,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              }
+              },
+              "listeIdcc": []
             }
           ],
           "open": [],
@@ -128,11 +128,11 @@
                 "estEntrepreneurIndividuel": true,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              }
+              },
+              "listeIdcc": []
             }
           ],
           "nombreEtablissementsOuverts": 0,

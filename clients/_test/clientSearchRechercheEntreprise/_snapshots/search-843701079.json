@@ -42,11 +42,6 @@
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
-            "idcc": [
-              "2420",
-              "2609",
-              "1596"
-            ],
             "idOrganismeFormation": [],
             "idRge": [
               "3111D111",
@@ -60,7 +55,21 @@
               "7131D112"
             ],
             "idUai": []
-          }
+          },
+          "listeIdcc": [
+            {
+              "idcc": "2420",
+              "title": ""
+            },
+            {
+              "idcc": "2609",
+              "title": ""
+            },
+            {
+              "idcc": "1596",
+              "title": ""
+            }
+          ]
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -102,11 +111,6 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "2420",
-                  "2609",
-                  "1596"
-                ],
                 "idOrganismeFormation": [],
                 "idRge": [
                   "3111D111",
@@ -120,7 +124,21 @@
                   "7131D112"
                 ],
                 "idUai": []
-              }
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "2420",
+                  "title": ""
+                },
+                {
+                  "idcc": "2609",
+                  "title": ""
+                },
+                {
+                  "idcc": "1596",
+                  "title": ""
+                }
+              ]
             }
           ],
           "open": [
@@ -154,11 +172,6 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "2420",
-                  "2609",
-                  "1596"
-                ],
                 "idOrganismeFormation": [],
                 "idRge": [
                   "3111D111",
@@ -172,7 +185,21 @@
                   "7131D112"
                 ],
                 "idUai": []
-              }
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "2420",
+                  "title": ""
+                },
+                {
+                  "idcc": "2609",
+                  "title": ""
+                },
+                {
+                  "idcc": "1596",
+                  "title": ""
+                }
+              ]
             }
           ],
           "unknown": [],
@@ -221,9 +248,18 @@
           "codeColter": null
         },
         "listeIdcc": [
-          "2420",
-          "2609",
-          "1596"
+          {
+            "idcc": "2420",
+            "title": ""
+          },
+          {
+            "idcc": "2609",
+            "title": ""
+          },
+          {
+            "idcc": "1596",
+            "title": ""
+          }
         ],
         "immatriculation": {
           "dateDebutActivite": "2018-11-12",

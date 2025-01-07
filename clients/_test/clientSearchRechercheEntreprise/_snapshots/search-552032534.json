@@ -44,13 +44,16 @@
               "750073181"
             ],
             "idBio": [],
-            "idcc": [
-              "9999"
-            ],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          }
+          },
+          "listeIdcc": [
+            {
+              "idcc": "9999",
+              "title": ""
+            }
+          ]
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -94,13 +97,16 @@
                   "750073181"
                 ],
                 "idBio": [],
-                "idcc": [
-                  "9999"
-                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              }
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "9999",
+                  "title": ""
+                }
+              ]
             }
           ],
           "open": [
@@ -136,13 +142,16 @@
                   "750073181"
                 ],
                 "idBio": [],
-                "idcc": [
-                  "9999"
-                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              }
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "9999",
+                  "title": ""
+                }
+              ]
             }
           ],
           "unknown": [],
@@ -191,7 +200,10 @@
           "codeColter": null
         },
         "listeIdcc": [
-          "9999"
+          {
+            "idcc": "9999",
+            "title": ""
+          }
         ],
         "immatriculation": {
           "dateDebutActivite": "",

@@ -35,11 +35,11 @@
           "estEntrepreneurIndividuel": false,
           "idFiness": [],
           "idBio": [],
-          "idcc": [],
           "idOrganismeFormation": [],
           "idRge": [],
           "idUai": []
-        }
+        },
+        "listeIdcc": []
       }
     ],
     "page": 1,

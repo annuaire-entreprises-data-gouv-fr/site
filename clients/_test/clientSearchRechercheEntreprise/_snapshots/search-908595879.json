@@ -42,13 +42,16 @@
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
-            "idcc": [
-              "9999"
-            ],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          }
+          },
+          "listeIdcc": [
+            {
+              "idcc": "9999",
+              "title": ""
+            }
+          ]
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -90,13 +93,16 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "9999"
-                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              }
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "9999",
+                  "title": ""
+                }
+              ]
             }
           ],
           "open": [
@@ -130,13 +136,16 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "9999"
-                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              }
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "9999",
+                  "title": ""
+                }
+              ]
             }
           ],
           "unknown": [],
@@ -185,7 +194,10 @@
           "codeColter": null
         },
         "listeIdcc": [
-          "9999"
+          {
+            "idcc": "9999",
+            "title": ""
+          }
         ],
         "immatriculation": {
           "dateDebutActivite": "2022-01-01",
