@@ -42,13 +42,16 @@
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
-            "idcc": [
-              "1261"
-            ],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
-          }
+          },
+          "listeIdcc": [
+            {
+              "idcc": "1261",
+              "title": ""
+            }
+          ]
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -90,13 +93,16 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "1261"
-                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              }
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "1261",
+                  "title": ""
+                }
+              ]
             }
           ],
           "open": [
@@ -130,13 +136,16 @@
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
-                "idcc": [
-                  "1261"
-                ],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
-              }
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "1261",
+                  "title": ""
+                }
+              ]
             }
           ],
           "unknown": [],
@@ -185,7 +194,10 @@
           "codeColter": null
         },
         "listeIdcc": [
-          "1261"
+          {
+            "idcc": "1261",
+            "title": ""
+          }
         ],
         "immatriculation": null,
         "matchingEtablissements": [],
