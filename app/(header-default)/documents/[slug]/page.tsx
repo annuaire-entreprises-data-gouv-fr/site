@@ -15,10 +15,10 @@ import extractParamsAppRouter, {
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
+import TravauxPublicsSection from '../../../../components/espace-agent-components/travaux-publics-section';
 import ActesSection from './_components/actes';
 import JustificatifsSection from './_components/justificatifs';
 import { SummaryDocuments } from './_components/summary-documents';
-import TravauxPublicsSection from './_components/travaux-publics-section';
 
 export const generateMetadata = async (
   props: AppRouterProps

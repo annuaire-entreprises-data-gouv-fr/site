@@ -1,24 +1,22 @@
-import { clientApiEntrepriseCarteProfessionnelleTravauxPublics } from '#clients/api-entreprise/carte-professionnelle-travaux-publics';
-import { clientApiEntrepriseCibtp } from '#clients/api-entreprise/certificats/cibtp';
-import { clientApiEntrepriseCnetp } from '#clients/api-entreprise/certificats/cnetp';
-import { clientApiEntrepriseProbtp } from '#clients/api-entreprise/certificats/probtp';
-import { HttpNotFound } from '#clients/exceptions';
+import {
+  clientApiEntrepriseCarteProfessionnelleTravauxPublics,
+  clientApiEntrepriseCibtp,
+  clientApiEntrepriseCnetp,
+  clientApiEntrepriseProbtp,
+} from '#clients/api-entreprise/travaux-publics';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { handleApiEntrepriseError } from './utils';
 
-export type ICertificatTravauxPublics = {
-  documentUrl: string;
-  expiresIn: number;
+export type IDocumentDownloader = {
+  url: string;
 };
-export type ICarteProfessionnelleTravauxPublics = {
-  documentUrl: string;
-};
+
 export type ITravauxPublics = {
-  fntp: ICarteProfessionnelleTravauxPublics | null;
-  cibtp: ICertificatTravauxPublics | null;
-  cnetp: ICertificatTravauxPublics | null;
-  probtp: ICertificatTravauxPublics | null;
+  fntp: IDocumentDownloader | IAPINotRespondingError;
+  cibtp: IDocumentDownloader | IAPINotRespondingError;
+  cnetp: IDocumentDownloader | IAPINotRespondingError;
+  probtp: IDocumentDownloader | IAPINotRespondingError;
 };
 
 export const getTravauxPublic = async (
@@ -26,44 +24,21 @@ export const getTravauxPublic = async (
 ): Promise<ITravauxPublics | IAPINotRespondingError> => {
   const siret = verifySiret(slug as string);
   const siren = extractSirenFromSiret(siret);
-  try {
-    const [fntp, cibtp, cnetp, probtp] = await Promise.all([
-      clientApiEntrepriseCarteProfessionnelleTravauxPublics(siren).catch(
-        (e) => {
-          if (e instanceof HttpNotFound) {
-            return null;
-          } else {
-            throw e;
-          }
-        }
-      ),
-      clientApiEntrepriseCibtp(siret).catch((e) => {
-        if (e instanceof HttpNotFound) {
-          return null;
-        } else {
-          throw e;
-        }
-      }),
-      clientApiEntrepriseCnetp(siren).catch((e) => {
-        if (e instanceof HttpNotFound) {
-          return null;
-        } else {
-          throw e;
-        }
-      }),
-      clientApiEntrepriseProbtp(siret).catch((e) => {
-        if (e instanceof HttpNotFound) {
-          return null;
-        } else {
-          throw e;
-        }
-      }),
-    ]);
-    return { fntp, cibtp, cnetp, probtp };
-  } catch (e) {
-    return handleApiEntrepriseError(e, {
+
+  const errorHandler = (e: any) =>
+    handleApiEntrepriseError(e, {
       siren,
+      siret,
       apiResource: 'TravauxPublics',
     });
-  }
+
+  const [fntp, cibtp, cnetp, probtp] = await Promise.all([
+    clientApiEntrepriseCarteProfessionnelleTravauxPublics(siren).catch(
+      errorHandler
+    ),
+    clientApiEntrepriseCibtp(siret).catch(errorHandler),
+    clientApiEntrepriseCnetp(siren).catch(errorHandler),
+    clientApiEntrepriseProbtp(siret).catch(errorHandler),
+  ]);
+  return { fntp, cibtp, cnetp, probtp };
 };
