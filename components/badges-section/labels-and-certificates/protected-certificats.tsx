@@ -67,51 +67,6 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
         />
       ),
     },
-    {
-      data: useAPIRouteData(
-        APIRoutesPaths.EspaceAgentCibtp,
-        uniteLegale.siege.siret,
-        session
-      ),
-      render: (
-        <LabelWithLinkToSection
-          informationTooltipLabel="Cette structure a un certificat CIBTP, attestant qu'elle est en règle de ses cotisations congés payés et chômage-intempéries"
-          label="CIBTP - cotisations congés et chômage"
-          sectionId="cibtp"
-          siren={uniteLegale.siren}
-        />
-      ),
-    },
-    {
-      data: useAPIRouteData(
-        APIRoutesPaths.EspaceAgentCnetp,
-        uniteLegale.siren,
-        session
-      ),
-      render: (
-        <LabelWithLinkToSection
-          informationTooltipLabel="Cette structure a un certificat CNETP, attestant qu'elle est en règle de ses cotisations congés payés et chômage-intempéries"
-          label="CNETP - cotisations congés et chômage"
-          sectionId="cnetp"
-          siren={uniteLegale.siren}
-        />
-      ),
-    },
-    {
-      data: useAPIRouteData(
-        APIRoutesPaths.EspaceAgentProbtp,
-        uniteLegale.siege.siret,
-        session
-      ),
-      render: (
-        <LabelWithLinkToSection
-          informationTooltipLabel="Cette structure a un certificat ProBTP, attestant la régularité de ses cotisations de retraite complémentaire auprès de la Protection Sociale du Bâtiment et des Travaux publics"
-          label="ProBTP - cotisations retraite complémentaire"
-          sectionId="probtp"
-          siren={uniteLegale.siren}
-        />
-      ),
-    },
   ];
 
   // either errors we ignore or 404

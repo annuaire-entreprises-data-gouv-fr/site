@@ -22,6 +22,7 @@ export const getConformiteEntreprise = async (
 ): Promise<IConformiteUniteLegale> => {
   const siret = verifySiret(maybeSiret as string);
   const siren = extractSirenFromSiret(siret);
+
   const [fiscale, vigilance, msa] = await Promise.all([
     clientApiEntrepriseConformiteFiscale(siren).catch((error) =>
       handleApiEntrepriseError(error, {

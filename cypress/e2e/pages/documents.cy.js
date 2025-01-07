@@ -13,10 +13,14 @@ describe('Documents ESSOR ENERGIES (SOLARSUD)', () => {
     cy.contains('DGFiP : conforme').should('be.visible');
     cy.contains('URSSAF : conforme').should('be.visible');
     cy.contains('MSA : conforme').should('be.visible');
-    // Carte professionnelle travaux publics
-    cy.contains('Carte professionnelle travaux publics').should('be.visible');
-    cy.contains(
-      'Cette entreprise possède une carte professionnelle d’entrepreneur de travaux publics,'
-    ).should('be.visible');
+    // Travaux publics
+    cy.contains('Travaux publics').should('be.visible');
+    cy.contains('Carte de travaux publics').should('be.visible');
+    cy.contains('FNTP : document disponible').should('be.visible');
+    cy.contains('Cotisations congés & chômage').should('be.visible');
+    cy.contains('CNETP : document disponible').should('be.visible');
+    cy.contains('CIBTP : document disponible').should('be.visible');
+    cy.contains('Cotisations retraite').should('be.visible');
+    cy.contains('ProBTP : document disponible').should('be.visible');
   });
 });

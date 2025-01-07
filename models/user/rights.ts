@@ -14,15 +14,12 @@ export enum ApplicationRights {
   protectedCertificats = 'Certificats Qualifelec, Qualibat et OPQIBI',
   associationProtected = 'Actes, statuts et données des dirigeants des associations',
   mandatairesRCS = 'État civil complet des dirigeants d’entreprise',
-  carteProfessionnelleTravauxPublics = 'Carte professionnelle travaux publics (FNTP)',
   beneficiaires = 'Registre des Bénéficiaires Effectifs',
   conformite = 'Attestations de conformité fiscale (DGFiP) et sociale (Urssaf & MSA)',
   subventionsAssociation = 'Données des subventions des associations',
-  cibtp = 'Accès au certificat CIBTP',
-  cnetp = 'Accès au certificat CNETP',
-  probtp = 'Accès à l‘attestation PROBTP',
   effectifsAnnuels = 'Effectifs annuels (RCD)',
   chiffreAffaires = 'Accès aux chiffres d’affaires (DGFiP)',
+  travauxPublics = 'Accès aux données relatives aux travaux publics',
 }
 
 /**
@@ -44,7 +41,6 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
     case ApplicationRights.effectifsAnnuels:
       return userScopes.includes('effectifs_annuels');
     case ApplicationRights.protectedCertificats:
-    case ApplicationRights.carteProfessionnelleTravauxPublics:
     case ApplicationRights.mandatairesRCS:
     case ApplicationRights.subventionsAssociation:
     case ApplicationRights.associationProtected:
@@ -52,16 +48,12 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
       return userScopes.includes('pseudo_opendata');
     case ApplicationRights.beneficiaires:
       return userScopes.includes('beneficiaires');
-    case ApplicationRights.cibtp:
-      return userScopes.includes('cibtp');
-    case ApplicationRights.cnetp:
-      return userScopes.includes('cnetp');
-    case ApplicationRights.probtp:
-      return userScopes.includes('probtp');
     case ApplicationRights.nonDiffusible:
       return userScopes.includes('nonDiffusible');
     case ApplicationRights.isAgent:
       return userScopes.includes('agent');
+    case ApplicationRights.travauxPublics:
+      return userScopes.includes('travaux_publics');
     default:
       return false;
   }

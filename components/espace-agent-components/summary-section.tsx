@@ -43,7 +43,18 @@ export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => {
                   [
                     'Conformité',
                     <a href={`/documents/${uniteLegale.siren}#conformite`}>
-                      → Consulter les attestations fiscales et sociales
+                      → Attestations de conformité fiscales et sociales
+                    </a>,
+                  ],
+                ]
+              : []),
+            ...(hasRights(session, ApplicationRights.travauxPublics)
+              ? [
+                  [
+                    'Travaux',
+                    <a href={`/documents/${uniteLegale.siren}#travaux-publics`}>
+                      → Justificatifs relatifs aux entreprises de travaux
+                      publics
                     </a>,
                   ],
                 ]

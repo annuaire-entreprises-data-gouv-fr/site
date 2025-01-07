@@ -1,18 +1,5 @@
 import { getAdditionnalIAgentScope } from '#clients/authentication/super-agent-scopes';
-
-const allAgentScopes = [
-  'rne',
-  'nonDiffusible',
-  'conformite',
-  'beneficiaires',
-  'agent',
-  'pseudo_opendata',
-  'cibtp',
-  'cnetp',
-  'probtp',
-  'effectifs_annuels',
-  'chiffre_affaires',
-] as const;
+import { allAgentScopes } from './all-agent-scopes';
 
 export type IAgentScope = (typeof allAgentScopes)[number];
 

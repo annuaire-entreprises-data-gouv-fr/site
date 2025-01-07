@@ -23,6 +23,7 @@ import { associationHandler } from './handlers/association';
 import { baseAdresseNationaleHandler } from './handlers/base-adresse-nationale';
 import { bodaccHandler } from './handlers/bodacc';
 import { carteProfessionnelleTravauxPublicsHandler } from './handlers/carte-professionnelle-travaux-publics';
+import { certificationsHandler } from './handlers/certifications';
 import { conformiteHandler } from './handlers/conformite';
 import { dgefpHandler } from './handlers/dgefp';
 import { donneesFinancieresHandler } from './handlers/donnees-financieres';
@@ -145,6 +146,24 @@ export const routesHandlers = [
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.carteProfessionnelleTravauxPublics('*')}`,
     carteProfessionnelleTravauxPublicsHandler
+  ),
+  http.get(
+    `${
+      process.env.API_ENTREPRISE_URL
+    }${routes.apiEntreprise.certifications.cibtp('*')}`,
+    certificationsHandler
+  ),
+  http.get(
+    `${
+      process.env.API_ENTREPRISE_URL
+    }${routes.apiEntreprise.certifications.cnetp('*')}`,
+    certificationsHandler
+  ),
+  http.get(
+    `${
+      process.env.API_ENTREPRISE_URL
+    }${routes.apiEntreprise.certifications.probtp('*')}`,
+    certificationsHandler
   ),
   http.get(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.mandatairesRCS(

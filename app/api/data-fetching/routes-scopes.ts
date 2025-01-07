@@ -24,11 +24,7 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
   [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
   // BTP
-  [APIRoutesPaths.EspaceAgentCibtp]: ApplicationRights.cibtp,
-  [APIRoutesPaths.EspaceAgentCnetp]: ApplicationRights.cnetp,
-  [APIRoutesPaths.EspaceAgentProbtp]: ApplicationRights.probtp,
-  [APIRoutesPaths.EspaceAgentCarteProfessionnelleTP]:
-    ApplicationRights.carteProfessionnelleTravauxPublics,
+  [APIRoutesPaths.EspaceAgentTravauxPublics]: ApplicationRights.travauxPublics,
   // fiscal & social
   [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]:
     ApplicationRights.effectifsAnnuels,
