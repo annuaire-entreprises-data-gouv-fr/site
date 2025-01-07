@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 export const marianne = localFont({
   src: [
     {
-      path: '../style/fonts/Marianne-Regular.woff2',
+      path: '../style/fonts/compressed/Marianne-Regular.woff2',
       weight: '400',
       style: 'normal',
     },
@@ -13,7 +13,7 @@ export const marianne = localFont({
       style: 'italic',
     },
     {
-      path: '../style/fonts/Marianne-Bold.woff2',
+      path: '../style/fonts/compressed/Marianne-Bold.woff2',
       weight: '900',
       style: 'normal',
     },
