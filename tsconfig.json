@@ -23,12 +23,13 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es6",
+    "types": ["jest", "webpack-env"],
     "plugins": [
       {
         "name": "next"
       }
     ]
   },
-  "exclude": ["node_modules", "cypress", "cypress.config.ts"],
+  "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }
