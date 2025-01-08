@@ -61,7 +61,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
           <ResponsablesServicePublicSection uniteLegale={uniteLegale} />
         ) : !estDiffusible(uniteLegale) &&
           !hasRights(session, ApplicationRights.nonDiffusible) ? (
-          <DonneesPriveesSection />
+          <DonneesPriveesSection title="Dirigeant(s)" />
         ) : isAssociation(uniteLegale) ? (
           <DirigeantsAssociationSection
             uniteLegale={uniteLegale}

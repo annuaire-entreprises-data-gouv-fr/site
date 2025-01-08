@@ -27,7 +27,7 @@ describe('Dirigeants non-diffusible ', () => {
     cy.contains('▪︎ ▪︎ ▪︎ information non-diffusible ▪︎ ▪︎ ▪︎').should(
       'be.visible'
     );
-    cy.contains('Données privées').should('be.visible');
+    cy.contains('Dirigeant(s) (données privées)').should('be.visible');
   });
   it('[LOGGED] Should display dirigeants', () => {
     cy.login();

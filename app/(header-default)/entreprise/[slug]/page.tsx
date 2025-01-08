@@ -5,7 +5,7 @@ import { EspaceAgentSummarySection } from '#components/espace-agent-components/s
 import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
-import { NonDiffusibleSection } from '#components/non-diffusible-section';
+import { NonDiffusibleStrictSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
@@ -72,7 +72,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
           session={session}
         />
         {estNonDiffusibleStrict(uniteLegale) ? (
-          <NonDiffusibleSection />
+          <NonDiffusibleStrictSection />
         ) : (
           <>
             <UniteLegaleSummarySection
