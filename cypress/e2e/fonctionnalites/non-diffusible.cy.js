@@ -11,6 +11,6 @@ describe('Non-diffusible', () => {
 
   it('No dirigeant in partial diffusible (protected)', () => {
     cy.visit(`/dirigeants/908595879`);
-    cy.contains('Données privées').should('have.length', 1);
+    cy.contains('Dirigeant(s) (données privées)').should('have.length', 1);
   });
 });
