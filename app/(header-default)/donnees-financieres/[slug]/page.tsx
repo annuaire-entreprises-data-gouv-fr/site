@@ -1,10 +1,13 @@
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import { FinancesAssociationSection } from '#components/finances-section/association';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
 import { SubventionsAssociationSection } from '#components/subventions-association-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
+import { estDiffusible } from '#models/core/diffusion';
 import { isAssociation } from '#models/core/types';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { uniteLegalePageTitle } from '#utils/helpers';
 import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
 import extractParamsAppRouter, {
@@ -58,10 +61,15 @@ const FinancePage = async (props: AppRouterProps) => {
           </>
         ) : (
           <>
-            <FinancesSocieteSection
-              uniteLegale={uniteLegale}
-              session={session}
-            />
+            {estDiffusible(uniteLegale) ||
+            hasRights(session, ApplicationRights.nonDiffusible) ? (
+              <FinancesSocieteSection
+                uniteLegale={uniteLegale}
+                session={session}
+              />
+            ) : (
+              <DonneesPriveesSection title="Indicateurs financiers" />
+            )}
             <HorizontalSeparator />
             <BilansSection uniteLegale={uniteLegale} session={session} />
           </>
