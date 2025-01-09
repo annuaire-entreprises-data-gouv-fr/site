@@ -14,7 +14,7 @@ type IModalite = {
   nue_propriete: number;
 };
 
-export type IBeneficairesEffectif = {
+export type IBeneficiairesEffectif = {
   nom: string;
   prenoms: string;
   moisNaissance: string;
@@ -72,7 +72,7 @@ export type IBeneficairesEffectif = {
 export const getBeneficiaires = async (
   maybeSiren: string,
   useCase: UseCase
-): Promise<Array<IBeneficairesEffectif> | IAPINotRespondingError> => {
+): Promise<Array<IBeneficiairesEffectif> | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
   try {
     const beneficiaires = await clientApiEntrepriseBeneficiaires(
