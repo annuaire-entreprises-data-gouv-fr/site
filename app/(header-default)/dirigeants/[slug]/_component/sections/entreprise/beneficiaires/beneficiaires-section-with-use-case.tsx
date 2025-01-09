@@ -1,3 +1,5 @@
+'use client';
+
 import routes from '#clients/routes';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';

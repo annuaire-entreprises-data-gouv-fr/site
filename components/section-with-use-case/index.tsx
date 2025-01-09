@@ -27,7 +27,7 @@ const SectionWithUseCase: React.FC<{
   isProtected: boolean;
   allowedUseCases: UseCase[];
   hasRights: boolean;
-  noRightContent: JSX.Element;
+  noRightContent?: JSX.Element;
   useCaseFormContent: JSX.Element;
   WrappedSection: React.ComponentType<WrappedSectionProps>;
 }> = ({
@@ -46,11 +46,11 @@ const SectionWithUseCase: React.FC<{
   const [useCase, setUseCase] = useState<UseCase>();
 
   if (!hasRights) {
-    return (
+    return noRightContent ? (
       <Section title={title} id={id}>
         {noRightContent}
       </Section>
-    );
+    ) : null;
   }
 
   if (!useCase || !allowedUseCases.includes(useCase)) {

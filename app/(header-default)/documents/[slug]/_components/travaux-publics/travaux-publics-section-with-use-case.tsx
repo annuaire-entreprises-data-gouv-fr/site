@@ -12,9 +12,11 @@ import {
 } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
 import { IDocumentDownloader } from '#models/espace-agent/travaux-publics';
+import { UseCase } from '#models/user/agent';
 import { ISession } from '#models/user/session';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { useMemo } from 'react';
 
 const DocumentDownloader = ({
   data,
@@ -56,30 +58,42 @@ const DocumentDownloader = ({
   );
 };
 
-export default function TravauxPublicsSection({
+export default function TravauxPublicsSectionWithUseCase({
   uniteLegale,
   session,
+  useCase,
+  title,
+  id,
+  sources,
+  isProtected,
 }: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
+  useCase: UseCase;
+  title: string;
+  id: string;
+  sources: EAdministration[];
+  isProtected: boolean;
 }) {
+  const params = useMemo(
+    () => ({
+      params: { useCase },
+    }),
+    [useCase]
+  );
   const travauxPublics = useAPIRouteData(
     APIRoutesPaths.EspaceAgentTravauxPublics,
     uniteLegale.siege.siret,
-    session
+    session,
+    params
   );
 
   return (
     <AsyncDataSectionClient
-      title="Travaux publics"
-      id="travaux-publics"
-      isProtected
-      sources={[
-        EAdministration.FNTP,
-        EAdministration.CIBTP,
-        EAdministration.CNETP,
-        EAdministration.PROBTP,
-      ]}
+      title={title}
+      id={id}
+      isProtected={isProtected}
+      sources={sources}
       data={travauxPublics}
     >
       {(data) => (

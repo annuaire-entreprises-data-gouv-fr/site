@@ -1,5 +1,3 @@
-'use client';
-
 import SectionWithUseCase from '#components/section-with-use-case';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
