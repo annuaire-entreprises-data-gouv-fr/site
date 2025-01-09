@@ -2,6 +2,7 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
+import TravauxPublicsSection from '#components/espace-agent-components/travaux-publics-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { ApplicationRights, hasRights } from '#models/user/rights';
@@ -15,7 +16,6 @@ import extractParamsAppRouter, {
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
-import TravauxPublicsSection from '../../../../components/espace-agent-components/travaux-publics-section';
 import ActesSection from './_components/actes';
 import JustificatifsSection from './_components/justificatifs';
 import { SummaryDocuments } from './_components/summary-documents';

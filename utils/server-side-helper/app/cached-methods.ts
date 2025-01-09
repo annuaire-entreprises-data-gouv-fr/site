@@ -1,21 +1,21 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { Exception } from '#models/exceptions';
-import { extractSirenOrSiretSlugFromUrl } from '#utils/helpers';
-import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
-import { redirect } from 'next/navigation';
-import { cache } from 'react';
 import {
   getEtablissementWithLatLongFromSlug,
   getEtablissementWithUniteLegaleFromSlug,
-} from '../../../models/core/etablissement';
+} from '#models/core/etablissement';
 import {
   FetchRechercheEntrepriseException,
   NotASirenError,
   NotASiretError,
   SirenNotFoundError,
   SiretNotFoundError,
-} from '../../../models/core/types';
-import { getUniteLegaleFromSlug } from '../../../models/core/unite-legale';
+} from '#models/core/types';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
+import { Exception } from '#models/exceptions';
+import { extractSirenOrSiretSlugFromUrl } from '#utils/helpers';
+import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
+import { redirect } from 'next/navigation';
+import { cache } from 'react';
 
 const handleException = (e: any, slug: string) => {
   if (

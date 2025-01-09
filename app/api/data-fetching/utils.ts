@@ -1,8 +1,8 @@
 import { Exception } from '#models/exceptions';
 import { ISession } from '#models/user/session';
 import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
+import getSession from '#utils/server-side-helper/app/get-session';
 import { userAgent } from 'next/server';
-import getSession from '../../../utils/server-side-helper/app/get-session';
 import { APIRoutesPaths } from './routes-paths';
 
 export type IContext = { params: Promise<{ slug: Array<string> }> };
