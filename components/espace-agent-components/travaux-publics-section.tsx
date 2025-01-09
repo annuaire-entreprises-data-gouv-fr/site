@@ -102,14 +102,18 @@ export default function TravauxPublicsSection({
                   cotisations congés payés et chômage-intempéries.
                 </FAQLink>,
                 <>
-                  <DocumentDownloader
-                    data={data.cnetp}
-                    administration="CNETP"
-                  />
-                  <DocumentDownloader
-                    data={data.cnetp}
-                    administration="CIBTP"
-                  />
+                  <div>
+                    <DocumentDownloader
+                      data={data.cnetp}
+                      administration="CNETP"
+                    />
+                  </div>
+                  <div>
+                    <DocumentDownloader
+                      data={data.cnetp}
+                      administration="CIBTP"
+                    />
+                  </div>
                 </>,
               ],
               [
