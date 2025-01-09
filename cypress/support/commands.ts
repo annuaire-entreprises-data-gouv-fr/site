@@ -38,7 +38,8 @@ const generateSessionCookie = async () => {
   };
 
   return sealData(session, {
-    password: Cypress.env('IRON_SESSION_PWD'),
+    password:
+      Cypress.env('IRON_SESSION_PWD') || 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   });
 };
 

@@ -9,12 +9,12 @@ import { getConformiteEntreprise } from '#models/espace-agent/conformite';
 import { getDirigeantsProtected } from '#models/espace-agent/dirigeants-protected';
 import { getEffectifsAnnuelsProtected } from '#models/espace-agent/effectifs/annuels';
 import { getDocumentsRNEProtected } from '#models/espace-agent/rne-protected/documents';
-import { getTravauxPublic } from '#models/espace-agent/travaux-publics';
 import { getDirigeantsRNE } from '#models/rne/dirigeants';
 import { getRNEObservations } from '#models/rne/observations';
 import { getSubventionsAssociationFromSlug } from '#models/subventions/association';
 import { buildAndVerifyTVA } from '#models/tva/verify';
 import getBeneficiairesController from './get-beneficiaires-controller';
+import getTravauxPublicsController from './get-travaux-publics-controller';
 import { APIRoutesPaths } from './routes-paths';
 
 export const APIRoutesHandlers = {
@@ -30,7 +30,7 @@ export const APIRoutesHandlers = {
     getEffectifsAnnuelsProtected,
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
     getChiffreAffairesProtected,
-  [APIRoutesPaths.EspaceAgentTravauxPublics]: getTravauxPublic,
+  [APIRoutesPaths.EspaceAgentTravauxPublics]: getTravauxPublicsController,
   getChiffreAffairesProtected,
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,
   [APIRoutesPaths.Observations]: getRNEObservations,

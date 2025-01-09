@@ -15,6 +15,7 @@ describe('Documents ESSOR ENERGIES (SOLARSUD)', () => {
     cy.contains('MSA : conforme').should('be.visible');
     // Travaux publics
     cy.contains('Travaux publics').should('be.visible');
+    cy.contains('label', 'Aides publiques').click();
     cy.contains('Carte de travaux publics').should('be.visible');
     cy.contains('FNTP : document disponible').should('be.visible');
     cy.contains('Cotisations congés & chômage').should('be.visible');
