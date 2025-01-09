@@ -7,7 +7,7 @@ import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
-import { IBeneficairesEffectif } from '#models/espace-agent/beneficiaires';
+import { IBeneficiairesEffectif } from '#models/espace-agent/beneficiaires';
 import { UseCase } from '#models/user/agent';
 import { ISession } from '#models/user/session';
 import { formatDatePartial } from '#utils/helpers';
@@ -20,11 +20,23 @@ import { useMemo } from 'react';
  * @param param0
  * @returns
  */
-const ProtectedBeneficiairesSection: React.FC<{
+export default function BeneficiairesSectionWithUseCase({
+  uniteLegale,
+  session,
+  useCase,
+  title,
+  id,
+  sources,
+  isProtected,
+}: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
   useCase: UseCase;
-}> = ({ uniteLegale, session, useCase }) => {
+  title: string;
+  id: string;
+  sources: EAdministration[];
+  isProtected: boolean;
+}) {
   const params = useMemo(
     () => ({
       params: { useCase },
@@ -41,9 +53,10 @@ const ProtectedBeneficiairesSection: React.FC<{
   return (
     <>
       <AsyncDataSectionClient
-        id="beneficiaires"
-        title="Bénéficiaire(s) effectif(s)"
-        sources={[EAdministration.INPI]}
+        title={title}
+        id={id}
+        isProtected={isProtected}
+        sources={sources}
         notFoundInfo={
           <>
             Cette structure n’est pas enregistrée au{' '}
@@ -51,7 +64,6 @@ const ProtectedBeneficiairesSection: React.FC<{
           </>
         }
         data={beneficiaires}
-        isProtected
       >
         {(beneficiaires) => (
           <>
@@ -64,16 +76,16 @@ const ProtectedBeneficiairesSection: React.FC<{
       </AsyncDataSectionClient>
     </>
   );
-};
+}
 
 function BénéficiairesContent({
   beneficiaires,
   uniteLegale,
 }: {
-  beneficiaires: IBeneficairesEffectif[];
+  beneficiaires: IBeneficiairesEffectif[];
   uniteLegale: IUniteLegale;
 }) {
-  const formatInfos = (beneficiaire: IBeneficairesEffectif) => [
+  const formatInfos = (beneficiaire: IBeneficiairesEffectif) => [
     <>
       {beneficiaire.prenoms}
       {beneficiaire.prenoms && ' '}
@@ -326,5 +338,3 @@ function PartCapitalModalite({
     </>
   );
 }
-
-export default ProtectedBeneficiairesSection;
