@@ -4,7 +4,7 @@ import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
 import { ApplicationRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import TravauxPublicsSectionWithUseCase from './travaux-publics-section-with-use-case';
+import ProtectedTravauxPublicsSection from './protected-travaux-publics-section';
 
 const TravauxPublicsSection = ({
   uniteLegale,
@@ -27,7 +27,7 @@ const TravauxPublicsSection = ({
       ]}
       allowedUseCases={[UseCase.aides, UseCase.marches, UseCase.fraude]}
       requiredRight={ApplicationRights.travauxPublics}
-      WrappedSection={TravauxPublicsSectionWithUseCase}
+      WrappedSection={ProtectedTravauxPublicsSection}
     />
   );
 };

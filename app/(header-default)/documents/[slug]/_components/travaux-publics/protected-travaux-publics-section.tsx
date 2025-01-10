@@ -58,7 +58,7 @@ const DocumentDownloader = ({
   );
 };
 
-export default function TravauxPublicsSectionWithUseCase({
+export default function ProtectedTravauxPublicsSection({
   uniteLegale,
   session,
   useCase,

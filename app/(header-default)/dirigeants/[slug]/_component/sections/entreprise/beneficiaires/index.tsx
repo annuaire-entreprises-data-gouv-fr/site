@@ -4,8 +4,8 @@ import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
 import { ApplicationRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import BeneficiairesSectionWithUseCase from './beneficiaires-section-with-use-case';
 import { InfoAgentRBE } from './info-agent-rbe';
+import ProtectedBeneficiairesSection from './protected-beneficiaires-section';
 import { WarningRBE } from './warning-rbe';
 
 const BeneficiairesSection: React.FC<{
@@ -23,7 +23,7 @@ const BeneficiairesSection: React.FC<{
       requiredRight={ApplicationRights.beneficiaires}
       noRightContent={<WarningRBE />}
       useCaseFormContent={<InfoAgentRBE />}
-      WrappedSection={BeneficiairesSectionWithUseCase}
+      WrappedSection={ProtectedBeneficiairesSection}
     />
   );
 };

@@ -22,7 +22,7 @@ import { useMemo } from 'react';
  * @param param0
  * @returns
  */
-export default function BeneficiairesSectionWithUseCase({
+export default function ProtectedBeneficiairesSection({
   uniteLegale,
   session,
   useCase,
