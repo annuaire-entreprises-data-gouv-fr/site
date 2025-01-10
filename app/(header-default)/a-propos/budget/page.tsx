@@ -42,13 +42,7 @@ export default function Budget() {
         <h2>Dépenses</h2>
         <p>Répartition des dépenses effectuées :</p>
         <FullTable
-          head={[
-            'Poste de dépense',
-            '2021',
-            '2022',
-            '2023',
-            '2024 (prévisionnel)',
-          ]}
+          head={['Poste de dépense', '2021', '2022', '2023', '2024']}
           body={[
             [
               'Développement',
@@ -89,7 +83,7 @@ export default function Budget() {
             '2021',
             '2022',
             '2023',
-            '2024 (prévisionnel)',
+            '2024',
           ]}
           body={[
             [
@@ -97,9 +91,9 @@ export default function Budget() {
               '768 000',
               '2 788 000',
               '12 934 000',
-              '40 000 000',
+              '52 000 000',
             ],
-            ['・€ / page', '0,25 €', '0,11 €', '0,04 €', '0,02 €'],
+            ['・€ / page', '0,25 €', '0,11 €', '0,04 €', '0,015 €'],
             [
               'Visiteurs uniques',
               '156 000',
