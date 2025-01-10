@@ -10,7 +10,7 @@ import { IUniteLegale } from '#models/core/types';
 import { IBeneficairesEffectif } from '#models/espace-agent/beneficiaires';
 import { UseCase } from '#models/user/agent';
 import { ISession } from '#models/user/session';
-import { formatDatePartial } from '#utils/helpers';
+import { formatDatePartial, pluralize } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { useMemo } from 'react';
@@ -256,7 +256,7 @@ function BénéficiairesContent({
     </ul>,
   ];
 
-  const plural = beneficiaires.length > 1 ? 's' : '';
+  const plural = pluralize(beneficiaires);
 
   return (
     <>

@@ -9,7 +9,12 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
-import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
+import {
+  formatCurrency,
+  formatDate,
+  formatDateYear,
+  pluralize,
+} from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
@@ -53,14 +58,15 @@ export const FinancesSocieteProtectedSection: React.FC<{
             ),
           ],
         ];
-        const bilanPlural = chiffreAffairesProtected.length > 1 ? 's' : '';
+        const plural = pluralize(chiffreAffairesProtected);
 
         return (
           <>
             <p>
               Les comptes annuels de cette entreprise n’étant pas publics, voici
-              le{bilanPlural} chiffre d’affaire{bilanPlural} récupéré auprès de
-              la <DGFiP />
+              le{plural} chiffre
+              {plural} d’affaires récupéré
+              {plural} auprès de la <DGFiP />
               &nbsp;:
             </p>
             <LineChart

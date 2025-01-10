@@ -9,6 +9,7 @@ import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
+import { pluralize } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import DirigeantsContentProtected from './content';
@@ -48,7 +49,7 @@ export default function DirigeantsSectionProtected({
       }
     >
       {(dirigeants) => {
-        const plural = dirigeants.data.length > 1 ? 's' : '';
+        const plural = pluralize(dirigeants.data);
         return (
           <>
             {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}

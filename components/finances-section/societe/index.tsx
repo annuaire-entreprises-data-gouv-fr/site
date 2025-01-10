@@ -12,7 +12,12 @@ import { IUniteLegale } from '#models/core/types';
 import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
+import {
+  formatCurrency,
+  formatDate,
+  formatDateYear,
+  pluralize,
+} from '#utils/helpers';
 import { useFetchFinancesSociete } from 'hooks';
 import { FinancesSocieteProtectedSection } from '../societe-protected';
 
@@ -91,7 +96,7 @@ export const FinancesSocieteSection: React.FC<{
             ...bilans.map((a) => formatCurrency(a?.resultatNet ?? '')),
           ],
         ];
-        const bilanPlural = bilans.length > 1 ? 's' : '';
+        const plural = pluralize(bilans);
 
         return (
           <>
@@ -113,9 +118,9 @@ export const FinancesSocieteSection: React.FC<{
             <p>
               Voici les résultats financiers
               {financesSociete.hasBilanConsolide ? ' consolidés' : ''} publiés
-              par l’entreprise pour les {bilans.length} dernier{bilanPlural}{' '}
-              exercice
-              {bilanPlural}&nbsp;:
+              par l’entreprise pour les {bilans.length} dernier
+              {plural} exercice
+              {plural}&nbsp;:
             </p>
             <LineChart
               htmlLegendId={'finance-data-legend'}

@@ -4,7 +4,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { isCollectiviteTerritoriale, IUniteLegale } from '#models/core/types';
 import { IEtatCivil } from '#models/rne/types';
-import { capitalize, formatDatePartial } from '#utils/helpers';
+import { capitalize, formatDatePartial, pluralize } from '#utils/helpers';
 import React from 'react';
 
 /**
@@ -39,7 +39,7 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
     return infos;
   };
 
-  const plural = elus.length > 1 ? 's' : '';
+  const plural = pluralize(elus);
 
   return (
     <Section

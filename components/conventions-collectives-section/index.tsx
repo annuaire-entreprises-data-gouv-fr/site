@@ -9,7 +9,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { ICCWithMetadata } from '#models/conventions-collectives';
-import { capitalize, formatSiret } from '#utils/helpers';
+import { capitalize, formatSiret, pluralize } from '#utils/helpers';
 import React from 'react';
 
 function CCUnknown({ ccWithMetadata }: { ccWithMetadata: ICCWithMetadata[] }) {
@@ -19,7 +19,7 @@ function CCUnknown({ ccWithMetadata }: { ccWithMetadata: ICCWithMetadata[] }) {
     return '.';
   }
 
-  const plural = unknown.length > 1 ? 's' : '';
+  const plural = pluralize(unknown);
 
   return (
     <>
