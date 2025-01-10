@@ -20,7 +20,7 @@ import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
 const NoBilans = () => (
-  <>Aucun comptes n’a été déposé au RNE pour cette entreprise.</>
+  <>Aucun compte n’a été déposé au RNE pour cette entreprise.</>
 );
 
 const AgentBilansSection: React.FC<{

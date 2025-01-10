@@ -53,14 +53,14 @@ export const FinancesSocieteProtectedSection: React.FC<{
             ),
           ],
         ];
-        const bilanPlural = chiffreAffairesProtected.length > 1 ? 's' : '';
+        const caPlural = chiffreAffairesProtected.length > 1 ? 's' : '';
 
         return (
           <>
             <p>
               Les comptes annuels de cette entreprise n’étant pas publics, voici
-              le{bilanPlural} chiffre d’affaire{bilanPlural} récupéré auprès de
-              la <DGFiP />
+              le{caPlural} chiffre{caPlural} d’affaires récupéré{caPlural}{' '}
+              auprès de la <DGFiP />
               &nbsp;:
             </p>
             <LineChart
