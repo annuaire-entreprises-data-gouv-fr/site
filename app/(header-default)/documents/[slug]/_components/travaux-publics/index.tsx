@@ -4,28 +4,31 @@ import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
 import { ApplicationRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { InfoAgentRBE } from './info-agent-rbe';
-import ProtectedBeneficiairesSection from './protected-beneficiaires-section';
-import { WarningRBE } from './warning-rbe';
+import ProtectedTravauxPublicsSection from './protected-travaux-publics-section';
 
-const BeneficiairesSection: React.FC<{
+const TravauxPublicsSection = ({
+  uniteLegale,
+  session,
+}: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}) => {
   return (
     <ProtectedSectionWithUseCase
       session={session}
       uniteLegale={uniteLegale}
-      title="Bénéficiaire(s) effectif(s)"
-      id="beneficiaires"
-      sources={[EAdministration.INPI]}
+      title="Travaux publics"
+      id="travaux-publics"
+      sources={[
+        EAdministration.FNTP,
+        EAdministration.CIBTP,
+        EAdministration.CNETP,
+        EAdministration.PROBTP,
+      ]}
       allowedUseCases={[UseCase.aides, UseCase.marches, UseCase.fraude]}
-      requiredRight={ApplicationRights.beneficiaires}
-      noRightContent={<WarningRBE />}
-      useCaseFormContent={<InfoAgentRBE />}
-      WrappedSection={ProtectedBeneficiairesSection}
+      requiredRight={ApplicationRights.travauxPublics}
+      WrappedSection={ProtectedTravauxPublicsSection}
     />
   );
 };
-
-export default BeneficiairesSection;
+export default TravauxPublicsSection;

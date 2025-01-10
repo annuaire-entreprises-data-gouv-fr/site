@@ -5,6 +5,7 @@ import {
   clientApiEntrepriseProbtp,
 } from '#clients/api-entreprise/travaux-publics';
 import { IAPINotRespondingError } from '#models/api-not-responding';
+import { UseCase } from '#models/user/agent';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { handleApiEntrepriseError } from './utils';
 
@@ -20,7 +21,8 @@ export type ITravauxPublics = {
 };
 
 export const getTravauxPublic = async (
-  slug: string
+  slug: string,
+  useCase: UseCase
 ): Promise<ITravauxPublics | IAPINotRespondingError> => {
   const siret = verifySiret(slug as string);
   const siren = extractSirenFromSiret(siret);
@@ -33,12 +35,12 @@ export const getTravauxPublic = async (
     });
 
   const [fntp, cibtp, cnetp, probtp] = await Promise.all([
-    clientApiEntrepriseCarteProfessionnelleTravauxPublics(siren).catch(
+    clientApiEntrepriseCarteProfessionnelleTravauxPublics(siren, useCase).catch(
       errorHandler
     ),
-    clientApiEntrepriseCibtp(siret).catch(errorHandler),
-    clientApiEntrepriseCnetp(siren).catch(errorHandler),
-    clientApiEntrepriseProbtp(siret).catch(errorHandler),
+    clientApiEntrepriseCibtp(siret, useCase).catch(errorHandler),
+    clientApiEntrepriseCnetp(siren, useCase).catch(errorHandler),
+    clientApiEntrepriseProbtp(siret, useCase).catch(errorHandler),
   ]);
   return { fntp, cibtp, cnetp, probtp };
 };

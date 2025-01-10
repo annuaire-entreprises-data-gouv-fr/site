@@ -1,19 +1,26 @@
 import { MultiChoice } from '#components-ui/multi-choice';
 import { UseCase } from '#models/user/agent';
-import { useState } from 'react';
 
 export function AskUseCase({
-  onUseCaseChanged,
+  useCase,
+  setUseCase,
+  introContent,
 }: {
-  onUseCaseChanged: (useCase: UseCase) => void;
+  useCase?: UseCase;
+  setUseCase: (useCase: UseCase) => void;
+  introContent?: React.ReactNode;
 }) {
-  const [useCase, setUseCase] = useState<UseCase>();
-  function saveUseCase(useCase: UseCase) {
-    setUseCase(useCase);
-    onUseCaseChanged(useCase);
-  }
+  const defaultIntroContent = (
+    <p>
+      Les agents publics peuvent demander accéder à cette donnée uniquement dans
+      les cas d’usages justifiant d’un intérêt légitime. En déclarant le cadre
+      juridique dans lequel vous accédez à ces données, vous vous engagez{' '}
+      <a href="/cgu">à respecter nos conditions générales d’utilisation</a>.
+    </p>
+  );
   return (
     <>
+      {introContent || defaultIntroContent}
       <form>
         <label>Dans quel cadre souhaitez-vous accéder à ces données ?</label>
         <br />
@@ -22,22 +29,22 @@ export function AskUseCase({
           values={[
             {
               label: 'Aides publiques',
-              onClick: () => saveUseCase(UseCase.aides),
+              onClick: () => setUseCase(UseCase.aides),
               checked: useCase === UseCase.aides,
             },
             {
               label: 'Marchés publics',
-              onClick: () => saveUseCase(UseCase.marches),
+              onClick: () => setUseCase(UseCase.marches),
               checked: useCase === UseCase.marches,
             },
             {
               label: 'Lutte contre la fraude',
-              onClick: () => saveUseCase(UseCase.fraude),
+              onClick: () => setUseCase(UseCase.fraude),
               checked: useCase === UseCase.fraude,
             },
             {
               label: 'Autre cas d’usage',
-              onClick: () => saveUseCase(UseCase.autre),
+              onClick: () => setUseCase(UseCase.autre),
               checked: useCase === UseCase.autre,
             },
           ]}

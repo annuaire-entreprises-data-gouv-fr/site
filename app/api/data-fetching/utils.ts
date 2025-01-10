@@ -1,4 +1,5 @@
 import { Exception } from '#models/exceptions';
+import { UseCase } from '#models/user/agent';
 import { ISession } from '#models/user/session';
 import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
@@ -65,7 +66,7 @@ function userVisitedAPageRecently(
 export class APIRouteError extends Exception {
   constructor(
     message: string,
-    context: { route: string; slug: string },
+    context: { route: string; slug: string; params?: { useCase: UseCase } },
     public status: 400 | 404 | 403 | 500 | 401,
     cause?: any
   ) {
@@ -117,5 +118,21 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
       logErrorInSentry(error);
       return new Response(error.message, { status: error.status });
     }
+  };
+}
+
+export function withUseCase<TResult>(
+  handler: (slug: string, useCase: UseCase) => TResult
+) {
+  return (slug: string, params: { useCase: UseCase }): TResult => {
+    if (!('useCase' in params) || params.useCase in UseCase) {
+      throw new APIRouteError(
+        'Invalid useCase',
+        { slug, route: 'withUseCase', params },
+        400
+      );
+    }
+
+    return handler(slug, params.useCase);
   };
 }

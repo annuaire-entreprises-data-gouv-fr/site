@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { IBeneficairesEffectif } from '#models/espace-agent/beneficiaires';
+import { IBeneficiairesEffectif } from '#models/espace-agent/beneficiaires';
 import { UseCase } from '#models/user/agent';
 import { Siren, formatNameFull } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
@@ -17,7 +17,7 @@ export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
       };
       nationalite: string;
       pays_residence: string;
-      modalites: IBeneficairesEffectif['modalites'];
+      modalites: IBeneficiairesEffectif['modalites'];
     }>
   >
 >;
@@ -31,7 +31,7 @@ export const clientApiEntrepriseBeneficiaires = async (
 ) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseBeneficiaires,
-    Array<IBeneficairesEffectif>
+    Array<IBeneficiairesEffectif>
   >(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.beneficiaires(
       siren
@@ -43,7 +43,7 @@ export const clientApiEntrepriseBeneficiaires = async (
 
 const mapToDomainObject = (
   response: IAPIEntrepriseBeneficiaires
-): Array<IBeneficairesEffectif> => {
+): Array<IBeneficiairesEffectif> => {
   return response.data.map(({ data: beneficiaire }) => {
     return {
       nom: formatNameFull(beneficiaire.nom, beneficiaire.nom_usage),
