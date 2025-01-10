@@ -52,15 +52,24 @@ const ProtectedSectionWithUseCase: React.FC<{
     ) : null;
   }
 
-  if (!useCase || !allowedUseCases.includes(useCase)) {
+  if (!useCase) {
     return (
       <Section title={title} id={id} sources={sources} isProtected={true}>
         <AskUseCase
           introContent={useCaseFormContent}
           useCase={useCase}
           setUseCase={setUseCase}
-          allowedUseCases={allowedUseCases}
         />
+      </Section>
+    );
+  }
+
+  if (!allowedUseCases.includes(useCase)) {
+    return (
+      <Section title={title} id={id} sources={sources} isProtected={true}>
+        <strong>
+          Ces informations ne vous sont pas accessibles dans ce cas d‘usage.
+        </strong>
       </Section>
     );
   }
