@@ -5,6 +5,7 @@ import { AskUseCase } from '#components/section-with-use-case/ask-use-case';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
+import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { useState } from 'react';
 
@@ -25,7 +26,7 @@ const ProtectedSectionWithUseCase: React.FC<{
   id: string;
   sources: EAdministration[];
   allowedUseCases: UseCase[];
-  hasRights: boolean;
+  requiredRight: ApplicationRights;
   noRightContent?: JSX.Element;
   useCaseFormContent?: JSX.Element;
   WrappedSection: React.ComponentType<WrappedSectionProps>;
@@ -38,12 +39,12 @@ const ProtectedSectionWithUseCase: React.FC<{
   allowedUseCases,
   noRightContent,
   useCaseFormContent,
-  hasRights,
+  requiredRight,
   WrappedSection,
 }) => {
   const [useCase, setUseCase] = useState<UseCase>();
 
-  if (!hasRights) {
+  if (!hasRights(session, requiredRight)) {
     return noRightContent ? (
       <Section title={title} id={id}>
         {noRightContent}

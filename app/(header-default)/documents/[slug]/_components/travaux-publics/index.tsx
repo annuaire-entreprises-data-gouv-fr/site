@@ -2,7 +2,7 @@ import ProtectedSectionWithUseCase from '#components/section-with-use-case';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
-import { ApplicationRights, hasRights } from '#models/user/rights';
+import { ApplicationRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import TravauxPublicsSectionWithUseCase from './travaux-publics-section-with-use-case';
 
@@ -26,7 +26,7 @@ const TravauxPublicsSection = ({
         EAdministration.PROBTP,
       ]}
       allowedUseCases={[UseCase.aides, UseCase.marches, UseCase.fraude]}
-      hasRights={hasRights(session, ApplicationRights.travauxPublics)}
+      requiredRight={ApplicationRights.travauxPublics}
       WrappedSection={TravauxPublicsSectionWithUseCase}
     />
   );
