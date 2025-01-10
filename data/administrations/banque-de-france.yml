@@ -1,0 +1,14 @@
+slug: banque-de-france
+short: Banque de France
+site: https://www.banque-france.fr/
+long: Banque de France
+logoType: portrait
+contact: https://www.banque-france.fr/contactez-nous
+dataSources:
+  - label: Bilans des entreprises
+    apiSlug: api-entreprise
+    data:
+      - label: Bilans
+estServicePublic: true
+description: |
+  La Banque de France est une institution publique fournissant des services économiques, monétaires et financiers, ainsi que des données et statistiques utiles aux acteurs économiques en France.
