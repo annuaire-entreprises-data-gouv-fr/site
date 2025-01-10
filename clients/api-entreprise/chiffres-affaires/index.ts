@@ -23,9 +23,11 @@ export async function clientApiEntrepriseChiffreAffaires(siret: Siret) {
 const mapToDomainObject = (
   response: IAPIEntrepriseDgfipChiffreAffaires
 ): IChiffreAffairesProtected => {
-  return response.data.map(({ data }) => ({
-    chiffreAffaires: data.chiffre_affaires,
-    dateFinExercice: data.date_fin_exercice,
-    year: getFiscalYear(data.date_fin_exercice),
-  }));
+  return response.data
+    .map(({ data }) => ({
+      chiffreAffaires: data.chiffre_affaires,
+      dateFinExercice: data.date_fin_exercice,
+      year: getFiscalYear(data.date_fin_exercice),
+    }))
+    .sort((a, b) => a.year - b.year);
 };
