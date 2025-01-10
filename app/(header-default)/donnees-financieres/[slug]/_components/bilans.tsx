@@ -14,7 +14,7 @@ import {
   isServicePublic,
 } from '#models/core/types';
 import { ISession } from '#models/user/session';
-import { formatDateLong } from '#utils/helpers';
+import { formatDateLong, pluralize } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
@@ -60,8 +60,9 @@ const AgentBilansSection: React.FC<{
         ) : (
           <>
             <p>
-              Cette entreprise possède {documents.bilans.length} bilan(s)
-              déposé(s) au RNE{' '}
+              Cette entreprise possède {documents.bilans.length} bilan
+              {pluralize(documents.bilans)} déposé{pluralize(documents.bilans)}{' '}
+              au RNE{' '}
               {documents.hasBilanConsolide && (
                 <>
                   , dont certains sont des{' '}

@@ -1,8 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
 import { Tag } from '#components-ui/tag';
-import { formatIntFr } from '#utils/helpers';
+import { formatIntFr, pluralize } from '#utils/helpers';
 import { useStorage } from 'hooks';
+import { useEffect, useState } from 'react';
 
 export default function Favourites() {
   const [shortCuts, setShortCuts] = useState([]);
@@ -12,7 +12,7 @@ export default function Favourites() {
     setShortCuts(recentVisits);
   }, [recentVisits]);
 
-  const plural = shortCuts.length > 1 ? 's' : '';
+  const plural = pluralize(shortCuts);
 
   return (
     shortCuts.length > 0 && (

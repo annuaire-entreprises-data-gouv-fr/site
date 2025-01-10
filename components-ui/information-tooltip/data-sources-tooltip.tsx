@@ -1,6 +1,7 @@
 import { Icon } from '#components-ui/icon/wrapper';
 import { IAdministrationMetaData } from '#models/administrations/types';
 import constants from '#models/constants';
+import { pluralize } from '#utils/helpers';
 import React from 'react';
 import InformationTooltip from '.';
 import style from './style.module.css';
@@ -49,7 +50,7 @@ const DataSourcesTooltip: React.FC<{
           <Icon color={constants.colors.frBlue} size={12} slug="information" />
         </span>
         <span>
-          Source{dataSources.length > 1 ? 's' : ''}&nbsp;:&nbsp;
+          Source{pluralize(dataSources)}&nbsp;:&nbsp;
           {dataSources.map((dataSource) => dataSource.short).join(', ')}
         </span>
       </a>

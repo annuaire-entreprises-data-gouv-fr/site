@@ -1,4 +1,3 @@
-import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
@@ -10,7 +9,8 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
-import { formatDate, formatDateLong } from '#utils/helpers';
+import { formatDate, formatDateLong, pluralize } from '#utils/helpers';
+import React from 'react';
 
 export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
   entrepreneurSpectacles:
@@ -43,7 +43,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
       }
     >
       {(entrepreneurSpectacles) => {
-        const plural = entrepreneurSpectacles.licences.length > 1 ? 's' : '';
+        const plural = pluralize(entrepreneurSpectacles.licences);
         return (
           <>
             Cette structure possède {plural ? 'plusieurs' : 'un'} récépissé
