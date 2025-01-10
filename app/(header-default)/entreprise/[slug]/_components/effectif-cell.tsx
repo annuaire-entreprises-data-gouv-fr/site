@@ -27,7 +27,7 @@ export const FAQEffectifAnnuel = () => (
   </FAQLink>
 );
 
-export const EffectifProtected = ({
+export const ProtectedEffectifCell = ({
   uniteLegale,
   session,
 }: {
@@ -42,15 +42,15 @@ export const EffectifProtected = ({
 
   if (isDataLoading(effectifsAnnuelsProtected)) {
     return (
-      <>
+      <ProtectedInlineData>
         <Loader />
         &nbsp;
-      </>
+      </ProtectedInlineData>
     );
   }
 
   if (isAPI404(effectifsAnnuelsProtected)) {
-    return null;
+    return <ProtectedInlineData>Pas de données</ProtectedInlineData>;
   }
 
   if (hasAnyError(effectifsAnnuelsProtected)) {
@@ -76,23 +76,9 @@ export const EffectifProtected = ({
 
   const { effectif, anneeEffectif } = effectifsAnnuelsProtected;
   return (
-    <ul>
-      <li>
-        Tranche statistique (<INSEE />) :{' '}
-        {libelleTrancheEffectif(
-          uniteLegale.trancheEffectif,
-          uniteLegale.anneeTrancheEffectif
-        )}
-      </li>
-      <li>
-        <span>
-          <FAQEffectifAnnuel /> (<GIPMDS />) :{' '}
-        </span>
-        <ProtectedInlineData>
-          {effectif} salarié{effectif > 1 ? 's' : ''}, en {anneeEffectif}
-        </ProtectedInlineData>
-      </li>
-    </ul>
+    <ProtectedInlineData>
+      {effectif} salarié{effectif > 1 ? 's' : ''}, en {anneeEffectif}
+    </ProtectedInlineData>
   );
 };
 
@@ -104,7 +90,23 @@ export const EffectifCell = ({
   session: ISession | null;
 }) => {
   if (hasRights(session, ApplicationRights.effectifsAnnuels)) {
-    return <EffectifProtected uniteLegale={uniteLegale} session={session} />;
+    return (
+      <ul>
+        <li>
+          Tranche statistique (<INSEE />) :{' '}
+          {libelleTrancheEffectif(
+            uniteLegale.trancheEffectif,
+            uniteLegale.anneeTrancheEffectif
+          )}
+        </li>
+        <li>
+          <span>
+            <FAQEffectifAnnuel /> (<GIPMDS />) :{' '}
+          </span>
+          <ProtectedEffectifCell uniteLegale={uniteLegale} session={session} />
+        </li>
+      </ul>
+    );
   }
   const effectif = libelleTrancheEffectif(
     uniteLegale.trancheEffectif,
