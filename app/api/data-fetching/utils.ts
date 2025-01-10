@@ -66,7 +66,7 @@ function userVisitedAPageRecently(
 export class APIRouteError extends Exception {
   constructor(
     message: string,
-    context: { route: string; slug: string },
+    context: { route: string; slug: string; params?: { useCase: UseCase } },
     public status: 400 | 404 | 403 | 500 | 401,
     cause?: any
   ) {
@@ -128,7 +128,7 @@ export function withUseCase<TResult>(
     if (!('useCase' in params) || params.useCase in UseCase) {
       throw new APIRouteError(
         'Invalid useCase',
-        { slug, route: 'withUseCase' },
+        { slug, route: 'withUseCase', params },
         400
       );
     }
