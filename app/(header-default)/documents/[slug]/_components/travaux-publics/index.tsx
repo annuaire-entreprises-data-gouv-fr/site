@@ -1,4 +1,4 @@
-import SectionWithUseCase from '#components/section-with-use-case';
+import ProtectedSectionWithUseCase from '#components/section-with-use-case';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
@@ -15,12 +15,11 @@ const TravauxPublicsSection = ({
   session: ISession | null;
 }) => {
   return (
-    <SectionWithUseCase
+    <ProtectedSectionWithUseCase
       session={session}
       uniteLegale={uniteLegale}
       title="Travaux publics"
       id="travaux-publics"
-      isProtected
       sources={[
         EAdministration.FNTP,
         EAdministration.CIBTP,

@@ -18,13 +18,12 @@ type WrappedSectionProps = {
   isProtected: boolean;
 };
 
-const SectionWithUseCase: React.FC<{
+const ProtectedSectionWithUseCase: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
   title: string;
   id: string;
   sources: EAdministration[];
-  isProtected: boolean;
   allowedUseCases: UseCase[];
   hasRights: boolean;
   noRightContent?: JSX.Element;
@@ -36,7 +35,6 @@ const SectionWithUseCase: React.FC<{
   title,
   id,
   sources,
-  isProtected,
   allowedUseCases,
   noRightContent,
   useCaseFormContent,
@@ -55,12 +53,7 @@ const SectionWithUseCase: React.FC<{
 
   if (!useCase || !allowedUseCases.includes(useCase)) {
     return (
-      <Section
-        title={title}
-        id={id}
-        sources={sources}
-        isProtected={isProtected}
-      >
+      <Section title={title} id={id} sources={sources} isProtected={true}>
         <AskUseCase
           introContent={useCaseFormContent}
           useCase={useCase}
@@ -79,9 +72,9 @@ const SectionWithUseCase: React.FC<{
       title={title}
       id={id}
       sources={sources}
-      isProtected={isProtected}
+      isProtected={true}
     />
   );
 };
 
-export default SectionWithUseCase;
+export default ProtectedSectionWithUseCase;

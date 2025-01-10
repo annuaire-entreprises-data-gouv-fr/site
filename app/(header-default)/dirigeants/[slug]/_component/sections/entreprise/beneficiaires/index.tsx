@@ -1,4 +1,4 @@
-import SectionWithUseCase from '#components/section-with-use-case';
+import ProtectedSectionWithUseCase from '#components/section-with-use-case';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
@@ -13,13 +13,12 @@ const BeneficiairesSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   return (
-    <SectionWithUseCase
+    <ProtectedSectionWithUseCase
       session={session}
       uniteLegale={uniteLegale}
       title="Bénéficiaire(s) effectif(s)"
       id="beneficiaires"
       sources={[EAdministration.INPI]}
-      isProtected={true}
       allowedUseCases={[UseCase.aides, UseCase.marches, UseCase.fraude]}
       hasRights={hasRights(session, ApplicationRights.beneficiaires)}
       noRightContent={<WarningRBE />}
