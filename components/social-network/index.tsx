@@ -13,17 +13,6 @@ const SocialNetworks = () => (
               <ul className="fr-btns-group">
                 <li>
                   <a
-                    className="fr-btn--twitter fr-btn"
-                    href="https://twitter.com/_DINUM"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    title="Page twitter de la DINUM"
-                  >
-                    twitter
-                  </a>
-                </li>
-                <li>
-                  <a
                     className="fr-btn--linkedin fr-btn"
                     href="https://www.linkedin.com/company/annuaire-des-entreprises"
                     target="_blank"

@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import { IDocumentDownloader } from '#models/espace-agent/travaux-publics';
+import { UseCase } from '#models/user/agent';
 import { Siren, Siret } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
@@ -11,36 +12,48 @@ export type IAPIEntrepriseDocumentTravauxPublics = IAPIEntrepriseResponse<{
 /**
  * GET document CIBTP
  */
-export const clientApiEntrepriseCibtp = async (siret: Siret) => {
+export const clientApiEntrepriseCibtp = async (
+  siret: Siret,
+  useCase: UseCase
+) => {
   return await clientAPIEntreprise(
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.certifications.cibtp(siret)}`,
-    mapToDomainObject
+    mapToDomainObject,
+    { useCase }
   );
 };
 
 /**
  * GET document Pro BTP
  */
-export const clientApiEntrepriseProbtp = async (siret: Siret) => {
+export const clientApiEntrepriseProbtp = async (
+  siret: Siret,
+  useCase: UseCase
+) => {
   return await clientAPIEntreprise(
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.certifications.probtp(siret)}`,
-    mapToDomainObject
+    mapToDomainObject,
+    { useCase }
   );
 };
 
 /**
  * GET document CNETP
  */
-export const clientApiEntrepriseCnetp = async (siren: Siren) => {
+export const clientApiEntrepriseCnetp = async (
+  siren: Siren,
+  useCase: UseCase
+) => {
   return await clientAPIEntreprise(
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.certifications.cnetp(siren)}`,
-    mapToDomainObject
+    mapToDomainObject,
+    { useCase }
   );
 };
 
@@ -48,13 +61,15 @@ export const clientApiEntrepriseCnetp = async (siren: Siren) => {
  * GET document FNTP
  */
 export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
-  siren: Siren
+  siren: Siren,
+  useCase: UseCase
 ) => {
   return await clientAPIEntreprise(
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.carteProfessionnelleTravauxPublics(siren)}`,
-    mapToDomainObject
+    mapToDomainObject,
+    { useCase }
   );
 };
 

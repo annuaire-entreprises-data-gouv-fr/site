@@ -10,6 +10,7 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IRGECertification } from '#models/certifications/rge';
 import { IUniteLegale } from '#models/core/types';
 import { ISession } from '#models/user/session';
+import { pluralize } from '#utils/helpers';
 import React from 'react';
 
 const renovLink = (slug: string) => {
@@ -76,7 +77,7 @@ export const CertificationsRGESection: React.FC<{
           ],
         ];
 
-        const plural = certificationsRGE.certifications.length > 1 ? 's' : '';
+        const plural = pluralize(certificationsRGE.certifications);
         const linkFranceRenov = renovLink(siret);
 
         return (

@@ -8,14 +8,14 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { formatDate, formatSiret } from '#utils/helpers';
+import { formatDate, formatSiret, pluralize } from '#utils/helpers';
 import React from 'react';
 
 const EtablissementTable: React.FC<{
   label?: string;
   etablissements: IEtablissement[];
 }> = ({ label, etablissements }) => {
-  const plural = etablissements.length > 1 ? 's' : '';
+  const plural = pluralize(etablissements);
   return (
     <>
       {label && (

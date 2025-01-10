@@ -76,7 +76,7 @@ const AnnoncesPage = async (props: AppRouterProps) => {
             )}
           </>
         ) : (
-          <DonneesPriveesSection />
+          <DonneesPriveesSection title="Annonces" />
         )}
       </div>
     </>

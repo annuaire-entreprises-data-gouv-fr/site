@@ -4,6 +4,7 @@ long: Fédération nationale des travaux publics
 site: https://www.fntp.fr/
 contact: https://www.fntp.fr/contact
 estServicePublic: false
+logoType: portrait
 dataSources:
   - label: Liste des entrepreneurs de travaux publics
     apiSlug: api-entreprise

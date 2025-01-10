@@ -380,3 +380,16 @@ export const formatRole = (role: string) => {
   }
   return removeSpecialChars(role).toUpperCase();
 };
+
+/**
+ * Returns "s" if the array has more than one element, otherwise an empty string.
+ *
+ * @param {any[]} array - The input array to check.
+ * @returns {string} - "s" if the array has more than one element, otherwise "".
+ */
+export const pluralize = (array: any[]) => {
+  if (!Array.isArray(array)) {
+    throw new Error('The input must be an array.');
+  }
+  return array.length > 1 ? 's' : '';
+};

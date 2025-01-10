@@ -1,4 +1,3 @@
-import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
@@ -14,7 +13,8 @@ import {
   IEtablissementsBio,
 } from '#models/certifications/bio';
 import { IUniteLegale } from '#models/core/types';
-import { formatDate, formatSiret } from '#utils/helpers';
+import { formatDate, formatSiret, pluralize } from '#utils/helpers';
+import React from 'react';
 
 export const CertificationsBioSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -48,7 +48,7 @@ export const CertificationsBioSection: React.FC<{
       }
     >
       {(bio) => {
-        const plural = bio.etablissementsBio.length > 1 ? 's' : '';
+        const plural = pluralize(bio.etablissementsBio);
         return (
           <>
             Cette structure possède {bio.etablissementsBio.length} établissement

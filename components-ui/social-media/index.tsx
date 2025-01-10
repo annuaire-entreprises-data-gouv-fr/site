@@ -35,42 +35,6 @@ const SocialMedia: React.FC<{
           ariaRelation="labelledby"
           tabIndex={undefined}
           horizontalOrientation="right"
-          label="Partager cette page sur Twitter"
-        >
-          <a
-            href={`https://twitter.com/intent/tweet?url=${path}`}
-            rel="noreferrer noopener"
-            target="_blank"
-            className="no-style-link"
-          >
-            <Icon slug="twitter" />
-          </a>
-        </InformationTooltip>
-      </span>
-      <span>
-        <InformationTooltip
-          ariaRelation="labelledby"
-          tabIndex={undefined}
-          horizontalOrientation="right"
-          label="Partager cette page sur Facebook"
-        >
-          <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${path}`}
-            rel="noreferrer noopener"
-            target="_blank"
-            // Hydration warning when using some extension
-            suppressHydrationWarning
-            className="no-style-link"
-          >
-            <Icon slug="facebook" />
-          </a>
-        </InformationTooltip>
-      </span>
-      <span>
-        <InformationTooltip
-          ariaRelation="labelledby"
-          tabIndex={undefined}
-          horizontalOrientation="right"
           label="Partager cette page par Email"
         >
           <a

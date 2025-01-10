@@ -1,4 +1,4 @@
-import { NonDiffusibleSection } from '#components/non-diffusible-section';
+import { NonDiffusibleStrictSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
@@ -58,7 +58,7 @@ export default async function EtablissementPage(props: AppRouterProps) {
         />
         <br />
         {estNonDiffusibleStrict(etablissement) ? (
-          <NonDiffusibleSection />
+          <NonDiffusibleStrictSection />
         ) : (
           <EtablissementSection
             etablissement={etablissement}

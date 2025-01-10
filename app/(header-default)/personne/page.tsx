@@ -68,7 +68,7 @@ export default async function PersonnePage(props: AppRouterProps) {
   const age = convertDateToAge(partialDate);
   const structureCountLabel =
     results.resultCount === 0 ? 'Aucune' : results.resultCount;
-  const plural = results.resultCount > 1;
+  const plural = results.resultCount > 1 ? 's' : '';
 
   return (
     <div className="content-container">
@@ -79,8 +79,8 @@ export default async function PersonnePage(props: AppRouterProps) {
         </a>
       )}
       <h1>
-        {structureCountLabel} structure{plural && 's'} associée{plural && 's'} à{' '}
-        {prenom} {nom}
+        {structureCountLabel} structure{plural} associée{plural} à {prenom}{' '}
+        {nom}
         {age ? ` (${age} ans)` : ''}
       </h1>
       <p>

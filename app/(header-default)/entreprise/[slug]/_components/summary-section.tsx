@@ -1,5 +1,11 @@
 import FAQLink from '#components-ui/faq-link';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
+import {
+  LabelsAndCertificatesBadgesSection,
+  checkHasLabelsAndCertificates,
+  checkHasQuality,
+  labelsAndCertificatesSources,
+} from '#components/badges-section/labels-and-certificates';
 import { ProtectedCertificatesBadgesSection } from '#components/badges-section/labels-and-certificates/protected-certificats';
 import EORICell from '#components/eori-cell';
 import { Section } from '#components/section';
@@ -17,12 +23,6 @@ import { ISession } from '#models/user/session';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
 import React from 'react';
-import {
-  LabelsAndCertificatesBadgesSection,
-  checkHasLabelsAndCertificates,
-  checkHasQuality,
-  labelsAndCertificatesSources,
-} from '../../../../../components/badges-section/labels-and-certificates';
 import { EffectifCell } from './effectif-cell';
 import {
   UniteLegaleInscriptionIG,

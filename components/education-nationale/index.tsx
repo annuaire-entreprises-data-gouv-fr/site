@@ -1,4 +1,3 @@
-import React from 'react';
 import routes from '#clients/routes';
 import { Tag } from '#components-ui/tag';
 import { EDUCNAT } from '#components/administrations';
@@ -8,6 +7,8 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IEtablissementsScolaires } from '#models/etablissements-scolaires';
+import { pluralize } from '#utils/helpers';
+import React from 'react';
 
 export const EtablissementsScolairesSection: React.FC<{
   etablissements: IEtablissementsScolaires | IAPINotRespondingError;
@@ -31,7 +32,7 @@ export const EtablissementsScolairesSection: React.FC<{
       }
     >
       {(etablissements) => {
-        const plural = etablissements.results.length > 1 ? 's' : '';
+        const plural = pluralize(etablissements.results);
         return (
           <>
             <p>
