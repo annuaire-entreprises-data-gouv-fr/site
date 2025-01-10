@@ -27,7 +27,7 @@ const ProtectedSectionWithUseCase: React.FC<{
   allowedUseCases: UseCase[];
   hasRights: boolean;
   noRightContent?: JSX.Element;
-  useCaseFormContent: JSX.Element;
+  useCaseFormContent?: JSX.Element;
   WrappedSection: React.ComponentType<WrappedSectionProps>;
 }> = ({
   uniteLegale,

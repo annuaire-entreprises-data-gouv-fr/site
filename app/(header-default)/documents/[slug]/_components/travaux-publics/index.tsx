@@ -4,7 +4,6 @@ import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/user/agent';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { InfoAgentTravauxPublics } from './info-agent-travaux-publics';
 import TravauxPublicsSectionWithUseCase from './travaux-publics-section-with-use-case';
 
 const TravauxPublicsSection = ({
@@ -28,7 +27,6 @@ const TravauxPublicsSection = ({
       ]}
       allowedUseCases={[UseCase.aides, UseCase.marches, UseCase.fraude]}
       hasRights={hasRights(session, ApplicationRights.travauxPublics)}
-      useCaseFormContent={<InfoAgentTravauxPublics />}
       WrappedSection={TravauxPublicsSectionWithUseCase}
     />
   );

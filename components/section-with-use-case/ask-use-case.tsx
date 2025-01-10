@@ -12,10 +12,18 @@ export function AskUseCase({
   allowedUseCases: UseCase[];
   introContent?: React.ReactNode;
 }) {
+  const defaultIntroContent = (
+    <p>
+      Les agents publics peuvent demander accéder à cette donnée uniquement dans
+      les cas d’usages justifiant d’un intérêt légitime. En déclarant le cadre
+      juridique dans lequel vous accédez à ces données, vous vous engagez{' '}
+      <a href="/cgu">à respecter nos conditions générales d’utilisation</a>.
+    </p>
+  );
   if (!useCase) {
     return (
       <>
-        {introContent ? introContent : null}
+        {introContent || defaultIntroContent}
         <form>
           <label>Dans quel cadre souhaitez-vous accéder à ces données ?</label>
           <br />
