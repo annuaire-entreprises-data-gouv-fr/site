@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import { IConformite } from '#models/espace-agent/conformite';
+import { UseCase } from '#models/user/agent';
 import { Siret } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
@@ -10,12 +11,16 @@ export type IAPIEntrepriseConformiteMSA = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseConformiteMSA = async (siret: Siret) => {
+export const clientApiEntrepriseConformiteMSA = async (
+  siret: Siret,
+  useCase: UseCase
+) => {
   return await clientAPIEntreprise<IAPIEntrepriseConformiteMSA, IConformite>(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.msa(
       siret
     )}`,
-    mapToDomainObject
+    mapToDomainObject,
+    { useCase }
   );
 };
 

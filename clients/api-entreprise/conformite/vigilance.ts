@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import { IConformite } from '#models/espace-agent/conformite';
+import { UseCase } from '#models/user/agent';
 import { Siren } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
@@ -18,7 +19,10 @@ export type IAPIEntrepriseConformiteVigilance = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseConformiteVigilance = async (siren: Siren) => {
+export const clientApiEntrepriseConformiteVigilance = async (
+  siren: Siren,
+  useCase: UseCase
+) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseConformiteVigilance,
     IConformite
@@ -26,7 +30,8 @@ export const clientApiEntrepriseConformiteVigilance = async (siren: Siren) => {
     `${
       process.env.API_ENTREPRISE_URL
     }${routes.apiEntreprise.conformite.vigilance(siren)}`,
-    mapToDomainObject
+    mapToDomainObject,
+    { useCase }
   );
 };
 
