@@ -19,7 +19,11 @@ const BeneficiairesSection: React.FC<{
       title="Bénéficiaire(s) effectif(s)"
       id="beneficiaires"
       sources={[EAdministration.INPI]}
-      allowedUseCases={[UseCase.aides, UseCase.marches, UseCase.fraude]}
+      allowedUseCases={[
+        UseCase.aidesEntreprises,
+        UseCase.marches,
+        UseCase.fraude,
+      ]}
       requiredRight={ApplicationRights.beneficiaires}
       noRightContent={<WarningRBE />}
       useCaseFormContent={<InfoAgentRBE />}
