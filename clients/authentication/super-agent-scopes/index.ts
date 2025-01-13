@@ -1,6 +1,6 @@
 import { FetchRessourceException } from '#models/exceptions';
 import { IAgentScope, isAgentScope } from '#models/user/scopes';
-import { readFromGrist } from '#utils/integrations/grist';
+import { readFromGithub } from '#utils/integrations/github';
 import { logFatalErrorInSentry } from '#utils/sentry';
 
 class SuperAgentsScopes {
@@ -11,7 +11,7 @@ class SuperAgentsScopes {
   getScope = async (email: string) => {
     if (Object.keys(this._scopesPerAgents).length === 0) {
       try {
-        const superAgents = await readFromGrist('comptes-agents');
+        const superAgents = await readFromGithub();
 
         superAgents
           .filter((r: any) => r.actif === true)
