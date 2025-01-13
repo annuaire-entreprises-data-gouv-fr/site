@@ -3,14 +3,14 @@ import { IChiffreAffairesProtected } from '#models/espace-agent/chiffre-affaires
 import { Siret } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import clientAPIEntreprise from '../client';
-import { IAPIEntrepriseDgfipChiffreAffaires } from './types';
+import { IAPIEntrepriseChiffreAffaires } from './types';
 
 /**
  * GET CA from API Entreprise
  */
 export async function clientApiEntrepriseChiffreAffaires(siret: Siret) {
   return await clientAPIEntreprise<
-    IAPIEntrepriseDgfipChiffreAffaires,
+    IAPIEntrepriseChiffreAffaires,
     IChiffreAffairesProtected
   >(
     `${
@@ -21,7 +21,7 @@ export async function clientApiEntrepriseChiffreAffaires(siret: Siret) {
 }
 
 const mapToDomainObject = (
-  response: IAPIEntrepriseDgfipChiffreAffaires
+  response: IAPIEntrepriseChiffreAffaires
 ): IChiffreAffairesProtected => {
   return response.data
     .map(({ data }) => ({

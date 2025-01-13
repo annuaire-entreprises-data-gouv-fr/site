@@ -16,7 +16,7 @@ export const getChiffreAffairesProtected = async (
   return clientApiEntrepriseChiffreAffaires(siret).catch((error) =>
     handleApiEntrepriseError(error, {
       siret,
-      apiResource: 'ChiffreAffairesDGFiP',
+      apiResource: 'ChiffreAffairesProtected',
     })
   );
 };

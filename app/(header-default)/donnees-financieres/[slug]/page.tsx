@@ -2,6 +2,7 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import { FinancesAssociationSection } from '#components/finances-section/association';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
+import { FinancesSocieteBilansSection } from '#components/finances-section/societe-bilans';
 import { SubventionsAssociationSection } from '#components/subventions-association-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -39,6 +40,9 @@ const FinancePage = async (props: AppRouterProps) => {
   const session = await getSession();
   const { slug, isBot } = await extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
+  const isMoreThanThreeYearsOld =
+    new Date(uniteLegale.dateDebutActivite).getFullYear() + 3 <=
+    new Date().getFullYear();
 
   return (
     <>
@@ -63,10 +67,18 @@ const FinancePage = async (props: AppRouterProps) => {
           <>
             {estDiffusible(uniteLegale) ||
             hasRights(session, ApplicationRights.nonDiffusible) ? (
-              <FinancesSocieteSection
-                uniteLegale={uniteLegale}
-                session={session}
-              />
+              <>
+                <FinancesSocieteSection
+                  uniteLegale={uniteLegale}
+                  session={session}
+                />
+                {isMoreThanThreeYearsOld && (
+                  <FinancesSocieteBilansSection
+                    uniteLegale={uniteLegale}
+                    session={session}
+                  />
+                )}
+              </>
             ) : (
               <DonneesPriveesSection title="Indicateurs financiers" />
             )}
