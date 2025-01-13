@@ -25,7 +25,7 @@ const TravauxPublicsSection = ({
         EAdministration.CNETP,
         EAdministration.PROBTP,
       ]}
-      allowedUseCases={[UseCase.aides, UseCase.marches, UseCase.fraude]}
+      allowedUseCases={[UseCase.marches]}
       requiredRight={ApplicationRights.travauxPublics}
       WrappedSection={ProtectedTravauxPublicsSection}
     />
