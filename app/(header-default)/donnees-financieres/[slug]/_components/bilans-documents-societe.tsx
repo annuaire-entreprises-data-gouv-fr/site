@@ -4,7 +4,7 @@ import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import AgentBilansSection from './bilans-documents-societe-protected';
 
-const BilansSection: React.FC<{
+const BilansDocumentsSociete: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
@@ -20,4 +20,4 @@ const BilansSection: React.FC<{
   return <AgentBilansSection uniteLegale={uniteLegale} session={session} />;
 };
 
-export default BilansSection;
+export default BilansDocumentsSociete;
