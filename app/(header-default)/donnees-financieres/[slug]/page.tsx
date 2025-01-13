@@ -62,6 +62,7 @@ const FinancePage = async (props: AppRouterProps) => {
               session={session}
               uniteLegale={uniteLegale}
             />
+            <ComptesAssociationSection uniteLegale={uniteLegale} />
           </>
         ) : (
           <>
@@ -85,12 +86,8 @@ const FinancePage = async (props: AppRouterProps) => {
             )}
             <HorizontalSeparator />
             <BilansSection uniteLegale={uniteLegale} session={session} />
+            <ComptesBodacc uniteLegale={uniteLegale} />
           </>
-        )}
-        {isAssociation(uniteLegale) ? (
-          <ComptesAssociationSection uniteLegale={uniteLegale} />
-        ) : (
-          <ComptesBodacc uniteLegale={uniteLegale} />
         )}
       </div>
     </>
