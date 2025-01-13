@@ -72,12 +72,13 @@ const FinancePage = async (props: AppRouterProps) => {
                   uniteLegale={uniteLegale}
                   session={session}
                 />
-                {isMoreThanThreeYearsOld && (
-                  <FinancesSocieteBilansSection
-                    uniteLegale={uniteLegale}
-                    session={session}
-                  />
-                )}
+                {hasRights(session, ApplicationRights.bilans) &&
+                  isMoreThanThreeYearsOld && (
+                    <FinancesSocieteBilansSection
+                      uniteLegale={uniteLegale}
+                      session={session}
+                    />
+                  )}
               </>
             ) : (
               <DonneesPriveesSection title="Indicateurs financiers" />
