@@ -1,9 +1,5 @@
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
-import { FinancesAssociationSection } from '#components/finances-section/association';
-import { FinancesSocieteSection } from '#components/finances-section/societe';
-import { FinancesSocieteBilansSection } from '#components/finances-section/societe-bilans';
-import { SubventionsAssociationSection } from '#components/subventions-association-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { estDiffusible } from '#models/core/diffusion';
@@ -15,10 +11,14 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import ComptesBodacc from 'app/(header-default)/donnees-financieres/[slug]/_components/bodacc';
-import { ComptesAssociationSection } from 'app/(header-default)/donnees-financieres/[slug]/_components/dca';
 import { Metadata } from 'next';
-import BilansSection from './_components';
+import BilansSection from './_components/bilans-documents-societe';
+import { FinancesSocieteBilansSection } from './_components/bilans-societe';
+import ComptesBodacc from './_components/bodacc';
+import { ComptesAssociationSection } from './_components/comptes-association';
+import { FinancesAssociationSection } from './_components/finances-association';
+import { FinancesSocieteSection } from './_components/finances-societe';
+import { SubventionsAssociationSection } from './_components/subventions-association';
 
 export const generateMetadata = async (
   props: AppRouterProps
