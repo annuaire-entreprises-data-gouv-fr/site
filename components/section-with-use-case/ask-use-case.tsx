@@ -28,11 +28,6 @@ export function AskUseCase({
           idPrefix="user-type"
           values={[
             {
-              label: 'Aides publiques',
-              onClick: () => setUseCase(UseCase.aides),
-              checked: useCase === UseCase.aides,
-            },
-            {
               label: 'Marchés publics',
               onClick: () => setUseCase(UseCase.marches),
               checked: useCase === UseCase.marches,
@@ -41,6 +36,16 @@ export function AskUseCase({
               label: 'Lutte contre la fraude',
               onClick: () => setUseCase(UseCase.fraude),
               checked: useCase === UseCase.fraude,
+            },
+            {
+              label: 'Aides publiques (aux entreprises)',
+              onClick: () => setUseCase(UseCase.aidesEntreprises),
+              checked: useCase === UseCase.aidesEntreprises,
+            },
+            {
+              label: 'Aides publiques (aux associations)',
+              onClick: () => setUseCase(UseCase.aidesAsso),
+              checked: useCase === UseCase.aidesAsso,
             },
             {
               label: 'Autre cas d’usage',

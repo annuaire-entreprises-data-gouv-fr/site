@@ -117,14 +117,11 @@ export default function Budget() {
           .
         </p>
         <FullTable
-          head={[
-            'Mesure d’impact pour les agents publics',
-            '2024 (prévisionnel)',
-          ]}
+          head={['Mesure d’impact pour les agents publics', '2024']}
           body={[
-            ['Fiches “entreprise” consultées par des agents', '480 000'],
-            ['Agents publics uniques', '45 000'],
-            ['・€ / agent public / mois', '1,6 €'],
+            ['Fiches “entreprise” consultées par des agents', '728 000'],
+            ['Agents publics uniques', '21 000'],
+            ['・€ / agent public / mois', '3,17 €'],
           ]}
         ></FullTable>
         <p>
