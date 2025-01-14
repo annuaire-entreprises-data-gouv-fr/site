@@ -83,10 +83,13 @@ const SubventionDetails: React.FC<{
   );
 };
 
-export const SubventionsAssociationSection: React.FC<{
+export default function SubventionsAssociationSection({
+  uniteLegale,
+  session,
+}: {
   uniteLegale: IAssociation;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}) {
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [selectedStatus, setSelectedStatus] = useState<string>('');
   const [filteredSubventions, setFilteredSubventions] = useState<ISubvention[]>(
@@ -243,4 +246,4 @@ export const SubventionsAssociationSection: React.FC<{
       }
     </DataSectionClient>
   );
-};
+}

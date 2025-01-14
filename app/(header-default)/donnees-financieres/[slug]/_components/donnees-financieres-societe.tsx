@@ -5,19 +5,22 @@ import { IUniteLegale } from '#models/core/types';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import BilansDocumentsSociete from './bilans-documents-societe';
-import { FinancesSocieteBilansSection } from './bilans-societe';
-import ComptesBodacc from './bodacc';
+import BilansSocieteSection from './bilans-societe';
+import ComptesBodaccSociete from './comptes-bodacc-societe';
 import { FinancesSocieteSection } from './finances-societe';
 
-const DonneesFinancieresSociete = ({
+export default function DonneesFinancieresSociete({
   uniteLegale,
   session,
 }: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}) => {
+}) {
   const isMoreThanThreeYearsOld =
-    new Date(uniteLegale.dateDebutActivite).getFullYear() + 3 <=
+    new Date(
+      uniteLegale.dateDebutActivite || uniteLegale.dateCreation
+    ).getFullYear() +
+      3 <=
     new Date().getFullYear();
 
   return (
@@ -28,7 +31,7 @@ const DonneesFinancieresSociete = ({
           <FinancesSocieteSection uniteLegale={uniteLegale} session={session} />
           {hasRights(session, ApplicationRights.bilans) &&
             isMoreThanThreeYearsOld && (
-              <FinancesSocieteBilansSection
+              <BilansSocieteSection
                 uniteLegale={uniteLegale}
                 session={session}
               />
@@ -39,9 +42,7 @@ const DonneesFinancieresSociete = ({
       )}
       <HorizontalSeparator />
       <BilansDocumentsSociete uniteLegale={uniteLegale} session={session} />
-      <ComptesBodacc uniteLegale={uniteLegale} />
+      <ComptesBodaccSociete uniteLegale={uniteLegale} />
     </>
   );
-};
-
-export default DonneesFinancieresSociete;
+}

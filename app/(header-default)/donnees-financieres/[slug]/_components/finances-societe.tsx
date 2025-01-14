@@ -19,7 +19,7 @@ import {
   pluralize,
 } from '#utils/helpers';
 import { useFetchFinancesSociete } from 'hooks';
-import { FinancesSocieteProtectedSection } from './finances-societe-protected';
+import FinancesSocieteProtectedSection from './finances-societe-protected';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>

@@ -4,10 +4,13 @@ import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import AgentBilansSection from './bilans-documents-societe-protected';
 
-const BilansDocumentsSociete: React.FC<{
+export default function BilansDocumentsSociete({
+  uniteLegale,
+  session,
+}: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}) {
   if (!hasRights(session, ApplicationRights.bilansRne)) {
     return (
       <AgentWallDocuments
@@ -18,6 +21,4 @@ const BilansDocumentsSociete: React.FC<{
     );
   }
   return <AgentBilansSection uniteLegale={uniteLegale} session={session} />;
-};
-
-export default BilansDocumentsSociete;
+}

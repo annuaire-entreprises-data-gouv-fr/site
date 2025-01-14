@@ -10,10 +10,13 @@ import { formatCurrency, formatDate, getDateFromYYYYMM } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
-export const FinancesSocieteBilansSection: React.FC<{
+export default function BilansSocieteSection({
+  uniteLegale,
+  session,
+}: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}) {
   const banqueDeFranceBilansProtected = useAPIRouteData(
     APIRoutesPaths.EspaceAgentBilansProtected,
     uniteLegale.siren,
@@ -104,4 +107,4 @@ export const FinancesSocieteBilansSection: React.FC<{
       }}
     </AsyncDataSectionClient>
   );
-};
+}
