@@ -24,7 +24,11 @@ const ConformiteSection = ({
         EAdministration.URSSAF,
         EAdministration.MSA,
       ]}
-      allowedUseCases={[UseCase.marches, UseCase.aides, UseCase.fraude]}
+      allowedUseCases={[
+        UseCase.marches,
+        UseCase.aidesEntreprises,
+        UseCase.fraude,
+      ]}
       requiredRight={ApplicationRights.travauxPublics}
       WrappedSection={ProtectedConformiteSection}
     />
