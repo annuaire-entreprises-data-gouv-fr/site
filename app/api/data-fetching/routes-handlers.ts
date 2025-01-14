@@ -2,6 +2,7 @@ import { getAssociationFromSlug } from '#models/association';
 import { getEORIValidation } from '#models/eori-validation';
 import { getAssociationProtected } from '#models/espace-agent/association-protected';
 import { getBeneficiaires } from '#models/espace-agent/beneficiaires';
+import { getBilansProtected } from '#models/espace-agent/bilans';
 import { getOpqibi } from '#models/espace-agent/certificats/opqibi';
 import { getQualibat } from '#models/espace-agent/certificats/qualibat';
 import { getQualifelec } from '#models/espace-agent/certificats/qualifelec';
@@ -29,6 +30,7 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentAssociationProtected]: getAssociationProtected,
   [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]:
     getEffectifsAnnuelsProtected,
+  [APIRoutesPaths.EspaceAgentBilansProtected]: getBilansProtected,
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
     getChiffreAffairesProtected,
   [APIRoutesPaths.EspaceAgentTravauxPublics]: withUseCase(getTravauxPublic),

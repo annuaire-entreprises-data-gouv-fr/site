@@ -27,4 +27,5 @@ export enum EAdministration {
   CNETP = 'cnetp',
   PROBTP = 'probtp',
   GIP_MDS = 'gip-mds',
+  BANQUE_DE_FRANCE = 'banque-de-france',
 }

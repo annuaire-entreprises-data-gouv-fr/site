@@ -141,6 +141,20 @@ export const formatMonthIntervalFromPartialDate = safe((dPartial: string) => {
 });
 
 /**
+ * Takes a YYYYMM and return a date
+ *
+ * @param dPartial
+ * @returns Date
+ */
+export const getDateFromYYYYMM = safe((dPartial: string) => {
+  const yyyy = parseInt(dPartial.slice(0, 4), 10);
+  const mm = parseInt(dPartial.slice(4, 6), 10);
+
+  const date = new Date(yyyy, mm, 1);
+  return date;
+});
+
+/**
  * Takes a YYYY-MM-DD and convert it to an age
  */
 export const convertDateToAge = safe((d: string) => {

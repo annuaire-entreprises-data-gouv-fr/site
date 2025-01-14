@@ -18,6 +18,7 @@ export enum ApplicationRights {
   conformite = 'Attestations de conformité fiscale (DGFiP) et sociale (Urssaf & MSA)',
   subventionsAssociation = 'Données des subventions des associations',
   effectifsAnnuels = 'Effectifs annuels (RCD)',
+  bilans = 'Accès aux bilans (Banque de France)',
   chiffreAffaires = 'Accès aux chiffres d’affaires (DGFiP)',
   travauxPublics = 'Accès aux données relatives aux travaux publics',
 }
@@ -34,6 +35,8 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
     case ApplicationRights.bilansRne:
     case ApplicationRights.documentsRne:
       return userScopes.includes('rne');
+    case ApplicationRights.bilans:
+      return userScopes.includes('bilans');
     case ApplicationRights.conformite:
       return userScopes.includes('conformite');
     case ApplicationRights.chiffreAffaires:
