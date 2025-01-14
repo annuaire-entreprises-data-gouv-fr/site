@@ -1,5 +1,6 @@
+import { DataStore } from '#clients/data-store';
 import routes from '#clients/routes';
-import { DataStore } from '../store';
+import { httpGet } from '#utils/network';
 
 type InclusionMetadata = { id: string; name: string; parent: string };
 
@@ -11,7 +12,7 @@ function mapToDomainObject(response: { results: InclusionMetadata[] }) {
 }
 
 const store = new DataStore<InclusionMetadata>(
-  routes.certifications.entrepriseInclusive.api.metadata,
+  () => httpGet(routes.certifications.entrepriseInclusive.api.metadata),
   'inclusion-metadata',
   mapToDomainObject
 );

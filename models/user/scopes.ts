@@ -1,4 +1,4 @@
-import { getAdditionnalIAgentScope } from '#clients/authentication/super-agent-scopes';
+import { superAgents } from '#clients/authentication/super-agent-scopes';
 import { allAgentScopes } from './all-agent-scopes';
 
 export type IAgentScope = (typeof allAgentScopes)[number];
@@ -36,7 +36,7 @@ export const getAgentScopes = async (
     };
   }
 
-  const additionnalScopes = await getAdditionnalIAgentScope(userEmail);
+  const additionnalScopes = await superAgents.getScopeForAgent(userEmail);
 
   return {
     scopes: [
