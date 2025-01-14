@@ -10,6 +10,7 @@ describe('Documents ESSOR ENERGIES (SOLARSUD)', () => {
     cy.visit('/documents/487444697');
     // Conformité
     cy.contains('Conformité').should('be.visible');
+    cy.contains('label', 'Aides publiques').click();
     cy.contains('DGFiP : conforme').should('be.visible');
     cy.contains('URSSAF : conforme').should('be.visible');
     cy.contains('MSA : conforme').should('be.visible');

@@ -20,7 +20,7 @@ import { APIRoutesPaths } from './routes-paths';
 import { withUseCase } from './utils';
 
 export const APIRoutesHandlers = {
-  [APIRoutesPaths.EspaceAgentConformite]: getConformiteEntreprise,
+  [APIRoutesPaths.EspaceAgentConformite]: withUseCase(getConformiteEntreprise),
   [APIRoutesPaths.EspaceAgentOpqibi]: getOpqibi,
   [APIRoutesPaths.EspaceAgentQualibat]: getQualibat,
   [APIRoutesPaths.EspaceAgentQualifelec]: getQualifelec,
