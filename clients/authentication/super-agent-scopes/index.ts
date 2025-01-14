@@ -33,9 +33,9 @@ class SuperAgentsScopes {
         return acc;
       }, {});
 
-  getScopeForAgent = async (email: string): Promise<IAgentScope[] | null> => {
+  getScopeForAgent = async (email: string) => {
     try {
-      return await this._superAgentsStore.get(email);
+      return (await this._superAgentsStore.get(email)) ?? [];
     } catch (e: any) {
       logFatalErrorInSentry(
         new FetchRessourceException({
@@ -43,7 +43,7 @@ class SuperAgentsScopes {
           cause: e,
         })
       );
-      return null;
+      return [];
     }
   };
 }
