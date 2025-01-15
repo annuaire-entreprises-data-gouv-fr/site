@@ -1,28 +1,21 @@
 'use client';
 
-import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAnnoncesBodacc } from '#models/annonces';
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
-import { IDataFetchingState } from '#models/data-fetching';
 import { formatDate } from '#utils/helpers';
 import { useFetchBODACC } from 'hooks';
 
-const ComptesBodacc: React.FC<{
+export default function ComptesBodaccSociete({
+  uniteLegale,
+}: {
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
+}) {
   const bodacc = useFetchBODACC(uniteLegale);
-  return <AnnoncesBodaccSection bodacc={bodacc} />;
-};
 
-const AnnoncesBodaccSection: React.FC<{
-  bodacc: IAnnoncesBodacc | IAPINotRespondingError | IDataFetchingState;
-}> = ({ bodacc }) => {
   return (
     <AsyncDataSectionClient
       title="Dépôts des comptes (BODACC C)"
@@ -71,5 +64,4 @@ const AnnoncesBodaccSection: React.FC<{
       )}
     </AsyncDataSectionClient>
   );
-};
-export default ComptesBodacc;
+}

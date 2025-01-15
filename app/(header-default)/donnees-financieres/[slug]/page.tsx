@@ -1,24 +1,15 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { DonneesPriveesSection } from '#components/donnees-privees-section';
-import { FinancesAssociationSection } from '#components/finances-section/association';
-import { FinancesSocieteSection } from '#components/finances-section/societe';
-import { FinancesSocieteBilansSection } from '#components/finances-section/societe-bilans';
-import { SubventionsAssociationSection } from '#components/subventions-association-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { estDiffusible } from '#models/core/diffusion';
 import { isAssociation } from '#models/core/types';
-import { ApplicationRights, hasRights } from '#models/user/rights';
 import { uniteLegalePageTitle } from '#utils/helpers';
 import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import ComptesBodacc from 'app/(header-default)/donnees-financieres/[slug]/_components/bodacc';
-import { ComptesAssociationSection } from 'app/(header-default)/donnees-financieres/[slug]/_components/dca';
 import { Metadata } from 'next';
-import BilansSection from './_components';
+import DonneesFinancieresAssociation from './_components/donnees-financieres-association';
+import DonneesFinancieresSociete from './_components/donnees-financieres-societe';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -40,9 +31,6 @@ const FinancePage = async (props: AppRouterProps) => {
   const session = await getSession();
   const { slug, isBot } = await extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-  const isMoreThanThreeYearsOld =
-    new Date(uniteLegale.dateDebutActivite).getFullYear() + 3 <=
-    new Date().getFullYear();
 
   return (
     <>
@@ -53,44 +41,15 @@ const FinancePage = async (props: AppRouterProps) => {
           session={session}
         />
         {isAssociation(uniteLegale) ? (
-          <>
-            <FinancesAssociationSection
-              session={session}
-              uniteLegale={uniteLegale}
-            />
-            <SubventionsAssociationSection
-              session={session}
-              uniteLegale={uniteLegale}
-            />
-          </>
+          <DonneesFinancieresAssociation
+            uniteLegale={uniteLegale}
+            session={session}
+          />
         ) : (
-          <>
-            {estDiffusible(uniteLegale) ||
-            hasRights(session, ApplicationRights.nonDiffusible) ? (
-              <>
-                <FinancesSocieteSection
-                  uniteLegale={uniteLegale}
-                  session={session}
-                />
-                {hasRights(session, ApplicationRights.bilans) &&
-                  isMoreThanThreeYearsOld && (
-                    <FinancesSocieteBilansSection
-                      uniteLegale={uniteLegale}
-                      session={session}
-                    />
-                  )}
-              </>
-            ) : (
-              <DonneesPriveesSection title="Indicateurs financiers" />
-            )}
-            <HorizontalSeparator />
-            <BilansSection uniteLegale={uniteLegale} session={session} />
-          </>
-        )}
-        {isAssociation(uniteLegale) ? (
-          <ComptesAssociationSection uniteLegale={uniteLegale} />
-        ) : (
-          <ComptesBodacc uniteLegale={uniteLegale} />
+          <DonneesFinancieresSociete
+            uniteLegale={uniteLegale}
+            session={session}
+          />
         )}
       </div>
     </>

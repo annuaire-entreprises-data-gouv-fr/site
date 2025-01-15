@@ -23,10 +23,13 @@ const NoBilans = () => (
   <>Aucun compte n’a été déposé au RNE pour cette entreprise.</>
 );
 
-const AgentBilansSection: React.FC<{
+export default function BilansDocumentsSocieteProtected({
+  uniteLegale,
+  session,
+}: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}) {
   const documents = useAPIRouteData(
     APIRoutesPaths.EspaceAgentRneDocuments,
     uniteLegale.siren,
@@ -120,6 +123,4 @@ const AgentBilansSection: React.FC<{
       }
     </AsyncDataSectionClient>
   );
-};
-
-export default AgentBilansSection;
+}

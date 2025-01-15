@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import { DILA } from '#components/administrations';
@@ -12,9 +11,11 @@ import { IAssociation } from '#models/core/types';
 import { formatDate } from '#utils/helpers';
 import { useFetchComptesAssociation } from 'hooks';
 
-export const ComptesAssociationSection: React.FC<{
+export default function ComptesAssociationSection({
+  uniteLegale,
+}: {
   uniteLegale: IAssociation;
-}> = ({ uniteLegale }) => {
+}) {
   const comptes = useFetchComptesAssociation(uniteLegale);
   return (
     <AsyncDataSectionClient
@@ -74,4 +75,4 @@ export const ComptesAssociationSection: React.FC<{
       }
     </AsyncDataSectionClient>
   );
-};
+}
