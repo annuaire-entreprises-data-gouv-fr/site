@@ -1,5 +1,6 @@
-import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
+import constants from '#models/constants';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Politique de confidentialité',
@@ -173,10 +174,8 @@ const Privacy = () => (
       <li>D’un droit à la limitation du traitement.</li>
     </ul>
     <p>
-      Pour les exercer, contactez-nous à :{' '}
-      <a href="mailto:annuaire-entreprises@data.gouv.fr">
-        annuaire-entreprises@data.gouv.fr{' '}
-      </a>
+      Pour les exercer, contactez-nous via notre{' '}
+      <a href={constants.links.parcours.contact}>formulaire de contact</a>.
     </p>
     <p>Ou bien à :</p>
     <ul>
