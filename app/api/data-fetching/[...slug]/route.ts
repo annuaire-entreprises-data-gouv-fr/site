@@ -35,6 +35,7 @@ async function getRoute(
   const validatedParams = {
     isEI: searchParams.isEI === 'true',
     useCase: searchParams.useCase as UseCase,
+    year: parseInt(searchParams.year),
   };
 
   const response = await handler(slug, validatedParams);
