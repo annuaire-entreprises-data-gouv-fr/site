@@ -7,14 +7,17 @@ import { IAPIEntrepriseRcpEffectifsAnnuels } from './types';
 /**
  * GET effectifs from API Entreprise
  */
-export async function clientApiEntrepriseEffectifsAnnuels(siren: Siren) {
+export async function clientApiEntrepriseEffectifsAnnuels(
+  siren: Siren,
+  year: number
+) {
   return await clientAPIEntreprise<
     IAPIEntrepriseRcpEffectifsAnnuels,
     IEffectifsAnnuelsProtected
   >(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.effectifs.annuels(
       siren,
-      new Date().getFullYear() - 1
+      year
     )}`,
     mapToDomainObject
   );

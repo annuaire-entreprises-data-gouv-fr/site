@@ -12,10 +12,18 @@ export const getEffectifsAnnuelsProtected = async (
   maybeSiren: string
 ): Promise<IEffectifsAnnuelsProtected | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
-  return clientApiEntrepriseEffectifsAnnuels(siren).catch((error) =>
-    handleApiEntrepriseError(error, {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
+
+  const effectifsAnnuelsYear =
+    currentMonth === 0 ? currentYear - 2 : currentYear - 1;
+  try {
+    return clientApiEntrepriseEffectifsAnnuels(siren, effectifsAnnuelsYear);
+  } catch (e) {
+    return handleApiEntrepriseError(e, {
       siren,
       apiResource: 'EffectifsAnnuelsProtected',
-    })
-  );
+    });
+  }
 };

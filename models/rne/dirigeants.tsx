@@ -33,8 +33,7 @@ export const getDirigeantsRNE = async (
       if (eFallback instanceof HttpNotFound) {
         return APINotRespondingFactory(EAdministration.INPI, 404);
       }
+      return APINotRespondingFactory(EAdministration.INPI, 500);
     }
-
-    return APINotRespondingFactory(EAdministration.INPI, 500);
   }
 };
