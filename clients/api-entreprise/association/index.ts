@@ -11,12 +11,7 @@ export async function clientApiEntrepriseAssociation(siren: Siren) {
   return await clientAPIEntreprise<
     IAPIEntrepriseAssociation,
     IAssociationProtected
-  >(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.association(
-      siren
-    )}`,
-    mapToDomainObject
-  );
+  >(routes.apiEntreprise.association(siren), mapToDomainObject);
 }
 
 const mapToDomainObject = (

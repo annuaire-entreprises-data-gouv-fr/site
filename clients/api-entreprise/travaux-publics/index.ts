@@ -17,9 +17,7 @@ export const clientApiEntrepriseCibtp = async (
   useCase: UseCase
 ) => {
   return await clientAPIEntreprise(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.certifications.cibtp(siret)}`,
+    routes.apiEntreprise.certifications.cibtp(siret),
     mapToDomainObject,
     { useCase }
   );
@@ -33,9 +31,7 @@ export const clientApiEntrepriseProbtp = async (
   useCase: UseCase
 ) => {
   return await clientAPIEntreprise(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.certifications.probtp(siret)}`,
+    routes.apiEntreprise.certifications.probtp(siret),
     mapToDomainObject,
     { useCase }
   );
@@ -49,9 +45,7 @@ export const clientApiEntrepriseCnetp = async (
   useCase: UseCase
 ) => {
   return await clientAPIEntreprise(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.certifications.cnetp(siren)}`,
+    routes.apiEntreprise.certifications.cnetp(siren),
     mapToDomainObject,
     { useCase }
   );
@@ -65,9 +59,7 @@ export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
   useCase: UseCase
 ) => {
   return await clientAPIEntreprise(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.carteProfessionnelleTravauxPublics(siren)}`,
+    routes.apiEntreprise.carteProfessionnelleTravauxPublics(siren),
     mapToDomainObject,
     { useCase }
   );

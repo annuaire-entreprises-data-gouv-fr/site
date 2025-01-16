@@ -44,7 +44,8 @@ export default async function clientAPIEntreprise<T, U>(
     throw new HttpUnauthorizedError('Missing API Entreprise credentials');
   }
 
-  const response = await httpGet<T>(route, {
+  const url = `${process.env.API_ENTREPRISE_URL}${route}`;
+  const response = await httpGet<T>(url, {
     headers: {
       Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
     },

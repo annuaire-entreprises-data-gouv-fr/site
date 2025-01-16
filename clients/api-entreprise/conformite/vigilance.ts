@@ -26,13 +26,9 @@ export const clientApiEntrepriseConformiteVigilance = async (
   return await clientAPIEntreprise<
     IAPIEntrepriseConformiteVigilance,
     IConformite
-  >(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.conformite.vigilance(siren)}`,
-    mapToDomainObject,
-    { useCase }
-  );
+  >(routes.apiEntreprise.conformite.vigilance(siren), mapToDomainObject, {
+    useCase,
+  });
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteVigilance) => {

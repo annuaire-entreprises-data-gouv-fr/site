@@ -11,12 +11,7 @@ export async function clientApiEntrepriseBilans(siren: Siren) {
   return await clientAPIEntreprise<
     IAPIEntrepriseBanqueDeFranceBilans,
     IBilansProtected
-  >(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.banqueDeFrance.bilans(siren)}`,
-    mapToDomainObject
-  );
+  >(routes.apiEntreprise.banqueDeFrance.bilans(siren), mapToDomainObject);
 }
 const mapToDomainObject = (
   response: IAPIEntrepriseBanqueDeFranceBilans
