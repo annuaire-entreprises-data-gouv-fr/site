@@ -53,9 +53,7 @@ export type IAPIEntrepriseQualifelec = IAPIEntrepriseResponse<
  */
 export const clientApiEntrepriseQualifelec = async (siret: Siret) => {
   return await clientAPIEntreprise<IAPIEntrepriseQualifelec, IQualifelec>(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.certifications.qualifelec(siret)}`,
+    routes.apiEntreprise.certifications.qualifelec(siret),
     mapToDomainObject
   );
 };

@@ -23,10 +23,13 @@ const ColorCircle = ({ color }: { color: string }) => (
 );
 const colorCA = constants.chartColors[4];
 
-export const FinancesSocieteProtectedSection: React.FC<{
+export default function FinancesSocieteProtectedSection({
+  uniteLegale,
+  session,
+}: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}) {
   const chiffreAffairesProtected = useAPIRouteData(
     APIRoutesPaths.EspaceAgentChiffreAffairesProtected,
     uniteLegale.siege.siret,
@@ -131,4 +134,4 @@ export const FinancesSocieteProtectedSection: React.FC<{
       }}
     </AsyncDataSectionClient>
   );
-};
+}

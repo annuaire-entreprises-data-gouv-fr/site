@@ -12,6 +12,7 @@ import { IUniteLegale } from '#models/core/types';
 import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import { formatFloatFr } from '#utils/helpers';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
@@ -77,7 +78,8 @@ export const ProtectedEffectifCell = ({
   const { effectif, anneeEffectif } = effectifsAnnuelsProtected;
   return (
     <ProtectedInlineData>
-      {effectif} salarié{effectif > 1 ? 's' : ''}, en {anneeEffectif}
+      {formatFloatFr(effectif.toString())} salarié{effectif > 1 ? 's' : ''}, en{' '}
+      {anneeEffectif}
     </ProtectedInlineData>
   );
 };

@@ -32,13 +32,7 @@ export const clientApiEntrepriseBeneficiaires = async (
   return await clientAPIEntreprise<
     IAPIEntrepriseBeneficiaires,
     Array<IBeneficiairesEffectif>
-  >(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.beneficiaires(
-      siren
-    )}`,
-    mapToDomainObject,
-    { useCase }
-  );
+  >(routes.apiEntreprise.beneficiaires(siren), mapToDomainObject, { useCase });
 };
 
 const mapToDomainObject = (

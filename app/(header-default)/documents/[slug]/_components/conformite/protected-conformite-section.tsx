@@ -5,34 +5,53 @@ import { AsyncDataSectionClient } from '#components/section/data-section/client'
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
+import { UseCase } from '#models/user/agent';
 import { ISession } from '#models/user/session';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { useMemo } from 'react';
 import Conformite from './conformite';
 
 interface IProps {
   uniteLegale: IUniteLegale;
   session: ISession | null;
+  useCase: UseCase;
+  title: string;
+  id: string;
+  sources: EAdministration[];
+  isProtected: boolean;
 }
-function ConformiteSection({ uniteLegale, session }: IProps) {
+
+function ConformiteSection({
+  uniteLegale,
+  session,
+  useCase,
+  title,
+  id,
+  sources,
+  isProtected,
+}: IProps) {
+  const params = useMemo(
+    () => ({
+      params: { useCase },
+    }),
+    [useCase]
+  );
   const conformite = useAPIRouteData(
     APIRoutesPaths.EspaceAgentConformite,
     uniteLegale.siege.siret,
-    session
+    session,
+    params
   );
 
   return (
     <PrintNever>
       <AsyncDataSectionClient
-        title="Attestations de conformité sociale et fiscale"
-        id="conformite"
-        isProtected
+        title={title}
+        id={id}
+        isProtected={isProtected}
+        sources={sources}
         data={conformite}
-        sources={[
-          EAdministration.DGFIP,
-          EAdministration.URSSAF,
-          EAdministration.MSA,
-        ]}
       >
         {(conformite) => (
           <TwoColumnTable

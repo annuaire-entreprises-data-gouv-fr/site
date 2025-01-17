@@ -12,12 +12,7 @@ export async function clientApiEntrepriseChiffreAffaires(siret: Siret) {
   return await clientAPIEntreprise<
     IAPIEntrepriseChiffreAffaires,
     IChiffreAffairesProtected
-  >(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.dgfip.chiffreAffaires(siret)}`,
-    mapToDomainObject
-  );
+  >(routes.apiEntreprise.dgfip.chiffreAffaires(siret), mapToDomainObject);
 }
 
 const mapToDomainObject = (

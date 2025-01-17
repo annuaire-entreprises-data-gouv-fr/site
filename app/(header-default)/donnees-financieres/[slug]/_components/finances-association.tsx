@@ -25,10 +25,13 @@ const colorCA = constants.chartColors[4];
  * @param param0
  * @returns
  */
-export const FinancesAssociationSection: React.FC<{
+export default function FinancesAssociationSection({
+  uniteLegale,
+  session,
+}: {
   uniteLegale: IAssociation;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}) {
   const data = useAPIRouteData(
     APIRoutesPaths.Association,
     uniteLegale.siren,
@@ -139,4 +142,4 @@ export const FinancesAssociationSection: React.FC<{
       }
     </DataSectionClient>
   );
-};
+}

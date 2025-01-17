@@ -1,5 +1,6 @@
 import TextWrapper from '#components-ui/text-wrapper';
 import { administrationsMetaData } from '#models/administrations';
+import constants from '#models/constants';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -169,10 +170,8 @@ export default function About() {
               guide sur le sujet
             </a>{' '}
             et n’hésitez pas à nous contacter afin que nous puissions vous aider
-            :{' '}
-            <a href="mailto:annuaire-entreprises@data.gouv.fr">
-              annuaire-entreprises@data.gouv.fr
-            </a>
+            via notre{' '}
+            <a href={constants.links.parcours.contact}>formulaire de contact</a>
             .
           </p>
           <h2>

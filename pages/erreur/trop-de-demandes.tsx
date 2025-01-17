@@ -1,7 +1,7 @@
-import { GetServerSideProps } from 'next';
 import ButtonLink from '#components-ui/button';
 import Meta from '#components/meta/meta-client';
 import constants from '#models/constants';
+import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 const TooManyRequest: NextPageWithLayout = () => {
@@ -18,9 +18,9 @@ const TooManyRequest: NextPageWithLayout = () => {
       <ul>
         <li>
           Si vous travaillez <strong>pour un service public</strong>{' '}
-          (administration, ministère, collectivité),{' '}
-          <a href={`mailto:${constants.links.mailto}`}>contactez-nous</a> et
-          nous ferons le nécessaire pour que cela ne se reproduise pas.
+          (administration, ministère, collectivité), contactez-nous via notre{' '}
+          <a href={constants.links.parcours.contact}>formulaire de contact</a>{' '}
+          et nous ferons le nécessaire pour que cela ne se reproduise pas.
         </li>
         <li>
           Si <strong>vous utilisez des robots 🤖</strong> pour scrapper les

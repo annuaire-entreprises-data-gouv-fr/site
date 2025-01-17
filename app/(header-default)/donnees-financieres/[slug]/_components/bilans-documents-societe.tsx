@@ -2,12 +2,15 @@ import AgentWallDocuments from '#components/espace-agent-components/agent-wall/d
 import { IUniteLegale } from '#models/core/types';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import AgentBilansSection from './bilans';
+import AgentBilansSection from './bilans-documents-societe-protected';
 
-const BilansSection: React.FC<{
+export default function BilansDocumentsSociete({
+  uniteLegale,
+  session,
+}: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}) {
   if (!hasRights(session, ApplicationRights.bilansRne)) {
     return (
       <AgentWallDocuments
@@ -18,6 +21,4 @@ const BilansSection: React.FC<{
     );
   }
   return <AgentBilansSection uniteLegale={uniteLegale} session={session} />;
-};
-
-export default BilansSection;
+}
