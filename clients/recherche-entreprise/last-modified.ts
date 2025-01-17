@@ -1,8 +1,9 @@
+import { DataStore } from '#clients/data-store';
 import routes from '#clients/routes';
-import { DataStore } from '../store';
+import { httpGet } from '#utils/network';
 
 const store = new DataStore<string>(
-  routes.rechercheEntreprise.lastModified,
+  () => httpGet(routes.rechercheEntreprise.lastModified),
   'recherche-entreprise-last-modified',
   (response) => response
 );
