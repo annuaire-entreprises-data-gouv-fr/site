@@ -3,7 +3,7 @@ import { FetchRessourceException } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
 
 /**
- * Generic client that cache an API response in memory
+ * Generic client that caches an API response in memory
  */
 export class DataStore<T> {
   private data: { [key: string]: T } | null;
