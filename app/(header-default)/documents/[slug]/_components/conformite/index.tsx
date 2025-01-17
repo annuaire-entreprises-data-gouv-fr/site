@@ -29,7 +29,7 @@ const ConformiteSection = ({
         UseCase.aidesEntreprises,
         UseCase.fraude,
       ]}
-      requiredRight={ApplicationRights.travauxPublics}
+      requiredRight={ApplicationRights.conformite}
       WrappedSection={ProtectedConformiteSection}
     />
   );
