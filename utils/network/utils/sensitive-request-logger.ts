@@ -41,7 +41,7 @@ export type ISensitiveCaller = {
 export const sensitiveRequestLogger = (
   route: string,
   user: ISensitiveCaller,
-  useCase: string
+  useCase?: string
 ) => {
   try {
     const url = new URL(route);
