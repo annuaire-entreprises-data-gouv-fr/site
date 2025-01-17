@@ -9,7 +9,9 @@ describe('Documents ESSOR ENERGIES (SOLARSUD)', () => {
     cy.login();
     cy.visit('/documents/487444697');
     // Conformité
-    cy.contains('Attestations de conformite').should('be.visible');
+    cy.contains('Attestations de conformité sociale et fiscale').should(
+      'be.visible'
+    );
     cy.contains('Conformité').should('be.visible');
     cy.contains('label', 'Aides publiques').click();
     cy.contains('DGFiP : conforme').should('be.visible');
@@ -33,7 +35,9 @@ describe('Documents ESSOR ENERGIES (SOLARSUD)', () => {
     cy.login(['travaux_publics']);
     cy.visit('/documents/487444697');
     // Conformité
-    cy.contains('Attestations de conformite').should('not.exist');
+    cy.contains('Attestations de conformité sociale et fiscale').should(
+      'not.exist'
+    );
     cy.contains('Conformité').should('not.exist');
     // Travaux publics
     cy.contains(
@@ -45,7 +49,9 @@ describe('Documents ESSOR ENERGIES (SOLARSUD)', () => {
     cy.login(['conformite']);
     cy.visit('/documents/487444697');
     // Conformité
-    cy.contains('Attestations de conformite').should('be.visible');
+    cy.contains('Attestations de conformité sociale et fiscale').should(
+      'be.visible'
+    );
     cy.contains('Conformité').should('be.visible');
     // Travaux publics
     cy.contains(
