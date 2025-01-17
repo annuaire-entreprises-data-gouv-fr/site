@@ -12,7 +12,9 @@ export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
       </li>
       {hasRights(session, ApplicationRights.conformite) && (
         <li>
-          <a href="#conformite">Attestations de conformite</a>
+          <a href="#conformite">
+            Attestations de conformité sociale et fiscale
+          </a>
         </li>
       )}
       <li>

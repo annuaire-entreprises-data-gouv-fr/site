@@ -27,8 +27,9 @@ export default async function clientAPIEntreprise<T, U>(
     useCase?: UseCase;
   }
 ) {
+  const useCase = options?.useCase ? options.useCase : 'annuaire-entreprises';
   const callerInfos = await sensitiveRequestCallerInfos();
-  sensitiveRequestLogger(route, callerInfos);
+  sensitiveRequestLogger(route, callerInfos, useCase);
 
   if (!callerInfos.siret) {
     logFatalErrorInSentry(
@@ -51,7 +52,7 @@ export default async function clientAPIEntreprise<T, U>(
     timeout: constants.timeout.XXXL,
     params: {
       object: 'espace-agent-public',
-      context: options?.useCase ? options.useCase : 'annuaire-entreprises',
+      context: useCase,
       recipient: callerInfos.siret,
     },
   });

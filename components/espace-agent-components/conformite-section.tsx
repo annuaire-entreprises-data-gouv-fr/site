@@ -24,7 +24,7 @@ function ConformiteSection({ uniteLegale, session }: IProps) {
   return (
     <PrintNever>
       <AsyncDataSectionClient
-        title="Conformité"
+        title="Attestations de conformité sociale et fiscale"
         id="conformite"
         isProtected
         data={conformite}
