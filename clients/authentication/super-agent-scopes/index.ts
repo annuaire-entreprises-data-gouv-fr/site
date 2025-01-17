@@ -8,7 +8,7 @@ import { readFromGrist } from '#utils/integrations/grist';
 class SuperAgentsScopes {
   private _superAgentsStore: DataStore<IAgentScope[]>;
   // time before agent list update
-  private TTL = 1000;
+  private TTL = 300000; //1000 * 60 * 5
 
   constructor() {
     this._superAgentsStore = new DataStore<IAgentScope[]>(

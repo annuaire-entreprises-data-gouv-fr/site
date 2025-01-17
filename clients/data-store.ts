@@ -29,6 +29,10 @@ export class DataStore<T> {
         })
       );
     }
+    /** refresh */
+    if (this.TTL && this.TTL > 0) {
+      setTimeout(this.fetchAndStoreData, this.TTL);
+    }
   };
 
   get = async (key: string) => {
@@ -44,15 +48,6 @@ export class DataStore<T> {
       return this.data[key];
     } else {
       return null;
-    }
-  };
-
-  refresh = () => {
-    if (this.TTL) {
-      // no need for await here
-      this.fetchAndStoreData();
-
-      setTimeout(this.refresh, this.TTL);
     }
   };
 }
