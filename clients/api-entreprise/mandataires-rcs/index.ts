@@ -40,9 +40,7 @@ export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
  */
 export const clientApiEntrepriseMandatairesRCS = async (siren: Siren) => {
   return await clientAPIEntreprise<IAPIEntrepriseMandatairesRCS, IDirigeants>(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.mandatairesRCS(
-      siren
-    )}`,
+    routes.apiEntreprise.mandatairesRCS(siren),
     mapToDomainObject
   );
 };

@@ -1,6 +1,6 @@
-import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import constants from '#models/constants';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Déclaration d’accessibilité',
@@ -44,8 +44,8 @@ function Accessibility() {
       </p>
       <ul>
         <li>
-          Écrivez-nous à{' '}
-          <a href={constants.links.mailto}>{constants.links.mail}</a>
+          Écrivez-nous via notre{' '}
+          <a href={constants.links.parcours.contact}>formulaire de contact</a>
         </li>
         <li>Adresse : DINUM 20 avenue de Ségur 75007 Paris</li>
       </ul>

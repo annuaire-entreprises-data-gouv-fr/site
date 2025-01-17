@@ -1,7 +1,5 @@
 const constants = {
   links: {
-    mailto: 'mailto:annuaire-entreprises@data.gouv.fr',
-    mail: 'annuaire-entreprises@data.gouv.fr',
     mailtoInpi: 'mailto:licences@inpi.fr',
     mailInpi: 'licences@inpi.fr',
     parcours: {

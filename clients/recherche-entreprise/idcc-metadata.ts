@@ -1,6 +1,7 @@
+import { DataStore } from '#clients/data-store';
 import routes from '#clients/routes';
 import { ICCWithMetadata } from '#models/conventions-collectives';
-import { DataStore } from '../store';
+import { httpGet } from '#utils/network';
 
 type IIdccMetadata = {
   [idcc: string]: {
@@ -34,7 +35,7 @@ function mapToDomainObject(response: IIdccMetadata) {
 }
 
 const store = new DataStore<ICCWithMetadata>(
-  routes.rechercheEntreprise.idcc.metadata,
+  () => httpGet(routes.rechercheEntreprise.idcc.metadata),
   'idcc-metadata',
   mapToDomainObject
 );

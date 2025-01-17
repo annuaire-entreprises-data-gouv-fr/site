@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import { IConformite } from '#models/espace-agent/conformite';
+import { UseCase } from '#models/user/agent';
 import { Siren } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 
@@ -13,16 +14,16 @@ export type IAPIEntrepriseConformiteFiscale = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseConformiteFiscale = async (siren: Siren) => {
+export const clientApiEntrepriseConformiteFiscale = async (
+  siren: Siren,
+  useCase: UseCase
+) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseConformiteFiscale,
     IConformite
-  >(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale(
-      siren
-    )}`,
-    mapToDomainObject
-  );
+  >(routes.apiEntreprise.conformite.fiscale(siren), mapToDomainObject, {
+    useCase,
+  });
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => {

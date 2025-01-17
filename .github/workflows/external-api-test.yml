@@ -12,18 +12,6 @@ on:
 # For critical env variable, declare it within the action.
 env:
   node-version: 18.x
-  INSEE_USERNAME: ${{ secrets.INSEE_USERNAME }}
-  INSEE_PASSWORD: ${{ secrets.INSEE_PASSWORD }}
-  INSEE_CLIENT_ID: ${{ secrets.INSEE_CLIENT_ID }}
-  INSEE_CLIENT_SECRET: ${{ secrets.INSEE_CLIENT_SECRET}}
-  INSEE_CLIENT_ID_FALLBACK: ${{ secrets.INSEE_CLIENT_ID_FALLBACK }}
-  INSEE_CLIENT_SECRET_FALLBACK: ${{ secrets.INSEE_CLIENT_SECRET_FALLBACK}}
-  NEXT_PUBLIC_END2END_MOCKING: disabled
-  INDEXING_ENABLED: enabled
-  REDIS_ENABLED: disabled
-  PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
-  IRON_SESSION_PWD: ${{ secrets.IRON_SESSION_PWD }}
-  GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
 
 jobs:
   dependencies:
@@ -61,8 +49,6 @@ jobs:
 
       - name: 'Create a PR if there is a diff in the snapshots'
         uses: peter-evans/create-pull-request@v6
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_EXTERNAL_API_TEST_PR }}
         with:
           branch: 'BOT-snapshots-update'
           title: '🤖 API client snapshots update'

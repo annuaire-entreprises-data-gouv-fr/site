@@ -1,5 +1,6 @@
 import ButtonLink from '#components-ui/button';
 import ButtonFranceConnect from '#components-ui/button-france-connect';
+import constants from '#models/constants';
 import { ISession } from '#models/user/session';
 import { getHidePersonalDataRequestFCSession } from '#utils/session';
 
@@ -71,9 +72,10 @@ export function ConnectionFranceConnect({
             <br />
             Dans ce cas vous pouvez nous écrire directement en précisant votre
             demande. Le temps de traitement pourra être plus long.{' '}
-            <a href="mailto:annuaire-entreprises@data.gouv.fr?subject=Je%20souhaite%20cacher%20mes%20informations%20de%20dirigeant(e)&body=Bonjour%2C%20%0A%0AJe%20souhaite%20cacher%20mes%20informations%20de%20dirigeant(e)%20de%20mon%20entreprise.%0A%0AVoici%20le%20num%C3%A9ro%20Siren%20%2F%20Siret%20concern%C3%A9%20%3A">
-              Faire ma demande par mail
+            <a href={constants.links.parcours.contact}>
+              Faire ma demande via le formulaire de contact
             </a>
+            .
           </p>
         </>
       )}
