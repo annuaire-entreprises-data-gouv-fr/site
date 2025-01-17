@@ -36,8 +36,8 @@
           "libelleActivitePrincipale": "Autres organisations fonctionnant par adhésion volontaire (94.99Z)",
           "trancheEffectif": "N",
           "anneeTrancheEffectif": null,
-          "latitude": "43.763569",
-          "longitude": "3.866137",
+          "latitude": null,
+          "longitude": null,
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -82,8 +82,8 @@
               "libelleActivitePrincipale": "Autres organisations fonctionnant par adhésion volontaire (94.99Z)",
               "trancheEffectif": "N",
               "anneeTrancheEffectif": null,
-              "latitude": "43.763569",
-              "longitude": "3.866137",
+              "latitude": null,
+              "longitude": null,
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -120,8 +120,8 @@
               "libelleActivitePrincipale": "Autres organisations fonctionnant par adhésion volontaire (94.99Z)",
               "trancheEffectif": "N",
               "anneeTrancheEffectif": null,
-              "latitude": "43.763569",
-              "longitude": "3.866137",
+              "latitude": null,
+              "longitude": null,
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],

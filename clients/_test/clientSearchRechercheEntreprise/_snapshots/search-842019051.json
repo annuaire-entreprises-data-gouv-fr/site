@@ -36,8 +36,8 @@
           "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
           "trancheEffectif": "N",
           "anneeTrancheEffectif": "2022",
-          "latitude": "48.891022",
-          "longitude": "2.329849",
+          "latitude": "48.891021999999985",
+          "longitude": "2.3298490000000003",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -82,8 +82,8 @@
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
               "trancheEffectif": "N",
               "anneeTrancheEffectif": "2022",
-              "latitude": "48.891022",
-              "longitude": "2.329849",
+              "latitude": "48.891021999999985",
+              "longitude": "2.3298490000000003",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -120,8 +120,8 @@
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
               "trancheEffectif": "N",
               "anneeTrancheEffectif": "2022",
-              "latitude": "48.891022",
-              "longitude": "2.329849",
+              "latitude": "48.891021999999985",
+              "longitude": "2.3298490000000003",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
