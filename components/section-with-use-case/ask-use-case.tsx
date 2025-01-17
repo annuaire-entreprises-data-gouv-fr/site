@@ -4,25 +4,16 @@ import { UseCase } from '#models/user/agent';
 export function AskUseCase({
   useCase,
   setUseCase,
-  introContent,
 }: {
   useCase?: UseCase;
   setUseCase: (useCase: UseCase) => void;
-  introContent?: React.ReactNode;
 }) {
-  const defaultIntroContent = (
-    <p>
-      Les agents publics peuvent demander accéder à cette donnée uniquement dans
-      les cas d’usages justifiant d’un intérêt légitime. En déclarant le cadre
-      juridique dans lequel vous accédez à ces données, vous vous engagez{' '}
-      <a href="/cgu">à respecter nos conditions générales d’utilisation</a>.
-    </p>
-  );
   return (
     <>
-      {introContent || defaultIntroContent}
       <form>
-        <label>Dans quel cadre souhaitez-vous accéder à ces données ?</label>
+        <label>
+          Dans quel cadre juridique souhaitez-vous accéder à ces données ?
+        </label>
         <br />
         <MultiChoice
           idPrefix="user-type"
