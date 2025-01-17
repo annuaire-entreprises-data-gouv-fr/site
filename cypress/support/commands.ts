@@ -6,6 +6,7 @@
 //
 //
 import { allAgentScopes } from '#models/user/all-agent-scopes';
+import { IAgentScope } from '#models/user/scopes';
 import { ISession } from '#models/user/session';
 import { sessionOptions } from '#utils/session';
 import { sealData } from 'iron-session';
@@ -13,12 +14,13 @@ import { sealData } from 'iron-session';
 declare global {
   namespace Cypress {
     interface Chainable {
-      login(): Chainable<void>;
+      login(scopes?: IAgentScope[]): Chainable<void>;
     }
   }
 }
 
-const generateSessionCookie = async () => {
+const generateSessionCookie = async (inputScopes?: IAgentScope[]) => {
+  const scopes = inputScopes || [...allAgentScopes];
   const session: ISession = {
     user: {
       idpId: '123456789',
@@ -31,7 +33,7 @@ const generateSessionCookie = async () => {
       firstName: 'John Doe',
       fullName: 'John Doe',
       email: 'user@yopmail.com',
-      scopes: [...allAgentScopes],
+      scopes,
       userType: 'Super-agent connecté',
       hasHabilitation: true,
     },
@@ -43,9 +45,9 @@ const generateSessionCookie = async () => {
   });
 };
 
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('login', (scopes?: IAgentScope[]) => {
   cy.then(() => {
-    return generateSessionCookie();
+    return generateSessionCookie(scopes);
   }).then((validSessionCookie) => {
     cy.setCookie(sessionOptions.cookieName, validSessionCookie);
   });
