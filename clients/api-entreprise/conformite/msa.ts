@@ -16,9 +16,7 @@ export const clientApiEntrepriseConformiteMSA = async (
   useCase: UseCase
 ) => {
   return await clientAPIEntreprise<IAPIEntrepriseConformiteMSA, IConformite>(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.msa(
-      siret
-    )}`,
+    routes.apiEntreprise.conformite.msa(siret),
     mapToDomainObject,
     { useCase }
   );

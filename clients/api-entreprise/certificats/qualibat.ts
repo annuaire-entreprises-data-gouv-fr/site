@@ -31,9 +31,7 @@ export type IAPIEntrepriseQualibat = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseQualibat = async (siret: Siret) => {
   return await clientAPIEntreprise(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.certifications.qualibat(siret)}`,
+    routes.apiEntreprise.certifications.qualibat(siret),
     mapToDomainObject
   );
 };

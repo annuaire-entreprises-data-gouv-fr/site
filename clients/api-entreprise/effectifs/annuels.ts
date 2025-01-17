@@ -14,13 +14,7 @@ export async function clientApiEntrepriseEffectifsAnnuels(
   return await clientAPIEntreprise<
     IAPIEntrepriseRcpEffectifsAnnuels,
     IEffectifsAnnuelsProtected
-  >(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.effectifs.annuels(
-      siren,
-      year
-    )}`,
-    mapToDomainObject
-  );
+  >(routes.apiEntreprise.effectifs.annuels(siren, year), mapToDomainObject);
 }
 
 const mapToDomainObject = ({

@@ -21,13 +21,9 @@ export const clientApiEntrepriseConformiteFiscale = async (
   return await clientAPIEntreprise<
     IAPIEntrepriseConformiteFiscale,
     IConformite
-  >(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale(
-      siren
-    )}`,
-    mapToDomainObject,
-    { useCase }
-  );
+  >(routes.apiEntreprise.conformite.fiscale(siren), mapToDomainObject, {
+    useCase,
+  });
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => {
