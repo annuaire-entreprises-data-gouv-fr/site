@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-website-staging:
+  deploy-staging:
     name: Deploy - staging
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -39,7 +39,7 @@ jobs:
           hook: ${{ secrets.TCHAP_HOOK }}
           id: ${{ secrets.TCHAP_ROOM_ID }}
 
-  deploy-website-production:
+  deploy-production:
     name: Deploy - production
     runs-on: ubuntu-latest
     needs: [deploy-staging]
