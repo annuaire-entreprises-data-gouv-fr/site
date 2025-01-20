@@ -1,13 +1,17 @@
 name: 'Deploy : production'
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   deploy-website-staging:
-    name: Deploy website to staging
+    name: Deploy - staging
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    environment:
+      name: staging
 
     steps:
       - uses: actions/checkout@v4
@@ -36,9 +40,11 @@ jobs:
           id: ${{ secrets.TCHAP_ROOM_ID }}
 
   deploy-website-production:
-    name: Deploy website to production
+    name: Deploy - production
     runs-on: ubuntu-latest
-    needs: [deploy-website-staging]
+    needs: [deploy-staging]
+    environment:
+      name: production
     timeout-minutes: 15
     strategy:
       matrix:
