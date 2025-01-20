@@ -18,7 +18,7 @@ const bucketsLists = {
       region: 'eu-west-par',
     },
     params: {
-      Bucket: 'annuaire-entreprises-droits-agentssdfjkn',
+      Bucket: 'annuaire-entreprises-droits-agents',
       Key: 'comptes_agents.json',
     },
   },
