@@ -32,7 +32,6 @@ export async function readFromS3(bucketKey: keyof typeof bucketsLists) {
 
   try {
     const data = await client.send(command);
-    console.log(data);
     return data;
   } catch (error) {
     logErrorInSentry(new readFromS3Exception({ cause: error }));
