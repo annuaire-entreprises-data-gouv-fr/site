@@ -80,7 +80,24 @@ const getSiretOrFallbackOnIdpId = (siret: string, idpId: string) => {
   return getSiretFromIdpTemporary(idpId);
 };
 
-export const getAgent = async (
+/**
+ * Return a verified agent with actual scopes, hasHabilitation and user type
+ * @param agent
+ * @returns
+ */
+export const getVerifiedAgent = async (agent: IAgentInfo) => {
+  const { scopes, userType, hasHabilitation } = await getAgentScopes(
+    agent.email
+  );
+  return {
+    ...agent,
+    scopes,
+    userType,
+    hasHabilitation,
+  };
+};
+
+export const createAgent = async (
   userInfo: IProConnectUserInfo
 ): Promise<IAgentInfo> => {
   const { scopes, userType, hasHabilitation } = await getAgentScopes(
