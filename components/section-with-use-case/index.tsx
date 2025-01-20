@@ -19,6 +19,15 @@ type WrappedSectionProps = {
   isProtected: boolean;
 };
 
+const DefaultIntroContent = () => (
+  <p>
+    Les agents publics peuvent demander à accéder à cette donnée uniquement dans
+    les cas d’usages justifiant d’un intérêt légitime. En déclarant le cadre
+    juridique dans lequel vous accédez à ces données, vous vous engagez{' '}
+    <a href="/cgu">à respecter nos conditions générales d’utilisation</a>.
+  </p>
+);
+
 const ProtectedSectionWithUseCase: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
@@ -55,11 +64,8 @@ const ProtectedSectionWithUseCase: React.FC<{
   if (!useCase) {
     return (
       <Section title={title} id={id} sources={sources} isProtected={true}>
-        <AskUseCase
-          introContent={useCaseFormContent}
-          useCase={useCase}
-          setUseCase={setUseCase}
-        />
+        {useCaseFormContent || <DefaultIntroContent />}
+        <AskUseCase useCase={useCase} setUseCase={setUseCase} />
       </Section>
     );
   }
@@ -67,6 +73,7 @@ const ProtectedSectionWithUseCase: React.FC<{
   if (!allowedUseCases.includes(useCase)) {
     return (
       <Section title={title} id={id} sources={sources} isProtected={true}>
+        {useCaseFormContent || <DefaultIntroContent />}
         <strong>
           Ces informations ne vous sont pas accessibles dans ce cas d‘usage.
         </strong>

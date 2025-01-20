@@ -17,7 +17,7 @@ const ConformiteSection = ({
     <ProtectedSectionWithUseCase
       session={session}
       uniteLegale={uniteLegale}
-      title="Conformité"
+      title="Attestations de conformité sociale et fiscale"
       id="conformite"
       sources={[
         EAdministration.DGFIP,

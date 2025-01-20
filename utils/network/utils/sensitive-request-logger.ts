@@ -20,6 +20,7 @@ type ISensitiveLogType = {
     query: string;
   };
   user: ISensitiveCaller;
+  useCase?: string;
 };
 
 // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-user.html
@@ -28,7 +29,6 @@ export type ISensitiveCaller = {
   siret: string | null;
   scopes: string[];
   domain: string;
-  useCase?: string;
 };
 
 /**
@@ -40,7 +40,8 @@ export type ISensitiveCaller = {
  */
 export const sensitiveRequestLogger = (
   route: string,
-  user: ISensitiveCaller
+  user: ISensitiveCaller,
+  useCase?: string
 ) => {
   try {
     const url = new URL(route);
@@ -73,6 +74,7 @@ export const sensitiveRequestLogger = (
         query: url.search,
       },
       user,
+      useCase,
     };
 
     // eslint-disable-next-line no-console
