@@ -1,6 +1,6 @@
 import { UseCase } from '#models/user/agent';
 import { hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
+import withSession, { IReqWithSession } from '#utils/session/with-session';
 import { APIRoutesHandlers } from '../routes-handlers';
 import { APIRoutesScopes } from '../routes-scopes';
 import {
@@ -11,11 +11,7 @@ import {
   withIgnoreBot,
 } from '../utils';
 
-async function getRoute(
-  request: Request,
-  context: IContext,
-  session: ISession
-) {
+async function getRoute(request: IReqWithSession, context: IContext) {
   const { slug, route } = await getRouteAndSlug(context);
 
   if (!(route in APIRoutesHandlers)) {
@@ -23,6 +19,7 @@ async function getRoute(
   }
   const handler = APIRoutesHandlers[route];
   const scope = APIRoutesScopes[route];
+  const session = request.session;
   if (!hasRights(session, scope)) {
     throw new APIRouteError(
       'User does not have the required scope for this API route',
@@ -42,4 +39,4 @@ async function getRoute(
   return Response.json(response);
 }
 
-export const GET = withHandleError(withIgnoreBot(getRoute));
+export const GET = withHandleError(withSession(withIgnoreBot(getRoute)));

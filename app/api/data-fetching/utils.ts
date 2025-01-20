@@ -2,18 +2,20 @@ import { Exception } from '#models/exceptions';
 import { UseCase } from '#models/user/agent';
 import { ISession } from '#models/user/session';
 import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { userAgent } from 'next/server';
+import { IReqWithSession } from '#utils/session/with-session';
+import { NextRequest, userAgent } from 'next/server';
 import { APIRoutesPaths } from './routes-paths';
 
 export type IContext = { params: Promise<{ slug: Array<string> }> };
 
-type RouteHandler = (request: Request, context: IContext) => Promise<Response>;
+type RouteHandler = (
+  request: NextRequest,
+  context: IContext
+) => Promise<Response>;
 
 type RouteHandlerWithSession = (
-  request: Request,
-  context: IContext,
-  session: ISession
+  request: IReqWithSession,
+  context: IContext
 ) => Promise<Response>;
 
 /**
@@ -25,7 +27,9 @@ type RouteHandlerWithSession = (
  * @param handler
  * @returns
  */
-export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
+export function withIgnoreBot(
+  handler: RouteHandlerWithSession
+): RouteHandlerWithSession {
   return async function (request, context) {
     const { isBot } = userAgent(request);
     const routeAndSlug = await getRouteAndSlug(context);
@@ -38,7 +42,7 @@ export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
       );
     }
 
-    const session = await getSession();
+    const session = request.session;
     if (!userVisitedAPageRecently(session)) {
       throw new APIRouteError(
         'Antiscrap activated : user tries to scrap',
@@ -47,7 +51,7 @@ export function withIgnoreBot(handler: RouteHandlerWithSession): RouteHandler {
       );
     }
 
-    return handler(request, context, session);
+    return handler(request, context);
   };
 }
 
