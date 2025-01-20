@@ -3,7 +3,7 @@ import { IAgentScope, isAgentScope } from '#models/user/scopes';
 import { logFatalErrorInSentry } from '#utils/sentry';
 
 import { DataStore } from '#clients/data-store';
-import { readFromGrist } from '#utils/integrations/grist';
+import { readFromS3 } from '#utils/integrations/s3';
 
 class SuperAgentsScopes {
   private _superAgentsStore: DataStore<IAgentScope[]>;
@@ -12,7 +12,7 @@ class SuperAgentsScopes {
 
   constructor() {
     this._superAgentsStore = new DataStore<IAgentScope[]>(
-      () => readFromGrist('comptes-agents'),
+      () => readFromS3('comptes-agents'),
       'comptes-super-agents',
       this.mapResponseToAgentScopes,
       this.TTL
