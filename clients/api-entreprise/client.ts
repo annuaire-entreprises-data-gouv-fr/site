@@ -27,9 +27,11 @@ export default async function clientAPIEntreprise<T, U>(
     useCase?: UseCase;
   }
 ) {
+  const url = `${process.env.API_ENTREPRISE_URL}${route}`;
   const useCase = options?.useCase ? options.useCase : 'annuaire-entreprises';
+
   const callerInfos = await sensitiveRequestCallerInfos();
-  sensitiveRequestLogger(route, callerInfos, useCase);
+  sensitiveRequestLogger(url, callerInfos, useCase);
 
   if (!callerInfos.siret) {
     logFatalErrorInSentry(
@@ -45,7 +47,6 @@ export default async function clientAPIEntreprise<T, U>(
     throw new HttpUnauthorizedError('Missing API Entreprise credentials');
   }
 
-  const url = `${process.env.API_ENTREPRISE_URL}${route}`;
   const response = await httpGet<T>(url, {
     headers: {
       Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
