@@ -15,10 +15,6 @@ const gristTables = {
     docId: 'hp8PLhMGY9sNWuzGDGe6yi',
     tableId: 'NPS_Feedbacks',
   },
-  'comptes-agents': {
-    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
-    tableId: 'Comptes_agents',
-  },
   'hide-personal-data': {
     docId: 'hp8PLhMGY9sNWuzGDGe6yi',
     tableId: 'Hide_personal_data_requests',
