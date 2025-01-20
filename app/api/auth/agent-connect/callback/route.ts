@@ -2,7 +2,7 @@ import { proConnectAuthenticate } from '#clients/authentication/pro-connect/stra
 import { HttpForbiddenError } from '#clients/exceptions';
 import { isServicePublic } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import { getAgent, IAgentInfo } from '#models/user/agent';
+import { createAgent, IAgentInfo } from '#models/user/agent';
 import { extractSirenFromSiret } from '#utils/helpers';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
@@ -19,7 +19,7 @@ import {
 export const GET = withSession(async function callbackRoute(req) {
   try {
     const userInfo = await proConnectAuthenticate(req);
-    const agent = await getAgent(userInfo);
+    const agent = await createAgent(userInfo);
 
     await verifyAgentHabilitation(agent);
 
