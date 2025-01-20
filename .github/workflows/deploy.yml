@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy-website-staging:
-    name: Deploy website to staging
+    name: Deploy - staging
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:
