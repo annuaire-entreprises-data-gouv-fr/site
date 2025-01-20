@@ -11,7 +11,7 @@ import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { APIRoutesHandlers } from 'app/api/data-fetching/routes-handlers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { APIRoutesScopes } from 'app/api/data-fetching/routes-scopes';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { UnwrapPromise } from 'types';
 
 export type RouteResponse<T> = T extends APIRoutesPaths
@@ -56,6 +56,35 @@ export function useAPIRouteData<T extends APIRoutesPaths>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug, route, session]);
   return response;
+}
+
+export function useManualAPIRouteData<T extends APIRoutesPaths>(
+  route: T,
+  slug: string,
+  session: ISession | null
+) {
+  const [response, setResponse] = useState<
+    IDataFetchingState | RouteResponse<T>
+  >(IDataFetchingState.LOADING);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchData = useCallback(
+    async (options: Options<T>) => {
+      setIsLoading(true);
+      const result = await fetchAPIRoute<T>(route, slug, session, options);
+      if (result) {
+        setResponse(result);
+      }
+      setIsLoading(false);
+    },
+    [route, slug, session]
+  );
+
+  return {
+    data: response,
+    fetchData,
+    isLoading,
+  };
 }
 
 async function fetchAPIRoute<T extends APIRoutesPaths>(
