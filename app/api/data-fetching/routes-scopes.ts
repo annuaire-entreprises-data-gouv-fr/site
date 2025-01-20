@@ -2,6 +2,14 @@ import { ApplicationRights } from '#models/user/rights';
 import { APIRoutesPaths } from './routes-paths';
 
 export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
+  // full open data & RNE
+  [APIRoutesPaths.RneDirigeants]: ApplicationRights.opendata,
+  [APIRoutesPaths.Observations]: ApplicationRights.opendata,
+  [APIRoutesPaths.Association]: ApplicationRights.opendata,
+  [APIRoutesPaths.VerifyTva]: ApplicationRights.opendata,
+  [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
+  // documents RNE - Open data but restricted to agents only
+  [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
   // person
   [APIRoutesPaths.EspaceAgentBeneficiaires]: ApplicationRights.beneficiaires,
   [APIRoutesPaths.EspaceAgentDirigeantsProtected]:
@@ -16,13 +24,6 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.EspaceAgentQualibat]: ApplicationRights.protectedCertificats,
   [APIRoutesPaths.EspaceAgentQualifelec]:
     ApplicationRights.protectedCertificats,
-  // pseudo open data & RNE
-  [APIRoutesPaths.RneDirigeants]: ApplicationRights.opendata,
-  [APIRoutesPaths.Observations]: ApplicationRights.opendata,
-  [APIRoutesPaths.Association]: ApplicationRights.opendata,
-  [APIRoutesPaths.VerifyTva]: ApplicationRights.opendata,
-  [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
-  [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
   // BTP
   [APIRoutesPaths.EspaceAgentTravauxPublics]: ApplicationRights.travauxPublics,
   // fiscal & social
