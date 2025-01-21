@@ -2,9 +2,11 @@ import { MultiChoice } from '#components-ui/multi-choice';
 import { UseCase } from '#models/user/agent';
 
 export function AskUseCase({
+  idPrefix,
   useCase,
   setUseCase,
 }: {
+  idPrefix: string;
   useCase?: UseCase;
   setUseCase: (useCase: UseCase) => void;
 }) {
@@ -16,7 +18,7 @@ export function AskUseCase({
         </label>
         <br />
         <MultiChoice
-          idPrefix="user-type"
+          idPrefix={`${idPrefix}-use-case`}
           values={[
             {
               label: 'Marchés publics',
