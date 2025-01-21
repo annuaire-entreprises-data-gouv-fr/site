@@ -45,21 +45,18 @@ export async function readFromS3(
 
         // Store all of data chunks returned from the response data stream
         // into an array then use Array#join() to use the returned contents as a String
-        //@ts-ignore
-        let responseDataChunks = [];
+        const responseDataChunks: Buffer[] = [];
+        const stream = response.Body as Readable;
 
         // Handle an error while streaming the response body
-        //@ts-ignore
-        response.Body.once('error', (err) => reject(err));
+        stream.once('error', (err) => reject(err));
 
         // Attach a 'data' listener to add the chunks of data to our array
         // Each chunk is a Buffer instance
-        //@ts-ignore
-        response.Body.on('data', (chunk) => responseDataChunks.push(chunk));
+        stream.on('data', (chunk) => responseDataChunks.push(chunk));
 
         // Once the stream has no more data, join the chunks into a string and return the string
-        //@ts-ignore
-        response.Body.once('end', () => resolve(responseDataChunks.join('')));
+        stream.once('end', () => resolve(responseDataChunks.join('')));
       } catch (err: any) {
         const statusCode = err['$metadata']?.httpStatusCode;
         if (statusCode === 404) {
