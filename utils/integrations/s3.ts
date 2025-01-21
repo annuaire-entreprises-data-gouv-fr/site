@@ -13,13 +13,13 @@ const bucketsLists = {
     config: {
       endpoint: 'https://s3.eu-west-par.io.cloud.ovh.net/',
       credentials: {
-        accessKeyId: process.env.OVH_S3_AGENT_ACCESS_KEY || '',
-        secretAccessKey: process.env.OVH_S3_AGENT_SECRET || '',
+        accessKeyId: process.env.OVH_S3_ACCESS_KEY || '',
+        secretAccessKey: process.env.OVH_S3_SECRET || '',
       },
       region: 'eu-west-par',
     },
     params: {
-      Bucket: process.env.OVH_S3_AGENT_BUCKET || '',
+      Bucket: process.env.OVH_S3_BUCKET || '',
       Key: 'comptes_agents.json',
     },
   },
