@@ -6,6 +6,7 @@ import {
 import { Exception } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { Readable } from 'stream';
 
 const bucketsLists = {
   'comptes-agents': {
