@@ -42,6 +42,7 @@ import { rechercheEntrepriseIdccMetadataHandler } from './handlers/recherche-ent
 import { rechercheEntrepriseLastModifiedHandler } from './handlers/recherche-entreprises-last-modified';
 import { rgeHandler } from './handlers/rge';
 import { rneDefaultHandler, rneFallbackHandler } from './handlers/rne';
+import { s3Handler } from './handlers/s3';
 import { tvaHandler } from './handlers/tva';
 import { upDownIoHandler } from './handlers/up-down-io';
 
@@ -170,5 +171,9 @@ export const routesHandlers = [
       '*'
     )}`,
     mandatairesRcsHandler
+  ),
+  http.get(
+    `https://${process.env.OVH_S3_BUCKET}.s3.eu-west-par.io.cloud.ovh.net/comptes_agents.json`,
+    s3Handler
   ),
 ];

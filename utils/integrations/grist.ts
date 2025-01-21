@@ -15,21 +15,9 @@ const gristTables = {
     docId: 'hp8PLhMGY9sNWuzGDGe6yi',
     tableId: 'NPS_Feedbacks',
   },
-  'comptes-agents': {
-    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
-    tableId: 'Comptes_agents',
-  },
   'hide-personal-data': {
     docId: 'hp8PLhMGY9sNWuzGDGe6yi',
     tableId: 'Hide_personal_data_requests',
-  },
-  'agents-beta-testeurs': {
-    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
-    tableId: 'Agents_beta_testeurs',
-  },
-  'logs-connexion': {
-    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
-    tableId: 'Logs_connexion',
   },
 } as const;
 
