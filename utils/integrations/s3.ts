@@ -12,13 +12,13 @@ const bucketsLists = {
     config: {
       endpoint: 'https://s3.eu-west-par.io.cloud.ovh.net/',
       credentials: {
-        accessKeyId: process.env.OVH_S3_ACCESS_KEY || '',
-        secretAccessKey: process.env.OVH_S3_SECRET || '',
+        accessKeyId: process.env.OVH_S3_AGENT_ACCESS_KEY || '',
+        secretAccessKey: process.env.OVH_S3_AGENT_SECRET || '',
       },
       region: 'eu-west-par',
     },
     params: {
-      Bucket: 'annuaire-entreprises-droits-agents',
+      Bucket: process.env.OVH_S3_AGENT_BUCKET || '',
       Key: 'comptes_agents.json',
     },
   },
@@ -30,8 +30,13 @@ export async function readFromS3(
   // a client can be shared by different commands.
   const { config, params } = bucketsLists[bucketKey];
 
-  if (!config.credentials.accessKeyId || !config.credentials.secretAccessKey) {
-    throw new Error('Missing S3 credentials');
+  if (
+    !config.credentials.accessKeyId ||
+    !config.credentials.secretAccessKey ||
+    !params.Bucket ||
+    !params.Key
+  ) {
+    throw new Error('Missing S3 credentials or incomplete params');
   }
 
   const client = new S3Client(config);

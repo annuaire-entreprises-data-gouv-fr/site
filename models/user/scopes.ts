@@ -23,19 +23,6 @@ export const getAgentScopes = async (
   userType: string;
   hasHabilitation: boolean;
 }> => {
-  const isTestAccount =
-    userEmail === 'user@yopmail.com' &&
-    (process.env.NODE_ENV !== 'production' ||
-      process.env.NEXT_PUBLIC_END2END_MOCKING === 'enabled');
-
-  if (isTestAccount) {
-    return {
-      scopes: [...allAgentScopes],
-      userType: 'Super-agent connecté',
-      hasHabilitation: true,
-    };
-  }
-
   const additionnalScopes = await superAgents.getScopeForAgent(userEmail);
 
   return {
