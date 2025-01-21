@@ -29,7 +29,7 @@ class SuperAgentsScopes {
     response: IAgentRecord[]
   ): { [key: string]: IAgentScope[] } =>
     response
-      .filter((r: any) => r.actif === true)
+      .filter((r) => r.actif === true)
       .reduce((acc: { [key: string]: IAgentScope[] }, agent) => {
         acc[agent.email] = this.convertScopesToAgentScopes(agent.scopes);
         return acc;
