@@ -69,7 +69,7 @@ export default function DirigeantsSection({ uniteLegale, session }: IProps) {
                 </p>
                 <p>
                   <strong>NB :</strong> si vous êtes agent public, vous pouvez
-                  accéder à l’etat civil complet (lieu et date de naissance
+                  accéder à l’état civil complet (lieu et date de naissance
                   complète) en vous connectant à{' '}
                   <a href="/lp/agent-public">l’espace agent public</a>.
                 </p>
