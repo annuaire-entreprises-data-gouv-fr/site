@@ -65,7 +65,7 @@ const ProtectedSectionWithUseCase: React.FC<{
     return (
       <Section title={title} id={id} sources={sources} isProtected={true}>
         {useCaseFormContent || <DefaultIntroContent />}
-        <AskUseCase useCase={useCase} setUseCase={setUseCase} />
+        <AskUseCase idPrefix={id} useCase={useCase} setUseCase={setUseCase} />
       </Section>
     );
   }

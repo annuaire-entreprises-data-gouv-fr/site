@@ -3,7 +3,7 @@ import { IAgentScope, isAgentScope } from '#models/user/scopes';
 import { logFatalErrorInSentry } from '#utils/sentry';
 
 import { DataStore } from '#clients/data-store';
-import { readFromGrist } from '#utils/integrations/grist';
+import { clientSuperAgentList, IAgentRecord } from './client-super-agent-list';
 
 class SuperAgentsScopes {
   private _superAgentsStore: DataStore<IAgentScope[]>;
@@ -12,7 +12,7 @@ class SuperAgentsScopes {
 
   constructor() {
     this._superAgentsStore = new DataStore<IAgentScope[]>(
-      () => readFromGrist('comptes-agents'),
+      () => clientSuperAgentList(),
       'comptes-super-agents',
       this.mapResponseToAgentScopes,
       this.TTL
@@ -25,10 +25,12 @@ class SuperAgentsScopes {
       .filter((s: string) => isAgentScope(s)) as IAgentScope[];
   };
 
-  mapResponseToAgentScopes = (response: any) =>
+  mapResponseToAgentScopes = (
+    response: IAgentRecord[]
+  ): { [key: string]: IAgentScope[] } =>
     response
-      .filter((r: any) => r.actif === true)
-      .reduce((acc: any, agent: any) => {
+      .filter((r) => r.actif === true)
+      .reduce((acc: { [key: string]: IAgentScope[] }, agent) => {
         acc[agent.email] = this.convertScopesToAgentScopes(agent.scopes);
         return acc;
       }, {});
