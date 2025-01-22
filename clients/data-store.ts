@@ -50,4 +50,16 @@ export class DataStore<T> {
       return null;
     }
   };
+
+  getAll = async () => {
+    if (!this.data) {
+      await this.fetchAndStoreData();
+    }
+
+    if (!this.data || Object.values(this.data).length === 0) {
+      throw new HttpServerError(`Empty data list : ${this.storeName}`);
+    }
+
+    return this.data;
+  };
 }

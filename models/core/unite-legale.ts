@@ -81,7 +81,10 @@ class UniteLegaleBuilder {
     // determine TVA
     uniteLegale.tva = getTvaUniteLegale(uniteLegale);
 
-    if (isProtectedSiren(uniteLegale.siren) && estDiffusible(uniteLegale)) {
+    if (
+      (await isProtectedSiren(uniteLegale.siren)) &&
+      estDiffusible(uniteLegale)
+    ) {
       uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
 
       uniteLegale.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;

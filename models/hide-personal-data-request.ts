@@ -16,7 +16,7 @@ export async function fillHidePersonalDataRequest(
   sub: string
 ): Promise<IHidePersonalDataRequest> {
   const validSiren = verifySiren(siren);
-  if (isProtectedSiren(validSiren)) {
+  if (await isProtectedSiren(validSiren)) {
     return 'ACCEPTED';
   }
   const requests = await readFromGrist('hide-personal-data');

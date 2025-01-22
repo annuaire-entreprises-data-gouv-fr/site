@@ -114,13 +114,15 @@ export const searchWithoutProtectedSiren = async (
 ): Promise<ISearchResults> => {
   const results = await search(searchTerm, page, searchFilterParams);
 
-  results.results = results.results.filter((result) => {
-    if (isProtectedSiren(result.siren)) {
-      results.resultCount -= 1;
-      return false;
-    }
-    return true;
-  });
+  results.results = await Promise.all(
+    results.results.filter(async (result) => {
+      if (await isProtectedSiren(result.siren)) {
+        results.resultCount -= 1;
+        return false;
+      }
+      return true;
+    })
+  );
 
   return results;
 };
