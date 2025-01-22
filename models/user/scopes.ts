@@ -10,6 +10,13 @@ export const isAgentScope = (str: string): str is IAgentScope => {
   return false;
 };
 
+export const defaultAgentScopes: IAgentScope[] = [
+  'agent',
+  'nonDiffusible',
+  'rne',
+  'pseudo_opendata',
+];
+
 /**
  * Get Agent rights written as scopes. There is no 1-to-1 match between UI and scopes.
  * This is a model persepective
@@ -28,10 +35,7 @@ export const getAgentScopes = async (
   return {
     scopes: [
       // default agent scopes
-      'agent',
-      'nonDiffusible',
-      'rne',
-      'pseudo_opendata',
+      ...defaultAgentScopes,
       // additionnal scopes from super agent list
       ...additionnalScopes,
     ],
