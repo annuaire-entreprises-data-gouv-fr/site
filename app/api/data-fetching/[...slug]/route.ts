@@ -2,6 +2,7 @@ import { getVerifiedAgent, UseCase } from '#models/user/agent';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { setAgentSession } from '#utils/session';
 import withSession, { IReqWithSession } from '#utils/session/with-session';
+import { userAgent } from 'next/server';
 import { APIRoutesHandlers } from '../routes-handlers';
 import { APIRoutesScopes } from '../routes-scopes';
 import {
@@ -41,10 +42,12 @@ async function getRoute(request: IReqWithSession, context: IContext) {
   }
 
   const searchParams = Object.fromEntries(new URL(request.url).searchParams);
+  const { isBot } = userAgent(request);
 
   const validatedParams = {
     isEI: searchParams.isEI === 'true',
     useCase: searchParams.useCase as UseCase,
+    isBot,
   };
 
   const response = await handler(slug, validatedParams);
