@@ -11,8 +11,13 @@ import logErrorInSentry from '#utils/sentry';
 import { tvaNumber } from './utils';
 
 export const buildAndVerifyTVA = async (
-  slug: string
+  slug: string,
+  params: { isBot: boolean }
 ): Promise<{ tva: string | null } | IAPINotRespondingError> => {
+  if (params.isBot) {
+    return APINotRespondingFactory(EAdministration.VIES, 403);
+  }
+
   const siren = verifySiren(slug);
   const tvaNumberFromSiren = verifyTVANumber(tvaNumber(siren));
 
