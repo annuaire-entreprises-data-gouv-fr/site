@@ -11,7 +11,7 @@ import { IAgentScope, parseAgentScope } from '#models/user/agent-scopes/parse';
 class SuperAgentsList {
   private _superAgentsStore: DataStore<IAgentScope[]>;
   // time before agent list update
-  private TTL = 300000; //1000 * 60 * 5
+  private TTL = 300000; //5min
 
   constructor() {
     this._superAgentsStore = new DataStore<IAgentScope[]>(

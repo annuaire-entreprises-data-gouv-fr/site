@@ -8,11 +8,18 @@ import { logWarningInSentry } from '#utils/sentry';
 export class DataStore<T> {
   private data: { [key: string]: T } | null;
 
+  /**
+   * Default TTL is 24h, set 0 to deactivate refresh
+   * @param getData
+   * @param storeName
+   * @param mapToDomainObject
+   * @param TTL
+   */
   constructor(
     private getData: () => Promise<any>,
     private storeName: string,
     private mapToDomainObject: (result: any) => { [key: string]: T },
-    private TTL?: number
+    private TTL = 86400000
   ) {
     this.data = null;
   }
@@ -49,5 +56,17 @@ export class DataStore<T> {
     } else {
       return null;
     }
+  };
+
+  getKeys = async () => {
+    if (!this.data) {
+      await this.fetchAndStoreData();
+    }
+
+    if (!this.data || Object.values(this.data).length === 0) {
+      throw new HttpServerError(`Empty data list : ${this.storeName}`);
+    }
+
+    return Object.keys(this.data);
   };
 }
