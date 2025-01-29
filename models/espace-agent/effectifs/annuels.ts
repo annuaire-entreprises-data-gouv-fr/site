@@ -18,12 +18,11 @@ export const getEffectifsAnnuelsProtected = async (
 
   const effectifsAnnuelsYear =
     currentMonth === 0 ? currentYear - 2 : currentYear - 1;
-  try {
-    return clientApiEntrepriseEffectifsAnnuels(siren, effectifsAnnuelsYear);
-  } catch (e) {
-    return handleApiEntrepriseError(e, {
-      siren,
-      apiResource: 'EffectifsAnnuelsProtected',
-    });
-  }
+  return clientApiEntrepriseEffectifsAnnuels(siren, effectifsAnnuelsYear).catch(
+    (error) =>
+      handleApiEntrepriseError(error, {
+        siren,
+        apiResource: 'EffectifsAnnuelsProtected',
+      })
+  );
 };
