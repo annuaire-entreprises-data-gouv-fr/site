@@ -8,6 +8,7 @@ import {
   NotEnoughParamsException,
 } from '#models/core/types';
 import { Exception } from '#models/exceptions';
+import { isProtectedSiren } from '#models/protected-siren';
 import { IDirigeants } from '#models/rne/types';
 import SearchFilterParams from '#models/search/search-filter-params';
 import {
@@ -15,7 +16,6 @@ import {
   removeSpecialChars,
 } from '#utils/helpers';
 import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
-import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
 
 export interface ISearchResult extends IUniteLegale {
@@ -113,15 +113,17 @@ export const searchWithoutProtectedSiren = async (
   searchFilterParams: SearchFilterParams
 ): Promise<ISearchResults> => {
   const results = await search(searchTerm, page, searchFilterParams);
+  const newResults = [];
 
-  results.results = results.results.filter((result) => {
-    if (isProtectedSiren(result.siren)) {
+  for (let i = 0; i < results.results.length; i++) {
+    const currentResult = results.results[i];
+    if (await isProtectedSiren(currentResult.siren)) {
       results.resultCount -= 1;
-      return false;
+    } else {
+      newResults.push(currentResult);
     }
-    return true;
-  });
-
+  }
+  results.results = newResults;
   return results;
 };
 

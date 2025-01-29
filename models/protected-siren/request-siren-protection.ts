@@ -1,6 +1,6 @@
+import { logInGrist, readFromGrist } from '#clients/external-tooling/grist';
+import { isProtectedSiren } from '#models/protected-siren';
 import { verifySiren } from '#utils/helpers';
-import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
-import { logInGrist, readFromGrist } from '#utils/integrations/grist';
 
 export type IHidePersonalDataRequest =
   | 'PENDING'
@@ -8,7 +8,7 @@ export type IHidePersonalDataRequest =
   | 'ACCEPTED'
   | 'DENIED';
 
-export async function fillHidePersonalDataRequest(
+export async function requestSirenProtection(
   siren: string,
   firstName: string,
   familyName: string,
@@ -16,7 +16,7 @@ export async function fillHidePersonalDataRequest(
   sub: string
 ): Promise<IHidePersonalDataRequest> {
   const validSiren = verifySiren(siren);
-  if (isProtectedSiren(validSiren)) {
+  if (await isProtectedSiren(validSiren)) {
     return 'ACCEPTED';
   }
   const requests = await readFromGrist('hide-personal-data');

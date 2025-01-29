@@ -3,8 +3,8 @@ import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { Exception } from '#models/exceptions';
 import {
   IHidePersonalDataRequest,
-  fillHidePersonalDataRequest,
-} from '#models/hide-personal-data-request';
+  requestSirenProtection,
+} from '#models/protected-siren/request-siren-protection';
 import {
   hasSirenFormat,
   isEntrepreneurIndividuelFromNatureJuridique,
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const hidePersonalDataRequest = await fillHidePersonalDataRequest(
+    const hidePersonalDataRequest = await requestSirenProtection(
       siren,
       franceConnect.firstName,
       franceConnect.familyName,

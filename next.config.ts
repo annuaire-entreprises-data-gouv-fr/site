@@ -38,6 +38,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     return redirects;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/protected-siren.txt',
+        destination: '/api/protected-siren',
+      },
+    ];
+  },
   async headers() {
     return [
       {

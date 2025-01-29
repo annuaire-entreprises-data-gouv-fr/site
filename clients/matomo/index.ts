@@ -1,7 +1,7 @@
+import { readFromGrist } from '#clients/external-tooling/grist';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { FetchRessourceException, InternalError } from '#models/exceptions';
-import { readFromGrist } from '#utils/integrations/grist';
 import { httpGet } from '#utils/network';
 
 export type IMatomoStats = {
