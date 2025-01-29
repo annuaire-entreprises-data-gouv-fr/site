@@ -177,5 +177,5 @@ export const routesHandlers = [
     `https://${process.env.OVH_S3_BUCKET}.s3.eu-west-par.io.cloud.ovh.net/comptes_agents.json`,
     s3Handler
   ),
-  http.get(routes.tooling.grist, gristHandler),
+  http.get(routes.tooling.grist + '*', gristHandler),
 ];
