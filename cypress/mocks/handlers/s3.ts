@@ -1,4 +1,4 @@
-import { allAgentScopes } from '#models/user/all-agent-scopes';
+import { allAgentScopes } from '#models/user/agent-scopes/all-agent-scopes';
 import { HttpResponse, HttpResponseResolver } from 'msw';
 
 export const s3Handler: HttpResponseResolver = ({ request }) => {
