@@ -1,6 +1,6 @@
+import { logInGrist } from '#clients/external-tooling/grist';
+import logInTchap from '#clients/external-tooling/tchap';
 import { Exception } from '#models/exceptions';
-import { logInGrist } from '#utils/integrations/grist';
-import logInTchap from '#utils/integrations/tchap';
 import logErrorInSentry from '#utils/sentry';
 import { redirect } from 'next/navigation';
 

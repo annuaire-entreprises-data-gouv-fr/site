@@ -1,6 +1,6 @@
+import { logInGrist, readFromGrist } from '#clients/external-tooling/grist';
 import { isProtectedSiren } from '#models/protected-siren';
 import { verifySiren } from '#utils/helpers';
-import { logInGrist, readFromGrist } from '#utils/integrations/grist';
 
 export type IHidePersonalDataRequest =
   | 'PENDING'

@@ -31,6 +31,7 @@ import { educationNationaleHandler } from './handlers/education-nationale';
 import { egaproHandler, egaproRepresentationHandler } from './handlers/egapro';
 import { entrepreneurSpectaclesHandler } from './handlers/entrepreneur-spectacles';
 import { eoriHandler } from './handlers/eori';
+import { gristHandler } from './handlers/grist';
 import { igHandler } from './handlers/ig';
 import { journalOfficielAssociationsHandler } from './handlers/journal-officiel-associations';
 import { mandatairesRcsHandler } from './handlers/mandataires-rcs';
@@ -176,4 +177,5 @@ export const routesHandlers = [
     `https://${process.env.OVH_S3_BUCKET}.s3.eu-west-par.io.cloud.ovh.net/comptes_agents.json`,
     s3Handler
   ),
+  http.get(routes.tooling.grist, gristHandler),
 ];
