@@ -1,9 +1,10 @@
-import { FetchRessourceException, InternalError } from '#models/exceptions';
-import { IAgentScope, isAgentScope } from '#models/user/scopes';
-import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
+import { FetchRessourceException } from '#models/exceptions';
+import { IAgentScope } from '#models/user/scopes';
+import { logFatalErrorInSentry } from '#utils/sentry';
 
 import { DataStore } from '#clients/data-store';
 import { clientSuperAgentList, IAgentRecord } from './client-super-agent-list';
+import { mapToAgentScopes } from './map-to-agent-scopes';
 
 class SuperAgentsScopes {
   private _superAgentsStore: DataStore<IAgentScope[]>;
@@ -19,38 +20,13 @@ class SuperAgentsScopes {
     );
   }
 
-  convertScopesToAgentScopes = (rawScope: string): IAgentScope[] => {
-    const scopes = (rawScope || '').split(' ');
-    const inValidScopes = [];
-    const validScopes = [] as IAgentScope[];
-
-    for (let i = 0; i < scopes.length; i++) {
-      const scope = scopes[i];
-      if (isAgentScope(scope)) {
-        validScopes.push(scope);
-      } else {
-        inValidScopes.push(scope);
-      }
-    }
-
-    if (inValidScopes.length > 0) {
-      logErrorInSentry(
-        new InternalError({
-          message: `Unknown agent scopes : ${inValidScopes.join(',')}`,
-        })
-      );
-    }
-
-    return validScopes;
-  };
-
   mapResponseToAgentScopes = (
     response: IAgentRecord[]
   ): { [key: string]: IAgentScope[] } =>
     response
       .filter((r) => r.actif === true)
       .reduce((acc: { [key: string]: IAgentScope[] }, agent) => {
-        acc[agent.email] = this.convertScopesToAgentScopes(agent.scopes);
+        acc[agent.email] = mapToAgentScopes(agent.scopes);
         return acc;
       }, {});
 
