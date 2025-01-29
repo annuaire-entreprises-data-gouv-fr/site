@@ -20,8 +20,7 @@
     "test:unit": "jest --runInBand --testPathIgnorePatterns='clients|cypress'",
     "test:api-clients": "jest clients --silent",
     "test:api-clients:update-snapshots": "jest clients --silent -u",
-    "lint": "next lint",
-    "script:fetch-protected-siren": "ts-node ./scripts/fetch-protected-siren.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.731.1",

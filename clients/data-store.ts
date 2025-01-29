@@ -51,7 +51,7 @@ export class DataStore<T> {
     }
   };
 
-  getAll = async () => {
+  getKeys = async () => {
     if (!this.data) {
       await this.fetchAndStoreData();
     }
@@ -60,6 +60,6 @@ export class DataStore<T> {
       throw new HttpServerError(`Empty data list : ${this.storeName}`);
     }
 
-    return this.data;
+    return Object.keys(this.data);
   };
 }

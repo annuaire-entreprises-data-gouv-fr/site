@@ -1,5 +1,5 @@
+import { isProtectedSiren } from '#models/protected-siren';
 import { verifySiren } from '#utils/helpers';
-import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logInGrist, readFromGrist } from '#utils/integrations/grist';
 
 export type IHidePersonalDataRequest =
@@ -8,7 +8,7 @@ export type IHidePersonalDataRequest =
   | 'ACCEPTED'
   | 'DENIED';
 
-export async function fillHidePersonalDataRequest(
+export async function requestSirenProtection(
   siren: string,
   firstName: string,
   familyName: string,

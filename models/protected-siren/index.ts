@@ -1,6 +1,12 @@
 import { DataStore } from '#clients/data-store';
+import { InternalError } from '#models/exceptions';
 import { readFromGrist } from '#utils/integrations/grist';
-import { extractSirenFromSiret, Siren, Siret } from './siren-and-siret';
+import logErrorInSentry from '#utils/sentry';
+import {
+  extractSirenFromSiret,
+  Siren,
+  Siret,
+} from '../../utils/helpers/siren-and-siret';
 
 /**
  * List of siren whose owner asked to be removed from website
@@ -9,7 +15,7 @@ import { extractSirenFromSiret, Siren, Siret } from './siren-and-siret';
 class ProtectedSirenList {
   public _list: DataStore<boolean>;
   // time before protected siren list update
-  private TTL = 300000; //1000 * 60 * 5
+  private TTL = 3600000; //1000 * 60 * 60
 
   constructor() {
     this._list = new DataStore<boolean>(
@@ -20,24 +26,24 @@ class ProtectedSirenList {
     );
   }
 
-  // TODO To Implement
-  checkAnomalies = () => {
-    // const newSirenToOldRatio = protectedSiren.length / oldProtectedSiren.length;
-    // if (newSirenToOldRatio < 0.75) {
-    //   throw new ProtectedSirenTooManySuppressionsError(
-    //     `New list is only ${newSirenToOldRatio}% of previous list. Should not be less than 75%`
-    //   );
-    // }
-  };
-
-  mapResponseToProtectedSirenList = (response: { siren: string }[]) =>
-    response
+  mapResponseToProtectedSirenList = (response: { siren: string }[]) => {
+    const sirenList = response
       .map((record) => record.siren)
       .filter(Boolean)
       .reduce((acc: { [key: string]: boolean }, protectedSiren) => {
         acc[protectedSiren] = true;
         return acc;
       }, {});
+
+    if (Object.keys(sirenList).length < 4000) {
+      logErrorInSentry(
+        new InternalError({
+          message: 'ProtectedSirenList is abnormally low',
+        })
+      );
+    }
+    return sirenList;
+  };
 }
 
 const protectedSiren = new ProtectedSirenList();
@@ -50,4 +56,4 @@ export const isProtectedSiret = async (siret: Siret) => {
   return protectedSiren._list.get(siren);
 };
 
-export const getProtectedSirenList = async () => protectedSiren._list.getAll();
+export const getProtectedSirenList = async () => protectedSiren._list.getKeys();

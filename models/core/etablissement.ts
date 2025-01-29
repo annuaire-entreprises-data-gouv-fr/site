@@ -7,13 +7,13 @@ import { clientEtablissementRechercheEntreprise } from '#clients/recherche-entre
 import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getGeoLoc } from '#models/geo-loc';
+import { isProtectedSiren } from '#models/protected-siren';
 import {
   Siret,
   extractNicFromSiret,
   extractSirenFromSiret,
   verifySiret,
 } from '#utils/helpers';
-import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import logErrorInSentry, {
   logFatalErrorInSentry,
   logWarningInSentry,
