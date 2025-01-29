@@ -1,6 +1,6 @@
-import { FetchRessourceException } from '#models/exceptions';
+import { FetchRessourceException, InternalError } from '#models/exceptions';
 import { IAgentScope, isAgentScope } from '#models/user/scopes';
-import { logFatalErrorInSentry } from '#utils/sentry';
+import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
 
 import { DataStore } from '#clients/data-store';
 import { clientSuperAgentList, IAgentRecord } from './client-super-agent-list';
@@ -19,10 +19,29 @@ class SuperAgentsScopes {
     );
   }
 
-  convertScopesToAgentScopes = (rawScope: string) => {
-    return (rawScope || '')
-      .split(' ')
-      .filter((s: string) => isAgentScope(s)) as IAgentScope[];
+  convertScopesToAgentScopes = (rawScope: string): IAgentScope[] => {
+    const scopes = (rawScope || '').split(' ');
+    const inValidScopes = [];
+    const validScopes = [] as IAgentScope[];
+
+    for (let i = 0; i < scopes.length; i++) {
+      const scope = scopes[i];
+      if (isAgentScope(scope)) {
+        validScopes.push(scope);
+      } else {
+        inValidScopes.push(scope);
+      }
+    }
+
+    if (inValidScopes.length > 0) {
+      logErrorInSentry(
+        new InternalError({
+          message: `Unknown agent scopes : ${inValidScopes.join(',')}`,
+        })
+      );
+    }
+
+    return validScopes;
   };
 
   mapResponseToAgentScopes = (
