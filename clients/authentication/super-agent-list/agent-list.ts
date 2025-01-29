@@ -1,12 +1,14 @@
-import { FetchRessourceException } from '#models/exceptions';
-import { IAgentScope } from '#models/user/scopes';
-import { logFatalErrorInSentry } from '#utils/sentry';
+import { FetchRessourceException, InternalError } from '#models/exceptions';
+import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
 
+import {
+  clientSuperAgentList,
+  IAgentRecord,
+} from '#clients/authentication/super-agent-list';
 import { DataStore } from '#clients/data-store';
-import { clientSuperAgentList, IAgentRecord } from './client-super-agent-list';
-import { mapToAgentScopes } from './map-to-agent-scopes';
+import { IAgentScope, parseAgentScope } from '#models/user/agent-scopes/parse';
 
-class SuperAgentsScopes {
+class SuperAgentsList {
   private _superAgentsStore: DataStore<IAgentScope[]>;
   // time before agent list update
   private TTL = 300000; //1000 * 60 * 5
@@ -26,7 +28,17 @@ class SuperAgentsScopes {
     response
       .filter((r) => r.actif === true)
       .reduce((acc: { [key: string]: IAgentScope[] }, agent) => {
-        acc[agent.email] = mapToAgentScopes(agent.scopes);
+        const { inValidScopes, validScopes } = parseAgentScope(agent.scopes);
+
+        if (inValidScopes.length > 0) {
+          logErrorInSentry(
+            new InternalError({
+              message: `Unknown agent scopes : ${inValidScopes.join(',')}`,
+            })
+          );
+        }
+
+        acc[agent.email] = validScopes;
         return acc;
       }, {});
 
@@ -45,4 +57,4 @@ class SuperAgentsScopes {
   };
 }
 
-export const superAgents = new SuperAgentsScopes();
+export const superAgentsList = new SuperAgentsList();
