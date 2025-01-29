@@ -3,7 +3,7 @@ import { allAgentScopes } from './all-agent-scopes';
 export type IAgentScope = (typeof allAgentScopes)[number];
 
 export const isAgentScope = (str: string): str is IAgentScope => {
-  if (allAgentScopes.indexOf(str as IAgentScope) > 0) {
+  if (allAgentScopes.indexOf(str as IAgentScope) > -1) {
     return true;
   }
   return false;
