@@ -8,7 +8,7 @@ import { clientSuperAgentList, IAgentRecord } from './client-super-agent-list';
 class SuperAgentsScopes {
   private _superAgentsStore: DataStore<IAgentScope[]>;
   // time before agent list update
-  private TTL = 300000; //1000 * 60 * 5
+  private TTL = 300000; //5min
 
   constructor() {
     this._superAgentsStore = new DataStore<IAgentScope[]>(
