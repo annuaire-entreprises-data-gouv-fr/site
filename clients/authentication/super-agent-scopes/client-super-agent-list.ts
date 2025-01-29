@@ -1,5 +1,5 @@
+import { readFromS3 } from '#clients/external-tooling/s3';
 import { Information } from '#models/exceptions';
-import { readFromS3 } from '#utils/integrations/s3';
 import { logInfoInSentry } from '#utils/sentry';
 
 export type IAgentRecord = {
