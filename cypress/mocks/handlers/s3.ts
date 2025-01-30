@@ -1,16 +1,6 @@
-import { allAgentScopes } from '#models/user/agent-scopes/all-agent-scopes';
+import { comptesAgents } from '#cypress/fixtures/comptes-agents';
 import { HttpResponse, HttpResponseResolver } from 'msw';
 
 export const s3Handler: HttpResponseResolver = ({ request }) => {
-  return HttpResponse.json([
-    {
-      email: 'user@yopmail.com',
-      scopes: allAgentScopes.join(' '),
-      actif: true,
-      'Date de création': '',
-      'Instructeur/rice': 'Xavier',
-      usage: 'Stack technique',
-      siret: '13002526500013',
-    },
-  ]);
+  return HttpResponse.json(comptesAgents);
 };
