@@ -5,8 +5,8 @@
 // ***********************************************
 //
 //
-import { allAgentScopes } from '#models/user/all-agent-scopes';
-import { IAgentScope } from '#models/user/scopes';
+import { allAgentScopes } from '#models/user/agent-scopes/all-agent-scopes';
+import { IAgentScope } from '#models/user/agent-scopes/parse';
 import { ISession } from '#models/user/session';
 import { sessionOptions } from '#utils/session';
 import { sealData } from 'iron-session';
