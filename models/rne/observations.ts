@@ -21,16 +21,11 @@ const fallback = async (siren: Siren) => {
  * @param siren
  */
 export const getRNEObservations = async (
-  maybeSiren: string,
-  params: { isBot: boolean }
+  maybeSiren: string
 ): Promise<IAPINotRespondingError | IObservationsWithMetadata> => {
   const siren = verifySiren(maybeSiren);
 
   try {
-    if (params.isBot) {
-      return await fallback(siren);
-    }
-
     const { observations } = await clientRNEImmatriculation(siren);
     return { data: observations, metadata: { isFallback: false } };
   } catch (eDefaultTry: any) {

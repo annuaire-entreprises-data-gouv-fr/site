@@ -14,13 +14,8 @@ export type IEORIValidation = {
 };
 
 export const getEORIValidation = async (
-  eori: string,
-  params: { isBot: boolean }
+  eori: string
 ): Promise<IEORIValidation | IAPINotRespondingError> => {
-  if (params.isBot) {
-    return APINotRespondingFactory(EAdministration.DOUANES, 403);
-  }
-
   try {
     const siret = verifySiret(eori);
     const data = await clientEORI(siret);

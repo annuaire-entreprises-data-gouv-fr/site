@@ -18,15 +18,10 @@ import {
 import { IDataAssociation } from './types';
 
 export const getAssociationFromSlug = async (
-  slug: string,
-  params: { isBot: boolean }
+  slug: string
 ): Promise<IDataAssociation | IAPINotRespondingError | null> => {
-  if (params.isBot) {
-    return null;
-  }
-
   const uniteLegale = await getUniteLegaleFromSlug(slug, {
-    isBot: params.isBot,
+    isBot: false,
   });
 
   if (!isAssociation(uniteLegale)) {

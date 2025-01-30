@@ -24,7 +24,7 @@ export const getDirigeantsProtected = async (
 
   const [dirigeantsRCS, dirigeantsRNE] = await Promise.all([
     getMandatairesRCS(siren),
-    getDirigeantsRNE(siren, { isBot: false }),
+    getDirigeantsRNE(siren),
   ]);
 
   if (isAPI404(dirigeantsRCS) && isAPI404(dirigeantsRNE)) {
