@@ -19,16 +19,10 @@ const fallback = async (siren: Siren) => {
  * @param siren
  */
 export const getDirigeantsRNE = async (
-  maybeSiren: string,
-  params: { isBot: boolean }
+  maybeSiren: string
 ): Promise<IAPINotRespondingError | IDirigeantsWithMetadata> => {
   const siren = verifySiren(maybeSiren);
-
   try {
-    if (params.isBot) {
-      return await fallback(siren);
-    }
-
     const { dirigeants } = await clientRNEImmatriculation(siren);
     return { data: dirigeants, metadata: { isFallback: false } };
   } catch (e: any) {
