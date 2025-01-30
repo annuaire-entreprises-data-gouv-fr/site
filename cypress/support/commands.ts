@@ -6,7 +6,7 @@
 //
 //
 import { comptesAgents } from '#cypress/fixtures/comptes-agents';
-import { IAgentScope } from '#models/user/scopes';
+import { IAgentScope } from '#models/user/agent-scopes/parse';
 import { ISession } from '#models/user/session';
 import { sessionOptions } from '#utils/session';
 import { sealData } from 'iron-session';

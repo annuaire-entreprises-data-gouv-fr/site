@@ -8,8 +8,13 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { verifySiren } from '#utils/helpers';
+import { Siren, verifySiren } from '#utils/helpers';
 import { IObservationsWithMetadata } from './types';
+
+const fallback = async (siren: Siren) => {
+  const { observations } = await clientRNEImmatriculationFallback(siren);
+  return { data: observations, metadata: { isFallback: true } };
+};
 
 /*
  * Request observations from INPI's RNE
@@ -29,8 +34,7 @@ export const getRNEObservations = async (
     }
 
     try {
-      const { observations } = await clientRNEImmatriculationFallback(siren);
-      return { data: observations, metadata: { isFallback: true } };
+      return await fallback(siren);
     } catch (eFallback: any) {
       if (eFallback instanceof HttpNotFound) {
         return APINotRespondingFactory(EAdministration.INPI, 404);

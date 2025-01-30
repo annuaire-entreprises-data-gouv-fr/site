@@ -1,9 +1,10 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
+import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
 import { InternalError } from '#models/exceptions';
 import { isLuhnValid } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
+import { IAgentScope } from './agent-scopes/parse';
 import getSiretFromIdpTemporary from './getSiretFromIdpTemporary';
-import { IAgentScope, getAgentScopes } from './scopes';
 
 const isLikelyPrestataire = (domain: string) => {
   try {
@@ -129,5 +130,40 @@ export const createAgent = async (
     isPrestataire,
     isMCP,
     hasHabilitation,
+  };
+};
+
+export const defaultAgentScopes: IAgentScope[] = [
+  'agent',
+  'nonDiffusible',
+  'rne',
+  'pseudo_opendata',
+];
+
+/**
+ * Get Agent rights written as scopes. There is no 1-to-1 match between UI and scopes.
+ * This is a model persepective
+ * @param userEmail
+ * @returns
+ */
+const getAgentScopes = async (
+  userEmail: string
+): Promise<{
+  scopes: IAgentScope[];
+  userType: string;
+  hasHabilitation: boolean;
+}> => {
+  const additionnalScopes = await superAgentsList.getScopeForAgent(userEmail);
+
+  return {
+    scopes: [
+      // default agent scopes
+      ...defaultAgentScopes,
+      // additionnal scopes from super agent list
+      ...additionnalScopes,
+    ],
+    userType:
+      additionnalScopes.length > 0 ? 'Super-agent connecté' : 'Agent connecté',
+    hasHabilitation: additionnalScopes.length > 0,
   };
 };

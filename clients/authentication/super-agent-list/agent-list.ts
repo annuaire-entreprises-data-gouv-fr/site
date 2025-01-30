@@ -1,14 +1,17 @@
-import { FetchRessourceException } from '#models/exceptions';
-import { IAgentScope, isAgentScope } from '#models/user/scopes';
-import { logFatalErrorInSentry } from '#utils/sentry';
+import { FetchRessourceException, InternalError } from '#models/exceptions';
+import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
 
+import {
+  clientSuperAgentList,
+  IAgentRecord,
+} from '#clients/authentication/super-agent-list';
 import { DataStore } from '#clients/data-store';
-import { clientSuperAgentList, IAgentRecord } from './client-super-agent-list';
+import { IAgentScope, parseAgentScope } from '#models/user/agent-scopes/parse';
 
-class SuperAgentsScopes {
+class SuperAgentsList {
   private _superAgentsStore: DataStore<IAgentScope[]>;
   // time before agent list update
-  private TTL = 300000; //1000 * 60 * 5
+  private TTL = 300000; //5min
 
   constructor() {
     this._superAgentsStore = new DataStore<IAgentScope[]>(
@@ -19,19 +22,23 @@ class SuperAgentsScopes {
     );
   }
 
-  convertScopesToAgentScopes = (rawScope: string) => {
-    return (rawScope || '')
-      .split(' ')
-      .filter((s: string) => isAgentScope(s)) as IAgentScope[];
-  };
-
   mapResponseToAgentScopes = (
     response: IAgentRecord[]
   ): { [key: string]: IAgentScope[] } =>
     response
       .filter((r) => r.actif === true)
       .reduce((acc: { [key: string]: IAgentScope[] }, agent) => {
-        acc[agent.email] = this.convertScopesToAgentScopes(agent.scopes);
+        const { inValidScopes, validScopes } = parseAgentScope(agent.scopes);
+
+        if (inValidScopes.length > 0) {
+          logErrorInSentry(
+            new InternalError({
+              message: `Unknown agent scopes : ${inValidScopes.join(',')}`,
+            })
+          );
+        }
+
+        acc[agent.email] = validScopes;
         return acc;
       }, {});
 
@@ -50,4 +57,4 @@ class SuperAgentsScopes {
   };
 }
 
-export const superAgents = new SuperAgentsScopes();
+export const superAgentsList = new SuperAgentsList();

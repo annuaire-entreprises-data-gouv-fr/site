@@ -6,8 +6,13 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { verifySiren } from '#utils/helpers';
+import { Siren, verifySiren } from '#utils/helpers';
 import { IDirigeantsWithMetadata } from './types';
+
+const fallback = async (siren: Siren) => {
+  const dirigeants = await clientDirigeantsRechercheEntreprise(siren);
+  return { data: dirigeants, metadata: { isFallback: true } };
+};
 
 /*
  * Request dirigeants from INPI's RNE
@@ -17,7 +22,6 @@ export const getDirigeantsRNE = async (
   maybeSiren: string
 ): Promise<IAPINotRespondingError | IDirigeantsWithMetadata> => {
   const siren = verifySiren(maybeSiren);
-
   try {
     const { dirigeants } = await clientRNEImmatriculation(siren);
     return { data: dirigeants, metadata: { isFallback: false } };
@@ -27,8 +31,7 @@ export const getDirigeantsRNE = async (
     }
 
     try {
-      const dirigeants = await clientDirigeantsRechercheEntreprise(siren);
-      return { data: dirigeants, metadata: { isFallback: true } };
+      return await fallback(siren);
     } catch (eFallback) {
       if (eFallback instanceof HttpNotFound) {
         return APINotRespondingFactory(EAdministration.INPI, 404);

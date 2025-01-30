@@ -27,6 +27,7 @@ export const getAssociationFromSlug = async (
   if (!isAssociation(uniteLegale)) {
     return null;
   }
+
   const rna = uniteLegale.association.idAssociation || '';
   const { siren } = uniteLegale;
 

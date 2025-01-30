@@ -10,8 +10,8 @@ import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
 import { getIdccTitle } from '#models/conventions-collectives';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
+import { isProtectedSiren } from '#models/protected-siren';
 import { Siren, isLuhnValid, verifySiren } from '#utils/helpers';
-import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logFatalErrorInSentry,
   logInfoInSentry,
@@ -81,7 +81,10 @@ class UniteLegaleBuilder {
     // determine TVA
     uniteLegale.tva = getTvaUniteLegale(uniteLegale);
 
-    if (isProtectedSiren(uniteLegale.siren) && estDiffusible(uniteLegale)) {
+    if (
+      (await isProtectedSiren(uniteLegale.siren)) &&
+      estDiffusible(uniteLegale)
+    ) {
       uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
 
       uniteLegale.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
