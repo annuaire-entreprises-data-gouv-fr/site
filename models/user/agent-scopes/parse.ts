@@ -14,7 +14,8 @@ export const parseAgentScope = (rawScope: string) => {
 
   const validScopes = (rawScope || '').split(' ').filter((s: string) => {
     const isScopeValid = isAgentScope(s);
-    if (!isScopeValid) {
+    // there can be trailing whitespace, therefore s can be an empty string
+    if (s && !isScopeValid) {
       inValidScopes.push(s);
     }
     return isScopeValid;
