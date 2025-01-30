@@ -11,12 +11,10 @@ import { capitalize, formatIntFr } from './formatting';
 const uniteLegalePronounContracted = (uniteLegale: IUniteLegale) => {
   switch (true) {
     case isAssociation(uniteLegale):
+    case isServicePublic(uniteLegale):
     case uniteLegale.complements.estEntrepreneurIndividuel:
       return 'de l’';
     case isCollectiviteTerritoriale(uniteLegale):
-      return 'de la ';
-    case isServicePublic(uniteLegale):
-      return 'du ';
     default:
       return 'de la ';
   }
@@ -25,12 +23,10 @@ const uniteLegalePronounContracted = (uniteLegale: IUniteLegale) => {
 const uniteLegalePronoun = (uniteLegale: IUniteLegale) => {
   switch (true) {
     case isAssociation(uniteLegale):
+    case isServicePublic(uniteLegale):
     case uniteLegale.complements.estEntrepreneurIndividuel:
       return 'l’';
     case isCollectiviteTerritoriale(uniteLegale):
-      return 'la ';
-    case isServicePublic(uniteLegale):
-      return 'le ';
     default:
       return 'la ';
   }
@@ -55,7 +51,7 @@ export const uniteLegaleLabel = (uniteLegale: IUniteLegale) => {
     case isCollectiviteTerritoriale(uniteLegale):
       return 'collectivité territoriale';
     case isServicePublic(uniteLegale):
-      return `service public`;
+      return `administration`;
     case uniteLegale.complements.estEntrepreneurIndividuel:
       return `entreprise individuelle`;
     default:

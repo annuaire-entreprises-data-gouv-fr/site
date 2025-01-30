@@ -13,17 +13,14 @@ export default function RefusedConnexionPage() {
       <h1>L’accès à l’espace agent vous est refusé</h1>
       <div>Seuls peuvent accéder à l’espace agent public :</div>
       <ul>
-        <li>
-          les membres d’une administration, d’une collectivité ou d’un service
-          public
-        </li>
+        <li>les membres d’une administration ou d’une collectivité</li>
         <li>
           les membres d’une organisation privée dotée d’une mission de service
           public
         </li>
       </ul>
       <p>
-        Votre organisation n’est pas un service public et par conséquent,
+        Votre organisation n’est pas une administration et par conséquent,
         l’accès à l’espace agent vous est refusé.
       </p>
       <a href="/">← Retourner au moteur de recherche</a>

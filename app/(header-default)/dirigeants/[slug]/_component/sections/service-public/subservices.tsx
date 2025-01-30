@@ -32,7 +32,8 @@ function SubServicesDataSection({
       {(subServices) => (
         <>
           <p>
-            Ce service public se compose de {subServices.length} départements :
+            Cette administration se compose de {subServices.length} départements
+            :
           </p>
           <FullTable
             head={['Nom du département', 'Responsable(s)']}
