@@ -17,7 +17,7 @@ dataSources:
     apiSlug: sirene
     datagouvLink: https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/
     data:
-      - label: Dénomination, NAF, Forme juridique et Adresse d’un service public
+      - label: Dénomination, NAF, Forme juridique et Adresse d’une administration
         form: https://www.insee.fr/fr/information/2015445
         targets:
           - agent

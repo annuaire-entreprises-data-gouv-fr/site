@@ -1,6 +1,5 @@
 'use client';
 
-import { ReactNode } from 'react';
 import NonRenseigne from '#components/non-renseigne';
 import { DataSectionClient } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
@@ -8,6 +7,7 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { IServicePublic } from '#models/service-public';
 import { useFetchServicePublic } from 'hooks/fetch/service-public';
+import { ReactNode } from 'react';
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -23,12 +23,12 @@ export default function ServicePublicSection({
   return (
     <>
       <DataSectionClient
-        title={'Service public'}
+        title={'Annuaire du service public'}
         sources={[EAdministration.DILA]}
         data={servicePublic}
         notFoundInfo={
           <p>
-            Ce service public n’a pas été retrouvé dans l’
+            Cette administration n’a pas été retrouvé dans l’
             <a
               href="https://lannuaire.service-public.fr/"
               target="_blank"
@@ -52,7 +52,7 @@ export default function ServicePublicSection({
                   href={servicePublic.liens.annuaireServicePublic.valeur}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Voir la page de ce service public sur l’Annuaire du service public, nouvelle fenêtre"
+                  aria-label="Voir la page de cette administration sur l’Annuaire du service public, nouvelle fenêtre"
                 >
                   fiche de l’Annuaire du service public
                 </a>

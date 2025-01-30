@@ -225,7 +225,7 @@ class SearchFilterParams {
       of: 'Label : Organisme de formation',
       ei: 'Type : Entreprise Individuelle ',
       ct: 'Type : Collectivité territoriale ',
-      sp: 'Type : Service public',
+      sp: 'Type : Administration',
       asso: 'Type : Association ',
     };
 

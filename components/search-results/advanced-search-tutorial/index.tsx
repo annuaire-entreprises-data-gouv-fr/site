@@ -22,7 +22,7 @@ export const AdvancedSearchTutorial = () => {
       <div>
         <div className={styles.title}>
           Grâce aux filtres de recherche, retrouvez n’importe quelle entreprise,
-          association, ou service public en France.
+          association, ou administration en France.
         </div>
         <div>
           <ul>

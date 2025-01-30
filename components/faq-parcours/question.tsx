@@ -113,7 +113,7 @@ export default function Question({
           <p>
             <strong>
               Comment modifier les informations d’une entreprise, d’une
-              association ou d’un service public ?
+              association ou d’une administration ?
             </strong>
           </p>
           <p>
@@ -128,7 +128,7 @@ export default function Question({
           <p>
             Pour le reste, l’Annuaire des Entreprises centralise les
             informations dont dispose l’administration sur une entreprise, une
-            association ou un service public, mais{' '}
+            association ou une administration, mais{' '}
             <strong>ne stocke aucune information</strong>. Les informations que
             vous voyez sur le site sont récupérées{' '}
             <strong>en temps réel</strong> auprès des services des
@@ -171,7 +171,7 @@ export default function Question({
       );
     case EQuestionType.ALL:
     default:
-      let modifyText = ' d’une entreprise, association ou service public';
+      let modifyText = ' d’une entreprise, association ou administration';
 
       if (userType === 'entreprise' || userType === 'independant') {
         modifyText = ' de mon entreprise';
