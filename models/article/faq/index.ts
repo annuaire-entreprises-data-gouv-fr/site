@@ -3,57 +3,19 @@ import { IArticle } from '../type';
 
 export type IFaqArticle = {
   administrations: string[];
-  faqTargets: EFAQTargets[];
 } & IArticle;
 
-export enum EFAQTargets {
-  AGENT = 'agent',
-  ENTREPRISE = 'entreprise',
-  INDEPENDANT = 'independant',
-  ASSOCIATION = 'association',
-  PARTICULIER = 'particulier',
-  ALL = 'all',
-  NONE = 'none',
-}
-
-export const FAQTargets = {
-  [EFAQTargets.AGENT]: 'Agent public',
-  [EFAQTargets.ENTREPRISE]: 'Dirigeant(e) ou salarié(e) d’entreprise',
-  [EFAQTargets.INDEPENDANT]: 'Indépendant(e)',
-  [EFAQTargets.ASSOCIATION]: 'Dirigeant(e) ou salarié(e) d’association',
-  [EFAQTargets.PARTICULIER]: 'Particulier',
-};
-
-export const loadAllFaqArticlesByTarget = () => {
-  const articlesByTargets: { [key: string]: IFaqArticle[] } = {};
+export const loadAllFaqArticlesByGroup = () => {
+  const articlesByGroup: { [key: string]: IFaqArticle[] } = {};
 
   allFaqArticles.forEach((article) => {
-    article.faqTargets.forEach((target) => {
-      if (Object.values(EFAQTargets).indexOf(target) === -1) {
-        throw new Error(`${target} is not a valid target`);
-      }
-
-      if (target === EFAQTargets.ALL) {
-        Object.keys(FAQTargets).forEach((validTarget) => {
-          articlesByTargets[validTarget] = [
-            ...(articlesByTargets[validTarget] || []),
-            article,
-          ];
-        });
-      } else {
-        articlesByTargets[target] = [
-          ...(articlesByTargets[target] || []),
-          article,
-        ];
-      }
-    });
-    articlesByTargets[EFAQTargets.ALL] = [
-      ...(articlesByTargets[EFAQTargets.ALL] || []),
+    articlesByGroup[article.group || 'default'] = [
+      ...(articlesByGroup[article.group || 'default'] || []),
       article,
     ];
   });
 
-  return articlesByTargets;
+  return articlesByGroup;
 };
 
 export const getFaqArticle = (slug: string) => {
@@ -78,4 +40,4 @@ export const allFaqArticles = loadAll<IFaqArticle>(
   require.context('data/faq', false, /\.yml$/)
 );
 
-export const allFaqArticlesByTarget = loadAllFaqArticlesByTarget();
+export const allFaqArticlesByGroup = loadAllFaqArticlesByGroup();
