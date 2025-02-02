@@ -58,15 +58,15 @@
           },
           "listeIdcc": [
             {
-              "idcc": "2420",
-              "title": ""
-            },
-            {
               "idcc": "2609",
               "title": ""
             },
             {
               "idcc": "1596",
+              "title": ""
+            },
+            {
+              "idcc": "2420",
               "title": ""
             }
           ]
@@ -127,15 +127,15 @@
               },
               "listeIdcc": [
                 {
-                  "idcc": "2420",
-                  "title": ""
-                },
-                {
                   "idcc": "2609",
                   "title": ""
                 },
                 {
                   "idcc": "1596",
+                  "title": ""
+                },
+                {
+                  "idcc": "2420",
                   "title": ""
                 }
               ]
@@ -188,15 +188,15 @@
               },
               "listeIdcc": [
                 {
-                  "idcc": "2420",
-                  "title": ""
-                },
-                {
                   "idcc": "2609",
                   "title": ""
                 },
                 {
                   "idcc": "1596",
+                  "title": ""
+                },
+                {
+                  "idcc": "2420",
                   "title": ""
                 }
               ]
@@ -249,15 +249,15 @@
         },
         "listeIdcc": [
           {
-            "idcc": "2420",
-            "title": ""
-          },
-          {
             "idcc": "2609",
             "title": ""
           },
           {
             "idcc": "1596",
+            "title": ""
+          },
+          {
+            "idcc": "2420",
             "title": ""
           }
         ],
