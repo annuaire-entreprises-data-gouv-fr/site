@@ -3,9 +3,12 @@ import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 
 interface IProps {
   uniteLegale: IUniteLegale;

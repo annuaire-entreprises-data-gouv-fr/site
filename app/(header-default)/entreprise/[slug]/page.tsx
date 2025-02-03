@@ -10,6 +10,10 @@ import ServicePublicSection from '#components/service-public-section';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import {
   isAssociation,
@@ -17,7 +21,6 @@ import {
   isServicePublic,
 } from '#models/core/types';
 import { getRechercheEntrepriseSourcesLastModified } from '#models/recherche-entreprise-modified';
-import { ApplicationRights, hasRights } from '#models/user/rights';
 import {
   shouldNotIndex,
   uniteLegalePageDescription,

@@ -3,7 +3,7 @@ import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { cleanAgentSession, cleanPathFrom, getPathFrom } from '#utils/session';
 import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
-import { AgentConnectLogoutFailedException } from '../agent-connect-types';
+import { AgentConnectLogoutFailedException } from '../../../../../models/authentication/authentication-exceptions';
 
 export const GET = withSession(async function logoutCallbackRoute(req) {
   try {

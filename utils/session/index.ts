@@ -1,5 +1,5 @@
-import { IAgentInfo } from '#models/user/agent';
-import { ISession } from '#models/user/session';
+import { IAgentInfo } from '#models/authentication/agent';
+import { ISession } from '#models/authentication/user/session';
 import { isAbsoluteUrl } from '#utils/server-side-helper/app/is-absolute-url';
 import type { IronSession, SessionOptions } from 'iron-session';
 

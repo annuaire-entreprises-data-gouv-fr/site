@@ -1,6 +1,6 @@
+import { ISession } from '#models/authentication/user/session';
 import { Exception } from '#models/exceptions';
-import { UseCase } from '#models/user/agent';
-import { ISession } from '#models/user/session';
+import { UseCase } from '#models/use-cases';
 import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
 import { IReqWithSession } from '#utils/session/with-session';
 import { NextRequest, userAgent } from 'next/server';

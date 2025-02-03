@@ -1,8 +1,11 @@
 import AgentWallAssociationProtected from '#components/espace-agent-components/agent-wall/association';
 import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale, isAssociation } from '#models/core/types';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import { AgentActesAssociation } from './associations';
 import { AgentActesRNE } from './rne';
 

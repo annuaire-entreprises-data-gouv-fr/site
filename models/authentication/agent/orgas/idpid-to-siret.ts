@@ -1,3 +1,5 @@
+import { isLuhnValid } from '#utils/helpers';
+
 const idpToSiret: Record<string, string> = {
   'a576f9b4-945b-4cd9-9bbf-811828215a70': '11002001300097', // 'Agents de l'Administration Centrale des ministères économiques et financiers (Réseau Interministériel de l'État)'],
   '115867c0-42dd-47be-a3c0-da05d5ac34f3': '18004301001485', // 'Réseau Canopé'],
@@ -45,11 +47,19 @@ const idpToSiret: Record<string, string> = {
   '8da7b85b-e1f3-4269-b3bf-2d051b86e95f': '11007001800012', // 'MASA'],
 };
 
-const getSiretFromIdpTemporary = (idpId: string): string => {
+/**
+ * Get siret or idpId fallback siret
+ * @param siret
+ * @param idpId
+ * @returns
+ */
+export const mapIdpToSiret = (siret: string, idpId: string) => {
+  const cleanedSiret = (siret || '').replaceAll(' ', '');
+  if (cleanedSiret && isLuhnValid(cleanedSiret)) {
+    return cleanedSiret;
+  }
   if (idpId && idpToSiret[idpId]) {
     return idpToSiret[idpId];
   }
   return '';
 };
-
-export default getSiretFromIdpTemporary;

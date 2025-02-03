@@ -1,9 +1,9 @@
 import ProtectedSectionWithUseCase from '#components/section-with-use-case';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { ApplicationRights } from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/user/agent';
-import { ApplicationRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
+import { UseCase } from '#models/use-cases';
 import ProtectedTravauxPublicsSection from './protected-travaux-publics-section';
 
 const TravauxPublicsSection = ({

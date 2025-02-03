@@ -87,7 +87,9 @@ export type IProConnectUserInfo = {
   idp_id: string;
 };
 
-export const proConnectAuthenticate = async (req: IReqWithSession) => {
+export const proConnectAuthenticate = async (
+  req: IReqWithSession
+): Promise<IProConnectUserInfo> => {
   const client = await getClient();
 
   const params = client.callbackParams(req.nextUrl.toString());

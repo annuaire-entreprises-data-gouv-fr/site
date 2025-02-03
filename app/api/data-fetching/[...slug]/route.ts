@@ -1,5 +1,8 @@
-import { getVerifiedAgent, UseCase } from '#models/user/agent';
-import { ApplicationRights, hasRights } from '#models/user/rights';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { UseCase } from '#models/use-cases';
 import { setAgentSession } from '#utils/session';
 import withSession, { IReqWithSession } from '#utils/session/with-session';
 import { APIRoutesHandlers } from '../routes-handlers';

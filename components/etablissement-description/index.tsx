@@ -1,9 +1,8 @@
-import React from 'react';
 import FAQLink from '#components-ui/faq-link';
+import { ISession } from '#models/authentication/user/session';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import {
   formatAge,
   formatDateLong,
@@ -11,6 +10,7 @@ import {
   uniteLegaleLabel,
   uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
+import React from 'react';
 
 type IProps = {
   etablissement: IEtablissement;
