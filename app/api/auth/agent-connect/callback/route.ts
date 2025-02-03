@@ -118,5 +118,5 @@ const verifyAgentHabilitation = async (agent: IAgentInfo) => {
   //  throw new AgentConnectCouldBeAServicePublicException({});
   //}
 
-  throw new HttpForbiddenError('Organization is not a service public');
+  throw new HttpForbiddenError('Organization is not an administration');
 };

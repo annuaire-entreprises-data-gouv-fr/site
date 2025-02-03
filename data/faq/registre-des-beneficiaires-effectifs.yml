@@ -13,8 +13,7 @@
 #     href: url
 administrations:
   - inpi
-faqTargets:
-  - all
+group: fonctionnement
 title: Comment accéder au Registre des Bénéficiaires Effectifs (RBE) ?
 seo:
   description: Depuis le 31 juillet 2024, le Registre des Bénéficiaires Effectifs (RBE) n’est plus accessible au grand public. Découvrez qui peut y accéder et comment.

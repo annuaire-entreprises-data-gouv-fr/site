@@ -1,7 +1,7 @@
-describe('Service public', () => {
-  it('Should display service public', () => {
+describe('Administration', () => {
+  it('Should display administration', () => {
     cy.visit('/entreprise/130025265');
-    cy.contains('Service public');
+    cy.contains('Administration');
     cy.contains('Type organisme');
     cy.contains('Administration centrale (ou Ministère)');
     cy.contains('fiche de l’Annuaire du service public');

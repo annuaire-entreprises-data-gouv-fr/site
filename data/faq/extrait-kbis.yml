@@ -14,8 +14,7 @@
 administrations:
   - inpi
   - infogreffe
-faqTargets:
-  - all
+group: defaults
 title: Comment télécharger un extrait Kbis ?
 seo:
   description: Quelles sont les différentes solutions pour se procurer un extrait Kbis ?

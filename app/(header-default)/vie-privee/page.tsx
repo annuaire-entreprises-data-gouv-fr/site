@@ -133,7 +133,7 @@ const Privacy = () => (
             </td>
             <td>
               Jusqu’à 10 ans suivant la cessation de l’activité de l’entreprise,
-              l’association ou le service public concerné
+              l’association ou l’administration concerné
             </td>
           </tr>
           <tr>
@@ -143,7 +143,7 @@ const Privacy = () => (
             </td>
             <td>
               Jusqu’à 10 ans suivant la cessation de l’activité de l’entreprise,
-              l’association ou le service public concerné
+              l’association ou l’administration concerné
             </td>
           </tr>
           <tr>

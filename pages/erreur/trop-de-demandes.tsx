@@ -17,8 +17,8 @@ const TooManyRequest: NextPageWithLayout = () => {
 
       <ul>
         <li>
-          Si vous travaillez <strong>pour un service public</strong>{' '}
-          (administration, ministère, collectivité), contactez-nous via notre{' '}
+          Si vous travaillez <strong>pour une administration</strong> (agence,
+          ministère, collectivité), contactez-nous via notre{' '}
           <a href={constants.links.parcours.contact}>formulaire de contact</a>{' '}
           et nous ferons le nécessaire pour que cela ne se reproduise pas.
         </li>

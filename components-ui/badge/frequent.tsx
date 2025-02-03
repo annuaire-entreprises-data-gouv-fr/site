@@ -76,7 +76,7 @@ export const ServicePublicBadge = ({
     small={small}
     onClick={onClick}
     isSelected={isSelected}
-    label="Service public"
+    label="Administration"
     fontColor="#563003"
     backgroundColor="#ffe283"
   />

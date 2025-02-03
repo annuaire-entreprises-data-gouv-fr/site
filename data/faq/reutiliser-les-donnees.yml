@@ -13,8 +13,7 @@
 #     href: url
 administrations:
   - all
-faqTargets:
-  - all
+group: data
 title: Comment puis-je utiliser ces données dans mon site internet ?
 seo:
   description: Les données accessibles publiquement sur le site sont des données ouvertes et réutilisables.

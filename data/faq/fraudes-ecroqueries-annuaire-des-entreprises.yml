@@ -13,11 +13,7 @@
 #     href: url
 administrations:
   - all
-faqTargets:
-  - particulier
-  - entreprise
-  - independant
-  - association
+group: fraude
 title: Fraudes et tentatives d’escroquerie au nom de L’Annuaire des Entreprises
 seo:
   description: L'Annuaire des Entreprises ne vous prélèvera jamais d'argent.
