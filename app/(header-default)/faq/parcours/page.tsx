@@ -16,7 +16,7 @@ export default async function Parcours() {
   return (
     <>
       <h1>Nous écrire</h1>
-      <strong>Vous-êtes :</strong>
+      <strong>Vous êtes :</strong>
       <ParcoursQuestions session={session} />
       <div style={{ marginTop: '200px' }} />
     </>
