@@ -6,7 +6,7 @@ export function Question() {
     <FloatingHelpButton>
       <a
         className="no-style-link"
-        href="/faq/parcours"
+        href="/faq"
         data-test-id="question-faq"
         aria-label="Une question ? Accéder à la FAQ."
       >

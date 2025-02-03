@@ -14,10 +14,7 @@
 administrations:
   - insee
   - inpi
-faqTargets:
-  - entreprise
-  - independant
-  - association
+group: modifier
 title: Comment modifier l’adresse de mon entreprise ou association ?
 seo:
   description: Modifiez les données de votre entreprise sur le guichet unique tenu par l’INPI

@@ -7,6 +7,7 @@ export type IArticle = {
     description: string;
     title?: string;
   };
+  group: string;
   body: IMarkdown;
   cta: { label: string; to: string };
   more: { label: string; href: string }[];

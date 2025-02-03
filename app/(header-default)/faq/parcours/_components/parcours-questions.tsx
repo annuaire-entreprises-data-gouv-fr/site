@@ -1,77 +1,87 @@
 'use client';
 
 import { MultiChoice } from '#components-ui/multi-choice';
-import Question, { EQuestionType } from '#components/faq-parcours/question';
-import {
-  EFAQTargets,
-  FAQTargets,
-  allFaqArticlesByTarget,
-} from '#models/article/faq';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import { ContactAnswer } from './answers/contact';
+import { ContactCompanyAnswer } from './answers/contact-entreprise';
+import { FraudAnswer } from './answers/fraud';
 
 type IProps = {
-  question: EQuestionType;
   session: ISession | null;
 };
-export default function ParcoursQuestions({ question, session }: IProps) {
-  const initialQuestionType = Object.values(EQuestionType).indexOf(question)
-    ? question
-    : null;
 
-  const scrollRef = useRef<HTMLSpanElement | null>(null);
+export const FAQTargets = {
+  particulier: 'Particulier',
+  entreprise: 'Entreprise ou auto-entreprise',
+  association: 'Association',
+  agent: 'Agent public',
+  none: 'Autre',
+};
 
+const questions = [
+  {
+    label: 'Joindre une entreprise',
+    key: 'company',
+  },
+  {
+    label: 'Nous alerter d’une fraude ou tentative d’escroquerie',
+    key: 'fraud',
+  },
+  { label: 'Autre', key: 'contact' },
+];
+
+export default function ParcoursQuestions({ session }: IProps) {
   const [userType, setUserType] = useState(
-    hasRights(session, ApplicationRights.isAgent)
-      ? EFAQTargets.AGENT
-      : initialQuestionType
-      ? 'all'
-      : ''
+    hasRights(session, ApplicationRights.isAgent) ? 'agent' : ''
   );
-  const [questionType, setQuestionType] = useState<EQuestionType>(
-    initialQuestionType || EQuestionType.NONE
-  );
+  const [questionType, setQuestionType] = useState<string>('');
 
-  const scroll = () => {
-    if (scrollRef && scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const updateQuestion = (q: EQuestionType) => {
+  const updateQuestion = (q: string) => {
     setQuestionType(q);
-    scroll();
   };
   return (
     <>
       <MultiChoice
         idPrefix="user-type"
-        values={[...Object.entries(FAQTargets), ['all', 'Autres']].map(
-          ([key, value]) => {
-            return {
-              label: value,
-              onClick: () => {
-                setUserType(key);
-                updateQuestion(EQuestionType.NONE);
-              },
-              checked: userType === key,
-            };
-          }
-        )}
+        values={Object.entries(FAQTargets).map(([key, value]) => {
+          return {
+            label: value,
+            onClick: () => {
+              setUserType(key);
+              updateQuestion('none');
+            },
+            checked: userType === key,
+          };
+        })}
       />
-      <span ref={scrollRef} />
       {userType && (
-        <Question
-          questionType={questionType}
-          setQuestionType={updateQuestion}
-          questions={
-            userType ? Object.values(allFaqArticlesByTarget[userType]) : []
-          }
-          userType={userType}
-          session={session}
-        />
+        <>
+          <br />
+          <strong>Vous voulez :</strong>
+          <MultiChoice
+            idPrefix="user-question"
+            values={questions.map(({ key, label }) => {
+              return {
+                label,
+                onClick: () => {
+                  updateQuestion(key);
+                },
+                checked: questionType === key,
+              };
+            })}
+          />
+        </>
       )}
+
+      {questionType && questionType === 'company' ? (
+        <ContactCompanyAnswer />
+      ) : questionType === 'fraud' ? (
+        <FraudAnswer />
+      ) : questionType === 'contact' ? (
+        <ContactAnswer userType={userType} session={session} />
+      ) : null}
     </>
   );
 }

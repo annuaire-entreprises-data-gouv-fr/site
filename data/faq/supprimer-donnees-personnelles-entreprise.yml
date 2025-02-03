@@ -14,10 +14,7 @@
 administrations:
   - insee
   - inpi
-faqTargets:
-  - entreprise
-  - independant
-  - particulier
+group: default
 title: Comment supprimer les données personnelles de mon entreprise ?
 seo:
   description: Les données d’une entreprise sont publiques mais une personne physique peut s’oppposer à ce qu’un site internet les publie.

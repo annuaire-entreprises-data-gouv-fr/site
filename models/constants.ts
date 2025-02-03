@@ -3,8 +3,8 @@ const constants = {
     mailtoInpi: 'mailto:licences@inpi.fr',
     mailInpi: 'licences@inpi.fr',
     parcours: {
-      modification: '/faq/parcours?question=modification',
-      contact: '/faq/parcours?question=contact',
+      modification: '/faq/modifier',
+      contact: '/faq/parcours',
     },
   },
   resultsPerPage: { etablissements: 100, search: 30 },
