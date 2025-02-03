@@ -3,7 +3,7 @@ import { ParcoursAnswer } from '.';
 
 export const FraudAnswer: React.FC<{}> = ({}) => (
   <ParcoursAnswer>
-    <strong>Attention à la fraude :</strong> l’Annuaire des Entreprise est un
+    <strong>Attention à la fraude :</strong> l’Annuaire des Entreprises est un
     service public <strong>gratuit</strong> et ne vous demandera{' '}
     <strong>jamais</strong> d’argent. Pour en savoir plus, consultez{' '}
     <a href="/faq/fraudes-ecroqueries-annuaire-des-entreprises">
