@@ -1,5 +1,5 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { MatomoInit } from '#components/matomo-event/init';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 class CustomDocument extends Document {
   render() {

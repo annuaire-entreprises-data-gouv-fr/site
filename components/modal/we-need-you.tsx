@@ -1,5 +1,5 @@
-import React from 'react';
 import constants from '#models/constants';
+import React from 'react';
 
 const formLink = 'https://tally.so/r/w478pA';
 
@@ -52,7 +52,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         right: 0;
         top: 230px;
         overflow: hidden;
-        display: none;
+        display: block;
       }
 
       #we-need-you-modal.hide > .modal {
