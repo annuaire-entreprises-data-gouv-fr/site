@@ -4,9 +4,9 @@ import { Tag } from '#components-ui/tag';
 import IsActiveTag from '#components-ui/tag/is-active-tag';
 import { NonDiffusibleTag } from '#components-ui/tag/non-diffusible-tag';
 import { EtablissementDescription } from '#components/etablissement-description';
+import { ISession } from '#models/authentication/user/session';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import {
   formatIntFr,
   formatSiret,

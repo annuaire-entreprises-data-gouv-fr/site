@@ -1,5 +1,6 @@
 import { ConnexionSubLayout } from '#components-ui/connexion-layout';
 import connexionRefusedPicture from '#components-ui/illustrations/connexion-failed';
+import constants from '#models/constants';
 import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Vous n’êtes pas autorisé(e) à accéder à l’espace agent',
@@ -25,14 +26,8 @@ export default function RequiredHabilitationPage() {
         Votre organisation{' '}
         <strong>ne fait pas partie de la liste des services publics</strong>.
         Vous pouvez{' '}
-        <a
-          href="https://www.demarches-simplifiees.fr/commencer/demande-d-ajout-a-la-liste-des-services-publics"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          demander l’ajout de votre organisation
-        </a>{' '}
-        à la liste.
+        <a href={constants.links.parcours.contact}>nous contacter</a> pour
+        demander l’ajout de votre organisation à la liste.
       </p>
       <p>
         Si votre demande est acceptée, vous obtiendrez automatiquement l’accès à

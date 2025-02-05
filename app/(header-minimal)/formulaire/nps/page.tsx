@@ -1,8 +1,11 @@
 import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
+import {
+  getAgentEmail,
+  getAgentUserType,
+} from '#models/authentication/user/helpers';
+import { isLoggedIn } from '#models/authentication/user/rights';
 import constants from '#models/constants';
-import { getAgentEmail, getAgentUserType } from '#models/user/helpers';
-import { isLoggedIn } from '#models/user/rights';
 import { randomId } from '#utils/helpers';
 import getSession from '#utils/server-side-helper/app/get-session';
 import styles from './style.module.css';

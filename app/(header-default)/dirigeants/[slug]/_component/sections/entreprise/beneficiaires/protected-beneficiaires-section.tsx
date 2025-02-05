@@ -8,10 +8,10 @@ import { AsyncDataSectionClient } from '#components/section/data-section/client'
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
 import { IBeneficiairesEffectif } from '#models/espace-agent/beneficiaires';
-import { UseCase } from '#models/user/agent';
-import { ISession } from '#models/user/session';
+import { UseCase } from '#models/use-cases';
 import { formatDatePartial, pluralize } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';

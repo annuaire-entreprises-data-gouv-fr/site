@@ -1,5 +1,5 @@
+import { ISession } from '#models/authentication/user/session';
 import { Exception } from '#models/exceptions';
-import { ISession } from '#models/user/session';
 import {
   extractSirenOrSiretFromRechercherUrl,
   extractSirenOrSiretSlugFromUrl,

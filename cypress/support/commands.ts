@@ -5,9 +5,9 @@
 // ***********************************************
 //
 //
-import { allAgentScopes } from '#models/user/agent-scopes/all-agent-scopes';
-import { IAgentScope } from '#models/user/agent-scopes/parse';
-import { ISession } from '#models/user/session';
+import { allAgentScopes } from '#models/authentication/agent/scopes/all-agent-scopes';
+import { IAgentScope } from '#models/authentication/agent/scopes/parse';
+import { ISession } from '#models/authentication/user/session';
 import { sessionOptions } from '#utils/session';
 import { sealData } from 'iron-session';
 
@@ -27,15 +27,12 @@ const generateSessionCookie = async (inputScopes?: IAgentScope[]) => {
       userId: '123456789',
       domain: 'yopmail.com',
       siret: '12345678912345',
-      isMCP: false,
-      isPrestataire: false,
       familyName: 'John Doe',
       firstName: 'John Doe',
       fullName: 'John Doe',
       email: 'user@yopmail.com',
       scopes,
       userType: 'Super-agent connecté',
-      hasHabilitation: true,
     },
   };
 

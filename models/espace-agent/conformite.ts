@@ -2,7 +2,7 @@ import { clientApiEntrepriseConformiteFiscale } from '#clients/api-entreprise/co
 import { clientApiEntrepriseConformiteMSA } from '#clients/api-entreprise/conformite/msa';
 import { clientApiEntrepriseConformiteVigilance } from '#clients/api-entreprise/conformite/vigilance';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { UseCase } from '#models/user/agent';
+import { UseCase } from '#models/use-cases';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { handleApiEntrepriseError } from './utils';
 

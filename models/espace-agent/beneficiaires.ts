@@ -4,7 +4,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { UseCase } from '#models/user/agent';
+import { UseCase } from '#models/use-cases';
 import { verifySiren } from '#utils/helpers';
 import { handleApiEntrepriseError } from './utils';
 

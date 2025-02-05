@@ -4,12 +4,15 @@ import {
   checkHasQuality,
 } from '#components/badges-section/labels-and-certificates';
 import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
+import {
   IUniteLegale,
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import styles from './styles.module.css';
 import TabLink from './tab-link';
 

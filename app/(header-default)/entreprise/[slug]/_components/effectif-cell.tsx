@@ -8,10 +8,13 @@ import { GIPMDS, INSEE } from '#components/administrations';
 import NonRenseigne from '#components/non-renseigne';
 import { ProtectedInlineData } from '#components/protected-inline-data';
 import { isAPI404 } from '#models/api-not-responding';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
 import { hasAnyError, isDataLoading } from '#models/data-fetching';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import { formatFloatFr } from '#utils/helpers';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';

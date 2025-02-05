@@ -3,7 +3,10 @@ import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { ApplicationRights, hasRights } from '#models/user/rights';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,

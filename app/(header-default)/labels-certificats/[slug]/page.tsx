@@ -16,8 +16,11 @@ import { CertificationsRGESection } from '#components/labels-and-certificates/rg
 import { CertificationSocieteMission } from '#components/labels-and-certificates/societe-mission';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
 import { getCertificationsFromSlug } from '#models/certifications';
-import { ApplicationRights, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,

@@ -6,10 +6,13 @@ import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { estDiffusible } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
 import React from 'react';
 

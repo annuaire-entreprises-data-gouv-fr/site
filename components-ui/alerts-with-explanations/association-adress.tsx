@@ -5,9 +5,9 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IDataAssociation } from '#models/association/types';
+import { ISession } from '#models/authentication/user/session';
 import { getPersonnalDataAssociation } from '#models/core/diffusion';
 import { IAssociation } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import { Warning } from '../alerts';
 
 const AssociationAdressAlert: React.FC<{

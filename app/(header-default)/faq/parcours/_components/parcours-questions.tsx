@@ -1,8 +1,11 @@
 'use client';
 
 import { MultiChoice } from '#components-ui/multi-choice';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { useState } from 'react';
 import { ContactAnswer } from './answers/contact';
 import { ContactCompanyAnswer } from './answers/contact-entreprise';
