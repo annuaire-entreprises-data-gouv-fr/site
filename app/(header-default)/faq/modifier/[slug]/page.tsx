@@ -31,14 +31,17 @@ export default async function FAQArticle({ params }: AppRouterProps) {
   if (!dataToModify) {
     return redirectFAQPageNotFound(slug);
   }
+
   return (
     <>
       <TextWrapper>
         <Breadcrumb
           links={[
             { href: '/faq', label: 'Questions fréquentes' },
-            { href: '/faq', label: 'Comment modifier ces informations' },
-
+            {
+              href: '/faq/modifier',
+              label: 'Comment modifier ces informations',
+            },
             { href: '', label: dataToModify.label },
           ]}
         />

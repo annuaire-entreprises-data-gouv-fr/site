@@ -46,18 +46,26 @@ const AdministrationDescription: React.FC<{
               </ul>
             </div>
           )}
-          {contact && (
-            <p>
-              <a href={`/donnees/sources#${slug}`}>
-                → Télécharger ou réutiliser ces données
-              </a>
-              <br />
-              <a rel="noreferrer noopener" target="_blank" href={contact}>
+          <p>
+            <a href={`/donnees/sources#${slug}`}>
+              → Télécharger ou réutiliser ces données
+            </a>
+            <br />
+            {contact && (
+              <a
+                rel="noreferrer noopener"
+                target="_blank"
+                href={
+                  (contact || '').indexOf('@') > -1
+                    ? `mailto:${contact}`
+                    : contact
+                }
+              >
                 → Contacter cette{' '}
                 {estServicePublic ? 'administration' : 'organisation'}
               </a>
-            </p>
-          )}
+            )}
+          </p>
         </section>
       </div>
     </div>

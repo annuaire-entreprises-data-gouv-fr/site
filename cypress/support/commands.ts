@@ -33,7 +33,6 @@ const generateSessionCookie = async (inputScopes?: IAgentScope[]) => {
       email: 'user@yopmail.com',
       scopes,
       userType: 'Super-agent connecté',
-      hasHabilitation: true,
     },
   };
 
