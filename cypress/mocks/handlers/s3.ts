@@ -1,4 +1,4 @@
-import { allAgentScopes } from '#models/use-cases-scopes/all-agent-scopes';
+import { allAgentScopes } from '#models/authentication/agent/scopes/all-agent-scopes';
 import { HttpResponse, HttpResponseResolver } from 'msw';
 
 export const s3Handler: HttpResponseResolver = ({ request }) => {

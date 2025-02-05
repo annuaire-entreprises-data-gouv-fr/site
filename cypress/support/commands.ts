@@ -5,9 +5,9 @@
 // ***********************************************
 //
 //
+import { allAgentScopes } from '#models/authentication/agent/scopes/all-agent-scopes';
+import { IAgentScope } from '#models/authentication/agent/scopes/parse';
 import { ISession } from '#models/authentication/user/session';
-import { allAgentScopes } from '#models/use-cases-scopes/all-agent-scopes';
-import { IAgentScope } from '#models/use-cases-scopes/parse';
 import { sessionOptions } from '#utils/session';
 import { sealData } from 'iron-session';
 
