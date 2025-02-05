@@ -1,9 +1,5 @@
-import {
-  ApplicationRights,
-  hasRights,
-} from '#models/authentication/user/rights';
+import { hasRights } from '#models/authentication/user/rights';
 import { UseCase } from '#models/use-cases';
-import { setAgentSession } from '#utils/session';
 import withSession, { IReqWithSession } from '#utils/session/with-session';
 import { APIRoutesHandlers } from '../routes-handlers';
 import { APIRoutesScopes } from '../routes-scopes';
@@ -24,16 +20,6 @@ async function getRoute(request: IReqWithSession, context: IContext) {
   const handler = APIRoutesHandlers[route];
   const scope = APIRoutesScopes[route];
   const session = request.session;
-
-  /**
-   * This only updates rights on ajax api calls.
-   *
-   * Therefore it is very efficient to downgrade agent rights but less effective to upgrade rights as an agent with few rights will not event trigger ajax calls on some pages.
-   */
-  if (hasRights(session, ApplicationRights.isAgent) && session?.user?.email) {
-    const updatedAgent = await getVerifiedAgent(session.user);
-    await setAgentSession(updatedAgent, session);
-  }
 
   if (!hasRights(session, scope)) {
     throw new APIRouteError(

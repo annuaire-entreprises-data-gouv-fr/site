@@ -1,19 +1,10 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
-import { HttpForbiddenError } from '#clients/exceptions';
-import { isServicePublic } from '#models/core/types';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import { extractSirenFromSiret } from '#utils/helpers';
-import {
-  CanRequestAuthorizationException,
-  NoSiretException,
-} from '../authentication-exceptions';
-import { mapIdpToSiret } from './orgas/idpid-to-siret';
-import { mightBeAuthorized } from './orgas/might-be-authorized';
-import { isOrganisationWhitelisted } from './orgas/whitelist';
+import { AgentOrganisation } from './organisation';
+import { mapIdpToSiret } from './organisation/idpid-to-siret';
 import { defaultAgentScopes } from './scopes/default-agent-scopes';
 import { IAgentScope } from './scopes/parse';
-import { extractDomain, isFromMCP, isLikelyPrestataire } from './utils';
+import { extractDomain, isLikelyPrestataire } from './utils';
 
 export type IAgentInfo = {
   userId: string;
@@ -77,44 +68,12 @@ export class AgentConnected {
   }
 
   async getOrganisationHabilitation() {
-    const organisationHabilitation = {
-      scopes: [...defaultAgentScopes],
-      userType: 'Agent connecté',
-      isSuperAgent: false,
-    };
-
-    if (!this.siret) {
-      throw new NoSiretException(
-        'The user doesn‘t have a siret',
-        `${this.domain} - ${this.idpId} - ${
-          isFromMCP(this.idpId) ? 'ProConnectIdentité' : 'FI ministères'
-        }`
-      );
-    }
-
-    const siren = extractSirenFromSiret(this.siret);
-
-    if (isOrganisationWhitelisted(siren)) {
-      return organisationHabilitation;
-    }
-
-    const uniteLegale = await getUniteLegaleFromSlug(siren, {
-      page: 0,
-      isBot: false,
-    });
-
-    if (isServicePublic(uniteLegale)) {
-      return organisationHabilitation;
-    }
-
-    if (mightBeAuthorized(uniteLegale.natureJuridique)) {
-      throw new CanRequestAuthorizationException(
-        uniteLegale.natureJuridique,
-        siren
-      );
-    }
-
-    throw new HttpForbiddenError('Organization is not a service public');
+    const organisation = new AgentOrganisation(
+      this.domain,
+      this.idpId,
+      this.siret
+    );
+    return await organisation.getHabilitationLevel();
   }
 
   /**
