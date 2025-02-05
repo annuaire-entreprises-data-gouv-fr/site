@@ -24,12 +24,12 @@ export class AgentOrganisation {
   constructor(private domain: string, private idpId: string, siret: string) {
     this.isFromMCP = this.isMCP(idpId);
     this.siren = extractSirenFromSiret(siret);
-    this.isDINUM = siret === '130025265';
+    this.isDINUM = this.siren === '130025265';
   }
 
-  isTrustworthy() {
-    return !this.isMCP && !this.isDINUM;
-  }
+  // isTrustworthy() {
+  //   return !this.isMCP && !this.isDINUM;
+  // }
 
   isMCP(idp_id: string) {
     if (idp_id === '71144ab3-ee1a-4401-b7b3-79b44f7daeeb') {
@@ -59,8 +59,7 @@ export class AgentOrganisation {
     });
 
     if (isServicePublic(uniteLegale)) {
-      // const isTrustworthyOrganisation = !(isMCP || siren= DINUM)
-      // if(isTrustworthyOrganisation) {
+      // if(this.isTrustworthy()) {
       //   return trustworthytOrganisationHabilitation;
       // }
       return basicOrganisationHabilitation;
