@@ -77,13 +77,13 @@ export default function FAQPage() {
           <>
             <h2>{title}</h2>
             <ul>
-              {(articlesByGroup[key] || []).map(({ slug, title }) => (
-                <li key={slug}>
+              {(articlesByGroup[key] || []).map(({ slug, title }, index) => (
+                <li key={slug + index}>
                   <a href={`/faq/${slug}`}>{title}</a>
                 </li>
               ))}
-              {(additionnalLink || []).map(({ href, label }) => (
-                <li key={href}>
+              {(additionnalLink || []).map(({ href, label }, index) => (
+                <li key={href + index}>
                   <a href={href}>{label}</a>
                 </li>
               ))}
