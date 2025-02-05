@@ -39,6 +39,7 @@ export default async function HomeLayout({
           href="https://annuaire-entreprises.data.gouv.fr/opensearch.xml"
         />
       </head>
+      <script async src="https://tally.so/widgets/embed.js" />
       <body>
         {process.env.NODE_ENV === 'production' &&
           process.env.MATOMO_SITE_ID && <MatomoInit session={session} />}
