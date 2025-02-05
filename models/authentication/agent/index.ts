@@ -1,7 +1,6 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
 import { AgentOrganisation } from './organisation';
-import { mapIdpToSiret } from './organisation/idpid-to-siret';
 import { defaultAgentScopes } from './scopes/default-agent-scopes';
 import { IAgentScope } from './scopes/parse';
 
@@ -34,7 +33,7 @@ export class AgentConnected {
     this.familyName = userInfo.family_name ?? '';
     this.firstName = userInfo.given_name ?? '';
     this.userId = userInfo.sub;
-    this.siret = mapIdpToSiret(userInfo.siret, this.idpId);
+    this.siret = userInfo.siret;
   }
 
   extractDomain(email: string) {
