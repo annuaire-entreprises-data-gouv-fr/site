@@ -1,5 +1,6 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
+import { PrestataireException } from '../authentication-exceptions';
 import { AgentOrganisation } from './organisation';
 import { defaultAgentScopes } from './scopes/default-agent-scopes';
 import { IAgentScope } from './scopes/parse';
@@ -44,6 +45,21 @@ export class AgentConnected {
     }
   }
 
+  isLikelyPrestataire = () => {
+    if (this.email.indexOf('@beta.gouv.fr') > -1) {
+      return true;
+    } else {
+      if (
+        !!this.email.match(
+          /[.@-]*(ext|presta|prestataire)(ernal|ernes|erne)*[.@-]/g
+        )
+      ) {
+        return true;
+      }
+      return false;
+    }
+  };
+
   /**
    * Habilitation is either agent-level or organisation-level
    * @returns
@@ -83,7 +99,14 @@ export class AgentConnected {
    * @returns
    */
   async getAndVerifyAgentInfo() {
+    if (this.isLikelyPrestataire()) {
+      throw new PrestataireException({
+        cause: `${this.email} is a prestataire`,
+      });
+    }
+
     const habilitationLevel = await this.getHabilitationLevel();
+
     return {
       userId: this.userId,
       idpId: this.idpId,

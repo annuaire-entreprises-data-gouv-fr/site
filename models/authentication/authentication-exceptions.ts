@@ -9,6 +9,15 @@ export class AgentConnectionFailedException extends Exception {
   }
 }
 
+export class PrestataireException extends Exception {
+  constructor(args: { cause?: any }) {
+    super({
+      name: 'PrestataireException',
+      ...args,
+    });
+  }
+}
+
 export class CanRequestAuthorizationException extends Exception {
   constructor(codeJuridique: string, siren: string) {
     super({

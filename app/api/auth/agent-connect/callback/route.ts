@@ -40,7 +40,11 @@ export const GET = withSession(async function callbackRoute(req) {
     return response;
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
-    if (e instanceof CanRequestAuthorizationException) {
+    if (e instanceof PrestataireException) {
+      return NextResponse.redirect(
+        getBaseUrl() + '/connexion/habilitation/prestataire'
+      );
+    } else if (e instanceof CanRequestAuthorizationException) {
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/requise'
       );
