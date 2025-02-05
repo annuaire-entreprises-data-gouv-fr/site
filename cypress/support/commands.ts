@@ -27,7 +27,6 @@ const generateSessionCookie = async (inputScopes?: IAgentScope[]) => {
       userId: '123456789',
       domain: 'yopmail.com',
       siret: '12345678912345',
-      isPrestataire: false,
       familyName: 'John Doe',
       firstName: 'John Doe',
       fullName: 'John Doe',

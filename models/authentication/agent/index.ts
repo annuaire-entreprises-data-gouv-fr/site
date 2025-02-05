@@ -4,7 +4,6 @@ import { AgentOrganisation } from './organisation';
 import { mapIdpToSiret } from './organisation/idpid-to-siret';
 import { defaultAgentScopes } from './scopes/default-agent-scopes';
 import { IAgentScope } from './scopes/parse';
-import { extractDomain, isLikelyPrestataire } from './utils';
 
 export type IAgentInfo = {
   userId: string;
@@ -17,12 +16,10 @@ export type IAgentInfo = {
   siret: string;
   scopes: IAgentScope[];
   userType: string;
-  isPrestataire: boolean;
 };
 
 export class AgentConnected {
   private domain;
-  private isPrestataire;
   private idpId;
   private email;
   private familyName;
@@ -31,15 +28,21 @@ export class AgentConnected {
   private siret;
 
   constructor(userInfo: IProConnectUserInfo) {
-    this.domain = extractDomain(userInfo?.email || '');
-    this.isPrestataire = isLikelyPrestataire(this.domain);
-
+    this.domain = this.extractDomain(userInfo?.email || '');
     this.idpId = userInfo.idp_id ?? '';
     this.email = userInfo.email ?? '';
     this.familyName = userInfo.family_name ?? '';
     this.firstName = userInfo.given_name ?? '';
     this.userId = userInfo.sub;
     this.siret = mapIdpToSiret(userInfo.siret, this.idpId);
+  }
+
+  extractDomain(email: string) {
+    try {
+      return (email.match(/@(.*)/) || ['']).shift() || '';
+    } catch {
+      return '';
+    }
   }
 
   /**
@@ -91,7 +94,6 @@ export class AgentConnected {
       firstName: this.firstName,
       fullName: this.familyName ? `${this.firstName} ${this.familyName}` : '',
       siret: this.siret,
-      isPrestataire: this.isPrestataire,
       ...habilitationLevel,
     };
   }
