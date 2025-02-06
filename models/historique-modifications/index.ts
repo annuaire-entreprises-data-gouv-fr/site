@@ -42,7 +42,9 @@ const loadData = (): IChangelog[] => {
 export const changelogData = loadData();
 
 const loadLastDates = () => {
-  const agent = changelogData.find(({ target }) => target.agent)?.date;
+  const agent = changelogData.find(
+    ({ target }) => target.agent || target.site
+  )?.date;
   const site = changelogData.find(({ target }) => target.site)?.date;
   return {
     agent,

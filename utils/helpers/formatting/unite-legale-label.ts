@@ -26,7 +26,6 @@ const uniteLegalePronoun = (uniteLegale: IUniteLegale) => {
     case isServicePublic(uniteLegale):
     case uniteLegale.complements.estEntrepreneurIndividuel:
       return 'l’';
-    case isCollectiviteTerritoriale(uniteLegale):
     default:
       return 'la ';
   }
@@ -48,8 +47,6 @@ export const uniteLegaleLabel = (uniteLegale: IUniteLegale) => {
   switch (true) {
     case isAssociation(uniteLegale):
       return `association`;
-    case isCollectiviteTerritoriale(uniteLegale):
-      return 'collectivité territoriale';
     case isServicePublic(uniteLegale):
       return `administration`;
     case uniteLegale.complements.estEntrepreneurIndividuel:
