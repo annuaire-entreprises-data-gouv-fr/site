@@ -1,6 +1,5 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
-import { PrestataireException } from '../authentication-exceptions';
 import { AgentOrganisation } from './organisation';
 import { defaultAgentScopes } from './scopes/default-agent-scopes';
 import { IAgentScope } from './scopes/parse';
@@ -46,18 +45,14 @@ export class AgentConnected {
   }
 
   isLikelyPrestataire = () => {
-    if (this.email.indexOf('@beta.gouv.fr') > -1) {
+    if (
+      !!this.email.match(
+        /[.@-]*(ext|external|externe|presta|prestataire)(s)*[.@-]/g
+      )
+    ) {
       return true;
-    } else {
-      if (
-        !!this.email.match(
-          /[.@-]*(ext|presta|prestataire)(ernal|ernes|erne)*[.@-]/g
-        )
-      ) {
-        return true;
-      }
-      return false;
     }
+    return false;
   };
 
   /**
@@ -69,6 +64,14 @@ export class AgentConnected {
     if (agentHabilitation) {
       return agentHabilitation;
     }
+
+    // exclude prestataire from getting habilitation
+    if (this.isLikelyPrestataire()) {
+      throw new PrestataireException({
+        cause: `${this.email} is a prestataire`,
+      });
+    }
+
     return this.getOrganisationHabilitation();
   }
 
@@ -99,12 +102,6 @@ export class AgentConnected {
    * @returns
    */
   async getAndVerifyAgentInfo() {
-    if (this.isLikelyPrestataire()) {
-      throw new PrestataireException({
-        cause: `${this.email} is a prestataire`,
-      });
-    }
-
     const habilitationLevel = await this.getHabilitationLevel();
 
     return {

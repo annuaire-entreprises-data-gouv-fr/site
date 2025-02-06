@@ -8,7 +8,6 @@ import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { extractSirenFromSiret, Siren } from '#utils/helpers';
 import { defaultAgentScopes } from '../scopes/default-agent-scopes';
 import { mightBeAuthorized } from './might-be-authorized';
-import { isOrganisationWhitelisted } from './whitelist';
 
 const basicOrganisationHabilitation = {
   scopes: [...defaultAgentScopes],
@@ -45,10 +44,6 @@ export class AgentOrganisation {
           this.isFromMCP ? 'ProConnectIdentité' : 'FI ministères'
         }`
       );
-    }
-
-    if (isOrganisationWhitelisted(this.siren)) {
-      return basicOrganisationHabilitation;
     }
 
     const uniteLegale = await getUniteLegaleFromSlug(this.siren, {
