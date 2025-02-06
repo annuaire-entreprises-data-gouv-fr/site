@@ -4,6 +4,8 @@ import constants from '#models/constants';
 import { ISubvention, ISubventions } from '#models/subventions/association';
 import { IdRna, Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
+import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-request-caller-infos';
+import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
 
 /**
  * Data Subvention
@@ -13,6 +15,10 @@ export const clientApiDataSubvention = async (
   siren: Siren | IdRna | string
 ): Promise<ISubventions> => {
   const route = routes.apiDataSubvention.grants(siren);
+
+  const callerInfos = await sensitiveRequestCallerInfos();
+  sensitiveRequestLogger(route, callerInfos);
+
   const data = await httpGet<any>(route, {
     headers: { 'x-access-token': process.env.DATA_SUBVENTION_API_KEY },
     timeout: constants.timeout.XXXL,
