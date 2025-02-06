@@ -5,6 +5,7 @@ import {
   AgentConnectionFailedException,
   CanRequestAuthorizationException,
   NoSiretException,
+  PrestataireException,
 } from '#models/authentication/authentication-exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';

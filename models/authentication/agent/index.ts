@@ -1,5 +1,6 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
+import { PrestataireException } from '../authentication-exceptions';
 import { AgentOrganisation } from './organisation';
 import { defaultAgentScopes } from './scopes/default-agent-scopes';
 import { IAgentScope } from './scopes/parse';
