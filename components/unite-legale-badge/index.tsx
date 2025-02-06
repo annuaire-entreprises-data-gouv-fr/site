@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import {
   AssociationBadge,
   CollectiviteTerritorialeBadge,
@@ -12,6 +11,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
+import { Fragment } from 'react';
 
 const UniteLegaleBadge: React.FC<{
   uniteLegale: IUniteLegale;
@@ -26,15 +26,12 @@ const UniteLegaleBadge: React.FC<{
     badges.push(<EntrepriseIndividuelleBadge small={small} />);
   }
 
-  if (isCollectiviteTerritoriale(uniteLegale)) {
-    badges.push(<CollectiviteTerritorialeBadge small={small} />);
+  if (isServicePublic(uniteLegale)) {
+    badges.push(<ServicePublicBadge small={small} />);
   }
 
-  if (
-    isServicePublic(uniteLegale) &&
-    !isCollectiviteTerritoriale(uniteLegale)
-  ) {
-    badges.push(<ServicePublicBadge small={small} />);
+  if (isCollectiviteTerritoriale(uniteLegale)) {
+    badges.push(<CollectiviteTerritorialeBadge small={small} />);
   }
 
   if (badges.length > 0) {
