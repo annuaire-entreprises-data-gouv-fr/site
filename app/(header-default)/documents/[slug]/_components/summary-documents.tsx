@@ -1,5 +1,8 @@
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 
 export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
   <nav role="navigation" aria-labelledby="document-summary-title">

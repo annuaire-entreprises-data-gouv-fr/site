@@ -22,17 +22,17 @@ export default function RequiredHabilitationPage() {
         </li>
       </ul>
       <p>
-        Votre organisation{' '}
-        <strong>ne fait pas partie de la liste des services publics</strong>.
-        Vous pouvez{' '}
-        <a
-          href="https://www.demarches-simplifiees.fr/commencer/demande-d-ajout-a-la-liste-des-services-publics"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          demander l’ajout de votre organisation
+        Votre organisation <strong>ne fait pas partie</strong> de la{' '}
+        <a>liste des services publics</a>{' '}
+        <strong>
+          au sens de l’article L. 100-3 du code des relations entre le public et
+          l’administration (CRPA)
+        </strong>
+        . Si vous appartenez a une administration, vous pouvez{' '}
+        <a href="https://www.demarches-simplifiees.fr/commencer/demande-d-ajout-a-la-liste-des-administrations">
+          faire une demande d’ajout
         </a>{' '}
-        à la liste.
+        de votre organisation à la liste.
       </p>
       <p>
         Si votre demande est acceptée, vous obtiendrez automatiquement l’accès à

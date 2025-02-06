@@ -3,13 +3,16 @@ import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
 import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
+import {
   estDiffusible,
   estNonDiffusibleProtected,
   nonDiffusibleDataFormatter,
 } from '#models/core/diffusion';
 import { IEtablissement } from '#models/core/types';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import React from 'react';
 
 const AvisSituationLink: React.FC<{

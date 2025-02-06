@@ -1,12 +1,15 @@
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
 import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
+import {
   estDiffusible,
   nonDiffusibleDataFormatter,
 } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import React from 'react';
 
 const ExtraitRNELink: React.FC<{

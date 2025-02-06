@@ -2,9 +2,12 @@
 
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { changelogData } from '#models/historique-modifications';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import { useMemo, useState } from 'react';
 
 export default function ChangelogWithFilters({

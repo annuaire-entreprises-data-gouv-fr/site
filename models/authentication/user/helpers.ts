@@ -8,10 +8,6 @@ export function getAgentUserType(session: ISession | null) {
   return session?.user?.userType || '';
 }
 
-export function getAgentLabel(session: ISession | null) {
-  return session?.user?.isPrestataire ? 'externe' : 'agent public';
-}
-
 export function getIAgentScope(session: ISession | null) {
   return session?.user?.scopes || [];
 }

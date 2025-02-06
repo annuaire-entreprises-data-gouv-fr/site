@@ -1,9 +1,9 @@
 import FloatingModal from '#components-ui/floating-modal';
 import { Icon } from '#components-ui/icon/wrapper';
+import { getAgentDisplayName } from '#models/authentication/user/helpers';
+import { isLoggedIn } from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import constants from '#models/constants';
-import { getAgentDisplayName, getAgentLabel } from '#models/user/helpers';
-import { isLoggedIn } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import { EspaceAgentLink } from './espace-agent-link';
 import styles from './styles.module.css';
 
@@ -24,7 +24,7 @@ const Menu: React.FC<{
                 color: constants.colors.espaceAgent,
               }}
             >
-              {getAgentLabel(session)}
+              agent public
             </strong>
             )
           </span>

@@ -1,6 +1,9 @@
-import { getAgentUserType } from '#models/user/helpers';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
+import { getAgentUserType } from '#models/authentication/user/helpers';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 
 const TRACKER_BASE_URL = 'https://stats.data.gouv.fr';
 export function MatomoInit({ session }: { session: ISession | null }) {

@@ -4,8 +4,8 @@ import { DataInpiLinkWithExplanations } from '#components/justificatifs/data-inp
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import { formatDate } from '#utils/helpers';
 
 const formatDateCloture = (DDMM: string) => {

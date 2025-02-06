@@ -1,5 +1,5 @@
 import { MultiChoice } from '#components-ui/multi-choice';
-import { UseCase } from '#models/user/agent';
+import { UseCase } from '#models/use-cases';
 
 export function AskUseCase({
   idPrefix,

@@ -11,9 +11,9 @@ import { CopyPaste } from '#components/table/copy-paste';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { ISession } from '#models/authentication/user/session';
 import { estActif } from '#models/core/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import {
   formatDate,
   formatSiret,

@@ -1,10 +1,10 @@
 import { proConnectAuthorizeUrl } from '#clients/authentication/pro-connect/strategy';
+import { AgentConnectionFailedException } from '#models/authentication/authentication-exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { setPathFrom } from '#utils/session';
 import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
-import { AgentConnectFailedException } from '../agent-connect-types';
 
 export const GET = withSession(async function loginRoute(req) {
   try {
@@ -21,7 +21,7 @@ export const GET = withSession(async function loginRoute(req) {
     const url = await proConnectAuthorizeUrl(req);
     return NextResponse.redirect(url);
   } catch (e: any) {
-    logFatalErrorInSentry(new AgentConnectFailedException({ cause: e }));
+    logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
     return NextResponse.redirect(getBaseUrl() + '/connexion/echec-connexion');
   }
 });
