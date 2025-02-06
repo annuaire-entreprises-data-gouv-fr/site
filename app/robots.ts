@@ -36,7 +36,6 @@ export default function robots(): MetadataRoute.Robots {
         '/rechercher/',
         '/dirigeants/',
         '/personne/',
-        '/elus/',
         '/divers/',
         '/erreur/',
         '/formulaire/',
