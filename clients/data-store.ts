@@ -8,6 +8,8 @@ import { logWarningInSentry } from '#utils/sentry';
 export class DataStore<T> {
   private data: { [key: string]: T } | null;
 
+  private refreshPromise: Promise<T> | null;
+
   /**
    * Default TTL is 24h, set 0 to deactivate refresh
    * @param getData
@@ -22,11 +24,21 @@ export class DataStore<T> {
     private TTL = 86400000
   ) {
     this.data = null;
+    this.refreshPromise = null;
   }
 
   fetchAndStoreData = async () => {
     try {
-      const response = await this.getData();
+      if (!this.refreshPromise) {
+        this.refreshPromise = this.getData();
+
+        /** refresh */
+        if (this.TTL && this.TTL > 0) {
+          setTimeout(this.fetchAndStoreData, this.TTL);
+        }
+      }
+
+      const response = await this.refreshPromise;
       this.data = this.mapToDomainObject(response);
     } catch (e) {
       logWarningInSentry(
@@ -35,10 +47,6 @@ export class DataStore<T> {
           cause: e,
         })
       );
-    }
-    /** refresh */
-    if (this.TTL && this.TTL > 0) {
-      setTimeout(this.fetchAndStoreData, this.TTL);
     }
   };
 
