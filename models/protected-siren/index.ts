@@ -15,7 +15,7 @@ import {
 class ProtectedSirenList {
   public _list: DataStore<boolean>;
   // time before protected siren list update
-  private TTL = 3600000; //1h
+  private TTL = 21600000; //1h
 
   constructor() {
     this._list = new DataStore<boolean>(
