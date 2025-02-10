@@ -1,9 +1,9 @@
-import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ICollectiviteTerritoriale } from '#models/core/types';
+import React from 'react';
 
 const CollectiviteTerritorialeSection: React.FC<{
   uniteLegale: ICollectiviteTerritoriale;
@@ -40,7 +40,7 @@ const CollectiviteTerritorialeSection: React.FC<{
     [
       'Élus',
       elus.length > 0 ? (
-        <a href={`/elus/${uniteLegale.siren}`}>
+        <a href={`/dirigeants/${uniteLegale.siren}`}>
           → voir les {elus.length} élu(s)
         </a>
       ) : (

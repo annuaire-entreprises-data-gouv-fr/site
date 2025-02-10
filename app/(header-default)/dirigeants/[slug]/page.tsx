@@ -4,7 +4,11 @@ import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { estDiffusible } from '#models/core/diffusion';
-import { isAssociation, isServicePublic } from '#models/core/types';
+import {
+  isAssociation,
+  isCollectiviteTerritoriale,
+  isServicePublic,
+} from '#models/core/types';
 import { ApplicationRights, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
@@ -17,6 +21,7 @@ import extractParamsAppRouter, {
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import DirigeantsAssociationSection from './_component/sections/association/dirigeants';
+import ElusSection from './_component/sections/collectivite/elus-section';
 import BeneficiairesSection from './_component/sections/entreprise/beneficiaires';
 import DirigeantsSection from './_component/sections/entreprise/dirigeants-open/section';
 import DirigeantsSectionProtected from './_component/sections/entreprise/dirigeants-protected/section';
@@ -31,7 +36,7 @@ export const generateMetadata = async (
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
   return {
-    title: `Dirigeants de la structure - ${uniteLegalePageTitle(uniteLegale)}`,
+    title: `Dirigeants - ${uniteLegalePageTitle(uniteLegale)}`,
     description: uniteLegalePageDescription(uniteLegale),
     robots: 'noindex',
     alternates: {
@@ -57,7 +62,9 @@ const DirigeantsPage = async (props: AppRouterProps) => {
           session={session}
         />
         <DirigeantSummary uniteLegale={uniteLegale} />
-        {isServicePublic(uniteLegale) ? (
+        {isCollectiviteTerritoriale(uniteLegale) ? (
+          <ElusSection uniteLegale={uniteLegale} />
+        ) : isServicePublic(uniteLegale) ? (
           <ResponsablesServicePublicSection uniteLegale={uniteLegale} />
         ) : !estDiffusible(uniteLegale) &&
           !hasRights(session, ApplicationRights.nonDiffusible) ? (
