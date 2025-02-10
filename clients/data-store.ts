@@ -47,6 +47,8 @@ export class DataStore<T> {
           cause: e,
         })
       );
+    } finally {
+      this.refreshPromise = null;
     }
   };
 
