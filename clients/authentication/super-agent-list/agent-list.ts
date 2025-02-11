@@ -5,8 +5,8 @@ import {
   clientSuperAgentList,
   IAgentRecord,
 } from '#clients/authentication/super-agent-list';
-import { DataStore } from '#clients/data-store';
 import { IAgentScope, parseAgentScope } from '#models/user/agent-scopes/parse';
+import { DataStore } from '#utils/data-store';
 
 class SuperAgentsList {
   private _superAgentsStore: DataStore<IAgentScope[]>;
@@ -24,10 +24,10 @@ class SuperAgentsList {
 
   mapResponseToAgentScopes = (
     response: IAgentRecord[]
-  ): { [key: string]: IAgentScope[] } =>
+  ): Map<string, IAgentScope[]> =>
     response
       .filter((r) => r.actif === true)
-      .reduce((acc: { [key: string]: IAgentScope[] }, agent) => {
+      .reduce((acc: Map<string, IAgentScope[]>, agent) => {
         const { inValidScopes, validScopes } = parseAgentScope(agent.scopes);
 
         if (inValidScopes.length > 0) {
@@ -38,9 +38,9 @@ class SuperAgentsList {
           );
         }
 
-        acc[agent.email] = validScopes;
+        acc.set(agent.email, validScopes);
         return acc;
-      }, {});
+      }, new Map() as Map<string, IAgentScope[]>);
 
   getScopeForAgent = async (email: string) => {
     try {
