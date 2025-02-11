@@ -1,4 +1,5 @@
-import { DataStore } from '#clients/data-store';
+import { DataStore } from '#utils/data-store';
+
 import routes from '#clients/routes';
 import { httpGet } from '#utils/network';
 
