@@ -72,6 +72,6 @@ export class DataStore<T> {
 
   getKeys = async () => {
     const data = await this.accessData();
-    return data.keys();
+    return [...data.keys()];
   };
 }
