@@ -1,4 +1,5 @@
-import { DataStore } from '#clients/data-store';
+import { DataStore } from '#utils/data-store';
+
 import routes from '#clients/routes';
 import { ICCWithMetadata } from '#models/conventions-collectives';
 import { httpGet } from '#utils/network';
@@ -19,7 +20,7 @@ type IIdccMetadata = {
 function mapToDomainObject(response: IIdccMetadata) {
   return Object.entries(response).reduce((idccMetadatas, [idcc, metadata]) => {
     const { id_kali, url, nature, etat } = metadata;
-    idccMetadatas[idcc] = {
+    idccMetadatas.set(idcc, {
       idKali: id_kali,
       legifrance: url,
       title: metadata['titre de la convention'],
@@ -28,10 +29,10 @@ function mapToDomainObject(response: IIdccMetadata) {
       idcc,
       updated: [],
       unknown: false,
-    };
+    });
 
     return idccMetadatas;
-  }, {} as { [idcc: string]: ICCWithMetadata });
+  }, new Map() as Map<string, ICCWithMetadata>);
 }
 
 const store = new DataStore<ICCWithMetadata>(

@@ -1,14 +1,14 @@
-import { DataStore } from '#clients/data-store';
 import routes from '#clients/routes';
+import { DataStore } from '#utils/data-store';
 import { httpGet } from '#utils/network';
 
 type InclusionMetadata = { id: string; name: string; parent: string };
 
 function mapToDomainObject(response: { results: InclusionMetadata[] }) {
   return response.results.reduce((store, el) => {
-    store[el.id] = el;
+    store.set(el.id, el);
     return store;
-  }, {} as { [kind: string]: InclusionMetadata });
+  }, new Map() as Map<string, InclusionMetadata>);
 }
 
 const store = new DataStore<InclusionMetadata>(

@@ -1,4 +1,5 @@
-import { DataStore } from '#clients/data-store';
+import { DataStore } from '#utils/data-store';
+
 import { readFromGrist } from '#clients/external-tooling/grist';
 import { InternalError } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
@@ -30,10 +31,10 @@ class ProtectedSirenList {
     const sirenList = response
       .map((record) => record.siren)
       .filter(Boolean)
-      .reduce((acc: { [key: string]: boolean }, protectedSiren) => {
-        acc[protectedSiren] = true;
+      .reduce((acc: Map<string, boolean>, protectedSiren) => {
+        acc.set(protectedSiren, true);
         return acc;
-      }, {});
+      }, new Map() as Map<string, boolean>);
 
     if (Object.keys(sirenList).length < 4000) {
       logErrorInSentry(
