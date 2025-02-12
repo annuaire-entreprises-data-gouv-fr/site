@@ -12,9 +12,9 @@ describe('DataStore', () => {
       'test',
       () => {
         t += 1;
-        const m = new Map();
-        m.set('foo', true);
-        m.set('bar', true);
+        const m = {} as { [key: string]: boolean };
+        m['foo'] = true;
+        m['bar'] = true;
         return m;
       },
       0
