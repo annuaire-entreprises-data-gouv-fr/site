@@ -20,7 +20,7 @@ type IIdccMetadata = {
 function mapToDomainObject(response: IIdccMetadata) {
   return Object.entries(response).reduce((idccMetadatas, [idcc, metadata]) => {
     const { id_kali, url, nature, etat } = metadata;
-    idccMetadatas.set(idcc, {
+    idccMetadatas[idcc] = {
       idKali: id_kali,
       legifrance: url,
       title: metadata['titre de la convention'],
@@ -29,10 +29,10 @@ function mapToDomainObject(response: IIdccMetadata) {
       idcc,
       updated: [],
       unknown: false,
-    });
+    };
 
     return idccMetadatas;
-  }, new Map() as Map<string, ICCWithMetadata>);
+  }, {} as { [key: string]: ICCWithMetadata });
 }
 
 const store = new DataStore<ICCWithMetadata>(

@@ -6,9 +6,9 @@ type InclusionMetadata = { id: string; name: string; parent: string };
 
 function mapToDomainObject(response: { results: InclusionMetadata[] }) {
   return response.results.reduce((store, el) => {
-    store.set(el.id, el);
+    store[el.id] = el;
     return store;
-  }, new Map() as Map<string, InclusionMetadata>);
+  }, {} as { [key: string]: InclusionMetadata });
 }
 
 const store = new DataStore<InclusionMetadata>(

@@ -24,10 +24,10 @@ class SuperAgentsList {
 
   mapResponseToAgentScopes = (
     response: IAgentRecord[]
-  ): Map<string, IAgentScope[]> =>
+  ): { [key: string]: IAgentScope[] } =>
     response
       .filter((r) => r.actif === true)
-      .reduce((acc: Map<string, IAgentScope[]>, agent) => {
+      .reduce((acc: { [key: string]: IAgentScope[] }, agent) => {
         const { inValidScopes, validScopes } = parseAgentScope(agent.scopes);
 
         if (inValidScopes.length > 0) {
@@ -38,9 +38,9 @@ class SuperAgentsList {
           );
         }
 
-        acc.set(agent.email, validScopes);
+        acc[agent.email] = validScopes;
         return acc;
-      }, new Map() as Map<string, IAgentScope[]>);
+      }, {} as { [key: string]: IAgentScope[] });
 
   getScopeForAgent = async (email: string) => {
     try {

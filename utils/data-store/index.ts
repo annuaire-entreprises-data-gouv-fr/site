@@ -9,7 +9,7 @@ import { logWarningInSentry } from '#utils/sentry';
  * As long as it as a data in store it will ignore any failed attempt to refresh and still return outdated cached data
  */
 export class DataStore<T> {
-  private data: Map<string, T> | null;
+  private data: { [key: string]: T } | null;
   private onGoingRefresh: Promise<T> | null;
   private shouldAttemptRefresh: boolean;
 
@@ -22,7 +22,7 @@ export class DataStore<T> {
   constructor(
     private getData: () => Promise<any>,
     private storeName: string,
-    private mapToDomainObject: (result: any) => Map<string, T>,
+    private mapToDomainObject: (result: any) => { [key: string]: T },
     private TTR = 86400000
   ) {
     this.data = null;
@@ -54,7 +54,7 @@ export class DataStore<T> {
     }
   };
 
-  private accessData = async () => {
+  get = async (key: string) => {
     if (!this.data) {
       await this.refresh();
     }
@@ -62,16 +62,17 @@ export class DataStore<T> {
     if (!this.data || this.data.size === 0) {
       throw new HttpServerError(`Empty data list : ${this.storeName}`);
     }
-    return this.data;
-  };
-
-  get = async (key: string) => {
-    const data = await this.accessData();
-    return data.get(key) ?? null;
+    return this.data[key];
   };
 
   getKeys = async () => {
-    const data = await this.accessData();
-    return [...data.keys()];
+    if (!this.data) {
+      await this.refresh();
+    }
+
+    if (!this.data || this.data.size === 0) {
+      throw new HttpServerError(`Empty data list : ${this.storeName}`);
+    }
+    return Object.keys(this.data);
   };
 }

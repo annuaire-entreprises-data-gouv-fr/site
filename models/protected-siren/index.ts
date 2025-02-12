@@ -31,10 +31,10 @@ class ProtectedSirenList {
     const sirenList = response
       .map((record) => record.siren)
       .filter(Boolean)
-      .reduce((acc: Map<string, boolean>, protectedSiren) => {
-        acc.set(protectedSiren, true);
+      .reduce((acc: { [key: string]: boolean }, protectedSiren) => {
+        acc[protectedSiren] = true;
         return acc;
-      }, new Map() as Map<string, boolean>);
+      }, {} as { [key: string]: boolean });
 
     if (Object.keys(sirenList).length < 4000) {
       logErrorInSentry(
@@ -50,11 +50,12 @@ class ProtectedSirenList {
 const protectedSiren = new ProtectedSirenList();
 
 export const isProtectedSiren = async (siren: Siren) =>
-  protectedSiren._list.get(siren);
+  await protectedSiren._list.get(siren);
 
 export const isProtectedSiret = async (siret: Siret) => {
   const siren = extractSirenFromSiret(siret);
-  return protectedSiren._list.get(siren);
+  return await protectedSiren._list.get(siren);
 };
 
-export const getProtectedSirenList = async () => protectedSiren._list.getKeys();
+export const getProtectedSirenList = async () =>
+  await protectedSiren._list.getKeys();
