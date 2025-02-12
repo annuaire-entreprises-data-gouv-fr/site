@@ -62,7 +62,8 @@ export class DataStore<T> {
     if (!this.data || this.data.size === 0) {
       throw new HttpServerError(`Empty data list : ${this.storeName}`);
     }
-    return this.data[key];
+    const value = this.data[key];
+    return typeof value === 'undefined' ? null : value;
   };
 
   getKeys = async () => {
