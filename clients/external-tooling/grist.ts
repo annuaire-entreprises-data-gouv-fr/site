@@ -63,21 +63,16 @@ export async function logInGrist(
 }
 
 export async function readFromGrist(tableKey: keyof typeof gristTables) {
-  try {
-    const { records } = await httpClient<IGristRecords>({
-      method: 'GET',
-      url: getGristUrl(tableKey),
-      headers: {
-        Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
-      },
-      timeout: constants.timeout.XXL,
-    });
+  const { records } = await httpClient<IGristRecords>({
+    method: 'GET',
+    url: getGristUrl(tableKey),
+    headers: {
+      Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
+    },
+    timeout: constants.timeout.XXL,
+  });
 
-    return records.map((r) => r.fields);
-  } catch (error) {
-    logErrorInSentry(new ReadFromGristException({ cause: error }));
-    throw error;
-  }
+  return records.map((r) => r.fields);
 }
 
 class LogInGristException extends Exception {
