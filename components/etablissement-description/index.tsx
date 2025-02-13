@@ -1,9 +1,7 @@
-import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import {
   formatAge,
   formatDateLong,
@@ -11,11 +9,11 @@ import {
   uniteLegaleLabel,
   uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
+import React from 'react';
 
 type IProps = {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
-  session: ISession | null;
 };
 
 const statusLabel = (etatAdministratif: IETATADMINSTRATIF) => {
@@ -34,7 +32,6 @@ const statusLabel = (etatAdministratif: IETATADMINSTRATIF) => {
 export const EtablissementDescription: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
-  session,
 }) => {
   const ageCreation = etablissement.dateCreation
     ? formatAge(etablissement.dateCreation)
