@@ -117,7 +117,6 @@ const TitleEtablissementWithDenomination: React.FC<{
       <EtablissementDescription
         etablissement={etablissement}
         uniteLegale={uniteLegale}
-        session={session}
       />
     )}
 
