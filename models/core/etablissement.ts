@@ -239,7 +239,7 @@ const getEtablissementWithUniteLegaleFromSlug = async (
   });
 
   // only for insee as recherche already holds ancienSiege at etablissement level
-  if (uniteLegale.anciensSiegesSirets.indexOf(etablissement.siret)) {
+  if (uniteLegale.anciensSiegesSirets.indexOf(etablissement.siret) > -1) {
     etablissement.ancienSiege = true;
   }
 
