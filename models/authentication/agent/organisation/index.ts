@@ -36,6 +36,16 @@ export class AgentOrganisation {
     }
   }
 
+  isNotAL103Administration(code: string) {
+    const rawCode = (code || '').replace('.', '');
+    if (
+      ['4110', '4120', '4140', '4150', '7381', '7410'].indexOf(rawCode) > -1
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   async getHabilitationLevel() {
     if (!this.siren) {
       throw new NoSiretException(
@@ -52,7 +62,12 @@ export class AgentOrganisation {
     });
 
     if (isServicePublic(uniteLegale)) {
-      if (this.isTrustworthy()) {
+      if (this.isNotAL103Administration(uniteLegale.natureJuridique)) {
+        throw new CanRequestAuthorizationException(
+          uniteLegale.natureJuridique,
+          this.siren
+        );
+      } else if (this.isTrustworthy()) {
         // return trustworthytOrganisationHabilitation;
         return basicOrganisationHabilitation;
       }
