@@ -47,12 +47,33 @@ export class AgentConnected {
 
   isLikelyPrestataire = () => {
     if (
+      [
+        'code.gouv.fr',
+        'data.gouv.fr',
+        'demarches-simplifiees.fr',
+        'entreprise.api.gouv.fr',
+        'franceconnect.gouv.fr',
+        'mail.numerique.gouv.fr',
+        'monstagedetroisieme.fr',
+        'numerique.gouv.fr',
+        'scn.rie.gouv.fr',
+      ].indexOf(this.domain) > -1
+    ) {
+      return true;
+    }
+
+    if (this.domain.indexOf('beta.gouv.fr') > -1) {
+      return true;
+    }
+
+    if (
       !!this.email.match(
         /[.@-]*(ext|external|externe|presta|prestataire)(s)*[.@-]/g
       )
     ) {
       return true;
     }
+
     return false;
   };
 

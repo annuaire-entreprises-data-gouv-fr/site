@@ -12,7 +12,7 @@ export default function RequiredHabilitationPage() {
     <ConnexionSubLayout img={connexionRefusedPicture}>
       <h1>Vous n’êtes pas autorisé(e) à accéder à l’espace agent</h1>
       <div>
-        Les prestataires ne sont pas autorisés a accèder a l’espace agent
+        Les prestataires ne sont pas autorisés a accèder à l’espace agent
         public.
       </div>
       <p>
