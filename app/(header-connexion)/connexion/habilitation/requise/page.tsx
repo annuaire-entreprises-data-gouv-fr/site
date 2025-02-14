@@ -28,7 +28,7 @@ export default function RequiredHabilitationPage() {
           au sens de l’article L. 100-3 du code des relations entre le public et
           l’administration (CRPA)
         </strong>
-        . Si vous appartenez a une administration, vous pouvez{' '}
+        . Si vous appartenez à une administration, vous pouvez{' '}
         <a href="https://www.demarches-simplifiees.fr/commencer/demande-d-ajout-a-la-liste-des-administrations">
           faire une demande d’ajout
         </a>{' '}
