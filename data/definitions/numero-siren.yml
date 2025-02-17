@@ -41,11 +41,11 @@ body: |
 
   552081317 66522 = 552081317 + 66522
 
-  ## **H2/ Comment obtenir un numéro de SIREN ?**
+  ## **Comment obtenir un numéro de SIREN ?**
 
   Le numéro  SIREN est délivré automatiquement après la demande d’immatriculation de l’entreprise sur le site internet [des formalités des entreprises](https://formalites.entreprises.gouv.fr/). Si vous n’avez pas encore reçu ce numéro, vous pourrez suivre l’évolution du traitement de votre demande sur ce même site internet.
 
-  ## **H2/ Comment trouver un numéro de SIREN ?**
+  ## **Comment trouver un numéro de SIREN ?**
 
   Le SIREN est une donnée publique. Toute personne peut consulter ce numéro sur le site internet de [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr). Ceci, au même titre que le SIRET, le N° TVA Intracommunautaire, l’activité principale (NAF/APE), le code NAF/APE, etc.
 
