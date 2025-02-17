@@ -61,7 +61,7 @@ body: |
 
 more:
   - label: 'SIRET'
-    href: '/definitions/siret'
+    href: '/definitions/numero-siret'
 
   - label: 'Numéro de TVA intracommunautaire'
     href: '/definitions/numero-tva-intracommunautaire'
