@@ -1,4 +1,5 @@
-import { DataStore } from '#clients/data-store';
+import { DataStore } from '#utils/data-store';
+
 import routes from '#clients/routes';
 import { httpGet } from '#utils/network';
 
@@ -15,8 +16,10 @@ const store = new DataStore<string>(
  * IDCC was published on 29/11, we indexed it on 12/12, then last modified date is 29/11
  */
 export const clientRechercheEntrepriseLastModified = async () => {
+  const rne = await store.get('rne');
+  const idcc = await store.get('convention_collective');
   return {
-    rne: (await store.get('rne')) ?? null,
-    idcc: (await store.get('convention_collective')) ?? null,
+    rne,
+    idcc,
   };
 };

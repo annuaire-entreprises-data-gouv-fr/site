@@ -1,4 +1,5 @@
-import { DataStore } from '#clients/data-store';
+import { DataStore } from '#utils/data-store';
+
 import { readFromGrist } from '#clients/external-tooling/grist';
 import { InternalError } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
@@ -15,7 +16,7 @@ import {
 class ProtectedSirenList {
   public _list: DataStore<boolean>;
   // time before protected siren list update
-  private TTL = 3600000; //1h
+  private TTL = 3600000; // 1h
 
   constructor() {
     this._list = new DataStore<boolean>(
@@ -33,7 +34,7 @@ class ProtectedSirenList {
       .reduce((acc: { [key: string]: boolean }, protectedSiren) => {
         acc[protectedSiren] = true;
         return acc;
-      }, {});
+      }, {} as { [key: string]: boolean });
 
     if (Object.keys(sirenList).length < 4000) {
       logErrorInSentry(
@@ -49,11 +50,12 @@ class ProtectedSirenList {
 const protectedSiren = new ProtectedSirenList();
 
 export const isProtectedSiren = async (siren: Siren) =>
-  protectedSiren._list.get(siren);
+  await protectedSiren._list.get(siren);
 
 export const isProtectedSiret = async (siret: Siret) => {
   const siren = extractSirenFromSiret(siret);
-  return protectedSiren._list.get(siren);
+  return await protectedSiren._list.get(siren);
 };
 
-export const getProtectedSirenList = async () => protectedSiren._list.getKeys();
+export const getProtectedSirenList = async () =>
+  await protectedSiren._list.getKeys();

@@ -15,7 +15,6 @@ import React from 'react';
 type IProps = {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
-  session: ISession | null;
 };
 
 const statusLabel = (etatAdministratif: IETATADMINSTRATIF) => {
@@ -34,7 +33,6 @@ const statusLabel = (etatAdministratif: IETATADMINSTRATIF) => {
 export const EtablissementDescription: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
-  session,
 }) => {
   const ageCreation = etablissement.dateCreation
     ? formatAge(etablissement.dateCreation)

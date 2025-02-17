@@ -26,7 +26,6 @@ export enum FICHE {
   COMPTES = 'bilans & comptes',
   DIRIGEANTS = 'dirigeants',
   DIVERS = 'conventions collectives',
-  ELUS = 'élus',
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
   ETABLISSEMENT = 'fiche établissement',
 }
@@ -52,18 +51,11 @@ export const Tabs: React.FC<{
       width: '80px',
     },
     {
-      ficheType: FICHE.ELUS,
-      label: 'Élus',
-      pathPrefix: '/elus/',
-      noFollow: false,
-      shouldDisplay: isCollectiviteTerritoriale(uniteLegale),
-    },
-    {
       ficheType: FICHE.DIRIGEANTS,
-      label: 'Dirigeants',
+      label: isCollectiviteTerritoriale(uniteLegale) ? 'Élus' : 'Dirigeants',
       pathPrefix: '/dirigeants/',
       noFollow: false,
-      shouldDisplay: !isCollectiviteTerritoriale(uniteLegale),
+      shouldDisplay: true,
     },
     {
       ficheType: FICHE.DOCUMENTS,

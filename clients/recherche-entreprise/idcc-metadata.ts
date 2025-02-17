@@ -1,4 +1,5 @@
-import { DataStore } from '#clients/data-store';
+import { DataStore } from '#utils/data-store';
+
 import routes from '#clients/routes';
 import { ICCWithMetadata } from '#models/conventions-collectives';
 import { httpGet } from '#utils/network';
@@ -31,7 +32,7 @@ function mapToDomainObject(response: IIdccMetadata) {
     };
 
     return idccMetadatas;
-  }, {} as { [idcc: string]: ICCWithMetadata });
+  }, {} as { [key: string]: ICCWithMetadata });
 }
 
 const store = new DataStore<ICCWithMetadata>(
