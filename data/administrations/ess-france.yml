@@ -9,7 +9,7 @@ dataSources:
     apiSlug: liste-ess
     datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-de-less
     data:
-      - label: famille juridique d’une entreprise de l’ESS
+      - label: Famille juridique d’une entreprise de l’ESS
       - label: CRESS d’une entreprise de l’ESS
 estServicePublic: false
 description: |

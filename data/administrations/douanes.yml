@@ -13,6 +13,6 @@ dataSources:
   - label: EORI
     apiSlug: api-eori
     data:
-      - label: numéro EORI
+      - label: Numéro EORI
 description: |
   La douane est chargée de tenir les frontières, qu’elles soient terrestres, maritimes, physiques ou numériques, afin d’assurer la protection du territoire, des citoyens et des intérêts économiques et financiers nationaux ou communautaires.
