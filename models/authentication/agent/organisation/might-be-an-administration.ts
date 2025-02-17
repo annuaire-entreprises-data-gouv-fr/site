@@ -37,6 +37,6 @@ const codeJuridiquesThatMightBeAuthorized: string[] = [
  * @param idpId
  * @returns
  */
-export const mightBeAuthorized = (code: string) => {
+export const mightBeAnAdministration = (code: string) => {
   return codeJuridiquesThatMightBeAuthorized.indexOf(code) > -1;
 };
