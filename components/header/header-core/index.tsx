@@ -130,12 +130,14 @@ export const HeaderCore: React.FC<IProps> = ({
         <div className={styles.agentBanner} role="banner">
           <PrintNever>
             <div className="fr-container">
-              Votre compte <strong>agent public</strong> vous donne accès à des
-              données réservées à l’administration, identifiables par la mention
-              “{' '}
+              En tant qu’<strong>agent public</strong>,{' '}
+              <a href="/lp/agent-public">
+                vous pouvez accéder à des données réservées à l’administration
+              </a>
+              , identifiables par les cadres roses et la mention “{' '}
               <strong style={{ color: constants.colors.espaceAgent }}>
                 <Icon size={12} slug="lockFill">
-                  Réservé(es) aux agents publics
+                  Réservé aux agents publics
                 </Icon>
               </strong>{' '}
               ”.
