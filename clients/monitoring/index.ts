@@ -24,7 +24,10 @@ export type IUpdownIODowntimes = {
   partial: boolean;
 };
 
-export const clientMonitoring = async (slug: string): Promise<IMonitoring> => {
+export const clientMonitoring = async (
+  slug: string,
+  startDate: null | number
+): Promise<IMonitoring> => {
   const url = routes.tooling.monitoring.getBySlug(slug);
   const response = await httpGet<IUpdownIODowntimes[]>(url, {
     headers: {
@@ -33,10 +36,13 @@ export const clientMonitoring = async (slug: string): Promise<IMonitoring> => {
     },
     timeout: constants.timeout.XL,
   });
-  return mapToDomainObject(response);
+  return mapToDomainObject(response, startDate);
 };
 
-const mapToDomainObject = (downtimes: IUpdownIODowntimes[]): IMonitoring => {
+const mapToDomainObject = (
+  downtimes: IUpdownIODowntimes[],
+  startDate: null | number
+): IMonitoring => {
   const from = new Date();
   from.setUTCDate(from.getUTCDate() - 89);
   from.setUTCHours(0);
@@ -48,7 +54,8 @@ const mapToDomainObject = (downtimes: IUpdownIODowntimes[]): IMonitoring => {
 
   const isOnline = downtimes.length > 0 ? downtimes[0].ended_at !== null : true;
 
-  const series = dailySeries.export();
+  const monitorStartDate = startDate ? new Date(startDate) : null;
+  const series = dailySeries.export(monitorStartDate);
 
   const avg = (ratios: IRatio[]) => {
     return (

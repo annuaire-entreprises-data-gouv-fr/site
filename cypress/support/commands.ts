@@ -5,8 +5,8 @@
 // ***********************************************
 //
 //
-import { allAgentScopes } from '#models/authentication/agent/scopes/all-agent-scopes';
-import { IAgentScope } from '#models/authentication/agent/scopes/parse';
+import { comptesAgents } from '#cypress/mocks/comptes-agents';
+import { IAgentScope } from '#models/authentication/agent/scopes';
 import { ISession } from '#models/authentication/user/session';
 import { sessionOptions } from '#utils/session';
 import { sealData } from 'iron-session';
@@ -14,13 +14,19 @@ import { sealData } from 'iron-session';
 declare global {
   namespace Cypress {
     interface Chainable {
-      login(scopes?: IAgentScope[]): Chainable<void>;
+      login(email?: string): Chainable<void>;
     }
   }
 }
 
-const generateSessionCookie = async (inputScopes?: IAgentScope[]) => {
-  const scopes = inputScopes || [...allAgentScopes];
+const generateSessionCookie = async (inputEmail?: string) => {
+  const email = inputEmail || 'user@yopmail.com';
+  const user = comptesAgents.find((agent) => agent.email === email);
+
+  if (!user) {
+    throw new Error(`User ${email} not found in comptesAgents`);
+  }
+
   const session: ISession = {
     user: {
       idpId: '123456789',
@@ -30,8 +36,8 @@ const generateSessionCookie = async (inputScopes?: IAgentScope[]) => {
       familyName: 'John Doe',
       firstName: 'John Doe',
       fullName: 'John Doe',
-      email: 'user@yopmail.com',
-      scopes,
+      email: user.email,
+      scopes: user.scopes.split(' ') as IAgentScope[],
       userType: 'Super-agent connecté',
     },
   };
@@ -42,9 +48,9 @@ const generateSessionCookie = async (inputScopes?: IAgentScope[]) => {
   });
 };
 
-Cypress.Commands.add('login', (scopes?: IAgentScope[]) => {
+Cypress.Commands.add('login', (email?: string) => {
   cy.then(() => {
-    return generateSessionCookie(scopes);
+    return generateSessionCookie(email);
   }).then((validSessionCookie) => {
     cy.setCookie(sessionOptions.cookieName, validSessionCookie);
   });

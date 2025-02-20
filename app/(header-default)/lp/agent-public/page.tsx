@@ -40,8 +40,12 @@ const LandingPageAgent = async (props: AppRouterProps) => {
               publics de l’Etat.
             </p>
             <p>
-              <a href="/cgu" rel="noreferrer noopener" target="_blank">
-                Consultez nos conditions générales d’utilisation
+              <a
+                href="/modalites-utilisation"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                Consultez nos modalités d’utilisation
               </a>
               .
             </p>

@@ -375,8 +375,11 @@ const Footer = () => (
               </a>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/cgu">
-                Conditions Générales d’Utilisation
+              <a
+                className="fr-footer__bottom-link"
+                href="/modalites-utilisation"
+              >
+                Modalités d’Utilisation
               </a>
             </li>
             <li className="fr-footer__bottom-item">

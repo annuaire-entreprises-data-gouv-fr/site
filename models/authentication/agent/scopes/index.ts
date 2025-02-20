@@ -1,3 +1,12 @@
+export type IAgentScope = (typeof allAgentScopes)[number];
+
+export const defaultAgentScopes: IAgentScope[] = [
+  'agent',
+  'nonDiffusible',
+  'rne',
+  'pseudo_opendata',
+];
+
 export const allAgentScopes = [
   'rne',
   'nonDiffusible',
