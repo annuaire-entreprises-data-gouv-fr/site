@@ -9,6 +9,7 @@ apiMonitors:
     apiSlug: rne
     apiDocumentationLink: https://data.inpi.fr/content/editorial/Acces_API_Entreprises
     updownIoId: g3mx
+    startDate: 2025-02-20
 dataSources:
   - label: Registre National des Entreprises
     apiSlug: rne
