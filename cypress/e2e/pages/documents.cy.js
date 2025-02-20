@@ -34,7 +34,7 @@ describe('Documents ESSOR ENERGIES (SOLARSUD)', () => {
     cy.contains('ProBTP : document disponible').should('be.visible');
   });
   it('[LOGGED] Should not display conformite documents but travaux publics documents', () => {
-    cy.login(['travaux_publics']);
+    cy.login('travaux_publics@yopmail.com');
     cy.visit('/documents/487444697');
     // Conformité
     cy.contains('Attestations de conformité sociale et fiscale').should(
@@ -50,7 +50,7 @@ describe('Documents ESSOR ENERGIES (SOLARSUD)', () => {
     cy.contains('Travaux publics').should('be.visible');
   });
   it('[LOGGED] Should display conformite documents but not travaux publics documents', () => {
-    cy.login(['conformite']);
+    cy.login('conformite@yopmail.com');
     cy.visit('/documents/487444697');
     // Conformité
     cy.contains('Attestations de conformité sociale et fiscale').should(

@@ -3,6 +3,7 @@ import { superAgentsList } from '#clients/authentication/super-agent-list/agent-
 import { InternalError } from '#models/exceptions';
 import { isLuhnValid } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
+import { defaultAgentScopes } from './agent-scopes';
 import { IAgentScope } from './agent-scopes/parse';
 import getSiretFromIdpTemporary from './getSiretFromIdpTemporary';
 
@@ -151,10 +152,7 @@ const getAgentScopes = async (
   return {
     scopes: [
       // default agent scopes
-      'agent',
-      'nonDiffusible',
-      'rne',
-      'pseudo_opendata',
+      ...defaultAgentScopes,
       // additionnal scopes from super agent list
       ...additionnalScopes,
     ],
