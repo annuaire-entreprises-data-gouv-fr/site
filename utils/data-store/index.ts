@@ -3,30 +3,44 @@ import { FetchRessourceException } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
 
 /**
- * Generic client that caches an API response in memory
+ * Caches a promise response in memory
+ *
+ * When gave a TTR, it will attempt to refresh data every TTR milliseconds.
+ * As long as it as a data in store it will ignore any failed attempt to refresh and still return outdated cached data
  */
 export class DataStore<T> {
   private data: { [key: string]: T } | null;
+  private onGoingRefresh: Promise<T> | null;
+  private shouldAttemptRefresh: boolean;
 
   /**
-   * Default TTL is 24h, set 0 to deactivate refresh
    * @param getData
    * @param storeName
    * @param mapToDomainObject
-   * @param TTL
+   * @param TTR Time To Refresh | default is 24h, set 0 to deactivate refresh
    */
   constructor(
     private getData: () => Promise<any>,
     private storeName: string,
     private mapToDomainObject: (result: any) => { [key: string]: T },
-    private TTL = 86400000
+    private TTR = 86400000
   ) {
     this.data = null;
+    this.onGoingRefresh = null;
+    this.shouldAttemptRefresh = this.TTR > 0;
   }
 
-  fetchAndStoreData = async () => {
+  private refresh = async () => {
     try {
-      const response = await this.getData();
+      if (!this.onGoingRefresh) {
+        this.onGoingRefresh = this.getData();
+
+        if (this.shouldAttemptRefresh) {
+          setTimeout(this.refresh, this.TTR);
+        }
+      }
+
+      const response = await this.onGoingRefresh;
       this.data = this.mapToDomainObject(response);
     } catch (e) {
       logWarningInSentry(
@@ -35,38 +49,31 @@ export class DataStore<T> {
           cause: e,
         })
       );
-    }
-    /** refresh */
-    if (this.TTL && this.TTL > 0) {
-      setTimeout(this.fetchAndStoreData, this.TTL);
+    } finally {
+      this.onGoingRefresh = null;
     }
   };
 
   get = async (key: string) => {
     if (!this.data) {
-      await this.fetchAndStoreData();
+      await this.refresh();
     }
 
-    if (!this.data || Object.values(this.data).length === 0) {
+    if (!this.data || this.data.size === 0) {
       throw new HttpServerError(`Empty data list : ${this.storeName}`);
     }
-
-    if (key in this.data) {
-      return this.data[key];
-    } else {
-      return null;
-    }
+    const value = this.data[key];
+    return typeof value === 'undefined' ? null : value;
   };
 
   getKeys = async () => {
     if (!this.data) {
-      await this.fetchAndStoreData();
+      await this.refresh();
     }
 
-    if (!this.data || Object.values(this.data).length === 0) {
+    if (!this.data || this.data.size === 0) {
       throw new HttpServerError(`Empty data list : ${this.storeName}`);
     }
-
     return Object.keys(this.data);
   };
 }

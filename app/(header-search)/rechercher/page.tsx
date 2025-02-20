@@ -15,7 +15,7 @@ import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Rechercher une entreprise, un service public ou une association',
+  title: 'Rechercher une entreprise, une administration ou une association',
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/rechercher',
   },

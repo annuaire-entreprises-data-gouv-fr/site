@@ -11,6 +11,16 @@
 #   site: true
 
 ---
+- date: 06/02/2025
+  target:
+    site: true
+  body: |
+    Désormais, les collectivités possèdent à la fois le badge "Administration" et "Collectivité territoriale" car ce sont des administrations au sens du Code des Relations entre le Public et l'Administration (CRPA)
+- date: 30/01/2025
+  target:
+    site: true
+  body: |
+    Dans le cadre du Code des Relations entre le Public et l'Administration (CRPA) le terme de “service public” est remplacé par celui d’“administration”, plus juste du point de vue juridique.
 - date: 18/11/2024
   target:
     agent: true

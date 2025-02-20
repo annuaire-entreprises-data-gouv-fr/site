@@ -13,8 +13,7 @@
 # body: corps de texte (markdown)
 administrations:
   - dinum
-faqTargets:
-  - agent
+group: fonctionnement
 title: Comment se connecter avec ProConnect ?
 seo:
   description: ProConnect est la solution d’authentification de l’État qui simplifie l’accès de tous les professionnels à ses services numériques

@@ -1,7 +1,7 @@
 describe('Établissement scolaire', () => {
   it('Should display service public and Établissement scolaire section', () => {
     cy.visit('/entreprise/198100125');
-    cy.contains('Service public');
+    cy.contains('Administration');
     cy.contains('Établissements scolaires');
   });
   it("Should display info from annuaire de l'éducation nationale", () => {

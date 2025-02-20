@@ -5,8 +5,8 @@ import {
   clientSuperAgentList,
   IAgentRecord,
 } from '#clients/authentication/super-agent-list';
-import { DataStore } from '#clients/data-store';
 import { IAgentScope, parseAgentScope } from '#models/user/agent-scopes/parse';
+import { DataStore } from '#utils/data-store';
 
 class SuperAgentsList {
   private _superAgentsStore: DataStore<IAgentScope[]>;
@@ -40,7 +40,7 @@ class SuperAgentsList {
 
         acc[agent.email] = validScopes;
         return acc;
-      }, {});
+      }, {} as { [key: string]: IAgentScope[] });
 
   getScopeForAgent = async (email: string) => {
     try {

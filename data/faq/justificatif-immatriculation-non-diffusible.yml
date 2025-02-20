@@ -14,11 +14,7 @@
 administrations:
   - insee
   - inpi
-faqTargets:
-  - entreprise
-  - independant
-  - association
-  - agent
+group: fonctionnement
 title: Comment accéder aux justificatifs d’immatriculation d’une entreprise non-diffusible ?
 seo:
   description: Qui peut accéder à l’avis de situation ou l’extrait RNE d’une entreprise non-diffusible ?

@@ -95,10 +95,9 @@ export default async function UniteLegalePage(props: AppRouterProps) {
             {isCollectiviteTerritoriale(uniteLegale) && (
               <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
             )}
-            {isServicePublic(uniteLegale) &&
-              !isCollectiviteTerritoriale(uniteLegale) && (
-                <ServicePublicSection uniteLegale={uniteLegale} />
-              )}
+            {isServicePublic(uniteLegale) && (
+              <ServicePublicSection uniteLegale={uniteLegale} />
+            )}
             {!isBot && isAssociation(uniteLegale) && (
               <AssociationSection uniteLegale={uniteLegale} session={session} />
             )}

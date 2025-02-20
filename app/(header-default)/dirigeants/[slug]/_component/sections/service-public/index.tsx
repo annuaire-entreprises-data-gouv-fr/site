@@ -29,7 +29,7 @@ export default function ResponsablesServicePublicSection({
           <>
             {!servicePublic.affectationPersonne ? (
               <p>
-                Ce service public n’a pas de responsable enregistré dans l’
+                Cette administration n’a pas de responsable enregistré dans l’
                 <a
                   href="https://lannuaire.service-public.fr/"
                   target="_blank"
@@ -43,7 +43,7 @@ export default function ResponsablesServicePublicSection({
             ) : (
               <>
                 <p>
-                  Ce service public possède{' '}
+                  Cette administration possède{' '}
                   {servicePublic.affectationPersonne.length} responsable(s)
                   enregistré(s) auprès de la <DILA />
                   {servicePublic.liens.annuaireServicePublic && (
@@ -116,7 +116,7 @@ export default function ResponsablesServicePublicSection({
 
 const NotFoundInfo = () => (
   <p>
-    Ce service public n’a pas été retrouvé dans l’
+    Cette administration n’a pas été retrouvé dans l’
     <a
       href="https://lannuaire.service-public.fr/"
       target="_blank"

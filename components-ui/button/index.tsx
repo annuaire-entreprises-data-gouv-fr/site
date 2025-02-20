@@ -49,7 +49,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
           (target === '_blank' ? 'noopener noreferrer' : '') +
           (nofollow ? 'nofollow' : '')
         }
-        href={to}
+        href={(to || '').indexOf('@') > -1 ? `mailto:${to}` : to}
         className={`fr-btn ${alt ? ' fr-btn--secondary ' : ''} ${
           small ? ' fr-btn--sm ' : ''
         }`}
