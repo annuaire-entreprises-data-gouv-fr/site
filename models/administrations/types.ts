@@ -29,6 +29,7 @@ export type IAdministrationMetaData = {
 export type IAPIMonitorMetaData = {
   updownIoId: string;
   apiDocumentationLink?: string;
+  startDate?: number;
   isProtected?: boolean;
   apiSlug: string;
   apiName: string;

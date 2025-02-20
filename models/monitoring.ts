@@ -8,6 +8,7 @@ import { FetchRessourceException } from './exceptions';
 export type IRatio = {
   ratioNumber: number;
   date?: string;
+  wasMonitorUp?: boolean;
 };
 export type IMonitoring = {
   isOnline: boolean;
@@ -48,9 +49,13 @@ export const getMonitorsByAdministration = async (): Promise<{
               isProtected = false,
               apiName = null,
               apiSlug = null,
+              startDate = null,
             }) => {
               try {
-                const monitoring = await clientMonitoring(updownIoId);
+                const monitoring = await clientMonitoring(
+                  updownIoId,
+                  startDate
+                );
                 return {
                   apiDocumentationLink,
                   apiSlug,
