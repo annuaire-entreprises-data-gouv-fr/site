@@ -1,4 +1,4 @@
-import { allAgentScopes } from './all-agent-scopes';
+import { allAgentScopes } from './';
 
 export type IAgentScope = (typeof allAgentScopes)[number];
 
