@@ -48,8 +48,12 @@ const AgentWall: React.FC<{
               <>
                 Disponible pour toutes les administrations, sans création de
                 compte (consultez les{' '}
-                <a href="/cgu" rel="noreferrer noopener" target="_blank">
-                  conditions générales d’utilisation
+                <a
+                  href="/modalites-utilisation"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  modalités d’utilisation
                 </a>
                 ).
               </>
