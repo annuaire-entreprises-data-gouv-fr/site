@@ -3,11 +3,14 @@ import {
   CanRequestAuthorizationException,
   NoSiretException,
 } from '#models/authentication/authentication-exceptions';
-import { isServicePublic, IUniteLegale } from '#models/core/types';
+import { isServicePublic } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { extractSirenFromSiret, Siren } from '#utils/helpers';
-import { defaultAgentScopes } from '../scopes/default-agent-scopes';
-import { mightBeAnAdministration } from './might-be-an-administration';
+import { defaultAgentScopes } from '../scopes';
+import {
+  isAdministrationButNotL100_3,
+  mightBeAnAdministration,
+} from './might-be-an-administration';
 
 const basicOrganisationHabilitation = {
   scopes: [...defaultAgentScopes],
@@ -40,20 +43,21 @@ export class AgentOrganisation {
     });
 
     const isAnAdministration = isServicePublic(uniteLegale);
+    const codeJuridique = (uniteLegale.natureJuridique || '').replace('.', '');
+
     if (isAnAdministration) {
-      if (!this.isAdministrationAuthorized(uniteLegale)) {
+      if (isAdministrationButNotL100_3(codeJuridique)) {
         throw new CanRequestAuthorizationException(
           uniteLegale.natureJuridique,
           this.siren
         );
       } else if (this.isAdministrationTrustworthy()) {
-        // return trustworthytOrganisationHabilitation;
         return basicOrganisationHabilitation;
       }
       return basicOrganisationHabilitation;
     }
 
-    if (mightBeAnAdministration(uniteLegale.natureJuridique)) {
+    if (mightBeAnAdministration(codeJuridique)) {
       throw new CanRequestAuthorizationException(
         uniteLegale.natureJuridique,
         this.siren
@@ -61,17 +65,6 @@ export class AgentOrganisation {
     }
 
     throw new HttpForbiddenError('Organization is not a service public');
-  }
-
-  isAdministrationAuthorized(uniteLegale: IUniteLegale) {
-    const rawCode = (uniteLegale.natureJuridique || '').replace('.', '');
-    if (
-      ['4110', '4120', '4140', '4150', '7381', '7410'].indexOf(rawCode) > -1
-    ) {
-      // not a L103 admnistration therefore not authorized
-      return false;
-    }
-    return true;
   }
 
   isAdministrationTrustworthy() {
