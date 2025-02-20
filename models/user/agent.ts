@@ -3,6 +3,7 @@ import { superAgentsList } from '#clients/authentication/super-agent-list/agent-
 import { InternalError } from '#models/exceptions';
 import { isLuhnValid } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
+import { defaultAgentScopes } from './agent-scopes';
 import { IAgentScope } from './agent-scopes/parse';
 import getSiretFromIdpTemporary from './getSiretFromIdpTemporary';
 
@@ -132,13 +133,6 @@ export const createAgent = async (
     hasHabilitation,
   };
 };
-
-export const defaultAgentScopes: IAgentScope[] = [
-  'agent',
-  'nonDiffusible',
-  'rne',
-  'pseudo_opendata',
-];
 
 /**
  * Get Agent rights written as scopes. There is no 1-to-1 match between UI and scopes.

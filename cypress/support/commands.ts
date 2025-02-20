@@ -5,7 +5,7 @@
 // ***********************************************
 //
 //
-import { comptesAgents } from '#cypress/fixtures/comptes-agents';
+import { comptesAgents } from '#cypress/mocks/comptes-agents';
 import { IAgentScope } from '#models/user/agent-scopes/parse';
 import { ISession } from '#models/user/session';
 import { sessionOptions } from '#utils/session';

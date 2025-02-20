@@ -1,3 +1,12 @@
+import { IAgentScope } from './parse';
+
+export const defaultAgentScopes: IAgentScope[] = [
+  'agent',
+  'nonDiffusible',
+  'rne',
+  'pseudo_opendata',
+];
+
 export const allAgentScopes = [
   'rne',
   'nonDiffusible',

@@ -1,5 +1,4 @@
-import { defaultAgentScopes } from '#models/user/agent';
-import { allAgentScopes } from '#models/user/agent-scopes/all-agent-scopes';
+import { allAgentScopes, defaultAgentScopes } from '#models/user/agent-scopes';
 
 export const comptesAgents = [
   {
