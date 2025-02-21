@@ -18,13 +18,14 @@ export const GET = withSession(async function callbackRoute(req) {
   try {
     const userInfo = await proConnectAuthenticate(req);
 
-    if (!userInfo.siret)
+    if (!userInfo.siret) {
       logInfoInSentry(
         new Information({
           name: 'AgentNoSiret',
           message: userInfo.idp_id,
         })
       );
+    }
 
     const agent = new AgentConnected(userInfo);
 
