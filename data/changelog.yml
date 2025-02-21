@@ -11,8 +11,6 @@
 #   site: true
 
 ---
-<<<<<<< Updated upstream
-=======
 - date: 20/02/2025
   target:
     agent: true
@@ -25,7 +23,6 @@
     site: true
   body: |
     Désormais, la définition des administrations sur l’Annuaire des Entreprises s’appuie sur la [Liste des administrations françaises](https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises) publiée par la Direction interministérielle du numérique.
->>>>>>> Stashed changes
 - date: 06/02/2025
   target:
     site: true
