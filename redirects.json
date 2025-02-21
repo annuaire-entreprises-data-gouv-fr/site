@@ -5,6 +5,11 @@
     "permanent": true
   },
   {
+    "source": "/cgu",
+    "destination": "/modalites-utilisation",
+    "permanent": true
+  },
+  {
     "source": "/justificatif/:slug",
     "destination": "/documents/:slug",
     "permanent": true

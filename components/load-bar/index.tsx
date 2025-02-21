@@ -1,8 +1,11 @@
 'use client';
 
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import constants from '#models/constants';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import { useEffect } from 'react';
 import styles from './style.module.css';
 

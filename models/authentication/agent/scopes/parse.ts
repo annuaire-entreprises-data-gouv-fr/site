@@ -1,6 +1,4 @@
-import { allAgentScopes } from './all-agent-scopes';
-
-export type IAgentScope = (typeof allAgentScopes)[number];
+import { allAgentScopes, IAgentScope } from './';
 
 export const isAgentScope = (str: string): str is IAgentScope => {
   if (allAgentScopes.indexOf(str as IAgentScope) > -1) {

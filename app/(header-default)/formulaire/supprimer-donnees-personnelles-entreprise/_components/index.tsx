@@ -1,6 +1,6 @@
 'use client';
 
-import { ISession } from '#models/user/session';
+import { ISession } from '#models/authentication/user/session';
 import { getHidePersonalDataRequestFCSession } from '#utils/session';
 import { useEffect, useState } from 'react';
 import { ConnectionFranceConnect } from './connection-france-connect';

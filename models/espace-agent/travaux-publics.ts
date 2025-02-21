@@ -5,7 +5,7 @@ import {
   clientApiEntrepriseProbtp,
 } from '#clients/api-entreprise/travaux-publics';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { UseCase } from '#models/user/agent';
+import { UseCase } from '#models/use-cases';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { handleApiEntrepriseError } from './utils';
 

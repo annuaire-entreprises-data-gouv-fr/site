@@ -1,6 +1,9 @@
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { ISTATUTDIFFUSION, estDiffusible } from '#models/core/diffusion';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import { Info, ProtectedData } from '../alerts';
 
 const DefaultNonDiffusibleAlert = () => (
