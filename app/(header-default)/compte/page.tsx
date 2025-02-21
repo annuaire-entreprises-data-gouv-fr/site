@@ -1,6 +1,9 @@
 import { Badge } from '#components-ui/badge';
 import { FullTable } from '#components/table/full';
-import { ApplicationRights, hasRights } from '#models/user/rights';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';

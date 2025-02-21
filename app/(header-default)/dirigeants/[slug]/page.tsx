@@ -3,13 +3,16 @@ import BreakPageForPrint from '#components-ui/print-break-page';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
 import { estDiffusible } from '#models/core/diffusion';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { ApplicationRights, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,

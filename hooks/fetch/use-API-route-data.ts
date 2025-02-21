@@ -1,7 +1,7 @@
+import { hasRights } from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { IDataFetchingState } from '#models/data-fetching';
 import { InternalError } from '#models/exceptions';
-import { hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import { httpGet } from '#utils/network';
 import {
   FailToFetchError,

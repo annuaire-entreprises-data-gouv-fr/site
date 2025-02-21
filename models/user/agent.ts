@@ -1,11 +1,11 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
+import {
+  defaultAgentScopes,
+  IAgentScope,
+} from '#models/authentication/agent/scopes';
 import { InternalError } from '#models/exceptions';
-import { isLuhnValid } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
-import { defaultAgentScopes } from './agent-scopes';
-import { IAgentScope } from './agent-scopes/parse';
-import getSiretFromIdpTemporary from './getSiretFromIdpTemporary';
 
 const isLikelyPrestataire = (domain: string) => {
   try {
@@ -69,20 +69,6 @@ const extractDomain = (email: string) => {
 };
 
 /**
- * Get siret or idpId fallback siret
- * @param siret
- * @param idpId
- * @returns
- */
-const getSiretOrFallbackOnIdpId = (siret: string, idpId: string) => {
-  const cleanedSiret = (siret || '').replaceAll(' ', '');
-  if (cleanedSiret && isLuhnValid(cleanedSiret)) {
-    return cleanedSiret;
-  }
-  return getSiretFromIdpTemporary(idpId);
-};
-
-/**
  * Return a verified agent with actual scopes, hasHabilitation and user type
  * @param agent
  * @returns
@@ -115,7 +101,7 @@ export const createAgent = async (
   const familyName = userInfo.family_name ?? '';
   const firstName = userInfo.given_name ?? '';
   const userId = userInfo.sub;
-  const siret = getSiretOrFallbackOnIdpId(userInfo.siret, idpId);
+  const siret = (userInfo.siret || '').replaceAll(' ', '');
 
   return {
     userId,

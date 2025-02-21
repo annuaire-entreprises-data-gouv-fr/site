@@ -1,4 +1,5 @@
 import FAQLink from '#components-ui/faq-link';
+import { ISession } from '#models/authentication/user/session';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/core/types';

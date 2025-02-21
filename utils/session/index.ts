@@ -1,5 +1,5 @@
-import { IAgentInfo } from '#models/user/agent';
-import { ISession } from '#models/user/session';
+import { IAgentInfo } from '#models/authentication/agent';
+import { ISession } from '#models/authentication/user/session';
 import { isAbsoluteUrl } from '#utils/server-side-helper/app/is-absolute-url';
 import type { IronSession, SessionOptions } from 'iron-session';
 
@@ -9,7 +9,7 @@ export const sessionOptions: SessionOptions = {
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
   },
-  ttl: 86400, // a day
+  ttl: 43200, // 12h
 };
 
 export async function setVisitTimestamp(session: IronSession<ISession>) {
