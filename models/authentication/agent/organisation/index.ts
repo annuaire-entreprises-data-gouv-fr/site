@@ -11,6 +11,7 @@ import {
   isAdministrationButNotL100_3,
   mightBeAnAdministration,
 } from './might-be-an-administration';
+import getSiretFromIdpTemporary from './siret-from-idpid';
 
 const basicOrganisationHabilitation = {
   scopes: [...defaultAgentScopes],
@@ -25,7 +26,9 @@ export class AgentOrganisation {
   constructor(private domain: string, private idpId: string, siret: string) {
     this.isFromMCP = this.isMCP(idpId);
 
-    if (!siret) {
+    const siretTmp = siret || getSiretFromIdpTemporary(idpId);
+
+    if (!siretTmp) {
       throw new NeedASiretException(
         'The user doesn‘t have a siret',
         `${this.domain} - ${this.idpId} - ${
@@ -34,7 +37,7 @@ export class AgentOrganisation {
       );
     }
 
-    this.siren = extractSirenFromSiret(siret);
+    this.siren = extractSirenFromSiret(siretTmp);
   }
 
   async getHabilitationLevel() {

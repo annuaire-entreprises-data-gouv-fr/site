@@ -11,6 +11,13 @@
 #   site: true
 
 ---
+- date: 21/02/2025
+  target:
+    agent: true
+  body: |
+    À partir du vendredi 21 février, seuls les membres des administrations au sens de l'article L.100-3 sont autorisés à se connecter à l'espace agent.
+
+    La liste des administrations est définie ici : [https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises/](https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises/)
 - date: 17/02/2025
   target:
     site: true
