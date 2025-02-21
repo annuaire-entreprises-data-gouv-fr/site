@@ -7,15 +7,18 @@ import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
-import { logFatalErrorInSentry } from '#utils/sentry';
+import { Information } from '#models/exceptions';
+import { logFatalErrorInSentry, logInfoInSentry } from '#utils/sentry';
 import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
 import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
 
 export const GET = withSession(async function callbackRoute(req) {
+  let siretStr = '';
   try {
     const userInfo = await proConnectAuthenticate(req);
+    siretStr = userInfo.siret;
 
     const agent = new AgentConnected(userInfo);
 
@@ -50,6 +53,13 @@ export const GET = withSession(async function callbackRoute(req) {
         getBaseUrl() + '/connexion/habilitation/requise'
       );
     } else if (e instanceof NeedASiretException) {
+      logInfoInSentry(
+        new Information({
+          name: 'NeedASiretException',
+          message: siretStr,
+        })
+      );
+
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/administration-inconnue'
       );
