@@ -28,6 +28,15 @@ export const GET = withSession(async function callbackRoute(req) {
         })
       );
 
+    if (!userInfo.siret) {
+      logInfoInSentry(
+        new Information({
+          name: 'AgentNoSiret',
+          message: userInfo.idp_id,
+        })
+      );
+    }
+
     const agent = new AgentConnected(userInfo);
 
     const agentInfo = await agent.getAndVerifyAgentInfo();
