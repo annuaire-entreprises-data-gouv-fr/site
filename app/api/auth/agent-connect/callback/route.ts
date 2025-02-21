@@ -15,10 +15,16 @@ import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
 
 export const GET = withSession(async function callbackRoute(req) {
-  let siretStr = '';
   try {
     const userInfo = await proConnectAuthenticate(req);
-    siretStr = userInfo.siret;
+
+    if (!userInfo.siret)
+      logInfoInSentry(
+        new Information({
+          name: 'AgentNoSiret',
+          message: userInfo.idp_id,
+        })
+      );
 
     const agent = new AgentConnected(userInfo);
 
@@ -53,13 +59,6 @@ export const GET = withSession(async function callbackRoute(req) {
         getBaseUrl() + '/connexion/habilitation/requise'
       );
     } else if (e instanceof NeedASiretException) {
-      logInfoInSentry(
-        new Information({
-          name: 'NeedASiretException',
-          message: siretStr,
-        })
-      );
-
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/administration-inconnue'
       );
