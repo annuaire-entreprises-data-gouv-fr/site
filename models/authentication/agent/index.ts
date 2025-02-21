@@ -45,24 +45,21 @@ export class AgentConnected {
   }
 
   isLikelyPrestataire = () => {
-    if (
-      [
-        'code.gouv.fr',
-        'data.gouv.fr',
-        'demarches-simplifiees.fr',
-        'entreprise.api.gouv.fr',
-        'franceconnect.gouv.fr',
-        'mail.numerique.gouv.fr',
-        'monstagedetroisieme.fr',
-        'numerique.gouv.fr',
-        'scn.rie.gouv.fr',
-      ].indexOf(this.domain) > -1
-    ) {
-      return true;
-    }
-
-    if (this.domain.indexOf('beta.gouv.fr') > -1) {
-      return true;
+    for (let bannedDomain of [
+      'beta.gouv.fr',
+      'code.gouv.fr',
+      'data.gouv.fr',
+      'demarches-simplifiees.fr',
+      'entreprise.api.gouv.fr',
+      'franceconnect.gouv.fr',
+      'mail.numerique.gouv.fr',
+      'monstagedetroisieme.fr',
+      'numerique.gouv.fr',
+      'scn.rie.gouv.fr',
+    ]) {
+      if (this.domain.indexOf(bannedDomain) > -1) {
+        return true;
+      }
     }
 
     if (
@@ -88,9 +85,7 @@ export class AgentConnected {
 
     // exclude prestataire from getting habilitation
     if (this.isLikelyPrestataire()) {
-      throw new PrestataireException({
-        cause: `${this.email} is a prestataire`,
-      });
+      throw new PrestataireException(`${this.email} is a prestataire`);
     }
 
     return this.getOrganisationHabilitation();

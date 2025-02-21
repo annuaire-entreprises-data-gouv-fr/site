@@ -1,7 +1,7 @@
 import { HttpForbiddenError } from '#clients/exceptions';
 import {
   CanRequestAuthorizationException,
-  NoSiretException,
+  NeedASiretException,
 } from '#models/authentication/authentication-exceptions';
 import { isServicePublic } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
@@ -24,12 +24,9 @@ export class AgentOrganisation {
 
   constructor(private domain: string, private idpId: string, siret: string) {
     this.isFromMCP = this.isMCP(idpId);
-    this.siren = extractSirenFromSiret(siret);
-  }
 
-  async getHabilitationLevel() {
-    if (!this.siren) {
-      throw new NoSiretException(
+    if (!siret) {
+      throw new NeedASiretException(
         'The user doesn‘t have a siret',
         `${this.domain} - ${this.idpId} - ${
           this.isFromMCP ? 'ProConnectIdentité' : 'FI ministères'
@@ -37,6 +34,10 @@ export class AgentOrganisation {
       );
     }
 
+    this.siren = extractSirenFromSiret(siret);
+  }
+
+  async getHabilitationLevel() {
     const uniteLegale = await getUniteLegaleFromSlug(this.siren, {
       page: 0,
       isBot: false,

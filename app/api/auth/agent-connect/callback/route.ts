@@ -4,7 +4,7 @@ import { AgentConnected } from '#models/authentication/agent';
 import {
   AgentConnectionFailedException,
   CanRequestAuthorizationException,
-  NoSiretException,
+  NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
@@ -43,13 +43,13 @@ export const GET = withSession(async function callbackRoute(req) {
     logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
     if (e instanceof PrestataireException) {
       return NextResponse.redirect(
-        getBaseUrl() + '/connexion/habilitation/prestataire'
+        getBaseUrl() + '/connexion/habilitation/prestataires'
       );
     } else if (e instanceof CanRequestAuthorizationException) {
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/requise'
       );
-    } else if (e instanceof NoSiretException) {
+    } else if (e instanceof NeedASiretException) {
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/administration-inconnue'
       );

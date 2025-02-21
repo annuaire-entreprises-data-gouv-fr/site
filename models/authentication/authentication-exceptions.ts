@@ -10,10 +10,12 @@ export class AgentConnectionFailedException extends Exception {
 }
 
 export class PrestataireException extends Exception {
-  constructor(args: { cause?: any }) {
+  constructor(details: string) {
     super({
       name: 'PrestataireException',
-      ...args,
+      context: {
+        details,
+      },
     });
   }
 }
@@ -30,10 +32,10 @@ export class CanRequestAuthorizationException extends Exception {
   }
 }
 
-export class NoSiretException extends Exception {
+export class NeedASiretException extends Exception {
   constructor(message: string, userId: string) {
     super({
-      name: 'OrganisationNoSiretException',
+      name: 'OrganisationNeedASiretException',
       message,
       context: {
         details: userId,
