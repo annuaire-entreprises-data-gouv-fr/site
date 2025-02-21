@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 import { IConformite } from '#models/espace-agent/conformite';
-import { UseCase } from '#models/user/agent';
+import { UseCase } from '#models/use-cases';
 import { Siret } from '#utils/helpers';
 import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
 

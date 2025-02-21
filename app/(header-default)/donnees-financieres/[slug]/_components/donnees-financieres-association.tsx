@@ -1,5 +1,5 @@
+import { ISession } from '#models/authentication/user/session';
 import { IAssociation } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import ComptesAssociationSection from './comptes-association';
 import FinancesAssociationSection from './finances-association';
 import SubventionsAssociationSection from './subventions-association';

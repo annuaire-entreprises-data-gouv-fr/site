@@ -3,10 +3,13 @@
 import { Section } from '#components/section';
 import { AskUseCase } from '#components/section-with-use-case/ask-use-case';
 import { EAdministration } from '#models/administrations/EAdministration';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/user/agent';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
+import { UseCase } from '#models/use-cases';
 import { useState } from 'react';
 
 type WrappedSectionProps = {

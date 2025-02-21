@@ -368,7 +368,7 @@ const Privacy = () => (
       </table>
     </div>
     <p>
-      L’Anuaire des Entreprises utilise l’outil de mesure d’audience Matomo,
+      L’Annuaire des Entreprises utilise l’outil de mesure d’audience Matomo,
       configuré en mode exempté, et ne nécessitant pas le recueil de votre
       consentement conformément aux recommandations de la CNIL.{' '}
     </p>

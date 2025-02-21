@@ -6,8 +6,8 @@
 //
 //
 import { comptesAgents } from '#cypress/mocks/comptes-agents';
-import { IAgentScope } from '#models/user/agent-scopes/parse';
-import { ISession } from '#models/user/session';
+import { IAgentScope } from '#models/authentication/agent/scopes';
+import { ISession } from '#models/authentication/user/session';
 import { sessionOptions } from '#utils/session';
 import { sealData } from 'iron-session';
 
@@ -33,15 +33,12 @@ const generateSessionCookie = async (inputEmail?: string) => {
       userId: '123456789',
       domain: 'yopmail.com',
       siret: '12345678912345',
-      isMCP: false,
-      isPrestataire: false,
       familyName: 'John Doe',
       firstName: 'John Doe',
       fullName: 'John Doe',
       email: user.email,
       scopes: user.scopes.split(' ') as IAgentScope[],
       userType: 'Super-agent connecté',
-      hasHabilitation: true,
     },
   };
 

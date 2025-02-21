@@ -3,9 +3,15 @@ import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
 import { allDataToModify } from '#models/administrations/data-to-modify';
 import { IFaqArticle } from '#models/article/faq';
-import { getAgentEmail, getAgentFullName } from '#models/user/helpers';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
+import {
+  getAgentEmail,
+  getAgentFullName,
+} from '#models/authentication/user/helpers';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { logMatomoEvent } from '#utils/matomo';
 import { PropsWithChildren } from 'react';
 export enum EQuestionType {

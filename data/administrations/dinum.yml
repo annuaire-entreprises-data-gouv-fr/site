@@ -25,5 +25,10 @@ dataSources:
     datagouvLink: https://www.data.gouv.fr/fr/datasets/base-adresse-nationale/
     data:
       - label: Géolocalisation des adresses
+  - label: Liste des administrations françaises
+    apiSlug: recherche-entreprise
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises/
+    data:
+      - label: Liste des siren des administrations françaises
 description: |
   La Direction Interministérielle du Numérique (DINUM) est l’administration qui accompagne les ministères et les autres administrations dans leur transformation numérique. Elle conseille également le gouvernement sur les sujets du numérique et développe des services et ressources mises à disposition des autres administrations comme par exemple : le réseau interministériel de l’État, FranceConnect, data.gouv.fr ou api.gouv.fr.

@@ -1,4 +1,4 @@
-import { IAgentScope } from './parse';
+export type IAgentScope = (typeof allAgentScopes)[number];
 
 export const defaultAgentScopes: IAgentScope[] = [
   'agent',

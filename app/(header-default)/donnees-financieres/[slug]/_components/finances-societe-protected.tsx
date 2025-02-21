@@ -6,9 +6,9 @@ import { LineChart } from '#components/chart/line';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { ISession } from '#models/authentication/user/session';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import {
   formatCurrency,
   formatDate,
