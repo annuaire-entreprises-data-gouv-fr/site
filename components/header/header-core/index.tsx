@@ -3,9 +3,12 @@ import { PrintNever } from '#components-ui/print-visibility';
 import ReconnectBanner from '#components/banner/reconnect';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import constants from '#models/constants';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import React from 'react';
 import ChangelogNotification from '../changelog-notification';
 import Menu from '../menu';

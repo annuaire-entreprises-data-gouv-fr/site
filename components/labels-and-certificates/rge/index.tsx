@@ -7,9 +7,9 @@ import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
+import { ISession } from '#models/authentication/user/session';
 import { IRGECertification } from '#models/certifications/rge';
 import { IUniteLegale } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import { pluralize } from '#utils/helpers';
 import React from 'react';
 

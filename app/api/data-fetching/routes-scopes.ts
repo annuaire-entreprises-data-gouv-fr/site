@@ -1,4 +1,4 @@
-import { ApplicationRights } from '#models/user/rights';
+import { ApplicationRights } from '#models/authentication/user/rights';
 import { APIRoutesPaths } from './routes-paths';
 
 export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {

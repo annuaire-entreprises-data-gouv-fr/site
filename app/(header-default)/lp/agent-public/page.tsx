@@ -1,8 +1,8 @@
 import { default as ButtonProConnect } from '#components-ui/button-pro-connect';
 import Container from '#components-ui/container';
 import { administrationsMetaData } from '#models/administrations';
-import { isLoggedIn } from '#models/user/rights';
-import { ISession } from '#models/user/session';
+import { isLoggedIn } from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';

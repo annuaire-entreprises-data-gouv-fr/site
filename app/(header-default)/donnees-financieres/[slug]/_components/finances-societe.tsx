@@ -7,11 +7,14 @@ import { LineChart } from '#components/chart/line';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/core/types';
 import { hasAnyError, isDataLoading } from '#models/data-fetching';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import {
   formatCurrency,
   formatDate,
