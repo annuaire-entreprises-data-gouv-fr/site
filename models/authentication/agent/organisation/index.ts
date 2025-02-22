@@ -3,17 +3,23 @@ import {
   CanRequestAuthorizationException,
   NeedASiretException,
 } from '#models/authentication/authentication-exceptions';
-import { isServicePublic } from '#models/core/types';
+import { isServicePublic, IUniteLegale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { extractSirenFromSiret, Siren } from '#utils/helpers';
 import { defaultAgentScopes } from '../scopes';
 import {
   isAdministrationButNotL100_3,
-  mightBeAnAdministration,
+  mightBeAnAuthorizedAdministration,
 } from './might-be-an-administration';
-import getSiretFromIdpTemporary from './siret-from-idpid';
+import { isNotL100_3ButWhitelisted } from './whitelisted-administrations';
 
 const basicOrganisationHabilitation = {
+  scopes: [...defaultAgentScopes],
+  userType: 'Agent connecté',
+  isSuperAgent: false,
+};
+
+const thrustworthyOrganisationHabilitation = {
   scopes: [...defaultAgentScopes],
   userType: 'Agent connecté',
   isSuperAgent: false,
@@ -26,9 +32,7 @@ export class AgentOrganisation {
   constructor(private domain: string, private idpId: string, siret: string) {
     this.isFromMCP = this.isMCP(idpId);
 
-    const siretTmp = siret || getSiretFromIdpTemporary(idpId);
-
-    if (!siretTmp) {
+    if (!siret) {
       throw new NeedASiretException(
         'The user doesn‘t have a siret',
         `${this.domain} - ${this.idpId} - ${
@@ -37,7 +41,7 @@ export class AgentOrganisation {
       );
     }
 
-    this.siren = extractSirenFromSiret(siretTmp);
+    this.siren = extractSirenFromSiret(siret);
   }
 
   async getHabilitationLevel() {
@@ -46,29 +50,44 @@ export class AgentOrganisation {
       isBot: false,
     });
 
-    const isAnAdministration = isServicePublic(uniteLegale);
     const codeJuridique = (uniteLegale.natureJuridique || '').replace('.', '');
+    const isAuthorized = this.isAnAuthorizedAdministration(
+      uniteLegale,
+      codeJuridique
+    );
 
-    if (isAnAdministration) {
-      if (isAdministrationButNotL100_3(codeJuridique)) {
+    if (isAuthorized) {
+      if (this.isAdministrationTrustworthy()) {
+        return thrustworthyOrganisationHabilitation;
+      } else {
+        return basicOrganisationHabilitation;
+      }
+    } else {
+      if (mightBeAnAuthorizedAdministration(codeJuridique)) {
         throw new CanRequestAuthorizationException(
           uniteLegale.natureJuridique,
           this.siren
         );
-      } else if (this.isAdministrationTrustworthy()) {
-        return basicOrganisationHabilitation;
       }
-      return basicOrganisationHabilitation;
+      throw new HttpForbiddenError('Organization is not a service public');
     }
+  }
 
-    if (mightBeAnAdministration(codeJuridique)) {
-      throw new CanRequestAuthorizationException(
-        uniteLegale.natureJuridique,
-        this.siren
-      );
+  isAnAuthorizedAdministration(
+    uniteLegale: IUniteLegale,
+    codeJuridique: string
+  ) {
+    if (isServicePublic(uniteLegale)) {
+      if (isAdministrationButNotL100_3(codeJuridique)) {
+        if (isNotL100_3ButWhitelisted(this.siren)) {
+          return true;
+        }
+        return false;
+      } else {
+        return true;
+      }
     }
-
-    throw new HttpForbiddenError('Organization is not a service public');
+    return false;
   }
 
   isAdministrationTrustworthy() {

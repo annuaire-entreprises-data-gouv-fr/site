@@ -52,6 +52,6 @@ export const isAdministrationButNotL100_3 = (code: string) => {
  * @param idpId
  * @returns
  */
-export const mightBeAnAdministration = (code: string) => {
+export const mightBeAnAuthorizedAdministration = (code: string) => {
   return codeJuridiquesThatMightBeAuthorized.indexOf(code) > -1;
 };
