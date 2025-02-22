@@ -3,10 +3,13 @@
 import { Section } from '#components/section';
 import { AskUseCase } from '#components/section-with-use-case/ask-use-case';
 import { EAdministration } from '#models/administrations/EAdministration';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/user/agent';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
+import { UseCase } from '#models/use-cases';
 import { useState } from 'react';
 
 type WrappedSectionProps = {
@@ -24,7 +27,8 @@ const DefaultIntroContent = () => (
     Les agents publics peuvent demander à accéder à cette donnée uniquement dans
     les cas d’usages justifiant d’un intérêt légitime. En déclarant le cadre
     juridique dans lequel vous accédez à ces données, vous vous engagez{' '}
-    <a href="/cgu">à respecter nos conditions générales d’utilisation</a>.
+    <a href="/modalites-utilisation">à respecter nos modalités d’utilisation</a>
+    .
   </p>
 );
 

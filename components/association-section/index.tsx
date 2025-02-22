@@ -8,9 +8,9 @@ import { AsyncDataSectionClient } from '#components/section/data-section/client'
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IDataAssociation } from '#models/association/types';
+import { ISession } from '#models/authentication/user/session';
 import { getPersonnalDataAssociation } from '#models/core/diffusion';
 import { IAssociation, IUniteLegale } from '#models/core/types';
-import { ISession } from '#models/user/session';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';

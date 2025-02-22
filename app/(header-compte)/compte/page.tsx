@@ -2,8 +2,11 @@ import { Badge } from '#components-ui/badge';
 import ButtonLink from '#components-ui/button';
 import FullWidthContainer from '#components-ui/container';
 import { FullTable } from '#components/table/full';
-import { getAgentFullName } from '#models/user/helpers';
-import { ApplicationRights, hasRights } from '#models/user/rights';
+import { getAgentFullName } from '#models/authentication/user/helpers';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
@@ -86,11 +89,11 @@ const AccountPage = async () => {
                 </div>
                 <div className="fr-card__footer">
                   <ul className="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
-                    <li>
+                    {/* <li>
                       <ButtonLink to="/historique-des-modifications">
                         Consulter la documentation
                       </ButtonLink>
-                    </li>
+                    </li> */}
                     <li>
                       <ButtonLink alt to="/cgu">
                         Consulter les modalités d’utilisation
@@ -104,13 +107,13 @@ const AccountPage = async () => {
         </div>
       </FullWidthContainer>
       <div className="content-container">
-        <h2>Récapitulatif de vos accès</h2>
+        <h2>Récapitulatif de vos droits d’accès</h2>
         <p>
           Voici la liste des données auxquelles vous avez actuellement accès en
           tant qu’agent public.
         </p>
         <FullTable
-          head={['Données', 'Droits', 'Documentation']}
+          head={['Données', 'Droits']}
           body={appRights
             .filter(([_a, b]) => !!b)
             .map(([a, _b]) => {
@@ -122,9 +125,9 @@ const AccountPage = async () => {
                   backgroundColor="#ddd"
                   fontColor="#666"
                 />,
-                <a rel="noreferre noopener" target="_blank" href={'#'}>
-                  → en savoir plus
-                </a>,
+                // <a rel="noreferre noopener" target="_blank" href={'#'}>
+                //   → en savoir plus
+                // </a>,
               ];
             })}
         />

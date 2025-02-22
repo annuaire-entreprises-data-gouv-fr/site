@@ -1,8 +1,8 @@
 import { default as ButtonProConnect } from '#components-ui/button-pro-connect';
 import FullWidthContainer from '#components-ui/container';
 import { administrationsMetaData } from '#models/administrations';
-import { isLoggedIn } from '#models/user/rights';
-import { ISession } from '#models/user/session';
+import { isLoggedIn } from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
@@ -40,8 +40,12 @@ const LandingPageAgent = async (props: AppRouterProps) => {
               publics de l’Etat.
             </p>
             <p>
-              <a href="/cgu" rel="noreferrer noopener" target="_blank">
-                Consultez nos conditions générales d’utilisation
+              <a
+                href="/modalites-utilisation"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                Consultez nos modalités d’utilisation
               </a>
               .
             </p>

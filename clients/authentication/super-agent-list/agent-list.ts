@@ -5,7 +5,8 @@ import {
   clientSuperAgentList,
   IAgentRecord,
 } from '#clients/authentication/super-agent-list';
-import { IAgentScope, parseAgentScope } from '#models/user/agent-scopes/parse';
+import { IAgentScope } from '#models/authentication/agent/scopes';
+import { parseAgentScope } from '#models/authentication/agent/scopes/parse';
 import { DataStore } from '#utils/data-store';
 
 class SuperAgentsList {

@@ -11,14 +11,10 @@ export default function RefusedConnexionPage() {
   return (
     <ConnexionSubLayout img={connexionRefusedPicture}>
       <h1>L’accès à l’espace agent vous est refusé</h1>
-      <div>Seuls peuvent accéder à l’espace agent public :</div>
-      <ul>
-        <li>les membres d’une administration ou d’une collectivité</li>
-        <li>
-          les membres d’une organisation privée dotée d’une mission de service
-          public
-        </li>
-      </ul>
+      <div>
+        Seuls les membres d’une administration peuvent accéder à l’espace agent
+        public.
+      </div>
       <p>
         Votre organisation n’est pas une administration et par conséquent,
         l’accès à l’espace agent vous est refusé.

@@ -4,8 +4,11 @@ import {
 } from '#clients/api-proxy/rne/documents';
 import { HttpBadRequestError, HttpForbiddenError } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
 import { FetchRessourceException } from '#models/exceptions';
-import { ApplicationRights, hasRights } from '#models/user/rights';
 import logErrorInSentry from '#utils/sentry';
 import withSessionPagesRouter from '#utils/session/with-session-pages-router';
 

@@ -3,8 +3,8 @@
 import { Loader } from '#components-ui/loader';
 import NonRenseigne from '#components/non-renseigne';
 import { ProtectedInlineData } from '#components/protected-inline-data';
+import { ISession } from '#models/authentication/user/session';
 import { hasAnyError, isDataLoading } from '#models/data-fetching';
-import { ISession } from '#models/user/session';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import React from 'react';

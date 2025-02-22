@@ -1,7 +1,7 @@
+import { ISession } from '#models/authentication/user/session';
+import { IReqWithSession } from '#utils/session/with-session';
 import { getIronSession } from 'iron-session';
 import { GetServerSidePropsContext } from 'next';
-import { ISession } from '#models/user/session';
-import { IReqWithSession } from '#utils/session/with-session';
 import { sessionOptions, setVisitTimestamp } from '../../session';
 
 export interface IPropsWithMetadata {

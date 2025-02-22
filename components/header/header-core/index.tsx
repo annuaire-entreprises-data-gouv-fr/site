@@ -3,9 +3,12 @@ import { PrintNever } from '#components-ui/print-visibility';
 import ReconnectBanner from '#components/banner/reconnect';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import constants from '#models/constants';
-import { ApplicationRights, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import React from 'react';
 import ChangelogNotification from '../changelog-notification';
 import Menu from '../menu';
@@ -130,7 +133,10 @@ export const HeaderCore: React.FC<IProps> = ({
         <div className={styles.agentBanner} role="banner">
           <PrintNever>
             <div className="fr-container">
-              Vous êtes connecté(e) en tant qu’<strong>agent public</strong>.{' '}
+              Vous êtes connecté(e) en tant qu’<strong>agent public</strong>.
+              Vous pouvez{' '}
+              <a href="/compte">consultez le récapitulatif de vos droits.</a>
+              <br />
               Vous pouvez accéder à des données réservées à l’administration,
               identifiables par les cadres roses et la mention “{' '}
               <strong style={{ color: constants.colors.espaceAgent }}>
@@ -139,10 +145,6 @@ export const HeaderCore: React.FC<IProps> = ({
                 </Icon>
               </strong>{' '}
               ”.
-              <br />
-              <a href="/mon-compte">
-                Consultez le récapitulatif de vos droits.
-              </a>
             </div>
           </PrintNever>
         </div>
