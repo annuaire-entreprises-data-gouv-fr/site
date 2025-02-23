@@ -200,7 +200,7 @@
             "etatAdministratif": "fermé",
             "statutDiffusion": "diffusible",
             "estSiege": true,
-            "ancienSiege": false,
+            "ancienSiege": true,
             "enseigne": "",
             "denomination": null,
             "nic": "00015",
