@@ -15,7 +15,10 @@ export interface IGeoLoc {
 export const getGeoLoc = async (etablissement: IEtablissement) => {
   try {
     if (estDiffusible(etablissement) && etablissement.adresse) {
-      return await clientBanGeoLoc(etablissement.adresse);
+      return await clientBanGeoLoc(
+        etablissement.adresse,
+        etablissement.codePostal
+      );
     }
     return { lat: '', long: '' };
   } catch (e: any) {

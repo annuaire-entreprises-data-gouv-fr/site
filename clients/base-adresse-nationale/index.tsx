@@ -8,13 +8,18 @@ import { IBANResponse } from './types';
 /**
  * GET address for geoloc
  */
-export const clientBanGeoLoc = async (adresse: string): Promise<IGeoLoc> => {
+export const clientBanGeoLoc = async (
+  adresse: string,
+  codePostal?: string
+): Promise<IGeoLoc> => {
   // remove all characters that are not digits or letters at the begining of adress as it triggers a 400
   const sanitizedAdress = adresse
     .replace(/^[^a-zA-Z0-9]*/, '')
     .replaceAll(' ', '+');
 
-  const query = `q=${sanitizedAdress}`;
+  const query = `q=${sanitizedAdress}${
+    codePostal ? `&postcode=${codePostal}` : ''
+  }`;
   const route = `${routes.ban}?${query}`;
   const response = await httpGet<IBANResponse>(route, {
     timeout: constants.timeout.L,
