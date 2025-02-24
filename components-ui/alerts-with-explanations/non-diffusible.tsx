@@ -1,3 +1,4 @@
+import { INSEE } from '#components/administrations';
 import {
   ApplicationRights,
   hasRights,
@@ -49,6 +50,16 @@ export default function NonDiffusibleAlert({
     return null;
   }
   if (hasRights(session, ApplicationRights.nonDiffusible)) {
+    if (statutDiffusion === ISTATUTDIFFUSION.NON_DIFF_STRICT) {
+      return (
+        <ProtectedData full>
+          Pour des raisons que nous ignorons, l’
+          <INSEE /> ne <strong>diffuse pas</strong> les informations de cette
+          structure. Par conséquent, vous ne pouvez pas les consulter sur notre
+          site, même avec votre compte <strong>agent public</strong>.
+        </ProtectedData>
+      );
+    }
     return (
       <ProtectedData full>
         Les informations de cette structure ne sont pas accessibles au grand
