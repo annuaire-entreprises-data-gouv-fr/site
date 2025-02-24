@@ -7,6 +7,7 @@ import {
   ApplicationRights,
   hasRights,
 } from '#models/authentication/user/rights';
+import constants from '#models/constants';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
@@ -61,7 +62,7 @@ const AccountPage = async () => {
                 <div className="fr-card__footer">
                   <ul className="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
                     <li>
-                      <ButtonLink to="https://tchap.gouv.fr/#/room/#annuaire-entreprises:agent.dinum.tchap.gouv.fr">
+                      <ButtonLink to={constants.links.tchap}>
                         Rejoindre la communauté Tchap
                       </ButtonLink>
                     </li>
@@ -89,11 +90,11 @@ const AccountPage = async () => {
                 </div>
                 <div className="fr-card__footer">
                   <ul className="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
-                    {/* <li>
-                      <ButtonLink to="/historique-des-modifications">
+                    <li>
+                      <ButtonLink to={constants.links.documentation}>
                         Consulter la documentation
                       </ButtonLink>
-                    </li> */}
+                    </li>
                     <li>
                       <ButtonLink alt to="/cgu">
                         Consulter les modalités d’utilisation
@@ -125,9 +126,6 @@ const AccountPage = async () => {
                   backgroundColor="#ddd"
                   fontColor="#666"
                 />,
-                // <a rel="noreferre noopener" target="_blank" href={'#'}>
-                //   → en savoir plus
-                // </a>,
               ];
             })}
         />
