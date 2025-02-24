@@ -7,8 +7,8 @@ import maplibregl, { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useEffect, useRef } from 'react';
 import { checkLatLng } from './check-lat-lng';
+import { hasWebGLSupport } from './has-web-gl';
 import './map.css';
-import withWebGL from './with-web-gl';
 
 function MapWithResults({
   results,
@@ -25,6 +25,13 @@ function MapWithResults({
   useEffect(() => {
     if (!mapContainer.current) return;
     if (map.current) return; // stops map from intializing more than once
+
+    if (!hasWebGLSupport()) {
+      alert(
+        'Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte.'
+      );
+      return;
+    }
 
     map.current = new maplibregl.Map({
       container: mapContainer.current,
@@ -91,9 +98,9 @@ function MapWithResults({
     <div
       ref={mapContainer}
       className="map"
-      style={{ width: '100%', zIndex: '0', height }}
+      style={{ width: '100%', zIndex: '0', height, backgroundColor: '#f0f0f0' }}
     />
   );
 }
 
-export default withWebGL(MapWithResults);
+export default MapWithResults;
