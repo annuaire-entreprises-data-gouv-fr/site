@@ -33,7 +33,7 @@ const AnnoncesBodacc: React.FC<{
               <ul>
                 {bodacc.procedures.map((procedure) => (
                   <li key={procedure.details}>
-                    le {procedure.date} : {procedure.details}
+                    le {formatDate(procedure.date)} : {procedure.details}
                   </li>
                 ))}
               </ul>
