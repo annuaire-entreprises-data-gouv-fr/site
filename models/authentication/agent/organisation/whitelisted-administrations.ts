@@ -5,6 +5,6 @@ const authorizedAdministrationWhitelist = {
   '385290309': 'ADEME',
 };
 
-export const isNotL100_3ButWhitelisted = (siren: Siren) => {
+export const isOrganisationWhitelisted = (siren: Siren) => {
   return Object.hasOwn(authorizedAdministrationWhitelist, siren);
 };

@@ -1,17 +1,18 @@
-import { HttpForbiddenError } from '#clients/exceptions';
+import { HttpForbiddenError, HttpServerError } from '#clients/exceptions';
+import { isAPINotResponding } from '#models/api-not-responding';
 import {
   CanRequestAuthorizationException,
   NeedASiretException,
 } from '#models/authentication/authentication-exceptions';
 import { isServicePublic, IUniteLegale } from '#models/core/types';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
+import { fetchUniteLegaleFromRechercheEntreprise } from '#models/core/unite-legale';
 import { extractSirenFromSiret, Siren } from '#utils/helpers';
 import { defaultAgentScopes } from '../scopes';
 import {
   isAdministrationButNotL100_3,
   mightBeAnAuthorizedAdministration,
 } from './might-be-an-administration';
-import { isNotL100_3ButWhitelisted } from './whitelisted-administrations';
+import { isOrganisationWhitelisted } from './whitelisted-administrations';
 
 const basicOrganisationHabilitation = {
   scopes: [...defaultAgentScopes],
@@ -45,10 +46,15 @@ export class AgentOrganisation {
   }
 
   async getHabilitationLevel() {
-    const uniteLegale = await getUniteLegaleFromSlug(this.siren, {
-      page: 0,
-      isBot: false,
-    });
+    const uniteLegale = await fetchUniteLegaleFromRechercheEntreprise(
+      this.siren,
+      0,
+      true
+    );
+
+    if (isAPINotResponding(uniteLegale)) {
+      throw new HttpServerError('Failed to fetch organisation details');
+    }
 
     const codeJuridique = (uniteLegale.natureJuridique || '').replace('.', '');
     const isAuthorized = this.isAnAuthorizedAdministration(
@@ -77,11 +83,11 @@ export class AgentOrganisation {
     uniteLegale: IUniteLegale,
     codeJuridique: string
   ) {
+    if (isOrganisationWhitelisted(this.siren)) {
+      return true;
+    }
     if (isServicePublic(uniteLegale)) {
       if (isAdministrationButNotL100_3(codeJuridique)) {
-        if (isNotL100_3ButWhitelisted(this.siren)) {
-          return true;
-        }
         return false;
       } else {
         return true;

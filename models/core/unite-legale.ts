@@ -267,7 +267,7 @@ class UniteLegaleBuilder {
  * Fetch Unite Legale from Sirene Recherche Entreprise
  */
 
-const fetchUniteLegaleFromRechercheEntreprise = async (
+export const fetchUniteLegaleFromRechercheEntreprise = async (
   siren: Siren,
   pageEtablissements: number,
   shouldRetry: boolean
