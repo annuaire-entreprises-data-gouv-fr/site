@@ -10,7 +10,7 @@ import { IBANResponse } from './types';
  */
 export const clientBanGeoLoc = async (
   adresse: string,
-  codePostal?: string
+  postCode?: string
 ): Promise<IGeoLoc> => {
   // remove all characters that are not digits or letters at the begining of adress as it triggers a 400
   const sanitizedAdress = adresse
@@ -18,7 +18,7 @@ export const clientBanGeoLoc = async (
     .replaceAll(' ', '+');
 
   const query = `q=${sanitizedAdress}${
-    codePostal ? `&postcode=${codePostal}` : ''
+    postCode ? `&postcode=${postCode}` : ''
   }`;
   const route = `${routes.ban}?${query}`;
   const response = await httpGet<IBANResponse>(route, {
