@@ -1,19 +1,26 @@
-import { HttpForbiddenError } from '#clients/exceptions';
+import { HttpForbiddenError, HttpServerError } from '#clients/exceptions';
+import { isAPINotResponding } from '#models/api-not-responding';
 import {
   CanRequestAuthorizationException,
   NeedASiretException,
 } from '#models/authentication/authentication-exceptions';
-import { isServicePublic } from '#models/core/types';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
+import { isServicePublic, IUniteLegale } from '#models/core/types';
+import { fetchUniteLegaleFromRechercheEntreprise } from '#models/core/unite-legale';
 import { extractSirenFromSiret, Siren } from '#utils/helpers';
 import { defaultAgentScopes } from '../scopes';
 import {
   isAdministrationButNotL100_3,
-  mightBeAnAdministration,
+  mightBeAnAuthorizedAdministration,
 } from './might-be-an-administration';
-import getSiretFromIdpTemporary from './siret-from-idpid';
+import { isOrganisationWhitelisted } from './whitelisted-administrations';
 
 const basicOrganisationHabilitation = {
+  scopes: [...defaultAgentScopes],
+  userType: 'Agent connecté',
+  isSuperAgent: false,
+};
+
+const thrustworthyOrganisationHabilitation = {
   scopes: [...defaultAgentScopes],
   userType: 'Agent connecté',
   isSuperAgent: false,
@@ -26,9 +33,7 @@ export class AgentOrganisation {
   constructor(private domain: string, private idpId: string, siret: string) {
     this.isFromMCP = this.isMCP(idpId);
 
-    const siretTmp = siret || getSiretFromIdpTemporary(idpId);
-
-    if (!siretTmp) {
+    if (!siret) {
       throw new NeedASiretException(
         'The user doesn‘t have a siret',
         `${this.domain} - ${this.idpId} - ${
@@ -37,38 +42,58 @@ export class AgentOrganisation {
       );
     }
 
-    this.siren = extractSirenFromSiret(siretTmp);
+    this.siren = extractSirenFromSiret(siret);
   }
 
   async getHabilitationLevel() {
-    const uniteLegale = await getUniteLegaleFromSlug(this.siren, {
-      page: 0,
-      isBot: false,
-    });
+    const uniteLegale = await fetchUniteLegaleFromRechercheEntreprise(
+      this.siren,
+      0,
+      true
+    );
 
-    const isAnAdministration = isServicePublic(uniteLegale);
+    if (isAPINotResponding(uniteLegale)) {
+      throw new HttpServerError('Failed to fetch organisation details');
+    }
+
     const codeJuridique = (uniteLegale.natureJuridique || '').replace('.', '');
+    const isAuthorized = this.isAnAuthorizedAdministration(
+      uniteLegale,
+      codeJuridique
+    );
 
-    if (isAnAdministration) {
-      if (isAdministrationButNotL100_3(codeJuridique)) {
+    if (isAuthorized) {
+      if (this.isAdministrationTrustworthy()) {
+        return thrustworthyOrganisationHabilitation;
+      } else {
+        return basicOrganisationHabilitation;
+      }
+    } else {
+      if (mightBeAnAuthorizedAdministration(codeJuridique)) {
         throw new CanRequestAuthorizationException(
           uniteLegale.natureJuridique,
           this.siren
         );
-      } else if (this.isAdministrationTrustworthy()) {
-        return basicOrganisationHabilitation;
       }
-      return basicOrganisationHabilitation;
+      throw new HttpForbiddenError('Organization is not a service public');
     }
+  }
 
-    if (mightBeAnAdministration(codeJuridique)) {
-      throw new CanRequestAuthorizationException(
-        uniteLegale.natureJuridique,
-        this.siren
-      );
+  isAnAuthorizedAdministration(
+    uniteLegale: IUniteLegale,
+    codeJuridique: string
+  ) {
+    if (isOrganisationWhitelisted(this.siren)) {
+      return true;
     }
-
-    throw new HttpForbiddenError('Organization is not a service public');
+    if (isServicePublic(uniteLegale)) {
+      if (isAdministrationButNotL100_3(codeJuridique)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    return false;
   }
 
   isAdministrationTrustworthy() {
