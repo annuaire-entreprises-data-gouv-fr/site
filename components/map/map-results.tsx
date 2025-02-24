@@ -8,8 +8,9 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { useEffect, useRef } from 'react';
 import { checkLatLng } from './check-lat-lng';
 import './map.css';
+import withWebGL from './with-web-gl';
 
-export default function MapWithResults({
+function MapWithResults({
   results,
   height,
   shouldColorZipCode,
@@ -94,3 +95,5 @@ export default function MapWithResults({
     />
   );
 }
+
+export default withWebGL(MapWithResults);

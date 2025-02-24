@@ -8,6 +8,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { useEffect, useRef } from 'react';
 import { checkLatLng } from './check-lat-lng';
 import './map.css';
+import withWebGL from './with-web-gl';
 
 export function MapEtablissement({
   etablissement,
@@ -71,4 +72,4 @@ export function MapEtablissement({
   );
 }
 
-export default MapEtablissement;
+export default withWebGL(MapEtablissement);
