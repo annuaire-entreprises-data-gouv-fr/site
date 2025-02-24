@@ -62,7 +62,7 @@ const AccountPage = async () => {
                 <div className="fr-card__footer">
                   <ul className="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
                     <li>
-                      <ButtonLink to={constants.links.tchap}>
+                      <ButtonLink to={constants.links.tchap} target="_blank">
                         Rejoindre la communauté Tchap
                       </ButtonLink>
                     </li>
@@ -91,12 +91,15 @@ const AccountPage = async () => {
                 <div className="fr-card__footer">
                   <ul className="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
                     <li>
-                      <ButtonLink to={constants.links.documentation}>
+                      <ButtonLink
+                        target="_blank"
+                        to={constants.links.documentation}
+                      >
                         Consulter la documentation
                       </ButtonLink>
                     </li>
                     <li>
-                      <ButtonLink alt to="/cgu">
+                      <ButtonLink alt to="/modalites-utilisation">
                         Consulter les modalités d’utilisation
                       </ButtonLink>
                     </li>
