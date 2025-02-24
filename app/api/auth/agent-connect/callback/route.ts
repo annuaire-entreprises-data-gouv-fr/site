@@ -20,19 +20,13 @@ export const GET = withSession(async function callbackRoute(req) {
     const userInfo = await proConnectAuthenticate(req);
     siretStr = userInfo.siret;
 
-    if (!userInfo.siret)
-      logInfoInSentry(
-        new Information({
-          name: 'AgentNoSiret',
-          message: userInfo.idp_id,
-        })
-      );
-
     if (!userInfo.siret) {
       logInfoInSentry(
         new Information({
           name: 'AgentNoSiret',
-          message: userInfo.idp_id,
+          context: {
+            details: userInfo.idp_id,
+          },
         })
       );
     }
