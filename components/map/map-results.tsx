@@ -7,9 +7,10 @@ import maplibregl, { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useEffect, useRef } from 'react';
 import { checkLatLng } from './check-lat-lng';
+import { hasWebGLSupport } from './has-web-gl';
 import './map.css';
 
-export default function MapWithResults({
+function MapWithResults({
   results,
   height,
   shouldColorZipCode,
@@ -24,6 +25,13 @@ export default function MapWithResults({
   useEffect(() => {
     if (!mapContainer.current) return;
     if (map.current) return; // stops map from intializing more than once
+
+    if (!hasWebGLSupport()) {
+      alert(
+        'Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte.'
+      );
+      return;
+    }
 
     map.current = new maplibregl.Map({
       container: mapContainer.current,
@@ -53,8 +61,8 @@ export default function MapWithResults({
 
         new maplibregl.Marker({ color: constants.colors.frBlue })
           .setLngLat([
-            parseInt(result.siege.longitude),
-            parseInt(result.siege.latitude),
+            parseFloat(result.siege.longitude),
+            parseFloat(result.siege.latitude),
           ])
           .setPopup(popup)
           .addTo(map.current!);
@@ -78,7 +86,10 @@ export default function MapWithResults({
           new maplibregl.Marker({
             color: shouldColorZipCode ? 'yellow' : constants.colors.pastelBlue,
           })
-            .setLngLat([parseInt(match.longitude), parseInt(match.latitude)])
+            .setLngLat([
+              parseFloat(match.longitude),
+              parseFloat(match.latitude),
+            ])
             .setPopup(popup)
             .addTo(map.current!);
         }
@@ -90,7 +101,9 @@ export default function MapWithResults({
     <div
       ref={mapContainer}
       className="map"
-      style={{ width: '100%', zIndex: '0', height }}
+      style={{ width: '100%', zIndex: '0', height, backgroundColor: '#f0f0f0' }}
     />
   );
 }
+
+export default MapWithResults;

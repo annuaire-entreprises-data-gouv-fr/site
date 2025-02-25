@@ -7,6 +7,7 @@ import maplibregl, { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useEffect, useRef } from 'react';
 import { checkLatLng } from './check-lat-lng';
+import { hasWebGLSupport } from './has-web-gl';
 import './map.css';
 
 export function MapEtablissement({
@@ -21,6 +22,12 @@ export function MapEtablissement({
 
   useEffect(() => {
     if (map.current || !coords) return; // stops map from intializing more than once
+    if (!hasWebGLSupport()) {
+      alert(
+        'Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte.'
+      );
+      return;
+    }
 
     const zoom = etablissement ? 12 : 4.5;
 
@@ -58,7 +65,12 @@ export function MapEtablissement({
         <div
           ref={mapContainer}
           className="map"
-          style={{ width: '100%', zIndex: '0', height: '450px' }}
+          style={{
+            width: '100%',
+            zIndex: '0',
+            height: '450px',
+            backgroundColor: '#f0f0f0',
+          }}
         />
       ) : (
         <i>
