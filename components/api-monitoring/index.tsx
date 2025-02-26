@@ -6,20 +6,20 @@ import { IMonitoringWithMetaData, IRatio } from '#models/monitoring';
 import React from 'react';
 import styles from './styles.module.css';
 
-const getUptimeColor = (ratio: IRatio) => {
+const getUptimeColorStyles = (ratio: IRatio) => {
   if (!ratio.wasMonitorUp) {
-    return '#ccc';
+    return { backgroundColor: '#ccc' };
   }
   const uptimeNum = ratio.ratioNumber;
 
   if (uptimeNum >= 99.99) {
-    return '#3bd671';
+    return { backgroundColor: '#3bd671' };
   } else if (uptimeNum >= 99) {
-    return '#c2e34b';
+    return { backgroundColor: '#c2e34b', height: '50px', margin: 0 };
   } else if (uptimeNum >= 95) {
-    return '#f29030'; // Orange
+    return { backgroundColor: '#f29030', height: '50px', margin: 0 }; // Orange
   }
-  return '#df484a';
+  return { backgroundColor: '#df484a', height: '50px', margin: 0 };
 };
 
 const getUptimeLabel = (ratio: IRatio) => {
@@ -74,9 +74,7 @@ const Metric: React.FC<{
           >
             <div
               className={styles['serie-rectangle']}
-              style={{
-                backgroundColor: getUptimeColor(serie),
-              }}
+              style={getUptimeColorStyles(serie)}
             ></div>
           </InformationTooltip>
         </div>
