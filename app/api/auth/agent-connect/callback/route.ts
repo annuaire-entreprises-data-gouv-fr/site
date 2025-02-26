@@ -54,7 +54,12 @@ export const GET = withSession(async function callbackRoute(req) {
     });
     return response;
   } catch (e: any) {
-    logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
+    logFatalErrorInSentry(
+      new AgentConnectionFailedException({
+        cause: e,
+        context: { slug: siretStr },
+      })
+    );
     if (e instanceof PrestataireException) {
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/prestataires'
