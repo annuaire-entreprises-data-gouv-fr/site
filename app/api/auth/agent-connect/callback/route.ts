@@ -18,7 +18,7 @@ export const GET = withSession(async function callbackRoute(req) {
   let siretStr = '';
   try {
     const userInfo = await proConnectAuthenticate(req);
-    siretStr = (userInfo.siret || '').replaceAll(' ', '');
+    siretStr = userInfo.siret;
 
     if (!userInfo.siret) {
       logInfoInSentry(
