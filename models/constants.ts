@@ -2,6 +2,9 @@ const constants = {
   links: {
     mailtoInpi: 'mailto:licences@inpi.fr',
     mailInpi: 'licences@inpi.fr',
+    tchap:
+      'https://tchap.gouv.fr/#/room/#annuaire-entreprises:agent.dinum.tchap.gouv.fr',
+    documentation: 'https://guide.annuaire-entreprises.data.gouv.fr/',
     parcours: {
       modification: '/faq/modifier',
       contact: '/faq/parcours',

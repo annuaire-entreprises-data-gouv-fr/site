@@ -1,5 +1,5 @@
 import { default as ButtonProConnect } from '#components-ui/button-pro-connect';
-import Container from '#components-ui/container';
+import FullWidthContainer from '#components-ui/container';
 import { administrationsMetaData } from '#models/administrations';
 import { isLoggedIn } from '#models/authentication/user/rights';
 import { ISession } from '#models/authentication/user/session';
@@ -108,9 +108,9 @@ const LandingPageAgent = async (props: AppRouterProps) => {
           />
         </div>
       </section>
-      <Container
+      <FullWidthContainer
         style={{
-          background: 'var(--background-alt-blue-france)',
+          background: 'var(--annuaire-colors-espaceAgentPastel)',
         }}
       >
         <section
@@ -128,7 +128,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
             <ButtonProConnect shouldRedirectToReferer event="BTN_LP_BOTTOM" />
           )}
         </section>
-      </Container>
+      </FullWidthContainer>
       <section>
         <h3>
           L’Annuaire des Entreprises est opéré par la DINUM, avec le partenariat

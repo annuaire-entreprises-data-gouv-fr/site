@@ -8,11 +8,13 @@ import React, { useEffect, useState } from 'react';
 type IProps = {
   shouldRedirectToReferer?: boolean;
   event: string;
+  noFootLink?: boolean;
 };
 
 const ButtonProConnect: React.FC<IProps> = ({
   shouldRedirectToReferer = false,
   event = 'BTN_DEFAULT',
+  noFootLink = false,
 }) => {
   const [referrer, setReferrer] = useState<string | null>(null);
   const currentPath = usePathname();
@@ -42,16 +44,18 @@ const ButtonProConnect: React.FC<IProps> = ({
           <span className="fr-connect__login">S’identifier avec</span>
           <span className="fr-connect__brand">ProConnect</span>
         </button>
-        <p>
-          <a
-            href="https://www.proconnect.gouv.fr/"
-            target="_blank"
-            rel="noopener"
-            title="Qu'est-ce que ProConnect ? - nouvelle fenêtre"
-          >
-            Qu’est-ce que ProConnect ?
-          </a>
-        </p>
+        {!noFootLink && (
+          <p>
+            <a
+              href="https://www.proconnect.gouv.fr/"
+              target="_blank"
+              rel="noopener"
+              title="Qu'est-ce que ProConnect ? - nouvelle fenêtre"
+            >
+              Qu’est-ce que ProConnect ?
+            </a>
+          </p>
+        )}
       </div>
     </form>
   );

@@ -38,13 +38,29 @@ const Menu: React.FC<{
         className={styles.dialog}
       >
         <a aria-label="Gestion de mon compte agent public" href={'/compte'}>
-          <div>Mon compte</div>
+          Consulter ses droits
+        </a>
+        <a
+          target="_blank"
+          rel="nopener noreferer"
+          aria-label="Documentation de l’espace agent public"
+          href={constants.links.documentation}
+        >
+          Consulter la documentation
+        </a>
+        <a
+          aria-label="Canal Tchap"
+          href={constants.links.tchap}
+          target="_blank"
+          rel="nopener noreferer"
+        >
+          Nous retrouver sur Tchap
         </a>
         <a
           aria-label="Se déconnecter de l'espace agent public"
           href={'/api/auth/agent-connect/logout'}
         >
-          <div>Se déconnecter</div>
+          <strong>Se déconnecter</strong>
         </a>
       </FloatingModal>
     </div>
