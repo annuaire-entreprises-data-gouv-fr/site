@@ -34,7 +34,9 @@ export class AgentConnected {
     this.familyName = userInfo.family_name ?? '';
     this.firstName = userInfo.given_name ?? '';
     this.userId = userInfo.sub;
-    this.siret = userInfo.siret || getSiretFromIdpTemporary(this.idpId);
+    this.siret = (
+      userInfo.siret || getSiretFromIdpTemporary(this.idpId)
+    ).replaceAll(' ', '');
   }
 
   extractDomain(email: string) {
