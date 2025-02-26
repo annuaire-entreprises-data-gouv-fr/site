@@ -5,7 +5,7 @@
 <a href="https://github.com/annuaire-entreprises-data-gouv-fr/site/blob/main/LICENSE"><img src="https://img.shields.io/github/license/annuaire-entreprises-data-gouv-fr/site.svg?color=green" alt="License Badge"></a>
 [![CI (lint, unit-tests, end2end, a11y)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/pre-merge.yml)
 [![External API check](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/external-api-test.yml)
-[![Deploy cluster](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy-cluster.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy-cluster.yml)
+[![Deploy](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy.yml)
 <a href="https://annuaire-entreprises.data.gouv.fr/administration"><img src="https://img.shields.io/badge/Page-partenaires-blue.svg" alt="Partenaires Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/donnees/sources"><img src="https://img.shields.io/badge/Page-datasources-blue.svg" alt="Sources de données Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/donnees/api"><img src="https://img.shields.io/badge/Page-statuts-blue.svg" alt="Statut des API Badge"></a>
