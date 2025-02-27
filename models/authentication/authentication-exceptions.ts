@@ -1,7 +1,7 @@
 import { Exception } from '#models/exceptions';
 
 export class AgentConnectionFailedException extends Exception {
-  constructor(args: { cause?: any }) {
+  constructor(args: { cause?: any; context?: { slug: string } }) {
     super({
       name: 'AgentConnectionFailed',
       ...args,

@@ -45,14 +45,15 @@
 .serie-rectangle {
   border-radius: 6px;
   height: 40px;
-  margin: 3px 0;
+  margin: 5px 0;
   transition: 100ms opacity ease-in-out;
   border: 2px solid #fff;
 }
+
 .serie-rectangle:hover {
   margin: 0;
   opacity: 0.6;
-  height: 46px;
+  height: 50px;
 }
 
 @media only screen and (min-width: 576px) and (max-width: 768px) {
