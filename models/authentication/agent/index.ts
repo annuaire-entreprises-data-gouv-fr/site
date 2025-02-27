@@ -1,6 +1,5 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
-import getSiretFromIdpTemporary from '#utils/siret-to-idpid';
 import { PrestataireException } from '../authentication-exceptions';
 import { AgentOrganisation } from './organisation';
 import { defaultAgentScopes, IAgentScope } from './scopes';
@@ -35,7 +34,7 @@ export class AgentConnected {
     this.firstName = userInfo.given_name ?? '';
     this.userId = userInfo.sub;
     this.siret = (
-      userInfo.siret || getSiretFromIdpTemporary(this.idpId)
+      userInfo.siret
     ).replaceAll(' ', '');
   }
 
