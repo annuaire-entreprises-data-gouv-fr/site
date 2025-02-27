@@ -55,7 +55,7 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
           </p>
           <FullTable
             head={['Role', 'Élu(e)', 'Date de naissance']}
-            body={elus.sort(sortByRole).map((elu) => formatElus(elu))}
+            body={elus.sort(sortElus).map((elu) => formatElus(elu))}
           />
         </>
       ) : (
@@ -69,14 +69,19 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
 };
 export default ElusSection;
 
-type IElu = {
-  role: string | null;
-};
-function sortByRole(a: IElu, b: IElu): -1 | 1 | 0 {
+function sortElus(a: IEtatCivil, b: IEtatCivil): -1 | 1 | 0 {
   const roleA = a.role;
   const roleB = b.role;
   if (roleA === roleB) {
-    return 0;
+    // same role, sort by name
+    if (a.nom === b.nom) {
+      if (a.prenoms === b.prenoms) {
+        return 0;
+      }
+      return a.prenoms < b.prenoms ? -1 : 1;
+    }
+
+    return a.nom < b.nom ? -1 : 1;
   }
   if (roleA === 'Maire') {
     return -1;
