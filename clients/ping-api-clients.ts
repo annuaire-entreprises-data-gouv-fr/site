@@ -9,7 +9,6 @@ import {
 import { clientAPIInclusion } from './api-inclusion';
 import { clientEORI } from './api-proxy/eori';
 import { clientUniteLegaleIG } from './api-proxy/greffe';
-import { clientRNEImmatriculation } from './api-proxy/rne';
 import { clientTVA } from './api-proxy/tva';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
 import { clientUniteLegaleRechercheEntreprise } from './recherche-entreprise/siren';
@@ -30,9 +29,6 @@ const ping = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-proxy-ig':
       return await clientUniteLegaleIG(sirenDanone);
-    case 'api-proxy-rne':
-      // fetch IRM and disable cache
-      return await clientRNEImmatriculation(sirenDanone);
     case 'api-sirene-insee':
       return await clientUniteLegaleInsee(sirenGanymede, 1, false);
     case 'api-sirene-donnees-ouvertes':
