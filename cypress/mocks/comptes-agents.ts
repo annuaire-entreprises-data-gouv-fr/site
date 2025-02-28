@@ -23,3 +23,9 @@ export const comptesAgents = [
     siret: '13002526500013',
   })),
 ];
+
+export const comptesAgentsMonitoring =
+  'user@yopmail.com,10000,10000,10000,10000\n' +
+  allAgentScopes
+    .map((scope) => `${scope}@yopmail.com,10000,10000,10000,10000\n`)
+    .join('');

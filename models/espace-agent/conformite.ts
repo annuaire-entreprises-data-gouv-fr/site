@@ -20,27 +20,28 @@ export type IConformiteUniteLegale = {
 
 export const getConformiteEntreprise = async (
   maybeSiret: string,
-  useCase: UseCase
+  params: { useCase?: UseCase }
 ): Promise<IConformiteUniteLegale> => {
   const siret = verifySiret(maybeSiret as string);
   const siren = extractSirenFromSiret(siret);
 
   const [fiscale, vigilance, msa] = await Promise.all([
-    clientApiEntrepriseConformiteFiscale(siren, useCase).catch((error) =>
+    clientApiEntrepriseConformiteFiscale(siren, params.useCase).catch((error) =>
       handleApiEntrepriseError(error, {
         siren,
         siret,
         apiResource: 'ConformiteFiscale',
       })
     ),
-    clientApiEntrepriseConformiteVigilance(siren, useCase).catch((error) =>
-      handleApiEntrepriseError(error, {
-        siren,
-        siret,
-        apiResource: 'ConformiteVigilance',
-      })
+    clientApiEntrepriseConformiteVigilance(siren, params.useCase).catch(
+      (error) =>
+        handleApiEntrepriseError(error, {
+          siren,
+          siret,
+          apiResource: 'ConformiteVigilance',
+        })
     ),
-    clientApiEntrepriseConformiteMSA(siret, useCase).catch((error) =>
+    clientApiEntrepriseConformiteMSA(siret, params.useCase).catch((error) =>
       handleApiEntrepriseError(error, {
         siren,
         siret,

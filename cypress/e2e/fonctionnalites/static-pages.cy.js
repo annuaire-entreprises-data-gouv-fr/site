@@ -39,7 +39,13 @@ describe('Footer navigation', () => {
 
     cy.get('.fr-footer a').each((footerLink) => {
       // donot test departements/index.html as it only exists in production and staging
-      if (footerLink.prop('href').indexOf('departements/index.html') === -1) {
+      // donot test https://entreprendre.service-public.fr/ as it seems to be blocked
+      // donot test https://service-public.fr/ as it seems to be blocked
+      if (
+        footerLink.prop('href').indexOf('departements/index.html') === -1 &&
+        footerLink.prop('href').indexOf('service-public.fr') === -1 &&
+        footerLink.prop('href').indexOf('entreprendre.service-public.fr') === -1
+      ) {
         cy.request(footerLink.prop('href'));
       }
     });
