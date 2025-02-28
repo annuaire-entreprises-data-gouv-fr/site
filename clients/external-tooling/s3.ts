@@ -23,6 +23,20 @@ const bucketsLists = {
       Key: 'comptes_agents.json',
     },
   },
+  'monitoring-comptes-agents': {
+    config: {
+      endpoint: 'https://s3.gra.io.cloud.ovh.net/',
+      credentials: {
+        accessKeyId: process.env.OVH_S3_ACCESS_KEY || '',
+        secretAccessKey: process.env.OVH_S3_SECRET || '',
+      },
+      region: 'gra',
+    },
+    params: {
+      Bucket: process.env.OVH_S3_BUCKET_MONITORING || '',
+      Key: 'monitoring_comptes_agents.csv',
+    },
+  },
 };
 
 export async function readFromS3(
