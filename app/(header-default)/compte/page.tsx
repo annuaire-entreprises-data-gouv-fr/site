@@ -1,4 +1,6 @@
+import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
 import { Badge } from '#components-ui/badge';
+import { Tag } from '#components-ui/tag';
 import { FullTable } from '#components/table/full';
 import {
   ApplicationRights,
@@ -30,6 +32,10 @@ const AccountPage = async () => {
       appRights.push([scope, hasRights(session, scope)]);
     }
   }
+
+  const allAgentsList = hasRights(session, ApplicationRights.administrateur)
+    ? await superAgentsList.getAllAgents()
+    : [];
 
   return (
     <div className="content-container">
@@ -66,6 +72,18 @@ const AccountPage = async () => {
           ];
         })}
       />
+
+      {hasRights(session, ApplicationRights.administrateur) && (
+        <>
+          <h2>Liste des agents avec des droits nominatifs</h2>
+          <FullTable
+            head={['Email', 'Scopes']}
+            body={Object.entries(allAgentsList).map(([key, values]) => {
+              return [key, values.map((v) => <Tag>{v}</Tag>)];
+            })}
+          />
+        </>
+      )}
     </div>
   );
 };
