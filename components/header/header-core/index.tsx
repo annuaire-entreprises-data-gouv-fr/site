@@ -3,9 +3,11 @@ import { PrintNever } from '#components-ui/print-visibility';
 import ReconnectBanner from '#components/banner/reconnect';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
+import { WelcomeModalAgent } from '#components/welcome-modal-agent';
 import {
   ApplicationRights,
   hasRights,
+  isLoggedIn,
 } from '#models/authentication/user/rights';
 import { ISession } from '#models/authentication/user/session';
 import constants from '#models/constants';
@@ -41,6 +43,7 @@ export const HeaderCore: React.FC<IProps> = ({
   return (
     <>
       {useReconnectBanner && <ReconnectBanner session={session} />}
+      {isLoggedIn(session) && <WelcomeModalAgent />}
       <LoadBar session={session} />
       <header
         role="banner"
@@ -133,12 +136,15 @@ export const HeaderCore: React.FC<IProps> = ({
         <div className={styles.agentBanner} role="banner">
           <PrintNever>
             <div className="fr-container">
-              Votre compte <strong>agent public</strong> vous donne accès à des
-              données réservées à l’administration, identifiables par la mention
-              “{' '}
+              Vous êtes connecté(e) en tant qu’<strong>agent public</strong>.
+              Vous pouvez{' '}
+              <a href="/compte">consultez le récapitulatif de vos droits.</a>
+              <br />
+              Vous pouvez accéder à des données réservées à l’administration,
+              identifiables par les cadres roses et la mention “{' '}
               <strong style={{ color: constants.colors.espaceAgent }}>
                 <Icon size={12} slug="lockFill">
-                  Réservé(es) aux agents publics
+                  Réservé aux agents publics
                 </Icon>
               </strong>{' '}
               ”.

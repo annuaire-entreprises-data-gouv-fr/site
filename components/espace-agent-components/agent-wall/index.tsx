@@ -9,17 +9,9 @@ const AgentWall: React.FC<{
   title: string;
   id?: string;
   sectionIntro?: JSX.Element;
-  conditionExplanation?: JSX.Element;
   modalFooter?: JSX.Element;
   sources?: EAdministration[];
-}> = ({
-  id,
-  title,
-  sectionIntro = null,
-  conditionExplanation = null,
-  modalFooter = null,
-  sources = [],
-}) => {
+}> = ({ id, title, sectionIntro = null, modalFooter = null, sources = [] }) => {
   return (
     <Section title={title} id={id} sources={sources} isProtected>
       {sectionIntro}
@@ -32,34 +24,22 @@ const AgentWall: React.FC<{
         >
           <h3>Vous êtes agent public ?</h3>
           <p>
-            Accédez immédiatement à ces données avec{' '}
-            <a
-              href="https://www.proconnect.gouv.fr/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Qu’est-ce que ProConnect ? - nouvelle fenêtre"
-            >
-              ProConnect
-            </a>
-            .{' '}
-            {conditionExplanation ? (
-              conditionExplanation
-            ) : (
-              <>
-                Disponible pour toutes les administrations, sans création de
-                compte (consultez les{' '}
-                <a
-                  href="/modalites-utilisation"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                >
-                  modalités d’utilisation
-                </a>
-                ).
-              </>
-            )}
+            Accédez immédiatement à ces données sur{' '}
+            <a href="/lp/agent-public">l’espace agent public</a>.{' '}
+            <>
+              En vous connectant vous acceptez nos{' '}
+              <a
+                href="/modalites-utilisation"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                modalités d’utilisation
+              </a>
+              .
+            </>
           </p>
-          <ButtonProConnect event="AGENT_WALL" />
+          <ButtonProConnect event="AGENT_WALL" noFootLink />
+          <a href="/lp/agent-public">⇢ Découvrir l’espace agent public</a>
         </FloatingModal>
         <div className={style['blur']} tab-index="-1" aria-hidden>
           <p>

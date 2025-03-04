@@ -51,7 +51,11 @@ const generateSessionCookie = async (inputEmail?: string) => {
 Cypress.Commands.add('login', (email?: string) => {
   cy.then(() => {
     return generateSessionCookie(email);
-  }).then((validSessionCookie) => {
-    cy.setCookie(sessionOptions.cookieName, validSessionCookie);
-  });
+  })
+    .then((validSessionCookie) => {
+      cy.setCookie(sessionOptions.cookieName, validSessionCookie);
+    })
+    .then(() => {
+      window.localStorage.setItem('welcome-modal-agent', 'true');
+    });
 });

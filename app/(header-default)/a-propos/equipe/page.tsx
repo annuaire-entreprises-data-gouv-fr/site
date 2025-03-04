@@ -40,12 +40,6 @@ const team = [
     role: 'chargé de déploiement SEO & communication',
   },
   {
-    photoUrl: '/images/team/lauren.jpg',
-    fullname: 'Lauren Michel',
-    pronoun: 'une',
-    role: 'chargée de déploiement',
-  },
-  {
     photoUrl: '/images/team/amandine.jpg',
     fullname: 'Amandine Audras',
     pronoun: 'une',
