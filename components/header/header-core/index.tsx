@@ -3,7 +3,7 @@ import { PrintNever } from '#components-ui/print-visibility';
 import ReconnectBanner from '#components/banner/reconnect';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
-import { WelcomeModalAgent } from '#components/welcome-modal/welome-modal-agent';
+import { WelcomeModalAgent } from '#components/welcome-modal-agent';
 import {
   ApplicationRights,
   hasRights,

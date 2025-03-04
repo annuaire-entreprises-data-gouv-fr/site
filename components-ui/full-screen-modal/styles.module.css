@@ -9,22 +9,29 @@
   justify-content: center;
   align-items: center;
   z-index: 999;
+
+  @media only screen and (min-width: 1px) and (max-width: 650px) {
+    align-items: end;
+  }
 }
 
-.welcomeModal {
-  max-width: 500px;
+.fullScreenModal {
+  max-width: 650px;
+  max-height: 70vh;
+  width: 100%;
   text-align: center;
   padding: 2rem;
   position: relative;
   z-index: 1000;
+
+  @media only screen and (min-width: 1px) and (max-width: 650px) {
+    height: 70vh;
+  }
 }
 
 .closeButton {
   position: absolute;
   top: 1rem;
   right: 1rem;
-}
-
-.linksContainer {
-  text-align: left;
+  cursor: pointer;
 }

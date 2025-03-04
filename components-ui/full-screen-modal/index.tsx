@@ -8,12 +8,11 @@ import { useStorage } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
-export const WelcomeModal: React.FC<{
+export const FullScreenModal: React.FC<{
   children: React.ReactNode;
   modalId: string;
-  title: string;
-}> = ({ children, modalId, title }) => {
-  const [isVisible, setIsVisible] = useState(false);
+}> = ({ children, modalId }) => {
+  const [isVisible, setIsVisible] = useState(true);
 
   const [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered] = useStorage(
     'local',
@@ -40,9 +39,8 @@ export const WelcomeModal: React.FC<{
             <FloatingModal
               id={modalId}
               role="dialog"
-              aria-label={title}
               elevation="high"
-              className={styles.welcomeModal}
+              className={styles.fullScreenModal}
               onClick={(e) => e.stopPropagation()}
             >
               <div className={styles.closeButton}>
@@ -52,7 +50,6 @@ export const WelcomeModal: React.FC<{
                   ariaLabel="Fermer la modale de bienvenue"
                 />
               </div>
-              <h2>{title}</h2>
               {children}
               <button
                 style={{ marginTop: 10 }}
