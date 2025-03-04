@@ -12,7 +12,7 @@ export const FullScreenModal: React.FC<{
   children: React.ReactNode;
   modalId: string;
 }> = ({ children, modalId }) => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   const [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered] = useStorage(
     'local',
