@@ -28,6 +28,12 @@ const team = [
     role: 'responsable du support utilisateur',
   },
   {
+    photoUrl: '/images/team/laura.jpg',
+    fullname: 'Laura Chevillotte',
+    pronoun: 'une',
+    role: 'responsable du support utilisateur',
+  },
+  {
     photoUrl: '/images/team/kevin.jpg',
     fullname: 'Kevin Masseix',
     pronoun: 'un',
