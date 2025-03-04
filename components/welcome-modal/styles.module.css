@@ -1,0 +1,30 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.welcomeModal {
+  max-width: 500px;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 1000;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.linksContainer {
+  text-align: left;
+}
