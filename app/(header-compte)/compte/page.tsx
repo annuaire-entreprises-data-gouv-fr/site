@@ -52,40 +52,11 @@ const AccountPage = async () => {
               <div className="fr-card__body">
                 <div className="fr-card__content">
                   <strong className="fr-card__title">
-                    Comment s’informer ?
+                    Comprendre les données
                   </strong>
                   <p className="fr-card__desc">
-                    Pour connaître les nouveautés de l’espace agent et de
-                    l’Annuaire des Entreprises.
-                  </p>
-                </div>
-                <div className="fr-card__footer">
-                  <ul className="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
-                    <li>
-                      <ButtonLink to={constants.links.tchap} target="_blank">
-                        Rejoindre la communauté Tchap
-                      </ButtonLink>
-                    </li>
-                    <li>
-                      <ButtonLink alt to="/historique-des-modifications">
-                        Consulter l’historique des changements
-                      </ButtonLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="fr-col-md-6 fr-col-12">
-            <div className="fr-card">
-              <div className="fr-card__body">
-                <div className="fr-card__content">
-                  <strong className="fr-card__title">
-                    Comprendre le projet
-                  </strong>
-                  <p className="fr-card__desc">
-                    Quelles sont les sources ? Que signifie telle ou telle
-                    donnée ? Tout est dans la documentation.
+                    Quelles sont les sources des données ? Dans quel cadre
+                    peut-on les utiliser ?
                   </p>
                 </div>
                 <div className="fr-card__footer">
@@ -100,7 +71,40 @@ const AccountPage = async () => {
                     </li>
                     <li>
                       <ButtonLink alt to="/modalites-utilisation">
-                        Consulter les modalités d’utilisation
+                        Modalités d’utilisation
+                      </ButtonLink>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="fr-col-md-6 fr-col-12">
+            <div className="fr-card">
+              <div className="fr-card__body">
+                <div className="fr-card__content">
+                  <strong className="fr-card__title">
+                    Comment s’informer ?
+                  </strong>
+                  <p className="fr-card__desc">
+                    Pour connaître les nouveautés de l’espace agent et de
+                    l’Annuaire des Entreprises.
+                  </p>
+                </div>
+                <div className="fr-card__footer">
+                  <ul className="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
+                    <li>
+                      <ButtonLink to="/historique-des-modifications">
+                        Consulter les nouveautés
+                      </ButtonLink>
+                    </li>
+                    <li>
+                      <ButtonLink
+                        alt
+                        to={constants.links.tchap}
+                        target="_blank"
+                      >
+                        Rejoignez-nous sur Tchap
                       </ButtonLink>
                     </li>
                   </ul>
