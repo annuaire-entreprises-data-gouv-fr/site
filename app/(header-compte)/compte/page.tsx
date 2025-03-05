@@ -1,8 +1,6 @@
-import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
 import { Badge } from '#components-ui/badge';
 import ButtonLink from '#components-ui/button';
 import FullWidthContainer from '#components-ui/container';
-import { Tag } from '#components-ui/tag';
 import { FullTable } from '#components/table/full';
 import { getAgentFullName } from '#models/authentication/user/helpers';
 import {
@@ -13,6 +11,7 @@ import constants from '#models/constants';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
+import SuperAgentListSection from './_components/super-agent-list';
 
 export const metadata: Metadata = {
   title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
@@ -34,10 +33,6 @@ const AccountPage = async () => {
     .map((scope) => [scope, hasRights(session, scope)]);
 
   const fullName = getAgentFullName(session);
-
-  const allAgentsList = hasRights(session, ApplicationRights.administrateur)
-    ? await superAgentsList.getAllAgents()
-    : [];
 
   return (
     <>
@@ -139,17 +134,8 @@ const AccountPage = async () => {
             })}
         />
       </div>
-
       {hasRights(session, ApplicationRights.administrateur) && (
-        <>
-          <h2>Liste des agents avec des droits nominatifs</h2>
-          <FullTable
-            head={['Email', 'Scopes']}
-            body={Object.entries(allAgentsList).map(([key, values]) => {
-              return [key, values.map((v) => <Tag>{v}</Tag>)];
-            })}
-          />
-        </>
+        <SuperAgentListSection session={session} />
       )}
     </>
   );

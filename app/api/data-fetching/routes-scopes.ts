@@ -2,6 +2,8 @@ import { ApplicationRights } from '#models/authentication/user/rights';
 import { APIRoutesPaths } from './routes-paths';
 
 export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
+  // administrateur only
+  [APIRoutesPaths.Admin]: ApplicationRights.administrateur,
   // full open data & RNE
   [APIRoutesPaths.RneDirigeants]: ApplicationRights.opendata,
   [APIRoutesPaths.Observations]: ApplicationRights.opendata,
