@@ -1,3 +1,4 @@
+import { agentRateLimiting } from '#clients/authentication/rate-limiting';
 import { ISession } from '#models/authentication/user/session';
 import { Exception } from '#models/exceptions';
 import { UseCase } from '#models/use-cases';
@@ -7,6 +8,13 @@ import { NextRequest, userAgent } from 'next/server';
 import { APIRoutesPaths } from './routes-paths';
 
 export type IContext = { params: Promise<{ slug: Array<string> }> };
+
+const RATE_LIMITS = {
+  TEN_MINUTES: 100,
+  ONE_HOUR: 200,
+  ONE_DAY: 1000,
+  ONE_WEEK: 5000,
+} as const;
 
 type RouteHandler = (
   request: NextRequest,
@@ -70,8 +78,12 @@ function userVisitedAPageRecently(
 export class APIRouteError extends Exception {
   constructor(
     message: string,
-    context: { route: string; slug: string; params?: { useCase: UseCase } },
-    public status: 400 | 404 | 403 | 500 | 401,
+    context: {
+      route: string;
+      slug: string;
+      params?: { useCase?: UseCase; isEI?: boolean };
+    },
+    public status: 400 | 404 | 403 | 500 | 401 | 429,
     cause?: any
   ) {
     super({
@@ -126,10 +138,18 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
 }
 
 export function withUseCase<TResult>(
-  handler: (slug: string, useCase: UseCase) => TResult
+  handler: (
+    slug: string,
+    params: { useCase?: UseCase; isEI?: boolean },
+    session: ISession
+  ) => TResult
 ) {
-  return (slug: string, params: { useCase: UseCase }): TResult => {
-    if (!('useCase' in params) || params.useCase in UseCase) {
+  return (
+    slug: string,
+    params: { useCase?: UseCase; isEI?: boolean },
+    session: ISession
+  ) => {
+    if (!params.useCase || params.useCase in UseCase) {
       throw new APIRouteError(
         'Invalid useCase',
         { slug, route: 'withUseCase', params },
@@ -137,6 +157,40 @@ export function withUseCase<TResult>(
       );
     }
 
-    return handler(slug, params.useCase);
+    return handler(slug, params, session);
+  };
+}
+
+export function withRateLimiting<TResult>(
+  handler: (
+    slug: string,
+    params: { useCase?: UseCase; isEI?: boolean },
+    session: ISession
+  ) => Promise<TResult>
+) {
+  return async (
+    slug: string,
+    params: { useCase?: UseCase; isEI?: boolean },
+    session: ISession
+  ) => {
+    const monitoringForAgent = await agentRateLimiting.getMonitoringForAgent(
+      session.user?.email!
+    );
+
+    if (
+      monitoringForAgent &&
+      (monitoringForAgent['Past 10 minutes'] > RATE_LIMITS.TEN_MINUTES ||
+        monitoringForAgent['Past hour'] > RATE_LIMITS.ONE_HOUR ||
+        monitoringForAgent['Past day'] > RATE_LIMITS.ONE_DAY ||
+        monitoringForAgent['Past week'] > RATE_LIMITS.ONE_WEEK)
+    ) {
+      throw new APIRouteError(
+        'Too many requests',
+        { slug, route: 'withUseCase' },
+        429
+      );
+    }
+
+    return handler(slug, params, session);
   };
 }

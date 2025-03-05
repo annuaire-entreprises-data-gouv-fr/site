@@ -1,5 +1,5 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
-import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
+import { superAgentsList } from '#clients/authentication/super-agents';
 import { PrestataireException } from '../authentication-exceptions';
 import { AgentOrganisation } from './organisation';
 import { defaultAgentScopes, IAgentScope } from './scopes';
@@ -33,9 +33,7 @@ export class AgentConnected {
     this.familyName = userInfo.family_name ?? '';
     this.firstName = userInfo.given_name ?? '';
     this.userId = userInfo.sub;
-    this.siret = (
-      userInfo.siret
-    ).replaceAll(' ', '');
+    this.siret = userInfo.siret.replaceAll(' ', '');
   }
 
   extractDomain(email: string) {
