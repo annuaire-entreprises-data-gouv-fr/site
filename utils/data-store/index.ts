@@ -20,7 +20,7 @@ export class DataStore<T> {
    * @param TTR Time To Refresh | default is 24h, set 0 to deactivate refresh
    */
   constructor(
-    private getData: () => Promise<any>,
+    private fetchData: () => Promise<any>,
     private storeName: string,
     private mapToDomainObject: (result: any) => { [key: string]: T },
     private TTR = 86400000
@@ -33,7 +33,7 @@ export class DataStore<T> {
   private refresh = async () => {
     try {
       if (!this.onGoingRefresh) {
-        this.onGoingRefresh = this.getData();
+        this.onGoingRefresh = this.fetchData();
 
         if (this.shouldAttemptRefresh) {
           setTimeout(this.refresh, this.TTR);
@@ -75,5 +75,16 @@ export class DataStore<T> {
       throw new HttpServerError(`Empty data list : ${this.storeName}`);
     }
     return Object.keys(this.data);
+  };
+
+  getData = async () => {
+    if (!this.data) {
+      await this.refresh();
+    }
+
+    if (!this.data || this.data.size === 0) {
+      throw new HttpServerError(`Empty data list : ${this.storeName}`);
+    }
+    return this.data;
   };
 }

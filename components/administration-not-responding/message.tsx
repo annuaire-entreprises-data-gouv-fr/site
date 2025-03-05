@@ -1,6 +1,6 @@
-import React from 'react';
 import { Warning } from '#components-ui/alerts';
 import { IAdministrationMetaData } from '#models/administrations/types';
+import React from 'react';
 
 interface IProps {
   administrationMetaData: IAdministrationMetaData;
@@ -23,7 +23,7 @@ const AdministrationNotRespondingMessage: React.FC<IProps> = ({
         <a href="">cliquez-ici pour recharger la page et ré-essayer</a>.
       </Warning>
       <p>
-        Pour en savoir plus sur l’état du service, vous pouvez consultez la
+        Pour en savoir plus sur l’état du service, vous pouvez consulter la
         section de cette administration{' '}
         <a
           href={`/donnees/api#${administrationMetaData.slug}`}

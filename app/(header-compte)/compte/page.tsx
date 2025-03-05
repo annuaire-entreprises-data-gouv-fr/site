@@ -11,6 +11,7 @@ import constants from '#models/constants';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
+import SuperAgentListSection from './_components/super-agent-list';
 
 export const metadata: Metadata = {
   title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
@@ -27,9 +28,9 @@ const AccountPage = async () => {
     return redirect('/lp/agent-public');
   }
 
-const appRights = Object.values(ApplicationRights)
-  .filter((scope) => scope !== ApplicationRights.isAgent)
-  .map((scope) => [scope, hasRights(session, scope)]);
+  const appRights = Object.values(ApplicationRights)
+    .filter((scope) => scope !== ApplicationRights.isAgent)
+    .map((scope) => [scope, hasRights(session, scope)]);
 
   const fullName = getAgentFullName(session);
 
@@ -133,6 +134,9 @@ const appRights = Object.values(ApplicationRights)
             })}
         />
       </div>
+      {hasRights(session, ApplicationRights.administrateur) && (
+        <SuperAgentListSection session={session} />
+      )}
     </>
   );
 };

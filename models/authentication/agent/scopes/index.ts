@@ -18,4 +18,5 @@ export const allAgentScopes = [
   'chiffre_affaires',
   'travaux_publics',
   'bilans',
+  'administrateur',
 ] as const;

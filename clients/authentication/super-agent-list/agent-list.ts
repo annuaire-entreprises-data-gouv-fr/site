@@ -56,6 +56,10 @@ class SuperAgentsList {
       return [];
     }
   };
+
+  getAllAgents = async () => {
+    return await this._superAgentsStore.getData();
+  };
 }
 
 export const superAgentsList = new SuperAgentsList();
