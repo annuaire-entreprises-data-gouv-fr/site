@@ -7,7 +7,6 @@ const codeJuridiquesThatAreAdministrationButNotL100_3 = [
   '4120',
   '4140',
   '4150',
-  '7381',
   '7410',
 ];
 
