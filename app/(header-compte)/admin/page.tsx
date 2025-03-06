@@ -11,9 +11,9 @@ import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
+  title: 'Page Administrateur',
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/compte',
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/admin',
   },
   robots: 'noindex, nofollow',
 };
