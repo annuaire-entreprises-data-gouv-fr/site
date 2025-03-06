@@ -22,11 +22,13 @@ const AdminPage = async () => {
   const session = await getSession();
 
   if (!hasRights(session, ApplicationRights.administrateur)) {
-    <p>
-      Cette page est réservée aux administrateurs de l’Annuaire des Entreprises.
-      Vous n’avez pas les droits d’administration et ne pouvez donc pas accéder
-      à son contenu.
-    </p>;
+    return (
+      <p>
+        Cette page est réservée aux administrateurs de l’Annuaire des Entreprises.
+        Vous n’avez pas les droits d’administration et ne pouvez donc pas accéder
+        à son contenu.
+      </p>
+    )
   }
 
   const data = await superAgentsList.getAllAgents();
