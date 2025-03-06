@@ -1,4 +1,3 @@
-import { getAdmin } from '#models/admin';
 import { getAssociationFromSlug } from '#models/association';
 import { getEORIValidation } from '#models/eori-validation';
 import { getAssociationProtected } from '#models/espace-agent/association-protected';
@@ -21,7 +20,6 @@ import { APIRoutesPaths } from './routes-paths';
 import { withUseCase } from './utils';
 
 export const APIRoutesHandlers = {
-  [APIRoutesPaths.Admin]: getAdmin,
   [APIRoutesPaths.EspaceAgentConformite]: withUseCase(getConformiteEntreprise),
   [APIRoutesPaths.EspaceAgentOpqibi]: getOpqibi,
   [APIRoutesPaths.EspaceAgentQualibat]: getQualibat,
