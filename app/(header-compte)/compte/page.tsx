@@ -27,9 +27,9 @@ const AccountPage = async () => {
     return redirect('/lp/agent-public');
   }
 
-const appRights = Object.values(ApplicationRights)
-  .filter((scope) => scope !== ApplicationRights.isAgent)
-  .map((scope) => [scope, hasRights(session, scope)]);
+  const appRights = Object.values(ApplicationRights)
+    .filter((scope) => scope !== ApplicationRights.isAgent)
+    .map((scope) => [scope, hasRights(session, scope)]);
 
   const fullName = getAgentFullName(session);
 

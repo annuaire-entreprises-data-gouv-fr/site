@@ -21,6 +21,7 @@ export enum ApplicationRights {
   bilans = 'Accès aux bilans (Banque de France)',
   chiffreAffaires = 'Accès aux chiffres d’affaires (DGFiP)',
   travauxPublics = 'Accès aux données relatives aux travaux publics',
+  administrateur = 'Administrateur',
 }
 
 /**
@@ -57,6 +58,8 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
       return userScopes.includes('agent');
     case ApplicationRights.travauxPublics:
       return userScopes.includes('travaux_publics');
+    case ApplicationRights.administrateur:
+      return userScopes.includes('administrateur');
     default:
       return false;
   }

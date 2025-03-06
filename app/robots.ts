@@ -29,6 +29,7 @@ export default function robots(): MetadataRoute.Robots {
         '/labels-certificats/',
       ],
       disallow: [
+        '/admin/',
         '/private/',
         '/justificatif-immatriculation-pdf/',
         '/api/',

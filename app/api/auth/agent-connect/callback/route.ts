@@ -1,6 +1,6 @@
 import { proConnectAuthenticate } from '#clients/authentication/pro-connect/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
-import { AgentConnected } from '#models/authentication/agent';
+import { AgentConnected } from '#models/authentication/agent/agent-connected';
 import {
   AgentConnectionFailedException,
   CanRequestAuthorizationException,
