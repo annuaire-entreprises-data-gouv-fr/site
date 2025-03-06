@@ -7,6 +7,7 @@ export type IAgentRecord = {
   email: string;
   scopes: string;
   actif: boolean;
+  usage: string;
 };
 
 export const clientSuperAgentList = async () => {

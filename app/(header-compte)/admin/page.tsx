@@ -24,11 +24,11 @@ const AdminPage = async () => {
   if (!hasRights(session, ApplicationRights.administrateur)) {
     return (
       <p>
-        Cette page est réservée aux administrateurs de l’Annuaire des Entreprises.
-        Vous n’avez pas les droits d’administration et ne pouvez donc pas accéder
-        à son contenu.
+        Cette page est réservée aux administrateurs de l’Annuaire des
+        Entreprises. Vous n’avez pas les droits d’administration et ne pouvez
+        donc pas accéder à son contenu.
       </p>
-    )
+    );
   }
 
   const data = await superAgentsList.getAllAgents();
@@ -48,9 +48,9 @@ const AdminPage = async () => {
           l’administration à laquelle ils appartiennent.
         </p>
         <FullTable
-          head={['Email', 'Scopes']}
-          body={Object.entries(data).map(([key, values]) => {
-            return [key, values.map((v) => <Tag>{v}</Tag>)];
+          head={['Email', 'Cadre', 'Scopes']}
+          body={Object.entries(data).map(([key, { scopes, usage }]) => {
+            return [key, usage, scopes.map((v) => <Tag>{v}</Tag>)];
           })}
         />
       </FullWidthContainer>
