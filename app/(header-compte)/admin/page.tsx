@@ -42,7 +42,7 @@ const AdminPage = async () => {
         <h2>Liste des agents avec des droits nominatifs</h2>
         <p>
           Contrairement à la majorité des utilisateurs de l’espace agent, ces
-          agents ont des droits en leur nom propre et pas au nom de
+          agents ont des droits en leur nom propre et non au nom de
           l’administration à laquelle ils appartiennent.
         </p>
         <FullTable
