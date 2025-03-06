@@ -24,7 +24,7 @@ const AdminPage = async () => {
   if (!hasRights(session, ApplicationRights.administrateur)) {
     <p>
       Cette page est réservée aux administrateurs de l’Annuaire des Entreprises.
-      Vous n’avez pas les droits d’administrations et ne pouvez donc pas accèder
+      Vous n’avez pas les droits d’administration et ne pouvez donc pas accéder
       à son contenu.
     </p>;
   }
