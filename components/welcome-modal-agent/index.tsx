@@ -5,9 +5,11 @@ import { FullScreenModal } from '../../components-ui/full-screen-modal';
 export const WelcomeModalAgent: React.FC = () => {
   return (
     <FullScreenModal modalId="welcome-modal-agent">
+      <div className="layout-center">
+        <img src="/images/lp-agent/secure-folder 1.svg" alt="" height="150px" />
+      </div>
+      <strong>Bonjour et bienvenue sur l’espace agent 👋</strong>
       <div style={{ textAlign: 'left' }}>
-        <h3>Bonjour et bienvenue sur l’espace agent 👋</h3>
-
         <p>
           Pour bien commencer, nous vous invitons à découvrir l’outil en lisant{' '}
           <a

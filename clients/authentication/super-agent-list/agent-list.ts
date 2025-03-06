@@ -9,13 +9,18 @@ import { IAgentScope } from '#models/authentication/agent/scopes';
 import { parseAgentScope } from '#models/authentication/agent/scopes/parse';
 import { DataStore } from '#utils/data-store';
 
+type ISuperAgentRecord = {
+  scopes: IAgentScope[];
+  usage: string;
+};
+
 class SuperAgentsList {
-  private _superAgentsStore: DataStore<IAgentScope[]>;
+  private _superAgentsStore: DataStore<ISuperAgentRecord>;
   // time before agent list update
   private TTL = 300000; //5min
 
   constructor() {
-    this._superAgentsStore = new DataStore<IAgentScope[]>(
+    this._superAgentsStore = new DataStore<ISuperAgentRecord>(
       () => clientSuperAgentList(),
       'comptes-super-agents',
       this.mapResponseToAgentScopes,
@@ -25,10 +30,10 @@ class SuperAgentsList {
 
   mapResponseToAgentScopes = (
     response: IAgentRecord[]
-  ): { [key: string]: IAgentScope[] } =>
+  ): { [key: string]: ISuperAgentRecord } =>
     response
       .filter((r) => r.actif === true)
-      .reduce((acc: { [key: string]: IAgentScope[] }, agent) => {
+      .reduce((acc: { [key: string]: ISuperAgentRecord }, agent) => {
         const { inValidScopes, validScopes } = parseAgentScope(agent.scopes);
 
         if (inValidScopes.length > 0) {
@@ -39,13 +44,13 @@ class SuperAgentsList {
           );
         }
 
-        acc[agent.email] = validScopes;
+        acc[agent.email] = { scopes: validScopes, usage: agent.usage };
         return acc;
-      }, {} as { [key: string]: IAgentScope[] });
+      }, {} as { [key: string]: ISuperAgentRecord });
 
   getScopeForAgent = async (email: string) => {
     try {
-      return (await this._superAgentsStore.get(email)) ?? [];
+      return (await this._superAgentsStore.get(email))?.scopes ?? [];
     } catch (e: any) {
       logFatalErrorInSentry(
         new FetchRessourceException({
