@@ -25,7 +25,7 @@ const team = [
     photoUrl: '/images/team/anais.jpg',
     fullname: 'Anais Tailhade',
     pronoun: 'une',
-    role: 'responsable du support utilisateur',
+    role: 'coach support utilisateur',
   },
   {
     photoUrl: '/images/team/laura.jpg',
