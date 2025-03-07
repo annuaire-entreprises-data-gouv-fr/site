@@ -17,28 +17,43 @@ import { getRNEObservations } from '#models/rne/observations';
 import { getSubventionsAssociationFromSlug } from '#models/subventions/association';
 import { buildAndVerifyTVA } from '#models/tva/verify';
 import { APIRoutesPaths } from './routes-paths';
-import { withUseCase } from './utils';
+import { withRateLimiting, withUseCase } from './utils';
 
 export const APIRoutesHandlers = {
-  [APIRoutesPaths.EspaceAgentConformite]: withUseCase(getConformiteEntreprise),
-  [APIRoutesPaths.EspaceAgentOpqibi]: getOpqibi,
-  [APIRoutesPaths.EspaceAgentQualibat]: getQualibat,
-  [APIRoutesPaths.EspaceAgentQualifelec]: getQualifelec,
-  [APIRoutesPaths.EspaceAgentDirigeantsProtected]: getDirigeantsProtected,
-  [APIRoutesPaths.EspaceAgentBeneficiaires]: withUseCase(getBeneficiaires),
-  [APIRoutesPaths.EspaceAgentRneDocuments]: getDocumentsRNEProtected,
+  [APIRoutesPaths.EspaceAgentConformite]: withRateLimiting(
+    withUseCase(getConformiteEntreprise)
+  ),
+  [APIRoutesPaths.EspaceAgentOpqibi]: withRateLimiting(getOpqibi),
+  [APIRoutesPaths.EspaceAgentQualibat]: withRateLimiting(getQualibat),
+  [APIRoutesPaths.EspaceAgentQualifelec]: withRateLimiting(getQualifelec),
+  [APIRoutesPaths.EspaceAgentDirigeantsProtected]: withRateLimiting(
+    getDirigeantsProtected
+  ),
+  [APIRoutesPaths.EspaceAgentBeneficiaires]: withRateLimiting(
+    withUseCase(getBeneficiaires)
+  ),
+  [APIRoutesPaths.EspaceAgentRneDocuments]: withRateLimiting(
+    getDocumentsRNEProtected
+  ),
   [APIRoutesPaths.EspaceAgentAssociationProtected]: getAssociationProtected,
-  [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]:
-    getEffectifsAnnuelsProtected,
-  [APIRoutesPaths.EspaceAgentBilansProtected]: getBilansProtected,
-  [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
-    getChiffreAffairesProtected,
-  [APIRoutesPaths.EspaceAgentTravauxPublics]: withUseCase(getTravauxPublic),
+  [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]: withRateLimiting(
+    getEffectifsAnnuelsProtected
+  ),
+  [APIRoutesPaths.EspaceAgentBilansProtected]:
+    withRateLimiting(getBilansProtected),
+  [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]: withRateLimiting(
+    getChiffreAffairesProtected
+  ),
+  [APIRoutesPaths.EspaceAgentTravauxPublics]: withRateLimiting(
+    withUseCase(getTravauxPublic)
+  ),
   getChiffreAffairesProtected,
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,
   [APIRoutesPaths.Observations]: getRNEObservations,
   [APIRoutesPaths.Association]: getAssociationFromSlug,
   [APIRoutesPaths.VerifyTva]: buildAndVerifyTVA,
   [APIRoutesPaths.EoriValidation]: getEORIValidation,
-  [APIRoutesPaths.SubventionsAssociation]: getSubventionsAssociationFromSlug,
+  [APIRoutesPaths.SubventionsAssociation]: withRateLimiting(
+    getSubventionsAssociationFromSlug
+  ),
 };

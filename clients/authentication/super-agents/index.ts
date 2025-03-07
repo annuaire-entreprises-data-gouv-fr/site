@@ -1,13 +1,12 @@
-import { FetchRessourceException, InternalError } from '#models/exceptions';
-import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
-
 import {
   clientSuperAgentList,
   IAgentRecord,
-} from '#clients/authentication/super-agent-list';
+} from '#clients/authentication/super-agents/client-super-agent-list';
 import { IAgentScope } from '#models/authentication/agent/scopes';
 import { parseAgentScope } from '#models/authentication/agent/scopes/parse';
+import { FetchRessourceException, InternalError } from '#models/exceptions';
 import { DataStore } from '#utils/data-store';
+import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
 
 type ISuperAgentRecord = {
   scopes: IAgentScope[];
@@ -17,7 +16,7 @@ type ISuperAgentRecord = {
 class SuperAgentsList {
   private _superAgentsStore: DataStore<ISuperAgentRecord>;
   // time before agent list update
-  private TTL = 300000; //5min
+  private TTL = 300000; // 5min
 
   constructor() {
     this._superAgentsStore = new DataStore<ISuperAgentRecord>(
@@ -33,7 +32,7 @@ class SuperAgentsList {
   ): { [key: string]: ISuperAgentRecord } =>
     response
       .filter((r) => r.actif === true)
-      .reduce((acc: { [key: string]: ISuperAgentRecord }, agent) => {
+      .reduce((acc, agent) => {
         const { inValidScopes, validScopes } = parseAgentScope(agent.scopes);
 
         if (inValidScopes.length > 0) {
