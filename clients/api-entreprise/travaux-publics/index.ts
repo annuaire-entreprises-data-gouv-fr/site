@@ -14,7 +14,7 @@ export type IAPIEntrepriseDocumentTravauxPublics = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseCibtp = async (
   siret: Siret,
-  useCase: UseCase
+  useCase?: UseCase
 ) => {
   return await clientAPIEntreprise(
     routes.apiEntreprise.certifications.cibtp(siret),
@@ -28,7 +28,7 @@ export const clientApiEntrepriseCibtp = async (
  */
 export const clientApiEntrepriseProbtp = async (
   siret: Siret,
-  useCase: UseCase
+  useCase?: UseCase
 ) => {
   return await clientAPIEntreprise(
     routes.apiEntreprise.certifications.probtp(siret),
@@ -42,7 +42,7 @@ export const clientApiEntrepriseProbtp = async (
  */
 export const clientApiEntrepriseCnetp = async (
   siren: Siren,
-  useCase: UseCase
+  useCase?: UseCase
 ) => {
   return await clientAPIEntreprise(
     routes.apiEntreprise.certifications.cnetp(siren),
@@ -56,7 +56,7 @@ export const clientApiEntrepriseCnetp = async (
  */
 export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
   siren: Siren,
-  useCase: UseCase
+  useCase?: UseCase
 ) => {
   return await clientAPIEntreprise(
     routes.apiEntreprise.carteProfessionnelleTravauxPublics(siren),
