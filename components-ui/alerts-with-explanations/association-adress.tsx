@@ -27,8 +27,7 @@ const AssociationAdressAlert: React.FC<{
     <>
       {adresseInconsistency && (
         <Warning full>
-          Le <MI />
-          (préfecture) et l’
+          Le <MI /> (préfecture) et l’
           <INSEE /> possèdent des adresses différentes pour cette association :
           <ul>
             <li>
