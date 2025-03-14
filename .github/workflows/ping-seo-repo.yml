@@ -30,6 +30,6 @@ jobs:
         if: failure()
         uses: ./.github/actions/notify
         with:
-          message: '🚨 ${{ github.event.repository.name }} [${{ matrix.environment }}] : trigger seo workflow failed'
+          message: '🚨 ${{ github.event.repository.name }} : trigger seo workflow failed'
           hook: ${{ secrets.TCHAP_HOOK }}
           id: ${{ secrets.TCHAP_ROOM_ID }}
