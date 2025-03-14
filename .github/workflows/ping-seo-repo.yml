@@ -33,17 +33,3 @@ jobs:
           message: '🚨 ${{ github.event.repository.name }} : trigger seo workflow failed'
           hook: ${{ secrets.TCHAP_HOOK }}
           id: ${{ secrets.TCHAP_ROOM_ID }}
-
-  notify-success:
-    name: Notify success
-    runs-on: ubuntu-latest
-    needs: [trigger-seo-workflow]
-
-    steps:
-      - uses: actions/checkout@v3
-      - name: Notify deploy succes
-        uses: ./.github/actions/notify
-        with:
-          message: '✅ ${{ github.event.repository.name }} : successfully trigger seo workflow'
-          hook: ${{ secrets.TCHAP_HOOK }}
-          id: ${{ secrets.TCHAP_ROOM_ID }}
