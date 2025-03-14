@@ -4,16 +4,10 @@ import styles from './style.module.css';
 
 const team = [
   {
-    photoUrl: '/images/team/xavier.jpg',
-    fullname: 'Xavier Jouppe',
-    pronoun: 'un',
-    role: 'intrapreneur',
-  },
-  {
     photoUrl: '/images/team/hajar.jpg',
     fullname: 'Hajar Ait El Kadi',
     pronoun: 'une',
-    role: 'data engineer',
+    role: 'intrapreneure',
   },
   {
     photoUrl: '/images/team/hadrien.jpg',
