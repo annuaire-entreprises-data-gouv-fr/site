@@ -1,0 +1,30 @@
+name: 'Trigger SEO Workflow'
+
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  trigger-seo-workflow:
+    name: Trigger SEO repository workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger workflow in SEO repository
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
+        run: |
+          echo "Triggering workflow seo.yml in repository: annuaire-entreprises-data-gouv-fr/seo"
+
+          # Trigger the workflow using GitHub API
+          gh api -X POST /repos/annuaire-entreprises-data-gouv-fr/seo/actions/workflows/seo.yml/dispatches \
+            -f ref='main' \
+            -f inputs='{"triggered_by": "site"}'
+
+      - name: Notify failure
+        if: failure()
+        uses: ./.github/actions/notify
+        with:
+          message: '🚨 ${{ github.event.repository.name }} [${{ matrix.environment }}] : trigger seo workflow failed'
+          hook: ${{ secrets.TCHAP_HOOK }}
+          id: ${{ secrets.TCHAP_ROOM_ID }}
