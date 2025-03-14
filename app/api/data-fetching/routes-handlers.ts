@@ -10,6 +10,7 @@ import { getChiffreAffairesProtected } from '#models/espace-agent/chiffre-affair
 import { getConformiteEntreprise } from '#models/espace-agent/conformite';
 import { getDirigeantsProtected } from '#models/espace-agent/dirigeants-protected';
 import { getEffectifsAnnuelsProtected } from '#models/espace-agent/effectifs/annuels';
+import { getLiensCapitalistiquesProtected } from '#models/espace-agent/liens-capitalistiques';
 import { getDocumentsRNEProtected } from '#models/espace-agent/rne-protected/documents';
 import { getTravauxPublic } from '#models/espace-agent/travaux-publics';
 import { getDirigeantsRNE } from '#models/rne/dirigeants';
@@ -34,7 +35,8 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
     getChiffreAffairesProtected,
   [APIRoutesPaths.EspaceAgentTravauxPublics]: withUseCase(getTravauxPublic),
-  getChiffreAffairesProtected,
+  [APIRoutesPaths.EspaceAgentLiensCapitalistiquesProtected]:
+    getLiensCapitalistiquesProtected,
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,
   [APIRoutesPaths.Observations]: getRNEObservations,
   [APIRoutesPaths.Association]: getAssociationFromSlug,

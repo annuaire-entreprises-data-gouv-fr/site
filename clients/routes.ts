@@ -36,6 +36,8 @@ const routes = {
     dgfip: {
       chiffreAffaires: (siret: string) =>
         `/v3/dgfip/etablissements/${siret}/chiffres_affaires`,
+      liensCapitalistiques: (siren: string, year: string | number) =>
+        `/v3/dgfip/unites_legales/${siren}/liens_capitalistiques/${year}`,
     },
     banqueDeFrance: {
       bilans: (siren: string) =>
