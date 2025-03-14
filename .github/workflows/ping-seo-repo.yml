@@ -20,3 +20,11 @@ jobs:
           gh api -X POST /repos/annuaire-entreprises-data-gouv-fr/seo/actions/workflows/seo.yml/dispatches \
             -f ref='main' \
             -f inputs='{"triggered_by": "site"}'
+
+      - name: Notify failure
+        if: failure()
+        uses: ./.github/actions/notify
+        with:
+          message: '🚨 ${{ github.event.repository.name }} [${{ matrix.environment }}] : trigger seo workflow failed'
+          hook: ${{ secrets.TCHAP_HOOK }}
+          id: ${{ secrets.TCHAP_ROOM_ID }}
