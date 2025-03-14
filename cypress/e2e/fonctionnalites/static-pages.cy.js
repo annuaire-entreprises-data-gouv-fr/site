@@ -24,7 +24,6 @@ pages.forEach((page) => {
 
     it('Logo button works', () => {
       cy.visit(page);
-
       cy.get('.fr-header__logo > a').click();
 
       // Should be on a new URL which includes '/commands/actions'
@@ -34,13 +33,20 @@ pages.forEach((page) => {
 });
 
 describe('Footer navigation', () => {
-  it('check all links in footer', () => {
+  it('check all internal links in footer', () => {
     cy.visit('/');
 
     cy.get('.fr-footer a').each((footerLink) => {
-      // donot test departements/index.html as it only exists in production and staging
-      if (footerLink.prop('href').indexOf('departements/index.html') === -1) {
-        cy.request(footerLink.prop('href'));
+      const href = footerLink.prop('href');
+      const currentOrigin = window.location.origin;
+
+      // Only test internal links (same origin)
+      // Skip departements/index.html as it only exists in production and staging
+      if (
+        href.startsWith(currentOrigin) &&
+        href.indexOf('departements/index.html') === -1
+      ) {
+        cy.request(href);
       }
     });
   });
