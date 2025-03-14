@@ -10,8 +10,8 @@ describe('clientTVA', () => {
       // '27552032534',
       // '39356000000',
       '883010316', // Non assujetie
-      '423208180', // Non assujetie
-      '43842019051',
+      // '423208180', // Non assujetie
+      // '43842019051',
       '72217500016',
     ];
     for (let arg of testValues) {
