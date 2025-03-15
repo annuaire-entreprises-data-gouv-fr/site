@@ -35,8 +35,9 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
     getChiffreAffairesProtected,
   [APIRoutesPaths.EspaceAgentTravauxPublics]: withUseCase(getTravauxPublic),
-  [APIRoutesPaths.EspaceAgentLiensCapitalistiquesProtected]:
-    getLiensCapitalistiquesProtected,
+  [APIRoutesPaths.EspaceAgentLiensCapitalistiquesProtected]: withUseCase(
+    getLiensCapitalistiquesProtected
+  ),
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,
   [APIRoutesPaths.Observations]: getRNEObservations,
   [APIRoutesPaths.Association]: getAssociationFromSlug,

@@ -125,11 +125,11 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
   };
 }
 
-export function withUseCase<TResult>(
-  handler: (slug: string, useCase: UseCase) => TResult
+export function withUseCase<TResult, TParams extends { useCase: UseCase }>(
+  handler: (slug: string, params: TParams) => TResult
 ) {
-  return (slug: string, params: { useCase: UseCase }): TResult => {
-    if (!('useCase' in params) || params.useCase in UseCase) {
+  return (slug: string, params: TParams): TResult => {
+    if (!params?.useCase || !(params.useCase in UseCase)) {
       throw new APIRouteError(
         'Invalid useCase',
         { slug, route: 'withUseCase', params },
@@ -137,6 +137,6 @@ export function withUseCase<TResult>(
       );
     }
 
-    return handler(slug, params.useCase);
+    return handler(slug, params);
   };
 }

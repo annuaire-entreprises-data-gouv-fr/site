@@ -1,9 +1,10 @@
 import routes from '#clients/routes';
+import { ILiensCapitalistiquesProtected } from '#models/espace-agent/liens-capitalistiques';
 import {
   IEtatCivilLiensCapitalistiques,
-  ILiensCapitalistiquesProtected,
   IPersonneMoraleLiensCapitalistiques,
-} from '#models/espace-agent/liens-capitalistiques';
+} from '#models/rne/types';
+import { UseCase } from '#models/use-cases';
 import { formatFirstNames, formatLastName, Siren } from '#utils/helpers';
 import clientAPIEntreprise from '../client';
 import { IAPIEntrepriseLiensCapitalistiques } from './types';
@@ -13,14 +14,16 @@ import { IAPIEntrepriseLiensCapitalistiques } from './types';
  */
 export async function clientApiEntrepriseLiensCapitalistiques(
   siren: Siren,
-  year: string | number
+  year: number,
+  useCase: UseCase
 ) {
   return await clientAPIEntreprise<
     IAPIEntrepriseLiensCapitalistiques,
     ILiensCapitalistiquesProtected
   >(
-    routes.apiEntreprise.dgfip.liensCapitalistiques(siren, '2022'),
-    mapToDomainObject
+    routes.apiEntreprise.dgfip.liensCapitalistiques(siren, year),
+    mapToDomainObject,
+    { useCase }
   );
 }
 
