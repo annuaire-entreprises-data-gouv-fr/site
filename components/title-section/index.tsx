@@ -2,6 +2,7 @@ import SocialMedia from '#components-ui/social-media';
 import IsActiveTag from '#components-ui/tag/is-active-tag';
 import { NonDiffusibleTag } from '#components-ui/tag/non-diffusible-tag';
 import { SaveFavourite } from '#components/save-favourite';
+import { CopyPaste } from '#components/table/copy-paste';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
 import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
@@ -45,7 +46,16 @@ const Title: React.FC<IProps> = ({
       <div className={styles.subTitle}>
         <UniteLegaleBadge uniteLegale={uniteLegale} />
         <span className={styles.sirenTitle}>
-          &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}
+          &nbsp;‣&nbsp;
+          <span style={{ display: 'inline-flex' }}>
+            <CopyPaste
+              shouldRemoveSpace={true}
+              disableTooltip={true}
+              label="SIREN"
+            >
+              {formatIntFr(uniteLegale.siren)}
+            </CopyPaste>
+          </span>
         </span>
         <span>
           <NonDiffusibleTag etablissementOrUniteLegale={uniteLegale} />

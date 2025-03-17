@@ -1,9 +1,10 @@
 'use client';
-import { useLayoutEffect, useRef, useState } from 'react';
 import { InternalError } from '#models/exceptions';
+import { useLayoutEffect, useRef, useState } from 'react';
 import style from './copy-paste.module.css';
 
 type ICopyPasteProps = {
+  disableTooltip?: boolean;
   shouldRemoveSpace?: boolean;
   id?: string;
   children: string;
@@ -21,6 +22,7 @@ function copyFallback(value: string) {
 export function CopyPaste({
   children,
   shouldRemoveSpace = false,
+  disableTooltip = false,
   id = undefined,
   label,
 }: ICopyPasteProps) {
@@ -80,7 +82,9 @@ export function CopyPaste({
 
   return (
     <button
-      className={style.copyButton}
+      className={`${style.copyButton} ${
+        disableTooltip ? style.tooltipDisabled : ''
+      }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocus={() => setFocused(true)}
@@ -91,7 +95,7 @@ export function CopyPaste({
       title="Copier dans le presse-papier"
     >
       <span id={id}>{children} </span>
-      {(hovered || copied || focused) && (
+      {(hovered || copied || focused) && !disableTooltip && (
         <span
           className={style.copyTooltip}
           aria-hidden
