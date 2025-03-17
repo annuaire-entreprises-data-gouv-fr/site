@@ -7,10 +7,10 @@ import {
   numberOfRequestByAgentList,
 } from './number-of-requests-by-agent-list';
 
-export class AgentOverRateLimitsException extends Exception {
+export class AgentOverRateLimitException extends Exception {
   constructor() {
     super({
-      name: 'AgentOverRateLimitsException',
+      name: 'AgentOverRateLimitException',
       message: 'Agent over rate limit',
     });
   }
@@ -70,7 +70,7 @@ class AgentRateLimiter {
         agentRateLimits.pastDay > RATE_LIMITS.ONE_DAY ||
         agentRateLimits.pastWeek > RATE_LIMITS.ONE_WEEK)
     ) {
-      throw new AgentOverRateLimitsException();
+      throw new AgentOverRateLimitException();
     }
   };
 }

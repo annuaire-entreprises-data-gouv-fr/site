@@ -1,5 +1,5 @@
 import {
-  AgentOverRateLimitsException,
+  AgentOverRateLimitException,
   agentRateLimiter,
 } from '#clients/authentication/rate-limiter';
 import { ISession } from '#models/authentication/user/session';
@@ -170,7 +170,7 @@ export function withRateLimiting<TResult>(handler: IHandler<TResult>) {
       await agentRateLimiter.verify(email);
       return handler(slug, params, session);
     } catch (e) {
-      if (e instanceof AgentOverRateLimitsException) {
+      if (e instanceof AgentOverRateLimitException) {
         throw new APIRouteError(
           'Agent over rate limit',
           { slug, route: 'withRateLimiting' },
