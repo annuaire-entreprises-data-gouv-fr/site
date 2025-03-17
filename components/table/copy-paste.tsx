@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import style from './copy-paste.module.css';
 
 type ICopyPasteProps = {
-  disableTooltip?: boolean;
+  disableCopyIcon?: boolean;
   shouldRemoveSpace?: boolean;
   id?: string;
   children: string;
@@ -22,7 +22,7 @@ function copyFallback(value: string) {
 export function CopyPaste({
   children,
   shouldRemoveSpace = false,
-  disableTooltip = false,
+  disableCopyIcon = false,
   id = undefined,
   label,
 }: ICopyPasteProps) {
@@ -72,18 +72,18 @@ export function CopyPaste({
   const [copied, setCopied] = useState(false);
   const [focused, setFocused] = useState(false);
 
-  const copyTooltipRef = useRef<HTMLSpanElement>(null);
+  const copyIconRef = useRef<HTMLSpanElement>(null);
 
   useLayoutEffect(() => {
-    if (copyTooltipRef.current && copyTooltipRef.current.offsetTop > 0) {
-      copyTooltipRef.current.classList.add(style.copyTooltipAbsolute);
+    if (copyIconRef.current && copyIconRef.current.offsetTop > 0) {
+      copyIconRef.current.classList.add(style.copyTooltipAbsolute);
     }
   });
 
   return (
     <button
       className={`${style.copyButton} ${
-        disableTooltip ? style.tooltipDisabled : ''
+        disableCopyIcon ? style.copyIconDisabled : ''
       }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -92,14 +92,14 @@ export function CopyPaste({
       ref={element}
       onClick={copyToClipboard}
       aria-label={`${children}, copier dans le presse-papier`}
-      title="Copier dans le presse-papier"
+      title="Cliquez pour copier dans le presse-papier"
     >
       <span id={id}>{children} </span>
-      {(hovered || copied || focused) && !disableTooltip && (
+      {(hovered || copied || focused) && !disableCopyIcon && (
         <span
-          className={style.copyTooltip}
+          className={style.copyIcon}
           aria-hidden
-          ref={copyTooltipRef}
+          ref={copyIconRef}
           style={{ color: copied ? 'green' : '' }}
         >
           {copied ? (

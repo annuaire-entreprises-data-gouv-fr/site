@@ -50,7 +50,7 @@ const Title: React.FC<IProps> = ({
           <span style={{ display: 'inline-flex' }}>
             <CopyPaste
               shouldRemoveSpace={true}
-              disableTooltip={true}
+              disableCopyIcon={true}
               label="SIREN"
             >
               {formatIntFr(uniteLegale.siren)}

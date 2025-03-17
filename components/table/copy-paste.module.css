@@ -18,11 +18,20 @@
   text-align: left;
 }
 
-.tooltipDisabled:hover {
+.copyIconDisabled:hover {
+  border-radius: 3px;
+}
+
+.copyIconDisabled:hover {
   background-color: var(--annuaire-colors-pastelBlue) !important;
 }
 
-.copyTooltip {
+.copyIconDisabled:active {
+  filter: brightness(0.9);
+  background-color: var(--annuaire-colors-pastelBlue) !important;
+}
+
+.copyIcon {
   background-color: var(--annuaire-colors-pastelBlue);
   border-radius: 3px;
   color: var(--annuaire-colors-frBlue);
@@ -34,7 +43,7 @@
   will-change: transform, opacity;
 }
 
-.copyTooltipAbsolute {
+.copyIconAbsolute {
   position: absolute;
   bottom: 0;
   right: 0;
