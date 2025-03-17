@@ -158,8 +158,16 @@ export function withUseCase<TResult>(handler: IHandler<TResult>) {
 
 export function withRateLimiting<TResult>(handler: IHandler<TResult>) {
   return async (slug: string, params: IHandlerParams, session: ISession) => {
+    const email = session.user?.email;
+    if (!email) {
+      throw new APIRouteError(
+        'User email not found',
+        { slug, route: 'withRateLimiting' },
+        400
+      );
+    }
     try {
-      await agentRateLimiter.verify(session.user?.email);
+      await agentRateLimiter.verify(email);
       return handler(slug, params, session);
     } catch (e) {
       if (e instanceof AgentOverRateLimitsException) {

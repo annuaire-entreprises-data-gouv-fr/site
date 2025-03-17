@@ -60,10 +60,7 @@ class AgentRateLimiter {
     }
   };
 
-  verify = async (email?: string) => {
-    if (!email) {
-      return null;
-    }
+  verify = async (email: string) => {
     const agentRateLimits = await this.getAgentRateLimits(email);
 
     if (
