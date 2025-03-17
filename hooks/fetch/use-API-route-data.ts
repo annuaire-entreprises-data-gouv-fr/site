@@ -80,7 +80,15 @@ async function fetchAPIRoute<T extends APIRoutesPaths>(
     if (e instanceof FailToFetchError) {
       e.context.slug = slug;
       e.context.page = '/api/data-fetching/' + route;
-      if (!e.status || [408, 504, 429, 401].includes(e.status)) {
+      if (e.status === 429) {
+        logWarningInSentry(e);
+        if (e.message === 'Agent over rate limits') {
+          return IDataFetchingState.AGENT_OVER_RATE_LIMITS;
+        } else {
+          return IDataFetchingState.TOO_MANY_REQUESTS;
+        }
+      }
+      if (!e.status || [408, 504, 401].includes(e.status)) {
         logWarningInSentry(e);
         return IDataFetchingState.CONNECTIVITY_ERROR;
       }

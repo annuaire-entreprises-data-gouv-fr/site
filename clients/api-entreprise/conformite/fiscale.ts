@@ -16,7 +16,7 @@ export type IAPIEntrepriseConformiteFiscale = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseConformiteFiscale = async (
   siren: Siren,
-  useCase: UseCase
+  useCase?: UseCase
 ) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseConformiteFiscale,
