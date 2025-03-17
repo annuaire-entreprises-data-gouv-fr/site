@@ -164,7 +164,7 @@ export function withRateLimiting<TResult>(handler: IHandler<TResult>) {
     } catch (e) {
       if (e instanceof AgentOverRateLimitsException) {
         throw new APIRouteError(
-          'Agent over rate limits',
+          'Agent over rate limit',
           { slug, route: 'withRateLimiting' },
           429
         );

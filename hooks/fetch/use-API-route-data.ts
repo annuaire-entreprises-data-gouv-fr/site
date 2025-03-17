@@ -82,7 +82,7 @@ async function fetchAPIRoute<T extends APIRoutesPaths>(
       e.context.page = '/api/data-fetching/' + route;
       if (e.status === 429) {
         logWarningInSentry(e);
-        if (e.message === 'Agent over rate limits') {
+        if (e.message === 'Agent over rate limit') {
           return IDataFetchingState.AGENT_OVER_RATE_LIMITS;
         } else {
           return IDataFetchingState.TOO_MANY_REQUESTS;

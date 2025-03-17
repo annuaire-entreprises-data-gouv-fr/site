@@ -11,7 +11,7 @@ export class AgentOverRateLimitsException extends Exception {
   constructor() {
     super({
       name: 'AgentOverRateLimitsException',
-      message: 'Agent over rate limits',
+      message: 'Agent over rate limit',
     });
   }
 }

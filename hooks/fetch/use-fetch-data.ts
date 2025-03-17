@@ -39,7 +39,7 @@ export function useFetchExternalData<T>(
           return;
         }
         if (429 === e.status) {
-          if (e.message === 'Agent over rate limits') {
+          if (e.message === 'Agent over rate limit') {
             setResponse(IDataFetchingState.AGENT_OVER_RATE_LIMITS);
           } else {
             setResponse(IDataFetchingState.TOO_MANY_REQUESTS);
