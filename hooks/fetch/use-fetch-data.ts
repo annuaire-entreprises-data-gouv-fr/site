@@ -38,12 +38,12 @@ export function useFetchExternalData<T>(
         if (e instanceof RequestAbortedDuringUnloadException) {
           return;
         }
+        if (432 === e.status) {
+          setResponse(IDataFetchingState.AGENT_OVER_RATE_LIMITS);
+          return;
+        }
         if (429 === e.status) {
-          if (e.message === 'Agent over rate limit') {
-            setResponse(IDataFetchingState.AGENT_OVER_RATE_LIMITS);
-          } else {
-            setResponse(IDataFetchingState.TOO_MANY_REQUESTS);
-          }
+          setResponse(IDataFetchingState.TOO_MANY_REQUESTS);
           return;
         }
         if (e instanceof FailToFetchError && !e.status) {

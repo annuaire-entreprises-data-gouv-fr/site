@@ -88,7 +88,7 @@ export class APIRouteError extends Exception {
       slug: string;
       params?: IHandlerParams;
     },
-    public status: 400 | 404 | 403 | 500 | 401 | 429,
+    public status: 400 | 404 | 403 | 500 | 401 | 429 | 432,
     cause?: any
   ) {
     super({
@@ -174,7 +174,7 @@ export function withRateLimiting<TResult>(handler: IHandler<TResult>) {
         throw new APIRouteError(
           'Agent over rate limit',
           { slug, route: 'withRateLimiting' },
-          429
+          432
         );
       }
       throw e;

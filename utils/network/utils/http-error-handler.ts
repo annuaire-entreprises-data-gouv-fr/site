@@ -1,4 +1,5 @@
 import {
+  AgentOverRateLimit,
   HttpBadRequestError,
   HttpConflict,
   HttpConnectionReset,
@@ -18,6 +19,9 @@ export const httpErrorHandler = (
   message: string
 ) => {
   switch (status) {
+    case 432: {
+      throw new AgentOverRateLimit(statusText || 'Agent over rate limit');
+    }
     case 429: {
       throw new HttpTooManyRequests(statusText || 'Too many requests');
     }
