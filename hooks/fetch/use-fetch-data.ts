@@ -38,10 +38,6 @@ export function useFetchExternalData<T>(
         if (e instanceof RequestAbortedDuringUnloadException) {
           return;
         }
-        if (432 === e.status) {
-          setResponse(IDataFetchingState.AGENT_OVER_RATE_LIMITS);
-          return;
-        }
         if (429 === e.status) {
           setResponse(IDataFetchingState.TOO_MANY_REQUESTS);
           return;
