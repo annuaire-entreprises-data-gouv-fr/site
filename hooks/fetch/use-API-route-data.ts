@@ -80,7 +80,6 @@ async function fetchAPIRoute<T extends APIRoutesPaths>(
     if (e instanceof FailToFetchError) {
       e.context.slug = slug;
       e.context.page = '/api/data-fetching/' + route;
-      // 432 is the status code for agent over rate limit
       if (e.status === 432) {
         logWarningInSentry(e);
         return IDataFetchingState.AGENT_OVER_RATE_LIMITS;
