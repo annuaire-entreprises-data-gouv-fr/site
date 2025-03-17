@@ -16,7 +16,7 @@ export const WelcomeModalAgent: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Documentation de l’espace agent public"
-            href={constants.links.documentation}
+            href={constants.links.documentation.home}
           >
             la documentation
           </a>
