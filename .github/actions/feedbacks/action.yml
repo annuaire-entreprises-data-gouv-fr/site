@@ -1,0 +1,8 @@
+name: 'User Feedback report'
+description: 'A GitHub Action that create a user feedback report'
+outputs:
+  feedbacks:
+    description: 'The feedbacks report'
+runs:
+  using: 'node20'
+  main: 'index.js'
