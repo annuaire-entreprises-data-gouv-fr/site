@@ -36,7 +36,7 @@ async function getRoute(request: IReqWithSession, context: IContext) {
     useCase: searchParams.useCase as UseCase,
   };
 
-  const response = await handler(slug, validatedParams, session);
+  const response = await handler(slug, validatedParams);
 
   return Response.json(response);
 }

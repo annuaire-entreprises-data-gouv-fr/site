@@ -4,11 +4,7 @@ const constants = {
     mailInpi: 'licences@inpi.fr',
     tchap:
       'https://tchap.gouv.fr/#/room/#annuaire-entreprises:agent.dinum.tchap.gouv.fr',
-    documentation: {
-      home: 'https://guides.data.gouv.fr/annuaire-des-entreprises',
-      agentRateLimiting:
-        'https://guides.data.gouv.fr/guides-de-data.gouv.fr/annuaire-des-entreprises/pour-approfondir/plafond-de-consultation-de-donnees',
-    },
+    documentation: 'https://guides.data.gouv.fr/annuaire-des-entreprises',
     parcours: {
       modification: '/faq/modifier',
       contact: '/faq/parcours',

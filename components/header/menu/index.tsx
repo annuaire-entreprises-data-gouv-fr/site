@@ -44,7 +44,7 @@ const Menu: React.FC<{
           target="_blank"
           rel="nopener noreferer"
           aria-label="Documentation de l’espace agent public"
-          href={constants.links.documentation.home}
+          href={constants.links.documentation}
         >
           Consulter la documentation
         </a>

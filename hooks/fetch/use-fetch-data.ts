@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
@@ -8,7 +9,6 @@ import {
   FailToFetchError,
   RequestAbortedDuringUnloadException,
 } from '#utils/network/frontend';
-import { useEffect, useState } from 'react';
 
 type IFetchDataType<T> = {
   fetchData: () => Promise<T>;
@@ -19,12 +19,12 @@ type IFetchDataType<T> = {
 /**
  * Hook to fetch data from an external public API (i.e. opendatasoft, service-public, etc.)
  * @param fetchOptions : fetch function, administration, logError
- * @param dependencies : Array of dependencies to retrigger the fetch
+ * @param dependancies : Array of dependancies to retrigger the fetch
  * @returns
  */
 export function useFetchExternalData<T>(
   { fetchData, administration, logError }: IFetchDataType<T>,
-  dependencies: Array<unknown>
+  dependancies: Array<unknown>
 ) {
   const [response, setResponse] = useState<
     T | IAPINotRespondingError | IDataFetchingState
@@ -38,11 +38,7 @@ export function useFetchExternalData<T>(
         if (e instanceof RequestAbortedDuringUnloadException) {
           return;
         }
-        if (429 === e.status) {
-          setResponse(IDataFetchingState.TOO_MANY_REQUESTS);
-          return;
-        }
-        if (e instanceof FailToFetchError && !e.status) {
+        if ((e instanceof FailToFetchError && !e.status) || 429 === e.status) {
           setResponse(IDataFetchingState.CONNECTIVITY_ERROR);
           return;
         }
@@ -57,6 +53,6 @@ export function useFetchExternalData<T>(
       }
     };
     fetchAndTreatResponse();
-  }, dependencies);
+  }, dependancies);
   return response;
 }

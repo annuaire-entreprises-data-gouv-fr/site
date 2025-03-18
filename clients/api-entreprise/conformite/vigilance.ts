@@ -21,7 +21,7 @@ export type IAPIEntrepriseConformiteVigilance = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseConformiteVigilance = async (
   siren: Siren,
-  useCase?: UseCase
+  useCase: UseCase
 ) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseConformiteVigilance,

@@ -1,4 +1,4 @@
-import { superAgentsList } from '#clients/authentication/super-agents';
+import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
 
 import FullWidthContainer from '#components-ui/container';
 import { Tag } from '#components-ui/tag';

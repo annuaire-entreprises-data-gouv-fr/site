@@ -1,5 +1,5 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
-import { superAgentsList } from '#clients/authentication/super-agents';
+import { superAgentsList } from '#clients/authentication/super-agent-list/agent-list';
 import {
   defaultAgentScopes,
   IAgentScope,

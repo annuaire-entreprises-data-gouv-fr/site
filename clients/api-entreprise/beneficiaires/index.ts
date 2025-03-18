@@ -27,7 +27,7 @@ export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
  */
 export const clientApiEntrepriseBeneficiaires = async (
   siren: Siren,
-  useCase?: UseCase
+  useCase: UseCase
 ) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseBeneficiaires,

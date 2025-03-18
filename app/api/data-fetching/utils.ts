@@ -1,7 +1,3 @@
-import {
-  AgentOverRateLimitException,
-  agentRateLimiter,
-} from '#clients/authentication/rate-limiter';
 import { ISession } from '#models/authentication/user/session';
 import { Exception } from '#models/exceptions';
 import { UseCase } from '#models/use-cases';
@@ -11,15 +7,6 @@ import { NextRequest, userAgent } from 'next/server';
 import { APIRoutesPaths } from './routes-paths';
 
 export type IContext = { params: Promise<{ slug: Array<string> }> };
-
-export interface IHandlerParams {
-  useCase?: UseCase;
-  isEI?: boolean;
-}
-
-export interface IHandler<TResult> {
-  (slug: string, params: IHandlerParams, session: ISession): Promise<TResult>;
-}
 
 type RouteHandler = (
   request: NextRequest,
@@ -83,12 +70,8 @@ function userVisitedAPageRecently(
 export class APIRouteError extends Exception {
   constructor(
     message: string,
-    context: {
-      route: string;
-      slug: string;
-      params?: IHandlerParams;
-    },
-    public status: 400 | 404 | 403 | 500 | 401 | 429 | 432,
+    context: { route: string; slug: string; params?: { useCase: UseCase } },
+    public status: 400 | 404 | 403 | 500 | 401,
     cause?: any
   ) {
     super({
@@ -142,9 +125,11 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
   };
 }
 
-export function withUseCase<TResult>(handler: IHandler<TResult>) {
-  return (slug: string, params: IHandlerParams, session: ISession) => {
-    if (!params.useCase || params.useCase in UseCase) {
+export function withUseCase<TResult>(
+  handler: (slug: string, useCase: UseCase) => TResult
+) {
+  return (slug: string, params: { useCase: UseCase }): TResult => {
+    if (!('useCase' in params) || params.useCase in UseCase) {
       throw new APIRouteError(
         'Invalid useCase',
         { slug, route: 'withUseCase', params },
@@ -152,32 +137,6 @@ export function withUseCase<TResult>(handler: IHandler<TResult>) {
       );
     }
 
-    return handler(slug, params, session);
-  };
-}
-
-export function withRateLimiting<TResult>(handler: IHandler<TResult>) {
-  return async (slug: string, params: IHandlerParams, session: ISession) => {
-    const email = session.user?.email;
-    if (!email) {
-      throw new APIRouteError(
-        'User email not found',
-        { slug, route: 'withRateLimiting' },
-        400
-      );
-    }
-    try {
-      await agentRateLimiter.verify(email);
-      return handler(slug, params, session);
-    } catch (e) {
-      if (e instanceof AgentOverRateLimitException) {
-        throw new APIRouteError(
-          'Agent over rate limit',
-          { slug, route: 'withRateLimiting' },
-          432
-        );
-      }
-      throw e;
-    }
+    return handler(slug, params.useCase);
   };
 }

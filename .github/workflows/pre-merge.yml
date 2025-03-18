@@ -104,11 +104,6 @@ jobs:
       OVH_S3_ACCESS_KEY: XXXXXX
       OVH_S3_SECRET: XXXXXX
       OVH_S3_BUCKET: uselessbucket
-      OVH_S3_REGION: region
-      OVH_S3_MONITORING_ACCESS_KEY: XXXXXX
-      OVH_S3_MONITORING_SECRET: XXXXXX
-      OVH_S3_MONITORING_BUCKET: uselessbucket
-      OVH_S3_MONITORING_REGION: region
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v4

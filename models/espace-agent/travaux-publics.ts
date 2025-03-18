@@ -22,7 +22,7 @@ export type ITravauxPublics = {
 
 export const getTravauxPublic = async (
   slug: string,
-  params: { useCase?: UseCase }
+  useCase: UseCase
 ): Promise<ITravauxPublics | IAPINotRespondingError> => {
   const siret = verifySiret(slug as string);
   const siren = extractSirenFromSiret(siret);
@@ -35,13 +35,12 @@ export const getTravauxPublic = async (
     });
 
   const [fntp, cibtp, cnetp, probtp] = await Promise.all([
-    clientApiEntrepriseCarteProfessionnelleTravauxPublics(
-      siren,
-      params.useCase
-    ).catch(errorHandler),
-    clientApiEntrepriseCibtp(siret, params.useCase).catch(errorHandler),
-    clientApiEntrepriseCnetp(siren, params.useCase).catch(errorHandler),
-    clientApiEntrepriseProbtp(siret, params.useCase).catch(errorHandler),
+    clientApiEntrepriseCarteProfessionnelleTravauxPublics(siren, useCase).catch(
+      errorHandler
+    ),
+    clientApiEntrepriseCibtp(siret, useCase).catch(errorHandler),
+    clientApiEntrepriseCnetp(siren, useCase).catch(errorHandler),
+    clientApiEntrepriseProbtp(siret, useCase).catch(errorHandler),
   ]);
   return { fntp, cibtp, cnetp, probtp };
 };

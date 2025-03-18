@@ -18,7 +18,7 @@ import { mergeDirigeants } from './utils';
 
 export const getDirigeantsProtected = async (
   maybeSiren: string,
-  params: { isEI?: boolean }
+  params: { isEI: boolean }
 ): Promise<IDirigeantsWithMetadataMergedIGInpi | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
 
