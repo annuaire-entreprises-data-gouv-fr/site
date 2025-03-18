@@ -23,6 +23,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@actions/core": "^1.11.1",
     "@aws-sdk/client-s3": "^3.758.0",
     "@react-spring/web": "^9.7.5",
     "@sentry/browser": "^8.55.0",

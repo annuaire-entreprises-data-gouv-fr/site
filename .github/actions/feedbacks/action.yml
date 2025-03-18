@@ -4,5 +4,5 @@ outputs:
   feedbacks:
     description: 'The feedbacks report'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'index.js'
