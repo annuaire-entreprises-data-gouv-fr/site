@@ -17,7 +17,7 @@ jobs:
         uses: ./.github/actions/feedbacks
         id: feedbacks-report
         env:
-          GRIST_TABLE: ${{ secrets.GRIST_TABLE }}
+          GRIST_TABLE: ${{ secrets.GRIST_FEEDBACKS_TABLE }}
           GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
 
       - name: Post feedback report
