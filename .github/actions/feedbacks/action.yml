@@ -20,5 +20,5 @@ runs:
       working-directory: .github/actions/feedbacks
       run: node index.js
       env:
-        GRIST_TABLE: ${{ secrets.GRIST_FEEDBACKS_TABLE }}
-        GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
+        GRIST_TABLE: ${{ process.env.GRIST_TABLE }}
+        GRIST_API_KEY: ${{ process.env.GRIST_API_KEY }}
