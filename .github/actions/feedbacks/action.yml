@@ -4,5 +4,21 @@ outputs:
   feedbacks:
     description: 'The feedbacks report'
 runs:
-  using: 'node20'
-  main: 'index.js'
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - name: Install dependencies
+      shell: bash
+      working-directory: .github/actions/feedbacks
+      run: npm install
+    - name: Run feedbacks action
+      shell: bash
+      working-directory: .github/actions/feedbacks
+      run: node index.js
+      env:
+        GRIST_TABLE: ${{ inputs.grist_table }}
+        GRIST_API_KEY: ${{ inputs.grist_api_key }}
