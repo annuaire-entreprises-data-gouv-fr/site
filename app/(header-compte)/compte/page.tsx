@@ -60,7 +60,7 @@ const AccountPage = async () => {
                     <li>
                       <ButtonLink
                         target="_blank"
-                        to={constants.links.documentation}
+                        to={constants.links.documentation.home}
                       >
                         Consulter la documentation
                       </ButtonLink>
