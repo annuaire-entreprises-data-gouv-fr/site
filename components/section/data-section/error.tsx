@@ -29,7 +29,7 @@ export default function DataFetchErrorExplanation({
   if (fetchErrorType === IDataFetchingState.AGENT_OVER_RATE_LIMITS) {
     return (
       <Error>
-        <strong>Plafond de consultation atteint</strong>
+        <strong>Plafond de consultations atteint</strong>
         <p>
           Pour des raisons de sécurité, nous avons mis en place un nombre de
           consultations maximal autorisé sur les données réservées aux agents.
