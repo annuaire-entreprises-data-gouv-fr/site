@@ -4,21 +4,5 @@ outputs:
   feedbacks:
     description: 'The feedbacks report'
 runs:
-  using: 'composite'
-  steps:
-    - uses: actions/checkout@v4
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-    - name: Install dependencies
-      shell: bash
-      working-directory: .github/actions/feedbacks
-      run: npm install
-    - name: Run feedbacks action
-      shell: bash
-      working-directory: .github/actions/feedbacks
-      run: node index.js
-      env:
-        GRIST_TABLE: ${{ process.env.GRIST_TABLE }}
-        GRIST_API_KEY: ${{ process.env.GRIST_API_KEY }}
+  using: 'node16'
+  main: 'index.js'
