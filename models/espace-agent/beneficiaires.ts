@@ -71,13 +71,13 @@ export type IBeneficiairesEffectif = {
 
 export const getBeneficiaires = async (
   maybeSiren: string,
-  useCase: UseCase
+  params: { useCase?: UseCase }
 ): Promise<Array<IBeneficiairesEffectif> | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
   try {
     const beneficiaires = await clientApiEntrepriseBeneficiaires(
       siren,
-      useCase
+      params.useCase
     );
     if (beneficiaires.length === 0) {
       return APINotRespondingFactory(EAdministration.INPI, 404);

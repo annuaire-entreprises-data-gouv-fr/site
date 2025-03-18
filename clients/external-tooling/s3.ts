@@ -11,16 +11,30 @@ import { Readable } from 'stream';
 const bucketsLists = {
   'comptes-agents': {
     config: {
-      endpoint: 'https://s3.eu-west-par.io.cloud.ovh.net/',
+      endpoint: `https://s3.${process.env.OVH_S3_REGION}.io.cloud.ovh.net/`,
       credentials: {
         accessKeyId: process.env.OVH_S3_ACCESS_KEY || '',
         secretAccessKey: process.env.OVH_S3_SECRET || '',
       },
-      region: 'eu-west-par',
+      region: process.env.OVH_S3_REGION,
     },
     params: {
       Bucket: process.env.OVH_S3_BUCKET || '',
       Key: 'comptes_agents.json',
+    },
+  },
+  'monitoring-comptes-agents': {
+    config: {
+      endpoint: `https://s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/`,
+      credentials: {
+        accessKeyId: process.env.OVH_S3_MONITORING_ACCESS_KEY || '',
+        secretAccessKey: process.env.OVH_S3_MONITORING_SECRET || '',
+      },
+      region: process.env.OVH_S3_MONITORING_REGION || '',
+    },
+    params: {
+      Bucket: process.env.OVH_S3_MONITORING_BUCKET || '',
+      Key: 'monitoring_comptes_agents.csv',
     },
   },
 };

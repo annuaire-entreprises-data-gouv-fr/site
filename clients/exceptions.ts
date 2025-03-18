@@ -61,6 +61,12 @@ export class HttpTooManyRequests extends HttpError {
     this.name = 'HttpTooManyRequests';
   }
 }
+export class AgentOverRateLimit extends HttpError {
+  constructor(public message: string) {
+    super(message, 432);
+    this.name = 'AgentOverRateLimit';
+  }
+}
 
 export class HttpUnauthorizedError extends HttpError {
   constructor(public message: string) {

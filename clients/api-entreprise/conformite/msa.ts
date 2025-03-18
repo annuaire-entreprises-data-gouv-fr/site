@@ -13,7 +13,7 @@ export type IAPIEntrepriseConformiteMSA = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseConformiteMSA = async (
   siret: Siret,
-  useCase: UseCase
+  useCase?: UseCase
 ) => {
   return await clientAPIEntreprise<IAPIEntrepriseConformiteMSA, IConformite>(
     routes.apiEntreprise.conformite.msa(siret),
