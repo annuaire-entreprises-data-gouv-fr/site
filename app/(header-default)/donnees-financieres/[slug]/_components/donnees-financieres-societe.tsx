@@ -11,6 +11,7 @@ import BilansDocumentsSociete from './bilans-documents-societe';
 import BilansSocieteSection from './bilans-societe';
 import ComptesBodaccSociete from './comptes-bodacc-societe';
 import { FinancesSocieteSection } from './finances-societe';
+import FinancesSocieteLiassesFiscalesSection from './finances-societe-liasses-fiscales';
 
 export default function DonneesFinancieresSociete({
   uniteLegale,
@@ -39,6 +40,12 @@ export default function DonneesFinancieresSociete({
                 session={session}
               />
             )}
+          {hasRights(session, ApplicationRights.liassesFiscales) && (
+            <FinancesSocieteLiassesFiscalesSection
+              uniteLegale={uniteLegale}
+              session={session}
+            />
+          )}
         </>
       ) : (
         <DonneesPriveesSection title="Indicateurs financiers" />

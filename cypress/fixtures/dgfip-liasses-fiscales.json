@@ -1,0 +1,48 @@
+{
+  "data": {
+    "obligations_fiscales": [
+      {
+        "id": "100209496193",
+        "code": "IS",
+        "libelle": "Impôt sur les sociétés",
+        "reference": null,
+        "regime": "RNMEMBRE"
+      },
+      {
+        "id": "101080892345",
+        "code": "ISGROUPE",
+        "libelle": null,
+        "reference": null,
+        "regime": "RNGROUPE"
+      }
+    ],
+    "declarations": [
+      {
+        "numero_imprime": "2050",
+        "regime": {
+          "code": "RN",
+          "libelle": "Réel normal"
+        },
+        "date_declaration": "2023-07-24",
+        "date_fin_exercice": "2022-12-31",
+        "duree_exercice": 365,
+        "millesime": 201601,
+        "donnees": [
+          {
+            "code_nref": "300274",
+            "valeurs": ["222216704"],
+            "code_absolu": "2000321",
+            "intitule": "Concessions, brevets et droits similaires, brut",
+            "code_EDI": "AF:C516:5004:1",
+            "code": "AF",
+            "code_type_donnee": "MOA"
+          }
+        ]
+      }
+    ]
+  },
+  "links": {},
+  "meta": {
+    "internal_id_itip": "100008503160"
+  }
+}
