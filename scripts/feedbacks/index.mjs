@@ -121,9 +121,9 @@ ${generateAsciiGraph(moods)}
 ${feedbacks
   .map(
     (f) =>
-      `|${String(f.mood).padStart(2, ' ')}| ${f.email} | ${
-        f.userType
-      } | ${f.text.replace('\n', '')}|`
+      `|${String(f.mood).padStart(2, ' ')}| ${f.email} | ${f.userType} | "${
+        f.text
+      }" |`
   )
   .join('\n')}
   `;
