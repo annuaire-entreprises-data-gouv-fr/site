@@ -31,5 +31,4 @@ jobs:
         uses: ./.github/actions/notify
         with:
           message: '🚨 ${{ github.event.repository.name }} : trigger seo workflow failed'
-          hook: ${{ secrets.TCHAP_HOOK }}
-          id: ${{ secrets.TCHAP_ROOM_ID }}
+          hook: ${{ secrets.DEV_EVENT_HOOK }}
