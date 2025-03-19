@@ -1,5 +1,4 @@
-const core = require('@actions/core');
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 function generateAsciiGraph(data) {
   // Create a frequency map to count occurrences of each value
@@ -100,40 +99,52 @@ function generateReport(data) {
     moods.push(mood);
 
     if (text) {
-      feedbacks.push({ text, mood, email });
+      feedbacks.push({ text, mood, email, userType });
     }
   });
 
-  console.log(moods, feedbacks);
   const report = `
-# Daily feedbacks report
+# Feedbacks reçus le ${yesterday}
 
-Feedbacks count : ${moods.length} 
+Hier, nous avons reçu ${moods.length} feedbacks.
 
-Distribution :
+## Distribution
+
+\`\`\`
 ${generateAsciiGraph(moods)}
+\`\`\`
 
-Commentaires :
+## Commentaires
+
+| Note  | Email  | Type | Commentaire |
+| :------------ |:---------------:| :-----:|-----:|
 ${feedbacks
   .map(
     (f) =>
-      `┌──┐\n│${String(f.mood).padStart(2, ' ')}│ @ : ${f.email}\n└──┘\n “${
-        f.text
-      }”`
+      `|${String(f.mood).padStart(2, ' ')}| ${f.email} | ${
+        f.userType
+      } | ${f.text.replace('\n', '')}|`
   )
-  .join('\n\n')}
+  .join('\n')}
   `;
 
-  console.log(report);
+  return report;
 }
 
 async function run() {
-  try {
-    const data = await fetchFeedbacks();
-    generateReport(data);
-    core.setOutput('data', data);
-  } catch (error) {
-    core.setFailed(error.message);
+  const data = await fetchFeedbacks();
+  const text = generateReport(data);
+
+  const post = await fetch(process.env.HOOK, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'post',
+    body: JSON.stringify({ text }),
+  });
+  if (!post.ok) {
+    console.error(post.error);
+    throw new Error(`HTTP error! status: ${post.status}`);
   }
 }
 

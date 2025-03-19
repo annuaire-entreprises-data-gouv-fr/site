@@ -13,26 +13,20 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Run feedbacks report
-        uses: ./.github/actions/feedbacks
-        id: feedbacks-report
-        env:
-          GRIST_TABLE: ${{ secrets.GRIST_FEEDBACKS_TABLE }}
-          GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
-
-      - name: Post feedback report
-        uses: ./.github/actions/notify
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v4
         with:
-          message: '${{ steps.my-action.outputs.feedbacks }}'
-          hook: ${{ secrets.TCHAP_HOOK }}
-          id: ${{ secrets.TCHAP_ROOM_ID }}
+          node-version: ${{ env.node-version }}
+
+      - name: Create and post feedbacks report
+        run: |
+          npm i node-fetch && GRIST_TABLE=${{ secrets.GRIST_FEEDBACKS_TABLE }} GRIST_API_KEY=${{ secrets.GRIST_API_KEY }}  HOOK=${{ secrets.FEEDBACKS_HOOK }} node ./scripts/feedbacks/index.mjs
 
       - name: Notify failure
         if: failure()
         uses: ./.github/actions/notify
         with:
           message: '🚨 ${{ github.event.repository.name }} : feedback report failed'
-          hook: ${{ secrets.TCHAP_HOOK }}
-          id: ${{ secrets.TCHAP_ROOM_ID }}
+          hook: ${{ secrets.FEEDBACKS_HOOK }}
