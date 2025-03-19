@@ -1,14 +1,15 @@
-import React, { PropsWithChildren } from 'react';
 import NonRenseigne from '#components/non-renseigne';
 import constants from '#models/constants';
 import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
+import React, { PropsWithChildren } from 'react';
 import { CopyPaste } from './copy-paste';
 import styles from './styleSimple.module.css';
 
 interface ISectionProps {
   body: any[][];
   id?: string;
+  firstColumnWidth?: string;
 }
 
 const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
@@ -68,7 +69,11 @@ const shouldRemoveSpace = (label: any) => {
  * @param body two dimension array, null or undefined rows will be filtered
  * @returns
  */
-export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
+export const TwoColumnTable: React.FC<ISectionProps> = ({
+  id,
+  body,
+  firstColumnWidth,
+}) => {
   return (
     <table className={styles['two-column-table']} id={id}>
       <tbody>
@@ -78,6 +83,8 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
               className={styles.cell}
               style={{
                 borderColor: constants.colors.pastelBlue,
+                /* Min width does not work in table cells https://stackoverflow.com/a/29379832 */
+                width: firstColumnWidth || '30%',
               }}
             >
               <div>{row[0]}</div>

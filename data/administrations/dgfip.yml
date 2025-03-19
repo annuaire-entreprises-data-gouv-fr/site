@@ -4,6 +4,10 @@ long: Direction générale des Finances publiques
 site: https://www.impots.gouv.fr/presentation-de-la-dgfip-overview-dgfip
 contact: https://www.impots.gouv.fr/contacts
 dataSources:
+  - label: Liasses fiscales
+    apiSlug: api-entreprise
+    data:
+      - label: Liasses fiscales
   - label: Statut fiscal des entreprises
     apiSlug: api-entreprise
     data:

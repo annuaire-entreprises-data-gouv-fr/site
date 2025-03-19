@@ -40,12 +40,6 @@ export default function DonneesFinancieresSociete({
                 session={session}
               />
             )}
-          {hasRights(session, ApplicationRights.liassesFiscales) && (
-            <FinancesSocieteLiassesFiscalesSection
-              uniteLegale={uniteLegale}
-              session={session}
-            />
-          )}
         </>
       ) : (
         <DonneesPriveesSection title="Indicateurs financiers" />
@@ -53,6 +47,12 @@ export default function DonneesFinancieresSociete({
       <HorizontalSeparator />
       <BilansDocumentsSociete uniteLegale={uniteLegale} session={session} />
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
+      {hasRights(session, ApplicationRights.liassesFiscales) && (
+        <FinancesSocieteLiassesFiscalesSection
+          uniteLegale={uniteLegale}
+          session={session}
+        />
+      )}
     </>
   );
 }

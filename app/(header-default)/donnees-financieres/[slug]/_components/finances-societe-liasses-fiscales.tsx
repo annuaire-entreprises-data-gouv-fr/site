@@ -1,34 +1,30 @@
 'use client';
 
-import FAQLink from '#components-ui/faq-link';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import { Loader } from '#components-ui/loader';
 import { Select } from '#components-ui/select';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { FullTable } from '#components/table/full';
+import { Tag } from '#components-ui/tag';
+import NonRenseigne from '#components/non-renseigne';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { isAPI404 } from '#models/api-not-responding';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
+import { hasAnyError, isDataLoading } from '#models/data-fetching';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { ChangeEvent, useMemo, useState } from 'react';
+import { ChangeEvent, Fragment, useMemo, useState } from 'react';
 
-export default function FinancesSocieteLiassesFiscalesSection({
+const InnerLiassesSection = ({
   uniteLegale,
   session,
+  selectedYear,
 }: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}) {
-  const currentYear = new Date().getFullYear();
-  const [selectedYear, setSelectedYear] = useState(currentYear - 1);
-
-  const options = useMemo(
-    () =>
-      Array.from({ length: 4 }, (_, i) => {
-        const year = currentYear - 1 - i;
-        return { value: year.toString(), label: year.toString() };
-      }),
-    [currentYear]
-  );
+  selectedYear: string;
+}) => {
   const params = useMemo(
     () => ({
       params: { year: selectedYear },
@@ -43,47 +39,109 @@ export default function FinancesSocieteLiassesFiscalesSection({
     params
   );
 
+  if (isDataLoading(liassesFiscalesProtected)) {
+    return <Loader />;
+  }
+
+  if (isAPI404(liassesFiscalesProtected)) {
+    return (
+      <i>
+        Aucune liasse fiscale n’a été retrouvé pour cette structure en{' '}
+        {selectedYear}
+      </i>
+    );
+  }
+
+  if (hasAnyError(liassesFiscalesProtected)) {
+    return (
+      <i>Impossible de télécharger les données pour l’année {selectedYear}</i>
+    );
+  }
+
   return (
-    <AsyncDataSectionClient
-      title="Liasses Fiscales DGFIP"
-      id="liasses-fiscales-dgfip"
+    <>
+      <div>
+        <strong>Liasse fiscale {selectedYear}</strong>
+      </div>
+      <div>
+        {liassesFiscalesProtected.obligationsFiscales.map((obl) => (
+          <Tag key={obl}>{obl}</Tag>
+        ))}
+      </div>
+
+      {liassesFiscalesProtected.declarations.map(
+        ({ imprime, dateFinExercice, donnees }, index) => (
+          <Fragment key={`${imprime}-${index}`}>
+            <HorizontalSeparator />
+            <TwoColumnTable
+              firstColumnWidth="70%"
+              body={[
+                ['N° d’Imprimé', imprime],
+                ['Date de fin d’exercice', dateFinExercice],
+                ...donnees.map((d) => [
+                  d.intitule,
+                  d.valeurs.length <= 1 ? (
+                    d.valeurs
+                  ) : (
+                    <ul>
+                      {d.valeurs.map((v, index) => (
+                        <li key={`${v}-${index}`}>{v || <NonRenseigne />}</li>
+                      ))}
+                    </ul>
+                  ),
+                ]),
+              ]}
+            />
+          </Fragment>
+        )
+      )}
+    </>
+  );
+};
+
+export default function FinancesSocieteLiassesFiscalesSection({
+  uniteLegale,
+  session,
+}: {
+  uniteLegale: IUniteLegale;
+  session: ISession | null;
+}) {
+  const [selectedYear, setSelectedYear] = useState<null | string>(null);
+
+  const options = useMemo(
+    () =>
+      Array.from({ length: 10 }, (_, i) => {
+        const year = new Date().getFullYear() - 1 - i;
+        return { value: year.toString(), label: year.toString() };
+      }),
+    []
+  );
+
+  return (
+    <Section
+      title="Liasses Fiscales"
+      id="liasses-fiscales"
       sources={[EAdministration.DGFIP]}
       isProtected
-      data={liassesFiscalesProtected}
-      notFoundInfo="Aucune liasse fiscale n’a été retrouvé pour cette structure."
     >
-      {(liassesFiscales) => {
-        const body = [
-          ['Date de clôture', liassesFiscales[0].dateFinExercice],
-          ...liassesFiscales[0].donnees.map((donnee) => [
-            donnee.intitule,
-            donnee.valeurs[0],
-          ]),
-        ];
-
-        return (
-          <>
-            <Select
-              options={options}
-              defaultValue={selectedYear.toString()}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                setSelectedYear(parseInt(e.target.value, 10));
-              }}
-            />
-            <FullTable
-              head={[
-                <FAQLink
-                  tooltipLabel="Indicateurs"
-                  to="/faq/donnees-financieres"
-                >
-                  Définition des indicateurs
-                </FAQLink>,
-              ]}
-              body={body}
-            />
-          </>
-        );
-      }}
-    </AsyncDataSectionClient>
+      <>
+        <Select
+          options={options}
+          defaultValue="Sélectionner une année"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setSelectedYear(e.target.value)
+          }
+        />
+        {selectedYear ? (
+          <InnerLiassesSection
+            uniteLegale={uniteLegale}
+            selectedYear={selectedYear}
+            session={session}
+          />
+        ) : (
+          <i>Selectionnez une année pour voir sa liasse fiscale.</i>
+        )}
+      </>
+    </Section>
   );
 }
