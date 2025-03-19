@@ -75,6 +75,7 @@ function generateReport(data) {
 
   const moods = [];
   const feedbacks = [];
+  let avg = 0;
 
   data.forEach((record) => {
     if (record.date !== yesterday) {
@@ -97,16 +98,19 @@ function generateReport(data) {
     const { text, email } = record;
 
     moods.push(mood);
+    avg += mood;
 
     if (text) {
       feedbacks.push({ text, mood, email, userType });
     }
   });
 
+  avg = (avg / moods.length).toFixed(2);
+
   const report = `
 # Feedbacks reçus le ${yesterday}
 
-Hier, nous avons reçu ${moods.length} feedbacks.
+Hier, nous avons reçu ${moods.length} feedbacks. La note moyenne est de ${avg};
 
 ## Distribution
 
