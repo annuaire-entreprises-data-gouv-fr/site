@@ -36,8 +36,7 @@ jobs:
         uses: ./.github/actions/notify
         with:
           message: '🚨 ${{ github.event.repository.name }} : deploy to staging failed'
-          hook: ${{ secrets.TCHAP_HOOK }}
-          id: ${{ secrets.TCHAP_ROOM_ID }}
+          hook: ${{ secrets.DEV_EVENT_HOOK }}
 
   deploy-production:
     name: Deploy - production
@@ -79,8 +78,7 @@ jobs:
         uses: ./.github/actions/notify
         with:
           message: '🚨 ${{ github.event.repository.name }} [${{ matrix.environment }}] : deploy to production cluster failed'
-          hook: ${{ secrets.TCHAP_HOOK }}
-          id: ${{ secrets.TCHAP_ROOM_ID }}
+          hook: ${{ secrets.DEV_EVENT_HOOK }}
 
   notify-deploy-success:
     name: Notify successful deployment
@@ -93,5 +91,4 @@ jobs:
         uses: ./.github/actions/notify
         with:
           message: '✅ ${{ github.event.repository.name }} : successfully deploy production cluster'
-          hook: ${{ secrets.TCHAP_HOOK }}
-          id: ${{ secrets.TCHAP_ROOM_ID }}
+          hook: ${{ secrets.DEV_EVENT_HOOK }}
