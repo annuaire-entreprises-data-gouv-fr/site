@@ -83,12 +83,3 @@ class LogInGristException extends Exception {
     });
   }
 }
-
-class ReadFromGristException extends Exception {
-  constructor(args: { cause?: any }) {
-    super({
-      ...args,
-      name: 'ReadFromGristException',
-    });
-  }
-}
