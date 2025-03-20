@@ -85,6 +85,7 @@ export const anonymiseUniteLegale = (
   } else {
     uniteLegale.nomComplet = getNomComplet(uniteLegale, session);
     uniteLegale.siege = anonymiseEtablissement(uniteLegale.siege, session);
+    uniteLegale.chemin = uniteLegale.siren;
     return uniteLegale;
   }
 };
@@ -105,18 +106,18 @@ export const anonymiseEtablissement = (
     const { adressePostale, adresse, commune } = etablissement || {};
 
     etablissement.adresse = formatAdresseForDiffusion(
-      estDiffusible(etablissement),
+      etablissement,
       adresse,
       commune
     );
     etablissement.adressePostale = formatAdresseForDiffusion(
-      estDiffusible(etablissement),
+      etablissement,
       adressePostale,
       commune
     );
 
-    etablissement.enseigne = defaultNonDiffusiblePlaceHolder;
-    etablissement.denomination = defaultNonDiffusiblePlaceHolder;
+    etablissement.enseigne = defaultNonDiffusiblePlaceHolder(etablissement);
+    etablissement.denomination = defaultNonDiffusiblePlaceHolder(etablissement);
     return etablissement;
   }
 };
@@ -135,12 +136,25 @@ const anonymiseEtablissements = (
   return etablissements;
 };
 
-export const nonDiffusibleDataFormatter = (e: string) =>
-  `▪︎ ▪︎ ▪︎ ${e} ▪︎ ▪︎ ▪︎`;
+const nonDiffusibleDataFormatter = (e: string) => `▪︎ ▪︎ ▪︎ ${e} ▪︎ ▪︎ ▪︎`;
 
-export const defaultNonDiffusiblePlaceHolder = nonDiffusibleDataFormatter(
-  'information non-diffusible'
-);
+const defaultNonDiffusiblePlaceHolder = (
+  uniteLegaleOrEtablissement: IUniteLegaleOrEtablissement
+) =>
+  nonDiffusibleDataFormatter(
+    estNonDiffusibleProtected(uniteLegaleOrEtablissement)
+      ? 'information protégée'
+      : 'information non-diffusible'
+  );
+
+export const documentNonDiffusiblePlaceHolder = (
+  uniteLegaleOrEtablissement: IUniteLegaleOrEtablissement
+) =>
+  nonDiffusibleDataFormatter(
+    estNonDiffusibleProtected(uniteLegaleOrEtablissement)
+      ? 'document protégé'
+      : 'document non-diffusible'
+  );
 
 const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {
   if (session && canSeeNonDiffusible(session)) {
@@ -150,20 +164,21 @@ const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {
   if (estDiffusible(uniteLegale)) {
     return uniteLegale.nomComplet;
   }
-  return defaultNonDiffusiblePlaceHolder;
+
+  return defaultNonDiffusiblePlaceHolder(uniteLegale);
 };
 
 const formatAdresseForDiffusion = (
-  estDiffusible: boolean,
+  etablissement: IEtablissement,
   adresse: string,
   commune: string
 ) => {
-  if (estDiffusible) {
+  if (estDiffusible(etablissement)) {
     return adresse || 'Adresse inconnue';
   }
 
   if (!commune) {
-    return defaultNonDiffusiblePlaceHolder;
+    return defaultNonDiffusiblePlaceHolder(etablissement);
   }
   return nonDiffusibleDataFormatter(commune);
 };
@@ -180,5 +195,5 @@ export const getPersonnalDataAssociation = (
     ? true
     : estDiffusible(uniteLegale);
 
-  return shouldDiff ? adresse : defaultNonDiffusiblePlaceHolder;
+  return shouldDiff ? adresse : defaultNonDiffusiblePlaceHolder(uniteLegale);
 };

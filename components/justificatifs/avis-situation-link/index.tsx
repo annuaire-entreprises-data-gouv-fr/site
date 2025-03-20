@@ -8,9 +8,9 @@ import {
 } from '#models/authentication/user/rights';
 import { ISession } from '#models/authentication/user/session';
 import {
+  documentNonDiffusiblePlaceHolder,
   estDiffusible,
   estNonDiffusibleProtected,
-  nonDiffusibleDataFormatter,
 } from '#models/core/diffusion';
 import { IEtablissement } from '#models/core/types';
 import React from 'react';
@@ -56,7 +56,7 @@ const AvisSituationLink: React.FC<{
     } else {
       return (
         <a href="/faq/justificatif-immatriculation-non-diffusible">
-          {nonDiffusibleDataFormatter('document non-diffusible')}
+          {documentNonDiffusiblePlaceHolder(etablissement)}
         </a>
       );
     }

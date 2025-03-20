@@ -6,8 +6,8 @@ import {
 } from '#models/authentication/user/rights';
 import { ISession } from '#models/authentication/user/session';
 import {
+  documentNonDiffusiblePlaceHolder,
   estDiffusible,
-  nonDiffusibleDataFormatter,
 } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
 import React from 'react';
@@ -28,7 +28,7 @@ const ExtraitRNELink: React.FC<{
     </ButtonLink>
   ) : (
     <a href="/faq/justificatif-immatriculation-non-diffusible">
-      {nonDiffusibleDataFormatter('document non-diffusible')}
+      {documentNonDiffusiblePlaceHolder(uniteLegale)}
     </a>
   );
 };
