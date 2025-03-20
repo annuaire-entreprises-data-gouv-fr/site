@@ -50,7 +50,7 @@ const AdminPage = async () => {
         <FullTable
           head={['Email', 'Cadre', 'Scopes']}
           body={Object.entries(data).map(([key, { scopes, usage }]) => {
-            return [key, usage, scopes.map((v) => <Tag>{v}</Tag>)];
+            return [key, usage, scopes.map((v) => <Tag key={v}>{v}</Tag>)];
           })}
         />
       </FullWidthContainer>
