@@ -29,8 +29,8 @@ const ProtectedSirenAlert = () => (
     Les dirigeant(e)s de cette structure se sont opposé(e)s à la diffusion de
     leurs informations personnelles.
     <br />
-    En conséquence, certaines informations{' '}
-    <strong>ne sont pas publiquement accessibles</strong>.
+    En conséquence, certaines informations sont <strong>protégées</strong> et ne
+    sont pas publiquement accessibles.
     <br />
     <br />
     Si vous êtes <strong>agent public</strong>, vous pouvez consulter ces
