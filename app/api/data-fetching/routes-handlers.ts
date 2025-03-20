@@ -49,8 +49,9 @@ export const APIRoutesHandlers = {
     withUseCase(getTravauxPublic)
   ),
   getChiffreAffairesProtected,
-  [APIRoutesPaths.EspaceAgentLiassesFiscalesProtected]:
-    getLiassesFiscalesProtected,
+  [APIRoutesPaths.EspaceAgentLiassesFiscalesProtected]: withRateLimiting(
+    withUseCase(getLiassesFiscalesProtected)
+  ),
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,
   [APIRoutesPaths.Observations]: getRNEObservations,
   [APIRoutesPaths.Association]: getAssociationFromSlug,

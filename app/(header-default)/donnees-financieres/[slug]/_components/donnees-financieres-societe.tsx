@@ -11,7 +11,7 @@ import BilansDocumentsSociete from './bilans-documents-societe';
 import BilansSocieteSection from './bilans-societe';
 import ComptesBodaccSociete from './comptes-bodacc-societe';
 import { FinancesSocieteSection } from './finances-societe';
-import FinancesSocieteLiassesFiscalesSection from './finances-societe-liasses-fiscales';
+import LiassesFiscalesSection from './liasses-fiscales';
 
 export default function DonneesFinancieresSociete({
   uniteLegale,
@@ -47,12 +47,7 @@ export default function DonneesFinancieresSociete({
       <HorizontalSeparator />
       <BilansDocumentsSociete uniteLegale={uniteLegale} session={session} />
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
-      {hasRights(session, ApplicationRights.liassesFiscales) && (
-        <FinancesSocieteLiassesFiscalesSection
-          uniteLegale={uniteLegale}
-          session={session}
-        />
-      )}
+      <LiassesFiscalesSection uniteLegale={uniteLegale} session={session} />
     </>
   );
 }

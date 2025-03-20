@@ -12,6 +12,7 @@ import { isAPI404 } from '#models/api-not-responding';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
 import { hasAnyError, isDataLoading } from '#models/data-fetching';
+import { UseCase } from '#models/use-cases';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { ChangeEvent, Fragment, useMemo, useState } from 'react';
@@ -20,16 +21,18 @@ const InnerLiassesSection = ({
   uniteLegale,
   session,
   selectedYear,
+  useCase,
 }: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
   selectedYear: string;
+  useCase: UseCase;
 }) => {
   const params = useMemo(
     () => ({
-      params: { year: selectedYear },
+      params: { year: selectedYear, useCase },
     }),
-    [selectedYear]
+    [selectedYear, useCase]
   );
 
   const liassesFiscalesProtected = useAPIRouteData(
@@ -99,12 +102,22 @@ const InnerLiassesSection = ({
   );
 };
 
-export default function FinancesSocieteLiassesFiscalesSection({
+export default function ProtectedLiassesFiscalesSection({
   uniteLegale,
   session,
+  useCase,
+  title,
+  id,
+  sources,
+  isProtected,
 }: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
+  useCase: UseCase;
+  title: string;
+  id: string;
+  sources: EAdministration[];
+  isProtected: boolean;
 }) {
   const [selectedYear, setSelectedYear] = useState<null | string>(null);
 
@@ -118,16 +131,11 @@ export default function FinancesSocieteLiassesFiscalesSection({
   );
 
   return (
-    <Section
-      title="Liasses Fiscales"
-      id="liasses-fiscales"
-      sources={[EAdministration.DGFIP]}
-      isProtected
-    >
+    <Section title={title} id={id} isProtected={isProtected} sources={sources}>
       <>
         <Select
           options={options}
-          defaultValue="Sélectionner une année"
+          placeholder="Sélectionnez une année"
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setSelectedYear(e.target.value)
           }
@@ -137,9 +145,10 @@ export default function FinancesSocieteLiassesFiscalesSection({
             uniteLegale={uniteLegale}
             selectedYear={selectedYear}
             session={session}
+            useCase={useCase}
           />
         ) : (
-          <i>Selectionnez une année pour voir sa liasse fiscale.</i>
+          <i>Sélectionnez une année pour voir sa liasse fiscale.</i>
         )}
       </>
     </Section>

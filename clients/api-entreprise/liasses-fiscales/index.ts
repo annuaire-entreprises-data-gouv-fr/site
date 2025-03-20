@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import { ILiassesFiscalesProtected } from '#models/espace-agent/dgfip/liasses-fiscales';
+import { UseCase } from '#models/use-cases';
 import { Siren } from '#utils/helpers';
 import clientAPIEntreprise from '../client';
 import { IAPIEntrepriseLiassesFiscales } from './types';
@@ -9,12 +10,17 @@ import { IAPIEntrepriseLiassesFiscales } from './types';
  */
 export async function clientApiEntrepriseDgfipLiassesFiscales(
   siren: Siren,
-  year: string
+  year?: string,
+  useCase?: UseCase
 ) {
   return await clientAPIEntreprise<
     IAPIEntrepriseLiassesFiscales,
     ILiassesFiscalesProtected
-  >(routes.apiEntreprise.dgfip.liassesFiscales(siren, year), mapToDomainObject);
+  >(
+    routes.apiEntreprise.dgfip.liassesFiscales(siren, year),
+    mapToDomainObject,
+    { useCase }
+  );
 }
 
 const mapToDomainObject = (
