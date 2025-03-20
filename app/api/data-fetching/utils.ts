@@ -15,10 +15,11 @@ export type IContext = { params: Promise<{ slug: Array<string> }> };
 export interface IHandlerParams {
   useCase?: UseCase;
   isEI?: boolean;
+  year?: string;
 }
 
-export interface IHandler<TResult> {
-  (slug: string, params: IHandlerParams, session: ISession): Promise<TResult>;
+export interface IHandler<TResult, TParams> {
+  (slug: string, params: TParams, session: ISession): Promise<TResult>;
 }
 
 type RouteHandler = (
@@ -142,9 +143,11 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
   };
 }
 
-export function withUseCase<TResult>(handler: IHandler<TResult>) {
-  return (slug: string, params: IHandlerParams, session: ISession) => {
-    if (!params.useCase || params.useCase in UseCase) {
+export function withUseCase<TResult, TParams extends { useCase: UseCase }>(
+  handler: (slug: string, params: TParams) => TResult
+) {
+  return (slug: string, params: TParams): TResult => {
+    if (!params?.useCase || !Object.values(UseCase).includes(params.useCase)) {
       throw new APIRouteError(
         'Invalid useCase',
         { slug, route: 'withUseCase', params },
@@ -152,12 +155,14 @@ export function withUseCase<TResult>(handler: IHandler<TResult>) {
       );
     }
 
-    return handler(slug, params, session);
+    return handler(slug, params);
   };
 }
 
-export function withRateLimiting<TResult>(handler: IHandler<TResult>) {
-  return async (slug: string, params: IHandlerParams, session: ISession) => {
+export function withRateLimiting<TResult, TParams>(
+  handler: IHandler<TResult, TParams>
+) {
+  return async (slug: string, params: TParams, session: ISession) => {
     const email = session.user?.email;
     if (!email) {
       throw new APIRouteError(
