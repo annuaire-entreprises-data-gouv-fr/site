@@ -19,8 +19,8 @@ export class AgentOverRateLimitException extends Exception {
 const RATE_LIMITS = {
   TEN_MINUTES: 100,
   ONE_HOUR: 200,
-  ONE_DAY: 1000,
-  ONE_WEEK: 5000,
+  ONE_DAY: 2000,
+  ONE_WEEK: 10000,
 } as const;
 
 class AgentRateLimiter {
