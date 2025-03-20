@@ -34,6 +34,7 @@ const mapToDomainObject = (
   const { agrement = [] } = association;
   const { objet = '', lib_famille1 = '' } = association.activites || {};
   const {
+    id_rna,
     nom = '',
     id_ex = '',
     lib_forme_juridique = '',
@@ -71,6 +72,7 @@ const mapToDomainObject = (
 
   return {
     exId: id_ex,
+    idAssociation: id_rna,
     nomComplet: nom,
     objet,
     telephone,
