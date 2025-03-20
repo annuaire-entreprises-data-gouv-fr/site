@@ -147,7 +147,7 @@ export function withUseCase<TResult, TParams extends { useCase: UseCase }>(
   handler: (slug: string, params: TParams) => TResult
 ) {
   return (slug: string, params: TParams): TResult => {
-    if (!params?.useCase || !(params.useCase in UseCase)) {
+    if (!params?.useCase || !Object.values(UseCase).includes(params.useCase)) {
       throw new APIRouteError(
         'Invalid useCase',
         { slug, route: 'withUseCase', params },
