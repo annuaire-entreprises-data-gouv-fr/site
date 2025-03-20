@@ -140,6 +140,7 @@ const EtablissementSection: React.FC<IProps> = ({
             'Convention collective de l’établissement',
             [
               <ConventionCollectivesBadgesSection
+                key="convention-collectives"
                 conventionCollectives={etablissement.listeIdcc}
                 siren={uniteLegale.siren}
               />,

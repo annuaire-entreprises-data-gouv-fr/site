@@ -1,5 +1,6 @@
 export interface IDataAssociation {
   exId: string;
+  idAssociation: string;
   nomComplet: string;
   objet: string;
   telephone: string;

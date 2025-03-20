@@ -18,6 +18,7 @@
     "test:end2end:open": "cypress open --config-file ./cypress/cypress.config.ts",
     "test:end2end:update-snapshots": "jest ./cypress/fixtures/recherche-entreprise/generate.test.ts --silent -u",
     "test:unit": "jest --runInBand --testPathIgnorePatterns='clients|cypress'",
+    "test:unit:debug": "node --inspect-brk=9229 ./node_modules/.bin/jest --runInBand --testPathIgnorePatterns='clients|cypress'",
     "test:api-clients": "jest clients --silent",
     "test:api-clients:update-snapshots": "jest clients --silent -u",
     "lint": "next lint"

@@ -31,9 +31,14 @@ async function getRoute(request: IReqWithSession, context: IContext) {
 
   const searchParams = Object.fromEntries(new URL(request.url).searchParams);
 
-  const validatedParams = {
+  const validatedParams: {
+    isEI: boolean;
+    useCase: UseCase;
+    year: string;
+  } = {
     isEI: searchParams.isEI === 'true',
     useCase: searchParams.useCase as UseCase,
+    year: searchParams.year,
   };
 
   const response = await handler(slug, validatedParams, session);

@@ -33,4 +33,6 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.EspaceAgentConformite]: ApplicationRights.conformite,
   [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]:
     ApplicationRights.effectifsAnnuels,
+  [APIRoutesPaths.EspaceAgentLiassesFiscalesProtected]:
+    ApplicationRights.liassesFiscales,
 };

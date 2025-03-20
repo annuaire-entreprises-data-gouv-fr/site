@@ -12,9 +12,6 @@ table.two-column-table {
   border-right-width: 1px;
   border-right-style: solid;
   vertical-align: baseline;
-
-  /* Min width does not work in table cells https://stackoverflow.com/a/29379832 */
-  width: 30%;
 }
 
 .two-column-table tr > td:first-of-type > div {
