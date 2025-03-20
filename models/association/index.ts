@@ -2,7 +2,7 @@ import { clientAssociation } from '#clients/api-proxy/association';
 import { clientBanGeoLoc } from '#clients/base-adresse-nationale';
 import { HttpNotFound } from '#clients/exceptions';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import { removeSpecialChars, Siren } from '#utils/helpers';
+import { IdRna, removeSpecialChars, Siren } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { EAdministration } from '../administrations/EAdministration';
 import {
@@ -34,6 +34,10 @@ export const getAssociationFromSlug = async (
   let data: IDataAssociation;
   try {
     data = await clientAssociation(siren, uniteLegale.siege.siret);
+
+    if (rna !== data.idAssociation) {
+      data = await clientAssociation(rna as IdRna, uniteLegale.siege.siret);
+    }
 
     const adresseInconsistency = await verifyAdressConsistency(
       siren,
