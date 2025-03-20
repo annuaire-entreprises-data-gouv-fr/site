@@ -3,8 +3,6 @@ name: 'User feedbacks report'
 on:
   schedule:
     - cron: '0 7 * * *'
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 
 jobs:
