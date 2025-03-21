@@ -15,7 +15,7 @@
   target:
     agent: true
   body: |
-    À partir du mardi 18 mars, une limite maximale de consultation des données par plage horaire de l'espace agent est mise en place afin d’éviter tout usage abusif.
+    À partir du mardi 18 mars, une limite maximale de consultations des données par plage horaire de l'espace agent est mise en place afin d’éviter tout usage abusif.
 
     En cas de dépassement d'un seuil, les requêtes sont temporairement bloquées.
 
