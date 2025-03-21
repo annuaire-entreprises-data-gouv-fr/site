@@ -103,10 +103,10 @@ const LandingPageAgent = async (props: AppRouterProps) => {
                   <SimpleSeparator />
                   <ul>
                     <li>Données des non-diffusibles</li>
-                    <li>Date de naissance des dirigeants</li>
+                    <li>Date de naissance des dirigeant(e)s</li>
                     <li>Comparaison des dirigeants RCS/RNE</li>
                     <li>Qualibat, OPQIBI, Qualifelec</li>
-                    <li>Dirigeants des associations</li>
+                    <li>Dirigeant(e)s des associations</li>
                     <li>Documents des associations (PDF)</li>
                     <li>Documents et actes au RNE (PDF)</li>
                     <li>Bilans au RNE (PDF)</li>
@@ -185,7 +185,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
               <div>
                 <p>
                   J’ai directement accès aux informations des entreprises
-                  non-diffusibles, sans avoir a leur demander de documents en
+                  non-diffusibles, sans avoir à leur demander de documents en
                   plus !
                 </p>
                 <div>
@@ -202,7 +202,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
               <div>
                 <p>
                   Je dois vérifier que nos titulaires sont toujours à jour de
-                  leurs obligationsfiscales et sociales pour une attribution et
+                  leurs obligations fiscales et sociales pour une attribution et
                   un suivi des marchés publics.
                 </p>
                 <div>
