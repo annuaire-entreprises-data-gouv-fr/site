@@ -56,40 +56,43 @@ section.value img {
 
 .case-example {
   display: flex;
-  align-items: center;
+  gap: 20px;
+}
+
+.case-example > div {
+  border-radius: 3px;
+  padding: 20px;
+  background-color: #fff;
+  flex-grow: 1;
+  position: relative;
+}
+
+.case-example > div p {
+  max-width: 75%;
+}
+
+.case-example > div:before {
+  content: '”';
+  position: absolute;
+  font-size: 20rem;
+  font-family: 'arial';
+  right: 12%;
+  top: 200px;
+  color: var(--annuaire-colors-pastelBlue);
+  opacity: 0.5;
+  z-index: 0;
 }
 
 .case-example img {
-  margin-right: 20px;
-  padding: 4rem;
-  padding-top: 0;
-  padding-bottom: 4rem;
-  margin: 0 -2rem;
-  background: radial-gradient(
-    circle at center,
-    var(--background-alt-blue-france) 0%,
-    var(--background-alt-blue-france) 50%,
-    #ffffff 50%
-  );
-}
-
-.case-example img + * {
-  border-left: 2px solid var(--background-alt-blue-france);
-  padding-left: 1.5rem;
+  height: 6rem;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 @media (max-width: 768px) {
   .case-example {
     flex-wrap: wrap;
     margin-bottom: 2rem;
-  }
-
-  .case-example img {
-    height: 4rem;
-    padding: 1rem;
-    margin: 0;
-    background: var(--background-alt-blue-france);
-    border-radius: 0.5rem;
-    border-bottom-left-radius: 0;
   }
 }

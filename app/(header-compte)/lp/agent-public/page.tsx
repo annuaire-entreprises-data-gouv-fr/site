@@ -169,58 +169,68 @@ const LandingPageAgent = async (props: AppRouterProps) => {
           </div>
         </section>
       </FullWidthContainer>
-      <section>
-        <h2>Comment l’Annuaire vous aide au quotidien ?</h2>
-        <div
-          className="fr-grid-row fr-grid-row--gutters"
-          style={{ marginTop: '1rem' }}
-        >
-          <div className={`fr-col-12 fr-col-md-6 ${styles['case-example']}`}>
-            <img
-              src="/images/lp-agent/woman-work-with-dashboard 1.svg"
-              alt=""
-            />
-            <div>
-              <Tag color="agent">
-                <Icon slug="lockFill">Écarter les risque de fraude</Icon>
-              </Tag>
-              <p>“bla bli blu”</p>
-              <i></i>
-            </div>
-          </div>
-          <div className={`fr-col-12 fr-col-md-6 ${styles['case-example']}`}>
-            <img src="/images/lp-agent/Group.svg" alt="" />
-            <div>
-              <Tag color="agent">
-                <Icon slug="lockFill">Instruire un marché public</Icon>
-              </Tag>
-              <p>“bla bli blu”</p>
-              <i></i>
-            </div>
-          </div>
-        </div>
-      </section>
       <FullWidthContainer
         style={{
           background: 'var(--annuaire-colors-pastelBlue)',
         }}
       >
-        <section
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1rem',
-          }}
-        >
-          <h2>
-            Rejoignez les agents qui utilisent déjà l’Annuaire des Entreprises !
-          </h2>
-          <ButtonLink to={constants.links.tchap}>
-            Rejoindre la communauté sur Tchap
-          </ButtonLink>
+        <section>
+          <h2>Comment l’Annuaire vous aide au quotidien ?</h2>
+          <div className={styles['case-example']}>
+            <div>
+              <Tag color="agent">
+                <Icon slug="lockFill">Écarter les risque de fraude</Icon>
+              </Tag>
+              <img src="/images/lp-agent/illu_fraude.svg" alt="" />
+              <div>
+                <p>
+                  J’ai directement accès aux informations des entreprises
+                  non-diffusibles, sans avoir a leur demander de documents en
+                  plus !
+                </p>
+                <div>
+                  <strong>Chargé du calcul de la cotisation CFE</strong>
+                </div>
+                <i>Administration centrale</i>
+              </div>
+            </div>
+            <div>
+              <Tag color="agent">
+                <Icon slug="lockFill">Instruire un marché public</Icon>
+              </Tag>
+              <img src="/images/lp-agent/illu_marchepublic.svg" alt="" />
+              <div>
+                <p>
+                  Je dois vérifier que nos titulaires sont toujours à jour de
+                  leurs obligationsfiscales et sociales pour une attribution et
+                  un suivi des marchés publics.
+                </p>
+                <div>
+                  <strong>Chargé de mission de la commande publique</strong>
+                </div>
+                <i>Administration déconcentrée</i>
+              </div>
+            </div>
+          </div>
         </section>
       </FullWidthContainer>
+      <br />
+      <section
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '1rem',
+        }}
+      >
+        <h2>
+          Rejoignez les agents qui utilisent déjà l’Annuaire des Entreprises !
+        </h2>
+        <ButtonLink to={constants.links.tchap}>
+          Rejoindre la communauté sur Tchap
+        </ButtonLink>
+      </section>
+      <br />
       <section>
         <h3>
           L’Annuaire des Entreprises est opéré par la DINUM, avec le partenariat
