@@ -150,7 +150,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
                   <i>
                     🚧 fonctionnalité en cours de construction.{' '}
                     <a href={constants.links.tchap}>Suivez-nous sur Tchap</a>{' '}
-                    pour être informé(e) des avancés.
+                    pour être informé(e) des avancées.
                   </i>
                 </div>
               </div>
