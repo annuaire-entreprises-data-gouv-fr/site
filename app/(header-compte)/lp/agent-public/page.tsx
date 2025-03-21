@@ -185,7 +185,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
               <div>
                 <p>
                   J’ai directement accès aux informations des entreprises
-                  non-diffusibles, sans avoir a leur demander de documents en
+                  non-diffusibles, sans avoir à leur demander de documents en
                   plus !
                 </p>
                 <div>
@@ -202,7 +202,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
               <div>
                 <p>
                   Je dois vérifier que nos titulaires sont toujours à jour de
-                  leurs obligationsfiscales et sociales pour une attribution et
+                  leurs obligations fiscales et sociales pour une attribution et
                   un suivi des marchés publics.
                 </p>
                 <div>
