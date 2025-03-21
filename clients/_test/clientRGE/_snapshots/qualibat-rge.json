@@ -4,12 +4,12 @@
   ],
   "result": {
     "companyInfo": {
-      "adresse": "1316 RTE DE LESTAR, 81170, CORDES",
+      "adresse": "LA VAURELLE 1316 ROUTE DE LESTAR, 81170, CORDES SUR CIEL",
       "email": "compta@besoin2toit.fr",
       "nomEntreprise": "BESOIN DE TOIT",
       "siret": "84370107900017",
       "siteInternet": "",
-      "telephone": "06 88 47 70 42",
+      "telephone": "",
       "workingWithIndividual": true
     },
     "certifications": [
@@ -19,14 +19,12 @@
         "domaines": [
           "Isolation par l'intérieur des murs ou rampants de toitures  ou plafonds",
           "Isolation des toitures terrasses ou des toitures par l'extérieur",
-          "Isolation des combles perdus",
-          "Isolation des planchers bas",
-          "Isolation des murs par l'extérieur"
+          "Isolation des combles perdus"
         ],
         "nomCertificat": "QUALIBAT-RGE",
         "nomQualification": "Tuiles canal (3111D111)",
         "organisme": "qualibat",
-        "urlQualification": "https://www.qualibat.com/Views/GetFichier.aspx?fn=2024\\SIEG-Certificat-177096-E177096-2-20240623-RGEAnnexe.pdf"
+        "urlQualification": "https://www.qualibat.com/Views/GetFichier.aspx?fn=2025\\D31-Certificat-177096-E177096-1-20250217-RGEAnnexe.pdf"
       }
     ]
   }

@@ -48,11 +48,11 @@
           },
           "listeIdcc": [
             {
-              "idcc": "5021",
+              "idcc": "5003",
               "title": ""
             },
             {
-              "idcc": "5003",
+              "idcc": "5021",
               "title": ""
             }
           ]
@@ -103,11 +103,11 @@
               },
               "listeIdcc": [
                 {
-                  "idcc": "5021",
+                  "idcc": "5003",
                   "title": ""
                 },
                 {
-                  "idcc": "5003",
+                  "idcc": "5021",
                   "title": ""
                 }
               ]
@@ -150,11 +150,11 @@
               },
               "listeIdcc": [
                 {
-                  "idcc": "5021",
+                  "idcc": "5003",
                   "title": ""
                 },
                 {
-                  "idcc": "5003",
+                  "idcc": "5021",
                   "title": ""
                 }
               ]
@@ -162,8 +162,8 @@
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 2906,
-          "nombreEtablissements": 3015,
+          "nombreEtablissementsOuverts": 2913,
+          "nombreEtablissements": 3022,
           "usePagination": true,
           "currentEtablissementPage": 1
         },
@@ -172,7 +172,7 @@
         "dateCreation": "1983-03-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-11-18T16:40:16",
+        "dateMiseAJourInsee": "2025-03-10T16:06:28.029",
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -1699,18 +1699,18 @@
             "title": ""
           },
           {
-            "idcc": "1043",
+            "idcc": "9999",
             "title": ""
           },
           {
-            "idcc": "9999",
+            "idcc": "1043",
             "title": ""
           }
         ],
         "immatriculation": null,
         "matchingEtablissements": [],
-        "nombreEtablissements": 3015,
-        "nombreEtablissementsOuverts": 2906,
+        "nombreEtablissements": 3022,
+        "nombreEtablissementsOuverts": 2913,
         "dirigeants": []
       }
     ]
