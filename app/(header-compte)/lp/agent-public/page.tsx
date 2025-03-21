@@ -103,10 +103,10 @@ const LandingPageAgent = async (props: AppRouterProps) => {
                   <SimpleSeparator />
                   <ul>
                     <li>Données des non-diffusibles</li>
-                    <li>Date de naissance des dirigeants</li>
+                    <li>Date de naissance des dirigeant(e)s</li>
                     <li>Comparaison des dirigeants RCS/RNE</li>
                     <li>Qualibat, OPQIBI, Qualifelec</li>
-                    <li>Dirigeants des associations</li>
+                    <li>Dirigeant(e)s des associations</li>
                     <li>Documents des associations (PDF)</li>
                     <li>Documents et actes au RNE (PDF)</li>
                     <li>Bilans au RNE (PDF)</li>
