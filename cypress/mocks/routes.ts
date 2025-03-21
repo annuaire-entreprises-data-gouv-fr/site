@@ -34,6 +34,7 @@ import { eoriHandler } from './handlers/eori';
 import { gristHandler } from './handlers/grist';
 import { igHandler } from './handlers/ig';
 import { journalOfficielAssociationsHandler } from './handlers/journal-officiel-associations';
+import { liensCapitalistiquesHandler } from './handlers/liens-capitalistiques';
 import { mandatairesRcsHandler } from './handlers/mandataires-rcs';
 import { odsMetadataHandler } from './handlers/ods-metadata';
 import { effectifsHandler } from './handlers/rcd-effectifs-annuels';
@@ -124,6 +125,12 @@ export const routesHandlers = [
       '*'
     )}`,
     effectifsHandler
+  ),
+  http.get(
+    `${
+      process.env.API_ENTREPRISE_URL
+    }${routes.apiEntreprise.dgfip.liensCapitalistiques('*', '*')}`,
+    liensCapitalistiquesHandler
   ),
   http.get(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale(

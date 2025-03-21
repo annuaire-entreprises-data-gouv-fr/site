@@ -20,6 +20,7 @@ export enum ApplicationRights {
   effectifsAnnuels = 'Effectifs annuels (RCD)',
   bilans = 'Accès aux bilans (Banque de France)',
   chiffreAffaires = 'Accès aux chiffres d’affaires (DGFiP)',
+  liensCapitalistiques = 'Accès aux liens capitalistiques (DGFiP)',
   travauxPublics = 'Accès aux données relatives aux travaux publics',
   administrateur = 'Administrateur',
   liassesFiscales = 'Accès aux liasses fiscales (DGFiP)',
@@ -45,6 +46,8 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
       return userScopes.includes('chiffre_affaires');
     case ApplicationRights.liassesFiscales:
       return userScopes.includes('liasses_fiscales');
+    case ApplicationRights.liensCapitalistiques:
+      return userScopes.includes('liens_capitalistiques');
     case ApplicationRights.effectifsAnnuels:
       return userScopes.includes('effectifs_annuels');
     case ApplicationRights.protectedCertificats:
