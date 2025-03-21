@@ -179,7 +179,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
           <div className={styles['case-example']}>
             <div>
               <Tag color="agent">
-                <Icon slug="lockFill">Écarter les risque de fraude</Icon>
+                <Icon slug="lockFill">Écarter les risques de fraude</Icon>
               </Tag>
               <img src="/images/lp-agent/illu_fraude.svg" alt="" />
               <div>
