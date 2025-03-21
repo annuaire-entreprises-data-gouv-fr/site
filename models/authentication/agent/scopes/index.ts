@@ -20,4 +20,5 @@ export const allAgentScopes = [
   'bilans',
   'administrateur',
   'liasses_fiscales',
+  'liens_capitalistiques',
 ] as const;

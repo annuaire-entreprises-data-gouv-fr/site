@@ -52,7 +52,11 @@ export const Tabs: React.FC<{
     },
     {
       ficheType: FICHE.DIRIGEANTS,
-      label: isCollectiviteTerritoriale(uniteLegale) ? 'Élus' : 'Dirigeants',
+      label: isCollectiviteTerritoriale(uniteLegale)
+        ? 'Élus'
+        : hasRights(session, ApplicationRights.liensCapitalistiques)
+        ? 'Dirigeants et actionnaires'
+        : 'Dirigeants',
       pathPrefix: '/dirigeants/',
       noFollow: false,
       shouldDisplay: true,
