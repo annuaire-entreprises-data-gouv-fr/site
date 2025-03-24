@@ -53,7 +53,10 @@ function LiensCapitalistiquesContent({
 
   if (isAPI404(liensCapitalistiquesProtected)) {
     return (
-      <p>Les actionnaires déclarés pour cette année n‘ont pas été retrouvés.</p>
+      <p>
+        Les actionnaires et filiales déclarés pour cette année n‘ont pas été
+        retrouvés.
+      </p>
     );
   }
 
@@ -63,37 +66,64 @@ function LiensCapitalistiquesContent({
     );
   }
 
-  const formatLienInfo = (
+  const formatLienActionnaireInfo = (
     lien: IPersonneMoraleLiensCapitalistiques | IEtatCivilLiensCapitalistiques
   ) => {
     if ('denomination' in lien) {
       return [
         <PersonneMoraleInfos dirigeant={lien} />,
         <div>{lien.pourcentage}%</div>,
-        <div>{lien.nombre_parts} parts</div>,
       ];
     } else {
       return [
         <EtatCivilInfos dirigeant={lien} />,
         <div>{lien.pourcentage}%</div>,
-        <div>{lien.nombre_parts} parts</div>,
       ];
     }
   };
 
-  const plural = pluralize(liensCapitalistiquesProtected);
+  const formatLienFilialeInfo = (lien: IPersonneMoraleLiensCapitalistiques) => {
+    return [
+      <PersonneMoraleInfos dirigeant={lien} />,
+      <div>{lien.pourcentage}%</div>,
+    ];
+  };
+
+  const pluralActionnaires = pluralize(
+    liensCapitalistiquesProtected.actionnaires
+  );
+  const pluralFiliales = pluralize(liensCapitalistiquesProtected.filiales);
+  const pluralActionnairesEtFiliales =
+    liensCapitalistiquesProtected.actionnaires.length +
+      liensCapitalistiquesProtected.filiales.length >
+    1
+      ? 's'
+      : '';
 
   return (
     <>
       <p>
-        Cette entreprise possède {liensCapitalistiquesProtected.length}{' '}
-        actionnaire{plural} déclaré{plural} dans la liasse fiscale de la{' '}
-        <DGFiP /> pour l‘année {selectedYear} :
+        Cette entreprise possède{' '}
+        {liensCapitalistiquesProtected.actionnaires.length} actionnaire
+        {pluralActionnaires} et {liensCapitalistiquesProtected.filiales.length}{' '}
+        filiale{pluralFiliales} déclaré{pluralActionnairesEtFiliales} dans la
+        liasse fiscale de la <DGFiP /> pour l‘année {selectedYear} :
       </p>
+      <br />
       <FullTable
         verticalAlign="top"
-        head={['Détenteur', 'Pourcentage de détention', 'Nombre de parts']}
-        body={liensCapitalistiquesProtected.map((lien) => formatLienInfo(lien))}
+        head={['Actionnaires', 'Pourcentage de détention']}
+        body={liensCapitalistiquesProtected.actionnaires.map((actionnaire) =>
+          formatLienActionnaireInfo(actionnaire)
+        )}
+      />
+      <br />
+      <FullTable
+        verticalAlign="top"
+        head={['Filiales', 'Pourcentage de détention']}
+        body={liensCapitalistiquesProtected.filiales.map((filiale) =>
+          formatLienFilialeInfo(filiale)
+        )}
       />
     </>
   );
@@ -145,7 +175,8 @@ export default function ProtectedLiensCapitalistiques({
         />
       ) : (
         <i>
-          Sélectionnez une année pour voir les actionnaires de l‘entreprise.
+          Sélectionnez une année pour voir les actionnaires et filiales de
+          l‘entreprise.
         </i>
       )}
     </Section>

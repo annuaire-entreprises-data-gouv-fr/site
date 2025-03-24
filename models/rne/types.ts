@@ -55,7 +55,7 @@ export type IPersonneMoraleMergedIGInpi = IPersonneMorale & {
 
 export type IPersonneMoraleLiensCapitalistiques = IPersonneMorale & {
   pourcentage: number;
-  nombre_parts: number;
+  nombre_parts?: number;
 };
 
 export type IObservations = {

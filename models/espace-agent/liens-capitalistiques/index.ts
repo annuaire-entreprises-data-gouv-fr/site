@@ -8,9 +8,12 @@ import { UseCase } from '#models/use-cases';
 import { verifySiren } from '#utils/helpers';
 import { handleApiEntrepriseError } from '../utils';
 
-export type ILiensCapitalistiquesProtected = Array<
-  IPersonneMoraleLiensCapitalistiques | IEtatCivilLiensCapitalistiques
->;
+export type ILiensCapitalistiquesProtected = {
+  actionnaires: Array<
+    IPersonneMoraleLiensCapitalistiques | IEtatCivilLiensCapitalistiques
+  >;
+  filiales: Array<IPersonneMoraleLiensCapitalistiques>;
+};
 
 export const getLiensCapitalistiquesProtected = async (
   maybeSiren: string,

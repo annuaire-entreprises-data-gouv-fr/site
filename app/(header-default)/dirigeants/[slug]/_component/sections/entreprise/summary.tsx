@@ -27,6 +27,9 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
           </a>
         </li>
         <li>
+          <a href="#liens-capitalistiques">Liste des liens capitalistiques</a>
+        </li>
+        <li>
           <a href="#beneficiaires">Liste des bénéficiaires effectifs</a>
         </li>
       </ul>

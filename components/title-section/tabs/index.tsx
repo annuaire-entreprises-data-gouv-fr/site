@@ -55,7 +55,7 @@ export const Tabs: React.FC<{
       label: isCollectiviteTerritoriale(uniteLegale)
         ? 'Élus'
         : hasRights(session, ApplicationRights.liensCapitalistiques)
-        ? 'Dirigeants et actionnaires'
+        ? 'Dirigeants et actionnariat'
         : 'Dirigeants',
       pathPrefix: '/dirigeants/',
       noFollow: false,
