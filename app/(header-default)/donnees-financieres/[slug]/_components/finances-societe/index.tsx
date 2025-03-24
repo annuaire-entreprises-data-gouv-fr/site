@@ -1,5 +1,6 @@
 'use client';
 
+import { DGFiP } from '#components/administrations';
 import { AskUseCase } from '#components/section-with-use-case/ask-use-case';
 import {
   ApplicationRights,
@@ -25,9 +26,13 @@ export function FinancesSocieteSection({
     <>
       {hasRights(session, ApplicationRights.chiffreAffaires) && !useCase && (
         <div style={{ marginBottom: '10px' }}>
-          Vos droits vous permettent d‘enrichir cette section avec les données
-          de chiffres d‘affaires de la DGFiP.
-          <AskUseCase idPrefix="finances-societe" setUseCase={setUseCase} />
+          Vos droits vous donnent accès aux chiffres d‘affaires déclarés à la{' '}
+          <DGFiP />.
+          <AskUseCase
+            idPrefix="finances-societe"
+            setUseCase={setUseCase}
+            label="Pour les ajouter à la section suivante, déclarez un cas d'usage :"
+          />
         </div>
       )}
       {useCase ? (

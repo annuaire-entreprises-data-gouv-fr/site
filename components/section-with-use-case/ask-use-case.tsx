@@ -5,16 +5,19 @@ export function AskUseCase({
   idPrefix,
   useCase,
   setUseCase,
+  label,
 }: {
   idPrefix: string;
   useCase?: UseCase;
   setUseCase: (useCase: UseCase) => void;
+  label?: string;
 }) {
   return (
     <>
       <form>
         <label>
-          Dans quel cadre juridique souhaitez-vous accéder à ces données ?
+          {label ||
+            'Dans quel cadre juridique souhaitez-vous accéder à ces données ?'}
         </label>
         <br />
         <MultiChoice
