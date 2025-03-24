@@ -79,19 +79,31 @@ const mergeFinancesSocieteWithChiffreAffaires = (
 ): IFinancesSocieteIndicateursFinanciers => {
   return {
     ...financesSociete,
-    bilans: [
-      ...(financesSociete?.bilans ?? []).map((bilan) => ({
+    bilans: (() => {
+      const existingYears = new Set(
+        (financesSociete?.bilans ?? []).map((bilan) => bilan.year)
+      );
+
+      const mergedBilans = (financesSociete?.bilans ?? []).map((bilan) => ({
         ...bilan,
         chiffreDAffairesDgfip: chiffreAffairesProtected?.find(
           (ca) => ca.year === bilan.year
         )?.chiffreAffaires,
-      })),
-      ...(chiffreAffairesProtected ?? []).map((caProtected) => ({
-        year: caProtected.year,
-        chiffreDAffaires: caProtected.chiffreAffaires,
-        confidentiality: financesSociete?.bilans[0].confidentiality ?? 'Public',
-        dateClotureExercice: '',
-      })),
-    ].sort((a, b) => a.year - b.year),
+      }));
+
+      const additionalBilans = (chiffreAffairesProtected ?? [])
+        .filter((caProtected) => !existingYears.has(caProtected.year))
+        .map((caProtected) => ({
+          year: caProtected.year,
+          chiffreDAffairesDgfip: caProtected.chiffreAffaires,
+          confidentiality:
+            financesSociete?.bilans?.[0]?.confidentiality ?? 'Public',
+          dateClotureExercice: '',
+        }));
+
+      return [...mergedBilans, ...additionalBilans].sort(
+        (a, b) => a.year - b.year
+      );
+    })(),
   };
 };

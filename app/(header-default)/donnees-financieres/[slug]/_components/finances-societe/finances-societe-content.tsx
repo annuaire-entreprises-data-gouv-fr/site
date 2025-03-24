@@ -112,7 +112,7 @@ export function FinancesSocieteContent({
       <p>
         Voici les résultats financiers
         {financesSociete.hasBilanConsolide ? ' consolidés' : ''} publiés par
-        l’entreprise pour les {bilans.length} dernier
+        l’entreprise pour {plural ? `les ${bilans.length}` : 'le'} dernier
         {plural} exercice
         {plural}&nbsp;:
       </p>
@@ -200,7 +200,7 @@ function formatCA(ca: number | undefined, caDgfip: number | undefined) {
         <div>{formatCurrency(ca ?? '')} </div>
         <div>
           {formatCurrency(caDgfip ?? '')}{' '}
-          <FAQLink tooltipLabel="(incohérence avec DGFiP)">
+          <FAQLink tooltipLabel="(DGFiP)">
             Cette donnée provient de la DGFiP, elle est différente de la donnée
             publique.
           </FAQLink>
