@@ -31,21 +31,20 @@ export default function DonneesFinancieresSociete({
     <>
       {estDiffusible(uniteLegale) ||
       hasRights(session, ApplicationRights.nonDiffusible) ? (
-        <>
-          <FinancesSocieteSection uniteLegale={uniteLegale} session={session} />
-          {hasRights(session, ApplicationRights.bilans) &&
-            isMoreThanThreeYearsOld && (
-              <BilansSocieteSection
-                uniteLegale={uniteLegale}
-                session={session}
-              />
-            )}
-        </>
+        <FinancesSocieteSection uniteLegale={uniteLegale} session={session} />
       ) : (
         <DonneesPriveesSection title="Indicateurs financiers" />
       )}
+      {hasRights(session, ApplicationRights.bilans) &&
+        isMoreThanThreeYearsOld && (
+          <>
+            <HorizontalSeparator />
+            <BilansSocieteSection uniteLegale={uniteLegale} session={session} />
+          </>
+        )}
       <HorizontalSeparator />
       <BilansDocumentsSociete uniteLegale={uniteLegale} session={session} />
+      <HorizontalSeparator />
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
       <LiassesFiscalesSection uniteLegale={uniteLegale} session={session} />
     </>
