@@ -1,6 +1,10 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agents';
-import { PrestataireException } from '#models/authentication/authentication-exceptions';
+import {
+  NeedASiretException,
+  PrestataireException,
+} from '#models/authentication/authentication-exceptions';
+import { isSiret, verifySiret } from '#utils/helpers';
 import { AgentOrganisation } from '../organisation';
 import { defaultAgentScopes } from '../scopes';
 
@@ -20,7 +24,16 @@ export class AgentConnected {
     this.familyName = userInfo.family_name ?? '';
     this.firstName = userInfo.given_name ?? '';
     this.userId = userInfo.sub;
-    this.siret = (userInfo.siret || '').replaceAll(' ', '');
+
+    const siretAsString = (userInfo.siret || '').replaceAll(' ', '');
+    if (!siretAsString || !isSiret(siretAsString)) {
+      throw new NeedASiretException(
+        'The user doesn‘t have a siret',
+        `${this.domain} - ${this.idpId}`
+      );
+    }
+
+    this.siret = verifySiret(siretAsString);
   }
 
   extractDomain(email: string) {
@@ -90,11 +103,7 @@ export class AgentConnected {
   }
 
   async getOrganisationHabilitation() {
-    const organisation = new AgentOrganisation(
-      this.domain,
-      this.idpId,
-      this.siret
-    );
+    const organisation = new AgentOrganisation(this.idpId, this.siret);
     return await organisation.getHabilitationLevel();
   }
 

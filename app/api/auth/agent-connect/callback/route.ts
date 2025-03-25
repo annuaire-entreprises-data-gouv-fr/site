@@ -7,7 +7,6 @@ import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
-import { Information } from '#models/exceptions';
 import { logFatalErrorInSentry, logInfoInSentry } from '#utils/sentry';
 import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
@@ -15,21 +14,10 @@ import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
 
 export const GET = withSession(async function callbackRoute(req) {
-  let siretStr = '' as string | undefined;
+  let siretForException = '' as string | undefined;
   try {
     const userInfo = await proConnectAuthenticate(req);
-    siretStr = userInfo.siret;
-
-    if (!userInfo.siret) {
-      logInfoInSentry(
-        new Information({
-          name: 'AgentNoSiret',
-          context: {
-            details: userInfo.idp_id,
-          },
-        })
-      );
-    }
+    siretForException = userInfo.siret;
 
     const agent = new AgentConnected(userInfo);
 
@@ -57,7 +45,7 @@ export const GET = withSession(async function callbackRoute(req) {
     logFatalErrorInSentry(
       new AgentConnectionFailedException({
         cause: e,
-        context: { slug: siretStr || 'siret non renseigné' },
+        context: { slug: siretForException || 'siret non renseigné' },
       })
     );
     if (e instanceof PrestataireException) {
@@ -69,12 +57,7 @@ export const GET = withSession(async function callbackRoute(req) {
         getBaseUrl() + '/connexion/habilitation/requise'
       );
     } else if (e instanceof NeedASiretException) {
-      logInfoInSentry(
-        new Information({
-          name: 'NeedASiretException',
-          message: siretStr || 'siret non renseigné',
-        })
-      );
+      logInfoInSentry(e);
 
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/administration-inconnue'

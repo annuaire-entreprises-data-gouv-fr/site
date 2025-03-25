@@ -1,12 +1,9 @@
 import { HttpForbiddenError, HttpServerError } from '#clients/exceptions';
 import { isAPINotResponding } from '#models/api-not-responding';
-import {
-  CanRequestAuthorizationException,
-  NeedASiretException,
-} from '#models/authentication/authentication-exceptions';
+import { CanRequestAuthorizationException } from '#models/authentication/authentication-exceptions';
 import { isServicePublic, IUniteLegale } from '#models/core/types';
 import { fetchUniteLegaleFromRechercheEntreprise } from '#models/core/unite-legale';
-import { extractSirenFromSiret, Siren } from '#utils/helpers';
+import { extractSirenFromSiret, Siren, Siret } from '#utils/helpers';
 import { defaultAgentScopes } from '../scopes';
 import {
   isAdministrationButNotL100_3,
@@ -30,18 +27,8 @@ export class AgentOrganisation {
   private isFromMCP: boolean;
   private siren: Siren;
 
-  constructor(private domain: string, private idpId: string, siret: string) {
+  constructor(idpId: string, siret: Siret) {
     this.isFromMCP = this.isMCP(idpId);
-
-    if (!siret) {
-      throw new NeedASiretException(
-        'The user doesn‘t have a siret',
-        `${this.domain} - ${this.idpId} - ${
-          this.isFromMCP ? 'ProConnectIdentité' : 'FI ministères'
-        }`
-      );
-    }
-
     this.siren = extractSirenFromSiret(siret);
   }
 
