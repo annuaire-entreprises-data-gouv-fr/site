@@ -27,7 +27,7 @@
     "@aws-sdk/client-s3": "^3.758.0",
     "@react-spring/web": "^9.7.5",
     "@sentry/browser": "^8.55.0",
-    "@sentry/nextjs": "^8.55.0",
+    "@sentry/nextjs": "^9.9.0",
     "@vcarl/remark-headings": "^0.1.0",
     "axios": "^1.8.3",
     "canvas": "^2.11.2",
