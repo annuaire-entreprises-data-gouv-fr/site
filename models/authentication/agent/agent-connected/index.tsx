@@ -39,9 +39,7 @@ export class AgentConnected {
       'demarches-simplifiees.fr',
       'entreprise.api.gouv.fr',
       'franceconnect.gouv.fr',
-      'mail.numerique.gouv.fr',
       'monstagedetroisieme.fr',
-      'numerique.gouv.fr',
       'scn.rie.gouv.fr',
     ]) {
       if (this.domain.indexOf(bannedDomain) > -1) {

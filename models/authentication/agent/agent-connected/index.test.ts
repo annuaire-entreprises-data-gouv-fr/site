@@ -51,6 +51,24 @@ describe('AgentConnected', () => {
       expect(agent.isLikelyPrestataire()).toBe(true);
     });
 
+    it('should not detect numerique.gouv.fr as prestataire', () => {
+      const prestataireUserInfo = {
+        ...mockUserInfo,
+        email: 'test@numerique.gouv.fr',
+      };
+      const agent = new AgentConnected(prestataireUserInfo);
+      expect(agent.isLikelyPrestataire()).toBe(false);
+    });
+
+    it('should detect numerique.gouv.fr with ext in name as prestataire', () => {
+      const prestataireUserInfo = {
+        ...mockUserInfo,
+        email: 'test.ext@numerique.gouv.fr',
+      };
+      const agent = new AgentConnected(prestataireUserInfo);
+      expect(agent.isLikelyPrestataire()).toBe(true);
+    });
+
     it('should detect prestataire by email pattern', () => {
       const prestataireUserInfo = {
         ...mockUserInfo,
