@@ -15,7 +15,7 @@ import withSession from '#utils/session/with-session';
 import { NextResponse } from 'next/server';
 
 export const GET = withSession(async function callbackRoute(req) {
-  let siretStr = '';
+  let siretStr = '' as string | undefined;
   try {
     const userInfo = await proConnectAuthenticate(req);
     siretStr = userInfo.siret;
@@ -57,7 +57,7 @@ export const GET = withSession(async function callbackRoute(req) {
     logFatalErrorInSentry(
       new AgentConnectionFailedException({
         cause: e,
-        context: { slug: siretStr },
+        context: { slug: siretStr || 'siret non renseigné' },
       })
     );
     if (e instanceof PrestataireException) {
@@ -72,7 +72,7 @@ export const GET = withSession(async function callbackRoute(req) {
       logInfoInSentry(
         new Information({
           name: 'NeedASiretException',
-          message: siretStr,
+          message: siretStr || 'siret non renseigné',
         })
       );
 
