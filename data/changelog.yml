@@ -11,6 +11,15 @@
 #   site: true
 
 ---
+- date: 18/03/2025
+  target:
+    agent: true
+  body: |
+    À partir du mardi 18 mars, une limite maximale de consultations des données par plage horaire de l'espace agent est mise en place afin d’éviter tout usage abusif.
+
+    En cas de dépassement d'un seuil, les requêtes sont temporairement bloquées.
+
+    Plus d'informations ici : [https://guides.data.gouv.fr/guides-de-data.gouv.fr/annuaire-des-entreprises](https://guides.data.gouv.fr/guides-de-data.gouv.fr/annuaire-des-entreprises)
 - date: 21/02/2025
   target:
     agent: true
