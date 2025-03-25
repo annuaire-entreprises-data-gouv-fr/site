@@ -1,5 +1,8 @@
 import { superAgentsList } from '#clients/authentication/super-agents';
-import { PrestataireException } from '#models/authentication/authentication-exceptions';
+import {
+  NeedASiretException,
+  PrestataireException,
+} from '#models/authentication/authentication-exceptions';
 import { AgentOrganisation } from '../organisation';
 import { AgentConnected } from './index';
 
@@ -23,6 +26,22 @@ describe('AgentConnected', () => {
     sub: 'test-user-id',
   };
 
+  const mockUserInfoNoSiret = {
+    idp_id: 'test-idp',
+    email: 'test@example.com',
+    email_verified: true,
+    family_name: 'Doe',
+    given_name: 'John',
+    phone_number: '+33612345678',
+    job: 'Developer',
+    siret: '',
+    is_external: false,
+    label: 'Test Label',
+    is_collectivite_territoriale: false,
+    is_service_public: true,
+    sub: 'test-user-id',
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -38,6 +57,12 @@ describe('AgentConnected', () => {
       expect(agent['firstName']).toBe(mockUserInfo.given_name);
       expect(agent['userId']).toBe(mockUserInfo.sub);
       expect(agent['siret']).toBe('12345678900000');
+    });
+
+    it('should fail to initialize without SIRET', () => {
+      expect(() => new AgentConnected(mockUserInfoNoSiret)).toThrow(
+        NeedASiretException
+      );
     });
   });
 
