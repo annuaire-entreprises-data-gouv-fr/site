@@ -79,7 +79,7 @@ export type IProConnectUserInfo = {
   given_name: string | null;
   phone_number: string | null;
   job: string | null;
-  siret: string;
+  siret?: string;
   is_external: boolean;
   label: string | null;
   is_collectivite_territoriale: boolean;

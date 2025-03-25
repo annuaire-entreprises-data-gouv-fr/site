@@ -20,7 +20,7 @@ export class AgentConnected {
     this.familyName = userInfo.family_name ?? '';
     this.firstName = userInfo.given_name ?? '';
     this.userId = userInfo.sub;
-    this.siret = userInfo.siret.replaceAll(' ', '');
+    this.siret = (userInfo.siret || '').replaceAll(' ', '');
   }
 
   extractDomain(email: string) {
