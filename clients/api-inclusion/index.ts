@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import constants from '#models/constants';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
@@ -11,7 +12,10 @@ import { httpGet } from '#utils/network';
 export const clientAPIInclusion = async (siren: Siren) => {
   const url = routes.certifications.entrepriseInclusive.api.getBySiren(siren);
   const response = await httpGet<APIInclusionResponse[]>(url, {
-    params: { token: process.env.API_MARCHE_INCLUSION_TOKEN },
+    headers: {
+      Authorization: `Bearer ${process.env.API_MARCHE_INCLUSION_TOKEN}`,
+    },
+    timeout: constants.timeout.XXXL,
   });
 
   if (response.length === 0) {

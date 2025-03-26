@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import constants from '#models/constants';
 import { DataStore } from '#utils/data-store';
 import { httpGet } from '#utils/network';
 
@@ -12,7 +13,13 @@ function mapToDomainObject(response: { results: InclusionMetadata[] }) {
 }
 
 const store = new DataStore<InclusionMetadata>(
-  () => httpGet(routes.certifications.entrepriseInclusive.api.metadata),
+  () =>
+    httpGet(routes.certifications.entrepriseInclusive.api.metadata, {
+      headers: {
+        Authorization: `Bearer ${process.env.API_MARCHE_INCLUSION_TOKEN}`,
+      },
+      timeout: constants.timeout.XXXL,
+    }),
   'inclusion-metadata',
   mapToDomainObject
 );

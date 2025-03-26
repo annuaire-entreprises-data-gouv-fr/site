@@ -7,7 +7,12 @@ import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
-import { logFatalErrorInSentry, logInfoInSentry } from '#utils/sentry';
+import { Information } from '#models/exceptions';
+import {
+  logFatalErrorInSentry,
+  logInfoInSentry,
+  logWarningInSentry,
+} from '#utils/sentry';
 import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
 import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
 import withSession from '#utils/session/with-session';
@@ -18,6 +23,33 @@ export const GET = withSession(async function callbackRoute(req) {
   try {
     const userInfo = await proConnectAuthenticate(req);
     siretForException = userInfo.siret;
+
+    if (!userInfo.siret) {
+      try {
+        logWarningInSentry(
+          new Information({
+            name: 'NoSiretExceptionnalLogs',
+            context: {
+              details: JSON.stringify({
+                ...userInfo,
+                family_name: '***',
+                given_name: '***',
+                sub: '***',
+              }),
+            },
+          })
+        );
+      } catch {
+        logWarningInSentry(
+          new Information({
+            name: 'NoSiretExceptionnalLogs',
+            context: {
+              details: 'cant serialize',
+            },
+          })
+        );
+      }
+    }
 
     const agent = new AgentConnected(userInfo);
 

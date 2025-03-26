@@ -113,6 +113,7 @@ export type IComplements = {
   est_qualiopi: boolean;
   est_finess: boolean;
   est_service_public: boolean;
+  est_l100_3: boolean;
   egapro_renseignee: boolean;
   est_rge: boolean;
   est_uai: boolean;
