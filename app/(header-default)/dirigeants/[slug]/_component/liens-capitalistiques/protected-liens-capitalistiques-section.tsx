@@ -174,14 +174,17 @@ export default function ProtectedLiensCapitalistiques({
 }) {
   const [selectedYear, setSelectedYear] = useState<null | string>(null);
 
-  const options = useMemo(
-    () =>
-      Array.from({ length: 10 }, (_, i) => {
-        const year = new Date().getFullYear() - 1 - i;
-        return { value: year.toString(), label: year.toString() };
-      }),
-    []
-  );
+  const options = useMemo(() => {
+    const currentYear = new Date().getFullYear();
+    const creationYear = new Date(uniteLegale.dateCreation).getFullYear();
+
+    const yearsToDisplay = currentYear - creationYear + 1;
+
+    return Array.from({ length: yearsToDisplay }, (_, i) => {
+      const year = currentYear - i;
+      return { value: year.toString(), label: year.toString() };
+    });
+  }, [uniteLegale.dateCreation]);
 
   return (
     <Section title={title} id={id} isProtected={isProtected} sources={sources}>
