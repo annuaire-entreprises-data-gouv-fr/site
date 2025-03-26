@@ -48,6 +48,7 @@ const mapToDomainObject = (
           pourcentage,
           nombre_parts,
           natureJuridique: personne_morale_attributes.forme_juridique,
+          pays: adresse.pays,
           role: '',
         } as IPersonneMoraleLiensCapitalistiques;
       }
@@ -82,6 +83,7 @@ const mapToDomainObject = (
         role: '',
         nationalite: '',
         dateNaissancePartial: `${mois}-${annee}`,
+        pays: adresse.pays,
       } as IEtatCivilLiensCapitalistiques;
     }),
     filiales: response.data.participations.filiales.map((filiale) => {
@@ -90,6 +92,7 @@ const mapToDomainObject = (
         denomination: filiale.denomination,
         pourcentage: filiale.pourcentage_detention,
         natureJuridique: filiale.forme_juridique,
+        pays: filiale.adresse.pays,
         role: '',
       } as IPersonneMoraleLiensCapitalistiques;
     }),

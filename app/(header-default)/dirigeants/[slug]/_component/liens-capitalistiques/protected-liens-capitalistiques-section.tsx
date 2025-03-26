@@ -15,12 +15,12 @@ import {
   IPersonneMoraleLiensCapitalistiques,
 } from '#models/rne/types';
 import { UseCase } from '#models/use-cases';
-import { pluralize } from '#utils/helpers/formatting/formatting';
+import { formatIntFr, pluralize } from '#utils/helpers/formatting/formatting';
 import EtatCivilInfos from 'app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/EtatCivilInfos';
-import PersonneMoraleInfos from 'app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/PersonneMoraleInfos';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { ChangeEvent, useMemo, useState } from 'react';
+import PersonneMoraleInfos from '../sections/entreprise/PersonneMoraleInfos';
 
 function LiensCapitalistiquesContent({
   uniteLegale,
@@ -73,19 +73,26 @@ function LiensCapitalistiquesContent({
       return [
         <PersonneMoraleInfos dirigeant={lien} />,
         <div>{lien.pourcentage}%</div>,
+        <div>{lien.pays}</div>,
       ];
     } else {
       return [
         <EtatCivilInfos dirigeant={lien} />,
         <div>{lien.pourcentage}%</div>,
+        <div>{lien.pays}</div>,
       ];
     }
   };
 
   const formatLienFilialeInfo = (lien: IPersonneMoraleLiensCapitalistiques) => {
     return [
-      <PersonneMoraleInfos dirigeant={lien} />,
+      <div>{lien.denomination}</div>,
+      <div>
+        <a href={`/entreprise/${lien.siren}`}>{formatIntFr(lien.siren)}</a>
+      </div>,
+      <div>{lien.natureJuridique}</div>,
       <div>{lien.pourcentage}%</div>,
+      <div>{lien.pays}</div>,
     ];
   };
 
@@ -103,24 +110,43 @@ function LiensCapitalistiquesContent({
   return (
     <>
       <p>
+        Les données transmises sont déclaratives et proviennent de deux CERFA
+        des liasses fiscales déposées auprès de la <DGFiP /> :
+        <ul>
+          <li>
+            CERFA 2059F : Composition du capital social (actionnaires,
+            répartition, etc.)
+          </li>
+          <li>CERFA 2059G : Participations (filiales et leurs adresses).</li>
+        </ul>
+      </p>
+      <p>
         Cette entreprise possède{' '}
         {liensCapitalistiquesProtected.actionnaires.length} actionnaire
         {pluralActionnaires} et {liensCapitalistiquesProtected.filiales.length}{' '}
-        filiale{pluralFiliales} déclaré{pluralActionnairesEtFiliales} dans la
-        liasse fiscale de la <DGFiP /> pour l‘année {selectedYear} :
+        filiale{pluralFiliales} déclaré{pluralActionnairesEtFiliales} pour
+        l‘année {selectedYear} :
       </p>
-      <br />
+
+      <h3>Composition du capital</h3>
       <FullTable
         verticalAlign="top"
-        head={['Actionnaires', 'Pourcentage de détention']}
+        head={['Actionnaire', 'Pourcentage de détention', 'Pays']}
         body={liensCapitalistiquesProtected.actionnaires.map((actionnaire) =>
           formatLienActionnaireInfo(actionnaire)
         )}
       />
       <br />
+      <h3>Liste des participations</h3>
       <FullTable
         verticalAlign="top"
-        head={['Filiales', 'Pourcentage de détention']}
+        head={[
+          'Dénomination',
+          'SIREN',
+          'Type',
+          'Pourcentage de détention',
+          'Pays',
+        ]}
         body={liensCapitalistiquesProtected.filiales.map((filiale) =>
           formatLienFilialeInfo(filiale)
         )}

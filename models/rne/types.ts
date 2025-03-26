@@ -32,6 +32,7 @@ export interface IEtatCivil {
 export type IEtatCivilLiensCapitalistiques = IEtatCivil & {
   pourcentage: number;
   nombre_parts: number;
+  pays: string;
 };
 
 export type IEtatCivilMergedIGInpi = IEtatCivil & {
@@ -56,6 +57,7 @@ export type IPersonneMoraleMergedIGInpi = IPersonneMorale & {
 export type IPersonneMoraleLiensCapitalistiques = IPersonneMorale & {
   pourcentage: number;
   nombre_parts?: number;
+  pays: string;
 };
 
 export type IObservations = {
