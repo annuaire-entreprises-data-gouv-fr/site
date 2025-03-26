@@ -26,6 +26,7 @@ export class AgentConnected {
     this.userId = userInfo.sub;
 
     const siretAsString = (userInfo.siret || '').replaceAll(' ', '');
+
     if (!siretAsString || !isSiret(siretAsString)) {
       throw new NeedASiretException(
         'The user doesn‘t have a siret',
