@@ -71,28 +71,28 @@ function LiensCapitalistiquesContent({
   ) => {
     if ('denomination' in lien) {
       return [
+        <div>{lien.pays}</div>,
         <PersonneMoraleInfos dirigeant={lien} />,
         <div>{lien.pourcentage}%</div>,
-        <div>{lien.pays}</div>,
       ];
     } else {
       return [
+        <div>{lien.pays}</div>,
         <EtatCivilInfos dirigeant={lien} />,
         <div>{lien.pourcentage}%</div>,
-        <div>{lien.pays}</div>,
       ];
     }
   };
 
   const formatLienFilialeInfo = (lien: IPersonneMoraleLiensCapitalistiques) => {
     return [
+      <div>{lien.pays}</div>,
       <div>{lien.denomination}</div>,
       <div>
         <a href={`/entreprise/${lien.siren}`}>{formatIntFr(lien.siren)}</a>
       </div>,
       <div>{lien.natureJuridique}</div>,
       <div>{lien.pourcentage}%</div>,
-      <div>{lien.pays}</div>,
     ];
   };
 
@@ -131,7 +131,7 @@ function LiensCapitalistiquesContent({
       <h3>Composition du capital</h3>
       <FullTable
         verticalAlign="top"
-        head={['Actionnaire', 'Pourcentage de détention', 'Pays']}
+        head={['Pays', 'Actionnaire', 'Pourcentage de détention']}
         body={liensCapitalistiquesProtected.actionnaires.map((actionnaire) =>
           formatLienActionnaireInfo(actionnaire)
         )}
@@ -141,11 +141,11 @@ function LiensCapitalistiquesContent({
       <FullTable
         verticalAlign="top"
         head={[
+          'Pays',
           'Dénomination',
           'SIREN',
           'Type',
           'Pourcentage de détention',
-          'Pays',
         ]}
         body={liensCapitalistiquesProtected.filiales.map((filiale) =>
           formatLienFilialeInfo(filiale)
