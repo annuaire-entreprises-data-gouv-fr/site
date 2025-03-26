@@ -1,23 +1,14 @@
 import { HttpForbiddenError, HttpServerError } from '#clients/exceptions';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { CanRequestAuthorizationException } from '#models/authentication/authentication-exceptions';
-import { isServicePublic, IUniteLegale } from '#models/core/types';
+import { IUniteLegale } from '#models/core/types';
 import { fetchUniteLegaleFromRechercheEntreprise } from '#models/core/unite-legale';
 import { extractSirenFromSiret, Siren, Siret } from '#utils/helpers';
 import { defaultAgentScopes } from '../scopes';
-import {
-  isAdministrationButNotL100_3,
-  mightBeAnAuthorizedAdministration,
-} from './might-be-an-administration';
+import { mightBeAnAuthorizedAdministration } from './might-be-an-administration';
 import { isOrganisationWhitelisted } from './whitelisted-administrations';
 
-const basicOrganisationHabilitation = {
-  scopes: [...defaultAgentScopes],
-  userType: 'Agent connecté',
-  isSuperAgent: false,
-};
-
-const thrustworthyOrganisationHabilitation = {
+const organisationHabilitation = {
   scopes: [...defaultAgentScopes],
   userType: 'Agent connecté',
   isSuperAgent: false,
@@ -50,11 +41,7 @@ export class AgentOrganisation {
     );
 
     if (isAuthorized) {
-      if (this.isAdministrationTrustworthy()) {
-        return thrustworthyOrganisationHabilitation;
-      } else {
-        return basicOrganisationHabilitation;
-      }
+      return organisationHabilitation;
     } else {
       if (mightBeAnAuthorizedAdministration(codeJuridique)) {
         throw new CanRequestAuthorizationException(
@@ -73,18 +60,10 @@ export class AgentOrganisation {
     if (isOrganisationWhitelisted(this.siren)) {
       return true;
     }
-    if (isServicePublic(uniteLegale)) {
-      if (isAdministrationButNotL100_3(codeJuridique)) {
-        return false;
-      } else {
-        return true;
-      }
+    if (uniteLegale.complements.estL100_3) {
+      return true;
     }
     return false;
-  }
-
-  isAdministrationTrustworthy() {
-    return !this.isMCP;
   }
 
   isMCP(idp_id: string) {
