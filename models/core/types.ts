@@ -206,6 +206,7 @@ export const createDefaultUniteLegaleComplements =
       egaproRenseignee: false,
       statutEntrepreneurSpectacle: '',
       estServicePublic: false,
+      estL100_3: false,
       estFiness: false,
       estRge: false,
       estOrganismeFormation: false,
