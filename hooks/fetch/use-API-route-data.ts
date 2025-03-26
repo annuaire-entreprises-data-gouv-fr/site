@@ -46,6 +46,8 @@ export function useAPIRouteData<T extends APIRoutesPaths>(
 
   useEffect(() => {
     const fetchData = async () => {
+      setResponse(IDataFetchingState.LOADING);
+
       const response = await fetchAPIRoute<T>(route, slug, session, options);
       if (response) {
         setResponse(response);
