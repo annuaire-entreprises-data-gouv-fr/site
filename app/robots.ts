@@ -40,7 +40,6 @@ export default function robots(): MetadataRoute.Robots {
         '/divers/',
         '/erreur/',
         '/formulaire/',
-        '/carte/',
       ],
     },
     sitemap: 'https://annuaire-entreprises.data.gouv.fr/sitemap.xml',

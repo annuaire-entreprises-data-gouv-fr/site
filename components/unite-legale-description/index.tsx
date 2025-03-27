@@ -68,7 +68,7 @@ export const UniteLegaleDescription: React.FC<{
               siège social
             </a>{' '}
             est domicilié au{' '}
-            <a href={`/carte/${uniteLegale.siege.siret}`}>
+            <a href={`/etablissement/${uniteLegale.siege.siret}`}>
               {uniteLegale.siege.adresse}
             </a>
             .

@@ -4,9 +4,10 @@ import { Tag } from '#components-ui/tag';
 import IsActiveTag from '#components-ui/tag/is-active-tag';
 import { NonDiffusibleTag } from '#components-ui/tag/non-diffusible-tag';
 import { EtablissementDescription } from '#components/etablissement-description';
+import MapEtablissement from '#components/map/map-etablissement';
 import { CopyPaste } from '#components/table/copy-paste';
 import { ISession } from '#models/authentication/user/session';
-import { estNonDiffusibleStrict } from '#models/core/diffusion';
+import { estDiffusible, estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
 import {
   formatIntFr,
@@ -45,78 +46,92 @@ const TitleEtablissementWithDenomination: React.FC<{
       statutDiffusion={etablissement.statutDiffusion}
     />
 
-    <h1>
-      Établissement{' '}
-      {etablissement.enseigne ||
-        etablissement.denomination ||
-        uniteLegale.nomComplet}{' '}
-      {etablissement.commune && (
-        <>
-          à{' '}
-          <a href={`/carte/${etablissement.siret}`}>{etablissement.commune}</a>
-        </>
-      )}
-    </h1>
-
-    <div className={styles.subTitle}>
-      <span className={styles.sirenOrSiret}>
-        <CopyPaste
-          shouldRemoveSpace={true}
-          disableCopyIcon={true}
-          label="SIRET"
-        >
-          {formatSiret(etablissement.siret)}
-        </CopyPaste>
-      </span>
-      <NonDiffusibleTag etablissementOrUniteLegale={etablissement} />
-      <IsActiveTag
-        etatAdministratif={etablissement.etatAdministratif}
-        statutDiffusion={etablissement.statutDiffusion}
-        since={etablissement.dateFermeture}
-      />
-    </div>
-    <div className={styles.subSubTitle}>
-      <span>Cet établissement est </span>
-      {etablissement.estSiege ? (
-        <>
-          le{' '}
-          <Tag color="info" size="small">
-            siège social
-          </Tag>
-        </>
-      ) : etablissement.ancienSiege ? (
-        <>
-          un<Tag size="small">ancien siège social</Tag>
-        </>
-      ) : (
-        <Tag size="small">un établissement secondaire</Tag>
-      )}
-      <span>
-        {' '}
-        {uniteLegaleLabelWithPronounContracted(uniteLegale)}{' '}
-        <a href={`/entreprise/${uniteLegale.siren}`}>
-          {uniteLegale.nomComplet}&nbsp;‣&nbsp;
+    <div className="layout-space-between">
+      <div>
+        <h1>
+          Établissement{' '}
+          {etablissement.enseigne ||
+            etablissement.denomination ||
+            uniteLegale.nomComplet}{' '}
+          {etablissement.commune && (
+            <>
+              à{' '}
+              <a href={`/etablissement/${etablissement.siret}`}>
+                {etablissement.commune}
+              </a>
+            </>
+          )}
+        </h1>
+        <div className={styles.subTitle}>
           <span className={styles.sirenOrSiret}>
-            {formatIntFr(uniteLegale.siren)}
+            <CopyPaste
+              shouldRemoveSpace={true}
+              disableCopyIcon={true}
+              label="SIRET"
+            >
+              {formatSiret(etablissement.siret)}
+            </CopyPaste>
           </span>
-        </a>
-        <IsActiveTag
-          etatAdministratif={uniteLegale.etatAdministratif}
-          statutDiffusion={uniteLegale.statutDiffusion}
-          size="small"
+          <NonDiffusibleTag etablissementOrUniteLegale={etablissement} />
+          <IsActiveTag
+            etatAdministratif={etablissement.etatAdministratif}
+            statutDiffusion={etablissement.statutDiffusion}
+            since={etablissement.dateFermeture}
+          />
+        </div>
+        <div className={styles.subSubTitle}>
+          <span>Cet établissement est </span>
+          {etablissement.estSiege ? (
+            <>
+              le{' '}
+              <Tag color="info" size="small">
+                siège social
+              </Tag>
+            </>
+          ) : etablissement.ancienSiege ? (
+            <>
+              un<Tag size="small">ancien siège social</Tag>
+            </>
+          ) : (
+            <Tag size="small">un établissement secondaire</Tag>
+          )}
+          <span>
+            {' '}
+            {uniteLegaleLabelWithPronounContracted(uniteLegale)}{' '}
+            <a href={`/entreprise/${uniteLegale.siren}`}>
+              {uniteLegale.nomComplet}&nbsp;‣&nbsp;
+              <span className={styles.sirenOrSiret}>
+                {formatIntFr(uniteLegale.siren)}
+              </span>
+            </a>
+            <IsActiveTag
+              etatAdministratif={uniteLegale.etatAdministratif}
+              statutDiffusion={uniteLegale.statutDiffusion}
+              size="small"
+            />
+          </span>
+        </div>
+      </div>
+      <div
+        style={{
+          padding: '20px 0',
+          width: '40%',
+        }}
+      >
+        <SocialMedia
+          path={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}
+          label={
+            etablissement.enseigne ||
+            etablissement.denomination ||
+            uniteLegale.nomComplet
+          }
         />
-      </span>
+        {estDiffusible(etablissement) && (
+          <MapEtablissement etablissement={etablissement} />
+        )}
+      </div>
     </div>
     <br />
-
-    <SocialMedia
-      path={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}
-      label={
-        etablissement.enseigne ||
-        etablissement.denomination ||
-        uniteLegale.nomComplet
-      }
-    />
 
     {estNonDiffusibleStrict(etablissement) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
