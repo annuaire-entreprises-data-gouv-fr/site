@@ -1,10 +1,12 @@
-import { DataSection } from '#components/section/data-section';
+'use client';
+
+import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
-import { getDPO } from '#models/dpo';
 import { formatIntFr } from '#utils/helpers';
+import { useFetchDPO } from 'hooks/fetch/dpo';
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -20,11 +22,11 @@ const DPONotFound = () => (
 /**
  * DPO section
  */
-export default async function DPOSection({ uniteLegale, session }: IProps) {
-  const dpo = await getDPO(uniteLegale);
+export default function DPOSection({ uniteLegale }: IProps) {
+  const dpo = useFetchDPO(uniteLegale);
 
   return (
-    <DataSection
+    <AsyncDataSectionClient
       id="dpo-section"
       title="Data Protection Officer (DPO)"
       sources={[EAdministration.CNIL]}
@@ -118,6 +120,6 @@ export default async function DPOSection({ uniteLegale, session }: IProps) {
           />
         </>
       )}
-    </DataSection>
+    </AsyncDataSectionClient>
   );
 }

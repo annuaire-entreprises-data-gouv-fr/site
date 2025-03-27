@@ -42,3 +42,27 @@ type IDPODatagouvResponse = {
     total: number;
   };
 };
+
+type IDPO = {
+  typeDPO: string;
+  organismeDesigne: {
+    siren: string;
+    nom: string;
+    secteurActivite: string;
+    codeNAF: string;
+    adressePostale: string;
+    codePostal: string;
+    ville: string;
+    pays: string;
+  };
+  contact: {
+    email: string;
+    url: string;
+    telephone: string;
+    adressePostale: string;
+    codePostal: string;
+    ville: string;
+    pays: string;
+    autre: string;
+  };
+};
