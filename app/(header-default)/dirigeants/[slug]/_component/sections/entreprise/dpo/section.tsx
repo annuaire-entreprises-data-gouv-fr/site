@@ -28,7 +28,7 @@ export default function DPOSection({ uniteLegale }: IProps) {
   return (
     <AsyncDataSectionClient
       id="dpo-section"
-      title="Data Protection Officer (DPO)"
+      title="Délégué à la Protection des Données (DPO)"
       sources={[EAdministration.CNIL]}
       isProtected={false}
       data={dpo}
@@ -37,8 +37,8 @@ export default function DPOSection({ uniteLegale }: IProps) {
       {(dpo) => (
         <>
           <p className="mt-4">
-            Le Data Protection Officer (DPO) est le point de contact privilégié
-            pour toute question relative à la protection des données
+            Le Délégué à la Protection des Données (DPO) est le point de contact
+            privilégié pour toute question relative à la protection des données
             personnelles. Vous trouverez ci-dessous les coordonnées du DPO
             désigné par cette entreprise.
           </p>
