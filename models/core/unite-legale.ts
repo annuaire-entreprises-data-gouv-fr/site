@@ -37,6 +37,7 @@ import {
   IUniteLegale,
   SirenNotFoundError,
   createDefaultUniteLegale,
+  isEntrepreneurIndividuel,
 } from './types';
 
 /**
@@ -127,8 +128,7 @@ class UniteLegaleBuilder {
     const useInsee = shouldUseInsee(
       uniteLegaleRechercheEntreprise,
       this._isBot,
-      (ul: IUniteLegale) =>
-        !estDiffusible(ul) || ul.complements.estEntrepreneurIndividuel,
+      (ul: IUniteLegale) => !estDiffusible(ul) || isEntrepreneurIndividuel(ul),
       (ul: IUniteLegale) => {
         // checks for inconsistency in recherche response - needs a validation from sirene API
         // - no dateMiseAJourInsee CAN mean there are two siren for this UL

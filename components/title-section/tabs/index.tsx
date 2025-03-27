@@ -10,7 +10,9 @@ import {
 import { ISession } from '#models/authentication/user/session';
 import {
   IUniteLegale,
+  isAssociation,
   isCollectiviteTerritoriale,
+  isEntrepreneurIndividuel,
   isServicePublic,
 } from '#models/core/types';
 import styles from './styles.module.css';
@@ -39,7 +41,7 @@ export const Tabs: React.FC<{
     // hide for public services
     !isServicePublic(uniteLegale) &&
     // hide for EI
-    !uniteLegale.complements.estEntrepreneurIndividuel;
+    !isEntrepreneurIndividuel(uniteLegale);
 
   const tabs = [
     {
@@ -54,7 +56,9 @@ export const Tabs: React.FC<{
       ficheType: FICHE.DIRIGEANTS,
       label: isCollectiviteTerritoriale(uniteLegale)
         ? 'Élus'
-        : hasRights(session, ApplicationRights.liensCapitalistiques)
+        : !isServicePublic(uniteLegale) &&
+          !isAssociation(uniteLegale) &&
+          hasRights(session, ApplicationRights.liensCapitalistiques)
         ? 'Dirigeants et actionnariat'
         : 'Dirigeants',
       pathPrefix: '/dirigeants/',

@@ -3,6 +3,7 @@ import {
   IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
+  isEntrepreneurIndividuel,
   isServicePublic,
 } from '#models/core/types';
 import { formatSiret } from '../siren-and-siret';
@@ -12,7 +13,7 @@ const uniteLegalePronounContracted = (uniteLegale: IUniteLegale) => {
   switch (true) {
     case isAssociation(uniteLegale):
     case isServicePublic(uniteLegale):
-    case uniteLegale.complements.estEntrepreneurIndividuel:
+    case isEntrepreneurIndividuel(uniteLegale):
       return 'de l’';
     case isCollectiviteTerritoriale(uniteLegale):
     default:
@@ -24,7 +25,7 @@ const uniteLegalePronoun = (uniteLegale: IUniteLegale) => {
   switch (true) {
     case isAssociation(uniteLegale):
     case isServicePublic(uniteLegale):
-    case uniteLegale.complements.estEntrepreneurIndividuel:
+    case isEntrepreneurIndividuel(uniteLegale):
       return 'l’';
     default:
       return 'la ';
@@ -49,7 +50,7 @@ export const uniteLegaleLabel = (uniteLegale: IUniteLegale) => {
       return `association`;
     case isServicePublic(uniteLegale):
       return `administration`;
-    case uniteLegale.complements.estEntrepreneurIndividuel:
+    case isEntrepreneurIndividuel(uniteLegale):
       return `entreprise individuelle`;
     default:
       return `société`;

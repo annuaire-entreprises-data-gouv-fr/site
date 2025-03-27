@@ -1,4 +1,8 @@
-import { isServicePublic, IUniteLegale } from '#models/core/types';
+import {
+  isEntrepreneurIndividuel,
+  isServicePublic,
+  IUniteLegale,
+} from '#models/core/types';
 
 type IDirigeantSummaryProps = {
   uniteLegale: IUniteLegale;
@@ -26,9 +30,11 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
             (RNE)
           </a>
         </li>
-        <li>
-          <a href="#liens-capitalistiques">Liste des liens capitalistiques</a>
-        </li>
+        {!isEntrepreneurIndividuel(uniteLegale) && (
+          <li>
+            <a href="#liens-capitalistiques">Liste des liens capitalistiques</a>
+          </li>
+        )}
         <li>
           <a href="#beneficiaires">Liste des bénéficiaires effectifs</a>
         </li>

@@ -259,6 +259,9 @@ export const isAssociation = (
 export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estServicePublic;
 
+export const isEntrepreneurIndividuel = (uniteLegale: IUniteLegale): boolean =>
+  uniteLegale.complements.estEntrepreneurIndividuel;
+
 export interface ICollectiviteTerritoriale
   extends Omit<IUniteLegale, 'colter'> {
   colter: {
