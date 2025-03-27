@@ -25,9 +25,6 @@ export const GET = withSession(async function callbackRoute(req) {
     siretForException = userInfo.siret;
 
     if (!userInfo.siret) {
-      if (userInfo.idp_id === '9e139e69-de07-4cbe-987f-d12cb38c0368') {
-        userInfo.siret = '11001001400014';
-      }
       logWarningInSentry(
         new Information({
           name: 'NoSiretExceptionnalLogs',
@@ -36,6 +33,9 @@ export const GET = withSession(async function callbackRoute(req) {
           },
         })
       );
+      if (userInfo.idp_id === '9e139e69-de07-4cbe-987f-d12cb38c0368') {
+        userInfo.siret = '11001001400014';
+      }
     }
 
     const agent = new AgentConnected(userInfo);
