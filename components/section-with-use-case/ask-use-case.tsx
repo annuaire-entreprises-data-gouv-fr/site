@@ -32,13 +32,14 @@ export function AskUseCase({
             },
             {
               label: 'Aides publiques (aux entreprises)',
-              onClick: () => setUseCase(UseCase.aidesEntreprises),
-              checked: useCase === UseCase.aidesEntreprises,
+              onClick: () => setUseCase(UseCase.aidesPubliques),
+              checked: useCase === UseCase.aidesPubliques,
             },
             {
               label: 'Aides publiques (aux associations)',
-              onClick: () => setUseCase(UseCase.aidesAsso),
-              checked: useCase === UseCase.aidesAsso,
+              onClick: () =>
+                setUseCase(UseCase.subventionsFonctionnementAssociation),
+              checked: useCase === UseCase.subventionsFonctionnementAssociation,
             },
             {
               label: 'Autre cas d’usage',
