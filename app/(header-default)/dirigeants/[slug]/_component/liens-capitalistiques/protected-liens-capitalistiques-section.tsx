@@ -110,47 +110,43 @@ function LiensCapitalistiquesContent({
   return (
     <>
       <p>
-        Les données transmises sont déclaratives et proviennent de deux CERFA
-        des liasses fiscales déposées auprès de la <DGFiP /> :
-        <ul>
-          <li>
-            CERFA 2059F : Composition du capital social (actionnaires,
-            répartition, etc.)
-          </li>
-          <li>CERFA 2059G : Participations (filiales et leurs adresses).</li>
-        </ul>
-      </p>
-      <p>
         Cette entreprise possède{' '}
         {liensCapitalistiquesProtected.actionnaires.length} actionnaire
         {pluralActionnaires} et {liensCapitalistiquesProtected.filiales.length}{' '}
         filiale{pluralFiliales} déclaré{pluralActionnairesEtFiliales} pour
         l‘année {selectedYear} :
       </p>
-
-      <h3>Composition du capital</h3>
-      <FullTable
-        verticalAlign="top"
-        head={['Pays', 'Actionnaire', 'Pourcentage de détention']}
-        body={liensCapitalistiquesProtected.actionnaires.map((actionnaire) =>
-          formatLienActionnaireInfo(actionnaire)
-        )}
-      />
+      <h3>Composition du capital (actionnaires) :</h3>
+      {liensCapitalistiquesProtected.actionnaires.length > 0 ? (
+        <FullTable
+          verticalAlign="top"
+          head={['Pays', 'Actionnaire', 'Pourcentage de détention']}
+          body={liensCapitalistiquesProtected.actionnaires.map((actionnaire) =>
+            formatLienActionnaireInfo(actionnaire)
+          )}
+        />
+      ) : (
+        <i>Aucun actionnaire n’a été retrouvé pour cette entreprise.</i>
+      )}
       <br />
-      <h3>Liste des participations</h3>
-      <FullTable
-        verticalAlign="top"
-        head={[
-          'Pays',
-          'Dénomination',
-          'SIREN',
-          'Type',
-          'Pourcentage de détention',
-        ]}
-        body={liensCapitalistiquesProtected.filiales.map((filiale) =>
-          formatLienFilialeInfo(filiale)
-        )}
-      />
+      <h3>Liste des participations (filiales) :</h3>
+      {liensCapitalistiquesProtected.filiales.length > 0 ? (
+        <FullTable
+          verticalAlign="top"
+          head={[
+            'Pays',
+            'Dénomination',
+            'SIREN',
+            'Type',
+            'Pourcentage de détention',
+          ]}
+          body={liensCapitalistiquesProtected.filiales.map((filiale) =>
+            formatLienFilialeInfo(filiale)
+          )}
+        />
+      ) : (
+        <i>Aucune filiale n’a été retrouvée pour cette entreprise.</i>
+      )}
     </>
   );
 }
@@ -188,25 +184,33 @@ export default function ProtectedLiensCapitalistiques({
 
   return (
     <Section title={title} id={id} isProtected={isProtected} sources={sources}>
+      <p>
+        Les données transmises sont déclaratives et proviennent de deux CERFA
+        des liasses fiscales déposées auprès de la <DGFiP /> :
+      </p>
+      <ul>
+        <li>
+          CERFA 2059F : Composition du capital social (actionnaires,
+          répartition, etc.)
+        </li>
+        <li>CERFA 2059G : Participations (filiales et leurs adresses).</li>
+      </ul>
+      <br />
       <Select
         options={options}
-        placeholder="Sélectionnez une année"
+        placeholder="Sélectionnez une année pour voir les actionnaires et filiales de
+          l‘entreprise."
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setSelectedYear(e.target.value);
         }}
       />
-      {selectedYear ? (
+      {selectedYear && (
         <LiensCapitalistiquesContent
           uniteLegale={uniteLegale}
           session={session}
           selectedYear={selectedYear}
           useCase={useCase}
         />
-      ) : (
-        <i>
-          Sélectionnez une année pour voir les actionnaires et filiales de
-          l‘entreprise.
-        </i>
       )}
     </Section>
   );
