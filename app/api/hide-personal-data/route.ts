@@ -1,14 +1,15 @@
-import { IUniteLegale, SirenNotFoundError } from '#models/core/types';
+import {
+  isEntrepreneurIndividuel,
+  IUniteLegale,
+  SirenNotFoundError,
+} from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { Exception } from '#models/exceptions';
 import {
   IHidePersonalDataRequest,
   requestSirenProtection,
 } from '#models/protected-siren/request-siren-protection';
-import {
-  hasSirenFormat,
-  isEntrepreneurIndividuelFromNatureJuridique,
-} from '#utils/helpers';
+import { hasSirenFormat } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import extractParamsAppRouter from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
@@ -37,9 +38,7 @@ export async function POST(request: Request) {
       isBot,
     });
 
-    const isEI = isEntrepreneurIndividuelFromNatureJuridique(
-      uniteLegale.natureJuridique
-    );
+    const isEI = isEntrepreneurIndividuel(uniteLegale);
 
     if (isEI) {
       return NextResponse.json({
