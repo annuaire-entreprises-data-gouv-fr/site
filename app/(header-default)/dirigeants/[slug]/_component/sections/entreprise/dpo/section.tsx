@@ -89,7 +89,14 @@ export default async function DPOSection({ uniteLegale, session }: IProps) {
                   ]
                 : []),
               ...(dpo.contact.telephone
-                ? [['Téléphone', dpo.contact.telephone]]
+                ? [
+                    [
+                      'Téléphone',
+                      <a href={`tel:${dpo.contact.telephone}`}>
+                        {dpo.contact.telephone}
+                      </a>,
+                    ],
+                  ]
                 : []),
               ...(dpo.contact.adressePostale
                 ? [
