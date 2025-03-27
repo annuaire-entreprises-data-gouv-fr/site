@@ -33,16 +33,6 @@ const mapToDomainObject = (response: IDPOItem) => {
       ville: response['Ville organisme désigné'],
       pays: response['Pays organisme désigné'],
     },
-    organismeDesignant: {
-      siren: response['SIREN organisme désignant'],
-      nom: response['Nom organisme désignant'],
-      secteurActivite: response['Secteur activité organisme désignant'],
-      codeNAF: response['Code NAF organisme désignant'],
-      adressePostale: response['Adresse postale organisme désignant'],
-      codePostal: response['Code postal organisme désignant'],
-      ville: response['Ville organisme désignant'],
-      pays: response['Pays organisme désignant'],
-    },
     contact: {
       email: response['Moyen contact DPO email'],
       url: response['Moyen contact DPO url'],

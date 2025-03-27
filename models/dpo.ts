@@ -21,16 +21,6 @@ export interface IDPO {
     ville: string;
     pays: string;
   };
-  organismeDesignant: {
-    siren: string;
-    nom: string;
-    secteurActivite: string;
-    codeNAF: string;
-    adressePostale: string;
-    codePostal: string;
-    ville: string;
-    pays: string;
-  };
   contact: {
     email: string;
     url: string;
