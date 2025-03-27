@@ -28,6 +28,7 @@ import ElusSection from './_component/sections/collectivite/elus-section';
 import BeneficiairesSection from './_component/sections/entreprise/beneficiaires';
 import DirigeantsSection from './_component/sections/entreprise/dirigeants-open/section';
 import DirigeantsSectionProtected from './_component/sections/entreprise/dirigeants-protected/section';
+import DPOSection from './_component/sections/entreprise/dpo/section';
 import DirigeantSummary from './_component/sections/entreprise/summary';
 import ResponsablesServicePublicSection from './_component/sections/service-public';
 
@@ -92,6 +93,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
             <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
           </>
         )}
+        <DPOSection uniteLegale={uniteLegale} session={session} />
       </div>
     </>
   );

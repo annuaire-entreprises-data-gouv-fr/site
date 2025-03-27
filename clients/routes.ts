@@ -68,6 +68,7 @@ const routes = {
   },
   datagouv: {
     ess: 'https://tabular-api.data.gouv.fr/api/resources/57bc99ca-0432-4b46-8fcc-e76a35c9efaf/data/',
+    dpo: 'https://tabular-api.data.gouv.fr/api/resources/c5d02b42-1008-4406-83f5-3a81c8b936a3/data/',
   },
   dataSubvention: {
     pageBySirenOrIdRna: (sirenOrIdRna: string) =>

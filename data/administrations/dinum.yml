@@ -11,6 +11,9 @@ apiMonitors:
   - apiName: API Liste des Entreprises de l’ESS
     apiSlug: liste-ess
     updownIoId: fpag
+  - apiName: API Liste des DPOs
+    apiSlug: liste-dpo
+    updownIoId: ojx4
   - apiName: API Recherche d’entreprises
     apiSlug: recherche-entreprise
     apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-recherche-dentreprises/
