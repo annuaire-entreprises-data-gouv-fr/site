@@ -2,7 +2,6 @@
 
 import constants from '#models/constants';
 import { IEtablissement } from '#models/core/types';
-import { formatSiret } from '#utils/helpers';
 import maplibregl, { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useEffect, useRef } from 'react';
@@ -15,6 +14,12 @@ export function MapEtablissement({
 }: {
   etablissement: IEtablissement;
 }) {
+  // if (!etablissement.latitude || !etablissement.longitude) {
+  //   const { lat, long } = await getGeoLoc(etablissement);
+  //   etablissement.latitude = lat;
+  //   etablissement.longitude = long;
+  // }
+
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<Map | null>(null);
 
@@ -44,9 +49,7 @@ export function MapEtablissement({
     });
 
     const popup = new maplibregl.Popup({ offset: 30 }).setHTML(
-      `<div><strong>${formatSiret(etablissement.siret)}</strong><br/>📍${
-        etablissement.adresse
-      }</div>`
+      `<div>📍${etablissement.adresse}</div>`
     );
 
     new maplibregl.Marker({ color: constants.colors.frBlue })
@@ -56,11 +59,7 @@ export function MapEtablissement({
   }, [etablissement, coords]);
 
   return (
-    <div
-      style={{
-        padding: '20px 0',
-      }}
-    >
+    <>
       {coords ? (
         <div
           ref={mapContainer}
@@ -68,7 +67,7 @@ export function MapEtablissement({
           style={{
             width: '100%',
             zIndex: '0',
-            height: '450px',
+            height: '200px',
             backgroundColor: '#f0f0f0',
           }}
         />
@@ -79,7 +78,7 @@ export function MapEtablissement({
           {etablissement.latitude || '⎽'}°, {etablissement.longitude || '⎽'}°].
         </i>
       )}
-    </div>
+    </>
   );
 }
 

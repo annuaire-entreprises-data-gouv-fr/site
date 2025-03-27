@@ -1,5 +1,4 @@
 import FAQLink from '#components-ui/faq-link';
-import { ISession } from '#models/authentication/user/session';
 import { estNonDiffusibleStrict } from '#models/core/diffusion';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
@@ -126,7 +125,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
               <>
                 {' '}
                 Il est domicilié au{' '}
-                <a href={`/carte/${etablissement.siret}`}>
+                <a href={`/etablissement/${etablissement.siret}`}>
                   {etablissement.adresse}
                 </a>
               </>
