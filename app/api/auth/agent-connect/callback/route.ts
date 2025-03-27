@@ -32,7 +32,7 @@ export const GET = withSession(async function callbackRoute(req) {
         new Information({
           name: 'NoSiretExceptionnalLogs',
           context: {
-            details: userInfo.idp_id,
+            details: `${userInfo.idp_id} - siret: ${userInfo.siret}`,
           },
         })
       );
