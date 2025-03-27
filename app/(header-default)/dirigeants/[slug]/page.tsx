@@ -11,6 +11,7 @@ import { estDiffusible } from '#models/core/diffusion';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
+  isEntrepreneurIndividuel,
   isServicePublic,
 } from '#models/core/types';
 import {
@@ -88,15 +89,16 @@ const DirigeantsPage = async (props: AppRouterProps) => {
               <DirigeantsSection uniteLegale={uniteLegale} session={session} />
             )}
             <BreakPageForPrint />
-            {hasRights(session, ApplicationRights.liensCapitalistiques) && (
-              <>
-                <HorizontalSeparator />
-                <LiensCapitalistiquesSection
-                  uniteLegale={uniteLegale}
-                  session={session}
-                />
-              </>
-            )}
+            {!isEntrepreneurIndividuel(uniteLegale) &&
+              hasRights(session, ApplicationRights.liensCapitalistiques) && (
+                <>
+                  <HorizontalSeparator />
+                  <LiensCapitalistiquesSection
+                    uniteLegale={uniteLegale}
+                    session={session}
+                  />
+                </>
+              )}
             <HorizontalSeparator />
             <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
           </>
