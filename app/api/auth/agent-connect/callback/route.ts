@@ -25,30 +25,17 @@ export const GET = withSession(async function callbackRoute(req) {
     siretForException = userInfo.siret;
 
     if (!userInfo.siret) {
-      try {
-        logWarningInSentry(
-          new Information({
-            name: 'NoSiretExceptionnalLogs',
-            context: {
-              details: JSON.stringify({
-                ...userInfo,
-                family_name: '***',
-                given_name: '***',
-                sub: '***',
-              }),
-            },
-          })
-        );
-      } catch {
-        logWarningInSentry(
-          new Information({
-            name: 'NoSiretExceptionnalLogs',
-            context: {
-              details: 'cant serialize',
-            },
-          })
-        );
+      if (userInfo.idp_id === '9e139e69-de07-4cbe-987f-d12cb38c0368') {
+        userInfo.siret = '11001001400014';
       }
+      logWarningInSentry(
+        new Information({
+          name: 'NoSiretExceptionnalLogs',
+          context: {
+            details: userInfo.idp_id,
+          },
+        })
+      );
     }
 
     const agent = new AgentConnected(userInfo);
