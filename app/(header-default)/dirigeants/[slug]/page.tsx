@@ -55,7 +55,6 @@ const DirigeantsPage = async (props: AppRouterProps) => {
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
   const session = await getSession();
-  const isProtected = hasRights(session, ApplicationRights.mandatairesRCS);
 
   return (
     <>
@@ -80,7 +79,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
           />
         ) : (
           <>
-            {isProtected ? (
+            {hasRights(session, ApplicationRights.mandatairesRCS) ? (
               <DirigeantsSectionProtected
                 uniteLegale={uniteLegale}
                 session={session}
