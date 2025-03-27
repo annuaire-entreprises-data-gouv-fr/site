@@ -13,7 +13,7 @@ type IProps = {
 
 const DPONotFound = () => (
   <>
-    <p>Aucun DPO trouvé pour cette entreprise.</p>
+    <p>Aucun DPO trouvé pour cette structure.</p>
   </>
 );
 
