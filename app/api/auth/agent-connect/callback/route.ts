@@ -27,16 +27,15 @@ export const GET = withSession(async function callbackRoute(req) {
     if (!userInfo.siret) {
       if (userInfo.idp_id === '9e139e69-de07-4cbe-987f-d12cb38c0368') {
         userInfo.siret = '11001001400014';
-      } else {
-        logWarningInSentry(
-          new Information({
-            name: 'NoSiretExceptionnalLogs',
-            context: {
-              details: userInfo.idp_id,
-            },
-          })
-        );
       }
+      logWarningInSentry(
+        new Information({
+          name: 'NoSiretExceptionnalLogs',
+          context: {
+            details: userInfo.idp_id,
+          },
+        })
+      );
     }
 
     const agent = new AgentConnected(userInfo);
