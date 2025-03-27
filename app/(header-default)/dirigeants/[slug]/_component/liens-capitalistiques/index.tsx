@@ -20,7 +20,11 @@ const LiensCapitalistiquesSection = ({
       title="Liens capitalistiques"
       id="liens-capitalistiques"
       sources={[EAdministration.DGFIP]}
-      allowedUseCases={[UseCase.fraude]}
+      allowedUseCases={[
+        UseCase.fraude,
+        UseCase.marches,
+        UseCase.aidesPubliques,
+      ]}
       requiredRight={ApplicationRights.liensCapitalistiques}
       WrappedSection={ProtectedLiensCapitalistiquesSection}
     />
