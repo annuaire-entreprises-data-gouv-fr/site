@@ -1,5 +1,3 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import BreakPageForPrint from '#components-ui/print-break-page';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -7,12 +5,14 @@ import {
   ApplicationRights,
   hasRights,
 } from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import { estDiffusible } from '#models/core/diffusion';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
   isServicePublic,
+  IUniteLegale,
 } from '#models/core/types';
 import {
   uniteLegalePageDescription,
@@ -24,12 +24,10 @@ import extractParamsAppRouter, {
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
-import LiensCapitalistiquesSection from './_component/liens-capitalistiques';
 import DirigeantsAssociationSection from './_component/sections/association/dirigeants';
 import ElusSection from './_component/sections/collectivite/elus-section';
-import BeneficiairesSection from './_component/sections/entreprise/beneficiaires';
-import DirigeantsSection from './_component/sections/entreprise/dirigeants-open/section';
-import DirigeantsSectionProtected from './_component/sections/entreprise/dirigeants-protected/section';
+import DirigeantsEntrepreneurIndividuelSection from './_component/sections/entrepreneur-individuel/entrepreneur-section';
+import DirigeantsEntrepriseSection from './_component/sections/entreprise/entreprise-section';
 import DirigeantSummary from './_component/sections/entreprise/summary';
 import ResponsablesServicePublicSection from './_component/sections/service-public';
 
@@ -50,6 +48,57 @@ export const generateMetadata = async (
   };
 };
 
+const DirigeantsContent = ({
+  uniteLegale,
+  session,
+}: {
+  uniteLegale: IUniteLegale;
+  session: ISession | null;
+}) => {
+  // Non diffusible
+  if (
+    !estDiffusible(uniteLegale) &&
+    !hasRights(session, ApplicationRights.nonDiffusible)
+  ) {
+    return <DonneesPriveesSection title="Dirigeant(s)" />;
+  }
+
+  // Collectivité territoriale
+  if (isCollectiviteTerritoriale(uniteLegale)) {
+    return <ElusSection uniteLegale={uniteLegale} />;
+  }
+
+  // Service public
+  if (isServicePublic(uniteLegale)) {
+    return <ResponsablesServicePublicSection uniteLegale={uniteLegale} />;
+  }
+
+  // Association
+  if (isAssociation(uniteLegale)) {
+    return (
+      <DirigeantsAssociationSection
+        uniteLegale={uniteLegale}
+        session={session}
+      />
+    );
+  }
+
+  // Entrepreneur individuel
+  if (isEntrepreneurIndividuel(uniteLegale)) {
+    return (
+      <DirigeantsEntrepreneurIndividuelSection
+        uniteLegale={uniteLegale}
+        session={session}
+      />
+    );
+  }
+
+  // Entreprises (hors EI)
+  return (
+    <DirigeantsEntrepriseSection uniteLegale={uniteLegale} session={session} />
+  );
+};
+
 const DirigeantsPage = async (props: AppRouterProps) => {
   const { slug, isBot } = await extractParamsAppRouter(props);
 
@@ -66,43 +115,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
           session={session}
         />
         <DirigeantSummary uniteLegale={uniteLegale} />
-        {isCollectiviteTerritoriale(uniteLegale) ? (
-          <ElusSection uniteLegale={uniteLegale} />
-        ) : isServicePublic(uniteLegale) ? (
-          <ResponsablesServicePublicSection uniteLegale={uniteLegale} />
-        ) : !estDiffusible(uniteLegale) &&
-          !hasRights(session, ApplicationRights.nonDiffusible) ? (
-          <DonneesPriveesSection title="Dirigeant(s)" />
-        ) : isAssociation(uniteLegale) ? (
-          <DirigeantsAssociationSection
-            uniteLegale={uniteLegale}
-            session={session}
-          />
-        ) : (
-          <>
-            {hasRights(session, ApplicationRights.mandatairesRCS) ? (
-              <DirigeantsSectionProtected
-                uniteLegale={uniteLegale}
-                session={session}
-              />
-            ) : (
-              <DirigeantsSection uniteLegale={uniteLegale} session={session} />
-            )}
-            <BreakPageForPrint />
-            {!isEntrepreneurIndividuel(uniteLegale) &&
-              hasRights(session, ApplicationRights.liensCapitalistiques) && (
-                <>
-                  <HorizontalSeparator />
-                  <LiensCapitalistiquesSection
-                    uniteLegale={uniteLegale}
-                    session={session}
-                  />
-                </>
-              )}
-            <HorizontalSeparator />
-            <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
-          </>
-        )}
+        <DirigeantsContent uniteLegale={uniteLegale} session={session} />
       </div>
     </>
   );
