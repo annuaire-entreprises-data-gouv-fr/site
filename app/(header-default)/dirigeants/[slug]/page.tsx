@@ -65,7 +65,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
           ficheType={FICHE.DIRIGEANTS}
           session={session}
         />
-        <DirigeantSummary uniteLegale={uniteLegale} />
+        <DirigeantSummary uniteLegale={uniteLegale} session={session} />
         {isCollectiviteTerritoriale(uniteLegale) ? (
           <ElusSection uniteLegale={uniteLegale} />
         ) : isServicePublic(uniteLegale) ? (
