@@ -9,6 +9,7 @@ import {
   IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
+  isEntrepreneurIndividuel,
   isServicePublic,
 } from '#models/core/types';
 import { Fragment } from 'react';
@@ -22,7 +23,7 @@ const UniteLegaleBadge: React.FC<{
   if (isAssociation(uniteLegale)) {
     badges.push(<AssociationBadge small={small} />);
   }
-  if (uniteLegale.complements.estEntrepreneurIndividuel) {
+  if (isEntrepreneurIndividuel(uniteLegale)) {
     badges.push(<EntrepriseIndividuelleBadge small={small} />);
   }
 

@@ -8,7 +8,7 @@ import { AsyncDataSectionClient } from '#components/section/data-section/client'
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
+import { isEntrepreneurIndividuel, IUniteLegale } from '#models/core/types';
 import { pluralize } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
@@ -27,7 +27,7 @@ export default function DirigeantsSectionProtected({
   uniteLegale,
   session,
 }: IProps) {
-  const isEI = uniteLegale.complements.estEntrepreneurIndividuel;
+  const isEI = isEntrepreneurIndividuel(uniteLegale);
   const params = useMemo(
     () => ({
       params: { isEI },

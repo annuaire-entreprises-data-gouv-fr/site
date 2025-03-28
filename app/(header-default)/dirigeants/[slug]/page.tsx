@@ -11,6 +11,7 @@ import { estDiffusible } from '#models/core/diffusion';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
+  isEntrepreneurIndividuel,
   isServicePublic,
 } from '#models/core/types';
 import {
@@ -23,6 +24,7 @@ import extractParamsAppRouter, {
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
+import LiensCapitalistiquesSection from './_component/liens-capitalistiques';
 import DirigeantsAssociationSection from './_component/sections/association/dirigeants';
 import ElusSection from './_component/sections/collectivite/elus-section';
 import BeneficiairesSection from './_component/sections/entreprise/beneficiaires';
@@ -54,7 +56,6 @@ const DirigeantsPage = async (props: AppRouterProps) => {
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
   const session = await getSession();
-  const isProtected = hasRights(session, ApplicationRights.mandatairesRCS);
 
   return (
     <>
@@ -79,7 +80,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
           />
         ) : (
           <>
-            {isProtected ? (
+            {hasRights(session, ApplicationRights.mandatairesRCS) ? (
               <DirigeantsSectionProtected
                 uniteLegale={uniteLegale}
                 session={session}
@@ -88,6 +89,16 @@ const DirigeantsPage = async (props: AppRouterProps) => {
               <DirigeantsSection uniteLegale={uniteLegale} session={session} />
             )}
             <BreakPageForPrint />
+            {!isEntrepreneurIndividuel(uniteLegale) &&
+              hasRights(session, ApplicationRights.liensCapitalistiques) && (
+                <>
+                  <HorizontalSeparator />
+                  <LiensCapitalistiquesSection
+                    uniteLegale={uniteLegale}
+                    session={session}
+                  />
+                </>
+              )}
             <HorizontalSeparator />
             <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
           </>

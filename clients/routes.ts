@@ -38,6 +38,8 @@ const routes = {
         `/v3/dgfip/etablissements/${siret}/chiffres_affaires`,
       liassesFiscales: (siren: string, year?: string) =>
         `/v3/dgfip/unites_legales/${siren}/liasses_fiscales/${year}`,
+      liensCapitalistiques: (siren: string, year?: string) =>
+        `/v3/dgfip/unites_legales/${siren}/liens_capitalistiques/${year}`,
     },
     banqueDeFrance: {
       bilans: (siren: string) =>
