@@ -98,7 +98,7 @@ const mergeFinancesSocieteWithChiffreAffaires = (
           chiffreDAffairesDgfip: caProtected.chiffreAffaires,
           confidentiality:
             financesSociete?.bilans?.[0]?.confidentiality ?? 'Public',
-          dateClotureExercice: '',
+          dateClotureExercice: `${caProtected.year}-12-31`,
         }));
 
       return [...mergedBilans, ...additionalBilans].sort(

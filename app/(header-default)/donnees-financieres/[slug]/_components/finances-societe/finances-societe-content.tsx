@@ -151,7 +151,10 @@ export function FinancesSocieteContent({
             {
               label: "Chiffre d'affaires",
               tension: 0.3,
-              data: bilans.map((bilan) => bilan.chiffreDAffaires ?? 0),
+              data: bilans.map(
+                (bilan) =>
+                  bilan.chiffreDAffaires ?? bilan.chiffreDAffairesDgfip ?? 0
+              ),
               borderColor: colorCA,
               backgroundColor: colorCA,
             },
