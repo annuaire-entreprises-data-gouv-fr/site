@@ -2,10 +2,11 @@
 
 import constants from '#models/constants';
 import { IEtablissement } from '#models/core/types';
+import { hasAnyError, isDataLoading } from '#models/data-fetching';
+import { useFetchGeoLoc } from 'hooks/fetch/geoloc';
 import maplibregl, { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useEffect, useRef } from 'react';
-import { checkLatLng } from './check-lat-lng';
 import { hasWebGLSupport } from './has-web-gl';
 import './map.css';
 
@@ -14,19 +15,21 @@ export function MapEtablissement({
 }: {
   etablissement: IEtablissement;
 }) {
-  // if (!etablissement.latitude || !etablissement.longitude) {
-  //   const { lat, long } = await getGeoLoc(etablissement);
-  //   etablissement.latitude = lat;
-  //   etablissement.longitude = long;
-  // }
+  const coords = useFetchGeoLoc(etablissement);
 
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<Map | null>(null);
 
-  const coords = checkLatLng(etablissement.latitude, etablissement.longitude);
-
   useEffect(() => {
-    if (map.current || !coords) return; // stops map from intializing more than once
+    if (isDataLoading(coords)) {
+      return; // still loading
+    }
+    if (hasAnyError(coords)) {
+      return; // should not be displayed
+    }
+    if (map.current || !coords) {
+      return; // stops map from intializing more than once
+    }
     if (!hasWebGLSupport()) {
       alert(
         'Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte.'
@@ -43,9 +46,7 @@ export function MapEtablissement({
       center: coords,
       zoom,
       minZoom: 3,
-      attributionControl: {
-        compact: true,
-      },
+      attributionControl: { compact: true },
     });
 
     const popup = new maplibregl.Popup({ offset: 30 }).setHTML(
@@ -59,26 +60,32 @@ export function MapEtablissement({
   }, [etablissement, coords]);
 
   return (
-    <>
-      {coords ? (
-        <div
-          ref={mapContainer}
-          className="map"
-          style={{
-            width: '100%',
-            zIndex: '0',
-            height: '200px',
-            backgroundColor: '#f0f0f0',
-          }}
-        />
-      ) : (
+    <div
+      ref={mapContainer}
+      className="map layout-center"
+      style={{
+        width: '100%',
+        zIndex: '0',
+        height: '100%',
+        minHeight: '150px',
+        borderRadius: '8px',
+        backgroundColor: '#f0f0f0',
+        textAlign: 'center',
+      }}
+    >
+      {(!coords || hasAnyError(coords)) && (
         <i>
-          Nous n’avons pas réussi à déterminer la géolocalisation de cet
-          établissement, car ses coordonnées sont invalides ou inconnues : [
-          {etablissement.latitude || '⎽'}°, {etablissement.longitude || '⎽'}°].
+          Impossible d’afficher la carte.
+          <br />
+          Cela peut-être dû à un problème d’affichage, ou à un problème dans les
+          coordonnées de l’établissement.
+          <br />
+          (coordonnées [{etablissement?.latitude || '⎽'}°,{' '}
+          {etablissement?.longitude || '⎽'}
+          °])
         </i>
       )}
-    </>
+    </div>
   );
 }
 

@@ -30,18 +30,17 @@ export enum FICHE {
   ETABLISSEMENT = 'fiche établissement',
 }
 
-export const Tabs: React.FC<{
-  currentFicheType: FICHE;
-  uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ currentFicheType, uniteLegale, session }) => {
+const getUniteLegaleTabs = (
+  uniteLegale: IUniteLegale,
+  session: ISession | null
+) => {
   const shouldDisplayFinances =
     // hide for public services
     !isServicePublic(uniteLegale) &&
     // hide for EI
     !uniteLegale.complements.estEntrepreneurIndividuel;
 
-  const tabs = [
+  return [
     {
       ficheType: FICHE.INFORMATION,
       label: `Fiche résumé`,
@@ -111,6 +110,14 @@ export const Tabs: React.FC<{
       width: '130px',
     },
   ];
+};
+
+export const Tabs: React.FC<{
+  currentFicheType: FICHE;
+  uniteLegale: IUniteLegale;
+  session: ISession | null;
+}> = ({ currentFicheType, uniteLegale, session }) => {
+  const tabs = getUniteLegaleTabs(uniteLegale, session);
   return (
     <PrintNever>
       <div className={styles.titleTabs}>
@@ -135,20 +142,30 @@ export const Tabs: React.FC<{
               />
             )
           )}
-        {currentFicheType === FICHE.ETABLISSEMENT && (
-          <>
-            <div style={{ flexGrow: 1 }} />
-            <a
-              className={styles.activeLink + ' no-style-link'}
-              key="etablissement"
-              href=""
-              style={{ width: '120px' }}
-            >
-              <h2>Fiche établissement</h2>
-            </a>
-          </>
-        )}
       </div>
     </PrintNever>
+  );
+};
+
+export const TabsForEtablissement: React.FC<{
+  uniteLegale: IUniteLegale;
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
+  const tabs = getUniteLegaleTabs(uniteLegale, session);
+  return (
+    <ul className={styles.titleTabsEtablissement}>
+      {tabs
+        .filter(({ shouldDisplay }) => shouldDisplay)
+        .map(({ fullPath, pathPrefix, label, noFollow }) => (
+          <li>
+            <a
+              href={fullPath || `${pathPrefix}${uniteLegale.siren}`}
+              rel={noFollow ? 'nofollow' : ''}
+            >
+              <h2>{label}</h2>
+            </a>
+          </li>
+        ))}
+    </ul>
   );
 };
