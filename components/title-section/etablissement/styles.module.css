@@ -1,6 +1,18 @@
-.etablissementTitle h1 {
-  line-height: 1.5rem;
-  font-size: 1.4rem;
+.titleBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 40px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+}
+
+.titleBlock > div:last-of-type {
+  flex-grow: 1;
 }
 
 .subTitle {
@@ -14,6 +26,9 @@
   color: #666;
 }
 
+.subSubTitle {
+  display: flex;
+}
 .subSubTitle:before {
   content: '';
   width: 20px;
@@ -26,4 +41,14 @@
   border-right: none;
   position: relative;
   display: inline-block;
+}
+
+.subSubTitle > div:first-of-type {
+  margin-top: 7px;
+}
+
+.subSubTitle > div > div:last-of-type {
+  border: 2px solid var(--annuaire-colors-pastelBlue);
+  margin-top: 10px;
+  padding: 15px 15px 5px 15px;
 }
