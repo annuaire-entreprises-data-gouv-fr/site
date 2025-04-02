@@ -10,7 +10,6 @@ import {
 import { ISession } from '#models/authentication/user/session';
 import {
   IUniteLegale,
-  isAssociation,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
   isServicePublic,
@@ -55,11 +54,11 @@ export const Tabs: React.FC<{
     {
       ficheType: FICHE.DIRIGEANTS,
       label: isCollectiviteTerritoriale(uniteLegale)
-        ? 'Élus'
-        : !isServicePublic(uniteLegale) &&
-          !isAssociation(uniteLegale) &&
-          hasRights(session, ApplicationRights.liensCapitalistiques)
-        ? 'Dirigeants et actionnariat'
+        ? 'Élus & organigramme'
+        : isServicePublic(uniteLegale)
+        ? 'Responsables & organigramme'
+        : hasRights(session, ApplicationRights.liensCapitalistiques)
+        ? 'Dirigeants & actionnariat'
         : 'Dirigeants',
       pathPrefix: '/dirigeants/',
       noFollow: false,
