@@ -9,7 +9,8 @@ import { logWarningInSentry } from '#utils/sentry';
 
 const isLikelyPrestataire = (domain: string) => {
   try {
-    if (domain === '@beta.gouv.fr') {
+    const excludedDomains = ['@beta.gouv.fr', '@i-carre.net'];
+    if (excludedDomains.includes(domain)) {
       return true;
     } else {
       if (!!domain.match(/[.@-]*(ext)(ernal|ernes|erne)*[.@-]/g)) {
