@@ -11,6 +11,13 @@
 #   site: true
 
 ---
+- date: 27/03/2025
+  target:
+    site: true
+  body: |
+    Ajout des informations relatives aux Délégués à la Protection des Données (DPO) (accessibles dans l'[onglet “Dirigeants/Élus”](/dirigeants/210203766#dpo-section)).
+
+    Ces informations, issues des déclarations officielles auprès de la CNIL, permettent d'identifier facilement le contact responsable de la protection des données personnelles au sein d'une organisation.
 - date: 18/03/2025
   target:
     agent: true

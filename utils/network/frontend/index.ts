@@ -13,6 +13,9 @@ function buildUrl(url: string, params: any) {
   try {
     const serializedParams = new URLSearchParams(params).toString();
     const separator = url.indexOf('?') > 0 ? '&' : '?';
+    if (!serializedParams) {
+      return url;
+    }
     return `${url}${separator}${serializedParams}`;
   } catch (e: any) {
     logErrorInSentry(
