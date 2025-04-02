@@ -46,28 +46,29 @@ export const Tabs: React.FC<{
     {
       ficheType: FICHE.INFORMATION,
       label: `Fiche résumé`,
-      fullPath: `/entreprise/${uniteLegale.chemin}`,
+      path: `/entreprise/${uniteLegale.chemin}`,
       noFollow: false,
       shouldDisplay: true,
       width: '80px',
+      pathPrefix: '',
     },
     {
       ficheType: FICHE.DIRIGEANTS,
-      label: isCollectiviteTerritoriale(uniteLegale)
-        ? 'Élus & organigramme'
-        : isServicePublic(uniteLegale)
-        ? 'Responsables & organigramme'
-        : hasRights(session, ApplicationRights.liensCapitalistiques)
-        ? 'Dirigeants & actionnariat'
-        : 'Dirigeants',
-      pathPrefix: '/dirigeants/',
+      path: `/dirigeants/${uniteLegale.siren}`,
       noFollow: false,
       shouldDisplay: true,
+      ...(isCollectiviteTerritoriale(uniteLegale)
+        ? { label: 'Élus & organigramme', width: '120px' }
+        : isServicePublic(uniteLegale)
+        ? { label: 'Responsables & organigramme', width: '130px' }
+        : hasRights(session, ApplicationRights.liensCapitalistiques)
+        ? { label: 'Dirigeants & actionnariat', width: '120px' }
+        : { label: 'Dirigeants' }),
     },
     {
       ficheType: FICHE.DOCUMENTS,
       label: 'Documents',
-      pathPrefix: '/documents/',
+      path: `/documents/${uniteLegale.siren}`,
       noFollow: false,
       shouldDisplay: true,
       width: '95px',
@@ -75,27 +76,27 @@ export const Tabs: React.FC<{
     {
       ficheType: FICHE.FINANCES,
       label: 'Données financières',
-      pathPrefix: '/donnees-financieres/',
+      path: `/donnees-financieres/${uniteLegale.siren}`,
       noFollow: false,
       shouldDisplay: shouldDisplayFinances,
       width: '100px',
     },
     {
       ficheType: FICHE.ANNONCES,
+      path: `/annonces/${uniteLegale.siren}`,
       label: `Annonces${
         uniteLegale.dateMiseAJourInpi ? ' et observations' : ''
       }`,
-      pathPrefix: '/annonces/',
       noFollow: false,
       shouldDisplay: true,
       width: uniteLegale.dateMiseAJourInpi ? '130px' : '90px',
     },
     {
       ficheType: FICHE.CERTIFICATS,
+      path: `/labels-certificats/${uniteLegale.siren}`,
       label: `${
         checkHasQuality(uniteLegale) ? 'Qualités, l' : 'L'
       }abels et certificats`,
-      pathPrefix: '/labels-certificats/',
       noFollow: false,
       shouldDisplay:
         checkHasLabelsAndCertificates(uniteLegale) ||
@@ -104,15 +105,15 @@ export const Tabs: React.FC<{
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
+      path: `/etablissements-scolaires/${uniteLegale.siren}`,
       label: 'Établissements scolaires',
-      pathPrefix: '/etablissements-scolaires/',
       noFollow: false,
       shouldDisplay: uniteLegale.complements.estUai,
     },
     {
       ficheType: FICHE.DIVERS,
+      path: '/divers/',
       label: 'Conventions collectives',
-      pathPrefix: '/divers/',
       noFollow: false,
       shouldDisplay: (uniteLegale.listeIdcc || []).length > 0,
       width: '130px',
@@ -123,25 +124,16 @@ export const Tabs: React.FC<{
       <div className={styles.titleTabs}>
         {tabs
           .filter(({ shouldDisplay }) => shouldDisplay)
-          .map(
-            ({
-              fullPath,
-              pathPrefix,
-              ficheType,
-              label,
-              noFollow,
-              width = 'auto',
-            }) => (
-              <TabLink
-                active={currentFicheType === ficheType}
-                href={fullPath || `${pathPrefix}${uniteLegale.siren}`}
-                label={label}
-                noFollow={noFollow}
-                key={label}
-                width={width}
-              />
-            )
-          )}
+          .map(({ path, ficheType, label, noFollow, width = 'auto' }) => (
+            <TabLink
+              active={currentFicheType === ficheType}
+              href={path}
+              label={label}
+              noFollow={noFollow}
+              key={label}
+              width={width}
+            />
+          ))}
         {currentFicheType === FICHE.ETABLISSEMENT && (
           <>
             <div style={{ flexGrow: 1 }} />

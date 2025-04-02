@@ -1,3 +1,4 @@
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -10,7 +11,6 @@ import { estDiffusible } from '#models/core/diffusion';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
-  isEntrepreneurIndividuel,
   isServicePublic,
   IUniteLegale,
 } from '#models/core/types';
@@ -26,7 +26,7 @@ import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import DirigeantsAssociationSection from './_component/sections/association/dirigeants';
 import ElusSection from './_component/sections/collectivite/elus-section';
-import DirigeantsEntrepreneurIndividuelSection from './_component/sections/entrepreneur-individuel/entrepreneur-section';
+import DPOSection from './_component/sections/entreprise/dpo/section';
 import DirigeantsEntrepriseSection from './_component/sections/entreprise/entreprise-section';
 import DirigeantSummary from './_component/sections/entreprise/summary';
 import ResponsablesServicePublicSection from './_component/sections/service-public';
@@ -65,7 +65,12 @@ const DirigeantsContent = ({
 
   // Collectivité territoriale
   if (isCollectiviteTerritoriale(uniteLegale)) {
-    return <ElusSection uniteLegale={uniteLegale} />;
+    return (
+      <>
+        <ElusSection uniteLegale={uniteLegale} />
+        <ResponsablesServicePublicSection uniteLegale={uniteLegale} />
+      </>
+    );
   }
 
   // Service public
@@ -82,18 +87,7 @@ const DirigeantsContent = ({
       />
     );
   }
-
-  // Entrepreneur individuel
-  if (isEntrepreneurIndividuel(uniteLegale)) {
-    return (
-      <DirigeantsEntrepreneurIndividuelSection
-        uniteLegale={uniteLegale}
-        session={session}
-      />
-    );
-  }
-
-  // Entreprises (hors EI)
+  // Entreprises & EI
   return (
     <DirigeantsEntrepriseSection uniteLegale={uniteLegale} session={session} />
   );
@@ -114,8 +108,10 @@ const DirigeantsPage = async (props: AppRouterProps) => {
           ficheType={FICHE.DIRIGEANTS}
           session={session}
         />
-        <DirigeantSummary uniteLegale={uniteLegale} />
+        <DirigeantSummary session={session} uniteLegale={uniteLegale} />
         <DirigeantsContent uniteLegale={uniteLegale} session={session} />
+        <HorizontalSeparator />
+        <DPOSection uniteLegale={uniteLegale} session={session} />
       </div>
     </>
   );

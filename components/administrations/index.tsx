@@ -135,3 +135,12 @@ export const DGFiP = ({ queryString = '' }) => (
     DGFiP
   </a>
 );
+
+export const CNIL = ({ queryString = '' }) => (
+  <a
+    href={`/administration/cnil${queryString}`}
+    title="Commission Nationale de l'Informatique et des Libertés"
+  >
+    CNIL
+  </a>
+);

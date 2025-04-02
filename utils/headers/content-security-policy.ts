@@ -28,6 +28,7 @@ const cspDirectives = {
     'https://openmaptiles.data.gouv.fr/',
     'https://geo.api.gouv.fr',
     'https://api-adresse.data.gouv.fr',
+    'https://tabular-api.data.gouv.fr',
   ],
 };
 

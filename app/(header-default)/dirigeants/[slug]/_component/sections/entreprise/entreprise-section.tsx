@@ -5,7 +5,7 @@ import {
   hasRights,
 } from '#models/authentication/user/rights';
 import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
+import { isEntrepreneurIndividuel, IUniteLegale } from '#models/core/types';
 import LiensCapitalistiquesSection from '../../liens-capitalistiques';
 import BeneficiairesSection from './beneficiaires';
 import DirigeantsSection from './dirigeants-open/section';
@@ -29,15 +29,16 @@ export default function DirigeantsEntrepriseSection({
         <DirigeantsSection uniteLegale={uniteLegale} session={session} />
       )}
       <BreakPageForPrint />
-      {hasRights(session, ApplicationRights.liensCapitalistiques) && (
-        <>
-          <HorizontalSeparator />
-          <LiensCapitalistiquesSection
-            uniteLegale={uniteLegale}
-            session={session}
-          />
-        </>
-      )}
+      {!isEntrepreneurIndividuel(uniteLegale) &&
+        hasRights(session, ApplicationRights.liensCapitalistiques) && (
+          <>
+            <HorizontalSeparator />
+            <LiensCapitalistiquesSection
+              uniteLegale={uniteLegale}
+              session={session}
+            />
+          </>
+        )}
       <HorizontalSeparator />
       <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
     </>
