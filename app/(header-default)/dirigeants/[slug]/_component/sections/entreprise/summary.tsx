@@ -30,9 +30,7 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
           <a href="#beneficiaires">Liste des bénéficiaires effectifs</a>
         </li>
         <li>
-          <a href="#dpo-section">
-            Informations sur le Délégué à la Protection des Données (DPO)
-          </a>
+          <a href="#dpo-section">Délégué à la Protection des Données (DPO)</a>
         </li>
       </ul>
       <br />

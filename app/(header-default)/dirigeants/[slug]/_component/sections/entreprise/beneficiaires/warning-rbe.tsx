@@ -3,7 +3,7 @@ import { INPI } from '#components/administrations';
 
 export const WarningRBE = () => (
   <Warning>
-    À compter du 31 juillet 2024, le{' '}
+    Depuis le 31 juillet 2024, le{' '}
     <a href="/faq/registre-des-beneficiaires-effectifs">
       registre des bénéficiaires effectifs n’est plus accessible sur le site
     </a>

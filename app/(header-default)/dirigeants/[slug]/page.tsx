@@ -93,6 +93,7 @@ const DirigeantsPage = async (props: AppRouterProps) => {
             <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
           </>
         )}
+        <HorizontalSeparator />
         <DPOSection uniteLegale={uniteLegale} session={session} />
       </div>
     </>
