@@ -63,7 +63,7 @@ export function withIgnoreBot(
     const session = request.session;
     if (
       // agent should not be impacted by the antibot
-      hasRights(session, ApplicationRights.isAgent) &&
+      !hasRights(session, ApplicationRights.isAgent) &&
       !userVisitedAPageRecently(session)
     ) {
       throw new APIRouteError(
