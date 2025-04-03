@@ -1,7 +1,10 @@
 import { HttpNotFound } from '#clients/exceptions';
 import odsClient from '#clients/open-data-soft';
 import routes from '#clients/routes';
-import { IBilanFinancier } from '#models/finances-societe/types';
+import {
+  IIndicateursFinanciers,
+  IIndicateursFinanciersSociete,
+} from '#models/finances-societe/types';
 import { Siren } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import { IAPIBilanResponse } from './interface';
@@ -10,7 +13,9 @@ import { IAPIBilanResponse } from './interface';
  * Données financière (Ratios Financiers (BCE / INPI))
  * https://data.economie.gouv.fr/explore/dataset/ratios_inpi_bce/api
  */
-export const clientBilansFinanciers = async (siren: Siren) => {
+export const clientBilansFinanciers = async (
+  siren: Siren
+): Promise<IIndicateursFinanciersSociete> => {
   const url = routes.donneesFinancieres.ods.search;
   const metaDataUrl = routes.donneesFinancieres.ods.metadata;
 
@@ -26,52 +31,29 @@ export const clientBilansFinanciers = async (siren: Siren) => {
     throw new HttpNotFound(siren);
   }
 
-  const bilans = mapToDomainObject(response.records);
+  const indicateurs = mapToDomainObject(response.records);
   return {
-    bilans,
-    hasBilanConsolide: bilans[0].estConsolide,
+    indicateurs,
+    hasBilanConsolide: indicateurs[0].estConsolide,
     lastModified: response.lastModified,
+    hasCADGFiP: false,
   };
 };
 
-const groupPerYear = (
-  bilansPerYear: { [year: string]: IBilanFinancier },
-  bilan: IBilanFinancier
-) => {
-  bilansPerYear[bilan.year] = bilan;
-  return bilansPerYear;
-};
-
-const sortPerYear = (b1: IBilanFinancier, b2: IBilanFinancier) =>
+const sortPerYear = (b1: IIndicateursFinanciers, b2: IIndicateursFinanciers) =>
   b1.year - b2.year;
 
 const mapToDomainObject = (
   response: IAPIBilanResponse[]
-): IBilanFinancier[] => {
+): IIndicateursFinanciers[] => {
   const allBilans = response.map(mapToBilan);
-
-  const bilansK = allBilans
-    .filter((b) => b.estConsolide)
-    .reduce(groupPerYear, {});
-
-  const bilansC = allBilans
-    .filter((b) => b.estComplet)
-    .reduce(groupPerYear, {});
-
-  const bilansS = allBilans
-    .filter((b) => b.estSimplifie)
-    .reduce(groupPerYear, {});
-
-  const hasBilanConsolide = Object.values(bilansK).length > 0;
-  if (hasBilanConsolide) {
-    return Object.values(bilansK).sort(sortPerYear);
-  } else {
-    const mergedBilans = Object.assign(bilansS, bilansC);
-    return Object.values(mergedBilans).sort(sortPerYear);
-  }
+  allBilans.sort(sortPerYear);
+  return allBilans;
 };
 
-const mapToBilan = (financialData: IAPIBilanResponse): IBilanFinancier => {
+const mapToBilan = (
+  financialData: IAPIBilanResponse
+): IIndicateursFinanciers => {
   const {
     ratio_de_vetuste = 0,
     rotation_des_stocks_jours = 0,
@@ -121,10 +103,10 @@ const mapToBilan = (financialData: IAPIBilanResponse): IBilanFinancier => {
     capaciteDeRemboursement: capacite_de_remboursement,
     ratioDeLiquidite: ratio_de_liquidite,
     tauxDEndettement: taux_d_endettement,
-    type: type_bilan.toLowerCase(),
-    estSimplifie: type_bilan.toLowerCase() === 's',
-    estConsolide: type_bilan.toLowerCase() === 'k',
-    estComplet: type_bilan.toLowerCase() === 'c',
+    type: type_bilan.toUpperCase() ?? '',
+    estSimplifie: type_bilan.toUpperCase() === 'S',
+    estConsolide: type_bilan.toUpperCase() === 'K',
+    estComplet: type_bilan.toUpperCase() === 'C',
     year: getFiscalYear(date_cloture_exercice),
   };
 };

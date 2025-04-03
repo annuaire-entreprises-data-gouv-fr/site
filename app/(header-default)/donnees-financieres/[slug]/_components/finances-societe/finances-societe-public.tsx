@@ -1,5 +1,6 @@
 'use client';
 
+import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import { DGFiP } from '#components/administrations';
 import { AskUseCase } from '#components/section-with-use-case/ask-use-case';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
@@ -12,7 +13,7 @@ import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/use-cases';
 import { useFetchFinancesSociete } from 'hooks';
-import { FinancesSocieteContent } from './finances-societe-content';
+import { FinancesSocieteInnerSection } from './inner-section';
 
 const NotFoundInfo = ({
   setUseCase,
@@ -44,7 +45,7 @@ export function PublicFinancesSocieteSection({
     <AsyncDataSectionClient
       title="Indicateurs financiers"
       id="finances-societe"
-      sources={[EAdministration.MEF]}
+      sources={[EAdministration.MEF, EAdministration.INPI]}
       data={financesSociete}
       isProtected={false}
       notFoundInfo={
@@ -57,17 +58,22 @@ export function PublicFinancesSocieteSection({
     >
       {(financesSociete) => (
         <>
-          <FinancesSocieteContent
-            uniteLegale={uniteLegale}
-            session={session}
+          <FinancesSocieteInnerSection
             financesSociete={financesSociete}
+            session={session}
           />
+          <br />
+          <SimpleSeparator />
           {hasRights(session, ApplicationRights.chiffreAffaires) && (
-            <div style={{ marginTop: '30px' }}>
-              Vos droits vous permettent d‘enrichir cette section avec les
-              chiffres d‘affaires déclarés à la <DGFiP />.
+            <>
+              <p>
+                En tant qu’agent public, vous pouvez enrichir la section des
+                indicateurs des bilans complets ou simplifiés avec les chiffres
+                d‘affaires déclarés à la <DGFiP />, si votre cas d’usage le
+                permet.
+              </p>
               <AskUseCase idPrefix="finances-societe" setUseCase={setUseCase} />
-            </div>
+            </>
           )}
         </>
       )}

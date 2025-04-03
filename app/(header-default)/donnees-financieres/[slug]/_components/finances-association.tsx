@@ -41,6 +41,7 @@ export default function FinancesAssociationSection({
 
   return (
     <DataSectionClient
+      id="finances-association"
       notFoundInfo="Aucun indicateur financier n’a été retrouvé pour cette association."
       title="Indicateurs financiers"
       sources={[EAdministration.DJEPVA]}
