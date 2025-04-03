@@ -47,6 +47,7 @@ export class AgentConnected {
 
   isLikelyPrestataire = () => {
     for (let bannedDomain of [
+      'i-carre.net',
       'beta.gouv.fr',
       'code.gouv.fr',
       'data.gouv.fr',
