@@ -1,6 +1,5 @@
 'use client';
 
-import { Info } from '#components-ui/alerts';
 import { CNIL } from '#components/administrations';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';
@@ -45,90 +44,79 @@ export default function DPOSection({ uniteLegale }: IProps) {
               relative à la protection des données personnelles. Vous trouverez
               ci-dessous les coordonnées du DPO désigné par cette entreprise.
             </p>
-            {dpo.typeDPO === 'Personne physique' ? (
-              <Info>
-                Les informations de contact de ce DPO pouvant contenir des
-                données personnelles nous ne les publions pas directement sur
-                notre site. Cependant vous pouvez les retrouver{' '}
-                <a href="/donnees/sources#cnil">sur la liste officielle</a>{' '}
-                tenue par la <CNIL />
-              </Info>
-            ) : (
-              <TwoColumnTable
-                body={[
-                  ['Type de DPO', dpo.typeDPO],
-                  ...(dpo.organismeDesigne.siren
-                    ? [
+            <TwoColumnTable
+              body={[
+                ...(dpo?.organismeDesigne.siren
+                  ? [
+                      [
+                        'SIREN',
+                        <a href={`/entreprise/${dpo.organismeDesigne.siren}`}>
+                          {formatIntFr(dpo.organismeDesigne.siren)}
+                        </a>,
+                      ],
+                    ]
+                  : []),
+                ...(dpo?.organismeDesigne.adressePostale
+                  ? [
+                      [
+                        'Adresse complète',
                         [
-                          'SIREN',
-                          <a href={`/entreprise/${dpo.organismeDesigne.siren}`}>
-                            {formatIntFr(dpo.organismeDesigne.siren)}
-                          </a>,
-                        ],
-                      ]
-                    : []),
-                  ...(dpo.organismeDesigne.adressePostale
-                    ? [
+                          dpo.organismeDesigne.adressePostale,
+                          dpo.organismeDesigne.codePostal,
+                          dpo.organismeDesigne.ville,
+                          dpo.organismeDesigne.pays,
+                        ]
+                          .filter(Boolean)
+                          .join(', '),
+                      ],
+                    ]
+                  : []),
+                ...(dpo.contact.email
+                  ? [
+                      [
+                        'Email',
+                        <a href={`mailto:${dpo.contact.email}`}>
+                          {dpo.contact.email}
+                        </a>,
+                      ],
+                    ]
+                  : []),
+                ...(dpo.contact.url
+                  ? [
+                      [
+                        'Site web',
+                        <a href={dpo.contact.url}>{dpo.contact.url}</a>,
+                      ],
+                    ]
+                  : []),
+                ...(dpo.contact.telephone
+                  ? [
+                      [
+                        'Téléphone',
+                        <a href={`tel:${dpo.contact.telephone}`}>
+                          {dpo.contact.telephone}
+                        </a>,
+                      ],
+                    ]
+                  : []),
+                ...(dpo.contact.adressePostale
+                  ? [
+                      [
+                        'Adresse complète',
                         [
-                          'Adresse complète',
-                          [
-                            dpo.organismeDesigne.adressePostale,
-                            dpo.organismeDesigne.codePostal,
-                            dpo.organismeDesigne.ville,
-                            dpo.organismeDesigne.pays,
-                          ]
-                            .filter(Boolean)
-                            .join(', '),
-                        ],
-                      ]
-                    : []),
-                  ...(dpo.contact.email
-                    ? [
-                        [
-                          'Email',
-                          <a href={`mailto:${dpo.contact.email}`}>
-                            {dpo.contact.email}
-                          </a>,
-                        ],
-                      ]
-                    : []),
-                  ...(dpo.contact.url
-                    ? [
-                        [
-                          'Site web',
-                          <a href={dpo.contact.url}>{dpo.contact.url}</a>,
-                        ],
-                      ]
-                    : []),
-                  ...(dpo.contact.telephone
-                    ? [
-                        [
-                          'Téléphone',
-                          <a href={`tel:${dpo.contact.telephone}`}>
-                            {dpo.contact.telephone}
-                          </a>,
-                        ],
-                      ]
-                    : []),
-                  ...(dpo.contact.adressePostale
-                    ? [
-                        [
-                          'Adresse complète',
-                          [
-                            dpo.contact.adressePostale,
-                            dpo.contact.codePostal,
-                            dpo.contact.ville,
-                            dpo.contact.pays,
-                          ]
-                            .filter(Boolean)
-                            .join(', '),
-                        ],
-                      ]
-                    : []),
-                  ...(dpo.contact.autre ? [['Autre', dpo.contact.autre]] : []),
-                ]}
-              />
-            )}
+                          dpo.contact.adressePostale,
+                          dpo.contact.codePostal,
+                          dpo.contact.ville,
+                          dpo.contact.pays,
+                        ]
+                          .filter(Boolean)
+                          .join(', '),
+                      ],
+                    ]
+                  : []),
+                ...(dpo.contact.autre ? [['Autre', dpo.contact.autre]] : []),
+              ]}
+            />
           </>
         );
       }}
