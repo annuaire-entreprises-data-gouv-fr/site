@@ -31,7 +31,7 @@ export default function BilansBDFSocieteSection({
       3 <=
     new Date().getFullYear();
 
-  if (isMoreThanThreeYearsOld) {
+  if (!isMoreThanThreeYearsOld) {
     return (
       <DataSectionClient
         title="Indicateurs financiers de la Banque de France"
@@ -42,8 +42,10 @@ export default function BilansBDFSocieteSection({
       >
         {() => (
           <p>
-            La Banque de France ne publie pas d’indicateurs pour les entreprises
-            de plus de 3 ans.
+            La Banque de France ne transmet ses indicateurs financiers qu’à la
+            condition que l’entreprise ait publié au moins trois bilans.
+            <br />
+            Hors cette entreprise a moins de trois ans d’existence.
           </p>
         )}
       </DataSectionClient>
