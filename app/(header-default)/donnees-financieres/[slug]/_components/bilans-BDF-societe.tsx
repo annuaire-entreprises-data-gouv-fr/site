@@ -1,6 +1,7 @@
 'use client';
 
 import FAQLink from '#components-ui/faq-link';
+import { DataSectionClient } from '#components/section/data-section';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -10,7 +11,7 @@ import { formatCurrency, formatDate, getDateFromYYYYMM } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
-export default function BilansSocieteSection({
+export default function BilansBDFSocieteSection({
   uniteLegale,
   session,
 }: {
@@ -23,14 +24,42 @@ export default function BilansSocieteSection({
     session
   );
 
+  const isMoreThanThreeYearsOld =
+    new Date(
+      uniteLegale.dateDebutActivite || uniteLegale.dateCreation
+    ).getFullYear() +
+      3 <=
+    new Date().getFullYear();
+
+  if (!isMoreThanThreeYearsOld) {
+    return (
+      <DataSectionClient
+        title="Indicateurs financiers de la Banque de France"
+        id="bilans-banque-de-france"
+        sources={[EAdministration.BANQUE_DE_FRANCE]}
+        isProtected
+        data={null}
+      >
+        {() => (
+          <p>
+            La Banque de France ne transmet ses indicateurs financiers qu’à la
+            condition que l’entreprise ait publié au moins trois bilans.
+            <br />
+            Hors cette entreprise a moins de trois ans d’existence.
+          </p>
+        )}
+      </DataSectionClient>
+    );
+  }
+
   return (
     <AsyncDataSectionClient
-      title="Bilans Banque de France"
+      title="Indicateurs financiers de la Banque de France"
       id="bilans-banque-de-france"
       sources={[EAdministration.BANQUE_DE_FRANCE]}
       isProtected
       data={banqueDeFranceBilansProtected}
-      notFoundInfo="Aucun bilan n’a été retrouvé pour cette structure."
+      notFoundInfo="Aucun indicateur n’a été retrouvé pour cette structure."
     >
       {(bilans) => {
         const body = [

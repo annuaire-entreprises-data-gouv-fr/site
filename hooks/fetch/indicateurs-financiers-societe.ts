@@ -1,11 +1,16 @@
 import { clientBilansFinanciers } from '#clients/open-data-soft/clients/bilans-financiers';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
+import { IDataFetchingState } from '#models/data-fetching';
 import { FetchRessourceException } from '#models/exceptions';
+import { IIndicateursFinanciersSociete } from '#models/finances-societe/types';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchExternalData } from './use-fetch-data';
 
-export function useFetchFinancesSociete(uniteLegale: IUniteLegale) {
+export function useFetchFinancesSociete(
+  uniteLegale: IUniteLegale
+): IIndicateursFinanciersSociete | IAPINotRespondingError | IDataFetchingState {
   const { siren } = uniteLegale;
   return useFetchExternalData(
     {
