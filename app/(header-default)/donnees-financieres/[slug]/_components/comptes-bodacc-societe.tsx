@@ -18,6 +18,7 @@ export default function ComptesBodaccSociete({
 
   return (
     <AsyncDataSectionClient
+      id="comptes-bodacc"
       title="Dépôts des comptes (BODACC C)"
       sources={[EAdministration.DILA]}
       data={bodacc}

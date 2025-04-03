@@ -20,6 +20,7 @@ export default function ComptesAssociationSection({
   return (
     <AsyncDataSectionClient
       data={comptes}
+      id="comptes-association"
       title="Dépôts des Comptes des Associations"
       sources={[EAdministration.DILA]}
     >

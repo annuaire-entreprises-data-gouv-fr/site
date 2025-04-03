@@ -4,19 +4,13 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
 import { IDataFetchingState } from '#models/data-fetching';
 import { FetchRessourceException } from '#models/exceptions';
-import { IBilanFinancier } from '#models/finances-societe/types';
+import { IIndicateursFinanciersSociete } from '#models/finances-societe/types';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchExternalData } from './use-fetch-data';
 
-export interface IFinancesSociete {
-  bilans: IBilanFinancier[];
-  hasBilanConsolide: boolean | undefined;
-  lastModified: any;
-}
-
 export function useFetchFinancesSociete(
   uniteLegale: IUniteLegale
-): IFinancesSociete | IAPINotRespondingError | IDataFetchingState {
+): IIndicateursFinanciersSociete | IAPINotRespondingError | IDataFetchingState {
   const { siren } = uniteLegale;
   return useFetchExternalData(
     {

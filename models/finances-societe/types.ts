@@ -1,10 +1,11 @@
-export type IFinancesSociete = {
-  bilans: IBilanFinancier[];
-  hasBilanConsolide: boolean;
-  lastModified: string | null;
+export type IIndicateursFinanciersSociete = {
+  indicateurs: IIndicateursFinanciers[];
+  hasBilanConsolide: boolean | undefined;
+  hasCADGFiP: boolean;
+  lastModified: any;
 };
 
-export interface IBilanFinancier {
+export interface IIndicateursFinanciers {
   confidentiality: 'Public' | string;
   ratioDeVetuste?: number;
   rotationDesStocksJours?: number;
@@ -27,9 +28,26 @@ export interface IBilanFinancier {
   capaciteDeRemboursement?: number;
   ratioDeLiquidite?: number;
   tauxDEndettement?: number;
-  type?: string;
+  type: string;
   estSimplifie?: boolean;
   estConsolide?: boolean;
   estComplet?: boolean;
   year: number;
+  // zero for open data
+  chiffreAffairesDGFiP?: number;
 }
+
+export const createDefaultIndicateursFinanciersWithDGFiP = (
+  year: number,
+  type: string,
+  dateClotureExercice: string,
+  CADGFiP: number
+): IIndicateursFinanciers => {
+  return {
+    confidentiality: '',
+    year,
+    type,
+    dateClotureExercice,
+    chiffreAffairesDGFiP: CADGFiP,
+  };
+};

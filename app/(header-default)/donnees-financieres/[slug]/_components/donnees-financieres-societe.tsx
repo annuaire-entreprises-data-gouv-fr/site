@@ -7,10 +7,11 @@ import {
 import { ISession } from '#models/authentication/user/session';
 import { estDiffusible } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
+import BilansBDFSocieteSection from './bilans-BDF-societe';
 import BilansDocumentsSociete from './bilans-documents-societe';
-import BilansSocieteSection from './bilans-societe';
 import ComptesBodaccSociete from './comptes-bodacc-societe';
 import { FinancesSocieteSection } from './finances-societe';
+import { FinancesSocieteSummary } from './finances-societe-summary';
 import LiassesFiscalesSection from './liasses-fiscales';
 
 export default function DonneesFinancieresSociete({
@@ -20,29 +21,24 @@ export default function DonneesFinancieresSociete({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
-  const isMoreThanThreeYearsOld =
-    new Date(
-      uniteLegale.dateDebutActivite || uniteLegale.dateCreation
-    ).getFullYear() +
-      3 <=
-    new Date().getFullYear();
-
   return (
     <>
+      <FinancesSocieteSummary session={session} />
       {estDiffusible(uniteLegale) ||
       hasRights(session, ApplicationRights.nonDiffusible) ? (
         <FinancesSocieteSection uniteLegale={uniteLegale} session={session} />
       ) : (
         <DonneesPriveesSection title="Indicateurs financiers" />
       )}
-      {hasRights(session, ApplicationRights.bilans) &&
-        isMoreThanThreeYearsOld && (
-          <>
-            <HorizontalSeparator />
-            <BilansSocieteSection uniteLegale={uniteLegale} session={session} />
-          </>
-        )}
-      <HorizontalSeparator />
+      {hasRights(session, ApplicationRights.bilansBDF) && (
+        <>
+          <HorizontalSeparator />
+          <BilansBDFSocieteSection
+            uniteLegale={uniteLegale}
+            session={session}
+          />
+        </>
+      )}
       <BilansDocumentsSociete uniteLegale={uniteLegale} session={session} />
       <HorizontalSeparator />
       <ComptesBodaccSociete uniteLegale={uniteLegale} />

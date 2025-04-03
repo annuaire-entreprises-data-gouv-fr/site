@@ -6,9 +6,7 @@ import { ISession } from '#models/authentication/user/session';
 
 export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
   <nav role="navigation" aria-labelledby="document-summary-title">
-    <strong id="document-summary-title">
-      Documents disponibles pour cette structure :
-    </strong>
+    <strong id="document-summary-title">Documents disponibles :</strong>
     <ul>
       <li>
         <a href="#justificatifs">Justificatifs d’immatriculation</a>

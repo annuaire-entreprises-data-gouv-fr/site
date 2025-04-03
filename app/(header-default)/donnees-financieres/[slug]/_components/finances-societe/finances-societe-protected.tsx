@@ -8,16 +8,16 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
 import { IChiffreAffairesProtected } from '#models/espace-agent/chiffre-affaires';
+import {
+  createDefaultIndicateursFinanciersWithDGFiP,
+  IIndicateursFinanciersSociete,
+} from '#models/finances-societe/types';
 import { UseCase } from '#models/use-cases';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useFetchFinancesSociete } from 'hooks';
-import { IFinancesSociete } from 'hooks/fetch/finances-societe';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { useMemo } from 'react';
-import {
-  FinancesSocieteContent,
-  IFinancesSocieteIndicateursFinanciers,
-} from './finances-societe-content';
+import { FinancesSocieteInnerSection } from './inner-section';
 
 export function ProtectedFinancesSocieteSection({
   uniteLegale,
@@ -55,17 +55,20 @@ export function ProtectedFinancesSocieteSection({
     <AsyncDataSectionClient
       title="Indicateurs financiers"
       id="finances-societe"
-      sources={[EAdministration.MEF, EAdministration.DGFIP]}
+      sources={[
+        EAdministration.MEF,
+        EAdministration.DGFIP,
+        EAdministration.INPI,
+      ]}
       data={mergedFinancesSociete}
       isProtected={true}
       notFoundInfo="Aucun indicateur financier n'a été retrouvé pour cette structure."
     >
       {(mergedFinancesSociete) => {
         return (
-          <FinancesSocieteContent
-            uniteLegale={uniteLegale}
-            session={session}
+          <FinancesSocieteInnerSection
             financesSociete={mergedFinancesSociete}
+            session={session}
           />
         );
       }}
@@ -74,36 +77,54 @@ export function ProtectedFinancesSocieteSection({
 }
 
 const mergeFinancesSocieteWithChiffreAffaires = (
-  financesSociete: IFinancesSociete | null,
+  financesSociete: IIndicateursFinanciersSociete | null,
   chiffreAffairesProtected: IChiffreAffairesProtected | null
-): IFinancesSocieteIndicateursFinanciers => {
+): IIndicateursFinanciersSociete => {
+  // as we may have different bilan type we can have multiple years
+  // and we dont know CAProtected type + we only have last three years
+  const existingYear = new Set([
+    ...(financesSociete?.indicateurs ?? []).map((i) => [i.year, i.type]),
+    ...(chiffreAffairesProtected ?? []).map((c) => [c.year, 'inconnu']),
+  ]);
+
+  const indicateurs = financesSociete?.indicateurs || [];
+
+  indicateurs.forEach((i) => {
+    // it seems that CADGFIP does not have bilan consolidés
+    if (i.type === 'K') {
+      return;
+    }
+    const existingCADGFiP = chiffreAffairesProtected?.find(
+      (c) => i.year === c.year
+    );
+    if (existingCADGFiP) {
+      i.chiffreAffairesDGFiP = existingCADGFiP.chiffreAffaires;
+    }
+  });
+
+  chiffreAffairesProtected?.forEach((c) => {
+    const existingIndicateursOpenData = financesSociete?.indicateurs.find(
+      (i) => i.year === c.year && i.type !== 'K'
+    );
+    if (!existingIndicateursOpenData) {
+      indicateurs.push(
+        createDefaultIndicateursFinanciersWithDGFiP(
+          c.year,
+          'inconnu',
+          c.dateFinExercice,
+          c.chiffreAffaires
+        )
+      );
+    }
+  });
+
+  indicateurs.sort((a, b) => a.year - b.year);
+
   return {
-    ...financesSociete,
-    bilans: (() => {
-      const existingYears = new Set(
-        (financesSociete?.bilans ?? []).map((bilan) => bilan.year)
-      );
-
-      const mergedBilans = (financesSociete?.bilans ?? []).map((bilan) => ({
-        ...bilan,
-        chiffreDAffairesDgfip: chiffreAffairesProtected?.find(
-          (ca) => ca.year === bilan.year
-        )?.chiffreAffaires,
-      }));
-
-      const additionalBilans = (chiffreAffairesProtected ?? [])
-        .filter((caProtected) => !existingYears.has(caProtected.year))
-        .map((caProtected) => ({
-          year: caProtected.year,
-          chiffreDAffairesDgfip: caProtected.chiffreAffaires,
-          confidentiality:
-            financesSociete?.bilans?.[0]?.confidentiality ?? 'Public',
-          dateClotureExercice: `${caProtected.year}-12-31`,
-        }));
-
-      return [...mergedBilans, ...additionalBilans].sort(
-        (a, b) => a.year - b.year
-      );
-    })(),
+    // default in case of no open data
+    lastModified: financesSociete?.lastModified ?? '',
+    hasBilanConsolide: financesSociete?.hasBilanConsolide ?? false,
+    hasCADGFiP: true,
+    indicateurs,
   };
 };
