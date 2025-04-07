@@ -112,7 +112,7 @@ export const Tabs: React.FC<{
     },
     {
       ficheType: FICHE.DIVERS,
-      path: '/divers/',
+      path: `/divers/${uniteLegale.siren}`,
       label: 'Conventions collectives',
       noFollow: false,
       shouldDisplay: (uniteLegale.listeIdcc || []).length > 0,
