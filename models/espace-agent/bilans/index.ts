@@ -1,5 +1,6 @@
 import { clientApiEntrepriseBilans } from '#clients/api-entreprise/bilans';
 import { IAPINotRespondingError } from '#models/api-not-responding';
+import { UseCase } from '#models/use-cases';
 import { verifySiren } from '#utils/helpers';
 import { handleApiEntrepriseError } from '../utils';
 
@@ -18,10 +19,11 @@ export type IBilansProtected = {
 }[];
 
 export const getBilansProtected = async (
-  maybeSiren: string
+  maybeSiren: string,
+  params: { useCase?: UseCase }
 ): Promise<IBilansProtected | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
-  return clientApiEntrepriseBilans(siren).catch((error) =>
+  return clientApiEntrepriseBilans(siren, params.useCase).catch((error) =>
     handleApiEntrepriseError(error, {
       siren,
       apiResource: 'BilansProtected',

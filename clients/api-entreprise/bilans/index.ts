@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import { IBilansProtected } from '#models/espace-agent/bilans';
+import { UseCase } from '#models/use-cases';
 import { Siren } from '#utils/helpers';
 import clientAPIEntreprise from '../client';
 import { IAPIEntrepriseBanqueDeFranceBilans } from './types';
@@ -7,11 +8,16 @@ import { IAPIEntrepriseBanqueDeFranceBilans } from './types';
 /**
  * GET association from API Entreprise
  */
-export async function clientApiEntrepriseBilans(siren: Siren) {
+export async function clientApiEntrepriseBilans(
+  siren: Siren,
+  useCase?: UseCase
+) {
   return await clientAPIEntreprise<
     IAPIEntrepriseBanqueDeFranceBilans,
     IBilansProtected
-  >(routes.apiEntreprise.banqueDeFrance.bilans(siren), mapToDomainObject);
+  >(routes.apiEntreprise.banqueDeFrance.bilans(siren), mapToDomainObject, {
+    useCase,
+  });
 }
 const mapToDomainObject = (
   response: IAPIEntrepriseBanqueDeFranceBilans

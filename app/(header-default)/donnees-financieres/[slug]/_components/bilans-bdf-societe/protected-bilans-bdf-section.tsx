@@ -1,63 +1,53 @@
 'use client';
 
 import FAQLink from '#components-ui/faq-link';
-import { DataSectionClient } from '#components/section/data-section';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
+import { UseCase } from '#models/use-cases';
 import { formatCurrency, formatDate, getDateFromYYYYMM } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { useMemo } from 'react';
 
 export default function BilansBDFSocieteSection({
   uniteLegale,
   session,
+  useCase,
+  title,
+  id,
+  sources,
+  isProtected,
 }: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
+  useCase: UseCase;
+  title: string;
+  id: string;
+  sources: EAdministration[];
+  isProtected: boolean;
 }) {
+  const params = useMemo(
+    () => ({
+      params: { useCase },
+    }),
+    [useCase]
+  );
   const banqueDeFranceBilansProtected = useAPIRouteData(
     APIRoutesPaths.EspaceAgentBilansProtected,
     uniteLegale.siren,
-    session
+    session,
+    params
   );
-
-  const isMoreThanThreeYearsOld =
-    new Date(
-      uniteLegale.dateDebutActivite || uniteLegale.dateCreation
-    ).getFullYear() +
-      3 <=
-    new Date().getFullYear();
-
-  if (!isMoreThanThreeYearsOld) {
-    return (
-      <DataSectionClient
-        title="Indicateurs financiers de la Banque de France"
-        id="bilans-banque-de-france"
-        sources={[EAdministration.BANQUE_DE_FRANCE]}
-        isProtected
-        data={null}
-      >
-        {() => (
-          <p>
-            La Banque de France ne transmet ses indicateurs financiers qu’à la
-            condition que l’entreprise ait publié au moins trois bilans.
-            <br />
-            Hors cette entreprise a moins de trois ans d’existence.
-          </p>
-        )}
-      </DataSectionClient>
-    );
-  }
 
   return (
     <AsyncDataSectionClient
-      title="Indicateurs financiers de la Banque de France"
-      id="bilans-banque-de-france"
-      sources={[EAdministration.BANQUE_DE_FRANCE]}
-      isProtected
+      title={title}
+      id={id}
+      isProtected={isProtected}
+      sources={sources}
       data={banqueDeFranceBilansProtected}
       notFoundInfo="Aucun indicateur n’a été retrouvé pour cette structure."
     >

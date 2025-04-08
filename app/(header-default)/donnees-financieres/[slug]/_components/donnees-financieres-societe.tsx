@@ -7,7 +7,7 @@ import {
 import { ISession } from '#models/authentication/user/session';
 import { estDiffusible } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
-import BilansBDFSocieteSection from './bilans-BDF-societe';
+import BilansBDFSociete from './bilans-bdf-societe';
 import BilansDocumentsSociete from './bilans-documents-societe';
 import ComptesBodaccSociete from './comptes-bodacc-societe';
 import { FinancesSocieteSection } from './finances-societe';
@@ -33,10 +33,7 @@ export default function DonneesFinancieresSociete({
       {hasRights(session, ApplicationRights.bilansBDF) && (
         <>
           <HorizontalSeparator />
-          <BilansBDFSocieteSection
-            uniteLegale={uniteLegale}
-            session={session}
-          />
+          <BilansBDFSociete uniteLegale={uniteLegale} session={session} />
         </>
       )}
       <BilansDocumentsSociete uniteLegale={uniteLegale} session={session} />
