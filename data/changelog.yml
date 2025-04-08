@@ -11,6 +11,13 @@
 #   site: true
 
 ---
+- date: 08/04/2025
+  target:
+    site: true
+  body: |
+    Modification de l'onglet "Données financières" pour les entreprises.
+
+    Quand une entreprise déclare un bilan consolidé, il est désormais également possible de consulter les données du bilan simplifié ou complet.
 - date: 27/03/2025
   target:
     site: true
