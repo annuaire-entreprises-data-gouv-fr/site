@@ -146,7 +146,7 @@ export function FinancesSocieteChartAndTable({
       label: "Chiffre d'affaires DGFiP",
       tension: 0.3,
       data: indicateurs.map(
-        (bilanIndicateurs) => bilanIndicateurs.chiffreAffairesDGFiP ?? 0
+        (bilanIndicateurs) => bilanIndicateurs.chiffreAffairesDGFiP ?? null
       ),
       borderColor: colorCADGFiP,
       backgroundColor: colorCADGFiP,
