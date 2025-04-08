@@ -41,8 +41,9 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]: withRateLimiting(
     getEffectifsAnnuelsProtected
   ),
-  [APIRoutesPaths.EspaceAgentBilansProtected]:
-    withRateLimiting(getBilansProtected),
+  [APIRoutesPaths.EspaceAgentBilansProtected]: withRateLimiting(
+    withUseCase(getBilansProtected)
+  ),
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]: withRateLimiting(
     withUseCase(getChiffreAffairesProtected)
   ),

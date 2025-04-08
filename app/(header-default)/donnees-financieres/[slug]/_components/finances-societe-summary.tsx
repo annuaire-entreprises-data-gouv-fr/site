@@ -15,11 +15,11 @@ export const FinancesSocieteSummary = ({
     </strong>
     <ul>
       <li>
-        <a href="#finances-association">Indicateurs financiers</a>
+        <a href="#indicateurs-financiers">Indicateurs financiers</a>
       </li>
       {hasRights(session, ApplicationRights.bilansBDF) && (
         <li>
-          <a href="#finances-association">
+          <a href="#indicateurs-financiers-banque-de-france">
             Indicateurs financiers de la Banque de France
           </a>
         </li>

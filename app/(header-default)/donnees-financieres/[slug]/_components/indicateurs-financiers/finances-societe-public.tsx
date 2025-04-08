@@ -44,7 +44,7 @@ export function PublicFinancesSocieteSection({
   return (
     <AsyncDataSectionClient
       title="Indicateurs financiers"
-      id="finances-societe"
+      id="indicateurs-financiers"
       sources={[EAdministration.MEF, EAdministration.INPI]}
       data={financesSociete}
       isProtected={false}
