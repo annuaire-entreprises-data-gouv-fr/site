@@ -102,16 +102,6 @@ const sentryBuildOptions: SentryBuildOptions = {
   },
   telemetry: false,
   widenClientFileUpload: true,
-
-  release: {
-    create: true,
-    finalize: true,
-    name: process.env.SOURCE_VERSION,
-    setCommits: {
-      ignoreMissing: true,
-      auto: true,
-    },
-  },
 };
 
 export default WITH_SENTRY && !DISABLE_SOURCEMAP_UPLOAD
