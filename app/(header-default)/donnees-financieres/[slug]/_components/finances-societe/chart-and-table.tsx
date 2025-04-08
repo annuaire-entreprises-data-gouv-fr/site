@@ -124,17 +124,17 @@ export function FinancesSocieteChartAndTable({
       label: "Chiffre d'affaires",
       tension: 0.3,
       data: indicateurs.map(
-        (bilanIndicateurs) => bilanIndicateurs.chiffreDAffaires ?? 0
+        (bilanIndicateurs) => bilanIndicateurs.chiffreDAffaires ?? null
       ),
       borderColor: colorCA,
       backgroundColor: colorCA,
     },
 
     {
-      label: 'Resultat net',
+      label: 'Résultat net',
       tension: 0.3,
       data: indicateurs.map(
-        (bilanIndicateurs) => bilanIndicateurs.resultatNet ?? 0
+        (bilanIndicateurs) => bilanIndicateurs.resultatNet ?? null
       ),
       borderColor: colorResultat,
       backgroundColor: colorResultat,

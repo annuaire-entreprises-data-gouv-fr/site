@@ -25,7 +25,7 @@ export const FinancesSocieteInnerSection = ({
           <FAQLink tooltipLabel="Consolidés">
             Une entreprise peut déposer différents types de bilans :
             <ul>
-              <li>simplifié : un bilan allégée</li>
+              <li>simplifié : un bilan allégé</li>
               <li>complet : le bilan classique</li>
               <li>
                 consolidé : un bilan qui intègre les données des filiales d’un
@@ -49,7 +49,7 @@ export const FinancesSocieteInnerSection = ({
       <FAQLink tooltipLabel="Complets ou Simplifiés">
         Une entreprise peut déposer différents types de bilans :
         <ul>
-          <li>simplifié : un bilan allégée</li>
+          <li>simplifié : un bilan allégé</li>
           <li>complet : le bilan classique</li>
           <li>
             consolidé : un bilan qui intègre les données des filiales d’un

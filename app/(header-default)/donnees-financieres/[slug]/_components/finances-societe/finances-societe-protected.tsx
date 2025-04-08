@@ -80,17 +80,13 @@ const mergeFinancesSocieteWithChiffreAffaires = (
   financesSociete: IIndicateursFinanciersSociete | null,
   chiffreAffairesProtected: IChiffreAffairesProtected | null
 ): IIndicateursFinanciersSociete => {
-  // as we may have different bilan type we can have multiple years
-  // and we dont know CAProtected type + we only have last three years
-  const existingYear = new Set([
-    ...(financesSociete?.indicateurs ?? []).map((i) => [i.year, i.type]),
-    ...(chiffreAffairesProtected ?? []).map((c) => [c.year, 'inconnu']),
-  ]);
-
+  // NOTES:
+  // - we may have different bilan type between protected and open data
+  // - we dont know the bilan type of protected data + we only have last three years
   const indicateurs = financesSociete?.indicateurs || [];
 
   indicateurs.forEach((i) => {
-    // it seems that CADGFIP does not have bilan consolidés
+    // it seems that CADGFIP does not have bilans consolidés
     if (i.type === 'K') {
       return;
     }
@@ -102,21 +98,23 @@ const mergeFinancesSocieteWithChiffreAffaires = (
     }
   });
 
-  chiffreAffairesProtected?.forEach((c) => {
-    const existingIndicateursOpenData = financesSociete?.indicateurs.find(
-      (i) => i.year === c.year && i.type !== 'K'
-    );
-    if (!existingIndicateursOpenData) {
-      indicateurs.push(
-        createDefaultIndicateursFinanciersWithDGFiP(
-          c.year,
-          'inconnu',
-          c.dateFinExercice,
-          c.chiffreAffaires
-        )
+  if (chiffreAffairesProtected) {
+    chiffreAffairesProtected.forEach((c) => {
+      const existingIndicateursOpenData = financesSociete?.indicateurs.find(
+        (i) => i.year === c.year && i.type !== 'K'
       );
-    }
-  });
+      if (!existingIndicateursOpenData) {
+        indicateurs.push(
+          createDefaultIndicateursFinanciersWithDGFiP(
+            c.year,
+            'inconnu',
+            c.dateFinExercice,
+            c.chiffreAffaires
+          )
+        );
+      }
+    });
+  }
 
   indicateurs.sort((a, b) => a.year - b.year);
 
