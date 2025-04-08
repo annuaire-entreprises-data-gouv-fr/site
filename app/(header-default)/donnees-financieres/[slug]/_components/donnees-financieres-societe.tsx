@@ -10,8 +10,8 @@ import { IUniteLegale } from '#models/core/types';
 import BilansBDFSociete from './bilans-bdf-societe';
 import BilansDocumentsSociete from './bilans-documents-societe';
 import ComptesBodaccSociete from './comptes-bodacc-societe';
-import { FinancesSocieteSection } from './finances-societe';
 import { FinancesSocieteSummary } from './finances-societe-summary';
+import { FinancesSocieteSection } from './indicateurs-financiers';
 import LiassesFiscalesSection from './liasses-fiscales';
 
 export default function DonneesFinancieresSociete({

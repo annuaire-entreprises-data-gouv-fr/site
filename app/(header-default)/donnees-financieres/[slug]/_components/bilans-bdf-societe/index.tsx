@@ -27,7 +27,7 @@ export default function BilansBDFSociete({
     return (
       <DataSectionClient
         title="Indicateurs financiers de la Banque de France"
-        id="bilans-banque-de-france"
+        id="indicateurs-financiers-banque-de-france"
         sources={[EAdministration.BANQUE_DE_FRANCE]}
         isProtected
         data={null}
@@ -48,8 +48,8 @@ export default function BilansBDFSociete({
     <ProtectedSectionWithUseCase
       session={session}
       uniteLegale={uniteLegale}
-      title="Bilans Banque de France"
-      id="bilans-banque-de-france"
+      title="Indicateurs financiers de la Banque de France"
+      id="indicateurs-financiers-banque-de-france"
       sources={[EAdministration.BANQUE_DE_FRANCE]}
       allowedUseCases={[UseCase.fraude]}
       requiredRight={ApplicationRights.bilansBDF}
