@@ -157,15 +157,13 @@ export default function SubventionsAssociationSection({
   }, [subventions, selectedYear, selectedStatus]);
 
   if (isUnauthorized(subventions)) {
-    return (
-      <AgentWall id="detail-des-subventions" title="Détail des subventions" />
-    );
+    return <AgentWall id="detail-des-subventions" title="Subventions reçues" />;
   }
 
   return (
     <DataSectionClient
       id="detail-des-subventions"
-      title="Détail des subventions"
+      title="Subventions reçues"
       sources={[EAdministration.DJEPVA]}
       notFoundInfo="Aucune demande de subvention n’a été trouvée pour cette association."
       data={subventions}

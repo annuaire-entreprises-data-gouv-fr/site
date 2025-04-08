@@ -33,7 +33,7 @@ describe('Données financières', () => {
     cy.contains('Résultat net');
     cy.contains('2 Mds €');
 
-    cy.contains('Source : MEF');
+    cy.contains('MEF, INPI');
   });
 
   it('Should display dépôts de compte section (JOAFE)', () => {
@@ -52,7 +52,7 @@ describe('Bilans financiers (authenticated)', () => {
   });
   it('Should display "Détail des subventions"', () => {
     cy.visit('/donnees-financieres/338365059');
-    cy.contains('Détail des subventions').should('be.visible');
+    cy.contains('Subventions reçues').should('be.visible');
     cy.contains('État').should('be.visible');
     cy.contains('Refusé').should('be.visible');
   });
