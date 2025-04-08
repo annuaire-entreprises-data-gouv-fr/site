@@ -7,9 +7,9 @@ import { ApplicationRights } from '#models/authentication/user/rights';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/use-cases';
-import ProtectedLiassesFiscalesSection from './protected-liasses-fiscales-section';
+import { ProtectedLiassesFiscales } from './protected-liasses-fiscales';
 
-export default function LiassesFiscalesSection({
+export function LiassesFiscales({
   uniteLegale,
   session,
 }: {
@@ -27,7 +27,7 @@ export default function LiassesFiscalesSection({
         sources={[EAdministration.DGFIP]}
         allowedUseCases={[UseCase.fraude]}
         requiredRight={ApplicationRights.liassesFiscales}
-        WrappedSection={ProtectedLiassesFiscalesSection}
+        WrappedSection={ProtectedLiassesFiscales}
       />
     </>
   );

@@ -12,7 +12,7 @@ import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 import { useMemo } from 'react';
 
-export default function BilansBDFSocieteSection({
+export function ProtectedIndicateursFinanciersBDF({
   uniteLegale,
   session,
   useCase,

@@ -7,12 +7,12 @@ import {
 import { ISession } from '#models/authentication/user/session';
 import { estDiffusible } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
-import BilansBDFSociete from './bilans-bdf-societe';
-import BilansDocumentsSociete from './bilans-documents-societe';
-import ComptesBodaccSociete from './comptes-bodacc-societe';
+import { BilansDocumentsSociete } from './bilans-documents-societe';
+import { ComptesBodaccSociete } from './comptes-bodacc-societe';
 import { FinancesSocieteSummary } from './finances-societe-summary';
-import { FinancesSocieteSection } from './indicateurs-financiers';
-import LiassesFiscalesSection from './liasses-fiscales';
+import { IndicateursFinanciers } from './indicateurs-financiers';
+import { IndicateursFinanciersBDF } from './indicateurs-financiers-bdf';
+import { LiassesFiscales } from './liasses-fiscales';
 
 export default function DonneesFinancieresSociete({
   uniteLegale,
@@ -26,20 +26,23 @@ export default function DonneesFinancieresSociete({
       <FinancesSocieteSummary session={session} />
       {estDiffusible(uniteLegale) ||
       hasRights(session, ApplicationRights.nonDiffusible) ? (
-        <FinancesSocieteSection uniteLegale={uniteLegale} session={session} />
+        <IndicateursFinanciers uniteLegale={uniteLegale} session={session} />
       ) : (
         <DonneesPriveesSection title="Indicateurs financiers" />
       )}
       {hasRights(session, ApplicationRights.bilansBDF) && (
         <>
           <HorizontalSeparator />
-          <BilansBDFSociete uniteLegale={uniteLegale} session={session} />
+          <IndicateursFinanciersBDF
+            uniteLegale={uniteLegale}
+            session={session}
+          />
         </>
       )}
       <BilansDocumentsSociete uniteLegale={uniteLegale} session={session} />
       <HorizontalSeparator />
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
-      <LiassesFiscalesSection uniteLegale={uniteLegale} session={session} />
+      <LiassesFiscales uniteLegale={uniteLegale} session={session} />
     </>
   );
 }

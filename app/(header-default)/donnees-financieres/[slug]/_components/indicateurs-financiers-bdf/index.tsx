@@ -7,9 +7,9 @@ import { ApplicationRights } from '#models/authentication/user/rights';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
 import { UseCase } from '#models/use-cases';
-import ProtectedBilansBdfSection from './protected-bilans-bdf-section';
+import { ProtectedIndicateursFinanciersBDF } from './protected-indicateurs-financiers-bdf';
 
-export default function BilansBDFSociete({
+export function IndicateursFinanciersBDF({
   uniteLegale,
   session,
 }: {
@@ -53,7 +53,7 @@ export default function BilansBDFSociete({
       sources={[EAdministration.BANQUE_DE_FRANCE]}
       allowedUseCases={[UseCase.fraude]}
       requiredRight={ApplicationRights.bilansBDF}
-      WrappedSection={ProtectedBilansBdfSection}
+      WrappedSection={ProtectedIndicateursFinanciersBDF}
     />
   );
 }

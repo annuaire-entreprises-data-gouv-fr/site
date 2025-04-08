@@ -6,9 +6,9 @@ import {
 } from '#models/authentication/user/rights';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
-import AgentBilansSection from './bilans-documents-societe-protected';
+import AgentBilansSection from './protected-bilans-documents-societe';
 
-export default function BilansDocumentsSociete({
+export function BilansDocumentsSociete({
   uniteLegale,
   session,
 }: {

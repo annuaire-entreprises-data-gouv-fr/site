@@ -102,7 +102,7 @@ const InnerLiassesSection = ({
   );
 };
 
-export default function ProtectedLiassesFiscalesSection({
+export function ProtectedLiassesFiscales({
   uniteLegale,
   session,
   useCase,

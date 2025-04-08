@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { ProtectedFinancesSocieteSection } from './finances-societe-protected';
 import { PublicFinancesSocieteSection } from './finances-societe-public';
 
-export function FinancesSocieteSection({
+export function IndicateursFinanciers({
   uniteLegale,
   session,
 }: {
