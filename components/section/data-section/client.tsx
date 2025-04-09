@@ -116,7 +116,10 @@ function useShowLoadingState<T>(
 export function mergeDataSources<T, U, V>(
   data1: IAPINotRespondingError | IDataFetchingState | T,
   data2: IAPINotRespondingError | IDataFetchingState | U,
-  mergeFunction: (data1: T | null, data2: U | null) => V
+  mergeFunction: (
+    data1: T | null,
+    data2: U | null
+  ) => IAPINotRespondingError | V
 ): IAPINotRespondingError | IDataFetchingState | V {
   if (isUnauthorized(data1) || isUnauthorized(data2)) {
     return IDataFetchingState.UNAUTHORIZED;
@@ -143,5 +146,6 @@ export function mergeDataSources<T, U, V>(
   if (isDataSuccess(data2) && isAPI404(data1)) {
     return mergeFunction(null, data2);
   }
-  return mergeFunction(null, null);
+
+  return data1 as IAPINotRespondingError;
 }
