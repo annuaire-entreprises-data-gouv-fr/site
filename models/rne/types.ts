@@ -9,12 +9,18 @@ interface IBilanRNE {
   dateDepot: string;
   dateCloture: string;
   typeBilan: string;
+  confidentiality: string; // ADDED
+}
+
+export interface IDocumentsRNE {
+  actes: IActeRNE[];
+  bilans: IBilanRNE[];
 }
 
 export interface IActesRNE {
   actes: IActeRNE[];
   bilans: IBilanRNE[];
-  hasBilanConsolide: boolean;
+  hasBilanConsolide: boolean; // SAME AS UPPER ?
 }
 
 export interface IEtatCivil {
