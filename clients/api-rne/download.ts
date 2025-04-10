@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 import constants from '#models/constants';
-import { actesApiRneClient } from '#utils/auth/api-rne';
+import { actesApiRneClient } from './auth';
 
 export const clientDownloadActe = async (id: string) => {
   const encodedId = encodeURIComponent(id);

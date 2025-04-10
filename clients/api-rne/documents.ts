@@ -1,10 +1,10 @@
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { IDocumentsRNE } from '#models/rne/types';
-import { actesApiRneClient } from '#utils/auth/api-rne';
 import { Siren } from '#utils/helpers';
 import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-request-caller-infos';
 import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
+import { actesApiRneClient } from './auth';
 
 type IDocumentsRNEResponse = {
   actes: {

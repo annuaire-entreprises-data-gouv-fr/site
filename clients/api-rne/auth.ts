@@ -7,9 +7,6 @@ import constants from '#models/constants';
 import { Information } from '#models/exceptions';
 import httpClient, { httpGet, IDefaultRequestConfig } from '#utils/network';
 import { logWarningInSentry } from '#utils/sentry';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 enum ECredentialType {
   DEFAULT,
@@ -106,7 +103,6 @@ class RNEClient {
   };
 }
 
-const defaultApiRneClient = new RNEClient(ECredentialType.DEFAULT);
 const actesApiRneClient = new RNEClient(ECredentialType.ACTES);
 
-export { actesApiRneClient, defaultApiRneClient };
+export { actesApiRneClient };
