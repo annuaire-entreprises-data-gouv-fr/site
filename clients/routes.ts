@@ -199,14 +199,6 @@ const routes = {
         fallback: (siren: string) =>
           `https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/fallback/${siren}`,
       },
-      documents: {
-        list: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/documents/',
-        download: {
-          acte: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/download/acte/',
-          bilan:
-            'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/download/bilan/',
-        },
-      },
     },
     association: (rnaOrSiren: string) =>
       `https://annuaire-entreprises-api-proxy.api.gouv.fr/association/${rnaOrSiren}`,

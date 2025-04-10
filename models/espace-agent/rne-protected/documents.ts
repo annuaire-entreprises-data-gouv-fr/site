@@ -1,4 +1,4 @@
-import { clientDocuments } from '#clients/api-proxy/rne/documents';
+import { clientDocuments } from '#clients/api-rne/documents';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { APINotRespondingFactory } from '#models/api-not-responding';
@@ -9,8 +9,6 @@ export async function getDocumentsRNEProtected(maybeSiren: string) {
 
   try {
     const actes = await clientDocuments(siren);
-    actes.hasBilanConsolide =
-      actes.bilans.filter((b) => b.typeBilan === 'K').length > 0;
     return actes;
   } catch (e: any) {
     if (e instanceof HttpNotFound) {

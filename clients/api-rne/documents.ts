@@ -3,6 +3,8 @@ import constants from '#models/constants';
 import { IDocumentsRNE } from '#models/rne/types';
 import { actesApiRneClient } from '#utils/auth/api-rne';
 import { Siren } from '#utils/helpers';
+import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-request-caller-infos';
+import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
 
 type IDocumentsRNEResponse = {
   actes: {
@@ -48,7 +50,12 @@ type IDocumentsRNEResponse = {
   }[];
 };
 
-export const listDocumentsRne = async (siren: Siren) => {
+export const clientDocuments = async (siren: Siren) => {
+  const route = routes.inpi.api.rne.cmc.companies + siren + '/attachments';
+
+  const callerInfos = await sensitiveRequestCallerInfos();
+  sensitiveRequestLogger(route, callerInfos);
+
   const response = await actesApiRneClient.get<IDocumentsRNEResponse>(
     routes.inpi.api.rne.cmc.companies + siren + '/attachments',
     { timeout: constants.timeout.XXXL }
@@ -83,5 +90,7 @@ const mapToDomainObject = (response: IDocumentsRNEResponse): IDocumentsRNE => {
         confidentiality: a.confidentiality || '',
       };
     }),
+    hasBilanConsolide:
+      (response?.bilans || []).filter((b) => b.typeBilan === 'K').length > 0,
   };
 };
