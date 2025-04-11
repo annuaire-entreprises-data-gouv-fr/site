@@ -13,7 +13,7 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
-import { IActesRNE } from '#models/rne/types';
+import { IDocumentsRNE } from '#models/rne/types';
 import { formatDateLong, pluralize } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
@@ -24,7 +24,7 @@ const NoBilans = () => (
   <>Aucun compte n’a été déposé au RNE pour cette entreprise.</>
 );
 
-const BilansTable = ({ bilans }: { bilans: IActesRNE['bilans'] }) => (
+const BilansTable = ({ bilans }: { bilans: IDocumentsRNE['bilans'] }) => (
   <FullTable
     head={['Date de dépôt', 'Année fiscale', 'Type de bilan', 'Lien']}
     body={bilans.map((a) => [

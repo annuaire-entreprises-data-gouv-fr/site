@@ -9,7 +9,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale, isServicePublic } from '#models/core/types';
-import { IActesRNE } from '#models/rne/types';
+import { IDocumentsRNE } from '#models/rne/types';
 import { formatDateLong } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
@@ -67,7 +67,7 @@ export const AgentActesRNE: React.FC<{
 };
 
 type IActesTableProps = {
-  actes: IActesRNE['actes'];
+  actes: IDocumentsRNE['actes'];
 };
 export function ActesTable({ actes }: IActesTableProps) {
   return (

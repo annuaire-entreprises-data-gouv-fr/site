@@ -9,9 +9,10 @@ interface IBilanRNE {
   dateDepot: string;
   dateCloture: string;
   typeBilan: string;
+  confidentiality: string;
 }
 
-export interface IActesRNE {
+export interface IDocumentsRNE {
   actes: IActeRNE[];
   bilans: IBilanRNE[];
   hasBilanConsolide: boolean;
