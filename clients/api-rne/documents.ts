@@ -12,10 +12,9 @@ export const clientDocuments = async (siren: Siren) => {
   const callerInfos = await sensitiveRequestCallerInfos();
   sensitiveRequestLogger(route, callerInfos);
 
-  const response = await actesApiRneClient.get<IDocumentsRNEResponse>(
-    routes.inpi.api.rne.cmc.companies + siren + '/attachments',
-    { timeout: constants.timeout.XXXL }
-  );
+  const response = await actesApiRneClient.get<IDocumentsRNEResponse>(route, {
+    timeout: constants.timeout.XXXL,
+  });
 
   return mapToDomainObject(response);
 };
