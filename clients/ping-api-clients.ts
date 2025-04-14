@@ -10,6 +10,7 @@ import { clientAPIInclusion } from './api-inclusion';
 import { clientEORI } from './api-proxy/eori';
 import { clientUniteLegaleIG } from './api-proxy/greffe';
 import { clientTVA } from './api-proxy/tva';
+import { clientDocuments } from './api-rne/documents';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
 import { clientUniteLegaleRechercheEntreprise } from './recherche-entreprise/siren';
 import { clientUniteLegaleInsee } from './sirene-insee/siren';
@@ -49,6 +50,8 @@ const ping = async (slug: string | string[]) => {
         searchFilterParams: undefined,
         inclureEtablissements: false,
       });
+    case 'api-rne':
+      return await clientDocuments(sirenDanone);
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }
