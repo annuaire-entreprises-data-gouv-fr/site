@@ -174,6 +174,20 @@ const routes = {
       },
     },
   },
+  inpi: {
+    api: {
+      rne: {
+        login: 'https://registre-national-entreprises.inpi.fr/api/sso/login',
+        documents: {
+          list: 'https://registre-national-entreprises.inpi.fr/api/companies/',
+          download: {
+            actes: 'https://registre-national-entreprises.inpi.fr/api/actes/',
+            bilans: 'https://registre-national-entreprises.inpi.fr/api/bilans/',
+          },
+        },
+      },
+    },
+  },
   proxy: {
     ig: (siren: string) =>
       `https://annuaire-entreprises-api-proxy.api.gouv.fr/ig/${siren}`,
@@ -183,14 +197,6 @@ const routes = {
           `https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/${siren}`,
         fallback: (siren: string) =>
           `https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/fallback/${siren}`,
-      },
-      documents: {
-        list: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/documents/',
-        download: {
-          acte: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/download/acte/',
-          bilan:
-            'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/download/bilan/',
-        },
       },
     },
     association: (rnaOrSiren: string) =>
