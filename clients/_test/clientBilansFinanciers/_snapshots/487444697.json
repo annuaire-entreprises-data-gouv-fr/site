@@ -3,7 +3,7 @@
     "487444697"
   ],
   "result": {
-    "bilans": [
+    "indicateurs": [
       {
         "confidentiality": "Partiellement confidentiel",
         "ratioDeVetuste": 90.991,
@@ -27,7 +27,7 @@
         "capaciteDeRemboursement": 0,
         "ratioDeLiquidite": 241.477,
         "tauxDEndettement": 186.013,
-        "type": "c",
+        "type": "C",
         "estSimplifie": false,
         "estConsolide": false,
         "estComplet": true,
@@ -56,7 +56,7 @@
         "capaciteDeRemboursement": 12.908,
         "ratioDeLiquidite": 360.23,
         "tauxDEndettement": 228.905,
-        "type": "c",
+        "type": "C",
         "estSimplifie": false,
         "estConsolide": false,
         "estComplet": true,
@@ -85,7 +85,7 @@
         "capaciteDeRemboursement": 0,
         "ratioDeLiquidite": 156.701,
         "tauxDEndettement": -167.972,
-        "type": "c",
+        "type": "C",
         "estSimplifie": false,
         "estConsolide": false,
         "estComplet": true,
@@ -114,7 +114,7 @@
         "capaciteDeRemboursement": -2.718,
         "ratioDeLiquidite": 260.954,
         "tauxDEndettement": -121.548,
-        "type": "c",
+        "type": "C",
         "estSimplifie": false,
         "estConsolide": false,
         "estComplet": true,
@@ -122,6 +122,7 @@
       }
     ],
     "hasBilanConsolide": false,
-    "lastModified": "2023-10-18T23:19:19.590091+00:00"
+    "lastModified": "2023-10-18T23:19:19.590091+00:00",
+    "hasCADGFiP": false
   }
 }

@@ -162,8 +162,8 @@
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 2906,
-          "nombreEtablissements": 3015,
+          "nombreEtablissementsOuverts": 2914,
+          "nombreEtablissements": 3023,
           "usePagination": true,
           "currentEtablissementPage": 1
         },
@@ -172,7 +172,7 @@
         "dateCreation": "1983-03-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-11-18T16:40:16",
+        "dateMiseAJourInsee": "2025-04-10T09:00:58.211",
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -184,6 +184,7 @@
           "estBio": false,
           "estEss": false,
           "estServicePublic": true,
+          "estL100_3": true,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": true,
           "statutEntrepreneurSpectacle": "valide",
@@ -1709,8 +1710,8 @@
         ],
         "immatriculation": null,
         "matchingEtablissements": [],
-        "nombreEtablissements": 3015,
-        "nombreEtablissementsOuverts": 2906,
+        "nombreEtablissements": 3023,
+        "nombreEtablissementsOuverts": 2914,
         "dirigeants": []
       }
     ]

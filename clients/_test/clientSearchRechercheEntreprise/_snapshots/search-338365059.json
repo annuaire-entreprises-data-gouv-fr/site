@@ -172,6 +172,7 @@
           "estBio": false,
           "estEss": true,
           "estServicePublic": false,
+          "estL100_3": false,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
