@@ -178,13 +178,12 @@ const routes = {
     api: {
       rne: {
         login: 'https://registre-national-entreprises.inpi.fr/api/sso/login',
-        cmc: {
-          companies:
-            'https://registre-national-entreprises.inpi.fr/api/companies/',
-        },
-        download: {
-          bilan: 'https://registre-national-entreprises.inpi.fr/api/bilans/',
-          acte: 'https://registre-national-entreprises.inpi.fr/api/actes/',
+        documents: {
+          list: 'https://registre-national-entreprises.inpi.fr/api/companies/',
+          download: {
+            actes: 'https://registre-national-entreprises.inpi.fr/api/actes/',
+            bilans: 'https://registre-national-entreprises.inpi.fr/api/bilans/',
+          },
         },
       },
     },

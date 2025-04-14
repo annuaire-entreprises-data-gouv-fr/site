@@ -4,7 +4,7 @@ import { actesApiRneClient } from './auth';
 
 export const clientDownloadActe = async (id: string) => {
   const encodedId = encodeURIComponent(id);
-  const url = `${routes.inpi.api.rne.download.acte}${encodedId}/download`;
+  const url = `${routes.inpi.api.rne.documents.download.actes}${encodedId}/download`;
   return await actesApiRneClient.get<string>(url, {
     timeout: constants.timeout.XXXL,
     responseType: 'arraybuffer',
@@ -13,7 +13,7 @@ export const clientDownloadActe = async (id: string) => {
 
 export const clientDownloadBilan = async (id: string) => {
   const encodedId = encodeURIComponent(id);
-  const url = `${routes.inpi.api.rne.download.bilan}${encodedId}/download`;
+  const url = `${routes.inpi.api.rne.documents.download.bilans}${encodedId}/download`;
 
   return await actesApiRneClient.get<string>(url, {
     timeout: constants.timeout.XXXL,
