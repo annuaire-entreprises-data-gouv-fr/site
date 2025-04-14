@@ -4,47 +4,17 @@ import {
 } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
-import { Information } from '#models/exceptions';
 import httpClient, { httpGet, IDefaultRequestConfig } from '#utils/network';
-import { logWarningInSentry } from '#utils/sentry';
-
-enum ECredentialType {
-  DEFAULT,
-  ACTES,
-}
 
 class RNEClient {
   private _token = '';
-  private _currentAccountIndex = 0;
-  private accounts;
+  private account = [
+    process.env.RNE_LOGIN_ACTES_1,
+    process.env.RNE_PASSWORD_ACTES_1,
+  ];
 
-  constructor(credentialType = ECredentialType.DEFAULT) {
-    this.accounts =
-      credentialType === ECredentialType.ACTES
-        ? [
-            [process.env.RNE_LOGIN_ACTES_1, process.env.RNE_PASSWORD_ACTES_1],
-            [process.env.RNE_LOGIN_ACTES_2, process.env.RNE_PASSWORD_ACTES_2],
-            [process.env.RNE_LOGIN_ACTES_3, process.env.RNE_PASSWORD_ACTES_3],
-          ]
-        : [[process.env.RNE_LOGIN, process.env.RNE_PASSWORD]];
-  }
-
-  refreshToken = async (shouldRotateAccount = false, e = {}) => {
-    if (shouldRotateAccount) {
-      this._currentAccountIndex =
-        (this._currentAccountIndex + 1) % this.accounts.length;
-
-      logWarningInSentry(
-        new Information({
-          name: 'Rotating RNE account',
-          context: {
-            details: `new pair : ${this._currentAccountIndex}, cause : ${e}`,
-          },
-        })
-      );
-    }
-
-    const [username, password] = this.accounts[this._currentAccountIndex];
+  refreshToken = async () => {
+    const [username, password] = this.account;
 
     const response = await httpClient<{ token: string }>({
       method: 'POST',
@@ -86,15 +56,12 @@ class RNEClient {
        * Unauthorized can either be
        * - token needs to be refresh
        * - account is blocked
-       *
-       * In both case rotating account is safer
        */
       if (
         e instanceof HttpTooManyRequests ||
         e instanceof HttpUnauthorizedError
       ) {
-        const shouldRotateAccount = true;
-        this._token = await this.refreshToken(shouldRotateAccount, e);
+        this._token = await this.refreshToken();
         return await callback();
       } else {
         throw e;
@@ -103,6 +70,6 @@ class RNEClient {
   };
 }
 
-const actesApiRneClient = new RNEClient(ECredentialType.ACTES);
+const actesApiRneClient = new RNEClient();
 
 export { actesApiRneClient };
