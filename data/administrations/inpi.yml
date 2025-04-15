@@ -8,7 +8,7 @@ apiMonitors:
   - apiName: API Registre National des Entreprises
     apiSlug: rne
     apiDocumentationLink: https://data.inpi.fr/content/editorial/Acces_API_Entreprises
-    updownIoId: g3mx
+    updownIoId: ulyj
     startDate: 2025-04-01
 dataSources:
   - label: Registre National des Entreprises
