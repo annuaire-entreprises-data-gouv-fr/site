@@ -74,7 +74,7 @@ const SearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <label>Ville, département ou région :</label>
+        <label htmlFor="geo-search-input">Ville, département ou région :</label>
         <FilterGeo
           cp_dep={cp_dep}
           cp_dep_label={cp_dep_label}
@@ -88,55 +88,80 @@ const SearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <label>
-          Rechercher toutes les structures liées à une personne (dirigeant(e),
-          ou élu(e))&nbsp;:
-        </label>
-        <div
-          style={{
-            display: 'flex',
-            gap: '5px',
-          }}
-        >
-          <input
-            className="fr-input"
-            name="fn"
-            autoComplete="off"
-            placeholder="Prénom"
-            defaultValue={fn}
-          />
-          <input
-            className="fr-input"
-            name="n"
-            autoComplete="off"
-            placeholder="Nom"
-            defaultValue={n}
-          />
-        </div>
-        <br />
-        <label>Né(e) entre :</label>
-        <div
-          style={{
-            display: 'flex',
-            gap: '5px',
-          }}
-        >
-          <input
-            className="fr-input"
-            type="date"
-            id="start"
-            name="dmin"
-            defaultValue={dmin}
-          />
-          &nbsp;et&nbsp;
-          <input
-            className="fr-input"
-            type="date"
-            id="end"
-            name="dmax"
-            defaultValue={dmax}
-          />
-        </div>
+        <fieldset>
+          <legend>
+            Rechercher toutes les structures liées à une personne (dirigeant(e),
+            ou élu(e))&nbsp;:
+          </legend>
+          <div
+            style={{
+              display: 'flex',
+              gap: '5px',
+            }}
+          >
+            <div className="fr-input-group">
+              <label htmlFor="firstname-input" className="fr-label fr-sr-only">
+                Prénom
+              </label>
+              <input
+                id="firstname-input"
+                className="fr-input"
+                name="fn"
+                autoComplete="off"
+                placeholder="Prénom"
+                defaultValue={fn}
+              />
+            </div>
+            <div className="fr-input-group">
+              <label htmlFor="lastname-input" className="fr-label fr-sr-only">
+                Nom
+              </label>
+              <input
+                id="lastname-input"
+                className="fr-input"
+                name="n"
+                autoComplete="off"
+                placeholder="Nom"
+                defaultValue={n}
+              />
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Né(e) entre :</legend>
+          <div
+            style={{
+              display: 'flex',
+              gap: '5px',
+            }}
+          >
+            <div className="fr-input-group">
+              <label htmlFor="date-min-input" className="fr-label fr-sr-only">
+                Date minimum
+              </label>
+              <input
+                id="date-min-input"
+                className="fr-input"
+                type="date"
+                name="dmin"
+                defaultValue={dmin}
+              />
+            </div>
+            &nbsp;et&nbsp;
+            <div className="fr-input-group">
+              <label htmlFor="date-max-input" className="fr-label fr-sr-only">
+                Date maximum
+              </label>
+              <input
+                id="date-max-input"
+                className="fr-input"
+                type="date"
+                name="dmax"
+                defaultValue={dmax}
+              />
+            </div>
+          </div>
+        </fieldset>
       </FilterMenu>
       <FilterMenu
         label="Structure"
@@ -168,23 +193,25 @@ const SearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <label>Etat administratif :</label>
         <Select
           options={[
             { value: 'A', label: 'En activité' },
             { value: 'C', label: 'Cessée' },
           ]}
           name="etat"
+          label="Etat administratif :"
           defaultValue={etat}
           placeholder="Choisir un état administratif"
         />
         <SimpleSeparator />
         <div className="select">
-          <label>Domaine d’activité :</label>
+          <label htmlFor="react-select-sap-multi-select-input">
+            Domaine d‘activité :
+          </label>
           <MultiSelect
             name="sap"
             defaultValue={sap}
-            placeholder="Choisir un domaine d’activité"
+            placeholder="Choisir un domaine d'activité"
             id="sap-multi-select"
             instanceId="sap-multi-select"
             options={Object.keys(codesSectionNAF).map((k) => ({
@@ -193,7 +220,9 @@ const SearchFilters: React.FC<{
             }))}
             menuPosition="fixed"
           />
-          <label>Code NAF/APE :</label>
+          <label htmlFor="react-select-naf-multi-select-input">
+            Code NAF/APE :
+          </label>
           <MultiSelect
             name="naf"
             defaultValue={naf}
@@ -211,7 +240,9 @@ const SearchFilters: React.FC<{
         </div>
         <SimpleSeparator />
         <div>
-          <label>Forme juridique :</label>
+          <label htmlFor="react-select-nature-juridique-multi-select-input">
+            Forme juridique :
+          </label>
           <MultiSelect
             name="nature_juridique"
             defaultValue={nature_juridique}
@@ -224,7 +255,9 @@ const SearchFilters: React.FC<{
         </div>
         <SimpleSeparator />
         <div>
-          <label>Effectif salarié</label>
+          <label htmlFor="react-select-effectif-salarie-multi-select-input">
+            Effectif salarié
+          </label>
           <MultiSelect
             name="tranche_effectif_salarie"
             defaultValue={tranche_effectif_salarie}
@@ -236,7 +269,9 @@ const SearchFilters: React.FC<{
           />
         </div>
         <div>
-          <label>Taille d’entreprise</label>
+          <label htmlFor="react-select-categorie-entreprise-multi-select-input">
+            Taille d’entreprise
+          </label>
           <MultiSelect
             name="categorie_entreprise"
             defaultValue={categorie_entreprise}
@@ -248,6 +283,20 @@ const SearchFilters: React.FC<{
           />
         </div>
       </FilterMenu>
+      <style jsx>{`
+        fieldset {
+          border: none;
+          padding: 0;
+          margin: 0;
+        }
+        legend {
+          padding: 0;
+          margin: 0;
+          font-weight: 500;
+          display: block;
+          width: 100%;
+        }
+      `}</style>
     </>
   );
 };

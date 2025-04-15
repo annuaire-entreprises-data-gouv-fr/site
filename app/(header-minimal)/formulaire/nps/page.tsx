@@ -166,7 +166,7 @@ const FeedBackPage = async () => {
                 ></textarea>
               </div>
               <div className="fr-input-group">
-                <label className="fr-label" htmlFor="textarea">
+                <label className="fr-label" htmlFor="email">
                   Facultatif : laissez-nous votre email si vous avez besoin
                   d‘une réponse.
                 </label>
