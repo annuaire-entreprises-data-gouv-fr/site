@@ -37,7 +37,7 @@ describe('Advanced search on page ' + path, () => {
     ).should('be.visible');
 
     cy.contains('Situation administrative').click();
-    cy.contains('Domaine d’activité').should('be.visible');
+    cy.contains('Domaine d‘activité').should('be.visible');
     cy.contains('Etat administratif').should('be.visible');
   });
 
