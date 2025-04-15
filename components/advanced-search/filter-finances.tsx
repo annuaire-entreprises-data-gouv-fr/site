@@ -123,6 +123,7 @@ export const FilterFinances: React.FC<{
         <legend>Chiffre d‘affaires :</legend>
         <DualRangeSlider
           idPrefix="ca"
+          label="Chiffre d‘affaires"
           min={0}
           max={CA.length - 1}
           value={valueCA}
@@ -140,6 +141,7 @@ export const FilterFinances: React.FC<{
         <legend>Résultat net :</legend>
         <DualRangeSlider
           idPrefix="res"
+          label="Résultat net"
           min={0}
           max={Res.length - 1}
           value={valueRes}

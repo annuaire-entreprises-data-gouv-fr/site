@@ -9,13 +9,14 @@ import { useEffect, useState } from 'react';
  */
 const DualRangeSlider: React.FC<{
   idPrefix: string;
+  label: string;
   min: number;
   max: number;
   step: number;
   value: any;
   onChange: any;
   color: string;
-}> = ({ idPrefix, min, max, value, step, onChange, color }) => {
+}> = ({ idPrefix, label, min, max, value, step, onChange, color }) => {
   const [minValue, setMinValue] = useState(value ? value.min : min);
   const [maxValue, setMaxValue] = useState(value ? value.max : max);
 
@@ -56,7 +57,7 @@ const DualRangeSlider: React.FC<{
           htmlFor={`${idPrefix}-min-range-input`}
           className="fr-label fr-sr-only"
         >
-          Chiffre d‘affaires minimum
+          {label} minimum
         </label>
         <input
           id={`${idPrefix}-min-range-input`}
@@ -71,7 +72,7 @@ const DualRangeSlider: React.FC<{
           htmlFor={`${idPrefix}-max-range-input`}
           className="fr-label fr-sr-only"
         >
-          Chiffre d‘affaires maximum
+          {label} maximum
         </label>
         <input
           id={`${idPrefix}-max-range-input`}
