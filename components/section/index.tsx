@@ -63,7 +63,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           </h2>
           <div className={style['section-logo-wrapper']}>
             {dataSources.map(
-              ({ slug, long, logoType }) =>
+              ({ slug, long, logoType, short }) =>
                 logoType && (
                   <a
                     key={long}
@@ -72,9 +72,21 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
                     className="no-style-link"
                   >
                     {logoType === 'portrait' ? (
-                      <Logo title={long} slug={slug} width={70} height={40} />
+                      <Logo
+                        title={long}
+                        alt={short}
+                        slug={slug}
+                        width={70}
+                        height={40}
+                      />
                     ) : (
-                      <Logo title={long} slug={slug} width={170} height={40} />
+                      <Logo
+                        title={long}
+                        alt={short}
+                        slug={slug}
+                        width={170}
+                        height={40}
+                      />
                     )}
                   </a>
                 )

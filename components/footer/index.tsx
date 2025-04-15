@@ -310,7 +310,7 @@ const Footer = () => (
               <ul>
                 {Object.values(administrationsMetaData)
                   .filter(({ logoType }) => !!logoType)
-                  .map(({ slug, logoType, long }) => (
+                  .map(({ slug, logoType, long, short }) => (
                     <li key={long}>
                       <a
                         className="fr-footer__partners-link"
@@ -319,6 +319,7 @@ const Footer = () => (
                         {logoType === 'portrait' ? (
                           <Logo
                             title={long}
+                            alt={short}
                             slug={slug}
                             width={80}
                             height={50}
@@ -328,6 +329,7 @@ const Footer = () => (
                         ) : (
                           <Logo
                             title={long}
+                            alt={short}
                             slug={slug}
                             width={150}
                             height={50}

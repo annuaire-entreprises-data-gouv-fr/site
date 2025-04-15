@@ -13,6 +13,7 @@ const AdministrationDescription: React.FC<{
     description,
     contact,
     long,
+    short,
     dataSources,
     logoType,
     estServicePublic,
@@ -23,6 +24,7 @@ const AdministrationDescription: React.FC<{
       <div>
         <Logo
           title={long}
+          alt={`Logo ${short}`}
           slug={logoType ? slug : 'rf'}
           width={80}
           height={80}
