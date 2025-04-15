@@ -6,7 +6,7 @@ describe(`FAQ contextual links`, () => {
   });
   it('Source de données', () => {
     cy.visit(`/entreprise/880878145`);
-    cy.contains('Sources : Insee').click();
+    cy.contains('Sources : INSEE').click();
     cy.url().should('include', '/administration/insee_vies');
     cy.contains(
       'Comment rendre mon entreprise individuelle diffusible ou non-diffusible ?'

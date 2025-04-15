@@ -1,5 +1,6 @@
 type IProps = {
   title: string;
+  alt?: string;
   width: number;
   height: number;
   slug: string;
@@ -16,6 +17,7 @@ type IProps = {
  */
 const Logo: React.FC<IProps> = ({
   title = 'Annuaire des Entreprises',
+  alt,
   width,
   height,
   slug = 'marianne',
@@ -37,7 +39,7 @@ const Logo: React.FC<IProps> = ({
     <img
       className={className}
       src={`/images/logos/${slug || 'marianne'}.svg`}
-      alt={title}
+      alt={alt || title}
       title={title}
       width="100%"
       height="100%"
