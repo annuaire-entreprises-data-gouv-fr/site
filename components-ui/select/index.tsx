@@ -21,11 +21,12 @@ export const Select = ({
 }: SelectProps) => (
   <div className="fr-select-group">
     {label && (
-      <label className="fr-label" htmlFor="select">
+      <label className="fr-label" htmlFor={name}>
         {label}
       </label>
     )}
     <select
+      id={name}
       name={name}
       className="fr-select"
       defaultValue={defaultValue || ''}
