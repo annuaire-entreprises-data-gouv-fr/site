@@ -6,11 +6,16 @@ import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-requ
 import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
 import { actesApiRneClient } from './auth';
 
-export const clientDocuments = async (siren: Siren) => {
+export const clientDocuments = async (
+  siren: Siren,
+  options?: { disableSensitiveRequestLogger?: boolean }
+) => {
   const route = routes.inpi.api.rne.documents.list + siren + '/attachments';
 
-  const callerInfos = await sensitiveRequestCallerInfos();
-  sensitiveRequestLogger(route, callerInfos);
+  if (!options?.disableSensitiveRequestLogger) {
+    const callerInfos = await sensitiveRequestCallerInfos();
+    sensitiveRequestLogger(route, callerInfos);
+  }
 
   const response = await actesApiRneClient.get<IDocumentsRNEResponse>(route, {
     timeout: constants.timeout.XXXL,

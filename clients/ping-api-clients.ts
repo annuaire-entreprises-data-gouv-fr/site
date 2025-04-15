@@ -51,7 +51,9 @@ const ping = async (slug: string | string[]) => {
         inclureEtablissements: false,
       });
     case 'api-rne':
-      return await clientDocuments(sirenDanone);
+      return await clientDocuments(sirenDanone, {
+        disableSensitiveRequestLogger: true,
+      });
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }
