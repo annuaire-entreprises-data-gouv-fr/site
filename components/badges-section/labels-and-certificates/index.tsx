@@ -19,6 +19,7 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
     estQualiopi,
     estRge,
     estEntrepriseInclusive,
+    estAchatsResponsables,
   } = uniteLegale.complements;
   if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
   if (estEss || estSocieteMission) sources.push(EAdministration.INSEE);
@@ -27,7 +28,7 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
     sources.push(EAdministration.MTPEI);
   if (estRge) sources.push(EAdministration.ADEME);
   if (estEntrepriseInclusive) sources.push(EAdministration.MARCHE_INCLUSION);
-
+  if (estAchatsResponsables) sources.push(EAdministration.MEF);
   return sources;
 };
 
@@ -49,6 +50,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     estSocieteMission,
     estEntrepriseInclusive,
     typeEntrepriseInclusive,
+    estAchatsResponsables,
   } = uniteLegale.complements;
 
   return (
@@ -74,6 +76,14 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
           informationTooltipLabel="Cette structure est une Entreprise Inclusive"
           label={`Entreprise Sociale Inclusive (${typeEntrepriseInclusive})`}
           sectionId="entreprise-inclusive"
+          siren={uniteLegale.siren}
+        />
+      )}
+      {estAchatsResponsables && (
+        <LabelWithLinkToSection
+          informationTooltipLabel="Cette structure est une Entreprise Achats Responsables"
+          label="Achats Responsables"
+          sectionId="achats-responsables"
           siren={uniteLegale.siren}
         />
       )}

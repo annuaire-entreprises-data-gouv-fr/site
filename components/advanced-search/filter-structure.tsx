@@ -102,6 +102,13 @@ export const FilterStructure: React.FC<{
         />
 
         <LabelAndCertificateBadge
+          label="Achats Responsables"
+          isSelected={labelSelected === 'achats_responsables'}
+          small
+          onClick={() => setLabelSelected('achats_responsables')}
+        />
+
+        <LabelAndCertificateBadge
           label="Professionnels du Bio"
           isSelected={labelSelected === 'bio'}
           small

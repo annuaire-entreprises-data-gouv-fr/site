@@ -193,6 +193,7 @@ export interface IUniteLegaleComplements {
   estAssociation: boolean;
   estEntrepriseInclusive: boolean;
   typeEntrepriseInclusive: string;
+  estAchatsResponsables: boolean;
   estUai: boolean;
 }
 
@@ -216,6 +217,7 @@ export const createDefaultUniteLegaleComplements =
       estAssociation: false,
       estEntrepriseInclusive: false,
       typeEntrepriseInclusive: '',
+      estAchatsResponsables: false,
     };
   };
 
