@@ -81,7 +81,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       )}
       {estAchatsResponsables && (
         <LabelWithLinkToSection
-          informationTooltipLabel="Cette structure est une Entreprise Achats Responsables"
+          informationTooltipLabel="Ce label distingue les structures ayant fait la preuve de relations durables et équilibrées avec leurs fournisseurs."
           label="Achats Responsables"
           sectionId="achats-responsables"
           siren={uniteLegale.siren}
