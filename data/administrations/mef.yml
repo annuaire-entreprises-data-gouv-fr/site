@@ -13,5 +13,10 @@ dataSources:
     datagouvLink: https://www.data.gouv.fr/fr/datasets/ratios-financiers-bce-inpi/
     data:
       - label: Données financières des entreprises
+  - label: Achats Responsables
+    apiSlug: achats-responsables
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-labellises-relations-fournisseurs-et-achats-responsables/
+    data:
+      - label: Liste des labellisés Relations Fournisseurs et Achats Responsables
 description: |
   Le ministère de l’Économie et des Finances, communément appelé « Bercy », est le ministère chargé des Finances publiques d’une part (budget) et de la politique économique de la France d’autre part.
