@@ -25,7 +25,7 @@
           "date_debut_activite": "2008-01-01",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-06-22T05:26:24",
+          "date_mise_a_jour_insee": "2025-01-19T02:07:46",
           "departement": "75",
           "distribution_speciale": null,
           "epci": "200054781",
@@ -66,7 +66,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "1955-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T15:34:48",
+        "date_mise_a_jour": "2025-04-17T06:56:05",
         "date_mise_a_jour_insee": "2024-06-22T05:26:24",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
@@ -204,8 +204,8 @@
           "indicateur_associe_unique": false
         },
         "finances": {
-          "2022": {
-            "ca": 24281000000,
+          "2023": {
+            "ca": 27661000000,
             "resultat_net": 0
           }
         },
@@ -216,6 +216,7 @@
             "9999"
           ],
           "egapro_renseignee": true,
+          "est_achats_responsables": false,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -227,6 +228,7 @@
           "liste_id_organisme_formation": null,
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,

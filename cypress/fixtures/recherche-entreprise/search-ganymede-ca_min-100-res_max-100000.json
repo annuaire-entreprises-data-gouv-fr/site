@@ -3,6 +3,174 @@
   "result": {
     "results": [
       {
+        "siren": "817883150",
+        "nom_complet": "GANYMEDE",
+        "nom_raison_sociale": "GANYMEDE",
+        "sigle": null,
+        "nombre_etablissements": 1,
+        "nombre_etablissements_ouverts": 1,
+        "siege": {
+          "activite_principale": "70.22Z",
+          "activite_principale_registre_metier": null,
+          "annee_tranche_effectif_salarie": "2022",
+          "adresse": "3 RUE DE LA GAITE 75014 PARIS",
+          "caractere_employeur": "O",
+          "cedex": null,
+          "code_pays_etranger": null,
+          "code_postal": "75014",
+          "commune": "75114",
+          "complement_adresse": null,
+          "coordonnees": "48.84074,2.324549",
+          "date_creation": "2016-01-15",
+          "date_debut_activite": "2017-06-01",
+          "date_fermeture": null,
+          "date_mise_a_jour": null,
+          "date_mise_a_jour_insee": "2025-02-10T02:12:53",
+          "departement": "75",
+          "distribution_speciale": null,
+          "epci": "200054781",
+          "est_siege": true,
+          "etat_administratif": "A",
+          "geo_adresse": "3 Rue de la Gaîté 75014 Paris",
+          "geo_id": "75114_3919_00003",
+          "indice_repetition": null,
+          "latitude": "48.84074",
+          "libelle_cedex": null,
+          "libelle_commune": "PARIS",
+          "libelle_commune_etranger": null,
+          "libelle_pays_etranger": null,
+          "libelle_voie": "DE LA GAITE",
+          "liste_enseignes": null,
+          "liste_finess": null,
+          "liste_id_bio": null,
+          "liste_idcc": [
+            "1486"
+          ],
+          "liste_id_organisme_formation": null,
+          "liste_rge": null,
+          "liste_uai": null,
+          "longitude": "2.324549",
+          "nom_commercial": null,
+          "numero_voie": "3",
+          "region": "11",
+          "siret": "81788315000010",
+          "statut_diffusion_etablissement": "O",
+          "tranche_effectif_salarie": "01",
+          "type_voie": "RUE"
+        },
+        "activite_principale": "70.22Z",
+        "categorie_entreprise": "PME",
+        "caractere_employeur": null,
+        "annee_categorie_entreprise": "2022",
+        "date_creation": "2016-01-15",
+        "date_fermeture": null,
+        "date_mise_a_jour": "2025-04-17T07:19:28",
+        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
+        "date_mise_a_jour_rne": "2024-05-19T16:49:33",
+        "dirigeants": [
+          {
+            "nom": "NÉGRIER",
+            "prenoms": "PHILIPPE",
+            "annee_de_naissance": "1966",
+            "date_de_naissance": "1966-01",
+            "qualite": "Président de SAS",
+            "nationalite": "Française",
+            "type_dirigeant": "personne physique"
+          }
+        ],
+        "etat_administratif": "A",
+        "nature_juridique": "5710",
+        "section_activite_principale": "M",
+        "tranche_effectif_salarie": "01",
+        "annee_tranche_effectif_salarie": "2022",
+        "statut_diffusion": "O",
+        "matching_etablissements": [
+          {
+            "activite_principale": "70.22Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": "2022",
+            "adresse": "3 RUE DE LA GAITE 75014 PARIS",
+            "caractere_employeur": "O",
+            "code_postal": "75014",
+            "commune": "75114",
+            "date_creation": "2016-01-15",
+            "date_debut_activite": "2017-06-01",
+            "date_fermeture": null,
+            "epci": "200054781",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "75114_3919_00003",
+            "latitude": "48.84074",
+            "libelle_commune": "PARIS",
+            "liste_enseignes": null,
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": [
+              "1486"
+            ],
+            "liste_id_organisme_formation": null,
+            "liste_rge": null,
+            "liste_uai": null,
+            "longitude": "2.324549",
+            "nom_commercial": null,
+            "region": "11",
+            "siret": "81788315000010",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": "01"
+          }
+        ],
+        "immatriculation": {
+          "date_debut_activite": "2016-01-15",
+          "date_immatriculation": "2016-01-20",
+          "date_radiation": null,
+          "duree_personne_morale": 99,
+          "nature_entreprise": [
+            "Commerciale"
+          ],
+          "date_cloture_exercice": "3112",
+          "capital_social": 10000,
+          "capital_variable": false,
+          "devise_capital": "EUR",
+          "indicateur_associe_unique": false
+        },
+        "finances": {
+          "2018": {
+            "ca": 106650,
+            "resultat_net": 49557
+          }
+        },
+        "complements": {
+          "collectivite_territoriale": null,
+          "convention_collective_renseignee": true,
+          "liste_idcc": [
+            "1486"
+          ],
+          "egapro_renseignee": false,
+          "est_achats_responsables": false,
+          "est_association": false,
+          "est_bio": false,
+          "est_entrepreneur_individuel": false,
+          "est_entrepreneur_spectacle": false,
+          "est_ess": false,
+          "est_finess": false,
+          "est_organisme_formation": true,
+          "est_qualiopi": false,
+          "liste_id_organisme_formation": [
+            "11756944775"
+          ],
+          "est_rge": false,
+          "est_service_public": false,
+          "est_l100_3": false,
+          "est_siae": false,
+          "est_societe_mission": false,
+          "est_uai": false,
+          "identifiant_association": null,
+          "statut_entrepreneur_spectacle": null,
+          "type_siae": null
+        },
+        "slug": "ganymede-817883150"
+      },
+      {
         "siren": "414971929",
         "nom_complet": "FINANCIERE GANYMEDE",
         "nom_raison_sociale": "FINANCIERE GANYMEDE",
@@ -64,7 +232,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "1997-12-08",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T14:19:36",
+        "date_mise_a_jour": "2025-04-17T06:08:27",
         "date_mise_a_jour_insee": "2024-10-17T05:12:35",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
@@ -208,8 +376,8 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "nature_entreprise": [
-            "Commerciale",
-            "Agent commercial"
+            "Agent commercial",
+            "Commerciale"
           ],
           "date_cloture_exercice": "3112",
           "capital_social": 84480,
@@ -218,9 +386,9 @@
           "indicateur_associe_unique": false
         },
         "finances": {
-          "2022": {
+          "2023": {
             "ca": 5400,
-            "resultat_net": 70948
+            "resultat_net": -32352
           }
         },
         "complements": {
@@ -230,6 +398,7 @@
             "0478"
           ],
           "egapro_renseignee": false,
+          "est_achats_responsables": false,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -241,6 +410,7 @@
           "liste_id_organisme_formation": null,
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
@@ -255,54 +425,56 @@
         "nom_complet": "FRANK HATEM & EUGENIE ROSEC (UCER - GANYMEDE)",
         "nom_raison_sociale": "FRANK HATEM & EUGENIE ROSEC",
         "sigle": null,
-        "nombre_etablissements": 1,
-        "nombre_etablissements_ouverts": 1,
+        "nombre_etablissements": 2,
+        "nombre_etablissements_ouverts": 2,
         "siege": {
-          "activite_principale": "46.18Z",
+          "activite_principale": "46.49Z",
           "activite_principale_registre_metier": null,
           "annee_tranche_effectif_salarie": null,
-          "adresse": "72 CHEMIN DES FONTAINES 77220 PRESLES-EN-BRIE",
+          "adresse": "C/O BUSINESS CENTER 16 B BOULEVARD CHAMBLAIN 77000 MELUN",
           "caractere_employeur": "N",
           "cedex": null,
           "code_pays_etranger": null,
-          "code_postal": "77220",
-          "commune": "77377",
-          "complement_adresse": null,
-          "coordonnees": "48.700488,2.758235",
-          "date_creation": "2004-09-01",
-          "date_debut_activite": "2008-01-01",
+          "code_postal": "77000",
+          "commune": "77288",
+          "complement_adresse": "C/O BUSINESS CENTER",
+          "coordonnees": "48.533717,2.654455",
+          "date_creation": "2024-05-01",
+          "date_debut_activite": "2024-05-01",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-03-30T17:57:41",
+          "date_mise_a_jour_insee": "2025-02-10T10:01:13",
           "departement": "77",
           "distribution_speciale": null,
-          "epci": "200072874",
+          "epci": "247700057",
           "est_siege": true,
           "etat_administratif": "A",
-          "geo_adresse": "72 Chemin des Fontaines 77220 Presles-en-Brie",
-          "geo_id": "77377_0083_00072",
-          "indice_repetition": null,
-          "latitude": "48.700488",
+          "geo_adresse": "16b Boulevard Chamblain 77000 Melun",
+          "geo_id": "77288_0260_00016_b",
+          "indice_repetition": "B",
+          "latitude": "48.533717",
           "libelle_cedex": null,
-          "libelle_commune": "PRESLES-EN-BRIE",
+          "libelle_commune": "MELUN",
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
-          "libelle_voie": "DES FONTAINES",
-          "liste_enseignes": null,
+          "libelle_voie": "CHAMBLAIN",
+          "liste_enseignes": [
+            "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE"
+          ],
           "liste_finess": null,
           "liste_id_bio": null,
           "liste_idcc": null,
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
-          "longitude": "2.758235",
-          "nom_commercial": null,
-          "numero_voie": "72",
+          "longitude": "2.654455",
+          "nom_commercial": "UCER - GANYMEDE",
+          "numero_voie": "16",
           "region": "11",
-          "siret": "47928580100011",
+          "siret": "47928580100029",
           "statut_diffusion_etablissement": "O",
           "tranche_effectif_salarie": null,
-          "type_voie": "CHEMIN"
+          "type_voie": "BOULEVARD"
         },
         "activite_principale": "46.18Z",
         "categorie_entreprise": "PME",
@@ -310,8 +482,8 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "2004-09-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T14:49:53",
-        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
+        "date_mise_a_jour": "2025-04-17T06:27:40",
+        "date_mise_a_jour_insee": "2025-02-10T10:01:13",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
           {
@@ -320,7 +492,7 @@
             "annee_de_naissance": "1952",
             "date_de_naissance": "1952-06",
             "qualite": "Gérant",
-            "nationalite": "Française",
+            "nationalite": "FRANÇAISE",
             "type_dirigeant": "personne physique"
           }
         ],
@@ -330,7 +502,41 @@
         "tranche_effectif_salarie": null,
         "annee_tranche_effectif_salarie": null,
         "statut_diffusion": "O",
-        "matching_etablissements": [],
+        "matching_etablissements": [
+          {
+            "activite_principale": "46.49Z",
+            "ancien_siege": false,
+            "annee_tranche_effectif_salarie": null,
+            "adresse": "C/O BUSINESS CENTER 16 B BOULEVARD CHAMBLAIN 77000 MELUN",
+            "caractere_employeur": "N",
+            "code_postal": "77000",
+            "commune": "77288",
+            "date_creation": "2024-05-01",
+            "date_debut_activite": "2024-05-01",
+            "date_fermeture": null,
+            "epci": "247700057",
+            "est_siege": true,
+            "etat_administratif": "A",
+            "geo_id": "77288_0260_00016_b",
+            "latitude": "48.533717",
+            "libelle_commune": "MELUN",
+            "liste_enseignes": [
+              "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE"
+            ],
+            "liste_finess": null,
+            "liste_id_bio": null,
+            "liste_idcc": null,
+            "liste_id_organisme_formation": null,
+            "liste_rge": null,
+            "liste_uai": null,
+            "longitude": "2.654455",
+            "nom_commercial": "UCER - GANYMEDE",
+            "region": "11",
+            "siret": "47928580100029",
+            "statut_diffusion_etablissement": "O",
+            "tranche_effectif_salarie": null
+          }
+        ],
         "immatriculation": {
           "date_debut_activite": "2004-09-01",
           "date_immatriculation": "2004-12-09",
@@ -346,9 +552,9 @@
           "indicateur_associe_unique": false
         },
         "finances": {
-          "2022": {
-            "ca": 13841,
-            "resultat_net": -3038
+          "2023": {
+            "ca": 16458,
+            "resultat_net": 12820
           }
         },
         "complements": {
@@ -356,6 +562,7 @@
           "convention_collective_renseignee": false,
           "liste_idcc": null,
           "egapro_renseignee": false,
+          "est_achats_responsables": false,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -367,6 +574,7 @@
           "liste_id_organisme_formation": null,
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
@@ -436,7 +644,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "2006-09-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T14:59:07",
+        "date_mise_a_jour": "2025-04-17T06:33:30",
         "date_mise_a_jour_insee": "2024-03-22T14:26:06",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
@@ -514,6 +722,7 @@
           "convention_collective_renseignee": false,
           "liste_idcc": null,
           "egapro_renseignee": false,
+          "est_achats_responsables": false,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -525,6 +734,7 @@
           "liste_id_organisme_formation": null,
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
@@ -575,10 +785,7 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "2609",
-            "1596"
-          ],
+          "liste_idcc": null,
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -597,7 +804,7 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "2014-01-13",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T15:58:20",
+        "date_mise_a_jour": "2025-04-17T07:10:53",
         "date_mise_a_jour_insee": "2024-06-27T12:21:00",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
@@ -638,10 +845,7 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "2609",
-              "1596"
-            ],
+            "liste_idcc": null,
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -675,12 +879,10 @@
         },
         "complements": {
           "collectivite_territoriale": null,
-          "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "2609",
-            "1596"
-          ],
+          "convention_collective_renseignee": false,
+          "liste_idcc": null,
           "egapro_renseignee": false,
+          "est_achats_responsables": false,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -692,6 +894,7 @@
           "liste_id_organisme_formation": null,
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
@@ -724,7 +927,7 @@
           "date_debut_activite": "2020-10-01",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-09-03T13:11:44",
+          "date_mise_a_jour_insee": "2025-02-18T02:14:51",
           "departement": "31",
           "distribution_speciale": null,
           "epci": "243100567",
@@ -763,10 +966,19 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "2019-07-09",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T16:40:47",
+        "date_mise_a_jour": "2025-04-17T07:37:34",
         "date_mise_a_jour_insee": "2024-09-03T13:11:44",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
+          {
+            "nom": "CASTEX",
+            "prenoms": "CAROLINE",
+            "annee_de_naissance": "1977",
+            "date_de_naissance": "1977-03",
+            "qualite": "Directeur Général",
+            "nationalite": "Française",
+            "type_dirigeant": "personne physique"
+          },
           {
             "nom": "DURET",
             "prenoms": "ERIC",
@@ -819,12 +1031,12 @@
           }
         ],
         "immatriculation": {
-          "date_debut_activite": "2019-07-09",
+          "date_debut_activite": null,
           "date_immatriculation": "2019-08-08",
           "date_radiation": null,
           "duree_personne_morale": 99,
           "nature_entreprise": [
-            "Commerciale"
+            "Agent commercial"
           ],
           "date_cloture_exercice": "3112",
           "capital_social": 10000,
@@ -845,6 +1057,7 @@
             "1527"
           ],
           "egapro_renseignee": false,
+          "est_achats_responsables": false,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -856,6 +1069,7 @@
           "liste_id_organisme_formation": null,
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
@@ -866,7 +1080,7 @@
         "slug": "patrimoine-occitan-ganymede-patrimoine-852504034"
       }
     ],
-    "total_results": 5,
+    "total_results": 6,
     "page": 1,
     "per_page": 10,
     "total_pages": 1

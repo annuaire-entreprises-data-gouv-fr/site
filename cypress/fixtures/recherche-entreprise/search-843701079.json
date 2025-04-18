@@ -7,8 +7,8 @@
         "nom_complet": "BESOIN DE TOIT",
         "nom_raison_sociale": "BESOIN DE TOIT",
         "sigle": null,
-        "nombre_etablissements": 1,
-        "nombre_etablissements_ouverts": 1,
+        "nombre_etablissements": 2,
+        "nombre_etablissements_ouverts": 2,
         "siege": {
           "activite_principale": "43.91A",
           "activite_principale_registre_metier": "4391AZ",
@@ -25,7 +25,7 @@
           "date_debut_activite": "2018-11-12",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-03-22T15:40:57",
+          "date_mise_a_jour_insee": "2025-01-16T02:32:46",
           "departement": "81",
           "distribution_speciale": null,
           "epci": "200034064",
@@ -44,6 +44,7 @@
           "liste_finess": null,
           "liste_id_bio": null,
           "liste_idcc": [
+            "2420",
             "1596",
             "2609"
           ],
@@ -54,10 +55,9 @@
             "3111D114",
             "7121D111",
             "7121D114",
-            "7122D111",
-            "7122D114",
-            "7122D115",
-            "7131D112"
+            "7142D112",
+            "7142D114",
+            "7142D115"
           ],
           "liste_uai": null,
           "longitude": "1.943401",
@@ -75,8 +75,8 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "2018-11-12",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T16:33:52",
-        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
+        "date_mise_a_jour": "2025-04-17T07:33:14",
+        "date_mise_a_jour_insee": "2025-02-04T13:52:53",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
           {
@@ -102,6 +102,7 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "nature_entreprise": [
+            "Artisanale réglementée",
             "Commerciale"
           ],
           "date_cloture_exercice": "3112",
@@ -115,10 +116,12 @@
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
           "liste_idcc": [
+            "2420",
             "1596",
             "2609"
           ],
           "egapro_renseignee": false,
+          "est_achats_responsables": false,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -130,6 +133,7 @@
           "liste_id_organisme_formation": null,
           "est_rge": true,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,

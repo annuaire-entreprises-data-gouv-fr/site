@@ -7,8 +7,8 @@
         "nom_complet": "LA POSTE (DIRECTION GENERALE DE LA POSTE)",
         "nom_raison_sociale": "LA POSTE",
         "sigle": null,
-        "nombre_etablissements": 13046,
-        "nombre_etablissements_ouverts": 9269,
+        "nombre_etablissements": 13072,
+        "nombre_etablissements_ouverts": 9291,
         "siege": {
           "activite_principale": "53.10Z",
           "activite_principale_registre_metier": null,
@@ -20,21 +20,21 @@
           "code_postal": "75015",
           "commune": "75115",
           "complement_adresse": "DIRECTION GENERALE DE LA POSTE",
-          "coordonnees": "48.83002,2.275688",
+          "coordonnees": "48.83001999999998,2.275688000000001",
           "date_creation": "2003-01-01",
           "date_debut_activite": "2014-04-29",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-09-09T08:17:38",
+          "date_mise_a_jour_insee": "2025-04-07T17:38:03.470",
           "departement": "75",
           "distribution_speciale": null,
           "epci": "200054781",
           "est_siege": true,
           "etat_administratif": "A",
-          "geo_adresse": "Rue du Colonel Pierre Avia 75015 Paris",
-          "geo_id": "75115_2214",
+          "geo_adresse": null,
+          "geo_id": null,
           "indice_repetition": null,
-          "latitude": "48.83002",
+          "latitude": "48.83001999999998",
           "libelle_cedex": null,
           "libelle_commune": "PARIS",
           "libelle_commune_etranger": null,
@@ -48,13 +48,13 @@
           ],
           "liste_id_bio": null,
           "liste_idcc": [
-            "9999",
-            "5516"
+            "5516",
+            "9999"
           ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
-          "longitude": "2.275688",
+          "longitude": "2.275688000000001",
           "nom_commercial": null,
           "numero_voie": "9",
           "region": "11",
@@ -69,8 +69,8 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "1991-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T17:42:35",
-        "date_mise_a_jour_insee": "2024-12-02T12:03:16.542",
+        "date_mise_a_jour": "2025-04-17T08:17:36",
+        "date_mise_a_jour_insee": "2025-04-14T11:01:58.879",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
         "etat_administratif": "A",
@@ -82,19 +82,20 @@
         "matching_etablissements": [],
         "immatriculation": null,
         "finances": {
-          "2022": {
-            "ca": 27103000000,
-            "resultat_net": 0
+          "2023": {
+            "ca": 26888000000,
+            "resultat_net": 776000000
           }
         },
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
           "liste_idcc": [
-            "9999",
-            "5516"
+            "5516",
+            "9999"
           ],
           "egapro_renseignee": true,
+          "est_achats_responsables": true,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -109,6 +110,7 @@
           ],
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,

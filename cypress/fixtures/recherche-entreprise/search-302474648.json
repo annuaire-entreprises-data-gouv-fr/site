@@ -8,7 +8,7 @@
         "nom_raison_sociale": "NATURALIA FRANCE",
         "sigle": null,
         "nombre_etablissements": 250,
-        "nombre_etablissements_ouverts": 178,
+        "nombre_etablissements_ouverts": 175,
         "siege": {
           "activite_principale": "47.29Z",
           "activite_principale_registre_metier": null,
@@ -25,7 +25,7 @@
           "date_debut_activite": "2011-06-14",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-10-01T13:07:03",
+          "date_mise_a_jour_insee": "2025-02-18T02:16:22",
           "departement": "92",
           "distribution_speciale": null,
           "epci": "200054781",
@@ -43,7 +43,7 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": [
-            "112492"
+            112492
           ],
           "liste_idcc": [
             "1505"
@@ -66,26 +66,35 @@
         "annee_categorie_entreprise": "2022",
         "date_creation": "1973-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T17:42:26",
-        "date_mise_a_jour_insee": "2024-12-06T05:09:42.450",
+        "date_mise_a_jour": "2025-04-17T05:27:24",
+        "date_mise_a_jour_insee": "2025-03-26T11:32:55",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
+          {
+            "nom": "JOLIVET",
+            "prenoms": "RICHARD",
+            "annee_de_naissance": "1973",
+            "date_de_naissance": "1973-08",
+            "qualite": null,
+            "nationalite": "FRANÇAISE",
+            "type_dirigeant": "personne physique"
+          },
           {
             "nom": "JOLIVET",
             "prenoms": "RICHARD DANIEL ALEXANDRE",
             "annee_de_naissance": "1973",
             "date_de_naissance": "1973-08",
-            "qualite": null,
-            "nationalite": null,
+            "qualite": "Directeur Général",
+            "nationalite": "FRANÇAISE",
             "type_dirigeant": "personne physique"
           },
           {
-            "nom": "SENECLAUZE",
-            "prenoms": "GUILLAUME",
-            "annee_de_naissance": "1965",
-            "date_de_naissance": "1965-10",
+            "nom": "PALAZZI",
+            "prenoms": "PHILIPPE",
+            "annee_de_naissance": "1971",
+            "date_de_naissance": "1971-06",
             "qualite": null,
-            "nationalite": null,
+            "nationalite": "FRANÇAISE",
             "type_dirigeant": "personne physique"
           },
           {
@@ -108,19 +117,19 @@
           "date_radiation": null,
           "duree_personne_morale": 30,
           "nature_entreprise": [
-            "Commerciale",
-            "Libérale réglementée"
+            "Libérale réglementée",
+            "Commerciale"
           ],
-          "date_cloture_exercice": null,
+          "date_cloture_exercice": "3112",
           "capital_social": 240000,
           "capital_variable": false,
           "devise_capital": "EUR",
           "indicateur_associe_unique": false
         },
         "finances": {
-          "2022": {
-            "ca": 305579122,
-            "resultat_net": -25031062
+          "2023": {
+            "ca": 299684465,
+            "resultat_net": -36683448
           }
         },
         "complements": {
@@ -130,6 +139,7 @@
             "1505"
           ],
           "egapro_renseignee": true,
+          "est_achats_responsables": false,
           "est_association": false,
           "est_bio": true,
           "est_entrepreneur_individuel": false,
@@ -141,6 +151,7 @@
           "liste_id_organisme_formation": null,
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
