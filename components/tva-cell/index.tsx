@@ -83,7 +83,6 @@ const VerifyTVA: React.FC<{
   siren: Siren;
 }> = ({ tva, siren }) => {
   const { tvaNumber, mayHaveMultipleTVANumber } = tva;
-
   const verification = useAPIRouteData(APIRoutesPaths.VerifyTva, siren, null);
   if (isDataLoading(verification)) {
     return (
@@ -176,24 +175,7 @@ const TVACell: React.FC<{
     return <NoTVA />;
   }
 
-  return (
-    <InformationTooltip
-      tabIndex={0}
-      label={
-        <>
-          Nous ne sommes pas en mesure de vérifier la validité des numéros de
-          TVA pour le moment. Le service sera rétabli dans le courant de la
-          semaine prochaine.
-        </>
-      }
-      horizontalOrientation="left"
-      left="5px"
-    >
-      <Icon slug="errorFill" color="#df0a00">
-        <CopyCell number={uniteLegale.tva.tvaNumber} />
-      </Icon>
-    </InformationTooltip>
-  );
+  return <VerifyTVA tva={uniteLegale.tva} siren={uniteLegale.siren} />;
 };
 
 export default TVACell;
