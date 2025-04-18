@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 18/04/2025
+  target:
+    site: true
+  body: |
+    Ajout de la liste des entreprises labellisées "Relations Fournisseurs et Achats Responsables"
 - date: 08/04/2025
   target:
     site: true

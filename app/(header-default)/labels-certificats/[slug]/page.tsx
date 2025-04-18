@@ -6,6 +6,7 @@ import {
 import { OpqibiSection } from '#components/espace-agent-components/certifications/opqibi-section';
 import { QualibatSection } from '#components/espace-agent-components/certifications/qualibat-section';
 import { QualifelecSection } from '#components/espace-agent-components/certifications/qualifelec-section';
+import { LabelAchatsResponsables } from '#components/labels-and-certificates/achats-responsables';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
@@ -65,6 +66,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
     estBio,
     estEntrepreneurSpectacle,
     estEntrepriseInclusive,
+    estAchatsResponsables,
   } = uniteLegale.complements;
 
   const {
@@ -104,6 +106,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
             session={session}
           />
         )}
+        {estAchatsResponsables && <LabelAchatsResponsables />}
         {hasRights(session, ApplicationRights.protectedCertificats) && (
           <>
             <QualibatSection session={session} uniteLegale={uniteLegale} />
