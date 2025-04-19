@@ -49,20 +49,19 @@
               "3111D114",
               "7121D111",
               "7121D114",
-              "7122D111",
-              "7122D114",
-              "7122D115",
-              "7131D112"
+              "7142D112",
+              "7142D114",
+              "7142D115"
             ],
             "idUai": []
           },
           "listeIdcc": [
             {
-              "idcc": "2420",
+              "idcc": "2609",
               "title": ""
             },
             {
-              "idcc": "2609",
+              "idcc": "2420",
               "title": ""
             },
             {
@@ -118,20 +117,19 @@
                   "3111D114",
                   "7121D111",
                   "7121D114",
-                  "7122D111",
-                  "7122D114",
-                  "7122D115",
-                  "7131D112"
+                  "7142D112",
+                  "7142D114",
+                  "7142D115"
                 ],
                 "idUai": []
               },
               "listeIdcc": [
                 {
-                  "idcc": "2420",
+                  "idcc": "2609",
                   "title": ""
                 },
                 {
-                  "idcc": "2609",
+                  "idcc": "2420",
                   "title": ""
                 },
                 {
@@ -179,20 +177,19 @@
                   "3111D114",
                   "7121D111",
                   "7121D114",
-                  "7122D111",
-                  "7122D114",
-                  "7122D115",
-                  "7131D112"
+                  "7142D112",
+                  "7142D114",
+                  "7142D115"
                 ],
                 "idUai": []
               },
               "listeIdcc": [
                 {
-                  "idcc": "2420",
+                  "idcc": "2609",
                   "title": ""
                 },
                 {
-                  "idcc": "2609",
+                  "idcc": "2420",
                   "title": ""
                 },
                 {
@@ -204,8 +201,8 @@
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 1,
-          "nombreEtablissements": 1,
+          "nombreEtablissementsOuverts": 2,
+          "nombreEtablissements": 2,
           "usePagination": false,
           "currentEtablissementPage": 1
         },
@@ -214,7 +211,7 @@
         "dateCreation": "2018-11-12",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-03-22T14:26:06",
+        "dateMiseAJourInsee": "2025-02-04T13:52:53",
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -226,6 +223,7 @@
           "estBio": false,
           "estEss": false,
           "estServicePublic": false,
+          "estL100_3": false,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
@@ -237,6 +235,7 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
+          "estAchatsResponsables": false,
           "estEntrepriseInclusive": false,
           "typeEntrepriseInclusive": null
         },
@@ -249,11 +248,11 @@
         },
         "listeIdcc": [
           {
-            "idcc": "2420",
+            "idcc": "2609",
             "title": ""
           },
           {
-            "idcc": "2609",
+            "idcc": "2420",
             "title": ""
           },
           {
@@ -268,6 +267,7 @@
           "duree": 99,
           "dateFin": "12/11/2117",
           "natureEntreprise": [
+            "Artisanale réglementée",
             "Commerciale"
           ],
           "dateCloture": "3112",
@@ -275,8 +275,8 @@
           "capital": "5 000,00 € (fixe)"
         },
         "matchingEtablissements": [],
-        "nombreEtablissements": 1,
-        "nombreEtablissementsOuverts": 1,
+        "nombreEtablissements": 2,
+        "nombreEtablissementsOuverts": 2,
         "dirigeants": [
           {
             "sexe": null,

@@ -172,6 +172,7 @@
           "estBio": false,
           "estEss": false,
           "estServicePublic": false,
+          "estL100_3": false,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
@@ -183,6 +184,7 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
+          "estAchatsResponsables": false,
           "estEntrepriseInclusive": false,
           "typeEntrepriseInclusive": null
         },
@@ -420,6 +422,7 @@
           "estBio": false,
           "estEss": false,
           "estServicePublic": false,
+          "estL100_3": false,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
@@ -431,6 +434,7 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
+          "estAchatsResponsables": false,
           "estEntrepriseInclusive": false,
           "typeEntrepriseInclusive": null
         },
@@ -601,30 +605,30 @@
         "oldSiren": "479285801",
         "siege": {
           "siren": "479285801",
-          "siret": "47928580100011",
+          "siret": "47928580100029",
           "oldSiret": "",
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
           "ancienSiege": false,
-          "enseigne": "",
-          "denomination": null,
-          "nic": "00011",
-          "dateCreation": "2004-09-01",
+          "enseigne": "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE",
+          "denomination": "UCER - GANYMEDE",
+          "nic": "00029",
+          "dateCreation": "2024-05-01",
           "dateDerniereMiseAJour": "",
           "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2008-01-01",
+          "dateDebutActivite": "2024-05-01",
           "dateFermeture": "",
-          "adresse": "72 CHEMIN DES FONTAINES 77220 PRESLES-EN-BRIE",
-          "adressePostale": "72 CHEMIN DES FONTAINES 77220 PRESLES-EN-BRIE",
-          "codePostal": "77220",
-          "commune": "PRESLES-EN-BRIE",
-          "activitePrincipale": "46.18Z",
-          "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
+          "adresse": "C/O BUSINESS CENTER 16 B BOULEVARD CHAMBLAIN 77000 MELUN",
+          "adressePostale": "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE, C/O BUSINESS CENTER 16 B BOULEVARD CHAMBLAIN 77000 MELUN",
+          "codePostal": "77000",
+          "commune": "MELUN",
+          "activitePrincipale": "46.49Z",
+          "libelleActivitePrincipale": "Commerce de gros (commerce interentreprises) d’autres biens domestiques (46.49Z)",
           "trancheEffectif": "N",
           "anneeTrancheEffectif": null,
-          "latitude": "48.700488",
-          "longitude": "2.758235",
+          "latitude": "48.533717",
+          "longitude": "2.654455",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [],
@@ -647,30 +651,30 @@
           "all": [
             {
               "siren": "479285801",
-              "siret": "47928580100011",
+              "siret": "47928580100029",
               "oldSiret": "",
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
               "ancienSiege": false,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00011",
-              "dateCreation": "2004-09-01",
+              "enseigne": "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE",
+              "denomination": "UCER - GANYMEDE",
+              "nic": "00029",
+              "dateCreation": "2024-05-01",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2008-01-01",
+              "dateDebutActivite": "2024-05-01",
               "dateFermeture": "",
-              "adresse": "72 CHEMIN DES FONTAINES 77220 PRESLES-EN-BRIE",
-              "adressePostale": "72 CHEMIN DES FONTAINES 77220 PRESLES-EN-BRIE",
-              "codePostal": "77220",
-              "commune": "PRESLES-EN-BRIE",
-              "activitePrincipale": "46.18Z",
-              "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
+              "adresse": "C/O BUSINESS CENTER 16 B BOULEVARD CHAMBLAIN 77000 MELUN",
+              "adressePostale": "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE, C/O BUSINESS CENTER 16 B BOULEVARD CHAMBLAIN 77000 MELUN",
+              "codePostal": "77000",
+              "commune": "MELUN",
+              "activitePrincipale": "46.49Z",
+              "libelleActivitePrincipale": "Commerce de gros (commerce interentreprises) d’autres biens domestiques (46.49Z)",
               "trancheEffectif": "N",
               "anneeTrancheEffectif": null,
-              "latitude": "48.700488",
-              "longitude": "2.758235",
+              "latitude": "48.533717",
+              "longitude": "2.654455",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -685,30 +689,30 @@
           "open": [
             {
               "siren": "479285801",
-              "siret": "47928580100011",
+              "siret": "47928580100029",
               "oldSiret": "",
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
               "ancienSiege": false,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00011",
-              "dateCreation": "2004-09-01",
+              "enseigne": "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE",
+              "denomination": "UCER - GANYMEDE",
+              "nic": "00029",
+              "dateCreation": "2024-05-01",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2008-01-01",
+              "dateDebutActivite": "2024-05-01",
               "dateFermeture": "",
-              "adresse": "72 CHEMIN DES FONTAINES 77220 PRESLES-EN-BRIE",
-              "adressePostale": "72 CHEMIN DES FONTAINES 77220 PRESLES-EN-BRIE",
-              "codePostal": "77220",
-              "commune": "PRESLES-EN-BRIE",
-              "activitePrincipale": "46.18Z",
-              "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
+              "adresse": "C/O BUSINESS CENTER 16 B BOULEVARD CHAMBLAIN 77000 MELUN",
+              "adressePostale": "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE, C/O BUSINESS CENTER 16 B BOULEVARD CHAMBLAIN 77000 MELUN",
+              "codePostal": "77000",
+              "commune": "MELUN",
+              "activitePrincipale": "46.49Z",
+              "libelleActivitePrincipale": "Commerce de gros (commerce interentreprises) d’autres biens domestiques (46.49Z)",
               "trancheEffectif": "N",
               "anneeTrancheEffectif": null,
-              "latitude": "48.700488",
-              "longitude": "2.758235",
+              "latitude": "48.533717",
+              "longitude": "2.654455",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [],
@@ -722,8 +726,8 @@
           ],
           "unknown": [],
           "closed": [],
-          "nombreEtablissementsOuverts": 1,
-          "nombreEtablissements": 1,
+          "nombreEtablissementsOuverts": 2,
+          "nombreEtablissements": 2,
           "usePagination": false,
           "currentEtablissementPage": 1
         },
@@ -732,7 +736,7 @@
         "dateCreation": "2004-09-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-03-22T14:26:06",
+        "dateMiseAJourInsee": "2025-02-10T10:01:13",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -744,6 +748,7 @@
           "estBio": false,
           "estEss": false,
           "estServicePublic": false,
+          "estL100_3": false,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
@@ -755,6 +760,7 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
+          "estAchatsResponsables": false,
           "estEntrepriseInclusive": false,
           "typeEntrepriseInclusive": null
         },
@@ -767,9 +773,46 @@
         },
         "listeIdcc": [],
         "immatriculation": null,
-        "matchingEtablissements": [],
-        "nombreEtablissements": 1,
-        "nombreEtablissementsOuverts": 1,
+        "matchingEtablissements": [
+          {
+            "siren": "479285801",
+            "siret": "47928580100029",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "ancienSiege": false,
+            "enseigne": "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE",
+            "denomination": "UCER - GANYMEDE",
+            "nic": "00029",
+            "dateCreation": "2024-05-01",
+            "dateDerniereMiseAJour": "",
+            "dateMiseAJourInsee": "",
+            "dateDebutActivite": "2024-05-01",
+            "dateFermeture": "",
+            "adresse": "C/O BUSINESS CENTER 16 B BOULEVARD CHAMBLAIN 77000 MELUN",
+            "adressePostale": "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE, C/O BUSINESS CENTER 16 B BOULEVARD CHAMBLAIN 77000 MELUN",
+            "codePostal": "77000",
+            "commune": "MELUN",
+            "activitePrincipale": "46.49Z",
+            "libelleActivitePrincipale": "Commerce de gros (commerce interentreprises) d’autres biens domestiques (46.49Z)",
+            "trancheEffectif": "N",
+            "anneeTrancheEffectif": null,
+            "latitude": "48.533717",
+            "longitude": "2.654455",
+            "complements": {
+              "estEntrepreneurIndividuel": false,
+              "idFiness": [],
+              "idBio": [],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
+            "listeIdcc": []
+          }
+        ],
+        "nombreEtablissements": 2,
+        "nombreEtablissementsOuverts": 2,
         "dirigeants": [
           {
             "sexe": null,
@@ -777,7 +820,7 @@
             "prenom": "Franck",
             "prenoms": "Franck",
             "role": "GERANT",
-            "nationalite": "Française",
+            "nationalite": "FRANÇAISE",
             "dateNaissancePartial": "1952-06"
           }
         ]
@@ -930,6 +973,7 @@
           "estBio": false,
           "estEss": false,
           "estServicePublic": false,
+          "estL100_3": false,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
@@ -941,6 +985,7 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
+          "estAchatsResponsables": false,
           "estEntrepriseInclusive": false,
           "typeEntrepriseInclusive": null
         },
@@ -1042,12 +1087,7 @@
             "idRge": [],
             "idUai": []
           },
-          "listeIdcc": [
-            {
-              "idcc": "1596",
-              "title": ""
-            }
-          ]
+          "listeIdcc": []
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -1093,12 +1133,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "listeIdcc": [
-                {
-                  "idcc": "1596",
-                  "title": ""
-                }
-              ]
+              "listeIdcc": []
             }
           ],
           "open": [
@@ -1136,12 +1171,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "listeIdcc": [
-                {
-                  "idcc": "1596",
-                  "title": ""
-                }
-              ]
+              "listeIdcc": []
             }
           ],
           "unknown": [],
@@ -1168,6 +1198,7 @@
           "estBio": false,
           "estEss": false,
           "estServicePublic": false,
+          "estL100_3": false,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
@@ -1179,6 +1210,7 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
+          "estAchatsResponsables": false,
           "estEntrepriseInclusive": false,
           "typeEntrepriseInclusive": null
         },
@@ -1189,12 +1221,7 @@
         "colter": {
           "codeColter": null
         },
-        "listeIdcc": [
-          {
-            "idcc": "1596",
-            "title": ""
-          }
-        ],
+        "listeIdcc": [],
         "immatriculation": null,
         "matchingEtablissements": [
           {
@@ -1231,12 +1258,7 @@
               "idRge": [],
               "idUai": []
             },
-            "listeIdcc": [
-              {
-                "idcc": "1596",
-                "title": ""
-              }
-            ]
+            "listeIdcc": []
           }
         ],
         "nombreEtablissements": 2,
@@ -1416,6 +1438,7 @@
           "estBio": false,
           "estEss": false,
           "estServicePublic": false,
+          "estL100_3": false,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
@@ -1427,6 +1450,7 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
+          "estAchatsResponsables": false,
           "estEntrepriseInclusive": false,
           "typeEntrepriseInclusive": null
         },
@@ -1490,6 +1514,15 @@
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
         "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "CASTEX",
+            "prenom": "Caroline",
+            "prenoms": "Caroline",
+            "role": "DIRECTEUR GENERAL",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1977-03"
+          },
           {
             "sexe": null,
             "nom": "DURET",
