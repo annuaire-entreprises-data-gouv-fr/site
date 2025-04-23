@@ -8,9 +8,9 @@ describe('Fiche résumé DANONE', () => {
     cy.contains(
       'Son siège social est domicilié au 17 BOULEVARD HAUSSMANN 75009 PARIS.'
     ).should('be.visible');
-    // // TVA number
-    // cy.contains('N° TVA Intracommunautaire').should('be.visible');
-    // cy.contains('FR12 345 678 901').should('be.visible');
+    // TVA number
+    cy.contains('N° TVA Intracommunautaire').should('be.visible');
+    cy.contains('FR12 345 678 901').should('be.visible');
     // EORI number
     cy.contains('N° EORI').should('be.visible');
     cy.contains('FR 123 456 789 0').should('be.visible');
@@ -45,13 +45,13 @@ describe('Entreprises non-diffusibles', () => {
   });
 });
 
-// describe('TVA number special cases', () => {
-//   it('TVA Non-assujettie', () => {
-//     cy.visit(`/entreprise/883010316`).then(() => {
-//       cy.contains('Pas de n° TVA valide');
-//     });
-//     cy.visit(`/entreprise/423208180`).then(() => {
-//       cy.contains('Pas de n° TVA valide connu');
-//     });
-//   });
-// });
+describe('TVA number special cases', () => {
+  it('TVA Non-assujettie', () => {
+    cy.visit(`/entreprise/883010316`).then(() => {
+      cy.contains('Pas de n° TVA valide');
+    });
+    cy.visit(`/entreprise/423208180`).then(() => {
+      cy.contains('Pas de n° TVA valide connu');
+    });
+  });
+});
