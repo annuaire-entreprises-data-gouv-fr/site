@@ -79,14 +79,6 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
           siren={uniteLegale.siren}
         />
       )}
-      {estAchatsResponsables && (
-        <LabelWithLinkToSection
-          informationTooltipLabel="Ce label distingue les structures ayant fait la preuve de relations durables et équilibrées avec leurs fournisseurs."
-          label="Achats Responsables"
-          sectionId="achats-responsables"
-          siren={uniteLegale.siren}
-        />
-      )}
       {estOrganismeFormation &&
         (estQualiopi ? (
           <LabelWithLinkToSection
@@ -143,6 +135,14 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
             siren={uniteLegale.siren}
           />
         ))}
+      {estAchatsResponsables && (
+        <LabelWithLinkToSection
+          informationTooltipLabel="Ce label distingue les structures ayant fait la preuve de relations durables et équilibrées avec leurs fournisseurs."
+          label="Achats Responsables"
+          sectionId="achats-responsables"
+          siren={uniteLegale.siren}
+        />
+      )}
     </>
   );
 };

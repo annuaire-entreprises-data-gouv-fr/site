@@ -223,12 +223,12 @@ class SearchFilterParams {
       qualiopi: 'Certifié : Qualiopi',
       sm: 'Qualité : Société à mission',
       siae: 'Qualité : Entreprise Inclusive',
-      achats_responsables: 'Label : Achats Responsables',
       of: 'Label : Organisme de formation',
       ei: 'Type : Entreprise Individuelle ',
       ct: 'Type : Collectivité territoriale ',
       sp: 'Type : Administration',
       asso: 'Type : Association ',
+      achats_responsables: 'Label : Achats Responsables',
     };
 
     if (this.params.type) {

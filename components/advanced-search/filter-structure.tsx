@@ -87,25 +87,18 @@ export const FilterStructure: React.FC<{
           onClick={() => setLabelSelected('ess')}
         />
 
-        <LabelAndCertificateBadge
+        {/* <LabelAndCertificateBadge
           label="Société à mission"
           isSelected={labelSelected === 'sm'}
           small
           onClick={() => setLabelSelected('sm')}
-        />
+        /> */}
 
         <LabelAndCertificateBadge
           label="Entreprise Inclusive"
           isSelected={labelSelected === 'siae'}
           small
           onClick={() => setLabelSelected('siae')}
-        />
-
-        <LabelAndCertificateBadge
-          label="Achats Responsables"
-          isSelected={labelSelected === 'achats_responsables'}
-          small
-          onClick={() => setLabelSelected('achats_responsables')}
         />
 
         <LabelAndCertificateBadge
@@ -148,6 +141,13 @@ export const FilterStructure: React.FC<{
           isSelected={labelSelected === 'esv'}
           small
           onClick={() => setLabelSelected('esv')}
+        />
+
+        <LabelAndCertificateBadge
+          label="Achats Responsables"
+          isSelected={labelSelected === 'achats_responsables'}
+          small
+          onClick={() => setLabelSelected('achats_responsables')}
         />
       </div>
       <style jsx>{`
