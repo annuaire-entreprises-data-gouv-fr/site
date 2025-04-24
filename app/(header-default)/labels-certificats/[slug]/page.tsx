@@ -32,6 +32,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import AlimConfianceSection from 'app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/alim-confiance/section';
 import { Metadata } from 'next';
 
 export const generateMetadata = async (
@@ -131,6 +132,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
         {estPatrimoineVivant && <LabelPatrimoineVivant />}
+        <AlimConfianceSection uniteLegale={uniteLegale} session={session} />
       </div>
     </>
   );

@@ -1,4 +1,5 @@
 export enum EAdministration {
+  MAA = 'maa',
   EDUCATION_NATIONALE = 'education-nationale',
   AGENCE_BIO = 'agence-bio',
   ADEME = 'ademe',
