@@ -149,6 +149,13 @@ export const FilterStructure: React.FC<{
           small
           onClick={() => setLabelSelected('achats_responsables')}
         />
+
+        <LabelAndCertificateBadge
+          label="Entreprises du patrimoine vivant"
+          isSelected={labelSelected === 'patrimoine_vivant'}
+          small
+          onClick={() => setLabelSelected('patrimoine_vivant')}
+        />
       </div>
       <style jsx>{`
         .badge-wrapper {

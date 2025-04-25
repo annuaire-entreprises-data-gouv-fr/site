@@ -13,6 +13,7 @@ import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-
 import { EntrepriseInclusiveSection } from '#components/labels-and-certificates/entreprise-inclusive';
 import { CertificationESSSection } from '#components/labels-and-certificates/ess';
 import { OrganismeDeFormationSection } from '#components/labels-and-certificates/organismes-de-formation';
+import { LabelPatrimoineVivant } from '#components/labels-and-certificates/patrimoine-vivant';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
 import { CertificationSocieteMission } from '#components/labels-and-certificates/societe-mission';
 import Title from '#components/title-section';
@@ -67,6 +68,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
     estEntrepreneurSpectacle,
     estEntrepriseInclusive,
     estAchatsResponsables,
+    estPatrimoineVivant,
   } = uniteLegale.complements;
 
   const {
@@ -128,6 +130,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         {estBio && (
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
+        {estPatrimoineVivant && <LabelPatrimoineVivant />}
       </div>
     </>
   );
