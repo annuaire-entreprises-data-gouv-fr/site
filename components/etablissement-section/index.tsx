@@ -9,7 +9,6 @@ import ExtraitRNELink from '#components/justificatifs/extrait-rne-link';
 import { Section } from '#components/section';
 import { CopyPaste } from '#components/table/copy-paste';
 import { TwoColumnTable } from '#components/table/simple';
-import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ISession } from '#models/authentication/user/session';
 import { estActif } from '#models/core/etat-administratif';
@@ -91,7 +90,11 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [
           [
             <a href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</a>,
-            <TVACell uniteLegale={uniteLegale} />,
+            <PrintNever key="siege-social-link">
+              <a key="entite" href={`/entreprise/${uniteLegale.chemin}`}>
+                → voir la page {uniteLegaleLabel}
+              </a>
+            </PrintNever>,
           ],
         ]
       : []),
