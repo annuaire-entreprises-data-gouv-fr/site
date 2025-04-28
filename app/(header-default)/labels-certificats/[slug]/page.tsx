@@ -109,7 +109,6 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
             session={session}
           />
         )}
-        {estAchatsResponsables && <LabelAchatsResponsables />}
         {hasRights(session, ApplicationRights.protectedCertificats) && (
           <>
             <QualibatSection session={session} uniteLegale={uniteLegale} />
@@ -131,6 +130,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         {estBio && (
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
+        {estAchatsResponsables && <LabelAchatsResponsables />}
         {estPatrimoineVivant && <LabelPatrimoineVivant />}
         <AlimConfianceSection uniteLegale={uniteLegale} session={session} />
       </div>
