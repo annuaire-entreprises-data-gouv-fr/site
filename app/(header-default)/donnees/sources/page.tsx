@@ -43,14 +43,24 @@ export default function DataSourcesPage() {
 
             return (
               <li key={`${source.label}-${slug}`}>
-                <a href={`#${slug}-${sourceIndex}`}>
-                  {isProtected ? (
-                    <Icon slug="lockFill" color={constants.colors.espaceAgent}>
-                      {source.label}
-                    </Icon>
-                  ) : (
-                    source.label
-                  )}
+                <a
+                  href={`#${slug}-${sourceIndex}`}
+                  style={{
+                    display: 'inline-block',
+                  }}
+                >
+                  <span>
+                    {isProtected ? (
+                      <Icon
+                        slug="lockFill"
+                        color={constants.colors.espaceAgent}
+                      >
+                        {source.label}
+                      </Icon>
+                    ) : (
+                      source.label
+                    )}
+                  </span>
                 </a>
               </li>
             );
