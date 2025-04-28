@@ -1,5 +1,5 @@
 type IAlimConfianceItem = {
-  __id: number;
+  __id: string;
   APP_Libelle_etablissement: string;
   SIRET: string;
   Adresse_2_UA: string;
@@ -8,13 +8,13 @@ type IAlimConfianceItem = {
   Date_inspection: string;
   APP_Libelle_activite_etablissement: string;
   Synthese_eval_sanit: string;
-  APP_Code_synthese_eval_sanit: number;
+  APP_Code_synthese_eval_sanit: string;
   Agrement: string;
   geores: string;
   filtre: null | string;
   ods_type_activite: string;
   reg_name: string;
-  reg_code: number;
+  reg_code: string;
   dep_name: string;
   dep_code: string;
   com_name: string;
