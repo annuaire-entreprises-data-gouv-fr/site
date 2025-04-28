@@ -6,11 +6,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
-import {
-  formatDate,
-  formatSiret,
-  uniteLegaleLabelWithPronounContracted,
-} from '#utils/helpers';
+import { formatDate, formatSiret, pluralize } from '#utils/helpers';
 import { useFetchAlimConfiance } from 'hooks/fetch/alim-confiance';
 
 type IProps = {
@@ -34,13 +30,14 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
       notFoundInfo={null}
     >
       {(alimConfiance) => {
+        const plural = pluralize(alimConfiance);
+
         return (
           <>
             <div>
               <p>
-                Vous trouverez ci-dessous les résultats des dernières
-                inspections sanitaires réalisées dans les établissements{' '}
-                {uniteLegaleLabelWithPronounContracted(uniteLegale)}.
+                Cette structure possède {alimConfiance.length} établissement
+                {plural} ayant fait l‘objet d‘un contrôle sanitaire :
               </p>
 
               <FullTable
