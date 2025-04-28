@@ -1,11 +1,12 @@
 'use client';
 
+import { Tag } from '#components-ui/tag';
 import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { TwoColumnTable } from '#components/table/simple';
+import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
-import { formatDate } from '#utils/helpers';
+import { formatDate, formatSiret } from '#utils/helpers';
 import { useFetchAlimConfiance } from 'hooks/fetch/alim-confiance';
 
 type IProps = {
@@ -37,21 +38,63 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
     >
       {(alimConfiance) => {
         return (
-          <div>
-            <p>
-              Vous trouverez ci-dessous les résultats de la dernière inspection
-              sanitaire réalisée dans cet établissement le{' '}
-              {formatDate(alimConfiance.dateInspection)}.
-            </p>
+          <>
+            <div>
+              <p>
+                Vous trouverez ci-dessous les résultats des dernières
+                inspections sanitaires réalisées dans les établissements.
+              </p>
 
-            <TwoColumnTable
-              body={[
-                ["Résultat de l'évaluation", alimConfiance.syntheseEvaluation],
-                ["Type d'activité", alimConfiance.libelleActiviteEtablissement],
-                ["Date d'inspection", formatDate(alimConfiance.dateInspection)],
-              ]}
-            />
-          </div>
+              <FullTable
+                head={[
+                  "Détail de l'établissement",
+                  "Résultat de l'évaluation",
+                  "Type d'activité",
+                  "Date d'inspection",
+                ]}
+                body={alimConfiance.map(
+                  ({
+                    siret,
+                    denomination,
+                    adresse,
+                    codePostal,
+                    commune,
+                    libelleActiviteEtablissement,
+                    dateInspection,
+                    syntheseEvaluation,
+                    code,
+                  }) => [
+                    <>
+                      {siret && (
+                        <a href={`/etablissement/${siret}`}>
+                          {formatSiret(siret)}
+                        </a>
+                      )}
+                      {denomination && <div>{denomination}</div>}
+                      {adresse && codePostal && commune && (
+                        <div>
+                          {adresse} {codePostal} {commune}
+                        </div>
+                      )}
+                    </>,
+                    <Tag
+                      color={
+                        code === '4'
+                          ? 'error'
+                          : code === '3'
+                          ? 'warning'
+                          : 'success'
+                      }
+                    >
+                      {syntheseEvaluation}
+                    </Tag>,
+                    <div>{libelleActiviteEtablissement}</div>,
+                    <div>{formatDate(dateInspection)}</div>,
+                  ]
+                )}
+              />
+            </div>
+          </>
         );
       }}
     </AsyncDataSectionClient>

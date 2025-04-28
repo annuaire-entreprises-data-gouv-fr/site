@@ -2,15 +2,14 @@ import { clientAlimConfiance } from '#clients/api-data-gouv/alim-confiance';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale } from '#models/core/types';
 import { FetchRessourceException } from '#models/exceptions';
-import { verifySiret } from '#utils/helpers';
+import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchExternalData } from './use-fetch-data';
 
 export function useFetchAlimConfiance(uniteLegale: IUniteLegale) {
   return useFetchExternalData(
     {
-      fetchData: () =>
-        clientAlimConfiance(verifySiret(uniteLegale.siege.siret)),
+      fetchData: () => clientAlimConfiance(verifySiren(uniteLegale.siren)),
       administration: EAdministration.MAA,
       logError: (e: any) => {
         if (e.status === 404) {

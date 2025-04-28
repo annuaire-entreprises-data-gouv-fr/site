@@ -40,4 +40,10 @@ type IAlimConfiance = {
   syntheseEvaluation: string;
   dateInspection: string;
   libelleActiviteEtablissement: string;
+  siret: string;
+  denomination: string;
+  adresse: string;
+  codePostal: string;
+  commune: string;
+  code: string;
 };
