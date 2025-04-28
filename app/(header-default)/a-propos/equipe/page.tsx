@@ -28,8 +28,8 @@ const team = [
     role: 'responsable du support utilisateur',
   },
   {
-    photoUrl: '/images/team/kevin.jpg',
-    fullname: 'Kevin Masseix',
+    photoUrl: '/images/team/paul.jpeg',
+    fullname: 'Paul Lesur',
     pronoun: 'un',
     role: 'devops',
   },
