@@ -18,13 +18,6 @@ type IProps = {
   session: ISession | null;
 };
 
-const AlimConfianceNotFound = () => (
-  <p>
-    Aucune donnée issue d‘une inspection sanitaire réalisée dans cet
-    établissement n‘a été trouvée.
-  </p>
-);
-
 /**
  * Alim‘Confiance section
  */
@@ -38,7 +31,7 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
       sources={[EAdministration.MAA]}
       isProtected={false}
       data={alimConfiance}
-      notFoundInfo={<AlimConfianceNotFound />}
+      notFoundInfo={null}
     >
       {(alimConfiance) => {
         return (
