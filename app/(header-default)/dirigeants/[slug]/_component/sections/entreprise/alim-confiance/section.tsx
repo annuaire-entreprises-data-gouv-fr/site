@@ -6,7 +6,11 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
-import { formatDate, formatSiret } from '#utils/helpers';
+import {
+  formatDate,
+  formatSiret,
+  uniteLegaleLabelWithPronounContracted,
+} from '#utils/helpers';
 import { useFetchAlimConfiance } from 'hooks/fetch/alim-confiance';
 
 type IProps = {
@@ -42,16 +46,18 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
             <div>
               <p>
                 Vous trouverez ci-dessous les résultats des dernières
-                inspections sanitaires réalisées dans les établissements.
+                inspections sanitaires réalisées dans les établissements{' '}
+                {uniteLegaleLabelWithPronounContracted(uniteLegale)}.
               </p>
 
               <FullTable
                 head={[
                   "Détail de l'établissement",
                   "Résultat de l'évaluation",
-                  "Type d'activité",
                   "Date d'inspection",
+                  "Type d'activité",
                 ]}
+                columnWidths={['40%', '20%', '25%', '15%']}
                 body={alimConfiance.map(
                   ({
                     siret,
@@ -88,8 +94,10 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
                     >
                       {syntheseEvaluation}
                     </Tag>,
-                    <div>{libelleActiviteEtablissement}</div>,
                     <div>{formatDate(dateInspection)}</div>,
+                    <div>
+                      {libelleActiviteEtablissement.split('|').join(', ')}
+                    </div>,
                   ]
                 )}
               />
