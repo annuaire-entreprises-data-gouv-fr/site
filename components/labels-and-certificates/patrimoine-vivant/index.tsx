@@ -4,13 +4,13 @@ import { EAdministration } from '#models/administrations/EAdministration';
 export const LabelPatrimoineVivant = () => {
   return (
     <Section
-      title="Entreprises du patrimoine vivant"
+      title="Entreprise du Patrimoine Vivant"
       sources={[EAdministration.MEF]}
       id="patrimoine-vivant"
     >
       <p>
         Cette structure est labellisée{' '}
-        <strong>« Entreprises du patrimoine vivant »</strong>.
+        <strong>« Entreprise du Patrimoine Vivant »</strong>.
       </p>
       <p>
         Créé en 2005, le label « Entreprise du Patrimoine Vivant » (EPV) est un
