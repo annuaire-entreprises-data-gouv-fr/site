@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 28/04/2025
+  target:
+    site: true
+  body: |
+    Ajout des résultats des contrôles sanitaires disponibles grâce au dispositif d'information Alim’confiance
 - date: 23/04/2025
   target:
     site: true
