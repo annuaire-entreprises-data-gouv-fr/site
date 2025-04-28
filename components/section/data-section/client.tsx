@@ -20,7 +20,7 @@ import { DataSectionLoader } from './loader';
 
 interface IDataSectionClientProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IDataFetchingState | T;
-  notFoundInfo?: NonNullable<React.ReactNode>;
+  notFoundInfo?: NonNullable<React.ReactNode> | null;
   additionalInfoOnError?: React.ReactNode;
   children: (data: T) => JSX.Element;
 }

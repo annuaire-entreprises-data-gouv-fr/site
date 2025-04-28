@@ -32,6 +32,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import AlimConfianceSection from 'app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/alim-confiance/section';
 import { Metadata } from 'next';
 
 export const generateMetadata = async (
@@ -108,7 +109,6 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
             session={session}
           />
         )}
-        {estAchatsResponsables && <LabelAchatsResponsables />}
         {hasRights(session, ApplicationRights.protectedCertificats) && (
           <>
             <QualibatSection session={session} uniteLegale={uniteLegale} />
@@ -130,7 +130,9 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         {estBio && (
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
+        {estAchatsResponsables && <LabelAchatsResponsables />}
         {estPatrimoineVivant && <LabelPatrimoineVivant />}
+        <AlimConfianceSection uniteLegale={uniteLegale} session={session} />
       </div>
     </>
   );
