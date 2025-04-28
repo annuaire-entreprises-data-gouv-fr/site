@@ -230,7 +230,7 @@ class SearchFilterParams {
       sp: 'Type : Administration',
       asso: 'Type : Association ',
       achats_responsables: 'Label : Achats Responsables',
-      patrimoine_vivant: 'Label : Entreprises du patrimoine vivant',
+      patrimoine_vivant: 'Label : Entreprise du Patrimoine Vivant',
     };
 
     if (this.params.type) {

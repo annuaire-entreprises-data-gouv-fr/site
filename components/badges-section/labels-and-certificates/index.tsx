@@ -148,8 +148,8 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       )}
       {estPatrimoineVivant && (
         <LabelWithLinkToSection
-          informationTooltipLabel="Cette structure est labelisée Entreprises du patrimoine vivant"
-          label="Entreprises du patrimoine vivant"
+          informationTooltipLabel="Cette structure est labelisée Entreprise du Patrimoine Vivant"
+          label="Entreprise du Patrimoine Vivant"
           sectionId="patrimoine-vivant"
           siren={uniteLegale.siren}
         />
