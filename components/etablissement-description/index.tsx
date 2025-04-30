@@ -66,7 +66,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
               .
             </FAQLink>
             , immatriculé sous le siret {formatSiret(etablissement.siret)}, est
-            <strong>{statusLabel(etablissement.etatAdministratif)}.</strong>
+            <strong>{statusLabel(etablissement.etatAdministratif)}. </strong>
             {etablissement.dateCreation && (
               <>
                 {' '}
