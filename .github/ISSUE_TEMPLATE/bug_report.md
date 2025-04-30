@@ -3,7 +3,7 @@ name: Signaler un bug
 about: Je viens de rencontrer un problème.
 title: '[BUG]'
 labels: bug
-assignees: XavierJp
+assignees: rmonnier9
 ---
 
 ## Sujet du problème
