@@ -1,4 +1,4 @@
-type IAlimConfianceItem = {
+type IAlimConfianceDatagouvItem = {
   __id: string;
   APP_Libelle_etablissement: string;
   SIRET: string;
@@ -22,7 +22,7 @@ type IAlimConfianceItem = {
 };
 
 type IAlimConfianceDatagouvResponse = {
-  data: IAlimConfianceItem[];
+  data: IAlimConfianceDatagouvItem[];
   links: {
     profile: string;
     swagger: string;
@@ -36,7 +36,7 @@ type IAlimConfianceDatagouvResponse = {
   };
 };
 
-type IAlimConfiance = {
+type IAlimConfianceItem = {
   syntheseEvaluation: string;
   dateInspection: string;
   libelleActiviteEtablissement: string;
@@ -46,4 +46,13 @@ type IAlimConfiance = {
   codePostal: string;
   commune: string;
   code: string;
+};
+
+type IAlimConfiance = {
+  data: IAlimConfianceItem[];
+  meta: {
+    page: number;
+    page_size: number;
+    total: number;
+  };
 };

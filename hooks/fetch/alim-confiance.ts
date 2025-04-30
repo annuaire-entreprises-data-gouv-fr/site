@@ -6,10 +6,14 @@ import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchExternalData } from './use-fetch-data';
 
-export function useFetchAlimConfiance(uniteLegale: IUniteLegale) {
+export function useFetchAlimConfiance(
+  uniteLegale: IUniteLegale,
+  page: number = 1
+) {
   return useFetchExternalData(
     {
-      fetchData: () => clientAlimConfiance(verifySiren(uniteLegale.siren)),
+      fetchData: () =>
+        clientAlimConfiance(verifySiren(uniteLegale.siren), page),
       administration: EAdministration.MAA,
       logError: (e: any) => {
         if (e.status === 404) {
@@ -26,6 +30,6 @@ export function useFetchAlimConfiance(uniteLegale: IUniteLegale) {
         logErrorInSentry(exception);
       },
     },
-    [uniteLegale]
+    [uniteLegale, page]
   );
 }
