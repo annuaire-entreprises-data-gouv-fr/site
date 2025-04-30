@@ -49,12 +49,14 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
                 {plural} ayant fait l‘objet d‘un contrôle sanitaire :
               </p>
 
-              <LocalPageCounter
-                currentPage={currentPage}
-                totalPages={Math.ceil(total / page_size)}
-                onPageChange={setCurrentPage}
-                compact={true}
-              />
+              {total > 20 && (
+                <LocalPageCounter
+                  currentPage={currentPage}
+                  totalPages={Math.ceil(total / page_size)}
+                  onPageChange={setCurrentPage}
+                  compact={true}
+                />
+              )}
 
               <FullTable
                 head={[
