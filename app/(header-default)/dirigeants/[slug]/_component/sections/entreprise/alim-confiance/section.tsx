@@ -27,7 +27,12 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
       sources={[EAdministration.MAA]}
       isProtected={false}
       data={alimConfiance}
-      notFoundInfo={null}
+      notFoundInfo={
+        <p>
+          Nous n’avons pas trouvé de résultat de contrôle sanitaire pour cette
+          structure.
+        </p>
+      }
     >
       {(alimConfiance) => {
         const plural = pluralize(alimConfiance);
