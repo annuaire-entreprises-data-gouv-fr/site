@@ -3,8 +3,7 @@ name: "🐞 Signaler un bug"
 about: Je viens de rencontrer un problème.
 title: "[BUG] Résumé du problème"
 labels: bug
-assignees:
-  - annuaire-entreprises-data-gouv-fr/site-team
+assignees: rmonnier9
 ---
 
 ## ❗ Sujet du problème
