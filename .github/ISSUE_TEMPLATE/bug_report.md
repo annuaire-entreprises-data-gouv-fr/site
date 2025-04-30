@@ -10,7 +10,7 @@ assignees:
 ## ❗ Sujet du problème
 
 Décrivez clairement le problème que vous rencontrez.  
-Exemple : *« Lorsque je clique sur… l’application plante »*
+Exemple : *« Lorsque je clique sur… le site plante »*
 
 ---
 
