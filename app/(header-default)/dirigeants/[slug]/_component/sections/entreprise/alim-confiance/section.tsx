@@ -22,7 +22,7 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
 
   return (
     <AsyncDataSectionClient
-      id="dpo-section"
+      id="alim-confiance"
       title="Dispositif d'information Alim’confiance"
       sources={[EAdministration.MAA]}
       isProtected={false}

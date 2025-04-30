@@ -161,7 +161,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure dispose de résultats de contrôles sanitaires (Alim'Confiance)"
           label="Alim'Confiance"
-          sectionId="patrimoine-vivant"
+          sectionId="alim-confiance"
           siren={uniteLegale.siren}
         />
       )}
