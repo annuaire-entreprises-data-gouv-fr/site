@@ -21,6 +21,7 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
     estEntrepriseInclusive,
     estAchatsResponsables,
     estPatrimoineVivant,
+    estAlimConfiance,
   } = uniteLegale.complements;
   if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
   if (estEss || estSocieteMission) sources.push(EAdministration.INSEE);
@@ -31,6 +32,7 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
   if (estEntrepriseInclusive) sources.push(EAdministration.MARCHE_INCLUSION);
   if (estAchatsResponsables) sources.push(EAdministration.MEF);
   if (estPatrimoineVivant) sources.push(EAdministration.MEF);
+  if (estAlimConfiance) sources.push(EAdministration.MAA);
   return sources;
 };
 
@@ -54,6 +56,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     typeEntrepriseInclusive,
     estAchatsResponsables,
     estPatrimoineVivant,
+    estAlimConfiance,
   } = uniteLegale.complements;
 
   return (
@@ -150,6 +153,14 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure est labelisée Entreprise du Patrimoine Vivant"
           label="Entreprise du Patrimoine Vivant"
+          sectionId="patrimoine-vivant"
+          siren={uniteLegale.siren}
+        />
+      )}
+      {estAlimConfiance && (
+        <LabelWithLinkToSection
+          informationTooltipLabel="Cette structure dispose de résultats de contrôles sanitaires (Alim'Confiance)"
+          label="Alim'Confiance"
           sectionId="patrimoine-vivant"
           siren={uniteLegale.siren}
         />
