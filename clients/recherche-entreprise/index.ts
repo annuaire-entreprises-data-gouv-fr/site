@@ -178,7 +178,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     type_siae = '',
     est_achats_responsables = false,
     est_patrimoine_vivant = false,
-    est_alim_confiance = true,
+    est_alim_confiance = false,
   } = complements || {};
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
