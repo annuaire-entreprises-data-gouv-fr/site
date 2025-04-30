@@ -1,9 +1,9 @@
 slug: insee
-short: Insee
+short: INSEE
 site: https://www.insee.fr/fr/accueil
 logoType: portrait
-long: Institut national de la statistique et des études économiques (Insee)
-contact: https://www.insee.fr/fr/information/1302169
+long: Institut National de la Statistique et des Études Économiques (Insee)
+contact: https://www.insee.fr/fr/information/2411108
 apiMonitors:
   - apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-sirene/
     apiSlug: sirene

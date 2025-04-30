@@ -5,16 +5,19 @@ export function AskUseCase({
   idPrefix,
   useCase,
   setUseCase,
+  label,
 }: {
   idPrefix: string;
   useCase?: UseCase;
   setUseCase: (useCase: UseCase) => void;
+  label?: string;
 }) {
   return (
     <>
       <form>
         <label>
-          Dans quel cadre juridique souhaitez-vous accéder à ces données ?
+          {label ||
+            'Dans quel cadre juridique souhaitez-vous accéder à ces données ?'}
         </label>
         <br />
         <MultiChoice
@@ -32,13 +35,14 @@ export function AskUseCase({
             },
             {
               label: 'Aides publiques (aux entreprises)',
-              onClick: () => setUseCase(UseCase.aidesEntreprises),
-              checked: useCase === UseCase.aidesEntreprises,
+              onClick: () => setUseCase(UseCase.aidesPubliques),
+              checked: useCase === UseCase.aidesPubliques,
             },
             {
               label: 'Aides publiques (aux associations)',
-              onClick: () => setUseCase(UseCase.aidesAsso),
-              checked: useCase === UseCase.aidesAsso,
+              onClick: () =>
+                setUseCase(UseCase.subventionsFonctionnementAssociation),
+              checked: useCase === UseCase.subventionsFonctionnementAssociation,
             },
             {
               label: 'Autre cas d’usage',

@@ -27,7 +27,7 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   // BTP
   [APIRoutesPaths.EspaceAgentTravauxPublics]: ApplicationRights.travauxPublics,
   // fiscal & social
-  [APIRoutesPaths.EspaceAgentBilansProtected]: ApplicationRights.bilans,
+  [APIRoutesPaths.EspaceAgentBilansProtected]: ApplicationRights.bilansBDF,
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]:
     ApplicationRights.chiffreAffaires,
   [APIRoutesPaths.EspaceAgentConformite]: ApplicationRights.conformite,
@@ -35,4 +35,6 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
     ApplicationRights.effectifsAnnuels,
   [APIRoutesPaths.EspaceAgentLiassesFiscalesProtected]:
     ApplicationRights.liassesFiscales,
+  [APIRoutesPaths.EspaceAgentLiensCapitalistiquesProtected]:
+    ApplicationRights.liensCapitalistiques,
 };

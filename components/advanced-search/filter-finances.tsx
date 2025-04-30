@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import DualRangeSlider from '#components-ui/dual-range-slider';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import constants from '#models/constants';
 import { formatCurrency } from '#utils/helpers';
+import { useState } from 'react';
 
-// Discretize "chiffer d’affaires" possible values
+// Discretize "chiffre d'affaires" possible values
 export const CA = [
   0, 1000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000,
   50000000000, 100000000000,
@@ -64,60 +64,92 @@ export const FilterFinances: React.FC<{
   return (
     <>
       {valueCA.min > 0 && (
-        <input
-          name="ca_min"
-          value={CA[valueCA.min]}
-          type="hidden"
-          onChange={() => {}}
-        />
+        <>
+          <label htmlFor="ca-min-input" className="fr-label fr-sr-only">
+            Chiffre d&apos;affaires minimum
+          </label>
+          <input
+            id="ca-min-input"
+            name="ca_min"
+            value={CA[valueCA.min]}
+            type="hidden"
+            onChange={() => {}}
+          />
+        </>
       )}
       {valueCA.max < CA.length - 1 && (
-        <input
-          name="ca_max"
-          value={CA[valueCA.max]}
-          type="hidden"
-          onChange={() => {}}
-        />
+        <>
+          <label htmlFor="ca-max-input" className="fr-label fr-sr-only">
+            Chiffre d&apos;affaires maximum
+          </label>
+          <input
+            id="ca-max-input"
+            name="ca_max"
+            value={CA[valueCA.max]}
+            type="hidden"
+            onChange={() => {}}
+          />
+        </>
       )}
       {valueRes.min > 0 && (
-        <input
-          name="res_min"
-          value={Res[valueRes.min]}
-          type="hidden"
-          onChange={() => {}}
-        />
+        <>
+          <label htmlFor="res-min-input" className="fr-label fr-sr-only">
+            Résultat net minimum
+          </label>
+          <input
+            id="res-min-input"
+            name="res_min"
+            value={Res[valueRes.min]}
+            type="hidden"
+            onChange={() => {}}
+          />
+        </>
       )}
       {valueRes.max < Res.length - 1 && (
-        <input
-          name="res_max"
-          value={Res[valueRes.max]}
-          type="hidden"
-          onChange={() => {}}
-        />
+        <>
+          <label htmlFor="res-max-input" className="fr-label fr-sr-only">
+            Résultat net maximum
+          </label>
+          <input
+            id="res-max-input"
+            name="res_max"
+            value={Res[valueRes.max]}
+            type="hidden"
+            onChange={() => {}}
+          />
+        </>
       )}
-      <label>Chiffre d’affaires :</label>
-      <DualRangeSlider
-        min={0}
-        max={CA.length - 1}
-        value={valueCA}
-        step={1}
-        onChange={setValueCA}
-        color={constants.chartColors[4]}
-      />
+      <fieldset>
+        <legend>Chiffre d‘affaires :</legend>
+        <DualRangeSlider
+          idPrefix="ca"
+          label="Chiffre d‘affaires"
+          min={0}
+          max={CA.length - 1}
+          value={valueCA}
+          step={1}
+          onChange={setValueCA}
+          color={constants.chartColors[4]}
+        />
+      </fieldset>
       <div className="legend">
         <span>Min : {formatCurrency(CA[valueCA.min])}</span>
         <span>Max : {formatCurrency(CA[valueCA.max])}</span>
       </div>
       <SimpleSeparator />
-      <label>Résultat net :</label>
-      <DualRangeSlider
-        min={0}
-        max={Res.length - 1}
-        value={valueRes}
-        step={1}
-        onChange={setValueRes}
-        color={constants.chartColors[1]}
-      />
+      <fieldset>
+        <legend>Résultat net :</legend>
+        <DualRangeSlider
+          idPrefix="res"
+          label="Résultat net"
+          min={0}
+          max={Res.length - 1}
+          value={valueRes}
+          step={1}
+          onChange={setValueRes}
+          color={constants.chartColors[1]}
+        />
+      </fieldset>
       <div className="legend">
         <span>Min : {formatCurrency(Res[valueRes.min])}</span>
         <span>Max : {formatCurrency(Res[valueRes.max])}</span>
@@ -128,6 +160,18 @@ export const FilterFinances: React.FC<{
           padding-top: 20px;
           display: flex;
           justify-content: space-between;
+          width: 100%;
+        }
+        fieldset {
+          border: none;
+          padding: 0;
+          margin: 0;
+        }
+        legend {
+          padding: 0;
+          margin: 0;
+          font-weight: 500;
+          display: block;
           width: 100%;
         }
       `}</style>

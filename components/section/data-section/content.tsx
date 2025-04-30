@@ -4,6 +4,7 @@ import AdministrationNotRespondingMessage from '#components/administration-not-r
 import { administrationsMetaData } from '#models/administrations';
 import {
   IAPINotRespondingError,
+  isAPI404,
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IDataFetchingState } from '#models/data-fetching';
@@ -24,11 +25,11 @@ export function DataSectionContent<
   additionalInfoOnError,
 }: IDataSectionContentProps<T>) {
   if (isAPINotResponding(data)) {
-    if (data.errorType === 404 && notFoundInfo === null) {
+    if (isAPI404(data) && notFoundInfo === null) {
       return null;
     }
 
-    if (data.errorType === 404 && notFoundInfo) {
+    if (isAPI404(data) && notFoundInfo) {
       return notFoundInfo;
     }
 

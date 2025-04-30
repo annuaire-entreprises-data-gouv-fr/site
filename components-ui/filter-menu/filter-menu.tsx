@@ -47,7 +47,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
     <>
       <div ref={ref} className={styles['search-filter-label-container']}>
         <div>
-          <label>
+          <div>
             {activeFilter.label ? (
               <ActiveFilterLabel
                 icon={activeFilter.icon}
@@ -69,7 +69,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
                 </Icon>
               </span>
             )}
-          </label>
+          </div>
           {open && (
             <ButtonClose
               onClick={() => setOpen(false)}

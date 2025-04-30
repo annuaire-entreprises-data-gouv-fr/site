@@ -108,6 +108,8 @@ class SearchFilterParams {
       est_service_public: this.params.type === 'sp',
       est_societe_mission: this.params.label === 'sm',
       est_siae: this.params.label === 'siae',
+      est_achats_responsables: this.params.label === 'achats_responsables',
+      est_patrimoine_vivant: this.params.label === 'patrimoine_vivant',
       est_entrepreneur_individuel: this.params.type === 'ei',
       section_activite_principale: this.params.sap,
       categorie_entreprise: this.params.categorie_entreprise,
@@ -227,6 +229,8 @@ class SearchFilterParams {
       ct: 'Type : Collectivité territoriale ',
       sp: 'Type : Administration',
       asso: 'Type : Association ',
+      achats_responsables: 'Label : Achats Responsables',
+      patrimoine_vivant: 'Label : Entreprise du Patrimoine Vivant',
     };
 
     if (this.params.type) {

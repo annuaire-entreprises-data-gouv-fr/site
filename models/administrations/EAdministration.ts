@@ -1,4 +1,5 @@
 export enum EAdministration {
+  MAA = 'maa',
   EDUCATION_NATIONALE = 'education-nationale',
   AGENCE_BIO = 'agence-bio',
   ADEME = 'ademe',
@@ -28,4 +29,5 @@ export enum EAdministration {
   PROBTP = 'probtp',
   GIP_MDS = 'gip-mds',
   BANQUE_DE_FRANCE = 'banque-de-france',
+  CNIL = 'cnil',
 }

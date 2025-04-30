@@ -6,31 +6,50 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ISession } from '#models/authentication/user/session';
 import { IUniteLegale } from '#models/core/types';
+import { UseCase } from '#models/use-cases';
 import { formatCurrency, formatDate, getDateFromYYYYMM } from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { useMemo } from 'react';
 
-export default function BilansSocieteSection({
+export function ProtectedIndicateursFinanciersBDF({
   uniteLegale,
   session,
+  useCase,
+  title,
+  id,
+  sources,
+  isProtected,
 }: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
+  useCase: UseCase;
+  title: string;
+  id: string;
+  sources: EAdministration[];
+  isProtected: boolean;
 }) {
+  const params = useMemo(
+    () => ({
+      params: { useCase },
+    }),
+    [useCase]
+  );
   const banqueDeFranceBilansProtected = useAPIRouteData(
     APIRoutesPaths.EspaceAgentBilansProtected,
     uniteLegale.siren,
-    session
+    session,
+    params
   );
 
   return (
     <AsyncDataSectionClient
-      title="Bilans Banque de France"
-      id="bilans-banque-de-france"
-      sources={[EAdministration.BANQUE_DE_FRANCE]}
-      isProtected
+      title={title}
+      id={id}
+      isProtected={isProtected}
+      sources={sources}
       data={banqueDeFranceBilansProtected}
-      notFoundInfo="Aucun bilan n’a été retrouvé pour cette structure."
+      notFoundInfo="Aucun indicateur n’a été retrouvé pour cette structure."
     >
       {(bilans) => {
         const body = [

@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import {
   AssociationBadge,
   CollectiviteTerritorialeBadge,
@@ -10,6 +9,7 @@ import {
   ServicePublicBadge,
 } from '#components-ui/badge/frequent';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
+import { useState } from 'react';
 
 export const FilterStructure: React.FC<{
   type?: string;
@@ -19,8 +19,11 @@ export const FilterStructure: React.FC<{
   const [labelSelected, setLabelSelected] = useState(label);
   return (
     <>
-      <label>Type de structure :</label>
+      <label className="fr-label" htmlFor="structure-type-input">
+        Type de structure :
+      </label>
       <input
+        id="structure-type-input"
         name="type"
         value={structureType}
         type="hidden"
@@ -59,8 +62,11 @@ export const FilterStructure: React.FC<{
         />
       </div>
       <SimpleSeparator />
-      <label>Qualités, labels et certificats :</label>
+      <label className="fr-label" htmlFor="structure-label-input">
+        Qualités, labels et certificats :
+      </label>
       <input
+        id="structure-label-input"
         name="label"
         value={labelSelected}
         type="hidden"
@@ -81,12 +87,12 @@ export const FilterStructure: React.FC<{
           onClick={() => setLabelSelected('ess')}
         />
 
-        <LabelAndCertificateBadge
+        {/* <LabelAndCertificateBadge
           label="Société à mission"
           isSelected={labelSelected === 'sm'}
           small
           onClick={() => setLabelSelected('sm')}
-        />
+        /> */}
 
         <LabelAndCertificateBadge
           label="Entreprise Inclusive"
@@ -135,6 +141,20 @@ export const FilterStructure: React.FC<{
           isSelected={labelSelected === 'esv'}
           small
           onClick={() => setLabelSelected('esv')}
+        />
+
+        <LabelAndCertificateBadge
+          label="Achats Responsables"
+          isSelected={labelSelected === 'achats_responsables'}
+          small
+          onClick={() => setLabelSelected('achats_responsables')}
+        />
+
+        <LabelAndCertificateBadge
+          label="Entreprise du Patrimoine Vivant"
+          isSelected={labelSelected === 'patrimoine_vivant'}
+          small
+          onClick={() => setLabelSelected('patrimoine_vivant')}
         />
       </div>
       <style jsx>{`

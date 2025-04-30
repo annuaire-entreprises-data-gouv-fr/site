@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import constants from '#models/constants';
+import { useEffect, useState } from 'react';
 
 /**
  * Component with dual slider
@@ -8,13 +8,15 @@ import constants from '#models/constants';
  * Use with react !
  */
 const DualRangeSlider: React.FC<{
+  idPrefix: string;
+  label: string;
   min: number;
   max: number;
   step: number;
   value: any;
   onChange: any;
   color: string;
-}> = ({ min, max, value, step, onChange, color }) => {
+}> = ({ idPrefix, label, min, max, value, step, onChange, color }) => {
   const [minValue, setMinValue] = useState(value ? value.min : min);
   const [maxValue, setMaxValue] = useState(value ? value.max : max);
 
@@ -51,7 +53,14 @@ const DualRangeSlider: React.FC<{
   return (
     <div id="dual-range-slider">
       <div className="input-wrapper">
+        <label
+          htmlFor={`${idPrefix}-min-range-input`}
+          className="fr-label fr-sr-only"
+        >
+          {label} minimum
+        </label>
         <input
+          id={`${idPrefix}-min-range-input`}
           type="range"
           value={minValue}
           min={min}
@@ -59,7 +68,14 @@ const DualRangeSlider: React.FC<{
           step={step}
           onChange={handleMinChange}
         />
+        <label
+          htmlFor={`${idPrefix}-max-range-input`}
+          className="fr-label fr-sr-only"
+        >
+          {label} maximum
+        </label>
         <input
+          id={`${idPrefix}-max-range-input`}
           type="range"
           value={maxValue}
           min={min}

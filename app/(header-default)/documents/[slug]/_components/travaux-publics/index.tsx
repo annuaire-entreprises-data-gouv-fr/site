@@ -27,7 +27,7 @@ const TravauxPublicsSection = ({
       ]}
       allowedUseCases={[
         UseCase.marches,
-        UseCase.aidesEntreprises,
+        UseCase.aidesPubliques,
         UseCase.fraude,
       ]}
       requiredRight={ApplicationRights.travauxPublics}

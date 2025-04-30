@@ -9,9 +9,10 @@ interface IBilanRNE {
   dateDepot: string;
   dateCloture: string;
   typeBilan: string;
+  confidentiality: string;
 }
 
-export interface IActesRNE {
+export interface IDocumentsRNE {
   actes: IActeRNE[];
   bilans: IBilanRNE[];
   hasBilanConsolide: boolean;
@@ -28,6 +29,12 @@ export interface IEtatCivil {
   dateNaissance?: string;
   nationalite?: string;
 }
+
+export type IEtatCivilLiensCapitalistiques = IEtatCivil & {
+  pourcentage: number;
+  nombre_parts: number;
+  pays: string;
+};
 
 export type IEtatCivilMergedIGInpi = IEtatCivil & {
   roles: IRole[];
@@ -46,6 +53,12 @@ export type IPersonneMoraleMergedIGInpi = IPersonneMorale & {
   roles: IRole[];
   isInInpi: boolean;
   isInIg: boolean;
+};
+
+export type IPersonneMoraleLiensCapitalistiques = IPersonneMorale & {
+  pourcentage: number;
+  nombre_parts?: number;
+  pays: string;
 };
 
 export type IObservations = {

@@ -7,11 +7,12 @@ import {
 import { ISession } from '#models/authentication/user/session';
 import { estDiffusible } from '#models/core/diffusion';
 import { IUniteLegale } from '#models/core/types';
-import BilansDocumentsSociete from './bilans-documents-societe';
-import BilansSocieteSection from './bilans-societe';
-import ComptesBodaccSociete from './comptes-bodacc-societe';
-import { FinancesSocieteSection } from './finances-societe';
-import LiassesFiscalesSection from './liasses-fiscales';
+import { BilansDocumentsSociete } from './bilans-documents-societe';
+import { ComptesBodaccSociete } from './comptes-bodacc-societe';
+import { FinancesSocieteSummary } from './finances-societe-summary';
+import { IndicateursFinanciers } from './indicateurs-financiers';
+import { IndicateursFinanciersBDF } from './indicateurs-financiers-bdf';
+import { LiassesFiscales } from './liasses-fiscales';
 
 export default function DonneesFinancieresSociete({
   uniteLegale,
@@ -20,34 +21,28 @@ export default function DonneesFinancieresSociete({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
-  const isMoreThanThreeYearsOld =
-    new Date(
-      uniteLegale.dateDebutActivite || uniteLegale.dateCreation
-    ).getFullYear() +
-      3 <=
-    new Date().getFullYear();
-
   return (
     <>
+      <FinancesSocieteSummary session={session} />
       {estDiffusible(uniteLegale) ||
       hasRights(session, ApplicationRights.nonDiffusible) ? (
-        <>
-          <FinancesSocieteSection uniteLegale={uniteLegale} session={session} />
-          {hasRights(session, ApplicationRights.bilans) &&
-            isMoreThanThreeYearsOld && (
-              <BilansSocieteSection
-                uniteLegale={uniteLegale}
-                session={session}
-              />
-            )}
-        </>
+        <IndicateursFinanciers uniteLegale={uniteLegale} session={session} />
       ) : (
         <DonneesPriveesSection title="Indicateurs financiers" />
       )}
-      <HorizontalSeparator />
+      {hasRights(session, ApplicationRights.bilansBDF) && (
+        <>
+          <HorizontalSeparator />
+          <IndicateursFinanciersBDF
+            uniteLegale={uniteLegale}
+            session={session}
+          />
+        </>
+      )}
       <BilansDocumentsSociete uniteLegale={uniteLegale} session={session} />
+      <HorizontalSeparator />
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
-      <LiassesFiscalesSection uniteLegale={uniteLegale} session={session} />
+      <LiassesFiscales uniteLegale={uniteLegale} session={session} />
     </>
   );
 }

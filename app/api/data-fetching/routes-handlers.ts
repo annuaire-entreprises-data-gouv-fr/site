@@ -11,6 +11,7 @@ import { getConformiteEntreprise } from '#models/espace-agent/conformite';
 import { getLiassesFiscalesProtected } from '#models/espace-agent/dgfip/liasses-fiscales';
 import { getDirigeantsProtected } from '#models/espace-agent/dirigeants-protected';
 import { getEffectifsAnnuelsProtected } from '#models/espace-agent/effectifs/annuels';
+import { getLiensCapitalistiquesProtected } from '#models/espace-agent/liens-capitalistiques';
 import { getDocumentsRNEProtected } from '#models/espace-agent/rne-protected/documents';
 import { getTravauxPublic } from '#models/espace-agent/travaux-publics';
 import { getDirigeantsRNE } from '#models/rne/dirigeants';
@@ -40,17 +41,20 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]: withRateLimiting(
     getEffectifsAnnuelsProtected
   ),
-  [APIRoutesPaths.EspaceAgentBilansProtected]:
-    withRateLimiting(getBilansProtected),
+  [APIRoutesPaths.EspaceAgentBilansProtected]: withRateLimiting(
+    withUseCase(getBilansProtected)
+  ),
   [APIRoutesPaths.EspaceAgentChiffreAffairesProtected]: withRateLimiting(
-    getChiffreAffairesProtected
+    withUseCase(getChiffreAffairesProtected)
   ),
   [APIRoutesPaths.EspaceAgentTravauxPublics]: withRateLimiting(
     withUseCase(getTravauxPublic)
   ),
-  getChiffreAffairesProtected,
   [APIRoutesPaths.EspaceAgentLiassesFiscalesProtected]: withRateLimiting(
     withUseCase(getLiassesFiscalesProtected)
+  ),
+  [APIRoutesPaths.EspaceAgentLiensCapitalistiquesProtected]: withRateLimiting(
+    withUseCase(getLiensCapitalistiquesProtected)
   ),
   [APIRoutesPaths.RneDirigeants]: getDirigeantsRNE,
   [APIRoutesPaths.Observations]: getRNEObservations,

@@ -6,6 +6,7 @@ interface ISectionProps {
   body: any[][];
   id?: string;
   verticalAlign?: 'top' | 'middle' | 'bottom';
+  columnWidths?: string[];
 }
 
 export const FullTable: React.FC<ISectionProps> = ({
@@ -13,13 +14,23 @@ export const FullTable: React.FC<ISectionProps> = ({
   head,
   body,
   verticalAlign = 'middle',
+  columnWidths,
 }) => (
   <>
     <table id={id} className={styles.fullTable}>
       <thead className={styles.head}>
         <tr>
           {head.map((cell, index) => (
-            <th key={index}>{cell}</th>
+            <th
+              key={index}
+              style={
+                columnWidths?.[index]
+                  ? { width: columnWidths[index] }
+                  : undefined
+              }
+            >
+              {cell}
+            </th>
           ))}
         </tr>
       </thead>
@@ -29,7 +40,12 @@ export const FullTable: React.FC<ISectionProps> = ({
             {row.map((cell, rowIndex) => (
               <td
                 key={'cell-' + rowIndex}
-                style={{ verticalAlign }}
+                style={{
+                  verticalAlign,
+                  ...(columnWidths?.[rowIndex]
+                    ? { width: columnWidths[rowIndex] }
+                    : {}),
+                }}
                 className={styles.cell}
               >
                 {cell == null || cell === '' ? null : (

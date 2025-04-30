@@ -1,29 +1,47 @@
 ---
-name: Signaler un bug
+name: "🐞 Signaler un bug"
 about: Je viens de rencontrer un problème.
-title: '[BUG]'
+title: "[BUG] Résumé du problème"
 labels: bug
-assignees: XavierJp
+assignees: rmonnier9
 ---
 
-## Sujet du problème
+## ❗ Sujet du problème
 
-Décrivez votre problème ici.
+Décrivez clairement le problème que vous rencontrez.  
+Exemple : *« Lorsque je clique sur… le site plante »*
 
-## Comment le reproduire ?
+---
 
-Étapes à suivre pour faire apparaître le bug :
-1. Aller à `…`
-2. Cliquer sur `…`
-3. Naviguer jusqu’à `…`
-4. Constater le bug
+## 🔁 Étapes pour reproduire le bug
 
-## Comportement attendu
+Listez les étapes précises permettant de reproduire le bug :
 
-Décrivez-nous ce à quoi vous vous attendiez.
+1. Aller sur `...`
+2. Cliquer sur `...`
+3. Faire `...`
+4. ⚠️ Comportement observé : `...`
 
-## Comportement actuel
+---
 
-## Screenshots
+## ✅ Comportement attendu
 
-Le cas échéant, ajoutez des captures d'écran pour aider à expliquer votre problème.
+Décrivez ce que vous pensiez devoir se produire à la place du bug.
+
+---
+
+## 💥 Comportement actuel
+
+Décrivez ce qu’il se passe réellement.
+
+---
+
+## 📸 Captures d’écran
+
+Ajoutez ici toute image ou enregistrement utile pour illustrer le problème.
+
+---
+
+## 💬 Informations complémentaires
+
+Ajoutez tout autre détail pouvant aider à comprendre ou reproduire le bug.

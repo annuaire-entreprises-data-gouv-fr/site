@@ -6,12 +6,14 @@ import {
 import { OpqibiSection } from '#components/espace-agent-components/certifications/opqibi-section';
 import { QualibatSection } from '#components/espace-agent-components/certifications/qualibat-section';
 import { QualifelecSection } from '#components/espace-agent-components/certifications/qualifelec-section';
+import { LabelAchatsResponsables } from '#components/labels-and-certificates/achats-responsables';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
 import { EntrepriseInclusiveSection } from '#components/labels-and-certificates/entreprise-inclusive';
 import { CertificationESSSection } from '#components/labels-and-certificates/ess';
 import { OrganismeDeFormationSection } from '#components/labels-and-certificates/organismes-de-formation';
+import { LabelPatrimoineVivant } from '#components/labels-and-certificates/patrimoine-vivant';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
 import { CertificationSocieteMission } from '#components/labels-and-certificates/societe-mission';
 import Title from '#components/title-section';
@@ -30,6 +32,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import AlimConfianceSection from 'app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/alim-confiance/section';
 import { Metadata } from 'next';
 
 export const generateMetadata = async (
@@ -65,6 +68,8 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
     estBio,
     estEntrepreneurSpectacle,
     estEntrepriseInclusive,
+    estAchatsResponsables,
+    estPatrimoineVivant,
   } = uniteLegale.complements;
 
   const {
@@ -125,6 +130,9 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         {estBio && (
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
+        {estAchatsResponsables && <LabelAchatsResponsables />}
+        {estPatrimoineVivant && <LabelPatrimoineVivant />}
+        <AlimConfianceSection uniteLegale={uniteLegale} session={session} />
       </div>
     </>
   );

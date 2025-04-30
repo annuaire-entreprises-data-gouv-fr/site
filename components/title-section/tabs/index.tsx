@@ -11,6 +11,7 @@ import { ISession } from '#models/authentication/user/session';
 import {
   IUniteLegale,
   isCollectiviteTerritoriale,
+  isEntrepreneurIndividuel,
   isServicePublic,
 } from '#models/core/types';
 import styles from './styles.module.css';
@@ -38,28 +39,35 @@ const getUniteLegaleTabs = (
     // hide for public services
     !isServicePublic(uniteLegale) &&
     // hide for EI
-    !uniteLegale.complements.estEntrepreneurIndividuel;
+    !isEntrepreneurIndividuel(uniteLegale);
 
   return [
     {
       ficheType: FICHE.INFORMATION,
       label: `Fiche résumé`,
-      fullPath: `/entreprise/${uniteLegale.chemin}`,
+      path: `/entreprise/${uniteLegale.chemin}`,
       noFollow: false,
       shouldDisplay: true,
       width: '80px',
+      pathPrefix: '',
     },
     {
       ficheType: FICHE.DIRIGEANTS,
-      label: isCollectiviteTerritoriale(uniteLegale) ? 'Élus' : 'Dirigeants',
-      pathPrefix: '/dirigeants/',
+      path: `/dirigeants/${uniteLegale.siren}`,
       noFollow: false,
       shouldDisplay: true,
+      ...(isCollectiviteTerritoriale(uniteLegale)
+        ? { label: 'Élus & organigramme', width: '120px' }
+        : isServicePublic(uniteLegale)
+        ? { label: 'Responsables & organigramme', width: '130px' }
+        : hasRights(session, ApplicationRights.liensCapitalistiques)
+        ? { label: 'Dirigeants & actionnariat', width: '120px' }
+        : { label: 'Dirigeants' }),
     },
     {
       ficheType: FICHE.DOCUMENTS,
       label: 'Documents',
-      pathPrefix: '/documents/',
+      path: `/documents/${uniteLegale.siren}`,
       noFollow: false,
       shouldDisplay: true,
       width: '95px',
@@ -67,27 +75,27 @@ const getUniteLegaleTabs = (
     {
       ficheType: FICHE.FINANCES,
       label: 'Données financières',
-      pathPrefix: '/donnees-financieres/',
+      path: `/donnees-financieres/${uniteLegale.siren}`,
       noFollow: false,
       shouldDisplay: shouldDisplayFinances,
       width: '100px',
     },
     {
       ficheType: FICHE.ANNONCES,
+      path: `/annonces/${uniteLegale.siren}`,
       label: `Annonces${
         uniteLegale.dateMiseAJourInpi ? ' et observations' : ''
       }`,
-      pathPrefix: '/annonces/',
       noFollow: false,
       shouldDisplay: true,
       width: uniteLegale.dateMiseAJourInpi ? '130px' : '90px',
     },
     {
       ficheType: FICHE.CERTIFICATS,
+      path: `/labels-certificats/${uniteLegale.siren}`,
       label: `${
         checkHasQuality(uniteLegale) ? 'Qualités, l' : 'L'
       }abels et certificats`,
-      pathPrefix: '/labels-certificats/',
       noFollow: false,
       shouldDisplay:
         checkHasLabelsAndCertificates(uniteLegale) ||
@@ -96,15 +104,15 @@ const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
+      path: `/etablissements-scolaires/${uniteLegale.siren}`,
       label: 'Établissements scolaires',
-      pathPrefix: '/etablissements-scolaires/',
       noFollow: false,
       shouldDisplay: uniteLegale.complements.estUai,
     },
     {
       ficheType: FICHE.DIVERS,
+      path: `/divers/${uniteLegale.siren}`,
       label: 'Conventions collectives',
-      pathPrefix: '/divers/',
       noFollow: false,
       shouldDisplay: (uniteLegale.listeIdcc || []).length > 0,
       width: '130px',
@@ -125,7 +133,7 @@ export const Tabs: React.FC<{
           .filter(({ shouldDisplay }) => shouldDisplay)
           .map(
             ({
-              fullPath,
+              path,
               pathPrefix,
               ficheType,
               label,
@@ -134,7 +142,7 @@ export const Tabs: React.FC<{
             }) => (
               <TabLink
                 active={currentFicheType === ficheType}
-                href={fullPath || `${pathPrefix}${uniteLegale.siren}`}
+                href={path || `${pathPrefix}${uniteLegale.siren}`}
                 label={label}
                 noFollow={noFollow}
                 key={label}
@@ -156,10 +164,10 @@ export const TabsForEtablissement: React.FC<{
     <ul className={styles.titleTabsEtablissement}>
       {tabs
         .filter(({ shouldDisplay }) => shouldDisplay)
-        .map(({ fullPath, pathPrefix, label, noFollow }) => (
+        .map(({ path, pathPrefix, label, noFollow }) => (
           <li>
             <a
-              href={fullPath || `${pathPrefix}${uniteLegale.siren}`}
+              href={path || `${pathPrefix}${uniteLegale.siren}`}
               rel={noFollow ? 'nofollow' : ''}
             >
               <h2>{label}</h2>

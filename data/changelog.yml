@@ -11,6 +11,35 @@
 #   site: true
 
 ---
+- date: 28/04/2025
+  target:
+    site: true
+  body: |
+    Ajout des résultats des contrôles sanitaires (dispositif d'information Alim’confiance)
+- date: 23/04/2025
+  target:
+    site: true
+  body: |
+    Ajout de la liste des entreprises labellisées "Entreprise du Patrimoine Vivant"
+- date: 18/04/2025
+  target:
+    site: true
+  body: |
+    Ajout de la liste des entreprises labellisées "Relations Fournisseurs et Achats Responsables"
+- date: 08/04/2025
+  target:
+    site: true
+  body: |
+    Modification de l'onglet "Données financières" pour les entreprises.
+
+    Quand une entreprise déclare un bilan consolidé, il est désormais également possible de consulter les données du bilan simplifié ou complet.
+- date: 27/03/2025
+  target:
+    site: true
+  body: |
+    Ajout des informations relatives aux Délégués à la Protection des Données (DPO) (accessibles dans l'[onglet “Dirigeants/Élus”](/dirigeants/210203766#dpo-section)).
+
+    Ces informations, issues des déclarations officielles auprès de la CNIL, permettent d'identifier facilement le contact responsable de la protection des données personnelles au sein d'une organisation.
 - date: 18/03/2025
   target:
     agent: true

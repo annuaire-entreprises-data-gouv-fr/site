@@ -193,6 +193,8 @@ export interface IUniteLegaleComplements {
   estAssociation: boolean;
   estEntrepriseInclusive: boolean;
   typeEntrepriseInclusive: string;
+  estAchatsResponsables: boolean;
+  estPatrimoineVivant: boolean;
   estUai: boolean;
 }
 
@@ -216,6 +218,8 @@ export const createDefaultUniteLegaleComplements =
       estAssociation: false,
       estEntrepriseInclusive: false,
       typeEntrepriseInclusive: '',
+      estAchatsResponsables: false,
+      estPatrimoineVivant: false,
     };
   };
 
@@ -258,6 +262,9 @@ export const isAssociation = (
 
 export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estServicePublic;
+
+export const isEntrepreneurIndividuel = (uniteLegale: IUniteLegale): boolean =>
+  uniteLegale.complements.estEntrepreneurIndividuel;
 
 export interface ICollectiviteTerritoriale
   extends Omit<IUniteLegale, 'colter'> {

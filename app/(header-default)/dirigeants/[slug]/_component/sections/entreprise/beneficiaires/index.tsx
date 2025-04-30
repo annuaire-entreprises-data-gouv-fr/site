@@ -20,7 +20,7 @@ const BeneficiairesSection: React.FC<{
       id="beneficiaires"
       sources={[EAdministration.INPI]}
       allowedUseCases={[
-        UseCase.aidesEntreprises,
+        UseCase.aidesPubliques,
         UseCase.marches,
         UseCase.fraude,
       ]}

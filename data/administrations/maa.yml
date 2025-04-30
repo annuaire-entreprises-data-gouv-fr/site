@@ -1,0 +1,14 @@
+slug: maa
+short: MAA
+site: https://www.agriculture.gouv.fr/
+long: Ministère de l'Agriculture et de l'Alimentation (MAA)
+contact: https://agriculture.gouv.fr/questions-frequentes-contacts
+dataSources:
+  - label: Liste des contrôles sanitaires des établissements
+    apiSlug: liste-alim-confiance
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/5593aab9c751df35d8a453ba/#/resources
+    data:
+      - label: Liste des contrôles sanitaires des établissements
+estServicePublic: true
+description: |
+  Le ministère de l'Agriculture et de l'Alimentation (MAA) publie la liste des contrôles sanitaires des établissements.

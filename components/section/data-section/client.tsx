@@ -8,6 +8,7 @@ import {
   IDataFetchingState,
   hasFetchError,
   isDataLoading,
+  isDataSuccess,
   isUnauthorized,
 } from '#models/data-fetching';
 import { useTimeout } from 'hooks/use-timeout';
@@ -19,10 +20,11 @@ import { DataSectionLoader } from './loader';
 
 interface IDataSectionClientProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IDataFetchingState | T;
-  notFoundInfo?: NonNullable<React.ReactNode>;
+  notFoundInfo?: NonNullable<React.ReactNode> | null;
   additionalInfoOnError?: React.ReactNode;
   children: (data: T) => JSX.Element;
 }
+
 export function AsyncDataSectionClient<T>({
   data,
   ...props
@@ -102,4 +104,48 @@ function useShowLoadingState<T>(
     return true;
   }
   return isDataLoading(data);
+}
+
+/**
+ * Merges two data sources of the same type, prioritizing errors and loading states
+ * @param data1 First data source
+ * @param data2 Second data source
+ * @param mergeFunction Function to merge the two data sources
+ * @returns Merged data that can be passed to AsyncDataSectionClient
+ */
+export function mergeDataSources<T, U, V>(
+  data1: IAPINotRespondingError | IDataFetchingState | T,
+  data2: IAPINotRespondingError | IDataFetchingState | U,
+  mergeFunction: (
+    data1: T | null,
+    data2: U | null
+  ) => IAPINotRespondingError | V
+): IAPINotRespondingError | IDataFetchingState | V {
+  if (isUnauthorized(data1) || isUnauthorized(data2)) {
+    return IDataFetchingState.UNAUTHORIZED;
+  }
+
+  if (isDataLoading(data1) || isDataLoading(data2)) {
+    return IDataFetchingState.LOADING;
+  }
+
+  if (hasFetchError(data1)) {
+    return data1;
+  }
+  if (hasFetchError(data2)) {
+    return data2;
+  }
+
+  if (isDataSuccess(data1) && isDataSuccess(data2)) {
+    return mergeFunction(data1, data2);
+  }
+
+  if (isDataSuccess(data1) && isAPI404(data2)) {
+    return mergeFunction(data1, null);
+  }
+  if (isDataSuccess(data2) && isAPI404(data1)) {
+    return mergeFunction(null, data2);
+  }
+
+  return data1 as IAPINotRespondingError;
 }

@@ -19,6 +19,8 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
     estQualiopi,
     estRge,
     estEntrepriseInclusive,
+    estAchatsResponsables,
+    estPatrimoineVivant,
   } = uniteLegale.complements;
   if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
   if (estEss || estSocieteMission) sources.push(EAdministration.INSEE);
@@ -27,7 +29,8 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
     sources.push(EAdministration.MTPEI);
   if (estRge) sources.push(EAdministration.ADEME);
   if (estEntrepriseInclusive) sources.push(EAdministration.MARCHE_INCLUSION);
-
+  if (estAchatsResponsables) sources.push(EAdministration.MEF);
+  if (estPatrimoineVivant) sources.push(EAdministration.MEF);
   return sources;
 };
 
@@ -49,6 +52,8 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     estSocieteMission,
     estEntrepriseInclusive,
     typeEntrepriseInclusive,
+    estAchatsResponsables,
+    estPatrimoineVivant,
   } = uniteLegale.complements;
 
   return (
@@ -133,6 +138,22 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
             siren={uniteLegale.siren}
           />
         ))}
+      {estAchatsResponsables && (
+        <LabelWithLinkToSection
+          informationTooltipLabel="Ce label distingue les structures ayant fait la preuve de relations durables et équilibrées avec leurs fournisseurs."
+          label="Achats Responsables"
+          sectionId="achats-responsables"
+          siren={uniteLegale.siren}
+        />
+      )}
+      {estPatrimoineVivant && (
+        <LabelWithLinkToSection
+          informationTooltipLabel="Cette structure est labelisée Entreprise du Patrimoine Vivant"
+          label="Entreprise du Patrimoine Vivant"
+          sectionId="patrimoine-vivant"
+          siren={uniteLegale.siren}
+        />
+      )}
     </>
   );
 };
