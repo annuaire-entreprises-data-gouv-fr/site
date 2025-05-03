@@ -56,7 +56,6 @@ export default async function EtablissementPage(props: AppRouterProps) {
           etablissement={etablissement}
           session={session}
         />
-        <br />
         {estNonDiffusibleStrict(etablissement) ? (
           <NonDiffusibleStrictSection />
         ) : (

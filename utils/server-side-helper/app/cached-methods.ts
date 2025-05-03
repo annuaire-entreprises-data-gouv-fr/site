@@ -1,8 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
-import {
-  getEtablissementWithLatLongFromSlug,
-  getEtablissementWithUniteLegaleFromSlug,
-} from '#models/core/etablissement';
+import { getEtablissementWithUniteLegaleFromSlug } from '#models/core/etablissement';
 import {
   FetchRechercheEntrepriseException,
   NotASirenError,
@@ -86,13 +83,3 @@ export const cachedEtablissementWithUniteLegale = cache(
     }
   }
 );
-
-export const cachedEtablissementWithLatLong = cache(async (slug: string) => {
-  const siretSlug = extractSirenOrSiretSlugFromUrl(slug);
-  try {
-    return await getEtablissementWithLatLongFromSlug(siretSlug);
-  } catch (e) {
-    handleException(e, siretSlug);
-    throw e;
-  }
-});

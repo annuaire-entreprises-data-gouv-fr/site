@@ -1,5 +1,10 @@
 [
   {
+    "source": "/carte/:slug",
+    "destination": "/etablissement/:slug",
+    "permanent": true
+  },
+  {
     "source": "/elus/:slug",
     "destination": "/dirigeants/:slug",
     "permanent": true
