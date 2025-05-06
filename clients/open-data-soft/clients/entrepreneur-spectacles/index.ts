@@ -30,12 +30,13 @@ export const clientEntrepreneurSpectacles = async (
   const url = routes.certifications.entrepreneurSpectacles.ods.search;
   const metaDataUrl = routes.certifications.entrepreneurSpectacles.ods.metadata;
 
+  const tmp = '789106374';
   const response = await odsClient(
     {
       url,
       config: {
         params: {
-          q: `#startswith(siren_siret,"${siren}")`,
+          q: `#startswith(siren_siret,"${tmp}")`,
           sort: 'date_depot_dossier',
         },
       },
@@ -45,15 +46,12 @@ export const clientEntrepreneurSpectacles = async (
 
   return {
     licences: response.records.map((record: ISpectaclesVivantsRecord) => ({
-      categorie: record.categorie,
+      categorie: (record.categorie || '').toString(),
       numeroRecepisse: record.numero_recepisse || '',
       nomLieu: record.nom_lieu || '',
       statut: record.statut_recepisse || '',
-      dateValidite:
-        record.date_debut_validite ||
-        '',
-      dateDepot:
-        record.date_depot_dossier || '',
+      dateValidite: record.date_debut_validite || '',
+      dateDepot: record.date_depot_dossier || '',
       type: record.type_declaration || '',
     })),
     lastModified: response.lastModified,
