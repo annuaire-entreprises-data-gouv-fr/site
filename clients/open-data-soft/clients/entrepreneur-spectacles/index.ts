@@ -30,13 +30,12 @@ export const clientEntrepreneurSpectacles = async (
   const url = routes.certifications.entrepreneurSpectacles.ods.search;
   const metaDataUrl = routes.certifications.entrepreneurSpectacles.ods.metadata;
 
-  const tmp = '789106374';
   const response = await odsClient(
     {
       url,
       config: {
         params: {
-          q: `#startswith(siren_siret,"${tmp}")`,
+          q: `#startswith(siren_siret,"${siren}")`,
           sort: 'date_depot_dossier',
         },
       },
