@@ -20,7 +20,7 @@ apiMonitors:
     updownIoId: f965
   - apiName: API Base Adresse Nationale
     apiSlug: ban
-    apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-base-dadresse-nationale-ban/
+    apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-adresse-base-adresse-nationale-ban/
     updownIoId: 58pf
 dataSources:
   - label: Base Adresse Nationale
