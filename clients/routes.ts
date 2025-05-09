@@ -70,7 +70,7 @@ const routes = {
   },
   datagouv: {
     alimConfiance:
-      'https://tabular-api.data.gouv.fr/api/resources/fff0cc27-977b-40d5-9c11-f7e4e79a0b72/data/',
+      'https://tabular-api.data.gouv.fr/api/resources/fdfabe62-a581-41a1-998f-73fc53da3398/data/',
     ess: 'https://tabular-api.data.gouv.fr/api/resources/57bc99ca-0432-4b46-8fcc-e76a35c9efaf/data/',
     dpo: 'https://tabular-api.data.gouv.fr/api/resources/c5d02b42-1008-4406-83f5-3a81c8b936a3/data/',
   },

@@ -93,11 +93,11 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
                     </>,
                     <Tag
                       color={
-                        code === '4'
+                        code === 4
                           ? 'error'
-                          : code === '3'
+                          : code === 3
                           ? 'warning'
-                          : code === '2'
+                          : code === 2
                           ? 'info'
                           : 'success'
                       }
