@@ -8,7 +8,7 @@ type IAlimConfianceDatagouvItem = {
   Date_inspection: string;
   APP_Libelle_activite_etablissement: string;
   Synthese_eval_sanit: string;
-  APP_Code_synthese_eval_sanit: string;
+  APP_Code_synthese_eval_sanit: number;
   Agrement: string;
   geores: string;
   filtre: null | string;
@@ -45,7 +45,7 @@ type IAlimConfianceItem = {
   adresse: string;
   codePostal: string;
   commune: string;
-  code: string;
+  code: number;
 };
 
 type IAlimConfiance = {
