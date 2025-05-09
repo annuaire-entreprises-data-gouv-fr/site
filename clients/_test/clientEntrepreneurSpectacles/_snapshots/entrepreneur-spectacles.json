@@ -5,7 +5,7 @@
   "result": {
     "licences": [
       {
-        "categorie": 2,
+        "categorie": "2",
         "numeroRecepisse": "PLATESV-R-2021-006658",
         "nomLieu": "",
         "statut": "Valide",
@@ -14,7 +14,7 @@
         "type": "Renouvellement"
       },
       {
-        "categorie": 2,
+        "categorie": "2",
         "numeroRecepisse": "PLATESV-R-2021-006193",
         "nomLieu": "",
         "statut": "Invalide",
