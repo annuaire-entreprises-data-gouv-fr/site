@@ -11,7 +11,7 @@ import { IUniteLegale } from '../core/types';
 
 export interface IEntrepreneurSpectaclesCertification {
   licences: {
-    categorie: number;
+    categorie: string;
     numeroRecepisse: string;
     statut: string;
     dateValidite: string;
