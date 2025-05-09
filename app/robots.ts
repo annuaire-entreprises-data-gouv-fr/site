@@ -27,12 +27,8 @@ export default function robots(): MetadataRoute.Robots {
         '/donnees-financieres/',
         '/annonces/',
         '/labels-certificats/',
-      ],
-      disallow: [
-        '/admin/',
-        '/private/',
+        // Allowed but disallowed in the meta tag
         '/justificatif-immatriculation-pdf/',
-        '/api/',
         '/rechercher/carte',
         '/rechercher/',
         '/dirigeants/',
@@ -42,6 +38,7 @@ export default function robots(): MetadataRoute.Robots {
         '/formulaire/',
         '/carte/',
       ],
+      disallow: ['/admin/', '/api/'],
     },
     sitemap: 'https://annuaire-entreprises.data.gouv.fr/sitemap.xml',
   };

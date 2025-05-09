@@ -1,12 +1,12 @@
-import { GetServerSideProps } from 'next';
 import ButtonLink from '#components-ui/button';
 import Meta from '#components/meta/meta-client';
+import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 const Forbidden: NextPageWithLayout = () => {
   return (
     <>
-      <Meta title="Accès refusé" />
+      <Meta title="Accès refusé" noIndex={true} />
       <h1>Accès refusé 🚫</h1>
       <p>
         Notre algorithme de détection pense que vous êtes un robot. <br />
