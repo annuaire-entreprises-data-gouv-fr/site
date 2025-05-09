@@ -70,6 +70,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
     estEntrepriseInclusive,
     estAchatsResponsables,
     estPatrimoineVivant,
+    estAlimConfiance,
   } = uniteLegale.complements;
 
   const {
@@ -132,7 +133,9 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         )}
         {estAchatsResponsables && <LabelAchatsResponsables />}
         {estPatrimoineVivant && <LabelPatrimoineVivant />}
-        <AlimConfianceSection uniteLegale={uniteLegale} session={session} />
+        {estAlimConfiance && (
+          <AlimConfianceSection uniteLegale={uniteLegale} session={session} />
+        )}
       </div>
     </>
   );

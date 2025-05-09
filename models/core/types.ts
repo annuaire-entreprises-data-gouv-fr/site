@@ -195,6 +195,7 @@ export interface IUniteLegaleComplements {
   typeEntrepriseInclusive: string;
   estAchatsResponsables: boolean;
   estPatrimoineVivant: boolean;
+  estAlimConfiance: boolean;
   estUai: boolean;
 }
 
@@ -220,6 +221,7 @@ export const createDefaultUniteLegaleComplements =
       typeEntrepriseInclusive: '',
       estAchatsResponsables: false,
       estPatrimoineVivant: false,
+      estAlimConfiance: false,
     };
   };
 

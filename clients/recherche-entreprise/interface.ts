@@ -124,6 +124,7 @@ export type IComplements = {
   type_siae: string;
   est_achats_responsables: boolean;
   est_patrimoine_vivant: boolean;
+  est_alim_confiance: boolean;
   liste_idcc: string[];
 };
 

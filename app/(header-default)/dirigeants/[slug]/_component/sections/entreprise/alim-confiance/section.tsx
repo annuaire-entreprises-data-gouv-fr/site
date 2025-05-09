@@ -22,12 +22,17 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
 
   return (
     <AsyncDataSectionClient
-      id="dpo-section"
+      id="alim-confiance"
       title="Dispositif d'information Alim’confiance"
       sources={[EAdministration.MAA]}
       isProtected={false}
       data={alimConfiance}
-      notFoundInfo={null}
+      notFoundInfo={
+        <p>
+          Nous n’avons pas trouvé de résultat de contrôle sanitaire pour cette
+          structure.
+        </p>
+      }
     >
       {(alimConfiance) => {
         const plural = pluralize(alimConfiance);
