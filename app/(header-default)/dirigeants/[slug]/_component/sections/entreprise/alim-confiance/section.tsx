@@ -97,6 +97,8 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
                           ? 'error'
                           : code === '3'
                           ? 'warning'
+                          : code === '2'
+                          ? 'info'
                           : 'success'
                       }
                     >
