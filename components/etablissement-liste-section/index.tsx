@@ -13,15 +13,16 @@ import React from 'react';
 
 const EtablissementTable: React.FC<{
   label?: string;
+  labelWithoutPlural?: boolean;
   etablissements: IEtablissement[];
-}> = ({ label, etablissements }) => {
+}> = ({ label, labelWithoutPlural, etablissements }) => {
   const plural = pluralize(etablissements);
   return (
     <>
       {label && (
         <h3>
           Etablissement{plural} {label}
-          {plural}&nbsp;:
+          {labelWithoutPlural ? '' : plural}&nbsp;:
         </h3>
       )}
 
@@ -136,7 +137,8 @@ const EtablissementListeSection: React.FC<{
           <>
             {uniteLegale.etablissements.open.length > 0 && (
               <EtablissementTable
-                label="actif"
+                label="en activité"
+                labelWithoutPlural={true}
                 etablissements={uniteLegale.etablissements.open}
               />
             )}
