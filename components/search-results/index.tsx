@@ -23,6 +23,9 @@ const SearchResults: React.FC<{
       <ResultsCounter
         resultCount={results.resultCount}
         currentPage={results.currentPage}
+        isMap={false}
+        currentSearchTerm={searchTerm}
+        searchParams={searchFilterParams}
       />
     );
   }
@@ -32,6 +35,9 @@ const SearchResults: React.FC<{
       <ResultsCounter
         resultCount={results.resultCount}
         currentPage={results.currentPage}
+        isMap={false}
+        currentSearchTerm={searchTerm}
+        searchParams={searchFilterParams}
       />
       <div>
         <ResultsList

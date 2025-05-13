@@ -4,13 +4,13 @@ import constants from '#models/constants';
 const MapOrListSwitch = ({ isMap = false, query = '' }) => (
   <>
     {isMap ? (
-      <a href={`/rechercher/${query}`}>
+      <a className="no-style-link" href={`/rechercher/${query}`}>
         <Icon color={constants.colors.frBlue} slug="listUnordered">
           Afficher en liste
         </Icon>
       </a>
     ) : (
-      <a href={`/rechercher/carte${query}`}>
+      <a className="no-style-link" href={`/rechercher/carte${query}`}>
         <Icon color={constants.colors.frBlue} slug="mapPin">
           Afficher sur une carte
         </Icon>

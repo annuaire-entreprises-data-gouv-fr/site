@@ -13,7 +13,6 @@
 
 .filter-container {
   display: flex;
-  max-width: calc(100% - 200px);
   flex-wrap: wrap;
 }
 

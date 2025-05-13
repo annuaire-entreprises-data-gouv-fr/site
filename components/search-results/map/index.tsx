@@ -52,6 +52,9 @@ const SearchResultsMap: React.FC<{
             <ResultsCounter
               resultCount={results.resultCount}
               currentPage={results.currentPage}
+              isMap={true}
+              currentSearchTerm={searchTerm}
+              searchParams={searchFilterParams}
             />
           </div>
         </div>
@@ -80,6 +83,9 @@ const SearchResultsMap: React.FC<{
           <ResultsCounter
             resultCount={results.resultCount}
             currentPage={results.currentPage}
+            isMap={true}
+            currentSearchTerm={searchTerm}
+            searchParams={searchFilterParams}
           />
           <ResultsPagination
             totalPages={results.pageCount}

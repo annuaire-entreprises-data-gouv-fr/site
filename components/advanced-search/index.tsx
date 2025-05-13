@@ -1,6 +1,5 @@
 import SearchFilters from '#components/advanced-search/search-filters';
-import { buildSearchQuery, IParams } from '#models/search/search-filter-params';
-import MapOrListSwitch from './map-or-list';
+import { IParams } from '#models/search/search-filter-params';
 import styles from './style.module.css';
 
 type IProps = {
@@ -20,12 +19,6 @@ export const AdvancedSearch: React.FC<IProps> = ({
         <SearchFilters
           searchParams={searchParams}
           searchTerm={currentSearchTerm}
-        />
-      </div>
-      <div className={styles['map-switch']}>
-        <MapOrListSwitch
-          isMap={isMap}
-          query={buildSearchQuery(currentSearchTerm, searchParams)}
         />
       </div>
     </div>
