@@ -94,22 +94,24 @@ class SearchFilterParams {
     const epci = cp_dep_type === 'epci' ? cp_dep : '';
     const code_commune = cp_dep_type === 'insee' ? cp_dep : '';
 
+    const labels = this.params.label ? this.params.label.split(',') : [];
+
     return serializeParams({
       etat_administratif: this.params.etat,
-      est_rge: this.params.label === 'rge',
-      est_bio: this.params.label === 'bio',
-      egapro_renseignee: this.params.label === 'egapro',
-      est_ess: this.params.label === 'ess',
-      est_organisme_formation: this.params.label === 'of',
-      est_qualiopi: this.params.label === 'qualiopi',
-      est_entrepreneur_spectacle: this.params.label === 'esv',
+      est_rge: labels.includes('rge'),
+      est_bio: labels.includes('bio'),
+      egapro_renseignee: labels.includes('egapro'),
+      est_ess: labels.includes('ess'),
+      est_organisme_formation: labels.includes('of'),
+      est_qualiopi: labels.includes('qualiopi'),
+      est_entrepreneur_spectacle: labels.includes('esv'),
+      est_societe_mission: labels.includes('sm'),
+      est_siae: labels.includes('siae'),
+      est_achats_responsables: labels.includes('achats_responsables'),
+      est_patrimoine_vivant: labels.includes('patrimoine_vivant'),
       est_association: this.params.type === 'asso',
       est_collectivite_territoriale: this.params.type === 'ct',
       est_service_public: this.params.type === 'sp',
-      est_societe_mission: this.params.label === 'sm',
-      est_siae: this.params.label === 'siae',
-      est_achats_responsables: this.params.label === 'achats_responsables',
-      est_patrimoine_vivant: this.params.label === 'patrimoine_vivant',
       est_entrepreneur_individuel: this.params.type === 'ei',
       section_activite_principale: this.params.sap,
       categorie_entreprise: this.params.categorie_entreprise,
@@ -237,12 +239,16 @@ class SearchFilterParams {
       f.structureFilter.label =
         structureLabels[this.params.type] || 'filtre sur le type';
     }
-    if (this.params.label && this.params.type) {
-      f.structureFilter.label += ' + ';
-    }
-    if (this.params.label) {
-      f.structureFilter.label +=
-        structureLabels[this.params.label] || 'filtre sur le label';
+
+    const labels = this.params.label ? this.params.label.split(',') : [];
+    if (labels.length > 0) {
+      const labelTexts = labels.map(
+        (label) => structureLabels[label] || 'filtre sur le label'
+      );
+      if (f.structureFilter.label) {
+        f.structureFilter.label += ' + ';
+      }
+      f.structureFilter.label += labelTexts.join(' + ');
     }
 
     if (this.params.cp_dep_label) {
