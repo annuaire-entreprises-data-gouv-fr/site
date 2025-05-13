@@ -16,7 +16,22 @@ export const FilterStructure: React.FC<{
   label?: string;
 }> = ({ type = '', label = '' }) => {
   const [structureType, setStructureType] = useState(type);
-  const [labelSelected, setLabelSelected] = useState(label);
+  const [labelsSelected, setLabelsSelected] = useState<string[]>(
+    label ? label.split(',') : []
+  );
+
+  const toggleLabel = (labelValue: string) => {
+    setLabelsSelected((prev) => {
+      if (labelValue === '') {
+        return [];
+      }
+      if (prev.includes(labelValue)) {
+        return prev.filter((l) => l !== labelValue);
+      }
+      return [...prev, labelValue];
+    });
+  };
+
   return (
     <>
       <label className="fr-label" htmlFor="structure-type-input">
@@ -68,23 +83,23 @@ export const FilterStructure: React.FC<{
       <input
         id="structure-label-input"
         name="label"
-        value={labelSelected}
+        value={labelsSelected.join(',')}
         type="hidden"
         onChange={() => {}}
       />
       <div className="badge-wrapper">
         <LabelAndCertificateBadge
           label="Tous"
-          isSelected={labelSelected === ''}
+          isSelected={labelsSelected.length === 0}
           small
-          onClick={() => setLabelSelected('')}
+          onClick={() => setLabelsSelected([])}
         />
 
         <LabelAndCertificateBadge
           label="ESS - Entreprise Sociale et Solidaire"
-          isSelected={labelSelected === 'ess'}
+          isSelected={labelsSelected.includes('ess')}
           small
-          onClick={() => setLabelSelected('ess')}
+          onClick={() => toggleLabel('ess')}
         />
 
         {/* <LabelAndCertificateBadge
@@ -96,65 +111,65 @@ export const FilterStructure: React.FC<{
 
         <LabelAndCertificateBadge
           label="Entreprise Inclusive"
-          isSelected={labelSelected === 'siae'}
+          isSelected={labelsSelected.includes('siae')}
           small
-          onClick={() => setLabelSelected('siae')}
+          onClick={() => toggleLabel('siae')}
         />
 
         <LabelAndCertificateBadge
           label="Professionnels du Bio"
-          isSelected={labelSelected === 'bio'}
+          isSelected={labelsSelected.includes('bio')}
           small
-          onClick={() => setLabelSelected('bio')}
+          onClick={() => toggleLabel('bio')}
         />
 
         <LabelAndCertificateBadge
           label="Égalité professionnelle"
-          isSelected={labelSelected === 'egapro'}
+          isSelected={labelsSelected.includes('egapro')}
           small
-          onClick={() => setLabelSelected('egapro')}
+          onClick={() => toggleLabel('egapro')}
         />
 
         <LabelAndCertificateBadge
-          label="RGE - Reconnu Garant de l’Environnement"
-          isSelected={labelSelected === 'rge'}
+          label="RGE - Reconnu Garant de l'Environnement"
+          isSelected={labelsSelected.includes('rge')}
           small
-          onClick={() => setLabelSelected('rge')}
+          onClick={() => toggleLabel('rge')}
         />
 
         <LabelAndCertificateBadge
           label="Organisme de formation"
-          isSelected={labelSelected === 'of'}
+          isSelected={labelsSelected.includes('of')}
           small
-          onClick={() => setLabelSelected('of')}
+          onClick={() => toggleLabel('of')}
         />
 
         <LabelAndCertificateBadge
           label="Qualiopi"
-          isSelected={labelSelected === 'qualiopi'}
+          isSelected={labelsSelected.includes('qualiopi')}
           small
-          onClick={() => setLabelSelected('qualiopi')}
+          onClick={() => toggleLabel('qualiopi')}
         />
 
         <LabelAndCertificateBadge
           label="Entrepreneur de spectacles vivants"
-          isSelected={labelSelected === 'esv'}
+          isSelected={labelsSelected.includes('esv')}
           small
-          onClick={() => setLabelSelected('esv')}
+          onClick={() => toggleLabel('esv')}
         />
 
         <LabelAndCertificateBadge
           label="Achats Responsables"
-          isSelected={labelSelected === 'achats_responsables'}
+          isSelected={labelsSelected.includes('achats_responsables')}
           small
-          onClick={() => setLabelSelected('achats_responsables')}
+          onClick={() => toggleLabel('achats_responsables')}
         />
 
         <LabelAndCertificateBadge
           label="Entreprise du Patrimoine Vivant"
-          isSelected={labelSelected === 'patrimoine_vivant'}
+          isSelected={labelsSelected.includes('patrimoine_vivant')}
           small
-          onClick={() => setLabelSelected('patrimoine_vivant')}
+          onClick={() => toggleLabel('patrimoine_vivant')}
         />
       </div>
       <style jsx>{`
