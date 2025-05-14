@@ -9,7 +9,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
-import { formatDate, formatDateLong, pluralize } from '#utils/helpers';
+import { formatDate, pluralize } from '#utils/helpers';
 import React from 'react';
 
 export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
@@ -44,6 +44,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
     >
       {(entrepreneurSpectacles) => {
         const plural = pluralize(entrepreneurSpectacles.licences);
+
         return (
           <>
             Cette structure possède {plural ? 'plusieurs' : 'un'} récépissé
@@ -76,8 +77,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
               head={[
                 'Numéro de récépissé',
                 'Type de déclaration',
-                'Date de déclaration',
-                'Demande',
+                'Date de dépôt',
                 'Validité',
               ]}
               body={entrepreneurSpectacles.licences.map(
@@ -91,9 +91,12 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
                   statut,
                 }) => [
                   <Tag>{numeroRecepisse}</Tag>,
-                  formatLicence(categorie, nomLieu),
-                  formatDateLong(dateDepot),
-                  type,
+                  <>
+                    <i>{type}</i>
+                    <br />
+                    {formatLicence(categorie, nomLieu)}
+                  </>,
+                  formatDate(dateDepot),
                   <Validity
                     statut={(statut || '').toLowerCase()}
                     dateDeValidite={dateValidite}
@@ -119,9 +122,9 @@ const FAQ = () => (
   </FAQLink>
 );
 
-const formatLicence = (categorie: number, nomLieu = '') => {
+const formatLicence = (categorie: string, type: string, nomLieu = '') => {
   switch (categorie) {
-    case 1:
+    case '1':
       return (
         <>
           <strong>Exploitant de lieu de spectacles vivant</strong>
@@ -133,11 +136,11 @@ const formatLicence = (categorie: number, nomLieu = '') => {
           )}
         </>
       );
-    case 2:
+    case '2':
       return (
         <strong>Producteurs de spectacles ou entrepreneurs de tournées</strong>
       );
-    case 3:
+    case '3':
       return <strong>Diffuseurs de spectacles</strong>;
     default:
       return <NonRenseigne />;

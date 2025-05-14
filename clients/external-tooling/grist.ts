@@ -12,15 +12,15 @@ type IGristRecords = {
 
 const gristTables = {
   'nps-feedbacks': {
-    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
+    docId: 'uE2WGSjyBbSfiuSGbQiN9K',
     tableId: 'NPS_Feedbacks',
   },
   'hide-personal-data': {
-    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
+    docId: 'uE2WGSjyBbSfiuSGbQiN9K',
     tableId: 'Hide_personal_data_requests',
   },
   'protected-siren': {
-    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
+    docId: 'uE2WGSjyBbSfiuSGbQiN9K',
     tableId: 'Protected_siren',
   },
 } as const;

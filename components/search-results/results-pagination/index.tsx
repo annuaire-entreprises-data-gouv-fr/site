@@ -1,5 +1,5 @@
-import React from 'react';
 import { buildSearchQuery, IParams } from '#models/search/search-filter-params';
+import React from 'react';
 import pagesArray from './pages-array';
 
 type IProps = {
@@ -146,7 +146,7 @@ const Page: React.FC<{
  * @param param0
  * @returns
  */
-const ResultsPagination: React.FC<IProps> = ({
+const PageCounter: React.FC<IProps> = ({
   currentPage,
   searchTerm,
   totalPages,
@@ -213,4 +213,4 @@ const ResultsPagination: React.FC<IProps> = ({
   );
 };
 
-export default ResultsPagination;
+export default PageCounter;

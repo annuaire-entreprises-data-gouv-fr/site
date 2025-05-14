@@ -4,21 +4,22 @@ import { Siren } from '#utils/helpers';
 import odsClient from '../..';
 
 type ISpectaclesVivantsRecord = {
-  geoloc_cp: string[];
-  raison_sociale_personne_morale_ou_nom_personne_physique: string; //"MANAKIN PRODUCTION"
-  nom_du_lieu: string;
-  numero_de_recepisse: string; //"PLATESV-R-2021-013704"
+  numero_recepisse: string; //"PLATESV-R-2021-013704"
   categorie: number; //2
-  date_de_depot_de_la_declaration_inscrite_sur_le_recepisse: string; //"2021-11-30"
-  siren_personne_physique_siret_personne_morale: number; //84201905100015
-  type: string; //"Renouvellement"
+  date_depot_dossier: string; //"2021-11-30"
+  date_debut_validite: string; //"12/01/2022"
+  statut_recepisse: string; //"Valide"
+  raison_sociale: string; //"MANAKIN PRODUCTION"
+  type_declaration: string; //"Renouvellement"
+  type_declarant: string; //"Personne morale"
+  code_postal: string; //"75018"
+  siren_siret: number; //84201905100015
+  code_naf: string; //"90.01Z - Arts du spectacle vivant"
+  nom_lieu: string;
+  code_postal_lieu: string; //"75018"
+  geoloc_cp: string[];
   departement: string; //"Paris"
   region: string; //"Île-de-France"
-  date_de_validite_du_recepisse_sauf_opposition_de_l_administration: string; //"12/01/2022"
-  type_de_declarant: string; //"Personne morale"
-  code_postal_de_l_etablissement_principal_personne_morale_ou_de_la_personne_physique: string; //"75018"
-  code_naf_ape: string; //"90.01Z - Arts du spectacle vivant"
-  statut_du_recepisse: string; //"Valide"
 };
 
 export const clientEntrepreneurSpectacles = async (
@@ -34,8 +35,8 @@ export const clientEntrepreneurSpectacles = async (
       url,
       config: {
         params: {
-          q: `#startswith(siren_personne_physique_siret_personne_morale,"${siren}")`,
-          sort: 'date_de_depot_de_la_declaration_inscrite_sur_le_recepisse',
+          q: `#startswith(siren_siret,"${siren}")`,
+          sort: 'date_depot_dossier',
         },
       },
     },
@@ -44,16 +45,13 @@ export const clientEntrepreneurSpectacles = async (
 
   return {
     licences: response.records.map((record: ISpectaclesVivantsRecord) => ({
-      categorie: record.categorie,
-      numeroRecepisse: record.numero_de_recepisse || '',
-      nomLieu: record.nom_du_lieu || '',
-      statut: record.statut_du_recepisse || '',
-      dateValidite:
-        record.date_de_validite_du_recepisse_sauf_opposition_de_l_administration ||
-        '',
-      dateDepot:
-        record.date_de_depot_de_la_declaration_inscrite_sur_le_recepisse || '',
-      type: record.type || '',
+      categorie: (record.categorie || '').toString(),
+      numeroRecepisse: record.numero_recepisse || '',
+      nomLieu: record.nom_lieu || '',
+      statut: record.statut_recepisse || '',
+      dateValidite: record.date_debut_validite || '',
+      dateDepot: record.date_depot_dossier || '',
+      type: record.type_declaration || '',
     })),
     lastModified: response.lastModified,
   };

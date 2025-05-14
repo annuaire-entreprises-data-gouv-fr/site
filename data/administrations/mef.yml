@@ -20,7 +20,7 @@ dataSources:
       - label: Liste des labellisés Relations Fournisseurs et Achats Responsables
   - label: Entreprise du Patrimoine Vivant
     apiSlug: patrimoine-vivant
-    datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-labellises-patrimoine-vivant/
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/entreprises-du-patrimoine-vivant-epv/
     data:
       - label: Liste des labellisés Entreprise du Patrimoine Vivant
 description: |

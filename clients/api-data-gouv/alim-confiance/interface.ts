@@ -1,4 +1,4 @@
-type IAlimConfianceItem = {
+type IAlimConfianceDatagouvItem = {
   __id: string;
   APP_Libelle_etablissement: string;
   SIRET: string;
@@ -8,7 +8,7 @@ type IAlimConfianceItem = {
   Date_inspection: string;
   APP_Libelle_activite_etablissement: string;
   Synthese_eval_sanit: string;
-  APP_Code_synthese_eval_sanit: string;
+  APP_Code_synthese_eval_sanit: number;
   Agrement: string;
   geores: string;
   filtre: null | string;
@@ -22,7 +22,7 @@ type IAlimConfianceItem = {
 };
 
 type IAlimConfianceDatagouvResponse = {
-  data: IAlimConfianceItem[];
+  data: IAlimConfianceDatagouvItem[];
   links: {
     profile: string;
     swagger: string;
@@ -36,7 +36,7 @@ type IAlimConfianceDatagouvResponse = {
   };
 };
 
-type IAlimConfiance = {
+type IAlimConfianceItem = {
   syntheseEvaluation: string;
   dateInspection: string;
   libelleActiviteEtablissement: string;
@@ -45,5 +45,14 @@ type IAlimConfiance = {
   adresse: string;
   codePostal: string;
   commune: string;
-  code: string;
+  code: number;
+};
+
+type IAlimConfiance = {
+  data: IAlimConfianceItem[];
+  meta: {
+    page: number;
+    page_size: number;
+    total: number;
+  };
 };

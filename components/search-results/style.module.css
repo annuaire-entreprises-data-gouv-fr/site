@@ -1,6 +1,19 @@
-.results-counter {
+.results-counter-container {
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.results-counter {
   color: var(--text-default-grey);
+  padding-right: 20px;
+}
+
+.map-switch {
+  flex-grow: 1;
+  text-align: right;
+  max-width: 200px;
 }
 
 .result-item {
