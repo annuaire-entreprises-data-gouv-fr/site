@@ -36,7 +36,6 @@ export default function robots(): MetadataRoute.Robots {
         '/divers/',
         '/erreur/',
         '/formulaire/',
-        '/carte/',
       ],
       disallow: ['/admin/', '/api/'],
     },

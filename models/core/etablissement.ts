@@ -6,7 +6,6 @@ import {
 import { clientEtablissementRechercheEntreprise } from '#clients/recherche-entreprise/siret';
 import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import { getGeoLoc } from '#models/geo-loc';
 import { isProtectedSiren } from '#models/protected-siren';
 import {
   Siret,
@@ -246,23 +245,6 @@ const getEtablissementWithUniteLegaleFromSlug = async (
   return { etablissement, uniteLegale };
 };
 
-/**
- * Download Etablissement and the Latitude/longitude
- *
- */
-const getEtablissementWithLatLongFromSlug = async (
-  slug: string
-): Promise<IEtablissement> => {
-  const etablissement = await getEtablissementFromSlug(slug);
-
-  if (!etablissement.latitude || !etablissement.longitude) {
-    const { lat, long } = await getGeoLoc(etablissement);
-    etablissement.latitude = lat;
-    etablissement.longitude = long;
-  }
-  return etablissement;
-};
-
 //=========================
 //        API calls
 //=========================
@@ -279,7 +261,4 @@ export const createNonDiffusibleEtablissement = (siret: Siret) => {
   return etablissement;
 };
 
-export {
-  getEtablissementWithLatLongFromSlug,
-  getEtablissementWithUniteLegaleFromSlug,
-};
+export { getEtablissementWithUniteLegaleFromSlug };
