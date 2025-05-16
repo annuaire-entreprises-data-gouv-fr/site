@@ -257,6 +257,26 @@ const routes = {
         `https://updown.io/api/checks/${slug}/downtimes`,
     },
   },
+  dRoles: {
+    auth: {
+      token: 'https://roles.preprod.data.gouv.fr/auth/token',
+    },
+    users: {
+      getByEmail: (email: string) =>
+        `https://roles.preprod.data.gouv.fr/users/search?email=${email}`,
+    },
+    groups: {
+      getGroupsByEmail: (email: string) =>
+        `https://roles.preprod.data.gouv.fr/groups/search?email=${email}`,
+      addUserToGroup: (groupId: number, userId: number, roleId: number) =>
+        `https://roles.preprod.data.gouv.fr/groups/${groupId}/users/${userId}?role_id=${roleId}`,
+      removeUserFromGroup: (groupId: number, userId: number) =>
+        `https://roles.preprod.data.gouv.fr/groups/${groupId}/users/${userId}`,
+    },
+    roles: {
+      getRoles: () => `https://roles.preprod.data.gouv.fr/roles`,
+    },
+  },
 };
 
 export default routes;

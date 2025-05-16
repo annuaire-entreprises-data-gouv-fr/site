@@ -1,4 +1,4 @@
-import { IAgentScope } from './scopes';
+import { IAgentScope } from './scopes/constants';
 
 export type IAgentInfo = {
   userId: string;

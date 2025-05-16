@@ -1,9 +1,9 @@
+import { parseAgentScopes } from '#clients/api-d-roles/parse';
 import {
   clientSuperAgentList,
   IAgentRecord,
 } from '#clients/authentication/super-agents/client-super-agent-list';
-import { IAgentScope } from '#models/authentication/agent/scopes';
-import { parseAgentScope } from '#models/authentication/agent/scopes/parse';
+import { IAgentScope } from '#models/authentication/agent/scopes/constants';
 import { FetchRessourceException, InternalError } from '#models/exceptions';
 import { DataStore } from '#utils/data-store';
 import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
@@ -33,7 +33,7 @@ class SuperAgentsList {
     response
       .filter((r) => r.actif === true)
       .reduce((acc, agent) => {
-        const { inValidScopes, validScopes } = parseAgentScope(agent.scopes);
+        const { inValidScopes, validScopes } = parseAgentScopes(agent.scopes);
 
         if (inValidScopes.length > 0) {
           logErrorInSentry(
@@ -42,7 +42,6 @@ class SuperAgentsList {
             })
           );
         }
-
         acc[agent.email] = { scopes: validScopes, usage: agent.usage };
         return acc;
       }, {} as { [key: string]: ISuperAgentRecord });

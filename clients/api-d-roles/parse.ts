@@ -1,4 +1,7 @@
-import { allAgentScopes, IAgentScope } from './';
+import {
+  allAgentScopes,
+  IAgentScope,
+} from '#models/authentication/agent/scopes/constants';
 
 export const isAgentScope = (str: string): str is IAgentScope => {
   if (allAgentScopes.indexOf(str as IAgentScope) > -1) {
@@ -7,7 +10,7 @@ export const isAgentScope = (str: string): str is IAgentScope => {
   return false;
 };
 
-export const parseAgentScope = (rawScope: string) => {
+export const parseAgentScopes = (rawScope: string) => {
   const inValidScopes = [] as string[];
 
   const validScopes = (rawScope || '').split(' ').filter((s: string) => {

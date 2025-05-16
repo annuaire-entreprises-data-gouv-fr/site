@@ -1,24 +1,47 @@
-export type IAgentScope = (typeof allAgentScopes)[number];
+import { IAgentScope } from './constants';
 
-export const defaultAgentScopes: IAgentScope[] = [
-  'agent',
-  'nonDiffusible',
-  'rne',
-  'pseudo_opendata',
-];
+export class Scopes {
+  private _scopes: IAgentScope[] = [];
 
-export const allAgentScopes = [
-  'rne',
-  'nonDiffusible',
-  'conformite',
-  'beneficiaires',
-  'agent',
-  'pseudo_opendata',
-  'effectifs_annuels',
-  'chiffre_affaires',
-  'travaux_publics',
-  'bilans_bdf',
-  'administrateur',
-  'liasses_fiscales',
-  'liens_capitalistiques',
-] as const;
+  /**
+   * Add new scopes to the existing collection
+   */
+  add(scopes: IAgentScope[]): void {
+    this._scopes = [...new Set([...this._scopes, ...scopes])];
+  }
+
+  /**
+   * Get the array of unique, validated scopes
+   */
+  get scopes(): IAgentScope[] {
+    return this._scopes;
+  }
+
+  /**
+   * Check if there are any scopes
+   */
+  hasScopes(): boolean {
+    return this._scopes.length > 0;
+  }
+
+  /**
+   * Check if a specific scope exists
+   */
+  hasScope(scope: IAgentScope): boolean {
+    return this._scopes.includes(scope);
+  }
+
+  /**
+   * Get the number of scopes
+   */
+  get length(): number {
+    return this._scopes.length;
+  }
+
+  /**
+   * Convert to array
+   */
+  toArray(): IAgentScope[] {
+    return this._scopes;
+  }
+}
