@@ -1,5 +1,6 @@
 import { getGroupsByEmail } from '#clients/api-d-roles';
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
+import { superAgentsList } from '#clients/authentication/super-agents';
 import {
   NeedASiretException,
   PrestataireException,
@@ -97,8 +98,13 @@ export class AgentConnected {
       .map((group) => group.scopes.split(' '))
       .flat();
 
+    const superAgentScopesFromS3 = await superAgentsList.getScopeForAgent(
+      this.email
+    );
+
     const superAgentScopes = [
       ...new Set(superAgentScopesWithDuplicates),
+      ...new Set(superAgentScopesFromS3),
     ] as IAgentScope[];
 
     if (superAgentScopes.length > 0) {
