@@ -1,12 +1,12 @@
+import { getGroupsByEmail } from '#clients/api-d-roles';
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
-import { superAgentsList } from '#clients/authentication/super-agents';
 import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
 import { isSiret, verifySiret } from '#utils/helpers';
 import { AgentOrganisation } from '../organisation';
-import { defaultAgentScopes } from '../scopes';
+import { defaultAgentScopes, IAgentScope } from '../scopes';
 
 export class AgentConnected {
   private domain;
@@ -92,7 +92,14 @@ export class AgentConnected {
   }
 
   async getAgentHabilitation() {
-    const superAgentScopes = await superAgentsList.getScopeForAgent(this.email);
+    const drolesGroups = await getGroupsByEmail(this.email);
+    const superAgentScopesWithDuplicates = drolesGroups
+      .map((group) => group.scopes.split(' '))
+      .flat();
+
+    const superAgentScopes = [
+      ...new Set(superAgentScopesWithDuplicates),
+    ] as IAgentScope[];
 
     if (superAgentScopes.length > 0) {
       return {
