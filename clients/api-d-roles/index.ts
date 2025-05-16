@@ -1,7 +1,9 @@
 import { HttpNotFound, HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
+import { FetchRessourceException } from '#models/exceptions';
 import { httpClient } from '#utils/network';
+import { logFatalErrorInSentry } from '#utils/sentry';
 import {
   IDRolesAuthTokenResponse,
   IDRolesGroupSearchResponse,
@@ -42,9 +44,12 @@ export const getAccessToken = async (): Promise<string> => {
 
     return data.access_token;
   } catch (error) {
-    if (error instanceof HttpUnauthorizedError) {
-      throw error;
-    }
+    logFatalErrorInSentry(
+      new FetchRessourceException({
+        ressource: 'D-Roles',
+        cause: error,
+      })
+    );
     throw new HttpUnauthorizedError('Authentication failed');
   }
 };
@@ -72,15 +77,18 @@ export const getGroupsByEmail = async (
       headers,
     });
 
-    if (!data) {
-      throw new HttpNotFound('No groups found matching the search criteria');
-    }
-
     return data;
   } catch (error) {
     if (error instanceof HttpNotFound) {
-      throw error;
+      return [];
     }
-    throw new HttpNotFound('Error searching for groups');
+
+    logFatalErrorInSentry(
+      new FetchRessourceException({
+        ressource: 'D-Roles',
+        cause: error,
+      })
+    );
+    return [];
   }
 };
