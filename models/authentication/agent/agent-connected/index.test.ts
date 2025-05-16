@@ -1,4 +1,4 @@
-import { superAgentsList } from '#clients/authentication/super-agents';
+import { getGroupsByEmail } from '#clients/api-d-roles';
 import {
   NeedASiretException,
   PrestataireException,
@@ -7,6 +7,7 @@ import { AgentOrganisation } from '../organisation';
 import { AgentConnected } from './index';
 
 jest.mock('#clients/authentication/super-agents');
+jest.mock('#clients/api-d-roles');
 jest.mock('#models/authentication/agent/organisation');
 
 describe('AgentConnected', () => {
@@ -42,6 +43,12 @@ describe('AgentConnected', () => {
     sub: 'test-user-id',
   };
 
+  (getGroupsByEmail as jest.Mock).mockResolvedValue([
+    {
+      scopes: 'rne nonDiffusible',
+    },
+  ]);
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -49,6 +56,11 @@ describe('AgentConnected', () => {
   describe('constructor', () => {
     it('should properly initialize with user info', () => {
       const agent = new AgentConnected(mockUserInfo);
+      (getGroupsByEmail as jest.Mock).mockResolvedValue([
+        {
+          scopes: 'rne nonDiffusible',
+        },
+      ]);
 
       expect(agent['domain']).toBe('@example.com');
       expect(agent['idpId']).toBe(mockUserInfo.idp_id);
@@ -72,6 +84,11 @@ describe('AgentConnected', () => {
         ...mockUserInfo,
         email: 'test@beta.gouv.fr',
       };
+      (getGroupsByEmail as jest.Mock).mockResolvedValue([
+        {
+          scopes: 'rne nonDiffusible',
+        },
+      ]);
       const agent = new AgentConnected(prestataireUserInfo);
       expect(agent.isLikelyPrestataire()).toBe(true);
     });
@@ -81,6 +98,11 @@ describe('AgentConnected', () => {
         ...mockUserInfo,
         email: 'test@numerique.gouv.fr',
       };
+      (getGroupsByEmail as jest.Mock).mockResolvedValue([
+        {
+          scopes: 'rne nonDiffusible',
+        },
+      ]);
       const agent = new AgentConnected(prestataireUserInfo);
       expect(agent.isLikelyPrestataire()).toBe(false);
     });
@@ -90,6 +112,11 @@ describe('AgentConnected', () => {
         ...mockUserInfo,
         email: 'test.ext@numerique.gouv.fr',
       };
+      (getGroupsByEmail as jest.Mock).mockResolvedValue([
+        {
+          scopes: 'rne nonDiffusible',
+        },
+      ]);
       const agent = new AgentConnected(prestataireUserInfo);
       expect(agent.isLikelyPrestataire()).toBe(true);
     });
@@ -99,12 +126,22 @@ describe('AgentConnected', () => {
         ...mockUserInfo,
         email: 'test.prestataire@example.com',
       };
+      (getGroupsByEmail as jest.Mock).mockResolvedValue([
+        {
+          scopes: 'rne nonDiffusible',
+        },
+      ]);
       const agent = new AgentConnected(prestataireUserInfo);
       expect(agent.isLikelyPrestataire()).toBe(true);
     });
 
     it('should not detect regular user as prestataire', () => {
       const agent = new AgentConnected(mockUserInfo);
+      (getGroupsByEmail as jest.Mock).mockResolvedValue([
+        {
+          scopes: 'rne nonDiffusible',
+        },
+      ]);
       expect(agent.isLikelyPrestataire()).toBe(false);
     });
   });
@@ -112,9 +149,11 @@ describe('AgentConnected', () => {
   describe('getHabilitationLevel', () => {
     it('should return agent habilitation when available', async () => {
       const mockScopes = ['scope1', 'scope2'];
-      (superAgentsList.getScopeForAgent as jest.Mock).mockResolvedValue(
-        mockScopes
-      );
+      (getGroupsByEmail as jest.Mock).mockResolvedValue([
+        {
+          scopes: mockScopes.join(' '),
+        },
+      ]);
 
       const agent = new AgentConnected(mockUserInfo);
       const result = await agent.getHabilitationLevel();
@@ -127,7 +166,7 @@ describe('AgentConnected', () => {
     });
 
     it('should throw PrestataireException for prestataire users', async () => {
-      (superAgentsList.getScopeForAgent as jest.Mock).mockResolvedValue([]);
+      (getGroupsByEmail as jest.Mock).mockResolvedValue([]);
       const prestataireUserInfo = {
         ...mockUserInfo,
         email: 'test@beta.gouv.fr',
@@ -139,7 +178,7 @@ describe('AgentConnected', () => {
     });
 
     it('should fallback to organisation habilitation when no agent habilitation', async () => {
-      (superAgentsList.getScopeForAgent as jest.Mock).mockResolvedValue([]);
+      (getGroupsByEmail as jest.Mock).mockResolvedValue([]);
       const mockOrgHabilitation = {
         scopes: ['org-scope'],
         userType: 'Organisation',
@@ -158,9 +197,11 @@ describe('AgentConnected', () => {
   describe('getAndVerifyAgentInfo', () => {
     it('should return complete agent info with habilitation', async () => {
       const mockScopes = ['scope1', 'scope2'];
-      (superAgentsList.getScopeForAgent as jest.Mock).mockResolvedValue(
-        mockScopes
-      );
+      (getGroupsByEmail as jest.Mock).mockResolvedValue([
+        {
+          scopes: mockScopes.join(' '),
+        },
+      ]);
 
       const agent = new AgentConnected(mockUserInfo);
       const result = await agent.getAndVerifyAgentInfo();

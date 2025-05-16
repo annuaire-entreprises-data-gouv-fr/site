@@ -1,3 +1,4 @@
+import { getGroupsByEmail } from '#clients/api-d-roles';
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agents';
 import {
@@ -6,7 +7,7 @@ import {
 } from '#models/authentication/authentication-exceptions';
 import { isSiret, verifySiret } from '#utils/helpers';
 import { AgentOrganisation } from '../organisation';
-import { defaultAgentScopes } from '../scopes';
+import { defaultAgentScopes, IAgentScope } from '../scopes';
 
 export class AgentConnected {
   private domain;
@@ -92,7 +93,28 @@ export class AgentConnected {
   }
 
   async getAgentHabilitation() {
-    const superAgentScopes = await superAgentsList.getScopeForAgent(this.email);
+    // Get all groups this agent belongs to from D-Roles API
+    const drolesGroups = await getGroupsByEmail(this.email);
+
+    // Each group has a space-separated string of scopes
+    // Extract all scopes from all groups and flatten into single array
+    const superAgentScopesWithDuplicates = drolesGroups
+      .map((group) => {
+        return group.scopes.split(' ') as IAgentScope[];
+      })
+      .flat();
+
+    // Get additional scopes from S3 storage for this agent
+    const superAgentScopesFromS3 = await superAgentsList.getScopeForAgent(
+      this.email
+    );
+
+    // Combine scopes from both D-Roles groups and S3 storage
+    // Remove any duplicate scopes using Set
+    const superAgentScopes = [
+      ...new Set(superAgentScopesWithDuplicates),
+      ...new Set(superAgentScopesFromS3),
+    ];
 
     if (superAgentScopes.length > 0) {
       return {
