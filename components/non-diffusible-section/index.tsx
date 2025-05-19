@@ -12,9 +12,7 @@ export const NonDiffusibleStrictSection = () => (
       public.
     </p>
     <p>
-      Pour des raisons de sécurité, certaines entreprises, associations et des
-      organismes relevant du ministère de la Défense sont totalement
-      non-diffusibles.
+      Pour des raisons administratives ou de sécurité, certaines entreprises, associations ou organismes sont totalement non-diffusibles.
     </p>
   </Section>
 );
