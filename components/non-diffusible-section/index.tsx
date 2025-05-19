@@ -8,7 +8,7 @@ import { Section } from '#components/section';
 export const NonDiffusibleStrictSection = () => (
   <Section title={'Qu’est-ce qu’une entreprise non-diffusible ?'}>
     <p>
-      Les informations relative à cette structure ne sont pas accessibles au
+      Les informations relatives à cette structure ne sont pas accessibles au
       public.
     </p>
     <p>
