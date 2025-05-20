@@ -62,6 +62,7 @@ export async function GET(
       headers: {
         'Content-Type': 'image/png',
         'Content-Length': img.length.toString(),
+        'X-Robots-Tag': 'noindex, nofollow',
       },
     });
   } catch (e: any) {
