@@ -26,4 +26,10 @@ export type IDRolesGroup = {
   scopes: string;
 };
 
+export type IDRolesRoles = {
+  role_name: string;
+  is_admin: boolean;
+  id: number;
+};
+
 export type IDRolesGroupSearchResponse = IDRolesGroup[];

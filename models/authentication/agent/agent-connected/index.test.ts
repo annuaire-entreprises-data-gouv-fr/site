@@ -1,13 +1,13 @@
-import { getGroupsByEmail } from '#clients/api-d-roles';
 import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
+import { getGroupsByEmail } from '#models/d-roles';
 import { AgentOrganisation } from '../organisation';
 import { AgentConnected } from './index';
 
 jest.mock('#clients/authentication/super-agents');
-jest.mock('#clients/api-d-roles');
+jest.mock('#models/d-roles');
 jest.mock('#models/authentication/agent/organisation');
 
 describe('AgentConnected', () => {

@@ -1,10 +1,10 @@
-import { getGroupsByEmail } from '#clients/api-d-roles';
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agents';
 import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
+import { getGroupsByEmail } from '#models/d-roles';
 import { isSiret, verifySiret } from '#utils/helpers';
 import { AgentOrganisation } from '../organisation';
 import { defaultAgentScopes, IAgentScope } from '../scopes';

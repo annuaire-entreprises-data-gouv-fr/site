@@ -1,94 +1,156 @@
-import { HttpNotFound, HttpUnauthorizedError } from '#clients/exceptions';
+import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
-import { FetchRessourceException } from '#models/exceptions';
-import { httpClient } from '#utils/network';
-import { logFatalErrorInSentry } from '#utils/sentry';
+import { Information } from '#models/exceptions';
+import httpClient, { httpGet, IDefaultRequestConfig } from '#utils/network';
+import { logInfoInSentry } from '#utils/sentry';
+import { URLSearchParams } from 'url';
 import {
   IDRolesAuthTokenResponse,
   IDRolesGroupSearchResponse,
+  IDRolesRoles,
+  IDRolesUser,
 } from './interface';
 
 /**
  * D-Roles
  * https://roles.preprod.data.gouv.fr/
  */
+class DRolesAPIClient {
+  private _token: {
+    data: IDRolesAuthTokenResponse;
+    tokenExpiryTime: number;
+  } | null;
 
-/**
- * Authenticate with client_id and client_secret to get a token
- * @param client_id Client ID
- * @param client_secret Client secret
- * @param grant_type Grant type
- * @returns Authentication token
- */
-export const getAccessToken = async (): Promise<string> => {
-  try {
-    const route = routes.dRoles.auth.token;
-    const data = await httpClient<IDRolesAuthTokenResponse>({
-      url: route,
-      method: 'POST',
-      timeout: constants.timeout.XXXL,
+  constructor(
+    private client_id: string | undefined,
+    private client_secret: string | undefined
+  ) {
+    if (
+      (!this.client_id || !this.client_secret) &&
+      process.env.NODE_ENV === 'production'
+    ) {
+      throw new HttpServerError('D-Roles env variables are undefined');
+    }
+    this._token = null;
+  }
+
+  private newToken = async () => {
+    try {
+      const data = await httpClient<IDRolesAuthTokenResponse>({
+        url: routes.dRoles.auth.token,
+        method: 'POST',
+        timeout: constants.timeout.XXXL,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          client_id: this.client_id || '',
+          client_secret: this.client_secret || '',
+          grant_type: 'client_credentials',
+        }).toString(),
+      });
+
+      this._token = {
+        data,
+        tokenExpiryTime: new Date().getTime() + 240 * 1000, // 4 minutes default expiry
+      };
+    } catch (e) {
+      this._token = null;
+      throw new HttpUnauthorizedError('Failed to get token');
+    }
+  };
+
+  private isTokenExpired = () => {
+    const now = new Date().getTime();
+    const tokenExpiryTime = this._token ? this._token.tokenExpiryTime : 0;
+    return now > tokenExpiryTime;
+  };
+
+  private getToken = async () => {
+    if (!this._token || this.isTokenExpired()) {
+      logInfoInSentry(
+        new Information({
+          name: 'RefreshingDRolesToken',
+          message: 'Refreshing D-Roles token',
+        })
+      );
+      await this.newToken();
+      if (!this._token) {
+        throw new HttpUnauthorizedError('Failed to refresh token');
+      }
+    }
+    return this._token;
+  };
+
+  private get = async <T>(
+    url: string,
+    config: IDefaultRequestConfig
+  ): Promise<T> => {
+    const token = await this.getToken();
+
+    return httpGet<T>(url, {
+      timeout: constants.timeout.M,
+      ...config,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        ...config.headers,
+        Authorization: `Bearer ${token.data.access_token}`,
       },
-      data: new URLSearchParams({
-        client_id: process.env.D_ROLES_CLIENT_ID!,
-        client_secret: process.env.D_ROLES_CLIENT_SECRET!,
-        grant_type: 'client_credentials',
-      }).toString(),
     });
+  };
 
-    if (!data || !data.access_token) {
-      throw new HttpUnauthorizedError('Authentication failed');
+  public getGroupsByEmail = async (
+    email: string
+  ): Promise<IDRolesGroupSearchResponse> => {
+    try {
+      const route = routes.dRoles.groups.getGroupsByEmail(email);
+      return await this.get<IDRolesGroupSearchResponse>(route, {});
+    } catch (error) {
+      if (error instanceof HttpUnauthorizedError) {
+        return [];
+      }
+      throw error;
     }
+  };
 
-    return data.access_token;
-  } catch (error) {
-    logFatalErrorInSentry(
-      new FetchRessourceException({
-        ressource: 'D-Roles',
-        cause: error,
-      })
-    );
-    throw new HttpUnauthorizedError('Authentication failed');
-  }
-};
+  public getRoles = async (): Promise<IDRolesRoles[]> => {
+    const route = routes.dRoles.roles.getRoles();
+    return await this.get<IDRolesRoles[]>(route, {});
+  };
 
-/**
- * Search for groups in D-Roles
- * @param email User's email address
- * @returns Search results with pagination information
- */
-export const getGroupsByEmail = async (
-  email: string
-): Promise<IDRolesGroupSearchResponse> => {
-  try {
-    const accessToken = await getAccessToken();
-    const route = routes.dRoles.groups.getGroupsByEmail(email);
+  public getUserByEmail = async (email: string): Promise<IDRolesUser> => {
+    const route = routes.dRoles.users.getByEmail(email);
+    return await this.get<IDRolesUser>(route, {});
+  };
 
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    };
-
-    const data = await httpClient<IDRolesGroupSearchResponse>({
-      url: route,
-      method: 'GET',
-      headers,
+  public addUserToGroup = async (
+    groupId: number,
+    email: string,
+    roleId: number
+  ): Promise<null> => {
+    const user = await this.getUserByEmail(email);
+    const route = routes.dRoles.groups.addUserToGroup(groupId, user.id, roleId);
+    return await this.get<null>(route, {
+      method: 'PUT',
+      data: { email },
     });
+  };
 
-    return data;
-  } catch (error) {
-    if (error instanceof HttpNotFound) {
-      return [];
-    }
+  public removeUserFromGroup = async (
+    groupId: number,
+    userId: number
+  ): Promise<void> => {
+    const route = routes.dRoles.groups.removeUserFromGroup(groupId, userId);
 
-    logFatalErrorInSentry(
-      new FetchRessourceException({
-        ressource: 'D-Roles',
-        cause: error,
-      })
-    );
-    return [];
-  }
-};
+    await this.get<null>(route, {
+      method: 'DELETE',
+    });
+  };
+}
+
+const droleApiClient = new DRolesAPIClient(
+  process.env.D_ROLES_CLIENT_ID,
+  process.env.D_ROLES_CLIENT_SECRET
+);
+
+export { droleApiClient };
