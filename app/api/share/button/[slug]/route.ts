@@ -173,7 +173,10 @@ export async function GET(
   try {
     return new NextResponse(html, {
       status: 200,
-      headers: { 'Content-Type': 'text/html; charset=utf-8' },
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'X-Robots-Tag': 'noindex, nofollow',
+      },
     });
   } catch (e: any) {
     logErrorInSentry(
