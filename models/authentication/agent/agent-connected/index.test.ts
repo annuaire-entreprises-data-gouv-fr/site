@@ -103,6 +103,15 @@ describe('AgentConnected', () => {
       expect(agent.isLikelyPrestataire()).toBe(true);
     });
 
+    it('should detect prestataire by email pattern', () => {
+      const prestataireUserInfo = {
+        ...mockUserInfo,
+        email: 'prenom.nom-consultant@example.com',
+      };
+      const agent = new AgentConnected(prestataireUserInfo);
+      expect(agent.isLikelyPrestataire()).toBe(true);
+    });
+
     it('should not detect regular user as prestataire', () => {
       const agent = new AgentConnected(mockUserInfo);
       expect(agent.isLikelyPrestataire()).toBe(false);

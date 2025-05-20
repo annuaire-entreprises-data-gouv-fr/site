@@ -64,7 +64,7 @@ export class AgentConnected {
 
     if (
       !!this.email.match(
-        /[.@-]*(ext|external|externe|presta|prestataire)(s)*[.@-]/g
+        /[.@-]*(ext|external|externe|presta|prestataire|consultant)(s)*[.@-]/g
       )
     ) {
       return true;
