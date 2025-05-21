@@ -2,7 +2,7 @@ import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { Information } from '#models/exceptions';
-import httpClient, { httpGet, IDefaultRequestConfig } from '#utils/network';
+import httpClient, { IDefaultRequestConfig } from '#utils/network';
 import { logInfoInSentry } from '#utils/sentry';
 import { URLSearchParams } from 'url';
 import { IDRolesAuthTokenResponse } from './interface';
@@ -69,13 +69,14 @@ class DRolesAPIClient {
     return this._token;
   };
 
-  public get = async <T>(
+  public fetch = async <T>(
     url: string,
     config: IDefaultRequestConfig
   ): Promise<T> => {
     const token = await this.getToken();
 
-    return httpGet<T>(url, {
+    return httpClient<T>({
+      url,
       timeout: constants.timeout.M,
       ...config,
       headers: {
