@@ -16,6 +16,7 @@ export type IDRolesAuthTokenRequest = {
 export type IDRolesAuthTokenResponse = {
   token_type: string;
   access_token: string;
+  expires_in: number;
 };
 
 export type IDRolesGroup = {

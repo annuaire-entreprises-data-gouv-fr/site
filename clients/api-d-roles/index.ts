@@ -17,19 +17,13 @@ import {
  * https://roles.preprod.data.gouv.fr/
  */
 class DRolesAPIClient {
-  private _token: {
-    data: IDRolesAuthTokenResponse;
-    tokenExpiryTime: number;
-  } | null;
+  private _token: IDRolesAuthTokenResponse | null;
 
   constructor(
     private client_id: string | undefined,
     private client_secret: string | undefined
   ) {
-    if (
-      (!this.client_id || !this.client_secret) &&
-      process.env.NODE_ENV === 'production'
-    ) {
+    if (!this.client_id || !this.client_secret) {
       throw new HttpServerError('D-Roles env variables are undefined');
     }
     this._token = null;
@@ -51,10 +45,7 @@ class DRolesAPIClient {
         }).toString(),
       });
 
-      this._token = {
-        data,
-        tokenExpiryTime: new Date().getTime() + 240 * 1000, // 4 minutes default expiry
-      };
+      this._token = data;
     } catch (e) {
       this._token = null;
       throw new HttpUnauthorizedError('Failed to get token');
@@ -63,7 +54,7 @@ class DRolesAPIClient {
 
   private isTokenExpired = () => {
     const now = new Date().getTime();
-    const tokenExpiryTime = this._token ? this._token.tokenExpiryTime : 0;
+    const tokenExpiryTime = this._token ? this._token.expires_in : 0;
     return now > tokenExpiryTime;
   };
 
@@ -94,7 +85,7 @@ class DRolesAPIClient {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: `Bearer ${token.data.access_token}`,
+        Authorization: `Bearer ${token.access_token}`,
       },
     });
   };
