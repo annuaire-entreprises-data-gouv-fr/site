@@ -258,7 +258,6 @@ const routes = {
     },
   },
   dRoles: {
-    base: 'https://roles.preprod.data.gouv.fr',
     auth: {
       token: 'https://roles.preprod.data.gouv.fr/auth/token',
     },
