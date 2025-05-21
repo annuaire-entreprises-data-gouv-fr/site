@@ -1,4 +1,4 @@
-import { droleApiClient } from '#clients/api-d-roles';
+import droleClient from '#clients/api-d-roles';
 import {
   IDRolesGroupSearchResponse,
   IDRolesRoles,
@@ -12,7 +12,7 @@ export async function getGroupsByEmail(
   email: string
 ): Promise<IDRolesGroupSearchResponse> {
   try {
-    return await droleApiClient.getGroupsByEmail(email);
+    return await droleClient.getGroupsByEmail(email);
   } catch (error) {
     logFatalErrorInSentry(
       new FetchRessourceException({
@@ -26,7 +26,7 @@ export async function getGroupsByEmail(
 
 export async function getRoles(): Promise<IDRolesRoles[]> {
   try {
-    return await droleApiClient.getRoles();
+    return await droleClient.getRoles();
   } catch (error) {
     logFatalErrorInSentry(
       new FetchRessourceException({
@@ -40,7 +40,7 @@ export async function getRoles(): Promise<IDRolesRoles[]> {
 
 export async function getUserByEmail(email: string): Promise<IDRolesUser> {
   try {
-    return await droleApiClient.getUserByEmail(email);
+    return await droleClient.getUserByEmail(email);
   } catch (error) {
     logFatalErrorInSentry(
       new FetchRessourceException({
@@ -58,7 +58,7 @@ export async function addUserToGroup(
   roleId: number
 ): Promise<null> {
   try {
-    return await droleApiClient.addUserToGroup(groupId, email, roleId);
+    return await droleClient.addUserToGroup(groupId, email, roleId);
   } catch (error) {
     logFatalErrorInSentry(
       new FetchRessourceException({
@@ -75,7 +75,7 @@ export async function removeUserFromGroup(
   userId: number
 ): Promise<void> {
   try {
-    await droleApiClient.removeUserFromGroup(groupId, userId);
+    await droleClient.removeUserFromGroup(groupId, userId);
   } catch (error) {
     logFatalErrorInSentry(
       new FetchRessourceException({

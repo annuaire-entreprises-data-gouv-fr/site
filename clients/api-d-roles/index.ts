@@ -62,3 +62,11 @@ export const removeUserFromGroup = async (
     method: 'DELETE',
   });
 };
+
+export default {
+  getGroupsByEmail,
+  getRoles,
+  getUserByEmail,
+  addUserToGroup,
+  removeUserFromGroup,
+};
