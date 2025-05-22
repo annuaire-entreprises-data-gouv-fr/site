@@ -43,6 +43,7 @@ reassurance:
       Toutes les structures de l'ESS - quelle que soit leur forme juridique - possèdent un numéro SIRET et par conséquent une fiche sur [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).
 datasources:
   - insee
+  - ess-france
 body: |
   ## Comment identifier les associations et les entreprises de l'économie sociale et solidaire ?
 
