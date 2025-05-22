@@ -3,7 +3,7 @@ export type IDefaultRequestConfig = {
   timeout?: number;
   params?: any;
   headers?: any;
-  method?: 'POST' | 'GET' | 'PATCH';
+  method?: 'POST' | 'GET' | 'PATCH' | 'PUT' | 'DELETE';
   responseType?: 'blob' | 'arraybuffer';
   data?: unknown;
 };
