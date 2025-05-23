@@ -1,0 +1,110 @@
+/* Layout containers */
+.firstRow {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.secondRow {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.section {
+  min-width: 340px;
+  flex: 1;
+}
+
+.sectionFlex2 {
+  min-width: 340px;
+  flex: 2;
+}
+
+/* Form sections */
+.formSection {
+  margin-bottom: 32px;
+}
+
+.subsectionTitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.radioGroupNormal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Size section specific */
+.sizeSliderContainer {
+  margin-bottom: 24px;
+}
+
+.effectifLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+/* Structure section */
+.structureSelects {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Date section */
+.dateContainer {
+  display: flex;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+
+.dateColumn {
+}
+
+.dateGroup {
+  margin-bottom: 16px;
+}
+
+.dateLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.dateInput {
+  min-width: 200px;
+}
+
+/* Button section */
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+/* Error display */
+.errorMessage {
+  color: red;
+  margin-top: 16px;
+  text-align: center;
+}
