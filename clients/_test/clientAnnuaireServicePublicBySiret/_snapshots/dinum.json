@@ -52,10 +52,7 @@
           "valeur": "https://www.numerique.gouv.fr"
         }
       ],
-      "formulaireContact": {
-        "libelle": "Accéder au formulaire de contact",
-        "valeur": "https://www.numerique.gouv.fr/contact/"
-      },
+      "formulaireContact": null,
       "annuaireServicePublic": {
         "libelle": "Informations supplémentaires (annuaire du service-public)",
         "valeur": "https://lannuaire.service-public.fr/gouvernement/d1a97841-b4bf-46df-a089-1003e4e266b4"
@@ -71,7 +68,7 @@
     "sigle": null,
     "categorie": "SI",
     "mission": "La Direction interministérielle du numérique (DINUM) accompagne les ministères dans leur transformation numérique, conseille le gouvernement et développe des services et ressources partagées comme le réseau interministériel de l’État, FranceConnect, data.gouv.fr ou api.gouv.fr. Elle pilote, avec l’appui des ministères, le programme Tech.gouv d’accélération de la transformation numérique du service public. Créée par le décret du 25 octobre 2019, la DINUM a pris la suite de la Direction interministérielle du numérique et du système d’information et de communication de l’État (DINSIC).",
-    "formulaireContact": "https://www.numerique.gouv.fr/contact/",
+    "formulaireContact": null,
     "adressePostale": "75334 Paris Cedex 07",
     "typeOrganisme": "Administration centrale (ou Ministère)",
     "nom": "Direction interministérielle du numérique (DINUM)",
