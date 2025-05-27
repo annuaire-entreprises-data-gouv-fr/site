@@ -15,28 +15,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ./deploy.key
-          sudo chmod 600 ./deploy.key
-          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-        shell: bash
-        env:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_MACHINE_USER_PRIVATE_KEY}}
-          SSH_HOST: ${{ secrets.SSH_HOST_STAGING_V2 }}
-
-      - name: Deploy website to staging
-        run: ssh -i ./deploy.key www-data@$SSH_HOST 'python3 /opt/scripts/app-deploy-release/deploy.py /opt/git/releases/annuaire-entreprises-site https://github.com/annuaire-entreprises-data-gouv-fr/site.git website --version main --versions_to_keep=5 1> >(tee --append /var/log/deploy_annuaire-entreprises-site)'
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST_STAGING_V2 }}
-
-      - name: Notify staging failure only
-        if: failure()
-        uses: ./.github/actions/notify
+      - uses: annuaire-entreprises-data-gouv-fr/github-actions/deploy@deploy
         with:
-          message: '🚨 ${{ github.event.repository.name }} : deploy to staging failed'
-          hook: ${{ secrets.DEV_EVENT_HOOK }}
+          app-to-deploy: "annuaire-entreprises-site"
+          app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
+          app-shortname: "website"
+          version: "main"
+          environment: "staging"
+          ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
+          ssh-host: ${{ secrets.SSH_HOST_STAGING_V2 }}
+          notify-on-failure: true
+          notify-on-success: false
+          notify-webhook: ${{ secrets.DEV_EVENT_HOOK }}
 
   deploy-production:
     name: Deploy - production
@@ -56,39 +46,15 @@ jobs:
             host: SSH_PRODUCTION_03
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ./deploy.key
-          sudo chmod 600 ./deploy.key
-          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-        shell: bash
-        env:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_MACHINE_USER_PRIVATE_KEY}}
-          SSH_HOST: ${{ secrets[matrix.host] }}
-
-      - name: Deploy website to production
-        run: ssh -i ./deploy.key www-data@$SSH_HOST 'python3 /opt/scripts/app-deploy-release/deploy.py /opt/git/releases/annuaire-entreprises-site https://github.com/annuaire-entreprises-data-gouv-fr/site.git website --version main --versions_to_keep=5 | tee --append /var/log/deploy_annuaire-entreprises-site'
-        env:
-          SSH_HOST: ${{ secrets[matrix.host] }}
-
-      - name: Notify production failure only
-        if: failure()
-        uses: ./.github/actions/notify
+      - uses: annuaire-entreprises-data-gouv-fr/github-actions/deploy@deploy
         with:
-          message: '🚨 ${{ github.event.repository.name }} [${{ matrix.environment }}] : deploy to production cluster failed'
-          hook: ${{ secrets.DEV_EVENT_HOOK }}
-
-  notify-deploy-success:
-    name: Notify successful deployment
-    runs-on: ubuntu-latest
-    needs: [deploy-production]
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Notify deploy success
-        uses: ./.github/actions/notify
-        with:
-          message: '✅ ${{ github.event.repository.name }} : successfully deploy production cluster'
-          hook: ${{ secrets.DEV_EVENT_HOOK }}
+          app-to-deploy: "annuaire-entreprises-site"
+          app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
+          app-shortname: "website"
+          version: "main"
+          environment: "production"
+          ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
+          ssh-host: ${{ secrets[matrix.host] }}
+          notify-on-failure: true
+          notify-on-success: true
+          notify-webhook: ${{ secrets.DEV_EVENT_HOOK }}
