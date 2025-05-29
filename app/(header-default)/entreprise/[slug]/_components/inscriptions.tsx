@@ -40,7 +40,7 @@ export const UniteLegaleInscriptionIG = ({
           <a
             rel="noreferre noopener"
             target="_blank"
-            href={`https://www.infogreffe.fr/entreprise/danone/${uniteLegale.siren}`}
+            href={`https://www.infogreffe.fr/entreprise/${uniteLegale.siren}`}
           >
             → Consulter la fiche Infogreffe
           </a>
