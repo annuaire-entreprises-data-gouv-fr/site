@@ -179,6 +179,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     est_achats_responsables = false,
     est_patrimoine_vivant = false,
     est_alim_confiance = false,
+    bilan_ges_renseigne = false,
   } = complements || {};
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
@@ -270,6 +271,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       typeEntrepriseInclusive: type_siae,
       estPatrimoineVivant: est_patrimoine_vivant,
       estAlimConfiance: est_alim_confiance,
+      bilanGesRenseigne: bilan_ges_renseigne,
     },
     immatriculation: mapToImmatriculation(immatriculation),
     association: {

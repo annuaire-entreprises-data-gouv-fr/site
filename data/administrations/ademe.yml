@@ -9,6 +9,9 @@ apiMonitors:
     apiSlug: rge
     apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-professionnels-rge
     updownIoId: urb0
+  - apiName: API Bilan GES
+    apiSlug: bilan-ges
+    updownIoId: wlfs
 dataSources:
   - label: Liste des Entreprises RGE
     apiSlug: recherche-entreprise, rge
@@ -16,5 +19,10 @@ dataSources:
     data:
       - label: Informations des professionnels RGE
         form: https://entreprendre.service-public.fr/vosdroits/F32251
+  - label: Bilans GES (Gaz à Effet de Serre)
+    apiSlug: bilan-ges
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/bilans-ges/
+    data:
+      - label: Bilans GES publiés par les organisations
 description: |
   L'Agence de l'Environnement et de la Maîtrise de l'Energie a pour mission d’accompagner la transition écologique et énergétique notamment en participant au financement de projets ou à la recherche pour leur mise en œuvre.
