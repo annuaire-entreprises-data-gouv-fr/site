@@ -72,16 +72,7 @@ const EtablissementSection: React.FC<IProps> = ({
     [
       <a href="/faq/modifier-adresse">Adresse</a>,
       etablissement.adresse ? (
-        <>
-          <CopyPaste label="Adresse">{etablissement.adresse}</CopyPaste>
-          <PrintNever key="adresse-link">
-            <a href={`/etablissement/${etablissement.siret}`}>
-              → voir sur la carte
-            </a>
-            <br />
-            <br />
-          </PrintNever>
-        </>
+        <CopyPaste label="Adresse">{etablissement.adresse}</CopyPaste>
       ) : (
         ''
       ),

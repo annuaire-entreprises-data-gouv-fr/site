@@ -122,13 +122,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
               </>
             )}
             {etablissement.adresse && (
-              <>
-                {' '}
-                Il est domicilié au{' '}
-                <a href={`/etablissement/${etablissement.siret}`}>
-                  {etablissement.adresse}
-                </a>
-              </>
+              <> Il est domicilié au {etablissement.adresse}</>
             )}
             .
           </p>

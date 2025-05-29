@@ -101,7 +101,7 @@ const TitleEtablissementWithDenomination: React.FC<{
             <div>
               <div>
                 <strong>
-                  <a href={`/entreprise/${uniteLegale.siren}`}>
+                  <a href={`/entreprise/${uniteLegale.chemin}`}>
                     {uniteLegale.nomComplet}
                   </a>
                 </strong>
