@@ -9,7 +9,7 @@ export const clientEss = async (siren: Siren): Promise<IESS> => {
   const response = await httpGet<IESSDatagouvResponse>(
     `${routes.datagouv.ess}?SIREN__exact=${siren}`,
     {
-      timeout: constants.timeout.S,
+      timeout: constants.timeout.L,
     }
   );
 
