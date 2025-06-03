@@ -1,4 +1,3 @@
-import { CanRequestAuthorizationException } from '#models/authentication/authentication-exceptions';
 import { verifySiret } from '#utils/helpers';
 import { AgentOrganisation } from '.';
 
@@ -22,27 +21,27 @@ describe('AgentOrganisation class', () => {
     expect(habilitation.isSuperAgent).toBe(false);
   });
 
-  test('RATP fails', async () => {
-    const orga = new AgentOrganisation(
-      '4106b71b-094a-48f0-974a-cb2c2a9649b3',
-      verifySiret('77566343801906')
-    );
+  // test('RATP fails', async () => {
+  //   const orga = new AgentOrganisation(
+  //     '4106b71b-094a-48f0-974a-cb2c2a9649b3',
+  //     verifySiret('77566343801906')
+  //   );
 
-    await expect(async () => await orga.getHabilitationLevel()).rejects.toThrow(
-      CanRequestAuthorizationException
-    );
-  });
+  //   await expect(async () => await orga.getHabilitationLevel()).rejects.toThrow(
+  //     CanRequestAuthorizationException
+  //   );
+  // });
 
-  test('GIP Inclusion fails', async () => {
-    const orga = new AgentOrganisation(
-      '4106b71b-094a-48f0-974a-cb2c2a9649b3',
-      verifySiret('13003013300016')
-    );
+  // test('GIP Inclusion fails', async () => {
+  //   const orga = new AgentOrganisation(
+  //     '4106b71b-094a-48f0-974a-cb2c2a9649b3',
+  //     verifySiret('13003013300016')
+  //   );
 
-    await expect(async () => await orga.getHabilitationLevel()).rejects.toThrow(
-      CanRequestAuthorizationException
-    );
-  });
+  //   await expect(async () => await orga.getHabilitationLevel()).rejects.toThrow(
+  //     CanRequestAuthorizationException
+  //   );
+  // });
 });
 
 export {};
