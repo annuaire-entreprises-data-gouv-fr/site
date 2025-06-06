@@ -1,12 +1,14 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { superAgentsList } from '#clients/authentication/super-agents';
+import { Scopes } from '#models/authentication/agent/scopes';
 import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
+import { Groups } from '#models/groups';
 import { isSiret, verifySiret } from '#utils/helpers';
 import { AgentOrganisation } from '../organisation';
-import { defaultAgentScopes } from '../scopes';
+import { defaultAgentScopes } from '../scopes/constants';
 
 export class AgentConnected {
   private domain;
@@ -92,11 +94,25 @@ export class AgentConnected {
   }
 
   async getAgentHabilitation() {
-    const superAgentScopes = await superAgentsList.getScopeForAgent(this.email);
+    const superAgentScopes = new Scopes();
 
-    if (superAgentScopes.length > 0) {
+    if (process.env.D_ROLES_ENABLED === 'enabled') {
+      // Get scopes from Groups (D-Roles API) for this agent
+      const groups = await Groups.find(this.email);
+      groups.forEach((group) => {
+        superAgentScopes.add(group.scopes);
+      });
+    }
+
+    // TEMP Get scopes from S3 storage for this agent
+    const superAgentsListScopesRaw = await superAgentsList.getScopeForAgent(
+      this.email
+    );
+    superAgentScopes.add(superAgentsListScopesRaw);
+
+    if (superAgentScopes.hasScopes()) {
       return {
-        scopes: [...defaultAgentScopes, ...superAgentScopes],
+        scopes: [...defaultAgentScopes, ...superAgentScopes.scopes],
         userType: 'Super-agent connecté',
         isSuperAgent: true,
       };

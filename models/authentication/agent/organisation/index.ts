@@ -4,7 +4,7 @@ import { CanRequestAuthorizationException } from '#models/authentication/authent
 import { IUniteLegale } from '#models/core/types';
 import { fetchUniteLegaleFromRechercheEntreprise } from '#models/core/unite-legale';
 import { extractSirenFromSiret, Siren, Siret } from '#utils/helpers';
-import { defaultAgentScopes } from '../scopes';
+import { defaultAgentScopes } from '../scopes/constants';
 import { mightBeAnAuthorizedAdministration } from './might-be-an-administration';
 import { isOrganisationWhitelisted } from './whitelisted-administrations';
 
