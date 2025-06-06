@@ -2,6 +2,7 @@ const routes = {
   espaceAgent: {
     documents: {
       download: '/api/download/espace-agent/documents/',
+      inpiPdf: '/api/inpi-pdf',
     },
   },
   ademe: {

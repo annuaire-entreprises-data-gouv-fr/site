@@ -25,7 +25,7 @@ function saveAsPdf(blob: Blob, siren: string) {
 }
 
 export function InpiPDFDownloader({ siren }: { siren: string }) {
-  const downloadLink = `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`;
+  const downloadLink = `${routes.espaceAgent.documents.inpiPdf}?siren=${siren}`;
 
   const pdf = usePDFDownloader(downloadLink);
 
