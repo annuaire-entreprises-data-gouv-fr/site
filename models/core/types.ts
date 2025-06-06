@@ -196,6 +196,7 @@ export interface IUniteLegaleComplements {
   estAchatsResponsables: boolean;
   estPatrimoineVivant: boolean;
   estAlimConfiance: boolean;
+  bilanGesRenseigne: boolean;
   estUai: boolean;
 }
 
@@ -222,6 +223,7 @@ export const createDefaultUniteLegaleComplements =
       estAchatsResponsables: false,
       estPatrimoineVivant: false,
       estAlimConfiance: false,
+      bilanGesRenseigne: false,
     };
   };
 

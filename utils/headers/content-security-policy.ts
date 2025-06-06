@@ -29,6 +29,7 @@ const cspDirectives = {
     'https://geo.api.gouv.fr',
     'https://api-adresse.data.gouv.fr',
     'https://tabular-api.data.gouv.fr',
+    'https://koumoul.com',
   ],
 };
 

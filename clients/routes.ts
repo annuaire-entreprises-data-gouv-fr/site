@@ -4,6 +4,10 @@ const routes = {
       download: '/api/download/espace-agent/documents/',
     },
   },
+  ademe: {
+    bilanGes:
+      'https://koumoul.com/data-fair/api/v1/datasets/gnzo7xgwv5d271w1t0yw8ynb/lines',
+  },
   apiEntreprise: {
     association: (siren: string) =>
       `/v4/djepva/api-association/associations/${siren}`,

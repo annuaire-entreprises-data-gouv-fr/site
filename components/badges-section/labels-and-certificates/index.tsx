@@ -22,6 +22,7 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
     estAchatsResponsables,
     estPatrimoineVivant,
     estAlimConfiance,
+    bilanGesRenseigne,
   } = uniteLegale.complements;
   if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
   if (estEss || estSocieteMission) sources.push(EAdministration.INSEE);
@@ -33,6 +34,7 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
   if (estAchatsResponsables) sources.push(EAdministration.MEF);
   if (estPatrimoineVivant) sources.push(EAdministration.MEF);
   if (estAlimConfiance) sources.push(EAdministration.MAA);
+  if (bilanGesRenseigne) sources.push(EAdministration.ADEME);
   return sources;
 };
 
@@ -57,6 +59,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     estAchatsResponsables,
     estPatrimoineVivant,
     estAlimConfiance,
+    bilanGesRenseigne,
   } = uniteLegale.complements;
 
   return (
@@ -162,6 +165,14 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
           informationTooltipLabel="Cette structure dispose de résultats de contrôles sanitaires (Alim'Confiance)"
           label="Alim'Confiance"
           sectionId="alim-confiance"
+          siren={uniteLegale.siren}
+        />
+      )}
+      {bilanGesRenseigne && (
+        <LabelWithLinkToSection
+          informationTooltipLabel="Cette structure a publié un Bilan GES (Gaz à Effet de Serre)"
+          label="Bilan GES"
+          sectionId="bilan-ges"
           siren={uniteLegale.siren}
         />
       )}

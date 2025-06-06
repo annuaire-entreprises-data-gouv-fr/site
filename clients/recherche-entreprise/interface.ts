@@ -125,6 +125,7 @@ export type IComplements = {
   est_achats_responsables: boolean;
   est_patrimoine_vivant: boolean;
   est_alim_confiance: boolean;
+  bilan_ges_renseigne: boolean;
   liste_idcc: string[];
 };
 
