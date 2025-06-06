@@ -45,7 +45,7 @@ export default function BilanGesSection({ uniteLegale, session }: IProps) {
         const pageSize = 20;
 
         const sortedBilans = [...bilanGes.data].sort(
-          (a, b) => b.anneeReporting - a.anneeReporting
+          (a, b) => a.anneeReporting - b.anneeReporting
         );
 
         return (

@@ -170,8 +170,8 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       )}
       {bilanGesRenseigne && (
         <LabelWithLinkToSection
-          informationTooltipLabel="Cette structure a publié un Bilan GES (Gaz à Effet de Serre)"
-          label="Bilan GES"
+          informationTooltipLabel="Cette structure dispose de bilans GES disponibles (Gaz à Effet de Serre)"
+          label="Bilans GES (Gaz à Effet de Serre)"
           sectionId="bilan-ges"
           siren={uniteLegale.siren}
         />

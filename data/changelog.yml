@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 06/06/2025
+  target:
+    site: true
+  body: |
+    Ajout des bilans GES (Gaz à Effet de Serre) dans l'onglet "Labels et certificats"
 - date: 15/05/2025
   target:
     site: true
