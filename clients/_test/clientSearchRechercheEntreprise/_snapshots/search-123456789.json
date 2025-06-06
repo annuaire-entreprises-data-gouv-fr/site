@@ -146,7 +146,7 @@
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "",
-        "dateMiseAJourInpi": "2024-07-03T17:35:38",
+        "dateMiseAJourInpi": "2025-01-17T15:55:26",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": null,
@@ -171,7 +171,10 @@
           "estUai": false,
           "estAchatsResponsables": false,
           "estEntrepriseInclusive": true,
-          "typeEntrepriseInclusive": "ESAT"
+          "typeEntrepriseInclusive": "ESAT",
+          "estPatrimoineVivant": false,
+          "estAlimConfiance": false,
+          "bilanGesRenseigne": false
         },
         "association": {
           "idAssociation": null,
