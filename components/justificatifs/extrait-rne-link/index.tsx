@@ -1,4 +1,3 @@
-import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
 import {
@@ -18,11 +17,13 @@ const ExtraitRNELink: React.FC<{
   label?: string;
   session: ISession | null;
 }> = ({ uniteLegale, label, session }) => {
-  const downloadLink = `${routes.rne.portail.pdf}?format=pdf&ids=[%22${uniteLegale.siren}%22]`;
-
   return estDiffusible(uniteLegale) ||
     hasRights(session, ApplicationRights.nonDiffusible) ? (
-    <ButtonLink small alt to={downloadLink} target="_blank">
+    <ButtonLink
+      small
+      alt
+      to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
+    >
       <Icon slug="download">{label || 'télécharger'}</Icon>
     </ButtonLink>
   ) : (
