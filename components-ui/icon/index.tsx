@@ -227,6 +227,20 @@ const mapPin = (
   </svg>
 );
 
+const mapPinFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="100%"
+    height="100%"
+    fill="currentColor"
+    stroke="currentColor"
+    strokeWidth="0"
+  >
+    <path d="M18.364 3.636a9 9 0 0 1 0 12.728L12 22.728l-6.364-6.364A9 9 0 0 1 18.364 3.636ZM12 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
+  </svg>
+);
+
 const information = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -418,6 +432,32 @@ const searchLine = (
   </svg>
 );
 
+const groupFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="100%"
+    height="100%"
+    stroke="none"
+    fill="currentColor"
+  >
+    <path d="M10 14a8 8 0 0 1 8 8H2a8 8 0 0 1 8-8Zm7.363 1.233A7.505 7.505 0 0 1 22.983 22H20c0-2.61-1-4.986-2.637-6.767ZM10 1c3.315 0 6 2.685 6 6s-2.685 6-6 6-6-2.685-6-6 2.685-6 6-6Zm6.985 2.097a5 5 0 0 1-1.645 9.86A7.98 7.98 0 0 0 18 7a7.964 7.964 0 0 0-1.015-3.903Z" />
+  </svg>
+);
+
+const calendarFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="100%"
+    height="100%"
+    stroke="none"
+    fill="currentColor"
+  >
+    <path d="M2 11h20v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-9zm15-8h4a1 1 0 0 1 1 1v5H2V4a1 1 0 0 1 1-1h4V1h2v2h6V1h2v2z" />
+  </svg>
+);
+
 export type IIconsSlug = keyof typeof icons;
 
 export const icons = {
@@ -450,4 +490,7 @@ export const icons = {
   questionFill,
   successFill,
   user,
+  groupFill,
+  calendarFill,
+  mapPinFill,
 };

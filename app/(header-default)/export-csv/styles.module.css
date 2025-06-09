@@ -1,0 +1,155 @@
+.row {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.formSection {
+  margin-bottom: 32px;
+  min-width: 340px;
+  flex: 1;
+}
+
+.formSection h2 {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+}
+
+/* Title and info section */
+.title {
+  color: var(--annuaire-colors-frBlue);
+}
+
+.infoSection {
+  border-radius: 6px;
+  background-color: var(--annuaire-colors-pastelBlue);
+  padding: 16px;
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoSection > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* Subsections */
+.subsectionTitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.sizeSliderContainer {
+  margin-bottom: 24px;
+}
+
+.sliderHeader {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.sliderHeader label {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.rangeDisplay {
+  background-color: var(--annuaire-colors-frBlue);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.effectifLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Structure section */
+.structureSelects {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dateContainer {
+  display: flex;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+
+.dateGroup {
+  margin-bottom: 16px;
+}
+
+.dateLabel {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.dateInput {
+  min-width: 200px;
+}
+
+/* Button section */
+.buttonContainer {
+  display: flex;
+  margin-top: 32px;
+}
+
+/* Error display */
+.errorMessage {
+  color: red;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.exportActions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* File download section */
+.fileDownloadSection {
+  margin: 24px 0;
+  padding: 20px 0;
+}
+
+.fileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fileName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #000091;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.fileName:hover {
+  text-decoration: none;
+}
+
+.fileSize {
+  font-size: 14px;
+  color: #666;
+}

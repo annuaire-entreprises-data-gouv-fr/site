@@ -16,7 +16,18 @@ const DualRangeSlider: React.FC<{
   value: any;
   onChange: any;
   color: string;
-}> = ({ idPrefix, label, min, max, value, step, onChange, color }) => {
+  samePositionAllowed?: boolean;
+}> = ({
+  idPrefix,
+  label,
+  min,
+  max,
+  value,
+  step,
+  onChange,
+  color,
+  samePositionAllowed = false,
+}) => {
   const [minValue, setMinValue] = useState(value ? value.min : min);
   const [maxValue, setMaxValue] = useState(value ? value.max : max);
 
@@ -29,7 +40,10 @@ const DualRangeSlider: React.FC<{
 
   const handleMinChange = (e: any) => {
     e.preventDefault();
-    const newMinVal = Math.min(+e.target.value, maxValue - step);
+    let newMinVal = Math.min(+e.target.value, maxValue - step);
+    if (samePositionAllowed) {
+      newMinVal = Math.min(+e.target.value, maxValue);
+    }
 
     if (!value) {
       setMinValue(newMinVal);
@@ -39,7 +53,10 @@ const DualRangeSlider: React.FC<{
 
   const handleMaxChange = (e: any) => {
     e.preventDefault();
-    const newMaxVal = Math.max(+e.target.value, minValue + step);
+    let newMaxVal = Math.max(+e.target.value, minValue + step);
+    if (samePositionAllowed) {
+      newMaxVal = Math.max(+e.target.value, minValue);
+    }
 
     if (!value) {
       setMaxValue(newMaxVal);
@@ -49,6 +66,11 @@ const DualRangeSlider: React.FC<{
 
   const minPos = ((minValue - min) / (max - min)) * 100;
   const maxPos = ((maxValue - min) / (max - min)) * 100;
+
+  // Add small visual offset when controls overlap to ensure both are draggable
+  const controlsOverlap = minValue === maxValue;
+  const minControlPos = controlsOverlap ? minPos - 2.5 : minPos;
+  const maxControlPos = controlsOverlap ? maxPos + 2.5 : maxPos;
 
   return (
     <div id="dual-range-slider">
@@ -67,6 +89,9 @@ const DualRangeSlider: React.FC<{
           max={max}
           step={step}
           onChange={handleMinChange}
+          style={
+            controlsOverlap ? { transform: 'translateX(-2.5px)' } : undefined
+          }
         />
         <label
           htmlFor={`${idPrefix}-max-range-input`}
@@ -82,18 +107,37 @@ const DualRangeSlider: React.FC<{
           max={max}
           step={step}
           onChange={handleMaxChange}
+          style={
+            controlsOverlap ? { transform: 'translateX(2.5px)' } : undefined
+          }
         />
       </div>
 
       <div className="control-wrapper">
-        <div className="control" style={{ left: `${minPos}%` }} />
+        <div
+          className="control"
+          style={{
+            left: `${minControlPos}%`,
+            backgroundColor: controlsOverlap
+              ? color || constants.colors.frBlue
+              : '#fff',
+          }}
+        />
         <div className="rail">
           <div
             className="inner-rail"
             style={{ left: `${minPos}%`, right: `${100 - maxPos}%` }}
           />
         </div>
-        <div className="control" style={{ left: `${maxPos}%` }} />
+        <div
+          className="control"
+          style={{
+            left: `${maxControlPos}%`,
+            backgroundColor: controlsOverlap
+              ? color || constants.colors.frBlue
+              : '#fff',
+          }}
+        />
       </div>
       <style jsx>{`
         #dual-range-slider {
