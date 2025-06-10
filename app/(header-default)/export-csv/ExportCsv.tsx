@@ -96,11 +96,12 @@ export default function ExportCsv() {
         body: JSON.stringify(query),
       });
 
-      if (!response.ok) {
+      const result = await response.json();
+
+      if (result.errorType) {
         throw new Error('Erreur lors du calcul');
       }
 
-      const result = await response.json();
       setCountResult({ count: result.count, filters: query });
       setFilename(
         `annuaire-des-entreprises-etablissements-${formatDate(new Date())}.csv`
@@ -128,8 +129,10 @@ export default function ExportCsv() {
         body: JSON.stringify(countResult.filters),
       });
 
-      if (!response.ok) {
-        throw new Error("Erreur lors de l'export");
+      const result = await response.json();
+
+      if (result.errorType) {
+        throw new Error('Erreur lors de l‘export');
       }
 
       // Créer un blob à partir de la réponse
