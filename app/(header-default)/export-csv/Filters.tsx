@@ -181,60 +181,54 @@ export default function Filters({
             </div>
           )}
           <div>
-            <div className="fr-checkbox-group">
-              <input
-                type="checkbox"
-                id="categoriesEnabled"
-                name="categoriesEnabled"
-                checked={filters.categoriesEnabled}
-                onChange={(e) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    categoriesEnabled: e.target.checked,
-                  }))
-                }
-              />
-              <label className="fr-label" htmlFor="categoriesEnabled">
-                Filtrer par catégorie
-              </label>
-            </div>
-            {filters.categoriesEnabled && (
-              <div>
-                <h3 className={styles.subsectionTitle}>Catégorie</h3>
-                <ul className="fr-tags-group">
-                  <li>
-                    <button
-                      type="button"
-                      className="fr-tag"
-                      aria-pressed={filters.categories.includes('PME')}
-                      onClick={() => toggleCategories('PME')}
-                    >
-                      Petite et Moyenne Entreprise
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      type="button"
-                      className="fr-tag"
-                      aria-pressed={filters.categories.includes('ETI')}
-                      onClick={() => toggleCategories('ETI')}
-                    >
-                      Entreprise de Taille Intermédiaire
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      type="button"
-                      className="fr-tag"
-                      aria-pressed={filters.categories.includes('GE')}
-                      onClick={() => toggleCategories('GE')}
-                    >
-                      Grande Entreprise
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            )}
+            <h3 className={styles.subsectionTitle}>Catégorie</h3>
+            <ul className="fr-tags-group">
+              <li>
+                <button
+                  type="button"
+                  className="fr-tag"
+                  aria-pressed={filters.categories.includes('PME')}
+                  onClick={() => toggleCategories('PME')}
+                >
+                  Petite et Moyenne Entreprise
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  className="fr-tag"
+                  aria-pressed={filters.categories.includes('ETI')}
+                  onClick={() => toggleCategories('ETI')}
+                >
+                  Entreprise de Taille Intermédiaire
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  className="fr-tag"
+                  aria-pressed={filters.categories.includes('GE')}
+                  onClick={() => toggleCategories('GE')}
+                >
+                  Grande Entreprise
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  className="fr-tag"
+                  aria-pressed={filters.categories.length === 0}
+                  onClick={() =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      categories: [],
+                    }))
+                  }
+                >
+                  Toutes, y compris non renseignées
+                </button>
+              </li>
+            </ul>
           </div>
         </section>
       </div>

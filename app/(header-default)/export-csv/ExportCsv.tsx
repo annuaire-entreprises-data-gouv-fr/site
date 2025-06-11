@@ -14,24 +14,25 @@ export interface ExtendedSireneSearchParams extends SireneSearchParams {
   headcount: { min: number; max: number };
   categories: ('PME' | 'ETI' | 'GE')[];
   headcountEnabled: boolean;
-  categoriesEnabled: boolean;
 }
 
 const getFileSize = (count: number) => {
   return Math.ceil((count * 300) / 1000);
 };
 
+const defaultFilters: ExtendedSireneSearchParams = {
+  headcount: { min: 0, max: 14 },
+  headcountEnabled: false,
+  categories: [],
+  activity: 'active',
+  legalUnit: 'all',
+  creationDate: { from: '', to: '' },
+  updateDate: { from: '', to: '' },
+};
+
 export default function ExportCsv() {
-  const [filters, setFilters] = useState<ExtendedSireneSearchParams>({
-    headcount: { min: 0, max: 14 },
-    headcountEnabled: false,
-    categories: ['PME', 'ETI', 'GE'],
-    categoriesEnabled: false,
-    activity: 'active',
-    legalUnit: 'all',
-    creationDate: { from: '', to: '' },
-    updateDate: { from: '', to: '' },
-  });
+  const [filters, setFilters] =
+    useState<ExtendedSireneSearchParams>(defaultFilters);
   const [filename, setFilename] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isCountLoading, setIsCountLoading] = useState(false);
@@ -43,16 +44,7 @@ export default function ExportCsv() {
   const [showResults, setShowResults] = useState(false);
 
   const resetFilters = () => {
-    setFilters({
-      headcount: { min: 0, max: 14 },
-      headcountEnabled: false,
-      categories: [],
-      categoriesEnabled: false,
-      activity: 'active',
-      legalUnit: 'all',
-      creationDate: { from: '', to: '' },
-      updateDate: { from: '', to: '' },
-    });
+    setFilters(defaultFilters);
     setShowResults(false);
     setCountResult(null);
     setError(null);
@@ -67,9 +59,7 @@ export default function ExportCsv() {
         max: parseInt(getEffectifCode(filters.headcount.max)),
       },
     }),
-    ...(filters.categoriesEnabled && {
-      categories: filters.categories as ('PME' | 'ETI' | 'GE')[],
-    }),
+    categories: filters.categories as ('PME' | 'ETI' | 'GE')[],
     activity: filters.activity,
     legalUnit: filters.legalUnit,
     legalCategory: filters.legalCategory,
