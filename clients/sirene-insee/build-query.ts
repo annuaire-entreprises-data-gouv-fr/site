@@ -1,4 +1,4 @@
-import { SireneSearchParams } from '.';
+import { SireneSearchParams } from './export-csv';
 
 export class SireneQueryBuilder {
   private conditions: string[] = [];

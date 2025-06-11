@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { inseeClientGet } from '#clients/sirene-insee';
+import { exportCsvClientGet } from '#clients/sirene-insee';
 import constants from '#models/constants';
 import { SireneQueryBuilder } from './build-query';
 
@@ -52,7 +52,7 @@ export const clientSireneInsee = async (params: SireneSearchParams) => {
     queryBuilder.build()
   )}&nombre=200000&noLink=true`;
 
-  const response = await inseeClientGet<string>(url, {
+  const response = await exportCsvClientGet<string>(url, {
     headers: {
       Accept: 'text/csv',
       'Accept-Encoding': 'gzip',
@@ -80,7 +80,7 @@ export const clientSireneInseeCount = async (params: SireneSearchParams) => {
     queryBuilder.build()
   )}&nombre=0&noLink=true`;
 
-  const response = await inseeClientGet<SireneJsonSearchResult>(url, {
+  const response = await exportCsvClientGet<SireneJsonSearchResult>(url, {
     headers: {
       Accept: 'application/json',
       'Accept-Encoding': 'gzip',

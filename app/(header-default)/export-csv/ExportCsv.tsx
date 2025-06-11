@@ -1,6 +1,6 @@
 'use client';
 
-import { SireneSearchParams } from '#clients/sirene-fr';
+import { SireneSearchParams } from '#clients/sirene-insee/export-csv';
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
 import { formatDate } from '#utils/helpers';

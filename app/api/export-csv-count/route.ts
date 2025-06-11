@@ -1,19 +1,25 @@
-import { SireneSearchParams } from '#clients/sirene-fr';
+import { SireneSearchParams } from '#clients/sirene-insee/export-csv';
+import { Exception } from '#models/exceptions';
 import { getEtablissementListeCount } from '#models/sirene-fr';
+import { logErrorInSentry } from '#utils/sentry';
 import { NextRequest } from 'next/server';
-import { withHandleError } from '../data-fetching/utils';
 
 async function exportCsvCount(request: NextRequest): Promise<Response> {
-  const body = await request.json();
-  const searchParams = body as SireneSearchParams;
+  try {
+    const body = await request.json();
+    const searchParams = body as SireneSearchParams;
 
-  const response = await getEtablissementListeCount(searchParams);
+    const response = await getEtablissementListeCount(searchParams);
 
-  if (typeof response === 'number') {
-    return Response.json({ count: response });
-  } else {
-    return Response.json(response);
+    if (typeof response === 'number') {
+      return Response.json({ count: response });
+    } else {
+      return Response.json(response);
+    }
+  } catch (e) {
+    logErrorInSentry(new Exception({ name: 'Export CSV Count', cause: e }));
+    return Response.json(e);
   }
 }
 
-export const POST = withHandleError(exportCsvCount);
+export const POST = exportCsvCount;
