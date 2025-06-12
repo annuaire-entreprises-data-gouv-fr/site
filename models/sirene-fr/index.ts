@@ -2,12 +2,12 @@ import { HttpNotFound } from '#clients/exceptions';
 import {
   clientSireneInsee,
   clientSireneInseeCount,
-  SireneSearchParams,
 } from '#clients/sirene-insee/export-csv';
 import { IAPINotRespondingError } from '#models/api-not-responding';
+import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 
 export const getEtablissementListe = async (
-  searchParams: SireneSearchParams
+  searchParams: ExportCsvInput
 ): Promise<string | IAPINotRespondingError> => {
   try {
     return await clientSireneInsee(searchParams);
@@ -17,7 +17,7 @@ export const getEtablissementListe = async (
 };
 
 export const getEtablissementListeCount = async (
-  searchParams: SireneSearchParams
+  searchParams: ExportCsvInput
 ): Promise<number> => {
   try {
     return await clientSireneInseeCount(searchParams);

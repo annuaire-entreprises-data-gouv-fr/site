@@ -1,16 +1,16 @@
 'use client';
 
-import { SireneSearchParams } from '#clients/sirene-insee/export-csv';
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
 import { formatDate } from '#utils/helpers';
+import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 import { useState } from 'react';
 import { getEffectifCode } from './constants';
 import Filters from './Filters';
 import FiltersSummary from './FiltersSummary';
 import styles from './styles.module.css';
 
-export interface ExtendedSireneSearchParams extends SireneSearchParams {
+export interface ExtendedExportCsvInput extends ExportCsvInput {
   headcount: { min: number; max: number };
   categories: ('PME' | 'ETI' | 'GE')[];
   headcountEnabled: boolean;
@@ -20,7 +20,7 @@ const getFileSize = (count: number) => {
   return Math.ceil((count * 300) / 1000);
 };
 
-const defaultFilters: ExtendedSireneSearchParams = {
+const defaultFilters: ExtendedExportCsvInput = {
   headcount: { min: 0, max: 14 },
   headcountEnabled: false,
   categories: [],
@@ -32,7 +32,7 @@ const defaultFilters: ExtendedSireneSearchParams = {
 
 export default function ExportCsv() {
   const [filters, setFilters] =
-    useState<ExtendedSireneSearchParams>(defaultFilters);
+    useState<ExtendedExportCsvInput>(defaultFilters);
   const [filename, setFilename] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isCountLoading, setIsCountLoading] = useState(false);
@@ -52,7 +52,7 @@ export default function ExportCsv() {
     setIsCountLoading(false);
   };
 
-  const buildQuery = (): SireneSearchParams => ({
+  const buildQuery = (): ExportCsvInput => ({
     ...(filters.headcountEnabled && {
       headcount: {
         min: parseInt(getEffectifCode(filters.headcount.min)),
@@ -62,10 +62,6 @@ export default function ExportCsv() {
     categories: filters.categories as ('PME' | 'ETI' | 'GE')[],
     activity: filters.activity,
     legalUnit: filters.legalUnit,
-    legalCategory: filters.legalCategory,
-    naf: filters.naf,
-    label: filters.label,
-    location: filters.location,
     creationDate: filters.creationDate,
     updateDate: filters.updateDate,
   });
@@ -78,12 +74,12 @@ export default function ExportCsv() {
 
     try {
       const query = buildQuery();
-      const response = await fetch('/api/export-csv-count', {
+      const response = await fetch('/api/export-csv', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(query),
+        body: JSON.stringify({ ...query, count: true }),
       });
 
       const result = await response.json();

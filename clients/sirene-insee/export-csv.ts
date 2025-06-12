@@ -1,40 +1,8 @@
 import routes from '#clients/routes';
 import { exportCsvClientGet } from '#clients/sirene-insee';
 import constants from '#models/constants';
+import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 import { SireneQueryBuilder } from './build-query';
-
-export interface SireneSearchParams {
-  headcount?: {
-    min: number;
-    max: number;
-  };
-  categories?: ('PME' | 'ETI' | 'GE')[];
-  activity?: 'all' | 'active' | 'ceased';
-  legalUnit?: 'all' | 'hq';
-  legalCategory?: string;
-  naf?: string;
-  label?: string;
-  location?: string;
-  creationDate?: {
-    from?: string;
-    to?: string;
-  };
-  updateDate?: {
-    from?: string;
-    to?: string;
-  };
-  ess?: {
-    inclure: boolean;
-    inclureNo: boolean;
-    inclureNonRenseigne: boolean;
-  };
-  mission?: {
-    inclure: boolean;
-    inclureNo: boolean;
-    inclureNonRenseigne: boolean;
-  };
-  siretsAndSirens?: string[];
-}
 
 interface SireneJsonSearchResult {
   header: {
@@ -46,7 +14,7 @@ interface SireneJsonSearchResult {
   };
 }
 
-export const clientSireneInsee = async (params: SireneSearchParams) => {
+export const clientSireneInsee = async (params: ExportCsvInput) => {
   const queryBuilder = new SireneQueryBuilder(params);
   const url = `${routes.sireneInsee.listEtablissements}?q=${encodeURIComponent(
     queryBuilder.build()
@@ -74,7 +42,7 @@ export interface ISireneInseeCount {
   etablissements: any[];
 }
 
-export const clientSireneInseeCount = async (params: SireneSearchParams) => {
+export const clientSireneInseeCount = async (params: ExportCsvInput) => {
   const queryBuilder = new SireneQueryBuilder(params);
   const url = `${routes.sireneInsee.listEtablissements}?q=${encodeURIComponent(
     queryBuilder.build()
