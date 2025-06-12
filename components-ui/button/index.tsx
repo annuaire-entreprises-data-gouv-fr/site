@@ -5,7 +5,7 @@ type IProps = {
   role?: string;
   small?: boolean;
   to?: string;
-  type?: 'submit' | null;
+  type?: 'button' | 'submit' | null;
   disabled?: boolean;
   alt?: boolean;
   target?: '_blank';
@@ -18,6 +18,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   role,
   disabled,
   to,
+  type,
   children,
   small = false,
   alt = false,
@@ -30,7 +31,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
     {!to ? (
       <button
         role={role}
-        type="submit"
+        type={type || 'submit'}
         onClick={onClick}
         disabled={disabled}
         aria-label={ariaLabel}

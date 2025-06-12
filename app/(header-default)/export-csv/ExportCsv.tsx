@@ -26,8 +26,8 @@ const defaultFilters: ExtendedExportCsvInput = {
   categories: [],
   activity: 'active',
   legalUnit: 'all',
-  creationDate: { from: '', to: '' },
-  updateDate: { from: '', to: '' },
+  creationDate: { from: undefined, to: undefined },
+  updateDate: { from: undefined, to: undefined },
 };
 
 export default function ExportCsv() {
@@ -93,6 +93,8 @@ export default function ExportCsv() {
         `annuaire-des-entreprises-etablissements-${formatDate(new Date())}.csv`
       );
       setShowResults(true);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Une erreur est survenue');
     } finally {
@@ -207,10 +209,14 @@ export default function ExportCsv() {
       )}
 
       <div className={styles.exportActions}>
-        <ButtonLink alt={true} onClick={resetFilters}>
+        <ButtonLink type="button" alt={true} onClick={resetFilters}>
           Annuler
         </ButtonLink>
-        <ButtonLink alt={true} onClick={() => setShowResults(false)}>
+        <ButtonLink
+          type="button"
+          alt={true}
+          onClick={() => setShowResults(false)}
+        >
           Modifier votre recherche
         </ButtonLink>
       </div>
