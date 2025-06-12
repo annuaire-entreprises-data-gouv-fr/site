@@ -1,11 +1,11 @@
 import { getEffectifLabel } from './constants';
-import { ExtendedSireneSearchParams } from './ExportCsv';
+import { ExtendedExportCsvInput } from './ExportCsv';
 import styles from './styles.module.css';
 
 export default function FiltersSummary({
   filters,
 }: {
-  filters: ExtendedSireneSearchParams;
+  filters: ExtendedExportCsvInput;
 }) {
   return (
     <>
@@ -38,7 +38,7 @@ export default function FiltersSummary({
         )}
 
         {/* Catégorie */}
-        {filters.categoriesEnabled && filters.categories.length > 0 && (
+        {filters.categories && filters.categories.length > 0 && (
           <p>
             <strong>Catégorie :</strong> {filters.categories.join(', ')}
           </p>

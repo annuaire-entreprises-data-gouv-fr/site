@@ -1,9 +1,9 @@
-import { SireneSearchParams } from './export-csv';
+import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 
 export class SireneQueryBuilder {
   private conditions: string[] = [];
 
-  constructor(private params: SireneSearchParams) {
+  constructor(private params: ExportCsvInput) {
     this.buildQuery(params);
   }
 
@@ -162,7 +162,7 @@ export class SireneQueryBuilder {
     );
   };
 
-  private buildQuery = (params: SireneSearchParams) => {
+  private buildQuery = (params: ExportCsvInput) => {
     // Etat administratif de l'établissement
     // Ligne 668
     if (params.activity === 'active') {

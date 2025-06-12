@@ -3,15 +3,15 @@ import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
 import { Dispatch, SetStateAction } from 'react';
 import { getEffectifLabel } from './constants';
-import { ExtendedSireneSearchParams } from './ExportCsv';
+import { ExtendedExportCsvInput } from './ExportCsv';
 import styles from './styles.module.css';
 
 export default function Filters({
   setFilters,
   filters,
 }: {
-  setFilters: Dispatch<SetStateAction<ExtendedSireneSearchParams>>;
-  filters: ExtendedSireneSearchParams;
+  setFilters: Dispatch<SetStateAction<ExtendedExportCsvInput>>;
+  filters: ExtendedExportCsvInput;
 }) {
   const toggleCategories = (value: 'PME' | 'ETI' | 'GE') => {
     setFilters((prev) => ({
