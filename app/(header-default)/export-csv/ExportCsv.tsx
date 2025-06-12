@@ -62,8 +62,14 @@ export default function ExportCsv() {
     categories: filters.categories as ('PME' | 'ETI' | 'GE')[],
     activity: filters.activity,
     legalUnit: filters.legalUnit,
-    creationDate: filters.creationDate,
-    updateDate: filters.updateDate,
+    creationDate: {
+      from: filters.creationDate?.from || undefined,
+      to: filters.creationDate?.to || undefined,
+    },
+    updateDate: {
+      from: filters.updateDate?.from || undefined,
+      to: filters.updateDate?.to || undefined,
+    },
   });
 
   const handleCountSubmit = async (e: React.FormEvent) => {
