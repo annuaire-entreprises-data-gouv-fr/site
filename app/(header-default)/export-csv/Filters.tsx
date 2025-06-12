@@ -142,9 +142,11 @@ export default function Filters({
             <h3 className={styles.subsectionTitle}>Effectifs</h3>
             <div className={styles.sliderHeader}>
               <div className={styles.rangeDisplay}>
-                {min === max
-                  ? getEffectifLabel(min)
-                  : `${getEffectifLabel(min)} - ${getEffectifLabel(max)}`}
+                {filters.headcountEnabled
+                  ? min === max
+                    ? getEffectifLabel(min)
+                    : `${getEffectifLabel(min)} - ${getEffectifLabel(max)}`
+                  : 'Tout, y compris les effectifs non renseignés'}
               </div>
             </div>
             <DualRangeSlider
@@ -162,10 +164,15 @@ export default function Filters({
               }
               color="#000091"
               samePositionAllowed={true}
+              disabled={!filters.headcountEnabled}
             />
             <div className={styles.effectifLabels}>
-              <span>{getEffectifLabel(0)}</span>
-              <span>{getEffectifLabel(14)}</span>
+              <span>
+                {filters.headcountEnabled ? getEffectifLabel(0) : '-'}
+              </span>
+              <span>
+                {filters.headcountEnabled ? getEffectifLabel(14) : '-'}
+              </span>
             </div>
           </div>
           <div className="fr-checkbox-group">

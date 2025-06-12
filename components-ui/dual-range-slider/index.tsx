@@ -17,6 +17,7 @@ const DualRangeSlider: React.FC<{
   onChange: any;
   color: string;
   samePositionAllowed?: boolean;
+  disabled?: boolean;
 }> = ({
   idPrefix,
   label,
@@ -27,6 +28,7 @@ const DualRangeSlider: React.FC<{
   onChange,
   color,
   samePositionAllowed = false,
+  disabled = false,
 }) => {
   const [minValue, setMinValue] = useState(value ? value.min : min);
   const [maxValue, setMaxValue] = useState(value ? value.max : max);
@@ -84,6 +86,7 @@ const DualRangeSlider: React.FC<{
           max={max}
           step={step}
           onChange={handleMinChange}
+          disabled={disabled}
         />
         <label
           htmlFor={`${idPrefix}-max-range-input`}
@@ -99,6 +102,7 @@ const DualRangeSlider: React.FC<{
           max={max}
           step={step}
           onChange={handleMaxChange}
+          disabled={disabled}
         />
       </div>
 
