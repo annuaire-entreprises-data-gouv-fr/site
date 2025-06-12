@@ -172,7 +172,7 @@ const DualRangeSlider: React.FC<{
           height: 35px;
           border-radius: 0px;
           border: 0 none;
-          cursor: grab;
+          cursor: ${disabled ? 'not-allowed' : 'grab'};
           background-color: red;
         }
 
@@ -187,7 +187,7 @@ const DualRangeSlider: React.FC<{
           height: 35px;
           border-radius: 0px;
           border: 0 none;
-          cursor: grab;
+          cursor: ${disabled ? 'not-allowed' : 'grab'};
           background-color: red;
         }
 
@@ -202,7 +202,7 @@ const DualRangeSlider: React.FC<{
           height: 35px;
           border-radius: 0px;
           border: 0 none;
-          cursor: grab;
+          cursor: ${disabled ? 'not-allowed' : 'grab'};
           background-color: red;
         }
 
@@ -223,7 +223,9 @@ const DualRangeSlider: React.FC<{
         .inner-rail {
           position: absolute;
           height: 100%;
-          background: ${color || constants.colors.frBlue};
+          background: ${disabled
+            ? '#e5e5e5'
+            : color || constants.colors.frBlue};
         }
 
         .control {
@@ -232,7 +234,8 @@ const DualRangeSlider: React.FC<{
           border-radius: 50%;
           position: absolute;
           background: #fff;
-          border: 2px solid ${color || constants.colors.frBlue};
+          border: 2px solid
+            ${disabled ? '#e5e5e5' : color || constants.colors.frBlue};
           margin-left: -10px;
           z-index: 2;
         }

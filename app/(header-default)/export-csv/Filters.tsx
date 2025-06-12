@@ -162,16 +162,27 @@ export default function Filters({
                   headcount: value,
                 }))
               }
-              color="#000091"
               samePositionAllowed={true}
               disabled={!filters.headcountEnabled}
             />
             <div className={styles.effectifLabels}>
-              <span>
-                {filters.headcountEnabled ? getEffectifLabel(0) : '-'}
+              <span
+                style={{
+                  color: filters.headcountEnabled
+                    ? constants.colors.frBlue
+                    : '#e5e5e5',
+                }}
+              >
+                {getEffectifLabel(0)}
               </span>
-              <span>
-                {filters.headcountEnabled ? getEffectifLabel(14) : '-'}
+              <span
+                style={{
+                  color: filters.headcountEnabled
+                    ? constants.colors.frBlue
+                    : '#e5e5e5',
+                }}
+              >
+                {getEffectifLabel(14)}
               </span>
             </div>
           </div>
