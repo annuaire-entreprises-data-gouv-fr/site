@@ -111,12 +111,10 @@ export class SireneQueryBuilder {
       '52',
       '53',
     ];
-    const minIndex = allCodes.indexOf(
-      headcount.min.toString().padStart(2, '0')
-    );
-    const maxIndex = allCodes.indexOf(
-      headcount.max.toString().padStart(2, '0')
-    );
+    const min = headcount.min <= headcount.max ? headcount.min : headcount.max;
+    const max = headcount.min <= headcount.max ? headcount.max : headcount.min;
+    const minIndex = allCodes.indexOf(min.toString().padStart(2, '0'));
+    const maxIndex = allCodes.indexOf(max.toString().padStart(2, '0'));
 
     const rangeConditions = allCodes
       .slice(minIndex, maxIndex + 1)

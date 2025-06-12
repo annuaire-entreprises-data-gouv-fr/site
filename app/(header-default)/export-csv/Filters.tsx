@@ -22,6 +22,15 @@ export default function Filters({
     }));
   };
 
+  const min =
+    filters.headcount.min <= filters.headcount.max
+      ? filters.headcount.min
+      : filters.headcount.max;
+  const max =
+    filters.headcount.min <= filters.headcount.max
+      ? filters.headcount.max
+      : filters.headcount.min;
+
   return (
     <>
       {/* First row: Situation administrative + Taille */}
@@ -133,11 +142,9 @@ export default function Filters({
             <h3 className={styles.subsectionTitle}>Effectifs</h3>
             <div className={styles.sliderHeader}>
               <div className={styles.rangeDisplay}>
-                {filters.headcount.min === filters.headcount.max
-                  ? getEffectifLabel(filters.headcount.min)
-                  : `${getEffectifLabel(
-                      filters.headcount.min
-                    )} - ${getEffectifLabel(filters.headcount.max)}`}
+                {min === max
+                  ? getEffectifLabel(min)
+                  : `${getEffectifLabel(min)} - ${getEffectifLabel(max)}`}
               </div>
             </div>
             <DualRangeSlider

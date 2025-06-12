@@ -42,7 +42,7 @@ const DualRangeSlider: React.FC<{
     e.preventDefault();
     let newMinVal = Math.min(+e.target.value, maxValue - step);
     if (samePositionAllowed) {
-      newMinVal = Math.min(+e.target.value, maxValue);
+      newMinVal = +e.target.value;
     }
 
     if (!value) {
@@ -55,7 +55,7 @@ const DualRangeSlider: React.FC<{
     e.preventDefault();
     let newMaxVal = Math.max(+e.target.value, minValue + step);
     if (samePositionAllowed) {
-      newMaxVal = Math.max(+e.target.value, minValue);
+      newMaxVal = +e.target.value;
     }
 
     if (!value) {
@@ -66,11 +66,6 @@ const DualRangeSlider: React.FC<{
 
   const minPos = ((minValue - min) / (max - min)) * 100;
   const maxPos = ((maxValue - min) / (max - min)) * 100;
-
-  // Add small visual offset when controls overlap to ensure both are draggable
-  const controlsOverlap = minValue === maxValue;
-  const minControlPos = controlsOverlap ? minPos - 2.5 : minPos;
-  const maxControlPos = controlsOverlap ? maxPos + 2.5 : maxPos;
 
   return (
     <div id="dual-range-slider">
@@ -89,9 +84,6 @@ const DualRangeSlider: React.FC<{
           max={max}
           step={step}
           onChange={handleMinChange}
-          style={
-            controlsOverlap ? { transform: 'translateX(-2.5px)' } : undefined
-          }
         />
         <label
           htmlFor={`${idPrefix}-max-range-input`}
@@ -107,37 +99,18 @@ const DualRangeSlider: React.FC<{
           max={max}
           step={step}
           onChange={handleMaxChange}
-          style={
-            controlsOverlap ? { transform: 'translateX(2.5px)' } : undefined
-          }
         />
       </div>
 
       <div className="control-wrapper">
-        <div
-          className="control"
-          style={{
-            left: `${minControlPos}%`,
-            backgroundColor: controlsOverlap
-              ? color || constants.colors.frBlue
-              : '#fff',
-          }}
-        />
+        <div className="control" style={{ left: `${minPos}%` }} />
         <div className="rail">
           <div
             className="inner-rail"
             style={{ left: `${minPos}%`, right: `${100 - maxPos}%` }}
           />
         </div>
-        <div
-          className="control"
-          style={{
-            left: `${maxControlPos}%`,
-            backgroundColor: controlsOverlap
-              ? color || constants.colors.frBlue
-              : '#fff',
-          }}
-        />
+        <div className="control" style={{ left: `${maxPos}%` }} />
       </div>
       <style jsx>{`
         #dual-range-slider {
