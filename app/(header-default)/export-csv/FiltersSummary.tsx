@@ -7,6 +7,14 @@ export default function FiltersSummary({
 }: {
   filters: ExtendedExportCsvInput;
 }) {
+  const min =
+    filters.headcount.min <= filters.headcount.max
+      ? filters.headcount.min
+      : filters.headcount.max;
+  const max =
+    filters.headcount.min <= filters.headcount.max
+      ? filters.headcount.max
+      : filters.headcount.min;
   return (
     <>
       <div className={styles.filtersRecap}>
@@ -32,8 +40,8 @@ export default function FiltersSummary({
         {/* Taille */}
         {filters.headcountEnabled && (
           <p>
-            <strong>Taille :</strong> {getEffectifLabel(filters.headcount.min)}{' '}
-            - {getEffectifLabel(filters.headcount.max)}
+            <strong>Taille :</strong> {getEffectifLabel(min)} -{' '}
+            {getEffectifLabel(max)}
           </p>
         )}
 
