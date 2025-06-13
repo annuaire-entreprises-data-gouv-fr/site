@@ -140,31 +140,23 @@ export default function Filters({
           </h2>
           <div className={styles.sizeSliderContainer}>
             <h3 className={styles.subsectionTitle}>Effectifs</h3>
-            <div className={styles.sliderHeader}>
-              <div className={styles.rangeDisplay}>
-                {filters.headcountEnabled
-                  ? min === max
-                    ? getEffectifLabel(min)
-                    : `${getEffectifLabel(min)} - ${getEffectifLabel(max)}`
-                  : 'Tout, y compris les effectifs non renseignés'}
-              </div>
+            <div className="fr-checkbox-group">
+              <input
+                type="checkbox"
+                id="includeEmptyEffectif"
+                name="includeEmptyEffectif"
+                checked={!filters.headcountEnabled}
+                onChange={(e) =>
+                  setFilters((prev) => ({
+                    ...prev,
+                    headcountEnabled: !e.target.checked,
+                  }))
+                }
+              />
+              <label className="fr-label" htmlFor="includeEmptyEffectif">
+                Tout, y compris les effectifs non renseignés
+              </label>
             </div>
-            <DualRangeSlider
-              idPrefix="headcount"
-              label="Effectifs"
-              min={0}
-              max={14}
-              step={1}
-              value={filters.headcount}
-              onChange={(value: { min: number; max: number }) =>
-                setFilters((prev) => ({
-                  ...prev,
-                  headcount: value,
-                }))
-              }
-              samePositionAllowed={true}
-              disabled={!filters.headcountEnabled}
-            />
             <div className={styles.effectifLabels}>
               <span
                 style={{
@@ -185,23 +177,32 @@ export default function Filters({
                 {getEffectifLabel(14)}
               </span>
             </div>
-          </div>
-          <div className="fr-checkbox-group">
-            <input
-              type="checkbox"
-              id="includeEmptyEffectif"
-              name="includeEmptyEffectif"
-              checked={!filters.headcountEnabled}
-              onChange={(e) =>
+            <DualRangeSlider
+              idPrefix="headcount"
+              label="Effectifs"
+              min={0}
+              max={14}
+              step={1}
+              value={filters.headcount}
+              onChange={(value: { min: number; max: number }) =>
                 setFilters((prev) => ({
                   ...prev,
-                  headcountEnabled: !e.target.checked,
+                  headcount: value,
                 }))
               }
+              samePositionAllowed={true}
+              disabled={!filters.headcountEnabled}
             />
-            <label className="fr-label" htmlFor="includeEmptyEffectif">
-              Tout, y compris les effectifs non renseignés
-            </label>
+
+            <div className={styles.sliderHeader}>
+              <div className={styles.rangeDisplay}>
+                {filters.headcountEnabled
+                  ? min === max
+                    ? getEffectifLabel(min)
+                    : `${getEffectifLabel(min)} - ${getEffectifLabel(max)}`
+                  : 'Tout, y compris les effectifs non renseignés'}
+              </div>
+            </div>
           </div>
           <div>
             <h3 className={styles.subsectionTitle}>Catégorie</h3>
