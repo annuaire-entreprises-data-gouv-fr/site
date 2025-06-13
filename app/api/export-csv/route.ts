@@ -59,8 +59,18 @@ async function exportCsv(request: NextRequest): Promise<Response> {
       );
     }
     if (e instanceof APIResponseError) {
-      logErrorInSentry(new Exception({ name: e.name, cause: e }));
-      return Response.json(e.data, { status: 500 });
+      logErrorInSentry(
+        new Exception({
+          name: 'API Sirene INSEE Export CSV',
+          cause: e,
+        })
+      );
+      return Response.json(
+        {
+          error: 'Internal server error',
+        },
+        { status: 500 }
+      );
     }
 
     logErrorInSentry(new Exception({ name: 'Export CSV', cause: e }));
