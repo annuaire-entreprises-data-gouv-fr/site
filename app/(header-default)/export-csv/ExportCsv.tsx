@@ -91,7 +91,9 @@ export default function ExportCsv() {
       const body = await response.json();
 
       if (body.error) {
-        throw new Error('Erreur lors du calcul');
+        throw new Error(
+          'Une erreur est survenue, veuillez réessayer plus tard'
+        );
       }
 
       setCountResult({ count: body.count, filters: query });
@@ -102,7 +104,11 @@ export default function ExportCsv() {
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Une erreur est survenue');
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Une erreur est survenue, veuillez réessayer plus tard'
+      );
     } finally {
       setIsCountLoading(false);
     }
@@ -126,7 +132,9 @@ export default function ExportCsv() {
       const body = await response.json();
 
       if (body.error) {
-        throw new Error('Erreur lors de l‘export');
+        throw new Error(
+          'Une erreur est survenue, veuillez réessayer plus tard'
+        );
       }
 
       // Créer un blob à partir de la réponse
@@ -143,7 +151,11 @@ export default function ExportCsv() {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Une erreur est survenue');
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Une erreur est survenue, veuillez réessayer plus tard'
+      );
     } finally {
       setIsLoading(false);
     }
