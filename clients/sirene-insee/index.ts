@@ -130,6 +130,14 @@ const fallbackClient = new httpInseeClient(
   process.env.INSEE_PASSWORD
 );
 
+const exportCsvClient = new httpInseeClient(
+  routes.sireneInsee.auth,
+  process.env.INSEE_CLIENT_ID_EXPORT_CSV,
+  process.env.INSEE_CLIENT_SECRET_EXPORT_CSV,
+  process.env.INSEE_USERNAME,
+  process.env.INSEE_PASSWORD
+);
+
 /**
  * Insee API client
  *
@@ -146,6 +154,23 @@ export async function inseeClientGet<T>(
   const client = useFallback ? fallbackClient : defaultClient;
   return (await client.get(route, {
     timeout: constants.timeout.S,
+    ...config,
+  })) as T;
+}
+
+/**
+ * Insee API export csvclient
+ *
+ * @param route
+ * @param config
+ * @returns
+ */
+export async function exportCsvClientGet<T>(
+  route: string,
+  config: IDefaultRequestConfig = {}
+): Promise<T> {
+  return (await exportCsvClient.get(route, {
+    timeout: constants.timeout.XXXL,
     ...config,
   })) as T;
 }
