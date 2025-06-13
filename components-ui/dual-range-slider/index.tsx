@@ -13,9 +13,9 @@ const DualRangeSlider: React.FC<{
   min: number;
   max: number;
   step: number;
-  value: any;
-  onChange: any;
-  color: string;
+  value: { min: number; max: number };
+  onChange: (value: { min: number; max: number }) => void;
+  color?: string;
   samePositionAllowed?: boolean;
   disabled?: boolean;
 }> = ({
@@ -26,7 +26,7 @@ const DualRangeSlider: React.FC<{
   value,
   step,
   onChange,
-  color,
+  color = constants.colors.frBlue,
   samePositionAllowed = false,
   disabled = false,
 }) => {
@@ -223,9 +223,7 @@ const DualRangeSlider: React.FC<{
         .inner-rail {
           position: absolute;
           height: 100%;
-          background: ${disabled
-            ? '#e5e5e5'
-            : color || constants.colors.frBlue};
+          background: ${disabled ? '#e5e5e5' : color};
         }
 
         .control {
@@ -234,8 +232,7 @@ const DualRangeSlider: React.FC<{
           border-radius: 50%;
           position: absolute;
           background: #fff;
-          border: 2px solid
-            ${disabled ? '#e5e5e5' : color || constants.colors.frBlue};
+          border: 2px solid ${disabled ? '#e5e5e5' : color};
           margin-left: -10px;
           z-index: 2;
         }
