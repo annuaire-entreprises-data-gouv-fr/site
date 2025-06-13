@@ -181,13 +181,18 @@ export class SireneQueryBuilder {
       this.conditions.push('etablissementSiege:true');
     }
 
-    // result = addGeo(result, fichier, nomenclatureRegions);
+    // Localisation
+    // if (params.location) {
+    //   this.addLocationConditions(params.location);
+    // }
 
-    // result = addApet(result, fichier, nomenclatureSections);
+    // Activité
+    // if (params.activity) {
+    //   this.addActivityConditions(params.activity);
+    // }
 
     // // Catégorie juridique
     // if (params.legalCategory) {
-    //   this.conditions.push(`categorieJuridiqueUniteLegale:${params.legalCategory}`);
     // }
 
     // Tranche d'effectifs

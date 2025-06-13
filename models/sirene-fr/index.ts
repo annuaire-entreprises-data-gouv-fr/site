@@ -3,12 +3,11 @@ import {
   clientSireneInsee,
   clientSireneInseeCount,
 } from '#clients/sirene-insee/export-csv';
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 
 export const getEtablissementListe = async (
   searchParams: ExportCsvInput
-): Promise<string | IAPINotRespondingError> => {
+): Promise<string> => {
   try {
     return await clientSireneInsee(searchParams);
   } catch (e: any) {
