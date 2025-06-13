@@ -39,7 +39,7 @@ export default function ExportCsv() {
   const [error, setError] = useState<string | null>(null);
   const [countResult, setCountResult] = useState<{
     count: number;
-    filters: any;
+    filters: ExportCsvInput;
   } | null>(null);
   const [showResults, setShowResults] = useState(false);
 
