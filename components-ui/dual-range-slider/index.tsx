@@ -1,5 +1,5 @@
 import constants from '#models/constants';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 /**
  * Component with dual slider
@@ -13,8 +13,8 @@ const DualRangeSlider: React.FC<{
   min: number;
   max: number;
   step: number;
-  value: { min: number; max: number };
   onChange: (value: { min: number; max: number }) => void;
+  defaultValue?: { min: number; max: number };
   color?: string;
   samePositionAllowed?: boolean;
   disabled?: boolean;
@@ -23,22 +23,15 @@ const DualRangeSlider: React.FC<{
   label,
   min,
   max,
-  value,
   step,
   onChange,
+  defaultValue,
   color = constants.colors.frBlue,
   samePositionAllowed = false,
   disabled = false,
 }) => {
-  const [minValue, setMinValue] = useState(value ? value.min : min);
-  const [maxValue, setMaxValue] = useState(value ? value.max : max);
-
-  useEffect(() => {
-    if (value) {
-      setMinValue(value.min);
-      setMaxValue(value.max);
-    }
-  }, [value]);
+  const [minValue, setMinValue] = useState(defaultValue?.min ?? min);
+  const [maxValue, setMaxValue] = useState(defaultValue?.max ?? max);
 
   const handleMinChange = (e: any) => {
     e.preventDefault();
@@ -47,10 +40,10 @@ const DualRangeSlider: React.FC<{
       newMinVal = +e.target.value;
     }
 
-    if (!value) {
-      setMinValue(newMinVal);
-    }
-    onChange({ min: newMinVal, max: maxValue });
+    setMinValue(newMinVal);
+    const min = newMinVal <= maxValue ? newMinVal : maxValue;
+    const max = newMinVal > maxValue ? newMinVal : maxValue;
+    onChange({ min, max });
   };
 
   const handleMaxChange = (e: any) => {
@@ -60,10 +53,10 @@ const DualRangeSlider: React.FC<{
       newMaxVal = +e.target.value;
     }
 
-    if (!value) {
-      setMaxValue(newMaxVal);
-    }
-    onChange({ min: minValue, max: newMaxVal });
+    setMaxValue(newMaxVal);
+    const min = minValue <= newMaxVal ? minValue : newMaxVal;
+    const max = minValue > newMaxVal ? minValue : newMaxVal;
+    onChange({ min, max });
   };
 
   const minPos = ((minValue - min) / (max - min)) * 100;

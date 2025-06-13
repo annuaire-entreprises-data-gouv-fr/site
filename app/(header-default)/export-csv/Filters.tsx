@@ -22,15 +22,6 @@ export default function Filters({
     }));
   };
 
-  const min =
-    filters.headcount.min <= filters.headcount.max
-      ? filters.headcount.min
-      : filters.headcount.max;
-  const max =
-    filters.headcount.min <= filters.headcount.max
-      ? filters.headcount.max
-      : filters.headcount.min;
-
   return (
     <>
       {/* First row: Situation administrative + Taille */}
@@ -183,7 +174,6 @@ export default function Filters({
               min={0}
               max={14}
               step={1}
-              value={filters.headcount}
               onChange={(value: { min: number; max: number }) =>
                 setFilters((prev) => ({
                   ...prev,
@@ -197,9 +187,11 @@ export default function Filters({
             <div className={styles.sliderHeader}>
               <div className={styles.rangeDisplay}>
                 {filters.headcountEnabled
-                  ? min === max
-                    ? getEffectifLabel(min)
-                    : `${getEffectifLabel(min)} - ${getEffectifLabel(max)}`
+                  ? filters.headcount.min === filters.headcount.max
+                    ? getEffectifLabel(filters.headcount.min)
+                    : `${getEffectifLabel(
+                        filters.headcount.min
+                      )} <-> ${getEffectifLabel(filters.headcount.max)}`
                   : 'Tout, y compris les effectifs non renseignés'}
               </div>
             </div>

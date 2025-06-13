@@ -126,8 +126,8 @@ export const FilterFinances: React.FC<{
           label="Chiffre d‘affaires"
           min={0}
           max={CA.length - 1}
-          value={valueCA}
           step={1}
+          defaultValue={valueCA}
           onChange={setValueCA}
           color={constants.chartColors[4]}
         />
@@ -144,8 +144,8 @@ export const FilterFinances: React.FC<{
           label="Résultat net"
           min={0}
           max={Res.length - 1}
-          value={valueRes}
           step={1}
+          defaultValue={valueRes}
           onChange={setValueRes}
           color={constants.chartColors[1]}
         />
