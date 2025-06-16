@@ -24,16 +24,13 @@ export default function Filters({
 
   return (
     <>
-      {/* First row: Situation administrative + Taille */}
       <div className={styles.row}>
-        {/* Filtrer par situation administrative */}
         <section className={styles.formSection}>
           <h2>
             Filtrer par situation administrative{' '}
             <Icon color={constants.colors.frBlue} slug="lightbulbFill" />
           </h2>
 
-          {/* Par activité */}
           <h3 className={styles.subsectionTitle}>Par activité</h3>
           <div className="fr-fieldset__element">
             <div className="fr-radio-group">
@@ -96,7 +93,6 @@ export default function Filters({
             </div>
           </div>
 
-          {/* Par type d'unité légale */}
           <h3 className={styles.subsectionTitle}>Par type d‘unité légale</h3>
           <div className="fr-checkbox-group">
             <input
@@ -123,7 +119,6 @@ export default function Filters({
           </div>
         </section>
 
-        {/* Filtrer par taille */}
         <section className={styles.formSection}>
           <h2>
             Filtrer par taille{' '}
@@ -249,80 +244,6 @@ export default function Filters({
         </section>
       </div>
 
-      {/* <div className={styles.row}>
-      <section className={styles.section}>
-        <h2>
-          Filtrer par localisation <Icon slug="mapPinFill" />
-        </h2>
-        <Select
-          label="Région et département"
-          name="region"
-          options={locationOptions}
-          defaultValue={filters.location}
-          onChange={(e) =>
-            setFilters(prev => ({
-              ...prev,
-              location: (e.target as HTMLInputElement).value
-            }))
-          }
-        />
-
-        <Select
-          label="Commune"
-          name="commune"
-          options={locationOptions}
-          defaultValue={filters.location}
-          onChange={(e) =>
-            setFilters(prev => ({
-              ...prev,
-              location: (e.target as HTMLInputElement).value
-            }))
-          }
-        />
-      </section>
-
-      <section className={styles.section}>
-        <h2>
-          Filtrer par type de structure <Icon slug="buildingFill" />
-        </h2>
-        <div className={styles.structureSelects}>
-          <Select
-            label="Catégorie juridique"
-            name="legalCategory"
-            options={legalOptions}
-            defaultValue={filters.legalCategory}
-            onChange={(e) =>
-              setFilters(prev => ({
-                ...prev,
-                legalCategory: (e.target as HTMLInputElement).value
-              }))
-            }
-          />
-          <Select
-            label="Code NAF / APE"
-            name="naf"
-            options={nafOptions}
-            defaultValue={filters.naf}
-            onChange={(e) => setFilters(prev => ({
-              ...prev,
-              naf: (e.target as HTMLInputElement).value
-            }))}
-          />
-          <Select
-            label="Label ou certificat"
-            name="label"
-            options={labelOptions}
-            defaultValue={filters.label}
-            onChange={(e) => setFilters(prev => ({
-              ...prev,
-              label: (e.target as HTMLInputElement).value
-            }))}
-          />
-        </div>
-      </section>
-    </div> */}
-
-      {/* Filtres par date */}
       <section className={styles.formSection}>
         <h2>
           Filtrer par date{' '}

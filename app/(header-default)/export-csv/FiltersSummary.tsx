@@ -11,7 +11,6 @@ export default function FiltersSummary({
     <>
       <div className={styles.filtersRecap}>
         <h2>Récapitulatif des filtres :</h2>
-        {/* Activité */}
         <p>
           <strong>État administratif des établissements :</strong>{' '}
           {filters.activity === 'all'
@@ -21,7 +20,6 @@ export default function FiltersSummary({
             : 'Établissements fermés'}
         </p>
 
-        {/* Type d'unité légale */}
         {filters.legalUnit === 'hq' && (
           <p>
             <strong>Type d‘établissement :</strong> L‘établissement siège
@@ -29,7 +27,6 @@ export default function FiltersSummary({
           </p>
         )}
 
-        {/* Taille */}
         {filters.headcountEnabled && (
           <p>
             <strong>Taille :</strong> {getEffectifLabel(filters.headcount.min)}{' '}
@@ -37,14 +34,12 @@ export default function FiltersSummary({
           </p>
         )}
 
-        {/* Catégorie */}
         {filters.categories && filters.categories.length > 0 && (
           <p>
             <strong>Catégorie :</strong> {filters.categories.join(', ')}
           </p>
         )}
 
-        {/* Dates de création */}
         {(filters.creationDate?.from || filters.creationDate?.to) && (
           <p>
             <strong>Date de création :</strong>
@@ -59,7 +54,6 @@ export default function FiltersSummary({
           </p>
         )}
 
-        {/* Dates de mise à jour */}
         {(filters.updateDate?.from || filters.updateDate?.to) && (
           <p>
             <strong>Date de mise à jour :</strong>

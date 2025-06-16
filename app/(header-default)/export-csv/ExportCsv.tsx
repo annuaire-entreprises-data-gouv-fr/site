@@ -2,7 +2,7 @@
 
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
-import { formatDate } from '#utils/helpers';
+import { formatDate, formatNumber } from '#utils/helpers';
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 import { useState } from 'react';
 import { getEffectifCode } from './constants';
@@ -137,10 +137,8 @@ export default function ExportCsv() {
         );
       }
 
-      // Créer un blob à partir de la réponse
       const blob = await response.blob();
 
-      // Créer un lien de téléchargement
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -199,8 +197,7 @@ export default function ExportCsv() {
 
       {countResult.count >= 200000 ? (
         <div className={styles.fileDownloadSection}>
-          Le nombre de résultats (
-          {Intl.NumberFormat('fr-FR').format(countResult.count)}) dépasse la
+          Le nombre de résultats ({formatNumber(countResult.count)}) dépasse la
           limite autorisée de 200 000. Veuillez affiner vos critères de
           recherche pour réduire le nombre de résultats.
         </div>
@@ -216,11 +213,7 @@ export default function ExportCsv() {
               </div>
             )}
             <div className={styles.fileSize}>
-              CSV - Environ{' '}
-              {Intl.NumberFormat('fr-FR').format(
-                getFileSize(countResult.count)
-              )}{' '}
-              Ko
+              CSV - Environ {formatNumber(getFileSize(countResult.count))} Ko
             </div>
           </div>
         </div>
