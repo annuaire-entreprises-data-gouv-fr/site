@@ -1,4 +1,7 @@
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
+import {
+  effectifCodes,
+} from './constants';
 
 export class SireneQueryBuilder {
   private conditions: string[] = [];
@@ -94,36 +97,19 @@ export class SireneQueryBuilder {
     headcount: { min: number; max: number },
     isHq?: boolean
   ) => {
-    const allCodes = [
-      '00',
-      '01',
-      '02',
-      '03',
-      '11',
-      '12',
-      '21',
-      '22',
-      '31',
-      '32',
-      '41',
-      '42',
-      '51',
-      '52',
-      '53',
-    ];
-    const minIndex = allCodes.indexOf(
+    const minIndex = effectifCodes.indexOf(
       headcount.min.toString().padStart(2, '0')
     );
-    const maxIndex = allCodes.indexOf(
+    const maxIndex = effectifCodes.indexOf(
       headcount.max.toString().padStart(2, '0')
     );
 
-    const rangeConditions = allCodes
+    const rangeConditions = effectifCodes
       .slice(minIndex, maxIndex + 1)
-      .map((code) =>
+      .map((effectifCode) =>
         isHq
-          ? `trancheEffectifsUniteLegale:${code}`
-          : `trancheEffectifsEtablissement:${code}`
+          ? `trancheEffectifsUniteLegale:${effectifCode}`
+          : `trancheEffectifsEtablissement:${effectifCode}`
       );
     this.conditions.push(`(${rangeConditions.join(' OR ')})`);
   };
