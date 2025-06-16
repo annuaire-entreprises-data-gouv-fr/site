@@ -16,6 +16,15 @@ class APIResponseError extends Error {
 }
 
 async function exportCsv(request: NextRequest): Promise<Response> {
+  if (process.env.EXPORT_CSV_ENABLED !== 'enabled') {
+    return Response.json(
+      {
+        error: 'Export CSV is not enabled',
+      },
+      { status: 400 }
+    );
+  }
+
   try {
     const body = await request.json();
     const validatedData = exportCsvSchema.parse(body);

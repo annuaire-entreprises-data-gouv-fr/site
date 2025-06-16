@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import ExportCsv from './ExportCsv';
 
 export const metadata: Metadata = {
@@ -10,5 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default function ExportCSV() {
+  if (process.env.EXPORT_CSV_ENABLED !== 'enabled') {
+    return redirect('/');
+  }
   return <ExportCsv />;
 }
