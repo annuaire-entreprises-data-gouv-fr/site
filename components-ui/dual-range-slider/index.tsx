@@ -1,5 +1,5 @@
 import constants from '#models/constants';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 /**
  * Component with dual slider
@@ -13,38 +13,50 @@ const DualRangeSlider: React.FC<{
   min: number;
   max: number;
   step: number;
-  value: any;
-  onChange: any;
-  color: string;
-}> = ({ idPrefix, label, min, max, value, step, onChange, color }) => {
-  const [minValue, setMinValue] = useState(value ? value.min : min);
-  const [maxValue, setMaxValue] = useState(value ? value.max : max);
-
-  useEffect(() => {
-    if (value) {
-      setMinValue(value.min);
-      setMaxValue(value.max);
-    }
-  }, [value]);
+  onChange: (value: { min: number; max: number }) => void;
+  defaultValue?: { min: number; max: number };
+  color?: string;
+  samePositionAllowed?: boolean;
+  disabled?: boolean;
+}> = ({
+  idPrefix,
+  label,
+  min,
+  max,
+  step,
+  onChange,
+  defaultValue,
+  color = constants.colors.frBlue,
+  samePositionAllowed = false,
+  disabled = false,
+}) => {
+  const [minValue, setMinValue] = useState(defaultValue?.min ?? min);
+  const [maxValue, setMaxValue] = useState(defaultValue?.max ?? max);
 
   const handleMinChange = (e: any) => {
     e.preventDefault();
-    const newMinVal = Math.min(+e.target.value, maxValue - step);
-
-    if (!value) {
-      setMinValue(newMinVal);
+    let newMinVal = Math.min(+e.target.value, maxValue - step);
+    if (samePositionAllowed) {
+      newMinVal = +e.target.value;
     }
-    onChange({ min: newMinVal, max: maxValue });
+
+    setMinValue(newMinVal);
+    const min = newMinVal <= maxValue ? newMinVal : maxValue;
+    const max = newMinVal > maxValue ? newMinVal : maxValue;
+    onChange({ min, max });
   };
 
   const handleMaxChange = (e: any) => {
     e.preventDefault();
-    const newMaxVal = Math.max(+e.target.value, minValue + step);
-
-    if (!value) {
-      setMaxValue(newMaxVal);
+    let newMaxVal = Math.max(+e.target.value, minValue + step);
+    if (samePositionAllowed) {
+      newMaxVal = +e.target.value;
     }
-    onChange({ min: minValue, max: newMaxVal });
+
+    setMaxValue(newMaxVal);
+    const min = minValue <= newMaxVal ? minValue : newMaxVal;
+    const max = minValue > newMaxVal ? minValue : newMaxVal;
+    onChange({ min, max });
   };
 
   const minPos = ((minValue - min) / (max - min)) * 100;
@@ -67,6 +79,7 @@ const DualRangeSlider: React.FC<{
           max={max}
           step={step}
           onChange={handleMinChange}
+          disabled={disabled}
         />
         <label
           htmlFor={`${idPrefix}-max-range-input`}
@@ -82,6 +95,7 @@ const DualRangeSlider: React.FC<{
           max={max}
           step={step}
           onChange={handleMaxChange}
+          disabled={disabled}
         />
       </div>
 
@@ -151,7 +165,7 @@ const DualRangeSlider: React.FC<{
           height: 35px;
           border-radius: 0px;
           border: 0 none;
-          cursor: grab;
+          cursor: ${disabled ? 'not-allowed' : 'grab'};
           background-color: red;
         }
 
@@ -166,7 +180,7 @@ const DualRangeSlider: React.FC<{
           height: 35px;
           border-radius: 0px;
           border: 0 none;
-          cursor: grab;
+          cursor: ${disabled ? 'not-allowed' : 'grab'};
           background-color: red;
         }
 
@@ -181,7 +195,7 @@ const DualRangeSlider: React.FC<{
           height: 35px;
           border-radius: 0px;
           border: 0 none;
-          cursor: grab;
+          cursor: ${disabled ? 'not-allowed' : 'grab'};
           background-color: red;
         }
 
@@ -202,7 +216,7 @@ const DualRangeSlider: React.FC<{
         .inner-rail {
           position: absolute;
           height: 100%;
-          background: ${color || constants.colors.frBlue};
+          background: ${disabled ? '#e5e5e5' : color};
         }
 
         .control {
@@ -211,7 +225,7 @@ const DualRangeSlider: React.FC<{
           border-radius: 50%;
           position: absolute;
           background: #fff;
-          border: 2px solid ${color || constants.colors.frBlue};
+          border: 2px solid ${disabled ? '#e5e5e5' : color};
           margin-left: -10px;
           z-index: 2;
         }

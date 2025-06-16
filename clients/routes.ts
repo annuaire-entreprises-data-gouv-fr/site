@@ -233,6 +233,7 @@ const routes = {
       `https://api.insee.fr/api-sirene/prive/3.11/siren/${siren}`,
     getBySiret: (siret: string) =>
       `https://api.insee.fr/api-sirene/prive/3.11/siret/${siret}`,
+    listEtablissements: 'https://api.insee.fr/api-sirene/prive/3.11/siret',
   },
   rechercheEntreprise: {
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
