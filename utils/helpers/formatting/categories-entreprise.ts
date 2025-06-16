@@ -1,6 +1,10 @@
 import { IUniteLegale } from '#models/core/types';
 
-export const categoriesEntreprisesOptions = [
+export type CategoryEntreprise = 'PME' | 'ETI' | 'GE';
+export const categoriesEntreprisesOptions: {
+  label: string;
+  value: CategoryEntreprise;
+}[] = [
   {
     label: 'Petite ou Moyenne Entreprise',
     value: 'PME',
