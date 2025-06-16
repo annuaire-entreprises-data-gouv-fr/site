@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/export-csv',
   },
-  robots: 'noindex, nofollow',
+  robots: 'index, follow',
 };
 
 export default function ExportCSV() {
