@@ -6,7 +6,7 @@ import {
 export class SireneQueryBuilder {
   private conditions: string[] = [];
 
-  constructor(private params: ExportCsvInput) {
+  constructor(params: ExportCsvInput) {
     this.buildQuery(params);
   }
 
@@ -229,7 +229,7 @@ export class SireneQueryBuilder {
     // Retirer les établissements non diffusibles
     // Ligne 715
     this.conditions.push(
-      '(statutDiffusionEtablissement:O OR statutDiffusionEtablissement:M OR statutDiffusionEtablissement:P)'
+      '(statutDiffusionEtablissement:O OR statutDiffusionEtablissement:P)'
     );
   };
 }
