@@ -7,6 +7,19 @@ import { getEffectifLabel } from './constants';
 import { ExtendedExportCsvInput } from './ExportCsv';
 import styles from './styles.module.css';
 
+export const selectedEffectifLabel = (filters: ExtendedExportCsvInput) => {
+  if (filters.headcountEnabled) {
+    return filters.headcount.min === filters.headcount.max
+      ? `De ${getEffectifLabel(filters.headcount.min)} inclus`
+      : `De ${getEffectifLabel(
+          filters.headcount.min
+        )} jusqu'à ${getEffectifLabel(filters.headcount.max)} inclus`;
+  }
+  return 'Tout, y compris les effectifs non renseignés';
+};
+
+const todayString = new Date().toISOString().split('T')[0];
+
 export default function Filters({
   setFilters,
   filters,
@@ -32,7 +45,7 @@ export default function Filters({
             <Icon color={constants.colors.frBlue} slug="lightbulbFill" />
           </h2>
 
-          <h3 className={styles.subsectionTitle}>Par activité</h3>
+          <h3 className={styles.subsectionTitle}>Par état administratif</h3>
           <div className="fr-fieldset__element">
             <div className="fr-radio-group">
               <input
@@ -69,7 +82,7 @@ export default function Filters({
                 }
               />
               <label htmlFor="activity-2" className={styles.radioLabel}>
-                Ouvert uniquement
+                En activité uniquement
               </label>
             </div>
           </div>
@@ -89,12 +102,14 @@ export default function Filters({
                 }
               />
               <label htmlFor="activity-3" className={styles.radioLabel}>
-                Fermé uniquement
+                Cessé uniquement
               </label>
             </div>
           </div>
 
-          <h3 className={styles.subsectionTitle}>Par type d‘unité légale</h3>
+          <h3 className={styles.subsectionTitle}>
+            Par type d&apos;établissement
+          </h3>
           <div className="fr-checkbox-group">
             <input
               type="checkbox"
@@ -182,13 +197,7 @@ export default function Filters({
 
             <div className={styles.sliderHeader}>
               <div className={styles.rangeDisplay}>
-                {filters.headcountEnabled
-                  ? filters.headcount.min === filters.headcount.max
-                    ? getEffectifLabel(filters.headcount.min)
-                    : `${getEffectifLabel(
-                        filters.headcount.min
-                      )} <-> ${getEffectifLabel(filters.headcount.max)}`
-                  : 'Tout, y compris les effectifs non renseignés'}
+                {selectedEffectifLabel(filters)}
               </div>
             </div>
           </div>
@@ -241,7 +250,7 @@ export default function Filters({
               <input
                 type="date"
                 className={`fr-input ${styles.dateInput}`}
-                value={filters.creationDate?.from}
+                max={filters.creationDate?.to || todayString}
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
@@ -258,7 +267,8 @@ export default function Filters({
               <input
                 type="date"
                 className={`fr-input ${styles.dateInput}`}
-                value={filters.creationDate?.to}
+                min={filters.creationDate?.from}
+                max={todayString}
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
@@ -278,7 +288,7 @@ export default function Filters({
               <input
                 type="date"
                 className={`fr-input ${styles.dateInput}`}
-                value={filters.updateDate?.from}
+                max={filters.updateDate?.to || todayString}
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
@@ -295,7 +305,8 @@ export default function Filters({
               <input
                 type="date"
                 className={`fr-input ${styles.dateInput}`}
-                value={filters.updateDate?.to}
+                min={filters.updateDate?.from}
+                max={todayString}
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,

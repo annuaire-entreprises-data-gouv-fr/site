@@ -52,6 +52,14 @@ export default function ExportCsv() {
     setIsCountLoading(false);
   };
 
+  const modifyFilters = () => {
+    setShowResults(false);
+    setCountResult(null);
+    setError(null);
+    setIsLoading(false);
+    setIsCountLoading(false);
+  };
+
   const buildQuery = (): ExportCsvInput => ({
     ...(filters.headcountEnabled && {
       headcount: {
@@ -92,7 +100,7 @@ export default function ExportCsv() {
 
       if (body.error) {
         throw new Error(
-          'Une erreur est survenue, veuillez réessayer plus tard'
+          body.error || 'Une erreur est survenue, veuillez réessayer plus tard'
         );
       }
 
@@ -129,12 +137,15 @@ export default function ExportCsv() {
         body: JSON.stringify(countResult.filters),
       });
 
-      const body = await response.json();
-
-      if (body.error) {
-        throw new Error(
-          'Une erreur est survenue, veuillez réessayer plus tard'
-        );
+      const contentType = response.headers.get('Content-Type');
+      if (contentType?.includes('application/json')) {
+        const body = await response.json();
+        if (body.error) {
+          throw new Error(
+            body.error ||
+              'Une erreur est survenue, veuillez réessayer plus tard'
+          );
+        }
       }
 
       const blob = await response.blob();
@@ -182,9 +193,8 @@ export default function ExportCsv() {
             {isCountLoading ? 'Calcul en cours...' : 'Calculer les résultats'}
           </ButtonLink>
         </div>
-
-        {error && <div className={styles.errorMessage}>{error}</div>}
       </form>
+      {error && <div className={styles.errorMessage}>{error}</div>}
     </div>
   ) : (
     <div>
@@ -221,16 +231,14 @@ export default function ExportCsv() {
 
       <div className={styles.exportActions}>
         <ButtonLink type="button" alt={true} onClick={resetFilters}>
-          Annuler
+          Réinitialiser
         </ButtonLink>
-        <ButtonLink
-          type="button"
-          alt={true}
-          onClick={() => setShowResults(false)}
-        >
+        <ButtonLink type="button" alt={true} onClick={modifyFilters}>
           Modifier votre recherche
         </ButtonLink>
       </div>
+
+      {error && <div className={styles.errorMessage}>{error}</div>}
     </div>
   );
 }
