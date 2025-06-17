@@ -212,6 +212,11 @@ export default function ExportCsv() {
           limite autorisée de 200 000. Veuillez affiner vos critères de
           recherche pour réduire le nombre de résultats.
         </div>
+      ) : countResult.count === 0 ? (
+        <div className={styles.fileDownloadSection}>
+          Vos critères de recherche ne correspondent à aucun établissement.
+          Veuillez élargir vos critères de recherche pour obtenir un résultat.
+        </div>
       ) : (
         <div className={styles.fileDownloadSection}>
           <div className={styles.fileInfo}>
