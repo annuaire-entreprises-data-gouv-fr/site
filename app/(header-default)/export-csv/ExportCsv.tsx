@@ -1,7 +1,6 @@
 'use client';
 
 import ButtonLink from '#components-ui/button';
-import { Icon } from '#components-ui/icon/wrapper';
 import { formatDate, formatNumber } from '#utils/helpers';
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 import { useState } from 'react';
@@ -122,19 +121,21 @@ export default function ExportCsv() {
     }
   };
 
-  const handleCsvExport = async () => {
+  const handleCsvExport = async (e: React.MouseEvent) => {
+    e.preventDefault();
     if (!countResult || !filename) return;
 
     setIsLoading(true);
     setError(null);
 
     try {
+      const query = buildQuery();
       const response = await fetch('/api/export-csv', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(countResult.filters),
+        body: JSON.stringify(query),
       });
 
       const contentType = response.headers.get('Content-Type');
@@ -211,20 +212,29 @@ export default function ExportCsv() {
           limite autorisée de 200 000. Veuillez affiner vos critères de
           recherche pour réduire le nombre de résultats.
         </div>
+      ) : countResult.count === 0 ? (
+        <div className={styles.fileDownloadSection}>
+          Vos critères de recherche ne correspondent à aucun établissement.
+          Veuillez élargir vos critères de recherche pour obtenir un résultat.
+        </div>
       ) : (
         <div className={styles.fileDownloadSection}>
           <div className={styles.fileInfo}>
             {isLoading ? (
               'Export en cours...'
             ) : (
-              <div className={styles.fileName} onClick={handleCsvExport}>
-                <span>{filename}</span>
-                <Icon slug="download" />
-              </div>
+              <a
+                className="fr-link fr-link--download"
+                href="#"
+                onClick={handleCsvExport}
+              >
+                {filename}
+                <span className="fr-link__detail">
+                  CSV - Environ {formatNumber(getFileSize(countResult.count))}{' '}
+                  Ko
+                </span>
+              </a>
             )}
-            <div className={styles.fileSize}>
-              CSV - Environ {formatNumber(getFileSize(countResult.count))} Ko
-            </div>
           </div>
         </div>
       )}
