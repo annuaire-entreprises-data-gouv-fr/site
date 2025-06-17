@@ -1,5 +1,5 @@
-import { getEffectifLabel } from './constants';
 import { ExtendedExportCsvInput } from './ExportCsv';
+import { selectedEffectifLabel } from './Filters';
 import styles from './styles.module.css';
 
 export default function FiltersSummary({
@@ -12,12 +12,12 @@ export default function FiltersSummary({
       <div className={styles.filtersRecap}>
         <h2>Récapitulatif des filtres :</h2>
         <p>
-          <strong>État administratif des établissements :</strong>{' '}
+          <strong>État administratif :</strong>{' '}
           {filters.activity === 'all'
-            ? 'Établissements actifs et fermés'
+            ? 'Établissements en activité et cessés'
             : filters.activity === 'active'
-            ? 'Établissements actifs'
-            : 'Établissements fermés'}
+            ? 'Établissements en activité'
+            : 'Établissements cessés'}
         </p>
 
         {filters.legalUnit === 'hq' && (
@@ -29,8 +29,7 @@ export default function FiltersSummary({
 
         {filters.headcountEnabled && (
           <p>
-            <strong>Taille :</strong> {getEffectifLabel(filters.headcount.min)}{' '}
-            - {getEffectifLabel(filters.headcount.max)}
+            <strong>Effectifs :</strong> {selectedEffectifLabel(filters)}
           </p>
         )}
 
@@ -42,15 +41,16 @@ export default function FiltersSummary({
 
         {(filters.creationDate?.from || filters.creationDate?.to) && (
           <p>
-            <strong>Date de création :</strong>
+            <strong>Date de création :</strong>{' '}
             {filters.creationDate?.from &&
-              ` Depuis le ${new Date(
+              `Depuis le ${new Date(
                 filters.creationDate.from
               ).toLocaleDateString()}`}
+            {filters.creationDate?.from && filters.creationDate?.to
+              ? ' jusqu‘au '
+              : 'Jusqu‘au '}
             {filters.creationDate.to &&
-              ` Jusqu'au ${new Date(
-                filters.creationDate.to
-              ).toLocaleDateString()}`}
+              `${new Date(filters.creationDate.to).toLocaleDateString()}`}
           </p>
         )}
 
@@ -61,10 +61,11 @@ export default function FiltersSummary({
               ` Depuis le ${new Date(
                 filters.updateDate.from
               ).toLocaleDateString()}`}
+            {filters.updateDate?.from && filters.updateDate?.to
+              ? ' jusqu‘au '
+              : 'Jusqu‘au '}
             {filters.updateDate.to &&
-              ` Jusqu'au ${new Date(
-                filters.updateDate.to
-              ).toLocaleDateString()}`}
+              `${new Date(filters.updateDate.to).toLocaleDateString()}`}
           </p>
         )}
       </div>
