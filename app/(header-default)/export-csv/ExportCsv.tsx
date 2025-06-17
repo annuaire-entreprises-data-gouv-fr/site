@@ -129,12 +129,13 @@ export default function ExportCsv() {
     setError(null);
 
     try {
+      const query = buildQuery();
       const response = await fetch('/api/export-csv', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(countResult.filters),
+        body: JSON.stringify(query),
       });
 
       const contentType = response.headers.get('Content-Type');
