@@ -189,10 +189,11 @@ export default function Filters({
                 setFilters((prev) => ({
                   ...prev,
                   headcount: value,
+                  headcountEnabled: true,
                 }))
               }
               samePositionAllowed={true}
-              disabled={!filters.headcountEnabled}
+              disabledColor={!filters.headcountEnabled}
             />
 
             <div className={styles.sliderHeader}>
