@@ -1,7 +1,6 @@
 'use client';
 
 import ButtonLink from '#components-ui/button';
-import { Icon } from '#components-ui/icon/wrapper';
 import { formatDate, formatNumber } from '#utils/helpers';
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 import { useState } from 'react';
@@ -122,7 +121,8 @@ export default function ExportCsv() {
     }
   };
 
-  const handleCsvExport = async () => {
+  const handleCsvExport = async (e: React.MouseEvent) => {
+    e.preventDefault();
     if (!countResult || !filename) return;
 
     setIsLoading(true);
@@ -223,14 +223,18 @@ export default function ExportCsv() {
             {isLoading ? (
               'Export en cours...'
             ) : (
-              <div className={styles.fileName} onClick={handleCsvExport}>
-                <span>{filename}</span>
-                <Icon slug="download" />
-              </div>
+              <a
+                className="fr-link fr-link--download"
+                href="#"
+                onClick={handleCsvExport}
+              >
+                {filename}
+                <span className="fr-link__detail">
+                  CSV - Environ {formatNumber(getFileSize(countResult.count))}{' '}
+                  Ko
+                </span>
+              </a>
             )}
-            <div className={styles.fileSize}>
-              CSV - Environ {formatNumber(getFileSize(countResult.count))} Ko
-            </div>
           </div>
         </div>
       )}
