@@ -46,9 +46,8 @@ export default function FiltersSummary({
               `Depuis le ${new Date(
                 filters.creationDate.from
               ).toLocaleDateString()}`}
-            {filters.creationDate?.from && filters.creationDate?.to
-              ? ' jusqu‘au '
-              : 'Jusqu‘au '}
+            {filters.creationDate?.to &&
+              (filters.creationDate?.from ? ' jusqu‘au ' : 'Jusqu‘au ')}
             {filters.creationDate.to &&
               `${new Date(filters.creationDate.to).toLocaleDateString()}`}
           </p>
@@ -61,9 +60,8 @@ export default function FiltersSummary({
               ` Depuis le ${new Date(
                 filters.updateDate.from
               ).toLocaleDateString()}`}
-            {filters.updateDate?.from && filters.updateDate?.to
-              ? ' jusqu‘au '
-              : 'Jusqu‘au '}
+            {filters.updateDate?.to &&
+              (filters.updateDate?.from ? ' jusqu‘au ' : 'Jusqu‘au ')}
             {filters.updateDate.to &&
               `${new Date(filters.updateDate.to).toLocaleDateString()}`}
           </p>
