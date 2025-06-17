@@ -182,6 +182,7 @@ export default function Filters({
             <DualRangeSlider
               idPrefix="headcount"
               label="Effectifs"
+              defaultValue={filters.headcount}
               min={0}
               max={14}
               step={1}
@@ -251,6 +252,7 @@ export default function Filters({
               <input
                 type="date"
                 className={`fr-input ${styles.dateInput}`}
+                defaultValue={filters.creationDate?.from}
                 max={filters.creationDate?.to || todayString}
                 onChange={(e) =>
                   setFilters((prev) => ({
@@ -268,6 +270,7 @@ export default function Filters({
               <input
                 type="date"
                 className={`fr-input ${styles.dateInput}`}
+                defaultValue={filters.creationDate?.to}
                 min={filters.creationDate?.from}
                 max={todayString}
                 onChange={(e) =>
@@ -289,6 +292,7 @@ export default function Filters({
               <input
                 type="date"
                 className={`fr-input ${styles.dateInput}`}
+                defaultValue={filters.updateDate?.from}
                 max={filters.updateDate?.to || todayString}
                 onChange={(e) =>
                   setFilters((prev) => ({
@@ -306,6 +310,7 @@ export default function Filters({
               <input
                 type="date"
                 className={`fr-input ${styles.dateInput}`}
+                defaultValue={filters.updateDate?.to}
                 min={filters.updateDate?.from}
                 max={todayString}
                 onChange={(e) =>
