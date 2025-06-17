@@ -1,6 +1,7 @@
 import DualRangeSlider from '#components-ui/dual-range-slider';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
+import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
 import { Dispatch, SetStateAction } from 'react';
 import { getEffectifLabel } from './constants';
 import { ExtendedExportCsvInput } from './ExportCsv';
@@ -194,36 +195,19 @@ export default function Filters({
           <div>
             <h3 className={styles.subsectionTitle}>Catégorie</h3>
             <ul className="fr-tags-group">
-              <li>
-                <button
-                  type="button"
-                  className="fr-tag"
-                  aria-pressed={filters.categories.includes('PME')}
-                  onClick={() => toggleCategories('PME')}
-                >
-                  Petite et Moyenne Entreprise
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  className="fr-tag"
-                  aria-pressed={filters.categories.includes('ETI')}
-                  onClick={() => toggleCategories('ETI')}
-                >
-                  Entreprise de Taille Intermédiaire
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  className="fr-tag"
-                  aria-pressed={filters.categories.includes('GE')}
-                  onClick={() => toggleCategories('GE')}
-                >
-                  Grande Entreprise
-                </button>
-              </li>
+              {categoriesEntreprisesOptions.map(({ label, value }) => (
+                <li key={value}>
+                  <button
+                    type="button"
+                    className="fr-tag"
+                    aria-pressed={filters.categories.includes(value)}
+                    onClick={() => toggleCategories(value)}
+                  >
+                    {label}
+                  </button>
+                </li>
+              ))}
+
               <li>
                 <button
                   type="button"
