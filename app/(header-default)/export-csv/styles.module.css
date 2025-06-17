@@ -78,13 +78,6 @@
   color: #666;
 }
 
-/* Structure section */
-.structureSelects {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
 .dateContainer {
   display: flex;
   gap: 64px;
@@ -127,29 +120,4 @@
 .fileDownloadSection {
   margin: 24px 0;
   padding: 20px 0;
-}
-
-.fileInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.fileName {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  color: #000091;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.fileName:hover {
-  text-decoration: none;
-}
-
-.fileSize {
-  font-size: 14px;
-  color: #666;
 }
