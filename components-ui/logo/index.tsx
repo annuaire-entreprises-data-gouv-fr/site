@@ -48,6 +48,7 @@ const Logo: React.FC<IProps> = ({
         display: 'block',
         maxWidth: '100%',
         maxHeight: '100%',
+        boxShadow: 'none',
       }}
       loading={lazy ? 'lazy' : 'eager'}
     />

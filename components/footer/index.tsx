@@ -321,7 +321,7 @@ const Footer = () => (
                             title={long}
                             alt={short}
                             slug={slug}
-                            width={80}
+                            width={60}
                             height={50}
                             className="fr-footer__logo"
                             lazy
@@ -331,7 +331,7 @@ const Footer = () => (
                             title={long}
                             alt={short}
                             slug={slug}
-                            width={150}
+                            width={100}
                             height={50}
                             className="fr-footer__logo"
                             lazy
