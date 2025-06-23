@@ -1,4 +1,6 @@
 name: 'Trigger SEO Workflow'
+permissions:
+  contents: read
 
 on:
   schedule:

@@ -1,4 +1,6 @@
 name: 'User feedbacks report'
+permissions:
+  contents: read
 
 on:
   schedule:
