@@ -41,11 +41,11 @@ jobs:
       matrix:
         include:
           - environment: production-01
-            host: ${{ secrets.SSH_PRODUCTION_01 }}
+            host: SSH_PRODUCTION_01
           - environment: production-02
-            host: ${{ secrets.SSH_PRODUCTION_02 }}
+            host: SSH_PRODUCTION_02
           - environment: production-03
-            host: ${{ secrets.SSH_PRODUCTION_03 }}
+            host: SSH_PRODUCTION_03
     steps:
       - uses: actions/checkout@v4
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1
@@ -56,7 +56,7 @@ jobs:
           version: "main"
           environment: "production"
           ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
-          ssh-host: ${{ matrix.host }}
+          ssh-host: ${{ secrets[matrix.host] }}
           notify-on-failure: true
           notify-on-success: true
           notify-webhook: ${{ secrets.DEV_EVENT_HOOK }}
