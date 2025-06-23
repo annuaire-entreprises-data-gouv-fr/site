@@ -1,6 +1,8 @@
 # This workflow will check if no regression is introduced in externals API
 
 name: 'External API check'
+permissions:
+  contents: read
 
 on:
   workflow_dispatch:
