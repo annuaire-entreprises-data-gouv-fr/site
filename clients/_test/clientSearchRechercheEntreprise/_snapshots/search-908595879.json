@@ -186,7 +186,10 @@
           "estUai": false,
           "estAchatsResponsables": false,
           "estEntrepriseInclusive": false,
-          "typeEntrepriseInclusive": null
+          "typeEntrepriseInclusive": null,
+          "estPatrimoineVivant": false,
+          "estAlimConfiance": false,
+          "bilanGesRenseigne": false
         },
         "association": {
           "idAssociation": null,
