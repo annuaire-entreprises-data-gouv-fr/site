@@ -31,8 +31,10 @@ class DRolesAPIClient {
 
   private newToken = async () => {
     try {
+      const url = `${process.env.D_ROLES_URL}${routes.dRoles.auth.token}`;
+
       const data = await httpClient<IDRolesAuthTokenResponse>({
-        url: routes.dRoles.auth.token,
+        url,
         method: 'POST',
         timeout: constants.timeout.XXXL,
         headers: {
@@ -78,10 +80,11 @@ class DRolesAPIClient {
   };
 
   public fetch = async <T>(
-    url: string,
+    route: string,
     config: IDefaultRequestConfig
   ): Promise<T> => {
     const token = await this.getToken();
+    const url = `${process.env.D_ROLES_URL}${route}`;
 
     return httpClient<T>({
       url,
