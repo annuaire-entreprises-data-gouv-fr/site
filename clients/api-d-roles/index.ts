@@ -15,9 +15,10 @@ import { parseAgentScopes } from './parse';
  * https://roles.preprod.data.gouv.fr/
  */
 export const getGroupsByEmail = async (
-  email: string
+  email: string,
+  actingUserSub?: string
 ): Promise<IDRolesGroup[]> => {
-  const route = routes.dRoles.groups.getGroupsByEmail(email);
+  const route = routes.dRoles.groups.getGroupsByEmail(email, actingUserSub);
   const response = await droleApiClient.fetch<IDRolesGroupSearchResponse>(
     route,
     {

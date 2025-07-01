@@ -98,7 +98,7 @@ export class AgentConnected {
 
     if (process.env.D_ROLES_ENABLED === 'enabled') {
       // Get scopes from Groups (D-Roles API) for this agent
-      const groups = await Groups.find(this.email);
+      const groups = await Groups.find(this.email, this.userId);
       groups.forEach((group) => {
         superAgentScopes.add(group.scopes);
       });

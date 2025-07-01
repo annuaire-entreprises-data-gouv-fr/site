@@ -265,22 +265,23 @@ const routes = {
   },
   dRoles: {
     auth: {
-      token: 'https://roles.preprod.data.gouv.fr/auth/token',
+      token: '/auth/token',
     },
     users: {
-      getByEmail: (email: string) =>
-        `https://roles.preprod.data.gouv.fr/users/search?email=${email}`,
+      getByEmail: (email: string) => `/users/search?email=${email}`,
     },
     groups: {
-      getGroupsByEmail: (email: string) =>
-        `https://roles.preprod.data.gouv.fr/groups/search?email=${email}`,
+      getGroupsByEmail: (email: string, actingUserSub?: string) =>
+        `/groups/search?email=${email}${
+          actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
+        }`,
       addUserToGroup: (groupId: number, userId: number, roleId: number) =>
-        `https://roles.preprod.data.gouv.fr/groups/${groupId}/users/${userId}?role_id=${roleId}`,
+        `/groups/${groupId}/users/${userId}?role_id=${roleId}`,
       removeUserFromGroup: (groupId: number, userId: number) =>
-        `https://roles.preprod.data.gouv.fr/groups/${groupId}/users/${userId}`,
+        `/groups/${groupId}/users/${userId}`,
     },
     roles: {
-      getRoles: () => `https://roles.preprod.data.gouv.fr/roles`,
+      getRoles: () => `/roles`,
     },
   },
 };

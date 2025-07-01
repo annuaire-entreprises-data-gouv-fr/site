@@ -16,9 +16,12 @@ export class Groups {
   /**
    * Get all groups that a user belongs to
    */
-  static async find(email: string): Promise<IDRolesGroup[]> {
+  static async find(
+    email: string,
+    actingUserSub?: string
+  ): Promise<IDRolesGroup[]> {
     try {
-      return await droleClient.getGroupsByEmail(email);
+      return await droleClient.getGroupsByEmail(email, actingUserSub);
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
