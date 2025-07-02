@@ -12,6 +12,10 @@ const dateValidator = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be in YYYY-MM-DD format');
 
+const locationValidator = z
+  .array(z.string().regex(/^\d+$/, 'Must contain only digits'))
+  .optional();
+
 export const exportCsvSchema = z.object({
   count: z.boolean().optional(),
   activity: z.enum(['active', 'ceased', 'all']).optional(),
@@ -51,6 +55,14 @@ export const exportCsvSchema = z.object({
       inclure: z.boolean(),
       inclureNo: z.boolean(),
       inclureNonRenseigne: z.boolean(),
+    })
+    .optional(),
+  location: z
+    .object({
+      codesPostaux: locationValidator,
+      codesInsee: locationValidator,
+      departments: locationValidator,
+      regions: locationValidator,
     })
     .optional(),
 });
