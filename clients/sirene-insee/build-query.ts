@@ -1,5 +1,6 @@
 import { regions } from '#utils/helpers/formatting/metadata/regions';
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
+import { niv1ToNiv5Mapping } from 'scripts/nomenclature-d-activites-francaises/niv1ToNiv5Mapping';
 import { effectifCodes } from './constants';
 
 export class SireneQueryBuilder {
@@ -217,6 +218,52 @@ export class SireneQueryBuilder {
     );
   };
 
+  private addActivityConditions = (
+    naf?: string[],
+    sap?: string[],
+    isHq?: boolean
+  ) => {
+    if (!naf?.length && !sap?.length) {
+      return;
+    }
+
+    const allLevels = new Set<string>();
+
+    // Add sous-classes with dot after 2nd character
+
+    // Add groupes with dot after 2nd character and wildcard
+    if (naf?.length) {
+      naf.forEach((naf) => {
+        allLevels.add(naf);
+      });
+    }
+
+    // Add sections by expanding to their divisions with wildcard
+    if (sap?.length) {
+      sap.forEach((sap) => {
+        niv1ToNiv5Mapping[sap].forEach((naf) => {
+          allLevels.add(naf);
+        });
+      });
+    }
+
+    // If we're looking for headquarters, use activitePrincipaleUniteLegale instead
+    const field = isHq
+      ? 'activitePrincipaleUniteLegale'
+      : 'activitePrincipaleEtablissement';
+
+    const activityConditions = Array.from(allLevels)
+      .map((activity) => `${field}:${activity}`)
+      .join(' OR ');
+
+    if (!isHq) {
+      // Add period condition for non-headquarters
+      this.conditions.push(`periode(-dateFin:* AND (${activityConditions}))`);
+    } else {
+      this.conditions.push(`(${activityConditions})`);
+    }
+  };
+
   private buildQuery = (params: ExportCsvInput) => {
     // Etat administratif de l'établissement
     // Ligne 668
@@ -243,9 +290,13 @@ export class SireneQueryBuilder {
     }
 
     // Activité
-    // if (params.activity) {
-    //   this.addActivityConditions(params.activity);
-    // }
+    if (params.naf || params.sap) {
+      this.addActivityConditions(
+        params.naf,
+        params.sap,
+        params.legalUnit === 'hq'
+      );
+    }
 
     // Catégorie juridique
     // Ligne 955

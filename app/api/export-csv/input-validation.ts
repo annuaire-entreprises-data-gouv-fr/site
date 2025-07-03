@@ -69,6 +69,23 @@ export const exportCsvSchema = z.object({
       regions: locationValidator,
     })
     .optional(),
+  naf: z
+    .array(
+      z
+        .string()
+        .regex(
+          /^\d{1,2}\.\d{1,2}[A-Z]$/,
+          'Must be a valid NAF code (like 01.12Z)'
+        )
+    )
+    .optional(),
+  sap: z
+    .array(
+      z
+        .string()
+        .regex(/^[A-Z]$/, 'Must be a valid SAP code (1 uppercase letter)')
+    )
+    .optional(),
 });
 
 export type ExportCsvInput = z.infer<typeof exportCsvSchema>;

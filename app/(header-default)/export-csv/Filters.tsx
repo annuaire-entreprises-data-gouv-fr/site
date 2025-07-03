@@ -4,6 +4,8 @@ import { MultiSelect } from '#components-ui/select/multi-select';
 import constants from '#models/constants';
 import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
 import { categoriesJuridiques } from '#utils/helpers/formatting/metadata/categories-juridiques';
+import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
+import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { Dispatch, SetStateAction } from 'react';
 import { getEffectifLabel } from './constants';
 import { ExtendedExportCsvInput } from './ExportCsv';
@@ -286,6 +288,65 @@ export default function Filters({
                     ),
                   }));
                 }}
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+      <div className={styles.row}>
+        <section className={styles.formSection}>
+          <h2>
+            Filtrer par type de structure{' '}
+            <Icon color={constants.colors.frBlue} slug="buildingFill" />
+          </h2>
+          <div className={styles.filterContainer}>
+            <div className={styles.filterColumn}>
+              <label htmlFor="react-select-sap-multi-select-input">
+                Domaine d‘activité (Section) :
+              </label>
+              <MultiSelect
+                name="sap"
+                defaultValue={filters.sap}
+                placeholder="Choisir un domaine d'activité"
+                id="sap-multi-select"
+                instanceId="sap-multi-select"
+                options={Object.keys(codesSectionNAF).map((k) => ({
+                  value: k,
+                  label: codesSectionNAF[k as keyof typeof codesSectionNAF],
+                }))}
+                onChange={(values) => {
+                  setFilters((prev) => ({
+                    ...prev,
+                    sap: values,
+                  }));
+                }}
+                menuPosition="fixed"
+              />
+            </div>
+
+            <div className={styles.filterColumn}>
+              <label htmlFor="react-select-naf-multi-select-input">
+                Code NAF/APE (Sous-classe) :
+              </label>
+              <MultiSelect
+                name="naf"
+                defaultValue={filters.naf}
+                placeholder="Choisir un code NAF/APE"
+                id="naf-multi-select"
+                instanceId="naf-multi-select"
+                options={Object.keys(codesNAFRev2).map((code) => ({
+                  value: code,
+                  label: `${code} - ${
+                    codesNAFRev2[code as keyof typeof codesNAFRev2]
+                  }`,
+                }))}
+                onChange={(values) => {
+                  setFilters((prev) => ({
+                    ...prev,
+                    naf: values,
+                  }));
+                }}
+                menuPosition="fixed"
               />
             </div>
           </div>

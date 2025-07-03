@@ -92,6 +92,8 @@ export default function ExportCsv() {
         .filter((loc) => loc.type === 'reg')
         .map((loc) => loc.value),
     },
+    naf: filters.naf,
+    sap: filters.sap,
     creationDate: {
       from: filters.creationDate?.from || undefined,
       to: filters.creationDate?.to || undefined,
