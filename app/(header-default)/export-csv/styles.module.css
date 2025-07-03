@@ -162,3 +162,73 @@ div.location-filter-container {
   font-style: italic;
   margin: 0;
 }
+
+/* SIRET Filter styles */
+.siretContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fileUploadArea {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 32px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.fileUploadArea:hover {
+  border-color: var(--annuaire-colors-frBlue);
+  background-color: #f0f8ff;
+}
+
+.fileUploadArea.dragActive {
+  border-color: var(--annuaire-colors-frBlue);
+  background-color: #e6f3ff;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileUploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.fileUploadLabel span {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--annuaire-colors-frBlue);
+}
+
+.fileUploadLabel small {
+  color: #666;
+  font-size: 14px;
+}
+
+.siretListContainer {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f9f9f9;
+}
+
+.siretListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.siretList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
