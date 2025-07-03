@@ -13,16 +13,11 @@
 #     href: url
 administrations:
   - insee
-  - inpi
 group: fonctionnement
-title: Comment accéder aux justificatifs d’immatriculation d’une entreprise non-diffusible ?
+title: Comment accéder à l’avis de situation d’une entreprise non-diffusible ?
 seo:
-  description: Qui peut accéder à l’avis de situation ou l’extrait RNE d’une entreprise non-diffusible ?
+  description: Qui peut accéder à l’avis de situation d’une entreprise non-diffusible ?
 body: |
-  ## Extrait RNE ou extrait INPI
-
-  Les extraits RNE sont consultables sur le site [data.inpi.fr](https://data.inpi.fr), y compris ceux des entreprises non-diffusibles. Munissez-vous du siren concerné et téléchargez le justificatif depuis la fiche de l’entreprise.
-
   ## Avis de situation Sirene
 
   L’avis de situation Sirene est uniquement accessible aux propriétaires des entreprises non-diffusibles. Il faut en faire la demande sur le site [avis-situation-sirene.insee.fr](https://avis-situation-sirene.insee.fr/).
