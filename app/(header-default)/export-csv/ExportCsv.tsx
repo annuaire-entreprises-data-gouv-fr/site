@@ -18,6 +18,7 @@ export interface ExtendedExportCsvInput extends ExportCsvInput {
     value: string;
     label: string;
   }>;
+  legalCategories: string[];
 }
 
 const getFileSize = (count: number) => {
@@ -33,6 +34,7 @@ const defaultFilters: ExtendedExportCsvInput = {
   locations: [],
   creationDate: { from: undefined, to: undefined },
   updateDate: { from: undefined, to: undefined },
+  legalCategories: [],
 };
 
 export default function ExportCsv() {
@@ -75,6 +77,7 @@ export default function ExportCsv() {
     categories: filters.categories as ('PME' | 'ETI' | 'GE')[],
     activity: filters.activity,
     legalUnit: filters.legalUnit,
+    legalCategories: filters.legalCategories,
     location: {
       codesPostaux: filters.locations
         .filter((loc) => loc.type === 'cp')

@@ -1,3 +1,4 @@
+import { categoriesJuridiques as legalCategories } from '#utils/helpers/formatting/metadata/categories-juridiques';
 import { ExtendedExportCsvInput } from './ExportCsv';
 import { selectedEffectifLabel } from './Filters';
 
@@ -96,6 +97,15 @@ export default function FiltersSummary({
             );
           })()}
         </div>
+      )}
+
+      {filters.legalCategories && filters.legalCategories.length > 0 && (
+        <p>
+          <strong>Catégorie juridique :</strong>{' '}
+          {filters.legalCategories
+            .map((code) => legalCategories[code] || code)
+            .join(', ')}
+        </p>
       )}
 
       {(filters.creationDate?.from || filters.creationDate?.to) && (

@@ -30,6 +30,10 @@ export const exportCsvSchema = z.object({
     .array(z.enum(['PME', 'ETI', 'GE']))
     .max(100)
     .optional(),
+  legalCategories: z
+    .array(z.string().regex(/^\d{4}$/, 'Must be a 4-digit code'))
+    .max(100)
+    .optional(),
   creationDate: z
     .object({
       from: dateValidator.optional(),
