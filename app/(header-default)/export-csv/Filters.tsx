@@ -11,6 +11,7 @@ import { getEffectifLabel } from './constants';
 import { ExtendedExportCsvInput } from './ExportCsv';
 import { LocationFilter } from './LocationFilter';
 import LocationTags from './LocationTags';
+import SiretFilter from './SiretFilter';
 import styles from './styles.module.css';
 
 export const selectedEffectifLabel = (filters: ExtendedExportCsvInput) => {
@@ -467,6 +468,16 @@ export default function Filters({
           </div>
         </div>
       </section>
+
+      <SiretFilter
+        siretsAndSirens={filters.siretsAndSirens || []}
+        onSiretsAndSirensChange={(siretsAndSirens) =>
+          setFilters((prev) => ({
+            ...prev,
+            siretsAndSirens,
+          }))
+        }
+      />
     </>
   );
 }

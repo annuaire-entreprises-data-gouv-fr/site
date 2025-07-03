@@ -78,6 +78,7 @@ export default function ExportCsv() {
     activity: filters.activity,
     legalUnit: filters.legalUnit,
     legalCategories: filters.legalCategories,
+    siretsAndSirens: filters.siretsAndSirens,
     location: {
       codesPostaux: filters.locations
         .filter((loc) => loc.type === 'cp')

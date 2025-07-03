@@ -146,6 +146,13 @@ export default function FiltersSummary({
         </p>
       )}
 
+      {filters.siretsAndSirens && filters.siretsAndSirens.length > 0 && (
+        <p>
+          <strong>Nombre de SIRET / SIREN sélectionnés :</strong>{' '}
+          {filters.siretsAndSirens.length}
+        </p>
+      )}
+
       {(filters.creationDate?.from || filters.creationDate?.to) && (
         <p>
           <strong>Date de création :</strong>{' '}
