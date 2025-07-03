@@ -1,7 +1,9 @@
 import DualRangeSlider from '#components-ui/dual-range-slider';
 import { Icon } from '#components-ui/icon/wrapper';
+import { MultiSelect } from '#components-ui/select/multi-select';
 import constants from '#models/constants';
 import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
+import { categoriesJuridiques } from '#utils/helpers/formatting/metadata/categories-juridiques';
 import { Dispatch, SetStateAction } from 'react';
 import { getEffectifLabel } from './constants';
 import { ExtendedExportCsvInput } from './ExportCsv';
@@ -19,6 +21,16 @@ export const selectedEffectifLabel = (filters: ExtendedExportCsvInput) => {
   }
   return 'Tout, y compris les effectifs non renseignés';
 };
+
+/**
+ * For the search api `nature_juridique` must be a string
+ * of 4 characters.
+ */
+const getLegalCategories = () =>
+  Object.keys(categoriesJuridiques).map((categorie) => ({
+    value: categorie,
+    label: categoriesJuridiques[categorie],
+  }));
 
 const todayString = new Date().toISOString().split('T')[0];
 
@@ -276,6 +288,32 @@ export default function Filters({
                 }}
               />
             </div>
+          </div>
+        </section>
+      </div>
+
+      <div>
+        <section className={styles.formSection}>
+          <h2>
+            Filtrer par catégorie juridique{' '}
+            <Icon color={constants.colors.frBlue} slug="scaleFill" />
+          </h2>
+          <div>
+            <MultiSelect
+              name="nature_juridique"
+              defaultValue={filters.legalCategories}
+              placeholder="Choisir une catégorie juridique"
+              id="nature-juridique-multi-select"
+              instanceId="nature-juridique-multi-select"
+              options={getLegalCategories()}
+              menuPosition="fixed"
+              onChange={(values: string[]) =>
+                setFilters((prev) => ({
+                  ...prev,
+                  legalCategories: values,
+                }))
+              }
+            />
           </div>
         </section>
       </div>

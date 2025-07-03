@@ -113,6 +113,13 @@ export class SireneQueryBuilder {
     this.conditions.push(`(${rangeConditions.join(' OR ')})`);
   };
 
+  private addLegalCategoryConditions = (legalCategories: string[]) => {
+    const legalCategoriesConditions = legalCategories.map(
+      (cat) => `categorieJuridiqueUniteLegale:${cat}`
+    );
+    this.conditions.push(`(${legalCategoriesConditions.join(' OR ')})`);
+  };
+
   private addDateCreationConditions = (
     creationDate: {
       to?: string;
@@ -230,6 +237,7 @@ export class SireneQueryBuilder {
     }
 
     // Localisation
+    // Ligne 982
     if (params.location) {
       this.addLocationConditions(params.location);
     }
@@ -239,9 +247,11 @@ export class SireneQueryBuilder {
     //   this.addActivityConditions(params.activity);
     // }
 
-    // // Catégorie juridique
-    // if (params.legalCategory) {
-    // }
+    // Catégorie juridique
+    // Ligne 955
+    if (params.legalCategories) {
+      this.addLegalCategoryConditions(params.legalCategories);
+    }
 
     // Tranche d'effectifs
     // Ligne 928
