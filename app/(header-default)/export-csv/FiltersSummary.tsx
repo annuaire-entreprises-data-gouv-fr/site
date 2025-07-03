@@ -1,4 +1,6 @@
 import { categoriesJuridiques as legalCategories } from '#utils/helpers/formatting/metadata/categories-juridiques';
+import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
+import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { ExtendedExportCsvInput } from './ExportCsv';
 import { selectedEffectifLabel } from './Filters';
 
@@ -97,6 +99,42 @@ export default function FiltersSummary({
             );
           })()}
         </div>
+      )}
+      {filters.sap && filters.sap.length > 0 && (
+        <p>
+          <strong>Domaine d‘activité (Section) :</strong>{' '}
+          {filters.sap
+            .map(
+              (code) => codesSectionNAF[code as keyof typeof codesSectionNAF]
+            )
+            .join(', ')}
+        </p>
+      )}
+
+      {filters.naf && filters.naf.length > 0 && (
+        <p>
+          <strong>Code NAF/APE (Sous-classe) :</strong>{' '}
+          {filters.naf
+            .map(
+              (code) =>
+                `${code} - ${codesNAFRev2[code as keyof typeof codesNAFRev2]}`
+            )
+            .join(', ')}
+        </p>
+      )}
+
+      {(filters.creationDate?.from || filters.creationDate?.to) && (
+        <p>
+          <strong>Date de création :</strong>{' '}
+          {filters.creationDate?.from &&
+            `Depuis le ${new Date(
+              filters.creationDate.from
+            ).toLocaleDateString()}`}
+          {filters.creationDate?.to &&
+            (filters.creationDate?.from ? ' jusqu‘au ' : 'Jusqu‘au ')}
+          {filters.creationDate.to &&
+            `${new Date(filters.creationDate.to).toLocaleDateString()}`}
+        </p>
       )}
 
       {filters.legalCategories && filters.legalCategories.length > 0 && (
