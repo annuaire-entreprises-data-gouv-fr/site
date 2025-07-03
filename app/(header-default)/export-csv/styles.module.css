@@ -121,3 +121,44 @@
   margin: 24px 0;
   padding: 20px 0;
 }
+
+.filterContainer {
+  display: flex;
+  gap: 32px;
+}
+
+.filterColumn {
+  flex: 1;
+  min-width: 200px;
+}
+
+div.location-filter-container {
+  position: relative;
+  margin: 0;
+  user-select: none;
+  margin-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.location-filter-modal-container {
+  box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
+  top: 100%;
+  border: none;
+  left: 0;
+  position: absolute;
+  margin-top: 5px;
+  min-width: 320px;
+  z-index: 1000;
+}
+
+.selectedLocations {
+  flex: 1;
+  min-width: 300px;
+}
+
+.noLocations {
+  color: #666;
+  font-style: italic;
+  margin: 0;
+}

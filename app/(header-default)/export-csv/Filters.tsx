@@ -5,6 +5,8 @@ import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categori
 import { Dispatch, SetStateAction } from 'react';
 import { getEffectifLabel } from './constants';
 import { ExtendedExportCsvInput } from './ExportCsv';
+import { LocationFilter } from './LocationFilter';
+import LocationTags from './LocationTags';
 import styles from './styles.module.css';
 
 export const selectedEffectifLabel = (filters: ExtendedExportCsvInput) => {
@@ -61,9 +63,7 @@ export default function Filters({
                   }))
                 }
               />
-              <label htmlFor="activity-1" className={styles.radioLabel}>
-                Tous
-              </label>
+              <label htmlFor="activity-1">Tous</label>
             </div>
           </div>
           <div className="fr-fieldset__element">
@@ -81,9 +81,7 @@ export default function Filters({
                   }))
                 }
               />
-              <label htmlFor="activity-2" className={styles.radioLabel}>
-                En activité uniquement
-              </label>
+              <label htmlFor="activity-2">En activité uniquement</label>
             </div>
           </div>
           <div className="fr-fieldset__element">
@@ -101,15 +99,11 @@ export default function Filters({
                   }))
                 }
               />
-              <label htmlFor="activity-3" className={styles.radioLabel}>
-                Cessé uniquement
-              </label>
+              <label htmlFor="activity-3">Cessé uniquement</label>
             </div>
           </div>
 
-          <h3 className={styles.subsectionTitle}>
-            Par type d&apos;établissement
-          </h3>
+          <h3 className={styles.subsectionTitle}>Par type d‘établissement</h3>
           <div className="fr-checkbox-group">
             <input
               type="checkbox"
@@ -239,13 +233,60 @@ export default function Filters({
         </section>
       </div>
 
+      <div>
+        <section>
+          <h2>
+            Filtrer par localisation{' '}
+            <Icon color={constants.colors.frBlue} slug="mapPinFill" />
+          </h2>
+          <div className={styles.filterContainer}>
+            <div className={styles.filterColumn}>
+              <LocationFilter
+                onSelect={(
+                  type: 'cp' | 'dep' | 'reg' | 'insee',
+                  value: string,
+                  label: string
+                ) => {
+                  setFilters((prev) => ({
+                    ...prev,
+                    locations: [
+                      ...prev.locations.filter(
+                        (loc) => !(loc.type === type && loc.value === value)
+                      ),
+                      { type, value, label },
+                    ],
+                  }));
+                }}
+              />
+            </div>
+            <div className={styles.filterColumn}>
+              <LocationTags
+                filters={filters}
+                handleClick={(location) => {
+                  setFilters((prev) => ({
+                    ...prev,
+                    locations: prev.locations.filter(
+                      (loc) =>
+                        !(
+                          loc.type === location.type &&
+                          loc.value === location.value
+                        )
+                    ),
+                  }));
+                }}
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+
       <section className={styles.formSection}>
         <h2>
           Filtrer par date{' '}
           <Icon color={constants.colors.frBlue} slug="calendarFill" />
         </h2>
         <div className={styles.dateContainer}>
-          <div className={styles.dateColumn}>
+          <div>
             <h3>Date de création</h3>
             <div className={styles.dateGroup}>
               <label className={styles.dateLabel}>Depuis le</label>
@@ -266,7 +307,7 @@ export default function Filters({
               />
             </div>
             <div>
-              <label className={styles.dateLabel}>Jusqu&apos;au</label>
+              <label className={styles.dateLabel}>Jusqu‘au</label>
               <input
                 type="date"
                 className={`fr-input ${styles.dateInput}`}
@@ -285,7 +326,7 @@ export default function Filters({
               />
             </div>
           </div>
-          <div className={styles.dateColumn}>
+          <div>
             <h3>Date de mise à jour</h3>
             <div className={styles.dateGroup}>
               <label className={styles.dateLabel}>Depuis le</label>
@@ -306,7 +347,7 @@ export default function Filters({
               />
             </div>
             <div>
-              <label className={styles.dateLabel}>Jusqu&apos;au</label>
+              <label className={styles.dateLabel}>Jusqu‘au</label>
               <input
                 type="date"
                 className={`fr-input ${styles.dateInput}`}

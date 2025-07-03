@@ -13,7 +13,8 @@ import {
 } from '#models/api-not-responding';
 
 export async function searchGeoElementByText(
-  slug: string
+  slug: string,
+  { noEpcis = false }: { noEpcis?: boolean } = {}
 ): Promise<IGeoElement[] | IAPINotRespondingError> {
   const term = slug as string;
   const isNumber = /^[0-9]+$/.test(term);
@@ -32,7 +33,7 @@ export async function searchGeoElementByText(
     }
 
     // code epci are siren
-    if (term.length === 9) {
+    if (term.length === 9 && !noEpcis) {
       const suggests = await clientEpcisBySiren(term);
       return suggests;
     }
@@ -43,7 +44,7 @@ export async function searchGeoElementByText(
       clientDepartementsByName(term),
       clientCommunesByName(term),
       clientRegionsByName(term),
-      clientEpcisByName(term),
+      noEpcis ? [] : clientEpcisByName(term),
     ]);
     return [
       ...regions,

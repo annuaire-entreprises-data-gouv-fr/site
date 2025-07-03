@@ -13,6 +13,11 @@ export interface ExtendedExportCsvInput extends ExportCsvInput {
   headcount: { min: number; max: number };
   categories: ('PME' | 'ETI' | 'GE')[];
   headcountEnabled: boolean;
+  locations: Array<{
+    type: 'cp' | 'dep' | 'reg' | 'insee';
+    value: string;
+    label: string;
+  }>;
 }
 
 const getFileSize = (count: number) => {
@@ -25,6 +30,7 @@ const defaultFilters: ExtendedExportCsvInput = {
   categories: [],
   activity: 'active',
   legalUnit: 'all',
+  locations: [],
   creationDate: { from: undefined, to: undefined },
   updateDate: { from: undefined, to: undefined },
 };
@@ -69,6 +75,20 @@ export default function ExportCsv() {
     categories: filters.categories as ('PME' | 'ETI' | 'GE')[],
     activity: filters.activity,
     legalUnit: filters.legalUnit,
+    location: {
+      codesPostaux: filters.locations
+        .filter((loc) => loc.type === 'cp')
+        .map((loc) => loc.value),
+      codesInsee: filters.locations
+        .filter((loc) => loc.type === 'insee')
+        .map((loc) => loc.value),
+      departments: filters.locations
+        .filter((loc) => loc.type === 'dep')
+        .map((loc) => loc.value),
+      regions: filters.locations
+        .filter((loc) => loc.type === 'reg')
+        .map((loc) => loc.value),
+    },
     creationDate: {
       from: filters.creationDate?.from || undefined,
       to: filters.creationDate?.to || undefined,
@@ -183,7 +203,7 @@ export default function ExportCsv() {
           au format CSV.
         </div>
         <div>
-          La recherche par raison sociale ou par nom de dirigeant n&apos;est pas
+          La recherche par raison sociale ou par nom de dirigeant n‘est pas
           disponible.
         </div>
       </div>
@@ -219,7 +239,7 @@ export default function ExportCsv() {
         </div>
       ) : (
         <div className={styles.fileDownloadSection}>
-          <div className={styles.fileInfo}>
+          <div>
             {isLoading ? (
               'Export en cours...'
             ) : (

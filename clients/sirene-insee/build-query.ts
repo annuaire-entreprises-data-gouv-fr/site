@@ -1,7 +1,6 @@
+import { regions } from '#utils/helpers/formatting/metadata/regions';
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
-import {
-  effectifCodes,
-} from './constants';
+import { effectifCodes } from './constants';
 
 export class SireneQueryBuilder {
   private conditions: string[] = [];
@@ -148,6 +147,69 @@ export class SireneQueryBuilder {
     );
   };
 
+  private addLocationConditions = (location: {
+    codesPostaux?: string[];
+    codesInsee?: string[];
+    departments?: string[];
+    regions?: string[];
+  }) => {
+    if (
+      !location.codesPostaux?.length &&
+      !location.codesInsee?.length &&
+      !location.departments?.length &&
+      !location.regions?.length
+    ) {
+      return;
+    }
+
+    const allCodesCommunes = new Set<string>();
+    const allCodesPostaux = new Set<string>();
+
+    // Add codes postaux
+    if (location.codesPostaux?.length) {
+      location.codesPostaux.forEach((codePostal) => {
+        allCodesPostaux.add(codePostal);
+      });
+    }
+
+    // Add codes insee
+    if (location.codesInsee?.length) {
+      location.codesInsee.forEach((codeInsee) => {
+        allCodesCommunes.add(codeInsee);
+      });
+    }
+
+    // Add departments with wildcard
+    if (location.departments?.length) {
+      location.departments.forEach((dept) => allCodesCommunes.add(`${dept}*`));
+    }
+
+    // Add regions by expanding to their departments with wildcard
+    if (location.regions?.length) {
+      location.regions.forEach((region) => {
+        const regionData = regions.find((r) => r.code === region);
+        if (regionData) {
+          regionData.departments.forEach((dept) =>
+            allCodesCommunes.add(`${dept.code}*`)
+          );
+        }
+      });
+    }
+
+    const codesCommunesConditions = Array.from(allCodesCommunes).map(
+      (codeCommune) => `codeCommuneEtablissement:${codeCommune}`
+    );
+    const codesPostauxConditions = Array.from(allCodesPostaux).map(
+      (codePostal) => `codePostalEtablissement:${codePostal}`
+    );
+
+    this.conditions.push(
+      `(${[...codesCommunesConditions, ...codesPostauxConditions].join(
+        ' OR '
+      )})`
+    );
+  };
+
   private buildQuery = (params: ExportCsvInput) => {
     // Etat administratif de l'établissement
     // Ligne 668
@@ -168,9 +230,9 @@ export class SireneQueryBuilder {
     }
 
     // Localisation
-    // if (params.location) {
-    //   this.addLocationConditions(params.location);
-    // }
+    if (params.location) {
+      this.addLocationConditions(params.location);
+    }
 
     // Activité
     // if (params.activity) {
