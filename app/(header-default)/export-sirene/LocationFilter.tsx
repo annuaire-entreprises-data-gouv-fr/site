@@ -94,6 +94,7 @@ export const LocationFilter: React.FC<{
 
   return (
     <div ref={ref} className={styles['location-filter-container']}>
+      <label htmlFor="geo-search-input">Ville, département ou région :</label>
       <input
         id="geo-search-input"
         className="fr-input"
@@ -104,7 +105,7 @@ export const LocationFilter: React.FC<{
           }
         }}
         onKeyDown={onKeyDown}
-        placeholder="ex : Rennes"
+        placeholder="Saisir une ville, département ou région"
         autoComplete="off"
         type="search"
         value={searchTerm}
