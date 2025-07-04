@@ -1,4 +1,5 @@
 import { NPSBanner } from '#components/banner/nps';
+import TempIncidentBanner from '#components/banner/temp-incident';
 import Footer from '#components/footer';
 import { HeaderAppRouter } from '#components/header/header-app-router';
 import { meta } from '#components/meta/meta-server';
@@ -20,6 +21,7 @@ export default function LayoutPublic({
   return (
     <>
       <NPSBanner />
+      <TempIncidentBanner />
       <HeaderAppRouter
         useSearchBar={true}
         useAgentCTA={false}

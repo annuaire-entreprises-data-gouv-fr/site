@@ -1,4 +1,5 @@
 import { NPSBanner } from '#components/banner/nps';
+import TempIncidentBanner from '#components/banner/temp-incident';
 import Footer from '#components/footer';
 import { HeaderPageRouter } from '#components/header/header-page-router';
 import { WeNeedYouModal } from '#components/modal/we-need-you';
@@ -18,6 +19,7 @@ export const LayoutDefault = ({
     <div id="page-layout">
       <WeNeedYouModal />
       <NPSBanner />
+      <TempIncidentBanner />
       <HeaderPageRouter
         useSearchBar={searchBar}
         useMap={false}
