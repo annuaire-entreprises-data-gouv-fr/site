@@ -181,15 +181,18 @@ class SearchFilterParams {
         labelAge = `plus de ${this.params.ageMin} ans`;
       }
 
-      const labelName = `${this.params.fn || ''}${this.params.n ? ` ${this.params.n}` : ''
-        }`;
-      f.dirigeantFilter.label = `${labelName}${labelAge && labelName && ', '
-        }${labelAge}`;
+      const labelName = `${this.params.fn || ''}${
+        this.params.n ? ` ${this.params.n}` : ''
+      }`;
+      f.dirigeantFilter.label = `${labelName}${
+        labelAge && labelName && ', '
+      }${labelAge}`;
     }
 
     if (this.params.etat) {
-      f.administrativeFilter.label = `Etat : ${this.params.etat === 'A' ? 'en activité' : 'cessée'
-        }`;
+      f.administrativeFilter.label = `Etat : ${
+        this.params.etat === 'A' ? 'en activité' : 'cessée'
+      }`;
     }
 
     let administrativeFilterCounter = 0;

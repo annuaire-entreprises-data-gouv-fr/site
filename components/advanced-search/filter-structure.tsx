@@ -42,7 +42,7 @@ export const FilterStructure: React.FC<{
         name="type"
         value={structureType}
         type="hidden"
-        onChange={() => { }}
+        onChange={() => {}}
       />
       <div className="badge-wrapper">
         <DefaultStructureBadge
@@ -85,7 +85,7 @@ export const FilterStructure: React.FC<{
         name="label"
         value={labelsSelected.join(',')}
         type="hidden"
-        onChange={() => { }}
+        onChange={() => {}}
       />
       <div className="badge-wrapper">
         <LabelAndCertificateBadge
