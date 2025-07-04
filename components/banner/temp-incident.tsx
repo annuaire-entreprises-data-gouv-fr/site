@@ -9,6 +9,8 @@ import styles from './styles.module.css';
 const TEMP_INCIDENT_BANNER_ID = 'temp-incident-banner';
 
 export default function TempIncidentBanner() {
+  return null;
+
   const [shouldDisplayBanner, setShouldDisplayBanner] = useStorage(
     'local',
     TEMP_INCIDENT_BANNER_ID,
