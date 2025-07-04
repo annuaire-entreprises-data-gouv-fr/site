@@ -46,7 +46,7 @@ export const CertificationESSSection = ({
   ess: IESS | IAPINotRespondingError;
 }) => (
   <DataSection
-    title="ESS - Entreprise Sociale et Solidaire"
+    title="ESS - Économie Sociale et Solidaire"
     id="ess"
     sources={[EAdministration.ESSFRANCE, EAdministration.INSEE]}
     data={ess}

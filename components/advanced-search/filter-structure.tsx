@@ -96,7 +96,7 @@ export const FilterStructure: React.FC<{
         />
 
         <LabelAndCertificateBadge
-          label="ESS - Entreprise Sociale et Solidaire"
+          label="ESS - Économie Sociale et Solidaire"
           isSelected={labelsSelected.includes('ess')}
           small
           onClick={() => toggleLabel('ess')}
