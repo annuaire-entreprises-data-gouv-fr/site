@@ -57,7 +57,7 @@
           },
           "listeIdcc": [
             {
-              "idcc": "2609",
+              "idcc": "1596",
               "title": ""
             },
             {
@@ -65,7 +65,7 @@
               "title": ""
             },
             {
-              "idcc": "1596",
+              "idcc": "2609",
               "title": ""
             }
           ]
@@ -125,7 +125,7 @@
               },
               "listeIdcc": [
                 {
-                  "idcc": "2609",
+                  "idcc": "1596",
                   "title": ""
                 },
                 {
@@ -133,7 +133,7 @@
                   "title": ""
                 },
                 {
-                  "idcc": "1596",
+                  "idcc": "2609",
                   "title": ""
                 }
               ]
@@ -185,7 +185,7 @@
               },
               "listeIdcc": [
                 {
-                  "idcc": "2609",
+                  "idcc": "1596",
                   "title": ""
                 },
                 {
@@ -193,7 +193,7 @@
                   "title": ""
                 },
                 {
-                  "idcc": "1596",
+                  "idcc": "2609",
                   "title": ""
                 }
               ]
@@ -211,7 +211,7 @@
         "dateCreation": "2018-11-12",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2025-02-04T13:52:53",
+        "dateMiseAJourInsee": "2025-05-06T05:13:22",
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -237,7 +237,10 @@
           "estUai": false,
           "estAchatsResponsables": false,
           "estEntrepriseInclusive": false,
-          "typeEntrepriseInclusive": null
+          "typeEntrepriseInclusive": null,
+          "estPatrimoineVivant": false,
+          "estAlimConfiance": false,
+          "bilanGesRenseigne": false
         },
         "association": {
           "idAssociation": null,
@@ -248,7 +251,7 @@
         },
         "listeIdcc": [
           {
-            "idcc": "2609",
+            "idcc": "1596",
             "title": ""
           },
           {
@@ -256,7 +259,7 @@
             "title": ""
           },
           {
-            "idcc": "1596",
+            "idcc": "2609",
             "title": ""
           }
         ],
