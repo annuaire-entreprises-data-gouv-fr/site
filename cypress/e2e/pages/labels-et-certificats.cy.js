@@ -13,7 +13,7 @@ describe('Label et certificats', () => {
   describe('ESS & Spectacles vivants', () => {
     it('Should display ESS and spectacles vivants', () => {
       cy.visit(`/labels-certificats/800329849`);
-      cy.contains('ESS - Entreprise Sociale et Solidaire').should('be.visible');
+      cy.contains('ESS - Économie Sociale et Solidaire').should('be.visible');
       cy.contains(
         'Cette structure apparait dans la liste des entreprises de l’Economie Sociale et Solidaire'
       ).should('be.visible');

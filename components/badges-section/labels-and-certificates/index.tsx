@@ -67,7 +67,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       {estEss && (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure appartient au champ de l’Economie Sociale et Solidaire"
-          label="ESS - Entreprise Sociale et Solidaire"
+          label="ESS - Économie Sociale et Solidaire"
           sectionId="ess"
           siren={uniteLegale.siren}
         />
