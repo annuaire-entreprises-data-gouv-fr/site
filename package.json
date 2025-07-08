@@ -29,7 +29,7 @@
     "@sentry/browser": "^8.55.0",
     "@sentry/nextjs": "^8.55.0",
     "@vcarl/remark-headings": "^0.1.0",
-    "axios": "^1.8.3",
+    "axios": "^1.10.0",
     "canvas": "^2.11.2",
     "chart.js": "^4.4.5",
     "crawler-user-agents": "^1.0.153",
