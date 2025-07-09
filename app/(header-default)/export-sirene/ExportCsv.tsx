@@ -198,7 +198,7 @@ export default function ExportCsv() {
   };
 
   return !showResults || !countResult ? (
-    <div>
+    <div className={styles.exportCsv}>
       <h1 className={styles.title}>
         Choisissez vos options pour générer une liste CSV
       </h1>

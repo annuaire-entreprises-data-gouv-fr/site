@@ -5,6 +5,16 @@
   margin-bottom: 32px;
 }
 
+.exportCsv h2 {
+  font-size: 1.1rem;
+  line-height: 1.8rem;
+}
+
+.exportCsv h3 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .formSection {
   margin-bottom: 32px;
   min-width: 340px;
