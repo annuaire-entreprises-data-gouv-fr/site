@@ -275,10 +275,40 @@ const routes = {
         `/groups/search?email=${email}${
           actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
         }`,
-      addUserToGroup: (groupId: number, userId: number, roleId: number) =>
-        `/groups/${groupId}/users/${userId}?role_id=${roleId}`,
-      removeUserFromGroup: (groupId: number, userId: number) =>
-        `/groups/${groupId}/users/${userId}`,
+      updateName: (
+        groupId: number,
+        groupName: string,
+        actingUserSub?: string
+      ) =>
+        `/groups/${groupId}?group_name=${groupName}${
+          actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
+        }`,
+      addUserToGroup: (
+        groupId: number,
+        userId: number,
+        roleId: number,
+        actingUserSub?: string
+      ) =>
+        `/groups/${groupId}/users/${userId}?role_id=${roleId}${
+          actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
+        }`,
+      updateUserFromGroup: (
+        groupId: number,
+        userId: number,
+        roleId: number,
+        actingUserSub?: string
+      ) =>
+        `/groups/${groupId}/users/${userId}?role_id=${roleId}${
+          actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
+        }`,
+      removeUserFromGroup: (
+        groupId: number,
+        userId: number,
+        actingUserSub?: string
+      ) =>
+        `/groups/${groupId}/users/${userId}${
+          actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
+        }`,
     },
     roles: {
       getRoles: () => `/roles`,

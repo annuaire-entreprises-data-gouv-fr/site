@@ -47,6 +47,24 @@ export class Group {
   /**
    * Add a user to this group (requires admin permissions)
    */
+  async updateName(groupName: string): Promise<boolean> {
+    try {
+      await droleClient.updateName(this.groupId, groupName);
+      return true;
+    } catch (error) {
+      logFatalErrorInSentry(
+        new FetchRessourceException({
+          ressource: 'D-Roles Update Name of a Group',
+          cause: error,
+        })
+      );
+      throw error;
+    }
+  }
+
+  /**
+   * Add a user to this group (requires admin permissions)
+   */
   async addUser(
     adminEmail: string,
     userEmail: string,
@@ -66,6 +84,35 @@ export class Group {
       logFatalErrorInSentry(
         new FetchRessourceException({
           ressource: 'D-Roles Add User to Group',
+          cause: error,
+        })
+      );
+      throw error;
+    }
+  }
+
+  /**
+   * Update a user from a group (requires admin permissions)
+   */
+  async updateUser(
+    adminEmail: string,
+    userEmail: string,
+    roleId: number
+  ): Promise<boolean> {
+    try {
+      const isAdmin = await this.isUserAdmin(adminEmail);
+      if (!isAdmin) {
+        throw new HttpUnauthorizedError(
+          'User does not have admin permissions for this group'
+        );
+      }
+
+      await droleClient.updateUserFromGroup(this.groupId, userEmail, roleId);
+      return true;
+    } catch (error) {
+      logFatalErrorInSentry(
+        new FetchRessourceException({
+          ressource: 'D-Roles Update User From Group',
           cause: error,
         })
       );
