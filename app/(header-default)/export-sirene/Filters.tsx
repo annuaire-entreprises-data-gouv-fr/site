@@ -468,7 +468,7 @@ export default function Filters({
         </h2>
         <div className={styles.dateContainer}>
           <div>
-            <h3>Date de création</h3>
+            <h3 style={{ marginTop: 0 }}>Date de création</h3>
             <div className={styles.dateGroup}>
               <label className={styles.dateLabel}>Depuis le</label>
               <input
@@ -508,7 +508,7 @@ export default function Filters({
             </div>
           </div>
           <div>
-            <h3>Date de mise à jour</h3>
+            <h3 style={{ marginTop: 0 }}>Date de mise à jour</h3>
             <div className={styles.dateGroup}>
               <label className={styles.dateLabel}>Depuis le</label>
               <input
