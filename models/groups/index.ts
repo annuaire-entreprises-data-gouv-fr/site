@@ -29,7 +29,10 @@ export class Groups {
           cause: error,
         })
       );
-      throw error;
+
+      // TEMP : allow a fallback to S3 without error
+      // throw error;
+      return [];
     }
   }
 }

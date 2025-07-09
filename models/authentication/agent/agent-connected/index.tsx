@@ -5,8 +5,10 @@ import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
+import { InternalError } from '#models/exceptions';
 import { Groups } from '#models/groups';
 import { isSiret, verifySiret } from '#utils/helpers';
+import { logWarningInSentry } from '#utils/sentry';
 import { AgentOrganisation } from '../organisation';
 import { defaultAgentScopes } from '../scopes/constants';
 
@@ -95,11 +97,14 @@ export class AgentConnected {
 
   async getAgentHabilitation() {
     const superAgentScopes = new Scopes();
+    let drolesScopes: string[] = [];
+    let s3Scopes: string[] = [];
 
     if (process.env.D_ROLES_ENABLED === 'enabled') {
       // Get scopes from Groups (D-Roles API) for this agent
       const groups = await Groups.find(this.email, this.userId);
       groups.forEach((group) => {
+        drolesScopes.push(...group.scopes);
         superAgentScopes.add(group.scopes);
       });
     }
@@ -108,7 +113,36 @@ export class AgentConnected {
     const superAgentsListScopesRaw = await superAgentsList.getScopeForAgent(
       this.email
     );
+    s3Scopes = [...superAgentsListScopesRaw];
     superAgentScopes.add(superAgentsListScopesRaw);
+
+    // Compare scopes from D-Roles and S3, log differences to Sentry
+    if (process.env.D_ROLES_ENABLED === 'enabled' && drolesScopes.length > 0) {
+      const drolesScopesSet = new Set(drolesScopes);
+      const s3ScopesSet = new Set(s3Scopes);
+
+      const onlyInDroles = drolesScopes.filter(
+        (scope) => !s3ScopesSet.has(scope)
+      );
+      const onlyInS3 = s3Scopes.filter((scope) => !drolesScopesSet.has(scope));
+
+      if (onlyInDroles.length > 0 || onlyInS3.length > 0) {
+        logWarningInSentry(
+          new InternalError({
+            message: 'Scope differences detected between D-Roles and S3',
+            context: {
+              details: JSON.stringify({
+                id: this.userId,
+                drolesScopes: drolesScopes,
+                s3Scopes: s3Scopes,
+                onlyInDroles: onlyInDroles,
+                onlyInS3: onlyInS3,
+              }),
+            },
+          })
+        );
+      }
+    }
 
     if (superAgentScopes.hasScopes()) {
       return {
