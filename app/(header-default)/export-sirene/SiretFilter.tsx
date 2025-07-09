@@ -126,7 +126,7 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
         >
           <div className={styles.titleRow}>
             Charger une liste de SIREN/SIRET
-            <Icon color={constants.colors.frBlue} slug="file" />
+            <Icon color={constants.colors.frBlue} slug="fileFill" />
           </div>
         </InformationTooltip>
       </h2>
