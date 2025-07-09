@@ -304,6 +304,28 @@ export default function Filters({
           <h2>
             Filtrer par localisation
             <Icon color={constants.colors.frBlue} slug="mapPinFill" />
+            <InformationTooltip
+              label={
+                <div>
+                  En savoir plus sur le code officiel géographique sur{' '}
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://www.insee.fr/fr/information/2560452"
+                  >
+                    le site de l‘INSEE
+                  </a>
+                </div>
+              }
+              tabIndex={0}
+              width={350}
+            >
+              <Icon
+                color={constants.colors.frBlue}
+                size={12}
+                slug="information"
+              />
+            </InformationTooltip>
           </h2>
           <div className={styles.filterContainer}>
             <div className={styles.filterColumn}>
@@ -350,6 +372,28 @@ export default function Filters({
           <h2>
             Filtrer par type de structure
             <Icon color={constants.colors.frBlue} slug="buildingFill" />
+            <InformationTooltip
+              label={
+                <div>
+                  En savoir plus sur les codes NAF/APE sur{' '}
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://www.insee.fr/fr/information/2120875"
+                  >
+                    le site de l‘INSEE
+                  </a>
+                </div>
+              }
+              tabIndex={0}
+              width={350}
+            >
+              <Icon
+                color={constants.colors.frBlue}
+                size={12}
+                slug="information"
+              />
+            </InformationTooltip>
           </h2>
           <div className={styles.filterContainer}>
             <div className={styles.filterColumn}>
@@ -410,6 +454,28 @@ export default function Filters({
           <h2>
             Filtrer par catégorie juridique
             <Icon color={constants.colors.frBlue} slug="scaleFill" />
+            <InformationTooltip
+              label={
+                <div>
+                  En savoir plus sur les catégories juridique sur{' '}
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://www.insee.fr/fr/information/2028129"
+                  >
+                    le site de l‘INSEE
+                  </a>
+                </div>
+              }
+              tabIndex={0}
+              width={350}
+            >
+              <Icon
+                color={constants.colors.frBlue}
+                size={12}
+                slug="information"
+              />
+            </InformationTooltip>
           </h2>
           <div>
             <MultiSelect
