@@ -62,7 +62,7 @@ export default function Filters({
             <Icon color={constants.colors.frBlue} slug="lightbulbFill" />
           </h2>
 
-          <h3 className={styles.subsectionTitle}>Par état administratif</h3>
+          <h3>Par état administratif</h3>
           <div className="fr-fieldset__element">
             <div className="fr-radio-group">
               <input
@@ -118,7 +118,7 @@ export default function Filters({
             </div>
           </div>
 
-          <h3 className={styles.subsectionTitle}>Par type d‘établissement</h3>
+          <h3>Par type d‘établissement</h3>
           <div className="fr-checkbox-group">
             <input
               type="checkbox"
@@ -150,7 +150,7 @@ export default function Filters({
             <Icon color={constants.colors.frBlue} slug="groupFill" />
           </h2>
           <div className={styles.sizeSliderContainer}>
-            <h3 className={styles.subsectionTitle}>Effectifs</h3>
+            <h3>Effectifs</h3>
             <div className="fr-checkbox-group">
               <input
                 type="checkbox"
@@ -213,7 +213,7 @@ export default function Filters({
             </div>
           </div>
           <div>
-            <h3 className={styles.subsectionTitle}>Catégorie</h3>
+            <h3>Catégorie</h3>
             <ul className="fr-tags-group">
               {categoriesEntreprisesOptions.map(({ label, value }) => (
                 <li key={value}>

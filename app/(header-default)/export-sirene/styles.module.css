@@ -48,13 +48,6 @@
   gap: 8px;
 }
 
-/* Subsections */
-.subsectionTitle {
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 12px;
-}
-
 .sizeSliderContainer {
   margin-bottom: 24px;
 }
@@ -165,6 +158,12 @@ div.location-filter-container {
 .selectedLocations {
   flex: 1;
   min-width: 300px;
+}
+
+.locationTitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
 }
 
 .noLocations {

@@ -167,9 +167,7 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
         {siretsAndSirens.length > 0 && (
           <div className={styles.siretListContainer}>
             <div className={styles.siretListHeader}>
-              <h3 className={styles.subsectionTitle}>
-                Sélection actuelle ({siretsAndSirens.length})
-              </h3>
+              <h3>Sélection actuelle ({siretsAndSirens.length})</h3>
               <button
                 type="button"
                 className="fr-btn fr-btn--sm fr-btn--secondary"
