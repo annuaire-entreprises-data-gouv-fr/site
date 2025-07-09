@@ -42,12 +42,6 @@
   gap: 8px;
 }
 
-.infoSection > div {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
 /* Subsections */
 .subsectionTitle {
   font-size: 16px;

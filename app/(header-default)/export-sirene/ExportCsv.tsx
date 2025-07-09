@@ -200,17 +200,25 @@ export default function ExportCsv() {
   return !showResults || !countResult ? (
     <div className={styles.exportCsv}>
       <h1 className={styles.title}>
-        Choisissez vos options pour générer une liste CSV
+        Générez une liste CSV à partir du répertoire Sirene
       </h1>
       <div className={styles.infoSection}>
         <div>
-          💡 Utilisez plusieurs filtres pour affiner votre recherche et générer
-          une liste personnalisée. Vous pourrez ensuite exporter les résultats
-          au format CSV.
+          Cette page vous permet de constituer une liste d‘établissements selon
+          vos critères à partir du répertoire Sirene.
         </div>
         <div>
-          La recherche par raison sociale ou par nom de dirigeant n‘est pas
-          disponible.
+          Les données sont disponibles le lendemain du jour de traitement au
+          répertoire Sirene.
+        </div>
+        <div>
+          💡 Ces listes ne contiennent pas les noms de dirigeants, les adresses
+          de courriel, les sites web ou les numéros de téléphone. Pour plus de
+          détails sur le contenu des fichiers, consultez la{' '}
+          <a href="https://sirene.fr/sirene/public/static/documentation">
+            documentation
+          </a>
+          .
         </div>
       </div>
       <form onSubmit={handleCountSubmit}>
