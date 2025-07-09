@@ -245,6 +245,18 @@ export default function ExportCsv() {
           Le nombre de résultats ({formatNumber(countResult.count)}) dépasse la
           limite autorisée de 200 000. Veuillez affiner vos critères de
           recherche pour réduire le nombre de résultats.
+          <br />
+          <br />
+          Vous pouvez aussi directement utiliser l‘API Sirene ou téléchargez la
+          base complète sur{' '}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/"
+          >
+            data.gouv.fr
+          </a>
+          .
         </div>
       ) : countResult.count === 0 ? (
         <div className={styles.fileDownloadSection}>
