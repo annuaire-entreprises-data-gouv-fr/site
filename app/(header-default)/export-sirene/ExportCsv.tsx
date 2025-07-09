@@ -212,9 +212,9 @@ export default function ExportCsv() {
           répertoire Sirene.
         </div>
         <div>
-          💡 Ces listes ne contiennent pas les noms de dirigeants, les adresses
-          de courriel, les sites web ou les numéros de téléphone. Pour plus de
-          détails sur le contenu des fichiers, consultez la{' '}
+          💡 Ces listes ne contiennent pas de nom de dirigeant, d‘adresse
+          courriel, de site web ou de numéro de téléphone. Pour plus de détails
+          sur le contenu des fichiers, consultez la{' '}
           <a href="https://sirene.fr/sirene/public/static/documentation">
             documentation
           </a>
