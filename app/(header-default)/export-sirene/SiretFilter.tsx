@@ -41,6 +41,13 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
           .map((line) => line.trim())
           .filter((line) => line.length > 0);
 
+        if (lines.length > 500) {
+          setError(
+            'Le fichier contient plus de 500 lignes. Vous ne pouvez pas charger plus de 500 lignes.'
+          );
+          return;
+        }
+
         const invalidValues = lines.filter(
           (line) => !validateSiretOrSiren(line)
         );
