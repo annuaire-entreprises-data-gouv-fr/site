@@ -58,8 +58,10 @@ export default function Filters({
       <div className={styles.row}>
         <section className={styles.formSection}>
           <h2>
-            Filtrer par situation administrative{' '}
-            <Icon color={constants.colors.frBlue} slug="lightbulbFill" />
+            <div className={styles.titleRow}>
+              Filtrer par situation administrative
+              <Icon color={constants.colors.frBlue} slug="lightbulbFill" />
+            </div>
           </h2>
 
           <h3>Par état administratif</h3>
@@ -146,8 +148,10 @@ export default function Filters({
 
         <section className={styles.formSection}>
           <h2>
-            Filtrer par taille{' '}
-            <Icon color={constants.colors.frBlue} slug="groupFill" />
+            <div className={styles.titleRow}>
+              Filtrer par taille
+              <Icon color={constants.colors.frBlue} slug="groupFill" />
+            </div>
           </h2>
           <div className={styles.sizeSliderContainer}>
             <h3>Effectifs</h3>
@@ -251,8 +255,10 @@ export default function Filters({
       <div>
         <section>
           <h2>
-            Filtrer par localisation{' '}
-            <Icon color={constants.colors.frBlue} slug="mapPinFill" />
+            <div className={styles.titleRow}>
+              Filtrer par localisation
+              <Icon color={constants.colors.frBlue} slug="mapPinFill" />
+            </div>
           </h2>
           <div className={styles.filterContainer}>
             <div className={styles.filterColumn}>
@@ -297,8 +303,10 @@ export default function Filters({
       <div className={styles.row}>
         <section className={styles.formSection}>
           <h2>
-            Filtrer par type de structure{' '}
-            <Icon color={constants.colors.frBlue} slug="buildingFill" />
+            <div className={styles.titleRow}>
+              Filtrer par type de structure
+              <Icon color={constants.colors.frBlue} slug="buildingFill" />
+            </div>
           </h2>
           <div className={styles.filterContainer}>
             <div className={styles.filterColumn}>
@@ -357,8 +365,10 @@ export default function Filters({
       <div>
         <section className={styles.formSection}>
           <h2>
-            Filtrer par catégorie juridique{' '}
-            <Icon color={constants.colors.frBlue} slug="scaleFill" />
+            <div className={styles.titleRow}>
+              Filtrer par catégorie juridique
+              <Icon color={constants.colors.frBlue} slug="scaleFill" />
+            </div>
           </h2>
           <div>
             <MultiSelect
