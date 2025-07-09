@@ -247,7 +247,7 @@ export default function ExportCsv() {
           recherche pour réduire le nombre de résultats.
           <br />
           <br />
-          Vous pouvez aussi directement utiliser l‘API Sirene ou téléchargez la
+          Vous pouvez aussi directement utiliser l‘API Sirene ou télécharger la
           base complète sur{' '}
           <a
             target="_blank"
