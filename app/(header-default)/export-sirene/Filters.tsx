@@ -59,10 +59,8 @@ export default function Filters({
       <div className={styles.row}>
         <section className={styles.formSection}>
           <h2>
-            <div className={styles.titleRow}>
-              Filtrer par situation administrative
-              <Icon color={constants.colors.frBlue} slug="lightbulbFill" />
-            </div>
+            Filtrer par situation administrative
+            <Icon color={constants.colors.frBlue} slug="lightbulbFill" />
           </h2>
 
           <h3>Par état administratif</h3>
@@ -149,13 +147,12 @@ export default function Filters({
 
         <section className={styles.formSection}>
           <h2>
-            <div className={styles.titleRow}>
-              Filtrer par taille
-              <Icon color={constants.colors.frBlue} slug="groupFill" />
-            </div>
+            Filtrer par taille
+            <Icon color={constants.colors.frBlue} slug="groupFill" />
           </h2>
           <div className={styles.sizeSliderContainer}>
             <h3>
+              Effectifs{' '}
               <InformationTooltip
                 label={
                   <div>
@@ -178,7 +175,11 @@ export default function Filters({
                 tabIndex={0}
                 width={350}
               >
-                Effectifs
+                <Icon
+                  color={constants.colors.frBlue}
+                  size={12}
+                  slug="information"
+                />
               </InformationTooltip>
             </h3>
             <div className="fr-checkbox-group">
@@ -244,6 +245,7 @@ export default function Filters({
           </div>
           <div>
             <h3>
+              Catégorie{' '}
               <InformationTooltip
                 label={
                   <div>
@@ -256,7 +258,11 @@ export default function Filters({
                 tabIndex={0}
                 width={350}
               >
-                Catégorie
+                <Icon
+                  color={constants.colors.frBlue}
+                  size={12}
+                  slug="information"
+                />
               </InformationTooltip>
             </h3>
             <ul className="fr-tags-group">
@@ -296,10 +302,8 @@ export default function Filters({
       <div>
         <section>
           <h2>
-            <div className={styles.titleRow}>
-              Filtrer par localisation
-              <Icon color={constants.colors.frBlue} slug="mapPinFill" />
-            </div>
+            Filtrer par localisation
+            <Icon color={constants.colors.frBlue} slug="mapPinFill" />
           </h2>
           <div className={styles.filterContainer}>
             <div className={styles.filterColumn}>
@@ -344,10 +348,8 @@ export default function Filters({
       <div className={styles.row}>
         <section className={styles.formSection}>
           <h2>
-            <div className={styles.titleRow}>
-              Filtrer par type de structure
-              <Icon color={constants.colors.frBlue} slug="buildingFill" />
-            </div>
+            Filtrer par type de structure
+            <Icon color={constants.colors.frBlue} slug="buildingFill" />
           </h2>
           <div className={styles.filterContainer}>
             <div className={styles.filterColumn}>
@@ -406,10 +408,8 @@ export default function Filters({
       <div>
         <section className={styles.formSection}>
           <h2>
-            <div className={styles.titleRow}>
-              Filtrer par catégorie juridique
-              <Icon color={constants.colors.frBlue} slug="scaleFill" />
-            </div>
+            Filtrer par catégorie juridique
+            <Icon color={constants.colors.frBlue} slug="scaleFill" />
           </h2>
           <div>
             <MultiSelect
@@ -433,6 +433,8 @@ export default function Filters({
 
       <section className={styles.formSection}>
         <h2>
+          Filtrer par date
+          <Icon color={constants.colors.frBlue} slug="calendarFill" />{' '}
           <InformationTooltip
             label={
               <div>
@@ -460,10 +462,11 @@ export default function Filters({
             tabIndex={0}
             width={350}
           >
-            <div className={styles.titleRow}>
-              Filtrer par date
-              <Icon color={constants.colors.frBlue} slug="calendarFill" />
-            </div>
+            <Icon
+              color={constants.colors.frBlue}
+              size={12}
+              slug="information"
+            />
           </InformationTooltip>
         </h2>
         <div className={styles.dateContainer}>
