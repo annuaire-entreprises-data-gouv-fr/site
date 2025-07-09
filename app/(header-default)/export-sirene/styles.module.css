@@ -10,6 +10,12 @@
   line-height: 1.8rem;
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
 .exportCsv h3 {
   font-size: 1rem;
   line-height: 1.5rem;

@@ -124,8 +124,10 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
           tabIndex={0}
           width={350}
         >
-          Charger une liste de SIREN/SIRET
-          <Icon color={constants.colors.frBlue} slug="file" />
+          <div className={styles.titleRow}>
+            Charger une liste de SIREN/SIRET
+            <Icon color={constants.colors.frBlue} slug="file" />
+          </div>
         </InformationTooltip>
       </h2>
 
