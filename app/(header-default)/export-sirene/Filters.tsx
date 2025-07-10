@@ -518,6 +518,10 @@ export default function Filters({
                       légales créés sur une période définie (ex: entre le 1er
                       décembre 2014 et le 31 janvier 2015).
                     </div>
+                    <div style={{ marginTop: 8 }}>
+                      Si vous souhaitez obtenir une liste d‘unités légales, il
+                      faut cocher &quot;Siège social uniquement&quot;.
+                    </div>
                   </div>
                 }
                 tabIndex={0}
@@ -585,7 +589,7 @@ export default function Filters({
                     </div>
                     <div style={{ marginTop: 8 }}>
                       Si vous souhaitez obtenir une liste d‘unités légales, il
-                      faut cocher &quot;Siège social uniquement&quot;
+                      faut cocher &quot;Siège social uniquement&quot;.
                     </div>
                   </div>
                 }
