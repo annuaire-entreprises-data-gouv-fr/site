@@ -97,6 +97,10 @@
   min-width: 200px;
 }
 
+.qualityFilterColumn {
+  flex: 1;
+}
+
 /* Button section */
 .buttonContainer {
   display: flex;

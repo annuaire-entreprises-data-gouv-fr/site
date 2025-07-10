@@ -497,6 +497,233 @@ export default function Filters({
         </section>
       </div>
 
+      <div className={styles.row}>
+        <section className={styles.formSection}>
+          <h2>
+            Filtrer par qualité
+            <Icon color={constants.colors.frBlue} slug="awardFill" />
+          </h2>
+
+          <div className={styles.dateContainer}>
+            <div className={styles.qualityFilterColumn}>
+              <h3 style={{ marginTop: 0 }}>
+                Appartenance au champ de l‘économie sociale et solidaire{' '}
+                <InformationTooltip
+                  label={
+                    <div>
+                      Pour plus d‘informations, consultez la{' '}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="/definitions/economie-sociale-et-solidaire-ess"
+                      >
+                        définition de l‘ESS
+                      </a>
+                      .
+                    </div>
+                  }
+                  tabIndex={0}
+                  width={350}
+                >
+                  <Icon
+                    color={constants.colors.frBlue}
+                    size={12}
+                    slug="information"
+                  />
+                </InformationTooltip>
+              </h3>
+              <fieldset
+                className="fr-fieldset"
+                aria-labelledby="ess-legend ess-messages"
+              >
+                <div className="fr-fieldset__element">
+                  <div className="fr-checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="ess-inclure"
+                      name="ess-inclure"
+                      checked={filters.ess?.inclure || false}
+                      onChange={(e) =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          ess: {
+                            inclure: e.target.checked,
+                            inclureNo: prev.ess?.inclureNo || false,
+                            inclureNonRenseigne:
+                              prev.ess?.inclureNonRenseigne || false,
+                          },
+                        }))
+                      }
+                    />
+                    <label className="fr-label" htmlFor="ess-inclure">
+                      Oui
+                    </label>
+                  </div>
+                </div>
+                <div className="fr-fieldset__element">
+                  <div className="fr-checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="ess-inclure-no"
+                      name="ess-inclure-no"
+                      checked={filters.ess?.inclureNo || false}
+                      onChange={(e) =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          ess: {
+                            inclure: prev.ess?.inclure || false,
+                            inclureNo: e.target.checked,
+                            inclureNonRenseigne:
+                              prev.ess?.inclureNonRenseigne || false,
+                          },
+                        }))
+                      }
+                    />
+                    <label className="fr-label" htmlFor="ess-inclure-no">
+                      Non
+                    </label>
+                  </div>
+                </div>
+                <div className="fr-fieldset__element">
+                  <div className="fr-checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="ess-inclure-non-renseigne"
+                      name="ess-inclure-non-renseigne"
+                      checked={filters.ess?.inclureNonRenseigne || false}
+                      onChange={(e) =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          ess: {
+                            inclure: prev.ess?.inclure || false,
+                            inclureNo: prev.ess?.inclureNo || false,
+                            inclureNonRenseigne: e.target.checked,
+                          },
+                        }))
+                      }
+                    />
+                    <label
+                      className="fr-label"
+                      htmlFor="ess-inclure-non-renseigne"
+                    >
+                      Non renseignée
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div className={styles.qualityFilterColumn}>
+              <h3 style={{ marginTop: 0 }}>
+                Appartenance au champ des sociétés à mission{' '}
+                <InformationTooltip
+                  label={
+                    <div>
+                      Pour plus d‘informations, consultez la{' '}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="/definitions/societe-a-mission"
+                      >
+                        définition de société à mission
+                      </a>
+                      .
+                    </div>
+                  }
+                  tabIndex={0}
+                  width={350}
+                >
+                  <Icon
+                    color={constants.colors.frBlue}
+                    size={12}
+                    slug="information"
+                  />
+                </InformationTooltip>
+              </h3>
+              <fieldset
+                className="fr-fieldset"
+                aria-labelledby="mission-legend mission-messages"
+              >
+                <div className="fr-fieldset__element">
+                  <div className="fr-checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="mission-inclure"
+                      name="mission-inclure"
+                      checked={filters.mission?.inclure || false}
+                      onChange={(e) =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          mission: {
+                            inclure: e.target.checked,
+                            inclureNo: prev.mission?.inclureNo || false,
+                            inclureNonRenseigne:
+                              prev.mission?.inclureNonRenseigne || false,
+                          },
+                        }))
+                      }
+                    />
+                    <label className="fr-label" htmlFor="mission-inclure">
+                      Oui
+                    </label>
+                  </div>
+                </div>
+                <div className="fr-fieldset__element">
+                  <div className="fr-checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="mission-inclure-no"
+                      name="mission-inclure-no"
+                      checked={filters.mission?.inclureNo || false}
+                      onChange={(e) =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          mission: {
+                            inclure: prev.mission?.inclure || false,
+                            inclureNo: e.target.checked,
+                            inclureNonRenseigne:
+                              prev.mission?.inclureNonRenseigne || false,
+                          },
+                        }))
+                      }
+                    />
+                    <label className="fr-label" htmlFor="mission-inclure-no">
+                      Non
+                    </label>
+                  </div>
+                </div>
+                <div className="fr-fieldset__element">
+                  <div className="fr-checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="mission-inclure-non-renseigne"
+                      name="mission-inclure-non-renseigne"
+                      checked={filters.mission?.inclureNonRenseigne || false}
+                      onChange={(e) =>
+                        setFilters((prev) => ({
+                          ...prev,
+                          mission: {
+                            inclure: prev.mission?.inclure || false,
+                            inclureNo: prev.mission?.inclureNo || false,
+                            inclureNonRenseigne: e.target.checked,
+                          },
+                        }))
+                      }
+                    />
+                    <label
+                      className="fr-label"
+                      htmlFor="mission-inclure-non-renseigne"
+                    >
+                      Non renseignée
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </section>
+      </div>
+
       <section className={styles.formSection}>
         <h2>
           Filtrer par date
