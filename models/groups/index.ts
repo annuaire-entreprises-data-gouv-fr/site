@@ -27,6 +27,9 @@ export class Groups {
         new FetchRessourceException({
           ressource: 'D-Roles Groups',
           cause: error,
+          context: {
+            details: process.env.D_ROLES_CLIENT_ID,
+          },
         })
       );
 
