@@ -14,7 +14,7 @@ export const LocationTags = ({
 }) => {
   return (
     <div className={styles.selectedLocations}>
-      <div className={styles.subsectionTitle}>Localisations sélectionnées</div>
+      <div className={styles.locationTitle}>Localisations sélectionnées</div>
       {!filters.locations?.length ? (
         <p className={styles.noLocations}>Aucune localisation sélectionnée</p>
       ) : (

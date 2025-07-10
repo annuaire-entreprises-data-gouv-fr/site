@@ -5,6 +5,19 @@
   margin-bottom: 32px;
 }
 
+.exportCsv h2 {
+  font-size: 1.1rem;
+  line-height: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.exportCsv h3 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .formSection {
   margin-bottom: 32px;
   min-width: 340px;
@@ -30,19 +43,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.infoSection > div {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-/* Subsections */
-.subsectionTitle {
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 12px;
 }
 
 .sizeSliderContainer {
@@ -155,6 +155,12 @@ div.location-filter-container {
 .selectedLocations {
   flex: 1;
   min-width: 300px;
+}
+
+.locationTitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
 }
 
 .noLocations {

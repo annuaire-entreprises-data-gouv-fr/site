@@ -1,6 +1,7 @@
 'use client';
 
 import { Icon } from '#components-ui/icon/wrapper';
+import InformationTooltip from '#components-ui/information-tooltip';
 import constants from '#models/constants';
 import { useRef, useState } from 'react';
 import styles from './styles.module.css';
@@ -39,6 +40,13 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
           .split('\n')
           .map((line) => line.trim())
           .filter((line) => line.length > 0);
+
+        if (lines.length > 500) {
+          setError(
+            'Le fichier contient plus de 500 lignes. Vous ne pouvez pas charger plus de 500 lignes.'
+          );
+          return;
+        }
 
         const invalidValues = lines.filter(
           (line) => !validateSiretOrSiren(line)
@@ -102,8 +110,31 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
   return (
     <section className={styles.formSection}>
       <h2>
-        Charger une liste de SIREN/SIRET{' '}
-        <Icon color={constants.colors.frBlue} slug="file" />
+        Charger une liste de SIREN/SIRET
+        <Icon color={constants.colors.frBlue} slug="fileFill" />{' '}
+        <InformationTooltip
+          label={
+            <div>
+              <strong>Format requis :</strong>
+              <ul>
+                <li>Fichier .txt (UTF-8)</li>
+                <li>SIREN (9 positions) ou SIRET (14 positions) uniquement</li>
+                <li>
+                  Un SIREN ou SIRET par ligne, sans séparateur et sans ligne à
+                  vide
+                </li>
+                <li>500 lignes maximum</li>
+              </ul>
+              <strong>Note :</strong> Si vous sélectionnez d&apos;autres
+              critères en complément de votre liste (Localisation, activité...),
+              ils peuvent éliminer certains SIRET de cette liste.
+            </div>
+          }
+          tabIndex={0}
+          width={350}
+        >
+          <Icon color={constants.colors.frBlue} size={12} slug="information" />
+        </InformationTooltip>
       </h2>
 
       <div className={styles.siretContainer}>
@@ -142,9 +173,7 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
         {siretsAndSirens.length > 0 && (
           <div className={styles.siretListContainer}>
             <div className={styles.siretListHeader}>
-              <h3 className={styles.subsectionTitle}>
-                Sélection actuelle ({siretsAndSirens.length})
-              </h3>
+              <h3>Sélection actuelle ({siretsAndSirens.length})</h3>
               <button
                 type="button"
                 className="fr-btn fr-btn--sm fr-btn--secondary"

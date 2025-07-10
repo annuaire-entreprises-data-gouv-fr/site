@@ -15,6 +15,10 @@ export class SireneQueryBuilder {
   }
 
   private addCategoryConditions = (categories: string[]) => {
+    if (!categories?.length) {
+      return;
+    }
+
     const categoryConditions = categories.join(' OR ');
     this.conditions.push(`(categorieEntreprise:(${categoryConditions}))`);
   };
@@ -77,6 +81,10 @@ export class SireneQueryBuilder {
   };
 
   private addSirenSiretConditions = (siretsAndSirens: string[]) => {
+    if (!siretsAndSirens?.length) {
+      return;
+    }
+
     const sirens = siretsAndSirens.filter((siren) => siren.length === 9);
     const sirets = siretsAndSirens.filter((siret) => siret.length === 14);
     const sirenConditions =
@@ -97,6 +105,10 @@ export class SireneQueryBuilder {
     headcount: { min: number; max: number },
     isHq?: boolean
   ) => {
+    if (!headcount?.min || !headcount?.max) {
+      return;
+    }
+
     const minIndex = effectifCodes.indexOf(
       headcount.min.toString().padStart(2, '0')
     );
@@ -115,6 +127,10 @@ export class SireneQueryBuilder {
   };
 
   private addLegalCategoryConditions = (legalCategories: string[]) => {
+    if (!legalCategories?.length) {
+      return;
+    }
+
     const legalCategoriesConditions = legalCategories.map(
       (cat) => `categorieJuridiqueUniteLegale:${cat}`
     );
@@ -333,7 +349,7 @@ export class SireneQueryBuilder {
 
     // Catégorie d'entreprise
     // Ligne 784
-    if (params.categories && params.categories.length > 0) {
+    if (params.categories) {
       this.addCategoryConditions(params.categories);
     }
 
