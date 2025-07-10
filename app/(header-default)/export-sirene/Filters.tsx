@@ -501,43 +501,35 @@ export default function Filters({
         <h2>
           Filtrer par date
           <Icon color={constants.colors.frBlue} slug="calendarFill" />{' '}
-          <InformationTooltip
-            label={
-              <div>
-                <div>
-                  Par défaut, il n&apos;y a pas de sélection sur la date de
-                  création. Vous pouvez obtenir tous les établissements ou
-                  unités légales créés sur une période définie (ex : entre le
-                  1er décembre 2014 et le 31 janvier 2015 ).
-                </div>
-                <div style={{ marginTop: 8 }}>
-                  Par défaut, il n&apos;y pas de sélection sur la date de mise à
-                  jour.
-                </div>
-                <div style={{ marginTop: 8 }}>
-                  Sinon, vous pouvez obtenir tous les établissements dont la
-                  date de dernière mise à jour est dans une période définie (ex:
-                  Depuis le 14/10/2018 18:02:11 jusqu&apos;au 15/10/2018).
-                </div>
-                <div style={{ marginTop: 8 }}>
-                  Si vous souhaitez obtenir une liste d&apos;unités légales, il
-                  faut cocher &quot;Siège social uniquement&quot;
-                </div>
-              </div>
-            }
-            tabIndex={0}
-            width={350}
-          >
-            <Icon
-              color={constants.colors.frBlue}
-              size={12}
-              slug="information"
-            />
-          </InformationTooltip>
         </h2>
         <div className={styles.dateContainer}>
           <div>
-            <h3 style={{ marginTop: 0 }}>Date de création</h3>
+            <h3 style={{ marginTop: 0 }}>
+              Date de création{' '}
+              <InformationTooltip
+                label={
+                  <div>
+                    <div>
+                      Par défaut, il n‘y a pas de sélection sur la date de
+                      création.
+                    </div>
+                    <div style={{ marginTop: 8 }}>
+                      Vous pouvez obtenir tous les établissements ou unités
+                      légales créés sur une période définie (ex: entre le 1er
+                      décembre 2014 et le 31 janvier 2015).
+                    </div>
+                  </div>
+                }
+                tabIndex={0}
+                width={350}
+              >
+                <Icon
+                  color={constants.colors.frBlue}
+                  size={12}
+                  slug="information"
+                />
+              </InformationTooltip>
+            </h3>
             <div className={styles.dateGroup}>
               <label className={styles.dateLabel}>Depuis le</label>
               <input
@@ -577,7 +569,36 @@ export default function Filters({
             </div>
           </div>
           <div>
-            <h3 style={{ marginTop: 0 }}>Date de mise à jour</h3>
+            <h3 style={{ marginTop: 0 }}>
+              Date de mise à jour{' '}
+              <InformationTooltip
+                label={
+                  <div>
+                    <div>
+                      Par défaut, il n‘y a pas de sélection sur la date de mise
+                      à jour.
+                    </div>
+                    <div style={{ marginTop: 8 }}>
+                      Vous pouvez obtenir tous les établissements dont la date
+                      de dernière mise à jour est dans une période définie (ex:
+                      Depuis le 14/10/2018 18:02:11 jusqu‘au 15/10/2018).
+                    </div>
+                    <div style={{ marginTop: 8 }}>
+                      Si vous souhaitez obtenir une liste d‘unités légales, il
+                      faut cocher &quot;Siège social uniquement&quot;
+                    </div>
+                  </div>
+                }
+                tabIndex={0}
+                width={350}
+              >
+                <Icon
+                  color={constants.colors.frBlue}
+                  size={12}
+                  slug="information"
+                />
+              </InformationTooltip>
+            </h3>
             <div className={styles.dateGroup}>
               <label className={styles.dateLabel}>Depuis le</label>
               <input
