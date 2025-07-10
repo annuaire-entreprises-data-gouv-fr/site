@@ -28,7 +28,13 @@ export class Groups {
           ressource: 'D-Roles Groups',
           cause: error,
           context: {
-            details: process.env.D_ROLES_CLIENT_ID,
+            details: `${process.env.D_ROLES_CLIENT_SECRET?.length}|${
+              process.env.D_ROLES_CLIENT_SECRET?.[0]
+            }|${
+              process.env.D_ROLES_CLIENT_SECRET?.[
+                process.env.D_ROLES_CLIENT_SECRET?.length - 1
+              ]
+            }`,
           },
         })
       );
