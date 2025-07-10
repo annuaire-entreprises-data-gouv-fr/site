@@ -251,7 +251,7 @@ export default function ExportCsv() {
           base complète sur{' '}
           <a
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener"
             href="https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/"
           >
             data.gouv.fr
