@@ -22,6 +22,7 @@ import {
 } from '#models/core/types';
 import { getRechercheEntrepriseSourcesLastModified } from '#models/recherche-entreprise-modified';
 import {
+  extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -34,6 +35,7 @@ import getSession from '#utils/server-side-helper/app/get-session';
 import { UniteLegaleImmatriculationSection } from 'app/(header-default)/entreprise/[slug]/_components/immatriculation-section';
 import UniteLegaleSummarySection from 'app/(header-default)/entreprise/[slug]/_components/summary-section';
 import { Metadata } from 'next';
+import { permanentRedirect } from 'next/navigation';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -62,6 +64,15 @@ export default async function UniteLegalePage(props: AppRouterProps) {
     cachedGetUniteLegale(slug, isBot, page),
     getRechercheEntrepriseSourcesLastModified(),
   ]);
+
+  const extractedSiren = extractSirenOrSiretSlugFromUrl(slug);
+  if (
+    slug === extractedSiren &&
+    uniteLegale.chemin &&
+    uniteLegale.chemin !== uniteLegale.siren
+  ) {
+    permanentRedirect(`/entreprise/${uniteLegale.chemin}`);
+  }
 
   return (
     <>
