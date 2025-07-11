@@ -3,24 +3,24 @@ describe('Siren / Siret redirections', () => {
     cy.visit('/');
 
     cy.get('.fr-search-bar > input')
-      .type('123456789')
-      .should('have.value', '123456789');
+      .type('552032534')
+      .should('have.value', '552032534');
 
     cy.get('.fr-search-bar > button').click();
 
-    cy.url().should('include', '/entreprise/123456789');
+    cy.url().should('include', '/entreprise/danone-552032534');
   });
 
   it('Unformatted siren redirection', () => {
     cy.visit('/');
 
     cy.get('.fr-search-bar > input')
-      .type('123 456 789')
-      .should('have.value', '123 456 789');
+      .type('552 032 534')
+      .should('have.value', '552 032 534');
 
     cy.get('.fr-search-bar > button').click();
 
-    cy.url().should('include', '/entreprise/123456789');
+    cy.url().should('include', '/entreprise/danone-552032534');
   });
 
   it('Not found redirection', () => {
@@ -52,7 +52,7 @@ describe('Siren / Siret redirections', () => {
     cy.url().should('include', '/etablissement/48744469700428');
 
     cy.visit('/etablissement/487444697');
-    cy.url().should('include', '/entreprise/487444697');
+    cy.url().should('include', '/entreprise/essor-energies-solarsud-487444697');
   });
 
   it('Allow search request with 9 or plus digits', () => {
