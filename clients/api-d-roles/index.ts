@@ -12,13 +12,13 @@ import { parseAgentScopes } from './parse';
 
 /**
  * D-Roles
- * https://roles.preprod.data.gouv.fr/
+ * https://roles.data.gouv.fr/
  */
 export const getGroupsByEmail = async (
-  email: string,
-  actingUserSub?: string
+  userEmail: string,
+  userSub: string
 ): Promise<IDRolesGroup[]> => {
-  const route = routes.dRoles.groups.getGroupsByEmail(email, actingUserSub);
+  const route = routes.dRoles.groups.getGroupsByEmail(userEmail, userSub);
   const response = await droleApiClient.fetch<IDRolesGroupSearchResponse>(
     route,
     {
@@ -48,7 +48,7 @@ const mapToDomainObject = (
 };
 
 export const getRoles = async (): Promise<IDRolesRoles[]> => {
-  const route = routes.dRoles.roles.getRoles();
+  const route = routes.dRoles.roles.get;
   return await droleApiClient.fetch<IDRolesRoles[]>(route, { method: 'GET' });
 };
 
@@ -59,24 +59,62 @@ export const getUserByEmail = async (email: string): Promise<IDRolesUser> => {
   });
 };
 
+export const updateName = async (
+  groupId: number,
+  groupName: string,
+  actingUserSub: string
+): Promise<null> => {
+  const route = routes.dRoles.groups.updateName(
+    groupId,
+    groupName,
+    actingUserSub
+  );
+  return await droleApiClient.fetch<null>(route, {
+    method: 'PUT',
+  });
+};
 export const addUserToGroup = async (
   groupId: number,
   email: string,
-  roleId: number
+  roleId: number,
+  actingUserSub: string
 ): Promise<null> => {
   const user = await getUserByEmail(email);
-  const route = routes.dRoles.groups.addUserToGroup(groupId, user.id, roleId);
+  const route = routes.dRoles.groups.addUserToGroup(groupId, actingUserSub);
   return await droleApiClient.fetch<null>(route, {
     method: 'PUT',
-    data: { email },
+    data: { email, role_id: roleId },
+  });
+};
+
+export const updateUserFromGroup = async (
+  groupId: number,
+  email: string,
+  roleId: number,
+  actingUserSub: string
+): Promise<null> => {
+  const user = await getUserByEmail(email);
+  const route = routes.dRoles.groups.updateUserFromGroup(
+    groupId,
+    user.id,
+    roleId,
+    actingUserSub
+  );
+  return await droleApiClient.fetch<null>(route, {
+    method: 'PATCH',
   });
 };
 
 export const removeUserFromGroup = async (
   groupId: number,
-  userId: number
+  userId: number,
+  actingUserSub: string
 ): Promise<null> => {
-  const route = routes.dRoles.groups.removeUserFromGroup(groupId, userId);
+  const route = routes.dRoles.groups.removeUserFromGroup(
+    groupId,
+    userId,
+    actingUserSub
+  );
 
   return await droleApiClient.fetch<null>(route, {
     method: 'DELETE',
@@ -87,6 +125,8 @@ export default {
   getGroupsByEmail,
   getRoles,
   getUserByEmail,
+  updateName,
   addUserToGroup,
+  updateUserFromGroup,
   removeUserFromGroup,
 };
