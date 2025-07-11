@@ -271,47 +271,28 @@ const routes = {
       getByEmail: (email: string) => `/users/search?email=${email}`,
     },
     groups: {
-      getGroupsByEmail: (email: string, actingUserSub?: string) =>
-        `/groups/search?email=${email}${
-          actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
-        }`,
-      updateName: (
-        groupId: number,
-        groupName: string,
-        actingUserSub?: string
-      ) =>
-        `/groups/${groupId}?group_name=${groupName}${
-          actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
-        }`,
-      addUserToGroup: (
-        groupId: number,
-        userId: number,
-        roleId: number,
-        actingUserSub?: string
-      ) =>
-        `/groups/${groupId}/users/${userId}?role_id=${roleId}${
-          actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
-        }`,
+      getGroupsByEmail: (userEmail: string, userSub: string) =>
+        `user_email=${userEmail}&user_sub=${userSub}`,
+      updateName: (groupId: number, groupName: string, actingUserSub: string) =>
+        `/groups/${groupId}?group_name=${groupName}&acting_user_sub=${actingUserSub}`,
+      addUserToGroup: (groupId: number, actingUserSub: string) =>
+        `/groups/${groupId}/users?acting_user_sub=${actingUserSub}`,
       updateUserFromGroup: (
         groupId: number,
         userId: number,
         roleId: number,
-        actingUserSub?: string
+        actingUserSub: string
       ) =>
-        `/groups/${groupId}/users/${userId}?role_id=${roleId}${
-          actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
-        }`,
+        `/groups/${groupId}/users/${userId}?role_id=${roleId}&acting_user_sub=${actingUserSub}`,
       removeUserFromGroup: (
         groupId: number,
         userId: number,
-        actingUserSub?: string
+        actingUserSub: string
       ) =>
-        `/groups/${groupId}/users/${userId}${
-          actingUserSub ? `&acting_user_sub=${actingUserSub}` : ''
-        }`,
+        `/groups/${groupId}/users/${userId}?acting_user_sub=${actingUserSub}`,
     },
     roles: {
-      getRoles: () => `/roles`,
+      get: '/roles',
     },
   },
 };

@@ -21,9 +21,9 @@ export class Group {
   /**
    * Check if a user is an admin of this group
    */
-  async isUserAdmin(email: string): Promise<boolean> {
+  async isUserAdmin(userEmail: string, userSub: string): Promise<boolean> {
     try {
-      const groups = await Groups.find(email);
+      const groups = await Groups.find(userEmail, userSub);
       const groupData =
         groups.find((group) => group.id === this.groupId) || null;
 
@@ -31,7 +31,7 @@ export class Group {
         return false;
       }
 
-      const user = groupData.users.find((user) => user.email === email);
+      const user = groupData.users.find((user) => user.email === userEmail);
       return user?.is_admin ?? false;
     } catch (error) {
       logFatalErrorInSentry(
@@ -67,11 +67,12 @@ export class Group {
    */
   async addUser(
     adminEmail: string,
+    adminSub: string,
     userEmail: string,
     roleId: number
   ): Promise<boolean> {
     try {
-      const isAdmin = await this.isUserAdmin(adminEmail);
+      const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {
         throw new HttpUnauthorizedError(
           'User does not have admin permissions for this group'
@@ -96,11 +97,12 @@ export class Group {
    */
   async updateUser(
     adminEmail: string,
+    adminSub: string,
     userEmail: string,
     roleId: number
   ): Promise<boolean> {
     try {
-      const isAdmin = await this.isUserAdmin(adminEmail);
+      const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {
         throw new HttpUnauthorizedError(
           'User does not have admin permissions for this group'
@@ -125,10 +127,11 @@ export class Group {
    */
   async removeUserFromGroup(
     adminEmail: string,
+    adminSub: string,
     userEmail: string
   ): Promise<boolean> {
     try {
-      const isAdmin = await this.isUserAdmin(adminEmail);
+      const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {
         throw new HttpUnauthorizedError(
           'User does not have admin permissions for this group'

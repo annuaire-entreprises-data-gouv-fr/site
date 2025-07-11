@@ -13,11 +13,15 @@ import { Fragment } from 'react';
 const MyTeamsPage = async () => {
   const session = await getSession();
 
-  if (!hasRights(session, ApplicationRights.isAgent)) {
+  if (
+    !hasRights(session, ApplicationRights.isAgent) ||
+    !session?.user?.email ||
+    !session?.user?.userId
+  ) {
     return redirect('/lp/agent-public');
   }
 
-  const groups = await Groups.find(session?.user?.email ?? '');
+  const groups = await Groups.find(session.user.email, session.user.userId);
 
   const handleUpdateName = (groupId: number) => async (groupName: string) => {
     const group = new Group(groupId);
@@ -28,39 +32,42 @@ const MyTeamsPage = async () => {
   const handleAdd =
     (groupId: number, userEmail: string) => async (roleId: number) => {
       const adminEmail = session?.user?.email;
+      const adminSub = session?.user?.userId;
 
-      if (!adminEmail) {
+      if (!adminEmail || !adminSub) {
         return;
       }
 
       const group = new Group(groupId);
 
-      await group.addUser(adminEmail, userEmail, roleId);
+      await group.addUser(adminEmail, adminSub, userEmail, roleId);
     };
 
   const handleUpdate =
     (groupId: number, userEmail: string) => async (roleId: number) => {
       const adminEmail = session?.user?.email;
+      const adminSub = session?.user?.userId;
 
-      if (!adminEmail) {
+      if (!adminEmail || !adminSub) {
         return;
       }
 
       const group = new Group(groupId);
 
-      await group.updateUser(adminEmail, userEmail, roleId);
+      await group.updateUser(adminEmail, adminSub, userEmail, roleId);
     };
 
   const handleRemove = (groupId: number, userEmail: string) => async () => {
     const adminEmail = session?.user?.email;
+    const adminSub = session?.user?.userId;
 
-    if (!adminEmail) {
+    if (!adminEmail || !adminSub) {
       return;
     }
 
     const group = new Group(groupId);
 
-    await group.removeUserFromGroup(adminEmail, userEmail);
+    await group.removeUserFromGroup(adminEmail, adminSub, userEmail);
   };
 
   return (
