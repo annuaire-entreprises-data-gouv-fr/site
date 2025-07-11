@@ -95,6 +95,8 @@ export default function ExportCsv() {
     },
     naf: filters.naf,
     sap: filters.sap,
+    ess: filters.ess,
+    mission: filters.mission,
     creationDate: {
       from: filters.creationDate?.from || undefined,
       to: filters.creationDate?.to || undefined,

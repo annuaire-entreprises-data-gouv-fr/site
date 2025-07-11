@@ -180,6 +180,36 @@ export default function FiltersSummary({
             `${new Date(filters.updateDate.to).toLocaleDateString()}`}
         </p>
       )}
+
+      {filters.ess && (
+        <p>
+          <strong>
+            Appartenance au champ de l‘économie sociale et solidair :
+          </strong>{' '}
+          {(() => {
+            const { inclure, inclureNo, inclureNonRenseigne } = filters.ess;
+            const options = [];
+            if (inclure) options.push('Oui');
+            if (inclureNo) options.push('Non');
+            if (inclureNonRenseigne) options.push('Non renseignées');
+            return options.length > 0 ? options.join(', ') : 'Aucune sélection';
+          })()}
+        </p>
+      )}
+
+      {filters.mission && (
+        <p>
+          <strong>Appartenance au champ des sociétés à mission :</strong>{' '}
+          {(() => {
+            const { inclure, inclureNo, inclureNonRenseigne } = filters.mission;
+            const options = [];
+            if (inclure) options.push('Oui');
+            if (inclureNo) options.push('Non');
+            if (inclureNonRenseigne) options.push('Non renseignées');
+            return options.length > 0 ? options.join(', ') : 'Aucune sélection';
+          })()}
+        </p>
+      )}
     </div>
   );
 }
