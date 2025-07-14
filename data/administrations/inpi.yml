@@ -15,7 +15,7 @@ dataSources:
     apiSlug: rne
     datagouvLink: https://data.inpi.fr
     data:
-      - label: Dénomination, NAF, Forme juridique et Adresse d’une entreprise
+      - label: Dénomination, NAF, État administratif, Forme juridique et Adresse d’une entreprise
         apiSlug: rne
         form: https://entreprendre.service-public.fr/vosdroits/F24023
         targets:
