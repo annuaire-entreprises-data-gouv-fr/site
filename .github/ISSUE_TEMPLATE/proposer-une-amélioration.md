@@ -3,7 +3,7 @@ name: "💡 Proposer une amélioration"
 about: Créer un ticket pour nous suggérer une fonctionnalité.
 title: "[FEATURE] Résumé de la fonctionnalité"
 labels: enhancement
-assignees: rmonnier9
+assignees: HAEKADI
 ---
 
 ## 🧐 Cette demande est-elle liée à un problème ?
