@@ -47,11 +47,11 @@ export const generateMetadata = async (
     title: uniteLegalePageTitle(uniteLegale),
     description: uniteLegalePageDescription(uniteLegale),
     robots: shouldNotIndex(uniteLegale) ? 'noindex, nofollow' : 'index, follow',
-    alternates: {
-      canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${
-        uniteLegale.chemin || uniteLegale.siren
-      }`,
-    },
+    ...(uniteLegale.chemin && {
+      alternates: {
+        canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`,
+      },
+    }),
   };
 };
 
