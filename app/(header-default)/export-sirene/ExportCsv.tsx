@@ -35,6 +35,16 @@ const defaultFilters: ExtendedExportCsvInput = {
   creationDate: { from: undefined, to: undefined },
   updateDate: { from: undefined, to: undefined },
   legalCategories: [],
+  ess: {
+    inclure: true,
+    inclureNo: true,
+    inclureNonRenseigne: true,
+  },
+  mission: {
+    inclure: true,
+    inclureNo: true,
+    inclureNonRenseigne: true,
+  },
 };
 
 export default function ExportCsv() {
@@ -229,6 +239,9 @@ export default function ExportCsv() {
           <ButtonLink type="submit" disabled={isCountLoading}>
             {isCountLoading ? 'Calcul en cours...' : 'Calculer les résultats'}
           </ButtonLink>
+          <ButtonLink type="button" alt={true} onClick={resetFilters}>
+            Réinitialiser
+          </ButtonLink>
         </div>
       </form>
       {error && <div className={styles.errorMessage}>{error}</div>}
@@ -287,12 +300,12 @@ export default function ExportCsv() {
         </div>
       )}
 
-      <div className={styles.exportActions}>
+      <div className={styles.buttonContainer}>
+        <ButtonLink type="button" onClick={modifyFilters}>
+          Modifier votre recherche
+        </ButtonLink>
         <ButtonLink type="button" alt={true} onClick={resetFilters}>
           Réinitialiser
-        </ButtonLink>
-        <ButtonLink type="button" alt={true} onClick={modifyFilters}>
-          Modifier votre recherche
         </ButtonLink>
       </div>
 
