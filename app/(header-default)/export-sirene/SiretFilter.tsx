@@ -125,9 +125,9 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
                 </li>
                 <li>500 lignes maximum</li>
               </ul>
-              <strong>Note :</strong> Si vous sélectionnez d&apos;autres
-              critères en complément de votre liste (Localisation, activité...),
-              ils peuvent éliminer certains SIRET de cette liste.
+              <strong>Note :</strong> Certains établissements seront éliminés si
+              vous avez sélectionné d‘autres critères (localisation, activité,
+              etc.).
             </div>
           }
           tabIndex={0}

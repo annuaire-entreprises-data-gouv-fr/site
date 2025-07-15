@@ -101,10 +101,10 @@
   flex: 1;
 }
 
-/* Button section */
 .buttonContainer {
   display: flex;
-  margin-top: 32px;
+  gap: 16px;
+  align-items: center;
 }
 
 /* Error display */
@@ -112,12 +112,6 @@
   color: red;
   margin-top: 16px;
   text-align: center;
-}
-
-.exportActions {
-  display: flex;
-  gap: 16px;
-  align-items: center;
 }
 
 /* File download section */
