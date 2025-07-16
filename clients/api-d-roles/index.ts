@@ -79,10 +79,9 @@ export const addUserToGroup = async (
   roleId: number,
   actingUserSub: string
 ): Promise<null> => {
-  const user = await getUserByEmail(email);
   const route = routes.dRoles.groups.addUserToGroup(groupId, actingUserSub);
   return await droleApiClient.fetch<null>(route, {
-    method: 'PUT',
+    method: 'POST',
     data: { email, role_id: roleId },
   });
 };
