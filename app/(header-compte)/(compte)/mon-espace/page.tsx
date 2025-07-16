@@ -15,7 +15,7 @@ import { redirect } from 'next/navigation';
 export const metadata: Metadata = {
   title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/compte',
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/mon-espace',
   },
   robots: 'noindex, nofollow',
 };
@@ -35,6 +35,7 @@ const AccountPage = async () => {
 
   return (
     <>
+      <h1>Mon espace</h1>
       <FullWidthContainer
         style={{
           background: 'var(--annuaire-colors-espaceAgentPastel)',
