@@ -34,6 +34,7 @@ export function TeamManagement({
   const [loading, setLoading] = useState<{ [key: string]: boolean }>({});
   const [roles, setRoles] = useState<Role[]>([]);
   const [rolesLoading, setRolesLoading] = useState(true);
+  const [inputEmail, setInputEmail] = useState<{ [key: string]: string }>({});
 
   const getCurrentRoleId = (userRoleName: string) => {
     const role = roles.find((r) => r.role_name === userRoleName);
@@ -93,47 +94,53 @@ export function TeamManagement({
     }
   };
 
-  const handleAdd =
-    (groupId: number, userEmail: string) => async (roleId: number) => {
-      const key = `add-user-${groupId}-${userEmail}`;
-      setLoading((prev) => ({ ...prev, [key]: true }));
+  const handleAddNewUser = async (groupId: number) => {
+    const currentInputEmail = inputEmail[groupId] || '';
+    if (!currentInputEmail || !currentInputEmail.trim()) return;
+    const userEmail = currentInputEmail.trim();
+    const defaultRoleId = roles.length > 0 ? roles[0].id : 0;
 
-      try {
-        const response = await fetch(`/api/teams/${groupId}/add-user`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ userEmail, roleId }),
-        });
+    const key = `add-user-${groupId}-${userEmail}`;
+    setLoading((prev) => ({ ...prev, [key]: true }));
 
-        if (!response.ok) {
-          throw new Error('Failed to add user to team');
-        }
+    try {
+      const response = await fetch(`/api/teams/${groupId}/add-user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userEmail, roleId: defaultRoleId }),
+      });
 
-        setTeams((prev) =>
-          prev.map((team) =>
-            team.id === groupId
-              ? {
-                  ...team,
-                  users: [
-                    ...team.users,
-                    {
-                      email: userEmail,
-                      role_name: getCurrentRoleName(roleId),
-                      is_email_confirmed: false,
-                    },
-                  ],
-                }
-              : team
-          )
-        );
-      } catch (error) {
-        console.error('Error adding user to team:', error);
-      } finally {
-        setLoading((prev) => ({ ...prev, [key]: false }));
+      if (!response.ok) {
+        throw new Error('Failed to add user to team');
       }
-    };
+
+      setTeams((prev) =>
+        prev.map((team) =>
+          team.id === groupId
+            ? {
+                ...team,
+                users: [
+                  ...team.users,
+                  {
+                    email: userEmail,
+                    role_name: getCurrentRoleName(defaultRoleId),
+                    is_email_confirmed: false,
+                  },
+                ],
+              }
+            : team
+        )
+      );
+
+      setInputEmail((prev) => ({ ...prev, [groupId]: '' }));
+    } catch (error) {
+      console.error('Error adding user to team:', error);
+    } finally {
+      setLoading((prev) => ({ ...prev, [key]: false }));
+    }
+  };
 
   const handleUpdate =
     (groupId: number, userEmail: string) => async (roleId: number) => {
@@ -221,7 +228,7 @@ export function TeamManagement({
         );
         const isAdmin =
           adminRoleName && currentUserRole?.role_name === adminRoleName;
-        console.log(currentUserRole, isAdmin, adminRoleName, group.users);
+
         return (
           <div key={group.id} className="fr-card">
             <div className="fr-card__body">
@@ -239,6 +246,55 @@ export function TeamManagement({
                     </div>
                   </div>
                 </div>
+
+                {isAdmin && (
+                  <>
+                    <div className="fr-input-group">
+                      <label
+                        className="fr-label"
+                        htmlFor={`new-user-email-${group.id}`}
+                      >
+                        Ajouter un membre
+                      </label>
+                      <div className="fr-input-wrap">
+                        <input
+                          className="fr-input"
+                          type="email"
+                          id={`new-user-email-${group.id}`}
+                          placeholder="email@exemple.fr"
+                          value={inputEmail[group.id] || ''}
+                          onChange={(e) =>
+                            setInputEmail((prev) => ({
+                              ...prev,
+                              [group.id]: e.target.value,
+                            }))
+                          }
+                          disabled={
+                            loading[
+                              `add-user-${group.id}-${
+                                inputEmail[group.id] || ''
+                              }`
+                            ]
+                          }
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        className="fr-btn fr-btn--primary fr-mt-1w"
+                        onClick={() => handleAddNewUser(group.id)}
+                        disabled={
+                          !(inputEmail[group.id] || '')?.trim() ||
+                          loading[
+                            `add-user-${group.id}-${inputEmail[group.id] || ''}`
+                          ]
+                        }
+                      >
+                        Ajouter
+                      </button>
+                    </div>
+                  </>
+                )}
+
                 <FullTable
                   head={['Membre', 'Rôle', 'Statut', 'Action']}
                   body={group.users.map((user) => [
