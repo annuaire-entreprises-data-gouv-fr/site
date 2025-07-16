@@ -1,28 +1,12 @@
 'use client';
 
+import { IDRolesUser } from '#clients/api-d-roles/interface';
 import { FullTable } from '#components/table/full';
+import { IDRolesGroup } from '#models/groups';
 import { useEffect, useState } from 'react';
 
-interface TeamUser {
-  email: string;
-  role_name: string;
-  is_email_confirmed: boolean;
-}
-
-interface Team {
-  id: number;
-  name: string;
-  users: TeamUser[];
-}
-
-interface Role {
-  id: number;
-  role_name: string;
-  is_admin: boolean;
-}
-
 interface TeamManagementProps {
-  groups: Team[];
+  groups: IDRolesGroup[];
   currentUserEmail: string;
 }
 
@@ -30,9 +14,9 @@ export function TeamManagement({
   groups,
   currentUserEmail,
 }: TeamManagementProps) {
-  const [teams, setTeams] = useState<Team[]>(groups);
+  const [teams, setTeams] = useState<IDRolesGroup[]>(groups);
   const [loading, setLoading] = useState<{ [key: string]: boolean }>({});
-  const [roles, setRoles] = useState<Role[]>([]);
+  const [roles, setRoles] = useState<IDRolesUser[]>([]);
   const [rolesLoading, setRolesLoading] = useState(true);
   const [inputEmail, setInputEmail] = useState<{ [key: string]: string }>({});
 
@@ -126,7 +110,8 @@ export function TeamManagement({
                   {
                     email: userEmail,
                     role_name: getCurrentRoleName(defaultRoleId),
-                    is_email_confirmed: false,
+                    id: 0,
+                    is_admin: false,
                   },
                 ],
               }
@@ -296,7 +281,7 @@ export function TeamManagement({
                 )}
 
                 <FullTable
-                  head={['Membre', 'Rôle', 'Statut', 'Action']}
+                  head={['Membre', 'Rôle', 'Action']}
                   body={group.users.map((user) => [
                     user.email,
 
@@ -328,13 +313,6 @@ export function TeamManagement({
                       </span>
                     ) : (
                       <span className="fr-badge">{user.role_name}</span>
-                    ),
-                    user.is_email_confirmed ? (
-                      <span className="fr-badge fr-badge--success">
-                        Inscrit
-                      </span>
-                    ) : (
-                      <span className="fr-badge">Invitation envoyée</span>
                     ),
                     <button
                       key={`remove-${user.email}`}
