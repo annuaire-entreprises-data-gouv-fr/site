@@ -47,9 +47,20 @@ export class Group {
   /**
    * Add a user to this group (requires admin permissions)
    */
-  async updateName(groupName: string, actingUserSub: string): Promise<boolean> {
+  async updateName(
+    adminEmail: string,
+    adminSub: string,
+    groupName: string
+  ): Promise<boolean> {
     try {
-      await droleClient.updateName(this.groupId, groupName, actingUserSub);
+      const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
+      if (!isAdmin) {
+        throw new HttpUnauthorizedError(
+          'User does not have admin permissions for this group'
+        );
+      }
+
+      await droleClient.updateName(this.groupId, groupName, adminSub);
       return true;
     } catch (error) {
       logFatalErrorInSentry(
