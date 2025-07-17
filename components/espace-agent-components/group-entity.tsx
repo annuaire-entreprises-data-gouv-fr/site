@@ -33,7 +33,7 @@ export function GroupEntity({
   const adminRoleName = roles.find((r) => r.is_admin)?.role_name;
 
   const updateName = async (groupName: string) => {
-    const response = await fetch(`/api/teams/${group.id}/update-name`, {
+    const response = await fetch(`/api/groups/${group.id}/update-name`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export function GroupEntity({
     const userEmail = inputEmail.trim();
     const defaultRoleId = roles.length > 0 ? roles[0].id : 0;
 
-    const response = await fetch(`/api/teams/${group.id}/add-user`, {
+    const response = await fetch(`/api/groups/${group.id}/add-user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export function GroupEntity({
     setLoading(true);
 
     try {
-      const response = await fetch(`/api/teams/${group.id}/update-user`, {
+      const response = await fetch(`/api/groups/${group.id}/update-user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ export function GroupEntity({
     setLoading(true);
 
     try {
-      const response = await fetch(`/api/teams/${group.id}/remove-user`, {
+      const response = await fetch(`/api/groups/${group.id}/remove-user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
