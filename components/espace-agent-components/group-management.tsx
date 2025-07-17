@@ -15,31 +15,27 @@ export function GroupManagement({
   initialGroups: IDRolesGroup[];
 }) {
   const [groups, setGroups] = useState<IDRolesGroup[]>(initialGroups);
-
   const adminRoleName = roles.find((r) => r.is_admin)?.role_name;
 
-  return (
-    <>
-      {groups.map((group) => {
-        const currentUserRole = group.users.find(
-          (user) => user.email === currentUserEmail
-        );
-        const isAdmin = Boolean(
-          adminRoleName && currentUserRole?.role_name === adminRoleName
-        );
+  return groups.map((group) => {
+    const currentUserRole = group.users.find(
+      (user) => user.email === currentUserEmail
+    );
+    const isAdmin = Boolean(
+      adminRoleName && currentUserRole?.role_name === adminRoleName
+    );
+    const setGroup = (group: IDRolesGroup) => {
+      setGroups(groups.map((g) => (g.id === group.id ? group : g)));
+    };
 
-        return (
-          <GroupEntity
-            key={group.id}
-            group={group}
-            setGroup={(group: IDRolesGroup) =>
-              setGroups(groups.map((g) => (g.id === group.id ? group : g)))
-            }
-            isAdmin={isAdmin}
-            roles={roles}
-          />
-        );
-      })}
-    </>
-  );
+    return (
+      <GroupEntity
+        key={group.id}
+        group={group}
+        setGroup={setGroup}
+        isAdmin={isAdmin}
+        roles={roles}
+      />
+    );
+  });
 }
