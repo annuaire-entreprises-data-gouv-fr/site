@@ -1,8 +1,10 @@
+import { getRoles } from '#clients/api-d-roles';
 import { GroupManagement } from '#components/espace-agent-components/group-management';
 import {
   ApplicationRights,
   hasRights,
 } from '#models/authentication/user/rights';
+import { Groups } from '#models/groups';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { redirect } from 'next/navigation';
 
@@ -17,6 +19,9 @@ const MesEquipesPage = async () => {
     return redirect('/lp/agent-public');
   }
 
+  const roles = await getRoles();
+  const groups = await Groups.find(session!.user!.email, session!.user!.userId);
+
   return (
     <>
       <h1>Mes équipes</h1>
@@ -26,7 +31,8 @@ const MesEquipesPage = async () => {
 
       <GroupManagement
         currentUserEmail={session.user.email}
-        currentUserSub={session.user.userId}
+        roles={roles}
+        initialGroups={groups}
       />
     </>
   );
