@@ -2,6 +2,8 @@ import { IDRolesUser } from '#clients/api-d-roles/interface';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/groups';
 import { useState } from 'react';
+import AddUser from './add-user';
+import UpdateName from './update-name';
 
 export function GroupEntity({
   group,
@@ -15,9 +17,6 @@ export function GroupEntity({
   roles: IDRolesUser[];
 }) {
   const [loading, setLoading] = useState(false);
-  const [inputEmail, setInputEmail] = useState('');
-  const [editingTeamName, setEditingTeamName] = useState('');
-  const [isEditingName, setIsEditingName] = useState(false);
 
   const getCurrentRoleId = (userRoleName: string) => {
     const role = roles.find((r) => r.role_name === userRoleName);
@@ -30,86 +29,51 @@ export function GroupEntity({
   };
   const adminRoleName = roles.find((r) => r.is_admin)?.role_name;
 
-  const handleUpdateName = async (groupName: string) => {
-    setLoading(true);
+  const updateName = async (groupName: string) => {
+    const response = await fetch(`/api/teams/${group.id}/update-name`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ groupName }),
+    });
 
-    try {
-      const response = await fetch(`/api/teams/${group.id}/update-name`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ groupName }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to update team name');
-      }
-
-      setGroup({ ...group, name: groupName });
-      setIsEditingName(false);
-    } catch (error) {
-      console.error('Error updating team name:', error);
-    } finally {
-      setLoading(false);
+    if (!response.ok) {
+      throw new Error('Failed to update team name');
     }
+
+    setGroup({ ...group, name: groupName });
   };
 
-  const startEditingName = (currentName: string) => {
-    setEditingTeamName(currentName);
-    setIsEditingName(true);
-  };
-
-  const cancelEditingName = () => {
-    setIsEditingName(false);
-    setEditingTeamName('');
-  };
-
-  const saveTeamName = () => {
-    if (editingTeamName && editingTeamName.trim()) {
-      handleUpdateName(editingTeamName.trim());
-    }
-  };
-
-  const handleAddNewUser = async () => {
+  const addNewUser = async (inputEmail: string) => {
     if (!inputEmail || !inputEmail.trim()) return;
     const userEmail = inputEmail.trim();
     const defaultRoleId = roles.length > 0 ? roles[0].id : 0;
 
-    setLoading(true);
+    const response = await fetch(`/api/teams/${group.id}/add-user`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userEmail, roleId: defaultRoleId }),
+    });
 
-    try {
-      const response = await fetch(`/api/teams/${group.id}/add-user`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userEmail, roleId: defaultRoleId }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to add user to team');
-      }
-
-      setGroup({
-        ...group,
-        users: [
-          ...group.users,
-          {
-            email: userEmail,
-            role_name: getCurrentRoleName(defaultRoleId),
-            id: 0,
-            is_admin: false,
-          },
-        ],
-      });
-
-      setInputEmail('');
-    } catch (error) {
-      console.error('Error adding user to team:', error);
-    } finally {
-      setLoading(false);
+    if (!response.ok) {
+      throw new Error('Failed to add user to team');
     }
+
+    setGroup({
+      ...group,
+      users: [
+        ...group.users,
+        {
+          email: userEmail,
+          role_name: getCurrentRoleName(defaultRoleId),
+          id: 0,
+          is_admin: false,
+        },
+      ],
+    });
   };
 
   const handleUpdate = (userEmail: string) => async (roleId: number) => {
@@ -185,103 +149,50 @@ export function GroupEntity({
           >
             <div className="fr-col">
               <div className="fr-text--xl fr-text--bold">
-                {isEditingName ? (
-                  <div className="fr-input-group">
-                    <input
-                      className="fr-input"
-                      type="text"
-                      value={editingTeamName}
-                      onChange={(e) => setEditingTeamName(e.target.value)}
-                      onBlur={saveTeamName}
-                      onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                          saveTeamName();
-                        }
-                      }}
-                      autoFocus
-                    />
-                    <div className="fr-mt-1w">
-                      <button
-                        type="button"
-                        className="fr-btn fr-btn--sm fr-btn--primary"
-                        onClick={saveTeamName}
-                        disabled={loading}
-                      >
-                        Sauvegarder
-                      </button>
-                      <button
-                        type="button"
-                        className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-ml-1w"
-                        onClick={cancelEditingName}
-                        disabled={loading}
-                      >
-                        Annuler
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="fr-grid-row fr-grid-row--middle">
-                    <div className="fr-col">
-                      <span
-                        onClick={() => isAdmin && startEditingName(group.name)}
-                        style={{
-                          cursor: isAdmin ? 'pointer' : 'default',
-                        }}
-                        className={isAdmin ? 'fr-link' : ''}
-                      >
-                        {group.name}
-                      </span>
-                    </div>
-                    {isAdmin && (
-                      <div className="fr-col-auto">
-                        <button
-                          type="button"
-                          className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline"
-                          onClick={() => startEditingName(group.name)}
-                          title="Modifier le nom de l'équipe"
-                          aria-label="Modifier le nom de l'équipe"
-                        >
-                          ✏️
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
+                <div className="fr-grid-row fr-grid-row--middle">
+                  <div className="fr-col">{group.name}</div>
+                  <span className="fr-badge">{group.contract}</span>
+                </div>
               </div>
               <div className="fr-text--sm">{group.users.length} membres</div>
             </div>
+            {isAdmin && (
+              <div className="fr-col-auto">
+                <div className="fr-grid-row fr-grid-row--middle fr-gap-1w">
+                  <button
+                    type="button"
+                    className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline"
+                    onClick={() => setShowRenameForm(true)}
+                    disabled={loading}
+                  >
+                    Renommer
+                  </button>
+                  <button
+                    type="button"
+                    className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline"
+                    onClick={() => setShowAddMembersForm(true)}
+                    disabled={loading}
+                  >
+                    Ajouter des membres
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
           {isAdmin && (
-            <>
-              <div className="fr-input-group">
-                <label
-                  className="fr-label"
-                  htmlFor={`new-user-email-${group.id}`}
-                >
-                  Ajouter un membre
-                </label>
-                <div className="fr-input-wrap">
-                  <input
-                    className="fr-input"
-                    type="email"
-                    id={`new-user-email-${group.id}`}
-                    placeholder="email@exemple.fr"
-                    value={inputEmail}
-                    onChange={(e) => setInputEmail(e.target.value)}
-                    disabled={loading}
-                  />
-                </div>
-                <button
-                  type="button"
-                  className="fr-btn fr-btn--primary fr-mt-1w"
-                  onClick={handleAddNewUser}
-                  disabled={!inputEmail?.trim() || loading}
-                >
-                  Ajouter
-                </button>
-              </div>
-            </>
+            <AddUser
+              groupId={group.id}
+              addNewUser={addNewUser}
+              cancel={() => null}
+            />
+          )}
+          {isAdmin && (
+            <UpdateName
+              groupId={group.id}
+              updateName={updateName}
+              cancel={() => null}
+            />
           )}
 
           <FullTable
