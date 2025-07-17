@@ -32,7 +32,7 @@ export function withAgentAuth(handler: RouteHandler) {
   };
 }
 
-export function withHandleError(handler: RouteHandler): RouteHandler {
+export function withErrorHandling(handler: RouteHandler): RouteHandler {
   return async (request: NextRequest, context: any) => {
     try {
       return await handler(request, context);

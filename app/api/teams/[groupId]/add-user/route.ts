@@ -2,7 +2,7 @@ import { Group } from '#models/group';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { NextRequest, NextResponse } from 'next/server';
 import { addUserSchema, groupIdParamSchema } from '../../input-validation';
-import { withAgentAuth, withHandleError } from '../../with-agent-auth';
+import { withAgentAuth, withErrorHandling } from '../../route-wrappers';
 
 async function addUserHandler(
   request: NextRequest,
@@ -27,4 +27,4 @@ async function addUserHandler(
   return NextResponse.json({ success: true });
 }
 
-export const POST = withAgentAuth(withHandleError(addUserHandler));
+export const POST = withAgentAuth(withErrorHandling(addUserHandler));
