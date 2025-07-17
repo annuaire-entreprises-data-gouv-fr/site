@@ -144,19 +144,12 @@ export function GroupEntity({
     <div className="fr-card">
       <div className="fr-card__body">
         <div className="fr-card__content">
-          <div
-            className="fr-grid-row fr-grid-row--gutters"
-            style={{ alignItems: 'center' }}
-          >
-            <div className="fr-col">
-              <div className="fr-text--xl fr-text--bold">
-                <div className="fr-grid-row fr-grid-row--middle">
-                  <div className="fr-col">{group.name}</div>
-                </div>
-              </div>
-              <div className="fr-badge">{group.contract}</div>
-              <div className="fr-text--sm">{group.users.length} membres</div>
-            </div>
+          <div>
+            <div className="fr-text--xl fr-text--bold">{group.name}</div>
+            <div className="fr-badge">{group.contract}</div>
+            <div className="fr-text--sm">{group.users.length} membres</div>
+          </div>
+          <div>
             {isAdmin && groupForm === null && (
               <div className="fr-col-auto">
                 <div className="fr-grid-row fr-grid-row--middle fr-gap-1w">
@@ -179,21 +172,22 @@ export function GroupEntity({
                 </div>
               </div>
             )}
+
+            {isAdmin && groupForm === 'addmembers' && (
+              <AddUser
+                groupId={group.id}
+                addNewUser={addNewUser}
+                cancel={() => setGroupForm(null)}
+              />
+            )}
+            {isAdmin && groupForm === 'rename' && (
+              <UpdateName
+                groupId={group.id}
+                updateName={updateName}
+                cancel={() => setGroupForm(null)}
+              />
+            )}
           </div>
-          {isAdmin && groupForm === 'addmembers' && (
-            <AddUser
-              groupId={group.id}
-              addNewUser={addNewUser}
-              cancel={() => setGroupForm(null)}
-            />
-          )}
-          {isAdmin && groupForm === 'rename' && (
-            <UpdateName
-              groupId={group.id}
-              updateName={updateName}
-              cancel={() => setGroupForm(null)}
-            />
-          )}
 
           <FullTable
             head={['Membre', 'Rôle', 'Action']}
