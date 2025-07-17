@@ -14,14 +14,10 @@ export function GroupEntity({
   setGroup: (group: IDRolesGroup) => void;
   roles: IDRolesUser[];
 }) {
-  const [loading, setLoading] = useState<{ [key: string]: boolean }>({});
-  const [inputEmail, setInputEmail] = useState<{ [key: string]: string }>({});
-  const [editingTeamName, setEditingTeamName] = useState<{
-    [key: number]: string;
-  }>({});
-  const [isEditingName, setIsEditingName] = useState<{
-    [key: number]: boolean;
-  }>({});
+  const [loading, setLoading] = useState(false);
+  const [inputEmail, setInputEmail] = useState('');
+  const [editingTeamName, setEditingTeamName] = useState('');
+  const [isEditingName, setIsEditingName] = useState(false);
 
   const getCurrentRoleId = (userRoleName: string) => {
     const role = roles.find((r) => r.role_name === userRoleName);
@@ -34,12 +30,11 @@ export function GroupEntity({
   };
   const adminRoleName = roles.find((r) => r.is_admin)?.role_name;
 
-  const handleUpdateName = (groupId: number) => async (groupName: string) => {
-    const key = `update-name-${groupId}`;
-    setLoading((prev) => ({ ...prev, [key]: true }));
+  const handleUpdateName = async (groupName: string) => {
+    setLoading(true);
 
     try {
-      const response = await fetch(`/api/teams/${groupId}/update-name`, {
+      const response = await fetch(`/api/teams/${group.id}/update-name`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,42 +47,39 @@ export function GroupEntity({
       }
 
       setGroup({ ...group, name: groupName });
-      setIsEditingName((prev) => ({ ...prev, [groupId]: false }));
+      setIsEditingName(false);
     } catch (error) {
       console.error('Error updating team name:', error);
     } finally {
-      setLoading((prev) => ({ ...prev, [key]: false }));
+      setLoading(false);
     }
   };
 
-  const startEditingName = (groupId: number, currentName: string) => {
-    setEditingTeamName((prev) => ({ ...prev, [groupId]: currentName }));
-    setIsEditingName((prev) => ({ ...prev, [groupId]: true }));
+  const startEditingName = (currentName: string) => {
+    setEditingTeamName(currentName);
+    setIsEditingName(true);
   };
 
-  const cancelEditingName = (groupId: number) => {
-    setIsEditingName((prev) => ({ ...prev, [groupId]: false }));
-    setEditingTeamName((prev) => ({ ...prev, [groupId]: '' }));
+  const cancelEditingName = () => {
+    setIsEditingName(false);
+    setEditingTeamName('');
   };
 
-  const saveTeamName = (groupId: number) => {
-    const newName = editingTeamName[groupId];
-    if (newName && newName.trim()) {
-      handleUpdateName(groupId)(newName.trim());
+  const saveTeamName = () => {
+    if (editingTeamName && editingTeamName.trim()) {
+      handleUpdateName(editingTeamName.trim());
     }
   };
 
-  const handleAddNewUser = async (groupId: number) => {
-    const currentInputEmail = inputEmail[groupId] || '';
-    if (!currentInputEmail || !currentInputEmail.trim()) return;
-    const userEmail = currentInputEmail.trim();
+  const handleAddNewUser = async () => {
+    if (!inputEmail || !inputEmail.trim()) return;
+    const userEmail = inputEmail.trim();
     const defaultRoleId = roles.length > 0 ? roles[0].id : 0;
 
-    const key = `add-user-${groupId}-${userEmail}`;
-    setLoading((prev) => ({ ...prev, [key]: true }));
+    setLoading(true);
 
     try {
-      const response = await fetch(`/api/teams/${groupId}/add-user`, {
+      const response = await fetch(`/api/teams/${group.id}/add-user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,58 +104,55 @@ export function GroupEntity({
         ],
       });
 
-      setInputEmail((prev) => ({ ...prev, [groupId]: '' }));
+      setInputEmail('');
     } catch (error) {
       console.error('Error adding user to team:', error);
     } finally {
-      setLoading((prev) => ({ ...prev, [key]: false }));
+      setLoading(false);
     }
   };
 
-  const handleUpdate =
-    (groupId: number, userEmail: string) => async (roleId: number) => {
-      const key = `update-user-${groupId}-${userEmail}`;
-      setLoading((prev) => ({ ...prev, [key]: true }));
-
-      try {
-        const response = await fetch(`/api/teams/${groupId}/update-user`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ userEmail, roleId }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to update user in team');
-        }
-
-        setGroup({
-          ...group,
-          users: group.users.map((user) =>
-            user.email === userEmail
-              ? {
-                  ...user,
-                  role_name:
-                    roles.find((r) => r.id === roleId)?.role_name ||
-                    user.role_name,
-                }
-              : user
-          ),
-        });
-      } catch (error) {
-        console.error('Error updating user in team:', error);
-      } finally {
-        setLoading((prev) => ({ ...prev, [key]: false }));
-      }
-    };
-
-  const handleRemove = (groupId: number, userEmail: string) => async () => {
-    const key = `remove-user-${groupId}-${userEmail}`;
-    setLoading((prev) => ({ ...prev, [key]: true }));
+  const handleUpdate = (userEmail: string) => async (roleId: number) => {
+    setLoading(true);
 
     try {
-      const response = await fetch(`/api/teams/${groupId}/remove-user`, {
+      const response = await fetch(`/api/teams/${group.id}/update-user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userEmail, roleId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update user in team');
+      }
+
+      setGroup({
+        ...group,
+        users: group.users.map((user) =>
+          user.email === userEmail
+            ? {
+                ...user,
+                role_name:
+                  roles.find((r) => r.id === roleId)?.role_name ||
+                  user.role_name,
+              }
+            : user
+        ),
+      });
+    } catch (error) {
+      console.error('Error updating user in team:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRemove = (userEmail: string) => async () => {
+    setLoading(true);
+
+    try {
+      const response = await fetch(`/api/teams/${group.id}/remove-user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -182,7 +171,7 @@ export function GroupEntity({
     } catch (error) {
       console.error('Error removing user from team:', error);
     } finally {
-      setLoading((prev) => ({ ...prev, [key]: false }));
+      setLoading(false);
     }
   };
 
@@ -196,22 +185,17 @@ export function GroupEntity({
           >
             <div className="fr-col">
               <div className="fr-text--xl fr-text--bold">
-                {isEditingName[group.id] ? (
+                {isEditingName ? (
                   <div className="fr-input-group">
                     <input
                       className="fr-input"
                       type="text"
-                      value={editingTeamName[group.id]}
-                      onChange={(e) =>
-                        setEditingTeamName((prev) => ({
-                          ...prev,
-                          [group.id]: e.target.value,
-                        }))
-                      }
-                      onBlur={() => saveTeamName(group.id)}
+                      value={editingTeamName}
+                      onChange={(e) => setEditingTeamName(e.target.value)}
+                      onBlur={saveTeamName}
                       onKeyPress={(e) => {
                         if (e.key === 'Enter') {
-                          saveTeamName(group.id);
+                          saveTeamName();
                         }
                       }}
                       autoFocus
@@ -220,16 +204,16 @@ export function GroupEntity({
                       <button
                         type="button"
                         className="fr-btn fr-btn--sm fr-btn--primary"
-                        onClick={() => saveTeamName(group.id)}
-                        disabled={loading[`update-name-${group.id}`]}
+                        onClick={saveTeamName}
+                        disabled={loading}
                       >
                         Sauvegarder
                       </button>
                       <button
                         type="button"
                         className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-ml-1w"
-                        onClick={() => cancelEditingName(group.id)}
-                        disabled={loading[`update-name-${group.id}`]}
+                        onClick={cancelEditingName}
+                        disabled={loading}
                       >
                         Annuler
                       </button>
@@ -239,9 +223,7 @@ export function GroupEntity({
                   <div className="fr-grid-row fr-grid-row--middle">
                     <div className="fr-col">
                       <span
-                        onClick={() =>
-                          isAdmin && startEditingName(group.id, group.name)
-                        }
+                        onClick={() => isAdmin && startEditingName(group.name)}
                         style={{
                           cursor: isAdmin ? 'pointer' : 'default',
                         }}
@@ -255,7 +237,7 @@ export function GroupEntity({
                         <button
                           type="button"
                           className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline"
-                          onClick={() => startEditingName(group.id, group.name)}
+                          onClick={() => startEditingName(group.name)}
                           title="Modifier le nom de l'équipe"
                           aria-label="Modifier le nom de l'équipe"
                         >
@@ -285,30 +267,16 @@ export function GroupEntity({
                     type="email"
                     id={`new-user-email-${group.id}`}
                     placeholder="email@exemple.fr"
-                    value={inputEmail[group.id] || ''}
-                    onChange={(e) =>
-                      setInputEmail((prev) => ({
-                        ...prev,
-                        [group.id]: e.target.value,
-                      }))
-                    }
-                    disabled={
-                      loading[
-                        `add-user-${group.id}-${inputEmail[group.id] || ''}`
-                      ]
-                    }
+                    value={inputEmail}
+                    onChange={(e) => setInputEmail(e.target.value)}
+                    disabled={loading}
                   />
                 </div>
                 <button
                   type="button"
                   className="fr-btn fr-btn--primary fr-mt-1w"
-                  onClick={() => handleAddNewUser(group.id)}
-                  disabled={
-                    !(inputEmail[group.id] || '')?.trim() ||
-                    loading[
-                      `add-user-${group.id}-${inputEmail[group.id] || ''}`
-                    ]
-                  }
+                  onClick={handleAddNewUser}
+                  disabled={!inputEmail?.trim() || loading}
                 >
                   Ajouter
                 </button>
@@ -325,9 +293,9 @@ export function GroupEntity({
                   className="fr-select"
                   value={getCurrentRoleId(user.role_name)}
                   onChange={(e) =>
-                    handleUpdate(group.id, user.email)(parseInt(e.target.value))
+                    handleUpdate(user.email)(parseInt(e.target.value))
                   }
-                  disabled={loading[`update-user-${group.id}-${user.email}`]}
+                  disabled={loading}
                 >
                   {roles.map((role) => (
                     <option key={role.id} value={role.id}>
@@ -346,8 +314,8 @@ export function GroupEntity({
                 className="fr-btn fr-btn--tertiary-no-outline"
                 title="Supprimer"
                 aria-label={`Supprimer ${user.email}`}
-                onClick={handleRemove(group.id, user.email)}
-                disabled={loading[`remove-user-${group.id}-${user.email}`]}
+                onClick={handleRemove(user.email)}
+                disabled={loading}
               >
                 <span aria-hidden="true">🗑️</span>
               </button>,
