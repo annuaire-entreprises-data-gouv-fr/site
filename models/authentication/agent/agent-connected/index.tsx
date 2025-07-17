@@ -133,10 +133,11 @@ export class AgentConnected {
             context: {
               details: JSON.stringify({
                 id: this.userId,
-                drolesScopes: drolesScopes,
-                s3Scopes: s3Scopes,
+                email: this.email,
                 onlyInDroles: onlyInDroles,
                 onlyInS3: onlyInS3,
+                drolesScopes: drolesScopes,
+                s3Scopes: s3Scopes,
               }),
             },
           })
