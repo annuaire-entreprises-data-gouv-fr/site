@@ -1,7 +1,7 @@
 'use client';
 
 import { IDRolesUser } from '#clients/api-d-roles/interface';
-import { Groups, IDRolesGroup } from '#models/groups';
+import { IDRolesGroup } from '#models/groups';
 import { useEffect, useState } from 'react';
 import { GroupEntity } from './group-entity';
 
@@ -36,8 +36,11 @@ export function GroupManagement({
 
     const fetchGroups = async () => {
       try {
-        const groups = await Groups.find(currentUserEmail, currentUserSub);
-        setGroups(groups);
+        const response = await fetch('/api/teams/groups');
+        if (response.ok) {
+          const groupsData = await response.json();
+          setGroups(groupsData);
+        }
       } catch (error) {
         console.error('Error fetching groups:', error);
       } finally {
