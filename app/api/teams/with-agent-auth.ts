@@ -2,8 +2,11 @@ import {
   ApplicationRights,
   hasRights,
 } from '#models/authentication/user/rights';
+import { FetchRessourceException } from '#models/exceptions';
+import logErrorInSentry from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { NextRequest, NextResponse } from 'next/server';
+import z from 'zod';
 
 type RouteHandler = (
   request: NextRequest,
@@ -26,5 +29,52 @@ export function withAgentAuth(handler: RouteHandler) {
     }
 
     return handler(request, context);
+  };
+}
+
+export function withHandleError(handler: RouteHandler): RouteHandler {
+  return async (request: NextRequest, context: any) => {
+    try {
+      return await handler(request, context);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return NextResponse.json(
+          {
+            error: 'Validation failed',
+            details: error.errors.map((err) => ({
+              field: err.path.join('.'),
+              message: err.message,
+            })),
+          },
+          { status: 400 }
+        );
+      }
+
+      if (error instanceof Error && error.name === 'HttpUnauthorizedError') {
+        return NextResponse.json(
+          { error: 'Unauthorized: Admin permissions required' },
+          { status: 403 }
+        );
+      }
+
+      if (error instanceof Error && error.name === 'HttpNotFoundError') {
+        return NextResponse.json(
+          { error: 'Resource not found' },
+          { status: 404 }
+        );
+      }
+
+      logErrorInSentry(
+        new FetchRessourceException({
+          ressource: 'Team API',
+          cause: error,
+        })
+      );
+
+      return NextResponse.json(
+        { error: 'Internal server error' },
+        { status: 500 }
+      );
+    }
   };
 }
