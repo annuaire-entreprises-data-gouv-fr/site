@@ -1,8 +1,4 @@
 import { HttpUnauthorizedError } from '#clients/exceptions';
-import {
-  ApplicationRights,
-  hasRights,
-} from '#models/authentication/user/rights';
 import { FetchRessourceException } from '#models/exceptions';
 import { Group } from '#models/group';
 import logErrorInSentry from '#utils/sentry';
@@ -10,25 +6,15 @@ import getSession from '#utils/server-side-helper/app/get-session';
 import { NextRequest, NextResponse } from 'next/server';
 import z from 'zod';
 import { groupIdParamSchema, updateNameSchema } from '../../input-validation';
+import { withAgentAuth } from '../../with-agent-auth';
 
-export async function POST(
+async function updateNameHandler(
   request: NextRequest,
   { params }: { params: Promise<{ groupId: string }> }
 ) {
   try {
     const session = await getSession();
     const { groupId } = await params;
-
-    if (
-      !hasRights(session, ApplicationRights.isAgent) ||
-      !session?.user?.email ||
-      !session?.user?.userId
-    ) {
-      return NextResponse.json(
-        { error: 'Unauthorized: Agent access required' },
-        { status: 401 }
-      );
-    }
 
     const validatedParams = groupIdParamSchema.parse({ groupId });
 
@@ -37,8 +23,8 @@ export async function POST(
 
     const group = new Group(validatedParams.groupId);
     await group.updateName(
-      session.user.email,
-      session.user.userId,
+      session!.user!.email,
+      session!.user!.userId,
       validatedData.groupName
     );
 
@@ -77,3 +63,5 @@ export async function POST(
     );
   }
 }
+
+export const POST = withAgentAuth(updateNameHandler);
