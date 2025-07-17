@@ -19,6 +19,12 @@ export function TeamManagement({
   const [roles, setRoles] = useState<IDRolesUser[]>([]);
   const [rolesLoading, setRolesLoading] = useState(true);
   const [inputEmail, setInputEmail] = useState<{ [key: string]: string }>({});
+  const [editingTeamName, setEditingTeamName] = useState<{
+    [key: number]: string;
+  }>({});
+  const [isEditingName, setIsEditingName] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const getCurrentRoleId = (userRoleName: string) => {
     const role = roles.find((r) => r.role_name === userRoleName);
@@ -71,10 +77,29 @@ export function TeamManagement({
           team.id === groupId ? { ...team, name: groupName } : team
         )
       );
+
+      setIsEditingName((prev) => ({ ...prev, [groupId]: false }));
     } catch (error) {
       console.error('Error updating team name:', error);
     } finally {
       setLoading((prev) => ({ ...prev, [key]: false }));
+    }
+  };
+
+  const startEditingName = (groupId: number, currentName: string) => {
+    setEditingTeamName((prev) => ({ ...prev, [groupId]: currentName }));
+    setIsEditingName((prev) => ({ ...prev, [groupId]: true }));
+  };
+
+  const cancelEditingName = (groupId: number) => {
+    setIsEditingName((prev) => ({ ...prev, [groupId]: false }));
+    setEditingTeamName((prev) => ({ ...prev, [groupId]: '' }));
+  };
+
+  const saveTeamName = (groupId: number) => {
+    const newName = editingTeamName[groupId];
+    if (newName && newName.trim()) {
+      handleUpdateName(groupId)(newName.trim());
     }
   };
 
@@ -224,7 +249,78 @@ export function TeamManagement({
                 >
                   <div className="fr-col">
                     <div className="fr-text--xl fr-text--bold">
-                      {group.name}
+                      {isEditingName[group.id] ? (
+                        <div className="fr-input-group">
+                          <input
+                            className="fr-input"
+                            type="text"
+                            value={editingTeamName[group.id]}
+                            onChange={(e) =>
+                              setEditingTeamName((prev) => ({
+                                ...prev,
+                                [group.id]: e.target.value,
+                              }))
+                            }
+                            onBlur={() => saveTeamName(group.id)}
+                            onKeyPress={(e) => {
+                              if (e.key === 'Enter') {
+                                saveTeamName(group.id);
+                              }
+                            }}
+                            autoFocus
+                          />
+                          <div className="fr-mt-1w">
+                            <button
+                              type="button"
+                              className="fr-btn fr-btn--sm fr-btn--primary"
+                              onClick={() => saveTeamName(group.id)}
+                              disabled={loading[`update-name-${group.id}`]}
+                            >
+                              Sauvegarder
+                            </button>
+                            <button
+                              type="button"
+                              className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-ml-1w"
+                              onClick={() => cancelEditingName(group.id)}
+                              disabled={loading[`update-name-${group.id}`]}
+                            >
+                              Annuler
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="fr-grid-row fr-grid-row--middle">
+                          <div className="fr-col">
+                            <span
+                              onClick={() =>
+                                isAdmin &&
+                                startEditingName(group.id, group.name)
+                              }
+                              style={{
+                                cursor: isAdmin ? 'pointer' : 'default',
+                              }}
+                              className={isAdmin ? 'fr-link' : ''}
+                            >
+                              {group.name}
+                            </span>
+                          </div>
+                          {isAdmin && (
+                            <div className="fr-col-auto">
+                              <button
+                                type="button"
+                                className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline"
+                                onClick={() =>
+                                  startEditingName(group.id, group.name)
+                                }
+                                title="Modifier le nom de l'équipe"
+                                aria-label="Modifier le nom de l'équipe"
+                              >
+                                ✏️
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <div className="fr-text--sm">
                       {group.users.length} membres
