@@ -8,6 +8,8 @@ import { Group } from '#models/group';
 import logErrorInSentry from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { NextRequest, NextResponse } from 'next/server';
+import z from 'zod';
+import { addUserSchema, groupIdParamSchema } from '../../input-validation';
 
 export async function POST(
   request: NextRequest,
@@ -28,38 +30,34 @@ export async function POST(
       );
     }
 
+    const validatedParams = groupIdParamSchema.parse({ groupId });
+
     const body = await request.json();
-    const { userEmail, roleId } = body;
+    const validatedData = addUserSchema.parse(body);
 
-    if (!userEmail || typeof userEmail !== 'string') {
-      return NextResponse.json(
-        { error: 'Invalid user email provided' },
-        { status: 400 }
-      );
-    }
-
-    if (!roleId || typeof roleId !== 'number') {
-      return NextResponse.json(
-        { error: 'Invalid role ID provided' },
-        { status: 400 }
-      );
-    }
-
-    const groupIdNumber = parseInt(groupId, 10);
-    if (isNaN(groupIdNumber)) {
-      return NextResponse.json({ error: 'Invalid group ID' }, { status: 400 });
-    }
-
-    const group = new Group(groupIdNumber);
+    const group = new Group(validatedParams.groupId);
     await group.addUser(
       session.user.email,
       session.user.userId,
-      userEmail,
-      roleId
+      validatedData.userEmail,
+      validatedData.roleId
     );
 
     return NextResponse.json({ success: true });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        {
+          error: 'Validation failed',
+          details: error.errors.map((err) => ({
+            field: err.path.join('.'),
+            message: err.message,
+          })),
+        },
+        { status: 400 }
+      );
+    }
+
     if (error instanceof HttpUnauthorizedError) {
       return NextResponse.json(
         { error: 'Unauthorized: Admin permissions required' },

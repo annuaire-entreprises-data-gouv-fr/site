@@ -8,6 +8,8 @@ import { Group } from '#models/group';
 import logErrorInSentry from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { NextRequest, NextResponse } from 'next/server';
+import z from 'zod';
+import { groupIdParamSchema, updateNameSchema } from '../../input-validation';
 
 export async function POST(
   request: NextRequest,
@@ -28,26 +30,33 @@ export async function POST(
       );
     }
 
-    const body = await request.json();
-    const { groupName } = body;
+    const validatedParams = groupIdParamSchema.parse({ groupId });
 
-    if (!groupName || typeof groupName !== 'string') {
+    const body = await request.json();
+    const validatedData = updateNameSchema.parse(body);
+
+    const group = new Group(validatedParams.groupId);
+    await group.updateName(
+      session.user.email,
+      session.user.userId,
+      validatedData.groupName
+    );
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid group name provided' },
+        {
+          error: 'Validation failed',
+          details: error.errors.map((err) => ({
+            field: err.path.join('.'),
+            message: err.message,
+          })),
+        },
         { status: 400 }
       );
     }
 
-    const groupIdNumber = parseInt(groupId, 10);
-    if (isNaN(groupIdNumber)) {
-      return NextResponse.json({ error: 'Invalid group ID' }, { status: 400 });
-    }
-
-    const group = new Group(groupIdNumber);
-    await group.updateName(session.user.email, session.user.userId, groupName);
-
-    return NextResponse.json({ success: true });
-  } catch (error) {
     if (error instanceof HttpUnauthorizedError) {
       return NextResponse.json(
         { error: 'Unauthorized: Admin permissions required' },
