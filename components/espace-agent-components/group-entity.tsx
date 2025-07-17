@@ -17,7 +17,9 @@ export function GroupEntity({
   roles: IDRolesUser[];
 }) {
   const [loading, setLoading] = useState(false);
-  const [groupForm, setGroupForm] = useState<'addmembers' | 'rename' | null>();
+  const [groupForm, setGroupForm] = useState<'addmembers' | 'rename' | null>(
+    null
+  );
 
   const getCurrentRoleId = (userRoleName: string) => {
     const role = roles.find((r) => r.role_name === userRoleName);
@@ -143,51 +145,51 @@ export function GroupEntity({
   return (
     <div className="fr-card">
       <div className="fr-card__body">
-        <div className="fr-card__content">
-          <div>
-            <div className="fr-text--xl fr-text--bold">{group.name}</div>
-            <div className="fr-badge">{group.contract}</div>
-            <div className="fr-text--sm">{group.users.length} membres</div>
+        <div className="fr-card__content" style={{ display: 'flex' }}>
+          <div className="fr-mb-3w">
+            <div className="fr-text--xl fr-text--bold fr-mb-1w">
+              {group.name}
+            </div>
+            <div className="fr-badge fr-mb-1w">{group.contract}</div>
+            <div className="fr-text--alt">{group.users.length} membres</div>
           </div>
-          <div>
-            {isAdmin && groupForm === null && (
-              <div className="fr-col-auto">
-                <div className="fr-grid-row fr-grid-row--middle fr-gap-1w">
-                  <button
-                    type="button"
-                    className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline"
-                    onClick={() => setGroupForm('rename')}
-                    disabled={loading}
-                  >
-                    Renommer
-                  </button>
-                  <button
-                    type="button"
-                    className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline"
-                    onClick={() => setGroupForm('addmembers')}
-                    disabled={loading}
-                  >
-                    Ajouter des membres
-                  </button>
-                </div>
+          {isAdmin && groupForm === null && (
+            <div style={{ alignSelf: 'flex-end', marginBottom: '1rem' }}>
+              <div>
+                <button
+                  type="button"
+                  className="fr-btn fr-btn--sm"
+                  onClick={() => setGroupForm('rename')}
+                  disabled={loading}
+                >
+                  Renommer
+                </button>
+                <button
+                  type="button"
+                  className="fr-btn fr-btn--sm fr-ml-1w"
+                  onClick={() => setGroupForm('addmembers')}
+                  disabled={loading}
+                >
+                  Ajouter des membres
+                </button>
               </div>
-            )}
+            </div>
+          )}
 
-            {isAdmin && groupForm === 'addmembers' && (
-              <AddUser
-                groupId={group.id}
-                addNewUser={addNewUser}
-                cancel={() => setGroupForm(null)}
-              />
-            )}
-            {isAdmin && groupForm === 'rename' && (
-              <UpdateName
-                groupId={group.id}
-                updateName={updateName}
-                cancel={() => setGroupForm(null)}
-              />
-            )}
-          </div>
+          {isAdmin && groupForm === 'addmembers' && (
+            <AddUser
+              groupId={group.id}
+              addNewUser={addNewUser}
+              cancel={() => setGroupForm(null)}
+            />
+          )}
+          {isAdmin && groupForm === 'rename' && (
+            <UpdateName
+              groupId={group.id}
+              updateName={updateName}
+              cancel={() => setGroupForm(null)}
+            />
+          )}
 
           <FullTable
             head={['Membre', 'Rôle', 'Action']}
