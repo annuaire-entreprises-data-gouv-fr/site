@@ -3,7 +3,6 @@ import {
   ApplicationRights,
   hasRights,
 } from '#models/authentication/user/rights';
-import { Groups } from '#models/groups';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { redirect } from 'next/navigation';
 
@@ -18,8 +17,6 @@ const MyTeamsPage = async () => {
     return redirect('/lp/agent-public');
   }
 
-  const groups = await Groups.find(session.user.email, session.user.userId);
-
   return (
     <>
       <h1>Mes équipes</h1>
@@ -27,7 +24,10 @@ const MyTeamsPage = async () => {
         <ButtonLink type="button">Nouvelle équipe</ButtonLink>
       </div> */}
 
-      <TeamManagement groups={groups} currentUserEmail={session.user.email} />
+      <TeamManagement
+        currentUserEmail={session.user.email}
+        currentUserSub={session.user.userId}
+      />
     </>
   );
 };
