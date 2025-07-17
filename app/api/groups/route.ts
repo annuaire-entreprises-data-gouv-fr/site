@@ -1,7 +1,7 @@
 import { Groups } from '#models/groups';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { NextResponse } from 'next/server';
-import { withAgentAuth, withErrorHandling } from '../route-wrappers';
+import { withAgentAuth, withErrorHandling } from './route-wrappers';
 
 async function getGroupsHandler() {
   const session = await getSession();

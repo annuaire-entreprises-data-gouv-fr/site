@@ -22,7 +22,7 @@ export function GroupManagement({
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const response = await fetch('/api/teams/roles');
+        const response = await fetch('/api/groups/roles');
         if (response.ok) {
           const rolesData = await response.json();
           setRoles(rolesData);
@@ -36,7 +36,7 @@ export function GroupManagement({
 
     const fetchGroups = async () => {
       try {
-        const response = await fetch('/api/teams/groups');
+        const response = await fetch('/api/groups');
         if (response.ok) {
           const groupsData = await response.json();
           setGroups(groupsData);
