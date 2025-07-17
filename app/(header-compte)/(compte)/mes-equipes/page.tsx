@@ -1,4 +1,4 @@
-import { TeamManagement } from '#components/espace-agent-components/team-management';
+import { GroupManagement } from '#components/espace-agent-components/group-management';
 import {
   ApplicationRights,
   hasRights,
@@ -6,7 +6,7 @@ import {
 import getSession from '#utils/server-side-helper/app/get-session';
 import { redirect } from 'next/navigation';
 
-const MyTeamsPage = async () => {
+const MesEquipesPage = async () => {
   const session = await getSession();
 
   if (
@@ -24,7 +24,7 @@ const MyTeamsPage = async () => {
         <ButtonLink type="button">Nouvelle équipe</ButtonLink>
       </div> */}
 
-      <TeamManagement
+      <GroupManagement
         currentUserEmail={session.user.email}
         currentUserSub={session.user.userId}
       />
@@ -32,4 +32,4 @@ const MyTeamsPage = async () => {
   );
 };
 
-export default MyTeamsPage;
+export default MesEquipesPage;
