@@ -17,6 +17,7 @@ export function GroupEntity({
   roles: IDRolesUser[];
 }) {
   const [loading, setLoading] = useState(false);
+  const [groupForm, setGroupForm] = useState<'addmembers' | 'rename' | null>();
 
   const getCurrentRoleId = (userRoleName: string) => {
     const role = roles.find((r) => r.role_name === userRoleName);
@@ -151,18 +152,18 @@ export function GroupEntity({
               <div className="fr-text--xl fr-text--bold">
                 <div className="fr-grid-row fr-grid-row--middle">
                   <div className="fr-col">{group.name}</div>
-                  <span className="fr-badge">{group.contract}</span>
                 </div>
               </div>
+              <div className="fr-badge">{group.contract}</div>
               <div className="fr-text--sm">{group.users.length} membres</div>
             </div>
-            {isAdmin && (
+            {isAdmin && groupForm === null && (
               <div className="fr-col-auto">
                 <div className="fr-grid-row fr-grid-row--middle fr-gap-1w">
                   <button
                     type="button"
                     className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline"
-                    onClick={() => setShowRenameForm(true)}
+                    onClick={() => setGroupForm('rename')}
                     disabled={loading}
                   >
                     Renommer
@@ -170,7 +171,7 @@ export function GroupEntity({
                   <button
                     type="button"
                     className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline"
-                    onClick={() => setShowAddMembersForm(true)}
+                    onClick={() => setGroupForm('addmembers')}
                     disabled={loading}
                   >
                     Ajouter des membres
@@ -179,19 +180,18 @@ export function GroupEntity({
               </div>
             )}
           </div>
-
-          {isAdmin && (
+          {isAdmin && groupForm === 'addmembers' && (
             <AddUser
               groupId={group.id}
               addNewUser={addNewUser}
-              cancel={() => null}
+              cancel={() => setGroupForm(null)}
             />
           )}
-          {isAdmin && (
+          {isAdmin && groupForm === 'rename' && (
             <UpdateName
               groupId={group.id}
               updateName={updateName}
-              cancel={() => null}
+              cancel={() => setGroupForm(null)}
             />
           )}
 
