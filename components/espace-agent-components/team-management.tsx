@@ -2,19 +2,19 @@
 
 import { IDRolesUser } from '#clients/api-d-roles/interface';
 import { FullTable } from '#components/table/full';
-import { IDRolesGroup } from '#models/groups';
+import { Groups, IDRolesGroup } from '#models/groups';
 import { useEffect, useState } from 'react';
 
 interface TeamManagementProps {
-  groups: IDRolesGroup[];
   currentUserEmail: string;
+  currentUserSub: string;
 }
 
 export function TeamManagement({
-  groups,
   currentUserEmail,
+  currentUserSub,
 }: TeamManagementProps) {
-  const [teams, setTeams] = useState<IDRolesGroup[]>(groups);
+  const [teams, setTeams] = useState<IDRolesGroup[]>([]);
   const [loading, setLoading] = useState<{ [key: string]: boolean }>({});
   const [roles, setRoles] = useState<IDRolesUser[]>([]);
   const [rolesLoading, setRolesLoading] = useState(true);
@@ -52,8 +52,14 @@ export function TeamManagement({
       }
     };
 
+    const fetchTeams = async () => {
+      const teams = await Groups.find(currentUserEmail, currentUserSub);
+      setTeams(teams);
+    };
+
     fetchRoles();
-  }, []);
+    fetchTeams();
+  }, [currentUserEmail, currentUserSub]);
 
   const handleUpdateName = (groupId: number) => async (groupName: string) => {
     const key = `update-name-${groupId}`;
