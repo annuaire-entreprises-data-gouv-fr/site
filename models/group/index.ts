@@ -159,7 +159,6 @@ export class Group {
         );
       }
 
-      // Get the user ID to remove
       const user = await droleClient.getUserByEmail(userEmail);
       await droleClient.removeUserFromGroup(this.groupId, user.id, adminSub);
       return true;
