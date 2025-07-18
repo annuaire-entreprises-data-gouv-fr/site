@@ -10,7 +10,7 @@ export type IDRolesGroup = {
   organisation_siret: string;
   users: IDRolesUser[];
   scopes: IAgentScope[];
-  contract: string;
+  contract_description: string;
 };
 
 export class Groups {
