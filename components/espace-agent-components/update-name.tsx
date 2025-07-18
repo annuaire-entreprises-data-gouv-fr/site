@@ -1,16 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function UpdateName({
   groupId,
+  initialName,
   updateName,
   cancel,
 }: {
   groupId: number;
+  initialName: string;
   updateName: (name: string) => void;
   cancel: () => void;
 }) {
-  const [groupName, setGroupName] = useState('');
+  const [groupName, setGroupName] = useState(initialName);
   const [loading, setLoading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const handleUpdateName = async () => {
     setLoading(true);
@@ -18,6 +27,7 @@ export default function UpdateName({
     try {
       await updateName(groupName);
       setGroupName('');
+      cancel();
     } catch (error) {
       console.error(error);
     } finally {
@@ -32,6 +42,7 @@ export default function UpdateName({
       </label>
       <div className="fr-input-wrap">
         <input
+          ref={inputRef}
           className="fr-input"
           type="text"
           id={`group-name-${groupId}`}

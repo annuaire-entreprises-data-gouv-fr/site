@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function AddUser({
   groupId,
@@ -11,6 +11,13 @@ export default function AddUser({
 }) {
   const [inputEmail, setInputEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const handleAddNewUser = async () => {
     setLoading(true);
@@ -18,6 +25,7 @@ export default function AddUser({
     try {
       await addNewUser(inputEmail);
       setInputEmail('');
+      cancel();
     } catch (error) {
       console.error(error);
     } finally {
@@ -32,6 +40,7 @@ export default function AddUser({
       </label>
       <div className="fr-input-wrap">
         <input
+          ref={inputRef}
           className="fr-input"
           type="email"
           id={`new-user-email-${groupId}`}
