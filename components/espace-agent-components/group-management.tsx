@@ -1,6 +1,6 @@
 'use client';
 
-import { IDRolesUser } from '#clients/api-d-roles/interface';
+import { IDRolesRoles } from '#clients/api-d-roles/interface';
 import { IDRolesGroup } from '#models/groups';
 import { useState } from 'react';
 import { GroupEntity } from './group-entity';
@@ -11,7 +11,7 @@ export function GroupManagement({
   initialGroups,
 }: {
   currentUserEmail: string;
-  roles: IDRolesUser[];
+  roles: IDRolesRoles[];
   initialGroups: IDRolesGroup[];
 }) {
   const [groups, setGroups] = useState<IDRolesGroup[]>(initialGroups);

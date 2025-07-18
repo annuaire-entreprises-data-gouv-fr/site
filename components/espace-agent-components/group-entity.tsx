@@ -1,4 +1,4 @@
-import { IDRolesUser } from '#clients/api-d-roles/interface';
+import { IDRolesRoles } from '#clients/api-d-roles/interface';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/groups';
 import { useState } from 'react';
@@ -16,7 +16,7 @@ export function GroupEntity({
   group: IDRolesGroup;
   isAdmin: boolean;
   setGroup: (group: IDRolesGroup) => void;
-  roles: IDRolesUser[];
+  roles: IDRolesRoles[];
 }) {
   const [loading, setLoading] = useState(false);
   const [groupForm, setGroupForm] = useState<'addmembers' | 'rename' | null>(
