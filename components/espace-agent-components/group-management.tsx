@@ -31,6 +31,7 @@ export function GroupManagement({
     return (
       <GroupEntity
         key={group.id}
+        currentUserEmail={currentUserEmail}
         group={group}
         setGroup={setGroup}
         isAdmin={isAdmin}

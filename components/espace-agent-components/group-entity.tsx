@@ -6,11 +6,13 @@ import AddUser from './add-user';
 import UpdateName from './update-name';
 
 export function GroupEntity({
+  currentUserEmail,
   group,
   setGroup,
   isAdmin,
   roles,
 }: {
+  currentUserEmail: string;
   group: IDRolesGroup;
   isAdmin: boolean;
   setGroup: (group: IDRolesGroup) => void;
@@ -197,7 +199,7 @@ export function GroupEntity({
             head={['Membre', 'Rôle', 'Action']}
             body={group.users.map((user) => [
               user.email,
-              isAdmin ? (
+              isAdmin && user.email !== currentUserEmail ? (
                 <select
                   className="fr-select"
                   value={getCurrentRoleId(user.role_name)}
@@ -217,17 +219,19 @@ export function GroupEntity({
               ) : (
                 <span className="fr-badge">{user.role_name}</span>
               ),
-              <button
-                key={`remove-${user.email}`}
-                type="button"
-                className="fr-btn fr-btn--tertiary-no-outline"
-                title="Supprimer"
-                aria-label={`Supprimer ${user.email}`}
-                onClick={handleRemove(user.email)}
-                disabled={loading}
-              >
-                <span aria-hidden="true">🗑️</span>
-              </button>,
+              isAdmin && user.email !== currentUserEmail ? (
+                <button
+                  key={`remove-${user.email}`}
+                  type="button"
+                  className="fr-btn fr-btn--tertiary-no-outline"
+                  title="Supprimer"
+                  aria-label={`Supprimer ${user.email}`}
+                  onClick={handleRemove(user.email)}
+                  disabled={loading}
+                >
+                  <span aria-hidden="true">🗑️</span>
+                </button>
+              ) : null,
             ])}
           />
         </div>
