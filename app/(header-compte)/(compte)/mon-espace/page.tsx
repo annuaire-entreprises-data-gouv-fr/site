@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow',
 };
 
-const AccountPage = async () => {
+const MonEspacePage = async () => {
   const session = await getSession();
 
   if (!hasRights(session, ApplicationRights.isAgent)) {
@@ -138,4 +138,4 @@ const AccountPage = async () => {
   );
 };
 
-export default AccountPage;
+export default MonEspacePage;
