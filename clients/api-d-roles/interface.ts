@@ -32,7 +32,8 @@ export type IDRolesGroupResponse = {
   organisation_siret: string;
   users: IDRolesUser[];
   scopes: string;
-  contract: string;
+  contract_description: string;
+  contract_url: string | null;
 };
 
 export type IDRolesRoles = {

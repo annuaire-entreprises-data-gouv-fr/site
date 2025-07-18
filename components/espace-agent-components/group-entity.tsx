@@ -155,7 +155,9 @@ export function GroupEntity({
             <div className="fr-text--xl fr-text--bold fr-mb-1w">
               {group.name}
             </div>
-            <div className="fr-badge fr-mb-1w">{group.contract}</div>
+            <div className="fr-badge fr-mb-1w">
+              {group.contract_description}
+            </div>
             <div className="fr-text--alt">{group.users.length} membres</div>
           </div>
           {isAdmin && groupForm === null && (
