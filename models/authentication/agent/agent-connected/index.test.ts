@@ -31,7 +31,8 @@ describe('AgentConnected', () => {
   const mockGroup = {
     name: 'Test Group',
     id: 1,
-    organisation_siren: '123456789',
+    organisation_siret: '123456789',
+    contract: 'test-contract',
     users: [],
     scopes: 'rne nonDiffusible',
   };
