@@ -53,7 +53,7 @@ export function GroupEntity({
   const addNewUser = async (inputEmail: string) => {
     const defaultRoleId = roles.find((r) => r.role_name === 'utilisateur')?.id;
 
-    if (!inputEmail || !inputEmail.trim() || defaultRoleId) return;
+    if (!inputEmail || !inputEmail.trim() || !defaultRoleId) return;
     const userEmail = inputEmail.trim();
 
     const response = await fetch(`/api/groups/${group.id}/add-user`, {
