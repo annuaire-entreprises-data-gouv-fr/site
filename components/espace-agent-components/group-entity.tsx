@@ -186,6 +186,7 @@ export function GroupEntity({
           {isAdmin && groupForm === 'rename' && (
             <UpdateName
               groupId={group.id}
+              initialName={group.name}
               updateName={updateName}
               cancel={() => setGroupForm(null)}
             />
