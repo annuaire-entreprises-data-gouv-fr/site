@@ -17,14 +17,14 @@ async function addUserHandler(
   const validatedData = addUserSchema.parse(body);
 
   const group = new Group(validatedParams.groupId);
-  await group.addUser(
+  const user = await group.addUser(
     session!.user!.email,
     session!.user!.userId,
     validatedData.userEmail,
     validatedData.roleId
   );
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json(user);
 }
 
 export const POST = withAgentAuth(withErrorHandling(addUserHandler));

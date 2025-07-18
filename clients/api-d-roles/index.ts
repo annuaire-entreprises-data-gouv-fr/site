@@ -4,6 +4,7 @@ import { IDRolesGroup } from '#models/groups';
 import logErrorInSentry from '#utils/sentry';
 import { droleApiClient } from './client';
 import {
+  IDRolesAddUserResponse,
   IDRolesGroupSearchResponse,
   IDRolesRoles,
   IDRolesUser,
@@ -78,9 +79,9 @@ export const addUserToGroup = async (
   email: string,
   roleId: number,
   actingUserSub: string
-): Promise<null> => {
+): Promise<IDRolesAddUserResponse> => {
   const route = routes.dRoles.groups.addUserToGroup(groupId, actingUserSub);
-  return await droleApiClient.fetch<null>(route, {
+  return await droleApiClient.fetch<IDRolesAddUserResponse>(route, {
     method: 'POST',
     data: { email, role_id: roleId },
   });

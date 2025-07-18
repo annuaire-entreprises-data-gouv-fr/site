@@ -1,3 +1,12 @@
+export type IDRolesAddUserResponse = {
+  id: number;
+  email: string;
+  sub_pro_connect: string | null;
+  is_verified: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
 export type IDRolesUser = {
   email: string;
   id: number;

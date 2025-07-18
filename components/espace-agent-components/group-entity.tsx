@@ -68,14 +68,16 @@ export function GroupEntity({
       throw new Error('Failed to add user to team');
     }
 
+    const user = await response.json();
+
     setGroup({
       ...group,
       users: [
         ...group.users,
         {
-          email: userEmail,
+          email: user.email,
+          id: user.id,
           role_name: getCurrentRoleName(defaultRoleId),
-          id: 0,
           is_admin: false,
         },
       ],
