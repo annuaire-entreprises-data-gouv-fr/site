@@ -1538,7 +1538,7 @@
             "prenom": "Caroline",
             "prenoms": "Caroline",
             "role": "DIRECTEUR GENERAL",
-            "nationalite": "Française",
+            "nationalite": null,
             "dateNaissancePartial": "1977-03"
           },
           {
@@ -1547,7 +1547,7 @@
             "prenom": "Eric",
             "prenoms": "Eric",
             "role": "PRESIDENT DE SAS",
-            "nationalite": "Française",
+            "nationalite": null,
             "dateNaissancePartial": "1947-09"
           }
         ]
