@@ -60,7 +60,7 @@ const TitleEtablissementWithDenomination: React.FC<{
       )}
     </h1>
     <div className={styles.titleBlock}>
-      <div>
+      <div className={styles.titleBlockContent}>
         <div className={styles.subTitle}>
           <span className={styles.sirenOrSiret}>
             <CopyPaste
