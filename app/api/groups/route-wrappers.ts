@@ -68,7 +68,7 @@ export function withErrorHandling<TContext>(
 
       logErrorInSentry(
         new FetchRessourceException({
-          ressource: 'Team API',
+          ressource: 'Groups API',
           cause: error,
         })
       );
