@@ -19,6 +19,7 @@ export function GroupEntity({
   roles: IDRolesRoles[];
 }) {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [groupForm, setGroupForm] = useState<'addmembers' | 'rename' | null>(
     null
   );
@@ -86,6 +87,7 @@ export function GroupEntity({
 
   const handleUpdate = (userEmail: string) => async (roleId: number) => {
     setLoading(true);
+    setError(null);
 
     try {
       const response = await fetch(`/api/groups/${group.id}/update-user`, {
@@ -97,7 +99,8 @@ export function GroupEntity({
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update user in team');
+        setError('Failed to update user in team');
+        return;
       }
 
       setGroup({
@@ -122,6 +125,7 @@ export function GroupEntity({
 
   const handleRemove = (userEmail: string) => async () => {
     setLoading(true);
+    setError(null);
 
     try {
       const response = await fetch(`/api/groups/${group.id}/remove-user`, {
@@ -133,7 +137,8 @@ export function GroupEntity({
       });
 
       if (!response.ok) {
-        throw new Error('Failed to remove user from team');
+        setError('Failed to remove user from team');
+        return;
       }
 
       setGroup({
@@ -198,6 +203,8 @@ export function GroupEntity({
               cancel={() => setGroupForm(null)}
             />
           )}
+
+          {error && <p className="fr-error-text">{error}</p>}
 
           <FullTable
             head={['Membre', 'Rôle', 'Action']}
