@@ -6,16 +6,26 @@ import constants from '#models/constants';
 import { useStorage } from 'hooks/use-storage';
 import styles from './styles.module.css';
 
-const TEMP_INCIDENT_BANNER_ID = 'temp-incident-banner';
+const TEMP_INCIDENT_BANNER_ENABLED = true;
+const TEMP_INCIDENT_BANNER_ID = 'temp-incident-banner-2025-07-21';
+const TEMP_INCIDENT_BANNER_MESSAGE = `
+        🚨 Un incident a été identifié concernant les fichiers des 
+        établissements géolocalisés du mois de juillet. Nos équipes sont
+        mobilisées pour résoudre ce problème, et une correction sera
+        apportée d’ici 15h aujourd’hui. Nous vous prions de nous excuser
+        pour la gêne occasionnée et vous remercions pour votre
+        compréhension.`;
 
 export default function TempIncidentBanner() {
-  return null;
-
   const [shouldDisplayBanner, setShouldDisplayBanner] = useStorage(
     'local',
     TEMP_INCIDENT_BANNER_ID,
     true
   );
+
+  if (!TEMP_INCIDENT_BANNER_ENABLED) {
+    return null;
+  }
 
   const close = () => {
     setShouldDisplayBanner(false);
@@ -36,12 +46,7 @@ export default function TempIncidentBanner() {
             }}
           >
             <div className="fr-container">
-              🚨 Un incident a été identifié concernant les fichiers des
-              établissements géolocalisés du mois de juillet. Nos équipes sont
-              mobilisées pour résoudre ce problème, et une correction sera
-              apportée d’ici 15h aujourd’hui. Nous vous prions de nous excuser
-              pour la gêne occasionnée et vous remercions pour votre
-              compréhension.
+              {TEMP_INCIDENT_BANNER_MESSAGE}
               <button onClick={close}>
                 <strong>Ne plus afficher ce message ✕</strong>
               </button>
