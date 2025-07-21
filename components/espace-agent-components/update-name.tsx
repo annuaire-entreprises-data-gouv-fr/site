@@ -13,6 +13,7 @@ export default function UpdateName({
 }) {
   const [groupName, setGroupName] = useState(initialName);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -23,13 +24,16 @@ export default function UpdateName({
 
   const handleUpdateName = async () => {
     setLoading(true);
+    setError(null);
 
     try {
       await updateName(groupName);
       setGroupName('');
       cancel();
     } catch (error) {
-      console.error(error);
+      setError(
+        error instanceof Error ? error.message : 'Une erreur est survenue'
+      );
     } finally {
       setLoading(false);
     }
@@ -51,6 +55,7 @@ export default function UpdateName({
           disabled={loading}
         />
       </div>
+      {error && <p className="fr-error-text">{error}</p>}
       <div className="fr-mt-1w">
         <button
           type="button"

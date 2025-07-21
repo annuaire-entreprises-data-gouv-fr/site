@@ -10,6 +10,7 @@ export default function AddUser({
   cancel: () => void;
 }) {
   const [inputEmail, setInputEmail] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -21,13 +22,16 @@ export default function AddUser({
 
   const handleAddNewUser = async () => {
     setLoading(true);
+    setError(null);
 
     try {
       await addNewUser(inputEmail);
       setInputEmail('');
       cancel();
     } catch (error) {
-      console.error(error);
+      setError(
+        error instanceof Error ? error.message : 'Une erreur est survenue'
+      );
     } finally {
       setLoading(false);
     }
@@ -50,6 +54,7 @@ export default function AddUser({
           disabled={loading}
         />
       </div>
+      {error && <p className="fr-error-text">{error}</p>}
       <div className="fr-mt-1w">
         <button
           type="button"
