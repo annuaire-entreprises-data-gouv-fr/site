@@ -8,13 +8,13 @@ import getSession from '#utils/server-side-helper/app/get-session';
 import { NextRequest, NextResponse } from 'next/server';
 import z from 'zod';
 
-type RouteHandler = (
+type RouteHandler<TContext> = (
   request: NextRequest,
-  context: any
+  context: TContext
 ) => Promise<NextResponse>;
 
-export function withAgentAuth(handler: RouteHandler) {
-  return async (request: NextRequest, context: any) => {
+export function withAgentAuth<TContext>(handler: RouteHandler<TContext>) {
+  return async (request: NextRequest, context: TContext) => {
     const session = await getSession();
 
     if (
@@ -32,8 +32,10 @@ export function withAgentAuth(handler: RouteHandler) {
   };
 }
 
-export function withErrorHandling(handler: RouteHandler): RouteHandler {
-  return async (request: NextRequest, context: any) => {
+export function withErrorHandling<TContext>(
+  handler: RouteHandler<TContext>
+): RouteHandler<TContext> {
+  return async (request: NextRequest, context: TContext) => {
     try {
       return await handler(request, context);
     } catch (error) {
