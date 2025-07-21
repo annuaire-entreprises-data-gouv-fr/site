@@ -102,12 +102,12 @@ export const FilterStructure: React.FC<{
           onClick={() => toggleLabel('ess')}
         />
 
-        {/* <LabelAndCertificateBadge
+        <LabelAndCertificateBadge
           label="Société à mission"
-          isSelected={labelSelected === 'sm'}
+          isSelected={labelsSelected.includes('sm')}
           small
-          onClick={() => setLabelSelected('sm')}
-        /> */}
+          onClick={() => toggleLabel('sm')}
+        />
 
         <LabelAndCertificateBadge
           label="Entreprise Inclusive"
@@ -157,7 +157,6 @@ export const FilterStructure: React.FC<{
           small
           onClick={() => toggleLabel('esv')}
         />
-
         <LabelAndCertificateBadge
           label="Achats Responsables"
           isSelected={labelsSelected.includes('achats_responsables')}
