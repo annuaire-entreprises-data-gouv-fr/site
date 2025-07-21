@@ -35,6 +35,7 @@ describe('AgentConnected', () => {
     contract: 'test-contract',
     users: [],
     scopes: 'rne nonDiffusible',
+    contract_description: 'test-contract-description',
   };
   const mockUserInfo = {
     idp_id: 'test-idp',
