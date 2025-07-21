@@ -39,7 +39,7 @@ const ResultsCounter: React.FC<{
         <div className="no-results">
           <div className={styles['results-counter']}>
             <span>
-              Aucune structure n’a été trouvée pour vos critères de recherche .
+              Aucune structure n’a été trouvée pour vos critères de recherche.
             </span>
           </div>
           <p>Nous vous suggérons de modifier votre recherche :</p>
