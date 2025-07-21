@@ -1,13 +1,8 @@
 import { getRoles } from '#clients/api-d-roles';
 import { GroupManagement } from '#components/espace-agent-components/group-management';
-import {
-  ApplicationRights,
-  hasRights,
-} from '#models/authentication/user/rights';
 import { Groups } from '#models/groups';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Vos équipes de l’Annuaire des Entreprises',
@@ -20,14 +15,6 @@ export const metadata: Metadata = {
 const MesEquipesPage = async () => {
   const session = await getSession();
 
-  if (
-    !hasRights(session, ApplicationRights.isAgent) ||
-    !session?.user?.email ||
-    !session?.user?.userId
-  ) {
-    return redirect('/lp/agent-public');
-  }
-
   const roles = await getRoles();
   const groups = await Groups.find(session!.user!.email, session!.user!.userId);
 
@@ -39,7 +26,7 @@ const MesEquipesPage = async () => {
       </div> */}
 
       <GroupManagement
-        currentUserEmail={session.user.email}
+        currentUserEmail={session!.user!.email}
         roles={roles}
         initialGroups={groups}
       />
