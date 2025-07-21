@@ -15,8 +15,10 @@ export const metadata: Metadata = {
 const MesEquipesPage = async () => {
   const session = await getSession();
 
-  const roles = await getRoles();
-  const groups = await Groups.find(session!.user!.email, session!.user!.userId);
+  const [roles, groups] = await Promise.all([
+    getRoles(),
+    Groups.find(session!.user!.email, session!.user!.userId),
+  ]);
 
   return (
     <>
