@@ -1,6 +1,10 @@
-import { IDRolesRoles } from '#clients/api-d-roles/interface';
+import {
+  IDRolesAddUserResponse,
+  IDRolesRoles,
+} from '#clients/api-d-roles/interface';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/groups';
+import httpClient from '#utils/network';
 import { useState } from 'react';
 import AddUser from './add-user';
 import UpdateName from './update-name';
@@ -36,17 +40,14 @@ export function GroupEntity({
   const adminRoleName = roles.find((r) => r.is_admin)?.role_name;
 
   const updateName = async (groupName: string) => {
-    const response = await fetch(`/api/groups/${group.id}/update-name`, {
+    await httpClient({
+      url: `/api/groups/${group.id}/update-name`,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ groupName }),
+      data: JSON.stringify({ groupName }),
     });
-
-    if (!response.ok) {
-      throw new Error('Failed to update team name');
-    }
 
     setGroup({ ...group, name: groupName });
   };
@@ -57,19 +58,14 @@ export function GroupEntity({
     if (!inputEmail || !inputEmail.trim() || !defaultRoleId) return;
     const userEmail = inputEmail.trim();
 
-    const response = await fetch(`/api/groups/${group.id}/add-user`, {
+    const user = await httpClient<IDRolesAddUserResponse>({
+      url: `/api/groups/${group.id}/add-user`,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ userEmail, roleId: defaultRoleId }),
+      data: JSON.stringify({ userEmail, roleId: defaultRoleId }),
     });
-
-    if (!response.ok) {
-      throw new Error('Failed to add user to team');
-    }
-
-    const user = await response.json();
 
     setGroup({
       ...group,
@@ -90,18 +86,14 @@ export function GroupEntity({
     setError(null);
 
     try {
-      const response = await fetch(`/api/groups/${group.id}/update-user`, {
+      await httpClient({
+        url: `/api/groups/${group.id}/update-user`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userEmail, roleId }),
+        data: JSON.stringify({ userEmail, roleId }),
       });
-
-      if (!response.ok) {
-        setError('Failed to update user in team');
-        return;
-      }
 
       setGroup({
         ...group,
@@ -128,18 +120,14 @@ export function GroupEntity({
     setError(null);
 
     try {
-      const response = await fetch(`/api/groups/${group.id}/remove-user`, {
+      await httpClient({
+        url: `/api/groups/${group.id}/remove-user`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userEmail }),
+        data: JSON.stringify({ userEmail }),
       });
-
-      if (!response.ok) {
-        setError('Failed to remove user from team');
-        return;
-      }
 
       setGroup({
         ...group,
