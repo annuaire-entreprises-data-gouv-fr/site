@@ -42,7 +42,7 @@ export default function UpdateName({
   return (
     <div className="fr-input-group">
       <label className="fr-label" htmlFor={`group-name-${groupId}`}>
-        Modifier le nom de l‘équipe
+        Renommer l‘équipe
       </label>
       <div className="fr-input-wrap">
         <input

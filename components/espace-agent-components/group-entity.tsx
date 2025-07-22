@@ -174,7 +174,7 @@ export function GroupEntity({
                   onClick={() => setGroupForm('rename')}
                   disabled={loading}
                 >
-                  Renommer
+                  Renommer l‘équipe
                 </button>
                 <button
                   type="button"
@@ -182,7 +182,7 @@ export function GroupEntity({
                   onClick={() => setGroupForm('addmembers')}
                   disabled={loading}
                 >
-                  Ajouter des membres
+                  Ajouter un membre
                 </button>
               </div>
             </div>
