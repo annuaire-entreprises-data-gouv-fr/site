@@ -11,6 +11,10 @@
   }
 }
 
+.titleBlockContent {
+  max-width: 500px;
+}
+
 .titleBlock > div:last-of-type {
   flex-grow: 1;
 }
