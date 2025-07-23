@@ -23,9 +23,6 @@ const MesEquipesPage = async () => {
     <>
       <AgentNavigation />
       <h1>Mes équipes</h1>
-      {/* <div style={{ textAlign: 'right', marginBottom: '1rem' }}>
-        <ButtonLink type="button">Nouvelle équipe</ButtonLink>
-      </div> */}
 
       <GroupManagement
         currentUserEmail={session!.user!.email}
