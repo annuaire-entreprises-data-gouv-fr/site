@@ -1,6 +1,6 @@
-import { getRoles } from '#clients/api-d-roles';
 import { GroupManagement } from '#components/espace-agent-components/group-management';
 import { Groups } from '#models/authentication/group/groups';
+import { dRolesStore } from '#models/authentication/group/roles';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 
@@ -15,10 +15,8 @@ export const metadata: Metadata = {
 const MesEquipesPage = async () => {
   const session = await getSession();
 
-  const [roles, groups] = await Promise.all([
-    getRoles(),
-    Groups.find(session!.user!.email, session!.user!.userId),
-  ]);
+  const roles = await dRolesStore.getRoles();
+  const groups = await Groups.find(session!.user!.email, session!.user!.userId);
 
   return (
     <>
