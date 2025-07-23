@@ -2,9 +2,9 @@ import { IDRolesRoles } from '#clients/api-d-roles/interface';
 import ButtonLink from '#components-ui/button';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/authentication/group/groups';
-import httpClient from '#utils/network';
 import { useState } from 'react';
 import AddUserModal from './add-user';
+import DeleteUserButton from './delete-user';
 import UpdateNameModal from './update-name';
 import UpdateUserSelect from './update-user';
 
@@ -37,31 +37,6 @@ export function GroupEntity({
     return role?.role_name || '';
   };
   const adminRoleName = roles.find((r) => r.is_admin)?.role_name;
-
-  const handleRemove = (userEmail: string) => async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      await httpClient({
-        url: `/api/groups/${group.id}/remove-user`,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: JSON.stringify({ userEmail }),
-      });
-
-      setGroup({
-        ...group,
-        users: group.users.filter((user) => user.email !== userEmail),
-      });
-    } catch (error) {
-      console.error('Error removing user from team:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="fr-card">
@@ -157,17 +132,18 @@ export function GroupEntity({
                 <span className="fr-badge">{user.role_name}</span>
               ),
               isAdmin && user.email !== currentUserEmail ? (
-                <button
-                  key={`remove-${user.email}`}
-                  type="button"
-                  className="fr-btn fr-btn--tertiary-no-outline"
-                  title="Supprimer"
-                  aria-label={`Supprimer ${user.email}`}
-                  onClick={handleRemove(user.email)}
-                  disabled={loading}
-                >
-                  <span aria-hidden="true">🗑️</span>
-                </button>
+                <DeleteUserButton
+                  userEmail={user.email}
+                  groupId={group.id}
+                  deleteUser={(userEmail: string) => {
+                    setGroup({
+                      ...group,
+                      users: group.users.filter(
+                        (user) => user.email !== userEmail
+                      ),
+                    });
+                  }}
+                />
               ) : null,
             ])}
           />
