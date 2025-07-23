@@ -6,6 +6,7 @@ import httpClient from '#utils/network';
 import { useState } from 'react';
 import AddUserModal from './add-user';
 import UpdateNameModal from './update-name';
+import UpdateUserSelect from './update-user';
 
 export function GroupEntity({
   currentUserEmail,
@@ -36,40 +37,6 @@ export function GroupEntity({
     return role?.role_name || '';
   };
   const adminRoleName = roles.find((r) => r.is_admin)?.role_name;
-
-  const handleUpdate = (userEmail: string) => async (roleId: number) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      await httpClient({
-        url: `/api/groups/${group.id}/update-user`,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: JSON.stringify({ userEmail, roleId }),
-      });
-
-      setGroup({
-        ...group,
-        users: group.users.map((user) =>
-          user.email === userEmail
-            ? {
-                ...user,
-                role_name:
-                  roles.find((r) => r.id === roleId)?.role_name ||
-                  user.role_name,
-              }
-            : user
-        ),
-      });
-    } catch (error) {
-      console.error('Error updating user in team:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleRemove = (userEmail: string) => async () => {
     setLoading(true);
@@ -163,20 +130,27 @@ export function GroupEntity({
             body={group.users.map((user) => [
               user.email,
               isAdmin && user.email !== currentUserEmail ? (
-                <select
-                  className="fr-select"
-                  value={getCurrentRoleId(user.role_name)}
-                  onChange={(e) =>
-                    handleUpdate(user.email)(parseInt(e.target.value))
-                  }
-                  disabled={loading}
-                >
-                  {roles.map((role) => (
-                    <option key={role.id} value={role.id}>
-                      {role.role_name}
-                    </option>
-                  ))}
-                </select>
+                <UpdateUserSelect
+                  userEmail={user.email}
+                  roleId={getCurrentRoleId(user.role_name)}
+                  groupId={group.id}
+                  roles={roles}
+                  updateUser={({ email, roleId }) => {
+                    setGroup({
+                      ...group,
+                      users: group.users.map((user) =>
+                        user.email === email
+                          ? {
+                              ...user,
+                              role_name:
+                                roles.find((r) => r.id === roleId)?.role_name ||
+                                user.role_name,
+                            }
+                          : user
+                      ),
+                    });
+                  }}
+                />
               ) : user.role_name === adminRoleName ? (
                 <span className="fr-badge fr-badge--new">{user.role_name}</span>
               ) : (
