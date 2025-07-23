@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
+import { IDRolesGroup } from '#models/authentication/group/groups';
 import { InternalError } from '#models/exceptions';
-import { IDRolesGroup } from '#models/groups';
 import logErrorInSentry from '#utils/sentry';
 import { droleApiClient } from './client';
 import {

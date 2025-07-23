@@ -1,7 +1,7 @@
 'use client';
 
 import { IDRolesRoles } from '#clients/api-d-roles/interface';
-import { IDRolesGroup } from '#models/groups';
+import { IDRolesGroup } from '#models/authentication/group/groups';
 import { useState } from 'react';
 import { GroupEntity } from './group-entity';
 

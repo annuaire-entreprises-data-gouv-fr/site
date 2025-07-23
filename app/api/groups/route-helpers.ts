@@ -1,4 +1,4 @@
-import { Group } from '#models/group';
+import { Group } from '#models/authentication/group';
 import { groupIdParamSchema } from './input-validation';
 
 export async function getGroup(params: Promise<{ groupId: string }>) {

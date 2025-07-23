@@ -5,7 +5,7 @@ import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
-import { Groups } from '#models/groups';
+import { Groups } from '#models/authentication/group/groups';
 import { AgentConnected } from './index';
 
 jest.mock('#clients/authentication/super-agents', () => ({
@@ -14,7 +14,7 @@ jest.mock('#clients/authentication/super-agents', () => ({
   },
 }));
 
-jest.mock('#models/groups', () => ({
+jest.mock('#models/authentication/group/groups', () => ({
   Groups: {
     find: jest.fn(),
     getScopeForAgent: jest.fn(),

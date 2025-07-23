@@ -3,7 +3,7 @@ import {
   IDRolesRoles,
 } from '#clients/api-d-roles/interface';
 import { FullTable } from '#components/table/full';
-import { IDRolesGroup } from '#models/groups';
+import { IDRolesGroup } from '#models/authentication/group/groups';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 import AddUser from './add-user';

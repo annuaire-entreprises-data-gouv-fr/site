@@ -1,6 +1,6 @@
 import { getRoles } from '#clients/api-d-roles';
 import { GroupManagement } from '#components/espace-agent-components/group-management';
-import { Groups } from '#models/groups';
+import { Groups } from '#models/authentication/group/groups';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 

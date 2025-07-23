@@ -5,8 +5,8 @@ import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
+import { Groups } from '#models/authentication/group/groups';
 import { InternalError } from '#models/exceptions';
-import { Groups } from '#models/groups';
 import { isSiret, verifySiret } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
 import { AgentOrganisation } from '../organisation';
