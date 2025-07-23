@@ -6,9 +6,12 @@ const emailValidator = z
   .min(1, 'Email is required');
 
 const groupIdValidator = z
-  .number()
-  .int('Group ID must be an integer')
-  .positive('Group ID must be positive');
+  .string()
+  .regex(/^\d+$/, 'Group ID must be a number')
+  .transform((val) => parseInt(val, 10))
+  .refine((val) => Number.isInteger(val) && val > 0, {
+    message: 'Group ID must be a positive integer',
+  });
 
 const roleIdValidator = z
   .number()
