@@ -1,13 +1,19 @@
+import { IDRolesAddUserResponse } from '#clients/api-d-roles/interface';
+import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
 
-export default function AddUser({
+export default function AddUserModal({
+  visible,
+  cancel,
   groupId,
   addNewUser,
-  cancel,
+  defaultRoleId,
 }: {
+  visible: boolean;
   groupId: number;
-  addNewUser: (email: string) => void;
+  addNewUser: (user: { email: string; id: number }) => void;
   cancel: () => void;
+  defaultRoleId: number;
 }) {
   const [inputEmail, setInputEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +31,20 @@ export default function AddUser({
     setError(null);
 
     try {
-      await addNewUser(inputEmail);
+      if (!inputEmail || !inputEmail.trim()) return;
+      const userEmail = inputEmail.trim();
+
+      const user = await httpClient<IDRolesAddUserResponse>({
+        url: `/api/groups/${groupId}/add-user`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: JSON.stringify({ userEmail, roleId: defaultRoleId }),
+      });
+
+      addNewUser({ email: user.email, id: user.id });
+
       setInputEmail('');
       cancel();
     } catch (error) {
@@ -36,6 +55,8 @@ export default function AddUser({
       setLoading(false);
     }
   };
+
+  if (!visible) return null;
 
   return (
     <div className="fr-input-group">

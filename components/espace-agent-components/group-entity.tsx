@@ -1,13 +1,11 @@
-import {
-  IDRolesAddUserResponse,
-  IDRolesRoles,
-} from '#clients/api-d-roles/interface';
+import { IDRolesRoles } from '#clients/api-d-roles/interface';
+import ButtonLink from '#components-ui/button';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/authentication/group/groups';
 import httpClient from '#utils/network';
 import { useState } from 'react';
-import AddUser from './add-user';
-import UpdateName from './update-name';
+import AddUserModal from './add-user';
+import UpdateNameModal from './update-name';
 
 export function GroupEntity({
   currentUserEmail,
@@ -24,62 +22,20 @@ export function GroupEntity({
 }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [groupForm, setGroupForm] = useState<'addmembers' | 'rename' | null>(
-    null
-  );
+  const [updateNameModalVisible, setUpdateNameModalVisible] = useState(false);
+  const [adduserModalVisible, setAdduserModalVisible] = useState(false);
 
   const getCurrentRoleId = (userRoleName: string) => {
     const role = roles.find((r) => r.role_name === userRoleName);
     return role?.id || 0;
   };
+  const defaultRoleId = roles.find((r) => r.role_name === 'utilisateur')?.id;
 
   const getCurrentRoleName = (roleId: number) => {
     const role = roles.find((r) => r.id === roleId);
     return role?.role_name || '';
   };
   const adminRoleName = roles.find((r) => r.is_admin)?.role_name;
-
-  const updateName = async (groupName: string) => {
-    await httpClient({
-      url: `/api/groups/${group.id}/update-name`,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: JSON.stringify({ groupName }),
-    });
-
-    setGroup({ ...group, name: groupName });
-  };
-
-  const addNewUser = async (inputEmail: string) => {
-    const defaultRoleId = roles.find((r) => r.role_name === 'utilisateur')?.id;
-
-    if (!inputEmail || !inputEmail.trim() || !defaultRoleId) return;
-    const userEmail = inputEmail.trim();
-
-    const user = await httpClient<IDRolesAddUserResponse>({
-      url: `/api/groups/${group.id}/add-user`,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: JSON.stringify({ userEmail, roleId: defaultRoleId }),
-    });
-
-    setGroup({
-      ...group,
-      users: [
-        ...group.users,
-        {
-          email: user.email,
-          id: user.id,
-          role_name: getCurrentRoleName(defaultRoleId),
-          is_admin: false,
-        },
-      ],
-    });
-  };
 
   const handleUpdate = (userEmail: string) => async (roleId: number) => {
     setLoading(true);
@@ -153,43 +109,51 @@ export function GroupEntity({
             </div>
             <div className="fr-text--alt">{group.users.length} membres</div>
           </div>
-          {isAdmin && groupForm === null && (
-            <div style={{ alignSelf: 'flex-end', marginBottom: '1rem' }}>
-              <div>
-                <button
-                  type="button"
-                  className="fr-btn fr-btn--sm"
-                  onClick={() => setGroupForm('rename')}
-                  disabled={loading}
-                >
-                  Renommer l‘équipe
-                </button>
-                <button
-                  type="button"
-                  className="fr-btn fr-btn--sm fr-ml-1w"
-                  onClick={() => setGroupForm('addmembers')}
-                  disabled={loading}
-                >
-                  Ajouter un membre
-                </button>
+          {isAdmin && (
+            <>
+              <div style={{ alignSelf: 'flex-end', marginBottom: '1rem' }}>
+                <div>
+                  <ButtonLink onClick={() => setUpdateNameModalVisible(true)}>
+                    Renommer l‘équipe
+                  </ButtonLink>
+                  <ButtonLink onClick={() => setAdduserModalVisible(true)}>
+                    Ajouter un membre
+                  </ButtonLink>
+                </div>
               </div>
-            </div>
-          )}
-
-          {isAdmin && groupForm === 'addmembers' && (
-            <AddUser
-              groupId={group.id}
-              addNewUser={addNewUser}
-              cancel={() => setGroupForm(null)}
-            />
-          )}
-          {isAdmin && groupForm === 'rename' && (
-            <UpdateName
-              groupId={group.id}
-              initialName={group.name}
-              updateName={updateName}
-              cancel={() => setGroupForm(null)}
-            />
+              <AddUserModal
+                visible={adduserModalVisible}
+                cancel={() => setAdduserModalVisible(false)}
+                groupId={group.id}
+                defaultRoleId={defaultRoleId!}
+                addNewUser={({ email, id }) => {
+                  setGroup({
+                    ...group,
+                    users: [
+                      ...group.users,
+                      {
+                        email,
+                        id,
+                        role_name: getCurrentRoleName(defaultRoleId!),
+                        is_admin: false,
+                      },
+                    ],
+                  });
+                }}
+              />
+              <UpdateNameModal
+                visible={updateNameModalVisible}
+                cancel={() => setUpdateNameModalVisible(false)}
+                groupId={group.id}
+                initialName={group.name}
+                updateName={(name: string) => {
+                  setGroup({
+                    ...group,
+                    name,
+                  });
+                }}
+              />
+            </>
           )}
 
           {error && <p className="fr-error-text">{error}</p>}

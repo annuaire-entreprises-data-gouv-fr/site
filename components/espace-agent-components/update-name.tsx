@@ -1,15 +1,18 @@
+import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
 
-export default function UpdateName({
+export default function UpdateNameModal({
+  visible,
+  cancel,
   groupId,
   initialName,
   updateName,
-  cancel,
 }: {
+  visible: boolean;
+  cancel: () => void;
   groupId: number;
   initialName: string;
   updateName: (name: string) => void;
-  cancel: () => void;
 }) {
   const [groupName, setGroupName] = useState(initialName);
   const [loading, setLoading] = useState(false);
@@ -27,7 +30,15 @@ export default function UpdateName({
     setError(null);
 
     try {
-      await updateName(groupName);
+      await httpClient({
+        url: `/api/groups/${groupId}/update-name`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: JSON.stringify({ groupName }),
+      });
+      updateName(groupName);
       setGroupName('');
       cancel();
     } catch (error) {
@@ -38,6 +49,8 @@ export default function UpdateName({
       setLoading(false);
     }
   };
+
+  if (!visible) return null;
 
   return (
     <div className="fr-input-group">
