@@ -4,29 +4,15 @@ import ButtonClose from '#components-ui/button/button-close';
 import FloatingModal from '#components-ui/floating-modal';
 import { PrintNever } from '#components-ui/print-visibility';
 import ClientOnly from '#components/client-only';
-import { useStorage } from 'hooks';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './styles.module.css';
 
 export const FullScreenModal: React.FC<{
   children: React.ReactNode;
+  isVisible: boolean;
+  setIsVisible: (visible: boolean) => void;
   modalId: string;
-}> = ({ children, modalId }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered] = useStorage(
-    'local',
-    modalId,
-    false
-  );
-
-  useEffect(() => {
-    if (!hasAlreadyBeenTriggered) {
-      setIsVisible(true);
-      setHasAlreadyBeenTriggered(true);
-    }
-  }, [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered]);
-
+}> = ({ children, isVisible, setIsVisible, modalId }) => {
   const close = () => {
     setIsVisible(false);
   };
@@ -51,13 +37,6 @@ export const FullScreenModal: React.FC<{
                 />
               </div>
               {children}
-              <button
-                style={{ marginTop: 10 }}
-                onClick={close}
-                className="fr-btn fr-btn--primary"
-              >
-                Continuer ma navigation
-              </button>
             </FloatingModal>
           </div>
         </PrintNever>
