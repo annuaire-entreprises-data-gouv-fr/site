@@ -1,3 +1,4 @@
+import AgentNavigation from '#components/espace-agent-components/agent-navigation';
 import { GroupManagement } from '#components/espace-agent-components/group-management';
 import { Groups } from '#models/authentication/group/groups';
 import { dRolesStore } from '#models/authentication/group/roles';
@@ -20,6 +21,7 @@ const MesEquipesPage = async () => {
 
   return (
     <>
+      <AgentNavigation />
       <h1>Mes équipes</h1>
       {/* <div style={{ textAlign: 'right', marginBottom: '1rem' }}>
         <ButtonLink type="button">Nouvelle équipe</ButtonLink>

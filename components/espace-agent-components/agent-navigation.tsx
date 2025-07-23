@@ -1,12 +1,20 @@
-'use client';
-
 import ButtonLink from '#components-ui/button';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
 import constants from '#models/constants';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import getSession from '#utils/server-side-helper/app/get-session';
+import { redirect } from 'next/navigation';
+import AgentNavigationLink from './agent-navigation-link';
 
-export default function AgentNavigation() {
-  const pathname = usePathname();
+export default async function AgentNavigation() {
+  const session = await getSession();
+
+  if (!hasRights(session, ApplicationRights.isAgent)) {
+    return redirect('/lp/agent-public');
+  }
+
   const navLinks = [
     { label: 'Mon espace', href: '/mon-espace' },
     { label: 'Mes équipes', href: '/mes-equipes' },
@@ -22,14 +30,7 @@ export default function AgentNavigation() {
     >
       <div style={{ display: 'flex', gap: '2rem' }}>
         {navLinks.map(({ label, href }) => (
-          <Link
-            className={'fr-nav__link'}
-            aria-current={pathname === href ? 'page' : undefined}
-            key={href}
-            href={href}
-          >
-            {label}
-          </Link>
+          <AgentNavigationLink href={href} label={label} key={href} />
         ))}
       </div>
       <div>
