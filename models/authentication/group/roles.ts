@@ -10,13 +10,14 @@ class DRolesStore {
     this._dRolesStore = new DataStore<IDRolesRoles[]>(
       () => getRoles(),
       'd-roles-roles',
-      (response) => response,
+      (response) => ({ roles: response }),
       this.TTL
     );
   }
 
   getRoles = async () => {
-    return await this._dRolesStore.getData();
+    const data = await this._dRolesStore.getData();
+    return data.roles;
   };
 }
 
