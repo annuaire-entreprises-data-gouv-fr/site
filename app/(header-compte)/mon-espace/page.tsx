@@ -11,6 +11,7 @@ import {
 import constants from '#models/constants';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
@@ -22,6 +23,10 @@ export const metadata: Metadata = {
 
 const MonEspacePage = async () => {
   const session = await getSession();
+
+  if (!hasRights(session, ApplicationRights.isAgent)) {
+    return redirect('/lp/agent-public');
+  }
 
   const appRights = Object.values(ApplicationRights)
     .filter((scope) => scope !== ApplicationRights.isAgent)
