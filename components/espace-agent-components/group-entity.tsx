@@ -1,8 +1,6 @@
 import { IDRolesRoles } from '#clients/api-d-roles/interface';
-import ButtonLink from '#components-ui/button';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/authentication/group/groups';
-import { useState } from 'react';
 import AddUserModal from './add-user';
 import DeleteUserButton from './delete-user';
 import UpdateNameModal from './update-name';
@@ -33,8 +31,6 @@ export function GroupEntity({
   setGroup: (group: IDRolesGroup) => void;
   roles: IDRolesRoles[];
 }) {
-  const [updateNameModalVisible, setUpdateNameModalVisible] = useState(false);
-
   const getCurrentRoleId = (userRoleName: string) => {
     const role = roles.find((r) => r.role_name === userRoleName);
     return role?.id || 0;
@@ -87,7 +83,17 @@ export function GroupEntity({
         <div className="fr-card__content" style={{ display: 'flex' }}>
           <div className="fr-mb-3w">
             <div className="fr-text--xl fr-text--bold fr-mb-1w">
-              {group.name}
+              {group.name}{' '}
+              <UpdateNameModal
+                groupId={group.id}
+                initialName={group.name}
+                updateName={(name: string) => {
+                  setGroup({
+                    ...group,
+                    name,
+                  });
+                }}
+              />
             </div>
             <div className="fr-badge fr-mb-1w">
               {group.contract_description}
@@ -100,9 +106,6 @@ export function GroupEntity({
             <>
               <div style={{ alignSelf: 'flex-end', marginBottom: '1rem' }}>
                 <div>
-                  <ButtonLink onClick={() => setUpdateNameModalVisible(true)}>
-                    Renommer l‘équipe
-                  </ButtonLink>
                   <AddUserModal
                     groupId={group.id}
                     defaultRoleId={defaultRoleId!}
@@ -110,18 +113,6 @@ export function GroupEntity({
                   />
                 </div>
               </div>
-              <UpdateNameModal
-                visible={updateNameModalVisible}
-                cancel={() => setUpdateNameModalVisible(false)}
-                groupId={group.id}
-                initialName={group.name}
-                updateName={(name: string) => {
-                  setGroup({
-                    ...group,
-                    name,
-                  });
-                }}
-              />
 
               <FullTable
                 head={['Membre', 'Rôle', 'Action']}
