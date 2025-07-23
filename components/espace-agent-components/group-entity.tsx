@@ -8,6 +8,18 @@ import DeleteUserButton from './delete-user';
 import UpdateNameModal from './update-name';
 import UpdateUserSelect from './update-user';
 
+const NotAdminTable = ({ group }: { group: IDRolesGroup }) => {
+  return (
+    <FullTable
+      head={['Membre', 'Rôle']}
+      body={group.users.map((user) => [
+        user.email,
+        <span className="fr-badge">{user.role_name}</span>,
+      ])}
+    />
+  );
+};
+
 export function GroupEntity({
   currentUserEmail,
   group,
@@ -21,8 +33,6 @@ export function GroupEntity({
   setGroup: (group: IDRolesGroup) => void;
   roles: IDRolesRoles[];
 }) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [updateNameModalVisible, setUpdateNameModalVisible] = useState(false);
   const [adduserModalVisible, setAdduserModalVisible] = useState(false);
 
@@ -36,7 +46,41 @@ export function GroupEntity({
     const role = roles.find((r) => r.id === roleId);
     return role?.role_name || '';
   };
-  const adminRoleName = roles.find((r) => r.is_admin)?.role_name;
+
+  const handleAddNewUser = ({ email, id }: { email: string; id: number }) => {
+    setGroup({
+      ...group,
+      users: [
+        ...group.users,
+        {
+          email,
+          id,
+          role_name: getCurrentRoleName(defaultRoleId!),
+          is_admin: false,
+        },
+      ],
+    });
+  };
+
+  const handleUpdateUser = ({
+    email,
+    roleId,
+  }: {
+    email: string;
+    roleId: number;
+  }) => {
+    setGroup({
+      ...group,
+      users: group.users.map((user) =>
+        user.email === email
+          ? {
+              ...user,
+              role_name: roles.find((r) => r.id === roleId)?.role_name!,
+            }
+          : user
+      ),
+    });
+  };
 
   return (
     <div className="fr-card">
@@ -51,7 +95,9 @@ export function GroupEntity({
             </div>
             <div className="fr-text--alt">{group.users.length} membres</div>
           </div>
-          {isAdmin && (
+          {!isAdmin ? (
+            <NotAdminTable group={group} />
+          ) : (
             <>
               <div style={{ alignSelf: 'flex-end', marginBottom: '1rem' }}>
                 <div>
@@ -68,20 +114,7 @@ export function GroupEntity({
                 cancel={() => setAdduserModalVisible(false)}
                 groupId={group.id}
                 defaultRoleId={defaultRoleId!}
-                addNewUser={({ email, id }) => {
-                  setGroup({
-                    ...group,
-                    users: [
-                      ...group.users,
-                      {
-                        email,
-                        id,
-                        role_name: getCurrentRoleName(defaultRoleId!),
-                        is_admin: false,
-                      },
-                    ],
-                  });
-                }}
+                addNewUser={handleAddNewUser}
               />
               <UpdateNameModal
                 visible={updateNameModalVisible}
@@ -95,58 +128,40 @@ export function GroupEntity({
                   });
                 }}
               />
+
+              <FullTable
+                head={['Membre', 'Rôle', 'Action']}
+                body={group.users.map((user) => [
+                  user.email,
+                  user.email !== currentUserEmail ? (
+                    <UpdateUserSelect
+                      userEmail={user.email}
+                      roleId={getCurrentRoleId(user.role_name)}
+                      groupId={group.id}
+                      roles={roles}
+                      updateUser={handleUpdateUser}
+                    />
+                  ) : (
+                    <span className="fr-badge">{user.role_name}</span>
+                  ),
+                  user.email !== currentUserEmail ? (
+                    <DeleteUserButton
+                      userEmail={user.email}
+                      groupId={group.id}
+                      deleteUser={(userEmail: string) => {
+                        setGroup({
+                          ...group,
+                          users: group.users.filter(
+                            (user) => user.email !== userEmail
+                          ),
+                        });
+                      }}
+                    />
+                  ) : null,
+                ])}
+              />
             </>
           )}
-
-          {error && <p className="fr-error-text">{error}</p>}
-
-          <FullTable
-            head={['Membre', 'Rôle', 'Action']}
-            body={group.users.map((user) => [
-              user.email,
-              isAdmin && user.email !== currentUserEmail ? (
-                <UpdateUserSelect
-                  userEmail={user.email}
-                  roleId={getCurrentRoleId(user.role_name)}
-                  groupId={group.id}
-                  roles={roles}
-                  updateUser={({ email, roleId }) => {
-                    setGroup({
-                      ...group,
-                      users: group.users.map((user) =>
-                        user.email === email
-                          ? {
-                              ...user,
-                              role_name:
-                                roles.find((r) => r.id === roleId)?.role_name ||
-                                user.role_name,
-                            }
-                          : user
-                      ),
-                    });
-                  }}
-                />
-              ) : user.role_name === adminRoleName ? (
-                <span className="fr-badge fr-badge--new">{user.role_name}</span>
-              ) : (
-                <span className="fr-badge">{user.role_name}</span>
-              ),
-              isAdmin && user.email !== currentUserEmail ? (
-                <DeleteUserButton
-                  userEmail={user.email}
-                  groupId={group.id}
-                  deleteUser={(userEmail: string) => {
-                    setGroup({
-                      ...group,
-                      users: group.users.filter(
-                        (user) => user.email !== userEmail
-                      ),
-                    });
-                  }}
-                />
-              ) : null,
-            ])}
-          />
         </div>
       </div>
     </div>
