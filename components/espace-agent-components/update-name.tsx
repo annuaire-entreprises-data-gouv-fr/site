@@ -38,7 +38,7 @@ export default function UpdateNameModal({
         },
         data: JSON.stringify({ groupName }),
       });
-      updateName(groupName);
+      updateName;
       setGroupName('');
       cancel();
     } catch (error) {

@@ -34,7 +34,6 @@ export function GroupEntity({
   roles: IDRolesRoles[];
 }) {
   const [updateNameModalVisible, setUpdateNameModalVisible] = useState(false);
-  const [adduserModalVisible, setAdduserModalVisible] = useState(false);
 
   const getCurrentRoleId = (userRoleName: string) => {
     const role = roles.find((r) => r.role_name === userRoleName);
@@ -104,18 +103,13 @@ export function GroupEntity({
                   <ButtonLink onClick={() => setUpdateNameModalVisible(true)}>
                     Renommer l‘équipe
                   </ButtonLink>
-                  <ButtonLink onClick={() => setAdduserModalVisible(true)}>
-                    Ajouter un membre
-                  </ButtonLink>
+                  <AddUserModal
+                    groupId={group.id}
+                    defaultRoleId={defaultRoleId!}
+                    addNewUser={handleAddNewUser}
+                  />
                 </div>
               </div>
-              <AddUserModal
-                visible={adduserModalVisible}
-                cancel={() => setAdduserModalVisible(false)}
-                groupId={group.id}
-                defaultRoleId={defaultRoleId!}
-                addNewUser={handleAddNewUser}
-              />
               <UpdateNameModal
                 visible={updateNameModalVisible}
                 cancel={() => setUpdateNameModalVisible(false)}
