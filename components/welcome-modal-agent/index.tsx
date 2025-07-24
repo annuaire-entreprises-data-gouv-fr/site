@@ -60,7 +60,7 @@ export const WelcomeModalAgent: React.FC = () => {
       </div>
       <button
         style={{ marginTop: 10 }}
-        onClick={close}
+        onClick={() => setIsVisible(false)}
         className="fr-btn fr-btn--primary"
       >
         Continuer ma navigation
