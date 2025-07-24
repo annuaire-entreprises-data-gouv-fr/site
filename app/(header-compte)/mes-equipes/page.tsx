@@ -30,8 +30,10 @@ const MesEquipesPage = async () => {
     return redirect('/lp/agent-public');
   }
 
-  const roles = await dRolesStore.getRoles();
-  const groups = await Groups.find(session.user.email, session.user.userId);
+  const [roles, groups] = await Promise.all([
+    dRolesStore.getRoles(),
+    Groups.find(session.user.email, session.user.userId),
+  ]);
 
   return (
     <>
