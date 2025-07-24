@@ -1,3 +1,4 @@
+import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { Icon } from '#components-ui/icon/wrapper';
 import httpClient from '#utils/network';
@@ -83,23 +84,27 @@ export default function UpdateNameModal({
             />
           </div>
           {error && <p className="fr-error-text">{error}</p>}
-          <div className="fr-mt-1w">
-            <button
-              type="button"
-              className="fr-btn fr-btn--primary fr-mt-1w"
+          <div
+            className="fr-mt-2w"
+            style={{
+              display: 'flex',
+              gap: '0.5rem',
+              justifyContent: 'center',
+            }}
+          >
+            <ButtonLink
               onClick={handleUpdateName}
               disabled={!groupName?.trim() || loading}
             >
               Sauvegarder
-            </button>
-            <button
-              type="button"
-              className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-ml-1w"
+            </ButtonLink>
+            <ButtonLink
+              alt
               onClick={() => setIsVisible(false)}
               disabled={loading}
             >
               Annuler
-            </button>
+            </ButtonLink>
           </div>
         </div>
       </FullScreenModal>

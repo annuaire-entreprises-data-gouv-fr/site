@@ -86,23 +86,27 @@ export default function AddUserModal({
             />
           </div>
           {error && <p className="fr-error-text">{error}</p>}
-          <div className="fr-mt-1w">
-            <button
-              type="button"
-              className="fr-btn fr-btn--primary fr-mt-1w"
+          <div
+            className="fr-mt-2w"
+            style={{
+              display: 'flex',
+              gap: '0.5rem',
+              justifyContent: 'center',
+            }}
+          >
+            <ButtonLink
               onClick={handleAddNewUser}
               disabled={!inputEmail?.trim() || loading}
             >
               Ajouter
-            </button>
-            <button
-              type="button"
-              className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-ml-1w"
+            </ButtonLink>
+            <ButtonLink
+              alt
               onClick={() => setIsVisible(false)}
               disabled={loading}
             >
               Annuler
-            </button>
+            </ButtonLink>
           </div>
         </div>
       </FullScreenModal>
