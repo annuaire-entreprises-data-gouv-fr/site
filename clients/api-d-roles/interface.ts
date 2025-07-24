@@ -1,6 +1,9 @@
 export type IDRolesAddUserResponse = {
   id: number;
   email: string;
+  role_id: number;
+  role_name: string;
+  is_admin: boolean;
   sub_pro_connect: string | null;
   is_verified: boolean;
   created_at: string;
@@ -11,6 +14,7 @@ export type IDRolesUser = {
   email: string;
   id: number;
   role_name: string;
+  role_id: number;
   is_admin: boolean;
 };
 

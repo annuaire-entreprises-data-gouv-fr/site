@@ -1,4 +1,4 @@
-import { IDRolesRoles } from '#clients/api-d-roles/interface';
+import { IDRolesRoles, IDRolesUser } from '#clients/api-d-roles/interface';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/authentication/group/groups';
 import AddUserModal from './add-user';
@@ -31,31 +31,7 @@ export function GroupEntity({
   setGroup: (group: IDRolesGroup) => void;
   roles: IDRolesRoles[];
 }) {
-  const getCurrentRoleId = (userRoleName: string) => {
-    const role = roles.find((r) => r.role_name === userRoleName);
-    return role?.id || 0;
-  };
   const defaultRoleId = roles.find((r) => r.role_name === 'utilisateur')?.id;
-
-  const getCurrentRoleName = (roleId: number) => {
-    const role = roles.find((r) => r.id === roleId);
-    return role?.role_name || '';
-  };
-
-  const handleAddNewUser = ({ email, id }: { email: string; id: number }) => {
-    setGroup({
-      ...group,
-      users: [
-        ...group.users,
-        {
-          email,
-          id,
-          role_name: getCurrentRoleName(defaultRoleId!),
-          is_admin: false,
-        },
-      ],
-    });
-  };
 
   const handleUpdateUser = ({
     email,
@@ -110,7 +86,12 @@ export function GroupEntity({
                   <AddUserModal
                     groupId={group.id}
                     defaultRoleId={defaultRoleId!}
-                    addUserToGroupState={handleAddNewUser}
+                    addUserToGroupState={(user: IDRolesUser) => {
+                      setGroup({
+                        ...group,
+                        users: [...group.users, user],
+                      });
+                    }}
                   />
                 </div>
               </div>
@@ -122,7 +103,7 @@ export function GroupEntity({
                   user.email !== currentUserEmail ? (
                     <UpdateUserSelect
                       userEmail={user.email}
-                      roleId={getCurrentRoleId(user.role_name)}
+                      roleId={user.role_id}
                       groupId={group.id}
                       roles={roles}
                       updateUserFromGroupState={handleUpdateUser}

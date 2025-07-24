@@ -1,6 +1,9 @@
 'use client';
 
-import { IDRolesAddUserResponse } from '#clients/api-d-roles/interface';
+import {
+  IDRolesAddUserResponse,
+  IDRolesUser,
+} from '#clients/api-d-roles/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import httpClient from '#utils/network';
@@ -15,7 +18,7 @@ export default function AddUserModal({
 }: {
   groupId: number;
   defaultRoleId: number;
-  addUserToGroupState: (user: { email: string; id: number }) => void;
+  addUserToGroupState: (user: IDRolesUser) => void;
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [inputEmail, setInputEmail] = useState('');
@@ -46,7 +49,7 @@ export default function AddUserModal({
         data: JSON.stringify({ userEmail, roleId: defaultRoleId }),
       });
 
-      addUserToGroupState({ email: user.email, id: user.id });
+      addUserToGroupState(user);
 
       setInputEmail('');
       setIsVisible(false);
