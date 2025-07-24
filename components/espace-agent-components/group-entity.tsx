@@ -46,7 +46,9 @@ export function GroupEntity({
         user.email === email
           ? {
               ...user,
+              role_id: roleId,
               role_name: roles.find((r) => r.id === roleId)?.role_name!,
+              is_admin: roles.find((r) => r.id === roleId)?.is_admin!,
             }
           : user
       ),
