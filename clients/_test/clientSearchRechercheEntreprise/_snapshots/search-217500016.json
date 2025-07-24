@@ -191,7 +191,7 @@
           "estFiness": true,
           "egaproRenseignee": false,
           "estRge": false,
-          "estOrganismeFormation": false,
+          "estOrganismeFormation": true,
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
