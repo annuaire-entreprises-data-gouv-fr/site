@@ -4,11 +4,11 @@ import { useState } from 'react';
 export default function DeleteUserButton({
   userEmail,
   groupId,
-  deleteUser,
+  deleteUserFromGroupState,
 }: {
   userEmail: string;
   groupId: number;
-  deleteUser: (email: string) => void;
+  deleteUserFromGroupState: (email: string) => void;
 }) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ export default function DeleteUserButton({
         data: JSON.stringify({ userEmail }),
       });
 
-      deleteUser(userEmail);
+      deleteUserFromGroupState(userEmail);
     } catch (error) {
       setError(
         error instanceof Error ? error.message : 'Une erreur est survenue'

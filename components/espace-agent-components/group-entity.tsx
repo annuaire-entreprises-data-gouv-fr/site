@@ -125,7 +125,7 @@ export function GroupEntity({
                       roleId={getCurrentRoleId(user.role_name)}
                       groupId={group.id}
                       roles={roles}
-                      updateUser={handleUpdateUser}
+                      updateUserFromGroupState={handleUpdateUser}
                     />
                   ) : (
                     <span className="fr-badge">{user.role_name}</span>
@@ -134,7 +134,7 @@ export function GroupEntity({
                     <DeleteUserButton
                       userEmail={user.email}
                       groupId={group.id}
-                      deleteUser={(userEmail: string) => {
+                      deleteUserFromGroupState={(userEmail: string) => {
                         setGroup({
                           ...group,
                           users: group.users.filter(

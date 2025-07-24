@@ -7,13 +7,13 @@ export default function UpdateUserSelect({
   roleId,
   groupId,
   roles,
-  updateUser,
+  updateUserFromGroupState,
 }: {
   userEmail: string;
   roleId: number;
   groupId: number;
   roles: IDRolesRoles[];
-  updateUser: (user: { email: string; roleId: number }) => void;
+  updateUserFromGroupState: (user: { email: string; roleId: number }) => void;
 }) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ export default function UpdateUserSelect({
         data: JSON.stringify({ userEmail, roleId }),
       });
 
-      updateUser({ email: userEmail, roleId });
+      updateUserFromGroupState({ email: userEmail, roleId });
     } catch (error) {
       setError(
         error instanceof Error ? error.message : 'Une erreur est survenue'
