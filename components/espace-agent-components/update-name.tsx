@@ -1,4 +1,3 @@
-import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { Icon } from '#components-ui/icon/wrapper';
 import httpClient from '#utils/network';
@@ -53,9 +52,12 @@ export default function UpdateNameModal({
 
   return (
     <>
-      <ButtonLink small alt onClick={() => setIsVisible(true)}>
+      <button
+        className="fr-btn fr-btn--tertiary-no-outline"
+        onClick={() => setIsVisible(true)}
+      >
         <Icon slug="ballPenFill" />
-      </ButtonLink>
+      </button>
       <FullScreenModal
         isVisible={isVisible}
         setIsVisible={setIsVisible}

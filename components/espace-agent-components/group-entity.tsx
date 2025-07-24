@@ -82,8 +82,12 @@ export function GroupEntity({
       <div className="fr-card__body">
         <div className="fr-card__content" style={{ display: 'flex' }}>
           <div className="fr-mb-3w">
-            <div className="fr-text--xl fr-text--bold fr-mb-1w">
-              {group.name}{' '}
+            <div
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+            >
+              <div className="fr-text--xl fr-text--bold fr-mb-1w">
+                {group.name}{' '}
+              </div>
               <UpdateNameModal
                 groupId={group.id}
                 initialName={group.name}
