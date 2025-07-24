@@ -10,12 +10,12 @@ const MODAL_ID = 'add-user';
 
 export default function AddUserModal({
   groupId,
-  addNewUser,
   defaultRoleId,
+  addUserToGroupState,
 }: {
   groupId: number;
-  addNewUser: (user: { email: string; id: number }) => void;
   defaultRoleId: number;
+  addUserToGroupState: (user: { email: string; id: number }) => void;
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [inputEmail, setInputEmail] = useState('');
@@ -46,7 +46,7 @@ export default function AddUserModal({
         data: JSON.stringify({ userEmail, roleId: defaultRoleId }),
       });
 
-      addNewUser({ email: user.email, id: user.id });
+      addUserToGroupState({ email: user.email, id: user.id });
 
       setInputEmail('');
       setIsVisible(false);

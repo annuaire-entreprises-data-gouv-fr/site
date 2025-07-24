@@ -88,7 +88,7 @@ export function GroupEntity({
               <UpdateNameModal
                 groupId={group.id}
                 initialName={group.name}
-                updateName={(name: string) => {
+                updateGroupNameState={(name: string) => {
                   setGroup({
                     ...group,
                     name,
@@ -110,7 +110,7 @@ export function GroupEntity({
                   <AddUserModal
                     groupId={group.id}
                     defaultRoleId={defaultRoleId!}
-                    addNewUser={handleAddNewUser}
+                    addUserToGroupState={handleAddNewUser}
                   />
                 </div>
               </div>

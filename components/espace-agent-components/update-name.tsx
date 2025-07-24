@@ -7,11 +7,11 @@ import { useEffect, useRef, useState } from 'react';
 export default function UpdateNameModal({
   groupId,
   initialName,
-  updateName,
+  updateGroupNameState,
 }: {
   groupId: number;
   initialName: string;
-  updateName: (name: string) => void;
+  updateGroupNameState: (name: string) => void;
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [groupName, setGroupName] = useState(initialName);
@@ -39,7 +39,7 @@ export default function UpdateNameModal({
         },
         data: JSON.stringify({ groupName }),
       });
-      updateName(groupName);
+      updateGroupNameState(groupName);
       setGroupName('');
       setIsVisible(false);
     } catch (error) {
