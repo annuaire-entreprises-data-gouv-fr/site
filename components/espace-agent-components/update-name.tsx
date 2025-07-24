@@ -52,12 +52,15 @@ export default function UpdateNameModal({
 
   return (
     <>
-      <button
-        className="fr-btn fr-btn--tertiary-no-outline"
-        onClick={() => setIsVisible(true)}
-      >
-        <Icon slug="ballPenFill" />
-      </button>
+      <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        {initialName}
+        <button
+          className="fr-btn fr-btn--tertiary-no-outline"
+          onClick={() => setIsVisible(true)}
+        >
+          <Icon slug="ballPenFill" />
+        </button>
+      </h2>
       <FullScreenModal
         isVisible={isVisible}
         setIsVisible={setIsVisible}
