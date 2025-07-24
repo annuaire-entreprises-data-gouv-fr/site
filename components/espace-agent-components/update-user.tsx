@@ -34,24 +34,29 @@ export default function UpdateUserSelect({
 
       updateUser({ email: userEmail, roleId });
     } catch (error) {
-      console.error('Error updating user in team:', error);
+      setError(
+        error instanceof Error ? error.message : 'Une erreur est survenue'
+      );
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <select
-      className="fr-select"
-      value={roleId}
-      onChange={(e) => handleUpdate(userEmail)(parseInt(e.target.value))}
-      disabled={loading}
-    >
-      {roles.map((role) => (
-        <option key={role.id} value={role.id}>
-          {role.role_name}
-        </option>
-      ))}
-    </select>
+    <>
+      {error && <p className="fr-error-text">{error}</p>}
+      <select
+        className="fr-select"
+        value={roleId}
+        onChange={(e) => handleUpdate(userEmail)(parseInt(e.target.value))}
+        disabled={loading}
+      >
+        {roles.map((role) => (
+          <option key={role.id} value={role.id}>
+            {role.role_name}
+          </option>
+        ))}
+      </select>
+    </>
   );
 }

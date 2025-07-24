@@ -29,23 +29,28 @@ export default function DeleteUserButton({
 
       deleteUser(userEmail);
     } catch (error) {
-      console.error('Error removing user from team:', error);
+      setError(
+        error instanceof Error ? error.message : 'Une erreur est survenue'
+      );
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <button
-      key={`remove-${userEmail}`}
-      type="button"
-      className="fr-btn fr-btn--tertiary-no-outline"
-      title="Supprimer"
-      aria-label={`Supprimer ${userEmail}`}
-      onClick={handleRemove(userEmail)}
-      disabled={loading}
-    >
-      <span aria-hidden="true">🗑️</span>
-    </button>
+    <>
+      {error && <p className="fr-error-text">{error}</p>}
+      <button
+        key={`remove-${userEmail}`}
+        type="button"
+        className="fr-btn fr-btn--tertiary-no-outline"
+        title="Supprimer"
+        aria-label={`Supprimer ${userEmail}`}
+        onClick={handleRemove(userEmail)}
+        disabled={loading}
+      >
+        <span aria-hidden="true">🗑️</span>
+      </button>
+    </>
   );
 }
