@@ -79,6 +79,7 @@ export default function UpdateNameModal({
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
               disabled={loading}
+              autoComplete="off"
             />
           </div>
           {error && <p className="fr-error-text">{error}</p>}
