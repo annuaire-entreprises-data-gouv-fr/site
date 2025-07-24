@@ -1,5 +1,5 @@
 import droleClient from '#clients/api-d-roles';
-import { IDRolesAddUserResponse } from '#clients/api-d-roles/interface';
+import { IDRolesUser } from '#clients/api-d-roles/interface';
 import { HttpUnauthorizedError } from '#clients/exceptions';
 import { Groups } from '#models/authentication/group/groups';
 import { FetchRessourceException } from '#models/exceptions';
@@ -82,7 +82,7 @@ export class Group {
     adminSub: string,
     userEmail: string,
     roleId: number
-  ): Promise<IDRolesAddUserResponse> {
+  ): Promise<IDRolesUser> {
     try {
       const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {

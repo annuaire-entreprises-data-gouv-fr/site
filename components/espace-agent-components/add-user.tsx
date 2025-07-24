@@ -1,9 +1,6 @@
 'use client';
 
-import {
-  IDRolesAddUserResponse,
-  IDRolesUser,
-} from '#clients/api-d-roles/interface';
+import { IDRolesUser } from '#clients/api-d-roles/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import httpClient from '#utils/network';
@@ -40,7 +37,7 @@ export default function AddUserModal({
       if (!inputEmail || !inputEmail.trim()) return;
       const userEmail = inputEmail.trim();
 
-      const user = await httpClient<IDRolesAddUserResponse>({
+      const user = await httpClient<IDRolesUser>({
         url: `/api/groups/${groupId}/add-user`,
         method: 'POST',
         headers: {
