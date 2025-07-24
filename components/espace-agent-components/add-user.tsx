@@ -64,50 +64,48 @@ export default function AddUserModal({
       <ButtonLink onClick={() => setIsVisible(true)}>
         Ajouter un membre
       </ButtonLink>
-      {isVisible && (
-        <FullScreenModal
-          isVisible={isVisible}
-          setIsVisible={setIsVisible}
-          modalId={MODAL_ID}
-        >
-          <div className="fr-input-group">
-            <label className="fr-label" htmlFor={`new-user-email-${groupId}`}>
-              Ajouter un membre
-            </label>
-            <div className="fr-input-wrap">
-              <input
-                ref={inputRef}
-                className="fr-input"
-                type="email"
-                id={`new-user-email-${groupId}`}
-                placeholder="email@exemple.fr"
-                value={inputEmail}
-                onChange={(e) => setInputEmail(e.target.value)}
-                disabled={loading}
-              />
-            </div>
-            {error && <p className="fr-error-text">{error}</p>}
-            <div className="fr-mt-1w">
-              <button
-                type="button"
-                className="fr-btn fr-btn--primary fr-mt-1w"
-                onClick={handleAddNewUser}
-                disabled={!inputEmail?.trim() || loading}
-              >
-                Ajouter
-              </button>
-              <button
-                type="button"
-                className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-ml-1w"
-                onClick={() => setIsVisible(false)}
-                disabled={loading}
-              >
-                Annuler
-              </button>
-            </div>
+      <FullScreenModal
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+        modalId={MODAL_ID}
+      >
+        <div className="fr-input-group">
+          <label className="fr-label" htmlFor={`new-user-email-${groupId}`}>
+            Ajouter un membre
+          </label>
+          <div className="fr-input-wrap">
+            <input
+              ref={inputRef}
+              className="fr-input"
+              type="email"
+              id={`new-user-email-${groupId}`}
+              placeholder="email@exemple.fr"
+              value={inputEmail}
+              onChange={(e) => setInputEmail(e.target.value)}
+              disabled={loading}
+            />
           </div>
-        </FullScreenModal>
-      )}
+          {error && <p className="fr-error-text">{error}</p>}
+          <div className="fr-mt-1w">
+            <button
+              type="button"
+              className="fr-btn fr-btn--primary fr-mt-1w"
+              onClick={handleAddNewUser}
+              disabled={!inputEmail?.trim() || loading}
+            >
+              Ajouter
+            </button>
+            <button
+              type="button"
+              className="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-ml-1w"
+              onClick={() => setIsVisible(false)}
+              disabled={loading}
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+      </FullScreenModal>
     </>
   );
 }

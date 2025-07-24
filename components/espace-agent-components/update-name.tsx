@@ -20,10 +20,11 @@ export default function UpdateNameModal({
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (inputRef.current) {
+    if (inputRef.current && isVisible) {
       inputRef.current.focus();
+      setGroupName(initialName);
     }
-  }, []);
+  }, [isVisible, initialName]);
 
   const handleUpdateName = async () => {
     setLoading(true);
