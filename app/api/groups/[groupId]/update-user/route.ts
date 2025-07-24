@@ -16,7 +16,7 @@ async function updateUserHandler(
 
   await group.updateUser(
     session!.user!.email,
-    session!.user!.userId,
+    session!.user!.proConnectSub,
     validatedData.userEmail,
     validatedData.roleId
   );

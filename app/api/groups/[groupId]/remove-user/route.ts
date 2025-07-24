@@ -16,7 +16,7 @@ async function removeUserHandler(
 
   await group.removeUserFromGroup(
     session!.user!.email,
-    session!.user!.userId,
+    session!.user!.proConnectSub,
     validatedData.userEmail
   );
 

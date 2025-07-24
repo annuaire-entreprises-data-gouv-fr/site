@@ -25,14 +25,14 @@ const MesEquipesPage = async () => {
     !hasRights(session, ApplicationRights.isAgent) ||
     !session?.user ||
     !session.user.email ||
-    !session.user.userId
+    !session.user.proConnectSub
   ) {
     return redirect('/lp/agent-public');
   }
 
   const [roles, groups] = await Promise.all([
     dRolesStore.getRoles(),
-    Groups.find(session.user.email, session.user.userId),
+    Groups.find(session.user.email, session.user.proConnectSub),
   ]);
 
   return (

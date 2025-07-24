@@ -91,7 +91,7 @@ describe('AgentConnected', () => {
       expect(agent['email']).toBe(mockUserInfo.email);
       expect(agent['familyName']).toBe(mockUserInfo.family_name);
       expect(agent['firstName']).toBe(mockUserInfo.given_name);
-      expect(agent['userId']).toBe(mockUserInfo.sub);
+      expect(agent['proConnectSub']).toBe(mockUserInfo.sub);
       expect(agent['siret']).toBe('12345678900000');
     });
 
@@ -262,7 +262,7 @@ describe('AgentConnected', () => {
       const result = await agent.getAndVerifyAgentInfo();
 
       expect(result).toEqual({
-        userId: 'test-user-id',
+        proConnectSub: 'test-user-id',
         idpId: 'test-idp',
         domain: '@example.com',
         email: 'test@example.com',

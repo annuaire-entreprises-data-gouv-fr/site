@@ -20,7 +20,7 @@ export function withAgentAuth<TContext>(handler: RouteHandler<TContext>) {
     if (
       !hasRights(session, ApplicationRights.isAgent) ||
       !session?.user?.email ||
-      !session?.user?.userId
+      !session?.user?.proConnectSub
     ) {
       return NextResponse.json(
         { error: 'Unauthorized: Agent access required' },

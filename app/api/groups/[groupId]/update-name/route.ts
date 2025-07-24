@@ -16,7 +16,7 @@ async function updateNameHandler(
 
   await group.updateName(
     session!.user!.email,
-    session!.user!.userId,
+    session!.user!.proConnectSub,
     validatedData.groupName
   );
 

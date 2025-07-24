@@ -16,7 +16,7 @@ async function addUserHandler(
 
   const user = await group.addUser(
     session!.user!.email,
-    session!.user!.userId,
+    session!.user!.proConnectSub,
     validatedData.userEmail,
     validatedData.roleId
   );
