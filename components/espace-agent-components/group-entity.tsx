@@ -85,9 +85,7 @@ export function GroupEntity({
             <div
               style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
             >
-              <div className="fr-text--xl fr-text--bold fr-mb-1w">
-                {group.name}{' '}
-              </div>
+              <div className="fr-text--xl fr-text--bold">{group.name}</div>
               <UpdateNameModal
                 groupId={group.id}
                 initialName={group.name}
@@ -99,10 +97,10 @@ export function GroupEntity({
                 }}
               />
             </div>
+            <div className="fr-text--alt">{group.users.length} membres</div>
             <div className="fr-badge fr-mb-1w">
               {group.contract_description}
             </div>
-            <div className="fr-text--alt">{group.users.length} membres</div>
           </div>
           {!isAdmin ? (
             <NotAdminTable group={group} />
