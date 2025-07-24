@@ -39,7 +39,6 @@ const MesEquipesPage = async () => {
     <>
       <AgentNavigation />
       <h1>Mes équipes</h1>
-
       <GroupManagement
         currentUserEmail={session!.user!.email}
         roles={roles}
