@@ -1,33 +1,10 @@
-'use client';
-
 import constants from '#models/constants';
-import { useStorage } from 'hooks';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FullScreenModal } from '../../components-ui/full-screen-modal';
 
-const MODAL_ID = 'welcome-modal-agent';
-
 export const WelcomeModalAgent: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered] = useStorage(
-    'local',
-    MODAL_ID,
-    false
-  );
-
-  useEffect(() => {
-    if (!hasAlreadyBeenTriggered) {
-      setIsVisible(true);
-      setHasAlreadyBeenTriggered(true);
-    }
-  }, [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered]);
-
   return (
-    <FullScreenModal
-      isVisible={isVisible}
-      setIsVisible={setIsVisible}
-      modalId={MODAL_ID}
-    >
+    <FullScreenModal modalId="welcome-modal-agent">
       <div className="layout-center">
         <img src="/images/lp-agent/secure-folder 1.svg" alt="" height="150px" />
       </div>
@@ -58,13 +35,6 @@ export const WelcomeModalAgent: React.FC = () => {
           et nous les poser.
         </p>
       </div>
-      <button
-        style={{ marginTop: 10 }}
-        onClick={() => setIsVisible(false)}
-        className="fr-btn fr-btn--primary"
-      >
-        Continuer ma navigation
-      </button>
     </FullScreenModal>
   );
 };

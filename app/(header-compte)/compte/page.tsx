@@ -1,7 +1,6 @@
 import { Badge } from '#components-ui/badge';
 import ButtonLink from '#components-ui/button';
 import FullWidthContainer from '#components-ui/container';
-import AgentNavigation from '#components/espace-agent-components/agent-navigation';
 import { FullTable } from '#components/table/full';
 import { getAgentFullName } from '#models/authentication/user/helpers';
 import {
@@ -16,12 +15,12 @@ import { redirect } from 'next/navigation';
 export const metadata: Metadata = {
   title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/mon-espace',
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/compte',
   },
   robots: 'noindex, nofollow',
 };
 
-const MonEspacePage = async () => {
+const AccountPage = async () => {
   const session = await getSession();
 
   if (!hasRights(session, ApplicationRights.isAgent)) {
@@ -36,8 +35,6 @@ const MonEspacePage = async () => {
 
   return (
     <>
-      <AgentNavigation />
-      <h1>Mon espace</h1>
       <FullWidthContainer
         style={{
           background: 'var(--annuaire-colors-espaceAgentPastel)',
@@ -140,4 +137,4 @@ const MonEspacePage = async () => {
   );
 };
 
-export default MonEspacePage;
+export default AccountPage;
