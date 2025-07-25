@@ -1,12 +1,13 @@
+import { IDRolesUser } from '#clients/api-d-roles/interface';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 
 export default function DeleteUserButton({
-  userEmail,
+  user,
   groupId,
   deleteUserFromGroupState,
 }: {
-  userEmail: string;
+  user: IDRolesUser;
   groupId: number;
   deleteUserFromGroupState: (email: string) => void;
 }) {
@@ -41,12 +42,12 @@ export default function DeleteUserButton({
     <>
       {error && <p className="fr-error-text">{error}</p>}
       <button
-        key={`remove-${userEmail}`}
+        key={`remove-${user.email}`}
         type="button"
         className="fr-btn fr-btn--tertiary-no-outline"
         title="Supprimer"
-        aria-label={`Supprimer ${userEmail}`}
-        onClick={handleRemove(userEmail)}
+        aria-label={`Supprimer ${user.email}`}
+        onClick={handleRemove(user.email)}
         disabled={loading}
       >
         <span aria-hidden="true">🗑️</span>

@@ -96,8 +96,7 @@ export function GroupEntity({
                   user.email,
                   user.email !== currentUserEmail ? (
                     <UpdateUserSelect
-                      userEmail={user.email}
-                      roleId={user.role_id}
+                      user={user}
                       groupId={group.id}
                       roles={roles}
                       updateUserFromGroupState={handleUpdateUser}
@@ -107,7 +106,7 @@ export function GroupEntity({
                   ),
                   user.email !== currentUserEmail ? (
                     <DeleteUserButton
-                      userEmail={user.email}
+                      user={user}
                       groupId={group.id}
                       deleteUserFromGroupState={(userEmail: string) => {
                         setGroup({
