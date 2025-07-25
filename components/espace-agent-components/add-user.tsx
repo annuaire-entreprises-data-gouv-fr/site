@@ -3,17 +3,18 @@
 import { IDRolesUser } from '#clients/api-d-roles/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
+import { IDRolesGroup } from '#models/authentication/group/groups';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
 
 const MODAL_ID = 'add-user';
 
 export default function AddUserModal({
-  groupId,
+  group,
   defaultRoleId,
   addUserToGroupState,
 }: {
-  groupId: number;
+  group: IDRolesGroup;
   defaultRoleId: number;
   addUserToGroupState: (user: IDRolesUser) => void;
 }) {
@@ -37,8 +38,13 @@ export default function AddUserModal({
       if (!inputEmail || !inputEmail.trim()) return;
       const userEmail = inputEmail.trim();
 
+      if (group.users.some((user: IDRolesUser) => user.email === userEmail)) {
+        setError('Cet utilisateur est déjà membre de cette équipe');
+        return;
+      }
+
       const user = await httpClient<IDRolesUser>({
-        url: `/api/groups/${groupId}/add-user`,
+        url: `/api/groups/${group.id}/add-user`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -89,7 +95,7 @@ export default function AddUserModal({
                 ref={inputRef}
                 className="fr-input"
                 type="email"
-                id={`new-user-email-${groupId}`}
+                id={`new-user-email-${group.id}`}
                 placeholder="email@exemple.fr"
                 value={inputEmail}
                 onChange={(e) => setInputEmail(e.target.value)}

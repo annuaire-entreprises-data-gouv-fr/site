@@ -77,7 +77,7 @@ export function GroupEntity({
               <div style={{ alignSelf: 'flex-end', marginBottom: '1rem' }}>
                 <div>
                   <AddUserModal
-                    groupId={group.id}
+                    group={group}
                     defaultRoleId={defaultRoleId!}
                     addUserToGroupState={(user: IDRolesUser) => {
                       setGroup({
