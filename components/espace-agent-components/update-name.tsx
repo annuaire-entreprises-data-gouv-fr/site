@@ -60,11 +60,11 @@ export default function UpdateNameModal({
   return (
     <>
       <h2
+        className="fr-mt-0"
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
-          marginTop: 0,
         }}
       >
         {initialName}

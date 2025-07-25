@@ -50,16 +50,20 @@ export function GroupEntity({
             <div
               style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
             >
-              <UpdateNameModal
-                groupId={group.id}
-                initialName={group.name}
-                updateGroupNameState={(name: string) => {
-                  setGroup({
-                    ...group,
-                    name,
-                  });
-                }}
-              />
+              {!isAdmin ? (
+                <h2 className="fr-mt-0">{group.name}</h2>
+              ) : (
+                <UpdateNameModal
+                  groupId={group.id}
+                  initialName={group.name}
+                  updateGroupNameState={(name: string) => {
+                    setGroup({
+                      ...group,
+                      name,
+                    });
+                  }}
+                />
+              )}
             </div>
             <div className="fr-text--alt fr-mb-1w">
               {group.users.length} membres
