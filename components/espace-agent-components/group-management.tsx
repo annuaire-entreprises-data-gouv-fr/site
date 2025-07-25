@@ -16,6 +16,10 @@ export function GroupManagement({
 }) {
   const [groups, setGroups] = useState<IDRolesGroup[]>(initialGroups);
 
+  if (groups.length === 0) {
+    return <div>Aucune équipe trouvée</div>;
+  }
+
   return groups.map((group) => {
     const currentUserRole = group.users.find(
       (user) => user.email === currentUserEmail
