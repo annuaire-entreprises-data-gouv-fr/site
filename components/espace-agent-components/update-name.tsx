@@ -53,7 +53,14 @@ export default function UpdateNameModal({
 
   return (
     <>
-      <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <h2
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          marginTop: 0,
+        }}
+      >
         {initialName}
         <button
           className="fr-btn fr-btn--tertiary-no-outline"

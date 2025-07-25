@@ -43,7 +43,7 @@ export function GroupEntity({
   };
 
   return (
-    <div className="fr-card">
+    <div className="fr-card fr-mt-3w">
       <div className="fr-card__body">
         <div className="fr-card__content" style={{ display: 'flex' }}>
           <div className="fr-mb-3w">
@@ -87,6 +87,7 @@ export function GroupEntity({
 
               <FullTable
                 head={['Membre', 'Rôle', 'Action']}
+                columnWidths={['30%', '30%', '20%']}
                 body={group.users.map((user) => [
                   user.email,
                   user.email !== currentUserEmail ? (
