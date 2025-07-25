@@ -80,41 +80,41 @@ export default function UpdateNameModal({
         modalId={`update-name-${groupId}`}
         onClose={handleCancel}
       >
-        <div className="fr-input-group">
-          <label className="fr-label" htmlFor={`group-name-${groupId}`}>
-            Renommer l‘équipe
-          </label>
-          <div className="fr-input-wrap">
-            <input
-              ref={inputRef}
-              className="fr-input"
-              type="text"
-              id={`group-name-${groupId}`}
-              value={groupName}
-              onChange={(e) => setGroupName(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && groupName?.trim() && !loading) {
-                  handleUpdateName();
-                }
-              }}
-              disabled={loading}
-              autoComplete="off"
-            />
+        <div className="fr-container">
+          <div className="fr-mb-4w">
+            <h2 className="fr-h2">Renommer l&apos;équipe</h2>
+            <p className="fr-text--lg">
+              Modifiez le nom de l‘équipe <strong>{initialName}</strong>
+            </p>
           </div>
-          {error && <p className="fr-error-text">{error}</p>}
-          <div
-            className="fr-mt-2w"
-            style={{
-              display: 'flex',
-              gap: '0.5rem',
-              justifyContent: 'center',
-            }}
-          >
+
+          <div className="fr-input-group fr-mb-4w">
+            <div className="fr-input-wrap">
+              <input
+                ref={inputRef}
+                className="fr-input"
+                type="text"
+                id={`group-name-${groupId}`}
+                value={groupName}
+                onChange={(e) => setGroupName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && groupName?.trim() && !loading) {
+                    handleUpdateName();
+                  }
+                }}
+                disabled={loading}
+                autoComplete="off"
+              />
+            </div>
+            {error && <p className="fr-error-text">{error}</p>}
+          </div>
+
+          <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
             <ButtonLink
               onClick={handleUpdateName}
               disabled={!groupName?.trim() || loading}
             >
-              Sauvegarder
+              {loading ? 'Sauvegarde...' : 'Sauvegarder'}
             </ButtonLink>
             <ButtonLink alt onClick={handleCancel} disabled={loading}>
               Annuler

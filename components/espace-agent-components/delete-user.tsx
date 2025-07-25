@@ -93,11 +93,11 @@ export default function DeleteUserButton({
           </div>
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
-            <ButtonLink alt onClick={closeConfirmation} disabled={loading}>
-              Annuler
-            </ButtonLink>
             <ButtonLink onClick={handleRemove(user.email)} disabled={loading}>
               {loading ? 'Suppression...' : 'Confirmer la suppression'}
+            </ButtonLink>
+            <ButtonLink alt onClick={closeConfirmation} disabled={loading}>
+              Annuler
             </ButtonLink>
           </div>
         </div>
