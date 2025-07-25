@@ -104,20 +104,19 @@ export function GroupEntity({
                   ) : (
                     <span className="fr-badge">{user.role_name}</span>
                   ),
-                  user.email !== currentUserEmail ? (
-                    <DeleteUserButton
-                      user={user}
-                      groupId={group.id}
-                      deleteUserFromGroupState={(userEmail: string) => {
-                        setGroup({
-                          ...group,
-                          users: group.users.filter(
-                            (user) => user.email !== userEmail
-                          ),
-                        });
-                      }}
-                    />
-                  ) : null,
+                  <DeleteUserButton
+                    isCurrentUser={user.email === currentUserEmail}
+                    user={user}
+                    groupId={group.id}
+                    deleteUserFromGroupState={(userEmail: string) => {
+                      setGroup({
+                        ...group,
+                        users: group.users.filter(
+                          (user) => user.email !== userEmail
+                        ),
+                      });
+                    }}
+                  />,
                 ])}
               />
             </>
