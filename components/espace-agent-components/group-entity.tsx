@@ -77,7 +77,7 @@ export function GroupEntity({
               <div style={{ alignSelf: 'flex-end', marginBottom: '1rem' }}>
                 <div>
                   <AddUserModal
-                    group={group}
+                    groupId={group.id}
                     defaultRoleId={defaultRoleId!}
                     addUserToGroupState={(user: IDRolesUser) => {
                       setGroup({
@@ -93,17 +93,11 @@ export function GroupEntity({
                 head={['Membre', 'Rôle', 'Action']}
                 columnWidths={['30%', '30%', '20%']}
                 body={group.users.map((user) => [
-                  <div>
-                    {user.email}
-                    {user.email === currentUserEmail && (
-                      <span className="fr-badge fr-ml-1w fr-badge--success fr-badge--sm">
-                        Vous
-                      </span>
-                    )}
-                  </div>,
+                  user.email,
                   user.email !== currentUserEmail ? (
                     <UpdateUserSelect
-                      user={user}
+                      userEmail={user.email}
+                      roleId={user.role_id}
                       groupId={group.id}
                       roles={roles}
                       updateUserFromGroupState={handleUpdateUser}
@@ -111,19 +105,20 @@ export function GroupEntity({
                   ) : (
                     <span className="fr-badge">{user.role_name}</span>
                   ),
-                  <DeleteUserButton
-                    isCurrentUser={user.email === currentUserEmail}
-                    user={user}
-                    groupId={group.id}
-                    deleteUserFromGroupState={(userEmail: string) => {
-                      setGroup({
-                        ...group,
-                        users: group.users.filter(
-                          (user) => user.email !== userEmail
-                        ),
-                      });
-                    }}
-                  />,
+                  user.email !== currentUserEmail ? (
+                    <DeleteUserButton
+                      userEmail={user.email}
+                      groupId={group.id}
+                      deleteUserFromGroupState={(userEmail: string) => {
+                        setGroup({
+                          ...group,
+                          users: group.users.filter(
+                            (user) => user.email !== userEmail
+                          ),
+                        });
+                      }}
+                    />
+                  ) : null,
                 ])}
               />
             </>

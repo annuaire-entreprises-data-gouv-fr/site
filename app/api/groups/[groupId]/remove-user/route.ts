@@ -1,11 +1,11 @@
 import getSession from '#utils/server-side-helper/app/get-session';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { removeUserSchema } from '../../input-validation';
 import { getGroup } from '../../route-helpers';
 import { withAgentAuth, withErrorHandling } from '../../route-wrappers';
 
 async function removeUserHandler(
-  request: Request,
+  request: NextRequest,
   { params }: { params: Promise<{ groupId: string }> }
 ) {
   const session = await getSession();

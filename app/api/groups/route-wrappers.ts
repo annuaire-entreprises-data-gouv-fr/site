@@ -5,16 +5,16 @@ import {
 import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import z from 'zod';
 
 type RouteHandler<TContext> = (
-  request: Request,
+  request: NextRequest,
   context: TContext
-) => Promise<Response>;
+) => Promise<NextResponse>;
 
 export function withAgentAuth<TContext>(handler: RouteHandler<TContext>) {
-  return async (request: Request, context: TContext) => {
+  return async (request: NextRequest, context: TContext) => {
     const session = await getSession();
 
     if (
@@ -35,22 +35,35 @@ export function withAgentAuth<TContext>(handler: RouteHandler<TContext>) {
 export function withErrorHandling<TContext>(
   handler: RouteHandler<TContext>
 ): RouteHandler<TContext> {
-  return async (request: Request, context: TContext) => {
+  return async (request: NextRequest, context: TContext) => {
     try {
       return await handler(request, context);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return new NextResponse('Validation failed', { status: 400 });
+        return NextResponse.json(
+          {
+            error: 'Validation failed',
+            details: error.errors.map((err) => ({
+              field: err.path.join('.'),
+              message: err.message,
+            })),
+          },
+          { status: 400 }
+        );
       }
 
       if (error instanceof Error && error.name === 'HttpUnauthorizedError') {
-        return new NextResponse('Unauthorized: Admin permissions required', {
-          status: 403,
-        });
+        return NextResponse.json(
+          { error: 'Unauthorized: Admin permissions required' },
+          { status: 403 }
+        );
       }
 
       if (error instanceof Error && error.name === 'HttpNotFoundError') {
-        return new NextResponse('Resource not found', { status: 404 });
+        return NextResponse.json(
+          { error: 'Resource not found' },
+          { status: 404 }
+        );
       }
 
       logErrorInSentry(
@@ -60,7 +73,10 @@ export function withErrorHandling<TContext>(
         })
       );
 
-      return new NextResponse('Internal server error', { status: 500 });
+      return NextResponse.json(
+        { error: 'Internal server error' },
+        { status: 500 }
+      );
     }
   };
 }

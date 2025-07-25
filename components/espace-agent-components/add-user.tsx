@@ -3,18 +3,17 @@
 import { IDRolesUser } from '#clients/api-d-roles/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
-import { IDRolesGroup } from '#models/authentication/group/groups';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
 
 const MODAL_ID = 'add-user';
 
 export default function AddUserModal({
-  group,
+  groupId,
   defaultRoleId,
   addUserToGroupState,
 }: {
-  group: IDRolesGroup;
+  groupId: number;
   defaultRoleId: number;
   addUserToGroupState: (user: IDRolesUser) => void;
 }) {
@@ -38,13 +37,8 @@ export default function AddUserModal({
       if (!inputEmail || !inputEmail.trim()) return;
       const userEmail = inputEmail.trim();
 
-      if (group.users.some((user: IDRolesUser) => user.email === userEmail)) {
-        setError('Cet utilisateur est déjà membre de cette équipe');
-        return;
-      }
-
       const user = await httpClient<IDRolesUser>({
-        url: `/api/groups/${group.id}/add-user`,
+        url: `/api/groups/${groupId}/add-user`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,43 +75,42 @@ export default function AddUserModal({
         modalId={MODAL_ID}
         onClose={handleClose}
       >
-        <div className="fr-container">
-          <div className="fr-mb-4w">
-            <h2 className="fr-h2">Ajouter un membre</h2>
-            <p className="fr-text--lg">
-              Invitez un nouvel utilisateur à rejoindre cette équipe
-            </p>
+        <div className="fr-input-group">
+          <label className="fr-label" htmlFor={`new-user-email-${groupId}`}>
+            Ajouter un membre
+          </label>
+          <div className="fr-input-wrap">
+            <input
+              ref={inputRef}
+              className="fr-input"
+              type="email"
+              id={`new-user-email-${groupId}`}
+              placeholder="email@exemple.fr"
+              value={inputEmail}
+              onChange={(e) => setInputEmail(e.target.value)}
+              disabled={loading}
+            />
           </div>
-
-          <div className="fr-input-group fr-mb-4w">
-            <div className="fr-input-wrap">
-              <input
-                ref={inputRef}
-                className="fr-input"
-                type="email"
-                id={`new-user-email-${group.id}`}
-                placeholder="email@exemple.fr"
-                value={inputEmail}
-                onChange={(e) => setInputEmail(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && inputEmail?.trim() && !loading) {
-                    handleAddNewUser();
-                  }
-                }}
-                disabled={loading}
-              />
-            </div>
-            {error && <p className="fr-error-text">{error}</p>}
-          </div>
-
-          <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
+          {error && <p className="fr-error-text">{error}</p>}
+          <div
+            className="fr-mt-2w"
+            style={{
+              display: 'flex',
+              gap: '0.5rem',
+              justifyContent: 'center',
+            }}
+          >
             <ButtonLink
               onClick={handleAddNewUser}
               disabled={!inputEmail?.trim() || loading}
             >
-              {loading ? 'Ajout en cours...' : 'Ajouter'}
+              Ajouter
             </ButtonLink>
-            <ButtonLink alt onClick={handleClose} disabled={loading}>
+            <ButtonLink
+              alt
+              onClick={() => setIsVisible(false)}
+              disabled={loading}
+            >
               Annuler
             </ButtonLink>
           </div>
