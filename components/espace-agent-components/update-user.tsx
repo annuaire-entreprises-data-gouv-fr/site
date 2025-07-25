@@ -3,40 +3,42 @@ import httpClient from '#utils/network';
 import { useState } from 'react';
 
 export default function UpdateUserSelect({
-  userEmail,
-  roleId,
+  user,
   groupId,
   roles,
   updateUserFromGroupState,
 }: {
-  userEmail: string;
-  roleId: number;
+  user: IDRolesUser;
   groupId: number;
   roles: IDRolesRoles[];
   updateUserFromGroupState: (user: IDRolesUser) => void;
 }) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [optimisticRoleId, setOptimisticRoleId] = useState<number | null>(null);
 
-  const handleUpdate = (userEmail: string) => async (roleId: number) => {
+  const handleUpdate = async (roleId: number) => {
     setLoading(true);
     setError(null);
+    setOptimisticRoleId(roleId);
 
     try {
-      const user = await httpClient<IDRolesUser>({
+      const updatedUser = await httpClient<IDRolesUser>({
         url: `/api/groups/${groupId}/update-user`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        data: JSON.stringify({ userEmail, roleId }),
+        data: JSON.stringify({ userEmail: user.email, roleId }),
       });
 
-      updateUserFromGroupState(user);
+      updateUserFromGroupState(updatedUser);
+      setOptimisticRoleId(null);
     } catch (error) {
       setError(
         error instanceof Error ? error.message : 'Une erreur est survenue'
       );
+      setOptimisticRoleId(null);
     } finally {
       setLoading(false);
     }
@@ -47,8 +49,8 @@ export default function UpdateUserSelect({
       {error && <p className="fr-error-text">{error}</p>}
       <select
         className="fr-select"
-        value={roleId}
-        onChange={(e) => handleUpdate(userEmail)(parseInt(e.target.value))}
+        value={optimisticRoleId ?? user.role_id}
+        onChange={(e) => handleUpdate(parseInt(e.target.value))}
         disabled={loading}
       >
         {roles.map((role) => (
