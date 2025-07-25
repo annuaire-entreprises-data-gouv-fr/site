@@ -51,6 +51,12 @@ export default function UpdateNameModal({
     }
   };
 
+  const handleCancel = () => {
+    setIsVisible(false);
+    setGroupName(initialName);
+    setError(null);
+  };
+
   return (
     <>
       <h2
@@ -71,8 +77,8 @@ export default function UpdateNameModal({
       </h2>
       <FullScreenModal
         isVisible={isVisible}
-        setIsVisible={setIsVisible}
         modalId={`update-name-${groupId}`}
+        onClose={handleCancel}
       >
         <div className="fr-input-group">
           <label className="fr-label" htmlFor={`group-name-${groupId}`}>
@@ -86,6 +92,11 @@ export default function UpdateNameModal({
               id={`group-name-${groupId}`}
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && groupName?.trim() && !loading) {
+                  handleUpdateName();
+                }
+              }}
               disabled={loading}
               autoComplete="off"
             />
@@ -105,11 +116,7 @@ export default function UpdateNameModal({
             >
               Sauvegarder
             </ButtonLink>
-            <ButtonLink
-              alt
-              onClick={() => setIsVisible(false)}
-              disabled={loading}
-            >
+            <ButtonLink alt onClick={handleCancel} disabled={loading}>
               Annuler
             </ButtonLink>
           </div>

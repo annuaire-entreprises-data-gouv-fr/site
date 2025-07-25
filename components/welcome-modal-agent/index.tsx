@@ -25,8 +25,8 @@ export const WelcomeModalAgent: React.FC = () => {
   return (
     <FullScreenModal
       isVisible={isVisible}
-      setIsVisible={setIsVisible}
       modalId={MODAL_ID}
+      onClose={() => setIsVisible(false)}
     >
       <div className="layout-center">
         <img src="/images/lp-agent/secure-folder 1.svg" alt="" height="150px" />
