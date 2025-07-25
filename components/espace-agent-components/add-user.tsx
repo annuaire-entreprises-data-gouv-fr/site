@@ -59,12 +59,6 @@ export default function AddUserModal({
     }
   };
 
-  const handleClose = () => {
-    setIsVisible(false);
-    setInputEmail('');
-    setError(null);
-  };
-
   return (
     <>
       <ButtonLink onClick={() => setIsVisible(true)}>
@@ -72,8 +66,8 @@ export default function AddUserModal({
       </ButtonLink>
       <FullScreenModal
         isVisible={isVisible}
+        setIsVisible={setIsVisible}
         modalId={MODAL_ID}
-        onClose={handleClose}
       >
         <div className="fr-input-group">
           <label className="fr-label" htmlFor={`new-user-email-${groupId}`}>

@@ -10,14 +10,18 @@ import styles from './styles.module.css';
 export const FullScreenModal: React.FC<{
   children: React.ReactNode;
   isVisible: boolean;
+  setIsVisible: (visible: boolean) => void;
   modalId: string;
-  onClose: () => void;
-}> = ({ children, isVisible, modalId, onClose }) => {
+}> = ({ children, isVisible, setIsVisible, modalId }) => {
+  const close = () => {
+    setIsVisible(false);
+  };
+
   return (
     <ClientOnly>
       {isVisible ? (
         <PrintNever>
-          <div className={styles.modalOverlay} onClick={onClose}>
+          <div className={styles.modalOverlay} onClick={close}>
             <FloatingModal
               id={modalId}
               role="dialog"
@@ -27,7 +31,7 @@ export const FullScreenModal: React.FC<{
             >
               <div className={styles.closeButton}>
                 <ButtonClose
-                  onClick={onClose}
+                  onClick={close}
                   ariaControls={modalId}
                   ariaLabel="Fermer la modale de bienvenue"
                 />
