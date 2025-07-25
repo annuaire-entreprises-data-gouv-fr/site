@@ -1,7 +1,8 @@
 import droleClient from '#clients/api-d-roles';
+import { IDRolesUser } from '#clients/api-d-roles/interface';
 import { HttpUnauthorizedError } from '#clients/exceptions';
+import { Groups } from '#models/authentication/group/groups';
 import { FetchRessourceException } from '#models/exceptions';
-import { Groups } from '#models/groups';
 import { logFatalErrorInSentry } from '#utils/sentry';
 
 export class Group {
@@ -47,9 +48,20 @@ export class Group {
   /**
    * Add a user to this group (requires admin permissions)
    */
-  async updateName(groupName: string, actingUserSub: string): Promise<boolean> {
+  async updateName(
+    adminEmail: string,
+    adminSub: string,
+    groupName: string
+  ): Promise<boolean> {
     try {
-      await droleClient.updateName(this.groupId, groupName, actingUserSub);
+      const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
+      if (!isAdmin) {
+        throw new HttpUnauthorizedError(
+          'User does not have admin permissions for this group'
+        );
+      }
+
+      await droleClient.updateName(this.groupId, groupName, adminSub);
       return true;
     } catch (error) {
       logFatalErrorInSentry(
@@ -70,7 +82,7 @@ export class Group {
     adminSub: string,
     userEmail: string,
     roleId: number
-  ): Promise<boolean> {
+  ): Promise<IDRolesUser> {
     try {
       const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {
@@ -79,13 +91,13 @@ export class Group {
         );
       }
 
-      await droleClient.addUserToGroup(
+      const user = await droleClient.addUserToGroup(
         this.groupId,
         userEmail,
         roleId,
         adminSub
       );
-      return true;
+      return user;
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
@@ -105,7 +117,7 @@ export class Group {
     adminSub: string,
     userEmail: string,
     roleId: number
-  ): Promise<boolean> {
+  ): Promise<IDRolesUser> {
     try {
       const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {
@@ -114,13 +126,13 @@ export class Group {
         );
       }
 
-      await droleClient.updateUserFromGroup(
+      const user = await droleClient.updateUserFromGroup(
         this.groupId,
         userEmail,
         roleId,
         adminSub
       );
-      return true;
+      return user;
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
@@ -148,7 +160,6 @@ export class Group {
         );
       }
 
-      // Get the user ID to remove
       const user = await droleClient.getUserByEmail(userEmail);
       await droleClient.removeUserFromGroup(this.groupId, user.id, adminSub);
       return true;

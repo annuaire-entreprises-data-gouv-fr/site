@@ -37,8 +37,11 @@ const Menu: React.FC<{
         role="dialog"
         className={styles.dialog}
       >
-        <a aria-label="Gestion de mon compte agent public" href={'/compte'}>
-          Consulter ses droits
+        <a aria-label="Gestion de mon compte agent public" href={'/mon-espace'}>
+          Mon espace
+        </a>
+        <a aria-label="Gestion de mes équipes" href={'/mes-equipes'}>
+          Mes équipes
         </a>
         <a
           target="_blank"

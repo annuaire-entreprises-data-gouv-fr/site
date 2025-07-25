@@ -1,9 +1,8 @@
 export type IDRolesUser = {
   email: string;
-  sub_pro_connect: string;
-  is_email_confirmed: boolean;
   id: number;
   role_name: string;
+  role_id: number;
   is_admin: boolean;
 };
 
@@ -22,9 +21,11 @@ export type IDRolesAuthTokenResponse = {
 export type IDRolesGroupResponse = {
   name: string;
   id: number;
-  organisation_siren: string;
+  organisation_siret: string;
   users: IDRolesUser[];
   scopes: string;
+  contract_description: string;
+  contract_url: string | null;
 };
 
 export type IDRolesRoles = {

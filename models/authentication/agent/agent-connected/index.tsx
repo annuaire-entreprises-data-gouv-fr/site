@@ -5,8 +5,8 @@ import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
+import { Groups } from '#models/authentication/group/groups';
 import { InternalError } from '#models/exceptions';
-import { Groups } from '#models/groups';
 import { isSiret, verifySiret } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
 import { AgentOrganisation } from '../organisation';
@@ -18,7 +18,7 @@ export class AgentConnected {
   private email;
   private familyName;
   private firstName;
-  private userId;
+  private proConnectSub;
   private siret;
 
   constructor(userInfo: IProConnectUserInfo) {
@@ -27,7 +27,7 @@ export class AgentConnected {
     this.email = userInfo.email ?? '';
     this.familyName = userInfo.family_name ?? '';
     this.firstName = userInfo.given_name ?? '';
-    this.userId = userInfo.sub;
+    this.proConnectSub = userInfo.sub;
 
     const siretAsString = (userInfo.siret || '').replaceAll(' ', '');
 
@@ -102,7 +102,7 @@ export class AgentConnected {
 
     if (process.env.D_ROLES_ENABLED === 'enabled') {
       // Get scopes from Groups (D-Roles API) for this agent
-      const groups = await Groups.find(this.email, this.userId);
+      const groups = await Groups.find(this.email, this.proConnectSub);
       groups.forEach((group) => {
         drolesScopes.push(...group.scopes);
         superAgentScopes.add(group.scopes);
@@ -132,8 +132,8 @@ export class AgentConnected {
             message: 'Scope differences detected between D-Roles and S3',
             context: {
               details: JSON.stringify({
-                id: this.userId,
                 email: this.email,
+                id: this.proConnectSub,
                 onlyInDroles: onlyInDroles,
                 onlyInS3: onlyInS3,
                 drolesScopes: drolesScopes,
@@ -168,7 +168,7 @@ export class AgentConnected {
     const habilitationLevel = await this.getHabilitationLevel();
 
     return {
-      userId: this.userId,
+      proConnectSub: this.proConnectSub,
       idpId: this.idpId,
       domain: this.domain,
       email: this.email,

@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
+import { IDRolesGroup } from '#models/authentication/group/groups';
 import { InternalError } from '#models/exceptions';
-import { IDRolesGroup } from '#models/groups';
 import logErrorInSentry from '#utils/sentry';
 import { droleApiClient } from './client';
 import {
@@ -78,11 +78,10 @@ export const addUserToGroup = async (
   email: string,
   roleId: number,
   actingUserSub: string
-): Promise<null> => {
-  const user = await getUserByEmail(email);
+): Promise<IDRolesUser> => {
   const route = routes.dRoles.groups.addUserToGroup(groupId, actingUserSub);
-  return await droleApiClient.fetch<null>(route, {
-    method: 'PUT',
+  return await droleApiClient.fetch<IDRolesUser>(route, {
+    method: 'POST',
     data: { email, role_id: roleId },
   });
 };
@@ -92,7 +91,7 @@ export const updateUserFromGroup = async (
   email: string,
   roleId: number,
   actingUserSub: string
-): Promise<null> => {
+): Promise<IDRolesUser> => {
   const user = await getUserByEmail(email);
   const route = routes.dRoles.groups.updateUserFromGroup(
     groupId,
@@ -100,7 +99,7 @@ export const updateUserFromGroup = async (
     roleId,
     actingUserSub
   );
-  return await droleApiClient.fetch<null>(route, {
+  return await droleApiClient.fetch<IDRolesUser>(route, {
     method: 'PATCH',
   });
 };

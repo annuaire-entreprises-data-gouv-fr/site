@@ -1,7 +1,7 @@
 import { IAgentScope } from './scopes/constants';
 
 export type IAgentInfo = {
-  userId: string;
+  proConnectSub: string;
   idpId: string;
   domain: string;
   email: string;

@@ -23,6 +23,23 @@ describe(
       cy.contains('button', 'ProConnect');
     });
 
+    it('API - Add user to group without authentication', () => {
+      cy.request({
+        method: 'POST',
+        url: '/api/groups/1/add-user',
+        failOnStatusCode: false,
+        body: {
+          email: 'user@example.com',
+          roleId: 1,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((response) => {
+        expect(response.status).to.be.equal(401);
+      });
+    });
+
     //   it('Connexion', () => {
     //     cy.clearCookies({
     //       domain: 'fca.integ01.dev-agentconnect.fr',
