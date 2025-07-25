@@ -93,7 +93,14 @@ export function GroupEntity({
                 head={['Membre', 'Rôle', 'Action']}
                 columnWidths={['30%', '30%', '20%']}
                 body={group.users.map((user) => [
-                  user.email,
+                  <div>
+                    {user.email}
+                    {user.email === currentUserEmail && (
+                      <span className="fr-badge fr-ml-1w fr-badge--success fr-badge--sm">
+                        Vous
+                      </span>
+                    )}
+                  </div>,
                   user.email !== currentUserEmail ? (
                     <UpdateUserSelect
                       user={user}
