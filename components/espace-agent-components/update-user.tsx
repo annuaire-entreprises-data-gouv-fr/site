@@ -15,15 +15,12 @@ export default function UpdateUserSelect({
 }) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [optimisticRoleId, setOptimisticRoleId] = useState<number | null>(null);
 
   const handleUpdate = async (roleId: number) => {
     setLoading(true);
     setError(null);
-
-    updateUserFromGroupState({
-      ...user,
-      role_id: roleId,
-    });
+    setOptimisticRoleId(roleId);
 
     try {
       const updatedUser = await httpClient<IDRolesUser>({
@@ -36,10 +33,12 @@ export default function UpdateUserSelect({
       });
 
       updateUserFromGroupState(updatedUser);
+      setOptimisticRoleId(null);
     } catch (error) {
       setError(
         error instanceof Error ? error.message : 'Une erreur est survenue'
       );
+      setOptimisticRoleId(null);
     } finally {
       setLoading(false);
     }
@@ -50,7 +49,7 @@ export default function UpdateUserSelect({
       {error && <p className="fr-error-text">{error}</p>}
       <select
         className="fr-select"
-        value={user.role_id}
+        value={optimisticRoleId ?? user.role_id}
         onChange={(e) => handleUpdate(parseInt(e.target.value))}
         disabled={loading}
       >
