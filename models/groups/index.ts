@@ -7,10 +7,9 @@ import { logFatalErrorInSentry } from '#utils/sentry';
 export type IDRolesGroup = {
   name: string;
   id: number;
-  organisation_siret: string;
+  organisation_siren: string;
   users: IDRolesUser[];
   scopes: IAgentScope[];
-  contract_description: string;
 };
 
 export class Groups {

@@ -30,7 +30,7 @@ const generateSessionCookie = async (inputEmail?: string) => {
   const session: ISession = {
     user: {
       idpId: '123456789',
-      proConnectSub: '123456789',
+      userId: '123456789',
       domain: 'yopmail.com',
       siret: '12345678912345',
       familyName: 'John Doe',

@@ -268,18 +268,13 @@ const routes = {
       token: '/auth/token',
     },
     users: {
-      getByEmail: (email: string) =>
-        `/users/search?email=${encodeURIComponent(email)}`,
+      getByEmail: (email: string) => `/users/search?email=${email}`,
     },
     groups: {
       getGroupsByEmail: (userEmail: string, userSub: string) =>
-        `/groups/search?user_email=${encodeURIComponent(
-          userEmail
-        )}&user_sub=${userSub}`,
+        `/groups/search?user_email=${userEmail}&user_sub=${userSub}`,
       updateName: (groupId: number, groupName: string, actingUserSub: string) =>
-        `/groups/${groupId}?group_name=${encodeURIComponent(
-          groupName
-        )}&acting_user_sub=${actingUserSub}`,
+        `/groups/${groupId}?group_name=${groupName}&acting_user_sub=${actingUserSub}`,
       addUserToGroup: (groupId: number, actingUserSub: string) =>
         `/groups/${groupId}/users?acting_user_sub=${actingUserSub}`,
       updateUserFromGroup: (

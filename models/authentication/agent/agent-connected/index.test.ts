@@ -5,7 +5,7 @@ import {
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
-import { Groups } from '#models/authentication/group/groups';
+import { Groups } from '#models/groups';
 import { AgentConnected } from './index';
 
 jest.mock('#clients/authentication/super-agents', () => ({
@@ -14,7 +14,7 @@ jest.mock('#clients/authentication/super-agents', () => ({
   },
 }));
 
-jest.mock('#models/authentication/group/groups', () => ({
+jest.mock('#models/groups', () => ({
   Groups: {
     find: jest.fn(),
     getScopeForAgent: jest.fn(),
@@ -31,11 +31,9 @@ describe('AgentConnected', () => {
   const mockGroup = {
     name: 'Test Group',
     id: 1,
-    organisation_siret: '123456789',
-    contract: 'test-contract',
+    organisation_siren: '123456789',
     users: [],
     scopes: 'rne nonDiffusible',
-    contract_description: 'test-contract-description',
   };
   const mockUserInfo = {
     idp_id: 'test-idp',
@@ -91,7 +89,7 @@ describe('AgentConnected', () => {
       expect(agent['email']).toBe(mockUserInfo.email);
       expect(agent['familyName']).toBe(mockUserInfo.family_name);
       expect(agent['firstName']).toBe(mockUserInfo.given_name);
-      expect(agent['proConnectSub']).toBe(mockUserInfo.sub);
+      expect(agent['userId']).toBe(mockUserInfo.sub);
       expect(agent['siret']).toBe('12345678900000');
     });
 
@@ -262,7 +260,7 @@ describe('AgentConnected', () => {
       const result = await agent.getAndVerifyAgentInfo();
 
       expect(result).toEqual({
-        proConnectSub: 'test-user-id',
+        userId: 'test-user-id',
         idpId: 'test-idp',
         domain: '@example.com',
         email: 'test@example.com',
