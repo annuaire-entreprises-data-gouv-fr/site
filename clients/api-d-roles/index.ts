@@ -91,7 +91,7 @@ export const updateUserFromGroup = async (
   email: string,
   roleId: number,
   actingUserSub: string
-): Promise<null> => {
+): Promise<IDRolesUser> => {
   const user = await getUserByEmail(email);
   const route = routes.dRoles.groups.updateUserFromGroup(
     groupId,
@@ -99,7 +99,7 @@ export const updateUserFromGroup = async (
     roleId,
     actingUserSub
   );
-  return await droleApiClient.fetch<null>(route, {
+  return await droleApiClient.fetch<IDRolesUser>(route, {
     method: 'PATCH',
   });
 };

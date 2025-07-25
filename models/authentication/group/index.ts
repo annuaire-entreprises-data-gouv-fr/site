@@ -117,7 +117,7 @@ export class Group {
     adminSub: string,
     userEmail: string,
     roleId: number
-  ): Promise<boolean> {
+  ): Promise<IDRolesUser> {
     try {
       const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {
@@ -126,13 +126,13 @@ export class Group {
         );
       }
 
-      await droleClient.updateUserFromGroup(
+      const user = await droleClient.updateUserFromGroup(
         this.groupId,
         userEmail,
         roleId,
         adminSub
       );
-      return true;
+      return user;
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({

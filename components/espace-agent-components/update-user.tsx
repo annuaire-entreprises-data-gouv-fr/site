@@ -1,4 +1,4 @@
-import { IDRolesRoles } from '#clients/api-d-roles/interface';
+import { IDRolesRoles, IDRolesUser } from '#clients/api-d-roles/interface';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 
@@ -13,7 +13,7 @@ export default function UpdateUserSelect({
   roleId: number;
   groupId: number;
   roles: IDRolesRoles[];
-  updateUserFromGroupState: (user: { email: string; roleId: number }) => void;
+  updateUserFromGroupState: (user: IDRolesUser) => void;
 }) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ export default function UpdateUserSelect({
     setError(null);
 
     try {
-      await httpClient({
+      const user = await httpClient<IDRolesUser>({
         url: `/api/groups/${groupId}/update-user`,
         method: 'POST',
         headers: {
@@ -32,7 +32,7 @@ export default function UpdateUserSelect({
         data: JSON.stringify({ userEmail, roleId }),
       });
 
-      updateUserFromGroupState({ email: userEmail, roleId });
+      updateUserFromGroupState(user);
     } catch (error) {
       setError(
         error instanceof Error ? error.message : 'Une erreur est survenue'

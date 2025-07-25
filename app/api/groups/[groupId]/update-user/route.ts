@@ -14,14 +14,14 @@ async function updateUserHandler(
   const body = await request.json();
   const validatedData = updateUserSchema.parse(body);
 
-  await group.updateUser(
+  const user = await group.updateUser(
     session!.user!.email,
     session!.user!.proConnectSub,
     validatedData.userEmail,
     validatedData.roleId
   );
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json(user);
 }
 
 export const POST = withAgentAuth(withErrorHandling(updateUserHandler));
