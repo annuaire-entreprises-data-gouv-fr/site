@@ -37,7 +37,7 @@ const MesEquipesPage = async () => {
 
       <p>
         <br />
-        Seuls les administrateurs d’équipe peuvent les modifier (renommer,
+        Seuls les administrateurs d’équipes peuvent les modifier (renommer,
         ajouter ou supprimer un membre, ou changer son rôle).
         <br />
         <br />
