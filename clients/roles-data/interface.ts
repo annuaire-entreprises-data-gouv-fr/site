@@ -25,7 +25,7 @@ export type IDRolesGroupResponse = {
   users: IDRolesUser[];
   scopes: string;
   contract_description: string;
-  contract_url: string | null;
+  contract_url?: string;
 };
 
 export type IDRolesRoles = {

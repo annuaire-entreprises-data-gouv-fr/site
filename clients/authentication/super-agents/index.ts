@@ -1,8 +1,8 @@
-import { parseAgentScopes } from '#clients/api-d-roles/parse';
 import {
   clientSuperAgentList,
   IAgentRecord,
 } from '#clients/authentication/super-agents/client-super-agent-list';
+import { parseAgentScopes } from '#clients/roles-data/parse';
 import { IAgentScope } from '#models/authentication/agent/scopes/constants';
 import { FetchRessourceException, InternalError } from '#models/exceptions';
 import { DataStore } from '#utils/data-store';

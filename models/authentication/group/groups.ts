@@ -1,5 +1,5 @@
-import droleClient from '#clients/api-d-roles';
-import { IDRolesUser } from '#clients/api-d-roles/interface';
+import droleClient from '#clients/roles-data';
+import { IDRolesUser } from '#clients/roles-data/interface';
 import { IAgentScope } from '#models/authentication/agent/scopes/constants';
 import { FetchRessourceException } from '#models/exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
@@ -11,7 +11,7 @@ export type IDRolesGroup = {
   users: IDRolesUser[];
   scopes: IAgentScope[];
   contract_description: string;
-  contract_url: string | null;
+  contract_url?: string;
 };
 
 export class Groups {

@@ -1,4 +1,4 @@
-import { IDRolesRoles, IDRolesUser } from '#clients/api-d-roles/interface';
+import { IDRolesRoles, IDRolesUser } from '#clients/roles-data/interface';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/authentication/group/groups';
 import { Fragment, useMemo } from 'react';
