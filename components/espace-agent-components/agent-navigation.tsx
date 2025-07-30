@@ -4,8 +4,8 @@ import AgentNavigationLink from './agent-navigation-link';
 
 export default async function AgentNavigation() {
   const navLinks = [
-    { label: 'Mon espace', href: '/mon-espace' },
-    { label: 'Mes équipes', href: '/mes-equipes' },
+    { label: 'Mon espace', href: '/compte/accueil' },
+    { label: 'Mes équipes', href: '/compte/mes-equipes' },
   ];
   return (
     <nav

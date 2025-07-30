@@ -1,4 +1,4 @@
-import { IDRolesUser } from '#clients/api-d-roles/interface';
+import { IDRolesUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import httpClient from '#utils/network';
@@ -7,10 +7,12 @@ import { useState } from 'react';
 export default function DeleteUserButton({
   isCurrentUser,
   user,
+  adminCount,
   groupId,
   deleteUserFromGroupState,
 }: {
   isCurrentUser: boolean;
+  adminCount: number;
   user: IDRolesUser;
   groupId: number;
   deleteUserFromGroupState: (email: string) => void;
@@ -57,17 +59,16 @@ export default function DeleteUserButton({
   return (
     <>
       {error && <p className="fr-error-text">{error}</p>}
-      <button
+      <ButtonLink
         key={`remove-${user.email}`}
         type="button"
-        className="fr-btn fr-btn--tertiary-no-outline"
-        title="Supprimer"
         aria-label={`Supprimer ${user.email}`}
         onClick={openConfirmation}
-        disabled={loading}
+        disabled={loading || (isCurrentUser && adminCount === 1)}
+        alt
       >
-        <span aria-hidden="true">🗑️</span>
-      </button>
+        <span aria-hidden="true">Supprimer</span>
+      </ButtonLink>
 
       <FullScreenModal
         isVisible={showConfirmation}

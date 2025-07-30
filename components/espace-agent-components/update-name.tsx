@@ -67,12 +67,15 @@ export default function UpdateNameModal({
           gap: '0.5rem',
         }}
       >
-        {initialName}
         <button
           className="fr-btn fr-btn--tertiary-no-outline"
           onClick={() => setIsVisible(true)}
         >
-          <Icon slug="ballPenFill" />
+          (
+          <i>
+            <Icon slug="ballPenFill">renommer</Icon>
+          </i>
+          )
         </button>
       </h2>
       <FullScreenModal

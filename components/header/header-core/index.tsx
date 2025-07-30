@@ -138,7 +138,7 @@ export const HeaderCore: React.FC<IProps> = ({
             <div className="fr-container">
               Vous êtes connecté(e) en tant qu’<strong>agent public</strong>.
               Vous pouvez{' '}
-              <a href="/mon-espace">
+              <a href="/compte/accueil">
                 consulter le récapitulatif de vos droits.
               </a>
               <br />

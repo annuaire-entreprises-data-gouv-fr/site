@@ -1,6 +1,6 @@
-import droleClient from '#clients/api-d-roles';
-import { IDRolesUser } from '#clients/api-d-roles/interface';
 import { HttpUnauthorizedError } from '#clients/exceptions';
+import droleClient from '#clients/roles-data';
+import { IDRolesUser } from '#clients/roles-data/interface';
 import { Groups } from '#models/authentication/group/groups';
 import { FetchRessourceException } from '#models/exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';

@@ -1,6 +1,6 @@
 'use client';
 
-import { IDRolesUser } from '#clients/api-d-roles/interface';
+import { IDRolesUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { IDRolesGroup } from '#models/authentication/group/groups';

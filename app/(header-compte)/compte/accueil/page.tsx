@@ -16,12 +16,12 @@ import { redirect } from 'next/navigation';
 export const metadata: Metadata = {
   title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/mon-espace',
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/compte/accueil',
   },
   robots: 'noindex, nofollow',
 };
 
-const MonEspacePage = async () => {
+const CompteAgentAccueil = async () => {
   const session = await getSession();
 
   if (!hasRights(session, ApplicationRights.isAgent)) {
@@ -36,8 +36,9 @@ const MonEspacePage = async () => {
 
   return (
     <>
-      <AgentNavigation />
-      <h1>Mon espace</h1>
+      {hasRights(session, ApplicationRights.administrateur) && (
+        <AgentNavigation />
+      )}
       <FullWidthContainer
         style={{
           background: 'var(--annuaire-colors-espaceAgentPastel)',
@@ -140,4 +141,4 @@ const MonEspacePage = async () => {
   );
 };
 
-export default MonEspacePage;
+export default CompteAgentAccueil;

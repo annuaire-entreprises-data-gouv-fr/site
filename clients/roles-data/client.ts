@@ -19,10 +19,7 @@ class DRolesAPIClient {
     private client_id: string | undefined,
     private client_secret: string | undefined
   ) {
-    if (
-      process.env.D_ROLES_ENABLED === 'enabled' &&
-      (!this.client_id || !this.client_secret)
-    ) {
+    if (!this.client_id || !this.client_secret) {
       throw new HttpServerError('D-Roles env variables are undefined');
     }
     this._accessToken = null;

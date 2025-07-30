@@ -1,4 +1,4 @@
-import { IDRolesRoles, IDRolesUser } from '#clients/api-d-roles/interface';
+import { IDRolesRoles, IDRolesUser } from '#clients/roles-data/interface';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 

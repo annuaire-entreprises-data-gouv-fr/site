@@ -1,5 +1,5 @@
-import { getRoles } from '#clients/api-d-roles';
-import { IDRolesRoles } from '#clients/api-d-roles/interface';
+import { getRoles } from '#clients/roles-data';
+import { IDRolesRoles } from '#clients/roles-data/interface';
 import { DataStore } from '#utils/data-store';
 
 class DRolesStore {

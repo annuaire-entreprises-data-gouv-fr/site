@@ -1,6 +1,7 @@
-import { IDRolesRoles, IDRolesUser } from '#clients/api-d-roles/interface';
+import { IDRolesRoles, IDRolesUser } from '#clients/roles-data/interface';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/authentication/group/groups';
+import { Fragment, useMemo } from 'react';
 import AddUserModal from './add-user';
 import DeleteUserButton from './delete-user';
 import UpdateNameModal from './update-name';
@@ -42,6 +43,10 @@ export function GroupEntity({
     });
   };
 
+  const adminCount = useMemo(() => {
+    return group.users.filter((u) => u.is_admin).length;
+  }, [group.users]);
+
   return (
     <div className="fr-card fr-mt-3w">
       <div className="fr-card__body">
@@ -50,9 +55,8 @@ export function GroupEntity({
             <div
               style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
             >
-              {!isAdmin ? (
-                <h2 className="fr-mt-0">{group.name}</h2>
-              ) : (
+              <h2 className="fr-mt-0">{group.name}</h2>
+              {isAdmin && (
                 <UpdateNameModal
                   groupId={group.id}
                   initialName={group.name}
@@ -65,10 +69,42 @@ export function GroupEntity({
                 />
               )}
             </div>
-            <div className="fr-text--alt fr-mb-1w">
-              {group.users.length} membres
-            </div>
-            <div className="fr-badge">{group.contract_description}</div>
+            <p>
+              Cette équipe contient {group.users.length} membres{' '}
+              {group.contract_description ? (
+                <>
+                  , elle possède le contrat{' '}
+                  <strong>{group.contract_description}</strong>
+                </>
+              ) : null}
+              {group.contract_url ? (
+                <>
+                  {' '}
+                  (
+                  <a
+                    href={group.contract_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    consulter le contrat
+                  </a>
+                  )
+                </>
+              ) : null}
+              .
+              {group.scopes && group.scopes.length > 0 ? (
+                <>
+                  {' '}
+                  Ce contrat donne accès aux droits suivants :{' '}
+                  {group.scopes.map((scope) => (
+                    <Fragment key={scope}>
+                      <span className="fr-badge fr-badge--sm">{scope}</span>
+                      &nbsp;
+                    </Fragment>
+                  ))}
+                </>
+              ) : null}
+            </p>
           </div>
           {!isAdmin ? (
             <NotAdminTable group={group} />
@@ -91,9 +127,9 @@ export function GroupEntity({
 
               <FullTable
                 head={['Membre', 'Rôle', 'Action']}
-                columnWidths={['30%', '30%', '20%']}
+                columnWidths={['65%']}
                 body={group.users.map((user) => [
-                  <div>
+                  <div style={{ flexGrow: 1 }}>
                     {user.email}
                     {user.email === currentUserEmail && (
                       <span className="fr-badge fr-ml-1w fr-badge--success fr-badge--sm">
@@ -113,6 +149,7 @@ export function GroupEntity({
                   ),
                   <DeleteUserButton
                     isCurrentUser={user.email === currentUserEmail}
+                    adminCount={adminCount}
                     user={user}
                     groupId={group.id}
                     deleteUserFromGroupState={(userEmail: string) => {

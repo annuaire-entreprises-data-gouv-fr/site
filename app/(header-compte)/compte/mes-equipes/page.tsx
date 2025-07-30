@@ -21,13 +21,8 @@ export const metadata: Metadata = {
 const MesEquipesPage = async () => {
   const session = await getSession();
 
-  if (
-    !hasRights(session, ApplicationRights.isAgent) ||
-    !session?.user ||
-    !session.user.email ||
-    !session.user.proConnectSub
-  ) {
-    return redirect('/lp/agent-public');
+  if (!session?.user || !hasRights(session, ApplicationRights.administrateur)) {
+    return redirect('/compte/accueil');
   }
 
   const [roles, groups] = await Promise.all([
@@ -39,6 +34,15 @@ const MesEquipesPage = async () => {
     <>
       <AgentNavigation />
       <h1>Mes équipes</h1>
+
+      <p>
+        <br />
+        Seuls les administrateurs d’équipes peuvent les modifier (renommer,
+        ajouter ou supprimer un membre, ou changer son rôle).
+        <br />
+        <br />
+        Vous faites partie de {groups.length} équipes :
+      </p>
       <GroupManagement
         currentUserEmail={session!.user!.email}
         roles={roles}
