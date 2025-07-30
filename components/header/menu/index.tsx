@@ -1,7 +1,11 @@
 import FloatingModal from '#components-ui/floating-modal';
 import { Icon } from '#components-ui/icon/wrapper';
 import { getAgentDisplayName } from '#models/authentication/user/helpers';
-import { isLoggedIn } from '#models/authentication/user/rights';
+import {
+  ApplicationRights,
+  hasRights,
+  isLoggedIn,
+} from '#models/authentication/user/rights';
 import { ISession } from '#models/authentication/user/session';
 import constants from '#models/constants';
 import { EspaceAgentLink } from './espace-agent-link';
@@ -37,12 +41,17 @@ const Menu: React.FC<{
         role="dialog"
         className={styles.dialog}
       >
-        <a aria-label="Gestion de mon compte agent public" href={'/mon-espace'}>
+        <a
+          aria-label="Gestion de mon compte agent public"
+          href={'/compte/accueil'}
+        >
           Mon espace
         </a>
-        <a aria-label="Gestion de mes équipes" href={'/mes-equipes'}>
-          Mes équipes
-        </a>
+        {hasRights(session, ApplicationRights.administrateur) && (
+          <a aria-label="Gestion de mes équipes" href={'/compte/mes-equipes'}>
+            Mes équipes
+          </a>
+        )}
         <a
           target="_blank"
           rel="nopener noreferer"

@@ -11,6 +11,7 @@ export type IDRolesGroup = {
   users: IDRolesUser[];
   scopes: IAgentScope[];
   contract_description: string;
+  contract_url: string | null;
 };
 
 export class Groups {

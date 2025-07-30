@@ -100,14 +100,12 @@ export class AgentConnected {
     let drolesScopes: string[] = [];
     let s3Scopes: string[] = [];
 
-    if (process.env.D_ROLES_ENABLED === 'enabled') {
-      // Get scopes from Groups (D-Roles API) for this agent
-      const groups = await Groups.find(this.email, this.proConnectSub);
-      groups.forEach((group) => {
-        drolesScopes.push(...group.scopes);
-        superAgentScopes.add(group.scopes);
-      });
-    }
+    // Get scopes from Groups (D-Roles API) for this agent
+    const groups = await Groups.find(this.email, this.proConnectSub);
+    groups.forEach((group) => {
+      drolesScopes.push(...group.scopes);
+      superAgentScopes.add(group.scopes);
+    });
 
     // TEMP Get scopes from S3 storage for this agent
     const superAgentsListScopesRaw = await superAgentsList.getScopeForAgent(
@@ -117,7 +115,7 @@ export class AgentConnected {
     superAgentScopes.add(superAgentsListScopesRaw);
 
     // Compare scopes from D-Roles and S3, log differences to Sentry
-    if (process.env.D_ROLES_ENABLED === 'enabled' && drolesScopes.length > 0) {
+    if (drolesScopes.length > 0) {
       const drolesScopesSet = new Set(drolesScopes);
       const s3ScopesSet = new Set(s3Scopes);
 

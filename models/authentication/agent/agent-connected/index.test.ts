@@ -71,7 +71,6 @@ describe('AgentConnected', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    process.env.D_ROLES_ENABLED = 'enabled';
     // Setup the AgentOrganisation mock
     const mockGetHabilitationLevel = jest.fn();
     mockAgentOrganisation.mockImplementation(
