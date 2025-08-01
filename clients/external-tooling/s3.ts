@@ -9,20 +9,6 @@ import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { Readable } from 'stream';
 
 const bucketsLists = {
-  'comptes-agents': {
-    config: {
-      endpoint: `https://s3.${process.env.OVH_S3_REGION}.io.cloud.ovh.net/`,
-      credentials: {
-        accessKeyId: process.env.OVH_S3_ACCESS_KEY || '',
-        secretAccessKey: process.env.OVH_S3_SECRET || '',
-      },
-      region: process.env.OVH_S3_REGION,
-    },
-    params: {
-      Bucket: process.env.OVH_S3_BUCKET || '',
-      Key: 'comptes_agents.json',
-    },
-  },
   'monitoring-comptes-agents': {
     config: {
       endpoint: `https://s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/`,
