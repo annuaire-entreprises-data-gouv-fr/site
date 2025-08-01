@@ -1,7 +1,9 @@
 import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
+import { Information } from '#models/exceptions';
 import httpClient, { IDefaultRequestConfig } from '#utils/network';
+import { logInfoInSentry } from '#utils/sentry';
 import { URLSearchParams } from 'url';
 import { IDRolesAuthTokenResponse } from './interface';
 
@@ -44,9 +46,8 @@ class DRolesAPIClient {
 
       this._accessToken = data.access_token;
       // 45 seconds before the token expires
-
       this._tokenExpiryTime =
-        new Date().getTime() + (data.expires_in - 45) * 1000;
+        new Date().getTime() / 1000 + data.expires_in - 45;
     } catch (e) {
       this._accessToken = null;
       this._tokenExpiryTime = 0;
@@ -61,6 +62,12 @@ class DRolesAPIClient {
 
   private getToken = async () => {
     if (!this._accessToken || this.isTokenExpired()) {
+      logInfoInSentry(
+        new Information({
+          name: 'RefreshingDRolesToken',
+          message: 'Refreshing D-Roles token',
+        })
+      );
       await this.newToken();
       if (!this._accessToken) {
         throw new HttpUnauthorizedError('Failed to refresh token');
