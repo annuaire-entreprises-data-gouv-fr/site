@@ -36,8 +36,8 @@
           "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
           "trancheEffectif": "42",
           "anneeTrancheEffectif": "2022",
-          "latitude": "48.872565",
-          "longitude": "2.334926",
+          "latitude": "48.87256499999998",
+          "longitude": "2.3349259999999994",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "idFiness": [
@@ -89,8 +89,8 @@
               "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
               "trancheEffectif": "42",
               "anneeTrancheEffectif": "2022",
-              "latitude": "48.872565",
-              "longitude": "2.334926",
+              "latitude": "48.87256499999998",
+              "longitude": "2.3349259999999994",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [
@@ -134,8 +134,8 @@
               "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
               "trancheEffectif": "42",
               "anneeTrancheEffectif": "2022",
-              "latitude": "48.872565",
-              "longitude": "2.334926",
+              "latitude": "48.87256499999998",
+              "longitude": "2.3349259999999994",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "idFiness": [
@@ -166,7 +166,7 @@
         "dateCreation": "1955-01-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2025-06-18T13:32:51",
+        "dateMiseAJourInsee": "2025-07-24T17:33:15.116",
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -221,7 +221,7 @@
           ],
           "dateCloture": "3112",
           "isPersonneMorale": true,
-          "capital": "170 267 100,00 € (fixe)"
+          "capital": "170 348 620,75 € (fixe)"
         },
         "matchingEtablissements": [],
         "nombreEtablissements": 17,
@@ -332,8 +332,8 @@
             "role": "COMMISSAIRE AUX COMPTES TITULAIRE"
           },
           {
-            "siren": "387953961",
-            "denomination": "MAZARS ET ASSOCIÉS",
+            "siren": "784824153",
+            "denomination": "FORVIS MAZARS SA",
             "role": "COMMISSAIRE AUX COMPTES TITULAIRE"
           }
         ]
