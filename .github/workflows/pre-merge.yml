@@ -107,6 +107,10 @@ jobs:
       NEXT_PUBLIC_BASE_URL: http://localhost:3000
       API_ENTREPRISE_URL: http://uselessurl.com
       API_ENTREPRISE_TOKEN: XXXXXX
+      OVH_S3_ACCESS_KEY: XXXXXX
+      OVH_S3_SECRET: XXXXXX
+      OVH_S3_BUCKET: uselessbucket
+      OVH_S3_REGION: region
       OVH_S3_MONITORING_ACCESS_KEY: XXXXXX
       OVH_S3_MONITORING_SECRET: XXXXXX
       OVH_S3_MONITORING_BUCKET: uselessbucket

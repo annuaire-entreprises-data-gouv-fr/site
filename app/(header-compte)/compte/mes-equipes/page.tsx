@@ -1,7 +1,7 @@
 import AgentNavigation from '#components/espace-agent-components/agent-navigation';
 import { GroupManagement } from '#components/espace-agent-components/group-management';
 import { Groups } from '#models/authentication/group/groups';
-import { rolesMetadataStore } from '#models/authentication/group/roles';
+import { dRolesStore } from '#models/authentication/group/roles';
 import {
   ApplicationRights,
   hasRights,
@@ -26,7 +26,7 @@ const MesEquipesPage = async () => {
   }
 
   const [roles, groups] = await Promise.all([
-    rolesMetadataStore.getRoles(),
+    dRolesStore.getRoles(),
     Groups.find(session.user.email, session.user.proConnectSub),
   ]);
 

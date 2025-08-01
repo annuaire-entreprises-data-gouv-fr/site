@@ -47,7 +47,7 @@ const mapToDomainObject = (
   });
 };
 
-export const getRolesMetadata = async (): Promise<IDRolesRoles[]> => {
+export const getRoles = async (): Promise<IDRolesRoles[]> => {
   const route = routes.dRoles.roles.get;
   return await droleApiClient.fetch<IDRolesRoles[]>(route, { method: 'GET' });
 };
@@ -122,7 +122,7 @@ export const removeUserFromGroup = async (
 
 export default {
   getGroupsByEmail,
-  getRolesMetadata,
+  getRoles,
   getUserByEmail,
   updateName,
   addUserToGroup,
