@@ -1,4 +1,3 @@
-import { superAgentsList } from '#clients/authentication/super-agents';
 import { AgentOrganisation } from '#models/authentication/agent/organisation';
 import { IAgentScope } from '#models/authentication/agent/scopes/constants';
 import {
@@ -7,12 +6,6 @@ import {
 } from '#models/authentication/authentication-exceptions';
 import { Groups } from '#models/authentication/group/groups';
 import { AgentConnected } from './index';
-
-jest.mock('#clients/authentication/super-agents', () => ({
-  superAgentsList: {
-    getScopeForAgent: jest.fn(),
-  },
-}));
 
 jest.mock('#models/authentication/group/groups', () => ({
   Groups: {
@@ -23,7 +16,6 @@ jest.mock('#models/authentication/group/groups', () => ({
 
 jest.mock('#models/authentication/agent/organisation');
 
-const mockSuperAgentsList = jest.mocked(superAgentsList);
 const mockGroups = jest.mocked(Groups);
 const mockAgentOrganisation = jest.mocked(AgentOrganisation);
 
@@ -159,7 +151,6 @@ describe('AgentConnected', () => {
       mockGroups.find.mockResolvedValue([
         { ...mockGroup, scopes: groupScopes },
       ]);
-      mockSuperAgentsList.getScopeForAgent.mockResolvedValue([]);
 
       const agent = new AgentConnected(mockUserInfo);
       const result = await agent.getHabilitationLevel();
@@ -171,49 +162,8 @@ describe('AgentConnected', () => {
       });
     });
 
-    it('should combine scopes from both groups and super agents', async () => {
-      const groupScopes: IAgentScope[] = ['rne', 'nonDiffusible'];
-      const superAgentScopes: IAgentScope[] = ['conformite', 'beneficiaires'];
-      mockGroups.find.mockResolvedValue([
-        { ...mockGroup, scopes: groupScopes },
-      ]);
-      mockSuperAgentsList.getScopeForAgent.mockResolvedValue(superAgentScopes);
-
-      const agent = new AgentConnected(mockUserInfo);
-      const result = await agent.getHabilitationLevel();
-
-      expect(result).toEqual({
-        scopes: expect.arrayContaining([...groupScopes, ...superAgentScopes]),
-        userType: 'Super-agent connecté',
-        isSuperAgent: true,
-      });
-    });
-
-    it('should remove duplicate scopes from multiple sources', async () => {
-      const groupScopes: IAgentScope[] = ['rne', 'conformite'];
-      const superAgentScopes: IAgentScope[] = ['conformite', 'beneficiaires'];
-      mockGroups.find.mockResolvedValue([
-        { ...mockGroup, scopes: groupScopes },
-      ]);
-      mockSuperAgentsList.getScopeForAgent.mockResolvedValue(superAgentScopes);
-
-      const agent = new AgentConnected(mockUserInfo);
-      const result = await agent.getHabilitationLevel();
-
-      // Should contain all unique scopes
-      expect(result?.scopes).toEqual(
-        expect.arrayContaining(['rne', 'conformite', 'beneficiaires'])
-      );
-      // Should not have duplicates
-      const conformiteCount = result?.scopes.filter(
-        (scope) => scope === 'conformite'
-      ).length;
-      expect(conformiteCount).toBe(1);
-    });
-
     it('should throw PrestataireException for prestataire users', async () => {
       mockGroups.find.mockResolvedValue([{ ...mockGroup, scopes: [] }]);
-      mockSuperAgentsList.getScopeForAgent.mockResolvedValue([]);
       const prestataireUserInfo = {
         ...mockUserInfo,
         email: 'test@beta.gouv.fr',
@@ -226,7 +176,6 @@ describe('AgentConnected', () => {
 
     it('should fallback to organisation habilitation when no agent habilitation', async () => {
       mockGroups.find.mockResolvedValue([{ ...mockGroup, scopes: [] }]);
-      mockSuperAgentsList.getScopeForAgent.mockResolvedValue([]);
       const mockOrgHabilitation = {
         scopes: ['org-scope'],
         userType: 'Organisation',
@@ -255,7 +204,6 @@ describe('AgentConnected', () => {
       mockGroups.find.mockResolvedValue([
         { ...mockGroup, scopes: groupScopes },
       ]);
-      mockSuperAgentsList.getScopeForAgent.mockResolvedValue([]);
 
       const agent = new AgentConnected(mockUserInfo);
       const result = await agent.getAndVerifyAgentInfo();

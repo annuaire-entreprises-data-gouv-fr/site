@@ -1,3 +1,4 @@
+import { HttpNotFound } from '#clients/exceptions';
 import droleClient from '#clients/roles-data';
 import { IDRolesUser } from '#clients/roles-data/interface';
 import { IAgentScope } from '#models/authentication/agent/scopes/constants';
@@ -25,6 +26,11 @@ export class Groups {
     try {
       return await droleClient.getGroupsByEmail(userEmail, userSub);
     } catch (error) {
+      if (error instanceof HttpNotFound) {
+        // user not in roles.data
+        return [];
+      }
+
       logFatalErrorInSentry(
         new FetchRessourceException({
           ressource: 'D-Roles Groups',
@@ -32,8 +38,6 @@ export class Groups {
         })
       );
 
-      // TEMP : allow a fallback to S3 without error
-      // throw error;
       return [];
     }
   }

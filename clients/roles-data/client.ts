@@ -1,9 +1,7 @@
 import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
-import { Information } from '#models/exceptions';
 import httpClient, { IDefaultRequestConfig } from '#utils/network';
-import { logInfoInSentry } from '#utils/sentry';
 import { URLSearchParams } from 'url';
 import { IDRolesAuthTokenResponse } from './interface';
 
@@ -63,12 +61,6 @@ class DRolesAPIClient {
 
   private getToken = async () => {
     if (!this._accessToken || this.isTokenExpired()) {
-      logInfoInSentry(
-        new Information({
-          name: 'RefreshingDRolesToken',
-          message: 'Refreshing D-Roles token',
-        })
-      );
       await this.newToken();
       if (!this._accessToken) {
         throw new HttpUnauthorizedError('Failed to refresh token');
