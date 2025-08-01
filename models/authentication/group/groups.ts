@@ -1,3 +1,4 @@
+import { HttpNotFound } from '#clients/exceptions';
 import droleClient from '#clients/roles-data';
 import { IDRolesUser } from '#clients/roles-data/interface';
 import { IAgentScope } from '#models/authentication/agent/scopes/constants';
