@@ -46,8 +46,9 @@ class DRolesAPIClient {
 
       this._accessToken = data.access_token;
       // 45 seconds before the token expires
+
       this._tokenExpiryTime =
-        new Date().getTime() / 1000 + data.expires_in - 45;
+        new Date().getTime() + (data.expires_in - 45) * 1000;
     } catch (e) {
       this._accessToken = null;
       this._tokenExpiryTime = 0;

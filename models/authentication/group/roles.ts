@@ -1,14 +1,14 @@
-import { getRoles } from '#clients/roles-data';
+import { getRolesMetadata } from '#clients/roles-data';
 import { IDRolesRoles } from '#clients/roles-data/interface';
 import { DataStore } from '#utils/data-store';
 
-class DRolesStore {
+class RolesmetadataStore {
   private _dRolesStore: DataStore<IDRolesRoles[]>;
   private TTL = 300000; // 5min
 
   constructor() {
     this._dRolesStore = new DataStore<IDRolesRoles[]>(
-      () => getRoles(),
+      () => getRolesMetadata(),
       'd-roles-roles',
       (response) => ({ roles: response }),
       this.TTL
@@ -21,4 +21,4 @@ class DRolesStore {
   };
 }
 
-export const dRolesStore = new DRolesStore();
+export const rolesMetadataStore = new RolesmetadataStore();
