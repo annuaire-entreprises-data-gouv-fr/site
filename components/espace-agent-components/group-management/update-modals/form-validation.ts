@@ -15,13 +15,13 @@ export const validateEmail = (email: string): ValidationErrors => {
 
 export const validateGroupName = (name: string): ValidationErrors => {
   if (!name?.trim()) {
-    return 'Le nom de l’équipe est requis';
+    return 'Le nom du groupe est requis';
   } else {
     if (name.trim().length < 2) {
-      return 'Le nom de l’équipe doit contenir au moins 2 caractères';
+      return 'Le nom du groupe doit contenir au moins 2 caractères';
     }
     if (name.trim().length > 100) {
-      return 'Le nom de l’équipe ne peut pas dépasser 100 caractères';
+      return 'Le nom du groupe ne peut pas dépasser 100 caractères';
     }
   }
 

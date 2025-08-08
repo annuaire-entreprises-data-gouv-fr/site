@@ -3,7 +3,7 @@
 import { IDRolesRoles } from '#clients/roles-data/interface';
 import { IDRolesGroup } from '#models/authentication/group/groups';
 import { useState } from 'react';
-import { GroupEntity } from './group-entity';
+import { GroupItem } from './group-item';
 
 export function GroupManagement({
   currentUserEmail,
@@ -17,7 +17,7 @@ export function GroupManagement({
   const [groups, setGroups] = useState<IDRolesGroup[]>(initialGroups);
 
   if (groups.length === 0) {
-    return <div>Aucune équipe trouvée</div>;
+    return <div>Aucun groupe</div>;
   }
 
   return groups.map((group) => {
@@ -30,7 +30,7 @@ export function GroupManagement({
     };
 
     return (
-      <GroupEntity
+      <GroupItem
         key={group.id}
         currentUserEmail={currentUserEmail}
         group={group}

@@ -2,10 +2,10 @@ import { IDRolesRoles, IDRolesUser } from '#clients/roles-data/interface';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/authentication/group/groups';
 import { Fragment, useMemo } from 'react';
-import AddUserModal from './add-user';
-import DeleteUserButton from './delete-user';
-import UpdateNameModal from './update-name';
-import UpdateUserSelect from './update-user';
+import AddUserModal from './update-modals/add-user';
+import DeleteUserButton from './update-modals/delete-user';
+import UpdateNameModal from './update-modals/update-name';
+import UpdateUserSelect from './update-modals/update-user';
 
 const NotAdminTable = ({ group }: { group: IDRolesGroup }) => {
   return (
@@ -19,7 +19,7 @@ const NotAdminTable = ({ group }: { group: IDRolesGroup }) => {
   );
 };
 
-export function GroupEntity({
+export function GroupItem({
   currentUserEmail,
   group,
   setGroup,
@@ -70,7 +70,7 @@ export function GroupEntity({
               )}
             </div>
             <p>
-              Cette équipe contient {group.users.length} membres{' '}
+              Ce groupe contient {group.users.length} membres{' '}
               {group.contract_description ? (
                 <>
                   , elle possède le contrat{' '}

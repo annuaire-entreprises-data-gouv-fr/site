@@ -1,7 +1,7 @@
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { Icon } from '#components-ui/icon/wrapper';
-import { validateGroupName } from '#components/espace-agent-components/form-validation';
+import { validateGroupName } from '#components/espace-agent-components/group-management/update-modals/form-validation';
 import {
   showErrorNotification,
   showSuccessNotification,
@@ -57,8 +57,8 @@ export default function UpdateNameModal({
       setIsVisible(false);
 
       showSuccessNotification(
-        "Nom de l'équipe mis à jour",
-        `L'équipe a été renommée "${groupName}"`
+        'Nom du groupe mis à jour',
+        `Le groupe a été renommé "${groupName}"`
       );
     } catch (error: any) {
       showErrorNotification(
@@ -105,9 +105,9 @@ export default function UpdateNameModal({
       >
         <div className="fr-container">
           <div className="fr-mb-4w">
-            <h2 className="fr-h2">Renommer l&apos;équipe</h2>
+            <h2 className="fr-h2">Renommer le groupe</h2>
             <p className="fr-text--lg">
-              Modifiez le nom de l‘équipe <strong>{initialName}</strong>
+              Modifiez le nom du groupe <strong>{initialName}</strong>
             </p>
           </div>
 
@@ -117,7 +117,7 @@ export default function UpdateNameModal({
             }`}
           >
             <label className="fr-label" htmlFor={`group-name-${groupId}`}>
-              Nom de l’équipe
+              Nom du groupe
               <span className="fr-hint-text">(entre 2 et 100 caractères)</span>
             </label>
             <div className="fr-input-wrap">

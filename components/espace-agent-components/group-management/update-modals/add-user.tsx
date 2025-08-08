@@ -3,7 +3,7 @@
 import { IDRolesUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
-import { validateEmail } from '#components/espace-agent-components/form-validation';
+import { validateEmail } from '#components/espace-agent-components/group-management/update-modals/form-validation';
 import {
   showErrorNotification,
   showSuccessNotification,
@@ -74,7 +74,7 @@ export default function AddUserModal({
 
       showSuccessNotification(
         'Membre ajouté avec succès',
-        `${userEmail} a été ajouté à l'équipe ${group.name}`
+        `${userEmail} a été ajouté au groupe ${group.name}`
       );
 
       setInputEmail('');
