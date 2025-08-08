@@ -1,8 +1,8 @@
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { Icon } from '#components-ui/icon/wrapper';
+import { validateGroupName } from '#components/espace-agent-components/form-validation';
 import { showError, showSuccess } from '#hooks/use-notifications';
-import { validateGroupName } from '#utils/form-validation';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
 
@@ -36,9 +36,9 @@ export default function UpdateNameModal({
 
     try {
       // Client-side validation
-      const nameValidation = validateGroupName(groupName);
-      if (!nameValidation.isValid) {
-        setValidationErrors(nameValidation.errors);
+      const nameValidationError = validateGroupName(groupName);
+      if (nameValidationError) {
+        setValidationErrors([nameValidationError]);
         return;
       }
 

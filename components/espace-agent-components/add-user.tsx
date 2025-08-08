@@ -3,9 +3,9 @@
 import { IDRolesUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
+import { validateEmail } from '#components/espace-agent-components/form-validation';
 import { showError, showSuccess } from '#hooks/use-notifications';
 import { IDRolesGroup } from '#models/authentication/group/groups';
-import { validateEmail } from '#utils/form-validation';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
 
@@ -41,10 +41,9 @@ export default function AddUserModal({
     try {
       const userEmail = inputEmail.trim();
 
-      // Client-side validation
-      const emailValidation = validateEmail(userEmail);
-      if (!emailValidation.isValid) {
-        setValidationErrors(emailValidation.errors);
+      const emailValidationError = validateEmail(userEmail);
+      if (emailValidationError) {
+        setValidationErrors([emailValidationError]);
         return;
       }
 
