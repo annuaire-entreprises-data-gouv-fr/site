@@ -4,22 +4,11 @@ import ButtonLink from '#components-ui/button';
 import { formatDate, formatNumber } from '#utils/helpers';
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 import { useState } from 'react';
+import FiltersSummary from './_components/filter-symmary';
+import Filters from './_components/filters';
+import { ExtendedExportCsvInput } from './_components/types';
 import { getEffectifCode } from './constants';
-import Filters from './Filters';
-import FiltersSummary from './FiltersSummary';
 import styles from './styles.module.css';
-
-export interface ExtendedExportCsvInput extends ExportCsvInput {
-  headcount: { min: number; max: number };
-  categories: ('PME' | 'ETI' | 'GE')[];
-  headcountEnabled: boolean;
-  locations: Array<{
-    type: 'cp' | 'dep' | 'reg' | 'insee';
-    value: string;
-    label: string;
-  }>;
-  legalCategories: string[];
-}
 
 const getFileSize = (count: number) => {
   return Math.ceil((count * 300) / 1000);
@@ -182,7 +171,7 @@ export default function ExportCsv() {
         if (body.error) {
           throw new Error(
             body.error ||
-            'Une erreur est survenue, veuillez réessayer plus tard'
+              'Une erreur est survenue, veuillez réessayer plus tard'
           );
         }
       }

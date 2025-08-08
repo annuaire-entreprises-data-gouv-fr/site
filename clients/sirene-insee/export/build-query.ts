@@ -1,7 +1,7 @@
 import { regions } from '#utils/helpers/formatting/metadata/regions';
+import { EFFECTIF_STEPS } from 'app/(header-default)/export-sirene/constants';
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 import { niv1ToNiv5Mapping } from 'scripts/nomenclature-d-activites-francaises/niv1ToNiv5Mapping';
-import { effectifCodes } from './constants';
 
 export class SireneQueryBuilder {
   private conditions: string[] = [];
@@ -108,6 +108,8 @@ export class SireneQueryBuilder {
     if (!headcount?.min || !headcount?.max) {
       return;
     }
+
+    const effectifCodes = EFFECTIF_STEPS.map((e) => e.code);
 
     const minIndex = effectifCodes.indexOf(
       headcount.min.toString().padStart(2, '0')

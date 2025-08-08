@@ -8,12 +8,12 @@ import { categoriesJuridiques } from '#utils/helpers/formatting/metadata/categor
 import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { Dispatch, SetStateAction } from 'react';
-import { getEffectifLabel } from './constants';
-import { ExtendedExportCsvInput } from './ExportCsv';
-import { LocationFilter } from './LocationFilter';
-import LocationTags from './LocationTags';
-import SiretFilter from './SiretFilter';
-import styles from './styles.module.css';
+import { getEffectifLabel } from '../constants';
+import styles from '../styles.module.css';
+import { LocationFilter } from './location-filter';
+import LocationTags from './location-tags';
+import SiretFilter from './siret-filter';
+import { ExtendedExportCsvInput } from './types';
 
 export const selectedEffectifLabel = (filters: ExtendedExportCsvInput) => {
   if (filters.headcountEnabled) {
