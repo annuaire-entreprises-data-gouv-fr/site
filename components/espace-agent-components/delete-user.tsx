@@ -1,6 +1,7 @@
 import { IDRolesUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
+import { showError, showSuccess } from '#hooks/use-notifications';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 
@@ -37,10 +38,16 @@ export default function DeleteUserButton({
 
       deleteUserFromGroupState(userEmail);
       setShowConfirmation(false);
-    } catch (error) {
-      setError(
-        error instanceof Error ? error.message : 'Une erreur est survenue'
+      
+      // Show success notification
+      showSuccess(
+        'Membre supprimé',
+        `${userEmail} a été retiré de l'équipe`
       );
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Une erreur est survenue';
+      setError(errorMessage);
+      showError('Erreur lors de la suppression', errorMessage);
     } finally {
       setLoading(false);
     }

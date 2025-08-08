@@ -1,6 +1,8 @@
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { Icon } from '#components-ui/icon/wrapper';
+import { showError, showSuccess } from '#hooks/use-notifications';
+import { validateGroupName } from '#utils/form-validation';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
 
@@ -17,6 +19,7 @@ export default function UpdateNameModal({
   const [groupName, setGroupName] = useState(initialName);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -29,8 +32,16 @@ export default function UpdateNameModal({
   const handleUpdateName = async () => {
     setLoading(true);
     setError(null);
+    setValidationErrors([]);
 
     try {
+      // Client-side validation
+      const nameValidation = validateGroupName(groupName);
+      if (!nameValidation.isValid) {
+        setValidationErrors(nameValidation.errors);
+        return;
+      }
+
       await httpClient({
         url: `/api/groups/${groupId}/update-name`,
         method: 'POST',
@@ -39,13 +50,20 @@ export default function UpdateNameModal({
         },
         data: JSON.stringify({ groupName }),
       });
+
       updateGroupNameState(groupName);
-      setGroupName('');
       setIsVisible(false);
-    } catch (error) {
-      setError(
-        error instanceof Error ? error.message : 'Une erreur est survenue'
+
+      // Show success notification
+      showSuccess(
+        "Nom de l'équipe mis à jour",
+        `L'équipe a été renommée "${groupName}"`
       );
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Une erreur est survenue';
+      setError(errorMessage);
+      showError('Erreur lors de la mise à jour du nom', errorMessage);
     } finally {
       setLoading(false);
     }
@@ -55,6 +73,7 @@ export default function UpdateNameModal({
     setIsVisible(false);
     setGroupName(initialName);
     setError(null);
+    setValidationErrors([]);
   };
 
   return (
@@ -91,15 +110,37 @@ export default function UpdateNameModal({
             </p>
           </div>
 
-          <div className="fr-input-group fr-mb-4w">
+          <div
+            className={`fr-input-group fr-mb-4w ${
+              validationErrors.length > 0 || error
+                ? 'fr-input-group--error'
+                : ''
+            }`}
+          >
+            <label className="fr-label" htmlFor={`group-name-${groupId}`}>
+              Nom de l’équipe
+              <span className="fr-hint-text">
+                Le nom doit contenir entre 2 et 100 caractères
+              </span>
+            </label>
             <div className="fr-input-wrap">
               <input
                 ref={inputRef}
-                className="fr-input"
+                className={`fr-input ${
+                  validationErrors.length > 0 || error ? 'fr-input--error' : ''
+                }`}
                 type="text"
                 id={`group-name-${groupId}`}
                 value={groupName}
-                onChange={(e) => setGroupName(e.target.value)}
+                onChange={(e) => {
+                  setGroupName(e.target.value);
+                  if (validationErrors.length > 0) {
+                    setValidationErrors([]);
+                  }
+                  if (error) {
+                    setError(null);
+                  }
+                }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && groupName?.trim() && !loading) {
                     handleUpdateName();
@@ -107,9 +148,27 @@ export default function UpdateNameModal({
                 }}
                 disabled={loading}
                 autoComplete="off"
+                aria-describedby={
+                  validationErrors.length > 0 || error
+                    ? `error-name-${groupId}`
+                    : undefined
+                }
               />
             </div>
-            {error && <p className="fr-error-text">{error}</p>}
+            {validationErrors.length > 0 && (
+              <div id={`error-name-${groupId}`} className="fr-messages-group">
+                {validationErrors.map((errorMsg, index) => (
+                  <p key={index} className="fr-message fr-message--error">
+                    {errorMsg}
+                  </p>
+                ))}
+              </div>
+            )}
+            {error && !validationErrors.length && (
+              <div id={`error-name-${groupId}`} className="fr-messages-group">
+                <p className="fr-message fr-message--error">{error}</p>
+              </div>
+            )}
           </div>
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">

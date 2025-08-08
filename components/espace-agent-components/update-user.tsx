@@ -1,4 +1,5 @@
 import { IDRolesRoles, IDRolesUser } from '#clients/roles-data/interface';
+import { showError, showSuccess } from '#hooks/use-notifications';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 
@@ -34,11 +35,18 @@ export default function UpdateUserSelect({
 
       updateUserFromGroupState(updatedUser);
       setOptimisticRoleId(null);
-    } catch (error) {
-      setError(
-        error instanceof Error ? error.message : 'Une erreur est survenue'
+      
+      // Show success notification
+      const roleName = roles.find(r => r.id === roleId)?.role_name || 'utilisateur';
+      showSuccess(
+        'Rôle mis à jour',
+        `Le rôle de ${user.email} a été changé vers "${roleName}"`
       );
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Une erreur est survenue';
+      setError(errorMessage);
       setOptimisticRoleId(null);
+      showError('Erreur lors de la mise à jour du rôle', errorMessage);
     } finally {
       setLoading(false);
     }

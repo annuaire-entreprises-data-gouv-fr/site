@@ -17,7 +17,8 @@
       "#components/*": ["./components/*"],
       "#components-ui/*": ["./components-ui/*"],
       "#models/*": ["./models/*"],
-      "#utils/*": ["./utils/*"]
+      "#utils/*": ["./utils/*"],
+      "#hooks/*": ["./hooks/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,

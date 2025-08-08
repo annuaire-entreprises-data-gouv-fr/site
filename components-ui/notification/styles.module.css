@@ -1,0 +1,139 @@
+.container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 400px;
+}
+
+.notification {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: white;
+  border-left: 4px solid;
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+}
+
+.notification.success {
+  border-left-color: #18753c;
+  background-color: #f9fffe;
+}
+
+.notification.error {
+  border-left-color: #ce0500;
+  background-color: #fffefe;
+}
+
+.notification.warning {
+  border-left-color: #ff9c00;
+  background-color: #fffdf9;
+}
+
+.notification.info {
+  border-left-color: #0078f3;
+  background-color: #f9fcff;
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.success .icon {
+  color: #18753c;
+}
+
+.error .icon {
+  color: #ce0500;
+}
+
+.warning .icon {
+  color: #ff9c00;
+}
+
+.info .icon {
+  color: #0078f3;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-bottom: 0.25rem;
+  color: #1e1e1e;
+}
+
+.message {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #666;
+}
+
+.action {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.action:hover {
+  background-color: #f5f5f5;
+}
+
+.close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  color: #666;
+  transition: background-color 0.2s;
+}
+
+.close:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    left: 0.5rem;
+    max-width: none;
+  }
+  
+  .notification {
+    padding: 0.75rem;
+  }
+}

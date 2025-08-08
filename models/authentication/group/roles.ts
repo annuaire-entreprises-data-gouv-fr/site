@@ -4,7 +4,7 @@ import { DataStore } from '#utils/data-store';
 
 class RolesmetadataStore {
   private _dRolesStore: DataStore<IDRolesRoles[]>;
-  private TTL = 300000; // 5min
+  private TTL = 36000000; // 10h
 
   constructor() {
     this._dRolesStore = new DataStore<IDRolesRoles[]>(
