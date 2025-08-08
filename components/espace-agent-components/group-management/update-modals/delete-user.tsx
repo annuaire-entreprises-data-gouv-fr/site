@@ -44,7 +44,7 @@ export default function DeleteUserButton({
       // Show success notification
       showSuccessNotification(
         'Membre supprimé',
-        `${userEmail} a été retiré de l'équipe`
+        `${userEmail} a été retiré du groupe`
       );
     } catch (error: any) {
       showErrorNotification('Erreur lors de la suppression', error?.message);
