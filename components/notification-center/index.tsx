@@ -21,7 +21,27 @@ export const NotificationProvider = () => {
     internatStateNotifications
   );
 
+  const removeNotification = (id: string) => {
+    internatStateNotifications = notifications.filter((n) => n.id !== id);
+    setNotifications(internatStateNotifications);
+  };
+
   useEffect(() => {
+    const addNotification = (notification: Omit<Notification, 'id'>): void => {
+      const id = randomId();
+      const newNotification = { ...notification, id };
+      internatStateNotifications = [
+        ...internatStateNotifications,
+        newNotification,
+      ];
+
+      setTimeout(() => {
+        removeNotification(id);
+      }, 4000);
+
+      setNotifications(internatStateNotifications);
+    };
+
     if (typeof window !== 'undefined') {
       window.addNotification = addNotification;
     }
@@ -29,26 +49,6 @@ export const NotificationProvider = () => {
       delete window.addNotification;
     };
   }, []);
-
-  const removeNotification = (id: string) => {
-    internatStateNotifications = notifications.filter((n) => n.id !== id);
-    setNotifications(internatStateNotifications);
-  };
-
-  const addNotification = (notification: Omit<Notification, 'id'>): void => {
-    const id = randomId();
-    const newNotification = { ...notification, id };
-    internatStateNotifications = [
-      ...internatStateNotifications,
-      newNotification,
-    ];
-
-    setTimeout(() => {
-      removeNotification(id);
-    }, 4000);
-
-    setNotifications(internatStateNotifications);
-  };
 
   return (
     <div className={styles.container}>
