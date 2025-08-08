@@ -182,7 +182,7 @@ export default function ExportCsv() {
         if (body.error) {
           throw new Error(
             body.error ||
-              'Une erreur est survenue, veuillez réessayer plus tard'
+            'Une erreur est survenue, veuillez réessayer plus tard'
           );
         }
       }
@@ -227,7 +227,7 @@ export default function ExportCsv() {
           💡 Ces listes ne contiennent pas de nom de dirigeant, d‘adresse
           courriel, de site web ou de numéro de téléphone. Pour plus de détails
           sur le contenu des fichiers, consultez la{' '}
-          <a href="https://sirene.fr/sirene/public/static/documentation">
+          <a href="https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret">
             documentation
           </a>
           .
