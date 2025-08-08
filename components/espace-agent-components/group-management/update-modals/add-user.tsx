@@ -56,7 +56,7 @@ export default function AddUserModal({
         ]);
         showErrorNotification(
           'Ajout impossible',
-          'Cet utilisateur est déjà membre de cette équipe'
+          'Cet utilisateur est déjà membre de ce groupe'
         );
         return;
       }
