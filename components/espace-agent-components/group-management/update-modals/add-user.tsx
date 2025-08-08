@@ -120,7 +120,7 @@ export default function AddUserModal({
               Adresse email du nouveau membre
               <span className="fr-hint-text">
                 L’utilisateur doit avoir un compte ProConnect pour rejoindre
-                l’équipe
+                le groupe
               </span>
             </label>
             <div className="fr-input-wrap">
