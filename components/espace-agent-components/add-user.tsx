@@ -4,7 +4,10 @@ import { IDRolesUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { validateEmail } from '#components/espace-agent-components/form-validation';
-import { showError, showSuccess } from '#hooks/use-notifications';
+import {
+  showErrorNotification,
+  showSuccessNotification,
+} from '#components/notification-center';
 import { IDRolesGroup } from '#models/authentication/group/groups';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
@@ -22,7 +25,6 @@ export default function AddUserModal({
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [inputEmail, setInputEmail] = useState('');
-  const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,7 +37,6 @@ export default function AddUserModal({
 
   const handleAddNewUser = async () => {
     setLoading(true);
-    setError(null);
     setValidationErrors([]);
 
     try {
@@ -44,6 +45,7 @@ export default function AddUserModal({
       const emailValidationError = validateEmail(userEmail);
       if (emailValidationError) {
         setValidationErrors([emailValidationError]);
+        showErrorNotification('Ajout impossible', emailValidationError);
         return;
       }
 
@@ -52,6 +54,10 @@ export default function AddUserModal({
         setValidationErrors([
           'Cet utilisateur est déjà membre de cette équipe',
         ]);
+        showErrorNotification(
+          'Ajout impossible',
+          'Cet utilisateur est déjà membre de cette équipe'
+        );
         return;
       }
 
@@ -66,19 +72,15 @@ export default function AddUserModal({
 
       addUserToGroupState(user);
 
-      // Show success notification
-      showSuccess(
+      showSuccessNotification(
         'Membre ajouté avec succès',
         `${userEmail} a été ajouté à l'équipe ${group.name}`
       );
 
       setInputEmail('');
       setIsVisible(false);
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Une erreur est survenue';
-      setError(errorMessage);
-      showError("Erreur lors de l'ajout du membre", errorMessage);
+    } catch (error: any) {
+      showErrorNotification("Erreur lors de l'ajout du membre", error?.message);
     } finally {
       setLoading(false);
     }
@@ -87,7 +89,6 @@ export default function AddUserModal({
   const handleClose = () => {
     setIsVisible(false);
     setInputEmail('');
-    setError(null);
     setValidationErrors([]);
   };
 
@@ -100,6 +101,7 @@ export default function AddUserModal({
         isVisible={isVisible}
         modalId={MODAL_ID}
         onClose={handleClose}
+        textAlign="left"
       >
         <div className="fr-container">
           <div className="fr-mb-4w">
@@ -111,9 +113,7 @@ export default function AddUserModal({
 
           <div
             className={`fr-input-group fr-mb-4w ${
-              validationErrors.length > 0 || error
-                ? 'fr-input-group--error'
-                : ''
+              validationErrors.length > 0 ? 'fr-input-group--error' : ''
             }`}
           >
             <label className="fr-label" htmlFor={`new-user-email-${group.id}`}>
@@ -127,7 +127,7 @@ export default function AddUserModal({
               <input
                 ref={inputRef}
                 className={`fr-input ${
-                  validationErrors.length > 0 || error ? 'fr-input--error' : ''
+                  validationErrors.length > 0 ? 'fr-input--error' : ''
                 }`}
                 type="email"
                 id={`new-user-email-${group.id}`}
@@ -138,9 +138,6 @@ export default function AddUserModal({
                   if (validationErrors.length > 0) {
                     setValidationErrors([]);
                   }
-                  if (error) {
-                    setError(null);
-                  }
                 }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && inputEmail?.trim() && !loading) {
@@ -149,9 +146,7 @@ export default function AddUserModal({
                 }}
                 disabled={loading}
                 aria-describedby={
-                  validationErrors.length > 0 || error
-                    ? `error-${group.id}`
-                    : undefined
+                  validationErrors.length > 0 ? `error-${group.id}` : undefined
                 }
               />
             </div>
@@ -162,11 +157,6 @@ export default function AddUserModal({
                     {errorMsg}
                   </p>
                 ))}
-              </div>
-            )}
-            {error && !validationErrors.length && (
-              <div id={`error-${group.id}`} className="fr-messages-group">
-                <p className="fr-message fr-message--error">{error}</p>
               </div>
             )}
           </div>

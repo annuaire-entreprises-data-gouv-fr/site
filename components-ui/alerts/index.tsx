@@ -1,10 +1,10 @@
-import React, { PropsWithChildren } from 'react';
 import { IIconsSlug } from '#components-ui/icon';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
+import React, { PropsWithChildren } from 'react';
 import styles from './styles.module.css';
 
-const colors = {
+export const colors = {
   info: ['#0078f3', '#e5f3ff'],
   success: ['#18753c', '#dffee6'],
   error: ['#ce0500', '#fff4f4'],
