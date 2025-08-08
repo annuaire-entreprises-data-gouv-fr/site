@@ -9,7 +9,7 @@ import { searchGeoElementByText } from '#models/geo';
 import { debounce } from '#utils/helpers/debounce';
 import { useOutsideClick } from 'hooks';
 import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
-import styles from './styles.module.css';
+import styles from '../styles.module.css';
 
 enum Issue {
   NONE = 2,

@@ -4,7 +4,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import constants from '#models/constants';
 import { useRef, useState } from 'react';
-import styles from './styles.module.css';
+import styles from '../styles.module.css';
 
 interface SiretFilterProps {
   siretsAndSirens: string[];

@@ -1,8 +1,8 @@
 import { categoriesJuridiques as legalCategories } from '#utils/helpers/formatting/metadata/categories-juridiques';
 import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
-import { ExtendedExportCsvInput } from './ExportCsv';
-import { selectedEffectifLabel } from './Filters';
+import { selectedEffectifLabel } from './filters';
+import { ExtendedExportCsvInput } from './types';
 
 export default function FiltersSummary({
   filters,
