@@ -52,7 +52,7 @@ export default function AddUserModal({
       // Check if user already exists in group
       if (group.users.some((user: IDRolesUser) => user.email === userEmail)) {
         setValidationErrors([
-          'Cet utilisateur est déjà membre de cette équipe',
+          'Cet utilisateur est déjà membre de ce groupe',
         ]);
         showErrorNotification(
           'Ajout impossible',
