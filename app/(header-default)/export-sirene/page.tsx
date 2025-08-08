@@ -11,8 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function ExportCSV() {
-  if (process.env.EXPORT_CSV_ENABLED !== 'enabled') {
-    return redirect('/');
-  }
+  return redirect('/');
+  // if (process.env.EXPORT_CSV_ENABLED !== 'enabled') {
+  //   return redirect('/');
+  // }
   return <ExportCsv />;
 }
