@@ -1,6 +1,11 @@
 import { IDRolesUser } from '#clients/roles-data/interface';
+import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
+import {
+  showErrorNotification,
+  showSuccessNotification,
+} from '#components/notification-center';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 
@@ -17,13 +22,11 @@ export default function DeleteUserButton({
   groupId: number;
   deleteUserFromGroupState: (email: string) => void;
 }) {
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleRemove = (userEmail: string) => async () => {
     setLoading(true);
-    setError(null);
 
     try {
       await httpClient({
@@ -37,10 +40,14 @@ export default function DeleteUserButton({
 
       deleteUserFromGroupState(userEmail);
       setShowConfirmation(false);
-    } catch (error) {
-      setError(
-        error instanceof Error ? error.message : 'Une erreur est survenue'
+
+      // Show success notification
+      showSuccessNotification(
+        'Membre supprimé',
+        `${userEmail} a été retiré du groupe`
       );
+    } catch (error: any) {
+      showErrorNotification('Erreur lors de la suppression', error?.message);
     } finally {
       setLoading(false);
     }
@@ -48,17 +55,14 @@ export default function DeleteUserButton({
 
   const openConfirmation = () => {
     setShowConfirmation(true);
-    setError(null);
   };
 
   const closeConfirmation = () => {
     setShowConfirmation(false);
-    setError(null);
   };
 
   return (
     <>
-      {error && <p className="fr-error-text">{error}</p>}
       <ButtonLink
         key={`remove-${user.email}`}
         type="button"
@@ -74,6 +78,7 @@ export default function DeleteUserButton({
         isVisible={showConfirmation}
         modalId="delete-user-confirmation"
         onClose={closeConfirmation}
+        textAlign="left"
       >
         <div className="fr-container">
           <div className="fr-mb-4w">
@@ -83,13 +88,12 @@ export default function DeleteUserButton({
               de ce groupe ?
             </p>
             {isCurrentUser && (
-              <div className="fr-alert fr-alert--warning fr-mb-3w">
-                <p className="fr-alert__title">Attention</p>
+              <Warning>
                 <p>
-                  Vous êtes sur le point de vous supprimer vous-même de ce
-                  groupe.
+                  <strong>Attention</strong>, vous êtes sur le point de vous
+                  supprimer vous-même de ce groupe.
                 </p>
-              </div>
+              </Warning>
             )}
           </div>
 

@@ -1,4 +1,8 @@
 import { IDRolesRoles, IDRolesUser } from '#clients/roles-data/interface';
+import {
+  showErrorNotification,
+  showSuccessNotification,
+} from '#components/notification-center';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 
@@ -13,32 +17,42 @@ export default function UpdateUserSelect({
   roles: IDRolesRoles[];
   updateUserFromGroupState: (user: IDRolesUser) => void;
 }) {
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [optimisticRoleId, setOptimisticRoleId] = useState<number | null>(null);
 
+  const postUpdateUser = async (roleId: number) => {
+    return await httpClient<IDRolesUser>({
+      url: `/api/groups/${groupId}/update-user`,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: JSON.stringify({ userEmail: user.email, roleId }),
+    });
+  };
+
   const handleUpdate = async (roleId: number) => {
     setLoading(true);
-    setError(null);
     setOptimisticRoleId(roleId);
 
     try {
-      const updatedUser = await httpClient<IDRolesUser>({
-        url: `/api/groups/${groupId}/update-user`,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: JSON.stringify({ userEmail: user.email, roleId }),
-      });
-
+      const updatedUser = await postUpdateUser(roleId);
       updateUserFromGroupState(updatedUser);
       setOptimisticRoleId(null);
-    } catch (error) {
-      setError(
-        error instanceof Error ? error.message : 'Une erreur est survenue'
+
+      // Show success notification
+      const roleName =
+        roles.find((r) => r.id === roleId)?.role_name || 'utilisateur';
+      showSuccessNotification(
+        'Changements pris en compte',
+        `Le rôle de ${user.email} a été changé en "${roleName}"`
       );
+    } catch (error: any) {
       setOptimisticRoleId(null);
+      showErrorNotification(
+        'Erreur lors de la mise à jour du rôle',
+        error?.message
+      );
     } finally {
       setLoading(false);
     }
@@ -46,7 +60,6 @@ export default function UpdateUserSelect({
 
   return (
     <>
-      {error && <p className="fr-error-text">{error}</p>}
       <select
         className="fr-select"
         value={optimisticRoleId ?? user.role_id}

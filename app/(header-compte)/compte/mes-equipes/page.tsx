@@ -11,7 +11,7 @@ import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
-  title: 'Vos équipes de l’Annuaire des Entreprises',
+  title: 'Vos groupes au sein de l’Annuaire des Entreprises',
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/mes-equipes',
   },
@@ -37,11 +37,11 @@ const MesEquipesPage = async () => {
 
       <p>
         <br />
-        Seuls les administrateurs d’équipes peuvent les modifier (renommer,
+        Seuls les administrateurs d’un groupe peuvent le modifier (renommer,
         ajouter ou supprimer un membre, ou changer son rôle).
         <br />
         <br />
-        Vous faites partie de {groups.length} équipes :
+        Vous faites partie de {groups.length} groupes :
       </p>
       <GroupManagement
         currentUserEmail={session!.user!.email}

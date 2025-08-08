@@ -11,8 +11,9 @@ export const FullScreenModal: React.FC<{
   children: React.ReactNode;
   isVisible: boolean;
   modalId: string;
+  textAlign?: 'center' | 'left';
   onClose: () => void;
-}> = ({ children, isVisible, modalId, onClose }) => {
+}> = ({ children, isVisible, modalId, onClose, textAlign = 'center' }) => {
   return (
     <ClientOnly>
       {isVisible ? (
@@ -23,6 +24,7 @@ export const FullScreenModal: React.FC<{
               role="dialog"
               elevation="high"
               className={styles.fullScreenModal}
+              style={{ textAlign }}
               onClick={(e) => e.stopPropagation()}
             >
               <div className={styles.closeButton}>

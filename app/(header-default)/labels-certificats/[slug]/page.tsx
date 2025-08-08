@@ -3,9 +3,6 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/badges-section/labels-and-certificates';
-import { OpqibiSection } from '#components/espace-agent-components/certifications/opqibi-section';
-import { QualibatSection } from '#components/espace-agent-components/certifications/qualibat-section';
-import { QualifelecSection } from '#components/espace-agent-components/certifications/qualifelec-section';
 import { LabelAchatsResponsables } from '#components/labels-and-certificates/achats-responsables';
 import BilanGesSection from '#components/labels-and-certificates/bilan-ges';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
@@ -17,6 +14,9 @@ import { OrganismeDeFormationSection } from '#components/labels-and-certificates
 import { LabelPatrimoineVivant } from '#components/labels-and-certificates/patrimoine-vivant';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
 import { CertificationSocieteMission } from '#components/labels-and-certificates/societe-mission';
+import { OpqibiSection } from '#components/protected-certificates/opqibi-section';
+import { QualibatSection } from '#components/protected-certificates/qualibat-section';
+import { QualifelecSection } from '#components/protected-certificates/qualifelec-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import {

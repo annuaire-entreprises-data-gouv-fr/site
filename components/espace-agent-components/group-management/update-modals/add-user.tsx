@@ -3,6 +3,11 @@
 import { IDRolesUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
+import { validateEmail } from '#components/espace-agent-components/group-management/update-modals/form-validation';
+import {
+  showErrorNotification,
+  showSuccessNotification,
+} from '#components/notification-center';
 import { IDRolesGroup } from '#models/authentication/group/groups';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
@@ -20,7 +25,7 @@ export default function AddUserModal({
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [inputEmail, setInputEmail] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -32,14 +37,27 @@ export default function AddUserModal({
 
   const handleAddNewUser = async () => {
     setLoading(true);
-    setError(null);
+    setValidationErrors([]);
 
     try {
-      if (!inputEmail || !inputEmail.trim()) return;
       const userEmail = inputEmail.trim();
 
+      const emailValidationError = validateEmail(userEmail);
+      if (emailValidationError) {
+        setValidationErrors([emailValidationError]);
+        showErrorNotification('Ajout impossible', emailValidationError);
+        return;
+      }
+
+      // Check if user already exists in group
       if (group.users.some((user: IDRolesUser) => user.email === userEmail)) {
-        setError('Cet utilisateur est déjà membre de cette équipe');
+        setValidationErrors([
+          'Cet utilisateur est déjà membre de ce groupe',
+        ]);
+        showErrorNotification(
+          'Ajout impossible',
+          'Cet utilisateur est déjà membre de ce groupe'
+        );
         return;
       }
 
@@ -54,12 +72,15 @@ export default function AddUserModal({
 
       addUserToGroupState(user);
 
+      showSuccessNotification(
+        'Membre ajouté avec succès',
+        `${userEmail} a été ajouté au groupe ${group.name}`
+      );
+
       setInputEmail('');
       setIsVisible(false);
-    } catch (error) {
-      setError(
-        error instanceof Error ? error.message : 'Une erreur est survenue'
-      );
+    } catch (error: any) {
+      showErrorNotification("Erreur lors de l'ajout du membre", error?.message);
     } finally {
       setLoading(false);
     }
@@ -68,7 +89,7 @@ export default function AddUserModal({
   const handleClose = () => {
     setIsVisible(false);
     setInputEmail('');
-    setError(null);
+    setValidationErrors([]);
   };
 
   return (
@@ -80,6 +101,7 @@ export default function AddUserModal({
         isVisible={isVisible}
         modalId={MODAL_ID}
         onClose={handleClose}
+        textAlign="left"
       >
         <div className="fr-container">
           <div className="fr-mb-4w">
@@ -89,25 +111,54 @@ export default function AddUserModal({
             </p>
           </div>
 
-          <div className="fr-input-group fr-mb-4w">
+          <div
+            className={`fr-input-group fr-mb-4w ${
+              validationErrors.length > 0 ? 'fr-input-group--error' : ''
+            }`}
+          >
+            <label className="fr-label" htmlFor={`new-user-email-${group.id}`}>
+              Adresse email du nouveau membre
+              <span className="fr-hint-text">
+                L’utilisateur doit avoir un compte ProConnect pour rejoindre
+                le groupe
+              </span>
+            </label>
             <div className="fr-input-wrap">
               <input
                 ref={inputRef}
-                className="fr-input"
+                className={`fr-input ${
+                  validationErrors.length > 0 ? 'fr-input--error' : ''
+                }`}
                 type="email"
                 id={`new-user-email-${group.id}`}
                 placeholder="email@exemple.fr"
                 value={inputEmail}
-                onChange={(e) => setInputEmail(e.target.value)}
+                onChange={(e) => {
+                  setInputEmail(e.target.value);
+                  if (validationErrors.length > 0) {
+                    setValidationErrors([]);
+                  }
+                }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && inputEmail?.trim() && !loading) {
                     handleAddNewUser();
                   }
                 }}
                 disabled={loading}
+                aria-describedby={
+                  validationErrors.length > 0 ? `error-${group.id}` : undefined
+                }
               />
             </div>
-            {error && <p className="fr-error-text">{error}</p>}
+            {validationErrors.length > 0 && (
+              <div id={`error-${group.id}`} className="fr-messages-group">
+                {validationErrors.map((errorMsg, index) => (
+                  <p key={index} className="fr-message fr-message--error">
+                    {errorMsg}
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
