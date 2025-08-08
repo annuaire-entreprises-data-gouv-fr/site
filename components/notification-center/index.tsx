@@ -26,22 +26,22 @@ export const NotificationProvider = () => {
     setNotifications(internatStateNotifications);
   };
 
+  const addNotification = (notification: Omit<Notification, 'id'>): void => {
+    const id = randomId();
+    const newNotification = { ...notification, id };
+    internatStateNotifications = [
+      ...internatStateNotifications,
+      newNotification,
+    ];
+
+    setTimeout(() => {
+      removeNotification(id);
+    }, 4000);
+
+    setNotifications(internatStateNotifications);
+  };
+
   useEffect(() => {
-    const addNotification = (notification: Omit<Notification, 'id'>): void => {
-      const id = randomId();
-      const newNotification = { ...notification, id };
-      internatStateNotifications = [
-        ...internatStateNotifications,
-        newNotification,
-      ];
-
-      setTimeout(() => {
-        removeNotification(id);
-      }, 4000);
-
-      setNotifications(internatStateNotifications);
-    };
-
     if (typeof window !== 'undefined') {
       window.addNotification = addNotification;
     }
