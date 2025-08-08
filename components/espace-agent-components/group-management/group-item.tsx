@@ -7,12 +7,25 @@ import DeleteUserButton from './update-modals/delete-user';
 import UpdateNameModal from './update-modals/update-name';
 import UpdateUserSelect from './update-modals/update-user';
 
-const NotAdminTable = ({ group }: { group: IDRolesGroup }) => {
+const NotAdminTable = ({
+  group,
+  currentUserEmail,
+}: {
+  group: IDRolesGroup;
+  currentUserEmail: string;
+}) => {
   return (
     <FullTable
       head={['Membre', 'Rôle']}
       body={group.users.map((user) => [
-        user.email,
+        <>
+          {user.email}{' '}
+          {user.email === currentUserEmail && (
+            <span className="fr-badge fr-ml-1w fr-badge--success fr-badge--sm">
+              Vous
+            </span>
+          )}
+        </>,
         <span className="fr-badge">{user.role_name}</span>,
       ])}
     />
@@ -107,7 +120,7 @@ export function GroupItem({
             </p>
           </div>
           {!isAdmin ? (
-            <NotAdminTable group={group} />
+            <NotAdminTable group={group} currentUserEmail={currentUserEmail} />
           ) : (
             <>
               <div style={{ alignSelf: 'flex-end', marginBottom: '1rem' }}>
