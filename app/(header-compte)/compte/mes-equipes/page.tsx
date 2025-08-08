@@ -13,12 +13,12 @@ import { redirect } from 'next/navigation';
 export const metadata: Metadata = {
   title: 'Vos groupes au sein de l’Annuaire des Entreprises',
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/mes-equipes',
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/mes-groupes',
   },
   robots: 'noindex, nofollow',
 };
 
-const MesEquipesPage = async () => {
+const MesGroupesPage = async () => {
   const session = await getSession();
 
   if (!session?.user || !hasRights(session, ApplicationRights.administrateur)) {
@@ -33,7 +33,7 @@ const MesEquipesPage = async () => {
   return (
     <>
       <AgentNavigation />
-      <h1>Mes équipes</h1>
+      <h1>Mes groupes</h1>
 
       <p>
         <br />
@@ -52,4 +52,4 @@ const MesEquipesPage = async () => {
   );
 };
 
-export default MesEquipesPage;
+export default MesGroupesPage;

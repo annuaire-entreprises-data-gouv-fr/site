@@ -44,8 +44,8 @@ export default function UpdateUserSelect({
       const roleName =
         roles.find((r) => r.id === roleId)?.role_name || 'utilisateur';
       showSuccessNotification(
-        'Changements pris en compte',
-        `Le rôle de ${user.email} a été changé en "${roleName}"`
+        'Changement pris en compte',
+        `Le rôle de ${user.email} a été changé en "${roleName}".`
       );
     } catch (error: any) {
       setOptimisticRoleId(null);

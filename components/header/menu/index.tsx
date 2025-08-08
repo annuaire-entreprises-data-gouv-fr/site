@@ -48,8 +48,8 @@ const Menu: React.FC<{
           Mon espace
         </a>
         {hasRights(session, ApplicationRights.administrateur) && (
-          <a aria-label="Gestion de mes équipes" href={'/compte/mes-equipes'}>
-            Mes équipes
+          <a aria-label="Gestion de mes groupes" href={'/compte/mes-groupes'}>
+            Mes groupes
           </a>
         )}
         <a
