@@ -83,10 +83,10 @@ export function GroupItem({
               )}
             </div>
             <p>
-              Ce groupe contient {group.users.length} membres{' '}
+              Ce groupe contient {group.users.length} membres
               {group.contract_description ? (
                 <>
-                  , elle possède le contrat{' '}
+                  , il possède le contrat{' '}
                   <strong>{group.contract_description}</strong>
                 </>
               ) : null}
