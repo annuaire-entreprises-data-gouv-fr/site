@@ -120,10 +120,6 @@ export default function AddUserModal({
           >
             <label className="fr-label" htmlFor={`new-user-email-${group.id}`}>
               Adresse email du nouveau membre
-              <span className="fr-hint-text">
-                L’utilisateur doit avoir un compte ProConnect pour rejoindre le
-                groupe
-              </span>
             </label>
             <div className="fr-input-wrap">
               <input
