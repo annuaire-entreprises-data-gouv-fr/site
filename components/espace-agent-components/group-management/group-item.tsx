@@ -86,7 +86,7 @@ export function GroupItem({
               Ce groupe contient {group.users.length} membres
               {group.contract_description ? (
                 <>
-                  , il possède le contrat{' '}
+                  {' '}et possède le contrat{' '}
                   <strong>{group.contract_description}</strong>
                 </>
               ) : null}
