@@ -37,7 +37,7 @@ export const getClient = async () => {
       client_secret: CLIENT_SECRET,
       redirect_uris: [REDIRECT_URI],
       post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
-      id_token_signed_response_alg: 'HS256',
+      id_token_signed_response_alg: 'RS256',
       response_types: ['code'],
     });
 
