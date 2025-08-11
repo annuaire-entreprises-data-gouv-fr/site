@@ -77,7 +77,13 @@ export async function franceConnectAuthenticate(
     // reuse redirect_uri
     REDIRECT_URI,
     params,
-    req.session.FC_CONNECT_CHECK
+    req.session.FC_CONNECT_CHECK,
+    {
+      exchangeBody: {
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+      },
+    }
   );
   delete req.session.FC_CONNECT_CHECK;
   await req.session.save();
