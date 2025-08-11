@@ -7,7 +7,7 @@ import { BaseClient, Issuer, generators } from 'openid-client';
 let _client = undefined as BaseClient | undefined;
 
 const CLIENT_ID = process.env.FRANCECONNECT_CLIENT_ID;
-const ISSUER_URL = process.env.FRANCECONNECT_URL;
+const URL = process.env.FRANCECONNECT_URL;
 const CLIENT_SECRET = process.env.FRANCECONNECT_CLIENT_SECRET;
 const REDIRECT_URI = process.env.FRANCECONNECT_REDIRECT_URI;
 const POST_LOGOUT_REDIRECT_URI =
@@ -19,29 +19,25 @@ export const getClient = async () => {
   } else {
     if (
       !CLIENT_ID ||
-      !ISSUER_URL ||
+      !URL ||
       !CLIENT_SECRET ||
       !REDIRECT_URI ||
       !POST_LOGOUT_REDIRECT_URI
     ) {
       throw new InternalError({
-        message: 'FRANCECONNECT ENV variables are not defined',
+        message: 'FRANCE CONNECT ENV variables are not defined',
       });
     }
-    const FranceConnectIssuer = new Issuer({
-      issuer: ISSUER_URL,
-      authorization_endpoint: `${ISSUER_URL}/api/v1/authorize`,
-      token_endpoint: `${ISSUER_URL}/api/v1/token`,
-      userinfo_endpoint: `${ISSUER_URL}/api/v1/userinfo`,
-      end_session_endpoint: `${ISSUER_URL}/api/v1/logout`,
-    });
+    const FranceConnectIssuer = await Issuer.discover(
+      `${URL}/api/v2/.well-known/openid-configuration`
+    );
 
     _client = new FranceConnectIssuer.Client({
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
       redirect_uris: [REDIRECT_URI],
       post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
-      id_token_signed_response_alg: 'HS256',
+      id_token_signed_response_alg: 'RS256',
       response_types: ['code'],
     });
 
