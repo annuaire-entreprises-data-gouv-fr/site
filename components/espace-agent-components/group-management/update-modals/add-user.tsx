@@ -51,9 +51,7 @@ export default function AddUserModal({
 
       // Check if user already exists in group
       if (group.users.some((user: IDRolesUser) => user.email === userEmail)) {
-        setValidationErrors([
-          'Cet utilisateur est déjà membre de ce groupe',
-        ]);
+        setValidationErrors(['Cet utilisateur est déjà membre de ce groupe']);
         showErrorNotification(
           'Ajout impossible',
           'Cet utilisateur est déjà membre de ce groupe'
@@ -107,7 +105,11 @@ export default function AddUserModal({
           <div className="fr-mb-4w">
             <h2 className="fr-h2">Ajouter un membre</h2>
             <p className="fr-text--lg">
-              Invitez un nouvel utilisateur à rejoindre cette équipe
+              Les nouveaux membres ont par défaut le{' '}
+              <strong>rôle d’utilisateur</strong>.
+              <br />
+              Vous pourrez ensuite le changer en{' '}
+              <strong>administrateur ou prestataire</strong>, si besoin.
             </p>
           </div>
 
@@ -119,8 +121,8 @@ export default function AddUserModal({
             <label className="fr-label" htmlFor={`new-user-email-${group.id}`}>
               Adresse email du nouveau membre
               <span className="fr-hint-text">
-                L’utilisateur doit avoir un compte ProConnect pour rejoindre
-                le groupe
+                L’utilisateur doit avoir un compte ProConnect pour rejoindre le
+                groupe
               </span>
             </label>
             <div className="fr-input-wrap">
