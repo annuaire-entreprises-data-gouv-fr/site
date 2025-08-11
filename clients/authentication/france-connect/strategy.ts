@@ -30,10 +30,10 @@ export const getClient = async () => {
     }
     const FranceConnectIssuer = new Issuer({
       issuer: ISSUER_URL,
-      authorization_endpoint: `${ISSUER_URL}/api/v1/authorize`,
-      token_endpoint: `${ISSUER_URL}/api/v1/token`,
-      userinfo_endpoint: `${ISSUER_URL}/api/v1/userinfo`,
-      end_session_endpoint: `${ISSUER_URL}/api/v1/logout`,
+      authorization_endpoint: `${ISSUER_URL}/api/v2/authorize`,
+      token_endpoint: `${ISSUER_URL}/api/v2/token`,
+      userinfo_endpoint: `${ISSUER_URL}/api/v2/userinfo`,
+      end_session_endpoint: `${ISSUER_URL}/api/v2/logout`,
     });
 
     _client = new FranceConnectIssuer.Client({
