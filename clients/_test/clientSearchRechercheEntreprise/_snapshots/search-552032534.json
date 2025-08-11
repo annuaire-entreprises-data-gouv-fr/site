@@ -166,7 +166,7 @@
         "dateCreation": "1955-01-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2025-06-18T13:32:51",
+        "dateMiseAJourInsee": "2025-07-24T17:33:15",
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -221,7 +221,7 @@
           ],
           "dateCloture": "3112",
           "isPersonneMorale": true,
-          "capital": "170 267 100,00 € (fixe)"
+          "capital": "170 348 620,75 € (fixe)"
         },
         "matchingEtablissements": [],
         "nombreEtablissements": 17,
@@ -302,8 +302,8 @@
           {
             "sexe": null,
             "nom": "PICAUD (ROAUX)",
-            "prenom": "Geraldine",
-            "prenoms": "Geraldine",
+            "prenom": "Géraldine",
+            "prenoms": "Géraldine",
             "role": "ADMINISTRATEUR",
             "nationalite": null,
             "dateNaissancePartial": "1970-02"
@@ -332,8 +332,8 @@
             "role": "COMMISSAIRE AUX COMPTES TITULAIRE"
           },
           {
-            "siren": "387953961",
-            "denomination": "MAZARS ET ASSOCIÉS",
+            "siren": "784824153",
+            "denomination": "FORVIS MAZARS SA",
             "role": "COMMISSAIRE AUX COMPTES TITULAIRE"
           }
         ]
