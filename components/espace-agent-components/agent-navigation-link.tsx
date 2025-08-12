@@ -6,9 +6,11 @@ import { usePathname } from 'next/navigation';
 export default function AgentNavigationLink({
   href,
   label,
+  isBeta = false,
 }: {
   href: string;
   label: string;
+  isBeta: boolean;
 }) {
   const pathname = usePathname();
 
@@ -20,6 +22,11 @@ export default function AgentNavigationLink({
       href={href}
     >
       {label}
+      {isBeta && (
+        <span className="fr-badge fr-ml-1w fr-badge--new fr-badge--sm">
+          Beta
+        </span>
+      )}
     </Link>
   );
 }
