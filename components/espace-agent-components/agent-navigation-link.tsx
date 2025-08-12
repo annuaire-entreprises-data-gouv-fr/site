@@ -21,12 +21,12 @@ export default function AgentNavigationLink({
       key={href}
       href={href}
     >
-      {label}
       {isBeta && (
-        <span className="fr-badge fr-ml-1w fr-badge--new fr-badge--sm">
+        <span className="fr-badge fr-mr-1w fr-badge--new fr-badge--sm">
           Beta
         </span>
       )}
+      {label}
     </Link>
   );
 }
