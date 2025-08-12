@@ -109,7 +109,7 @@ export default function AddUserModal({
               <strong>rôle d’utilisateur</strong>.
               <br />
               Vous pourrez ensuite le changer en{' '}
-              <strong>administrateur ou prestataire</strong>, si besoin.
+              <strong>administrateur</strong>, si besoin.
             </p>
           </div>
 
