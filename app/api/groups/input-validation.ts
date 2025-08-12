@@ -13,6 +13,11 @@ const groupIdValidator = z
     message: 'Group ID must be a positive integer',
   });
 
+const habilitationIdValidator = z
+  .number()
+  .int('Role ID must be an integer')
+  .positive('Role ID must be positive');
+
 const roleIdValidator = z
   .number()
   .int('Role ID must be an integer')
@@ -23,6 +28,11 @@ const groupNameValidator = z
   .min(1, 'Group name is required')
   .max(255, 'Group name must be less than 255 characters')
   .trim();
+
+export const validateSchema = z.object({
+  groupName: groupNameValidator,
+  habilitationId: habilitationIdValidator,
+});
 
 export const addUserSchema = z.object({
   userEmail: emailValidator,
