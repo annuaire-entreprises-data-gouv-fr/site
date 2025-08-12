@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const MesGroupesPage = async () => {
   const session = await getSession();
 
-  if (!session?.user || !session.user.isSuperAgent) {
+  if (!session?.user?.isSuperAgent) {
     return redirect('/compte/accueil');
   }
 
