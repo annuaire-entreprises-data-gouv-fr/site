@@ -2,6 +2,7 @@ import AgentNavigation from '#components/espace-agent-components/agent-navigatio
 import { GroupManagement } from '#components/espace-agent-components/group-management';
 import { Groups } from '#models/authentication/group/groups';
 import { rolesMetadataStore } from '#models/authentication/group/roles';
+import { isSuperAgent } from '#models/authentication/user/rights';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 const MesGroupesPage = async () => {
   const session = await getSession();
 
-  if (!session?.user || !session.user.isSuperAgent) {
+  if (!session?.user || !isSuperAgent(session)) {
     return redirect('/compte/accueil');
   }
 

@@ -74,3 +74,7 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
 export function isLoggedIn(session: ISession | null) {
   return getIAgentScope(session).length > 0;
 }
+
+export function isSuperAgent(session: ISession | null) {
+  return session?.user?.isSuperAgent ?? false;
+}
