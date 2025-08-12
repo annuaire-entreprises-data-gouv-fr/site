@@ -1,6 +1,8 @@
 'use client';
 
 import ButtonLink from '#components-ui/button';
+import httpClient from '#utils/network';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 
 export default function ValidateGroupForm() {
@@ -8,8 +10,31 @@ export default function ValidateGroupForm() {
   const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const searchParams = useSearchParams();
+  const habilitationId = searchParams?.get('habilitation-id');
+  const router = useRouter();
 
-  const handleUpdateName = () => {};
+  const handleUpdateName = async () => {
+    setLoading(true);
+    setValidationErrors([]);
+
+    try {
+      await httpClient({
+        url: `/api/groups/validate`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: JSON.stringify({ groupName, habilitationId }),
+      });
+      router.push('/compte/mes-groupes');
+    } catch (error: any) {
+      setValidationErrors([error.message || 'Une erreur est survenue']);
+      return;
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="fr-card">
