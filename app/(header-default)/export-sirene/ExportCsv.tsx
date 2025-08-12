@@ -182,7 +182,7 @@ export default function ExportCsv() {
         if (body.error) {
           throw new Error(
             body.error ||
-            'Une erreur est survenue, veuillez réessayer plus tard'
+              'Une erreur est survenue, veuillez réessayer plus tard'
           );
         }
       }
@@ -229,8 +229,16 @@ export default function ExportCsv() {
           sur le contenu des fichiers, consultez la{' '}
           <a href="https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret">
             documentation
+          </a>{' '}
+          et ce{' '}
+          <a href="https://guides.data.gouv.fr/reutiliser-des-donnees/guide-traitement-et-analyse-de-donnees/manipuler-des-donnees/ouvrir-des-donnees">
+            guide sur les fichiers CSV
           </a>
           .
+        </div>
+        <div>
+          Pour les unités en diffusion partielle (statut de diffusion = « P »),
+          certaines informations ne sont pas publiquement accessibles.
         </div>
       </div>
       <form onSubmit={handleCountSubmit}>
