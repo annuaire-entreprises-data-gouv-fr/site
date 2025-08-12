@@ -7,7 +7,6 @@ import { getAgentFullName } from '#models/authentication/user/helpers';
 import {
   ApplicationRights,
   hasRights,
-  isSuperAgent,
 } from '#models/authentication/user/rights';
 import constants from '#models/constants';
 import getSession from '#utils/server-side-helper/app/get-session';
@@ -37,7 +36,7 @@ const CompteAgentAccueil = async () => {
 
   return (
     <>
-      {isSuperAgent(session) && <AgentNavigation />}
+      {session?.user?.isSuperAgent && <AgentNavigation />}
       <FullWidthContainer
         style={{
           background: 'var(--annuaire-colors-espaceAgentPastel)',
