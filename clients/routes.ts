@@ -263,6 +263,14 @@ const routes = {
         `https://updown.io/api/checks/${slug}/downtimes`,
     },
   },
+  datapass: {
+    auth: {
+      token: '/oauth/token',
+    },
+    habilitations: {
+      getById: (id: string) => `/habilitations/${id}`,
+    },
+  },
   dRoles: {
     auth: {
       token: '/auth/token',
