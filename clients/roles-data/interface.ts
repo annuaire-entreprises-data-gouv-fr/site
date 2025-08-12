@@ -6,6 +6,16 @@ export type IDRolesUser = {
   is_admin: boolean;
 };
 
+export type IDrolesBodyCreateRequest = {
+  name: string;
+  organisation_siret: string;
+  admin: { email: string };
+  scopes: string;
+  contract_description: string;
+  contract_url?: string;
+  members?: { email: string }[];
+};
+
 export type IDRolesAuthTokenRequest = {
   client_id: string;
   client_secret: string;

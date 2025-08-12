@@ -4,6 +4,7 @@ import { InternalError } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { droleApiClient } from './client';
 import {
+  IDrolesBodyCreateRequest,
   IDRolesGroupSearchResponse,
   IDRolesRoles,
   IDRolesUser,
@@ -59,6 +60,17 @@ export const getUserByEmail = async (email: string): Promise<IDRolesUser> => {
   });
 };
 
+export const create = async (
+  body: IDrolesBodyCreateRequest,
+  actingUserSub: string
+): Promise<IDRolesGroup> => {
+  const route = routes.dRoles.groups.create(actingUserSub);
+  return await droleApiClient.fetch<IDRolesGroup>(route, {
+    method: 'POST',
+    data: body,
+  });
+};
+
 export const updateName = async (
   groupId: number,
   groupName: string,
@@ -73,6 +85,7 @@ export const updateName = async (
     method: 'PUT',
   });
 };
+
 export const addUserToGroup = async (
   groupId: number,
   email: string,
@@ -124,6 +137,7 @@ export default {
   getGroupsByEmail,
   getRolesMetadata,
   getUserByEmail,
+  create,
   updateName,
   addUserToGroup,
   updateUserFromGroup,

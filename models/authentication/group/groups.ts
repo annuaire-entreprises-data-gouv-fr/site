@@ -1,3 +1,4 @@
+import datapassClient from '#clients/datapass';
 import { HttpNotFound } from '#clients/exceptions';
 import droleClient from '#clients/roles-data';
 import { IDRolesUser } from '#clients/roles-data/interface';
@@ -33,12 +34,47 @@ export class Groups {
 
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'D-Roles Groups',
+          ressource: 'D-Roles Groups : find',
           cause: error,
         })
       );
 
       return [];
+    }
+  }
+
+  /**
+   * Validate a group
+   */
+  static async validateGroup(
+    habilitationId: number,
+    groupName: string,
+    userEmail: string,
+    userSub: string
+  ): Promise<IDRolesGroup> {
+    try {
+      const habilitation = await datapassClient.getHabilitation(habilitationId);
+
+      const body = {
+        name: groupName,
+        organisation_siret: habilitation.organization.siret,
+        admin: {
+          email: userEmail,
+        },
+        // TMP add scopes according to datapass
+        scopes: '',
+        contract_description: habilitation.definition_id,
+      };
+
+      return await droleClient.create(body, userSub);
+    } catch (error) {
+      logFatalErrorInSentry(
+        new FetchRessourceException({
+          ressource: 'D-Roles Groups : validateGroup',
+          cause: error,
+        })
+      );
+      throw error;
     }
   }
 }

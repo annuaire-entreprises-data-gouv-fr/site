@@ -6,8 +6,8 @@ import { IDatapassHabilitationResponse } from './interface';
  * Datapass
  * https://datapass.api.gouv.fr/
  */
-export const getGroupsByEmail = async (
-  habilitationId: string
+export const getHabilitation = async (
+  habilitationId: number
 ): Promise<IDatapassHabilitationResponse> => {
   const route = routes.datapass.habilitations.getById(habilitationId);
   const response = await datapassApiClient.fetch<IDatapassHabilitationResponse>(
@@ -26,5 +26,5 @@ const mapToDomainObject = (
 };
 
 export default {
-  getGroupsByEmail,
+  getHabilitation,
 };

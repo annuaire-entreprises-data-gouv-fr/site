@@ -268,7 +268,7 @@ const routes = {
       token: '/oauth/token',
     },
     habilitations: {
-      getById: (id: string) => `/habilitations/${id}`,
+      getById: (id: number) => `/habilitations/${id}`,
     },
   },
   dRoles: {
@@ -284,6 +284,8 @@ const routes = {
         `/groups/search?user_email=${encodeURIComponent(
           userEmail
         )}&user_sub=${userSub}`,
+      create: (actingUserSub: string) =>
+        `/groups?acting_user_sub=${actingUserSub}`,
       updateName: (groupId: number, groupName: string, actingUserSub: string) =>
         `/groups/${groupId}?group_name=${encodeURIComponent(
           groupName
