@@ -40,9 +40,15 @@ const ConfigurezVotreGroupe = async ({
           background: 'var(--annuaire-colors-espaceAgentPastel)',
         }}
       >
-        <div className="fr-grid-row fr-grid-row--gutters fr-mt-1w fr-mb-1w">
-          <div className="fr-col-12">
-            <ValidateGroupForm demandeId={demandeId} />
+        <div className="fr-mt-4w fr-mb-4w">
+          <div className="fr-card">
+            <div className="fr-card__body">
+              <div className="fr-card__content">
+                <div className="fr-grid-row fr-grid-row--gutters fr-mt-1w fr-mb-1w">
+                  <ValidateGroupForm demandeId={demandeId} />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </FullWidthContainer>
