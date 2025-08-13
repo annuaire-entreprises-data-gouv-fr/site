@@ -134,8 +134,8 @@ const exportCsvClient = new httpInseeClient(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID_EXPORT_CSV,
   process.env.INSEE_CLIENT_SECRET_EXPORT_CSV,
-  process.env.INSEE_USERNAME,
-  process.env.INSEE_PASSWORD
+  process.env.INSEE_USERNAME_EXPORT_CSV,
+  process.env.INSEE_PASSWORD_EXPORT_CSV
 );
 
 /**
