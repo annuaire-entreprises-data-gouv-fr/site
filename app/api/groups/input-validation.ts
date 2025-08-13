@@ -13,7 +13,7 @@ const groupIdValidator = z
     message: 'Group ID must be a positive integer',
   });
 
-const habilitationIdValidator = z
+const demandeIdValidator = z
   .number()
   .int('Role ID must be an integer')
   .positive('Role ID must be positive');
@@ -31,7 +31,7 @@ const groupNameValidator = z
 
 export const validateSchema = z.object({
   groupName: groupNameValidator,
-  habilitationId: habilitationIdValidator,
+  demandeId: demandeIdValidator,
 });
 
 export const addUserSchema = z.object({

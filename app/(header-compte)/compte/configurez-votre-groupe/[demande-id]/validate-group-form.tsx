@@ -11,7 +11,7 @@ export default function ValidateGroupForm() {
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const searchParams = useSearchParams();
-  const habilitationId = searchParams?.get('habilitation-id');
+  const demandeId = searchParams?.get('demande-id');
   const router = useRouter();
 
   const handleUpdateName = async () => {
@@ -25,7 +25,7 @@ export default function ValidateGroupForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        data: JSON.stringify({ groupName, habilitationId }),
+        data: JSON.stringify({ groupName, demandeId }),
       });
       router.push('/compte/mes-groupes');
     } catch (error: any) {
@@ -40,7 +40,7 @@ export default function ValidateGroupForm() {
     <div className="fr-card">
       <div className="fr-card__body">
         <div className="fr-card__content">
-          <strong className="fr-card__title">Configurez vos droits</strong>
+          <strong className="fr-card__title">Configurez votre groupe</strong>
           <p className="fr-card__desc">
             L‘habilitation liée à votre mission temptemp est validée !
           </p>

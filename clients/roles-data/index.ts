@@ -6,8 +6,8 @@ import { droleApiClient } from './client';
 import {
   IDrolesBodyCreateRequest,
   IDRolesGetGroupsResponse,
-  IDRolesGroupSearchResponse,
   IDRolesRoles,
+  IDRolesSearchGroupsResponse,
   IDRolesUser,
 } from './interface';
 import { parseAgentScopes } from './parse';
@@ -21,7 +21,7 @@ export const getGroupsByEmail = async (
   userSub: string
 ): Promise<IDRolesGroup[]> => {
   const route = routes.dRoles.groups.getGroupsByEmail(userEmail, userSub);
-  const response = await droleApiClient.fetch<IDRolesGroupSearchResponse>(
+  const response = await droleApiClient.fetch<IDRolesSearchGroupsResponse>(
     route,
     {
       method: 'GET',
@@ -31,7 +31,7 @@ export const getGroupsByEmail = async (
 };
 
 const mapToDomainObject = (
-  response: IDRolesGroupSearchResponse
+  response: IDRolesSearchGroupsResponse
 ): IDRolesGroup[] => {
   return response.map((group) => {
     const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
@@ -51,13 +51,13 @@ const mapToDomainObject = (
 
 export const getGroupByContractUrl = async (
   contractUrl: string
-): Promise<IDRolesGetGroupsResponse | null> => {
+): Promise<IDRolesGetGroupsResponse> => {
   const route = routes.dRoles.groups.getGroups;
   const response = await droleApiClient.fetch<IDRolesGetGroupsResponse>(route, {
     method: 'GET',
   });
 
-  return response.filter((group) => group.contract_url !== contractUrl);
+  return response.filter((group) => group.contract_url === contractUrl);
 };
 
 export const getRolesMetadata = async (): Promise<IDRolesRoles[]> => {

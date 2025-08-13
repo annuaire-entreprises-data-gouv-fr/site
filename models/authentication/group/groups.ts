@@ -66,9 +66,9 @@ export class Groups {
         });
       }
 
-      const group = await droleClient.getGroupByContractUrl(contractUrl);
+      const groups = await droleClient.getGroupByContractUrl(contractUrl);
 
-      if (group) {
+      if (groups.length >= 1) {
         throw new FetchRessourceException({
           ressource: 'D-Roles Groups : validateGroup',
           cause: new Error('A group has already been created for this demande'),

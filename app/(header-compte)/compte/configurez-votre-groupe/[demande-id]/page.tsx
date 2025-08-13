@@ -10,15 +10,15 @@ import { redirect } from 'next/navigation';
 import ValidateGroupForm from './validate-group-form';
 
 export const metadata: Metadata = {
-  title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
+  title: 'Configurez votre groupe pour l’Annuaire des Entreprises',
   alternates: {
     canonical:
-      'https://annuaire-entreprises.data.gouv.fr/compte/configurerz-vos-droits',
+      'https://annuaire-entreprises.data.gouv.fr/compte/configurez-votre-groupe',
   },
   robots: 'noindex, nofollow',
 };
 
-const CompteAgentAccueil = async () => {
+const ConfigurezVotreGroupe = async () => {
   const session = await getSession();
 
   if (!hasRights(session, ApplicationRights.isAgent)) {
@@ -45,4 +45,4 @@ const CompteAgentAccueil = async () => {
   );
 };
 
-export default CompteAgentAccueil;
+export default ConfigurezVotreGroupe;

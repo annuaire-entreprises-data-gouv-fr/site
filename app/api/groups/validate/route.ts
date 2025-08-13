@@ -11,7 +11,7 @@ async function validateHandler(request: Request) {
   const validatedData = validateSchema.parse(body);
 
   const group = await Groups.validateGroup(
-    validatedData.habilitationId,
+    validatedData.demandeId,
     validatedData.groupName,
     session!.user!.email,
     session!.user!.proConnectSub
