@@ -2,7 +2,7 @@
 
 import ButtonLink from '#components-ui/button';
 import httpClient from '#utils/network';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 
 export default function ValidateGroupForm({
@@ -14,7 +14,6 @@ export default function ValidateGroupForm({
   const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   const handleValidateGroup = async () => {
