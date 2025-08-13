@@ -11,10 +11,11 @@ async function validateHandler(request: Request) {
   const validatedData = validateSchema.parse(body);
 
   const group = await Groups.validateGroup(
+    session!.user!.email,
+    session!.user!.proConnectSub,
     validatedData.demandeId,
     validatedData.groupName,
-    session!.user!.email,
-    session!.user!.proConnectSub
+    validatedData.emails
   );
 
   return NextResponse.json(group);

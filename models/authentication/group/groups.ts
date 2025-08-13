@@ -47,10 +47,11 @@ export class Groups {
    * Validate a group
    */
   static async validateGroup(
+    userEmail: string,
+    userSub: string,
     demandeId: number,
     groupName: string,
-    userEmail: string,
-    userSub: string
+    emails?: string[]
   ): Promise<IDRolesGroup> {
     try {
       const demande = await datapassClient.getDemande(demandeId);
@@ -92,6 +93,9 @@ export class Groups {
         scopes: '',
         contract_url: contractUrl,
         contract_description: demande.definition_id,
+        members: emails?.map((email) => ({
+          email,
+        })),
       };
 
       return await droleClient.create(body, userSub);

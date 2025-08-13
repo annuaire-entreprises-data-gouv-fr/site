@@ -32,9 +32,16 @@ const groupNameValidator = z
   .max(255, 'Group name must be less than 255 characters')
   .trim();
 
+const emailsValidator = z
+  .string()
+  .transform((value) => value.split(','))
+  .pipe(emailValidator.array())
+  .optional();
+
 export const validateSchema = z.object({
   groupName: groupNameValidator,
   demandeId: demandeIdValidator,
+  emails: emailsValidator,
 });
 
 export const addUserSchema = z.object({
