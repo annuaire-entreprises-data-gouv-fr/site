@@ -31,6 +31,24 @@ export const clientSireneInsee = async (params: ExportCsvInput) => {
   return (await response) as string;
 };
 
+export const clientSireneInseeStream = async (params: ExportCsvInput) => {
+  const queryBuilder = new SireneQueryBuilder(params);
+  const url = `${routes.sireneInsee.listEtablissements}?q=${encodeURIComponent(
+    queryBuilder.build()
+  )}&nombre=200000&noLink=true`;
+
+  const stream = await exportCsvClientGet(url, {
+    headers: {
+      Accept: 'text/csv',
+      'Accept-Encoding': 'gzip',
+    },
+    responseType: 'stream',
+    timeout: constants.timeout.XXXL,
+  });
+
+  return stream as NodeJS.ReadableStream;
+};
+
 export interface ISireneInseeCount {
   header: {
     statut: number;
