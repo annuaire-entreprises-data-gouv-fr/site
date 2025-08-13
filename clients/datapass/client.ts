@@ -26,7 +26,7 @@ class DatapassAPIClient {
 
   private newToken = async () => {
     try {
-      const url = `${process.env.DATAPASS_URL}${routes.datapass.auth.token}`;
+      const url = `${process.env.DATAPASS_URL}/api/v1${routes.datapass.auth.token}`;
 
       const data = await httpClient<IDRolesAuthTokenResponse>({
         url,
@@ -74,7 +74,7 @@ class DatapassAPIClient {
     config: IDefaultRequestConfig
   ): Promise<T> => {
     const token = await this.getToken();
-    const url = `${process.env.DATAPASS_URL}${route}`;
+    const url = `${process.env.DATAPASS_URL}/api/v1${route}`;
 
     return httpClient<T>({
       url,
@@ -89,8 +89,8 @@ class DatapassAPIClient {
 }
 
 const datapassApiClient = new DatapassAPIClient(
-  process.env.D_ROLES_CLIENT_ID,
-  process.env.D_ROLES_CLIENT_SECRET
+  process.env.DATAPASS_CLIENT_ID,
+  process.env.DATAPASS_CLIENT_SECRET
 );
 
 export { datapassApiClient };

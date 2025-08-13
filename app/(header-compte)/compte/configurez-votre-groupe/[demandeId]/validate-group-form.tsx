@@ -5,16 +5,19 @@ import httpClient from '#utils/network';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 
-export default function ValidateGroupForm() {
+export default function ValidateGroupForm({
+  demandeId,
+}: {
+  demandeId: string;
+}) {
   const [groupName, setGroupName] = useState('');
   const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const searchParams = useSearchParams();
-  const demandeId = searchParams?.get('demande-id');
   const router = useRouter();
 
-  const handleUpdateName = async () => {
+  const handleValidateGroup = async () => {
     setLoading(true);
     setValidationErrors([]);
 
@@ -75,7 +78,7 @@ export default function ValidateGroupForm() {
                 }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && groupName?.trim() && !loading) {
-                    handleUpdateName();
+                    handleValidateGroup();
                   }
                 }}
                 disabled={loading}
@@ -88,7 +91,7 @@ export default function ValidateGroupForm() {
           </div>
           <ul className="fr-card__desc fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
             <li>
-              <ButtonLink alt onClick={() => {}}>
+              <ButtonLink alt onClick={handleValidateGroup} disabled={loading}>
                 Continuer sans ajouter de membre
               </ButtonLink>
             </li>

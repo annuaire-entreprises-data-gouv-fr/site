@@ -55,9 +55,16 @@ export class Groups {
     try {
       const demande = await datapassClient.getDemande(demandeId);
 
-      const contractUrl = `https://staging.datapass.api.gouv.fr/instruction/demandes/${demandeId}`;
+      if (demande.state !== 'validated') {
+        throw new FetchRessourceException({
+          ressource: 'D-Roles Groups : validateGroup',
+          cause: new Error('Demande is not validated'),
+        });
+      }
 
-      if (userEmail !== demande.applicant.email) {
+      const contractUrl = `${process.env.DATAPASS_URL}/instruction/demandes/${demandeId}`;
+
+      if (userEmail !== demande.applicant?.email) {
         throw new FetchRessourceException({
           ressource: 'D-Roles Groups : validateGroup',
           cause: new Error(
@@ -77,7 +84,7 @@ export class Groups {
 
       const body = {
         name: groupName,
-        organisation_siret: demande.organization.siret,
+        organisation_siret: demande.organisation?.siret,
         admin: {
           email: userEmail,
         },

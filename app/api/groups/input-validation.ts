@@ -14,9 +14,12 @@ const groupIdValidator = z
   });
 
 const demandeIdValidator = z
-  .number()
-  .int('Role ID must be an integer')
-  .positive('Role ID must be positive');
+  .string()
+  .regex(/^\d+$/, 'Demande ID must be a number')
+  .transform((val) => parseInt(val, 10))
+  .refine((val) => Number.isInteger(val) && val > 0, {
+    message: 'Demande ID must be a positive integer',
+  });
 
 const roleIdValidator = z
   .number()

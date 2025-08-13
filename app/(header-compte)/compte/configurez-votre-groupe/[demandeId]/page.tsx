@@ -18,8 +18,13 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow',
 };
 
-const ConfigurezVotreGroupe = async () => {
+const ConfigurezVotreGroupe = async ({
+  params,
+}: {
+  params: Promise<{ demandeId: string }>;
+}) => {
   const session = await getSession();
+  const { demandeId } = await params;
 
   if (!hasRights(session, ApplicationRights.isAgent)) {
     return redirect('/lp/agent-public');
@@ -37,7 +42,7 @@ const ConfigurezVotreGroupe = async () => {
       >
         <div className="fr-grid-row fr-grid-row--gutters fr-mt-1w fr-mb-1w">
           <div className="fr-col-12">
-            <ValidateGroupForm />
+            <ValidateGroupForm demandeId={demandeId} />
           </div>
         </div>
       </FullWidthContainer>

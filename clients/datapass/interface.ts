@@ -20,7 +20,7 @@ export type IDatapassHabilitationResponse = {
   data: any;
   definition_id: string;
   request_id: string;
-  organization: {
+  organisation: {
     id: string;
     siret: string;
     name: string;
@@ -47,7 +47,7 @@ export type IDatapassDemandeResponse = {
   last_validated_at: string;
   reopening: boolean;
   reopened_at: string;
-  organization: {
+  organisation: {
     id: string;
     siret: string;
     name: string;
