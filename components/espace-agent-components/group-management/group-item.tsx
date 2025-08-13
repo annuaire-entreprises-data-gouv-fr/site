@@ -1,6 +1,7 @@
 import { IDRolesRoles, IDRolesUser } from '#clients/roles-data/interface';
 import { FullTable } from '#components/table/full';
 import { IDRolesGroup } from '#models/authentication/group/groups';
+import { pluralize } from '#utils/helpers';
 import { Fragment, useMemo } from 'react';
 import AddUserModal from './update-modals/add-user';
 import DeleteUserButton from './update-modals/delete-user';
@@ -83,10 +84,12 @@ export function GroupItem({
               )}
             </div>
             <p>
-              Ce groupe contient {group.users.length} membres
+              Ce groupe contient {group.users.length} membre
+              {pluralize(group.users)}
               {group.contract_description ? (
                 <>
-                  {' '}et possède le contrat{' '}
+                  {' '}
+                  et possède le contrat{' '}
                   <strong>{group.contract_description}</strong>
                 </>
               ) : null}
