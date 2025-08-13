@@ -28,7 +28,7 @@ export type IDRolesAuthTokenResponse = {
   expires_in: number;
 };
 
-export type IDRolesGroupResponse = {
+export type IDRolesSearchGroups = {
   name: string;
   id: number;
   organisation_siret: string;
@@ -44,4 +44,14 @@ export type IDRolesRoles = {
   id: number;
 };
 
-export type IDRolesGroupSearchResponse = IDRolesGroupResponse[];
+export type IDRolesSearchGroupsResponse = IDRolesSearchGroups[];
+
+export type IDRolesGetGroups = {
+  id: string;
+  name: string;
+  scopes: string;
+  contract_url: string;
+  contract_description: string;
+};
+
+export type IDRolesGetGroupsResponse = IDRolesGetGroups[];

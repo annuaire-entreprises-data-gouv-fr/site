@@ -270,6 +270,9 @@ const routes = {
     habilitations: {
       getById: (id: number) => `/habilitations/${id}`,
     },
+    demandes: {
+      getById: (id: number) => `/demandes/${id}`,
+    },
   },
   dRoles: {
     auth: {
@@ -280,6 +283,7 @@ const routes = {
         `/users/search?email=${encodeURIComponent(email)}`,
     },
     groups: {
+      getGroups: '/groups/',
       getGroupsByEmail: (userEmail: string, userSub: string) =>
         `/groups/search?user_email=${encodeURIComponent(
           userEmail

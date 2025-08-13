@@ -47,23 +47,44 @@ export class Groups {
    * Validate a group
    */
   static async validateGroup(
-    habilitationId: number,
+    demandeId: number,
     groupName: string,
     userEmail: string,
     userSub: string
   ): Promise<IDRolesGroup> {
     try {
-      const habilitation = await datapassClient.getHabilitation(habilitationId);
+      const demande = await datapassClient.getDemande(demandeId);
+
+      const contractUrl = `https://staging.datapass.api.gouv.fr/instruction/demandes/${demandeId}`;
+
+      if (userEmail !== demande.applicant.email) {
+        throw new FetchRessourceException({
+          ressource: 'D-Roles Groups : validateGroup',
+          cause: new Error(
+            'User email does not match the applicant email in the demande'
+          ),
+        });
+      }
+
+      const group = await droleClient.getGroupByContractUrl(contractUrl);
+
+      if (group) {
+        throw new FetchRessourceException({
+          ressource: 'D-Roles Groups : validateGroup',
+          cause: new Error('A group has already been created for this demande'),
+        });
+      }
 
       const body = {
         name: groupName,
-        organisation_siret: habilitation.organization.siret,
+        organisation_siret: demande.organization.siret,
         admin: {
           email: userEmail,
         },
         // TMP add scopes according to datapass
         scopes: '',
-        contract_description: habilitation.definition_id,
+        contract_url: contractUrl,
+        contract_description: demande.definition_id,
       };
 
       return await droleClient.create(body, userSub);

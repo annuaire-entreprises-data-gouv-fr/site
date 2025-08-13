@@ -5,6 +5,7 @@ import logErrorInSentry from '#utils/sentry';
 import { droleApiClient } from './client';
 import {
   IDrolesBodyCreateRequest,
+  IDRolesGetGroupsResponse,
   IDRolesGroupSearchResponse,
   IDRolesRoles,
   IDRolesUser,
@@ -46,6 +47,17 @@ const mapToDomainObject = (
       scopes: validScopes,
     };
   });
+};
+
+export const getGroupByContractUrl = async (
+  contractUrl: string
+): Promise<IDRolesGetGroupsResponse | null> => {
+  const route = routes.dRoles.groups.getGroups;
+  const response = await droleApiClient.fetch<IDRolesGetGroupsResponse>(route, {
+    method: 'GET',
+  });
+
+  return response.filter((group) => group.contract_url !== contractUrl);
 };
 
 export const getRolesMetadata = async (): Promise<IDRolesRoles[]> => {
@@ -135,6 +147,7 @@ export const removeUserFromGroup = async (
 
 export default {
   getGroupsByEmail,
+  getGroupByContractUrl,
   getRolesMetadata,
   getUserByEmail,
   create,

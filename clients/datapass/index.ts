@@ -1,6 +1,9 @@
 import routes from '#clients/routes';
 import { datapassApiClient } from './client';
-import { IDatapassHabilitationResponse } from './interface';
+import {
+  IDatapassDemandeResponse,
+  IDatapassHabilitationResponse,
+} from './interface';
 
 /**
  * Datapass
@@ -16,15 +19,23 @@ export const getHabilitation = async (
       method: 'GET',
     }
   );
-  return mapToDomainObject(response);
+  return response;
 };
 
-const mapToDomainObject = (
-  response: IDatapassHabilitationResponse
-): IDatapassHabilitationResponse => {
+export const getDemande = async (
+  demandeId: number
+): Promise<IDatapassDemandeResponse> => {
+  const route = routes.datapass.demandes.getById(demandeId);
+  const response = await datapassApiClient.fetch<IDatapassDemandeResponse>(
+    route,
+    {
+      method: 'GET',
+    }
+  );
   return response;
 };
 
 export default {
   getHabilitation,
+  getDemande,
 };
