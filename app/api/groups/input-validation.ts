@@ -34,8 +34,11 @@ const groupNameValidator = z
 
 const emailsValidator = z
   .string()
-  .transform((value) => value.split(','))
-  .pipe(emailValidator.array())
+  .transform((value) => {
+    if (value.trim() === '') return [];
+    return value.split(',').filter((email) => email.trim() !== '');
+  })
+  .pipe(z.array(z.string().email('Must be a valid email address')).min(0))
   .optional();
 
 export const validateSchema = z.object({
