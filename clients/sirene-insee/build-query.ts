@@ -189,26 +189,22 @@ export class SireneQueryBuilder {
     const allCodesCommunes = new Set<string>();
     const allCodesPostaux = new Set<string>();
 
-    // Add codes postaux
     if (location.codesPostaux?.length) {
       location.codesPostaux.forEach((codePostal) => {
         allCodesPostaux.add(codePostal);
       });
     }
 
-    // Add codes insee
     if (location.codesInsee?.length) {
       location.codesInsee.forEach((codeInsee) => {
         allCodesCommunes.add(codeInsee);
       });
     }
 
-    // Add departments with wildcard
     if (location.departments?.length) {
       location.departments.forEach((dept) => allCodesCommunes.add(`${dept}*`));
     }
 
-    // Add regions by expanding to their departments with wildcard
     if (location.regions?.length) {
       location.regions.forEach((region) => {
         const regionData = regions.find((r) => r.code === region);
@@ -245,16 +241,12 @@ export class SireneQueryBuilder {
 
     const allLevels = new Set<string>();
 
-    // Add sous-classes with dot after 2nd character
-
-    // Add groupes with dot after 2nd character and wildcard
     if (naf?.length) {
       naf.forEach((naf) => {
         allLevels.add(naf);
       });
     }
 
-    // Add sections by expanding to their divisions with wildcard
     if (sap?.length) {
       sap.forEach((sap) => {
         niv1ToNiv5Mapping[sap].forEach((naf) => {
@@ -263,7 +255,6 @@ export class SireneQueryBuilder {
       });
     }
 
-    // If we're looking for headquarters, use activitePrincipaleUniteLegale instead
     const field = isHq
       ? 'activitePrincipaleUniteLegale'
       : 'activitePrincipaleEtablissement';
@@ -273,7 +264,6 @@ export class SireneQueryBuilder {
       .join(' OR ');
 
     if (!isHq) {
-      // Add period condition for non-headquarters
       this.conditions.push(`periode(-dateFin:* AND (${activityConditions}))`);
     } else {
       this.conditions.push(`(${activityConditions})`);
@@ -282,7 +272,6 @@ export class SireneQueryBuilder {
 
   private buildQuery = (params: ExportCsvInput) => {
     // Etat administratif de l'établissement
-    // Ligne 668
     if (params.activity === 'active') {
       this.conditions.push(
         'periode(-dateFin:* AND etatAdministratifEtablissement:A)'
@@ -294,13 +283,11 @@ export class SireneQueryBuilder {
     }
 
     // Type d'établissement
-    // Ligne 684
     if (params.legalUnit === 'hq') {
       this.conditions.push('etablissementSiege:true');
     }
 
     // Localisation
-    // Ligne 982
     if (params.location) {
       this.addLocationConditions(params.location);
     }
@@ -315,19 +302,16 @@ export class SireneQueryBuilder {
     }
 
     // Catégorie juridique
-    // Ligne 955
     if (params.legalCategories) {
       this.addLegalCategoryConditions(params.legalCategories);
     }
 
     // Tranche d'effectifs
-    // Ligne 928
     if (params.headcount) {
       this.addEffectifConditions(params.headcount);
     }
 
     // Date de création
-    // Ligne 891
     if (params.creationDate?.from || params.creationDate?.to) {
       this.addDateCreationConditions(
         params.creationDate,
@@ -336,37 +320,31 @@ export class SireneQueryBuilder {
     }
 
     // Date de mise à jour
-    // Ligne 861
     if (params.updateDate?.from || params.updateDate?.to) {
       this.addDateMajConditions(params.updateDate, params.legalUnit === 'hq');
     }
 
     // Sirets et Sirens
-    // Ligne 808
     if (params.siretsAndSirens) {
       this.addSirenSiretConditions(params.siretsAndSirens);
     }
 
     // Catégorie d'entreprise
-    // Ligne 784
     if (params.categories) {
       this.addCategoryConditions(params.categories);
     }
 
     // Filtre ESS
-    // Ligne 744
     if (params.ess) {
       this.addESSConditions(params.ess, 'ess');
     }
 
     // Filtre société à mission
-    // Ligne 744
     if (params.mission) {
       this.addESSConditions(params.mission, 'mission');
     }
 
     // Retirer les établissements non diffusibles
-    // Ligne 715
     this.conditions.push(
       '(statutDiffusionEtablissement:O OR statutDiffusionEtablissement:P)'
     );
