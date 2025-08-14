@@ -2,6 +2,7 @@ import FullWidthContainer from '#components-ui/container';
 import {
   ApplicationRights,
   hasRights,
+  isLoggedIn,
 } from '#models/authentication/user/rights';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
@@ -24,6 +25,12 @@ const ConfigurezVotreGroupe = async ({
 }) => {
   const session = await getSession();
   const { demandeId } = await params;
+
+  if (!isLoggedIn(session)) {
+    return redirect(
+      `/api/auth/agent-connect/login?pathFrom=/compte/configurez-votre-groupe/${demandeId}`
+    );
+  }
 
   if (!hasRights(session, ApplicationRights.isAgent)) {
     return redirect('/lp/agent-public');
