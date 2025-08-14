@@ -191,9 +191,9 @@
           "duree": 99,
           "dateFin": "12/12/2104",
           "natureEntreprise": [
+            "Gestion de biens",
             "Commerciale",
-            "Artisanale non réglementée",
-            "Gestion de biens"
+            "Artisanale non réglementée"
           ],
           "dateCloture": "3112",
           "isPersonneMorale": true,
@@ -208,7 +208,7 @@
             "nom": "POUYANNE (POUYANNE)",
             "prenom": "David",
             "prenoms": "David, Jean, Claude",
-            "role": "",
+            "role": "GERANT",
             "nationalite": null,
             "dateNaissancePartial": "1965-10"
           },
