@@ -4,14 +4,9 @@ import ButtonLink from '#components-ui/button';
 import { validateGroupName } from '#components/espace-agent-components/group-management/update-modals/form-validation';
 import { showErrorNotification } from '#components/notification-center';
 import { IDRolesGroup } from '#models/authentication/group/groups';
-import {
-  ApplicationRights,
-  hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
 import httpClient from '#utils/network';
-import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
+import FinalStep from './FinalStep';
 
 export default function ValidateGroupForm({
   demandeId,
@@ -25,7 +20,6 @@ export default function ValidateGroupForm({
   const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   const handleAddMembers = () => {
     const groupName = inputGroupName.trim();
@@ -77,46 +71,7 @@ export default function ValidateGroupForm({
   };
 
   if (newGroup) {
-    return (
-      <>
-        <div className="fr-col-4">
-          <img src="/images/compte/your-scopes.svg" alt="" height="280px" />
-        </div>
-        <div className="fr-col-8">
-          <strong className="fr-card__title">
-            Découvrez vos nouveaux droits
-          </strong>
-          <p className="fr-card__desc">
-            Voilà les nouvelles données qui vous aideront à mener à bien votre
-            mission :
-            <ul>
-              {Object.entries(ApplicationRights)
-                .map(([key, value]) => {
-                  if (
-                    hasRights(
-                      { user: { scopes: newGroup.scopes } } as ISession,
-                      value
-                    )
-                  ) {
-                    return <li key={key}>{value}</li>;
-                  }
-                  return null;
-                })
-                .filter((e) => Boolean(e))}
-            </ul>
-          </p>
-
-          <ButtonLink
-            onClick={() => {
-              router.replace('/compte/accueil');
-            }}
-            disabled={loading}
-          >
-            Terminer
-          </ButtonLink>
-        </div>
-      </>
-    );
+    return <FinalStep newGroup={newGroup} />;
   }
 
   if (addMembers) {
