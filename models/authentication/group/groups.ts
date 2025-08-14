@@ -2,7 +2,13 @@ import datapassClient from '#clients/datapass';
 import { HttpNotFound } from '#clients/exceptions';
 import droleClient from '#clients/roles-data';
 import { IDRolesUser } from '#clients/roles-data/interface';
-import { IAgentScope } from '#models/authentication/agent/scopes/constants';
+import {
+  aidesPubliquesScopes,
+  IAgentScope,
+  lutteContreLaFraudeScopes,
+  marchePublicScopes,
+  subventionsAssociationsScopes,
+} from '#models/authentication/agent/scopes/constants';
 import { FetchRessourceException } from '#models/exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
 
@@ -63,8 +69,6 @@ export class Groups {
         });
       }
 
-      const contractUrl = `${process.env.DATAPASS_URL}/instruction/demandes/${demandeId}`;
-
       if (userEmail !== demande.applicant?.email) {
         throw new FetchRessourceException({
           ressource: 'D-Roles Groups : validateGroup',
@@ -74,6 +78,7 @@ export class Groups {
         });
       }
 
+      const contractUrl = `${process.env.DATAPASS_URL}/instruction/demandes/${demandeId}`;
       const groups = await droleClient.getGroupByContractUrl(contractUrl);
 
       if (groups.length >= 1) {
@@ -83,14 +88,29 @@ export class Groups {
         });
       }
 
+      const formUid = demande.form_uid;
+      let scopesArray: string[] = [];
+      if (formUid === 'annuaire-des-entreprises-marches-publics') {
+        scopesArray = marchePublicScopes;
+      } else if (formUid === 'annuaire-des-entreprises-aides-publiques') {
+        scopesArray = aidesPubliquesScopes;
+      } else if (
+        formUid === 'annuaire-des-entreprises-lutte-contre-la-fraude'
+      ) {
+        scopesArray = lutteContreLaFraudeScopes;
+      } else if (
+        formUid === 'annuaire-des-entreprises-subventions-associations'
+      ) {
+        scopesArray = subventionsAssociationsScopes;
+      }
+
       const body = {
         name: groupName,
         organisation_siret: demande.organisation?.siret,
         admin: {
           email: userEmail,
         },
-        // TMP add scopes according to datapass
-        scopes: '',
+        scopes: scopesArray.join(','),
         contract_url: contractUrl,
         contract_description: demande.definition_id,
         members: emails?.map((email) => ({

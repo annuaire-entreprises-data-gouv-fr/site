@@ -22,3 +22,28 @@ export const allAgentScopes = [
   'liasses_fiscales',
   'liens_capitalistiques',
 ] as const;
+
+export const marchePublicScopes = [
+  'liens_capitalistiques',
+  'beneficiaires',
+  'conformite',
+  'travaux_publics',
+];
+
+export const aidesPubliquesScopes = [
+  'liens_capitalistiques',
+  'beneficiaires',
+  'conformite',
+  'travaux_publics',
+];
+
+export const lutteContreLaFraudeScopes = [
+  'liens_capitalistiques',
+  'beneficiaires',
+  'conformite',
+  'travaux_publics',
+  'bilans_bdf',
+  'liasses_fiscales',
+];
+
+export const subventionsAssociationsScopes = [];
