@@ -4,7 +4,7 @@ import React from 'react';
 export const UniteLegaleEtablissementCountDescription: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const { nombreEtablissements, nombreEtablissementsOuverts } =
+  const { nombreEtablissements, nombreEtablissementsOuverts, usePagination } =
     uniteLegale.etablissements;
 
   const hasOpenEtablissements = nombreEtablissementsOuverts > 0;
@@ -18,6 +18,7 @@ export const UniteLegaleEtablissementCountDescription: React.FC<{
         {nombreEtablissements} établissement{plural}
       </a>
       {hasOpenEtablissements &&
+        !(usePagination && uniteLegale.onlyFromInsee) &&
         nombreEtablissements !== nombreEtablissementsOuverts && (
           <strong>
             {' '}
