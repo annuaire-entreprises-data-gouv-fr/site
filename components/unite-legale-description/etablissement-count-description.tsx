@@ -18,7 +18,7 @@ export const UniteLegaleEtablissementCountDescription: React.FC<{
         {nombreEtablissements} établissement{plural}
       </a>
       {hasOpenEtablissements &&
-        !(usePagination && uniteLegale.onlyFromInsee) &&
+        (!usePagination || uniteLegale.isNbEtablissementOuvertReliable) &&
         nombreEtablissements !== nombreEtablissementsOuverts && (
           <strong>
             {' '}

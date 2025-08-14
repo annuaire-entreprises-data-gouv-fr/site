@@ -121,7 +121,7 @@ export interface IUniteLegale extends IEtablissementsList {
     codeColter: string | null;
   };
   listeIdcc: { idcc: string; title: string }[];
-  onlyFromInsee?: boolean;
+  isNbEtablissementOuvertReliable: boolean;
 }
 
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
@@ -162,6 +162,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     },
     listeIdcc: [],
     immatriculation: null,
+    isNbEtablissementOuvertReliable: true,
   };
 };
 

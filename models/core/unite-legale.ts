@@ -202,7 +202,7 @@ class UniteLegaleBuilder {
             },
           })
         );
-        return { ...uniteLegaleInsee, onlyFromInsee: true };
+        return uniteLegaleInsee;
       }
     }
 
