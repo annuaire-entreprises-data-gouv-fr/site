@@ -3,6 +3,12 @@
 import ButtonLink from '#components-ui/button';
 import { validateGroupName } from '#components/espace-agent-components/group-management/update-modals/form-validation';
 import { showErrorNotification } from '#components/notification-center';
+import { IDRolesGroup } from '#models/authentication/group/groups';
+import {
+  ApplicationRights,
+  hasRights,
+} from '#models/authentication/user/rights';
+import { ISession } from '#models/authentication/user/session';
 import httpClient from '#utils/network';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
@@ -12,10 +18,10 @@ export default function ValidateGroupForm({
 }: {
   demandeId: string;
 }) {
+  const [newGroup, setNewGroup] = useState<IDRolesGroup | null>(null);
   const [inputGroupName, setInputGroupName] = useState('');
   const [emails, setEmails] = useState('');
   const [addMembers, setAddMembers] = useState(false);
-  const [finalStep, setFinalStep] = useState(false);
   const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -53,7 +59,7 @@ export default function ValidateGroupForm({
         return;
       }
 
-      await httpClient({
+      const result = await httpClient<IDRolesGroup>({
         url: `/api/groups/validate`,
         method: 'POST',
         headers: {
@@ -61,7 +67,7 @@ export default function ValidateGroupForm({
         },
         data: JSON.stringify({ groupName, demandeId, emails }),
       });
-      setFinalStep(true);
+      setNewGroup(result);
     } catch (error: any) {
       setValidationErrors([error.message || 'Une erreur est survenue']);
       return;
@@ -70,7 +76,7 @@ export default function ValidateGroupForm({
     }
   };
 
-  if (finalStep) {
+  if (newGroup) {
     return (
       <>
         <div className="fr-col-4">
@@ -82,16 +88,27 @@ export default function ValidateGroupForm({
           </strong>
           <p className="fr-card__desc">
             Voilà les nouvelles données qui vous aideront à mener à bien votre
-            mission <b>XXXX</b> :
+            mission :
             <ul>
-              <li>YYYY</li>
-              <li>ZZZZ</li>
+              {Object.entries(ApplicationRights)
+                .map(([key, value]) => {
+                  if (
+                    hasRights(
+                      { user: { scopes: newGroup.scopes } } as ISession,
+                      value
+                    )
+                  ) {
+                    return <li key={key}>{value}</li>;
+                  }
+                  return null;
+                })
+                .filter((e) => Boolean(e))}
             </ul>
           </p>
 
           <ButtonLink
             onClick={() => {
-              router.push('/compte/accueil');
+              router.replace('/compte/accueil');
             }}
             disabled={loading}
           >
@@ -176,7 +193,7 @@ export default function ValidateGroupForm({
       <div className="fr-col-8">
         <strong className="fr-card__title">Configurez votre groupe</strong>
         <p className="fr-card__desc">
-          L‘habilitation liée à votre mission temptemp est validée !
+          L‘habilitation liée à votre mission est validée !
         </p>
         <p className="fr-card__desc">
           Par défaut, vous êtes administrateur du groupe habilité. Pour

@@ -1,5 +1,4 @@
 import FullWidthContainer from '#components-ui/container';
-import AgentNavigation from '#components/espace-agent-components/agent-navigation';
 import {
   ApplicationRights,
   hasRights,
@@ -31,28 +30,23 @@ const ConfigurezVotreGroupe = async ({
   }
 
   return (
-    <>
-      {hasRights(session, ApplicationRights.administrateur) && (
-        <AgentNavigation />
-      )}
-      <FullWidthContainer
-        style={{
-          background: 'var(--annuaire-colors-espaceAgentPastel)',
-        }}
-      >
-        <div className="fr-mt-4w fr-mb-4w">
-          <div className="fr-card">
-            <div className="fr-card__body">
-              <div className="fr-card__content">
-                <div className="fr-grid-row fr-grid-row--gutters fr-mt-1w fr-mb-1w">
-                  <ValidateGroupForm demandeId={demandeId} />
-                </div>
+    <FullWidthContainer
+      style={{
+        background: 'var(--annuaire-colors-espaceAgentPastel)',
+      }}
+    >
+      <div className="fr-mt-4w fr-mb-12w">
+        <div className="fr-card">
+          <div className="fr-card__body">
+            <div className="fr-card__content">
+              <div className="fr-grid-row fr-grid-row--gutters fr-mt-1w fr-mb-1w">
+                <ValidateGroupForm demandeId={demandeId} />
               </div>
             </div>
           </div>
         </div>
-      </FullWidthContainer>
-    </>
+      </div>
+    </FullWidthContainer>
   );
 };
 

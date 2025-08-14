@@ -23,21 +23,21 @@ export const allAgentScopes = [
   'liens_capitalistiques',
 ] as const;
 
-export const marchePublicScopes = [
+export const marchePublicScopes: IAgentScope[] = [
   'liens_capitalistiques',
   'beneficiaires',
   'conformite',
   'travaux_publics',
 ];
 
-export const aidesPubliquesScopes = [
+export const aidesPubliquesScopes: IAgentScope[] = [
   'liens_capitalistiques',
   'beneficiaires',
   'conformite',
   'travaux_publics',
 ];
 
-export const lutteContreLaFraudeScopes = [
+export const lutteContreLaFraudeScopes: IAgentScope[] = [
   'liens_capitalistiques',
   'beneficiaires',
   'conformite',
@@ -46,4 +46,4 @@ export const lutteContreLaFraudeScopes = [
   'liasses_fiscales',
 ];
 
-export const subventionsAssociationsScopes = [];
+export const subventionsAssociationsScopes: IAgentScope[] = [];

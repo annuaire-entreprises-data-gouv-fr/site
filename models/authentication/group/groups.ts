@@ -89,7 +89,7 @@ export class Groups {
       }
 
       const formUid = demande.form_uid;
-      let scopesArray: string[] = [];
+      let scopesArray: IAgentScope[] = [];
       if (formUid === 'annuaire-des-entreprises-marches-publics') {
         scopesArray = marchePublicScopes;
       } else if (formUid === 'annuaire-des-entreprises-aides-publiques') {
@@ -118,7 +118,13 @@ export class Groups {
         })),
       };
 
-      return await droleClient.create(body, userSub);
+      const newGroup = await droleClient.create(body, userSub);
+      return {
+        ...newGroup,
+        scopes: scopesArray,
+        contract_description: body.contract_description,
+        contract_url: body.contract_url,
+      };
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
