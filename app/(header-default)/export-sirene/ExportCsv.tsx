@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { getEffectifCode } from './constants';
 import Filters from './Filters';
 import FiltersSummary from './FiltersSummary';
+import InfoSection from './InfoSection';
 import styles from './styles.module.css';
 
 export interface ExtendedExportCsvInput extends ExportCsvInput {
@@ -214,33 +215,7 @@ export default function ExportCsv() {
       <h1 className={styles.title}>
         Générez une liste CSV à partir du répertoire Sirene
       </h1>
-      <div className={styles.infoSection}>
-        <div>
-          Cette page vous permet de constituer une liste d‘établissements selon
-          vos critères à partir du répertoire Sirene.
-        </div>
-        <div>
-          Les données sont disponibles le lendemain du jour de traitement au
-          répertoire Sirene.
-        </div>
-        <div>
-          💡 Ces listes ne contiennent pas de nom de dirigeant, d‘adresse
-          courriel, de site web ou de numéro de téléphone. Pour plus de détails
-          sur le contenu des fichiers, consultez la{' '}
-          <a href="https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret">
-            documentation
-          </a>{' '}
-          et ce{' '}
-          <a href="https://guides.data.gouv.fr/reutiliser-des-donnees/guide-traitement-et-analyse-de-donnees/manipuler-des-donnees/ouvrir-des-donnees">
-            guide sur les fichiers CSV
-          </a>
-          .
-        </div>
-        <div>
-          Pour les unités en diffusion partielle (statut de diffusion = « P »),
-          certaines informations ne sont pas publiquement accessibles.
-        </div>
-      </div>
+      <InfoSection />
       <form onSubmit={handleCountSubmit}>
         <Filters filters={filters} setFilters={setFilters} />
         <div className={styles.buttonContainer}>
