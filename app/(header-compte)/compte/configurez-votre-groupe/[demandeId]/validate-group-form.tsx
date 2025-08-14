@@ -1,11 +1,14 @@
 'use client';
 
 import ButtonLink from '#components-ui/button';
-import { validateGroupName } from '#components/espace-agent-components/group-management/update-modals/form-validation';
+import {
+  validateEmails,
+  validateGroupName,
+} from '#components/espace-agent-components/group-management/update-modals/form-validation';
 import { showErrorNotification } from '#components/notification-center';
 import { IDRolesGroup } from '#models/authentication/group/groups';
 import httpClient from '#utils/network';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import FinalStep from './FinalStep';
 
 export default function ValidateGroupForm({
@@ -13,13 +16,12 @@ export default function ValidateGroupForm({
 }: {
   demandeId: string;
 }) {
-  const [newGroup, setNewGroup] = useState<IDRolesGroup | null>(null);
   const [inputGroupName, setInputGroupName] = useState('');
-  const [emails, setEmails] = useState('');
+  const [inputEmails, setInputEmails] = useState('');
   const [addMembers, setAddMembers] = useState(false);
+  const [newGroup, setNewGroup] = useState<IDRolesGroup | null>(null);
   const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleAddMembers = () => {
     const groupName = inputGroupName.trim();
@@ -36,7 +38,7 @@ export default function ValidateGroupForm({
 
   const cancelAddMembers = () => {
     setAddMembers(false);
-    setEmails('');
+    setInputEmails('');
   };
 
   const handleValidateGroup = async () => {
@@ -45,11 +47,19 @@ export default function ValidateGroupForm({
 
     try {
       const groupName = inputGroupName.trim();
+      const emails = inputEmails.trim();
 
       const groupNameValidationError = validateGroupName(groupName);
       if (groupNameValidationError) {
         setValidationErrors([groupNameValidationError]);
         showErrorNotification('Ajout impossible', groupNameValidationError);
+        return;
+      }
+
+      const emailsValidationError = validateEmails(emails);
+      if (emailsValidationError) {
+        setValidationErrors([emailsValidationError]);
+        showErrorNotification('Ajout impossible', emailsValidationError);
         return;
       }
 
@@ -103,16 +113,11 @@ export default function ValidateGroupForm({
                   validationErrors.length > 0 ? 'fr-input--error' : ''
                 }`}
                 id={`group-name`}
-                value={emails}
+                value={inputEmails}
                 onChange={(e) => {
-                  setEmails(e.target.value);
+                  setInputEmails(e.target.value);
                   if (validationErrors.length > 0) {
                     setValidationErrors([]);
-                  }
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && emails?.trim() && !loading) {
-                    handleValidateGroup();
                   }
                 }}
                 disabled={loading}
@@ -166,7 +171,6 @@ export default function ValidateGroupForm({
           </label>
           <div className="fr-input-wrap">
             <input
-              ref={inputRef}
               className={`fr-input ${
                 validationErrors.length > 0 ? 'fr-input--error' : ''
               }`}
@@ -177,11 +181,6 @@ export default function ValidateGroupForm({
                 setInputGroupName(e.target.value);
                 if (validationErrors.length > 0) {
                   setValidationErrors([]);
-                }
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && inputGroupName?.trim() && !loading) {
-                  handleValidateGroup();
                 }
               }}
               disabled={loading}
