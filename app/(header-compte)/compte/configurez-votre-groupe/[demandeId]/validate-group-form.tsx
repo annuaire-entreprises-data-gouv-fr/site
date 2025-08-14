@@ -73,8 +73,7 @@ export default function ValidateGroupForm({
       });
       setNewGroup(result);
     } catch (error: any) {
-      setValidationErrors([error.message || 'Une erreur est survenue']);
-      return;
+      showErrorNotification("Erreur lors de l'ajout du membre", error.message);
     } finally {
       setLoading(false);
     }

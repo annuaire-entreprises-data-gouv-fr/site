@@ -64,14 +64,14 @@ export class Groups {
 
       if (demande.state !== 'validated') {
         throw new FetchRessourceException({
-          ressource: 'D-Roles Groups : validateGroup',
+          ressource: 'D-Roles Groups',
           cause: new Error('Demande is not validated'),
         });
       }
 
       if (userEmail !== demande.applicant?.email) {
         throw new FetchRessourceException({
-          ressource: 'D-Roles Groups : validateGroup',
+          ressource: 'D-Roles Groups',
           cause: new Error(
             'User email does not match the applicant email in the demande'
           ),
@@ -83,7 +83,7 @@ export class Groups {
 
       if (groups.length >= 1) {
         throw new FetchRessourceException({
-          ressource: 'D-Roles Groups : validateGroup',
+          ressource: 'D-Roles Groups',
           cause: new Error('A group has already been created for this demande'),
         });
       }
