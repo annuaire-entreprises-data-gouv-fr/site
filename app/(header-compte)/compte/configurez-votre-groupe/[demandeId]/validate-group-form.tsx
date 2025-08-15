@@ -21,14 +21,16 @@ export default function ValidateGroupForm({
   const [addMembers, setAddMembers] = useState(false);
   const [newGroup, setNewGroup] = useState<IDRolesGroup | null>(null);
   const [loading, setLoading] = useState(false);
-  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [errors, setErrors] = useState<{ groupName?: string; emails?: string }>(
+    {}
+  );
 
   const handleAddMembers = () => {
     const groupName = inputGroupName.trim();
 
     const groupNameValidationError = validateGroupName(groupName);
     if (groupNameValidationError) {
-      setValidationErrors([groupNameValidationError]);
+      setErrors({ groupName: groupNameValidationError });
       showErrorNotification('Ajout impossible', groupNameValidationError);
       return;
     }
@@ -39,30 +41,30 @@ export default function ValidateGroupForm({
   const cancelAddMembers = () => {
     setAddMembers(false);
     setInputEmails('');
+    setErrors((e) => ({ ...e, emails: undefined }));
   };
 
   const handleValidateGroup = async () => {
+    const groupName = inputGroupName.trim();
+    const emails = inputEmails.trim();
+
+    const groupNameValidationError = validateGroupName(groupName);
+    const emailsValidationError = validateEmails(emails);
+
+    if (groupNameValidationError || emailsValidationError) {
+      setErrors({
+        groupName: groupNameValidationError ?? undefined,
+        emails: emailsValidationError ?? undefined,
+      });
+      const firstError = groupNameValidationError || emailsValidationError;
+      if (firstError) {
+        showErrorNotification('Ajout impossible', firstError);
+      }
+      return;
+    }
+
     setLoading(true);
-    setValidationErrors([]);
-
     try {
-      const groupName = inputGroupName.trim();
-      const emails = inputEmails.trim();
-
-      const groupNameValidationError = validateGroupName(groupName);
-      if (groupNameValidationError) {
-        setValidationErrors([groupNameValidationError]);
-        showErrorNotification('Ajout impossible', groupNameValidationError);
-        return;
-      }
-
-      const emailsValidationError = validateEmails(emails);
-      if (emailsValidationError) {
-        setValidationErrors([emailsValidationError]);
-        showErrorNotification('Ajout impossible', emailsValidationError);
-        return;
-      }
-
       const result = await httpClient<IDRolesGroup>({
         url: `/api/groups/validate`,
         method: 'POST',
@@ -97,10 +99,10 @@ export default function ValidateGroupForm({
           </p>
           <div
             className={`fr-card__desc fr-input-group fr-mb-4w ${
-              validationErrors.length > 0 ? 'fr-input-group--error' : ''
+              errors.emails ? 'fr-input-group--error' : ''
             }`}
           >
-            <label className="fr-label" htmlFor={'group-name'}>
+            <label className="fr-label" htmlFor={'group-emails'}>
               Membres du groupe
               <span className="fr-hint-text">
                 Ajoutez plusieurs emails séparés par une virgule
@@ -108,24 +110,28 @@ export default function ValidateGroupForm({
             </label>
             <div className="fr-input-wrap">
               <textarea
-                className={`fr-input ${
-                  validationErrors.length > 0 ? 'fr-input--error' : ''
-                }`}
-                id={`group-name`}
+                className={`fr-input ${errors.emails ? 'fr-input--error' : ''}`}
+                id={`group-emails`}
                 value={inputEmails}
                 onChange={(e) => {
                   setInputEmails(e.target.value);
-                  if (validationErrors.length > 0) {
-                    setValidationErrors([]);
+                  if (errors.emails) {
+                    setErrors((prev) => ({ ...prev, emails: undefined }));
                   }
                 }}
                 disabled={loading}
                 autoComplete="off"
+                rows={6}
                 aria-describedby={
-                  validationErrors.length > 0 ? 'error-name' : undefined
+                  errors.emails ? 'group-emails-error' : undefined
                 }
               />
             </div>
+            {errors.emails && (
+              <p className="fr-error-text" id="group-emails-error">
+                {errors.emails}
+              </p>
+            )}
           </div>
           <ul className="fr-card__desc fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
             <li>
@@ -161,7 +167,7 @@ export default function ValidateGroupForm({
         </p>
         <div
           className={`fr-card__desc fr-input-group fr-mb-4w ${
-            validationErrors.length > 0 ? 'fr-input-group--error' : ''
+            errors.groupName ? 'fr-input-group--error' : ''
           }`}
         >
           <label className="fr-label" htmlFor={'group-name'}>
@@ -171,24 +177,31 @@ export default function ValidateGroupForm({
           <div className="fr-input-wrap">
             <input
               className={`fr-input ${
-                validationErrors.length > 0 ? 'fr-input--error' : ''
+                errors.groupName ? 'fr-input--error' : ''
               }`}
               type="text"
               id={`group-name`}
               value={inputGroupName}
               onChange={(e) => {
                 setInputGroupName(e.target.value);
-                if (validationErrors.length > 0) {
-                  setValidationErrors([]);
+                if (errors.groupName) {
+                  setErrors((prev) => ({ ...prev, groupName: undefined }));
                 }
               }}
               disabled={loading}
               autoComplete="off"
+              minLength={2}
+              maxLength={100}
               aria-describedby={
-                validationErrors.length > 0 ? 'error-name' : undefined
+                errors.groupName ? 'group-name-error' : undefined
               }
             />
           </div>
+          {errors.groupName && (
+            <p className="fr-error-text" id="group-name-error">
+              {errors.groupName}
+            </p>
+          )}
         </div>
         <ul className="fr-card__desc fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
           <li>
