@@ -13,6 +13,14 @@ export const validateEmail = (email: string): ValidationErrors => {
   return null;
 };
 
+export const validateEmails = (emailList: string): ValidationErrors => {
+  const emails = emailList.split(',').filter((email) => Boolean(email.trim()));
+
+  return emails.some((email) => validateEmail(email))
+    ? 'Au moins une des adresses emails n’est pas valide'
+    : null;
+};
+
 export const validateGroupName = (name: string): ValidationErrors => {
   if (!name?.trim()) {
     return 'Le nom du groupe est requis';

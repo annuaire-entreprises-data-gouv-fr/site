@@ -43,6 +43,13 @@ export function withErrorHandling<TContext>(
         return new NextResponse('Validation failed', { status: 400 });
       }
 
+      if (
+        error instanceof Error &&
+        error.name === 'FetchD-Roles GroupsException'
+      ) {
+        return new NextResponse(error.message, { status: 400 });
+      }
+
       if (error instanceof Error && error.name === 'HttpUnauthorizedError') {
         return new NextResponse('Unauthorized: Admin permissions required', {
           status: 403,
