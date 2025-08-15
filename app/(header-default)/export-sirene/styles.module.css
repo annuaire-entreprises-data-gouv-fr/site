@@ -45,6 +45,12 @@
   gap: 8px;
 }
 
+.infoSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .sizeSliderContainer {
   margin-bottom: 24px;
 }
