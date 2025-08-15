@@ -14,10 +14,10 @@ export default function InfoSection() {
         actualisation dans le répertoire Sirene.
       </div>
       <div>
-        🚨 À noter que nos listes ne contiennent pas :
+        🚨 À noter que les listes ne contiennent pas :
         <ul style={{ paddingLeft: 35 }}>
           <li>
-            le nom des dirigeants, l’adresse e-mail, le site web ni le numéro de
+            les noms de dirigeants, les adresses de courriel, les sites web, ni les numéros de
             téléphone
           </li>
           <li>
