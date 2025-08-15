@@ -198,6 +198,7 @@
           "isPersonneMorale": false,
           "capital": ""
         },
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [],
         "nombreEtablissements": 2,
         "nombreEtablissementsOuverts": 1,

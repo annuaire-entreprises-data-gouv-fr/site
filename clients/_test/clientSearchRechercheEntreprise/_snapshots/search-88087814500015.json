@@ -197,6 +197,7 @@
           "isPersonneMorale": true,
           "capital": "1 000,00 € (fixe)"
         },
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [
           {
             "siren": "880878145",
