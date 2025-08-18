@@ -4,8 +4,10 @@ import { InternalError } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { droleApiClient } from './client';
 import {
-  IDRolesGroupSearchResponse,
+  IDrolesBodyCreateRequest,
+  IDRolesGetGroupsResponse,
   IDRolesRoles,
+  IDRolesSearchGroupsResponse,
   IDRolesUser,
 } from './interface';
 import { parseAgentScopes } from './parse';
@@ -19,7 +21,7 @@ export const getGroupsByEmail = async (
   userSub: string
 ): Promise<IDRolesGroup[]> => {
   const route = routes.dRoles.groups.getGroupsByEmail(userEmail, userSub);
-  const response = await droleApiClient.fetch<IDRolesGroupSearchResponse>(
+  const response = await droleApiClient.fetch<IDRolesSearchGroupsResponse>(
     route,
     {
       method: 'GET',
@@ -29,7 +31,7 @@ export const getGroupsByEmail = async (
 };
 
 const mapToDomainObject = (
-  response: IDRolesGroupSearchResponse
+  response: IDRolesSearchGroupsResponse
 ): IDRolesGroup[] => {
   return response.map((group) => {
     const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
@@ -47,6 +49,17 @@ const mapToDomainObject = (
   });
 };
 
+export const getGroupByContractUrl = async (
+  contractUrl: string
+): Promise<IDRolesGetGroupsResponse> => {
+  const route = routes.dRoles.groups.getGroups;
+  const response = await droleApiClient.fetch<IDRolesGetGroupsResponse>(route, {
+    method: 'GET',
+  });
+
+  return response.filter((group) => group.contract_url === contractUrl);
+};
+
 export const getRolesMetadata = async (): Promise<IDRolesRoles[]> => {
   const route = routes.dRoles.roles.get;
   return await droleApiClient.fetch<IDRolesRoles[]>(route, { method: 'GET' });
@@ -56,6 +69,17 @@ export const getUserByEmail = async (email: string): Promise<IDRolesUser> => {
   const route = routes.dRoles.users.getByEmail(email);
   return await droleApiClient.fetch<IDRolesUser>(route, {
     method: 'GET',
+  });
+};
+
+export const create = async (
+  body: IDrolesBodyCreateRequest,
+  actingUserSub: string
+): Promise<IDRolesGroup> => {
+  const route = routes.dRoles.groups.create(actingUserSub);
+  return await droleApiClient.fetch<IDRolesGroup>(route, {
+    method: 'POST',
+    data: body,
   });
 };
 
@@ -73,6 +97,7 @@ export const updateName = async (
     method: 'PUT',
   });
 };
+
 export const addUserToGroup = async (
   groupId: number,
   email: string,
@@ -122,8 +147,10 @@ export const removeUserFromGroup = async (
 
 export default {
   getGroupsByEmail,
+  getGroupByContractUrl,
   getRolesMetadata,
   getUserByEmail,
+  create,
   updateName,
   addUserToGroup,
   updateUserFromGroup,

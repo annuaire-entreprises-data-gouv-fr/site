@@ -11,4 +11,5 @@ export type IAgentInfo = {
   siret: string;
   scopes: IAgentScope[];
   userType: string;
+  isSuperAgent: boolean;
 };

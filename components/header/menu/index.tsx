@@ -1,11 +1,7 @@
 import FloatingModal from '#components-ui/floating-modal';
 import { Icon } from '#components-ui/icon/wrapper';
 import { getAgentDisplayName } from '#models/authentication/user/helpers';
-import {
-  ApplicationRights,
-  hasRights,
-  isLoggedIn,
-} from '#models/authentication/user/rights';
+import { isLoggedIn } from '#models/authentication/user/rights';
 import { ISession } from '#models/authentication/user/session';
 import constants from '#models/constants';
 import { EspaceAgentLink } from './espace-agent-link';
@@ -47,8 +43,11 @@ const Menu: React.FC<{
         >
           Mon espace
         </a>
-        {hasRights(session, ApplicationRights.administrateur) && (
+        {session?.user?.isSuperAgent && (
           <a aria-label="Gestion de mes groupes" href={'/compte/mes-groupes'}>
+            <span className="fr-badge fr-mr-1w fr-badge--new fr-badge--sm">
+              Beta
+            </span>
             Mes groupes
           </a>
         )}

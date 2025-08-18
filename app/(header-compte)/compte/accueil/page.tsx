@@ -36,9 +36,7 @@ const CompteAgentAccueil = async () => {
 
   return (
     <>
-      {hasRights(session, ApplicationRights.administrateur) && (
-        <AgentNavigation />
-      )}
+      {session?.user?.isSuperAgent && <AgentNavigation />}
       <FullWidthContainer
         style={{
           background: 'var(--annuaire-colors-espaceAgentPastel)',
