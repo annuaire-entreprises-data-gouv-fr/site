@@ -8,7 +8,7 @@ export const clientDPO = async (siren: Siren): Promise<IDPO> => {
   const response = await httpGet<IDPODatagouvResponse>(
     `${routes.datagouv.dpo}?SIREN%20organisme%20désignant__exact=${siren}`,
     {
-      timeout: constants.timeout.S,
+      timeout: constants.timeout.L,
     }
   );
 
