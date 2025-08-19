@@ -1,15 +1,15 @@
 import { HttpNotFound } from '#clients/exceptions';
-import droleClient from '#clients/roles-data';
-import { IDRolesUser } from '#clients/roles-data/interface';
+import rolesdataClient from '#clients/roles-data';
+import { IRolesDataUser } from '#clients/roles-data/interface';
 import { IAgentScope } from '#models/authentication/agent/scopes/constants';
 import { FetchRessourceException } from '#models/exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
 
-export type IDRolesGroup = {
+export type IRolesDataGroup = {
   name: string;
   id: number;
   organisation_siret: string;
-  users: IDRolesUser[];
+  users: IRolesDataUser[];
   scopes: IAgentScope[];
   contract_description: string;
   contract_url?: string;
@@ -22,9 +22,9 @@ export class Groups {
   static async find(
     userEmail: string,
     userSub: string
-  ): Promise<IDRolesGroup[]> {
+  ): Promise<IRolesDataGroup[]> {
     try {
-      return await droleClient.getGroupsByEmail(userEmail, userSub);
+      return await rolesdataClient.getGroupsByEmail(userEmail, userSub);
     } catch (error) {
       if (error instanceof HttpNotFound) {
         // user not in roles.data
@@ -33,7 +33,7 @@ export class Groups {
 
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'D-Roles Groups',
+          ressource: 'Roles.data Groups',
           cause: error,
         })
       );

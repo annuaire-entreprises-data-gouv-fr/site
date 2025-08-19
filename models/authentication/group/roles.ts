@@ -1,22 +1,22 @@
 import { getRolesMetadata } from '#clients/roles-data';
-import { IDRolesRoles } from '#clients/roles-data/interface';
+import { IRolesDataRoles } from '#clients/roles-data/interface';
 import { DataStore } from '#utils/data-store';
 
 class RolesmetadataStore {
-  private _dRolesStore: DataStore<IDRolesRoles[]>;
+  private _rolesDataStore: DataStore<IRolesDataRoles[]>;
   private TTL = 36000000; // 10h
 
   constructor() {
-    this._dRolesStore = new DataStore<IDRolesRoles[]>(
+    this._rolesDataStore = new DataStore<IRolesDataRoles[]>(
       () => getRolesMetadata(),
-      'd-roles-roles',
+      'roles-data-roles',
       (response) => ({ roles: response }),
       this.TTL
     );
   }
 
   getRoles = async () => {
-    const data = await this._dRolesStore.getData();
+    const data = await this._rolesDataStore.getData();
     return data.roles;
   };
 }

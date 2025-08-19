@@ -1,6 +1,6 @@
-import { IDRolesRoles, IDRolesUser } from '#clients/roles-data/interface';
+import { IRolesDataRoles, IRolesDataUser } from '#clients/roles-data/interface';
 import { FullTable } from '#components/table/full';
-import { IDRolesGroup } from '#models/authentication/group/groups';
+import { IRolesDataGroup } from '#models/authentication/group/groups';
 import { pluralize } from '#utils/helpers';
 import { Fragment, useMemo } from 'react';
 import AddUserModal from './update-modals/add-user';
@@ -12,7 +12,7 @@ const NotAdminTable = ({
   group,
   currentUserEmail,
 }: {
-  group: IDRolesGroup;
+  group: IRolesDataGroup;
   currentUserEmail: string;
 }) => {
   return (
@@ -41,14 +41,14 @@ export function GroupItem({
   roles,
 }: {
   currentUserEmail: string;
-  group: IDRolesGroup;
+  group: IRolesDataGroup;
   isAdmin: boolean;
-  setGroup: (group: IDRolesGroup) => void;
-  roles: IDRolesRoles[];
+  setGroup: (group: IRolesDataGroup) => void;
+  roles: IRolesDataRoles[];
 }) {
   const defaultRoleId = roles.find((r) => r.role_name === 'utilisateur')?.id;
 
-  const handleUpdateUser = (user: IDRolesUser) => {
+  const handleUpdateUser = (user: IRolesDataUser) => {
     setGroup({
       ...group,
       users: group.users.map((currentUser) =>
@@ -131,7 +131,7 @@ export function GroupItem({
                   <AddUserModal
                     group={group}
                     defaultRoleId={defaultRoleId!}
-                    addUserToGroupState={(user: IDRolesUser) => {
+                    addUserToGroupState={(user: IRolesDataUser) => {
                       setGroup({
                         ...group,
                         users: [...group.users, user],

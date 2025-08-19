@@ -1,7 +1,7 @@
 'use client';
 
-import { IDRolesRoles } from '#clients/roles-data/interface';
-import { IDRolesGroup } from '#models/authentication/group/groups';
+import { IRolesDataRoles } from '#clients/roles-data/interface';
+import { IRolesDataGroup } from '#models/authentication/group/groups';
 import { useState } from 'react';
 import { GroupItem } from './group-item';
 
@@ -11,10 +11,10 @@ export function GroupManagement({
   initialGroups,
 }: {
   currentUserEmail: string;
-  roles: IDRolesRoles[];
-  initialGroups: IDRolesGroup[];
+  roles: IRolesDataRoles[];
+  initialGroups: IRolesDataGroup[];
 }) {
-  const [groups, setGroups] = useState<IDRolesGroup[]>(initialGroups);
+  const [groups, setGroups] = useState<IRolesDataGroup[]>(initialGroups);
 
   if (groups.length === 0) {
     return <div>Aucun groupe</div>;
@@ -25,7 +25,7 @@ export function GroupManagement({
       (user) => user.email === currentUserEmail
     );
     const isAdmin = Boolean(currentUserRole?.is_admin);
-    const setGroup = (group: IDRolesGroup) => {
+    const setGroup = (group: IRolesDataGroup) => {
       setGroups(groups.map((g) => (g.id === group.id ? group : g)));
     };
 
