@@ -1,6 +1,6 @@
 import { HttpUnauthorizedError } from '#clients/exceptions';
-import droleClient from '#clients/roles-data';
-import { IDRolesUser } from '#clients/roles-data/interface';
+import rolesdataClient from '#clients/roles-data';
+import { IRolesDataUser } from '#clients/roles-data/interface';
 import { Groups } from '#models/authentication/group/groups';
 import { FetchRessourceException } from '#models/exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
@@ -37,7 +37,7 @@ export class Group {
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'D-Roles Group Admin Check',
+          ressource: 'Roles.data',
           cause: error,
         })
       );
@@ -61,12 +61,12 @@ export class Group {
         );
       }
 
-      await droleClient.updateName(this.groupId, groupName, adminSub);
+      await rolesdataClient.updateName(this.groupId, groupName, adminSub);
       return true;
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'D-Roles Update Name of a Group',
+          ressource: 'Roles.data',
           cause: error,
         })
       );
@@ -82,16 +82,17 @@ export class Group {
     adminSub: string,
     userEmail: string,
     roleId: number
-  ): Promise<IDRolesUser> {
+  ): Promise<IRolesDataUser> {
     try {
       const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
+
       if (!isAdmin) {
         throw new HttpUnauthorizedError(
           'User does not have admin permissions for this group'
         );
       }
 
-      const user = await droleClient.addUserToGroup(
+      const user = await rolesdataClient.addUserToGroup(
         this.groupId,
         userEmail,
         roleId,
@@ -101,7 +102,7 @@ export class Group {
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'D-Roles Add User to Group',
+          ressource: 'Roles.data',
           cause: error,
         })
       );
@@ -117,7 +118,7 @@ export class Group {
     adminSub: string,
     userEmail: string,
     roleId: number
-  ): Promise<IDRolesUser> {
+  ): Promise<IRolesDataUser> {
     try {
       const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {
@@ -126,7 +127,7 @@ export class Group {
         );
       }
 
-      const user = await droleClient.updateUserFromGroup(
+      const user = await rolesdataClient.updateUserFromGroup(
         this.groupId,
         userEmail,
         roleId,
@@ -136,7 +137,7 @@ export class Group {
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'D-Roles Update User From Group',
+          ressource: 'Roles.data',
           cause: error,
         })
       );
@@ -160,13 +161,17 @@ export class Group {
         );
       }
 
-      const user = await droleClient.getUserByEmail(userEmail);
-      await droleClient.removeUserFromGroup(this.groupId, user.id, adminSub);
+      const user = await rolesdataClient.getUserByEmail(userEmail);
+      await rolesdataClient.removeUserFromGroup(
+        this.groupId,
+        user.id,
+        adminSub
+      );
       return true;
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'D-Roles Remove User from Group',
+          ressource: 'Roles.data',
           cause: error,
         })
       );

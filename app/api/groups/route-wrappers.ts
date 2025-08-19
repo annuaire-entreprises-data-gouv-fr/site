@@ -1,9 +1,8 @@
+import { HttpNotFound, HttpUnauthorizedError } from '#clients/exceptions';
 import {
   ApplicationRights,
   hasRights,
 } from '#models/authentication/user/rights';
-import { FetchRessourceException } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { NextResponse } from 'next/server';
 import z from 'zod';
@@ -43,22 +42,15 @@ export function withErrorHandling<TContext>(
         return new NextResponse('Validation failed', { status: 400 });
       }
 
-      if (error instanceof Error && error.name === 'HttpUnauthorizedError') {
+      if (error instanceof HttpUnauthorizedError) {
         return new NextResponse('Unauthorized: Admin permissions required', {
           status: 403,
         });
       }
 
-      if (error instanceof Error && error.name === 'HttpNotFoundError') {
+      if (error instanceof HttpNotFound) {
         return new NextResponse('Resource not found', { status: 404 });
       }
-
-      logErrorInSentry(
-        new FetchRessourceException({
-          ressource: 'Groups API',
-          cause: error,
-        })
-      );
 
       return new NextResponse('Internal server error', { status: 500 });
     }

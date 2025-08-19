@@ -1,4 +1,4 @@
-import { IDRolesRoles, IDRolesUser } from '#clients/roles-data/interface';
+import { IRolesDataRoles, IRolesDataUser } from '#clients/roles-data/interface';
 import {
   showErrorNotification,
   showSuccessNotification,
@@ -12,16 +12,16 @@ export default function UpdateUserSelect({
   roles,
   updateUserFromGroupState,
 }: {
-  user: IDRolesUser;
+  user: IRolesDataUser;
   groupId: number;
-  roles: IDRolesRoles[];
-  updateUserFromGroupState: (user: IDRolesUser) => void;
+  roles: IRolesDataRoles[];
+  updateUserFromGroupState: (user: IRolesDataUser) => void;
 }) {
   const [loading, setLoading] = useState(false);
   const [optimisticRoleId, setOptimisticRoleId] = useState<number | null>(null);
 
   const postUpdateUser = async (roleId: number) => {
-    return await httpClient<IDRolesUser>({
+    return await httpClient<IRolesDataUser>({
       url: `/api/groups/${groupId}/update-user`,
       method: 'POST',
       headers: {

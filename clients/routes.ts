@@ -263,7 +263,7 @@ const routes = {
         `https://updown.io/api/checks/${slug}/downtimes`,
     },
   },
-  dRoles: {
+  rolesData: {
     auth: {
       token: '/auth/token',
     },

@@ -64,7 +64,7 @@ export const mergeDirigeants = ({
     string,
     IEtatCivilMergedIGInpi | IPersonneMoraleMergedIGInpi
   > = {};
-  const mergedRoles: Record<string, Record<string, IRole>> = {};
+  const mergerolesData: Record<string, Record<string, IRole>> = {};
 
   const dirigeants = [
     ...dirigeantsRCS.map((d) => ({ ...d, isInIg: true, isInInpi: false })),
@@ -84,7 +84,7 @@ export const mergeDirigeants = ({
         isInInpi,
         isInIg,
       };
-      mergedRoles[currentDirigeantKey] = {};
+      mergerolesData[currentDirigeantKey] = {};
     } else if (isInInpi) {
       foundDirigeant.isInInpi = true;
       if (!isPersonneMorale(dirigeant) && !isPersonneMorale(foundDirigeant)) {
@@ -98,10 +98,10 @@ export const mergeDirigeants = ({
       }
     }
 
-    const foundCleanedRole = mergedRoles[currentDirigeantKey][role];
+    const foundCleanedRole = mergerolesData[currentDirigeantKey][role];
     if (role !== '') {
       if (!foundCleanedRole) {
-        mergedRoles[currentDirigeantKey][role] = {
+        mergerolesData[currentDirigeantKey][role] = {
           label: role,
           isInInpi,
           isInIg,
@@ -116,6 +116,6 @@ export const mergeDirigeants = ({
 
   return Object.values(mergedDirigeants).map((dirigeant) => ({
     ...dirigeant,
-    roles: Object.values(mergedRoles[createUniqueKey(dirigeant)]),
+    roles: Object.values(mergerolesData[createUniqueKey(dirigeant)]),
   }));
 };

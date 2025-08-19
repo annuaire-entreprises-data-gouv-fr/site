@@ -1,4 +1,4 @@
-import { IDRolesUser } from '#clients/roles-data/interface';
+import { IRolesDataUser } from '#clients/roles-data/interface';
 import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
@@ -18,7 +18,7 @@ export default function DeleteUserButton({
 }: {
   isCurrentUser: boolean;
   adminCount: number;
-  user: IDRolesUser;
+  user: IRolesDataUser;
   groupId: number;
   deleteUserFromGroupState: (email: string) => void;
 }) {
