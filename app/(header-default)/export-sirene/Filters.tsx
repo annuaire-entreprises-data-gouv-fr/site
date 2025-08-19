@@ -370,7 +370,7 @@ export default function Filters({
       <div className={styles.row}>
         <section className={styles.formSection}>
           <h2>
-            Filtrer par type de structure
+            Filtrer par activité économique
             <Icon color={constants.colors.frBlue} slug="buildingFill" />
             <InformationTooltip
               label={
