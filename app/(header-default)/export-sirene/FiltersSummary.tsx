@@ -184,7 +184,7 @@ export default function FiltersSummary({
       {filters.ess && (
         <p>
           <strong>
-            Appartenance au champ de l‘économie sociale et solidair :
+            Appartenance au champ de l‘économie sociale et solidaire :
           </strong>{' '}
           {(() => {
             const { inclure, inclureNo, inclureNonRenseigne } = filters.ess;
