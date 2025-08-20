@@ -3,13 +3,13 @@ import routes from '#clients/routes';
 import constants from '#models/constants';
 import httpClient, { IDefaultRequestConfig } from '#utils/network';
 import { URLSearchParams } from 'url';
-import { IDRolesAuthTokenResponse } from './interface';
+import { IRolesDataAuthTokenResponse } from './interface';
 
 /**
- * D-Roles
+ * Roles.data
  * https://roles.preprod.data.gouv.fr/
  */
-class DRolesAPIClient {
+class RolesDataAPIClient {
   private _accessToken: string | null;
   private _tokenExpiryTime: number;
 
@@ -18,7 +18,7 @@ class DRolesAPIClient {
     private client_secret: string | undefined
   ) {
     if (!this.client_id || !this.client_secret) {
-      throw new HttpServerError('D-Roles env variables are undefined');
+      throw new HttpServerError('Roles.data env variables are undefined');
     }
     this._accessToken = null;
     this._tokenExpiryTime = 0;
@@ -26,9 +26,9 @@ class DRolesAPIClient {
 
   private newToken = async () => {
     try {
-      const url = `${process.env.D_ROLES_URL}${routes.dRoles.auth.token}`;
+      const url = `${process.env.D_ROLES_URL}${routes.rolesData.auth.token}`;
 
-      const data = await httpClient<IDRolesAuthTokenResponse>({
+      const data = await httpClient<IRolesDataAuthTokenResponse>({
         url,
         method: 'POST',
         timeout: constants.timeout.XXXL,
@@ -78,7 +78,7 @@ class DRolesAPIClient {
 
     return httpClient<T>({
       url,
-      timeout: constants.timeout.M,
+      timeout: constants.timeout.XL,
       ...config,
       headers: {
         ...config.headers,
@@ -88,9 +88,9 @@ class DRolesAPIClient {
   };
 }
 
-const droleApiClient = new DRolesAPIClient(
+const rolesdataApiClient = new RolesDataAPIClient(
   process.env.D_ROLES_CLIENT_ID,
   process.env.D_ROLES_CLIENT_SECRET
 );
 
-export { droleApiClient };
+export { rolesdataApiClient };

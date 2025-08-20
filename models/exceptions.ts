@@ -82,6 +82,21 @@ export function throwUnreachableCaseError(value: never): never {
     context: { details: value },
   });
 }
+
+/**
+ * Represents an validation error when processing a form submission
+ */
+
+export class ValidationError extends Exception {
+  constructor(args: {
+    message: string;
+    cause?: any;
+    context?: IExceptionContext;
+  }) {
+    super({ name: 'ValidationError', ...args });
+  }
+}
+
 /**
  * Represents an internal error.
  * This error should never be thrown.

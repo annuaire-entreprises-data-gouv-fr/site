@@ -125,6 +125,7 @@ export const clientUniteLegaleInsee = async (
 
   return {
     ...uniteLegale,
+    isNbEtablissementOuvertReliable: false,
     siege,
     nomComplet,
     etablissements,

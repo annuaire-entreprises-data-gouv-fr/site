@@ -274,7 +274,7 @@ const routes = {
       getById: (id: number) => `/demandes/${id}`,
     },
   },
-  dRoles: {
+  rolesData: {
     auth: {
       token: '/auth/token',
     },

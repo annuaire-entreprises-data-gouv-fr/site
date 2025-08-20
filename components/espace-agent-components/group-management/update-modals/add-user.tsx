@@ -1,6 +1,6 @@
 'use client';
 
-import { IDRolesUser } from '#clients/roles-data/interface';
+import { IRolesDataUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { validateEmail } from '#components/espace-agent-components/group-management/update-modals/form-validation';
@@ -8,7 +8,7 @@ import {
   showErrorNotification,
   showSuccessNotification,
 } from '#components/notification-center';
-import { IDRolesGroup } from '#models/authentication/group/groups';
+import { IRolesDataGroup } from '#models/authentication/group/groups';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
 
@@ -19,9 +19,9 @@ export default function AddUserModal({
   defaultRoleId,
   addUserToGroupState,
 }: {
-  group: IDRolesGroup;
+  group: IRolesDataGroup;
   defaultRoleId: number;
-  addUserToGroupState: (user: IDRolesUser) => void;
+  addUserToGroupState: (user: IRolesDataUser) => void;
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [inputEmail, setInputEmail] = useState('');
@@ -50,7 +50,9 @@ export default function AddUserModal({
       }
 
       // Check if user already exists in group
-      if (group.users.some((user: IDRolesUser) => user.email === userEmail)) {
+      if (
+        group.users.some((user: IRolesDataUser) => user.email === userEmail)
+      ) {
         setValidationErrors(['Cet utilisateur est déjà membre de ce groupe']);
         showErrorNotification(
           'Ajout impossible',
@@ -59,7 +61,7 @@ export default function AddUserModal({
         return;
       }
 
-      const user = await httpClient<IDRolesUser>({
+      const user = await httpClient<IRolesDataUser>({
         url: `/api/groups/${group.id}/add-user`,
         method: 'POST',
         headers: {
@@ -108,8 +110,8 @@ export default function AddUserModal({
               Les nouveaux membres ont par défaut le{' '}
               <strong>rôle d’utilisateur</strong>.
               <br />
-              Vous pourrez ensuite le changer en{' '}
-              <strong>administrateur</strong>, si besoin.
+              Vous pourrez ensuite le changer en <strong>administrateur</strong>
+              , si besoin.
             </p>
           </div>
 

@@ -1,7 +1,10 @@
 import datapassClient from '#clients/datapass';
 import { HttpNotFound } from '#clients/exceptions';
-import droleClient from '#clients/roles-data';
-import { IDRolesUser } from '#clients/roles-data/interface';
+import {
+  default as droleClient,
+  default as rolesdataClient,
+} from '#clients/roles-data';
+import { IRolesDataUser } from '#clients/roles-data/interface';
 import {
   aidesPubliquesScopes,
   IAgentScope,
@@ -12,11 +15,11 @@ import {
 import { FetchRessourceException } from '#models/exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
 
-export type IDRolesGroup = {
+export type IRolesDataGroup = {
   name: string;
   id: number;
   organisation_siret: string;
-  users: IDRolesUser[];
+  users: IRolesDataUser[];
   scopes: IAgentScope[];
   contract_description: string;
   contract_url?: string;
@@ -29,9 +32,9 @@ export class Groups {
   static async find(
     userEmail: string,
     userSub: string
-  ): Promise<IDRolesGroup[]> {
+  ): Promise<IRolesDataGroup[]> {
     try {
-      return await droleClient.getGroupsByEmail(userEmail, userSub);
+      return await rolesdataClient.getGroupsByEmail(userEmail, userSub);
     } catch (error) {
       if (error instanceof HttpNotFound) {
         // user not in roles.data
@@ -40,7 +43,7 @@ export class Groups {
 
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'D-Roles Groups : find',
+          ressource: 'Roles.data Groups',
           cause: error,
         })
       );
@@ -52,7 +55,7 @@ export class Groups {
   /**
    * Validate a group
    */
-  static async validateGroup(
+  static async validateNewGroup(
     userEmail: string,
     userSub: string,
     demandeId: number,
@@ -63,15 +66,15 @@ export class Groups {
       const demande = await datapassClient.getDemande(demandeId);
 
       if (demande.state !== 'validated') {
-        throw new FetchRessourceException({
-          ressource: 'D-Roles Groups',
+        throw new ValidationError({
+          ressource: 'Groups',
           cause: new Error('Demande is not validated'),
         });
       }
 
       if (userEmail !== demande.applicant?.email) {
-        throw new FetchRessourceException({
-          ressource: 'D-Roles Groups',
+        throw new ValidationError({
+          ressource: 'Groups',
           cause: new Error(
             'User email does not match the applicant email in the demande'
           ),
@@ -82,8 +85,8 @@ export class Groups {
       const groups = await droleClient.getGroupByContractUrl(contractUrl);
 
       if (groups.length >= 1) {
-        throw new FetchRessourceException({
-          ressource: 'D-Roles Groups',
+        throw new ValidationError({
+          ressource: 'Groups',
           cause: new Error('A group has already been created for this demande'),
         });
       }
@@ -126,12 +129,15 @@ export class Groups {
         contract_url: body.contract_url,
       };
     } catch (error) {
-      logFatalErrorInSentry(
-        new FetchRessourceException({
-          ressource: 'D-Roles Groups : validateGroup',
-          cause: error,
-        })
-      );
+      // validation error are expected as user
+      if (!(error instanceof ValidationError)) {
+        logFatalErrorInSentry(
+          new InternalError({
+            ressource: 'New Group Validation',
+            cause: error,
+          })
+        );
+      }
       throw error;
     }
   }
