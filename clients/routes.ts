@@ -267,9 +267,6 @@ const routes = {
     auth: {
       token: '/oauth/token',
     },
-    habilitations: {
-      getById: (id: number) => `/habilitations/${id}`,
-    },
     demandes: {
       getById: (id: number) => `/demandes/${id}`,
     },

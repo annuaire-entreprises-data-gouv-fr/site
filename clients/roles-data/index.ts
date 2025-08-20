@@ -3,6 +3,12 @@ import { IRolesDataGroup } from '#models/authentication/group/groups';
 import { InternalError } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { rolesdataApiClient } from './client';
+import {
+  IRolesDataGroupCreate,
+  IRolesDataGroupResponse,
+  IRolesDataRoles,
+  IRolesDataUser,
+} from './interface';
 import { parseAgentScopes } from './parse';
 
 /**
@@ -14,15 +20,17 @@ export const getGroupsByEmail = async (
   userSub: string
 ): Promise<IRolesDataGroup[]> => {
   const route = routes.rolesData.groups.getGroupsByEmail(userEmail, userSub);
-  const response =
-    await rolesdataApiClient.fetch<IRolesDataGroupSearchResponse>(route, {
+  const response = await rolesdataApiClient.fetch<IRolesDataGroupResponse[]>(
+    route,
+    {
       method: 'GET',
-    });
+    }
+  );
   return mapToDomainObject(response);
 };
 
 const mapToDomainObject = (
-  response: IRolesDataGroupSearchResponse
+  response: IRolesDataGroupResponse[]
 ): IRolesDataGroup[] => {
   return response.map((group) => {
     const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
@@ -38,17 +46,6 @@ const mapToDomainObject = (
       scopes: validScopes,
     };
   });
-};
-
-export const getGroupByContractUrl = async (
-  contractUrl: string
-): Promise<IDRolesGetGroupsResponse> => {
-  const route = routes.dRoles.groups.getGroups;
-  const response = await droleApiClient.fetch<IDRolesGetGroupsResponse>(route, {
-    method: 'GET',
-  });
-
-  return response.filter((group) => group.contract_url === contractUrl);
 };
 
 export const getRolesMetadata = async (): Promise<IRolesDataRoles[]> => {
@@ -68,11 +65,11 @@ export const getUserByEmail = async (
 };
 
 export const create = async (
-  body: IDrolesBodyCreateRequest,
+  body: IRolesDataGroupCreate,
   actingUserSub: string
-): Promise<IDRolesGroup> => {
-  const route = routes.dRoles.groups.create(actingUserSub);
-  return await droleApiClient.fetch<IDRolesGroup>(route, {
+): Promise<IRolesDataGroup> => {
+  const route = routes.rolesData.groups.create(actingUserSub);
+  return await rolesdataApiClient.fetch<IRolesDataGroup>(route, {
     method: 'POST',
     data: body,
   });
@@ -142,7 +139,6 @@ export const removeUserFromGroup = async (
 
 export default {
   getGroupsByEmail,
-  getGroupByContractUrl,
   getRolesMetadata,
   getUserByEmail,
   create,

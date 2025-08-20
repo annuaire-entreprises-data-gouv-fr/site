@@ -1,28 +1,8 @@
 import routes from '#clients/routes';
 import { datapassApiClient } from './client';
-import {
-  IDatapassDemandeResponse,
-  IDatapassHabilitationResponse,
-} from './interface';
+import { IDatapassDemandeResponse } from './interface';
 
-/**
- * Datapass
- * https://datapass.api.gouv.fr/
- */
-export const getHabilitation = async (
-  habilitationId: number
-): Promise<IDatapassHabilitationResponse> => {
-  const route = routes.datapass.habilitations.getById(habilitationId);
-  const response = await datapassApiClient.fetch<IDatapassHabilitationResponse>(
-    route,
-    {
-      method: 'GET',
-    }
-  );
-  return response;
-};
-
-export const getDemande = async (
+export const getDatapassDemande = async (
   demandeId: number
 ): Promise<IDatapassDemandeResponse> => {
   const route = routes.datapass.demandes.getById(demandeId);
@@ -33,9 +13,4 @@ export const getDemande = async (
     }
   );
   return response;
-};
-
-export default {
-  getHabilitation,
-  getDemande,
 };

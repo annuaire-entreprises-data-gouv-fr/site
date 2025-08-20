@@ -1,5 +1,4 @@
 import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
-import { IDRolesAuthTokenResponse } from '#clients/roles-data/interface';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import httpClient, { IDefaultRequestConfig } from '#utils/network';
@@ -15,9 +14,10 @@ class DatapassAPIClient {
 
   constructor(
     private client_id: string | undefined,
-    private client_secret: string | undefined
+    private client_secret: string | undefined,
+    private url: string | undefined
   ) {
-    if (!this.client_id || !this.client_secret) {
+    if (!this.client_id || !this.client_secret || !this.url) {
       throw new HttpServerError('Datapass env variables are undefined');
     }
     this._accessToken = null;
@@ -26,9 +26,9 @@ class DatapassAPIClient {
 
   private newToken = async () => {
     try {
-      const url = `${process.env.DATAPASS_URL}/api/v1${routes.datapass.auth.token}`;
+      const url = `${this.url}/api/v1${routes.datapass.auth.token}`;
 
-      const data = await httpClient<IDRolesAuthTokenResponse>({
+      const data = await httpClient<any>({
         url,
         method: 'POST',
         timeout: constants.timeout.XXXL,
@@ -74,7 +74,7 @@ class DatapassAPIClient {
     config: IDefaultRequestConfig
   ): Promise<T> => {
     const token = await this.getToken();
-    const url = `${process.env.DATAPASS_URL}/api/v1${route}`;
+    const url = `${this.url}/api/v1${route}`;
 
     return httpClient<T>({
       url,
@@ -90,7 +90,8 @@ class DatapassAPIClient {
 
 const datapassApiClient = new DatapassAPIClient(
   process.env.DATAPASS_CLIENT_ID,
-  process.env.DATAPASS_CLIENT_SECRET
+  process.env.DATAPASS_CLIENT_SECRET,
+  process.env.DATAPASS_URL
 );
 
 export { datapassApiClient };
