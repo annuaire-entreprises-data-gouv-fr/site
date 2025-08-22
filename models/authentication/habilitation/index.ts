@@ -1,8 +1,9 @@
 import { getDatapassDemande } from '#clients/datapass';
-import { IDatapassDemandeResponse } from '#clients/datapass/interface';
+import { HttpNotFound } from '#clients/exceptions';
 import { Exception, FetchRessourceException } from '#models/exceptions';
 import { Siret } from '#utils/helpers';
 import { logFatalErrorInSentry } from '#utils/sentry';
+import { defaultAgentScopes } from '../agent/scopes/constants';
 
 export class HabilitationVerificationFailedException extends Exception {
   constructor(args: { message?: any; context?: { slug: string } }) {
@@ -14,7 +15,7 @@ export class HabilitationVerificationFailedException extends Exception {
 }
 
 export class Habilitation {
-  private static mapDemandeToScopes(demande: IDatapassDemandeResponse) {
+  private static mapDatapassScopesToIAgentScopes(habiliationData: any) {
     // const formUid = demande.form_uid;
     //   let scopesArray: IAgentScope[] = [];
     //   if (formUid === 'annuaire-des-entreprises-marches-publics') {
@@ -31,14 +32,11 @@ export class Habilitation {
     //     scopesArray = subventionsAssociationsScopes;
     //   }
 
-    return '';
+    return [...defaultAgentScopes];
   }
 
   static async verify(demandeId: number, userEmail: string) {
     try {
-      /**
-       * Get all groups that a user belongs to
-       */
       const demande = await getDatapassDemande(demandeId);
 
       if (demande.state !== 'validated') {
@@ -47,10 +45,11 @@ export class Habilitation {
         });
       }
 
-      const validHabilitations = demande.habilitations.filter(
-        (h) => !h.revoked
+      const activeHabilitation = demande.habilitations.find(
+        (h) => h.state === 'active'
       );
-      if (validHabilitations.length === 0) {
+
+      if (!activeHabilitation) {
         throw new HabilitationVerificationFailedException({
           message: `Aucune habilitations n’est associée a cette demande`,
         });
@@ -63,16 +62,22 @@ export class Habilitation {
       }
 
       const contractUrl = `${process.env.DATAPASS_URL}/instruction/demandes/${demandeId}`;
-
-      const scopes = this.mapDemandeToScopes(demande);
+      const scopes = this.mapDatapassScopesToIAgentScopes(
+        activeHabilitation.data
+      );
 
       return {
         contractUrl,
-        contractDescription: `DATAPASS : demande ${demandeId} | habilitation ${validHabilitations[0].id}`,
+        contractDescription: `DATAPASS : demande ${demandeId} | habilitation ${activeHabilitation.id}`,
         scopes,
-        siret: demande.organisation.siret as Siret,
+        siret: activeHabilitation.organisation.siret as Siret,
       };
     } catch (error) {
+      if (error instanceof HttpNotFound) {
+        throw new HabilitationVerificationFailedException({
+          message: `Cette demande n’existe pas`,
+        });
+      }
       logFatalErrorInSentry(
         new FetchRessourceException({
           ressource: 'Datapass',

@@ -62,6 +62,6 @@ export type IDatapassDemandeResponse = {
     phone_number: string;
     job_title: string;
   };
-  habilitations: any[];
+  habilitations: IDatapassHabilitationResponse[];
   events: any[];
 };
