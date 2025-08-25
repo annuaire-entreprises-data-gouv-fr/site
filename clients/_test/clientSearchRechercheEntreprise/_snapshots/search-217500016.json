@@ -1713,6 +1713,7 @@
           }
         ],
         "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [],
         "nombreEtablissements": 3024,
         "nombreEtablissementsOuverts": 2915,
