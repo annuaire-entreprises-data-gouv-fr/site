@@ -8,6 +8,7 @@ import {
 import { showErrorNotification } from '#components/notification-center';
 import httpClient from '#utils/network';
 import { ICreateRolesDataGroup } from 'app/api/groups/route';
+import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 
 export default function ValidateGroupForm({
@@ -15,6 +16,7 @@ export default function ValidateGroupForm({
 }: {
   demandeId: string;
 }) {
+  const router = useRouter();
   const inputGroup = useRef<HTMLInputElement>(null);
   const inputEmails = useRef<HTMLTextAreaElement>(null);
   const [loading, setLoading] = useState(false);
@@ -59,6 +61,12 @@ export default function ValidateGroupForm({
           response.error || ''
         );
       }
+
+      router.push(
+        `/compte/habilitation/${demandeId}/succes?scopes=${encodeURIComponent(
+          response.newScopes || ''
+        )}`
+      );
     } catch (error: any) {
       showErrorNotification('Impossible de configurer vos droits');
     } finally {

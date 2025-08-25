@@ -11,21 +11,20 @@ export type IDatapassAuthTokenResponse = {
   created_at: number;
 };
 
-export type IDatapassHabilitationResponse = {
-  id: string;
+export type IDatapassHabilitation = {
+  id: number;
   slug: string;
   revoked: boolean;
   state: 'active' | 'obsolete' | 'revoked';
   created_at: string;
-  data: any;
-  definition_id: string;
-  request_id: string;
-  organisation: {
-    id: string;
-    siret: string;
-    name: string;
-    insee_payload: any;
+  data: {
+    scopes: string;
+    description: string;
+    cadre_juridique_url: string;
+    cadre_juridique_nature: string;
   };
+  definition_id: string;
+  authorization_request_class: string;
 };
 
 export type IDatapassDemandeResponse = {
@@ -62,6 +61,6 @@ export type IDatapassDemandeResponse = {
     phone_number: string;
     job_title: string;
   };
-  habilitations: IDatapassHabilitationResponse[];
+  habilitations: IDatapassHabilitation[];
   events: any[];
 };

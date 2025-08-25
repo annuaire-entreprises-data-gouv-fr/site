@@ -1,4 +1,4 @@
-import { IRolesDataGroup } from '#models/authentication/group/groups';
+import { Groups } from '#models/authentication/group/groups';
 import {
   Habilitation,
   HabilitationVerificationFailedException,
@@ -9,7 +9,7 @@ import { validateSchema } from './input-validation';
 import { withAgentAuth, withErrorHandling } from './route-wrappers';
 
 export interface ICreateRolesDataGroup {
-  group: IRolesDataGroup | null;
+  newScopes: string;
   error: string | null;
 }
 
@@ -19,30 +19,29 @@ async function createGroupHandler(request: Request) {
 
     const body = await request.json();
     const validatedData = validateSchema.parse(body);
-    const user = 'robin.monnier@beta.gouv.fr';
-    // const user = session!.user!.email;
+    const user = session!.user!.email;
 
     const { contractUrl, contractDescription, scopes, siret } =
       await Habilitation.verify(validatedData.demandeId, user);
 
-    // const group = await Groups.create(
-    //   session!.user!.email,
-    //   session!.user!.proConnectSub,
-    //   validatedData.groupName,
-    //   validatedData.emails || [],
-    //   contractUrl,
-    //   contractDescription,
-    //   scopes,
-    //   siret
-    // );
+    const serializedScopes = scopes.join(' ');
 
-    return NextResponse.redirect(
-      `/compte/habilitation/${validatedData.demandeId}/succes`
+    await Groups.create(
+      session!.user!.email,
+      session!.user!.proConnectSub,
+      validatedData.groupName,
+      validatedData.emails || [],
+      contractUrl,
+      contractDescription,
+      serializedScopes,
+      siret
     );
+
+    return NextResponse.json({ newScopes: serializedScopes, error: null });
   } catch (error) {
     if (error instanceof HabilitationVerificationFailedException) {
       return NextResponse.json({
-        group: null,
+        newScopes: '',
         error: error.message,
       } as ICreateRolesDataGroup);
     }

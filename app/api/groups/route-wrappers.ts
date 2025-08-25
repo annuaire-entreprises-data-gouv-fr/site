@@ -3,6 +3,8 @@ import {
   ApplicationRights,
   hasRights,
 } from '#models/authentication/user/rights';
+import { InternalError } from '#models/exceptions';
+import { logFatalErrorInSentry } from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { NextResponse } from 'next/server';
 import z from 'zod';
@@ -51,6 +53,13 @@ export function withErrorHandling<TContext>(
       if (error instanceof HttpNotFound) {
         return new NextResponse('Resource not found', { status: 404 });
       }
+
+      logFatalErrorInSentry(
+        new InternalError({
+          message: 'Internal error in Groups',
+          cause: error,
+        })
+      );
 
       return new NextResponse('Internal server error', { status: 500 });
     }

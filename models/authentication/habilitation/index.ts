@@ -1,5 +1,7 @@
 import { getDatapassDemande } from '#clients/datapass';
+import { IDatapassHabilitation } from '#clients/datapass/interface';
 import { HttpNotFound } from '#clients/exceptions';
+import { parseAgentScopes } from '#clients/roles-data/parse';
 import { Exception, FetchRessourceException } from '#models/exceptions';
 import { Siret } from '#utils/helpers';
 import { logFatalErrorInSentry } from '#utils/sentry';
@@ -15,24 +17,26 @@ export class HabilitationVerificationFailedException extends Exception {
 }
 
 export class Habilitation {
-  private static mapDatapassScopesToIAgentScopes(habiliationData: any) {
-    // const formUid = demande.form_uid;
-    //   let scopesArray: IAgentScope[] = [];
-    //   if (formUid === 'annuaire-des-entreprises-marches-publics') {
-    //     scopesArray = marchePublicScopes;
-    //   } else if (formUid === 'annuaire-des-entreprises-aides-publiques') {
-    //     scopesArray = aidesPubliquesScopes;
-    //   } else if (
-    //     formUid === 'annuaire-des-entreprises-lutte-contre-la-fraude'
-    //   ) {
-    //     scopesArray = lutteContreLaFraudeScopes;
-    //   } else if (
-    //     formUid === 'annuaire-des-entreprises-subventions-associations'
-    //   ) {
-    //     scopesArray = subventionsAssociationsScopes;
-    //   }
+  private static mapDatapassScopesToIAgentScopes(
+    habilitation: IDatapassHabilitation
+  ) {
+    const rawScopes = habilitation.data.scopes
+      .replace('[', '')
+      .replace(']', '')
+      .replaceAll('"', '')
+      .replaceAll(',', '');
 
-    return [...defaultAgentScopes];
+    const { validScopes, inValidScopes } = parseAgentScopes(rawScopes);
+
+    if (inValidScopes.length > 0) {
+      throw new HabilitationVerificationFailedException({
+        message: `Certains droits associés à la demande sont invalides (${inValidScopes.join(
+          ', '
+        )}). Contactez-nous pour résoudre le problème.`,
+      });
+    }
+
+    return [...defaultAgentScopes, ...validScopes];
   }
 
   static async verify(demandeId: number, userEmail: string) {
@@ -62,15 +66,13 @@ export class Habilitation {
       }
 
       const contractUrl = `${process.env.DATAPASS_URL}/instruction/demandes/${demandeId}`;
-      const scopes = this.mapDatapassScopesToIAgentScopes(
-        activeHabilitation.data
-      );
+      const scopes = this.mapDatapassScopesToIAgentScopes(activeHabilitation);
 
       return {
         contractUrl,
         contractDescription: `DATAPASS : demande ${demandeId} | habilitation ${activeHabilitation.id}`,
         scopes,
-        siret: activeHabilitation.organisation.siret as Siret,
+        siret: demande.organisation.siret as Siret,
       };
     } catch (error) {
       if (error instanceof HttpNotFound) {

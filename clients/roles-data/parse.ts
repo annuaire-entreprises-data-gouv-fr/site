@@ -10,10 +10,10 @@ export const isAgentScope = (str: string): str is IAgentScope => {
   return false;
 };
 
-export const parseAgentScopes = (rawScope: string) => {
+export const parseAgentScopes = (rawScope: string, separator = ' ') => {
   const inValidScopes = [] as string[];
 
-  const validScopes = (rawScope || '').split(' ').filter((s: string) => {
+  const validScopes = (rawScope || '').split(separator).filter((s: string) => {
     const isScopeValid = isAgentScope(s);
     // there can be trailing whitespace, therefore s can be an empty string
     if (s && !isScopeValid) {
