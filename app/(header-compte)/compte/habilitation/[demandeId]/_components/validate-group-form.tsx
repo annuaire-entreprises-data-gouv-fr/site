@@ -26,11 +26,13 @@ export default function ValidateGroupForm({
   );
 
   const submitAndCreateGroup = async () => {
+    setErrors({ groupName: undefined, emails: undefined });
+
     const groupName = (inputGroup.current?.value || '').trim();
     const emails = (inputEmails.current?.value || '').trim();
 
     const groupNameValidationError = validateGroupName(groupName);
-    const emailsValidationError = validateEmails(emails);
+    const emailsValidationError = validateEmails(emails.replaceAll('\n', ''));
 
     if (groupNameValidationError || emailsValidationError) {
       setErrors({
@@ -60,13 +62,13 @@ export default function ValidateGroupForm({
           'Impossible de configurer vos droits',
           response.error || ''
         );
+      } else {
+        router.push(
+          `/compte/habilitation/${demandeId}/succes?scopes=${encodeURIComponent(
+            response.newScopes || ''
+          )}`
+        );
       }
-
-      router.push(
-        `/compte/habilitation/${demandeId}/succes?scopes=${encodeURIComponent(
-          response.newScopes || ''
-        )}`
-      );
     } catch (error: any) {
       showErrorNotification('Impossible de configurer vos droits');
     } finally {

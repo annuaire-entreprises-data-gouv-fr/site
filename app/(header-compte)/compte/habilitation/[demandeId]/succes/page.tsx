@@ -46,7 +46,7 @@ const ConfigurezVotreGroupe = async ({
           l’espace agent de l’Annuaire des Entreprises :{' '}
         </p>
       </div>
-      {scopes.split(' ').map((s) => (
+      {(scopes || '').split(' ').map((s) => (
         <>
           <Tag>{s}</Tag>{' '}
         </>
@@ -54,7 +54,7 @@ const ConfigurezVotreGroupe = async ({
       <div className="fr-col-8">
         <p>
           Pour consultez vos droits, vous pouvez consulter la{' '}
-          <a href="/comte/accueil">page ”Mes droits”</a>.
+          <a href="/compte/accueil">page ”Mes droits”</a>.
         </p>
         <p>
           Il vous est également possible d’ajouter vos collègues a votre groupe
@@ -62,12 +62,12 @@ const ConfigurezVotreGroupe = async ({
         </p>
         <ul className="fr-card__desc fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
           <li>
-            <ButtonLink alt small>
+            <ButtonLink to="/compte/accueil" alt small>
               Voir mes droits
             </ButtonLink>
           </li>
           <li>
-            <ButtonLink to="/compte/accueil" small>
+            <ButtonLink to="/compte/mes-groupes" small>
               Gérer mes groupes
             </ButtonLink>
           </li>

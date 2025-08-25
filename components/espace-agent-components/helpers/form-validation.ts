@@ -16,9 +16,16 @@ export const validateEmail = (email: string): ValidationErrors => {
 export const validateEmails = (emailList: string): ValidationErrors => {
   const emails = emailList.split(',').filter((email) => Boolean(email.trim()));
 
-  return emails.some((email) => validateEmail(email))
-    ? 'Au moins une des adresses emails n’est pas valide'
-    : null;
+  const invalidEmails = emails.filter((email) => validateEmail(email));
+
+  if (invalidEmails.length === 0) {
+    return null;
+  }
+
+  const plural = invalidEmails.length === 1 ? '' : 's';
+  return `Adresse${plural} email${plural} invalide${plural} : ${invalidEmails.join(
+    ', '
+  )}`;
 };
 
 export const validateGroupName = (name: string): ValidationErrors => {
