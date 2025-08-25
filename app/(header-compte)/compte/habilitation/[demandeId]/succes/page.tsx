@@ -42,8 +42,8 @@ const ConfigurezVotreGroupe = async ({
           Vos nouveaux droits ont été enregistrés avec succès !
         </h1>
         <p>
-          Vous pouvez désormais utiliser vos nouveaux droits dans l’espace agent
-          de l’Annuaire des Entreprises :{' '}
+          Vous pouvez commencer désormais à utiliser vos nouveaux droits dans
+          l’espace agent de l’Annuaire des Entreprises :{' '}
         </p>
       </div>
       {scopes.split(' ').map((s) => (
