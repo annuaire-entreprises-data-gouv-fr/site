@@ -62,12 +62,12 @@ const ConfigurezVotreGroupe = async ({
         </p>
         <ul className="fr-card__desc fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
           <li>
-            <ButtonLink alt small>
+            <ButtonLink to="/compte/accueil" alt small>
               Voir mes droits
             </ButtonLink>
           </li>
           <li>
-            <ButtonLink to="/compte/accueil" small>
+            <ButtonLink to="/compte/mes-groupes" small>
               Gérer mes groupes
             </ButtonLink>
           </li>
