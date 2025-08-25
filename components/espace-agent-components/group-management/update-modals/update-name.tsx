@@ -1,7 +1,7 @@
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { Icon } from '#components-ui/icon/wrapper';
-import { validateGroupName } from '#components/espace-agent-components/group-management/update-modals/form-validation';
+import { validateGroupName } from '#components/espace-agent-components/helpers/form-validation';
 import {
   showErrorNotification,
   showSuccessNotification,

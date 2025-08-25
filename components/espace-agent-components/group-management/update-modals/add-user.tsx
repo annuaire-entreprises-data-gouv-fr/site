@@ -3,7 +3,7 @@
 import { IRolesDataUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
-import { validateEmail } from '#components/espace-agent-components/group-management/update-modals/form-validation';
+import { validateEmail } from '#components/espace-agent-components/helpers/form-validation';
 import {
   showErrorNotification,
   showSuccessNotification,

@@ -1,0 +1,97 @@
+import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import httpClient, { IDefaultRequestConfig } from '#utils/network';
+import { URLSearchParams } from 'url';
+
+/**
+ * Datapass
+ * https://datapass.api.gouv.fr/
+ */
+class DatapassAPIClient {
+  private _accessToken: string | null;
+  private _tokenExpiryTime: number;
+
+  constructor(
+    private client_id: string | undefined,
+    private client_secret: string | undefined,
+    private url: string | undefined
+  ) {
+    if (!this.client_id || !this.client_secret || !this.url) {
+      throw new HttpServerError('Datapass env variables are undefined');
+    }
+    this._accessToken = null;
+    this._tokenExpiryTime = 0;
+  }
+
+  private newToken = async () => {
+    try {
+      const url = `${this.url}/api/v1${routes.datapass.auth.token}`;
+
+      const data = await httpClient<any>({
+        url,
+        method: 'POST',
+        timeout: constants.timeout.XXXL,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          client_id: this.client_id || '',
+          client_secret: this.client_secret || '',
+          grant_type: 'client_credentials',
+        }).toString(),
+      });
+
+      this._accessToken = data.access_token;
+      // 45 seconds before the token expires
+
+      this._tokenExpiryTime =
+        new Date().getTime() + (data.expires_in - 45) * 1000;
+    } catch (e) {
+      this._accessToken = null;
+      this._tokenExpiryTime = 0;
+      throw new HttpUnauthorizedError('Failed to get token');
+    }
+  };
+
+  private isTokenExpired = () => {
+    const now = new Date().getTime();
+    return now > this._tokenExpiryTime;
+  };
+
+  private getToken = async () => {
+    if (!this._accessToken || this.isTokenExpired()) {
+      await this.newToken();
+      if (!this._accessToken) {
+        throw new HttpUnauthorizedError('Failed to refresh token');
+      }
+    }
+    return this._accessToken;
+  };
+
+  public fetch = async <T>(
+    route: string,
+    config: IDefaultRequestConfig
+  ): Promise<T> => {
+    const token = await this.getToken();
+    const url = `${this.url}/api/v1${route}`;
+
+    return httpClient<T>({
+      url,
+      timeout: constants.timeout.M,
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+}
+
+const datapassApiClient = new DatapassAPIClient(
+  process.env.DATAPASS_CLIENT_ID,
+  process.env.DATAPASS_CLIENT_SECRET,
+  process.env.DATAPASS_URL
+);
+
+export { datapassApiClient };

@@ -1,5 +1,5 @@
 import { HttpUnauthorizedError } from '#clients/exceptions';
-import rolesdataClient from '#clients/roles-data';
+import rolesDataClient from '#clients/roles-data';
 import { IRolesDataUser } from '#clients/roles-data/interface';
 import { Groups } from '#models/authentication/group/groups';
 import { FetchRessourceException } from '#models/exceptions';
@@ -61,7 +61,7 @@ export class Group {
         );
       }
 
-      await rolesdataClient.updateName(this.groupId, groupName, adminSub);
+      await rolesDataClient.updateName(this.groupId, groupName, adminSub);
       return true;
     } catch (error) {
       logFatalErrorInSentry(
@@ -92,7 +92,7 @@ export class Group {
         );
       }
 
-      const user = await rolesdataClient.addUserToGroup(
+      const user = await rolesDataClient.addUserToGroup(
         this.groupId,
         userEmail,
         roleId,
@@ -127,7 +127,7 @@ export class Group {
         );
       }
 
-      const user = await rolesdataClient.updateUserFromGroup(
+      const user = await rolesDataClient.updateUserFromGroup(
         this.groupId,
         userEmail,
         roleId,
@@ -161,8 +161,8 @@ export class Group {
         );
       }
 
-      const user = await rolesdataClient.getUserByEmail(userEmail);
-      await rolesdataClient.removeUserFromGroup(
+      const user = await rolesDataClient.getUserByEmail(userEmail);
+      await rolesDataClient.removeUserFromGroup(
         this.groupId,
         user.id,
         adminSub

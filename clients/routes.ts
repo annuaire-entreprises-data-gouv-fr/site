@@ -263,6 +263,14 @@ const routes = {
         `https://updown.io/api/checks/${slug}/downtimes`,
     },
   },
+  datapass: {
+    auth: {
+      token: '/oauth/token',
+    },
+    demandes: {
+      getById: (id: number) => `/demandes/${id}`,
+    },
+  },
   rolesData: {
     auth: {
       token: '/auth/token',
@@ -272,10 +280,13 @@ const routes = {
         `/users/search?email=${encodeURIComponent(email)}`,
     },
     groups: {
+      getGroups: '/groups/',
       getGroupsByEmail: (userEmail: string, userSub: string) =>
         `/groups/search?user_email=${encodeURIComponent(
           userEmail
         )}&user_sub=${userSub}`,
+      create: (actingUserSub: string) =>
+        `/groups?acting_user_sub=${actingUserSub}`,
       updateName: (groupId: number, groupName: string, actingUserSub: string) =>
         `/groups/${groupId}?group_name=${encodeURIComponent(
           groupName

@@ -4,7 +4,8 @@ import { InternalError } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { rolesdataApiClient } from './client';
 import {
-  IRolesDataGroupSearchResponse,
+  IRolesDataGroupCreate,
+  IRolesDataGroupResponse,
   IRolesDataRoles,
   IRolesDataUser,
 } from './interface';
@@ -19,15 +20,17 @@ export const getGroupsByEmail = async (
   userSub: string
 ): Promise<IRolesDataGroup[]> => {
   const route = routes.rolesData.groups.getGroupsByEmail(userEmail, userSub);
-  const response =
-    await rolesdataApiClient.fetch<IRolesDataGroupSearchResponse>(route, {
+  const response = await rolesdataApiClient.fetch<IRolesDataGroupResponse[]>(
+    route,
+    {
       method: 'GET',
-    });
+    }
+  );
   return mapToDomainObject(response);
 };
 
 const mapToDomainObject = (
-  response: IRolesDataGroupSearchResponse
+  response: IRolesDataGroupResponse[]
 ): IRolesDataGroup[] => {
   return response.map((group) => {
     const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
@@ -61,6 +64,17 @@ export const getUserByEmail = async (
   });
 };
 
+export const create = async (
+  body: IRolesDataGroupCreate,
+  actingUserSub: string
+): Promise<IRolesDataGroup> => {
+  const route = routes.rolesData.groups.create(actingUserSub);
+  return await rolesdataApiClient.fetch<IRolesDataGroup>(route, {
+    method: 'POST',
+    data: body,
+  });
+};
+
 export const updateName = async (
   groupId: number,
   groupName: string,
@@ -75,6 +89,7 @@ export const updateName = async (
     method: 'PUT',
   });
 };
+
 export const addUserToGroup = async (
   groupId: number,
   email: string,
@@ -126,6 +141,7 @@ export default {
   getGroupsByEmail,
   getRolesMetadata,
   getUserByEmail,
+  create,
   updateName,
   addUserToGroup,
   updateUserFromGroup,
