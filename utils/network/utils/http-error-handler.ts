@@ -4,6 +4,7 @@ import {
   HttpConflict,
   HttpConnectionReset,
   HttpForbiddenError,
+  HttpLocked,
   HttpNotFound,
   HttpServerError,
   HttpTimeoutError,
@@ -27,6 +28,9 @@ export const httpErrorHandler = (
     }
     case 404: {
       throw new HttpNotFound(statusText || 'Not Found');
+    }
+    case 423: {
+      throw new HttpLocked(statusText || 'Resource is locked');
     }
     case 403: {
       throw new HttpForbiddenError('Forbidden');

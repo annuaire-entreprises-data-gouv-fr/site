@@ -6,6 +6,13 @@ class HttpError extends Error {
   }
 }
 
+export class HttpLocked extends HttpError {
+  constructor(public message: string) {
+    super(message, 423);
+    this.name = 'HttpLocked';
+  }
+}
+
 export class HttpNotFound extends HttpError {
   constructor(public message: string) {
     super(message, 404);

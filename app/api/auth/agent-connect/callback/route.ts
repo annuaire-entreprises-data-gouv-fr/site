@@ -3,6 +3,7 @@ import { HttpForbiddenError } from '#clients/exceptions';
 import { AgentConnected } from '#models/authentication/agent/agent-connected';
 import {
   AgentConnectionFailedException,
+  AgentNotVerifiedException,
   CanRequestAuthorizationException,
   NeedASiretException,
   PrestataireException,
@@ -34,7 +35,7 @@ export const GET = withSession(async function callbackRoute(req) {
         })
       );
       if (userInfo.idp_id === '9e139e69-de07-4cbe-987f-d12cb38c0368') {
-      // Ministère de la Justice – temporary workaround until Proconnect fix
+        // Ministère de la Justice – temporary workaround until Proconnect fix
         userInfo.siret = '11001001400014';
       }
     }
@@ -68,6 +69,11 @@ export const GET = withSession(async function callbackRoute(req) {
         context: { slug: siretForException || 'siret non renseigné' },
       })
     );
+    if (e instanceof AgentNotVerifiedException) {
+      return NextResponse.redirect(
+        getBaseUrl() + '/connexion/habilitation/activation-necessaire'
+      );
+    }
     if (e instanceof PrestataireException) {
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/prestataires'
