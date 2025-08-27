@@ -159,6 +159,7 @@ describe('AgentConnected', () => {
         scopes: expect.arrayContaining([...groupScopes]),
         userType: 'Super-agent connecté',
         isSuperAgent: true,
+        agentIsNotVerified: false,
       });
     });
 
@@ -221,6 +222,7 @@ describe('AgentConnected', () => {
         scopes: expect.arrayContaining(groupScopes),
         userType: 'Super-agent connecté',
         isSuperAgent: true,
+        agentIsNotVerified: false,
       });
     });
   });
