@@ -116,6 +116,15 @@ export const anonymiseEtablissement = (
       commune
     );
 
+    // 851915207
+    // should be reverted with https://github.com/annuaire-entreprises-data-gouv-fr/site/pull/1949
+    if (etablissement.siren === '851915207') {
+      etablissement.adresse = '';
+      etablissement.adressePostale = '';
+      etablissement.commune = '';
+      etablissement.codePostal = '';
+    }
+
     etablissement.enseigne = defaultNonDiffusiblePlaceHolder(etablissement);
     etablissement.denomination = defaultNonDiffusiblePlaceHolder(etablissement);
     return etablissement;
