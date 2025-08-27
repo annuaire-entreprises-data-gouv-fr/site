@@ -80,7 +80,7 @@ export class AgentConnected {
    * @returns
    */
   async getHabilitationLevel() {
-    // If agent is not verified we still belongs to a group and need activation
+    // If agent is not verified, he still belongs to a group and need activation
     let agentIsNotVerified = false;
     try {
       const agentHabilitation = await this.getAgentHabilitation();
