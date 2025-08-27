@@ -40,6 +40,7 @@ const generateSessionCookie = async (inputEmail?: string) => {
       scopes: user.scopes.split(' ') as IAgentScope[],
       userType: 'Super-agent connecté',
       isSuperAgent: true,
+      agentIsNotVerified: false,
     },
   };
 

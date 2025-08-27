@@ -159,6 +159,7 @@ describe('AgentConnected', () => {
         scopes: expect.arrayContaining([...groupScopes]),
         userType: 'Super-agent connecté',
         isSuperAgent: true,
+        agentIsNotVerified: false,
       });
     });
 
@@ -179,6 +180,7 @@ describe('AgentConnected', () => {
       const mockOrgHabilitation = {
         scopes: ['org-scope'],
         userType: 'Organisation',
+        agentIsNotVerified: false,
       };
 
       const mockGetHabilitationLevel = jest
@@ -220,6 +222,7 @@ describe('AgentConnected', () => {
         scopes: expect.arrayContaining(groupScopes),
         userType: 'Super-agent connecté',
         isSuperAgent: true,
+        agentIsNotVerified: false,
       });
     });
   });
