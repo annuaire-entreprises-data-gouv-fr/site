@@ -2,66 +2,33 @@ import { HttpForbiddenError } from '#clients/exceptions';
 import { InternalError } from '#models/exceptions';
 import { getHidePersonalDataRequestFCSession } from '#utils/session';
 import { randomBytes } from 'crypto';
-import { BaseClient, Issuer, generators } from 'openid-client';
+import * as client from 'openid-client';
 
-let _client = undefined as BaseClient | undefined;
-
-const CLIENT_ID = process.env.FRANCECONNECT_CLIENT_ID;
-const ISSUER_URL = process.env.FRANCECONNECT_URL;
-const CLIENT_SECRET = process.env.FRANCECONNECT_CLIENT_SECRET;
-const REDIRECT_URI = process.env.FRANCECONNECT_REDIRECT_URI;
-const POST_LOGOUT_REDIRECT_URI =
-  process.env.FRANCECONNECT_POST_LOGOUT_REDIRECT_URI;
-
-export const getClient = async () => {
-  if (_client) {
-    return _client;
-  } else {
-    if (
-      !CLIENT_ID ||
-      !ISSUER_URL ||
-      !CLIENT_SECRET ||
-      !REDIRECT_URI ||
-      !POST_LOGOUT_REDIRECT_URI
-    ) {
-      throw new InternalError({
-        message: 'FRANCECONNECT ENV variables are not defined',
-      });
-    }
-    const FranceConnectIssuer = new Issuer({
-      issuer: ISSUER_URL,
-      authorization_endpoint: `${ISSUER_URL}/api/v1/authorize`,
-      token_endpoint: `${ISSUER_URL}/api/v1/token`,
-      userinfo_endpoint: `${ISSUER_URL}/api/v1/userinfo`,
-      end_session_endpoint: `${ISSUER_URL}/api/v1/logout`,
-    });
-
-    _client = new FranceConnectIssuer.Client({
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      redirect_uris: [REDIRECT_URI],
-      post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
-      id_token_signed_response_alg: 'HS256',
-      response_types: ['code'],
-    });
-
-    return _client;
-  }
-};
+let server = process.env.FRANCECONNECT_URL as string;
+let clientId = process.env.FRANCECONNECT_CLIENT_ID as string;
+let clientSecret = process.env.FRANCECONNECT_CLIENT_SECRET as string;
+let redirect_uri = process.env.FRANCECONNECT_REDIRECT_URI as string;
+let post_logout_redirect_uri = process.env
+  .FRANCECONNECT_POST_LOGOUT_REDIRECT_URI as string;
 
 export const franceConnectAuthorizeUrl = async (req: any) => {
-  const client = await getClient();
+  let config = await client.discovery(new URL(server), clientId, clientSecret);
+
   const session = req.session;
-  session.FC_CONNECT_CHECK = {
-    state: generators.state(),
-    nonce: generators.nonce(),
-  };
+  session.state = client.randomState();
+  session.nonce = client.randomNonce();
   await session.save();
-  return client.authorizationUrl({
-    scope: 'openid ' + franceConnectScope.join(' '),
+
+  let parameters: Record<string, string> = {
+    redirect_uri,
     acr_values: 'eidas1',
-    ...session.FC_CONNECT_CHECK,
-  });
+    scope: 'openid ' + franceConnectScope.join(' '),
+    state: session.state,
+    nonce: session.nonce,
+  };
+
+  let redirectTo = client.buildAuthorizationUrl(config, parameters);
+  return redirectTo;
 };
 const franceConnectScope = ['family_name', 'given_name', 'birthdate'] as const;
 
@@ -72,32 +39,29 @@ export type IFranceConnectUserInfo = Partial<
   sub: string;
 };
 
-export async function franceConnectAuthenticate(
-  req: any
-): Promise<IFranceConnectUserInfo> {
-  const client = await getClient();
-  const params = client.callbackParams(req);
-  const tokenSet = await client.callback(
-    // reuse redirect_uri
-    REDIRECT_URI,
-    params,
-    req.session.FC_CONNECT_CHECK,
-    {
-      exchangeBody: {
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-      },
-    }
-  );
-  delete req.session.FC_CONNECT_CHECK;
+export async function franceConnectAuthenticate(req: any) {
+  let config = await client.discovery(new URL(server), clientId, clientSecret);
+
+  const session = req.session;
+  let tokens = await client.authorizationCodeGrant(config, currentUrl, {
+    expectedNonce: session.nonce,
+    expectedState: session.state,
+    idTokenExpected: true,
+  });
+  delete req.session.state;
+  delete req.session.nonce;
   await req.session.save();
-  const { access_token, id_token } = tokenSet;
-  if (!access_token || !id_token) {
+
+  const { access_token } = tokens;
+  let claims = tokens.claims()!;
+  const { sub } = claims;
+
+  if (!access_token) {
     throw new HttpForbiddenError('No access token');
   }
 
-  const userInfo = await client.userinfo(access_token);
-  return { ...userInfo, id_token, sub: userInfo.sub };
+  let userInfo = await client.fetchUserInfo(config, access_token, sub);
+  return userInfo;
 }
 
 export const franceConnectLogoutUrl = async (req: any) => {
