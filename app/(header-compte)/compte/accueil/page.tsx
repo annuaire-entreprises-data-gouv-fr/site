@@ -31,8 +31,10 @@ const CompteAgentAccueil = async () => {
     return redirect('/lp/agent-public');
   }
 
-  const canSeeDatapassLink =
-    true || hasRights(session, ApplicationRights.administrateur);
+  const canSeeDatapassLink = hasRights(
+    session,
+    ApplicationRights.administrateur
+  );
 
   const appRights = Object.values(ApplicationRights)
     .filter((scope) => scope !== ApplicationRights.isAgent)
