@@ -65,12 +65,12 @@ export class Habilitation {
         });
       }
 
-      const contractUrl = `${process.env.DATAPASS_URL}/instruction/demandes/${demandeId}`;
+      const contractUrl = `${process.env.DATAPASS_URL}/habilitations/${activeHabilitation.slug}`;
       const scopes = this.mapDatapassScopesToIAgentScopes(activeHabilitation);
 
       return {
         contractUrl,
-        contractDescription: `DATAPASS : demande ${demandeId} | habilitation ${activeHabilitation.id}`,
+        contractDescription: `Habilitation DATAPASS n° ${activeHabilitation.id}`,
         scopes,
         siret: demande.organisation.siret as Siret,
       };
