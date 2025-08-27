@@ -117,7 +117,7 @@ export const anonymiseEtablissement = (
     );
 
     // 851915207
-    // should be reverted with https://github.com/annuaire-entreprises-data-gouv-fr/site/pull/1949
+    // should be reverted with https://github.com/annuaire-entreprises-data-gouv-fr/site/pull/1955
     if (etablissement.siren === '851915207') {
       etablissement.adresse = '';
       etablissement.adressePostale = '';
