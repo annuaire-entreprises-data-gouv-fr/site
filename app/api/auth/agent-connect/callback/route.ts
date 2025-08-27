@@ -3,7 +3,6 @@ import { HttpForbiddenError } from '#clients/exceptions';
 import { AgentConnected } from '#models/authentication/agent/agent-connected';
 import {
   AgentConnectionFailedException,
-  AgentNotVerifiedException,
   CanRequestAuthorizationException,
   NeedASiretException,
   PrestataireException,
@@ -69,11 +68,6 @@ export const GET = withSession(async function callbackRoute(req) {
         context: { slug: siretForException || 'siret non renseigné' },
       })
     );
-    if (e instanceof AgentNotVerifiedException) {
-      return NextResponse.redirect(
-        getBaseUrl() + '/connexion/habilitation/activation-necessaire'
-      );
-    }
     if (e instanceof PrestataireException) {
       return NextResponse.redirect(
         getBaseUrl() + '/connexion/habilitation/prestataires'

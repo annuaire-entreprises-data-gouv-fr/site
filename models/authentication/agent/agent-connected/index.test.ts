@@ -179,6 +179,7 @@ describe('AgentConnected', () => {
       const mockOrgHabilitation = {
         scopes: ['org-scope'],
         userType: 'Organisation',
+        agentIsNotVerified: false,
       };
 
       const mockGetHabilitationLevel = jest

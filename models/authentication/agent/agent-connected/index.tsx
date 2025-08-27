@@ -1,6 +1,7 @@
 import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
 import { Scopes } from '#models/authentication/agent/scopes';
 import {
+  AgentNotVerifiedException,
   NeedASiretException,
   PrestataireException,
 } from '#models/authentication/authentication-exceptions';
@@ -79,7 +80,8 @@ export class AgentConnected {
    * @returns
    */
   async getHabilitationLevel() {
-    const agentHabilitation = await this.getAgentHabilitation();
+    const { agentHabilitation, agentIsNotVerified } =
+      await this.getAgentHabilitation();
     if (agentHabilitation) {
       return agentHabilitation;
     }
@@ -89,26 +91,43 @@ export class AgentConnected {
       throw new PrestataireException(`${this.email} is a prestataire`);
     }
 
-    return this.getOrganisationHabilitation();
+    const habilitationInheritedFromOrganisation =
+      await this.getOrganisationHabilitation();
+
+    return {
+      ...habilitationInheritedFromOrganisation,
+      agentIsNotVerified,
+    };
   }
 
   async getAgentHabilitation() {
     const superAgentScopes = new Scopes();
 
-    const groups = await Groups.find(this.email, this.proConnectSub);
-    groups.forEach((group) => {
-      superAgentScopes.add(group.scopes);
-    });
+    try {
+      const groups = await Groups.find(this.email, this.proConnectSub);
+      groups.forEach((group) => {
+        superAgentScopes.add(group.scopes);
+      });
+    } catch (e) {
+      if (e instanceof AgentNotVerifiedException) {
+        return { agentHabilitation: null, agentIsNotVerified: true };
+      } else {
+        throw e;
+      }
+    }
 
     if (superAgentScopes.hasScopes()) {
       return {
-        scopes: [...defaultAgentScopes, ...superAgentScopes.scopes],
-        userType: 'Super-agent connecté',
-        isSuperAgent: true,
+        agentHabilitation: {
+          scopes: [...defaultAgentScopes, ...superAgentScopes.scopes],
+          userType: 'Super-agent connecté',
+          isSuperAgent: true,
+        },
+        agentIsNotVerified: false,
       };
     }
 
-    return null;
+    return { agentHabilitation: null, agentIsNotVerified: false };
   }
 
   async getOrganisationHabilitation() {
