@@ -4,15 +4,17 @@ import ButtonLink from '#components-ui/button';
 import FullWidthContainer from '#components-ui/container';
 import AgentNavigation from '#components/espace-agent-components/agent-navigation';
 import { FullTable } from '#components/table/full';
-import { getAgentFullName } from '#models/authentication/user/helpers';
 import {
   ApplicationRights,
   hasRights,
 } from '#models/authentication/user/rights';
 import constants from '#models/constants';
+import { changelogData } from '#models/historique-modifications';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
+
+const lastChangelog = changelogData[0];
 
 export const metadata: Metadata = {
   title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
@@ -29,84 +31,115 @@ const CompteAgentAccueil = async () => {
     return redirect('/lp/agent-public');
   }
 
+  const canSeeDatapassLink =
+    true || hasRights(session, ApplicationRights.administrateur);
+
   const appRights = Object.values(ApplicationRights)
     .filter((scope) => scope !== ApplicationRights.isAgent)
-    .map((scope) => [scope, hasRights(session, scope)]);
-
-  const fullName = getAgentFullName(session);
+    .map((scope) => [scope, hasRights(session, scope)])
+    .filter(([a, b]) => canSeeDatapassLink || b);
 
   return (
     <>
       {session?.user?.isSuperAgent && <AgentNavigation />}
+      <section className="layout-space-between-start">
+        <div style={{ maxWidth: '50%' }}>
+          <h1>Bienvenue dans votre espace agent</h1>
+          <p>
+            Accédez à toutes les données publiques des entreprises et des
+            associations, pour faciliter vos missions.
+          </p>
+          <ButtonLink to="#droits-acces">
+            Consultez la liste des données
+          </ButtonLink>
+        </div>
+        <img src="/images/lp-agent/secure-folder 1.svg" alt="" />
+      </section>
       <FullWidthContainer
         style={{
-          background: 'var(--annuaire-colors-espaceAgentPastel)',
+          background:
+            'radial-gradient(61.94% 118.71% at 36.66% 38.06%, #F9C5E1 0%, #D8E6FF 100%)',
+          padding: '3rem 2rem 2rem 2rem',
         }}
       >
-        <h1>Bonjour{fullName ? ` ${fullName}` : ''},</h1>
-        <p>Découvrez l’espace agent public de l’Annuaire des Entreprises.</p>
         <div className="fr-grid-row fr-grid-row--gutters fr-mb-1w">
-          <div className="fr-col-md-6 fr-col-12">
+          <div className="fr-col-md-4 fr-col-12">
             <div className="fr-card">
               <div className="fr-card__body">
                 <div className="fr-card__content">
-                  <strong className="fr-card__title">
-                    Comprendre les données
-                  </strong>
+                  <strong className="fr-card__title">Nouveautés</strong>
                   <p className="fr-card__desc">
-                    Quelles sont les sources des données ? Dans quel cadre
-                    peut-on les utiliser ?
+                    <strong>{lastChangelog.date}</strong> :{' '}
+                    {lastChangelog.htmlBody}
                   </p>
                 </div>
                 <div className="fr-card__footer">
-                  <ul className="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
-                    <li>
-                      <ButtonLink
-                        target="_blank"
-                        to={constants.links.documentation.home}
-                      >
-                        Consulter la documentation
-                      </ButtonLink>
-                    </li>
-                    <li>
-                      <ButtonLink alt to="/modalites-utilisation">
-                        Modalités d’utilisation
-                      </ButtonLink>
-                    </li>
-                  </ul>
+                  <ButtonLink to="/historique-des-modifications" alt small>
+                    Voir toutes les nouveautés
+                  </ButtonLink>
                 </div>
               </div>
             </div>
           </div>
-          <div className="fr-col-md-6 fr-col-12">
+
+          <div className="fr-col-md-4 fr-col-12">
             <div className="fr-card">
               <div className="fr-card__body">
                 <div className="fr-card__content">
                   <strong className="fr-card__title">
-                    Comment s’informer ?
+                    Les données, ce sont des droits et des devoirs
                   </strong>
                   <p className="fr-card__desc">
-                    Pour connaître les nouveautés de l’espace agent et de
-                    l’Annuaire des Entreprises.
+                    Vous avez accès à des données dans le strict cadre de votre
+                    mission professionnelle.
+                  </p>
+                  <p className="fr-card__desc">
+                    Retrouvez les responsabilités et les contraintes qui
+                    entourent cet accès privilégié dans notre documentation et
+                    nos{' '}
+                    <a href="/modalites-utilisation">modalités d’utilisation</a>
+                    .
                   </p>
                 </div>
                 <div className="fr-card__footer">
-                  <ul className="fr-btns-group fr-btns-group--inline-reverse fr-btns-group--inline-lg">
-                    <li>
-                      <ButtonLink to="/historique-des-modifications">
-                        Consulter les nouveautés
-                      </ButtonLink>
-                    </li>
-                    <li>
-                      <ButtonLink
-                        alt
-                        to={constants.links.tchap}
-                        target="_blank"
-                      >
-                        Rejoignez-nous sur Tchap
-                      </ButtonLink>
-                    </li>
-                  </ul>
+                  <ButtonLink
+                    target="_blank"
+                    alt
+                    small
+                    to={constants.links.documentation.home}
+                  >
+                    Accéder à notre documentation
+                  </ButtonLink>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="fr-col-md-4 fr-col-12">
+            <div className="fr-card">
+              <div className="fr-card__body">
+                <div className="fr-card__content">
+                  <strong className="fr-card__title">
+                    Le Tchap de l’Annuaire
+                  </strong>
+                  <p className="fr-card__desc">
+                    Rejoignez notre équipe et les autres utilisateurs de
+                    l’Annuaire sur notre salon Tchap !
+                  </p>
+                  <p className="fr-card__desc">
+                    Partagez vos questions, vos souhaits, vos idées pour
+                    améliorer l’Annuaire.
+                  </p>
+                </div>
+                <div className="fr-card__footer">
+                  <ButtonLink
+                    alt
+                    to={constants.links.tchap}
+                    target="_blank"
+                    small
+                  >
+                    Rejoindre le salon Tchap
+                  </ButtonLink>
                 </div>
               </div>
             </div>
@@ -114,7 +147,7 @@ const CompteAgentAccueil = async () => {
         </div>
       </FullWidthContainer>
       <div className="content-container">
-        <h2>Récapitulatif de vos droits d’accès</h2>
+        <h2 id="droits-acces">Les données auxquelles vous avez accès</h2>
         {session?.user?.agentIsNotVerified && (
           <Warning>
             <strong>Attention</strong>, vous faites partie d’un groupe qui
@@ -138,21 +171,48 @@ const CompteAgentAccueil = async () => {
 
         <FullTable
           head={['Données', 'Droits']}
-          body={appRights
-            .filter(([_a, b]) => !!b)
-            .map(([a, _b]) => {
-              return [
-                a,
-                <Badge
-                  icon={'open'}
-                  label="oui"
-                  backgroundColor="#ddd"
-                  fontColor="#666"
-                />,
-              ];
-            })}
+          body={appRights.map(([a, b]) => {
+            return [
+              a,
+              <Badge
+                icon={b ? 'open' : 'closed'}
+                label={b ? 'Oui' : 'Non'}
+                backgroundColor="#ddd"
+                fontColor="#666"
+              />,
+            ];
+          })}
         />
       </div>
+
+      {canSeeDatapassLink && (
+        <div className="content-container">
+          <h2>Les données supplémentaires</h2>
+          <p>
+            Si votre <strong>mission le justifie</strong>, vous pouvez débloquer
+            l’accès aux données marquées{' '}
+            <Badge
+              icon={'closed'}
+              label={'Non'}
+              backgroundColor="#ddd"
+              fontColor="#666"
+            />
+            . Les missions qui permettent d’être habilité sont :
+          </p>
+          <ul>
+            <li>Lutte contre la fraude</li>
+            <li>Commande publique / marchés publics</li>
+            <li>Subventions aux associations</li>
+            <li>Aides publiques</li>
+          </ul>
+          <br />
+          <ButtonLink
+            to={`${process.env.DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`}
+          >
+            Demander une habilitation
+          </ButtonLink>
+        </div>
+      )}
     </>
   );
 };

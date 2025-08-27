@@ -77,6 +77,12 @@ h3,
   justify-content: space-between;
 }
 
+.layout-space-between-start {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+
 .font-small {
   font-size: 0.9rem;
 }
