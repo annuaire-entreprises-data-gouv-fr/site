@@ -62,11 +62,6 @@ export default function About() {
               ou élus (collectivités)
             </li>
             <li>
-              <strong>Annonces légales :</strong> annonces officielles au
-              Journal Officiel et au BODACC (Bulletin Officiel Des Annonces
-              Civiles et Commerciales)
-            </li>
-            <li>
               <strong>Données financières des entreprises :</strong> chiffre
               d’affaires et résultat net des sociétés
             </li>
