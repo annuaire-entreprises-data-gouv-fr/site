@@ -4,10 +4,6 @@ import { IRolesDataUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { validateEmail } from '#components/espace-agent-components/helpers/form-validation';
-import {
-  showErrorNotification,
-  showSuccessNotification,
-} from '#components/notification-center';
 import { IRolesDataGroup } from '#models/authentication/group/groups';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
@@ -45,7 +41,6 @@ export default function AddUserModal({
       const emailValidationError = validateEmail(userEmail);
       if (emailValidationError) {
         setValidationErrors([emailValidationError]);
-        showErrorNotification('Ajout impossible', emailValidationError);
         return;
       }
 
@@ -54,10 +49,6 @@ export default function AddUserModal({
         group.users.some((user: IRolesDataUser) => user.email === userEmail)
       ) {
         setValidationErrors(['Cet utilisateur est déjà membre de ce groupe']);
-        showErrorNotification(
-          'Ajout impossible',
-          'Cet utilisateur est déjà membre de ce groupe'
-        );
         return;
       }
 
@@ -72,15 +63,9 @@ export default function AddUserModal({
 
       addUserToGroupState(user);
 
-      showSuccessNotification(
-        'Membre ajouté avec succès',
-        `${userEmail} a été ajouté au groupe ${group.name}`
-      );
-
       setInputEmail('');
       setIsVisible(false);
     } catch (error: any) {
-      showErrorNotification("Erreur lors de l'ajout du membre", error?.message);
     } finally {
       setLoading(false);
     }

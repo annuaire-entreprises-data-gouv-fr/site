@@ -5,7 +5,6 @@ import {
   validateEmails,
   validateGroupName,
 } from '#components/espace-agent-components/helpers/form-validation';
-import { showErrorNotification } from '#components/notification-center';
 import httpClient from '#utils/network';
 import { ICreateRolesDataGroup } from 'app/api/groups/route';
 import { useRouter } from 'next/navigation';
@@ -39,10 +38,6 @@ export default function ValidateGroupForm({
         groupName: groupNameValidationError ?? undefined,
         emails: emailsValidationError ?? undefined,
       });
-      showErrorNotification(
-        'Impossible de configurer vos droits',
-        groupNameValidationError || emailsValidationError || ''
-      );
       return;
     }
 
@@ -58,10 +53,6 @@ export default function ValidateGroupForm({
         data: JSON.stringify({ groupName, demandeId, emails }),
       });
       if (response.error) {
-        showErrorNotification(
-          'Impossible de configurer vos droits',
-          response.error || ''
-        );
       } else {
         router.push(
           `/compte/habilitation/${demandeId}/succes?scopes=${encodeURIComponent(
@@ -70,7 +61,6 @@ export default function ValidateGroupForm({
         );
       }
     } catch (error: any) {
-      showErrorNotification('Impossible de configurer vos droits');
     } finally {
       setLoading(false);
     }

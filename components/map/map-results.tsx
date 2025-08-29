@@ -97,6 +97,17 @@ function MapWithResults({
     });
   }, [results, shouldColorZipCode, mapContainer]);
 
+  useEffect(() => {
+    setTimeout(
+      () =>
+        showNotificationSuccess(
+          'Tout va bien',
+          `La carte est correctement chargée`
+        ),
+      500
+    );
+    return () => {};
+  }, []);
   return (
     <div
       ref={mapContainer}

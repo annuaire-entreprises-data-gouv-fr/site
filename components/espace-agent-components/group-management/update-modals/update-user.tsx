@@ -1,8 +1,4 @@
 import { IRolesDataRoles, IRolesDataUser } from '#clients/roles-data/interface';
-import {
-  showErrorNotification,
-  showSuccessNotification,
-} from '#components/notification-center';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 
@@ -40,19 +36,10 @@ export default function UpdateUserSelect({
       updateUserFromGroupState(updatedUser);
       setOptimisticRoleId(null);
 
-      // Show success notification
       const roleName =
         roles.find((r) => r.id === roleId)?.role_name || 'utilisateur';
-      showSuccessNotification(
-        'Changement pris en compte',
-        `Le rôle de ${user.email} a été changé en "${roleName}".`
-      );
     } catch (error: any) {
       setOptimisticRoleId(null);
-      showErrorNotification(
-        'Erreur lors de la mise à jour du rôle',
-        error?.message
-      );
     } finally {
       setLoading(false);
     }

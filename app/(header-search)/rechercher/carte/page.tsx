@@ -30,6 +30,7 @@ export default async function MapSearchResultPage(props: AppRouterProps) {
   );
 
   const searchFilterParamsJSON = searchFilterParams.toJSON();
+
   return (
     <>
       <HeaderWithAdvancedSearch

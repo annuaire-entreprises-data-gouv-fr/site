@@ -2,10 +2,6 @@ import { IRolesDataUser } from '#clients/roles-data/interface';
 import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
-import {
-  showErrorNotification,
-  showSuccessNotification,
-} from '#components/notification-center';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 
@@ -40,14 +36,7 @@ export default function DeleteUserButton({
 
       deleteUserFromGroupState(userEmail);
       setShowConfirmation(false);
-
-      // Show success notification
-      showSuccessNotification(
-        'Membre supprimé',
-        `${userEmail} a été retiré du groupe`
-      );
     } catch (error: any) {
-      showErrorNotification('Erreur lors de la suppression', error?.message);
     } finally {
       setLoading(false);
     }
