@@ -28,9 +28,13 @@ export const getClient = async () => {
         message: 'FRANCE CONNECT ENV variables are not defined',
       });
     }
-    const FranceConnectIssuer = await Issuer.discover(
-      `${URL}/api/v2/.well-known/openid-configuration`
-    );
+    const FranceConnectIssuer = new Issuer({
+      issuer: URL,
+      authorization_endpoint: `${URL}/api/v2/authorize`,
+      token_endpoint: `${URL}/api/v2/token`,
+      userinfo_endpoint: `${URL}/api/v2/userinfo`,
+      end_session_endpoint: `${URL}/api/v2/logout`,
+    });
 
     _client = new FranceConnectIssuer.Client({
       client_id: CLIENT_ID,
