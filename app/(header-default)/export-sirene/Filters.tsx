@@ -33,7 +33,7 @@ export const selectedEffectifLabel = (filters: ExtendedExportCsvInput) => {
 const getLegalCategories = () =>
   Object.keys(categoriesJuridiques).map((categorie) => ({
     value: categorie,
-    label: categoriesJuridiques[categorie],
+    label: `${categorie} - ${categoriesJuridiques[categorie]}`,
   }));
 
 const todayString = new Date().toISOString().split('T')[0];
@@ -406,9 +406,9 @@ export default function Filters({
                 placeholder="Choisir un domaine d'activité"
                 id="sap-multi-select"
                 instanceId="sap-multi-select"
-                options={Object.keys(codesSectionNAF).map((k) => ({
-                  value: k,
-                  label: codesSectionNAF[k as keyof typeof codesSectionNAF],
+                options={Object.keys(codesSectionNAF).map((code) => ({
+                  value: code,
+                  label: `${code} - ${codesSectionNAF[code]}`,
                 }))}
                 onChange={(values) => {
                   setFilters((prev) => ({

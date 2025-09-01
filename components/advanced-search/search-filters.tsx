@@ -231,9 +231,7 @@ const SearchFilters: React.FC<{
             instanceId="naf-multi-select"
             options={Object.keys(codesNAFRev2).map((code) => ({
               value: code,
-              label: `${code} - ${
-                codesNAFRev2[code as keyof typeof codesNAFRev2]
-              }`,
+              label: `${code} - ${codesNAFRev2[code]}`,
             }))}
             menuPosition="fixed"
           />
