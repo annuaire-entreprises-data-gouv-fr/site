@@ -45,7 +45,6 @@ export class SireneQueryBuilder {
       'nomenclatureActivitePrincipaleUniteLegale',
       'identifiantAssociationUniteLegale',
       'economieSocialeSolidaireUniteLegale',
-      'caractereEmployeurUniteLegale',
       'societeMissionUniteLegale',
       'trancheEffectifsUniteLegale',
       'anneeEffectifsUniteLegale',
@@ -61,26 +60,9 @@ export class SireneQueryBuilder {
       'codePostalEtablissement',
       'libelleCommuneEtablissement',
       'libelleCommuneEtrangerEtablissement',
-      'distributionSpecialeEtablissement',
       'codeCommuneEtablissement',
-      'codeCedexEtablissement',
-      'libelleCedexEtablissement',
       'codePaysEtrangerEtablissement',
       'libellePaysEtrangerEtablissement',
-      'complementAdresse2Etablissement',
-      'numeroVoie2Etablissement',
-      'indiceRepetition2Etablissement',
-      'typeVoie2Etablissement',
-      'libelleVoie2Etablissement',
-      'codePostal2Etablissement',
-      'libelleCommune2Etablissement',
-      'libelleCommuneEtranger2Etablissement',
-      'distributionSpeciale2Etablissement',
-      'codeCommune2Etablissement',
-      'codeCedex2Etablissement',
-      'libelleCedex2Etablissement',
-      'codePaysEtranger2Etablissement',
-      'libellePaysEtranger2Etablissement',
       'etatAdministratifEtablissement',
       'enseigne1Etablissement',
       'enseigne2Etablissement',
@@ -93,9 +75,9 @@ export class SireneQueryBuilder {
       'coordonneeLambertOrdonneeEtablissement',
       'identifiantAdresseEtablissement',
       'dernierNumeroVoieEtablissement',
-      'indiceRepetitionDernierNumeroVoieEtablissement',
     ];
   }
+
   static getFieldsString(): string {
     return encodeURIComponent(
       SireneQueryBuilder.getAvailableFields().join(',')
