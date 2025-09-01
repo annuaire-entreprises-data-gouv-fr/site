@@ -53,8 +53,8 @@ const ConfigurezVotreGroupe = async ({
       ))}
       <div className="fr-col-8">
         <p>
-          Pour consultez vos droits, vous pouvez consulter la{' '}
-          <a href="/compte/accueil">page ”Mes droits”</a>.
+          Pour consulter vos droits, vous pouvez consulter la{' '}
+          <a href="/compte/accueil">page ”Mon espace”</a>.
         </p>
         <p>
           Il vous est également possible d’ajouter vos collègues a votre groupe
