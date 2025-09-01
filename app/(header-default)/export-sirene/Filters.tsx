@@ -491,7 +491,7 @@ export default function Filters({
               </label>
               <MultiSelect
                 name="nature_juridique"
-                defaultValue={filters.legalCategories}
+                defaultValue={filters.legalCategoriesNiveau1}
                 placeholder="Choisir une catégorie juridique"
                 id="nature-juridique-niveau-1-multi-select"
                 instanceId="nature-juridique-niveau-1-multi-select"
