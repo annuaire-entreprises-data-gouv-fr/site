@@ -45,9 +45,6 @@ const Menu: React.FC<{
         </a>
         {session?.user?.isSuperAgent && (
           <a aria-label="Gestion de mes groupes" href={'/compte/mes-groupes'}>
-            <span className="fr-badge fr-mr-1w fr-badge--new fr-badge--sm">
-              Beta
-            </span>
             Mes groupes
           </a>
         )}
