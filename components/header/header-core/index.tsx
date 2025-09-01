@@ -26,7 +26,7 @@ type IProps = {
   useMap?: boolean;
   useInfoBanner?: boolean;
   session: ISession | null;
-  plugin?: JSX.Element;
+  plugin?: React.JSX.Element;
 };
 
 export const HeaderCore: React.FC<IProps> = ({

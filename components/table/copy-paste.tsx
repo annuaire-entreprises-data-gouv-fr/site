@@ -32,7 +32,7 @@ export function CopyPaste({
     });
   }
 
-  const timeoutId = useRef<NodeJS.Timeout>();
+  const timeoutId = useRef<NodeJS.Timeout | null>(null);
 
   const element = useRef<HTMLButtonElement>(null);
 
@@ -66,7 +66,9 @@ export function CopyPaste({
   const handleBlur = () => {
     setFocused(false);
     setCopied(false);
-    clearTimeout(timeoutId.current);
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
   };
   const [hovered, setHovered] = useState(false);
   const [copied, setCopied] = useState(false);

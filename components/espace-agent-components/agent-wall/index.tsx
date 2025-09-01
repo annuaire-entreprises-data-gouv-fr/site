@@ -8,8 +8,8 @@ import style from './style.module.css';
 const AgentWall: React.FC<{
   title: string;
   id?: string;
-  sectionIntro?: JSX.Element;
-  modalFooter?: JSX.Element;
+  sectionIntro?: React.JSX.Element;
+  modalFooter?: React.JSX.Element;
   sources?: EAdministration[];
 }> = ({ id, title, sectionIntro = null, modalFooter = null, sources = [] }) => {
   return (

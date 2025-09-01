@@ -8,7 +8,7 @@ type IProps = {
   useAgentBanner?: boolean;
   useReconnectBanner?: boolean;
   useMap?: boolean;
-  plugin?: JSX.Element;
+  plugin?: React.JSX.Element;
   currentSearchTerm?: string;
 };
 
