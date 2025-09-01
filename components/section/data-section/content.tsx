@@ -13,7 +13,7 @@ export type IDataSectionContentProps<T> = {
   data: IAPINotRespondingError | T;
   notFoundInfo?: React.ReactNode;
   additionalInfoOnError?: React.ReactNode;
-  children: (data: T) => JSX.Element;
+  children: (data: T) => React.JSX.Element;
 };
 
 export function DataSectionContent<

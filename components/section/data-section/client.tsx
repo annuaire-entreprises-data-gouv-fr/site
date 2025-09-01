@@ -22,7 +22,7 @@ interface IDataSectionClientProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IDataFetchingState | T;
   notFoundInfo?: NonNullable<React.ReactNode> | null;
   additionalInfoOnError?: React.ReactNode;
-  children: (data: T) => JSX.Element;
+  children: (data: T) => React.JSX.Element;
 }
 
 export function AsyncDataSectionClient<T>({
