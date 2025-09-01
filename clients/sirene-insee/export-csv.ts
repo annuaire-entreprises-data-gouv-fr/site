@@ -16,9 +16,9 @@ interface SireneJsonSearchResult {
 
 export const clientSireneInsee = async (params: ExportCsvInput) => {
   const queryBuilder = new SireneQueryBuilder(params);
-  const url = `${routes.sireneInsee.listEtablissements}?q=${encodeURIComponent(
-    queryBuilder.build()
-  )}&nombre=200000&noLink=true`;
+  const q = queryBuilder.build();
+  const champs = SireneQueryBuilder.getFieldsString();
+  const url = `${routes.sireneInsee.listEtablissements}?q=${q}&champs=${champs}&nombre=200000&noLink=true`;
 
   const response = await exportCsvClientGet<string>(url, {
     headers: {
@@ -44,9 +44,10 @@ export interface ISireneInseeCount {
 
 export const clientSireneInseeCount = async (params: ExportCsvInput) => {
   const queryBuilder = new SireneQueryBuilder(params);
-  const url = `${routes.sireneInsee.listEtablissements}?q=${encodeURIComponent(
-    queryBuilder.build()
-  )}&nombre=0&noLink=true`;
+  const q = queryBuilder.build();
+  // We only need the number of results
+  const champs = 'siret';
+  const url = `${routes.sireneInsee.listEtablissements}?q=${q}&champs=${champs}&nombre=0&noLink=true`;
 
   const response = await exportCsvClientGet<SireneJsonSearchResult>(url, {
     headers: {
