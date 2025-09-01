@@ -29,11 +29,12 @@ export const getClient = async () => {
       });
     }
     const FranceConnectIssuer = new Issuer({
-      issuer: URL,
+      issuer: `${URL}/api/v2`,
+      jwks_uri: `${URL}/api/v2/jwks`,
       authorization_endpoint: `${URL}/api/v2/authorize`,
       token_endpoint: `${URL}/api/v2/token`,
       userinfo_endpoint: `${URL}/api/v2/userinfo`,
-      end_session_endpoint: `${URL}/api/v2/logout`,
+      end_session_endpoint: `${URL}/api/v2/session/end`,
     });
 
     _client = new FranceConnectIssuer.Client({
@@ -42,6 +43,7 @@ export const getClient = async () => {
       redirect_uris: [REDIRECT_URI],
       post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
       id_token_signed_response_alg: 'RS256',
+      userinfo_signed_response_alg: 'RS256',
       response_types: ['code'],
     });
 
@@ -81,13 +83,7 @@ export async function franceConnectAuthenticate(
     // reuse redirect_uri
     REDIRECT_URI,
     params,
-    req.session.FC_CONNECT_CHECK,
-    {
-      exchangeBody: {
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-      },
-    }
+    req.session.FC_CONNECT_CHECK
   );
   delete req.session.FC_CONNECT_CHECK;
   await req.session.save();
