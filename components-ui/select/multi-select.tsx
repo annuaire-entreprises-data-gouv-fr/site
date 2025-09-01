@@ -57,7 +57,7 @@ export const MultiSelect = ({
       <div style={{ marginBottom: 16, width: '100%', maxWidth }}>
         <ReactSelect
           defaultValue={getDefaultValue()}
-          id={id}
+          inputId={id}
           instanceId={instanceId}
           isMulti
           menuPosition={menuPosition}

@@ -404,7 +404,7 @@ export default function Filters({
           </h2>
           <div className={styles.filterContainer}>
             <div className={styles.filterColumn}>
-              <label htmlFor="react-select-sap-multi-select-input">
+              <label htmlFor="sap-multi-select">
                 Domaine d‘activité (Section) :
               </label>
               <MultiSelect
@@ -428,7 +428,7 @@ export default function Filters({
             </div>
 
             <div className={styles.filterColumn}>
-              <label htmlFor="react-select-naf-multi-select-input">
+              <label htmlFor="naf-multi-select">
                 Code NAF/APE (Sous-classe) :
               </label>
               <MultiSelect

@@ -205,9 +205,7 @@ const SearchFilters: React.FC<{
         />
         <SimpleSeparator />
         <div className="select">
-          <label htmlFor="react-select-sap-multi-select-input">
-            Domaine d‘activité :
-          </label>
+          <label htmlFor="sap-multi-select">Domaine d‘activité :</label>
           <MultiSelect
             name="sap"
             defaultValue={sap}
@@ -220,9 +218,7 @@ const SearchFilters: React.FC<{
             }))}
             menuPosition="fixed"
           />
-          <label htmlFor="react-select-naf-multi-select-input">
-            Code NAF/APE :
-          </label>
+          <label htmlFor="naf-multi-select">Code NAF/APE :</label>
           <MultiSelect
             name="naf"
             defaultValue={naf}
@@ -238,7 +234,7 @@ const SearchFilters: React.FC<{
         </div>
         <SimpleSeparator />
         <div>
-          <label htmlFor="react-select-nature-juridique-multi-select-input">
+          <label htmlFor="nature-juridique-multi-select">
             Forme juridique :
           </label>
           <MultiSelect
@@ -253,7 +249,7 @@ const SearchFilters: React.FC<{
         </div>
         <SimpleSeparator />
         <div>
-          <label htmlFor="react-select-effectif-salarie-multi-select-input">
+          <label htmlFor="effectif-salarie-multi-select">
             Effectif salarié
           </label>
           <MultiSelect
@@ -267,7 +263,7 @@ const SearchFilters: React.FC<{
           />
         </div>
         <div>
-          <label htmlFor="react-select-categorie-entreprise-multi-select-input">
+          <label htmlFor="categorie-entreprise-multi-select">
             Taille d’entreprise
           </label>
           <MultiSelect
