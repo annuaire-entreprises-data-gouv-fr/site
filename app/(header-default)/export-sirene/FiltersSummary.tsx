@@ -1,4 +1,5 @@
 import { categoriesJuridiques as legalCategories } from '#utils/helpers/formatting/metadata/categories-juridiques';
+import { categoriesJuridiquesNiveau1 as legalCategoriesNiveau1 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-1';
 import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { ExtendedExportCsvInput } from './ExportCsv';
@@ -103,11 +104,7 @@ export default function FiltersSummary({
       {filters.sap && filters.sap.length > 0 && (
         <p>
           <strong>Domaine d‘activité (Section) :</strong>{' '}
-          {filters.sap
-            .map(
-              (code) => codesSectionNAF[code as keyof typeof codesSectionNAF]
-            )
-            .join(', ')}
+          {filters.sap.map((code) => codesSectionNAF[code]).join(', ')}
         </p>
       )}
 
@@ -115,10 +112,7 @@ export default function FiltersSummary({
         <p>
           <strong>Code NAF/APE (Sous-classe) :</strong>{' '}
           {filters.naf
-            .map(
-              (code) =>
-                `${code} - ${codesNAFRev2[code as keyof typeof codesNAFRev2]}`
-            )
+            .map((code) => `${code} - ${codesNAFRev2[code]}`)
             .join(', ')}
         </p>
       )}
@@ -137,11 +131,21 @@ export default function FiltersSummary({
         </p>
       )}
 
+      {filters.legalCategoriesNiveau1 &&
+        filters.legalCategoriesNiveau1.length > 0 && (
+          <p>
+            <strong>Catégorie juridique (Niveau 1) :</strong>{' '}
+            {filters.legalCategoriesNiveau1
+              .map((code) => `${code} - ${legalCategoriesNiveau1[code]}`)
+              .join(', ')}
+          </p>
+        )}
+
       {filters.legalCategories && filters.legalCategories.length > 0 && (
         <p>
-          <strong>Catégorie juridique :</strong>{' '}
+          <strong>Catégorie juridique (Niveau 3) :</strong>{' '}
           {filters.legalCategories
-            .map((code) => legalCategories[code] || code)
+            .map((code) => `${code} - ${legalCategories[code]}`)
             .join(', ')}
         </p>
       )}
