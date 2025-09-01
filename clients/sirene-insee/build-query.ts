@@ -10,8 +10,100 @@ export class SireneQueryBuilder {
     this.buildQuery(params);
   }
 
+  static getAvailableFields(): string[] {
+    return [
+      'siren',
+      'nic',
+      'siret',
+      'statutDiffusionEtablissement',
+      'dateCreationEtablissement',
+      'trancheEffectifsEtablissement',
+      'anneeEffectifsEtablissement',
+      'activitePrincipaleRegistreMetiersEtablissement',
+      'dateDernierTraitementEtablissement',
+      'etablissementSiege',
+      'etatAdministratifUniteLegale',
+      'statutDiffusionUniteLegale',
+      'unitePurgeeUniteLegale',
+      'dateCreationUniteLegale',
+      'categorieJuridiqueUniteLegale',
+      'denominationUniteLegale',
+      'sigleUniteLegale',
+      'denominationUsuelle1UniteLegale',
+      'denominationUsuelle2UniteLegale',
+      'denominationUsuelle3UniteLegale',
+      'sexeUniteLegale',
+      'nomUniteLegale',
+      'nomUsageUniteLegale',
+      'prenom1UniteLegale',
+      'prenom2UniteLegale',
+      'prenom3UniteLegale',
+      'prenom4UniteLegale',
+      'prenomUsuelUniteLegale',
+      'pseudonymeUniteLegale',
+      'activitePrincipaleUniteLegale',
+      'nomenclatureActivitePrincipaleUniteLegale',
+      'identifiantAssociationUniteLegale',
+      'economieSocialeSolidaireUniteLegale',
+      'caractereEmployeurUniteLegale',
+      'societeMissionUniteLegale',
+      'trancheEffectifsUniteLegale',
+      'anneeEffectifsUniteLegale',
+      'nicSiegeUniteLegale',
+      'dateDernierTraitementUniteLegale',
+      'categorieEntreprise',
+      'anneeCategorieEntreprise',
+      'complementAdresseEtablissement',
+      'numeroVoieEtablissement',
+      'indiceRepetitionEtablissement',
+      'typeVoieEtablissement',
+      'libelleVoieEtablissement',
+      'codePostalEtablissement',
+      'libelleCommuneEtablissement',
+      'libelleCommuneEtrangerEtablissement',
+      'distributionSpecialeEtablissement',
+      'codeCommuneEtablissement',
+      'codeCedexEtablissement',
+      'libelleCedexEtablissement',
+      'codePaysEtrangerEtablissement',
+      'libellePaysEtrangerEtablissement',
+      'complementAdresse2Etablissement',
+      'numeroVoie2Etablissement',
+      'indiceRepetition2Etablissement',
+      'typeVoie2Etablissement',
+      'libelleVoie2Etablissement',
+      'codePostal2Etablissement',
+      'libelleCommune2Etablissement',
+      'libelleCommuneEtranger2Etablissement',
+      'distributionSpeciale2Etablissement',
+      'codeCommune2Etablissement',
+      'codeCedex2Etablissement',
+      'libelleCedex2Etablissement',
+      'codePaysEtranger2Etablissement',
+      'libellePaysEtranger2Etablissement',
+      'etatAdministratifEtablissement',
+      'enseigne1Etablissement',
+      'enseigne2Etablissement',
+      'enseigne3Etablissement',
+      'denominationUsuelleEtablissement',
+      'activitePrincipaleEtablissement',
+      'nomenclatureActivitePrincipaleEtablissement',
+      'caractereEmployeurEtablissement',
+      'coordonneeLambertAbscisseEtablissement',
+      'coordonneeLambertOrdonneeEtablissement',
+      'identifiantAdresseEtablissement',
+      'dernierNumeroVoieEtablissement',
+      'indiceRepetitionDernierNumeroVoieEtablissement',
+    ];
+  }
+  static getFieldsString(): string {
+    return encodeURIComponent(
+      SireneQueryBuilder.getAvailableFields().join(',')
+    );
+  }
+
   build() {
-    return this.conditions.join(' AND ');
+    return encodeURIComponent(this.conditions.join(' AND '));
   }
 
   private addCategoryConditions = (categories: string[]) => {
