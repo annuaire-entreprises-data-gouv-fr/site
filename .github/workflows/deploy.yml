@@ -8,27 +8,27 @@ on:
   workflow_dispatch:
 
 jobs:
-   deploy-staging:
-      name: Deploy - staging
-      runs-on: ubuntu-latest
-      timeout-minutes: 15
-      environment:
-        name: staging
+  deploy-staging:
+    name: Deploy - staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: staging
 
-      steps:
-        - uses: actions/checkout@v4
-        - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1
-          with:
-            app-to-deploy: "annuaire-entreprises-site"
-            app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
-            app-shortname: "website"
-            version: "main"
-            environment: "staging"
-            ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
-            ssh-host: ${{ secrets.SSH_HOST_STAGING_V2 }}
-            notify-on-failure: true
-            notify-on-success: false
-            notify-webhook: ${{ secrets.DEV_EVENT_HOOK }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1
+        with:
+          app-to-deploy: "annuaire-entreprises-site"
+          app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
+          app-shortname: "website"
+          version: "main"
+          environment: "staging"
+          ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
+          ssh-host: ${{ secrets.SSH_HOST_STAGING_V2 }}
+          notify-on-failure: true
+          notify-on-success: false
+          notify-webhook: ${{ secrets.DEV_EVENT_HOOK }}
 
   deploy-production:
     name: Deploy - production
