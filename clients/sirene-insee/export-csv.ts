@@ -20,23 +20,6 @@ export const clientSireneInsee = async (params: ExportCsvInput) => {
   const champs = SireneQueryBuilder.getFieldsString();
   const url = `${routes.sireneInsee.listEtablissements}?q=${q}&champs=${champs}&nombre=200000&noLink=true`;
 
-  const response = await exportCsvClientGet<string>(url, {
-    headers: {
-      Accept: 'text/csv',
-      'Accept-Encoding': 'gzip',
-    },
-    timeout: constants.timeout.XXXL,
-  });
-
-  return (await response) as string;
-};
-
-export const clientSireneInseeStream = async (params: ExportCsvInput) => {
-  const queryBuilder = new SireneQueryBuilder(params);
-  const q = queryBuilder.build();
-  const champs = SireneQueryBuilder.getFieldsString();
-  const url = `${routes.sireneInsee.listEtablissements}?q=${q}&champs=${champs}&nombre=200000&noLink=true`;
-
   const stream = await exportCsvClientGet(url, {
     headers: {
       Accept: 'text/csv',
