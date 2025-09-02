@@ -1,7 +1,7 @@
 import { Exception } from '#models/exceptions';
 import {
+  getEtablissementListe,
   getEtablissementListeCount,
-  getEtablissementListeStream,
 } from '#models/sirene-fr';
 import { logErrorInSentry } from '#utils/sentry';
 import { NextRequest } from 'next/server';
@@ -32,7 +32,7 @@ async function exportCsv(request: NextRequest): Promise<Response> {
         throw new Error('Response is not a number or is greater than 200000');
       }
 
-      const nodeStream = await getEtablissementListeStream(validatedData);
+      const nodeStream = await getEtablissementListe(validatedData);
       const webStream = Readable.toWeb(nodeStream as any) as ReadableStream;
 
       return new Response(webStream, {

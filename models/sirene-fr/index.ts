@@ -2,25 +2,14 @@ import { HttpNotFound } from '#clients/exceptions';
 import {
   clientSireneInsee,
   clientSireneInseeCount,
-  clientSireneInseeStream,
 } from '#clients/sirene-insee/export-csv';
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
 
 export const getEtablissementListe = async (
   searchParams: ExportCsvInput
-): Promise<string> => {
-  try {
-    return await clientSireneInsee(searchParams);
-  } catch (e: any) {
-    throw e;
-  }
-};
-
-export const getEtablissementListeStream = async (
-  searchParams: ExportCsvInput
 ): Promise<NodeJS.ReadableStream> => {
   try {
-    return await clientSireneInseeStream(searchParams);
+    return await clientSireneInsee(searchParams);
   } catch (e: any) {
     throw e;
   }
