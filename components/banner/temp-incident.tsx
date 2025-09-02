@@ -7,14 +7,11 @@ import { useStorage } from 'hooks/use-storage';
 import styles from './styles.module.css';
 
 const TEMP_INCIDENT_BANNER_ENABLED = true;
-const TEMP_INCIDENT_BANNER_ID = 'temp-incident-banner-2025-07-21';
+const TEMP_INCIDENT_BANNER_ID = 'temp-incident-banner-2025-09-02';
 const TEMP_INCIDENT_BANNER_MESSAGE = `
-        🚨 Un incident a été identifié concernant les fichiers des 
-        établissements géolocalisés du mois de juillet. Nos équipes sont
-        mobilisées pour résoudre ce problème, et une correction sera
-        apportée d’ici 15h aujourd’hui. Nous vous prions de nous excuser
-        pour la gêne occasionnée et vous remercions pour votre
-        compréhension.`;
+        🚨 Nous rencontrons actuellement des difficultés techniques, le service peut être temporairement indisponible.
+        Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser
+        pour la gêne occasionnée.`;
 
 export default function TempIncidentBanner() {
   const [shouldDisplayBanner, setShouldDisplayBanner] = useStorage(
@@ -41,8 +38,8 @@ export default function TempIncidentBanner() {
             aria-label="Incident en cours"
             className={styles.npsModal}
             style={{
-              backgroundColor: constants.colors.espaceAgentPastel,
-              borderColor: constants.colors.espaceAgent,
+              backgroundColor: constants.colors.pastelBlue,
+              borderColor: constants.colors.blue,
             }}
           >
             <div className="fr-container">
