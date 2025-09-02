@@ -1,7 +1,7 @@
 import { IRolesDataRoles, IRolesDataUser } from '#clients/roles-data/interface';
+import ButtonLink from '#components-ui/button';
 import { FullTable } from '#components/table/full';
 import { IRolesDataGroup } from '#models/authentication/group/groups';
-import { pluralize } from '#utils/helpers';
 import { Fragment, useMemo } from 'react';
 import AddUserModal from './update-modals/add-user';
 import DeleteUserButton from './update-modals/delete-user';
@@ -83,44 +83,47 @@ export function GroupItem({
                 />
               )}
             </div>
-            <p>
-              Ce groupe contient {group.users.length} membre
-              {pluralize(group.users)}
+            <div>
+              <strong>Habilitation :</strong>{' '}
               {group.contract_description ? (
-                <>
-                  {' '}
-                  et possède le contrat{' '}
-                  <strong>{group.contract_description}</strong>
-                </>
-              ) : null}
-              {group.contract_url ? (
-                <>
-                  {' '}
-                  (
+                group.contract_url ? (
                   <a
                     href={group.contract_url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    consulter le contrat
+                    {group.contract_description}
                   </a>
-                  )
-                </>
-              ) : null}
-              .
-              {group.scopes && group.scopes.length > 0 ? (
-                <>
-                  {' '}
-                  Ce contrat donne accès aux droits suivants :{' '}
-                  {group.scopes.map((scope) => (
+                ) : (
+                  <strong>{group.contract_description}</strong>
+                )
+              ) : (
+                <i>Aucune habilitation</i>
+              )}
+            </div>
+            <div>
+              <strong>Données accessibles :</strong>{' '}
+              {group.scopes && group.scopes.length > 0
+                ? group.scopes.map((scope) => (
                     <Fragment key={scope}>
                       <span className="fr-badge fr-badge--sm">{scope}</span>
                       &nbsp;
                     </Fragment>
-                  ))}
-                </>
-              ) : null}
-            </p>
+                  ))
+                : null}
+            </div>
+            {isAdmin && (
+              <div>
+                <p>
+                  Votre mission ou le cadre juridique de ce groupe est modifié ?
+                  En tant qu’administrateur, modifiez votre habilitation pour
+                  accèder à des données supplémentaires.
+                </p>
+                <ButtonLink alt small to={group.contract_url}>
+                  Modifier l’habilitation
+                </ButtonLink>
+              </div>
+            )}
           </div>
           {!isAdmin ? (
             <NotAdminTable group={group} currentUserEmail={currentUserEmail} />
@@ -142,7 +145,7 @@ export function GroupItem({
               </div>
 
               <FullTable
-                head={['Membre', 'Rôle', 'Action']}
+                head={[`Membres (${group.users.length})`, 'Rôle', 'Action']}
                 columnWidths={['65%']}
                 body={group.users.map((user) => [
                   <div style={{ flexGrow: 1 }}>

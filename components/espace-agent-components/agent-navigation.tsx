@@ -4,8 +4,8 @@ import AgentNavigationLink from './agent-navigation-link';
 
 export default async function AgentNavigation() {
   const navLinks = [
-    { label: 'Mon espace', href: '/compte/accueil', isBeta: false },
-    { label: 'Mes groupes', href: '/compte/mes-groupes', isBeta: true },
+    { label: 'Mon espace', href: '/compte/accueil' },
+    { label: 'Mes groupes', href: '/compte/mes-groupes' },
   ];
   return (
     <nav
@@ -17,13 +17,8 @@ export default async function AgentNavigation() {
       }}
     >
       <div style={{ display: 'flex', gap: '2rem' }}>
-        {navLinks.map(({ label, href, isBeta }) => (
-          <AgentNavigationLink
-            href={href}
-            label={label}
-            key={href}
-            isBeta={isBeta}
-          />
+        {navLinks.map(({ label, href }) => (
+          <AgentNavigationLink href={href} label={label} key={href} />
         ))}
       </div>
       <div>
