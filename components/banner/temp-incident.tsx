@@ -7,21 +7,27 @@ const TEMP_INCIDENT_BANNER_MESSAGE = `
         Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser
         pour la gêne occasionnée.`;
 
+const DISPLAY_INCIDENT_BANNER = false;
+
 export default function TempIncidentBanner() {
-  return (
-    <PrintNever>
-      <div
-        id="temp-incident"
-        role="dialog"
-        aria-label="Incident en cours"
-        className={styles.npsModal}
-        style={{
-          backgroundColor: constants.colors.pastelBlue,
-          borderColor: constants.colors.frBlue,
-        }}
-      >
-        <div className="fr-container">{TEMP_INCIDENT_BANNER_MESSAGE}</div>
-      </div>
-    </PrintNever>
-  );
+  if (!DISPLAY_INCIDENT_BANNER) {
+    return null;
+  } else {
+    return (
+      <PrintNever>
+        <div
+          id="temp-incident"
+          role="dialog"
+          aria-label="Incident en cours"
+          className={styles.npsModal}
+          style={{
+            backgroundColor: constants.colors.pastelBlue,
+            borderColor: constants.colors.frBlue,
+          }}
+        >
+          <div className="fr-container">{TEMP_INCIDENT_BANNER_MESSAGE}</div>
+        </div>
+      </PrintNever>
+    );
+  }
 }
