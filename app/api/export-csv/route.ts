@@ -33,7 +33,7 @@ async function exportCsv(request: NextRequest): Promise<Response> {
       }
 
       const nodeStream = await getEtablissementListe(validatedData);
-      const webStream = Readable.toWeb(nodeStream as any) as ReadableStream;
+      const webStream = Readable.toWeb(nodeStream) as ReadableStream;
 
       return new Response(webStream, {
         headers: {

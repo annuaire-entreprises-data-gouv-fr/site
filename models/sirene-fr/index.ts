@@ -4,10 +4,11 @@ import {
   clientSireneInseeCount,
 } from '#clients/sirene-insee/export-csv';
 import { ExportCsvInput } from 'app/api/export-csv/input-validation';
+import { Readable } from 'stream';
 
 export const getEtablissementListe = async (
   searchParams: ExportCsvInput
-): Promise<NodeJS.ReadableStream> => {
+): Promise<Readable> => {
   try {
     return await clientSireneInsee(searchParams);
   } catch (e: any) {
