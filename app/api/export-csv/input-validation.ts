@@ -35,8 +35,8 @@ export const exportCsvSchema = z.object({
       z
         .string()
         .regex(
-          /^(\d{4}|\d\*)$/,
-          'Must be a 4-digit code or a digit followed by "*" (e.g., "1*")'
+          /^(\d{4}|\d{2}\*|\d\*)$/,
+          'Must be a 4-digit code, a 2-digit code followed by "*" or a 1-digit code followed by "*"'
         )
     )
     .max(100)

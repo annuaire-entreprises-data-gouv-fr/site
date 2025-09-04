@@ -1,5 +1,5 @@
 import { escapeString } from './formatting';
-import { categoriesJuridiques } from './metadata/categories-juridiques';
+import { categoriesJuridiquesNiveau3 } from './metadata/categories-juridiques';
 import { codesNAF1993 } from './metadata/codes-NAF-1993';
 import { codesNAFRev1 } from './metadata/codes-NAF-rev-1';
 import { codesNAFRev2 } from './metadata/codes-NAF-rev-2';
@@ -100,7 +100,7 @@ export const libelleFromCodeNAFWithoutNomenclature = (
 };
 
 export const libelleFromCategoriesJuridiques = (categorie: string) =>
-  categoriesJuridiques[categorie];
+  categoriesJuridiquesNiveau3[categorie];
 
 export const libelleFromTypeVoie = (codeVoie: string) => {
   return codesVoies[codeVoie] || codeVoie;

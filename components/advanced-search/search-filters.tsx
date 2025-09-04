@@ -9,7 +9,7 @@ import SearchFilterParams, {
 } from '#models/search/search-filter-params';
 import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
 import { codesEffectifsOptions } from '#utils/helpers/formatting/codes-effectifs';
-import { categoriesJuridiques } from '#utils/helpers/formatting/metadata/categories-juridiques';
+import { categoriesJuridiquesNiveau3 } from '#utils/helpers/formatting/metadata/categories-juridiques';
 import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import React from 'react';
@@ -58,11 +58,11 @@ const SearchFilters: React.FC<{
    * of 4 characters.
    */
   const getNaturesJuridiques = () =>
-    Object.keys(categoriesJuridiques)
+    Object.keys(categoriesJuridiquesNiveau3)
       .filter((k) => k.length === 4)
       .map((categorie) => ({
         value: categorie,
-        label: categoriesJuridiques[categorie],
+        label: categoriesJuridiquesNiveau3[categorie],
       }));
 
   return (

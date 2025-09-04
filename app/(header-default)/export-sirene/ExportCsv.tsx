@@ -19,8 +19,9 @@ export interface ExtendedExportCsvInput extends ExportCsvInput {
     value: string;
     label: string;
   }>;
-  legalCategories: string[];
   legalCategoriesNiveau1: string[];
+  legalCategoriesNiveau2: string[];
+  legalCategoriesNiveau3: string[];
 }
 
 const getFileSize = (count: number) => {
@@ -36,8 +37,9 @@ const defaultFilters: ExtendedExportCsvInput = {
   locations: [],
   creationDate: { from: undefined, to: undefined },
   updateDate: { from: undefined, to: undefined },
-  legalCategories: [],
   legalCategoriesNiveau1: [],
+  legalCategoriesNiveau2: [],
+  legalCategoriesNiveau3: [],
   ess: {
     inclure: true,
     inclureNo: true,
@@ -91,8 +93,9 @@ export default function ExportCsv() {
     activity: filters.activity,
     legalUnit: filters.legalUnit,
     legalCategories: [
-      ...filters.legalCategories,
       ...filters.legalCategoriesNiveau1.map((cat) => cat + '*'),
+      ...filters.legalCategoriesNiveau2.map((cat) => cat + '*'),
+      ...filters.legalCategoriesNiveau3,
     ],
     siretsAndSirens: filters.siretsAndSirens,
     location: {

@@ -1,5 +1,6 @@
-import { categoriesJuridiques as legalCategories } from '#utils/helpers/formatting/metadata/categories-juridiques';
-import { categoriesJuridiquesNiveau1 as legalCategoriesNiveau1 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-1';
+import { categoriesJuridiquesNiveau3 } from '#utils/helpers/formatting/metadata/categories-juridiques';
+import { categoriesJuridiquesNiveau1 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-1';
+import { categoriesJuridiquesNiveau2 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-2';
 import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { ExtendedExportCsvInput } from './ExportCsv';
@@ -136,19 +137,30 @@ export default function FiltersSummary({
           <p>
             <strong>Catégorie juridique (Niveau 1) :</strong>{' '}
             {filters.legalCategoriesNiveau1
-              .map((code) => `${code} - ${legalCategoriesNiveau1[code]}`)
+              .map((code) => `${code} - ${categoriesJuridiquesNiveau1[code]}`)
               .join(', ')}
           </p>
         )}
 
-      {filters.legalCategories && filters.legalCategories.length > 0 && (
-        <p>
-          <strong>Catégorie juridique (Niveau 3) :</strong>{' '}
-          {filters.legalCategories
-            .map((code) => `${code} - ${legalCategories[code]}`)
-            .join(', ')}
-        </p>
-      )}
+      {filters.legalCategoriesNiveau2 &&
+        filters.legalCategoriesNiveau2.length > 0 && (
+          <p>
+            <strong>Catégorie juridique (Niveau 2) :</strong>{' '}
+            {filters.legalCategoriesNiveau2
+              .map((code) => `${code} - ${categoriesJuridiquesNiveau2[code]}`)
+              .join(', ')}
+          </p>
+        )}
+
+      {filters.legalCategoriesNiveau3 &&
+        filters.legalCategoriesNiveau3.length > 0 && (
+          <p>
+            <strong>Catégorie juridique (Niveau 3) :</strong>{' '}
+            {filters.legalCategoriesNiveau3
+              .map((code) => `${code} - ${categoriesJuridiquesNiveau3[code]}`)
+              .join(', ')}
+          </p>
+        )}
 
       {filters.siretsAndSirens && filters.siretsAndSirens.length > 0 && (
         <p>

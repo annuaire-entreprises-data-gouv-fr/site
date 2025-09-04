@@ -4,8 +4,9 @@ import InformationTooltip from '#components-ui/information-tooltip';
 import { MultiSelect } from '#components-ui/select/multi-select';
 import constants from '#models/constants';
 import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
-import { categoriesJuridiques } from '#utils/helpers/formatting/metadata/categories-juridiques';
+import { categoriesJuridiquesNiveau3 } from '#utils/helpers/formatting/metadata/categories-juridiques';
 import { categoriesJuridiquesNiveau1 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-1';
+import { categoriesJuridiquesNiveau2 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-2';
 import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { Dispatch, SetStateAction } from 'react';
@@ -31,10 +32,16 @@ export const selectedEffectifLabel = (filters: ExtendedExportCsvInput) => {
  * For the search api `nature_juridique` must be a string
  * of 4 characters.
  */
-const getLegalCategories = () =>
-  Object.keys(categoriesJuridiques).map((categorie) => ({
+const getLegalCategoriesNiveau3 = () =>
+  Object.keys(categoriesJuridiquesNiveau3).map((categorie) => ({
     value: categorie,
-    label: `${categorie} - ${categoriesJuridiques[categorie]}`,
+    label: `${categorie} - ${categoriesJuridiquesNiveau3[categorie]}`,
+  }));
+
+const getLegalCategoriesNiveau2 = () =>
+  Object.keys(categoriesJuridiquesNiveau2).map((categorie) => ({
+    value: categorie,
+    label: `${categorie} - ${categoriesJuridiquesNiveau2[categorie]}`,
   }));
 
 const getLegalCategoriesNiveau1 = () =>
@@ -507,21 +514,42 @@ export default function Filters({
             </div>
 
             <div className={styles.filterColumn}>
-              <label htmlFor="nature-juridique-multi-select">
-                Catégorie juridique (Niveau 3) :
+              <label htmlFor="nature-juridique-niveau-2-multi-select">
+                Catégorie juridique (Niveau 2) :
               </label>
               <MultiSelect
                 name="nature_juridique"
-                defaultValue={filters.legalCategories}
+                defaultValue={filters.legalCategoriesNiveau2}
                 placeholder="Choisir une catégorie juridique"
-                id="nature-juridique-multi-select"
-                instanceId="nature-juridique-multi-select"
-                options={getLegalCategories()}
+                id="nature-juridique-niveau-2-multi-select"
+                instanceId="nature-juridique-niveau-2-multi-select"
+                options={getLegalCategoriesNiveau2()}
                 menuPosition="fixed"
                 onChange={(values: string[]) =>
                   setFilters((prev) => ({
                     ...prev,
-                    legalCategories: values,
+                    legalCategoriesNiveau2: values,
+                  }))
+                }
+              />
+            </div>
+
+            <div className={styles.filterColumn}>
+              <label htmlFor="nature-juridique-niveau-3-multi-select">
+                Catégorie juridique (Niveau 3) :
+              </label>
+              <MultiSelect
+                name="nature_juridique"
+                defaultValue={filters.legalCategoriesNiveau3}
+                placeholder="Choisir une catégorie juridique"
+                id="nature-juridique-niveau-3-multi-select"
+                instanceId="nature-juridique-niveau-3-multi-select"
+                options={getLegalCategoriesNiveau3()}
+                menuPosition="fixed"
+                onChange={(values: string[]) =>
+                  setFilters((prev) => ({
+                    ...prev,
+                    legalCategoriesNiveau3: values,
                   }))
                 }
               />
