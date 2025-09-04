@@ -6,12 +6,12 @@ import { BaseClient, Issuer, generators } from 'openid-client';
 
 let _client = undefined as BaseClient | undefined;
 
-const CLIENT_ID = process.env.FRANCECONNECT_CLIENT_ID;
-const URL = process.env.FRANCECONNECT_URL;
-const CLIENT_SECRET = process.env.FRANCECONNECT_CLIENT_SECRET;
-const REDIRECT_URI = process.env.FRANCECONNECT_REDIRECT_URI;
+const CLIENT_ID = process.env.FRANCE_CONNECT_CLIENT_ID;
+const URL = process.env.FRANCE_CONNECT_URL;
+const CLIENT_SECRET = process.env.FRANCE_CONNECT_CLIENT_SECRET;
+const REDIRECT_URI = process.env.FRANCE_CONNECT_REDIRECT_URI;
 const POST_LOGOUT_REDIRECT_URI =
-  process.env.FRANCECONNECT_POST_LOGOUT_REDIRECT_URI;
+  process.env.FRANCE_CONNECT_POST_LOGOUT_REDIRECT_URI;
 
 export const getClient = async () => {
   if (_client) {
