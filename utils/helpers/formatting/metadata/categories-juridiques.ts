@@ -1,4 +1,4 @@
-export const categoriesJuridiques: Record<string, string> = {
+export const categoriesJuridiquesNiveau3: Record<string, string> = {
   '0000':
     'Organisme de placement collectif en valeurs mobilières sans personnalité morale',
   '1000': 'Entrepreneur individuel',
