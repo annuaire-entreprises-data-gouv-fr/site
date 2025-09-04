@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styleFull.module.css';
 
 interface ISectionProps {
-  head: (string | JSX.Element)[];
+  head: (string | React.JSX.Element)[];
   body: any[][];
   id?: string;
   verticalAlign?: 'top' | 'middle' | 'bottom';

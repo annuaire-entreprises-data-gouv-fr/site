@@ -40,8 +40,8 @@ const ProtectedSectionWithUseCase: React.FC<{
   sources: EAdministration[];
   allowedUseCases: UseCase[];
   requiredRight: ApplicationRights;
-  noRightContent?: JSX.Element;
-  useCaseFormContent?: JSX.Element;
+  noRightContent?: React.JSX.Element;
+  useCaseFormContent?: React.JSX.Element;
   WrappedSection: React.ComponentType<WrappedSectionProps>;
 }> = ({
   uniteLegale,
