@@ -36,8 +36,8 @@
           "libelleActivitePrincipale": "Location de logements (68.20A)",
           "trancheEffectif": "N",
           "anneeTrancheEffectif": null,
-          "latitude": null,
-          "longitude": null,
+          "latitude": "48.111673",
+          "longitude": "-1.681846",
           "complements": {
             "estEntrepreneurIndividuel": true,
             "idFiness": [],
@@ -82,8 +82,8 @@
               "libelleActivitePrincipale": "Location de logements (68.20A)",
               "trancheEffectif": "N",
               "anneeTrancheEffectif": null,
-              "latitude": null,
-              "longitude": null,
+              "latitude": "48.111673",
+              "longitude": "-1.681846",
               "complements": {
                 "estEntrepreneurIndividuel": true,
                 "idFiness": [],
@@ -120,8 +120,8 @@
               "libelleActivitePrincipale": "Location de logements (68.20A)",
               "trancheEffectif": "N",
               "anneeTrancheEffectif": null,
-              "latitude": null,
-              "longitude": null,
+              "latitude": "48.111673",
+              "longitude": "-1.681846",
               "complements": {
                 "estEntrepreneurIndividuel": true,
                 "idFiness": [],
@@ -198,6 +198,7 @@
           "isPersonneMorale": false,
           "capital": ""
         },
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [],
         "nombreEtablissements": 2,
         "nombreEtablissementsOuverts": 1,
