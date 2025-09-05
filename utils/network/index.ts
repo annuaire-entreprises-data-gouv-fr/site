@@ -4,7 +4,7 @@ export type IDefaultRequestConfig = {
   params?: any;
   headers?: any;
   method?: 'POST' | 'GET' | 'PATCH' | 'PUT' | 'DELETE';
-  responseType?: 'blob' | 'arraybuffer';
+  responseType?: 'blob' | 'arraybuffer' | 'stream';
   data?: unknown;
 };
 

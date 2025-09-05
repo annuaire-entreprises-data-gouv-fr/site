@@ -5,6 +5,7 @@ import {
 } from '#models/sirene-fr';
 import { logErrorInSentry } from '#utils/sentry';
 import { NextRequest } from 'next/server';
+import { Readable } from 'stream';
 import z from 'zod';
 import { exportCsvSchema } from './input-validation';
 
@@ -31,13 +32,10 @@ async function exportCsv(request: NextRequest): Promise<Response> {
         throw new Error('Response is not a number or is greater than 200000');
       }
 
-      const csvData = await getEtablissementListe(validatedData);
+      const nodeStream = await getEtablissementListe(validatedData);
+      const webStream = Readable.toWeb(nodeStream) as ReadableStream;
 
-      if (typeof csvData !== 'string') {
-        throw new APIResponseError('Export CSV request failed', response);
-      }
-
-      return new Response(csvData, {
+      return new Response(webStream, {
         headers: {
           'Content-Type': 'text/csv; charset=utf-8',
           'Content-Disposition':
