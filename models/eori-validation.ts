@@ -1,4 +1,4 @@
-import { clientEORI } from "#clients/api-proxy/eori";
+import { clientAPIEntrepriseEORI } from "#clients/api-entreprise/eori";
 import { verifySiret } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 import { EAdministration } from "./administrations/EAdministration";
@@ -14,13 +14,13 @@ export type IEORIValidation = {
 };
 
 export const getEORIValidation = async (
-  eori: string
+  siret: string
 ): Promise<IEORIValidation | IAPINotRespondingError> => {
   try {
-    const siret = verifySiret(eori);
-    const data = await clientEORI(siret);
+    const verifiedSiret = verifySiret(siret);
+    const data = await clientAPIEntrepriseEORI(verifiedSiret);
     if (!data) {
-      throw new Error("EOS response is empty");
+      throw new Error("API Entreprise EORI response is empty");
     }
     return data;
   } catch (e: any) {
@@ -28,7 +28,7 @@ export const getEORIValidation = async (
       new FetchRessourceException({
         ressource: "EORIValidation",
         cause: e,
-        context: { slug: eori },
+        context: { siret },
       })
     );
     return APINotRespondingFactory(EAdministration.DOUANES, e.status || 500);

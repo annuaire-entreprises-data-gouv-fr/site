@@ -12,7 +12,12 @@ import {
   isDataLoading,
   isUnauthorized,
 } from "#models/data-fetching";
-import { formatSiret, type Siret } from "#utils/helpers";
+import {
+  formatIntFr,
+  formatSiret,
+  isLikelyASiret,
+  type Siret,
+} from "#utils/helpers";
 
 type IProps = {
   siret: Siret;
@@ -75,9 +80,18 @@ export default function EORICell({ siret, session }: IProps) {
       </InformationTooltip>
     );
   }
+
+  const { eori } = eoriValidation;
+  const sirenOrSiret = eori.slice(2);
+  const formattedEori =
+    "FR " +
+    (isLikelyASiret(sirenOrSiret)
+      ? formatSiret(sirenOrSiret)
+      : formatIntFr(sirenOrSiret));
+
   return eoriValidation.isValid ? (
     <CopyPaste label="eori" shouldRemoveSpace>
-      {"FR " + formatSiret(eoriValidation.eori)}
+      {formattedEori}
     </CopyPaste>
   ) : (
     <i>Pas de n° EORI valide</i>

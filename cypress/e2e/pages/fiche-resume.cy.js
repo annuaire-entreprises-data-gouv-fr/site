@@ -13,7 +13,7 @@ describe("Fiche résumé DANONE", () => {
     cy.contains("FR12 345 678 901").should("be.visible");
     // EORI number
     cy.contains("N° EORI").should("be.visible");
-    cy.contains("FR 123 456 789 0").should("be.visible");
+    cy.contains("FR 123 456 789").should("be.visible");
     // Effectifs
     cy.contains("Effectif salarié").should("be.visible");
     cy.contains("1 000 à 1 999 salariés, en 2022").should("be.visible");

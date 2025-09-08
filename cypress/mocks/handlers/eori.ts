@@ -1,13 +1,13 @@
 import { HttpResponse, type HttpResponseResolver } from "msw";
 
 export const eoriHandler: HttpResponseResolver = ({ request }) => {
-  let eori = "1234567890";
-  let isValid = true;
+  let id = "FR123456789";
+  let actif = true;
 
   if (request.url.match("88301031600015")) {
-    eori = "43842019051";
-    isValid = false;
+    id = "FR438420190";
+    actif = false;
   }
 
-  return HttpResponse.json({ isValid, eori });
+  return HttpResponse.json({ data: { id, actif } });
 };

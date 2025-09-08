@@ -50,7 +50,6 @@ import { upDownIoHandler } from "./handlers/up-down-io";
 
 export const routesHandlers = [
   http.get(routes.proxy.tva("*"), tvaHandler),
-  http.get(routes.proxy.eori("*"), eoriHandler),
   http.get(routes.proxy.ig("*"), igHandler),
   http.get(routes.proxy.association("*"), associationHandler),
   http.get(routes.proxy.rne.immatriculation.default("*"), rneDefaultHandler),
@@ -179,6 +178,10 @@ export const routesHandlers = [
       "*"
     )}`,
     mandatairesRcsHandler
+  ),
+  http.get(
+    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.eori("*")}`,
+    eoriHandler
   ),
   http.get(
     `https://${process.env.OVH_S3_MONITORING_BUCKET}.s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/monitoring_comptes_agents.csv`,
