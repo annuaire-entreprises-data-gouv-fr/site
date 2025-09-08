@@ -14,7 +14,7 @@ import { formatDate } from '#utils/helpers';
 import React, { PropsWithChildren } from 'react';
 import styles from './style.module.css';
 
-const Wrapper: React.FC<PropsWithChildren<{ link: JSX.Element }>> = ({
+const Wrapper: React.FC<PropsWithChildren<{ link: React.JSX.Element }>> = ({
   children,
   link,
 }) => (

@@ -4,7 +4,7 @@ type IProps = {
   onChange: (selectedValues: string[]) => void;
   dataSelect: { value: string; label: string }[];
   placeholder?: string;
-  fallback?: JSX.Element | null;
+  fallback?: React.JSX.Element | null;
 };
 
 export default function TableFilter({
