@@ -132,40 +132,29 @@ export default function FiltersSummary({
         </p>
       )}
 
-      {filters.legalCategoriesNiveau1 &&
-        filters.legalCategoriesNiveau1.length > 0 && (
-          <p>
-            <strong>Catégorie juridique (Niveau 1) :</strong>{' '}
-            {filters.legalCategoriesNiveau1
-              .map((code) => `${code} - ${categoriesJuridiquesNiveau1[code]}`)
-              .join(', ')}
-          </p>
-        )}
-
-      {filters.legalCategoriesNiveau2 &&
-        filters.legalCategoriesNiveau2.length > 0 && (
-          <p>
-            <strong>Catégorie juridique (Niveau 2) :</strong>{' '}
-            {filters.legalCategoriesNiveau2
-              .map((code) => `${code} - ${categoriesJuridiquesNiveau2[code]}`)
-              .join(', ')}
-          </p>
-        )}
-
-      {filters.legalCategoriesNiveau3 &&
-        filters.legalCategoriesNiveau3.length > 0 && (
-          <p>
-            <strong>Catégorie juridique (Niveau 3) :</strong>{' '}
-            {filters.legalCategoriesNiveau3
-              .map((code) => `${code} - ${categoriesJuridiquesNiveau3[code]}`)
-              .join(', ')}
-          </p>
-        )}
-
-      {filters.siretsAndSirens && filters.siretsAndSirens.length > 0 && (
+      {((filters.legalCategoriesNiveau1 &&
+        filters.legalCategoriesNiveau1.length > 0) ||
+        (filters.legalCategoriesNiveau2 &&
+          filters.legalCategoriesNiveau2.length > 0) ||
+        (filters.legalCategoriesNiveau3 &&
+          filters.legalCategoriesNiveau3.length > 0)) && (
         <p>
-          <strong>Nombre de SIRET / SIREN sélectionnés :</strong>{' '}
-          {filters.siretsAndSirens.length}
+          <strong>Catégorie juridique :</strong>{' '}
+          <ul>
+            {[
+              ...filters.legalCategoriesNiveau1.map(
+                (code) => `${code} - ${categoriesJuridiquesNiveau1[code]}`
+              ),
+              ...filters.legalCategoriesNiveau2.map(
+                (code) => `${code} - ${categoriesJuridiquesNiveau2[code]}`
+              ),
+              ...filters.legalCategoriesNiveau3.map(
+                (code) => `${code} - ${categoriesJuridiquesNiveau3[code]}`
+              ),
+            ].map((code) => (
+              <li key={code}>{code}</li>
+            ))}
+          </ul>
         </p>
       )}
 
