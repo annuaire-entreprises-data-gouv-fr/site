@@ -1,5 +1,5 @@
 import { regions } from '#utils/helpers/formatting/metadata/regions';
-import { ExportCsvInput } from 'app/api/export-csv/input-validation';
+import { ExportCsvInput } from 'app/api/export-sirene/input-validation';
 import { niv1ToNiv5Mapping } from 'scripts/nomenclature-d-activites-francaises/niv1ToNiv5Mapping';
 import { effectifCodes } from './constants';
 

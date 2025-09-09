@@ -2,7 +2,7 @@
 
 import ButtonLink from '#components-ui/button';
 import { formatDate, formatNumber } from '#utils/helpers';
-import { ExportCsvInput } from 'app/api/export-csv/input-validation';
+import { ExportCsvInput } from 'app/api/export-sirene/input-validation';
 import { useState } from 'react';
 import { getEffectifCode } from './constants';
 import Filters from './Filters';
@@ -134,7 +134,7 @@ export default function ExportCsv() {
 
     try {
       const query = buildQuery();
-      const response = await fetch('/api/export-csv', {
+      const response = await fetch('/api/export-sirene', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -177,7 +177,7 @@ export default function ExportCsv() {
 
     try {
       const query = buildQuery();
-      const response = await fetch('/api/export-csv', {
+      const response = await fetch('/api/export-sirene', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

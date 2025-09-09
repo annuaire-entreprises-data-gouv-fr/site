@@ -138,8 +138,8 @@ export default function FiltersSummary({
           filters.legalCategoriesNiveau2.length > 0) ||
         (filters.legalCategoriesNiveau3 &&
           filters.legalCategoriesNiveau3.length > 0)) && (
-        <p>
-          <strong>Catégorie juridique :</strong>{' '}
+        <div>
+          <strong>Catégorie juridique :</strong>
           <ul>
             {[
               ...filters.legalCategoriesNiveau1.map(
@@ -155,7 +155,7 @@ export default function FiltersSummary({
               <li key={code}>{code}</li>
             ))}
           </ul>
-        </p>
+        </div>
       )}
 
       {(filters.creationDate?.from || filters.creationDate?.to) && (
