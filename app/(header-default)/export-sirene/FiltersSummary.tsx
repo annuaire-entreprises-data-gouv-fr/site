@@ -118,20 +118,6 @@ export default function FiltersSummary({
         </p>
       )}
 
-      {(filters.creationDate?.from || filters.creationDate?.to) && (
-        <p>
-          <strong>Date de création :</strong>{' '}
-          {filters.creationDate?.from &&
-            `Depuis le ${new Date(
-              filters.creationDate.from
-            ).toLocaleDateString()}`}
-          {filters.creationDate?.to &&
-            (filters.creationDate?.from ? ' jusqu‘au ' : 'Jusqu‘au ')}
-          {filters.creationDate.to &&
-            `${new Date(filters.creationDate.to).toLocaleDateString()}`}
-        </p>
-      )}
-
       {((filters.legalCategoriesNiveau1 &&
         filters.legalCategoriesNiveau1.length > 0) ||
         (filters.legalCategoriesNiveau2 &&
