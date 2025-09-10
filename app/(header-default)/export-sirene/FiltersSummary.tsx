@@ -38,7 +38,7 @@ export default function FiltersSummary({
 
       {filters.categories && filters.categories.length > 0 && (
         <p>
-          <strong>Catégorie :</strong> {filters.categories.join(', ')}
+          <strong>Catégories :</strong> {filters.categories.join(', ')}
         </p>
       )}
 
@@ -60,7 +60,7 @@ export default function FiltersSummary({
               <>
                 {regions.length > 0 && (
                   <div style={{ marginLeft: '20px' }}>
-                    <i>Région</i>
+                    <i>Régions</i>
                     {regions.map((loc) => (
                       <div
                         key={`${loc.type}-${loc.value}`}
@@ -73,7 +73,7 @@ export default function FiltersSummary({
                 )}
                 {departments.length > 0 && (
                   <div style={{ marginLeft: '20px' }}>
-                    <i>Département</i>
+                    <i>Départements</i>
                     {departments.map((loc) => (
                       <div
                         key={`${loc.type}-${loc.value}`}
@@ -86,7 +86,7 @@ export default function FiltersSummary({
                 )}
                 {communes.length > 0 && (
                   <div style={{ marginLeft: '20px' }}>
-                    <i>Commune</i>
+                    <i>Communes</i>
                     {communes.map((loc) => (
                       <div
                         key={`${loc.type}-${loc.value}`}
@@ -104,14 +104,14 @@ export default function FiltersSummary({
       )}
       {filters.sap && filters.sap.length > 0 && (
         <p>
-          <strong>Domaine d‘activité (Section) :</strong>{' '}
+          <strong>Domaines d‘activité (Section) :</strong>{' '}
           {filters.sap.map((code) => codesSectionNAF[code]).join(', ')}
         </p>
       )}
 
       {filters.naf && filters.naf.length > 0 && (
         <p>
-          <strong>Code NAF/APE (Sous-classe) :</strong>{' '}
+          <strong>Codes NAF/APE (Sous-classe) :</strong>{' '}
           {filters.naf
             .map((code) => `${code} - ${codesNAFRev2[code]}`)
             .join(', ')}
@@ -125,7 +125,7 @@ export default function FiltersSummary({
         (filters.legalCategoriesNiveau3 &&
           filters.legalCategoriesNiveau3.length > 0)) && (
         <div>
-          <strong>Catégorie juridique :</strong>
+          <strong>Catégories juridiques :</strong>
           <ul>
             {[
               ...filters.legalCategoriesNiveau1.map(
