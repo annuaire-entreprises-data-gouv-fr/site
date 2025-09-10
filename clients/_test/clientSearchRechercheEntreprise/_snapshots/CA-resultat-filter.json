@@ -205,6 +205,7 @@
           }
         ],
         "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [
           {
             "siren": "817883150",
@@ -458,6 +459,7 @@
           }
         ],
         "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [
           {
             "siren": "414971929",
@@ -782,6 +784,7 @@
         },
         "listeIdcc": [],
         "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [
           {
             "siren": "479285801",
@@ -1010,6 +1013,7 @@
         },
         "listeIdcc": [],
         "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [
           {
             "siren": "491470597",
@@ -1238,6 +1242,7 @@
         },
         "listeIdcc": [],
         "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [
           {
             "siren": "800069130",
@@ -1486,6 +1491,7 @@
           }
         ],
         "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [
           {
             "siren": "852504034",
