@@ -10,7 +10,12 @@ import {
   isDataLoading,
   isUnauthorized,
 } from '#models/data-fetching';
-import { Siret, formatSiret } from '#utils/helpers';
+import {
+  formatIntFr,
+  formatSiret,
+  isLikelyASiret,
+  Siret,
+} from '#utils/helpers';
 import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
 import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
 
@@ -75,9 +80,18 @@ export default function EORICell({ siret, session }: IProps) {
       </InformationTooltip>
     );
   }
+
+  const { eori } = eoriValidation;
+  const sirenOrSiret = eori.slice(2);
+  const formattedEori =
+    'FR ' +
+    (isLikelyASiret(sirenOrSiret)
+      ? formatSiret(sirenOrSiret)
+      : formatIntFr(sirenOrSiret));
+
   return eoriValidation.isValid ? (
     <CopyPaste label="eori" shouldRemoveSpace>
-      {'FR ' + formatSiret(eoriValidation.eori)}
+      {formattedEori}
     </CopyPaste>
   ) : (
     <i>Pas de n° EORI valide</i>
