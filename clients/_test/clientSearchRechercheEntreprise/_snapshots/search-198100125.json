@@ -211,6 +211,7 @@
           }
         ],
         "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,

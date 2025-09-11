@@ -166,7 +166,7 @@
         "dateCreation": "1955-01-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2025-07-24T17:33:15",
+        "dateMiseAJourInsee": "2025-08-20T09:22:48",
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -223,6 +223,7 @@
           "isPersonneMorale": true,
           "capital": "170 348 620,75 € (fixe)"
         },
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [],
         "nombreEtablissements": 17,
         "nombreEtablissementsOuverts": 2,
