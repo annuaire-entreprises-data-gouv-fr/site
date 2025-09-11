@@ -7,6 +7,7 @@ import {
   IPersonneMoraleMergedIGInpi,
 } from '#models/rne/types';
 import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
+import { sortDirigeants } from '../dirigeants-open/content';
 import DisambiguationTooltip from '../DisambiguationTooltip';
 import EtatCivilInfos from '../EtatCivilInfos';
 import PersonneMoraleInfos from '../PersonneMoraleInfos';
@@ -71,7 +72,9 @@ export default function DirigeantsContentProtected({
   return (
     <FullTable
       head={['Role', 'Details', 'Action']}
-      body={dirigeants.data.map((dirigeant) => formatDirigeant(dirigeant))}
+      body={dirigeants.data
+        .sort(sortDirigeants)
+        .map((dirigeant) => formatDirigeant(dirigeant))}
     />
   );
 }
