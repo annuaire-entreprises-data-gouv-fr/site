@@ -156,7 +156,7 @@ export function GroupItem({
                       </span>
                     )}
                   </div>,
-                  user.email !== currentUserEmail ? (
+                  user.email !== currentUserEmail || adminCount >= 2 ? (
                     <UpdateUserSelect
                       user={user}
                       groupId={group.id}
