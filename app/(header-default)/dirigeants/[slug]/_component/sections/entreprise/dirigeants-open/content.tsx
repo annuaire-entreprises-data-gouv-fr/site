@@ -53,7 +53,43 @@ export default function DirigeantsContent({
   return (
     <FullTable
       head={['Role', 'Details', 'Action']}
-      body={dirigeants.data.map((dirigeant) => formatDirigeant(dirigeant))}
+      body={dirigeants.data
+        .sort(sortDirigeants)
+        .map((dirigeant) => formatDirigeant(dirigeant))}
     />
   );
+}
+
+export function sortDirigeants(
+  a: IEtatCivil | IPersonneMorale,
+  b: IEtatCivil | IPersonneMorale
+): -1 | 1 | 0 {
+  const roleA = a.role;
+  const roleB = b.role;
+  if (roleA === roleB) {
+    if (isPersonneMorale(a) && isPersonneMorale(b)) {
+      // same role, sort by denomination
+      return a.denomination < b.denomination ? -1 : 1;
+    }
+    if (!isPersonneMorale(a) && !isPersonneMorale(b)) {
+      // same role, sort by name
+      if (a.nom === b.nom) {
+        if (a.prenoms === b.prenoms) {
+          return 0;
+        }
+        return a.prenoms < b.prenoms ? -1 : 1;
+      }
+      return a.nom < b.nom ? -1 : 1;
+    }
+  }
+  if (roleA == null) {
+    return 1;
+  }
+  if (roleB == null) {
+    return -1;
+  }
+  if (roleA.match(/^[\d]+/) && roleB.match(/^[\d]+/)) {
+    return parseInt(roleA, 10) < parseInt(roleB, 10) ? -1 : 1;
+  }
+  return roleA < roleB ? -1 : 1;
 }
