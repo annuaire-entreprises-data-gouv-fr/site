@@ -31,7 +31,7 @@
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@vcarl/remark-headings": "^0.1.0",
-    "axios": "^1.10.0",
+    "axios": "^1.12.0",
     "canvas": "^2.11.2",
     "chart.js": "^4.5.0",
     "crawler-user-agents": "^1.0.153",
