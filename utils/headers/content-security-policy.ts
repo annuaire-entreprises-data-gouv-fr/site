@@ -5,6 +5,7 @@ const cspDirectives = {
     "'unsafe-inline'",
     "'unsafe-eval'",
     'https://stats.data.gouv.fr/',
+    'https://tally.so/widgets/embed.js',
   ],
   'worker-src': ["'self'", 'blob:'],
   'style-src': ["'self'", "'unsafe-inline'"],
@@ -13,6 +14,7 @@ const cspDirectives = {
     "'self'",
     'https://stats.data.gouv.fr/',
     'https://plugins.crisp.chat/',
+    'https://tally.so/popup/',
   ],
   'connect-src': [
     "'self'",
