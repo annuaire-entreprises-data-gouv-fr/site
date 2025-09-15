@@ -209,6 +209,11 @@ const Footer = () => (
                     Équipe
                   </a>
                 </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/export-sirene">
+                    Générez une liste CSV à partir du répertoire Sirene
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
