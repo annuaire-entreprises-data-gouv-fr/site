@@ -25,13 +25,24 @@ export default async function clientAPIEntreprise<T, U>(
   mapToDomainObject: (e: T) => U,
   options?: {
     useCase?: UseCase;
-  }
+  },
+  publicRequest: boolean = false
 ) {
   const url = `${process.env.API_ENTREPRISE_URL}${route}`;
   const useCase = options?.useCase ? options.useCase : 'annuaire-entreprises';
 
-  const callerInfos = await sensitiveRequestCallerInfos();
-  sensitiveRequestLogger(url, callerInfos, useCase);
+  const callerInfos = !publicRequest
+    ? await sensitiveRequestCallerInfos()
+    : {
+        siret: '13002526500013',
+        email: 'dinum@dinum.fr',
+        scopes: [],
+        domain: 'public',
+      };
+
+  if (!publicRequest) {
+    sensitiveRequestLogger(url, callerInfos, useCase);
+  }
 
   if (!callerInfos.siret) {
     logFatalErrorInSentry(
@@ -53,7 +64,7 @@ export default async function clientAPIEntreprise<T, U>(
     },
     timeout: constants.timeout.XXXL,
     params: {
-      object: 'espace-agent-public',
+      object: publicRequest ? 'open-data' : 'espace-agent-public',
       context: useCase,
       recipient: callerInfos.siret,
     },
