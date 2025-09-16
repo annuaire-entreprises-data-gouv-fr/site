@@ -8,7 +8,7 @@ Please note that this feature does not make sense. It is just an excuse to test 
 
 ## Task Description
 
-Create a new page route `/entreprise/[siren1]/vs/[siren2]` that displays a basic comparison between two companies (aka `unite_legales`).
+Create a new page route `/entreprise/[siren1]/vs/[siren2]` that displays a basic comparison between two companies (aka `unites_legales`).
 
 ## Expected Implementation
 
