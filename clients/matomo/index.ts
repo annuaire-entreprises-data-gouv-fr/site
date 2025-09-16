@@ -2,7 +2,7 @@ import { readFromGrist } from '#clients/external-tooling/grist';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { FetchRessourceException, InternalError } from '#models/exceptions';
-import { httpGet } from '#utils/network';
+import httpClient, { httpGet } from '#utils/network';
 
 export type IMatomoStats = {
   visits: {
@@ -181,11 +181,27 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       httpGet<IMatomoMonthlyStat[]>(createPageViewUrl(API_SITE_ID), {
         timeout: constants.timeout.XXL,
       }),
-      httpGet<IMatomoEventStat[]>(createCopyPasteEventUrl(), {
+      httpClient<IMatomoEventStat[]>({
+        url: createCopyPasteEventUrl(),
         timeout: constants.timeout.XXL,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          token_auth: process.env.MATOMO_TOKEN_AUTH || '',
+        }),
       }),
-      httpGet<IMatomoEventStat[][]>(createEventsCategoryUrl(SITE_ID), {
+      httpClient<IMatomoEventStat[][]>({
+        url: createEventsCategoryUrl(SITE_ID),
         timeout: constants.timeout.XXL,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: new URLSearchParams({
+          token_auth: process.env.MATOMO_TOKEN_AUTH || '',
+        }),
       }),
       getNpsRecords(),
     ]);
