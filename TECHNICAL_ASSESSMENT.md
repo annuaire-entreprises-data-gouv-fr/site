@@ -2,9 +2,9 @@
 
 ## Objective
 
-Implement a company comparison page that allows users to compare two companies side by side using Next.js App Router and React best practices.
+Implement a company comparison page that allows users to compare two companies side by side.
 
-NB : this feature is completly useless. It is just an excuse to test your React skills.
+Please note that this feature does not make sense. It is just an excuse to test your technical (React, Next.js) skills.
 
 ## Task Description
 
@@ -19,7 +19,7 @@ Create a new page route `/entreprise/[siren1]/vs/[siren2]` that displays a basic
 - **Error** handle invalid SIRENs or non-existent companies
 - **SEO** use appropriate metadata
 
-### 2. UI Components
+### 2. UI
 
 Reuse existing components from the codebase such as `<TwoColumnTable>` or `<FullTable>` to display the comparison data. Focus on displaying only key information for each company:
 
