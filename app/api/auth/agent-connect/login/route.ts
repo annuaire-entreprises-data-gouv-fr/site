@@ -8,6 +8,10 @@ import { NextResponse } from 'next/server';
 
 export const GET = withSession(async function loginRoute(req) {
   try {
+    if (req.session.franceConnectHidePersonalDataSession) {
+      throw new Error('User is already logged in with FranceConnect');
+    }
+
     const referer = req.headers.get('referer') || '';
     const baseURL = getBaseUrl();
     const isFromSite = referer.indexOf(baseURL) === 0;

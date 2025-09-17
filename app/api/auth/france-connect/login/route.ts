@@ -7,6 +7,10 @@ import { FranceConnectFailedException } from '../france-connect-types';
 
 export const GET = withSession(async function loginRoute(req) {
   try {
+    if (req.session.user) {
+      throw new Error('User is already logged in with ProConnect');
+    }
+
     const url = await franceConnectAuthorizeUrl(req);
     return NextResponse.redirect(url);
   } catch (e: any) {
