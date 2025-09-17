@@ -1,8 +1,6 @@
 import { DataStore } from '#utils/data-store';
 
 import { readFromGrist } from '#clients/external-tooling/grist';
-import { InternalError } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
 import {
   extractSirenFromSiret,
   Siren,
@@ -36,13 +34,13 @@ class ProtectedSirenList {
         return acc;
       }, {} as { [key: string]: boolean });
 
-    if (Object.keys(sirenList).length < 4000) {
-      logErrorInSentry(
-        new InternalError({
-          message: 'ProtectedSirenList is abnormally low',
-        })
-      );
-    }
+    // if (Object.keys(sirenList).length < 4000) {
+    //   logErrorInSentry(
+    //     new InternalError({
+    //       message: 'ProtectedSirenList is abnormally low',
+    //     })
+    //   );
+    // }
     return sirenList;
   };
 }
