@@ -12,7 +12,7 @@ export type ISession = {
   pathFrom?: string;
 
   // FranceConnect hide personal data request
-  hidePersonalDataRequestFC?: {
+  franceConnectHidePersonalDataSession?: {
     firstName?: string;
     familyName?: string;
     birthdate?: string;
