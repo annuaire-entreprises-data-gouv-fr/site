@@ -2,12 +2,8 @@ import { NPSBanner } from '#components/banner/nps';
 import TempIncidentBanner from '#components/banner/temp-incident';
 import Footer from '#components/footer';
 import { HeaderAppRouter } from '#components/header/header-app-router';
-import { meta } from '#components/meta/meta-server';
 import { Question } from '#components/question';
 import SocialNetworks from '#components/social-network';
-import { Metadata } from 'next';
-
-export const metadata: Metadata = meta({});
 
 /**
  * Layout component designed for pages without authentication.

@@ -20,7 +20,7 @@ export const isTwoMonthOld = (dateAsString: string) => {
 /**
  * Return true if an uniteLegale should be **ignored** by indexing bots
  */
-export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
+export const shouldAddNoIndexNoFollow = (uniteLegale: IUniteLegale) => {
   if (isEntrepreneurIndividuel(uniteLegale)) {
     // we dont index EI
     return true;
