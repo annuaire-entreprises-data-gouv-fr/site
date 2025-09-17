@@ -10,18 +10,27 @@ import { administrationsMetaData } from "#models/administrations";
 import { isLoggedIn } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
+import { shouldAddNoIndex } from "#utils/seo/noindex-query-params";
 import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
 import styles from "./style.module.css";
 
-export const metadata: Metadata = {
-  title: "Espace agent | L’Annuaire des Entreprises",
-  description:
-    "Les informations des entreprises sont toutes dans l’espace agent !",
-  robots: "index, follow",
-  alternates: {
-    canonical: "https://annuaire-entreprises.data.gouv.fr/lp/agent-public",
-  },
+export const generateMetadata = async (
+  props: AppRouterProps
+): Promise<Metadata> => {
+  const searchParams = await props.searchParams;
+
+  return {
+    title: "Espace agent | L’Annuaire des Entreprises",
+    description:
+      "Les informations des entreprises sont toutes dans l’espace agent !",
+    robots: shouldAddNoIndex(searchParams)
+      ? "noindex, follow"
+      : "index, follow",
+    alternates: {
+      canonical: "https://annuaire-entreprises.data.gouv.fr/lp/agent-public",
+    },
+  };
 };
 
 const isLoggedInMessage = (session: ISession | null) => (

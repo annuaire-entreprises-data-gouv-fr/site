@@ -95,10 +95,11 @@ export async function generateStaticParams(): Promise<Array<IParams>> {
   }));
 }
 
-export const generateMetadata = async ({
-  params,
-}: AppRouterProps): Promise<Metadata> => {
-  const { slug } = await params;
+export const generateMetadata = async (
+  props: AppRouterProps
+): Promise<Metadata> => {
+  const { slug } = await props.params;
+
   const landingPage = getLandingPage(slug);
   if (!landingPage) {
     notFound();
