@@ -1,12 +1,12 @@
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  Title as ChartTitle,
-  Tooltip,
-  Legend,
-  ChartData,
   ArcElement,
+  CategoryScale,
+  ChartData,
+  Chart as ChartJS,
   ChartOptions,
+  Title as ChartTitle,
+  Legend,
+  Tooltip,
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
@@ -35,7 +35,6 @@ export const DoughnutChart = ({
   return (
     <div>
       <Doughnut
-        title="hey"
         options={{
           ...options,
           plugins: {
