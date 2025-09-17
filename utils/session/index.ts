@@ -71,7 +71,7 @@ export const setHidePersonalDataRequestFCSession = async (
   sub: string,
   session: IronSession<ISession>
 ) => {
-  session.hidePersonalDataRequestFC = {
+  session.franceConnectHidePersonalDataSession = {
     firstName,
     familyName,
     birthdate,
@@ -83,17 +83,19 @@ export const setHidePersonalDataRequestFCSession = async (
 
 export function getHidePersonalDataRequestFCSession(
   session: ISession | null
-): Required<NonNullable<ISession['hidePersonalDataRequestFC']>> | null {
+): Required<
+  NonNullable<ISession['franceConnectHidePersonalDataSession']>
+> | null {
   if (
     !session ||
-    !session.hidePersonalDataRequestFC ||
-    !session.hidePersonalDataRequestFC.firstName ||
-    !session.hidePersonalDataRequestFC.familyName ||
-    !session.hidePersonalDataRequestFC.birthdate
+    !session.franceConnectHidePersonalDataSession ||
+    !session.franceConnectHidePersonalDataSession.firstName ||
+    !session.franceConnectHidePersonalDataSession.familyName ||
+    !session.franceConnectHidePersonalDataSession.birthdate
   ) {
     return null;
   }
-  return session.hidePersonalDataRequestFC as Required<
-    NonNullable<ISession['hidePersonalDataRequestFC']>
+  return session.franceConnectHidePersonalDataSession as Required<
+    NonNullable<ISession['franceConnectHidePersonalDataSession']>
   >;
 }
