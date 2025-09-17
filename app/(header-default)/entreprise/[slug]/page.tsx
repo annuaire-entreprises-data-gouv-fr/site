@@ -71,7 +71,13 @@ export default async function UniteLegalePage(props: AppRouterProps) {
     uniteLegale.chemin &&
     uniteLegale.chemin !== uniteLegale.siren
   ) {
-    permanentRedirect(`/entreprise/${uniteLegale.chemin}`);
+    const searchParams = await props.searchParams;
+    const queryString = new URLSearchParams(
+      searchParams as Record<string, string>
+    ).toString();
+    permanentRedirect(
+      `/entreprise/${uniteLegale.chemin}${queryString ? `?${queryString}` : ''}`
+    );
   }
 
   return (
