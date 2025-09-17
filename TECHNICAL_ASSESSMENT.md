@@ -39,7 +39,7 @@ Reuse existing components from the codebase such as `<TwoColumnTable>` or `<Full
 
 ## Time Estimate
 
-**2-4 hours** should be enough for a complete implementation
+**around 2 hours / 3 hours** should be enough for a first implementation. We do not expect a perfect implementation. Work on it for 2-3 hours and send us the results.
 
 ## Getting Started
 
