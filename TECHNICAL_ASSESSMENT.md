@@ -8,7 +8,12 @@ Please note that this feature does not make sense. It is just an excuse to test 
 
 ## Task Description
 
+<<<<<<< HEAD
 Create a new page route `/entreprise/[siren1]/vs/[siren2]` that displays a basic comparison between two companies (aka `unite_legales`).
+=======
+Create a new page route `/entreprise/[siren1]/vs/[siren2]` that displays a basic comparison between two companies (aka `unites_legales`).
+
+> > > > > > > 3b397f7fe889352dd610f3a807c72ae65ceccf6d
 
 ## Expected Implementation
 

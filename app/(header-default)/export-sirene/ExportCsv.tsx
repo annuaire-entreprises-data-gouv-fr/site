@@ -2,7 +2,7 @@
 
 import ButtonLink from '#components-ui/button';
 import { formatDate, formatNumber } from '#utils/helpers';
-import { ExportCsvInput } from 'app/api/export-csv/input-validation';
+import { ExportCsvInput } from 'app/api/export-sirene/input-validation';
 import { useState } from 'react';
 import { getEffectifCode } from './constants';
 import Filters from './Filters';
@@ -19,7 +19,9 @@ export interface ExtendedExportCsvInput extends ExportCsvInput {
     value: string;
     label: string;
   }>;
-  legalCategories: string[];
+  legalCategoriesNiveau1: string[];
+  legalCategoriesNiveau2: string[];
+  legalCategoriesNiveau3: string[];
 }
 
 const getFileSize = (count: number) => {
@@ -35,7 +37,9 @@ const defaultFilters: ExtendedExportCsvInput = {
   locations: [],
   creationDate: { from: undefined, to: undefined },
   updateDate: { from: undefined, to: undefined },
-  legalCategories: [],
+  legalCategoriesNiveau1: [],
+  legalCategoriesNiveau2: [],
+  legalCategoriesNiveau3: [],
   ess: {
     inclure: true,
     inclureNo: true,
@@ -88,7 +92,11 @@ export default function ExportCsv() {
     categories: filters.categories as ('PME' | 'ETI' | 'GE')[],
     activity: filters.activity,
     legalUnit: filters.legalUnit,
-    legalCategories: filters.legalCategories,
+    legalCategories: [
+      ...filters.legalCategoriesNiveau1.map((cat) => cat + '*'),
+      ...filters.legalCategoriesNiveau2.map((cat) => cat + '*'),
+      ...filters.legalCategoriesNiveau3,
+    ],
     siretsAndSirens: filters.siretsAndSirens,
     location: {
       codesPostaux: filters.locations
@@ -126,7 +134,7 @@ export default function ExportCsv() {
 
     try {
       const query = buildQuery();
-      const response = await fetch('/api/export-csv', {
+      const response = await fetch('/api/export-sirene', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -169,7 +177,7 @@ export default function ExportCsv() {
 
     try {
       const query = buildQuery();
-      const response = await fetch('/api/export-csv', {
+      const response = await fetch('/api/export-sirene', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

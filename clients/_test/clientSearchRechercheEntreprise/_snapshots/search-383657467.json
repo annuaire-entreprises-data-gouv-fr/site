@@ -185,6 +185,7 @@
         },
         "listeIdcc": [],
         "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [],
         "nombreEtablissements": 2,
         "nombreEtablissementsOuverts": 1,

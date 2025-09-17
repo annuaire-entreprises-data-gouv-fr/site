@@ -158,7 +158,7 @@ const CompteAgentAccueil = async () => {
             >
               Activez votre compte
             </a>
-            , puis déconnectez-vous et reconnectez-vous .
+            , puis déconnectez-vous et reconnectez-vous.
           </Warning>
         )}
         <p>

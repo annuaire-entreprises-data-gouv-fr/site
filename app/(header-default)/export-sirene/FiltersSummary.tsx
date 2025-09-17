@@ -1,4 +1,6 @@
-import { categoriesJuridiques as legalCategories } from '#utils/helpers/formatting/metadata/categories-juridiques';
+import { categoriesJuridiquesNiveau3 } from '#utils/helpers/formatting/metadata/categories-juridiques';
+import { categoriesJuridiquesNiveau1 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-1';
+import { categoriesJuridiquesNiveau2 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-2';
 import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { ExtendedExportCsvInput } from './ExportCsv';
@@ -36,7 +38,7 @@ export default function FiltersSummary({
 
       {filters.categories && filters.categories.length > 0 && (
         <p>
-          <strong>Catégorie :</strong> {filters.categories.join(', ')}
+          <strong>Catégories :</strong> {filters.categories.join(', ')}
         </p>
       )}
 
@@ -58,7 +60,7 @@ export default function FiltersSummary({
               <>
                 {regions.length > 0 && (
                   <div style={{ marginLeft: '20px' }}>
-                    <i>Région</i>
+                    <i>Régions</i>
                     {regions.map((loc) => (
                       <div
                         key={`${loc.type}-${loc.value}`}
@@ -71,7 +73,7 @@ export default function FiltersSummary({
                 )}
                 {departments.length > 0 && (
                   <div style={{ marginLeft: '20px' }}>
-                    <i>Département</i>
+                    <i>Départements</i>
                     {departments.map((loc) => (
                       <div
                         key={`${loc.type}-${loc.value}`}
@@ -84,7 +86,7 @@ export default function FiltersSummary({
                 )}
                 {communes.length > 0 && (
                   <div style={{ marginLeft: '20px' }}>
-                    <i>Commune</i>
+                    <i>Communes</i>
                     {communes.map((loc) => (
                       <div
                         key={`${loc.type}-${loc.value}`}
@@ -102,55 +104,44 @@ export default function FiltersSummary({
       )}
       {filters.sap && filters.sap.length > 0 && (
         <p>
-          <strong>Domaine d‘activité (Section) :</strong>{' '}
-          {filters.sap
-            .map(
-              (code) => codesSectionNAF[code as keyof typeof codesSectionNAF]
-            )
-            .join(', ')}
+          <strong>Domaines d‘activité (Section) :</strong>{' '}
+          {filters.sap.map((code) => codesSectionNAF[code]).join(', ')}
         </p>
       )}
 
       {filters.naf && filters.naf.length > 0 && (
         <p>
-          <strong>Code NAF/APE (Sous-classe) :</strong>{' '}
+          <strong>Codes NAF/APE (Sous-classe) :</strong>{' '}
           {filters.naf
-            .map(
-              (code) =>
-                `${code} - ${codesNAFRev2[code as keyof typeof codesNAFRev2]}`
-            )
+            .map((code) => `${code} - ${codesNAFRev2[code]}`)
             .join(', ')}
         </p>
       )}
 
-      {(filters.creationDate?.from || filters.creationDate?.to) && (
-        <p>
-          <strong>Date de création :</strong>{' '}
-          {filters.creationDate?.from &&
-            `Depuis le ${new Date(
-              filters.creationDate.from
-            ).toLocaleDateString()}`}
-          {filters.creationDate?.to &&
-            (filters.creationDate?.from ? ' jusqu‘au ' : 'Jusqu‘au ')}
-          {filters.creationDate.to &&
-            `${new Date(filters.creationDate.to).toLocaleDateString()}`}
-        </p>
-      )}
-
-      {filters.legalCategories && filters.legalCategories.length > 0 && (
-        <p>
-          <strong>Catégorie juridique :</strong>{' '}
-          {filters.legalCategories
-            .map((code) => legalCategories[code] || code)
-            .join(', ')}
-        </p>
-      )}
-
-      {filters.siretsAndSirens && filters.siretsAndSirens.length > 0 && (
-        <p>
-          <strong>Nombre de SIRET / SIREN sélectionnés :</strong>{' '}
-          {filters.siretsAndSirens.length}
-        </p>
+      {((filters.legalCategoriesNiveau1 &&
+        filters.legalCategoriesNiveau1.length > 0) ||
+        (filters.legalCategoriesNiveau2 &&
+          filters.legalCategoriesNiveau2.length > 0) ||
+        (filters.legalCategoriesNiveau3 &&
+          filters.legalCategoriesNiveau3.length > 0)) && (
+        <div>
+          <strong>Catégories juridiques :</strong>
+          <ul>
+            {[
+              ...filters.legalCategoriesNiveau1.map(
+                (code) => `${code} - ${categoriesJuridiquesNiveau1[code]}`
+              ),
+              ...filters.legalCategoriesNiveau2.map(
+                (code) => `${code} - ${categoriesJuridiquesNiveau2[code]}`
+              ),
+              ...filters.legalCategoriesNiveau3.map(
+                (code) => `${code} - ${categoriesJuridiquesNiveau3[code]}`
+              ),
+            ].map((code) => (
+              <li key={code}>{code}</li>
+            ))}
+          </ul>
+        </div>
       )}
 
       {(filters.creationDate?.from || filters.creationDate?.to) && (

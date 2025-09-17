@@ -6,7 +6,7 @@ type IProps = {
   useSearchBar?: boolean;
   useAgentCTA?: boolean;
   useMap?: boolean;
-  plugin?: JSX.Element;
+  plugin?: React.JSX.Element;
   currentSearchTerm?: string;
 };
 export const HeaderPageRouter: React.FC<IProps> = ({

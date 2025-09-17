@@ -197,6 +197,7 @@
           "isPersonneMorale": true,
           "capital": "36 000,00 € (fixe)"
         },
+        "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
