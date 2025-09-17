@@ -7,6 +7,12 @@ import React, { useEffect } from 'react';
 
 const NPS_MODAL_ID = 'nps-modal-2';
 
+declare global {
+  interface Window {
+    Tally: any | undefined;
+  }
+}
+
 export const NPSBanner: React.FC<{}> = () => {
   // const [isVisible, setIsVisible] = useState(false);
 
@@ -53,8 +59,7 @@ export const NPSBanner: React.FC<{}> = () => {
   }, []);
 
   const showTally = () => {
-    if (typeof window !== 'undefined') {
-      //@ts-ignore
+    if (typeof window !== 'undefined' && window.Tally?.openPopup) {
       window.Tally.openPopup('n04Jq0', {
         emoji: {
           text: '👋',
