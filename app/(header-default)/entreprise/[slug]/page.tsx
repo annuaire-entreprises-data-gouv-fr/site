@@ -7,7 +7,7 @@ import EtablissementSection from '#components/etablissement-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
 import { NonDiffusibleStrictSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
-import StructuredDataBreadcrumb from '#components/structured-data/Breadcrumb';
+import StructuredDataBreadcrumb from '#components/structured-data/StructuredDataBreadcrumb';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import {
