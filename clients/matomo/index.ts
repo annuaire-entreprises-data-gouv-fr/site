@@ -2,7 +2,7 @@ import { readFromGrist } from '#clients/external-tooling/grist';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { FetchRessourceException, InternalError } from '#models/exceptions';
-import httpClient, { httpGet } from '#utils/network';
+import httpClient from '#utils/network';
 
 export type IMatomoStats = {
   visits: {
@@ -153,6 +153,20 @@ const computeStats = (
   };
 };
 
+const matomoHttpClient = async <T>(url: string) => {
+  return httpClient<T>({
+    url,
+    timeout: constants.timeout.XXL,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    data: new URLSearchParams({
+      token_auth: process.env.MATOMO_TOKEN_AUTH || '',
+    }),
+  });
+};
+
 export const clientMatomoStats = async (): Promise<IMatomoStats> => {
   const SITE_ID = process.env.MATOMO_SITE_ID;
   const API_SITE_ID = process.env.MATOMO_API_SITE_ID;
@@ -172,37 +186,11 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       matomoEventsCategory,
       npsRecords,
     ] = await Promise.all([
-      httpGet<IMatomoMonthlyStat[]>(createPageViewUrl(SITE_ID), {
-        timeout: constants.timeout.XXL,
-      }),
-      httpGet<IMatomoMonthlyStat[]>(createAgentPageViewUrl(SITE_ID), {
-        timeout: constants.timeout.XXL,
-      }),
-      httpGet<IMatomoMonthlyStat[]>(createPageViewUrl(API_SITE_ID), {
-        timeout: constants.timeout.XXL,
-      }),
-      httpClient<IMatomoEventStat[]>({
-        url: createCopyPasteEventUrl(),
-        timeout: constants.timeout.XXL,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: new URLSearchParams({
-          token_auth: process.env.MATOMO_TOKEN_AUTH || '',
-        }),
-      }),
-      httpClient<IMatomoEventStat[][]>({
-        url: createEventsCategoryUrl(SITE_ID),
-        timeout: constants.timeout.XXL,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: new URLSearchParams({
-          token_auth: process.env.MATOMO_TOKEN_AUTH || '',
-        }),
-      }),
+      matomoHttpClient<IMatomoMonthlyStat[]>(createPageViewUrl(SITE_ID)),
+      matomoHttpClient<IMatomoMonthlyStat[]>(createAgentPageViewUrl(SITE_ID)),
+      matomoHttpClient<IMatomoMonthlyStat[]>(createPageViewUrl(API_SITE_ID)),
+      matomoHttpClient<IMatomoEventStat[]>(createCopyPasteEventUrl()),
+      matomoHttpClient<IMatomoEventStat[][]>(createEventsCategoryUrl(SITE_ID)),
       getNpsRecords(),
     ]);
     return {
