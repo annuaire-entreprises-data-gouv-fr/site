@@ -11,7 +11,7 @@ export function ConnectionFranceConnect({
 }) {
   const missingDataInFranceConnect =
     session &&
-    session.hidePersonalDataRequestFC &&
+    session.franceConnectHidePersonalDataSession &&
     !getHidePersonalDataRequestFCSession(session);
 
   const franceConnectInfo =
