@@ -2,10 +2,7 @@ import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { Icon } from '#components-ui/icon/wrapper';
 import { validateGroupName } from '#components/espace-agent-components/helpers/form-validation';
-import {
-  showErrorNotification,
-  showSuccessNotification,
-} from '#components/notification-center';
+import { NotificationTypeEnum, useNotification } from '#hooks/use-notification';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
 
@@ -18,6 +15,7 @@ export default function UpdateNameModal({
   initialName: string;
   updateGroupNameState: (name: string) => void;
 }) {
+  const { showNotification } = useNotification();
   const [isVisible, setIsVisible] = useState(false);
   const [groupName, setGroupName] = useState(initialName);
   const [loading, setLoading] = useState(false);
@@ -40,7 +38,11 @@ export default function UpdateNameModal({
       const nameValidationError = validateGroupName(groupName);
       if (nameValidationError) {
         setValidationErrors([nameValidationError]);
-        showErrorNotification('Nom invalide', nameValidationError);
+        showNotification({
+          type: NotificationTypeEnum.ERROR,
+          title: 'Nom invalide',
+          message: nameValidationError,
+        });
         return;
       }
 
@@ -56,15 +58,17 @@ export default function UpdateNameModal({
       updateGroupNameState(groupName);
       setIsVisible(false);
 
-      showSuccessNotification(
-        'Nom du groupe mis à jour',
-        `Le groupe a été renommé "${groupName}"`
-      );
+      showNotification({
+        type: NotificationTypeEnum.SUCCESS,
+        title: 'Nom du groupe mis à jour',
+        message: `Le groupe a été renommé "${groupName}"`,
+      });
     } catch (error: any) {
-      showErrorNotification(
-        'Erreur lors de la mise à jour du nom',
-        error?.message
-      );
+      showNotification({
+        type: NotificationTypeEnum.ERROR,
+        title: 'Erreur lors de la mise à jour du nom',
+        message: error?.message,
+      });
     } finally {
       setLoading(false);
     }

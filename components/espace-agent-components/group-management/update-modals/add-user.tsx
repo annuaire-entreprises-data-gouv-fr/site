@@ -4,10 +4,7 @@ import { IRolesDataUser } from '#clients/roles-data/interface';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
 import { validateEmail } from '#components/espace-agent-components/helpers/form-validation';
-import {
-  showErrorNotification,
-  showSuccessNotification,
-} from '#components/notification-center';
+import { NotificationTypeEnum, useNotification } from '#hooks/use-notification';
 import { IRolesDataGroup } from '#models/authentication/group/groups';
 import httpClient from '#utils/network';
 import { useEffect, useRef, useState } from 'react';
@@ -23,6 +20,7 @@ export default function AddUserModal({
   defaultRoleId: number;
   addUserToGroupState: (user: IRolesDataUser) => void;
 }) {
+  const { showNotification } = useNotification();
   const [isVisible, setIsVisible] = useState(false);
   const [inputEmail, setInputEmail] = useState('');
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -45,7 +43,11 @@ export default function AddUserModal({
       const emailValidationError = validateEmail(userEmail);
       if (emailValidationError) {
         setValidationErrors([emailValidationError]);
-        showErrorNotification('Ajout impossible', emailValidationError);
+        showNotification({
+          type: NotificationTypeEnum.ERROR,
+          title: 'Ajout impossible',
+          message: emailValidationError,
+        });
         return;
       }
 
@@ -54,10 +56,11 @@ export default function AddUserModal({
         group.users.some((user: IRolesDataUser) => user.email === userEmail)
       ) {
         setValidationErrors(['Cet utilisateur est déjà membre de ce groupe']);
-        showErrorNotification(
-          'Ajout impossible',
-          'Cet utilisateur est déjà membre de ce groupe'
-        );
+        showNotification({
+          type: NotificationTypeEnum.ERROR,
+          title: 'Ajout impossible',
+          message: 'Cet utilisateur est déjà membre de ce groupe',
+        });
         return;
       }
 
@@ -72,15 +75,20 @@ export default function AddUserModal({
 
       addUserToGroupState(user);
 
-      showSuccessNotification(
-        'Membre ajouté avec succès',
-        `${userEmail} a été ajouté au groupe ${group.name}`
-      );
+      showNotification({
+        type: NotificationTypeEnum.SUCCESS,
+        title: 'Membre ajouté avec succès',
+        message: `${userEmail} a été ajouté au groupe ${group.name}`,
+      });
 
       setInputEmail('');
       setIsVisible(false);
     } catch (error: any) {
-      showErrorNotification("Erreur lors de l'ajout du membre", error?.message);
+      showNotification({
+        type: NotificationTypeEnum.ERROR,
+        title: "Erreur lors de l'ajout du membre",
+        message: error?.message,
+      });
     } finally {
       setLoading(false);
     }

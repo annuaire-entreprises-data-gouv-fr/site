@@ -2,10 +2,7 @@ import { IRolesDataUser } from '#clients/roles-data/interface';
 import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import { FullScreenModal } from '#components-ui/full-screen-modal';
-import {
-  showErrorNotification,
-  showSuccessNotification,
-} from '#components/notification-center';
+import { NotificationTypeEnum, useNotification } from '#hooks/use-notification';
 import httpClient from '#utils/network';
 import { useState } from 'react';
 
@@ -22,6 +19,7 @@ export default function DeleteUserButton({
   groupId: number;
   deleteUserFromGroupState: (email: string) => void;
 }) {
+  const { showNotification } = useNotification();
   const [loading, setLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -42,12 +40,17 @@ export default function DeleteUserButton({
       setShowConfirmation(false);
 
       // Show success notification
-      showSuccessNotification(
-        'Membre supprimé',
-        `${userEmail} a été retiré du groupe`
-      );
+      showNotification({
+        type: NotificationTypeEnum.SUCCESS,
+        title: 'Membre supprimé',
+        message: `${userEmail} a été retiré du groupe`,
+      });
     } catch (error: any) {
-      showErrorNotification('Erreur lors de la suppression', error?.message);
+      showNotification({
+        type: NotificationTypeEnum.ERROR,
+        title: 'Erreur lors de la suppression',
+        message: error?.message,
+      });
     } finally {
       setLoading(false);
     }
