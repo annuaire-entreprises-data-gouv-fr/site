@@ -56,7 +56,7 @@ const Footer = () => (
               </ul>
               <br />
               <strong className="fr-footer__top-cat">
-                Extraire une liste d‘entreprises du répertoire Sirene
+                Générer une liste CSV à partir du répertoire Sirene
               </strong>
               <ul className="fr-footer__top-list">
                 <li>
