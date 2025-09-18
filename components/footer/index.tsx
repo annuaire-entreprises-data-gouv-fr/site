@@ -61,7 +61,7 @@ const Footer = () => (
               <ul className="fr-footer__top-list">
                 <li>
                   <a className="fr-footer__top-link" href="/export-sirene">
-                    Export CSV depuis la base Sirene
+                    Configurer un export Sirene
                   </a>
                 </li>
               </ul>
