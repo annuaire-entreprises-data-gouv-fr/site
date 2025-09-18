@@ -54,6 +54,17 @@ const Footer = () => (
                   </a>
                 </li>
               </ul>
+              <br />
+              <strong className="fr-footer__top-cat">
+                Générer une liste CSV à partir du répertoire Sirene
+              </strong>
+              <ul className="fr-footer__top-list">
+                <li>
+                  <a className="fr-footer__top-link" href="/export-sirene">
+                    Configurer un export Sirene
+                  </a>
+                </li>
+              </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
               <strong className="fr-footer__top-cat">
@@ -207,11 +218,6 @@ const Footer = () => (
                 <li>
                   <a className="fr-footer__top-link" href="/a-propos/equipe">
                     Équipe
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/export-sirene">
-                    Générez une liste CSV à partir du répertoire Sirene
                   </a>
                 </li>
               </ul>
