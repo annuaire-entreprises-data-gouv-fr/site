@@ -2,7 +2,11 @@ import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { Information } from '#models/exceptions';
-import httpClient, { httpGet, IDefaultRequestConfig } from '#utils/network';
+import httpClient, {
+  httpGet,
+  httpPost,
+  IDefaultRequestConfig,
+} from '#utils/network';
 import { logInfoInSentry } from '#utils/sentry';
 import { URLSearchParams } from 'url';
 
@@ -101,6 +105,19 @@ export class httpInseeClient {
       },
     });
   };
+
+  post = async (url: string, config: IDefaultRequestConfig) => {
+    const token = await this.getToken();
+
+    return httpPost(url, {
+      timeout: constants.timeout.M,
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: `Bearer ${token.data.access_token}`,
+      },
+    });
+  };
 }
 
 /**
@@ -159,17 +176,17 @@ export async function inseeClientGet<T>(
 }
 
 /**
- * Insee API export csvclient
+ * Insee API export csvclient POST
  *
  * @param route
  * @param config
  * @returns
  */
-export async function exportCsvClientGet<T>(
+export async function exportCsvClientPost<T>(
   route: string,
   config: IDefaultRequestConfig = {}
 ): Promise<T> {
-  return (await exportCsvClient.get(route, {
+  return (await exportCsvClient.post(route, {
     timeout: constants.timeout.XXXL,
     ...config,
   })) as T;

@@ -79,13 +79,11 @@ export class SireneQueryBuilder {
   }
 
   static getFieldsString(): string {
-    return encodeURIComponent(
-      SireneQueryBuilder.getAvailableFields().join(',')
-    );
+    return SireneQueryBuilder.getAvailableFields().join(',');
   }
 
   build() {
-    return encodeURIComponent(this.conditions.join(' AND '));
+    return this.conditions.join(' AND ');
   }
 
   private addCategoryConditions = (categories: string[]) => {
