@@ -5,7 +5,7 @@ import {
   validateEmails,
   validateGroupName,
 } from '#components/espace-agent-components/helpers/form-validation';
-import { showErrorNotification } from '#components/notification-center';
+import { NotificationTypeEnum, useNotification } from '#hooks/use-notification';
 import httpClient from '#utils/network';
 import { ICreateRolesDataGroup } from 'app/api/groups/route';
 import { useRouter } from 'next/navigation';
@@ -16,6 +16,7 @@ export default function ValidateGroupForm({
 }: {
   demandeId: string;
 }) {
+  const { showNotification } = useNotification();
   const router = useRouter();
   const inputGroup = useRef<HTMLInputElement>(null);
   const inputEmails = useRef<HTMLTextAreaElement>(null);
@@ -39,10 +40,11 @@ export default function ValidateGroupForm({
         groupName: groupNameValidationError ?? undefined,
         emails: emailsValidationError ?? undefined,
       });
-      showErrorNotification(
-        'Impossible de configurer vos droits',
-        groupNameValidationError || emailsValidationError || ''
-      );
+      showNotification({
+        type: NotificationTypeEnum.ERROR,
+        title: 'Impossible de configurer vos droits',
+        message: groupNameValidationError || emailsValidationError || '',
+      });
       return;
     }
 
@@ -58,10 +60,11 @@ export default function ValidateGroupForm({
         data: JSON.stringify({ groupName, demandeId, emails }),
       });
       if (response.error) {
-        showErrorNotification(
-          'Impossible de configurer vos droits',
-          response.error || ''
-        );
+        showNotification({
+          type: NotificationTypeEnum.ERROR,
+          title: 'Impossible de configurer vos droits',
+          message: response.error || '',
+        });
       } else {
         router.push(
           `/compte/habilitation/${demandeId}/succes?scopes=${encodeURIComponent(
@@ -70,7 +73,10 @@ export default function ValidateGroupForm({
         );
       }
     } catch (error: any) {
-      showErrorNotification('Impossible de configurer vos droits');
+      showNotification({
+        type: NotificationTypeEnum.ERROR,
+        title: 'Impossible de configurer vos droits',
+      });
     } finally {
       setLoading(false);
     }
