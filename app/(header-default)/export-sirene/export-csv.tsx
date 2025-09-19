@@ -225,11 +225,11 @@ export default function ExportCsv() {
       <form onSubmit={handleCountSubmit}>
         <Filters filters={filters} setFilters={setFilters} />
         <div className={styles.buttonContainer}>
+          <ButtonLink type="button" alt={true} onClick={resetFilters}>
+            Réinitialiser les critères
+          </ButtonLink>
           <ButtonLink type="submit" disabled={isCountLoading}>
             {isCountLoading ? 'Calcul en cours...' : 'Calculer les résultats'}
-          </ButtonLink>
-          <ButtonLink type="button" alt={true} onClick={resetFilters}>
-            Réinitialiser
           </ButtonLink>
         </div>
       </form>
@@ -290,11 +290,11 @@ export default function ExportCsv() {
       )}
 
       <div className={styles.buttonContainer}>
+        <ButtonLink type="button" alt={true} onClick={resetFilters}>
+          Réinitialiser les critères
+        </ButtonLink>
         <ButtonLink type="button" onClick={modifyFilters}>
           Modifier votre recherche
-        </ButtonLink>
-        <ButtonLink type="button" alt={true} onClick={resetFilters}>
-          Réinitialiser
         </ButtonLink>
       </div>
 

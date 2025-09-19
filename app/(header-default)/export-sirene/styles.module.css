@@ -80,9 +80,14 @@
 }
 
 .buttonContainer {
+  position: sticky;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
   display: flex;
   gap: 16px;
   align-items: center;
+  z-index: 9;
 }
 
 /* Error display */
