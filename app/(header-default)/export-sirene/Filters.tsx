@@ -341,7 +341,7 @@ export default function Filters({
               />
             </InformationTooltip>
           </h2>
-          <div className={styles.filterContainer}>
+          <div className={styles.inputContainer}>
             <div className={styles.filterColumn}>
               <LocationFilter
                 onSelect={(
@@ -409,7 +409,7 @@ export default function Filters({
               />
             </InformationTooltip>
           </h2>
-          <div className={styles.filterContainer}>
+          <div className={styles.inputContainer}>
             <div className={styles.filterColumn}>
               <label htmlFor="sap-multi-select">
                 Domaine d‘activité (Section) :
@@ -491,7 +491,7 @@ export default function Filters({
               />
             </InformationTooltip>
           </h2>
-          <div className={styles.filterContainer}>
+          <div className={styles.inputContainer}>
             <div className={styles.filterColumn}>
               <label htmlFor="nature-juridique-niveau-1-multi-select">
                 Catégorie juridique (Niveau 1) :
@@ -565,8 +565,8 @@ export default function Filters({
             <Icon color={constants.colors.frBlue} slug="awardFill" />
           </h2>
 
-          <div className={styles.dateContainer}>
-            <div className={styles.qualityFilterColumn}>
+          <div className={styles.inputContainer}>
+            <div>
               <h3 style={{ marginTop: 0 }}>
                 Appartenance au champ de l‘économie sociale et solidaire{' '}
                 <InformationTooltip
@@ -674,7 +674,7 @@ export default function Filters({
               </fieldset>
             </div>
 
-            <div className={styles.qualityFilterColumn}>
+            <div>
               <h3 style={{ marginTop: 0 }}>
                 Appartenance au champ des sociétés à mission{' '}
                 <InformationTooltip
@@ -790,7 +790,7 @@ export default function Filters({
           Filtrer par date
           <Icon color={constants.colors.frBlue} slug="calendarFill" />{' '}
         </h2>
-        <div className={styles.dateContainer}>
+        <div className={styles.inputContainer}>
           <div>
             <h3 style={{ marginTop: 0 }}>
               Date de création{' '}

@@ -58,4 +58,21 @@ export async function httpGet<T>(
   });
 }
 
+/**
+ * POST http client
+ * @param url
+ * @param config
+ * @returns
+ */
+export async function httpPost<T>(
+  url: string,
+  config?: IDefaultRequestConfig
+): Promise<T> {
+  return await httpClient({
+    url,
+    method: 'POST',
+    ...config,
+  });
+}
+
 export default httpClient;

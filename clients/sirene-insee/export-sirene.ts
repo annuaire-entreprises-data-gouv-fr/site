@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { exportCsvClientGet } from '#clients/sirene-insee';
+import { exportCsvClientPost } from '#clients/sirene-insee';
 import constants from '#models/constants';
 import { ExportCsvInput } from 'app/api/export-sirene/input-validation';
 import { Readable } from 'stream';
@@ -19,12 +19,19 @@ export const clientSireneInsee = async (params: ExportCsvInput) => {
   const queryBuilder = new SireneQueryBuilder(params);
   const q = queryBuilder.build();
   const champs = SireneQueryBuilder.getFieldsString();
-  const url = `${routes.sireneInsee.listEtablissements}?q=${q}&champs=${champs}&nombre=200000&noLink=true`;
+  const url = routes.sireneInsee.listEtablissements;
 
-  const stream = await exportCsvClientGet<Readable>(url, {
+  const stream = await exportCsvClientPost<Readable>(url, {
     headers: {
       Accept: 'text/csv',
       'Accept-Encoding': 'gzip',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    data: {
+      q,
+      champs,
+      nombre: '200000',
+      noLink: 'true',
     },
     responseType: 'stream',
     timeout: constants.timeout.XXXL,
@@ -49,12 +56,19 @@ export const clientSireneInseeCount = async (params: ExportCsvInput) => {
   const q = queryBuilder.build();
   // We only need the number of results
   const champs = 'siret';
-  const url = `${routes.sireneInsee.listEtablissements}?q=${q}&champs=${champs}&nombre=0&noLink=true`;
+  const url = routes.sireneInsee.listEtablissements;
 
-  const response = await exportCsvClientGet<SireneJsonSearchResult>(url, {
+  const response = await exportCsvClientPost<SireneJsonSearchResult>(url, {
     headers: {
       Accept: 'application/json',
       'Accept-Encoding': 'gzip',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    data: {
+      q,
+      champs,
+      nombre: '0',
+      noLink: 'true',
     },
   });
 
