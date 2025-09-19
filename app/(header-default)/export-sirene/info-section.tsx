@@ -1,33 +1,37 @@
 'use client';
 
-import styles from './styles.module.css';
+import { Info } from '#components-ui/alerts';
+import { INSEE } from '#components/administrations';
 
 export default function InfoSection() {
   return (
-    <div className={styles.infoSection}>
-      <div>
-        Constituez une liste d’établissements en combinant plusieurs critères de
-        recherche à partir du répertoire Sirene.
-      </div>
-      <div>
-        Les données sont mises à jour chaque jour et disponibles 24h après leur
-        actualisation dans le répertoire Sirene.
-      </div>
-      <div>
-        🚨 À noter que les listes ne contiennent pas :
-        <ul style={{ paddingLeft: 35 }}>
+    <div>
+      <p>
+        Constituez une <strong>liste d’établissements (maille SIRET)</strong> en
+        combinant plusieurs critères de recherche à partir du répertoire Sirene
+        tenu par l’
+        <INSEE />.
+      </p>
+      <p>
+        Les données sont mises à jour chaque jour et{' '}
+        <strong>disponibles 24h après leur actualisation</strong> dans le
+        répertoire Sirene.
+      </p>
+      <Info>
+        Notez que les listes ne contiennent pas :
+        <ul>
           <li>
-            les noms de dirigeants, les adresses de courriel, les sites web, ni les numéros de
-            téléphone
+            les noms de dirigeants, les adresses de courriel, les sites web, ni
+            les numéros de téléphone
           </li>
           <li>
             certaines informations non accessibles au public pour les unités en
             diffusion partielle
           </li>
         </ul>
-      </div>
+      </Info>
       <div>
-        💡 Pour plus de détails sur le contenu des fichiers, consultez la{' '}
+        Pour plus de détails sur le contenu des fichiers, consultez la{' '}
         <a
           rel="noreferrer noopener"
           target="_blank"

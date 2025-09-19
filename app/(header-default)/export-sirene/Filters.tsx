@@ -1,6 +1,6 @@
 import DualRangeSlider from '#components-ui/dual-range-slider';
+import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
 import { MultiSelect } from '#components-ui/select/multi-select';
 import constants from '#models/constants';
 import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
@@ -73,8 +73,9 @@ export default function Filters({
       <div className={styles.row}>
         <section className={styles.formSection}>
           <h2>
-            Filtrer par situation administrative
-            <Icon color={constants.colors.frBlue} slug="lightbulbFill" />
+            <Icon color={constants.colors.frBlue} slug="lightbulbFill">
+              Filtrer par situation administrative
+            </Icon>
           </h2>
 
           <h3>Par état administratif</h3>
@@ -161,40 +162,30 @@ export default function Filters({
 
         <section className={styles.formSection}>
           <h2>
-            Filtrer par taille
-            <Icon color={constants.colors.frBlue} slug="groupFill" />
+            <Icon color={constants.colors.frBlue} slug="groupFill">
+              Filtrer par taille
+            </Icon>
           </h2>
           <div className={styles.sizeSliderContainer}>
             <h3>
-              Effectifs{' '}
-              <InformationTooltip
-                label={
+              <FAQLink tooltipLabel="Effectifs">
+                <div>
                   <div>
-                    <div>
-                      Pour environ la moitié des établissements, la tranche
-                      d&apos;effectif salarié n&apos;est pas renseignée. Il
-                      s&apos;agit principalement d&apos;établissements récents
-                      (créés il y a moins de trois ans). Si vous créez une liste
-                      d&apos;établissements en filtrant sur les tranches
-                      d&apos;effectifs, ceux dont l&apos;effectif n&apos;est pas
-                      renseigné ne seront pas sélectionnés.
-                    </div>
-                    <div style={{ marginTop: 8 }}>
-                      Si vous souhaitez une liste d&apos;établissements récents,
-                      nous vous conseillons de ne pas intervenir sur
-                      l&apos;onglet Effectif.
-                    </div>
+                    Pour environ la moitié des établissements, la tranche
+                    d&apos;effectif salarié n&apos;est pas renseignée. Il
+                    s&apos;agit principalement d&apos;établissements récents
+                    (créés il y a moins de trois ans). Si vous créez une liste
+                    d&apos;établissements en filtrant sur les tranches
+                    d&apos;effectifs, ceux dont l&apos;effectif n&apos;est pas
+                    renseigné ne seront pas sélectionnés.
                   </div>
-                }
-                tabIndex={0}
-                width={350}
-              >
-                <Icon
-                  color={constants.colors.frBlue}
-                  size={12}
-                  slug="information"
-                />
-              </InformationTooltip>
+                  <div style={{ marginTop: 8 }}>
+                    Si vous souhaitez une liste d&apos;établissements récents,
+                    nous vous conseillons de ne pas intervenir sur l&apos;onglet
+                    Effectif.
+                  </div>
+                </div>
+              </FAQLink>
             </h3>
             <div className="fr-checkbox-group">
               <input
@@ -259,25 +250,14 @@ export default function Filters({
           </div>
           <div>
             <h3>
-              Catégorie{' '}
-              <InformationTooltip
-                label={
+              <FAQLink tooltipLabel="Catégorie">
+                <div>
                   <div>
-                    <div>
-                      La donnée n&apos;est pas renseignée pour bon nombre
-                      d&apos;établissements. Les PME comprennent les TPE.
-                    </div>
+                    La donnée n&apos;est pas renseignée pour bon nombre
+                    d&apos;établissements. Les PME comprennent les TPE.
                   </div>
-                }
-                tabIndex={0}
-                width={350}
-              >
-                <Icon
-                  color={constants.colors.frBlue}
-                  size={12}
-                  slug="information"
-                />
-              </InformationTooltip>
+                </div>
+              </FAQLink>
             </h3>
             <ul className="fr-tags-group">
               {categoriesEntreprisesOptions.map(({ label, value }) => (
@@ -316,10 +296,9 @@ export default function Filters({
       <div>
         <section>
           <h2>
-            Filtrer par localisation
-            <Icon color={constants.colors.frBlue} slug="mapPinFill" />
-            <InformationTooltip
-              label={
+            <Icon color={constants.colors.frBlue} slug="mapPinFill">
+              Filtrer par{' '}
+              <FAQLink tooltipLabel="localisation">
                 <div>
                   En savoir plus sur le code officiel géographique sur{' '}
                   <a
@@ -330,16 +309,8 @@ export default function Filters({
                     le site de l‘INSEE
                   </a>
                 </div>
-              }
-              tabIndex={0}
-              width={350}
-            >
-              <Icon
-                color={constants.colors.frBlue}
-                size={12}
-                slug="information"
-              />
-            </InformationTooltip>
+              </FAQLink>
+            </Icon>
           </h2>
           <div className={styles.inputContainer}>
             <div className={styles.filterColumn}>
@@ -384,10 +355,9 @@ export default function Filters({
       <div className={styles.row}>
         <section className={styles.formSection}>
           <h2>
-            Filtrer par activité économique
-            <Icon color={constants.colors.frBlue} slug="buildingFill" />
-            <InformationTooltip
-              label={
+            <Icon color={constants.colors.frBlue} slug="buildingFill">
+              Filtrer par{' '}
+              <FAQLink tooltipLabel="activité économique">
                 <div>
                   En savoir plus sur les codes NAF/APE sur{' '}
                   <a
@@ -398,16 +368,8 @@ export default function Filters({
                     le site de l‘INSEE
                   </a>
                 </div>
-              }
-              tabIndex={0}
-              width={350}
-            >
-              <Icon
-                color={constants.colors.frBlue}
-                size={12}
-                slug="information"
-              />
-            </InformationTooltip>
+              </FAQLink>
+            </Icon>
           </h2>
           <div className={styles.inputContainer}>
             <div className={styles.filterColumn}>
@@ -466,10 +428,9 @@ export default function Filters({
       <div>
         <section className={styles.formSection}>
           <h2>
-            Filtrer par catégorie juridique
-            <Icon color={constants.colors.frBlue} slug="scaleFill" />
-            <InformationTooltip
-              label={
+            <Icon color={constants.colors.frBlue} slug="scaleFill">
+              Filtrer par{' '}
+              <FAQLink tooltipLabel="catégorie juridique">
                 <div>
                   En savoir plus sur les catégories juridique sur{' '}
                   <a
@@ -480,16 +441,8 @@ export default function Filters({
                     le site de l‘INSEE
                   </a>
                 </div>
-              }
-              tabIndex={0}
-              width={350}
-            >
-              <Icon
-                color={constants.colors.frBlue}
-                size={12}
-                slug="information"
-              />
-            </InformationTooltip>
+              </FAQLink>
+            </Icon>
           </h2>
           <div className={styles.inputContainer}>
             <div className={styles.filterColumn}>
@@ -561,37 +514,28 @@ export default function Filters({
       <div className={styles.row}>
         <section className={styles.formSection}>
           <h2>
-            Filtrer par qualité
-            <Icon color={constants.colors.frBlue} slug="awardFill" />
+            <Icon color={constants.colors.frBlue} slug="awardFill">
+              Filtrer par qualité
+            </Icon>
           </h2>
 
           <div className={styles.inputContainer}>
             <div>
               <h3 style={{ marginTop: 0 }}>
-                Appartenance au champ de l‘économie sociale et solidaire{' '}
-                <InformationTooltip
-                  label={
-                    <div>
-                      Pour plus d‘informations, consultez la{' '}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="/definitions/economie-sociale-et-solidaire-ess"
-                      >
-                        définition de l‘ESS
-                      </a>
-                      .
-                    </div>
-                  }
-                  tabIndex={0}
-                  width={350}
-                >
-                  <Icon
-                    color={constants.colors.frBlue}
-                    size={12}
-                    slug="information"
-                  />
-                </InformationTooltip>
+                Appartenance au{' '}
+                <FAQLink tooltipLabel="champ de l‘économie sociale et solidaire">
+                  <div>
+                    Pour plus d‘informations, consultez la{' '}
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="/definitions/economie-sociale-et-solidaire-ess"
+                    >
+                      définition de l‘ESS
+                    </a>
+                    .
+                  </div>
+                </FAQLink>
               </h3>
               <fieldset
                 className="fr-fieldset"
@@ -676,30 +620,20 @@ export default function Filters({
 
             <div>
               <h3 style={{ marginTop: 0 }}>
-                Appartenance au champ des sociétés à mission{' '}
-                <InformationTooltip
-                  label={
-                    <div>
-                      Pour plus d‘informations, consultez la{' '}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="/definitions/societe-a-mission"
-                      >
-                        définition de société à mission
-                      </a>
-                      .
-                    </div>
-                  }
-                  tabIndex={0}
-                  width={350}
-                >
-                  <Icon
-                    color={constants.colors.frBlue}
-                    size={12}
-                    slug="information"
-                  />
-                </InformationTooltip>
+                Appartenance au{' '}
+                <FAQLink tooltipLabel="champ des sociétés à mission">
+                  <div>
+                    Pour plus d‘informations, consultez la{' '}
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="/definitions/societe-a-mission"
+                    >
+                      définition de société à mission
+                    </a>
+                    .
+                  </div>
+                </FAQLink>
               </h3>
               <fieldset
                 className="fr-fieldset"
@@ -787,40 +721,30 @@ export default function Filters({
 
       <section className={styles.formSection}>
         <h2>
-          Filtrer par date
-          <Icon color={constants.colors.frBlue} slug="calendarFill" />{' '}
+          <Icon color={constants.colors.frBlue} slug="calendarFill">
+            Filtrer par date
+          </Icon>
         </h2>
         <div className={styles.inputContainer}>
           <div>
             <h3 style={{ marginTop: 0 }}>
-              Date de création{' '}
-              <InformationTooltip
-                label={
+              <FAQLink tooltipLabel="Date de création">
+                <div>
                   <div>
-                    <div>
-                      Par défaut, il n‘y a pas de sélection sur la date de
-                      création.
-                    </div>
-                    <div style={{ marginTop: 8 }}>
-                      Vous pouvez obtenir tous les établissements ou unités
-                      légales créés sur une période définie (ex: entre le 1er
-                      décembre 2014 et le 31 janvier 2015).
-                    </div>
-                    <div style={{ marginTop: 8 }}>
-                      Si vous souhaitez obtenir une liste d‘unités légales, il
-                      faut cocher &quot;Siège social uniquement&quot;.
-                    </div>
+                    Par défaut, il n‘y a pas de sélection sur la date de
+                    création.
                   </div>
-                }
-                tabIndex={0}
-                width={350}
-              >
-                <Icon
-                  color={constants.colors.frBlue}
-                  size={12}
-                  slug="information"
-                />
-              </InformationTooltip>
+                  <div style={{ marginTop: 8 }}>
+                    Vous pouvez obtenir tous les établissements ou unités
+                    légales créés sur une période définie (ex: entre le 1er
+                    décembre 2014 et le 31 janvier 2015).
+                  </div>
+                  <div style={{ marginTop: 8 }}>
+                    Si vous souhaitez obtenir une liste d‘unités légales, il
+                    faut cocher &quot;Siège social uniquement&quot;.
+                  </div>
+                </div>
+              </FAQLink>
             </h3>
             <div className={styles.dateGroup}>
               <label className={styles.dateLabel}>Depuis le</label>
@@ -862,34 +786,23 @@ export default function Filters({
           </div>
           <div>
             <h3 style={{ marginTop: 0 }}>
-              Date de mise à jour{' '}
-              <InformationTooltip
-                label={
+              <FAQLink tooltipLabel="Date de mise à jour">
+                <div>
                   <div>
-                    <div>
-                      Par défaut, il n‘y a pas de sélection sur la date de mise
-                      à jour.
-                    </div>
-                    <div style={{ marginTop: 8 }}>
-                      Vous pouvez obtenir tous les établissements dont la date
-                      de dernière mise à jour est dans une période définie (ex:
-                      Depuis le 14/10/2018 18:02:11 jusqu‘au 15/10/2018).
-                    </div>
-                    <div style={{ marginTop: 8 }}>
-                      Si vous souhaitez obtenir une liste d‘unités légales, il
-                      faut cocher &quot;Siège social uniquement&quot;.
-                    </div>
+                    Par défaut, il n‘y a pas de sélection sur la date de mise à
+                    jour.
                   </div>
-                }
-                tabIndex={0}
-                width={350}
-              >
-                <Icon
-                  color={constants.colors.frBlue}
-                  size={12}
-                  slug="information"
-                />
-              </InformationTooltip>
+                  <div style={{ marginTop: 8 }}>
+                    Vous pouvez obtenir tous les établissements dont la date de
+                    dernière mise à jour est dans une période définie (ex:
+                    Depuis le 14/10/2018 18:02:11 jusqu‘au 15/10/2018).
+                  </div>
+                  <div style={{ marginTop: 8 }}>
+                    Si vous souhaitez obtenir une liste d‘unités légales, il
+                    faut cocher &quot;Siège social uniquement&quot;.
+                  </div>
+                </div>
+              </FAQLink>
             </h3>
             <div className={styles.dateGroup}>
               <label className={styles.dateLabel}>Depuis le</label>

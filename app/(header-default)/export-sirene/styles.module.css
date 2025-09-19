@@ -8,9 +8,6 @@
 .exportCsv h2 {
   font-size: 1.1rem;
   line-height: 1.8rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
 }
 
 .exportCsv h3 {
@@ -28,22 +25,6 @@
   border-bottom: 1px solid #ddd;
   padding-bottom: 12px;
   margin-bottom: 24px;
-}
-
-.infoSection {
-  border-radius: 6px;
-  background-color: var(--annuaire-colors-pastelBlue);
-  padding: 16px;
-  margin: 24px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.infoSectionHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .sizeSliderContainer {
