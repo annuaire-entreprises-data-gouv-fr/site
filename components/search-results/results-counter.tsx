@@ -1,4 +1,6 @@
+import { Icon } from '#components-ui/icon/wrapper';
 import MapOrListSwitch from '#components/advanced-search/map-or-list';
+import constants from '#models/constants';
 import { buildSearchQuery, IParams } from '#models/search/search-filter-params';
 import React from 'react';
 import styles from './style.module.css';
@@ -33,6 +35,11 @@ const ResultsCounter: React.FC<{
               isMap={isMap}
               query={buildSearchQuery(currentSearchTerm, searchParams)}
             />
+            <a className="no-style-link" href="/export-sirene">
+              <Icon color={constants.colors.frBlue} slug="download">
+                Faire un export Sirene
+              </Icon>
+            </a>
           </div>
         </div>
       ) : (
