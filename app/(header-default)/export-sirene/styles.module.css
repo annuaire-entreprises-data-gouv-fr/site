@@ -84,9 +84,9 @@
   color: #666;
 }
 
-.dateContainer {
+.inputContainer {
   display: flex;
-  gap: 64px;
+  gap: 32px 64px;
   flex-wrap: wrap;
 }
 
@@ -101,10 +101,6 @@
 
 .dateInput {
   min-width: 200px;
-}
-
-.qualityFilterColumn {
-  flex: 1;
 }
 
 .buttonContainer {
@@ -126,14 +122,15 @@
   padding: 20px 0;
 }
 
-.filterContainer {
-  display: flex;
-  gap: 32px;
+.filterColumn {
+  min-width: 45%;
+  max-width: 600px;
 }
 
-.filterColumn {
-  flex: 1;
-  min-width: 200px;
+@media (max-width: 768px) {
+  .filterColumn {
+    min-width: 100%;
+  }
 }
 
 div.location-filter-container {
