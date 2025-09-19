@@ -30,11 +30,6 @@
   margin-bottom: 24px;
 }
 
-/* Title and info section */
-.title {
-  color: var(--annuaire-colors-frBlue);
-}
-
 .infoSection {
   border-radius: 6px;
   background-color: var(--annuaire-colors-pastelBlue);
