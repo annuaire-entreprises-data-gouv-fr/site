@@ -65,7 +65,10 @@ export const HeaderCore: React.FC<IProps> = ({
                       filter: !useSearchBar ? 'none' : undefined,
                     }}
                   >
-                    <div className="fr-header__brand-top">
+                    <div
+                      className="fr-header__brand-top"
+                      style={{ overflow: 'visible' }}
+                    >
                       <div className="fr-header__logo">
                         <a href="/" title="République française">
                           <p className="fr-logo">
