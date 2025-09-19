@@ -1,4 +1,3 @@
-import { HttpServerError } from '#clients/exceptions';
 import { FetchRessourceException } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
 
@@ -60,7 +59,8 @@ export class DataStore<T> {
     }
 
     if (!this.data || this.data.size === 0) {
-      throw new HttpServerError(`Empty data list : ${this.storeName}`);
+      // throw new HttpServerError(`Empty data list : ${this.storeName}`);
+      return null;
     }
     const value = this.data[key];
     return typeof value === 'undefined' ? null : value;
@@ -72,7 +72,8 @@ export class DataStore<T> {
     }
 
     if (!this.data || this.data.size === 0) {
-      throw new HttpServerError(`Empty data list : ${this.storeName}`);
+      // throw new HttpServerError(`Empty data list : ${this.storeName}`);
+      return [];
     }
     return Object.keys(this.data);
   };
@@ -83,7 +84,8 @@ export class DataStore<T> {
     }
 
     if (!this.data || this.data.size === 0) {
-      throw new HttpServerError(`Empty data list : ${this.storeName}`);
+      // throw new HttpServerError(`Empty data list : ${this.storeName}`);
+      return {};
     }
     return this.data;
   };

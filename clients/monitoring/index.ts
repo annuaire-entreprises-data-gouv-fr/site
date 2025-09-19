@@ -29,6 +29,11 @@ export const clientMonitoring = async (
   startDate: null | number
 ): Promise<IMonitoring> => {
   const url = routes.tooling.monitoring.getBySlug(slug);
+
+  if (!process.env.UPDOWN_IO_API_KEY) {
+    return mapToDomainObject([], startDate);
+  }
+
   const response = await httpGet<IUpdownIODowntimes[]>(url, {
     headers: {
       'Accept-Encoding': 'gzip',
