@@ -28,6 +28,9 @@ export function GroupManagement({
     const setGroup = (group: IRolesDataGroup) => {
       setGroups(groups.map((g) => (g.id === group.id ? group : g)));
     };
+    const deleteGroup = (groupId: number) => {
+      setGroups(groups.filter((g) => g.id !== groupId));
+    };
 
     return (
       <GroupItem
@@ -35,6 +38,7 @@ export function GroupManagement({
         currentUserEmail={currentUserEmail}
         group={group}
         setGroup={setGroup}
+        deleteGroup={deleteGroup}
         isAdmin={isAdmin}
         roles={roles}
       />
