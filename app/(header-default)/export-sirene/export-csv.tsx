@@ -5,8 +5,8 @@ import { formatDate, formatNumber } from '#utils/helpers';
 import { ExportCsvInput } from 'app/api/export-sirene/input-validation';
 import { useState } from 'react';
 import { getEffectifCode } from './constants';
+import Filters from './filters';
 import FiltersSummary from './filters-summary';
-import Filters from './filters-tmp';
 import InfoSection from './info-section';
 import styles from './styles.module.css';
 

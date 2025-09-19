@@ -4,7 +4,7 @@ import { categoriesJuridiquesNiveau2 } from '#utils/helpers/formatting/metadata/
 import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { ExtendedExportCsvInput } from './export-csv';
-import { selectedEffectifLabel } from './filters-tmp';
+import { selectedEffectifLabel } from './filters';
 
 export default function FiltersSummary({
   filters,
