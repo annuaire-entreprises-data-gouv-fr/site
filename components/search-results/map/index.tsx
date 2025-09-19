@@ -33,6 +33,13 @@ const SearchResultsMap: React.FC<{
           shouldColorZipCode={shouldColorZipCode}
         />
         <div className={styles['results-for-map-wrapper']}>
+          <ResultsCounter
+            resultCount={results.resultCount}
+            currentPage={results.currentPage}
+            isMap={true}
+            currentSearchTerm={searchTerm}
+            searchParams={searchFilterParams}
+          />
           <ResultsList
             results={results.results}
             shouldColorZipCode={shouldColorZipCode}
@@ -41,13 +48,6 @@ const SearchResultsMap: React.FC<{
       </div>
       <div className={styles['results-footer-wrapper']}>
         <div className="fr-container">
-          <ResultsCounter
-            resultCount={results.resultCount}
-            currentPage={results.currentPage}
-            isMap={true}
-            currentSearchTerm={searchTerm}
-            searchParams={searchFilterParams}
-          />
           <ResultsPagination
             totalPages={results.pageCount}
             currentPage={results.currentPage}

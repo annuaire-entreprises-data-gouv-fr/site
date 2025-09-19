@@ -5,9 +5,9 @@ import { formatDate, formatNumber } from '#utils/helpers';
 import { ExportCsvInput } from 'app/api/export-sirene/input-validation';
 import { useState } from 'react';
 import { getEffectifCode } from './constants';
-import Filters from './Filters';
-import FiltersSummary from './FiltersSummary';
-import InfoSection from './InfoSection';
+import Filters from './filters';
+import FiltersSummary from './filters-summary';
+import InfoSection from './info-section';
 import styles from './styles.module.css';
 
 export interface ExtendedExportCsvInput extends ExportCsvInput {
@@ -220,18 +220,16 @@ export default function ExportCsv() {
 
   return !showResults || !countResult ? (
     <div className={styles.exportCsv}>
-      <h1 className={styles.title}>
-        Générez une liste CSV à partir du répertoire Sirene
-      </h1>
+      <h1>Générez une liste CSV à partir du répertoire Sirene</h1>
       <InfoSection />
       <form onSubmit={handleCountSubmit}>
         <Filters filters={filters} setFilters={setFilters} />
         <div className={styles.buttonContainer}>
+          <ButtonLink type="button" alt={true} onClick={resetFilters}>
+            Réinitialiser les critères
+          </ButtonLink>
           <ButtonLink type="submit" disabled={isCountLoading}>
             {isCountLoading ? 'Calcul en cours...' : 'Calculer les résultats'}
-          </ButtonLink>
-          <ButtonLink type="button" alt={true} onClick={resetFilters}>
-            Réinitialiser
           </ButtonLink>
         </div>
       </form>
@@ -292,11 +290,11 @@ export default function ExportCsv() {
       )}
 
       <div className={styles.buttonContainer}>
+        <ButtonLink type="button" alt={true} onClick={resetFilters}>
+          Réinitialiser les critères
+        </ButtonLink>
         <ButtonLink type="button" onClick={modifyFilters}>
           Modifier votre recherche
-        </ButtonLink>
-        <ButtonLink type="button" alt={true} onClick={resetFilters}>
-          Réinitialiser
         </ButtonLink>
       </div>
 

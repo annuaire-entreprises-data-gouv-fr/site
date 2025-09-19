@@ -1,7 +1,7 @@
 'use client';
 
+import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
 import constants from '#models/constants';
 import { useRef, useState } from 'react';
 import styles from './styles.module.css';
@@ -110,32 +110,32 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
   return (
     <section className={styles.formSection}>
       <h2>
-        Charger une liste de SIREN/SIRET
-        <Icon color={constants.colors.frBlue} slug="fileFill" />{' '}
-        <InformationTooltip
-          label={
-            <div>
-              <strong>Format requis :</strong>
-              <ul>
-                <li>Fichier .txt (UTF-8)</li>
-                <li>SIREN (9 positions) ou SIRET (14 positions) uniquement</li>
-                <li>
-                  Un SIREN ou SIRET par ligne, sans séparateur et sans ligne à
-                  vide
-                </li>
-                <li>500 lignes maximum</li>
-              </ul>
-              <strong>Note :</strong> Certains établissements seront éliminés si
-              vous avez sélectionné d‘autres critères (localisation, activité,
-              etc.).
-            </div>
-          }
-          tabIndex={0}
-          width={350}
-        >
-          <Icon color={constants.colors.frBlue} size={12} slug="information" />
-        </InformationTooltip>
+        <Icon color={constants.colors.frBlue} slug="fileFill">
+          Charger une liste de SIREN/SIRET (facultatif)
+        </Icon>
       </h2>
+      <div>
+        Plutôt d’utiliser des critères de recherche, vous pouvez nous fournir
+        directement une liste de SIREN / SIRET. Assurez-vous que la liste soit{' '}
+        <FAQLink tooltipLabel="correctement mis en page">
+          <div>
+            <strong>Format requis :</strong>
+            <ul>
+              <li>Fichier .txt (UTF-8)</li>
+              <li>SIREN (9 positions) ou SIRET (14 positions) uniquement</li>
+              <li>
+                Un SIREN ou SIRET par ligne, sans séparateur et sans ligne à
+                vide
+              </li>
+              <li>500 lignes maximum</li>
+            </ul>
+            <strong>Note :</strong> Certains établissements seront éliminés si
+            vous avez sélectionné d‘autres critères (localisation, activité,
+            etc.).
+          </div>
+        </FAQLink>
+      </div>
+      <br />
 
       <div className={styles.siretContainer}>
         <div

@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ExportCsv from './ExportCsv';
+import ExportCsv from './export-csv';
 
 export const metadata: Metadata = {
   title: 'Générer une liste CSV d‘entreprises | L’Annuaire des Entreprises',
