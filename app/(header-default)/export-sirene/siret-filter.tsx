@@ -117,7 +117,7 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
       <div>
         Plutôt d’utiliser des critères de recherche, vous pouvez nous fournir
         directement une liste de SIREN / SIRET. Assurez-vous que la liste soit{' '}
-        <FAQLink tooltipLabel="correctement mis en page">
+        <FAQLink tooltipLabel="correctement mise en page">
           <div>
             <strong>Format requis :</strong>
             <ul>
