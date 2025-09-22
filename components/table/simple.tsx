@@ -78,7 +78,12 @@ const labelToString = (label: string | JSX.Element): string => {
     return label.props.tooltipLabel;
   }
   if (label?.props?.children) {
-    return labelToString(label.props.children);
+    if (typeof label?.props?.children === 'string') {
+      return label?.props?.children;
+    }
+    if (typeof label?.props?.children?.props?.children === 'string') {
+      return label?.props?.children?.props?.children;
+    }
   }
   return 'unknown label';
 };
