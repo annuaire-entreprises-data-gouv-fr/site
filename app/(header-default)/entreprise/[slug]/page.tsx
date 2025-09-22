@@ -66,6 +66,9 @@ export default async function UniteLegalePage(props: AppRouterProps) {
   ]);
 
   const extractedSiren = extractSirenOrSiretSlugFromUrl(slug);
+  // We redirect from /entreprise/${siren} to /entreprise/${slug}
+  // In this case, there can be a double redirect :
+  // /rechercher?terme=${siren} -> /entreprise/${siren} -> /entreprise/${slug}
   if (
     slug === extractedSiren &&
     uniteLegale.chemin &&
