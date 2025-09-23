@@ -52,13 +52,23 @@ export const AdvancedSearchTutorial = () => {
               </Icon>
             </li>
             <li>
-              <Icon color={constants.colors.frBlue} slug="file">
+              <Icon slug="file">
                 <strong>Situation administrative&nbsp;:</strong>&#8200;filtrez
                 par domaine d’activité, état administratif (En activité/Cessée)
                 ou taille d’entreprise
               </Icon>
             </li>
           </ul>
+        </div>
+        <br />
+        <div>
+          <Icon slug="download" color={constants.colors.frBlue}>
+            Vous pouvez également{' '}
+            <a href="/export-sirene">
+              télécharger une liste d’établissements (fichier CSV)
+            </a>{' '}
+            grâce à l’export Sirene.
+          </Icon>
         </div>
       </div>
     </div>
