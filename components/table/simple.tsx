@@ -2,7 +2,7 @@ import NonRenseigne from '#components/non-renseigne';
 import constants from '#models/constants';
 import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
-import React, { PropsWithChildren } from 'react';
+import React, { JSX, PropsWithChildren } from 'react';
 import { CopyPaste } from './copy-paste';
 import styles from './styleSimple.module.css';
 
@@ -17,6 +17,7 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
   label = '',
 }) => {
   const isCopyEnabled = typeof children === 'string' && children !== '';
+
   return (
     <td className={styles.cell}>
       {isCopyEnabled ? (
@@ -65,6 +66,29 @@ const shouldRemoveSpace = (label: any) => {
 };
 
 /**
+ * Convert a label to a string
+ * @param label
+ * @returns
+ */
+const labelToString = (label: string | JSX.Element): string => {
+  if (typeof label === 'string') {
+    return label;
+  }
+  if (label?.props?.tooltipLabel) {
+    return label.props.tooltipLabel;
+  }
+  if (label?.props?.children) {
+    if (typeof label?.props?.children === 'string') {
+      return label?.props?.children;
+    }
+    if (typeof label?.props?.children?.props?.children === 'string') {
+      return label?.props?.children?.props?.children;
+    }
+  }
+  return 'unknown label';
+};
+
+/**
  * Two column tables
  * @param body two dimension array, null or undefined rows will be filtered
  * @returns
@@ -89,7 +113,7 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({
             >
               <div>{row[0]}</div>
             </td>
-            <Cell label={row[0]}>{row[1]}</Cell>
+            <Cell label={labelToString(row[0])}>{row[1]}</Cell>
           </tr>
         ))}
       </tbody>

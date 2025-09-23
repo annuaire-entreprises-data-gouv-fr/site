@@ -66,12 +66,21 @@ export default async function UniteLegalePage(props: AppRouterProps) {
   ]);
 
   const extractedSiren = extractSirenOrSiretSlugFromUrl(slug);
+  // We redirect from /entreprise/${siren} to /entreprise/${slug}
+  // Nb: in somes cases, there can be a two redirects :
+  // /rechercher?terme=${siren} -> /entreprise/${siren}?redirected=1 -> /entreprise/${slug}?redirected=1
   if (
     slug === extractedSiren &&
     uniteLegale.chemin &&
     uniteLegale.chemin !== uniteLegale.siren
   ) {
-    permanentRedirect(`/entreprise/${uniteLegale.chemin}`);
+    const searchParams = await props.searchParams;
+    const queryString = new URLSearchParams(
+      searchParams as Record<string, string>
+    ).toString();
+    permanentRedirect(
+      `/entreprise/${uniteLegale.chemin}${queryString ? `?${queryString}` : ''}`
+    );
   }
 
   return (

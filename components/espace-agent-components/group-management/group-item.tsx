@@ -37,6 +37,7 @@ export function GroupItem({
   currentUserEmail,
   group,
   setGroup,
+  deleteGroup,
   isAdmin,
   roles,
 }: {
@@ -44,6 +45,7 @@ export function GroupItem({
   group: IRolesDataGroup;
   isAdmin: boolean;
   setGroup: (group: IRolesDataGroup) => void;
+  deleteGroup: (groupId: number) => void;
   roles: IRolesDataRoles[];
 }) {
   const defaultRoleId = roles.find((r) => r.role_name === 'utilisateur')?.id;
@@ -172,12 +174,16 @@ export function GroupItem({
                     user={user}
                     groupId={group.id}
                     deleteUserFromGroupState={(userEmail: string) => {
-                      setGroup({
-                        ...group,
-                        users: group.users.filter(
-                          (user) => user.email !== userEmail
-                        ),
-                      });
+                      if (user.email === currentUserEmail) {
+                        deleteGroup(group.id);
+                      } else {
+                        setGroup({
+                          ...group,
+                          users: group.users.filter(
+                            (user) => user.email !== userEmail
+                          ),
+                        });
+                      }
                     }}
                   />,
                 ])}

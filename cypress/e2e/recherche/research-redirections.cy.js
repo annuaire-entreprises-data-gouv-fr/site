@@ -8,7 +8,7 @@ describe('Siren / Siret redirections', () => {
 
     cy.get('.fr-search-bar > button').click();
 
-    cy.url().should('include', '/entreprise/danone-552032534');
+    cy.url().should('include', '/entreprise/danone-552032534?redirected=1');
   });
 
   it('Unformatted siren redirection', () => {
@@ -20,7 +20,7 @@ describe('Siren / Siret redirections', () => {
 
     cy.get('.fr-search-bar > button').click();
 
-    cy.url().should('include', '/entreprise/danone-552032534');
+    cy.url().should('include', '/entreprise/danone-552032534?redirected=1');
   });
 
   it('Not found redirection', () => {
