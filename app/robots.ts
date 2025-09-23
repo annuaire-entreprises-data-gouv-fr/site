@@ -37,7 +37,7 @@ export default function robots(): MetadataRoute.Robots {
         '/erreur/',
         '/formulaire/',
       ],
-      disallow: ['/admin/', '/api/', '/*redirected=1'],
+      disallow: ['/admin/', '/api/'],
     },
     sitemap: 'https://annuaire-entreprises.data.gouv.fr/sitemap.xml',
   };
