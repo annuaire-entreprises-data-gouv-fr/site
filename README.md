@@ -54,9 +54,7 @@ Nous utilisons [Commit-lint](https://commitlint.js.org/#/) avec [conventional-co
 
 #### Prérequis
 
-Le projet nécessite node > 18 installé pour être lancé en local.
-
-- [Installer Node](https://nodejs.org/en/download/package-manager)
+Le projet nécessite [node](https://github.com/nvm-sh/nvm) (voir package.json pour la version) pour être lancé en local.
 
 ```bash
 # Installation
@@ -71,6 +69,15 @@ npm run dev
 # Lancer le site en prod
 npm run build && npm run start
 ```
+
+#### node-gyp error on mac
+
+In some case you might need to update xcode command line tools to install dependencies
+```
+sudo rm -rf /Library/Developer/CommandLineTools
+xcode-select --install
+```
+
 
 ### Tests
 
