@@ -308,7 +308,7 @@ export default function ExportCsv() {
           alt={countResult.count < 200000 && countResult.count !== 0}
           onClick={modifyFilters}
         >
-          Modifier le fichier
+          Modifier votre recherche
         </ButtonLink>
         {countResult.count < 200000 && countResult.count !== 0 ? (
           <ButtonLink type="button" onClick={handleCsvExport}>
