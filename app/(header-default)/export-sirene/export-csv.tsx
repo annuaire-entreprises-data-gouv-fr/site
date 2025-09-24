@@ -220,7 +220,7 @@ export default function ExportCsv() {
 
   return !showResults || !countResult ? (
     <div className={styles.exportCsv}>
-      <h1>Générez une liste CSV à partir du répertoire Sirene</h1>
+      <h1>Générez une liste d’établissements au format CSV à partir des données du répertoire Sirene</h1>
       <InfoSection />
       <form onSubmit={handleCountSubmit}>
         <Filters filters={filters} setFilters={setFilters} />
@@ -251,7 +251,15 @@ export default function ExportCsv() {
           recherche pour réduire le nombre de résultats.
           <br />
           <br />
-          Vous pouvez aussi directement utiliser l‘API Sirene ou télécharger la
+          Vous pouvez aussi directement utiliser{' '}
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://www.data.gouv.fr/dataservices/api-sirene-open-data/"
+          >
+            l‘API Sirene
+          </a>{' '}
+          ou télécharger la
           base complète sur{' '}
           <a
             target="_blank"
