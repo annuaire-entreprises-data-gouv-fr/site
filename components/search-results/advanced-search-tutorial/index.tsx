@@ -65,9 +65,9 @@ export const AdvancedSearchTutorial = () => {
           <Icon slug="download" color={constants.colors.frBlue}>
             Vous pouvez également{' '}
             <a href="/export-sirene">
-              télécharger une liste d’établissements (fichier CSV)
+              générer une liste d’établissements (au format CSV)
             </a>{' '}
-            grâce à l’export Sirene.
+            grâce à l’outil d’export des données Sirene.
           </Icon>
         </div>
       </div>

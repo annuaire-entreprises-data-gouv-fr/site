@@ -56,12 +56,12 @@ const Footer = () => (
               </ul>
               <br />
               <strong className="fr-footer__top-cat">
-                Générer une liste CSV à partir du répertoire Sirene
+                Répertoire Sirene
               </strong>
               <ul className="fr-footer__top-list">
                 <li>
                   <a className="fr-footer__top-link" href="/export-sirene">
-                    Configurer un export Sirene
+                    Générer une liste d’établissements (SIRET) au format CSV
                   </a>
                 </li>
               </ul>
