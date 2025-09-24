@@ -262,7 +262,8 @@ export default function ExportCsv() {
           >
             l‘API Sirene
           </a>{' '}
-          ou télécharger la base complète sur{' '}
+          ou télécharger la
+          base complète sur{' '}
           <a
             target="_blank"
             rel="noopener"
