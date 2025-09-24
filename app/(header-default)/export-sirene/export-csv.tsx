@@ -220,7 +220,10 @@ export default function ExportCsv() {
 
   return !showResults || !countResult ? (
     <div className={styles.exportCsv}>
-      <h1>Générez une liste d’établissements au format CSV à partir des données du répertoire Sirene</h1>
+      <h1>
+        Générez une liste d’établissements au format CSV à partir des données du
+        répertoire Sirene
+      </h1>
       <InfoSection />
       <form onSubmit={handleCountSubmit}>
         <Filters filters={filters} setFilters={setFilters} />
@@ -259,8 +262,7 @@ export default function ExportCsv() {
           >
             l‘API Sirene
           </a>{' '}
-          ou télécharger la
-          base complète sur{' '}
+          ou télécharger la base complète sur{' '}
           <a
             target="_blank"
             rel="noopener"
@@ -301,9 +303,18 @@ export default function ExportCsv() {
         <ButtonLink type="button" alt={true} onClick={resetFilters}>
           Réinitialiser les critères
         </ButtonLink>
-        <ButtonLink type="button" onClick={modifyFilters}>
-          Modifier votre recherche
+        <ButtonLink
+          type="button"
+          alt={countResult.count < 200000 && countResult.count !== 0}
+          onClick={modifyFilters}
+        >
+          Modifier le fichier
         </ButtonLink>
+        {countResult.count < 200000 && countResult.count !== 0 ? (
+          <ButtonLink type="button" onClick={handleCsvExport}>
+            Télécharger le fichier
+          </ButtonLink>
+        ) : null}
       </div>
 
       {error && <div className={styles.errorMessage}>{error}</div>}
