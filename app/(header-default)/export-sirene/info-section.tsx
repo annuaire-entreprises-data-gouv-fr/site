@@ -15,7 +15,16 @@ export default function InfoSection() {
       <p>
         Les données sont mises à jour chaque jour et{' '}
         <strong>disponibles 24h après leur actualisation</strong> dans le
-        répertoire Sirene.
+        répertoire Sirene. Pour vérifier l’état de disponibilité du répertoire
+        Sirene, consultez la{' '}
+        <a
+          rel="noreferrer noopener"
+          target="_blank"
+          href="https://portail-api.insee.fr/catalog/api/2ba0e549-5587-3ef1-9082-99cd865de66f?aq=ALL"
+        >
+          page suivante
+        </a>
+        .
       </p>
       <Info>
         Notez que les listes ne contiennent pas :
