@@ -4,7 +4,6 @@ import { InternalError } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { rolesdataApiClient } from './client';
 import {
-  IRolesDataGroupCreate,
   IRolesDataGroupResponse,
   IRolesDataRoles,
   IRolesDataUser,
@@ -61,17 +60,6 @@ export const getUserByEmail = async (
   const route = routes.rolesData.users.getByEmail(email);
   return await rolesdataApiClient.fetch<IRolesDataUser>(route, {
     method: 'GET',
-  });
-};
-
-export const create = async (
-  body: IRolesDataGroupCreate,
-  actingUserSub: string
-): Promise<IRolesDataGroup> => {
-  const route = routes.rolesData.groups.create(actingUserSub);
-  return await rolesdataApiClient.fetch<IRolesDataGroup>(route, {
-    method: 'POST',
-    data: body,
   });
 };
 
@@ -141,7 +129,6 @@ export default {
   getGroupsByEmail,
   getRolesMetadata,
   getUserByEmail,
-  create,
   updateName,
   addUserToGroup,
   updateUserFromGroup,
