@@ -187,6 +187,15 @@ const Validity = ({ statut = '', dateDeValidite = '' }) => {
           <Tag color="error">Invalide</Tag>
         </InformationTooltip>
       );
+    case 'expiré':
+      return (
+        <InformationTooltip
+          tabIndex={0}
+          label="La licence est arrivée à expiration de sa durée de validité."
+        >
+          <Tag color="error">Expiré</Tag>
+        </InformationTooltip>
+      );
     default:
       return <Tag color="new">Etat inconnu</Tag>;
   }
