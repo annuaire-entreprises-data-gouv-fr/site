@@ -77,15 +77,7 @@ export default function Equipe() {
           >
             (DINUM)
           </a>
-          , en coopération avec la{' '}
-          <a
-            href="https://entreprises.gouv.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Direction Générale des Entreprises (DGE)
-          </a>{' '}
-          et les{' '}
+          en coopération avec les{' '}
           <a href="/donnees/sources">
             administrations qui fournissent la donnée
           </a>

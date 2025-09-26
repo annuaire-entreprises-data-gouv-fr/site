@@ -55,9 +55,7 @@ const Footer = () => (
                 </li>
               </ul>
               <br />
-              <strong className="fr-footer__top-cat">
-                Répertoire Sirene
-              </strong>
+              <strong className="fr-footer__top-cat">Répertoire Sirene</strong>
               <ul className="fr-footer__top-list">
                 <li>
                   <a className="fr-footer__top-link" href="/export-sirene">
@@ -254,14 +252,6 @@ const Footer = () => (
                 target="_blank"
               >
                 Direction Interministérielle du Numérique
-              </a>
-              &nbsp;et la&nbsp;
-              <a
-                href="https://entreprises.gouv.fr"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Direction Générale des Entreprises
               </a>
               .
             </p>
