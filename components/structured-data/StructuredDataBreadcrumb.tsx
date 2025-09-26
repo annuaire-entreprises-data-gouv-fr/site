@@ -1,10 +1,10 @@
-import React from 'react';
 import { IUniteLegale } from '#models/core/types';
 import {
   getDepartementFromCodePostal,
   getUrlFromDepartement,
   libelleFromDepartement,
 } from '#utils/helpers/formatting/labels';
+import React from 'react';
 
 const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
