@@ -219,7 +219,7 @@
             "prenom": "David",
             "prenoms": "David, Jean-Claude",
             "role": "GERANT",
-            "nationalite": "Française",
+            "nationalite": null,
             "dateNaissancePartial": "1965-10"
           }
         ]
