@@ -1,7 +1,8 @@
 import { IRolesDataRoles, IRolesDataUser } from '#clients/roles-data/interface';
-import ButtonLink from '#components-ui/button';
+import NonRenseigne from '#components/non-renseigne';
 import { FullTable } from '#components/table/full';
 import { IRolesDataGroup } from '#models/authentication/group/groups';
+import { formatSiret } from '#utils/helpers';
 import { Fragment, useMemo } from 'react';
 import AddUserModal from './update-modals/add-user';
 import DeleteUserButton from './update-modals/delete-user';
@@ -87,44 +88,57 @@ export function GroupItem({
             </div>
             <div>
               <strong>Habilitation :</strong>{' '}
-              {group.contract_description ? (
-                group.contract_url ? (
-                  <a
-                    href={group.contract_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {group.contract_description}
-                  </a>
-                ) : (
-                  <strong>{group.contract_description}</strong>
-                )
-              ) : (
-                <i>Aucune habilitation</i>
+              {group.contract_description || <i>Aucune habilitation</i>}
+              {group.contract_url && (
+                <>
+                  {group.contract_url && (
+                    <>
+                      {' '}
+                      (
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={group.contract_url}
+                      >
+                        consulter
+                      </a>
+                      )
+                    </>
+                  )}
+                </>
               )}
             </div>
             <div>
-              <strong>Données accessibles :</strong>{' '}
-              {group.scopes && group.scopes.length > 0
-                ? group.scopes.map((scope) => (
-                    <Fragment key={scope}>
-                      <span className="fr-badge fr-badge--sm">{scope}</span>
-                      &nbsp;
-                    </Fragment>
-                  ))
-                : null}
+              <strong>Organisation :</strong>{' '}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`/etablissement/${group.organisation_siret}`}
+              >
+                {formatSiret(group.organisation_siret)}
+              </a>
             </div>
-            {isAdmin && (
-              <div>
-                <p>
-                  Votre mission ou le cadre juridique de ce groupe est modifié ?
-                  En tant qu’administrateur, modifiez votre habilitation pour
-                  accèder à des données supplémentaires.
-                </p>
-                <ButtonLink alt small to={group.contract_url}>
-                  Modifier l’habilitation
-                </ButtonLink>
-              </div>
+            <div>
+              <strong>Données accessibles :</strong>{' '}
+              {group.scopes && group.scopes.length > 0 ? (
+                group.scopes.map((scope) => (
+                  <Fragment key={scope}>
+                    <span className="fr-badge fr-badge--sm">{scope}</span>
+                    &nbsp;
+                  </Fragment>
+                ))
+              ) : (
+                <NonRenseigne />
+              )}
+            </div>
+            {isAdmin && group.contract_url && (
+              <p>
+                Votre mission ou le cadre juridique de ce groupe est modifié ?{' '}
+                <a href={group.contract_url}>
+                  Demandez une mise à jour de votre habilitation
+                </a>{' '}
+                pour accèder à des données supplémentaires.
+              </p>
             )}
           </div>
           {!isAdmin ? (
