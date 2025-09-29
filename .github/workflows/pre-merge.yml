@@ -32,9 +32,6 @@ env:
   UPDOWN_IO_API_KEY: ${{ secrets.UPDOWN_IO_API_KEY }}
   D_ROLES_CLIENT_ID: ${{ secrets.D_ROLES_CLIENT_ID }}
   D_ROLES_CLIENT_SECRET: ${{ secrets.D_ROLES_CLIENT_SECRET }}
-  DATAPASS_CLIENT_ID: ${{ secrets.DATAPASS_CLIENT_ID }}
-  DATAPASS_CLIENT_SECRET: ${{ secrets.DATAPASS_CLIENT_SECRET }}
-  DATAPASS_URL: 'https://sandbox.datapass.api.gouv.fr'
 
 jobs:
   dependencies:
