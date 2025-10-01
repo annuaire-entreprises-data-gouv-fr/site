@@ -7,7 +7,7 @@ apiMonitors:
   - apiName: API Entreprise
     apiSlug: api-entreprise
     isProtected: true
-    apiDocumentationLink: https://entreprise.api.gouv.fr/
+    apiDocumentationLink: https://entreprise.api.gouv.fr/catalogue
   - apiName: API Liste des Entreprises de l’ESS
     apiSlug: liste-ess
     updownIoId: fpag
