@@ -46,8 +46,8 @@ const team = [
     role: 'UX designeure',
   },
   {
-    photoUrl: '/images/team/robin.jpg',
-    fullname: 'Robin Monnier',
+    photoUrl: '/images/team/alan.jpg',
+    fullname: 'Alan Chauchet',
     pronoun: 'un',
     role: 'lead développeur',
   },
