@@ -16,6 +16,8 @@ const routes = {
       `/v3/inpi/rne/unites_legales/${siren}/beneficiaires_effectifs`,
     carteProfessionnelleTravauxPublics: (siren: string) =>
       `/v3/fntp/unites_legales/${siren}/carte_professionnelle_travaux_publics`,
+    eori: (siret: string) =>
+      `/v3/douanes/etablissements/${siret}/immatriculations_eori/`,
     certifications: {
       cibtp: (siret: string) =>
         `/v3/cibtp/etablissements/${siret}/attestation_cotisations_conges_payes_chomage_intemperies`,
