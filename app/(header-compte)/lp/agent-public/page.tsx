@@ -130,6 +130,10 @@ const LandingPageAgent = async (props: AppRouterProps) => {
                       <span className={styles['asterix-et-obelix']}>*</span>
                     </li>
                     <li>
+                      Liens capitalistiques
+                      <span className={styles['asterix-et-obelix']}>*</span>
+                    </li>
+                    <li>
                       Bilans de la Banque de France
                       <span className={styles['asterix-et-obelix']}>*</span>
                     </li>
