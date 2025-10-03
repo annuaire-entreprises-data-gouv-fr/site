@@ -2,6 +2,7 @@ import type React from "react";
 import UniteLegaleBadge from "#components/unite-legale-badge";
 import { Icon } from "#components-ui/icon/wrapper";
 import IsActiveTag from "#components-ui/tag/is-active-tag";
+import { estDiffusible } from "#models/core/diffusion";
 import { estActif } from "#models/core/etat-administratif";
 import { isCollectiviteTerritoriale } from "#models/core/types";
 import type { IDirigeants } from "#models/rne/types";
@@ -17,12 +18,13 @@ type IProps = {
 
 const DirigeantsOrElusList: React.FC<{
   dirigeantsOrElus: IDirigeants;
-}> = ({ dirigeantsOrElus }) => {
+  isDiffusible: boolean;
+}> = ({ dirigeantsOrElus, isDiffusible }) => {
   const displayMax = 5;
   const firstFive = dirigeantsOrElus.slice(0, displayMax);
   const moreCount = Math.max(dirigeantsOrElus.length - displayMax, 0);
 
-  if (dirigeantsOrElus.length === 0) {
+  if (dirigeantsOrElus.length === 0 || !isDiffusible) {
     return null;
   }
 
@@ -100,6 +102,7 @@ const ResultItem: React.FC<{
               ? result.colter.elus
               : result.dirigeants
           }
+          isDiffusible={estDiffusible(result)}
         />
         <div>
           <Icon slug="mapPin">

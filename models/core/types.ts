@@ -269,15 +269,14 @@ export const isEntrepreneurIndividuel = (
   uniteLegaleOrEtablissement: IUniteLegale | IEtablissement
 ): boolean => uniteLegaleOrEtablissement.complements.estEntrepreneurIndividuel;
 
-export const isPersonneMorale = (
-  uniteLegaleOrEtablissement: IUniteLegale
-): boolean =>
+export const isPersonneMorale = (uniteLegale: IUniteLegale): boolean =>
   !(
-    isEntrepreneurIndividuel(uniteLegaleOrEtablissement) ||
-    isNotPersonneMoraleFromNatureJuridique(
-      uniteLegaleOrEtablissement.natureJuridique
-    )
+    isEntrepreneurIndividuel(uniteLegale) ||
+    isNotPersonneMoraleFromNatureJuridique(uniteLegale.natureJuridique)
   );
+
+export const isPersonnePhysique = (uniteLegale: IUniteLegale): boolean =>
+  !isPersonneMorale(uniteLegale);
 
 export interface ICollectiviteTerritoriale
   extends Omit<IUniteLegale, "colter"> {

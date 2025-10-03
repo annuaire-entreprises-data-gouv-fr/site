@@ -1,9 +1,6 @@
 import { estDiffusible } from "#models/core/diffusion";
 import { estActif } from "#models/core/etat-administratif";
-import {
-  type IUniteLegale,
-  isEntrepreneurIndividuel,
-} from "#models/core/types";
+import { type IUniteLegale, isPersonnePhysique } from "#models/core/types";
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string
@@ -28,8 +25,8 @@ export const isTwoMonthOld = (dateAsString: string) => {
  * Return true if an uniteLegale should be **ignored** by indexing bots
  */
 export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
-  if (isEntrepreneurIndividuel(uniteLegale)) {
-    // we dont index EI
+  if (isPersonnePhysique(uniteLegale)) {
+    // we dont index personnes physiques
     return true;
   }
   if (!estActif(uniteLegale)) {
