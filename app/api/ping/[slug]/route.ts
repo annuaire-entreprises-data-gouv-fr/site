@@ -1,4 +1,5 @@
 import { APISlugNotFound, pingAPIClient } from "#clients/ping-api-clients";
+import logErrorInSentry from "#utils/sentry";
 
 export async function GET(
   req: Request,
@@ -20,14 +21,21 @@ export async function GET(
     });
   } catch (e: any) {
     if (e instanceof APISlugNotFound) {
-      return new Response(JSON.stringify(e), {
-        status: 404,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ message: "API slug not found", status: 404 }),
+        {
+          status: 404,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
-    return new Response(JSON.stringify(e), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    logErrorInSentry(e);
+    return new Response(
+      JSON.stringify({ message: "server error", status: 500 }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }
