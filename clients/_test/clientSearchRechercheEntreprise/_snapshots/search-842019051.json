@@ -35,7 +35,7 @@
           "activitePrincipale": "90.01Z",
           "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
           "trancheEffectif": "N",
-          "anneeTrancheEffectif": "2022",
+          "anneeTrancheEffectif": "2023",
           "latitude": "48.891022",
           "longitude": "2.329849",
           "complements": {
@@ -81,7 +81,7 @@
               "activitePrincipale": "90.01Z",
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
               "trancheEffectif": "N",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "48.891022",
               "longitude": "2.329849",
               "complements": {
@@ -119,7 +119,7 @@
               "activitePrincipale": "90.01Z",
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
               "trancheEffectif": "N",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "48.891022",
               "longitude": "2.329849",
               "complements": {
@@ -150,9 +150,9 @@
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "01",
-        "anneeCategorieEntreprise": "2022",
+        "anneeCategorieEntreprise": "2023",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2022",
+        "anneeTrancheEffectif": "2023",
         "complements": {
           "estBio": false,
           "estEss": true,

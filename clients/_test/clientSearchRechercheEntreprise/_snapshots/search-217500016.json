@@ -35,7 +35,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "42",
-          "anneeTrancheEffectif": "2022",
+          "anneeTrancheEffectif": "2023",
           "latitude": "48.856145",
           "longitude": "2.351838",
           "complements": {
@@ -48,11 +48,11 @@
           },
           "listeIdcc": [
             {
-              "idcc": "5021",
+              "idcc": "5003",
               "title": ""
             },
             {
-              "idcc": "5003",
+              "idcc": "5021",
               "title": ""
             }
           ]
@@ -90,7 +90,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "42",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "48.856145",
               "longitude": "2.351838",
               "complements": {
@@ -103,11 +103,11 @@
               },
               "listeIdcc": [
                 {
-                  "idcc": "5021",
+                  "idcc": "5003",
                   "title": ""
                 },
                 {
-                  "idcc": "5003",
+                  "idcc": "5021",
                   "title": ""
                 }
               ]
@@ -137,7 +137,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "42",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "48.856145",
               "longitude": "2.351838",
               "complements": {
@@ -150,11 +150,11 @@
               },
               "listeIdcc": [
                 {
-                  "idcc": "5021",
+                  "idcc": "5003",
                   "title": ""
                 },
                 {
-                  "idcc": "5003",
+                  "idcc": "5021",
                   "title": ""
                 }
               ]
@@ -172,14 +172,14 @@
         "dateCreation": "1983-03-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2025-09-03T15:38:45.306",
+        "dateMiseAJourInsee": "2025-09-03T15:38:45",
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "53",
-        "anneeCategorieEntreprise": "2022",
+        "anneeCategorieEntreprise": "2023",
         "categorieEntreprise": "GE",
-        "anneeTrancheEffectif": "2022",
+        "anneeTrancheEffectif": "2023",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -1704,11 +1704,11 @@
             "title": ""
           },
           {
-            "idcc": "9999",
+            "idcc": "1043",
             "title": ""
           },
           {
-            "idcc": "1043",
+            "idcc": "9999",
             "title": ""
           }
         ],

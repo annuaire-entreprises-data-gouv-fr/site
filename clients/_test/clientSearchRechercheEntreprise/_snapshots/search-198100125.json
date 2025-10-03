@@ -35,7 +35,7 @@
           "activitePrincipale": "85.31Z",
           "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
           "trancheEffectif": "22",
-          "anneeTrancheEffectif": "2022",
+          "anneeTrancheEffectif": "2023",
           "latitude": "46.8030906",
           "longitude": "4.4244097",
           "complements": {
@@ -88,7 +88,7 @@
               "activitePrincipale": "85.31Z",
               "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
               "trancheEffectif": "22",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "46.8030906",
               "longitude": "4.4244097",
               "complements": {
@@ -133,7 +133,7 @@
               "activitePrincipale": "85.31Z",
               "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
               "trancheEffectif": "22",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "46.8030906",
               "longitude": "4.4244097",
               "complements": {
@@ -171,9 +171,9 @@
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "22",
-        "anneeCategorieEntreprise": "2022",
+        "anneeCategorieEntreprise": "2023",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2022",
+        "anneeTrancheEffectif": "2023",
         "complements": {
           "estBio": false,
           "estEss": false,

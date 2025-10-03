@@ -35,7 +35,7 @@
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
           "trancheEffectif": "N",
-          "anneeTrancheEffectif": "2022",
+          "anneeTrancheEffectif": "2023",
           "latitude": "48.850699",
           "longitude": "2.308628",
           "complements": {
@@ -81,7 +81,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "N",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "48.850699",
               "longitude": "2.308628",
               "complements": {
@@ -119,7 +119,7 @@
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
               "trancheEffectif": "N",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "48.850699",
               "longitude": "2.308628",
               "complements": {
@@ -150,9 +150,9 @@
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "32",
-        "anneeCategorieEntreprise": "2022",
+        "anneeCategorieEntreprise": "2023",
         "categorieEntreprise": "ETI",
-        "anneeTrancheEffectif": "2022",
+        "anneeTrancheEffectif": "2023",
         "complements": {
           "estBio": false,
           "estEss": false,

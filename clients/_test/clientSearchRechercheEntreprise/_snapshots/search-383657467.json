@@ -149,7 +149,7 @@
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": null,
+        "trancheEffectif": "NN",
         "anneeCategorieEntreprise": null,
         "categorieEntreprise": null,
         "anneeTrancheEffectif": null,

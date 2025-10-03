@@ -35,7 +35,7 @@
           "activitePrincipale": "70.10Z",
           "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
           "trancheEffectif": "42",
-          "anneeTrancheEffectif": "2022",
+          "anneeTrancheEffectif": "2023",
           "latitude": "48.872565",
           "longitude": "2.334926",
           "complements": {
@@ -88,7 +88,7 @@
               "activitePrincipale": "70.10Z",
               "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
               "trancheEffectif": "42",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "48.872565",
               "longitude": "2.334926",
               "complements": {
@@ -133,7 +133,7 @@
               "activitePrincipale": "70.10Z",
               "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
               "trancheEffectif": "42",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "48.872565",
               "longitude": "2.334926",
               "complements": {
@@ -171,9 +171,9 @@
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "42",
-        "anneeCategorieEntreprise": "2022",
+        "anneeCategorieEntreprise": "2023",
         "categorieEntreprise": "GE",
-        "anneeTrancheEffectif": "2022",
+        "anneeTrancheEffectif": "2023",
         "complements": {
           "estBio": false,
           "estEss": false,

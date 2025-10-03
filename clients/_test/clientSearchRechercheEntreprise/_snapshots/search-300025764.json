@@ -149,8 +149,8 @@
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": null,
-        "anneeCategorieEntreprise": "2022",
+        "trancheEffectif": "NN",
+        "anneeCategorieEntreprise": "2023",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
         "complements": {

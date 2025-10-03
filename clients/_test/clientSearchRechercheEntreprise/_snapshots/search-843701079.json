@@ -35,7 +35,7 @@
           "activitePrincipale": "43.91A",
           "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
           "trancheEffectif": "03",
-          "anneeTrancheEffectif": "2022",
+          "anneeTrancheEffectif": "2023",
           "latitude": "44.075685",
           "longitude": "1.943401",
           "complements": {
@@ -103,7 +103,7 @@
               "activitePrincipale": "43.91A",
               "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
               "trancheEffectif": "03",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "44.075685",
               "longitude": "1.943401",
               "complements": {
@@ -163,7 +163,7 @@
               "activitePrincipale": "43.91A",
               "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
               "trancheEffectif": "03",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "44.075685",
               "longitude": "1.943401",
               "complements": {
@@ -216,9 +216,9 @@
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "03",
-        "anneeCategorieEntreprise": "2022",
+        "anneeCategorieEntreprise": "2023",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2022",
+        "anneeTrancheEffectif": "2023",
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -251,15 +251,15 @@
         },
         "listeIdcc": [
           {
+            "idcc": "1596",
+            "title": ""
+          },
+          {
             "idcc": "2609",
             "title": ""
           },
           {
             "idcc": "2420",
-            "title": ""
-          },
-          {
-            "idcc": "1596",
             "title": ""
           }
         ],
