@@ -1,18 +1,22 @@
 "use client";
+
 /* eslint-disable react/jsx-props-no-spreading */
 
+import { useTimeout } from "hooks/use-timeout";
+import { useEffect, useState } from "react";
 import { FadeIn } from "#components-ui/animation/fade-in";
 import { HeightTransition } from "#components-ui/animation/height-transition";
-import { type IAPINotRespondingError, isAPI404 } from "#models/api-not-responding";
 import {
-  IDataFetchingState,
+  type IAPINotRespondingError,
+  isAPI404,
+} from "#models/api-not-responding";
+import {
   hasFetchError,
+  IDataFetchingState,
   isDataLoading,
   isDataSuccess,
   isUnauthorized,
 } from "#models/data-fetching";
-import { useTimeout } from "hooks/use-timeout";
-import { useEffect, useState } from "react";
 import { type ISectionProps, Section } from "..";
 import { DataSectionContent } from "./content";
 import DataFetchErrorExplanation from "./error";
@@ -68,10 +72,10 @@ export function AsyncDataSectionClient<T>({
       <HeightTransition>
         <FadeIn key={lastModified}>
           <DataSectionContent
+            additionalInfoOnError={props.additionalInfoOnError}
+            children={props.children}
             data={data}
             notFoundInfo={props.notFoundInfo}
-            children={props.children}
-            additionalInfoOnError={props.additionalInfoOnError}
           />
         </FadeIn>
       </HeightTransition>

@@ -1,6 +1,7 @@
+import type React from "react";
 import FAQLink from "#components-ui/faq-link";
 import { estNonDiffusibleStrict } from "#models/core/diffusion";
-import { IETATADMINSTRATIF, estActif } from "#models/core/etat-administratif";
+import { estActif, IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import {
   formatAge,
@@ -9,7 +10,6 @@ import {
   uniteLegaleLabel,
   uniteLegaleLabelWithPronounContracted,
 } from "#utils/helpers";
-import type React from "react";
 
 type IProps = {
   etablissement: IEtablissement;

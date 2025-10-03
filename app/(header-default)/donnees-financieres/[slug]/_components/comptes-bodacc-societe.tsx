@@ -1,13 +1,13 @@
 "use client";
 
+import { useFetchBODACC } from "hooks";
 import routes from "#clients/routes";
-import ButtonLink from "#components-ui/button";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
+import ButtonLink from "#components-ui/button";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IUniteLegale } from "#models/core/types";
 import { formatDate } from "#utils/helpers";
-import { useFetchBODACC } from "hooks";
 
 export function ComptesBodaccSociete({
   uniteLegale,
@@ -18,10 +18,10 @@ export function ComptesBodaccSociete({
 
   return (
     <AsyncDataSectionClient
-      id="comptes-bodacc"
-      title="Dépôts des comptes (BODACC C)"
-      sources={[EAdministration.DILA]}
       data={bodacc}
+      id="comptes-bodacc"
+      sources={[EAdministration.DILA]}
+      title="Dépôts des comptes (BODACC C)"
     >
       {(bodacc) => (
         <>
@@ -29,10 +29,10 @@ export function ComptesBodaccSociete({
             <div>
               Aucun dépôt de compte publié au{" "}
               <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href={routes.bodacc.site.recherche}
                 aria-label="Bulletin Officiel Des Annonces Civiles et Commerciales"
+                href={routes.bodacc.site.recherche}
+                rel="noreferrer noopener"
+                target="_blank"
               >
                 BODACC
               </a>
@@ -40,7 +40,6 @@ export function ComptesBodaccSociete({
             </div>
           ) : (
             <FullTable
-              head={["Publication", "Details", "Annonce"]}
               body={bodacc.comptes.map((annonce) => [
                 <strong>{formatDate(annonce.datePublication)}</strong>,
                 <>
@@ -55,10 +54,11 @@ export function ComptesBodaccSociete({
                     </i>
                   </div>
                 </>,
-                <ButtonLink target="_blank" to={annonce.path} alt small>
+                <ButtonLink alt small target="_blank" to={annonce.path}>
                   ⇢&nbsp;Consulter
                 </ButtonLink>,
               ])}
+              head={["Publication", "Details", "Annonce"]}
             />
           )}
         </>

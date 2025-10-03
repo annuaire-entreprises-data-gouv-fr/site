@@ -1,9 +1,9 @@
-import { Exception } from "#models/exceptions";
-import { isSiren, isSiret } from "#utils/helpers";
-import logErrorInSentry from "#utils/sentry";
 import { createCanvas, loadImage } from "canvas";
 import { NextResponse } from "next/server";
 import QRCode from "qrcode";
+import { Exception } from "#models/exceptions";
+import { isSiren, isSiret } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
 
 async function createQRCode(dataForQRcode: string) {
   const image =

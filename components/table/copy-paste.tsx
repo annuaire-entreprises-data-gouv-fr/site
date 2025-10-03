@@ -1,6 +1,6 @@
 "use client";
-import { InternalError } from "#models/exceptions";
 import { useLayoutEffect, useRef, useState } from "react";
+import { InternalError } from "#models/exceptions";
 import style from "./copy-paste.module.css";
 
 type ICopyPasteProps = {
@@ -84,23 +84,23 @@ export function CopyPaste({
 
   return (
     <button
+      aria-label={`${children}, copier dans le presse-papier`}
       className={`${style.copyButton} ${
         disableCopyIcon ? style.copyIconDisabled : ""
       }`}
+      onBlur={handleBlur}
+      onClick={copyToClipboard}
+      onFocus={() => setFocused(true)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onFocus={() => setFocused(true)}
-      onBlur={handleBlur}
       ref={element}
-      onClick={copyToClipboard}
-      aria-label={`${children}, copier dans le presse-papier`}
       title="Cliquez pour copier dans le presse-papier"
     >
       <span id={id}>{children} </span>
       {(hovered || copied || focused) && !disableCopyIcon && (
         <span
-          className={style.copyIcon}
           aria-hidden
+          className={style.copyIcon}
           ref={copyIconRef}
           style={{ color: copied ? "green" : "" }}
         >
@@ -124,18 +124,18 @@ export function CopyPaste({
 function CopySVG() {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
       fill="none"
+      height="15"
       stroke="currentColor"
-      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="15"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+      <rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
     </svg>
   );
 }
@@ -144,15 +144,15 @@ function CheckMarkSVG() {
   return (
     <svg
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 30 30"
-      width="15"
+      height="15px"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeMiterlimit="10"
       strokeWidth="2"
-      height="15px"
+      viewBox="0 0 30 30"
+      width="15"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M4 16L11 23 27 7" />
     </svg>

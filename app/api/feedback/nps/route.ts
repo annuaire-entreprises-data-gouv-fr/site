@@ -1,7 +1,7 @@
+import { redirect } from "next/navigation";
 import { logInGrist } from "#clients/external-tooling/grist";
 import { Exception } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
-import { redirect } from "next/navigation";
 
 /**
  * Log feedback in relevant platform

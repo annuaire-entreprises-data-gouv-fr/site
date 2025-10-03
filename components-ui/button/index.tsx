@@ -2,6 +2,7 @@
 
 import type React from "react";
 import type { MouseEventHandler, PropsWithChildren } from "react";
+
 type IProps = {
   role?: string;
   small?: boolean;
@@ -31,30 +32,30 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   <>
     {!to ? (
       <button
-        role={role}
-        type={type || "submit"}
-        onClick={onClick}
-        disabled={disabled}
         aria-label={ariaLabel}
         className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
           small ? " fr-btn--sm " : ""
         }`}
+        disabled={disabled}
+        onClick={onClick}
+        role={role}
+        type={type || "submit"}
       >
         {children}
       </button>
     ) : (
       <a
-        role={role}
         aria-label={ariaLabel}
-        target={target}
+        className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
+          small ? " fr-btn--sm " : ""
+        }`}
+        href={(to || "").indexOf("@") > -1 ? `mailto:${to}` : to}
         rel={
           (target === "_blank" ? "noopener noreferrer" : "") +
           (nofollow ? "nofollow" : "")
         }
-        href={(to || "").indexOf("@") > -1 ? `mailto:${to}` : to}
-        className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
-          small ? " fr-btn--sm " : ""
-        }`}
+        role={role}
+        target={target}
       >
         {children}
       </a>

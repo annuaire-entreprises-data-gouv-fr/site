@@ -1,3 +1,6 @@
+import { getIronSession } from "iron-session";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import type { ISession } from "#models/authentication/user/session";
 import { Exception } from "#models/exceptions";
 import {
@@ -9,9 +12,6 @@ import {
 import logErrorInSentry from "#utils/sentry";
 import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 import { sessionOptions, setVisitTimestamp } from "#utils/session";
-import { getIronSession } from "iron-session";
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
 
 const shouldRedirect = (path: string, search: string, url: string) => {
   try {

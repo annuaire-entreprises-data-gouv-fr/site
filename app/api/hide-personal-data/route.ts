@@ -1,6 +1,7 @@
+import { NextResponse } from "next/server";
 import {
-  isEntrepreneurIndividuel,
   type IUniteLegale,
+  isEntrepreneurIndividuel,
   SirenNotFoundError,
 } from "#models/core/types";
 import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
@@ -14,7 +15,6 @@ import logErrorInSentry from "#utils/sentry";
 import extractParamsAppRouter from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
 import { getHidePersonalDataRequestFCSession } from "#utils/session";
-import { NextResponse } from "next/server";
 
 export type IFormState = {
   uniteLegale?: IUniteLegale;

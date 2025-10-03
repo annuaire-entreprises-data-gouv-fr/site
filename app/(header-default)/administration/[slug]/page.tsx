@@ -1,12 +1,12 @@
-import TextWrapper from "#components-ui/text-wrapper";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { cache } from "react";
 import AdministrationDescription from "#components/administrations/administration-description";
+import TextWrapper from "#components-ui/text-wrapper";
 import { administrationsMetaData } from "#models/administrations";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import { getFaqArticlesByTag } from "#models/article/faq";
 import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { cache } from "react";
 
 const cachedGetAdministrations = cache((slug: string) => {
   const slugs = slug.split("_");
@@ -54,7 +54,7 @@ export default async function AdministrationPage(props: AppRouterProps) {
     <TextWrapper>
       <h1>D’où viennent les informations de cette section ?</h1>
       {administrations.map(({ slug }) => (
-        <AdministrationDescription slug={slug} key={slug} />
+        <AdministrationDescription key={slug} slug={slug} />
       ))}
       {articles && (
         <>

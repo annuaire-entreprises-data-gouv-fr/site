@@ -1,13 +1,13 @@
-import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import type { Metadata } from "next";
+import React from "react";
 import ApiMonitoring from "#components/api-monitoring";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import { administrationsMetaData } from "#models/administrations";
 import type { IAdministrationsMetaData } from "#models/administrations/types";
 import {
-  type IMonitoringWithMetaData,
   getMonitorsByAdministration,
+  type IMonitoringWithMetaData,
 } from "#models/monitoring";
-import type { Metadata } from "next";
-import React from "react";
 
 export const dynamic = "force-static";
 export const revalidate = 30;

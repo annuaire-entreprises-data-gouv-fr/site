@@ -1,9 +1,9 @@
 "use client";
 
-import { Info } from "#components-ui/alerts";
-import FAQLink from "#components-ui/faq-link";
 import { LineChart } from "#components/chart/line";
 import { FullTable } from "#components/table/full";
+import { Info } from "#components-ui/alerts";
+import FAQLink from "#components-ui/faq-link";
 import {
   ApplicationRights,
   hasRights,
@@ -161,8 +161,8 @@ export function FinancesSocieteChartAndTable({
           <>
             {" "}
             <FAQLink
-              tooltipLabel="consolidés"
               to="/faq/donnees-financieres#quest-ce-quun-bilan-consolide"
+              tooltipLabel="consolidés"
             >
               Qu’est-ce qu’un bilan consolidé ?
             </FAQLink>{" "}
@@ -177,6 +177,13 @@ export function FinancesSocieteChartAndTable({
         {plural}&nbsp;:
       </p>
       <LineChart
+        data={{
+          labels: indicateurs.map((bilanIndicateurs) =>
+            formatDateYear(bilanIndicateurs.dateClotureExercice)
+          ),
+          datasets,
+        }}
+        height={250}
         htmlLegendId={
           estBilanConsolide
             ? "data-legend-consolide"
@@ -199,32 +206,23 @@ export function FinancesSocieteChartAndTable({
             y: {
               border: { display: false },
               ticks: {
-                callback: (label) => {
-                  return formatCurrency(label.toString());
-                },
+                callback: (label) => formatCurrency(label.toString()),
               },
             },
           },
         }}
-        height={250}
-        data={{
-          labels: indicateurs.map((bilanIndicateurs) =>
-            formatDateYear(bilanIndicateurs.dateClotureExercice)
-          ),
-          datasets,
-        }}
       />
       <br />
       <FullTable
+        body={body}
         head={[
-          <FAQLink tooltipLabel="Indicateurs" to="/faq/donnees-financieres">
+          <FAQLink to="/faq/donnees-financieres" tooltipLabel="Indicateurs">
             Définition des indicateurs
           </FAQLink>,
           ...indicateurs.map((bilanIndicateurs) =>
             bilanIndicateurs?.year.toString()
           ),
         ]}
-        body={body}
       />
     </>
   );

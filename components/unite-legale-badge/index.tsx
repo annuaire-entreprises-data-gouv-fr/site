@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
   AssociationBadge,
   CollectiviteTerritorialeBadge,
@@ -12,7 +13,6 @@ import {
   isEntrepreneurIndividuel,
   isServicePublic,
 } from "#models/core/types";
-import { Fragment } from "react";
 
 const UniteLegaleBadge: React.FC<{
   uniteLegale: IUniteLegale;

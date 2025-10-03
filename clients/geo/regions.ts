@@ -21,12 +21,9 @@ export const clientRegionsByName = async (
   return mapToDomainObject(response || []);
 };
 
-const mapToDomainObject = (response: IGeoRegionResponse[]): IGeoElement[] => {
-  return response.map((region) => {
-    return {
-      label: `${region.nom}`,
-      value: region.code,
-      type: "reg",
-    };
-  });
-};
+const mapToDomainObject = (response: IGeoRegionResponse[]): IGeoElement[] =>
+  response.map((region) => ({
+    label: `${region.nom}`,
+    value: region.code,
+    type: "reg",
+  }));

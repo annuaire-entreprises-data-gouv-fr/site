@@ -26,15 +26,15 @@ export const HeaderAppRouter: React.FC<IProps> = async ({
 
   return (
     <HeaderCore
-      useMap={useMap}
-      useLogo={useLogo}
-      useSearchBar={useSearchBar}
-      useAgentBanner={useAgentBanner}
-      useAgentCTA={useAgentCTA}
-      useReconnectBanner={useReconnectBanner}
+      currentSearchTerm={currentSearchTerm}
       plugin={plugin}
       session={session}
-      currentSearchTerm={currentSearchTerm}
+      useAgentBanner={useAgentBanner}
+      useAgentCTA={useAgentCTA}
+      useLogo={useLogo}
+      useMap={useMap}
+      useReconnectBanner={useReconnectBanner}
+      useSearchBar={useSearchBar}
     />
   );
 };

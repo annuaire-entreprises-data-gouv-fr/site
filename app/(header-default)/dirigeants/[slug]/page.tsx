@@ -1,7 +1,8 @@
-import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import type { Metadata } from "next";
 import { DonneesPriveesSection } from "#components/donnees-privees-section";
 import Title from "#components/title-section";
 import { FICHE } from "#components/title-section/tabs";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import {
   ApplicationRights,
   hasRights,
@@ -9,10 +10,10 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible } from "#models/core/diffusion";
 import {
+  type IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
-  type IUniteLegale,
 } from "#models/core/types";
 import {
   uniteLegalePageDescription,
@@ -23,7 +24,6 @@ import extractParamsAppRouter, {
   type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import type { Metadata } from "next";
 import DirigeantsAssociationSection from "./_component/sections/association/dirigeants";
 import ElusSection from "./_component/sections/collectivite/elus-section";
 import DPOSection from "./_component/sections/entreprise/dpo/section";
@@ -82,14 +82,14 @@ const DirigeantsContent = ({
   if (isAssociation(uniteLegale)) {
     return (
       <DirigeantsAssociationSection
-        uniteLegale={uniteLegale}
         session={session}
+        uniteLegale={uniteLegale}
       />
     );
   }
   // Entreprises & EI
   return (
-    <DirigeantsEntrepriseSection uniteLegale={uniteLegale} session={session} />
+    <DirigeantsEntrepriseSection session={session} uniteLegale={uniteLegale} />
   );
 };
 
@@ -104,14 +104,14 @@ const DirigeantsPage = async (props: AppRouterProps) => {
     <>
       <div className="content-container">
         <Title
-          uniteLegale={uniteLegale}
           ficheType={FICHE.DIRIGEANTS}
           session={session}
+          uniteLegale={uniteLegale}
         />
         <DirigeantSummary session={session} uniteLegale={uniteLegale} />
-        <DirigeantsContent uniteLegale={uniteLegale} session={session} />
+        <DirigeantsContent session={session} uniteLegale={uniteLegale} />
         <HorizontalSeparator />
-        <DPOSection uniteLegale={uniteLegale} session={session} />
+        <DPOSection session={session} uniteLegale={uniteLegale} />
       </div>
     </>
   );

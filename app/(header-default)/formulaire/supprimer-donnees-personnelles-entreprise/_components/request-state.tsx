@@ -20,8 +20,8 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
             les sites internet d’un coup.
           </p>
           <ButtonLink
-            target="_blank"
             aria-label="Changer mon statut de diffusion sur le site de l'Insee, nouvelle fenêtre"
+            target="_blank"
             to="https://statut-diffusion-sirene.insee.fr/"
           >
             Changer mon statut de diffusion
@@ -77,9 +77,9 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
         </li>
         <li>
           <ButtonLink
+            alt
             role="listitem"
             to="/api/auth/france-connect/logout?pathFrom=%2Fformulaire%2Fsupprimer-donnees-personnelles-entreprise"
-            alt
           >
             Me déconnecter
           </ButtonLink>

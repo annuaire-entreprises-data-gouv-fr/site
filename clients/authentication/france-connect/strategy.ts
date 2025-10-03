@@ -1,8 +1,8 @@
+import { randomBytes } from "crypto";
+import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
 import { InternalError } from "#models/exceptions";
 import { getHidePersonalDataRequestFCSession } from "#utils/session";
-import { randomBytes } from "crypto";
-import { type BaseClient, Issuer, generators } from "openid-client";
 
 let _client = undefined as BaseClient | undefined;
 

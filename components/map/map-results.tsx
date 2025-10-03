@@ -1,9 +1,9 @@
 "use client";
 
+import maplibregl, { type Map } from "maplibre-gl";
 import constants from "#models/constants";
 import type { ISearchResults } from "#models/search";
 import { formatIntFr, formatSiret } from "#utils/helpers";
-import maplibregl, { type Map } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef } from "react";
 import { checkLatLng } from "./check-lat-lng";
@@ -99,8 +99,8 @@ function MapWithResults({
 
   return (
     <div
-      ref={mapContainer}
       className="map"
+      ref={mapContainer}
       style={{ width: "100%", zIndex: "0", height, backgroundColor: "#f0f0f0" }}
     />
   );

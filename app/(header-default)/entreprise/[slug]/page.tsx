@@ -1,4 +1,7 @@
-import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import { UniteLegaleImmatriculationSection } from "app/(header-default)/entreprise/[slug]/_components/immatriculation-section";
+import UniteLegaleSummarySection from "app/(header-default)/entreprise/[slug]/_components/summary-section";
+import type { Metadata } from "next";
+import { permanentRedirect } from "next/navigation";
 import AssociationSection from "#components/association-section";
 import CollectiviteTerritorialeSection from "#components/collectivite-territoriale-section";
 import { EspaceAgentSummarySection } from "#components/espace-agent-components/summary-section";
@@ -10,6 +13,7 @@ import ServicePublicSection from "#components/service-public-section";
 import StructuredDataBreadcrumb from "#components/structured-data/breadcrumb";
 import Title from "#components/title-section";
 import { FICHE } from "#components/title-section/tabs";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import {
   ApplicationRights,
   hasRights,
@@ -32,10 +36,6 @@ import extractParamsAppRouter, {
   type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import { UniteLegaleImmatriculationSection } from "app/(header-default)/entreprise/[slug]/_components/immatriculation-section";
-import UniteLegaleSummarySection from "app/(header-default)/entreprise/[slug]/_components/summary-section";
-import type { Metadata } from "next";
-import { permanentRedirect } from "next/navigation";
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -89,29 +89,29 @@ export default async function UniteLegalePage(props: AppRouterProps) {
       )}
       <div className="content-container">
         <Title
-          uniteLegale={uniteLegale}
           ficheType={FICHE.INFORMATION}
           session={session}
+          uniteLegale={uniteLegale}
         />
         {estNonDiffusibleStrict(uniteLegale) ? (
           <NonDiffusibleStrictSection />
         ) : (
           <>
             <UniteLegaleSummarySection
-              uniteLegale={uniteLegale}
               session={session}
+              uniteLegale={uniteLegale}
             />
             {hasRights(session, ApplicationRights.isAgent) && (
               <EspaceAgentSummarySection
-                uniteLegale={uniteLegale}
                 session={session}
+                uniteLegale={uniteLegale}
               />
             )}
             {uniteLegale.dateMiseAJourInpi && (
               <UniteLegaleImmatriculationSection
-                uniteLegale={uniteLegale}
                 rneLastModified={sourcesLastModified.rne}
                 session={session}
+                uniteLegale={uniteLegale}
               />
             )}
             {isCollectiviteTerritoriale(uniteLegale) && (
@@ -121,16 +121,16 @@ export default async function UniteLegalePage(props: AppRouterProps) {
               <ServicePublicSection uniteLegale={uniteLegale} />
             )}
             {!isBot && isAssociation(uniteLegale) && (
-              <AssociationSection uniteLegale={uniteLegale} session={session} />
+              <AssociationSection session={session} uniteLegale={uniteLegale} />
             )}
             <HorizontalSeparator />
             {uniteLegale.siege && (
               <EtablissementSection
-                uniteLegale={uniteLegale}
                 etablissement={uniteLegale.siege}
+                session={session}
+                uniteLegale={uniteLegale}
                 usedInEntreprisePage={true}
                 withDenomination={false}
-                session={session}
               />
             )}
             <EtablissementListeSection uniteLegale={uniteLegale} />

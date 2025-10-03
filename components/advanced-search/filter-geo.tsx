@@ -1,13 +1,18 @@
 "use client";
 
-import { type KeyboardEventHandler, useCallback, useEffect, useState } from "react";
+import { useStorage } from "hooks";
+import {
+  type KeyboardEventHandler,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import type { IGeoElement } from "#clients/geo";
 import { Info, Warning } from "#components-ui/alerts";
 import { Loader } from "#components-ui/loader";
 import { isAPI404, isAPINotResponding } from "#models/api-not-responding";
 import { searchGeoElementByText } from "#models/geo";
 import { debounce } from "#utils/helpers/debounce";
-import { useStorage } from "hooks";
 
 enum Issue {
   NONE = 2,
@@ -125,29 +130,29 @@ export const FilterGeo: React.FC<{
   return (
     <>
       <input
-        id="geo-search-input"
-        className="fr-input"
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        onFocus={() => setSearchTerm("")}
-        placeholder="ex : Rennes"
         autoComplete="off"
+        className="fr-input"
+        id="geo-search-input"
+        onChange={onChange}
+        onFocus={() => setSearchTerm("")}
+        onKeyDown={onKeyDown}
+        placeholder="ex : Rennes"
         type="search"
         value={searchTerm}
       />
       <input
         name="cp_dep_label"
-        value={labelDep}
-        type="hidden"
         onChange={() => {}}
+        type="hidden"
+        value={labelDep}
       />
       <input
         name="cp_dep_type"
-        value={typeDep}
-        type="hidden"
         onChange={() => {}}
+        type="hidden"
+        value={typeDep}
       />
-      <input name="cp_dep" value={dep} type="hidden" onChange={() => {}} />
+      <input name="cp_dep" onChange={() => {}} type="hidden" value={dep} />
       {issue !== Issue.NONE ? (
         issue === Issue.NORESULT ? (
           <Info>Aucun résultat ne correspond à votre recherche.</Info>
@@ -167,8 +172,8 @@ export const FilterGeo: React.FC<{
                 <strong>Localisations récentes :</strong>
                 {suggestsHistory.map((suggest: IGeoElement) => (
                   <div
-                    key={"suggest-history-" + suggest.label}
                     className="suggest cursor-pointer"
+                    key={"suggest-history-" + suggest.label}
                     onClick={() => selectDep(suggest)}
                   >
                     {suggest.label}
@@ -184,8 +189,8 @@ export const FilterGeo: React.FC<{
             ) : (
               geoSuggests.map((suggest: IGeoElement) => (
                 <div
-                  key={suggest.label}
                   className="suggest cursor-pointer"
+                  key={suggest.label}
                   onClick={() => selectDep(suggest)}
                 >
                   {suggest.label}

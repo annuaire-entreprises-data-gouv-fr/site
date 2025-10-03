@@ -15,8 +15,8 @@ const SocialNetworks = () => (
                   <a
                     className="fr-btn--linkedin fr-btn"
                     href="https://www.linkedin.com/company/annuaire-des-entreprises"
-                    target="_blank"
                     rel="noreferrer noopener"
+                    target="_blank"
                     title="Page linkedin de l’Annuaire des Entreprises"
                   >
                     linkedin
@@ -26,8 +26,8 @@ const SocialNetworks = () => (
                   <a
                     className="fr-btn--github fr-btn"
                     href="https://github.com/annuaire-entreprises-data-gouv-fr/site"
-                    target="_blank"
                     rel="noreferrer noopener"
+                    target="_blank"
                     title="Page github de l’Annuaire des Entreprises"
                   >
                     github

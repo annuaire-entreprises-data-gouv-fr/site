@@ -14,10 +14,10 @@ export default function AgentNavigationLink({
 
   return (
     <Link
-      className={"fr-nav__link"}
       aria-current={pathname === href ? "page" : undefined}
-      key={href}
+      className={"fr-nav__link"}
       href={href}
+      key={href}
     >
       {label}
     </Link>

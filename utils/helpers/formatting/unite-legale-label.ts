@@ -32,17 +32,12 @@ const uniteLegalePronoun = (uniteLegale: IUniteLegale) => {
   }
 };
 
-export const uniteLegaleLabelWithPronoun = (uniteLegale: IUniteLegale) => {
-  return uniteLegalePronoun(uniteLegale) + uniteLegaleLabel(uniteLegale);
-};
+export const uniteLegaleLabelWithPronoun = (uniteLegale: IUniteLegale) =>
+  uniteLegalePronoun(uniteLegale) + uniteLegaleLabel(uniteLegale);
 
 export const uniteLegaleLabelWithPronounContracted = (
   uniteLegale: IUniteLegale
-) => {
-  return (
-    uniteLegalePronounContracted(uniteLegale) + uniteLegaleLabel(uniteLegale)
-  );
-};
+) => uniteLegalePronounContracted(uniteLegale) + uniteLegaleLabel(uniteLegale);
 
 export const uniteLegaleLabel = (uniteLegale: IUniteLegale) => {
   switch (true) {

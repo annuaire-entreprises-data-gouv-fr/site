@@ -1,9 +1,12 @@
-import type { IRolesDataRoles, IRolesDataUser } from "#clients/roles-data/interface";
+import { Fragment, useMemo } from "react";
+import type {
+  IRolesDataRoles,
+  IRolesDataUser,
+} from "#clients/roles-data/interface";
 import NonRenseigne from "#components/non-renseigne";
 import { FullTable } from "#components/table/full";
 import type { IRolesDataGroup } from "#models/authentication/group/groups";
 import { formatSiret } from "#utils/helpers";
-import { Fragment, useMemo } from "react";
 import AddUserModal from "./update-modals/add-user";
 import DeleteUserButton from "./update-modals/delete-user";
 import UpdateNameModal from "./update-modals/update-name";
@@ -15,24 +18,22 @@ const NotAdminTable = ({
 }: {
   group: IRolesDataGroup;
   currentUserEmail: string;
-}) => {
-  return (
-    <FullTable
-      head={["Membre", "Rôle"]}
-      body={group.users.map((user) => [
-        <>
-          {user.email}{" "}
-          {user.email === currentUserEmail && (
-            <span className="fr-badge fr-ml-1w fr-badge--success fr-badge--sm">
-              Vous
-            </span>
-          )}
-        </>,
-        <span className="fr-badge">{user.role_name}</span>,
-      ])}
-    />
-  );
-};
+}) => (
+  <FullTable
+    body={group.users.map((user) => [
+      <>
+        {user.email}{" "}
+        {user.email === currentUserEmail && (
+          <span className="fr-badge fr-ml-1w fr-badge--success fr-badge--sm">
+            Vous
+          </span>
+        )}
+      </>,
+      <span className="fr-badge">{user.role_name}</span>,
+    ])}
+    head={["Membre", "Rôle"]}
+  />
+);
 
 export function GroupItem({
   currentUserEmail,
@@ -60,9 +61,10 @@ export function GroupItem({
     });
   };
 
-  const adminCount = useMemo(() => {
-    return group.users.filter((u) => u.is_admin).length;
-  }, [group.users]);
+  const adminCount = useMemo(
+    () => group.users.filter((u) => u.is_admin).length,
+    [group.users]
+  );
 
   return (
     <div className="fr-card fr-mt-3w">
@@ -96,9 +98,9 @@ export function GroupItem({
                       {" "}
                       (
                       <a
-                        target="_blank"
-                        rel="noopener noreferrer"
                         href={group.contract_url}
+                        rel="noopener noreferrer"
+                        target="_blank"
                       >
                         consulter
                       </a>
@@ -111,9 +113,9 @@ export function GroupItem({
             <div>
               <strong>Organisation :</strong>{" "}
               <a
-                target="_blank"
-                rel="noopener noreferrer"
                 href={`/etablissement/${group.organisation_siret}`}
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 {formatSiret(group.organisation_siret)}
               </a>
@@ -142,27 +144,25 @@ export function GroupItem({
             )}
           </div>
           {!isAdmin ? (
-            <NotAdminTable group={group} currentUserEmail={currentUserEmail} />
+            <NotAdminTable currentUserEmail={currentUserEmail} group={group} />
           ) : (
             <>
               <div style={{ alignSelf: "flex-end", marginBottom: "1rem" }}>
                 <div>
                   <AddUserModal
-                    group={group}
-                    defaultRoleId={defaultRoleId!}
                     addUserToGroupState={(user: IRolesDataUser) => {
                       setGroup({
                         ...group,
                         users: [...group.users, user],
                       });
                     }}
+                    defaultRoleId={defaultRoleId!}
+                    group={group}
                   />
                 </div>
               </div>
 
               <FullTable
-                head={[`Membres (${group.users.length})`, "Rôle", "Action"]}
-                columnWidths={["65%"]}
                 body={group.users.map((user) => [
                   <div style={{ flexGrow: 1 }}>
                     {user.email}
@@ -174,19 +174,16 @@ export function GroupItem({
                   </div>,
                   user.email !== currentUserEmail || adminCount >= 2 ? (
                     <UpdateUserSelect
-                      user={user}
                       groupId={group.id}
                       roles={roles}
                       updateUserFromGroupState={handleUpdateUser}
+                      user={user}
                     />
                   ) : (
                     <span className="fr-badge">{user.role_name}</span>
                   ),
                   <DeleteUserButton
-                    isCurrentUser={user.email === currentUserEmail}
                     adminCount={adminCount}
-                    user={user}
-                    groupId={group.id}
                     deleteUserFromGroupState={(userEmail: string) => {
                       if (user.email === currentUserEmail) {
                         deleteGroup(group.id);
@@ -199,8 +196,13 @@ export function GroupItem({
                         });
                       }
                     }}
+                    groupId={group.id}
+                    isCurrentUser={user.email === currentUserEmail}
+                    user={user}
                   />,
                 ])}
+                columnWidths={["65%"]}
+                head={[`Membres (${group.users.length})`, "Rôle", "Action"]}
               />
             </>
           )}

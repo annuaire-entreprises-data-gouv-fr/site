@@ -1,5 +1,9 @@
 "use client";
 
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useFetchFinancesSociete } from "hooks";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
 import {
   AsyncDataSectionClient,
   mergeDataSources,
@@ -13,10 +17,6 @@ import {
   type IIndicateursFinanciersSociete,
 } from "#models/finances-societe/types";
 import type { UseCase } from "#models/use-cases";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useFetchFinancesSociete } from "hooks";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import { useMemo } from "react";
 import { FinancesSocieteInnerSection } from "./inner-section";
 
 export function ProtectedFinancesSocieteSection({
@@ -43,35 +43,35 @@ export function ProtectedFinancesSocieteSection({
     params
   );
 
-  const mergedFinancesSociete = useMemo(() => {
-    return mergeDataSources(
-      financesSociete,
-      chiffreAffairesProtected,
-      mergeFinancesSocieteWithChiffreAffaires
-    );
-  }, [financesSociete, chiffreAffairesProtected]);
+  const mergedFinancesSociete = useMemo(
+    () =>
+      mergeDataSources(
+        financesSociete,
+        chiffreAffairesProtected,
+        mergeFinancesSocieteWithChiffreAffaires
+      ),
+    [financesSociete, chiffreAffairesProtected]
+  );
 
   return (
     <AsyncDataSectionClient
-      title="Indicateurs financiers"
+      data={mergedFinancesSociete}
       id="indicateurs-financiers"
+      isProtected={true}
+      notFoundInfo="Aucun indicateur financier n'a été retrouvé pour cette structure."
       sources={[
         EAdministration.MEF,
         EAdministration.DGFIP,
         EAdministration.INPI,
       ]}
-      data={mergedFinancesSociete}
-      isProtected={true}
-      notFoundInfo="Aucun indicateur financier n'a été retrouvé pour cette structure."
+      title="Indicateurs financiers"
     >
-      {(mergedFinancesSociete) => {
-        return (
-          <FinancesSocieteInnerSection
-            financesSociete={mergedFinancesSociete}
-            session={session}
-          />
-        );
-      }}
+      {(mergedFinancesSociete) => (
+        <FinancesSocieteInnerSection
+          financesSociete={mergedFinancesSociete}
+          session={session}
+        />
+      )}
     </AsyncDataSectionClient>
   );
 }

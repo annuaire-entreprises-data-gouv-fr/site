@@ -153,8 +153,8 @@ const computeStats = (
   };
 };
 
-const matomoHttpClient = async <T>(url: string) => {
-  return httpClient<T>({
+const matomoHttpClient = async <T>(url: string) =>
+  httpClient<T>({
     url,
     timeout: constants.timeout.XXL,
     method: "POST",
@@ -165,7 +165,6 @@ const matomoHttpClient = async <T>(url: string) => {
       token_auth: process.env.MATOMO_TOKEN_AUTH || "",
     }),
   });
-};
 
 export const clientMatomoStats = async (): Promise<IMatomoStats> => {
   const SITE_ID = process.env.MATOMO_SITE_ID;

@@ -1,9 +1,9 @@
 // Documentation ProConnect
 // https://github.com/numerique-gouv/proconnect-documentation/blob/main/doc_fs/implementation_technique.md
 
+import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
 import type { IReqWithSession } from "#utils/session/with-session";
-import { type BaseClient, Issuer, generators } from "openid-client";
 
 let _client = undefined as BaseClient | undefined;
 

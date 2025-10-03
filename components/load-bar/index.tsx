@@ -1,12 +1,12 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
-import { useEffect } from "react";
 import styles from "./style.module.css";
 
 export default function LoadBar({ session }: { session: ISession | null }) {
@@ -22,8 +22,8 @@ export default function LoadBar({ session }: { session: ISession | null }) {
 
   return (
     <div
-      id="loader-bar"
       className={styles["load-bar"]}
+      id="loader-bar"
       style={{
         background: hasRights(session, ApplicationRights.isAgent)
           ? constants.colors.espaceAgent
@@ -41,9 +41,8 @@ export default function LoadBar({ session }: { session: ISession | null }) {
  * Load bar is entirely a visual trick to help with user patience.
  */
 
-const wait = async (timeout: number): Promise<void> => {
-  return new Promise((resolve) => window.setTimeout(() => resolve(), timeout));
-};
+const wait = async (timeout: number): Promise<void> =>
+  new Promise((resolve) => window.setTimeout(() => resolve(), timeout));
 
 /**
  * Load bar position from 0 to 100%

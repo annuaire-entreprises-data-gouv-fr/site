@@ -9,8 +9,8 @@ const ButtonFranceConnect: React.FC<{}> = () => (
     <p>
       <a
         href="https://franceconnect.gouv.fr/"
-        target="_blank"
         rel="noopener noreferrer"
+        target="_blank"
         title="Qu’est-ce que FranceConnect ? - nouvelle fenêtre"
       >
         Qu’est-ce que FranceConnect ?

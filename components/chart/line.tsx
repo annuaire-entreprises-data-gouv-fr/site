@@ -1,14 +1,14 @@
 import {
-  Chart as ChartJS,
   CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title as ChartTitle,
-  Tooltip,
-  Legend,
   type ChartData,
+  Chart as ChartJS,
   type ChartOptions,
+  Title as ChartTitle,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { htmlLegendPlugin } from "./html-legend-plugin";
@@ -44,19 +44,19 @@ export const LineChart = ({
   return (
     <>
       {htmlLegendContainerId && (
-        <div id={htmlLegendContainerId} className="layout-right" />
+        <div className="layout-right" id={htmlLegendContainerId} />
       )}
       <div>
         <Line
-          options={{ ...options, maintainAspectRatio: false }}
           data={data}
-          width={width}
           height={height}
+          options={{ ...options, maintainAspectRatio: false }}
           plugins={[
             ...(htmlLegendContainerId
               ? [htmlLegendPlugin(htmlLegendContainerId)]
               : []),
           ]}
+          width={width}
         />
       </div>
     </>

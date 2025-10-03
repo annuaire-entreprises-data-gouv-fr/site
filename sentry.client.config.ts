@@ -3,6 +3,7 @@ import { Exception } from "#models/exceptions";
 import { isNextJSSentryActivated } from "#utils/sentry";
 import { getTransactionNameFromUrl } from "#utils/sentry/tracing";
 import isUserAgentABot from "#utils/user-agent";
+
 declare global {
   interface Window {
     IS_OUTDATED_BROWSER: boolean;

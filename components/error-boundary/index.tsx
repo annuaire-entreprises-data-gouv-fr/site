@@ -10,14 +10,14 @@ export default function ErrorBoundary({
 }) {
   return (
     <Sentry.ErrorBoundary
+      beforeCapture={(scope) => {
+        scope.setLevel("fatal");
+      }}
       fallback={
         <LayoutDefault>
           <ClientErrorExplanations />
         </LayoutDefault>
       }
-      beforeCapture={(scope) => {
-        scope.setLevel("fatal");
-      }}
     >
       {children}
     </Sentry.ErrorBoundary>

@@ -1,8 +1,8 @@
-import FAQLink from "#components-ui/faq-link";
 import { INPI } from "#components/administrations";
 import { DataInpiLinkWithExplanations } from "#components/justificatifs/data-inpi-link";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
+import FAQLink from "#components-ui/faq-link";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
@@ -32,10 +32,10 @@ export const UniteLegaleImmatriculationSection = ({
 
   return (
     <Section
-      title="Immatriculation au RNE"
       id="immatriculation-rne"
-      sources={[EAdministration.INPI]}
       lastModified={rneLastModified}
+      sources={[EAdministration.INPI]}
+      title="Immatriculation au RNE"
     >
       <p>
         Cette structure est une entreprise immatriculée au{" "}
@@ -121,8 +121,8 @@ export const UniteLegaleImmatriculationSection = ({
         ]}
       />
       <DataInpiLinkWithExplanations
-        uniteLegale={uniteLegale}
         session={session}
+        uniteLegale={uniteLegale}
       />
     </Section>
   );

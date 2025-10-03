@@ -1,7 +1,7 @@
-import getContentSecurityPolicy from "#utils/headers/content-security-policy";
-import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 import { type SentryBuildOptions, withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
+import getContentSecurityPolicy from "#utils/headers/content-security-policy";
+import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 import redirects from "./redirects.json";
 
 const WITH_SENTRY =

@@ -3,6 +3,4 @@ import journalOfficielAssociations from "../../fixtures/journal-officiel-associa
 
 export const journalOfficielAssociationsHandler: HttpResponseResolver = ({
   request,
-}) => {
-  return HttpResponse.json(journalOfficielAssociations);
-};
+}) => HttpResponse.json(journalOfficielAssociations);

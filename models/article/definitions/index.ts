@@ -5,9 +5,8 @@ export type IDefinition = {
   administrations: string[];
 } & IArticle;
 
-export const getDefinition = (slug: string) => {
-  return allDefinitions.find((article) => article.slug === slug);
-};
+export const getDefinition = (slug: string) =>
+  allDefinitions.find((article) => article.slug === slug);
 
 export const allDefinitions = loadAll<IDefinition>(
   // @ts-ignore

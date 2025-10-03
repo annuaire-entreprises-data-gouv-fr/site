@@ -107,24 +107,22 @@ export const clientAnnuaireServicePublicBySiret = async (
 
 const mapToDomainObject = (
   record: IServicePublicRecord
-): Omit<IServicePublic, "lastModified"> => {
-  return {
-    affectationPersonne: mapToAffectationPersonne(record.affectation_personne),
-    liens: mapToLiens(record),
-    telephone: mapToTelephone(record.telephone),
-    urlServicePublic: record.url_service_public || null,
-    adresseCourriel: record.adresse_courriel || null,
-    sigle: record.sigle || null,
-    categorie: (record.categorie as IServicePublic["categorie"]) || null,
-    mission: record.mission || null,
-    formulaireContact: record.formulaire_contact || null,
-    adressePostale: mapToAdresse(record),
-    typeOrganisme:
-      (record.type_organisme as IServicePublic["typeOrganisme"]) || null,
-    nom: mapToNom(record),
-    subServicesId: mapToServicesId(record.hierarchie),
-  };
-};
+): Omit<IServicePublic, "lastModified"> => ({
+  affectationPersonne: mapToAffectationPersonne(record.affectation_personne),
+  liens: mapToLiens(record),
+  telephone: mapToTelephone(record.telephone),
+  urlServicePublic: record.url_service_public || null,
+  adresseCourriel: record.adresse_courriel || null,
+  sigle: record.sigle || null,
+  categorie: (record.categorie as IServicePublic["categorie"]) || null,
+  mission: record.mission || null,
+  formulaireContact: record.formulaire_contact || null,
+  adressePostale: mapToAdresse(record),
+  typeOrganisme:
+    (record.type_organisme as IServicePublic["typeOrganisme"]) || null,
+  nom: mapToNom(record),
+  subServicesId: mapToServicesId(record.hierarchie),
+});
 
 /**
  * List of sub services

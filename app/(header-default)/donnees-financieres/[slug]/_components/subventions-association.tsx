@@ -1,28 +1,31 @@
 "use client";
 
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { type ChangeEvent, useEffect, useMemo, useState } from "react";
 import routes from "#clients/routes";
-import FAQLink from "#components-ui/faq-link";
-import { Select } from "#components-ui/select";
-import { Tag } from "#components-ui/tag";
 import { DJEPVA } from "#components/administrations";
 import AgentWall from "#components/espace-agent-components/agent-wall";
 import NonRenseigne from "#components/non-renseigne";
 import { DataSectionClient } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
+import FAQLink from "#components-ui/faq-link";
+import { Select } from "#components-ui/select";
+import { Tag } from "#components-ui/tag";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IAssociation } from "#models/core/types";
 import { isDataSuccess, isUnauthorized } from "#models/data-fetching";
-import type { ISubvention, ISubventions } from "#models/subventions/association";
+import type {
+  ISubvention,
+  ISubventions,
+} from "#models/subventions/association";
 import { formatCurrency, type Siren } from "#utils/helpers";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import { type ChangeEvent, useEffect, useMemo, useState } from "react";
 
 const DataSubventionLink = () => (
   <FAQLink
-    tooltipLabel="data.subvention"
     to="https://datasubvention.beta.gouv.fr/"
+    tooltipLabel="data.subvention"
   >
     Data.subvention est un outil développé par la <DJEPVA />. Il recense les
     subventions demandées et reçues par une association.
@@ -70,8 +73,8 @@ const SubventionDetails: React.FC<{
       <p>
         Pour en savoir plus, vous pouvez consulter{" "}
         <a
-          href={routes.dataSubvention.pageBySirenOrIdRna(siren)}
           aria-label={`Voir la page de l’association sur le site de data.subvention`}
+          href={routes.dataSubvention.pageBySirenOrIdRna(siren)}
           rel="noreferrer noopener"
           target="_blank"
         >
@@ -112,12 +115,10 @@ export default function SubventionsAssociationSection({
           .filter((s) => (selectedStatus ? s.label === selectedStatus : true))
           .map((s) => s.year)
       ),
-    ].map((y) => {
-      return {
-        value: y.toString(),
-        label: y.toString(),
-      };
-    });
+    ].map((y) => ({
+      value: y.toString(),
+      label: y.toString(),
+    }));
   }, [subventions, selectedStatus]);
 
   const allStatuses = useMemo(() => {
@@ -133,12 +134,10 @@ export default function SubventionsAssociationSection({
           )
           .map((s) => s.label)
       ),
-    ].map((y) => {
-      return {
-        value: y,
-        label: y,
-      };
-    });
+    ].map((y) => ({
+      value: y,
+      label: y,
+    }));
   }, [subventions, selectedYear]);
 
   useEffect(() => {
@@ -162,12 +161,12 @@ export default function SubventionsAssociationSection({
 
   return (
     <DataSectionClient
-      id="detail-des-subventions"
-      title="Subventions reçues"
-      sources={[EAdministration.DJEPVA]}
-      notFoundInfo="Aucune demande de subvention n’a été trouvée pour cette association."
       data={subventions}
+      id="detail-des-subventions"
       isProtected
+      notFoundInfo="Aucune demande de subvention n’a été trouvée pour cette association."
+      sources={[EAdministration.DJEPVA]}
+      title="Subventions reçues"
     >
       {(subventions) =>
         !subventions || subventions?.length === 0 ? (
@@ -178,30 +177,30 @@ export default function SubventionsAssociationSection({
         ) : (
           <>
             <SubventionDetails
-              subventions={subventions}
               siren={uniteLegale.siren}
+              subventions={subventions}
             />
             <div className="layout-right" style={{ marginBottom: "20px" }}>
               <ul className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center">
                 <li style={{ marginRight: "10px" }}>
                   <Select
-                    options={allYears}
-                    name="Filtrer par année"
                     defaultValue={""}
+                    name="Filtrer par année"
                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
                       setSelectedYear(parseInt(e.target.value, 10));
                     }}
+                    options={allYears}
                     placeholder="Toutes les années"
                   />
                 </li>
                 <li>
                   <Select
-                    options={allStatuses}
-                    name="Filtrer par état"
                     defaultValue={""}
+                    name="Filtrer par état"
                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
                       setSelectedStatus(e.target.value);
                     }}
+                    options={allStatuses}
                     placeholder="Tous les états"
                   />
                 </li>
@@ -209,7 +208,6 @@ export default function SubventionsAssociationSection({
             </div>
 
             <FullTable
-              head={["Année", "Dispositif", "Montant", "État"]}
               body={filteredSubventions.map((subvention) => [
                 <strong>{subvention.year}</strong>,
                 subvention.description ? (
@@ -238,6 +236,7 @@ export default function SubventionsAssociationSection({
                   <Tag color="default">Inconnu</Tag>
                 ),
               ])}
+              head={["Année", "Dispositif", "Montant", "État"]}
             />
           </>
         )

@@ -1,9 +1,12 @@
 "use client";
 
-import FAQLink from "#components-ui/faq-link";
-import { Icon } from "#components-ui/icon/wrapper";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
+import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import {
   type IAPINotRespondingError,
@@ -14,9 +17,6 @@ import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { IDocumentDownloader } from "#models/espace-agent/travaux-publics";
 import type { UseCase } from "#models/use-cases";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import { useMemo } from "react";
 
 const DocumentDownloader = ({
   data,
@@ -32,7 +32,7 @@ const DocumentDownloader = ({
       );
     } else {
       return (
-        <Icon slug="errorFill" color="#df0a00">
+        <Icon color="#df0a00" slug="errorFill">
           La récupération du document auprès des services {administration} a
           échoué.
           <br />
@@ -90,11 +90,11 @@ export default function ProtectedTravauxPublicsSection({
 
   return (
     <AsyncDataSectionClient
-      title={title}
+      data={travauxPublics}
       id={id}
       isProtected={isProtected}
       sources={sources}
-      data={travauxPublics}
+      title={title}
     >
       {(data) => (
         <>
@@ -107,7 +107,7 @@ export default function ProtectedTravauxPublicsSection({
                   (FNTP) à une entreprise en règle de ses obligations sociales,
                   administratives et juridiques.
                 </FAQLink>,
-                <DocumentDownloader data={data.fntp} administration="FNTP" />,
+                <DocumentDownloader administration="FNTP" data={data.fntp} />,
               ],
               [
                 <FAQLink tooltipLabel="Cotisations congés & chômage">
@@ -118,14 +118,14 @@ export default function ProtectedTravauxPublicsSection({
                 <>
                   <div>
                     <DocumentDownloader
-                      data={data.cnetp}
                       administration="CNETP"
+                      data={data.cnetp}
                     />
                   </div>
                   <div>
                     <DocumentDownloader
-                      data={data.cnetp}
                       administration="CIBTP"
+                      data={data.cnetp}
                     />
                   </div>
                 </>,
@@ -137,8 +137,8 @@ export default function ProtectedTravauxPublicsSection({
                   des Travaux publics (ProBTP).
                 </FAQLink>,
                 <DocumentDownloader
-                  data={data.probtp}
                   administration="ProBTP"
+                  data={data.probtp}
                 />,
               ],
             ]}

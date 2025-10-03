@@ -270,25 +270,23 @@ class SearchFilterParams {
 const serializeParams = (
   params: IParams | object,
   excludeParams: string[] = []
-) => {
-  return Object.entries(params).reduce((uri, [key, value]) => {
+) =>
+  Object.entries(params).reduce((uri, [key, value]) => {
     if (!!value && excludeParams.indexOf(key) === -1) {
       uri += `&${key}=${encodeURIComponent(value)}`;
     }
     return uri;
   }, "");
-};
 
 export const buildSearchQuery = (
   searchTerm: string,
   params: IParams | object,
   excludeParams: string[] = []
-) => {
-  return `?terme=${encodeURIComponent(searchTerm)}${serializeParams(
+) =>
+  `?terme=${encodeURIComponent(searchTerm)}${serializeParams(
     params,
     excludeParams
   )}`;
-};
 
 export interface ISearchFilter {
   icon: IIconsSlug;
@@ -296,12 +294,10 @@ export interface ISearchFilter {
   excludeParams: string[];
 }
 
-export const hasDirigeantFilter = (params: IParams = {}) => {
-  return params.fn || params.n || params.dmin || params.dmax;
-};
+export const hasDirigeantFilter = (params: IParams = {}) =>
+  params.fn || params.n || params.dmin || params.dmax;
 
-export const hasSearchParam = (params: object) => {
-  return Object.values(params).some((v) => !!v);
-};
+export const hasSearchParam = (params: object) =>
+  Object.values(params).some((v) => !!v);
 
 export default SearchFilterParams;

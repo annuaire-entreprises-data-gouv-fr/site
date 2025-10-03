@@ -1,9 +1,9 @@
-import FAQLink from "#components-ui/faq-link";
+import type React from "react";
 import { ConventionCollectivesBadgesSection } from "#components/badges-section/convention-collectives";
 import {
-  LabelsAndCertificatesBadgesSection,
   checkHasLabelsAndCertificates,
   checkHasQuality,
+  LabelsAndCertificatesBadgesSection,
   labelsAndCertificatesSources,
 } from "#components/badges-section/labels-and-certificates";
 import { ProtectedCertificatesBadgesSection } from "#components/badges-section/labels-and-certificates/protected-certificats";
@@ -11,6 +11,7 @@ import EORICell from "#components/eori-cell";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import TVACell from "#components/tva-cell";
+import FAQLink from "#components-ui/faq-link";
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   ApplicationRights,
@@ -25,7 +26,6 @@ import {
 } from "#models/core/types";
 import { formatDate, formatIntFr, formatSiret } from "#utils/helpers";
 import { libelleCategorieEntreprise } from "#utils/helpers/formatting/categories-entreprise";
-import type React from "react";
 import { EffectifCell } from "./effectif-cell";
 import {
   UniteLegaleInscriptionIG,
@@ -57,12 +57,12 @@ const UniteLegaleSummarySection: React.FC<{
       </FAQLink>,
       <>
         <UniteLegaleInscriptionSirene
-          uniteLegale={uniteLegale}
           session={session}
+          uniteLegale={uniteLegale}
         />
         <UniteLegaleInscriptionRNE
-          uniteLegale={uniteLegale}
           session={session}
+          uniteLegale={uniteLegale}
         />
         <UniteLegaleInscriptionIG uniteLegale={uniteLegale} />
         <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
@@ -83,15 +83,15 @@ const UniteLegaleSummarySection: React.FC<{
     ],
     [
       <FAQLink
-        tooltipLabel="N° EORI"
         to="https://www.economie.gouv.fr/entreprises/numero-eori"
+        tooltipLabel="N° EORI"
       >
         Le numéro EORI (Economic Operator Registration and Identification) est
         un identifiant unique communautaire permettant d’identifier l’entreprise
         dans ses relations avec les autorités douanières.
       </FAQLink>,
       uniteLegale.siege.siret ? (
-        <EORICell siret={uniteLegale.siege.siret} session={session} />
+        <EORICell session={session} siret={uniteLegale.siege.siret} />
       ) : (
         ""
       ),
@@ -105,12 +105,12 @@ const UniteLegaleSummarySection: React.FC<{
     ["Forme juridique", uniteLegale.libelleNatureJuridique],
     [
       "Effectif salarié",
-      <EffectifCell uniteLegale={uniteLegale} session={session} />,
+      <EffectifCell session={session} uniteLegale={uniteLegale} />,
     ],
     [
       <FAQLink
-        tooltipLabel="Taille de la structure"
         to="https://www.insee.fr/fr/metadonnees/definition/c1057"
+        tooltipLabel="Taille de la structure"
       >
         La taille de l’entreprise, ou catégorie d’entreprise, est une variable
         statistique calculée par l’Insee sur la base de l’effectif, du chiffre
@@ -161,7 +161,7 @@ const UniteLegaleSummarySection: React.FC<{
   return (
     <div id="entreprise">
       <Section
-        title={`Informations légales de ${uniteLegale.nomComplet}`}
+        lastModified={uniteLegale.dateDerniereMiseAJour}
         sources={[
           EAdministration.INSEE,
           EAdministration.VIES,
@@ -177,7 +177,7 @@ const UniteLegaleSummarySection: React.FC<{
             ? [EAdministration.GIP_MDS]
             : []),
         ]}
-        lastModified={uniteLegale.dateDerniereMiseAJour}
+        title={`Informations légales de ${uniteLegale.nomComplet}`}
       >
         <TwoColumnTable body={data} />
       </Section>

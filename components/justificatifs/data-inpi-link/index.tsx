@@ -1,8 +1,8 @@
 import routes from "#clients/routes";
+import { INPI } from "#components/administrations";
 import ButtonLink from "#components-ui/button";
 import { Icon } from "#components-ui/icon/wrapper";
 import { PrintNever } from "#components-ui/print-visibility";
-import { INPI } from "#components/administrations";
 import {
   ApplicationRights,
   hasRights,
@@ -60,11 +60,11 @@ export const DataInpiLinkWithExplanations = ({
         </li>
         <li>
           <ButtonLink
+            alt
             target="_blank"
             to={
               siteLink || `${routes.rne.portail.entreprise}${uniteLegale.siren}`
             }
-            alt
           >
             ⇢ Voir la fiche sur le site de l’INPI
           </ButtonLink>

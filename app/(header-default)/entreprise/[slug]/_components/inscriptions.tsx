@@ -1,8 +1,10 @@
+import type React from "react";
+import type { PropsWithChildren } from "react";
+import AvisSituationLink from "#components/justificatifs/avis-situation-link";
+import ExtraitRNELink from "#components/justificatifs/extrait-rne-link";
 import { OpenClosedTag } from "#components-ui/badge/frequent";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
-import AvisSituationLink from "#components/justificatifs/avis-situation-link";
-import ExtraitRNELink from "#components/justificatifs/extrait-rne-link";
 import type { ISession } from "#models/authentication/user/session";
 import { estActif } from "#models/core/etat-administratif";
 import {
@@ -11,8 +13,6 @@ import {
   isServicePublic,
 } from "#models/core/types";
 import { formatDate } from "#utils/helpers";
-import type React from "react";
-import type { PropsWithChildren } from "react";
 import styles from "./style.module.css";
 
 const Wrapper: React.FC<PropsWithChildren<{ link: React.JSX.Element }>> = ({
@@ -39,16 +39,15 @@ export const UniteLegaleInscriptionIG = ({
       <Wrapper
         link={
           <a
+            href={`https://www.infogreffe.fr/entreprise/${uniteLegale.siren}`}
             rel="noreferre noopener"
             target="_blank"
-            href={`https://www.infogreffe.fr/entreprise/${uniteLegale.siren}`}
           >
             → Consulter la fiche Infogreffe
           </a>
         }
       >
         <InformationTooltip
-          tabIndex={undefined}
           label={`Cette structure est enregistrée sur Infogreffe${
             uniteLegale.immatriculation?.dateImmatriculation
               ? `, depuis le ${formatDate(
@@ -56,6 +55,7 @@ export const UniteLegaleInscriptionIG = ({
                 )}`
               : ""
           }.`}
+          tabIndex={undefined}
         >
           <>
             {uniteLegale.immatriculation?.dateRadiation ? (
@@ -93,10 +93,10 @@ export const UniteLegaleInscriptionSirene = ({
   if (!uniteLegale.dateMiseAJourInsee) {
     return (
       <InformationTooltip
-        tabIndex={undefined}
         label={
           "Cette structure est n’a pas été retrouvée dans la base Sirene tenue par l’Insee. Pourtant, elle devrait s’y trouver. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site sirene.fr"
         }
+        tabIndex={undefined}
       >
         <OpenClosedTag
           icon="questionFill"
@@ -110,15 +110,14 @@ export const UniteLegaleInscriptionSirene = ({
     <Wrapper
       link={
         <AvisSituationLink
-          session={session}
+          button={true}
           etablissement={uniteLegale.siege}
           label="Avis de situation"
-          button={true}
+          session={session}
         />
       }
     >
       <InformationTooltip
-        tabIndex={undefined}
         label={`Cette structure est inscrite dans la base Sirene tenue par l’Insee${
           uniteLegale.dateCreation
             ? `, depuis le ${formatDate(uniteLegale.dateCreation)}`
@@ -126,6 +125,7 @@ export const UniteLegaleInscriptionSirene = ({
         }. Elle a été mise à jour le ${formatDate(
           uniteLegale.dateMiseAJourInsee
         )}.`}
+        tabIndex={undefined}
       >
         {estActif(uniteLegale) ? (
           <OpenClosedTag icon="open" label="Inscrite (Insee)">
@@ -161,9 +161,9 @@ export const UniteLegaleInscriptionRNE = ({
           link={
             <Icon slug="searchLine">
               <a
+                href="https://data.inpi.fr"
                 rel="noreferre noopener"
                 target="_blank"
-                href="https://data.inpi.fr"
               >
                 Rechercher sur data.inpi.fr
               </a>
@@ -171,10 +171,10 @@ export const UniteLegaleInscriptionRNE = ({
           }
         >
           <InformationTooltip
-            tabIndex={undefined}
             label={
               "Cette structure est n’a pas été retrouvée dans le Registre National des Entreprises (RNE) tenu par l’INPI. Pourtant, vu sa forme juridique, elle devrait y être inscrite. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site data.inpi.fr"
             }
+            tabIndex={undefined}
           >
             <OpenClosedTag
               icon="questionFill"
@@ -190,14 +190,13 @@ export const UniteLegaleInscriptionRNE = ({
     <Wrapper
       link={
         <ExtraitRNELink
-          uniteLegale={uniteLegale}
-          session={session}
           label="Extrait RNE"
+          session={session}
+          uniteLegale={uniteLegale}
         />
       }
     >
       <InformationTooltip
-        tabIndex={undefined}
         label={`Cette structure est immatriculée au Registre National des Entreprises (RNE)${
           uniteLegale.immatriculation?.dateImmatriculation
             ? `, depuis le ${formatDate(
@@ -211,6 +210,7 @@ export const UniteLegaleInscriptionRNE = ({
               )}.`
             : ""
         }`}
+        tabIndex={undefined}
       >
         <a href="#immatriculation-rne">
           {uniteLegale.immatriculation?.dateRadiation ? (
@@ -252,8 +252,8 @@ export const UniteLegaleInscriptionRNA = ({
       }
     >
       <InformationTooltip
-        tabIndex={undefined}
         label="Cette structure est inscrite au Répertoire National des Associations (RNA)."
+        tabIndex={undefined}
       >
         <a href="#association-section">
           <OpenClosedTag

@@ -32,7 +32,7 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
     props: PropsWithChildren<{ style?: any; className?: string; id?: string }>
   ) =>
     link ? (
-      <a href={link.href} aria-label={link["aria-label"]} {...props} />
+      <a aria-label={link["aria-label"]} href={link.href} {...props} />
     ) : (
       <span {...props} />
     );
@@ -40,14 +40,14 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   return (
     <>
       <ContainerComponent
-        id={id}
-        style={{
-          margin: "3px",
-        }}
         className={
           styles.frBadge +
           ` fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`
         }
+        id={id}
+        style={{
+          margin: "3px",
+        }}
       >
         {children}
       </ContainerComponent>

@@ -1,9 +1,9 @@
 "use client";
-import type { IMatomoStats } from "#clients/matomo";
-import { Select } from "#components-ui/select";
-import { StackedBarChart } from "#components/chart/stack-bar";
-import constants from "#models/constants";
 import { type ChangeEvent, useState } from "react";
+import type { IMatomoStats } from "#clients/matomo";
+import { StackedBarChart } from "#components/chart/stack-bar";
+import { Select } from "#components-ui/select";
+import constants from "#models/constants";
 
 type IStatType = "agents" | "users" | "api";
 
@@ -73,8 +73,8 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
           identifié avec{" "}
           <a
             href="https://www.proconnect.gouv.fr/"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             title="Qu’est-ce que ProConnect ? - nouvelle fenêtre"
           >
             ProConnect
@@ -95,13 +95,13 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
       <div className="layout-right">
         <div>Afficher les données par&nbsp;</div>
         <Select
+          defaultValue={"users"}
+          onChange={onOptionChange}
           options={[
             { value: "users", label: "utilisateurs" },
             { value: "agents", label: "agents" },
             { value: "api", label: "appels API" },
           ]}
-          defaultValue={"users"}
-          onChange={onOptionChange}
         />
       </div>
       <StackedBarChart data={data} />

@@ -22,19 +22,17 @@ export type IAPIEntrepriseConformiteVigilance = IAPIEntrepriseResponse<{
 export const clientApiEntrepriseConformiteVigilance = async (
   siren: Siren,
   useCase?: UseCase
-) => {
-  return await clientAPIEntreprise<
-    IAPIEntrepriseConformiteVigilance,
-    IConformite
-  >(routes.apiEntreprise.conformite.vigilance(siren), mapToDomainObject, {
-    useCase,
-  });
-};
+) =>
+  await clientAPIEntreprise<IAPIEntrepriseConformiteVigilance, IConformite>(
+    routes.apiEntreprise.conformite.vigilance(siren),
+    mapToDomainObject,
+    {
+      useCase,
+    }
+  );
 
-const mapToDomainObject = (response: IAPIEntrepriseConformiteVigilance) => {
-  return {
-    url: response.data.document_url,
-    isValid: response.data?.entity_status?.code === "ok",
-    label: "Attestation de vigilance",
-  };
-};
+const mapToDomainObject = (response: IAPIEntrepriseConformiteVigilance) => ({
+  url: response.data.document_url,
+  isValid: response.data?.entity_status?.code === "ok",
+  label: "Attestation de vigilance",
+});

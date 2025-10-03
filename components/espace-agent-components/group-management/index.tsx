@@ -1,8 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import type { IRolesDataRoles } from "#clients/roles-data/interface";
 import type { IRolesDataGroup } from "#models/authentication/group/groups";
-import { useState } from "react";
 import { GroupItem } from "./group-item";
 
 export function GroupManagement({
@@ -34,13 +34,13 @@ export function GroupManagement({
 
     return (
       <GroupItem
-        key={group.id}
         currentUserEmail={currentUserEmail}
-        group={group}
-        setGroup={setGroup}
         deleteGroup={deleteGroup}
+        group={group}
         isAdmin={isAdmin}
+        key={group.id}
         roles={roles}
+        setGroup={setGroup}
       />
     );
   });

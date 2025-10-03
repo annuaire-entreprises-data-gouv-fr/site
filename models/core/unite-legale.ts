@@ -9,16 +9,15 @@ import { clientUniteLegaleRechercheEntreprise } from "#clients/recherche-entrepr
 import { clientUniteLegaleInsee } from "#clients/sirene-insee/siren";
 import { getIdccTitle } from "#models/conventions-collectives";
 import { createEtablissementsList } from "#models/core/etablissements-list";
-import { IETATADMINSTRATIF, estActif } from "#models/core/etat-administratif";
+import { estActif, IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import { isProtectedSiren } from "#models/protected-siren";
-import { type Siren, isLuhnValid, verifySiren } from "#utils/helpers";
+import { isLuhnValid, type Siren, verifySiren } from "#utils/helpers";
 import {
   logFatalErrorInSentry,
   logInfoInSentry,
   logWarningInSentry,
 } from "#utils/sentry";
 import getSession from "#utils/server-side-helper/app/get-session";
-import { shouldUseInsee } from ".";
 import { EAdministration } from "../administrations/EAdministration";
 import {
   APINotRespondingFactory,
@@ -28,16 +27,17 @@ import {
 } from "../api-not-responding";
 import { FetchRessourceException, Information } from "../exceptions";
 import { getTvaUniteLegale } from "../tva";
+import { shouldUseInsee } from ".";
 import {
-  ISTATUTDIFFUSION,
   anonymiseUniteLegale,
   estDiffusible,
+  ISTATUTDIFFUSION,
 } from "./diffusion";
 import {
-  type IUniteLegale,
-  SirenNotFoundError,
   createDefaultUniteLegale,
+  type IUniteLegale,
   isEntrepreneurIndividuel,
+  SirenNotFoundError,
 } from "./types";
 
 /**
@@ -108,9 +108,9 @@ class UniteLegaleBuilder {
 
     // idcc
     uniteLegale.listeIdcc = await Promise.all(
-      uniteLegale.listeIdcc.map(async ({ idcc }) => {
-        return await getIdccTitle(uniteLegale.siren, idcc);
-      })
+      uniteLegale.listeIdcc.map(
+        async ({ idcc }) => await getIdccTitle(uniteLegale.siren, idcc)
+      )
     );
 
     return uniteLegale;

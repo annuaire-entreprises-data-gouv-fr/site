@@ -1,17 +1,17 @@
 "use client";
 
+import { useFetchJOAFE } from "hooks";
 import type React from "react";
 import routes from "#clients/routes";
-import AssociationCreationNotFoundAlert from "#components-ui/alerts-with-explanations/association-creation-not-found-alert";
-import ButtonLink from "#components-ui/button";
 import { DILA } from "#components/administrations";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
 import { UniteLegalePageLink } from "#components/unite-legale-page-link";
+import AssociationCreationNotFoundAlert from "#components-ui/alerts-with-explanations/association-creation-not-found-alert";
+import ButtonLink from "#components-ui/button";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IAssociation } from "#models/core/types";
 import { formatDate } from "#utils/helpers";
-import { useFetchJOAFE } from "hooks";
 
 const AnnoncesJOAFESection: React.FC<{
   uniteLegale: IAssociation;
@@ -19,10 +19,10 @@ const AnnoncesJOAFESection: React.FC<{
   const annoncesAssociation = useFetchJOAFE(uniteLegale);
   return (
     <AsyncDataSectionClient
-      id="annonces-joafe"
-      title="Annonces Journal Officiel des Associations"
-      sources={[EAdministration.DILA]}
       data={annoncesAssociation}
+      id="annonces-joafe"
+      sources={[EAdministration.DILA]}
+      title="Annonces Journal Officiel des Associations"
     >
       {(annoncesAssociation) => (
         <>
@@ -35,9 +35,9 @@ const AnnoncesJOAFESection: React.FC<{
             <div>
               Cette structure n’a aucune annonce publiée au{" "}
               <a
-                target="_blank"
-                rel="noreferrer noopener"
                 href={routes.journalOfficielAssociations.site.recherche}
+                rel="noreferrer noopener"
+                target="_blank"
               >
                 Journal Officiel des Associations (JOAFE)
               </a>
@@ -52,18 +52,13 @@ const AnnoncesJOAFESection: React.FC<{
                 consolidé par la <DILA />. Pour en savoir plus, vous pouvez
                 consulter{" "}
                 <UniteLegalePageLink
-                  uniteLegale={uniteLegale}
                   href={`${routes.journalOfficielAssociations.site.recherche}?q=${uniteLegale.siren}`}
                   siteName="le site du JOAFE"
+                  uniteLegale={uniteLegale}
                 />
                 &nbsp;:
               </p>
               <FullTable
-                head={[
-                  "Publication",
-                  "Type d’annonce",
-                  "Justificatif de parution",
-                ]}
                 body={annoncesAssociation.annonces.map((annonce) => [
                   <strong>{formatDate(annonce.datePublication)}</strong>,
                   <>
@@ -77,10 +72,15 @@ const AnnoncesJOAFESection: React.FC<{
                       </i>
                     </div>
                   </>,
-                  <ButtonLink target="_blank" to={annonce.path} alt small>
+                  <ButtonLink alt small target="_blank" to={annonce.path}>
                     ⇢&nbsp;Consulter
                   </ButtonLink>,
                 ])}
+                head={[
+                  "Publication",
+                  "Type d’annonce",
+                  "Justificatif de parution",
+                ]}
               />
             </>
           )}

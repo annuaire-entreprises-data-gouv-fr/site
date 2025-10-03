@@ -1,7 +1,6 @@
-import { DataStore } from "#utils/data-store";
-
 import routes from "#clients/routes";
 import type { ICCWithMetadata } from "#models/conventions-collectives";
+import { DataStore } from "#utils/data-store";
 import { httpGet } from "#utils/network";
 
 type IIdccMetadata = {

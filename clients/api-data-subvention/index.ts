@@ -1,7 +1,10 @@
 import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import type { ISubvention, ISubventions } from "#models/subventions/association";
+import type {
+  ISubvention,
+  ISubventions,
+} from "#models/subventions/association";
 import type { IdRna, Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 import { sensitiveRequestCallerInfos } from "#utils/network/utils/sensitive-request-caller-infos";
@@ -38,8 +41,8 @@ export const clientApiDataSubvention = async (
   return subventions;
 };
 
-const mapToDomainObject = (grantItems: IGrantItem[]): ISubvention[] => {
-  return grantItems
+const mapToDomainObject = (grantItems: IGrantItem[]): ISubvention[] =>
+  grantItems
     .filter((grantItem) => Boolean(grantItem.application))
     .reduce((subventions: ISubvention[], grantItem) => {
       const year = grantItem.application.annee_demande?.value ?? 0;
@@ -59,4 +62,3 @@ const mapToDomainObject = (grantItems: IGrantItem[]): ISubvention[] => {
       return [...subventions, newSubvention];
     }, [])
     .sort((a, b) => b.year - a.year);
-};

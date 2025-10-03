@@ -1,5 +1,5 @@
-import { HttpServerError, HttpTimeoutError } from "#clients/exceptions";
 import path from "path";
+import { HttpServerError, HttpTimeoutError } from "#clients/exceptions";
 
 type IParams<T extends unknown[], U> = {
   client: (...args: T) => Promise<U>;

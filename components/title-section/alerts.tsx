@@ -22,7 +22,7 @@ export default function TitleAlerts({
       <NoSiegeSocialAlert uniteLegale={uniteLegale} />
       <MultipleSirenAlert uniteLegale={uniteLegale} />
       <NotInSireneAlert uniteLegale={uniteLegale} />
-      <NonDiffusibleAlert statutDiffusion={statutDiffusion} session={session} />
+      <NonDiffusibleAlert session={session} statutDiffusion={statutDiffusion} />
     </>
   );
 }

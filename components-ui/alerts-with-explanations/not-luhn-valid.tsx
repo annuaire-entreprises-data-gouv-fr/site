@@ -1,5 +1,5 @@
-import { Error } from "#components-ui/alerts";
 import MatomoEvent from "#components/matomo-event";
+import { Error } from "#components-ui/alerts";
 import type { IUniteLegale } from "#models/core/types";
 import { formatIntFr, isLuhnValid } from "#utils/helpers";
 
@@ -12,15 +12,15 @@ export const NotLuhnValidAlert: React.FC<{
 
   return (
     <>
-      <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
+      <MatomoEvent action="sirenOrSiretInvalid" category="error" name="" />
       <Error full>
         Ce numéro d’identification “{formatIntFr(uniteLegale.siren)}”{" "}
         <strong>ne respecte pas</strong>{" "}
         <a
-          href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
-          target="_blank"
-          rel="noreferrer noopener"
           aria-label="Voir les explications de l'algorithme de vérification, nouvelle fenêtre"
+          href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
+          rel="noreferrer noopener"
+          target="_blank"
         >
           l’algorithme de vérification
         </a>{" "}

@@ -1,3 +1,4 @@
+import { type NextRequest, userAgent } from "next/server";
 import {
   AgentOverRateLimitException,
   agentRateLimiter,
@@ -11,7 +12,6 @@ import { Exception } from "#models/exceptions";
 import { UseCase } from "#models/use-cases";
 import logErrorInSentry, { logInfoInSentry } from "#utils/sentry";
 import type { IReqWithSession } from "#utils/session/with-session";
-import { type NextRequest, userAgent } from "next/server";
 import type { APIRoutesPaths } from "./routes-paths";
 
 export type IContext = { params: Promise<{ slug: Array<string> }> };

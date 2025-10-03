@@ -223,20 +223,18 @@ export const serializeForClientScript = (term = "") => {
  * @param term
  * @returns
  */
-export const escapeString = (term = "") => {
-  return removeSpecialChars(term).replaceAll(/[^a-zA-Z0-9]/g, "-");
-};
+export const escapeString = (term = "") =>
+  removeSpecialChars(term).replaceAll(/[^a-zA-Z0-9]/g, "-");
 
 /**
  * Normalize string and remove special chars & diacritics before using a term in search
  */
-export const removeSpecialChars = (term = "") => {
-  return term
+export const removeSpecialChars = (term = "") =>
+  term
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+$/, "")
     .replace(/^\s+/, "");
-};
 
 /**
  * Turn a string into a slug for URL use
@@ -255,9 +253,7 @@ export const slugify = (text: string) =>
 /**
  * Removes whitespace
  */
-export const trimWhitespace = (term = "") => {
-  return term.split(" ").join("");
-};
+export const trimWhitespace = (term = "") => term.split(" ").join("");
 
 /**
  * Parse an int and return default value in case of failure
@@ -364,9 +360,7 @@ export const agregateTripleFields = (
 export const formatFirstNames = (firstNames: string, separator: ", " | " ") => {
   const formatted = (firstNames || "")
     .split(separator)
-    .map((prenom) => {
-      return prenom.split("-").map(capitalize).join("-");
-    })
+    .map((prenom) => prenom.split("-").map(capitalize).join("-"))
     .filter((name) => !!name);
 
   return {
@@ -408,6 +402,5 @@ export const pluralize = (array: any[]) => {
   return array.length > 1 ? "s" : "";
 };
 
-export const formatNumber = (number: number) => {
-  return new Intl.NumberFormat("fr-FR").format(number);
-};
+export const formatNumber = (number: number) =>
+  new Intl.NumberFormat("fr-FR").format(number);

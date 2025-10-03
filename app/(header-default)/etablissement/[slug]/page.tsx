@@ -1,3 +1,6 @@
+import EtablissementSection from "components/etablissement-section";
+import MatomoEventRedirected from "components/matomo-event/search-redirected";
+import type { Metadata } from "next";
 import { NonDiffusibleStrictSection } from "#components/non-diffusible-section";
 import ServicePublicSection from "#components/service-public-section";
 import { TitleEtablissementWithDenomination } from "#components/title-section/etablissement";
@@ -13,9 +16,6 @@ import extractParamsAppRouter, {
   type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import EtablissementSection from "components/etablissement-section";
-import MatomoEventRedirected from "components/matomo-event/search-redirected";
-import type { Metadata } from "next";
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -52,25 +52,25 @@ export default async function EtablissementPage(props: AppRouterProps) {
       )}
       <div className="content-container">
         <TitleEtablissementWithDenomination
-          uniteLegale={uniteLegale}
           etablissement={etablissement}
           session={session}
+          uniteLegale={uniteLegale}
         />
         {estNonDiffusibleStrict(etablissement) ? (
           <NonDiffusibleStrictSection />
         ) : (
           <EtablissementSection
             etablissement={etablissement}
-            uniteLegale={uniteLegale}
             session={session}
-            withDenomination={true}
+            uniteLegale={uniteLegale}
             usedInEntreprisePage={false}
+            withDenomination={true}
           />
         )}
         {!isBot && isServicePublic(uniteLegale) && (
           <ServicePublicSection
-            uniteLegale={uniteLegale}
             etablissement={etablissement}
+            uniteLegale={uniteLegale}
           />
         )}
       </div>

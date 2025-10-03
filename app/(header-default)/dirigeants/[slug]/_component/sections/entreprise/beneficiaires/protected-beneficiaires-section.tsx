@@ -1,21 +1,21 @@
 "use client";
 
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
 import routes from "#clients/routes";
-import FAQLink from "#components-ui/faq-link";
-import { Tag } from "#components-ui/tag";
 import { INPI } from "#components/administrations";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
 import { UniteLegalePageLink } from "#components/unite-legale-page-link";
+import FAQLink from "#components-ui/faq-link";
+import { Tag } from "#components-ui/tag";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { IBeneficiairesEffectif } from "#models/espace-agent/beneficiaires";
 import type { UseCase } from "#models/use-cases";
 import { formatDatePartial, pluralize } from "#utils/helpers";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import { useMemo } from "react";
 
 /**
  * Dirigeants section
@@ -55,17 +55,17 @@ export default function ProtectedBeneficiairesSection({
   return (
     <>
       <AsyncDataSectionClient
-        title={title}
+        data={beneficiaires}
         id={id}
         isProtected={isProtected}
-        sources={sources}
         notFoundInfo={
           <>
             Cette structure n’est pas enregistrée au{" "}
             <strong>Registre National des Entreprises (RNE)</strong>
           </>
         }
-        data={beneficiaires}
+        sources={sources}
+        title={title}
       >
         {(beneficiaires) => (
           <>
@@ -279,9 +279,9 @@ function BénéficiairesContent({
           <p>
             Cette entreprise possède {beneficiaires.length}{" "}
             <a
+              href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
               rel="noreferrer noopener"
               target="_blank"
-              href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
             >
               bénéficiaire{plural} effectif{plural}
             </a>{" "}
@@ -289,14 +289,16 @@ function BénéficiairesContent({
             <strong>Registre National des Entreprises (RNE)</strong> tenu par l’
             <INPI />. Retrouvez le détail des modalités de contrôle sur{" "}
             <UniteLegalePageLink
-              uniteLegale={uniteLegale}
               href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
               siteName="le site de l’INPI"
+              uniteLegale={uniteLegale}
             />
             &nbsp;:
           </p>
           <FullTable
-            verticalAlign="top"
+            body={beneficiaires.map((beneficiaire) =>
+              formatInfos(beneficiaire)
+            )}
             head={[
               "Bénéficiaire",
               "Pays",
@@ -304,9 +306,7 @@ function BénéficiairesContent({
               "Droits de vote",
               "Pouvoirs de contrôle",
             ]}
-            body={beneficiaires.map((beneficiaire) =>
-              formatInfos(beneficiaire)
-            )}
+            verticalAlign="top"
           />
         </>
       )}

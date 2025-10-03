@@ -8,7 +8,7 @@ export const Checkbox: React.FC<{ label: string; value: boolean }> = ({
 
   return (
     <div className="fr-checkbox-group">
-      <input type="checkbox" id={id} name="checkbox" checked={value} />
+      <input checked={value} id={id} name="checkbox" type="checkbox" />
       <label className="fr-label" htmlFor={id}>
         {label}
       </label>

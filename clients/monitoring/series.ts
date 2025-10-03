@@ -103,13 +103,11 @@ export class DailyUptimeRatioConverter {
   export(monitorStartDate: Date | null): IRatio[] {
     return Object.values(this._days)
       .sort((a, b) => (a.date < b.date ? -1 : 1))
-      .map((day) => {
-        return {
-          ratioNumber: day.uptime,
-          date: getDDMMYYYY(day.date),
-          wasMonitorUp: monitorStartDate ? monitorStartDate < day.date : true,
-        };
-      });
+      .map((day) => ({
+        ratioNumber: day.uptime,
+        date: getDDMMYYYY(day.date),
+        wasMonitorUp: monitorStartDate ? monitorStartDate < day.date : true,
+      }));
   }
 }
 

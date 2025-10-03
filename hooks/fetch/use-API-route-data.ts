@@ -1,3 +1,8 @@
+import type { APIRoutesHandlers } from "app/api/data-fetching/routes-handlers";
+import type { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { APIRoutesScopes } from "app/api/data-fetching/routes-scopes";
+import { useEffect, useState } from "react";
+import type { UnwrapPromise } from "types";
 import { hasRights } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import { IDataFetchingState } from "#models/data-fetching";
@@ -8,11 +13,6 @@ import {
   RequestAbortedDuringUnloadException,
 } from "#utils/network/frontend";
 import logErrorInSentry, { logWarningInSentry } from "#utils/sentry";
-import type { APIRoutesHandlers } from "app/api/data-fetching/routes-handlers";
-import type { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { APIRoutesScopes } from "app/api/data-fetching/routes-scopes";
-import { useEffect, useState } from "react";
-import type { UnwrapPromise } from "types";
 
 export type RouteResponse<T> = T extends APIRoutesPaths
   ? UnwrapPromise<ReturnType<(typeof APIRoutesHandlers)[T]>>

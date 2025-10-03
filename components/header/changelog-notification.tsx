@@ -1,5 +1,7 @@
 "use client";
 
+import { useStorage } from "hooks";
+import { useEffect, useState } from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import {
   ApplicationRights,
@@ -8,8 +10,6 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 import { lastDates } from "#models/historique-modifications";
 import { formatDate } from "#utils/helpers";
-import { useStorage } from "hooks";
-import { useEffect, useState } from "react";
 import style from "./changelog-notification.module.css";
 
 const NEW_SINCE_LAST_VISIT_ID = "new-since-last-visit";
@@ -62,8 +62,8 @@ export default function ChangelogNotification({
 
   return shouldDisplayNotif ? (
     <a
-      href="/historique-des-modifications"
       className={style.changelogNotification + " fr-link"}
+      href="/historique-des-modifications"
       title="Découvrir les dernières évolutions de l’Annuaire des Entreprises"
     >
       <Icon slug="present">

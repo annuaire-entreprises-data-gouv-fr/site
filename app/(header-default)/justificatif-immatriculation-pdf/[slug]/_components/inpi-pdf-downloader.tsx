@@ -1,5 +1,6 @@
 "use client";
 
+import usePDFDownloader from "hooks/fetch/download-pdf";
 import routes from "#clients/routes";
 import { Tag } from "#components-ui/tag";
 import { EAdministration } from "#models/administrations/EAdministration";
@@ -7,7 +8,6 @@ import { isAPI404 } from "#models/api-not-responding";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
 import { FetchRessourceException } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
-import usePDFDownloader from "hooks/fetch/download-pdf";
 import { PDFFailed } from "./pdf-failed";
 import { PDFFLoading } from "./pdf-loading";
 import { PDFNotFound } from "./pdf-not-found";

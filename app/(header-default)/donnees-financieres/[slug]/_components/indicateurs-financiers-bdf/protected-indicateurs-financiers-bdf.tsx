@@ -1,16 +1,16 @@
 "use client";
 
-import FAQLink from "#components-ui/faq-link";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
+import FAQLink from "#components-ui/faq-link";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { UseCase } from "#models/use-cases";
 import { formatCurrency, formatDate, getDateFromYYYYMM } from "#utils/helpers";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import { useMemo } from "react";
 
 export function ProtectedIndicateursFinanciersBDF({
   uniteLegale,
@@ -44,12 +44,12 @@ export function ProtectedIndicateursFinanciersBDF({
 
   return (
     <AsyncDataSectionClient
-      title={title}
+      data={banqueDeFranceBilansProtected}
       id={id}
       isProtected={isProtected}
-      sources={sources}
-      data={banqueDeFranceBilansProtected}
       notFoundInfo="Aucun indicateur n’a été retrouvé pour cette structure."
+      sources={sources}
+      title={title}
     >
       {(bilans) => {
         const body = [
@@ -114,13 +114,13 @@ export function ProtectedIndicateursFinanciersBDF({
 
         return (
           <FullTable
+            body={body}
             head={[
-              <FAQLink tooltipLabel="Indicateurs" to="/faq/donnees-financieres">
+              <FAQLink to="/faq/donnees-financieres" tooltipLabel="Indicateurs">
                 Définition des indicateurs
               </FAQLink>,
               ...bilans.map((item) => item.annee),
             ]}
-            body={body}
           />
         );
       }}

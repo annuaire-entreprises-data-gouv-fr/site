@@ -14,20 +14,19 @@ export const FadeIn = ({
   children,
   style,
   className,
-}: IProps) => {
-  return (
-    <>
-      <div
-        className={(className ? className : "") + " " + "fade-in-wrapper"}
-        style={{
-          ...(style || {}),
-          animationDuration: duration + "ms",
-          animationDelay: delay + "ms",
-        }}
-      >
-        {children}
-      </div>
-      <style jsx>{`
+}: IProps) => (
+  <>
+    <div
+      className={(className ? className : "") + " " + "fade-in-wrapper"}
+      style={{
+        ...(style || {}),
+        animationDuration: duration + "ms",
+        animationDelay: delay + "ms",
+      }}
+    >
+      {children}
+    </div>
+    <style jsx>{`
         @media (prefers-reduced-motion: no-preference) {
           .fade-in-wrapper {
             will-change: opacity, transform;
@@ -47,7 +46,6 @@ export const FadeIn = ({
           }
         }
       `}</style>
-    </>
-  );
-};
+  </>
+);
 export default FadeIn;

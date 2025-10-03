@@ -11,7 +11,7 @@ const ActiveFilterLabel: React.FC<{
   onClick: MouseEventHandler;
 }> = ({ label, icon, query, onClick }) => (
   <div className={`${styles["selected-filter-container"]} cursor-pointer`}>
-    <span onClick={onClick} className="layout-center">
+    <span className="layout-center" onClick={onClick}>
       <Icon color={constants.colors.frBlue} slug={icon}>
         &nbsp;{label}
       </Icon>

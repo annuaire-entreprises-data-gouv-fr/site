@@ -1,15 +1,15 @@
-import { diamond } from "#components-ui/logo-annuaire/logo-annuaire";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import React, { use } from "react";
 import AdministrationDescription from "#components/administrations/administration-description";
 import { RenderMarkdownServerOnly } from "#components/markdown";
 import SearchBar from "#components/search-bar";
+import { diamond } from "#components-ui/logo-annuaire/logo-annuaire";
 import { getAllLandingPages, getLandingPage } from "#models/landing-pages";
 import type {
   AppRouterProps,
   IParams,
 } from "#utils/server-side-helper/app/extract-params";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import React, { use } from "react";
 import styles from "./style.module.css";
 
 export default function LandingPage(props: AppRouterProps) {
@@ -31,9 +31,9 @@ export default function LandingPage(props: AppRouterProps) {
   return (
     <>
       <form
+        action={`/rechercher`}
         className={`${styles["centered-search"]} layout-center`}
         id="search-bar-form"
-        action={`/rechercher`}
         method="get"
       >
         <h1>
@@ -45,16 +45,16 @@ export default function LandingPage(props: AppRouterProps) {
         </h1>
         <h2 className={styles["sub-title"]}>{description}</h2>
         <input
-          style={{ display: "none" }}
           name={filter.name}
-          value={filter.value}
           readOnly
+          style={{ display: "none" }}
+          value={filter.value}
         />
         <div className={styles["search-bar-wrapper"]}>
           <SearchBar
-            placeholder="Nom, adresse, n° SIRET/SIREN..."
-            defaultValue=""
             autoFocus={true}
+            defaultValue=""
+            placeholder="Nom, adresse, n° SIRET/SIREN..."
           />
         </div>
       </form>
@@ -62,8 +62,8 @@ export default function LandingPage(props: AppRouterProps) {
         <div className="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
           {reassurance.map((block) => (
             <div
-              key={block.title}
               className="fr-col-12 fr-col-sm-4 fr-col-md-4"
+              key={block.title}
             >
               <div className={styles["reassurance"]}>
                 <h2>{block.title}</h2>
@@ -90,11 +90,9 @@ export default function LandingPage(props: AppRouterProps) {
 }
 
 export async function generateStaticParams(): Promise<Array<IParams>> {
-  return getAllLandingPages().map(({ slug }) => {
-    return {
-      slug,
-    };
-  });
+  return getAllLandingPages().map(({ slug }) => ({
+    slug,
+  }));
 }
 
 export const generateMetadata = async ({

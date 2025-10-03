@@ -37,12 +37,11 @@ const Logo: React.FC<IProps> = ({
     }}
   >
     <img
-      className={className}
-      src={`/images/logos/${slug || "marianne"}.svg`}
       alt={alt || title}
-      title={title}
-      width="100%"
+      className={className}
       height="100%"
+      loading={lazy ? "lazy" : "eager"}
+      src={`/images/logos/${slug || "marianne"}.svg`}
       style={{
         margin: "auto",
         display: "block",
@@ -50,7 +49,8 @@ const Logo: React.FC<IProps> = ({
         maxHeight: "100%",
         boxShadow: "none",
       }}
-      loading={lazy ? "lazy" : "eager"}
+      title={title}
+      width="100%"
     />
   </div>
 );

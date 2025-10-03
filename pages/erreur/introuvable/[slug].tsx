@@ -1,3 +1,5 @@
+import type { GetServerSideProps } from "next";
+import type { NextPageWithLayout } from "pages/_app";
 import { INPI, INSEE } from "#components/administrations";
 import MatomoEvent from "#components/matomo-event";
 import Meta from "#components/meta/meta-client";
@@ -8,8 +10,6 @@ import {
   isSiren,
   isSiret,
 } from "#utils/helpers";
-import type { GetServerSideProps } from "next";
-import type { NextPageWithLayout } from "pages/_app";
 
 type SirenOrSiretNotFoundPageProps = {
   slug?: string;
@@ -25,8 +25,8 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
   if (isLuhnValid(slug)) {
     return (
       <>
-        <Meta title="Numéro d’identification introuvable" noIndex={true} />
-        <MatomoEvent category="error" action="sirenOrSiretNotFound" name="" />
+        <Meta noIndex={true} title="Numéro d’identification introuvable" />
+        <MatomoEvent action="sirenOrSiretNotFound" category="error" name="" />
         <h1>
           Le numéro {type} “{formatted}” est introuvable
         </h1>
@@ -62,8 +62,8 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
   } else {
     return (
       <>
-        <Meta title="Numéro d’identification invalide" noIndex={true} />
-        <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
+        <Meta noIndex={true} title="Numéro d’identification invalide" />
+        <MatomoEvent action="sirenOrSiretInvalid" category="error" name="" />
         <h1>
           Le numéro {type} “{formatted}” est invalide
         </h1>
@@ -77,8 +77,8 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
             De plus, ce numéro <strong>ne respecte pas</strong>{" "}
             <a
               href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
-              target="_blank"
               rel="noreferrer noopener"
+              target="_blank"
             >
               l’algorithme de vérification
             </a>{" "}

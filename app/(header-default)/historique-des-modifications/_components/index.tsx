@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import { Tag } from "#components-ui/tag";
 import {
@@ -8,7 +9,6 @@ import {
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import { changelogData } from "#models/historique-modifications";
-import { useMemo, useState } from "react";
 
 export default function ChangelogWithFilters({
   session,
@@ -41,19 +41,19 @@ export default function ChangelogWithFilters({
           className="fr-fieldset"
         >
           <legend
+            aria-label="Filtrer les nouveautés par périmètre"
             className="fr-fieldset__legend"
             id="sidebar_category_legend"
-            aria-label="Filtrer les nouveautés par périmètre"
           >
             Filtrer par périmètre :
           </legend>
           <div className="fr-fieldset__element">
             <div className="fr-checkbox-group">
               <input
-                onChange={() => setShowPublic(!showPublic)}
-                id="filter-all"
-                type="checkbox"
                 checked={showPublic}
+                id="filter-all"
+                onChange={() => setShowPublic(!showPublic)}
+                type="checkbox"
               />
               <label className="fr-label" htmlFor="filter-all">
                 Site public
@@ -63,10 +63,10 @@ export default function ChangelogWithFilters({
           <div className="fr-fieldset__element">
             <div className="fr-checkbox-group">
               <input
-                onChange={() => setShowAgents(!showAgents)}
-                id="filter-agent"
-                type="checkbox"
                 checked={showAgents}
+                id="filter-agent"
+                onChange={() => setShowAgents(!showAgents)}
+                type="checkbox"
               />
               <label className="fr-label" htmlFor="filter-agent">
                 Espace agent public
@@ -76,10 +76,10 @@ export default function ChangelogWithFilters({
           <div className="fr-fieldset__element">
             <div className="fr-checkbox-group">
               <input
-                onChange={() => setShowAPI(!showAPI)}
-                id="filter-api"
-                type="checkbox"
                 checked={showAPI}
+                id="filter-api"
+                onChange={() => setShowAPI(!showAPI)}
+                type="checkbox"
               />
               <label className="fr-label" htmlFor="filter-api">
                 API (développeurs)
@@ -88,9 +88,9 @@ export default function ChangelogWithFilters({
           </div>
         </fieldset>
       </div>
-      <div className="fr-col-md-9" aria-live="polite">
+      <div aria-live="polite" className="fr-col-md-9">
         {data.map((change, index) => (
-          <div key={`${change.date}-${index}`} className="fr-mb-4w">
+          <div className="fr-mb-4w" key={`${change.date}-${index}`}>
             <h3>{change.date}</h3>
             <div
               className="fr-mb-4w fr-px-2w fr-py-2w"
@@ -98,7 +98,7 @@ export default function ChangelogWithFilters({
             >
               {change.target.agent && (
                 <Tag color="agent">
-                  <Icon slug="lockFill" size={12}>
+                  <Icon size={12} slug="lockFill">
                     Espace Agent public
                   </Icon>
                 </Tag>

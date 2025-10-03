@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import { proConnectAuthenticate } from "#clients/authentication/pro-connect/strategy";
 import { HttpForbiddenError } from "#clients/exceptions";
 import { AgentConnected } from "#models/authentication/agent/agent-connected";
@@ -16,7 +17,6 @@ import {
 import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 import { cleanPathFrom, getPathFrom, setAgentSession } from "#utils/session";
 import withSession from "#utils/session/with-session";
-import { NextResponse } from "next/server";
 
 export const GET = withSession(async function callbackRoute(req) {
   let siretForException = "" as string | undefined;

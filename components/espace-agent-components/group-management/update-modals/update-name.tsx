@@ -1,10 +1,10 @@
+import { useEffect, useRef, useState } from "react";
+import { validateGroupName } from "#components/espace-agent-components/helpers/form-validation";
 import ButtonLink from "#components-ui/button";
 import { FullScreenModal } from "#components-ui/full-screen-modal";
 import { Icon } from "#components-ui/icon/wrapper";
-import { validateGroupName } from "#components/espace-agent-components/helpers/form-validation";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
 import httpClient from "#utils/network";
-import { useEffect, useRef, useState } from "react";
 
 export default function UpdateNameModal({
   groupId,
@@ -126,13 +126,17 @@ export default function UpdateNameModal({
             </label>
             <div className="fr-input-wrap">
               <input
-                ref={inputRef}
+                aria-describedby={
+                  validationErrors.length > 0
+                    ? `error-name-${groupId}`
+                    : undefined
+                }
+                autoComplete="off"
                 className={`fr-input ${
                   validationErrors.length > 0 ? "fr-input--error" : ""
                 }`}
-                type="text"
+                disabled={loading}
                 id={`group-name-${groupId}`}
-                value={groupName}
                 onChange={(e) => {
                   setGroupName(e.target.value);
                   if (validationErrors.length > 0) {
@@ -144,25 +148,21 @@ export default function UpdateNameModal({
                     handleUpdateName();
                   }
                 }}
-                disabled={loading}
-                autoComplete="off"
-                aria-describedby={
-                  validationErrors.length > 0
-                    ? `error-name-${groupId}`
-                    : undefined
-                }
+                ref={inputRef}
+                type="text"
+                value={groupName}
               />
             </div>
           </div>
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
             <ButtonLink
-              onClick={handleUpdateName}
               disabled={!groupName?.trim() || loading}
+              onClick={handleUpdateName}
             >
               {loading ? "Sauvegarde..." : "Sauvegarder"}
             </ButtonLink>
-            <ButtonLink alt onClick={handleCancel} disabled={loading}>
+            <ButtonLink alt disabled={loading} onClick={handleCancel}>
               Annuler
             </ButtonLink>
           </div>

@@ -5,11 +5,12 @@
 // ***********************************************
 //
 //
+
+import { sealData } from "iron-session";
 import { comptesAgents } from "#cypress/mocks/comptes-agents";
 import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { ISession } from "#models/authentication/user/session";
 import { sessionOptions } from "#utils/session";
-import { sealData } from "iron-session";
 
 declare global {
   namespace Cypress {
@@ -51,9 +52,7 @@ const generateSessionCookie = async (inputEmail?: string) => {
 };
 
 Cypress.Commands.add("login", (email?: string) => {
-  cy.then(() => {
-    return generateSessionCookie(email);
-  })
+  cy.then(() => generateSessionCookie(email))
     .then((validSessionCookie) => {
       cy.setCookie(sessionOptions.cookieName, validSessionCookie);
     })

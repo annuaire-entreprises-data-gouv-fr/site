@@ -40,12 +40,9 @@ const loadAllLandingPages = () => {
   return landingPages.filter((page) => page.published || false);
 };
 
-export const getAllLandingPages = () => {
-  return allLandingPages;
-};
+export const getAllLandingPages = () => allLandingPages;
 
-export const getLandingPage = (slug: string) => {
-  return allLandingPages.find((landingPage) => landingPage.slug === slug);
-};
+export const getLandingPage = (slug: string) =>
+  allLandingPages.find((landingPage) => landingPage.slug === slug);
 
 const allLandingPages = loadAllLandingPages();

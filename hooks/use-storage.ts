@@ -17,9 +17,8 @@ function isStorageAvailable(type: "session" | "local") {
   }
 }
 
-const getStore = (type: "session" | "local") => {
-  return type === "session" ? window.sessionStorage : window.localStorage;
-};
+const getStore = (type: "session" | "local") =>
+  type === "session" ? window.sessionStorage : window.localStorage;
 
 export const useStorage = (
   type: "session" | "local",

@@ -1,7 +1,10 @@
 import { HttpNotFound } from "#clients/exceptions";
 import { EAdministration } from "#models/administrations/EAdministration";
 import { APINotRespondingFactory } from "#models/api-not-responding";
-import { FetchRessourceException, type IExceptionContext } from "#models/exceptions";
+import {
+  FetchRessourceException,
+  type IExceptionContext,
+} from "#models/exceptions";
 import type {
   IDirigeants,
   IDirigeantsMergedIGInpi,

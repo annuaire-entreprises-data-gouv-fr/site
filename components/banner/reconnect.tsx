@@ -1,5 +1,7 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import { PrintNever } from "#components-ui/print-visibility";
 import { isLoggedIn } from "#models/authentication/user/rights";
@@ -9,8 +11,6 @@ import {
   deleteCookieBrowser,
   getCookieBrowser,
 } from "#utils/cookies/browser-cookies";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
 export default function ReconnectBanner({
@@ -45,17 +45,17 @@ export default function ReconnectBanner({
   return shouldDisplayBanner ? (
     <PrintNever>
       <div
-        id="reconnect"
-        role="dialog"
         aria-label="Voulez-vous vous reconnecter ?"
         className={styles.npsModal}
+        id="reconnect"
+        role="dialog"
         style={{
           backgroundColor: constants.colors.espaceAgentPastel,
           borderColor: constants.colors.espaceAgent,
         }}
       >
         <div className="fr-container">
-          <Icon slug="lockFill" color={constants.colors.espaceAgent}>
+          <Icon color={constants.colors.espaceAgent} slug="lockFill">
             Pour des raisons de sécurité, vous avez été automatiquement
             déconnecté après 24 heures.{" "}
             <a href={`/api/auth/agent-connect/login?pathFrom=${currentPath}`}>

@@ -1,13 +1,10 @@
 import { HttpResponse, type HttpResponseResolver } from "msw";
-import egaproRepresentation from "../../fixtures/egapro-representation.json";
 import egapro from "../../fixtures/egapro.json";
+import egaproRepresentation from "../../fixtures/egapro-representation.json";
 
-export const egaproHandler: HttpResponseResolver = ({ request }) => {
-  return HttpResponse.json(egapro);
-};
+export const egaproHandler: HttpResponseResolver = ({ request }) =>
+  HttpResponse.json(egapro);
 
 export const egaproRepresentationHandler: HttpResponseResolver = ({
   request,
-}) => {
-  return HttpResponse.json(egaproRepresentation);
-};
+}) => HttpResponse.json(egaproRepresentation);

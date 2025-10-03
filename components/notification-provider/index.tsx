@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import {
   CornerBannerError,
   CornerBannerInfo,
@@ -11,7 +12,6 @@ import {
   NotificationTypeEnum,
 } from "#hooks/use-notification";
 import { randomId } from "#utils/helpers";
-import { useCallback, useState } from "react";
 import styles from "./styles.module.css";
 
 export const NotificationBanner = ({

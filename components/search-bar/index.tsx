@@ -8,23 +8,23 @@ const SearchBar = ({
       Rechercher une entreprise
     </label>
     <input
-      className="fr-input"
-      placeholder={placeholder}
-      defaultValue={defaultValue}
-      type="search"
-      id="search-input-input"
-      name="terme"
       autoComplete="off"
       autoFocus={autoFocus}
+      className="fr-input"
+      defaultValue={defaultValue}
+      id="search-input-input"
+      name="terme"
+      placeholder={placeholder}
       style={{
         width: "100%",
       }}
+      type="search"
     />
     <button
       className="fr-btn"
       title="Rechercher"
-      value="submit"
       type="submit"
+      value="submit"
     />
   </div>
 );

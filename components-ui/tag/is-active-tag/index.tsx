@@ -2,8 +2,8 @@ import type React from "react";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { Tag } from "#components-ui/tag";
 import {
-  type ISTATUTDIFFUSION,
   estNonDiffusibleStrict,
+  type ISTATUTDIFFUSION,
 } from "#models/core/diffusion";
 import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import { formatDate } from "#utils/helpers";
@@ -44,12 +44,12 @@ const IsActiveTag: React.FC<{
   ) {
     return (
       <InformationTooltip
-        tabIndex={0}
         label="Nous n’avons pas les
     informations nécessaires pour savoir si cette structure est en activité
     ou si elle est fermée."
+        tabIndex={0}
       >
-        <EtatTag state={IETATADMINSTRATIF.INCONNU} size={size} />
+        <EtatTag size={size} state={IETATADMINSTRATIF.INCONNU} />
       </InformationTooltip>
     );
   }
@@ -57,15 +57,15 @@ const IsActiveTag: React.FC<{
   if (etatAdministratif === IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT) {
     return (
       <InformationTooltip
-        tabIndex={0}
         label="Cette structure est en sommeil ou présumée inactive. Elle est active du point de vue administratif mais tous ses établissements sont fermés. Elle n’a pas d’activité économique."
+        tabIndex={0}
       >
-        <EtatTag state={etatAdministratif} size={size} />
+        <EtatTag size={size} state={etatAdministratif} />
       </InformationTooltip>
     );
   }
 
-  return <EtatTag state={etatAdministratif} since={since || ""} size={size} />;
+  return <EtatTag since={since || ""} size={size} state={etatAdministratif} />;
 };
 
 export default IsActiveTag;

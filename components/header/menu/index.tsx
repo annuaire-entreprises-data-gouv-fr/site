@@ -10,8 +10,8 @@ import styles from "./styles.module.css";
 const Menu: React.FC<{
   session: ISession | null;
   useAgentCTA: boolean;
-}> = ({ session, useAgentCTA }) => {
-  return isLoggedIn(session) ? (
+}> = ({ session, useAgentCTA }) =>
+  isLoggedIn(session) ? (
     <div className={styles.menuLogout + " fr-link"} tabIndex={0}>
       <div>
         <Icon slug="accountLine">
@@ -31,11 +31,11 @@ const Menu: React.FC<{
         </Icon>
       </div>
       <FloatingModal
-        id="menu-modal"
         aria-modal="false"
-        elevation="low"
-        role="dialog"
         className={styles.dialog}
+        elevation="low"
+        id="menu-modal"
+        role="dialog"
       >
         <a
           aria-label="Gestion de mon compte agent public"
@@ -49,18 +49,18 @@ const Menu: React.FC<{
           </a>
         )}
         <a
-          target="_blank"
-          rel="nopener noreferer"
           aria-label="Documentation de l’espace agent public"
           href={constants.links.documentation.home}
+          rel="nopener noreferer"
+          target="_blank"
         >
           Consulter la documentation
         </a>
         <a
           aria-label="Canal Tchap"
           href={constants.links.tchap}
-          target="_blank"
           rel="nopener noreferer"
+          target="_blank"
         >
           Nous retrouver sur Tchap
         </a>
@@ -75,6 +75,5 @@ const Menu: React.FC<{
   ) : useAgentCTA ? (
     <EspaceAgentLink />
   ) : null;
-};
 
 export default Menu;

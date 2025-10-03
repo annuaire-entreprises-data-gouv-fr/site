@@ -1,7 +1,7 @@
 import {
-  type ISTATUTDIFFUSION,
   estDiffusible,
   estNonDiffusibleProtected,
+  type ISTATUTDIFFUSION,
 } from "#models/core/diffusion";
 import { Tag } from "..";
 

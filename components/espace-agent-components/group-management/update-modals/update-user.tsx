@@ -1,7 +1,10 @@
-import type { IRolesDataRoles, IRolesDataUser } from "#clients/roles-data/interface";
+import { useState } from "react";
+import type {
+  IRolesDataRoles,
+  IRolesDataUser,
+} from "#clients/roles-data/interface";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
 import httpClient from "#utils/network";
-import { useState } from "react";
 
 export default function UpdateUserSelect({
   user,
@@ -18,8 +21,8 @@ export default function UpdateUserSelect({
   const [loading, setLoading] = useState(false);
   const [optimisticRoleId, setOptimisticRoleId] = useState<number | null>(null);
 
-  const postUpdateUser = async (roleId: number) => {
-    return await httpClient<IRolesDataUser>({
+  const postUpdateUser = async (roleId: number) =>
+    await httpClient<IRolesDataUser>({
       url: `/api/groups/${groupId}/update-user`,
       method: "POST",
       headers: {
@@ -27,7 +30,6 @@ export default function UpdateUserSelect({
       },
       data: JSON.stringify({ userEmail: user.email, roleId }),
     });
-  };
 
   const handleUpdate = async (roleId: number) => {
     setLoading(true);
@@ -62,9 +64,9 @@ export default function UpdateUserSelect({
     <>
       <select
         className="fr-select"
-        value={optimisticRoleId ?? user.role_id}
-        onChange={(e) => handleUpdate(parseInt(e.target.value))}
         disabled={loading}
+        onChange={(e) => handleUpdate(parseInt(e.target.value))}
+        value={optimisticRoleId ?? user.role_id}
       >
         {roles.map((role) => (
           <option key={role.id} value={role.id}>

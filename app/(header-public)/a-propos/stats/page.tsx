@@ -1,8 +1,8 @@
-import { type IMatomoStats, clientMatomoStats } from "#clients/matomo";
+import type { Metadata } from "next";
+import { clientMatomoStats, type IMatomoStats } from "#clients/matomo";
 import { NpsStats } from "#components/stats/nps";
 import { TraficStats } from "#components/stats/trafic";
 import { UsageStats } from "#components/stats/usage";
-import type { Metadata } from "next";
 
 export const dynamic = "force-static";
 export const revalidate = 14400; // 4 * 3600 = 4 hours;
@@ -51,8 +51,8 @@ export default async function StatsPage() {
       <h2>Comment est utilisé l’Annuaire des Entreprises ?</h2>
       <UsageStats
         copyPasteAction={copyPasteAction}
-        redirectedSiren={redirectedSiren}
         mostCopied={mostCopied}
+        redirectedSiren={redirectedSiren}
       />
       <h2>Satisfaction des utilisateurs</h2>
       <NpsStats monthlyNps={monthlyNps} />

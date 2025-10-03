@@ -17,19 +17,17 @@ export type IAPIEntrepriseConformiteFiscale = IAPIEntrepriseResponse<{
 export const clientApiEntrepriseConformiteFiscale = async (
   siren: Siren,
   useCase?: UseCase
-) => {
-  return await clientAPIEntreprise<
-    IAPIEntrepriseConformiteFiscale,
-    IConformite
-  >(routes.apiEntreprise.conformite.fiscale(siren), mapToDomainObject, {
-    useCase,
-  });
-};
+) =>
+  await clientAPIEntreprise<IAPIEntrepriseConformiteFiscale, IConformite>(
+    routes.apiEntreprise.conformite.fiscale(siren),
+    mapToDomainObject,
+    {
+      useCase,
+    }
+  );
 
-const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => {
-  return {
-    url: response.data.document_url,
-    isValid: true,
-    label: "Attestation fiscale",
-  };
-};
+const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => ({
+  url: response.data.document_url,
+  isValid: true,
+  label: "Attestation fiscale",
+});

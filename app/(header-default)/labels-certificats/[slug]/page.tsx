@@ -1,4 +1,5 @@
-import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import AlimConfianceSection from "app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/alim-confiance/section";
+import type { Metadata } from "next";
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
@@ -19,6 +20,7 @@ import { QualibatSection } from "#components/protected-certificates/qualibat-sec
 import { QualifelecSection } from "#components/protected-certificates/qualifelec-section";
 import Title from "#components/title-section";
 import { FICHE } from "#components/title-section/tabs";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import {
   ApplicationRights,
   hasRights,
@@ -33,8 +35,6 @@ import extractParamsAppRouter, {
   type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import AlimConfianceSection from "app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/alim-confiance/section";
-import type { Metadata } from "next";
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -90,8 +90,8 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
       <div className="content-container">
         <Title
           ficheType={FICHE.CERTIFICATS}
-          uniteLegale={uniteLegale}
           session={session}
+          uniteLegale={uniteLegale}
         />
         {!checkHasLabelsAndCertificates(uniteLegale) &&
           !hasRights(session, ApplicationRights.protectedCertificats) && (
@@ -107,9 +107,9 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
         {estRge && (
           <CertificationsRGESection
-            uniteLegale={uniteLegale}
             certificationsRGE={rge}
             session={session}
+            uniteLegale={uniteLegale}
           />
         )}
         {hasRights(session, ApplicationRights.protectedCertificats) && (
@@ -131,15 +131,15 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
           />
         )}
         {estBio && (
-          <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
+          <CertificationsBioSection bio={bio} uniteLegale={uniteLegale} />
         )}
         {estAchatsResponsables && <LabelAchatsResponsables />}
         {estPatrimoineVivant && <LabelPatrimoineVivant />}
         {estAlimConfiance && (
-          <AlimConfianceSection uniteLegale={uniteLegale} session={session} />
+          <AlimConfianceSection session={session} uniteLegale={uniteLegale} />
         )}
         {bilanGesRenseigne && (
-          <BilanGesSection uniteLegale={uniteLegale} session={session} />
+          <BilanGesSection session={session} uniteLegale={uniteLegale} />
         )}
       </div>
     </>

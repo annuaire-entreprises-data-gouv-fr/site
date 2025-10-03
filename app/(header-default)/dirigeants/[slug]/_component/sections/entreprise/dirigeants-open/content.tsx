@@ -1,5 +1,5 @@
-import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
 import { FullTable } from "#components/table/full";
+import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
 import type { IUniteLegale } from "#models/core/types";
 import type {
   IDirigeantsWithMetadata,
@@ -29,7 +29,7 @@ export default function DirigeantsContent({
       if (dirigeant.siren) {
         const defaultDenom = dirigeant.denomination || dirigeant.siren;
         infos.push(
-          <a key={dirigeant.siren} href={`/dirigeants/${dirigeant.siren}`}>
+          <a href={`/dirigeants/${dirigeant.siren}`} key={dirigeant.siren}>
             → voir les dirigeants de {defaultDenom}
           </a>
         );
@@ -52,10 +52,10 @@ export default function DirigeantsContent({
 
   return (
     <FullTable
-      head={["Role", "Details", "Action"]}
       body={dirigeants.data
         .sort(sortDirigeants)
         .map((dirigeant) => formatDirigeant(dirigeant))}
+      head={["Role", "Details", "Action"]}
     />
   );
 }

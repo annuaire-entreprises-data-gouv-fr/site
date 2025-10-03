@@ -25,8 +25,8 @@ export function UniteLegalePageLink({ uniteLegale, href, siteName }: IProp) {
   return (
     <>
       <a
-        href={href}
         aria-label={`Voir ${linkLabel}${siteDescription}`}
+        href={href}
         rel="noreferrer noopener"
         target="_blank"
       >

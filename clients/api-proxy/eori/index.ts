@@ -8,8 +8,7 @@ import { clientAPIProxy } from "../client";
  * Call EORI to validate a French EORI number
  * @param siret
  */
-export const clientEORI = async (siret: Siret): Promise<IEORIValidation> => {
-  return await clientAPIProxy<IEORIValidation>(routes.proxy.eori(siret), {
+export const clientEORI = async (siret: Siret): Promise<IEORIValidation> =>
+  await clientAPIProxy<IEORIValidation>(routes.proxy.eori(siret), {
     timeout: constants.timeout.XXL,
   });
-};

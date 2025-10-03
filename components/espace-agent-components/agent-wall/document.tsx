@@ -1,7 +1,7 @@
+import type { PropsWithChildren } from "react";
 import routes from "#clients/routes";
 import { estDiffusible } from "#models/core/diffusion";
 import type { IUniteLegale } from "#models/core/types";
-import type { PropsWithChildren } from "react";
 import AgentWall from ".";
 
 const AgentWallDocuments: React.FC<
@@ -13,7 +13,6 @@ const AgentWallDocuments: React.FC<
 > = ({ uniteLegale, id, title }) => (
   <AgentWall
     id={id}
-    title={title}
     modalFooter={
       estDiffusible(uniteLegale) ? (
         <>
@@ -27,6 +26,7 @@ const AgentWallDocuments: React.FC<
         </>
       ) : undefined
     }
+    title={title}
   />
 );
 

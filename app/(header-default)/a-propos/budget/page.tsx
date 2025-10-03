@@ -1,6 +1,6 @@
-import TextWrapper from "#components-ui/text-wrapper";
-import { FullTable } from "#components/table/full";
 import type { Metadata } from "next";
+import { FullTable } from "#components/table/full";
+import TextWrapper from "#components-ui/text-wrapper";
 
 export const metadata: Metadata = {
   title: "Budget de l’Annuaire des Entreprises",
@@ -28,7 +28,7 @@ export default function Budget() {
         <ul>
           <li>
             le projet est financé en majorité par la{" "}
-            <a href="https://numerique.gouv.fr/" target="_blank" rel="noopener">
+            <a href="https://numerique.gouv.fr/" rel="noopener" target="_blank">
               Direction Interministérielle du Numérique (DINUM)
             </a>{" "}
             au titre de ses missions d’innovation, d’ouverture et de circulation
@@ -42,7 +42,6 @@ export default function Budget() {
         <h2>Dépenses</h2>
         <p>Répartition des dépenses effectuées :</p>
         <FullTable
-          head={["Poste de dépense", "2021", "2022", "2023", "2024"]}
           body={[
             [
               "Développement",
@@ -64,6 +63,7 @@ export default function Budget() {
               <strong>800 000 €</strong>,
             ],
           ]}
+          head={["Poste de dépense", "2021", "2022", "2023", "2024"]}
         ></FullTable>
         <p>
           <strong>NB :</strong> contrairement aux entreprises du secteur privé,
@@ -78,13 +78,6 @@ export default function Budget() {
           statistiques 2024 sont des estimations) :
         </p>
         <FullTable
-          head={[
-            "Mesure d’impact pour le grand public",
-            "2021",
-            "2022",
-            "2023",
-            "2024",
-          ]}
           body={[
             [
               "Fiches “entreprise” consultées",
@@ -103,6 +96,13 @@ export default function Budget() {
             ],
             ["・€ / visiteur unique", "1,2 €", "0,45 €", "0,15 €", "0,06 €"],
           ]}
+          head={[
+            "Mesure d’impact pour le grand public",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+          ]}
         ></FullTable>
         <br />
         <p>
@@ -117,12 +117,12 @@ export default function Budget() {
           .
         </p>
         <FullTable
-          head={["Mesure d’impact pour les agents publics", "2024"]}
           body={[
             ["Fiches “entreprise” consultées par des agents", "728 000"],
             ["Agents publics uniques", "21 000"],
             ["・€ / agent public / mois", "3,17 €"],
           ]}
+          head={["Mesure d’impact pour les agents publics", "2024"]}
         ></FullTable>
         <p>
           Le détail de nos mesures d’impact est disponible sur notre{" "}

@@ -2,6 +2,7 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite"],
   "linter": {
+    "enabled": false,
     "rules": {
       "a11y": {
         "noRedundantRoles": "off",

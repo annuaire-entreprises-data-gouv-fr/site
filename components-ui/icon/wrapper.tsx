@@ -23,7 +23,7 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
     console.error(`Error in <Icon/> : ${slug} icon does not exists`);
   }
   return (
-    <span id={id} className={styles.icon + " " + className}>
+    <span className={styles.icon + " " + className} id={id}>
       <span
         style={{
           height: size + "px",

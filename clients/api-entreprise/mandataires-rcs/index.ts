@@ -1,5 +1,9 @@
 import routes from "#clients/routes";
-import type { IDirigeants, IEtatCivil, IPersonneMorale } from "#models/rne/types";
+import type {
+  IDirigeants,
+  IEtatCivil,
+  IPersonneMorale,
+} from "#models/rne/types";
 import {
   formatFirstNames,
   formatLastName,
@@ -38,17 +42,16 @@ export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseMandatairesRCS = async (siren: Siren) => {
-  return await clientAPIEntreprise<IAPIEntrepriseMandatairesRCS, IDirigeants>(
+export const clientApiEntrepriseMandatairesRCS = async (siren: Siren) =>
+  await clientAPIEntreprise<IAPIEntrepriseMandatairesRCS, IDirigeants>(
     routes.apiEntreprise.mandatairesRCS(siren),
     mapToDomainObject
   );
-};
 
 const mapToDomainObject = (
   response: IAPIEntrepriseMandatairesRCS
-): IDirigeants => {
-  return response.data.map(({ data: dirigeant }) => {
+): IDirigeants =>
+  response.data.map(({ data: dirigeant }) => {
     if (dirigeant.type === "personne_physique") {
       const { prenom, prenoms } = formatFirstNames(dirigeant.prenom, " ");
 
@@ -70,4 +73,3 @@ const mapToDomainObject = (
       role: formatRole(dirigeant.fonction),
     } as IPersonneMorale;
   });
-};

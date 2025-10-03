@@ -1,8 +1,8 @@
-import { LogoAnnuaireWithEasterEgg } from "#components-ui/logo-annuaire/logo-with-easter-egg";
+import type { Metadata } from "next";
 import Favourites from "#components/favourites";
 import SearchBar from "#components/search-bar";
 import StructuredDataSearchAction from "#components/structured-data/search";
-import type { Metadata } from "next";
+import { LogoAnnuaireWithEasterEgg } from "#components-ui/logo-annuaire/logo-with-easter-egg";
 
 export const metadata: Metadata = {
   title:
@@ -21,14 +21,14 @@ export default function IndexPage() {
       <StructuredDataSearchAction />
       <div className="layout-center">
         <form
+          action={"/rechercher"}
+          id="search-bar-form"
+          method="get"
           style={{
             marginBottom: "16vh",
             marginTop: "11vh",
             maxWidth: "900px",
           }}
-          id="search-bar-form"
-          action={"/rechercher"}
-          method="get"
         >
           <LogoAnnuaireWithEasterEgg />
           <h2 style={{ textAlign: "center", marginTop: "30px" }}>
@@ -45,9 +45,9 @@ export default function IndexPage() {
             }}
           >
             <SearchBar
-              placeholder="Nom, adresse, n° SIRET/SIREN..."
-              defaultValue=""
               autoFocus={true}
+              defaultValue=""
+              placeholder="Nom, adresse, n° SIRET/SIREN..."
             />
           </div>
 

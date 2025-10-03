@@ -42,12 +42,10 @@ export const createDefaultIndicateursFinanciersWithDGFiP = (
   type: string,
   dateClotureExercice: string,
   CADGFiP: number
-): IIndicateursFinanciers => {
-  return {
-    confidentiality: "",
-    year,
-    type,
-    dateClotureExercice,
-    chiffreAffairesDGFiP: CADGFiP,
-  };
-};
+): IIndicateursFinanciers => ({
+  confidentiality: "",
+  year,
+  type,
+  dateClotureExercice,
+  chiffreAffairesDGFiP: CADGFiP,
+});

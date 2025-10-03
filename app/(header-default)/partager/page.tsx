@@ -1,7 +1,7 @@
-import { Icon } from "#components-ui/icon/wrapper";
-import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 import TextWrapper from "components-ui/text-wrapper";
 import type { Metadata } from "next";
+import { Icon } from "#components-ui/icon/wrapper";
+import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 
 export const metadata: Metadata = {
   title: "Réutiliser ou partager l’Annuaire des Entreprises",
@@ -68,17 +68,17 @@ export default function PartagerPage() {
           </p>
           <p>Le lien est disponible en deux couleurs :</p>
           <iframe
-            width="300"
             height="70"
-            style={{ border: "none", maxWidth: "100%" }}
             src={`${getBaseUrl()}/api/share/button/510973431`}
+            style={{ border: "none", maxWidth: "100%" }}
+            width="300"
           ></iframe>
           <div />
           <iframe
-            width="300"
             height="70"
-            style={{ border: "none", maxWidth: "100%" }}
             src={`${getBaseUrl()}/api/share/button/510973431?light=true`}
+            style={{ border: "none", maxWidth: "100%" }}
+            width="300"
           ></iframe>
           <h3>Comment ajouter un lien sur mon site ?</h3>
           <p>
@@ -129,9 +129,9 @@ export default function PartagerPage() {
           <p>
             Vous pouvez générer un lien{" "}
             <a
-              target="_blank"
-              rel="noreferrer noopener"
               href="https://fr.wikipedia.org/wiki/Code_QR"
+              rel="noreferrer noopener"
+              target="_blank"
             >
               QR code
             </a>
@@ -188,9 +188,9 @@ export default function PartagerPage() {
           </p>
           <div>
             <img
-              style={{ width: "100%" }}
               alt="exemple de liste de moteurs de recherche"
               src="/images/Browser_example.png"
+              style={{ width: "100%" }}
             />
           </div>
           <h3>Comment faire ?</h3>

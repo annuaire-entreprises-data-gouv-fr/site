@@ -4,14 +4,12 @@ import { Exception } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
 import type { NextPageWithLayout } from "./_app";
 
-const ServerError: NextPageWithLayout = () => {
-  return (
-    <>
-      <Meta title="Cette page ne fonctionne pas" noIndex={true} />
-      <ServerErrorExplanations />
-    </>
-  );
-};
+const ServerError: NextPageWithLayout = () => (
+  <>
+    <Meta noIndex={true} title="Cette page ne fonctionne pas" />
+    <ServerErrorExplanations />
+  </>
+);
 
 ServerError.getInitialProps = (...args) => {
   // log as JSON in order to be parse by Kibana

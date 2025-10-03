@@ -1,8 +1,8 @@
-import { PrintNever } from "#components-ui/print-visibility";
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from "#components/badges-section/labels-and-certificates";
+import { PrintNever } from "#components-ui/print-visibility";
 import {
   ApplicationRights,
   hasRights,
@@ -143,9 +143,9 @@ export const Tabs: React.FC<{
               <TabLink
                 active={currentFicheType === ficheType}
                 href={path || `${pathPrefix}${uniteLegale.siren}`}
+                key={label}
                 label={label}
                 noFollow={noFollow}
-                key={label}
                 width={width}
               />
             )

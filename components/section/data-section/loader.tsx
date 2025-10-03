@@ -1,10 +1,10 @@
 "use client";
+import { useTimeout } from "hooks/use-timeout";
 import { Info } from "#components-ui/alerts";
 import { FadeIn } from "#components-ui/animation/fade-in";
 import { HeightTransition } from "#components-ui/animation/height-transition";
 import { Loader } from "#components-ui/loader";
 import { administrationsMetaData } from "#models/administrations";
-import { useTimeout } from "hooks/use-timeout";
 import type { ISectionProps } from "..";
 import style from "./style.module.css";
 

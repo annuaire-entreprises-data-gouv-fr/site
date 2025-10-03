@@ -1,11 +1,11 @@
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import AgentNavigation from "#components/espace-agent-components/agent-navigation";
 import { GroupManagement } from "#components/espace-agent-components/group-management";
 import { Groups } from "#models/authentication/group/groups";
 import { rolesMetadataStore } from "#models/authentication/group/roles";
 import { pluralize } from "#utils/helpers";
 import getSession from "#utils/server-side-helper/app/get-session";
-import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Vos groupes au sein de l’Annuaire des Entreprises",
@@ -42,8 +42,8 @@ const MesGroupesPage = async () => {
       </p>
       <GroupManagement
         currentUserEmail={session!.user!.email}
-        roles={roles}
         initialGroups={groups}
+        roles={roles}
       />
     </>
   );

@@ -1,13 +1,13 @@
 "use client";
 
+import { useFetchBilanGes } from "hooks/fetch/bilan-ges";
+import { useState } from "react";
 import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
-import { useFetchBilanGes } from "hooks/fetch/bilan-ges";
-import { useState } from "react";
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -28,8 +28,6 @@ export default function BilanGesSection({ uniteLegale, session }: IProps) {
 
   return (
     <AsyncDataSectionClient
-      title="Bilans GES (Gaz à Effet de Serre)"
-      sources={[EAdministration.ADEME]}
       data={bilanGes}
       id="bilan-ges"
       notFoundInfo={
@@ -38,6 +36,8 @@ export default function BilanGesSection({ uniteLegale, session }: IProps) {
           structure.
         </p>
       }
+      sources={[EAdministration.ADEME]}
+      title="Bilans GES (Gaz à Effet de Serre)"
     >
       {(bilanGes) => {
         const { total } = bilanGes.meta;
@@ -57,18 +57,14 @@ export default function BilanGesSection({ uniteLegale, session }: IProps) {
 
             {total > pageSize && (
               <LocalPageCounter
-                currentPage={currentPage}
-                totalPages={Math.ceil(total / pageSize)}
-                onPageChange={setCurrentPage}
                 compact={true}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+                totalPages={Math.ceil(total / pageSize)}
               />
             )}
 
             <FullTable
-              head={[
-                "Indicateur",
-                ...sortedBilans.map((bilan) => bilan.anneeReporting.toString()),
-              ]}
               body={[
                 [
                   "Total des émissions (tCO2e)",
@@ -77,14 +73,18 @@ export default function BilanGesSection({ uniteLegale, session }: IProps) {
                   ),
                 ],
               ]}
+              head={[
+                "Indicateur",
+                ...sortedBilans.map((bilan) => bilan.anneeReporting.toString()),
+              ]}
             />
 
             {total > pageSize && (
               <LocalPageCounter
-                currentPage={currentPage}
-                totalPages={Math.ceil(total / pageSize)}
-                onPageChange={setCurrentPage}
                 compact={true}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+                totalPages={Math.ceil(total / pageSize)}
               />
             )}
           </>

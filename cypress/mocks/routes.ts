@@ -1,5 +1,5 @@
-import routes from "#clients/routes";
 import { http } from "msw";
+import routes from "#clients/routes";
 import { annuaireServicePublicHandler } from "./handlers/annuaire-service-public";
 import { apiBioHandler } from "./handlers/api-bio";
 import { apiDataGouvEssHandler } from "./handlers/api-data-gouv-ess";

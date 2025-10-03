@@ -2,7 +2,7 @@ import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
 import type { IDataAssociation } from "#models/association/types";
 import constants from "#models/constants";
-import { type IdRna, type Siren, formatAdresse } from "#utils/helpers";
+import { formatAdresse, type IdRna, type Siren } from "#utils/helpers";
 import { clientAPIProxy } from "../client";
 import type { IAssociationResponse } from "./types";
 
@@ -116,16 +116,14 @@ const mapToDomainObject = (
           charges = 0,
           resultat = 0,
           annee,
-        }) => {
-          return {
-            charges,
-            resultat,
-            subv,
-            dons,
-            produits,
-            year: annee,
-          };
-        }
+        }) => ({
+          charges,
+          resultat,
+          subv,
+          dons,
+          produits,
+          year: annee,
+        })
       )
       .sort((c, b) => c.year - b.year),
   };

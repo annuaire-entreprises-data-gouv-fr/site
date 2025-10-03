@@ -1,10 +1,10 @@
 "use client";
 import {
   Children,
-  type PropsWithChildren,
-  type ReactNode,
   cloneElement,
   isValidElement,
+  type PropsWithChildren,
+  type ReactNode,
   useEffect,
   useId,
   useState,
@@ -73,22 +73,24 @@ function InformationTooltip({
   return (
     <>
       <span
-        onFocus={handleFocus}
-        onBlur={handleBlur}
         className={style.wrapper}
-        tabIndex={tabIndex}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
           cursor: cursor,
           display: inlineBlock ? "inline-block" : "block",
         }}
+        tabIndex={tabIndex}
       >
         <span>{children}</span>
         <span
           className={`${style.tooltip} ${style[horizontalOrientation]} ${
             style[verticalOrientation]
           } ${displayed ? style.displayed : ""}`}
+          id={id}
+          role="tooltip"
           style={{
             width: `${width}px`,
             left: left || computeLeft(horizontalOrientation, width),
@@ -97,8 +99,6 @@ function InformationTooltip({
             borderBottomLeftRadius:
               horizontalOrientation === "left" ? "0" : "5px",
           }}
-          id={id}
-          role="tooltip"
         >
           {label}
         </span>

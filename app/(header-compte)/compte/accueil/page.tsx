@@ -1,9 +1,11 @@
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import AgentNavigation from "#components/espace-agent-components/agent-navigation";
+import { FullTable } from "#components/table/full";
 import { Warning } from "#components-ui/alerts";
 import { Badge } from "#components-ui/badge";
 import ButtonLink from "#components-ui/button";
 import FullWidthContainer from "#components-ui/container";
-import AgentNavigation from "#components/espace-agent-components/agent-navigation";
-import { FullTable } from "#components/table/full";
 import {
   ApplicationRights,
   hasRights,
@@ -11,8 +13,6 @@ import {
 import constants from "#models/constants";
 import { changelogData } from "#models/historique-modifications";
 import getSession from "#utils/server-side-helper/app/get-session";
-import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 
 const lastChangelog = changelogData[0];
 
@@ -50,7 +50,7 @@ const CompteAgentAccueil = async () => {
             Consultez la liste des données
           </ButtonLink>
         </div>
-        <img src="/images/lp-agent/secure-folder 1.svg" alt="" />
+        <img alt="" src="/images/lp-agent/secure-folder 1.svg" />
       </section>
       <FullWidthContainer
         style={{
@@ -71,7 +71,7 @@ const CompteAgentAccueil = async () => {
                   </p>
                 </div>
                 <div className="fr-card__footer">
-                  <ButtonLink to="/historique-des-modifications" alt small>
+                  <ButtonLink alt small to="/historique-des-modifications">
                     Voir toutes les nouveautés
                   </ButtonLink>
                 </div>
@@ -100,9 +100,9 @@ const CompteAgentAccueil = async () => {
                 </div>
                 <div className="fr-card__footer">
                   <ButtonLink
-                    target="_blank"
                     alt
                     small
+                    target="_blank"
                     to={constants.links.documentation.home}
                   >
                     Accéder à notre documentation
@@ -131,9 +131,9 @@ const CompteAgentAccueil = async () => {
                 <div className="fr-card__footer">
                   <ButtonLink
                     alt
-                    to={constants.links.tchap}
-                    target="_blank"
                     small
+                    target="_blank"
+                    to={constants.links.tchap}
                   >
                     Rejoindre le salon Tchap
                   </ButtonLink>
@@ -153,8 +153,8 @@ const CompteAgentAccueil = async () => {
             <br />
             <a
               href="https://roles.data.gouv.fr/ui/activation"
-              target="_blank"
               rel="noreferrer noopener"
+              target="_blank"
             >
               Activez votre compte
             </a>
@@ -167,18 +167,16 @@ const CompteAgentAccueil = async () => {
         </p>
 
         <FullTable
+          body={appRights.map(([a, b]) => [
+            a,
+            <Badge
+              backgroundColor="#ddd"
+              fontColor="#666"
+              icon={b ? "open" : "closed"}
+              label={b ? "Oui" : "Non"}
+            />,
+          ])}
           head={["Données", "Droits"]}
-          body={appRights.map(([a, b]) => {
-            return [
-              a,
-              <Badge
-                icon={b ? "open" : "closed"}
-                label={b ? "Oui" : "Non"}
-                backgroundColor="#ddd"
-                fontColor="#666"
-              />,
-            ];
-          })}
         />
       </div>
     </>

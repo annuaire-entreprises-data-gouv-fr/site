@@ -1,11 +1,13 @@
 "use client";
 
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import routes from "#clients/routes";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { FullTable } from "#components/table/full";
 import { Warning } from "#components-ui/alerts";
 import ButtonLink from "#components-ui/button";
 import FAQLink from "#components-ui/faq-link";
-import { AsyncDataSectionClient } from "#components/section/data-section/client";
-import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import {
@@ -16,8 +18,6 @@ import {
 import type { IDocumentsRNE } from "#models/rne/types";
 import { formatDateLong, pluralize } from "#utils/helpers";
 import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { BilanTypeTag } from "../bilan-tag";
 
 const NoBilans = () => (
@@ -26,7 +26,6 @@ const NoBilans = () => (
 
 const BilansTable = ({ bilans }: { bilans: IDocumentsRNE["bilans"] }) => (
   <FullTable
-    head={["Date de dépôt", "Année fiscale", "Type de bilan", "Lien"]}
     body={bilans.map((a) => [
       formatDateLong(a.dateDepot),
       getFiscalYear(a.dateCloture),
@@ -40,6 +39,7 @@ const BilansTable = ({ bilans }: { bilans: IDocumentsRNE["bilans"] }) => (
         Télécharger
       </ButtonLink>,
     ])}
+    head={["Date de dépôt", "Année fiscale", "Type de bilan", "Lien"]}
   />
 );
 
@@ -57,11 +57,9 @@ export default function BilansDocumentsSocieteProtected({
   );
   return (
     <AsyncDataSectionClient
-      title="Bilans au format PDF"
+      data={documents}
       id="bilans-pdf"
       isProtected
-      sources={[EAdministration.INPI]}
-      data={documents}
       notFoundInfo={
         <>
           {(isAssociation(uniteLegale) || isServicePublic(uniteLegale)) && (
@@ -76,6 +74,8 @@ export default function BilansDocumentsSocieteProtected({
           <NoBilans />
         </>
       }
+      sources={[EAdministration.INPI]}
+      title="Bilans au format PDF"
     >
       {(documents) =>
         documents.bilans?.length === 0 ? (
@@ -106,8 +106,8 @@ export default function BilansDocumentsSocieteProtected({
                 <div>
                   Cette entreprise a notamment déclaré des{" "}
                   <FAQLink
-                    tooltipLabel="bilans consolidés"
                     to="/faq/donnees-financieres#quest-ce-quun-bilan-consolide"
+                    tooltipLabel="bilans consolidés"
                   >
                     Qu’est-ce qu’un bilan consolidé ?
                   </FAQLink>

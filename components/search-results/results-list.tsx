@@ -1,12 +1,12 @@
+import type React from "react";
+import UniteLegaleBadge from "#components/unite-legale-badge";
 import { Icon } from "#components-ui/icon/wrapper";
 import IsActiveTag from "#components-ui/tag/is-active-tag";
-import UniteLegaleBadge from "#components/unite-legale-badge";
 import { estActif } from "#models/core/etat-administratif";
 import { isCollectiviteTerritoriale } from "#models/core/types";
 import type { IDirigeants } from "#models/rne/types";
 import type { ISearchResult } from "#models/search";
 import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
-import type React from "react";
 import styles from "./style.module.css";
 
 type IProps = {
@@ -71,17 +71,17 @@ const ResultItem: React.FC<{
   return (
     <div className={styles["result-item"]}>
       <a
-        href={`/entreprise/${result.chemin}`}
-        key={result.siren}
         className="result-link no-style-link"
         data-siren={result.siren}
+        href={`/entreprise/${result.chemin}`}
+        key={result.siren}
       >
         <div className={styles["title"]}>
           <span>{`${result.nomComplet}`}</span>
           <UniteLegaleBadge
-            uniteLegale={result}
-            small
             defaultBadgeShouldBeHid
+            small
+            uniteLegale={result}
           />
           {!estActif(result) && (
             <IsActiveTag

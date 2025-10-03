@@ -1,10 +1,10 @@
+import { useState } from "react";
 import type { IRolesDataUser } from "#clients/roles-data/interface";
 import { Warning } from "#components-ui/alerts";
 import ButtonLink from "#components-ui/button";
 import { FullScreenModal } from "#components-ui/full-screen-modal";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
 import httpClient from "#utils/network";
-import { useState } from "react";
 
 export default function DeleteUserButton({
   isCurrentUser,
@@ -67,12 +67,12 @@ export default function DeleteUserButton({
   return (
     <>
       <ButtonLink
-        key={`remove-${user.email}`}
-        type="button"
-        aria-label={`Supprimer ${user.email}`}
-        onClick={openConfirmation}
-        disabled={loading || (isCurrentUser && adminCount === 1)}
         alt
+        aria-label={`Supprimer ${user.email}`}
+        disabled={loading || (isCurrentUser && adminCount === 1)}
+        key={`remove-${user.email}`}
+        onClick={openConfirmation}
+        type="button"
       >
         <span aria-hidden="true">Supprimer</span>
       </ButtonLink>
@@ -101,10 +101,10 @@ export default function DeleteUserButton({
           </div>
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
-            <ButtonLink onClick={handleRemove(user.email)} disabled={loading}>
+            <ButtonLink disabled={loading} onClick={handleRemove(user.email)}>
               {loading ? "Suppression..." : "Confirmer la suppression"}
             </ButtonLink>
-            <ButtonLink alt onClick={closeConfirmation} disabled={loading}>
+            <ButtonLink alt disabled={loading} onClick={closeConfirmation}>
               Annuler
             </ButtonLink>
           </div>

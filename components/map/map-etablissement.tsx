@@ -1,10 +1,10 @@
 "use client";
 
+import { useFetchGeoLoc } from "hooks/fetch/geoloc";
+import maplibregl, { type Map } from "maplibre-gl";
 import constants from "#models/constants";
 import type { IEtablissement } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
-import { useFetchGeoLoc } from "hooks/fetch/geoloc";
-import maplibregl, { type Map } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef } from "react";
 import { hasWebGLSupport } from "./has-web-gl";
@@ -61,8 +61,8 @@ export function MapEtablissement({
 
   return (
     <div
-      ref={mapContainer}
       className="map layout-center"
+      ref={mapContainer}
       style={{
         width: "100%",
         zIndex: "0",

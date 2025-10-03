@@ -13,7 +13,7 @@ const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
     <p>En attendant, vous pouvez toujours :</p>
     <ul className="fr-btns-group fr-btns-group--inline-md">
       <li>
-        <ButtonLink to="/faq" alt>
+        <ButtonLink alt to="/faq">
           Consulter notre page d’aide
         </ButtonLink>
       </li>

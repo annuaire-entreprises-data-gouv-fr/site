@@ -1,9 +1,9 @@
 import type React from "react";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
 import FAQLink from "#components-ui/faq-link";
 import { SimpleSeparator } from "#components-ui/horizontal-separator";
 import InformationTooltip from "#components-ui/information-tooltip";
-import { DataSection } from "#components/section/data-section";
-import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
 import type { IEgapro } from "#models/certifications/egapro";
@@ -15,6 +15,7 @@ export const EgaproSection: React.FC<{
 
   return (
     <DataSection
+      data={egapro}
       id="egalite-professionnelle"
       notFoundInfo={
         <>
@@ -22,9 +23,8 @@ export const EgaproSection: React.FC<{
           <FAQEgapro /> pour cette entreprise.
         </>
       }
-      data={egapro}
-      title={sectionTitle}
       sources={[EAdministration.MTPEI]}
+      title={sectionTitle}
     >
       {(egapro) => {
         const body = getSectionBody(egapro);
@@ -40,8 +40,8 @@ export const EgaproSection: React.FC<{
               en 2023 sont celles de 2022).
             </p>
             <FullTable
-              head={["Année", ...egapro.index.indexYears]}
               body={body}
+              head={["Année", ...egapro.index.indexYears]}
             />
             {egapro.representation ? (
               <>
@@ -53,7 +53,6 @@ export const EgaproSection: React.FC<{
                   de direction&nbsp;:
                 </p>
                 <FullTable
-                  head={["Année", ...egapro.representation.years]}
                   body={[
                     [
                       "Femmes parmi les cadres dirigeants (%)",
@@ -80,6 +79,7 @@ export const EgaproSection: React.FC<{
                       ),
                     ],
                   ]}
+                  head={["Année", ...egapro.representation.years]}
                 />
               </>
             ) : null}
@@ -115,8 +115,8 @@ const getSectionBody = (egapro: IEgapro) => {
     [
       <strong>
         <FAQLink
-          tooltipLabel="Détails"
           to="https://egapro.travail.gouv.fr/aide-simulation"
+          tooltipLabel="Détails"
         >
           L’index est une synthèse des différents indicateurs ci-dessous
         </FAQLink>
@@ -169,8 +169,8 @@ const getColor = (note: number) => {
 
 const FAQEgapro = () => (
   <FAQLink
-    tooltipLabel={`index d’égalité professionnelle entre les femmes et les hommes.`}
     to="/faq/egapro-egalite-professionnelle-femme-homme"
+    tooltipLabel={`index d’égalité professionnelle entre les femmes et les hommes.`}
   >
     L’Index Egapro permet de mesurer l’égalité professionnelle entre les femmes
     et les hommes dans les entreprises de plus de 50 salariés.
@@ -179,8 +179,8 @@ const FAQEgapro = () => (
 
 const NC = () => (
   <InformationTooltip
-    tabIndex={0}
     label="Cette année là, cette structure n’était pas concernée par ce critère."
+    tabIndex={0}
   >
     <i>NC</i>
   </InformationTooltip>

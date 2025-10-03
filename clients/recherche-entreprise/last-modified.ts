@@ -1,6 +1,5 @@
-import { DataStore } from "#utils/data-store";
-
 import routes from "#clients/routes";
+import { DataStore } from "#utils/data-store";
 import { httpGet } from "#utils/network";
 
 const store = new DataStore<string>(

@@ -1,17 +1,17 @@
+import type { Metadata } from "next";
+import { Section } from "#components/section";
 import ButtonLink from "#components-ui/button";
 import { default as ButtonProConnect } from "#components-ui/button-pro-connect";
 import FullWidthContainer from "#components-ui/container";
 import { SimpleSeparator } from "#components-ui/horizontal-separator";
 import { Icon } from "#components-ui/icon/wrapper";
 import { Tag } from "#components-ui/tag";
-import { Section } from "#components/section";
 import { administrationsMetaData } from "#models/administrations";
 import { isLoggedIn } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
 import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import type { Metadata } from "next";
 import styles from "./style.module.css";
 
 export const metadata: Metadata = {
@@ -55,13 +55,13 @@ const LandingPageAgent = async (props: AppRouterProps) => {
             isLoggedInMessage(session)
           ) : (
             <ButtonProConnect
+              event="BTN_LP_HERO"
               noFootLink
               shouldRedirectToReferer
-              event="BTN_LP_HERO"
             />
           )}
         </div>
-        <img src="/images/lp-agent/secure-folder 1.svg" alt="" />
+        <img alt="" src="/images/lp-agent/secure-folder 1.svg" />
       </section>
       <FullWidthContainer>
         <h2>
@@ -96,7 +96,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
             </Section>
           </div>
           <div className="fr-col-12  fr-col-md-8">
-            <Section title="Espace agent public" isProtected>
+            <Section isProtected title="Espace agent public">
               <div className="fr-grid-row fr-grid-row--gutters">
                 <div className="fr-col-12  fr-col-md-6">
                   <i>Accessible aux administrations, sans conditions</i>
@@ -164,8 +164,8 @@ const LandingPageAgent = async (props: AppRouterProps) => {
                   isLoggedInMessage(session)
                 ) : (
                   <ButtonProConnect
-                    shouldRedirectToReferer
                     event="BTN_LP_HERO"
+                    shouldRedirectToReferer
                   />
                 )}
               </div>
@@ -185,7 +185,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
               <Tag color="agent">
                 <Icon slug="lockFill">Écarter les risques de fraude</Icon>
               </Tag>
-              <img src="/images/lp-agent/illu_fraude.svg" alt="" />
+              <img alt="" src="/images/lp-agent/illu_fraude.svg" />
               <div>
                 <p>
                   J’ai directement accès aux informations des entreprises
@@ -202,7 +202,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
               <Tag color="agent">
                 <Icon slug="lockFill">Instruire un marché public</Icon>
               </Tag>
-              <img src="/images/lp-agent/illu_marchepublic.svg" alt="" />
+              <img alt="" src="/images/lp-agent/illu_marchepublic.svg" />
               <div>
                 <p>
                   Je dois vérifier que nos titulaires sont toujours à jour de
@@ -245,7 +245,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
             .sort((a, b) => a.long.localeCompare(b.long))
             .map(({ slug, long, logoType }) =>
               logoType && slug ? (
-                <img src={`/images/logos/${slug}.svg`} alt={long} key={slug} />
+                <img alt={long} key={slug} src={`/images/logos/${slug}.svg`} />
               ) : null
             )}
         </div>

@@ -2,6 +2,4 @@ import { HttpResponse, type HttpResponseResolver } from "msw";
 import rechercheEntrepriseIdccMetadata from "../../fixtures/recherche-entreprise-idcc-metadata.json";
 
 export const rechercheEntrepriseIdccMetadataHandler: HttpResponseResolver =
-  async ({ request }) => {
-    return HttpResponse.json(rechercheEntrepriseIdccMetadata);
-  };
+  async ({ request }) => HttpResponse.json(rechercheEntrepriseIdccMetadata);

@@ -11,9 +11,9 @@ export default function Summary(props: ISummaryProps) {
   }
   return (
     <nav
+      aria-labelledby="fr-summary-title"
       className="fr-summary"
       role="navigation"
-      aria-labelledby="fr-summary-title"
     >
       <p className="fr-summary__title" id="fr-summary-title">
         Sommaire

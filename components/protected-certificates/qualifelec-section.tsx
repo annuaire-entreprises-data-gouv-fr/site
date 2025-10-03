@@ -1,14 +1,14 @@
 "use client";
 
-import ButtonLink from "#components-ui/button";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { DataSectionClient } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
+import ButtonLink from "#components-ui/button";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import { formatDate, formatDateLong } from "#utils/helpers";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 
 export function QualifelecSection({
   uniteLegale,
@@ -24,17 +24,17 @@ export function QualifelecSection({
   );
   return (
     <DataSectionClient
-      title="Certificats Qualifelec"
+      data={qualifelec}
       id="qualifelec"
       isProtected
       notFoundInfo={
         <>
           Cette entreprise n’a pas de{" "}
           <a
-            target="_blank"
-            rel="noreferrer"
             aria-label="En savoir plus sur les certificats Qualifelec, nouvelle fenêtre"
             href="https://www.qualifelec.fr/pourquoi-choisir-une-entreprise-qualifelec/le-certificat-qualifelec-la-meilleure-des-recommandations/"
+            rel="noreferrer"
+            target="_blank"
           >
             certificat Qualifelec
           </a>
@@ -42,31 +42,23 @@ export function QualifelecSection({
         </>
       }
       sources={[EAdministration.QUALIFELEC]}
-      data={qualifelec}
+      title="Certificats Qualifelec"
     >
       {(qualifelec) => (
         <>
           <p>
             Cette entreprise possède un ou plusieurs{" "}
             <a
-              target="_blank"
-              rel="noreferrer"
               aria-label="En savoir plus sur les certificats Qualifelec, nouvelle fenêtre"
               href="https://www.qualifelec.fr/pourquoi-choisir-une-entreprise-qualifelec/le-certificat-qualifelec-la-meilleure-des-recommandations/"
+              rel="noreferrer"
+              target="_blank"
             >
               certificats Qualifelec
             </a>{" "}
             valides.
           </p>
           <FullTable
-            verticalAlign="top"
-            head={[
-              "N°",
-              "Qualification",
-              "Validité",
-              "Assurances",
-              "Certificat",
-            ]}
             body={qualifelec.map((c) => [
               c.numero,
               c.qualification.label,
@@ -85,15 +77,23 @@ export function QualifelecSection({
               </ul>,
 
               <ButtonLink
-                target="_blank"
                 alt
-                small
-                to={c.documentUrl}
                 ariaLabel="Télécharger le certificat Qualifelec, nouvelle fenêtre"
+                small
+                target="_blank"
+                to={c.documentUrl}
               >
                 Télécharger
               </ButtonLink>,
             ])}
+            head={[
+              "N°",
+              "Qualification",
+              "Validité",
+              "Assurances",
+              "Certificat",
+            ]}
+            verticalAlign="top"
           />
         </>
       )}

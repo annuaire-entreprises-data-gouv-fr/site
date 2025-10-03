@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import HiddenH1 from "#components/a11y-components/hidden-h1";
 import { NPSBanner } from "#components/banner/nps";
 import TempIncidentBanner from "#components/banner/temp-incident";
@@ -13,7 +14,6 @@ import SearchFilterParams, {
 } from "#models/search/search-filter-params";
 import { parseIntWithDefaultValue } from "#utils/helpers";
 import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Rechercher une entreprise, une administration ou une association",
@@ -42,11 +42,11 @@ const SearchResultPage = async (props: AppRouterProps) => {
       <NPSBanner />
       <TempIncidentBanner />
       <HeaderWithAdvancedSearch
-        useSearchBar={true}
+        currentSearchTerm={searchTerm}
+        searchParams={searchFilterParamsJSON}
         useAgentCTA={true}
         useMap={false}
-        searchParams={searchFilterParamsJSON}
-        currentSearchTerm={searchTerm}
+        useSearchBar={true}
       />
       <main className="fr-container">
         <StructuredDataSearchAction />
@@ -57,8 +57,8 @@ const SearchResultPage = async (props: AppRouterProps) => {
           ) : (
             <SearchResults
               results={results}
-              searchTerm={searchTerm}
               searchFilterParams={searchFilterParamsJSON}
+              searchTerm={searchTerm}
             />
           )}
         </div>

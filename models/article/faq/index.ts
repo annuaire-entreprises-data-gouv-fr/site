@@ -18,9 +18,8 @@ export const loadAllFaqArticlesByGroup = () => {
   return articlesByGroup;
 };
 
-export const getFaqArticle = (slug: string) => {
-  return allFaqArticles.find((article) => article.slug === slug);
-};
+export const getFaqArticle = (slug: string) =>
+  allFaqArticles.find((article) => article.slug === slug);
 
 export const getFaqArticlesByTag = (tagList: string[]): IFaqArticle[] => {
   const filteredArticles = new Set<IFaqArticle>();

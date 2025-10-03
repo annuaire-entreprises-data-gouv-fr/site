@@ -1,5 +1,5 @@
-import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
 import { FullTable } from "#components/table/full";
+import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
 import type { IUniteLegale } from "#models/core/types";
 import type {
   IDirigeantsWithMetadataMergedIGInpi,
@@ -7,8 +7,8 @@ import type {
   IPersonneMoraleMergedIGInpi,
 } from "#models/rne/types";
 import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
-import { sortDirigeants } from "../dirigeants-open/content";
 import DisambiguationTooltip from "../DisambiguationTooltip";
+import { sortDirigeants } from "../dirigeants-open/content";
 import EtatCivilInfos from "../EtatCivilInfos";
 import PersonneMoraleInfos from "../PersonneMoraleInfos";
 import RolesInfos from "../RolesInfos";
@@ -41,7 +41,7 @@ export default function DirigeantsContentProtected({
       if (dirigeant.siren) {
         const defaultDenom = dirigeant.denomination || dirigeant.siren;
         infos.push(
-          <a key={dirigeant.siren} href={`/dirigeants/${dirigeant.siren}`}>
+          <a href={`/dirigeants/${dirigeant.siren}`} key={dirigeant.siren}>
             → voir les dirigeants de {defaultDenom}
           </a>
         );
@@ -71,10 +71,10 @@ export default function DirigeantsContentProtected({
 
   return (
     <FullTable
-      head={["Role", "Details", "Action"]}
       body={dirigeants.data
         .sort(sortDirigeants)
         .map((dirigeant) => formatDirigeant(dirigeant))}
+      head={["Role", "Details", "Action"]}
     />
   );
 }

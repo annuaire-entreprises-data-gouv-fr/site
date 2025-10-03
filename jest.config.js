@@ -3,13 +3,12 @@ const { compilerOptions: baseTsConfig } = require("./tsconfig.json");
 
 // Take the paths from tsconfig automatically from base tsconfig.json
 // @link https://kulshekhar.github.io/ts-jest/docs/paths-mapping
-const getTsConfigBasePaths = () => {
-  return baseTsConfig.paths
+const getTsConfigBasePaths = () =>
+  baseTsConfig.paths
     ? pathsToModuleNameMapper(baseTsConfig.paths, {
         prefix: "<rootDir>/",
       })
     : {};
-};
 
 const config = {
   transform: {

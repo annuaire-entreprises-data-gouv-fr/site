@@ -1,17 +1,17 @@
 "use client";
 
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import MatomoEvent from "#components/matomo-event";
+import { CopyPaste } from "#components/table/copy-paste";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { Loader } from "#components-ui/loader";
-import MatomoEvent from "#components/matomo-event";
-import { CopyPaste } from "#components/table/copy-paste";
 import type { IUniteLegale } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
 import type { ITVAIntracommunautaire } from "#models/tva";
-import { type Siren, formatIntFr } from "#utils/helpers";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { formatIntFr, type Siren } from "#utils/helpers";
 
 const NoTVA = () => (
   <i>
@@ -57,7 +57,7 @@ const TVAInvalide = ({
 );
 
 const CopyCell = ({ number }: { number: string }) => (
-  <CopyPaste shouldRemoveSpace={true} id="tva-cell-result" label="TVA">
+  <CopyPaste id="tva-cell-result" label="TVA" shouldRemoveSpace={true}>
     {"FR" + formatIntFr(number)}
   </CopyPaste>
 );
@@ -99,7 +99,7 @@ const VerifyTVA: React.FC<{
     return (
       <>
         <InformationTooltip
-          tabIndex={0}
+          horizontalOrientation="left"
           label={
             <>
               Nous n’avons pas pu controler la validité de ce numéro car le
@@ -108,10 +108,10 @@ const VerifyTVA: React.FC<{
               assujettie à la TVA.
             </>
           }
-          horizontalOrientation="left"
           left="5px"
+          tabIndex={0}
         >
-          <Icon slug="errorFill" color="#df0a00">
+          <Icon color="#df0a00" slug="errorFill">
             <CopyCell number={tvaNumber} />
           </Icon>
         </InformationTooltip>
@@ -125,7 +125,7 @@ const VerifyTVA: React.FC<{
           <>
             {mayHaveMultipleTVANumber.currentlyActive ? (
               <InformationTooltip
-                tabIndex={0}
+                horizontalOrientation="left"
                 label={
                   <>
                     Attention, cette structure a plusieurs activités
@@ -138,10 +138,10 @@ const VerifyTVA: React.FC<{
                     ancienne.
                   </>
                 }
-                horizontalOrientation="left"
                 left="5px"
+                tabIndex={0}
               >
-                <Icon slug="lightbulbFill" color="#ffb300">
+                <Icon color="#ffb300" slug="lightbulbFill">
                   <CopyCell number={tva} />
                 </Icon>
               </InformationTooltip>
@@ -151,15 +151,15 @@ const VerifyTVA: React.FC<{
           </>
         ) : (
           <TVAInvalide
-            number={tvaNumber}
             multipleNum={mayHaveMultipleTVANumber.allTime}
+            number={tvaNumber}
           />
         )}
 
         {Math.random() < 0.0001 && (
           <MatomoEvent
-            category="tva"
             action={!!tva ? "valid" : "invalid"}
+            category="tva"
             name={siren}
           />
         )}
@@ -175,7 +175,7 @@ const TVACell: React.FC<{
     return <NoTVA />;
   }
 
-  return <VerifyTVA tva={uniteLegale.tva} siren={uniteLegale.siren} />;
+  return <VerifyTVA siren={uniteLegale.siren} tva={uniteLegale.tva} />;
 };
 
 export default TVACell;

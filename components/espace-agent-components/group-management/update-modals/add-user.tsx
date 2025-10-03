@@ -1,13 +1,13 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import type { IRolesDataUser } from "#clients/roles-data/interface";
+import { validateEmail } from "#components/espace-agent-components/helpers/form-validation";
 import ButtonLink from "#components-ui/button";
 import { FullScreenModal } from "#components-ui/full-screen-modal";
-import { validateEmail } from "#components/espace-agent-components/helpers/form-validation";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
 import type { IRolesDataGroup } from "#models/authentication/group/groups";
 import httpClient from "#utils/network";
-import { useEffect, useRef, useState } from "react";
 
 const MODAL_ID = "add-user";
 
@@ -133,14 +133,14 @@ export default function AddUserModal({
             </label>
             <div className="fr-input-wrap">
               <input
-                ref={inputRef}
+                aria-describedby={
+                  validationErrors.length > 0 ? `error-${group.id}` : undefined
+                }
                 className={`fr-input ${
                   validationErrors.length > 0 ? "fr-input--error" : ""
                 }`}
-                type="email"
+                disabled={loading}
                 id={`new-user-email-${group.id}`}
-                placeholder="email@exemple.fr"
-                value={inputEmail}
                 onChange={(e) => {
                   setInputEmail(e.target.value);
                   if (validationErrors.length > 0) {
@@ -152,16 +152,16 @@ export default function AddUserModal({
                     handleAddNewUser();
                   }
                 }}
-                disabled={loading}
-                aria-describedby={
-                  validationErrors.length > 0 ? `error-${group.id}` : undefined
-                }
+                placeholder="email@exemple.fr"
+                ref={inputRef}
+                type="email"
+                value={inputEmail}
               />
             </div>
             {validationErrors.length > 0 && (
-              <div id={`error-${group.id}`} className="fr-messages-group">
+              <div className="fr-messages-group" id={`error-${group.id}`}>
                 {validationErrors.map((errorMsg, index) => (
-                  <p key={index} className="fr-message fr-message--error">
+                  <p className="fr-message fr-message--error" key={index}>
                     {errorMsg}
                   </p>
                 ))}
@@ -171,12 +171,12 @@ export default function AddUserModal({
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
             <ButtonLink
-              onClick={handleAddNewUser}
               disabled={!inputEmail?.trim() || loading}
+              onClick={handleAddNewUser}
             >
               {loading ? "Ajout en cours..." : "Ajouter"}
             </ButtonLink>
-            <ButtonLink alt onClick={handleClose} disabled={loading}>
+            <ButtonLink alt disabled={loading} onClick={handleClose}>
               Annuler
             </ButtonLink>
           </div>

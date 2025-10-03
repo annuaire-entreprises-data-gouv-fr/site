@@ -1,10 +1,11 @@
-import ButtonLink from "#components-ui/button";
-import { Tag } from "#components-ui/tag";
-import IsActiveTag from "#components-ui/tag/is-active-tag";
+import type React from "react";
 import { INSEE } from "#components/administrations";
 import AvisSituationLink from "#components/justificatifs/avis-situation-link";
 import { Section } from "#components/section";
 import { FullTable } from "#components/table/full";
+import ButtonLink from "#components-ui/button";
+import { Tag } from "#components-ui/tag";
+import IsActiveTag from "#components-ui/tag/is-active-tag";
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   ApplicationRights,
@@ -14,14 +15,12 @@ import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible } from "#models/core/diffusion";
 import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import { formatSiret } from "#utils/helpers";
-import type React from "react";
 
 const AvisSituationTable: React.FC<{
   etablissements: IEtablissement[];
   session: ISession | null;
 }> = ({ etablissements, session }) => (
   <FullTable
-    head={["SIRET", "Adresse", "Statut", "Avis de situation"]}
     body={etablissements.map((etablissement: IEtablissement) => [
       <a href={`/etablissement/${etablissement.siret}`}>
         {formatSiret(etablissement.siret)}
@@ -32,15 +31,16 @@ const AvisSituationTable: React.FC<{
       </>,
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}
-        statutDiffusion={etablissement.statutDiffusion}
         since={etablissement.dateFermeture}
+        statutDiffusion={etablissement.statutDiffusion}
       />,
       <AvisSituationLink
-        session={session}
         etablissement={etablissement}
         label="Télécharger"
+        session={session}
       />,
     ])}
+    head={["SIRET", "Adresse", "Statut", "Avis de situation"]}
   />
 );
 
@@ -68,8 +68,8 @@ const AvisSituationNonDiffusible = () => (
 const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, session }) => (
   <Section
     id="justificatifs-insee"
-    title="Justificatif d’inscription à l’Insee"
     sources={[EAdministration.INSEE]}
+    title="Justificatif d’inscription à l’Insee"
   >
     {!estDiffusible(uniteLegale) &&
     !hasRights(session, ApplicationRights.nonDiffusible) ? (
@@ -84,9 +84,9 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, session }) => (
           Si vous avez plusieurs établisements et ne savez pas quel avis de
           situation utiliser,{" "}
           <AvisSituationLink
-            session={session}
             etablissement={uniteLegale.siege}
             label="téléchargez l’avis de situation Sirene du siège social"
+            session={session}
           />
           .
         </p>

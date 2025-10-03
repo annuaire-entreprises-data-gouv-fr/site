@@ -1,6 +1,6 @@
+import path from "path";
 import { clientSearchRechercheEntrepriseRaw } from "#clients/recherche-entreprise";
 import SearchFilterParams from "#models/search/search-filter-params";
-import path from "path";
 
 describe("Simple search with searchTerms", () => {
   [

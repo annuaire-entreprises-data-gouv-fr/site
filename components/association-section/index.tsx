@@ -1,19 +1,19 @@
 "use client";
 
-import AssociationAdressAlert from "#components-ui/alerts-with-explanations/association-adress";
-import FAQLink from "#components-ui/faq-link";
-import BreakPageForPrint from "#components-ui/print-break-page";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { DJEPVA, MI } from "#components/administrations";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
+import AssociationAdressAlert from "#components-ui/alerts-with-explanations/association-adress";
+import FAQLink from "#components-ui/faq-link";
+import BreakPageForPrint from "#components-ui/print-break-page";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IDataAssociation } from "#models/association/types";
 import type { ISession } from "#models/authentication/user/session";
 import { getPersonnalDataAssociation } from "#models/core/diffusion";
 import type { IAssociation, IUniteLegale } from "#models/core/types";
-import { type IdRna, formatDate, formatIntFr } from "#utils/helpers";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { formatDate, formatIntFr, type IdRna } from "#utils/helpers";
 import { AssociationNotFound } from "./association-not-found";
 
 const getTableData = (
@@ -77,14 +77,12 @@ const getTableData = (
         subvention
       </FAQLink>,
       agrement.length > 0
-        ? agrement.map((agr) => {
-            return (
-              <div key={agr.type}>
-                <strong>{agr.type}&nbsp;:</strong> attribué le{" "}
-                {formatDate(agr.dateAttribution)} ({agr.attributeur})
-              </div>
-            );
-          })
+        ? agrement.map((agr) => (
+            <div key={agr.type}>
+              <strong>{agr.type}&nbsp;:</strong> attribué le{" "}
+              {formatDate(agr.dateAttribution)} ({agr.attributeur})
+            </div>
+          ))
         : "",
     ],
     ["", <br />],
@@ -129,7 +127,7 @@ const getTableData = (
     [
       "Site web",
       siteWeb ? (
-        <a href={siteWeb} target="_blank" rel="noopener noreferrer">
+        <a href={siteWeb} rel="noopener noreferrer" target="_blank">
           {siteWeb}
         </a>
       ) : (
@@ -157,11 +155,11 @@ const AssociationSection = ({
   return (
     <>
       <AsyncDataSectionClient
-        title="Répertoire National des Associations"
-        sources={[EAdministration.MI, EAdministration.DJEPVA]}
-        id="association-section"
         data={association}
+        id="association-section"
         notFoundInfo={<AssociationNotFound uniteLegale={uniteLegale} />}
+        sources={[EAdministration.MI, EAdministration.DJEPVA]}
+        title="Répertoire National des Associations"
       >
         {(association) =>
           !association ? (
@@ -169,9 +167,9 @@ const AssociationSection = ({
           ) : (
             <>
               <AssociationAdressAlert
-                uniteLegale={uniteLegale}
-                session={session}
                 association={association}
+                session={session}
+                uniteLegale={uniteLegale}
               />
               <p>
                 Cette structure est inscrite au{" "}

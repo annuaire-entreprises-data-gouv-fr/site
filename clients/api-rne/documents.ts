@@ -24,33 +24,25 @@ export const clientDocuments = async (
   return mapToDomainObject(response);
 };
 
-const mapToDomainObject = (response: IDocumentsRNEResponse): IDocumentsRNE => {
-  return {
-    actes: (response?.actes || []).map((a) => {
-      return {
-        id: a.id || "",
-        dateDepot: a.dateDepot || "",
-        detailsDocuments:
-          a?.typeRdd && a?.typeRdd.length > 0
-            ? a?.typeRdd.map((t) => {
-                return {
-                  nom: t.typeActe,
-                  label: t.decision,
-                };
-              })
-            : [{ nom: a?.nomDocument, label: a?.libelle }],
-      };
-    }),
-    bilans: (response?.bilans || []).map((a) => {
-      return {
-        id: a.id || "",
-        dateDepot: a.dateDepot || "",
-        dateCloture: a.dateCloture || "",
-        typeBilan: a.typeBilan || "",
-        confidentiality: a.confidentiality || "",
-      };
-    }),
-    hasBilanConsolide:
-      (response?.bilans || []).filter((b) => b.typeBilan === "K").length > 0,
-  };
-};
+const mapToDomainObject = (response: IDocumentsRNEResponse): IDocumentsRNE => ({
+  actes: (response?.actes || []).map((a) => ({
+    id: a.id || "",
+    dateDepot: a.dateDepot || "",
+    detailsDocuments:
+      a?.typeRdd && a?.typeRdd.length > 0
+        ? a?.typeRdd.map((t) => ({
+            nom: t.typeActe,
+            label: t.decision,
+          }))
+        : [{ nom: a?.nomDocument, label: a?.libelle }],
+  })),
+  bilans: (response?.bilans || []).map((a) => ({
+    id: a.id || "",
+    dateDepot: a.dateDepot || "",
+    dateCloture: a.dateCloture || "",
+    typeBilan: a.typeBilan || "",
+    confidentiality: a.confidentiality || "",
+  })),
+  hasBilanConsolide:
+    (response?.bilans || []).filter((b) => b.typeBilan === "K").length > 0,
+});

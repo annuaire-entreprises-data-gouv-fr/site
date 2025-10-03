@@ -1,8 +1,8 @@
-import TextWrapper from "#components-ui/text-wrapper";
+import type { Metadata } from "next";
 import parseMarkdownSync from "#components/markdown/parse-markdown";
 import StructuredDataFAQ from "#components/structured-data/faq";
+import TextWrapper from "#components-ui/text-wrapper";
 import { allDefinitions } from "#models/article/definitions";
-import type { Metadata } from "next";
 
 export default function AllDefinitionsPage() {
   const definitions = allDefinitions;
@@ -20,8 +20,8 @@ export default function AllDefinitionsPage() {
           {definitions.map(({ slug, title }) => (
             <li key={slug}>
               <a
-                href={`/definitions/${slug}`}
                 aria-label={title + ", voir la définition"}
+                href={`/definitions/${slug}`}
               >
                 {title}
               </a>

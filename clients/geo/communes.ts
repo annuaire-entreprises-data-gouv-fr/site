@@ -36,8 +36,8 @@ export const clientCommuneByCp = async (cp: string): Promise<IGeoElement[]> => {
   return mapToDomainObject(response || []);
 };
 
-const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
-  return response
+const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] =>
+  response
     .sort((a, b) => b.codesPostaux.length - a.codesPostaux.length)
     .reduce(
       (communes: IGeoElement[], commune: IGeoCommuneResponse) => [
@@ -56,15 +56,15 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
             ]
           : []),
         ...(commune.codesPostaux.length > 1
-          ? commune.codesPostaux.map((cp) => {
-              return {
-                label: `${commune.nom} (${cp})`,
-                value: cp,
-                type: "cp",
-              } as IGeoElement;
-            })
+          ? commune.codesPostaux.map(
+              (cp) =>
+                ({
+                  label: `${commune.nom} (${cp})`,
+                  value: cp,
+                  type: "cp",
+                }) as IGeoElement
+            )
           : []),
       ],
       []
     );
-};

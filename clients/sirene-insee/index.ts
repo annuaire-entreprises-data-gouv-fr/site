@@ -1,3 +1,4 @@
+import { URLSearchParams } from "url";
 import { HttpServerError, HttpUnauthorizedError } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
@@ -8,7 +9,6 @@ import httpClient, {
   type IDefaultRequestConfig,
 } from "#utils/network";
 import { logInfoInSentry } from "#utils/sentry";
-import { URLSearchParams } from "url";
 
 type IAccessToken = {
   data: {

@@ -16,10 +16,10 @@ export default function TempIncidentBanner() {
     return (
       <PrintNever>
         <div
-          id="temp-incident"
-          role="dialog"
           aria-label="Incident en cours"
           className={styles.npsModal}
+          id="temp-incident"
+          role="dialog"
           style={{
             backgroundColor: constants.colors.pastelBlue,
             borderColor: constants.colors.frBlue,

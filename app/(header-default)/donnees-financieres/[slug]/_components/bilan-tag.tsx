@@ -1,5 +1,5 @@
-import { Tag } from "#components-ui/tag";
 import NonRenseigne from "#components/non-renseigne";
+import { Tag } from "#components-ui/tag";
 
 export const BilanTypeTag = ({ type }: { type: string }) => (
   <>

@@ -15,10 +15,10 @@ const AdministrationNotResponding: React.FC<IProps> = ({
   const administrationMetaData = administrationsMetaData[administration] || {};
   return (
     <Section
+      sources={[administration]}
       title={`${
         title || administrationMetaData.long
       } : transmission des données hors-service 🛑`}
-      sources={[administration]}
     >
       <AdministrationNotRespondingMessage
         administrationMetaData={administrationMetaData}

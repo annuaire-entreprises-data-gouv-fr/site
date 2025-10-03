@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
@@ -8,7 +9,6 @@ import {
   FailToFetchError,
   RequestAbortedDuringUnloadException,
 } from "#utils/network/frontend";
-import { useEffect, useState } from "react";
 
 type IFetchDataType<T> = {
   fetchData: () => Promise<T>;

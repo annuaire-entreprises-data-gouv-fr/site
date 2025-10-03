@@ -1,6 +1,6 @@
+import { headers } from "next/headers";
 import { parseIntWithDefaultValue } from "#utils/helpers";
 import isUserAgentABot from "#utils/user-agent";
-import { headers } from "next/headers";
 
 export type IParams = { slug: string };
 

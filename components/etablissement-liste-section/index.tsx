@@ -1,15 +1,15 @@
-import { Tag } from "#components-ui/tag";
-import IsActiveTag from "#components-ui/tag/is-active-tag";
+import type React from "react";
 import NonRenseigne from "#components/non-renseigne";
 import PageCounter from "#components/search-results/results-pagination";
 import { Section } from "#components/section";
 import { FullTable } from "#components/table/full";
+import { Tag } from "#components-ui/tag";
+import IsActiveTag from "#components-ui/tag/is-active-tag";
 import { EAdministration } from "#models/administrations/EAdministration";
 import constants from "#models/constants";
 import { estNonDiffusibleStrict } from "#models/core/diffusion";
 import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import { formatDate, formatSiret, pluralize } from "#utils/helpers";
-import type React from "react";
 
 const EtablissementTable: React.FC<{
   label?: string;
@@ -27,13 +27,6 @@ const EtablissementTable: React.FC<{
       )}
 
       <FullTable
-        head={[
-          "SIRET",
-          "Activité (NAF/APE)",
-          "Détails (nom, enseigne, adresse)",
-          "Création",
-          "État",
-        ]}
         body={etablissements.map((etablissement: IEtablissement) => [
           <a href={`/etablissement/${etablissement.siret}`}>
             {formatSiret(etablissement.siret)}
@@ -75,11 +68,18 @@ const EtablissementTable: React.FC<{
           <>
             <IsActiveTag
               etatAdministratif={etablissement.etatAdministratif}
-              statutDiffusion={etablissement.statutDiffusion}
               since={etablissement.dateFermeture}
+              statutDiffusion={etablissement.statutDiffusion}
             />
           </>,
         ])}
+        head={[
+          "SIRET",
+          "Activité (NAF/APE)",
+          "Détails (nom, enseigne, adresse)",
+          "Création",
+          "État",
+        ]}
       />
     </>
   );
@@ -118,9 +118,9 @@ const EtablissementListeSection: React.FC<{
         . Cliquez sur un n° SIRET pour obtenir plus d’information :
       </p>
       <Section
-        title={`${nombreEtablissements} établissement${plural} de ${uniteLegale.nomComplet}`}
-        sources={[EAdministration.INSEE]}
         lastModified={uniteLegale.dateDerniereMiseAJour}
+        sources={[EAdministration.INSEE]}
+        title={`${nombreEtablissements} établissement${plural} de ${uniteLegale.nomComplet}`}
       >
         {usePagination ? (
           <>
@@ -137,21 +137,21 @@ const EtablissementListeSection: React.FC<{
           <>
             {uniteLegale.etablissements.open.length > 0 && (
               <EtablissementTable
+                etablissements={uniteLegale.etablissements.open}
                 label="en activité"
                 labelWithoutPlural={true}
-                etablissements={uniteLegale.etablissements.open}
               />
             )}
             {uniteLegale.etablissements.unknown.length > 0 && (
               <EtablissementTable
-                label="non-diffusible"
                 etablissements={uniteLegale.etablissements.unknown}
+                label="non-diffusible"
               />
             )}
             {uniteLegale.etablissements.closed.length > 0 && (
               <EtablissementTable
-                label="fermé"
                 etablissements={uniteLegale.etablissements.closed}
+                label="fermé"
               />
             )}
           </>

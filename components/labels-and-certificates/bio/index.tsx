@@ -1,11 +1,12 @@
+import type React from "react";
 import routes from "#clients/routes";
+import NonRenseigne from "#components/non-renseigne";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
 import ButtonLink from "#components-ui/button";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import { Tag } from "#components-ui/tag";
-import NonRenseigne from "#components/non-renseigne";
-import { DataSection } from "#components/section/data-section";
-import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
 import type {
@@ -14,123 +15,118 @@ import type {
 } from "#models/certifications/bio";
 import type { IUniteLegale } from "#models/core/types";
 import { formatDate, formatSiret, pluralize } from "#utils/helpers";
-import type React from "react";
 
 export const CertificationsBioSection: React.FC<{
   uniteLegale: IUniteLegale;
   bio: IEtablissementsBio | IAPINotRespondingError;
-}> = ({ bio }) => {
-  return (
-    <DataSection
-      title="Professionnel du Bio"
-      data={bio}
-      id="professionnel-du-bio"
-      sources={[EAdministration.AGENCE_BIO]}
-      notFoundInfo={
+}> = ({ bio }) => (
+  <DataSection
+    data={bio}
+    id="professionnel-du-bio"
+    notFoundInfo={
+      <>
+        Nous n’avons pas retrouvé de <FAQBio /> pour cette structure.
+        <p>
+          Vous pourrez peut-être les trouver sur le{" "}
+          <a
+            href={routes.certifications.bio.site}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            moteur de recherche de l&apos;Agence Bio
+          </a>
+          .
+        </p>
+        <p>
+          Seules les structures avec un certificat en cours de validité
+          apparaissent sur cette page.
+        </p>
+      </>
+    }
+    sources={[EAdministration.AGENCE_BIO]}
+    title="Professionnel du Bio"
+  >
+    {(bio) => {
+      const plural = pluralize(bio.etablissementsBio);
+      return (
         <>
-          Nous n’avons pas retrouvé de <FAQBio /> pour cette structure.
-          <p>
-            Vous pourrez peut-être les trouver sur le{" "}
-            <a
-              href={routes.certifications.bio.site}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              moteur de recherche de l&apos;Agence Bio
-            </a>
-            .
-          </p>
-          <p>
-            Seules les structures avec un certificat en cours de validité
-            apparaissent sur cette page.
-          </p>
-        </>
-      }
-    >
-      {(bio) => {
-        const plural = pluralize(bio.etablissementsBio);
-        return (
-          <>
-            Cette structure possède {bio.etablissementsBio.length} établissement
-            {plural} <FAQBio label={`engagé${plural} “Professionnel du Bio”`} />{" "}
-            &nbsp;:
-            <br />
-            <br />
-            <FullTable
-              head={[
-                "Détail établissement",
-                "Statut",
-                "Certificat",
-                "Annuaire professionnels Bio",
-              ]}
-              body={bio.etablissementsBio.map(
-                ({
-                  numeroBio,
-                  siret,
-                  denomination,
-                  enseigne,
-                  adresse,
-                  certificat,
-                }) => [
-                  <>
-                    {siret && (
-                      <a href={`/etablissement/${siret}`}>
-                        {formatSiret(siret)}
-                      </a>
-                    )}
-                    {denomination && (
-                      <div>
-                        {denomination}
-                        {enseigne && ` (${enseigne})`}
-                      </div>
-                    )}
-                    {adresse && <div>{adresse}</div>}
-                  </>,
-                  <>
-                    {getCertificationDate(certificat)}
-                    {certificat.organization && (
-                      <div>par {certificat.organization}</div>
-                    )}
-                  </>,
-                  <>
-                    {certificat.exempted ? (
-                      <i>
-                        Dispensé de certification de par la nature de son
-                        activité.
-                      </i>
-                    ) : certificat.url ? (
-                      <a
-                        target="_blank"
-                        rel="noreferre noopener"
-                        href={certificat.url}
-                      >
-                        <Icon slug="file" color="black">
-                          certificat
-                        </Icon>
-                      </a>
-                    ) : (
-                      <i>document introuvable</i>
-                    )}
-                  </>,
-                  <div className="layout-center">
-                    <ButtonLink
+          Cette structure possède {bio.etablissementsBio.length} établissement
+          {plural} <FAQBio label={`engagé${plural} “Professionnel du Bio”`} />{" "}
+          &nbsp;:
+          <br />
+          <br />
+          <FullTable
+            body={bio.etablissementsBio.map(
+              ({
+                numeroBio,
+                siret,
+                denomination,
+                enseigne,
+                adresse,
+                certificat,
+              }) => [
+                <>
+                  {siret && (
+                    <a href={`/etablissement/${siret}`}>{formatSiret(siret)}</a>
+                  )}
+                  {denomination && (
+                    <div>
+                      {denomination}
+                      {enseigne && ` (${enseigne})`}
+                    </div>
+                  )}
+                  {adresse && <div>{adresse}</div>}
+                </>,
+                <>
+                  {getCertificationDate(certificat)}
+                  {certificat.organization && (
+                    <div>par {certificat.organization}</div>
+                  )}
+                </>,
+                <>
+                  {certificat.exempted ? (
+                    <i>
+                      Dispensé de certification de par la nature de son
+                      activité.
+                    </i>
+                  ) : certificat.url ? (
+                    <a
+                      href={certificat.url}
+                      rel="noreferre noopener"
                       target="_blank"
-                      alt
-                      small
-                      to={`${routes.certifications.bio.entreprise}${numeroBio}`}
                     >
-                      →&nbsp;consulter
-                    </ButtonLink>
-                  </div>,
-                ]
-              )}
-            />
-          </>
-        );
-      }}
-    </DataSection>
-  );
-};
+                      <Icon color="black" slug="file">
+                        certificat
+                      </Icon>
+                    </a>
+                  ) : (
+                    <i>document introuvable</i>
+                  )}
+                </>,
+                <div className="layout-center">
+                  <ButtonLink
+                    alt
+                    small
+                    target="_blank"
+                    to={`${routes.certifications.bio.entreprise}${numeroBio}`}
+                  >
+                    →&nbsp;consulter
+                  </ButtonLink>
+                </div>,
+              ]
+            )}
+            head={[
+              "Détail établissement",
+              "Statut",
+              "Certificat",
+              "Annuaire professionnels Bio",
+            ]}
+          />
+        </>
+      );
+    }}
+  </DataSection>
+);
 
 const getCertificationDate = (certificat: IBioCertification) => {
   const { status, date } = certificat;
@@ -159,7 +155,7 @@ const getCertificationDate = (certificat: IBioCertification) => {
 };
 
 const FAQBio = ({ label = "certification Bio" }) => (
-  <FAQLink tooltipLabel={label} to="/faq/professionnels-bio">
+  <FAQLink to="/faq/professionnels-bio" tooltipLabel={label}>
     Le label “Professionnel du bio” concerne les entreprises dont tout ou partie
     de leur activité est certifiée Bio par des organismes certificateurs,
     encadrés par l’Agence Bio.

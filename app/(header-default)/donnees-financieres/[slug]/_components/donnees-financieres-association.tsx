@@ -15,8 +15,8 @@ export default function DonneesFinancieresAssociation({
   return (
     <>
       <nav
-        role="navigation"
         aria-labelledby="finances-association-summary-title"
+        role="navigation"
       >
         <strong id="finances-associtation-summary-title">
           Informations financières disponibles :

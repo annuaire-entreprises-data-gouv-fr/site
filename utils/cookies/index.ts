@@ -1,5 +1,5 @@
-import type { IncomingMessage, ServerResponse } from "http";
 import Cookies from "cookies";
+import type { IncomingMessage, ServerResponse } from "http";
 
 export const getCookie = (
   req: IncomingMessage,

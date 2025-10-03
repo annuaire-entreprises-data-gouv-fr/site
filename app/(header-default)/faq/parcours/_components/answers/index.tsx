@@ -1,5 +1,5 @@
-import TextWrapper from "#components-ui/text-wrapper";
 import type { PropsWithChildren } from "react";
+import TextWrapper from "#components-ui/text-wrapper";
 
 export const ParcoursAnswer: React.FC<PropsWithChildren<{}>> = ({
   children,

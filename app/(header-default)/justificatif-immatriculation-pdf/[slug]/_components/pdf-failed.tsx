@@ -10,13 +10,13 @@ export function PDFFailed({ downloadLink }: { downloadLink: string }) {
       </p>
       Si besoin,{" "}
       <a
-        id="download-pdf-link"
-        target="_blank"
-        rel="noreferrer noopener"
         href={downloadLink}
+        id="download-pdf-link"
         onClick={() =>
           window.open(downloadLink, "_blank", "noopener,noreferrer")
         }
+        rel="noreferrer noopener"
+        target="_blank"
       >
         cliquez ici pour re-lancer un téléchargement dans un nouvel onglet.
       </a>

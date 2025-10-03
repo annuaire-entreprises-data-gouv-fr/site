@@ -1,13 +1,13 @@
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  type ChartData,
+  Chart as ChartJS,
+  type ChartOptions,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
-  type ChartData,
-  type ChartOptions,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
@@ -52,26 +52,24 @@ export const StackedBarChart = ({
   width = "100%",
   pluginOption,
   scales,
-}: StackedBarChartProps) => {
-  return (
-    <div>
-      <Bar
-        options={{
-          ...defaultOptions,
-          scales: {
-            ...defaultOptions.scales,
-            ...scales,
-          },
-          plugins: {
-            ...defaultOptions.plugins,
-            ...pluginOption,
-          },
-          maintainAspectRatio: false,
-        }}
-        width={width}
-        height={height}
-        data={data}
-      />
-    </div>
-  );
-};
+}: StackedBarChartProps) => (
+  <div>
+    <Bar
+      data={data}
+      height={height}
+      options={{
+        ...defaultOptions,
+        scales: {
+          ...defaultOptions.scales,
+          ...scales,
+        },
+        plugins: {
+          ...defaultOptions.plugins,
+          ...pluginOption,
+        },
+        maintainAspectRatio: false,
+      }}
+      width={width}
+    />
+  </div>
+);

@@ -1,14 +1,14 @@
-import { Info } from "#components-ui/alerts";
+import type { Metadata } from "next";
+import { use } from "react";
 import { INPI } from "#components/administrations";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
+import { Info } from "#components-ui/alerts";
 import { EAdministration } from "#models/administrations/EAdministration";
 import { formatIntFr } from "#utils/helpers";
 import extractParamsAppRouter, {
   type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
-import type { Metadata } from "next";
-import { use } from "react";
 import { InpiPDFDownloader } from "./_components/inpi-pdf-downloader";
 
 export const generateMetadata = async (
@@ -36,8 +36,8 @@ export default function InpiPDF({ params }: AppRouterProps) {
         <h1>Téléchargement du justificatif d’immatriculation</h1>
 
         <Section
-          title="Justificatif d’immatriculation au RNE"
           sources={[EAdministration.INPI]}
+          title="Justificatif d’immatriculation au RNE"
         >
           <Info full>
             Le téléservice de l’

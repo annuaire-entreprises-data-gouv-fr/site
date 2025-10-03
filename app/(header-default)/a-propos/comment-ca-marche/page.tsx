@@ -1,7 +1,7 @@
+import type { Metadata } from "next";
 import TextWrapper from "#components-ui/text-wrapper";
 import { administrationsMetaData } from "#models/administrations";
 import constants from "#models/constants";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Comment ça marche ?",
@@ -111,8 +111,8 @@ export default function About() {
             accessibles sur{" "}
             <a
               href="https://data.gouv.fr/"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               data.gouv.fr
             </a>
@@ -123,8 +123,8 @@ export default function About() {
             service public qui sont référencées sur{" "}
             <a
               href="https://api.gouv.fr/"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               api.gouv.fr
             </a>
@@ -141,8 +141,8 @@ export default function About() {
             disposition gratuitement :{" "}
             <a
               href="https://www.data.gouv.fr/fr/dataservices/api-recherche-dentreprises/"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               l’API Recherche d’Entreprises
             </a>
@@ -198,16 +198,16 @@ export default function About() {
               cas de problème, contactez les services de la{" "}
               <a
                 href="https://www.economie.gouv.fr/dgccrf"
-                target="_blank"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 DGCCRF
               </a>{" "}
               et plus particulièrement{" "}
               <a
                 href="https://signal.conso.gouv.fr"
-                target="_blank"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 Signal Conso
               </a>{" "}

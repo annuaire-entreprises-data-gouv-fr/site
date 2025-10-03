@@ -1,4 +1,4 @@
-import { type IDefaultRequestConfig, httpGet } from "#utils/network";
+import { httpGet, type IDefaultRequestConfig } from "#utils/network";
 
 /**
  * GET for API Proxy api

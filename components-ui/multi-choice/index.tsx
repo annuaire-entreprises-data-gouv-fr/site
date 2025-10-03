@@ -50,28 +50,28 @@ export const MultiChoice: React.FC<IProps> = ({
       {values.map(({ label, value, href, onClick, checked = false }, index) => (
         <div key={href || value || label}>
           {href ? (
-            <a tabIndex={0} href={href} style={computeStyle(large)}>
+            <a href={href} style={computeStyle(large)} tabIndex={0}>
               {label}
             </a>
           ) : (
             <>
               <input
-                type="radio"
-                id={`${idPrefix}-${index}`}
-                name={name}
-                value={value}
-                required={required}
-                onChange={!!onClick ? onClick : undefined}
                 checked={!!onClick ? checked : undefined}
                 defaultChecked={!!onClick ? undefined : checked}
+                id={`${idPrefix}-${index}`}
+                name={name}
+                onChange={!!onClick ? onClick : undefined}
+                required={required}
                 tabIndex={-1}
+                type="radio"
+                value={value}
               />
               <label
-                tabIndex={0}
-                style={computeStyle(large)}
-                onKeyDown={(e) => onKeyDown(e, onClick)}
                 className="fr-label"
                 htmlFor={`${idPrefix}-${index}`}
+                onKeyDown={(e) => onKeyDown(e, onClick)}
+                style={computeStyle(large)}
+                tabIndex={0}
               >
                 {label}
               </label>

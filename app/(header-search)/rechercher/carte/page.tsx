@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import HiddenH1 from "#components/a11y-components/hidden-h1";
 import { HeaderWithAdvancedSearch } from "#components/header/header-advanced-search";
 import SearchResultsMap from "#components/search-results/map";
@@ -6,7 +7,6 @@ import { searchWithoutProtectedSiren } from "#models/search";
 import SearchFilterParams from "#models/search/search-filter-params";
 import { parseIntWithDefaultValue } from "#utils/helpers";
 import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Rechercher une entreprise sur la carte",
@@ -33,19 +33,19 @@ export default async function MapSearchResultPage(props: AppRouterProps) {
   return (
     <>
       <HeaderWithAdvancedSearch
-        useSearchBar={true}
+        currentSearchTerm={searchTerm}
+        searchParams={searchFilterParamsJSON}
         useAgentCTA={true}
         useMap={true}
-        searchParams={searchFilterParamsJSON}
-        currentSearchTerm={searchTerm}
+        useSearchBar={true}
       />
-      <main style={{ maxWidth: "100%", marginBottom: 0 }} className="map">
+      <main className="map" style={{ maxWidth: "100%", marginBottom: 0 }}>
         <StructuredDataSearchAction />
         <HiddenH1 title="Résultats de recherche" />
         <SearchResultsMap
           results={results}
-          searchTerm={searchTerm}
           searchFilterParams={searchFilterParamsJSON}
+          searchTerm={searchTerm}
         />
       </main>
     </>

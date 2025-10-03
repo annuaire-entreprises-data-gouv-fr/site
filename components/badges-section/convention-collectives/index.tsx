@@ -1,7 +1,7 @@
+import React from "react";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { Tag } from "#components-ui/tag";
 import type { Siren } from "#utils/helpers";
-import React from "react";
 
 const TagCC = ({ siren, idcc }: { siren: Siren; idcc: string }) => (
   <Tag
@@ -23,10 +23,10 @@ export const ConventionCollectivesBadgesSection: React.FC<{
       <React.Fragment key={idcc}>
         {title ? (
           <InformationTooltip label={title} tabIndex={0}>
-            <TagCC siren={siren} idcc={idcc} />
+            <TagCC idcc={idcc} siren={siren} />
           </InformationTooltip>
         ) : (
-          <TagCC siren={siren} idcc={idcc} />
+          <TagCC idcc={idcc} siren={siren} />
         )}
       </React.Fragment>
     ))

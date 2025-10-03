@@ -5,12 +5,10 @@ import { formatLog } from "../utils/format-log";
  * Add startTime to request
  * @param config
  */
-export const addStartTimeInterceptor = (config: AxiosRequestConfig) => {
-  return {
-    ...config,
-    metadata: { startTime: new Date().getTime() },
-  };
-};
+export const addStartTimeInterceptor = (config: AxiosRequestConfig) => ({
+  ...config,
+  metadata: { startTime: new Date().getTime() },
+});
 
 /**
  * Log into STDOUT in production

@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import { cache } from "react";
 import { HttpNotFound } from "#clients/exceptions";
 import { getEtablissementWithUniteLegaleFromSlug } from "#models/core/etablissement";
 import {
@@ -11,8 +13,6 @@ import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
 import { Exception } from "#models/exceptions";
 import { extractSirenOrSiretSlugFromUrl } from "#utils/helpers";
 import { logFatalErrorInSentry, logWarningInSentry } from "#utils/sentry";
-import { redirect } from "next/navigation";
-import { cache } from "react";
 
 const handleException = (e: any, slug: string) => {
   if (

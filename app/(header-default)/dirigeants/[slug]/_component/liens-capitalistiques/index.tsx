@@ -12,22 +12,16 @@ const LiensCapitalistiquesSection = ({
 }: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}) => {
-  return (
-    <ProtectedSectionWithUseCase
-      session={session}
-      uniteLegale={uniteLegale}
-      title="Liens capitalistiques"
-      id="liens-capitalistiques"
-      sources={[EAdministration.DGFIP]}
-      allowedUseCases={[
-        UseCase.fraude,
-        UseCase.marches,
-        UseCase.aidesPubliques,
-      ]}
-      requiredRight={ApplicationRights.liensCapitalistiques}
-      WrappedSection={ProtectedLiensCapitalistiquesSection}
-    />
-  );
-};
+}) => (
+  <ProtectedSectionWithUseCase
+    allowedUseCases={[UseCase.fraude, UseCase.marches, UseCase.aidesPubliques]}
+    id="liens-capitalistiques"
+    requiredRight={ApplicationRights.liensCapitalistiques}
+    session={session}
+    sources={[EAdministration.DGFIP]}
+    title="Liens capitalistiques"
+    uniteLegale={uniteLegale}
+    WrappedSection={ProtectedLiensCapitalistiquesSection}
+  />
+);
 export default LiensCapitalistiquesSection;

@@ -1,8 +1,8 @@
-import TextWrapper from "#components-ui/text-wrapper";
+import type { Metadata } from "next";
 import parseMarkdownSync from "#components/markdown/parse-markdown";
 import StructuredDataFAQ from "#components/structured-data/faq";
+import TextWrapper from "#components-ui/text-wrapper";
 import { allFaqArticles, allFaqArticlesByGroup } from "#models/article/faq";
-import type { Metadata } from "next";
 
 const config = [
   {

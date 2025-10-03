@@ -1,9 +1,10 @@
-import { Info } from "#components-ui/alerts";
-import FAQLink from "#components-ui/faq-link";
-import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
+import type { Metadata } from "next";
 import PageCounter from "#components/search-results/results-pagination";
 import StructuredDataSearchAction from "#components/structured-data/search";
 import { FullTable } from "#components/table/full";
+import { Info } from "#components-ui/alerts";
+import FAQLink from "#components-ui/faq-link";
+import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
 import { searchPersonCompanies } from "#models/search";
 import {
   convertDateToAge,
@@ -14,7 +15,6 @@ import {
 } from "#utils/helpers";
 import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
 import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
-import type { Metadata } from "next";
 
 async function extractParamsPersonne(props: AppRouterProps) {
   const searchParams = await props.searchParams;
@@ -112,7 +112,6 @@ export default async function PersonnePage(props: AppRouterProps) {
 
       {results.results.length > 0 ? (
         <FullTable
-          head={["Siren", "Détails", "Dirigeant(s)"]}
           body={results.results.map((result) => [
             <a href={`/entreprise/${result.chemin}`}>
               {formatIntFr(result.siren)}
@@ -129,8 +128,8 @@ export default async function PersonnePage(props: AppRouterProps) {
                     <>
                       {dirigeantOrElu.siren ? (
                         <a
-                          href={`/dirigeants/${dirigeantOrElu.siren}`}
                           aria-label={`Voir les dirigeants de cette entreprise (siren ${dirigeantOrElu.siren})`}
+                          href={`/dirigeants/${dirigeantOrElu.siren}`}
                         >
                           {dirigeantOrElu.denomination}
                         </a>
@@ -142,8 +141,8 @@ export default async function PersonnePage(props: AppRouterProps) {
                     <>
                       {dirigeantOrElu.dateNaissancePartial ? (
                         <SeePersonPageLink
-                          person={dirigeantOrElu}
                           label={`${dirigeantOrElu.prenoms} ${dirigeantOrElu.nom}`}
+                          person={dirigeantOrElu}
                         />
                       ) : (
                         `${dirigeantOrElu.prenom} ${dirigeantOrElu.nom}`
@@ -171,6 +170,7 @@ export default async function PersonnePage(props: AppRouterProps) {
               ))}
             </div>,
           ])}
+          head={["Siren", "Détails", "Dirigeant(s)"]}
         />
       ) : (
         <i>Aucune structure n’a été retrouvée pour cette personne.</i>
@@ -178,9 +178,9 @@ export default async function PersonnePage(props: AppRouterProps) {
 
       {results.pageCount > 0 && (
         <PageCounter
-          totalPages={results.pageCount}
-          searchTerm=""
           currentPage={results.currentPage}
+          searchTerm=""
+          totalPages={results.pageCount}
           urlComplement={`&${urlComplements}`}
         />
       )}

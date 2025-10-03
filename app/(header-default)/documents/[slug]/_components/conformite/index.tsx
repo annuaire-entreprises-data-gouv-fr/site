@@ -12,26 +12,20 @@ const ConformiteSection = ({
 }: {
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}) => {
-  return (
-    <ProtectedSectionWithUseCase
-      session={session}
-      uniteLegale={uniteLegale}
-      title="Attestations de conformité sociale et fiscale"
-      id="conformite"
-      sources={[
-        EAdministration.DGFIP,
-        EAdministration.URSSAF,
-        EAdministration.MSA,
-      ]}
-      allowedUseCases={[
-        UseCase.marches,
-        UseCase.aidesPubliques,
-        UseCase.fraude,
-      ]}
-      requiredRight={ApplicationRights.conformite}
-      WrappedSection={ProtectedConformiteSection}
-    />
-  );
-};
+}) => (
+  <ProtectedSectionWithUseCase
+    allowedUseCases={[UseCase.marches, UseCase.aidesPubliques, UseCase.fraude]}
+    id="conformite"
+    requiredRight={ApplicationRights.conformite}
+    session={session}
+    sources={[
+      EAdministration.DGFIP,
+      EAdministration.URSSAF,
+      EAdministration.MSA,
+    ]}
+    title="Attestations de conformité sociale et fiscale"
+    uniteLegale={uniteLegale}
+    WrappedSection={ProtectedConformiteSection}
+  />
+);
 export default ConformiteSection;

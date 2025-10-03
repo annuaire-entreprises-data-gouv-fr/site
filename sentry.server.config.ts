@@ -1,6 +1,7 @@
 import * as Sentry from "@sentry/nextjs";
 import { isNextJSSentryActivated } from "#utils/sentry";
 import isUserAgentABot from "#utils/user-agent";
+
 if (isNextJSSentryActivated) {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,

@@ -31,21 +31,19 @@ export const DoughnutChart = ({
   height = "400px",
   width = "100%",
   pluginOptions = {},
-}: StackedBarChartProps) => {
-  return (
-    <div>
-      <Doughnut
-        options={{
-          ...options,
-          plugins: {
-            ...options.plugins,
-            ...pluginOptions,
-          },
-        }}
-        width={width}
-        height={height}
-        data={data}
-      />
-    </div>
-  );
-};
+}: StackedBarChartProps) => (
+  <div>
+    <Doughnut
+      data={data}
+      height={height}
+      options={{
+        ...options,
+        plugins: {
+          ...options.plugins,
+          ...pluginOptions,
+        },
+      }}
+      width={width}
+    />
+  </div>
+);

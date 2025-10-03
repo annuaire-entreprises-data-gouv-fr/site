@@ -7,10 +7,10 @@ import searchFile from "../../style/icons/system/search-line.svg";
 export function PrefetchImgs() {
   return (
     <div style={{ display: "none" }}>
-      <Image src={searchFile} alt="" priority />
-      <Image src={linkedinLogo} alt="" priority />
-      <Image src={githubLogo} alt="" priority />
-      <Image src={externalLink} alt="" priority />
+      <Image alt="" priority src={searchFile} />
+      <Image alt="" priority src={linkedinLogo} />
+      <Image alt="" priority src={githubLogo} />
+      <Image alt="" priority src={externalLink} />
     </div>
   );
 }

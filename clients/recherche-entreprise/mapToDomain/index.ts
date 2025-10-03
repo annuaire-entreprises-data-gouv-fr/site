@@ -1,12 +1,15 @@
-import { type IEtablissement, createDefaultEtablissement } from "#models/core/types";
+import {
+  createDefaultEtablissement,
+  type IEtablissement,
+} from "#models/core/types";
 import type { IEtatCivil, IPersonneMorale } from "#models/rne/types";
 import {
-  type Siret,
   extractNicFromSiret,
   extractSirenFromSiret,
   formatFirstNames,
   formatLastName,
   formatRole,
+  type Siret,
   verifySiret,
 } from "#utils/helpers";
 import { libelleFromCodeNAFWithoutNomenclature } from "#utils/helpers/formatting/labels";

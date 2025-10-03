@@ -36,15 +36,15 @@ export const ContactAnswer: React.FC<IProps> = ({ session, userType }) => (
             https://app.crisp.chat/website/064fca1b-bdd6-4a81-af56-9f38e40953ad/plugins/settings/b68ffdd2-ba6e-46a6-94bb-d0a9872ce09a/
             */}
       <iframe
-        title="Contact Form"
+        frameBorder="0"
+        height="660px"
+        referrerPolicy="origin"
+        sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
         src={`https://plugins.crisp.chat/urn:crisp.im:contact-form:0/contact/064fca1b-bdd6-4a81-af56-9f38e40953ad?type=${userType}${
           session?.user?.email ? `&email=${session?.user?.email}` : ""
         }${session?.user?.fullName ? `&name=${session?.user?.fullName}` : ""}`}
-        referrerPolicy="origin"
-        sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
+        title="Contact Form"
         width="100%"
-        height="660px"
-        frameBorder="0"
       ></iframe>
     </div>
     <p>
@@ -57,8 +57,8 @@ export const ContactAnswer: React.FC<IProps> = ({ session, userType }) => (
         Rejoignez notre salon{" "}
         <a
           href="https://tchap.gouv.fr/#/room/#annuaire-entreprises:agent.dinum.tchap.gouv.fr"
-          target="_blank"
           rel="noopener noreferrer"
+          target="_blank"
         >
           Tchap
         </a>{" "}

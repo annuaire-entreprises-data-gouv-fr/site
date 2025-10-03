@@ -1,6 +1,6 @@
+import type { Metadata } from "next";
 import { HeaderAppRouter } from "#components/header/header-app-router";
 import { meta } from "#components/meta/meta-server";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = meta({});
 
@@ -12,10 +12,10 @@ export default async function ConnexionLayout({
   return (
     <>
       <HeaderAppRouter
-        useSearchBar={false}
+        useAgentCTA={false}
         useLogo={true}
         useMap={false}
-        useAgentCTA={false}
+        useSearchBar={false}
       />
       <div>{children}</div>
     </>

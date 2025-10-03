@@ -1,9 +1,9 @@
+import type { ReactElement } from "react";
 import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
-import type { ReactElement } from "react";
 import type { IEtablissementsList } from "../etablissements-list";
 import type { IEtablissement, IUniteLegale } from "../types";
 
@@ -28,11 +28,7 @@ const canSeeNonDiffusible = (session: ISession | null) =>
  */
 export const estDiffusible = (
   uniteLegaleOrEtablissement: IUniteLegaleOrEtablissement
-) => {
-  return (
-    uniteLegaleOrEtablissement.statutDiffusion === ISTATUTDIFFUSION.DIFFUSIBLE
-  );
-};
+) => uniteLegaleOrEtablissement.statutDiffusion === ISTATUTDIFFUSION.DIFFUSIBLE;
 /**
  * Only strict non-diffusible. Exclude partially diffusible, protected and diffusible
  * @param uniteLegaleOrEtablissement
@@ -40,12 +36,9 @@ export const estDiffusible = (
  */
 export const estNonDiffusibleStrict = (
   uniteLegaleOrEtablissement: IUniteLegaleOrEtablissement
-) => {
-  return (
-    uniteLegaleOrEtablissement.statutDiffusion ===
-    ISTATUTDIFFUSION.NON_DIFF_STRICT
-  );
-};
+) =>
+  uniteLegaleOrEtablissement.statutDiffusion ===
+  ISTATUTDIFFUSION.NON_DIFF_STRICT;
 
 /**
  * Only people that asks us to remove their data
@@ -54,11 +47,7 @@ export const estNonDiffusibleStrict = (
  */
 export const estNonDiffusibleProtected = (
   uniteLegaleOrEtablissement: IUniteLegaleOrEtablissement
-) => {
-  return (
-    uniteLegaleOrEtablissement.statutDiffusion === ISTATUTDIFFUSION.PROTECTED
-  );
-};
+) => uniteLegaleOrEtablissement.statutDiffusion === ISTATUTDIFFUSION.PROTECTED;
 
 /**
  * Anonymise name & etablissements' adresses

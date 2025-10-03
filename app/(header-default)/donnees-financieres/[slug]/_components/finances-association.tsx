@@ -1,5 +1,7 @@
 "use client";
 
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { DJEPVA } from "#components/administrations";
 import { LineChart } from "#components/chart/line";
 import { DataSectionClient } from "#components/section/data-section";
@@ -9,8 +11,6 @@ import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
 import type { IAssociation } from "#models/core/types";
 import { formatCurrency } from "#utils/helpers";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -41,11 +41,11 @@ export default function FinancesAssociationSection({
 
   return (
     <DataSectionClient
+      data={data}
       id="finances-association"
       notFoundInfo="Aucun indicateur financier n’a été retrouvé pour cette association."
-      title="Indicateurs financiers"
       sources={[EAdministration.DJEPVA]}
-      data={data}
+      title="Indicateurs financiers"
     >
       {(data) =>
         data?.bilans.length === 0 ? (
@@ -59,32 +59,6 @@ export default function FinancesAssociationSection({
               l’association. Ils sont diffusés par la <DJEPVA />.
             </p>
             <LineChart
-              htmlLegendId={"finance-data-legend"}
-              options={{
-                plugins: {
-                  tooltip: {
-                    callbacks: {
-                      label(tooltipItem) {
-                        return formatCurrency(tooltipItem.parsed.y.toString());
-                      },
-                    },
-                  },
-                  legend: { display: false },
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                  y: {
-                    border: { display: false },
-                    ticks: {
-                      callback: (label) => {
-                        return formatCurrency(label.toString());
-                      },
-                    },
-                  },
-                },
-              }}
-              height={250}
               data={{
                 labels: data.bilans.map((bilan) => bilan.year),
                 datasets: [
@@ -104,13 +78,33 @@ export default function FinancesAssociationSection({
                   },
                 ],
               }}
+              height={250}
+              htmlLegendId={"finance-data-legend"}
+              options={{
+                plugins: {
+                  tooltip: {
+                    callbacks: {
+                      label(tooltipItem) {
+                        return formatCurrency(tooltipItem.parsed.y.toString());
+                      },
+                    },
+                  },
+                  legend: { display: false },
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  y: {
+                    border: { display: false },
+                    ticks: {
+                      callback: (label) => formatCurrency(label.toString()),
+                    },
+                  },
+                },
+              }}
             />
             <br />
             <FullTable
-              head={[
-                "Indicateurs",
-                ...data.bilans.map((a) => a?.year.toString()),
-              ]}
               body={[
                 [
                   <>
@@ -136,6 +130,10 @@ export default function FinancesAssociationSection({
                   </>,
                   ...data.bilans.map((a) => formatCurrency(a?.resultat ?? "")),
                 ],
+              ]}
+              head={[
+                "Indicateurs",
+                ...data.bilans.map((a) => a?.year.toString()),
               ]}
             />
           </>

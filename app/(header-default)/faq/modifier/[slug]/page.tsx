@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Breadcrumb from "#components-ui/breadcrumb";
 import ButtonLink from "#components-ui/button";
 import TextWrapper from "#components-ui/text-wrapper";
@@ -11,8 +13,6 @@ import type {
   AppRouterProps,
   IParams,
 } from "#utils/server-side-helper/app/extract-params";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 
 // should not happen since we declared generateStaticParams
 const redirectFAQPageNotFound = (slug: string) => {
@@ -78,7 +78,7 @@ export default async function FAQArticle({ params }: AppRouterProps) {
 
         <h2>Vous ne trouvez pas votre réponse ?</h2>
         <div className="layout-left">
-          <ButtonLink to="/faq" alt small>
+          <ButtonLink alt small to="/faq">
             Consultez notre FAQ
           </ButtonLink>
         </div>
@@ -90,11 +90,9 @@ export default async function FAQArticle({ params }: AppRouterProps) {
 export async function generateStaticParams(): Promise<Array<IParams>> {
   return allDataToModify
     .filter(({ slug }) => !!slug)
-    .map(({ slug }) => {
-      return {
-        slug,
-      };
-    });
+    .map(({ slug }) => ({
+      slug,
+    }));
 }
 
 export const generateMetadata = async ({

@@ -1,8 +1,8 @@
 import { EAdministration } from "./EAdministration";
 import type {
-  IAPIMonitorMetaData,
   IAdministrationMetaData,
   IAdministrationsMetaData,
+  IAPIMonitorMetaData,
 } from "./types";
 
 /**

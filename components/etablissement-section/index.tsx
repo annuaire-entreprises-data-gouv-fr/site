@@ -1,7 +1,4 @@
-import { HorizontalSeparator } from "#components-ui/horizontal-separator";
-import BreakPageForPrint from "#components-ui/print-break-page";
-import { PrintNever } from "#components-ui/print-visibility";
-import { Tag } from "#components-ui/tag";
+import type React from "react";
 import { ConventionCollectivesBadgesSection } from "#components/badges-section/convention-collectives";
 import { labelsAndCertificatesSources } from "#components/badges-section/labels-and-certificates";
 import AvisSituationLink from "#components/justificatifs/avis-situation-link";
@@ -9,6 +6,10 @@ import ExtraitRNELink from "#components/justificatifs/extrait-rne-link";
 import { Section } from "#components/section";
 import { CopyPaste } from "#components/table/copy-paste";
 import { TwoColumnTable } from "#components/table/simple";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import BreakPageForPrint from "#components-ui/print-break-page";
+import { PrintNever } from "#components-ui/print-visibility";
+import { Tag } from "#components-ui/tag";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import { estActif } from "#models/core/etat-administratif";
@@ -19,7 +20,6 @@ import {
   uniteLegaleLabelWithPronounContracted,
 } from "#utils/helpers";
 import { libelleTrancheEffectif } from "#utils/helpers/formatting/codes-effectifs";
-import type React from "react";
 
 type IProps = {
   session: ISession | null;
@@ -55,7 +55,7 @@ const EtablissementSection: React.FC<IProps> = ({
                 <Tag>secondaire</Tag>
               )}
               {" ( "}
-              <a key="entite" href={`/entreprise/${uniteLegale.chemin}`}>
+              <a href={`/entreprise/${uniteLegale.chemin}`} key="entite">
                 → voir la page {uniteLegaleLabel}
               </a>
               {" )"}
@@ -84,7 +84,7 @@ const EtablissementSection: React.FC<IProps> = ({
           [
             <a href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</a>,
             <PrintNever key="siege-social-link">
-              <a key="entite" href={`/entreprise/${uniteLegale.chemin}`}>
+              <a href={`/entreprise/${uniteLegale.chemin}`} key="entite">
                 → voir la page {uniteLegaleLabel}
               </a>
             </PrintNever>,
@@ -136,8 +136,8 @@ const EtablissementSection: React.FC<IProps> = ({
             "Convention collective de l’établissement",
             [
               <ConventionCollectivesBadgesSection
-                key="convention-collectives"
                 conventionCollectives={etablissement.listeIdcc}
+                key="convention-collectives"
                 siren={uniteLegale.siren}
               />,
             ],
@@ -151,17 +151,17 @@ const EtablissementSection: React.FC<IProps> = ({
         <>
           Avis de situation Insee de cet établissement :{" "}
           <AvisSituationLink
-            session={session}
+            button={true}
             etablissement={etablissement}
             label="télécharger"
-            button={true}
+            session={session}
           />
           {!usedInEntreprisePage && uniteLegale.dateMiseAJourInpi && (
             <>
               <br />
               Extrait RNE {uniteLegaleLabel} (
               <a href="/faq/extrait-kbis">équivalent KBIS/D1</a>) :{" "}
-              <ExtraitRNELink uniteLegale={uniteLegale} session={session} />
+              <ExtraitRNELink session={session} uniteLegale={uniteLegale} />
             </>
           )}
         </>
@@ -174,6 +174,13 @@ const EtablissementSection: React.FC<IProps> = ({
   return (
     <>
       <Section
+        id="etablissement"
+        lastModified={etablissement.dateDerniereMiseAJour}
+        sources={[
+          EAdministration.INSEE,
+          EAdministration.VIES,
+          ...labelsAndCertificatesSources(uniteLegale),
+        ]}
         title={
           usedInEntreprisePage
             ? `Siège social de ${uniteLegale.nomComplet}`
@@ -183,13 +190,6 @@ const EtablissementSection: React.FC<IProps> = ({
                 uniteLegale.nomComplet
               }${etablissement.commune ? ` à ${etablissement.commune}` : ""}`
         }
-        id="etablissement"
-        sources={[
-          EAdministration.INSEE,
-          EAdministration.VIES,
-          ...labelsAndCertificatesSources(uniteLegale),
-        ]}
-        lastModified={etablissement.dateDerniereMiseAJour}
       >
         <TwoColumnTable body={data} />
       </Section>

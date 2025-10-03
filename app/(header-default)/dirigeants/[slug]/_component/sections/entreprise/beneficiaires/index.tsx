@@ -11,25 +11,19 @@ import { WarningRBE } from "./warning-rbe";
 const BeneficiairesSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
-  return (
-    <ProtectedSectionWithUseCase
-      session={session}
-      uniteLegale={uniteLegale}
-      title="Bénéficiaire(s) effectif(s)"
-      id="beneficiaires"
-      sources={[EAdministration.INPI]}
-      allowedUseCases={[
-        UseCase.aidesPubliques,
-        UseCase.marches,
-        UseCase.fraude,
-      ]}
-      requiredRight={ApplicationRights.beneficiaires}
-      noRightContent={<WarningRBE />}
-      useCaseFormContent={<InfoAgentRBE />}
-      WrappedSection={ProtectedBeneficiairesSection}
-    />
-  );
-};
+}> = ({ uniteLegale, session }) => (
+  <ProtectedSectionWithUseCase
+    allowedUseCases={[UseCase.aidesPubliques, UseCase.marches, UseCase.fraude]}
+    id="beneficiaires"
+    noRightContent={<WarningRBE />}
+    requiredRight={ApplicationRights.beneficiaires}
+    session={session}
+    sources={[EAdministration.INPI]}
+    title="Bénéficiaire(s) effectif(s)"
+    uniteLegale={uniteLegale}
+    useCaseFormContent={<InfoAgentRBE />}
+    WrappedSection={ProtectedBeneficiairesSection}
+  />
+);
 
 export default BeneficiairesSection;

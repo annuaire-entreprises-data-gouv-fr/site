@@ -1,3 +1,4 @@
+import type React from "react";
 import ButtonLink from "#components-ui/button";
 import { Icon } from "#components-ui/icon/wrapper";
 import {
@@ -10,18 +11,17 @@ import {
   estDiffusible,
 } from "#models/core/diffusion";
 import type { IUniteLegale } from "#models/core/types";
-import type React from "react";
 
 const ExtraitRNELink: React.FC<{
   uniteLegale: IUniteLegale;
   label?: string;
   session: ISession | null;
-}> = ({ uniteLegale, label, session }) => {
-  return estDiffusible(uniteLegale) ||
-    hasRights(session, ApplicationRights.nonDiffusible) ? (
+}> = ({ uniteLegale, label, session }) =>
+  estDiffusible(uniteLegale) ||
+  hasRights(session, ApplicationRights.nonDiffusible) ? (
     <ButtonLink
-      small
       alt
+      small
       to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
     >
       <Icon slug="download">{label || "télécharger"}</Icon>
@@ -31,6 +31,5 @@ const ExtraitRNELink: React.FC<{
       {documentNonDiffusiblePlaceHolder(uniteLegale)}
     </a>
   );
-};
 
 export default ExtraitRNELink;

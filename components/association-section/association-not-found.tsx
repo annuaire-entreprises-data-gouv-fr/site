@@ -1,5 +1,5 @@
-import { Warning } from "#components-ui/alerts";
 import { TwoColumnTable } from "#components/table/simple";
+import { Warning } from "#components-ui/alerts";
 import type { IAssociation } from "#models/core/types";
 import { formatIntFr, isTwoMonthOld } from "#utils/helpers";
 

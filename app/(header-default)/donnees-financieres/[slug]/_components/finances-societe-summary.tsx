@@ -9,7 +9,7 @@ export const FinancesSocieteSummary = ({
 }: {
   session: ISession | null;
 }) => (
-  <nav role="navigation" aria-labelledby="finances-societe-summary-title">
+  <nav aria-labelledby="finances-societe-summary-title" role="navigation">
     <strong id="finances-societe-summary-title">
       Informations financières disponibles :
     </strong>

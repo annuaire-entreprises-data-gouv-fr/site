@@ -1,15 +1,15 @@
 "use client";
 
-import FAQLink from "#components-ui/faq-link";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { DataSectionClient } from "#components/section/data-section";
 import { TwoColumnTable } from "#components/table/simple";
+import FAQLink from "#components-ui/faq-link";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { IOpqibi } from "#models/espace-agent/certificats/opqibi";
 import { formatDateLong } from "#utils/helpers";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 
 export const OpqibiSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -22,17 +22,17 @@ export const OpqibiSection: React.FC<{
   );
   return (
     <DataSectionClient
-      title="Certificat OPQIBI"
+      data={opqibi}
       id="opqibi"
       isProtected
       notFoundInfo={
         <>
           Cette entreprise n’a pas de{" "}
           <a
-            target="_blank"
-            rel="noreferrer"
             aria-label="En savoir plus sur les certificats Opqibi, nouvelle fenêtre"
             href="https://www.opqibi.com/page/la-qualification-opqibi"
+            rel="noreferrer"
+            target="_blank"
           >
             certificat Opqibi
           </a>
@@ -40,17 +40,17 @@ export const OpqibiSection: React.FC<{
         </>
       }
       sources={[EAdministration.OPQIBI]}
-      data={opqibi}
+      title="Certificat OPQIBI"
     >
       {(opqibi) => (
         <>
           <p>
             Cette entreprise possède un{" "}
             <a
-              target="_blank"
-              rel="noreferrer"
               aria-label="En savoir plus sur les certificats Opqibi, nouvelle fenêtre"
               href="https://www.opqibi.com/page/la-qualification-opqibi"
+              rel="noreferrer"
+              target="_blank"
             >
               certificat Opqibi
             </a>{" "}
@@ -67,9 +67,9 @@ export const OpqibiSection: React.FC<{
               [
                 "Certificat",
                 <a
-                  target="_blank"
-                  href={opqibi.url}
                   aria-label="Voir au certificat sur le site OPQIBI, nouvelle fenêtre"
+                  href={opqibi.url}
+                  target="_blank"
                 >
                   Voir le certificat
                 </a>,

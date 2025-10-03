@@ -1,9 +1,9 @@
+import type React from "react";
+import { Section } from "#components/section";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
-import { Section } from "#components/section";
 import constants from "#models/constants";
 import type { IMonitoringWithMetaData, IRatio } from "#models/monitoring";
-import type React from "react";
 import styles from "./styles.module.css";
 
 const getUptimeColorStyles = (ratio: IRatio) => {
@@ -59,10 +59,8 @@ const Metric: React.FC<{
           key={index}
         >
           <InformationTooltip
-            horizontalOrientation={index < 76 ? "left" : "right"}
-            width={170}
-            tabIndex={0}
             ariaRelation="labelledby"
+            horizontalOrientation={index < 76 ? "left" : "right"}
             inlineBlock={false}
             label={
               <>
@@ -71,6 +69,8 @@ const Metric: React.FC<{
                 {getUptimeLabel(serie)}
               </>
             }
+            tabIndex={0}
+            width={170}
           >
             <div
               className={styles["serie-rectangle"]}
@@ -85,10 +85,10 @@ const Metric: React.FC<{
 
 const RobotTooltip = () => (
   <InformationTooltip
-    horizontalOrientation="right"
-    tabIndex={0}
     ariaRelation="labelledby"
+    horizontalOrientation="right"
     label="Ces données sont obtenues via un robot qui interroge la source de données toutes les minutes"
+    tabIndex={0}
   >
     <Icon color={constants.colors.frBlue} size={12} slug="information" />
   </InformationTooltip>
@@ -152,8 +152,8 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
             {apiDocumentationLink && (
               <a
                 href={apiDocumentationLink}
-                target="_blank"
                 rel="noreferrer noopener"
+                target="_blank"
               >
                 Consulter la documentation
               </a>

@@ -1,16 +1,16 @@
 "use client";
 
+import { useFetchJOAFE } from "hooks";
+import type React from "react";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { TwoColumnTable } from "#components/table/simple";
 import AssociationCreationNotFoundAlert from "#components-ui/alerts-with-explanations/association-creation-not-found-alert";
 import ButtonLink from "#components-ui/button";
 import { Icon } from "#components-ui/icon/wrapper";
 import { PrintNever } from "#components-ui/print-visibility";
-import { AsyncDataSectionClient } from "#components/section/data-section/client";
-import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IAssociation } from "#models/core/types";
 import { formatDate, formatIntFr } from "#utils/helpers";
-import { useFetchJOAFE } from "hooks";
-import type React from "react";
 
 type IProps = {
   uniteLegale: IAssociation;
@@ -23,13 +23,13 @@ export const JustificatifImmatriculationJOAFE: React.FC<IProps> = ({
 
   return (
     <AsyncDataSectionClient
-      id="justificatifs"
-      title="Enregistrement au JOAFE"
-      sources={[EAdministration.DILA]}
       data={annoncesJOAFE}
+      id="justificatifs"
       notFoundInfo={
         <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />
       }
+      sources={[EAdministration.DILA]}
+      title="Enregistrement au JOAFE"
     >
       {(annoncesJOAFE) => {
         const annonceCreation = annoncesJOAFE.annonces.find(

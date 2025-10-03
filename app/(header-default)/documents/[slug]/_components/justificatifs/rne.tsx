@@ -12,10 +12,10 @@ export const JustificatifImmatriculationRNE = ({
   session: ISession | null;
 }) => (
   <Section
-    title="Justificatif d’immatriculation au RNE"
     id="justificatifs"
     sources={[EAdministration.INPI]}
+    title="Justificatif d’immatriculation au RNE"
   >
-    <DataInpiLinkWithExplanations uniteLegale={uniteLegale} session={session} />
+    <DataInpiLinkWithExplanations session={session} uniteLegale={uniteLegale} />
   </Section>
 );

@@ -1,11 +1,11 @@
 import routes from "#clients/routes";
 import constants from "#models/constants";
 import {
-  type IUniteLegale,
   createDefaultEtablissement,
   createDefaultUniteLegale,
+  type IUniteLegale,
 } from "#models/core/types";
-import { type Siren, formatDateYear } from "#utils/helpers";
+import { formatDateYear, type Siren } from "#utils/helpers";
 import { etatFromEtatAdministratifInsee } from "#utils/helpers/insee-variables";
 import { clientAPIProxy } from "../client";
 import type { IIGResponse } from "./types";
@@ -16,14 +16,13 @@ import type { IIGResponse } from "./types";
  */
 export const clientUniteLegaleIG = async (
   siren: Siren
-): Promise<IUniteLegale> => {
-  return mapToDomainObject(
+): Promise<IUniteLegale> =>
+  mapToDomainObject(
     await clientAPIProxy<IIGResponse>(routes.proxy.ig(siren), {
       timeout: constants.timeout.XL,
     }),
     siren
   );
-};
 
 const mapToDomainObject = (r: IIGResponse, siren: Siren): IUniteLegale => {
   const defaultUniteLegale = createDefaultUniteLegale(siren);

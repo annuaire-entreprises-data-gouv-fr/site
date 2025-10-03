@@ -1,11 +1,11 @@
 "use client";
-import type { IMatomoStats } from "#clients/matomo";
-import { Select } from "#components-ui/select";
-import { LineChart } from "#components/chart/line";
-import { StackedBarChart } from "#components/chart/stack-bar";
-import constants from "#models/constants";
 import type { ChartData } from "chart.js";
 import { type ChangeEvent, useState } from "react";
+import type { IMatomoStats } from "#clients/matomo";
+import { LineChart } from "#components/chart/line";
+import { StackedBarChart } from "#components/chart/stack-bar";
+import { Select } from "#components-ui/select";
+import constants from "#models/constants";
 
 export const NpsStats: React.FC<{
   monthlyNps: IMatomoStats["monthlyNps"];
@@ -105,12 +105,12 @@ export const NpsStats: React.FC<{
       <div className="layout-right">
         <div>Afficher les données par&nbsp;</div>
         <Select
+          defaultValue={"avg"}
+          onChange={onOptionChange}
           options={[
             { value: "avg", label: "note moyenne" },
             { value: "nps", label: "net promoter score (NPS)" },
           ]}
-          defaultValue={"avg"}
-          onChange={onOptionChange}
         />
       </div>
       <br />
@@ -141,18 +141,8 @@ export const NpsStats: React.FC<{
       <strong>utilisateurs récurrents</strong>. Cette “image” est donc plus
       représentative de ces derniers que de l’ensemble des utilisateurs du site.
       <StackedBarChart
-        height="300px"
         data={userTypesData}
-        scales={{
-          x: {
-            stacked: true,
-          },
-          y: {
-            stacked: true,
-            min: 1,
-            max: 100,
-          },
-        }}
+        height="300px"
         options={{ scales: { y: { min: 1, max: 100 } } }}
         pluginOption={{
           legend: { onClick: () => undefined },
@@ -164,6 +154,16 @@ export const NpsStats: React.FC<{
                 )}%`;
               },
             },
+          },
+        }}
+        scales={{
+          x: {
+            stacked: true,
+          },
+          y: {
+            stacked: true,
+            min: 1,
+            max: 100,
           },
         }}
       />

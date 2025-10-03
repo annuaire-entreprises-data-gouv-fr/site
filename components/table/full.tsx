@@ -17,7 +17,7 @@ export const FullTable: React.FC<ISectionProps> = ({
   columnWidths,
 }) => (
   <>
-    <table id={id} className={styles.fullTable}>
+    <table className={styles.fullTable} id={id}>
       <thead className={styles.head}>
         <tr>
           {head.map((cell, index) => (
@@ -36,9 +36,10 @@ export const FullTable: React.FC<ISectionProps> = ({
       </thead>
       <tbody>
         {body.map((row, bodyIndex) => (
-          <tr key={"row-" + bodyIndex} className={styles.row}>
+          <tr className={styles.row} key={"row-" + bodyIndex}>
             {row.map((cell, rowIndex) => (
               <td
+                className={styles.cell}
                 key={"cell-" + rowIndex}
                 style={{
                   verticalAlign,
@@ -46,7 +47,6 @@ export const FullTable: React.FC<ISectionProps> = ({
                     ? { width: columnWidths[rowIndex] }
                     : {}),
                 }}
-                className={styles.cell}
               >
                 {cell == null || cell === "" ? null : (
                   <strong aria-hidden className={styles.mobile}>

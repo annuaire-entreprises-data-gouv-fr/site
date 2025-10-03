@@ -1,6 +1,7 @@
 import Logo from "#components-ui/logo";
 import { administrationsMetaData } from "#models/administrations";
 import styles from "./style.module.css";
+
 const AdministrationDescription: React.FC<{
   slug: string; // EAdministration
   titleLevel?: "h2" | "h3";
@@ -23,11 +24,11 @@ const AdministrationDescription: React.FC<{
     <div className={styles["administration-wrapper"]} id={slug}>
       <div>
         <Logo
-          title={long}
           alt={`Logo ${short}`}
-          slug={logoType ? slug : "rf"}
-          width={80}
           height={80}
+          slug={logoType ? slug : "rf"}
+          title={long}
+          width={80}
         />
       </div>
       <div>
@@ -55,13 +56,13 @@ const AdministrationDescription: React.FC<{
             <br />
             {contact && (
               <a
-                rel="noreferrer noopener"
-                target="_blank"
                 href={
                   (contact || "").indexOf("@") > -1
                     ? `mailto:${contact}`
                     : contact
                 }
+                rel="noreferrer noopener"
+                target="_blank"
               >
                 → Contacter cette{" "}
                 {estServicePublic ? "administration" : "organisation"}

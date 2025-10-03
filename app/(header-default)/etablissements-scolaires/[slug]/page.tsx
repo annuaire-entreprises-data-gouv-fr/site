@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { EtablissementsScolairesSection } from "#components/education-nationale";
 import Title from "#components/title-section";
 import { FICHE } from "#components/title-section/tabs";
@@ -11,7 +12,6 @@ import extractParamsAppRouter, {
   type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import type { Metadata } from "next";
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -43,8 +43,8 @@ const EtablissementsScolairesPage = async (props: AppRouterProps) => {
     <div className="content-container">
       <Title
         ficheType={FICHE.ETABLISSEMENTS_SCOLAIRES}
-        uniteLegale={uniteLegale}
         session={session}
+        uniteLegale={uniteLegale}
       />
       <EtablissementsScolairesSection
         etablissements={etablissementsScolaires}

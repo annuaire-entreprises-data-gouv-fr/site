@@ -1,5 +1,12 @@
 "use client";
 
+import { useOutsideClick } from "hooks";
+import {
+  type KeyboardEventHandler,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import type { IGeoElement } from "#clients/geo";
 import { Info, Warning } from "#components-ui/alerts";
 import FloatingModal from "#components-ui/floating-modal";
@@ -7,8 +14,6 @@ import { Loader } from "#components-ui/loader";
 import { isAPI404, isAPINotResponding } from "#models/api-not-responding";
 import { searchGeoElementByText } from "#models/geo";
 import { debounce } from "#utils/helpers/debounce";
-import { useOutsideClick } from "hooks";
-import { type KeyboardEventHandler, useCallback, useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
 enum Issue {
@@ -93,11 +98,12 @@ export const LocationFilter: React.FC<{
   }, [searchTerm, setGeoSuggests, setIssue, search]);
 
   return (
-    <div ref={ref} className={styles["location-filter-container"]}>
+    <div className={styles["location-filter-container"]} ref={ref}>
       <label htmlFor="geo-search-input">Ville, département ou région :</label>
       <input
-        id="geo-search-input"
+        autoComplete="off"
         className="fr-input"
+        id="geo-search-input"
         onChange={onChange}
         onFocus={() => {
           if (geoSuggests.length > 0) {
@@ -106,15 +112,14 @@ export const LocationFilter: React.FC<{
         }}
         onKeyDown={onKeyDown}
         placeholder="Saisir une ville, département ou région"
-        autoComplete="off"
         type="search"
         value={searchTerm}
       />
       <FloatingModal
-        className={styles["location-filter-modal-container"]}
-        style={{ display: open ? "block" : "none" }}
         aria-label={"Les filtres de localisation"}
         aria-modal={false}
+        className={styles["location-filter-modal-container"]}
+        style={{ display: open ? "block" : "none" }}
       >
         {issue !== Issue.NONE ? (
           issue === Issue.NORESULT ? (
@@ -134,8 +139,8 @@ export const LocationFilter: React.FC<{
             ) : (
               geoSuggests.map((suggest: IGeoElement) => (
                 <div
-                  key={suggest.label}
                   className="suggest cursor-pointer"
+                  key={suggest.label}
                   onClick={() => selectDep(suggest)}
                 >
                   {suggest.label}

@@ -1,5 +1,5 @@
-import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import { DonneesPriveesSection } from "#components/donnees-privees-section";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import {
   ApplicationRights,
   hasRights,
@@ -26,7 +26,7 @@ export default function DonneesFinancieresSociete({
       <FinancesSocieteSummary session={session} />
       {estDiffusible(uniteLegale) ||
       hasRights(session, ApplicationRights.nonDiffusible) ? (
-        <IndicateursFinanciers uniteLegale={uniteLegale} session={session} />
+        <IndicateursFinanciers session={session} uniteLegale={uniteLegale} />
       ) : (
         <DonneesPriveesSection title="Indicateurs financiers" />
       )}
@@ -34,15 +34,15 @@ export default function DonneesFinancieresSociete({
         <>
           <HorizontalSeparator />
           <IndicateursFinanciersBDF
-            uniteLegale={uniteLegale}
             session={session}
+            uniteLegale={uniteLegale}
           />
         </>
       )}
-      <BilansDocumentsSociete uniteLegale={uniteLegale} session={session} />
+      <BilansDocumentsSociete session={session} uniteLegale={uniteLegale} />
       <HorizontalSeparator />
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
-      <LiassesFiscales uniteLegale={uniteLegale} session={session} />
+      <LiassesFiscales session={session} uniteLegale={uniteLegale} />
     </>
   );
 }

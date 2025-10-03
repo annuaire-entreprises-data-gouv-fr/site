@@ -1,21 +1,21 @@
 "use client";
 
-import FAQLink from "#components-ui/faq-link";
-import InformationTooltip from "#components-ui/information-tooltip";
-import { Tag } from "#components-ui/tag";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo, useState } from "react";
 import AgentWallAssociationProtected from "#components/espace-agent-components/agent-wall/association";
 import { DataSectionClient } from "#components/section/data-section";
 import TableFilter from "#components/table/filter";
 import { FullTable } from "#components/table/full";
+import FAQLink from "#components-ui/faq-link";
+import InformationTooltip from "#components-ui/information-tooltip";
+import { Tag } from "#components-ui/tag";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import { isDataSuccess, isUnauthorized } from "#models/data-fetching";
 import { formatSiret } from "#utils/helpers";
 import { extractAssociationEtablissements } from "#utils/helpers/association";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import { useMemo, useState } from "react";
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -47,8 +47,8 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
   if (isUnauthorized(associationProtected)) {
     return (
       <AgentWallAssociationProtected
-        title="Dirigeants des associations"
         id="dirigeants"
+        title="Dirigeants des associations"
         uniteLegale={uniteLegale}
       />
     );
@@ -56,12 +56,12 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
 
   return (
     <DataSectionClient
+      data={associationProtected}
       id="rna-dirigeants"
-      title="Dirigeants des associations"
       isProtected
       notFoundInfo={<NoDirigeants />}
       sources={[EAdministration.MI, EAdministration.DJEPVA]}
-      data={associationProtected}
+      title="Dirigeants des associations"
     >
       {(associationProtected) => (
         <>
@@ -77,17 +77,16 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
               :
               <TableFilter
                 dataSelect={etablissementsForFilter}
-                onChange={(e) => setSelectedSiret(e)}
-                placeholder="Filtrer par établissement"
                 fallback={
                   <>
                     <br />
                     <br />
                   </>
                 }
+                onChange={(e) => setSelectedSiret(e)}
+                placeholder="Filtrer par établissement"
               />
               <FullTable
-                head={["Établissement", "Rôle", "Détails"]}
                 body={associationProtected.dirigeants
                   .filter((d) =>
                     selectedSiret.length > 0
@@ -134,6 +133,7 @@ function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
                       </>,
                     ]
                   )}
+                head={["Établissement", "Rôle", "Détails"]}
               />
             </>
           )}

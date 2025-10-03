@@ -47,10 +47,10 @@ const NotInSireneAlert: React.FC<{
       <br />
       Retrouvez plus d&apos;informations sur la{" "}
       <a
-        href={routes.rne.portail.entreprise + uniteLegale.siren}
-        target="_blank"
-        rel="noopener noreferrer"
         aria-label="Voir la page de cette structure sur data.inpi.fr, nouvelle fenêtre"
+        href={routes.rne.portail.entreprise + uniteLegale.siren}
+        rel="noopener noreferrer"
+        target="_blank"
       >
         fiche data.inpi.fr
       </a>

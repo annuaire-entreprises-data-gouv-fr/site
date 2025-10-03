@@ -1,13 +1,13 @@
 "use client";
 
+import { useFetchServicePublic } from "hooks/fetch/service-public";
+import type { ReactNode } from "react";
 import NonRenseigne from "#components/non-renseigne";
 import { DataSectionClient } from "#components/section/data-section";
 import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import type { IServicePublic } from "#models/service-public";
-import { useFetchServicePublic } from "hooks/fetch/service-public";
-import type { ReactNode } from "react";
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -23,23 +23,23 @@ export default function ServicePublicSection({
   return (
     <>
       <DataSectionClient
-        title={"Annuaire du service public"}
-        sources={[EAdministration.DILA]}
         data={servicePublic}
         notFoundInfo={
           <p>
             Cette administration n’a pas été retrouvé dans l’
             <a
-              href="https://lannuaire.service-public.fr/"
-              target="_blank"
-              rel="noopener noreferrer"
               aria-label="Voir l’Annuaire du service public, nouvelle fenêtre"
+              href="https://lannuaire.service-public.fr/"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Annuaire du service public
             </a>
             .
           </p>
         }
+        sources={[EAdministration.DILA]}
+        title={"Annuaire du service public"}
       >
         {(servicePublic) => (
           <>
@@ -49,10 +49,10 @@ export default function ServicePublicSection({
               <p>
                 Retrouvez plus d&apos;informations sur la{" "}
                 <a
-                  href={servicePublic.liens.annuaireServicePublic.valeur}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   aria-label="Voir la page de cette administration sur l’Annuaire du service public, nouvelle fenêtre"
+                  href={servicePublic.liens.annuaireServicePublic.valeur}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   fiche de l’Annuaire du service public
                 </a>
@@ -69,8 +69,8 @@ export default function ServicePublicSection({
 const getTableData = (
   servicePublic: IServicePublic,
   uniteLegale: IUniteLegale
-) => {
-  return (
+) =>
+  (
     [
       ["Nom", servicePublic.nom],
       servicePublic.typeOrganisme && [
@@ -106,10 +106,10 @@ const getTableData = (
         "Formulaire de contact",
         servicePublic.liens.formulaireContact && (
           <a
-            href={servicePublic.liens.formulaireContact.valeur}
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label={`ouvrir ${servicePublic.liens.formulaireContact.libelle}, nouvelle fenêtre`}
+            href={servicePublic.liens.formulaireContact.valeur}
+            rel="noopener noreferrer"
+            target="_blank"
           >
             {servicePublic.liens.formulaireContact.libelle}
           </a>
@@ -136,15 +136,14 @@ const getTableData = (
       ],
     ].filter(Boolean) as [string, ReactNode][]
   ).map(([label, value]) => [label, value ?? <NonRenseigne />]);
-};
 
 function Lien({ libelle, valeur }: { libelle: string; valeur: string }) {
   return (
     <a
-      href={valeur}
-      target="_blank"
-      rel="noopener noreferrer"
       aria-label={`ouvrir ${libelle}, nouvelle fenêtre`}
+      href={valeur}
+      rel="noopener noreferrer"
+      target="_blank"
     >
       {libelle}
     </a>

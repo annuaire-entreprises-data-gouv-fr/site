@@ -1,9 +1,9 @@
 "use client";
 
+import { useRef, useState } from "react";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import constants from "#models/constants";
-import { useRef, useState } from "react";
 import styles from "./styles.module.css";
 
 interface SiretFilterProps {
@@ -148,14 +148,14 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
           onDrop={handleDrop}
         >
           <input
-            ref={fileInputRef}
-            type="file"
             accept=".txt"
-            onChange={handleFileInput}
             className={styles.fileInput}
             id="siret-file-input"
+            onChange={handleFileInput}
+            ref={fileInputRef}
+            type="file"
           />
-          <label htmlFor="siret-file-input" className={styles.fileUploadLabel}>
+          <label className={styles.fileUploadLabel} htmlFor="siret-file-input">
             <Icon color={constants.colors.frBlue} slug="download" />
             <span>
               Glissez-déposez votre fichier .txt ici ou cliquez pour le
@@ -175,9 +175,9 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
             <div className={styles.siretListHeader}>
               <h3>Sélection actuelle ({siretsAndSirens.length})</h3>
               <button
-                type="button"
                 className="fr-btn fr-btn--sm fr-btn--secondary"
                 onClick={clearSiretList}
+                type="button"
               >
                 Effacer la liste
               </button>
@@ -185,7 +185,7 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
 
             <div className={styles.siretList}>
               {siretsAndSirens.slice(0, 10).map((siret, index) => (
-                <span key={index} className="fr-tag">
+                <span className="fr-tag" key={index}>
                   {siret}
                 </span>
               ))}

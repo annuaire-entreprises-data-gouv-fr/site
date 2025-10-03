@@ -1,9 +1,9 @@
-import FAQLink from "#components-ui/faq-link";
+import type React from "react";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
+import FAQLink from "#components-ui/faq-link";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ICollectiviteTerritoriale } from "#models/core/types";
-import type React from "react";
 
 const CollectiviteTerritorialeSection: React.FC<{
   uniteLegale: ICollectiviteTerritoriale;
@@ -53,12 +53,12 @@ const CollectiviteTerritorialeSection: React.FC<{
   return (
     <>
       <Section
-        title={`Collectivité territoriale`}
         sources={[
           EAdministration.INSEE,
           EAdministration.MI,
           EAdministration.DINUM,
         ]}
+        title={`Collectivité territoriale`}
       >
         <TwoColumnTable body={data} />
         {shouldDisplayCollectiviteLink && (
@@ -66,9 +66,9 @@ const CollectiviteTerritorialeSection: React.FC<{
             <br />
             Retrouvez plus d&apos;informations sur la{" "}
             <a
-              target="_blank"
               href={`https://collectivite.fr/${codeInsee}`}
               rel="noopener"
+              target="_blank"
             >
               fiche collectivites.fr
             </a>

@@ -1,3 +1,5 @@
+import type React from "react";
+import type { PropsWithChildren } from "react";
 import { Warning } from "#components-ui/alerts";
 import { Icon } from "#components-ui/icon/wrapper";
 import DataSourcesTooltip from "#components-ui/information-tooltip/data-sources-tooltip";
@@ -6,8 +8,6 @@ import { administrationsMetaData } from "#models/administrations";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import constants from "#models/constants";
 import { formatDate, formatDateLong, isTwoMonthOld } from "#utils/helpers";
-import type React from "react";
-import type { PropsWithChildren } from "react";
 import SectionErrorBoundary from "./section-error-boundary";
 import style from "./style.module.css";
 export interface ISectionProps {
@@ -67,26 +67,26 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
               ({ slug, long, logoType, short }) =>
                 logoType && (
                   <a
-                    key={long}
-                    href={faqLink}
-                    title={long}
                     className="no-style-link"
+                    href={faqLink}
+                    key={long}
+                    title={long}
                   >
                     {logoType === "portrait" ? (
                       <Logo
-                        title={long}
                         alt={short}
-                        slug={slug}
-                        width={70}
                         height={40}
+                        slug={slug}
+                        title={long}
+                        width={70}
                       />
                     ) : (
                       <Logo
-                        title={long}
                         alt={short}
-                        slug={slug}
-                        width={170}
                         height={40}
+                        slug={slug}
+                        title={long}
+                        width={170}
                       />
                     )}
                   </a>

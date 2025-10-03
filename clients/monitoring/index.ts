@@ -57,11 +57,8 @@ const mapToDomainObject = (
   const monitorStartDate = startDate ? new Date(startDate) : null;
   const series = dailySeries.export(monitorStartDate);
 
-  const avg = (ratios: IRatio[]) => {
-    return (
-      ratios.reduce((sum, ratio) => ratio.ratioNumber + sum, 0) / ratios.length
-    );
-  };
+  const avg = (ratios: IRatio[]) =>
+    ratios.reduce((sum, ratio) => ratio.ratioNumber + sum, 0) / ratios.length;
 
   return {
     series,

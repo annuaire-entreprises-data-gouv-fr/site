@@ -21,10 +21,10 @@ const SearchResults: React.FC<{
   if (!results.results || results.results.length === 0) {
     return (
       <ResultsCounter
-        resultCount={results.resultCount}
         currentPage={results.currentPage}
-        isMap={false}
         currentSearchTerm={searchTerm}
+        isMap={false}
+        resultCount={results.resultCount}
         searchParams={searchFilterParams}
       />
     );
@@ -33,10 +33,10 @@ const SearchResults: React.FC<{
   return (
     <>
       <ResultsCounter
-        resultCount={results.resultCount}
         currentPage={results.currentPage}
-        isMap={false}
         currentSearchTerm={searchTerm}
+        isMap={false}
+        resultCount={results.resultCount}
         searchParams={searchFilterParams}
       />
       <div>
@@ -45,10 +45,10 @@ const SearchResults: React.FC<{
           shouldColorZipCode={!!searchFilterParams.cp_dep}
         />
         <ResultsPagination
-          totalPages={results.pageCount}
-          searchTerm={searchTerm}
           currentPage={results.currentPage}
           searchFilterParams={searchFilterParams}
+          searchTerm={searchTerm}
+          totalPages={results.pageCount}
         />
       </div>
     </>

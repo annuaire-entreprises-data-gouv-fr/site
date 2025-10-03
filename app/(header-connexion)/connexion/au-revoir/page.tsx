@@ -1,6 +1,6 @@
+import type { Metadata } from "next";
 import { ConnexionSubLayout } from "#components-ui/connexion-layout";
 import logoutPicture from "#components-ui/illustrations/logout";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Vous êtes bien deconnecté",

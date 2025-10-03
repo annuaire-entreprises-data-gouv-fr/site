@@ -1,8 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { Loader } from "#components-ui/loader";
 import { isSiren } from "#utils/helpers";
-import { useState } from "react";
 
 type RenseignerSirenProps = {
   postFormData: (formData: FormData) => Promise<void>;
@@ -27,30 +27,30 @@ export function RenseignerSiren({ postFormData }: RenseignerSirenProps) {
   return (
     <form onSubmit={handleSubmit}>
       <fieldset
-        className="fr-fieldset fr-grid-row"
         aria-label="SIREN de l'entreprise"
-        id="siren-1632-fieldset"
         aria-labelledby="siren-1632-fieldset-messages"
+        className="fr-fieldset fr-grid-row"
+        id="siren-1632-fieldset"
       >
         <div className="fr-fieldset__element fr-col-lg-6 fr-col-md-8 fr-col-sm-12">
           <div className="fr-input-group">
-            <label htmlFor="siren-1-input" className="fr-label">
+            <label className="fr-label" htmlFor="siren-1-input">
               Numéro de SIREN
             </label>
             <input
-              className="fr-input"
-              placeholder="Exemple : 468200728"
               aria-describedby="siren-1-messages"
-              name="siren"
-              value={siren}
-              onChange={(e) => setSiren(e.target.value)}
-              type="text"
+              className="fr-input"
               id="siren-1-input"
+              name="siren"
+              onChange={(e) => setSiren(e.target.value)}
+              placeholder="Exemple : 468200728"
+              type="text"
+              value={siren}
             />
             <div
+              aria-live="assertive"
               className="fr-messages-group"
               id="siren-1-messages"
-              aria-live="assertive"
             >
               {siren && !validSiren && (
                 <p className="fr-error-text">
@@ -62,15 +62,15 @@ export function RenseignerSiren({ postFormData }: RenseignerSirenProps) {
         </div>
       </fieldset>
       <p>
-        <a href="/" target="_blank" rel="noopener noreferrer">
+        <a href="/" rel="noopener noreferrer" target="_blank">
           → Rechercher le SIREN de mon entreprise
         </a>
       </p>
       <p className="fr-mt-6w">
         <button
           className="fr-btn fr-btn--primary fr-mr-2w"
-          type="submit"
           disabled={!validSiren || loading}
+          type="submit"
         >
           Valider et envoyer la demande {loading && <Loader />}
         </button>

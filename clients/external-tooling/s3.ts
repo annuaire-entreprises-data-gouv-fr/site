@@ -1,3 +1,5 @@
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import type { Readable } from "stream";
 import {
   HttpForbiddenError,
   HttpNotFound,
@@ -5,8 +7,6 @@ import {
 } from "#clients/exceptions";
 import { Exception } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import type { Readable } from "stream";
 
 const bucketsLists = {
   "monitoring-comptes-agents": {

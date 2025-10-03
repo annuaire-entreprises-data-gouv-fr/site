@@ -1,6 +1,6 @@
-import { regions } from "#utils/helpers/formatting/metadata/regions";
 import type { ExportCsvInput } from "app/api/export-sirene/input-validation";
 import { niv1ToNiv5Mapping } from "scripts/nomenclature-d-activites-francaises/niv1ToNiv5Mapping";
+import { regions } from "#utils/helpers/formatting/metadata/regions";
 import { effectifCodes } from "./constants";
 
 export class SireneQueryBuilder {

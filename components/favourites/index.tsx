@@ -1,8 +1,8 @@
 "use client";
-import { Tag } from "#components-ui/tag";
-import { formatIntFr, pluralize } from "#utils/helpers";
 import { useStorage } from "hooks";
 import { useEffect, useState } from "react";
+import { Tag } from "#components-ui/tag";
+import { formatIntFr, pluralize } from "#utils/helpers";
 
 export default function Favourites() {
   const [shortCuts, setShortCuts] = useState([]);
@@ -26,12 +26,12 @@ export default function Favourites() {
 
             return (
               <Tag
+                key={siren}
                 link={{
                   href: path || `/entreprise/${siren}`,
                   "aria-label": `Consulter la page de ${fullName}`,
                 }}
                 maxWidth="300px"
-                key={siren}
               >
                 {fullName}
               </Tag>

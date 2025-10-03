@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Section } from "#components/section";
 import { AskUseCase } from "#components/section-with-use-case/ask-use-case";
 import type { EAdministration } from "#models/administrations/EAdministration";
@@ -10,7 +11,6 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { UseCase } from "#models/use-cases";
-import { useState } from "react";
 
 type WrappedSectionProps = {
   uniteLegale: IUniteLegale;
@@ -59,7 +59,7 @@ const ProtectedSectionWithUseCase: React.FC<{
 
   if (!hasRights(session, requiredRight)) {
     return noRightContent ? (
-      <Section title={title} id={id}>
+      <Section id={id} title={title}>
         {noRightContent}
       </Section>
     ) : null;
@@ -67,16 +67,16 @@ const ProtectedSectionWithUseCase: React.FC<{
 
   if (!useCase) {
     return (
-      <Section title={title} id={id} sources={sources} isProtected={true}>
+      <Section id={id} isProtected={true} sources={sources} title={title}>
         {useCaseFormContent || <DefaultIntroContent />}
-        <AskUseCase idPrefix={id} useCase={useCase} setUseCase={setUseCase} />
+        <AskUseCase idPrefix={id} setUseCase={setUseCase} useCase={useCase} />
       </Section>
     );
   }
 
   if (!allowedUseCases.includes(useCase)) {
     return (
-      <Section title={title} id={id} sources={sources} isProtected={true}>
+      <Section id={id} isProtected={true} sources={sources} title={title}>
         {useCaseFormContent || <DefaultIntroContent />}
         <strong>
           Ces informations ne vous sont pas accessibles dans ce cas d‘usage.
@@ -87,13 +87,13 @@ const ProtectedSectionWithUseCase: React.FC<{
 
   return (
     <WrappedSection
-      uniteLegale={uniteLegale}
-      session={session}
-      useCase={useCase}
-      title={title}
       id={id}
-      sources={sources}
       isProtected={true}
+      session={session}
+      sources={sources}
+      title={title}
+      uniteLegale={uniteLegale}
+      useCase={useCase}
     />
   );
 };

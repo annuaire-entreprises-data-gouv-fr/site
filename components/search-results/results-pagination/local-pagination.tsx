@@ -12,8 +12,8 @@ const First: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
   <li>
     <button
       className="fr-pagination__link fr-pagination__link--first fr-pagination__link--lg-label"
-      onClick={() => currentPage > 1 && onPageChange(1)}
       disabled={currentPage <= 1}
+      onClick={() => currentPage > 1 && onPageChange(1)}
     >
       {compact ? "" : "Première page"}
     </button>
@@ -29,8 +29,8 @@ const Last: React.FC<IProps> = ({
   <li>
     <button
       className="fr-pagination__link fr-pagination__link--last"
-      onClick={() => currentPage < totalPages && onPageChange(totalPages)}
       disabled={currentPage >= totalPages}
+      onClick={() => currentPage < totalPages && onPageChange(totalPages)}
     >
       {compact ? "" : "Dernière page"}
     </button>
@@ -41,8 +41,8 @@ const Previous: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
   <li>
     <button
       className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
-      onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
       disabled={currentPage <= 1}
+      onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
     >
       {compact ? "" : "Page précédente"}
     </button>
@@ -58,8 +58,8 @@ const Next: React.FC<IProps> = ({
   <li>
     <button
       className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
-      onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
       disabled={currentPage >= totalPages}
+      onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
     >
       {compact ? "" : "Page suivante"}
     </button>
@@ -73,9 +73,9 @@ const Page: React.FC<{
 }> = ({ pageNum, currentPage, onPageChange }) => (
   <li>
     <button
-      onClick={() => onPageChange(pageNum)}
-      className="fr-pagination__link"
       aria-current={currentPage === pageNum ? "page" : undefined}
+      className="fr-pagination__link"
+      onClick={() => onPageChange(pageNum)}
       title={`Page ${pageNum}`}
     >
       {pageNum}
@@ -101,41 +101,39 @@ const LocalPageCounter: React.FC<IProps> = ({
 
   return (
     <div className="layout-center" style={{ margin: "15px auto" }}>
-      <nav role="navigation" className="fr-pagination" aria-label="Pagination">
+      <nav aria-label="Pagination" className="fr-pagination" role="navigation">
         <ul className="fr-pagination__list">
           <First
-            currentPage={currentPage}
-            totalPages={totalPages}
             compact={compact}
+            currentPage={currentPage}
             onPageChange={onPageChange}
+            totalPages={totalPages}
           />
           <Previous
-            currentPage={currentPage}
-            totalPages={totalPages}
             compact={compact}
+            currentPage={currentPage}
             onPageChange={onPageChange}
+            totalPages={totalPages}
           />
-          {pages.map((pageNum) => {
-            return (
-              <Page
-                currentPage={currentPage}
-                pageNum={pageNum}
-                onPageChange={onPageChange}
-                key={pageNum}
-              />
-            );
-          })}
+          {pages.map((pageNum) => (
+            <Page
+              currentPage={currentPage}
+              key={pageNum}
+              onPageChange={onPageChange}
+              pageNum={pageNum}
+            />
+          ))}
           <Next
-            currentPage={currentPage}
             compact={compact}
-            totalPages={totalPages}
+            currentPage={currentPage}
             onPageChange={onPageChange}
+            totalPages={totalPages}
           />
           <Last
-            currentPage={currentPage}
             compact={compact}
-            totalPages={totalPages}
+            currentPage={currentPage}
             onPageChange={onPageChange}
+            totalPages={totalPages}
           />
         </ul>
       </nav>

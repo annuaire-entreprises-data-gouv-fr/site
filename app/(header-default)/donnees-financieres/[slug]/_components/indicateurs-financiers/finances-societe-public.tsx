@@ -1,9 +1,10 @@
 "use client";
 
-import { SimpleSeparator } from "#components-ui/horizontal-separator";
+import { useFetchFinancesSociete } from "hooks";
 import { DGFiP } from "#components/administrations";
-import { AskUseCase } from "#components/section-with-use-case/ask-use-case";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { AskUseCase } from "#components/section-with-use-case/ask-use-case";
+import { SimpleSeparator } from "#components-ui/horizontal-separator";
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   ApplicationRights,
@@ -12,7 +13,6 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { UseCase } from "#models/use-cases";
-import { useFetchFinancesSociete } from "hooks";
 import { FinancesSocieteInnerSection } from "./inner-section";
 
 const NotFoundInfo = ({
@@ -43,10 +43,8 @@ export function PublicFinancesSocieteSection({
 
   return (
     <AsyncDataSectionClient
-      title="Indicateurs financiers"
-      id="indicateurs-financiers"
-      sources={[EAdministration.MEF, EAdministration.INPI]}
       data={financesSociete}
+      id="indicateurs-financiers"
       isProtected={false}
       notFoundInfo={
         hasRights(session, ApplicationRights.chiffreAffaires) ? (
@@ -55,6 +53,8 @@ export function PublicFinancesSocieteSection({
           "Aucun indicateur financier n’a été retrouvé pour cette structure."
         )
       }
+      sources={[EAdministration.MEF, EAdministration.INPI]}
+      title="Indicateurs financiers"
     >
       {(financesSociete) => (
         <>

@@ -1,7 +1,7 @@
 "use client";
 
-import ButtonLink from "#components-ui/button";
 import { type CSSProperties, useId, useState } from "react";
+import ButtonLink from "#components-ui/button";
 import styles from "./style.module.css";
 
 type IProps = {
@@ -35,14 +35,14 @@ export default function ShowMore(props: IProps) {
       <div className={styles["content"]}>{props.children}</div>
       <div className={styles["button-container"]}>
         <ButtonLink
-          onClick={() => setIsExpanded(!isExpanded)}
+          alt
           aria-label={props["aria-label"] || "Voir toutes les informations"}
           described-by={id}
-          alt
+          onClick={() => setIsExpanded(!isExpanded)}
         >
           {isExpanded ? "Voir moins" : props.label || "Voir plus"}
         </ButtonLink>
-        <p id={id} className="fr-sr-only">
+        <p className="fr-sr-only" id={id}>
           {!isExpanded ? "Affiche le texte caché" : "Cache une partie du texte"}{" "}
           pour les utilisateurs voyants, mais le texte est déjà accessible en
           entier pour les lecteurs d’écran.

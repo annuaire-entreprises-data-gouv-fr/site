@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { cache, use } from "react";
+import { RenderMarkdownServerOnly } from "#components/markdown";
 import Breadcrumb from "#components-ui/breadcrumb";
 import ButtonLink from "#components-ui/button";
 import TextWrapper from "#components-ui/text-wrapper";
-import { RenderMarkdownServerOnly } from "#components/markdown";
 import { allDefinitions, getDefinition } from "#models/article/definitions";
 import { Exception } from "#models/exceptions";
 import { logWarningInSentry } from "#utils/sentry";
@@ -9,9 +12,6 @@ import type {
   AppRouterProps,
   IParams,
 } from "#utils/server-side-helper/app/extract-params";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { cache, use } from "react";
 
 const cachedGetDefinition = cache((slug: string) => {
   const definition = getDefinition(slug);
@@ -83,9 +83,7 @@ export default function DefinitionPage({ params }: AppRouterProps) {
 }
 
 export async function generateStaticParams(): Promise<Array<IParams>> {
-  return allDefinitions.map(({ slug }) => {
-    return {
-      slug,
-    };
-  });
+  return allDefinitions.map(({ slug }) => ({
+    slug,
+  }));
 }

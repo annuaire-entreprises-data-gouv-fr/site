@@ -1,8 +1,8 @@
 import {
   type ChangeEventHandler,
   type DetailedHTMLProps,
-  type TextareaHTMLAttributes,
   forwardRef,
+  type TextareaHTMLAttributes,
   useCallback,
 } from "react";
 
@@ -30,13 +30,13 @@ function TextArea(
   return (
     <textarea
       {...rest}
+      className={"fr-input " + (className ?? "")}
+      onChange={handleChange}
+      ref={ref}
       style={{
         resize: autoResize ? "none" : "vertical",
         overflow: autoResize ? "hidden" : "auto",
       }}
-      ref={ref}
-      className={"fr-input " + (className ?? "")}
-      onChange={handleChange}
     />
   );
 }

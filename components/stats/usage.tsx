@@ -1,8 +1,8 @@
 "use client";
+import type { ChartData } from "chart.js";
 import { DoughnutChart } from "#components/chart/doughnut";
 import { LineChart } from "#components/chart/line";
 import constants from "#models/constants";
-import type { ChartData } from "chart.js";
 
 export const UsageStats: React.FC<{
   copyPasteAction: {
@@ -51,7 +51,7 @@ export const UsageStats: React.FC<{
           </a>
           .
         </p>
-        <LineChart height="300px" data={data} />
+        <LineChart data={data} height="300px" />
         <br />
         <div className="chart-container">
           <div>
@@ -75,7 +75,6 @@ export const UsageStats: React.FC<{
           </div>
           <div>
             <DoughnutChart
-              height="200px"
               data={{
                 labels: mostCopied.map((el) => el.label),
                 datasets: [
@@ -88,15 +87,15 @@ export const UsageStats: React.FC<{
                   },
                 ],
               }}
+              height="200px"
               pluginOptions={{
                 tooltip: {
                   callbacks: {
                     label(context) {
                       const safeData = context.dataset.data as number[];
                       const total = safeData.reduce(
-                        (previousValue, currentValue) => {
-                          return previousValue + currentValue;
-                        },
+                        (previousValue, currentValue) =>
+                          previousValue + currentValue,
                         0
                       );
                       return Math.round((context.parsed * 100) / total) + "%";

@@ -30,8 +30,8 @@ export const getGroupsByEmail = async (
 
 const mapToDomainObject = (
   response: IRolesDataGroupResponse[]
-): IRolesDataGroup[] => {
-  return response.map((group) => {
+): IRolesDataGroup[] =>
+  response.map((group) => {
     const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
     if (inValidScopes.length > 0) {
       logErrorInSentry(
@@ -45,7 +45,6 @@ const mapToDomainObject = (
       scopes: validScopes,
     };
   });
-};
 
 export const getRolesMetadata = async (): Promise<IRolesDataRoles[]> => {
   const route = routes.rolesData.roles.get;

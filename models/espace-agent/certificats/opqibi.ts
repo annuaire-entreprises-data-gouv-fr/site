@@ -2,6 +2,7 @@ import { clientApiEntrepriseOpqibi } from "#clients/api-entreprise/opqibi";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
+
 type Qualification = {
   nom: string;
   codeQualification: string;

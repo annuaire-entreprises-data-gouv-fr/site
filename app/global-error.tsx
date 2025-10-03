@@ -1,7 +1,7 @@
 "use client";
 
-import NextError from "next/error";
 import { useLog500ErrorAppClient } from "hooks";
+import NextError from "next/error";
 
 export default function GlobalError({
   error,

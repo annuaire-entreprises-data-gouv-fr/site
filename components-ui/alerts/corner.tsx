@@ -1,7 +1,7 @@
-import type { IIconsSlug } from "#components-ui/icon";
-import { Icon } from "#components-ui/icon/wrapper";
 import type React from "react";
 import type { PropsWithChildren } from "react";
+import type { IIconsSlug } from "#components-ui/icon";
+import { Icon } from "#components-ui/icon/wrapper";
 import { colors } from ".";
 import styles from "./styles.module.css";
 
@@ -25,9 +25,9 @@ const CornerAlert: React.FC<
     </div>
     <div>{children}</div>
     <button
+      aria-label="Fermer la notification"
       className={styles.close}
       onClick={onDismiss}
-      aria-label="Fermer la notification"
     >
       ✕
     </button>

@@ -26,10 +26,10 @@ export const Select = ({
       </label>
     )}
     <select
-      id={name}
-      name={name}
       className="fr-select"
       defaultValue={defaultValue || ""}
+      id={name}
+      name={name}
       onChange={onChange}
     >
       {placeholder && <option value="">{placeholder}</option>}

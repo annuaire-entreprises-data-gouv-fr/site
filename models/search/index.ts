@@ -3,8 +3,8 @@ import clientSearchRechercheEntreprise from "#clients/recherche-entreprise";
 import {
   FetchRechercheEntrepriseException,
   type IEtablissement,
-  type IUniteLegale,
   IsLikelyASirenOrSiretException,
+  type IUniteLegale,
   NotEnoughParamsException,
 } from "#models/core/types";
 import { Exception } from "#models/exceptions";

@@ -35,12 +35,12 @@ export const FinancesSocieteInnerSection = ({
           </FAQLink>
         </h3>
         <FinancesSocieteChartAndTable
-          session={session}
+          estBilanConsolide={true}
+          hasCADGFiP={false}
           indicateurs={financesSociete.indicateurs.filter(
             (b) => b.estConsolide
           )}
-          estBilanConsolide={true}
-          hasCADGFiP={false}
+          session={session}
         />
       </>
     )}
@@ -59,10 +59,10 @@ export const FinancesSocieteInnerSection = ({
       </FAQLink>
     </h3>
     <FinancesSocieteChartAndTable
-      session={session}
-      indicateurs={financesSociete.indicateurs.filter((b) => !b.estConsolide)}
-      hasCADGFiP={financesSociete.hasCADGFiP}
       estBilanConsolide={false}
+      hasCADGFiP={financesSociete.hasCADGFiP}
+      indicateurs={financesSociete.indicateurs.filter((b) => !b.estConsolide)}
+      session={session}
     />
   </>
 );

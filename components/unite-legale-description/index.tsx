@@ -1,3 +1,4 @@
+import type React from "react";
 import type { IUniteLegale } from "#models/core/types";
 import {
   capitalize,
@@ -7,7 +8,6 @@ import {
 } from "#utils/helpers";
 import { libelleCategorieEntrepriseForDescription } from "#utils/helpers/formatting/categories-entreprise";
 import { libelleEffectifForDescription } from "#utils/helpers/formatting/codes-effectifs";
-import type React from "react";
 import { UniteLegaleEtablissementCountDescription } from "./etablissement-count-description";
 
 export const UniteLegaleDescription: React.FC<{

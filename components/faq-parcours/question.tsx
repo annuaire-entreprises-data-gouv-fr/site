@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from "react";
 import { Warning } from "#components-ui/alerts";
 import { MultiChoice } from "#components-ui/multi-choice";
 import TextWrapper from "#components-ui/text-wrapper";
@@ -13,7 +14,6 @@ import {
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import { logMatomoEvent } from "#utils/matomo";
-import type { PropsWithChildren } from "react";
 export enum EQuestionType {
   LOADER = "loader",
   NONE = "none",
@@ -82,15 +82,15 @@ export default function Question({
             https://app.crisp.chat/website/064fca1b-bdd6-4a81-af56-9f38e40953ad/plugins/settings/b68ffdd2-ba6e-46a6-94bb-d0a9872ce09a/
             */}
             <iframe
-              title="Contact Form"
+              frameBorder="0"
+              height="660px"
+              referrerPolicy="origin"
+              sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
               src={`https://plugins.crisp.chat/urn:crisp.im:contact-form:0/contact/064fca1b-bdd6-4a81-af56-9f38e40953ad?type=${userType}${
                 email ? `&email=${email}` : ""
               }${name ? `&name=${name}` : ""}`}
-              referrerPolicy="origin"
-              sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
+              title="Contact Form"
               width="100%"
-              height="660px"
-              frameBorder="0"
             ></iframe>
           </div>
           <p>
@@ -103,8 +103,8 @@ export default function Question({
               Rejoignez notre salon{" "}
               <a
                 href="https://tchap.gouv.fr/#/room/#annuaire-entreprises:agent.dinum.tchap.gouv.fr"
-                target="_blank"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 Tchap
               </a>{" "}
@@ -161,17 +161,15 @@ export default function Question({
                   );
                 }
               })
-              .map((data) => {
-                return {
-                  onClick: () => {
-                    if (typeof window !== "undefined") {
-                      logMatomoEvent("parcours", userType, data.label);
-                      window.location.pathname = `/faq/modifier/${data.slug}`;
-                    }
-                  },
-                  label: data.label,
-                };
-              })}
+              .map((data) => ({
+                onClick: () => {
+                  if (typeof window !== "undefined") {
+                    logMatomoEvent("parcours", userType, data.label);
+                    window.location.pathname = `/faq/modifier/${data.slug}`;
+                  }
+                },
+                label: data.label,
+              }))}
           />
         </>
       );
@@ -198,17 +196,15 @@ export default function Question({
                 onClick: () => setQuestionType(EQuestionType.MODIFICATION),
                 label: `Comment modifier les informations ${modifyText} ?`,
               },
-              ...questions.map(({ title, slug }) => {
-                return {
-                  onClick: () => {
-                    if (typeof window !== "undefined") {
-                      logMatomoEvent("parcours", userType, title);
-                      window.location.pathname = `/faq/${slug}`;
-                    }
-                  },
-                  label: title,
-                };
-              }),
+              ...questions.map(({ title, slug }) => ({
+                onClick: () => {
+                  if (typeof window !== "undefined") {
+                    logMatomoEvent("parcours", userType, title);
+                    window.location.pathname = `/faq/${slug}`;
+                  }
+                },
+                label: title,
+              })),
               {
                 onClick: () => setQuestionType(EQuestionType.CONTACT),
                 label: "Je ne trouve pas la réponse à ma question",

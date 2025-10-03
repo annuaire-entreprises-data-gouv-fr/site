@@ -20,7 +20,6 @@ const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
 
     return (
       <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: `
         {
@@ -45,6 +44,7 @@ const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
           }]
         }`,
         }}
+        type="application/ld+json"
       />
     );
   } catch {

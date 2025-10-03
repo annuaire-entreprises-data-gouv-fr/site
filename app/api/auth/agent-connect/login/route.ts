@@ -1,10 +1,10 @@
+import { NextResponse } from "next/server";
 import { proConnectAuthorizeUrl } from "#clients/authentication/pro-connect/strategy";
 import { AgentConnectionFailedException } from "#models/authentication/authentication-exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
 import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 import { setPathFrom } from "#utils/session";
 import withSession from "#utils/session/with-session";
-import { NextResponse } from "next/server";
 
 export const GET = withSession(async function loginRoute(req) {
   try {

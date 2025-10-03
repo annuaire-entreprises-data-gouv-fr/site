@@ -1,7 +1,7 @@
 /** COMMON TYPES */
 import {
-  type IEtablissementsList,
   createEtablissementsList,
+  type IEtablissementsList,
 } from "#models/core/etablissements-list";
 import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import type { IEtatCivil } from "#models/rne/types";
@@ -51,37 +51,35 @@ export interface IEtablissementWithUniteLegale {
 }
 
 /** BASIC CONSTRUCTORS */
-export const createDefaultEtablissement = (): IEtablissement => {
-  return {
-    siren: "" as Siren,
-    siret: "" as Siret,
-    oldSiret: "" as Siret,
-    etatAdministratif: IETATADMINSTRATIF.INCONNU,
-    statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
-    estSiege: false,
-    ancienSiege: false,
-    enseigne: null,
-    denomination: null,
-    nic: "",
-    dateCreation: "",
-    dateDerniereMiseAJour: "",
-    dateMiseAJourInsee: "",
-    dateDebutActivite: "",
-    dateFermeture: "",
-    adresse: "",
-    adressePostale: "",
-    codePostal: "",
-    commune: "",
-    activitePrincipale: "",
-    libelleActivitePrincipale: "",
-    trancheEffectif: "",
-    anneeTrancheEffectif: "",
-    latitude: "",
-    longitude: "",
-    complements: createDefaultEtablissementComplements(),
-    listeIdcc: [],
-  };
-};
+export const createDefaultEtablissement = (): IEtablissement => ({
+  siren: "" as Siren,
+  siret: "" as Siret,
+  oldSiret: "" as Siret,
+  etatAdministratif: IETATADMINSTRATIF.INCONNU,
+  statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
+  estSiege: false,
+  ancienSiege: false,
+  enseigne: null,
+  denomination: null,
+  nic: "",
+  dateCreation: "",
+  dateDerniereMiseAJour: "",
+  dateMiseAJourInsee: "",
+  dateDebutActivite: "",
+  dateFermeture: "",
+  adresse: "",
+  adressePostale: "",
+  codePostal: "",
+  commune: "",
+  activitePrincipale: "",
+  libelleActivitePrincipale: "",
+  trancheEffectif: "",
+  anneeTrancheEffectif: "",
+  latitude: "",
+  longitude: "",
+  complements: createDefaultEtablissementComplements(),
+  listeIdcc: [],
+});
 
 export interface IUniteLegale extends IEtablissementsList {
   siren: Siren;
@@ -203,31 +201,29 @@ export interface IUniteLegaleComplements {
 }
 
 export const createDefaultUniteLegaleComplements =
-  (): IUniteLegaleComplements => {
-    return {
-      estEntrepreneurIndividuel: false,
-      estEss: false,
-      estBio: false,
-      estEntrepreneurSpectacle: false,
-      egaproRenseignee: false,
-      statutEntrepreneurSpectacle: "",
-      estServicePublic: false,
-      estL100_3: false,
-      estFiness: false,
-      estRge: false,
-      estOrganismeFormation: false,
-      estSocieteMission: false,
-      estQualiopi: false,
-      estUai: false,
-      estAssociation: false,
-      estEntrepriseInclusive: false,
-      typeEntrepriseInclusive: "",
-      estAchatsResponsables: false,
-      estPatrimoineVivant: false,
-      estAlimConfiance: false,
-      bilanGesRenseigne: false,
-    };
-  };
+  (): IUniteLegaleComplements => ({
+    estEntrepreneurIndividuel: false,
+    estEss: false,
+    estBio: false,
+    estEntrepreneurSpectacle: false,
+    egaproRenseignee: false,
+    statutEntrepreneurSpectacle: "",
+    estServicePublic: false,
+    estL100_3: false,
+    estFiness: false,
+    estRge: false,
+    estOrganismeFormation: false,
+    estSocieteMission: false,
+    estQualiopi: false,
+    estUai: false,
+    estAssociation: false,
+    estEntrepriseInclusive: false,
+    typeEntrepriseInclusive: "",
+    estAchatsResponsables: false,
+    estPatrimoineVivant: false,
+    estAlimConfiance: false,
+    bilanGesRenseigne: false,
+  });
 
 export interface IEtablissementComplements {
   // this is used to determined if etablissement belongs to an EI - useful to determinie wether we should use insee
@@ -240,16 +236,14 @@ export interface IEtablissementComplements {
 }
 
 export const createDefaultEtablissementComplements =
-  (): IEtablissementComplements => {
-    return {
-      estEntrepreneurIndividuel: false,
-      idFiness: [],
-      idBio: [],
-      idOrganismeFormation: [],
-      idRge: [],
-      idUai: [],
-    };
-  };
+  (): IEtablissementComplements => ({
+    estEntrepreneurIndividuel: false,
+    idFiness: [],
+    idBio: [],
+    idOrganismeFormation: [],
+    idRge: [],
+    idUai: [],
+  });
 
 export interface IAssociation extends Omit<IUniteLegale, "association"> {
   association: {
@@ -259,12 +253,9 @@ export interface IAssociation extends Omit<IUniteLegale, "association"> {
 
 export const isAssociation = (
   toBeDetermined: IUniteLegale
-): toBeDetermined is IAssociation => {
-  return (
-    toBeDetermined.complements.estAssociation ||
-    (toBeDetermined as IAssociation).association.idAssociation !== null
-  );
-};
+): toBeDetermined is IAssociation =>
+  toBeDetermined.complements.estAssociation ||
+  (toBeDetermined as IAssociation).association.idAssociation !== null;
 
 export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estServicePublic;
@@ -284,11 +275,8 @@ export interface ICollectiviteTerritoriale
 
 export const isCollectiviteTerritoriale = (
   toBeDetermined: IUniteLegale
-): toBeDetermined is ICollectiviteTerritoriale => {
-  return (
-    (toBeDetermined as ICollectiviteTerritoriale).colter.codeColter !== null
-  );
-};
+): toBeDetermined is ICollectiviteTerritoriale =>
+  (toBeDetermined as ICollectiviteTerritoriale).colter.codeColter !== null;
 
 /** COMMON ERRORS */
 

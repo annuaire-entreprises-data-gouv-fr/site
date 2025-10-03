@@ -4,7 +4,7 @@ import {
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
-import { ISTATUTDIFFUSION, estDiffusible } from "#models/core/diffusion";
+import { estDiffusible, ISTATUTDIFFUSION } from "#models/core/diffusion";
 import { Info, ProtectedData } from "../alerts";
 
 const DefaultNonDiffusibleAlert = () => (

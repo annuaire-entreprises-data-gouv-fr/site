@@ -7,20 +7,18 @@ import { JustificatifImmatriculationRNE } from "./rne";
 const JustificatifsSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
-  return (
-    <>
-      {isAssociation(uniteLegale) && (
-        <JustificatifImmatriculationJOAFE uniteLegale={uniteLegale} />
-      )}
-      {uniteLegale.dateMiseAJourInpi && (
-        <JustificatifImmatriculationRNE
-          uniteLegale={uniteLegale}
-          session={session}
-        />
-      )}
-      <AvisSituationSection uniteLegale={uniteLegale} session={session} />
-    </>
-  );
-};
+}> = ({ uniteLegale, session }) => (
+  <>
+    {isAssociation(uniteLegale) && (
+      <JustificatifImmatriculationJOAFE uniteLegale={uniteLegale} />
+    )}
+    {uniteLegale.dateMiseAJourInpi && (
+      <JustificatifImmatriculationRNE
+        session={session}
+        uniteLegale={uniteLegale}
+      />
+    )}
+    <AvisSituationSection session={session} uniteLegale={uniteLegale} />
+  </>
+);
 export default JustificatifsSection;

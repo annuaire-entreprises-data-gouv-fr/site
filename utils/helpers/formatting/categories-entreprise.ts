@@ -27,15 +27,14 @@ export const categoriesEntreprise = (code: string) => {
   return null;
 };
 
-const formatAsMap = () => {
-  return categoriesEntreprisesOptions.reduce(
+const formatAsMap = () =>
+  categoriesEntreprisesOptions.reduce(
     (aggregator, code) => {
       aggregator[code.value] = code.label;
       return aggregator;
     },
     {} as { [key: string]: string }
   );
-};
 
 const categoriesEntreprisesMap = formatAsMap();
 

@@ -1,5 +1,8 @@
-import { buildSearchQuery, type IParams } from "#models/search/search-filter-params";
 import type React from "react";
+import {
+  buildSearchQuery,
+  type IParams,
+} from "#models/search/search-filter-params";
 import pagesArray from "./pages-array";
 
 type IProps = {
@@ -131,9 +134,9 @@ const Page: React.FC<{
 }) => (
   <li>
     <a
-      href={urlParams(pageNum, searchTerm, searchFilterParams, urlComplement)}
-      className="fr-pagination__link "
       aria-current={currentPage === pageNum ? "page" : undefined}
+      className="fr-pagination__link "
+      href={urlParams(pageNum, searchTerm, searchFilterParams, urlComplement)}
       title={`Page ${pageNum}`}
     >
       {pageNum}
@@ -161,50 +164,48 @@ const PageCounter: React.FC<IProps> = ({
 
   return (
     <div className="layout-center" style={{ margin: "15px auto" }}>
-      <nav role="navigation" className="fr-pagination" aria-label="Pagination">
+      <nav aria-label="Pagination" className="fr-pagination" role="navigation">
         <ul className="fr-pagination__list">
           <First
+            compact={compact}
             currentPage={currentPage}
+            searchFilterParams={searchFilterParams}
             searchTerm={searchTerm}
             totalPages={totalPages}
-            compact={compact}
-            searchFilterParams={searchFilterParams}
             urlComplement={urlComplement}
           />
           <Previous
+            compact={compact}
             currentPage={currentPage}
+            searchFilterParams={searchFilterParams}
             searchTerm={searchTerm}
             totalPages={totalPages}
-            compact={compact}
-            searchFilterParams={searchFilterParams}
             urlComplement={urlComplement}
           />
-          {pages.map((pageNum) => {
-            return (
-              <Page
-                searchFilterParams={searchFilterParams}
-                currentPage={currentPage}
-                searchTerm={searchTerm}
-                pageNum={pageNum}
-                urlComplement={urlComplement}
-                key={pageNum}
-              />
-            );
-          })}
+          {pages.map((pageNum) => (
+            <Page
+              currentPage={currentPage}
+              key={pageNum}
+              pageNum={pageNum}
+              searchFilterParams={searchFilterParams}
+              searchTerm={searchTerm}
+              urlComplement={urlComplement}
+            />
+          ))}
           <Next
-            currentPage={currentPage}
-            searchTerm={searchTerm}
             compact={compact}
-            totalPages={totalPages}
+            currentPage={currentPage}
             searchFilterParams={searchFilterParams}
+            searchTerm={searchTerm}
+            totalPages={totalPages}
             urlComplement={urlComplement}
           />
           <Last
-            currentPage={currentPage}
             compact={compact}
+            currentPage={currentPage}
+            searchFilterParams={searchFilterParams}
             searchTerm={searchTerm}
             totalPages={totalPages}
-            searchFilterParams={searchFilterParams}
             urlComplement={urlComplement}
           />
         </ul>

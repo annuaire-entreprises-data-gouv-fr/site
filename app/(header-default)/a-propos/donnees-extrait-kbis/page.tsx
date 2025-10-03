@@ -1,6 +1,6 @@
-import TextWrapper from "#components-ui/text-wrapper";
-import { INPI, INSEE } from "#components/administrations";
 import type { Metadata } from "next";
+import { INPI, INSEE } from "#components/administrations";
+import TextWrapper from "#components-ui/text-wrapper";
 
 export const metadata: Metadata = {
   title: "Comment retrouver les données contenues dans un extrait KBIS ou D1 ?",
@@ -96,9 +96,9 @@ export default function ExtraitKbis() {
             <strong>NB :</strong> toutes les APIs du service public sont
             référencées sur{" "}
             <a
-              target="_blank"
-              rel="noreferrer noopener"
               href="https://api.gouv.fr"
+              rel="noreferrer noopener"
+              target="_blank"
             >
               api.gouv.fr
             </a>
@@ -125,9 +125,9 @@ export default function ExtraitKbis() {
           </ul>
           <p>
             <a
-              target="_blank"
-              rel="noreferrer noopener"
               href="https://www.data.gouv.fr/fr/dataservices/api-entreprise"
+              rel="noreferrer noopener"
+              target="_blank"
             >
               ⇢ En savoir plus sur API Entreprise
             </a>

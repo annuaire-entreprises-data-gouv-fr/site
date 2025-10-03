@@ -1,11 +1,14 @@
+import type React from "react";
 import NonRenseigne from "#components/non-renseigne";
 import { Section } from "#components/section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { isCollectiviteTerritoriale, type IUniteLegale } from "#models/core/types";
+import {
+  type IUniteLegale,
+  isCollectiviteTerritoriale,
+} from "#models/core/types";
 import type { IEtatCivil } from "#models/rne/types";
 import { capitalize, formatDatePartial, pluralize } from "#utils/helpers";
-import type React from "react";
 
 /**
  * Elus section
@@ -44,8 +47,8 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
   return (
     <Section
       id="collectivite-elus"
-      title={`Élu${plural}`}
       sources={[EAdministration.MI, EAdministration.DINUM]}
+      title={`Élu${plural}`}
     >
       {elus.length > 0 ? (
         <>
@@ -54,8 +57,8 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
             {plural} au Répertoire National des Élus&nbsp;:
           </p>
           <FullTable
-            head={["Role", "Élu(e)", "Date de naissance"]}
             body={elus.sort(sortElus).map((elu) => formatElus(elu))}
+            head={["Role", "Élu(e)", "Date de naissance"]}
           />
         </>
       ) : (

@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from "react";
 import DualRangeSlider from "#components-ui/dual-range-slider";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
@@ -9,7 +10,6 @@ import { categoriesJuridiquesNiveau1 } from "#utils/helpers/formatting/metadata/
 import { categoriesJuridiquesNiveau2 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
 import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
 import { codesSectionNAF } from "#utils/helpers/formatting/metadata/codes-section-NAF";
-import type { Dispatch, SetStateAction } from "react";
 import { getEffectifLabel } from "./constants";
 import type { ExtendedExportCsvInput } from "./export-csv";
 import { LocationFilter } from "./location-filter";
@@ -82,17 +82,17 @@ export default function Filters({
           <div className="fr-fieldset__element">
             <div className="fr-radio-group">
               <input
-                type="radio"
-                name="activity"
-                id="activity-1"
-                value="all"
                 checked={filters.activity === "all"}
+                id="activity-1"
+                name="activity"
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
                     activity: e.target.value as "all" | "active" | "ceased",
                   }))
                 }
+                type="radio"
+                value="all"
               />
               <label htmlFor="activity-1">Tous</label>
             </div>
@@ -100,17 +100,17 @@ export default function Filters({
           <div className="fr-fieldset__element">
             <div className="fr-radio-group">
               <input
-                type="radio"
-                name="activity"
-                id="activity-2"
-                value="active"
                 checked={filters.activity === "active"}
+                id="activity-2"
+                name="activity"
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
                     activity: e.target.value as "all" | "active" | "ceased",
                   }))
                 }
+                type="radio"
+                value="active"
               />
               <label htmlFor="activity-2">En activité uniquement</label>
             </div>
@@ -118,17 +118,17 @@ export default function Filters({
           <div className="fr-fieldset__element">
             <div className="fr-radio-group">
               <input
-                type="radio"
-                name="activity"
-                id="activity-3"
-                value="ceased"
                 checked={filters.activity === "ceased"}
+                id="activity-3"
+                name="activity"
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
                     activity: e.target.value as "all" | "active" | "ceased",
                   }))
                 }
+                type="radio"
+                value="ceased"
               />
               <label htmlFor="activity-3">Cessé uniquement</label>
             </div>
@@ -137,25 +137,25 @@ export default function Filters({
           <h3>Par type d‘établissement</h3>
           <div className="fr-checkbox-group">
             <input
-              type="checkbox"
+              aria-describedby="checkboxes-1-messages"
+              checked={filters.legalUnit === "hq"}
               id="legalUnit"
               name="legalUnit"
-              checked={filters.legalUnit === "hq"}
               onChange={(e) =>
                 setFilters((prev) => ({
                   ...prev,
                   legalUnit: e.target.checked ? "hq" : "all",
                 }))
               }
-              aria-describedby="checkboxes-1-messages"
+              type="checkbox"
             />
             <label className="fr-label" htmlFor="legalUnit">
               Siège social uniquement
             </label>
             <div
+              aria-live="assertive"
               className="fr-messages-group"
               id="checkboxes-1-messages"
-              aria-live="assertive"
             ></div>
           </div>
         </section>
@@ -189,16 +189,16 @@ export default function Filters({
             </h3>
             <div className="fr-checkbox-group">
               <input
-                type="checkbox"
+                checked={!filters.headcountEnabled}
                 id="includeEmptyEffectif"
                 name="includeEmptyEffectif"
-                checked={!filters.headcountEnabled}
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
                     headcountEnabled: !e.target.checked,
                   }))
                 }
+                type="checkbox"
               />
               <label className="fr-label" htmlFor="includeEmptyEffectif">
                 Tout, y compris les effectifs non renseignés
@@ -225,12 +225,12 @@ export default function Filters({
               </span>
             </div>
             <DualRangeSlider
+              defaultValue={filters.headcount}
+              disabledColor={!filters.headcountEnabled}
               idPrefix="headcount"
               label="Effectifs"
-              defaultValue={filters.headcount}
-              min={0}
               max={14}
-              step={1}
+              min={0}
               onChange={(value: { min: number; max: number }) =>
                 setFilters((prev) => ({
                   ...prev,
@@ -239,7 +239,7 @@ export default function Filters({
                 }))
               }
               samePositionAllowed={true}
-              disabledColor={!filters.headcountEnabled}
+              step={1}
             />
 
             <div className={styles.sliderHeader}>
@@ -263,10 +263,10 @@ export default function Filters({
               {categoriesEntreprisesOptions.map(({ label, value }) => (
                 <li key={value}>
                   <button
-                    type="button"
-                    className="fr-tag"
                     aria-pressed={filters.categories.includes(value)}
+                    className="fr-tag"
                     onClick={() => toggleCategories(value)}
+                    type="button"
                   >
                     {label}
                   </button>
@@ -275,15 +275,15 @@ export default function Filters({
 
               <li>
                 <button
-                  type="button"
-                  className="fr-tag"
                   aria-pressed={filters.categories.length === 0}
+                  className="fr-tag"
                   onClick={() =>
                     setFilters((prev) => ({
                       ...prev,
                       categories: [],
                     }))
                   }
+                  type="button"
                 >
                   Toutes, y compris non renseignées
                 </button>
@@ -302,9 +302,9 @@ export default function Filters({
                 <div>
                   En savoir plus sur le code officiel géographique sur{" "}
                   <a
-                    target="_blank"
-                    rel="noopener noreferrer"
                     href="https://www.insee.fr/fr/information/2560452"
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     le site de l‘INSEE
                   </a>
@@ -361,9 +361,9 @@ export default function Filters({
                 <div>
                   En savoir plus sur les codes NAF/APE sur{" "}
                   <a
-                    target="_blank"
-                    rel="noopener noreferrer"
                     href="https://www.insee.fr/fr/information/2120875"
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     le site de l‘INSEE
                   </a>
@@ -377,22 +377,22 @@ export default function Filters({
                 Domaine d‘activité (Section) :
               </label>
               <MultiSelect
-                name="sap"
                 defaultValue={filters.sap}
-                placeholder="Choisir un domaine d'activité"
                 id="sap-multi-select"
                 instanceId="sap-multi-select"
-                options={Object.keys(codesSectionNAF).map((code) => ({
-                  value: code,
-                  label: `${code} - ${codesSectionNAF[code]}`,
-                }))}
+                menuPosition="fixed"
+                name="sap"
                 onChange={(values) => {
                   setFilters((prev) => ({
                     ...prev,
                     sap: values,
                   }));
                 }}
-                menuPosition="fixed"
+                options={Object.keys(codesSectionNAF).map((code) => ({
+                  value: code,
+                  label: `${code} - ${codesSectionNAF[code]}`,
+                }))}
+                placeholder="Choisir un domaine d'activité"
               />
             </div>
 
@@ -401,24 +401,24 @@ export default function Filters({
                 Code NAF/APE (Sous-classe) :
               </label>
               <MultiSelect
-                name="naf"
                 defaultValue={filters.naf}
-                placeholder="Choisir un code NAF/APE"
                 id="naf-multi-select"
                 instanceId="naf-multi-select"
-                options={Object.keys(codesNAFRev2).map((code) => ({
-                  value: code,
-                  label: `${code} - ${
-                    codesNAFRev2[code as keyof typeof codesNAFRev2]
-                  }`,
-                }))}
+                menuPosition="fixed"
+                name="naf"
                 onChange={(values) => {
                   setFilters((prev) => ({
                     ...prev,
                     naf: values,
                   }));
                 }}
-                menuPosition="fixed"
+                options={Object.keys(codesNAFRev2).map((code) => ({
+                  value: code,
+                  label: `${code} - ${
+                    codesNAFRev2[code as keyof typeof codesNAFRev2]
+                  }`,
+                }))}
+                placeholder="Choisir un code NAF/APE"
               />
             </div>
           </div>
@@ -434,9 +434,9 @@ export default function Filters({
                 <div>
                   En savoir plus sur les catégories juridique sur{" "}
                   <a
-                    target="_blank"
-                    rel="noopener noreferrer"
                     href="https://www.insee.fr/fr/information/2028129"
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     le site de l‘INSEE
                   </a>
@@ -450,19 +450,19 @@ export default function Filters({
                 Catégorie juridique (Niveau 1) :
               </label>
               <MultiSelect
-                name="nature_juridique"
                 defaultValue={filters.legalCategoriesNiveau1}
-                placeholder="Choisir une catégorie juridique"
                 id="nature-juridique-niveau-1-multi-select"
                 instanceId="nature-juridique-niveau-1-multi-select"
-                options={getLegalCategoriesNiveau1()}
                 menuPosition="fixed"
+                name="nature_juridique"
                 onChange={(values: string[]) =>
                   setFilters((prev) => ({
                     ...prev,
                     legalCategoriesNiveau1: values,
                   }))
                 }
+                options={getLegalCategoriesNiveau1()}
+                placeholder="Choisir une catégorie juridique"
               />
             </div>
 
@@ -471,19 +471,19 @@ export default function Filters({
                 Catégorie juridique (Niveau 2) :
               </label>
               <MultiSelect
-                name="nature_juridique"
                 defaultValue={filters.legalCategoriesNiveau2}
-                placeholder="Choisir une catégorie juridique"
                 id="nature-juridique-niveau-2-multi-select"
                 instanceId="nature-juridique-niveau-2-multi-select"
-                options={getLegalCategoriesNiveau2()}
                 menuPosition="fixed"
+                name="nature_juridique"
                 onChange={(values: string[]) =>
                   setFilters((prev) => ({
                     ...prev,
                     legalCategoriesNiveau2: values,
                   }))
                 }
+                options={getLegalCategoriesNiveau2()}
+                placeholder="Choisir une catégorie juridique"
               />
             </div>
 
@@ -492,19 +492,19 @@ export default function Filters({
                 Catégorie juridique (Niveau 3) :
               </label>
               <MultiSelect
-                name="nature_juridique"
                 defaultValue={filters.legalCategoriesNiveau3}
-                placeholder="Choisir une catégorie juridique"
                 id="nature-juridique-niveau-3-multi-select"
                 instanceId="nature-juridique-niveau-3-multi-select"
-                options={getLegalCategoriesNiveau3()}
                 menuPosition="fixed"
+                name="nature_juridique"
                 onChange={(values: string[]) =>
                   setFilters((prev) => ({
                     ...prev,
                     legalCategoriesNiveau3: values,
                   }))
                 }
+                options={getLegalCategoriesNiveau3()}
+                placeholder="Choisir une catégorie juridique"
               />
             </div>
           </div>
@@ -527,9 +527,9 @@ export default function Filters({
                   <div>
                     Pour plus d‘informations, consultez la{" "}
                     <a
-                      target="_blank"
-                      rel="noopener noreferrer"
                       href="/definitions/economie-sociale-et-solidaire-ess"
+                      rel="noopener noreferrer"
+                      target="_blank"
                     >
                       définition de l‘ESS
                     </a>
@@ -538,16 +538,15 @@ export default function Filters({
                 </FAQLink>
               </h3>
               <fieldset
-                className="fr-fieldset"
                 aria-labelledby="ess-legend ess-messages"
+                className="fr-fieldset"
               >
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      type="checkbox"
+                      checked={filters.ess?.inclure || false}
                       id="ess-inclure"
                       name="ess-inclure"
-                      checked={filters.ess?.inclure || false}
                       onChange={(e) =>
                         setFilters((prev) => ({
                           ...prev,
@@ -559,6 +558,7 @@ export default function Filters({
                           },
                         }))
                       }
+                      type="checkbox"
                     />
                     <label className="fr-label" htmlFor="ess-inclure">
                       Oui
@@ -568,10 +568,9 @@ export default function Filters({
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      type="checkbox"
+                      checked={filters.ess?.inclureNo || false}
                       id="ess-inclure-no"
                       name="ess-inclure-no"
-                      checked={filters.ess?.inclureNo || false}
                       onChange={(e) =>
                         setFilters((prev) => ({
                           ...prev,
@@ -583,6 +582,7 @@ export default function Filters({
                           },
                         }))
                       }
+                      type="checkbox"
                     />
                     <label className="fr-label" htmlFor="ess-inclure-no">
                       Non
@@ -592,10 +592,9 @@ export default function Filters({
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      type="checkbox"
+                      checked={filters.ess?.inclureNonRenseigne || false}
                       id="ess-inclure-non-renseigne"
                       name="ess-inclure-non-renseigne"
-                      checked={filters.ess?.inclureNonRenseigne || false}
                       onChange={(e) =>
                         setFilters((prev) => ({
                           ...prev,
@@ -606,6 +605,7 @@ export default function Filters({
                           },
                         }))
                       }
+                      type="checkbox"
                     />
                     <label
                       className="fr-label"
@@ -625,9 +625,9 @@ export default function Filters({
                   <div>
                     Pour plus d‘informations, consultez la{" "}
                     <a
-                      target="_blank"
-                      rel="noopener noreferrer"
                       href="/definitions/societe-a-mission"
+                      rel="noopener noreferrer"
+                      target="_blank"
                     >
                       définition de société à mission
                     </a>
@@ -636,16 +636,15 @@ export default function Filters({
                 </FAQLink>
               </h3>
               <fieldset
-                className="fr-fieldset"
                 aria-labelledby="mission-legend mission-messages"
+                className="fr-fieldset"
               >
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      type="checkbox"
+                      checked={filters.mission?.inclure || false}
                       id="mission-inclure"
                       name="mission-inclure"
-                      checked={filters.mission?.inclure || false}
                       onChange={(e) =>
                         setFilters((prev) => ({
                           ...prev,
@@ -657,6 +656,7 @@ export default function Filters({
                           },
                         }))
                       }
+                      type="checkbox"
                     />
                     <label className="fr-label" htmlFor="mission-inclure">
                       Oui
@@ -666,10 +666,9 @@ export default function Filters({
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      type="checkbox"
+                      checked={filters.mission?.inclureNo || false}
                       id="mission-inclure-no"
                       name="mission-inclure-no"
-                      checked={filters.mission?.inclureNo || false}
                       onChange={(e) =>
                         setFilters((prev) => ({
                           ...prev,
@@ -681,6 +680,7 @@ export default function Filters({
                           },
                         }))
                       }
+                      type="checkbox"
                     />
                     <label className="fr-label" htmlFor="mission-inclure-no">
                       Non
@@ -690,10 +690,9 @@ export default function Filters({
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      type="checkbox"
+                      checked={filters.mission?.inclureNonRenseigne || false}
                       id="mission-inclure-non-renseigne"
                       name="mission-inclure-non-renseigne"
-                      checked={filters.mission?.inclureNonRenseigne || false}
                       onChange={(e) =>
                         setFilters((prev) => ({
                           ...prev,
@@ -704,6 +703,7 @@ export default function Filters({
                           },
                         }))
                       }
+                      type="checkbox"
                     />
                     <label
                       className="fr-label"
@@ -749,7 +749,6 @@ export default function Filters({
             <div className={styles.dateGroup}>
               <label className={styles.dateLabel}>Depuis le</label>
               <input
-                type="date"
                 className={`fr-input ${styles.dateInput}`}
                 defaultValue={filters.creationDate?.from}
                 max={filters.creationDate?.to || todayString}
@@ -762,16 +761,16 @@ export default function Filters({
                     },
                   }))
                 }
+                type="date"
               />
             </div>
             <div>
               <label className={styles.dateLabel}>Jusqu‘au</label>
               <input
-                type="date"
                 className={`fr-input ${styles.dateInput}`}
                 defaultValue={filters.creationDate?.to}
-                min={filters.creationDate?.from}
                 max={todayString}
+                min={filters.creationDate?.from}
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
@@ -781,6 +780,7 @@ export default function Filters({
                     },
                   }))
                 }
+                type="date"
               />
             </div>
           </div>
@@ -807,7 +807,6 @@ export default function Filters({
             <div className={styles.dateGroup}>
               <label className={styles.dateLabel}>Depuis le</label>
               <input
-                type="date"
                 className={`fr-input ${styles.dateInput}`}
                 defaultValue={filters.updateDate?.from}
                 max={filters.updateDate?.to || todayString}
@@ -820,16 +819,16 @@ export default function Filters({
                     },
                   }))
                 }
+                type="date"
               />
             </div>
             <div>
               <label className={styles.dateLabel}>Jusqu‘au</label>
               <input
-                type="date"
                 className={`fr-input ${styles.dateInput}`}
                 defaultValue={filters.updateDate?.to}
-                min={filters.updateDate?.from}
                 max={todayString}
+                min={filters.updateDate?.from}
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
@@ -839,6 +838,7 @@ export default function Filters({
                     },
                   }))
                 }
+                type="date"
               />
             </div>
           </div>
@@ -846,13 +846,13 @@ export default function Filters({
       </section>
 
       <SiretFilter
-        siretsAndSirens={filters.siretsAndSirens || []}
         onSiretsAndSirensChange={(siretsAndSirens) =>
           setFilters((prev) => ({
             ...prev,
             siretsAndSirens,
           }))
         }
+        siretsAndSirens={filters.siretsAndSirens || []}
       />
     </>
   );

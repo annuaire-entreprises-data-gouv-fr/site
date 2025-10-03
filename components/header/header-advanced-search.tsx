@@ -19,22 +19,20 @@ export const HeaderWithAdvancedSearch: React.FC<IProps> = ({
   useLogo = false,
   useSearchBar = false,
   useAgentCTA = false,
-}) => {
-  return (
-    <HeaderAppRouter
-      useMap={useMap}
-      useLogo={useLogo}
-      useSearchBar={useSearchBar}
-      useAgentCTA={useAgentCTA}
-      useAgentBanner={false}
-      plugin={
-        <AdvancedSearch
-          searchParams={searchParams}
-          currentSearchTerm={currentSearchTerm}
-          isMap={useMap}
-        />
-      }
-      currentSearchTerm={currentSearchTerm}
-    />
-  );
-};
+}) => (
+  <HeaderAppRouter
+    currentSearchTerm={currentSearchTerm}
+    plugin={
+      <AdvancedSearch
+        currentSearchTerm={currentSearchTerm}
+        isMap={useMap}
+        searchParams={searchParams}
+      />
+    }
+    useAgentBanner={false}
+    useAgentCTA={useAgentCTA}
+    useLogo={useLogo}
+    useMap={useMap}
+    useSearchBar={useSearchBar}
+  />
+);

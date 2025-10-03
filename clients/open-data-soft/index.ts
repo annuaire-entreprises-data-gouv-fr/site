@@ -1,5 +1,5 @@
 import constants from "#models/constants";
-import { type IDefaultRequestConfig, httpGet } from "#utils/network";
+import { httpGet, type IDefaultRequestConfig } from "#utils/network";
 import type { IODSMetadata, IODSResponse } from "./types";
 
 /**

@@ -5,7 +5,10 @@ import {
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
-import { isEntrepreneurIndividuel, type IUniteLegale } from "#models/core/types";
+import {
+  type IUniteLegale,
+  isEntrepreneurIndividuel,
+} from "#models/core/types";
 import LiensCapitalistiquesSection from "../../liens-capitalistiques";
 import BeneficiairesSection from "./beneficiaires";
 import DirigeantsSection from "./dirigeants-open/section";
@@ -22,11 +25,11 @@ export default function DirigeantsEntrepriseSection({
     <>
       {hasRights(session, ApplicationRights.mandatairesRCS) ? (
         <DirigeantsSectionProtected
-          uniteLegale={uniteLegale}
           session={session}
+          uniteLegale={uniteLegale}
         />
       ) : (
-        <DirigeantsSection uniteLegale={uniteLegale} session={session} />
+        <DirigeantsSection session={session} uniteLegale={uniteLegale} />
       )}
       <BreakPageForPrint />
       {!isEntrepreneurIndividuel(uniteLegale) &&
@@ -34,13 +37,13 @@ export default function DirigeantsEntrepriseSection({
           <>
             <HorizontalSeparator />
             <LiensCapitalistiquesSection
-              uniteLegale={uniteLegale}
               session={session}
+              uniteLegale={uniteLegale}
             />
           </>
         )}
       <HorizontalSeparator />
-      <BeneficiairesSection uniteLegale={uniteLegale} session={session} />
+      <BeneficiairesSection session={session} uniteLegale={uniteLegale} />
     </>
   );
 }

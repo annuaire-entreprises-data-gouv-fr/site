@@ -1,5 +1,5 @@
-import TextWrapper from "#components-ui/text-wrapper";
 import type { Metadata } from "next";
+import TextWrapper from "#components-ui/text-wrapper";
 
 export const metadata: Metadata = {
   title: "Modalités d’utilisation",

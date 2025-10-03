@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import type { ISession } from "#models/authentication/user/session";
 import { getHidePersonalDataRequestFCSession } from "#utils/session";
-import { useEffect, useState } from "react";
 import { ConnectionFranceConnect } from "./connection-france-connect";
 import { RenseignerSiren } from "./renseigner-siren";
 import { RequestState } from "./request-state";

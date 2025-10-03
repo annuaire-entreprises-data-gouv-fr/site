@@ -1,14 +1,14 @@
 "use client";
 
-import InpiPartiallyDownWarning from "#components-ui/alerts-with-explanations/inpi-partially-down";
-import { Tag } from "#components-ui/tag";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
+import InpiPartiallyDownWarning from "#components-ui/alerts-with-explanations/inpi-partially-down";
+import { Tag } from "#components-ui/tag";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 
 export const ObservationsRNE: React.FC<{
   uniteLegale: IUniteLegale;
@@ -22,16 +22,16 @@ export const ObservationsRNE: React.FC<{
 
   return (
     <AsyncDataSectionClient
-      id="observations-rne"
-      title="Observations au RNE"
-      sources={[EAdministration.INPI]}
       data={observations}
+      id="observations-rne"
       notFoundInfo={
         <>
           Cette structure ne possède pas de fiche d’immatriculation au{" "}
           <strong>Registre National des Entreprises (RNE)</strong>.
         </>
       }
+      sources={[EAdministration.INPI]}
+      title="Observations au RNE"
     >
       {({ data, metadata }) =>
         data.length > 0 ? (
@@ -43,12 +43,12 @@ export const ObservationsRNE: React.FC<{
               &nbsp;:
             </p>
             <FullTable
-              head={["Date d’ajout", "Numéro d’observation", "Description"]}
               body={data.map((o) => [
                 o.dateAjout,
                 o.numObservation ? <Tag>{o.numObservation}</Tag> : "",
                 o.description,
               ])}
+              head={["Date d’ajout", "Numéro d’observation", "Description"]}
             />
           </>
         ) : (

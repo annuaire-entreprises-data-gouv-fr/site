@@ -18,15 +18,15 @@ export default async function AgentNavigation() {
     >
       <div style={{ display: "flex", gap: "2rem" }}>
         {navLinks.map(({ label, href }) => (
-          <AgentNavigationLink href={href} label={label} key={href} />
+          <AgentNavigationLink href={href} key={href} label={label} />
         ))}
       </div>
       <div>
         <ButtonLink
-          to={constants.links.documentation.home}
-          target="_blank"
           alt
           ariaLabel="Documentation"
+          target="_blank"
+          to={constants.links.documentation.home}
         >
           Documentation
         </ButtonLink>

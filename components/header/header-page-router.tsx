@@ -21,13 +21,13 @@ export const HeaderPageRouter: React.FC<IProps> = ({
 
   return (
     <HeaderCore
-      useMap={useMap}
-      useLogo={useLogo}
-      useSearchBar={useSearchBar}
-      useAgentCTA={useAgentCTA}
+      currentSearchTerm={currentSearchTerm}
       plugin={plugin}
       session={session}
-      currentSearchTerm={currentSearchTerm}
+      useAgentCTA={useAgentCTA}
+      useLogo={useLogo}
+      useMap={useMap}
+      useSearchBar={useSearchBar}
     />
   );
 };

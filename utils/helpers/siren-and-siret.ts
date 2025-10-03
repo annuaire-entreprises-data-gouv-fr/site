@@ -7,9 +7,8 @@ type Brand<K, T> = K & { __brand: T };
 
 export type TVANumber = Brand<string, "TVANumber">;
 
-export const isTVANumber = (slug: string): slug is TVANumber => {
-  return !!slug.match(/^\d{11}$/g);
-};
+export const isTVANumber = (slug: string): slug is TVANumber =>
+  !!slug.match(/^\d{11}$/g);
 
 /**
  * throw an exception if a string is not a TVA Number
@@ -67,8 +66,8 @@ export const verifySiret = (slug: string): Siret => {
  * @param siret
  * @returns
  */
-const luhnChecksum = (str: string) => {
-  return Array.from(str)
+const luhnChecksum = (str: string) =>
+  Array.from(str)
     .reverse()
     .map((character, charIdx) => {
       const num = parseInt(character, 10);
@@ -79,7 +78,6 @@ const luhnChecksum = (str: string) => {
       const val = num >= 10 ? num - 9 : num;
       return checksum + val;
     }, 0);
-};
 
 export const isLuhnValid = (str: string) => {
   // La poste siren and siret are the only exceptions to Luhn's formula
@@ -89,36 +87,28 @@ export const isLuhnValid = (str: string) => {
   return luhnChecksum(str) % 10 === 0;
 };
 
-export const isLikelyASiren = (slug: string) => {
-  return hasSirenFormat(slug) && slug.length === 9;
-};
+export const isLikelyASiren = (slug: string) =>
+  hasSirenFormat(slug) && slug.length === 9;
 
-export const isLikelyASiret = (slug: string) => {
-  return hasSiretFormat(slug) && slug.length === 14;
-};
+export const isLikelyASiret = (slug: string) =>
+  hasSiretFormat(slug) && slug.length === 14;
 
-export const isLikelyASiretOrSiren = (slug: string) => {
-  return isLikelyASiren(slug) || isLikelyASiret(slug);
-};
+export const isLikelyASiretOrSiren = (slug: string) =>
+  isLikelyASiren(slug) || isLikelyASiret(slug);
 
 export const hasSirenFormat = (str: string) => !!str.match(/^\d{9}$/g);
 
 export const hasSiretFormat = (str: string) => !!str.match(/^\d{14}$/g);
 
-export const formatSiret = (siret = "") => {
-  return siret.replace(/(\d{3})/g, "$1 ").replace(/(\s)(?=(\d{2})$)/g, "");
-};
+export const formatSiret = (siret = "") =>
+  siret.replace(/(\d{3})/g, "$1 ").replace(/(\s)(?=(\d{2})$)/g, "");
 
-export const extractSirenFromSiret = (siret: string) => {
-  return verifySiren(siret.slice(0, 9));
-};
-export const extractSirenFromSiretNoVerify = (siret: string): string => {
-  return siret.slice(0, 9);
-};
+export const extractSirenFromSiret = (siret: string) =>
+  verifySiren(siret.slice(0, 9));
+export const extractSirenFromSiretNoVerify = (siret: string): string =>
+  siret.slice(0, 9);
 
-export const extractNicFromSiret = (siret: string) => {
-  return siret.slice(9);
-};
+export const extractNicFromSiret = (siret: string) => siret.slice(9);
 
 /**
  * Extract a siren/siret-like string from any url. Return empty string if nothing matches

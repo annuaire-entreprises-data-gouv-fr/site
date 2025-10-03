@@ -1,12 +1,12 @@
+import type { Metadata } from "next";
+import React from "react";
+import { Section } from "#components/section";
+import { TwoColumnTable } from "#components/table/simple";
 import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import { Icon } from "#components-ui/icon/wrapper";
 import { Tag } from "#components-ui/tag";
-import { Section } from "#components/section";
-import { TwoColumnTable } from "#components/table/simple";
 import { administrationsMetaData, allAPI } from "#models/administrations";
 import constants from "#models/constants";
-import type { Metadata } from "next";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "Sources des données utilisées dans l’Annuaire des Entreprises",
@@ -52,8 +52,8 @@ export default function DataSourcesPage() {
                   <span>
                     {isProtected ? (
                       <Icon
-                        slug="lockFill"
                         color={constants.colors.espaceAgent}
+                        slug="lockFill"
                       >
                         {source.label}
                       </Icon>
@@ -78,11 +78,11 @@ export default function DataSourcesPage() {
 
                 return (
                   <Section
-                    key={label}
                     id={`${slug}-${sourceIndex}`}
-                    title={label}
-                    sources={[administrationEnum]}
                     isProtected={isProtected}
+                    key={label}
+                    sources={[administrationEnum]}
+                    title={label}
                   >
                     <TwoColumnTable
                       body={[
@@ -99,9 +99,9 @@ export default function DataSourcesPage() {
                                 "Source de données",
                                 datagouvLink ? (
                                   <a
-                                    target="_blank"
-                                    rel="noreferrer noopener"
                                     href={datagouvLink}
+                                    rel="noreferrer noopener"
+                                    target="_blank"
                                   >
                                     Consulter le jeu de données
                                   </a>
@@ -123,8 +123,8 @@ export default function DataSourcesPage() {
                                       {" ("}
                                       <a
                                         href={api.apiDocumentationLink}
-                                        target="_blank"
                                         rel="noreferrer noopener"
+                                        target="_blank"
                                       >
                                         documentation
                                       </a>
@@ -141,8 +141,8 @@ export default function DataSourcesPage() {
                                 "Taux de disponibilité de l’API",
                                 <a
                                   href={`/donnees/api#${api.apiSlug}`}
-                                  target="_blank"
                                   rel="noreferrer noopener"
+                                  target="_blank"
                                 >
                                   Consulter le taux de disponibilité
                                 </a>,

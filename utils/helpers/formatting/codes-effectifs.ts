@@ -27,15 +27,11 @@ export const codesEffectifsOptions = [
   { label: "10 000 salariés et plus", value: "53" },
 ];
 
-const formatAsMap = () => {
-  return codesEffectifsOptions.reduce<Record<string, string>>(
-    (aggregator, code) => {
-      aggregator[code.value] = code.label;
-      return aggregator;
-    },
-    {}
-  );
-};
+const formatAsMap = () =>
+  codesEffectifsOptions.reduce<Record<string, string>>((aggregator, code) => {
+    aggregator[code.value] = code.label;
+    return aggregator;
+  }, {});
 
 const codesEffectifs = formatAsMap();
 

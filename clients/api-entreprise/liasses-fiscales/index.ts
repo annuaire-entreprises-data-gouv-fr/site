@@ -25,20 +25,18 @@ export async function clientApiEntrepriseDgfipLiassesFiscales(
 
 const mapToDomainObject = (
   response: IAPIEntrepriseLiassesFiscales
-): ILiassesFiscalesProtected => {
-  return {
-    obligationsFiscales: response.data.obligations_fiscales.map((obl) => {
-      return `Régime: ${obl.regime}${obl.libelle ? ` (${obl.libelle})` : ""}`;
-    }),
-    declarations: response.data.declarations.map((declaration) => ({
-      imprime: declaration.numero_imprime,
-      regime: declaration.regime,
-      dureeExercice: declaration.duree_exercice,
-      dateFinExercice: declaration.date_fin_exercice,
-      donnees: declaration.donnees.map((donnee) => ({
-        intitule: donnee.intitule,
-        valeurs: donnee.valeurs,
-      })),
+): ILiassesFiscalesProtected => ({
+  obligationsFiscales: response.data.obligations_fiscales.map(
+    (obl) => `Régime: ${obl.regime}${obl.libelle ? ` (${obl.libelle})` : ""}`
+  ),
+  declarations: response.data.declarations.map((declaration) => ({
+    imprime: declaration.numero_imprime,
+    regime: declaration.regime,
+    dureeExercice: declaration.duree_exercice,
+    dateFinExercice: declaration.date_fin_exercice,
+    donnees: declaration.donnees.map((donnee) => ({
+      intitule: donnee.intitule,
+      valeurs: donnee.valeurs,
     })),
-  };
-};
+  })),
+});

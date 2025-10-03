@@ -106,16 +106,16 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
         ))}
       {estBio && (
         <LabelWithLinkToSection
-          label="Professionnel du Bio"
           informationTooltipLabel="Cette structure est un professionnel du Bio"
+          label="Professionnel du Bio"
           sectionId="professionnel-du-bio"
           siren={uniteLegale.siren}
         />
       )}
       {egaproRenseignee && (
         <LabelWithLinkToSection
-          label="Égalité professionnelle"
           informationTooltipLabel="Cette structure a renseigné ses déclarations d’égalité entre les femmes et les hommes"
+          label="Égalité professionnelle"
           sectionId="egalite-professionnelle"
           siren={uniteLegale.siren}
         />

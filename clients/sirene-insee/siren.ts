@@ -20,12 +20,12 @@ import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAF,
 } from "#utils/helpers/formatting/labels";
-import { inseeClientGet } from ".";
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
 } from "../../utils/helpers/insee-variables";
+import { inseeClientGet } from ".";
 import { formatDenominationUsuelle } from "./helpers";
 import {
   clientAllEtablissementsInsee,

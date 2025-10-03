@@ -1,7 +1,6 @@
-import { DataStore } from "#utils/data-store";
-
 import { readFromGrist } from "#clients/external-tooling/grist";
 import { InternalError } from "#models/exceptions";
+import { DataStore } from "#utils/data-store";
 import logErrorInSentry from "#utils/sentry";
 import {
   extractSirenFromSiret,

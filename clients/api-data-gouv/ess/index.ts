@@ -20,10 +20,8 @@ export const clientEss = async (siren: Siren): Promise<IESS> => {
   return mapToDomainObject(response.data[0]);
 };
 
-const mapToDomainObject = (response: IESSItem) => {
-  return {
-    familleJuridique: response["Famille juridique de l'entreprise"],
-    nom: response["Nom ou raison sociale de l'entreprise"],
-    region: response["Région de l'établissement"],
-  };
-};
+const mapToDomainObject = (response: IESSItem) => ({
+  familleJuridique: response["Famille juridique de l'entreprise"],
+  nom: response["Nom ou raison sociale de l'entreprise"],
+  region: response["Région de l'établissement"],
+});

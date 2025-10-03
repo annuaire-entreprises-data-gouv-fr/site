@@ -1,15 +1,15 @@
 "use client";
 
-import { PrintNever } from "#components-ui/print-visibility";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
+import { PrintNever } from "#components-ui/print-visibility";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { UseCase } from "#models/use-cases";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import { useMemo } from "react";
 import Conformite from "./conformite";
 
 interface IProps {
@@ -47,11 +47,11 @@ function ConformiteSection({
   return (
     <PrintNever>
       <AsyncDataSectionClient
-        title={title}
+        data={conformite}
         id={id}
         isProtected={isProtected}
         sources={sources}
-        data={conformite}
+        title={title}
       >
         {(conformite) => (
           <TwoColumnTable
@@ -59,19 +59,19 @@ function ConformiteSection({
               [
                 "Conformité fiscale",
                 <Conformite
-                  data={conformite?.fiscale}
                   administration="DGFiP"
+                  data={conformite?.fiscale}
                 />,
               ],
               [
                 "Conformité sociale",
                 <>
                   <Conformite
-                    data={conformite?.vigilance}
                     administration="URSSAF"
+                    data={conformite?.vigilance}
                   />
                   <br />
-                  <Conformite data={conformite?.msa} administration="MSA" />
+                  <Conformite administration="MSA" data={conformite?.msa} />
                 </>,
               ],
             ]}

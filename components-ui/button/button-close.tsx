@@ -13,10 +13,10 @@ export default function ButtonClose({
 }: IProps) {
   return (
     <button
-      onClick={onClick}
-      className={"fr-btn fr-btn--tertiary-no-outline " + (className ?? "")}
-      aria-label={ariaLabel}
       aria-controls={ariaControls}
+      aria-label={ariaLabel}
+      className={"fr-btn fr-btn--tertiary-no-outline " + (className ?? "")}
+      onClick={onClick}
     >
       × Fermer
     </button>

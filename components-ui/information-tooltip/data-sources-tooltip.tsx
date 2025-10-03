@@ -1,8 +1,8 @@
+import React from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import type { IAdministrationMetaData } from "#models/administrations/types";
 import constants from "#models/constants";
 import { pluralize } from "#utils/helpers";
-import React from "react";
 import InformationTooltip from ".";
 import style from "./style.module.css";
 
@@ -24,7 +24,6 @@ const DataSourcesTooltip: React.FC<{
       ""
     )}
     <InformationTooltip
-      tabIndex={undefined}
       horizontalOrientation={orientation || "center"}
       label={
         <>
@@ -35,10 +34,11 @@ const DataSourcesTooltip: React.FC<{
           ))}
         </>
       }
+      tabIndex={undefined}
     >
       <a
-        href={link}
         className={`no-style-link ${style["data-source"]}`}
+        href={link}
         style={{
           color: constants.colors.frBlue,
         }}

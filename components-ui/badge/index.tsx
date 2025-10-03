@@ -38,25 +38,25 @@ export function Badge({
     }>
   ) =>
     link ? (
-      <a href={link.href} aria-label={link["aria-label"]} {...props} />
+      <a aria-label={link["aria-label"]} href={link.href} {...props} />
     ) : (
       <span {...props} />
     );
 
   return (
     <ContainerComponent
-      onClick={onClick}
       className={`${styles.badgeWrapper} ${
         onClick && !link && !isSelected ? styles.badgeWrapperOnClick : ""
       } ${!!onClick ? " cursor-pointer" : ""}`}
+      onClick={onClick}
       style={{
         border: isSelected ? "2px solid #000091" : "2px solid transparent",
         fontSize: small ? "0.9rem" : "1rem",
       }}
     >
       <span
-        className={styles.badgeIcon}
         aria-hidden
+        className={styles.badgeIcon}
         style={{
           backgroundColor: backgroundColor,
           color: fontColor,

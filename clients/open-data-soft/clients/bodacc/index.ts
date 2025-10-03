@@ -2,7 +2,7 @@ import odsClient from "#clients/open-data-soft";
 import routes from "#clients/routes";
 import type { IAnnoncesBodacc } from "#models/annonces";
 import { Exception } from "#models/exceptions";
-import { type Siren, formatDate } from "#utils/helpers";
+import { formatDate, type Siren } from "#utils/helpers";
 import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
 import { logWarningInSentry } from "#utils/sentry";
 
@@ -63,18 +63,16 @@ export const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
   };
 };
 
-const mapToDomainObject = (annonce: IBodaccRecords) => {
-  return {
-    titre: extractTitre(annonce),
-    sousTitre: `BODACC ${annonce.publicationavis} n°${annonce.parution}`,
-    typeAvisLibelle: annonce.typeavis_lib || "",
-    tribunal: annonce.tribunal || "",
-    numeroAnnonce: annonce.numeroannonce || 0,
-    datePublication: annonce.dateparution || "",
-    details: extractDetails(annonce) || "",
-    path: `${routes.bodacc.site.annonce}${annonce.publicationavis}/${annonce.parution}/${annonce.numeroannonce}`,
-  };
-};
+const mapToDomainObject = (annonce: IBodaccRecords) => ({
+  titre: extractTitre(annonce),
+  sousTitre: `BODACC ${annonce.publicationavis} n°${annonce.parution}`,
+  typeAvisLibelle: annonce.typeavis_lib || "",
+  tribunal: annonce.tribunal || "",
+  numeroAnnonce: annonce.numeroannonce || 0,
+  datePublication: annonce.dateparution || "",
+  details: extractDetails(annonce) || "",
+  path: `${routes.bodacc.site.annonce}${annonce.publicationavis}/${annonce.parution}/${annonce.numeroannonce}`,
+});
 
 const extractTitre = (annonce: IBodaccRecords) => {
   if ((annonce as IBodaccC).depot) {

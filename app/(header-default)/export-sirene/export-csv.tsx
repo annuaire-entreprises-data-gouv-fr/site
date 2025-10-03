@@ -1,9 +1,9 @@
 "use client";
 
-import ButtonLink from "#components-ui/button";
-import { formatDate, formatNumber } from "#utils/helpers";
 import type { ExportCsvInput } from "app/api/export-sirene/input-validation";
 import { useState } from "react";
+import ButtonLink from "#components-ui/button";
+import { formatDate, formatNumber } from "#utils/helpers";
 import { getEffectifCode } from "./constants";
 import Filters from "./filters";
 import FiltersSummary from "./filters-summary";
@@ -24,9 +24,7 @@ export interface ExtendedExportCsvInput extends ExportCsvInput {
   legalCategoriesNiveau3: string[];
 }
 
-const getFileSize = (count: number) => {
-  return Math.ceil((count * 300) / 1000);
-};
+const getFileSize = (count: number) => Math.ceil((count * 300) / 1000);
 
 const defaultFilters: ExtendedExportCsvInput = {
   headcount: { min: 0, max: 14 },
@@ -228,10 +226,10 @@ export default function ExportCsv() {
       <form onSubmit={handleCountSubmit}>
         <Filters filters={filters} setFilters={setFilters} />
         <div className={styles.buttonContainer}>
-          <ButtonLink type="button" alt={true} onClick={resetFilters}>
+          <ButtonLink alt={true} onClick={resetFilters} type="button">
             Réinitialiser les critères
           </ButtonLink>
-          <ButtonLink type="submit" disabled={isCountLoading}>
+          <ButtonLink disabled={isCountLoading} type="submit">
             {isCountLoading ? "Calcul en cours..." : "Calculer les résultats"}
           </ButtonLink>
         </div>
@@ -256,17 +254,17 @@ export default function ExportCsv() {
           <br />
           Vous pouvez aussi directement utiliser{" "}
           <a
-            target="_blank"
-            rel="noopener"
             href="https://www.data.gouv.fr/dataservices/api-sirene-open-data/"
+            rel="noopener"
+            target="_blank"
           >
             l‘API Sirene
           </a>{" "}
           ou télécharger la base complète sur{" "}
           <a
-            target="_blank"
-            rel="noopener"
             href="https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/"
+            rel="noopener"
+            target="_blank"
           >
             data.gouv.fr
           </a>
@@ -300,18 +298,18 @@ export default function ExportCsv() {
       )}
 
       <div className={styles.buttonContainer}>
-        <ButtonLink type="button" alt={true} onClick={resetFilters}>
+        <ButtonLink alt={true} onClick={resetFilters} type="button">
           Réinitialiser les critères
         </ButtonLink>
         <ButtonLink
-          type="button"
           alt={countResult.count < 200000 && countResult.count !== 0}
           onClick={modifyFilters}
+          type="button"
         >
           Modifier votre recherche
         </ButtonLink>
         {countResult.count < 200000 && countResult.count !== 0 ? (
-          <ButtonLink type="button" onClick={handleCsvExport}>
+          <ButtonLink onClick={handleCsvExport} type="button">
             Télécharger le fichier
           </ButtonLink>
         ) : null}

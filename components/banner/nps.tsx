@@ -1,12 +1,12 @@
 "use client";
 
-import { PrintNever } from "#components-ui/print-visibility";
-import ClientOnly from "#components/client-only";
-import { Exception } from "#models/exceptions";
-import { logInfoInSentry } from "#utils/sentry";
 import { useStorage } from "hooks";
 import type React from "react";
 import { useEffect, useState } from "react";
+import ClientOnly from "#components/client-only";
+import { PrintNever } from "#components-ui/print-visibility";
+import { Exception } from "#models/exceptions";
+import { logInfoInSentry } from "#utils/sentry";
 import styles from "./styles.module.css";
 
 const NPS_MODAL_ID = "nps-modal-2";
@@ -63,13 +63,13 @@ export const NPSBanner: React.FC<{}> = () => {
       {isVisible ? (
         <PrintNever>
           <div
-            id={NPS_MODAL_ID}
-            role="dialog"
             aria-label="Donnez-nous votre avis"
             className={styles.npsModal}
+            id={NPS_MODAL_ID}
+            role="dialog"
           >
             <div className="fr-container">
-              <a onClick={close} href="/formulaire/nps" target="_blank">
+              <a href="/formulaire/nps" onClick={close} target="_blank">
                 👍👎 Quel est votre avis sur l‘Annuaire des Entreprises ?
               </a>
               <button onClick={close}>

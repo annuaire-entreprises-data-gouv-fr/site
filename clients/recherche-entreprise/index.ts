@@ -2,10 +2,10 @@ import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
 import { createEtablissementsList } from "#models/core/etablissements-list";
-import { IETATADMINSTRATIF, estActif } from "#models/core/etat-administratif";
+import { estActif, IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import {
-  NotEnoughParamsException,
   createDefaultUniteLegale,
+  NotEnoughParamsException,
 } from "#models/core/types";
 import type { ISearchResults } from "#models/search";
 import type SearchFilterParams from "#models/search/search-filter-params";
@@ -284,9 +284,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     dateMiseAJourInsee: date_mise_a_jour_insee || "",
     dateMiseAJourInpi: date_mise_a_jour_rne || "",
     dateFermeture: date_fermeture ?? "",
-    listeIdcc: (liste_idcc || []).map((idcc) => {
-      return { idcc, title: "" };
-    }),
+    listeIdcc: (liste_idcc || []).map((idcc) => ({ idcc, title: "" })),
   };
 };
 

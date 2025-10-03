@@ -7,9 +7,9 @@ export default function PrintButton() {
   return (
     <InformationTooltip
       ariaRelation="labelledby"
-      tabIndex={undefined}
-      label="Imprimer cette page ou la sauvegarder au format PDF"
       horizontalOrientation="right"
+      label="Imprimer cette page ou la sauvegarder au format PDF"
+      tabIndex={undefined}
     >
       <button
         id="print-button"

@@ -1,12 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { MultiChoice } from "#components-ui/multi-choice";
 import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
-import { useState } from "react";
 import { ContactAnswer } from "./answers/contact";
 import { ContactCompanyAnswer } from "./answers/contact-entreprise";
 import { FraudAnswer } from "./answers/fraud";
@@ -48,16 +48,14 @@ export default function ParcoursQuestions({ session }: IProps) {
     <>
       <MultiChoice
         idPrefix="user-type"
-        values={Object.entries(FAQTargets).map(([key, value]) => {
-          return {
-            label: value,
-            onClick: () => {
-              setUserType(key);
-              updateQuestion("none");
-            },
-            checked: userType === key,
-          };
-        })}
+        values={Object.entries(FAQTargets).map(([key, value]) => ({
+          label: value,
+          onClick: () => {
+            setUserType(key);
+            updateQuestion("none");
+          },
+          checked: userType === key,
+        }))}
       />
       {userType && (
         <>
@@ -65,15 +63,13 @@ export default function ParcoursQuestions({ session }: IProps) {
           <strong>Vous voulez :</strong>
           <MultiChoice
             idPrefix="user-question"
-            values={questions.map(({ key, label }) => {
-              return {
-                label,
-                onClick: () => {
-                  updateQuestion(key);
-                },
-                checked: questionType === key,
-              };
-            })}
+            values={questions.map(({ key, label }) => ({
+              label,
+              onClick: () => {
+                updateQuestion(key);
+              },
+              checked: questionType === key,
+            }))}
           />
         </>
       )}
@@ -83,7 +79,7 @@ export default function ParcoursQuestions({ session }: IProps) {
       ) : questionType === "fraud" ? (
         <FraudAnswer />
       ) : questionType === "contact" ? (
-        <ContactAnswer userType={userType} session={session} />
+        <ContactAnswer session={session} userType={userType} />
       ) : null}
     </>
   );

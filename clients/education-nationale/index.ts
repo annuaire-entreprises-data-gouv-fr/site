@@ -4,7 +4,10 @@ import type { IEtablissementsScolaires } from "#models/etablissements-scolaires"
 import type { Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 import { zoneMapping } from "./helpers";
-import type { IEducationNationaleRecord, IEducationNationaleRecords } from "./types";
+import type {
+  IEducationNationaleRecord,
+  IEducationNationaleRecords,
+} from "./types";
 
 /**
  * Education nationale
@@ -38,8 +41,8 @@ export const clientEducationNationale = async (siren: Siren, page: number) => {
 
 const mapToDomainObject = (
   records: IEducationNationaleRecord[]
-): IEtablissementsScolaires["results"] => {
-  return records.map(({ fields }) => ({
+): IEtablissementsScolaires["results"] =>
+  records.map(({ fields }) => ({
     adresse: fields.adresse_1 || "",
     codePostal: fields.code_postal || "",
     idEtablissement: fields.identifiant_de_l_etablissement || "",
@@ -55,4 +58,3 @@ const mapToDomainObject = (
     zone:
       zoneMapping[fields.libelle_academie as keyof typeof zoneMapping] || "",
   }));
-};

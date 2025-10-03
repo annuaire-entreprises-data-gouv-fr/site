@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
+import Title from "#components/title-section";
+import { FICHE } from "#components/title-section/tabs";
 import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import BreakPageForPrint from "#components-ui/print-break-page";
 import { PrintNever } from "#components-ui/print-visibility";
-import Title from "#components/title-section";
-import { FICHE } from "#components/title-section/tabs";
 import {
   ApplicationRights,
   hasRights,
@@ -16,7 +17,6 @@ import extractParamsAppRouter, {
   type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import type { Metadata } from "next";
 import ActesSection from "./_components/actes";
 import ConformiteSection from "./_components/conformite";
 import JustificatifsSection from "./_components/justificatifs";
@@ -49,19 +49,19 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
     <>
       <div className="content-container">
         <Title
-          uniteLegale={uniteLegale}
           ficheType={FICHE.DOCUMENTS}
           session={session}
+          uniteLegale={uniteLegale}
         />
         <SummaryDocuments session={session} />
-        <JustificatifsSection uniteLegale={uniteLegale} session={session} />
+        <JustificatifsSection session={session} uniteLegale={uniteLegale} />
         <HorizontalSeparator />
         <BreakPageForPrint />
         <PrintNever>
           {hasRights(session, ApplicationRights.conformite) && (
             <ConformiteSection session={session} uniteLegale={uniteLegale} />
           )}
-          <ActesSection uniteLegale={uniteLegale} session={session} />
+          <ActesSection session={session} uniteLegale={uniteLegale} />
           {hasRights(session, ApplicationRights.travauxPublics) && (
             <TravauxPublicsSection
               session={session}

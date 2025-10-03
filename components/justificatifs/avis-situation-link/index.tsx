@@ -1,3 +1,4 @@
+import type React from "react";
 import routes from "#clients/routes";
 import ButtonLink from "#components-ui/button";
 import FAQLink from "#components-ui/faq-link";
@@ -13,7 +14,6 @@ import {
   estNonDiffusibleProtected,
 } from "#models/core/diffusion";
 import type { IEtablissement } from "#models/core/types";
-import type React from "react";
 
 const AvisSituationLink: React.FC<{
   etablissement: IEtablissement;
@@ -23,17 +23,17 @@ const AvisSituationLink: React.FC<{
 }> = ({ etablissement, label, button = false, session }) => {
   const link = button ? (
     <ButtonLink
-      small
       alt
+      small
       to={`${routes.sireneInsee.avis}${etablissement.siret}`}
     >
       <Icon slug="download">{label || "Avis de situation"}</Icon>
     </ButtonLink>
   ) : (
     <a
-      target="_blank"
-      rel="noopener noreferrer"
       href={`${routes.sireneInsee.avis}${etablissement.siret}`}
+      rel="noopener noreferrer"
+      target="_blank"
     >
       {label || "Avis de situation"}
     </a>

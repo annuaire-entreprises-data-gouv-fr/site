@@ -50,9 +50,7 @@ export async function logInGrist(
         Authorization: "Bearer " + process.env.GRIST_API_KEY,
       },
       data: {
-        records: data.map((d) => {
-          return { fields: d };
-        }),
+        records: data.map((d) => ({ fields: d })),
       },
       timeout: constants.timeout.XXL,
     });

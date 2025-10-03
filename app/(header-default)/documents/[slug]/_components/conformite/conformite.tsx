@@ -10,40 +10,38 @@ import type { IConformite } from "#models/espace-agent/conformite";
 const APINotRespongingElement: React.FC<{
   data: IAPINotRespondingError;
   administration: string;
-}> = ({ data, administration }) => {
-  return (
-    <>
-      {(data?.errorType === 408 && (
-        <>
-          <i>
-            <Icon slug="alertFill" color="orange">
-              La récupération du document auprès des services {administration} a
-              pris trop de temps.
-            </Icon>
-          </i>
-          <br />
-          <a href="">Rechargez la page</a> ou ré-essayez plus-tard.
-          <br />
-          <br />
-        </>
-      )) || (
-        <>
-          <i>
-            <Icon slug="errorFill" color="#df0a00">
-              La récupération du document auprès des services {administration} a
-              échoué.
-            </Icon>
-          </i>
-          <br />
-          Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui
-          demander la pièce directement.
-          <br />
-          <br />
-        </>
-      )}
-    </>
-  );
-};
+}> = ({ data, administration }) => (
+  <>
+    {(data?.errorType === 408 && (
+      <>
+        <i>
+          <Icon color="orange" slug="alertFill">
+            La récupération du document auprès des services {administration} a
+            pris trop de temps.
+          </Icon>
+        </i>
+        <br />
+        <a href="">Rechargez la page</a> ou ré-essayez plus-tard.
+        <br />
+        <br />
+      </>
+    )) || (
+      <>
+        <i>
+          <Icon color="#df0a00" slug="errorFill">
+            La récupération du document auprès des services {administration} a
+            échoué.
+          </Icon>
+        </i>
+        <br />
+        Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui
+        demander la pièce directement.
+        <br />
+        <br />
+      </>
+    )}
+  </>
+);
 
 const Conformite: React.FC<{
   data: IConformite | IAPINotRespondingError;
@@ -56,7 +54,7 @@ const Conformite: React.FC<{
       );
     } else {
       return (
-        <APINotRespongingElement data={data} administration={administration} />
+        <APINotRespongingElement administration={administration} data={data} />
       );
     }
   }

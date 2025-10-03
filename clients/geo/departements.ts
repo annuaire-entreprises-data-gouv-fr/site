@@ -34,12 +34,9 @@ export const clientDepartementByCode = async (
 
 const mapToDomainObject = (
   response: IGeoDepartementResponse[]
-): IGeoElement[] => {
-  return response.map((departement) => {
-    return {
-      label: `${departement.nom} (${departement.code})`,
-      value: departement.code,
-      type: "dep",
-    };
-  });
-};
+): IGeoElement[] =>
+  response.map((departement) => ({
+    label: `${departement.nom} (${departement.code})`,
+    value: departement.code,
+    type: "dep",
+  }));

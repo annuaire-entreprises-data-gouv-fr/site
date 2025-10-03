@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Title from "#components/title-section";
 import { FICHE } from "#components/title-section/tabs";
 import { isAssociation } from "#models/core/types";
@@ -7,7 +8,6 @@ import extractParamsAppRouter, {
   type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import type { Metadata } from "next";
 import DonneesFinancieresAssociation from "./_components/donnees-financieres-association";
 import DonneesFinancieresSociete from "./_components/donnees-financieres-societe";
 
@@ -37,18 +37,18 @@ const FinancePage = async (props: AppRouterProps) => {
       <div className="content-container">
         <Title
           ficheType={FICHE.FINANCES}
-          uniteLegale={uniteLegale}
           session={session}
+          uniteLegale={uniteLegale}
         />
         {isAssociation(uniteLegale) ? (
           <DonneesFinancieresAssociation
-            uniteLegale={uniteLegale}
             session={session}
+            uniteLegale={uniteLegale}
           />
         ) : (
           <DonneesFinancieresSociete
-            uniteLegale={uniteLegale}
             session={session}
+            uniteLegale={uniteLegale}
           />
         )}
       </div>

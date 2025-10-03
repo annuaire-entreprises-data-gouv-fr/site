@@ -1,12 +1,12 @@
 "use client";
 
+import { useFetchServicePublic } from "hooks/fetch/service-public";
 import { DILA } from "#components/administrations";
 import NonRenseigne from "#components/non-renseigne";
 import { DataSectionClient } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IUniteLegale } from "#models/core/types";
-import { useFetchServicePublic } from "hooks/fetch/service-public";
 import SubServicesSection from "./subservices";
 
 export default function ResponsablesServicePublicSection({
@@ -19,11 +19,11 @@ export default function ResponsablesServicePublicSection({
   return (
     <>
       <DataSectionClient
-        id="responsables-service-public"
-        title={`Responsable(s)`}
-        sources={[EAdministration.DILA]}
-        notFoundInfo={<NotFoundInfo />}
         data={servicePublic}
+        id="responsables-service-public"
+        notFoundInfo={<NotFoundInfo />}
+        sources={[EAdministration.DILA]}
+        title={`Responsable(s)`}
       >
         {(servicePublic) => (
           <>
@@ -31,10 +31,10 @@ export default function ResponsablesServicePublicSection({
               <p>
                 Cette administration n’a pas de responsable enregistré dans l’
                 <a
-                  href="https://lannuaire.service-public.fr/"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   aria-label="Voir l’Annuaire de l’administration, nouvelle fenêtre"
+                  href="https://lannuaire.service-public.fr/"
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   Annuaire de l’administration
                 </a>
@@ -51,10 +51,10 @@ export default function ResponsablesServicePublicSection({
                       {" "}
                       sur{" "}
                       <a
-                        href={servicePublic.liens.annuaireServicePublic.valeur}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         aria-label="Voir la page de l’Annuaire du service public, Nouvelle fenêtre"
+                        href={servicePublic.liens.annuaireServicePublic.valeur}
+                        rel="noopener noreferrer"
+                        target="_blank"
                       >
                         l’Annuaire du service public
                       </a>
@@ -65,10 +65,10 @@ export default function ResponsablesServicePublicSection({
                       {" "}
                       et publie un{" "}
                       <a
-                        href={servicePublic.liens.organigramme.valeur}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         aria-label={`Voir ${servicePublic.liens.organigramme.libelle}, nouvelle fenêtre`}
+                        href={servicePublic.liens.organigramme.valeur}
+                        rel="noopener noreferrer"
+                        target="_blank"
                       >
                         organigramme
                       </a>
@@ -78,19 +78,18 @@ export default function ResponsablesServicePublicSection({
                 </p>
 
                 <FullTable
-                  head={["Role", "Nom", "Nomination"]}
                   body={servicePublic.affectationPersonne.map((personne) => [
                     personne.fonction,
                     personne.nom ?? <NonRenseigne />,
                     personne.lienTexteAffectation ? (
                       <a
-                        href={personne.lienTexteAffectation.valeur}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         aria-label={`${
                           personne.lienTexteAffectation.libelle ||
                           "Voir la nomination"
                         }, nouvelle fenêtre`}
+                        href={personne.lienTexteAffectation.valeur}
+                        rel="noopener noreferrer"
+                        target="_blank"
                       >
                         {personne.lienTexteAffectation.libelle ||
                           "Voir la nomination"}
@@ -99,6 +98,7 @@ export default function ResponsablesServicePublicSection({
                       <NonRenseigne />
                     ),
                   ])}
+                  head={["Role", "Nom", "Nomination"]}
                 />
               </>
             )}
@@ -118,10 +118,10 @@ const NotFoundInfo = () => (
   <p>
     Cette administration n’a pas été retrouvé dans l’
     <a
-      href="https://lannuaire.service-public.fr/"
-      target="_blank"
-      rel="noopener noreferrer"
       aria-label="Voir l’Annuaire de l’administration, nouvelle fenêtre"
+      href="https://lannuaire.service-public.fr/"
+      rel="noopener noreferrer"
+      target="_blank"
     >
       Annuaire de l’administration
     </a>

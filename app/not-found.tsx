@@ -6,7 +6,7 @@ import { Question } from "#components/question";
 export default function NotFound() {
   return (
     <>
-      <HeaderAppRouter useSearchBar={true} useAgentCTA={true} />
+      <HeaderAppRouter useAgentCTA={true} useSearchBar={true} />
       <main className="fr-container">
         <ErrorNotFoundExplanations />
       </main>

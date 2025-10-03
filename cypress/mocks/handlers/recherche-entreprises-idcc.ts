@@ -3,6 +3,4 @@ import rechercheEntrepriseIdcc from "../../fixtures/recherche-entreprise-idcc.js
 
 export const rechercheEntrepriseIdccHandler: HttpResponseResolver = async ({
   request,
-}) => {
-  return HttpResponse.json(rechercheEntrepriseIdcc);
-};
+}) => HttpResponse.json(rechercheEntrepriseIdcc);

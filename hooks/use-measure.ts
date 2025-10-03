@@ -46,13 +46,14 @@ export function useMeasure(): [
     [elementObserver]
   );
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       if (node && elementObserver) {
         elementObserver.unobserve(node);
       }
-    };
-  }, [elementObserver, node]);
+    },
+    [elementObserver, node]
+  );
 
   return [ref, measures];
 }

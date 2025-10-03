@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+import z from "zod";
 import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
 import {
   ApplicationRights,
@@ -6,8 +8,6 @@ import {
 import { InternalError } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
 import getSession from "#utils/server-side-helper/app/get-session";
-import { NextResponse } from "next/server";
-import z from "zod";
 
 type RouteHandler<TContext> = (
   request: Request,

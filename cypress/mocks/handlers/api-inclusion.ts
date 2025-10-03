@@ -1,13 +1,10 @@
 import { HttpResponse, type HttpResponseResolver } from "msw";
-import apiInclusionMetadata from "../../fixtures/api-inclusion-metadata.json";
 import apiInclusion from "../../fixtures/api-inclusion.json";
+import apiInclusionMetadata from "../../fixtures/api-inclusion-metadata.json";
 
-export const apiInclusionHandler: HttpResponseResolver = ({ request }) => {
-  return HttpResponse.json(apiInclusion);
-};
+export const apiInclusionHandler: HttpResponseResolver = ({ request }) =>
+  HttpResponse.json(apiInclusion);
 
 export const apiInclusionMetadataHandler: HttpResponseResolver = ({
   request,
-}) => {
-  return HttpResponse.json(apiInclusionMetadata);
-};
+}) => HttpResponse.json(apiInclusionMetadata);

@@ -102,6 +102,5 @@ export const libelleFromCodeNAFWithoutNomenclature = (
 export const libelleFromCategoriesJuridiques = (categorie: string) =>
   categoriesJuridiquesNiveau3[categorie];
 
-export const libelleFromTypeVoie = (codeVoie: string) => {
-  return codesVoies[codeVoie] || codeVoie;
-};
+export const libelleFromTypeVoie = (codeVoie: string) =>
+  codesVoies[codeVoie] || codeVoie;

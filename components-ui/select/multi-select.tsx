@@ -1,5 +1,5 @@
-import ClientOnly from "#components/client-only";
 import ReactSelect, { type MultiValue, type Props } from "react-select";
+import ClientOnly from "#components/client-only";
 import type { ISelectOptions } from "./type";
 
 type MultiSelectProps = {
@@ -60,13 +60,13 @@ export const MultiSelect = ({
           inputId={id}
           instanceId={instanceId}
           isMulti
-          menuPosition={menuPosition}
           menuPlacement="auto"
+          menuPosition={menuPosition}
           name={name}
-          options={options}
           noOptionsMessage={() => "Liste vide"}
-          placeholder={placeholder}
           onChange={handleChange}
+          options={options}
+          placeholder={placeholder}
           styles={{
             clearIndicator: (base) => ({ ...base, color: "#000" }),
             placeholder: (base) => ({ ...base, color: "#161616" }),

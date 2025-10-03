@@ -17,16 +17,16 @@ const ActesSection: React.FC<{
     if (isAssociation(uniteLegale)) {
       return (
         <AgentWallAssociationProtected
-          title="Actes et statuts des associations"
           id="actes"
+          title="Actes et statuts des associations"
           uniteLegale={uniteLegale}
         />
       );
     }
     return (
       <AgentWallDocuments
-        title="Actes et statuts"
         id="actes"
+        title="Actes et statuts"
         uniteLegale={uniteLegale}
       />
     );
@@ -35,9 +35,9 @@ const ActesSection: React.FC<{
   return (
     <>
       {isAssociation(uniteLegale) && (
-        <AgentActesAssociation uniteLegale={uniteLegale} session={session} />
+        <AgentActesAssociation session={session} uniteLegale={uniteLegale} />
       )}
-      <AgentActesRNE uniteLegale={uniteLegale} session={session} />
+      <AgentActesRNE session={session} uniteLegale={uniteLegale} />
     </>
   );
 };

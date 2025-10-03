@@ -9,12 +9,10 @@ export interface IAPINotRespondingError {
 export const APINotRespondingFactory = (
   administration: EAdministration,
   errorType = 500
-): IAPINotRespondingError => {
-  return {
-    administration,
-    errorType,
-  };
-};
+): IAPINotRespondingError => ({
+  administration,
+  errorType,
+});
 
 export function isAPINotResponding<
   T extends Exclude<unknown, IDataFetchingState>,

@@ -9,6 +9,5 @@ const authorizedAdministrationWhitelist = {
   "843721416": "CHARTRES METROPOLE TRAITEMENT ET VALORISATION",
 };
 
-export const isOrganisationWhitelisted = (siren: Siren) => {
-  return Object.hasOwn(authorizedAdministrationWhitelist, siren);
-};
+export const isOrganisationWhitelisted = (siren: Siren) =>
+  Object.hasOwn(authorizedAdministrationWhitelist, siren);

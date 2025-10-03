@@ -1,7 +1,7 @@
+import type { Metadata } from "next";
 import { ConnexionSubLayout } from "#components-ui/connexion-layout";
 import connexionRefusedPicture from "#components-ui/illustrations/connexion-failed";
 import constants from "#models/constants";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Votre administration est inconnue de nos services",

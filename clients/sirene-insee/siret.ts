@@ -2,20 +2,23 @@ import { HttpNotFound, HttpServerError } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
 import { estActif } from "#models/core/etat-administratif";
-import { type IEtablissement, createDefaultEtablissement } from "#models/core/types";
 import {
-  type Siret,
+  createDefaultEtablissement,
+  type IEtablissement,
+} from "#models/core/types";
+import {
   agregateTripleFields,
   extractSirenFromSiret,
   formatAdresse,
+  type Siret,
 } from "#utils/helpers";
 import { libelleFromCodeNAF } from "#utils/helpers/formatting/labels";
-import { inseeClientGet } from ".";
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
 } from "../../utils/helpers/insee-variables";
+import { inseeClientGet } from ".";
 
 type IInseeEtablissementResponse = {
   etablissement: IInseeEtablissement;

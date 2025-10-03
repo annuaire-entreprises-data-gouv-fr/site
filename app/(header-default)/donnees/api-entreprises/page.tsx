@@ -1,5 +1,5 @@
-import { DINUM, INPI, INSEE } from "#components/administrations";
 import type { Metadata } from "next";
+import { DINUM, INPI, INSEE } from "#components/administrations";
 
 export const metadata: Metadata = {
   title: "API Recherche d’entreprises & API Entreprise",

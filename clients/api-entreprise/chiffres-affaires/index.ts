@@ -23,12 +23,11 @@ export async function clientApiEntrepriseChiffreAffaires(
 
 const mapToDomainObject = (
   response: IAPIEntrepriseChiffreAffaires
-): IChiffreAffairesProtected => {
-  return response.data
+): IChiffreAffairesProtected =>
+  response.data
     .map(({ data }) => ({
       chiffreAffaires: data.chiffre_affaires,
       dateFinExercice: data.date_fin_exercice,
       year: getFiscalYear(data.date_fin_exercice),
     }))
     .sort((a, b) => a.year - b.year);
-};

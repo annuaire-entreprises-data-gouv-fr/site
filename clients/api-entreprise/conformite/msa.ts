@@ -14,18 +14,15 @@ export type IAPIEntrepriseConformiteMSA = IAPIEntrepriseResponse<{
 export const clientApiEntrepriseConformiteMSA = async (
   siret: Siret,
   useCase?: UseCase
-) => {
-  return await clientAPIEntreprise<IAPIEntrepriseConformiteMSA, IConformite>(
+) =>
+  await clientAPIEntreprise<IAPIEntrepriseConformiteMSA, IConformite>(
     routes.apiEntreprise.conformite.msa(siret),
     mapToDomainObject,
     { useCase }
   );
-};
 
-const mapToDomainObject = (response: IAPIEntrepriseConformiteMSA) => {
-  return {
-    isValid: response.data?.status === "up_to_date",
-    url: null,
-    label: null,
-  };
-};
+const mapToDomainObject = (response: IAPIEntrepriseConformiteMSA) => ({
+  isValid: response.data?.status === "up_to_date",
+  url: null,
+  label: null,
+});

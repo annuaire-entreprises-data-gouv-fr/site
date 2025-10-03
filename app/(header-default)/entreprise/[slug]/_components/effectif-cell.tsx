@@ -1,12 +1,14 @@
 "use client";
 
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { GIPMDS, INSEE } from "#components/administrations";
+import NonRenseigne from "#components/non-renseigne";
+import { ProtectedInlineData } from "#components/protected-inline-data";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { Loader } from "#components-ui/loader";
-import { GIPMDS, INSEE } from "#components/administrations";
-import NonRenseigne from "#components/non-renseigne";
-import { ProtectedInlineData } from "#components/protected-inline-data";
 import { isAPI404 } from "#models/api-not-responding";
 import {
   ApplicationRights,
@@ -17,8 +19,6 @@ import type { IUniteLegale } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
 import { formatFloatFr } from "#utils/helpers";
 import { libelleTrancheEffectif } from "#utils/helpers/formatting/codes-effectifs";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 
 export const FAQEffectifAnnuel = () => (
   <FAQLink tooltipLabel="Effectif annuel">
@@ -60,7 +60,7 @@ export const ProtectedEffectifCell = ({
   if (hasAnyError(effectifsAnnuelsProtected)) {
     return (
       <InformationTooltip
-        tabIndex={0}
+        horizontalOrientation="left"
         label={
           <>
             Nous n’avons pas pu récupérer les effectifs de cette structure car
@@ -68,10 +68,10 @@ export const ProtectedEffectifCell = ({
             plus tard.
           </>
         }
-        horizontalOrientation="left"
         left="5px"
+        tabIndex={0}
       >
-        <Icon slug="errorFill" color="#df0a00">
+        <Icon color="#df0a00" slug="errorFill">
           <em>Service indisponible</em>
         </Icon>
       </InformationTooltip>
@@ -108,7 +108,7 @@ export const EffectifCell = ({
           <span>
             <FAQEffectifAnnuel /> (<GIPMDS />) :{" "}
           </span>
-          <ProtectedEffectifCell uniteLegale={uniteLegale} session={session} />
+          <ProtectedEffectifCell session={session} uniteLegale={uniteLegale} />
         </li>
       </ul>
     );

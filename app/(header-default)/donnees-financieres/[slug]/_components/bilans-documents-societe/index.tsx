@@ -1,5 +1,5 @@
-import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import AgentWallDocuments from "#components/espace-agent-components/agent-wall/document";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import {
   ApplicationRights,
   hasRights,
@@ -20,8 +20,8 @@ export function BilansDocumentsSociete({
       <>
         <HorizontalSeparator />
         <AgentWallDocuments
-          title="Bilans au format PDF"
           id="bilans-pdf"
+          title="Bilans au format PDF"
           uniteLegale={uniteLegale}
         />
       </>
@@ -30,7 +30,7 @@ export function BilansDocumentsSociete({
   return (
     <>
       <HorizontalSeparator />
-      <AgentBilansSection uniteLegale={uniteLegale} session={session} />
+      <AgentBilansSection session={session} uniteLegale={uniteLegale} />
     </>
   );
 }

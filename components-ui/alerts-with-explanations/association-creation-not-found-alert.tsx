@@ -18,9 +18,9 @@ const AssociationCreationNotFoundAlert: React.FC<{
     En revanche, vous pouvez probablement retrouver l’annonce de création grâce
     au{" "}
     <a
-      target="_blank"
-      rel="noreferrer noopener"
       href={routes.journalOfficielAssociations.site.recherche}
+      rel="noreferrer noopener"
+      target="_blank"
     >
       moteur de recherche du Journal Officiel
     </a>

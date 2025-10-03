@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { NPSBanner } from "#components/banner/nps";
 import TempIncidentBanner from "#components/banner/temp-incident";
 import Footer from "#components/footer";
@@ -5,7 +6,6 @@ import { HeaderAppRouter } from "#components/header/header-app-router";
 import { meta } from "#components/meta/meta-server";
 import { Question } from "#components/question";
 import SocialNetworks from "#components/social-network";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = meta({});
 
@@ -23,10 +23,10 @@ export default function LayoutPublic({
       <NPSBanner />
       <TempIncidentBanner />
       <HeaderAppRouter
-        useSearchBar={true}
-        useAgentCTA={false}
         useAgentBanner={false}
+        useAgentCTA={false}
         useReconnectBanner={false}
+        useSearchBar={true}
       />
       <main className="fr-container">{children}</main>
       <SocialNetworks />

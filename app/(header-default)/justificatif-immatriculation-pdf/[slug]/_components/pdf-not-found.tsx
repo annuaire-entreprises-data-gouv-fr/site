@@ -1,5 +1,5 @@
-import { Tag } from "#components-ui/tag";
 import { INPI } from "#components/administrations";
+import { Tag } from "#components-ui/tag";
 
 export function PDFNotFound({ downloadLink }: { downloadLink: string }) {
   return (
@@ -14,7 +14,7 @@ export function PDFNotFound({ downloadLink }: { downloadLink: string }) {
       <ol>
         <li>
           Soit essayer de télécharger le document{" "}
-          <a target="_blank" rel="noreferrer noopener" href={downloadLink}>
+          <a href={downloadLink} rel="noreferrer noopener" target="_blank">
             directement sur le site de l’INPI
           </a>
           .

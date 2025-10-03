@@ -71,14 +71,19 @@ const FeedBackPage = async () => {
         <div className="content-container form-container">
           <form
             action="/api/feedback/nps"
-            method="post"
-            id="form-feedback-nps"
             className={styles["form-feedback-nps"]}
+            id="form-feedback-nps"
+            method="post"
           >
-            <input name="uuid" value={uuid} type="hidden" />
+            <input name="uuid" type="hidden" value={uuid} />
             <fieldset>
               <MultiChoice
+                centered
+                idPrefix="radio-smiley"
+                large
                 legend="Sur une échelle de 1 à 10, à quel point recommanderiez-vous l’Annuaire des Entreprises ?"
+                name="radio-set-mood"
+                required={true}
                 values={[
                   { value: "1", label: "1" },
                   { value: "2", label: "2" },
@@ -91,11 +96,6 @@ const FeedBackPage = async () => {
                   { value: "9", label: "9" },
                   { value: "10", label: "10" },
                 ]}
-                name="radio-set-mood"
-                idPrefix="radio-smiley"
-                required={true}
-                centered
-                large
               />
             </fieldset>
 
@@ -103,24 +103,27 @@ const FeedBackPage = async () => {
               {isLoggedIn(session) ? (
                 <input
                   aria-hidden
-                  type="hidden"
                   name="radio-set-visitor-type"
-                  value={getAgentUserType(session) || ""}
                   tabIndex={-1}
+                  type="hidden"
+                  value={getAgentUserType(session) || ""}
                 />
               ) : (
                 <MultiChoice
-                  legend="Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
-                  values={visitorTypes}
-                  name="radio-set-visitor-type"
                   idPrefix="radio-visitor-type"
+                  legend="Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
+                  name="radio-set-visitor-type"
                   required={false}
+                  values={visitorTypes}
                 />
               )}
             </fieldset>
             <fieldset>
               <MultiChoice
+                idPrefix="radio-visitor-origin"
                 legend="Comment êtes-vous arrivé(e) jusqu’ici ?"
+                name="radio-set-visitor-origin"
+                required={false}
                 values={[
                   {
                     value: "Bouche à oreille",
@@ -145,9 +148,6 @@ const FeedBackPage = async () => {
                     label: "Autre",
                   },
                 ]}
-                name="radio-set-visitor-origin"
-                idPrefix="radio-visitor-origin"
-                required={false}
               />
             </fieldset>
             <fieldset>
@@ -172,12 +172,12 @@ const FeedBackPage = async () => {
                 </label>
                 <input
                   className="fr-input"
-                  id="email"
-                  name="email"
-                  type="email"
                   defaultValue={
                     isLoggedIn(session) ? getAgentEmail(session) : ""
                   }
+                  id="email"
+                  name="email"
+                  type="email"
                 />
               </div>
             </fieldset>

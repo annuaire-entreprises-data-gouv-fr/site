@@ -16,10 +16,8 @@ export const EFFECTIF_STEPS = [
   { value: 14, label: "10 000 salariés et plus", code: "53" },
 ];
 
-export const getEffectifLabel = (value: number) => {
-  return EFFECTIF_STEPS[value]?.label || "";
-};
+export const getEffectifLabel = (value: number) =>
+  EFFECTIF_STEPS[value]?.label || "";
 
-export const getEffectifCode = (value: number) => {
-  return EFFECTIF_STEPS[value]?.code || "00";
-};
+export const getEffectifCode = (value: number) =>
+  EFFECTIF_STEPS[value]?.code || "00";

@@ -1,7 +1,7 @@
-import TextWrapper from "#components-ui/text-wrapper";
-import AdministrationDescription from "#components/administrations/administration-description";
-import { administrationsMetaData } from "#models/administrations";
 import type { Metadata } from "next";
+import AdministrationDescription from "#components/administrations/administration-description";
+import TextWrapper from "#components-ui/text-wrapper";
+import { administrationsMetaData } from "#models/administrations";
 
 export const metadata: Metadata = {
   title: "Liste des administrations partenaires de l’Annuaire des Entreprises",
@@ -20,7 +20,7 @@ const AllAdministrationsPage = () => (
       entreprises, les associations ou les services publics&nbsp;:
     </p>
     {Object.values(administrationsMetaData).map(({ slug }) => (
-      <AdministrationDescription slug={slug} key={slug} />
+      <AdministrationDescription key={slug} slug={slug} />
     ))}
   </TextWrapper>
 );

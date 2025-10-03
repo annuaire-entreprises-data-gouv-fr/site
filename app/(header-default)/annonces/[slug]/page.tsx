@@ -1,3 +1,6 @@
+import AnnoncesBodacc from "app/(header-default)/annonces/[slug]/_components/bodacc";
+import AnnoncesJOAFESection from "app/(header-default)/annonces/[slug]/_components/joafe";
+import type { Metadata } from "next";
 import { DonneesPriveesSection } from "#components/donnees-privees-section";
 import Title from "#components/title-section";
 import { FICHE } from "#components/title-section/tabs";
@@ -16,9 +19,6 @@ import extractParamsAppRouter, {
   type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import AnnoncesBodacc from "app/(header-default)/annonces/[slug]/_components/bodacc";
-import AnnoncesJOAFESection from "app/(header-default)/annonces/[slug]/_components/joafe";
-import type { Metadata } from "next";
 import { ObservationsRNE } from "./_components/observations-rne";
 
 export const generateMetadata = async (
@@ -49,8 +49,8 @@ const AnnoncesPage = async (props: AppRouterProps) => {
       <div className="content-container">
         <Title
           ficheType={FICHE.ANNONCES}
-          uniteLegale={uniteLegale}
           session={session}
+          uniteLegale={uniteLegale}
         />
         {estDiffusible(uniteLegale) ||
         hasRights(session, ApplicationRights.nonDiffusible) ? (
@@ -72,7 +72,7 @@ const AnnoncesPage = async (props: AppRouterProps) => {
             </ul>
             <AnnoncesBodacc uniteLegale={uniteLegale} />
             {uniteLegale.dateMiseAJourInpi && (
-              <ObservationsRNE uniteLegale={uniteLegale} session={session} />
+              <ObservationsRNE session={session} uniteLegale={uniteLegale} />
             )}
             {isAssociation(uniteLegale) && (
               <AnnoncesJOAFESection uniteLegale={uniteLegale} />

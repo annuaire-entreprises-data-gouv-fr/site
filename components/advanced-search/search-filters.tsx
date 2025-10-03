@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { FilterMenu } from "#components-ui/filter-menu";
 import { SimpleSeparator } from "#components-ui/horizontal-separator";
 import { Select } from "#components-ui/select";
@@ -12,7 +13,6 @@ import { codesEffectifsOptions } from "#utils/helpers/formatting/codes-effectifs
 import { categoriesJuridiquesNiveau3 } from "#utils/helpers/formatting/metadata/categories-juridiques";
 import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
 import { codesSectionNAF } from "#utils/helpers/formatting/metadata/codes-section-NAF";
-import type React from "react";
 import { FilterFinances } from "./filter-finances";
 import { FilterGeo } from "./filter-geo";
 import { FilterStructure } from "./filter-structure";
@@ -68,11 +68,11 @@ const SearchFilters: React.FC<{
   return (
     <>
       <FilterMenu
-        label="Zone géographique"
         activeFilter={localisationFilter}
+        addSaveClearButton
+        label="Zone géographique"
         searchParams={searchParams}
         searchTerm={searchTerm}
-        addSaveClearButton
       >
         <label htmlFor="geo-search-input">Ville, département ou région :</label>
         <FilterGeo
@@ -82,11 +82,11 @@ const SearchFilters: React.FC<{
         />
       </FilterMenu>
       <FilterMenu
-        label="Dirigeant"
         activeFilter={dirigeantFilter}
+        addSaveClearButton
+        label="Dirigeant"
         searchParams={searchParams}
         searchTerm={searchTerm}
-        addSaveClearButton
       >
         <fieldset>
           <legend>
@@ -100,29 +100,29 @@ const SearchFilters: React.FC<{
             }}
           >
             <div className="fr-input-group">
-              <label htmlFor="firstname-input" className="fr-label fr-sr-only">
+              <label className="fr-label fr-sr-only" htmlFor="firstname-input">
                 Prénom
               </label>
               <input
-                id="firstname-input"
-                className="fr-input"
-                name="fn"
                 autoComplete="off"
-                placeholder="Prénom"
+                className="fr-input"
                 defaultValue={fn}
+                id="firstname-input"
+                name="fn"
+                placeholder="Prénom"
               />
             </div>
             <div className="fr-input-group">
-              <label htmlFor="lastname-input" className="fr-label fr-sr-only">
+              <label className="fr-label fr-sr-only" htmlFor="lastname-input">
                 Nom
               </label>
               <input
-                id="lastname-input"
-                className="fr-input"
-                name="n"
                 autoComplete="off"
-                placeholder="Nom"
+                className="fr-input"
                 defaultValue={n}
+                id="lastname-input"
+                name="n"
+                placeholder="Nom"
               />
             </div>
           </div>
@@ -136,100 +136,100 @@ const SearchFilters: React.FC<{
             }}
           >
             <div className="fr-input-group">
-              <label htmlFor="date-min-input" className="fr-label fr-sr-only">
+              <label className="fr-label fr-sr-only" htmlFor="date-min-input">
                 Date minimum
               </label>
               <input
-                id="date-min-input"
                 className="fr-input"
-                type="date"
-                name="dmin"
                 defaultValue={dmin}
+                id="date-min-input"
+                name="dmin"
+                type="date"
               />
             </div>
             &nbsp;et&nbsp;
             <div className="fr-input-group">
-              <label htmlFor="date-max-input" className="fr-label fr-sr-only">
+              <label className="fr-label fr-sr-only" htmlFor="date-max-input">
                 Date maximum
               </label>
               <input
-                id="date-max-input"
                 className="fr-input"
-                type="date"
-                name="dmax"
                 defaultValue={dmax}
+                id="date-max-input"
+                name="dmax"
+                type="date"
               />
             </div>
           </div>
         </fieldset>
       </FilterMenu>
       <FilterMenu
-        label="Structure"
         activeFilter={structureFilter}
+        addSaveClearButton
+        label="Structure"
         searchParams={searchParams}
         searchTerm={searchTerm}
-        addSaveClearButton
       >
         <FilterStructure label={label} type={type} />
       </FilterMenu>
       <FilterMenu
-        label="Financier"
         activeFilter={financeFilter}
+        addSaveClearButton
+        label="Financier"
         searchParams={searchParams}
         searchTerm={searchTerm}
-        addSaveClearButton
       >
         <FilterFinances
-          ca_min={ca_min}
           ca_max={ca_max}
-          res_min={res_min}
+          ca_min={ca_min}
           res_max={res_max}
+          res_min={res_min}
         />
       </FilterMenu>
       <FilterMenu
-        label="Situation administrative"
         activeFilter={administrativeFilter}
+        addSaveClearButton
+        label="Situation administrative"
         searchParams={searchParams}
         searchTerm={searchTerm}
-        addSaveClearButton
       >
         <Select
+          defaultValue={etat}
+          label="Etat administratif :"
+          name="etat"
           options={[
             { value: "A", label: "En activité" },
             { value: "C", label: "Cessée" },
           ]}
-          name="etat"
-          label="Etat administratif :"
-          defaultValue={etat}
           placeholder="Choisir un état administratif"
         />
         <SimpleSeparator />
         <div className="select">
           <label htmlFor="sap-multi-select">Domaine d‘activité :</label>
           <MultiSelect
-            name="sap"
             defaultValue={sap}
-            placeholder="Choisir un domaine d'activité"
             id="sap-multi-select"
             instanceId="sap-multi-select"
+            menuPosition="fixed"
+            name="sap"
             options={Object.keys(codesSectionNAF).map((k) => ({
               value: k,
               label: codesSectionNAF[k as keyof typeof codesSectionNAF],
             }))}
-            menuPosition="fixed"
+            placeholder="Choisir un domaine d'activité"
           />
           <label htmlFor="naf-multi-select">Code NAF/APE :</label>
           <MultiSelect
-            name="naf"
             defaultValue={naf}
-            placeholder="Choisir un code NAF/APE"
             id="naf-multi-select"
             instanceId="naf-multi-select"
+            menuPosition="fixed"
+            name="naf"
             options={Object.keys(codesNAFRev2).map((code) => ({
               value: code,
               label: `${code} - ${codesNAFRev2[code]}`,
             }))}
-            menuPosition="fixed"
+            placeholder="Choisir un code NAF/APE"
           />
         </div>
         <SimpleSeparator />
@@ -238,13 +238,13 @@ const SearchFilters: React.FC<{
             Forme juridique :
           </label>
           <MultiSelect
-            name="nature_juridique"
             defaultValue={nature_juridique}
-            placeholder="Choisir une forme juridique"
             id="nature-juridique-multi-select"
             instanceId="nature-juridique-multi-select"
-            options={getNaturesJuridiques()}
             menuPosition="fixed"
+            name="nature_juridique"
+            options={getNaturesJuridiques()}
+            placeholder="Choisir une forme juridique"
           />
         </div>
         <SimpleSeparator />
@@ -253,13 +253,13 @@ const SearchFilters: React.FC<{
             Effectif salarié
           </label>
           <MultiSelect
-            name="tranche_effectif_salarie"
             defaultValue={tranche_effectif_salarie}
-            placeholder="Choisir une tranche d'effectif"
             id="effectif-salarie-multi-select"
             instanceId="effectif-salarie-multi-select"
-            options={codesEffectifsOptions}
             menuPosition="fixed"
+            name="tranche_effectif_salarie"
+            options={codesEffectifsOptions}
+            placeholder="Choisir une tranche d'effectif"
           />
         </div>
         <div>
@@ -267,13 +267,13 @@ const SearchFilters: React.FC<{
             Taille d’entreprise
           </label>
           <MultiSelect
-            name="categorie_entreprise"
             defaultValue={categorie_entreprise}
-            placeholder="Choisir une catégorie d'entreprise"
             id="categorie-entreprise-multi-select"
             instanceId="categorie-entreprise-multi-select"
-            options={categoriesEntreprisesOptions}
             menuPosition="fixed"
+            name="categorie_entreprise"
+            options={categoriesEntreprisesOptions}
+            placeholder="Choisir une catégorie d'entreprise"
           />
         </div>
       </FilterMenu>

@@ -4,7 +4,7 @@ import type {
   IEtablissementBio,
   IEtablissementsBio,
 } from "#models/certifications/bio";
-import { type Siren, formatAdresse, verifySiret } from "#utils/helpers";
+import { formatAdresse, type Siren, verifySiret } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 import type { IBioItem, IBioResponse } from "./interface";
 

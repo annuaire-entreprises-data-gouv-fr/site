@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import styles from "./style.module.css";
+
 type IProps = React.HTMLAttributes<HTMLDivElement> & {
   agentColor?: boolean;
   noMobile?: boolean;

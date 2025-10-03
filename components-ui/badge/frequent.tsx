@@ -1,5 +1,5 @@
-import constants from "#models/constants";
 import type { PropsWithChildren } from "react";
+import constants from "#models/constants";
 import { Badge, type IPartialBadgeProps } from ".";
 
 export const LabelAndCertificateBadge = ({
@@ -10,14 +10,14 @@ export const LabelAndCertificateBadge = ({
   link,
 }: IPartialBadgeProps) => (
   <Badge
-    label={label}
-    icon="awardFill"
-    onClick={onClick}
-    isSelected={isSelected}
-    small={small}
-    link={link}
-    fontColor={constants.colors.frBlue}
     backgroundColor="#ddd"
+    fontColor={constants.colors.frBlue}
+    icon="awardFill"
+    isSelected={isSelected}
+    label={label}
+    link={link}
+    onClick={onClick}
+    small={small}
   />
 );
 
@@ -27,13 +27,13 @@ export const AssociationBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
-    small={small}
-    onClick={onClick}
+    backgroundColor="#e5d2f9"
+    fontColor="#3d0d71"
     icon="communityFill"
     isSelected={isSelected}
     label="Association"
-    fontColor="#3d0d71"
-    backgroundColor="#e5d2f9"
+    onClick={onClick}
+    small={small}
   />
 );
 export const EntrepriseIndividuelleBadge = ({
@@ -42,13 +42,13 @@ export const EntrepriseIndividuelleBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
+    backgroundColor="#95e3e8"
+    fontColor="#034e6e"
     icon="user"
-    small={small}
-    onClick={onClick}
     isSelected={isSelected}
     label="Entreprise individuelle"
-    fontColor="#034e6e"
-    backgroundColor="#95e3e8"
+    onClick={onClick}
+    small={small}
   />
 );
 export const CollectiviteTerritorialeBadge = ({
@@ -57,13 +57,13 @@ export const CollectiviteTerritorialeBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
+    backgroundColor="#ffe283"
+    fontColor="#563003"
     icon="collectiviteFill"
-    small={small}
-    onClick={onClick}
     isSelected={isSelected}
     label="Collectivité territoriale"
-    fontColor="#563003"
-    backgroundColor="#ffe283"
+    onClick={onClick}
+    small={small}
   />
 );
 export const ServicePublicBadge = ({
@@ -72,13 +72,13 @@ export const ServicePublicBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
+    backgroundColor="#ffe283"
+    fontColor="#563003"
     icon="administrationFill"
-    small={small}
-    onClick={onClick}
     isSelected={isSelected}
     label="Administration"
-    fontColor="#563003"
-    backgroundColor="#ffe283"
+    onClick={onClick}
+    small={small}
   />
 );
 export const DefaultStructureBadge = ({
@@ -88,13 +88,13 @@ export const DefaultStructureBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
-    icon="buildingFill"
-    small={small}
-    onClick={onClick}
-    label={label}
-    isSelected={isSelected}
-    fontColor={constants.colors.frBlue}
     backgroundColor="#e8edff"
+    fontColor={constants.colors.frBlue}
+    icon="buildingFill"
+    isSelected={isSelected}
+    label={label}
+    onClick={onClick}
+    small={small}
   />
 );
 
@@ -102,7 +102,7 @@ export const OpenClosedTag: React.FC<
   PropsWithChildren<{ icon: "open" | "closed" | "questionFill"; label: string }>
 > = ({ label = "", icon, children }) => (
   <div className="layout-left">
-    <Badge icon={icon} label={label} backgroundColor="#ddd" fontColor="#666" />
+    <Badge backgroundColor="#ddd" fontColor="#666" icon={icon} label={label} />
     {children}
   </div>
 );
