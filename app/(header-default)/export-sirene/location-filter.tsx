@@ -35,7 +35,6 @@ export const LocationFilter: React.FC<{
   const [isLoading, setLoading] = useState(false);
   const [geoSuggests, setGeoSuggests] = useState<IGeoElement[]>([]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const search = useCallback(
     debounce(async (term: string) => {
       setLoading(true);

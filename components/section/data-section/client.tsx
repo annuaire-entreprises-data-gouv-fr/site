@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { useTimeout } from "hooks/use-timeout";
 import { useEffect, useState } from "react";
 import { FadeIn } from "#components-ui/animation/fade-in";
@@ -97,7 +95,6 @@ function useShowLoadingState<T>(
     if (!isDataLoading(data) && before100ms) {
       setDataLoadedBefore100ms(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   if (before100ms || dataLoadedBefore100ms) {

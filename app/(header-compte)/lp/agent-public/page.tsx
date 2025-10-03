@@ -131,7 +131,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
                     </li>
                     <li>
                       Liens capitalistiques
-                      <span className={styles['asterix-et-obelix']}>*</span>
+                      <span className={styles["asterix-et-obelix"]}>*</span>
                     </li>
                     <li>
                       Bilans de la Banque de France

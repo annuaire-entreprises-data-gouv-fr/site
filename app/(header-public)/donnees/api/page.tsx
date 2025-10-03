@@ -83,7 +83,6 @@ export default async function StatusPage() {
             {monitors[administrationEnum].map((monitor) => (
               <React.Fragment key={monitor.apiName}>
                 <h3 id={monitor.apiSlug}>{monitor.apiName}</h3>
-                {/* eslint-disable-next-line react/jsx-props-no-spreading */}
                 <ApiMonitoring {...monitor} />
               </React.Fragment>
             ))}

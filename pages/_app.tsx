@@ -26,7 +26,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   // Use the layout defined at the page level, otherwise fallback on layout with default settings.
   const getLayout =
     Component.getLayout ?? ((page) => <LayoutDefault>{page}</LayoutDefault>);
-  //eslint-disable-next-line react/jsx-props-no-spreading
+
   const layout = getLayout(<Component {...pageProps} />);
   return (
     <ErrorBoundary>

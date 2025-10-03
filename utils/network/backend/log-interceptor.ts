@@ -20,7 +20,6 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
   const startTime = response?.config?.metadata?.startTime;
 
   // logged into stdout
-  // eslint-disable-next-line no-console
   console.info(
     formatLog(
       response?.config?.url || "",

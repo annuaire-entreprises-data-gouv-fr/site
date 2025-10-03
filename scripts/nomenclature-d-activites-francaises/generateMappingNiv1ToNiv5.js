@@ -48,7 +48,6 @@ const totalNiv5Count = Object.values(niv1ToNiv5Mapping).reduce(
   0
 );
 
-// eslint-disable-next-line no-console
 console.log(
   `Generated mapping for ${niv1Count} NIV1 codes with ${totalNiv5Count} total NIV5 codes in ${outputPath}`
 );
