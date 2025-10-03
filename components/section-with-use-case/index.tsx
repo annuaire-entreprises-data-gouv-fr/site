@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { Section } from '#components/section';
-import { AskUseCase } from '#components/section-with-use-case/ask-use-case';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { useState } from "react";
+import { Section } from "#components/section";
+import { AskUseCase } from "#components/section-with-use-case/ask-use-case";
+import type { EAdministration } from "#models/administrations/EAdministration";
 import {
-  ApplicationRights,
+  type ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/use-cases';
-import { useState } from 'react';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import type { UseCase } from "#models/use-cases";
 
 type WrappedSectionProps = {
   uniteLegale: IUniteLegale;
@@ -26,7 +26,7 @@ const DefaultIntroContent = () => (
   <p>
     Les agents publics peuvent demander à accéder à cette donnée uniquement dans
     les cas d’usages justifiant d’un intérêt légitime. En déclarant le cadre
-    juridique dans lequel vous accédez à ces données, vous vous engagez{' '}
+    juridique dans lequel vous accédez à ces données, vous vous engagez{" "}
     <a href="/modalites-utilisation">à respecter nos modalités d’utilisation</a>
     .
   </p>
@@ -59,7 +59,7 @@ const ProtectedSectionWithUseCase: React.FC<{
 
   if (!hasRights(session, requiredRight)) {
     return noRightContent ? (
-      <Section title={title} id={id}>
+      <Section id={id} title={title}>
         {noRightContent}
       </Section>
     ) : null;
@@ -67,16 +67,16 @@ const ProtectedSectionWithUseCase: React.FC<{
 
   if (!useCase) {
     return (
-      <Section title={title} id={id} sources={sources} isProtected={true}>
+      <Section id={id} isProtected={true} sources={sources} title={title}>
         {useCaseFormContent || <DefaultIntroContent />}
-        <AskUseCase idPrefix={id} useCase={useCase} setUseCase={setUseCase} />
+        <AskUseCase idPrefix={id} setUseCase={setUseCase} useCase={useCase} />
       </Section>
     );
   }
 
   if (!allowedUseCases.includes(useCase)) {
     return (
-      <Section title={title} id={id} sources={sources} isProtected={true}>
+      <Section id={id} isProtected={true} sources={sources} title={title}>
         {useCaseFormContent || <DefaultIntroContent />}
         <strong>
           Ces informations ne vous sont pas accessibles dans ce cas d‘usage.
@@ -87,13 +87,13 @@ const ProtectedSectionWithUseCase: React.FC<{
 
   return (
     <WrappedSection
-      uniteLegale={uniteLegale}
-      session={session}
-      useCase={useCase}
-      title={title}
       id={id}
-      sources={sources}
       isProtected={true}
+      session={session}
+      sources={sources}
+      title={title}
+      uniteLegale={uniteLegale}
+      useCase={useCase}
     />
   );
 };

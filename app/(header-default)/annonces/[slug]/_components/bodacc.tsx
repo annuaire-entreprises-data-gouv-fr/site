@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import routes from '#clients/routes';
-import { Info } from '#components-ui/alerts';
-import ButtonLink from '#components-ui/button';
-import { DILA } from '#components/administrations';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { FullTable } from '#components/table/full';
-import { UniteLegalePageLink } from '#components/unite-legale-page-link';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale } from '#models/core/types';
-import { formatDate } from '#utils/helpers';
-import { useFetchBODACC } from 'hooks';
-import React from 'react';
+import { useFetchBODACC } from "hooks";
+import type React from "react";
+import routes from "#clients/routes";
+import { DILA } from "#components/administrations";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { FullTable } from "#components/table/full";
+import { UniteLegalePageLink } from "#components/unite-legale-page-link";
+import { Info } from "#components-ui/alerts";
+import ButtonLink from "#components-ui/button";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { IUniteLegale } from "#models/core/types";
+import { formatDate } from "#utils/helpers";
 
 const AnnoncesBodacc: React.FC<{
   uniteLegale: IUniteLegale;
@@ -20,10 +20,10 @@ const AnnoncesBodacc: React.FC<{
 
   return (
     <AsyncDataSectionClient
-      id="annonces-bodacc"
-      title="Annonces BODACC"
-      sources={[EAdministration.DILA]}
       data={bodacc}
+      id="annonces-bodacc"
+      sources={[EAdministration.DILA]}
+      title="Annonces BODACC"
     >
       {(bodacc) => (
         <>
@@ -46,11 +46,11 @@ const AnnoncesBodacc: React.FC<{
           )}
           {bodacc.annonces.length === 0 ? (
             <div>
-              Elle n’a aucune annonce publiée au{' '}
+              Elle n’a aucune annonce publiée au{" "}
               <a
-                target="_blank"
-                rel="noreferrer noopener"
                 href={routes.bodacc.site.recherche}
+                rel="noreferrer noopener"
+                target="_blank"
               >
                 Bulletin Officiel Des Annonces Civiles et Commerciales (BODACC)
               </a>
@@ -59,22 +59,21 @@ const AnnoncesBodacc: React.FC<{
           ) : (
             <>
               <p>
-                Elle possède {bodacc.annonces.length} annonces publiées au{' '}
+                Elle possède {bodacc.annonces.length} annonces publiées au{" "}
                 <strong>
                   Bulletin Officiel Des Annonces Civiles et Commerciales
                   (BODACC)
                 </strong>
                 , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
-                consulter{' '}
+                consulter{" "}
                 <UniteLegalePageLink
-                  uniteLegale={uniteLegale}
                   href={routes.bodacc.site.rechercheBySiren(uniteLegale.siren)}
                   siteName="le site du BODACC"
+                  uniteLegale={uniteLegale}
                 />
                 &nbsp;:
               </p>
               <FullTable
-                head={['Publication', 'Details', 'Lien']}
                 body={bodacc.annonces.map((annonce) => [
                   <strong>{formatDate(annonce.datePublication)}</strong>,
                   <>
@@ -91,10 +90,11 @@ const AnnoncesBodacc: React.FC<{
                       </i>
                     </div>
                   </>,
-                  <ButtonLink target="_blank" to={annonce.path} alt small>
+                  <ButtonLink alt small target="_blank" to={annonce.path}>
                     ⇢&nbsp;Consulter
                   </ButtonLink>,
                 ])}
+                head={["Publication", "Details", "Lien"]}
               />
             </>
           )}

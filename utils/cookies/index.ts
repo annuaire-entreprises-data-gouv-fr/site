@@ -1,5 +1,5 @@
-import { IncomingMessage, ServerResponse } from 'http';
-import Cookies from 'cookies';
+import Cookies from "cookies";
+import type { IncomingMessage, ServerResponse } from "http";
 
 export const getCookie = (
   req: IncomingMessage,
@@ -7,7 +7,7 @@ export const getCookie = (
   cookieName: string
 ) => {
   const cookies = new Cookies(req, res);
-  return cookies.get(cookieName) || '';
+  return cookies.get(cookieName) || "";
 };
 
 export const setCookie = (

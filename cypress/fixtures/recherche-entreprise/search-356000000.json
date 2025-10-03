@@ -40,17 +40,10 @@
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
           "libelle_voie": "DU COLONEL PIERRE AVIA",
-          "liste_enseignes": [
-            "LA POSTE"
-          ],
-          "liste_finess": [
-            "750073637"
-          ],
+          "liste_enseignes": ["LA POSTE"],
+          "liste_finess": ["750073637"],
           "liste_id_bio": null,
-          "liste_idcc": [
-            "9999",
-            "5516"
-          ],
+          "liste_idcc": ["9999", "5516"],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -90,10 +83,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "9999",
-            "5516"
-          ],
+          "liste_idcc": ["9999", "5516"],
           "egapro_renseignee": true,
           "est_association": false,
           "est_bio": false,
@@ -103,10 +93,7 @@
           "est_finess": true,
           "est_organisme_formation": true,
           "est_qualiopi": true,
-          "liste_id_organisme_formation": [
-            "11755565775",
-            "11755762075"
-          ],
+          "liste_id_organisme_formation": ["11755565775", "11755762075"],
           "est_rge": false,
           "est_service_public": false,
           "est_siae": false,

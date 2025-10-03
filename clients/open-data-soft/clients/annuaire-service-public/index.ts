@@ -1,9 +1,9 @@
-import { HttpNotFound } from '#clients/exceptions';
-import odsClient from '#clients/open-data-soft';
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { IServicePublic } from '#models/service-public';
-import { removeSpecialChars, Siret } from '#utils/helpers';
+import { HttpNotFound } from "#clients/exceptions";
+import odsClient from "#clients/open-data-soft";
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import type { IServicePublic } from "#models/service-public";
+import { removeSpecialChars, type Siret } from "#utils/helpers";
 
 interface IServicePublicRecord {
   adresse: string;
@@ -81,10 +81,10 @@ export const clientAnnuaireServicePublicByIds = async (
   ids: string[]
 ): Promise<IServicePublic[]> => {
   const query = `id="${ids.join('" OR id="')}"`;
-  let response = await queryAnnuaireServicePublic(query);
+  const response = await queryAnnuaireServicePublic(query);
 
   if (!response.records.length) {
-    throw new HttpNotFound(`Ids = ${ids.join(', ')}`);
+    throw new HttpNotFound(`Ids = ${ids.join(", ")}`);
   }
 
   return response.records.map(mapToDomainObject);
@@ -93,7 +93,7 @@ export const clientAnnuaireServicePublicByIds = async (
 export const clientAnnuaireServicePublicBySiret = async (
   siret: Siret
 ): Promise<IServicePublic> => {
-  let response = await queryAnnuaireServicePublic(`siret="${siret}"`);
+  const response = await queryAnnuaireServicePublic(`siret="${siret}"`);
 
   if (!response.records.length) {
     throw new HttpNotFound(`Siret = ${siret}`);
@@ -107,24 +107,22 @@ export const clientAnnuaireServicePublicBySiret = async (
 
 const mapToDomainObject = (
   record: IServicePublicRecord
-): Omit<IServicePublic, 'lastModified'> => {
-  return {
-    affectationPersonne: mapToAffectationPersonne(record.affectation_personne),
-    liens: mapToLiens(record),
-    telephone: mapToTelephone(record.telephone),
-    urlServicePublic: record.url_service_public || null,
-    adresseCourriel: record.adresse_courriel || null,
-    sigle: record.sigle || null,
-    categorie: (record.categorie as IServicePublic['categorie']) || null,
-    mission: record.mission || null,
-    formulaireContact: record.formulaire_contact || null,
-    adressePostale: mapToAdresse(record),
-    typeOrganisme:
-      (record.type_organisme as IServicePublic['typeOrganisme']) || null,
-    nom: mapToNom(record),
-    subServicesId: mapToServicesId(record.hierarchie),
-  };
-};
+): Omit<IServicePublic, "lastModified"> => ({
+  affectationPersonne: mapToAffectationPersonne(record.affectation_personne),
+  liens: mapToLiens(record),
+  telephone: mapToTelephone(record.telephone),
+  urlServicePublic: record.url_service_public || null,
+  adresseCourriel: record.adresse_courriel || null,
+  sigle: record.sigle || null,
+  categorie: (record.categorie as IServicePublic["categorie"]) || null,
+  mission: record.mission || null,
+  formulaireContact: record.formulaire_contact || null,
+  adressePostale: mapToAdresse(record),
+  typeOrganisme:
+    (record.type_organisme as IServicePublic["typeOrganisme"]) || null,
+  nom: mapToNom(record),
+  subServicesId: mapToServicesId(record.hierarchie),
+});
 
 /**
  * List of sub services
@@ -133,7 +131,7 @@ const mapToDomainObject = (
  */
 function mapToServicesId(hierarchieSerialized: string): string[] {
   const hierarchie = JSON.parse(
-    hierarchieSerialized || 'null'
+    hierarchieSerialized || "null"
   ) as Array<IServices> | null;
 
   if (!hierarchie || !hierarchie.length) {
@@ -142,12 +140,12 @@ function mapToServicesId(hierarchieSerialized: string): string[] {
   return hierarchie.map((service) => service.service);
 }
 
-type IAffectationPersonne = IServicePublic['affectationPersonne'];
+type IAffectationPersonne = IServicePublic["affectationPersonne"];
 function mapToAffectationPersonne(
   affectationRecord: string
 ): IAffectationPersonne {
   const affectations = JSON.parse(
-    affectationRecord || 'null'
+    affectationRecord || "null"
   ) as Array<IAffectationRecord> | null;
 
   if (!affectations || !affectations.length) {
@@ -162,13 +160,13 @@ function mapToAffectationPersonne(
     ),
   }));
 }
-function getNom(personne: IAffectationRecord['personne']) {
+function getNom(personne: IAffectationRecord["personne"]) {
   if (!personne.prenom && !personne.nom) {
     return null;
   }
   return (
     personne.prenom +
-    (personne.nom || personne.prenom ? ' ' + personne.nom : '')
+    (personne.nom || personne.prenom ? " " + personne.nom : "")
   );
 }
 
@@ -176,11 +174,11 @@ function mapToNom(record: IServicePublicRecord) {
   if (!record.nom) {
     return null;
   }
-  return record.nom + (record.sigle ? ` (${record.sigle})` : '');
+  return record.nom + (record.sigle ? ` (${record.sigle})` : "");
 }
 
 function mapToAdresse(record: IServicePublicRecord) {
-  const adresses = JSON.parse(record.adresse || '[]') as Array<{
+  const adresses = JSON.parse(record.adresse || "[]") as Array<{
     numero_voie: string;
     type_adresse: string;
     complement1: string;
@@ -193,7 +191,7 @@ function mapToAdresse(record: IServicePublicRecord) {
     return null;
   }
   const adresse =
-    adresses.find((a) => a.type_adresse === 'Adresse postale') ??
+    adresses.find((a) => a.type_adresse === "Adresse postale") ??
     firstArrayElement(adresses, null);
   if (!adresse) {
     return null;
@@ -206,11 +204,11 @@ function mapToAdresse(record: IServicePublicRecord) {
     adresse.pays,
   ]
     .filter(Boolean)
-    .join(', ');
+    .join(", ");
 }
 
 function mapToTelephone(telephoneRecord: string) {
-  const telephones = JSON.parse(telephoneRecord || '[]') as Array<{
+  const telephones = JSON.parse(telephoneRecord || "[]") as Array<{
     valeur: string;
     description: string;
   }>;
@@ -221,14 +219,14 @@ function mapToTelephone(telephoneRecord: string) {
 }
 
 function mapToLiens(record: IServicePublicRecord) {
-  const liens: IServicePublic['liens'] = {
+  const liens: IServicePublic["liens"] = {
     sitesInternet: [],
     formulaireContact: null,
     annuaireServicePublic: null,
     organigramme: null,
   };
   liens.sitesInternet = (
-    JSON.parse(record['site_internet'] || '[]') as Array<{
+    JSON.parse(record["site_internet"] || "[]") as Array<{
       valeur: string;
       libelle: string;
     }>
@@ -236,28 +234,28 @@ function mapToLiens(record: IServicePublicRecord) {
     libelle:
       site.libelle ||
       `Site officiel (${site.valeur
-        .replace(/^https?:\/\//, '')
-        .replace(/^www./, '')})`,
+        .replace(/^https?:\/\//, "")
+        .replace(/^www./, "")})`,
     valeur: site.valeur,
   }));
 
-  if (record['formulaire_contact']) {
+  if (record["formulaire_contact"]) {
     liens.formulaireContact = {
-      libelle: 'Accéder au formulaire de contact',
-      valeur: record['formulaire_contact'],
+      libelle: "Accéder au formulaire de contact",
+      valeur: record["formulaire_contact"],
     };
   }
 
-  const organigrammes = JSON.parse(record['organigramme'] || '[]') as Array<{
+  const organigrammes = JSON.parse(record["organigramme"] || "[]") as Array<{
     valeur: string;
     libelle: string;
   }>;
   liens.organigramme = firstArrayElement(organigrammes, null);
 
-  if (record['url_service_public']) {
+  if (record["url_service_public"]) {
     liens.annuaireServicePublic = {
-      libelle: 'Informations supplémentaires (annuaire du service-public)',
-      valeur: record['url_service_public'],
+      libelle: "Informations supplémentaires (annuaire du service-public)",
+      valeur: record["url_service_public"],
     };
   }
 

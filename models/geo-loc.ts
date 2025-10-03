@@ -1,6 +1,6 @@
-import { clientBanGeoLoc } from '#clients/base-adresse-nationale';
-import { estDiffusible } from './core/diffusion';
-import { IEtablissement } from './core/types';
+import { clientBanGeoLoc } from "#clients/base-adresse-nationale";
+import { estDiffusible } from "./core/diffusion";
+import type { IEtablissement } from "./core/types";
 
 export interface IGeoLoc {
   lat: string;
@@ -20,8 +20,8 @@ export const getGeoLoc = async (etablissement: IEtablissement) => {
         etablissement.codePostal
       );
     }
-    return { lat: '', long: '' };
+    return { lat: "", long: "" };
   } catch (e: any) {
-    return { lat: '', long: '' };
+    return { lat: "", long: "" };
   }
 };

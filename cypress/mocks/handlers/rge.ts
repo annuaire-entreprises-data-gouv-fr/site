@@ -1,6 +1,5 @@
-import { HttpResponse, HttpResponseResolver } from 'msw';
-import rge from '../../fixtures/rge.json';
+import { HttpResponse, type HttpResponseResolver } from "msw";
+import rge from "../../fixtures/rge.json" with { type: "json" };
 
-export const rgeHandler: HttpResponseResolver = ({ request }) => {
-  return HttpResponse.json(rge);
-};
+export const rgeHandler: HttpResponseResolver = ({ request }) =>
+  HttpResponse.json(rge);

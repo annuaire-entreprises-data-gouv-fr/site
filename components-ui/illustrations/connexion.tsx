@@ -1,9 +1,9 @@
 const connexionPicture = (
   <svg
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 4947 4947"
     width="100%"
+    xmlns="http://www.w3.org/2000/svg"
   >
     <path
       d="M1471.7 4282.9c4.3-29 9-66.8 12-109.3h5c590.1 0 1409.2-45.7 1653.1-60.2a72 72 0 0 0 67.5-75.6l-153-2879a62.4 62.4 0 0 0-65.6-59.1h-1.6a6199.5 6199.5 0 0 1-473.2 16.9c-507.4 0-1013.5-49.4-1308.6-84.5H2994c109 0 199 85.5 204.4 194.4l21.6 423 124.3 2443.3a151 151 0 0 1-142.8 158.6l-5.2.2-81.7 1.4-1152.8 21-490.2 9v-.1Zm-686.2-547.3v-2471c0-107.7 73-198 172.2-224.6a67.2 67.2 0 0 0-10.3 36.2L963 3735h-20c-56.2 0-110 .2-157.5.5v.1Z"
@@ -207,23 +207,23 @@ const connexionPicture = (
     />
     <defs>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="a"
         x1="3059.5"
-        y1="3977.1"
         x2="3784.8"
+        y1="3977.1"
         y2="4772.4"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#09005D" />
         <stop offset="1" stopColor="#1A0F91" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="b"
         x1="3232.9"
-        y1="4207.1"
         x2="3432.3"
+        y1="4207.1"
         y2="4153.6"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#9F5013" />
         <stop offset="1" stopColor="#FFC3A2" />

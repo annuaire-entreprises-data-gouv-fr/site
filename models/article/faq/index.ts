@@ -1,5 +1,5 @@
-import { loadAll } from '#utils/static-pages/load-all';
-import { IArticle } from '../type';
+import { loadAll } from "#utils/static-pages/load-all";
+import type { IArticle } from "../type";
 
 export type IFaqArticle = {
   administrations: string[];
@@ -9,8 +9,8 @@ export const loadAllFaqArticlesByGroup = () => {
   const articlesByGroup: { [key: string]: IFaqArticle[] } = {};
 
   allFaqArticles.forEach((article) => {
-    articlesByGroup[article.group || 'default'] = [
-      ...(articlesByGroup[article.group || 'default'] || []),
+    articlesByGroup[article.group || "default"] = [
+      ...(articlesByGroup[article.group || "default"] || []),
       article,
     ];
   });
@@ -18,9 +18,8 @@ export const loadAllFaqArticlesByGroup = () => {
   return articlesByGroup;
 };
 
-export const getFaqArticle = (slug: string) => {
-  return allFaqArticles.find((article) => article.slug === slug);
-};
+export const getFaqArticle = (slug: string) =>
+  allFaqArticles.find((article) => article.slug === slug);
 
 export const getFaqArticlesByTag = (tagList: string[]): IFaqArticle[] => {
   const filteredArticles = new Set<IFaqArticle>();
@@ -36,8 +35,8 @@ export const getFaqArticlesByTag = (tagList: string[]): IFaqArticle[] => {
 };
 
 export const allFaqArticles = loadAll<IFaqArticle>(
-  // @ts-ignore
-  require.context('data/faq', false, /\.yml$/)
+  // @ts-expect-error
+  require.context("data/faq", false, /\.yml$/)
 );
 
 export const allFaqArticlesByGroup = loadAllFaqArticlesByGroup();

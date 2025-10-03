@@ -92,10 +92,7 @@
           "date_immatriculation": "1981-10-01",
           "date_radiation": null,
           "duree_personne_morale": null,
-          "nature_entreprise": [
-            "Gestion de biens",
-            "Libérale non réglementée"
-          ],
+          "nature_entreprise": ["Gestion de biens", "Libérale non réglementée"],
           "date_cloture_exercice": null,
           "capital_social": null,
           "capital_variable": false,

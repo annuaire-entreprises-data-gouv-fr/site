@@ -1,5 +1,5 @@
-import Summary from '#components-ui/summary';
-import parseMarkdownSync, { IMarkdown } from './parse-markdown';
+import Summary from "#components-ui/summary";
+import parseMarkdownSync, { type IMarkdown } from "./parse-markdown";
 
 export default function RenderMarkdownServerOnly({
   children,
@@ -8,8 +8,8 @@ export default function RenderMarkdownServerOnly({
   showToc?: boolean;
   children: IMarkdown | string;
 }) {
-  if (typeof window !== 'undefined') {
-    throw new Error('This component is server-side only');
+  if (typeof window !== "undefined") {
+    throw new Error("This component is server-side only");
   }
   const { html, headings } = parseMarkdownSync(children);
 

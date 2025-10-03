@@ -1,4 +1,4 @@
-import { IAgentInfo } from '../agent';
+import type { IAgentInfo } from "../agent";
 
 export type ISession = {
   lastVisitTimestamp?: number;

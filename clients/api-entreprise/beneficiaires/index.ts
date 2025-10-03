@@ -1,8 +1,8 @@
-import routes from '#clients/routes';
-import { IBeneficiairesEffectif } from '#models/espace-agent/beneficiaires';
-import { UseCase } from '#models/use-cases';
-import { Siren, formatNameFull } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import type { IBeneficiairesEffectif } from "#models/espace-agent/beneficiaires";
+import type { UseCase } from "#models/use-cases";
+import { formatNameFull, type Siren } from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
   Array<
@@ -17,7 +17,7 @@ export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
       };
       nationalite: string;
       pays_residence: string;
-      modalites: IBeneficiairesEffectif['modalites'];
+      modalites: IBeneficiairesEffectif["modalites"];
     }>
   >
 >;
@@ -28,25 +28,21 @@ export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
 export const clientApiEntrepriseBeneficiaires = async (
   siren: Siren,
   useCase?: UseCase
-) => {
-  return await clientAPIEntreprise<
+) =>
+  await clientAPIEntreprise<
     IAPIEntrepriseBeneficiaires,
     Array<IBeneficiairesEffectif>
   >(routes.apiEntreprise.beneficiaires(siren), mapToDomainObject, { useCase });
-};
 
 const mapToDomainObject = (
   response: IAPIEntrepriseBeneficiaires
-): Array<IBeneficiairesEffectif> => {
-  return response.data.map(({ data: beneficiaire }) => {
-    return {
-      nom: formatNameFull(beneficiaire.nom, beneficiaire.nom_usage),
-      prenoms: (beneficiaire.prenoms || '').join(', '),
-      nationalite: beneficiaire.nationalite,
-      moisNaissance: beneficiaire.date_naissance.mois,
-      anneeNaissance: beneficiaire.date_naissance.annee,
-      paysResidence: beneficiaire.pays_residence,
-      modalites: beneficiaire.modalites,
-    };
-  });
-};
+): Array<IBeneficiairesEffectif> =>
+  response.data.map(({ data: beneficiaire }) => ({
+    nom: formatNameFull(beneficiaire.nom, beneficiaire.nom_usage),
+    prenoms: (beneficiaire.prenoms || "").join(", "),
+    nationalite: beneficiaire.nationalite,
+    moisNaissance: beneficiaire.date_naissance.mois,
+    anneeNaissance: beneficiaire.date_naissance.annee,
+    paysResidence: beneficiaire.pays_residence,
+    modalites: beneficiaire.modalites,
+  }));

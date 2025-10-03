@@ -1,14 +1,14 @@
-import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
-import { FullTable } from '#components/table/full';
-import { IUniteLegale } from '#models/core/types';
-import {
+import { FullTable } from "#components/table/full";
+import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
+import type { IUniteLegale } from "#models/core/types";
+import type {
   IDirigeantsWithMetadata,
   IEtatCivil,
   IPersonneMorale,
-} from '#models/rne/types';
-import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
-import EtatCivilInfos from '../EtatCivilInfos';
-import PersonneMoraleInfos from '../PersonneMoraleInfos';
+} from "#models/rne/types";
+import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
+import EtatCivilInfos from "../EtatCivilInfos";
+import PersonneMoraleInfos from "../PersonneMoraleInfos";
 
 type IDirigeantContentProps = {
   dirigeants: IDirigeantsWithMetadata;
@@ -29,33 +29,32 @@ export default function DirigeantsContent({
       if (dirigeant.siren) {
         const defaultDenom = dirigeant.denomination || dirigeant.siren;
         infos.push(
-          <a key={dirigeant.siren} href={`/dirigeants/${dirigeant.siren}`}>
+          <a href={`/dirigeants/${dirigeant.siren}`} key={dirigeant.siren}>
             → voir les dirigeants de {defaultDenom}
           </a>
         );
       }
       return infos;
-    } else {
-      const infos = [
-        <>{dirigeant.role}</>,
-        <EtatCivilInfos dirigeant={dirigeant} />,
-      ];
-
-      if (dirigeant.dateNaissancePartial) {
-        infos.push(
-          <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />
-        );
-      }
-      return infos;
     }
+    const infos = [
+      <>{dirigeant.role}</>,
+      <EtatCivilInfos dirigeant={dirigeant} />,
+    ];
+
+    if (dirigeant.dateNaissancePartial) {
+      infos.push(
+        <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />
+      );
+    }
+    return infos;
   };
 
   return (
     <FullTable
-      head={['Role', 'Details', 'Action']}
       body={dirigeants.data
         .sort(sortDirigeants)
         .map((dirigeant) => formatDirigeant(dirigeant))}
+      head={["Role", "Details", "Action"]}
     />
   );
 }
@@ -89,7 +88,7 @@ export function sortDirigeants(
     return -1;
   }
   if (roleA.match(/^[\d]+/) && roleB.match(/^[\d]+/)) {
-    return parseInt(roleA, 10) < parseInt(roleB, 10) ? -1 : 1;
+    return Number.parseInt(roleA, 10) < Number.parseInt(roleB, 10) ? -1 : 1;
   }
   return roleA < roleB ? -1 : 1;
 }

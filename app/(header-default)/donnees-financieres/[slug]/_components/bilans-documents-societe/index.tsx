@@ -1,12 +1,12 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
+import AgentWallDocuments from "#components/espace-agent-components/agent-wall/document";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import AgentBilansSection from './protected-bilans-documents-societe';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import AgentBilansSection from "./protected-bilans-documents-societe";
 
 export function BilansDocumentsSociete({
   uniteLegale,
@@ -20,8 +20,8 @@ export function BilansDocumentsSociete({
       <>
         <HorizontalSeparator />
         <AgentWallDocuments
-          title="Bilans au format PDF"
           id="bilans-pdf"
+          title="Bilans au format PDF"
           uniteLegale={uniteLegale}
         />
       </>
@@ -30,7 +30,7 @@ export function BilansDocumentsSociete({
   return (
     <>
       <HorizontalSeparator />
-      <AgentBilansSection uniteLegale={uniteLegale} session={session} />
+      <AgentBilansSection session={session} uniteLegale={uniteLegale} />
     </>
   );
 }

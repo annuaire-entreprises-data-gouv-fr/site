@@ -1,4 +1,4 @@
-import { ParcoursAnswer } from '.';
+import { ParcoursAnswer } from ".";
 
 export const ContactCompanyAnswer: React.FC<{}> = ({}) => (
   <ParcoursAnswer>

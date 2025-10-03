@@ -1,7 +1,7 @@
-import routes from '#clients/routes';
-import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
-import { Siren } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import type { IOpqibi } from "#models/espace-agent/certificats/opqibi";
+import type { Siren } from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseOpqibi = IAPIEntrepriseResponse<{
   numero_certificat: string; // "string",
@@ -28,15 +28,14 @@ export type IAPIEntrepriseOpqibi = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseOpqibi = async (siren: Siren) => {
-  return await clientAPIEntreprise(
+export const clientApiEntrepriseOpqibi = async (siren: Siren) =>
+  await clientAPIEntreprise(
     routes.apiEntreprise.certifications.opqibi(siren),
     mapToDomainObject
   );
-};
 
 const mapQualification = (
-  qualification: IAPIEntrepriseOpqibi['data']['qualifications'][0]
+  qualification: IAPIEntrepriseOpqibi["data"]["qualifications"][0]
 ) => ({
   nom: qualification.nom,
   codeQualification: qualification.code_qualification,
@@ -44,18 +43,16 @@ const mapQualification = (
   rge: qualification.rge,
 });
 
-const mapToDomainObject = ({ data }: IAPIEntrepriseOpqibi): IOpqibi => {
-  return {
-    numeroCertificat: data.numero_certificat,
-    url: data.url,
-    dateDelivranceCertificat: data.date_delivrance_certificat,
-    dureeValiditeCertificat: data.duree_validite_certificat,
-    assurances: data.assurances,
-    qualifications: data.qualifications.map(mapQualification),
-    dateValiditeQualifications: data.date_validite_qualifications,
-    qualificationsProbatoires:
-      data.qualifications_probatoires.map(mapQualification),
-    dateValiditeQualificationsProbatoires:
-      data.date_validite_qualifications_probatoires,
-  };
-};
+const mapToDomainObject = ({ data }: IAPIEntrepriseOpqibi): IOpqibi => ({
+  numeroCertificat: data.numero_certificat,
+  url: data.url,
+  dateDelivranceCertificat: data.date_delivrance_certificat,
+  dureeValiditeCertificat: data.duree_validite_certificat,
+  assurances: data.assurances,
+  qualifications: data.qualifications.map(mapQualification),
+  dateValiditeQualifications: data.date_validite_qualifications,
+  qualificationsProbatoires:
+    data.qualifications_probatoires.map(mapQualification),
+  dateValiditeQualificationsProbatoires:
+    data.date_validite_qualifications_probatoires,
+});

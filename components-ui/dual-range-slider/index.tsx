@@ -1,5 +1,5 @@
-import constants from '#models/constants';
-import { useState } from 'react';
+import { useState } from "react";
+import constants from "#models/constants";
 
 /**
  * Component with dual slider
@@ -68,36 +68,36 @@ const DualRangeSlider: React.FC<{
     <div id="dual-range-slider">
       <div className="input-wrapper">
         <label
-          htmlFor={`${idPrefix}-min-range-input`}
           className="fr-label fr-sr-only"
+          htmlFor={`${idPrefix}-min-range-input`}
         >
           {label} minimum
         </label>
         <input
+          disabled={disabled}
           id={`${idPrefix}-min-range-input`}
+          max={max}
+          min={min}
+          onChange={handleMinChange}
+          step={step}
           type="range"
           value={minValue}
-          min={min}
-          max={max}
-          step={step}
-          onChange={handleMinChange}
-          disabled={disabled}
         />
         <label
-          htmlFor={`${idPrefix}-max-range-input`}
           className="fr-label fr-sr-only"
+          htmlFor={`${idPrefix}-max-range-input`}
         >
           {label} maximum
         </label>
         <input
+          disabled={disabled}
           id={`${idPrefix}-max-range-input`}
+          max={max}
+          min={min}
+          onChange={handleMaxChange}
+          step={step}
           type="range"
           value={maxValue}
-          min={min}
-          max={max}
-          step={step}
-          onChange={handleMaxChange}
-          disabled={disabled}
         />
       </div>
 
@@ -167,7 +167,7 @@ const DualRangeSlider: React.FC<{
           height: 35px;
           border-radius: 0px;
           border: 0 none;
-          cursor: ${disabled ? 'not-allowed' : 'grab'};
+          cursor: ${disabled ? "not-allowed" : "grab"};
           background-color: red;
         }
 
@@ -182,7 +182,7 @@ const DualRangeSlider: React.FC<{
           height: 35px;
           border-radius: 0px;
           border: 0 none;
-          cursor: ${disabled ? 'not-allowed' : 'grab'};
+          cursor: ${disabled ? "not-allowed" : "grab"};
           background-color: red;
         }
 
@@ -197,7 +197,7 @@ const DualRangeSlider: React.FC<{
           height: 35px;
           border-radius: 0px;
           border: 0 none;
-          cursor: ${disabled ? 'not-allowed' : 'grab'};
+          cursor: ${disabled ? "not-allowed" : "grab"};
           background-color: red;
         }
 
@@ -218,7 +218,7 @@ const DualRangeSlider: React.FC<{
         .inner-rail {
           position: absolute;
           height: 100%;
-          background: ${disabledColor ? '#e5e5e5' : color};
+          background: ${disabledColor ? "#e5e5e5" : color};
         }
 
         .control {
@@ -227,7 +227,7 @@ const DualRangeSlider: React.FC<{
           border-radius: 50%;
           position: absolute;
           background: #fff;
-          border: 2px solid ${disabledColor ? '#e5e5e5' : color};
+          border: 2px solid ${disabledColor ? "#e5e5e5" : color};
           margin-left: -10px;
           z-index: 2;
         }

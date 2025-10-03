@@ -1,16 +1,16 @@
-import { ISearchResults } from '#models/search';
-import { IParams } from '#models/search/search-filter-params';
-import ResultsCounter from './results-counter';
-import ResultsList from './results-list';
-import ResultsPagination from './results-pagination';
-import { BadParams } from './results-problems/bad-params';
-import { NotEnoughParams } from './results-problems/results-not-enough-params';
+import type { ISearchResults } from "#models/search";
+import type { IParams } from "#models/search/search-filter-params";
+import ResultsCounter from "./results-counter";
+import ResultsList from "./results-list";
+import ResultsPagination from "./results-pagination";
+import { BadParams } from "./results-problems/bad-params";
+import { NotEnoughParams } from "./results-problems/results-not-enough-params";
 
 const SearchResults: React.FC<{
   searchTerm?: string;
   results: ISearchResults;
   searchFilterParams?: IParams;
-}> = ({ results, searchTerm = '', searchFilterParams = {} }) => {
+}> = ({ results, searchTerm = "", searchFilterParams = {} }) => {
   if (results.notEnoughParams) {
     return <NotEnoughParams />;
   }
@@ -21,10 +21,10 @@ const SearchResults: React.FC<{
   if (!results.results || results.results.length === 0) {
     return (
       <ResultsCounter
-        resultCount={results.resultCount}
         currentPage={results.currentPage}
-        isMap={false}
         currentSearchTerm={searchTerm}
+        isMap={false}
+        resultCount={results.resultCount}
         searchParams={searchFilterParams}
       />
     );
@@ -33,10 +33,10 @@ const SearchResults: React.FC<{
   return (
     <>
       <ResultsCounter
-        resultCount={results.resultCount}
         currentPage={results.currentPage}
-        isMap={false}
         currentSearchTerm={searchTerm}
+        isMap={false}
+        resultCount={results.resultCount}
         searchParams={searchFilterParams}
       />
       <div>
@@ -45,10 +45,10 @@ const SearchResults: React.FC<{
           shouldColorZipCode={!!searchFilterParams.cp_dep}
         />
         <ResultsPagination
-          totalPages={results.pageCount}
-          searchTerm={searchTerm}
           currentPage={results.currentPage}
           searchFilterParams={searchFilterParams}
+          searchTerm={searchTerm}
+          totalPages={results.pageCount}
         />
       </div>
     </>

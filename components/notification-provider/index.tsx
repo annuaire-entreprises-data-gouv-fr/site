@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
+import { useCallback, useState } from "react";
 import {
   CornerBannerError,
   CornerBannerInfo,
   CornerBannerSuccess,
-} from '#components-ui/alerts/corner';
+} from "#components-ui/alerts/corner";
 import {
-  INotification,
+  type INotification,
   NotificationContext,
   NotificationTypeEnum,
-} from '#hooks/use-notification';
-import { randomId } from '#utils/helpers';
-import { useCallback, useState } from 'react';
-import styles from './styles.module.css';
+} from "#hooks/use-notification";
+import { randomId } from "#utils/helpers";
+import styles from "./styles.module.css";
 
 export const NotificationBanner = ({
   notification,
@@ -60,7 +60,7 @@ export const NotificationProvider = ({
   }, []);
 
   const showNotification = useCallback(
-    ({ type, title, message = '' }: Omit<INotification, 'id'>) => {
+    ({ type, title, message = "" }: Omit<INotification, "id">) => {
       const id = randomId();
       const newNotification: INotification = {
         id,

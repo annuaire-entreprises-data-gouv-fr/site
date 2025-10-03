@@ -1,13 +1,13 @@
-import { clientEss } from '#clients/api-data-gouv/ess';
-import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { clientEss } from "#clients/api-data-gouv/ess";
+import { HttpNotFound } from "#clients/exceptions";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { FetchRessourceException } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '../core/types';
+  type IAPINotRespondingError,
+} from "#models/api-not-responding";
+import { FetchRessourceException } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import type { IUniteLegale } from "../core/types";
 
 export interface IESS {
   familleJuridique: string;
@@ -30,7 +30,7 @@ export const getEss = async (
     logErrorInSentry(
       new FetchRessourceException({
         cause: e,
-        ressource: 'EconomieSocialeEtSolidaire',
+        ressource: "EconomieSocialeEtSolidaire",
         context: {
           siren: uniteLegale.siren,
         },

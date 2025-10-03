@@ -1,6 +1,6 @@
-import constants from '#models/constants';
-import { IDefaultRequestConfig, httpGet } from '#utils/network';
-import { IODSMetadata, IODSResponse } from './types';
+import constants from "#models/constants";
+import { httpGet, type IDefaultRequestConfig } from "#utils/network";
+import type { IODSMetadata, IODSResponse } from "./types";
 
 /**
  * Request ODS
@@ -23,7 +23,7 @@ const odsClient = async (
   const lastModified = responseMetaData?.metas?.metadata_processed || null;
   return {
     records:
-      'records' in results
+      "records" in results
         ? results.records.map((record) => record.fields)
         : results.results,
     lastModified,

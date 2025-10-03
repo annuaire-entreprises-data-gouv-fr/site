@@ -19,7 +19,7 @@ export interface IDocumentsRNE {
 }
 
 export interface IEtatCivil {
-  sexe: 'M' | 'F' | null;
+  sexe: "M" | "F" | null;
   nom: string;
   prenom: string;
   prenoms: string;

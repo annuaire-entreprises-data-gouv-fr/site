@@ -1,7 +1,7 @@
-import { clientAPIProxy } from '#clients/api-proxy/client';
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { TVANumber } from '#utils/helpers';
+import { clientAPIProxy } from "#clients/api-proxy/client";
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import type { TVANumber } from "#utils/helpers";
 
 type IVIESResponse = {
   isValid: boolean;
@@ -33,7 +33,7 @@ export class TVAUserException extends Error {
   constructor(public message: string) {
     super(message);
     this.message = message;
-    this.name = 'TVAUserException';
+    this.name = "TVAUserException";
   }
 }
 
@@ -49,7 +49,7 @@ export const clientTVA = async (tva: TVANumber): Promise<string | null> => {
     timeout: constants.timeout.XXL,
   });
 
-  if (data.userError && ['VALID', 'INVALID'].indexOf(data.userError) === -1) {
+  if (data.userError && ["VALID", "INVALID"].indexOf(data.userError) === -1) {
     throw new TVAUserException(data.userError);
   }
 

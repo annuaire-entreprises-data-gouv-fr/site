@@ -1,11 +1,14 @@
-import NonRenseigne from '#components/non-renseigne';
-import { Section } from '#components/section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { isCollectiviteTerritoriale, IUniteLegale } from '#models/core/types';
-import { IEtatCivil } from '#models/rne/types';
-import { capitalize, formatDatePartial, pluralize } from '#utils/helpers';
-import React from 'react';
+import type React from "react";
+import NonRenseigne from "#components/non-renseigne";
+import { Section } from "#components/section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import {
+  type IUniteLegale,
+  isCollectiviteTerritoriale,
+} from "#models/core/types";
+import type { IEtatCivil } from "#models/rne/types";
+import { capitalize, formatDatePartial, pluralize } from "#utils/helpers";
 
 /**
  * Elus section
@@ -22,7 +25,7 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
   }
 
   const formatElus = (elu: IEtatCivil) => {
-    const nomComplet = `${elu.prenoms}${elu.prenoms && elu.nom ? ' ' : ''}${
+    const nomComplet = `${elu.prenoms}${elu.prenoms && elu.nom ? " " : ""}${
       elu.nom
     }`;
 
@@ -30,7 +33,7 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
       elu.role ?? <NonRenseigne />,
       <>{nomComplet}</>,
       <span>
-        {capitalize(formatDatePartial(elu.dateNaissancePartial) ?? '') || (
+        {capitalize(formatDatePartial(elu.dateNaissancePartial) ?? "") || (
           <NonRenseigne />
         )}
       </span>,
@@ -44,8 +47,8 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
   return (
     <Section
       id="collectivite-elus"
-      title={`Élu${plural}`}
       sources={[EAdministration.MI, EAdministration.DINUM]}
+      title={`Élu${plural}`}
     >
       {elus.length > 0 ? (
         <>
@@ -54,8 +57,8 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
             {plural} au Répertoire National des Élus&nbsp;:
           </p>
           <FullTable
-            head={['Role', 'Élu(e)', 'Date de naissance']}
             body={elus.sort(sortElus).map((elu) => formatElus(elu))}
+            head={["Role", "Élu(e)", "Date de naissance"]}
           />
         </>
       ) : (
@@ -83,10 +86,10 @@ function sortElus(a: IEtatCivil, b: IEtatCivil): -1 | 1 | 0 {
 
     return a.nom < b.nom ? -1 : 1;
   }
-  if (roleA === 'Maire') {
+  if (roleA === "Maire") {
     return -1;
   }
-  if (roleB === 'Maire') {
+  if (roleB === "Maire") {
     return 1;
   }
   if (roleA == null) {
@@ -96,7 +99,7 @@ function sortElus(a: IEtatCivil, b: IEtatCivil): -1 | 1 | 0 {
     return -1;
   }
   if (roleA.match(/^[\d]+/) && roleB.match(/^[\d]+/)) {
-    return parseInt(roleA, 10) < parseInt(roleB, 10) ? -1 : 1;
+    return Number.parseInt(roleA, 10) < Number.parseInt(roleB, 10) ? -1 : 1;
   }
   return roleA < roleB ? -1 : 1;
 }

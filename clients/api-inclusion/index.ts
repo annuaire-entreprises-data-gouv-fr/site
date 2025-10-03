@@ -1,8 +1,8 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { Siren } from '#utils/helpers';
-import { httpGet } from '#utils/network';
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import type { Siren } from "#utils/helpers";
+import { httpGet } from "#utils/network";
 
 /**
  * API Inclusion
@@ -19,7 +19,7 @@ export const clientAPIInclusion = async (siren: Siren) => {
   });
 
   if (response.length === 0) {
-    throw new HttpNotFound('No result in API Inclusion');
+    throw new HttpNotFound("No result in API Inclusion");
   }
   return await Promise.all(response.map(mapToDomainObject));
 };
@@ -28,7 +28,7 @@ const mapToDomainObject = async (res: APIInclusionResponse) => {
   const { slug, siret, kind, city, department } = res;
   return {
     marcheInclusionLink: routes.certifications.entrepriseInclusive.site + slug,
-    siret: siret || '',
+    siret: siret || "",
     kind,
     city,
     department,

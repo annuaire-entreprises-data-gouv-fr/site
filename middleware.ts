@@ -1,51 +1,54 @@
-import { ISession } from '#models/authentication/user/session';
-import { Exception } from '#models/exceptions';
+import { getIronSession } from "iron-session";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import type { ISession } from "#models/authentication/user/session";
+import { Exception } from "#models/exceptions";
 import {
   extractSirenOrSiretFromRechercherUrl,
   extractSirenOrSiretSlugFromUrl,
   isLikelyASiren,
   isLikelyASiret,
-} from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
-import { sessionOptions, setVisitTimestamp } from '#utils/session';
-import { getIronSession } from 'iron-session';
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+} from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import { sessionOptions, setVisitTimestamp } from "#utils/session";
 
 const shouldRedirect = (path: string, search: string, url: string) => {
   try {
-    if (path.startsWith('/entreprise/')) {
+    if (path.startsWith("/entreprise/")) {
       const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(path);
       if (isLikelyASiret(sirenOrSiretSlug)) {
         return new URL(`/etablissement/${sirenOrSiretSlug}`, url);
-      } else if (!isLikelyASiren(sirenOrSiretSlug)) {
-        return new URL(`/404`, url);
+      }
+      if (!isLikelyASiren(sirenOrSiretSlug)) {
+        return new URL("/404", url);
       }
     }
 
-    if (path.startsWith('/etablissement/')) {
+    if (path.startsWith("/etablissement/")) {
       const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(path);
       if (isLikelyASiren(sirenOrSiretSlug)) {
         return new URL(`/entreprise/${sirenOrSiretSlug}`, url);
-      } else if (!isLikelyASiret(sirenOrSiretSlug)) {
-        return new URL(`/404`, url);
+      }
+      if (!isLikelyASiret(sirenOrSiretSlug)) {
+        return new URL("/404", url);
       }
     }
 
-    if (path.startsWith('/rechercher')) {
+    if (path.startsWith("/rechercher")) {
       const sirenOrSiretParam = extractSirenOrSiretFromRechercherUrl(search);
 
       if (isLikelyASiret(sirenOrSiretParam)) {
         return new URL(`/etablissement/${sirenOrSiretParam}?redirected=1`, url);
-      } else if (isLikelyASiren(sirenOrSiretParam)) {
+      }
+      if (isLikelyASiren(sirenOrSiretParam)) {
         return new URL(`/entreprise/${sirenOrSiretParam}?redirected=1`, url);
       }
     }
   } catch (e) {
     logErrorInSentry(
       new Exception({
-        name: 'FailedToRedirectInMiddleware',
+        name: "FailedToRedirectInMiddleware",
         cause: e,
         context: {
           page: path,
@@ -73,17 +76,17 @@ export async function middleware(request: NextRequest) {
    */
   const requestHeaders = new Headers(request.headers);
   const nextUrl = request.nextUrl;
-  const paramIsPresent = nextUrl.search.indexOf('redirected=1') > -1;
+  const paramIsPresent = nextUrl.search.indexOf("redirected=1") > -1;
 
   if (paramIsPresent) {
     // store redirection status in custom header as referrer seems missing from headers in RSC
     // isRedirected = params is present + previous page is coming from site
-    const referer = requestHeaders.get('referer') || '';
+    const referer = requestHeaders.get("referer") || "";
     const baseURL = getBaseUrl();
     const isFromSite = referer.indexOf(baseURL) === 0;
 
-    const isRedirected = paramIsPresent && isFromSite ? '1' : '0';
-    requestHeaders.set('x-redirected', isRedirected);
+    const isRedirected = paramIsPresent && isFromSite ? "1" : "0";
+    requestHeaders.set("x-redirected", isRedirected);
   }
 
   const response = NextResponse.next({
@@ -113,5 +116,5 @@ export const config = {
      * - robots.txt (robots file)
      * - etc.
      */
-    '/((?!api|_next/static|images|_next/image|favicon.ico|robots.txt|opensearch.xml|protected-siren.txt|dsfr-departements).*)',
+    "/((?!api|_next/static|images|_next/image|favicon.ico|robots.txt|opensearch.xml|protected-siren.txt|dsfr-departements).*)",
 };

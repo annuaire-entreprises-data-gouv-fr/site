@@ -1,21 +1,21 @@
-import { clientAssociation } from '#clients/api-proxy/association';
-import { clientBanGeoLoc } from '#clients/base-adresse-nationale';
-import { HttpNotFound } from '#clients/exceptions';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import { IdRna, removeSpecialChars, Siren } from '#utils/helpers';
-import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
-import { EAdministration } from '../administrations/EAdministration';
+import { clientAssociation } from "#clients/api-proxy/association";
+import { clientBanGeoLoc } from "#clients/base-adresse-nationale";
+import { HttpNotFound } from "#clients/exceptions";
+import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
+import { type IdRna, removeSpecialChars, type Siren } from "#utils/helpers";
+import logErrorInSentry, { logWarningInSentry } from "#utils/sentry";
+import { EAdministration } from "../administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
-} from '../api-not-responding';
-import { isAssociation } from '../core/types';
+  type IAPINotRespondingError,
+} from "../api-not-responding";
+import { isAssociation } from "../core/types";
 import {
   Exception,
   FetchRessourceException,
-  IExceptionContext,
-} from '../exceptions';
-import { IDataAssociation } from './types';
+  type IExceptionContext,
+} from "../exceptions";
+import type { IDataAssociation } from "./types";
 
 export const getAssociationFromSlug = async (
   slug: string
@@ -28,7 +28,7 @@ export const getAssociationFromSlug = async (
     return null;
   }
 
-  const rna = uniteLegale.association.idAssociation || '';
+  const rna = uniteLegale.association.idAssociation || "";
   const { siren } = uniteLegale;
 
   let data: IDataAssociation;
@@ -53,7 +53,7 @@ export const getAssociationFromSlug = async (
     if (e instanceof HttpNotFound) {
       logWarningInSentry(
         new FetchAssociationException({
-          message: 'Id RNA not found',
+          message: "Id RNA not found",
           cause: e,
           context: {
             idRna: rna,
@@ -87,7 +87,7 @@ class FetchAssociationException extends FetchRessourceException {
   constructor(args: IFetchAssociationExceptionArgs) {
     super({
       ...args,
-      ressource: 'Association',
+      ressource: "Association",
       administration: EAdministration.DJEPVA,
     });
   }
@@ -102,8 +102,8 @@ class FetchAssociationException extends FetchRessourceException {
  */
 const verifyAdressConsistency = async (
   siren: Siren,
-  adress1 = '',
-  adress2 = ''
+  adress1 = "",
+  adress2 = ""
 ) => {
   try {
     const adress1formatted = removeSpecialChars(adress1.toLowerCase());
@@ -127,7 +127,7 @@ const verifyAdressConsistency = async (
     if (!(e instanceof HttpNotFound)) {
       logWarningInSentry(
         new Exception({
-          name: 'FailToVerifyAdressConsistencyException',
+          name: "FailToVerifyAdressConsistencyException",
           cause: e,
           context: { siren },
         })

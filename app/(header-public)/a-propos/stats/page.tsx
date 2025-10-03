@@ -1,11 +1,11 @@
-import { IMatomoStats, clientMatomoStats } from '#clients/matomo';
-import { NpsStats } from '#components/stats/nps';
-import { TraficStats } from '#components/stats/trafic';
-import { UsageStats } from '#components/stats/usage';
-import { Metadata } from 'next';
+import type { Metadata } from "next";
+import { clientMatomoStats, type IMatomoStats } from "#clients/matomo";
+import { NpsStats } from "#components/stats/nps";
+import { TraficStats } from "#components/stats/trafic";
+import { UsageStats } from "#components/stats/usage";
 
-export const dynamic = 'force-static';
-export const revalidate = 14400; // 4 * 3600 = 4 hours;
+export const dynamic = "force-static";
+export const revalidate = 14_400; // 4 * 3600 = 4 hours;
 
 async function fetchStats(): Promise<IMatomoStats> {
   const {
@@ -27,11 +27,11 @@ async function fetchStats(): Promise<IMatomoStats> {
 }
 
 export const metadata: Metadata = {
-  title: 'Statistiques d’utilisation de l’Annuaire des Entreprises',
+  title: "Statistiques d’utilisation de l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/stats',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/a-propos/stats",
   },
-  robots: 'noindex, follow',
+  robots: "noindex, follow",
 };
 
 export default async function StatsPage() {
@@ -51,8 +51,8 @@ export default async function StatsPage() {
       <h2>Comment est utilisé l’Annuaire des Entreprises ?</h2>
       <UsageStats
         copyPasteAction={copyPasteAction}
-        redirectedSiren={redirectedSiren}
         mostCopied={mostCopied}
+        redirectedSiren={redirectedSiren}
       />
       <h2>Satisfaction des utilisateurs</h2>
       <NpsStats monthlyNps={monthlyNps} />

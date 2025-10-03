@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import FAQLink from '#components-ui/faq-link';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/use-cases';
-import { formatCurrency, formatDate, getDateFromYYYYMM } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { useMemo } from 'react';
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { FullTable } from "#components/table/full";
+import FAQLink from "#components-ui/faq-link";
+import type { EAdministration } from "#models/administrations/EAdministration";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import type { UseCase } from "#models/use-cases";
+import { formatCurrency, formatDate, getDateFromYYYYMM } from "#utils/helpers";
 
 export function ProtectedIndicateursFinanciersBDF({
   uniteLegale,
@@ -44,58 +44,58 @@ export function ProtectedIndicateursFinanciersBDF({
 
   return (
     <AsyncDataSectionClient
-      title={title}
+      data={banqueDeFranceBilansProtected}
       id={id}
       isProtected={isProtected}
-      sources={sources}
-      data={banqueDeFranceBilansProtected}
       notFoundInfo="Aucun indicateur n’a été retrouvé pour cette structure."
+      sources={sources}
+      title={title}
     >
       {(bilans) => {
         const body = [
           [
-            'Date de clôture',
+            "Date de clôture",
             ...bilans.map((item) =>
-              formatDate(getDateFromYYYYMM(item.dateArreteExercice || ''))
+              formatDate(getDateFromYYYYMM(item.dateArreteExercice || ""))
             ),
           ],
           [
-            'Besoin en Fonds de Roulement',
+            "Besoin en Fonds de Roulement",
             ...bilans.map((item) =>
               formatCurrency(item.besoinEnFondsDeRoulement)
             ),
           ],
           [
-            'Capacité d’Autofinancement',
+            "Capacité d’Autofinancement",
             ...bilans.map((item) =>
               formatCurrency(item.capaciteAutofinancement)
             ),
           ],
           [
-            'Dettes 4 maturité à un an au plus',
+            "Dettes 4 maturité à un an au plus",
             ...bilans.map((item) =>
               formatCurrency(item.dettes4MaturiteAUnAnAuPlus)
             ),
           ],
           [
-            'Disponibilités',
+            "Disponibilités",
             ...bilans.map((item) => formatCurrency(item.disponibilites)),
           ],
 
           [
-            'Excédent Brut d’Exploitation',
+            "Excédent Brut d’Exploitation",
             ...bilans.map((item) =>
               formatCurrency(item.excedentBrutExploitation)
             ),
           ],
           [
-            'Fonds de Roulement Net Global',
+            "Fonds de Roulement Net Global",
             ...bilans.map((item) =>
               formatCurrency(item.fondsRoulementNetGlobal)
             ),
           ],
           [
-            'Ratio Fonds de Roulement Net Global sur Besoin en Fonds de Roulement',
+            "Ratio Fonds de Roulement Net Global sur Besoin en Fonds de Roulement",
             ...bilans.map((item) =>
               formatCurrency(
                 item.ratioFondsRoulementNetGlobalSurBesoinEnFondsDeRoulement
@@ -103,24 +103,24 @@ export function ProtectedIndicateursFinanciersBDF({
             ),
           ],
           [
-            'Total Dettes Stables',
+            "Total Dettes Stables",
             ...bilans.map((item) => formatCurrency(item.totalDettesStables)),
           ],
           [
-            'Valeur ajoutée BDF',
+            "Valeur ajoutée BDF",
             ...bilans.map((item) => formatCurrency(item.valeurAjouteeBdf)),
           ],
         ];
 
         return (
           <FullTable
+            body={body}
             head={[
-              <FAQLink tooltipLabel="Indicateurs" to="/faq/donnees-financieres">
+              <FAQLink to="/faq/donnees-financieres" tooltipLabel="Indicateurs">
                 Définition des indicateurs
               </FAQLink>,
               ...bilans.map((item) => item.annee),
             ]}
-            body={body}
           />
         );
       }}

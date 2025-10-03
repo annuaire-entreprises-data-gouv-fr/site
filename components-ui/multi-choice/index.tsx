@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { ChangeEventHandler } from 'react';
-import styles from './style.module.css';
+import type { ChangeEventHandler } from "react";
+import styles from "./style.module.css";
 
 export type IProps = {
   values: {
@@ -28,50 +28,50 @@ const onKeyDown = (event: any, onclick?: Function) => {
 
 export const MultiChoice: React.FC<IProps> = ({
   values,
-  legend = '',
-  idPrefix = '',
-  name = '',
+  legend = "",
+  idPrefix = "",
+  name = "",
   required = false,
   large = false,
 }) => (
   <>
     {legend && (
       <legend>
-        <h2 style={{ fontSize: '1.2rem' }}>{legend}</h2>
+        <h2 style={{ fontSize: "1.2rem" }}>{legend}</h2>
       </legend>
     )}
 
     <div
-      className={styles['radio-group']}
+      className={styles["radio-group"]}
       style={{
-        justifyContent: large ? 'center' : 'flex-start',
+        justifyContent: large ? "center" : "flex-start",
       }}
     >
       {values.map(({ label, value, href, onClick, checked = false }, index) => (
         <div key={href || value || label}>
           {href ? (
-            <a tabIndex={0} href={href} style={computeStyle(large)}>
+            <a href={href} style={computeStyle(large)} tabIndex={0}>
               {label}
             </a>
           ) : (
             <>
               <input
-                type="radio"
+                checked={onClick ? checked : undefined}
+                defaultChecked={onClick ? undefined : checked}
                 id={`${idPrefix}-${index}`}
                 name={name}
-                value={value}
+                onChange={onClick ? onClick : undefined}
                 required={required}
-                onChange={!!onClick ? onClick : undefined}
-                checked={!!onClick ? checked : undefined}
-                defaultChecked={!!onClick ? undefined : checked}
                 tabIndex={-1}
+                type="radio"
+                value={value}
               />
               <label
-                tabIndex={0}
-                style={computeStyle(large)}
-                onKeyDown={(e) => onKeyDown(e, onClick)}
                 className="fr-label"
                 htmlFor={`${idPrefix}-${index}`}
+                onKeyDown={(e) => onKeyDown(e, onClick)}
+                style={computeStyle(large)}
+                tabIndex={0}
               >
                 {label}
               </label>
@@ -85,9 +85,9 @@ export const MultiChoice: React.FC<IProps> = ({
 
 function computeStyle(large: boolean) {
   return {
-    fontWeight: large ? 'bold' : 'inherit',
-    fontSize: large ? '2rem' : '1rem',
-    lineHeight: large ? '3rem' : '1.5rem',
-    margin: large ? '15px 10px' : '5px',
+    fontWeight: large ? "bold" : "inherit",
+    fontSize: large ? "2rem" : "1rem",
+    lineHeight: large ? "3rem" : "1.5rem",
+    margin: large ? "15px 10px" : "5px",
   };
 }

@@ -1,9 +1,9 @@
 const logoutPicture = (
   <svg
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 4947 4947"
     width="100%"
+    xmlns="http://www.w3.org/2000/svg"
   >
     <path
       d="M3847.8 3929.3c-103.5 0-208.2-30.1-253.7-68-68.8-57.5-77.8-253.4-17.6-381.2a77 77 0 0 0-5-74.6 80.8 80.8 0 0 0-68.4-37.9h-446.3v-606a66.7 66.7 0 0 0-100.8-57.4c-78.9 47-197.8 103.7-316.3 109l-11 .2c-81 0-137.8-40.8-173-124.4-32.6-77-41.4-177.8-46-266.1-3.9-78 73.4-182.8 180-243.8 58.5-33.5 118.7-50.4 176.5-50.4s108.8 15.5 156 46.5c2.8 2 60.8 39.7 99.2 39.7 6.3.1 12.5-1.2 18.2-4 6.5-3.5 14.3-11 14.3-27v-567.8H3528a89 89 0 0 0 77.8-44.6c42.7-73.7-28-109-43.8-193.5-14.2-76-8.8-133.6 33-180.8 68.4-77 169.9-123.3 262-123.3 19 0 37.7 2 55.5 6 56.5 12.9 130.8 52.3 163.6 167 24.4 85.5 16 164.2-25 233.6a88.7 88.7 0 0 0-.6 90c16 28.3 46 45.7 78.4 45.6h443v594.1a56.7 56.7 0 0 1-30.8 51.2 58.7 58.7 0 0 1-60.9-4c-90.3-62.7-165.5-83.5-225.7-83.5-45 0-81.8 11.8-110 26.4-96.3 50.3-139.9 155.4-140 214-.4 99.2 32 278 122.2 364.5 35.7 36 85 55 135.6 52.2a484.8 484.8 0 0 0 221.8-66.4 58.3 58.3 0 0 1 87.9 49.9v553.3h-458.8a77.7 77.7 0 0 0-69.2 41 78 78 0 0 0 3.3 80.8c41 63.4 62.5 143.1 63.8 237 1.2 80.4-33.9 138.3-104.2 171.8-45.9 22-102.2 30.9-159 30.9h-.2Zm-528.2-1867.6c-130.5 0-223.8 31.5-223.8 31.5l-16.3 105.4c-14.6 93.8 15.5 183.7 48.6 272.7 105 282.6 136.5 368.9 167.9 518 30.5 8.6 62 13 93.6 13.2 86.8 0 165.7-36.9 235.9-115.2l6.3-20.7 62-10c6.8-1 12-6.7 12.3-13.5.4-9.6 0-23.6-4-37.9a34.6 34.6 0 0 0-36.8-24.9l-9.5 1c146.1-571.2-129.4-690.9-129.4-690.9a739.3 739.3 0 0 0-206.7-28.7h-.1Z"
@@ -195,111 +195,111 @@ const logoutPicture = (
     />
     <defs>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="a"
         x1="2402.9"
-        y1="2610.1"
         x2="2446.1"
+        y1="2610.1"
         y2="2595.2"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#FCC63A" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="b"
         x1="3579"
-        y1="4354.1"
         x2="3291.8"
+        y1="4354.1"
         y2="4354.1"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="c"
         x1="4272"
-        y1="4085.4"
         x2="3232.3"
+        y1="4085.4"
         y2="4381.7"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#8182FF" />
         <stop offset="1" stopColor="#8182FF" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="d"
         x1="4151.3"
-        y1="4348"
         x2="4041.3"
+        y1="4348"
         y2="4348"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="e"
         x1="3692.4"
-        y1="4025.1"
         x2="4340.3"
+        y1="4025.1"
         y2="4447"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#8182FF" />
         <stop offset="1" stopColor="#8182FF" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="f"
         x1="3456.8"
-        y1="2738.7"
         x2="3455.1"
+        y1="2738.7"
         y2="2937.7"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="g"
         x1="1630.3"
-        y1="4278.5"
         x2="1818.6"
+        y1="4278.5"
         y2="4278.5"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#8182FF" />
         <stop offset="1" stopColor="#8182FF" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="h"
         x1="2101.8"
-        y1="4056.3"
         x2="1416.6"
+        y1="4056.3"
         y2="4594.3"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="i"
         x1="2227.6"
-        y1="4211.1"
         x2="1542.2"
+        y1="4211.1"
         y2="4749.1"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="j"
         x1="1921.1"
-        y1="4283.3"
         x2="2192.2"
+        y1="4283.3"
         y2="4283.3"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#8182FF" />
         <stop offset="1" stopColor="#8182FF" />

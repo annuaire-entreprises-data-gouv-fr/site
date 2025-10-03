@@ -1,35 +1,35 @@
-import { Warning } from '#components-ui/alerts';
-import { Badge } from '#components-ui/badge';
-import ButtonLink from '#components-ui/button';
-import FullWidthContainer from '#components-ui/container';
-import { Icon } from '#components-ui/icon/wrapper';
-import AgentNavigation from '#components/espace-agent-components/agent-navigation';
-import { FullTable } from '#components/table/full';
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import AgentNavigation from "#components/espace-agent-components/agent-navigation";
+import { FullTable } from "#components/table/full";
+import { Warning } from "#components-ui/alerts";
+import { Badge } from "#components-ui/badge";
+import ButtonLink from "#components-ui/button";
+import FullWidthContainer from "#components-ui/container";
+import { Icon } from "#components-ui/icon/wrapper";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import constants from '#models/constants';
-import { changelogData } from '#models/historique-modifications';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+} from "#models/authentication/user/rights";
+import constants from "#models/constants";
+import { changelogData } from "#models/historique-modifications";
+import getSession from "#utils/server-side-helper/app/get-session";
 
 const lastChangelog = changelogData[0];
 
 export const metadata: Metadata = {
-  title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
+  title: "Votre compte utilisateur de l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/compte/accueil',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/compte/accueil",
   },
-  robots: 'noindex, nofollow',
+  robots: "noindex, nofollow",
 };
 
 const CompteAgentAccueil = async () => {
   const session = await getSession();
 
   if (!hasRights(session, ApplicationRights.isAgent)) {
-    return redirect('/lp/agent-public');
+    return redirect("/lp/agent-public");
   }
 
   const appRights = Object.values(ApplicationRights)
@@ -41,7 +41,7 @@ const CompteAgentAccueil = async () => {
     <>
       {session?.user?.isSuperAgent && <AgentNavigation />}
       <section className="layout-space-between-start">
-        <div style={{ maxWidth: '50%' }}>
+        <div style={{ maxWidth: "50%" }}>
           <h1>Bienvenue dans votre espace agent</h1>
           <p>
             Accédez à toutes les données publiques des entreprises et des
@@ -51,13 +51,13 @@ const CompteAgentAccueil = async () => {
             Consultez la liste des données
           </ButtonLink>
         </div>
-        <img src="/images/lp-agent/secure-folder 1.svg" alt="" />
+        <img alt="" src="/images/lp-agent/secure-folder 1.svg" />
       </section>
       <FullWidthContainer
         style={{
           background:
-            'radial-gradient(61.94% 118.71% at 36.66% 38.06%, #F9C5E1 0%, #D8E6FF 100%)',
-          padding: '3rem 2rem 2rem 2rem',
+            "radial-gradient(61.94% 118.71% at 36.66% 38.06%, #F9C5E1 0%, #D8E6FF 100%)",
+          padding: "3rem 2rem 2rem 2rem",
         }}
       >
         <div className="fr-grid-row fr-grid-row--gutters fr-mb-1w">
@@ -67,12 +67,12 @@ const CompteAgentAccueil = async () => {
                 <div className="fr-card__content">
                   <strong className="fr-card__title">Nouveautés</strong>
                   <p className="fr-card__desc">
-                    <strong>{lastChangelog.date}</strong> :{' '}
+                    <strong>{lastChangelog.date}</strong> :{" "}
                     {lastChangelog.htmlBody}
                   </p>
                 </div>
                 <div className="fr-card__footer">
-                  <ButtonLink to="/historique-des-modifications" alt small>
+                  <ButtonLink alt small to="/historique-des-modifications">
                     Voir toutes les nouveautés
                   </ButtonLink>
                 </div>
@@ -94,16 +94,16 @@ const CompteAgentAccueil = async () => {
                   <p className="fr-card__desc">
                     Retrouvez les responsabilités et les contraintes qui
                     entourent cet accès privilégié dans notre documentation et
-                    nos{' '}
+                    nos{" "}
                     <a href="/modalites-utilisation">modalités d’utilisation</a>
                     .
                   </p>
                 </div>
                 <div className="fr-card__footer">
                   <ButtonLink
-                    target="_blank"
                     alt
                     small
+                    target="_blank"
                     to={constants.links.documentation.home}
                   >
                     Accéder à notre documentation
@@ -132,9 +132,9 @@ const CompteAgentAccueil = async () => {
                 <div className="fr-card__footer">
                   <ButtonLink
                     alt
-                    to={constants.links.tchap}
-                    target="_blank"
                     small
+                    target="_blank"
+                    to={constants.links.tchap}
                   >
                     Rejoindre le salon Tchap
                   </ButtonLink>
@@ -154,8 +154,8 @@ const CompteAgentAccueil = async () => {
             <br />
             <a
               href="https://roles.data.gouv.fr/ui/activation"
-              target="_blank"
               rel="noreferrer noopener"
+              target="_blank"
             >
               Activez votre compte
             </a>
@@ -168,23 +168,21 @@ const CompteAgentAccueil = async () => {
         </p>
         <br />
         <FullTable
-          head={['Données', 'Cadre légal', 'Droits']}
-          body={appRights.map(([a, b]) => {
-            return [
-              a,
-              b ? (
-                <>Agent public</>
-              ) : (
-                <Icon slug="lockFill">Sous habilitation</Icon>
-              ),
-              <Badge
-                icon={b ? 'open' : 'closed'}
-                label={b ? 'Oui' : 'Non'}
-                backgroundColor="#ddd"
-                fontColor="#666"
-              />,
-            ];
-          })}
+          body={appRights.map(([a, b]) => [
+            a,
+            b ? (
+              <>Agent public</>
+            ) : (
+              <Icon slug="lockFill">Sous habilitation</Icon>
+            ),
+            <Badge
+              backgroundColor="#ddd"
+              fontColor="#666"
+              icon={b ? "open" : "closed"}
+              label={b ? "Oui" : "Non"}
+            />,
+          ])}
+          head={["Données", "Cadre légal", "Droits"]}
         />
       </div>
 
@@ -192,12 +190,12 @@ const CompteAgentAccueil = async () => {
         <div className="content-container">
           <h2>Les données supplémentaires</h2>
           <p>
-            Lorsque le tableau indique{' '}
+            Lorsque le tableau indique{" "}
             <Badge
-              icon={'closed'}
-              label={'Non'}
               backgroundColor="#ddd"
               fontColor="#666"
+              icon={"closed"}
+              label={"Non"}
             />
             , cela signifie que ces données nécessitent une habilitation.
           </p>

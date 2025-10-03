@@ -43,14 +43,10 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "9999"
-          ],
+          "liste_idcc": ["9999"],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
-          "liste_uai": [
-            "0810012Y"
-          ],
+          "liste_uai": ["0810012Y"],
           "longitude": "4.4244097",
           "nom_commercial": null,
           "numero_voie": null,
@@ -82,9 +78,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "9999"
-          ],
+          "liste_idcc": ["9999"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,

@@ -1,7 +1,10 @@
-import MapOrListSwitch from '#components/advanced-search/map-or-list';
-import { buildSearchQuery, IParams } from '#models/search/search-filter-params';
-import React from 'react';
-import styles from './style.module.css';
+import type React from "react";
+import MapOrListSwitch from "#components/advanced-search/map-or-list";
+import {
+  buildSearchQuery,
+  type IParams,
+} from "#models/search/search-filter-params";
+import styles from "./style.module.css";
 
 const ResultsCounter: React.FC<{
   resultCount?: number;
@@ -13,22 +16,22 @@ const ResultsCounter: React.FC<{
   resultCount = 0,
   currentPage = 1,
   searchParams = {},
-  currentSearchTerm = '',
+  currentSearchTerm = "",
   isMap = false,
 }) => {
-  const plural = resultCount > 1 ? 's' : '';
+  const plural = resultCount > 1 ? "s" : "";
   return (
     <>
       {resultCount ? (
-        <div className={styles['results-counter-container']}>
-          <div className={styles['results-counter']}>
+        <div className={styles["results-counter-container"]}>
+          <div className={styles["results-counter"]}>
             <span>
               {currentPage > 1 && `Page ${currentPage} de `}
-              {resultCount === 10000 && 'Plus de '}
+              {resultCount === 10_000 && "Plus de "}
               {resultCount} résultat{plural} trouvé{plural}.
             </span>
           </div>
-          <div className={styles['map-switch']}>
+          <div className={styles["map-switch"]}>
             <MapOrListSwitch
               isMap={isMap}
               query={buildSearchQuery(currentSearchTerm, searchParams)}
@@ -37,7 +40,7 @@ const ResultsCounter: React.FC<{
         </div>
       ) : (
         <div className="no-results">
-          <div className={styles['results-counter']}>
+          <div className={styles["results-counter"]}>
             <span>
               Aucune structure n’a été trouvée pour vos critères de recherche.
             </span>

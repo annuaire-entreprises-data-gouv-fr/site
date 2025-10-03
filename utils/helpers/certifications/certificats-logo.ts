@@ -1,16 +1,16 @@
 const certificatsLogo = {
-  qualibat: 'qualibat.jpg',
-  qualifelec: 'qualifelec.jpg',
-  qualipac: 'qualiPAC.jpg',
-  qualibois: 'qualiBois.jpg',
-  opqibi: 'opqibi.jpg',
-  'chauffage +': 'chauffage.jpg',
-  qualipv: 'qualiPV.jpg',
-  ventilation: 'ventillation.jpg',
-  qualisol: 'qualisol.jpg',
-  certibat: 'certibat.jpg',
-  habitat: 'NF.jpg',
-  qualiforage: 'aualiForage.jpg',
+  qualibat: "qualibat.jpg",
+  qualifelec: "qualifelec.jpg",
+  qualipac: "qualiPAC.jpg",
+  qualibois: "qualiBois.jpg",
+  opqibi: "opqibi.jpg",
+  "chauffage +": "chauffage.jpg",
+  qualipv: "qualiPV.jpg",
+  ventilation: "ventillation.jpg",
+  qualisol: "qualisol.jpg",
+  certibat: "certibat.jpg",
+  habitat: "NF.jpg",
+  qualiforage: "aualiForage.jpg",
 };
 
 /**
@@ -20,10 +20,10 @@ const certificatsLogo = {
  *  */
 
 export const getCertificatLogoPath = (nomCertificat: string) => {
-  for (let [certificateSub, path] of Object.entries(certificatsLogo)) {
-    if ((nomCertificat || '').toLowerCase().indexOf(certificateSub) !== -1) {
-      return `/images/rge/logo-rge-${path}` || '';
+  for (const [certificateSub, path] of Object.entries(certificatsLogo)) {
+    if ((nomCertificat || "").toLowerCase().indexOf(certificateSub) !== -1) {
+      return `/images/rge/logo-rge-${path}` || "";
     }
   }
-  return '';
+  return "";
 };

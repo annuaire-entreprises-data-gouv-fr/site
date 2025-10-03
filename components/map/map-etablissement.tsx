@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import constants from '#models/constants';
-import { IEtablissement } from '#models/core/types';
-import { hasAnyError, isDataLoading } from '#models/data-fetching';
-import { useFetchGeoLoc } from 'hooks/fetch/geoloc';
-import maplibregl, { Map } from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
-import { useEffect, useRef } from 'react';
-import { hasWebGLSupport } from './has-web-gl';
-import './map.css';
+import { useFetchGeoLoc } from "hooks/fetch/geoloc";
+import maplibregl, { type Map } from "maplibre-gl";
+import constants from "#models/constants";
+import type { IEtablissement } from "#models/core/types";
+import { hasAnyError, isDataLoading } from "#models/data-fetching";
+import "maplibre-gl/dist/maplibre-gl.css";
+import { useEffect, useRef } from "react";
+import { hasWebGLSupport } from "./has-web-gl";
+import "./map.css";
 
 export function MapEtablissement({
   etablissement,
@@ -32,7 +32,7 @@ export function MapEtablissement({
     }
     if (!hasWebGLSupport()) {
       alert(
-        'Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte.'
+        "Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte."
       );
       return;
     }
@@ -40,9 +40,10 @@ export function MapEtablissement({
     const zoom = etablissement ? 12 : 4.5;
 
     map.current = new maplibregl.Map({
-      //@ts-ignore
+      //@ts-expect-error
       container: mapContainer.current,
-      style: `https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json`,
+      style:
+        "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json",
       center: coords,
       zoom,
       minZoom: 3,
@@ -61,16 +62,16 @@ export function MapEtablissement({
 
   return (
     <div
-      ref={mapContainer}
       className="map layout-center"
+      ref={mapContainer}
       style={{
-        width: '100%',
-        zIndex: '0',
-        height: '100%',
-        minHeight: '150px',
-        borderRadius: '8px',
-        backgroundColor: '#f0f0f0',
-        textAlign: 'center',
+        width: "100%",
+        zIndex: "0",
+        height: "100%",
+        minHeight: "150px",
+        borderRadius: "8px",
+        backgroundColor: "#f0f0f0",
+        textAlign: "center",
       }}
     >
       {(!coords || hasAnyError(coords)) && (
@@ -80,8 +81,8 @@ export function MapEtablissement({
           Cela peut-être dû à un problème d’affichage, ou à un problème dans les
           coordonnées de l’établissement.
           <br />
-          (coordonnées [{etablissement?.latitude || '⎽'}°,{' '}
-          {etablissement?.longitude || '⎽'}
+          (coordonnées [{etablissement?.latitude || "⎽"}°,{" "}
+          {etablissement?.longitude || "⎽"}
           °])
         </i>
       )}

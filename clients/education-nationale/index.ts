@@ -1,10 +1,13 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import { IEtablissementsScolaires } from '#models/etablissements-scolaires';
-import { Siren } from '#utils/helpers';
-import { httpGet } from '#utils/network';
-import { zoneMapping } from './helpers';
-import { IEducationNationaleRecord, IEducationNationaleRecords } from './types';
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import type { IEtablissementsScolaires } from "#models/etablissements-scolaires";
+import type { Siren } from "#utils/helpers";
+import { httpGet } from "#utils/network";
+import { zoneMapping } from "./helpers";
+import type {
+  IEducationNationaleRecord,
+  IEducationNationaleRecords,
+} from "./types";
 
 /**
  * Education nationale
@@ -38,21 +41,20 @@ export const clientEducationNationale = async (siren: Siren, page: number) => {
 
 const mapToDomainObject = (
   records: IEducationNationaleRecord[]
-): IEtablissementsScolaires['results'] => {
-  return records.map(({ fields }) => ({
-    adresse: fields.adresse_1 || '',
-    codePostal: fields.code_postal || '',
-    idEtablissement: fields.identifiant_de_l_etablissement || '',
-    libelleAcademie: fields.libelle_academie || '',
-    mail: fields.mail || '',
+): IEtablissementsScolaires["results"] =>
+  records.map(({ fields }) => ({
+    adresse: fields.adresse_1 || "",
+    codePostal: fields.code_postal || "",
+    idEtablissement: fields.identifiant_de_l_etablissement || "",
+    libelleAcademie: fields.libelle_academie || "",
+    mail: fields.mail || "",
     nombreEleves: fields.nombre_d_eleves || 0,
-    nomCommune: fields.nom_commune || '',
-    nomEtablissement: fields.nom_etablissement || '',
-    siret: fields.siren_siret || '',
-    statut: fields.statut_public_prive || '',
-    telephone: fields.telephone || '',
-    uai: fields.identifiant_de_l_etablissement || '',
+    nomCommune: fields.nom_commune || "",
+    nomEtablissement: fields.nom_etablissement || "",
+    siret: fields.siren_siret || "",
+    statut: fields.statut_public_prive || "",
+    telephone: fields.telephone || "",
+    uai: fields.identifiant_de_l_etablissement || "",
     zone:
-      zoneMapping[fields.libelle_academie as keyof typeof zoneMapping] || '',
+      zoneMapping[fields.libelle_academie as keyof typeof zoneMapping] || "",
   }));
-};

@@ -1,20 +1,20 @@
-import { EAdministration } from '#models/administrations/EAdministration';
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
-} from '#models/api-not-responding';
-import { InternalError } from '#models/exceptions';
-import { getDirigeantsRNE } from '#models/rne/dirigeants';
-import {
+} from "#models/api-not-responding";
+import { InternalError } from "#models/exceptions";
+import { getDirigeantsRNE } from "#models/rne/dirigeants";
+import type {
   IDirigeantsMergedIGInpi,
   IDirigeantsWithMetadataMergedIGInpi,
-} from '#models/rne/types';
-import { verifySiren } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { getMandatairesRCS } from './mandataires-rcs';
-import { mergeDirigeants } from './utils';
+} from "#models/rne/types";
+import { verifySiren } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { getMandatairesRCS } from "./mandataires-rcs";
+import { mergeDirigeants } from "./utils";
 
 export const getDirigeantsProtected = async (
   maybeSiren: string,
@@ -36,10 +36,8 @@ export const getDirigeantsProtected = async (
   }
 
   try {
-    const rneData = !isAPINotResponding(dirigeantsRNE)
-      ? dirigeantsRNE.data
-      : [];
-    const rcsData = !isAPINotResponding(dirigeantsRCS) ? dirigeantsRCS : [];
+    const rneData = isAPINotResponding(dirigeantsRNE) ? [] : dirigeantsRNE.data;
+    const rcsData = isAPINotResponding(dirigeantsRCS) ? [] : dirigeantsRCS;
 
     // EI data is not standardised. It lacks birthdate in RNE and is randomly populated in IG
     let dirigeantMerged: IDirigeantsMergedIGInpi = [];
@@ -67,7 +65,7 @@ export const getDirigeantsProtected = async (
   } catch (e: any) {
     logErrorInSentry(
       new InternalError({
-        message: 'mergeDirigeants',
+        message: "mergeDirigeants",
         cause: e,
         context: {
           details: siren,

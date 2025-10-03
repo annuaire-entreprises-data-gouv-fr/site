@@ -1,5 +1,5 @@
-import { ApplicationRights } from '#models/authentication/user/rights';
-import { APIRoutesPaths } from './routes-paths';
+import { ApplicationRights } from "#models/authentication/user/rights";
+import { APIRoutesPaths } from "./routes-paths";
 
 export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   // full open data & RNE

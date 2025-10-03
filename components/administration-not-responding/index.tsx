@@ -1,8 +1,8 @@
-import React from 'react';
-import { Section } from '#components/section';
-import { administrationsMetaData } from '#models/administrations';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import AdministrationNotRespondingMessage from './message';
+import type React from "react";
+import { Section } from "#components/section";
+import { administrationsMetaData } from "#models/administrations";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import AdministrationNotRespondingMessage from "./message";
 
 interface IProps extends IAPINotRespondingError {
   title?: string;
@@ -15,10 +15,10 @@ const AdministrationNotResponding: React.FC<IProps> = ({
   const administrationMetaData = administrationsMetaData[administration] || {};
   return (
     <Section
+      sources={[administration]}
       title={`${
         title || administrationMetaData.long
       } : transmission des données hors-service 🛑`}
-      sources={[administration]}
     >
       <AdministrationNotRespondingMessage
         administrationMetaData={administrationMetaData}

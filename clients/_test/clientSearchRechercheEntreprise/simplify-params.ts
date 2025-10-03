@@ -10,6 +10,6 @@ export default function simplifyParams(a: IParams) {
   return {
     pageResultatsRecherche: a.pageResultatsRecherche,
     searchTerms: a.searchTerms,
-    searchFilterParams: a.searchFilterParams?.toApiURI() ?? '',
+    searchFilterParams: a.searchFilterParams?.toApiURI() ?? "",
   };
 }

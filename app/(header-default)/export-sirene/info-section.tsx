@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Info } from '#components-ui/alerts';
-import { INSEE } from '#components/administrations';
+import { INSEE } from "#components/administrations";
+import { Info } from "#components-ui/alerts";
 
 export default function InfoSection() {
   return (
@@ -13,14 +13,14 @@ export default function InfoSection() {
         <INSEE />.
       </p>
       <p>
-        Les données sont mises à jour chaque jour et{' '}
+        Les données sont mises à jour chaque jour et{" "}
         <strong>disponibles 24h après leur actualisation</strong> dans le
         répertoire Sirene. Pour vérifier l’état de disponibilité du répertoire
-        Sirene, consultez la{' '}
+        Sirene, consultez la{" "}
         <a
+          href="https://portail-api.insee.fr/catalog/api/2ba0e549-5587-3ef1-9082-99cd865de66f?aq=ALL"
           rel="noreferrer noopener"
           target="_blank"
-          href="https://portail-api.insee.fr/catalog/api/2ba0e549-5587-3ef1-9082-99cd865de66f?aq=ALL"
         >
           page suivante
         </a>
@@ -40,19 +40,19 @@ export default function InfoSection() {
         </ul>
       </Info>
       <div>
-        Pour plus de détails sur le contenu des fichiers, consultez la{' '}
+        Pour plus de détails sur le contenu des fichiers, consultez la{" "}
         <a
-          rel="noreferrer noopener"
-          target="_blank"
           href="https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret"
-        >
-          documentation{' '}
-        </a>{' '}
-        et ce{' '}
-        <a
           rel="noreferrer noopener"
           target="_blank"
+        >
+          documentation{" "}
+        </a>{" "}
+        et ce{" "}
+        <a
           href="https://guides.data.gouv.fr/reutiliser-des-donnees/guide-traitement-et-analyse-de-donnees/manipuler-des-donnees/ouvrir-des-donnees"
+          rel="noreferrer noopener"
+          target="_blank"
         >
           guide d’utilisation des fichiers CSV
         </a>

@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import { DGFiP } from '#components/administrations';
-import { AskUseCase } from '#components/section-with-use-case/ask-use-case';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { useFetchFinancesSociete } from "hooks";
+import { DGFiP } from "#components/administrations";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { AskUseCase } from "#components/section-with-use-case/ask-use-case";
+import { SimpleSeparator } from "#components-ui/horizontal-separator";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/use-cases';
-import { useFetchFinancesSociete } from 'hooks';
-import { FinancesSocieteInnerSection } from './inner-section';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import type { UseCase } from "#models/use-cases";
+import { FinancesSocieteInnerSection } from "./inner-section";
 
 const NotFoundInfo = ({
   setUseCase,
@@ -22,7 +22,7 @@ const NotFoundInfo = ({
 }) => (
   <>
     Aucun indicateur financier n’a été retrouvé pour cette structure.
-    <div style={{ marginTop: '30px' }}>
+    <div style={{ marginTop: "30px" }}>
       Vos droits vous permettent d‘enrichir cette section avec les chiffres
       d‘affaires déclarés à la <DGFiP />.
       <AskUseCase idPrefix="finances-societe" setUseCase={setUseCase} />
@@ -43,18 +43,18 @@ export function PublicFinancesSocieteSection({
 
   return (
     <AsyncDataSectionClient
-      title="Indicateurs financiers"
-      id="indicateurs-financiers"
-      sources={[EAdministration.MEF, EAdministration.INPI]}
       data={financesSociete}
+      id="indicateurs-financiers"
       isProtected={false}
       notFoundInfo={
         hasRights(session, ApplicationRights.chiffreAffaires) ? (
           <NotFoundInfo setUseCase={setUseCase} />
         ) : (
-          'Aucun indicateur financier n’a été retrouvé pour cette structure.'
+          "Aucun indicateur financier n’a été retrouvé pour cette structure."
         )
       }
+      sources={[EAdministration.MEF, EAdministration.INPI]}
+      title="Indicateurs financiers"
     >
       {(financesSociete) => (
         <>

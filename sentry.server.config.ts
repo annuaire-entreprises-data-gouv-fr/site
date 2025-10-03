@@ -1,6 +1,7 @@
-import * as Sentry from '@sentry/nextjs';
-import { isNextJSSentryActivated } from '#utils/sentry';
-import isUserAgentABot from '#utils/user-agent';
+import * as Sentry from "@sentry/nextjs";
+import { isNextJSSentryActivated } from "#utils/sentry";
+import isUserAgentABot from "#utils/user-agent";
+
 if (isNextJSSentryActivated) {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
@@ -12,16 +13,16 @@ if (isNextJSSentryActivated) {
       if (
         // The exception is an instance of our custom Exception class
         // (instanceof does not work in this case)
-        typeof originalException === 'object' &&
+        typeof originalException === "object" &&
         originalException &&
-        'context' in originalException &&
-        'name' in originalException
+        "context" in originalException &&
+        "name" in originalException
       ) {
         const name = originalException.name as string;
         const message =
-          'message' in originalException
+          "message" in originalException
             ? (originalException.message as string)
-            : '';
+            : "";
         event.fingerprint = [name, message];
       }
 
@@ -42,8 +43,8 @@ if (isNextJSSentryActivated) {
       if (!event.tags) {
         event.tags = {};
       }
-      event.tags['is_bot'] = isUserAgentABot(
-        event.request.headers['user-agent'] ?? ''
+      event.tags["is_bot"] = isUserAgentABot(
+        event.request.headers["user-agent"] ?? ""
       );
 
       return event;

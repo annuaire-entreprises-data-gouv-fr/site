@@ -1,6 +1,6 @@
-import { Error } from '#components-ui/alerts';
-import constants from '#models/constants';
-import { IDataFetchingState } from '#models/data-fetching';
+import { Error } from "#components-ui/alerts";
+import constants from "#models/constants";
+import { IDataFetchingState } from "#models/data-fetching";
 
 export default function DataFetchErrorExplanation({
   fetchErrorType,
@@ -39,14 +39,14 @@ export default function DataFetchErrorExplanation({
           attendre avant de pouvoir de nouveau consulter cette donnée.
         </p>
         <p>
-          Pour en savoir plus,{' '}
+          Pour en savoir plus,{" "}
           <a href={constants.links.documentation.agentRateLimiting}>
             consultez notre page de documentation
           </a>
           .
         </p>
         <p>
-          Si la situation perdure, vous pouvez{' '}
+          Si la situation perdure, vous pouvez{" "}
           <a href={constants.links.parcours.contact}>nous contacter</a>.
         </p>
       </Error>
@@ -65,7 +65,7 @@ export default function DataFetchErrorExplanation({
           contacter.
         </p>
         <p>
-          Si la situation perdure, vous pouvez{' '}
+          Si la situation perdure, vous pouvez{" "}
           <a href={constants.links.parcours.contact}>nous contacter</a> pour que
           nous puissions trouver la panne 🕵️‍♀️.
         </p>
@@ -86,7 +86,7 @@ export default function DataFetchErrorExplanation({
         va essayer de le corriger au plus vite.
       </p>
       <p>
-        Si la situation perdure, merci de{' '}
+        Si la situation perdure, merci de{" "}
         <a href={constants.links.parcours.contact}>nous contacter</a> pour que
         nous puissions trouver la panne 🕵️‍♀️.
       </p>

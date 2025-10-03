@@ -1,4 +1,4 @@
-import constants from '#models/constants';
+import constants from "#models/constants";
 
 export const BadParams = () => (
   <div>
@@ -10,10 +10,10 @@ export const BadParams = () => (
       </h3>
       <p>
         Vous pouvez essayez d’identifier le filtre qui pose problème. Si vous
-        n’y parvenez pas,{' '}
+        n’y parvenez pas,{" "}
         <a href={constants.links.parcours.contact}>
           vous pouvez nous contacter
-        </a>{' '}
+        </a>{" "}
         ou bien <a href="/rechercher?terme=">effacer tous les filtres</a>.
       </p>
     </div>

@@ -1,7 +1,7 @@
-import { Icon } from '#components-ui/icon/wrapper';
-import constants from '#models/constants';
+import { Icon } from "#components-ui/icon/wrapper";
+import constants from "#models/constants";
 
-const MapOrListSwitch = ({ isMap = false, query = '' }) => (
+const MapOrListSwitch = ({ isMap = false, query = "" }) => (
   <>
     {isMap ? (
       <a className="no-style-link" href={`/rechercher/${query}`}>

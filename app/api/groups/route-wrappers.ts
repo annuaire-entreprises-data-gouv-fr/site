@@ -1,13 +1,13 @@
-import { HttpNotFound, HttpUnauthorizedError } from '#clients/exceptions';
+import { NextResponse } from "next/server";
+import z from "zod";
+import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { InternalError } from '#models/exceptions';
-import { logFatalErrorInSentry } from '#utils/sentry';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { NextResponse } from 'next/server';
-import z from 'zod';
+} from "#models/authentication/user/rights";
+import { InternalError } from "#models/exceptions";
+import { logFatalErrorInSentry } from "#utils/sentry";
+import getSession from "#utils/server-side-helper/app/get-session";
 
 type RouteHandler<TContext> = (
   request: Request,
@@ -24,7 +24,7 @@ export function withAgentAuth<TContext>(handler: RouteHandler<TContext>) {
       !session?.user?.proConnectSub
     ) {
       return NextResponse.json(
-        { error: 'Unauthorized: Agent access required' },
+        { error: "Unauthorized: Agent access required" },
         { status: 401 }
       );
     }
@@ -41,27 +41,27 @@ export function withErrorHandling<TContext>(
       return await handler(request, context);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return new NextResponse('Validation failed', { status: 400 });
+        return new NextResponse("Validation failed", { status: 400 });
       }
 
       if (error instanceof HttpUnauthorizedError) {
-        return new NextResponse('Unauthorized: Admin permissions required', {
+        return new NextResponse("Unauthorized: Admin permissions required", {
           status: 403,
         });
       }
 
       if (error instanceof HttpNotFound) {
-        return new NextResponse('Resource not found', { status: 404 });
+        return new NextResponse("Resource not found", { status: 404 });
       }
 
       logFatalErrorInSentry(
         new InternalError({
-          message: 'Internal error in Groups',
+          message: "Internal error in Groups",
           cause: error,
         })
       );
 
-      return new NextResponse('Internal server error', { status: 500 });
+      return new NextResponse("Internal server error", { status: 500 });
     }
   };
 }

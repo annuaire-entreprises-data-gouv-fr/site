@@ -1,33 +1,33 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { createEtablissementsList } from '#models/core/etablissements-list';
-import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import { createEtablissementsList } from "#models/core/etablissements-list";
+import { estActif, IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import {
-  NotEnoughParamsException,
   createDefaultUniteLegale,
-} from '#models/core/types';
-import { ISearchResults } from '#models/search';
-import SearchFilterParams from '#models/search/search-filter-params';
-import { parseIntWithDefaultValue, verifySiren } from '#utils/helpers';
+  NotEnoughParamsException,
+} from "#models/core/types";
+import type { ISearchResults } from "#models/search";
+import type SearchFilterParams from "#models/search/search-filter-params";
+import { parseIntWithDefaultValue, verifySiren } from "#utils/helpers";
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAFWithoutNomenclature,
-} from '#utils/helpers/formatting/labels';
+} from "#utils/helpers/formatting/labels";
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
-} from '#utils/helpers/insee-variables';
-import { httpGet } from '#utils/network';
-import { IResult, ISearchResponse } from './interface';
+} from "#utils/helpers/insee-variables";
+import { httpGet } from "#utils/network";
+import type { IResult, ISearchResponse } from "./interface";
 import {
   mapToDirigeantModel,
   mapToElusModel,
   mapToEtablissement,
   mapToImmatriculation,
   mapToSiege,
-} from './mapToDomain';
+} from "./mapToDomain";
 
 type ClientSearchRechercheEntreprise = {
   searchTerms: string;
@@ -63,30 +63,30 @@ export const clientSearchRechercheEntrepriseRaw = async ({
 
   let url = route;
   url += `?per_page=10&page=${pageResultatsRecherche}&q=${encodedTerms}&limite_matching_etablissements=3${
-    searchFilterParams?.toApiURI() || ''
+    searchFilterParams?.toApiURI() || ""
   }`;
 
-  url += `&include_admin=slug`;
+  url += "&include_admin=slug";
 
   if (inclureEtablissements) {
-    url += `,etablissements`;
+    url += ",etablissements";
   }
 
   if (inclureImmatriculation) {
-    url += `,immatriculation`;
+    url += ",immatriculation";
   }
 
   if (inclureEtablissements && pageEtablissements) {
     url += `&page_etablissements=${pageEtablissements}`;
   }
 
-  url += `&mtm_campaign=annuaire-entreprises-site`;
+  url += "&mtm_campaign=annuaire-entreprises-site";
 
   const timeout = constants.timeout.L;
 
   const results = await httpGet<ISearchResponse>(url, {
     timeout,
-    headers: { referer: 'annuaire-entreprises-site' },
+    headers: { referer: "annuaire-entreprises-site" },
   });
   return results;
 };
@@ -112,7 +112,7 @@ const clientSearchRechercheEntreprise = async ({
   });
 
   if (!results.results || results.results.length === 0) {
-    throw new HttpNotFound('No results');
+    throw new HttpNotFound("No results");
   }
   return mapToDomainObjectNew(results, pageEtablissements);
 };
@@ -150,7 +150,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     date_mise_a_jour_rne,
     statut_diffusion,
     etablissements = [],
-    caractere_employeur = '',
+    caractere_employeur = "",
     etat_administratif,
     nombre_etablissements_ouverts,
   } = result;
@@ -171,18 +171,18 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     est_uai = false,
     est_societe_mission = false,
     identifiant_association = null,
-    statut_entrepreneur_spectacle = '',
+    statut_entrepreneur_spectacle = "",
     est_association = false,
     liste_idcc = [],
     est_siae = false,
-    type_siae = '',
+    type_siae = "",
     est_achats_responsables = false,
     est_patrimoine_vivant = false,
     est_alim_confiance = false,
     bilan_ges_renseigne = false,
   } = complements || {};
 
-  const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
+  const nomComplet = (result.nom_complet || "Nom inconnu").toUpperCase();
 
   const siren = verifySiren(result.siren);
 
@@ -231,7 +231,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     etablissements: etablissementsList,
     etatAdministratif,
     statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
-      statut_diffusion || 'O',
+      statut_diffusion || "O",
       siren
     ),
     nomComplet,
@@ -240,10 +240,10 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     anneeCategorieEntreprise: annee_categorie_entreprise,
     trancheEffectif:
       tranche_effectif_salarie ??
-      (caractere_employeur === 'N' ? caractere_employeur : null),
+      (caractere_employeur === "N" ? caractere_employeur : null),
     anneeTrancheEffectif: annee_tranche_effectif_salarie,
     chemin: result.slug || result.siren,
-    natureJuridique: nature_juridique || '',
+    natureJuridique: nature_juridique || "",
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
       result.activite_principale,
       false
@@ -280,13 +280,11 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     },
     colter,
     dateCreation: parseDateCreationInsee(date_creation),
-    dateDerniereMiseAJour: date_mise_a_jour || '',
-    dateMiseAJourInsee: date_mise_a_jour_insee || '',
-    dateMiseAJourInpi: date_mise_a_jour_rne || '',
-    dateFermeture: date_fermeture ?? '',
-    listeIdcc: (liste_idcc || []).map((idcc) => {
-      return { idcc, title: '' };
-    }),
+    dateDerniereMiseAJour: date_mise_a_jour || "",
+    dateMiseAJourInsee: date_mise_a_jour_insee || "",
+    dateMiseAJourInpi: date_mise_a_jour_rne || "",
+    dateFermeture: date_fermeture ?? "",
+    listeIdcc: (liste_idcc || []).map((idcc) => ({ idcc, title: "" })),
   };
 };
 

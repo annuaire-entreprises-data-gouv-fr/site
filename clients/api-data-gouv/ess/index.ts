@@ -1,9 +1,9 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import { IESS } from '#models/certifications/ess';
-import constants from '#models/constants';
-import { Siren } from '#utils/helpers';
-import { httpGet } from '#utils/network';
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import type { IESS } from "#models/certifications/ess";
+import constants from "#models/constants";
+import type { Siren } from "#utils/helpers";
+import { httpGet } from "#utils/network";
 
 export const clientEss = async (siren: Siren): Promise<IESS> => {
   const response = await httpGet<IESSDatagouvResponse>(
@@ -20,10 +20,8 @@ export const clientEss = async (siren: Siren): Promise<IESS> => {
   return mapToDomainObject(response.data[0]);
 };
 
-const mapToDomainObject = (response: IESSItem) => {
-  return {
-    familleJuridique: response["Famille juridique de l'entreprise"],
-    nom: response["Nom ou raison sociale de l'entreprise"],
-    region: response["Région de l'établissement"],
-  };
-};
+const mapToDomainObject = (response: IESSItem) => ({
+  familleJuridique: response["Famille juridique de l'entreprise"],
+  nom: response["Nom ou raison sociale de l'entreprise"],
+  region: response["Région de l'établissement"],
+});

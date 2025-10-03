@@ -10,11 +10,11 @@ export const logMatomoEvent = (
   label: string
 ) => {
   var _paq = window._paq || [];
-  _paq.push(['trackEvent', category, action, label]);
+  _paq.push(["trackEvent", category, action, label]);
 };
 
 export const logConversionEvent = (label: string) => {
-  if (typeof window !== 'undefined') {
-    logMatomoEvent('agent:conversion', label, window?.location.pathname);
+  if (typeof window !== "undefined") {
+    logMatomoEvent("agent:conversion", label, window?.location.pathname);
   }
 };

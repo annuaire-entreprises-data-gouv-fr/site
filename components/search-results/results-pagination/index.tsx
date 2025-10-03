@@ -1,6 +1,9 @@
-import { buildSearchQuery, IParams } from '#models/search/search-filter-params';
-import React from 'react';
-import pagesArray from './pages-array';
+import type React from "react";
+import {
+  buildSearchQuery,
+  type IParams,
+} from "#models/search/search-filter-params";
+import pagesArray from "./pages-array";
 
 type IProps = {
   currentPage: number;
@@ -13,9 +16,9 @@ type IProps = {
 
 const urlParams = (
   page = 1,
-  searchTerm = '',
+  searchTerm = "",
   searchfilterParams?: IParams,
-  urlComplement = ''
+  urlComplement = ""
 ) => {
   const searchQuery = buildSearchQuery(searchTerm, searchfilterParams || {});
   return `${searchQuery}&page=${page}${urlComplement}`;
@@ -37,7 +40,7 @@ const First: React.FC<IProps> = ({
           : undefined
       }
     >
-      {compact ? '' : 'Première page'}
+      {compact ? "" : "Première page"}
     </a>
   </li>
 );
@@ -59,7 +62,7 @@ const Last: React.FC<IProps> = ({
           : undefined
       }
     >
-      {compact ? '' : 'Dernière page'}
+      {compact ? "" : "Dernière page"}
     </a>
   </li>
 );
@@ -84,7 +87,7 @@ const Previous: React.FC<IProps> = ({
           : undefined
       }
     >
-      {compact ? '' : 'Page précédente'}
+      {compact ? "" : "Page précédente"}
     </a>
   </li>
 );
@@ -111,7 +114,7 @@ const Next: React.FC<IProps> = ({
           : undefined
       }
     >
-      {compact ? '' : 'Page suivante'}
+      {compact ? "" : "Page suivante"}
     </a>
   </li>
 );
@@ -131,9 +134,9 @@ const Page: React.FC<{
 }) => (
   <li>
     <a
-      href={urlParams(pageNum, searchTerm, searchFilterParams, urlComplement)}
+      aria-current={currentPage === pageNum ? "page" : undefined}
       className="fr-pagination__link "
-      aria-current={currentPage === pageNum ? 'page' : undefined}
+      href={urlParams(pageNum, searchTerm, searchFilterParams, urlComplement)}
       title={`Page ${pageNum}`}
     >
       {pageNum}
@@ -151,7 +154,7 @@ const PageCounter: React.FC<IProps> = ({
   searchTerm,
   totalPages,
   searchFilterParams,
-  urlComplement = '',
+  urlComplement = "",
   compact = false,
 }) => {
   const pages = pagesArray(currentPage, totalPages);
@@ -160,51 +163,49 @@ const PageCounter: React.FC<IProps> = ({
   }
 
   return (
-    <div className="layout-center" style={{ margin: '15px auto' }}>
-      <nav role="navigation" className="fr-pagination" aria-label="Pagination">
+    <div className="layout-center" style={{ margin: "15px auto" }}>
+      <nav aria-label="Pagination" className="fr-pagination" role="navigation">
         <ul className="fr-pagination__list">
           <First
+            compact={compact}
             currentPage={currentPage}
+            searchFilterParams={searchFilterParams}
             searchTerm={searchTerm}
             totalPages={totalPages}
-            compact={compact}
-            searchFilterParams={searchFilterParams}
             urlComplement={urlComplement}
           />
           <Previous
+            compact={compact}
             currentPage={currentPage}
+            searchFilterParams={searchFilterParams}
             searchTerm={searchTerm}
             totalPages={totalPages}
-            compact={compact}
-            searchFilterParams={searchFilterParams}
             urlComplement={urlComplement}
           />
-          {pages.map((pageNum) => {
-            return (
-              <Page
-                searchFilterParams={searchFilterParams}
-                currentPage={currentPage}
-                searchTerm={searchTerm}
-                pageNum={pageNum}
-                urlComplement={urlComplement}
-                key={pageNum}
-              />
-            );
-          })}
+          {pages.map((pageNum) => (
+            <Page
+              currentPage={currentPage}
+              key={pageNum}
+              pageNum={pageNum}
+              searchFilterParams={searchFilterParams}
+              searchTerm={searchTerm}
+              urlComplement={urlComplement}
+            />
+          ))}
           <Next
-            currentPage={currentPage}
-            searchTerm={searchTerm}
             compact={compact}
-            totalPages={totalPages}
+            currentPage={currentPage}
             searchFilterParams={searchFilterParams}
+            searchTerm={searchTerm}
+            totalPages={totalPages}
             urlComplement={urlComplement}
           />
           <Last
-            currentPage={currentPage}
             compact={compact}
+            currentPage={currentPage}
+            searchFilterParams={searchFilterParams}
             searchTerm={searchTerm}
             totalPages={totalPages}
-            searchFilterParams={searchFilterParams}
             urlComplement={urlComplement}
           />
         </ul>

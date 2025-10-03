@@ -1,6 +1,6 @@
-import { parseIntWithDefaultValue } from '#utils/helpers';
-import isUserAgentABot from '#utils/user-agent';
-import { headers } from 'next/headers';
+import { headers } from "next/headers";
+import { parseIntWithDefaultValue } from "#utils/helpers";
+import isUserAgentABot from "#utils/user-agent";
 
 export type IParams = { slug: string };
 
@@ -14,19 +14,19 @@ async function extractParamsAppRouter({
   searchParams,
 }: Partial<AppRouterProps>) {
   const resolvedParams = await params;
-  const slug = (resolvedParams?.slug || '') as string;
+  const slug = (resolvedParams?.slug || "") as string;
 
   const resolvedSearchParams = (await searchParams) || {};
   const headersList = await headers();
-  const userAgent = headersList.get('user-agent') || '';
+  const userAgent = headersList.get("user-agent") || "";
 
   // cf middleware
-  const isRedirected = headersList.get('x-redirected') === '1';
+  const isRedirected = headersList.get("x-redirected") === "1";
 
-  const pageParam = (resolvedSearchParams.page || '') as string;
+  const pageParam = (resolvedSearchParams.page || "") as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
 
-  const isABotParam = (resolvedSearchParams.isABot || '') as string;
+  const isABotParam = (resolvedSearchParams.isABot || "") as string;
   const isABotUA = isUserAgentABot(userAgent);
 
   const isBot = !!isABotParam || isABotUA;

@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import { Loader } from '#components-ui/loader';
-import { Select } from '#components-ui/select';
-import { DGFiP } from '#components/administrations';
-import { Section } from '#components/section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { isAPI404 } from '#models/api-not-responding';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { hasAnyError, isDataLoading } from '#models/data-fetching';
-import {
+import EtatCivilInfos from "app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/EtatCivilInfos";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { type ChangeEvent, useMemo, useState } from "react";
+import { DGFiP } from "#components/administrations";
+import { Section } from "#components/section";
+import { FullTable } from "#components/table/full";
+import { Loader } from "#components-ui/loader";
+import { Select } from "#components-ui/select";
+import type { EAdministration } from "#models/administrations/EAdministration";
+import { isAPI404 } from "#models/api-not-responding";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import { hasAnyError, isDataLoading } from "#models/data-fetching";
+import type {
   IEtatCivilLiensCapitalistiques,
   IPersonneMoraleLiensCapitalistiques,
-} from '#models/rne/types';
-import { UseCase } from '#models/use-cases';
-import { formatIntFr, pluralize } from '#utils/helpers/formatting/formatting';
-import EtatCivilInfos from 'app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/EtatCivilInfos';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { ChangeEvent, useMemo, useState } from 'react';
-import PersonneMoraleInfos from '../sections/entreprise/PersonneMoraleInfos';
+} from "#models/rne/types";
+import type { UseCase } from "#models/use-cases";
+import { formatIntFr, pluralize } from "#utils/helpers/formatting/formatting";
+import PersonneMoraleInfos from "../sections/entreprise/PersonneMoraleInfos";
 
 function LiensCapitalistiquesContent({
   uniteLegale,
@@ -69,32 +69,29 @@ function LiensCapitalistiquesContent({
   const formatLienActionnaireInfo = (
     lien: IPersonneMoraleLiensCapitalistiques | IEtatCivilLiensCapitalistiques
   ) => {
-    if ('denomination' in lien) {
+    if ("denomination" in lien) {
       return [
         <div>{lien.pays}</div>,
         <PersonneMoraleInfos dirigeant={lien} />,
         <div>{lien.pourcentage}%</div>,
       ];
-    } else {
-      return [
-        <div>{lien.pays}</div>,
-        <EtatCivilInfos dirigeant={lien} />,
-        <div>{lien.pourcentage}%</div>,
-      ];
     }
-  };
-
-  const formatLienFilialeInfo = (lien: IPersonneMoraleLiensCapitalistiques) => {
     return [
       <div>{lien.pays}</div>,
-      <div>{lien.denomination}</div>,
-      <div>
-        <a href={`/entreprise/${lien.siren}`}>{formatIntFr(lien.siren)}</a>
-      </div>,
-      <div>{lien.natureJuridique}</div>,
+      <EtatCivilInfos dirigeant={lien} />,
       <div>{lien.pourcentage}%</div>,
     ];
   };
+
+  const formatLienFilialeInfo = (lien: IPersonneMoraleLiensCapitalistiques) => [
+    <div>{lien.pays}</div>,
+    <div>{lien.denomination}</div>,
+    <div>
+      <a href={`/entreprise/${lien.siren}`}>{formatIntFr(lien.siren)}</a>
+    </div>,
+    <div>{lien.natureJuridique}</div>,
+    <div>{lien.pourcentage}%</div>,
+  ];
 
   const pluralActionnaires = pluralize(
     liensCapitalistiquesProtected.actionnaires
@@ -104,26 +101,26 @@ function LiensCapitalistiquesContent({
     liensCapitalistiquesProtected.actionnaires.length +
       liensCapitalistiquesProtected.filiales.length >
     1
-      ? 's'
-      : '';
+      ? "s"
+      : "";
 
   return (
     <>
       <p>
-        Cette entreprise possède{' '}
+        Cette entreprise possède{" "}
         {liensCapitalistiquesProtected.actionnaires.length} actionnaire
-        {pluralActionnaires} et {liensCapitalistiquesProtected.filiales.length}{' '}
+        {pluralActionnaires} et {liensCapitalistiquesProtected.filiales.length}{" "}
         filiale{pluralFiliales} déclaré{pluralActionnairesEtFiliales} pour
         l‘année {selectedYear} :
       </p>
       <h3>Composition du capital (actionnaires) :</h3>
       {liensCapitalistiquesProtected.actionnaires.length > 0 ? (
         <FullTable
-          verticalAlign="top"
-          head={['Pays', 'Actionnaire', 'Pourcentage de détention']}
           body={liensCapitalistiquesProtected.actionnaires.map((actionnaire) =>
             formatLienActionnaireInfo(actionnaire)
           )}
+          head={["Pays", "Actionnaire", "Pourcentage de détention"]}
+          verticalAlign="top"
         />
       ) : (
         <i>Aucun actionnaire n’a été retrouvé pour cette entreprise.</i>
@@ -132,17 +129,17 @@ function LiensCapitalistiquesContent({
       <h3>Liste des participations (filiales) :</h3>
       {liensCapitalistiquesProtected.filiales.length > 0 ? (
         <FullTable
-          verticalAlign="top"
-          head={[
-            'Pays',
-            'Dénomination',
-            'SIREN',
-            'Type',
-            'Pourcentage de détention',
-          ]}
           body={liensCapitalistiquesProtected.filiales.map((filiale) =>
             formatLienFilialeInfo(filiale)
           )}
+          head={[
+            "Pays",
+            "Dénomination",
+            "SIREN",
+            "Type",
+            "Pourcentage de détention",
+          ]}
+          verticalAlign="top"
         />
       ) : (
         <i>Aucune filiale n’a été retrouvée pour cette entreprise.</i>
@@ -183,7 +180,7 @@ export default function ProtectedLiensCapitalistiques({
   }, [uniteLegale.dateCreation]);
 
   return (
-    <Section title={title} id={id} isProtected={isProtected} sources={sources}>
+    <Section id={id} isProtected={isProtected} sources={sources} title={title}>
       <p>
         Les données transmises sont déclaratives et proviennent de deux CERFA
         des liasses fiscales déposées auprès de la <DGFiP /> :
@@ -197,18 +194,18 @@ export default function ProtectedLiensCapitalistiques({
       </ul>
       <br />
       <Select
-        options={options}
-        placeholder="Sélectionnez une année pour voir les actionnaires et filiales de
-          l‘entreprise."
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setSelectedYear(e.target.value);
         }}
+        options={options}
+        placeholder="Sélectionnez une année pour voir les actionnaires et filiales de
+          l‘entreprise."
       />
       {selectedYear && (
         <LiensCapitalistiquesContent
-          uniteLegale={uniteLegale}
-          session={session}
           selectedYear={selectedYear}
+          session={session}
+          uniteLegale={uniteLegale}
           useCase={useCase}
         />
       )}

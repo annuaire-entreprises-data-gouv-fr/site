@@ -1,13 +1,13 @@
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
 import {
+  type IUniteLegale,
   isEntrepreneurIndividuel,
   isServicePublic,
-  IUniteLegale,
-} from '#models/core/types';
+} from "#models/core/types";
 
 type IDirigeantSummaryProps = {
   uniteLegale: IUniteLegale;
@@ -26,7 +26,7 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   }
 
   return (
-    <nav role="navigation" aria-labelledby="dirigeant-summary-title">
+    <nav aria-labelledby="dirigeant-summary-title" role="navigation">
       <strong id="dirigeant-summary-title">
         Informations disponibles sur les dirigeant(s) :
       </strong>

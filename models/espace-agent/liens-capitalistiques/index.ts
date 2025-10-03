@@ -1,12 +1,12 @@
-import { clientApiEntrepriseLiensCapitalistiques } from '#clients/api-entreprise/liens-capitalistiques';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import {
+import { clientApiEntrepriseLiensCapitalistiques } from "#clients/api-entreprise/liens-capitalistiques";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type {
   IEtatCivilLiensCapitalistiques,
   IPersonneMoraleLiensCapitalistiques,
-} from '#models/rne/types';
-import { UseCase } from '#models/use-cases';
-import { verifySiren } from '#utils/helpers';
-import { handleApiEntrepriseError } from '../utils';
+} from "#models/rne/types";
+import type { UseCase } from "#models/use-cases";
+import { verifySiren } from "#utils/helpers";
+import { handleApiEntrepriseError } from "../utils";
 
 export type ILiensCapitalistiquesProtected = {
   actionnaires: Array<
@@ -27,7 +27,7 @@ export const getLiensCapitalistiquesProtected = async (
   ).catch((error) =>
     handleApiEntrepriseError(error, {
       siren,
-      apiResource: 'LiensCapitalistiquesProtected',
+      apiResource: "LiensCapitalistiquesProtected",
     })
   );
 };

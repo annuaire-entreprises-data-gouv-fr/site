@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
+import { useEffect } from "react";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import constants from '#models/constants';
-import { useEffect } from 'react';
-import styles from './style.module.css';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import constants from "#models/constants";
+import styles from "./style.module.css";
 
 export default function LoadBar({ session }: { session: ISession | null }) {
   useEffect(() => {
     const loadBar = loadBarFactory();
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       window.addEventListener(
-        'beforeunload',
+        "beforeunload",
         loadBar.runWithDelay.bind(loadBar)
       );
     }
@@ -22,12 +22,12 @@ export default function LoadBar({ session }: { session: ISession | null }) {
 
   return (
     <div
+      className={styles["load-bar"]}
       id="loader-bar"
-      className={styles['load-bar']}
       style={{
         background: hasRights(session, ApplicationRights.isAgent)
           ? constants.colors.espaceAgent
-          : 'transparent',
+          : "transparent",
       }}
     />
   );
@@ -41,9 +41,8 @@ export default function LoadBar({ session }: { session: ISession | null }) {
  * Load bar is entirely a visual trick to help with user patience.
  */
 
-const wait = async (timeout: number): Promise<void> => {
-  return new Promise((resolve) => window.setTimeout(() => resolve(), timeout));
-};
+const wait = async (timeout: number): Promise<void> =>
+  new Promise((resolve) => window.setTimeout(() => resolve(), timeout));
 
 /**
  * Load bar position from 0 to 100%
@@ -56,15 +55,15 @@ const positions = [
 ];
 
 const init = () => {
-  const loader = document.getElementById('loader-bar');
+  const loader = document.getElementById("loader-bar");
   if (!loader) {
     return null;
   }
 
-  if (loader.style.backgroundColor === 'transparent') {
-    loader.style.background = '#000091';
+  if (loader.style.backgroundColor === "transparent") {
+    loader.style.background = "#000091";
     loader.style.background =
-      'linear-gradient(90deg, rgba(0,0,145,1), rgb(0, 159, 255))';
+      "linear-gradient(90deg, rgba(0,0,145,1), rgb(0, 159, 255))";
   }
 
   return loader;
@@ -72,7 +71,7 @@ const init = () => {
 
 const loadBarFactory = () => {
   return {
-    _currentJobId: '',
+    _currentJobId: "",
     _loader: null as HTMLElement | null,
     async _run(step: number) {
       const jobId = Math.random().toString(16).substring(7);
@@ -86,7 +85,7 @@ const loadBarFactory = () => {
           return;
         }
       }
-      this._loader.style.opacity = '1';
+      this._loader.style.opacity = "1";
       for (let i = step; i < positions.length; i++) {
         // interrupt job if another job has been triggered by another beforeunload event
         if (this._currentJobId !== jobId) {

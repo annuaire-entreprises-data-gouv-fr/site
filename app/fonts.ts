@@ -1,23 +1,23 @@
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 
 export const marianne = localFont({
   src: [
     {
-      path: '../style/fonts/compressed/Marianne-Regular.woff2',
-      weight: '400',
-      style: 'normal',
+      path: "../style/fonts/compressed/Marianne-Regular.woff2",
+      weight: "400",
+      style: "normal",
     },
     {
-      path: '../style/fonts/Marianne-Regular_Italic.woff2',
-      weight: '400',
-      style: 'italic',
+      path: "../style/fonts/Marianne-Regular_Italic.woff2",
+      weight: "400",
+      style: "italic",
     },
     {
-      path: '../style/fonts/compressed/Marianne-Bold.woff2',
-      weight: '900',
-      style: 'normal',
+      path: "../style/fonts/compressed/Marianne-Bold.woff2",
+      weight: "900",
+      style: "normal",
     },
   ],
-  display: 'swap',
-  variable: '--font-marianne',
+  display: "swap",
+  variable: "--font-marianne",
 });

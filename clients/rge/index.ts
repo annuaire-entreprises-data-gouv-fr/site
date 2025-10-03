@@ -1,9 +1,12 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import { INomCertificat, IRGECertification } from '#models/certifications/rge';
-import { Siren } from '#utils/helpers';
-import { httpGet } from '#utils/network';
-import { getCertificatLogoPath } from '../../utils/helpers/certifications/certificats-logo';
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import type {
+  INomCertificat,
+  IRGECertification,
+} from "#models/certifications/rge";
+import type { Siren } from "#utils/helpers";
+import { httpGet } from "#utils/network";
+import { getCertificatLogoPath } from "../../utils/helpers/certifications/certificats-logo";
 
 type IRGEResponse = {
   results: {
@@ -47,47 +50,47 @@ const mapToDomainObject = (rge: IRGEResponse) => {
   const [firstResult] = rge.results;
 
   const {
-    adresse = '',
-    code_postal = '',
-    commune = '',
-    nom_entreprise = '',
+    adresse = "",
+    code_postal = "",
+    commune = "",
+    nom_entreprise = "",
     particulier = false,
     siret,
-    telephone = '',
-    site_internet = '',
-    email = '',
+    telephone = "",
+    site_internet = "",
+    email = "",
   } = firstResult;
 
   const companyInfo = {
     adresse: `${adresse}, ${code_postal}, ${commune}`,
     email,
     nomEntreprise: nom_entreprise,
-    siret: siret,
+    siret,
     siteInternet: site_internet,
-    telephone: telephone,
+    telephone,
     workingWithIndividual: particulier,
   };
 
-  const certifications: IRGECertification['certifications'] = [];
+  const certifications: IRGECertification["certifications"] = [];
 
   rge.results.forEach((result) => {
     const findCertification = certifications.findIndex(
       (certification) => certification.nomCertificat === result.nom_certificat
     );
     if (findCertification !== -1) {
-      if (result.domaine !== 'Inconnu') {
+      if (result.domaine !== "Inconnu") {
         const domaines = new Set(certifications[findCertification].domaines);
         domaines.add(result.domaine);
         certifications[findCertification].domaines = Array.from(domaines);
       }
     } else {
       const {
-        code_qualification = '',
-        domaine = '',
+        code_qualification = "",
+        domaine = "",
         nom_certificat,
-        nom_qualification = '',
-        organisme = '',
-        url_qualification = '',
+        nom_qualification = "",
+        organisme = "",
+        url_qualification = "",
       } = result;
       certifications.push({
         logoPath: getCertificatLogoPath(nom_certificat),

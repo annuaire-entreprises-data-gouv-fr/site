@@ -1,14 +1,14 @@
-import { IProConnectUserInfo } from '#clients/authentication/pro-connect/strategy';
-import { Scopes } from '#models/authentication/agent/scopes';
+import type { IProConnectUserInfo } from "#clients/authentication/pro-connect/strategy";
+import { Scopes } from "#models/authentication/agent/scopes";
 import {
   AgentNotVerifiedException,
   NeedASiretException,
   PrestataireException,
-} from '#models/authentication/authentication-exceptions';
-import { Groups } from '#models/authentication/group/groups';
-import { isSiret, verifySiret } from '#utils/helpers';
-import { AgentOrganisation } from '../organisation';
-import { defaultAgentScopes } from '../scopes/constants';
+} from "#models/authentication/authentication-exceptions";
+import { Groups } from "#models/authentication/group/groups";
+import { isSiret, verifySiret } from "#utils/helpers";
+import { AgentOrganisation } from "../organisation";
+import { defaultAgentScopes } from "../scopes/constants";
 
 export class AgentConnected {
   private domain;
@@ -20,18 +20,18 @@ export class AgentConnected {
   private siret;
 
   constructor(userInfo: IProConnectUserInfo) {
-    this.domain = this.extractDomain(userInfo?.email || '');
-    this.idpId = userInfo.idp_id ?? '';
-    this.email = userInfo.email ?? '';
-    this.familyName = userInfo.family_name ?? '';
-    this.firstName = userInfo.given_name ?? '';
+    this.domain = this.extractDomain(userInfo?.email || "");
+    this.idpId = userInfo.idp_id ?? "";
+    this.email = userInfo.email ?? "";
+    this.familyName = userInfo.family_name ?? "";
+    this.firstName = userInfo.given_name ?? "";
     this.proConnectSub = userInfo.sub;
 
-    const siretAsString = (userInfo.siret || '').replaceAll(' ', '');
+    const siretAsString = (userInfo.siret || "").replaceAll(" ", "");
 
     if (!siretAsString || !isSiret(siretAsString)) {
       throw new NeedASiretException(
-        'The user doesn‘t have a siret',
+        "The user doesn‘t have a siret",
         `${this.domain} - ${this.idpId}`
       );
     }
@@ -41,23 +41,23 @@ export class AgentConnected {
 
   extractDomain(email: string) {
     try {
-      return (email.match(/@(.*)/) || ['']).shift() || '';
+      return (email.match(/@(.*)/) || [""]).shift() || "";
     } catch {
-      return '';
+      return "";
     }
   }
 
   isLikelyPrestataire = () => {
-    for (let bannedDomain of [
-      'i-carre.net',
-      'beta.gouv.fr',
-      'code.gouv.fr',
-      'data.gouv.fr',
-      'demarches-simplifiees.fr',
-      'entreprise.api.gouv.fr',
-      'franceconnect.gouv.fr',
-      'monstagedetroisieme.fr',
-      'scn.rie.gouv.fr',
+    for (const bannedDomain of [
+      "i-carre.net",
+      "beta.gouv.fr",
+      "code.gouv.fr",
+      "data.gouv.fr",
+      "demarches-simplifiees.fr",
+      "entreprise.api.gouv.fr",
+      "franceconnect.gouv.fr",
+      "monstagedetroisieme.fr",
+      "scn.rie.gouv.fr",
     ]) {
       if (this.domain.indexOf(bannedDomain) > -1) {
         return true;
@@ -65,7 +65,7 @@ export class AgentConnected {
     }
 
     if (
-      !!this.email.match(
+      this.email.match(
         /[.@-]*(ext|external|externe|presta|prestataire|consultant)(s)*[.@-]/g
       )
     ) {
@@ -118,7 +118,7 @@ export class AgentConnected {
     if (superAgentScopes.hasScopes()) {
       return {
         scopes: [...defaultAgentScopes, ...superAgentScopes.scopes],
-        userType: 'Super-agent connecté',
+        userType: "Super-agent connecté",
         isSuperAgent: true,
         agentIsNotVerified: false,
       };
@@ -146,7 +146,7 @@ export class AgentConnected {
       email: this.email,
       familyName: this.familyName,
       firstName: this.firstName,
-      fullName: this.familyName ? `${this.firstName} ${this.familyName}` : '',
+      fullName: this.familyName ? `${this.firstName} ${this.familyName}` : "",
       siret: this.siret,
       ...habilitationLevel,
     };

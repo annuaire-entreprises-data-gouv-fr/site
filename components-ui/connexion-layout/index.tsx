@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react';
-import styles from './styles.module.css';
+import type { PropsWithChildren } from "react";
+import styles from "./styles.module.css";
 
 export const ConnexionSubLayout: React.FC<
   PropsWithChildren<{ img: React.JSX.Element }>

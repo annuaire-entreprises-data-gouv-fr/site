@@ -1,11 +1,11 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import { Metadata } from 'next';
+import type { Metadata } from "next";
+import TextWrapper from "#components-ui/text-wrapper";
 
 export const metadata: Metadata = {
-  title: 'Mentions légales',
-  robots: 'noindex, nofollow',
+  title: "Mentions légales",
+  robots: "noindex, nofollow",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/mentions-legales',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/mentions-legales",
   },
 };
 
@@ -26,8 +26,7 @@ const Mentions = () => (
     <p>Cette plateforme est hébergée par :</p>
     <p>
       OVH
-      <br />
-      2 rue Kellermann
+      <br />2 rue Kellermann
       <br />
       59100 Roubaix
       <br />

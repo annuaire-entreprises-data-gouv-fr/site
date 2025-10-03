@@ -21,7 +21,7 @@ export interface ILandingPage {
 const loadAllLandingPages = () => {
   const landingPages = [] as ILandingPage[];
   const landingPagesFolderContext = require.context(
-    '/data/landing-pages',
+    "/data/landing-pages",
     false,
     /\.yml$/
   );
@@ -30,22 +30,19 @@ const loadAllLandingPages = () => {
 
   keys
     // weirdly context add duplicates - this filter removes them
-    .filter((k: string) => k.indexOf('./') === 0)
+    .filter((k: string) => k.indexOf("./") === 0)
     .forEach((key: string, index: number) => {
-      const slug = key.replace('.yml', '').replace('./', '');
-      //@ts-ignore
+      const slug = key.replace(".yml", "").replace("./", "");
+      //@ts-expect-error
       landingPages.push({ ...values[index], slug });
     });
 
   return landingPages.filter((page) => page.published || false);
 };
 
-export const getAllLandingPages = () => {
-  return allLandingPages;
-};
+export const getAllLandingPages = () => allLandingPages;
 
-export const getLandingPage = (slug: string) => {
-  return allLandingPages.find((landingPage) => landingPage.slug === slug);
-};
+export const getLandingPage = (slug: string) =>
+  allLandingPages.find((landingPage) => landingPage.slug === slug);
 
 const allLandingPages = loadAllLandingPages();

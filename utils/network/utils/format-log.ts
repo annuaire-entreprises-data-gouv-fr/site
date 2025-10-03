@@ -3,6 +3,4 @@ export const formatLog = (
   status: number,
   time = -1,
   method: string
-) => {
-  return `status=${status} time=${time} request=${url} method=${method}`;
-};
+) => `status=${status} time=${time} request=${url} method=${method}`;

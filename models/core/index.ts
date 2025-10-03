@@ -1,7 +1,7 @@
 import {
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPINotResponding,
-} from '#models/api-not-responding';
+} from "#models/api-not-responding";
 
 export function shouldUseInsee<T extends {}>(
   rechercheEntrepriseResponse: T | IAPINotRespondingError,
@@ -9,7 +9,7 @@ export function shouldUseInsee<T extends {}>(
   isEI: (r: T) => boolean,
   hasInconsistencies?: (r: T) => boolean
 ) {
-  if (process.env.INSEE_ENABLED === 'disabled') {
+  if (process.env.INSEE_ENABLED === "disabled") {
     return false;
   }
 
@@ -19,24 +19,20 @@ export function shouldUseInsee<T extends {}>(
 
   if (rechercheEntrepriseFailed) {
     return true;
-  } else {
-    if (isBot) {
-      return false;
-    }
-
-    if (rechercheEntrepriseResponse) {
-      if (
-        hasInconsistencies &&
-        hasInconsistencies(rechercheEntrepriseResponse)
-      ) {
-        return true;
-      }
-
-      if (isEI(rechercheEntrepriseResponse)) {
-        return true;
-      }
-    }
-
+  }
+  if (isBot) {
     return false;
   }
+
+  if (rechercheEntrepriseResponse) {
+    if (hasInconsistencies && hasInconsistencies(rechercheEntrepriseResponse)) {
+      return true;
+    }
+
+    if (isEI(rechercheEntrepriseResponse)) {
+      return true;
+    }
+  }
+
+  return false;
 }

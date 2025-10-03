@@ -1,6 +1,6 @@
-import { Exception } from '#models/exceptions';
-import { extractSirenOrSiretSlugFromUrl, randomId } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
+import { Exception } from "#models/exceptions";
+import { extractSirenOrSiretSlugFromUrl, randomId } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
 
 type ISensitiveLogType = {
   date: string;
@@ -47,28 +47,28 @@ export const sensitiveRequestLogger = (
     const url = new URL(route);
 
     const resource_type = url.pathname
-      .replace(/\d{14}|\d{9}/, '')
-      .replace('//', '/');
+      .replace(/\d{14}|\d{9}/, "")
+      .replace("//", "/");
 
     const resource_id = extractSirenOrSiretSlugFromUrl(url.pathname);
 
-    let log: ISensitiveLogType = {
+    const log: ISensitiveLogType = {
       date: new Date().toISOString(),
       timestamp: Date.now(),
 
       request: {
-        route: route,
+        route,
         id: randomId(),
       },
 
       content: {
-        resource_type: resource_type,
-        resource_id: resource_id,
+        resource_type,
+        resource_id,
       },
 
       // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-url.html
       url: {
-        scheme: (url.protocol.match(/^(https?)/) || ['']).shift() ?? '',
+        scheme: (url.protocol.match(/^(https?)/) || [""]).shift() ?? "",
         domain: url.host,
         path: url.pathname,
         query: url.search,
@@ -77,13 +77,12 @@ export const sensitiveRequestLogger = (
       useCase,
     };
 
-    // eslint-disable-next-line no-console
     console.info(JSON.stringify(log));
   } catch (e) {
     logErrorInSentry(
       new Exception({
-        name: 'SensitiveRequestLoggerFailed',
-        message: 'Error while logging sensitive request',
+        name: "SensitiveRequestLoggerFailed",
+        message: "Error while logging sensitive request",
         cause: e,
         context: {
           details: route,

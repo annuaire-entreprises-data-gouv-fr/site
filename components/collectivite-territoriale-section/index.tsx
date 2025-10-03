@@ -1,15 +1,15 @@
-import FAQLink from '#components-ui/faq-link';
-import { Section } from '#components/section';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ICollectiviteTerritoriale } from '#models/core/types';
-import React from 'react';
+import type React from "react";
+import { Section } from "#components/section";
+import { TwoColumnTable } from "#components/table/simple";
+import FAQLink from "#components-ui/faq-link";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { ICollectiviteTerritoriale } from "#models/core/types";
 
 const CollectiviteTerritorialeSection: React.FC<{
   uniteLegale: ICollectiviteTerritoriale;
 }> = ({ uniteLegale }) => {
   const {
-    colter: { codeColter = '', codeInsee = '', elus = [], niveau = '' },
+    colter: { codeColter = "", codeInsee = "", elus = [], niveau = "" },
   } = uniteLegale;
 
   const data = [
@@ -24,8 +24,8 @@ const CollectiviteTerritorialeSection: React.FC<{
       codeInsee,
     ],
     [
-      'Type',
-      niveau === 'particulier' ? (
+      "Type",
+      niveau === "particulier" ? (
         <FAQLink
           to="https://www.insee.fr/fr/information/3528272"
           tooltipLabel={niveau}
@@ -38,37 +38,37 @@ const CollectiviteTerritorialeSection: React.FC<{
       ),
     ],
     [
-      'Élus',
+      "Élus",
       elus.length > 0 ? (
         <a href={`/dirigeants/${uniteLegale.siren}`}>
           → voir les {elus.length} élu(s)
         </a>
       ) : (
-        ''
+        ""
       ),
     ],
   ];
 
-  const shouldDisplayCollectiviteLink = codeInsee && niveau === 'commune';
+  const shouldDisplayCollectiviteLink = codeInsee && niveau === "commune";
   return (
     <>
       <Section
-        title={`Collectivité territoriale`}
         sources={[
           EAdministration.INSEE,
           EAdministration.MI,
           EAdministration.DINUM,
         ]}
+        title={"Collectivité territoriale"}
       >
         <TwoColumnTable body={data} />
         {shouldDisplayCollectiviteLink && (
           <>
             <br />
-            Retrouvez plus d&apos;informations sur la{' '}
+            Retrouvez plus d&apos;informations sur la{" "}
             <a
-              target="_blank"
               href={`https://collectivite.fr/${codeInsee}`}
               rel="noopener"
+              target="_blank"
             >
               fiche collectivites.fr
             </a>

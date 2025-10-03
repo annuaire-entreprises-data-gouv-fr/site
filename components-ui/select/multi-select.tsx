@@ -1,46 +1,46 @@
-import ClientOnly from '#components/client-only';
-import ReactSelect, { MultiValue, Props } from 'react-select';
-import { ISelectOptions } from './type';
+import ReactSelect, { type MultiValue, type Props } from "react-select";
+import ClientOnly from "#components/client-only";
+import type { ISelectOptions } from "./type";
 
 type MultiSelectProps = {
   defaultValue?: string | string[];
   id: string;
-  instanceId: Props['instanceId'];
+  instanceId: Props["instanceId"];
   name?: string;
   options: ISelectOptions[];
   placeholder?: string;
   onChange?: (values: string[]) => void;
   maxWidth?: string;
-  menuPosition: 'absolute' | 'fixed';
+  menuPosition: "absolute" | "fixed";
 };
 
 export const MultiSelect = ({
-  defaultValue = undefined,
+  defaultValue,
   id,
   instanceId,
   name,
   options,
   placeholder,
   onChange,
-  maxWidth = 'none',
+  maxWidth = "none",
   menuPosition,
 }: MultiSelectProps) => {
   const getDefaultValue = () => {
     if (!defaultValue) {
       return null;
     }
-    if (typeof defaultValue === 'string') {
+    if (typeof defaultValue === "string") {
       return {
         value: defaultValue,
         label: options.find((option) => option.value === defaultValue)?.[
-          'label'
+          "label"
         ],
       };
     }
     if (Array.isArray(defaultValue)) {
       return defaultValue.map((v) => ({
         value: v,
-        label: options.find((option) => option.value === v)?.['label'],
+        label: options.find((option) => option.value === v)?.["label"],
       }));
     }
     return null;
@@ -54,47 +54,47 @@ export const MultiSelect = ({
 
   return (
     <ClientOnly>
-      <div style={{ marginBottom: 16, width: '100%', maxWidth }}>
+      <div style={{ marginBottom: 16, width: "100%", maxWidth }}>
         <ReactSelect
           defaultValue={getDefaultValue()}
           inputId={id}
           instanceId={instanceId}
           isMulti
-          menuPosition={menuPosition}
           menuPlacement="auto"
+          menuPosition={menuPosition}
           name={name}
-          options={options}
-          noOptionsMessage={() => 'Liste vide'}
-          placeholder={placeholder}
+          noOptionsMessage={() => "Liste vide"}
           onChange={handleChange}
+          options={options}
+          placeholder={placeholder}
           styles={{
-            clearIndicator: (base) => ({ ...base, color: '#000' }),
-            placeholder: (base) => ({ ...base, color: '#161616' }),
+            clearIndicator: (base) => ({ ...base, color: "#000" }),
+            placeholder: (base) => ({ ...base, color: "#161616" }),
             control: (baseStyles, state) => ({
               ...baseStyles,
-              boxShadow: '0 !important',
-              outline: state.isFocused ? '2px solid #0476f5' : '',
-              outlineOffset: state.isFocused ? '2px' : '',
-              backgroundColor: '#eeeeee',
-              border: 'none',
-              borderRadius: '0.25rem 0.25rem 0 0',
-              borderBottom: '2px solid black',
-              '&:hover': {
-                borderBottom: '2px solid black',
+              boxShadow: "0 !important",
+              outline: state.isFocused ? "2px solid #0476f5" : "",
+              outlineOffset: state.isFocused ? "2px" : "",
+              backgroundColor: "#eeeeee",
+              border: "none",
+              borderRadius: "0.25rem 0.25rem 0 0",
+              borderBottom: "2px solid black",
+              "&:hover": {
+                borderBottom: "2px solid black",
               },
             }),
             dropdownIndicator: (base) => ({
               ...base,
-              color: 'black',
-              '&:hover': {
-                color: 'black',
+              color: "black",
+              "&:hover": {
+                color: "black",
               },
             }),
             menuPortal: (base) => ({
               ...base,
               zIndex: 2,
             }),
-            multiValue: (base) => ({ ...base, backgroundColor: '#FFF' }),
+            multiValue: (base) => ({ ...base, backgroundColor: "#FFF" }),
           }}
         />
       </div>

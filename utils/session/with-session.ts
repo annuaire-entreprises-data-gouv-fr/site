@@ -1,8 +1,8 @@
-import { ISession } from '#models/authentication/user/session';
-import { IronSession, getIronSession } from 'iron-session';
-import { cookies } from 'next/headers';
-import { NextRequest } from 'next/server';
-import { sessionOptions } from '.';
+import { getIronSession, type IronSession } from "iron-session";
+import { cookies } from "next/headers";
+import type { NextRequest } from "next/server";
+import type { ISession } from "#models/authentication/user/session";
+import { sessionOptions } from ".";
 
 export type IReqWithSession = NextRequest & {
   session: IronSession<ISession>;

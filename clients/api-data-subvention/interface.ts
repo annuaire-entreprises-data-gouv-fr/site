@@ -5,8 +5,8 @@ type ApplicationField<T> = {
   type: string;
 };
 
-type SubventionStatus = 'Accordé' | 'Refusé' | 'Prise en charge' | 'Recevable';
-type SubventionLabel = 'Accordé' | 'Refusé' | 'En instruction';
+type SubventionStatus = "Accordé" | "Refusé" | "Prise en charge" | "Recevable";
+type SubventionLabel = "Accordé" | "Refusé" | "En instruction";
 
 type Contact = {
   email: ApplicationField<string>;
@@ -25,7 +25,7 @@ type Versement = {
   solde: ApplicationField<number>;
   realise: ApplicationField<number>;
   compensation: {
-    'n-1': ApplicationField<number>;
+    "n-1": ApplicationField<number>;
     reversement: ApplicationField<number>;
   };
 };

@@ -17,7 +17,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  content: '';
+  content: "";
   width: 55vw;
   z-index: -1;
   left: calc(-51vw + 50%);

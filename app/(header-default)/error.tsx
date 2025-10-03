@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { ClientErrorExplanations } from '#components/error-explanations';
 import {
-  NextAppError,
+  type NextAppError,
   useLogFatalErrorAppClient,
-} from 'hooks/use-log-fatal-error-app-client';
+} from "hooks/use-log-fatal-error-app-client";
+import { ClientErrorExplanations } from "#components/error-explanations";
 
 export default function ErrorPage({ error }: { error: NextAppError }) {
   useLogFatalErrorAppClient(error);

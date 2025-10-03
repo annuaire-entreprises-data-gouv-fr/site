@@ -1,44 +1,44 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const shouldNotIndex = process.env.INDEXING_ENABLED !== 'enabled';
+  const shouldNotIndex = process.env.INDEXING_ENABLED !== "enabled";
 
   if (shouldNotIndex) {
     return {
       rules: {
-        userAgent: '*',
-        disallow: '/',
+        userAgent: "*",
+        disallow: "/",
       },
     };
   }
   return {
     rules: {
-      userAgent: '*',
+      userAgent: "*",
       allow: [
-        '/',
-        '/entreprise/',
-        '/administration/',
-        '/faq/',
-        '/definitions/',
-        '/departements/',
-        '/etablissement/',
-        '/lp/',
-        '/documents/',
-        '/donnees-financieres/',
-        '/annonces/',
-        '/labels-certificats/',
+        "/",
+        "/entreprise/",
+        "/administration/",
+        "/faq/",
+        "/definitions/",
+        "/departements/",
+        "/etablissement/",
+        "/lp/",
+        "/documents/",
+        "/donnees-financieres/",
+        "/annonces/",
+        "/labels-certificats/",
         // Allowed but disallowed in the meta tag
-        '/justificatif-immatriculation-pdf/',
-        '/rechercher/carte',
-        '/rechercher/',
-        '/dirigeants/',
-        '/personne/',
-        '/divers/',
-        '/erreur/',
-        '/formulaire/',
+        "/justificatif-immatriculation-pdf/",
+        "/rechercher/carte",
+        "/rechercher/",
+        "/dirigeants/",
+        "/personne/",
+        "/divers/",
+        "/erreur/",
+        "/formulaire/",
       ],
-      disallow: ['/admin/', '/api/'],
+      disallow: ["/admin/", "/api/"],
     },
-    sitemap: 'https://annuaire-entreprises.data.gouv.fr/sitemap.xml',
+    sitemap: "https://annuaire-entreprises.data.gouv.fr/sitemap.xml",
   };
 }

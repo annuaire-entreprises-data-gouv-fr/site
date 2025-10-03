@@ -1,13 +1,13 @@
-import { clientRNEImmatriculation } from '#clients/api-proxy/rne';
-import { HttpNotFound } from '#clients/exceptions';
-import { clientDirigeantsRechercheEntreprise } from '#clients/recherche-entreprise/dirigeants';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { clientRNEImmatriculation } from "#clients/api-proxy/rne";
+import { HttpNotFound } from "#clients/exceptions";
+import { clientDirigeantsRechercheEntreprise } from "#clients/recherche-entreprise/dirigeants";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { Siren, verifySiren } from '#utils/helpers';
-import { IDirigeantsWithMetadata } from './types';
+  type IAPINotRespondingError,
+} from "#models/api-not-responding";
+import { type Siren, verifySiren } from "#utils/helpers";
+import type { IDirigeantsWithMetadata } from "./types";
 
 const fallback = async (siren: Siren) => {
   const dirigeants = await clientDirigeantsRechercheEntreprise(siren);

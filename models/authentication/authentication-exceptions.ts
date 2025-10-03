@@ -1,9 +1,9 @@
-import { Exception } from '#models/exceptions';
+import { Exception } from "#models/exceptions";
 
 export class AgentConnectionFailedException extends Exception {
   constructor(args: { cause?: any; context?: { slug: string } }) {
     super({
-      name: 'AgentConnectionFailed',
+      name: "AgentConnectionFailed",
       ...args,
     });
   }
@@ -12,7 +12,7 @@ export class AgentConnectionFailedException extends Exception {
 export class AgentNotVerifiedException extends Exception {
   constructor(args: { cause?: any; context?: { slug: string } }) {
     super({
-      name: 'AgentNotVerifiedException',
+      name: "AgentNotVerifiedException",
       ...args,
     });
   }
@@ -21,7 +21,7 @@ export class AgentNotVerifiedException extends Exception {
 export class PrestataireException extends Exception {
   constructor(details: string) {
     super({
-      name: 'PrestataireException',
+      name: "PrestataireException",
       context: {
         details,
       },
@@ -32,7 +32,7 @@ export class PrestataireException extends Exception {
 export class CanRequestAuthorizationException extends Exception {
   constructor(codeJuridique: string, siren: string) {
     super({
-      name: 'OrganisationCanRequestAuthorizationException',
+      name: "OrganisationCanRequestAuthorizationException",
       context: {
         details: codeJuridique,
         siren,
@@ -44,7 +44,7 @@ export class CanRequestAuthorizationException extends Exception {
 export class NeedASiretException extends Exception {
   constructor(message: string, userId: string) {
     super({
-      name: 'OrganisationNeedASiretException',
+      name: "OrganisationNeedASiretException",
       message,
       context: {
         details: userId,

@@ -1,17 +1,15 @@
-import { ServerErrorExplanations } from '#components/error-explanations';
-import Meta from '#components/meta/meta-client';
-import { Exception } from '#models/exceptions';
-import { logFatalErrorInSentry } from '#utils/sentry';
-import { NextPageWithLayout } from './_app';
+import { ServerErrorExplanations } from "#components/error-explanations";
+import Meta from "#components/meta/meta-client";
+import { Exception } from "#models/exceptions";
+import { logFatalErrorInSentry } from "#utils/sentry";
+import type { NextPageWithLayout } from "./_app";
 
-const ServerError: NextPageWithLayout = () => {
-  return (
-    <>
-      <Meta title="Cette page ne fonctionne pas" noIndex={true} />
-      <ServerErrorExplanations />
-    </>
-  );
-};
+const ServerError: NextPageWithLayout = () => (
+  <>
+    <Meta noIndex={true} title="Cette page ne fonctionne pas" />
+    <ServerErrorExplanations />
+  </>
+);
 
 ServerError.getInitialProps = (...args) => {
   // log as JSON in order to be parse by Kibana
@@ -20,7 +18,7 @@ ServerError.getInitialProps = (...args) => {
     const { res, err } = args[0];
     logFatalErrorInSentry(
       new Exception({
-        name: 'ServerErrorPageDisplayed',
+        name: "ServerErrorPageDisplayed",
         cause: err,
         context: {
           page: res?.req.url,
@@ -28,10 +26,10 @@ ServerError.getInitialProps = (...args) => {
       })
     );
   } catch (e) {
-    console.error('Failed to parse NextPageRequest, returning 500');
+    console.error("Failed to parse NextPageRequest, returning 500");
     logFatalErrorInSentry(
       new Exception({
-        name: 'ServerErrorPageDisplayed',
+        name: "ServerErrorPageDisplayed",
         cause: e,
         context: {},
       })

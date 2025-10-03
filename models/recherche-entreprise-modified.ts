@@ -1,6 +1,6 @@
-import { clientRechercheEntrepriseLastModified } from '#clients/recherche-entreprise/last-modified';
-import logErrorInSentry from '#utils/sentry';
-import { FetchRechercheEntrepriseException } from './core/types';
+import { clientRechercheEntrepriseLastModified } from "#clients/recherche-entreprise/last-modified";
+import logErrorInSentry from "#utils/sentry";
+import { FetchRechercheEntrepriseException } from "./core/types";
 
 export interface IRechercheEntrepriseSourcesLastModified {
   rne: string | null;
@@ -19,7 +19,7 @@ export const getRechercheEntrepriseSourcesLastModified =
       logErrorInSentry(
         new FetchRechercheEntrepriseException({
           cause: e,
-          message: 'Could not fetch sources’s last modified dates',
+          message: "Could not fetch sources’s last modified dates",
         })
       );
       return { rne: null, idcc: null };

@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 
 function generateAsciiGraph(data) {
   // Create a frequency map to count occurrences of each value
@@ -15,34 +15,34 @@ function generateAsciiGraph(data) {
   const counts = Object.values(frequencyMap);
   const rowCount = Math.max(...counts) + 2;
 
-  let graph = '';
+  let graph = "";
 
-  graph += '┌';
+  graph += "┌";
 
   for (let i = 0; i < 10; i++) {
-    graph += '───';
+    graph += "───";
   }
   graph += `┐ ${rowCount}\n`;
 
   for (let row = 0; row < rowCount - 1; row++) {
-    graph += '│';
+    graph += "│";
     for (let i = 1; i <= 10; i++) {
       if (frequencyMap[i] >= rowCount - row - 1) {
-        graph += ' ⎕ ';
+        graph += " ⎕ ";
       } else {
-        graph += '   ';
+        graph += "   ";
       }
     }
-    graph += '│\n';
+    graph += "│\n";
   }
-  graph += '└';
+  graph += "└";
 
   for (let i = 0; i < 10; i++) {
-    graph += '───';
+    graph += "───";
   }
-  graph += '┘ 0\n';
+  graph += "┘ 0\n";
 
-  graph += '  ' + Object.keys(frequencyMap).join('  ');
+  graph += "  " + Object.keys(frequencyMap).join("  ");
 
   return graph;
 }
@@ -54,7 +54,7 @@ async function fetchFeedbacks() {
     },
   });
   if (!response.ok) {
-    console.error('This is very disapointing');
+    console.error("This is very disapointing");
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   const data = await response.json();
@@ -67,7 +67,7 @@ function getYesterday() {
 
   return `${yesterday.getFullYear()}-${String(
     yesterday.getMonth() + 1
-  ).padStart(2, '0')}-${String(yesterday.getDate()).padStart(2, '0')}`;
+  ).padStart(2, "0")}-${String(yesterday.getDate()).padStart(2, "0")}`;
 }
 
 function generateReport(data) {
@@ -82,18 +82,18 @@ function generateReport(data) {
       return;
     }
 
-    const mood = parseInt(record.mood, 10);
+    const mood = Number.parseInt(record.mood, 10);
 
     if (mood === -1 || isNaN(mood)) {
       return;
     }
 
     let userType = record.visitorType;
-    if (userType === 'Non renseigné') {
-      userType = 'Autre';
+    if (userType === "Non renseigné") {
+      userType = "Autre";
     }
-    if (userType.startsWith('Agent') || userType.startsWith('Super-agent')) {
-      userType = 'Agent public';
+    if (userType.startsWith("Agent") || userType.startsWith("Super-agent")) {
+      userType = "Agent public";
     }
     const { text, email } = record;
 
@@ -125,11 +125,11 @@ ${generateAsciiGraph(moods)}
 ${feedbacks
   .map(
     (f) =>
-      `|${String(f.mood).padStart(2, ' ')}| ${f.email} | ${
+      `|${String(f.mood).padStart(2, " ")}| ${f.email} | ${
         f.userType
-      } | "${f.text.replaceAll('\n', '').replaceAll('\r', '')}" |`
+      } | "${f.text.replaceAll("\n", "").replaceAll("\r", "")}" |`
   )
-  .join('\n')}
+  .join("\n")}
   `;
 
   return report;
@@ -141,9 +141,9 @@ async function run() {
 
   const post = await fetch(process.env.HOOK, {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    method: 'post',
+    method: "post",
     body: JSON.stringify({ text }),
   });
   if (!post.ok) {

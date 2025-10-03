@@ -1,14 +1,16 @@
-'use client';
+"use client";
 
-import React, { MouseEventHandler, PropsWithChildren } from 'react';
+import type React from "react";
+import type { MouseEventHandler, PropsWithChildren } from "react";
+
 type IProps = {
   role?: string;
   small?: boolean;
   to?: string;
-  type?: 'button' | 'submit' | null;
+  type?: "button" | "submit" | null;
   disabled?: boolean;
   alt?: boolean;
-  target?: '_blank';
+  target?: "_blank";
   ariaLabel?: string;
   nofollow?: boolean;
   onClick?: MouseEventHandler;
@@ -23,40 +25,40 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   small = false,
   alt = false,
   ariaLabel,
-  target = '',
+  target = "",
   nofollow = false,
   onClick = () => {},
 }) => (
   <>
-    {!to ? (
-      <button
-        role={role}
-        type={type || 'submit'}
-        onClick={onClick}
-        disabled={disabled}
-        aria-label={ariaLabel}
-        className={`fr-btn ${alt ? ' fr-btn--secondary ' : ''} ${
-          small ? ' fr-btn--sm ' : ''
-        }`}
-      >
-        {children}
-      </button>
-    ) : (
+    {to ? (
       <a
-        role={role}
         aria-label={ariaLabel}
-        target={target}
-        rel={
-          (target === '_blank' ? 'noopener noreferrer' : '') +
-          (nofollow ? 'nofollow' : '')
-        }
-        href={(to || '').indexOf('@') > -1 ? `mailto:${to}` : to}
-        className={`fr-btn ${alt ? ' fr-btn--secondary ' : ''} ${
-          small ? ' fr-btn--sm ' : ''
+        className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
+          small ? " fr-btn--sm " : ""
         }`}
+        href={(to || "").indexOf("@") > -1 ? `mailto:${to}` : to}
+        rel={
+          (target === "_blank" ? "noopener noreferrer" : "") +
+          (nofollow ? "nofollow" : "")
+        }
+        role={role}
+        target={target}
       >
         {children}
       </a>
+    ) : (
+      <button
+        aria-label={ariaLabel}
+        className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
+          small ? " fr-btn--sm " : ""
+        }`}
+        disabled={disabled}
+        onClick={onClick}
+        role={role}
+        type={type || "submit"}
+      >
+        {children}
+      </button>
     )}
   </>
 );

@@ -1,5 +1,5 @@
 export type IGeoElement = {
   label: string;
   value: string;
-  type: 'insee' | 'cp' | 'dep' | 'reg' | 'epci';
+  type: "insee" | "cp" | "dep" | "reg" | "epci";
 };

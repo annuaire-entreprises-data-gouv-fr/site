@@ -71,7 +71,7 @@ span.search-filter-label:hover {
 }
 
 .container:before {
-  content: ' ';
+  content: " ";
   position: absolute;
   bottom: 100%;
   /* At the bottom of the tooltip */

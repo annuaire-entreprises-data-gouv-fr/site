@@ -1,7 +1,7 @@
-import constants from '#models/constants';
-import { estNonDiffusibleStrict } from './diffusion';
-import { estActif } from './etat-administratif';
-import { IEtablissement } from './types';
+import constants from "#models/constants";
+import { estNonDiffusibleStrict } from "./diffusion";
+import { estActif } from "./etat-administratif";
+import type { IEtablissement } from "./types";
 
 export interface IEtablissementsList {
   etablissements: {

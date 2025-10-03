@@ -1,6 +1,5 @@
-import { HttpResponse, HttpResponseResolver } from 'msw';
-import apiBio from '../../fixtures/api-bio.json';
+import { HttpResponse, type HttpResponseResolver } from "msw";
+import apiBio from "../../fixtures/api-bio.json" with { type: "json" };
 
-export const apiBioHandler: HttpResponseResolver = ({ request }) => {
-  return HttpResponse.json(apiBio);
-};
+export const apiBioHandler: HttpResponseResolver = ({ request }) =>
+  HttpResponse.json(apiBio);

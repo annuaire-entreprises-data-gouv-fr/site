@@ -1,10 +1,10 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import { IDataAssociation } from '#models/association/types';
-import constants from '#models/constants';
-import { IdRna, Siren, formatAdresse } from '#utils/helpers';
-import { clientAPIProxy } from '../client';
-import { IAssociationResponse } from './types';
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import type { IDataAssociation } from "#models/association/types";
+import constants from "#models/constants";
+import { formatAdresse, type IdRna, type Siren } from "#utils/helpers";
+import { clientAPIProxy } from "../client";
+import type { IAssociationResponse } from "./types";
 
 /**
  * Association through the API proxy
@@ -32,43 +32,43 @@ const mapToDomainObject = (
   siretSiege: string
 ): IDataAssociation => {
   const { agrement = [] } = association;
-  const { objet = '', lib_famille1 = '' } = association.activites || {};
+  const { objet = "", lib_famille1 = "" } = association.activites || {};
   const {
     id_rna,
-    nom = '',
-    id_ex = '',
-    lib_forme_juridique = '',
-    date_pub_jo = '',
-    date_creat = '',
-    date_dissolution = '',
+    nom = "",
+    id_ex = "",
+    lib_forme_juridique = "",
+    date_pub_jo = "",
+    date_creat = "",
+    date_dissolution = "",
     eligibilite_cec = false,
-    regime = '',
+    regime = "",
     util_publique = false,
     impots_commerciaux,
   } = association.identite || {};
 
   const {
-    num_voie = '',
-    type_voie = '',
-    cp = '',
-    commune = '',
-    voie = '',
+    num_voie = "",
+    type_voie = "",
+    cp = "",
+    commune = "",
+    voie = "",
   } = association?.coordonnees?.adresse_siege || {};
 
   const {
-    commune: communeGestion = '',
-    cp: cpGestion = '',
-    pays: paysGestion = '',
-    voie: voieGestion = '',
+    commune: communeGestion = "",
+    cp: cpGestion = "",
+    pays: paysGestion = "",
+    voie: voieGestion = "",
   } = association?.coordonnees?.adresse_gestion || {};
   const {
-    telephone = '',
-    courriel = '',
-    site_web = '',
+    telephone = "",
+    courriel = "",
+    site_web = "",
   } = association?.coordonnees || {};
 
-  const protocol = (site_web || '').indexOf('http') === 0 ? '' : 'https://';
-  const siteWeb = site_web ? `${protocol}${site_web}` : '';
+  const protocol = (site_web || "").indexOf("http") === 0 ? "" : "https://";
+  const siteWeb = site_web ? `${protocol}${site_web}` : "";
 
   return {
     exId: id_ex,
@@ -116,16 +116,14 @@ const mapToDomainObject = (
           charges = 0,
           resultat = 0,
           annee,
-        }) => {
-          return {
-            charges,
-            resultat,
-            subv,
-            dons,
-            produits,
-            year: annee,
-          };
-        }
+        }) => ({
+          charges,
+          resultat,
+          subv,
+          dons,
+          produits,
+          year: annee,
+        })
       )
       .sort((c, b) => c.year - b.year),
   };

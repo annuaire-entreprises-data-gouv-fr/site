@@ -1,6 +1,7 @@
-import { HttpResponse, HttpResponseResolver } from 'msw';
-import certifications from '../../fixtures/certifications.json';
-
-export const certificationsHandler: HttpResponseResolver = ({ request }) => {
-  return HttpResponse.json(certifications);
+import { HttpResponse, type HttpResponseResolver } from "msw";
+import certifications from "../../fixtures/certifications.json" with {
+  type: "json",
 };
+
+export const certificationsHandler: HttpResponseResolver = ({ request }) =>
+  HttpResponse.json(certifications);

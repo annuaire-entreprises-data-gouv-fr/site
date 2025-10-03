@@ -1,11 +1,11 @@
-import React from 'react';
-import styles from './styleFull.module.css';
+import type React from "react";
+import styles from "./styleFull.module.css";
 
 interface ISectionProps {
   head: (string | React.JSX.Element)[];
   body: any[][];
   id?: string;
-  verticalAlign?: 'top' | 'middle' | 'bottom';
+  verticalAlign?: "top" | "middle" | "bottom";
   columnWidths?: string[];
 }
 
@@ -13,11 +13,11 @@ export const FullTable: React.FC<ISectionProps> = ({
   id,
   head,
   body,
-  verticalAlign = 'middle',
+  verticalAlign = "middle",
   columnWidths,
 }) => (
   <>
-    <table id={id} className={styles.fullTable}>
+    <table className={styles.fullTable} id={id}>
       <thead className={styles.head}>
         <tr>
           {head.map((cell, index) => (
@@ -36,19 +36,19 @@ export const FullTable: React.FC<ISectionProps> = ({
       </thead>
       <tbody>
         {body.map((row, bodyIndex) => (
-          <tr key={'row-' + bodyIndex} className={styles.row}>
+          <tr className={styles.row} key={"row-" + bodyIndex}>
             {row.map((cell, rowIndex) => (
               <td
-                key={'cell-' + rowIndex}
+                className={styles.cell}
+                key={"cell-" + rowIndex}
                 style={{
                   verticalAlign,
                   ...(columnWidths?.[rowIndex]
                     ? { width: columnWidths[rowIndex] }
                     : {}),
                 }}
-                className={styles.cell}
               >
-                {cell == null || cell === '' ? null : (
+                {cell == null || cell === "" ? null : (
                   <strong aria-hidden className={styles.mobile}>
                     {head[rowIndex]}&nbsp;:&nbsp;
                   </strong>

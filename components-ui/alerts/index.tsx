@@ -1,14 +1,15 @@
-import { IIconsSlug } from '#components-ui/icon';
-import { Icon } from '#components-ui/icon/wrapper';
-import constants from '#models/constants';
-import React, { PropsWithChildren } from 'react';
-import styles from './styles.module.css';
+import type React from "react";
+import type { PropsWithChildren } from "react";
+import type { IIconsSlug } from "#components-ui/icon";
+import { Icon } from "#components-ui/icon/wrapper";
+import constants from "#models/constants";
+import styles from "./styles.module.css";
 
 export const colors = {
-  info: ['#0078f3', '#e5f3ff'],
-  success: ['#18753c', '#dffee6'],
-  error: ['#ce0500', '#fff4f4'],
-  warning: ['#ff9c00', '#fff3e0'],
+  info: ["#0078f3", "#e5f3ff"],
+  success: ["#18753c", "#dffee6"],
+  error: ["#ce0500", "#fff4f4"],
+  warning: ["#ff9c00", "#fff3e0"],
   protected: [constants.colors.espaceAgent, constants.colors.espaceAgentPastel],
 };
 
@@ -25,7 +26,7 @@ const Alert: React.FC<
     style={{
       borderLeft: `4px solid ${color1}`,
       backgroundColor: color2,
-      width: full ? '100%' : 'auto',
+      width: full ? "100%" : "auto",
     }}
   >
     <div>
@@ -40,9 +41,9 @@ export const ProtectedData: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   children,
 }) => (
   <Alert
-    full={full}
     color1={colors.protected[0]}
     color2={colors.protected[1]}
+    full={full}
     icon="lockFill"
   >
     {children}
@@ -54,9 +55,9 @@ export const Success: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   children,
 }) => (
   <Alert
-    full={full}
     color1={colors.success[0]}
     color2={colors.success[1]}
+    full={full}
     icon="successFill"
   >
     {children}
@@ -68,9 +69,9 @@ export const Warning: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   children,
 }) => (
   <Alert
-    full={full}
     color1={colors.warning[0]}
     color2={colors.warning[1]}
+    full={full}
     icon="alertFill"
   >
     {children}
@@ -82,9 +83,9 @@ export const Error: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   children,
 }) => (
   <Alert
-    full={full}
     color1={colors.error[0]}
     color2={colors.error[1]}
+    full={full}
     icon="errorFill"
   >
     {children}
@@ -96,9 +97,9 @@ export const Info: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   children,
 }) => (
   <Alert
-    full={full}
     color1={colors.info[0]}
     color2={colors.info[1]}
+    full={full}
     icon="information"
   >
     {children}

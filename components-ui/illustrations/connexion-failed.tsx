@@ -1,9 +1,9 @@
 const connexionFailedPicture = (
   <svg
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 4947 4947"
     width="100%"
+    xmlns="http://www.w3.org/2000/svg"
   >
     <path
       d="M2730.2 4285.4c-36.5 0-72.4-7.8-105.8-22.7-33.5-14.9-73.6-34.2-118.9-58.4a2311.4 2311.4 0 0 0 313.2 6.8c49.5-2.2 99-6.6 148-13.2-42.8 23.3-86.4 45-130.8 64.8a257.4 257.4 0 0 1-105.7 22.7Zm1154.6-1068.8a907.9 907.9 0 0 0-228-160.7c142.5-325.7 203.8-705.7 182.3-1135.4a67 67 0 0 0-37.4-57l-1043.3-506.1a64.5 64.5 0 0 0-56.3 0l-1043.4 506a67.1 67.1 0 0 0-37.4 57.3c-12.2 243.1 2.1 470.3 42.8 680.8l-194.3 343.6c-30.3-95-56.2-196.2-76.3-303.7a2920.2 2920.2 0 0 1-46.7-418.4c-2.5-62.4-3.4-126.9-2.4-192.8 1-56.8 3.2-114.7 6.9-174a270.2 270.2 0 0 1 79.1-174.9 262.7 262.7 0 0 1 70.7-50l313.6-152.2 37.6-18.2 457.6-222 64-31 243-117.9a258 258 0 0 1 226 0l207.8 100.8 35.2 17.1 174.1 84.4 244 118.5 407.4 197.5 47.6 23.1a268.6 268.6 0 0 1 149.7 225c35 550.9-57.2 985.1-207.9 1324.8-5.3 11.9-10.7 24-16.3 35.7"
@@ -25,8 +25,8 @@ const connexionFailedPicture = (
       d="m2235.2 2882.9 3.3 3.4a72.2 72.2 0 0 0 103.5 0l370-377.7a24 24 0 0 1 34.6 0L3114 2886a72.2 72.2 0 0 0 103.5.3l.2-.2 3.2-3.3a75.9 75.9 0 0 0 .2-105.7l-370.6-380.5a25.4 25.4 0 0 1 0-35.1l370.6-380.7a76 76 0 0 0-.2-105.5l-3.1-3.3a72 72 0 0 0-103.5 0l-.4.4-367.3 379.4a24 24 0 0 1-34.5.2l-.1-.2-369.8-379.8a72.1 72.1 0 0 0-103.6-.3l-.1.2-3.3 3.3a75.9 75.9 0 0 0-.1 105.7l370.5 380.6a25.4 25.4 0 0 1 0 35l-370.5 380.7a76 76 0 0 0 .1 105.6Z"
       fill="#fff"
       stroke="#fff"
-      strokeWidth="6"
       strokeMiterlimit="10"
+      strokeWidth="6"
     />
     <path
       d="M4139.4 3900h-1l-26.8-1.8-773.8-50.8L3069 3865l-53.1-144.3h-.6l-1.6-4.5c43.2-17.1 74-35.6 80.7-54.5 6.2-167.5-34.7-512.4-30.8-622.8.6-18 2.4-29.6 5.8-33.4 21.3-24.2 88.7-39.2 131.8-42.4h1.1c8.3 0 15 6.6 15.4 15l.2 3.8c5.9 221.2 11.2 442.5 15.8 663.8 0 8.3 6.6 14.4 14.6 14.4h9.7a14 14 0 0 0 10.7-4.3c2.7-3 4.2-6.4 4-10.6l-21.4-672.6-1.3-41.8a46.2 46.2 0 0 1 34.7-46.7h.4a218 218 0 0 1 105.2 0 46 46 0 0 1 34.6 46.6l-1.3 39.2-21.7 675.2c0 4 1.3 7.8 4.2 10.8a14 14 0 0 0 10.5 4.2h9.8c8 0 14.5-6 14.6-14.3 1.9-90.5 12.4-569.3 15.9-667v-.4c.2-8.6 7-15.3 15.4-15.3h1.1c43.2 3.3 110.3 18.2 131.7 42.4 3 3.4 5 13.6 5.6 28.9 5.2 105.1-37 457.5-30.9 627.3 26.2 74.3 420.2 140.5 487.5 151.3h1.3c2 0 3.4-.6 5-2 1.9-1.6 1.4-4 1.4-6.6v-.3a34.5 34.5 0 0 1 34.4-33.5l4.4.3c16.5 2 29.6 15 31.7 32l7.5 81.7c.8 7.8-5 14.7-12.6 15.5h-1.2.3Zm-616.6-882.5a29 29 0 0 0-16 4.8 27.3 27.3 0 0 0-12.4 21.2l-34.5 663.9a25 25 0 0 0 22.7 25.8h.4c7 .9 13.8-1.1 19.3-5.4a24.3 24.3 0 0 0 9.2-17.4l47.6-661c1-12.4-7-23.9-19.3-27.9l-8-2.5c-3-1-6-1.4-9-1.4v-.1Zm-370.2 0c-3 0-6 .5-9 1.4l-8 2.6c-12 3.5-20.1 15.1-19.4 27.9l47.6 660.9c.4 6.8 3.8 12.9 9.1 17.3a26.2 26.2 0 0 0 19.3 5.5h.6a25 25 0 0 0 22.6-25.9l-34.5-663.9a27 27 0 0 0-12.4-21.2 29 29 0 0 0-16-4.8l.1.2Zm184-113.6c-14.4 0-28.4 6.9-28.4 15.3v796c0 8.4 14 15.2 28.3 15.2 14.4 0 28.3-6.8 28.3-15.2v-796c0-8.4-14-15.3-28.3-15.3ZM2919.3 3462.3 2906 3427h1l-70.5-188.3c31.6-33.5 71.2-65 111.5-65 5.7 0 11.4.5 17 2a46 46 0 0 1 31.4 26c33.7 66.8-33 143.5-58.1 200.4-8.5 19-13.3 40-19.2 60.2"
@@ -100,100 +100,100 @@ const connexionFailedPicture = (
     />
     <defs>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="a"
         x1="2362.4"
-        y1="1333.1"
         x2="3371.7"
+        y1="1333.1"
         y2="3759"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="b"
         x1="2753.4"
-        y1="4007.8"
         x2="3610.2"
+        y1="4007.8"
         y2="2897.7"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="c"
         x1="3260.7"
-        y1="4399.4"
         x2="4117.5"
+        y1="4399.4"
         y2="3289.3"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="d"
         x1="3406"
-        y1="2861.6"
         x2="3247.6"
+        y1="2861.6"
         y2="3739.3"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="e"
         x1="3576.9"
-        y1="2892.5"
         x2="3418.6"
+        y1="2892.5"
         y2="3770.2"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="f"
         x1="3251"
-        y1="2833.7"
         x2="3092.7"
+        y1="2833.7"
         y2="3711.4"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="g"
         x1="2497.1"
-        y1="715.4"
         x2="1306"
+        y1="715.4"
         y2="5150.9"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="h"
         x1="2434.2"
-        y1="3761.4"
         x2="3291"
+        y1="3761.4"
         y2="2651.3"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />
       </linearGradient>
       <linearGradient
+        gradientUnits="userSpaceOnUse"
         id="i"
         x1="2513.2"
-        y1="3822.4"
         x2="3370"
+        y1="3822.4"
         y2="2712.3"
-        gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#1A3080" />
         <stop offset="1" stopColor="#1A3080" />

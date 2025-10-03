@@ -1,12 +1,12 @@
-import { Metadata } from 'next';
-import ExportCsv from './export-csv';
+import type { Metadata } from "next";
+import ExportCsv from "./export-csv";
 
 export const metadata: Metadata = {
-  title: 'Générer une liste CSV d‘entreprises | L’Annuaire des Entreprises',
+  title: "Générer une liste CSV d‘entreprises | L’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/export-sirene',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/export-sirene",
   },
-  robots: 'index, follow',
+  robots: "index, follow",
 };
 
 export default function ExportCSV() {

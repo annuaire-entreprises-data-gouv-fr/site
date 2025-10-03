@@ -43,13 +43,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
+          "liste_rge": ["1911"],
           "liste_uai": null,
           "longitude": "-0.626794",
           "nom_commercial": null,
@@ -97,13 +93,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "5021"
-            ],
+            "liste_idcc": ["5021"],
             "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
+            "liste_rge": ["1911"],
             "liste_uai": null,
             "longitude": "-0.626794",
             "nom_commercial": null,
@@ -572,10 +564,7 @@
             "niveau": "epci"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "2149",
-            "5021"
-          ],
+          "liste_idcc": ["2149", "5021"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -638,14 +627,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "9999",
-            "5021"
-          ],
+          "liste_idcc": ["9999", "5021"],
           "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
+          "liste_rge": ["1911"],
           "liste_uai": null,
           "longitude": "3.085147",
           "nom_commercial": null,
@@ -693,14 +677,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "9999",
-              "5021"
-            ],
+            "liste_idcc": ["9999", "5021"],
             "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
+            "liste_rge": ["1911"],
             "liste_uai": null,
             "longitude": "3.085147",
             "nom_commercial": null,
@@ -1155,10 +1134,7 @@
             "niveau": "departement"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "5021",
-            "9999"
-          ],
+          "liste_idcc": ["5021", "9999"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -1219,17 +1195,11 @@
           "libelle_pays_etranger": null,
           "libelle_voie": "DE LA MARQUETTE",
           "liste_enseignes": null,
-          "liste_finess": [
-            "310796198"
-          ],
+          "liste_finess": ["310796198"],
           "liste_id_bio": null,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
+          "liste_rge": ["1911"],
           "liste_uai": null,
           "longitude": "1.436756",
           "nom_commercial": null,
@@ -1275,17 +1245,11 @@
             "latitude": "43.615663",
             "libelle_commune": "TOULOUSE",
             "liste_enseignes": null,
-            "liste_finess": [
-              "310796198"
-            ],
+            "liste_finess": ["310796198"],
             "liste_id_bio": null,
-            "liste_idcc": [
-              "5021"
-            ],
+            "liste_idcc": ["5021"],
             "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
+            "liste_rge": ["1911"],
             "liste_uai": null,
             "longitude": "1.436756",
             "nom_commercial": null,
@@ -1677,9 +1641,7 @@
             "niveau": "departement"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -1689,9 +1651,7 @@
           "est_finess": true,
           "est_organisme_formation": true,
           "est_qualiopi": true,
-          "liste_id_organisme_formation": [
-            "7331P005131"
-          ],
+          "liste_id_organisme_formation": ["7331P005131"],
           "est_rge": true,
           "est_service_public": true,
           "est_siae": false,
@@ -1744,13 +1704,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
+          "liste_rge": ["1911"],
           "liste_uai": null,
           "longitude": "2.357944",
           "nom_commercial": null,
@@ -1798,13 +1754,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "5021"
-            ],
+            "liste_idcc": ["5021"],
             "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
+            "liste_rge": ["1911"],
             "liste_uai": null,
             "longitude": "2.357944",
             "nom_commercial": null,
@@ -2721,10 +2673,7 @@
             "niveau": "epci"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "5021",
-            "9999"
-          ],
+          "liste_idcc": ["5021", "9999"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -2787,13 +2736,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
+          "liste_rge": ["1911"],
           "liste_uai": null,
           "longitude": "-1.025321",
           "nom_commercial": null,
@@ -2841,13 +2786,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "5021"
-            ],
+            "liste_idcc": ["5021"],
             "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
+            "liste_rge": ["1911"],
             "liste_uai": null,
             "longitude": "-1.025321",
             "nom_commercial": null,
@@ -3302,9 +3243,7 @@
             "niveau": "epci"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -3367,13 +3306,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
+          "liste_rge": ["1911"],
           "liste_uai": null,
           "longitude": "0.160605",
           "nom_commercial": null,
@@ -3421,13 +3356,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "5021"
-            ],
+            "liste_idcc": ["5021"],
             "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
+            "liste_rge": ["1911"],
             "liste_uai": null,
             "longitude": "0.160605",
             "nom_commercial": null,
@@ -3924,10 +3855,7 @@
             "niveau": "epci"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "1486",
-            "5021"
-          ],
+          "liste_idcc": ["1486", "5021"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -3990,13 +3918,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
+          "liste_rge": ["1911"],
           "liste_uai": null,
           "longitude": "2.02648",
           "nom_commercial": null,
@@ -4044,13 +3968,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "5021"
-            ],
+            "liste_idcc": ["5021"],
             "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
+            "liste_rge": ["1911"],
             "liste_uai": null,
             "longitude": "2.02648",
             "nom_commercial": null,
@@ -4435,9 +4355,7 @@
             "niveau": "epci"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -4498,17 +4416,11 @@
           "libelle_pays_etranger": null,
           "libelle_voie": "MARIE CURIE",
           "liste_enseignes": null,
-          "liste_finess": [
-            "440050896"
-          ],
+          "liste_finess": ["440050896"],
           "liste_id_bio": null,
-          "liste_idcc": [
-            "9999"
-          ],
+          "liste_idcc": ["9999"],
           "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
+          "liste_rge": ["1911"],
           "liste_uai": null,
           "longitude": "-1.646571",
           "nom_commercial": null,
@@ -4554,17 +4466,11 @@
             "latitude": "47.374716",
             "libelle_commune": "GRANDCHAMP-DES-FONTAINES",
             "liste_enseignes": null,
-            "liste_finess": [
-              "440050896"
-            ],
+            "liste_finess": ["440050896"],
             "liste_id_bio": null,
-            "liste_idcc": [
-              "9999"
-            ],
+            "liste_idcc": ["9999"],
             "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
+            "liste_rge": ["1911"],
             "liste_uai": null,
             "longitude": "-1.646571",
             "nom_commercial": null,
@@ -4837,9 +4743,7 @@
             "niveau": "epci"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "9999"
-          ],
+          "liste_idcc": ["9999"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -4902,13 +4806,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
+          "liste_rge": ["1911"],
           "liste_uai": null,
           "longitude": "-1.303525",
           "nom_commercial": null,
@@ -4956,13 +4856,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "5021"
-            ],
+            "liste_idcc": ["5021"],
             "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
+            "liste_rge": ["1911"],
             "liste_uai": null,
             "longitude": "-1.303525",
             "nom_commercial": null,
@@ -5193,10 +5089,7 @@
             "niveau": "epci"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "9999",
-            "5021"
-          ],
+          "liste_idcc": ["9999", "5021"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -5259,13 +5152,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "liste_id_organisme_formation": null,
-          "liste_rge": [
-            "1911"
-          ],
+          "liste_rge": ["1911"],
           "liste_uai": null,
           "longitude": "1.747963",
           "nom_commercial": null,
@@ -5313,13 +5202,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "5021"
-            ],
+            "liste_idcc": ["5021"],
             "liste_id_organisme_formation": null,
-            "liste_rge": [
-              "1911"
-            ],
+            "liste_rge": ["1911"],
             "liste_uai": null,
             "longitude": "1.747963",
             "nom_commercial": null,
@@ -5648,9 +5533,7 @@
             "niveau": "epci"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "5021"
-          ],
+          "liste_idcc": ["5021"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,

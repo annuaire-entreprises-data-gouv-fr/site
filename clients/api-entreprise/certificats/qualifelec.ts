@@ -1,7 +1,7 @@
-import routes from '#clients/routes';
-import { IQualifelec } from '#models/espace-agent/certificats/qualifelec';
-import { Siret } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import type { IQualifelec } from "#models/espace-agent/certificats/qualifelec";
+import type { Siret } from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseQualifelec = IAPIEntrepriseResponse<
   Array<{
@@ -51,15 +51,14 @@ export type IAPIEntrepriseQualifelec = IAPIEntrepriseResponse<
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseQualifelec = async (siret: Siret) => {
-  return await clientAPIEntreprise<IAPIEntrepriseQualifelec, IQualifelec>(
+export const clientApiEntrepriseQualifelec = async (siret: Siret) =>
+  await clientAPIEntreprise<IAPIEntrepriseQualifelec, IQualifelec>(
     routes.apiEntreprise.certifications.qualifelec(siret),
     mapToDomainObject
   );
-};
 
-const mapToDomainObject = (response: IAPIEntrepriseQualifelec): IQualifelec => {
-  return response.data.map((item) => ({
+const mapToDomainObject = (response: IAPIEntrepriseQualifelec): IQualifelec =>
+  response.data.map((item) => ({
     documentUrl: item.data.document_url,
     numero: item.data.numero,
     rge: item.data.rge,
@@ -97,4 +96,3 @@ const mapToDomainObject = (response: IAPIEntrepriseQualifelec): IQualifelec => {
       dateFin: item.data.assurance_decennale.date_fin,
     },
   }));
-};

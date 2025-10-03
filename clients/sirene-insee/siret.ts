@@ -1,21 +1,24 @@
-import { HttpNotFound, HttpServerError } from '#clients/exceptions';
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { estActif } from '#models/core/etat-administratif';
-import { IEtablissement, createDefaultEtablissement } from '#models/core/types';
+import { HttpNotFound, HttpServerError } from "#clients/exceptions";
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import { estActif } from "#models/core/etat-administratif";
 import {
-  Siret,
+  createDefaultEtablissement,
+  type IEtablissement,
+} from "#models/core/types";
+import {
   agregateTripleFields,
   extractSirenFromSiret,
   formatAdresse,
-} from '#utils/helpers';
-import { libelleFromCodeNAF } from '#utils/helpers/formatting/labels';
-import { inseeClientGet } from '.';
+  type Siret,
+} from "#utils/helpers";
+import { libelleFromCodeNAF } from "#utils/helpers/formatting/labels";
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
-} from '../../utils/helpers/insee-variables';
+} from "../../utils/helpers/insee-variables";
+import { inseeClientGet } from ".";
 
 type IInseeEtablissementResponse = {
   etablissement: IInseeEtablissement;
@@ -102,7 +105,7 @@ export const clientAllEtablissementsInsee = async (
 
   const { header, etablissements } =
     await inseeClientGet<IInseeEtablissementsResponse>(
-      routes.sireneInsee.getBySiret(''),
+      routes.sireneInsee.getBySiret(""),
       {
         params: {
           q: `siren:${siren}`,
@@ -140,7 +143,7 @@ export const clientEtablissementInsee = async (
       return mapEtablissementToDomainObject(etablissements[0], siret);
     }
     throw new HttpServerError(
-      'INSEE returns multiple siret for one etablissement'
+      "INSEE returns multiple siret for one etablissement"
     );
   }
   return mapEtablissementToDomainObject(etablissement, siret);
@@ -155,7 +158,7 @@ const mapEtablissementToDomainObject = (
   // as sirene.fr doesnot display it, we dont either
 
   if (!inseeEtablissement) {
-    throw new HttpNotFound('Not Found');
+    throw new HttpNotFound("Not Found");
   }
 
   const {
@@ -187,10 +190,10 @@ const mapEtablissementToDomainObject = (
       enseigne1Etablissement,
       enseigne2Etablissement,
       enseigne3Etablissement
-    ) || '';
+    ) || "";
 
   // get last state change to obtain closing date
-  let lastStateChange =
+  const lastStateChange =
     periodesEtablissement.find(
       (periode) => periode.changementEtatAdministratifEtablissement === true
     ) || periodesEtablissement[0];
@@ -205,9 +208,9 @@ const mapEtablissementToDomainObject = (
     siret
   );
 
-  const dateFermeture = !estActif({ etatAdministratif })
-    ? lastStateChange.dateDebut
-    : null;
+  const dateFermeture = estActif({ etatAdministratif })
+    ? null
+    : lastStateChange.dateDebut;
 
   const defaultEtablissement = createDefaultEtablissement();
 
@@ -248,9 +251,9 @@ const mapEtablissementToDomainObject = (
     ? `${
         denominationUsuelleEtablissement
           ? `${denominationUsuelleEtablissement}, `
-          : ''
+          : ""
       }${adresse}`
-    : '';
+    : "";
 
   return {
     ...defaultEtablissement,
@@ -259,7 +262,7 @@ const mapEtablissementToDomainObject = (
     oldSiret: oldSiret || siret,
     nic,
     enseigne,
-    denomination: denominationUsuelleEtablissement || '',
+    denomination: denominationUsuelleEtablissement || "",
     dateCreation: parseDateCreationInsee(dateCreationEtablissement),
     activitePrincipale: activitePrincipaleEtablissement,
     libelleActivitePrincipale: libelleFromCodeNAF(

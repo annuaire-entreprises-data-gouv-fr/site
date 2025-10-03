@@ -1,25 +1,25 @@
-import { INSEE } from '#components/administrations';
+import { INSEE } from "#components/administrations";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { ISTATUTDIFFUSION, estDiffusible } from '#models/core/diffusion';
-import { Info, ProtectedData } from '../alerts';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import { estDiffusible, ISTATUTDIFFUSION } from "#models/core/diffusion";
+import { Info, ProtectedData } from "../alerts";
 
 const DefaultNonDiffusibleAlert = () => (
   <Info full>
     Cette structure est non-diffusible. Cela signifie que certaines informations
     ne sont pas publiquement accessibles.
     <br />
-    Si c’est votre entreprise et que vous souhaitez vous la rendre diffusible,{' '}
+    Si c’est votre entreprise et que vous souhaitez vous la rendre diffusible,{" "}
     <a href="https://statut-diffusion-sirene.insee.fr/">
       vous pouvez en faire la demande sur le site de l’Insee.
     </a>
     <br />
     <br />
     Si vous êtes <strong>agent public</strong>, vous pouvez consulter ces
-    informations en vous connectant à{' '}
+    informations en vous connectant à{" "}
     <a href="/lp/agent-public">l’espace agent public</a>.
   </Info>
 );
@@ -34,7 +34,7 @@ const ProtectedSirenAlert = () => (
     <br />
     <br />
     Si vous êtes <strong>agent public</strong>, vous pouvez consulter ces
-    informations en vous connectant à{' '}
+    informations en vous connectant à{" "}
     <a href="/lp/agent-public">l’espace agent public</a>.
   </Info>
 );
@@ -63,7 +63,7 @@ export default function NonDiffusibleAlert({
     return (
       <ProtectedData full>
         Les informations de cette structure ne sont pas accessibles au grand
-        public mais vous pouvez voir ses informations grâce à votre compte{' '}
+        public mais vous pouvez voir ses informations grâce à votre compte{" "}
         <strong>agent-public</strong>.
       </ProtectedData>
     );

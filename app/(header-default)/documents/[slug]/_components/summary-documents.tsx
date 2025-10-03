@@ -1,11 +1,11 @@
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
 
 export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
-  <nav role="navigation" aria-labelledby="document-summary-title">
+  <nav aria-labelledby="document-summary-title" role="navigation">
     <strong id="document-summary-title">Documents disponibles :</strong>
     <ul>
       <li>

@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import routes from '#clients/routes';
-import { Info } from '#components-ui/alerts';
-import ButtonLink from '#components-ui/button';
-import ShowMore from '#components-ui/show-more';
-import { DataSectionClient } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale, isServicePublic } from '#models/core/types';
-import { IDocumentsRNE } from '#models/rne/types';
-import { formatDateLong } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import routes from "#clients/routes";
+import { DataSectionClient } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { Info } from "#components-ui/alerts";
+import ButtonLink from "#components-ui/button";
+import ShowMore from "#components-ui/show-more";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { ISession } from "#models/authentication/user/session";
+import { type IUniteLegale, isServicePublic } from "#models/core/types";
+import type { IDocumentsRNE } from "#models/rne/types";
+import { formatDateLong } from "#utils/helpers";
 
 export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
@@ -26,11 +26,9 @@ export const AgentActesRNE: React.FC<{
 
   return (
     <DataSectionClient
-      title="Actes et statuts"
+      data={documentsRne}
       id="actes"
       isProtected
-      sources={[EAdministration.INPI]}
-      data={documentsRne}
       notFoundInfo={
         isServicePublic(uniteLegale) ? (
           <Info full>
@@ -40,6 +38,8 @@ export const AgentActesRNE: React.FC<{
           <>Cette structure n’est pas immatriculée au RNE.</>
         )
       }
+      sources={[EAdministration.INPI]}
+      title="Actes et statuts"
     >
       {(documentsRne) =>
         documentsRne.actes?.length === 0 ? (
@@ -67,12 +67,11 @@ export const AgentActesRNE: React.FC<{
 };
 
 type IActesTableProps = {
-  actes: IDocumentsRNE['actes'];
+  actes: IDocumentsRNE["actes"];
 };
 export function ActesTable({ actes }: IActesTableProps) {
   return (
     <FullTable
-      head={['Date de dépôt', 'Acte(s) contenu(s)', 'Lien']}
       body={actes.map((a) => [
         formatDateLong(a.dateDepot),
         <ul>
@@ -81,7 +80,7 @@ export function ActesTable({ actes }: IActesTableProps) {
               <strong>{nom}</strong>
               {label && (
                 <>
-                  {' - '}
+                  {" - "}
                   <i>{label}</i>
                 </>
               )}
@@ -89,14 +88,15 @@ export function ActesTable({ actes }: IActesTableProps) {
           ))}
         </ul>,
         <ButtonLink
-          target="_blank"
           alt
           small
+          target="_blank"
           to={`${routes.espaceAgent.documents.download}${a.id}?type=acte`}
         >
           Télécharger
         </ButtonLink>,
       ])}
+      head={["Date de dépôt", "Acte(s) contenu(s)", "Lien"]}
     />
   );
 }

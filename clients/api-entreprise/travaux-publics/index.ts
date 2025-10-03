@@ -1,8 +1,8 @@
-import routes from '#clients/routes';
-import { IDocumentDownloader } from '#models/espace-agent/travaux-publics';
-import { UseCase } from '#models/use-cases';
-import { Siren, Siret } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import type { IDocumentDownloader } from "#models/espace-agent/travaux-publics";
+import type { UseCase } from "#models/use-cases";
+import type { Siren, Siret } from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseDocumentTravauxPublics = IAPIEntrepriseResponse<{
   document_url: string;
@@ -15,13 +15,12 @@ export type IAPIEntrepriseDocumentTravauxPublics = IAPIEntrepriseResponse<{
 export const clientApiEntrepriseCibtp = async (
   siret: Siret,
   useCase?: UseCase
-) => {
-  return await clientAPIEntreprise(
+) =>
+  await clientAPIEntreprise(
     routes.apiEntreprise.certifications.cibtp(siret),
     mapToDomainObject,
     { useCase }
   );
-};
 
 /**
  * GET document Pro BTP
@@ -29,13 +28,12 @@ export const clientApiEntrepriseCibtp = async (
 export const clientApiEntrepriseProbtp = async (
   siret: Siret,
   useCase?: UseCase
-) => {
-  return await clientAPIEntreprise(
+) =>
+  await clientAPIEntreprise(
     routes.apiEntreprise.certifications.probtp(siret),
     mapToDomainObject,
     { useCase }
   );
-};
 
 /**
  * GET document CNETP
@@ -43,13 +41,12 @@ export const clientApiEntrepriseProbtp = async (
 export const clientApiEntrepriseCnetp = async (
   siren: Siren,
   useCase?: UseCase
-) => {
-  return await clientAPIEntreprise(
+) =>
+  await clientAPIEntreprise(
     routes.apiEntreprise.certifications.cnetp(siren),
     mapToDomainObject,
     { useCase }
   );
-};
 
 /**
  * GET document FNTP
@@ -57,18 +54,15 @@ export const clientApiEntrepriseCnetp = async (
 export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
   siren: Siren,
   useCase?: UseCase
-) => {
-  return await clientAPIEntreprise(
+) =>
+  await clientAPIEntreprise(
     routes.apiEntreprise.carteProfessionnelleTravauxPublics(siren),
     mapToDomainObject,
     { useCase }
   );
-};
 
 const mapToDomainObject = (
   response: IAPIEntrepriseDocumentTravauxPublics
-): IDocumentDownloader => {
-  return {
-    url: response.data.document_url,
-  };
-};
+): IDocumentDownloader => ({
+  url: response.data.document_url,
+});

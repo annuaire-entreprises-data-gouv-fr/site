@@ -20,7 +20,7 @@ export type IResult = {
   date_mise_a_jour_rne: string;
   dirigeants: IDirigeant[];
   etat_administratif: string;
-  statut_diffusion: 'O' | 'P';
+  statut_diffusion: "O" | "P";
   nature_juridique: string;
   nom_raison_sociale: string;
   section_activite_principale: string;
@@ -106,7 +106,7 @@ export type IComplements = {
   convention_collective_renseignee: boolean;
   est_entrepreneur_individuel: boolean;
   est_entrepreneur_spectacle: boolean;
-  statut_entrepreneur_spectacle: 'invalide' | 'valide';
+  statut_entrepreneur_spectacle: "invalide" | "valide";
   est_bio: boolean;
   est_ess: boolean;
   est_organisme_formation: boolean;

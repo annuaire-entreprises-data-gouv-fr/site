@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useFetchFinancesSociete } from "hooks";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
 import {
   AsyncDataSectionClient,
   mergeDataSources,
-} from '#components/section/data-section/client';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { IChiffreAffairesProtected } from '#models/espace-agent/chiffre-affaires';
+} from "#components/section/data-section/client";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import type { IChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
 import {
   createDefaultIndicateursFinanciersWithDGFiP,
-  IIndicateursFinanciersSociete,
-} from '#models/finances-societe/types';
-import { UseCase } from '#models/use-cases';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useFetchFinancesSociete } from 'hooks';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { useMemo } from 'react';
-import { FinancesSocieteInnerSection } from './inner-section';
+  type IIndicateursFinanciersSociete,
+} from "#models/finances-societe/types";
+import type { UseCase } from "#models/use-cases";
+import { FinancesSocieteInnerSection } from "./inner-section";
 
 export function ProtectedFinancesSocieteSection({
   uniteLegale,
@@ -43,35 +43,35 @@ export function ProtectedFinancesSocieteSection({
     params
   );
 
-  const mergedFinancesSociete = useMemo(() => {
-    return mergeDataSources(
-      financesSociete,
-      chiffreAffairesProtected,
-      mergeFinancesSocieteWithChiffreAffaires
-    );
-  }, [financesSociete, chiffreAffairesProtected]);
+  const mergedFinancesSociete = useMemo(
+    () =>
+      mergeDataSources(
+        financesSociete,
+        chiffreAffairesProtected,
+        mergeFinancesSocieteWithChiffreAffaires
+      ),
+    [financesSociete, chiffreAffairesProtected]
+  );
 
   return (
     <AsyncDataSectionClient
-      title="Indicateurs financiers"
+      data={mergedFinancesSociete}
       id="indicateurs-financiers"
+      isProtected={true}
+      notFoundInfo="Aucun indicateur financier n'a été retrouvé pour cette structure."
       sources={[
         EAdministration.MEF,
         EAdministration.DGFIP,
         EAdministration.INPI,
       ]}
-      data={mergedFinancesSociete}
-      isProtected={true}
-      notFoundInfo="Aucun indicateur financier n'a été retrouvé pour cette structure."
+      title="Indicateurs financiers"
     >
-      {(mergedFinancesSociete) => {
-        return (
-          <FinancesSocieteInnerSection
-            financesSociete={mergedFinancesSociete}
-            session={session}
-          />
-        );
-      }}
+      {(mergedFinancesSociete) => (
+        <FinancesSocieteInnerSection
+          financesSociete={mergedFinancesSociete}
+          session={session}
+        />
+      )}
     </AsyncDataSectionClient>
   );
 }
@@ -87,7 +87,7 @@ const mergeFinancesSocieteWithChiffreAffaires = (
 
   indicateurs.forEach((i) => {
     // it seems that CADGFIP does not have bilans consolidés
-    if (i.type === 'K') {
+    if (i.type === "K") {
       return;
     }
     const existingCADGFiP = chiffreAffairesProtected?.find(
@@ -101,13 +101,13 @@ const mergeFinancesSocieteWithChiffreAffaires = (
   if (chiffreAffairesProtected) {
     chiffreAffairesProtected.forEach((c) => {
       const existingIndicateursOpenData = financesSociete?.indicateurs.find(
-        (i) => i.year === c.year && i.type !== 'K'
+        (i) => i.year === c.year && i.type !== "K"
       );
       if (!existingIndicateursOpenData) {
         indicateurs.push(
           createDefaultIndicateursFinanciersWithDGFiP(
             c.year,
-            'inconnu',
+            "inconnu",
             c.dateFinExercice,
             c.chiffreAffaires
           )
@@ -120,7 +120,7 @@ const mergeFinancesSocieteWithChiffreAffaires = (
 
   return {
     // default in case of no open data
-    lastModified: financesSociete?.lastModified ?? '',
+    lastModified: financesSociete?.lastModified ?? "",
     hasBilanConsolide: financesSociete?.hasBilanConsolide ?? false,
     hasCADGFiP: true,
     indicateurs,

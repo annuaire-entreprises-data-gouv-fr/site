@@ -1,15 +1,12 @@
-import { clientAlimConfiance } from '#clients/api-data-gouv/alim-confiance';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale } from '#models/core/types';
-import { FetchRessourceException } from '#models/exceptions';
-import { verifySiren } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { useFetchExternalData } from './use-fetch-data';
+import { clientAlimConfiance } from "#clients/api-data-gouv/alim-confiance";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { IUniteLegale } from "#models/core/types";
+import { FetchRessourceException } from "#models/exceptions";
+import { verifySiren } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { useFetchExternalData } from "./use-fetch-data";
 
-export function useFetchAlimConfiance(
-  uniteLegale: IUniteLegale,
-  page: number = 1
-) {
+export function useFetchAlimConfiance(uniteLegale: IUniteLegale, page = 1) {
   return useFetchExternalData(
     {
       fetchData: () =>
@@ -20,7 +17,7 @@ export function useFetchAlimConfiance(
           return;
         }
         const exception = new FetchRessourceException({
-          ressource: 'Alim Confiance',
+          ressource: "Alim Confiance",
           administration: EAdministration.MAA,
           cause: e,
           context: {

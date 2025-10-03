@@ -40,20 +40,13 @@
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
           "libelle_voie": "HOTEL VILLE ESP LIBERATION",
-          "liste_enseignes": [
-            "MAIRIE"
-          ],
+          "liste_enseignes": ["MAIRIE"],
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "5021",
-            "5003"
-          ],
+          "liste_idcc": ["5021", "5003"],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
-          "liste_uai": [
-            "0755710Z"
-          ],
+          "liste_uai": ["0755710Z"],
           "longitude": "2.351838",
           "nom_commercial": null,
           "numero_voie": "4",
@@ -1239,13 +1232,7 @@
             "niveau": "particulier"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "5003",
-            "5021",
-            "5022",
-            "1043",
-            "9999"
-          ],
+          "liste_idcc": ["5003", "5021", "5022", "1043", "9999"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,

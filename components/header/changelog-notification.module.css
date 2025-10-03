@@ -1,5 +1,5 @@
 .changelogNotification::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 5px;
   right: 2px;

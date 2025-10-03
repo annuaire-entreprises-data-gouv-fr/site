@@ -1,18 +1,18 @@
-'use client';
-import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
-import { Loader } from '#components-ui/loader';
-import { CopyPaste } from '#components/table/copy-paste';
-import { isAPINotResponding } from '#models/api-not-responding';
-import { ISession } from '#models/authentication/user/session';
+"use client";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { CopyPaste } from "#components/table/copy-paste";
+import { Icon } from "#components-ui/icon/wrapper";
+import InformationTooltip from "#components-ui/information-tooltip";
+import { Loader } from "#components-ui/loader";
+import { isAPINotResponding } from "#models/api-not-responding";
+import type { ISession } from "#models/authentication/user/session";
 import {
   hasFetchError,
   isDataLoading,
   isUnauthorized,
-} from '#models/data-fetching';
-import { Siret, formatSiret } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+} from "#models/data-fetching";
+import { formatSiret, type Siret } from "#utils/helpers";
 
 type IProps = {
   siret: Siret;
@@ -37,7 +37,7 @@ export default function EORICell({ siret, session }: IProps) {
   if (hasFetchError(eoriValidation) || isUnauthorized(eoriValidation)) {
     return (
       <InformationTooltip
-        tabIndex={0}
+        horizontalOrientation="left"
         label={
           <>
             Nous n’avons pas pu controler la validité du numéro EORI à cause
@@ -45,10 +45,10 @@ export default function EORICell({ siret, session }: IProps) {
             page, ou revenir plus tard.
           </>
         }
-        horizontalOrientation="left"
         left="5px"
+        tabIndex={0}
       >
-        <Icon slug="errorFill" color="#df0a00">
+        <Icon color="#df0a00" slug="errorFill">
           <em>Erreur de connexion</em>
         </Icon>
       </InformationTooltip>
@@ -58,7 +58,7 @@ export default function EORICell({ siret, session }: IProps) {
   if (isAPINotResponding(eoriValidation)) {
     return (
       <InformationTooltip
-        tabIndex={0}
+        horizontalOrientation="left"
         label={
           <>
             Nous n’avons pas pu controler la validité du numéro EORI car le
@@ -66,10 +66,10 @@ export default function EORICell({ siret, session }: IProps) {
             tard pour vérifier si cette structure possède un numéro EORI
           </>
         }
-        horizontalOrientation="left"
         left="5px"
+        tabIndex={0}
       >
-        <Icon slug="errorFill" color="#df0a00">
+        <Icon color="#df0a00" slug="errorFill">
           <em>Service indisponible</em>
         </Icon>
       </InformationTooltip>
@@ -77,7 +77,7 @@ export default function EORICell({ siret, session }: IProps) {
   }
   return eoriValidation.isValid ? (
     <CopyPaste label="eori" shouldRemoveSpace>
-      {'FR ' + formatSiret(eoriValidation.eori)}
+      {"FR " + formatSiret(eoriValidation.eori)}
     </CopyPaste>
   ) : (
     <i>Pas de n° EORI valide</i>

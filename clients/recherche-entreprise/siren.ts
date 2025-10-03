@@ -1,7 +1,7 @@
-import { HttpNotFound } from '#clients/exceptions';
-import { IUniteLegale } from '#models/core/types';
-import { Siren } from '#utils/helpers';
-import clientSearchRechercheEntreprise from '.';
+import { HttpNotFound } from "#clients/exceptions";
+import type { IUniteLegale } from "#models/core/types";
+import type { Siren } from "#utils/helpers";
+import clientSearchRechercheEntreprise from ".";
 
 export const clientUniteLegaleRechercheEntreprise = async (
   siren: Siren,

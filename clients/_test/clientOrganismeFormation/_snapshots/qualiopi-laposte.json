@@ -1,7 +1,5 @@
 {
-  "args": [
-    "356000000"
-  ],
+  "args": ["356000000"],
   "result": {
     "records": [
       {
@@ -12,9 +10,7 @@
         "specialite": "Informatique, traitement de l'information, réseaux de transmission des données/Développement des capacités comportementales et relationnelles",
         "stagiaires": 1270,
         "formateurs": 166,
-        "certifications": [
-          "Actions de formations"
-        ]
+        "certifications": ["Actions de formations"]
       },
       {
         "nda": "11755762075",
@@ -24,9 +20,7 @@
         "specialite": "Spécialités plutitechnologiques, mécanique-électricité/Ressources humaines, gestion du personnel, gestion de l'emploi",
         "stagiaires": 107,
         "formateurs": 77,
-        "certifications": [
-          "Actions de formations"
-        ]
+        "certifications": ["Actions de formations"]
       }
     ],
     "qualiopiCertified": true,

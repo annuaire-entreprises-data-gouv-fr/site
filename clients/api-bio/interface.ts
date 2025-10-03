@@ -78,10 +78,10 @@ export type Activite = {
 export type Certificat = {
   organisme: string;
   etatCertification?:
-    | 'ARRETEE'
-    | 'ENGAGEE'
-    | 'NON ENGAGEE'
-    | 'SUSPENDUE'
+    | "ARRETEE"
+    | "ENGAGEE"
+    | "NON ENGAGEE"
+    | "SUSPENDUE"
     | null;
   dateSuspension?: string;
   dateArret?: string;

@@ -1,15 +1,15 @@
-import { INPI, INSEE } from '#components/administrations';
-import MatomoEvent from '#components/matomo-event';
-import Meta from '#components/meta/meta-client';
+import type { GetServerSideProps } from "next";
+import type { NextPageWithLayout } from "pages/_app";
+import { INPI, INSEE } from "#components/administrations";
+import MatomoEvent from "#components/matomo-event";
+import Meta from "#components/meta/meta-client";
 import {
   formatIntFr,
   formatSiret,
   isLuhnValid,
   isSiren,
   isSiret,
-} from '#utils/helpers';
-import { GetServerSideProps } from 'next';
-import { NextPageWithLayout } from 'pages/_app';
+} from "#utils/helpers";
 
 type SirenOrSiretNotFoundPageProps = {
   slug?: string;
@@ -17,16 +17,16 @@ type SirenOrSiretNotFoundPageProps = {
 
 const SirenOrSiretNotFoundPage: NextPageWithLayout<
   SirenOrSiretNotFoundPageProps
-> = ({ slug = '' }) => {
+> = ({ slug = "" }) => {
   const slugIsSiren = isSiren(slug);
-  const type = slugIsSiren ? 'SIREN' : 'SIRET';
+  const type = slugIsSiren ? "SIREN" : "SIRET";
   const formatted = slugIsSiren ? formatIntFr(slug) : formatSiret(slug);
 
   if (isLuhnValid(slug)) {
     return (
       <>
-        <Meta title="Numéro d’identification introuvable" noIndex={true} />
-        <MatomoEvent category="error" action="sirenOrSiretNotFound" name="" />
+        <Meta noIndex={true} title="Numéro d’identification introuvable" />
+        <MatomoEvent action="sirenOrSiretNotFound" category="error" name="" />
         <h1>
           Le numéro {type} “{formatted}” est introuvable
         </h1>
@@ -39,11 +39,11 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
           <p>Il existe plusieurs explications possibles :</p>
           <ul>
             <li>
-              Vous avez peut-être commis une erreur en tapant votre numéro{' '}
+              Vous avez peut-être commis une erreur en tapant votre numéro{" "}
               {type}.
             </li>
             <li>
-              Ce numéro fait peut-être référence à une entreprise{' '}
+              Ce numéro fait peut-être référence à une entreprise{" "}
               <a href="/faq">non-diffusible</a>.
             </li>
             <li>
@@ -59,57 +59,56 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
         </div>
       </>
     );
-  } else {
-    return (
-      <>
-        <Meta title="Numéro d’identification invalide" noIndex={true} />
-        <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
-        <h1>
-          Le numéro {type} “{formatted}” est invalide
-        </h1>
-        <div>
-          <p>
-            Nous n’avons pas retrouvé ce numéro {type} dans les registres
-            officiels (<INPI />, <INSEE />
-            ).
-          </p>
-          <p>
-            De plus, ce numéro <strong>ne respecte pas</strong>{' '}
-            <a
-              href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              l’algorithme de vérification
-            </a>{' '}
-            des numéros {type}. En conséquence, nous vous invitons à la plus
-            grande vigilance,{' '}
-            <strong>car il peut s’agir d’un numéro frauduleux</strong>&nbsp;:
-          </p>
-          <ul>
-            <li>
-              Vérifiez que vous n’avez pas commis de faute de frappe en
-              recopiant le numéro.
-            </li>
-            <li>
-              Vérifiez ce numéro auprès de l’organisme ou l’entreprise qui vous
-              l’a transmis.
-            </li>
-          </ul>
-        </div>
-      </>
-    );
   }
+  return (
+    <>
+      <Meta noIndex={true} title="Numéro d’identification invalide" />
+      <MatomoEvent action="sirenOrSiretInvalid" category="error" name="" />
+      <h1>
+        Le numéro {type} “{formatted}” est invalide
+      </h1>
+      <div>
+        <p>
+          Nous n’avons pas retrouvé ce numéro {type} dans les registres
+          officiels (<INPI />, <INSEE />
+          ).
+        </p>
+        <p>
+          De plus, ce numéro <strong>ne respecte pas</strong>{" "}
+          <a
+            href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            l’algorithme de vérification
+          </a>{" "}
+          des numéros {type}. En conséquence, nous vous invitons à la plus
+          grande vigilance,{" "}
+          <strong>car il peut s’agir d’un numéro frauduleux</strong>&nbsp;:
+        </p>
+        <ul>
+          <li>
+            Vérifiez que vous n’avez pas commis de faute de frappe en recopiant
+            le numéro.
+          </li>
+          <li>
+            Vérifiez ce numéro auprès de l’organisme ou l’entreprise qui vous
+            l’a transmis.
+          </li>
+        </ul>
+      </div>
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   context.res.statusCode = 404;
-  const slug = (context?.params?.slug || '') as string;
+  const slug = (context?.params?.slug || "") as string;
 
   if (!isSiren(slug) && !isSiret(slug)) {
     return {
       redirect: {
-        destination: '/404',
+        destination: "/404",
         permanent: false,
       },
     };

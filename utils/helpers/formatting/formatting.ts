@@ -1,8 +1,8 @@
-import { InternalError } from '#models/exceptions';
-import { libelleFromTypeVoie } from '#utils/helpers/formatting/labels';
-import logErrorInSentry from '#utils/sentry';
+import { InternalError } from "#models/exceptions";
+import { libelleFromTypeVoie } from "#utils/helpers/formatting/labels";
+import logErrorInSentry from "#utils/sentry";
 
-const timeZone = 'UTC';
+const timeZone = "UTC";
 
 /**
  * Wrapper that ensure every formatter is safe to run
@@ -15,13 +15,13 @@ const safe =
     try {
       return castAndFormat.apply(null, args);
     } catch (e: any) {
-      let argsAsString = '';
+      let argsAsString = "";
       try {
         argsAsString = args.toString();
       } catch {}
       logErrorInSentry(
         new InternalError({
-          message: 'Formatting error',
+          message: "Formatting error",
           cause: e,
           context: {
             details: argsAsString,
@@ -34,23 +34,23 @@ const safe =
   };
 
 const castDate = (date: string | Date) =>
-  typeof date === 'string' ? new Date(date) : date;
+  typeof date === "string" ? new Date(date) : date;
 
 const longDateOptions: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+  year: "numeric",
+  month: "long",
+  day: "numeric",
   timeZone,
 };
 
 const longDatePartial: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'long',
+  year: "numeric",
+  month: "long",
   timeZone,
 };
 
 const yearOption: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
+  year: "numeric",
   timeZone,
 };
 
@@ -60,29 +60,30 @@ const yearOption: Intl.DateTimeFormatOptions = {
  * @param digits number of digits
  * @returns
  */
+// biome-ignore lint/style/noInferrableTypes: needed for the safe function inference
 export const formatPercentage = safe((value: string, digits: number = 1) => {
-  let number = parseFloat(value);
+  const number = Number.parseFloat(value);
   if (!number) {
-    return undefined;
+    return;
   }
 
-  return parseFloat(value).toFixed(digits) + '%';
+  return Number.parseFloat(value).toFixed(digits) + "%";
 });
 
 export const formatCurrency = safe(
   (value: string | number | undefined | null) => {
-    const number = parseInt(value + '', 10);
+    const number = Number.parseInt(value + "", 10);
     if (!number && number !== 0) {
       return value as string;
     }
 
-    const unitlist = ['€', 'K €', 'M €', 'Mds €'];
+    const unitlist = ["€", "K €", "M €", "Mds €"];
     const sign = Math.sign(number);
 
     const orderOfMagnitude = Math.floor(
       (Math.abs(number).toString().length - 1) / 3
     );
-    const magnitude = Math.pow(1000, orderOfMagnitude);
+    const magnitude = 1000 ** orderOfMagnitude;
     const roundedValue = Math.floor(Math.abs(number / magnitude) * 10) / 10;
 
     return `${sign * roundedValue} ${unitlist[orderOfMagnitude]}`;
@@ -92,33 +93,33 @@ export const formatCurrency = safe(
 export const formatDateYear = safe(
   (date: string | Date): string | undefined => {
     if (!date) {
-      return undefined;
+      return;
     }
-    return new Intl.DateTimeFormat('fr-FR', yearOption).format(castDate(date));
+    return new Intl.DateTimeFormat("fr-FR", yearOption).format(castDate(date));
   }
 );
 
 export const formatDatePartial = safe((date: string | Date | undefined) => {
   if (!date) {
-    return undefined;
+    return;
   }
-  return new Intl.DateTimeFormat('fr-FR', longDatePartial).format(
+  return new Intl.DateTimeFormat("fr-FR", longDatePartial).format(
     castDate(date)
   );
 });
 
 export const formatDateLong = safe((date: string | Date) => {
   if (!date) {
-    return undefined;
+    return;
   }
-  return new Intl.DateTimeFormat('fr-FR', longDateOptions).format(
+  return new Intl.DateTimeFormat("fr-FR", longDateOptions).format(
     castDate(date)
   );
 });
 
 export const formatDate = safe((date: string | Date | undefined) =>
   date
-    ? new Intl.DateTimeFormat('fr-FR', { timeZone }).format(castDate(date))
+    ? new Intl.DateTimeFormat("fr-FR", { timeZone }).format(castDate(date))
     : undefined
 );
 
@@ -129,11 +130,11 @@ export const formatDate = safe((date: string | Date | undefined) =>
  * @returns [dmin, dmax]
  */
 export const formatMonthIntervalFromPartialDate = safe((dPartial: string) => {
-  const [yyyy, mm] = dPartial.split('-');
+  const [yyyy, mm] = dPartial.split("-");
 
   const lastDayOfMonth = new Date(
-    parseInt(yyyy, 10),
-    parseInt(mm, 10),
+    Number.parseInt(yyyy, 10),
+    Number.parseInt(mm, 10),
     0
   ).getDate();
 
@@ -147,8 +148,8 @@ export const formatMonthIntervalFromPartialDate = safe((dPartial: string) => {
  * @returns Date
  */
 export const getDateFromYYYYMM = safe((dPartial: string) => {
-  const yyyy = parseInt(dPartial.slice(0, 4), 10);
-  const mm = parseInt(dPartial.slice(4, 6), 10);
+  const yyyy = Number.parseInt(dPartial.slice(0, 4), 10);
+  const mm = Number.parseInt(dPartial.slice(4, 6), 10);
 
   const date = new Date(yyyy, mm, 1);
   return date;
@@ -161,11 +162,11 @@ export const convertDateToAge = safe((d: string) => {
   const ageMilliseconds = Date.now() - new Date(d).getTime();
 
   if (isNaN(ageMilliseconds)) {
-    return '';
+    return "";
   }
 
   // this is an approximation of age
-  const age = Math.floor(ageMilliseconds / 31557600000);
+  const age = Math.floor(ageMilliseconds / 31_557_600_000);
   return age;
 });
 
@@ -179,10 +180,10 @@ export const formatAge = safe((date: string | Date) => {
 
   if (monthDiff >= 12) {
     const yearAge = Math.round(monthDiff / 12);
-    return `${yearAge} an${yearAge >= 2 ? 's' : ''}`;
+    return `${yearAge} an${yearAge >= 2 ? "s" : ""}`;
   }
   if (monthDiff === 0) {
-    return undefined;
+    return;
   }
   return `${monthDiff} mois`;
 });
@@ -193,19 +194,21 @@ export const capitalize = safe((str: string) => {
   return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
 });
 
-export const formatIntFr = safe((intAsString: string = '') => {
+// biome-ignore lint/style/noInferrableTypes: needed for the safe function inference
+export const formatIntFr = safe((intAsString: string = "") => {
   if (!intAsString) {
     return intAsString;
   }
-  return intAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+  return intAsString.replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
 });
 
-export const formatFloatFr = safe((floatAsString: string = '') => {
+// biome-ignore lint/style/noInferrableTypes: needed for the safe function inference
+export const formatFloatFr = safe((floatAsString: string = "") => {
   if (!floatAsString) {
     return floatAsString;
   }
-  const floatAsNumber = parseFloat(floatAsString);
-  return new Intl.NumberFormat('fr-FR').format(floatAsNumber);
+  const floatAsNumber = Number.parseFloat(floatAsString);
+  return new Intl.NumberFormat("fr-FR").format(floatAsNumber);
 });
 
 /**
@@ -213,9 +216,9 @@ export const formatFloatFr = safe((floatAsString: string = '') => {
  * @param term
  * @returns
  */
-export const serializeForClientScript = (term = '') => {
+export const serializeForClientScript = (term = "") => {
   // remove signle quotes as they dont get serialize by encode/decodeUriComponent
-  return encodeURIComponent(term.replaceAll("'", ''));
+  return encodeURIComponent(term.replaceAll("'", ""));
 };
 
 /**
@@ -223,20 +226,18 @@ export const serializeForClientScript = (term = '') => {
  * @param term
  * @returns
  */
-export const escapeString = (term = '') => {
-  return removeSpecialChars(term).replaceAll(/[^a-zA-Z0-9]/g, '-');
-};
+export const escapeString = (term = "") =>
+  removeSpecialChars(term).replaceAll(/[^a-zA-Z0-9]/g, "-");
 
 /**
  * Normalize string and remove special chars & diacritics before using a term in search
  */
-export const removeSpecialChars = (term = '') => {
-  return term
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\s+$/, '')
-    .replace(/^\s+/, '');
-};
+export const removeSpecialChars = (term = "") =>
+  term
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+$/, "")
+    .replace(/^\s+/, "");
 
 /**
  * Turn a string into a slug for URL use
@@ -244,20 +245,18 @@ export const removeSpecialChars = (term = '') => {
 export const slugify = (text: string) =>
   text
     .toString()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w-]+/g, '')
-    .replace(/--+/g, '-');
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-");
 
 /**
  * Removes whitespace
  */
-export const trimWhitespace = (term = '') => {
-  return term.split(' ').join('');
-};
+export const trimWhitespace = (term = "") => term.split(" ").join("");
 
 /**
  * Parse an int and return default value in case of failure
@@ -267,7 +266,7 @@ export const parseIntWithDefaultValue = (
   defaultValue = 0
 ) => {
   try {
-    const result = parseInt(intAsString, 10);
+    const result = Number.parseInt(intAsString, 10);
     if (isNaN(result)) {
       throw new Error();
     }
@@ -277,9 +276,9 @@ export const parseIntWithDefaultValue = (
   }
 };
 
-const wrapWord = (word: string | null | undefined = '', punct = ' ') => {
+const wrapWord = (word: string | null | undefined = "", punct = " ") => {
   if (!word) {
-    return '';
+    return "";
   }
   return word.toString().toUpperCase() + punct;
 };
@@ -301,19 +300,19 @@ type IAdressFields = {
 };
 
 export const formatAdresse = ({
-  complement = '',
-  numeroVoie = '',
-  indiceRepetition = '',
-  typeVoie = '',
-  libelleVoie = '',
-  distributionSpeciale = '',
-  codePostal = '',
-  libelleCommune = '',
-  codeCedex = '',
-  libelleCommuneCedex = '',
-  libelleCommuneEtranger = '',
-  codePaysEtranger = '',
-  libellePaysEtranger = '',
+  complement = "",
+  numeroVoie = "",
+  indiceRepetition = "",
+  typeVoie = "",
+  libelleVoie = "",
+  distributionSpeciale = "",
+  codePostal = "",
+  libelleCommune = "",
+  codeCedex = "",
+  libelleCommuneCedex = "",
+  libelleCommuneEtranger = "",
+  codePaysEtranger = "",
+  libellePaysEtranger = "",
 }: IAdressFields) => {
   if (
     !complement &&
@@ -328,25 +327,25 @@ export const formatAdresse = ({
     !codePaysEtranger &&
     !libellePaysEtranger
   ) {
-    return '';
+    return "";
   }
 
-  const fullLibelleFromTypeVoie = libelleFromTypeVoie(typeVoie || '');
+  const fullLibelleFromTypeVoie = libelleFromTypeVoie(typeVoie || "");
 
   return [
-    wrapWord(complement, ', '),
+    wrapWord(complement, ", "),
     wrapWord(numeroVoie),
     wrapWord(indiceRepetition),
     wrapWord(fullLibelleFromTypeVoie),
-    wrapWord(libelleVoie, ', '),
-    wrapWord(distributionSpeciale, ', '),
+    wrapWord(libelleVoie, ", "),
+    wrapWord(distributionSpeciale, ", "),
     wrapWord(codeCedex || codePostal),
     wrapWord(
       libelleCommuneCedex || libelleCommune || libelleCommuneEtranger,
-      ''
+      ""
     ),
-    libellePaysEtranger ? `, ${wrapWord(libellePaysEtranger, '')}` : '',
-  ].join('');
+    libellePaysEtranger ? `, ${wrapWord(libellePaysEtranger, "")}` : "",
+  ].join("");
 };
 
 export const agregateTripleFields = (
@@ -357,40 +356,38 @@ export const agregateTripleFields = (
   if (!field1 && !field2 && !field3) {
     return null;
   }
-  const field = `${field1 || ''} ${field2 || ''} ${field3 || ''}`;
+  const field = `${field1 || ""} ${field2 || ""} ${field3 || ""}`;
   return field.trim();
 };
 
-export const formatFirstNames = (firstNames: string, separator: ', ' | ' ') => {
-  const formatted = (firstNames || '')
+export const formatFirstNames = (firstNames: string, separator: ", " | " ") => {
+  const formatted = (firstNames || "")
     .split(separator)
-    .map((prenom) => {
-      return prenom.split('-').map(capitalize).join('-');
-    })
+    .map((prenom) => prenom.split("-").map(capitalize).join("-"))
     .filter((name) => !!name);
 
   return {
-    prenom: formatted.length > 0 ? formatted[0] : '',
-    prenoms: formatted.join(', '),
+    prenom: formatted.length > 0 ? formatted[0] : "",
+    prenoms: formatted.join(", "),
   };
 };
 
 export const formatLastName = (lastname: string) => {
-  const nom = (lastname || '').toUpperCase();
+  const nom = (lastname || "").toUpperCase();
 
   return nom;
 };
 
-export const formatNameFull = (nomPatronymique = '', nomUsage = '') => {
+export const formatNameFull = (nomPatronymique = "", nomUsage = "") => {
   if (nomUsage && nomPatronymique) {
     return `${nomUsage} (${nomPatronymique})`;
   }
-  return nomUsage || nomPatronymique || '';
+  return nomUsage || nomPatronymique || "";
 };
 
 export const formatRole = (role: string) => {
   if (!role) {
-    return '';
+    return "";
   }
   return removeSpecialChars(role).toUpperCase();
 };
@@ -403,11 +400,10 @@ export const formatRole = (role: string) => {
  */
 export const pluralize = (array: any[]) => {
   if (!Array.isArray(array)) {
-    throw new Error('The input must be an array.');
+    throw new Error("The input must be an array.");
   }
-  return array.length > 1 ? 's' : '';
+  return array.length > 1 ? "s" : "";
 };
 
-export const formatNumber = (number: number) => {
-  return new Intl.NumberFormat('fr-FR').format(number);
-};
+export const formatNumber = (number: number) =>
+  new Intl.NumberFormat("fr-FR").format(number);

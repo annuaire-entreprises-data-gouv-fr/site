@@ -1,15 +1,15 @@
-import React from 'react';
-import constants from '#models/constants';
+import type React from "react";
+import constants from "#models/constants";
 
-const formLink = 'https://tally.so/r/w478pA';
+const formLink = "https://tally.so/r/w478pA";
 
 export const WeNeedYouModal: React.FC<{}> = () => (
   <>
     <div
-      id="we-need-you-modal"
-      role="dialog"
       aria-label="Donnez-nous votre avis"
       className="hide"
+      id="we-need-you-modal"
+      role="dialog"
     >
       <div className="modal">
         <div className="title">

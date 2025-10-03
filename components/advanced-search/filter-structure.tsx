@@ -1,5 +1,6 @@
-'use client';
+"use client";
 
+import { useState } from "react";
 import {
   AssociationBadge,
   CollectiviteTerritorialeBadge,
@@ -7,22 +8,21 @@ import {
   EntrepriseIndividuelleBadge,
   LabelAndCertificateBadge,
   ServicePublicBadge,
-} from '#components-ui/badge/frequent';
-import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import { useState } from 'react';
+} from "#components-ui/badge/frequent";
+import { SimpleSeparator } from "#components-ui/horizontal-separator";
 
 export const FilterStructure: React.FC<{
   type?: string;
   label?: string;
-}> = ({ type = '', label = '' }) => {
+}> = ({ type = "", label = "" }) => {
   const [structureType, setStructureType] = useState(type);
   const [labelsSelected, setLabelsSelected] = useState<string[]>(
-    label ? label.split(',') : []
+    label ? label.split(",") : []
   );
 
   const toggleLabel = (labelValue: string) => {
     setLabelsSelected((prev) => {
-      if (labelValue === '') {
+      if (labelValue === "") {
         return [];
       }
       if (prev.includes(labelValue)) {
@@ -40,40 +40,40 @@ export const FilterStructure: React.FC<{
       <input
         id="structure-type-input"
         name="type"
-        value={structureType}
-        type="hidden"
         onChange={() => {}}
+        type="hidden"
+        value={structureType}
       />
       <div className="badge-wrapper">
         <DefaultStructureBadge
+          isSelected={structureType === ""}
           label="Tous"
+          onClick={() => setStructureType("")}
           small
-          onClick={() => setStructureType('')}
-          isSelected={structureType === ''}
         />
 
         <CollectiviteTerritorialeBadge
-          isSelected={structureType === 'ct'}
+          isSelected={structureType === "ct"}
+          onClick={() => setStructureType("ct")}
           small
-          onClick={() => setStructureType('ct')}
         />
 
         <AssociationBadge
-          isSelected={structureType === 'asso'}
+          isSelected={structureType === "asso"}
+          onClick={() => setStructureType("asso")}
           small
-          onClick={() => setStructureType('asso')}
         />
 
         <ServicePublicBadge
-          isSelected={structureType === 'sp'}
+          isSelected={structureType === "sp"}
+          onClick={() => setStructureType("sp")}
           small
-          onClick={() => setStructureType('sp')}
         />
 
         <EntrepriseIndividuelleBadge
-          isSelected={structureType === 'ei'}
+          isSelected={structureType === "ei"}
+          onClick={() => setStructureType("ei")}
           small
-          onClick={() => setStructureType('ei')}
         />
       </div>
       <SimpleSeparator />
@@ -83,92 +83,92 @@ export const FilterStructure: React.FC<{
       <input
         id="structure-label-input"
         name="label"
-        value={labelsSelected.join(',')}
-        type="hidden"
         onChange={() => {}}
+        type="hidden"
+        value={labelsSelected.join(",")}
       />
       <div className="badge-wrapper">
         <LabelAndCertificateBadge
-          label="Tous"
           isSelected={labelsSelected.length === 0}
-          small
+          label="Tous"
           onClick={() => setLabelsSelected([])}
+          small
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("ess")}
           label="ESS - Économie Sociale et Solidaire"
-          isSelected={labelsSelected.includes('ess')}
+          onClick={() => toggleLabel("ess")}
           small
-          onClick={() => toggleLabel('ess')}
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("sm")}
           label="Société à mission"
-          isSelected={labelsSelected.includes('sm')}
+          onClick={() => toggleLabel("sm")}
           small
-          onClick={() => toggleLabel('sm')}
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("siae")}
           label="Entreprise Inclusive"
-          isSelected={labelsSelected.includes('siae')}
+          onClick={() => toggleLabel("siae")}
           small
-          onClick={() => toggleLabel('siae')}
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("bio")}
           label="Professionnels du Bio"
-          isSelected={labelsSelected.includes('bio')}
+          onClick={() => toggleLabel("bio")}
           small
-          onClick={() => toggleLabel('bio')}
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("egapro")}
           label="Égalité professionnelle"
-          isSelected={labelsSelected.includes('egapro')}
+          onClick={() => toggleLabel("egapro")}
           small
-          onClick={() => toggleLabel('egapro')}
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("rge")}
           label="RGE - Reconnu Garant de l'Environnement"
-          isSelected={labelsSelected.includes('rge')}
+          onClick={() => toggleLabel("rge")}
           small
-          onClick={() => toggleLabel('rge')}
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("of")}
           label="Organisme de formation"
-          isSelected={labelsSelected.includes('of')}
+          onClick={() => toggleLabel("of")}
           small
-          onClick={() => toggleLabel('of')}
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("qualiopi")}
           label="Qualiopi"
-          isSelected={labelsSelected.includes('qualiopi')}
+          onClick={() => toggleLabel("qualiopi")}
           small
-          onClick={() => toggleLabel('qualiopi')}
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("esv")}
           label="Entrepreneur de spectacles vivants"
-          isSelected={labelsSelected.includes('esv')}
+          onClick={() => toggleLabel("esv")}
           small
-          onClick={() => toggleLabel('esv')}
         />
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("achats_responsables")}
           label="Achats Responsables"
-          isSelected={labelsSelected.includes('achats_responsables')}
+          onClick={() => toggleLabel("achats_responsables")}
           small
-          onClick={() => toggleLabel('achats_responsables')}
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("patrimoine_vivant")}
           label="Entreprise du Patrimoine Vivant"
-          isSelected={labelsSelected.includes('patrimoine_vivant')}
+          onClick={() => toggleLabel("patrimoine_vivant")}
           small
-          onClick={() => toggleLabel('patrimoine_vivant')}
         />
       </div>
       <style jsx>{`

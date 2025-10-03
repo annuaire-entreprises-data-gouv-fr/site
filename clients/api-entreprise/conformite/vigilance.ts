@@ -1,12 +1,12 @@
-import routes from '#clients/routes';
-import { IConformite } from '#models/espace-agent/conformite';
-import { UseCase } from '#models/use-cases';
-import { Siren } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import type { IConformite } from "#models/espace-agent/conformite";
+import type { UseCase } from "#models/use-cases";
+import type { Siren } from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseConformiteVigilance = IAPIEntrepriseResponse<{
   entity_status: {
-    code: 'ok';
+    code: "ok";
     libelle: string;
     description: string;
   };
@@ -22,19 +22,17 @@ export type IAPIEntrepriseConformiteVigilance = IAPIEntrepriseResponse<{
 export const clientApiEntrepriseConformiteVigilance = async (
   siren: Siren,
   useCase?: UseCase
-) => {
-  return await clientAPIEntreprise<
-    IAPIEntrepriseConformiteVigilance,
-    IConformite
-  >(routes.apiEntreprise.conformite.vigilance(siren), mapToDomainObject, {
-    useCase,
-  });
-};
+) =>
+  await clientAPIEntreprise<IAPIEntrepriseConformiteVigilance, IConformite>(
+    routes.apiEntreprise.conformite.vigilance(siren),
+    mapToDomainObject,
+    {
+      useCase,
+    }
+  );
 
-const mapToDomainObject = (response: IAPIEntrepriseConformiteVigilance) => {
-  return {
-    url: response.data.document_url,
-    isValid: response.data?.entity_status?.code === 'ok',
-    label: 'Attestation de vigilance',
-  };
-};
+const mapToDomainObject = (response: IAPIEntrepriseConformiteVigilance) => ({
+  url: response.data.document_url,
+  isValid: response.data?.entity_status?.code === "ok",
+  label: "Attestation de vigilance",
+});

@@ -1,14 +1,14 @@
-import { clientBodacc } from '#clients/open-data-soft/clients/bodacc';
-import { IAnnoncesBodacc } from '#models/annonces';
-import { Siren } from '#utils/helpers';
-import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
+import { clientBodacc } from "#clients/open-data-soft/clients/bodacc";
+import type { IAnnoncesBodacc } from "#models/annonces";
+import type { Siren } from "#utils/helpers";
+import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
-describe('clientBODACC', () => {
-  it('Should match snapshot', async () => {
+describe("clientBODACC", () => {
+  it("Should match snapshot", async () => {
     await expectClientToMatchSnapshot({
       client: clientBodacc,
-      args: ['880878145' as Siren],
-      snapshotFile: 'ganymede-bodacc.json',
+      args: ["880878145" as Siren],
+      snapshotFile: "ganymede-bodacc.json",
       __dirname,
       postProcessResult,
     });
@@ -16,5 +16,5 @@ describe('clientBODACC', () => {
 });
 
 function postProcessResult(result: IAnnoncesBodacc) {
-  result.lastModified = '2023-09-21T03:34:50';
+  result.lastModified = "2023-09-21T03:34:50";
 }

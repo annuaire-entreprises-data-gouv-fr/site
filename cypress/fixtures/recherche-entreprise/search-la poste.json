@@ -40,17 +40,10 @@
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
           "libelle_voie": "DU COLONEL PIERRE AVIA",
-          "liste_enseignes": [
-            "LA POSTE"
-          ],
-          "liste_finess": [
-            "750073637"
-          ],
+          "liste_enseignes": ["LA POSTE"],
+          "liste_finess": ["750073637"],
           "liste_id_bio": null,
-          "liste_idcc": [
-            "9999",
-            "5516"
-          ],
+          "liste_idcc": ["9999", "5516"],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -97,15 +90,10 @@
             "geo_id": "75115_2300_00102",
             "latitude": "48.841436",
             "libelle_commune": "PARIS",
-            "liste_enseignes": [
-              "LA POSTE"
-            ],
+            "liste_enseignes": ["LA POSTE"],
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "9999",
-              "5516"
-            ],
+            "liste_idcc": ["9999", "5516"],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -133,9 +121,7 @@
             "geo_id": "75115_5469_00113",
             "latitude": "48.829684",
             "libelle_commune": "PARIS",
-            "liste_enseignes": [
-              "LA POSTE"
-            ],
+            "liste_enseignes": ["LA POSTE"],
             "liste_finess": null,
             "liste_id_bio": null,
             "liste_idcc": null,
@@ -166,15 +152,10 @@
             "geo_id": "75115_5698_00016",
             "latitude": "48.848434",
             "libelle_commune": "PARIS",
-            "liste_enseignes": [
-              "LA POSTE"
-            ],
+            "liste_enseignes": ["LA POSTE"],
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "9999",
-              "5516"
-            ],
+            "liste_idcc": ["9999", "5516"],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -196,10 +177,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "9999",
-            "5516"
-          ],
+          "liste_idcc": ["9999", "5516"],
           "egapro_renseignee": true,
           "est_association": false,
           "est_bio": false,
@@ -209,10 +187,7 @@
           "est_finess": true,
           "est_organisme_formation": true,
           "est_qualiopi": true,
-          "liste_id_organisme_formation": [
-            "11755565775",
-            "11755762075"
-          ],
+          "liste_id_organisme_formation": ["11755565775", "11755762075"],
           "est_rge": false,
           "est_service_public": false,
           "est_siae": false,
@@ -382,9 +357,7 @@
           "date_immatriculation": "1986-07-08",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 457.35,
           "capital_variable": false,
@@ -544,9 +517,7 @@
           "date_immatriculation": "2011-05-20",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 200,
           "capital_variable": false,
@@ -734,9 +705,7 @@
           "date_immatriculation": "2008-07-02",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 100,
           "capital_variable": false,
@@ -902,9 +871,7 @@
           "date_immatriculation": "2021-10-06",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 6000,
           "capital_variable": false,
@@ -978,9 +945,7 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "1043"
-          ],
+          "liste_idcc": ["1043"],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -1030,9 +995,7 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "1043"
-            ],
+            "liste_idcc": ["1043"],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -1049,9 +1012,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "1043"
-          ],
+          "liste_idcc": ["1043"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -1218,9 +1179,7 @@
           "date_immatriculation": "2015-04-29",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 65000,
           "capital_variable": false,
@@ -1380,9 +1339,7 @@
           "date_immatriculation": "2020-05-07",
           "date_radiation": null,
           "duree_personne_morale": 50,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 100,
           "capital_variable": false,
@@ -1548,9 +1505,7 @@
           "date_immatriculation": null,
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Gestion de biens"
-          ],
+          "nature_entreprise": ["Gestion de biens"],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,
@@ -1624,9 +1579,7 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "1518"
-          ],
+          "liste_idcc": ["1518"],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -1676,9 +1629,7 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "1518"
-            ],
+            "liste_idcc": ["1518"],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -1740,9 +1691,7 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "1518"
-            ],
+            "liste_idcc": ["1518"],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -1759,9 +1708,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "1518"
-          ],
+          "liste_idcc": ["1518"],
           "egapro_renseignee": true,
           "est_association": true,
           "est_bio": false,

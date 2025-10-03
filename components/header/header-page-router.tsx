@@ -1,5 +1,5 @@
-import usePageRouterSession from 'hooks/use-page-router-session';
-import { HeaderCore } from './header-core';
+import usePageRouterSession from "hooks/use-page-router-session";
+import { HeaderCore } from "./header-core";
 
 type IProps = {
   useLogo?: boolean;
@@ -15,19 +15,19 @@ export const HeaderPageRouter: React.FC<IProps> = ({
   useMap = false,
   useAgentCTA = false,
   plugin,
-  currentSearchTerm = '',
+  currentSearchTerm = "",
 }) => {
   const session = usePageRouterSession();
 
   return (
     <HeaderCore
-      useMap={useMap}
-      useLogo={useLogo}
-      useSearchBar={useSearchBar}
-      useAgentCTA={useAgentCTA}
+      currentSearchTerm={currentSearchTerm}
       plugin={plugin}
       session={session}
-      currentSearchTerm={currentSearchTerm}
+      useAgentCTA={useAgentCTA}
+      useLogo={useLogo}
+      useMap={useMap}
+      useSearchBar={useSearchBar}
     />
   );
 };

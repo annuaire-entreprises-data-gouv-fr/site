@@ -1,11 +1,11 @@
-import Logo from '#components-ui/logo';
-import { PrintNever } from '#components-ui/print-visibility';
-import { administrationsMetaData } from '#models/administrations';
-import { getAllLandingPages } from '#models/landing-pages';
+import Logo from "#components-ui/logo";
+import { PrintNever } from "#components-ui/print-visibility";
+import { administrationsMetaData } from "#models/administrations";
+import { getAllLandingPages } from "#models/landing-pages";
 
 const Footer = () => (
   <PrintNever>
-    <footer className="fr-footer" role="contentinfo" id="footer">
+    <footer className="fr-footer" id="footer" role="contentinfo">
       <div className="fr-footer__top">
         <div className="fr-container">
           <div className="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
@@ -77,9 +77,9 @@ const Footer = () => (
                 <li>
                   <a
                     className="fr-footer__top-link"
-                    target="_blank"
-                    rel="noreferrer noopener"
                     href="https://github.com/annuaire-entreprises-data-gouv-fr"
+                    rel="noreferrer noopener"
+                    target="_blank"
                   >
                     Code source
                   </a>
@@ -110,8 +110,8 @@ const Footer = () => (
                   <a
                     className="fr-footer__top-link"
                     href="https://entreprises.gouv.fr"
-                    target="_blank"
                     rel="noreferrer noopener"
+                    target="_blank"
                   >
                     entreprises.gouv.fr
                   </a>
@@ -119,9 +119,9 @@ const Footer = () => (
                 <li className="fr-footer__content-item">
                   <a
                     className="fr-footer__top-link"
-                    target="_blank"
-                    rel="noreferrer noopener"
                     href="https://entreprendre.service-public.fr/"
+                    rel="noreferrer noopener"
+                    target="_blank"
                   >
                     entreprendre.service-public.fr
                   </a>
@@ -129,9 +129,9 @@ const Footer = () => (
                 <li className="fr-footer__content-item">
                   <a
                     className="fr-footer__top-link"
-                    target="_blank"
-                    rel="noreferrer noopener"
                     href="https://mon-entreprise.urssaf.fr/"
+                    rel="noreferrer noopener"
+                    target="_blank"
                   >
                     mon-entreprise.urssaf.fr
                   </a>
@@ -139,9 +139,9 @@ const Footer = () => (
                 <li className="fr-footer__content-item">
                   <a
                     className="fr-footer__top-link"
-                    target="_blank"
-                    rel="noreferrer noopener"
                     href="https://formalites.entreprises.gouv.fr"
+                    rel="noreferrer noopener"
+                    target="_blank"
                   >
                     formalites.entreprises.gouv.fr
                   </a>
@@ -149,9 +149,9 @@ const Footer = () => (
                 <li className="fr-footer__content-item">
                   <a
                     className="fr-footer__top-link"
-                    target="_blank"
-                    rel="noreferrer noopener"
                     href="https://conseillers-entreprises.service-public.fr"
+                    rel="noreferrer noopener"
+                    target="_blank"
                   >
                     conseillers-entreprises.service-public.fr
                   </a>
@@ -238,14 +238,14 @@ const Footer = () => (
             <p className="fr-footer__content-desc">
               Ce site permet de retrouver toutes les données publiques détenues
               par l’administration sur une entreprise, une association ou une
-              administration et{' '}
+              administration et{" "}
               <a href="/a-propos/donnees-extrait-kbis">
                 en particulier les données contenues dans un extrait KBIS
-              </a>{' '}
+              </a>{" "}
               ou de l’extrait D1.
             </p>
             <p className="fr-footer__content-desc">
-              Il est opéré par la{' '}
+              Il est opéré par la{" "}
               <a
                 href="https://numerique.gouv.fr"
                 rel="noopener noreferrer"
@@ -260,10 +260,10 @@ const Footer = () => (
               <li className="fr-footer__content-item">
                 <a
                   className="fr-footer__content-link"
-                  target="_blank"
-                  rel="noopener external"
-                  title="Legifrance - nouvelle fenêtre"
                   href="https://legifrance.gouv.fr"
+                  rel="noopener external"
+                  target="_blank"
+                  title="Legifrance - nouvelle fenêtre"
                 >
                   legifrance.gouv.fr
                 </a>
@@ -271,10 +271,10 @@ const Footer = () => (
               <li className="fr-footer__content-item">
                 <a
                   className="fr-footer__content-link"
-                  target="_blank"
-                  rel="noopener external"
-                  title="Info.gouv.fr - nouvelle fenêtre"
                   href="https://info.gouv.fr"
+                  rel="noopener external"
+                  target="_blank"
+                  title="Info.gouv.fr - nouvelle fenêtre"
                 >
                   info.gouv.fr
                 </a>
@@ -282,10 +282,10 @@ const Footer = () => (
               <li className="fr-footer__content-item">
                 <a
                   className="fr-footer__content-link"
-                  target="_blank"
-                  rel="noopener external"
-                  title="Service Public - nouvelle fenêtre"
                   href="https://service-public.fr"
+                  rel="noopener external"
+                  target="_blank"
+                  title="Service Public - nouvelle fenêtre"
                 >
                   service-public.fr
                 </a>
@@ -293,10 +293,10 @@ const Footer = () => (
               <li className="fr-footer__content-item">
                 <a
                   className="fr-footer__content-link"
-                  target="_blank"
-                  rel="noopener external"
-                  title="Data.gouv.fr - nouvelle fenêtre"
                   href="https://data.gouv.fr"
+                  rel="noopener external"
+                  target="_blank"
+                  title="Data.gouv.fr - nouvelle fenêtre"
                 >
                   data.gouv.fr
                 </a>
@@ -317,25 +317,25 @@ const Footer = () => (
                         className="fr-footer__partners-link"
                         href={`/administration#${slug}`}
                       >
-                        {logoType === 'portrait' ? (
+                        {logoType === "portrait" ? (
                           <Logo
-                            title={long}
                             alt={short}
-                            slug={slug}
-                            width={60}
-                            height={50}
                             className="fr-footer__logo"
+                            height={50}
                             lazy
+                            slug={slug}
+                            title={long}
+                            width={60}
                           />
                         ) : (
                           <Logo
-                            title={long}
                             alt={short}
-                            slug={slug}
-                            width={100}
-                            height={50}
                             className="fr-footer__logo"
+                            height={50}
                             lazy
+                            slug={slug}
+                            title={long}
+                            width={100}
                           />
                         )}
                       </a>
@@ -347,17 +347,17 @@ const Footer = () => (
                     href="/administration"
                   >
                     <Logo
+                      className="fr-footer__logo"
+                      height={50}
+                      lazy
+                      slug="rf"
                       title={[
-                        'Ainsi que : ',
+                        "Ainsi que : ",
                         ...Object.values(administrationsMetaData)
                           .filter(({ logoType }) => !logoType)
                           .map(({ long }) => long),
-                      ].join('\r\n')}
-                      slug="rf"
+                      ].join("\r\n")}
                       width={80}
-                      height={50}
-                      className="fr-footer__logo"
-                      lazy
                     />
                   </a>
                 </li>
@@ -401,9 +401,9 @@ const Footer = () => (
             <li className="fr-footer__bottom-item">
               <a
                 className="fr-footer__bottom-link"
-                target="_blank"
-                rel="noreferrer noopener"
                 href="https://github.com/annuaire-entreprises-data-gouv-fr"
+                rel="noreferrer noopener"
+                target="_blank"
               >
                 Code source
               </a>
@@ -411,11 +411,11 @@ const Footer = () => (
           </ul>
           <div className="fr-footer__bottom-copy">
             <p>
-              Sauf mention contraire, tous les textes de ce site sont sous{' '}
+              Sauf mention contraire, tous les textes de ce site sont sous{" "}
               <a
                 href="https://github.com/etalab/licence-ouverte/blob/master/LO.md"
-                target="_blank"
                 rel="noreferrer noopener"
+                target="_blank"
               >
                 licence etalab-2.0
               </a>

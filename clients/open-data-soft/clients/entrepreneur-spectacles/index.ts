@@ -1,7 +1,7 @@
-import routes from '#clients/routes';
-import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
-import { Siren } from '#utils/helpers';
-import odsClient from '../..';
+import routes from "#clients/routes";
+import type { IEntrepreneurSpectaclesCertification } from "#models/certifications/entrepreneur-spectacles";
+import type { Siren } from "#utils/helpers";
+import odsClient from "../..";
 
 type ISpectaclesVivantsRecord = {
   numero_recepisse: string; //"PLATESV-R-2021-013704"
@@ -36,7 +36,7 @@ export const clientEntrepreneurSpectacles = async (
       config: {
         params: {
           q: `#startswith(siren_siret,"${siren}")`,
-          sort: 'date_depot_dossier',
+          sort: "date_depot_dossier",
         },
       },
     },
@@ -45,13 +45,13 @@ export const clientEntrepreneurSpectacles = async (
 
   return {
     licences: response.records.map((record: ISpectaclesVivantsRecord) => ({
-      categorie: (record.categorie || '').toString(),
-      numeroRecepisse: record.numero_recepisse || '',
-      nomLieu: record.nom_lieu || '',
-      statut: record.statut_recepisse || '',
-      dateValidite: record.date_debut_validite || '',
-      dateDepot: record.date_depot_dossier || '',
-      type: record.type_declaration || '',
+      categorie: (record.categorie || "").toString(),
+      numeroRecepisse: record.numero_recepisse || "",
+      nomLieu: record.nom_lieu || "",
+      statut: record.statut_recepisse || "",
+      dateValidite: record.date_debut_validite || "",
+      dateDepot: record.date_depot_dossier || "",
+      type: record.type_declaration || "",
     })),
     lastModified: response.lastModified,
   };

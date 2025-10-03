@@ -1,6 +1,6 @@
-import SearchFilters from '#components/advanced-search/search-filters';
-import { IParams } from '#models/search/search-filter-params';
-import styles from './style.module.css';
+import SearchFilters from "#components/advanced-search/search-filters";
+import type { IParams } from "#models/search/search-filter-params";
+import styles from "./style.module.css";
 
 type IProps = {
   searchParams: IParams;
@@ -10,11 +10,11 @@ type IProps = {
 
 export const AdvancedSearch: React.FC<IProps> = ({
   searchParams = {},
-  currentSearchTerm = '',
+  currentSearchTerm = "",
 }) => (
-  <div className={styles['search-filters-container']}>
+  <div className={styles["search-filters-container"]}>
     <div className="fr-container">
-      <div className={styles['filter-container']}>
+      <div className={styles["filter-container"]}>
         <SearchFilters
           searchParams={searchParams}
           searchTerm={currentSearchTerm}

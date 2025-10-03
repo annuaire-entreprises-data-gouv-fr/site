@@ -1,20 +1,21 @@
-import React from 'react';
-import FAQLink from '#components-ui/faq-link';
-import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import InformationTooltip from '#components-ui/information-tooltip';
-import { DataSection } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IEgapro } from '#models/certifications/egapro';
+import type React from "react";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import FAQLink from "#components-ui/faq-link";
+import { SimpleSeparator } from "#components-ui/horizontal-separator";
+import InformationTooltip from "#components-ui/information-tooltip";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IEgapro } from "#models/certifications/egapro";
 
 export const EgaproSection: React.FC<{
   egapro: IEgapro | IAPINotRespondingError;
 }> = ({ egapro }) => {
-  const sectionTitle = `Égalité professionnelle - Egapro`;
+  const sectionTitle = "Égalité professionnelle - Egapro";
 
   return (
     <DataSection
+      data={egapro}
       id="egalite-professionnelle"
       notFoundInfo={
         <>
@@ -22,26 +23,25 @@ export const EgaproSection: React.FC<{
           <FAQEgapro /> pour cette entreprise.
         </>
       }
-      data={egapro}
-      title={sectionTitle}
       sources={[EAdministration.MTPEI]}
+      title={sectionTitle}
     >
       {(egapro) => {
         const body = getSectionBody(egapro);
         const plural = egapro.index.years.length > 0;
         return (
           <>
-            Cette structure de{' '}
-            <strong>{egapro.index.employeesSizeRange}</strong> a déclaré{' '}
-            {plural ? 'plusieurs' : 'une'} <FAQEgapro />
+            Cette structure de{" "}
+            <strong>{egapro.index.employeesSizeRange}</strong> a déclaré{" "}
+            {plural ? "plusieurs" : "une"} <FAQEgapro />
             <p>
               Chaque déclaration se fait l’année <strong>N</strong> au titre de
               l’année <strong>N-1</strong> (par exemple : les données déclarées
               en 2023 sont celles de 2022).
             </p>
             <FullTable
-              head={['Année', ...egapro.index.indexYears]}
               body={body}
+              head={["Année", ...egapro.index.indexYears]}
             />
             {egapro.representation ? (
               <>
@@ -53,33 +53,33 @@ export const EgaproSection: React.FC<{
                   de direction&nbsp;:
                 </p>
                 <FullTable
-                  head={['Année', ...egapro.representation.years]}
                   body={[
                     [
-                      'Femmes parmi les cadres dirigeants (%)',
+                      "Femmes parmi les cadres dirigeants (%)",
                       ...egapro.representation.scores.pourcentageFemmesCadres.map(
                         mapToNc
                       ),
                     ],
                     [
-                      'Hommes parmi les cadres dirigeants (%)',
+                      "Hommes parmi les cadres dirigeants (%)",
                       ...egapro.representation.scores.pourcentageHommesCadres.map(
                         mapToNc
                       ),
                     ],
                     [
-                      'Femmes dans les instances dirigeantes (%)',
+                      "Femmes dans les instances dirigeantes (%)",
                       ...egapro.representation.scores.pourcentageFemmesMembres.map(
                         mapToNc
                       ),
                     ],
                     [
-                      'Hommes dans les instances dirigeantes (%)',
+                      "Hommes dans les instances dirigeantes (%)",
                       ...egapro.representation.scores.pourcentageHommesCadres.map(
                         mapToNc
                       ),
                     ],
                   ]}
+                  head={["Année", ...egapro.representation.years]}
                 />
               </>
             ) : null}
@@ -103,7 +103,7 @@ const getSectionBody = (egapro: IEgapro) => {
 
   return [
     [
-      'Index (sur 100)',
+      "Index (sur 100)",
       ...notes
         .map((note) =>
           note ? (
@@ -115,15 +115,15 @@ const getSectionBody = (egapro: IEgapro) => {
     [
       <strong>
         <FAQLink
-          tooltipLabel="Détails"
           to="https://egapro.travail.gouv.fr/aide-simulation"
+          tooltipLabel="Détails"
         >
           L’index est une synthèse des différents indicateurs ci-dessous
         </FAQLink>
       </strong>,
-      ...egapro.index.years.map(() => ''),
+      ...egapro.index.years.map(() => ""),
     ],
-    ['・Écart rémunérations (sur 40)', ...remunerations.map(mapToNc)],
+    ["・Écart rémunérations (sur 40)", ...remunerations.map(mapToNc)],
     // only less than 250
     ...[
       egapro.index.lessThan250
@@ -135,42 +135,44 @@ const getSectionBody = (egapro: IEgapro) => {
     ],
     // only more than 250
     ...[
-      !egapro.index.lessThan250
-        ? [
+      egapro.index.lessThan250
+        ? []
+        : [
             `・Écart taux d'augmentation (sur 20)`,
             ...augmentations.map(mapToNc),
-          ]
-        : [],
+          ],
     ],
     // only more than 250
     ...[
-      !egapro.index.lessThan250
-        ? ['・Écart taux promotion (sur 15)', ...promotions.map(mapToNc)]
-        : [],
+      egapro.index.lessThan250
+        ? []
+        : ["・Écart taux promotion (sur 15)", ...promotions.map(mapToNc)],
     ],
-    ['・Retour congé maternité (sur 15)', ...congesMaternite.map(mapToNc)],
-    ['・Hautes rémunérations (sur 10)', ...hautesRemunerations.map(mapToNc)],
+    ["・Retour congé maternité (sur 15)", ...congesMaternite.map(mapToNc)],
+    ["・Hautes rémunérations (sur 10)", ...hautesRemunerations.map(mapToNc)],
   ];
 };
 
 const getColor = (note: number) => {
   try {
     if (note > 75) {
-      return '#18753c';
+      return "#18753c";
     }
     if (note > 50) {
-      return '#9f551b';
+      return "#9f551b";
     }
-    return '#cf0b06';
+    return "#cf0b06";
   } catch {
-    return '#000';
+    return "#000";
   }
 };
 
 const FAQEgapro = () => (
   <FAQLink
-    tooltipLabel={`index d’égalité professionnelle entre les femmes et les hommes.`}
     to="/faq/egapro-egalite-professionnelle-femme-homme"
+    tooltipLabel={
+      "index d’égalité professionnelle entre les femmes et les hommes."
+    }
   >
     L’Index Egapro permet de mesurer l’égalité professionnelle entre les femmes
     et les hommes dans les entreprises de plus de 50 salariés.
@@ -179,8 +181,8 @@ const FAQEgapro = () => (
 
 const NC = () => (
   <InformationTooltip
-    tabIndex={0}
     label="Cette année là, cette structure n’était pas concernée par ce critère."
+    tabIndex={0}
   >
     <i>NC</i>
   </InformationTooltip>

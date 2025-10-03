@@ -1,12 +1,12 @@
-import { Icon } from '#components-ui/icon/wrapper';
-import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
-import TextWrapper from 'components-ui/text-wrapper';
-import { Metadata } from 'next';
+import TextWrapper from "components-ui/text-wrapper";
+import type { Metadata } from "next";
+import { Icon } from "#components-ui/icon/wrapper";
+import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 
 export const metadata: Metadata = {
-  title: 'Réutiliser ou partager l’Annuaire des Entreprises',
+  title: "Réutiliser ou partager l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/partager',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/partager",
   },
 };
 
@@ -68,18 +68,18 @@ export default function PartagerPage() {
           </p>
           <p>Le lien est disponible en deux couleurs :</p>
           <iframe
-            width="300"
             height="70"
-            style={{ border: 'none', maxWidth: '100%' }}
             src={`${getBaseUrl()}/api/share/button/510973431`}
-          ></iframe>
+            style={{ border: "none", maxWidth: "100%" }}
+            width="300"
+          />
           <div />
           <iframe
-            width="300"
             height="70"
-            style={{ border: 'none', maxWidth: '100%' }}
             src={`${getBaseUrl()}/api/share/button/510973431?light=true`}
-          ></iframe>
+            style={{ border: "none", maxWidth: "100%" }}
+            width="300"
+          />
           <h3>Comment ajouter un lien sur mon site ?</h3>
           <p>
             Il vous suffit d’intégrer l’iframe suivante sur votre site web, à
@@ -112,7 +112,7 @@ export default function PartagerPage() {
             </code>
           </p>
           <p>
-            <strong>Attention :</strong> pensez à bien renseigner{' '}
+            <strong>Attention :</strong> pensez à bien renseigner{" "}
             <code>SIREN_OR_SIRET</code> avec le SIREN ou le SIRET pour lequel
             vous voulez créer un lien !
           </p>
@@ -127,15 +127,15 @@ export default function PartagerPage() {
           <img alt="exemple de QR code" src="/images/QR_code_example.jpeg" />
           <h3>Comment générer un QR code ?</h3>
           <p>
-            Vous pouvez générer un lien{' '}
+            Vous pouvez générer un lien{" "}
             <a
-              target="_blank"
-              rel="noreferrer noopener"
               href="https://fr.wikipedia.org/wiki/Code_QR"
+              rel="noreferrer noopener"
+              target="_blank"
             >
               QR code
             </a>
-            , scannable par téléphone,{' '}
+            , scannable par téléphone,{" "}
             <strong>depuis chaque fiche entreprise</strong> :
           </p>
           <ul>
@@ -144,7 +144,7 @@ export default function PartagerPage() {
             </li>
             <li>Trouvez l’entreprise et accédez à sa fiche</li>
             <li>
-              Cliquez en haut à droite de la page, sur le petit logo{' '}
+              Cliquez en haut à droite de la page, sur le petit logo{" "}
               <Icon slug="qrCode" />
             </li>
             <li>Sauvegardez le QR code ainsi généré</li>
@@ -160,7 +160,7 @@ export default function PartagerPage() {
             liées à une personne morale dans un formulaire (par exemple, le
             SIRET ou le SIREN), vous pouvez fluidifier l’expérience utilisateur
             et limiter les erreurs de saisie, en invitant à retrouver les
-            informations demandées grâce à{' '}
+            informations demandées grâce à{" "}
             <a href="/">notre moteur de recherche</a>.
           </p>
           <h3>Comment faire ?</h3>
@@ -188,9 +188,9 @@ export default function PartagerPage() {
           </p>
           <div>
             <img
-              style={{ width: '100%' }}
               alt="exemple de liste de moteurs de recherche"
               src="/images/Browser_example.png"
+              style={{ width: "100%" }}
             />
           </div>
           <h3>Comment faire ?</h3>
@@ -201,7 +201,7 @@ export default function PartagerPage() {
           <h2 id="api">Réutiliser les données de l’Annuaire des Entreprises</h2>
           <p>
             Toutes les données utilisées sur l’Annuaire des Entreprises sont
-            librement accessibles par API. Consultez la page{' '}
+            librement accessibles par API. Consultez la page{" "}
             <a href="/donnees/api">statut des API</a> pour en savoir plus.
           </p>
         </div>

@@ -1,26 +1,26 @@
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import type { Readable } from "stream";
 import {
   HttpForbiddenError,
   HttpNotFound,
   HttpServerError,
-} from '#clients/exceptions';
-import { Exception } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
-import { Readable } from 'stream';
+} from "#clients/exceptions";
+import { Exception } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
 
 const bucketsLists = {
-  'monitoring-comptes-agents': {
+  "monitoring-comptes-agents": {
     config: {
       endpoint: `https://s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/`,
       credentials: {
-        accessKeyId: process.env.OVH_S3_MONITORING_ACCESS_KEY || '',
-        secretAccessKey: process.env.OVH_S3_MONITORING_SECRET || '',
+        accessKeyId: process.env.OVH_S3_MONITORING_ACCESS_KEY || "",
+        secretAccessKey: process.env.OVH_S3_MONITORING_SECRET || "",
       },
-      region: process.env.OVH_S3_MONITORING_REGION || '',
+      region: process.env.OVH_S3_MONITORING_REGION || "",
     },
     params: {
-      Bucket: process.env.OVH_S3_MONITORING_BUCKET || '',
-      Key: 'monitoring_comptes_agents.csv',
+      Bucket: process.env.OVH_S3_MONITORING_BUCKET || "",
+      Key: "monitoring_comptes_agents.csv",
     },
   },
 };
@@ -37,7 +37,7 @@ export async function readFromS3(
     !params.Bucket ||
     !params.Key
   ) {
-    throw new Error('Missing S3 credentials or incomplete params');
+    throw new Error("Missing S3 credentials or incomplete params");
   }
 
   const client = new S3Client(config);
@@ -55,16 +55,16 @@ export async function readFromS3(
         const stream = response.Body as Readable;
 
         // Handle an error while streaming the response body
-        stream.once('error', (err) => reject(err));
+        stream.once("error", (err) => reject(err));
 
         // Attach a 'data' listener to add the chunks of data to our array
         // Each chunk is a Buffer instance
-        stream.on('data', (chunk) => responseDataChunks.push(chunk));
+        stream.on("data", (chunk) => responseDataChunks.push(chunk));
 
         // Once the stream has no more data, join the chunks into a string and return the string
-        stream.once('end', () => resolve(responseDataChunks.join('')));
+        stream.once("end", () => resolve(responseDataChunks.join("")));
       } catch (err: any) {
-        const statusCode = err['$metadata']?.httpStatusCode;
+        const statusCode = err["$metadata"]?.httpStatusCode;
         if (statusCode === 404) {
           return reject(new HttpNotFound(err.Code));
         }
@@ -88,7 +88,7 @@ class readFromS3Exception extends Exception {
   constructor(args: { cause?: any }) {
     super({
       ...args,
-      name: 'readFromS3Exception',
+      name: "readFromS3Exception",
     });
   }
 }

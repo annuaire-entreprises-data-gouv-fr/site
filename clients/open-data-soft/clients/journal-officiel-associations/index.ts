@@ -1,9 +1,9 @@
-import routes from '#clients/routes';
-import { IAnnoncesAssociation } from '#models/annonces';
-import constants from '#models/constants';
-import { IdRna, Siren, formatDateLong } from '#utils/helpers';
-import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import odsClient from '../..';
+import routes from "#clients/routes";
+import type { IAnnoncesAssociation } from "#models/annonces";
+import constants from "#models/constants";
+import { formatDateLong, type IdRna, type Siren } from "#utils/helpers";
+import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
+import odsClient from "../..";
 
 type IJournalOfficielAssociationRecord = {
   association_type: string; // 'assoLoi1901';
@@ -75,8 +75,8 @@ export const clientJOAFE = async (
   return {
     annonces: response.records.map(
       (annonce: IJournalOfficielAssociationRecord) => ({
-        typeAvisLibelle: annonce.typeavis || '',
-        datePublication: annonce.dateparution || '',
+        typeAvisLibelle: annonce.typeavis || "",
+        datePublication: annonce.dateparution || "",
         numeroParution: annonce.id,
         details: annonce.association_type_libelle,
         path: `${routes.journalOfficielAssociations.site.justificatif}${annonce.id}`,

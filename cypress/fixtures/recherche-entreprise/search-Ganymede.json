@@ -138,9 +138,7 @@
           "date_immatriculation": "1999-06-21",
           "date_radiation": null,
           "duree_personne_morale": 50,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 36000,
           "capital_variable": false,
@@ -300,9 +298,7 @@
           "date_immatriculation": "2014-08-07",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 110000,
           "capital_variable": false,
@@ -376,9 +372,7 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "1486"
-          ],
+          "liste_idcc": ["1486"],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -438,9 +432,7 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "1486"
-            ],
+            "liste_idcc": ["1486"],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -457,9 +449,7 @@
           "date_immatriculation": "2016-01-20",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 10000,
           "capital_variable": false,
@@ -470,9 +460,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "1486"
-          ],
+          "liste_idcc": ["1486"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -482,9 +470,7 @@
           "est_finess": false,
           "est_organisme_formation": true,
           "est_qualiopi": false,
-          "liste_id_organisme_formation": [
-            "11756944775"
-          ],
+          "liste_id_organisme_formation": ["11756944775"],
           "est_rge": false,
           "est_service_public": false,
           "est_siae": false,
@@ -614,9 +600,7 @@
           "date_immatriculation": "1996-11-07",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 152.45,
           "capital_variable": false,
@@ -798,10 +782,7 @@
           "date_immatriculation": "2009-03-09",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Gestion de biens",
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Gestion de biens", "Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,
@@ -961,9 +942,7 @@
           "date_immatriculation": "2021-07-26",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 2000,
           "capital_variable": false,
@@ -1114,9 +1093,7 @@
           "date_immatriculation": "2023-05-30",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Libérale non réglementée"
-          ],
+          "nature_entreprise": ["Libérale non réglementée"],
           "date_cloture_exercice": "3009",
           "capital_social": 1000,
           "capital_variable": false,
@@ -1276,9 +1253,7 @@
           "date_immatriculation": null,
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 500,
           "capital_variable": false,
@@ -1601,9 +1576,7 @@
           "date_immatriculation": "1996-06-24",
           "date_radiation": "2018-10-16",
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 1219.59,
           "capital_variable": false,

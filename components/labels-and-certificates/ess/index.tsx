@@ -1,15 +1,15 @@
-import FAQLink from '#components-ui/faq-link';
-import { ESSFrance, INSEE } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IESS } from '#models/certifications/ess';
+import { ESSFrance, INSEE } from "#components/administrations";
+import { DataSection } from "#components/section/data-section";
+import { TwoColumnTable } from "#components/table/simple";
+import FAQLink from "#components-ui/faq-link";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IESS } from "#models/certifications/ess";
 
 const ESSFAQLink = () => (
   <FAQLink
-    tooltipLabel="l’Economie Sociale et Solidaire"
     to="/definitions/economie-sociale-et-solidaire-ess"
+    tooltipLabel="l’Economie Sociale et Solidaire"
   >
     L’Economie Sociale et Solidaire (ESS) regroupe&nbsp;:
     <br />
@@ -46,28 +46,28 @@ export const CertificationESSSection = ({
   ess: IESS | IAPINotRespondingError;
 }) => (
   <DataSection
-    title="ESS - Économie Sociale et Solidaire"
-    id="ess"
-    sources={[EAdministration.ESSFRANCE, EAdministration.INSEE]}
     data={ess}
+    id="ess"
     notFoundInfo={<ESSNotFound />}
+    sources={[EAdministration.ESSFRANCE, EAdministration.INSEE]}
+    title="ESS - Économie Sociale et Solidaire"
   >
     {(ess) => (
       <>
-        Cette structure apparait dans la liste des entreprises de <ESSFAQLink />{' '}
+        Cette structure apparait dans la liste des entreprises de <ESSFAQLink />{" "}
         tenue par <ESSFrance />.
         <br />
         <br />
         <TwoColumnTable
           body={[
-            ['Nom', ess.nom],
-            ['Famille juridique', ess.familleJuridique],
+            ["Nom", ess.nom],
+            ["Famille juridique", ess.familleJuridique],
             [
               <>
                 <FAQLink tooltipLabel="CRESS">
                   Chambre régionale de l’économie sociale et solidaire ou
                   Chambre régionale d’économie sociale
-                </FAQLink>{' '}
+                </FAQLink>{" "}
               </>,
               ess.region,
             ],

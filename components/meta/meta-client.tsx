@@ -1,11 +1,11 @@
-import { NextSeo } from 'next-seo';
-import Head from 'next/head';
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import {
   OPENGRAPH_IMAGES,
   SHOULD_NOT_INDEX,
   SITE_DESCRIPTION,
   SITE_NAME,
-} from '.';
+} from ".";
 
 type IProps = {
   title: string;
@@ -16,7 +16,7 @@ type IProps = {
 
 const Meta: React.FC<IProps> = ({
   title = SITE_NAME,
-  description = '',
+  description = "",
   noIndex = false,
   canonical,
 }) => {
@@ -28,43 +28,43 @@ const Meta: React.FC<IProps> = ({
   return (
     <>
       <NextSeo
-        title={title ?? SITE_NAME}
-        description={description ?? SITE_DESCRIPTION}
         canonical={canonical}
+        description={description ?? SITE_DESCRIPTION}
+        nofollow={false}
+        noindex={noIndex ?? SHOULD_NOT_INDEX}
         openGraph={{
           ...(canonical ? { url: canonical } : {}),
-          locale: 'fr_FR',
-          type: 'website',
-          title: title,
+          locale: "fr_FR",
+          type: "website",
+          title,
           description: description ?? SITE_DESCRIPTION,
           images: OPENGRAPH_IMAGES,
           site_name: SITE_NAME,
         }}
-        noindex={noIndex ?? SHOULD_NOT_INDEX}
-        nofollow={false}
+        title={title ?? SITE_NAME}
       />
       <Head>
         <title>{title}</title>
         <link
-          rel="search"
-          type="application/opensearchdescription+xml"
-          title="Annuaire des Entreprises"
           href="https://annuaire-entreprises.data.gouv.fr/opensearch.xml"
+          rel="search"
+          title="Annuaire des Entreprises"
+          type="application/opensearchdescription+xml"
         />
 
         <meta char-set="utf-8" />
         <meta
-          name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          name="viewport"
         />
 
-        <meta name="format-detection" content="telephone=no" />
+        <meta content="telephone=no" name="format-detection" />
 
         {/* Schema.org for Google */}
-        <meta itemProp="name" content={title ?? SITE_NAME} />
+        <meta content={title ?? SITE_NAME} itemProp="name" />
         <meta
-          itemProp="description"
           content={description ?? SITE_DESCRIPTION}
+          itemProp="description"
         />
       </Head>
     </>

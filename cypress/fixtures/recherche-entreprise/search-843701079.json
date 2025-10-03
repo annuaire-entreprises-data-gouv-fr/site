@@ -43,10 +43,7 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "1596",
-            "2609"
-          ],
+          "liste_idcc": ["1596", "2609"],
           "liste_id_organisme_formation": null,
           "liste_rge": [
             "3111D111",
@@ -101,9 +98,7 @@
           "date_immatriculation": "2018-11-12",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 5000,
           "capital_variable": false,
@@ -114,10 +109,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "1596",
-            "2609"
-          ],
+          "liste_idcc": ["1596", "2609"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,

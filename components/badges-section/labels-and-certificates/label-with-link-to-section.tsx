@@ -1,5 +1,5 @@
-import { LabelAndCertificateBadge } from '#components-ui/badge/frequent';
-import InformationTooltip from '#components-ui/information-tooltip';
+import { LabelAndCertificateBadge } from "#components-ui/badge/frequent";
+import InformationTooltip from "#components-ui/information-tooltip";
 
 export function LabelWithLinkToSection({
   label,
@@ -18,7 +18,7 @@ export function LabelWithLinkToSection({
         label={label}
         link={{
           href: `/labels-certificats/${siren}#${sectionId}`,
-          'aria-label': `Consulter la section ${label} pour cette structure`,
+          "aria-label": `Consulter la section ${label} pour cette structure`,
         }}
       />
     </InformationTooltip>

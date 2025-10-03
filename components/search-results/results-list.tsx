@@ -1,13 +1,13 @@
-import { Icon } from '#components-ui/icon/wrapper';
-import IsActiveTag from '#components-ui/tag/is-active-tag';
-import UniteLegaleBadge from '#components/unite-legale-badge';
-import { estActif } from '#models/core/etat-administratif';
-import { isCollectiviteTerritoriale } from '#models/core/types';
-import { IDirigeants } from '#models/rne/types';
-import { ISearchResult } from '#models/search';
-import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
-import React from 'react';
-import styles from './style.module.css';
+import type React from "react";
+import UniteLegaleBadge from "#components/unite-legale-badge";
+import { Icon } from "#components-ui/icon/wrapper";
+import IsActiveTag from "#components-ui/tag/is-active-tag";
+import { estActif } from "#models/core/etat-administratif";
+import { isCollectiviteTerritoriale } from "#models/core/types";
+import type { IDirigeants } from "#models/rne/types";
+import type { ISearchResult } from "#models/search";
+import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
+import styles from "./style.module.css";
 
 type IProps = {
   results: ISearchResult[];
@@ -27,7 +27,7 @@ const DirigeantsOrElusList: React.FC<{
   }
 
   return (
-    <div className={styles['dirigeants-or-elus']}>
+    <div className={styles["dirigeants-or-elus"]}>
       <Icon slug="user">
         {firstFive
           .map((dirigeantOrElu) =>
@@ -35,15 +35,15 @@ const DirigeantsOrElusList: React.FC<{
               ? `${dirigeantOrElu.denomination}`
               : `${dirigeantOrElu.prenom} ${dirigeantOrElu.nom}`
           )
-          .join(', ')}
+          .join(", ")}
         {moreCount > 0 &&
-          `, et ${moreCount} autre${moreCount === 1 ? '' : 's'}`}
+          `, et ${moreCount} autre${moreCount === 1 ? "" : "s"}`}
       </Icon>
     </div>
   );
 };
 
-const AddressWithColouredZip = ({ adress = '', zip = '' }) => {
+const AddressWithColouredZip = ({ adress = "", zip = "" }) => {
   try {
     if (!zip) {
       return <>{adress}</>;
@@ -69,19 +69,19 @@ const ResultItem: React.FC<{
     shouldColorZipCode && result.matchingEtablissements.find((e) => e.estSiege);
 
   return (
-    <div className={styles['result-item']}>
+    <div className={styles["result-item"]}>
       <a
-        href={`/entreprise/${result.chemin}`}
-        key={result.siren}
         className="result-link no-style-link"
         data-siren={result.siren}
+        href={`/entreprise/${result.chemin}`}
+        key={result.siren}
       >
-        <div className={styles['title']}>
+        <div className={styles["title"]}>
           <span>{`${result.nomComplet}`}</span>
           <UniteLegaleBadge
-            uniteLegale={result}
-            small
             defaultBadgeShouldBeHid
+            small
+            uniteLegale={result}
           />
           {!estActif(result) && (
             <IsActiveTag
@@ -91,7 +91,7 @@ const ResultItem: React.FC<{
           )}
         </div>
         <div>
-          {result.libelleActivitePrincipale}{' '}
+          {result.libelleActivitePrincipale}{" "}
           {result.activitePrincipale ? `(${result.activitePrincipale})` : null}
         </div>
         <DirigeantsOrElusList
@@ -103,29 +103,29 @@ const ResultItem: React.FC<{
         />
         <div>
           <Icon slug="mapPin">
-            <span className={styles['adress']}>
+            <span className={styles["adress"]}>
               <AddressWithColouredZip
                 adress={result.siege.adressePostale}
-                zip={(shouldColorSiege && result.siege.codePostal) || ''}
+                zip={(shouldColorSiege && result.siege.codePostal) || ""}
               />
             </span>
           </Icon>
         </div>
       </a>
-      <ul className={styles['matching-etablissement']}>
+      <ul className={styles["matching-etablissement"]}>
         {(result.matchingEtablissements || [])
           .filter((e) => !e.estSiege)
           .map((etablissement) => (
             <li key={etablissement.siret}>
               <a
-                className={styles['adress']}
+                className={styles["adress"]}
                 href={`/etablissement/${etablissement.siret}`}
               >
                 <AddressWithColouredZip
                   adress={etablissement.adressePostale}
-                  zip={(shouldColorZipCode && etablissement.codePostal) || ''}
+                  zip={(shouldColorZipCode && etablissement.codePostal) || ""}
                 />
-                <span className={styles['down']} />
+                <span className={styles["down"]} />
               </a>
             </li>
           ))}
@@ -135,9 +135,9 @@ const ResultItem: React.FC<{
             href={`/entreprise/${result.chemin}#etablissements`}
           >
             {result.nombreEtablissementsOuverts === 0
-              ? `aucun établissement en activité`
+              ? "aucun établissement en activité"
               : `${result.nombreEtablissementsOuverts} établissement${
-                  result.nombreEtablissementsOuverts > 1 ? 's' : ''
+                  result.nombreEtablissementsOuverts > 1 ? "s" : ""
                 } en activité`}
           </a>
         </li>
