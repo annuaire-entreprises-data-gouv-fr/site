@@ -58,8 +58,7 @@ const getEtablissementFromSlug = async (
     etablissement.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
   }
 
-  const session = await getSession();
-  return anonymiseEtablissement(etablissement, session);
+  return etablissement;
 };
 
 /**
@@ -91,7 +90,13 @@ const fetchFromClients = async (
     return etablissementRechercheEntreprise;
   }
 
-  const etablissementInsee = await fetchEtablissmentFromInsee(siret, false);
+  const etablissementInsee = await fetchEtablissmentFromInsee(
+    siret,
+    false,
+    isAPINotResponding(etablissementRechercheEntreprise)
+      ? false
+      : etablissementRechercheEntreprise.complements.estEntrepreneurIndividuel
+  );
 
   /**
    * Nowhere to be found
@@ -147,10 +152,15 @@ const fetchFromClients = async (
 
 const fetchEtablissmentFromInsee = async (
   siret: Siret,
-  useFallback: boolean
+  useFallback: boolean,
+  isEntrepreneurIndividuel: boolean
 ): Promise<IEtablissement | IAPINotRespondingError> => {
   try {
-    return await clientEtablissementInsee(siret, useFallback);
+    return await clientEtablissementInsee(
+      siret,
+      useFallback,
+      isEntrepreneurIndividuel
+    );
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleEtablissement(siret);
@@ -160,7 +170,11 @@ const fetchEtablissmentFromInsee = async (
     }
 
     if (!useFallback) {
-      return await fetchEtablissmentFromInsee(siret, true);
+      return await fetchEtablissmentFromInsee(
+        siret,
+        true,
+        isEntrepreneurIndividuel
+      );
     }
 
     logErrorInSentry(
@@ -228,7 +242,7 @@ const getEtablissementWithUniteLegaleFromSlug = async (
   slug: string,
   isBot = false
 ): Promise<IEtablissementWithUniteLegale> => {
-  const etablissement = await getEtablissementFromSlug(slug, {
+  let etablissement = await getEtablissementFromSlug(slug, {
     isBot,
   });
 
@@ -240,6 +254,9 @@ const getEtablissementWithUniteLegaleFromSlug = async (
   if (uniteLegale.anciensSiegesSirets.indexOf(etablissement.siret) > -1) {
     etablissement.ancienSiege = true;
   }
+
+  const session = await getSession();
+  etablissement = anonymiseEtablissement(uniteLegale, etablissement, session);
 
   return { etablissement, uniteLegale };
 };

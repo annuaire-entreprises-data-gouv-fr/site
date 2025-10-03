@@ -9,6 +9,10 @@ export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string
 ) => ["1", "10", "1000"].indexOf(natureJuridique) > -1;
 
+export const isNotPersonneMoraleFromNatureJuridique = (
+  natureJuridique: string
+) => natureJuridique.startsWith("2");
+
 export const isTwoMonthOld = (dateAsString: string) => {
   try {
     const date = new Date(dateAsString);

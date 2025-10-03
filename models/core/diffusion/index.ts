@@ -5,7 +5,11 @@ import {
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import type { IEtablissementsList } from "../etablissements-list";
-import type { IEtablissement, IUniteLegale } from "../types";
+import {
+  type IEtablissement,
+  type IUniteLegale,
+  isPersonneMorale,
+} from "../types";
 
 export enum ISTATUTDIFFUSION {
   PROTECTED = "protégé en diffusion",
@@ -65,6 +69,7 @@ export const anonymiseUniteLegale = (
 
   // a single etablissement can be non-diffusible with UL being diffusible
   uniteLegale.etablissements = anonymiseEtablissements(
+    uniteLegale,
     uniteLegale.etablissements,
     session
   );
@@ -73,7 +78,11 @@ export const anonymiseUniteLegale = (
     return uniteLegale;
   }
   uniteLegale.nomComplet = getNomComplet(uniteLegale, session);
-  uniteLegale.siege = anonymiseEtablissement(uniteLegale.siege, session);
+  uniteLegale.siege = anonymiseEtablissement(
+    uniteLegale,
+    uniteLegale.siege,
+    session
+  );
   uniteLegale.chemin = uniteLegale.siren;
   return uniteLegale;
 };
@@ -81,48 +90,56 @@ export const anonymiseUniteLegale = (
 /**
  * Anonymise etablissement's adressen, enseigne, denomination
  * @param uniteLegale
+ * @param etablissement
  * @param session
  * @returns
  */
 export const anonymiseEtablissement = (
+  uniteLegale: IUniteLegale,
   etablissement: IEtablissement,
   session: ISession | null
 ) => {
   if (canSeeNonDiffusible(session) || estDiffusible(etablissement)) {
     return etablissement;
   }
-  const { adressePostale, adresse, commune } = etablissement || {};
+  const { adressePostale, adresse, commune, codePostal } = etablissement || {};
 
   etablissement.adresse = formatAdresseForDiffusion(
+    uniteLegale,
     etablissement,
     adresse,
     commune
   );
   etablissement.adressePostale = formatAdresseForDiffusion(
+    uniteLegale,
     etablissement,
     adressePostale,
     commune
   );
-
-  // 851915207
-  // should be reverted with https://github.com/annuaire-entreprises-data-gouv-fr/site/pull/1955
-  if (etablissement.siren === "851915207") {
-    etablissement.adresse = "";
-    etablissement.adressePostale = "";
-    etablissement.commune = "";
-    etablissement.codePostal = "";
-  }
+  etablissement.codePostal = formatCodePostalForDiffusion(
+    uniteLegale,
+    etablissement,
+    codePostal
+  );
+  etablissement.commune = formatCommuneForDiffusion(
+    uniteLegale,
+    etablissement,
+    commune
+  );
 
   etablissement.enseigne = defaultNonDiffusiblePlaceHolder(etablissement);
   etablissement.denomination = defaultNonDiffusiblePlaceHolder(etablissement);
+
   return etablissement;
 };
 
 const anonymiseEtablissements = (
+  uniteLegale: IUniteLegale,
   etablissements: IEtablissementsList["etablissements"],
   session: ISession | null
 ) => {
-  const anonymiser = (e: IEtablissement) => anonymiseEtablissement(e, session);
+  const anonymiser = (e: IEtablissement) =>
+    anonymiseEtablissement(uniteLegale, e, session);
 
   etablissements.all = etablissements.all.map(anonymiser);
   etablissements.open = etablissements.open.map(anonymiser);
@@ -165,6 +182,7 @@ const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {
 };
 
 const formatAdresseForDiffusion = (
+  uniteLegale: IUniteLegale,
   etablissement: IEtablissement,
   adresse: string,
   commune: string
@@ -173,9 +191,41 @@ const formatAdresseForDiffusion = (
     return adresse || "Adresse inconnue";
   }
 
-  if (!commune) {
+  if (!commune || !isPersonneMorale(uniteLegale)) {
     return defaultNonDiffusiblePlaceHolder(etablissement);
   }
+  return nonDiffusibleDataFormatter(commune);
+};
+
+const formatCodePostalForDiffusion = (
+  uniteLegale: IUniteLegale,
+  etablissement: IEtablissement,
+  codePostal: string
+) => {
+  if (estDiffusible(etablissement)) {
+    return codePostal;
+  }
+
+  if (!isPersonneMorale(uniteLegale)) {
+    return defaultNonDiffusiblePlaceHolder(etablissement);
+  }
+
+  return nonDiffusibleDataFormatter(codePostal);
+};
+
+const formatCommuneForDiffusion = (
+  uniteLegale: IUniteLegale,
+  etablissement: IEtablissement,
+  commune: string
+) => {
+  if (estDiffusible(etablissement)) {
+    return commune;
+  }
+
+  if (!isPersonneMorale(uniteLegale)) {
+    return defaultNonDiffusiblePlaceHolder(etablissement);
+  }
+
   return nonDiffusibleDataFormatter(commune);
 };
 
