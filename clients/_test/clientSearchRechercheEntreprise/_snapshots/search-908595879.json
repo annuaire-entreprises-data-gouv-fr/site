@@ -35,7 +35,7 @@
           "activitePrincipale": "70.21Z",
           "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
           "trancheEffectif": "01",
-          "anneeTrancheEffectif": "2022",
+          "anneeTrancheEffectif": "2023",
           "latitude": "48.873057",
           "longitude": "2.316605",
           "complements": {
@@ -86,7 +86,7 @@
               "activitePrincipale": "70.21Z",
               "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
               "trancheEffectif": "01",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "48.873057",
               "longitude": "2.316605",
               "complements": {
@@ -129,7 +129,7 @@
               "activitePrincipale": "70.21Z",
               "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
               "trancheEffectif": "01",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "48.873057",
               "longitude": "2.316605",
               "complements": {
@@ -165,9 +165,9 @@
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "01",
-        "anneeCategorieEntreprise": "2022",
+        "anneeCategorieEntreprise": "2023",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2022",
+        "anneeTrancheEffectif": "2023",
         "complements": {
           "estBio": false,
           "estEss": false,

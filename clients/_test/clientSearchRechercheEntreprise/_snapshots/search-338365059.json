@@ -35,7 +35,7 @@
           "activitePrincipale": "88.99B",
           "libelleActivitePrincipale": "Action sociale sans hébergement n.c.a. (88.99B)",
           "trancheEffectif": "11",
-          "anneeTrancheEffectif": "2022",
+          "anneeTrancheEffectif": "2023",
           "latitude": "43.277531",
           "longitude": "-0.356241",
           "complements": {
@@ -86,7 +86,7 @@
               "activitePrincipale": "88.99B",
               "libelleActivitePrincipale": "Action sociale sans hébergement n.c.a. (88.99B)",
               "trancheEffectif": "11",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "43.277531",
               "longitude": "-0.356241",
               "complements": {
@@ -129,7 +129,7 @@
               "activitePrincipale": "88.99B",
               "libelleActivitePrincipale": "Action sociale sans hébergement n.c.a. (88.99B)",
               "trancheEffectif": "11",
-              "anneeTrancheEffectif": "2022",
+              "anneeTrancheEffectif": "2023",
               "latitude": "43.277531",
               "longitude": "-0.356241",
               "complements": {
@@ -165,9 +165,9 @@
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "11",
-        "anneeCategorieEntreprise": "2022",
+        "anneeCategorieEntreprise": "2023",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2022",
+        "anneeTrancheEffectif": "2023",
         "complements": {
           "estBio": false,
           "estEss": true,
