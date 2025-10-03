@@ -93,13 +93,22 @@ export const clientUniteLegaleInsee = async (
   const siretSiege = uniteLegale.siege.siret;
 
   const [realSiege, allEtablissements] = await Promise.all([
-    clientEtablissementInsee(siretSiege, useFallback).catch((e) => {
+    clientEtablissementInsee(
+      siretSiege,
+      useFallback,
+      uniteLegale.complements.estEntrepreneurIndividuel
+    ).catch((e) => {
       if (e instanceof HttpForbiddenError) {
         return createNonDiffusibleEtablissement(uniteLegale.siege.siret);
       }
       return null;
     }), // better empty etablissement list than failing UL
-    clientAllEtablissementsInsee(siren, page, useFallback).catch(() => null),
+    clientAllEtablissementsInsee(
+      siren,
+      page,
+      useFallback,
+      uniteLegale.complements.estEntrepreneurIndividuel
+    ).catch(() => null),
   ]);
 
   const siege = realSiege || uniteLegale.siege;
@@ -112,10 +121,11 @@ export const clientUniteLegaleInsee = async (
   }${tmpUniteLegale.sigle ? ` (${tmpUniteLegale.sigle})` : ""}`;
 
   const etablissementsList = allEtablissements?.list || [siege];
-  etablissementsList.forEach(
-    (e) =>
-      (e.ancienSiege = uniteLegale.anciensSiegesSirets.indexOf(e.siret) > -1)
-  );
+  etablissementsList.forEach((e) => {
+    e.ancienSiege = uniteLegale.anciensSiegesSirets.indexOf(e.siret) > -1;
+    e.complements.estEntrepreneurIndividuel =
+      uniteLegale.complements.estEntrepreneurIndividuel;
+  });
 
   const etablissements = createEtablissementsList(
     etablissementsList,
@@ -178,6 +188,10 @@ const mapToDomainObject = (
     denominationUsuelle3UniteLegale,
   } = periodesUniteLegale[0];
 
+  const estEntrepreneurIndividuel = isEntrepreneurIndividuelFromNatureJuridique(
+    categorieJuridiqueUniteLegale
+  );
+
   const libelleActivitePrincipaleUniteLegale = libelleFromCodeNAF(
     activitePrincipaleUniteLegale,
     nomenclatureActivitePrincipaleUniteLegale,
@@ -196,6 +210,8 @@ const mapToDomainObject = (
     siege.estSiege = true;
     siege.trancheEffectif = "";
   }
+
+  siege.complements.estEntrepreneurIndividuel = estEntrepreneurIndividuel;
 
   /**
    *   either siege nom commercial or pre 2008 unite legale nom commercial
@@ -218,10 +234,6 @@ const mapToDomainObject = (
   )}`.trim();
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
-
-  const estEntrepreneurIndividuel = isEntrepreneurIndividuelFromNatureJuridique(
-    categorieJuridiqueUniteLegale
-  );
 
   const dateDernierTraitement = (dateDernierTraitementUniteLegale || "").split(
     "T"

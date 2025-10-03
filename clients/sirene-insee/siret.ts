@@ -94,7 +94,8 @@ interface IInseeetablissementUniteLegale {
 export const clientAllEtablissementsInsee = async (
   siren: string,
   page = 1,
-  useFallback: boolean
+  useFallback: boolean,
+  isEntrepreneurIndividuel: boolean
 ): Promise<{
   list: IEtablissement[];
   page: number;
@@ -117,7 +118,7 @@ export const clientAllEtablissementsInsee = async (
     );
 
   const allEtablissements = etablissements.map((e) =>
-    mapEtablissementToDomainObject(e)
+    mapEtablissementToDomainObject(e, isEntrepreneurIndividuel)
   );
 
   return {
@@ -129,7 +130,8 @@ export const clientAllEtablissementsInsee = async (
 
 export const clientEtablissementInsee = async (
   siret: Siret,
-  useFallback: boolean
+  useFallback: boolean,
+  isEntrepreneurIndividuel: boolean
 ) => {
   const { etablissement, etablissements } =
     await inseeClientGet<IInseeEtablissementResponse>(
@@ -140,17 +142,26 @@ export const clientEtablissementInsee = async (
 
   if (!etablissement && etablissements) {
     if (etablissements.length === 1) {
-      return mapEtablissementToDomainObject(etablissements[0], siret);
+      return mapEtablissementToDomainObject(
+        etablissements[0],
+        isEntrepreneurIndividuel,
+        siret
+      );
     }
     throw new HttpServerError(
       "INSEE returns multiple siret for one etablissement"
     );
   }
-  return mapEtablissementToDomainObject(etablissement, siret);
+  return mapEtablissementToDomainObject(
+    etablissement,
+    isEntrepreneurIndividuel,
+    siret
+  );
 };
 
 const mapEtablissementToDomainObject = (
   inseeEtablissement: IInseeEtablissement,
+  isEntrepreneurIndividuel: boolean,
   oldSiret?: Siret
 ): IEtablissement => {
   // There cases of inseeEtablissement undefined.
@@ -213,6 +224,9 @@ const mapEtablissementToDomainObject = (
     : lastStateChange.dateDebut;
 
   const defaultEtablissement = createDefaultEtablissement();
+
+  defaultEtablissement.complements.estEntrepreneurIndividuel =
+    isEntrepreneurIndividuel;
 
   const {
     complementAdresseEtablissement,

@@ -5,7 +5,12 @@ import {
 } from "#models/core/etablissements-list";
 import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import type { IEtatCivil } from "#models/rne/types";
-import type { IdRna, Siren, Siret } from "#utils/helpers";
+import {
+  type IdRna,
+  isNotPersonneMoraleFromNatureJuridique,
+  type Siren,
+  type Siret,
+} from "#utils/helpers";
 import { EAdministration } from "../administrations/EAdministration";
 import {
   Exception,
@@ -260,8 +265,18 @@ export const isAssociation = (
 export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estServicePublic;
 
-export const isEntrepreneurIndividuel = (uniteLegale: IUniteLegale): boolean =>
-  uniteLegale.complements.estEntrepreneurIndividuel;
+export const isEntrepreneurIndividuel = (
+  uniteLegaleOrEtablissement: IUniteLegale | IEtablissement
+): boolean => uniteLegaleOrEtablissement.complements.estEntrepreneurIndividuel;
+
+export const isPersonneMorale = (uniteLegale: IUniteLegale): boolean =>
+  !(
+    isEntrepreneurIndividuel(uniteLegale) ||
+    isNotPersonneMoraleFromNatureJuridique(uniteLegale.natureJuridique)
+  );
+
+export const isPersonnePhysique = (uniteLegale: IUniteLegale): boolean =>
+  !isPersonneMorale(uniteLegale);
 
 export interface ICollectiviteTerritoriale
   extends Omit<IUniteLegale, "colter"> {

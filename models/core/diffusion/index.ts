@@ -4,8 +4,14 @@ import {
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
+import type { ISearchResult } from "#models/search";
 import type { IEtablissementsList } from "../etablissements-list";
-import type { IEtablissement, IUniteLegale } from "../types";
+import {
+  type IEtablissement,
+  type IUniteLegale,
+  isPersonneMorale,
+  isPersonnePhysique,
+} from "../types";
 
 export enum ISTATUTDIFFUSION {
   PROTECTED = "protégé en diffusion",
@@ -55,79 +61,120 @@ export const estNonDiffusibleProtected = (
  * @param session
  * @returns
  */
-export const anonymiseUniteLegale = (
-  uniteLegale: IUniteLegale,
+export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
+  uniteLegale: T,
   session: ISession | null
-) => {
+): T => {
   if (canSeeNonDiffusible(session)) {
     return uniteLegale;
   }
 
   // a single etablissement can be non-diffusible with UL being diffusible
-  uniteLegale.etablissements = anonymiseEtablissements(
+  uniteLegale.etablissements = anonymiseUniteLegaleEtablissements(
+    uniteLegale,
     uniteLegale.etablissements,
     session
   );
+
+  // for search results, anonymise matching etablissements
+  if ("matchingEtablissements" in uniteLegale) {
+    uniteLegale.matchingEtablissements = anonymiseEtablissementsList(
+      uniteLegale,
+      uniteLegale.matchingEtablissements,
+      session
+    );
+  }
 
   if (estDiffusible(uniteLegale)) {
     return uniteLegale;
   }
   uniteLegale.nomComplet = getNomComplet(uniteLegale, session);
-  uniteLegale.siege = anonymiseEtablissement(uniteLegale.siege, session);
+  uniteLegale.siege = anonymiseEtablissement(
+    uniteLegale,
+    uniteLegale.siege,
+    session
+  );
   uniteLegale.chemin = uniteLegale.siren;
   return uniteLegale;
 };
 
 /**
- * Anonymise etablissement's adressen, enseigne, denomination
+ * Anonymise etablissement's adresse, enseigne, denomination
  * @param uniteLegale
+ * @param etablissement
  * @param session
  * @returns
  */
 export const anonymiseEtablissement = (
+  uniteLegale: IUniteLegale,
   etablissement: IEtablissement,
   session: ISession | null
 ) => {
   if (canSeeNonDiffusible(session) || estDiffusible(etablissement)) {
     return etablissement;
   }
-  const { adressePostale, adresse, commune } = etablissement || {};
+  const { adressePostale, adresse, commune, codePostal } = etablissement || {};
 
   etablissement.adresse = formatAdresseForDiffusion(
+    uniteLegale,
     etablissement,
     adresse,
     commune
   );
   etablissement.adressePostale = formatAdresseForDiffusion(
+    uniteLegale,
     etablissement,
     adressePostale,
     commune
   );
-
-  // 851915207
-  // should be reverted with https://github.com/annuaire-entreprises-data-gouv-fr/site/pull/1955
-  if (etablissement.siren === "851915207") {
-    etablissement.adresse = "";
-    etablissement.adressePostale = "";
-    etablissement.commune = "";
-    etablissement.codePostal = "";
-  }
+  etablissement.codePostal = formatCodePostalForDiffusion(
+    uniteLegale,
+    etablissement,
+    codePostal
+  );
+  etablissement.commune = formatCommuneForDiffusion(
+    uniteLegale,
+    etablissement,
+    commune
+  );
 
   etablissement.enseigne = defaultNonDiffusiblePlaceHolder(etablissement);
   etablissement.denomination = defaultNonDiffusiblePlaceHolder(etablissement);
+
   return etablissement;
 };
 
-const anonymiseEtablissements = (
+const anonymiseEtablissementsList = (
+  uniteLegale: IUniteLegale,
+  etablissements: IEtablissement[],
+  session: ISession | null
+) => etablissements.map((e) => anonymiseEtablissement(uniteLegale, e, session));
+
+const anonymiseUniteLegaleEtablissements = (
+  uniteLegale: IUniteLegale,
   etablissements: IEtablissementsList["etablissements"],
   session: ISession | null
 ) => {
-  const anonymiser = (e: IEtablissement) => anonymiseEtablissement(e, session);
-
-  etablissements.all = etablissements.all.map(anonymiser);
-  etablissements.open = etablissements.open.map(anonymiser);
-  etablissements.unknown = etablissements.unknown.map(anonymiser);
-  etablissements.closed = etablissements.closed.map(anonymiser);
+  etablissements.all = anonymiseEtablissementsList(
+    uniteLegale,
+    etablissements.all,
+    session
+  );
+  etablissements.open = anonymiseEtablissementsList(
+    uniteLegale,
+    etablissements.open,
+    session
+  );
+  etablissements.unknown = anonymiseEtablissementsList(
+    uniteLegale,
+    etablissements.unknown,
+    session
+  );
+  etablissements.closed = anonymiseEtablissementsList(
+    uniteLegale,
+    etablissements.closed,
+    session
+  );
 
   return etablissements;
 };
@@ -157,7 +204,7 @@ const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {
     return uniteLegale.nomComplet;
   }
 
-  if (estDiffusible(uniteLegale)) {
+  if (estDiffusible(uniteLegale) || isPersonneMorale(uniteLegale)) {
     return uniteLegale.nomComplet;
   }
 
@@ -165,6 +212,7 @@ const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {
 };
 
 const formatAdresseForDiffusion = (
+  uniteLegale: IUniteLegale,
   etablissement: IEtablissement,
   adresse: string,
   commune: string
@@ -173,9 +221,41 @@ const formatAdresseForDiffusion = (
     return adresse || "Adresse inconnue";
   }
 
-  if (!commune) {
+  if (!commune || isPersonnePhysique(uniteLegale)) {
     return defaultNonDiffusiblePlaceHolder(etablissement);
   }
+  return nonDiffusibleDataFormatter(commune);
+};
+
+const formatCodePostalForDiffusion = (
+  uniteLegale: IUniteLegale,
+  etablissement: IEtablissement,
+  codePostal: string
+) => {
+  if (estDiffusible(etablissement)) {
+    return codePostal;
+  }
+
+  if (isPersonnePhysique(uniteLegale)) {
+    return defaultNonDiffusiblePlaceHolder(etablissement);
+  }
+
+  return nonDiffusibleDataFormatter(codePostal);
+};
+
+const formatCommuneForDiffusion = (
+  uniteLegale: IUniteLegale,
+  etablissement: IEtablissement,
+  commune: string
+) => {
+  if (estDiffusible(etablissement)) {
+    return commune;
+  }
+
+  if (isPersonnePhysique(uniteLegale)) {
+    return defaultNonDiffusiblePlaceHolder(etablissement);
+  }
+
   return nonDiffusibleDataFormatter(commune);
 };
 
