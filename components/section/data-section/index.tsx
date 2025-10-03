@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { isAPI404 } from "#models/api-not-responding";
 import type { IDataFetchingState } from "#models/data-fetching";
 import { type ISectionProps, Section } from "..";
@@ -39,6 +37,5 @@ export function DataSection<T extends Exclude<unknown, IDataFetchingState>>({
     </Section>
   );
 }
-/* eslint-enable react/jsx-props-no-spreading */
 
 export { AsyncDataSectionClient as DataSectionClient } from "./client";

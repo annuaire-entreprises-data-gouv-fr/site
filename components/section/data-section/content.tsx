@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import AdministrationNotRespondingMessage from "#components/administration-not-responding/message";
 import { administrationsMetaData } from "#models/administrations";
 import {

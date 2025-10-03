@@ -41,7 +41,6 @@ export const FilterGeo: React.FC<{
   );
   const [showSuggestsHistory, setShowSuggestsHistory] = useState(false);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const search = useCallback(
     debounce(async (term: string) => {
       setLoading(true);

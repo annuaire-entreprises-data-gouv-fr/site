@@ -77,7 +77,6 @@ export const sensitiveRequestLogger = (
       useCase,
     };
 
-    // eslint-disable-next-line no-console
     console.info(JSON.stringify(log));
   } catch (e) {
     logErrorInSentry(
