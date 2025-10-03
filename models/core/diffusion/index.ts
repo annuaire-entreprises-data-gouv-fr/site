@@ -4,11 +4,13 @@ import {
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
+import type { ISearchResult } from "#models/search";
 import type { IEtablissementsList } from "../etablissements-list";
 import {
   type IEtablissement,
   type IUniteLegale,
   isPersonneMorale,
+  isPersonnePhysique,
 } from "../types";
 
 export enum ISTATUTDIFFUSION {
@@ -59,20 +61,29 @@ export const estNonDiffusibleProtected = (
  * @param session
  * @returns
  */
-export const anonymiseUniteLegale = (
-  uniteLegale: IUniteLegale,
+export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
+  uniteLegale: T,
   session: ISession | null
-) => {
+): T => {
   if (canSeeNonDiffusible(session)) {
     return uniteLegale;
   }
 
   // a single etablissement can be non-diffusible with UL being diffusible
-  uniteLegale.etablissements = anonymiseEtablissements(
+  uniteLegale.etablissements = anonymiseUniteLegaleEtablissements(
     uniteLegale,
     uniteLegale.etablissements,
     session
   );
+
+  // for search results, anonymise matching etablissements
+  if ("matchingEtablissements" in uniteLegale) {
+    uniteLegale.matchingEtablissements = anonymiseEtablissementsList(
+      uniteLegale,
+      uniteLegale.matchingEtablissements,
+      session
+    );
+  }
 
   if (estDiffusible(uniteLegale)) {
     return uniteLegale;
@@ -88,7 +99,7 @@ export const anonymiseUniteLegale = (
 };
 
 /**
- * Anonymise etablissement's adressen, enseigne, denomination
+ * Anonymise etablissement's adresse, enseigne, denomination
  * @param uniteLegale
  * @param etablissement
  * @param session
@@ -133,18 +144,37 @@ export const anonymiseEtablissement = (
   return etablissement;
 };
 
-const anonymiseEtablissements = (
+const anonymiseEtablissementsList = (
+  uniteLegale: IUniteLegale,
+  etablissements: IEtablissement[],
+  session: ISession | null
+) => etablissements.map((e) => anonymiseEtablissement(uniteLegale, e, session));
+
+const anonymiseUniteLegaleEtablissements = (
   uniteLegale: IUniteLegale,
   etablissements: IEtablissementsList["etablissements"],
   session: ISession | null
 ) => {
-  const anonymiser = (e: IEtablissement) =>
-    anonymiseEtablissement(uniteLegale, e, session);
-
-  etablissements.all = etablissements.all.map(anonymiser);
-  etablissements.open = etablissements.open.map(anonymiser);
-  etablissements.unknown = etablissements.unknown.map(anonymiser);
-  etablissements.closed = etablissements.closed.map(anonymiser);
+  etablissements.all = anonymiseEtablissementsList(
+    uniteLegale,
+    etablissements.all,
+    session
+  );
+  etablissements.open = anonymiseEtablissementsList(
+    uniteLegale,
+    etablissements.open,
+    session
+  );
+  etablissements.unknown = anonymiseEtablissementsList(
+    uniteLegale,
+    etablissements.unknown,
+    session
+  );
+  etablissements.closed = anonymiseEtablissementsList(
+    uniteLegale,
+    etablissements.closed,
+    session
+  );
 
   return etablissements;
 };
@@ -174,7 +204,7 @@ const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {
     return uniteLegale.nomComplet;
   }
 
-  if (estDiffusible(uniteLegale)) {
+  if (estDiffusible(uniteLegale) || isPersonneMorale(uniteLegale)) {
     return uniteLegale.nomComplet;
   }
 
@@ -191,7 +221,7 @@ const formatAdresseForDiffusion = (
     return adresse || "Adresse inconnue";
   }
 
-  if (!commune || !isPersonneMorale(uniteLegale)) {
+  if (!commune || isPersonnePhysique(uniteLegale)) {
     return defaultNonDiffusiblePlaceHolder(etablissement);
   }
   return nonDiffusibleDataFormatter(commune);
@@ -206,7 +236,7 @@ const formatCodePostalForDiffusion = (
     return codePostal;
   }
 
-  if (!isPersonneMorale(uniteLegale)) {
+  if (isPersonnePhysique(uniteLegale)) {
     return defaultNonDiffusiblePlaceHolder(etablissement);
   }
 
@@ -222,7 +252,7 @@ const formatCommuneForDiffusion = (
     return commune;
   }
 
-  if (!isPersonneMorale(uniteLegale)) {
+  if (isPersonnePhysique(uniteLegale)) {
     return defaultNonDiffusiblePlaceHolder(etablissement);
   }
 
