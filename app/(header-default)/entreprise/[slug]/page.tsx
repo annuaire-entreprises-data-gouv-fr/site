@@ -29,12 +29,12 @@ import {
 } from "#utils/helpers";
 import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
-  AppRouterProps,
+  type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
 import { UniteLegaleImmatriculationSection } from "app/(header-default)/entreprise/[slug]/_components/immatriculation-section";
 import UniteLegaleSummarySection from "app/(header-default)/entreprise/[slug]/_components/summary-section";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { permanentRedirect } from "next/navigation";
 
 export const generateMetadata = async (

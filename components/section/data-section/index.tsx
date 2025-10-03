@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import { isAPI404 } from "#models/api-not-responding";
-import { IDataFetchingState } from "#models/data-fetching";
-import { ISectionProps, Section } from "..";
-import { DataSectionContent, IDataSectionContentProps } from "./content";
+import type { IDataFetchingState } from "#models/data-fetching";
+import { type ISectionProps, Section } from "..";
+import { DataSectionContent, type IDataSectionContentProps } from "./content";
 
 interface IDataSectionProps<T>
   extends ISectionProps,

@@ -3,11 +3,11 @@ import { clientEntrepreneurSpectacles } from "#clients/open-data-soft/clients/en
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "#models/api-not-responding";
 import { FetchRessourceException } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
-import { IUniteLegale } from "../core/types";
+import type { IUniteLegale } from "../core/types";
 
 export interface IEntrepreneurSpectaclesCertification {
   licences: {

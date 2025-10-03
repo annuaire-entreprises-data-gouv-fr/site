@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse } from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 import { formatLog } from "../utils/format-log";
 import { httpErrorHandler } from "../utils/http-error-handler";
 

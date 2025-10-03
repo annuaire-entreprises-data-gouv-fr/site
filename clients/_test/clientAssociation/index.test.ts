@@ -1,5 +1,5 @@
 import { clientAssociation } from "#clients/api-proxy/association";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 import simplifyParams from "./simplify-params";
 

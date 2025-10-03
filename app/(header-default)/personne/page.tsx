@@ -13,8 +13,8 @@ import {
   parseIntWithDefaultValue,
 } from "#utils/helpers";
 import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
-import { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
-import { Metadata } from "next";
+import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
+import type { Metadata } from "next";
 
 async function extractParamsPersonne(props: AppRouterProps) {
   const searchParams = await props.searchParams;

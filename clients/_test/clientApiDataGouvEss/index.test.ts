@@ -1,5 +1,5 @@
 import { clientEss } from "#clients/api-data-gouv/ess";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientAssociation", () => {

@@ -2,7 +2,7 @@ import {
   clientRNEImmatriculation,
   clientRNEImmatriculationFallback,
 } from "#clients/api-proxy/rne";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 const TIMEOUT_RNE = 90000;

@@ -1,6 +1,6 @@
 "use client";
 
-import { IGeoElement } from "#clients/geo";
+import type { IGeoElement } from "#clients/geo";
 import { Info, Warning } from "#components-ui/alerts";
 import FloatingModal from "#components-ui/floating-modal";
 import { Loader } from "#components-ui/loader";
@@ -8,7 +8,7 @@ import { isAPI404, isAPINotResponding } from "#models/api-not-responding";
 import { searchGeoElementByText } from "#models/geo";
 import { debounce } from "#utils/helpers/debounce";
 import { useOutsideClick } from "hooks";
-import { KeyboardEventHandler, useCallback, useEffect, useState } from "react";
+import { type KeyboardEventHandler, useCallback, useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
 enum Issue {

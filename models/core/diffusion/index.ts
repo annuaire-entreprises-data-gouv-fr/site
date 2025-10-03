@@ -2,10 +2,10 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
-import { ReactElement } from "react";
-import { IEtablissementsList } from "../etablissements-list";
-import { IEtablissement, IUniteLegale } from "../types";
+import type { ISession } from "#models/authentication/user/session";
+import type { ReactElement } from "react";
+import type { IEtablissementsList } from "../etablissements-list";
+import type { IEtablissement, IUniteLegale } from "../types";
 
 export enum ISTATUTDIFFUSION {
   PROTECTED = "protégé en diffusion",

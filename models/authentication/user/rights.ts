@@ -1,5 +1,5 @@
 import { getIAgentScope } from "./helpers";
-import { ISession } from "./session";
+import type { ISession } from "./session";
 
 /**
  * Application scopes designate specific parts or section of the UI / app

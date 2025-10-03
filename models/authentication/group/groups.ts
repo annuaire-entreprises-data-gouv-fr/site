@@ -1,7 +1,7 @@
 import { HttpLocked, HttpNotFound } from "#clients/exceptions";
 import { default as rolesDataClient } from "#clients/roles-data";
-import { IRolesDataUser } from "#clients/roles-data/interface";
-import { IAgentScope } from "#models/authentication/agent/scopes/constants";
+import type { IRolesDataUser } from "#clients/roles-data/interface";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import { FetchRessourceException } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
 import { AgentNotVerifiedException } from "../authentication-exceptions";

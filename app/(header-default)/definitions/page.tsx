@@ -2,7 +2,7 @@ import TextWrapper from "#components-ui/text-wrapper";
 import parseMarkdownSync from "#components/markdown/parse-markdown";
 import StructuredDataFAQ from "#components/structured-data/faq";
 import { allDefinitions } from "#models/article/definitions";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export default function AllDefinitionsPage() {
   const definitions = allDefinitions;

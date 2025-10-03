@@ -1,4 +1,4 @@
-import { HttpResponse, HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw";
 import egaproRepresentation from "../../fixtures/egapro-representation.json";
 import egapro from "../../fixtures/egapro.json";
 

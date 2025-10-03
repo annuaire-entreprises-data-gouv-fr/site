@@ -1,7 +1,7 @@
 import TextWrapper from "#components-ui/text-wrapper";
 import AdministrationDescription from "#components/administrations/administration-description";
 import { administrationsMetaData } from "#models/administrations";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Liste des administrations partenaires de l’Annuaire des Entreprises",

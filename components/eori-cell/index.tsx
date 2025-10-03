@@ -4,13 +4,13 @@ import InformationTooltip from "#components-ui/information-tooltip";
 import { Loader } from "#components-ui/loader";
 import { CopyPaste } from "#components/table/copy-paste";
 import { isAPINotResponding } from "#models/api-not-responding";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import {
   hasFetchError,
   isDataLoading,
   isUnauthorized,
 } from "#models/data-fetching";
-import { Siret, formatSiret } from "#utils/helpers";
+import { type Siret, formatSiret } from "#utils/helpers";
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 

@@ -1,4 +1,4 @@
-import { EAdministration } from "./administrations/EAdministration";
+import type { EAdministration } from "./administrations/EAdministration";
 
 type IExceptionArgument = {
   /** Name of the exception, CamelCase

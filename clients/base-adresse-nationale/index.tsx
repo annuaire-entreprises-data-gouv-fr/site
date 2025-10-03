@@ -1,9 +1,9 @@
 import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import { IGeoLoc } from "#models/geo-loc";
+import type { IGeoLoc } from "#models/geo-loc";
 import { httpGet } from "#utils/network";
-import { IBANResponse } from "./types";
+import type { IBANResponse } from "./types";
 
 /**
  * GET address for geoloc

@@ -4,7 +4,7 @@ import logErrorInSentry from "#utils/sentry";
 import { EAdministration } from "./administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "./api-not-responding";
 import { FetchRessourceException } from "./exceptions";
 

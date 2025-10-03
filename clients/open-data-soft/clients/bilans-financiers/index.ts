@@ -1,13 +1,13 @@
 import { HttpNotFound } from "#clients/exceptions";
 import odsClient from "#clients/open-data-soft";
 import routes from "#clients/routes";
-import {
+import type {
   IIndicateursFinanciers,
   IIndicateursFinanciersSociete,
 } from "#models/finances-societe/types";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
-import { IAPIBilanResponse } from "./interface";
+import type { IAPIBilanResponse } from "./interface";
 
 /**
  * Données financière (Ratios Financiers (BCE / INPI))

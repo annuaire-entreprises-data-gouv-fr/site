@@ -1,9 +1,9 @@
 import routes from "#clients/routes";
-import { IRolesDataGroup } from "#models/authentication/group/groups";
+import type { IRolesDataGroup } from "#models/authentication/group/groups";
 import { InternalError } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
 import { rolesdataApiClient } from "./client";
-import {
+import type {
   IRolesDataGroupResponse,
   IRolesDataRoles,
   IRolesDataUser,

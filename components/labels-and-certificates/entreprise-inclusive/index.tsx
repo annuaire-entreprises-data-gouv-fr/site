@@ -1,11 +1,11 @@
-import React from "react";
+import type React from "react";
 import ButtonLink from "#components-ui/button";
 import FAQLink from "#components-ui/faq-link";
 import { MarcheInclusion } from "#components/administrations";
 import { DataSection } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { ICertifications } from "#models/certifications";
+import type { ICertifications } from "#models/certifications";
 import { formatSiret } from "#utils/helpers";
 
 export const EntrepriseInclusiveSection: React.FC<{

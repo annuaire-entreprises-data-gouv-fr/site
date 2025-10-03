@@ -1,6 +1,6 @@
 import MapWithResults from "#components/map/map-results";
-import { ISearchResults } from "#models/search";
-import { buildSearchQuery, IParams } from "#models/search/search-filter-params";
+import type { ISearchResults } from "#models/search";
+import { buildSearchQuery, type IParams } from "#models/search/search-filter-params";
 import { redirect } from "next/navigation";
 import ResultsCounter from "../results-counter";
 import ResultsList from "../results-list";

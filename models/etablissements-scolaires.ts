@@ -2,9 +2,9 @@ import { clientEducationNationale } from "#clients/education-nationale";
 import { HttpNotFound } from "#clients/exceptions";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "#models/api-not-responding";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 import { EAdministration } from "./administrations/EAdministration";
 import { FetchRessourceException } from "./exceptions";

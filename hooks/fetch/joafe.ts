@@ -1,8 +1,8 @@
 import { clientJOAFE } from "#clients/open-data-soft/clients/journal-officiel-associations";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAssociation } from "#models/core/types";
+import type { IAssociation } from "#models/core/types";
 import { FetchRessourceException } from "#models/exceptions";
-import { IdRna } from "#utils/helpers";
+import type { IdRna } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 

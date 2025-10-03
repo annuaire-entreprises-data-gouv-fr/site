@@ -1,13 +1,13 @@
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
 } from "#models/api-not-responding";
 import { InternalError } from "#models/exceptions";
 import { getDirigeantsRNE } from "#models/rne/dirigeants";
-import {
+import type {
   IDirigeantsMergedIGInpi,
   IDirigeantsWithMetadataMergedIGInpi,
 } from "#models/rne/types";

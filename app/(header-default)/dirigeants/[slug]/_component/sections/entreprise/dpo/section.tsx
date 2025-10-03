@@ -4,8 +4,8 @@ import { CNIL } from "#components/administrations";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
 import { formatIntFr, uniteLegaleLabel } from "#utils/helpers";
 import { useFetchDPO } from "hooks/fetch/dpo";
 

@@ -16,16 +16,16 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { estActif } from "#models/core/etat-administratif";
 import {
-  IUniteLegale,
+  type IUniteLegale,
   isAssociation,
   isServicePublic,
 } from "#models/core/types";
 import { formatDate, formatIntFr, formatSiret } from "#utils/helpers";
 import { libelleCategorieEntreprise } from "#utils/helpers/formatting/categories-entreprise";
-import React from "react";
+import type React from "react";
 import { EffectifCell } from "./effectif-cell";
 import {
   UniteLegaleInscriptionIG,

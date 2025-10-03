@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import constants from "#models/constants";
 
 const formLink = "https://tally.so/r/w478pA";

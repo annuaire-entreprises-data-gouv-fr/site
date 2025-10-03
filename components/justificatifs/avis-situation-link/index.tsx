@@ -6,14 +6,14 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import {
   documentNonDiffusiblePlaceHolder,
   estDiffusible,
   estNonDiffusibleProtected,
 } from "#models/core/diffusion";
-import { IEtablissement } from "#models/core/types";
-import React from "react";
+import type { IEtablissement } from "#models/core/types";
+import type React from "react";
 
 const AvisSituationLink: React.FC<{
   etablissement: IEtablissement;

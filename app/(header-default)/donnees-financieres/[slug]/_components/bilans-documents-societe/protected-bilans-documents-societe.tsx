@@ -7,13 +7,13 @@ import FAQLink from "#components-ui/faq-link";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import {
-  IUniteLegale,
+  type IUniteLegale,
   isAssociation,
   isServicePublic,
 } from "#models/core/types";
-import { IDocumentsRNE } from "#models/rne/types";
+import type { IDocumentsRNE } from "#models/rne/types";
 import { formatDateLong, pluralize } from "#utils/helpers";
 import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";

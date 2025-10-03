@@ -1,4 +1,4 @@
-import { IRolesDataUser } from "#clients/roles-data/interface";
+import type { IRolesDataUser } from "#clients/roles-data/interface";
 import { Warning } from "#components-ui/alerts";
 import ButtonLink from "#components-ui/button";
 import { FullScreenModal } from "#components-ui/full-screen-modal";

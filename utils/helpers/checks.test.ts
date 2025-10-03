@@ -5,7 +5,7 @@ import {
   isEntrepreneurIndividuelFromNatureJuridique,
   shouldNotIndex,
 } from "./checks";
-import { Siren } from "./siren-and-siret";
+import type { Siren } from "./siren-and-siret";
 
 describe("Check isEntrepreneurIndividuel", () => {
   test("Succeed with EI", () => {

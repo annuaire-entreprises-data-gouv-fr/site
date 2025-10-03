@@ -2,8 +2,8 @@ import { HttpNotFound } from "#clients/exceptions";
 import odsClient from "#clients/open-data-soft";
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import { IServicePublic } from "#models/service-public";
-import { removeSpecialChars, Siret } from "#utils/helpers";
+import type { IServicePublic } from "#models/service-public";
+import { removeSpecialChars, type Siret } from "#utils/helpers";
 
 interface IServicePublicRecord {
   adresse: string;

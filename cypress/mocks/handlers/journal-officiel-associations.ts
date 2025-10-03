@@ -1,4 +1,4 @@
-import { HttpResponse, HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw";
 import journalOfficielAssociations from "../../fixtures/journal-officiel-associations.json";
 
 export const journalOfficielAssociationsHandler: HttpResponseResolver = ({

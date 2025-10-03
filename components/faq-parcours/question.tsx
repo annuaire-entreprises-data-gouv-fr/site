@@ -2,7 +2,7 @@ import { Warning } from "#components-ui/alerts";
 import { MultiChoice } from "#components-ui/multi-choice";
 import TextWrapper from "#components-ui/text-wrapper";
 import { allDataToModify } from "#models/administrations/data-to-modify";
-import { IFaqArticle } from "#models/article/faq";
+import type { IFaqArticle } from "#models/article/faq";
 import {
   getAgentEmail,
   getAgentFullName,
@@ -11,9 +11,9 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { logMatomoEvent } from "#utils/matomo";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 export enum EQuestionType {
   LOADER = "loader",
   NONE = "none",

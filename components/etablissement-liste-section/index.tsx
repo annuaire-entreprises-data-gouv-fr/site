@@ -7,9 +7,9 @@ import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
 import constants from "#models/constants";
 import { estNonDiffusibleStrict } from "#models/core/diffusion";
-import { IEtablissement, IUniteLegale } from "#models/core/types";
+import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import { formatDate, formatSiret, pluralize } from "#utils/helpers";
-import React from "react";
+import type React from "react";
 
 const EtablissementTable: React.FC<{
   label?: string;

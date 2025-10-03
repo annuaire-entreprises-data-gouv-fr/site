@@ -1,8 +1,8 @@
 "use client";
 import {
   Children,
-  PropsWithChildren,
-  ReactNode,
+  type PropsWithChildren,
+  type ReactNode,
   cloneElement,
   isValidElement,
   useEffect,

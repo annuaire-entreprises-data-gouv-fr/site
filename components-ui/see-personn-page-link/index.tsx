@@ -1,5 +1,5 @@
-import { IEtatCivil, IEtatCivilMergedIGInpi } from "#models/rne/types";
-import { Siren } from "#utils/helpers";
+import type { IEtatCivil, IEtatCivilMergedIGInpi } from "#models/rne/types";
+import type { Siren } from "#utils/helpers";
 
 export const SeePersonPageLink = ({
   person,

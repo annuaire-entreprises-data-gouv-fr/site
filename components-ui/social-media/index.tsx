@@ -1,8 +1,8 @@
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { PrintNever } from "#components-ui/print-visibility";
-import { Siren } from "#utils/helpers";
-import React from "react";
+import type { Siren } from "#utils/helpers";
+import type React from "react";
 import PrintButton from "./print-button";
 import styles from "./styles.module.css";
 

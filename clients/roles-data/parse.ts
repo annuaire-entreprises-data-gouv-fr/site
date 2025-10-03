@@ -1,6 +1,6 @@
 import {
   allAgentScopes,
-  IAgentScope,
+  type IAgentScope,
 } from "#models/authentication/agent/scopes/constants";
 
 export const isAgentScope = (str: string): str is IAgentScope => {

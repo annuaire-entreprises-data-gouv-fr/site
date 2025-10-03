@@ -2,7 +2,7 @@
 
 import { ClientErrorExplanations } from "#components/error-explanations";
 import {
-  NextAppError,
+  type NextAppError,
   useLogFatalErrorAppClient,
 } from "hooks/use-log-fatal-error-app-client";
 

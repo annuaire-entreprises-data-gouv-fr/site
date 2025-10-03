@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import ExportCsv from "./export-csv";
 
 export const metadata: Metadata = {

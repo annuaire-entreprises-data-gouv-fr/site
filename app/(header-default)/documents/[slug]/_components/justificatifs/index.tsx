@@ -1,5 +1,5 @@
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale, isAssociation } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import { type IUniteLegale, isAssociation } from "#models/core/types";
 import AvisSituationSection from "./insee";
 import { JustificatifImmatriculationJOAFE } from "./joafe";
 import { JustificatifImmatriculationRNE } from "./rne";

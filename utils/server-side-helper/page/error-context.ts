@@ -1,5 +1,5 @@
-import { IncomingMessage } from "http";
-import { IExceptionContext } from "#models/exceptions";
+import type { IncomingMessage } from "http";
+import type { IExceptionContext } from "#models/exceptions";
 import { verifySiren, verifySiret } from "#utils/helpers";
 
 export const getContext = (

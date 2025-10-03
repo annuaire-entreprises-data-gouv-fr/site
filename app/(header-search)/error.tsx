@@ -3,7 +3,7 @@
 import { SearchErrorExplanations } from "#components/error-explanations";
 import { HeaderPageRouter } from "#components/header/header-page-router";
 import {
-  NextAppError,
+  type NextAppError,
   useLogFatalErrorAppClient,
 } from "hooks/use-log-fatal-error-app-client";
 

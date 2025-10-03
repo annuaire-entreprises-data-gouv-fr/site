@@ -1,6 +1,6 @@
 import { Error } from "#components-ui/alerts";
 import MatomoEvent from "#components/matomo-event";
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 import { formatIntFr, isLuhnValid } from "#utils/helpers";
 
 export const NotLuhnValidAlert: React.FC<{

@@ -1,4 +1,4 @@
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { Exception } from "#models/exceptions";
 import {
   extractSirenOrSiretFromRechercherUrl,

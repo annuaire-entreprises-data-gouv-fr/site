@@ -3,7 +3,7 @@ import { HttpNotFound } from "#clients/exceptions";
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "#models/api-not-responding";
 import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
 import { FetchRessourceException, Information } from "#models/exceptions";

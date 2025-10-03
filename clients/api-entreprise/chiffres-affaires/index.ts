@@ -1,10 +1,10 @@
 import routes from "#clients/routes";
-import { IChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
-import { UseCase } from "#models/use-cases";
-import { Siret } from "#utils/helpers";
+import type { IChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
+import type { UseCase } from "#models/use-cases";
+import type { Siret } from "#utils/helpers";
 import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
 import clientAPIEntreprise from "../client";
-import { IAPIEntrepriseChiffreAffaires } from "./types";
+import type { IAPIEntrepriseChiffreAffaires } from "./types";
 
 /**
  * GET CA from API Entreprise

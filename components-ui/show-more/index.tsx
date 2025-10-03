@@ -1,7 +1,7 @@
 "use client";
 
 import ButtonLink from "#components-ui/button";
-import { CSSProperties, useId, useState } from "react";
+import { type CSSProperties, useId, useState } from "react";
 import styles from "./style.module.css";
 
 type IProps = {

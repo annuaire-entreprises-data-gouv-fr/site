@@ -1,5 +1,5 @@
 import { AgentOrganisation } from "#models/authentication/agent/organisation";
-import { IAgentScope } from "#models/authentication/agent/scopes/constants";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import {
   NeedASiretException,
   PrestataireException,

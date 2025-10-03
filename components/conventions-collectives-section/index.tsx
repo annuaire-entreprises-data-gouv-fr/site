@@ -7,10 +7,10 @@ import NonRenseigne from "#components/non-renseigne";
 import { DataSection } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { ICCWithMetadata } from "#models/conventions-collectives";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { ICCWithMetadata } from "#models/conventions-collectives";
 import { capitalize, formatSiret, pluralize } from "#utils/helpers";
-import React from "react";
+import type React from "react";
 
 function CCUnknown({ ccWithMetadata }: { ccWithMetadata: ICCWithMetadata[] }) {
   const unknown = ccWithMetadata.filter((e) => e.unknown);

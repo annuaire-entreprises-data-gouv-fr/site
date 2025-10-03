@@ -4,10 +4,10 @@ import NonRenseigne from "#components/non-renseigne";
 import { DataSectionClient } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { IUniteLegale } from "#models/core/types";
-import { IDataFetchingState, isDataSuccess } from "#models/data-fetching";
-import { IServicePublic } from "#models/service-public";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IUniteLegale } from "#models/core/types";
+import { type IDataFetchingState, isDataSuccess } from "#models/data-fetching";
+import type { IServicePublic } from "#models/service-public";
 import { useFetchServicePublicSubServices } from "hooks/fetch/service-public-subservices";
 
 function SubServicesDataSection({

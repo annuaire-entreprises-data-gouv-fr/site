@@ -11,7 +11,7 @@ import {
 import constants from "#models/constants";
 import { changelogData } from "#models/historique-modifications";
 import getSession from "#utils/server-side-helper/app/get-session";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 const lastChangelog = changelogData[0];

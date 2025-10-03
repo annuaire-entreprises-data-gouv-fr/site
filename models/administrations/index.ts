@@ -1,5 +1,5 @@
 import { EAdministration } from "./EAdministration";
-import {
+import type {
   IAPIMonitorMetaData,
   IAdministrationMetaData,
   IAdministrationsMetaData,

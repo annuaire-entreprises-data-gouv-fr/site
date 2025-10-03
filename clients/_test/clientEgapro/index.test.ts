@@ -1,5 +1,5 @@
 import { clientEgapro } from "#clients/egapro";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientEgapro", () => {

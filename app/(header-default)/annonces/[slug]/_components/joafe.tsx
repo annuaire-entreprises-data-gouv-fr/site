@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import routes from "#clients/routes";
 import AssociationCreationNotFoundAlert from "#components-ui/alerts-with-explanations/association-creation-not-found-alert";
 import ButtonLink from "#components-ui/button";
@@ -9,7 +9,7 @@ import { AsyncDataSectionClient } from "#components/section/data-section/client"
 import { FullTable } from "#components/table/full";
 import { UniteLegalePageLink } from "#components/unite-legale-page-link";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAssociation } from "#models/core/types";
+import type { IAssociation } from "#models/core/types";
 import { formatDate } from "#utils/helpers";
 import { useFetchJOAFE } from "hooks";
 

@@ -1,8 +1,8 @@
 import routes from "#clients/routes";
-import { IConformite } from "#models/espace-agent/conformite";
-import { UseCase } from "#models/use-cases";
-import { Siret } from "#utils/helpers";
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
+import type { IConformite } from "#models/espace-agent/conformite";
+import type { UseCase } from "#models/use-cases";
+import type { Siret } from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseConformiteMSA = IAPIEntrepriseResponse<{
   status: "up_to_date" | string;

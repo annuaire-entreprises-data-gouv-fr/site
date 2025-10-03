@@ -1,6 +1,6 @@
 import { Icon } from "#components-ui/icon/wrapper";
 import constants from "#models/constants";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 export const ProtectedInlineData: React.FC<PropsWithChildren> = ({
   children,

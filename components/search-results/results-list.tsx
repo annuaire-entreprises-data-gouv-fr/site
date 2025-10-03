@@ -3,10 +3,10 @@ import IsActiveTag from "#components-ui/tag/is-active-tag";
 import UniteLegaleBadge from "#components/unite-legale-badge";
 import { estActif } from "#models/core/etat-administratif";
 import { isCollectiviteTerritoriale } from "#models/core/types";
-import { IDirigeants } from "#models/rne/types";
-import { ISearchResult } from "#models/search";
+import type { IDirigeants } from "#models/rne/types";
+import type { ISearchResult } from "#models/search";
 import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
-import React from "react";
+import type React from "react";
 import styles from "./style.module.css";
 
 type IProps = {

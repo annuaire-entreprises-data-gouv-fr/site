@@ -1,4 +1,4 @@
-import { IDirigeants } from "#models/rne/types";
+import type { IDirigeants } from "#models/rne/types";
 import { mergeDirigeants } from "./utils";
 
 describe("mergeDirigeants", () => {

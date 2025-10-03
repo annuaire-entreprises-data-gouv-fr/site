@@ -1,7 +1,8 @@
-import { IIconsSlug } from "#components-ui/icon";
+import type { IIconsSlug } from "#components-ui/icon";
 import { Icon } from "#components-ui/icon/wrapper";
 import constants from "#models/constants";
-import React, { PropsWithChildren } from "react";
+import type React from "react";
+import type { PropsWithChildren } from "react";
 import styles from "./styles.module.css";
 
 export const colors = {

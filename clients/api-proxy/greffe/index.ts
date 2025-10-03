@@ -1,14 +1,14 @@
 import routes from "#clients/routes";
 import constants from "#models/constants";
 import {
-  IUniteLegale,
+  type IUniteLegale,
   createDefaultEtablissement,
   createDefaultUniteLegale,
 } from "#models/core/types";
-import { Siren, formatDateYear } from "#utils/helpers";
+import { type Siren, formatDateYear } from "#utils/helpers";
 import { etatFromEtatAdministratifInsee } from "#utils/helpers/insee-variables";
 import { clientAPIProxy } from "../client";
-import { IIGResponse } from "./types";
+import type { IIGResponse } from "./types";
 
 /**
  * Call EORI to validate a French EORI number

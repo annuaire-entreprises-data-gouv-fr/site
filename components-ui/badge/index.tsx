@@ -1,5 +1,5 @@
-import { MouseEventHandler, PropsWithChildren } from "react";
-import { IIconsSlug } from "#components-ui/icon";
+import type { MouseEventHandler, PropsWithChildren } from "react";
+import type { IIconsSlug } from "#components-ui/icon";
 import { Icon } from "#components-ui/icon/wrapper";
 import styles from "./styles.module.css";
 

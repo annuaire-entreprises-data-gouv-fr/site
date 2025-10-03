@@ -1,7 +1,7 @@
 import routes from "#clients/routes";
-import { IAnnoncesAssociation } from "#models/annonces";
+import type { IAnnoncesAssociation } from "#models/annonces";
 import constants from "#models/constants";
-import { IdRna, Siren, formatDateLong } from "#utils/helpers";
+import { type IdRna, type Siren, formatDateLong } from "#utils/helpers";
 import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
 import odsClient from "../..";
 

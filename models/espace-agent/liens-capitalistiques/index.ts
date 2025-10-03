@@ -1,10 +1,10 @@
 import { clientApiEntrepriseLiensCapitalistiques } from "#clients/api-entreprise/liens-capitalistiques";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import {
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type {
   IEtatCivilLiensCapitalistiques,
   IPersonneMoraleLiensCapitalistiques,
 } from "#models/rne/types";
-import { UseCase } from "#models/use-cases";
+import type { UseCase } from "#models/use-cases";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 

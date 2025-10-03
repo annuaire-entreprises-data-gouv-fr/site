@@ -1,5 +1,5 @@
 import { PrintNever } from "#components-ui/print-visibility";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export function BrowserIsOutdatedBanner({ children }: { children: ReactNode }) {
   return (

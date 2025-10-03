@@ -1,7 +1,7 @@
 "use client";
 
-import { KeyboardEventHandler, useCallback, useEffect, useState } from "react";
-import { IGeoElement } from "#clients/geo";
+import { type KeyboardEventHandler, useCallback, useEffect, useState } from "react";
+import type { IGeoElement } from "#clients/geo";
 import { Info, Warning } from "#components-ui/alerts";
 import { Loader } from "#components-ui/loader";
 import { isAPI404, isAPINotResponding } from "#models/api-not-responding";

@@ -1,4 +1,4 @@
-import { IRolesDataRoles, IRolesDataUser } from "#clients/roles-data/interface";
+import type { IRolesDataRoles, IRolesDataUser } from "#clients/roles-data/interface";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
 import httpClient from "#utils/network";
 import { useState } from "react";

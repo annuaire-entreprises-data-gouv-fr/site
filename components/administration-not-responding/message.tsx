@@ -1,6 +1,6 @@
 import { Warning } from "#components-ui/alerts";
-import { IAdministrationMetaData } from "#models/administrations/types";
-import React from "react";
+import type { IAdministrationMetaData } from "#models/administrations/types";
+import type React from "react";
 
 interface IProps {
   administrationMetaData: IAdministrationMetaData;

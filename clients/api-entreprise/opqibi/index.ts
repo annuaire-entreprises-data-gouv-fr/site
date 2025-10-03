@@ -1,7 +1,7 @@
 import routes from "#clients/routes";
-import { IOpqibi } from "#models/espace-agent/certificats/opqibi";
-import { Siren } from "#utils/helpers";
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
+import type { IOpqibi } from "#models/espace-agent/certificats/opqibi";
+import type { Siren } from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseOpqibi = IAPIEntrepriseResponse<{
   numero_certificat: string; // "string",

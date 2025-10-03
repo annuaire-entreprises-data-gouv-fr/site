@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import ButtonLink from "#components-ui/button";
 import constants from "#models/constants";
 

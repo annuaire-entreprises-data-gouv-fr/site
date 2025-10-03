@@ -7,10 +7,10 @@ import { PrintNever } from "#components-ui/print-visibility";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAssociation } from "#models/core/types";
+import type { IAssociation } from "#models/core/types";
 import { formatDate, formatIntFr } from "#utils/helpers";
 import { useFetchJOAFE } from "hooks";
-import React from "react";
+import type React from "react";
 
 type IProps = {
   uniteLegale: IAssociation;

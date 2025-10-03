@@ -7,11 +7,11 @@ import {
 } from "#models/administrations/data-to-modify";
 import { Exception } from "#models/exceptions";
 import { logWarningInSentry } from "#utils/sentry";
-import {
+import type {
   AppRouterProps,
   IParams,
 } from "#utils/server-side-helper/app/extract-params";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 // should not happen since we declared generateStaticParams

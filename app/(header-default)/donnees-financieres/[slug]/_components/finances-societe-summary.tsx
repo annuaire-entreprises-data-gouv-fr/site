@@ -2,7 +2,7 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 
 export const FinancesSocieteSummary = ({
   session,

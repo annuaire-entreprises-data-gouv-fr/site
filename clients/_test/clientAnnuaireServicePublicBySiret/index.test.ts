@@ -1,5 +1,5 @@
 import { clientAnnuaireServicePublicBySiret } from "#clients/open-data-soft/clients/annuaire-service-public";
-import { Siret } from "#utils/helpers";
+import type { Siret } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientEntrepreneurSpectacles", () => {

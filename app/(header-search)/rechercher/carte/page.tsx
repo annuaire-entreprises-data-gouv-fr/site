@@ -5,8 +5,8 @@ import StructuredDataSearchAction from "#components/structured-data/search";
 import { searchWithoutProtectedSiren } from "#models/search";
 import SearchFilterParams from "#models/search/search-filter-params";
 import { parseIntWithDefaultValue } from "#utils/helpers";
-import { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
-import { Metadata } from "next";
+import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Rechercher une entreprise sur la carte",

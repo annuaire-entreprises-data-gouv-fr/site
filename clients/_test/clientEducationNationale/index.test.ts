@@ -1,5 +1,5 @@
 import { clientEducationNationale } from "#clients/education-nationale";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientEducationNationale", () => {

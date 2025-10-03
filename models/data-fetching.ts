@@ -1,5 +1,5 @@
 import {
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPINotResponding,
 } from "./api-not-responding";
 

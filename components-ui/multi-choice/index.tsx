@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEventHandler } from "react";
+import type { ChangeEventHandler } from "react";
 import styles from "./style.module.css";
 
 export type IProps = {

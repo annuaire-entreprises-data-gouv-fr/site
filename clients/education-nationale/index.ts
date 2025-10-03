@@ -1,10 +1,10 @@
 import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
-import { IEtablissementsScolaires } from "#models/etablissements-scolaires";
-import { Siren } from "#utils/helpers";
+import type { IEtablissementsScolaires } from "#models/etablissements-scolaires";
+import type { Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 import { zoneMapping } from "./helpers";
-import { IEducationNationaleRecord, IEducationNationaleRecords } from "./types";
+import type { IEducationNationaleRecord, IEducationNationaleRecords } from "./types";
 
 /**
  * Education nationale

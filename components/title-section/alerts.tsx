@@ -3,9 +3,9 @@ import NoSiegeSocialAlert from "#components-ui/alerts-with-explanations/no-siege
 import NonDiffusibleAlert from "#components-ui/alerts-with-explanations/non-diffusible";
 import NotInSireneAlert from "#components-ui/alerts-with-explanations/not-in-sirene-alert";
 import { NotLuhnValidAlert } from "#components-ui/alerts-with-explanations/not-luhn-valid";
-import { ISession } from "#models/authentication/user/session";
-import { ISTATUTDIFFUSION } from "#models/core/diffusion";
-import { IUniteLegale } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import type { ISTATUTDIFFUSION } from "#models/core/diffusion";
+import type { IUniteLegale } from "#models/core/types";
 
 export default function TitleAlerts({
   uniteLegale,

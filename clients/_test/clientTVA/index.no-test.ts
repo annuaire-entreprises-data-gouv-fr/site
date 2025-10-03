@@ -1,5 +1,5 @@
 import { clientTVA } from "#clients/api-proxy/tva";
-import { TVANumber } from "#utils/helpers";
+import type { TVANumber } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 const TIMEOUT_TVA = 30000;

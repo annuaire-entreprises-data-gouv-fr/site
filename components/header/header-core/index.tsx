@@ -9,9 +9,9 @@ import {
   hasRights,
   isLoggedIn,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
-import React from "react";
+import type React from "react";
 import ChangelogNotification from "../changelog-notification";
 import Menu from "../menu";
 import styles from "./styles.module.css";

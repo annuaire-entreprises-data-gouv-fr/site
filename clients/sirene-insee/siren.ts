@@ -6,15 +6,15 @@ import { estActif } from "#models/core/etat-administratif";
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
-  IUniteLegale,
+  type IUniteLegale,
 } from "#models/core/types";
 import {
   agregateTripleFields,
   capitalize,
   formatNameFull,
   isEntrepreneurIndividuelFromNatureJuridique,
-  Siren,
-  Siret,
+  type Siren,
+  type Siret,
 } from "#utils/helpers";
 import {
   libelleFromCategoriesJuridiques,

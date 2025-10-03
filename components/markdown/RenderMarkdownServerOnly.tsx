@@ -1,5 +1,5 @@
 import Summary from "#components-ui/summary";
-import parseMarkdownSync, { IMarkdown } from "./parse-markdown";
+import parseMarkdownSync, { type IMarkdown } from "./parse-markdown";
 
 export default function RenderMarkdownServerOnly({
   children,

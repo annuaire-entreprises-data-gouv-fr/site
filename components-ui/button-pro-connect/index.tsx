@@ -3,7 +3,8 @@
 import { logConversionEvent } from "#utils/matomo";
 import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 
 type IProps = {
   shouldRedirectToReferer?: boolean;

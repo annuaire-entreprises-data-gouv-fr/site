@@ -3,10 +3,11 @@ import { Icon } from "#components-ui/icon/wrapper";
 import DataSourcesTooltip from "#components-ui/information-tooltip/data-sources-tooltip";
 import Logo from "#components-ui/logo";
 import { administrationsMetaData } from "#models/administrations";
-import { EAdministration } from "#models/administrations/EAdministration";
+import type { EAdministration } from "#models/administrations/EAdministration";
 import constants from "#models/constants";
 import { formatDate, formatDateLong, isTwoMonthOld } from "#utils/helpers";
-import React, { PropsWithChildren } from "react";
+import type React from "react";
+import type { PropsWithChildren } from "react";
 import SectionErrorBoundary from "./section-error-boundary";
 import style from "./style.module.css";
 export interface ISectionProps {

@@ -2,7 +2,7 @@ import constants from "#models/constants";
 import { Exception } from "#models/exceptions";
 import { isSiren, isSiret } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,

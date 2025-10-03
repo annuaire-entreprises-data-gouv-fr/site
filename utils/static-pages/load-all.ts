@@ -1,4 +1,4 @@
-import { IArticle } from "#models/article/type";
+import type { IArticle } from "#models/article/type";
 
 export function loadAll<T extends IArticle>(
   articlesFolderContext: Record<string, T>

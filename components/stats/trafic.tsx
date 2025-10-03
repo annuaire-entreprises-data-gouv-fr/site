@@ -1,9 +1,9 @@
 "use client";
-import { IMatomoStats } from "#clients/matomo";
+import type { IMatomoStats } from "#clients/matomo";
 import { Select } from "#components-ui/select";
 import { StackedBarChart } from "#components/chart/stack-bar";
 import constants from "#models/constants";
-import { ChangeEvent, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 
 type IStatType = "agents" | "users" | "api";
 

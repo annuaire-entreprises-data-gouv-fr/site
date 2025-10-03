@@ -1,5 +1,5 @@
 import {
-  ISTATUTDIFFUSION,
+  type ISTATUTDIFFUSION,
   estDiffusible,
   estNonDiffusibleProtected,
 } from "#models/core/diffusion";

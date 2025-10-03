@@ -10,12 +10,12 @@ import {
 } from "#utils/helpers";
 import { cachedEtablissementWithUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
-  AppRouterProps,
+  type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
 import EtablissementSection from "components/etablissement-section";
 import MatomoEventRedirected from "components/matomo-event/search-redirected";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const generateMetadata = async (
   props: AppRouterProps

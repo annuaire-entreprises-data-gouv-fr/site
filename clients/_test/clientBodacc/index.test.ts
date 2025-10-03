@@ -1,6 +1,6 @@
 import { clientBodacc } from "#clients/open-data-soft/clients/bodacc";
-import { IAnnoncesBodacc } from "#models/annonces";
-import { Siren } from "#utils/helpers";
+import type { IAnnoncesBodacc } from "#models/annonces";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientBODACC", () => {

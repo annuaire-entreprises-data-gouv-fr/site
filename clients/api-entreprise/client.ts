@@ -1,7 +1,7 @@
 import { HttpUnauthorizedError } from "#clients/exceptions";
 import constants from "#models/constants";
 import { InternalError } from "#models/exceptions";
-import { UseCase } from "#models/use-cases";
+import type { UseCase } from "#models/use-cases";
 import { httpGet } from "#utils/network";
 import { sensitiveRequestCallerInfos } from "#utils/network/utils/sensitive-request-caller-infos";
 import { sensitiveRequestLogger } from "#utils/network/utils/sensitive-request-logger";

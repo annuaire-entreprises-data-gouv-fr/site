@@ -1,8 +1,8 @@
 import { clientMonitoring } from "#clients/monitoring";
 import { logWarningInSentry } from "#utils/sentry";
 import { administrationsMetaData } from "./administrations";
-import { EAdministration } from "./administrations/EAdministration";
-import { IAPIMonitorMetaData } from "./administrations/types";
+import type { EAdministration } from "./administrations/EAdministration";
+import type { IAPIMonitorMetaData } from "./administrations/types";
 import { FetchRessourceException } from "./exceptions";
 
 export type IRatio = {

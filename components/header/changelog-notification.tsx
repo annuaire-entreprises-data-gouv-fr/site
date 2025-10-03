@@ -5,7 +5,7 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { lastDates } from "#models/historique-modifications";
 import { formatDate } from "#utils/helpers";
 import { useStorage } from "hooks";

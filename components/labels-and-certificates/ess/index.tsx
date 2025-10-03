@@ -3,8 +3,8 @@ import { ESSFrance, INSEE } from "#components/administrations";
 import { DataSection } from "#components/section/data-section";
 import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { IESS } from "#models/certifications/ess";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IESS } from "#models/certifications/ess";
 
 const ESSFAQLink = () => (
   <FAQLink

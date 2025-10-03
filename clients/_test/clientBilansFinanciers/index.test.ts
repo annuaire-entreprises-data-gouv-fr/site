@@ -1,5 +1,5 @@
 import { clientBilansFinanciers } from "#clients/open-data-soft/clients/bilans-financiers";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientBilansFinanciers", () => {

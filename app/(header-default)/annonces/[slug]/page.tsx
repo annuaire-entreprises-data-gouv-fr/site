@@ -13,12 +13,12 @@ import {
 } from "#utils/helpers";
 import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
-  AppRouterProps,
+  type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
 import AnnoncesBodacc from "app/(header-default)/annonces/[slug]/_components/bodacc";
 import AnnoncesJOAFESection from "app/(header-default)/annonces/[slug]/_components/joafe";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { ObservationsRNE } from "./_components/observations-rne";
 
 export const generateMetadata = async (

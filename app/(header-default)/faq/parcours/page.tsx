@@ -1,5 +1,5 @@
 import getSession from "#utils/server-side-helper/app/get-session";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import ParcoursQuestions from "./_components/parcours-questions";
 
 export const metadata: Metadata = {

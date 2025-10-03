@@ -1,4 +1,4 @@
-import { HttpResponse, HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw";
 
 export const tvaHandler: HttpResponseResolver = ({ request }) => {
   let vatNumber: string | null = "12345678901";

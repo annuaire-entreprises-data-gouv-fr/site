@@ -4,8 +4,8 @@ import { MTPEI } from "#components/administrations";
 import { DataSection } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { IOrganismeFormation } from "#models/certifications/organismes-de-formation";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IOrganismeFormation } from "#models/certifications/organismes-de-formation";
 
 type OrganismeDeFormationSectionProps = {
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;

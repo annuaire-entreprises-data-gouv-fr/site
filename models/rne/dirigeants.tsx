@@ -4,10 +4,10 @@ import { clientDirigeantsRechercheEntreprise } from "#clients/recherche-entrepri
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "#models/api-not-responding";
-import { Siren, verifySiren } from "#utils/helpers";
-import { IDirigeantsWithMetadata } from "./types";
+import { type Siren, verifySiren } from "#utils/helpers";
+import type { IDirigeantsWithMetadata } from "./types";
 
 const fallback = async (siren: Siren) => {
   const dirigeants = await clientDirigeantsRechercheEntreprise(siren);

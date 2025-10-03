@@ -5,9 +5,9 @@ import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
 import { formatIntFr } from "#utils/helpers";
 import extractParamsAppRouter, {
-  AppRouterProps,
+  type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { use } from "react";
 import { InpiPDFDownloader } from "./_components/inpi-pdf-downloader";
 

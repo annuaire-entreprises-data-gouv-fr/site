@@ -1,9 +1,9 @@
 import { HttpServerError, HttpUnauthorizedError } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import httpClient, { IDefaultRequestConfig } from "#utils/network";
+import httpClient, { type IDefaultRequestConfig } from "#utils/network";
 import { URLSearchParams } from "url";
-import { IRolesDataAuthTokenResponse } from "./interface";
+import type { IRolesDataAuthTokenResponse } from "./interface";
 
 /**
  * Roles.data

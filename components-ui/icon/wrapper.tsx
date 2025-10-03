@@ -1,5 +1,5 @@
-import { PropsWithChildren } from "react";
-import { IIconsSlug, icons } from ".";
+import type { PropsWithChildren } from "react";
+import { type IIconsSlug, icons } from ".";
 import styles from "./styles.module.css";
 
 type IProps = {

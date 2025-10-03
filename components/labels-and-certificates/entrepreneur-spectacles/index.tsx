@@ -7,10 +7,10 @@ import NonRenseigne from "#components/non-renseigne";
 import { DataSection } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { IEntrepreneurSpectaclesCertification } from "#models/certifications/entrepreneur-spectacles";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IEntrepreneurSpectaclesCertification } from "#models/certifications/entrepreneur-spectacles";
 import { formatDate, pluralize } from "#utils/helpers";
-import React from "react";
+import type React from "react";
 
 export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
   entrepreneurSpectacles:

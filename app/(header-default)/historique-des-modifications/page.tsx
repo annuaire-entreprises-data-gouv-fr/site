@@ -1,6 +1,6 @@
 import FAQLink from "#components-ui/faq-link";
 import getSession from "#utils/server-side-helper/app/get-session";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import ChangelogWithFilters from "./_components";
 
 export const metadata: Metadata = {

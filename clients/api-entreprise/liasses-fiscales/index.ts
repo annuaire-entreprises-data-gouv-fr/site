@@ -1,9 +1,9 @@
 import routes from "#clients/routes";
-import { ILiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
-import { UseCase } from "#models/use-cases";
-import { Siren } from "#utils/helpers";
+import type { ILiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
+import type { UseCase } from "#models/use-cases";
+import type { Siren } from "#utils/helpers";
 import clientAPIEntreprise from "../client";
-import { IAPIEntrepriseLiassesFiscales } from "./types";
+import type { IAPIEntrepriseLiassesFiscales } from "./types";
 
 /**
  * GET association from API Entreprise

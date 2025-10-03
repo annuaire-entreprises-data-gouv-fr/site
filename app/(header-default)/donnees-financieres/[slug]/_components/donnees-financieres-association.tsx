@@ -1,6 +1,6 @@
 import { HorizontalSeparator } from "#components-ui/horizontal-separator";
-import { ISession } from "#models/authentication/user/session";
-import { IAssociation } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import type { IAssociation } from "#models/core/types";
 import ComptesAssociationSection from "./comptes-association";
 import FinancesAssociationSection from "./finances-association";
 import SubventionsAssociationSection from "./subventions-association";

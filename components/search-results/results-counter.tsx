@@ -1,6 +1,6 @@
 import MapOrListSwitch from "#components/advanced-search/map-or-list";
-import { buildSearchQuery, IParams } from "#models/search/search-filter-params";
-import React from "react";
+import { buildSearchQuery, type IParams } from "#models/search/search-filter-params";
+import type React from "react";
 import styles from "./style.module.css";
 
 const ResultsCounter: React.FC<{

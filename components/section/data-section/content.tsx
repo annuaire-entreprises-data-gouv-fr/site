@@ -3,11 +3,11 @@
 import AdministrationNotRespondingMessage from "#components/administration-not-responding/message";
 import { administrationsMetaData } from "#models/administrations";
 import {
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
 } from "#models/api-not-responding";
-import { IDataFetchingState } from "#models/data-fetching";
+import type { IDataFetchingState } from "#models/data-fetching";
 
 export type IDataSectionContentProps<T> = {
   data: IAPINotRespondingError | T;

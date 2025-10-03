@@ -1,5 +1,5 @@
 import SearchFilters from "#components/advanced-search/search-filters";
-import { IParams } from "#models/search/search-filter-params";
+import type { IParams } from "#models/search/search-filter-params";
 import styles from "./style.module.css";
 
 type IProps = {

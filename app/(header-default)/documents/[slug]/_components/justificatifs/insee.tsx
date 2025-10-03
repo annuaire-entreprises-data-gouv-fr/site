@@ -10,11 +10,11 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible } from "#models/core/diffusion";
-import { IEtablissement, IUniteLegale } from "#models/core/types";
+import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import { formatSiret } from "#utils/helpers";
-import React from "react";
+import type React from "react";
 
 const AvisSituationTable: React.FC<{
   etablissements: IEtablissement[];

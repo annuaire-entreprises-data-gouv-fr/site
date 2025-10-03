@@ -7,11 +7,11 @@ import { Tag } from "#components-ui/tag";
 import { Section } from "#components/section";
 import { administrationsMetaData } from "#models/administrations";
 import { isLoggedIn } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
-import { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
+import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import styles from "./style.module.css";
 
 export const metadata: Metadata = {

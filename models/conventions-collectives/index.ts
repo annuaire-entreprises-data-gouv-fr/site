@@ -1,11 +1,11 @@
 import { clientIdccRechercheEntreprise } from "#clients/recherche-entreprise/idcc";
 import { clientIdccMetadata } from "#clients/recherche-entreprise/idcc-metadata";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 import { EAdministration } from "../administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "../api-not-responding";
 import { FetchRessourceException } from "../exceptions";
 import { idccUpdates } from "./idcc-updates";

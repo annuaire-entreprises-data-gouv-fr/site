@@ -1,4 +1,4 @@
-import { ExtendedExportCsvInput } from "./export-csv";
+import type { ExtendedExportCsvInput } from "./export-csv";
 import styles from "./styles.module.css";
 
 export const LocationTags = ({

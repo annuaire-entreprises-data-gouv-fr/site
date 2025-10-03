@@ -1,7 +1,7 @@
 "use client";
 
-import { IRolesDataRoles } from "#clients/roles-data/interface";
-import { IRolesDataGroup } from "#models/authentication/group/groups";
+import type { IRolesDataRoles } from "#clients/roles-data/interface";
+import type { IRolesDataGroup } from "#models/authentication/group/groups";
 import { useState } from "react";
 import { GroupItem } from "./group-item";
 

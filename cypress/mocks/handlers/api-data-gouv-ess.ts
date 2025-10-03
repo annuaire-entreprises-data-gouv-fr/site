@@ -1,4 +1,4 @@
-import { HttpResponse, HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw";
 import apiDataGouvEss from "../../fixtures/api-data-gouv-ess.json";
 
 export const apiDataGouvEssHandler: HttpResponseResolver = ({ request }) => {

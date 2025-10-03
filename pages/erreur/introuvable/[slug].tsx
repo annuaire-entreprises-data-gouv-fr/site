@@ -8,8 +8,8 @@ import {
   isSiren,
   isSiret,
 } from "#utils/helpers";
-import { GetServerSideProps } from "next";
-import { NextPageWithLayout } from "pages/_app";
+import type { GetServerSideProps } from "next";
+import type { NextPageWithLayout } from "pages/_app";
 
 type SirenOrSiretNotFoundPageProps = {
   slug?: string;

@@ -1,5 +1,5 @@
 import { clientApiEntrepriseEffectifsAnnuels } from "#clients/api-entreprise/effectifs/annuels";
-import { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 

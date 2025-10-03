@@ -1,12 +1,12 @@
 import {
   isEntrepreneurIndividuel,
-  IUniteLegale,
+  type IUniteLegale,
   SirenNotFoundError,
 } from "#models/core/types";
 import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
 import { Exception } from "#models/exceptions";
 import {
-  IHidePersonalDataRequest,
+  type IHidePersonalDataRequest,
   requestSirenProtection,
 } from "#models/protected-siren/request-siren-protection";
 import { hasSirenFormat } from "#utils/helpers";

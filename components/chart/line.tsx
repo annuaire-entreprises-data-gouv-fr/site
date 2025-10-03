@@ -7,8 +7,8 @@ import {
   Title as ChartTitle,
   Tooltip,
   Legend,
-  ChartData,
-  ChartOptions,
+  type ChartData,
+  type ChartOptions,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { htmlLegendPlugin } from "./html-legend-plugin";

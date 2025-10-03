@@ -2,8 +2,8 @@ import FAQLink from "#components-ui/faq-link";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { ICollectiviteTerritoriale } from "#models/core/types";
-import React from "react";
+import type { ICollectiviteTerritoriale } from "#models/core/types";
+import type React from "react";
 
 const CollectiviteTerritorialeSection: React.FC<{
   uniteLegale: ICollectiviteTerritoriale;

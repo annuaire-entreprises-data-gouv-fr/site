@@ -1,11 +1,11 @@
-import React from "react";
+import type React from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import {
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
 } from "#models/api-not-responding";
-import { IConformite } from "#models/espace-agent/conformite";
+import type { IConformite } from "#models/espace-agent/conformite";
 
 const APINotRespongingElement: React.FC<{
   data: IAPINotRespondingError;

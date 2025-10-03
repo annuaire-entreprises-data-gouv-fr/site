@@ -1,8 +1,8 @@
 import ButtonLink from "#components-ui/button";
 import Meta from "#components/meta/meta-client";
 import constants from "#models/constants";
-import { GetServerSideProps } from "next";
-import { NextPageWithLayout } from "pages/_app";
+import type { GetServerSideProps } from "next";
+import type { NextPageWithLayout } from "pages/_app";
 
 const TooManyRequest: NextPageWithLayout = () => {
   return (

@@ -1,5 +1,5 @@
 import { getRolesMetadata } from "#clients/roles-data";
-import { IRolesDataRoles } from "#clients/roles-data/interface";
+import type { IRolesDataRoles } from "#clients/roles-data/interface";
 import { DataStore } from "#utils/data-store";
 
 class RolesmetadataStore {

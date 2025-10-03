@@ -7,8 +7,8 @@ import {
   NotEnoughParamsException,
   createDefaultUniteLegale,
 } from "#models/core/types";
-import { ISearchResults } from "#models/search";
-import SearchFilterParams from "#models/search/search-filter-params";
+import type { ISearchResults } from "#models/search";
+import type SearchFilterParams from "#models/search/search-filter-params";
 import { parseIntWithDefaultValue, verifySiren } from "#utils/helpers";
 import {
   libelleFromCategoriesJuridiques,
@@ -20,7 +20,7 @@ import {
   statuDiffusionFromStatutDiffusionInsee,
 } from "#utils/helpers/insee-variables";
 import { httpGet } from "#utils/network";
-import { IResult, ISearchResponse } from "./interface";
+import type { IResult, ISearchResponse } from "./interface";
 import {
   mapToDirigeantModel,
   mapToElusModel,

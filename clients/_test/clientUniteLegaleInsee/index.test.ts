@@ -1,4 +1,4 @@
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { clientUniteLegaleInsee } from "../../sirene-insee/siren";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 import simplifyParams from "./simplify-params";

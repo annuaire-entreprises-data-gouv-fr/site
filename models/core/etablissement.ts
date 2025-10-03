@@ -8,7 +8,7 @@ import { clientEtablissementInsee } from "#clients/sirene-insee/siret";
 import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
 import { isProtectedSiren } from "#models/protected-siren";
 import {
-  Siret,
+  type Siret,
   extractNicFromSiret,
   extractSirenFromSiret,
   verifySiret,
@@ -22,19 +22,19 @@ import { shouldUseInsee } from ".";
 import { EAdministration } from "../administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
 } from "../api-not-responding";
-import { FetchRessourceException, IExceptionContext } from "../exceptions";
+import { FetchRessourceException, type IExceptionContext } from "../exceptions";
 import {
   ISTATUTDIFFUSION,
   anonymiseEtablissement,
   estDiffusible,
 } from "./diffusion";
 import {
-  IEtablissement,
-  IEtablissementWithUniteLegale,
+  type IEtablissement,
+  type IEtablissementWithUniteLegale,
   SiretNotFoundError,
   createDefaultEtablissement,
 } from "./types";

@@ -30,11 +30,11 @@ import {
 } from "#utils/helpers";
 import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
-  AppRouterProps,
+  type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
 import AlimConfianceSection from "app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/alim-confiance/section";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const generateMetadata = async (
   props: AppRouterProps

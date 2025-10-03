@@ -1,4 +1,4 @@
-import { IGeoElement } from "#clients/geo";
+import type { IGeoElement } from "#clients/geo";
 import { clientCommuneByCp, clientCommunesByName } from "#clients/geo/communes";
 import {
   clientDepartementByCode,
@@ -9,7 +9,7 @@ import { clientRegionsByName } from "#clients/geo/regions";
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "#models/api-not-responding";
 
 export async function searchGeoElementByText(

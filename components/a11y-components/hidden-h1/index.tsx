@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 const HiddenH1: React.FC<{ title: string }> = ({ title }) => (
   <h1

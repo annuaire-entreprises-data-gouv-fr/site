@@ -1,8 +1,8 @@
 import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import { ISubvention, ISubventions } from "#models/subventions/association";
-import { IdRna, Siren } from "#utils/helpers";
+import type { ISubvention, ISubventions } from "#models/subventions/association";
+import type { IdRna, Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 import { sensitiveRequestCallerInfos } from "#utils/network/utils/sensitive-request-caller-infos";
 import { sensitiveRequestLogger } from "#utils/network/utils/sensitive-request-logger";

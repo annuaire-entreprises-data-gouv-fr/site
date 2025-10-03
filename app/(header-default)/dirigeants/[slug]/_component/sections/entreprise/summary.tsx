@@ -2,11 +2,11 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import {
   isEntrepreneurIndividuel,
   isServicePublic,
-  IUniteLegale,
+  type IUniteLegale,
 } from "#models/core/types";
 
 type IDirigeantSummaryProps = {

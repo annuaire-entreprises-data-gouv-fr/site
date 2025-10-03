@@ -2,7 +2,8 @@
 
 import constants from "#models/constants";
 import { useStorage } from "hooks";
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import { FullScreenModal } from "../../components-ui/full-screen-modal";
 
 const MODAL_ID = "welcome-modal-agent";

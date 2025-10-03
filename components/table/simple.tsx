@@ -2,7 +2,8 @@ import NonRenseigne from "#components/non-renseigne";
 import constants from "#models/constants";
 import { InternalError } from "#models/exceptions";
 import { logWarningInSentry } from "#utils/sentry";
-import React, { JSX, PropsWithChildren } from "react";
+import type React from "react";
+import type { JSX, PropsWithChildren } from "react";
 import { CopyPaste } from "./copy-paste";
 import styles from "./styleSimple.module.css";
 

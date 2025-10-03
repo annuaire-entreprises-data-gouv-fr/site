@@ -6,7 +6,7 @@ import {
   ServicePublicBadge,
 } from "#components-ui/badge/frequent";
 import {
-  IUniteLegale,
+  type IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,

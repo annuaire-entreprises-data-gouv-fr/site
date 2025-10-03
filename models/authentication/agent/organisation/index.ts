@@ -1,9 +1,9 @@
 import { HttpForbiddenError, HttpServerError } from "#clients/exceptions";
 import { isAPINotResponding } from "#models/api-not-responding";
 import { CanRequestAuthorizationException } from "#models/authentication/authentication-exceptions";
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 import { fetchUniteLegaleFromRechercheEntreprise } from "#models/core/unite-legale";
-import { extractSirenFromSiret, Siren, Siret } from "#utils/helpers";
+import { extractSirenFromSiret, type Siren, type Siret } from "#utils/helpers";
 import { defaultAgentScopes } from "../scopes/constants";
 import { mightBeAnAuthorizedAdministration } from "./might-be-an-administration";
 import { isOrganisationWhitelisted } from "./whitelisted-administrations";

@@ -1,9 +1,9 @@
 import routes from "#clients/routes";
-import { IBilansProtected } from "#models/espace-agent/bilans";
-import { UseCase } from "#models/use-cases";
-import { Siren } from "#utils/helpers";
+import type { IBilansProtected } from "#models/espace-agent/bilans";
+import type { UseCase } from "#models/use-cases";
+import type { Siren } from "#utils/helpers";
 import clientAPIEntreprise from "../client";
-import { IAPIEntrepriseBanqueDeFranceBilans } from "./types";
+import type { IAPIEntrepriseBanqueDeFranceBilans } from "./types";
 
 /**
  * GET association from API Entreprise

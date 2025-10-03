@@ -1,10 +1,10 @@
 "use client";
 
 import constants from "#models/constants";
-import { IEtablissement } from "#models/core/types";
+import type { IEtablissement } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
 import { useFetchGeoLoc } from "hooks/fetch/geoloc";
-import maplibregl, { Map } from "maplibre-gl";
+import maplibregl, { type Map } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef } from "react";
 import { hasWebGLSupport } from "./has-web-gl";

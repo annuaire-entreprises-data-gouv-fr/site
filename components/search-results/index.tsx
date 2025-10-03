@@ -1,5 +1,5 @@
-import { ISearchResults } from "#models/search";
-import { IParams } from "#models/search/search-filter-params";
+import type { ISearchResults } from "#models/search";
+import type { IParams } from "#models/search/search-filter-params";
 import ResultsCounter from "./results-counter";
 import ResultsList from "./results-list";
 import ResultsPagination from "./results-pagination";

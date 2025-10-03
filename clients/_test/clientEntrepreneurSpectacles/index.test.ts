@@ -1,5 +1,5 @@
 import { clientEntrepreneurSpectacles } from "#clients/open-data-soft/clients/entrepreneur-spectacles";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientEntrepreneurSpectacles", () => {

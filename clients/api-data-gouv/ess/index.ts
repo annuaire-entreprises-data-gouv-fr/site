@@ -1,8 +1,8 @@
 import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
-import { IESS } from "#models/certifications/ess";
+import type { IESS } from "#models/certifications/ess";
 import constants from "#models/constants";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 
 export const clientEss = async (siren: Siren): Promise<IESS> => {

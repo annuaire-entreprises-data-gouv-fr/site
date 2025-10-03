@@ -1,5 +1,5 @@
 import { estNonDiffusibleStrict } from "#models/core/diffusion";
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 import { Warning } from "../alerts";
 
 const NoSiegeSocialAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({

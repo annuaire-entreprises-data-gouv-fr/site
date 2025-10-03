@@ -1,6 +1,6 @@
 import { ConnexionSubLayout } from "#components-ui/connexion-layout";
 import connexionRefusedPicture from "#components-ui/illustrations/connexion-failed";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Vous n’êtes pas autorisé(e) à accéder à l’espace agent",
   robots: "noindex, nofollow",

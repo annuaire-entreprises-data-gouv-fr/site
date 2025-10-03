@@ -1,4 +1,4 @@
-import { IAgentScope } from "./constants";
+import type { IAgentScope } from "./constants";
 
 export class Scopes {
   private _scopes: IAgentScope[] = [];

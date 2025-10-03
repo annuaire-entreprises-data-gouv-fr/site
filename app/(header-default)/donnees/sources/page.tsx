@@ -5,7 +5,7 @@ import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import { administrationsMetaData, allAPI } from "#models/administrations";
 import constants from "#models/constants";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {

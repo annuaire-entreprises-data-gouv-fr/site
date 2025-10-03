@@ -1,4 +1,4 @@
-import { ISession } from "./session";
+import type { ISession } from "./session";
 
 export function getAgentEmail(session: ISession | null) {
   return session?.user?.email || "";

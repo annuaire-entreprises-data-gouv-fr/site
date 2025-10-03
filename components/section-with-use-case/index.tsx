@@ -2,14 +2,14 @@
 
 import { Section } from "#components/section";
 import { AskUseCase } from "#components/section-with-use-case/ask-use-case";
-import { EAdministration } from "#models/administrations/EAdministration";
+import type { EAdministration } from "#models/administrations/EAdministration";
 import {
-  ApplicationRights,
+  type ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale } from "#models/core/types";
-import { UseCase } from "#models/use-cases";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import type { UseCase } from "#models/use-cases";
 import { useState } from "react";
 
 type WrappedSectionProps = {

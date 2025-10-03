@@ -5,8 +5,8 @@ import { InternalError } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
 import {
   extractSirenFromSiret,
-  Siren,
-  Siret,
+  type Siren,
+  type Siret,
 } from "../../utils/helpers/siren-and-siret";
 
 /**

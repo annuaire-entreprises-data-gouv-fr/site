@@ -1,5 +1,5 @@
 import { clientApiEntrepriseOpqibi } from "#clients/api-entreprise/opqibi";
-import { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 type Qualification = {

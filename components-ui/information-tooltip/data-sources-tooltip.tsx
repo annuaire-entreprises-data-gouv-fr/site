@@ -1,5 +1,5 @@
 import { Icon } from "#components-ui/icon/wrapper";
-import { IAdministrationMetaData } from "#models/administrations/types";
+import type { IAdministrationMetaData } from "#models/administrations/types";
 import constants from "#models/constants";
 import { pluralize } from "#utils/helpers";
 import React from "react";

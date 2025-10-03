@@ -1,8 +1,8 @@
 import ProtectedSectionWithUseCase from "#components/section-with-use-case";
 import { EAdministration } from "#models/administrations/EAdministration";
 import { ApplicationRights } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
 import { UseCase } from "#models/use-cases";
 import ProtectedConformiteSection from "./protected-conformite-section";
 

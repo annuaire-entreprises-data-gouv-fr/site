@@ -6,13 +6,13 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { Exception } from "#models/exceptions";
 import { UseCase } from "#models/use-cases";
 import logErrorInSentry, { logInfoInSentry } from "#utils/sentry";
-import { IReqWithSession } from "#utils/session/with-session";
-import { NextRequest, userAgent } from "next/server";
-import { APIRoutesPaths } from "./routes-paths";
+import type { IReqWithSession } from "#utils/session/with-session";
+import { type NextRequest, userAgent } from "next/server";
+import type { APIRoutesPaths } from "./routes-paths";
 
 export type IContext = { params: Promise<{ slug: Array<string> }> };
 

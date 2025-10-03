@@ -1,7 +1,7 @@
 import { Error, Info, Success } from "#components-ui/alerts";
 import ButtonLink from "#components-ui/button";
 import { throwUnreachableCaseError } from "#models/exceptions";
-import { IHidePersonalDataRequest } from "#models/protected-siren/request-siren-protection";
+import type { IHidePersonalDataRequest } from "#models/protected-siren/request-siren-protection";
 
 type IProps = {
   hidePersonalDataRequest?: IHidePersonalDataRequest;

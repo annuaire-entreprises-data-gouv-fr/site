@@ -1,6 +1,6 @@
 import {
-  IEtablissement,
-  IUniteLegale,
+  type IEtablissement,
+  type IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,

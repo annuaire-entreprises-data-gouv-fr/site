@@ -1,6 +1,6 @@
 import ButtonLink from "#components-ui/button";
 import ButtonFranceConnect from "#components-ui/button-france-connect";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
 import { getHidePersonalDataRequestFCSession } from "#utils/session";
 

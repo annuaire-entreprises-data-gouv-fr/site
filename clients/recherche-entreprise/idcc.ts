@@ -1,6 +1,6 @@
 import routes from "#clients/routes";
-import { IConventionsCollectives } from "#models/conventions-collectives";
-import { Siren } from "#utils/helpers";
+import type { IConventionsCollectives } from "#models/conventions-collectives";
+import type { Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 
 export const clientIdccRechercheEntreprise = async (

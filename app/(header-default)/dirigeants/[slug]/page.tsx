@@ -6,13 +6,13 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible } from "#models/core/diffusion";
 import {
   isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
-  IUniteLegale,
+  type IUniteLegale,
 } from "#models/core/types";
 import {
   uniteLegalePageDescription,
@@ -20,10 +20,10 @@ import {
 } from "#utils/helpers";
 import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
-  AppRouterProps,
+  type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import DirigeantsAssociationSection from "./_component/sections/association/dirigeants";
 import ElusSection from "./_component/sections/collectivite/elus-section";
 import DPOSection from "./_component/sections/entreprise/dpo/section";

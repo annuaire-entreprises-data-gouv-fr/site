@@ -7,15 +7,15 @@ import { Tag } from "#components-ui/tag";
 import NonRenseigne from "#components/non-renseigne";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
-import { EAdministration } from "#models/administrations/EAdministration";
+import type { EAdministration } from "#models/administrations/EAdministration";
 import { isAPI404 } from "#models/api-not-responding";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
-import { UseCase } from "#models/use-cases";
+import type { UseCase } from "#models/use-cases";
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import { ChangeEvent, Fragment, useMemo, useState } from "react";
+import { type ChangeEvent, Fragment, useMemo, useState } from "react";
 
 const InnerLiassesSection = ({
   uniteLegale,

@@ -6,10 +6,10 @@ import InformationTooltip from "#components-ui/information-tooltip";
 import { Loader } from "#components-ui/loader";
 import MatomoEvent from "#components/matomo-event";
 import { CopyPaste } from "#components/table/copy-paste";
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
-import { ITVAIntracommunautaire } from "#models/tva";
-import { Siren, formatIntFr } from "#utils/helpers";
+import type { ITVAIntracommunautaire } from "#models/tva";
+import { type Siren, formatIntFr } from "#utils/helpers";
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 

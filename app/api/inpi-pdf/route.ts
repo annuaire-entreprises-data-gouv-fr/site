@@ -2,7 +2,7 @@ import routes from "#clients/routes";
 import { EAdministration } from "#models/administrations/EAdministration";
 import { FetchRessourceException } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;

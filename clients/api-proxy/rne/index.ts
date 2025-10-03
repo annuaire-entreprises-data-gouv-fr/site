@@ -1,6 +1,6 @@
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import {
+import type {
   IDirigeants,
   IEtatCivil,
   IObservations,
@@ -10,10 +10,10 @@ import {
   formatFirstNames,
   formatLastName,
   formatRole,
-  Siren,
+  type Siren,
 } from "#utils/helpers";
 import { clientAPIProxy } from "../client";
-import {
+import type {
   IRNEEtatCivilProxyResponse,
   IRNEPersonneMoraleProxyResponse,
   IRNEProxyResponse,

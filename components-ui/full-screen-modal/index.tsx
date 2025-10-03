@@ -4,7 +4,7 @@ import ButtonClose from "#components-ui/button/button-close";
 import FloatingModal from "#components-ui/floating-modal";
 import { PrintNever } from "#components-ui/print-visibility";
 import ClientOnly from "#components/client-only";
-import React from "react";
+import type React from "react";
 import styles from "./styles.module.css";
 
 export const FullScreenModal: React.FC<{

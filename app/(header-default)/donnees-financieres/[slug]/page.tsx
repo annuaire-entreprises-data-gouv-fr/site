@@ -4,10 +4,10 @@ import { isAssociation } from "#models/core/types";
 import { uniteLegalePageTitle } from "#utils/helpers";
 import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
-  AppRouterProps,
+  type AppRouterProps,
 } from "#utils/server-side-helper/app/extract-params";
 import getSession from "#utils/server-side-helper/app/get-session";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import DonneesFinancieresAssociation from "./_components/donnees-financieres-association";
 import DonneesFinancieresSociete from "./_components/donnees-financieres-societe";
 

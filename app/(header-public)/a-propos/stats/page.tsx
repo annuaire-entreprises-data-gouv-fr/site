@@ -1,8 +1,8 @@
-import { IMatomoStats, clientMatomoStats } from "#clients/matomo";
+import { type IMatomoStats, clientMatomoStats } from "#clients/matomo";
 import { NpsStats } from "#components/stats/nps";
 import { TraficStats } from "#components/stats/trafic";
 import { UsageStats } from "#components/stats/usage";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const dynamic = "force-static";
 export const revalidate = 14400; // 4 * 3600 = 4 hours;

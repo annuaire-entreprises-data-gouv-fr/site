@@ -3,11 +3,11 @@ import AdministrationDescription from "#components/administrations/administratio
 import { RenderMarkdownServerOnly } from "#components/markdown";
 import SearchBar from "#components/search-bar";
 import { getAllLandingPages, getLandingPage } from "#models/landing-pages";
-import {
+import type {
   AppRouterProps,
   IParams,
 } from "#utils/server-side-helper/app/extract-params";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import React, { use } from "react";
 import styles from "./style.module.css";

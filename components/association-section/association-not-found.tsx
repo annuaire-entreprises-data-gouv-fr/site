@@ -1,6 +1,6 @@
 import { Warning } from "#components-ui/alerts";
 import { TwoColumnTable } from "#components/table/simple";
-import { IAssociation } from "#models/core/types";
+import type { IAssociation } from "#models/core/types";
 import { formatIntFr, isTwoMonthOld } from "#utils/helpers";
 
 export const AssociationNotFound: React.FC<{

@@ -2,11 +2,11 @@ import { HttpTimeoutError } from "#clients/exceptions";
 import constants from "#models/constants";
 import {
   Exception,
-  IExceptionContext,
+  type IExceptionContext,
   InternalError,
 } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
-import { IDefaultRequestConfig } from "..";
+import type { IDefaultRequestConfig } from "..";
 import { httpErrorHandler } from "../utils/http-error-handler";
 
 function buildUrl(url: string, params: any) {

@@ -9,11 +9,11 @@ import { EtablissementDescription } from "#components/etablissement-description"
 import MapEtablissement from "#components/map/map-etablissement";
 import { CopyPaste } from "#components/table/copy-paste";
 import UniteLegaleBadge from "#components/unite-legale-badge";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible, estNonDiffusibleStrict } from "#models/core/diffusion";
-import { IEtablissement, IUniteLegale } from "#models/core/types";
+import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import { formatIntFr, formatSiret } from "#utils/helpers";
-import React from "react";
+import type React from "react";
 import { INSEE } from "../../administrations";
 import TitleAlerts from "../alerts";
 import { TabsForEtablissement } from "../tabs";

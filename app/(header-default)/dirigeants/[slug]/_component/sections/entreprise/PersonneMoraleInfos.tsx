@@ -1,4 +1,4 @@
-import { IPersonneMorale } from "#models/rne/types";
+import type { IPersonneMorale } from "#models/rne/types";
 import { formatIntFr } from "#utils/helpers";
 
 export default function PersonneMoraleInfos({

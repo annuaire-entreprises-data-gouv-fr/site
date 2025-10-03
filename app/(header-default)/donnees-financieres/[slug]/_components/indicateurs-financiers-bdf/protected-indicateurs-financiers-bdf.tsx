@@ -3,10 +3,10 @@
 import FAQLink from "#components-ui/faq-link";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
-import { EAdministration } from "#models/administrations/EAdministration";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale } from "#models/core/types";
-import { UseCase } from "#models/use-cases";
+import type { EAdministration } from "#models/administrations/EAdministration";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import type { UseCase } from "#models/use-cases";
 import { formatCurrency, formatDate, getDateFromYYYYMM } from "#utils/helpers";
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";

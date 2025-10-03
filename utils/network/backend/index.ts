@@ -1,8 +1,8 @@
 import constants from "#models/constants";
-import Axios, { AxiosInstance } from "axios";
+import Axios, { type AxiosInstance } from "axios";
 import http from "http";
 import https from "https";
-import { IDefaultRequestConfig } from "..";
+import type { IDefaultRequestConfig } from "..";
 import errorInterceptor from "./error-interceptor";
 import { addStartTimeInterceptor, logInterceptor } from "./log-interceptor";
 

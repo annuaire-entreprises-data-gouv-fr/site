@@ -1,4 +1,4 @@
-import { IAPIEntrepriseResponse } from "../client";
+import type { IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseLiensCapitalistiques = IAPIEntrepriseResponse<{
   capital: {

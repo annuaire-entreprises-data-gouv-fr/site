@@ -1,12 +1,12 @@
 import routes from "#clients/routes";
-import { IDirigeants, IEtatCivil, IPersonneMorale } from "#models/rne/types";
+import type { IDirigeants, IEtatCivil, IPersonneMorale } from "#models/rne/types";
 import {
   formatFirstNames,
   formatLastName,
   formatRole,
-  Siren,
+  type Siren,
 } from "#utils/helpers";
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
   Array<
     IAPIEntrepriseResponse<

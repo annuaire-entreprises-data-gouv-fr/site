@@ -4,9 +4,9 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible } from "#models/core/diffusion";
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 import { BilansDocumentsSociete } from "./bilans-documents-societe";
 import { ComptesBodaccSociete } from "./comptes-bodacc-societe";
 import { FinancesSocieteSummary } from "./finances-societe-summary";

@@ -1,12 +1,12 @@
 import { hasRights } from "#models/authentication/user/rights";
-import { UseCase } from "#models/use-cases";
-import withSession, { IReqWithSession } from "#utils/session/with-session";
+import type { UseCase } from "#models/use-cases";
+import withSession, { type IReqWithSession } from "#utils/session/with-session";
 import { APIRoutesHandlers } from "../routes-handlers";
 import { APIRoutesScopes } from "../routes-scopes";
 import {
   APIRouteError,
   getRouteAndSlug,
-  IContext,
+  type IContext,
   withHandleError,
   withIgnoreBot,
 } from "../utils";

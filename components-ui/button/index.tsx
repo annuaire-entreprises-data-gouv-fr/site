@@ -1,6 +1,7 @@
 "use client";
 
-import React, { MouseEventHandler, PropsWithChildren } from "react";
+import type React from "react";
+import type { MouseEventHandler, PropsWithChildren } from "react";
 type IProps = {
   role?: string;
   small?: boolean;

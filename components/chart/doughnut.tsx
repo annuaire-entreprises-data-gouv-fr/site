@@ -1,9 +1,9 @@
 import {
   ArcElement,
   CategoryScale,
-  ChartData,
+  type ChartData,
   Chart as ChartJS,
-  ChartOptions,
+  type ChartOptions,
   Title as ChartTitle,
   Legend,
   Tooltip,

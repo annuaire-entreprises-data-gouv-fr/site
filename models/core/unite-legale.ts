@@ -11,7 +11,7 @@ import { getIdccTitle } from "#models/conventions-collectives";
 import { createEtablissementsList } from "#models/core/etablissements-list";
 import { IETATADMINSTRATIF, estActif } from "#models/core/etat-administratif";
 import { isProtectedSiren } from "#models/protected-siren";
-import { Siren, isLuhnValid, verifySiren } from "#utils/helpers";
+import { type Siren, isLuhnValid, verifySiren } from "#utils/helpers";
 import {
   logFatalErrorInSentry,
   logInfoInSentry,
@@ -22,7 +22,7 @@ import { shouldUseInsee } from ".";
 import { EAdministration } from "../administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
 } from "../api-not-responding";
@@ -34,7 +34,7 @@ import {
   estDiffusible,
 } from "./diffusion";
 import {
-  IUniteLegale,
+  type IUniteLegale,
   SirenNotFoundError,
   createDefaultUniteLegale,
   isEntrepreneurIndividuel,

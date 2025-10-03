@@ -5,12 +5,12 @@ import FloatingModal from "#components-ui/floating-modal";
 import { Icon } from "#components-ui/icon/wrapper";
 import constants from "#models/constants";
 import {
-  IParams,
-  ISearchFilter,
+  type IParams,
+  type ISearchFilter,
   buildSearchQuery,
 } from "#models/search/search-filter-params";
 import { useOutsideClick } from "hooks";
-import { PropsWithChildren, useId, useState } from "react";
+import { type PropsWithChildren, useId, useState } from "react";
 import ActiveFilterLabel from "./active-filter-label";
 import styles from "./style.module.css";
 

@@ -5,7 +5,7 @@ import NonRenseigne from "#components/non-renseigne";
 import { DataSectionClient } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 import { useFetchServicePublic } from "hooks/fetch/service-public";
 import SubServicesSection from "./subservices";
 

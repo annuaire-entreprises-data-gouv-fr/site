@@ -2,8 +2,8 @@ import { Exception, FetchRessourceException } from "#models/exceptions";
 import { DataStore } from "#utils/data-store";
 import { logFatalErrorInSentry } from "#utils/sentry";
 import {
-  IAgentMonitoring,
-  IAgentRateLimits,
+  type IAgentMonitoring,
+  type IAgentRateLimits,
   numberOfRequestByAgentList,
 } from "./number-of-requests-by-agent-list";
 

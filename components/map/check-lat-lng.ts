@@ -1,4 +1,4 @@
-import { LngLatLike } from "maplibre-gl";
+import type { LngLatLike } from "maplibre-gl";
 
 export function checkLatLng(
   latitude: string,

@@ -1,5 +1,5 @@
 import { clientEgaproRepresentationEquilibre } from "#clients/egapro/representationEquilibre";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientEgaproRepresentationEquilibre", () => {

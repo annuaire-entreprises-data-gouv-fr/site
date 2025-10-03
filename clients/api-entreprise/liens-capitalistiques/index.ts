@@ -1,13 +1,13 @@
 import routes from "#clients/routes";
-import { ILiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
-import {
+import type { ILiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
+import type {
   IEtatCivilLiensCapitalistiques,
   IPersonneMoraleLiensCapitalistiques,
 } from "#models/rne/types";
-import { UseCase } from "#models/use-cases";
-import { formatFirstNames, formatLastName, Siren } from "#utils/helpers";
+import type { UseCase } from "#models/use-cases";
+import { formatFirstNames, formatLastName, type Siren } from "#utils/helpers";
 import clientAPIEntreprise from "../client";
-import { IAPIEntrepriseLiensCapitalistiques } from "./types";
+import type { IAPIEntrepriseLiensCapitalistiques } from "./types";
 
 /**
  * GET liens capitalistiques from API Entreprise

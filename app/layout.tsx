@@ -2,7 +2,7 @@ import { BrowserIsOutdatedBanner } from "#components/banner/browser-is-outdated"
 import { MatomoInit } from "#components/matomo-event/init";
 import { meta } from "#components/meta/meta-server";
 import getSession from "#utils/server-side-helper/app/get-session";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import "../style/dsfr.min.css";
 import "../style/globals.css";
 import { PrefetchImgs } from "./_component/prefetch-dsfr-imgs";

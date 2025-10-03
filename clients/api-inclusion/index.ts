@@ -1,7 +1,7 @@
 import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 
 /**

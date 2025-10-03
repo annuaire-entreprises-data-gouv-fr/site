@@ -1,11 +1,11 @@
 "use client";
 
-import { IRolesDataUser } from "#clients/roles-data/interface";
+import type { IRolesDataUser } from "#clients/roles-data/interface";
 import ButtonLink from "#components-ui/button";
 import { FullScreenModal } from "#components-ui/full-screen-modal";
 import { validateEmail } from "#components/espace-agent-components/helpers/form-validation";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
-import { IRolesDataGroup } from "#models/authentication/group/groups";
+import type { IRolesDataGroup } from "#models/authentication/group/groups";
 import httpClient from "#utils/network";
 import { useEffect, useRef, useState } from "react";
 

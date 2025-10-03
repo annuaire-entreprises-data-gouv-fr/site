@@ -1,21 +1,21 @@
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { getEgapro, IEgapro } from "#models/certifications/egapro";
-import { IUniteLegale } from "../core/types";
-import { getBio, IEtablissementsBio } from "./bio";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import { getEgapro, type IEgapro } from "#models/certifications/egapro";
+import type { IUniteLegale } from "../core/types";
+import { getBio, type IEtablissementsBio } from "./bio";
 import {
   getEntrepreneurSpectaclesCertification,
-  IEntrepreneurSpectaclesCertification,
+  type IEntrepreneurSpectaclesCertification,
 } from "./entrepreneur-spectacles";
 import {
   getEntrepriseInclusive,
-  IEntrepriseInclusive,
+  type IEntrepriseInclusive,
 } from "./entreprise-inclusive";
-import { getEss, IESS } from "./ess";
+import { getEss, type IESS } from "./ess";
 import {
   getOrganismesDeFormation,
-  IOrganismeFormation,
+  type IOrganismeFormation,
 } from "./organismes-de-formation";
-import { getRGECertifications, IRGECertification } from "./rge";
+import { getRGECertifications, type IRGECertification } from "./rge";
 
 export interface ICertifications {
   uniteLegale: IUniteLegale;

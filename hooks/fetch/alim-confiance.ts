@@ -1,6 +1,6 @@
 import { clientAlimConfiance } from "#clients/api-data-gouv/alim-confiance";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 import { FetchRessourceException } from "#models/exceptions";
 import { verifySiren } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";

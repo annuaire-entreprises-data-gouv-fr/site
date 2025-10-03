@@ -10,16 +10,16 @@ import { Section } from "#components/section";
 import { CopyPaste } from "#components/table/copy-paste";
 import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { estActif } from "#models/core/etat-administratif";
-import { IEtablissement, IUniteLegale } from "#models/core/types";
+import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import {
   formatDate,
   formatSiret,
   uniteLegaleLabelWithPronounContracted,
 } from "#utils/helpers";
 import { libelleTrancheEffectif } from "#utils/helpers/formatting/codes-effectifs";
-import React from "react";
+import type React from "react";
 
 type IProps = {
   session: ISession | null;

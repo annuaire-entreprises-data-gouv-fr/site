@@ -2,9 +2,9 @@ import { clientApiEntrepriseBeneficiaires } from "#clients/api-entreprise/benefi
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "#models/api-not-responding";
-import { UseCase } from "#models/use-cases";
+import type { UseCase } from "#models/use-cases";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
 

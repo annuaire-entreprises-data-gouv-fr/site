@@ -2,7 +2,7 @@ import { LogoAnnuaireWithEasterEgg } from "#components-ui/logo-annuaire/logo-wit
 import Favourites from "#components/favourites";
 import SearchBar from "#components/search-bar";
 import StructuredDataSearchAction from "#components/structured-data/search";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:

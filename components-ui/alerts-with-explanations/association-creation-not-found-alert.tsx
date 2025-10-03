@@ -1,6 +1,6 @@
-import React from "react";
+import type React from "react";
 import routes from "#clients/routes";
-import { IAssociation } from "#models/core/types";
+import type { IAssociation } from "#models/core/types";
 import { formatIntFr } from "#utils/helpers";
 import { Warning } from "../alerts";
 

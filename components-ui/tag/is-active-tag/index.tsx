@@ -1,8 +1,8 @@
-import React from "react";
+import type React from "react";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { Tag } from "#components-ui/tag";
 import {
-  ISTATUTDIFFUSION,
+  type ISTATUTDIFFUSION,
   estNonDiffusibleStrict,
 } from "#models/core/diffusion";
 import { IETATADMINSTRATIF } from "#models/core/etat-administratif";

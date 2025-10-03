@@ -1,6 +1,6 @@
 "use client";
 
-import { IUniteLegale, isAssociation } from "#models/core/types";
+import { type IUniteLegale, isAssociation } from "#models/core/types";
 
 type IProp = {
   /**

@@ -1,7 +1,7 @@
 import { clientAPIProxy } from "#clients/api-proxy/client";
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import { TVANumber } from "#utils/helpers";
+import type { TVANumber } from "#utils/helpers";
 
 type IVIESResponse = {
   isValid: boolean;

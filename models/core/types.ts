@@ -1,18 +1,18 @@
 /** COMMON TYPES */
 import {
-  IEtablissementsList,
+  type IEtablissementsList,
   createEtablissementsList,
 } from "#models/core/etablissements-list";
 import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
-import { IEtatCivil } from "#models/rne/types";
-import { IdRna, Siren, Siret } from "#utils/helpers";
+import type { IEtatCivil } from "#models/rne/types";
+import type { IdRna, Siren, Siret } from "#utils/helpers";
 import { EAdministration } from "../administrations/EAdministration";
 import {
   Exception,
   FetchRessourceException,
-  IExceptionContext,
+  type IExceptionContext,
 } from "../exceptions";
-import { ITVAIntracommunautaire } from "../tva";
+import type { ITVAIntracommunautaire } from "../tva";
 import { ISTATUTDIFFUSION } from "./diffusion";
 
 export interface IEtablissement {

@@ -9,9 +9,9 @@ import { categoriesJuridiquesNiveau1 } from "#utils/helpers/formatting/metadata/
 import { categoriesJuridiquesNiveau2 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
 import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
 import { codesSectionNAF } from "#utils/helpers/formatting/metadata/codes-section-NAF";
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { getEffectifLabel } from "./constants";
-import { ExtendedExportCsvInput } from "./export-csv";
+import type { ExtendedExportCsvInput } from "./export-csv";
 import { LocationFilter } from "./location-filter";
 import LocationTags from "./location-tags";
 import SiretFilter from "./siret-filter";

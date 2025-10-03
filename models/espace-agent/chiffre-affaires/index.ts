@@ -1,6 +1,6 @@
 import { clientApiEntrepriseChiffreAffaires } from "#clients/api-entreprise/chiffres-affaires";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { UseCase } from "#models/use-cases";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { UseCase } from "#models/use-cases";
 import { verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 

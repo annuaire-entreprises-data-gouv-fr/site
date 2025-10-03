@@ -1,8 +1,8 @@
 import routes from "#clients/routes";
 import { exportCsvClientPost } from "#clients/sirene-insee";
 import constants from "#models/constants";
-import { ExportCsvInput } from "app/api/export-sirene/input-validation";
-import { Readable } from "stream";
+import type { ExportCsvInput } from "app/api/export-sirene/input-validation";
+import type { Readable } from "stream";
 import { SireneQueryBuilder } from "./build-query";
 
 interface SireneJsonSearchResult {

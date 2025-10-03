@@ -1,4 +1,4 @@
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { sessionOptions } from "#utils/session";
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";

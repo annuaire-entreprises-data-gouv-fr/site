@@ -1,5 +1,5 @@
 import parseMarkdownSync, {
-  IMarkdown,
+  type IMarkdown,
 } from "#components/markdown/parse-markdown";
 /** @ts-ignore */
 import data from "../../data/changelog.yml";

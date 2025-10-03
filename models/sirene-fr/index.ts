@@ -3,8 +3,8 @@ import {
   clientSireneInsee,
   clientSireneInseeCount,
 } from "#clients/sirene-insee/export-sirene";
-import { ExportCsvInput } from "app/api/export-sirene/input-validation";
-import { Readable } from "stream";
+import type { ExportCsvInput } from "app/api/export-sirene/input-validation";
+import type { Readable } from "stream";
 
 export const getEtablissementListe = async (
   searchParams: ExportCsvInput

@@ -1,4 +1,4 @@
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 
 /** Administration that are not L100-3 but are still authorized to acces espace agent */
 const authorizedAdministrationWhitelist = {

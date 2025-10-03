@@ -2,7 +2,7 @@
 import { DoughnutChart } from "#components/chart/doughnut";
 import { LineChart } from "#components/chart/line";
 import constants from "#models/constants";
-import { ChartData } from "chart.js";
+import type { ChartData } from "chart.js";
 
 export const UsageStats: React.FC<{
   copyPasteAction: {

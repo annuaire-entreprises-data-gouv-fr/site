@@ -4,10 +4,10 @@ import NonRenseigne from "#components/non-renseigne";
 import { DataSectionClient } from "#components/section/data-section";
 import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IEtablissement, IUniteLegale } from "#models/core/types";
-import { IServicePublic } from "#models/service-public";
+import type { IEtablissement, IUniteLegale } from "#models/core/types";
+import type { IServicePublic } from "#models/service-public";
 import { useFetchServicePublic } from "hooks/fetch/service-public";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type IProps = {
   uniteLegale: IUniteLegale;

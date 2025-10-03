@@ -3,7 +3,7 @@
 import { Icon } from "#components-ui/icon/wrapper";
 import { PrintNever } from "#components-ui/print-visibility";
 import { isLoggedIn } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
 import {
   deleteCookieBrowser,

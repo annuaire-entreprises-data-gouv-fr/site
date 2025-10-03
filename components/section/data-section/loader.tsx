@@ -5,7 +5,7 @@ import { HeightTransition } from "#components-ui/animation/height-transition";
 import { Loader } from "#components-ui/loader";
 import { administrationsMetaData } from "#models/administrations";
 import { useTimeout } from "hooks/use-timeout";
-import { ISectionProps } from "..";
+import type { ISectionProps } from "..";
 import style from "./style.module.css";
 
 export function DataSectionLoader({

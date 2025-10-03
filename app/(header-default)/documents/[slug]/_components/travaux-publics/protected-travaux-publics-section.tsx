@@ -4,16 +4,16 @@ import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
-import { EAdministration } from "#models/administrations/EAdministration";
+import type { EAdministration } from "#models/administrations/EAdministration";
 import {
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
 } from "#models/api-not-responding";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale } from "#models/core/types";
-import { IDocumentDownloader } from "#models/espace-agent/travaux-publics";
-import { UseCase } from "#models/use-cases";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import type { IDocumentDownloader } from "#models/espace-agent/travaux-publics";
+import type { UseCase } from "#models/use-cases";
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { useMemo } from "react";

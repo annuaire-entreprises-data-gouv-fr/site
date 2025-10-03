@@ -1,5 +1,5 @@
 import { clientOrganismeFormation } from "#clients/open-data-soft/clients/qualiopi";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientOrganismeFormation", () => {

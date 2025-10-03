@@ -3,7 +3,7 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 
 const TRACKER_BASE_URL = "https://stats.data.gouv.fr";
 export function MatomoInit({ session }: { session: ISession | null }) {

@@ -1,6 +1,6 @@
 import TextWrapper from "#components-ui/text-wrapper";
 import { allDataToModify } from "#models/administrations/data-to-modify";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export default function FAQPage() {
   return (

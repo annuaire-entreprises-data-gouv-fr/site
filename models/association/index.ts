@@ -2,20 +2,20 @@ import { clientAssociation } from "#clients/api-proxy/association";
 import { clientBanGeoLoc } from "#clients/base-adresse-nationale";
 import { HttpNotFound } from "#clients/exceptions";
 import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
-import { IdRna, removeSpecialChars, Siren } from "#utils/helpers";
+import { type IdRna, removeSpecialChars, type Siren } from "#utils/helpers";
 import logErrorInSentry, { logWarningInSentry } from "#utils/sentry";
 import { EAdministration } from "../administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "../api-not-responding";
 import { isAssociation } from "../core/types";
 import {
   Exception,
   FetchRessourceException,
-  IExceptionContext,
+  type IExceptionContext,
 } from "../exceptions";
-import { IDataAssociation } from "./types";
+import type { IDataAssociation } from "./types";
 
 export const getAssociationFromSlug = async (
   slug: string

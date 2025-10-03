@@ -1,5 +1,5 @@
 import { hasRights } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { IDataFetchingState } from "#models/data-fetching";
 import { InternalError } from "#models/exceptions";
 import { httpGet } from "#utils/network";
@@ -8,11 +8,11 @@ import {
   RequestAbortedDuringUnloadException,
 } from "#utils/network/frontend";
 import logErrorInSentry, { logWarningInSentry } from "#utils/sentry";
-import { APIRoutesHandlers } from "app/api/data-fetching/routes-handlers";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import type { APIRoutesHandlers } from "app/api/data-fetching/routes-handlers";
+import type { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { APIRoutesScopes } from "app/api/data-fetching/routes-scopes";
 import { useEffect, useState } from "react";
-import { UnwrapPromise } from "types";
+import type { UnwrapPromise } from "types";
 
 export type RouteResponse<T> = T extends APIRoutesPaths
   ? UnwrapPromise<ReturnType<(typeof APIRoutesHandlers)[T]>>

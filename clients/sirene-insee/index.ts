@@ -5,7 +5,7 @@ import { Information } from "#models/exceptions";
 import httpClient, {
   httpGet,
   httpPost,
-  IDefaultRequestConfig,
+  type IDefaultRequestConfig,
 } from "#utils/network";
 import { logInfoInSentry } from "#utils/sentry";
 import { URLSearchParams } from "url";

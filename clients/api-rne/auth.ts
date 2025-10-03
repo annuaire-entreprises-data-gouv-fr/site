@@ -4,7 +4,7 @@ import {
 } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import httpClient, { httpGet, IDefaultRequestConfig } from "#utils/network";
+import httpClient, { httpGet, type IDefaultRequestConfig } from "#utils/network";
 
 class RNEClient {
   private _token = "";

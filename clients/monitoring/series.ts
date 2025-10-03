@@ -1,5 +1,5 @@
-import { IRatio } from "#models/monitoring";
-import { IUpdownIODowntimes } from ".";
+import type { IRatio } from "#models/monitoring";
+import type { IUpdownIODowntimes } from ".";
 
 type ILog = {
   date: Date;

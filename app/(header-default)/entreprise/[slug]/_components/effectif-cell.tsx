@@ -12,8 +12,8 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
 import { formatFloatFr } from "#utils/helpers";
 import { libelleTrancheEffectif } from "#utils/helpers/formatting/codes-effectifs";

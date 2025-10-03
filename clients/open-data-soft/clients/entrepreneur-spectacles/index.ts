@@ -1,6 +1,6 @@
 import routes from "#clients/routes";
-import { IEntrepreneurSpectaclesCertification } from "#models/certifications/entrepreneur-spectacles";
-import { Siren } from "#utils/helpers";
+import type { IEntrepreneurSpectaclesCertification } from "#models/certifications/entrepreneur-spectacles";
+import type { Siren } from "#utils/helpers";
 import odsClient from "../..";
 
 type ISpectaclesVivantsRecord = {

@@ -1,4 +1,4 @@
-import { IIconsSlug } from "#components-ui/icon";
+import type { IIconsSlug } from "#components-ui/icon";
 import { convertDateToAge } from "#utils/helpers";
 
 export interface IParams {

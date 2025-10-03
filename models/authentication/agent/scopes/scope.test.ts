@@ -1,5 +1,5 @@
 import { Scopes } from ".";
-import { IAgentScope } from "./constants";
+import type { IAgentScope } from "./constants";
 
 describe("Scopes", () => {
   describe("constructor", () => {

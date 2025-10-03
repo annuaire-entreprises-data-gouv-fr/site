@@ -5,21 +5,21 @@ import { Select } from "#components-ui/select";
 import { DGFiP } from "#components/administrations";
 import { Section } from "#components/section";
 import { FullTable } from "#components/table/full";
-import { EAdministration } from "#models/administrations/EAdministration";
+import type { EAdministration } from "#models/administrations/EAdministration";
 import { isAPI404 } from "#models/api-not-responding";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
-import {
+import type {
   IEtatCivilLiensCapitalistiques,
   IPersonneMoraleLiensCapitalistiques,
 } from "#models/rne/types";
-import { UseCase } from "#models/use-cases";
+import type { UseCase } from "#models/use-cases";
 import { formatIntFr, pluralize } from "#utils/helpers/formatting/formatting";
 import EtatCivilInfos from "app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/EtatCivilInfos";
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import { ChangeEvent, useMemo, useState } from "react";
+import { type ChangeEvent, useMemo, useState } from "react";
 import PersonneMoraleInfos from "../sections/entreprise/PersonneMoraleInfos";
 
 function LiensCapitalistiquesContent({

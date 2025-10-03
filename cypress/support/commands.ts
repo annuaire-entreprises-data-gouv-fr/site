@@ -6,8 +6,8 @@
 //
 //
 import { comptesAgents } from "#cypress/mocks/comptes-agents";
-import { IAgentScope } from "#models/authentication/agent/scopes/constants";
-import { ISession } from "#models/authentication/user/session";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
+import type { ISession } from "#models/authentication/user/session";
 import { sessionOptions } from "#utils/session";
 import { sealData } from "iron-session";
 

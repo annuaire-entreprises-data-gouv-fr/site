@@ -4,7 +4,7 @@ import {
   getEtablissementListeCount,
 } from "#models/sirene-fr";
 import { logErrorInSentry } from "#utils/sentry";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { Readable } from "stream";
 import z from "zod";
 import { exportCsvSchema } from "./input-validation";

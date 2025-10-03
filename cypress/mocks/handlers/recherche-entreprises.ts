@@ -1,5 +1,5 @@
 import fs from "fs";
-import { HttpResponse, HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw";
 import path from "path";
 
 function getSnapshots() {

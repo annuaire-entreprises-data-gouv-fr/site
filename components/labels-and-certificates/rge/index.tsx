@@ -6,12 +6,12 @@ import { DataSection } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { ISession } from "#models/authentication/user/session";
-import { IRGECertification } from "#models/certifications/rge";
-import { IUniteLegale } from "#models/core/types";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { ISession } from "#models/authentication/user/session";
+import type { IRGECertification } from "#models/certifications/rge";
+import type { IUniteLegale } from "#models/core/types";
 import { pluralize } from "#utils/helpers";
-import React from "react";
+import type React from "react";
 
 const renovLink = (slug: string) => {
   try {

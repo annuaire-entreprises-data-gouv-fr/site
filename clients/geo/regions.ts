@@ -1,7 +1,7 @@
 import routes from "#clients/routes";
 import constants from "#models/constants";
 import { httpGet } from "#utils/network";
-import { IGeoElement } from ".";
+import type { IGeoElement } from ".";
 
 type IGeoRegionResponse = {
   nom: string;

@@ -1,6 +1,6 @@
 import { clientApiEntrepriseDgfipLiassesFiscales } from "#clients/api-entreprise/liasses-fiscales";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { UseCase } from "#models/use-cases";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { UseCase } from "#models/use-cases";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 

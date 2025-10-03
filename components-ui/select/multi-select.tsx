@@ -1,6 +1,6 @@
 import ClientOnly from "#components/client-only";
-import ReactSelect, { MultiValue, Props } from "react-select";
-import { ISelectOptions } from "./type";
+import ReactSelect, { type MultiValue, type Props } from "react-select";
+import type { ISelectOptions } from "./type";
 
 type MultiSelectProps = {
   defaultValue?: string | string[];

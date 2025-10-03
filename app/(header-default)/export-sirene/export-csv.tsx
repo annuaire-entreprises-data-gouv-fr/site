@@ -2,7 +2,7 @@
 
 import ButtonLink from "#components-ui/button";
 import { formatDate, formatNumber } from "#utils/helpers";
-import { ExportCsvInput } from "app/api/export-sirene/input-validation";
+import type { ExportCsvInput } from "app/api/export-sirene/input-validation";
 import { useState } from "react";
 import { getEffectifCode } from "./constants";
 import Filters from "./filters";

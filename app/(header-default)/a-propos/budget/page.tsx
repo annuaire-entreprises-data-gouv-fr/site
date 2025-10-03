@@ -1,6 +1,6 @@
 import TextWrapper from "#components-ui/text-wrapper";
 import { FullTable } from "#components/table/full";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Budget de l’Annuaire des Entreprises",

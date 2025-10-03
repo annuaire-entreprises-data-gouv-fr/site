@@ -1,7 +1,7 @@
 import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
 import { FullTable } from "#components/table/full";
-import { IUniteLegale } from "#models/core/types";
-import {
+import type { IUniteLegale } from "#models/core/types";
+import type {
   IDirigeantsWithMetadataMergedIGInpi,
   IEtatCivilMergedIGInpi,
   IPersonneMoraleMergedIGInpi,

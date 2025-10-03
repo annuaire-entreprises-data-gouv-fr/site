@@ -1,7 +1,7 @@
 import { BrowserIsOutdatedBanner } from "#components/banner/browser-is-outdated";
 import ErrorBoundary from "#components/error-boundary/index";
 import { LayoutDefault } from "#components/layouts/layout-default";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import { marianne } from "app/fonts";
 import { SessionProvider } from "hooks/use-page-router-session";
 import type { NextPage } from "next";

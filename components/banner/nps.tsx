@@ -5,7 +5,8 @@ import ClientOnly from "#components/client-only";
 import { Exception } from "#models/exceptions";
 import { logInfoInSentry } from "#utils/sentry";
 import { useStorage } from "hooks";
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
 const NPS_MODAL_ID = "nps-modal-2";

@@ -1,4 +1,4 @@
-import { IRole } from "#models/rne/types";
+import type { IRole } from "#models/rne/types";
 import DisambiguationTooltip from "./DisambiguationTooltip";
 
 export default function RolesInfos({ roles }: { roles: IRole[] }) {

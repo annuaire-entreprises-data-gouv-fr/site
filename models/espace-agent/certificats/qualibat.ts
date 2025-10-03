@@ -1,5 +1,5 @@
 import { clientApiEntrepriseQualibat } from "#clients/api-entreprise/certificats/qualibat";
-import { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
 import { verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 export type IQualibat = {

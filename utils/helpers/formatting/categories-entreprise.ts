@@ -1,4 +1,4 @@
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 
 export type CategoryEntreprise = "PME" | "ETI" | "GE";
 export const categoriesEntreprisesOptions: {

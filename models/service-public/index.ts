@@ -6,11 +6,11 @@ import {
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "#models/api-not-responding";
-import { IEtablissement, IUniteLegale } from "#models/core/types";
+import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import { FetchRessourceException } from "#models/exceptions";
-import { Siret } from "#utils/helpers";
+import type { Siret } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 
 export interface IServicePublic {

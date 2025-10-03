@@ -1,7 +1,7 @@
 import TextWrapper from "#components-ui/text-wrapper";
 import { administrationsMetaData } from "#models/administrations";
 import constants from "#models/constants";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Comment ça marche ?",

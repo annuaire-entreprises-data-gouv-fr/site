@@ -1,6 +1,6 @@
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import { IMonitoring, IRatio } from "#models/monitoring";
+import type { IMonitoring, IRatio } from "#models/monitoring";
 import { httpGet } from "#utils/network";
 import { DailyUptimeRatioConverter } from "./series";
 

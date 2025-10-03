@@ -1,4 +1,4 @@
-import { IProConnectUserInfo } from "#clients/authentication/pro-connect/strategy";
+import type { IProConnectUserInfo } from "#clients/authentication/pro-connect/strategy";
 import { Scopes } from "#models/authentication/agent/scopes";
 import {
   AgentNotVerifiedException,

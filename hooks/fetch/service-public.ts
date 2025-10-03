@@ -1,5 +1,5 @@
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IEtablissement, IUniteLegale } from "#models/core/types";
+import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import { FetchRessourceException } from "#models/exceptions";
 import {
   getServicePublicByEtablissement,

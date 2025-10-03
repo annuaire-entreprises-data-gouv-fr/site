@@ -2,14 +2,14 @@ import { HttpBadRequestError, HttpNotFound } from "#clients/exceptions";
 import clientSearchRechercheEntreprise from "#clients/recherche-entreprise";
 import {
   FetchRechercheEntrepriseException,
-  IEtablissement,
-  IUniteLegale,
+  type IEtablissement,
+  type IUniteLegale,
   IsLikelyASirenOrSiretException,
   NotEnoughParamsException,
 } from "#models/core/types";
 import { Exception } from "#models/exceptions";
 import { isProtectedSiren } from "#models/protected-siren";
-import { IDirigeants } from "#models/rne/types";
+import type { IDirigeants } from "#models/rne/types";
 import SearchFilterParams from "#models/search/search-filter-params";
 import {
   formatMonthIntervalFromPartialDate,

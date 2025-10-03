@@ -2,7 +2,7 @@ import { HttpForbiddenError } from "#clients/exceptions";
 import { InternalError } from "#models/exceptions";
 import { getHidePersonalDataRequestFCSession } from "#utils/session";
 import { randomBytes } from "crypto";
-import { BaseClient, Issuer, generators } from "openid-client";
+import { type BaseClient, Issuer, generators } from "openid-client";
 
 let _client = undefined as BaseClient | undefined;
 

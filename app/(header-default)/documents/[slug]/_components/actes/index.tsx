@@ -4,8 +4,8 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale, isAssociation } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import { type IUniteLegale, isAssociation } from "#models/core/types";
 import { AgentActesAssociation } from "./associations";
 import { AgentActesRNE } from "./rne";
 

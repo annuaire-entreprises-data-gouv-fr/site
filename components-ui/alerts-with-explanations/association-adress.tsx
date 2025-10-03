@@ -1,13 +1,13 @@
 import { INSEE, MI } from "#components/administrations";
 import NonRenseigne from "#components/non-renseigne";
 import {
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPINotResponding,
 } from "#models/api-not-responding";
-import { IDataAssociation } from "#models/association/types";
-import { ISession } from "#models/authentication/user/session";
+import type { IDataAssociation } from "#models/association/types";
+import type { ISession } from "#models/authentication/user/session";
 import { getPersonnalDataAssociation } from "#models/core/diffusion";
-import { IAssociation } from "#models/core/types";
+import type { IAssociation } from "#models/core/types";
 import { Warning } from "../alerts";
 
 const AssociationAdressAlert: React.FC<{

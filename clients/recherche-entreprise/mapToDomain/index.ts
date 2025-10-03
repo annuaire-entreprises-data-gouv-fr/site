@@ -1,7 +1,7 @@
-import { IEtablissement, createDefaultEtablissement } from "#models/core/types";
-import { IEtatCivil, IPersonneMorale } from "#models/rne/types";
+import { type IEtablissement, createDefaultEtablissement } from "#models/core/types";
+import type { IEtatCivil, IPersonneMorale } from "#models/rne/types";
 import {
-  Siret,
+  type Siret,
   extractNicFromSiret,
   extractSirenFromSiret,
   formatFirstNames,
@@ -16,7 +16,7 @@ import {
   statuDiffusionFromStatutDiffusionInsee,
 } from "#utils/helpers/insee-variables";
 import { getCapital, getDateFin } from "#utils/helpers/rne-variables";
-import {
+import type {
   IDirigeant,
   IMatchingEtablissement,
   IResult,

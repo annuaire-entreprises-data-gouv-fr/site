@@ -2,7 +2,7 @@ import FloatingModal from "#components-ui/floating-modal";
 import { Icon } from "#components-ui/icon/wrapper";
 import { getAgentDisplayName } from "#models/authentication/user/helpers";
 import { isLoggedIn } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
 import { EspaceAgentLink } from "./espace-agent-link";
 import styles from "./styles.module.css";

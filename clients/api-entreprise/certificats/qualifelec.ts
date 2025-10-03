@@ -1,7 +1,7 @@
 import routes from "#clients/routes";
-import { IQualifelec } from "#models/espace-agent/certificats/qualifelec";
-import { Siret } from "#utils/helpers";
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
+import type { IQualifelec } from "#models/espace-agent/certificats/qualifelec";
+import type { Siret } from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseQualifelec = IAPIEntrepriseResponse<
   Array<{

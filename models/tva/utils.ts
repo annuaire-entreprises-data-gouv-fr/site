@@ -1,4 +1,4 @@
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 
 /**
  * Compute TVA number from siren - does not include country code

@@ -1,7 +1,7 @@
 import routes from "#clients/routes";
 import { INPI, INSEE } from "#components/administrations";
 import { estNonDiffusibleStrict } from "#models/core/diffusion";
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 import { Warning } from "../alerts";
 
 const NotInSireneAlert: React.FC<{

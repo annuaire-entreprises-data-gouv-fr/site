@@ -1,5 +1,5 @@
 import { clientDCA } from "#clients/open-data-soft/clients/journal-officiel-associations";
-import { Siren } from "#utils/helpers";
+import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientDCA", () => {

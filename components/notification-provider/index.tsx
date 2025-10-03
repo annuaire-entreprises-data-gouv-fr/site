@@ -6,7 +6,7 @@ import {
   CornerBannerSuccess,
 } from "#components-ui/alerts/corner";
 import {
-  INotification,
+  type INotification,
   NotificationContext,
   NotificationTypeEnum,
 } from "#hooks/use-notification";

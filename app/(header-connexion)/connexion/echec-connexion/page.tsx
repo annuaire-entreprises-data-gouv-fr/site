@@ -1,7 +1,7 @@
 import { ConnexionSubLayout } from "#components-ui/connexion-layout";
 import connexionFailedPicture from "#components-ui/illustrations/connexion-failed";
 import constants from "#models/constants";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Votre tentative de connexion a échoué",

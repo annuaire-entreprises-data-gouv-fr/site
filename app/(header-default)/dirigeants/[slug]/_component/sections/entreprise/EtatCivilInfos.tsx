@@ -1,4 +1,4 @@
-import { IEtatCivil } from "#models/rne/types";
+import type { IEtatCivil } from "#models/rne/types";
 import { formatDateLong, formatDatePartial } from "#utils/helpers";
 
 export default function EtatCivilInfos({

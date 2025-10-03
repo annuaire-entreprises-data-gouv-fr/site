@@ -1,7 +1,7 @@
-import { IRolesDataRoles, IRolesDataUser } from "#clients/roles-data/interface";
+import type { IRolesDataRoles, IRolesDataUser } from "#clients/roles-data/interface";
 import NonRenseigne from "#components/non-renseigne";
 import { FullTable } from "#components/table/full";
-import { IRolesDataGroup } from "#models/authentication/group/groups";
+import type { IRolesDataGroup } from "#models/authentication/group/groups";
 import { formatSiret } from "#utils/helpers";
 import { Fragment, useMemo } from "react";
 import AddUserModal from "./update-modals/add-user";

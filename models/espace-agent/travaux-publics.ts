@@ -4,8 +4,8 @@ import {
   clientApiEntrepriseCnetp,
   clientApiEntrepriseProbtp,
 } from "#clients/api-entreprise/travaux-publics";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { UseCase } from "#models/use-cases";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { UseCase } from "#models/use-cases";
 import { extractSirenFromSiret, verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
 

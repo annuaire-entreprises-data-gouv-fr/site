@@ -1,5 +1,5 @@
-import { ChangeEventHandler } from "react";
-import { ISelectOptions } from "./type";
+import type { ChangeEventHandler } from "react";
+import type { ISelectOptions } from "./type";
 
 type SelectProps = {
   placeholder?: string | null;

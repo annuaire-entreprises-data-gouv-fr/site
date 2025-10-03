@@ -1,8 +1,8 @@
 import routes from "#clients/routes";
-import { IBeneficiairesEffectif } from "#models/espace-agent/beneficiaires";
-import { UseCase } from "#models/use-cases";
-import { Siren, formatNameFull } from "#utils/helpers";
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
+import type { IBeneficiairesEffectif } from "#models/espace-agent/beneficiaires";
+import type { UseCase } from "#models/use-cases";
+import { type Siren, formatNameFull } from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
   Array<

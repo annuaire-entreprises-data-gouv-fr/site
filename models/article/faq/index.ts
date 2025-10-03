@@ -1,5 +1,5 @@
 import { loadAll } from "#utils/static-pages/load-all";
-import { IArticle } from "../type";
+import type { IArticle } from "../type";
 
 export type IFaqArticle = {
   administrations: string[];

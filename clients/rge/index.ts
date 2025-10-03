@@ -1,7 +1,7 @@
 import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
-import { INomCertificat, IRGECertification } from "#models/certifications/rge";
-import { Siren } from "#utils/helpers";
+import type { INomCertificat, IRGECertification } from "#models/certifications/rge";
+import type { Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 import { getCertificatLogoPath } from "../../utils/helpers/certifications/certificats-logo";
 

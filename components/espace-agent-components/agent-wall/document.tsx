@@ -1,7 +1,7 @@
 import routes from "#clients/routes";
 import { estDiffusible } from "#models/core/diffusion";
-import { IUniteLegale } from "#models/core/types";
-import { PropsWithChildren } from "react";
+import type { IUniteLegale } from "#models/core/types";
+import type { PropsWithChildren } from "react";
 import AgentWall from ".";
 
 const AgentWallDocuments: React.FC<

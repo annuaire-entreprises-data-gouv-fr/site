@@ -1,6 +1,6 @@
 import { HttpUnauthorizedError } from "#clients/exceptions";
 import rolesDataClient from "#clients/roles-data";
-import { IRolesDataUser } from "#clients/roles-data/interface";
+import type { IRolesDataUser } from "#clients/roles-data/interface";
 import { Groups } from "#models/authentication/group/groups";
 import { FetchRessourceException } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";

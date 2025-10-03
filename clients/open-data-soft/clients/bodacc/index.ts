@@ -1,8 +1,8 @@
 import odsClient from "#clients/open-data-soft";
 import routes from "#clients/routes";
-import { IAnnoncesBodacc } from "#models/annonces";
+import type { IAnnoncesBodacc } from "#models/annonces";
 import { Exception } from "#models/exceptions";
-import { Siren, formatDate } from "#utils/helpers";
+import { type Siren, formatDate } from "#utils/helpers";
 import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
 import { logWarningInSentry } from "#utils/sentry";
 

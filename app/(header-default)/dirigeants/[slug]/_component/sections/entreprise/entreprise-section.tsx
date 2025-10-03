@@ -4,8 +4,8 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
-import { isEntrepreneurIndividuel, IUniteLegale } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import { isEntrepreneurIndividuel, type IUniteLegale } from "#models/core/types";
 import LiensCapitalistiquesSection from "../../liens-capitalistiques";
 import BeneficiairesSection from "./beneficiaires";
 import DirigeantsSection from "./dirigeants-open/section";

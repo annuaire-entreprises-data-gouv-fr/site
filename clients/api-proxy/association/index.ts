@@ -1,10 +1,10 @@
 import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
-import { IDataAssociation } from "#models/association/types";
+import type { IDataAssociation } from "#models/association/types";
 import constants from "#models/constants";
-import { IdRna, Siren, formatAdresse } from "#utils/helpers";
+import { type IdRna, type Siren, formatAdresse } from "#utils/helpers";
 import { clientAPIProxy } from "../client";
-import { IAssociationResponse } from "./types";
+import type { IAssociationResponse } from "./types";
 
 /**
  * Association through the API proxy

@@ -1,4 +1,4 @@
-import { HttpResponse, HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw";
 
 export const eoriHandler: HttpResponseResolver = ({ request }) => {
   let eori = "1234567890";

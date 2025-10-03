@@ -1,8 +1,8 @@
 import { clientApiEntrepriseConformiteFiscale } from "#clients/api-entreprise/conformite/fiscale";
 import { clientApiEntrepriseConformiteMSA } from "#clients/api-entreprise/conformite/msa";
 import { clientApiEntrepriseConformiteVigilance } from "#clients/api-entreprise/conformite/vigilance";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { UseCase } from "#models/use-cases";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { UseCase } from "#models/use-cases";
 import { extractSirenFromSiret, verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
 

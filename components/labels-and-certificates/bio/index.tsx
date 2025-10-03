@@ -7,14 +7,14 @@ import NonRenseigne from "#components/non-renseigne";
 import { DataSection } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import {
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type {
   IBioCertification,
   IEtablissementsBio,
 } from "#models/certifications/bio";
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 import { formatDate, formatSiret, pluralize } from "#utils/helpers";
-import React from "react";
+import type React from "react";
 
 export const CertificationsBioSection: React.FC<{
   uniteLegale: IUniteLegale;

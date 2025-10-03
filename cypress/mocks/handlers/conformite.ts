@@ -1,4 +1,4 @@
-import { HttpResponse, HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw";
 import conformiteDgfip from "../../fixtures/conformite-dgfip.json";
 import conformiteMsa from "../../fixtures/conformite-msa.json";
 import conformiteUrssaf from "../../fixtures/conformite-urssaf.json";

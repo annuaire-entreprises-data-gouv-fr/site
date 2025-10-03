@@ -1,9 +1,9 @@
 "use client";
 
 import constants from "#models/constants";
-import { ISearchResults } from "#models/search";
+import type { ISearchResults } from "#models/search";
 import { formatIntFr, formatSiret } from "#utils/helpers";
-import maplibregl, { Map } from "maplibre-gl";
+import maplibregl, { type Map } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef } from "react";
 import { checkLatLng } from "./check-lat-lng";

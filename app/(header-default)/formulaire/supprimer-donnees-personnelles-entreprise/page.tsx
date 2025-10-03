@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import TextWrapper from "#components-ui/text-wrapper";
 import getSession from "#utils/server-side-helper/app/get-session";
 import HidePersonalDataPageClient from "./_components";

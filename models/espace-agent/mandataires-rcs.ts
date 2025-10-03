@@ -2,9 +2,9 @@ import { clientApiEntrepriseMandatairesRCS } from "#clients/api-entreprise/manda
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "#models/api-not-responding";
-import { IDirigeants } from "#models/rne/types";
+import type { IDirigeants } from "#models/rne/types";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
 

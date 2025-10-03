@@ -1,6 +1,6 @@
-import React from "react";
+import type React from "react";
 import { AdvancedSearch } from "#components/advanced-search";
-import { IParams } from "#models/search/search-filter-params";
+import type { IParams } from "#models/search/search-filter-params";
 import { HeaderAppRouter } from "./header-app-router";
 
 type IProps = {

@@ -1,6 +1,6 @@
 import FAQLink from "#components-ui/faq-link";
-import { ISession } from "#models/authentication/user/session";
-import { IIndicateursFinanciersSociete } from "#models/finances-societe/types";
+import type { ISession } from "#models/authentication/user/session";
+import type { IIndicateursFinanciersSociete } from "#models/finances-societe/types";
 import { pluralize } from "#utils/helpers";
 import { FinancesSocieteChartAndTable } from "./chart-and-table";
 

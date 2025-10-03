@@ -4,13 +4,13 @@ import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import { ISession } from "#models/authentication/user/session";
+import type { ISession } from "#models/authentication/user/session";
 import {
   documentNonDiffusiblePlaceHolder,
   estDiffusible,
 } from "#models/core/diffusion";
-import { IUniteLegale } from "#models/core/types";
-import React from "react";
+import type { IUniteLegale } from "#models/core/types";
+import type React from "react";
 
 const ExtraitRNELink: React.FC<{
   uniteLegale: IUniteLegale;

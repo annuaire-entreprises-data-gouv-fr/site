@@ -1,10 +1,10 @@
 import TextWrapper from "#components-ui/text-wrapper";
 import AdministrationDescription from "#components/administrations/administration-description";
 import { administrationsMetaData } from "#models/administrations";
-import { EAdministration } from "#models/administrations/EAdministration";
+import type { EAdministration } from "#models/administrations/EAdministration";
 import { getFaqArticlesByTag } from "#models/article/faq";
-import { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
-import { Metadata } from "next";
+import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 

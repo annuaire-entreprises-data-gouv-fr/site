@@ -1,5 +1,5 @@
 import { clientApiEntrepriseAssociation } from "#clients/api-entreprise/association";
-import { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 

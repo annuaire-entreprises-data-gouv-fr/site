@@ -1,7 +1,7 @@
 import {
-  ChangeEventHandler,
-  DetailedHTMLProps,
-  TextareaHTMLAttributes,
+  type ChangeEventHandler,
+  type DetailedHTMLProps,
+  type TextareaHTMLAttributes,
   forwardRef,
   useCallback,
 } from "react";

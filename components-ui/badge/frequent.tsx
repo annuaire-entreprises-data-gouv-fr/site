@@ -1,6 +1,6 @@
 import constants from "#models/constants";
-import { PropsWithChildren } from "react";
-import { Badge, IPartialBadgeProps } from ".";
+import type { PropsWithChildren } from "react";
+import { Badge, type IPartialBadgeProps } from ".";
 
 export const LabelAndCertificateBadge = ({
   small = false,

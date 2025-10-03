@@ -1,12 +1,12 @@
 import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
-import {
+import type {
   IEtablissementBio,
   IEtablissementsBio,
 } from "#models/certifications/bio";
-import { Siren, formatAdresse, verifySiret } from "#utils/helpers";
+import { type Siren, formatAdresse, verifySiret } from "#utils/helpers";
 import { httpGet } from "#utils/network";
-import { IBioItem, IBioResponse } from "./interface";
+import type { IBioItem, IBioResponse } from "./interface";
 
 /**
  * BIO

@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext } from "next";
+import type { GetServerSidePropsContext } from "next";
 import { parseIntWithDefaultValue } from "#utils/helpers";
 import isUserAgentABot from "#utils/user-agent";
 

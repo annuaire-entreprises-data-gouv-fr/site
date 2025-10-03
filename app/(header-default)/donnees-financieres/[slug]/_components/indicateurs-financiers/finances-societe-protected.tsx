@@ -5,14 +5,14 @@ import {
   mergeDataSources,
 } from "#components/section/data-section/client";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale } from "#models/core/types";
-import { IChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import type { IChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
 import {
   createDefaultIndicateursFinanciersWithDGFiP,
-  IIndicateursFinanciersSociete,
+  type IIndicateursFinanciersSociete,
 } from "#models/finances-societe/types";
-import { UseCase } from "#models/use-cases";
+import type { UseCase } from "#models/use-cases";
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useFetchFinancesSociete } from "hooks";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";

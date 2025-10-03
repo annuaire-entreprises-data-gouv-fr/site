@@ -2,10 +2,10 @@ import NonRenseigne from "#components/non-renseigne";
 import { Section } from "#components/section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { isCollectiviteTerritoriale, IUniteLegale } from "#models/core/types";
-import { IEtatCivil } from "#models/rne/types";
+import { isCollectiviteTerritoriale, type IUniteLegale } from "#models/core/types";
+import type { IEtatCivil } from "#models/rne/types";
 import { capitalize, formatDatePartial, pluralize } from "#utils/helpers";
-import React from "react";
+import type React from "react";
 
 /**
  * Elus section

@@ -5,10 +5,10 @@ import ResultsPagination from "#components/search-results/results-pagination";
 import { DataSection } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IAPINotRespondingError } from "#models/api-not-responding";
-import { IEtablissementsScolaires } from "#models/etablissements-scolaires";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IEtablissementsScolaires } from "#models/etablissements-scolaires";
 import { pluralize } from "#utils/helpers";
-import React from "react";
+import type React from "react";
 
 export const EtablissementsScolairesSection: React.FC<{
   etablissements: IEtablissementsScolaires | IAPINotRespondingError;

@@ -1,8 +1,8 @@
 import routes from "#clients/routes";
-import { IConformite } from "#models/espace-agent/conformite";
-import { UseCase } from "#models/use-cases";
-import { Siren } from "#utils/helpers";
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
+import type { IConformite } from "#models/espace-agent/conformite";
+import type { UseCase } from "#models/use-cases";
+import type { Siren } from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseConformiteVigilance = IAPIEntrepriseResponse<{
   entity_status: {

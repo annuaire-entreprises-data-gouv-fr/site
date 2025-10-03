@@ -8,10 +8,10 @@ import { AsyncDataSectionClient } from "#components/section/data-section/client"
 import { FullTable } from "#components/table/full";
 import { UniteLegalePageLink } from "#components/unite-legale-page-link";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { IUniteLegale } from "#models/core/types";
+import type { IUniteLegale } from "#models/core/types";
 import { formatDate } from "#utils/helpers";
 import { useFetchBODACC } from "hooks";
-import React from "react";
+import type React from "react";
 
 const AnnoncesBodacc: React.FC<{
   uniteLegale: IUniteLegale;

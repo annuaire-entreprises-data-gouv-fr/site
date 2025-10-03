@@ -1,9 +1,9 @@
 import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
-import { IEgapro } from "#models/certifications/egapro";
-import { Siren } from "#utils/helpers";
+import type { IEgapro } from "#models/certifications/egapro";
+import type { Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
-import { IEgaproItem, IEgaproResponse } from "./types";
+import type { IEgaproItem, IEgaproResponse } from "./types";
 
 const employeesSizeRangeMapping = {
   "50:250": "50 à 250 salariés",

@@ -2,7 +2,7 @@ import { clientApiEntrepriseQualifelec } from "#clients/api-entreprise/certifica
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "#models/api-not-responding";
 import { verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";

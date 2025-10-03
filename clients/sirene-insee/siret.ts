@@ -2,9 +2,9 @@ import { HttpNotFound, HttpServerError } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
 import { estActif } from "#models/core/etat-administratif";
-import { IEtablissement, createDefaultEtablissement } from "#models/core/types";
+import { type IEtablissement, createDefaultEtablissement } from "#models/core/types";
 import {
-  Siret,
+  type Siret,
   agregateTripleFields,
   extractSirenFromSiret,
   formatAdresse,

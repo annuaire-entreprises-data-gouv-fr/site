@@ -1,4 +1,4 @@
-import { HttpResponse, HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw";
 import apiInclusionMetadata from "../../fixtures/api-inclusion-metadata.json";
 import apiInclusion from "../../fixtures/api-inclusion.json";
 

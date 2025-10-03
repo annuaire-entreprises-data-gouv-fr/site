@@ -3,7 +3,7 @@
 
 import { FadeIn } from "#components-ui/animation/fade-in";
 import { HeightTransition } from "#components-ui/animation/height-transition";
-import { IAPINotRespondingError, isAPI404 } from "#models/api-not-responding";
+import { type IAPINotRespondingError, isAPI404 } from "#models/api-not-responding";
 import {
   IDataFetchingState,
   hasFetchError,
@@ -13,7 +13,7 @@ import {
 } from "#models/data-fetching";
 import { useTimeout } from "hooks/use-timeout";
 import { useEffect, useState } from "react";
-import { ISectionProps, Section } from "..";
+import { type ISectionProps, Section } from "..";
 import { DataSectionContent } from "./content";
 import DataFetchErrorExplanation from "./error";
 import { DataSectionLoader } from "./loader";

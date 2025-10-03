@@ -3,11 +3,11 @@ import { clientRGE } from "#clients/rge";
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
 } from "#models/api-not-responding";
 import { FetchRessourceException } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
-import { IUniteLegale } from "../core/types";
+import type { IUniteLegale } from "../core/types";
 
 export type INomCertificat =
   | "QUALIBAT-RGE"

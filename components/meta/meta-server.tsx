@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { OPENGRAPH_IMAGES, SITE_DESCRIPTION, SITE_NAME } from ".";
 
 export function meta(obj: Metadata): Metadata {

@@ -1,6 +1,6 @@
-import { Exception, FetchRessourceException } from "#models/exceptions";
+import { type Exception, FetchRessourceException } from "#models/exceptions";
 import * as Sentry from "@sentry/nextjs";
-import { SeverityLevel } from "@sentry/nextjs";
+import type { SeverityLevel } from "@sentry/nextjs";
 
 // scope allows to log stuff in tags in sentry
 function getScope(exception: Exception, scope: Sentry.Scope) {

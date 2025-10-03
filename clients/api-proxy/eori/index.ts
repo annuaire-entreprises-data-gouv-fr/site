@@ -1,7 +1,7 @@
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import { IEORIValidation } from "#models/eori-validation";
-import { Siret } from "#utils/helpers";
+import type { IEORIValidation } from "#models/eori-validation";
+import type { Siret } from "#utils/helpers";
 import { clientAPIProxy } from "../client";
 
 /**

@@ -5,8 +5,8 @@ import LocalPageCounter from "#components/search-results/results-pagination/loca
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import { ISession } from "#models/authentication/user/session";
-import { IUniteLegale } from "#models/core/types";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
 import { formatDate, formatSiret } from "#utils/helpers";
 import { useFetchAlimConfiance } from "hooks/fetch/alim-confiance";
 import { useState } from "react";
