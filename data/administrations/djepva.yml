@@ -2,12 +2,12 @@ slug: djepva
 short: DJEPVA
 site: https://www.jeunes.gouv.fr/organisation-du-ministere-184
 long: La direction de la jeunesse de l'éducation populaire et de la vie associative (DJEPVA)
-contact: djepva.dir@jeunesse-sports.gouv.fr
+contact: mailto:djepva.dir@jeunesse-sports.gouv.fr
 apiMonitors:
   - apiName: API Association
     apiSlug: rna
     updownIoId: phbs
-    apiDocumentationLink: https://www.associations.gouv.fr/les-api-et-autres-outils.html
+    apiDocumentationLink: https://www.associations.gouv.fr/lapi-association-et-le-referentiel-des-associations
   - label: API data.subvention
     apiSlug: data-subvention
     isProtected: true
