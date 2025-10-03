@@ -1,8 +1,8 @@
-import odsClient from '#clients/open-data-soft';
-import routes from '#clients/routes';
-import { IOrganismeFormation } from '#models/certifications/organismes-de-formation';
-import { Siren } from '#utils/helpers';
-import { IOrganismesFormationRecord } from './type';
+import odsClient from "#clients/open-data-soft";
+import routes from "#clients/routes";
+import { IOrganismeFormation } from "#models/certifications/organismes-de-formation";
+import { Siren } from "#utils/helpers";
+import { IOrganismesFormationRecord } from "./type";
 
 /**
  * MTPEI - DGEFP
@@ -40,7 +40,7 @@ const mapToDomainObject = (record: IOrganismesFormationRecord) => {
     stagiaires: record.informationsdeclarees_nbstagiaires || null,
     formateurs: record.informationsdeclarees_effectifformateurs || null,
     certifications: record.certifications
-      ? (record.certifications || '').split('/')
+      ? (record.certifications || "").split("/")
       : [],
   };
 };

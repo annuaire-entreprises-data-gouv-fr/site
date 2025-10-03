@@ -1,4 +1,4 @@
-import { IAgentScope } from './scopes/constants';
+import { IAgentScope } from "./scopes/constants";
 
 export type IAgentInfo = {
   proConnectSub: string;

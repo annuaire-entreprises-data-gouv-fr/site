@@ -1,24 +1,24 @@
-import { OpenClosedTag } from '#components-ui/badge/frequent';
-import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
-import AvisSituationLink from '#components/justificatifs/avis-situation-link';
-import ExtraitRNELink from '#components/justificatifs/extrait-rne-link';
-import { ISession } from '#models/authentication/user/session';
-import { estActif } from '#models/core/etat-administratif';
+import { OpenClosedTag } from "#components-ui/badge/frequent";
+import { Icon } from "#components-ui/icon/wrapper";
+import InformationTooltip from "#components-ui/information-tooltip";
+import AvisSituationLink from "#components/justificatifs/avis-situation-link";
+import ExtraitRNELink from "#components/justificatifs/extrait-rne-link";
+import { ISession } from "#models/authentication/user/session";
+import { estActif } from "#models/core/etat-administratif";
 import {
   IUniteLegale,
   isAssociation,
   isServicePublic,
-} from '#models/core/types';
-import { formatDate } from '#utils/helpers';
-import React, { PropsWithChildren } from 'react';
-import styles from './style.module.css';
+} from "#models/core/types";
+import { formatDate } from "#utils/helpers";
+import React, { PropsWithChildren } from "react";
+import styles from "./style.module.css";
 
 const Wrapper: React.FC<PropsWithChildren<{ link: React.JSX.Element }>> = ({
   children,
   link,
 }) => (
-  <div className={styles['inscriptions-wrapper']}>
+  <div className={styles["inscriptions-wrapper"]}>
     <div>{children}</div>
     <div className="layout-right">{link}</div>
   </div>
@@ -53,7 +53,7 @@ export const UniteLegaleInscriptionIG = ({
               ? `, depuis le ${formatDate(
                   uniteLegale.immatriculation?.dateImmatriculation
                 )}`
-              : ''
+              : ""
           }.`}
         >
           <>
@@ -65,7 +65,7 @@ export const UniteLegaleInscriptionIG = ({
               <OpenClosedTag icon="open" label="Enregistrée sur Infogreffe">
                 {uniteLegale.immatriculation?.dateImmatriculation && (
                   <>
-                    le{' '}
+                    le{" "}
                     {formatDate(
                       uniteLegale.immatriculation?.dateImmatriculation
                     )}
@@ -94,7 +94,7 @@ export const UniteLegaleInscriptionSirene = ({
       <InformationTooltip
         tabIndex={undefined}
         label={
-          'Cette structure est n’a pas été retrouvée dans la base Sirene tenue par l’Insee. Pourtant, elle devrait s’y trouver. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site sirene.fr'
+          "Cette structure est n’a pas été retrouvée dans la base Sirene tenue par l’Insee. Pourtant, elle devrait s’y trouver. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site sirene.fr"
         }
       >
         <OpenClosedTag
@@ -121,7 +121,7 @@ export const UniteLegaleInscriptionSirene = ({
         label={`Cette structure est inscrite dans la base Sirene tenue par l’Insee${
           uniteLegale.dateCreation
             ? `, depuis le ${formatDate(uniteLegale.dateCreation)}`
-            : ''
+            : ""
         }. Elle a été mise à jour le ${formatDate(
           uniteLegale.dateMiseAJourInsee
         )}.`}
@@ -172,7 +172,7 @@ export const UniteLegaleInscriptionRNE = ({
           <InformationTooltip
             tabIndex={undefined}
             label={
-              'Cette structure est n’a pas été retrouvée dans le Registre National des Entreprises (RNE) tenu par l’INPI. Pourtant, vu sa forme juridique, elle devrait y être inscrite. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site data.inpi.fr'
+              "Cette structure est n’a pas été retrouvée dans le Registre National des Entreprises (RNE) tenu par l’INPI. Pourtant, vu sa forme juridique, elle devrait y être inscrite. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site data.inpi.fr"
             }
           >
             <OpenClosedTag
@@ -202,13 +202,13 @@ export const UniteLegaleInscriptionRNE = ({
             ? `, depuis le ${formatDate(
                 uniteLegale.immatriculation?.dateImmatriculation
               )}`
-            : ''
+            : ""
         }.${
           uniteLegale.dateMiseAJourInpi
             ? ` Elle a été mise à jour le ${formatDate(
                 uniteLegale.dateMiseAJourInpi
               )}.`
-            : ''
+            : ""
         }`}
       >
         <a href="#immatriculation-rne">
@@ -220,7 +220,7 @@ export const UniteLegaleInscriptionRNE = ({
             <OpenClosedTag icon="open" label="Immatriculée au RNE (INPI)">
               {uniteLegale.immatriculation?.dateImmatriculation && (
                 <>
-                  le{' '}
+                  le{" "}
                   {formatDate(uniteLegale.immatriculation?.dateImmatriculation)}
                 </>
               )}
@@ -257,7 +257,7 @@ export const UniteLegaleInscriptionRNA = ({
         <a href="#association-section">
           <OpenClosedTag
             icon="open"
-            label={'Inscrite au RNA (Ministère de l’Intérieur)'}
+            label={"Inscrite au RNA (Ministère de l’Intérieur)"}
           />
         </a>
       </InformationTooltip>

@@ -1,19 +1,19 @@
-import routes from '#clients/routes';
-import ButtonLink from '#components-ui/button';
-import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
+import routes from "#clients/routes";
+import ButtonLink from "#components-ui/button";
+import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
 import {
   documentNonDiffusiblePlaceHolder,
   estDiffusible,
   estNonDiffusibleProtected,
-} from '#models/core/diffusion';
-import { IEtablissement } from '#models/core/types';
-import React from 'react';
+} from "#models/core/diffusion";
+import { IEtablissement } from "#models/core/types";
+import React from "react";
 
 const AvisSituationLink: React.FC<{
   etablissement: IEtablissement;
@@ -27,7 +27,7 @@ const AvisSituationLink: React.FC<{
       alt
       to={`${routes.sireneInsee.avis}${etablissement.siret}`}
     >
-      <Icon slug="download">{label || 'Avis de situation'}</Icon>
+      <Icon slug="download">{label || "Avis de situation"}</Icon>
     </ButtonLink>
   ) : (
     <a
@@ -35,7 +35,7 @@ const AvisSituationLink: React.FC<{
       rel="noopener noreferrer"
       href={`${routes.sireneInsee.avis}${etablissement.siret}`}
     >
-      {label || 'Avis de situation'}
+      {label || "Avis de situation"}
     </a>
   );
 

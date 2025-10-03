@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/use-cases';
-import { useState } from 'react';
-import { ProtectedFinancesSocieteSection } from './finances-societe-protected';
-import { PublicFinancesSocieteSection } from './finances-societe-public';
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { UseCase } from "#models/use-cases";
+import { useState } from "react";
+import { ProtectedFinancesSocieteSection } from "./finances-societe-protected";
+import { PublicFinancesSocieteSection } from "./finances-societe-public";
 
 export function IndicateursFinanciers({
   uniteLegale,

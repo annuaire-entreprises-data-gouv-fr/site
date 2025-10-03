@@ -1,7 +1,7 @@
-import { clientApiEntrepriseAssociation } from '#clients/api-entreprise/association';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { verifySiren } from '#utils/helpers';
-import { handleApiEntrepriseError } from '../utils';
+import { clientApiEntrepriseAssociation } from "#clients/api-entreprise/association";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { verifySiren } from "#utils/helpers";
+import { handleApiEntrepriseError } from "../utils";
 
 type IDocumentAssociation = {
   date_depot: string; //'2019-01-01';
@@ -59,7 +59,7 @@ export const getAssociationProtected = async (
   return clientApiEntrepriseAssociation(siren).catch((error) =>
     handleApiEntrepriseError(error, {
       siren,
-      apiResource: 'AssociationProtected',
+      apiResource: "AssociationProtected",
     })
   );
 };

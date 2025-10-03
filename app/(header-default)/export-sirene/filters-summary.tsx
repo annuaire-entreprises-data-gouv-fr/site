@@ -1,10 +1,10 @@
-import { categoriesJuridiquesNiveau3 } from '#utils/helpers/formatting/metadata/categories-juridiques';
-import { categoriesJuridiquesNiveau1 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-1';
-import { categoriesJuridiquesNiveau2 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-2';
-import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
-import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
-import { ExtendedExportCsvInput } from './export-csv';
-import { selectedEffectifLabel } from './filters';
+import { categoriesJuridiquesNiveau3 } from "#utils/helpers/formatting/metadata/categories-juridiques";
+import { categoriesJuridiquesNiveau1 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-1";
+import { categoriesJuridiquesNiveau2 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
+import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
+import { codesSectionNAF } from "#utils/helpers/formatting/metadata/codes-section-NAF";
+import { ExtendedExportCsvInput } from "./export-csv";
+import { selectedEffectifLabel } from "./filters";
 
 export default function FiltersSummary({
   filters,
@@ -15,15 +15,15 @@ export default function FiltersSummary({
     <div>
       <h2>Récapitulatif des filtres :</h2>
       <p>
-        <strong>État administratif :</strong>{' '}
-        {filters.activity === 'all'
-          ? 'Établissements en activité et cessés'
-          : filters.activity === 'active'
-          ? 'Établissements en activité'
-          : 'Établissements cessés'}
+        <strong>État administratif :</strong>{" "}
+        {filters.activity === "all"
+          ? "Établissements en activité et cessés"
+          : filters.activity === "active"
+            ? "Établissements en activité"
+            : "Établissements cessés"}
       </p>
 
-      {filters.legalUnit === 'hq' && (
+      {filters.legalUnit === "hq" && (
         <p>
           <strong>Type d‘établissement :</strong> L‘établissement siège
           seulement
@@ -38,7 +38,7 @@ export default function FiltersSummary({
 
       {filters.categories && filters.categories.length > 0 && (
         <p>
-          <strong>Catégories :</strong> {filters.categories.join(', ')}
+          <strong>Catégories :</strong> {filters.categories.join(", ")}
         </p>
       )}
 
@@ -47,24 +47,24 @@ export default function FiltersSummary({
           <strong>Localisation :</strong>
           {(() => {
             const regions = filters.locations.filter(
-              (loc) => loc.type === 'reg'
+              (loc) => loc.type === "reg"
             );
             const departments = filters.locations.filter(
-              (loc) => loc.type === 'dep'
+              (loc) => loc.type === "dep"
             );
             const communes = filters.locations.filter(
-              (loc) => loc.type === 'cp' || loc.type === 'insee'
+              (loc) => loc.type === "cp" || loc.type === "insee"
             );
 
             return (
               <>
                 {regions.length > 0 && (
-                  <div style={{ marginLeft: '20px' }}>
+                  <div style={{ marginLeft: "20px" }}>
                     <i>Régions</i>
                     {regions.map((loc) => (
                       <div
                         key={`${loc.type}-${loc.value}`}
-                        style={{ marginLeft: '20px' }}
+                        style={{ marginLeft: "20px" }}
                       >
                         {loc.label}
                       </div>
@@ -72,12 +72,12 @@ export default function FiltersSummary({
                   </div>
                 )}
                 {departments.length > 0 && (
-                  <div style={{ marginLeft: '20px' }}>
+                  <div style={{ marginLeft: "20px" }}>
                     <i>Départements</i>
                     {departments.map((loc) => (
                       <div
                         key={`${loc.type}-${loc.value}`}
-                        style={{ marginLeft: '20px' }}
+                        style={{ marginLeft: "20px" }}
                       >
                         {loc.label}
                       </div>
@@ -85,12 +85,12 @@ export default function FiltersSummary({
                   </div>
                 )}
                 {communes.length > 0 && (
-                  <div style={{ marginLeft: '20px' }}>
+                  <div style={{ marginLeft: "20px" }}>
                     <i>Communes</i>
                     {communes.map((loc) => (
                       <div
                         key={`${loc.type}-${loc.value}`}
-                        style={{ marginLeft: '20px' }}
+                        style={{ marginLeft: "20px" }}
                       >
                         {loc.label}
                       </div>
@@ -104,17 +104,17 @@ export default function FiltersSummary({
       )}
       {filters.sap && filters.sap.length > 0 && (
         <p>
-          <strong>Domaines d‘activité (Section) :</strong>{' '}
-          {filters.sap.map((code) => codesSectionNAF[code]).join(', ')}
+          <strong>Domaines d‘activité (Section) :</strong>{" "}
+          {filters.sap.map((code) => codesSectionNAF[code]).join(", ")}
         </p>
       )}
 
       {filters.naf && filters.naf.length > 0 && (
         <p>
-          <strong>Codes NAF/APE (Sous-classe) :</strong>{' '}
+          <strong>Codes NAF/APE (Sous-classe) :</strong>{" "}
           {filters.naf
             .map((code) => `${code} - ${codesNAFRev2[code]}`)
-            .join(', ')}
+            .join(", ")}
         </p>
       )}
 
@@ -146,13 +146,13 @@ export default function FiltersSummary({
 
       {(filters.creationDate?.from || filters.creationDate?.to) && (
         <p>
-          <strong>Date de création :</strong>{' '}
+          <strong>Date de création :</strong>{" "}
           {filters.creationDate?.from &&
             `Depuis le ${new Date(
               filters.creationDate.from
             ).toLocaleDateString()}`}
           {filters.creationDate?.to &&
-            (filters.creationDate?.from ? ' jusqu‘au ' : 'Jusqu‘au ')}
+            (filters.creationDate?.from ? " jusqu‘au " : "Jusqu‘au ")}
           {filters.creationDate.to &&
             `${new Date(filters.creationDate.to).toLocaleDateString()}`}
         </p>
@@ -166,7 +166,7 @@ export default function FiltersSummary({
               filters.updateDate.from
             ).toLocaleDateString()}`}
           {filters.updateDate?.to &&
-            (filters.updateDate?.from ? ' jusqu‘au ' : 'Jusqu‘au ')}
+            (filters.updateDate?.from ? " jusqu‘au " : "Jusqu‘au ")}
           {filters.updateDate.to &&
             `${new Date(filters.updateDate.to).toLocaleDateString()}`}
         </p>
@@ -176,28 +176,28 @@ export default function FiltersSummary({
         <p>
           <strong>
             Appartenance au champ de l‘économie sociale et solidaire :
-          </strong>{' '}
+          </strong>{" "}
           {(() => {
             const { inclure, inclureNo, inclureNonRenseigne } = filters.ess;
             const options = [];
-            if (inclure) options.push('Oui');
-            if (inclureNo) options.push('Non');
-            if (inclureNonRenseigne) options.push('Non renseignées');
-            return options.length > 0 ? options.join(', ') : 'Aucune sélection';
+            if (inclure) options.push("Oui");
+            if (inclureNo) options.push("Non");
+            if (inclureNonRenseigne) options.push("Non renseignées");
+            return options.length > 0 ? options.join(", ") : "Aucune sélection";
           })()}
         </p>
       )}
 
       {filters.mission && (
         <p>
-          <strong>Appartenance au champ des sociétés à mission :</strong>{' '}
+          <strong>Appartenance au champ des sociétés à mission :</strong>{" "}
           {(() => {
             const { inclure, inclureNo, inclureNonRenseigne } = filters.mission;
             const options = [];
-            if (inclure) options.push('Oui');
-            if (inclureNo) options.push('Non');
-            if (inclureNonRenseigne) options.push('Non renseignées');
-            return options.length > 0 ? options.join(', ') : 'Aucune sélection';
+            if (inclure) options.push("Oui");
+            if (inclureNo) options.push("Non");
+            if (inclureNonRenseigne) options.push("Non renseignées");
+            return options.length > 0 ? options.join(", ") : "Aucune sélection";
           })()}
         </p>
       )}

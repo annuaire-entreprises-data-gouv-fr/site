@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
-import { Loader } from '#components-ui/loader';
-import { GIPMDS, INSEE } from '#components/administrations';
-import NonRenseigne from '#components/non-renseigne';
-import { ProtectedInlineData } from '#components/protected-inline-data';
-import { isAPI404 } from '#models/api-not-responding';
+import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
+import InformationTooltip from "#components-ui/information-tooltip";
+import { Loader } from "#components-ui/loader";
+import { GIPMDS, INSEE } from "#components/administrations";
+import NonRenseigne from "#components/non-renseigne";
+import { ProtectedInlineData } from "#components/protected-inline-data";
+import { isAPI404 } from "#models/api-not-responding";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { hasAnyError, isDataLoading } from '#models/data-fetching';
-import { formatFloatFr } from '#utils/helpers';
-import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { hasAnyError, isDataLoading } from "#models/data-fetching";
+import { formatFloatFr } from "#utils/helpers";
+import { libelleTrancheEffectif } from "#utils/helpers/formatting/codes-effectifs";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 
 export const FAQEffectifAnnuel = () => (
   <FAQLink tooltipLabel="Effectif annuel">
@@ -81,7 +81,7 @@ export const ProtectedEffectifCell = ({
   const { effectif, anneeEffectif } = effectifsAnnuelsProtected;
   return (
     <ProtectedInlineData>
-      {formatFloatFr(effectif.toString())} salarié{effectif > 1 ? 's' : ''}, en{' '}
+      {formatFloatFr(effectif.toString())} salarié{effectif > 1 ? "s" : ""}, en{" "}
       {anneeEffectif}
     </ProtectedInlineData>
   );
@@ -98,7 +98,7 @@ export const EffectifCell = ({
     return (
       <ul>
         <li>
-          Tranche statistique (<INSEE />) :{' '}
+          Tranche statistique (<INSEE />) :{" "}
           {libelleTrancheEffectif(
             uniteLegale.trancheEffectif,
             uniteLegale.anneeTrancheEffectif
@@ -106,7 +106,7 @@ export const EffectifCell = ({
         </li>
         <li>
           <span>
-            <FAQEffectifAnnuel /> (<GIPMDS />) :{' '}
+            <FAQEffectifAnnuel /> (<GIPMDS />) :{" "}
           </span>
           <ProtectedEffectifCell uniteLegale={uniteLegale} session={session} />
         </li>

@@ -8,8 +8,8 @@ import {
   Legend,
   ChartData,
   ChartOptions,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -23,10 +23,10 @@ ChartJS.register(
 type StackedBarChartProps = {
   height?: number | string;
   width?: number | string;
-  data: ChartData<'bar', any, unknown>;
-  pluginOption?: ChartOptions<'bar'>['plugins'];
-  options?: ChartOptions<'bar'>;
-  scales?: ChartOptions<'bar'>['scales'];
+  data: ChartData<"bar", any, unknown>;
+  pluginOption?: ChartOptions<"bar">["plugins"];
+  options?: ChartOptions<"bar">;
+  scales?: ChartOptions<"bar">["scales"];
 };
 
 const defaultOptions = {
@@ -48,8 +48,8 @@ const defaultOptions = {
 
 export const StackedBarChart = ({
   data,
-  height = '400px',
-  width = '100%',
+  height = "400px",
+  width = "100%",
   pluginOption,
   scales,
 }: StackedBarChartProps) => {

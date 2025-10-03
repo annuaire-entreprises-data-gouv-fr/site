@@ -1,11 +1,11 @@
-import { HttpUnauthorizedError } from '#clients/exceptions';
-import constants from '#models/constants';
-import { InternalError } from '#models/exceptions';
-import { UseCase } from '#models/use-cases';
-import { httpGet } from '#utils/network';
-import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-request-caller-infos';
-import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
-import { logFatalErrorInSentry } from '#utils/sentry';
+import { HttpUnauthorizedError } from "#clients/exceptions";
+import constants from "#models/constants";
+import { InternalError } from "#models/exceptions";
+import { UseCase } from "#models/use-cases";
+import { httpGet } from "#utils/network";
+import { sensitiveRequestCallerInfos } from "#utils/network/utils/sensitive-request-caller-infos";
+import { sensitiveRequestLogger } from "#utils/network/utils/sensitive-request-logger";
+import { logFatalErrorInSentry } from "#utils/sentry";
 
 export type IAPIEntrepriseResponse<T> = {
   data: T;
@@ -28,7 +28,7 @@ export default async function clientAPIEntreprise<T, U>(
   }
 ) {
   const url = `${process.env.API_ENTREPRISE_URL}${route}`;
-  const useCase = options?.useCase ? options.useCase : 'annuaire-entreprises';
+  const useCase = options?.useCase ? options.useCase : "annuaire-entreprises";
 
   const callerInfos = await sensitiveRequestCallerInfos();
   sensitiveRequestLogger(url, callerInfos, useCase);
@@ -36,15 +36,15 @@ export default async function clientAPIEntreprise<T, U>(
   if (!callerInfos.siret) {
     logFatalErrorInSentry(
       new InternalError({
-        message: 'Missing recipient siret',
+        message: "Missing recipient siret",
         context: { domain: callerInfos.domain },
       })
     );
-    throw new HttpUnauthorizedError('Missing recipient siret');
+    throw new HttpUnauthorizedError("Missing recipient siret");
   }
 
   if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
-    throw new HttpUnauthorizedError('Missing API Entreprise credentials');
+    throw new HttpUnauthorizedError("Missing API Entreprise credentials");
   }
 
   const response = await httpGet<T>(url, {
@@ -53,7 +53,7 @@ export default async function clientAPIEntreprise<T, U>(
     },
     timeout: constants.timeout.XXXL,
     params: {
-      object: 'espace-agent-public',
+      object: "espace-agent-public",
       context: useCase,
       recipient: callerInfos.siret,
     },

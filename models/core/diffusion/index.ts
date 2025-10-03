@@ -1,17 +1,17 @@
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { ReactElement } from 'react';
-import { IEtablissementsList } from '../etablissements-list';
-import { IEtablissement, IUniteLegale } from '../types';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { ReactElement } from "react";
+import { IEtablissementsList } from "../etablissements-list";
+import { IEtablissement, IUniteLegale } from "../types";
 
 export enum ISTATUTDIFFUSION {
-  PROTECTED = 'protégé en diffusion',
-  PARTIAL = 'partiellement diffusible',
-  NON_DIFF_STRICT = 'non-diffusible',
-  DIFFUSIBLE = 'diffusible',
+  PROTECTED = "protégé en diffusion",
+  PARTIAL = "partiellement diffusible",
+  NON_DIFF_STRICT = "non-diffusible",
+  DIFFUSIBLE = "diffusible",
 }
 
 type IUniteLegaleOrEtablissement = {
@@ -118,11 +118,11 @@ export const anonymiseEtablissement = (
 
     // 851915207
     // should be reverted with https://github.com/annuaire-entreprises-data-gouv-fr/site/pull/1955
-    if (etablissement.siren === '851915207') {
-      etablissement.adresse = '';
-      etablissement.adressePostale = '';
-      etablissement.commune = '';
-      etablissement.codePostal = '';
+    if (etablissement.siren === "851915207") {
+      etablissement.adresse = "";
+      etablissement.adressePostale = "";
+      etablissement.commune = "";
+      etablissement.codePostal = "";
     }
 
     etablissement.enseigne = defaultNonDiffusiblePlaceHolder(etablissement);
@@ -132,7 +132,7 @@ export const anonymiseEtablissement = (
 };
 
 const anonymiseEtablissements = (
-  etablissements: IEtablissementsList['etablissements'],
+  etablissements: IEtablissementsList["etablissements"],
   session: ISession | null
 ) => {
   const anonymiser = (e: IEtablissement) => anonymiseEtablissement(e, session);
@@ -152,8 +152,8 @@ const defaultNonDiffusiblePlaceHolder = (
 ) =>
   nonDiffusibleDataFormatter(
     estNonDiffusibleProtected(uniteLegaleOrEtablissement)
-      ? 'information protégée'
-      : 'information non-diffusible'
+      ? "information protégée"
+      : "information non-diffusible"
   );
 
 export const documentNonDiffusiblePlaceHolder = (
@@ -161,8 +161,8 @@ export const documentNonDiffusiblePlaceHolder = (
 ) =>
   nonDiffusibleDataFormatter(
     estNonDiffusibleProtected(uniteLegaleOrEtablissement)
-      ? 'document protégé'
-      : 'document non-diffusible'
+      ? "document protégé"
+      : "document non-diffusible"
   );
 
 const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {
@@ -183,7 +183,7 @@ const formatAdresseForDiffusion = (
   commune: string
 ) => {
   if (estDiffusible(etablissement)) {
-    return adresse || 'Adresse inconnue';
+    return adresse || "Adresse inconnue";
   }
 
   if (!commune) {

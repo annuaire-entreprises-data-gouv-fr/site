@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { PrintNever } from '#components-ui/print-visibility';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/use-cases';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { useMemo } from 'react';
-import Conformite from './conformite';
+import { PrintNever } from "#components-ui/print-visibility";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { UseCase } from "#models/use-cases";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import Conformite from "./conformite";
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -57,14 +57,14 @@ function ConformiteSection({
           <TwoColumnTable
             body={[
               [
-                'Conformité fiscale',
+                "Conformité fiscale",
                 <Conformite
                   data={conformite?.fiscale}
                   administration="DGFiP"
                 />,
               ],
               [
-                'Conformité sociale',
+                "Conformité sociale",
                 <>
                   <Conformite
                     data={conformite?.vigilance}

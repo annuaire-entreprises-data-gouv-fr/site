@@ -1,12 +1,12 @@
-import { clientApiEntrepriseBeneficiaires } from '#clients/api-entreprise/beneficiaires';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { clientApiEntrepriseBeneficiaires } from "#clients/api-entreprise/beneficiaires";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { UseCase } from '#models/use-cases';
-import { verifySiren } from '#utils/helpers';
-import { handleApiEntrepriseError } from './utils';
+} from "#models/api-not-responding";
+import { UseCase } from "#models/use-cases";
+import { verifySiren } from "#utils/helpers";
+import { handleApiEntrepriseError } from "./utils";
 
 type IModalite = {
   total: number;
@@ -86,7 +86,7 @@ export const getBeneficiaires = async (
   } catch (error) {
     return handleApiEntrepriseError(error, {
       siren,
-      apiResource: 'BeneficiairesEffectifs',
+      apiResource: "BeneficiairesEffectifs",
     });
   }
 };

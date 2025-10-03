@@ -1,18 +1,18 @@
-import { hasRights } from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { IDataFetchingState } from '#models/data-fetching';
-import { InternalError } from '#models/exceptions';
-import { httpGet } from '#utils/network';
+import { hasRights } from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { IDataFetchingState } from "#models/data-fetching";
+import { InternalError } from "#models/exceptions";
+import { httpGet } from "#utils/network";
 import {
   FailToFetchError,
   RequestAbortedDuringUnloadException,
-} from '#utils/network/frontend';
-import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
-import { APIRoutesHandlers } from 'app/api/data-fetching/routes-handlers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { APIRoutesScopes } from 'app/api/data-fetching/routes-scopes';
-import { useEffect, useState } from 'react';
-import { UnwrapPromise } from 'types';
+} from "#utils/network/frontend";
+import logErrorInSentry, { logWarningInSentry } from "#utils/sentry";
+import { APIRoutesHandlers } from "app/api/data-fetching/routes-handlers";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { APIRoutesScopes } from "app/api/data-fetching/routes-scopes";
+import { useEffect, useState } from "react";
+import { UnwrapPromise } from "types";
 
 export type RouteResponse<T> = T extends APIRoutesPaths
   ? UnwrapPromise<ReturnType<(typeof APIRoutesHandlers)[T]>>
@@ -70,7 +70,7 @@ async function fetchAPIRoute<T extends APIRoutesPaths>(
 
   try {
     return await httpGet<RouteResponse<T>>(
-      '/api/data-fetching/' + route + '/' + slug,
+      "/api/data-fetching/" + route + "/" + slug,
       options
     );
   } catch (e: unknown) {
@@ -79,7 +79,7 @@ async function fetchAPIRoute<T extends APIRoutesPaths>(
     }
     if (e instanceof FailToFetchError) {
       e.context.slug = slug;
-      e.context.page = '/api/data-fetching/' + route;
+      e.context.page = "/api/data-fetching/" + route;
       if (e.status === 432) {
         logWarningInSentry(e);
         return IDataFetchingState.AGENT_OVER_RATE_LIMITS;
@@ -98,7 +98,7 @@ async function fetchAPIRoute<T extends APIRoutesPaths>(
     logErrorInSentry(
       new InternalError({
         cause: e,
-        message: 'Unhandled error',
+        message: "Unhandled error",
       })
     );
     return IDataFetchingState.MODEL_ERROR;

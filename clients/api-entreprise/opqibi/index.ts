@@ -1,7 +1,7 @@
-import routes from '#clients/routes';
-import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
-import { Siren } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import { IOpqibi } from "#models/espace-agent/certificats/opqibi";
+import { Siren } from "#utils/helpers";
+import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseOpqibi = IAPIEntrepriseResponse<{
   numero_certificat: string; // "string",
@@ -36,7 +36,7 @@ export const clientApiEntrepriseOpqibi = async (siren: Siren) => {
 };
 
 const mapQualification = (
-  qualification: IAPIEntrepriseOpqibi['data']['qualifications'][0]
+  qualification: IAPIEntrepriseOpqibi["data"]["qualifications"][0]
 ) => ({
   nom: qualification.nom,
   codeQualification: qualification.code_qualification,

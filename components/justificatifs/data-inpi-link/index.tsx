@@ -1,15 +1,15 @@
-import routes from '#clients/routes';
-import ButtonLink from '#components-ui/button';
-import { Icon } from '#components-ui/icon/wrapper';
-import { PrintNever } from '#components-ui/print-visibility';
-import { INPI } from '#components/administrations';
+import routes from "#clients/routes";
+import ButtonLink from "#components-ui/button";
+import { Icon } from "#components-ui/icon/wrapper";
+import { PrintNever } from "#components-ui/print-visibility";
+import { INPI } from "#components/administrations";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { estDiffusible } from '#models/core/diffusion';
-import { IUniteLegale } from '#models/core/types';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { estDiffusible } from "#models/core/diffusion";
+import { IUniteLegale } from "#models/core/types";
 
 type IProps = { uniteLegale: IUniteLegale; session: ISession | null };
 
@@ -27,7 +27,7 @@ export const DataInpiLinkWithExplanations = ({
       <>
         Le(s) dirigeant(s) se sont opposés à la diffusion de leurs données
         personnelles. Pour télécharger l’extrait d’immatriculation de cette
-        entreprise, rendez-vous sur le site{' '}
+        entreprise, rendez-vous sur le site{" "}
         <a href="https://data.inpi.fr">data.inpi.fr</a>.
       </>
     );
@@ -36,11 +36,11 @@ export const DataInpiLinkWithExplanations = ({
     <PrintNever>
       <p>
         Pour accéder aux données contenues dans un extrait d’immatriculation
-        (équivalent de{' '}
+        (équivalent de{" "}
         <strong>
           <a href="/faq/extrait-kbis">l’extrait KBIS ou D1</a>
         </strong>
-        ), vous pouvez soit télécharger l’{' '}
+        ), vous pouvez soit télécharger l’{" "}
         <strong>
           extrait des inscriptions au Registre National des Entreprises (RNE)
         </strong>

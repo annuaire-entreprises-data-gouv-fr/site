@@ -190,9 +190,7 @@
           "dateImmatriculation": "",
           "duree": 0,
           "dateFin": "",
-          "natureEntreprise": [
-            "Agricole : Périmètre des actifs agricoles"
-          ],
+          "natureEntreprise": ["Agricole : Périmètre des actifs agricoles"],
           "dateCloture": "",
           "isPersonneMorale": false,
           "capital": ""

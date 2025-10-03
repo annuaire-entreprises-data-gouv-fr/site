@@ -1,8 +1,8 @@
-import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
-import constants from '#models/constants';
-import React, { PropsWithChildren } from 'react';
-import styles from './style.module.css';
+import { Icon } from "#components-ui/icon/wrapper";
+import InformationTooltip from "#components-ui/information-tooltip";
+import constants from "#models/constants";
+import React, { PropsWithChildren } from "react";
+import styles from "./style.module.css";
 
 const FAQLink: React.FC<
   PropsWithChildren<{ tooltipLabel: string | React.JSX.Element; to?: string }>
@@ -16,8 +16,8 @@ const FAQLink: React.FC<
     ariaRelation="describedby"
   >
     <LinkOrSpan to={to} ariaLabel={`En savoir plus sur ${tooltipLabel}`}>
-      <span className={styles.label + ' ' + (to ? styles.link : '')}>
-        {tooltipLabel}{' '}
+      <span className={styles.label + " " + (to ? styles.link : "")}>
+        {tooltipLabel}{" "}
         <Icon color={constants.colors.frBlue} size={12} slug="information" />
       </span>
     </LinkOrSpan>

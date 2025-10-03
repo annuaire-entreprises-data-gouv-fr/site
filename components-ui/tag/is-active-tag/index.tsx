@@ -1,31 +1,31 @@
-import React from 'react';
-import InformationTooltip from '#components-ui/information-tooltip';
-import { Tag } from '#components-ui/tag';
+import React from "react";
+import InformationTooltip from "#components-ui/information-tooltip";
+import { Tag } from "#components-ui/tag";
 import {
   ISTATUTDIFFUSION,
   estNonDiffusibleStrict,
-} from '#models/core/diffusion';
-import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
-import { formatDate } from '#utils/helpers';
+} from "#models/core/diffusion";
+import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
+import { formatDate } from "#utils/helpers";
 
 const classFromState = (state: IETATADMINSTRATIF) => {
   switch (state) {
     case IETATADMINSTRATIF.ACTIF:
-      return 'success';
+      return "success";
     case IETATADMINSTRATIF.CESSEE:
     case IETATADMINSTRATIF.FERME:
-      return 'error';
+      return "error";
     case IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT:
     default:
-      return 'new';
+      return "new";
   }
 };
 
 const EtatTag: React.FC<{
   state: IETATADMINSTRATIF;
   since?: string;
-  size?: 'medium' | 'small';
-}> = ({ state, since = '', size = 'medium' }) => (
+  size?: "medium" | "small";
+}> = ({ state, since = "", size = "medium" }) => (
   <Tag color={classFromState(state)} size={size}>
     {state}
     {since && <>&nbsp;le&nbsp;{formatDate(since)}</>}
@@ -36,8 +36,8 @@ const IsActiveTag: React.FC<{
   etatAdministratif: IETATADMINSTRATIF;
   statutDiffusion: ISTATUTDIFFUSION;
   since?: string | null;
-  size?: 'medium' | 'small';
-}> = ({ etatAdministratif, statutDiffusion, since, size = 'medium' }) => {
+  size?: "medium" | "small";
+}> = ({ etatAdministratif, statutDiffusion, since, size = "medium" }) => {
   if (
     etatAdministratif === IETATADMINSTRATIF.INCONNU ||
     estNonDiffusibleStrict({ statutDiffusion })
@@ -65,7 +65,7 @@ const IsActiveTag: React.FC<{
     );
   }
 
-  return <EtatTag state={etatAdministratif} since={since || ''} size={size} />;
+  return <EtatTag state={etatAdministratif} since={since || ""} size={size} />;
 };
 
 export default IsActiveTag;

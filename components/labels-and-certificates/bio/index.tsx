@@ -1,20 +1,20 @@
-import routes from '#clients/routes';
-import ButtonLink from '#components-ui/button';
-import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
-import { Tag } from '#components-ui/tag';
-import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
+import routes from "#clients/routes";
+import ButtonLink from "#components-ui/button";
+import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
+import { Tag } from "#components-ui/tag";
+import NonRenseigne from "#components/non-renseigne";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IAPINotRespondingError } from "#models/api-not-responding";
 import {
   IBioCertification,
   IEtablissementsBio,
-} from '#models/certifications/bio';
-import { IUniteLegale } from '#models/core/types';
-import { formatDate, formatSiret, pluralize } from '#utils/helpers';
-import React from 'react';
+} from "#models/certifications/bio";
+import { IUniteLegale } from "#models/core/types";
+import { formatDate, formatSiret, pluralize } from "#utils/helpers";
+import React from "react";
 
 export const CertificationsBioSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -30,7 +30,7 @@ export const CertificationsBioSection: React.FC<{
         <>
           Nous n’avons pas retrouvé de <FAQBio /> pour cette structure.
           <p>
-            Vous pourrez peut-être les trouver sur le{' '}
+            Vous pourrez peut-être les trouver sur le{" "}
             <a
               href={routes.certifications.bio.site}
               target="_blank"
@@ -52,16 +52,16 @@ export const CertificationsBioSection: React.FC<{
         return (
           <>
             Cette structure possède {bio.etablissementsBio.length} établissement
-            {plural} <FAQBio label={`engagé${plural} “Professionnel du Bio”`} />{' '}
+            {plural} <FAQBio label={`engagé${plural} “Professionnel du Bio”`} />{" "}
             &nbsp;:
             <br />
             <br />
             <FullTable
               head={[
-                'Détail établissement',
-                'Statut',
-                'Certificat',
-                'Annuaire professionnels Bio',
+                "Détail établissement",
+                "Statut",
+                "Certificat",
+                "Annuaire professionnels Bio",
               ]}
               body={bio.etablissementsBio.map(
                 ({
@@ -147,7 +147,7 @@ const getCertificationDate = (certificat: IBioCertification) => {
         {date?.start && `le ${formatDate(date.start)}, `}
       </>
     ),
-    'NON ENGAGEE': <Tag>Non engagée</Tag>,
+    "NON ENGAGEE": <Tag>Non engagée</Tag>,
     SUSPENDUE: (
       <>
         <Tag color="warning">Suspendue</Tag>
@@ -158,7 +158,7 @@ const getCertificationDate = (certificat: IBioCertification) => {
   return status ? mapping[status] : <NonRenseigne />;
 };
 
-const FAQBio = ({ label = 'certification Bio' }) => (
+const FAQBio = ({ label = "certification Bio" }) => (
   <FAQLink tooltipLabel={label} to="/faq/professionnels-bio">
     Le label “Professionnel du bio” concerne les entreprises dont tout ou partie
     de leur activité est certifiée Bio par des organismes certificateurs,

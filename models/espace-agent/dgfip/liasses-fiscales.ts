@@ -1,8 +1,8 @@
-import { clientApiEntrepriseDgfipLiassesFiscales } from '#clients/api-entreprise/liasses-fiscales';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { UseCase } from '#models/use-cases';
-import { verifySiren } from '#utils/helpers';
-import { handleApiEntrepriseError } from '../utils';
+import { clientApiEntrepriseDgfipLiassesFiscales } from "#clients/api-entreprise/liasses-fiscales";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { UseCase } from "#models/use-cases";
+import { verifySiren } from "#utils/helpers";
+import { handleApiEntrepriseError } from "../utils";
 
 export type ILiassesFiscalesProtected = {
   obligationsFiscales: string[];
@@ -30,7 +30,7 @@ export const getLiassesFiscalesProtected = async (
   ).catch((error) =>
     handleApiEntrepriseError(error, {
       siren,
-      apiResource: 'getLiassesFiscalesProtected',
+      apiResource: "getLiassesFiscalesProtected",
     })
   );
 };

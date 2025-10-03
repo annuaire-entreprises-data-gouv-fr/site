@@ -1,23 +1,23 @@
-import { HttpNotFound } from '#clients/exceptions';
+import { HttpNotFound } from "#clients/exceptions";
 import {
   clientAnnuaireServicePublicByName,
   clientAnnuaireServicePublicBySiret,
-} from '#clients/open-data-soft/clients/annuaire-service-public';
-import { EAdministration } from '#models/administrations/EAdministration';
+} from "#clients/open-data-soft/clients/annuaire-service-public";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { FetchRessourceException } from '#models/exceptions';
-import { Siret } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
+} from "#models/api-not-responding";
+import { IEtablissement, IUniteLegale } from "#models/core/types";
+import { FetchRessourceException } from "#models/exceptions";
+import { Siret } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
 
 export interface IServicePublic {
   adresseCourriel: string | null;
   adressePostale: string | null;
   affectationPersonne: IAffectationPersonne | null;
-  categorie: 'SI' | 'SIL' | 'SL' | null;
+  categorie: "SI" | "SIL" | "SL" | null;
   formulaireContact: string | null;
   lastModified: string;
   mission: string | null;
@@ -32,24 +32,24 @@ export interface IServicePublic {
   telephone: string | null;
   typeOrganisme:
     | null
-    | 'Administration centrale (ou Ministère)'
-    | 'Ambassade ou mission diplomatique'
+    | "Administration centrale (ou Ministère)"
+    | "Ambassade ou mission diplomatique"
     | "Association d'utilité publique"
-    | 'Autorité administrative indépendante'
-    | 'Autorité publique indépendante'
-    | 'Cabinet ministériel'
-    | 'Collectivité locale'
-    | 'Conseil, comité, commission (organisme consultatif)'
-    | 'Direction départementale interministérielle'
+    | "Autorité administrative indépendante"
+    | "Autorité publique indépendante"
+    | "Cabinet ministériel"
+    | "Collectivité locale"
+    | "Conseil, comité, commission (organisme consultatif)"
+    | "Direction départementale interministérielle"
     | "Groupement d'intérêt public"
-    | 'Institution'
-    | 'Institution européenne'
-    | 'Juridiction'
-    | 'Préfecture, sous-préfecture'
+    | "Institution"
+    | "Institution européenne"
+    | "Juridiction"
+    | "Préfecture, sous-préfecture"
     | "Secrétaire d'État"
-    | 'Service déconcentré'
-    | 'Service à compétence nationale'
-    | 'Syndicat mixte'
+    | "Service déconcentré"
+    | "Service à compétence nationale"
+    | "Syndicat mixte"
     | "Établissement d'enseignement";
   urlServicePublic: string | null;
   subServicesId: string[];
@@ -97,7 +97,7 @@ function mapToError(e: any, siret: Siret, details?: string) {
   }
   logErrorInSentry(
     new FetchRessourceException({
-      ressource: 'AnnuaireServicePublic',
+      ressource: "AnnuaireServicePublic",
       cause: e,
       context: {
         siret,

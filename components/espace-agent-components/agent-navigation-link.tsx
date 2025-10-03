@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function AgentNavigationLink({
   href,
@@ -14,8 +14,8 @@ export default function AgentNavigationLink({
 
   return (
     <Link
-      className={'fr-nav__link'}
-      aria-current={pathname === href ? 'page' : undefined}
+      className={"fr-nav__link"}
+      aria-current={pathname === href ? "page" : undefined}
       key={href}
       href={href}
     >

@@ -3,11 +3,11 @@ import {
   clientApiEntrepriseCibtp,
   clientApiEntrepriseCnetp,
   clientApiEntrepriseProbtp,
-} from '#clients/api-entreprise/travaux-publics';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { UseCase } from '#models/use-cases';
-import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
-import { handleApiEntrepriseError } from './utils';
+} from "#clients/api-entreprise/travaux-publics";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { UseCase } from "#models/use-cases";
+import { extractSirenFromSiret, verifySiret } from "#utils/helpers";
+import { handleApiEntrepriseError } from "./utils";
 
 export type IDocumentDownloader = {
   url: string;
@@ -31,7 +31,7 @@ export const getTravauxPublic = async (
     handleApiEntrepriseError(e, {
       siren,
       siret,
-      apiResource: 'TravauxPublics',
+      apiResource: "TravauxPublics",
     });
 
   const [fntp, cibtp, cnetp, probtp] = await Promise.all([

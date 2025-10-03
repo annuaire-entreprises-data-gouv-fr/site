@@ -1,4 +1,4 @@
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 export const diamond = (
   <svg
@@ -31,7 +31,7 @@ export const LogoAnnuaire = () => (
 
 export const LogoAnnuaireGif = () => (
   <img
-    style={{ height: '100px', margin: 'auto', display: 'block' }}
+    style={{ height: "100px", margin: "auto", display: "block" }}
     src="/images/annuaire-entreprises-paysage-large.gif"
     alt="Logo de l’Annuaire des Entreprises"
   />

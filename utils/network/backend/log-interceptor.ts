@@ -1,5 +1,5 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { formatLog } from '../utils/format-log';
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { formatLog } from "../utils/format-log";
 
 /**
  * Add startTime to request
@@ -25,10 +25,10 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
   // eslint-disable-next-line no-console
   console.info(
     formatLog(
-      response?.config?.url || '',
+      response?.config?.url || "",
       response?.status,
       startTime ? endTime - startTime : undefined,
-      (response?.config?.method || '').toUpperCase()
+      (response?.config?.method || "").toUpperCase()
     )
   );
   return response;

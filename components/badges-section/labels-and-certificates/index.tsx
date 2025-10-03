@@ -1,6 +1,6 @@
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale } from '#models/core/types';
-import { LabelWithLinkToSection } from './label-with-link-to-section';
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IUniteLegale } from "#models/core/types";
+import { LabelWithLinkToSection } from "./label-with-link-to-section";
 
 export const checkHasQuality = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEss ||
@@ -129,7 +129,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
         />
       )}
       {estEntrepreneurSpectacle &&
-        (statutEntrepreneurSpectacle !== 'valide' ? (
+        (statutEntrepreneurSpectacle !== "valide" ? (
           <LabelWithLinkToSection
             informationTooltipLabel="Cette structure a demandé un récépissé de déclaration d’entrepreneur de spectacles vivants, mais le statut du récépissé n’est pas valide (en cours d’instruction ou invalide)"
             label="Entrepreneur de spectacles vivants (pas de récépissé valide)"

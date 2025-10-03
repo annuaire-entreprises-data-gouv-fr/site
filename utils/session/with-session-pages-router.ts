@@ -1,7 +1,7 @@
-import { ISession } from '#models/authentication/user/session';
-import { IronSession, getIronSession } from 'iron-session';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { sessionOptions } from '.';
+import { ISession } from "#models/authentication/user/session";
+import { IronSession, getIronSession } from "iron-session";
+import { NextApiRequest, NextApiResponse } from "next";
+import { sessionOptions } from ".";
 
 type IReqWithSession = NextApiRequest & {
   session: IronSession<ISession>;

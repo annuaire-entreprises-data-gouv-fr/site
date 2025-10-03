@@ -1,9 +1,9 @@
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { ParcoursAnswer } from '.';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { ParcoursAnswer } from ".";
 
 type IProps = {
   userType: string;
@@ -12,11 +12,11 @@ type IProps = {
 
 export const ContactAnswer: React.FC<IProps> = ({ session, userType }) => (
   <ParcoursAnswer>
-    {userType === 'independant' && (
+    {userType === "independant" && (
       <p>
         Si vous possédez une <strong>entreprise individuelle</strong> dont vous
         souhaitez <strong>cacher ou afficher</strong> les informations
-        personnelles,{' '}
+        personnelles,{" "}
         <a href="/faq/rendre-mon-entreprise-non-diffusible">
           consultez notre fiche
         </a>
@@ -24,7 +24,7 @@ export const ContactAnswer: React.FC<IProps> = ({ session, userType }) => (
       </p>
     )}
     <p>
-      Si vous avez une question{' '}
+      Si vous avez une question{" "}
       <strong>à propos des informations affichées sur le site</strong>, ou un
       problème lié au <strong>fonctionnement du site</strong>, vous pouvez nous
       contacter via le formulaire ci-dessous :
@@ -38,8 +38,8 @@ export const ContactAnswer: React.FC<IProps> = ({ session, userType }) => (
       <iframe
         title="Contact Form"
         src={`https://plugins.crisp.chat/urn:crisp.im:contact-form:0/contact/064fca1b-bdd6-4a81-af56-9f38e40953ad?type=${userType}${
-          session?.user?.email ? `&email=${session?.user?.email}` : ''
-        }${session?.user?.fullName ? `&name=${session?.user?.fullName}` : ''}`}
+          session?.user?.email ? `&email=${session?.user?.email}` : ""
+        }${session?.user?.fullName ? `&name=${session?.user?.fullName}` : ""}`}
         referrerPolicy="origin"
         sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
         width="100%"
@@ -49,19 +49,19 @@ export const ContactAnswer: React.FC<IProps> = ({ session, userType }) => (
     </div>
     <p>
       <strong>NB :</strong> si votre question concerne une structure en
-      particulier, pensez à mentionner le <strong>siren ou le siret</strong>{' '}
+      particulier, pensez à mentionner le <strong>siren ou le siret</strong>{" "}
       dans votre message.
     </p>
     {hasRights(session, ApplicationRights.isAgent) && (
       <p>
-        Rejoignez notre salon{' '}
+        Rejoignez notre salon{" "}
         <a
           href="https://tchap.gouv.fr/#/room/#annuaire-entreprises:agent.dinum.tchap.gouv.fr"
           target="_blank"
           rel="noopener noreferrer"
         >
           Tchap
-        </a>{' '}
+        </a>{" "}
         pour nous contacter ou être tenu au courant de nos nouveautés.
       </p>
     )}

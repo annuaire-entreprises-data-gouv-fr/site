@@ -40,9 +40,7 @@
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
           "libelle_voie": "D'AVON",
-          "liste_enseignes": [
-            "AGA"
-          ],
+          "liste_enseignes": ["AGA"],
           "liste_finess": null,
           "liste_id_bio": null,
           "liste_idcc": null,
@@ -120,9 +118,7 @@
             "geo_id": "77186_0110_00065",
             "latitude": "48.407603",
             "libelle_commune": "FONTAINEBLEAU",
-            "liste_enseignes": [
-              "AGA"
-            ],
+            "liste_enseignes": ["AGA"],
             "liste_finess": null,
             "liste_id_bio": null,
             "liste_idcc": null,
@@ -142,9 +138,7 @@
           "date_immatriculation": null,
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Gestion de biens"
-          ],
+          "nature_entreprise": ["Gestion de biens"],
           "date_cloture_exercice": null,
           "capital_social": 345900,
           "capital_variable": false,
@@ -322,9 +316,7 @@
           "date_immatriculation": null,
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Gestion de biens"
-          ],
+          "nature_entreprise": ["Gestion de biens"],
           "date_cloture_exercice": null,
           "capital_social": null,
           "capital_variable": false,
@@ -515,9 +507,7 @@
           "date_immatriculation": "2011-10-27",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 5000,
           "capital_variable": false,
@@ -730,9 +720,7 @@
           "date_immatriculation": "1987-06-18",
           "date_radiation": null,
           "duree_personne_morale": 50,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 34830,
           "capital_variable": false,
@@ -894,9 +882,7 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "1505"
-            ],
+            "liste_idcc": ["1505"],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -913,9 +899,7 @@
           "date_immatriculation": "2021-10-21",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 10000,
           "capital_variable": false,
@@ -926,9 +910,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "1505"
-          ],
+          "liste_idcc": ["1505"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -1082,9 +1064,7 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "1979"
-            ],
+            "liste_idcc": ["1979"],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -1101,9 +1081,7 @@
           "date_immatriculation": "2022-02-14",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3103",
           "capital_social": 1000,
           "capital_variable": false,
@@ -1114,9 +1092,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "1979"
-          ],
+          "liste_idcc": ["1979"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -1246,9 +1222,7 @@
           "date_immatriculation": "2009-09-01",
           "date_radiation": null,
           "duree_personne_morale": null,
-          "nature_entreprise": [
-            "Agent commercial"
-          ],
+          "nature_entreprise": ["Agent commercial"],
           "date_cloture_exercice": null,
           "capital_social": null,
           "capital_variable": false,
@@ -1430,10 +1404,7 @@
           "date_immatriculation": "2010-03-01",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Artisanale réglementée",
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Artisanale réglementée", "Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 5000,
           "capital_variable": false,
@@ -1574,9 +1545,7 @@
           "date_immatriculation": "2006-08-04",
           "date_radiation": null,
           "duree_personne_morale": null,
-          "nature_entreprise": [
-            "Gestion de biens"
-          ],
+          "nature_entreprise": ["Gestion de biens"],
           "date_cloture_exercice": null,
           "capital_social": null,
           "capital_variable": false,
@@ -1767,9 +1736,7 @@
           "date_immatriculation": "2013-04-02",
           "date_radiation": null,
           "duree_personne_morale": 95,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,

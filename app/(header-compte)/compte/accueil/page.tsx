@@ -1,34 +1,34 @@
-import { Warning } from '#components-ui/alerts';
-import { Badge } from '#components-ui/badge';
-import ButtonLink from '#components-ui/button';
-import FullWidthContainer from '#components-ui/container';
-import AgentNavigation from '#components/espace-agent-components/agent-navigation';
-import { FullTable } from '#components/table/full';
+import { Warning } from "#components-ui/alerts";
+import { Badge } from "#components-ui/badge";
+import ButtonLink from "#components-ui/button";
+import FullWidthContainer from "#components-ui/container";
+import AgentNavigation from "#components/espace-agent-components/agent-navigation";
+import { FullTable } from "#components/table/full";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import constants from '#models/constants';
-import { changelogData } from '#models/historique-modifications';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+} from "#models/authentication/user/rights";
+import constants from "#models/constants";
+import { changelogData } from "#models/historique-modifications";
+import getSession from "#utils/server-side-helper/app/get-session";
+import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 const lastChangelog = changelogData[0];
 
 export const metadata: Metadata = {
-  title: 'Votre compte utilisateur de l’Annuaire des Entreprises',
+  title: "Votre compte utilisateur de l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/compte/accueil',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/compte/accueil",
   },
-  robots: 'noindex, nofollow',
+  robots: "noindex, nofollow",
 };
 
 const CompteAgentAccueil = async () => {
   const session = await getSession();
 
   if (!hasRights(session, ApplicationRights.isAgent)) {
-    return redirect('/lp/agent-public');
+    return redirect("/lp/agent-public");
   }
 
   const appRights = Object.values(ApplicationRights)
@@ -40,7 +40,7 @@ const CompteAgentAccueil = async () => {
     <>
       {session?.user?.isSuperAgent && <AgentNavigation />}
       <section className="layout-space-between-start">
-        <div style={{ maxWidth: '50%' }}>
+        <div style={{ maxWidth: "50%" }}>
           <h1>Bienvenue dans votre espace agent</h1>
           <p>
             Accédez à toutes les données publiques des entreprises et des
@@ -55,8 +55,8 @@ const CompteAgentAccueil = async () => {
       <FullWidthContainer
         style={{
           background:
-            'radial-gradient(61.94% 118.71% at 36.66% 38.06%, #F9C5E1 0%, #D8E6FF 100%)',
-          padding: '3rem 2rem 2rem 2rem',
+            "radial-gradient(61.94% 118.71% at 36.66% 38.06%, #F9C5E1 0%, #D8E6FF 100%)",
+          padding: "3rem 2rem 2rem 2rem",
         }}
       >
         <div className="fr-grid-row fr-grid-row--gutters fr-mb-1w">
@@ -66,7 +66,7 @@ const CompteAgentAccueil = async () => {
                 <div className="fr-card__content">
                   <strong className="fr-card__title">Nouveautés</strong>
                   <p className="fr-card__desc">
-                    <strong>{lastChangelog.date}</strong> :{' '}
+                    <strong>{lastChangelog.date}</strong> :{" "}
                     {lastChangelog.htmlBody}
                   </p>
                 </div>
@@ -93,7 +93,7 @@ const CompteAgentAccueil = async () => {
                   <p className="fr-card__desc">
                     Retrouvez les responsabilités et les contraintes qui
                     entourent cet accès privilégié dans notre documentation et
-                    nos{' '}
+                    nos{" "}
                     <a href="/modalites-utilisation">modalités d’utilisation</a>
                     .
                   </p>
@@ -167,13 +167,13 @@ const CompteAgentAccueil = async () => {
         </p>
 
         <FullTable
-          head={['Données', 'Droits']}
+          head={["Données", "Droits"]}
           body={appRights.map(([a, b]) => {
             return [
               a,
               <Badge
-                icon={b ? 'open' : 'closed'}
-                label={b ? 'Oui' : 'Non'}
+                icon={b ? "open" : "closed"}
+                label={b ? "Oui" : "Non"}
                 backgroundColor="#ddd"
                 fontColor="#666"
               />,

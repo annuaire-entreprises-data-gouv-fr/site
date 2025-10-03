@@ -1,8 +1,8 @@
-import { ISession } from '#models/authentication/user/session';
-import { IReqWithSession } from '#utils/session/with-session';
-import { getIronSession } from 'iron-session';
-import { GetServerSidePropsContext } from 'next';
-import { sessionOptions, setVisitTimestamp } from '../../session';
+import { ISession } from "#models/authentication/user/session";
+import { IReqWithSession } from "#utils/session/with-session";
+import { getIronSession } from "iron-session";
+import { GetServerSidePropsContext } from "next";
+import { sessionOptions, setVisitTimestamp } from "../../session";
 
 export interface IPropsWithMetadata {
   metadata: {
@@ -63,7 +63,7 @@ export function postServerSideProps(
  * @returns
  */
 export function handleErrorFromServerSideProps<
-  C extends GetServerSidePropsContext
+  C extends GetServerSidePropsContext,
 >(getServerSidePropsFunction: (context: C) => any) {
   return async (context: C) => {
     try {

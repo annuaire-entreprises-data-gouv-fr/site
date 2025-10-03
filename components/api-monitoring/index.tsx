@@ -1,35 +1,35 @@
-import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
-import { Section } from '#components/section';
-import constants from '#models/constants';
-import { IMonitoringWithMetaData, IRatio } from '#models/monitoring';
-import React from 'react';
-import styles from './styles.module.css';
+import { Icon } from "#components-ui/icon/wrapper";
+import InformationTooltip from "#components-ui/information-tooltip";
+import { Section } from "#components/section";
+import constants from "#models/constants";
+import { IMonitoringWithMetaData, IRatio } from "#models/monitoring";
+import React from "react";
+import styles from "./styles.module.css";
 
 const getUptimeColorStyles = (ratio: IRatio) => {
   if (!ratio.wasMonitorUp) {
-    return { backgroundColor: '#ccc' };
+    return { backgroundColor: "#ccc" };
   }
   const uptimeNum = ratio.ratioNumber;
 
   if (uptimeNum >= 99.99) {
-    return { backgroundColor: '#3bd671' };
+    return { backgroundColor: "#3bd671" };
   } else if (uptimeNum >= 99) {
-    return { backgroundColor: '#c2e34b', height: '50px', margin: 0 };
+    return { backgroundColor: "#c2e34b", height: "50px", margin: 0 };
   } else if (uptimeNum >= 95) {
-    return { backgroundColor: '#f29030', height: '50px', margin: 0 }; // Orange
+    return { backgroundColor: "#f29030", height: "50px", margin: 0 }; // Orange
   }
-  return { backgroundColor: '#df484a', height: '50px', margin: 0 };
+  return { backgroundColor: "#df484a", height: "50px", margin: 0 };
 };
 
 const getUptimeLabel = (ratio: IRatio) => {
   if (!ratio.wasMonitorUp) {
-    return 'pas de données';
+    return "pas de données";
   }
   const uptimeNum = ratio.ratioNumber;
   const formattedRation = ratio.ratioNumber.toFixed(2);
   if (uptimeNum >= 99.99) {
-    return 'service en état de fonctionnement';
+    return "service en état de fonctionnement";
   } else if (uptimeNum >= 99) {
     return `${formattedRation}% : service faiblement perturbé`;
   } else if (uptimeNum >= 95) {
@@ -40,26 +40,26 @@ const getUptimeLabel = (ratio: IRatio) => {
 
 const getHideClasses = (index: number) => {
   if (index > 70) {
-    return '';
+    return "";
   } else if (index > 50) {
-    return styles['hide-mobile'];
+    return styles["hide-mobile"];
   } else {
-    return `${styles['hide-mobile']} ${styles['hide-tablet']}`;
+    return `${styles["hide-mobile"]} ${styles["hide-tablet"]}`;
   }
 };
 
 const Metric: React.FC<{
   series: IRatio[];
 }> = ({ series }) => (
-  <div className={styles['series-wrapper']}>
-    <div className={styles['uptime-chart']}>
+  <div className={styles["series-wrapper"]}>
+    <div className={styles["uptime-chart"]}>
       {series.map((serie, index) => (
         <div
           className={`${getHideClasses(index)} ${styles.series}`}
           key={index}
         >
           <InformationTooltip
-            horizontalOrientation={index < 76 ? 'left' : 'right'}
+            horizontalOrientation={index < 76 ? "left" : "right"}
             width={170}
             tabIndex={0}
             ariaRelation="labelledby"
@@ -73,7 +73,7 @@ const Metric: React.FC<{
             }
           >
             <div
-              className={styles['serie-rectangle']}
+              className={styles["serie-rectangle"]}
               style={getUptimeColorStyles(serie)}
             ></div>
           </InformationTooltip>
@@ -109,7 +109,7 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
     ) : (
       <Section
         title={`Disponibilité : l’API est actuellement ${
-          isOnline ? 'en ligne ✅' : 'hors-ligne 🛑'
+          isOnline ? "en ligne ✅" : "hors-ligne 🛑"
         }`}
       >
         {isOnline ? (
@@ -123,13 +123,13 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
             fortement perturbé, voire impossible.
           </p>
         )}
-        <div className={styles['metrics-title']}>
+        <div className={styles["metrics-title"]}>
           <h3>
             Historique de disponibilité <RobotTooltip />
           </h3>
           <Metric series={series} />
           <h3>Statistiques moyennes</h3>
-          <div className={styles['mean-stats']}>
+          <div className={styles["mean-stats"]}>
             <div>
               <strong>24h</strong>
               <span>{uptime.day}%</span>
@@ -148,7 +148,7 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
         {apiDocumentationLink && (
           <i>
             <br />
-            Envie de réutiliser cette API ?{' '}
+            Envie de réutiliser cette API ?{" "}
             {apiDocumentationLink && (
               <a
                 href={apiDocumentationLink}

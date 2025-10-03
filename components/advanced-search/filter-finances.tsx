@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import DualRangeSlider from '#components-ui/dual-range-slider';
-import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import constants from '#models/constants';
-import { formatCurrency } from '#utils/helpers';
-import { useState } from 'react';
+import DualRangeSlider from "#components-ui/dual-range-slider";
+import { SimpleSeparator } from "#components-ui/horizontal-separator";
+import constants from "#models/constants";
+import { formatCurrency } from "#utils/helpers";
+import { useState } from "react";
 
 // Discretize "chiffre d'affaires" possible values
 export const CA = [
@@ -32,7 +32,7 @@ const findNearestValueIndex = (
   defaultValue: number,
   value?: number | null
 ) => {
-  if (typeof value === 'undefined' || value === null) {
+  if (typeof value === "undefined" || value === null) {
     return defaultValue;
   }
 

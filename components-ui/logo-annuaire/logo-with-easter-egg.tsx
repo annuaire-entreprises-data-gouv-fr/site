@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { LogoAnnuaire, LogoAnnuaireGif } from './logo-annuaire';
+import { useEffect, useState } from "react";
+import { LogoAnnuaire, LogoAnnuaireGif } from "./logo-annuaire";
 
 //Haut, haut, bas, bas, gauche, droite, gauche, droite, B, A
 const konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
@@ -23,10 +23,10 @@ export const LogoAnnuaireWithEasterEgg = () => {
       }
     };
 
-    document.addEventListener('keydown', keyDown);
+    document.addEventListener("keydown", keyDown);
 
     return () => {
-      document.removeEventListener('keydown', keyDown);
+      document.removeEventListener("keydown", keyDown);
     };
   }, []);
 

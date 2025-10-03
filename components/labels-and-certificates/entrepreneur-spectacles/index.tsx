@@ -1,16 +1,16 @@
-import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
-import { Tag } from '#components-ui/tag';
-import { MC } from '#components/administrations';
-import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
-import { formatDate, pluralize } from '#utils/helpers';
-import React from 'react';
+import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
+import InformationTooltip from "#components-ui/information-tooltip";
+import { Tag } from "#components-ui/tag";
+import { MC } from "#components/administrations";
+import NonRenseigne from "#components/non-renseigne";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { IEntrepreneurSpectaclesCertification } from "#models/certifications/entrepreneur-spectacles";
+import { formatDate, pluralize } from "#utils/helpers";
+import React from "react";
 
 export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
   entrepreneurSpectacles:
@@ -30,7 +30,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
             auprès du <MC /> pour cette structure.
           </p>
           <p>
-            Pour effectuer une déclaration, rendez-vous sur{' '}
+            Pour effectuer une déclaration, rendez-vous sur{" "}
             <a
               target="_blank"
               rel="noreferrer noopener"
@@ -47,38 +47,38 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
 
         return (
           <>
-            Cette structure possède {plural ? 'plusieurs' : 'un'} récépissé
-            {plural} de déclaration d’activité <FAQ /> déposé{plural} sur{' '}
+            Cette structure possède {plural ? "plusieurs" : "un"} récépissé
+            {plural} de déclaration d’activité <FAQ /> déposé{plural} sur{" "}
             <a
               target="_blank"
               rel="noreferrer noopener"
               href="https://www.culture.gouv.fr/Thematiques/Theatre-spectacles/Pour-les-professionnels/Plateforme-des-entrepreneurs-de-spectacles-vivants-PLATESV#deux"
             >
               la plateforme PLATES
-            </a>{' '}
+            </a>{" "}
             du <MC />.
             <p>
-              Le{' '}
+              Le{" "}
               <strong>numéro de récépissé est le numéro de déclaration</strong>.
               Le récépissé est valide 30 jours après que le dossier ait été reçu
               complet et conforme à la réglementation. Un récépissé de
-              déclaration au statut valide est{' '}
+              déclaration au statut valide est{" "}
               <strong>valable pour cinq ans</strong>.
             </p>
             <p>
               Si une déclaration que vous avez faite n’apparaît pas sur le
-              tableau après plus d’un mois, veuillez contacter{' '}
+              tableau après plus d’un mois, veuillez contacter{" "}
               <a href="https://mesdemarches.culture.gouv.fr/loc_fr/mcc/?__CSRFTOKEN__=ade60dc8-891d-439e-b355-0438dea9a33c">
                 le service des démarches en lignes
-              </a>{' '}
+              </a>{" "}
               du <MC />.
             </p>
             <FullTable
               head={[
-                'Numéro de récépissé',
-                'Type de déclaration',
-                'Date de dépôt',
-                'Validité',
+                "Numéro de récépissé",
+                "Type de déclaration",
+                "Date de dépôt",
+                "Validité",
               ]}
               body={entrepreneurSpectacles.licences.map(
                 ({
@@ -98,7 +98,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
                   </>,
                   formatDate(dateDepot),
                   <Validity
-                    statut={(statut || '').toLowerCase()}
+                    statut={(statut || "").toLowerCase()}
                     dateDeValidite={dateValidite}
                   />,
                 ]
@@ -122,9 +122,9 @@ const FAQ = () => (
   </FAQLink>
 );
 
-const formatLicence = (categorie: string, type: string, nomLieu = '') => {
+const formatLicence = (categorie: string, type: string, nomLieu = "") => {
   switch (categorie) {
-    case '1':
+    case "1":
       return (
         <>
           <strong>Exploitant de lieu de spectacles vivant</strong>
@@ -136,30 +136,30 @@ const formatLicence = (categorie: string, type: string, nomLieu = '') => {
           )}
         </>
       );
-    case '2':
+    case "2":
       return (
         <strong>Producteurs de spectacles ou entrepreneurs de tournées</strong>
       );
-    case '3':
+    case "3":
       return <strong>Diffuseurs de spectacles</strong>;
     default:
       return <NonRenseigne />;
   }
 };
 
-const Validity = ({ statut = '', dateDeValidite = '' }) => {
+const Validity = ({ statut = "", dateDeValidite = "" }) => {
   switch (statut) {
-    case 'valide':
+    case "valide":
       return (
         <InformationTooltip
           tabIndex={0}
           label="La déclaration vaut récépissé. L'exercice de la profession est licite."
         >
           <Tag color="success">valide</Tag>
-          {dateDeValidite ? ` depuis le ${formatDate(dateDeValidite)}` : ''}
+          {dateDeValidite ? ` depuis le ${formatDate(dateDeValidite)}` : ""}
         </InformationTooltip>
       );
-    case 'en instruction':
+    case "en instruction":
       return (
         <InformationTooltip
           tabIndex={0}
@@ -168,17 +168,17 @@ const Validity = ({ statut = '', dateDeValidite = '' }) => {
           <Tag color="info">En instruction</Tag>
         </InformationTooltip>
       );
-    case 'invalidé':
+    case "invalidé":
       return (
         <InformationTooltip
           tabIndex={0}
           label="Le récépissé a été retirée après une période de validité."
         >
           <Tag color="error">Invalidé</Tag>
-          {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
+          {dateDeValidite ? ` depuis le ${dateDeValidite}` : ""}
         </InformationTooltip>
       );
-    case 'invalide':
+    case "invalide":
       return (
         <InformationTooltip
           tabIndex={0}
@@ -187,7 +187,7 @@ const Validity = ({ statut = '', dateDeValidite = '' }) => {
           <Tag color="error">Invalide</Tag>
         </InformationTooltip>
       );
-    case 'expiré':
+    case "expiré":
       return (
         <InformationTooltip
           tabIndex={0}

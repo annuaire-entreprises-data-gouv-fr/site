@@ -1,13 +1,13 @@
-import { HttpNotFound } from '#clients/exceptions';
-import odsClient from '#clients/open-data-soft';
-import routes from '#clients/routes';
+import { HttpNotFound } from "#clients/exceptions";
+import odsClient from "#clients/open-data-soft";
+import routes from "#clients/routes";
 import {
   IIndicateursFinanciers,
   IIndicateursFinanciersSociete,
-} from '#models/finances-societe/types';
-import { Siren } from '#utils/helpers';
-import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import { IAPIBilanResponse } from './interface';
+} from "#models/finances-societe/types";
+import { Siren } from "#utils/helpers";
+import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
+import { IAPIBilanResponse } from "./interface";
 
 /**
  * Données financière (Ratios Financiers (BCE / INPI))
@@ -65,10 +65,10 @@ const mapToBilan = (
     chiffre_d_affaires = 0,
     caf_sur_ca = 0,
     ebitda = 0,
-    date_cloture_exercice = '',
+    date_cloture_exercice = "",
     ebit = 0,
     ebe = 0,
-    type_bilan = '',
+    type_bilan = "",
     marge_brute = 0,
     resultat_net = 0,
     siren,
@@ -103,10 +103,10 @@ const mapToBilan = (
     capaciteDeRemboursement: capacite_de_remboursement,
     ratioDeLiquidite: ratio_de_liquidite,
     tauxDEndettement: taux_d_endettement,
-    type: type_bilan.toUpperCase() ?? '',
-    estSimplifie: type_bilan.toUpperCase() === 'S',
-    estConsolide: type_bilan.toUpperCase() === 'K',
-    estComplet: type_bilan.toUpperCase() === 'C',
+    type: type_bilan.toUpperCase() ?? "",
+    estSimplifie: type_bilan.toUpperCase() === "S",
+    estConsolide: type_bilan.toUpperCase() === "K",
+    estComplet: type_bilan.toUpperCase() === "C",
     year: getFiscalYear(date_cloture_exercice),
   };
 };

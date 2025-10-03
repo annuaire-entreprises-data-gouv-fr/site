@@ -1,14 +1,14 @@
-import { clientIdccRechercheEntreprise } from '#clients/recherche-entreprise/idcc';
-import { clientIdccMetadata } from '#clients/recherche-entreprise/idcc-metadata';
-import { Siren } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { EAdministration } from '../administrations/EAdministration';
+import { clientIdccRechercheEntreprise } from "#clients/recherche-entreprise/idcc";
+import { clientIdccMetadata } from "#clients/recherche-entreprise/idcc-metadata";
+import { Siren } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { EAdministration } from "../administrations/EAdministration";
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '../api-not-responding';
-import { FetchRessourceException } from '../exceptions';
-import { idccUpdates } from './idcc-updates';
+} from "../api-not-responding";
+import { FetchRessourceException } from "../exceptions";
+import { idccUpdates } from "./idcc-updates";
 
 export type IConventionsCollectives = {
   [idcc: string]: string[];
@@ -35,19 +35,19 @@ export type ICCWithMetadata = {
 export const getIdccTitle = async (siren: Siren, idcc: string) => {
   try {
     const metadata = await clientIdccMetadata(idcc);
-    return { idcc, title: metadata.title || '' };
+    return { idcc, title: metadata.title || "" };
   } catch (e: any) {
     logErrorInSentry(
       new FetchRessourceException({
         cause: e,
-        ressource: 'Convention Collective',
+        ressource: "Convention Collective",
         context: {
           siren,
         },
       })
     );
     // when metadata fails we intentionnally ignore failure
-    return { idcc, title: '' };
+    return { idcc, title: "" };
   }
 };
 
@@ -83,7 +83,7 @@ export const getAllIdccWithMetadata = async (
     logErrorInSentry(
       new FetchRessourceException({
         cause: e,
-        ressource: 'Convention Collective',
+        ressource: "Convention Collective",
         context: {
           siren,
         },

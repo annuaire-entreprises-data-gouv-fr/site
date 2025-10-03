@@ -1,7 +1,7 @@
-import React from 'react';
-import constants from '#models/constants';
+import React from "react";
+import constants from "#models/constants";
 
-const formLink = 'https://tally.so/r/w478pA';
+const formLink = "https://tally.so/r/w478pA";
 
 export const WeNeedYouModal: React.FC<{}> = () => (
   <>

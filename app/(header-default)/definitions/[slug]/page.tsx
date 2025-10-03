@@ -1,17 +1,17 @@
-import Breadcrumb from '#components-ui/breadcrumb';
-import ButtonLink from '#components-ui/button';
-import TextWrapper from '#components-ui/text-wrapper';
-import { RenderMarkdownServerOnly } from '#components/markdown';
-import { allDefinitions, getDefinition } from '#models/article/definitions';
-import { Exception } from '#models/exceptions';
-import { logWarningInSentry } from '#utils/sentry';
+import Breadcrumb from "#components-ui/breadcrumb";
+import ButtonLink from "#components-ui/button";
+import TextWrapper from "#components-ui/text-wrapper";
+import { RenderMarkdownServerOnly } from "#components/markdown";
+import { allDefinitions, getDefinition } from "#models/article/definitions";
+import { Exception } from "#models/exceptions";
+import { logWarningInSentry } from "#utils/sentry";
 import {
   AppRouterProps,
   IParams,
-} from '#utils/server-side-helper/app/extract-params';
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { cache, use } from 'react';
+} from "#utils/server-side-helper/app/extract-params";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { cache, use } from "react";
 
 const cachedGetDefinition = cache((slug: string) => {
   const definition = getDefinition(slug);
@@ -19,7 +19,7 @@ const cachedGetDefinition = cache((slug: string) => {
     // should not happen as we declared generateStaticParams
     logWarningInSentry(
       new Exception({
-        name: 'DefinitionPageNotFound',
+        name: "DefinitionPageNotFound",
         context: { slug },
       })
     );
@@ -37,7 +37,7 @@ export const generateMetadata = async ({
   return {
     title: definition.seo.title || definition.title,
     description: definition.seo.description,
-    robots: 'index, follow',
+    robots: "index, follow",
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`,
     },
@@ -52,8 +52,8 @@ export default function DefinitionPage({ params }: AppRouterProps) {
     <TextWrapper>
       <Breadcrumb
         links={[
-          { href: '/definitions', label: 'Définitions' },
-          { href: '', label: definition.title },
+          { href: "/definitions", label: "Définitions" },
+          { href: "", label: definition.title },
         ]}
       />
       <h1 className="definition-title">{definition.title}</h1>

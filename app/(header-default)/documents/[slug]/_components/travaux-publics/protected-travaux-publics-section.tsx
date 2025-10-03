@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
+import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
-} from '#models/api-not-responding';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { IDocumentDownloader } from '#models/espace-agent/travaux-publics';
-import { UseCase } from '#models/use-cases';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { useMemo } from 'react';
+} from "#models/api-not-responding";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { IDocumentDownloader } from "#models/espace-agent/travaux-publics";
+import { UseCase } from "#models/use-cases";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
 
 const DocumentDownloader = ({
   data,
@@ -47,11 +47,11 @@ const DocumentDownloader = ({
   return (
     <div className="layout-space-between">
       <Icon slug="open">
-        {administration ? `${administration} : ` : ''}document disponible
+        {administration ? `${administration} : ` : ""}document disponible
       </Icon>
       {data.url && (
         <a href={data.url}>
-          <Icon slug="download">{'télécharger'}</Icon>
+          <Icon slug="download">{"télécharger"}</Icon>
         </a>
       )}
     </div>

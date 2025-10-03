@@ -1,5 +1,5 @@
-import { IRatio } from '#models/monitoring';
-import { IUpdownIODowntimes } from '.';
+import { IRatio } from "#models/monitoring";
+import { IUpdownIODowntimes } from ".";
 
 type ILog = {
   date: Date;
@@ -114,7 +114,7 @@ export class DailyUptimeRatioConverter {
 }
 
 function getDDMMYYYY(d: Date): string {
-  return new Intl.DateTimeFormat('fr-FR', { timeZone: 'UTC' }).format(d);
+  return new Intl.DateTimeFormat("fr-FR", { timeZone: "UTC" }).format(d);
 }
 
 function addUTCDay(d: Date, day: number) {

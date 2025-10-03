@@ -1,10 +1,10 @@
-import odsClient from '#clients/open-data-soft';
-import routes from '#clients/routes';
-import { IAnnoncesBodacc } from '#models/annonces';
-import { Exception } from '#models/exceptions';
-import { Siren, formatDate } from '#utils/helpers';
-import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import { logWarningInSentry } from '#utils/sentry';
+import odsClient from "#clients/open-data-soft";
+import routes from "#clients/routes";
+import { IAnnoncesBodacc } from "#models/annonces";
+import { Exception } from "#models/exceptions";
+import { Siren, formatDate } from "#utils/helpers";
+import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
+import { logWarningInSentry } from "#utils/sentry";
 
 type IBodaccRecords = IBodaccA | IBodaccB | IBodaccC;
 
@@ -54,7 +54,7 @@ export const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
   return {
     annonces: response.records.map(mapToDomainObject),
     comptes: response.records
-      .filter((a: IBodaccCoreRecord) => a.publicationavis === 'C')
+      .filter((a: IBodaccCoreRecord) => a.publicationavis === "C")
       .map(mapToDomainObject),
     lastModified: response.lastModified,
     procedures: response.records
@@ -67,29 +67,29 @@ const mapToDomainObject = (annonce: IBodaccRecords) => {
   return {
     titre: extractTitre(annonce),
     sousTitre: `BODACC ${annonce.publicationavis} n°${annonce.parution}`,
-    typeAvisLibelle: annonce.typeavis_lib || '',
-    tribunal: annonce.tribunal || '',
+    typeAvisLibelle: annonce.typeavis_lib || "",
+    tribunal: annonce.tribunal || "",
     numeroAnnonce: annonce.numeroannonce || 0,
-    datePublication: annonce.dateparution || '',
-    details: extractDetails(annonce) || '',
+    datePublication: annonce.dateparution || "",
+    details: extractDetails(annonce) || "",
     path: `${routes.bodacc.site.annonce}${annonce.publicationavis}/${annonce.parution}/${annonce.numeroannonce}`,
   };
 };
 
 const extractTitre = (annonce: IBodaccRecords) => {
   if ((annonce as IBodaccC).depot) {
-    const depot = JSON.parse((annonce as IBodaccC).depot || '{}');
+    const depot = JSON.parse((annonce as IBodaccC).depot || "{}");
     return `${annonce.familleavis_lib} ${getFiscalYear(depot.dateCloture)}`;
   }
-  return annonce.familleavis_lib || '';
+  return annonce.familleavis_lib || "";
 };
 
 const extractProcedure = (annonce: IBodaccRecords): any | undefined => {
   try {
     if ((annonce as IBodaccA).jugement) {
-      const jugement = JSON.parse((annonce as IBodaccA).jugement || '{}');
+      const jugement = JSON.parse((annonce as IBodaccA).jugement || "{}");
 
-      const isProcedure = annonce.familleavis_lib === 'Procédures collectives';
+      const isProcedure = annonce.familleavis_lib === "Procédures collectives";
       if (isProcedure) {
         return {
           date: jugement.date,
@@ -113,47 +113,47 @@ const extractProcedure = (annonce: IBodaccRecords): any | undefined => {
 const extractDetails = (annonce: IBodaccRecords): string => {
   try {
     if ((annonce as IBodaccA).jugement) {
-      const jugement = JSON.parse((annonce as IBodaccA).jugement || '{}');
+      const jugement = JSON.parse((annonce as IBodaccA).jugement || "{}");
       return jugement.complementJugement;
     }
     if ((annonce as IBodaccA).acte) {
-      const acte = JSON.parse((annonce as IBodaccA).acte || '{}');
+      const acte = JSON.parse((annonce as IBodaccA).acte || "{}");
 
       const detail = acte.creation?.categorieCreation; // || acte.descriptif; descriptif is usually very long
       const dateDebutActivite = formatDate(acte.dateCommencementActivite);
       const dateImmatriculation = formatDate(acte.dateImmatriculation);
-      return `${detail || ''} ${
-        dateImmatriculation ? `, immatriculée le ${dateImmatriculation}` : ''
+      return `${detail || ""} ${
+        dateImmatriculation ? `, immatriculée le ${dateImmatriculation}` : ""
       } ${
         dateDebutActivite
           ? `, dont l'activité a commencé le ${dateDebutActivite}`
-          : ''
+          : ""
       }`;
     }
 
     if ((annonce as IBodaccC).depot) {
-      const depot = JSON.parse((annonce as IBodaccC).depot || '{}');
+      const depot = JSON.parse((annonce as IBodaccC).depot || "{}");
       return `${depot.typeDepot} de l’exercice clos le ${depot.dateCloture}${
-        depot.descriptif ? `. \n${depot.descriptif}` : ''
+        depot.descriptif ? `. \n${depot.descriptif}` : ""
       }`;
     }
     if ((annonce as IBodaccB).radiationaurcs) {
       const radiationaurcs = JSON.parse(
-        (annonce as IBodaccB).radiationaurcs || '{}'
+        (annonce as IBodaccB).radiationaurcs || "{}"
       );
       const dateRadiation = formatDate(
         (radiationaurcs.radiationPP || {}).dateCessationActivitePP
       );
 
-      return dateRadiation ? `Radiation le ${dateRadiation}` : '';
+      return dateRadiation ? `Radiation le ${dateRadiation}` : "";
     }
     if ((annonce as IBodaccB).modificationsgenerales) {
       const modif = JSON.parse(
-        (annonce as IBodaccB).modificationsgenerales || '{}'
+        (annonce as IBodaccB).modificationsgenerales || "{}"
       );
       return modif.descriptif;
     }
-    return '';
+    return "";
   } catch (e: any) {
     logWarningInSentry(
       new BodaccParsingException({
@@ -163,7 +163,7 @@ const extractDetails = (annonce: IBodaccRecords): string => {
         },
       })
     );
-    return '';
+    return "";
   }
 };
 
@@ -175,6 +175,6 @@ type IBodaccParsingExceptionArguments = {
 };
 class BodaccParsingException extends Exception {
   constructor(args: IBodaccParsingExceptionArguments) {
-    super({ name: 'BodaccParsingException', ...args });
+    super({ name: "BodaccParsingException", ...args });
   }
 }

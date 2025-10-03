@@ -3,8 +3,8 @@ export type IDefaultRequestConfig = {
   timeout?: number;
   params?: any;
   headers?: any;
-  method?: 'POST' | 'GET' | 'PATCH' | 'PUT' | 'DELETE';
-  responseType?: 'blob' | 'arraybuffer' | 'stream';
+  method?: "POST" | "GET" | "PATCH" | "PUT" | "DELETE";
+  responseType?: "blob" | "arraybuffer" | "stream";
   data?: unknown;
 };
 
@@ -15,10 +15,10 @@ export type IDefaultRequestConfig = {
  */
 let innerClient = initClient();
 async function initClient() {
-  if (typeof window === 'undefined') {
-    return (await import('./backend')).httpBackClient;
+  if (typeof window === "undefined") {
+    return (await import("./backend")).httpBackClient;
   } else {
-    return (await import('./frontend')).httpFrontClient;
+    return (await import("./frontend")).httpFrontClient;
   }
 }
 
@@ -37,9 +37,7 @@ async function initClient() {
  * @returns
  */
 export async function httpClient<T>(config: IDefaultRequestConfig): Promise<T> {
-  return await (
-    await innerClient
-  )(config);
+  return await (await innerClient)(config);
 }
 
 /**
@@ -70,7 +68,7 @@ export async function httpPost<T>(
 ): Promise<T> {
   return await httpClient({
     url,
-    method: 'POST',
+    method: "POST",
     ...config,
   });
 }

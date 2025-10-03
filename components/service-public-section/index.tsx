@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import NonRenseigne from '#components/non-renseigne';
-import { DataSectionClient } from '#components/section/data-section';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { IServicePublic } from '#models/service-public';
-import { useFetchServicePublic } from 'hooks/fetch/service-public';
-import { ReactNode } from 'react';
+import NonRenseigne from "#components/non-renseigne";
+import { DataSectionClient } from "#components/section/data-section";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IEtablissement, IUniteLegale } from "#models/core/types";
+import { IServicePublic } from "#models/service-public";
+import { useFetchServicePublic } from "hooks/fetch/service-public";
+import { ReactNode } from "react";
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -23,7 +23,7 @@ export default function ServicePublicSection({
   return (
     <>
       <DataSectionClient
-        title={'Annuaire du service public'}
+        title={"Annuaire du service public"}
         sources={[EAdministration.DILA]}
         data={servicePublic}
         notFoundInfo={
@@ -47,7 +47,7 @@ export default function ServicePublicSection({
             <TwoColumnTable body={getTableData(servicePublic, uniteLegale)} />
             {servicePublic.liens.annuaireServicePublic && (
               <p>
-                Retrouvez plus d&apos;informations sur la{' '}
+                Retrouvez plus d&apos;informations sur la{" "}
                 <a
                   href={servicePublic.liens.annuaireServicePublic.valeur}
                   target="_blank"
@@ -72,22 +72,22 @@ const getTableData = (
 ) => {
   return (
     [
-      ['Nom', servicePublic.nom],
+      ["Nom", servicePublic.nom],
       servicePublic.typeOrganisme && [
-        'Type organisme',
+        "Type organisme",
         servicePublic.typeOrganisme,
       ],
       servicePublic.affectationPersonne && [
-        'Dirigeants',
+        "Dirigeants",
         <a
           href={`/dirigeants/${uniteLegale.siren}#responsables-service-public`}
         >
           → voir les {servicePublic.affectationPersonne.length} dirigeant(es)
         </a>,
       ],
-      ['Adresse postale', servicePublic.adressePostale],
+      ["Adresse postale", servicePublic.adressePostale],
       [
-        'Téléphone',
+        "Téléphone",
         servicePublic.telephone && (
           <a href={`tel:${servicePublic.telephone}`}>
             {servicePublic.telephone}
@@ -95,7 +95,7 @@ const getTableData = (
         ),
       ],
       [
-        'Email',
+        "Email",
         servicePublic.adresseCourriel && (
           <a href={`mailto:${servicePublic.adresseCourriel}`}>
             {servicePublic.adresseCourriel}
@@ -103,7 +103,7 @@ const getTableData = (
         ),
       ],
       [
-        'Formulaire de contact',
+        "Formulaire de contact",
         servicePublic.liens.formulaireContact && (
           <a
             href={servicePublic.liens.formulaireContact.valeur}
@@ -117,7 +117,7 @@ const getTableData = (
       ],
 
       [
-        'Site internet',
+        "Site internet",
         servicePublic.liens.sitesInternet.length === 0 ? null : servicePublic
             .liens.sitesInternet.length === 1 ? (
           <Lien

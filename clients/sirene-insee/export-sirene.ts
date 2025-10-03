@@ -1,9 +1,9 @@
-import routes from '#clients/routes';
-import { exportCsvClientPost } from '#clients/sirene-insee';
-import constants from '#models/constants';
-import { ExportCsvInput } from 'app/api/export-sirene/input-validation';
-import { Readable } from 'stream';
-import { SireneQueryBuilder } from './build-query';
+import routes from "#clients/routes";
+import { exportCsvClientPost } from "#clients/sirene-insee";
+import constants from "#models/constants";
+import { ExportCsvInput } from "app/api/export-sirene/input-validation";
+import { Readable } from "stream";
+import { SireneQueryBuilder } from "./build-query";
 
 interface SireneJsonSearchResult {
   header: {
@@ -23,17 +23,17 @@ export const clientSireneInsee = async (params: ExportCsvInput) => {
 
   const stream = await exportCsvClientPost<Readable>(url, {
     headers: {
-      Accept: 'text/csv',
-      'Accept-Encoding': 'gzip',
-      'Content-Type': 'application/x-www-form-urlencoded',
+      Accept: "text/csv",
+      "Accept-Encoding": "gzip",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     data: {
       q,
       champs,
-      nombre: '200000',
-      noLink: 'true',
+      nombre: "200000",
+      noLink: "true",
     },
-    responseType: 'stream',
+    responseType: "stream",
     timeout: constants.timeout.XXXL,
   });
 
@@ -55,20 +55,20 @@ export const clientSireneInseeCount = async (params: ExportCsvInput) => {
   const queryBuilder = new SireneQueryBuilder(params);
   const q = queryBuilder.build();
   // We only need the number of results
-  const champs = 'siret';
+  const champs = "siret";
   const url = routes.sireneInsee.listEtablissements;
 
   const response = await exportCsvClientPost<SireneJsonSearchResult>(url, {
     headers: {
-      Accept: 'application/json',
-      'Accept-Encoding': 'gzip',
-      'Content-Type': 'application/x-www-form-urlencoded',
+      Accept: "application/json",
+      "Accept-Encoding": "gzip",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     data: {
       q,
       champs,
-      nombre: '0',
-      noLink: 'true',
+      nombre: "0",
+      noLink: "true",
     },
   });
 

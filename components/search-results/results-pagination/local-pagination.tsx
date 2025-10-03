@@ -1,5 +1,5 @@
-import React from 'react';
-import pagesArray from './pages-array';
+import React from "react";
+import pagesArray from "./pages-array";
 
 type IProps = {
   currentPage: number;
@@ -15,7 +15,7 @@ const First: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
       onClick={() => currentPage > 1 && onPageChange(1)}
       disabled={currentPage <= 1}
     >
-      {compact ? '' : 'Première page'}
+      {compact ? "" : "Première page"}
     </button>
   </li>
 );
@@ -32,7 +32,7 @@ const Last: React.FC<IProps> = ({
       onClick={() => currentPage < totalPages && onPageChange(totalPages)}
       disabled={currentPage >= totalPages}
     >
-      {compact ? '' : 'Dernière page'}
+      {compact ? "" : "Dernière page"}
     </button>
   </li>
 );
@@ -44,7 +44,7 @@ const Previous: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
       onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
       disabled={currentPage <= 1}
     >
-      {compact ? '' : 'Page précédente'}
+      {compact ? "" : "Page précédente"}
     </button>
   </li>
 );
@@ -61,7 +61,7 @@ const Next: React.FC<IProps> = ({
       onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
       disabled={currentPage >= totalPages}
     >
-      {compact ? '' : 'Page suivante'}
+      {compact ? "" : "Page suivante"}
     </button>
   </li>
 );
@@ -75,7 +75,7 @@ const Page: React.FC<{
     <button
       onClick={() => onPageChange(pageNum)}
       className="fr-pagination__link"
-      aria-current={currentPage === pageNum ? 'page' : undefined}
+      aria-current={currentPage === pageNum ? "page" : undefined}
       title={`Page ${pageNum}`}
     >
       {pageNum}
@@ -100,7 +100,7 @@ const LocalPageCounter: React.FC<IProps> = ({
   }
 
   return (
-    <div className="layout-center" style={{ margin: '15px auto' }}>
+    <div className="layout-center" style={{ margin: "15px auto" }}>
       <nav role="navigation" className="fr-pagination" aria-label="Pagination">
         <ul className="fr-pagination__list">
           <First

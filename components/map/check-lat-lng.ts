@@ -1,4 +1,4 @@
-import { LngLatLike } from 'maplibre-gl';
+import { LngLatLike } from "maplibre-gl";
 
 export function checkLatLng(
   latitude: string,
@@ -15,7 +15,7 @@ export function checkLatLng(
       lng < -180 ||
       lng > 180
     ) {
-      throw new Error('Invalid coords');
+      throw new Error("Invalid coords");
     }
 
     return {

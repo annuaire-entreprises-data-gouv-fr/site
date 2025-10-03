@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { MouseEventHandler, PropsWithChildren } from 'react';
+import React, { MouseEventHandler, PropsWithChildren } from "react";
 type IProps = {
   role?: string;
   small?: boolean;
   to?: string;
-  type?: 'button' | 'submit' | null;
+  type?: "button" | "submit" | null;
   disabled?: boolean;
   alt?: boolean;
-  target?: '_blank';
+  target?: "_blank";
   ariaLabel?: string;
   nofollow?: boolean;
   onClick?: MouseEventHandler;
@@ -23,7 +23,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   small = false,
   alt = false,
   ariaLabel,
-  target = '',
+  target = "",
   nofollow = false,
   onClick = () => {},
 }) => (
@@ -31,12 +31,12 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
     {!to ? (
       <button
         role={role}
-        type={type || 'submit'}
+        type={type || "submit"}
         onClick={onClick}
         disabled={disabled}
         aria-label={ariaLabel}
-        className={`fr-btn ${alt ? ' fr-btn--secondary ' : ''} ${
-          small ? ' fr-btn--sm ' : ''
+        className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
+          small ? " fr-btn--sm " : ""
         }`}
       >
         {children}
@@ -47,12 +47,12 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         aria-label={ariaLabel}
         target={target}
         rel={
-          (target === '_blank' ? 'noopener noreferrer' : '') +
-          (nofollow ? 'nofollow' : '')
+          (target === "_blank" ? "noopener noreferrer" : "") +
+          (nofollow ? "nofollow" : "")
         }
-        href={(to || '').indexOf('@') > -1 ? `mailto:${to}` : to}
-        className={`fr-btn ${alt ? ' fr-btn--secondary ' : ''} ${
-          small ? ' fr-btn--sm ' : ''
+        href={(to || "").indexOf("@") > -1 ? `mailto:${to}` : to}
+        className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
+          small ? " fr-btn--sm " : ""
         }`}
       >
         {children}

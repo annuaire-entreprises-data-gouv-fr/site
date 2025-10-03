@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import constants from '#models/constants';
-import { IEtablissement } from '#models/core/types';
-import { hasAnyError, isDataLoading } from '#models/data-fetching';
-import { useFetchGeoLoc } from 'hooks/fetch/geoloc';
-import maplibregl, { Map } from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
-import { useEffect, useRef } from 'react';
-import { hasWebGLSupport } from './has-web-gl';
-import './map.css';
+import constants from "#models/constants";
+import { IEtablissement } from "#models/core/types";
+import { hasAnyError, isDataLoading } from "#models/data-fetching";
+import { useFetchGeoLoc } from "hooks/fetch/geoloc";
+import maplibregl, { Map } from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
+import { useEffect, useRef } from "react";
+import { hasWebGLSupport } from "./has-web-gl";
+import "./map.css";
 
 export function MapEtablissement({
   etablissement,
@@ -32,7 +32,7 @@ export function MapEtablissement({
     }
     if (!hasWebGLSupport()) {
       alert(
-        'Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte.'
+        "Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte."
       );
       return;
     }
@@ -64,13 +64,13 @@ export function MapEtablissement({
       ref={mapContainer}
       className="map layout-center"
       style={{
-        width: '100%',
-        zIndex: '0',
-        height: '100%',
-        minHeight: '150px',
-        borderRadius: '8px',
-        backgroundColor: '#f0f0f0',
-        textAlign: 'center',
+        width: "100%",
+        zIndex: "0",
+        height: "100%",
+        minHeight: "150px",
+        borderRadius: "8px",
+        backgroundColor: "#f0f0f0",
+        textAlign: "center",
       }}
     >
       {(!coords || hasAnyError(coords)) && (
@@ -80,8 +80,8 @@ export function MapEtablissement({
           Cela peut-être dû à un problème d’affichage, ou à un problème dans les
           coordonnées de l’établissement.
           <br />
-          (coordonnées [{etablissement?.latitude || '⎽'}°,{' '}
-          {etablissement?.longitude || '⎽'}
+          (coordonnées [{etablissement?.latitude || "⎽"}°,{" "}
+          {etablissement?.longitude || "⎽"}
           °])
         </i>
       )}

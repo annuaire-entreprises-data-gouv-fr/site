@@ -1,7 +1,7 @@
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { httpGet } from '#utils/network';
-import { IGeoElement } from '.';
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import { httpGet } from "#utils/network";
+import { IGeoElement } from ".";
 
 type IGeoDepartementResponse = {
   nom: string;
@@ -39,7 +39,7 @@ const mapToDomainObject = (
     return {
       label: `${departement.nom} (${departement.code})`,
       value: departement.code,
-      type: 'dep',
+      type: "dep",
     };
   });
 };

@@ -1,10 +1,10 @@
-import { clientApiEntrepriseConformiteFiscale } from '#clients/api-entreprise/conformite/fiscale';
-import { clientApiEntrepriseConformiteMSA } from '#clients/api-entreprise/conformite/msa';
-import { clientApiEntrepriseConformiteVigilance } from '#clients/api-entreprise/conformite/vigilance';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { UseCase } from '#models/use-cases';
-import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
-import { handleApiEntrepriseError } from './utils';
+import { clientApiEntrepriseConformiteFiscale } from "#clients/api-entreprise/conformite/fiscale";
+import { clientApiEntrepriseConformiteMSA } from "#clients/api-entreprise/conformite/msa";
+import { clientApiEntrepriseConformiteVigilance } from "#clients/api-entreprise/conformite/vigilance";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { UseCase } from "#models/use-cases";
+import { extractSirenFromSiret, verifySiret } from "#utils/helpers";
+import { handleApiEntrepriseError } from "./utils";
 
 export type IConformite = {
   isValid: boolean | null;
@@ -30,7 +30,7 @@ export const getConformiteEntreprise = async (
       handleApiEntrepriseError(error, {
         siren,
         siret,
-        apiResource: 'ConformiteFiscale',
+        apiResource: "ConformiteFiscale",
       })
     ),
     clientApiEntrepriseConformiteVigilance(siren, params.useCase).catch(
@@ -38,14 +38,14 @@ export const getConformiteEntreprise = async (
         handleApiEntrepriseError(error, {
           siren,
           siret,
-          apiResource: 'ConformiteVigilance',
+          apiResource: "ConformiteVigilance",
         })
     ),
     clientApiEntrepriseConformiteMSA(siret, params.useCase).catch((error) =>
       handleApiEntrepriseError(error, {
         siren,
         siret,
-        apiResource: 'ConformiteMSA',
+        apiResource: "ConformiteMSA",
       })
     ),
   ]);

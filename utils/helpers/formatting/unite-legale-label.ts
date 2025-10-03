@@ -5,19 +5,19 @@ import {
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
   isServicePublic,
-} from '#models/core/types';
-import { formatSiret } from '../siren-and-siret';
-import { capitalize, formatIntFr } from './formatting';
+} from "#models/core/types";
+import { formatSiret } from "../siren-and-siret";
+import { capitalize, formatIntFr } from "./formatting";
 
 const uniteLegalePronounContracted = (uniteLegale: IUniteLegale) => {
   switch (true) {
     case isAssociation(uniteLegale):
     case isServicePublic(uniteLegale):
     case isEntrepreneurIndividuel(uniteLegale):
-      return 'de l’';
+      return "de l’";
     case isCollectiviteTerritoriale(uniteLegale):
     default:
-      return 'de la ';
+      return "de la ";
   }
 };
 
@@ -26,9 +26,9 @@ const uniteLegalePronoun = (uniteLegale: IUniteLegale) => {
     case isAssociation(uniteLegale):
     case isServicePublic(uniteLegale):
     case isEntrepreneurIndividuel(uniteLegale):
-      return 'l’';
+      return "l’";
     default:
-      return 'la ';
+      return "la ";
   }
 };
 
@@ -61,7 +61,7 @@ export const uniteLegalePageTitle = (uniteLegale: IUniteLegale) => {
   const city =
     uniteLegale.siege.codePostal || uniteLegale.siege.commune
       ? ` à ${uniteLegale.siege.codePostal} ${uniteLegale.siege.commune}`
-      : '';
+      : "";
 
   return `${capitalize(uniteLegaleLabel(uniteLegale))} ${
     uniteLegale.nomComplet
@@ -92,7 +92,7 @@ export const etablissementPageTitle = (
   const city =
     etablissement.codePostal || etablissement.commune
       ? ` à ${etablissement.codePostal} ${etablissement.commune}`
-      : '';
+      : "";
 
   return `${
     etablissement.enseigne ||

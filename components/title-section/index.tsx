@@ -1,19 +1,19 @@
-import SocialMedia from '#components-ui/social-media';
-import IsActiveTag from '#components-ui/tag/is-active-tag';
-import { NonDiffusibleTag } from '#components-ui/tag/non-diffusible-tag';
-import { SaveFavourite } from '#components/save-favourite';
-import { CopyPaste } from '#components/table/copy-paste';
-import UniteLegaleBadge from '#components/unite-legale-badge';
-import { UniteLegaleDescription } from '#components/unite-legale-description';
-import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
-import { ISession } from '#models/authentication/user/session';
-import { estNonDiffusibleStrict } from '#models/core/diffusion';
-import { IUniteLegale } from '#models/core/types';
-import { formatIntFr } from '#utils/helpers';
-import React from 'react';
-import TitleAlerts from './alerts';
-import styles from './styles.module.css';
-import { FICHE, Tabs } from './tabs';
+import SocialMedia from "#components-ui/social-media";
+import IsActiveTag from "#components-ui/tag/is-active-tag";
+import { NonDiffusibleTag } from "#components-ui/tag/non-diffusible-tag";
+import { SaveFavourite } from "#components/save-favourite";
+import { CopyPaste } from "#components/table/copy-paste";
+import UniteLegaleBadge from "#components/unite-legale-badge";
+import { UniteLegaleDescription } from "#components/unite-legale-description";
+import { UniteLegaleEtablissementCountDescription } from "#components/unite-legale-description/etablissement-count-description";
+import { ISession } from "#models/authentication/user/session";
+import { estNonDiffusibleStrict } from "#models/core/diffusion";
+import { IUniteLegale } from "#models/core/types";
+import { formatIntFr } from "#utils/helpers";
+import React from "react";
+import TitleAlerts from "./alerts";
+import styles from "./styles.module.css";
+import { FICHE, Tabs } from "./tabs";
 
 type IProps = {
   ficheType?: FICHE;
@@ -47,7 +47,7 @@ const Title: React.FC<IProps> = ({
         <UniteLegaleBadge uniteLegale={uniteLegale} />
         <span className={styles.sirenTitle}>
           &nbsp;‣&nbsp;
-          <span style={{ display: 'inline-flex' }}>
+          <span style={{ display: "inline-flex" }}>
             <CopyPaste
               shouldRemoveSpace={true}
               disableCopyIcon={true}

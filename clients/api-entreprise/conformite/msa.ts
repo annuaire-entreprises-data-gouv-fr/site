@@ -1,11 +1,11 @@
-import routes from '#clients/routes';
-import { IConformite } from '#models/espace-agent/conformite';
-import { UseCase } from '#models/use-cases';
-import { Siret } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import { IConformite } from "#models/espace-agent/conformite";
+import { UseCase } from "#models/use-cases";
+import { Siret } from "#utils/helpers";
+import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseConformiteMSA = IAPIEntrepriseResponse<{
-  status: 'up_to_date' | string;
+  status: "up_to_date" | string;
 }>;
 
 /**
@@ -24,7 +24,7 @@ export const clientApiEntrepriseConformiteMSA = async (
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteMSA) => {
   return {
-    isValid: response.data?.status === 'up_to_date',
+    isValid: response.data?.status === "up_to_date",
     url: null,
     label: null,
   };

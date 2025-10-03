@@ -1,8 +1,8 @@
-import routes from '#clients/routes';
-import { IDocumentDownloader } from '#models/espace-agent/travaux-publics';
-import { UseCase } from '#models/use-cases';
-import { Siren, Siret } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import { IDocumentDownloader } from "#models/espace-agent/travaux-publics";
+import { UseCase } from "#models/use-cases";
+import { Siren, Siret } from "#utils/helpers";
+import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseDocumentTravauxPublics = IAPIEntrepriseResponse<{
   document_url: string;

@@ -1,9 +1,9 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import { IESS } from '#models/certifications/ess';
-import constants from '#models/constants';
-import { Siren } from '#utils/helpers';
-import { httpGet } from '#utils/network';
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import { IESS } from "#models/certifications/ess";
+import constants from "#models/constants";
+import { Siren } from "#utils/helpers";
+import { httpGet } from "#utils/network";
 
 export const clientEss = async (siren: Siren): Promise<IESS> => {
   const response = await httpGet<IESSDatagouvResponse>(

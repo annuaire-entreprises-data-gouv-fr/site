@@ -1,10 +1,10 @@
-import { IRolesDataUser } from '#clients/roles-data/interface';
-import { Warning } from '#components-ui/alerts';
-import ButtonLink from '#components-ui/button';
-import { FullScreenModal } from '#components-ui/full-screen-modal';
-import { NotificationTypeEnum, useNotification } from '#hooks/use-notification';
-import httpClient from '#utils/network';
-import { useState } from 'react';
+import { IRolesDataUser } from "#clients/roles-data/interface";
+import { Warning } from "#components-ui/alerts";
+import ButtonLink from "#components-ui/button";
+import { FullScreenModal } from "#components-ui/full-screen-modal";
+import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
+import httpClient from "#utils/network";
+import { useState } from "react";
 
 export default function DeleteUserButton({
   isCurrentUser,
@@ -29,9 +29,9 @@ export default function DeleteUserButton({
     try {
       await httpClient({
         url: `/api/groups/${groupId}/remove-user`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         data: JSON.stringify({ userEmail }),
       });
@@ -42,13 +42,13 @@ export default function DeleteUserButton({
       // Show success notification
       showNotification({
         type: NotificationTypeEnum.SUCCESS,
-        title: 'Membre supprimé',
+        title: "Membre supprimé",
         message: `${userEmail} a été retiré du groupe`,
       });
     } catch (error: any) {
       showNotification({
         type: NotificationTypeEnum.ERROR,
-        title: 'Erreur lors de la suppression',
+        title: "Erreur lors de la suppression",
         message: error?.message,
       });
     } finally {
@@ -87,7 +87,7 @@ export default function DeleteUserButton({
           <div className="fr-mb-4w">
             <h2 className="fr-h2">Confirmer la suppression</h2>
             <p className="fr-text--lg">
-              Êtes-vous sûr de vouloir supprimer <strong>{user.email}</strong>{' '}
+              Êtes-vous sûr de vouloir supprimer <strong>{user.email}</strong>{" "}
               de ce groupe ?
             </p>
             {isCurrentUser && (
@@ -102,7 +102,7 @@ export default function DeleteUserButton({
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
             <ButtonLink onClick={handleRemove(user.email)} disabled={loading}>
-              {loading ? 'Suppression...' : 'Confirmer la suppression'}
+              {loading ? "Suppression..." : "Confirmer la suppression"}
             </ButtonLink>
             <ButtonLink alt onClick={closeConfirmation} disabled={loading}>
               Annuler

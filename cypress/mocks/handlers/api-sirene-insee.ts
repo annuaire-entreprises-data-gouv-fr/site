@@ -1,6 +1,6 @@
-import { HttpResponse, HttpResponseResolver } from 'msw';
-import apiSireneInseeAuth from '../../fixtures/api-sirene-insee-auth.json';
-import apiSireneInseeSiren from '../../fixtures/api-sirene-insee-siren.json';
+import { HttpResponse, HttpResponseResolver } from "msw";
+import apiSireneInseeAuth from "../../fixtures/api-sirene-insee-auth.json";
+import apiSireneInseeSiren from "../../fixtures/api-sirene-insee-siren.json";
 
 export const apiSireneInseeSirenHandler: HttpResponseResolver = ({
   request,

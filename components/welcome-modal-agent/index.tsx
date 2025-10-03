@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import constants from '#models/constants';
-import { useStorage } from 'hooks';
-import React, { useEffect, useState } from 'react';
-import { FullScreenModal } from '../../components-ui/full-screen-modal';
+import constants from "#models/constants";
+import { useStorage } from "hooks";
+import React, { useEffect, useState } from "react";
+import { FullScreenModal } from "../../components-ui/full-screen-modal";
 
-const MODAL_ID = 'welcome-modal-agent';
+const MODAL_ID = "welcome-modal-agent";
 
 export const WelcomeModalAgent: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered] = useStorage(
-    'local',
+    "local",
     MODAL_ID,
     false
   );
@@ -32,9 +32,9 @@ export const WelcomeModalAgent: React.FC = () => {
         <img src="/images/lp-agent/secure-folder 1.svg" alt="" height="150px" />
       </div>
       <strong>Bonjour et bienvenue sur l’espace agent 👋</strong>
-      <div style={{ textAlign: 'left' }}>
+      <div style={{ textAlign: "left" }}>
         <p>
-          Pour bien commencer, nous vous invitons à découvrir l’outil en lisant{' '}
+          Pour bien commencer, nous vous invitons à découvrir l’outil en lisant{" "}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -46,7 +46,7 @@ export const WelcomeModalAgent: React.FC = () => {
           .
         </p>
         <p>
-          Si vous avez des questions, n’hésitez pas à{' '}
+          Si vous avez des questions, n’hésitez pas à{" "}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -54,7 +54,7 @@ export const WelcomeModalAgent: React.FC = () => {
             href={constants.links.tchap}
           >
             nous rejoindre sur Tchap
-          </a>{' '}
+          </a>{" "}
           et nous les poser.
         </p>
       </div>

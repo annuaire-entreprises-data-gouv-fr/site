@@ -1,11 +1,11 @@
-import { ISession } from './session';
+import { ISession } from "./session";
 
 export function getAgentEmail(session: ISession | null) {
-  return session?.user?.email || '';
+  return session?.user?.email || "";
 }
 
 export function getAgentUserType(session: ISession | null) {
-  return session?.user?.userType || '';
+  return session?.user?.userType || "";
 }
 
 export function getIAgentScope(session: ISession | null) {
@@ -21,11 +21,11 @@ export function getAgentFullName(session: ISession | null) {
     return fullName.trim();
   }
 
-  return [firstName, familyName].filter(Boolean).join(' ').trim();
+  return [firstName, familyName].filter(Boolean).join(" ").trim();
 }
 
 export function getAgentDisplayName(session: ISession | null) {
   return (
-    session?.user?.fullName || session?.user?.email || 'Utilisateur inconnu'
+    session?.user?.fullName || session?.user?.email || "Utilisateur inconnu"
   );
 }

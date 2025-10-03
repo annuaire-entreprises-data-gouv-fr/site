@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
-import { Loader } from '#components-ui/loader';
-import MatomoEvent from '#components/matomo-event';
-import { CopyPaste } from '#components/table/copy-paste';
-import { IUniteLegale } from '#models/core/types';
-import { hasAnyError, isDataLoading } from '#models/data-fetching';
-import { ITVAIntracommunautaire } from '#models/tva';
-import { Siren, formatIntFr } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
+import InformationTooltip from "#components-ui/information-tooltip";
+import { Loader } from "#components-ui/loader";
+import MatomoEvent from "#components/matomo-event";
+import { CopyPaste } from "#components/table/copy-paste";
+import { IUniteLegale } from "#models/core/types";
+import { hasAnyError, isDataLoading } from "#models/data-fetching";
+import { ITVAIntracommunautaire } from "#models/tva";
+import { Siren, formatIntFr } from "#utils/helpers";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 
 const NoTVA = () => (
   <i>
-    Pas de{' '}
+    Pas de{" "}
     <FAQLink to="/faq/tva-intracommunautaire" tooltipLabel="n° TVA valide">
       Cette structure n’est plus en activité, par conséquent elle ne peut pas
       avoir de numéro de TVA valide.
@@ -31,12 +31,12 @@ const TVAInvalide = ({
   multipleNum: boolean;
 }) => (
   <i>
-    Pas de{' '}
+    Pas de{" "}
     <FAQLink
       to="/faq/tva-intracommunautaire"
       tooltipLabel="n° TVA valide connu"
     >
-      Le numéro de TVA {'FR' + formatIntFr(number)} n’est pas validé par
+      Le numéro de TVA {"FR" + formatIntFr(number)} n’est pas validé par
       l’administration fiscale.
       <br />
       Plusieurs explications sont possibles :
@@ -58,7 +58,7 @@ const TVAInvalide = ({
 
 const CopyCell = ({ number }: { number: string }) => (
   <CopyPaste shouldRemoveSpace={true} id="tva-cell-result" label="TVA">
-    {'FR' + formatIntFr(number)}
+    {"FR" + formatIntFr(number)}
   </CopyPaste>
 );
 
@@ -159,7 +159,7 @@ const VerifyTVA: React.FC<{
         {Math.random() < 0.0001 && (
           <MatomoEvent
             category="tva"
-            action={!!tva ? 'valid' : 'invalid'}
+            action={!!tva ? "valid" : "invalid"}
             name={siren}
           />
         )}

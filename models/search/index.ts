@@ -1,22 +1,22 @@
-import { HttpBadRequestError, HttpNotFound } from '#clients/exceptions';
-import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
+import { HttpBadRequestError, HttpNotFound } from "#clients/exceptions";
+import clientSearchRechercheEntreprise from "#clients/recherche-entreprise";
 import {
   FetchRechercheEntrepriseException,
   IEtablissement,
   IUniteLegale,
   IsLikelyASirenOrSiretException,
   NotEnoughParamsException,
-} from '#models/core/types';
-import { Exception } from '#models/exceptions';
-import { isProtectedSiren } from '#models/protected-siren';
-import { IDirigeants } from '#models/rne/types';
-import SearchFilterParams from '#models/search/search-filter-params';
+} from "#models/core/types";
+import { Exception } from "#models/exceptions";
+import { isProtectedSiren } from "#models/protected-siren";
+import { IDirigeants } from "#models/rne/types";
+import SearchFilterParams from "#models/search/search-filter-params";
 import {
   formatMonthIntervalFromPartialDate,
   removeSpecialChars,
-} from '#utils/helpers';
-import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
-import { logWarningInSentry } from '#utils/sentry';
+} from "#utils/helpers";
+import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
+import { logWarningInSentry } from "#utils/sentry";
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
@@ -59,7 +59,7 @@ const search = async (
       logWarningInSentry(
         new FetchRechercheEntrepriseException({
           cause: e,
-          message: 'BadParams in API Recherche Entreprise',
+          message: "BadParams in API Recherche Entreprise",
           context: {
             details: searchFilterParams.toApiURI(),
           },
@@ -148,13 +148,13 @@ export const searchPersonCompanies = async (
   const monthInterval = formatMonthIntervalFromPartialDate(partialDate);
 
   const [dmin, dmax] =
-    typeof monthInterval === 'string' ? ['', ''] : monthInterval;
+    typeof monthInterval === "string" ? ["", ""] : monthInterval;
 
   if (!dmin || !dmax) {
     logWarningInSentry(
       new Exception({
-        name: 'SearchDirigeantBadParams',
-        message: 'No date bounds in page personne',
+        name: "SearchDirigeantBadParams",
+        message: "No date bounds in page personne",
         context: {
           siren: sirenFrom,
         },
@@ -176,7 +176,7 @@ export const searchPersonCompanies = async (
   });
 
   const results = await searchWithoutProtectedSiren(
-    '',
+    "",
     page,
     searchFilterParams
   );

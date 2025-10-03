@@ -1,4 +1,4 @@
-import { IAPIEntrepriseResponse } from '../client';
+import { IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseBanqueDeFranceBilans = IAPIEntrepriseResponse<
   {

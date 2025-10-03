@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { IUniteLegale, isAssociation } from '#models/core/types';
+import { IUniteLegale, isAssociation } from "#models/core/types";
 
 type IProp = {
   /**
@@ -21,7 +21,7 @@ export function UniteLegalePageLink({ uniteLegale, href, siteName }: IProp) {
   const linkLabel = isAssociation(uniteLegale)
     ? `la page de l’association`
     : `la page de l’entreprise`;
-  const siteDescription = siteName ? ` sur ${siteName}` : '';
+  const siteDescription = siteName ? ` sur ${siteName}` : "";
   return (
     <>
       <a

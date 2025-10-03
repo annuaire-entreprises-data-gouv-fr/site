@@ -2,8 +2,8 @@ import {
   ISTATUTDIFFUSION,
   estDiffusible,
   estNonDiffusibleProtected,
-} from '#models/core/diffusion';
-import { Tag } from '..';
+} from "#models/core/diffusion";
+import { Tag } from "..";
 
 export const NonDiffusibleTag: React.FC<{
   etablissementOrUniteLegale: {

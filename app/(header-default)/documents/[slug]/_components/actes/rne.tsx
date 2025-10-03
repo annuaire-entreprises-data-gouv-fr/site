@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import routes from '#clients/routes';
-import { Info } from '#components-ui/alerts';
-import ButtonLink from '#components-ui/button';
-import ShowMore from '#components-ui/show-more';
-import { DataSectionClient } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale, isServicePublic } from '#models/core/types';
-import { IDocumentsRNE } from '#models/rne/types';
-import { formatDateLong } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import routes from "#clients/routes";
+import { Info } from "#components-ui/alerts";
+import ButtonLink from "#components-ui/button";
+import ShowMore from "#components-ui/show-more";
+import { DataSectionClient } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale, isServicePublic } from "#models/core/types";
+import { IDocumentsRNE } from "#models/rne/types";
+import { formatDateLong } from "#utils/helpers";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 
 export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
@@ -67,12 +67,12 @@ export const AgentActesRNE: React.FC<{
 };
 
 type IActesTableProps = {
-  actes: IDocumentsRNE['actes'];
+  actes: IDocumentsRNE["actes"];
 };
 export function ActesTable({ actes }: IActesTableProps) {
   return (
     <FullTable
-      head={['Date de dépôt', 'Acte(s) contenu(s)', 'Lien']}
+      head={["Date de dépôt", "Acte(s) contenu(s)", "Lien"]}
       body={actes.map((a) => [
         formatDateLong(a.dateDepot),
         <ul>
@@ -81,7 +81,7 @@ export function ActesTable({ actes }: IActesTableProps) {
               <strong>{nom}</strong>
               {label && (
                 <>
-                  {' - '}
+                  {" - "}
                   <i>{label}</i>
                 </>
               )}

@@ -1,15 +1,15 @@
-import { INPI, INSEE } from '#components/administrations';
-import MatomoEvent from '#components/matomo-event';
-import Meta from '#components/meta/meta-client';
+import { INPI, INSEE } from "#components/administrations";
+import MatomoEvent from "#components/matomo-event";
+import Meta from "#components/meta/meta-client";
 import {
   formatIntFr,
   formatSiret,
   isLuhnValid,
   isSiren,
   isSiret,
-} from '#utils/helpers';
-import { GetServerSideProps } from 'next';
-import { NextPageWithLayout } from 'pages/_app';
+} from "#utils/helpers";
+import { GetServerSideProps } from "next";
+import { NextPageWithLayout } from "pages/_app";
 
 type SirenOrSiretNotFoundPageProps = {
   slug?: string;
@@ -17,9 +17,9 @@ type SirenOrSiretNotFoundPageProps = {
 
 const SirenOrSiretNotFoundPage: NextPageWithLayout<
   SirenOrSiretNotFoundPageProps
-> = ({ slug = '' }) => {
+> = ({ slug = "" }) => {
   const slugIsSiren = isSiren(slug);
-  const type = slugIsSiren ? 'SIREN' : 'SIRET';
+  const type = slugIsSiren ? "SIREN" : "SIRET";
   const formatted = slugIsSiren ? formatIntFr(slug) : formatSiret(slug);
 
   if (isLuhnValid(slug)) {
@@ -39,11 +39,11 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
           <p>Il existe plusieurs explications possibles :</p>
           <ul>
             <li>
-              Vous avez peut-être commis une erreur en tapant votre numéro{' '}
+              Vous avez peut-être commis une erreur en tapant votre numéro{" "}
               {type}.
             </li>
             <li>
-              Ce numéro fait peut-être référence à une entreprise{' '}
+              Ce numéro fait peut-être référence à une entreprise{" "}
               <a href="/faq">non-diffusible</a>.
             </li>
             <li>
@@ -74,16 +74,16 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
             ).
           </p>
           <p>
-            De plus, ce numéro <strong>ne respecte pas</strong>{' '}
+            De plus, ce numéro <strong>ne respecte pas</strong>{" "}
             <a
               href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
               target="_blank"
               rel="noreferrer noopener"
             >
               l’algorithme de vérification
-            </a>{' '}
+            </a>{" "}
             des numéros {type}. En conséquence, nous vous invitons à la plus
-            grande vigilance,{' '}
+            grande vigilance,{" "}
             <strong>car il peut s’agir d’un numéro frauduleux</strong>&nbsp;:
           </p>
           <ul>
@@ -104,12 +104,12 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   context.res.statusCode = 404;
-  const slug = (context?.params?.slug || '') as string;
+  const slug = (context?.params?.slug || "") as string;
 
   if (!isSiren(slug) && !isSiret(slug)) {
     return {
       redirect: {
-        destination: '/404',
+        destination: "/404",
         permanent: false,
       },
     };

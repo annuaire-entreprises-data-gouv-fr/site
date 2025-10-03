@@ -1,14 +1,14 @@
-import { INSEE, MI } from '#components/administrations';
-import NonRenseigne from '#components/non-renseigne';
+import { INSEE, MI } from "#components/administrations";
+import NonRenseigne from "#components/non-renseigne";
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '#models/api-not-responding';
-import { IDataAssociation } from '#models/association/types';
-import { ISession } from '#models/authentication/user/session';
-import { getPersonnalDataAssociation } from '#models/core/diffusion';
-import { IAssociation } from '#models/core/types';
-import { Warning } from '../alerts';
+} from "#models/api-not-responding";
+import { IDataAssociation } from "#models/association/types";
+import { ISession } from "#models/authentication/user/session";
+import { getPersonnalDataAssociation } from "#models/core/diffusion";
+import { IAssociation } from "#models/core/types";
+import { Warning } from "../alerts";
 
 const AssociationAdressAlert: React.FC<{
   uniteLegale: IAssociation;
@@ -31,7 +31,7 @@ const AssociationAdressAlert: React.FC<{
           <INSEE /> possèdent des adresses différentes pour cette association :
           <ul>
             <li>
-              <MI /> :{' '}
+              <MI /> :{" "}
               {getPersonnalDataAssociation(
                 associationAdresse,
                 uniteLegale,
@@ -47,10 +47,10 @@ const AssociationAdressAlert: React.FC<{
           <br />
           <br />
           <strong>NB :</strong> si vous avez déjà effectué la correction auprès
-          de l’administration, sachez que dans certains cas exceptionnels,{' '}
+          de l’administration, sachez que dans certains cas exceptionnels,{" "}
           <strong>
             la mise à jour des données peut prendre jusqu’à deux mois
-          </strong>{' '}
+          </strong>{" "}
           avant d’être totalement prise en compte .
         </Warning>
       )}

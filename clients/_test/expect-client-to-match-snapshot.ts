@@ -1,5 +1,5 @@
-import { HttpServerError, HttpTimeoutError } from '#clients/exceptions';
-import path from 'path';
+import { HttpServerError, HttpTimeoutError } from "#clients/exceptions";
+import path from "path";
 
 type IParams<T extends unknown[], U> = {
   client: (...args: T) => Promise<U>;
@@ -24,11 +24,11 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
     result = await client(...args);
   } catch (e) {
     try {
-      console.log('Second try');
+      console.log("Second try");
       result = await client(...args);
     } catch (e) {
       if (e instanceof HttpServerError || e instanceof HttpTimeoutError) {
-        console.warn('Could not test siret client (api not responding)');
+        console.warn("Could not test siret client (api not responding)");
         return;
       } else {
         throw e;
@@ -44,12 +44,12 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
       postProcessResult(result);
     } catch (e) {
       console.error(e);
-      console.warn('Snapshot not tested');
+      console.warn("Snapshot not tested");
       return;
     }
   }
 
   expect(
     JSON.stringify({ args: simplifyParams(...args), result }, null, 2)
-  ).toMatchFile(path.join(__dirname, '_snapshots', snapshotFile));
+  ).toMatchFile(path.join(__dirname, "_snapshots", snapshotFile));
 }

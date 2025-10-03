@@ -1,59 +1,59 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import parseMarkdownSync from '#components/markdown/parse-markdown';
-import StructuredDataFAQ from '#components/structured-data/faq';
-import { allFaqArticles, allFaqArticlesByGroup } from '#models/article/faq';
-import { Metadata } from 'next';
+import TextWrapper from "#components-ui/text-wrapper";
+import parseMarkdownSync from "#components/markdown/parse-markdown";
+import StructuredDataFAQ from "#components/structured-data/faq";
+import { allFaqArticles, allFaqArticlesByGroup } from "#models/article/faq";
+import { Metadata } from "next";
 
 const config = [
   {
-    title: 'Informations générales',
-    key: 'default',
+    title: "Informations générales",
+    key: "default",
   },
   {
-    title: 'Fonctionnement du service',
-    key: 'fonctionnement',
+    title: "Fonctionnement du service",
+    key: "fonctionnement",
   },
   {
-    title: 'Réutiliser les données',
-    key: 'data',
+    title: "Réutiliser les données",
+    key: "data",
     additionnalLink: [
       {
-        href: '/donnees/sources',
-        label: 'Quelle est la liste des données utilisées sur ce site ?',
+        href: "/donnees/sources",
+        label: "Quelle est la liste des données utilisées sur ce site ?",
       },
       {
-        href: '/donnees/api-entreprises',
+        href: "/donnees/api-entreprises",
         label:
-          'Quelle est la différence entre l’API Entreprise et l’API Recherche d’entreprises',
+          "Quelle est la différence entre l’API Entreprise et l’API Recherche d’entreprises",
       },
     ],
   },
   {
-    title: 'Modifier ou supprimer des données',
-    key: 'modifier',
+    title: "Modifier ou supprimer des données",
+    key: "modifier",
     additionnalLink: [
       {
-        href: '/faq/modifier',
-        label: 'Comment modifier une information affichée sur ce site ?',
+        href: "/faq/modifier",
+        label: "Comment modifier une information affichée sur ce site ?",
       },
     ],
   },
   {
-    title: 'Nous contacter',
-    key: 'contact',
+    title: "Nous contacter",
+    key: "contact",
     additionnalLink: [
       {
-        href: '/faq/parcours',
-        label: 'Comment joindre une entreprise ?',
+        href: "/faq/parcours",
+        label: "Comment joindre une entreprise ?",
       },
       {
-        href: '/faq/parcours',
-        label: 'Comment vous alerter d’une fraude ou tentative d’escroquerie ?',
+        href: "/faq/parcours",
+        label: "Comment vous alerter d’une fraude ou tentative d’escroquerie ?",
       },
       {
-        href: '/faq/parcours',
+        href: "/faq/parcours",
         label:
-          'Vous n’avez pas trouvé la réponse à votre question ? Contactez-nous !',
+          "Vous n’avez pas trouvé la réponse à votre question ? Contactez-nous !",
       },
     ],
   },
@@ -96,9 +96,9 @@ export default function FAQPage() {
 }
 
 export const metadata: Metadata = {
-  title: 'FAQ de l’Annuaire des Entreprises',
+  title: "FAQ de l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/faq',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/faq",
   },
-  robots: 'index, follow',
+  robots: "index, follow",
 };

@@ -4,7 +4,7 @@
  * This function removes that specific mention.
  */
 export const formatDenominationUsuelle = (denominationUsuelle: string) => {
-  return denominationUsuelle !== 'SUPPRESSION DU NOM COMMERCIAL'
+  return denominationUsuelle !== "SUPPRESSION DU NOM COMMERCIAL"
     ? denominationUsuelle
-    : '';
+    : "";
 };

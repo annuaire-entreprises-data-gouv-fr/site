@@ -1,15 +1,15 @@
-import React from 'react';
-import ButtonLink from '#components-ui/button';
-import FAQLink from '#components-ui/faq-link';
-import { MarcheInclusion } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ICertifications } from '#models/certifications';
-import { formatSiret } from '#utils/helpers';
+import React from "react";
+import ButtonLink from "#components-ui/button";
+import FAQLink from "#components-ui/faq-link";
+import { MarcheInclusion } from "#components/administrations";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ICertifications } from "#models/certifications";
+import { formatSiret } from "#utils/helpers";
 
 export const EntrepriseInclusiveSection: React.FC<{
-  entrepriseInclusive: ICertifications['entrepriseInclusive'];
+  entrepriseInclusive: ICertifications["entrepriseInclusive"];
 }> = ({ entrepriseInclusive }) => {
   return (
     <DataSection
@@ -23,7 +23,7 @@ export const EntrepriseInclusiveSection: React.FC<{
     >
       {(entrepriseInclusive) => (
         <>
-          Cette structure est une{' '}
+          Cette structure est une{" "}
           <FAQLink tooltipLabel="Entreprise Sociale Inclusive">
             Une Entreprise Sociale Inclusive ou ESI, est une entreprise qui agit
             pour l’insertion sociale et professionnelle des personnes les plus
@@ -36,11 +36,11 @@ export const EntrepriseInclusiveSection: React.FC<{
           </p>
           <FullTable
             head={[
-              'Siret de l’établissement',
-              'Catégorie',
-              'Type de structure',
-              'Lieu',
-              'Plus d’informations',
+              "Siret de l’établissement",
+              "Catégorie",
+              "Type de structure",
+              "Lieu",
+              "Plus d’informations",
             ]}
             body={entrepriseInclusive.map(
               ({
@@ -57,7 +57,7 @@ export const EntrepriseInclusiveSection: React.FC<{
                   type,
                   <>
                     {city}
-                    {department ? ` (${department})` : ''}
+                    {department ? ` (${department})` : ""}
                   </>,
                   <ButtonLink to={marcheInclusionLink} alt small>
                     ⇢&nbsp;Consulter

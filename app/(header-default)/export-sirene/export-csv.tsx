@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import ButtonLink from '#components-ui/button';
-import { formatDate, formatNumber } from '#utils/helpers';
-import { ExportCsvInput } from 'app/api/export-sirene/input-validation';
-import { useState } from 'react';
-import { getEffectifCode } from './constants';
-import Filters from './filters';
-import FiltersSummary from './filters-summary';
-import InfoSection from './info-section';
-import styles from './styles.module.css';
+import ButtonLink from "#components-ui/button";
+import { formatDate, formatNumber } from "#utils/helpers";
+import { ExportCsvInput } from "app/api/export-sirene/input-validation";
+import { useState } from "react";
+import { getEffectifCode } from "./constants";
+import Filters from "./filters";
+import FiltersSummary from "./filters-summary";
+import InfoSection from "./info-section";
+import styles from "./styles.module.css";
 
 export interface ExtendedExportCsvInput extends ExportCsvInput {
   headcount: { min: number; max: number };
-  categories: ('PME' | 'ETI' | 'GE')[];
+  categories: ("PME" | "ETI" | "GE")[];
   headcountEnabled: boolean;
   locations: Array<{
-    type: 'cp' | 'dep' | 'reg' | 'insee';
+    type: "cp" | "dep" | "reg" | "insee";
     value: string;
     label: string;
   }>;
@@ -32,8 +32,8 @@ const defaultFilters: ExtendedExportCsvInput = {
   headcount: { min: 0, max: 14 },
   headcountEnabled: false,
   categories: [],
-  activity: 'active',
-  legalUnit: 'all',
+  activity: "active",
+  legalUnit: "all",
   locations: [],
   creationDate: { from: undefined, to: undefined },
   updateDate: { from: undefined, to: undefined },
@@ -89,27 +89,27 @@ export default function ExportCsv() {
         max: parseInt(getEffectifCode(filters.headcount.max)),
       },
     }),
-    categories: filters.categories as ('PME' | 'ETI' | 'GE')[],
+    categories: filters.categories as ("PME" | "ETI" | "GE")[],
     activity: filters.activity,
     legalUnit: filters.legalUnit,
     legalCategories: [
-      ...filters.legalCategoriesNiveau1.map((cat) => cat + '*'),
-      ...filters.legalCategoriesNiveau2.map((cat) => cat + '*'),
+      ...filters.legalCategoriesNiveau1.map((cat) => cat + "*"),
+      ...filters.legalCategoriesNiveau2.map((cat) => cat + "*"),
       ...filters.legalCategoriesNiveau3,
     ],
     siretsAndSirens: filters.siretsAndSirens,
     location: {
       codesPostaux: filters.locations
-        .filter((loc) => loc.type === 'cp')
+        .filter((loc) => loc.type === "cp")
         .map((loc) => loc.value),
       codesInsee: filters.locations
-        .filter((loc) => loc.type === 'insee')
+        .filter((loc) => loc.type === "insee")
         .map((loc) => loc.value),
       departments: filters.locations
-        .filter((loc) => loc.type === 'dep')
+        .filter((loc) => loc.type === "dep")
         .map((loc) => loc.value),
       regions: filters.locations
-        .filter((loc) => loc.type === 'reg')
+        .filter((loc) => loc.type === "reg")
         .map((loc) => loc.value),
     },
     naf: filters.naf,
@@ -134,10 +134,10 @@ export default function ExportCsv() {
 
     try {
       const query = buildQuery();
-      const response = await fetch('/api/export-sirene', {
-        method: 'POST',
+      const response = await fetch("/api/export-sirene", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ ...query, count: true }),
       });
@@ -146,7 +146,7 @@ export default function ExportCsv() {
 
       if (body.error) {
         throw new Error(
-          body.error || 'Une erreur est survenue, veuillez réessayer plus tard'
+          body.error || "Une erreur est survenue, veuillez réessayer plus tard"
         );
       }
 
@@ -156,12 +156,12 @@ export default function ExportCsv() {
       );
       setShowResults(true);
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : 'Une erreur est survenue, veuillez réessayer plus tard'
+          : "Une erreur est survenue, veuillez réessayer plus tard"
       );
     } finally {
       setIsCountLoading(false);
@@ -177,21 +177,21 @@ export default function ExportCsv() {
 
     try {
       const query = buildQuery();
-      const response = await fetch('/api/export-sirene', {
-        method: 'POST',
+      const response = await fetch("/api/export-sirene", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(query),
       });
 
-      const contentType = response.headers.get('Content-Type');
-      if (contentType?.includes('application/json')) {
+      const contentType = response.headers.get("Content-Type");
+      if (contentType?.includes("application/json")) {
         const body = await response.json();
         if (body.error) {
           throw new Error(
             body.error ||
-              'Une erreur est survenue, veuillez réessayer plus tard'
+              "Une erreur est survenue, veuillez réessayer plus tard"
           );
         }
       }
@@ -199,7 +199,7 @@ export default function ExportCsv() {
       const blob = await response.blob();
 
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       a.download = filename;
       document.body.appendChild(a);
@@ -211,7 +211,7 @@ export default function ExportCsv() {
       setError(
         err instanceof Error
           ? err.message
-          : 'Une erreur est survenue, veuillez réessayer plus tard'
+          : "Une erreur est survenue, veuillez réessayer plus tard"
       );
     } finally {
       setIsLoading(false);
@@ -232,7 +232,7 @@ export default function ExportCsv() {
             Réinitialiser les critères
           </ButtonLink>
           <ButtonLink type="submit" disabled={isCountLoading}>
-            {isCountLoading ? 'Calcul en cours...' : 'Calculer les résultats'}
+            {isCountLoading ? "Calcul en cours..." : "Calculer les résultats"}
           </ButtonLink>
         </div>
       </form>
@@ -242,8 +242,8 @@ export default function ExportCsv() {
     <div>
       <h1 className={styles.title}>Résultats de votre recherche</h1>
       <p>
-        Votre recherche donne{' '}
-        {Intl.NumberFormat('fr-FR').format(countResult.count)} résultats
+        Votre recherche donne{" "}
+        {Intl.NumberFormat("fr-FR").format(countResult.count)} résultats
       </p>
       <FiltersSummary filters={filters} />
 
@@ -254,16 +254,15 @@ export default function ExportCsv() {
           recherche pour réduire le nombre de résultats.
           <br />
           <br />
-          Vous pouvez aussi directement utiliser{' '}
+          Vous pouvez aussi directement utiliser{" "}
           <a
             target="_blank"
             rel="noopener"
             href="https://www.data.gouv.fr/dataservices/api-sirene-open-data/"
           >
             l‘API Sirene
-          </a>{' '}
-          ou télécharger la
-          base complète sur{' '}
+          </a>{" "}
+          ou télécharger la base complète sur{" "}
           <a
             target="_blank"
             rel="noopener"
@@ -282,7 +281,7 @@ export default function ExportCsv() {
         <div className={styles.fileDownloadSection}>
           <div>
             {isLoading ? (
-              'Export en cours...'
+              "Export en cours..."
             ) : (
               <a
                 className="fr-link fr-link--download"
@@ -291,7 +290,7 @@ export default function ExportCsv() {
               >
                 {filename}
                 <span className="fr-link__detail">
-                  CSV - Environ {formatNumber(getFileSize(countResult.count))}{' '}
+                  CSV - Environ {formatNumber(getFileSize(countResult.count))}{" "}
                   Ko
                 </span>
               </a>

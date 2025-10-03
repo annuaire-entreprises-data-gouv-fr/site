@@ -1,8 +1,8 @@
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { IEORIValidation } from '#models/eori-validation';
-import { Siret } from '#utils/helpers';
-import { clientAPIProxy } from '../client';
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import { IEORIValidation } from "#models/eori-validation";
+import { Siret } from "#utils/helpers";
+import { clientAPIProxy } from "../client";
 
 /**
  * Call EORI to validate a French EORI number

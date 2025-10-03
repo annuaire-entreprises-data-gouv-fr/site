@@ -1,18 +1,18 @@
 import {
   AgentOverRateLimitException,
   agentRateLimiter,
-} from '#clients/authentication/rate-limiter';
+} from "#clients/authentication/rate-limiter";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { Exception } from '#models/exceptions';
-import { UseCase } from '#models/use-cases';
-import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
-import { IReqWithSession } from '#utils/session/with-session';
-import { NextRequest, userAgent } from 'next/server';
-import { APIRoutesPaths } from './routes-paths';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { Exception } from "#models/exceptions";
+import { UseCase } from "#models/use-cases";
+import logErrorInSentry, { logInfoInSentry } from "#utils/sentry";
+import { IReqWithSession } from "#utils/session/with-session";
+import { NextRequest, userAgent } from "next/server";
+import { APIRoutesPaths } from "./routes-paths";
 
 export type IContext = { params: Promise<{ slug: Array<string> }> };
 
@@ -54,7 +54,7 @@ export function withIgnoreBot(
 
     if (isBot) {
       throw new APIRouteError(
-        'Antibot activated : user is a bot',
+        "Antibot activated : user is a bot",
         routeAndSlug,
         401
       );
@@ -67,7 +67,7 @@ export function withIgnoreBot(
       !userVisitedAPageRecently(session)
     ) {
       throw new APIRouteError(
-        'Antiscrap activated : user tries to scrap',
+        "Antiscrap activated : user tries to scrap",
         routeAndSlug,
         401
       );
@@ -101,12 +101,12 @@ export class APIRouteError extends Exception {
     cause?: any
   ) {
     super({
-      name: 'APIRouteError',
+      name: "APIRouteError",
       message,
       context: { page: context.route, slug: context.slug },
       cause,
     });
-    this.name = 'APIRouteError';
+    this.name = "APIRouteError";
   }
 }
 
@@ -116,10 +116,10 @@ export async function getRouteAndSlug(context: {
   try {
     const params = await context.params;
     const slug = params.slug.at(-1) as string;
-    const route = params.slug.slice(0, -1).join('/') as APIRoutesPaths;
+    const route = params.slug.slice(0, -1).join("/") as APIRoutesPaths;
     return { route, slug };
   } catch (e) {
-    throw new APIRouteError('Invalid route', { route: '', slug: '' }, 404, e);
+    throw new APIRouteError("Invalid route", { route: "", slug: "" }, 404, e);
   }
 }
 
@@ -137,10 +137,10 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
       try {
         routeAndSlug = await getRouteAndSlug(context);
       } catch (e) {
-        routeAndSlug = { route: '', slug: '' };
+        routeAndSlug = { route: "", slug: "" };
       }
       const error = new APIRouteError(
-        'Internal Server Error',
+        "Internal Server Error",
         routeAndSlug,
         500,
         e
@@ -157,8 +157,8 @@ export function withUseCase<TResult, TParams extends { useCase: UseCase }>(
   return (slug: string, params: TParams): TResult => {
     if (!params?.useCase || !Object.values(UseCase).includes(params.useCase)) {
       throw new APIRouteError(
-        'Invalid useCase',
-        { slug, route: 'withUseCase', params },
+        "Invalid useCase",
+        { slug, route: "withUseCase", params },
         400
       );
     }
@@ -174,8 +174,8 @@ export function withRateLimiting<TResult, TParams>(
     const email = session.user?.email;
     if (!email) {
       throw new APIRouteError(
-        'User email not found',
-        { slug, route: 'withRateLimiting' },
+        "User email not found",
+        { slug, route: "withRateLimiting" },
         400
       );
     }
@@ -185,8 +185,8 @@ export function withRateLimiting<TResult, TParams>(
     } catch (e) {
       if (e instanceof AgentOverRateLimitException) {
         throw new APIRouteError(
-          'Agent over rate limit',
-          { slug, route: 'withRateLimiting' },
+          "Agent over rate limit",
+          { slug, route: "withRateLimiting" },
           432
         );
       }

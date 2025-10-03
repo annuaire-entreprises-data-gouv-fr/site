@@ -1,14 +1,14 @@
-import { IIconsSlug } from '#components-ui/icon';
-import { Icon } from '#components-ui/icon/wrapper';
-import constants from '#models/constants';
-import React, { PropsWithChildren } from 'react';
-import styles from './styles.module.css';
+import { IIconsSlug } from "#components-ui/icon";
+import { Icon } from "#components-ui/icon/wrapper";
+import constants from "#models/constants";
+import React, { PropsWithChildren } from "react";
+import styles from "./styles.module.css";
 
 export const colors = {
-  info: ['#0078f3', '#e5f3ff'],
-  success: ['#18753c', '#dffee6'],
-  error: ['#ce0500', '#fff4f4'],
-  warning: ['#ff9c00', '#fff3e0'],
+  info: ["#0078f3", "#e5f3ff"],
+  success: ["#18753c", "#dffee6"],
+  error: ["#ce0500", "#fff4f4"],
+  warning: ["#ff9c00", "#fff3e0"],
   protected: [constants.colors.espaceAgent, constants.colors.espaceAgentPastel],
 };
 
@@ -25,7 +25,7 @@ const Alert: React.FC<
     style={{
       borderLeft: `4px solid ${color1}`,
       backgroundColor: color2,
-      width: full ? '100%' : 'auto',
+      width: full ? "100%" : "auto",
     }}
   >
     <div>

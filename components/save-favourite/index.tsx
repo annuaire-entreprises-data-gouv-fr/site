@@ -1,7 +1,7 @@
-'use client';
-import { useEffect } from 'react';
-import { Exception } from '#models/exceptions';
-import { logInfoInSentry } from '#utils/sentry';
+"use client";
+import { useEffect } from "react";
+import { Exception } from "#models/exceptions";
+import { logInfoInSentry } from "#utils/sentry";
 
 export function SaveFavourite(props: {
   siren: string;
@@ -15,11 +15,11 @@ export function SaveFavourite(props: {
   return null;
 }
 
-const LOCALSTORAGE_KEY = 'favourites-siren';
+const LOCALSTORAGE_KEY = "favourites-siren";
 function saveFavourite(visit: { siren: string; name: string; path: string }) {
   try {
     var path = window.location.pathname;
-    if (path.indexOf('/entreprise') !== 0) {
+    if (path.indexOf("/entreprise") !== 0) {
       return;
     }
 
@@ -41,7 +41,7 @@ function saveFavourite(visit: { siren: string; name: string; path: string }) {
     if (e)
       logInfoInSentry(
         new Exception({
-          name: 'SaveFavouriteException',
+          name: "SaveFavouriteException",
           cause: e,
         })
       );

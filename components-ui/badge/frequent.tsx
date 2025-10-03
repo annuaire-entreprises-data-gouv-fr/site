@@ -1,6 +1,6 @@
-import constants from '#models/constants';
-import { PropsWithChildren } from 'react';
-import { Badge, IPartialBadgeProps } from '.';
+import constants from "#models/constants";
+import { PropsWithChildren } from "react";
+import { Badge, IPartialBadgeProps } from ".";
 
 export const LabelAndCertificateBadge = ({
   small = false,
@@ -82,7 +82,7 @@ export const ServicePublicBadge = ({
   />
 );
 export const DefaultStructureBadge = ({
-  label = 'Unité légale',
+  label = "Unité légale",
   small = false,
   isSelected = false,
   onClick,
@@ -99,8 +99,8 @@ export const DefaultStructureBadge = ({
 );
 
 export const OpenClosedTag: React.FC<
-  PropsWithChildren<{ icon: 'open' | 'closed' | 'questionFill'; label: string }>
-> = ({ label = '', icon, children }) => (
+  PropsWithChildren<{ icon: "open" | "closed" | "questionFill"; label: string }>
+> = ({ label = "", icon, children }) => (
   <div className="layout-left">
     <Badge icon={icon} label={label} backgroundColor="#ddd" fontColor="#666" />
     {children}

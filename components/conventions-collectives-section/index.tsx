@@ -1,34 +1,34 @@
-import routes from '#clients/routes';
-import ButtonLink from '#components-ui/button';
-import FAQLink from '#components-ui/faq-link';
-import { Tag } from '#components-ui/tag';
-import { MTPEI } from '#components/administrations';
-import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { ICCWithMetadata } from '#models/conventions-collectives';
-import { capitalize, formatSiret, pluralize } from '#utils/helpers';
-import React from 'react';
+import routes from "#clients/routes";
+import ButtonLink from "#components-ui/button";
+import FAQLink from "#components-ui/faq-link";
+import { Tag } from "#components-ui/tag";
+import { MTPEI } from "#components/administrations";
+import NonRenseigne from "#components/non-renseigne";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { ICCWithMetadata } from "#models/conventions-collectives";
+import { capitalize, formatSiret, pluralize } from "#utils/helpers";
+import React from "react";
 
 function CCUnknown({ ccWithMetadata }: { ccWithMetadata: ICCWithMetadata[] }) {
   const unknown = ccWithMetadata.filter((e) => e.unknown);
 
   if (unknown.length == 0) {
-    return '.';
+    return ".";
   }
 
   const plural = pluralize(unknown);
 
   return (
     <>
-      , mais elle possède {plural ? 'plusieurs' : 'une'}{' '}
+      , mais elle possède {plural ? "plusieurs" : "une"}{" "}
       <Tag color="warning">
         IDCC Inconnue{plural} ou supprimée{plural}
-      </Tag>{' '}
+      </Tag>{" "}
       qui n’apparai
-      {plural ? 'ssent' : 't'} pas dans la{' '}
+      {plural ? "ssent" : "t"} pas dans la{" "}
       <a
         target="_blank"
         rel="noreferrer noopener"
@@ -51,14 +51,14 @@ const ConventionsCollectivesSection: React.FC<{
       sources={[EAdministration.MTPEI]}
       notFoundInfo={
         <div>
-          Cette structure n’a pas de{' '}
+          Cette structure n’a pas de{" "}
           <a
             target="_blank"
             rel="noreferrer noopener"
             href={`${routes.conventionsCollectives.site}?src_url=https://annuaire-entreprises.data.gouv.fr`}
           >
             convention collective enregistrée
-          </a>{' '}
+          </a>{" "}
           auprès du <MTPEI />.
         </div>
       }
@@ -66,21 +66,21 @@ const ConventionsCollectivesSection: React.FC<{
       lastModified={ccLastModified}
     >
       {(ccWithMetadata) => {
-        const plural = ccWithMetadata.length > 0 ? 's' : '';
+        const plural = ccWithMetadata.length > 0 ? "s" : "";
         return (
           <>
-            Cette structure possède {ccWithMetadata.length}{' '}
+            Cette structure possède {ccWithMetadata.length}{" "}
             <FAQLink
               to="/faq/convention-collective"
               tooltipLabel={`convention${plural} collective${plural}`}
             >
               Qu’est-ce qu’une convention collective ?
-            </FAQLink>{' '}
+            </FAQLink>{" "}
             enregistrée{plural}
             <CCUnknown ccWithMetadata={ccWithMetadata} />
             <p>
               Pour en savoir plus sur une convention collective en particulier,
-              consultez{' '}
+              consultez{" "}
               <a
                 rel="noreferrer noopener"
                 target="_blank"
@@ -88,7 +88,7 @@ const ConventionsCollectivesSection: React.FC<{
               >
                 le site du Code du Travail Numérique.
               </a>
-              , le{' '}
+              , le{" "}
               <a
                 rel="noreferrer noopener"
                 target="_blank"
@@ -96,7 +96,7 @@ const ConventionsCollectivesSection: React.FC<{
               >
                 bulletin officiel des conventions collectives sur Legifrance
               </a>
-              , ou le{' '}
+              , ou le{" "}
               <a href="https://www.elections-professionnelles.travail.gouv.fr/web/guest/recherche-idcc">
                 moteur de recherche de conventions collectives
               </a>
@@ -104,7 +104,7 @@ const ConventionsCollectivesSection: React.FC<{
             </p>
             {ccWithMetadata && ccWithMetadata.length > 0 && (
               <FullTable
-                head={['N°IDCC', 'Détails', 'Etablissement(s)', 'Explications']}
+                head={["N°IDCC", "Détails", "Etablissement(s)", "Explications"]}
                 verticalAlign="top"
                 body={ccWithMetadata.map(
                   ({ idcc, sirets = [], nature, title, unknown, updated }) => [
@@ -113,11 +113,11 @@ const ConventionsCollectivesSection: React.FC<{
                       {updated.length > 0 ? (
                         <>
                           <Tag color="new">IDCC Supprimée</Tag> et remplacée par
-                          :{' '}
+                          :{" "}
                           <ul>
                             {updated.map((updatedCC, index) => (
                               <li>
-                                {index !== 0 && ' ou '}
+                                {index !== 0 && " ou "}
                                 {updatedCC.title}
                                 <Tag>IDCC {updatedCC.idcc}</Tag>
                               </li>
@@ -154,7 +154,7 @@ const ConventionsCollectivesSection: React.FC<{
                       ))}
                     </ul>,
                     <>
-                      {idcc === '9999' ? (
+                      {idcc === "9999" ? (
                         <i>Sans convention collective</i>
                       ) : unknown ? (
                         <i>Convention collective inconnue</i>

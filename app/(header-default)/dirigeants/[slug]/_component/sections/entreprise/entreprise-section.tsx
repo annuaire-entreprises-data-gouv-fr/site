@@ -1,15 +1,15 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import BreakPageForPrint from '#components-ui/print-break-page';
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import BreakPageForPrint from "#components-ui/print-break-page";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { isEntrepreneurIndividuel, IUniteLegale } from '#models/core/types';
-import LiensCapitalistiquesSection from '../../liens-capitalistiques';
-import BeneficiairesSection from './beneficiaires';
-import DirigeantsSection from './dirigeants-open/section';
-import DirigeantsSectionProtected from './dirigeants-protected/section';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { isEntrepreneurIndividuel, IUniteLegale } from "#models/core/types";
+import LiensCapitalistiquesSection from "../../liens-capitalistiques";
+import BeneficiairesSection from "./beneficiaires";
+import DirigeantsSection from "./dirigeants-open/section";
+import DirigeantsSectionProtected from "./dirigeants-protected/section";
 
 export default function DirigeantsEntrepriseSection({
   uniteLegale,

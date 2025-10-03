@@ -1,10 +1,10 @@
-import { checkLatLng } from '#components/map/check-lat-lng';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IEtablissement } from '#models/core/types';
-import { FetchRessourceException } from '#models/exceptions';
-import { getGeoLoc } from '#models/geo-loc';
-import logErrorInSentry from '#utils/sentry';
-import { useFetchExternalData } from './use-fetch-data';
+import { checkLatLng } from "#components/map/check-lat-lng";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IEtablissement } from "#models/core/types";
+import { FetchRessourceException } from "#models/exceptions";
+import { getGeoLoc } from "#models/geo-loc";
+import logErrorInSentry from "#utils/sentry";
+import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchGeoLoc(etablissement: IEtablissement) {
   return useFetchExternalData(
@@ -26,7 +26,7 @@ export function useFetchGeoLoc(etablissement: IEtablissement) {
           return;
         }
         const exception = new FetchRessourceException({
-          ressource: 'GeoLoc',
+          ressource: "GeoLoc",
           administration: EAdministration.DINUM,
           cause: e,
           context: {

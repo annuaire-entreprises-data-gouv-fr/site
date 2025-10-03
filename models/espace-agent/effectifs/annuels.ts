@@ -1,7 +1,7 @@
-import { clientApiEntrepriseEffectifsAnnuels } from '#clients/api-entreprise/effectifs/annuels';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { verifySiren } from '#utils/helpers';
-import { handleApiEntrepriseError } from '../utils';
+import { clientApiEntrepriseEffectifsAnnuels } from "#clients/api-entreprise/effectifs/annuels";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { verifySiren } from "#utils/helpers";
+import { handleApiEntrepriseError } from "../utils";
 
 export type IEffectifsAnnuelsProtected = {
   effectif: number;
@@ -22,7 +22,7 @@ export const getEffectifsAnnuelsProtected = async (
     (error) =>
       handleApiEntrepriseError(error, {
         siren,
-        apiResource: 'EffectifsAnnuelsProtected',
+        apiResource: "EffectifsAnnuelsProtected",
       })
   );
 };

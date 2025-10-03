@@ -1,12 +1,12 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import constants from '#models/constants';
-import { Metadata } from 'next';
+import TextWrapper from "#components-ui/text-wrapper";
+import constants from "#models/constants";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Déclaration d’accessibilité',
-  robots: 'noindex, nofollow',
+  title: "Déclaration d’accessibilité",
+  robots: "noindex, nofollow",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/accessibilite',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/accessibilite",
   },
 };
 
@@ -18,7 +18,7 @@ function Accessibility() {
         La DINUM s’engage à rendre son service accessible, conformément à
         l’article 47 de la loi n° 2005-102 du 11 février 2005.
         <br />À cette fin, nous mettons en œuvre la stratégie et les actions
-        suivantes :{' '}
+        suivantes :{" "}
         <a href="https://www.numerique.gouv.fr/uploads/DINUM_SchemaPluriannuel_2020.pdf">
           Télécharger le schéma pluriannuel de la DINUM au format PDF.
         </a>
@@ -30,7 +30,7 @@ function Accessibility() {
       <p>
         annuaire-entreprises.data.gouv.fr est non conforme avec le RGAA 4.1.
         <br />
-        Le site n’a pas encore été audité.{' '}
+        Le site n’a pas encore été audité.{" "}
       </p>
       <h2>Établissement de cette déclaration d’accessibilité</h2>
       <p>Cette déclaration a été établie le 23 mars 2021.</p>
@@ -44,7 +44,7 @@ function Accessibility() {
       </p>
       <ul>
         <li>
-          Écrivez-nous via notre{' '}
+          Écrivez-nous via notre{" "}
           <a href={constants.links.parcours.contact}>formulaire de contact</a>
         </li>
         <li>Adresse : DINUM 20 avenue de Ségur 75007 Paris</li>

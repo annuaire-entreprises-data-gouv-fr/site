@@ -1,6 +1,6 @@
-import { IDirigeants } from '#models/rne/types';
-import { Siren } from '#utils/helpers';
-import clientSearchRechercheEntreprise from '.';
+import { IDirigeants } from "#models/rne/types";
+import { Siren } from "#utils/helpers";
+import clientSearchRechercheEntreprise from ".";
 
 export const clientDirigeantsRechercheEntreprise = async (
   siren: Siren

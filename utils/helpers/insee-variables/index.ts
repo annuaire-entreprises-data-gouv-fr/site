@@ -1,8 +1,8 @@
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISTATUTDIFFUSION } from '#models/core/diffusion';
-import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
-import { Exception } from '#models/exceptions';
-import logErrorInSentry from '../../sentry';
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISTATUTDIFFUSION } from "#models/core/diffusion";
+import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
+import { Exception } from "#models/exceptions";
+import logErrorInSentry from "../../sentry";
 
 /**
  * Turn letter based etatAdministratif into Boolean. Logs any unkniown value
@@ -12,15 +12,15 @@ import logErrorInSentry from '../../sentry';
  * @returns
  */
 export const etatFromEtatAdministratifInsee = (
-  etatAdministratifInsee: 'A' | 'C' | 'F' | 'I' | string = '',
+  etatAdministratifInsee: "A" | "C" | "F" | "I" | string = "",
   sirenOrSiret: string
 ) => {
   switch (etatAdministratifInsee) {
-    case 'A':
+    case "A":
       return IETATADMINSTRATIF.ACTIF;
-    case 'C':
+    case "C":
       return IETATADMINSTRATIF.CESSEE;
-    case 'F':
+    case "F":
       return IETATADMINSTRATIF.FERME;
     default:
       return IETATADMINSTRATIF.INCONNU;
@@ -35,20 +35,20 @@ export const etatFromEtatAdministratifInsee = (
  * @returns
  */
 export const statuDiffusionFromStatutDiffusionInsee = (
-  statutDiffusionInsee: 'O' | 'N' | 'P' | string = '',
+  statutDiffusionInsee: "O" | "N" | "P" | string = "",
   sirenOrSiret: string
 ) => {
   switch (statutDiffusionInsee) {
-    case 'O':
+    case "O":
       return ISTATUTDIFFUSION.DIFFUSIBLE;
-    case 'N':
+    case "N":
       return ISTATUTDIFFUSION.NON_DIFF_STRICT;
-    case 'P':
+    case "P":
       return ISTATUTDIFFUSION.PARTIAL;
     default:
       logErrorInSentry(
         new APISireneUnknownParameterException(
-          'Unknown Statut Diffusion',
+          "Unknown Statut Diffusion",
           sirenOrSiret,
           statutDiffusionInsee
         )
@@ -61,7 +61,7 @@ class APISireneUnknownParameterException extends Exception {
   administration = EAdministration.INSEE;
   constructor(message: string, siret: string, details: string) {
     super({
-      name: 'APISireneUnknownParameterException',
+      name: "APISireneUnknownParameterException",
       message,
       context: {
         siret,
@@ -89,8 +89,8 @@ class APISireneUnknownParameterException extends Exception {
 export const parseDateCreationInsee = (
   dateCreation: string | null | undefined
 ) => {
-  if (!dateCreation || dateCreation === '1900-01-01') {
-    return '';
+  if (!dateCreation || dateCreation === "1900-01-01") {
+    return "";
   }
   return dateCreation;
 };

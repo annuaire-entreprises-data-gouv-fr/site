@@ -1,7 +1,7 @@
-import { regions } from '#utils/helpers/formatting/metadata/regions';
-import { ExportCsvInput } from 'app/api/export-sirene/input-validation';
-import { niv1ToNiv5Mapping } from 'scripts/nomenclature-d-activites-francaises/niv1ToNiv5Mapping';
-import { effectifCodes } from './constants';
+import { regions } from "#utils/helpers/formatting/metadata/regions";
+import { ExportCsvInput } from "app/api/export-sirene/input-validation";
+import { niv1ToNiv5Mapping } from "scripts/nomenclature-d-activites-francaises/niv1ToNiv5Mapping";
+import { effectifCodes } from "./constants";
 
 export class SireneQueryBuilder {
   private conditions: string[] = [];
@@ -12,78 +12,78 @@ export class SireneQueryBuilder {
 
   static getAvailableFields(): string[] {
     return [
-      'siren',
-      'nic',
-      'siret',
-      'statutDiffusionEtablissement',
-      'dateCreationEtablissement',
-      'trancheEffectifsEtablissement',
-      'anneeEffectifsEtablissement',
-      'activitePrincipaleRegistreMetiersEtablissement',
-      'dateDernierTraitementEtablissement',
-      'etablissementSiege',
-      'etatAdministratifUniteLegale',
-      'statutDiffusionUniteLegale',
-      'unitePurgeeUniteLegale',
-      'dateCreationUniteLegale',
-      'categorieJuridiqueUniteLegale',
-      'denominationUniteLegale',
-      'sigleUniteLegale',
-      'denominationUsuelle1UniteLegale',
-      'denominationUsuelle2UniteLegale',
-      'denominationUsuelle3UniteLegale',
-      'sexeUniteLegale',
-      'nomUniteLegale',
-      'nomUsageUniteLegale',
-      'prenom1UniteLegale',
-      'prenom2UniteLegale',
-      'prenom3UniteLegale',
-      'prenom4UniteLegale',
-      'prenomUsuelUniteLegale',
-      'pseudonymeUniteLegale',
-      'activitePrincipaleUniteLegale',
-      'nomenclatureActivitePrincipaleUniteLegale',
-      'identifiantAssociationUniteLegale',
-      'economieSocialeSolidaireUniteLegale',
-      'societeMissionUniteLegale',
-      'trancheEffectifsUniteLegale',
-      'anneeEffectifsUniteLegale',
-      'nicSiegeUniteLegale',
-      'dateDernierTraitementUniteLegale',
-      'categorieEntreprise',
-      'anneeCategorieEntreprise',
-      'complementAdresseEtablissement',
-      'numeroVoieEtablissement',
-      'indiceRepetitionEtablissement',
-      'typeVoieEtablissement',
-      'libelleVoieEtablissement',
-      'codePostalEtablissement',
-      'libelleCommuneEtablissement',
-      'libelleCommuneEtrangerEtablissement',
-      'codeCommuneEtablissement',
-      'codePaysEtrangerEtablissement',
-      'libellePaysEtrangerEtablissement',
-      'etatAdministratifEtablissement',
-      'enseigne1Etablissement',
-      'enseigne2Etablissement',
-      'enseigne3Etablissement',
-      'denominationUsuelleEtablissement',
-      'activitePrincipaleEtablissement',
-      'nomenclatureActivitePrincipaleEtablissement',
-      'caractereEmployeurEtablissement',
-      'coordonneeLambertAbscisseEtablissement',
-      'coordonneeLambertOrdonneeEtablissement',
-      'identifiantAdresseEtablissement',
-      'dernierNumeroVoieEtablissement',
+      "siren",
+      "nic",
+      "siret",
+      "statutDiffusionEtablissement",
+      "dateCreationEtablissement",
+      "trancheEffectifsEtablissement",
+      "anneeEffectifsEtablissement",
+      "activitePrincipaleRegistreMetiersEtablissement",
+      "dateDernierTraitementEtablissement",
+      "etablissementSiege",
+      "etatAdministratifUniteLegale",
+      "statutDiffusionUniteLegale",
+      "unitePurgeeUniteLegale",
+      "dateCreationUniteLegale",
+      "categorieJuridiqueUniteLegale",
+      "denominationUniteLegale",
+      "sigleUniteLegale",
+      "denominationUsuelle1UniteLegale",
+      "denominationUsuelle2UniteLegale",
+      "denominationUsuelle3UniteLegale",
+      "sexeUniteLegale",
+      "nomUniteLegale",
+      "nomUsageUniteLegale",
+      "prenom1UniteLegale",
+      "prenom2UniteLegale",
+      "prenom3UniteLegale",
+      "prenom4UniteLegale",
+      "prenomUsuelUniteLegale",
+      "pseudonymeUniteLegale",
+      "activitePrincipaleUniteLegale",
+      "nomenclatureActivitePrincipaleUniteLegale",
+      "identifiantAssociationUniteLegale",
+      "economieSocialeSolidaireUniteLegale",
+      "societeMissionUniteLegale",
+      "trancheEffectifsUniteLegale",
+      "anneeEffectifsUniteLegale",
+      "nicSiegeUniteLegale",
+      "dateDernierTraitementUniteLegale",
+      "categorieEntreprise",
+      "anneeCategorieEntreprise",
+      "complementAdresseEtablissement",
+      "numeroVoieEtablissement",
+      "indiceRepetitionEtablissement",
+      "typeVoieEtablissement",
+      "libelleVoieEtablissement",
+      "codePostalEtablissement",
+      "libelleCommuneEtablissement",
+      "libelleCommuneEtrangerEtablissement",
+      "codeCommuneEtablissement",
+      "codePaysEtrangerEtablissement",
+      "libellePaysEtrangerEtablissement",
+      "etatAdministratifEtablissement",
+      "enseigne1Etablissement",
+      "enseigne2Etablissement",
+      "enseigne3Etablissement",
+      "denominationUsuelleEtablissement",
+      "activitePrincipaleEtablissement",
+      "nomenclatureActivitePrincipaleEtablissement",
+      "caractereEmployeurEtablissement",
+      "coordonneeLambertAbscisseEtablissement",
+      "coordonneeLambertOrdonneeEtablissement",
+      "identifiantAdresseEtablissement",
+      "dernierNumeroVoieEtablissement",
     ];
   }
 
   static getFieldsString(): string {
-    return SireneQueryBuilder.getAvailableFields().join(',');
+    return SireneQueryBuilder.getAvailableFields().join(",");
   }
 
   build() {
-    return this.conditions.join(' AND ');
+    return this.conditions.join(" AND ");
   }
 
   private addCategoryConditions = (categories: string[]) => {
@@ -91,7 +91,7 @@ export class SireneQueryBuilder {
       return;
     }
 
-    const categoryConditions = categories.join(' OR ');
+    const categoryConditions = categories.join(" OR ");
     this.conditions.push(`(categorieEntreprise:(${categoryConditions}))`);
   };
 
@@ -105,12 +105,12 @@ export class SireneQueryBuilder {
       inclureNo: boolean;
       inclureNonRenseigne: boolean;
     },
-    type: 'mission' | 'ess'
+    type: "mission" | "ess"
   ) => {
     const field =
-      type === 'mission'
-        ? 'societeMissionUniteLegale'
-        : 'economieSocialeSolidaireUniteLegale';
+      type === "mission"
+        ? "societeMissionUniteLegale"
+        : "economieSocialeSolidaireUniteLegale";
 
     // Toutes les entreprises : ESS, non ESS et non-renseignées
     if (inclure && inclureNo && inclureNonRenseigne) {
@@ -160,9 +160,9 @@ export class SireneQueryBuilder {
     const sirens = siretsAndSirens.filter((siren) => siren.length === 9);
     const sirets = siretsAndSirens.filter((siret) => siret.length === 14);
     const sirenConditions =
-      sirens.length > 0 ? `siren:(${sirens.join(' OR ')})` : '';
+      sirens.length > 0 ? `siren:(${sirens.join(" OR ")})` : "";
     const siretConditions =
-      sirets.length > 0 ? `siret:(${sirets.join(' OR ')})` : '';
+      sirets.length > 0 ? `siret:(${sirets.join(" OR ")})` : "";
 
     if (sirens.length > 0 && sirets.length > 0) {
       this.conditions.push(`(${sirenConditions} OR ${siretConditions})`);
@@ -182,10 +182,10 @@ export class SireneQueryBuilder {
     }
 
     const minIndex = effectifCodes.indexOf(
-      headcount.min.toString().padStart(2, '0')
+      headcount.min.toString().padStart(2, "0")
     );
     const maxIndex = effectifCodes.indexOf(
-      headcount.max.toString().padStart(2, '0')
+      headcount.max.toString().padStart(2, "0")
     );
 
     const rangeConditions = effectifCodes
@@ -195,7 +195,7 @@ export class SireneQueryBuilder {
           ? `trancheEffectifsUniteLegale:${effectifCode}`
           : `trancheEffectifsEtablissement:${effectifCode}`
       );
-    this.conditions.push(`(${rangeConditions.join(' OR ')})`);
+    this.conditions.push(`(${rangeConditions.join(" OR ")})`);
   };
 
   private addLegalCategoryConditions = (legalCategories: string[]) => {
@@ -206,7 +206,7 @@ export class SireneQueryBuilder {
     const legalCategoriesConditions = legalCategories.map(
       (cat) => `categorieJuridiqueUniteLegale:${cat}`
     );
-    this.conditions.push(`(${legalCategoriesConditions.join(' OR ')})`);
+    this.conditions.push(`(${legalCategoriesConditions.join(" OR ")})`);
   };
 
   private addDateCreationConditions = (
@@ -216,11 +216,11 @@ export class SireneQueryBuilder {
     },
     isHq?: boolean
   ) => {
-    const from = creationDate.from ? creationDate.from : '*';
-    const to = creationDate.to ? creationDate.to : '*';
+    const from = creationDate.from ? creationDate.from : "*";
+    const to = creationDate.to ? creationDate.to : "*";
     this.conditions.push(
       `${
-        isHq ? 'dateCreationUniteLegale' : 'dateCreationEtablissement'
+        isHq ? "dateCreationUniteLegale" : "dateCreationEtablissement"
       }:[${from} TO ${to}]`
     );
   };
@@ -232,13 +232,13 @@ export class SireneQueryBuilder {
     },
     isHq?: boolean
   ) => {
-    const from = updateDate.from ? updateDate.from : '*';
-    const to = updateDate.to ? updateDate.to : '*';
+    const from = updateDate.from ? updateDate.from : "*";
+    const to = updateDate.to ? updateDate.to : "*";
     this.conditions.push(
       `${
         isHq
-          ? 'dateDernierTraitementUniteLegale'
-          : 'dateDernierTraitementEtablissement'
+          ? "dateDernierTraitementUniteLegale"
+          : "dateDernierTraitementEtablissement"
       }:[${from} TO ${to}]`
     );
   };
@@ -297,7 +297,7 @@ export class SireneQueryBuilder {
 
     this.conditions.push(
       `(${[...codesCommunesConditions, ...codesPostauxConditions].join(
-        ' OR '
+        " OR "
       )})`
     );
   };
@@ -328,12 +328,12 @@ export class SireneQueryBuilder {
     }
 
     const field = isHq
-      ? 'activitePrincipaleUniteLegale'
-      : 'activitePrincipaleEtablissement';
+      ? "activitePrincipaleUniteLegale"
+      : "activitePrincipaleEtablissement";
 
     const activityConditions = Array.from(allLevels)
       .map((activity) => `${field}:${activity}`)
-      .join(' OR ');
+      .join(" OR ");
 
     if (!isHq) {
       this.conditions.push(`periode(-dateFin:* AND (${activityConditions}))`);
@@ -344,19 +344,19 @@ export class SireneQueryBuilder {
 
   private buildQuery = (params: ExportCsvInput) => {
     // Etat administratif de l'établissement
-    if (params.activity === 'active') {
+    if (params.activity === "active") {
       this.conditions.push(
-        'periode(-dateFin:* AND etatAdministratifEtablissement:A)'
+        "periode(-dateFin:* AND etatAdministratifEtablissement:A)"
       );
-    } else if (params.activity === 'ceased') {
+    } else if (params.activity === "ceased") {
       this.conditions.push(
-        'periode(-dateFin:* AND etatAdministratifEtablissement:F)'
+        "periode(-dateFin:* AND etatAdministratifEtablissement:F)"
       );
     }
 
     // Type d'établissement
-    if (params.legalUnit === 'hq') {
-      this.conditions.push('etablissementSiege:true');
+    if (params.legalUnit === "hq") {
+      this.conditions.push("etablissementSiege:true");
     }
 
     // Localisation
@@ -369,7 +369,7 @@ export class SireneQueryBuilder {
       this.addActivityConditions(
         params.naf,
         params.sap,
-        params.legalUnit === 'hq'
+        params.legalUnit === "hq"
       );
     }
 
@@ -387,13 +387,13 @@ export class SireneQueryBuilder {
     if (params.creationDate?.from || params.creationDate?.to) {
       this.addDateCreationConditions(
         params.creationDate,
-        params.legalUnit === 'hq'
+        params.legalUnit === "hq"
       );
     }
 
     // Date de mise à jour
     if (params.updateDate?.from || params.updateDate?.to) {
-      this.addDateMajConditions(params.updateDate, params.legalUnit === 'hq');
+      this.addDateMajConditions(params.updateDate, params.legalUnit === "hq");
     }
 
     // Sirets et Sirens
@@ -408,17 +408,17 @@ export class SireneQueryBuilder {
 
     // Filtre ESS
     if (params.ess) {
-      this.addESSConditions(params.ess, 'ess');
+      this.addESSConditions(params.ess, "ess");
     }
 
     // Filtre société à mission
     if (params.mission) {
-      this.addESSConditions(params.mission, 'mission');
+      this.addESSConditions(params.mission, "mission");
     }
 
     // Retirer les établissements non diffusibles
     this.conditions.push(
-      '(statutDiffusionEtablissement:O OR statutDiffusionEtablissement:P)'
+      "(statutDiffusionEtablissement:O OR statutDiffusionEtablissement:P)"
     );
   };
 }

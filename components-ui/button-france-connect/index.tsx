@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const ButtonFranceConnect: React.FC<{}> = () => (
   <div className="fr-connect-group">

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import LocalPageCounter from '#components/search-results/results-pagination/local-pagination';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { useFetchBilanGes } from 'hooks/fetch/bilan-ges';
-import { useState } from 'react';
+import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { useFetchBilanGes } from "hooks/fetch/bilan-ges";
+import { useState } from "react";
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -15,8 +15,8 @@ type IProps = {
 };
 
 const formatEmissions = (value: number): string => {
-  if (value === 0) return 'Non renseigné';
-  return value.toLocaleString('fr-FR');
+  if (value === 0) return "Non renseigné";
+  return value.toLocaleString("fr-FR");
 };
 
 /**
@@ -41,7 +41,7 @@ export default function BilanGesSection({ uniteLegale, session }: IProps) {
     >
       {(bilanGes) => {
         const { total } = bilanGes.meta;
-        const plural = total > 1 ? 's' : '';
+        const plural = total > 1 ? "s" : "";
         const pageSize = 20;
 
         const sortedBilans = [...bilanGes.data].sort(
@@ -66,12 +66,12 @@ export default function BilanGesSection({ uniteLegale, session }: IProps) {
 
             <FullTable
               head={[
-                'Indicateur',
+                "Indicateur",
                 ...sortedBilans.map((bilan) => bilan.anneeReporting.toString()),
               ]}
               body={[
                 [
-                  'Total des émissions (tCO2e)',
+                  "Total des émissions (tCO2e)",
                   ...sortedBilans.map((bilan) =>
                     formatEmissions(bilan.totalEmissions)
                   ),

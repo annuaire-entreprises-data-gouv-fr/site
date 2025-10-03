@@ -1,13 +1,13 @@
-import remarkHeadings from '@vcarl/remark-headings';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeStringify from 'rehype-stringify';
-import remarkHeadingId from 'remark-heading-id';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import { unified } from 'unified';
+import remarkHeadings from "@vcarl/remark-headings";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeStringify from "rehype-stringify";
+import remarkHeadingId from "remark-heading-id";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
 
 export type IMarkdown = {
-  __typename: 'Markdown';
+  __typename: "Markdown";
 };
 
 type IParsedMakdown = {
@@ -39,17 +39,17 @@ const markdownProcessor = unified()
   .use(remarkRehype)
   .use(rehypeAutolinkHeadings, {
     content: {
-      type: 'text',
-      value: '#',
+      type: "text",
+      value: "#",
     },
     properties: {
-      className: ['anchor-link'],
-      'aria-hidden': true,
-      'tab-index': -1,
+      className: ["anchor-link"],
+      "aria-hidden": true,
+      "tab-index": -1,
     },
   })
   .use(rehypeStringify);
 
 function removeSingleParagraph(body: string): string {
-  return body.replace(/^<p>(.*)<\/p>$/, '$1');
+  return body.replace(/^<p>(.*)<\/p>$/, "$1");
 }

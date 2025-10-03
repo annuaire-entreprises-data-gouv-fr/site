@@ -1,7 +1,7 @@
-import ButtonLink from '#components-ui/button';
-import Meta from '#components/meta/meta-client';
-import { GetServerSideProps } from 'next';
-import { NextPageWithLayout } from 'pages/_app';
+import ButtonLink from "#components-ui/button";
+import Meta from "#components/meta/meta-client";
+import { GetServerSideProps } from "next";
+import { NextPageWithLayout } from "pages/_app";
 
 const Forbidden: NextPageWithLayout = () => {
   return (

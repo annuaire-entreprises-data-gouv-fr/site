@@ -1,10 +1,10 @@
-import { clientJOAFE } from '#clients/open-data-soft/clients/journal-officiel-associations';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAssociation } from '#models/core/types';
-import { FetchRessourceException } from '#models/exceptions';
-import { IdRna } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { useFetchExternalData } from './use-fetch-data';
+import { clientJOAFE } from "#clients/open-data-soft/clients/journal-officiel-associations";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IAssociation } from "#models/core/types";
+import { FetchRessourceException } from "#models/exceptions";
+import { IdRna } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { useFetchExternalData } from "./use-fetch-data";
 
 export const useFetchJOAFE = (uniteLegale: IAssociation) => {
   const idRna = uniteLegale.association.idAssociation as IdRna;
@@ -18,7 +18,7 @@ export const useFetchJOAFE = (uniteLegale: IAssociation) => {
           return;
         }
         const exception = new FetchRessourceException({
-          ressource: 'JOAFE',
+          ressource: "JOAFE",
           administration: EAdministration.DILA,
           cause: e,
           context: {

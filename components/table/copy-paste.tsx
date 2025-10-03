@@ -1,7 +1,7 @@
-'use client';
-import { InternalError } from '#models/exceptions';
-import { useLayoutEffect, useRef, useState } from 'react';
-import style from './copy-paste.module.css';
+"use client";
+import { InternalError } from "#models/exceptions";
+import { useLayoutEffect, useRef, useState } from "react";
+import style from "./copy-paste.module.css";
 
 type ICopyPasteProps = {
   disableCopyIcon?: boolean;
@@ -12,11 +12,11 @@ type ICopyPasteProps = {
 };
 
 function copyFallback(value: string) {
-  const el = document.createElement('textarea');
+  const el = document.createElement("textarea");
   el.value = value;
   document.body.appendChild(el);
   el.select();
-  document.execCommand('copy');
+  document.execCommand("copy");
   document.body.removeChild(el);
 }
 export function CopyPaste({
@@ -26,7 +26,7 @@ export function CopyPaste({
   id = undefined,
   label,
 }: ICopyPasteProps) {
-  if (typeof children !== 'string') {
+  if (typeof children !== "string") {
     throw new InternalError({
       message: `CopyPaste component can only be used with string children, got ${typeof children}`,
     });
@@ -38,12 +38,12 @@ export function CopyPaste({
 
   const copyToClipboard = (e: any) => {
     const valueToCopy = shouldRemoveSpace
-      ? children.replace(/\s/g, '')
+      ? children.replace(/\s/g, "")
       : children;
 
     try {
       if (!document.hasFocus()) {
-        throw new Error('document is not focused');
+        throw new Error("document is not focused");
       }
       navigator.clipboard.writeText(valueToCopy);
     } catch {
@@ -85,7 +85,7 @@ export function CopyPaste({
   return (
     <button
       className={`${style.copyButton} ${
-        disableCopyIcon ? style.copyIconDisabled : ''
+        disableCopyIcon ? style.copyIconDisabled : ""
       }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -102,7 +102,7 @@ export function CopyPaste({
           className={style.copyIcon}
           aria-hidden
           ref={copyIconRef}
-          style={{ color: copied ? 'green' : '' }}
+          style={{ color: copied ? "green" : "" }}
         >
           {copied ? (
             <>
@@ -162,6 +162,6 @@ function CheckMarkSVG() {
 function logCopyPaste(label: string) {
   try {
     var _paq = window._paq || [];
-    _paq.push(['trackEvent', 'action', 'copyPaste', `${label}`]);
+    _paq.push(["trackEvent", "action", "copyPaste", `${label}`]);
   } catch {}
 }

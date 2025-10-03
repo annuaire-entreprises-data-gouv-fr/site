@@ -2,8 +2,8 @@
  * NO 'use client' as this uses a context and therefore cannot be used on server components
  */
 
-import { ISession } from '#models/authentication/user/session';
-import { createContext, useContext } from 'react';
+import { ISession } from "#models/authentication/user/session";
+import { createContext, useContext } from "react";
 
 const sessionContext = createContext<ISession | null>(null);
 

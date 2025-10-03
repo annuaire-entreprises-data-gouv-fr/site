@@ -1,14 +1,14 @@
-import routes from '#clients/routes';
-import { Tag } from '#components-ui/tag';
-import { EDUCNAT } from '#components/administrations';
-import ResultsPagination from '#components/search-results/results-pagination';
-import { DataSection } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IEtablissementsScolaires } from '#models/etablissements-scolaires';
-import { pluralize } from '#utils/helpers';
-import React from 'react';
+import routes from "#clients/routes";
+import { Tag } from "#components-ui/tag";
+import { EDUCNAT } from "#components/administrations";
+import ResultsPagination from "#components/search-results/results-pagination";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { IEtablissementsScolaires } from "#models/etablissements-scolaires";
+import { pluralize } from "#utils/helpers";
+import React from "react";
 
 export const EtablissementsScolairesSection: React.FC<{
   etablissements: IEtablissementsScolaires | IAPINotRespondingError;
@@ -22,7 +22,7 @@ export const EtablissementsScolairesSection: React.FC<{
         <p>
           Nous n’avons pas retrouvé les établissements scolaires de cette entité
           dans l’annuaire de l’
-          <EDUCNAT />. En revanche, vous pouvez peut-être les retrouver grâce au{' '}
+          <EDUCNAT />. En revanche, vous pouvez peut-être les retrouver grâce au{" "}
           <a href={routes.educationNationale.site}>
             moteur de recherche de l’
             <EDUCNAT />
@@ -36,12 +36,12 @@ export const EtablissementsScolairesSection: React.FC<{
         return (
           <>
             <p>
-              Cette structure possède{' '}
+              Cette structure possède{" "}
               <strong>{etablissements.resultCount}</strong> établissement
               {plural} scolaire{plural}&nbsp;:
             </p>
             <FullTable
-              head={['N° UAI', 'Académie', 'Détails', 'Contact', 'Nb d’élèves']}
+              head={["N° UAI", "Académie", "Détails", "Contact", "Nb d’élèves"]}
               body={etablissements.results.map(
                 ({
                   adresse,

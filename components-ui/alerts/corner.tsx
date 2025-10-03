@@ -1,8 +1,8 @@
-import { IIconsSlug } from '#components-ui/icon';
-import { Icon } from '#components-ui/icon/wrapper';
-import React, { PropsWithChildren } from 'react';
-import { colors } from '.';
-import styles from './styles.module.css';
+import { IIconsSlug } from "#components-ui/icon";
+import { Icon } from "#components-ui/icon/wrapper";
+import React, { PropsWithChildren } from "react";
+import { colors } from ".";
+import styles from "./styles.module.css";
 
 const CornerAlert: React.FC<
   PropsWithChildren<{
@@ -13,7 +13,7 @@ const CornerAlert: React.FC<
   }>
 > = ({ color1, color2, icon, children, onDismiss }) => (
   <div
-    className={styles['corner-banner']}
+    className={styles["corner-banner"]}
     style={{
       borderLeft: `4px solid ${color1}`,
       backgroundColor: color2,

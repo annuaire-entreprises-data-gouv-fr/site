@@ -1,24 +1,24 @@
-import Breadcrumb from '#components-ui/breadcrumb';
-import ButtonLink from '#components-ui/button';
-import TextWrapper from '#components-ui/text-wrapper';
+import Breadcrumb from "#components-ui/breadcrumb";
+import ButtonLink from "#components-ui/button";
+import TextWrapper from "#components-ui/text-wrapper";
 import {
   allDataToModify,
   getDataToModify,
-} from '#models/administrations/data-to-modify';
-import { Exception } from '#models/exceptions';
-import { logWarningInSentry } from '#utils/sentry';
+} from "#models/administrations/data-to-modify";
+import { Exception } from "#models/exceptions";
+import { logWarningInSentry } from "#utils/sentry";
 import {
   AppRouterProps,
   IParams,
-} from '#utils/server-side-helper/app/extract-params';
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+} from "#utils/server-side-helper/app/extract-params";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 // should not happen since we declared generateStaticParams
 const redirectFAQPageNotFound = (slug: string) => {
   logWarningInSentry(
     new Exception({
-      name: 'FAQPageNotFound',
+      name: "FAQPageNotFound",
       context: { slug },
     })
   );
@@ -37,12 +37,12 @@ export default async function FAQArticle({ params }: AppRouterProps) {
       <TextWrapper>
         <Breadcrumb
           links={[
-            { href: '/faq', label: 'Questions fréquentes' },
+            { href: "/faq", label: "Questions fréquentes" },
             {
-              href: '/faq/modifier',
-              label: 'Comment modifier ces informations',
+              href: "/faq/modifier",
+              label: "Comment modifier ces informations",
             },
-            { href: '', label: dataToModify.label },
+            { href: "", label: dataToModify.label },
           ]}
         />
         <h1>
@@ -52,11 +52,11 @@ export default async function FAQArticle({ params }: AppRouterProps) {
         <p>Ces informations proviennent de :</p>
         <ul>
           <li>
-            Source de la donnée :{' '}
+            Source de la donnée :{" "}
             <a href={dataToModify.datagouvLink}>{dataToModify.dataSource}</a>
           </li>
           <li>
-            Service responsable :{' '}
+            Service responsable :{" "}
             <a href={dataToModify.site}>{dataToModify.long}</a>.
           </li>
         </ul>
@@ -107,7 +107,7 @@ export const generateMetadata = async ({
   }
   return {
     title: dataToModify.label,
-    robots: 'index, follow',
+    robots: "index, follow",
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/faq/modifier/${dataToModify.slug}`,
     },

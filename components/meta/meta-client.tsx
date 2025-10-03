@@ -1,11 +1,11 @@
-import { NextSeo } from 'next-seo';
-import Head from 'next/head';
+import { NextSeo } from "next-seo";
+import Head from "next/head";
 import {
   OPENGRAPH_IMAGES,
   SHOULD_NOT_INDEX,
   SITE_DESCRIPTION,
   SITE_NAME,
-} from '.';
+} from ".";
 
 type IProps = {
   title: string;
@@ -16,7 +16,7 @@ type IProps = {
 
 const Meta: React.FC<IProps> = ({
   title = SITE_NAME,
-  description = '',
+  description = "",
   noIndex = false,
   canonical,
 }) => {
@@ -33,8 +33,8 @@ const Meta: React.FC<IProps> = ({
         canonical={canonical}
         openGraph={{
           ...(canonical ? { url: canonical } : {}),
-          locale: 'fr_FR',
-          type: 'website',
+          locale: "fr_FR",
+          type: "website",
           title: title,
           description: description ?? SITE_DESCRIPTION,
           images: OPENGRAPH_IMAGES,

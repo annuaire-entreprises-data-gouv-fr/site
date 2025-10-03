@@ -1,5 +1,5 @@
-import getSession from '#utils/server-side-helper/app/get-session';
-import { HeaderCore } from './header-core';
+import getSession from "#utils/server-side-helper/app/get-session";
+import { HeaderCore } from "./header-core";
 
 type IProps = {
   useLogo?: boolean;
@@ -20,7 +20,7 @@ export const HeaderAppRouter: React.FC<IProps> = async ({
   useAgentBanner = false,
   useReconnectBanner = true,
   plugin,
-  currentSearchTerm = '',
+  currentSearchTerm = "",
 }) => {
   const session = await getSession();
 

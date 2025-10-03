@@ -1,6 +1,6 @@
-import { Exception } from '#models/exceptions';
-import { extractSirenOrSiretSlugFromUrl, randomId } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
+import { Exception } from "#models/exceptions";
+import { extractSirenOrSiretSlugFromUrl, randomId } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
 
 type ISensitiveLogType = {
   date: string;
@@ -47,8 +47,8 @@ export const sensitiveRequestLogger = (
     const url = new URL(route);
 
     const resource_type = url.pathname
-      .replace(/\d{14}|\d{9}/, '')
-      .replace('//', '/');
+      .replace(/\d{14}|\d{9}/, "")
+      .replace("//", "/");
 
     const resource_id = extractSirenOrSiretSlugFromUrl(url.pathname);
 
@@ -68,7 +68,7 @@ export const sensitiveRequestLogger = (
 
       // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-url.html
       url: {
-        scheme: (url.protocol.match(/^(https?)/) || ['']).shift() ?? '',
+        scheme: (url.protocol.match(/^(https?)/) || [""]).shift() ?? "",
         domain: url.host,
         path: url.pathname,
         query: url.search,
@@ -82,8 +82,8 @@ export const sensitiveRequestLogger = (
   } catch (e) {
     logErrorInSentry(
       new Exception({
-        name: 'SensitiveRequestLoggerFailed',
-        message: 'Error while logging sensitive request',
+        name: "SensitiveRequestLoggerFailed",
+        message: "Error while logging sensitive request",
         cause: e,
         context: {
           details: route,

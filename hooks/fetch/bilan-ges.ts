@@ -1,10 +1,10 @@
-import { clientBilanGes } from '#clients/api-data-gouv/bilan-ges';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale } from '#models/core/types';
-import { FetchRessourceException } from '#models/exceptions';
-import { verifySiren } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { useFetchExternalData } from './use-fetch-data';
+import { clientBilanGes } from "#clients/api-data-gouv/bilan-ges";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IUniteLegale } from "#models/core/types";
+import { FetchRessourceException } from "#models/exceptions";
+import { verifySiren } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchBilanGes(uniteLegale: IUniteLegale, page: number = 1) {
   return useFetchExternalData(
@@ -16,7 +16,7 @@ export function useFetchBilanGes(uniteLegale: IUniteLegale, page: number = 1) {
           return;
         }
         const exception = new FetchRessourceException({
-          ressource: 'Bilan GES',
+          ressource: "Bilan GES",
           administration: EAdministration.ADEME,
           cause: e,
           context: {

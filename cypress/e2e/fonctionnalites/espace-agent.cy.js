@@ -1,5 +1,5 @@
 describe(
-  'Espace agent',
+  "Espace agent",
   {
     defaultCommandTimeout: 10000, // 10 sec
     pageLoadTimeout: 180000, // 3min because AgentConnect testing env is veeeery slow
@@ -9,31 +9,31 @@ describe(
     it("Page d'accueil", () => {
       cy.clearCookies();
       cy.visit(`/`);
-      cy.contains('Espace agent')
+      cy.contains("Espace agent")
         // The element is present twice (mobile and desktop menu).
         // The mobile one is hidden but appears first in the DOM,
         // so we need to force the click
         .click({ force: true });
-      cy.contains('button', 'ProConnect');
+      cy.contains("button", "ProConnect");
     });
 
-    it('Bouton agent connect sur les données protégées', () => {
-      cy.visit('/documents/487444697');
-      cy.contains('Réservé aux agents publics');
-      cy.contains('button', 'ProConnect');
+    it("Bouton agent connect sur les données protégées", () => {
+      cy.visit("/documents/487444697");
+      cy.contains("Réservé aux agents publics");
+      cy.contains("button", "ProConnect");
     });
 
-    it('API - Add user to group without authentication', () => {
+    it("API - Add user to group without authentication", () => {
       cy.request({
-        method: 'POST',
-        url: '/api/groups/1/add-user',
+        method: "POST",
+        url: "/api/groups/1/add-user",
         failOnStatusCode: false,
         body: {
-          email: 'user@example.com',
+          email: "user@example.com",
           roleId: 1,
         },
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }).then((response) => {
         expect(response.status).to.be.equal(401);

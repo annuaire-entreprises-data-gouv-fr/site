@@ -1,8 +1,8 @@
-import routes from '#clients/routes';
-import { IAssociationProtected } from '#models/espace-agent/association-protected';
-import { Siren } from '#utils/helpers';
-import clientAPIEntreprise from '../client';
-import { IAPIEntrepriseAssociation } from './types';
+import routes from "#clients/routes";
+import { IAssociationProtected } from "#models/espace-agent/association-protected";
+import { Siren } from "#utils/helpers";
+import clientAPIEntreprise from "../client";
+import { IAPIEntrepriseAssociation } from "./types";
 
 /**
  * GET association from API Entreprise

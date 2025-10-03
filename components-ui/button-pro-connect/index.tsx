@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { logConversionEvent } from '#utils/matomo';
-import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
-import { usePathname } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { logConversionEvent } from "#utils/matomo";
+import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 type IProps = {
   shouldRedirectToReferer?: boolean;
@@ -13,7 +13,7 @@ type IProps = {
 
 const ButtonProConnect: React.FC<IProps> = ({
   shouldRedirectToReferer = false,
-  event = 'BTN_DEFAULT',
+  event = "BTN_DEFAULT",
   noFootLink = false,
 }) => {
   const [referrer, setReferrer] = useState<string | null>(null);

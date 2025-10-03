@@ -1,5 +1,5 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import { PropsWithChildren } from 'react';
+import TextWrapper from "#components-ui/text-wrapper";
+import { PropsWithChildren } from "react";
 
 export const ParcoursAnswer: React.FC<PropsWithChildren<{}>> = ({
   children,
@@ -11,10 +11,10 @@ export const ParcoursAnswer: React.FC<PropsWithChildren<{}>> = ({
     <TextWrapper>
       <div
         style={{
-          background: '#efefef',
-          padding: '30px 20px',
-          margin: '10px',
-          borderRadius: '3px',
+          background: "#efefef",
+          padding: "30px 20px",
+          margin: "10px",
+          borderRadius: "3px",
         }}
       >
         {children}

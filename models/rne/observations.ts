@@ -1,15 +1,15 @@
 import {
   clientRNEImmatriculation,
   clientRNEImmatriculationFallback,
-} from '#clients/api-proxy/rne';
-import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations/EAdministration';
+} from "#clients/api-proxy/rne";
+import { HttpNotFound } from "#clients/exceptions";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { Siren, verifySiren } from '#utils/helpers';
-import { IObservationsWithMetadata } from './types';
+} from "#models/api-not-responding";
+import { Siren, verifySiren } from "#utils/helpers";
+import { IObservationsWithMetadata } from "./types";
 
 const fallback = async (siren: Siren) => {
   const { observations } = await clientRNEImmatriculationFallback(siren);

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { ChangeEventHandler } from 'react';
-import styles from './style.module.css';
+import { ChangeEventHandler } from "react";
+import styles from "./style.module.css";
 
 export type IProps = {
   values: {
@@ -28,23 +28,23 @@ const onKeyDown = (event: any, onclick?: Function) => {
 
 export const MultiChoice: React.FC<IProps> = ({
   values,
-  legend = '',
-  idPrefix = '',
-  name = '',
+  legend = "",
+  idPrefix = "",
+  name = "",
   required = false,
   large = false,
 }) => (
   <>
     {legend && (
       <legend>
-        <h2 style={{ fontSize: '1.2rem' }}>{legend}</h2>
+        <h2 style={{ fontSize: "1.2rem" }}>{legend}</h2>
       </legend>
     )}
 
     <div
-      className={styles['radio-group']}
+      className={styles["radio-group"]}
       style={{
-        justifyContent: large ? 'center' : 'flex-start',
+        justifyContent: large ? "center" : "flex-start",
       }}
     >
       {values.map(({ label, value, href, onClick, checked = false }, index) => (
@@ -85,9 +85,9 @@ export const MultiChoice: React.FC<IProps> = ({
 
 function computeStyle(large: boolean) {
   return {
-    fontWeight: large ? 'bold' : 'inherit',
-    fontSize: large ? '2rem' : '1rem',
-    lineHeight: large ? '3rem' : '1.5rem',
-    margin: large ? '15px 10px' : '5px',
+    fontWeight: large ? "bold" : "inherit",
+    fontSize: large ? "2rem" : "1rem",
+    lineHeight: large ? "3rem" : "1.5rem",
+    margin: large ? "15px 10px" : "5px",
   };
 }

@@ -1,5 +1,5 @@
-import { ExtendedExportCsvInput } from './export-csv';
-import styles from './styles.module.css';
+import { ExtendedExportCsvInput } from "./export-csv";
+import styles from "./styles.module.css";
 
 export const LocationTags = ({
   filters,
@@ -7,7 +7,7 @@ export const LocationTags = ({
 }: {
   filters: ExtendedExportCsvInput;
   handleClick: (location: {
-    type: 'cp' | 'dep' | 'reg' | 'insee';
+    type: "cp" | "dep" | "reg" | "insee";
     value: string;
     label: string;
   }) => void;

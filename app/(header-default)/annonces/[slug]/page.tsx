@@ -1,25 +1,25 @@
-import { DonneesPriveesSection } from '#components/donnees-privees-section';
-import Title from '#components/title-section';
-import { FICHE } from '#components/title-section/tabs';
+import { DonneesPriveesSection } from "#components/donnees-privees-section";
+import Title from "#components/title-section";
+import { FICHE } from "#components/title-section/tabs";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { estDiffusible } from '#models/core/diffusion';
-import { isAssociation } from '#models/core/types';
+} from "#models/authentication/user/rights";
+import { estDiffusible } from "#models/core/diffusion";
+import { isAssociation } from "#models/core/types";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
-} from '#utils/helpers';
-import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
+} from "#utils/helpers";
+import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
   AppRouterProps,
-} from '#utils/server-side-helper/app/extract-params';
-import getSession from '#utils/server-side-helper/app/get-session';
-import AnnoncesBodacc from 'app/(header-default)/annonces/[slug]/_components/bodacc';
-import AnnoncesJOAFESection from 'app/(header-default)/annonces/[slug]/_components/joafe';
-import { Metadata } from 'next';
-import { ObservationsRNE } from './_components/observations-rne';
+} from "#utils/server-side-helper/app/extract-params";
+import getSession from "#utils/server-side-helper/app/get-session";
+import AnnoncesBodacc from "app/(header-default)/annonces/[slug]/_components/bodacc";
+import AnnoncesJOAFESection from "app/(header-default)/annonces/[slug]/_components/joafe";
+import { Metadata } from "next";
+import { ObservationsRNE } from "./_components/observations-rne";
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -33,7 +33,7 @@ export const generateMetadata = async (
       uniteLegale
     )}`,
     description: uniteLegalePageDescription(uniteLegale),
-    robots: 'noindex',
+    robots: "noindex",
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/annonces/${uniteLegale.siren}`,
     },

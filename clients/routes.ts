@@ -1,13 +1,13 @@
 const routes = {
   espaceAgent: {
     documents: {
-      download: '/api/download/espace-agent/documents/',
-      inpiPdf: '/api/inpi-pdf',
+      download: "/api/download/espace-agent/documents/",
+      inpiPdf: "/api/inpi-pdf",
     },
   },
   ademe: {
     bilanGes:
-      'https://koumoul.com/data-fair/api/v1/datasets/9nd9avrbto3l14md-wkode4o/lines',
+      "https://koumoul.com/data-fair/api/v1/datasets/9nd9avrbto3l14md-wkode4o/lines",
   },
   apiEntreprise: {
     association: (siren: string) =>
@@ -57,139 +57,139 @@ const routes = {
         `/v3/gip_mds/unites_legales/${siren}/effectifs_annuels/${year}`,
     },
   },
-  ban: 'https://api-adresse.data.gouv.fr/search',
+  ban: "https://api-adresse.data.gouv.fr/search",
   bodacc: {
     ods: {
       metadata:
-        'https://bodacc-datadila.opendatasoft.com/api/datasets/1.0/annonces-commerciales',
+        "https://bodacc-datadila.opendatasoft.com/api/datasets/1.0/annonces-commerciales",
       search:
-        'https://bodacc-datadila.opendatasoft.com/api/records/1.0/search/?dataset=annonces-commerciales',
+        "https://bodacc-datadila.opendatasoft.com/api/records/1.0/search/?dataset=annonces-commerciales",
     },
     site: {
-      annonce: 'https://www.bodacc.fr/annonce/detail-annonce/',
+      annonce: "https://www.bodacc.fr/annonce/detail-annonce/",
       recherche:
-        'https://www.bodacc.fr/pages/annonces-commerciales/?sort=dateparution',
+        "https://www.bodacc.fr/pages/annonces-commerciales/?sort=dateparution",
       rechercheBySiren: (siren: string) =>
         `https://www.bodacc.fr/pages/annonces-commerciales/?q.registre=registre:${siren}`,
     },
   },
   datagouv: {
     alimConfiance:
-      'https://tabular-api.data.gouv.fr/api/resources/fdfabe62-a581-41a1-998f-73fc53da3398/data/',
-    ess: 'https://tabular-api.data.gouv.fr/api/resources/57bc99ca-0432-4b46-8fcc-e76a35c9efaf/data/',
-    dpo: 'https://tabular-api.data.gouv.fr/api/resources/c5d02b42-1008-4406-83f5-3a81c8b936a3/data/',
+      "https://tabular-api.data.gouv.fr/api/resources/fdfabe62-a581-41a1-998f-73fc53da3398/data/",
+    ess: "https://tabular-api.data.gouv.fr/api/resources/57bc99ca-0432-4b46-8fcc-e76a35c9efaf/data/",
+    dpo: "https://tabular-api.data.gouv.fr/api/resources/c5d02b42-1008-4406-83f5-3a81c8b936a3/data/",
   },
   dataSubvention: {
     pageBySirenOrIdRna: (sirenOrIdRna: string) =>
       `https://app.datasubvention.beta.gouv.fr/association/${sirenOrIdRna}`,
   },
   apiDataSubvention: {
-    documentation: 'https://api.datasubvention.beta.gouv.fr/docs',
+    documentation: "https://api.datasubvention.beta.gouv.fr/docs",
     grants: (siren: string) =>
       `https://api.datasubvention.beta.gouv.fr/association/${siren}/grants`,
   },
   conventionsCollectives: {
-    site: 'https://code.travail.gouv.fr/outils/convention-collective',
-    details: 'https://code.travail.gouv.fr/convention-collective/',
+    site: "https://code.travail.gouv.fr/outils/convention-collective",
+    details: "https://code.travail.gouv.fr/convention-collective/",
   },
   donneesFinancieres: {
     ods: {
       metadata:
-        'https://data.economie.gouv.fr/api/datasets/1.0/ratios_inpi_bce/',
+        "https://data.economie.gouv.fr/api/datasets/1.0/ratios_inpi_bce/",
       search:
-        'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
+        "https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce",
     },
   },
   dgefp: {
     metadata:
-      'https://dgefp.opendatasoft.com/api/datasets/1.0/liste-publique-des-of-v2',
+      "https://dgefp.opendatasoft.com/api/datasets/1.0/liste-publique-des-of-v2",
     search:
-      'https://dgefp.opendatasoft.com/api/records/1.0/search/?dataset=liste-publique-des-of-v2',
+      "https://dgefp.opendatasoft.com/api/records/1.0/search/?dataset=liste-publique-des-of-v2",
   },
   educationNationale: {
     metadata:
-      'https://data.education.gouv.fr/api/datasets/1.0/fr-en-annuaire-education',
+      "https://data.education.gouv.fr/api/datasets/1.0/fr-en-annuaire-education",
     search:
-      'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education',
-    site: 'https://www.education.gouv.fr/annuaire',
+      "https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education",
+    site: "https://www.education.gouv.fr/annuaire",
   },
   geo: {
-    communes: 'https://geo.api.gouv.fr/communes',
-    departements: 'https://geo.api.gouv.fr/departements',
-    regions: 'https://geo.api.gouv.fr/regions',
-    epcis: 'https://geo.api.gouv.fr/epcis',
+    communes: "https://geo.api.gouv.fr/communes",
+    departements: "https://geo.api.gouv.fr/departements",
+    regions: "https://geo.api.gouv.fr/regions",
+    epcis: "https://geo.api.gouv.fr/epcis",
   },
   journalOfficielAssociations: {
     ods: {
       metadata:
-        'https://journal-officiel-datadila.opendatasoft.com/api/datasets/1.0/jo_associations',
+        "https://journal-officiel-datadila.opendatasoft.com/api/datasets/1.0/jo_associations",
       search:
-        'https://journal-officiel-datadila.opendatasoft.com/api/records/1.0/search/?dataset=jo_associations',
+        "https://journal-officiel-datadila.opendatasoft.com/api/records/1.0/search/?dataset=jo_associations",
     },
     site: {
-      dca: 'https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce',
+      dca: "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce",
       justificatif:
-        'https://www.journal-officiel.gouv.fr/document/associations_b/',
+        "https://www.journal-officiel.gouv.fr/document/associations_b/",
       recherche:
-        'https://www.journal-officiel.gouv.fr/pages/associations-recherche',
+        "https://www.journal-officiel.gouv.fr/pages/associations-recherche",
     },
   },
   annuaireServicePublic: {
     ods: {
       metadata:
-        'https://api-lannuaire.service-public.fr/api/explore/v2.1/catalog/datasets/api-lannuaire-administration/',
+        "https://api-lannuaire.service-public.fr/api/explore/v2.1/catalog/datasets/api-lannuaire-administration/",
       search:
-        'https://api-lannuaire.service-public.fr/api/explore/v2.1/catalog/datasets/api-lannuaire-administration/records',
+        "https://api-lannuaire.service-public.fr/api/explore/v2.1/catalog/datasets/api-lannuaire-administration/records",
     },
   },
   franceConnect: {
-    authorization: '/api/v1/authorize',
-    token: '/api/v1/token',
-    userInfo: '/api/v1/userinfo',
-    logout: '/api/v1/logout',
+    authorization: "/api/v1/authorize",
+    token: "/api/v1/token",
+    userInfo: "/api/v1/userinfo",
+    logout: "/api/v1/logout",
   },
   egapro: {
-    index: 'https://egapro.travail.gouv.fr/api/search',
+    index: "https://egapro.travail.gouv.fr/api/search",
     representation:
-      'https://egapro.travail.gouv.fr/api/representation-equilibree/search',
-    site: 'https://egapro.travail.gouv.fr',
+      "https://egapro.travail.gouv.fr/api/representation-equilibree/search",
+    site: "https://egapro.travail.gouv.fr",
   },
   certifications: {
     rge: {
-      api: 'https://data.ademe.fr/data-fair/api/v1/datasets/liste-des-entreprises-rge-2/lines/',
-      site: 'https://france-renov.gouv.fr/annuaire-rge',
+      api: "https://data.ademe.fr/data-fair/api/v1/datasets/liste-des-entreprises-rge-2/lines/",
+      site: "https://france-renov.gouv.fr/annuaire-rge",
     },
     bio: {
-      site: 'https://annuaire.agencebio.org/',
-      entreprise: 'https://annuaire.agencebio.org/fiche/',
-      api: 'https://opendata.agencebio.org/api/gouv/operateurs/',
+      site: "https://annuaire.agencebio.org/",
+      entreprise: "https://annuaire.agencebio.org/fiche/",
+      api: "https://opendata.agencebio.org/api/gouv/operateurs/",
     },
     entrepreneurSpectacles: {
       ods: {
         metadata:
-          'https://data.culture.gouv.fr/api/datasets/1.0/declarations-des-entrepreneurs-de-spectacles-vivants',
+          "https://data.culture.gouv.fr/api/datasets/1.0/declarations-des-entrepreneurs-de-spectacles-vivants",
         search:
-          'https://data.culture.gouv.fr/api/records/1.0/search/?dataset=declarations-des-entrepreneurs-de-spectacles-vivants',
+          "https://data.culture.gouv.fr/api/records/1.0/search/?dataset=declarations-des-entrepreneurs-de-spectacles-vivants",
       },
     },
     entrepriseInclusive: {
-      site: 'https://lemarche.inclusion.beta.gouv.fr/prestataires/',
+      site: "https://lemarche.inclusion.beta.gouv.fr/prestataires/",
       api: {
         getBySiren: (siren: string) =>
           `https://lemarche.inclusion.beta.gouv.fr/api/siae/siren/${siren}`,
-        metadata: 'https://lemarche.inclusion.beta.gouv.fr/api/siae/kinds',
+        metadata: "https://lemarche.inclusion.beta.gouv.fr/api/siae/kinds",
       },
     },
   },
   inpi: {
     api: {
       rne: {
-        login: 'https://registre-national-entreprises.inpi.fr/api/sso/login',
+        login: "https://registre-national-entreprises.inpi.fr/api/sso/login",
         documents: {
-          list: 'https://registre-national-entreprises.inpi.fr/api/companies/',
+          list: "https://registre-national-entreprises.inpi.fr/api/companies/",
           download: {
-            actes: 'https://registre-national-entreprises.inpi.fr/api/actes/',
-            bilans: 'https://registre-national-entreprises.inpi.fr/api/bilans/',
+            actes: "https://registre-national-entreprises.inpi.fr/api/actes/",
+            bilans: "https://registre-national-entreprises.inpi.fr/api/bilans/",
           },
         },
       },
@@ -215,48 +215,48 @@ const routes = {
   },
   rne: {
     portail: {
-      pdf: 'https://data.inpi.fr/export/companies',
-      entreprise: 'https://data.inpi.fr/entreprises/',
-      account: 'https://data.inpi.fr/register',
+      pdf: "https://data.inpi.fr/export/companies",
+      entreprise: "https://data.inpi.fr/entreprises/",
+      account: "https://data.inpi.fr/register",
     },
   },
   infogreffe: {
     portail: {
-      home: 'https://www.infogreffe.fr',
-      entreprise: 'https://www.infogreffe.fr/entreprise/',
+      home: "https://www.infogreffe.fr",
+      entreprise: "https://www.infogreffe.fr/entreprise/",
     },
   },
   sireneInsee: {
-    auth: 'https://auth.insee.net/auth/realms/apim-gravitee/protocol/openid-connect/token',
-    avis: 'https://api-avis-situation-sirene.insee.fr/identification/pdf/',
+    auth: "https://auth.insee.net/auth/realms/apim-gravitee/protocol/openid-connect/token",
+    avis: "https://api-avis-situation-sirene.insee.fr/identification/pdf/",
     getBySiren: (siren: string) =>
       `https://api.insee.fr/api-sirene/prive/3.11/siren/${siren}`,
     getBySiret: (siret: string) =>
       `https://api.insee.fr/api-sirene/prive/3.11/siret/${siret}`,
-    listEtablissements: 'https://api.insee.fr/api-sirene/prive/3.11/siret',
+    listEtablissements: "https://api.insee.fr/api-sirene/prive/3.11/siret",
   },
   rechercheEntreprise: {
-    rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
+    rechercheUniteLegale: "https://recherche-entreprises.api.gouv.fr/search",
     idcc: {
-      metadata: 'https://recherche-entreprises.api.gouv.fr/idcc/metadata',
+      metadata: "https://recherche-entreprises.api.gouv.fr/idcc/metadata",
       getBySiren: (siren: string) =>
         `https://recherche-entreprises.api.gouv.fr/idcc/${siren}`,
     },
     lastModified:
-      'https://recherche-entreprises.api.gouv.fr/sources/last_modified',
+      "https://recherche-entreprises.api.gouv.fr/sources/last_modified",
   },
   tooling: {
-    grist: 'https://grist.numerique.gouv.fr/api/docs/',
+    grist: "https://grist.numerique.gouv.fr/api/docs/",
     matomo: {
       report: {
         copyPasteEvents:
-          'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=1&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
+          "https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=1&module=API&showColumns=label,nb_events&filter_limit=9999&date=",
         npsEvents:
-          'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=1&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
+          "https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=1&module=API&showColumns=label,nb_events&filter_limit=9999&date=",
         bulkRequest:
-          'https://stats.data.gouv.fr/index.php?module=API&method=API.getBulkRequest&format=json',
+          "https://stats.data.gouv.fr/index.php?module=API&method=API.getBulkRequest&format=json",
       },
-      tracker: 'https://stats.data.gouv.fr/piwik.php',
+      tracker: "https://stats.data.gouv.fr/piwik.php",
     },
     monitoring: {
       getBySlug: (slug: string) =>
@@ -265,7 +265,7 @@ const routes = {
   },
   datapass: {
     auth: {
-      token: '/oauth/token',
+      token: "/oauth/token",
     },
     demandes: {
       getById: (id: number) => `/demandes/${id}`,
@@ -273,14 +273,14 @@ const routes = {
   },
   rolesData: {
     auth: {
-      token: '/auth/token',
+      token: "/auth/token",
     },
     users: {
       getByEmail: (email: string) =>
         `/users/search?email=${encodeURIComponent(email)}`,
     },
     groups: {
-      getGroups: '/groups/',
+      getGroups: "/groups/",
       getGroupsByEmail: (userEmail: string, userSub: string) =>
         `/groups/search?user_email=${encodeURIComponent(
           userEmail
@@ -308,7 +308,7 @@ const routes = {
         `/groups/${groupId}/users/${userId}?acting_user_sub=${actingUserSub}`,
     },
     roles: {
-      get: '/roles',
+      get: "/roles",
     },
   },
 };

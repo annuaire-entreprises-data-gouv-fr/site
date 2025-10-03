@@ -1,8 +1,8 @@
-import routes from '#clients/routes';
-import { IBeneficiairesEffectif } from '#models/espace-agent/beneficiaires';
-import { UseCase } from '#models/use-cases';
-import { Siren, formatNameFull } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import { IBeneficiairesEffectif } from "#models/espace-agent/beneficiaires";
+import { UseCase } from "#models/use-cases";
+import { Siren, formatNameFull } from "#utils/helpers";
+import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
   Array<
@@ -17,7 +17,7 @@ export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
       };
       nationalite: string;
       pays_residence: string;
-      modalites: IBeneficiairesEffectif['modalites'];
+      modalites: IBeneficiairesEffectif["modalites"];
     }>
   >
 >;
@@ -41,7 +41,7 @@ const mapToDomainObject = (
   return response.data.map(({ data: beneficiaire }) => {
     return {
       nom: formatNameFull(beneficiaire.nom, beneficiaire.nom_usage),
-      prenoms: (beneficiaire.prenoms || '').join(', '),
+      prenoms: (beneficiaire.prenoms || "").join(", "),
       nationalite: beneficiaire.nationalite,
       moisNaissance: beneficiaire.date_naissance.mois,
       anneeNaissance: beneficiaire.date_naissance.annee,

@@ -1,7 +1,7 @@
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '#models/api-not-responding';
+} from "#models/api-not-responding";
 
 export function shouldUseInsee<T extends {}>(
   rechercheEntrepriseResponse: T | IAPINotRespondingError,
@@ -9,7 +9,7 @@ export function shouldUseInsee<T extends {}>(
   isEI: (r: T) => boolean,
   hasInconsistencies?: (r: T) => boolean
 ) {
-  if (process.env.INSEE_ENABLED === 'disabled') {
+  if (process.env.INSEE_ENABLED === "disabled") {
     return false;
   }
 

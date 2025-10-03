@@ -1,13 +1,13 @@
-import AgentWallAssociationProtected from '#components/espace-agent-components/agent-wall/association';
-import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
+import AgentWallAssociationProtected from "#components/espace-agent-components/agent-wall/association";
+import AgentWallDocuments from "#components/espace-agent-components/agent-wall/document";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale, isAssociation } from '#models/core/types';
-import { AgentActesAssociation } from './associations';
-import { AgentActesRNE } from './rne';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale, isAssociation } from "#models/core/types";
+import { AgentActesAssociation } from "./associations";
+import { AgentActesRNE } from "./rne";
 
 const ActesSection: React.FC<{
   uniteLegale: IUniteLegale;

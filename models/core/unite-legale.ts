@@ -1,44 +1,44 @@
-import { clientUniteLegaleIG } from '#clients/api-proxy/greffe';
+import { clientUniteLegaleIG } from "#clients/api-proxy/greffe";
 import {
   HttpBadRequestError,
   HttpForbiddenError,
   HttpNotFound,
   HttpServerError,
-} from '#clients/exceptions';
-import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
-import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
-import { getIdccTitle } from '#models/conventions-collectives';
-import { createEtablissementsList } from '#models/core/etablissements-list';
-import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
-import { isProtectedSiren } from '#models/protected-siren';
-import { Siren, isLuhnValid, verifySiren } from '#utils/helpers';
+} from "#clients/exceptions";
+import { clientUniteLegaleRechercheEntreprise } from "#clients/recherche-entreprise/siren";
+import { clientUniteLegaleInsee } from "#clients/sirene-insee/siren";
+import { getIdccTitle } from "#models/conventions-collectives";
+import { createEtablissementsList } from "#models/core/etablissements-list";
+import { IETATADMINSTRATIF, estActif } from "#models/core/etat-administratif";
+import { isProtectedSiren } from "#models/protected-siren";
+import { Siren, isLuhnValid, verifySiren } from "#utils/helpers";
 import {
   logFatalErrorInSentry,
   logInfoInSentry,
   logWarningInSentry,
-} from '#utils/sentry';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { shouldUseInsee } from '.';
-import { EAdministration } from '../administrations/EAdministration';
+} from "#utils/sentry";
+import getSession from "#utils/server-side-helper/app/get-session";
+import { shouldUseInsee } from ".";
+import { EAdministration } from "../administrations/EAdministration";
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
-} from '../api-not-responding';
-import { FetchRessourceException, Information } from '../exceptions';
-import { getTvaUniteLegale } from '../tva';
+} from "../api-not-responding";
+import { FetchRessourceException, Information } from "../exceptions";
+import { getTvaUniteLegale } from "../tva";
 import {
   ISTATUTDIFFUSION,
   anonymiseUniteLegale,
   estDiffusible,
-} from './diffusion';
+} from "./diffusion";
 import {
   IUniteLegale,
   SirenNotFoundError,
   createDefaultUniteLegale,
   isEntrepreneurIndividuel,
-} from './types';
+} from "./types";
 
 /**
  * PUBLIC METHODS
@@ -142,7 +142,7 @@ class UniteLegaleBuilder {
         return this.fallBackOnIG();
       }
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-        throw new HttpServerError('Recherche failed, return 500');
+        throw new HttpServerError("Recherche failed, return 500");
       }
       return uniteLegaleRechercheEntreprise;
     }
@@ -180,7 +180,7 @@ class UniteLegaleBuilder {
       if (isAPI404(uniteLegaleRechercheEntreprise)) {
         return this.fallBackOnIG();
       } else if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-        throw new HttpServerError('Both API failed');
+        throw new HttpServerError("Both API failed");
       } else {
         return uniteLegaleRechercheEntreprise;
       }
@@ -194,9 +194,9 @@ class UniteLegaleBuilder {
       ) {
         logWarningInSentry(
           new FetchRessourceException({
-            ressource: 'UniteLegaleRecherche',
+            ressource: "UniteLegaleRecherche",
             administration: EAdministration.DINUM,
-            message: 'Fail to find siren in recherche API',
+            message: "Fail to find siren in recherche API",
             context: {
               siren: this._siren,
             },
@@ -246,7 +246,7 @@ class UniteLegaleBuilder {
     } else {
       logInfoInSentry(
         new Information({
-          name: 'Fallback on IG',
+          name: "Fallback on IG",
           message: `Not found in RNE or Sirene, but found in IG`,
           context: {
             siren: this._siren,
@@ -292,7 +292,7 @@ export const fetchUniteLegaleFromRechercheEntreprise = async (
     logFatalErrorInSentry(
       new FetchRessourceException({
         cause: e,
-        ressource: 'UniteLegale',
+        ressource: "UniteLegale",
         administration: EAdministration.DINUM,
         context: {
           siren,
@@ -318,7 +318,7 @@ const fetchUniteLegaleFromInsee = async (
     if (e instanceof HttpForbiddenError) {
       const uniteLegale = createDefaultUniteLegale(siren);
       uniteLegale.statutDiffusion = ISTATUTDIFFUSION.NON_DIFF_STRICT;
-      uniteLegale.nomComplet = 'Entreprise non-diffusible';
+      uniteLegale.nomComplet = "Entreprise non-diffusible";
 
       return uniteLegale;
     }
@@ -332,10 +332,10 @@ const fetchUniteLegaleFromInsee = async (
 
     logWarningInSentry(
       new FetchRessourceException({
-        ressource: 'UniteLegaleInsee',
+        ressource: "UniteLegaleInsee",
         administration: EAdministration.INSEE,
         message: `Fail to fetch from INSEE ${
-          useFallback ? 'fallback' : ''
+          useFallback ? "fallback" : ""
         } API`,
         cause: e,
         context: {
@@ -364,7 +364,7 @@ const fetchUniteLegaleFromIG = async (
 
     logWarningInSentry(
       new FetchRessourceException({
-        ressource: 'UniteLegaleGreffe',
+        ressource: "UniteLegaleGreffe",
         administration: EAdministration.INFOGREFFE,
         message: `Fail to fetch from IG API`,
         cause: e,

@@ -1,25 +1,25 @@
-import routes from '#clients/routes';
-import ButtonLink from '#components-ui/button';
-import FAQLink from '#components-ui/faq-link';
-import { Tag } from '#components-ui/tag';
-import { DataSection } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { ISession } from '#models/authentication/user/session';
-import { IRGECertification } from '#models/certifications/rge';
-import { IUniteLegale } from '#models/core/types';
-import { pluralize } from '#utils/helpers';
-import React from 'react';
+import routes from "#clients/routes";
+import ButtonLink from "#components-ui/button";
+import FAQLink from "#components-ui/faq-link";
+import { Tag } from "#components-ui/tag";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { ISession } from "#models/authentication/user/session";
+import { IRGECertification } from "#models/certifications/rge";
+import { IUniteLegale } from "#models/core/types";
+import { pluralize } from "#utils/helpers";
+import React from "react";
 
 const renovLink = (slug: string) => {
   try {
     return `${routes.certifications.rge.site}/identifier?company=${slug}&date=${
-      new Date().toISOString().split('T')[0]
+      new Date().toISOString().split("T")[0]
     }`;
   } catch {
-    return '';
+    return "";
   }
 };
 
@@ -38,7 +38,7 @@ export const CertificationsRGESection: React.FC<{
         <p>
           Nous n’avons pas retrouvé les certifications RGE de cette entreprise
           dans l’annuaire des professionnels qualifiés. En revanche, vous pouvez
-          peut-être les retrouver grâce au{' '}
+          peut-être les retrouver grâce au{" "}
           <a href={routes.certifications.rge.site}>
             moteur de recherche France Renov Officiel
           </a>
@@ -57,19 +57,19 @@ export const CertificationsRGESection: React.FC<{
         } = certificationsRGE.companyInfo;
 
         const data = [
-          ['Dénomination', uniteLegale.nomComplet],
-          ['Adresse', adresse],
+          ["Dénomination", uniteLegale.nomComplet],
+          ["Adresse", adresse],
           [
-            'Téléphone',
+            "Téléphone",
             telephone && <a href={`tel:${telephone}`}>{telephone}</a>,
           ],
           [
-            'Site internet',
+            "Site internet",
             siteInternet && <a href={siteInternet}>{siteInternet}</a>,
           ],
-          ['Email', email && <a href={`mailto:${email}`}>{email}</a>],
+          ["Email", email && <a href={`mailto:${email}`}>{email}</a>],
           [
-            'Travaille avec',
+            "Travaille avec",
             <div>
               <Tag color="info">Professionnels</Tag>
               {workingWithIndividual && <Tag color="info">Particuliers</Tag>}
@@ -82,7 +82,7 @@ export const CertificationsRGESection: React.FC<{
 
         return (
           <>
-            Cette structure est une entreprise{' '}
+            Cette structure est une entreprise{" "}
             <FAQLink
               tooltipLabel="certifiée RGE - Reconnu Garant de l’Environnement"
               to="/faq/reconnu-garant-environnement"
@@ -94,7 +94,7 @@ export const CertificationsRGESection: React.FC<{
             .
             {linkFranceRenov && (
               <p>
-                Vous pouvez consulter{' '}
+                Vous pouvez consulter{" "}
                 <a
                   href={linkFranceRenov}
                   target="_blank"
@@ -106,13 +106,13 @@ export const CertificationsRGESection: React.FC<{
             )}
             <TwoColumnTable body={data} />
             <p>
-              Cette structure possède{' '}
-              <strong>{certificationsRGE.certifications.length}</strong>{' '}
+              Cette structure possède{" "}
+              <strong>{certificationsRGE.certifications.length}</strong>{" "}
               certificat
               {plural}&nbsp;:
             </p>
             <FullTable
-              head={['Certificat', 'Domaine(s) certifié(s)', 'Lien']}
+              head={["Certificat", "Domaine(s) certifié(s)", "Lien"]}
               body={certificationsRGE.certifications.map((certification) => [
                 <div className="font-small layout-left">
                   {certification.logoPath && (

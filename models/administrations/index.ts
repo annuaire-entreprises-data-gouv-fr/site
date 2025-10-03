@@ -1,9 +1,9 @@
-import { EAdministration } from './EAdministration';
+import { EAdministration } from "./EAdministration";
 import {
   IAPIMonitorMetaData,
   IAdministrationMetaData,
   IAdministrationsMetaData,
-} from './types';
+} from "./types";
 
 /**
  * Validate administration meta data as we load it (during build)
@@ -15,12 +15,12 @@ const validateMetaData = (
   administrationEnum: EAdministration
 ) => {
   const logoTypeIsValid =
-    typeof a.logoType === 'undefined' ||
-    a.logoType === 'portrait' ||
-    a.logoType === 'paysage';
+    typeof a.logoType === "undefined" ||
+    a.logoType === "portrait" ||
+    a.logoType === "paysage";
 
   if (!a.site || !a.long || !a.slug || !logoTypeIsValid) {
-    throw new Error('Invalid administrationMetadata : ' + a.slug);
+    throw new Error("Invalid administrationMetadata : " + a.slug);
   }
 
   return {
@@ -43,7 +43,9 @@ const loadMetadata = (): IAdministrationsMetaData => {
   const metadata = {} as { [k: string]: IAdministrationMetaData };
 
   Object.values(EAdministration).forEach((administrationEnum) => {
-    const data = require(`../../data/administrations/${administrationEnum.toString()}.yml`);
+    const data = require(
+      `../../data/administrations/${administrationEnum.toString()}.yml`
+    );
 
     metadata[administrationEnum] = validateMetaData(data, administrationEnum);
   });

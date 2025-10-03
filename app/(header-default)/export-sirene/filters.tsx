@@ -1,21 +1,21 @@
-import DualRangeSlider from '#components-ui/dual-range-slider';
-import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
-import { MultiSelect } from '#components-ui/select/multi-select';
-import constants from '#models/constants';
-import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
-import { categoriesJuridiquesNiveau3 } from '#utils/helpers/formatting/metadata/categories-juridiques';
-import { categoriesJuridiquesNiveau1 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-1';
-import { categoriesJuridiquesNiveau2 } from '#utils/helpers/formatting/metadata/categories-juridiques-niveau-2';
-import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
-import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
-import { Dispatch, SetStateAction } from 'react';
-import { getEffectifLabel } from './constants';
-import { ExtendedExportCsvInput } from './export-csv';
-import { LocationFilter } from './location-filter';
-import LocationTags from './location-tags';
-import SiretFilter from './siret-filter';
-import styles from './styles.module.css';
+import DualRangeSlider from "#components-ui/dual-range-slider";
+import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
+import { MultiSelect } from "#components-ui/select/multi-select";
+import constants from "#models/constants";
+import { categoriesEntreprisesOptions } from "#utils/helpers/formatting/categories-entreprise";
+import { categoriesJuridiquesNiveau3 } from "#utils/helpers/formatting/metadata/categories-juridiques";
+import { categoriesJuridiquesNiveau1 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-1";
+import { categoriesJuridiquesNiveau2 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
+import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
+import { codesSectionNAF } from "#utils/helpers/formatting/metadata/codes-section-NAF";
+import { Dispatch, SetStateAction } from "react";
+import { getEffectifLabel } from "./constants";
+import { ExtendedExportCsvInput } from "./export-csv";
+import { LocationFilter } from "./location-filter";
+import LocationTags from "./location-tags";
+import SiretFilter from "./siret-filter";
+import styles from "./styles.module.css";
 
 export const selectedEffectifLabel = (filters: ExtendedExportCsvInput) => {
   if (filters.headcountEnabled) {
@@ -25,7 +25,7 @@ export const selectedEffectifLabel = (filters: ExtendedExportCsvInput) => {
           filters.headcount.min
         )} jusqu'à ${getEffectifLabel(filters.headcount.max)} inclus`;
   }
-  return 'Tout, y compris les effectifs non renseignés';
+  return "Tout, y compris les effectifs non renseignés";
 };
 
 /**
@@ -50,7 +50,7 @@ const getLegalCategoriesNiveau1 = () =>
     label: `${categorie} - ${categoriesJuridiquesNiveau1[categorie]}`,
   }));
 
-const todayString = new Date().toISOString().split('T')[0];
+const todayString = new Date().toISOString().split("T")[0];
 
 export default function Filters({
   setFilters,
@@ -59,7 +59,7 @@ export default function Filters({
   setFilters: Dispatch<SetStateAction<ExtendedExportCsvInput>>;
   filters: ExtendedExportCsvInput;
 }) {
-  const toggleCategories = (value: 'PME' | 'ETI' | 'GE') => {
+  const toggleCategories = (value: "PME" | "ETI" | "GE") => {
     setFilters((prev) => ({
       ...prev,
       categories: prev.categories.includes(value)
@@ -86,11 +86,11 @@ export default function Filters({
                 name="activity"
                 id="activity-1"
                 value="all"
-                checked={filters.activity === 'all'}
+                checked={filters.activity === "all"}
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
-                    activity: e.target.value as 'all' | 'active' | 'ceased',
+                    activity: e.target.value as "all" | "active" | "ceased",
                   }))
                 }
               />
@@ -104,11 +104,11 @@ export default function Filters({
                 name="activity"
                 id="activity-2"
                 value="active"
-                checked={filters.activity === 'active'}
+                checked={filters.activity === "active"}
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
-                    activity: e.target.value as 'all' | 'active' | 'ceased',
+                    activity: e.target.value as "all" | "active" | "ceased",
                   }))
                 }
               />
@@ -122,11 +122,11 @@ export default function Filters({
                 name="activity"
                 id="activity-3"
                 value="ceased"
-                checked={filters.activity === 'ceased'}
+                checked={filters.activity === "ceased"}
                 onChange={(e) =>
                   setFilters((prev) => ({
                     ...prev,
-                    activity: e.target.value as 'all' | 'active' | 'ceased',
+                    activity: e.target.value as "all" | "active" | "ceased",
                   }))
                 }
               />
@@ -140,11 +140,11 @@ export default function Filters({
               type="checkbox"
               id="legalUnit"
               name="legalUnit"
-              checked={filters.legalUnit === 'hq'}
+              checked={filters.legalUnit === "hq"}
               onChange={(e) =>
                 setFilters((prev) => ({
                   ...prev,
-                  legalUnit: e.target.checked ? 'hq' : 'all',
+                  legalUnit: e.target.checked ? "hq" : "all",
                 }))
               }
               aria-describedby="checkboxes-1-messages"
@@ -209,7 +209,7 @@ export default function Filters({
                 style={{
                   color: filters.headcountEnabled
                     ? constants.colors.frBlue
-                    : '#e5e5e5',
+                    : "#e5e5e5",
                 }}
               >
                 {getEffectifLabel(0)}
@@ -218,7 +218,7 @@ export default function Filters({
                 style={{
                   color: filters.headcountEnabled
                     ? constants.colors.frBlue
-                    : '#e5e5e5',
+                    : "#e5e5e5",
                 }}
               >
                 {getEffectifLabel(14)}
@@ -297,10 +297,10 @@ export default function Filters({
         <section>
           <h2>
             <Icon color={constants.colors.frBlue} slug="mapPinFill">
-              Filtrer par{' '}
+              Filtrer par{" "}
               <FAQLink tooltipLabel="localisation">
                 <div>
-                  En savoir plus sur le code officiel géographique sur{' '}
+                  En savoir plus sur le code officiel géographique sur{" "}
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -316,7 +316,7 @@ export default function Filters({
             <div className={styles.filterColumn}>
               <LocationFilter
                 onSelect={(
-                  type: 'cp' | 'dep' | 'reg' | 'insee',
+                  type: "cp" | "dep" | "reg" | "insee",
                   value: string,
                   label: string
                 ) => {
@@ -356,10 +356,10 @@ export default function Filters({
         <section className={styles.formSection}>
           <h2>
             <Icon color={constants.colors.frBlue} slug="buildingFill">
-              Filtrer par{' '}
+              Filtrer par{" "}
               <FAQLink tooltipLabel="activité économique">
                 <div>
-                  En savoir plus sur les codes NAF/APE sur{' '}
+                  En savoir plus sur les codes NAF/APE sur{" "}
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -429,10 +429,10 @@ export default function Filters({
         <section className={styles.formSection}>
           <h2>
             <Icon color={constants.colors.frBlue} slug="scaleFill">
-              Filtrer par{' '}
+              Filtrer par{" "}
               <FAQLink tooltipLabel="catégorie juridique">
                 <div>
-                  En savoir plus sur les catégories juridique sur{' '}
+                  En savoir plus sur les catégories juridique sur{" "}
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -522,10 +522,10 @@ export default function Filters({
           <div className={styles.inputContainer}>
             <div>
               <h3 style={{ marginTop: 0 }}>
-                Appartenance au{' '}
+                Appartenance au{" "}
                 <FAQLink tooltipLabel="champ de l‘économie sociale et solidaire">
                   <div>
-                    Pour plus d‘informations, consultez la{' '}
+                    Pour plus d‘informations, consultez la{" "}
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
@@ -620,10 +620,10 @@ export default function Filters({
 
             <div>
               <h3 style={{ marginTop: 0 }}>
-                Appartenance au{' '}
+                Appartenance au{" "}
                 <FAQLink tooltipLabel="champ des sociétés à mission">
                   <div>
-                    Pour plus d‘informations, consultez la{' '}
+                    Pour plus d‘informations, consultez la{" "}
                     <a
                       target="_blank"
                       rel="noopener noreferrer"

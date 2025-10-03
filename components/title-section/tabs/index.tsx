@@ -1,34 +1,34 @@
-import { PrintNever } from '#components-ui/print-visibility';
+import { PrintNever } from "#components-ui/print-visibility";
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
-} from '#components/badges-section/labels-and-certificates';
+} from "#components/badges-section/labels-and-certificates";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
 import {
   IUniteLegale,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
   isServicePublic,
-} from '#models/core/types';
-import styles from './styles.module.css';
-import TabLink from './tab-link';
+} from "#models/core/types";
+import styles from "./styles.module.css";
+import TabLink from "./tab-link";
 
 export enum FICHE {
-  INFORMATION = 'résumé',
-  DOCUMENTS = 'documents',
-  ACTES = 'actes & statuts',
-  ANNONCES = 'annonces',
-  FINANCES = 'finances',
-  CERTIFICATS = 'Labels ou certifications',
-  COMPTES = 'bilans & comptes',
-  DIRIGEANTS = 'dirigeants',
-  DIVERS = 'conventions collectives',
-  ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
-  ETABLISSEMENT = 'fiche établissement',
+  INFORMATION = "résumé",
+  DOCUMENTS = "documents",
+  ACTES = "actes & statuts",
+  ANNONCES = "annonces",
+  FINANCES = "finances",
+  CERTIFICATS = "Labels ou certifications",
+  COMPTES = "bilans & comptes",
+  DIRIGEANTS = "dirigeants",
+  DIVERS = "conventions collectives",
+  ETABLISSEMENTS_SCOLAIRES = "établissements scolaires",
+  ETABLISSEMENT = "fiche établissement",
 }
 
 const getUniteLegaleTabs = (
@@ -48,8 +48,8 @@ const getUniteLegaleTabs = (
       path: `/entreprise/${uniteLegale.chemin}`,
       noFollow: false,
       shouldDisplay: true,
-      width: '80px',
-      pathPrefix: '',
+      width: "80px",
+      pathPrefix: "",
     },
     {
       ficheType: FICHE.DIRIGEANTS,
@@ -57,65 +57,65 @@ const getUniteLegaleTabs = (
       noFollow: false,
       shouldDisplay: true,
       ...(isCollectiviteTerritoriale(uniteLegale)
-        ? { label: 'Élus & organigramme', width: '120px' }
+        ? { label: "Élus & organigramme", width: "120px" }
         : isServicePublic(uniteLegale)
-        ? { label: 'Responsables & organigramme', width: '130px' }
-        : hasRights(session, ApplicationRights.liensCapitalistiques)
-        ? { label: 'Dirigeants & actionnariat', width: '120px' }
-        : { label: 'Dirigeants' }),
+          ? { label: "Responsables & organigramme", width: "130px" }
+          : hasRights(session, ApplicationRights.liensCapitalistiques)
+            ? { label: "Dirigeants & actionnariat", width: "120px" }
+            : { label: "Dirigeants" }),
     },
     {
       ficheType: FICHE.DOCUMENTS,
-      label: 'Documents',
+      label: "Documents",
       path: `/documents/${uniteLegale.siren}`,
       noFollow: false,
       shouldDisplay: true,
-      width: '95px',
+      width: "95px",
     },
     {
       ficheType: FICHE.FINANCES,
-      label: 'Données financières',
+      label: "Données financières",
       path: `/donnees-financieres/${uniteLegale.siren}`,
       noFollow: false,
       shouldDisplay: shouldDisplayFinances,
-      width: '100px',
+      width: "100px",
     },
     {
       ficheType: FICHE.ANNONCES,
       path: `/annonces/${uniteLegale.siren}`,
       label: `Annonces${
-        uniteLegale.dateMiseAJourInpi ? ' et observations' : ''
+        uniteLegale.dateMiseAJourInpi ? " et observations" : ""
       }`,
       noFollow: false,
       shouldDisplay: true,
-      width: uniteLegale.dateMiseAJourInpi ? '130px' : '90px',
+      width: uniteLegale.dateMiseAJourInpi ? "130px" : "90px",
     },
     {
       ficheType: FICHE.CERTIFICATS,
       path: `/labels-certificats/${uniteLegale.siren}`,
       label: `${
-        checkHasQuality(uniteLegale) ? 'Qualités, l' : 'L'
+        checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
       }abels et certificats`,
       noFollow: false,
       shouldDisplay:
         checkHasLabelsAndCertificates(uniteLegale) ||
         hasRights(session, ApplicationRights.protectedCertificats),
-      width: checkHasQuality(uniteLegale) ? '200px' : '110px',
+      width: checkHasQuality(uniteLegale) ? "200px" : "110px",
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
       path: `/etablissements-scolaires/${uniteLegale.siren}`,
-      label: 'Établissements scolaires',
+      label: "Établissements scolaires",
       noFollow: false,
       shouldDisplay: uniteLegale.complements.estUai,
     },
     {
       ficheType: FICHE.DIVERS,
       path: `/divers/${uniteLegale.siren}`,
-      label: 'Conventions collectives',
+      label: "Conventions collectives",
       noFollow: false,
       shouldDisplay: (uniteLegale.listeIdcc || []).length > 0,
-      width: '130px',
+      width: "130px",
     },
   ];
 };
@@ -138,7 +138,7 @@ export const Tabs: React.FC<{
               ficheType,
               label,
               noFollow,
-              width = 'auto',
+              width = "auto",
             }) => (
               <TabLink
                 active={currentFicheType === ficheType}
@@ -168,7 +168,7 @@ export const TabsForEtablissement: React.FC<{
           <li>
             <a
               href={path || `${pathPrefix}${uniteLegale.siren}`}
-              rel={noFollow ? 'nofollow' : ''}
+              rel={noFollow ? "nofollow" : ""}
             >
               <h2>{label}</h2>
             </a>

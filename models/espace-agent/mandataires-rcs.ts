@@ -1,12 +1,12 @@
-import { clientApiEntrepriseMandatairesRCS } from '#clients/api-entreprise/mandataires-rcs';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { clientApiEntrepriseMandatairesRCS } from "#clients/api-entreprise/mandataires-rcs";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { IDirigeants } from '#models/rne/types';
-import { verifySiren } from '#utils/helpers';
-import { handleApiEntrepriseError } from './utils';
+} from "#models/api-not-responding";
+import { IDirigeants } from "#models/rne/types";
+import { verifySiren } from "#utils/helpers";
+import { handleApiEntrepriseError } from "./utils";
 
 export const getMandatairesRCS = async (
   maybeSiren: string
@@ -21,7 +21,7 @@ export const getMandatairesRCS = async (
   } catch (error) {
     return handleApiEntrepriseError(error, {
       siren,
-      apiResource: 'MandatairesRCS',
+      apiResource: "MandatairesRCS",
     });
   }
 };

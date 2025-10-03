@@ -43,9 +43,7 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "1483"
-          ],
+          "liste_idcc": ["1483"],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -105,9 +103,7 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "1483"
-            ],
+            "liste_idcc": ["1483"],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -124,9 +120,7 @@
           "date_immatriculation": "2005-01-11",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 8000,
           "capital_variable": false,
@@ -137,9 +131,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "1483"
-          ],
+          "liste_idcc": ["1483"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -288,9 +280,7 @@
           "date_immatriculation": "2002-03-11",
           "date_radiation": null,
           "duree_personne_morale": 30,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 16500,
           "capital_variable": false,
@@ -441,9 +431,7 @@
           "date_immatriculation": "2022-02-07",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 12138280,
           "capital_variable": false,
@@ -517,9 +505,7 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": [
-            "1501"
-          ],
+          "liste_idcc": ["1501"],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -579,9 +565,7 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": [
-              "1501"
-            ],
+            "liste_idcc": ["1501"],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -598,9 +582,7 @@
           "date_immatriculation": "2022-03-01",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 8000,
           "capital_variable": false,
@@ -611,9 +593,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "1501"
-          ],
+          "liste_idcc": ["1501"],
           "egapro_renseignee": false,
           "est_association": false,
           "est_bio": false,
@@ -798,9 +778,7 @@
           "date_immatriculation": "2006-02-15",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 2000,
           "capital_variable": false,
@@ -962,9 +940,7 @@
             "geo_id": "31056_0055_00064",
             "latitude": "43.669079",
             "libelle_commune": "BEAUZELLE",
-            "liste_enseignes": [
-              "MY GYM"
-            ],
+            "liste_enseignes": ["MY GYM"],
             "liste_finess": null,
             "liste_id_bio": null,
             "liste_idcc": null,
@@ -984,9 +960,7 @@
           "date_immatriculation": null,
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
           "capital_social": 8000,
           "capital_variable": false,
@@ -1208,9 +1182,7 @@
           "date_immatriculation": "1999-02-01",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 304.9,
           "capital_variable": false,
@@ -1379,9 +1351,7 @@
           "date_immatriculation": "2016-07-29",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 1500,
           "capital_variable": false,
@@ -1594,10 +1564,7 @@
           "date_immatriculation": "2011-04-11",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale",
-            "Gestion de biens"
-          ],
+          "nature_entreprise": ["Commerciale", "Gestion de biens"],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,

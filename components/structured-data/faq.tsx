@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const generateFAQuestion = (question: string, answer: string): String => {
   return `{
@@ -20,7 +20,7 @@ const StructuredDataFAQ: React.FC<{ data: string[][] }> = ({ data }) => (
         "@type": "FAQPage",
         "mainEntity": [${data
           .map((elem) => generateFAQuestion(elem[0], elem[1]))
-          .join(',')}]
+          .join(",")}]
       }
       `,
     }}

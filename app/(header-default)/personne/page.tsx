@@ -1,29 +1,29 @@
-import { Info } from '#components-ui/alerts';
-import FAQLink from '#components-ui/faq-link';
-import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
-import PageCounter from '#components/search-results/results-pagination';
-import StructuredDataSearchAction from '#components/structured-data/search';
-import { FullTable } from '#components/table/full';
-import { searchPersonCompanies } from '#models/search';
+import { Info } from "#components-ui/alerts";
+import FAQLink from "#components-ui/faq-link";
+import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
+import PageCounter from "#components/search-results/results-pagination";
+import StructuredDataSearchAction from "#components/structured-data/search";
+import { FullTable } from "#components/table/full";
+import { searchPersonCompanies } from "#models/search";
 import {
   convertDateToAge,
   formatDatePartial,
   formatFirstNames,
   formatIntFr,
   parseIntWithDefaultValue,
-} from '#utils/helpers';
-import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
-import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
-import { Metadata } from 'next';
+} from "#utils/helpers";
+import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
+import { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
+import { Metadata } from "next";
 
 async function extractParamsPersonne(props: AppRouterProps) {
   const searchParams = await props.searchParams;
 
-  const pageParam = (searchParams.page || '') as string;
-  const sirenFrom = (searchParams.sirenFrom || '') as string;
-  const partialDate = (searchParams.partialDate || '') as string;
-  const fn = (searchParams.fn || '') as string;
-  const nom = (searchParams.n || '') as string;
+  const pageParam = (searchParams.page || "") as string;
+  const sirenFrom = (searchParams.sirenFrom || "") as string;
+  const partialDate = (searchParams.partialDate || "") as string;
+  const fn = (searchParams.fn || "") as string;
+  const nom = (searchParams.n || "") as string;
 
   return {
     pageParam,
@@ -40,8 +40,8 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { urlComplements } = await extractParamsPersonne(props);
   return {
-    title: 'Liste des structures associées à un individu',
-    robots: 'follow, noindex',
+    title: "Liste des structures associées à un individu",
+    robots: "follow, noindex",
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/personne?${urlComplements}`,
     },
@@ -52,7 +52,7 @@ export default async function PersonnePage(props: AppRouterProps) {
   const { urlComplements, fn, nom, pageParam, sirenFrom, partialDate } =
     await extractParamsPersonne(props);
 
-  const { prenom, prenoms } = formatFirstNames(fn, ', ');
+  const { prenom, prenoms } = formatFirstNames(fn, ", ");
 
   const page = parseIntWithDefaultValue(pageParam, 1);
 
@@ -67,8 +67,8 @@ export default async function PersonnePage(props: AppRouterProps) {
 
   const age = convertDateToAge(partialDate);
   const structureCountLabel =
-    results.resultCount === 0 ? 'Aucune' : results.resultCount;
-  const plural = results.resultCount > 1 ? 's' : '';
+    results.resultCount === 0 ? "Aucune" : results.resultCount;
+  const plural = results.resultCount > 1 ? "s" : "";
 
   return (
     <div className="content-container">
@@ -79,17 +79,17 @@ export default async function PersonnePage(props: AppRouterProps) {
         </a>
       )}
       <h1>
-        {structureCountLabel} structure{plural} associée{plural} à {prenom}{' '}
+        {structureCountLabel} structure{plural} associée{plural} à {prenom}{" "}
         {nom}
-        {age ? ` (${age} ans)` : ''}
+        {age ? ` (${age} ans)` : ""}
       </h1>
       <p>
         <FAQLink tooltipLabel="Etat civil">
           Ceci est un état civil partiel. Il est composé du mois et de l’année
           de naissance ainsi que des prénoms et du nom. Cet état civil peut ne
           pas contenir les prénoms secondaires.
-        </FAQLink>{' '}
-        :{' '}
+        </FAQLink>{" "}
+        :{" "}
         <strong>
           {prenoms} {nom}
         </strong>
@@ -101,8 +101,8 @@ export default async function PersonnePage(props: AppRouterProps) {
         de rares cas <strong>d’homonymie</strong>.
         <br />
         Si <strong>vous ne retrouvez pas une entreprise</strong> qui devrait se
-        trouver dans la liste, vous pouvez effectuer une recherche{' '}
-        <a href={`/rechercher?fn=${prenoms}&n=${nom}`}>sans filtre d’âge</a> ou{' '}
+        trouver dans la liste, vous pouvez effectuer une recherche{" "}
+        <a href={`/rechercher?fn=${prenoms}&n=${nom}`}>sans filtre d’âge</a> ou{" "}
         <a href={`/rechercher?fn=${prenom}&n=${nom}`}>
           sans prénom secondaire et sans filtre d’âge
         </a>
@@ -112,7 +112,7 @@ export default async function PersonnePage(props: AppRouterProps) {
 
       {results.results.length > 0 ? (
         <FullTable
-          head={['Siren', 'Détails', 'Dirigeant(s)']}
+          head={["Siren", "Détails", "Dirigeant(s)"]}
           body={results.results.map((result) => [
             <a href={`/entreprise/${result.chemin}`}>
               {formatIntFr(result.siren)}
@@ -153,10 +153,10 @@ export default async function PersonnePage(props: AppRouterProps) {
                       dirigeantOrElu.prenom === prenom &&
                       dirigeantOrElu.nom.toLowerCase() === nom.toLowerCase() ? (
                         <>
-                          {' '}
+                          {" "}
                           (
                           <FAQLink tooltipLabel={<i>possible homonymie</i>}>
-                            Il est probable que {dirigeantOrElu.prenoms}{' '}
+                            Il est probable que {dirigeantOrElu.prenoms}{" "}
                             {dirigeantOrElu.nom} et {prenoms} {nom} soient la
                             même personne mais cela peut aussi être des
                             homonymes.
@@ -164,7 +164,7 @@ export default async function PersonnePage(props: AppRouterProps) {
                           )
                           <br />
                         </>
-                      ) : null}{' '}
+                      ) : null}{" "}
                     </>
                   )}
                 </div>

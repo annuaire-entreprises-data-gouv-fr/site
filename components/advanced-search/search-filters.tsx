@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import { FilterMenu } from '#components-ui/filter-menu';
-import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import { Select } from '#components-ui/select';
-import { MultiSelect } from '#components-ui/select/multi-select';
+import { FilterMenu } from "#components-ui/filter-menu";
+import { SimpleSeparator } from "#components-ui/horizontal-separator";
+import { Select } from "#components-ui/select";
+import { MultiSelect } from "#components-ui/select/multi-select";
 import SearchFilterParams, {
   IParams,
-} from '#models/search/search-filter-params';
-import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
-import { codesEffectifsOptions } from '#utils/helpers/formatting/codes-effectifs';
-import { categoriesJuridiquesNiveau3 } from '#utils/helpers/formatting/metadata/categories-juridiques';
-import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
-import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
-import React from 'react';
-import { FilterFinances } from './filter-finances';
-import { FilterGeo } from './filter-geo';
-import { FilterStructure } from './filter-structure';
+} from "#models/search/search-filter-params";
+import { categoriesEntreprisesOptions } from "#utils/helpers/formatting/categories-entreprise";
+import { codesEffectifsOptions } from "#utils/helpers/formatting/codes-effectifs";
+import { categoriesJuridiquesNiveau3 } from "#utils/helpers/formatting/metadata/categories-juridiques";
+import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
+import { codesSectionNAF } from "#utils/helpers/formatting/metadata/codes-section-NAF";
+import React from "react";
+import { FilterFinances } from "./filter-finances";
+import { FilterGeo } from "./filter-geo";
+import { FilterStructure } from "./filter-structure";
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;
   searchTerm?: string;
-}> = ({ searchParams = {}, searchTerm = '' }) => {
+}> = ({ searchParams = {}, searchTerm = "" }) => {
   const {
     cp_dep_label,
     cp_dep_type,
@@ -95,8 +95,8 @@ const SearchFilters: React.FC<{
           </legend>
           <div
             style={{
-              display: 'flex',
-              gap: '5px',
+              display: "flex",
+              gap: "5px",
             }}
           >
             <div className="fr-input-group">
@@ -131,8 +131,8 @@ const SearchFilters: React.FC<{
           <legend>Né(e) entre :</legend>
           <div
             style={{
-              display: 'flex',
-              gap: '5px',
+              display: "flex",
+              gap: "5px",
             }}
           >
             <div className="fr-input-group">
@@ -195,8 +195,8 @@ const SearchFilters: React.FC<{
       >
         <Select
           options={[
-            { value: 'A', label: 'En activité' },
-            { value: 'C', label: 'Cessée' },
+            { value: "A", label: "En activité" },
+            { value: "C", label: "Cessée" },
           ]}
           name="etat"
           label="Etat administratif :"

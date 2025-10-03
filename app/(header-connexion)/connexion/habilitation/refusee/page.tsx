@@ -1,10 +1,10 @@
-import { ConnexionSubLayout } from '#components-ui/connexion-layout';
-import connexionRefusedPicture from '#components-ui/illustrations/connexion-failed';
-import { Metadata } from 'next';
+import { ConnexionSubLayout } from "#components-ui/connexion-layout";
+import connexionRefusedPicture from "#components-ui/illustrations/connexion-failed";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Accès à l’espace agent refusé',
-  robots: 'noindex, nofollow',
+  title: "Accès à l’espace agent refusé",
+  robots: "noindex, nofollow",
 };
 
 export default function RefusedConnexionPage() {

@@ -1,8 +1,8 @@
-import ButtonLink from '#components-ui/button';
-import Meta from '#components/meta/meta-client';
-import constants from '#models/constants';
-import { GetServerSideProps } from 'next';
-import { NextPageWithLayout } from 'pages/_app';
+import ButtonLink from "#components-ui/button";
+import Meta from "#components/meta/meta-client";
+import constants from "#models/constants";
+import { GetServerSideProps } from "next";
+import { NextPageWithLayout } from "pages/_app";
 
 const TooManyRequest: NextPageWithLayout = () => {
   return (
@@ -18,14 +18,14 @@ const TooManyRequest: NextPageWithLayout = () => {
       <ul>
         <li>
           Si vous travaillez <strong>pour une administration</strong> (agence,
-          ministère, collectivité), contactez-nous via notre{' '}
-          <a href={constants.links.parcours.contact}>formulaire de contact</a>{' '}
+          ministère, collectivité), contactez-nous via notre{" "}
+          <a href={constants.links.parcours.contact}>formulaire de contact</a>{" "}
           et nous ferons le nécessaire pour que cela ne se reproduise pas.
         </li>
         <li>
           Si <strong>vous utilisez des robots 🤖</strong> pour scrapper les
-          données du site.{' '}
-          <strong>Sachez que toutes les données sont publiques !</strong> Alors{' '}
+          données du site.{" "}
+          <strong>Sachez que toutes les données sont publiques !</strong> Alors{" "}
           <a href="/donnees/sources">
             utilisez les jeux de données directement ou l’API
           </a>

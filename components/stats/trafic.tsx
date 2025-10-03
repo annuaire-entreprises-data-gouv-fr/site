@@ -1,23 +1,23 @@
-'use client';
-import { IMatomoStats } from '#clients/matomo';
-import { Select } from '#components-ui/select';
-import { StackedBarChart } from '#components/chart/stack-bar';
-import constants from '#models/constants';
-import { ChangeEvent, useState } from 'react';
+"use client";
+import { IMatomoStats } from "#clients/matomo";
+import { Select } from "#components-ui/select";
+import { StackedBarChart } from "#components/chart/stack-bar";
+import constants from "#models/constants";
+import { ChangeEvent, useState } from "react";
 
-type IStatType = 'agents' | 'users' | 'api';
+type IStatType = "agents" | "users" | "api";
 
 export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
   visits = [],
 }) => {
-  const [statsType, setStatsType] = useState<IStatType>('users');
+  const [statsType, setStatsType] = useState<IStatType>("users");
 
   const data = {
     datasets:
-      statsType === 'api'
+      statsType === "api"
         ? [
             {
-              label: 'Nombre d’appels reçus par l’API Recherche d’Entreprises',
+              label: "Nombre d’appels reçus par l’API Recherche d’Entreprises",
               data: visits.map(({ label, apiRequests }) => ({
                 y: apiRequests,
                 x: label,
@@ -28,12 +28,12 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
         : [
             {
               label:
-                statsType === 'agents'
-                  ? 'Agents récurrents'
-                  : 'Utilisateurs récurrents',
+                statsType === "agents"
+                  ? "Agents récurrents"
+                  : "Utilisateurs récurrents",
               data: visits.map(
                 ({ label, visitorReturning, agentReturning }) => ({
-                  y: statsType === 'agents' ? agentReturning : visitorReturning,
+                  y: statsType === "agents" ? agentReturning : visitorReturning,
                   x: label,
                 })
               ),
@@ -41,11 +41,11 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
             },
             {
               label:
-                statsType === 'agents'
-                  ? 'Agents occasionnels'
-                  : 'Utilisateurs occasionnels',
+                statsType === "agents"
+                  ? "Agents occasionnels"
+                  : "Utilisateurs occasionnels",
               data: visits.map(({ label, visitorUnknown, agentUnknown }) => ({
-                y: statsType === 'agents' ? agentUnknown : visitorUnknown,
+                y: statsType === "agents" ? agentUnknown : visitorUnknown,
                 x: label,
               })),
               backgroundColor: constants.chartColors[1],
@@ -70,7 +70,7 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
         </li>
         <li>
           Un <strong>agent connecté</strong> est un agent public qui s’est
-          identifié avec{' '}
+          identifié avec{" "}
           <a
             href="https://www.proconnect.gouv.fr/"
             target="_blank"
@@ -78,8 +78,8 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
             title="Qu’est-ce que ProConnect ? - nouvelle fenêtre"
           >
             ProConnect
-          </a>{' '}
-          pour{' '}
+          </a>{" "}
+          pour{" "}
           <a href="https://annuaire-entreprises.data.gouv.fr/lp/agent-public">
             avoir accès à des informations additionnelles (actes, statuts, etc.)
           </a>
@@ -89,18 +89,18 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
       <p>
         Un utilisateur ou un agent connecté qui visite le site une fois dans le
         mois a un usage <strong>occasionnel</strong>. À l’inverse, s’il visite
-        le site plusieurs fois dans le mois, il a un usage{' '}
+        le site plusieurs fois dans le mois, il a un usage{" "}
         <strong>récurrent</strong>.
       </p>
       <div className="layout-right">
         <div>Afficher les données par&nbsp;</div>
         <Select
           options={[
-            { value: 'users', label: 'utilisateurs' },
-            { value: 'agents', label: 'agents' },
-            { value: 'api', label: 'appels API' },
+            { value: "users", label: "utilisateurs" },
+            { value: "agents", label: "agents" },
+            { value: "api", label: "appels API" },
           ]}
-          defaultValue={'users'}
+          defaultValue={"users"}
           onChange={onOptionChange}
         />
       </div>
@@ -120,11 +120,11 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
         </li>
       </ul>
       <p>
-        Nous suivons également le nombre d’appels reçus par{' '}
+        Nous suivons également le nombre d’appels reçus par{" "}
         <a href="/donnees/api-entreprises">
           notre API de Recherche d’entreprises
         </a>
-        . Ce chiffre inclut les appels provenant du site{' '}
+        . Ce chiffre inclut les appels provenant du site{" "}
         <strong>Annuaire des Entreprises</strong> et les appels externes,
         provenant d’acteurs privés ou publics.
       </p>

@@ -1,11 +1,11 @@
-import { NotASirenError, NotASiretError } from '#models/core/types';
+import { NotASirenError, NotASiretError } from "#models/core/types";
 
 /**
  * Siren and siret types
  */
 type Brand<K, T> = K & { __brand: T };
 
-export type TVANumber = Brand<string, 'TVANumber'>;
+export type TVANumber = Brand<string, "TVANumber">;
 
 export const isTVANumber = (slug: string): slug is TVANumber => {
   return !!slug.match(/^\d{11}$/g);
@@ -16,14 +16,14 @@ export const isTVANumber = (slug: string): slug is TVANumber => {
  * */
 export const verifyTVANumber = (slug: string): TVANumber => {
   if (!isTVANumber(slug)) {
-    throw new Error('Not a valid TVANumber');
+    throw new Error("Not a valid TVANumber");
   } else {
     return slug;
   }
 };
 
-export type Siren = Brand<string, 'Siren'>;
-export type Siret = Brand<string, 'Siret'>;
+export type Siren = Brand<string, "Siren">;
+export type Siret = Brand<string, "Siret">;
 
 export const isSiren = (slug: string): slug is Siren => {
   if (!hasSirenFormat(slug)) {
@@ -83,7 +83,7 @@ const luhnChecksum = (str: string) => {
 
 export const isLuhnValid = (str: string) => {
   // La poste siren and siret are the only exceptions to Luhn's formula
-  if (str.indexOf('356000000') === 0) {
+  if (str.indexOf("356000000") === 0) {
     return true;
   }
   return luhnChecksum(str) % 10 === 0;
@@ -105,8 +105,8 @@ export const hasSirenFormat = (str: string) => !!str.match(/^\d{9}$/g);
 
 export const hasSiretFormat = (str: string) => !!str.match(/^\d{14}$/g);
 
-export const formatSiret = (siret = '') => {
-  return siret.replace(/(\d{3})/g, '$1 ').replace(/(\s)(?=(\d{2})$)/g, '');
+export const formatSiret = (siret = "") => {
+  return siret.replace(/(\d{3})/g, "$1 ").replace(/(\s)(?=(\d{2})$)/g, "");
 };
 
 export const extractSirenFromSiret = (siret: string) => {
@@ -127,12 +127,12 @@ export const extractNicFromSiret = (siret: string) => {
  */
 export const extractSirenOrSiretSlugFromUrl = (slug: string) => {
   if (!slug) {
-    return '';
+    return "";
   }
   // match a string that ends with either 9 digit or 14 like a siren or a siret
   // we dont use a $ end match as there might be " or %22 at the end
   const match = slug.match(/\d{14}|\d{9}/g);
-  return match ? match[match.length - 1] : '';
+  return match ? match[match.length - 1] : "";
 };
 
 /**
@@ -142,20 +142,20 @@ export const extractSirenOrSiretSlugFromUrl = (slug: string) => {
  */
 export const extractSirenOrSiretFromRechercherUrl = (rechercherUrl: string) => {
   if (!rechercherUrl) {
-    return '';
+    return "";
   }
 
   let cleanedUrl = (rechercherUrl.match(/terme=([^&]*)/g) || [
-    '',
-  ])[0].replaceAll(/[+]|(%20|%22)/g, '');
+    "",
+  ])[0].replaceAll(/[+]|(%20|%22)/g, "");
 
   if (cleanedUrl.match(/terme=FR/g)) {
     if (cleanedUrl.match(/terme=FR\d{14}$/g)) {
       // remove EORI number prefix when relevant
-      cleanedUrl = cleanedUrl.replace('terme=FR', '');
+      cleanedUrl = cleanedUrl.replace("terme=FR", "");
     } else if (cleanedUrl.match(/terme=FR\d{11}$/g)) {
       // remove TVA number prefix when relevant
-      cleanedUrl = cleanedUrl.replace(/terme=FR\d{2}/g, '');
+      cleanedUrl = cleanedUrl.replace(/terme=FR\d{2}/g, "");
     }
   }
   return extractSirenOrSiretSlugFromUrl(cleanedUrl);

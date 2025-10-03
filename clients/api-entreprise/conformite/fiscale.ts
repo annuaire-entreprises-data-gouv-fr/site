@@ -1,8 +1,8 @@
-import routes from '#clients/routes';
-import { IConformite } from '#models/espace-agent/conformite';
-import { UseCase } from '#models/use-cases';
-import { Siren } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import { IConformite } from "#models/espace-agent/conformite";
+import { UseCase } from "#models/use-cases";
+import { Siren } from "#utils/helpers";
+import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseConformiteFiscale = IAPIEntrepriseResponse<{
   document_url: string;
@@ -30,6 +30,6 @@ const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => {
   return {
     url: response.data.document_url,
     isValid: true,
-    label: 'Attestation fiscale',
+    label: "Attestation fiscale",
   };
 };

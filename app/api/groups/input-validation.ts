@@ -1,44 +1,44 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 const emailValidator = z
   .string()
-  .email('Must be a valid email address')
-  .min(1, 'Email is required');
+  .email("Must be a valid email address")
+  .min(1, "Email is required");
 
 const groupIdValidator = z
   .string()
-  .regex(/^\d+$/, 'Group ID must be a number')
+  .regex(/^\d+$/, "Group ID must be a number")
   .transform((val) => parseInt(val, 10))
   .refine((val) => Number.isInteger(val) && val > 0, {
-    message: 'Group ID must be a positive integer',
+    message: "Group ID must be a positive integer",
   });
 
 const demandeIdValidator = z
   .string()
-  .regex(/^\d+$/, 'Demande ID must be a number')
+  .regex(/^\d+$/, "Demande ID must be a number")
   .transform((val) => parseInt(val, 10))
   .refine((val) => Number.isInteger(val) && val > 0, {
-    message: 'Demande ID must be a positive integer',
+    message: "Demande ID must be a positive integer",
   });
 
 const roleIdValidator = z
   .number()
-  .int('Role ID must be an integer')
-  .positive('Role ID must be positive');
+  .int("Role ID must be an integer")
+  .positive("Role ID must be positive");
 
 const groupNameValidator = z
   .string()
-  .min(1, 'Group name is required')
-  .max(255, 'Group name must be less than 255 characters')
+  .min(1, "Group name is required")
+  .max(255, "Group name must be less than 255 characters")
   .trim();
 
 const emailsValidator = z
   .string()
   .transform((value) => {
-    if (value.trim() === '') return [];
-    return value.split(',').filter((email) => email.trim() !== '');
+    if (value.trim() === "") return [];
+    return value.split(",").filter((email) => email.trim() !== "");
   })
-  .pipe(z.array(z.string().email('Must be a valid email address')).min(0))
+  .pipe(z.array(z.string().email("Must be a valid email address")).min(0))
   .optional();
 
 export const validateSchema = z.object({

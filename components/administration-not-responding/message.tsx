@@ -1,6 +1,6 @@
-import { Warning } from '#components-ui/alerts';
-import { IAdministrationMetaData } from '#models/administrations/types';
-import React from 'react';
+import { Warning } from "#components-ui/alerts";
+import { IAdministrationMetaData } from "#models/administrations/types";
+import React from "react";
 
 interface IProps {
   administrationMetaData: IAdministrationMetaData;
@@ -19,12 +19,12 @@ const AdministrationNotRespondingMessage: React.FC<IProps> = ({
         Nous sommes désolés pour le dérangement.
         <br />
         <br />
-        Vous pouvez{' '}
+        Vous pouvez{" "}
         <a href="">cliquez-ici pour recharger la page et ré-essayer</a>.
       </Warning>
       <p>
         Pour en savoir plus sur l’état du service, vous pouvez consulter la
-        section de cette administration{' '}
+        section de cette administration{" "}
         <a
           href={`/donnees/api#${administrationMetaData.slug}`}
           target="_blank"
@@ -34,8 +34,8 @@ const AdministrationNotRespondingMessage: React.FC<IProps> = ({
         </a>
         {administrationMetaData.site && (
           <>
-            {' '}
-            ou{' '}
+            {" "}
+            ou{" "}
             <a href={administrationMetaData.site}>
               le site de l’administration
             </a>

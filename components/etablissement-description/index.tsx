@@ -1,15 +1,15 @@
-import FAQLink from '#components-ui/faq-link';
-import { estNonDiffusibleStrict } from '#models/core/diffusion';
-import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
-import { IEtablissement, IUniteLegale } from '#models/core/types';
+import FAQLink from "#components-ui/faq-link";
+import { estNonDiffusibleStrict } from "#models/core/diffusion";
+import { IETATADMINSTRATIF, estActif } from "#models/core/etat-administratif";
+import { IEtablissement, IUniteLegale } from "#models/core/types";
 import {
   formatAge,
   formatDateLong,
   formatSiret,
   uniteLegaleLabel,
   uniteLegaleLabelWithPronounContracted,
-} from '#utils/helpers';
-import React from 'react';
+} from "#utils/helpers";
+import React from "react";
 
 type IProps = {
   etablissement: IEtablissement;
@@ -18,15 +18,15 @@ type IProps = {
 
 const statusLabel = (etatAdministratif: IETATADMINSTRATIF) => {
   if (etatAdministratif === IETATADMINSTRATIF.ACTIF) {
-    return ' en activité';
+    return " en activité";
   }
   if (
     etatAdministratif === IETATADMINSTRATIF.CESSEE ||
     etatAdministratif === IETATADMINSTRATIF.FERME
   ) {
-    return ' fermé';
+    return " fermé";
   }
-  return ' dans un état administratif inconnu';
+  return " dans un état administratif inconnu";
 };
 
 export const EtablissementDescription: React.FC<IProps> = ({
@@ -47,19 +47,19 @@ export const EtablissementDescription: React.FC<IProps> = ({
       {!estNonDiffusibleStrict(uniteLegale) && (
         <>
           <span>
-            Cet{' '}
+            Cet{" "}
             <FAQLink tooltipLabel="établissement">
               Une {uniteLegaleLabel(uniteLegale)} est constituée d’autant
               d’établissements qu’il y a de lieux différents où elle exerce - ou
               a exercé - son activité.
               <br />
               <br />
-              Il faut bien distinguer la{' '}
+              Il faut bien distinguer la{" "}
               <a href={`/entreprise/${uniteLegale.chemin}`}>
-                fiche résumé{' '}
+                fiche résumé{" "}
                 {uniteLegaleLabelWithPronounContracted(uniteLegale)}
-              </a>{' '}
-              et les{' '}
+              </a>{" "}
+              et les{" "}
               <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                 fiches de ses établissements
               </a>
@@ -69,19 +69,19 @@ export const EtablissementDescription: React.FC<IProps> = ({
             <strong>{statusLabel(etablissement.etatAdministratif)}. </strong>
             {etablissement.dateCreation && (
               <>
-                {' '}
-                Il a été créé le{' '}
+                {" "}
+                Il a été créé le{" "}
                 <strong>{formatDateLong(etablissement.dateCreation)}</strong>
-                {ageCreation && <>, il y a {ageCreation}</>}.{' '}
+                {ageCreation && <>, il y a {ageCreation}</>}.{" "}
               </>
             )}
             {etablissement.dateDebutActivite && !estActif(etablissement) && (
               <>
-                Il a été fermée le{' '}
+                Il a été fermée le{" "}
                 <strong>
                   {formatDateLong(etablissement.dateDebutActivite)}
                 </strong>
-                {ageFermeture && <>, il y a {ageFermeture}</>}.{' '}
+                {ageFermeture && <>, il y a {ageFermeture}</>}.{" "}
               </>
             )}
             C’est
@@ -91,14 +91,14 @@ export const EtablissementDescription: React.FC<IProps> = ({
               <> un ancien siège social</>
             ) : (
               <> un établissement secondaire</>
-            )}{' '}
-            {uniteLegaleLabelWithPronounContracted(uniteLegale)}{' '}
+            )}{" "}
+            {uniteLegaleLabelWithPronounContracted(uniteLegale)}{" "}
             <a href={`/entreprise/${uniteLegale.chemin}`}>
               {uniteLegale.nomComplet}
             </a>
             {uniteLegale.etablissements.all.length > 1 ? (
               <>
-                , qui possède{' '}
+                , qui possède{" "}
                 <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                   {uniteLegale.etablissements.nombreEtablissements - 1} autre(s)
                   établissement(s)
@@ -106,7 +106,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
               </>
             ) : (
               <>
-                {' et '}
+                {" et "}
                 <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                   son unique établissement
                 </a>
@@ -117,8 +117,8 @@ export const EtablissementDescription: React.FC<IProps> = ({
           <p>
             {etablissement.libelleActivitePrincipale && (
               <>
-                Son domaine d’activité est :{' '}
-                {(etablissement.libelleActivitePrincipale || '').toLowerCase()}.
+                Son domaine d’activité est :{" "}
+                {(etablissement.libelleActivitePrincipale || "").toLowerCase()}.
               </>
             )}
             {etablissement.adresse && (

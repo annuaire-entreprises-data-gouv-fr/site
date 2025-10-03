@@ -1,13 +1,13 @@
 import {
   HttpTooManyRequests,
   HttpUnauthorizedError,
-} from '#clients/exceptions';
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import httpClient, { httpGet, IDefaultRequestConfig } from '#utils/network';
+} from "#clients/exceptions";
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import httpClient, { httpGet, IDefaultRequestConfig } from "#utils/network";
 
 class RNEClient {
-  private _token = '';
+  private _token = "";
   private account = [
     process.env.RNE_LOGIN_ACTES_1,
     process.env.RNE_PASSWORD_ACTES_1,
@@ -17,7 +17,7 @@ class RNEClient {
     const [username, password] = this.account;
 
     const response = await httpClient<{ token: string }>({
-      method: 'POST',
+      method: "POST",
       url: routes.inpi.api.rne.login,
       data: {
         username,
@@ -25,7 +25,7 @@ class RNEClient {
       },
       timeout: constants.timeout.XXL,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     return response.token;

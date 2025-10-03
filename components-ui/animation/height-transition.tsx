@@ -1,6 +1,6 @@
-'use client';
-import { animated } from '@react-spring/web';
-import { useHeightTransition } from 'hooks/use-height-transition';
+"use client";
+import { animated } from "@react-spring/web";
+import { useHeightTransition } from "hooks/use-height-transition";
 
 type IHeightTransitionProps = {
   children: React.ReactNode;

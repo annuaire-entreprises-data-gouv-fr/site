@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { CNIL } from '#components/administrations';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { formatIntFr, uniteLegaleLabel } from '#utils/helpers';
-import { useFetchDPO } from 'hooks/fetch/dpo';
+import { CNIL } from "#components/administrations";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { formatIntFr, uniteLegaleLabel } from "#utils/helpers";
+import { useFetchDPO } from "hooks/fetch/dpo";
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -49,7 +49,7 @@ export default function DPOSection({ uniteLegale }: IProps) {
                 ...(dpo?.organismeDesigne.siren
                   ? [
                       [
-                        'SIREN',
+                        "SIREN",
                         <a href={`/entreprise/${dpo.organismeDesigne.siren}`}>
                           {formatIntFr(dpo.organismeDesigne.siren)}
                         </a>,
@@ -59,7 +59,7 @@ export default function DPOSection({ uniteLegale }: IProps) {
                 ...(dpo?.organismeDesigne.adressePostale
                   ? [
                       [
-                        'Adresse complète',
+                        "Adresse complète",
                         [
                           dpo.organismeDesigne.adressePostale,
                           dpo.organismeDesigne.codePostal,
@@ -67,14 +67,14 @@ export default function DPOSection({ uniteLegale }: IProps) {
                           dpo.organismeDesigne.pays,
                         ]
                           .filter(Boolean)
-                          .join(', '),
+                          .join(", "),
                       ],
                     ]
                   : []),
                 ...(dpo.contact.email
                   ? [
                       [
-                        'Email',
+                        "Email",
                         <a href={`mailto:${dpo.contact.email}`}>
                           {dpo.contact.email}
                         </a>,
@@ -84,7 +84,7 @@ export default function DPOSection({ uniteLegale }: IProps) {
                 ...(dpo.contact.url
                   ? [
                       [
-                        'Site web',
+                        "Site web",
                         <a href={dpo.contact.url}>{dpo.contact.url}</a>,
                       ],
                     ]
@@ -92,7 +92,7 @@ export default function DPOSection({ uniteLegale }: IProps) {
                 ...(dpo.contact.telephone
                   ? [
                       [
-                        'Téléphone',
+                        "Téléphone",
                         <a href={`tel:${dpo.contact.telephone}`}>
                           {dpo.contact.telephone}
                         </a>,
@@ -102,7 +102,7 @@ export default function DPOSection({ uniteLegale }: IProps) {
                 ...(dpo.contact.adressePostale
                   ? [
                       [
-                        'Adresse complète',
+                        "Adresse complète",
                         [
                           dpo.contact.adressePostale,
                           dpo.contact.codePostal,
@@ -110,11 +110,11 @@ export default function DPOSection({ uniteLegale }: IProps) {
                           dpo.contact.pays,
                         ]
                           .filter(Boolean)
-                          .join(', '),
+                          .join(", "),
                       ],
                     ]
                   : []),
-                ...(dpo.contact.autre ? [['Autre', dpo.contact.autre]] : []),
+                ...(dpo.contact.autre ? [["Autre", dpo.contact.autre]] : []),
               ]}
             />
           </>

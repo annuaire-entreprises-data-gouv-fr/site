@@ -1,8 +1,8 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import parseMarkdownSync from '#components/markdown/parse-markdown';
-import StructuredDataFAQ from '#components/structured-data/faq';
-import { allDefinitions } from '#models/article/definitions';
-import { Metadata } from 'next';
+import TextWrapper from "#components-ui/text-wrapper";
+import parseMarkdownSync from "#components/markdown/parse-markdown";
+import StructuredDataFAQ from "#components/structured-data/faq";
+import { allDefinitions } from "#models/article/definitions";
+import { Metadata } from "next";
 
 export default function AllDefinitionsPage() {
   const definitions = allDefinitions;
@@ -21,7 +21,7 @@ export default function AllDefinitionsPage() {
             <li key={slug}>
               <a
                 href={`/definitions/${slug}`}
-                aria-label={title + ', voir la définition'}
+                aria-label={title + ", voir la définition"}
               >
                 {title}
               </a>
@@ -34,9 +34,9 @@ export default function AllDefinitionsPage() {
 }
 
 export const metadata: Metadata = {
-  title: 'Definitions des termes utilisés sur l’Annuaire des Entreprises',
+  title: "Definitions des termes utilisés sur l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/definitions',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/definitions",
   },
-  robots: 'index, follow',
+  robots: "index, follow",
 };

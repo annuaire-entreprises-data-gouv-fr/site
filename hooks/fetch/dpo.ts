@@ -1,10 +1,10 @@
-import { clientDPO } from '#clients/api-data-gouv/dpo';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale } from '#models/core/types';
-import { FetchRessourceException } from '#models/exceptions';
-import { verifySiren } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { useFetchExternalData } from './use-fetch-data';
+import { clientDPO } from "#clients/api-data-gouv/dpo";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IUniteLegale } from "#models/core/types";
+import { FetchRessourceException } from "#models/exceptions";
+import { verifySiren } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchDPO(uniteLegale: IUniteLegale) {
   return useFetchExternalData(
@@ -16,7 +16,7 @@ export function useFetchDPO(uniteLegale: IUniteLegale) {
           return;
         }
         const exception = new FetchRessourceException({
-          ressource: 'DigitalProtectionOfficer',
+          ressource: "DigitalProtectionOfficer",
           administration: EAdministration.CNIL,
           cause: e,
           context: {

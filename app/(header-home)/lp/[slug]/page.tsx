@@ -1,16 +1,16 @@
-import { diamond } from '#components-ui/logo-annuaire/logo-annuaire';
-import AdministrationDescription from '#components/administrations/administration-description';
-import { RenderMarkdownServerOnly } from '#components/markdown';
-import SearchBar from '#components/search-bar';
-import { getAllLandingPages, getLandingPage } from '#models/landing-pages';
+import { diamond } from "#components-ui/logo-annuaire/logo-annuaire";
+import AdministrationDescription from "#components/administrations/administration-description";
+import { RenderMarkdownServerOnly } from "#components/markdown";
+import SearchBar from "#components/search-bar";
+import { getAllLandingPages, getLandingPage } from "#models/landing-pages";
 import {
   AppRouterProps,
   IParams,
-} from '#utils/server-side-helper/app/extract-params';
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import React, { use } from 'react';
-import styles from './style.module.css';
+} from "#utils/server-side-helper/app/extract-params";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import React, { use } from "react";
+import styles from "./style.module.css";
 
 export default function LandingPage(props: AppRouterProps) {
   const params = use(props.params);
@@ -31,7 +31,7 @@ export default function LandingPage(props: AppRouterProps) {
   return (
     <>
       <form
-        className={`${styles['centered-search']} layout-center`}
+        className={`${styles["centered-search"]} layout-center`}
         id="search-bar-form"
         action={`/rechercher`}
         method="get"
@@ -43,14 +43,14 @@ export default function LandingPage(props: AppRouterProps) {
           </span>
           {title}
         </h1>
-        <h2 className={styles['sub-title']}>{description}</h2>
+        <h2 className={styles["sub-title"]}>{description}</h2>
         <input
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           name={filter.name}
           value={filter.value}
           readOnly
         />
-        <div className={styles['search-bar-wrapper']}>
+        <div className={styles["search-bar-wrapper"]}>
           <SearchBar
             placeholder="Nom, adresse, n° SIRET/SIREN..."
             defaultValue=""
@@ -58,14 +58,14 @@ export default function LandingPage(props: AppRouterProps) {
           />
         </div>
       </form>
-      <div className={styles['content-container']}>
+      <div className={styles["content-container"]}>
         <div className="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
           {reassurance.map((block) => (
             <div
               key={block.title}
               className="fr-col-12 fr-col-sm-4 fr-col-md-4"
             >
-              <div className={styles['reassurance']}>
+              <div className={styles["reassurance"]}>
                 <h2>{block.title}</h2>
                 <RenderMarkdownServerOnly>
                   {block.body}
@@ -75,7 +75,7 @@ export default function LandingPage(props: AppRouterProps) {
           ))}
         </div>
         <br />
-        <RenderMarkdownServerOnly>{body}</RenderMarkdownServerOnly>{' '}
+        <RenderMarkdownServerOnly>{body}</RenderMarkdownServerOnly>{" "}
         {datasources.length > 0 && (
           <h2>Quelles sont les sources des données utilisées ?</h2>
         )}
@@ -108,7 +108,7 @@ export const generateMetadata = async ({
   return {
     title: landingPage.seo.title || landingPage.title,
     description: landingPage.seo.description,
-    robots: 'index, follow',
+    robots: "index, follow",
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/lp/${slug}`,
     },

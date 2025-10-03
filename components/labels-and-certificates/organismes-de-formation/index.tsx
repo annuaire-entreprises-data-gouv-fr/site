@@ -1,11 +1,11 @@
-import FAQLink from '#components-ui/faq-link';
-import { Tag } from '#components-ui/tag';
-import { MTPEI } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IOrganismeFormation } from '#models/certifications/organismes-de-formation';
+import FAQLink from "#components-ui/faq-link";
+import { Tag } from "#components-ui/tag";
+import { MTPEI } from "#components/administrations";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { IOrganismeFormation } from "#models/certifications/organismes-de-formation";
 
 type OrganismeDeFormationSectionProps = {
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
@@ -28,9 +28,9 @@ export const OrganismeDeFormationSection = ({
         const qualiopiCertified = organismesDeFormation.qualiopiCertified;
 
         const head = [
-          'Numéro Déclaration Activité (NDA)',
-          'Détails',
-          ...(qualiopiCertified ? ['Certification(s) Qualiopi'] : []),
+          "Numéro Déclaration Activité (NDA)",
+          "Détails",
+          ...(qualiopiCertified ? ["Certification(s) Qualiopi"] : []),
         ];
 
         return (
@@ -39,7 +39,7 @@ export const OrganismeDeFormationSection = ({
             <FullTable
               head={head}
               body={organismesDeFormation.records.map((fields) => [
-                <Tag>{fields.nda ? fields.nda : 'Inconnu'}</Tag>,
+                <Tag>{fields.nda ? fields.nda : "Inconnu"}</Tag>,
                 <>
                   {fields.specialite && (
                     <>
@@ -49,21 +49,21 @@ export const OrganismeDeFormationSection = ({
                   )}
                   {fields.formateurs && (
                     <>
-                      <strong>Effectifs formateurs :</strong>{' '}
+                      <strong>Effectifs formateurs :</strong>{" "}
                       {fields.formateurs}
                       <br />
                     </>
                   )}
                   {fields.stagiaires && (
                     <>
-                      <strong>Effectifs stagiaires :</strong>{' '}
+                      <strong>Effectifs stagiaires :</strong>{" "}
                       {fields.stagiaires}
                       <br />
                     </>
                   )}
                   {fields.dateDeclaration && (
                     <>
-                      <strong>Déclaration : </strong> le{' '}
+                      <strong>Déclaration : </strong> le{" "}
                       {fields.dateDeclaration}
                       {fields.region && <>, en région {fields.region}</>}
                       <br />
@@ -80,7 +80,7 @@ export const OrganismeDeFormationSection = ({
                     ]
                   : []),
               ])}
-            />{' '}
+            />{" "}
           </>
         );
       }}
@@ -100,7 +100,7 @@ const FAQQaliopi = () => (
 
 const OrganismeFormationLabel = ({ qualiopiCertified = false }) => (
   <>
-    Cette structure est un organisme de formation,{' '}
+    Cette structure est un organisme de formation,{" "}
     <FAQLink tooltipLabel="à jour de ses obligations">
       Un organisme de formation est à jour de ses obligations si il a bien
       déclaré auprès du Préfet de Région territorialement compétent son Bilan

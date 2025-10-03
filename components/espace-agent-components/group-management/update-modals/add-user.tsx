@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { IRolesDataUser } from '#clients/roles-data/interface';
-import ButtonLink from '#components-ui/button';
-import { FullScreenModal } from '#components-ui/full-screen-modal';
-import { validateEmail } from '#components/espace-agent-components/helpers/form-validation';
-import { NotificationTypeEnum, useNotification } from '#hooks/use-notification';
-import { IRolesDataGroup } from '#models/authentication/group/groups';
-import httpClient from '#utils/network';
-import { useEffect, useRef, useState } from 'react';
+import { IRolesDataUser } from "#clients/roles-data/interface";
+import ButtonLink from "#components-ui/button";
+import { FullScreenModal } from "#components-ui/full-screen-modal";
+import { validateEmail } from "#components/espace-agent-components/helpers/form-validation";
+import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
+import { IRolesDataGroup } from "#models/authentication/group/groups";
+import httpClient from "#utils/network";
+import { useEffect, useRef, useState } from "react";
 
-const MODAL_ID = 'add-user';
+const MODAL_ID = "add-user";
 
 export default function AddUserModal({
   group,
@@ -22,7 +22,7 @@ export default function AddUserModal({
 }) {
   const { showNotification } = useNotification();
   const [isVisible, setIsVisible] = useState(false);
-  const [inputEmail, setInputEmail] = useState('');
+  const [inputEmail, setInputEmail] = useState("");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -45,7 +45,7 @@ export default function AddUserModal({
         setValidationErrors([emailValidationError]);
         showNotification({
           type: NotificationTypeEnum.ERROR,
-          title: 'Ajout impossible',
+          title: "Ajout impossible",
           message: emailValidationError,
         });
         return;
@@ -55,20 +55,20 @@ export default function AddUserModal({
       if (
         group.users.some((user: IRolesDataUser) => user.email === userEmail)
       ) {
-        setValidationErrors(['Cet utilisateur est déjà membre de ce groupe']);
+        setValidationErrors(["Cet utilisateur est déjà membre de ce groupe"]);
         showNotification({
           type: NotificationTypeEnum.ERROR,
-          title: 'Ajout impossible',
-          message: 'Cet utilisateur est déjà membre de ce groupe',
+          title: "Ajout impossible",
+          message: "Cet utilisateur est déjà membre de ce groupe",
         });
         return;
       }
 
       const user = await httpClient<IRolesDataUser>({
         url: `/api/groups/${group.id}/add-user`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         data: JSON.stringify({ userEmail, roleId: defaultRoleId }),
       });
@@ -77,11 +77,11 @@ export default function AddUserModal({
 
       showNotification({
         type: NotificationTypeEnum.SUCCESS,
-        title: 'Membre ajouté avec succès',
+        title: "Membre ajouté avec succès",
         message: `${userEmail} a été ajouté au groupe ${group.name}`,
       });
 
-      setInputEmail('');
+      setInputEmail("");
       setIsVisible(false);
     } catch (error: any) {
       showNotification({
@@ -96,7 +96,7 @@ export default function AddUserModal({
 
   const handleClose = () => {
     setIsVisible(false);
-    setInputEmail('');
+    setInputEmail("");
     setValidationErrors([]);
   };
 
@@ -115,7 +115,7 @@ export default function AddUserModal({
           <div className="fr-mb-4w">
             <h2 className="fr-h2">Ajouter un membre</h2>
             <p className="fr-text--lg">
-              Les nouveaux membres ont par défaut le{' '}
+              Les nouveaux membres ont par défaut le{" "}
               <strong>rôle d’utilisateur</strong>.
               <br />
               Vous pourrez ensuite le changer en <strong>administrateur</strong>
@@ -125,7 +125,7 @@ export default function AddUserModal({
 
           <div
             className={`fr-input-group fr-mb-4w ${
-              validationErrors.length > 0 ? 'fr-input-group--error' : ''
+              validationErrors.length > 0 ? "fr-input-group--error" : ""
             }`}
           >
             <label className="fr-label" htmlFor={`new-user-email-${group.id}`}>
@@ -135,7 +135,7 @@ export default function AddUserModal({
               <input
                 ref={inputRef}
                 className={`fr-input ${
-                  validationErrors.length > 0 ? 'fr-input--error' : ''
+                  validationErrors.length > 0 ? "fr-input--error" : ""
                 }`}
                 type="email"
                 id={`new-user-email-${group.id}`}
@@ -148,7 +148,7 @@ export default function AddUserModal({
                   }
                 }}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' && inputEmail?.trim() && !loading) {
+                  if (e.key === "Enter" && inputEmail?.trim() && !loading) {
                     handleAddNewUser();
                   }
                 }}
@@ -174,7 +174,7 @@ export default function AddUserModal({
               onClick={handleAddNewUser}
               disabled={!inputEmail?.trim() || loading}
             >
-              {loading ? 'Ajout en cours...' : 'Ajouter'}
+              {loading ? "Ajout en cours..." : "Ajouter"}
             </ButtonLink>
             <ButtonLink alt onClick={handleClose} disabled={loading}>
               Annuler

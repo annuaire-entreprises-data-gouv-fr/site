@@ -1,5 +1,5 @@
-import { ChangeEventHandler } from 'react';
-import { ISelectOptions } from './type';
+import { ChangeEventHandler } from "react";
+import { ISelectOptions } from "./type";
 
 type SelectProps = {
   placeholder?: string | null;
@@ -15,7 +15,7 @@ export const Select = ({
   label,
   options,
   placeholder = null,
-  name = '',
+  name = "",
   defaultValue = null,
   onChange = undefined,
 }: SelectProps) => (
@@ -29,7 +29,7 @@ export const Select = ({
       id={name}
       name={name}
       className="fr-select"
-      defaultValue={defaultValue || ''}
+      defaultValue={defaultValue || ""}
       onChange={onChange}
     >
       {placeholder && <option value="">{placeholder}</option>}

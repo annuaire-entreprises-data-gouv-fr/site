@@ -1,7 +1,7 @@
-import routes from '#clients/routes';
-import { IQualibat } from '#models/espace-agent/certificats/qualibat';
-import { Siret } from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+import routes from "#clients/routes";
+import { IQualibat } from "#models/espace-agent/certificats/qualibat";
+import { Siret } from "#utils/helpers";
+import clientAPIEntreprise, { IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseQualibat = IAPIEntrepriseResponse<{
   document_url: string; // "https://storage.entreprise.api.gouv.fr/siade/1635521735-1a675fc210d09e04604aabe5e93b452fb56865f5-certificat_qualibat.pdf",

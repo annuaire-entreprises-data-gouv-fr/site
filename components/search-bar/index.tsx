@@ -1,6 +1,6 @@
 const SearchBar = ({
-  placeholder = 'Nom, adresse, n° SIRET/SIREN...',
-  defaultValue = '',
+  placeholder = "Nom, adresse, n° SIRET/SIREN...",
+  defaultValue = "",
   autoFocus = false,
 }) => (
   <div className="fr-search-bar" id="search-input--lg">
@@ -17,7 +17,7 @@ const SearchBar = ({
       autoComplete="off"
       autoFocus={autoFocus}
       style={{
-        width: '100%',
+        width: "100%",
       }}
     />
     <button

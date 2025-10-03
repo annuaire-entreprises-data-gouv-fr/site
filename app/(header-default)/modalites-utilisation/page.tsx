@@ -1,12 +1,12 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import { Metadata } from 'next';
+import TextWrapper from "#components-ui/text-wrapper";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Modalités d’utilisation',
-  robots: 'noindex, nofollow',
+  title: "Modalités d’utilisation",
+  robots: "noindex, nofollow",
   alternates: {
     canonical:
-      'https://annuaire-entreprises.data.gouv.fr/modalites-utilisation',
+      "https://annuaire-entreprises.data.gouv.fr/modalites-utilisation",
   },
 };
 
@@ -16,7 +16,7 @@ const CGU = () => (
     <h2>1 - Champ d’application</h2>
     <p>
       Le présent document définit les modalités d’utilisation du service
-      Annuaire des Entreprises, accessible à la page{' '}
+      Annuaire des Entreprises, accessible à la page{" "}
       <a href="https://annuaire-entreprises.data.gouv.fr">
         https://annuaire-entreprises.data.gouv.fr
       </a>
@@ -198,7 +198,7 @@ const CGU = () => (
     <p>
       Vous pouvez nous aider à améliorer l’accessibilité du site en nous
       signalant les problèmes éventuels que vous rencontrez. Pour ce faire,
-      envoyez-nous un courriel à{' '}
+      envoyez-nous un courriel à{" "}
       <a href="mailto:annuaire-entreprises@data.gouv.fr">
         annuaire-entreprises@data.gouv.fr
       </a>
@@ -209,7 +209,7 @@ const CGU = () => (
     <ul>
       <li>
         Écrire un message au Défenseur des droits à l’aide du formulaire
-        accessible sur{' '}
+        accessible sur{" "}
         <a href="https://formulaire.defenseurdesdroits.fr">
           https://formulaire.defenseurdesdroits.fr
         </a>

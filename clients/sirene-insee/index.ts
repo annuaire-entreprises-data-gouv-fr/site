@@ -1,21 +1,21 @@
-import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { Information } from '#models/exceptions';
+import { HttpServerError, HttpUnauthorizedError } from "#clients/exceptions";
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import { Information } from "#models/exceptions";
 import httpClient, {
   httpGet,
   httpPost,
   IDefaultRequestConfig,
-} from '#utils/network';
-import { logInfoInSentry } from '#utils/sentry';
-import { URLSearchParams } from 'url';
+} from "#utils/network";
+import { logInfoInSentry } from "#utils/sentry";
+import { URLSearchParams } from "url";
 
 type IAccessToken = {
   data: {
     access_token: string;
     expires_in: number;
     scope: string;
-    token_type: 'Bearer' | string;
+    token_type: "Bearer" | string;
   };
   tokenExpiryTime: number;
 };
@@ -36,29 +36,29 @@ export class httpInseeClient {
         !this.token_url ||
         !this.username ||
         !this.password) &&
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === "production"
     ) {
-      throw new HttpServerError('An insee env variable is undefined');
+      throw new HttpServerError("An insee env variable is undefined");
     }
     this._token = null;
   }
 
   newToken = async () => {
     try {
-      const data = await httpClient<IAccessToken['data']>({
+      const data = await httpClient<IAccessToken["data"]>({
         url: this.token_url,
-        method: 'POST',
+        method: "POST",
         timeout: constants.timeout.XXS,
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         data: new URLSearchParams({
-          client_id: this.client_id || '',
-          client_secret: this.client_secret || '',
-          grant_type: 'password',
-          validity_period: '604800',
-          username: this.username || '',
-          password: this.password || '',
+          client_id: this.client_id || "",
+          client_secret: this.client_secret || "",
+          grant_type: "password",
+          validity_period: "604800",
+          username: this.username || "",
+          password: this.password || "",
         }).toString(),
       });
       this._token = {
@@ -81,13 +81,13 @@ export class httpInseeClient {
     if (!this._token || this.isTokenExpired()) {
       logInfoInSentry(
         new Information({
-          name: 'RefreshingInseeToken',
-          message: 'Refreshing Insee token',
+          name: "RefreshingInseeToken",
+          message: "Refreshing Insee token",
         })
       );
       await this.newToken();
       if (!this._token) {
-        throw new HttpUnauthorizedError('Failed to refresh token');
+        throw new HttpUnauthorizedError("Failed to refresh token");
       }
     }
     return this._token;

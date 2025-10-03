@@ -1,5 +1,5 @@
-import { loadAll } from '#utils/static-pages/load-all';
-import { IArticle } from '../type';
+import { loadAll } from "#utils/static-pages/load-all";
+import { IArticle } from "../type";
 
 export type IFaqArticle = {
   administrations: string[];
@@ -9,8 +9,8 @@ export const loadAllFaqArticlesByGroup = () => {
   const articlesByGroup: { [key: string]: IFaqArticle[] } = {};
 
   allFaqArticles.forEach((article) => {
-    articlesByGroup[article.group || 'default'] = [
-      ...(articlesByGroup[article.group || 'default'] || []),
+    articlesByGroup[article.group || "default"] = [
+      ...(articlesByGroup[article.group || "default"] || []),
       article,
     ];
   });
@@ -37,7 +37,7 @@ export const getFaqArticlesByTag = (tagList: string[]): IFaqArticle[] => {
 
 export const allFaqArticles = loadAll<IFaqArticle>(
   // @ts-ignore
-  require.context('data/faq', false, /\.yml$/)
+  require.context("data/faq", false, /\.yml$/)
 );
 
 export const allFaqArticlesByGroup = loadAllFaqArticlesByGroup();

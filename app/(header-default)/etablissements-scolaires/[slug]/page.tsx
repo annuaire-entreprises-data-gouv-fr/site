@@ -1,17 +1,17 @@
-import { EtablissementsScolairesSection } from '#components/education-nationale';
-import Title from '#components/title-section';
-import { FICHE } from '#components/title-section/tabs';
-import { getEtablissementsScolaires } from '#models/etablissements-scolaires';
+import { EtablissementsScolairesSection } from "#components/education-nationale";
+import Title from "#components/title-section";
+import { FICHE } from "#components/title-section/tabs";
+import { getEtablissementsScolaires } from "#models/etablissements-scolaires";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
-} from '#utils/helpers';
-import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
+} from "#utils/helpers";
+import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
   AppRouterProps,
-} from '#utils/server-side-helper/app/extract-params';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
+} from "#utils/server-side-helper/app/extract-params";
+import getSession from "#utils/server-side-helper/app/get-session";
+import { Metadata } from "next";
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -23,7 +23,7 @@ export const generateMetadata = async (
   return {
     title: `Établissements scolaires - ${uniteLegalePageTitle(uniteLegale)}`,
     description: uniteLegalePageDescription(uniteLegale),
-    robots: 'noindex',
+    robots: "noindex",
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/etablissements-scolaires/${uniteLegale.siren}`,
     },

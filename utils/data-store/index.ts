@@ -1,6 +1,6 @@
-import { HttpServerError } from '#clients/exceptions';
-import { FetchRessourceException } from '#models/exceptions';
-import { logWarningInSentry } from '#utils/sentry';
+import { HttpServerError } from "#clients/exceptions";
+import { FetchRessourceException } from "#models/exceptions";
+import { logWarningInSentry } from "#utils/sentry";
 
 /**
  * Caches a promise response in memory
@@ -63,7 +63,7 @@ export class DataStore<T> {
       throw new HttpServerError(`Empty data list : ${this.storeName}`);
     }
     const value = this.data[key];
-    return typeof value === 'undefined' ? null : value;
+    return typeof value === "undefined" ? null : value;
   };
 
   getKeys = async () => {

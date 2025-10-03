@@ -1,29 +1,29 @@
-import { getIAgentScope } from './helpers';
-import { ISession } from './session';
+import { getIAgentScope } from "./helpers";
+import { ISession } from "./session";
 
 /**
  * Application scopes designate specific parts or section of the UI / app
  */
 export enum ApplicationRights {
-  opendata = 'Données en open data',
-  isAgent = 'Compte agent public',
-  nonDiffusible = 'Données des entreprises non diffusibles',
-  actesRne = 'Actes au RNE',
-  bilansRne = 'Bilans au RNE',
-  documentsRne = 'Documents au RNE',
-  protectedCertificats = 'Certificats Qualifelec, Qualibat et OPQIBI',
-  associationProtected = 'Actes, statuts et données des dirigeants des associations',
-  mandatairesRCS = 'État civil complet des dirigeants d’entreprise',
-  beneficiaires = 'Registre des Bénéficiaires Effectifs',
-  conformite = 'Attestations de conformité fiscale (DGFiP) et sociale (Urssaf & MSA)',
-  subventionsAssociation = 'Données des subventions des associations',
-  effectifsAnnuels = 'Effectifs annuels (RCD)',
-  bilansBDF = 'Accès aux bilans (Banque de France)',
-  chiffreAffaires = 'Accès aux chiffres d’affaires (DGFiP)',
-  liensCapitalistiques = 'Accès aux liens capitalistiques (DGFiP)',
-  travauxPublics = 'Accès aux données relatives aux travaux publics',
-  administrateur = 'Administrateur',
-  liassesFiscales = 'Accès aux liasses fiscales (DGFiP)',
+  opendata = "Données en open data",
+  isAgent = "Compte agent public",
+  nonDiffusible = "Données des entreprises non diffusibles",
+  actesRne = "Actes au RNE",
+  bilansRne = "Bilans au RNE",
+  documentsRne = "Documents au RNE",
+  protectedCertificats = "Certificats Qualifelec, Qualibat et OPQIBI",
+  associationProtected = "Actes, statuts et données des dirigeants des associations",
+  mandatairesRCS = "État civil complet des dirigeants d’entreprise",
+  beneficiaires = "Registre des Bénéficiaires Effectifs",
+  conformite = "Attestations de conformité fiscale (DGFiP) et sociale (Urssaf & MSA)",
+  subventionsAssociation = "Données des subventions des associations",
+  effectifsAnnuels = "Effectifs annuels (RCD)",
+  bilansBDF = "Accès aux bilans (Banque de France)",
+  chiffreAffaires = "Accès aux chiffres d’affaires (DGFiP)",
+  liensCapitalistiques = "Accès aux liens capitalistiques (DGFiP)",
+  travauxPublics = "Accès aux données relatives aux travaux publics",
+  administrateur = "Administrateur",
+  liassesFiscales = "Accès aux liasses fiscales (DGFiP)",
 }
 
 /**
@@ -37,35 +37,35 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
     case ApplicationRights.actesRne:
     case ApplicationRights.bilansRne:
     case ApplicationRights.documentsRne:
-      return userScopes.includes('rne');
+      return userScopes.includes("rne");
     case ApplicationRights.bilansBDF:
-      return userScopes.includes('bilans_bdf');
+      return userScopes.includes("bilans_bdf");
     case ApplicationRights.conformite:
-      return userScopes.includes('conformite');
+      return userScopes.includes("conformite");
     case ApplicationRights.chiffreAffaires:
-      return userScopes.includes('chiffre_affaires');
+      return userScopes.includes("chiffre_affaires");
     case ApplicationRights.liassesFiscales:
-      return userScopes.includes('liasses_fiscales');
+      return userScopes.includes("liasses_fiscales");
     case ApplicationRights.liensCapitalistiques:
-      return userScopes.includes('liens_capitalistiques');
+      return userScopes.includes("liens_capitalistiques");
     case ApplicationRights.effectifsAnnuels:
-      return userScopes.includes('effectifs_annuels');
+      return userScopes.includes("effectifs_annuels");
     case ApplicationRights.protectedCertificats:
     case ApplicationRights.mandatairesRCS:
     case ApplicationRights.subventionsAssociation:
     case ApplicationRights.associationProtected:
       // not open data but available for all agents
-      return userScopes.includes('pseudo_opendata');
+      return userScopes.includes("pseudo_opendata");
     case ApplicationRights.beneficiaires:
-      return userScopes.includes('beneficiaires');
+      return userScopes.includes("beneficiaires");
     case ApplicationRights.nonDiffusible:
-      return userScopes.includes('nonDiffusible');
+      return userScopes.includes("nonDiffusible");
     case ApplicationRights.isAgent:
-      return userScopes.includes('agent');
+      return userScopes.includes("agent");
     case ApplicationRights.travauxPublics:
-      return userScopes.includes('travaux_publics');
+      return userScopes.includes("travaux_publics");
     case ApplicationRights.administrateur:
-      return userScopes.includes('administrateur');
+      return userScopes.includes("administrateur");
     default:
       return false;
   }

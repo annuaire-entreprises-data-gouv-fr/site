@@ -1,7 +1,7 @@
-import Logo from '#components-ui/logo';
-import { PrintNever } from '#components-ui/print-visibility';
-import { administrationsMetaData } from '#models/administrations';
-import { getAllLandingPages } from '#models/landing-pages';
+import Logo from "#components-ui/logo";
+import { PrintNever } from "#components-ui/print-visibility";
+import { administrationsMetaData } from "#models/administrations";
+import { getAllLandingPages } from "#models/landing-pages";
 
 const Footer = () => (
   <PrintNever>
@@ -238,14 +238,14 @@ const Footer = () => (
             <p className="fr-footer__content-desc">
               Ce site permet de retrouver toutes les données publiques détenues
               par l’administration sur une entreprise, une association ou une
-              administration et{' '}
+              administration et{" "}
               <a href="/a-propos/donnees-extrait-kbis">
                 en particulier les données contenues dans un extrait KBIS
-              </a>{' '}
+              </a>{" "}
               ou de l’extrait D1.
             </p>
             <p className="fr-footer__content-desc">
-              Il est opéré par la{' '}
+              Il est opéré par la{" "}
               <a
                 href="https://numerique.gouv.fr"
                 rel="noopener noreferrer"
@@ -317,7 +317,7 @@ const Footer = () => (
                         className="fr-footer__partners-link"
                         href={`/administration#${slug}`}
                       >
-                        {logoType === 'portrait' ? (
+                        {logoType === "portrait" ? (
                           <Logo
                             title={long}
                             alt={short}
@@ -348,11 +348,11 @@ const Footer = () => (
                   >
                     <Logo
                       title={[
-                        'Ainsi que : ',
+                        "Ainsi que : ",
                         ...Object.values(administrationsMetaData)
                           .filter(({ logoType }) => !logoType)
                           .map(({ long }) => long),
-                      ].join('\r\n')}
+                      ].join("\r\n")}
                       slug="rf"
                       width={80}
                       height={50}
@@ -411,7 +411,7 @@ const Footer = () => (
           </ul>
           <div className="fr-footer__bottom-copy">
             <p>
-              Sauf mention contraire, tous les textes de ce site sont sous{' '}
+              Sauf mention contraire, tous les textes de ce site sont sous{" "}
               <a
                 href="https://github.com/etalab/licence-ouverte/blob/master/LO.md"
                 target="_blank"

@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { Tag } from '#components-ui/tag';
-import LocalPageCounter from '#components/search-results/results-pagination/local-pagination';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { formatDate, formatSiret } from '#utils/helpers';
-import { useFetchAlimConfiance } from 'hooks/fetch/alim-confiance';
-import { useState } from 'react';
+import { Tag } from "#components-ui/tag";
+import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { formatDate, formatSiret } from "#utils/helpers";
+import { useFetchAlimConfiance } from "hooks/fetch/alim-confiance";
+import { useState } from "react";
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -39,7 +39,7 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
     >
       {(alimConfiance) => {
         const { total, page_size } = alimConfiance.meta;
-        const plural = total > 1 ? 's' : '';
+        const plural = total > 1 ? "s" : "";
 
         return (
           <>
@@ -65,7 +65,7 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
                   "Date d'inspection",
                   "Type d'activité",
                 ]}
-                columnWidths={['40%', '20%', '25%', '15%']}
+                columnWidths={["40%", "20%", "25%", "15%"]}
                 body={alimConfiance.data.map(
                   ({
                     siret,
@@ -94,19 +94,19 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
                     <Tag
                       color={
                         code === 4
-                          ? 'error'
+                          ? "error"
                           : code === 3
-                          ? 'warning'
-                          : code === 2
-                          ? 'info'
-                          : 'success'
+                            ? "warning"
+                            : code === 2
+                              ? "info"
+                              : "success"
                       }
                     >
                       {syntheseEvaluation}
                     </Tag>,
                     <div>{formatDate(dateInspection)}</div>,
                     <div>
-                      {libelleActiviteEtablissement.split('|').join(', ')}
+                      {libelleActiviteEtablissement.split("|").join(", ")}
                     </div>,
                   ]
                 )}

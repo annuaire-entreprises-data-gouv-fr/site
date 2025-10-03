@@ -1,10 +1,10 @@
-import { HttpLocked, HttpNotFound } from '#clients/exceptions';
-import { default as rolesDataClient } from '#clients/roles-data';
-import { IRolesDataUser } from '#clients/roles-data/interface';
-import { IAgentScope } from '#models/authentication/agent/scopes/constants';
-import { FetchRessourceException } from '#models/exceptions';
-import { logFatalErrorInSentry } from '#utils/sentry';
-import { AgentNotVerifiedException } from '../authentication-exceptions';
+import { HttpLocked, HttpNotFound } from "#clients/exceptions";
+import { default as rolesDataClient } from "#clients/roles-data";
+import { IRolesDataUser } from "#clients/roles-data/interface";
+import { IAgentScope } from "#models/authentication/agent/scopes/constants";
+import { FetchRessourceException } from "#models/exceptions";
+import { logFatalErrorInSentry } from "#utils/sentry";
+import { AgentNotVerifiedException } from "../authentication-exceptions";
 
 export type IRolesDataGroup = {
   id: number;
@@ -37,7 +37,7 @@ export class Groups {
 
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'Roles.data Groups',
+          ressource: "Roles.data Groups",
           cause: error,
         })
       );

@@ -1,25 +1,25 @@
-import AgentNavigation from '#components/espace-agent-components/agent-navigation';
-import { GroupManagement } from '#components/espace-agent-components/group-management';
-import { Groups } from '#models/authentication/group/groups';
-import { rolesMetadataStore } from '#models/authentication/group/roles';
-import { pluralize } from '#utils/helpers';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+import AgentNavigation from "#components/espace-agent-components/agent-navigation";
+import { GroupManagement } from "#components/espace-agent-components/group-management";
+import { Groups } from "#models/authentication/group/groups";
+import { rolesMetadataStore } from "#models/authentication/group/roles";
+import { pluralize } from "#utils/helpers";
+import getSession from "#utils/server-side-helper/app/get-session";
+import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: 'Vos groupes au sein de l’Annuaire des Entreprises',
+  title: "Vos groupes au sein de l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/mes-groupes',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/mes-groupes",
   },
-  robots: 'noindex, nofollow',
+  robots: "noindex, nofollow",
 };
 
 const MesGroupesPage = async () => {
   const session = await getSession();
 
   if (!session?.user?.isSuperAgent) {
-    return redirect('/compte/accueil');
+    return redirect("/compte/accueil");
   }
 
   const [roles, groups] = await Promise.all([

@@ -1,12 +1,12 @@
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { FetchRessourceException } from '#models/exceptions';
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IEtablissement, IUniteLegale } from "#models/core/types";
+import { FetchRessourceException } from "#models/exceptions";
 import {
   getServicePublicByEtablissement,
   getServicePublicByUniteLegale,
-} from '#models/service-public';
-import logErrorInSentry from '#utils/sentry';
-import { useFetchExternalData } from './use-fetch-data';
+} from "#models/service-public";
+import logErrorInSentry from "#utils/sentry";
+import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchServicePublic(
   uniteLegale: IUniteLegale,
@@ -25,7 +25,7 @@ export function useFetchServicePublic(
       logError: (e: any) => {
         logErrorInSentry(
           new FetchRessourceException({
-            ressource: 'AnnuaireServicePublic',
+            ressource: "AnnuaireServicePublic",
             administration: EAdministration.DILA,
             cause: e,
             context: {

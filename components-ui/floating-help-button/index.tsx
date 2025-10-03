@@ -1,5 +1,5 @@
-import { PrintNever } from '#components-ui/print-visibility';
-import styles from './style.module.css';
+import { PrintNever } from "#components-ui/print-visibility";
+import styles from "./style.module.css";
 
 export default function FloatingHelpButton({
   children,
@@ -8,7 +8,7 @@ export default function FloatingHelpButton({
 }) {
   return (
     <PrintNever>
-      <div className={styles.questionBottomRight + ' layout-center'}>
+      <div className={styles.questionBottomRight + " layout-center"}>
         {children}
       </div>
     </PrintNever>

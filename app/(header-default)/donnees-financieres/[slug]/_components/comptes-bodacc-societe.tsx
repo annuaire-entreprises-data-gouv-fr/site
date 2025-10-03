@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import routes from '#clients/routes';
-import ButtonLink from '#components-ui/button';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale } from '#models/core/types';
-import { formatDate } from '#utils/helpers';
-import { useFetchBODACC } from 'hooks';
+import routes from "#clients/routes";
+import ButtonLink from "#components-ui/button";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IUniteLegale } from "#models/core/types";
+import { formatDate } from "#utils/helpers";
+import { useFetchBODACC } from "hooks";
 
 export function ComptesBodaccSociete({
   uniteLegale,
@@ -27,7 +27,7 @@ export function ComptesBodaccSociete({
         <>
           {bodacc.comptes.length === 0 ? (
             <div>
-              Aucun dépôt de compte publié au{' '}
+              Aucun dépôt de compte publié au{" "}
               <a
                 target="_blank"
                 rel="noreferrer noopener"
@@ -40,7 +40,7 @@ export function ComptesBodaccSociete({
             </div>
           ) : (
             <FullTable
-              head={['Publication', 'Details', 'Annonce']}
+              head={["Publication", "Details", "Annonce"]}
               body={bodacc.comptes.map((annonce) => [
                 <strong>{formatDate(annonce.datePublication)}</strong>,
                 <>

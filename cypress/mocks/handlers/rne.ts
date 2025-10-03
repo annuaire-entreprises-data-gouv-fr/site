@@ -1,4 +1,4 @@
-import { HttpResponse, HttpResponseResolver } from 'msw';
+import { HttpResponse, HttpResponseResolver } from "msw";
 
 export const rneDefaultHandler: HttpResponseResolver = ({ request }) => {
   return HttpResponse.json({});

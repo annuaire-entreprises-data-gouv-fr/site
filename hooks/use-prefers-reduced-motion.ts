@@ -1,10 +1,10 @@
 // https://www.joshwcomeau.com/react/prefers-reduced-motion/
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-const QUERY = '(prefers-reduced-motion: no-preference)';
+const QUERY = "(prefers-reduced-motion: no-preference)";
 const getInitialState = () =>
-  typeof window !== 'undefined' && !window.matchMedia(QUERY).matches;
+  typeof window !== "undefined" && !window.matchMedia(QUERY).matches;
 
 /**
  * Returns whether the user has requested that the system minimize the amount of
@@ -17,16 +17,16 @@ export function usePrefersReducedMotion() {
     useState(getInitialState);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
     if (!window.matchMedia) return;
     const mediaQueryList = window.matchMedia(QUERY);
     const listener = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(!event.matches);
     };
 
-    mediaQueryList.addEventListener?.('change', listener);
+    mediaQueryList.addEventListener?.("change", listener);
     return () => {
-      mediaQueryList.removeEventListener?.('change', listener);
+      mediaQueryList.removeEventListener?.("change", listener);
     };
   }, []);
 

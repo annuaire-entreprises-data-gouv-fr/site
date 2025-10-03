@@ -1,13 +1,13 @@
-import InformationTooltip from '#components-ui/information-tooltip';
-import { Tag } from '#components-ui/tag';
-import { Siren } from '#utils/helpers';
-import React from 'react';
+import InformationTooltip from "#components-ui/information-tooltip";
+import { Tag } from "#components-ui/tag";
+import { Siren } from "#utils/helpers";
+import React from "react";
 
 const TagCC = ({ siren, idcc }: { siren: Siren; idcc: string }) => (
   <Tag
     link={{
       href: `/divers/${siren}#idcc-${idcc}`,
-      'aria-label': `Consulter la liste de toutes les conventions collectives de la structure, dont l'IDCC ${idcc}`,
+      "aria-label": `Consulter la liste de toutes les conventions collectives de la structure, dont l'IDCC ${idcc}`,
     }}
   >
     IDCC {idcc}

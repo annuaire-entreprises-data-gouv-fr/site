@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   Children,
   PropsWithChildren,
@@ -8,8 +8,8 @@ import {
   useEffect,
   useId,
   useState,
-} from 'react';
-import style from './style.module.css';
+} from "react";
+import style from "./style.module.css";
 
 type IProps = PropsWithChildren<{
   /**
@@ -17,18 +17,18 @@ type IProps = PropsWithChildren<{
    * MUST NOT contain any interactive elements (like buttons or links) for accessibility reasons
    */
   label: string | ReactNode;
-  horizontalOrientation?: 'left' | 'right' | 'center';
-  verticalOrientation?: 'top' | 'bottom';
+  horizontalOrientation?: "left" | "right" | "center";
+  verticalOrientation?: "top" | "bottom";
   width?: number;
   inlineBlock?: boolean;
   left?: string;
-  cursor?: 'help' | 'pointer' | 'auto';
+  cursor?: "help" | "pointer" | "auto";
   /**
    * The aria relation between the tooltip and the element it describes.
    * - 'labelledby' is used when the tooltip is a label for the element, and will replace the element's content (for instance when the element is an icon)
    *  - 'describedby' is used when the tooltip adds information to the element, it will be read after the element's content
    */
-  ariaRelation?: 'describedby' | 'labelledby';
+  ariaRelation?: "describedby" | "labelledby";
   /**
    * The tabIndex of the element, MUST BE SET to allow keyboard navigation (accessibility)
    * - to a number if the children is not focusable (like a div or a span), usually to 0
@@ -43,13 +43,13 @@ type IProps = PropsWithChildren<{
 function InformationTooltip({
   children,
   label,
-  horizontalOrientation = 'center',
-  verticalOrientation = 'top',
-  ariaRelation = 'describedby',
+  horizontalOrientation = "center",
+  verticalOrientation = "top",
+  ariaRelation = "describedby",
   width = 250,
   inlineBlock = true,
-  left = '',
-  cursor = 'auto',
+  left = "",
+  cursor = "auto",
   tabIndex,
 }: IProps) {
   const id = useId();
@@ -81,21 +81,21 @@ function InformationTooltip({
         onMouseLeave={handleMouseLeave}
         style={{
           cursor: cursor,
-          display: inlineBlock ? 'inline-block' : 'block',
+          display: inlineBlock ? "inline-block" : "block",
         }}
       >
         <span>{children}</span>
         <span
           className={`${style.tooltip} ${style[horizontalOrientation]} ${
             style[verticalOrientation]
-          } ${displayed ? style.displayed : ''}`}
+          } ${displayed ? style.displayed : ""}`}
           style={{
             width: `${width}px`,
             left: left || computeLeft(horizontalOrientation, width),
             borderBottomRightRadius:
-              horizontalOrientation === 'right' ? '0' : '5px',
+              horizontalOrientation === "right" ? "0" : "5px",
             borderBottomLeftRadius:
-              horizontalOrientation === 'left' ? '0' : '5px',
+              horizontalOrientation === "left" ? "0" : "5px",
           }}
           id={id}
           role="tooltip"
@@ -108,13 +108,13 @@ function InformationTooltip({
 }
 export default InformationTooltip;
 
-const computeLeft = (orientation: 'left' | 'right' | 'center', width = 250) => {
+const computeLeft = (orientation: "left" | "right" | "center", width = 250) => {
   switch (orientation) {
-    case 'right':
+    case "right":
       return `calc(50% - ${width}px)`;
-    case 'left':
+    case "left":
       return `50%`;
-    case 'center':
+    case "center":
     default:
       return `calc(50% - ${Math.round(width / 2)}px)`;
   }
@@ -126,14 +126,14 @@ function useTooltipState() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         setDisplayedFocus(false);
         setDisplayedHover(false);
       }
     };
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 

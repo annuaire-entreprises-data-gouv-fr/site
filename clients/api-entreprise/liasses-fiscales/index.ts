@@ -1,9 +1,9 @@
-import routes from '#clients/routes';
-import { ILiassesFiscalesProtected } from '#models/espace-agent/dgfip/liasses-fiscales';
-import { UseCase } from '#models/use-cases';
-import { Siren } from '#utils/helpers';
-import clientAPIEntreprise from '../client';
-import { IAPIEntrepriseLiassesFiscales } from './types';
+import routes from "#clients/routes";
+import { ILiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
+import { UseCase } from "#models/use-cases";
+import { Siren } from "#utils/helpers";
+import clientAPIEntreprise from "../client";
+import { IAPIEntrepriseLiassesFiscales } from "./types";
 
 /**
  * GET association from API Entreprise
@@ -28,7 +28,7 @@ const mapToDomainObject = (
 ): ILiassesFiscalesProtected => {
   return {
     obligationsFiscales: response.data.obligations_fiscales.map((obl) => {
-      return `Régime: ${obl.regime}${obl.libelle ? ` (${obl.libelle})` : ''}`;
+      return `Régime: ${obl.regime}${obl.libelle ? ` (${obl.libelle})` : ""}`;
     }),
     declarations: response.data.declarations.map((declaration) => ({
       imprime: declaration.numero_imprime,

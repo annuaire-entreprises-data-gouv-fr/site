@@ -1,6 +1,6 @@
-import { PrintNever } from '#components-ui/print-visibility';
-import constants from '#models/constants';
-import styles from './styles.module.css';
+import { PrintNever } from "#components-ui/print-visibility";
+import constants from "#models/constants";
+import styles from "./styles.module.css";
 
 const TEMP_INCIDENT_BANNER_MESSAGE = `
         🚨 Nous rencontrons actuellement des difficultés techniques, le service peut être temporairement indisponible.

@@ -1,8 +1,8 @@
-import ButtonLink from '#components-ui/button';
-import ButtonFranceConnect from '#components-ui/button-france-connect';
-import { ISession } from '#models/authentication/user/session';
-import constants from '#models/constants';
-import { getHidePersonalDataRequestFCSession } from '#utils/session';
+import ButtonLink from "#components-ui/button";
+import ButtonFranceConnect from "#components-ui/button-france-connect";
+import { ISession } from "#models/authentication/user/session";
+import constants from "#models/constants";
+import { getHidePersonalDataRequestFCSession } from "#utils/session";
 
 export function ConnectionFranceConnect({
   session,
@@ -33,7 +33,7 @@ export function ConnectionFranceConnect({
         <>
           <h2>Authentification réussie</h2>
           <p>
-            Vous êtes correctement authentifié avec FranceConnect en tant que{' '}
+            Vous êtes correctement authentifié avec FranceConnect en tant que{" "}
             <strong>
               {franceConnectInfo.firstName} {franceConnectInfo.familyName}
             </strong>
@@ -71,7 +71,7 @@ export function ConnectionFranceConnect({
             </strong>
             <br />
             Dans ce cas vous pouvez nous écrire directement en précisant votre
-            demande. Le temps de traitement pourra être plus long.{' '}
+            demande. Le temps de traitement pourra être plus long.{" "}
             <a href={constants.links.parcours.contact}>
               Faire ma demande via le formulaire de contact
             </a>

@@ -1,12 +1,12 @@
-import { slugify } from '#utils/helpers';
-import { administrationsMetaData, allAPI } from '.';
+import { slugify } from "#utils/helpers";
+import { administrationsMetaData, allAPI } from ".";
 
 const loadDataToModify = () => {
   return Object.values(administrationsMetaData)
     .flatMap(({ dataSources, contact, site, long, short }) => {
       return dataSources.flatMap((datasource) => {
         return (datasource.data || []).map(
-          ({ label, form = '', targets = [] }) => {
+          ({ label, form = "", targets = [] }) => {
             const slug = slugify(label);
             return {
               label: label,

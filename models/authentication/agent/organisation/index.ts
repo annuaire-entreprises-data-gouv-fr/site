@@ -1,16 +1,16 @@
-import { HttpForbiddenError, HttpServerError } from '#clients/exceptions';
-import { isAPINotResponding } from '#models/api-not-responding';
-import { CanRequestAuthorizationException } from '#models/authentication/authentication-exceptions';
-import { IUniteLegale } from '#models/core/types';
-import { fetchUniteLegaleFromRechercheEntreprise } from '#models/core/unite-legale';
-import { extractSirenFromSiret, Siren, Siret } from '#utils/helpers';
-import { defaultAgentScopes } from '../scopes/constants';
-import { mightBeAnAuthorizedAdministration } from './might-be-an-administration';
-import { isOrganisationWhitelisted } from './whitelisted-administrations';
+import { HttpForbiddenError, HttpServerError } from "#clients/exceptions";
+import { isAPINotResponding } from "#models/api-not-responding";
+import { CanRequestAuthorizationException } from "#models/authentication/authentication-exceptions";
+import { IUniteLegale } from "#models/core/types";
+import { fetchUniteLegaleFromRechercheEntreprise } from "#models/core/unite-legale";
+import { extractSirenFromSiret, Siren, Siret } from "#utils/helpers";
+import { defaultAgentScopes } from "../scopes/constants";
+import { mightBeAnAuthorizedAdministration } from "./might-be-an-administration";
+import { isOrganisationWhitelisted } from "./whitelisted-administrations";
 
 const organisationHabilitation = {
   scopes: [...defaultAgentScopes],
-  userType: 'Agent connecté',
+  userType: "Agent connecté",
   isSuperAgent: false,
 };
 
@@ -31,10 +31,10 @@ export class AgentOrganisation {
     );
 
     if (isAPINotResponding(uniteLegale)) {
-      throw new HttpServerError('Failed to fetch organisation details');
+      throw new HttpServerError("Failed to fetch organisation details");
     }
 
-    const codeJuridique = (uniteLegale.natureJuridique || '').replace('.', '');
+    const codeJuridique = (uniteLegale.natureJuridique || "").replace(".", "");
     const isAuthorized = this.isAnAuthorizedAdministration(
       uniteLegale,
       codeJuridique
@@ -49,7 +49,7 @@ export class AgentOrganisation {
           this.siren
         );
       }
-      throw new HttpForbiddenError('Organization is not a service public');
+      throw new HttpForbiddenError("Organization is not a service public");
     }
   }
 
@@ -67,7 +67,7 @@ export class AgentOrganisation {
   }
 
   isMCP(idp_id: string) {
-    if (idp_id === '71144ab3-ee1a-4401-b7b3-79b44f7daeeb') {
+    if (idp_id === "71144ab3-ee1a-4401-b7b3-79b44f7daeeb") {
       return true;
     } else {
       return false;

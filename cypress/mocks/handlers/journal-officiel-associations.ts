@@ -1,5 +1,5 @@
-import { HttpResponse, HttpResponseResolver } from 'msw';
-import journalOfficielAssociations from '../../fixtures/journal-officiel-associations.json';
+import { HttpResponse, HttpResponseResolver } from "msw";
+import journalOfficielAssociations from "../../fixtures/journal-officiel-associations.json";
 
 export const journalOfficielAssociationsHandler: HttpResponseResolver = ({
   request,

@@ -1,5 +1,5 @@
-import { EAdministration } from './administrations/EAdministration';
-import { IDataFetchingState } from './data-fetching';
+import { EAdministration } from "./administrations/EAdministration";
+import { IDataFetchingState } from "./data-fetching";
 
 export interface IAPINotRespondingError {
   administration: EAdministration;
@@ -17,7 +17,7 @@ export const APINotRespondingFactory = (
 };
 
 export function isAPINotResponding<
-  T extends Exclude<unknown, IDataFetchingState>
+  T extends Exclude<unknown, IDataFetchingState>,
 >(
   toBeDetermined: T | IAPINotRespondingError
 ): toBeDetermined is IAPINotRespondingError {

@@ -1,12 +1,12 @@
-import FAQLink from '#components-ui/faq-link';
-import { INPI } from '#components/administrations';
-import { DataInpiLinkWithExplanations } from '#components/justificatifs/data-inpi-link';
-import { Section } from '#components/section';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { formatDate } from '#utils/helpers';
+import FAQLink from "#components-ui/faq-link";
+import { INPI } from "#components/administrations";
+import { DataInpiLinkWithExplanations } from "#components/justificatifs/data-inpi-link";
+import { Section } from "#components/section";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { formatDate } from "#utils/helpers";
 
 const formatDateCloture = (DDMM: string) => {
   if (DDMM && DDMM.length === 4) {
@@ -38,7 +38,7 @@ export const UniteLegaleImmatriculationSection = ({
       lastModified={rneLastModified}
     >
       <p>
-        Cette structure est une entreprise immatriculée au{' '}
+        Cette structure est une entreprise immatriculée au{" "}
         <strong>Registre National des Entreprises (RNE)</strong>. Ce registre
         liste les entreprises de France. Il est tenu par l’
         <INPI />.
@@ -48,16 +48,16 @@ export const UniteLegaleImmatriculationSection = ({
           ...(immatriculation
             ? [
                 [
-                  'Date d’immatriculation',
+                  "Date d’immatriculation",
                   formatDate(immatriculation?.dateImmatriculation),
                 ],
                 [
-                  'Date de début d’activité',
+                  "Date de début d’activité",
                   formatDate(immatriculation?.dateDebutActivite),
                 ],
                 [
-                  'Nature de l’entreprise',
-                  (immatriculation?.natureEntreprise || []).join(', '),
+                  "Nature de l’entreprise",
+                  (immatriculation?.natureEntreprise || []).join(", "),
                 ],
                 ...(immatriculation?.isPersonneMorale
                   ? [
@@ -74,7 +74,7 @@ export const UniteLegaleImmatriculationSection = ({
                         immatriculation?.capital,
                       ],
                       [
-                        'Clôture de l’exercice comptable',
+                        "Clôture de l’exercice comptable",
                         formatDateCloture(immatriculation?.dateCloture),
                       ],
                     ]
@@ -82,11 +82,11 @@ export const UniteLegaleImmatriculationSection = ({
                 ...(immatriculation?.duree
                   ? [
                       [
-                        'Durée de la personne morale',
+                        "Durée de la personne morale",
                         `${immatriculation?.duree} ans${
                           immatriculation?.dateFin
                             ? `, jusqu’au ${immatriculation?.dateFin}`
-                            : ''
+                            : ""
                         }`,
                       ],
                     ]
@@ -94,13 +94,13 @@ export const UniteLegaleImmatriculationSection = ({
                 ...(immatriculation?.dateRadiation
                   ? [
                       [
-                        'Date de radiation',
+                        "Date de radiation",
                         formatDate(immatriculation?.dateRadiation),
                       ],
                     ]
                   : []),
                 [
-                  'Dirigeants',
+                  "Dirigeants",
                   <a href={`/dirigeants/${uniteLegale.siren}`}>
                     → Consulter la liste des dirigeants
                   </a>,

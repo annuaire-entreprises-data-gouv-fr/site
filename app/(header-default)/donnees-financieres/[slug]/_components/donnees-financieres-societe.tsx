@@ -1,18 +1,18 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { DonneesPriveesSection } from '#components/donnees-privees-section';
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import { DonneesPriveesSection } from "#components/donnees-privees-section";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { estDiffusible } from '#models/core/diffusion';
-import { IUniteLegale } from '#models/core/types';
-import { BilansDocumentsSociete } from './bilans-documents-societe';
-import { ComptesBodaccSociete } from './comptes-bodacc-societe';
-import { FinancesSocieteSummary } from './finances-societe-summary';
-import { IndicateursFinanciers } from './indicateurs-financiers';
-import { IndicateursFinanciersBDF } from './indicateurs-financiers-bdf';
-import { LiassesFiscales } from './liasses-fiscales';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { estDiffusible } from "#models/core/diffusion";
+import { IUniteLegale } from "#models/core/types";
+import { BilansDocumentsSociete } from "./bilans-documents-societe";
+import { ComptesBodaccSociete } from "./comptes-bodacc-societe";
+import { FinancesSocieteSummary } from "./finances-societe-summary";
+import { IndicateursFinanciers } from "./indicateurs-financiers";
+import { IndicateursFinanciersBDF } from "./indicateurs-financiers-bdf";
+import { LiassesFiscales } from "./liasses-fiscales";
 
 export default function DonneesFinancieresSociete({
   uniteLegale,

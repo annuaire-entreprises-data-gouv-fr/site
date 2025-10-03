@@ -1,10 +1,10 @@
-import { clientDCA } from '#clients/open-data-soft/clients/journal-officiel-associations';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale as IAssociation } from '#models/core/types';
-import { FetchRessourceException } from '#models/exceptions';
-import { IdRna } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { useFetchExternalData } from './use-fetch-data';
+import { clientDCA } from "#clients/open-data-soft/clients/journal-officiel-associations";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IUniteLegale as IAssociation } from "#models/core/types";
+import { FetchRessourceException } from "#models/exceptions";
+import { IdRna } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { useFetchExternalData } from "./use-fetch-data";
 
 export const useFetchComptesAssociation = (uniteLegale: IAssociation) => {
   const idRna = uniteLegale.association.idAssociation as IdRna;
@@ -18,7 +18,7 @@ export const useFetchComptesAssociation = (uniteLegale: IAssociation) => {
           return;
         }
         const exception = new FetchRessourceException({
-          ressource: 'ComptesAssociation',
+          ressource: "ComptesAssociation",
           administration: EAdministration.DILA,
           cause: e,
           context: {

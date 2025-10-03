@@ -1,33 +1,33 @@
-import { HttpNotFound } from '#clients/exceptions';
-import { clientRGE } from '#clients/rge';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { HttpNotFound } from "#clients/exceptions";
+import { clientRGE } from "#clients/rge";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { FetchRessourceException } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '../core/types';
+} from "#models/api-not-responding";
+import { FetchRessourceException } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import { IUniteLegale } from "../core/types";
 
 export type INomCertificat =
-  | 'QUALIBAT-RGE'
-  | 'QualiPAC Chauffage'
-  | 'Qualibois module Eau'
-  | 'Certificat OPQIBI'
-  | 'Qualibois module Air'
-  | 'Chauffage +'
-  | 'Certificat Qualifelec RGE'
-  | 'Qualisol CESI'
-  | 'QualiPV 36'
-  | 'Ventilation +'
-  | 'Qualisol Combi'
-  | 'QualiPAC module CET'
-  | 'QualiPV 500'
-  | 'CERTIBAT-RGE'
-  | ' NF HABITAT Rénovation Maison RGE par CERQUAL'
-  | 'Qualiforage module Sonde'
-  | 'Qualiforage module Nappe'
-  | 'Qualisol Collectif';
+  | "QUALIBAT-RGE"
+  | "QualiPAC Chauffage"
+  | "Qualibois module Eau"
+  | "Certificat OPQIBI"
+  | "Qualibois module Air"
+  | "Chauffage +"
+  | "Certificat Qualifelec RGE"
+  | "Qualisol CESI"
+  | "QualiPV 36"
+  | "Ventilation +"
+  | "Qualisol Combi"
+  | "QualiPAC module CET"
+  | "QualiPV 500"
+  | "CERTIBAT-RGE"
+  | " NF HABITAT Rénovation Maison RGE par CERQUAL"
+  | "Qualiforage module Sonde"
+  | "Qualiforage module Nappe"
+  | "Qualisol Collectif";
 
 export interface IRGECertification {
   companyInfo: {
@@ -55,7 +55,7 @@ export const getRGECertifications = async (
 ): Promise<IRGECertification | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.estRge) {
-      throw new HttpNotFound('Not a RGE company');
+      throw new HttpNotFound("Not a RGE company");
     }
     return await clientRGE(uniteLegale.siren);
   } catch (e: any) {
@@ -65,7 +65,7 @@ export const getRGECertifications = async (
     logErrorInSentry(
       new FetchRessourceException({
         cause: e,
-        ressource: 'RGECertifications',
+        ressource: "RGECertifications",
         context: {
           siren: uniteLegale.siren,
         },

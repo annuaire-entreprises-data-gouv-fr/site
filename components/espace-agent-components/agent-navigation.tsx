@@ -1,22 +1,22 @@
-import ButtonLink from '#components-ui/button';
-import constants from '#models/constants';
-import AgentNavigationLink from './agent-navigation-link';
+import ButtonLink from "#components-ui/button";
+import constants from "#models/constants";
+import AgentNavigationLink from "./agent-navigation-link";
 
 export default async function AgentNavigation() {
   const navLinks = [
-    { label: 'Mon espace', href: '/compte/accueil' },
-    { label: 'Mes groupes', href: '/compte/mes-groupes' },
+    { label: "Mon espace", href: "/compte/accueil" },
+    { label: "Mes groupes", href: "/compte/mes-groupes" },
   ];
   return (
     <nav
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        margin: '1rem 0',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        margin: "1rem 0",
       }}
     >
-      <div style={{ display: 'flex', gap: '2rem' }}>
+      <div style={{ display: "flex", gap: "2rem" }}>
         {navLinks.map(({ label, href }) => (
           <AgentNavigationLink href={href} label={label} key={href} />
         ))}

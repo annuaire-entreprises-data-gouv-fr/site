@@ -1,8 +1,8 @@
-import getSession from '#utils/server-side-helper/app/get-session';
-import { NextResponse } from 'next/server';
-import { addUserSchema } from '../../input-validation';
-import { getGroup } from '../../route-helpers';
-import { withAgentAuth, withErrorHandling } from '../../route-wrappers';
+import getSession from "#utils/server-side-helper/app/get-session";
+import { NextResponse } from "next/server";
+import { addUserSchema } from "../../input-validation";
+import { getGroup } from "../../route-helpers";
+import { withAgentAuth, withErrorHandling } from "../../route-wrappers";
 
 async function addUserHandler(
   request: Request,

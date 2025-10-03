@@ -1,7 +1,7 @@
-import { ErrorNotFoundExplanations } from '#components/error-explanations';
-import Footer from '#components/footer';
-import { HeaderAppRouter } from '#components/header/header-app-router';
-import { Question } from '#components/question';
+import { ErrorNotFoundExplanations } from "#components/error-explanations";
+import Footer from "#components/footer";
+import { HeaderAppRouter } from "#components/header/header-app-router";
+import { Question } from "#components/question";
 
 export default function NotFound() {
   return (

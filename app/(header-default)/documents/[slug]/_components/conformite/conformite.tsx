@@ -1,11 +1,11 @@
-import React from 'react';
-import { Icon } from '#components-ui/icon/wrapper';
+import React from "react";
+import { Icon } from "#components-ui/icon/wrapper";
 import {
   IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
-} from '#models/api-not-responding';
-import { IConformite } from '#models/espace-agent/conformite';
+} from "#models/api-not-responding";
+import { IConformite } from "#models/espace-agent/conformite";
 
 const APINotRespongingElement: React.FC<{
   data: IAPINotRespondingError;
@@ -62,15 +62,15 @@ const Conformite: React.FC<{
   }
 
   const valid = data.isValid === true;
-  const iconSlug = valid ? 'open' : 'closed';
-  const label = `${administration} : ${valid ? '' : 'non-'}conforme`;
+  const iconSlug = valid ? "open" : "closed";
+  const label = `${administration} : ${valid ? "" : "non-"}conforme`;
 
   return (
     <div className="layout-space-between">
       <Icon slug={iconSlug}>{label}</Icon>
       {data.url && (
         <a href={data.url}>
-          <Icon slug="download">{data.label || 'télécharger'}</Icon>
+          <Icon slug="download">{data.label || "télécharger"}</Icon>
         </a>
       )}
     </div>

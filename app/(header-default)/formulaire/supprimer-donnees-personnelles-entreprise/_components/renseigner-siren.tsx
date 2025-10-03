@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { Loader } from '#components-ui/loader';
-import { isSiren } from '#utils/helpers';
-import { useState } from 'react';
+import { Loader } from "#components-ui/loader";
+import { isSiren } from "#utils/helpers";
+import { useState } from "react";
 
 type RenseignerSirenProps = {
   postFormData: (formData: FormData) => Promise<void>;
 };
 
 export function RenseignerSiren({ postFormData }: RenseignerSirenProps) {
-  const [siren, setSiren] = useState('');
+  const [siren, setSiren] = useState("");
   const [loading, setLoading] = useState(false);
   const validSiren = isSiren(siren);
 
@@ -18,7 +18,7 @@ export function RenseignerSiren({ postFormData }: RenseignerSirenProps) {
     setLoading(true);
 
     const formData = new FormData();
-    formData.append('siren', siren);
+    formData.append("siren", siren);
     await postFormData(formData);
 
     setLoading(false);

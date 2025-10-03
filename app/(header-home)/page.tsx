@@ -1,17 +1,17 @@
-import { LogoAnnuaireWithEasterEgg } from '#components-ui/logo-annuaire/logo-with-easter-egg';
-import Favourites from '#components/favourites';
-import SearchBar from '#components/search-bar';
-import StructuredDataSearchAction from '#components/structured-data/search';
-import { Metadata } from 'next';
+import { LogoAnnuaireWithEasterEgg } from "#components-ui/logo-annuaire/logo-with-easter-egg";
+import Favourites from "#components/favourites";
+import SearchBar from "#components/search-bar";
+import StructuredDataSearchAction from "#components/structured-data/search";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    'L’Annuaire des Entreprises françaises : les informations légales officielles de l’administration',
+    "L’Annuaire des Entreprises françaises : les informations légales officielles de l’administration",
   description:
-    'L’administration permet aux particuliers, entrepreneurs et agents publics de vérifier les informations informations légales des entreprises, associations et services publics en France.',
-  robots: 'index, follow',
+    "L’administration permet aux particuliers, entrepreneurs et agents publics de vérifier les informations informations légales des entreprises, associations et services publics en France.",
+  robots: "index, follow",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr',
+    canonical: "https://annuaire-entreprises.data.gouv.fr",
   },
 };
 
@@ -22,26 +22,26 @@ export default function IndexPage() {
       <div className="layout-center">
         <form
           style={{
-            marginBottom: '16vh',
-            marginTop: '11vh',
-            maxWidth: '900px',
+            marginBottom: "16vh",
+            marginTop: "11vh",
+            maxWidth: "900px",
           }}
           id="search-bar-form"
-          action={'/rechercher'}
+          action={"/rechercher"}
           method="get"
         >
           <LogoAnnuaireWithEasterEgg />
-          <h2 style={{ textAlign: 'center', marginTop: '30px' }}>
+          <h2 style={{ textAlign: "center", marginTop: "30px" }}>
             Vérifiez les informations légales publiques des entreprises,
             associations et services publics en France
           </h2>
           <div
             style={{
-              margin: 'auto',
-              marginTop: '30px',
-              flexDirection: 'column',
-              width: '100%',
-              maxWidth: '450px',
+              margin: "auto",
+              marginTop: "30px",
+              flexDirection: "column",
+              width: "100%",
+              maxWidth: "450px",
             }}
           >
             <SearchBar
@@ -57,7 +57,7 @@ export default function IndexPage() {
           </div>
         </form>
       </div>
-      <div style={{ height: '25vh', maxHeight: '150px' }}>
+      <div style={{ height: "25vh", maxHeight: "150px" }}>
         <Favourites />
       </div>
     </>

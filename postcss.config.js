@@ -1,24 +1,24 @@
 const postCssPresetEnv = [
-  'postcss-preset-env',
+  "postcss-preset-env",
   {
     features: {
-      'nesting-rules': true,
+      "nesting-rules": true,
     },
   },
 ];
 
 const plugins =
-  process.env.NODE_ENV === 'production'
+  process.env.NODE_ENV === "production"
     ? [
         [
-          '@fullhuman/postcss-purgecss',
+          "@fullhuman/postcss-purgecss",
           {
-            css: ['frontend/style/dsfr.min.css'],
+            css: ["frontend/style/dsfr.min.css"],
             content: [
-              './pages/**/*.{js,jsx,ts,tsx}',
-              './app/**/*.{js,jsx,ts,tsx}',
-              './components/**/*.{js,jsx,ts,tsx}',
-              './components-ui/**/*.{js,jsx,ts,tsx}',
+              "./pages/**/*.{js,jsx,ts,tsx}",
+              "./app/**/*.{js,jsx,ts,tsx}",
+              "./components/**/*.{js,jsx,ts,tsx}",
+              "./components-ui/**/*.{js,jsx,ts,tsx}",
             ],
             safelist: {
               standard: [/html/, /body/, /anchor-link/],
@@ -28,13 +28,13 @@ const plugins =
             fontFace: true,
           },
         ],
-        'postcss-flexbugs-fixes',
+        "postcss-flexbugs-fixes",
         postCssPresetEnv,
         [
-          'cssnano',
+          "cssnano",
           {
             preset: [
-              'default',
+              "default",
               {
                 discardComments: { removeAll: true },
                 calc: false,

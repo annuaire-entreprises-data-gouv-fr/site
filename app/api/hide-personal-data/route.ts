@@ -2,19 +2,19 @@ import {
   isEntrepreneurIndividuel,
   IUniteLegale,
   SirenNotFoundError,
-} from '#models/core/types';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import { Exception } from '#models/exceptions';
+} from "#models/core/types";
+import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
+import { Exception } from "#models/exceptions";
 import {
   IHidePersonalDataRequest,
   requestSirenProtection,
-} from '#models/protected-siren/request-siren-protection';
-import { hasSirenFormat } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import extractParamsAppRouter from '#utils/server-side-helper/app/extract-params';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { getHidePersonalDataRequestFCSession } from '#utils/session';
-import { NextResponse } from 'next/server';
+} from "#models/protected-siren/request-siren-protection";
+import { hasSirenFormat } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import extractParamsAppRouter from "#utils/server-side-helper/app/extract-params";
+import getSession from "#utils/server-side-helper/app/get-session";
+import { getHidePersonalDataRequestFCSession } from "#utils/session";
+import { NextResponse } from "next/server";
 
 export type IFormState = {
   uniteLegale?: IUniteLegale;
@@ -24,10 +24,10 @@ export type IFormState = {
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
-    const siren = formData.get('siren');
-    if (typeof siren !== 'string' || !hasSirenFormat(siren)) {
+    const siren = formData.get("siren");
+    if (typeof siren !== "string" || !hasSirenFormat(siren)) {
       return NextResponse.json(
-        { message: 'Le SIREN est invalide.' },
+        { message: "Le SIREN est invalide." },
         { status: 400 }
       );
     }
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
 
     if (!franceConnect) {
       return NextResponse.json(
-        { error: 'La session France Connect est invalide.' },
+        { error: "La session France Connect est invalide." },
         { status: 401 }
       );
     }
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
       uniteLegale,
     });
   } catch (error) {
-    let message = '';
+    let message = "";
     if (error instanceof SirenNotFoundError) {
       message =
         "Le SIREN est valide mais l'entreprise correspondante n'a pas été trouvée.";
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         message:
-          message || 'Une erreur est intervenue. Nos équipes ont été notifiés.',
+          message || "Une erreur est intervenue. Nos équipes ont été notifiés.",
       },
       { status: message ? 400 : 500 }
     );
@@ -90,7 +90,7 @@ class HidePersonalDataFailedException extends Exception {
   constructor(args: { cause?: any }) {
     super({
       ...args,
-      name: 'LogoutFailedException',
+      name: "LogoutFailedException",
     });
   }
 }

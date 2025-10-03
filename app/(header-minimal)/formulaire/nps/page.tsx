@@ -1,47 +1,47 @@
-import ButtonLink from '#components-ui/button';
-import { MultiChoice } from '#components-ui/multi-choice';
+import ButtonLink from "#components-ui/button";
+import { MultiChoice } from "#components-ui/multi-choice";
 import {
   getAgentEmail,
   getAgentUserType,
-} from '#models/authentication/user/helpers';
-import { isLoggedIn } from '#models/authentication/user/rights';
-import constants from '#models/constants';
-import { randomId } from '#utils/helpers';
-import getSession from '#utils/server-side-helper/app/get-session';
-import styles from './style.module.css';
+} from "#models/authentication/user/helpers";
+import { isLoggedIn } from "#models/authentication/user/rights";
+import constants from "#models/constants";
+import { randomId } from "#utils/helpers";
+import getSession from "#utils/server-side-helper/app/get-session";
+import styles from "./style.module.css";
 
 const visitorTypes = [
   {
-    value: 'Indépendant',
-    label: 'Indépendant(e)',
+    value: "Indépendant",
+    label: "Indépendant(e)",
   },
   {
-    value: 'Dirigeant',
-    label: 'Dirigeant(e) d’entreprise ou d’association',
+    value: "Dirigeant",
+    label: "Dirigeant(e) d’entreprise ou d’association",
   },
   {
-    value: 'Agent public non connecté',
-    label: 'Agent public',
+    value: "Agent public non connecté",
+    label: "Agent public",
   },
   {
-    value: 'Salarié',
-    label: 'Salarié(e) d’entreprise ou d’association',
+    value: "Salarié",
+    label: "Salarié(e) d’entreprise ou d’association",
   },
   {
-    value: 'Particulier',
-    label: 'Particulier',
+    value: "Particulier",
+    label: "Particulier",
   },
   {
-    value: 'Autre',
-    label: 'Autre',
+    value: "Autre",
+    label: "Autre",
   },
 ];
 
 export const metadata = {
-  title: 'Quel est votre avis sur l’Annuaire des Entreprises ?',
-  robots: 'noindex, nofollow',
+  title: "Quel est votre avis sur l’Annuaire des Entreprises ?",
+  robots: "noindex, nofollow",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/formulaire/nps',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/formulaire/nps",
   },
 };
 
@@ -65,7 +65,7 @@ const FeedBackPage = async () => {
         <br />
         <div>
           Attention, <strong>ce formulaire est anonyme</strong>. Si vous avez
-          une demande précise,{' '}
+          une demande précise,{" "}
           <a href={constants.links.parcours.contact}>contactez-nous</a>.
         </div>
         <div className="content-container form-container">
@@ -73,23 +73,23 @@ const FeedBackPage = async () => {
             action="/api/feedback/nps"
             method="post"
             id="form-feedback-nps"
-            className={styles['form-feedback-nps']}
+            className={styles["form-feedback-nps"]}
           >
             <input name="uuid" value={uuid} type="hidden" />
             <fieldset>
               <MultiChoice
                 legend="Sur une échelle de 1 à 10, à quel point recommanderiez-vous l’Annuaire des Entreprises ?"
                 values={[
-                  { value: '1', label: '1' },
-                  { value: '2', label: '2' },
-                  { value: '3', label: '3' },
-                  { value: '4', label: '4' },
-                  { value: '5', label: '5' },
-                  { value: '6', label: '6' },
-                  { value: '7', label: '7' },
-                  { value: '8', label: '8' },
-                  { value: '9', label: '9' },
-                  { value: '10', label: '10' },
+                  { value: "1", label: "1" },
+                  { value: "2", label: "2" },
+                  { value: "3", label: "3" },
+                  { value: "4", label: "4" },
+                  { value: "5", label: "5" },
+                  { value: "6", label: "6" },
+                  { value: "7", label: "7" },
+                  { value: "8", label: "8" },
+                  { value: "9", label: "9" },
+                  { value: "10", label: "10" },
                 ]}
                 name="radio-set-mood"
                 idPrefix="radio-smiley"
@@ -105,7 +105,7 @@ const FeedBackPage = async () => {
                   aria-hidden
                   type="hidden"
                   name="radio-set-visitor-type"
-                  value={getAgentUserType(session) || ''}
+                  value={getAgentUserType(session) || ""}
                   tabIndex={-1}
                 />
               ) : (
@@ -123,26 +123,26 @@ const FeedBackPage = async () => {
                 legend="Comment êtes-vous arrivé(e) jusqu’ici ?"
                 values={[
                   {
-                    value: 'Bouche à oreille',
-                    label: 'Bouche à oreille',
+                    value: "Bouche à oreille",
+                    label: "Bouche à oreille",
                   },
                   {
-                    value: 'Moteur de recherche',
-                    label: 'Moteur de recherche',
+                    value: "Moteur de recherche",
+                    label: "Moteur de recherche",
                   },
                   {
-                    value: 'Je connaissais déjà le site',
-                    label: 'Je connaissais déjà le site',
+                    value: "Je connaissais déjà le site",
+                    label: "Je connaissais déjà le site",
                   },
                   {
                     value:
-                      'J’ai cliqué sur un lien depuis un autre site internet',
+                      "J’ai cliqué sur un lien depuis un autre site internet",
                     label:
-                      'J’ai cliqué sur un lien depuis un autre site internet',
+                      "J’ai cliqué sur un lien depuis un autre site internet",
                   },
                   {
-                    value: 'Autre',
-                    label: 'Autre',
+                    value: "Autre",
+                    label: "Autre",
                   },
                 ]}
                 name="radio-set-visitor-origin"
@@ -176,7 +176,7 @@ const FeedBackPage = async () => {
                   name="email"
                   type="email"
                   defaultValue={
-                    isLoggedIn(session) ? getAgentEmail(session) : ''
+                    isLoggedIn(session) ? getAgentEmail(session) : ""
                   }
                 />
               </div>

@@ -1,12 +1,12 @@
-'use client';
-import { Tag } from '#components-ui/tag';
-import { formatIntFr, pluralize } from '#utils/helpers';
-import { useStorage } from 'hooks';
-import { useEffect, useState } from 'react';
+"use client";
+import { Tag } from "#components-ui/tag";
+import { formatIntFr, pluralize } from "#utils/helpers";
+import { useStorage } from "hooks";
+import { useEffect, useState } from "react";
 
 export default function Favourites() {
   const [shortCuts, setShortCuts] = useState([]);
-  const [recentVisits] = useStorage('local', 'favourites-siren', []);
+  const [recentVisits] = useStorage("local", "favourites-siren", []);
 
   useEffect(() => {
     setShortCuts(recentVisits);
@@ -22,13 +22,13 @@ export default function Favourites() {
         </small>
         <div className="layout-center">
           {shortCuts.map(({ siren, name, path }) => {
-            const fullName = `${formatIntFr(siren)}${name ? ` - ${name}` : ''}`;
+            const fullName = `${formatIntFr(siren)}${name ? ` - ${name}` : ""}`;
 
             return (
               <Tag
                 link={{
                   href: path || `/entreprise/${siren}`,
-                  'aria-label': `Consulter la page de ${fullName}`,
+                  "aria-label": `Consulter la page de ${fullName}`,
                 }}
                 maxWidth="300px"
                 key={siren}

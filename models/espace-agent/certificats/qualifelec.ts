@@ -1,11 +1,11 @@
-import { clientApiEntrepriseQualifelec } from '#clients/api-entreprise/certificats/qualifelec';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { clientApiEntrepriseQualifelec } from "#clients/api-entreprise/certificats/qualifelec";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { verifySiret } from '#utils/helpers';
-import { handleApiEntrepriseError } from '../utils';
+} from "#models/api-not-responding";
+import { verifySiret } from "#utils/helpers";
+import { handleApiEntrepriseError } from "../utils";
 
 export type IQualifelec = Array<{
   documentUrl: string;
@@ -56,6 +56,6 @@ export const getQualifelec = async (
         : response
     )
     .catch((error) =>
-      handleApiEntrepriseError(error, { siret, apiResource: 'Qualifelec' })
+      handleApiEntrepriseError(error, { siret, apiResource: "Qualifelec" })
     );
 };

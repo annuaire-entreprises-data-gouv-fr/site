@@ -1,9 +1,9 @@
-import { clientMonitoring } from '#clients/monitoring';
-import { logWarningInSentry } from '#utils/sentry';
-import { administrationsMetaData } from './administrations';
-import { EAdministration } from './administrations/EAdministration';
-import { IAPIMonitorMetaData } from './administrations/types';
-import { FetchRessourceException } from './exceptions';
+import { clientMonitoring } from "#clients/monitoring";
+import { logWarningInSentry } from "#utils/sentry";
+import { administrationsMetaData } from "./administrations";
+import { EAdministration } from "./administrations/EAdministration";
+import { IAPIMonitorMetaData } from "./administrations/types";
+import { FetchRessourceException } from "./exceptions";
 
 export type IRatio = {
   ratioNumber: number;
@@ -67,9 +67,9 @@ export const getMonitorsByAdministration = async (): Promise<{
               } catch (e: any) {
                 const error = new FetchRessourceException({
                   cause: e,
-                  ressource: 'ClientMonitoring',
+                  ressource: "ClientMonitoring",
                   context: {
-                    details: apiName || '',
+                    details: apiName || "",
                   },
                 });
                 logWarningInSentry(error);

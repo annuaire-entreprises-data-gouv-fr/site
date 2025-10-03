@@ -1,6 +1,6 @@
-import { PropsWithChildren } from 'react';
-import ButtonLink from '#components-ui/button';
-import constants from '#models/constants';
+import { PropsWithChildren } from "react";
+import ButtonLink from "#components-ui/button";
+import constants from "#models/constants";
 
 const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
   <div className="content-container">
@@ -42,7 +42,7 @@ const ServerErrorExplanations = () => (
 
 const ClientErrorExplanations = ({ error }: { error?: Error }) => (
   <ErrorTemplate>
-    {error?.name === 'ChunkLoadError' ? (
+    {error?.name === "ChunkLoadError" ? (
       <>
         <h1>Erreur lors du chargement de la page</h1>
         <p>
@@ -51,7 +51,7 @@ const ClientErrorExplanations = ({ error }: { error?: Error }) => (
           utilisez un bloqueur de publicité.
         </p>
         <p>
-          Si la situation perdure, merci de{' '}
+          Si la situation perdure, merci de{" "}
           <a href={constants.links.parcours.contact}>nous contacter</a> pour que
           nous puissions trouver la panne 🕵️‍♀️.
         </p>
@@ -87,11 +87,11 @@ const ErrorNotFoundExplanations = () => (
 const SearchErrorExplanations = () => (
   <div>
     <p>
-      Le moteur de recherche est momentanément indisponible et devrait{' '}
+      Le moteur de recherche est momentanément indisponible et devrait{" "}
       <a href="/rechercher">fonctionner de nouveau</a> dans quelques instants.
     </p>
     <p>
-      Si la situation perdure, merci de{' '}
+      Si la situation perdure, merci de{" "}
       <a href={constants.links.parcours.contact}>nous contacter</a> pour que
       nous puissions trouver la panne 🕵️‍♀️.
     </p>

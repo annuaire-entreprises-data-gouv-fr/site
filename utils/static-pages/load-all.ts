@@ -1,4 +1,4 @@
-import { IArticle } from '#models/article/type';
+import { IArticle } from "#models/article/type";
 
 export function loadAll<T extends IArticle>(
   articlesFolderContext: Record<string, T>
@@ -10,9 +10,9 @@ export function loadAll<T extends IArticle>(
 
   keys
     // weirdly context add duplicates - this filter removes them
-    .filter((k: string) => k.indexOf('./') === 0)
+    .filter((k: string) => k.indexOf("./") === 0)
     .forEach((key: string, index: number) => {
-      const slug = key.replace('.yml', '').replace('./', '');
+      const slug = key.replace(".yml", "").replace("./", "");
       articles.push({ ...values[index], slug });
     });
 

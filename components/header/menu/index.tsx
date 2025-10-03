@@ -1,18 +1,18 @@
-import FloatingModal from '#components-ui/floating-modal';
-import { Icon } from '#components-ui/icon/wrapper';
-import { getAgentDisplayName } from '#models/authentication/user/helpers';
-import { isLoggedIn } from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import constants from '#models/constants';
-import { EspaceAgentLink } from './espace-agent-link';
-import styles from './styles.module.css';
+import FloatingModal from "#components-ui/floating-modal";
+import { Icon } from "#components-ui/icon/wrapper";
+import { getAgentDisplayName } from "#models/authentication/user/helpers";
+import { isLoggedIn } from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import constants from "#models/constants";
+import { EspaceAgentLink } from "./espace-agent-link";
+import styles from "./styles.module.css";
 
 const Menu: React.FC<{
   session: ISession | null;
   useAgentCTA: boolean;
 }> = ({ session, useAgentCTA }) => {
   return isLoggedIn(session) ? (
-    <div className={styles.menuLogout + ' fr-link'} tabIndex={0}>
+    <div className={styles.menuLogout + " fr-link"} tabIndex={0}>
       <div>
         <Icon slug="accountLine">
           <span className={styles.menuText}>
@@ -20,7 +20,7 @@ const Menu: React.FC<{
             &nbsp;(
             <strong
               style={{
-                fontVariant: 'small-caps',
+                fontVariant: "small-caps",
                 color: constants.colors.espaceAgent,
               }}
             >
@@ -39,12 +39,12 @@ const Menu: React.FC<{
       >
         <a
           aria-label="Gestion de mon compte agent public"
-          href={'/compte/accueil'}
+          href={"/compte/accueil"}
         >
           Mon espace
         </a>
         {session?.user?.isSuperAgent && (
-          <a aria-label="Gestion de mes groupes" href={'/compte/mes-groupes'}>
+          <a aria-label="Gestion de mes groupes" href={"/compte/mes-groupes"}>
             Mes groupes
           </a>
         )}
@@ -66,7 +66,7 @@ const Menu: React.FC<{
         </a>
         <a
           aria-label="Se déconnecter de l'espace agent public"
-          href={'/api/auth/agent-connect/logout'}
+          href={"/api/auth/agent-connect/logout"}
         >
           <strong>Se déconnecter</strong>
         </a>

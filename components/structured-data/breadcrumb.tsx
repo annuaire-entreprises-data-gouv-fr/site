@@ -1,10 +1,10 @@
-import React from 'react';
-import { IUniteLegale } from '#models/core/types';
+import React from "react";
+import { IUniteLegale } from "#models/core/types";
 import {
   getDepartementFromCodePostal,
   getUrlFromDepartement,
   libelleFromDepartement,
-} from '#utils/helpers/formatting/labels';
+} from "#utils/helpers/formatting/labels";
 
 const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
@@ -12,7 +12,7 @@ const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
   try {
     const naf = uniteLegale.activitePrincipale;
     const dep = getDepartementFromCodePostal(uniteLegale.siege.codePostal);
-    const depUrl = getUrlFromDepartement(dep || '');
+    const depUrl = getUrlFromDepartement(dep || "");
 
     if (!dep || !depUrl || !naf) {
       throw new Error();

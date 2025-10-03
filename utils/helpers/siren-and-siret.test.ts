@@ -5,138 +5,138 @@ import {
   isSiren,
   isSiret,
   isTVANumber,
-} from './siren-and-siret';
+} from "./siren-and-siret";
 
-describe('Check isTVA', () => {
-  test('Succeed with valid tva', () => {
-    expect(isTVANumber('74722003936')).toBe(true);
+describe("Check isTVA", () => {
+  test("Succeed with valid tva", () => {
+    expect(isTVANumber("74722003936")).toBe(true);
   });
 
-  test('Fails with invalid tva', () => {
-    expect(isSiren('747220039E6')).toBe(false);
-    expect(isTVANumber('356000000')).toBe(false);
+  test("Fails with invalid tva", () => {
+    expect(isSiren("747220039E6")).toBe(false);
+    expect(isTVANumber("356000000")).toBe(false);
   });
 });
 
-describe('Check isSiren', () => {
-  test('Succeed with valid siren', () => {
-    expect(isSiren('356000000')).toBe(true);
-    expect(isSiren('880878145')).toBe(true);
+describe("Check isSiren", () => {
+  test("Succeed with valid siren", () => {
+    expect(isSiren("356000000")).toBe(true);
+    expect(isSiren("880878145")).toBe(true);
   });
-  test('Fails with invalid siren', () => {
-    expect(isSiren('35600')).toBe(false);
-    expect(isSiren('88087814553')).toBe(false);
-    expect(isSiren('8808ad14553')).toBe(false);
-    expect(isSiren('8808781455300000888')).toBe(false);
+  test("Fails with invalid siren", () => {
+    expect(isSiren("35600")).toBe(false);
+    expect(isSiren("88087814553")).toBe(false);
+    expect(isSiren("8808ad14553")).toBe(false);
+    expect(isSiren("8808781455300000888")).toBe(false);
   });
 
-  test('Fails with valid siret', () => {
-    expect(isSiren('35600000000000')).toBe(false);
-    expect(isSiren('88087814500015')).toBe(false);
+  test("Fails with valid siret", () => {
+    expect(isSiren("35600000000000")).toBe(false);
+    expect(isSiren("88087814500015")).toBe(false);
   });
 });
 
-describe('Check isSiret', () => {
-  test('Succeed with valid siret', () => {
-    expect(isSiret('35600000000000')).toBe(true);
-    expect(isSiret('88087814500015')).toBe(true);
+describe("Check isSiret", () => {
+  test("Succeed with valid siret", () => {
+    expect(isSiret("35600000000000")).toBe(true);
+    expect(isSiret("88087814500015")).toBe(true);
   });
-  test('Fails with invalid siret', () => {
-    expect(isSiret('35600')).toBe(false);
-    expect(isSiret('8808781455300000')).toBe(false);
-    expect(isSiret('8808ad1455300000')).toBe(false);
-    expect(isSiret('8808781455300000888')).toBe(false);
+  test("Fails with invalid siret", () => {
+    expect(isSiret("35600")).toBe(false);
+    expect(isSiret("8808781455300000")).toBe(false);
+    expect(isSiret("8808ad1455300000")).toBe(false);
+    expect(isSiret("8808781455300000888")).toBe(false);
   });
 
-  test('Fails with valid siren', () => {
-    expect(isSiret('356000000')).toBe(false);
-    expect(isSiret('880878145')).toBe(false);
+  test("Fails with valid siren", () => {
+    expect(isSiret("356000000")).toBe(false);
+    expect(isSiret("880878145")).toBe(false);
   });
 });
 
-describe('Check isLuhnValid', () => {
-  test('La Poste always works', () => {
-    expect(isLuhnValid('356000000')).toBe(true);
-    expect(isLuhnValid('35600000054')).toBe(true);
-    expect(isLuhnValid('3560000005454')).toBe(true);
+describe("Check isLuhnValid", () => {
+  test("La Poste always works", () => {
+    expect(isLuhnValid("356000000")).toBe(true);
+    expect(isLuhnValid("35600000054")).toBe(true);
+    expect(isLuhnValid("3560000005454")).toBe(true);
   });
 
-  test('Ganymede works', () => {
-    expect(isLuhnValid('880878145')).toBe(true);
-    expect(isLuhnValid('88087814554')).toBe(false);
-    expect(isLuhnValid('88087814500015')).toBe(true);
+  test("Ganymede works", () => {
+    expect(isLuhnValid("880878145")).toBe(true);
+    expect(isLuhnValid("88087814554")).toBe(false);
+    expect(isLuhnValid("88087814500015")).toBe(true);
   });
 
-  test('Random string dosesnot work', () => {
-    expect(isLuhnValid('000000001')).toBe(false);
-    expect(isLuhnValid('aaaaaaaaa')).toBe(false);
-    expect(isLuhnValid('3500000005454')).toBe(false);
-    expect(isLuhnValid('8808781455300000')).toBe(false);
+  test("Random string dosesnot work", () => {
+    expect(isLuhnValid("000000001")).toBe(false);
+    expect(isLuhnValid("aaaaaaaaa")).toBe(false);
+    expect(isLuhnValid("3500000005454")).toBe(false);
+    expect(isLuhnValid("8808781455300000")).toBe(false);
   });
 });
 
-describe('Siren or siret extraction from url', () => {
-  test('It works with siren or siret', () => {
-    expect(extractSirenOrSiretSlugFromUrl('/entreprise/880878145')).toBe(
-      '880878145'
+describe("Siren or siret extraction from url", () => {
+  test("It works with siren or siret", () => {
+    expect(extractSirenOrSiretSlugFromUrl("/entreprise/880878145")).toBe(
+      "880878145"
     );
-    expect(extractSirenOrSiretSlugFromUrl('/entreprise/8808799')).toBe('');
-    expect(extractSirenOrSiretSlugFromUrl('/entreprise/88087990000')).toBe(
-      '880879900'
+    expect(extractSirenOrSiretSlugFromUrl("/entreprise/8808799")).toBe("");
+    expect(extractSirenOrSiretSlugFromUrl("/entreprise/88087990000")).toBe(
+      "880879900"
     );
     expect(
-      extractSirenOrSiretSlugFromUrl('/entreprise/sdfds-88087990000')
-    ).toBe('880879900');
+      extractSirenOrSiretSlugFromUrl("/entreprise/sdfds-88087990000")
+    ).toBe("880879900");
   });
 
-  test('It works with siret', () => {
-    expect(extractSirenOrSiretSlugFromUrl('/entreprise/88087814500015')).toBe(
-      '88087814500015'
+  test("It works with siret", () => {
+    expect(extractSirenOrSiretSlugFromUrl("/entreprise/88087814500015")).toBe(
+      "88087814500015"
     );
 
     expect(
-      extractSirenOrSiretSlugFromUrl('/entreprise/dfgdfg-88087814500015')
-    ).toBe('88087814500015');
+      extractSirenOrSiretSlugFromUrl("/entreprise/dfgdfg-88087814500015")
+    ).toBe("88087814500015");
   });
 });
 
-describe('Siren or siret extraction from rechercher url', () => {
-  test('It works with siren or siret', () => {
+describe("Siren or siret extraction from rechercher url", () => {
+  test("It works with siren or siret", () => {
     expect(
-      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=880878145')
-    ).toBe('880878145');
+      extractSirenOrSiretFromRechercherUrl("/rechercher?terme=880878145")
+    ).toBe("880878145");
     expect(
-      extractSirenOrSiretFromRechercherUrl('/rechercher?bla=bar&terme=8808799')
-    ).toBe('');
+      extractSirenOrSiretFromRechercherUrl("/rechercher?bla=bar&terme=8808799")
+    ).toBe("");
   });
 
-  test('It works with siret', () => {
+  test("It works with siret", () => {
     expect(
-      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=88087814500015')
-    ).toBe('88087814500015');
+      extractSirenOrSiretFromRechercherUrl("/rechercher?terme=88087814500015")
+    ).toBe("88087814500015");
 
     expect(
       extractSirenOrSiretFromRechercherUrl(
-        '/rechercher?terme=dfgdfg-8808+7814500+0156'
+        "/rechercher?terme=dfgdfg-8808+7814500+0156"
       )
-    ).toBe('88087814500015');
+    ).toBe("88087814500015");
   });
-  test('It works with VAT and EORI', () => {
+  test("It works with VAT and EORI", () => {
     expect(
-      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=FR88087814500015')
-    ).toBe('88087814500015');
+      extractSirenOrSiretFromRechercherUrl("/rechercher?terme=FR88087814500015")
+    ).toBe("88087814500015");
 
     expect(
-      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=FR27552032534')
-    ).toBe('552032534');
+      extractSirenOrSiretFromRechercherUrl("/rechercher?terme=FR27552032534")
+    ).toBe("552032534");
 
     expect(
-      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=FR70850285594%22')
-    ).toBe('850285594');
+      extractSirenOrSiretFromRechercherUrl("/rechercher?terme=FR70850285594%22")
+    ).toBe("850285594");
 
     expect(
-      extractSirenOrSiretFromRechercherUrl('/rechercher?terme=FR70850285')
-    ).toBe('');
+      extractSirenOrSiretFromRechercherUrl("/rechercher?terme=FR70850285")
+    ).toBe("");
   });
 });
 

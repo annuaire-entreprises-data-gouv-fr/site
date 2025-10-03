@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { Info } from '#components-ui/alerts';
-import FAQLink from '#components-ui/faq-link';
-import { LineChart } from '#components/chart/line';
-import { FullTable } from '#components/table/full';
+import { Info } from "#components-ui/alerts";
+import FAQLink from "#components-ui/faq-link";
+import { LineChart } from "#components/chart/line";
+import { FullTable } from "#components/table/full";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import constants from '#models/constants';
-import { IIndicateursFinanciers } from '#models/finances-societe/types';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import constants from "#models/constants";
+import { IIndicateursFinanciers } from "#models/finances-societe/types";
 
 import {
   formatCurrency,
   formatDate,
   formatDateYear,
   pluralize,
-} from '#utils/helpers';
-import { BilanTypeTag } from '../bilan-tag';
+} from "#utils/helpers";
+import { BilanTypeTag } from "../bilan-tag";
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -40,7 +40,7 @@ export function FinancesSocieteChartAndTable({
 }) {
   if (
     indicateurs.find(
-      (bilanIndicateurs) => bilanIndicateurs.confidentiality !== 'Public'
+      (bilanIndicateurs) => bilanIndicateurs.confidentiality !== "Public"
     ) &&
     !hasRights(session, ApplicationRights.bilansRne)
   ) {
@@ -56,13 +56,13 @@ export function FinancesSocieteChartAndTable({
   }
   const body = [
     [
-      'Date de clôture',
+      "Date de clôture",
       ...indicateurs.map((bilanIndicateurs) =>
-        formatDate(bilanIndicateurs?.dateClotureExercice ?? '')
+        formatDate(bilanIndicateurs?.dateClotureExercice ?? "")
       ),
     ],
     [
-      'Type de bilan',
+      "Type de bilan",
       ...indicateurs.map((bilanIndicateurs) => (
         <BilanTypeTag type={bilanIndicateurs.type} />
       )),
@@ -72,14 +72,14 @@ export function FinancesSocieteChartAndTable({
         <ColorCircle color={colorCA} /> Chiffre d’affaires
       </>,
       ...indicateurs.map((bilanIndicateurs) =>
-        formatCurrency(bilanIndicateurs.chiffreDAffaires ?? '')
+        formatCurrency(bilanIndicateurs.chiffreDAffaires ?? "")
       ),
     ],
     ...(hasCADGFiP
       ? [
           [
             <>
-              <ColorCircle color={colorCADGFiP} /> Chiffre d’affaires{' '}
+              <ColorCircle color={colorCADGFiP} /> Chiffre d’affaires{" "}
               <FAQLink tooltipLabel="DGFiP">
                 La DGFiP fournit le chiffre d’affaires pour les trois dernières
                 années.
@@ -91,21 +91,21 @@ export function FinancesSocieteChartAndTable({
               </FAQLink>
             </>,
             ...indicateurs.map((bilanIndicateurs) =>
-              formatCurrency(bilanIndicateurs.chiffreAffairesDGFiP ?? '')
+              formatCurrency(bilanIndicateurs.chiffreAffairesDGFiP ?? "")
             ),
           ],
         ]
       : []),
     [
-      'Marge brute',
+      "Marge brute",
       ...indicateurs.map((bilanIndicateurs) =>
-        formatCurrency(bilanIndicateurs?.margeBrute ?? '')
+        formatCurrency(bilanIndicateurs?.margeBrute ?? "")
       ),
     ],
     [
-      'Excédent Brut d’Exploitation',
+      "Excédent Brut d’Exploitation",
       ...indicateurs.map((bilanIndicateurs) =>
-        formatCurrency(bilanIndicateurs?.ebe ?? '')
+        formatCurrency(bilanIndicateurs?.ebe ?? "")
       ),
     ],
     [
@@ -113,7 +113,7 @@ export function FinancesSocieteChartAndTable({
         <ColorCircle color={colorResultat} /> Résultat net
       </>,
       ...indicateurs.map((bilanIndicateurs) =>
-        formatCurrency(bilanIndicateurs?.resultatNet ?? '')
+        formatCurrency(bilanIndicateurs?.resultatNet ?? "")
       ),
     ],
   ];
@@ -131,7 +131,7 @@ export function FinancesSocieteChartAndTable({
     },
 
     {
-      label: 'Résultat net',
+      label: "Résultat net",
       tension: 0.3,
       data: indicateurs.map(
         (bilanIndicateurs) => bilanIndicateurs.resultatNet ?? null
@@ -159,28 +159,28 @@ export function FinancesSocieteChartAndTable({
         Voici les résultats financiers
         {estBilanConsolide ? (
           <>
-            {' '}
+            {" "}
             <FAQLink
               tooltipLabel="consolidés"
               to="/faq/donnees-financieres#quest-ce-quun-bilan-consolide"
             >
               Qu’est-ce qu’un bilan consolidé ?
-            </FAQLink>{' '}
+            </FAQLink>{" "}
             (qui incluent ceux des filiales)
           </>
         ) : (
-          ''
-        )}{' '}
-        publiés par l’entreprise pour{' '}
-        {plural ? `les ${indicateurs.length}` : 'le'} dernier
+          ""
+        )}{" "}
+        publiés par l’entreprise pour{" "}
+        {plural ? `les ${indicateurs.length}` : "le"} dernier
         {plural} exercice
         {plural}&nbsp;:
       </p>
       <LineChart
         htmlLegendId={
           estBilanConsolide
-            ? 'data-legend-consolide'
-            : 'data-legend-non-consolide'
+            ? "data-legend-consolide"
+            : "data-legend-non-consolide"
         }
         options={{
           plugins: {

@@ -1,22 +1,22 @@
-'use client';
+"use client";
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { FadeIn } from '#components-ui/animation/fade-in';
-import { HeightTransition } from '#components-ui/animation/height-transition';
-import { IAPINotRespondingError, isAPI404 } from '#models/api-not-responding';
+import { FadeIn } from "#components-ui/animation/fade-in";
+import { HeightTransition } from "#components-ui/animation/height-transition";
+import { IAPINotRespondingError, isAPI404 } from "#models/api-not-responding";
 import {
   IDataFetchingState,
   hasFetchError,
   isDataLoading,
   isDataSuccess,
   isUnauthorized,
-} from '#models/data-fetching';
-import { useTimeout } from 'hooks/use-timeout';
-import { useEffect, useState } from 'react';
-import { ISectionProps, Section } from '..';
-import { DataSectionContent } from './content';
-import DataFetchErrorExplanation from './error';
-import { DataSectionLoader } from './loader';
+} from "#models/data-fetching";
+import { useTimeout } from "hooks/use-timeout";
+import { useEffect, useState } from "react";
+import { ISectionProps, Section } from "..";
+import { DataSectionContent } from "./content";
+import DataFetchErrorExplanation from "./error";
+import { DataSectionLoader } from "./loader";
 
 interface IDataSectionClientProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IDataFetchingState | T;
@@ -36,7 +36,7 @@ export function AsyncDataSectionClient<T>({
   }
 
   if (isDataLoading(data) && !showLoadingState) {
-    return <div style={{ minHeight: '80px' }} />;
+    return <div style={{ minHeight: "80px" }} />;
   }
 
   if (showLoadingState) {

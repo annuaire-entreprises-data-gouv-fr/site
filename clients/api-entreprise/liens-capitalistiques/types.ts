@@ -1,9 +1,9 @@
-import { IAPIEntrepriseResponse } from '../client';
+import { IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseLiensCapitalistiques = IAPIEntrepriseResponse<{
   capital: {
     actionnaires: Array<{
-      type: 'personne_physique' | 'personne_morale';
+      type: "personne_physique" | "personne_morale";
       pourcentage: number;
       nombre_parts: number;
       personne_physique_attributes?: {

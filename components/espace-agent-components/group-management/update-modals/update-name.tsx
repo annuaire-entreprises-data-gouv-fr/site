@@ -1,10 +1,10 @@
-import ButtonLink from '#components-ui/button';
-import { FullScreenModal } from '#components-ui/full-screen-modal';
-import { Icon } from '#components-ui/icon/wrapper';
-import { validateGroupName } from '#components/espace-agent-components/helpers/form-validation';
-import { NotificationTypeEnum, useNotification } from '#hooks/use-notification';
-import httpClient from '#utils/network';
-import { useEffect, useRef, useState } from 'react';
+import ButtonLink from "#components-ui/button";
+import { FullScreenModal } from "#components-ui/full-screen-modal";
+import { Icon } from "#components-ui/icon/wrapper";
+import { validateGroupName } from "#components/espace-agent-components/helpers/form-validation";
+import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
+import httpClient from "#utils/network";
+import { useEffect, useRef, useState } from "react";
 
 export default function UpdateNameModal({
   groupId,
@@ -40,7 +40,7 @@ export default function UpdateNameModal({
         setValidationErrors([nameValidationError]);
         showNotification({
           type: NotificationTypeEnum.ERROR,
-          title: 'Nom invalide',
+          title: "Nom invalide",
           message: nameValidationError,
         });
         return;
@@ -48,9 +48,9 @@ export default function UpdateNameModal({
 
       await httpClient({
         url: `/api/groups/${groupId}/update-name`,
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         data: JSON.stringify({ groupName }),
       });
@@ -60,13 +60,13 @@ export default function UpdateNameModal({
 
       showNotification({
         type: NotificationTypeEnum.SUCCESS,
-        title: 'Nom du groupe mis à jour',
+        title: "Nom du groupe mis à jour",
         message: `Le groupe a été renommé "${groupName}"`,
       });
     } catch (error: any) {
       showNotification({
         type: NotificationTypeEnum.ERROR,
-        title: 'Erreur lors de la mise à jour du nom',
+        title: "Erreur lors de la mise à jour du nom",
         message: error?.message,
       });
     } finally {
@@ -85,9 +85,9 @@ export default function UpdateNameModal({
       <h2
         className="fr-mt-0"
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5rem",
         }}
       >
         <button
@@ -117,7 +117,7 @@ export default function UpdateNameModal({
 
           <div
             className={`fr-input-group fr-mb-4w ${
-              validationErrors.length > 0 ? 'fr-input-group--error' : ''
+              validationErrors.length > 0 ? "fr-input-group--error" : ""
             }`}
           >
             <label className="fr-label" htmlFor={`group-name-${groupId}`}>
@@ -128,7 +128,7 @@ export default function UpdateNameModal({
               <input
                 ref={inputRef}
                 className={`fr-input ${
-                  validationErrors.length > 0 ? 'fr-input--error' : ''
+                  validationErrors.length > 0 ? "fr-input--error" : ""
                 }`}
                 type="text"
                 id={`group-name-${groupId}`}
@@ -140,7 +140,7 @@ export default function UpdateNameModal({
                   }
                 }}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' && groupName?.trim() && !loading) {
+                  if (e.key === "Enter" && groupName?.trim() && !loading) {
                     handleUpdateName();
                   }
                 }}
@@ -160,7 +160,7 @@ export default function UpdateNameModal({
               onClick={handleUpdateName}
               disabled={!groupName?.trim() || loading}
             >
-              {loading ? 'Sauvegarde...' : 'Sauvegarder'}
+              {loading ? "Sauvegarde..." : "Sauvegarder"}
             </ButtonLink>
             <ButtonLink alt onClick={handleCancel} disabled={loading}>
               Annuler

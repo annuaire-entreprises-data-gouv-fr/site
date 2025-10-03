@@ -1,13 +1,13 @@
-import routes from '#clients/routes';
-import { ILiensCapitalistiquesProtected } from '#models/espace-agent/liens-capitalistiques';
+import routes from "#clients/routes";
+import { ILiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
 import {
   IEtatCivilLiensCapitalistiques,
   IPersonneMoraleLiensCapitalistiques,
-} from '#models/rne/types';
-import { UseCase } from '#models/use-cases';
-import { formatFirstNames, formatLastName, Siren } from '#utils/helpers';
-import clientAPIEntreprise from '../client';
-import { IAPIEntrepriseLiensCapitalistiques } from './types';
+} from "#models/rne/types";
+import { UseCase } from "#models/use-cases";
+import { formatFirstNames, formatLastName, Siren } from "#utils/helpers";
+import clientAPIEntreprise from "../client";
+import { IAPIEntrepriseLiensCapitalistiques } from "./types";
 
 /**
  * GET liens capitalistiques from API Entreprise
@@ -41,7 +41,7 @@ const mapToDomainObject = (
         adresse,
       } = actionnaire;
 
-      if (type === 'personne_morale' && personne_morale_attributes) {
+      if (type === "personne_morale" && personne_morale_attributes) {
         return {
           siren: personne_morale_attributes.siren,
           denomination: personne_morale_attributes.denomination,
@@ -49,28 +49,28 @@ const mapToDomainObject = (
           nombre_parts,
           natureJuridique: personne_morale_attributes.forme_juridique,
           pays: adresse.pays,
-          role: '',
+          role: "",
         } as IPersonneMoraleLiensCapitalistiques;
       }
       const { nom_patronymique_et_prenoms, civilite } =
         personne_physique_attributes!;
       const { mois, annee } = personne_physique_attributes!.date_naissance;
 
-      const { nom, prenoms } = nom_patronymique_et_prenoms.split(' ').reduce(
+      const { nom, prenoms } = nom_patronymique_et_prenoms.split(" ").reduce(
         (acc: { nom: string; prenoms: string }, motCourant: string) => {
           if (motCourant === motCourant.toUpperCase()) {
-            acc.nom += (acc.nom ? ' ' : '') + motCourant;
+            acc.nom += (acc.nom ? " " : "") + motCourant;
           } else {
-            acc.prenoms += (acc.prenoms ? ' ' : '') + motCourant;
+            acc.prenoms += (acc.prenoms ? " " : "") + motCourant;
           }
           return acc;
         },
-        { nom: '', prenoms: '' }
+        { nom: "", prenoms: "" }
       );
 
       const { prenom, prenoms: formattedPrenoms } = formatFirstNames(
         prenoms,
-        ' '
+        " "
       );
 
       return {
@@ -80,8 +80,8 @@ const mapToDomainObject = (
         nom: formatLastName(nom),
         prenom,
         prenoms: formattedPrenoms,
-        role: '',
-        nationalite: '',
+        role: "",
+        nationalite: "",
         dateNaissancePartial: `${mois}-${annee}`,
         pays: adresse.pays,
       } as IEtatCivilLiensCapitalistiques;
@@ -93,7 +93,7 @@ const mapToDomainObject = (
         pourcentage: filiale.pourcentage_detention,
         natureJuridique: filiale.forme_juridique,
         pays: filiale.adresse.pays,
-        role: '',
+        role: "",
       } as IPersonneMoraleLiensCapitalistiques;
     }),
   };

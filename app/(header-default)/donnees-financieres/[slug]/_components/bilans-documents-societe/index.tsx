@@ -1,12 +1,12 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import AgentWallDocuments from '#components/espace-agent-components/agent-wall/document';
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import AgentWallDocuments from "#components/espace-agent-components/agent-wall/document";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import AgentBilansSection from './protected-bilans-documents-societe';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import AgentBilansSection from "./protected-bilans-documents-societe";
 
 export function BilansDocumentsSociete({
   uniteLegale,

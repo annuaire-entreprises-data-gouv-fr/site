@@ -1,17 +1,17 @@
-'use client';
-import { Info } from '#components-ui/alerts';
-import { FadeIn } from '#components-ui/animation/fade-in';
-import { HeightTransition } from '#components-ui/animation/height-transition';
-import { Loader } from '#components-ui/loader';
-import { administrationsMetaData } from '#models/administrations';
-import { useTimeout } from 'hooks/use-timeout';
-import { ISectionProps } from '..';
-import style from './style.module.css';
+"use client";
+import { Info } from "#components-ui/alerts";
+import { FadeIn } from "#components-ui/animation/fade-in";
+import { HeightTransition } from "#components-ui/animation/height-transition";
+import { Loader } from "#components-ui/loader";
+import { administrationsMetaData } from "#models/administrations";
+import { useTimeout } from "hooks/use-timeout";
+import { ISectionProps } from "..";
+import style from "./style.module.css";
 
 export function DataSectionLoader({
   sources,
 }: {
-  sources: ISectionProps['sources'];
+  sources: ISectionProps["sources"];
 }) {
   const after5s = useTimeout(5000);
 
@@ -24,8 +24,8 @@ export function DataSectionLoader({
         <HeightTransition animateAppear>
           <FadeIn>
             <Info full>
-              Le téléservice qui renvoie la donnée{' '}
-              {dataSources && `(${dataSources.map((d) => d.short).join(', ')})`}{' '}
+              Le téléservice qui renvoie la donnée{" "}
+              {dataSources && `(${dataSources.map((d) => d.short).join(", ")})`}{" "}
               semble occupé en ce moment. Le téléchargement des informations
               peut prendre du temps (10s à 20s).
             </Info>
@@ -38,7 +38,7 @@ export function DataSectionLoader({
         </p>
       ) : dataSources.length === 1 ? (
         <p>
-          Nous récupérons les informations dans la base de données «{' '}
+          Nous récupérons les informations dans la base de données «{" "}
           {dataSources[0].long} » <Loader />
         </p>
       ) : (

@@ -1,13 +1,13 @@
-import { IAgentInfo } from '#models/authentication/agent';
-import { ISession } from '#models/authentication/user/session';
-import { isAbsoluteUrl } from '#utils/server-side-helper/app/is-absolute-url';
-import type { IronSession, SessionOptions } from 'iron-session';
+import { IAgentInfo } from "#models/authentication/agent";
+import { ISession } from "#models/authentication/user/session";
+import { isAbsoluteUrl } from "#utils/server-side-helper/app/is-absolute-url";
+import type { IronSession, SessionOptions } from "iron-session";
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
-  cookieName: 'annuaire-entreprises-user-session-4',
+  cookieName: "annuaire-entreprises-user-session-4",
   cookieOptions: {
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === "production",
   },
   ttl: 43200, // 12h
 };
@@ -47,7 +47,7 @@ export const setPathFrom = async (
       session.pathFrom = pathFrom;
       await session.save();
     } else {
-      throw new Error('Absolute URL not allowed');
+      throw new Error("Absolute URL not allowed");
     }
   }
 };
@@ -84,7 +84,7 @@ export const setHidePersonalDataRequestFCSession = async (
 export function getHidePersonalDataRequestFCSession(
   session: ISession | null
 ): Required<
-  NonNullable<ISession['franceConnectHidePersonalDataSession']>
+  NonNullable<ISession["franceConnectHidePersonalDataSession"]>
 > | null {
   if (
     !session ||
@@ -96,6 +96,6 @@ export function getHidePersonalDataRequestFCSession(
     return null;
   }
   return session.franceConnectHidePersonalDataSession as Required<
-    NonNullable<ISession['franceConnectHidePersonalDataSession']>
+    NonNullable<ISession["franceConnectHidePersonalDataSession"]>
   >;
 }

@@ -1,8 +1,8 @@
 import parseMarkdownSync, {
   IMarkdown,
-} from '#components/markdown/parse-markdown';
+} from "#components/markdown/parse-markdown";
 /** @ts-ignore */
-import data from '../../data/changelog.yml';
+import data from "../../data/changelog.yml";
 
 type IChangelogTarget = {
   agent: boolean;

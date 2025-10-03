@@ -1,8 +1,8 @@
-import FAQLink from '#components-ui/faq-link';
-import { ISession } from '#models/authentication/user/session';
-import { IIndicateursFinanciersSociete } from '#models/finances-societe/types';
-import { pluralize } from '#utils/helpers';
-import { FinancesSocieteChartAndTable } from './chart-and-table';
+import FAQLink from "#components-ui/faq-link";
+import { ISession } from "#models/authentication/user/session";
+import { IIndicateursFinanciersSociete } from "#models/finances-societe/types";
+import { pluralize } from "#utils/helpers";
+import { FinancesSocieteChartAndTable } from "./chart-and-table";
 
 export const FinancesSocieteInnerSection = ({
   financesSociete,
@@ -13,7 +13,7 @@ export const FinancesSocieteInnerSection = ({
 }) => (
   <>
     <p>
-      Cette entreprise possède des indicateurs financiers pour{' '}
+      Cette entreprise possède des indicateurs financiers pour{" "}
       {financesSociete.indicateurs.length} bilan
       {pluralize(financesSociete.indicateurs)} déposé
       {pluralize(financesSociete.indicateurs)} au RNE :
@@ -21,7 +21,7 @@ export const FinancesSocieteInnerSection = ({
     {financesSociete.hasBilanConsolide && (
       <>
         <h3>
-          Bilans{' '}
+          Bilans{" "}
           <FAQLink tooltipLabel="Consolidés">
             Une entreprise peut déposer différents types de bilans :
             <ul>
@@ -45,7 +45,7 @@ export const FinancesSocieteInnerSection = ({
       </>
     )}
     <h3>
-      Bilans{' '}
+      Bilans{" "}
       <FAQLink tooltipLabel="Complets ou Simplifiés">
         Une entreprise peut déposer différents types de bilans :
         <ul>

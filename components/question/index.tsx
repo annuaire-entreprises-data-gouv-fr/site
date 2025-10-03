@@ -1,5 +1,5 @@
-import FloatingHelpButton from '#components-ui/floating-help-button';
-import { Icon } from '#components-ui/icon/wrapper';
+import FloatingHelpButton from "#components-ui/floating-help-button";
+import { Icon } from "#components-ui/icon/wrapper";
 
 export function Question() {
   return (

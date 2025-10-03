@@ -1,25 +1,25 @@
-import { Warning } from '#components-ui/alerts';
-import { MultiChoice } from '#components-ui/multi-choice';
-import TextWrapper from '#components-ui/text-wrapper';
-import { allDataToModify } from '#models/administrations/data-to-modify';
-import { IFaqArticle } from '#models/article/faq';
+import { Warning } from "#components-ui/alerts";
+import { MultiChoice } from "#components-ui/multi-choice";
+import TextWrapper from "#components-ui/text-wrapper";
+import { allDataToModify } from "#models/administrations/data-to-modify";
+import { IFaqArticle } from "#models/article/faq";
 import {
   getAgentEmail,
   getAgentFullName,
-} from '#models/authentication/user/helpers';
+} from "#models/authentication/user/helpers";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { logMatomoEvent } from '#utils/matomo';
-import { PropsWithChildren } from 'react';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { logMatomoEvent } from "#utils/matomo";
+import { PropsWithChildren } from "react";
 export enum EQuestionType {
-  LOADER = 'loader',
-  NONE = 'none',
-  MODIFICATION = 'modification',
-  CONTACT = 'contact',
-  ALL = 'all',
+  LOADER = "loader",
+  NONE = "none",
+  MODIFICATION = "modification",
+  CONTACT = "contact",
+  ALL = "all",
 }
 type IProps = {
   questionType: EQuestionType;
@@ -41,28 +41,28 @@ export default function Question({
 
   switch (questionType) {
     case EQuestionType.CONTACT:
-      logMatomoEvent('parcours', userType, 'contact');
+      logMatomoEvent("parcours", userType, "contact");
       return (
         <Answer>
           <strong>Je ne trouve pas la réponse à ma question</strong>.
-          {userType !== 'agent' &&
+          {userType !== "agent" &&
             !hasRights(session, ApplicationRights.isAgent) && (
               <Warning>
                 <strong>Attention à la fraude :</strong> l’Annuaire des
                 Entreprise est un service public <strong>gratuit</strong> et ne
                 vous demandera <strong>jamais</strong> d’argent. Pour en savoir
-                plus, consultez{' '}
+                plus, consultez{" "}
                 <a href="/faq/fraudes-ecroqueries-annuaire-des-entreprises">
                   notre fiche explicative
                 </a>
                 .
               </Warning>
             )}
-          {userType === 'independant' && (
+          {userType === "independant" && (
             <p>
               Si vous possédez une <strong>entreprise individuelle</strong> dont
               vous souhaitez <strong>cacher ou afficher</strong> les
-              informations personnelles,{' '}
+              informations personnelles,{" "}
               <a href="/faq/rendre-mon-entreprise-non-diffusible">
                 consultez notre fiche
               </a>
@@ -70,7 +70,7 @@ export default function Question({
             </p>
           )}
           <p>
-            Si vous avez une question{' '}
+            Si vous avez une question{" "}
             <strong>à propos des informations affichées sur le site</strong>, ou
             un problème lié au <strong>fonctionnement du site</strong>, vous
             pouvez nous contacter via le formulaire ci-dessous :
@@ -84,8 +84,8 @@ export default function Question({
             <iframe
               title="Contact Form"
               src={`https://plugins.crisp.chat/urn:crisp.im:contact-form:0/contact/064fca1b-bdd6-4a81-af56-9f38e40953ad?type=${userType}${
-                email ? `&email=${email}` : ''
-              }${name ? `&name=${name}` : ''}`}
+                email ? `&email=${email}` : ""
+              }${name ? `&name=${name}` : ""}`}
               referrerPolicy="origin"
               sandbox="allow-forms allow-popups allow-scripts allow-same-origin"
               width="100%"
@@ -95,19 +95,19 @@ export default function Question({
           </div>
           <p>
             <strong>NB :</strong> si votre question concerne une structure en
-            particulier, pensez à mentionner le{' '}
+            particulier, pensez à mentionner le{" "}
             <strong>siren ou le siret</strong> dans votre message.
           </p>
           {hasRights(session, ApplicationRights.isAgent) && (
             <p>
-              Rejoignez notre salon{' '}
+              Rejoignez notre salon{" "}
               <a
                 href="https://tchap.gouv.fr/#/room/#annuaire-entreprises:agent.dinum.tchap.gouv.fr"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Tchap
-              </a>{' '}
+              </a>{" "}
               pour nous contacter ou être tenu au courant de nos nouveautés.
             </p>
           )}
@@ -123,25 +123,25 @@ export default function Question({
             </strong>
           </p>
           <p>
-            Si la modification concerne{' '}
+            Si la modification concerne{" "}
             <strong>l’affichage de données personnelles</strong> sur le site,
-            consultez{' '}
+            consultez{" "}
             <a href="/faq/supprimer-donnees-personnelles-entreprise">
               notre fiche dédiée
-            </a>{' '}
+            </a>{" "}
             ou notre <a href="/vie-privee">politique de confidentialité</a>.
           </p>
           <p>
             Pour le reste, l’Annuaire des Entreprises centralise les
             informations dont dispose l’administration sur une entreprise, une
-            association ou une administration, mais{' '}
+            association ou une administration, mais{" "}
             <strong>ne stocke aucune information</strong>. Les informations que
-            vous voyez sur le site sont récupérées{' '}
+            vous voyez sur le site sont récupérées{" "}
             <strong>en temps réel</strong> auprès des services des
             administrations qui en ont la charge.
           </p>
           <p>
-            Si vous constatez une erreur, il est{' '}
+            Si vous constatez une erreur, il est{" "}
             <strong>essentiel de la faire corriger à la source</strong>, pour
             que la correction soit transmise à toute l’administration.
           </p>
@@ -152,7 +152,7 @@ export default function Question({
             idPrefix="modification"
             values={allDataToModify
               .filter((data) => {
-                if (userType === 'agent' || userType === 'all') {
+                if (userType === "agent" || userType === "all") {
                   return true;
                 } else {
                   return (
@@ -164,8 +164,8 @@ export default function Question({
               .map((data) => {
                 return {
                   onClick: () => {
-                    if (typeof window !== 'undefined') {
-                      logMatomoEvent('parcours', userType, data.label);
+                    if (typeof window !== "undefined") {
+                      logMatomoEvent("parcours", userType, data.label);
                       window.location.pathname = `/faq/modifier/${data.slug}`;
                     }
                   },
@@ -177,14 +177,14 @@ export default function Question({
       );
     case EQuestionType.ALL:
     default:
-      let modifyText = ' d’une entreprise, association ou administration';
+      let modifyText = " d’une entreprise, association ou administration";
 
-      if (userType === 'entreprise' || userType === 'independant') {
-        modifyText = ' de mon entreprise';
+      if (userType === "entreprise" || userType === "independant") {
+        modifyText = " de mon entreprise";
       }
 
-      if (userType === 'association') {
-        modifyText = ' de mon association';
+      if (userType === "association") {
+        modifyText = " de mon association";
       }
       return (
         <>
@@ -201,8 +201,8 @@ export default function Question({
               ...questions.map(({ title, slug }) => {
                 return {
                   onClick: () => {
-                    if (typeof window !== 'undefined') {
-                      logMatomoEvent('parcours', userType, title);
+                    if (typeof window !== "undefined") {
+                      logMatomoEvent("parcours", userType, title);
                       window.location.pathname = `/faq/${slug}`;
                     }
                   },
@@ -211,7 +211,7 @@ export default function Question({
               }),
               {
                 onClick: () => setQuestionType(EQuestionType.CONTACT),
-                label: 'Je ne trouve pas la réponse à ma question',
+                label: "Je ne trouve pas la réponse à ma question",
               },
             ]}
           />
@@ -229,10 +229,10 @@ const Answer: React.FC<PropsWithChildren<{}>> = ({ children }) => (
     <TextWrapper>
       <div
         style={{
-          background: '#efefef',
-          padding: '30px 20px',
-          margin: '10px',
-          borderRadius: '3px',
+          background: "#efefef",
+          padding: "30px 20px",
+          margin: "10px",
+          borderRadius: "3px",
         }}
       >
         {children}

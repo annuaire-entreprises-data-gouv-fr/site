@@ -1,14 +1,14 @@
-import routes from '#clients/routes';
-import constants from '#models/constants';
+import routes from "#clients/routes";
+import constants from "#models/constants";
 import {
   IUniteLegale,
   createDefaultEtablissement,
   createDefaultUniteLegale,
-} from '#models/core/types';
-import { Siren, formatDateYear } from '#utils/helpers';
-import { etatFromEtatAdministratifInsee } from '#utils/helpers/insee-variables';
-import { clientAPIProxy } from '../client';
-import { IIGResponse } from './types';
+} from "#models/core/types";
+import { Siren, formatDateYear } from "#utils/helpers";
+import { etatFromEtatAdministratifInsee } from "#utils/helpers/insee-variables";
+import { clientAPIProxy } from "../client";
+import { IIGResponse } from "./types";
 
 /**
  * Call EORI to validate a French EORI number
@@ -31,7 +31,7 @@ const mapToDomainObject = (r: IIGResponse, siren: Siren): IUniteLegale => {
     ...defaultUniteLegale,
     ...r,
     siege: createDefaultEtablissement(),
-    dateMiseAJourIG: formatDateYear(new Date()) || '',
+    dateMiseAJourIG: formatDateYear(new Date()) || "",
     etatAdministratif: etatFromEtatAdministratifInsee(r.etat, r.siren),
   };
 };

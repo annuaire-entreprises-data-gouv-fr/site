@@ -1,10 +1,10 @@
-import { IMatomoStats, clientMatomoStats } from '#clients/matomo';
-import { NpsStats } from '#components/stats/nps';
-import { TraficStats } from '#components/stats/trafic';
-import { UsageStats } from '#components/stats/usage';
-import { Metadata } from 'next';
+import { IMatomoStats, clientMatomoStats } from "#clients/matomo";
+import { NpsStats } from "#components/stats/nps";
+import { TraficStats } from "#components/stats/trafic";
+import { UsageStats } from "#components/stats/usage";
+import { Metadata } from "next";
 
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
 export const revalidate = 14400; // 4 * 3600 = 4 hours;
 
 async function fetchStats(): Promise<IMatomoStats> {
@@ -27,11 +27,11 @@ async function fetchStats(): Promise<IMatomoStats> {
 }
 
 export const metadata: Metadata = {
-  title: 'Statistiques d’utilisation de l’Annuaire des Entreprises',
+  title: "Statistiques d’utilisation de l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/stats',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/a-propos/stats",
   },
-  robots: 'noindex, follow',
+  robots: "noindex, follow",
 };
 
 export default async function StatsPage() {

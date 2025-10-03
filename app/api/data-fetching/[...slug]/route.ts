@@ -1,21 +1,21 @@
-import { hasRights } from '#models/authentication/user/rights';
-import { UseCase } from '#models/use-cases';
-import withSession, { IReqWithSession } from '#utils/session/with-session';
-import { APIRoutesHandlers } from '../routes-handlers';
-import { APIRoutesScopes } from '../routes-scopes';
+import { hasRights } from "#models/authentication/user/rights";
+import { UseCase } from "#models/use-cases";
+import withSession, { IReqWithSession } from "#utils/session/with-session";
+import { APIRoutesHandlers } from "../routes-handlers";
+import { APIRoutesScopes } from "../routes-scopes";
 import {
   APIRouteError,
   getRouteAndSlug,
   IContext,
   withHandleError,
   withIgnoreBot,
-} from '../utils';
+} from "../utils";
 
 async function getRoute(request: IReqWithSession, context: IContext) {
   const { slug, route } = await getRouteAndSlug(context);
 
   if (!(route in APIRoutesHandlers)) {
-    throw new APIRouteError('API route not found', { route, slug }, 404);
+    throw new APIRouteError("API route not found", { route, slug }, 404);
   }
   const handler = APIRoutesHandlers[route];
   const scope = APIRoutesScopes[route];
@@ -23,7 +23,7 @@ async function getRoute(request: IReqWithSession, context: IContext) {
 
   if (!hasRights(session, scope)) {
     throw new APIRouteError(
-      'User does not have the required scope for this API route',
+      "User does not have the required scope for this API route",
       { route, slug },
       403
     );
@@ -36,7 +36,7 @@ async function getRoute(request: IReqWithSession, context: IContext) {
     useCase: UseCase;
     year: string;
   } = {
-    isEI: searchParams.isEI === 'true',
+    isEI: searchParams.isEI === "true",
     useCase: searchParams.useCase as UseCase,
     year: searchParams.year,
   };

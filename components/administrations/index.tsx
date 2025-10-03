@@ -1,4 +1,4 @@
-export const INSEE = ({ queryString = '' }) => (
+export const INSEE = ({ queryString = "" }) => (
   <a
     href={`/administration/insee${queryString}`}
     title="Institut National de la Statistique et des Études Économiques"
@@ -7,7 +7,7 @@ export const INSEE = ({ queryString = '' }) => (
   </a>
 );
 
-export const ADEME = ({ queryString = '' }) => (
+export const ADEME = ({ queryString = "" }) => (
   <a
     href={`/administration/ademe${queryString}`}
     title="ADEME - Agence de la transition écologique "
@@ -16,7 +16,7 @@ export const ADEME = ({ queryString = '' }) => (
   </a>
 );
 
-export const INPI = ({ queryString = '' }) => (
+export const INPI = ({ queryString = "" }) => (
   <a
     href={`/administration/inpi${queryString}`}
     title="Institut National de la Propriété Industrielle"
@@ -25,7 +25,7 @@ export const INPI = ({ queryString = '' }) => (
   </a>
 );
 
-export const ESSFrance = ({ queryString = '' }) => (
+export const ESSFrance = ({ queryString = "" }) => (
   <a
     href={`/administration/ess-france${queryString}`}
     title="ESS France ou Chambre Française de l'Economie Sociale et Solidaire"
@@ -34,7 +34,7 @@ export const ESSFrance = ({ queryString = '' }) => (
   </a>
 );
 
-export const DILA = ({ queryString = '' }) => (
+export const DILA = ({ queryString = "" }) => (
   <a
     href={`/administration/dila${queryString}`}
     title="Direction de l’Information Légale et Administrative"
@@ -43,7 +43,7 @@ export const DILA = ({ queryString = '' }) => (
   </a>
 );
 
-export const MTPEI = ({ queryString = '' }) => (
+export const MTPEI = ({ queryString = "" }) => (
   <a
     href={`/administration/mtpei${queryString}`}
     title="Ministère du Travail de l’Emploi et de l’Insertion"
@@ -52,13 +52,13 @@ export const MTPEI = ({ queryString = '' }) => (
   </a>
 );
 
-export const MI = ({ queryString = '' }) => (
+export const MI = ({ queryString = "" }) => (
   <a href={`/administration/mi${queryString}`} title="Ministère de l’Intérieur">
     ministère de l’Intérieur
   </a>
 );
 
-export const DJEPVA = ({ queryString = '' }) => (
+export const DJEPVA = ({ queryString = "" }) => (
   <a
     href={`/administration/djepva${queryString}`}
     title="Direction de la Jeunesse de l’Éducation Populaire et de la Vie Associative"
@@ -67,7 +67,7 @@ export const DJEPVA = ({ queryString = '' }) => (
   </a>
 );
 
-export const DataSubvention = ({ queryString = '' }) => (
+export const DataSubvention = ({ queryString = "" }) => (
   <a
     href={`/administration/data-subvention${queryString}`}
     title="Data Subvention"
@@ -76,7 +76,7 @@ export const DataSubvention = ({ queryString = '' }) => (
   </a>
 );
 
-export const MEF = ({ queryString = '' }) => (
+export const MEF = ({ queryString = "" }) => (
   <a
     href={`/administration/mef${queryString}`}
     title="Ministère de l’Économie et des Finances"
@@ -85,13 +85,13 @@ export const MEF = ({ queryString = '' }) => (
   </a>
 );
 
-export const MC = ({ queryString = '' }) => (
+export const MC = ({ queryString = "" }) => (
   <a href={`/administration/mc${queryString}`} title="Ministère de la Culture">
     ministère de la Culture
   </a>
 );
 
-export const EDUCNAT = ({ queryString = '' }) => (
+export const EDUCNAT = ({ queryString = "" }) => (
   <a
     href={`/administration/education-nationale${queryString}`}
     title="Éducation nationale"
@@ -100,7 +100,7 @@ export const EDUCNAT = ({ queryString = '' }) => (
   </a>
 );
 
-export const DINUM = ({ queryString = '' }) => (
+export const DINUM = ({ queryString = "" }) => (
   <a
     href={`/administration/dinum${queryString}`}
     title="Direction Interministérielle du Numérique"
@@ -109,7 +109,7 @@ export const DINUM = ({ queryString = '' }) => (
   </a>
 );
 
-export const MarcheInclusion = ({ queryString = '' }) => (
+export const MarcheInclusion = ({ queryString = "" }) => (
   <a
     href={`/administration/marche-inclusion${queryString}`}
     title="Le Marché de l’Inclusion"
@@ -118,7 +118,7 @@ export const MarcheInclusion = ({ queryString = '' }) => (
   </a>
 );
 
-export const GIPMDS = ({ queryString = '' }) => (
+export const GIPMDS = ({ queryString = "" }) => (
   <a
     href={`/administration/gip-mds${queryString}`}
     title="Groupement d’intérêt public Modernisation des déclarations sociales"
@@ -127,7 +127,7 @@ export const GIPMDS = ({ queryString = '' }) => (
   </a>
 );
 
-export const DGFiP = ({ queryString = '' }) => (
+export const DGFiP = ({ queryString = "" }) => (
   <a
     href={`/administration/dgfip${queryString}`}
     title="Direction générale des Finances publiques"
@@ -136,7 +136,7 @@ export const DGFiP = ({ queryString = '' }) => (
   </a>
 );
 
-export const CNIL = ({ queryString = '' }) => (
+export const CNIL = ({ queryString = "" }) => (
   <a
     href={`/administration/cnil${queryString}`}
     title="Commission Nationale de l'Informatique et des Libertés"

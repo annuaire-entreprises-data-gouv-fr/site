@@ -1,13 +1,13 @@
-import { clientApiDataSubvention } from '#clients/api-data-subvention';
-import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { clientApiDataSubvention } from "#clients/api-data-subvention";
+import { HttpNotFound } from "#clients/exceptions";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import { FetchRessourceException, Information } from '#models/exceptions';
-import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
+} from "#models/api-not-responding";
+import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
+import { FetchRessourceException, Information } from "#models/exceptions";
+import logErrorInSentry, { logInfoInSentry } from "#utils/sentry";
 
 export type ISubventions = ISubvention[];
 
@@ -42,8 +42,8 @@ export const getSubventionsAssociationFromSlug = async (
         const result = await clientApiDataSubvention(idAssociation);
         logInfoInSentry(
           new Information({
-            name: 'DataSubvention',
-            message: 'Fallback worked for data subvention',
+            name: "DataSubvention",
+            message: "Fallback worked for data subvention",
           })
         );
         return result;
@@ -53,7 +53,7 @@ export const getSubventionsAssociationFromSlug = async (
         }
         logErrorInSentry(
           new FetchRessourceException({
-            ressource: 'DataSubvention',
+            ressource: "DataSubvention",
             cause: e,
             context: {
               siren,

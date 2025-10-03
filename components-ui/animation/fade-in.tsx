@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 type IProps = {
   duration?: number;
@@ -18,11 +18,11 @@ export const FadeIn = ({
   return (
     <>
       <div
-        className={(className ? className : '') + ' ' + 'fade-in-wrapper'}
+        className={(className ? className : "") + " " + "fade-in-wrapper"}
         style={{
           ...(style || {}),
-          animationDuration: duration + 'ms',
-          animationDelay: delay + 'ms',
+          animationDuration: duration + "ms",
+          animationDelay: delay + "ms",
         }}
       >
         {children}

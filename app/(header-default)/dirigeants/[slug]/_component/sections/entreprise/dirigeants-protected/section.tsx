@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import routes from '#clients/routes';
-import { Info } from '#components-ui/alerts';
-import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
-import { INPI } from '#components/administrations';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { UniteLegalePageLink } from '#components/unite-legale-page-link';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { isEntrepreneurIndividuel, IUniteLegale } from '#models/core/types';
-import { pluralize } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { useMemo } from 'react';
-import DirigeantsContentProtected from './content';
+import routes from "#clients/routes";
+import { Info } from "#components-ui/alerts";
+import InpiPartiallyDownWarning from "#components-ui/alerts-with-explanations/inpi-partially-down";
+import { INPI } from "#components/administrations";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { UniteLegalePageLink } from "#components/unite-legale-page-link";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISession } from "#models/authentication/user/session";
+import { isEntrepreneurIndividuel, IUniteLegale } from "#models/core/types";
+import { pluralize } from "#utils/helpers";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import DirigeantsContentProtected from "./content";
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -50,7 +50,7 @@ export default function DirigeantsSectionProtected({
       isProtected={true}
       notFoundInfo={
         <>
-          Cette structure n’est pas enregistrée au{' '}
+          Cette structure n’est pas enregistrée au{" "}
           <strong>Registre National des Entreprises (RNE)</strong>
         </>
       }
@@ -70,7 +70,7 @@ export default function DirigeantsSectionProtected({
 
             {dirigeants.data.length === 0 ? (
               <p>
-                Cette entreprise est enregistrée au{' '}
+                Cette entreprise est enregistrée au{" "}
                 <strong>Registre National des Entreprises (RNE)</strong>, mais
                 n’y possède aucun dirigeant.
               </p>
@@ -78,10 +78,10 @@ export default function DirigeantsSectionProtected({
               <>
                 <p>
                   Cette entreprise possède {dirigeants.data.length} dirigeant
-                  {plural} enregistré{plural} au{' '}
+                  {plural} enregistré{plural} au{" "}
                   <strong>Registre National des Entreprises (RNE)</strong> tenu
                   par l’
-                  <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
+                  <INPI />. Pour en savoir plus, vous pouvez consulter{" "}
                   <UniteLegalePageLink
                     href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
                     uniteLegale={uniteLegale}

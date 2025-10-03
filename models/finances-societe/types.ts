@@ -6,7 +6,7 @@ export type IIndicateursFinanciersSociete = {
 };
 
 export interface IIndicateursFinanciers {
-  confidentiality: 'Public' | string;
+  confidentiality: "Public" | string;
   ratioDeVetuste?: number;
   rotationDesStocksJours?: number;
   margeEbe?: number;
@@ -44,7 +44,7 @@ export const createDefaultIndicateursFinanciersWithDGFiP = (
   CADGFiP: number
 ): IIndicateursFinanciers => {
   return {
-    confidentiality: '',
+    confidentiality: "",
     year,
     type,
     dateClotureExercice,

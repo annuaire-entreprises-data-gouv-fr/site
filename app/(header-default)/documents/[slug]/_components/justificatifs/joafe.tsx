@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import AssociationCreationNotFoundAlert from '#components-ui/alerts-with-explanations/association-creation-not-found-alert';
-import ButtonLink from '#components-ui/button';
-import { Icon } from '#components-ui/icon/wrapper';
-import { PrintNever } from '#components-ui/print-visibility';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAssociation } from '#models/core/types';
-import { formatDate, formatIntFr } from '#utils/helpers';
-import { useFetchJOAFE } from 'hooks';
-import React from 'react';
+import AssociationCreationNotFoundAlert from "#components-ui/alerts-with-explanations/association-creation-not-found-alert";
+import ButtonLink from "#components-ui/button";
+import { Icon } from "#components-ui/icon/wrapper";
+import { PrintNever } from "#components-ui/print-visibility";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IAssociation } from "#models/core/types";
+import { formatDate, formatIntFr } from "#utils/helpers";
+import { useFetchJOAFE } from "hooks";
+import React from "react";
 
 type IProps = {
   uniteLegale: IAssociation;
@@ -33,26 +33,26 @@ export const JustificatifImmatriculationJOAFE: React.FC<IProps> = ({
     >
       {(annoncesJOAFE) => {
         const annonceCreation = annoncesJOAFE.annonces.find(
-          (annonce) => annonce.typeAvisLibelle === 'Création'
+          (annonce) => annonce.typeAvisLibelle === "Création"
         );
 
-        if (typeof annonceCreation === 'undefined') {
+        if (typeof annonceCreation === "undefined") {
           return <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />;
         } else {
-          const downloadLink = annonceCreation.path + '?format=pdf';
+          const downloadLink = annonceCreation.path + "?format=pdf";
 
           const data = [
-            ['Siren', formatIntFr(uniteLegale.siren)],
-            ['N°RNA', formatIntFr(uniteLegale.association.idAssociation)],
+            ["Siren", formatIntFr(uniteLegale.siren)],
+            ["N°RNA", formatIntFr(uniteLegale.association.idAssociation)],
             [
-              'Date d’enregistrement',
+              "Date d’enregistrement",
               formatDate(annonceCreation.datePublication),
             ],
           ];
           return (
             <>
               <p>
-                Cette structure est enregistrée au{' '}
+                Cette structure est enregistrée au{" "}
                 <strong>Journal Officiel des Association (JOAFE)</strong>.
               </p>
               <TwoColumnTable body={data} />

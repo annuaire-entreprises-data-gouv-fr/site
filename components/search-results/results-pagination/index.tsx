@@ -1,6 +1,6 @@
-import { buildSearchQuery, IParams } from '#models/search/search-filter-params';
-import React from 'react';
-import pagesArray from './pages-array';
+import { buildSearchQuery, IParams } from "#models/search/search-filter-params";
+import React from "react";
+import pagesArray from "./pages-array";
 
 type IProps = {
   currentPage: number;
@@ -13,9 +13,9 @@ type IProps = {
 
 const urlParams = (
   page = 1,
-  searchTerm = '',
+  searchTerm = "",
   searchfilterParams?: IParams,
-  urlComplement = ''
+  urlComplement = ""
 ) => {
   const searchQuery = buildSearchQuery(searchTerm, searchfilterParams || {});
   return `${searchQuery}&page=${page}${urlComplement}`;
@@ -37,7 +37,7 @@ const First: React.FC<IProps> = ({
           : undefined
       }
     >
-      {compact ? '' : 'Première page'}
+      {compact ? "" : "Première page"}
     </a>
   </li>
 );
@@ -59,7 +59,7 @@ const Last: React.FC<IProps> = ({
           : undefined
       }
     >
-      {compact ? '' : 'Dernière page'}
+      {compact ? "" : "Dernière page"}
     </a>
   </li>
 );
@@ -84,7 +84,7 @@ const Previous: React.FC<IProps> = ({
           : undefined
       }
     >
-      {compact ? '' : 'Page précédente'}
+      {compact ? "" : "Page précédente"}
     </a>
   </li>
 );
@@ -111,7 +111,7 @@ const Next: React.FC<IProps> = ({
           : undefined
       }
     >
-      {compact ? '' : 'Page suivante'}
+      {compact ? "" : "Page suivante"}
     </a>
   </li>
 );
@@ -133,7 +133,7 @@ const Page: React.FC<{
     <a
       href={urlParams(pageNum, searchTerm, searchFilterParams, urlComplement)}
       className="fr-pagination__link "
-      aria-current={currentPage === pageNum ? 'page' : undefined}
+      aria-current={currentPage === pageNum ? "page" : undefined}
       title={`Page ${pageNum}`}
     >
       {pageNum}
@@ -151,7 +151,7 @@ const PageCounter: React.FC<IProps> = ({
   searchTerm,
   totalPages,
   searchFilterParams,
-  urlComplement = '',
+  urlComplement = "",
   compact = false,
 }) => {
   const pages = pagesArray(currentPage, totalPages);
@@ -160,7 +160,7 @@ const PageCounter: React.FC<IProps> = ({
   }
 
   return (
-    <div className="layout-center" style={{ margin: '15px auto' }}>
+    <div className="layout-center" style={{ margin: "15px auto" }}>
       <nav role="navigation" className="fr-pagination" aria-label="Pagination">
         <ul className="fr-pagination__list">
           <First

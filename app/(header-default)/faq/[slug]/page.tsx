@@ -1,22 +1,22 @@
-import Breadcrumb from '#components-ui/breadcrumb';
-import ButtonLink from '#components-ui/button';
-import TextWrapper from '#components-ui/text-wrapper';
-import { RenderMarkdownServerOnly } from '#components/markdown';
-import { allFaqArticles, getFaqArticle } from '#models/article/faq';
-import { Exception } from '#models/exceptions';
-import { logWarningInSentry } from '#utils/sentry';
+import Breadcrumb from "#components-ui/breadcrumb";
+import ButtonLink from "#components-ui/button";
+import TextWrapper from "#components-ui/text-wrapper";
+import { RenderMarkdownServerOnly } from "#components/markdown";
+import { allFaqArticles, getFaqArticle } from "#models/article/faq";
+import { Exception } from "#models/exceptions";
+import { logWarningInSentry } from "#utils/sentry";
 import {
   AppRouterProps,
   IParams,
-} from '#utils/server-side-helper/app/extract-params';
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+} from "#utils/server-side-helper/app/extract-params";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 // should not happen since we declared generateStaticParams
 const redirectFAQPageNotFound = (slug: string) => {
   logWarningInSentry(
     new Exception({
-      name: 'FAQPageNotFound',
+      name: "FAQPageNotFound",
       context: { slug },
     })
   );
@@ -35,8 +35,8 @@ export default async function FAQArticle({ params }: AppRouterProps) {
       <TextWrapper>
         <Breadcrumb
           links={[
-            { href: '/faq', label: 'Questions fréquentes' },
-            { href: '', label: article.title },
+            { href: "/faq", label: "Questions fréquentes" },
+            { href: "", label: article.title },
           ]}
         />
         <h1>{article.title}</h1>
@@ -91,7 +91,7 @@ export const generateMetadata = async ({
   return {
     title: article.seo.title || article.title,
     description: article.seo.description,
-    robots: 'index, follow',
+    robots: "index, follow",
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/faq/${article.slug}`,
     },

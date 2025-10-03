@@ -1,7 +1,7 @@
-import { Error, Info, Success } from '#components-ui/alerts';
-import ButtonLink from '#components-ui/button';
-import { throwUnreachableCaseError } from '#models/exceptions';
-import { IHidePersonalDataRequest } from '#models/protected-siren/request-siren-protection';
+import { Error, Info, Success } from "#components-ui/alerts";
+import ButtonLink from "#components-ui/button";
+import { throwUnreachableCaseError } from "#models/exceptions";
+import { IHidePersonalDataRequest } from "#models/protected-siren/request-siren-protection";
 
 type IProps = {
   hidePersonalDataRequest?: IHidePersonalDataRequest;
@@ -27,7 +27,7 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
             Changer mon statut de diffusion
           </ButtonLink>
         </div>
-      ) : hidePersonalDataRequest === 'CREATED' ? (
+      ) : hidePersonalDataRequest === "CREATED" ? (
         <Success full>
           <strong>Demande prise en compte</strong>
           <p>
@@ -35,7 +35,7 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
             deux jours ouvrés.
           </p>
         </Success>
-      ) : hidePersonalDataRequest === 'DENIED' ? (
+      ) : hidePersonalDataRequest === "DENIED" ? (
         <Error full>
           <strong>Demande refusée</strong>
           <p>
@@ -45,7 +45,7 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
             d’informations.
           </p>
         </Error>
-      ) : hidePersonalDataRequest === 'PENDING' ? (
+      ) : hidePersonalDataRequest === "PENDING" ? (
         <Info>
           <strong>Votre demande est en cours</strong>
           <p>
@@ -54,7 +54,7 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
             jours ouvrés.
           </p>
         </Info>
-      ) : hidePersonalDataRequest === 'ACCEPTED' ? (
+      ) : hidePersonalDataRequest === "ACCEPTED" ? (
         <Success>
           <strong>Demande déjà traitée</strong>
           <p>

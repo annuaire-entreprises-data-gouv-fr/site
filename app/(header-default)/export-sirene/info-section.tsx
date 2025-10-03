@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Info } from '#components-ui/alerts';
-import { INSEE } from '#components/administrations';
+import { Info } from "#components-ui/alerts";
+import { INSEE } from "#components/administrations";
 
 export default function InfoSection() {
   return (
@@ -13,10 +13,10 @@ export default function InfoSection() {
         <INSEE />.
       </p>
       <p>
-        Les données sont mises à jour chaque jour et{' '}
+        Les données sont mises à jour chaque jour et{" "}
         <strong>disponibles 24h après leur actualisation</strong> dans le
         répertoire Sirene. Pour vérifier l’état de disponibilité du répertoire
-        Sirene, consultez la{' '}
+        Sirene, consultez la{" "}
         <a
           rel="noreferrer noopener"
           target="_blank"
@@ -40,15 +40,15 @@ export default function InfoSection() {
         </ul>
       </Info>
       <div>
-        Pour plus de détails sur le contenu des fichiers, consultez la{' '}
+        Pour plus de détails sur le contenu des fichiers, consultez la{" "}
         <a
           rel="noreferrer noopener"
           target="_blank"
           href="https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret"
         >
-          documentation{' '}
-        </a>{' '}
-        et ce{' '}
+          documentation{" "}
+        </a>{" "}
+        et ce{" "}
         <a
           rel="noreferrer noopener"
           target="_blank"

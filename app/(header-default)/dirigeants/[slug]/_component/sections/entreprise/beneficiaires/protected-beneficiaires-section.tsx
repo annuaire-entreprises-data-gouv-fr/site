@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import routes from '#clients/routes';
-import FAQLink from '#components-ui/faq-link';
-import { Tag } from '#components-ui/tag';
-import { INPI } from '#components/administrations';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { FullTable } from '#components/table/full';
-import { UniteLegalePageLink } from '#components/unite-legale-page-link';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { IBeneficiairesEffectif } from '#models/espace-agent/beneficiaires';
-import { UseCase } from '#models/use-cases';
-import { formatDatePartial, pluralize } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { useMemo } from 'react';
+import routes from "#clients/routes";
+import FAQLink from "#components-ui/faq-link";
+import { Tag } from "#components-ui/tag";
+import { INPI } from "#components/administrations";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { FullTable } from "#components/table/full";
+import { UniteLegalePageLink } from "#components/unite-legale-page-link";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { IBeneficiairesEffectif } from "#models/espace-agent/beneficiaires";
+import { UseCase } from "#models/use-cases";
+import { formatDatePartial, pluralize } from "#utils/helpers";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
 
 /**
  * Dirigeants section
@@ -61,7 +61,7 @@ export default function ProtectedBeneficiairesSection({
         sources={sources}
         notFoundInfo={
           <>
-            Cette structure n’est pas enregistrée au{' '}
+            Cette structure n’est pas enregistrée au{" "}
             <strong>Registre National des Entreprises (RNE)</strong>
           </>
         }
@@ -90,8 +90,8 @@ function BénéficiairesContent({
   const formatInfos = (beneficiaire: IBeneficiairesEffectif) => [
     <>
       {beneficiaire.prenoms}
-      {beneficiaire.prenoms && ' '}
-      {(beneficiaire.nom || '').toUpperCase()}, né(e) en{' '}
+      {beneficiaire.prenoms && " "}
+      {(beneficiaire.nom || "").toUpperCase()}, né(e) en{" "}
       {formatDatePartial(
         `${beneficiaire.anneeNaissance}-${beneficiaire.moisNaissance}-00`
       )}
@@ -119,8 +119,8 @@ function BénéficiairesContent({
             est soit égal à 0%, soit supérieur ou égal à 25%. En effet, en
             dessous de ce ratio, la personne physique ne déclare pas son
             capital.
-          </FAQLink>{' '}
-          :{' '}
+          </FAQLink>{" "}
+          :{" "}
           <strong>
             {beneficiaire.modalites.detention_de_capital.parts_totale}%
           </strong>
@@ -132,7 +132,7 @@ function BénéficiairesContent({
               Le bénéficiaire détient du capital direct (parts sociales ou
               actions) de l’unité légale. Par opposition à une détention
               indirecte du capital, via une personne morale.
-            </FAQLink>{' '}
+            </FAQLink>{" "}
             :
             <PartCapitalModalite
               capital={
@@ -150,7 +150,7 @@ function BénéficiairesContent({
               succession appartiennent indistinctement à tous les héritiers sans
               que leurs parts respectives ne soient matériellement
               individualisées.
-            </FAQLink>{' '}
+            </FAQLink>{" "}
             :
             <PartCapitalModalite
               capital={
@@ -166,7 +166,7 @@ function BénéficiairesContent({
             <FAQLink tooltipLabel="Part via personne morale">
               Les parts indirectes peuvent être détenues par le biais d’une ou
               de plusieurs personnes morales intermédiaires.
-            </FAQLink>{' '}
+            </FAQLink>{" "}
             :
             <PartCapitalModalite
               capital={
@@ -186,7 +186,7 @@ function BénéficiairesContent({
           indirects. Ce total est soit égal à 0%, soit supérieur ou égal à 25%.
           En effet, en dessous de ce ratio, la personne physique ne déclare pas
           ses droits de vote.
-        </FAQLink>{' '}
+        </FAQLink>{" "}
         : <strong>{beneficiaire.modalites.droits_de_vote.total}%</strong>
       </li>
       {beneficiaire.modalites.droits_de_vote.directes.detention && (
@@ -195,7 +195,7 @@ function BénéficiairesContent({
             Le bénéficiaire détient du capital direct (parts sociales ou
             actions) de l’unité légale. Par opposition à une détention indirecte
             du capital, via une personne morale.
-          </FAQLink>{' '}
+          </FAQLink>{" "}
           :
           <PartCapitalModalite
             capital={beneficiaire.modalites.droits_de_vote.directes}
@@ -210,7 +210,7 @@ function BénéficiairesContent({
             plusieurs héritiers. Cela signifie que les biens de la succession
             appartiennent indistinctement à tous les héritiers sans que leurs
             parts respectives ne soient matériellement individualisées.
-          </FAQLink>{' '}
+          </FAQLink>{" "}
           :
           <PartCapitalModalite
             capital={
@@ -225,7 +225,7 @@ function BénéficiairesContent({
           <FAQLink tooltipLabel="Droits via personne morale">
             Les droits indirectes peuvent être détenues par le biais d’une ou de
             plusieurs personnes morales intermédiaires.
-          </FAQLink>{' '}
+          </FAQLink>{" "}
           :
           <PartCapitalModalite
             capital={
@@ -277,17 +277,17 @@ function BénéficiairesContent({
       {beneficiaires.length === 0 ? null : (
         <>
           <p>
-            Cette entreprise possède {beneficiaires.length}{' '}
+            Cette entreprise possède {beneficiaires.length}{" "}
             <a
               rel="noreferrer noopener"
               target="_blank"
               href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
             >
               bénéficiaire{plural} effectif{plural}
-            </a>{' '}
-            enregistré{plural} au{' '}
+            </a>{" "}
+            enregistré{plural} au{" "}
             <strong>Registre National des Entreprises (RNE)</strong> tenu par l’
-            <INPI />. Retrouvez le détail des modalités de contrôle sur{' '}
+            <INPI />. Retrouvez le détail des modalités de contrôle sur{" "}
             <UniteLegalePageLink
               uniteLegale={uniteLegale}
               href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
@@ -298,11 +298,11 @@ function BénéficiairesContent({
           <FullTable
             verticalAlign="top"
             head={[
-              'Bénéficiaire',
-              'Pays',
-              'Détention de capital',
-              'Droits de vote',
-              'Pouvoirs de contrôle',
+              "Bénéficiaire",
+              "Pays",
+              "Détention de capital",
+              "Droits de vote",
+              "Pouvoirs de contrôle",
             ]}
             body={beneficiaires.map((beneficiaire) =>
               formatInfos(beneficiaire)

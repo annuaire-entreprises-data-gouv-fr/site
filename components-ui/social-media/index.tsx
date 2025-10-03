@@ -1,10 +1,10 @@
-import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
-import { PrintNever } from '#components-ui/print-visibility';
-import { Siren } from '#utils/helpers';
-import React from 'react';
-import PrintButton from './print-button';
-import styles from './styles.module.css';
+import { Icon } from "#components-ui/icon/wrapper";
+import InformationTooltip from "#components-ui/information-tooltip";
+import { PrintNever } from "#components-ui/print-visibility";
+import { Siren } from "#utils/helpers";
+import React from "react";
+import PrintButton from "./print-button";
+import styles from "./styles.module.css";
 
 const SocialMedia: React.FC<{
   path: string;
@@ -12,7 +12,7 @@ const SocialMedia: React.FC<{
   siren?: Siren;
 }> = ({ path, label, siren }) => (
   <PrintNever>
-    <div className={styles.socialMedia + ' layout-right'}>
+    <div className={styles.socialMedia + " layout-right"}>
       <span>
         <InformationTooltip
           ariaRelation="labelledby"

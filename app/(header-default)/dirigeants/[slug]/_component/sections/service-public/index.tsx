@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { DILA } from '#components/administrations';
-import NonRenseigne from '#components/non-renseigne';
-import { DataSectionClient } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale } from '#models/core/types';
-import { useFetchServicePublic } from 'hooks/fetch/service-public';
-import SubServicesSection from './subservices';
+import { DILA } from "#components/administrations";
+import NonRenseigne from "#components/non-renseigne";
+import { DataSectionClient } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IUniteLegale } from "#models/core/types";
+import { useFetchServicePublic } from "hooks/fetch/service-public";
+import SubServicesSection from "./subservices";
 
 export default function ResponsablesServicePublicSection({
   uniteLegale,
@@ -43,13 +43,13 @@ export default function ResponsablesServicePublicSection({
             ) : (
               <>
                 <p>
-                  Cette administration possède{' '}
+                  Cette administration possède{" "}
                   {servicePublic.affectationPersonne.length} responsable(s)
                   enregistré(s) auprès de la <DILA />
                   {servicePublic.liens.annuaireServicePublic && (
                     <>
-                      {' '}
-                      sur{' '}
+                      {" "}
+                      sur{" "}
                       <a
                         href={servicePublic.liens.annuaireServicePublic.valeur}
                         target="_blank"
@@ -62,8 +62,8 @@ export default function ResponsablesServicePublicSection({
                   )}
                   {servicePublic.liens.organigramme && (
                     <>
-                      {' '}
-                      et publie un{' '}
+                      {" "}
+                      et publie un{" "}
                       <a
                         href={servicePublic.liens.organigramme.valeur}
                         target="_blank"
@@ -78,7 +78,7 @@ export default function ResponsablesServicePublicSection({
                 </p>
 
                 <FullTable
-                  head={['Role', 'Nom', 'Nomination']}
+                  head={["Role", "Nom", "Nomination"]}
                   body={servicePublic.affectationPersonne.map((personne) => [
                     personne.fonction,
                     personne.nom ?? <NonRenseigne />,
@@ -89,11 +89,11 @@ export default function ResponsablesServicePublicSection({
                         rel="noopener noreferrer"
                         aria-label={`${
                           personne.lienTexteAffectation.libelle ||
-                          'Voir la nomination'
+                          "Voir la nomination"
                         }, nouvelle fenêtre`}
                       >
                         {personne.lienTexteAffectation.libelle ||
-                          'Voir la nomination'}
+                          "Voir la nomination"}
                       </a>
                     ) : (
                       <NonRenseigne />

@@ -1,10 +1,10 @@
-import constants from '#models/constants';
-import Axios, { AxiosInstance } from 'axios';
-import http from 'http';
-import https from 'https';
-import { IDefaultRequestConfig } from '..';
-import errorInterceptor from './error-interceptor';
-import { addStartTimeInterceptor, logInterceptor } from './log-interceptor';
+import constants from "#models/constants";
+import Axios, { AxiosInstance } from "axios";
+import http from "http";
+import https from "https";
+import { IDefaultRequestConfig } from "..";
+import errorInterceptor from "./error-interceptor";
+import { addStartTimeInterceptor, logInterceptor } from "./log-interceptor";
 
 /**
  * Limit the number of sockets allocated per distant hosts and to reuse sockets
@@ -45,7 +45,7 @@ async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
     timeout: constants.timeout.L,
     ...config,
     headers: {
-      'User-Agent': 'annuaire-entreprises-site',
+      "User-Agent": "annuaire-entreprises-site",
       ...(config.headers || {}),
     },
   });

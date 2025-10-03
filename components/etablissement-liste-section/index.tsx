@@ -1,15 +1,15 @@
-import { Tag } from '#components-ui/tag';
-import IsActiveTag from '#components-ui/tag/is-active-tag';
-import NonRenseigne from '#components/non-renseigne';
-import PageCounter from '#components/search-results/results-pagination';
-import { Section } from '#components/section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import constants from '#models/constants';
-import { estNonDiffusibleStrict } from '#models/core/diffusion';
-import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { formatDate, formatSiret, pluralize } from '#utils/helpers';
-import React from 'react';
+import { Tag } from "#components-ui/tag";
+import IsActiveTag from "#components-ui/tag/is-active-tag";
+import NonRenseigne from "#components/non-renseigne";
+import PageCounter from "#components/search-results/results-pagination";
+import { Section } from "#components/section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import constants from "#models/constants";
+import { estNonDiffusibleStrict } from "#models/core/diffusion";
+import { IEtablissement, IUniteLegale } from "#models/core/types";
+import { formatDate, formatSiret, pluralize } from "#utils/helpers";
+import React from "react";
 
 const EtablissementTable: React.FC<{
   label?: string;
@@ -22,17 +22,17 @@ const EtablissementTable: React.FC<{
       {label && (
         <h3>
           Etablissement{plural} {label}
-          {labelWithoutPlural ? '' : plural}&nbsp;:
+          {labelWithoutPlural ? "" : plural}&nbsp;:
         </h3>
       )}
 
       <FullTable
         head={[
-          'SIRET',
-          'Activité (NAF/APE)',
-          'Détails (nom, enseigne, adresse)',
-          'Création',
-          'État',
+          "SIRET",
+          "Activité (NAF/APE)",
+          "Détails (nom, enseigne, adresse)",
+          "Création",
+          "État",
         ]}
         body={etablissements.map((etablissement: IEtablissement) => [
           <a href={`/etablissement/${etablissement.siret}`}>
@@ -50,7 +50,7 @@ const EtablissementTable: React.FC<{
               <NonRenseigne />
             ) : (
               <>
-                <span style={{ fontVariant: 'all-small-caps' }}>
+                <span style={{ fontVariant: "all-small-caps" }}>
                   {(etablissement.enseigne || etablissement.denomination) && (
                     <a href={`/etablissement/${etablissement.siret}`}>
                       <strong>
@@ -71,7 +71,7 @@ const EtablissementTable: React.FC<{
           </>,
           (!estNonDiffusibleStrict(etablissement) &&
             formatDate(etablissement.dateCreation)) ||
-            '',
+            "",
           <>
             <IsActiveTag
               etatAdministratif={etablissement.etatAdministratif}
@@ -99,19 +99,19 @@ const EtablissementListeSection: React.FC<{
     nombreEtablissements / constants.resultsPerPage.etablissements
   );
 
-  const plural = nombreEtablissements > 1 ? 's' : '';
-  const pluralBe = nombreEtablissementsOuverts > 1 ? 'sont' : 'est';
+  const plural = nombreEtablissements > 1 ? "s" : "";
+  const pluralBe = nombreEtablissementsOuverts > 1 ? "sont" : "est";
 
   return (
     <div id="etablissements">
       <p>
-        Cette structure possède{' '}
+        Cette structure possède{" "}
         <strong>
           {nombreEtablissements} établissement{plural}
         </strong>
         {nombreEtablissementsOuverts && !usePagination ? (
           <>
-            {' '}
+            {" "}
             dont {nombreEtablissementsOuverts} {pluralBe} en activité
           </>
         ) : null}

@@ -1,7 +1,7 @@
-import { IAssociationEtablissement } from '#models/espace-agent/association-protected';
-import { InternalError } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { formatSiret } from '../siren-and-siret';
+import { IAssociationEtablissement } from "#models/espace-agent/association-protected";
+import { InternalError } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import { formatSiret } from "../siren-and-siret";
 
 export const extractAssociationEtablissements = (
   etablissements: { etablissement: IAssociationEtablissement }[]
@@ -22,7 +22,7 @@ export const extractAssociationEtablissements = (
   } catch (e) {
     logErrorInSentry(
       new InternalError({
-        message: 'Failed to extract association etablissement',
+        message: "Failed to extract association etablissement",
         cause: e,
       })
     );

@@ -22,7 +22,7 @@ export default function Summary(props: ISummaryProps) {
         {props.headings.map(({ id, content }) => (
           <li key={id}>
             <a className="fr-summary__link" href={`#${id}`}>
-              {content}{' '}
+              {content}{" "}
             </a>
           </li>
         ))}

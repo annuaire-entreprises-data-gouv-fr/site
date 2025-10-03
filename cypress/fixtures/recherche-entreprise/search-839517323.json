@@ -88,9 +88,7 @@
           "date_immatriculation": "2018-05-12",
           "date_radiation": "2021-10-15",
           "duree_personne_morale": 99,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3006",
           "capital_social": 1000,
           "capital_variable": false,

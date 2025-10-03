@@ -1,10 +1,10 @@
-import ButtonLink from '#components-ui/button';
+import ButtonLink from "#components-ui/button";
 
 export const metadata = {
-  title: 'Merci beaucoup pour votre retour',
-  robots: 'noindex, nofollow',
+  title: "Merci beaucoup pour votre retour",
+  robots: "noindex, nofollow",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/formulaire/merci',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/formulaire/merci",
   },
 };
 

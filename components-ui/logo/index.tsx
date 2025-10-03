@@ -16,12 +16,12 @@ type IProps = {
  * @returns
  */
 const Logo: React.FC<IProps> = ({
-  title = 'Annuaire des Entreprises',
+  title = "Annuaire des Entreprises",
   alt,
   width,
   height,
-  slug = 'marianne',
-  className = '',
+  slug = "marianne",
+  className = "",
   lazy = false,
 }) => (
   <div
@@ -29,28 +29,28 @@ const Logo: React.FC<IProps> = ({
     style={{
       width: `${width}px`,
       height: `${height}px`,
-      maxWidth: ' 90%',
-      margin: '0 auto',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
+      maxWidth: " 90%",
+      margin: "0 auto",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     }}
   >
     <img
       className={className}
-      src={`/images/logos/${slug || 'marianne'}.svg`}
+      src={`/images/logos/${slug || "marianne"}.svg`}
       alt={alt || title}
       title={title}
       width="100%"
       height="100%"
       style={{
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100%',
-        boxShadow: 'none',
+        margin: "auto",
+        display: "block",
+        maxWidth: "100%",
+        maxHeight: "100%",
+        boxShadow: "none",
       }}
-      loading={lazy ? 'lazy' : 'eager'}
+      loading={lazy ? "lazy" : "eager"}
     />
   </div>
 );

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import NonRenseigne from '#components/non-renseigne';
-import { DataSectionClient } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IUniteLegale } from '#models/core/types';
-import { IDataFetchingState, isDataSuccess } from '#models/data-fetching';
-import { IServicePublic } from '#models/service-public';
-import { useFetchServicePublicSubServices } from 'hooks/fetch/service-public-subservices';
+import NonRenseigne from "#components/non-renseigne";
+import { DataSectionClient } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { IUniteLegale } from "#models/core/types";
+import { IDataFetchingState, isDataSuccess } from "#models/data-fetching";
+import { IServicePublic } from "#models/service-public";
+import { useFetchServicePublicSubServices } from "hooks/fetch/service-public-subservices";
 
 function SubServicesDataSection({
   servicePublic,
@@ -36,7 +36,7 @@ function SubServicesDataSection({
             :
           </p>
           <FullTable
-            head={['Nom du département', 'Responsable(s)']}
+            head={["Nom du département", "Responsable(s)"]}
             body={subServices.map((service) => {
               return [
                 service.urlServicePublic ? (
@@ -57,7 +57,7 @@ function SubServicesDataSection({
                   service?.affectationPersonne.length > 0 ? (
                   service?.affectationPersonne.map((personne, index) => (
                     <>
-                      {index !== 0 && ', '}
+                      {index !== 0 && ", "}
                       <strong>{personne.nom}</strong> {personne.fonction}
                     </>
                   ))

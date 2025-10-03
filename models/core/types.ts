@@ -2,18 +2,18 @@
 import {
   IEtablissementsList,
   createEtablissementsList,
-} from '#models/core/etablissements-list';
-import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
-import { IEtatCivil } from '#models/rne/types';
-import { IdRna, Siren, Siret } from '#utils/helpers';
-import { EAdministration } from '../administrations/EAdministration';
+} from "#models/core/etablissements-list";
+import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
+import { IEtatCivil } from "#models/rne/types";
+import { IdRna, Siren, Siret } from "#utils/helpers";
+import { EAdministration } from "../administrations/EAdministration";
 import {
   Exception,
   FetchRessourceException,
   IExceptionContext,
-} from '../exceptions';
-import { ITVAIntracommunautaire } from '../tva';
-import { ISTATUTDIFFUSION } from './diffusion';
+} from "../exceptions";
+import { ITVAIntracommunautaire } from "../tva";
+import { ISTATUTDIFFUSION } from "./diffusion";
 
 export interface IEtablissement {
   siren: Siren;
@@ -53,31 +53,31 @@ export interface IEtablissementWithUniteLegale {
 /** BASIC CONSTRUCTORS */
 export const createDefaultEtablissement = (): IEtablissement => {
   return {
-    siren: '' as Siren,
-    siret: '' as Siret,
-    oldSiret: '' as Siret,
+    siren: "" as Siren,
+    siret: "" as Siret,
+    oldSiret: "" as Siret,
     etatAdministratif: IETATADMINSTRATIF.INCONNU,
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     estSiege: false,
     ancienSiege: false,
     enseigne: null,
     denomination: null,
-    nic: '',
-    dateCreation: '',
-    dateDerniereMiseAJour: '',
-    dateMiseAJourInsee: '',
-    dateDebutActivite: '',
-    dateFermeture: '',
-    adresse: '',
-    adressePostale: '',
-    codePostal: '',
-    commune: '',
-    activitePrincipale: '',
-    libelleActivitePrincipale: '',
-    trancheEffectif: '',
-    anneeTrancheEffectif: '',
-    latitude: '',
-    longitude: '',
+    nic: "",
+    dateCreation: "",
+    dateDerniereMiseAJour: "",
+    dateMiseAJourInsee: "",
+    dateDebutActivite: "",
+    dateFermeture: "",
+    adresse: "",
+    adressePostale: "",
+    codePostal: "",
+    commune: "",
+    activitePrincipale: "",
+    libelleActivitePrincipale: "",
+    trancheEffectif: "",
+    anneeTrancheEffectif: "",
+    latitude: "",
+    longitude: "",
     complements: createDefaultEtablissementComplements(),
     listeIdcc: [],
   };
@@ -135,21 +135,21 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     anciensSiegesSirets: [],
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif: IETATADMINSTRATIF.INCONNU,
-    nomComplet: '',
+    nomComplet: "",
     chemin: siren,
-    natureJuridique: '',
-    libelleNatureJuridique: '',
+    natureJuridique: "",
+    libelleNatureJuridique: "",
     etablissements: createEtablissementsList([siege]),
-    activitePrincipale: '',
-    libelleActivitePrincipale: '',
-    dateCreation: '',
-    dateFermeture: '',
-    dateDerniereMiseAJour: '',
-    dateMiseAJourInsee: '',
-    dateMiseAJourInpi: '',
-    dateMiseAJourIG: '',
-    dateDebutActivite: '',
-    trancheEffectif: '',
+    activitePrincipale: "",
+    libelleActivitePrincipale: "",
+    dateCreation: "",
+    dateFermeture: "",
+    dateDerniereMiseAJour: "",
+    dateMiseAJourInsee: "",
+    dateMiseAJourInpi: "",
+    dateMiseAJourIG: "",
+    dateDebutActivite: "",
+    trancheEffectif: "",
     anneeCategorieEntreprise: null,
     categorieEntreprise: null,
     anneeTrancheEffectif: null,
@@ -210,7 +210,7 @@ export const createDefaultUniteLegaleComplements =
       estBio: false,
       estEntrepreneurSpectacle: false,
       egaproRenseignee: false,
-      statutEntrepreneurSpectacle: '',
+      statutEntrepreneurSpectacle: "",
       estServicePublic: false,
       estL100_3: false,
       estFiness: false,
@@ -221,7 +221,7 @@ export const createDefaultUniteLegaleComplements =
       estUai: false,
       estAssociation: false,
       estEntrepriseInclusive: false,
-      typeEntrepriseInclusive: '',
+      typeEntrepriseInclusive: "",
       estAchatsResponsables: false,
       estPatrimoineVivant: false,
       estAlimConfiance: false,
@@ -251,7 +251,7 @@ export const createDefaultEtablissementComplements =
     };
   };
 
-export interface IAssociation extends Omit<IUniteLegale, 'association'> {
+export interface IAssociation extends Omit<IUniteLegale, "association"> {
   association: {
     idAssociation: IdRna | string;
   };
@@ -273,7 +273,7 @@ export const isEntrepreneurIndividuel = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estEntrepreneurIndividuel;
 
 export interface ICollectiviteTerritoriale
-  extends Omit<IUniteLegale, 'colter'> {
+  extends Omit<IUniteLegale, "colter"> {
   colter: {
     codeColter: string;
     codeInsee: string;
@@ -298,8 +298,8 @@ export const isCollectiviteTerritoriale = (
 export class SirenNotFoundError extends Exception {
   constructor(siren: string) {
     super({
-      name: 'SirenNotFoundError',
-      message: 'This is a valid siren but it was not found',
+      name: "SirenNotFoundError",
+      message: "This is a valid siren but it was not found",
       context: { siren },
     });
   }
@@ -311,8 +311,8 @@ export class SirenNotFoundError extends Exception {
 export class NotLuhnValidSirenError extends Exception {
   constructor(siren: string) {
     super({
-      name: 'NotLuhnValidSirenError',
-      message: 'This look like a siren but does not respect Luhn formula',
+      name: "NotLuhnValidSirenError",
+      message: "This look like a siren but does not respect Luhn formula",
       context: { siren },
     });
   }
@@ -324,8 +324,8 @@ export class NotLuhnValidSirenError extends Exception {
 export class NotASirenError extends Exception {
   constructor(siren: string) {
     super({
-      name: 'NotASirenError',
-      message: 'This does not even look like a siren',
+      name: "NotASirenError",
+      message: "This does not even look like a siren",
       context: { siren },
     });
   }
@@ -337,8 +337,8 @@ export class NotASirenError extends Exception {
 export class SiretNotFoundError extends Exception {
   constructor(siret: string) {
     super({
-      name: 'SiretNotFoundError',
-      message: 'This is a valid siret but it was not found',
+      name: "SiretNotFoundError",
+      message: "This is a valid siret but it was not found",
       context: { siret },
     });
   }
@@ -350,8 +350,8 @@ export class SiretNotFoundError extends Exception {
 export class NotLuhnValidSiretError extends Exception {
   constructor(siret: string) {
     super({
-      name: 'NotLuhnValidSiretError',
-      message: 'This look like a siret but does not respect Luhn formula',
+      name: "NotLuhnValidSiretError",
+      message: "This look like a siret but does not respect Luhn formula",
       context: { siret },
     });
   }
@@ -363,8 +363,8 @@ export class NotLuhnValidSiretError extends Exception {
 export class NotASiretError extends Exception {
   constructor(siret: string) {
     super({
-      name: 'NotASiretError',
-      message: 'This does not even look like a siret',
+      name: "NotASiretError",
+      message: "This does not even look like a siret",
       context: { siret },
     });
   }
@@ -376,8 +376,8 @@ export class NotASiretError extends Exception {
 export class NotAValidIdRnaError extends Exception {
   constructor(idRna: string) {
     super({
-      name: 'NotAValidIdRnaError',
-      message: 'This is not a valid IdRna',
+      name: "NotAValidIdRnaError",
+      message: "This is not a valid IdRna",
       context: { idRna },
     });
   }
@@ -387,7 +387,7 @@ export class NotAValidIdRnaError extends Exception {
 export class IsLikelyASirenOrSiretException extends Exception {
   constructor(public sirenOrSiret: string) {
     super({
-      name: 'IsLikelyASirenOrSiretException',
+      name: "IsLikelyASirenOrSiretException",
       context: {
         details: sirenOrSiret,
       },
@@ -398,7 +398,7 @@ export class IsLikelyASirenOrSiretException extends Exception {
 // search engine exception
 export class NotEnoughParamsException extends Exception {
   constructor() {
-    super({ name: 'NotEnoughParamsException' });
+    super({ name: "NotEnoughParamsException" });
   }
 }
 
@@ -411,7 +411,7 @@ export class FetchRechercheEntrepriseException extends FetchRessourceException {
     super({
       ...args,
       administration: EAdministration.DINUM,
-      ressource: 'RechercheEntreprise',
+      ressource: "RechercheEntreprise",
     });
   }
 }

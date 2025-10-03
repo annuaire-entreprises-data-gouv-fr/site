@@ -1,8 +1,8 @@
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
 
 export const FinancesSocieteSummary = ({
   session,

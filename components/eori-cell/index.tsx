@@ -1,18 +1,18 @@
-'use client';
-import { Icon } from '#components-ui/icon/wrapper';
-import InformationTooltip from '#components-ui/information-tooltip';
-import { Loader } from '#components-ui/loader';
-import { CopyPaste } from '#components/table/copy-paste';
-import { isAPINotResponding } from '#models/api-not-responding';
-import { ISession } from '#models/authentication/user/session';
+"use client";
+import { Icon } from "#components-ui/icon/wrapper";
+import InformationTooltip from "#components-ui/information-tooltip";
+import { Loader } from "#components-ui/loader";
+import { CopyPaste } from "#components/table/copy-paste";
+import { isAPINotResponding } from "#models/api-not-responding";
+import { ISession } from "#models/authentication/user/session";
 import {
   hasFetchError,
   isDataLoading,
   isUnauthorized,
-} from '#models/data-fetching';
-import { Siret, formatSiret } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+} from "#models/data-fetching";
+import { Siret, formatSiret } from "#utils/helpers";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 
 type IProps = {
   siret: Siret;
@@ -77,7 +77,7 @@ export default function EORICell({ siret, session }: IProps) {
   }
   return eoriValidation.isValid ? (
     <CopyPaste label="eori" shouldRemoveSpace>
-      {'FR ' + formatSiret(eoriValidation.eori)}
+      {"FR " + formatSiret(eoriValidation.eori)}
     </CopyPaste>
   ) : (
     <i>Pas de n° EORI valide</i>

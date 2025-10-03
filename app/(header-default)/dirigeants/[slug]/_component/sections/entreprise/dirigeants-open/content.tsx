@@ -1,14 +1,14 @@
-import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
-import { FullTable } from '#components/table/full';
-import { IUniteLegale } from '#models/core/types';
+import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
+import { FullTable } from "#components/table/full";
+import { IUniteLegale } from "#models/core/types";
 import {
   IDirigeantsWithMetadata,
   IEtatCivil,
   IPersonneMorale,
-} from '#models/rne/types';
-import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
-import EtatCivilInfos from '../EtatCivilInfos';
-import PersonneMoraleInfos from '../PersonneMoraleInfos';
+} from "#models/rne/types";
+import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
+import EtatCivilInfos from "../EtatCivilInfos";
+import PersonneMoraleInfos from "../PersonneMoraleInfos";
 
 type IDirigeantContentProps = {
   dirigeants: IDirigeantsWithMetadata;
@@ -52,7 +52,7 @@ export default function DirigeantsContent({
 
   return (
     <FullTable
-      head={['Role', 'Details', 'Action']}
+      head={["Role", "Details", "Action"]}
       body={dirigeants.data
         .sort(sortDirigeants)
         .map((dirigeant) => formatDirigeant(dirigeant))}

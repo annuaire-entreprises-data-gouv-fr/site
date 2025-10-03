@@ -1,9 +1,9 @@
 // Documentation ProConnect
 // https://github.com/numerique-gouv/proconnect-documentation/blob/main/doc_fs/implementation_technique.md
 
-import { HttpForbiddenError } from '#clients/exceptions';
-import { IReqWithSession } from '#utils/session/with-session';
-import { BaseClient, Issuer, generators } from 'openid-client';
+import { HttpForbiddenError } from "#clients/exceptions";
+import { IReqWithSession } from "#utils/session/with-session";
+import { BaseClient, Issuer, generators } from "openid-client";
 
 let _client = undefined as BaseClient | undefined;
 
@@ -16,7 +16,7 @@ const REDIRECT_URI = process.env.AGENTCONNECT_REDIRECT_URI;
 const POST_LOGOUT_REDIRECT_URI =
   process.env.AGENTCONNECT_POST_LOGOUT_REDIRECT_URI;
 
-const SCOPES = 'openid given_name usual_name email siret idp_id';
+const SCOPES = "openid given_name usual_name email siret idp_id";
 
 export const getClient = async () => {
   if (_client) {
@@ -29,7 +29,7 @@ export const getClient = async () => {
       !REDIRECT_URI ||
       !POST_LOGOUT_REDIRECT_URI
     ) {
-      throw new Error('PRO CONNECT ENV variables are not defined');
+      throw new Error("PRO CONNECT ENV variables are not defined");
     }
     const proConnectIssuer = await Issuer.discover(ISSUER_URL);
 
@@ -38,8 +38,8 @@ export const getClient = async () => {
       client_secret: CLIENT_SECRET,
       redirect_uris: [REDIRECT_URI],
       post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
-      id_token_signed_response_alg: 'RS256',
-      userinfo_signed_response_alg: 'RS256',
+      id_token_signed_response_alg: "RS256",
+      userinfo_signed_response_alg: "RS256",
     });
 
     return _client;
@@ -58,7 +58,7 @@ export const proConnectAuthorizeUrl = async (req: IReqWithSession) => {
 
   return client.authorizationUrl({
     scope: SCOPES,
-    acr_values: 'eidas1',
+    acr_values: "eidas1",
     nonce,
     state,
     claims: {
@@ -101,7 +101,7 @@ export const proConnectAuthenticate = async (
 
   const accessToken = tokenSet.access_token;
   if (!accessToken) {
-    throw new HttpForbiddenError('No access token');
+    throw new HttpForbiddenError("No access token");
   }
 
   const userInfo = (await client.userinfo(tokenSet)) as IProConnectUserInfo;

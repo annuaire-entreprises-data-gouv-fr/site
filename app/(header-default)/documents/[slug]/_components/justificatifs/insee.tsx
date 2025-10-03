@@ -1,27 +1,27 @@
-import ButtonLink from '#components-ui/button';
-import { Tag } from '#components-ui/tag';
-import IsActiveTag from '#components-ui/tag/is-active-tag';
-import { INSEE } from '#components/administrations';
-import AvisSituationLink from '#components/justificatifs/avis-situation-link';
-import { Section } from '#components/section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
+import ButtonLink from "#components-ui/button";
+import { Tag } from "#components-ui/tag";
+import IsActiveTag from "#components-ui/tag/is-active-tag";
+import { INSEE } from "#components/administrations";
+import AvisSituationLink from "#components/justificatifs/avis-situation-link";
+import { Section } from "#components/section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { estDiffusible } from '#models/core/diffusion';
-import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { formatSiret } from '#utils/helpers';
-import React from 'react';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { estDiffusible } from "#models/core/diffusion";
+import { IEtablissement, IUniteLegale } from "#models/core/types";
+import { formatSiret } from "#utils/helpers";
+import React from "react";
 
 const AvisSituationTable: React.FC<{
   etablissements: IEtablissement[];
   session: ISession | null;
 }> = ({ etablissements, session }) => (
   <FullTable
-    head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
+    head={["SIRET", "Adresse", "Statut", "Avis de situation"]}
     body={etablissements.map((etablissement: IEtablissement) => [
       <a href={`/etablissement/${etablissement.siret}`}>
         {formatSiret(etablissement.siret)}
@@ -53,7 +53,7 @@ const AvisSituationNonDiffusible = () => (
   <>
     <div className="description">
       Bien que cette entreprise soit <strong>non-diffusible</strong>, l’
-      <INSEE /> propose une téléprocédure qui permet{' '}
+      <INSEE /> propose une téléprocédure qui permet{" "}
       <strong>au représentant légal</strong> d’une entreprise d’accéder en
       quelques clics à son avis de situation.
     </div>
@@ -82,7 +82,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, session }) => (
         </div>
         <p>
           Si vous avez plusieurs établisements et ne savez pas quel avis de
-          situation utiliser,{' '}
+          situation utiliser,{" "}
           <AvisSituationLink
             session={session}
             etablissement={uniteLegale.siege}

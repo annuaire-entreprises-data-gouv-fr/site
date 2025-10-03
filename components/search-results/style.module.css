@@ -61,7 +61,7 @@ a.adress:hover,
 }
 .matching-etablissement li:before,
 .down {
-  content: '';
+  content: "";
   width: 10px;
   height: 15px;
   border: 1px solid #bbb;

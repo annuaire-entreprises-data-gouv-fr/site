@@ -17,7 +17,7 @@ export default function Stepper({ titles, currentStep }: IStepperProps) {
       ></div>
       {currentStep < totalSteps - 1 && (
         <p className="fr-stepper__details">
-          <span className="fr-text--bold">Étape suivante :</span>{' '}
+          <span className="fr-text--bold">Étape suivante :</span>{" "}
           {titles[currentStep + 1]}
         </p>
       )}

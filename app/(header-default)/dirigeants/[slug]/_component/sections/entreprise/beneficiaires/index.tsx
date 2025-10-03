@@ -1,12 +1,12 @@
-import ProtectedSectionWithUseCase from '#components/section-with-use-case';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ApplicationRights } from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/use-cases';
-import { InfoAgentRBE } from './info-agent-rbe';
-import ProtectedBeneficiairesSection from './protected-beneficiaires-section';
-import { WarningRBE } from './warning-rbe';
+import ProtectedSectionWithUseCase from "#components/section-with-use-case";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ApplicationRights } from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { UseCase } from "#models/use-cases";
+import { InfoAgentRBE } from "./info-agent-rbe";
+import ProtectedBeneficiairesSection from "./protected-beneficiaires-section";
+import { WarningRBE } from "./warning-rbe";
 
 const BeneficiairesSection: React.FC<{
   uniteLegale: IUniteLegale;

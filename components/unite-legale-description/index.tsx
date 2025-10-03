@@ -1,14 +1,14 @@
-import { IUniteLegale } from '#models/core/types';
+import { IUniteLegale } from "#models/core/types";
 import {
   capitalize,
   formatAge,
   formatDateLong,
   uniteLegaleLabelWithPronoun,
-} from '#utils/helpers';
-import { libelleCategorieEntrepriseForDescription } from '#utils/helpers/formatting/categories-entreprise';
-import { libelleEffectifForDescription } from '#utils/helpers/formatting/codes-effectifs';
-import React from 'react';
-import { UniteLegaleEtablissementCountDescription } from './etablissement-count-description';
+} from "#utils/helpers";
+import { libelleCategorieEntrepriseForDescription } from "#utils/helpers/formatting/categories-entreprise";
+import { libelleEffectifForDescription } from "#utils/helpers/formatting/codes-effectifs";
+import React from "react";
+import { UniteLegaleEtablissementCountDescription } from "./etablissement-count-description";
 
 export const UniteLegaleDescription: React.FC<{
   uniteLegale: IUniteLegale;
@@ -25,36 +25,36 @@ export const UniteLegaleDescription: React.FC<{
     <>
       <p>
         <>
-          {capitalize(uniteLegaleLabelWithPronoun(uniteLegale))}{' '}
+          {capitalize(uniteLegaleLabelWithPronoun(uniteLegale))}{" "}
           {uniteLegale.nomComplet}
         </>
         {uniteLegale.dateCreation ? (
           <>
-            {' '}
-            a été créée le{' '}
+            {" "}
+            a été créée le{" "}
             <strong>{formatDateLong(uniteLegale.dateCreation)}</strong>
-            {ageCreation && <>, il y a {ageCreation}</>}.{' '}
+            {ageCreation && <>, il y a {ageCreation}</>}.{" "}
           </>
         ) : (
           <> n’a pas de date de création connue. </>
         )}
         {uniteLegale.dateFermeture && (
           <>
-            Elle a été fermée le{' '}
+            Elle a été fermée le{" "}
             <strong>{formatDateLong(uniteLegale.dateFermeture)}</strong>
-            {ageFermeture && <>, il y a {ageFermeture}</>}.{' '}
+            {ageFermeture && <>, il y a {ageFermeture}</>}.{" "}
           </>
         )}
         {uniteLegale.natureJuridique && (
           <>
-            Sa forme juridique est{' '}
-            <strong>{uniteLegale.libelleNatureJuridique}</strong>.{' '}
+            Sa forme juridique est{" "}
+            <strong>{uniteLegale.libelleNatureJuridique}</strong>.{" "}
           </>
         )}
         {uniteLegale.libelleActivitePrincipale && (
           <>
-            Son domaine d’activité est :{' '}
-            {(uniteLegale.libelleActivitePrincipale || '').toLowerCase()}.
+            Son domaine d’activité est :{" "}
+            {(uniteLegale.libelleActivitePrincipale || "").toLowerCase()}.
           </>
         )}
         {libelleCategorieEntrepriseForDescription(uniteLegale)}
@@ -63,11 +63,11 @@ export const UniteLegaleDescription: React.FC<{
       <p>
         {uniteLegale.siege && uniteLegale.siege.adresse && (
           <>
-            Son{' '}
+            Son{" "}
             <a href={`/etablissement/${uniteLegale.siege.siret}`}>
               siège social
-            </a>{' '}
-            est domicilié au{' '}
+            </a>{" "}
+            est domicilié au{" "}
             <a href={`/etablissement/${uniteLegale.siege.siret}`}>
               {uniteLegale.siege.adresse}
             </a>
@@ -76,8 +76,8 @@ export const UniteLegaleDescription: React.FC<{
         )}
         {uniteLegale.etablissements.all && (
           <>
-            {' '}
-            Elle possède{' '}
+            {" "}
+            Elle possède{" "}
             <UniteLegaleEtablissementCountDescription
               uniteLegale={uniteLegale}
             />

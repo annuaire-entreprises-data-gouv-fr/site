@@ -1,7 +1,7 @@
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale } from '#models/core/types';
-import { PropsWithChildren } from 'react';
-import AgentWall from '.';
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IUniteLegale } from "#models/core/types";
+import { PropsWithChildren } from "react";
+import AgentWall from ".";
 
 const AgentWallAssociationProtected: React.FC<
   PropsWithChildren<{
@@ -16,15 +16,15 @@ const AgentWallAssociationProtected: React.FC<
     sources={[EAdministration.MI, EAdministration.DJEPVA]}
     modalFooter={
       <>
-        Les <strong>particuliers, salariés</strong> et{' '}
-        <strong>entrepreneurs</strong>, peuvent consulter cette donnée sur{' '}
+        Les <strong>particuliers, salariés</strong> et{" "}
+        <strong>entrepreneurs</strong>, peuvent consulter cette donnée sur{" "}
         <a
           target="_blank"
           href={`https://www.data-asso.fr/annuaire/association/${uniteLegale.association.idAssociation}?docFields=documentsDac,documentsRna`}
           rel="noopener noreferrer"
         >
           la fiche data-asso
-        </a>{' '}
+        </a>{" "}
         de cette association.
       </>
     }

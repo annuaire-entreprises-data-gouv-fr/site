@@ -1,25 +1,25 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import BreakPageForPrint from '#components-ui/print-break-page';
-import { PrintNever } from '#components-ui/print-visibility';
-import { Tag } from '#components-ui/tag';
-import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
-import { labelsAndCertificatesSources } from '#components/badges-section/labels-and-certificates';
-import AvisSituationLink from '#components/justificatifs/avis-situation-link';
-import ExtraitRNELink from '#components/justificatifs/extrait-rne-link';
-import { Section } from '#components/section';
-import { CopyPaste } from '#components/table/copy-paste';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { estActif } from '#models/core/etat-administratif';
-import { IEtablissement, IUniteLegale } from '#models/core/types';
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import BreakPageForPrint from "#components-ui/print-break-page";
+import { PrintNever } from "#components-ui/print-visibility";
+import { Tag } from "#components-ui/tag";
+import { ConventionCollectivesBadgesSection } from "#components/badges-section/convention-collectives";
+import { labelsAndCertificatesSources } from "#components/badges-section/labels-and-certificates";
+import AvisSituationLink from "#components/justificatifs/avis-situation-link";
+import ExtraitRNELink from "#components/justificatifs/extrait-rne-link";
+import { Section } from "#components/section";
+import { CopyPaste } from "#components/table/copy-paste";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISession } from "#models/authentication/user/session";
+import { estActif } from "#models/core/etat-administratif";
+import { IEtablissement, IUniteLegale } from "#models/core/types";
 import {
   formatDate,
   formatSiret,
   uniteLegaleLabelWithPronounContracted,
-} from '#utils/helpers';
-import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
-import React from 'react';
+} from "#utils/helpers";
+import { libelleTrancheEffectif } from "#utils/helpers/formatting/codes-effectifs";
+import React from "react";
 
 type IProps = {
   session: ISession | null;
@@ -45,7 +45,7 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [
           [`Dénomination ${uniteLegaleLabel}`, uniteLegale.nomComplet],
           [
-            'Type d’établissement',
+            "Type d’établissement",
             <>
               {etablissement.estSiege ? (
                 <Tag color="info">siège social</Tag>
@@ -54,31 +54,31 @@ const EtablissementSection: React.FC<IProps> = ({
               ) : (
                 <Tag>secondaire</Tag>
               )}
-              {' ( '}
+              {" ( "}
               <a key="entite" href={`/entreprise/${uniteLegale.chemin}`}>
                 → voir la page {uniteLegaleLabel}
               </a>
-              {' )'}
+              {" )"}
             </>,
           ],
         ]
       : []),
     ...(etablissement.enseigne
-      ? [['Enseigne de l’établissement', etablissement.enseigne]]
+      ? [["Enseigne de l’établissement", etablissement.enseigne]]
       : []),
     ...(etablissement.denomination
-      ? [['Nom de l’établissement', etablissement.denomination]]
+      ? [["Nom de l’établissement", etablissement.denomination]]
       : []),
     [
       <a href="/faq/modifier-adresse">Adresse</a>,
       etablissement.adresse ? (
         <CopyPaste label="Adresse">{etablissement.adresse}</CopyPaste>
       ) : (
-        ''
+        ""
       ),
     ],
-    ['SIRET', formatSiret(etablissement.siret)],
-    ['Clef NIC', etablissement.nic],
+    ["SIRET", formatSiret(etablissement.siret)],
+    ["Clef NIC", etablissement.nic],
     ...(!usedInEntreprisePage
       ? [
           [
@@ -99,13 +99,13 @@ const EtablissementSection: React.FC<IProps> = ({
       `Activité principale de l’établissement (NAF/APE)`,
       etablissement.libelleActivitePrincipale,
     ],
-    ['Code NAF/APE de l’établissement', etablissement.activitePrincipale],
-    ['Forme juridique', uniteLegale.libelleNatureJuridique],
+    ["Code NAF/APE de l’établissement", etablissement.activitePrincipale],
+    ["Forme juridique", uniteLegale.libelleNatureJuridique],
     [
-      'Tranche d’effectif salarié',
+      "Tranche d’effectif salarié",
       libelleTrancheEffectif(
-        uniteLegale.trancheEffectif === 'N'
-          ? 'N'
+        uniteLegale.trancheEffectif === "N"
+          ? "N"
           : etablissement.trancheEffectif,
         etablissement.anneeTrancheEffectif
       ),
@@ -115,25 +115,25 @@ const EtablissementSection: React.FC<IProps> = ({
       formatDate(uniteLegale.dateCreation),
     ],
     [
-      'Date de création de l’établissement',
+      "Date de création de l’établissement",
       formatDate(etablissement.dateCreation),
     ],
     ...(etablissement.dateMiseAJourInsee
       ? [
           [
-            'Dernière modification des données Insee',
+            "Dernière modification des données Insee",
             formatDate(etablissement.dateMiseAJourInsee),
           ],
         ]
       : []),
     ...(!estActif(etablissement)
-      ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
+      ? [["Date de fermeture", formatDate(etablissement.dateFermeture || "")]]
       : []),
-    ['', <br />],
+    ["", <br />],
     ...(etablissement.listeIdcc
       ? [
           [
-            'Convention collective de l’établissement',
+            "Convention collective de l’établissement",
             [
               <ConventionCollectivesBadgesSection
                 key="convention-collectives"
@@ -142,14 +142,14 @@ const EtablissementSection: React.FC<IProps> = ({
               />,
             ],
           ],
-          ['', <br />],
+          ["", <br />],
         ]
       : []),
     [
-      'Justificatif(s) d’existence',
+      "Justificatif(s) d’existence",
       etablissement.siret ? (
         <>
-          Avis de situation Insee de cet établissement :{' '}
+          Avis de situation Insee de cet établissement :{" "}
           <AvisSituationLink
             session={session}
             etablissement={etablissement}
@@ -160,13 +160,13 @@ const EtablissementSection: React.FC<IProps> = ({
             <>
               <br />
               Extrait RNE {uniteLegaleLabel} (
-              <a href="/faq/extrait-kbis">équivalent KBIS/D1</a>) :{' '}
+              <a href="/faq/extrait-kbis">équivalent KBIS/D1</a>) :{" "}
               <ExtraitRNELink uniteLegale={uniteLegale} session={session} />
             </>
           )}
         </>
       ) : (
-        ''
+        ""
       ),
     ],
   ];
@@ -181,7 +181,7 @@ const EtablissementSection: React.FC<IProps> = ({
                 etablissement.enseigne ||
                 etablissement.denomination ||
                 uniteLegale.nomComplet
-              }${etablissement.commune ? ` à ${etablissement.commune}` : ''}`
+              }${etablissement.commune ? ` à ${etablissement.commune}` : ""}`
         }
         id="etablissement"
         sources={[

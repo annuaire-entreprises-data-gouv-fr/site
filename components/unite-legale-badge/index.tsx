@@ -4,15 +4,15 @@ import {
   DefaultStructureBadge,
   EntrepriseIndividuelleBadge,
   ServicePublicBadge,
-} from '#components-ui/badge/frequent';
+} from "#components-ui/badge/frequent";
 import {
   IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
   isServicePublic,
-} from '#models/core/types';
-import { Fragment } from 'react';
+} from "#models/core/types";
+import { Fragment } from "react";
 
 const UniteLegaleBadge: React.FC<{
   uniteLegale: IUniteLegale;

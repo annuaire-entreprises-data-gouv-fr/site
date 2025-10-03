@@ -4,7 +4,7 @@ const Breadcrumb: React.FC<{ links: { href: string; label: string }[] }> = ({
   <nav role="navigation" className="fr-breadcrumb" aria-label="vous êtes ici :">
     <div id="breadcrumb-1">
       <ol className="fr-breadcrumb__list">
-        {links.map(({ label, href = '' }, index) => (
+        {links.map(({ label, href = "" }, index) => (
           <li key={href + index}>
             <a className="fr-breadcrumb__link" href={href}>
               {label}

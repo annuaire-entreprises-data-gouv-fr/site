@@ -1,4 +1,4 @@
-import { randomId } from '#utils/helpers';
+import { randomId } from "#utils/helpers";
 
 export const Checkbox: React.FC<{ label: string; value: boolean }> = ({
   label,

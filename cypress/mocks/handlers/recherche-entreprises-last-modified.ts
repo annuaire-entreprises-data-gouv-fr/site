@@ -1,5 +1,5 @@
-import { HttpResponse, HttpResponseResolver } from 'msw';
-import rechercheEntrepriseLastModified from '../../fixtures/recherche-entreprise-last-modified.json';
+import { HttpResponse, HttpResponseResolver } from "msw";
+import rechercheEntrepriseLastModified from "../../fixtures/recherche-entreprise-last-modified.json";
 
 export const rechercheEntrepriseLastModifiedHandler: HttpResponseResolver =
   async ({ request }) => {

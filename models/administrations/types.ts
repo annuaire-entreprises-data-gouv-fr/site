@@ -1,4 +1,4 @@
-import { EAdministration } from './EAdministration';
+import { EAdministration } from "./EAdministration";
 
 export type IAdministrationsMetaData = {
   [key: string]: IAdministrationMetaData;
@@ -6,7 +6,7 @@ export type IAdministrationsMetaData = {
 export type IAdministrationMetaData = {
   long: string;
   short: string;
-  logoType: 'portrait' | 'paysage' | null;
+  logoType: "portrait" | "paysage" | null;
   administrationEnum: EAdministration;
   slug: string;
   description: string;

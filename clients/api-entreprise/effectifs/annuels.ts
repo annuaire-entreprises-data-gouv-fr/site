@@ -1,8 +1,8 @@
-import routes from '#clients/routes';
-import { IEffectifsAnnuelsProtected } from '#models/espace-agent/effectifs/annuels';
-import { Siren } from '#utils/helpers';
-import clientAPIEntreprise from '../client';
-import { IAPIEntrepriseRcpEffectifsAnnuels } from './types';
+import routes from "#clients/routes";
+import { IEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
+import { Siren } from "#utils/helpers";
+import clientAPIEntreprise from "../client";
+import { IAPIEntrepriseRcpEffectifsAnnuels } from "./types";
 
 /**
  * GET effectifs from API Entreprise

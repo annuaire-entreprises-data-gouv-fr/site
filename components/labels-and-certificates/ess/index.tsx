@@ -1,10 +1,10 @@
-import FAQLink from '#components-ui/faq-link';
-import { ESSFrance, INSEE } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IESS } from '#models/certifications/ess';
+import FAQLink from "#components-ui/faq-link";
+import { ESSFrance, INSEE } from "#components/administrations";
+import { DataSection } from "#components/section/data-section";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import { IESS } from "#models/certifications/ess";
 
 const ESSFAQLink = () => (
   <FAQLink
@@ -54,20 +54,20 @@ export const CertificationESSSection = ({
   >
     {(ess) => (
       <>
-        Cette structure apparait dans la liste des entreprises de <ESSFAQLink />{' '}
+        Cette structure apparait dans la liste des entreprises de <ESSFAQLink />{" "}
         tenue par <ESSFrance />.
         <br />
         <br />
         <TwoColumnTable
           body={[
-            ['Nom', ess.nom],
-            ['Famille juridique', ess.familleJuridique],
+            ["Nom", ess.nom],
+            ["Famille juridique", ess.familleJuridique],
             [
               <>
                 <FAQLink tooltipLabel="CRESS">
                   Chambre régionale de l’économie sociale et solidaire ou
                   Chambre régionale d’économie sociale
-                </FAQLink>{' '}
+                </FAQLink>{" "}
               </>,
               ess.region,
             ],

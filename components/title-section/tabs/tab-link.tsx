@@ -1,4 +1,4 @@
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 type IProps = {
   label: string;
   href: string;
@@ -15,9 +15,9 @@ export default function TabLink({
 }: IProps) {
   return (
     <a
-      className={`${active ? styles.activeLink : ''} no-style-link`}
+      className={`${active ? styles.activeLink : ""} no-style-link`}
       href={href}
-      rel={noFollow ? 'nofollow' : ''}
+      rel={noFollow ? "nofollow" : ""}
       style={{ width }}
     >
       {active ? label : <h2>{label}</h2>}

@@ -1,9 +1,9 @@
-import routes from '#clients/routes';
-import { IBilansProtected } from '#models/espace-agent/bilans';
-import { UseCase } from '#models/use-cases';
-import { Siren } from '#utils/helpers';
-import clientAPIEntreprise from '../client';
-import { IAPIEntrepriseBanqueDeFranceBilans } from './types';
+import routes from "#clients/routes";
+import { IBilansProtected } from "#models/espace-agent/bilans";
+import { UseCase } from "#models/use-cases";
+import { Siren } from "#utils/helpers";
+import clientAPIEntreprise from "../client";
+import { IAPIEntrepriseBanqueDeFranceBilans } from "./types";
 
 /**
  * GET association from API Entreprise
@@ -28,28 +28,28 @@ const mapToDomainObject = (
       dateArreteExercice: item.data.date_arrete_exercice,
       besoinEnFondsDeRoulement:
         item.data.valeurs_calculees[0]?.besoin_en_fonds_de_roulement?.valeur ??
-        '',
+        "",
       capaciteAutofinancement:
-        item.data.valeurs_calculees[0]?.capacite_autofinancement?.valeur ?? '',
+        item.data.valeurs_calculees[0]?.capacite_autofinancement?.valeur ?? "",
       dettes4MaturiteAUnAnAuPlus:
         item.data.valeurs_calculees[0]?.dettes4_maturite_a_un_an_au_plus
-          ?.valeur ?? '',
+          ?.valeur ?? "",
       disponibilites:
-        item.data.valeurs_calculees[0]?.disponibilites?.valeur ?? '',
+        item.data.valeurs_calculees[0]?.disponibilites?.valeur ?? "",
       excedentBrutExploitation:
         item.data.valeurs_calculees[0]?.excedent_brut_exploitation?.valeur ??
-        '',
+        "",
       fondsRoulementNetGlobal:
         item.data.valeurs_calculees[0]?.fonds_roulement_net_global?.valeur ??
-        '',
+        "",
       ratioFondsRoulementNetGlobalSurBesoinEnFondsDeRoulement:
         item.data.valeurs_calculees[0]
           ?.ratio_fonds_roulement_net_global_sur_besoin_en_fonds_de_roulement
-          ?.valeur ?? '',
+          ?.valeur ?? "",
       totalDettesStables:
-        item.data.valeurs_calculees[0]?.total_dettes_stables?.valeur ?? '',
+        item.data.valeurs_calculees[0]?.total_dettes_stables?.valeur ?? "",
       valeurAjouteeBdf:
-        item.data.valeurs_calculees[0]?.valeur_ajoutee_bdf?.valeur ?? '',
+        item.data.valeurs_calculees[0]?.valeur_ajoutee_bdf?.valeur ?? "",
     };
   });
 };

@@ -1,11 +1,11 @@
-import React from 'react';
-import styles from './styleFull.module.css';
+import React from "react";
+import styles from "./styleFull.module.css";
 
 interface ISectionProps {
   head: (string | React.JSX.Element)[];
   body: any[][];
   id?: string;
-  verticalAlign?: 'top' | 'middle' | 'bottom';
+  verticalAlign?: "top" | "middle" | "bottom";
   columnWidths?: string[];
 }
 
@@ -13,7 +13,7 @@ export const FullTable: React.FC<ISectionProps> = ({
   id,
   head,
   body,
-  verticalAlign = 'middle',
+  verticalAlign = "middle",
   columnWidths,
 }) => (
   <>
@@ -36,10 +36,10 @@ export const FullTable: React.FC<ISectionProps> = ({
       </thead>
       <tbody>
         {body.map((row, bodyIndex) => (
-          <tr key={'row-' + bodyIndex} className={styles.row}>
+          <tr key={"row-" + bodyIndex} className={styles.row}>
             {row.map((cell, rowIndex) => (
               <td
-                key={'cell-' + rowIndex}
+                key={"cell-" + rowIndex}
                 style={{
                   verticalAlign,
                   ...(columnWidths?.[rowIndex]
@@ -48,7 +48,7 @@ export const FullTable: React.FC<ISectionProps> = ({
                 }}
                 className={styles.cell}
               >
-                {cell == null || cell === '' ? null : (
+                {cell == null || cell === "" ? null : (
                   <strong aria-hidden className={styles.mobile}>
                     {head[rowIndex]}&nbsp;:&nbsp;
                   </strong>

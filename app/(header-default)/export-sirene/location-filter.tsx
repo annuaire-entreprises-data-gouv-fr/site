@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { IGeoElement } from '#clients/geo';
-import { Info, Warning } from '#components-ui/alerts';
-import FloatingModal from '#components-ui/floating-modal';
-import { Loader } from '#components-ui/loader';
-import { isAPI404, isAPINotResponding } from '#models/api-not-responding';
-import { searchGeoElementByText } from '#models/geo';
-import { debounce } from '#utils/helpers/debounce';
-import { useOutsideClick } from 'hooks';
-import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
-import styles from './styles.module.css';
+import { IGeoElement } from "#clients/geo";
+import { Info, Warning } from "#components-ui/alerts";
+import FloatingModal from "#components-ui/floating-modal";
+import { Loader } from "#components-ui/loader";
+import { isAPI404, isAPINotResponding } from "#models/api-not-responding";
+import { searchGeoElementByText } from "#models/geo";
+import { debounce } from "#utils/helpers/debounce";
+import { useOutsideClick } from "hooks";
+import { KeyboardEventHandler, useCallback, useEffect, useState } from "react";
+import styles from "./styles.module.css";
 
 enum Issue {
   NONE = 2,
@@ -18,7 +18,7 @@ enum Issue {
 }
 
 export const LocationFilter: React.FC<{
-  onSelect: (type: 'cp' | 'dep' | 'reg', value: string, label: string) => void;
+  onSelect: (type: "cp" | "dep" | "reg", value: string, label: string) => void;
 }> = ({ onSelect }) => {
   const [open, setOpen] = useState(false);
   const ref = useOutsideClick(() => {
@@ -26,7 +26,7 @@ export const LocationFilter: React.FC<{
   });
 
   const [issue, setIssue] = useState(Issue.NONE);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [geoSuggests, setGeoSuggests] = useState<IGeoElement[]>([]);
 
@@ -59,8 +59,8 @@ export const LocationFilter: React.FC<{
   const selectDep = ({ label, value, type }: IGeoElement) => {
     setGeoSuggests([]);
     setSearchTerm(label);
-    onSelect(type as 'cp' | 'dep' | 'reg', value, label);
-    setSearchTerm('');
+    onSelect(type as "cp" | "dep" | "reg", value, label);
+    setSearchTerm("");
   };
 
   const onChange = (inputElement: any) => {
@@ -93,7 +93,7 @@ export const LocationFilter: React.FC<{
   }, [searchTerm, setGeoSuggests, setIssue, search]);
 
   return (
-    <div ref={ref} className={styles['location-filter-container']}>
+    <div ref={ref} className={styles["location-filter-container"]}>
       <label htmlFor="geo-search-input">Ville, département ou région :</label>
       <input
         id="geo-search-input"
@@ -111,9 +111,9 @@ export const LocationFilter: React.FC<{
         value={searchTerm}
       />
       <FloatingModal
-        className={styles['location-filter-modal-container']}
-        style={{ display: open ? 'block' : 'none' }}
-        aria-label={'Les filtres de localisation'}
+        className={styles["location-filter-modal-container"]}
+        style={{ display: open ? "block" : "none" }}
+        aria-label={"Les filtres de localisation"}
         aria-modal={false}
       >
         {issue !== Issue.NONE ? (

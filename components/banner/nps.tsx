@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import { PrintNever } from '#components-ui/print-visibility';
-import ClientOnly from '#components/client-only';
-import { Exception } from '#models/exceptions';
-import { logInfoInSentry } from '#utils/sentry';
-import { useStorage } from 'hooks';
-import React, { useEffect, useState } from 'react';
-import styles from './styles.module.css';
+import { PrintNever } from "#components-ui/print-visibility";
+import ClientOnly from "#components/client-only";
+import { Exception } from "#models/exceptions";
+import { logInfoInSentry } from "#utils/sentry";
+import { useStorage } from "hooks";
+import React, { useEffect, useState } from "react";
+import styles from "./styles.module.css";
 
-const NPS_MODAL_ID = 'nps-modal-2';
+const NPS_MODAL_ID = "nps-modal-2";
 
 export const NPSBanner: React.FC<{}> = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered] = useStorage(
-    'local',
+    "local",
     NPS_MODAL_ID,
     false
   );
 
   const [pageViewCount, setPageViewCount] = useStorage(
-    'session',
-    'pv-' + NPS_MODAL_ID,
-    '0'
+    "session",
+    "pv-" + NPS_MODAL_ID,
+    "0"
   );
 
   const pathCounter = () => {
@@ -36,7 +36,7 @@ export const NPSBanner: React.FC<{}> = () => {
     } catch (e) {
       logInfoInSentry(
         new Exception({
-          name: 'SaveFavouriteException',
+          name: "SaveFavouriteException",
           cause: e,
         })
       );

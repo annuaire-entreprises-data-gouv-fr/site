@@ -1,5 +1,5 @@
-import { Section } from '#components/section';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { Section } from "#components/section";
+import { EAdministration } from "#models/administrations/EAdministration";
 
 export const LabelPatrimoineVivant = () => {
   return (
@@ -9,7 +9,7 @@ export const LabelPatrimoineVivant = () => {
       id="patrimoine-vivant"
     >
       <p>
-        Cette structure est labellisée{' '}
+        Cette structure est labellisée{" "}
         <strong>« Entreprise du Patrimoine Vivant »</strong>.
       </p>
       <p>
@@ -19,7 +19,7 @@ export const LabelPatrimoineVivant = () => {
       </p>
       <p>
         Décerné par les préfets de région et attribué pour une période de cinq
-        ans, le label « Entreprise du Patrimoine Vivant » rassemble{' '}
+        ans, le label « Entreprise du Patrimoine Vivant » rassemble{" "}
         <strong>
           des fabricants attachés à la haute performance de leur métier et de
           leurs produits

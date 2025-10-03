@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { Icon } from '#components-ui/icon/wrapper';
-import { Tag } from '#components-ui/tag';
+import { Icon } from "#components-ui/icon/wrapper";
+import { Tag } from "#components-ui/tag";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { changelogData } from '#models/historique-modifications';
-import { useMemo, useState } from 'react';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { changelogData } from "#models/historique-modifications";
+import { useMemo, useState } from "react";
 
 export default function ChangelogWithFilters({
   session,
@@ -94,7 +94,7 @@ export default function ChangelogWithFilters({
             <h3>{change.date}</h3>
             <div
               className="fr-mb-4w fr-px-2w fr-py-2w"
-              style={{ backgroundColor: '#f6f6f6', borderRadius: '3px' }}
+              style={{ backgroundColor: "#f6f6f6", borderRadius: "3px" }}
             >
               {change.target.agent && (
                 <Tag color="agent">

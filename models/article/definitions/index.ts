@@ -1,5 +1,5 @@
-import { loadAll } from '#utils/static-pages/load-all';
-import { IArticle } from '../type';
+import { loadAll } from "#utils/static-pages/load-all";
+import { IArticle } from "../type";
 
 export type IDefinition = {
   administrations: string[];
@@ -11,5 +11,5 @@ export const getDefinition = (slug: string) => {
 
 export const allDefinitions = loadAll<IDefinition>(
   // @ts-ignore
-  require.context('data/definitions', false, /\.yml$/)
+  require.context("data/definitions", false, /\.yml$/)
 );

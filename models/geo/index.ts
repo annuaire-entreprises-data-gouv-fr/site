@@ -1,16 +1,16 @@
-import { IGeoElement } from '#clients/geo';
-import { clientCommuneByCp, clientCommunesByName } from '#clients/geo/communes';
+import { IGeoElement } from "#clients/geo";
+import { clientCommuneByCp, clientCommunesByName } from "#clients/geo/communes";
 import {
   clientDepartementByCode,
   clientDepartementsByName,
-} from '#clients/geo/departements';
-import { clientEpcisByName, clientEpcisBySiren } from '#clients/geo/epcis';
-import { clientRegionsByName } from '#clients/geo/regions';
-import { EAdministration } from '#models/administrations/EAdministration';
+} from "#clients/geo/departements";
+import { clientEpcisByName, clientEpcisBySiren } from "#clients/geo/epcis";
+import { clientRegionsByName } from "#clients/geo/regions";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '#models/api-not-responding';
+} from "#models/api-not-responding";
 
 export async function searchGeoElementByText(
   slug: string,
@@ -23,10 +23,10 @@ export async function searchGeoElementByText(
       // code departement or CP
       let suggests = [];
       if (term.length <= 2) {
-        const testDepCode = `${term}${'0'.repeat(2 - term.length)}`;
+        const testDepCode = `${term}${"0".repeat(2 - term.length)}`;
         suggests = await clientDepartementByCode(testDepCode);
       } else {
-        const testCommuneCode = `${term}${'0'.repeat(5 - term.length)}`;
+        const testCommuneCode = `${term}${"0".repeat(5 - term.length)}`;
         suggests = await clientCommuneByCp(testCommuneCode);
       }
       return suggests;

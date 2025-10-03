@@ -1,6 +1,6 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import { allDataToModify } from '#models/administrations/data-to-modify';
-import { Metadata } from 'next';
+import TextWrapper from "#components-ui/text-wrapper";
+import { allDataToModify } from "#models/administrations/data-to-modify";
+import { Metadata } from "next";
 
 export default function FAQPage() {
   return (
@@ -20,9 +20,9 @@ export default function FAQPage() {
 
 export const metadata: Metadata = {
   title:
-    'FAQ : modifier une information présente sur l’Annuaire des Entreprises',
+    "FAQ : modifier une information présente sur l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/faq/modifier',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/faq/modifier",
   },
-  robots: 'index, follow',
+  robots: "index, follow",
 };

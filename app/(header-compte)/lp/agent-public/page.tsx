@@ -1,26 +1,26 @@
-import ButtonLink from '#components-ui/button';
-import { default as ButtonProConnect } from '#components-ui/button-pro-connect';
-import FullWidthContainer from '#components-ui/container';
-import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import { Icon } from '#components-ui/icon/wrapper';
-import { Tag } from '#components-ui/tag';
-import { Section } from '#components/section';
-import { administrationsMetaData } from '#models/administrations';
-import { isLoggedIn } from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import constants from '#models/constants';
-import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
-import styles from './style.module.css';
+import ButtonLink from "#components-ui/button";
+import { default as ButtonProConnect } from "#components-ui/button-pro-connect";
+import FullWidthContainer from "#components-ui/container";
+import { SimpleSeparator } from "#components-ui/horizontal-separator";
+import { Icon } from "#components-ui/icon/wrapper";
+import { Tag } from "#components-ui/tag";
+import { Section } from "#components/section";
+import { administrationsMetaData } from "#models/administrations";
+import { isLoggedIn } from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import constants from "#models/constants";
+import { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
+import getSession from "#utils/server-side-helper/app/get-session";
+import { Metadata } from "next";
+import styles from "./style.module.css";
 
 export const metadata: Metadata = {
-  title: 'Espace agent | L’Annuaire des Entreprises',
+  title: "Espace agent | L’Annuaire des Entreprises",
   description:
-    'Les informations des entreprises sont toutes dans l’espace agent !',
-  robots: 'index, follow',
+    "Les informations des entreprises sont toutes dans l’espace agent !",
+  robots: "index, follow",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/lp/agent-public',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/lp/agent-public",
   },
 };
 
@@ -34,10 +34,10 @@ const LandingPageAgent = async (props: AppRouterProps) => {
   const session = await getSession();
 
   return (
-    <div className={styles['page']}>
-      <section className={styles['hero']}>
+    <div className={styles["page"]}>
+      <section className={styles["hero"]}>
         <div>
-          <header style={{ marginBottom: '2rem' }}>
+          <header style={{ marginBottom: "2rem" }}>
             <h1>Agents publics, votre temps est précieux !</h1>
             <p className="fr-text--lead">
               Accédez à toutes les données publiques des entreprises et des
@@ -74,7 +74,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
           Entreprises !
         </p>
         <section
-          className={`fr-grid-row fr-grid-row--gutters ${styles['value']}`}
+          className={`fr-grid-row fr-grid-row--gutters ${styles["value"]}`}
         >
           <div className="fr-col-12  fr-col-md-4">
             <Section title="Site grand public">
@@ -119,15 +119,15 @@ const LandingPageAgent = async (props: AppRouterProps) => {
                   <ul>
                     <li>
                       Conformité fiscale, sociale et MSA
-                      <span className={styles['asterix-et-obelix']}>*</span>
+                      <span className={styles["asterix-et-obelix"]}>*</span>
                     </li>
                     <li>
                       Effectifs annuels
-                      <span className={styles['asterix-et-obelix']}>*</span>
+                      <span className={styles["asterix-et-obelix"]}>*</span>
                     </li>
                     <li>
                       Chiffres d’affaires
-                      <span className={styles['asterix-et-obelix']}>*</span>
+                      <span className={styles["asterix-et-obelix"]}>*</span>
                     </li>
                     <li>
                       Liens capitalistiques
@@ -135,25 +135,25 @@ const LandingPageAgent = async (props: AppRouterProps) => {
                     </li>
                     <li>
                       Bilans de la Banque de France
-                      <span className={styles['asterix-et-obelix']}>*</span>
+                      <span className={styles["asterix-et-obelix"]}>*</span>
                     </li>
                     <li>
                       Travaux publics (CIBTP, CNETP, ProBTP, FNTP)
-                      <span className={styles['asterix-et-obelix']}>*</span>
+                      <span className={styles["asterix-et-obelix"]}>*</span>
                     </li>
                     <li>
                       Liasses fiscales
-                      <span className={styles['asterix-et-obelix']}>*</span>
+                      <span className={styles["asterix-et-obelix"]}>*</span>
                     </li>
                     <li>
                       Registre des Bénéficiaires Effectifs
-                      <span className={styles['asterix-et-obelix']}>*</span>
+                      <span className={styles["asterix-et-obelix"]}>*</span>
                     </li>
                   </ul>
-                  <span className={styles['asterix-et-obelix']}>*</span>
+                  <span className={styles["asterix-et-obelix"]}>*</span>
                   <i>
-                    🚧 fonctionnalité en cours de construction.{' '}
-                    <a href={constants.links.tchap}>Suivez-nous sur Tchap</a>{' '}
+                    🚧 fonctionnalité en cours de construction.{" "}
+                    <a href={constants.links.tchap}>Suivez-nous sur Tchap</a>{" "}
                     pour être informé(e) des avancées.
                   </i>
                 </div>
@@ -175,12 +175,12 @@ const LandingPageAgent = async (props: AppRouterProps) => {
       </FullWidthContainer>
       <FullWidthContainer
         style={{
-          background: 'var(--annuaire-colors-pastelBlue)',
+          background: "var(--annuaire-colors-pastelBlue)",
         }}
       >
         <section>
           <h2>Comment l’Annuaire vous aide au quotidien ?</h2>
-          <div className={styles['case-example']}>
+          <div className={styles["case-example"]}>
             <div>
               <Tag color="agent">
                 <Icon slug="lockFill">Écarter les risques de fraude</Icon>
@@ -221,10 +221,10 @@ const LandingPageAgent = async (props: AppRouterProps) => {
       <br />
       <section
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '1rem',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "1rem",
         }}
       >
         <h2>
@@ -240,7 +240,7 @@ const LandingPageAgent = async (props: AppRouterProps) => {
           L’Annuaire des Entreprises est opéré par la DINUM, avec le partenariat
           des administrations suivantes :
         </h3>
-        <div className={styles['logo-soup']}>
+        <div className={styles["logo-soup"]}>
           {Object.values(administrationsMetaData)
             .sort((a, b) => a.long.localeCompare(b.long))
             .map(({ slug, long, logoType }) =>

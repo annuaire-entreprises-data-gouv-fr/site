@@ -1,17 +1,17 @@
-import { SeePersonPageLink } from '#components-ui/see-personn-page-link';
-import { FullTable } from '#components/table/full';
-import { IUniteLegale } from '#models/core/types';
+import { SeePersonPageLink } from "#components-ui/see-personn-page-link";
+import { FullTable } from "#components/table/full";
+import { IUniteLegale } from "#models/core/types";
 import {
   IDirigeantsWithMetadataMergedIGInpi,
   IEtatCivilMergedIGInpi,
   IPersonneMoraleMergedIGInpi,
-} from '#models/rne/types';
-import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
-import { sortDirigeants } from '../dirigeants-open/content';
-import DisambiguationTooltip from '../DisambiguationTooltip';
-import EtatCivilInfos from '../EtatCivilInfos';
-import PersonneMoraleInfos from '../PersonneMoraleInfos';
-import RolesInfos from '../RolesInfos';
+} from "#models/rne/types";
+import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
+import { sortDirigeants } from "../dirigeants-open/content";
+import DisambiguationTooltip from "../DisambiguationTooltip";
+import EtatCivilInfos from "../EtatCivilInfos";
+import PersonneMoraleInfos from "../PersonneMoraleInfos";
+import RolesInfos from "../RolesInfos";
 
 type IDirigeantContentProps = {
   dirigeants: IDirigeantsWithMetadataMergedIGInpi;
@@ -71,7 +71,7 @@ export default function DirigeantsContentProtected({
 
   return (
     <FullTable
-      head={['Role', 'Details', 'Action']}
+      head={["Role", "Details", "Action"]}
       body={dirigeants.data
         .sort(sortDirigeants)
         .map((dirigeant) => formatDirigeant(dirigeant))}

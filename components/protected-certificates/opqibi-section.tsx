@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import FAQLink from '#components-ui/faq-link';
-import { DataSectionClient } from '#components/section/data-section';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { IOpqibi } from '#models/espace-agent/certificats/opqibi';
-import { formatDateLong } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import FAQLink from "#components-ui/faq-link";
+import { DataSectionClient } from "#components/section/data-section";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { IOpqibi } from "#models/espace-agent/certificats/opqibi";
+import { formatDateLong } from "#utils/helpers";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 
 export const OpqibiSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -27,7 +27,7 @@ export const OpqibiSection: React.FC<{
       isProtected
       notFoundInfo={
         <>
-          Cette entreprise n’a pas de{' '}
+          Cette entreprise n’a pas de{" "}
           <a
             target="_blank"
             rel="noreferrer"
@@ -45,7 +45,7 @@ export const OpqibiSection: React.FC<{
       {(opqibi) => (
         <>
           <p>
-            Cette entreprise possède un{' '}
+            Cette entreprise possède un{" "}
             <a
               target="_blank"
               rel="noreferrer"
@@ -53,19 +53,19 @@ export const OpqibiSection: React.FC<{
               href="https://www.opqibi.com/page/la-qualification-opqibi"
             >
               certificat Opqibi
-            </a>{' '}
+            </a>{" "}
             valide.
           </p>
           <TwoColumnTable
             body={[
               [
-                'Date de délivrance',
+                "Date de délivrance",
                 formatDateLong(opqibi.dateDelivranceCertificat),
               ],
-              ['Durée de validité', opqibi.dureeValiditeCertificat],
-              ['Assurances', opqibi.assurances],
+              ["Durée de validité", opqibi.dureeValiditeCertificat],
+              ["Assurances", opqibi.assurances],
               [
-                'Certificat',
+                "Certificat",
                 <a
                   target="_blank"
                   href={opqibi.url}
@@ -82,11 +82,11 @@ export const OpqibiSection: React.FC<{
               <TwoColumnTable
                 body={[
                   [
-                    'Labels',
+                    "Labels",
                     <Qualification qualifications={opqibi.qualifications} />,
                   ],
                   [
-                    'Date de validité',
+                    "Date de validité",
                     formatDateLong(opqibi.dateValiditeQualifications),
                   ],
                 ]}
@@ -108,13 +108,13 @@ export const OpqibiSection: React.FC<{
               <TwoColumnTable
                 body={[
                   [
-                    'Labels',
+                    "Labels",
                     <Qualification
                       qualifications={opqibi.qualificationsProbatoires}
                     />,
                   ],
                   [
-                    'Date de validité',
+                    "Date de validité",
                     formatDateLong(
                       opqibi.dateValiditeQualificationsProbatoires
                     ),
@@ -132,16 +132,16 @@ export const OpqibiSection: React.FC<{
 function Qualification({
   qualifications,
 }: {
-  qualifications: IOpqibi['qualifications'];
+  qualifications: IOpqibi["qualifications"];
 }) {
   return (
-    <ul style={{ listStyle: 'none', padding: 0 }}>
+    <ul style={{ listStyle: "none", padding: 0 }}>
       {qualifications.map((qualification) => (
         <li key={qualification.codeQualification}>
           <FAQLink
             tooltipLabel={`${qualification.codeQualification} : ${
               qualification.nom
-            }${qualification.rge ? ' - RGE' : ''}`}
+            }${qualification.rge ? " - RGE" : ""}`}
           >
             {qualification.definition}
           </FAQLink>

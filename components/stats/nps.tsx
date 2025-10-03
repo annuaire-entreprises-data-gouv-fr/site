@@ -1,30 +1,30 @@
-'use client';
-import { IMatomoStats } from '#clients/matomo';
-import { Select } from '#components-ui/select';
-import { LineChart } from '#components/chart/line';
-import { StackedBarChart } from '#components/chart/stack-bar';
-import constants from '#models/constants';
-import { ChartData } from 'chart.js';
-import { ChangeEvent, useState } from 'react';
+"use client";
+import { IMatomoStats } from "#clients/matomo";
+import { Select } from "#components-ui/select";
+import { LineChart } from "#components/chart/line";
+import { StackedBarChart } from "#components/chart/stack-bar";
+import constants from "#models/constants";
+import { ChartData } from "chart.js";
+import { ChangeEvent, useState } from "react";
 
 export const NpsStats: React.FC<{
-  monthlyNps: IMatomoStats['monthlyNps'];
+  monthlyNps: IMatomoStats["monthlyNps"];
 }> = ({ monthlyNps }) => {
-  const [statsType, setStatsType] = useState<'avg' | 'nps'>('avg');
+  const [statsType, setStatsType] = useState<"avg" | "nps">("avg");
 
   const totalAvg =
     monthlyNps.reduce(
-      (sum, { values }) => sum + (values['all'][statsType] || 0),
+      (sum, { values }) => sum + (values["all"][statsType] || 0),
       0
     ) / 12;
-  const npsMaxRange = statsType === 'avg' ? 10 : 100;
-  const npsPrefixLabel = statsType === 'avg' ? 'Note moyenne' : 'NPS';
+  const npsMaxRange = statsType === "avg" ? 10 : 100;
+  const npsPrefixLabel = statsType === "avg" ? "Note moyenne" : "NPS";
 
-  const dataLineChart: ChartData<'line'> = {
+  const dataLineChart: ChartData<"line"> = {
     labels: monthlyNps.map(({ label }) => label),
     datasets: [
       {
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
         borderColor: constants.chartColors[0],
         borderWidth: 1,
         pointStyle: false,
@@ -35,7 +35,7 @@ export const NpsStats: React.FC<{
       {
         backgroundColor: constants.chartColors[2],
         borderColor: constants.chartColors[2],
-        data: monthlyNps.map(({ values }) => values['all'][statsType] || null),
+        data: monthlyNps.map(({ values }) => values["all"][statsType] || null),
         label: `${npsPrefixLabel} de tous les utilisateurs`,
         tension: 0.3,
       },
@@ -43,7 +43,7 @@ export const NpsStats: React.FC<{
         backgroundColor: constants.chartColors[6],
         borderColor: constants.chartColors[6],
         data: monthlyNps.map(
-          ({ values }) => values['Agent public'][statsType],
+          ({ values }) => values["Agent public"][statsType],
           null
         ),
         label: `${npsPrefixLabel} des agents`,
@@ -53,12 +53,12 @@ export const NpsStats: React.FC<{
   };
 
   const userTypes = [
-    { label: 'Agent public', color: constants.chartColors[6] },
-    { label: 'Dirigeant', color: constants.chartColors[1] },
-    { label: 'Salarié', color: constants.chartColors[7] },
-    { label: 'Indépendant', color: `${constants.chartColors[1]}99` },
-    { label: 'Particulier', color: constants.chartColors[5] },
-    { label: 'Autre', color: constants.chartColors[3] },
+    { label: "Agent public", color: constants.chartColors[6] },
+    { label: "Dirigeant", color: constants.chartColors[1] },
+    { label: "Salarié", color: constants.chartColors[7] },
+    { label: "Indépendant", color: `${constants.chartColors[1]}99` },
+    { label: "Particulier", color: constants.chartColors[5] },
+    { label: "Autre", color: constants.chartColors[3] },
   ];
 
   const userTypesData = {
@@ -66,7 +66,7 @@ export const NpsStats: React.FC<{
       label: userType.label,
       data: monthlyNps.map(({ label, values }) => {
         const response = values[userType.label]?.count || 0;
-        const userResponse = values['all']?.count || 0;
+        const userResponse = values["all"]?.count || 0;
         return {
           y: userResponse ? (response * 100) / userResponse : 0,
           x: label,
@@ -77,12 +77,12 @@ export const NpsStats: React.FC<{
   };
 
   const onOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setStatsType(e.target.value as 'nps' | 'avg');
+    setStatsType(e.target.value as "nps" | "avg");
   };
 
   return (
     <>
-      Les chiffres de cette section proviennent de l’analyse des réponses au{' '}
+      Les chiffres de cette section proviennent de l’analyse des réponses au{" "}
       <a href="/formulaire/nps">questionnaire de satisfaction</a>.
       <h3>Score de satisfaction</h3>
       <p>
@@ -94,10 +94,10 @@ export const NpsStats: React.FC<{
         variations par rapport à la moyenne.
       </p>
       <p>
-        Les données sont consultables sous deux formes : la{' '}
-        <strong>note moyenne</strong> et le{' '}
+        Les données sont consultables sous deux formes : la{" "}
+        <strong>note moyenne</strong> et le{" "}
         <strong>Net Promoter Score (NPS)</strong>. Le NPS est la différence
-        entre les promoteurs (notes {'>'} 8/10) et les détracteurs (notes {'<'}{' '}
+        entre les promoteurs (notes {">"} 8/10) et les détracteurs (notes {"<"}{" "}
         7/10). Il permet d’estimer les chances qu’a un produit d’être recommandé
         par ses utilisateurs et utilisatrices.
       </p>
@@ -106,10 +106,10 @@ export const NpsStats: React.FC<{
         <div>Afficher les données par&nbsp;</div>
         <Select
           options={[
-            { value: 'avg', label: 'note moyenne' },
-            { value: 'nps', label: 'net promoter score (NPS)' },
+            { value: "avg", label: "note moyenne" },
+            { value: "nps", label: "net promoter score (NPS)" },
           ]}
-          defaultValue={'avg'}
+          defaultValue={"avg"}
           onChange={onOptionChange}
         />
       </div>
@@ -123,7 +123,7 @@ export const NpsStats: React.FC<{
             y: {
               title: {
                 display: true,
-                text: statsType === 'avg' ? 'Note sur 10' : 'NPS',
+                text: statsType === "avg" ? "Note sur 10" : "NPS",
               },
               min: 0,
               max: npsMaxRange,
@@ -137,7 +137,7 @@ export const NpsStats: React.FC<{
         Les réponses au formulaire de statisfaction nous permettent de
         constituer une “image” de nos utilisateurs.
       </p>
-      Cependant, le formulaire est le plus souvent rempli par des{' '}
+      Cependant, le formulaire est le plus souvent rempli par des{" "}
       <strong>utilisateurs récurrents</strong>. Cette “image” est donc plus
       représentative de ces derniers que de l’ensemble des utilisateurs du site.
       <StackedBarChart

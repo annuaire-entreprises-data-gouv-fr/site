@@ -1,8 +1,8 @@
-import React from 'react';
-import { Section } from '#components/section';
-import { administrationsMetaData } from '#models/administrations';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import AdministrationNotRespondingMessage from './message';
+import React from "react";
+import { Section } from "#components/section";
+import { administrationsMetaData } from "#models/administrations";
+import { IAPINotRespondingError } from "#models/api-not-responding";
+import AdministrationNotRespondingMessage from "./message";
 
 interface IProps extends IAPINotRespondingError {
   title?: string;

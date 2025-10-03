@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { IRolesDataRoles } from '#clients/roles-data/interface';
-import { IRolesDataGroup } from '#models/authentication/group/groups';
-import { useState } from 'react';
-import { GroupItem } from './group-item';
+import { IRolesDataRoles } from "#clients/roles-data/interface";
+import { IRolesDataGroup } from "#models/authentication/group/groups";
+import { useState } from "react";
+import { GroupItem } from "./group-item";
 
 export function GroupManagement({
   currentUserEmail,

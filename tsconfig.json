@@ -7,45 +7,24 @@
     "incremental": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {
-      "#clients/*": [
-        "./clients/*"
-      ],
-      "#cypress/*": [
-        "./cypress/*"
-      ],
-      "#components/*": [
-        "./components/*"
-      ],
-      "#components-ui/*": [
-        "./components-ui/*"
-      ],
-      "#models/*": [
-        "./models/*"
-      ],
-      "#utils/*": [
-        "./utils/*"
-      ],
-      "#hooks/*": [
-        "./hooks/*"
-      ]
+      "#clients/*": ["./clients/*"],
+      "#cypress/*": ["./cypress/*"],
+      "#components/*": ["./components/*"],
+      "#components-ui/*": ["./components-ui/*"],
+      "#models/*": ["./models/*"],
+      "#utils/*": ["./utils/*"],
+      "#hooks/*": ["./hooks/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "es6",
-    "types": [
-      "jest",
-      "webpack-env"
-    ],
+    "types": ["jest", "webpack-env"],
     "plugins": [
       {
         "name": "next"
@@ -53,13 +32,6 @@
     ],
     "strictNullChecks": true
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }

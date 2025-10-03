@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { Loader } from '#components-ui/loader';
-import { Select } from '#components-ui/select';
-import { Tag } from '#components-ui/tag';
-import NonRenseigne from '#components/non-renseigne';
-import { Section } from '#components/section';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { isAPI404 } from '#models/api-not-responding';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { hasAnyError, isDataLoading } from '#models/data-fetching';
-import { UseCase } from '#models/use-cases';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { ChangeEvent, Fragment, useMemo, useState } from 'react';
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import { Loader } from "#components-ui/loader";
+import { Select } from "#components-ui/select";
+import { Tag } from "#components-ui/tag";
+import NonRenseigne from "#components/non-renseigne";
+import { Section } from "#components/section";
+import { TwoColumnTable } from "#components/table/simple";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { isAPI404 } from "#models/api-not-responding";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { hasAnyError, isDataLoading } from "#models/data-fetching";
+import { UseCase } from "#models/use-cases";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { ChangeEvent, Fragment, useMemo, useState } from "react";
 
 const InnerLiassesSection = ({
   uniteLegale,
@@ -49,7 +49,7 @@ const InnerLiassesSection = ({
   if (isAPI404(liassesFiscalesProtected)) {
     return (
       <i>
-        Aucune liasse fiscale n’a été retrouvé pour cette structure en{' '}
+        Aucune liasse fiscale n’a été retrouvé pour cette structure en{" "}
         {selectedYear}
       </i>
     );
@@ -79,8 +79,8 @@ const InnerLiassesSection = ({
             <TwoColumnTable
               firstColumnWidth="70%"
               body={[
-                ['N° d’Imprimé', imprime],
-                ['Date de fin d’exercice', dateFinExercice],
+                ["N° d’Imprimé", imprime],
+                ["Date de fin d’exercice", dateFinExercice],
                 ...donnees.map((d) => [
                   d.intitule,
                   d.valeurs.length <= 1 ? (

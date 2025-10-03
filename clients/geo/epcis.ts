@@ -1,7 +1,7 @@
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { httpGet } from '#utils/network';
-import { IGeoElement } from '.';
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import { httpGet } from "#utils/network";
+import { IGeoElement } from ".";
 
 type IGeoEpciResponse = {
   nom: string;
@@ -39,7 +39,7 @@ const mapToDomainObject = (response: IGeoEpciResponse[]): IGeoElement[] => {
     return {
       label: `${epci.nom} (EPCI)`,
       value: epci.code,
-      type: 'epci',
+      type: "epci",
     };
   });
 };

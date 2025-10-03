@@ -1,20 +1,20 @@
-import { Icon } from '#components-ui/icon/wrapper';
-import { PrintNever } from '#components-ui/print-visibility';
-import ReconnectBanner from '#components/banner/reconnect';
-import LoadBar from '#components/load-bar';
-import SearchBar from '#components/search-bar';
-import { WelcomeModalAgent } from '#components/welcome-modal-agent';
+import { Icon } from "#components-ui/icon/wrapper";
+import { PrintNever } from "#components-ui/print-visibility";
+import ReconnectBanner from "#components/banner/reconnect";
+import LoadBar from "#components/load-bar";
+import SearchBar from "#components/search-bar";
+import { WelcomeModalAgent } from "#components/welcome-modal-agent";
 import {
   ApplicationRights,
   hasRights,
   isLoggedIn,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import constants from '#models/constants';
-import React from 'react';
-import ChangelogNotification from '../changelog-notification';
-import Menu from '../menu';
-import styles from './styles.module.css';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import constants from "#models/constants";
+import React from "react";
+import ChangelogNotification from "../changelog-notification";
+import Menu from "../menu";
+import styles from "./styles.module.css";
 
 type IProps = {
   currentSearchTerm?: string;
@@ -30,7 +30,7 @@ type IProps = {
 };
 
 export const HeaderCore: React.FC<IProps> = ({
-  currentSearchTerm = '',
+  currentSearchTerm = "",
   useLogo = false,
   useSearchBar = false,
   useAgentCTA = false,
@@ -48,12 +48,12 @@ export const HeaderCore: React.FC<IProps> = ({
       <header
         role="banner"
         className="fr-header"
-        style={{ filter: !useSearchBar ? 'none' : undefined }}
+        style={{ filter: !useSearchBar ? "none" : undefined }}
       >
         <PrintNever>
           <form
             id="search-bar-form"
-            action={useMap ? '/rechercher/carte' : '/rechercher'}
+            action={useMap ? "/rechercher/carte" : "/rechercher"}
             method="get"
           >
             <div className="fr-header__body">
@@ -62,12 +62,12 @@ export const HeaderCore: React.FC<IProps> = ({
                   <div
                     className="fr-header__brand"
                     style={{
-                      filter: !useSearchBar ? 'none' : undefined,
+                      filter: !useSearchBar ? "none" : undefined,
                     }}
                   >
                     <div
                       className="fr-header__brand-top"
-                      style={{ overflow: 'visible' }}
+                      style={{ overflow: "visible" }}
                     >
                       <div className="fr-header__logo">
                         <a href="/" title="République française">
@@ -81,8 +81,8 @@ export const HeaderCore: React.FC<IProps> = ({
                       {useSearchBar || useLogo ? (
                         <div
                           style={{
-                            order: '2',
-                            marginRight: '15px',
+                            order: "2",
+                            marginRight: "15px",
                           }}
                         >
                           <a href="/" title="L’Annuaire des Entreprises">
@@ -140,18 +140,18 @@ export const HeaderCore: React.FC<IProps> = ({
           <PrintNever>
             <div className="fr-container">
               Vous êtes connecté(e) en tant qu’<strong>agent public</strong>.
-              Vous pouvez{' '}
+              Vous pouvez{" "}
               <a href="/compte/accueil">
                 consulter le récapitulatif de vos droits.
               </a>
               <br />
               Vous pouvez accéder à des données réservées à l’administration,
-              identifiables par les cadres roses et la mention “{' '}
+              identifiables par les cadres roses et la mention “{" "}
               <strong style={{ color: constants.colors.espaceAgent }}>
                 <Icon size={12} slug="lockFill">
                   Réservé aux agents publics
                 </Icon>
-              </strong>{' '}
+              </strong>{" "}
               ”.
             </div>
           </PrintNever>

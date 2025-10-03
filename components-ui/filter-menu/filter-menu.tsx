@@ -1,18 +1,18 @@
-'use client';
-import ButtonLink from '#components-ui/button';
-import ButtonClose from '#components-ui/button/button-close';
-import FloatingModal from '#components-ui/floating-modal';
-import { Icon } from '#components-ui/icon/wrapper';
-import constants from '#models/constants';
+"use client";
+import ButtonLink from "#components-ui/button";
+import ButtonClose from "#components-ui/button/button-close";
+import FloatingModal from "#components-ui/floating-modal";
+import { Icon } from "#components-ui/icon/wrapper";
+import constants from "#models/constants";
 import {
   IParams,
   ISearchFilter,
   buildSearchQuery,
-} from '#models/search/search-filter-params';
-import { useOutsideClick } from 'hooks';
-import { PropsWithChildren, useId, useState } from 'react';
-import ActiveFilterLabel from './active-filter-label';
-import styles from './style.module.css';
+} from "#models/search/search-filter-params";
+import { useOutsideClick } from "hooks";
+import { PropsWithChildren, useId, useState } from "react";
+import ActiveFilterLabel from "./active-filter-label";
+import styles from "./style.module.css";
 
 type FilterMenuProps = {
   label: string;
@@ -45,7 +45,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
 
   return (
     <>
-      <div ref={ref} className={styles['search-filter-label-container']}>
+      <div ref={ref} className={styles["search-filter-label-container"]}>
         <div>
           <div>
             {activeFilter.label ? (
@@ -59,7 +59,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
               />
             ) : (
               <span
-                className={styles['search-filter-label']}
+                className={styles["search-filter-label"]}
                 onClick={() => {
                   setOpen(!open);
                 }}
@@ -73,19 +73,19 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
           {open && (
             <ButtonClose
               onClick={() => setOpen(false)}
-              className={styles['close-container']}
+              className={styles["close-container"]}
               ariaControls={id}
               ariaLabel="Fermer les filtres"
             />
           )}
         </div>
         <FloatingModal
-          className={styles['container']}
-          style={{ display: open ? 'block' : 'none' }}
-          aria-label={'Les filtres de ' + activeFilter.label}
+          className={styles["container"]}
+          style={{ display: open ? "block" : "none" }}
+          aria-label={"Les filtres de " + activeFilter.label}
           aria-modal={false}
         >
-          <div className={styles['filter-container']}>{children}</div>
+          <div className={styles["filter-container"]}>{children}</div>
           {addSaveClearButton && (
             <>
               <br />

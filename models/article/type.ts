@@ -1,4 +1,4 @@
-import { IMarkdown } from '#components/markdown/parse-markdown';
+import { IMarkdown } from "#components/markdown/parse-markdown";
 
 export type IArticle = {
   slug: string;

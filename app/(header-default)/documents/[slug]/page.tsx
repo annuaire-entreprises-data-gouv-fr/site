@@ -1,27 +1,27 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import BreakPageForPrint from '#components-ui/print-break-page';
-import { PrintNever } from '#components-ui/print-visibility';
-import Title from '#components/title-section';
-import { FICHE } from '#components/title-section/tabs';
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import BreakPageForPrint from "#components-ui/print-break-page";
+import { PrintNever } from "#components-ui/print-visibility";
+import Title from "#components/title-section";
+import { FICHE } from "#components/title-section/tabs";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
+} from "#models/authentication/user/rights";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
-} from '#utils/helpers';
-import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
+} from "#utils/helpers";
+import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
   AppRouterProps,
-} from '#utils/server-side-helper/app/extract-params';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
-import ActesSection from './_components/actes';
-import ConformiteSection from './_components/conformite';
-import JustificatifsSection from './_components/justificatifs';
-import { SummaryDocuments } from './_components/summary-documents';
-import TravauxPublicsSection from './_components/travaux-publics';
+} from "#utils/server-side-helper/app/extract-params";
+import getSession from "#utils/server-side-helper/app/get-session";
+import { Metadata } from "next";
+import ActesSection from "./_components/actes";
+import ConformiteSection from "./_components/conformite";
+import JustificatifsSection from "./_components/justificatifs";
+import { SummaryDocuments } from "./_components/summary-documents";
+import TravauxPublicsSection from "./_components/travaux-publics";
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -33,7 +33,7 @@ export const generateMetadata = async (
   return {
     title: `Documents, Actes et statuts - ${uniteLegalePageTitle(uniteLegale)}`,
     description: uniteLegalePageDescription(uniteLegale),
-    robots: 'noindex',
+    robots: "noindex",
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/documents/${uniteLegale.siren}`,
     },

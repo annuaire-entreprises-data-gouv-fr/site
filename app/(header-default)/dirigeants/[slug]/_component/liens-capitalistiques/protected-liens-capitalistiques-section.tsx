@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import { Loader } from '#components-ui/loader';
-import { Select } from '#components-ui/select';
-import { DGFiP } from '#components/administrations';
-import { Section } from '#components/section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { isAPI404 } from '#models/api-not-responding';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { hasAnyError, isDataLoading } from '#models/data-fetching';
+import { Loader } from "#components-ui/loader";
+import { Select } from "#components-ui/select";
+import { DGFiP } from "#components/administrations";
+import { Section } from "#components/section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { isAPI404 } from "#models/api-not-responding";
+import { ISession } from "#models/authentication/user/session";
+import { IUniteLegale } from "#models/core/types";
+import { hasAnyError, isDataLoading } from "#models/data-fetching";
 import {
   IEtatCivilLiensCapitalistiques,
   IPersonneMoraleLiensCapitalistiques,
-} from '#models/rne/types';
-import { UseCase } from '#models/use-cases';
-import { formatIntFr, pluralize } from '#utils/helpers/formatting/formatting';
-import EtatCivilInfos from 'app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/EtatCivilInfos';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { ChangeEvent, useMemo, useState } from 'react';
-import PersonneMoraleInfos from '../sections/entreprise/PersonneMoraleInfos';
+} from "#models/rne/types";
+import { UseCase } from "#models/use-cases";
+import { formatIntFr, pluralize } from "#utils/helpers/formatting/formatting";
+import EtatCivilInfos from "app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/EtatCivilInfos";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { ChangeEvent, useMemo, useState } from "react";
+import PersonneMoraleInfos from "../sections/entreprise/PersonneMoraleInfos";
 
 function LiensCapitalistiquesContent({
   uniteLegale,
@@ -69,7 +69,7 @@ function LiensCapitalistiquesContent({
   const formatLienActionnaireInfo = (
     lien: IPersonneMoraleLiensCapitalistiques | IEtatCivilLiensCapitalistiques
   ) => {
-    if ('denomination' in lien) {
+    if ("denomination" in lien) {
       return [
         <div>{lien.pays}</div>,
         <PersonneMoraleInfos dirigeant={lien} />,
@@ -104,15 +104,15 @@ function LiensCapitalistiquesContent({
     liensCapitalistiquesProtected.actionnaires.length +
       liensCapitalistiquesProtected.filiales.length >
     1
-      ? 's'
-      : '';
+      ? "s"
+      : "";
 
   return (
     <>
       <p>
-        Cette entreprise possède{' '}
+        Cette entreprise possède{" "}
         {liensCapitalistiquesProtected.actionnaires.length} actionnaire
-        {pluralActionnaires} et {liensCapitalistiquesProtected.filiales.length}{' '}
+        {pluralActionnaires} et {liensCapitalistiquesProtected.filiales.length}{" "}
         filiale{pluralFiliales} déclaré{pluralActionnairesEtFiliales} pour
         l‘année {selectedYear} :
       </p>
@@ -120,7 +120,7 @@ function LiensCapitalistiquesContent({
       {liensCapitalistiquesProtected.actionnaires.length > 0 ? (
         <FullTable
           verticalAlign="top"
-          head={['Pays', 'Actionnaire', 'Pourcentage de détention']}
+          head={["Pays", "Actionnaire", "Pourcentage de détention"]}
           body={liensCapitalistiquesProtected.actionnaires.map((actionnaire) =>
             formatLienActionnaireInfo(actionnaire)
           )}
@@ -134,11 +134,11 @@ function LiensCapitalistiquesContent({
         <FullTable
           verticalAlign="top"
           head={[
-            'Pays',
-            'Dénomination',
-            'SIREN',
-            'Type',
-            'Pourcentage de détention',
+            "Pays",
+            "Dénomination",
+            "SIREN",
+            "Type",
+            "Pourcentage de détention",
           ]}
           body={liensCapitalistiquesProtected.filiales.map((filiale) =>
             formatLienFilialeInfo(filiale)

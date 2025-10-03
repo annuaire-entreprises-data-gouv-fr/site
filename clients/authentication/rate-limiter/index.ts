@@ -1,17 +1,17 @@
-import { Exception, FetchRessourceException } from '#models/exceptions';
-import { DataStore } from '#utils/data-store';
-import { logFatalErrorInSentry } from '#utils/sentry';
+import { Exception, FetchRessourceException } from "#models/exceptions";
+import { DataStore } from "#utils/data-store";
+import { logFatalErrorInSentry } from "#utils/sentry";
 import {
   IAgentMonitoring,
   IAgentRateLimits,
   numberOfRequestByAgentList,
-} from './number-of-requests-by-agent-list';
+} from "./number-of-requests-by-agent-list";
 
 export class AgentOverRateLimitException extends Exception {
   constructor() {
     super({
-      name: 'AgentOverRateLimitException',
-      message: 'Agent over rate limit',
+      name: "AgentOverRateLimitException",
+      message: "Agent over rate limit",
     });
   }
 }
@@ -31,18 +31,21 @@ class AgentRateLimiter {
   constructor() {
     this._agentRateLimitsStore = new DataStore<IAgentRateLimits>(
       () => numberOfRequestByAgentList(),
-      'number-of-request-by-agent-list',
+      "number-of-request-by-agent-list",
       this.mapResponseToAgentRateLimits,
       this.TTL
     );
   }
 
   mapResponseToAgentRateLimits = (response: IAgentMonitoring[]) =>
-    response.reduce((acc, agentMonitoring) => {
-      const email = agentMonitoring.email;
-      acc[email] = agentMonitoring.rateLimits;
-      return acc;
-    }, {} as { [key: string]: IAgentRateLimits });
+    response.reduce(
+      (acc, agentMonitoring) => {
+        const email = agentMonitoring.email;
+        acc[email] = agentMonitoring.rateLimits;
+        return acc;
+      },
+      {} as { [key: string]: IAgentRateLimits }
+    );
 
   getAgentRateLimits = async (email: string) => {
     try {
@@ -52,7 +55,7 @@ class AgentRateLimiter {
     } catch (e: any) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'AgentRateLimiter',
+          ressource: "AgentRateLimiter",
           cause: e,
         })
       );

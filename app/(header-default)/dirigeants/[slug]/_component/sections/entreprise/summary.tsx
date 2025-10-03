@@ -1,13 +1,13 @@
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
 import {
   isEntrepreneurIndividuel,
   isServicePublic,
   IUniteLegale,
-} from '#models/core/types';
+} from "#models/core/types";
 
 type IDirigeantSummaryProps = {
   uniteLegale: IUniteLegale;

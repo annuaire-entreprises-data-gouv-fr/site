@@ -1,14 +1,14 @@
-import routes from '#clients/routes';
-import { IRolesDataGroup } from '#models/authentication/group/groups';
-import { InternalError } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { rolesdataApiClient } from './client';
+import routes from "#clients/routes";
+import { IRolesDataGroup } from "#models/authentication/group/groups";
+import { InternalError } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import { rolesdataApiClient } from "./client";
 import {
   IRolesDataGroupResponse,
   IRolesDataRoles,
   IRolesDataUser,
-} from './interface';
-import { parseAgentScopes } from './parse';
+} from "./interface";
+import { parseAgentScopes } from "./parse";
 
 /**
  * Roles.data
@@ -22,7 +22,7 @@ export const getGroupsByEmail = async (
   const response = await rolesdataApiClient.fetch<IRolesDataGroupResponse[]>(
     route,
     {
-      method: 'GET',
+      method: "GET",
     }
   );
   return mapToDomainObject(response);
@@ -36,7 +36,7 @@ const mapToDomainObject = (
     if (inValidScopes.length > 0) {
       logErrorInSentry(
         new InternalError({
-          message: `Unknown agent scopes : ${inValidScopes.join(',')}`,
+          message: `Unknown agent scopes : ${inValidScopes.join(",")}`,
         })
       );
     }
@@ -50,7 +50,7 @@ const mapToDomainObject = (
 export const getRolesMetadata = async (): Promise<IRolesDataRoles[]> => {
   const route = routes.rolesData.roles.get;
   return await rolesdataApiClient.fetch<IRolesDataRoles[]>(route, {
-    method: 'GET',
+    method: "GET",
   });
 };
 
@@ -59,7 +59,7 @@ export const getUserByEmail = async (
 ): Promise<IRolesDataUser> => {
   const route = routes.rolesData.users.getByEmail(email);
   return await rolesdataApiClient.fetch<IRolesDataUser>(route, {
-    method: 'GET',
+    method: "GET",
   });
 };
 
@@ -74,7 +74,7 @@ export const updateName = async (
     actingUserSub
   );
   return await rolesdataApiClient.fetch<null>(route, {
-    method: 'PUT',
+    method: "PUT",
   });
 };
 
@@ -86,7 +86,7 @@ export const addUserToGroup = async (
 ): Promise<IRolesDataUser> => {
   const route = routes.rolesData.groups.addUserToGroup(groupId, actingUserSub);
   return await rolesdataApiClient.fetch<IRolesDataUser>(route, {
-    method: 'POST',
+    method: "POST",
     data: { email, role_id: roleId },
   });
 };
@@ -105,7 +105,7 @@ export const updateUserFromGroup = async (
     actingUserSub
   );
   return await rolesdataApiClient.fetch<IRolesDataUser>(route, {
-    method: 'PATCH',
+    method: "PATCH",
   });
 };
 
@@ -121,7 +121,7 @@ export const removeUserFromGroup = async (
   );
 
   return await rolesdataApiClient.fetch<null>(route, {
-    method: 'DELETE',
+    method: "DELETE",
   });
 };
 

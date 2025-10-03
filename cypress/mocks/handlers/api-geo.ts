@@ -1,4 +1,4 @@
-import { HttpResponse, HttpResponseResolver } from 'msw';
+import { HttpResponse, HttpResponseResolver } from "msw";
 
 export const apiGeoCommunesHandler: HttpResponseResolver = ({ request }) => {
   return HttpResponse.json({});

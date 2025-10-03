@@ -1,11 +1,11 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { ISubvention, ISubventions } from '#models/subventions/association';
-import { IdRna, Siren } from '#utils/helpers';
-import { httpGet } from '#utils/network';
-import { sensitiveRequestCallerInfos } from '#utils/network/utils/sensitive-request-caller-infos';
-import { sensitiveRequestLogger } from '#utils/network/utils/sensitive-request-logger';
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import { ISubvention, ISubventions } from "#models/subventions/association";
+import { IdRna, Siren } from "#utils/helpers";
+import { httpGet } from "#utils/network";
+import { sensitiveRequestCallerInfos } from "#utils/network/utils/sensitive-request-caller-infos";
+import { sensitiveRequestLogger } from "#utils/network/utils/sensitive-request-logger";
 
 /**
  * Data Subvention
@@ -20,7 +20,7 @@ export const clientApiDataSubvention = async (
   sensitiveRequestLogger(route, callerInfos);
 
   const data = await httpGet<any>(route, {
-    headers: { 'x-access-token': process.env.DATA_SUBVENTION_API_KEY },
+    headers: { "x-access-token": process.env.DATA_SUBVENTION_API_KEY },
     timeout: constants.timeout.XXXL,
   });
 
@@ -43,9 +43,9 @@ const mapToDomainObject = (grantItems: IGrantItem[]): ISubvention[] => {
     .filter((grantItem) => Boolean(grantItem.application))
     .reduce((subventions: ISubvention[], grantItem) => {
       const year = grantItem.application.annee_demande?.value ?? 0;
-      const label = grantItem.application.statut_label?.value ?? '';
-      const status = grantItem.application.status?.value ?? '';
-      const description = grantItem.application.dispositif?.value ?? '';
+      const label = grantItem.application.statut_label?.value ?? "";
+      const status = grantItem.application.status?.value ?? "";
+      const description = grantItem.application.dispositif?.value ?? "";
       const amount = grantItem.application.montants?.accorde?.value;
 
       const newSubvention: ISubvention = {

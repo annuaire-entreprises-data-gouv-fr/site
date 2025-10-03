@@ -1,45 +1,45 @@
-'use client';
+"use client";
 
-import { MultiChoice } from '#components-ui/multi-choice';
+import { MultiChoice } from "#components-ui/multi-choice";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { useState } from 'react';
-import { ContactAnswer } from './answers/contact';
-import { ContactCompanyAnswer } from './answers/contact-entreprise';
-import { FraudAnswer } from './answers/fraud';
+} from "#models/authentication/user/rights";
+import { ISession } from "#models/authentication/user/session";
+import { useState } from "react";
+import { ContactAnswer } from "./answers/contact";
+import { ContactCompanyAnswer } from "./answers/contact-entreprise";
+import { FraudAnswer } from "./answers/fraud";
 
 type IProps = {
   session: ISession | null;
 };
 
 export const FAQTargets = {
-  particulier: 'Particulier',
-  entreprise: 'Entreprise ou auto-entreprise',
-  association: 'Association',
-  agent: 'Agent public',
-  none: 'Autre',
+  particulier: "Particulier",
+  entreprise: "Entreprise ou auto-entreprise",
+  association: "Association",
+  agent: "Agent public",
+  none: "Autre",
 };
 
 const questions = [
   {
-    label: 'Joindre une entreprise',
-    key: 'company',
+    label: "Joindre une entreprise",
+    key: "company",
   },
   {
-    label: 'Nous alerter d’une fraude ou tentative d’escroquerie',
-    key: 'fraud',
+    label: "Nous alerter d’une fraude ou tentative d’escroquerie",
+    key: "fraud",
   },
-  { label: 'Autre', key: 'contact' },
+  { label: "Autre", key: "contact" },
 ];
 
 export default function ParcoursQuestions({ session }: IProps) {
   const [userType, setUserType] = useState(
-    hasRights(session, ApplicationRights.isAgent) ? 'agent' : ''
+    hasRights(session, ApplicationRights.isAgent) ? "agent" : ""
   );
-  const [questionType, setQuestionType] = useState<string>('');
+  const [questionType, setQuestionType] = useState<string>("");
 
   const updateQuestion = (q: string) => {
     setQuestionType(q);
@@ -53,7 +53,7 @@ export default function ParcoursQuestions({ session }: IProps) {
             label: value,
             onClick: () => {
               setUserType(key);
-              updateQuestion('none');
+              updateQuestion("none");
             },
             checked: userType === key,
           };
@@ -78,11 +78,11 @@ export default function ParcoursQuestions({ session }: IProps) {
         </>
       )}
 
-      {questionType && questionType === 'company' ? (
+      {questionType && questionType === "company" ? (
         <ContactCompanyAnswer />
-      ) : questionType === 'fraud' ? (
+      ) : questionType === "fraud" ? (
         <FraudAnswer />
-      ) : questionType === 'contact' ? (
+      ) : questionType === "contact" ? (
         <ContactAnswer userType={userType} session={session} />
       ) : null}
     </>

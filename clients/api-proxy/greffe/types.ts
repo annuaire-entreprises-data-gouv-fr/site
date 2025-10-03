@@ -1,4 +1,4 @@
-import { Siren } from '#utils/helpers';
+import { Siren } from "#utils/helpers";
 
 export type IIGResponse = {
   siren: Siren;
