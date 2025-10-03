@@ -2,7 +2,7 @@ import { type SentryBuildOptions, withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 import getContentSecurityPolicy from "#utils/headers/content-security-policy";
 import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
-import redirects from "./redirects.json";
+import redirects from "./redirects.json" with { type: "json" };
 
 const WITH_SENTRY =
   !!process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.NODE_ENV === "production";

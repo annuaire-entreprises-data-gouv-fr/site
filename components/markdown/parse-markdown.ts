@@ -23,7 +23,7 @@ export default function parseMarkdownSync(
   return {
     raw: body as IMarkdown,
     html: removeSingleParagraph(parsedBody.value as string),
-    // @ts-ignore
+    // @ts-expect-error
     headings: parsedBody.data.headings.map((header) => ({
       id: header.data.id,
       content: header.value,

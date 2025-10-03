@@ -22,7 +22,7 @@ const StructuredDataFAQ: React.FC<{ data: string[][] }> = ({ data }) => (
       `,
     }}
     type="application/ld+json"
-  ></script>
+  />
 );
 
 export default StructuredDataFAQ;

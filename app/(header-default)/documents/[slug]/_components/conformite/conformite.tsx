@@ -52,11 +52,10 @@ const Conformite: React.FC<{
       return (
         <Icon slug="closed">{administration} : document introuvable.</Icon>
       );
-    } else {
-      return (
-        <APINotRespongingElement administration={administration} data={data} />
-      );
     }
+    return (
+      <APINotRespongingElement administration={administration} data={data} />
+    );
   }
 
   const valid = data.isValid === true;

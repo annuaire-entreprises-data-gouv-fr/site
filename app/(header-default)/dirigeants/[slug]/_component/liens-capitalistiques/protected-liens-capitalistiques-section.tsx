@@ -75,13 +75,12 @@ function LiensCapitalistiquesContent({
         <PersonneMoraleInfos dirigeant={lien} />,
         <div>{lien.pourcentage}%</div>,
       ];
-    } else {
-      return [
-        <div>{lien.pays}</div>,
-        <EtatCivilInfos dirigeant={lien} />,
-        <div>{lien.pourcentage}%</div>,
-      ];
     }
+    return [
+      <div>{lien.pays}</div>,
+      <EtatCivilInfos dirigeant={lien} />,
+      <div>{lien.pourcentage}%</div>,
+    ];
   };
 
   const formatLienFilialeInfo = (lien: IPersonneMoraleLiensCapitalistiques) => [

@@ -31,7 +31,7 @@ export const NPSBanner: React.FC<{}> = () => {
       if (hasAlreadyBeenTriggered) {
         return 0;
       }
-      const newViewCount = parseInt(pageViewCount, 10) + 1;
+      const newViewCount = Number.parseInt(pageViewCount, 10) + 1;
       setPageViewCount(newViewCount.toString());
       return newViewCount;
     } catch (e) {
@@ -69,7 +69,12 @@ export const NPSBanner: React.FC<{}> = () => {
             role="dialog"
           >
             <div className="fr-container">
-              <a href="/formulaire/nps" onClick={close} target="_blank">
+              <a
+                href="/formulaire/nps"
+                onClick={close}
+                rel="noopener"
+                target="_blank"
+              >
                 👍👎 Quel est votre avis sur l‘Annuaire des Entreprises ?
               </a>
               <button onClick={close}>

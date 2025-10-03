@@ -41,9 +41,10 @@ const ping = async (slug: string | string[]) => {
       return await clientAssociation(verifyIdRna("W551000280"), "");
     case "api-marche-inclusion":
       return await clientAPIInclusion(sirenInclusion);
-    case "api-tva":
+    case "api-tva": {
       const tva = verifyTVANumber(tvaNumber(sirenDanone));
       return await clientTVA(tva);
+    }
     case "api-eori":
       return await clientEORI(siretGanymede);
     case "api-recherche":
@@ -69,8 +70,7 @@ export const pingAPIClient = async (slug: string | string[]) => {
   } catch (e: any) {
     if (e instanceof APISlugNotFound) {
       throw e;
-    } else {
-      return { test: false, status: e.status || 500 };
     }
+    return { test: false, status: e.status || 500 };
   }
 };

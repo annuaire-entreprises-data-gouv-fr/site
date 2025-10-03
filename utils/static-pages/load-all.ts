@@ -4,7 +4,7 @@ export function loadAll<T extends IArticle>(
   articlesFolderContext: Record<string, T>
 ): T[] {
   const articles = [] as Array<T>;
-  //@ts-ignore
+  //@ts-expect-error
   const keys = articlesFolderContext.keys();
   const values = keys.map(articlesFolderContext);
 

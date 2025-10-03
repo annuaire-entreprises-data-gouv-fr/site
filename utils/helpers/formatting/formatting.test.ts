@@ -91,14 +91,14 @@ describe("Check formatCurrency", () => {
   ];
 
   [
-    -100000000000,
-    -9999999,
+    -100_000_000_000,
+    -9_999_999,
     -1000,
     0,
     100,
-    10000,
-    1000000,
-    100000000000,
+    10_000,
+    1_000_000,
+    100_000_000_000,
     undefined,
     null,
     "",
@@ -134,5 +134,3 @@ describe("Check formatFirstNames", () => {
   expect(formatLastName("Monnier")).toStrictEqual("MONNIER");
   expect(formatLastName("")).toStrictEqual("");
 });
-
-export {};

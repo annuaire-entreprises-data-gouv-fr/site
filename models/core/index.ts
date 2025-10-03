@@ -19,24 +19,20 @@ export function shouldUseInsee<T extends {}>(
 
   if (rechercheEntrepriseFailed) {
     return true;
-  } else {
-    if (isBot) {
-      return false;
-    }
-
-    if (rechercheEntrepriseResponse) {
-      if (
-        hasInconsistencies &&
-        hasInconsistencies(rechercheEntrepriseResponse)
-      ) {
-        return true;
-      }
-
-      if (isEI(rechercheEntrepriseResponse)) {
-        return true;
-      }
-    }
-
+  }
+  if (isBot) {
     return false;
   }
+
+  if (rechercheEntrepriseResponse) {
+    if (hasInconsistencies && hasInconsistencies(rechercheEntrepriseResponse)) {
+      return true;
+    }
+
+    if (isEI(rechercheEntrepriseResponse)) {
+      return true;
+    }
+  }
+
+  return false;
 }

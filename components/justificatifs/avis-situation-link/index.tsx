@@ -41,26 +41,23 @@ const AvisSituationLink: React.FC<{
 
   if (estDiffusible(etablissement)) {
     return link;
-  } else {
-    if (hasRights(session, ApplicationRights.isAgent)) {
-      if (estNonDiffusibleProtected(etablissement)) {
-        return link;
-      } else {
-        return (
-          <FAQLink tooltipLabel="Document non disponible">
-            L’avis de situation INSEE n’est pas disponible pour les entreprises
-            non diffusibles, y compris pour les agents publics.
-          </FAQLink>
-        );
-      }
-    } else {
-      return (
-        <a href="/faq/justificatif-immatriculation-non-diffusible">
-          {documentNonDiffusiblePlaceHolder(etablissement)}
-        </a>
-      );
-    }
   }
+  if (hasRights(session, ApplicationRights.isAgent)) {
+    if (estNonDiffusibleProtected(etablissement)) {
+      return link;
+    }
+    return (
+      <FAQLink tooltipLabel="Document non disponible">
+        L’avis de situation INSEE n’est pas disponible pour les entreprises non
+        diffusibles, y compris pour les agents publics.
+      </FAQLink>
+    );
+  }
+  return (
+    <a href="/faq/justificatif-immatriculation-non-diffusible">
+      {documentNonDiffusiblePlaceHolder(etablissement)}
+    </a>
+  );
 };
 
 export default AvisSituationLink;

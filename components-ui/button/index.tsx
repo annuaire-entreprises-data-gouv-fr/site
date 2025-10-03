@@ -30,20 +30,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   onClick = () => {},
 }) => (
   <>
-    {!to ? (
-      <button
-        aria-label={ariaLabel}
-        className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
-          small ? " fr-btn--sm " : ""
-        }`}
-        disabled={disabled}
-        onClick={onClick}
-        role={role}
-        type={type || "submit"}
-      >
-        {children}
-      </button>
-    ) : (
+    {to ? (
       <a
         aria-label={ariaLabel}
         className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
@@ -59,6 +46,19 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
       >
         {children}
       </a>
+    ) : (
+      <button
+        aria-label={ariaLabel}
+        className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
+          small ? " fr-btn--sm " : ""
+        }`}
+        disabled={disabled}
+        onClick={onClick}
+        role={role}
+        type={type || "submit"}
+      >
+        {children}
+      </button>
     )}
   </>
 );

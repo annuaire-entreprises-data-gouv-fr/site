@@ -21,7 +21,7 @@ const errorInterceptor = (error: AxiosError) => {
 
   if (status !== 404) {
     const endTime = new Date().getTime();
-    //@ts-ignore
+    //@ts-expect-error
     const startTime = config?.metadata?.startTime;
     console.error(
       formatLog(

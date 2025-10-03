@@ -145,7 +145,7 @@ export const NpsStats: React.FC<{
         height="300px"
         options={{ scales: { y: { min: 1, max: 100 } } }}
         pluginOption={{
-          legend: { onClick: () => undefined },
+          legend: { onClick: () => {} },
           tooltip: {
             callbacks: {
               label(context) {

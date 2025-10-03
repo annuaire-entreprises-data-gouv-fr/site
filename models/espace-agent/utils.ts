@@ -39,21 +39,20 @@ export function handleApiEntrepriseError(
 const createUniqueKey = (dirigeant: IEtatCivil | IPersonneMorale): string => {
   if ("siren" in dirigeant) {
     return `pm-${dirigeant.siren}`;
-  } else {
-    const prenoms = dirigeant.prenoms || "";
-    const nom = dirigeant.nom || "";
-
-    const hasNomDeNaissanceMatch = nom.match(/\(([^)]+)\)/);
-    const nomDeNaissance = hasNomDeNaissanceMatch
-      ? hasNomDeNaissanceMatch[1]
-      : nom;
-
-    const partialDate =
-      dirigeant.dateNaissancePartial ||
-      dirigeant.dateNaissance?.slice(0, 7) ||
-      "";
-    return `pf-${prenoms}-${nomDeNaissance}-${partialDate}`;
   }
+  const prenoms = dirigeant.prenoms || "";
+  const nom = dirigeant.nom || "";
+
+  const hasNomDeNaissanceMatch = nom.match(/\(([^)]+)\)/);
+  const nomDeNaissance = hasNomDeNaissanceMatch
+    ? hasNomDeNaissanceMatch[1]
+    : nom;
+
+  const partialDate =
+    dirigeant.dateNaissancePartial ||
+    dirigeant.dateNaissance?.slice(0, 7) ||
+    "";
+  return `pf-${prenoms}-${nomDeNaissance}-${partialDate}`;
 };
 
 export const mergeDirigeants = ({

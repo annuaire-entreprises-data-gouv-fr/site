@@ -64,7 +64,7 @@ export default function Budget() {
             ],
           ]}
           head={["Poste de dépense", "2021", "2022", "2023", "2024"]}
-        ></FullTable>
+        />
         <p>
           <strong>NB :</strong> contrairement aux entreprises du secteur privé,
           les administrations ne peuvent pas récupérer la TVA supportée sur
@@ -103,7 +103,7 @@ export default function Budget() {
             "2023",
             "2024",
           ]}
-        ></FullTable>
+        />
         <br />
         <p>
           En 2024, la DINUM a créé un{" "}
@@ -123,7 +123,7 @@ export default function Budget() {
             ["・€ / agent public / mois", "3,17 €"],
           ]}
           head={["Mesure d’impact pour les agents publics", "2024"]}
-        ></FullTable>
+        />
         <p>
           Le détail de nos mesures d’impact est disponible sur notre{" "}
           <a href="/a-propos/stats">page de statistiques</a>.

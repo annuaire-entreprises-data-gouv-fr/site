@@ -159,11 +159,7 @@ const FeedBackPage = async () => {
                   Vous rêvez d’une fonctionnalité ? Vous détestez le bleu ?
                   Dites-nous tout !
                 </label>
-                <textarea
-                  className="fr-input"
-                  id="textarea"
-                  name="textarea"
-                ></textarea>
+                <textarea className="fr-input" id="textarea" name="textarea" />
               </div>
               <div className="fr-input-group">
                 <label className="fr-label" htmlFor="email">

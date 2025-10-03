@@ -8,7 +8,7 @@ export function meta(obj: Metadata): Metadata {
   obj.openGraph ??= {};
   obj.openGraph.title ??= obj.title;
   obj.openGraph.description ??= obj.description ?? SITE_DESCRIPTION;
-  // @ts-ignore
+  // @ts-expect-error
   obj.openGraph.type ??= "website";
   obj.openGraph.locale ??= "fr_FR";
   obj.openGraph.images ??= OPENGRAPH_IMAGES;

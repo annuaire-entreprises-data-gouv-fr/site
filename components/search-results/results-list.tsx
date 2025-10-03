@@ -135,7 +135,7 @@ const ResultItem: React.FC<{
             href={`/entreprise/${result.chemin}#etablissements`}
           >
             {result.nombreEtablissementsOuverts === 0
-              ? `aucun établissement en activité`
+              ? "aucun établissement en activité"
               : `${result.nombreEtablissementsOuverts} établissement${
                   result.nombreEtablissementsOuverts > 1 ? "s" : ""
                 } en activité`}

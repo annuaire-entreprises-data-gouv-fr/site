@@ -59,47 +59,46 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
         </div>
       </>
     );
-  } else {
-    return (
-      <>
-        <Meta noIndex={true} title="Numéro d’identification invalide" />
-        <MatomoEvent action="sirenOrSiretInvalid" category="error" name="" />
-        <h1>
-          Le numéro {type} “{formatted}” est invalide
-        </h1>
-        <div>
-          <p>
-            Nous n’avons pas retrouvé ce numéro {type} dans les registres
-            officiels (<INPI />, <INSEE />
-            ).
-          </p>
-          <p>
-            De plus, ce numéro <strong>ne respecte pas</strong>{" "}
-            <a
-              href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              l’algorithme de vérification
-            </a>{" "}
-            des numéros {type}. En conséquence, nous vous invitons à la plus
-            grande vigilance,{" "}
-            <strong>car il peut s’agir d’un numéro frauduleux</strong>&nbsp;:
-          </p>
-          <ul>
-            <li>
-              Vérifiez que vous n’avez pas commis de faute de frappe en
-              recopiant le numéro.
-            </li>
-            <li>
-              Vérifiez ce numéro auprès de l’organisme ou l’entreprise qui vous
-              l’a transmis.
-            </li>
-          </ul>
-        </div>
-      </>
-    );
   }
+  return (
+    <>
+      <Meta noIndex={true} title="Numéro d’identification invalide" />
+      <MatomoEvent action="sirenOrSiretInvalid" category="error" name="" />
+      <h1>
+        Le numéro {type} “{formatted}” est invalide
+      </h1>
+      <div>
+        <p>
+          Nous n’avons pas retrouvé ce numéro {type} dans les registres
+          officiels (<INPI />, <INSEE />
+          ).
+        </p>
+        <p>
+          De plus, ce numéro <strong>ne respecte pas</strong>{" "}
+          <a
+            href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            l’algorithme de vérification
+          </a>{" "}
+          des numéros {type}. En conséquence, nous vous invitons à la plus
+          grande vigilance,{" "}
+          <strong>car il peut s’agir d’un numéro frauduleux</strong>&nbsp;:
+        </p>
+        <ul>
+          <li>
+            Vérifiez que vous n’avez pas commis de faute de frappe en recopiant
+            le numéro.
+          </li>
+          <li>
+            Vérifiez ce numéro auprès de l’organisme ou l’entreprise qui vous
+            l’a transmis.
+          </li>
+        </ul>
+      </div>
+    </>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

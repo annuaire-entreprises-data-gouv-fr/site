@@ -22,5 +22,3 @@ describe("CertificatLogo works", () => {
     expect(getCertificatLogoPath("chauffage+")).toBe("");
   });
 });
-
-export {};

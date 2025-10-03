@@ -79,7 +79,7 @@ function InformationTooltip({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
-          cursor: cursor,
+          cursor,
           display: inlineBlock ? "inline-block" : "block",
         }}
         tabIndex={tabIndex}
@@ -113,7 +113,7 @@ const computeLeft = (orientation: "left" | "right" | "center", width = 250) => {
     case "right":
       return `calc(50% - ${width}px)`;
     case "left":
-      return `50%`;
+      return "50%";
     case "center":
     default:
       return `calc(50% - ${Math.round(width / 2)}px)`;

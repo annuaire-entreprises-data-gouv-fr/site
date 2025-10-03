@@ -47,7 +47,7 @@ export const HeaderCore: React.FC<IProps> = ({
     <header
       className="fr-header"
       role="banner"
-      style={{ filter: !useSearchBar ? "none" : undefined }}
+      style={{ filter: useSearchBar ? undefined : "none" }}
     >
       <PrintNever>
         <form
@@ -61,7 +61,7 @@ export const HeaderCore: React.FC<IProps> = ({
                 <div
                   className="fr-header__brand"
                   style={{
-                    filter: !useSearchBar ? "none" : undefined,
+                    filter: useSearchBar ? undefined : "none",
                   }}
                 >
                   <div

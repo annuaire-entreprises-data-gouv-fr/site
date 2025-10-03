@@ -83,8 +83,8 @@ export default function ExportCsv() {
   const buildQuery = (): ExportCsvInput => ({
     ...(filters.headcountEnabled && {
       headcount: {
-        min: parseInt(getEffectifCode(filters.headcount.min)),
-        max: parseInt(getEffectifCode(filters.headcount.max)),
+        min: Number.parseInt(getEffectifCode(filters.headcount.min)),
+        max: Number.parseInt(getEffectifCode(filters.headcount.max)),
       },
     }),
     categories: filters.categories as ("PME" | "ETI" | "GE")[],
@@ -245,7 +245,7 @@ export default function ExportCsv() {
       </p>
       <FiltersSummary filters={filters} />
 
-      {countResult.count >= 200000 ? (
+      {countResult.count >= 200_000 ? (
         <div className={styles.fileDownloadSection}>
           Le nombre de résultats ({formatNumber(countResult.count)}) dépasse la
           limite autorisée de 200 000. Veuillez affiner vos critères de
@@ -302,13 +302,13 @@ export default function ExportCsv() {
           Réinitialiser les critères
         </ButtonLink>
         <ButtonLink
-          alt={countResult.count < 200000 && countResult.count !== 0}
+          alt={countResult.count < 200_000 && countResult.count !== 0}
           onClick={modifyFilters}
           type="button"
         >
           Modifier votre recherche
         </ButtonLink>
-        {countResult.count < 200000 && countResult.count !== 0 ? (
+        {countResult.count < 200_000 && countResult.count !== 0 ? (
           <ButtonLink onClick={handleCsvExport} type="button">
             Télécharger le fichier
           </ButtonLink>

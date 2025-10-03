@@ -30,19 +30,18 @@ const DocumentDownloader = ({
       return (
         <Icon slug="closed">{administration} : document introuvable.</Icon>
       );
-    } else {
-      return (
-        <Icon color="#df0a00" slug="errorFill">
-          La récupération du document auprès des services {administration} a
-          échoué.
-          <br />
-          Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui
-          demander la pièce directement.
-          <br />
-          <br />
-        </Icon>
-      );
     }
+    return (
+      <Icon color="#df0a00" slug="errorFill">
+        La récupération du document auprès des services {administration} a
+        échoué.
+        <br />
+        Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui
+        demander la pièce directement.
+        <br />
+        <br />
+      </Icon>
+    );
   }
   return (
     <div className="layout-space-between">

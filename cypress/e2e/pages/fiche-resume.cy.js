@@ -1,6 +1,6 @@
 describe("Fiche résumé DANONE", () => {
   it("Should display basic infos", () => {
-    cy.visit(`/entreprise/danone-552032534`);
+    cy.visit("/entreprise/danone-552032534");
     cy.contains(
       "Sa forme juridique est SA à conseil d'administration (s.a.i.)."
     ).should("be.visible");
@@ -20,7 +20,7 @@ describe("Fiche résumé DANONE", () => {
   });
   it("[LOGGED] Should display basic infos", () => {
     cy.login();
-    cy.visit(`/entreprise/danone-552032534`);
+    cy.visit("/entreprise/danone-552032534");
     // Effectifs
     cy.contains("Effectif salarié").should("be.visible");
     cy.contains("1 000 à 1 999 salariés, en 2022").should("be.visible");
@@ -35,22 +35,22 @@ describe("Fiche résumé DANONE", () => {
 
 describe("Entreprises non-diffusibles", () => {
   it("Should be non diffusible", () => {
-    cy.visit(`/entreprise/300025764`);
+    cy.visit("/entreprise/300025764");
     cy.contains("ne sont pas publiquement").should("have.length", 1);
   });
 
   it("Should be diffusible", () => {
-    cy.visit(`/entreprise/880878145`);
+    cy.visit("/entreprise/880878145");
     cy.contains("ne sont pas publiquement").should("have.length", 0);
   });
 });
 
 describe("TVA number special cases", () => {
   it("TVA Non-assujettie", () => {
-    cy.visit(`/entreprise/883010316`).then(() => {
+    cy.visit("/entreprise/883010316").then(() => {
       cy.contains("Pas de n° TVA valide");
     });
-    cy.visit(`/entreprise/423208180`).then(() => {
+    cy.visit("/entreprise/423208180").then(() => {
       cy.contains("Pas de n° TVA valide connu");
     });
   });

@@ -99,7 +99,7 @@ function sortElus(a: IEtatCivil, b: IEtatCivil): -1 | 1 | 0 {
     return -1;
   }
   if (roleA.match(/^[\d]+/) && roleB.match(/^[\d]+/)) {
-    return parseInt(roleA, 10) < parseInt(roleB, 10) ? -1 : 1;
+    return Number.parseInt(roleA, 10) < Number.parseInt(roleB, 10) ? -1 : 1;
   }
   return roleA < roleB ? -1 : 1;
 }

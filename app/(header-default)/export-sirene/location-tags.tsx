@@ -14,9 +14,7 @@ export const LocationTags = ({
 }) => (
   <div className={styles.selectedLocations}>
     <div className={styles.locationTitle}>Localisations sélectionnées</div>
-    {!filters.locations?.length ? (
-      <p className={styles.noLocations}>Aucune localisation sélectionnée</p>
-    ) : (
+    {filters.locations?.length ? (
       <ul className="fr-tags-group">
         {filters.locations.map((location) => (
           <li key={`${location.type}-${location.value}`}>
@@ -31,6 +29,8 @@ export const LocationTags = ({
           </li>
         ))}
       </ul>
+    ) : (
+      <p className={styles.noLocations}>Aucune localisation sélectionnée</p>
     )}
   </div>
 );

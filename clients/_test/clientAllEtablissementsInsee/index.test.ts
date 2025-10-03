@@ -18,7 +18,7 @@ function expectClientToMatchSnapshotWithSiren(siren: string, page = 1) {
     page !== 1 ? " and page " + page : ""
   }`, async () => {
     await expectClientToMatchSnapshot({
-      __dirname,
+      __dirname: import.meta.dirname,
       client: clientAllEtablissementsInsee,
       args: [siren, page, false],
       snapshotFile: `siren-${siren}${page !== 1 ? "-page-" + page : ""}.json`,

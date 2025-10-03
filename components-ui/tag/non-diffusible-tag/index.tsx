@@ -10,10 +10,10 @@ export const NonDiffusibleTag: React.FC<{
     statutDiffusion: ISTATUTDIFFUSION;
   };
 }> = ({ etablissementOrUniteLegale }) =>
-  !estDiffusible(etablissementOrUniteLegale) ? (
-    estNonDiffusibleProtected(etablissementOrUniteLegale) ? (
-      <Tag color="new">protégé</Tag>
-    ) : (
-      <Tag color="new">non-diffusible</Tag>
-    )
-  ) : null;
+  estDiffusible(etablissementOrUniteLegale) ? null : estNonDiffusibleProtected(
+      etablissementOrUniteLegale
+    ) ? (
+    <Tag color="new">protégé</Tag>
+  ) : (
+    <Tag color="new">non-diffusible</Tag>
+  );

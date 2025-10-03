@@ -16,9 +16,8 @@ export const isTVANumber = (slug: string): slug is TVANumber =>
 export const verifyTVANumber = (slug: string): TVANumber => {
   if (!isTVANumber(slug)) {
     throw new Error("Not a valid TVANumber");
-  } else {
-    return slug;
   }
+  return slug;
 };
 
 export type Siren = Brand<string, "Siren">;
@@ -70,7 +69,7 @@ const luhnChecksum = (str: string) =>
   Array.from(str)
     .reverse()
     .map((character, charIdx) => {
-      const num = parseInt(character, 10);
+      const num = Number.parseInt(character, 10);
       const isIndexEven = (charIdx + 1) % 2 === 0;
       return isIndexEven ? num * 2 : num;
     })

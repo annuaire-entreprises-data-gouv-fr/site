@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "FAQ interactive de l’Annuaire des Entreprises",
   robots: "index, follow",
   alternates: {
-    canonical: `https://annuaire-entreprises.data.gouv.fr/faq/parcours`,
+    canonical: "https://annuaire-entreprises.data.gouv.fr/faq/parcours",
   },
 };
 

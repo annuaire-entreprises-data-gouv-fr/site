@@ -36,10 +36,8 @@ export const getDirigeantsProtected = async (
   }
 
   try {
-    const rneData = !isAPINotResponding(dirigeantsRNE)
-      ? dirigeantsRNE.data
-      : [];
-    const rcsData = !isAPINotResponding(dirigeantsRCS) ? dirigeantsRCS : [];
+    const rneData = isAPINotResponding(dirigeantsRNE) ? [] : dirigeantsRNE.data;
+    const rcsData = isAPINotResponding(dirigeantsRCS) ? [] : dirigeantsRCS;
 
     // EI data is not standardised. It lacks birthdate in RNE and is randomly populated in IG
     let dirigeantMerged: IDirigeantsMergedIGInpi = [];

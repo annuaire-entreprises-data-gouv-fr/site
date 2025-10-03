@@ -16,7 +16,7 @@ export const addStartTimeInterceptor = (config: AxiosRequestConfig) => ({
  */
 export const logInterceptor = (response: AxiosResponse<any, any>) => {
   const endTime = new Date().getTime();
-  //@ts-ignore
+  //@ts-expect-error
   const startTime = response?.config?.metadata?.startTime;
 
   // logged into stdout

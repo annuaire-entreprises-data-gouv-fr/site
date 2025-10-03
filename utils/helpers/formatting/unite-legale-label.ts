@@ -42,13 +42,13 @@ export const uniteLegaleLabelWithPronounContracted = (
 export const uniteLegaleLabel = (uniteLegale: IUniteLegale) => {
   switch (true) {
     case isAssociation(uniteLegale):
-      return `association`;
+      return "association";
     case isServicePublic(uniteLegale):
-      return `administration`;
+      return "administration";
     case isEntrepreneurIndividuel(uniteLegale):
-      return `entreprise individuelle`;
+      return "entreprise individuelle";
     default:
-      return `société`;
+      return "société";
   }
 };
 

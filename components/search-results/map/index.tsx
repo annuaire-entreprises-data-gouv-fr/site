@@ -29,7 +29,7 @@ const SearchResultsMap: React.FC<{
 
   return (
     <>
-      <div className={styles["map-container"]} style={{ height: height }}>
+      <div className={styles["map-container"]} style={{ height }}>
         <MapWithResults
           height={height}
           results={results}

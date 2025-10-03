@@ -97,9 +97,9 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
 
       <ProtectedInlineData>
         {protectedCertificates.map((certificate, index) =>
-          !hasAnyError(certificate.data) ? (
+          hasAnyError(certificate.data) ? null : (
             <React.Fragment key={index}>{certificate.render}</React.Fragment>
-          ) : null
+          )
         )}
       </ProtectedInlineData>
     </>

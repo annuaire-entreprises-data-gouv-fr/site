@@ -28,10 +28,10 @@ function parseCSV(csvString: string) {
     const output: IAgentMonitoring = {
       email: row["Agent"],
       rateLimits: {
-        tenMinutes: parseInt(row["Past 10 minutes"], 10),
-        pastHour: parseInt(row["Past hour"], 10),
-        pastDay: parseInt(row["Past day"], 10),
-        pastWeek: parseInt(row["Past week"], 10),
+        tenMinutes: Number.parseInt(row["Past 10 minutes"], 10),
+        pastHour: Number.parseInt(row["Past hour"], 10),
+        pastDay: Number.parseInt(row["Past day"], 10),
+        pastWeek: Number.parseInt(row["Past week"], 10),
       },
     };
     return output;

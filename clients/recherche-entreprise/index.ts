@@ -66,21 +66,21 @@ export const clientSearchRechercheEntrepriseRaw = async ({
     searchFilterParams?.toApiURI() || ""
   }`;
 
-  url += `&include_admin=slug`;
+  url += "&include_admin=slug";
 
   if (inclureEtablissements) {
-    url += `,etablissements`;
+    url += ",etablissements";
   }
 
   if (inclureImmatriculation) {
-    url += `,immatriculation`;
+    url += ",immatriculation";
   }
 
   if (inclureEtablissements && pageEtablissements) {
     url += `&page_etablissements=${pageEtablissements}`;
   }
 
-  url += `&mtm_campaign=annuaire-entreprises-site`;
+  url += "&mtm_campaign=annuaire-entreprises-site";
 
   const timeout = constants.timeout.L;
 

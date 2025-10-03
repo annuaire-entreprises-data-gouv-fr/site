@@ -79,8 +79,9 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
     ["SIRET", formatSiret(etablissement.siret)],
     ["Clef NIC", etablissement.nic],
-    ...(!usedInEntreprisePage
-      ? [
+    ...(usedInEntreprisePage
+      ? []
+      : [
           [
             <a href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</a>,
             <PrintNever key="siege-social-link">
@@ -89,14 +90,13 @@ const EtablissementSection: React.FC<IProps> = ({
               </a>
             </PrintNever>,
           ],
-        ]
-      : []),
+        ]),
     [
       `Activité principale ${uniteLegaleLabel} (NAF/APE)`,
       uniteLegale.libelleActivitePrincipale,
     ],
     [
-      `Activité principale de l’établissement (NAF/APE)`,
+      "Activité principale de l’établissement (NAF/APE)",
       etablissement.libelleActivitePrincipale,
     ],
     ["Code NAF/APE de l’établissement", etablissement.activitePrincipale],
@@ -126,9 +126,9 @@ const EtablissementSection: React.FC<IProps> = ({
           ],
         ]
       : []),
-    ...(!estActif(etablissement)
-      ? [["Date de fermeture", formatDate(etablissement.dateFermeture || "")]]
-      : []),
+    ...(estActif(etablissement)
+      ? []
+      : [["Date de fermeture", formatDate(etablissement.dateFermeture || "")]]),
     ["", <br />],
     ...(etablissement.listeIdcc
       ? [

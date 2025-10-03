@@ -81,8 +81,8 @@ const CopyCell = ({ number }: { number: string }) => (
 const VerifyTVA: React.FC<{
   tva: ITVAIntracommunautaire;
   siren: Siren;
-}> = ({ tva, siren }) => {
-  const { tvaNumber, mayHaveMultipleTVANumber } = tva;
+}> = ({ tva: tvaProp, siren }) => {
+  const { tvaNumber, mayHaveMultipleTVANumber } = tvaProp;
   const verification = useAPIRouteData(APIRoutesPaths.VerifyTva, siren, null);
   if (isDataLoading(verification)) {
     return (
@@ -95,7 +95,8 @@ const VerifyTVA: React.FC<{
         &nbsp;
       </>
     );
-  } else if (hasAnyError(verification)) {
+  }
+  if (hasAnyError(verification)) {
     return (
       <>
         <InformationTooltip
@@ -117,55 +118,52 @@ const VerifyTVA: React.FC<{
         </InformationTooltip>
       </>
     );
-  } else {
-    const tva = verification?.tva;
-    return (
-      <>
-        {tva ? (
-          <>
-            {mayHaveMultipleTVANumber.currentlyActive ? (
-              <InformationTooltip
-                horizontalOrientation="left"
-                label={
-                  <>
-                    Attention, cette structure a plusieurs activités
-                    différentes.
-                    <br />
-                    Elle peut posséder un numéro de TVA Intracommunautaire pour
-                    chacune de ces activités.
-                    <br />
-                    Le numéro affiché correspond à son activité la plus
-                    ancienne.
-                  </>
-                }
-                left="5px"
-                tabIndex={0}
-              >
-                <Icon color="#ffb300" slug="lightbulbFill">
-                  <CopyCell number={tva} />
-                </Icon>
-              </InformationTooltip>
-            ) : (
-              <CopyCell number={tva} />
-            )}
-          </>
-        ) : (
-          <TVAInvalide
-            multipleNum={mayHaveMultipleTVANumber.allTime}
-            number={tvaNumber}
-          />
-        )}
-
-        {Math.random() < 0.0001 && (
-          <MatomoEvent
-            action={!!tva ? "valid" : "invalid"}
-            category="tva"
-            name={siren}
-          />
-        )}
-      </>
-    );
   }
+  const tva = verification?.tva;
+  return (
+    <>
+      {tva ? (
+        <>
+          {mayHaveMultipleTVANumber.currentlyActive ? (
+            <InformationTooltip
+              horizontalOrientation="left"
+              label={
+                <>
+                  Attention, cette structure a plusieurs activités différentes.
+                  <br />
+                  Elle peut posséder un numéro de TVA Intracommunautaire pour
+                  chacune de ces activités.
+                  <br />
+                  Le numéro affiché correspond à son activité la plus ancienne.
+                </>
+              }
+              left="5px"
+              tabIndex={0}
+            >
+              <Icon color="#ffb300" slug="lightbulbFill">
+                <CopyCell number={tva} />
+              </Icon>
+            </InformationTooltip>
+          ) : (
+            <CopyCell number={tva} />
+          )}
+        </>
+      ) : (
+        <TVAInvalide
+          multipleNum={mayHaveMultipleTVANumber.allTime}
+          number={tvaNumber}
+        />
+      )}
+
+      {Math.random() < 0.0001 && (
+        <MatomoEvent
+          action={tva ? "valid" : "invalid"}
+          category="tva"
+          name={siren}
+        />
+      )}
+    </>
+  );
 };
 
 const TVACell: React.FC<{

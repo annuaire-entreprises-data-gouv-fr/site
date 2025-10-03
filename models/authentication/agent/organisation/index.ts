@@ -42,15 +42,14 @@ export class AgentOrganisation {
 
     if (isAuthorized) {
       return organisationHabilitation;
-    } else {
-      if (mightBeAnAuthorizedAdministration(codeJuridique)) {
-        throw new CanRequestAuthorizationException(
-          uniteLegale.natureJuridique,
-          this.siren
-        );
-      }
-      throw new HttpForbiddenError("Organization is not a service public");
     }
+    if (mightBeAnAuthorizedAdministration(codeJuridique)) {
+      throw new CanRequestAuthorizationException(
+        uniteLegale.natureJuridique,
+        this.siren
+      );
+    }
+    throw new HttpForbiddenError("Organization is not a service public");
   }
 
   isAnAuthorizedAdministration(
@@ -69,8 +68,7 @@ export class AgentOrganisation {
   isMCP(idp_id: string) {
     if (idp_id === "71144ab3-ee1a-4401-b7b3-79b44f7daeeb") {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 }

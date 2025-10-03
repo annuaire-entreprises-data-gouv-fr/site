@@ -60,18 +60,19 @@ const yearOption: Intl.DateTimeFormatOptions = {
  * @param digits number of digits
  * @returns
  */
+// biome-ignore lint/style/noInferrableTypes: needed for the safe function inference
 export const formatPercentage = safe((value: string, digits: number = 1) => {
-  let number = parseFloat(value);
+  const number = Number.parseFloat(value);
   if (!number) {
-    return undefined;
+    return;
   }
 
-  return parseFloat(value).toFixed(digits) + "%";
+  return Number.parseFloat(value).toFixed(digits) + "%";
 });
 
 export const formatCurrency = safe(
   (value: string | number | undefined | null) => {
-    const number = parseInt(value + "", 10);
+    const number = Number.parseInt(value + "", 10);
     if (!number && number !== 0) {
       return value as string;
     }
@@ -82,7 +83,7 @@ export const formatCurrency = safe(
     const orderOfMagnitude = Math.floor(
       (Math.abs(number).toString().length - 1) / 3
     );
-    const magnitude = Math.pow(1000, orderOfMagnitude);
+    const magnitude = 1000 ** orderOfMagnitude;
     const roundedValue = Math.floor(Math.abs(number / magnitude) * 10) / 10;
 
     return `${sign * roundedValue} ${unitlist[orderOfMagnitude]}`;
@@ -92,7 +93,7 @@ export const formatCurrency = safe(
 export const formatDateYear = safe(
   (date: string | Date): string | undefined => {
     if (!date) {
-      return undefined;
+      return;
     }
     return new Intl.DateTimeFormat("fr-FR", yearOption).format(castDate(date));
   }
@@ -100,7 +101,7 @@ export const formatDateYear = safe(
 
 export const formatDatePartial = safe((date: string | Date | undefined) => {
   if (!date) {
-    return undefined;
+    return;
   }
   return new Intl.DateTimeFormat("fr-FR", longDatePartial).format(
     castDate(date)
@@ -109,7 +110,7 @@ export const formatDatePartial = safe((date: string | Date | undefined) => {
 
 export const formatDateLong = safe((date: string | Date) => {
   if (!date) {
-    return undefined;
+    return;
   }
   return new Intl.DateTimeFormat("fr-FR", longDateOptions).format(
     castDate(date)
@@ -132,8 +133,8 @@ export const formatMonthIntervalFromPartialDate = safe((dPartial: string) => {
   const [yyyy, mm] = dPartial.split("-");
 
   const lastDayOfMonth = new Date(
-    parseInt(yyyy, 10),
-    parseInt(mm, 10),
+    Number.parseInt(yyyy, 10),
+    Number.parseInt(mm, 10),
     0
   ).getDate();
 
@@ -147,8 +148,8 @@ export const formatMonthIntervalFromPartialDate = safe((dPartial: string) => {
  * @returns Date
  */
 export const getDateFromYYYYMM = safe((dPartial: string) => {
-  const yyyy = parseInt(dPartial.slice(0, 4), 10);
-  const mm = parseInt(dPartial.slice(4, 6), 10);
+  const yyyy = Number.parseInt(dPartial.slice(0, 4), 10);
+  const mm = Number.parseInt(dPartial.slice(4, 6), 10);
 
   const date = new Date(yyyy, mm, 1);
   return date;
@@ -165,7 +166,7 @@ export const convertDateToAge = safe((d: string) => {
   }
 
   // this is an approximation of age
-  const age = Math.floor(ageMilliseconds / 31557600000);
+  const age = Math.floor(ageMilliseconds / 31_557_600_000);
   return age;
 });
 
@@ -182,7 +183,7 @@ export const formatAge = safe((date: string | Date) => {
     return `${yearAge} an${yearAge >= 2 ? "s" : ""}`;
   }
   if (monthDiff === 0) {
-    return undefined;
+    return;
   }
   return `${monthDiff} mois`;
 });
@@ -193,6 +194,7 @@ export const capitalize = safe((str: string) => {
   return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
 });
 
+// biome-ignore lint/style/noInferrableTypes: needed for the safe function inference
 export const formatIntFr = safe((intAsString: string = "") => {
   if (!intAsString) {
     return intAsString;
@@ -200,11 +202,12 @@ export const formatIntFr = safe((intAsString: string = "") => {
   return intAsString.replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
 });
 
+// biome-ignore lint/style/noInferrableTypes: needed for the safe function inference
 export const formatFloatFr = safe((floatAsString: string = "") => {
   if (!floatAsString) {
     return floatAsString;
   }
-  const floatAsNumber = parseFloat(floatAsString);
+  const floatAsNumber = Number.parseFloat(floatAsString);
   return new Intl.NumberFormat("fr-FR").format(floatAsNumber);
 });
 
@@ -263,7 +266,7 @@ export const parseIntWithDefaultValue = (
   defaultValue = 0
 ) => {
   try {
-    const result = parseInt(intAsString, 10);
+    const result = Number.parseInt(intAsString, 10);
     if (isNaN(result)) {
       throw new Error();
     }

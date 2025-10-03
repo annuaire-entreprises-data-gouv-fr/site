@@ -23,7 +23,7 @@ export class DataStore<T> {
     private fetchData: () => Promise<any>,
     private storeName: string,
     private mapToDomainObject: (result: any) => { [key: string]: T },
-    private TTR = 86400000
+    private TTR = 86_400_000
   ) {
     this.data = null;
     this.onGoingRefresh = null;

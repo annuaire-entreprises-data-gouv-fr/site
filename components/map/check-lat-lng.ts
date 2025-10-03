@@ -5,8 +5,8 @@ export function checkLatLng(
   longitude: string
 ): LngLatLike | null {
   try {
-    const lat = parseFloat(latitude);
-    const lng = parseFloat(longitude);
+    const lat = Number.parseFloat(latitude);
+    const lng = Number.parseFloat(longitude);
     if (
       isNaN(lat) ||
       isNaN(lng) ||

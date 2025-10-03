@@ -9,7 +9,7 @@ describe("Search page", () => {
     cy.contains("Nice (06000)").click();
     cy.contains("Appliquer").click();
     cy.location().should((loc) => {
-      expect(loc.search).includes(`cp_dep=06000`);
+      expect(loc.search).includes("cp_dep=06000");
     });
   });
 });

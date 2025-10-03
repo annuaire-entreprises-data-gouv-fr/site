@@ -37,23 +37,28 @@ const getLabel = (labelAsString: string, index: number) => {
     labelAsString.indexOf("Siren") === 0
   ) {
     return "Siret ou siren";
-  } else if (
+  }
+  if (
     labelAsString.indexOf("Dénom") === 0 ||
     labelAsString.indexOf("Nom de l’établissement") === 0 ||
     labelAsString.indexOf("Enseigne") === 0
   ) {
     return "Dénomination ou enseigne";
-  } else if (
+  }
+  if (
     labelAsString.indexOf("Prénoms") === 0 ||
     labelAsString.indexOf("Prénom") === 0 ||
     labelAsString.indexOf("Nom") === 0
   ) {
     return "Prénom ou nom du dirigeant";
-  } else if (labelAsString.indexOf("Adresse") === 0) {
+  }
+  if (labelAsString.indexOf("Adresse") === 0) {
     return "Adresse";
-  } else if (labelAsString.indexOf("NAF/APE") > -1) {
+  }
+  if (labelAsString.indexOf("NAF/APE") > -1) {
     return "Code NAF/APE";
-  } else if (index > 7) {
+  }
+  if (index > 7) {
     return "Autre";
   }
   return labelAsString;
@@ -261,7 +266,7 @@ const getNpsRecords = async () => {
   } = {};
 
   npsRecords.forEach((record) => {
-    const mood = parseInt(record.mood, 10);
+    const mood = Number.parseInt(record.mood, 10);
 
     if (mood === -1 || isNaN(mood)) {
       return;

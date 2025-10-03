@@ -9,6 +9,6 @@ export const getDefinition = (slug: string) =>
   allDefinitions.find((article) => article.slug === slug);
 
 export const allDefinitions = loadAll<IDefinition>(
-  // @ts-ignore
+  // @ts-expect-error
   require.context("data/definitions", false, /\.yml$/)
 );

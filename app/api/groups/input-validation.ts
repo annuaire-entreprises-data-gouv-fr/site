@@ -8,7 +8,7 @@ const emailValidator = z
 const groupIdValidator = z
   .string()
   .regex(/^\d+$/, "Group ID must be a number")
-  .transform((val) => parseInt(val, 10))
+  .transform((val) => Number.parseInt(val, 10))
   .refine((val) => Number.isInteger(val) && val > 0, {
     message: "Group ID must be a positive integer",
   });
@@ -16,7 +16,7 @@ const groupIdValidator = z
 const demandeIdValidator = z
   .string()
   .regex(/^\d+$/, "Demande ID must be a number")
-  .transform((val) => parseInt(val, 10))
+  .transform((val) => Number.parseInt(val, 10))
   .refine((val) => Number.isInteger(val) && val > 0, {
     message: "Demande ID must be a positive integer",
   });

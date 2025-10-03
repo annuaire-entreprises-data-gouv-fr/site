@@ -38,7 +38,7 @@ export function useFetchExternalData<T>(
         if (e instanceof RequestAbortedDuringUnloadException) {
           return;
         }
-        if (429 === e.status) {
+        if (e.status === 429) {
           setResponse(IDataFetchingState.TOO_MANY_REQUESTS);
           return;
         }

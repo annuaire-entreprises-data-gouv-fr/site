@@ -43,7 +43,7 @@ export default function ShowMore(props: IProps) {
           {isExpanded ? "Voir moins" : props.label || "Voir plus"}
         </ButtonLink>
         <p className="fr-sr-only" id={id}>
-          {!isExpanded ? "Affiche le texte caché" : "Cache une partie du texte"}{" "}
+          {isExpanded ? "Cache une partie du texte" : "Affiche le texte caché"}{" "}
           pour les utilisateurs voyants, mais le texte est déjà accessible en
           entier pour les lecteurs d’écran.
         </p>

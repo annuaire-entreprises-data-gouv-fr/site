@@ -72,22 +72,24 @@ export const GET = withSession(async function callbackRoute(req) {
       return NextResponse.redirect(
         getBaseUrl() + "/connexion/habilitation/prestataires"
       );
-    } else if (e instanceof CanRequestAuthorizationException) {
+    }
+    if (e instanceof CanRequestAuthorizationException) {
       return NextResponse.redirect(
         getBaseUrl() + "/connexion/habilitation/requise"
       );
-    } else if (e instanceof NeedASiretException) {
+    }
+    if (e instanceof NeedASiretException) {
       logInfoInSentry(e);
 
       return NextResponse.redirect(
         getBaseUrl() + "/connexion/habilitation/administration-inconnue"
       );
-    } else if (e instanceof HttpForbiddenError) {
+    }
+    if (e instanceof HttpForbiddenError) {
       return NextResponse.redirect(
         getBaseUrl() + "/connexion/habilitation/refusee"
       );
-    } else {
-      return NextResponse.redirect(getBaseUrl() + "/connexion/echec-connexion");
     }
+    return NextResponse.redirect(getBaseUrl() + "/connexion/echec-connexion");
   }
 });

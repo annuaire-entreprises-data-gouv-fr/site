@@ -56,7 +56,7 @@ const mapToDomainObject = (egapro: IEgaproItem): IEgapro["index"] => {
   // index is valid for declaration year + 1
   const indexYears = years.map((y) => {
     try {
-      return (parseInt(y, 10) + 1).toString();
+      return (Number.parseInt(y, 10) + 1).toString();
     } catch {
       return y;
     }

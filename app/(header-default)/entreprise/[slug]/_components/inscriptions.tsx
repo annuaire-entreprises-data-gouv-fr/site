@@ -78,9 +78,8 @@ export const UniteLegaleInscriptionIG = ({
         </InformationTooltip>
       </Wrapper>
     );
-  } else {
-    return null;
   }
+  return null;
 };
 
 export const UniteLegaleInscriptionSirene = ({
@@ -155,35 +154,34 @@ export const UniteLegaleInscriptionRNE = ({
   if (!uniteLegale.dateMiseAJourInpi) {
     if (isServicePublic(uniteLegale) || isAssociation(uniteLegale)) {
       return null;
-    } else {
-      return (
-        <Wrapper
-          link={
-            <Icon slug="searchLine">
-              <a
-                href="https://data.inpi.fr"
-                rel="noreferre noopener"
-                target="_blank"
-              >
-                Rechercher sur data.inpi.fr
-              </a>
-            </Icon>
-          }
-        >
-          <InformationTooltip
-            label={
-              "Cette structure est n’a pas été retrouvée dans le Registre National des Entreprises (RNE) tenu par l’INPI. Pourtant, vu sa forme juridique, elle devrait y être inscrite. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site data.inpi.fr"
-            }
-            tabIndex={undefined}
-          >
-            <OpenClosedTag
-              icon="questionFill"
-              label="Non trouvée dans le RNE (INPI)"
-            />
-          </InformationTooltip>
-        </Wrapper>
-      );
     }
+    return (
+      <Wrapper
+        link={
+          <Icon slug="searchLine">
+            <a
+              href="https://data.inpi.fr"
+              rel="noreferre noopener"
+              target="_blank"
+            >
+              Rechercher sur data.inpi.fr
+            </a>
+          </Icon>
+        }
+      >
+        <InformationTooltip
+          label={
+            "Cette structure est n’a pas été retrouvée dans le Registre National des Entreprises (RNE) tenu par l’INPI. Pourtant, vu sa forme juridique, elle devrait y être inscrite. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site data.inpi.fr"
+          }
+          tabIndex={undefined}
+        >
+          <OpenClosedTag
+            icon="questionFill"
+            label="Non trouvée dans le RNE (INPI)"
+          />
+        </InformationTooltip>
+      </Wrapper>
+    );
   }
 
   return (

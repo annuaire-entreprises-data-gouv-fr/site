@@ -10,5 +10,3 @@ describe("Check formatFiscalYear", () => {
     expect(getFiscalYear("2020-12-31")).toBe(2020);
   });
 });
-
-export {};

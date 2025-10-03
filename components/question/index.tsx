@@ -11,7 +11,7 @@ export function Question() {
         href="/faq"
       >
         <span>Une question&nbsp;</span>
-        <Icon size={24} slug="questionFill"></Icon>
+        <Icon size={24} slug="questionFill" />
       </a>
     </FloatingHelpButton>
   );

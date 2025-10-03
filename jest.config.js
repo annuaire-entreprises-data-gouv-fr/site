@@ -18,7 +18,7 @@ const config = {
     ...getTsConfigBasePaths(),
   },
   setupFilesAfterEnv: ["<rootDir>/setup-jest.ts"],
-  testTimeout: 10000,
+  testTimeout: 10_000,
 };
 
 module.exports = config;

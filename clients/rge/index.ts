@@ -65,9 +65,9 @@ const mapToDomainObject = (rge: IRGEResponse) => {
     adresse: `${adresse}, ${code_postal}, ${commune}`,
     email,
     nomEntreprise: nom_entreprise,
-    siret: siret,
+    siret,
     siteInternet: site_internet,
-    telephone: telephone,
+    telephone,
     workingWithIndividual: particulier,
   };
 

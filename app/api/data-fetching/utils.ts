@@ -22,9 +22,11 @@ export interface IHandlerParams {
   year?: string;
 }
 
-export interface IHandler<TResult, TParams> {
-  (slug: string, params: TParams, session: ISession): Promise<TResult>;
-}
+export type IHandler<TResult, TParams> = (
+  slug: string,
+  params: TParams,
+  session: ISession
+) => Promise<TResult>;
 
 type RouteHandler = (
   request: NextRequest,
@@ -48,7 +50,7 @@ type RouteHandlerWithSession = (
 export function withIgnoreBot(
   handler: RouteHandlerWithSession
 ): RouteHandlerWithSession {
-  return async function (request, context) {
+  return async (request, context) => {
     const { isBot } = userAgent(request);
     const routeAndSlug = await getRouteAndSlug(context);
 
@@ -124,7 +126,7 @@ export async function getRouteAndSlug(context: {
 }
 
 export function withHandleError(handler: RouteHandler): RouteHandler {
-  return async function (request, context) {
+  return async (request, context) => {
     try {
       return await handler(request, context);
     } catch (e) {

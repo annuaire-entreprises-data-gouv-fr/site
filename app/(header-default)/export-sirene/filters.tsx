@@ -156,7 +156,7 @@ export default function Filters({
               aria-live="assertive"
               className="fr-messages-group"
               id="checkboxes-1-messages"
-            ></div>
+            />
           </div>
         </section>
 

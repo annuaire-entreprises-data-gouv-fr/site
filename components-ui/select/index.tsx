@@ -17,7 +17,7 @@ export const Select = ({
   placeholder = null,
   name = "",
   defaultValue = null,
-  onChange = undefined,
+  onChange,
 }: SelectProps) => (
   <div className="fr-select-group">
     {label && (

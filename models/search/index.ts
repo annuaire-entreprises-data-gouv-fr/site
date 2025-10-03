@@ -194,10 +194,9 @@ export const searchPersonCompanies = async (
     );
     if (hasFirstNames) {
       return true;
-    } else {
-      results.resultCount -= 1;
-      return false;
     }
+    results.resultCount -= 1;
+    return false;
   });
 
   return results;

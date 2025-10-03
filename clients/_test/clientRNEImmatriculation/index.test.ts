@@ -5,7 +5,7 @@ import {
 import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
-const TIMEOUT_RNE = 90000;
+const TIMEOUT_RNE = 90_000;
 
 describe("clientRNEImmatriculation", () => {
   it(

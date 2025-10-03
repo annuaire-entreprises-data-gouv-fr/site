@@ -58,7 +58,7 @@ const CollectiviteTerritorialeSection: React.FC<{
           EAdministration.MI,
           EAdministration.DINUM,
         ]}
-        title={`Collectivité territoriale`}
+        title={"Collectivité territoriale"}
       >
         <TwoColumnTable body={data} />
         {shouldDisplayCollectiviteLink && (

@@ -72,14 +72,14 @@ export default function PartagerPage() {
             src={`${getBaseUrl()}/api/share/button/510973431`}
             style={{ border: "none", maxWidth: "100%" }}
             width="300"
-          ></iframe>
+          />
           <div />
           <iframe
             height="70"
             src={`${getBaseUrl()}/api/share/button/510973431?light=true`}
             style={{ border: "none", maxWidth: "100%" }}
             width="300"
-          ></iframe>
+          />
           <h3>Comment ajouter un lien sur mon site ?</h3>
           <p>
             Il vous suffit d’intégrer l’iframe suivante sur votre site web, à

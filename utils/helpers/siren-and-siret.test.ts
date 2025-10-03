@@ -139,5 +139,3 @@ describe("Siren or siret extraction from rechercher url", () => {
     ).toBe("");
   });
 });
-
-export {};

@@ -12,22 +12,21 @@ const DISPLAY_INCIDENT_BANNER = false;
 export default function TempIncidentBanner() {
   if (!DISPLAY_INCIDENT_BANNER) {
     return null;
-  } else {
-    return (
-      <PrintNever>
-        <div
-          aria-label="Incident en cours"
-          className={styles.npsModal}
-          id="temp-incident"
-          role="dialog"
-          style={{
-            backgroundColor: constants.colors.pastelBlue,
-            borderColor: constants.colors.frBlue,
-          }}
-        >
-          <div className="fr-container">{TEMP_INCIDENT_BANNER_MESSAGE}</div>
-        </div>
-      </PrintNever>
-    );
   }
+  return (
+    <PrintNever>
+      <div
+        aria-label="Incident en cours"
+        className={styles.npsModal}
+        id="temp-incident"
+        role="dialog"
+        style={{
+          backgroundColor: constants.colors.pastelBlue,
+          borderColor: constants.colors.frBlue,
+        }}
+      >
+        <div className="fr-container">{TEMP_INCIDENT_BANNER_MESSAGE}</div>
+      </div>
+    </PrintNever>
+  );
 }

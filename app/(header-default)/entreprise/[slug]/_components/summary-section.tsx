@@ -119,9 +119,9 @@ const UniteLegaleSummarySection: React.FC<{
       libelleCategorieEntreprise(uniteLegale),
     ],
     ["Date de création", formatDate(uniteLegale.dateCreation)],
-    ...(!estActif(uniteLegale)
-      ? [["Date de fermeture", formatDate(uniteLegale.dateFermeture)]]
-      : []),
+    ...(estActif(uniteLegale)
+      ? []
+      : [["Date de fermeture", formatDate(uniteLegale.dateFermeture)]]),
     ["", <br />],
     [
       "Convention(s) collective(s)",

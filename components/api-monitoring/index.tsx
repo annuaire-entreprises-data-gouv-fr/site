@@ -14,9 +14,11 @@ const getUptimeColorStyles = (ratio: IRatio) => {
 
   if (uptimeNum >= 99.99) {
     return { backgroundColor: "#3bd671" };
-  } else if (uptimeNum >= 99) {
+  }
+  if (uptimeNum >= 99) {
     return { backgroundColor: "#c2e34b", height: "50px", margin: 0 };
-  } else if (uptimeNum >= 95) {
+  }
+  if (uptimeNum >= 95) {
     return { backgroundColor: "#f29030", height: "50px", margin: 0 }; // Orange
   }
   return { backgroundColor: "#df484a", height: "50px", margin: 0 };
@@ -30,9 +32,11 @@ const getUptimeLabel = (ratio: IRatio) => {
   const formattedRation = ratio.ratioNumber.toFixed(2);
   if (uptimeNum >= 99.99) {
     return "service en état de fonctionnement";
-  } else if (uptimeNum >= 99) {
+  }
+  if (uptimeNum >= 99) {
     return `${formattedRation}% : service faiblement perturbé`;
-  } else if (uptimeNum >= 95) {
+  }
+  if (uptimeNum >= 95) {
     return `${formattedRation}% : service très perturbé`; // Orange
   }
   return `${formattedRation}% : service extrêmement perturbé`;
@@ -41,11 +45,11 @@ const getUptimeLabel = (ratio: IRatio) => {
 const getHideClasses = (index: number) => {
   if (index > 70) {
     return "";
-  } else if (index > 50) {
-    return styles["hide-mobile"];
-  } else {
-    return `${styles["hide-mobile"]} ${styles["hide-tablet"]}`;
   }
+  if (index > 50) {
+    return styles["hide-mobile"];
+  }
+  return `${styles["hide-mobile"]} ${styles["hide-tablet"]}`;
 };
 
 const Metric: React.FC<{
@@ -75,7 +79,7 @@ const Metric: React.FC<{
             <div
               className={styles["serie-rectangle"]}
               style={getUptimeColorStyles(serie)}
-            ></div>
+            />
           </InformationTooltip>
         </div>
       ))}
@@ -101,12 +105,7 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
   apiDocumentationLink,
 }) => (
   <>
-    {!series ? (
-      <Section title="Suivi des performances de l'API indisponible">
-        Notre service de suivi des performances est actuellement hors-ligne.
-        Nous sommes désolés pour ce dérangement.
-      </Section>
-    ) : (
+    {series ? (
       <Section
         title={`Disponibilité : l’API est actuellement ${
           isOnline ? "en ligne ✅" : "hors-ligne 🛑"
@@ -160,6 +159,11 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
             )}
           </i>
         )}
+      </Section>
+    ) : (
+      <Section title="Suivi des performances de l'API indisponible">
+        Notre service de suivi des performances est actuellement hors-ligne.
+        Nous sommes désolés pour ce dérangement.
       </Section>
     )}
   </>

@@ -38,40 +38,39 @@ export const JustificatifImmatriculationJOAFE: React.FC<IProps> = ({
 
         if (typeof annonceCreation === "undefined") {
           return <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />;
-        } else {
-          const downloadLink = annonceCreation.path + "?format=pdf";
-
-          const data = [
-            ["Siren", formatIntFr(uniteLegale.siren)],
-            ["N°RNA", formatIntFr(uniteLegale.association.idAssociation)],
-            [
-              "Date d’enregistrement",
-              formatDate(annonceCreation.datePublication),
-            ],
-          ];
-          return (
-            <>
-              <p>
-                Cette structure est enregistrée au{" "}
-                <strong>Journal Officiel des Association (JOAFE)</strong>.
-              </p>
-              <TwoColumnTable body={data} />
-              {downloadLink && (
-                <PrintNever>
-                  <p>
-                    Pour accéder à l’annonce de création de l’association,
-                    téléchargez le document ci-dessous :
-                  </p>
-                  <div className="layout-center">
-                    <ButtonLink target="_blank" to={`${downloadLink}`}>
-                      <Icon slug="download">Télécharger le justificatif</Icon>
-                    </ButtonLink>
-                  </div>
-                </PrintNever>
-              )}
-            </>
-          );
         }
+        const downloadLink = annonceCreation.path + "?format=pdf";
+
+        const data = [
+          ["Siren", formatIntFr(uniteLegale.siren)],
+          ["N°RNA", formatIntFr(uniteLegale.association.idAssociation)],
+          [
+            "Date d’enregistrement",
+            formatDate(annonceCreation.datePublication),
+          ],
+        ];
+        return (
+          <>
+            <p>
+              Cette structure est enregistrée au{" "}
+              <strong>Journal Officiel des Association (JOAFE)</strong>.
+            </p>
+            <TwoColumnTable body={data} />
+            {downloadLink && (
+              <PrintNever>
+                <p>
+                  Pour accéder à l’annonce de création de l’association,
+                  téléchargez le document ci-dessous :
+                </p>
+                <div className="layout-center">
+                  <ButtonLink target="_blank" to={`${downloadLink}`}>
+                    <Icon slug="download">Télécharger le justificatif</Icon>
+                  </ButtonLink>
+                </div>
+              </PrintNever>
+            )}
+          </>
+        );
       }}
     </AsyncDataSectionClient>
   );

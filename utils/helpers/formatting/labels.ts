@@ -85,7 +85,7 @@ export const libelleFromCodeNAFWithoutNomenclature = (
   code = "",
   addCode = true
 ) => {
-  for (let nomenclature of [
+  for (const nomenclature of [
     codesNAFRev2,
     codesNAFRev1,
     codesNAF1993,

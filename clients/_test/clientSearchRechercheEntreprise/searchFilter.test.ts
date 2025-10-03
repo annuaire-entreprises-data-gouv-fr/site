@@ -21,7 +21,7 @@ describe("clientSearchRechercheEntreprise : use of search filters", () => {
           searchTerms: "ganymede",
           searchFilterParams: new SearchFilterParams({
             ca_min: 100,
-            res_max: 100000,
+            res_max: 100_000,
           }),
         },
       ],

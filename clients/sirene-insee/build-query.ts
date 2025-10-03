@@ -335,10 +335,10 @@ export class SireneQueryBuilder {
       .map((activity) => `${field}:${activity}`)
       .join(" OR ");
 
-    if (!isHq) {
-      this.conditions.push(`periode(-dateFin:* AND (${activityConditions}))`);
-    } else {
+    if (isHq) {
       this.conditions.push(`(${activityConditions})`);
+    } else {
+      this.conditions.push(`periode(-dateFin:* AND (${activityConditions}))`);
     }
   };
 

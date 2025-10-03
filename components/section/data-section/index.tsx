@@ -25,7 +25,7 @@ export function DataSection<T extends Exclude<unknown, IDataFetchingState>>({
     return null;
   }
 
-  //@ts-ignore
+  //@ts-expect-error
   const lastModified = props?.lastModified ?? data?.lastModified ?? null;
 
   return (

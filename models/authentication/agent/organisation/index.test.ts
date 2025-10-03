@@ -50,5 +50,3 @@ describe("AgentOrganisation class", () => {
     expect(habilitation.userType).toBe("Agent connecté");
   });
 });
-
-export {};

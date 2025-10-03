@@ -64,7 +64,7 @@ export function AsyncDataSectionClient<T>({
   if (props.notFoundInfo === null && isAPI404(data)) {
     return null;
   }
-  //@ts-ignore
+  //@ts-expect-error
   const lastModified = data?.lastModified || null;
 
   return (

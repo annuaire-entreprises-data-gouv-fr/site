@@ -47,26 +47,25 @@ export default function DirigeantsContentProtected({
         );
       }
       return infos;
-    } else {
-      const infos = [
-        <RolesInfos roles={dirigeant.roles} />,
-        <>
-          <EtatCivilInfos dirigeant={dirigeant} />
-          <DisambiguationTooltip
-            dataType="dirigeant"
-            isInIg={dirigeant.isInIg}
-            isInInpi={dirigeant.isInInpi}
-          />
-        </>,
-      ];
-
-      if (dirigeant.dateNaissancePartial) {
-        infos.push(
-          <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />
-        );
-      }
-      return infos;
     }
+    const infos = [
+      <RolesInfos roles={dirigeant.roles} />,
+      <>
+        <EtatCivilInfos dirigeant={dirigeant} />
+        <DisambiguationTooltip
+          dataType="dirigeant"
+          isInIg={dirigeant.isInIg}
+          isInInpi={dirigeant.isInInpi}
+        />
+      </>,
+    ];
+
+    if (dirigeant.dateNaissancePartial) {
+      infos.push(
+        <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />
+      );
+    }
+    return infos;
   };
 
   return (

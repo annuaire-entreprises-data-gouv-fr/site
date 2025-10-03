@@ -81,7 +81,7 @@ export const clientAnnuaireServicePublicByIds = async (
   ids: string[]
 ): Promise<IServicePublic[]> => {
   const query = `id="${ids.join('" OR id="')}"`;
-  let response = await queryAnnuaireServicePublic(query);
+  const response = await queryAnnuaireServicePublic(query);
 
   if (!response.records.length) {
     throw new HttpNotFound(`Ids = ${ids.join(", ")}`);
@@ -93,7 +93,7 @@ export const clientAnnuaireServicePublicByIds = async (
 export const clientAnnuaireServicePublicBySiret = async (
   siret: Siret
 ): Promise<IServicePublic> => {
-  let response = await queryAnnuaireServicePublic(`siret="${siret}"`);
+  const response = await queryAnnuaireServicePublic(`siret="${siret}"`);
 
   if (!response.records.length) {
     throw new HttpNotFound(`Siret = ${siret}`);

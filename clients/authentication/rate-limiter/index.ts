@@ -20,13 +20,13 @@ const RATE_LIMITS = {
   TEN_MINUTES: 200,
   ONE_HOUR: 400,
   ONE_DAY: 2400,
-  ONE_WEEK: 10000,
+  ONE_WEEK: 10_000,
 } as const;
 
 class AgentRateLimiter {
   private _agentRateLimitsStore: DataStore<IAgentRateLimits>;
   // time before agent rate limits update
-  private TTL = 300000; // 5min
+  private TTL = 300_000; // 5min
 
   constructor() {
     this._agentRateLimitsStore = new DataStore<IAgentRateLimits>(

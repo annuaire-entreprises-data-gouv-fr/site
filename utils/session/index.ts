@@ -9,7 +9,7 @@ export const sessionOptions: SessionOptions = {
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
   },
-  ttl: 43200, // 12h
+  ttl: 43_200, // 12h
 };
 
 export async function setVisitTimestamp(session: IronSession<ISession>) {
@@ -43,12 +43,11 @@ export const setPathFrom = async (
   pathFrom: string
 ) => {
   if (pathFrom) {
-    if (!isAbsoluteUrl(pathFrom)) {
-      session.pathFrom = pathFrom;
-      await session.save();
-    } else {
+    if (isAbsoluteUrl(pathFrom)) {
       throw new Error("Absolute URL not allowed");
     }
+    session.pathFrom = pathFrom;
+    await session.save();
   }
 };
 

@@ -49,7 +49,7 @@ describe("Search with searchTerms and filters", () => {
     "ganymede",
     new SearchFilterParams({
       ca_min: 100,
-      res_max: 100000,
+      res_max: 100_000,
     }),
     "-ca_min-100-res_max-100000"
   );
@@ -70,7 +70,7 @@ function delay(ms: number) {
 function itShouldMatchSnapshot(
   searchTerms: string,
   searchFilterParams?: SearchFilterParams,
-  suffix: string = ""
+  suffix = ""
 ) {
   it(`Should match snapshot for search ${searchTerms}`, async () => {
     await delay(1000); // Delay of 1000 ms (1 second)

@@ -75,7 +75,7 @@ section.value img {
   content: "”";
   position: absolute;
   font-size: 20rem;
-  font-family: "arial";
+  font-family: "arial", sans-serif;
   right: 12%;
   top: 200px;
   color: var(--annuaire-colors-pastelBlue);

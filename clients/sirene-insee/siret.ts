@@ -193,7 +193,7 @@ const mapEtablissementToDomainObject = (
     ) || "";
 
   // get last state change to obtain closing date
-  let lastStateChange =
+  const lastStateChange =
     periodesEtablissement.find(
       (periode) => periode.changementEtatAdministratifEtablissement === true
     ) || periodesEtablissement[0];
@@ -208,9 +208,9 @@ const mapEtablissementToDomainObject = (
     siret
   );
 
-  const dateFermeture = !estActif({ etatAdministratif })
-    ? lastStateChange.dateDebut
-    : null;
+  const dateFermeture = estActif({ etatAdministratif })
+    ? null
+    : lastStateChange.dateDebut;
 
   const defaultEtablissement = createDefaultEtablissement();
 

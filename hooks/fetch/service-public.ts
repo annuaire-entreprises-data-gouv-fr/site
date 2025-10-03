@@ -17,9 +17,8 @@ export function useFetchServicePublic(
       fetchData: async () => {
         if (etablissement) {
           return await getServicePublicByEtablissement(etablissement);
-        } else {
-          return await getServicePublicByUniteLegale(uniteLegale);
         }
+        return await getServicePublicByUniteLegale(uniteLegale);
       },
       administration: EAdministration.DILA,
       logError: (e: any) => {

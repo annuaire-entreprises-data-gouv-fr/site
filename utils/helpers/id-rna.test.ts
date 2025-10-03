@@ -11,5 +11,3 @@ describe("Check isIdRna", () => {
     expect(isIdRna("37_2304")).toBe(false);
   });
 });
-
-export {};

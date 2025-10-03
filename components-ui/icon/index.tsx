@@ -193,9 +193,9 @@ const download = (
     width="100%"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-    <polyline points="7 10 12 15 17 10"></polyline>
-    <line x1="12" x2="12" y1="15" y2="3"></line>
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <polyline points="7 10 12 15 17 10" />
+    <line x1="12" x2="12" y1="15" y2="3" />
   </svg>
 );
 
@@ -251,9 +251,9 @@ const information = (
     width="100%"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="12" cy="12" fill="currentColor" r="10"></circle>
-    <line stroke="#fff" x1="12" x2="12" y1="16" y2="12"></line>
-    <line stroke="#fff" x1="12" x2="12.01" y1="8" y2="8"></line>
+    <circle cx="12" cy="12" fill="currentColor" r="10" />
+    <line stroke="#fff" x1="12" x2="12" y1="16" y2="12" />
+    <line stroke="#fff" x1="12" x2="12.01" y1="8" y2="8" />
   </svg>
 );
 
@@ -269,9 +269,9 @@ const linkedin = (
     width="100%"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-    <rect height="12" width="4" x="2" y="9"></rect>
-    <circle cx="4" cy="4" r="2"></circle>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect height="12" width="4" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
   </svg>
 );
 
@@ -302,9 +302,9 @@ const print = (
     width="100%"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <polyline points="6 9 6 2 18 2 18 9"></polyline>
-    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-    <rect height="8" width="12" x="6" y="14"></rect>
+    <polyline points="6 9 6 2 18 2 18 9" />
+    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+    <rect height="8" width="12" x="6" y="14" />
   </svg>
 );
 
@@ -320,8 +320,8 @@ const mail = (
     width="100%"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-    <polyline points="22,6 12,13 2,6"></polyline>
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+    <polyline points="22,6 12,13 2,6" />
   </svg>
 );
 

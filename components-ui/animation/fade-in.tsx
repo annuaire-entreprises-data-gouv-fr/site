@@ -17,7 +17,7 @@ export const FadeIn = ({
 }: IProps) => (
   <>
     <div
-      className={(className ? className : "") + " " + "fade-in-wrapper"}
+      className={(className ? className : "") + " fade-in-wrapper"}
       style={{
         ...(style || {}),
         animationDuration: duration + "ms",

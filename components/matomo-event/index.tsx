@@ -22,6 +22,6 @@ const MatomoEvent: React.FC<{
         </script>
         `,
     }}
-  ></div>
+  />
 );
 export default MatomoEvent;

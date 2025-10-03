@@ -35,19 +35,18 @@ export default function DirigeantsContent({
         );
       }
       return infos;
-    } else {
-      const infos = [
-        <>{dirigeant.role}</>,
-        <EtatCivilInfos dirigeant={dirigeant} />,
-      ];
-
-      if (dirigeant.dateNaissancePartial) {
-        infos.push(
-          <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />
-        );
-      }
-      return infos;
     }
+    const infos = [
+      <>{dirigeant.role}</>,
+      <EtatCivilInfos dirigeant={dirigeant} />,
+    ];
+
+    if (dirigeant.dateNaissancePartial) {
+      infos.push(
+        <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />
+      );
+    }
+    return infos;
   };
 
   return (
@@ -89,7 +88,7 @@ export function sortDirigeants(
     return -1;
   }
   if (roleA.match(/^[\d]+/) && roleB.match(/^[\d]+/)) {
-    return parseInt(roleA, 10) < parseInt(roleB, 10) ? -1 : 1;
+    return Number.parseInt(roleA, 10) < Number.parseInt(roleB, 10) ? -1 : 1;
   }
   return roleA < roleB ? -1 : 1;
 }

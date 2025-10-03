@@ -5,7 +5,8 @@ export const getTransactionNameFromUrl = (url: string) => {
     }
     if (url.indexOf("/rechercher/carte") > -1) {
       return "/rechercher/carte";
-    } else if (url.indexOf("/rechercher") > -1) {
+    }
+    if (url.indexOf("/rechercher") > -1) {
       return "/rechercher";
     }
     return url.replace("?redirected=1", "").replace(/\d{14}|\d{9}/g, "[slug]");

@@ -2,7 +2,7 @@ import { clientTVA } from "#clients/api-proxy/tva";
 import type { TVANumber } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
-const TIMEOUT_TVA = 30000;
+const TIMEOUT_TVA = 30_000;
 
 describe("clientTVA", () => {
   it(
@@ -18,7 +18,7 @@ describe("clientTVA", () => {
         "43842019051",
         "72217500016",
       ];
-      for (let arg of testValues) {
+      for (const arg of testValues) {
         await expectClientToMatchSnapshot({
           client: clientTVA,
           args: [arg as TVANumber],

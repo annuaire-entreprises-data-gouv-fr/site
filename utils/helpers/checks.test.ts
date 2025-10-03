@@ -54,5 +54,3 @@ describe("Check shouldIndex", () => {
     expect(shouldNotIndex(u)).toBe(true);
   });
 });
-
-export {};

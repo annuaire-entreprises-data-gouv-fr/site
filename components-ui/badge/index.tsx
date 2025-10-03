@@ -47,7 +47,7 @@ export function Badge({
     <ContainerComponent
       className={`${styles.badgeWrapper} ${
         onClick && !link && !isSelected ? styles.badgeWrapperOnClick : ""
-      } ${!!onClick ? " cursor-pointer" : ""}`}
+      } ${onClick ? " cursor-pointer" : ""}`}
       onClick={onClick}
       style={{
         border: isSelected ? "2px solid #000091" : "2px solid transparent",
@@ -58,7 +58,7 @@ export function Badge({
         aria-hidden
         className={styles.badgeIcon}
         style={{
-          backgroundColor: backgroundColor,
+          backgroundColor,
           color: fontColor,
           padding: small ? "0 6px" : "2px 8px",
         }}

@@ -12,7 +12,7 @@ export const LogoAnnuaireWithEasterEgg = () => {
   useEffect(() => {
     let counter = 0;
 
-    const keyDown = function (e: KeyboardEvent) {
+    const keyDown = (e: KeyboardEvent) => {
       if (e.keyCode === konami[counter++]) {
         if (counter === konami.length) {
           counter = 0;

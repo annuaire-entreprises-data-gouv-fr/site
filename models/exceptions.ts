@@ -78,7 +78,7 @@ export class FetchRessourceException extends Exception {
  */
 export function throwUnreachableCaseError(value: never): never {
   throw new InternalError({
-    message: `Unreachable case`,
+    message: "Unreachable case",
     context: { details: value },
   });
 }

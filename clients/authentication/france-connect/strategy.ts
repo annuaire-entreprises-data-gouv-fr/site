@@ -16,34 +16,33 @@ const POST_LOGOUT_REDIRECT_URI =
 export const getClient = async () => {
   if (_client) {
     return _client;
-  } else {
-    if (
-      !CLIENT_ID ||
-      !URL ||
-      !CLIENT_SECRET ||
-      !REDIRECT_URI ||
-      !POST_LOGOUT_REDIRECT_URI
-    ) {
-      throw new InternalError({
-        message: "FRANCE CONNECT ENV variables are not defined",
-      });
-    }
-    const franceConnectIssuer = await Issuer.discover(
-      `${URL}/api/v2/.well-known/openid-configuration`
-    );
-
-    _client = new franceConnectIssuer.Client({
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      redirect_uris: [REDIRECT_URI],
-      post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
-      id_token_signed_response_alg: "RS256",
-      userinfo_signed_response_alg: "RS256",
-      response_types: ["code"],
-    });
-
-    return _client;
   }
+  if (
+    !CLIENT_ID ||
+    !URL ||
+    !CLIENT_SECRET ||
+    !REDIRECT_URI ||
+    !POST_LOGOUT_REDIRECT_URI
+  ) {
+    throw new InternalError({
+      message: "FRANCE CONNECT ENV variables are not defined",
+    });
+  }
+  const franceConnectIssuer = await Issuer.discover(
+    `${URL}/api/v2/.well-known/openid-configuration`
+  );
+
+  _client = new franceConnectIssuer.Client({
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    redirect_uris: [REDIRECT_URI],
+    post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
+    id_token_signed_response_alg: "RS256",
+    userinfo_signed_response_alg: "RS256",
+    response_types: ["code"],
+  });
+
+  return _client;
 };
 
 export const franceConnectAuthorizeUrl = async (req: any) => {

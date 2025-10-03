@@ -36,7 +36,7 @@ const Meta: React.FC<IProps> = ({
           ...(canonical ? { url: canonical } : {}),
           locale: "fr_FR",
           type: "website",
-          title: title,
+          title,
           description: description ?? SITE_DESCRIPTION,
           images: OPENGRAPH_IMAGES,
           site_name: SITE_NAME,

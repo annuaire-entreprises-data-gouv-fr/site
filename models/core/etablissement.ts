@@ -109,31 +109,30 @@ const fetchFromClients = async (
      */
     if (isAPI404(etablissementRechercheEntreprise)) {
       throw new SiretNotFoundError(siret);
-    } else if (isAPINotResponding(etablissementRechercheEntreprise)) {
+    }
+    if (isAPINotResponding(etablissementRechercheEntreprise)) {
       throw new HttpServerError("Both API failed");
-    } else {
-      return etablissementRechercheEntreprise;
     }
-  } else {
-    /**
-     * Sirene succeed but siret is not in recherhce or recherche failed
-     */
-    if (
-      isAPINotResponding(etablissementRechercheEntreprise) ||
-      isAPI404(etablissementRechercheEntreprise)
-    ) {
-      logWarningInSentry(
-        new FetchRessourceException({
-          ressource: "UniteLegaleRecherche",
-          administration: EAdministration.DINUM,
-          message: "Fail to find siret in recherche API",
-          context: {
-            siret,
-          },
-        })
-      );
-      return etablissementInsee;
-    }
+    return etablissementRechercheEntreprise;
+  }
+  /**
+   * Sirene succeed but siret is not in recherhce or recherche failed
+   */
+  if (
+    isAPINotResponding(etablissementRechercheEntreprise) ||
+    isAPI404(etablissementRechercheEntreprise)
+  ) {
+    logWarningInSentry(
+      new FetchRessourceException({
+        ressource: "UniteLegaleRecherche",
+        administration: EAdministration.DINUM,
+        message: "Fail to find siret in recherche API",
+        context: {
+          siret,
+        },
+      })
+    );
+    return etablissementInsee;
   }
 
   // default case

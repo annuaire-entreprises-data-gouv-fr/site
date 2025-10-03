@@ -35,34 +35,34 @@ export const getSubventionsAssociationFromSlug = async (
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DJEPVA, 404);
-    } else if (!idAssociation) {
+    }
+    if (!idAssociation) {
       return APINotRespondingFactory(EAdministration.DJEPVA, 500);
-    } else {
-      try {
-        const result = await clientApiDataSubvention(idAssociation);
-        logInfoInSentry(
-          new Information({
-            name: "DataSubvention",
-            message: "Fallback worked for data subvention",
-          })
-        );
-        return result;
-      } catch (e) {
-        if (e instanceof HttpNotFound) {
-          return APINotRespondingFactory(EAdministration.DJEPVA, 404);
-        }
-        logErrorInSentry(
-          new FetchRessourceException({
-            ressource: "DataSubvention",
-            cause: e,
-            context: {
-              siren,
-            },
-            administration: EAdministration.DJEPVA,
-          })
-        );
-        return APINotRespondingFactory(EAdministration.DJEPVA, 500);
+    }
+    try {
+      const result = await clientApiDataSubvention(idAssociation);
+      logInfoInSentry(
+        new Information({
+          name: "DataSubvention",
+          message: "Fallback worked for data subvention",
+        })
+      );
+      return result;
+    } catch (e) {
+      if (e instanceof HttpNotFound) {
+        return APINotRespondingFactory(EAdministration.DJEPVA, 404);
       }
+      logErrorInSentry(
+        new FetchRessourceException({
+          ressource: "DataSubvention",
+          cause: e,
+          context: {
+            siren,
+          },
+          administration: EAdministration.DJEPVA,
+        })
+      );
+      return APINotRespondingFactory(EAdministration.DJEPVA, 500);
     }
   }
 };

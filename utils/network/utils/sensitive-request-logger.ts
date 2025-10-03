@@ -52,18 +52,18 @@ export const sensitiveRequestLogger = (
 
     const resource_id = extractSirenOrSiretSlugFromUrl(url.pathname);
 
-    let log: ISensitiveLogType = {
+    const log: ISensitiveLogType = {
       date: new Date().toISOString(),
       timestamp: Date.now(),
 
       request: {
-        route: route,
+        route,
         id: randomId(),
       },
 
       content: {
-        resource_type: resource_type,
-        resource_id: resource_id,
+        resource_type,
+        resource_id,
       },
 
       // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-url.html

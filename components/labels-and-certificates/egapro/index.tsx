@@ -11,7 +11,7 @@ import type { IEgapro } from "#models/certifications/egapro";
 export const EgaproSection: React.FC<{
   egapro: IEgapro | IAPINotRespondingError;
 }> = ({ egapro }) => {
-  const sectionTitle = `Égalité professionnelle - Egapro`;
+  const sectionTitle = "Égalité professionnelle - Egapro";
 
   return (
     <DataSection
@@ -135,18 +135,18 @@ const getSectionBody = (egapro: IEgapro) => {
     ],
     // only more than 250
     ...[
-      !egapro.index.lessThan250
-        ? [
+      egapro.index.lessThan250
+        ? []
+        : [
             `・Écart taux d'augmentation (sur 20)`,
             ...augmentations.map(mapToNc),
-          ]
-        : [],
+          ],
     ],
     // only more than 250
     ...[
-      !egapro.index.lessThan250
-        ? ["・Écart taux promotion (sur 15)", ...promotions.map(mapToNc)]
-        : [],
+      egapro.index.lessThan250
+        ? []
+        : ["・Écart taux promotion (sur 15)", ...promotions.map(mapToNc)],
     ],
     ["・Retour congé maternité (sur 15)", ...congesMaternite.map(mapToNc)],
     ["・Hautes rémunérations (sur 10)", ...hautesRemunerations.map(mapToNc)],
@@ -170,7 +170,9 @@ const getColor = (note: number) => {
 const FAQEgapro = () => (
   <FAQLink
     to="/faq/egapro-egalite-professionnelle-femme-homme"
-    tooltipLabel={`index d’égalité professionnelle entre les femmes et les hommes.`}
+    tooltipLabel={
+      "index d’égalité professionnelle entre les femmes et les hommes."
+    }
   >
     L’Index Egapro permet de mesurer l’égalité professionnelle entre les femmes
     et les hommes dans les entreprises de plus de 50 salariés.

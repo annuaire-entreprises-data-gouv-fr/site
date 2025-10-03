@@ -15,7 +15,7 @@ type MultiSelectProps = {
 };
 
 export const MultiSelect = ({
-  defaultValue = undefined,
+  defaultValue,
   id,
   instanceId,
   name,

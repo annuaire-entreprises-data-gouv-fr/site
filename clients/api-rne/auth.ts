@@ -66,9 +66,8 @@ class RNEClient {
       ) {
         this._token = await this.refreshToken();
         return await callback();
-      } else {
-        throw e;
       }
+      throw e;
     }
   };
 }

@@ -1,6 +1,6 @@
 describe("Dirigeants ESSOR ENERGIES (SOLARSUD)", () => {
   it("Should display dirigeants from INPI", () => {
-    cy.visit(`/dirigeants/487444697`);
+    cy.visit("/dirigeants/487444697");
     cy.contains(
       "Cette entreprise possède 2 dirigeants enregistrés au Registre National des Entreprises (RNE) tenu par l’INPI."
     ).should("be.visible");
@@ -11,7 +11,7 @@ describe("Dirigeants ESSOR ENERGIES (SOLARSUD)", () => {
 
   it("[LOGGED] Should display comparison between INPI and IG", () => {
     cy.login();
-    cy.visit(`/dirigeants/487444697`);
+    cy.visit("/dirigeants/487444697");
     cy.contains(
       "Ces informations proviennent du RNE et sont issues d‘une comparaison entre les données issues de l’INPI et celles d’Infogreffe"
     ).should("be.visible");
@@ -23,13 +23,13 @@ describe("Dirigeants ESSOR ENERGIES (SOLARSUD)", () => {
 });
 describe("Dirigeants non-diffusible ", () => {
   it("Should not display dirigeants", () => {
-    cy.visit(`/dirigeants/908595879`);
+    cy.visit("/dirigeants/908595879");
     cy.contains("▪︎ ▪︎ ▪︎ information protégée ▪︎ ▪︎ ▪︎").should("be.visible");
     cy.contains("Dirigeant(s) (données privées)").should("be.visible");
   });
   it("[LOGGED] Should display dirigeants", () => {
     cy.login();
-    cy.visit(`/dirigeants/908595879`);
+    cy.visit("/dirigeants/908595879");
     cy.contains("Dirigeant(s)").should("be.visible");
     cy.contains(
       "Cette entreprise possède 2 dirigeants enregistrés au Registre National des Entreprises (RNE) tenu par l’INPI."

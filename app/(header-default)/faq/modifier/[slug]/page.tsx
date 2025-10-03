@@ -48,7 +48,7 @@ export default async function FAQArticle({ params }: AppRouterProps) {
         <h1>
           Comment modifier : “<strong>{dataToModify.label}</strong>” ?
         </h1>
-        <p></p>
+        <p />
         <p>Ces informations proviennent de :</p>
         <ul>
           <li>

@@ -23,24 +23,11 @@ export default function ResponsablesServicePublicSection({
         id="responsables-service-public"
         notFoundInfo={<NotFoundInfo />}
         sources={[EAdministration.DILA]}
-        title={`Responsable(s)`}
+        title={"Responsable(s)"}
       >
         {(servicePublic) => (
           <>
-            {!servicePublic.affectationPersonne ? (
-              <p>
-                Cette administration n’a pas de responsable enregistré dans l’
-                <a
-                  aria-label="Voir l’Annuaire de l’administration, nouvelle fenêtre"
-                  href="https://lannuaire.service-public.fr/"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  Annuaire de l’administration
-                </a>
-                .
-              </p>
-            ) : (
+            {servicePublic.affectationPersonne ? (
               <>
                 <p>
                   Cette administration possède{" "}
@@ -101,6 +88,19 @@ export default function ResponsablesServicePublicSection({
                   head={["Role", "Nom", "Nomination"]}
                 />
               </>
+            ) : (
+              <p>
+                Cette administration n’a pas de responsable enregistré dans l’
+                <a
+                  aria-label="Voir l’Annuaire de l’administration, nouvelle fenêtre"
+                  href="https://lannuaire.service-public.fr/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Annuaire de l’administration
+                </a>
+                .
+              </p>
             )}
           </>
         )}

@@ -26,7 +26,7 @@ export function MatomoInit({ session }: { session: ISession | null }) {
               _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
               `,
         }}
-      ></script>
+      />
       <div
         dangerouslySetInnerHTML={{
           __html: `

@@ -73,7 +73,9 @@ const SubventionDetails: React.FC<{
       <p>
         Pour en savoir plus, vous pouvez consulter{" "}
         <a
-          aria-label={`Voir la page de l’association sur le site de data.subvention`}
+          aria-label={
+            "Voir la page de l’association sur le site de data.subvention"
+          }
           href={routes.dataSubvention.pageBySirenOrIdRna(siren)}
           rel="noreferrer noopener"
           target="_blank"
@@ -187,7 +189,7 @@ export default function SubventionsAssociationSection({
                     defaultValue={""}
                     name="Filtrer par année"
                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                      setSelectedYear(parseInt(e.target.value, 10));
+                      setSelectedYear(Number.parseInt(e.target.value, 10));
                     }}
                     options={allYears}
                     placeholder="Toutes les années"

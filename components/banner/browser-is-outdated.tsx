@@ -44,7 +44,7 @@ export function BrowserIsOutdatedBanner({ children }: { children: ReactNode }) {
         })()
         `,
         }}
-      ></script>
+      />
     </>
   );
 }

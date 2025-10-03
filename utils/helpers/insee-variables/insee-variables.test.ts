@@ -49,4 +49,3 @@ describe("Check etatFromEtatAdministratifInsee", () => {
     );
   });
 });
-export {};

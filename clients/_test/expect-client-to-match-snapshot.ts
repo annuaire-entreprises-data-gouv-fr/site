@@ -30,9 +30,8 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
       if (e instanceof HttpServerError || e instanceof HttpTimeoutError) {
         console.warn("Could not test siret client (api not responding)");
         return;
-      } else {
-        throw e;
       }
+      throw e;
     }
   } finally {
     if (!result) {

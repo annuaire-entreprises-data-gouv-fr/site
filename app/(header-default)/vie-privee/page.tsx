@@ -384,7 +384,7 @@ const Privacy = () => (
         width: "100%",
       }}
       title="Optout cookie"
-    ></iframe>
+    />
 
     <p>
       Pour aller plus loin, vous pouvez consulter les ﬁches proposées par la

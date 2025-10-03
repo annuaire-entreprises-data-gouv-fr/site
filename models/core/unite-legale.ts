@@ -179,31 +179,30 @@ class UniteLegaleBuilder {
        */
       if (isAPI404(uniteLegaleRechercheEntreprise)) {
         return this.fallBackOnIG();
-      } else if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
+      }
+      if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
         throw new HttpServerError("Both API failed");
-      } else {
-        return uniteLegaleRechercheEntreprise;
       }
-    } else {
-      /**
-       * Sirene succeed but siren not in recherhce or recherche failed
-       */
-      if (
-        isAPINotResponding(uniteLegaleRechercheEntreprise) ||
-        isAPI404(uniteLegaleRechercheEntreprise)
-      ) {
-        logWarningInSentry(
-          new FetchRessourceException({
-            ressource: "UniteLegaleRecherche",
-            administration: EAdministration.DINUM,
-            message: "Fail to find siren in recherche API",
-            context: {
-              siren: this._siren,
-            },
-          })
-        );
-        return uniteLegaleInsee;
-      }
+      return uniteLegaleRechercheEntreprise;
+    }
+    /**
+     * Sirene succeed but siren not in recherhce or recherche failed
+     */
+    if (
+      isAPINotResponding(uniteLegaleRechercheEntreprise) ||
+      isAPI404(uniteLegaleRechercheEntreprise)
+    ) {
+      logWarningInSentry(
+        new FetchRessourceException({
+          ressource: "UniteLegaleRecherche",
+          administration: EAdministration.DINUM,
+          message: "Fail to find siren in recherche API",
+          context: {
+            siren: this._siren,
+          },
+        })
+      );
+      return uniteLegaleInsee;
     }
 
     /**
@@ -243,19 +242,18 @@ class UniteLegaleBuilder {
 
     if (isAPINotResponding(uniteLegaleGreffe)) {
       throw new SirenNotFoundError(this._siren);
-    } else {
-      logInfoInSentry(
-        new Information({
-          name: "Fallback on IG",
-          message: `Not found in RNE or Sirene, but found in IG`,
-          context: {
-            siren: this._siren,
-          },
-        })
-      );
-
-      return uniteLegaleGreffe;
     }
+    logInfoInSentry(
+      new Information({
+        name: "Fallback on IG",
+        message: "Not found in RNE or Sirene, but found in IG",
+        context: {
+          siren: this._siren,
+        },
+      })
+    );
+
+    return uniteLegaleGreffe;
   };
 }
 
@@ -366,7 +364,7 @@ const fetchUniteLegaleFromIG = async (
       new FetchRessourceException({
         ressource: "UniteLegaleGreffe",
         administration: EAdministration.INFOGREFFE,
-        message: `Fail to fetch from IG API`,
+        message: "Fail to fetch from IG API",
         cause: e,
         context: {
           siren,

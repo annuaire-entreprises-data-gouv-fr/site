@@ -6,10 +6,7 @@ import { verifySiren } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
-export function useFetchAlimConfiance(
-  uniteLegale: IUniteLegale,
-  page: number = 1
-) {
+export function useFetchAlimConfiance(uniteLegale: IUniteLegale, page = 1) {
   return useFetchExternalData(
     {
       fetchData: () =>

@@ -1,7 +1,7 @@
 import parseMarkdownSync, {
   type IMarkdown,
 } from "#components/markdown/parse-markdown";
-/** @ts-ignore */
+/** @ts-expect-error */
 import data from "../../data/changelog.yml";
 
 type IChangelogTarget = {

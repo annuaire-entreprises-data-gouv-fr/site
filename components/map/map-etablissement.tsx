@@ -40,9 +40,10 @@ export function MapEtablissement({
     const zoom = etablissement ? 12 : 4.5;
 
     map.current = new maplibregl.Map({
-      //@ts-ignore
+      //@ts-expect-error
       container: mapContainer.current,
-      style: `https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json`,
+      style:
+        "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json",
       center: coords,
       zoom,
       minZoom: 3,

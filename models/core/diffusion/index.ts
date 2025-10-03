@@ -71,12 +71,11 @@ export const anonymiseUniteLegale = (
 
   if (estDiffusible(uniteLegale)) {
     return uniteLegale;
-  } else {
-    uniteLegale.nomComplet = getNomComplet(uniteLegale, session);
-    uniteLegale.siege = anonymiseEtablissement(uniteLegale.siege, session);
-    uniteLegale.chemin = uniteLegale.siren;
-    return uniteLegale;
   }
+  uniteLegale.nomComplet = getNomComplet(uniteLegale, session);
+  uniteLegale.siege = anonymiseEtablissement(uniteLegale.siege, session);
+  uniteLegale.chemin = uniteLegale.siren;
+  return uniteLegale;
 };
 
 /**
@@ -91,33 +90,32 @@ export const anonymiseEtablissement = (
 ) => {
   if (canSeeNonDiffusible(session) || estDiffusible(etablissement)) {
     return etablissement;
-  } else {
-    const { adressePostale, adresse, commune } = etablissement || {};
-
-    etablissement.adresse = formatAdresseForDiffusion(
-      etablissement,
-      adresse,
-      commune
-    );
-    etablissement.adressePostale = formatAdresseForDiffusion(
-      etablissement,
-      adressePostale,
-      commune
-    );
-
-    // 851915207
-    // should be reverted with https://github.com/annuaire-entreprises-data-gouv-fr/site/pull/1955
-    if (etablissement.siren === "851915207") {
-      etablissement.adresse = "";
-      etablissement.adressePostale = "";
-      etablissement.commune = "";
-      etablissement.codePostal = "";
-    }
-
-    etablissement.enseigne = defaultNonDiffusiblePlaceHolder(etablissement);
-    etablissement.denomination = defaultNonDiffusiblePlaceHolder(etablissement);
-    return etablissement;
   }
+  const { adressePostale, adresse, commune } = etablissement || {};
+
+  etablissement.adresse = formatAdresseForDiffusion(
+    etablissement,
+    adresse,
+    commune
+  );
+  etablissement.adressePostale = formatAdresseForDiffusion(
+    etablissement,
+    adressePostale,
+    commune
+  );
+
+  // 851915207
+  // should be reverted with https://github.com/annuaire-entreprises-data-gouv-fr/site/pull/1955
+  if (etablissement.siren === "851915207") {
+    etablissement.adresse = "";
+    etablissement.adressePostale = "";
+    etablissement.commune = "";
+    etablissement.codePostal = "";
+  }
+
+  etablissement.enseigne = defaultNonDiffusiblePlaceHolder(etablissement);
+  etablissement.denomination = defaultNonDiffusiblePlaceHolder(etablissement);
+  return etablissement;
 };
 
 const anonymiseEtablissements = (

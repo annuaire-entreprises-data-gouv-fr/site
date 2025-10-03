@@ -6,7 +6,7 @@ import { httpGet } from "#utils/network";
 
 export const clientBilanGes = async (
   siren: Siren,
-  page: number = 1
+  page = 1
 ): Promise<IBilanGesResponse> => {
   const response = await httpGet<IBilanGesDatagouvResponse>(
     `${routes.ademe.bilanGes}?qs=siren_principal:"${siren}"&size=20`,

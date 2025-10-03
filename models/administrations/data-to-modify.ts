@@ -8,7 +8,7 @@ const loadDataToModify = () =>
         (datasource.data || []).map(({ label, form = "", targets = [] }) => {
           const slug = slugify(label);
           return {
-            label: label,
+            label,
             slug,
             dataSource: datasource.label,
             datagouvLink: datasource.datagouvLink,

@@ -64,7 +64,7 @@ export const getAllIdccWithMetadata = async (
 
     const metadata = [] as ICCWithMetadata[];
 
-    for (let [idcc, sirets] of Object.entries(allIdcc)) {
+    for (const [idcc, sirets] of Object.entries(allIdcc)) {
       const idccMetadata = await clientIdccMetadata(idcc);
 
       const updates = idccUpdates(idcc);

@@ -35,7 +35,8 @@ function MapWithResults({
 
     map.current = new maplibregl.Map({
       container: mapContainer.current,
-      style: `https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json`,
+      style:
+        "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json",
       center: [2, 47],
       zoom: 4.5,
       minZoom: 3,
@@ -61,8 +62,8 @@ function MapWithResults({
 
         new maplibregl.Marker({ color: constants.colors.frBlue })
           .setLngLat([
-            parseFloat(result.siege.longitude),
-            parseFloat(result.siege.latitude),
+            Number.parseFloat(result.siege.longitude),
+            Number.parseFloat(result.siege.latitude),
           ])
           .setPopup(popup)
           .addTo(map.current!);
@@ -87,8 +88,8 @@ function MapWithResults({
             color: shouldColorZipCode ? "yellow" : constants.colors.pastelBlue,
           })
             .setLngLat([
-              parseFloat(match.longitude),
-              parseFloat(match.latitude),
+              Number.parseFloat(match.longitude),
+              Number.parseFloat(match.latitude),
             ])
             .setPopup(popup)
             .addTo(map.current!);

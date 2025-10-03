@@ -104,7 +104,7 @@ export const OpqibiSection: React.FC<{
                   encore ou pas suffisamment réalisées
                 </FAQLink>
               </h4>
-              <p></p>
+              <p />
               <TwoColumnTable
                 body={[
                   [

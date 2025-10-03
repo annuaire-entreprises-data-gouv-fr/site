@@ -21,29 +21,28 @@ const SCOPES = "openid given_name usual_name email siret idp_id";
 export const getClient = async () => {
   if (_client) {
     return _client;
-  } else {
-    if (
-      !CLIENT_ID ||
-      !ISSUER_URL ||
-      !CLIENT_SECRET ||
-      !REDIRECT_URI ||
-      !POST_LOGOUT_REDIRECT_URI
-    ) {
-      throw new Error("PRO CONNECT ENV variables are not defined");
-    }
-    const proConnectIssuer = await Issuer.discover(ISSUER_URL);
-
-    _client = new proConnectIssuer.Client({
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      redirect_uris: [REDIRECT_URI],
-      post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
-      id_token_signed_response_alg: "RS256",
-      userinfo_signed_response_alg: "RS256",
-    });
-
-    return _client;
   }
+  if (
+    !CLIENT_ID ||
+    !ISSUER_URL ||
+    !CLIENT_SECRET ||
+    !REDIRECT_URI ||
+    !POST_LOGOUT_REDIRECT_URI
+  ) {
+    throw new Error("PRO CONNECT ENV variables are not defined");
+  }
+  const proConnectIssuer = await Issuer.discover(ISSUER_URL);
+
+  _client = new proConnectIssuer.Client({
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    redirect_uris: [REDIRECT_URI],
+    post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
+    id_token_signed_response_alg: "RS256",
+    userinfo_signed_response_alg: "RS256",
+  });
+
+  return _client;
 };
 
 export const proConnectAuthorizeUrl = async (req: IReqWithSession) => {

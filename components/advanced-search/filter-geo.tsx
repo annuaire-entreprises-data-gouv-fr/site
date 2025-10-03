@@ -119,9 +119,8 @@ export const FilterGeo: React.FC<{
       // in case of remaining pending requests
       setLoading(false);
       return;
-    } else {
-      search(searchTerm);
     }
+    search(searchTerm);
   }, [searchTerm, setGeoSuggests, setIssue, labelDep, search]);
 
   // only show suggest history on browser to avoid rehydration conflict with server rendered html

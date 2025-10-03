@@ -31,7 +31,7 @@ export default function LandingPage(props: AppRouterProps) {
   return (
     <>
       <form
-        action={`/rechercher`}
+        action={"/rechercher"}
         className={`${styles["centered-search"]} layout-center`}
         id="search-bar-form"
         method="get"

@@ -48,7 +48,7 @@ export class AgentConnected {
   }
 
   isLikelyPrestataire = () => {
-    for (let bannedDomain of [
+    for (const bannedDomain of [
       "i-carre.net",
       "beta.gouv.fr",
       "code.gouv.fr",
@@ -65,7 +65,7 @@ export class AgentConnected {
     }
 
     if (
-      !!this.email.match(
+      this.email.match(
         /[.@-]*(ext|external|externe|presta|prestataire|consultant)(s)*[.@-]/g
       )
     ) {

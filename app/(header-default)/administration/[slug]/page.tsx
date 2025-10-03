@@ -39,7 +39,8 @@ export const generateMetadata = async (
     title,
     robots: "noindex",
     alternates: {
-      canonical: `https://annuaire-entreprises.data.gouv.fr/administration/slug`,
+      canonical:
+        "https://annuaire-entreprises.data.gouv.fr/administration/slug",
     },
   };
 };

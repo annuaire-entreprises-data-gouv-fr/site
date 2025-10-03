@@ -13,23 +13,21 @@ export async function GET(
         status: 200,
         headers: { "Content-Type": "application/json" },
       });
-    } else {
-      return new Response(JSON.stringify({ message: "ko", status }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
     }
+    return new Response(JSON.stringify({ message: "ko", status }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (e: any) {
     if (e instanceof APISlugNotFound) {
       return new Response(JSON.stringify(e), {
         status: 404,
         headers: { "Content-Type": "application/json" },
       });
-    } else {
-      return new Response(JSON.stringify(e), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
     }
+    return new Response(JSON.stringify(e), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

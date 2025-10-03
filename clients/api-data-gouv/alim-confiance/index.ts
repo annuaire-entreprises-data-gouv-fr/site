@@ -6,7 +6,7 @@ import { httpGet } from "#utils/network";
 
 export const clientAlimConfiance = async (
   siren: Siren,
-  page: number = 1
+  page = 1
 ): Promise<IAlimConfiance> => {
   const response = await httpGet<IAlimConfianceDatagouvResponse>(
     `${routes.datagouv.alimConfiance}?SIRET__sort=asc&SIRET__greater=${siren}00000&SIRET__less=${siren}99999&page=${page}&page_size=20`,

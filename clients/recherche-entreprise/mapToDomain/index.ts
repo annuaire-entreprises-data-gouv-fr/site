@@ -75,7 +75,7 @@ export const mapToDirigeantModel = (
     date_de_naissance = "",
     nationalite = "",
   } = dirigeant;
-  if (!!dirigeant.siren) {
+  if (dirigeant.siren) {
     return {
       siren,
       denomination: `${denomination}${sigle ? ` (${sigle})` : ""}`,

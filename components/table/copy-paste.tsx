@@ -23,7 +23,7 @@ export function CopyPaste({
   children,
   shouldRemoveSpace = false,
   disableCopyIcon = false,
-  id = undefined,
+  id,
   label,
 }: ICopyPasteProps) {
   if (typeof children !== "string") {
@@ -134,8 +134,8 @@ function CopySVG() {
       width="15"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-      <rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <rect height="4" rx="1" ry="1" width="8" x="8" y="2" />
     </svg>
   );
 }

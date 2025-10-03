@@ -30,12 +30,10 @@ const logInSentryFactory =
         scope.setLevel(severity);
         Sentry.captureException(exception, scope);
       });
+    } else if (["fatal", "error"].indexOf(severity) > -1) {
+      console.error(exception, JSON.stringify(exception.context));
     } else {
-      if (["fatal", "error"].indexOf(severity) > -1) {
-        console.error(exception, JSON.stringify(exception.context));
-      } else {
-        console.warn(exception, JSON.stringify(exception.context));
-      }
+      console.warn(exception, JSON.stringify(exception.context));
     }
   };
 

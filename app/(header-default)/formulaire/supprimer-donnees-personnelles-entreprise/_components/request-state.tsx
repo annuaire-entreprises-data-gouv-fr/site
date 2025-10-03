@@ -9,7 +9,47 @@ type IProps = {
 export function RequestState({ hidePersonalDataRequest }: IProps) {
   return (
     <>
-      {!hidePersonalDataRequest ? (
+      {hidePersonalDataRequest ? (
+        hidePersonalDataRequest === "CREATED" ? (
+          <Success full>
+            <strong>Demande prise en compte</strong>
+            <p>
+              Votre demande a bien été prise en compte. Elle sera traitée dans
+              les deux jours ouvrés.
+            </p>
+          </Success>
+        ) : hidePersonalDataRequest === "DENIED" ? (
+          <Error full>
+            <strong>Demande refusée</strong>
+            <p>
+              Votre demande a été refusée. Cela est vraisemblablement dû au fait
+              que vous n’apparaissez pas comme dirigeant de l’entreprise.
+              Veuillez contacter le support de l’annuaire des entreprises pour
+              plus d’informations.
+            </p>
+          </Error>
+        ) : hidePersonalDataRequest === "PENDING" ? (
+          <Info>
+            <strong>Votre demande est en cours</strong>
+            <p>
+              Une précédente demande concernant cette entreprise est déjà en
+              cours de traitement. Cette dernière devrait être traité dans les
+              deux jours ouvrés.
+            </p>
+          </Info>
+        ) : hidePersonalDataRequest === "ACCEPTED" ? (
+          <Success>
+            <strong>Demande déjà traitée</strong>
+            <p>
+              Une précédente demande concernant cette entreprise a déjà été
+              traitée : les informations personnelles de dirigeant ne sont plus
+              affichées sur l’annuaire des entreprises.
+            </p>
+          </Success>
+        ) : (
+          throwUnreachableCaseError(hidePersonalDataRequest)
+        )
+      ) : (
         <div className="fr-callout fr-icon-information-line">
           <h3 className="fr-callout__title">
             Demande à effectuer sur le site de l’INSEE
@@ -27,44 +67,6 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
             Changer mon statut de diffusion
           </ButtonLink>
         </div>
-      ) : hidePersonalDataRequest === "CREATED" ? (
-        <Success full>
-          <strong>Demande prise en compte</strong>
-          <p>
-            Votre demande a bien été prise en compte. Elle sera traitée dans les
-            deux jours ouvrés.
-          </p>
-        </Success>
-      ) : hidePersonalDataRequest === "DENIED" ? (
-        <Error full>
-          <strong>Demande refusée</strong>
-          <p>
-            Votre demande a été refusée. Cela est vraisemblablement dû au fait
-            que vous n’apparaissez pas comme dirigeant de l’entreprise. Veuillez
-            contacter le support de l’annuaire des entreprises pour plus
-            d’informations.
-          </p>
-        </Error>
-      ) : hidePersonalDataRequest === "PENDING" ? (
-        <Info>
-          <strong>Votre demande est en cours</strong>
-          <p>
-            Une précédente demande concernant cette entreprise est déjà en cours
-            de traitement. Cette dernière devrait être traité dans les deux
-            jours ouvrés.
-          </p>
-        </Info>
-      ) : hidePersonalDataRequest === "ACCEPTED" ? (
-        <Success>
-          <strong>Demande déjà traitée</strong>
-          <p>
-            Une précédente demande concernant cette entreprise a déjà été
-            traitée : les informations personnelles de dirigeant ne sont plus
-            affichées sur l’annuaire des entreprises.
-          </p>
-        </Success>
-      ) : (
-        throwUnreachableCaseError(hidePersonalDataRequest)
       )}
       <ul className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center">
         <li>

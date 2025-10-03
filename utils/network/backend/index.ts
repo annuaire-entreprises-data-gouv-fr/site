@@ -28,7 +28,7 @@ const axiosInstanceFactory = (timeout = constants.timeout.L): AxiosInstance => {
 
   const axiosInstance = Axios.create(axiosOptions);
 
-  //@ts-ignore
+  //@ts-expect-error
   axiosInstance.interceptors.request.use(addStartTimeInterceptor, (err) =>
     Promise.reject(err)
   );

@@ -162,9 +162,7 @@ const AssociationSection = ({
         title="Répertoire National des Associations"
       >
         {(association) =>
-          !association ? (
-            <AssociationNotFound uniteLegale={uniteLegale} />
-          ) : (
+          association ? (
             <>
               <AssociationAdressAlert
                 association={association}
@@ -191,6 +189,8 @@ const AssociationSection = ({
                 )}
               />
             </>
+          ) : (
+            <AssociationNotFound uniteLegale={uniteLegale} />
           )
         }
       </AsyncDataSectionClient>

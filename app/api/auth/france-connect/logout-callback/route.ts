@@ -14,9 +14,8 @@ export const GET = withSession(async function logoutCallbackRoute(req) {
 
     if (pathFrom) {
       return NextResponse.redirect(getBaseUrl() + pathFrom);
-    } else {
-      return NextResponse.redirect(getBaseUrl() + "/connexion/au-revoir");
     }
+    return NextResponse.redirect(getBaseUrl() + "/connexion/au-revoir");
   } catch (e: any) {
     logErrorInSentry(new FranceConnectLogoutFailedException({ cause: e }));
     return NextResponse.redirect(getBaseUrl() + "/connexion/au-revoir");

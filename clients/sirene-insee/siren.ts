@@ -257,7 +257,7 @@ const mapToDomainObject = (
       dateMiseAJourInsee: dateDernierTraitement,
       dateMiseAJourInpi: "",
       dateDebutActivite: dateDebut,
-      dateFermeture: !estActif({ etatAdministratif }) ? dateDebut : "",
+      dateFermeture: estActif({ etatAdministratif }) ? "" : dateDebut,
       etatAdministratif,
       statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
         statutDiffusionUniteLegale,

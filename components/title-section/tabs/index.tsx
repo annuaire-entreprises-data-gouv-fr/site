@@ -44,7 +44,7 @@ const getUniteLegaleTabs = (
   return [
     {
       ficheType: FICHE.INFORMATION,
-      label: `Fiche résumé`,
+      label: "Fiche résumé",
       path: `/entreprise/${uniteLegale.chemin}`,
       noFollow: false,
       shouldDisplay: true,

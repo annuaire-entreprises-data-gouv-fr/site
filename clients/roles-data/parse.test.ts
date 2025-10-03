@@ -25,5 +25,3 @@ describe("Scopes validation", () => {
     );
   });
 });
-
-export {};

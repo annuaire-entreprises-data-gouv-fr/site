@@ -27,7 +27,7 @@ const ResultsCounter: React.FC<{
           <div className={styles["results-counter"]}>
             <span>
               {currentPage > 1 && `Page ${currentPage} de `}
-              {resultCount === 10000 && "Plus de "}
+              {resultCount === 10_000 && "Plus de "}
               {resultCount} résultat{plural} trouvé{plural}.
             </span>
           </div>

@@ -91,10 +91,9 @@ export const LocationFilter: React.FC<{
       setLoading(false);
       setOpen(false);
       return;
-    } else {
-      search(searchTerm);
-      setOpen(true);
     }
+    search(searchTerm);
+    setOpen(true);
   }, [searchTerm, setGeoSuggests, setIssue, search]);
 
   return (

@@ -45,7 +45,7 @@ export const ContactAnswer: React.FC<IProps> = ({ session, userType }) => (
         }${session?.user?.fullName ? `&name=${session?.user?.fullName}` : ""}`}
         title="Contact Form"
         width="100%"
-      ></iframe>
+      />
     </div>
     <p>
       <strong>NB :</strong> si votre question concerne une structure en

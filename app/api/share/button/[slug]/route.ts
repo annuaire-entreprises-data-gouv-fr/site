@@ -25,9 +25,9 @@ export async function GET(
     `https://annuaire-entreprises.data.gouv.fr/${path}?mtm_campaign=button-iframe`
   );
 
-  const fontColor = !light ? "#fff" : constants.colors.frBlue;
-  const backgroundColor = !light ? constants.colors.frBlue : "#fff";
-  const hoverBackgroundColor = !light ? "#000060" : "#f0f0ff";
+  const fontColor = light ? constants.colors.frBlue : "#fff";
+  const backgroundColor = light ? "#fff" : constants.colors.frBlue;
+  const hoverBackgroundColor = light ? "#f0f0ff" : "#000060";
 
   const html = `
     <!DOCTYPE html>

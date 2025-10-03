@@ -35,7 +35,7 @@ export const getFaqArticlesByTag = (tagList: string[]): IFaqArticle[] => {
 };
 
 export const allFaqArticles = loadAll<IFaqArticle>(
-  // @ts-ignore
+  // @ts-expect-error
   require.context("data/faq", false, /\.yml$/)
 );
 

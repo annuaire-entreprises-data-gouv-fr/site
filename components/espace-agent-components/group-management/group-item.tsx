@@ -143,9 +143,7 @@ export function GroupItem({
               </p>
             )}
           </div>
-          {!isAdmin ? (
-            <NotAdminTable currentUserEmail={currentUserEmail} group={group} />
-          ) : (
+          {isAdmin ? (
             <>
               <div style={{ alignSelf: "flex-end", marginBottom: "1rem" }}>
                 <div>
@@ -205,6 +203,8 @@ export function GroupItem({
                 head={[`Membres (${group.users.length})`, "Rôle", "Action"]}
               />
             </>
+          ) : (
+            <NotAdminTable currentUserEmail={currentUserEmail} group={group} />
           )}
         </div>
       </div>

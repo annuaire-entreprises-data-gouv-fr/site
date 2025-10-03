@@ -56,11 +56,11 @@ export const MultiChoice: React.FC<IProps> = ({
           ) : (
             <>
               <input
-                checked={!!onClick ? checked : undefined}
-                defaultChecked={!!onClick ? undefined : checked}
+                checked={onClick ? checked : undefined}
+                defaultChecked={onClick ? undefined : checked}
                 id={`${idPrefix}-${index}`}
                 name={name}
-                onChange={!!onClick ? onClick : undefined}
+                onChange={onClick ? onClick : undefined}
                 required={required}
                 tabIndex={-1}
                 type="radio"

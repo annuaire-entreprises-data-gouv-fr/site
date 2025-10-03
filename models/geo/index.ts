@@ -39,18 +39,17 @@ export async function searchGeoElementByText(
     }
 
     return APINotRespondingFactory(EAdministration.DINUM, 404);
-  } else {
-    const [departements, communes, regions, epcis] = await Promise.all([
-      clientDepartementsByName(term),
-      clientCommunesByName(term),
-      clientRegionsByName(term),
-      noEpcis ? [] : clientEpcisByName(term),
-    ]);
-    return [
-      ...regions,
-      ...departements.slice(0, 5),
-      ...epcis.slice(0, 3),
-      ...communes.slice(0, 20),
-    ];
   }
+  const [departements, communes, regions, epcis] = await Promise.all([
+    clientDepartementsByName(term),
+    clientCommunesByName(term),
+    clientRegionsByName(term),
+    noEpcis ? [] : clientEpcisByName(term),
+  ]);
+  return [
+    ...regions,
+    ...departements.slice(0, 5),
+    ...epcis.slice(0, 3),
+    ...communes.slice(0, 20),
+  ];
 }

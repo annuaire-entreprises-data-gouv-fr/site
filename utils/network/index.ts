@@ -13,13 +13,12 @@ export type IDefaultRequestConfig = {
  *
  * i.e. when node starts or web page loads
  */
-let innerClient = initClient();
+const innerClient = initClient();
 async function initClient() {
   if (typeof window === "undefined") {
     return (await import("./backend")).httpBackClient;
-  } else {
-    return (await import("./frontend")).httpFrontClient;
   }
+  return (await import("./frontend")).httpFrontClient;
 }
 
 /**

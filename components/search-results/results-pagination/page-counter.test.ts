@@ -35,5 +35,3 @@ describe("Check page counter helper", () => {
     expect(pages).toStrictEqual([]);
   });
 });
-
-export {};

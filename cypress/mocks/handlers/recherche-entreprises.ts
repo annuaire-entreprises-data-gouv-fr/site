@@ -4,7 +4,7 @@ import path from "path";
 
 function getSnapshots() {
   try {
-    const folderPath = `./cypress/fixtures/recherche-entreprise`;
+    const folderPath = "./cypress/fixtures/recherche-entreprise";
     const files = fs.readdirSync(folderPath);
 
     const jsonFiles = files.filter((file) => file.endsWith(".json"));

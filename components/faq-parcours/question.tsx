@@ -91,7 +91,7 @@ export default function Question({
               }${name ? `&name=${name}` : ""}`}
               title="Contact Form"
               width="100%"
-            ></iframe>
+            />
           </div>
           <p>
             <strong>NB :</strong> si votre question concerne une structure en
@@ -154,12 +154,11 @@ export default function Question({
               .filter((data) => {
                 if (userType === "agent" || userType === "all") {
                   return true;
-                } else {
-                  return (
-                    data.targets.length === 0 ||
-                    data.targets.indexOf(userType) > -1
-                  );
                 }
+                return (
+                  data.targets.length === 0 ||
+                  data.targets.indexOf(userType) > -1
+                );
               })
               .map((data) => ({
                 onClick: () => {
@@ -174,7 +173,7 @@ export default function Question({
         </>
       );
     case EQuestionType.ALL:
-    default:
+    default: {
       let modifyText = " d’une entreprise, association ou administration";
 
       if (userType === "entreprise" || userType === "independant") {
@@ -214,6 +213,7 @@ export default function Question({
           <br />
         </>
       );
+    }
   }
 }
 
