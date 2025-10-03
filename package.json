@@ -88,8 +88,5 @@
     "@swc/core-linux-x64-gnu": "^1.7.36",
     "esbuild-linux-64": "^0.15.18",
     "tsconfig-paths": "^4.2.0"
-  },
-  "volta": {
-    "node": "20.19.5"
   }
 }
