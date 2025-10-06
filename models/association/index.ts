@@ -35,7 +35,7 @@ export const getAssociationFromSlug = async (
   try {
     data = await clientAssociation(siren, uniteLegale.siege.siret);
 
-    if (rna !== data.idAssociation) {
+    if (rna && rna !== data.idAssociation) {
       data = await clientAssociation(rna as IdRna, uniteLegale.siege.siret);
     }
 
