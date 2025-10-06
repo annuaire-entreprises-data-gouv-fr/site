@@ -30,7 +30,7 @@ jobs:
 
       - name: Notify failure
         if: failure()
-        uses: ./.github/actions/notify
+        uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/notify@main
         with:
           message: '🚨 ${{ github.event.repository.name }} : trigger seo workflow failed'
           hook: ${{ secrets.DEV_EVENT_HOOK }}
