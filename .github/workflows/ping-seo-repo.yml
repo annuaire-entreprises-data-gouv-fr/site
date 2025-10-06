@@ -15,9 +15,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Generate GitHub App token
+        id: generate-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.SEO_APP_ID }}
+          private-key: ${{ secrets.SEO_APP_PRIVATE_KEY }}
+          owner: annuaire-entreprises-data-gouv-fr
+          repositories: seo
+
       - name: Trigger workflow in SEO repository
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
           echo "Triggering workflow seo.yml in repository: annuaire-entreprises-data-gouv-fr/seo"
           # Trigger a workflow dispatch event : https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#create-a-workflow-dispatch-event
