@@ -104,7 +104,7 @@ const search = async (
 };
 
 /**
- * Research a search query but remove any protected Siren from result list
+ * Research a search query but remove any protected personne physique from result list
  * @param searchTerm
  * @param page
  * @param searchFilterParams
@@ -123,17 +123,17 @@ export const searchWithoutProtectedSiren = async (
     const currentResult = results.results[i];
     const isProtected = await isProtectedSiren(currentResult.siren);
 
-    if (isProtected) {
-      currentResult.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
-      currentResult.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
-      currentResult.matchingEtablissements.forEach((etablissement) => {
-        etablissement.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
-      });
-    }
-
     if (isProtected && isPersonnePhysique(currentResult)) {
       results.resultCount -= 1;
     } else {
+      if (isProtected) {
+        currentResult.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+        currentResult.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+        currentResult.matchingEtablissements.forEach((etablissement) => {
+          etablissement.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+        });
+      }
+
       newResults.push(anonymiseUniteLegale(currentResult, session));
     }
   }

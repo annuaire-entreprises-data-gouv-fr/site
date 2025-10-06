@@ -10,6 +10,7 @@ import {
   agregateTripleFields,
   extractSirenFromSiret,
   formatAdresse,
+  isEntrepreneurIndividuelFromNatureJuridique,
   type Siret,
 } from "#utils/helpers";
 import { libelleFromCodeNAF } from "#utils/helpers/formatting/labels";
@@ -94,8 +95,7 @@ interface IInseeetablissementUniteLegale {
 export const clientAllEtablissementsInsee = async (
   siren: string,
   page = 1,
-  useFallback: boolean,
-  isEntrepreneurIndividuel: boolean
+  useFallback: boolean
 ): Promise<{
   list: IEtablissement[];
   page: number;
@@ -118,7 +118,7 @@ export const clientAllEtablissementsInsee = async (
     );
 
   const allEtablissements = etablissements.map((e) =>
-    mapEtablissementToDomainObject(e, isEntrepreneurIndividuel)
+    mapEtablissementToDomainObject(e)
   );
 
   return {
@@ -130,8 +130,7 @@ export const clientAllEtablissementsInsee = async (
 
 export const clientEtablissementInsee = async (
   siret: Siret,
-  useFallback: boolean,
-  isEntrepreneurIndividuel: boolean
+  useFallback: boolean
 ) => {
   const { etablissement, etablissements } =
     await inseeClientGet<IInseeEtablissementResponse>(
@@ -142,26 +141,17 @@ export const clientEtablissementInsee = async (
 
   if (!etablissement && etablissements) {
     if (etablissements.length === 1) {
-      return mapEtablissementToDomainObject(
-        etablissements[0],
-        isEntrepreneurIndividuel,
-        siret
-      );
+      return mapEtablissementToDomainObject(etablissements[0], siret);
     }
     throw new HttpServerError(
       "INSEE returns multiple siret for one etablissement"
     );
   }
-  return mapEtablissementToDomainObject(
-    etablissement,
-    isEntrepreneurIndividuel,
-    siret
-  );
+  return mapEtablissementToDomainObject(etablissement, siret);
 };
 
 const mapEtablissementToDomainObject = (
   inseeEtablissement: IInseeEtablissement,
-  isEntrepreneurIndividuel: boolean,
   oldSiret?: Siret
 ): IEtablissement => {
   // There cases of inseeEtablissement undefined.
@@ -183,6 +173,7 @@ const mapEtablissementToDomainObject = (
     adresseEtablissement,
     statutDiffusionEtablissement,
     periodesEtablissement,
+    uniteLegale: { categorieJuridiqueUniteLegale },
   } = inseeEtablissement;
 
   // get last periode to obtain most recent data
@@ -226,7 +217,7 @@ const mapEtablissementToDomainObject = (
   const defaultEtablissement = createDefaultEtablissement();
 
   defaultEtablissement.complements.estEntrepreneurIndividuel =
-    isEntrepreneurIndividuel;
+    isEntrepreneurIndividuelFromNatureJuridique(categorieJuridiqueUniteLegale);
 
   const {
     complementAdresseEtablissement,

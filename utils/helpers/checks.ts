@@ -6,6 +6,7 @@ export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string
 ) => ["1", "10", "1000"].indexOf(natureJuridique) > -1;
 
+// Unités non dotées de la personnalité morale have a nature juridique starting with 2
 export const isSocietePersonnePhysiqueFromNatureJuridique = (
   natureJuridique: string
 ) => natureJuridique.startsWith("2");

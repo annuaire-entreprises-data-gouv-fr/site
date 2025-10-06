@@ -90,13 +90,7 @@ const fetchFromClients = async (
     return etablissementRechercheEntreprise;
   }
 
-  const etablissementInsee = await fetchEtablissmentFromInsee(
-    siret,
-    false,
-    isAPINotResponding(etablissementRechercheEntreprise)
-      ? false
-      : etablissementRechercheEntreprise.complements.estEntrepreneurIndividuel
-  );
+  const etablissementInsee = await fetchEtablissmentFromInsee(siret, false);
 
   /**
    * Nowhere to be found
@@ -152,15 +146,10 @@ const fetchFromClients = async (
 
 const fetchEtablissmentFromInsee = async (
   siret: Siret,
-  useFallback: boolean,
-  isEntrepreneurIndividuel: boolean
+  useFallback: boolean
 ): Promise<IEtablissement | IAPINotRespondingError> => {
   try {
-    return await clientEtablissementInsee(
-      siret,
-      useFallback,
-      isEntrepreneurIndividuel
-    );
+    return await clientEtablissementInsee(siret, useFallback);
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleEtablissement(siret);
@@ -170,11 +159,7 @@ const fetchEtablissmentFromInsee = async (
     }
 
     if (!useFallback) {
-      return await fetchEtablissmentFromInsee(
-        siret,
-        true,
-        isEntrepreneurIndividuel
-      );
+      return await fetchEtablissmentFromInsee(siret, true);
     }
 
     logErrorInSentry(
