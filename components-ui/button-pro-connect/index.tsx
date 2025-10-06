@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import { logConversionEvent } from '#utils/matomo';
-import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
-import { usePathname } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { usePathname } from "next/navigation";
+import type React from "react";
+import { useEffect, useState } from "react";
+import { logConversionEvent } from "#utils/matomo";
+import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 
 type IProps = {
   shouldRedirectToReferer?: boolean;
@@ -13,7 +14,7 @@ type IProps = {
 
 const ButtonProConnect: React.FC<IProps> = ({
   shouldRedirectToReferer = false,
-  event = 'BTN_DEFAULT',
+  event = "BTN_DEFAULT",
   noFootLink = false,
 }) => {
   const [referrer, setReferrer] = useState<string | null>(null);
@@ -34,7 +35,7 @@ const ButtonProConnect: React.FC<IProps> = ({
   return (
     <form action="/api/auth/agent-connect/login" method="get">
       {pathFrom && (
-        <input readOnly hidden aria-hidden name="pathFrom" value={pathFrom} />
+        <input aria-hidden hidden name="pathFrom" readOnly value={pathFrom} />
       )}
       <div className="fr-connect-group">
         <button
@@ -48,8 +49,8 @@ const ButtonProConnect: React.FC<IProps> = ({
           <p>
             <a
               href="https://www.proconnect.gouv.fr/"
-              target="_blank"
               rel="noopener"
+              target="_blank"
               title="Qu'est-ce que ProConnect ? - nouvelle fenêtre"
             >
               Qu’est-ce que ProConnect ?

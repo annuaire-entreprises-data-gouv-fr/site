@@ -1,14 +1,14 @@
-import getContentSecurityPolicy from '#utils/headers/content-security-policy';
-import { getBaseUrl } from '#utils/server-side-helper/app/get-base-url';
-import { SentryBuildOptions, withSentryConfig } from '@sentry/nextjs';
-import { NextConfig } from 'next';
-import redirects from './redirects.json';
+import { type SentryBuildOptions, withSentryConfig } from "@sentry/nextjs";
+import type { NextConfig } from "next";
+import getContentSecurityPolicy from "#utils/headers/content-security-policy";
+import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import redirects from "./redirects.json" with { type: "json" };
 
 const WITH_SENTRY =
-  !!process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.NODE_ENV === 'production';
+  !!process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.NODE_ENV === "production";
 
 const DISABLE_SOURCEMAP_UPLOAD =
-  process.env.SENTRY_DISABLE_SOURCEMAP_UPLOAD === 'true';
+  process.env.SENTRY_DISABLE_SOURCEMAP_UPLOAD === "true";
 
 if (DISABLE_SOURCEMAP_UPLOAD) {
   console.warn(`
@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
     config.module.rules.push({
       test: /\.ya?ml$/,
-      use: 'js-yaml-loader',
+      use: "js-yaml-loader",
     });
     // https://github.com/open-telemetry/opentelemetry-js/issues/4173
     // "Critical dependency: the request of a dependency is an expression"
@@ -41,49 +41,49 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/protected-siren.txt',
-        destination: '/api/protected-siren',
+        source: "/protected-siren.txt",
+        destination: "/api/protected-siren",
       },
     ];
   },
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
           {
-            key: 'Content-Security-Policy',
+            key: "Content-Security-Policy",
             value: getContentSecurityPolicy(),
           },
           {
-            key: 'Access-Control-Allow-Origin',
+            key: "Access-Control-Allow-Origin",
             value: getBaseUrl(),
           },
           {
-            key: 'Access-Control-Allow-Methods',
-            value: 'GET',
+            key: "Access-Control-Allow-Methods",
+            value: "GET",
           },
           {
-            key: 'Access-Control-Max-Age',
-            value: '86400',
-          },
-        ],
-      },
-      {
-        source: '/api/share/button:id(\\d+)',
-        headers: [
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: '*',
+            key: "Access-Control-Max-Age",
+            value: "86400",
           },
         ],
       },
       {
-        source: '/api/(feedback/nps|hide-personal-data)',
+        source: "/api/share/button:id(\\d+)",
         headers: [
           {
-            key: 'Access-Control-Allow-Methods',
-            value: 'POST,OPTIONS',
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+        ],
+      },
+      {
+        source: "/api/(feedback/nps|hide-personal-data)",
+        headers: [
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "POST,OPTIONS",
           },
         ],
       },

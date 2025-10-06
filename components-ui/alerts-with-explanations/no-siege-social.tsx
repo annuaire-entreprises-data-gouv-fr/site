@@ -1,6 +1,6 @@
-import { estNonDiffusibleStrict } from '#models/core/diffusion';
-import { IUniteLegale } from '#models/core/types';
-import { Warning } from '../alerts';
+import { estNonDiffusibleStrict } from "#models/core/diffusion";
+import type { IUniteLegale } from "#models/core/types";
+import { Warning } from "../alerts";
 
 const NoSiegeSocialAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
@@ -10,13 +10,13 @@ const NoSiegeSocialAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
     return null;
   }
 
-  if (uniteLegale.siege.siret !== '') {
+  if (uniteLegale.siege.siret !== "") {
     return null;
   }
 
   return (
     <Warning full>
-      Nous ne disposons pas des informations concernant le{' '}
+      Nous ne disposons pas des informations concernant le{" "}
       <strong>siège social</strong> de cette structure.
     </Warning>
   );

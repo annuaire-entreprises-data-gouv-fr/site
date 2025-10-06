@@ -1,8 +1,11 @@
-import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { APINotRespondingFactory } from '#models/api-not-responding';
-import { FetchRessourceException, IExceptionContext } from '#models/exceptions';
+import { HttpNotFound } from "#clients/exceptions";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { APINotRespondingFactory } from "#models/api-not-responding";
 import {
+  FetchRessourceException,
+  type IExceptionContext,
+} from "#models/exceptions";
+import type {
   IDirigeants,
   IDirigeantsMergedIGInpi,
   IEtatCivil,
@@ -10,9 +13,9 @@ import {
   IPersonneMorale,
   IPersonneMoraleMergedIGInpi,
   IRole,
-} from '#models/rne/types';
-import { isPersonneMorale } from '#utils/helpers/is-personne-morale';
-import logErrorInSentry from '#utils/sentry';
+} from "#models/rne/types";
+import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
+import logErrorInSentry from "#utils/sentry";
 
 export function handleApiEntrepriseError(
   e: any,
@@ -25,7 +28,7 @@ export function handleApiEntrepriseError(
   logErrorInSentry(
     new FetchRessourceException({
       cause: e,
-      ressource: 'APIEntreprise',
+      ressource: "APIEntreprise",
       context,
       administration: EAdministration.DINUM,
     })
@@ -34,23 +37,22 @@ export function handleApiEntrepriseError(
 }
 
 const createUniqueKey = (dirigeant: IEtatCivil | IPersonneMorale): string => {
-  if ('siren' in dirigeant) {
+  if ("siren" in dirigeant) {
     return `pm-${dirigeant.siren}`;
-  } else {
-    const prenoms = dirigeant.prenoms || '';
-    const nom = dirigeant.nom || '';
-
-    const hasNomDeNaissanceMatch = nom.match(/\(([^)]+)\)/);
-    const nomDeNaissance = hasNomDeNaissanceMatch
-      ? hasNomDeNaissanceMatch[1]
-      : nom;
-
-    const partialDate =
-      dirigeant.dateNaissancePartial ||
-      dirigeant.dateNaissance?.slice(0, 7) ||
-      '';
-    return `pf-${prenoms}-${nomDeNaissance}-${partialDate}`;
   }
+  const prenoms = dirigeant.prenoms || "";
+  const nom = dirigeant.nom || "";
+
+  const hasNomDeNaissanceMatch = nom.match(/\(([^)]+)\)/);
+  const nomDeNaissance = hasNomDeNaissanceMatch
+    ? hasNomDeNaissanceMatch[1]
+    : nom;
+
+  const partialDate =
+    dirigeant.dateNaissancePartial ||
+    dirigeant.dateNaissance?.slice(0, 7) ||
+    "";
+  return `pf-${prenoms}-${nomDeNaissance}-${partialDate}`;
 };
 
 export const mergeDirigeants = ({
@@ -73,7 +75,7 @@ export const mergeDirigeants = ({
 
   for (const dirigeant of dirigeants) {
     const { isInInpi, isInIg } = dirigeant;
-    const role = dirigeant.role || '';
+    const role = dirigeant.role || "";
 
     const currentDirigeantKey = createUniqueKey(dirigeant);
 
@@ -99,7 +101,7 @@ export const mergeDirigeants = ({
     }
 
     const foundCleanedRole = mergerolesData[currentDirigeantKey][role];
-    if (role !== '') {
+    if (role !== "") {
       if (!foundCleanedRole) {
         mergerolesData[currentDirigeantKey][role] = {
           label: role,

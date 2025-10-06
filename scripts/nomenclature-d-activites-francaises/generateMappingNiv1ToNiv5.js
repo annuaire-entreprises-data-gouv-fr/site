@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // Read and parse NAF 5 niveaux CSV
-const nafCsvPath = path.join(__dirname, 'naf2008_5_niveaux.csv');
-const nafContent = fs.readFileSync(nafCsvPath, 'utf-8');
-const nafLines = nafContent.split('\n').slice(1); // Skip header
+const nafCsvPath = path.join(__dirname, "naf2008_5_niveaux.csv");
+const nafContent = fs.readFileSync(nafCsvPath, "utf-8");
+const nafLines = nafContent.split("\n").slice(1); // Skip header
 
 // Create mapping from NIV1 to all NIV5 codes
 const niv1ToNiv5Mapping = {};
@@ -13,7 +13,7 @@ nafLines
   .filter((line) => line.trim())
   .forEach((line) => {
     const [niv5, niv4, niv3, niv2, niv1] = line
-      .split(';')
+      .split(";")
       .map((field) => field.trim());
 
     if (niv1 && niv5) {
@@ -38,7 +38,7 @@ export const niv1ToNiv5Mapping: Niv1ToNiv5Mapping = ${JSON.stringify(
 `;
 
 // Write the output to a TypeScript file
-const outputPath = path.join(__dirname, 'niv1ToNiv5Mapping.ts');
+const outputPath = path.join(__dirname, "niv1ToNiv5Mapping.ts");
 fs.writeFileSync(outputPath, tsContent);
 
 // Log summary
@@ -48,7 +48,6 @@ const totalNiv5Count = Object.values(niv1ToNiv5Mapping).reduce(
   0
 );
 
-// eslint-disable-next-line no-console
 console.log(
   `Generated mapping for ${niv1Count} NIV1 codes with ${totalNiv5Count} total NIV5 codes in ${outputPath}`
 );

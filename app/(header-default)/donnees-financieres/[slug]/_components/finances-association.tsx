@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { DJEPVA } from '#components/administrations';
-import { LineChart } from '#components/chart/line';
-import { DataSectionClient } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import constants from '#models/constants';
-import { IAssociation } from '#models/core/types';
-import { formatCurrency } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { DJEPVA } from "#components/administrations";
+import { LineChart } from "#components/chart/line";
+import { DataSectionClient } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { ISession } from "#models/authentication/user/session";
+import constants from "#models/constants";
+import type { IAssociation } from "#models/core/types";
+import { formatCurrency } from "#utils/helpers";
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -41,11 +41,11 @@ export default function FinancesAssociationSection({
 
   return (
     <DataSectionClient
+      data={data}
       id="finances-association"
       notFoundInfo="Aucun indicateur financier n’a été retrouvé pour cette association."
-      title="Indicateurs financiers"
       sources={[EAdministration.DJEPVA]}
-      data={data}
+      title="Indicateurs financiers"
     >
       {(data) =>
         data?.bilans.length === 0 ? (
@@ -59,7 +59,27 @@ export default function FinancesAssociationSection({
               l’association. Ils sont diffusés par la <DJEPVA />.
             </p>
             <LineChart
-              htmlLegendId={'finance-data-legend'}
+              data={{
+                labels: data.bilans.map((bilan) => bilan.year),
+                datasets: [
+                  {
+                    label: "Produit",
+                    tension: 0.3,
+                    data: data.bilans.map((bilan) => bilan.produits ?? 0),
+                    borderColor: colorCA,
+                    backgroundColor: colorCA,
+                  },
+                  {
+                    label: "Resultat",
+                    tension: 0.3,
+                    data: data.bilans.map((bilan) => bilan.resultat ?? 0),
+                    borderColor: colorResultat,
+                    backgroundColor: colorResultat,
+                  },
+                ],
+              }}
+              height={250}
+              htmlLegendId={"finance-data-legend"}
               options={{
                 plugins: {
                   tooltip: {
@@ -77,65 +97,43 @@ export default function FinancesAssociationSection({
                   y: {
                     border: { display: false },
                     ticks: {
-                      callback: (label) => {
-                        return formatCurrency(label.toString());
-                      },
+                      callback: (label) => formatCurrency(label.toString()),
                     },
                   },
                 },
               }}
-              height={250}
-              data={{
-                labels: data.bilans.map((bilan) => bilan.year),
-                datasets: [
-                  {
-                    label: 'Produit',
-                    tension: 0.3,
-                    data: data.bilans.map((bilan) => bilan.produits ?? 0),
-                    borderColor: colorCA,
-                    backgroundColor: colorCA,
-                  },
-                  {
-                    label: 'Resultat',
-                    tension: 0.3,
-                    data: data.bilans.map((bilan) => bilan.resultat ?? 0),
-                    borderColor: colorResultat,
-                    backgroundColor: colorResultat,
-                  },
-                ],
-              }}
             />
             <br />
             <FullTable
-              head={[
-                'Indicateurs',
-                ...data.bilans.map((a) => a?.year.toString()),
-              ]}
               body={[
                 [
                   <>
                     <ColorCircle color={colorCA} /> Total des produits
                   </>,
-                  ...data.bilans.map((a) => formatCurrency(a?.produits ?? '')),
+                  ...data.bilans.map((a) => formatCurrency(a?.produits ?? "")),
                 ],
                 [
-                  'Total des charges',
-                  ...data.bilans.map((a) => formatCurrency(a?.charges ?? '')),
+                  "Total des charges",
+                  ...data.bilans.map((a) => formatCurrency(a?.charges ?? "")),
                 ],
                 [
-                  'Montants des dons perçus',
-                  ...data.bilans.map((a) => formatCurrency(a?.dons ?? '')),
+                  "Montants des dons perçus",
+                  ...data.bilans.map((a) => formatCurrency(a?.dons ?? "")),
                 ],
                 [
-                  'Montants des subventions perçues',
-                  ...data.bilans.map((a) => formatCurrency(a?.subv ?? '')),
+                  "Montants des subventions perçues",
+                  ...data.bilans.map((a) => formatCurrency(a?.subv ?? "")),
                 ],
                 [
                   <>
                     <ColorCircle color={colorResultat} /> Résultat
                   </>,
-                  ...data.bilans.map((a) => formatCurrency(a?.resultat ?? '')),
+                  ...data.bilans.map((a) => formatCurrency(a?.resultat ?? "")),
                 ],
+              ]}
+              head={[
+                "Indicateurs",
+                ...data.bilans.map((a) => a?.year.toString()),
               ]}
             />
           </>

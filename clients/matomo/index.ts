@@ -1,8 +1,8 @@
-import { readFromGrist } from '#clients/external-tooling/grist';
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { FetchRessourceException, InternalError } from '#models/exceptions';
-import httpClient from '#utils/network';
+import { readFromGrist } from "#clients/external-tooling/grist";
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import { FetchRessourceException, InternalError } from "#models/exceptions";
+import httpClient from "#utils/network";
 
 export type IMatomoStats = {
   visits: {
@@ -33,28 +33,33 @@ export type IMatomoStats = {
 
 const getLabel = (labelAsString: string, index: number) => {
   if (
-    labelAsString.indexOf('SIRE') === 0 ||
-    labelAsString.indexOf('Siren') === 0
+    labelAsString.indexOf("SIRE") === 0 ||
+    labelAsString.indexOf("Siren") === 0
   ) {
-    return 'Siret ou siren';
-  } else if (
-    labelAsString.indexOf('Dénom') === 0 ||
-    labelAsString.indexOf('Nom de l’établissement') === 0 ||
-    labelAsString.indexOf('Enseigne') === 0
+    return "Siret ou siren";
+  }
+  if (
+    labelAsString.indexOf("Dénom") === 0 ||
+    labelAsString.indexOf("Nom de l’établissement") === 0 ||
+    labelAsString.indexOf("Enseigne") === 0
   ) {
-    return 'Dénomination ou enseigne';
-  } else if (
-    labelAsString.indexOf('Prénoms') === 0 ||
-    labelAsString.indexOf('Prénom') === 0 ||
-    labelAsString.indexOf('Nom') === 0
+    return "Dénomination ou enseigne";
+  }
+  if (
+    labelAsString.indexOf("Prénoms") === 0 ||
+    labelAsString.indexOf("Prénom") === 0 ||
+    labelAsString.indexOf("Nom") === 0
   ) {
-    return 'Prénom ou nom du dirigeant';
-  } else if (labelAsString.indexOf('Adresse') === 0) {
-    return 'Adresse';
-  } else if (labelAsString.indexOf('NAF/APE') > -1) {
-    return 'Code NAF/APE';
-  } else if (index > 7) {
-    return 'Autre';
+    return "Prénom ou nom du dirigeant";
+  }
+  if (labelAsString.indexOf("Adresse") === 0) {
+    return "Adresse";
+  }
+  if (labelAsString.indexOf("NAF/APE") > -1) {
+    return "Code NAF/APE";
+  }
+  if (index > 7) {
+    return "Autre";
   }
   return labelAsString;
 };
@@ -80,9 +85,9 @@ const computeStats = (
   matomoCopyPasteEventStats: IMatomoEventStat[],
   matomoEventsCategory: IMatomoEventStat[][]
 ) => {
-  const visits = [] as IMatomoStats['visits'];
-  const redirectedSiren = [] as IMatomoStats['redirectedSiren'];
-  const copyPasteAction = [] as IMatomoStats['copyPasteAction'];
+  const visits = [] as IMatomoStats["visits"];
+  const redirectedSiren = [] as IMatomoStats["redirectedSiren"];
+  const copyPasteAction = [] as IMatomoStats["copyPasteAction"];
 
   lastTwelveMonths().forEach(({ label, number }, index) => {
     const {
@@ -114,14 +119,14 @@ const computeStats = (
       label,
       value:
         matomoEventsCategory[index].find(
-          (e) => e.label === 'research:redirected'
+          (e) => e.label === "research:redirected"
         )?.nb_events || 0,
     });
 
     copyPasteAction.push({
       label,
       value:
-        matomoEventsCategory[index].find((e) => e.label === 'action')
+        matomoEventsCategory[index].find((e) => e.label === "action")
           ?.nb_events || 0,
     });
   });
@@ -136,14 +141,14 @@ const computeStats = (
 
   const mostCopied = Object.keys(mostCopiedAggregator)
     .reduce((acc: { label: string; count: number }[], key) => {
-      if (key !== 'Autre') {
+      if (key !== "Autre") {
         acc.push({ label: key, count: mostCopiedAggregator[key] });
       }
       return acc;
     }, [])
     .sort((a, b) => b.count - a.count);
 
-  mostCopied.push({ label: 'Autre', count: mostCopiedAggregator['Autre'] });
+  mostCopied.push({ label: "Autre", count: mostCopiedAggregator["Autre"] });
 
   return {
     copyPasteAction,
@@ -153,19 +158,18 @@ const computeStats = (
   };
 };
 
-const matomoHttpClient = async <T>(url: string) => {
-  return httpClient<T>({
+const matomoHttpClient = async <T>(url: string) =>
+  httpClient<T>({
     url,
     timeout: constants.timeout.XXL,
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     data: new URLSearchParams({
-      token_auth: process.env.MATOMO_TOKEN_AUTH || '',
+      token_auth: process.env.MATOMO_TOKEN_AUTH || "",
     }),
   });
-};
 
 export const clientMatomoStats = async (): Promise<IMatomoStats> => {
   const SITE_ID = process.env.MATOMO_SITE_ID;
@@ -173,7 +177,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
 
   if (!SITE_ID || !API_SITE_ID) {
     throw new InternalError({
-      message: 'Matomo site id (site & API) are required for the stats page',
+      message: "Matomo site id (site & API) are required for the stats page",
     });
   }
 
@@ -205,7 +209,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
     };
   } catch (e: any) {
     throw new FetchRessourceException({
-      ressource: 'MatomoStats',
+      ressource: "MatomoStats",
       cause: e,
     });
   }
@@ -231,9 +235,9 @@ const createPageViewUrl = (siteId: string) => {
 };
 
 const createAgentPageViewUrl = (siteId: string) => {
-  const agentConnecté = encodeURIComponent('Agent connecté');
-  const segment = encodeURIComponent('dimension1==' + agentConnecté);
-  const baseUrl = createPageViewUrl(siteId) + '&segment=' + segment;
+  const agentConnecté = encodeURIComponent("Agent connecté");
+  const segment = encodeURIComponent("dimension1==" + agentConnecté);
+  const baseUrl = createPageViewUrl(siteId) + "&segment=" + segment;
   return baseUrl;
 };
 
@@ -251,7 +255,7 @@ const createEventsCategoryUrl = (siteId: string) => {
  * Fetch from Grist and then aggregate event by month and userType
  */
 const getNpsRecords = async () => {
-  const npsRecords = await readFromGrist('nps-feedbacks');
+  const npsRecords = await readFromGrist("nps-feedbacks");
 
   const months: {
     [monthKey: string]: { [userTypeKey: string]: number[] };
@@ -262,7 +266,7 @@ const getNpsRecords = async () => {
   } = {};
 
   npsRecords.forEach((record) => {
-    const mood = parseInt(record.mood, 10);
+    const mood = Number.parseInt(record.mood, 10);
 
     if (mood === -1 || isNaN(mood)) {
       return;
@@ -272,11 +276,11 @@ const getNpsRecords = async () => {
     const monthLabel = getMonthLabelFromDate(date);
 
     let userType: string = record.visitorType;
-    if (userType === 'Non renseigné') {
-      userType = 'Autre';
+    if (userType === "Non renseigné") {
+      userType = "Autre";
     }
-    if (userType.startsWith('Agent') || userType.startsWith('Super-agent')) {
-      userType = 'Agent public';
+    if (userType.startsWith("Agent") || userType.startsWith("Super-agent")) {
+      userType = "Agent public";
     }
 
     if (!months[monthLabel]) {
@@ -285,12 +289,12 @@ const getNpsRecords = async () => {
     if (!months[monthLabel][userType]) {
       months[monthLabel][userType] = [];
     }
-    if (!months[monthLabel]['all']) {
-      months[monthLabel]['all'] = [];
+    if (!months[monthLabel]["all"]) {
+      months[monthLabel]["all"] = [];
     }
 
     months[monthLabel][userType].push(mood);
-    months[monthLabel]['all'].push(mood);
+    months[monthLabel]["all"].push(mood);
 
     totals[userType] = (totals[userType] || 0) + 1;
   });
@@ -318,7 +322,7 @@ const getNpsRecords = async () => {
     }
   }
 
-  const monthlyNps: IMatomoStats['monthlyNps'] = [];
+  const monthlyNps: IMatomoStats["monthlyNps"] = [];
   lastTwelveMonths().forEach(({ label, number }) => {
     monthlyNps.push({
       number,
@@ -354,14 +358,14 @@ const getLastYear = () => {
 /**
  * format date as string following format YYYY-MM-DD
  */
-const YYYYMMDD = (d: Date) => d.toISOString().split('T')[0];
+const YYYYMMDD = (d: Date) => d.toISOString().split("T")[0];
 
 /**
  * format a date as it's month in french
  */
 const getMonthLabelFromDate = (d: Date) => {
-  const options = { month: 'long', year: 'numeric', timeZone: 'UTC' } as any;
-  return new Intl.DateTimeFormat('fr-FR', options).format(d);
+  const options = { month: "long", year: "numeric", timeZone: "UTC" } as any;
+  return new Intl.DateTimeFormat("fr-FR", options).format(d);
 };
 
 /**

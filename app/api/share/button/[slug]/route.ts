@@ -1,33 +1,33 @@
-import constants from '#models/constants';
-import { Exception } from '#models/exceptions';
-import { isSiren, isSiret } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from "next/server";
+import constants from "#models/constants";
+import { Exception } from "#models/exceptions";
+import { isSiren, isSiret } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
 
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  const light = req.nextUrl.searchParams.get('light');
+  const light = req.nextUrl.searchParams.get("light");
 
   const isSirenOrSiret =
-    typeof slug === 'string' && (isSiren(slug) || isSiret(slug));
+    typeof slug === "string" && (isSiren(slug) || isSiret(slug));
   if (!isSirenOrSiret) {
     return NextResponse.json(
-      { message: 'Slug must be a siren or a siret' },
+      { message: "Slug must be a siren or a siret" },
       { status: 403 }
     );
   }
 
-  const path = `${isSiren(slug) ? 'entreprise' : 'etablissement'}/${slug}`;
+  const path = `${isSiren(slug) ? "entreprise" : "etablissement"}/${slug}`;
   const uri = encodeURI(
     `https://annuaire-entreprises.data.gouv.fr/${path}?mtm_campaign=button-iframe`
   );
 
-  const fontColor = !light ? '#fff' : constants.colors.frBlue;
-  const backgroundColor = !light ? constants.colors.frBlue : '#fff';
-  const hoverBackgroundColor = !light ? '#000060' : '#f0f0ff';
+  const fontColor = light ? constants.colors.frBlue : "#fff";
+  const backgroundColor = light ? "#fff" : constants.colors.frBlue;
+  const hoverBackgroundColor = light ? "#f0f0ff" : "#000060";
 
   const html = `
     <!DOCTYPE html>
@@ -174,14 +174,14 @@ export async function GET(
     return new NextResponse(html, {
       status: 200,
       headers: {
-        'Content-Type': 'text/html; charset=utf-8',
-        'X-Robots-Tag': 'noindex, nofollow',
+        "Content-Type": "text/html; charset=utf-8",
+        "X-Robots-Tag": "noindex, nofollow",
       },
     });
   } catch (e: any) {
     logErrorInSentry(
       new Exception({
-        name: 'ShareButtonGenerationException',
+        name: "ShareButtonGenerationException",
         cause: e,
         context: {
           slug: slug as string,
@@ -189,7 +189,7 @@ export async function GET(
       })
     );
     return NextResponse.json(
-      { message: 'Une erreur est survenue.' },
+      { message: "Une erreur est survenue." },
       { status: 500 }
     );
   }

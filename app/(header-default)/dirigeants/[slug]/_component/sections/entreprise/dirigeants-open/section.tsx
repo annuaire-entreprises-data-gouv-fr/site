@@ -1,16 +1,16 @@
-'use client';
-import routes from '#clients/routes';
-import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
-import { INPI } from '#components/administrations';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { UniteLegalePageLink } from '#components/unite-legale-page-link';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { pluralize } from '#utils/helpers';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import DirigeantsContent from './content';
+"use client";
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import routes from "#clients/routes";
+import { INPI } from "#components/administrations";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { UniteLegalePageLink } from "#components/unite-legale-page-link";
+import InpiPartiallyDownWarning from "#components-ui/alerts-with-explanations/inpi-partially-down";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import { pluralize } from "#utils/helpers";
+import DirigeantsContent from "./content";
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -29,17 +29,17 @@ export default function DirigeantsSection({ uniteLegale, session }: IProps) {
 
   return (
     <AsyncDataSectionClient
-      id="dirigeants-section"
-      title="Dirigeant(s)"
-      sources={[EAdministration.INPI]}
       data={dirigeants}
+      id="dirigeants-section"
       isProtected={false}
       notFoundInfo={
         <>
-          Cette structure n’est pas enregistrée au{' '}
+          Cette structure n’est pas enregistrée au{" "}
           <strong>Registre National des Entreprises (RNE)</strong>
         </>
       }
+      sources={[EAdministration.INPI]}
+      title="Dirigeant(s)"
     >
       {(dirigeants) => {
         const plural = pluralize(dirigeants.data);
@@ -48,7 +48,7 @@ export default function DirigeantsSection({ uniteLegale, session }: IProps) {
             {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}
             {dirigeants.data.length === 0 ? (
               <p>
-                Cette entreprise est enregistrée au{' '}
+                Cette entreprise est enregistrée au{" "}
                 <strong>Registre National des Entreprises (RNE)</strong>, mais
                 n’y possède aucun dirigeant.
               </p>
@@ -56,21 +56,21 @@ export default function DirigeantsSection({ uniteLegale, session }: IProps) {
               <>
                 <p>
                   Cette entreprise possède {dirigeants.data.length} dirigeant
-                  {plural} enregistré{plural} au{' '}
+                  {plural} enregistré{plural} au{" "}
                   <strong>Registre National des Entreprises (RNE)</strong> tenu
                   par l’
-                  <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
+                  <INPI />. Pour en savoir plus, vous pouvez consulter{" "}
                   <UniteLegalePageLink
                     href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
-                    uniteLegale={uniteLegale}
                     siteName="le site de l’INPI"
+                    uniteLegale={uniteLegale}
                   />
                   .
                 </p>
                 <p>
                   <strong>NB :</strong> si vous êtes agent public, vous pouvez
                   accéder à l’état civil complet (lieu et date de naissance
-                  complète) en vous connectant à{' '}
+                  complète) en vous connectant à{" "}
                   <a href="/lp/agent-public">l’espace agent public</a>.
                 </p>
 

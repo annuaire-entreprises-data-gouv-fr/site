@@ -2,42 +2,42 @@ import {
   HttpForbiddenError,
   HttpNotFound,
   HttpServerError,
-} from '#clients/exceptions';
-import { clientEtablissementRechercheEntreprise } from '#clients/recherche-entreprise/siret';
-import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import { isProtectedSiren } from '#models/protected-siren';
+} from "#clients/exceptions";
+import { clientEtablissementRechercheEntreprise } from "#clients/recherche-entreprise/siret";
+import { clientEtablissementInsee } from "#clients/sirene-insee/siret";
+import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
+import { isProtectedSiren } from "#models/protected-siren";
 import {
-  Siret,
   extractNicFromSiret,
   extractSirenFromSiret,
+  type Siret,
   verifySiret,
-} from '#utils/helpers';
+} from "#utils/helpers";
 import logErrorInSentry, {
   logFatalErrorInSentry,
   logWarningInSentry,
-} from '#utils/sentry';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { shouldUseInsee } from '.';
-import { EAdministration } from '../administrations/EAdministration';
+} from "#utils/sentry";
+import getSession from "#utils/server-side-helper/app/get-session";
+import { EAdministration } from "../administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
-} from '../api-not-responding';
-import { FetchRessourceException, IExceptionContext } from '../exceptions';
+} from "../api-not-responding";
+import { FetchRessourceException, type IExceptionContext } from "../exceptions";
+import { shouldUseInsee } from ".";
 import {
-  ISTATUTDIFFUSION,
   anonymiseEtablissement,
   estDiffusible,
-} from './diffusion';
+  ISTATUTDIFFUSION,
+} from "./diffusion";
 import {
-  IEtablissement,
-  IEtablissementWithUniteLegale,
-  SiretNotFoundError,
   createDefaultEtablissement,
-} from './types';
+  type IEtablissement,
+  type IEtablissementWithUniteLegale,
+  SiretNotFoundError,
+} from "./types";
 
 /*
  * Return an etablissement given an existing siret
@@ -86,7 +86,7 @@ const fetchFromClients = async (
       throw new SiretNotFoundError(siret);
     }
     if (isAPINotResponding(etablissementRechercheEntreprise)) {
-      throw new HttpServerError('Recherche failed, return 500');
+      throw new HttpServerError("Recherche failed, return 500");
     }
     return etablissementRechercheEntreprise;
   }
@@ -109,31 +109,30 @@ const fetchFromClients = async (
      */
     if (isAPI404(etablissementRechercheEntreprise)) {
       throw new SiretNotFoundError(siret);
-    } else if (isAPINotResponding(etablissementRechercheEntreprise)) {
-      throw new HttpServerError('Both API failed');
-    } else {
-      return etablissementRechercheEntreprise;
     }
-  } else {
-    /**
-     * Sirene succeed but siret is not in recherhce or recherche failed
-     */
-    if (
-      isAPINotResponding(etablissementRechercheEntreprise) ||
-      isAPI404(etablissementRechercheEntreprise)
-    ) {
-      logWarningInSentry(
-        new FetchRessourceException({
-          ressource: 'UniteLegaleRecherche',
-          administration: EAdministration.DINUM,
-          message: 'Fail to find siret in recherche API',
-          context: {
-            siret,
-          },
-        })
-      );
-      return etablissementInsee;
+    if (isAPINotResponding(etablissementRechercheEntreprise)) {
+      throw new HttpServerError("Both API failed");
     }
+    return etablissementRechercheEntreprise;
+  }
+  /**
+   * Sirene succeed but siret is not in recherhce or recherche failed
+   */
+  if (
+    isAPINotResponding(etablissementRechercheEntreprise) ||
+    isAPI404(etablissementRechercheEntreprise)
+  ) {
+    logWarningInSentry(
+      new FetchRessourceException({
+        ressource: "UniteLegaleRecherche",
+        administration: EAdministration.DINUM,
+        message: "Fail to find siret in recherche API",
+        context: {
+          siret,
+        },
+      })
+    );
+    return etablissementInsee;
   }
 
   // default case
@@ -166,7 +165,7 @@ const fetchEtablissmentFromInsee = async (
 
     logErrorInSentry(
       new FetchEtablissementException({
-        message: 'Fail to fetch from INSEE API',
+        message: "Fail to fetch from INSEE API",
         cause: e,
         administration: EAdministration.INSEE,
         context: {
@@ -194,7 +193,7 @@ const fetchEtablissementFromRechercheEntreprise = async (
 
     logFatalErrorInSentry(
       new FetchEtablissementException({
-        message: 'Fail to fetch from Search API',
+        message: "Fail to fetch from Search API",
         cause: e,
         administration: EAdministration.DINUM,
         context: {
@@ -217,7 +216,7 @@ class FetchEtablissementException extends FetchRessourceException {
   constructor(args: IFetchEtablissementExceptionArgs) {
     super({
       ...args,
-      ressource: 'Etablissement',
+      ressource: "Etablissement",
     });
   }
 }

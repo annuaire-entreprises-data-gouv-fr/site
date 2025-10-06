@@ -1,15 +1,15 @@
-import FAQLink from '#components-ui/faq-link';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
-import ChangelogWithFilters from './_components';
+import type { Metadata } from "next";
+import FAQLink from "#components-ui/faq-link";
+import getSession from "#utils/server-side-helper/app/get-session";
+import ChangelogWithFilters from "./_components";
 
 export const metadata: Metadata = {
-  title: 'Historique des changements',
+  title: "Historique des changements",
   alternates: {
     canonical:
-      'https://annuaire-entreprises.data.gouv.fr/historique-des-modifications',
+      "https://annuaire-entreprises.data.gouv.fr/historique-des-modifications",
   },
-  robots: 'noindex, follow',
+  robots: "noindex, follow",
 };
 
 export default async function ChangelogPage() {
@@ -18,7 +18,7 @@ export default async function ChangelogPage() {
     <>
       <h1>Quoi de neuf sur l’Annuaire des Entreprises ?</h1>
       <p>
-        Retrouvez les nouveautés du{' '}
+        Retrouvez les nouveautés du{" "}
         <FAQLink tooltipLabel="Site public">
           Ensemble des pages accessibles à tous les internautes, gratuitement et
           sans création de compte

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
-import constants from '#models/constants';
-import { useRef, useState } from 'react';
-import styles from './styles.module.css';
+import { useRef, useState } from "react";
+import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
+import constants from "#models/constants";
+import styles from "./styles.module.css";
 
 interface SiretFilterProps {
   siretsAndSirens: string[];
@@ -27,8 +27,8 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
   const processFile = (file: File) => {
     setError(null);
 
-    if (file.type !== 'text/plain' && !file.name.endsWith('.txt')) {
-      setError('Veuillez sélectionner un fichier .txt');
+    if (file.type !== "text/plain" && !file.name.endsWith(".txt")) {
+      setError("Veuillez sélectionner un fichier .txt");
       return;
     }
 
@@ -37,13 +37,13 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
       try {
         const content = e.target?.result as string;
         const lines = content
-          .split('\n')
+          .split("\n")
           .map((line) => line.trim())
           .filter((line) => line.length > 0);
 
         if (lines.length > 500) {
           setError(
-            'Le fichier contient plus de 500 lignes. Vous ne pouvez pas charger plus de 500 lignes.'
+            "Le fichier contient plus de 500 lignes. Vous ne pouvez pas charger plus de 500 lignes."
           );
           return;
         }
@@ -63,10 +63,10 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
         onSiretsAndSirensChange(validValues);
 
         if (validValues.length === 0) {
-          setError('Aucun SIREN ou SIRET valide trouvé dans le fichier');
+          setError("Aucun SIREN ou SIRET valide trouvé dans le fichier");
         }
       } catch (err) {
-        setError('Erreur lors de la lecture du fichier');
+        setError("Erreur lors de la lecture du fichier");
       }
     };
 
@@ -76,9 +76,9 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === 'dragenter' || e.type === 'dragover') {
+    if (e.type === "dragenter" || e.type === "dragover") {
       setDragActive(true);
-    } else if (e.type === 'dragleave') {
+    } else if (e.type === "dragleave") {
       setDragActive(false);
     }
   };
@@ -103,7 +103,7 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
     onSiretsAndSirensChange([]);
     setError(null);
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   };
 
@@ -116,7 +116,7 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
       </h2>
       <div>
         Plutôt d’utiliser des critères de recherche, vous pouvez nous fournir
-        directement une liste de SIREN / SIRET. Assurez-vous que la liste soit{' '}
+        directement une liste de SIREN / SIRET. Assurez-vous que la liste soit{" "}
         <FAQLink tooltipLabel="correctement mise en page">
           <div>
             <strong>Format requis :</strong>
@@ -140,7 +140,7 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
       <div className={styles.siretContainer}>
         <div
           className={`${styles.fileUploadArea} ${
-            dragActive ? styles.dragActive : ''
+            dragActive ? styles.dragActive : ""
           }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -148,14 +148,14 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
           onDrop={handleDrop}
         >
           <input
-            ref={fileInputRef}
-            type="file"
             accept=".txt"
-            onChange={handleFileInput}
             className={styles.fileInput}
             id="siret-file-input"
+            onChange={handleFileInput}
+            ref={fileInputRef}
+            type="file"
           />
-          <label htmlFor="siret-file-input" className={styles.fileUploadLabel}>
+          <label className={styles.fileUploadLabel} htmlFor="siret-file-input">
             <Icon color={constants.colors.frBlue} slug="download" />
             <span>
               Glissez-déposez votre fichier .txt ici ou cliquez pour le
@@ -175,9 +175,9 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
             <div className={styles.siretListHeader}>
               <h3>Sélection actuelle ({siretsAndSirens.length})</h3>
               <button
-                type="button"
                 className="fr-btn fr-btn--sm fr-btn--secondary"
                 onClick={clearSiretList}
+                type="button"
               >
                 Effacer la liste
               </button>
@@ -185,7 +185,7 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
 
             <div className={styles.siretList}>
               {siretsAndSirens.slice(0, 10).map((siret, index) => (
-                <span key={index} className="fr-tag">
+                <span className="fr-tag" key={index}>
                   {siret}
                 </span>
               ))}

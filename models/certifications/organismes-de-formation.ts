@@ -1,13 +1,13 @@
-import { HttpNotFound } from '#clients/exceptions';
-import { clientOrganismeFormation } from '#clients/open-data-soft/clients/qualiopi';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { HttpNotFound } from "#clients/exceptions";
+import { clientOrganismeFormation } from "#clients/open-data-soft/clients/qualiopi";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { FetchRessourceException } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '../core/types';
+  type IAPINotRespondingError,
+} from "#models/api-not-responding";
+import { FetchRessourceException } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import type { IUniteLegale } from "../core/types";
 
 export type IOrganismeFormation = {
   records: {
@@ -29,7 +29,7 @@ export const getOrganismesDeFormation = async (
 ): Promise<IOrganismeFormation | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.estOrganismeFormation) {
-      throw new HttpNotFound('Not organisme de formation');
+      throw new HttpNotFound("Not organisme de formation");
     }
     return await clientOrganismeFormation(uniteLegale.siren);
   } catch (e: any) {
@@ -39,7 +39,7 @@ export const getOrganismesDeFormation = async (
     logErrorInSentry(
       new FetchRessourceException({
         cause: e,
-        ressource: 'OrganismeFormation',
+        ressource: "OrganismeFormation",
         context: {
           siren: uniteLegale.siren,
         },

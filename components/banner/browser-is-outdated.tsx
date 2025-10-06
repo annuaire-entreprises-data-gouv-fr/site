@@ -1,14 +1,14 @@
-import { PrintNever } from '#components-ui/print-visibility';
-import { ReactNode } from 'react';
+import type { ReactNode } from "react";
+import { PrintNever } from "#components-ui/print-visibility";
 
 export function BrowserIsOutdatedBanner({ children }: { children: ReactNode }) {
   return (
     <>
       <PrintNever>
         <div
+          aria-label="Votre navigateur est obsolète"
           id="browser-is-outdated"
           role="dialog"
-          aria-label="Votre navigateur est obsolète"
         />
       </PrintNever>
 
@@ -44,7 +44,7 @@ export function BrowserIsOutdatedBanner({ children }: { children: ReactNode }) {
         })()
         `,
         }}
-      ></script>
+      />
     </>
   );
 }

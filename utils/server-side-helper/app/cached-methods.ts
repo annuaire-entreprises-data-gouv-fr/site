@@ -1,18 +1,18 @@
-import { HttpNotFound } from '#clients/exceptions';
-import { getEtablissementWithUniteLegaleFromSlug } from '#models/core/etablissement';
+import { redirect } from "next/navigation";
+import { cache } from "react";
+import { HttpNotFound } from "#clients/exceptions";
+import { getEtablissementWithUniteLegaleFromSlug } from "#models/core/etablissement";
 import {
   FetchRechercheEntrepriseException,
   NotASirenError,
   NotASiretError,
   SirenNotFoundError,
   SiretNotFoundError,
-} from '#models/core/types';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import { Exception } from '#models/exceptions';
-import { extractSirenOrSiretSlugFromUrl } from '#utils/helpers';
-import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
-import { redirect } from 'next/navigation';
-import { cache } from 'react';
+} from "#models/core/types";
+import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
+import { Exception } from "#models/exceptions";
+import { extractSirenOrSiretSlugFromUrl } from "#utils/helpers";
+import { logFatalErrorInSentry, logWarningInSentry } from "#utils/sentry";
 
 const handleException = (e: any, slug: string) => {
   if (
@@ -22,31 +22,31 @@ const handleException = (e: any, slug: string) => {
   ) {
     logWarningInSentry(
       new Exception({
-        name: 'PageNotFoundException',
+        name: "PageNotFoundException",
         cause: e,
         context: { slug },
       })
     );
-    redirect('/404');
+    redirect("/404");
   } else if (
     e instanceof SirenNotFoundError ||
     e instanceof SiretNotFoundError
   ) {
     logWarningInSentry(
       new Exception({
-        name: 'SirenNotFoundOrInvalid',
+        name: "SirenNotFoundOrInvalid",
         cause: e,
         context: { slug },
       })
     );
-    redirect('/erreur/introuvable/' + slug);
+    redirect("/erreur/introuvable/" + slug);
   } else if (e instanceof FetchRechercheEntrepriseException) {
     logFatalErrorInSentry(e);
     throw e;
   } else {
     logFatalErrorInSentry(
       new Exception({
-        name: 'ServerErrorPageException',
+        name: "ServerErrorPageException",
         cause: e,
         context: { slug },
       })

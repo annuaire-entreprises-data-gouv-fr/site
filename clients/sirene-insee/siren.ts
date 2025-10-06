@@ -1,36 +1,36 @@
-import { HttpForbiddenError } from '#clients/exceptions';
-import routes from '#clients/routes';
-import { createNonDiffusibleEtablissement } from '#models/core/etablissement';
-import { createEtablissementsList } from '#models/core/etablissements-list';
-import { estActif } from '#models/core/etat-administratif';
+import { HttpForbiddenError } from "#clients/exceptions";
+import routes from "#clients/routes";
+import { createNonDiffusibleEtablissement } from "#models/core/etablissement";
+import { createEtablissementsList } from "#models/core/etablissements-list";
+import { estActif } from "#models/core/etat-administratif";
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
-  IUniteLegale,
-} from '#models/core/types';
+  type IUniteLegale,
+} from "#models/core/types";
 import {
   agregateTripleFields,
   capitalize,
   formatNameFull,
   isEntrepreneurIndividuelFromNatureJuridique,
-  Siren,
-  Siret,
-} from '#utils/helpers';
+  type Siren,
+  type Siret,
+} from "#utils/helpers";
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAF,
-} from '#utils/helpers/formatting/labels';
-import { inseeClientGet } from '.';
+} from "#utils/helpers/formatting/labels";
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
-} from '../../utils/helpers/insee-variables';
-import { formatDenominationUsuelle } from './helpers';
+} from "../../utils/helpers/insee-variables";
+import { inseeClientGet } from ".";
+import { formatDenominationUsuelle } from "./helpers";
 import {
   clientAllEtablissementsInsee,
   clientEtablissementInsee,
-} from './siret';
+} from "./siret";
 
 type IInseeUniteLegaleResponse = {
   uniteLegale: {
@@ -49,7 +49,7 @@ type IInseeUniteLegaleResponse = {
     prenom3UniteLegale: string;
     prenom4UniteLegale: string;
     prenomUsuelUniteLegale: string;
-    sexeUniteLegale: 'M' | 'F';
+    sexeUniteLegale: "M" | "F";
     identifiantAssociationUniteLegale: string | null;
   };
 };
@@ -105,11 +105,11 @@ export const clientUniteLegaleInsee = async (
   const siege = realSiege || uniteLegale.siege;
 
   const denominationUsuelle =
-    siege?.denomination || tmpUniteLegale.denominationUsuelle || '';
+    siege?.denomination || tmpUniteLegale.denominationUsuelle || "";
 
   const nomComplet = `${tmpUniteLegale.denomination}${
-    denominationUsuelle ? ` (${denominationUsuelle})` : ''
-  }${tmpUniteLegale.sigle ? ` (${tmpUniteLegale.sigle})` : ''}`;
+    denominationUsuelle ? ` (${denominationUsuelle})` : ""
+  }${tmpUniteLegale.sigle ? ` (${tmpUniteLegale.sigle})` : ""}`;
 
   const etablissementsList = allEtablissements?.list || [siege];
   etablissementsList.forEach(
@@ -164,7 +164,7 @@ const mapToDomainObject = (
   const {
     nicSiegeUniteLegale,
     dateDebut,
-    activitePrincipaleUniteLegale = '',
+    activitePrincipaleUniteLegale = "",
     nomenclatureActivitePrincipaleUniteLegale,
     categorieJuridiqueUniteLegale,
     denominationUniteLegale,
@@ -191,10 +191,10 @@ const mapToDomainObject = (
     siege.siren = siren;
     siege.siret = (siren + nicSiegeUniteLegale) as Siret;
     siege.dateCreation = dateDebut;
-    siege.activitePrincipale = '';
-    siege.libelleActivitePrincipale = '';
+    siege.activitePrincipale = "";
+    siege.libelleActivitePrincipale = "";
     siege.estSiege = true;
-    siege.trancheEffectif = '';
+    siege.trancheEffectif = "";
   }
 
   /**
@@ -208,7 +208,7 @@ const mapToDomainObject = (
       formatDenominationUsuelle(denominationUsuelle2UniteLegale),
       formatDenominationUsuelle(denominationUsuelle3UniteLegale)
     ) ||
-    '';
+    "";
 
   // EI names and firstName
   // remove trailing whitespace in case name or firstname is missing
@@ -223,8 +223,8 @@ const mapToDomainObject = (
     categorieJuridiqueUniteLegale
   );
 
-  const dateDernierTraitement = (dateDernierTraitementUniteLegale || '').split(
-    'T'
+  const dateDernierTraitement = (dateDernierTraitementUniteLegale || "").split(
+    "T"
   )[0];
 
   const etatAdministratif = etatFromEtatAdministratifInsee(
@@ -245,7 +245,7 @@ const mapToDomainObject = (
             .filter((e) => e !== siege.siret)
         )
       ),
-      natureJuridique: categorieJuridiqueUniteLegale || '',
+      natureJuridique: categorieJuridiqueUniteLegale || "",
       libelleNatureJuridique: libelleFromCategoriesJuridiques(
         categorieJuridiqueUniteLegale
       ),
@@ -255,26 +255,26 @@ const mapToDomainObject = (
       dateCreation: parseDateCreationInsee(dateCreationUniteLegale),
       dateDerniereMiseAJour: new Date().toISOString(),
       dateMiseAJourInsee: dateDernierTraitement,
-      dateMiseAJourInpi: '',
+      dateMiseAJourInpi: "",
       dateDebutActivite: dateDebut,
-      dateFermeture: !estActif({ etatAdministratif }) ? dateDebut : '',
+      dateFermeture: estActif({ etatAdministratif }) ? "" : dateDebut,
       etatAdministratif,
       statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
         statutDiffusionUniteLegale,
         siren
       ),
-      nomComplet: '',
+      nomComplet: "",
       chemin: siren,
       trancheEffectif:
         trancheEffectifsUniteLegale ??
-        (caractereEmployeurUniteLegale === 'N' ? 'N' : null),
+        (caractereEmployeurUniteLegale === "N" ? "N" : null),
       anneeTrancheEffectif: anneeEffectifsUniteLegale,
       categorieEntreprise,
       anneeCategorieEntreprise,
       complements: {
         ...defaultUniteLegale.complements,
         estEntrepreneurIndividuel,
-        estEss: economieSocialeSolidaireUniteLegale === 'O',
+        estEss: economieSocialeSolidaireUniteLegale === "O",
       },
       association: {
         idAssociation: identifiantAssociationUniteLegale || null,
@@ -282,7 +282,7 @@ const mapToDomainObject = (
     },
     tmpUniteLegale: {
       denominationUsuelle: denominationUsuelleUniteLegale,
-      denomination: denominationUniteLegale || names || 'Nom inconnu',
+      denomination: denominationUniteLegale || names || "Nom inconnu",
       sigle: sigleUniteLegale,
     },
   };

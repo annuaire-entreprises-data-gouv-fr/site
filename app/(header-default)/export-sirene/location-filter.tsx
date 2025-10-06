@@ -1,15 +1,20 @@
-'use client';
+"use client";
 
-import { IGeoElement } from '#clients/geo';
-import { Info, Warning } from '#components-ui/alerts';
-import FloatingModal from '#components-ui/floating-modal';
-import { Loader } from '#components-ui/loader';
-import { isAPI404, isAPINotResponding } from '#models/api-not-responding';
-import { searchGeoElementByText } from '#models/geo';
-import { debounce } from '#utils/helpers/debounce';
-import { useOutsideClick } from 'hooks';
-import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
-import styles from './styles.module.css';
+import { useOutsideClick } from "hooks";
+import {
+  type KeyboardEventHandler,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import type { IGeoElement } from "#clients/geo";
+import { Info, Warning } from "#components-ui/alerts";
+import FloatingModal from "#components-ui/floating-modal";
+import { Loader } from "#components-ui/loader";
+import { isAPI404, isAPINotResponding } from "#models/api-not-responding";
+import { searchGeoElementByText } from "#models/geo";
+import { debounce } from "#utils/helpers/debounce";
+import styles from "./styles.module.css";
 
 enum Issue {
   NONE = 2,
@@ -18,7 +23,7 @@ enum Issue {
 }
 
 export const LocationFilter: React.FC<{
-  onSelect: (type: 'cp' | 'dep' | 'reg', value: string, label: string) => void;
+  onSelect: (type: "cp" | "dep" | "reg", value: string, label: string) => void;
 }> = ({ onSelect }) => {
   const [open, setOpen] = useState(false);
   const ref = useOutsideClick(() => {
@@ -26,11 +31,10 @@ export const LocationFilter: React.FC<{
   });
 
   const [issue, setIssue] = useState(Issue.NONE);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [geoSuggests, setGeoSuggests] = useState<IGeoElement[]>([]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const search = useCallback(
     debounce(async (term: string) => {
       setLoading(true);
@@ -59,8 +63,8 @@ export const LocationFilter: React.FC<{
   const selectDep = ({ label, value, type }: IGeoElement) => {
     setGeoSuggests([]);
     setSearchTerm(label);
-    onSelect(type as 'cp' | 'dep' | 'reg', value, label);
-    setSearchTerm('');
+    onSelect(type as "cp" | "dep" | "reg", value, label);
+    setSearchTerm("");
   };
 
   const onChange = (inputElement: any) => {
@@ -86,18 +90,18 @@ export const LocationFilter: React.FC<{
       setLoading(false);
       setOpen(false);
       return;
-    } else {
-      search(searchTerm);
-      setOpen(true);
     }
+    search(searchTerm);
+    setOpen(true);
   }, [searchTerm, setGeoSuggests, setIssue, search]);
 
   return (
-    <div ref={ref} className={styles['location-filter-container']}>
+    <div className={styles["location-filter-container"]} ref={ref}>
       <label htmlFor="geo-search-input">Ville, département ou région :</label>
       <input
-        id="geo-search-input"
+        autoComplete="off"
         className="fr-input"
+        id="geo-search-input"
         onChange={onChange}
         onFocus={() => {
           if (geoSuggests.length > 0) {
@@ -106,15 +110,14 @@ export const LocationFilter: React.FC<{
         }}
         onKeyDown={onKeyDown}
         placeholder="Saisir une ville, département ou région"
-        autoComplete="off"
         type="search"
         value={searchTerm}
       />
       <FloatingModal
-        className={styles['location-filter-modal-container']}
-        style={{ display: open ? 'block' : 'none' }}
-        aria-label={'Les filtres de localisation'}
+        aria-label={"Les filtres de localisation"}
         aria-modal={false}
+        className={styles["location-filter-modal-container"]}
+        style={{ display: open ? "block" : "none" }}
       >
         {issue !== Issue.NONE ? (
           issue === Issue.NORESULT ? (
@@ -134,8 +137,8 @@ export const LocationFilter: React.FC<{
             ) : (
               geoSuggests.map((suggest: IGeoElement) => (
                 <div
-                  key={suggest.label}
                   className="suggest cursor-pointer"
+                  key={suggest.label}
                   onClick={() => selectDep(suggest)}
                 >
                   {suggest.label}

@@ -1,7 +1,6 @@
-import React from 'react';
+import type React from "react";
 
-const generateFAQuestion = (question: string, answer: string): String => {
-  return `{
+const generateFAQuestion = (question: string, answer: string): String => `{
     "@type": "Question",
     "name": ${JSON.stringify(question)},
     "acceptedAnswer": {
@@ -9,22 +8,21 @@ const generateFAQuestion = (question: string, answer: string): String => {
       "text": ${JSON.stringify(answer)}
     }
   }`;
-};
 
 const StructuredDataFAQ: React.FC<{ data: string[][] }> = ({ data }) => (
   <script
-    type="application/ld+json"
     dangerouslySetInnerHTML={{
       __html: `{
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [${data
           .map((elem) => generateFAQuestion(elem[0], elem[1]))
-          .join(',')}]
+          .join(",")}]
       }
       `,
     }}
-  ></script>
+    type="application/ld+json"
+  />
 );
 
 export default StructuredDataFAQ;

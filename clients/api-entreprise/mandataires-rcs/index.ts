@@ -1,17 +1,21 @@
-import routes from '#clients/routes';
-import { IDirigeants, IEtatCivil, IPersonneMorale } from '#models/rne/types';
+import routes from "#clients/routes";
+import type {
+  IDirigeants,
+  IEtatCivil,
+  IPersonneMorale,
+} from "#models/rne/types";
 import {
   formatFirstNames,
   formatLastName,
   formatRole,
-  Siren,
-} from '#utils/helpers';
-import clientAPIEntreprise, { IAPIEntrepriseResponse } from '../client';
+  type Siren,
+} from "#utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
   Array<
     IAPIEntrepriseResponse<
       | {
-          type: 'personne_physique';
+          type: "personne_physique";
           fonction: string; // "PRESIDENT",
           nom: string; // "GAUQUELIN",
           prenom: string; // "ARNAUD",
@@ -24,7 +28,7 @@ export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
           code_nationalite: string; // "FR"
         }
       | {
-          type: 'personne_morale'; // "personne_morale",
+          type: "personne_morale"; // "personne_morale",
           numero_identification: string; // "784824153",
           fonction: string; // "COMMISSAIRE AUX COMPTES TITULAIRE",
           raison_sociale: string; // "MAZARS - SOCIETE ANONYME A DIRECTOIRE ET CONSEIL DE SURVEILLANCE",
@@ -38,19 +42,18 @@ export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseMandatairesRCS = async (siren: Siren) => {
-  return await clientAPIEntreprise<IAPIEntrepriseMandatairesRCS, IDirigeants>(
+export const clientApiEntrepriseMandatairesRCS = async (siren: Siren) =>
+  await clientAPIEntreprise<IAPIEntrepriseMandatairesRCS, IDirigeants>(
     routes.apiEntreprise.mandatairesRCS(siren),
     mapToDomainObject
   );
-};
 
 const mapToDomainObject = (
   response: IAPIEntrepriseMandatairesRCS
-): IDirigeants => {
-  return response.data.map(({ data: dirigeant }) => {
-    if (dirigeant.type === 'personne_physique') {
-      const { prenom, prenoms } = formatFirstNames(dirigeant.prenom, ' ');
+): IDirigeants =>
+  response.data.map(({ data: dirigeant }) => {
+    if (dirigeant.type === "personne_physique") {
+      const { prenom, prenoms } = formatFirstNames(dirigeant.prenom, " ");
 
       return {
         sexe: null,
@@ -70,4 +73,3 @@ const mapToDomainObject = (
       role: formatRole(dirigeant.fonction),
     } as IPersonneMorale;
   });
-};

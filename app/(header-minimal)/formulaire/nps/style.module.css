@@ -8,6 +8,6 @@
 }
 .form-feedback-nps > fieldset > legend h2::before {
   counter-increment: question;
-  content: counter(question) ' ・ ';
+  content: counter(question) " ・ ";
   font-weight: bold;
 }

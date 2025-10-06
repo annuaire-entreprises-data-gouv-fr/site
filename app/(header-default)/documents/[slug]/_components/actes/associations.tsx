@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import ButtonLink from '#components-ui/button';
-import FAQLink from '#components-ui/faq-link';
-import { DataSectionClient } from '#components/section/data-section';
-import TableFilter from '#components/table/filter';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { isDataSuccess } from '#models/data-fetching';
-import { formatDate, formatSiret } from '#utils/helpers';
-import { extractAssociationEtablissements } from '#utils/helpers/association';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { useMemo, useState } from 'react';
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo, useState } from "react";
+import { DataSectionClient } from "#components/section/data-section";
+import TableFilter from "#components/table/filter";
+import { FullTable } from "#components/table/full";
+import ButtonLink from "#components-ui/button";
+import FAQLink from "#components-ui/faq-link";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import { isDataSuccess } from "#models/data-fetching";
+import { formatDate, formatSiret } from "#utils/helpers";
+import { extractAssociationEtablissements } from "#utils/helpers/association";
 
 const NoDocument = () => (
   <>Aucun document n’a été retrouvé pour cette association.</>
@@ -40,12 +40,12 @@ export const AgentActesAssociation: React.FC<{
 
   return (
     <DataSectionClient
-      title="Actes et statuts"
+      data={associationProtected}
       id="actes"
       isProtected
-      sources={[EAdministration.MI, EAdministration.DJEPVA]}
-      data={associationProtected}
       notFoundInfo={<NoDocument />}
+      sources={[EAdministration.MI, EAdministration.DJEPVA]}
+      title="Actes et statuts"
     >
       {(associationProtected) => (
         <>
@@ -55,22 +55,22 @@ export const AgentActesAssociation: React.FC<{
           {associationProtected.documents.rna.length > 0 && (
             <>
               <h3>
-                Documents au{' '}
+                Documents au{" "}
                 <FAQLink tooltipLabel="RNA">
                   Répertoire National des Associations
                 </FAQLink>
               </h3>
               <FullTable
-                head={['Dépôt', 'Description', 'Lien']}
                 body={associationProtected.documents.rna.map(
                   ({ date_depot, sous_type, url }) => [
                     formatDate(date_depot),
                     sous_type.libelle,
-                    <ButtonLink target="_blank" alt small to={url}>
+                    <ButtonLink alt small target="_blank" to={url}>
                       Télécharger
                     </ButtonLink>,
                   ]
                 )}
+                head={["Dépôt", "Description", "Lien"]}
               />
             </>
           )}
@@ -85,12 +85,11 @@ export const AgentActesAssociation: React.FC<{
 
               <TableFilter
                 dataSelect={etablissementsForFilter}
+                fallback={null}
                 onChange={(e) => setSelectedSiret(e)}
                 placeholder="Filtrer par établissement"
-                fallback={null}
               />
               <FullTable
-                head={['Siret', 'Dépôt', 'Validité', 'Description', 'Lien']}
                 body={associationProtected.documents.dac
                   .filter((d) =>
                     selectedSiret.length > 0
@@ -116,11 +115,12 @@ export const AgentActesAssociation: React.FC<{
                         <br />
                         {commentaire && <i>{commentaire}</i>}
                       </>,
-                      <ButtonLink target="_blank" alt small to={url}>
+                      <ButtonLink alt small target="_blank" to={url}>
                         Télécharger
                       </ButtonLink>,
                     ]
                   )}
+                head={["Siret", "Dépôt", "Validité", "Description", "Lien"]}
               />
             </>
           )}

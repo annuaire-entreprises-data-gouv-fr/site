@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import NonRenseigne from '#components/non-renseigne';
-import { DataSectionClient } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IUniteLegale } from '#models/core/types';
-import { IDataFetchingState, isDataSuccess } from '#models/data-fetching';
-import { IServicePublic } from '#models/service-public';
-import { useFetchServicePublicSubServices } from 'hooks/fetch/service-public-subservices';
+import { useFetchServicePublicSubServices } from "hooks/fetch/service-public-subservices";
+import NonRenseigne from "#components/non-renseigne";
+import { DataSectionClient } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IUniteLegale } from "#models/core/types";
+import { type IDataFetchingState, isDataSuccess } from "#models/data-fetching";
+import type { IServicePublic } from "#models/service-public";
 
 function SubServicesDataSection({
   servicePublic,
@@ -24,10 +24,10 @@ function SubServicesDataSection({
 
   return (
     <DataSectionClient
-      id="subservices-service-public"
-      title="Département(s)"
-      sources={[EAdministration.DILA]}
       data={subServices}
+      id="subservices-service-public"
+      sources={[EAdministration.DILA]}
+      title="Département(s)"
     >
       {(subServices) => (
         <>
@@ -36,36 +36,34 @@ function SubServicesDataSection({
             :
           </p>
           <FullTable
-            head={['Nom du département', 'Responsable(s)']}
-            body={subServices.map((service) => {
-              return [
-                service.urlServicePublic ? (
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Voir ${service.nom}, nouvelle fenêtre`}
-                    href={service.urlServicePublic}
-                  >
-                    {service.nom}
-                  </a>
-                ) : (
-                  service.nom
-                ),
-                service.affectationPersonne?.length === 0 ? (
-                  <NonRenseigne />
-                ) : service?.affectationPersonne &&
-                  service?.affectationPersonne.length > 0 ? (
-                  service?.affectationPersonne.map((personne, index) => (
-                    <>
-                      {index !== 0 && ', '}
-                      <strong>{personne.nom}</strong> {personne.fonction}
-                    </>
-                  ))
-                ) : (
-                  <NonRenseigne />
-                ),
-              ];
-            })}
+            body={subServices.map((service) => [
+              service.urlServicePublic ? (
+                <a
+                  aria-label={`Voir ${service.nom}, nouvelle fenêtre`}
+                  href={service.urlServicePublic}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {service.nom}
+                </a>
+              ) : (
+                service.nom
+              ),
+              service.affectationPersonne?.length === 0 ? (
+                <NonRenseigne />
+              ) : service?.affectationPersonne &&
+                service?.affectationPersonne.length > 0 ? (
+                service?.affectationPersonne.map((personne, index) => (
+                  <>
+                    {index !== 0 && ", "}
+                    <strong>{personne.nom}</strong> {personne.fonction}
+                  </>
+                ))
+              ) : (
+                <NonRenseigne />
+              ),
+            ])}
+            head={["Nom du département", "Responsable(s)"]}
           />
         </>
       )}

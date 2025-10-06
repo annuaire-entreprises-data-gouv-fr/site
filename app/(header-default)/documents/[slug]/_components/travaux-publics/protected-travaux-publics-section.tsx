@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { TwoColumnTable } from "#components/table/simple";
+import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
+import type { EAdministration } from "#models/administrations/EAdministration";
 import {
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
-} from '#models/api-not-responding';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { IDocumentDownloader } from '#models/espace-agent/travaux-publics';
-import { UseCase } from '#models/use-cases';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { useMemo } from 'react';
+} from "#models/api-not-responding";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import type { IDocumentDownloader } from "#models/espace-agent/travaux-publics";
+import type { UseCase } from "#models/use-cases";
 
 const DocumentDownloader = ({
   data,
@@ -30,28 +30,27 @@ const DocumentDownloader = ({
       return (
         <Icon slug="closed">{administration} : document introuvable.</Icon>
       );
-    } else {
-      return (
-        <Icon slug="errorFill" color="#df0a00">
-          La récupération du document auprès des services {administration} a
-          échoué.
-          <br />
-          Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui
-          demander la pièce directement.
-          <br />
-          <br />
-        </Icon>
-      );
     }
+    return (
+      <Icon color="#df0a00" slug="errorFill">
+        La récupération du document auprès des services {administration} a
+        échoué.
+        <br />
+        Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui
+        demander la pièce directement.
+        <br />
+        <br />
+      </Icon>
+    );
   }
   return (
     <div className="layout-space-between">
       <Icon slug="open">
-        {administration ? `${administration} : ` : ''}document disponible
+        {administration ? `${administration} : ` : ""}document disponible
       </Icon>
       {data.url && (
         <a href={data.url}>
-          <Icon slug="download">{'télécharger'}</Icon>
+          <Icon slug="download">{"télécharger"}</Icon>
         </a>
       )}
     </div>
@@ -90,11 +89,11 @@ export default function ProtectedTravauxPublicsSection({
 
   return (
     <AsyncDataSectionClient
-      title={title}
+      data={travauxPublics}
       id={id}
       isProtected={isProtected}
       sources={sources}
-      data={travauxPublics}
+      title={title}
     >
       {(data) => (
         <>
@@ -107,7 +106,7 @@ export default function ProtectedTravauxPublicsSection({
                   (FNTP) à une entreprise en règle de ses obligations sociales,
                   administratives et juridiques.
                 </FAQLink>,
-                <DocumentDownloader data={data.fntp} administration="FNTP" />,
+                <DocumentDownloader administration="FNTP" data={data.fntp} />,
               ],
               [
                 <FAQLink tooltipLabel="Cotisations congés & chômage">
@@ -118,14 +117,14 @@ export default function ProtectedTravauxPublicsSection({
                 <>
                   <div>
                     <DocumentDownloader
-                      data={data.cnetp}
                       administration="CNETP"
+                      data={data.cnetp}
                     />
                   </div>
                   <div>
                     <DocumentDownloader
-                      data={data.cnetp}
                       administration="CIBTP"
+                      data={data.cnetp}
                     />
                   </div>
                 </>,
@@ -137,8 +136,8 @@ export default function ProtectedTravauxPublicsSection({
                   des Travaux publics (ProBTP).
                 </FAQLink>,
                 <DocumentDownloader
-                  data={data.probtp}
                   administration="ProBTP"
+                  data={data.probtp}
                 />,
               ],
             ]}

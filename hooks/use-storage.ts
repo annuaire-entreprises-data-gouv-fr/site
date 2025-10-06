@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-function isStorageAvailable(type: 'session' | 'local') {
-  const test = 'test';
+function isStorageAvailable(type: "session" | "local") {
+  const test = "test";
 
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return false;
   }
 
@@ -17,12 +17,11 @@ function isStorageAvailable(type: 'session' | 'local') {
   }
 }
 
-const getStore = (type: 'session' | 'local') => {
-  return type === 'session' ? window.sessionStorage : window.localStorage;
-};
+const getStore = (type: "session" | "local") =>
+  type === "session" ? window.sessionStorage : window.localStorage;
 
 export const useStorage = (
-  type: 'session' | 'local',
+  type: "session" | "local",
   key: string,
   initialValue: any
 ) => {
@@ -61,7 +60,7 @@ export const useStorage = (
       // Save state
       setStoredValue(valueToStore);
       // Save to local storage
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         const store = getStore(type);
         store.setItem(key, JSON.stringify(valueToStore));
       }

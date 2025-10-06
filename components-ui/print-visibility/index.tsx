@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from "react";
 
 const PrintOnly: React.FC<PropsWithChildren<{}>> = ({ children }) => (
   <div className="print-only">{children}</div>

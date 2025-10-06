@@ -1,4 +1,4 @@
-import { formatDate } from '../formatting/formatting';
+import { formatDate } from "../formatting/formatting";
 
 /**
  * compute date at which personne morale will end
@@ -14,10 +14,10 @@ export function getDateFin(
     if (duree && dateImmatriculation) {
       const d = new Date(dateImmatriculation);
       d.setFullYear(d.getFullYear() + duree);
-      return formatDate(d) || '';
+      return formatDate(d) || "";
     }
   } catch {}
-  return '';
+  return "";
 }
 
 /**
@@ -35,13 +35,13 @@ export const getCapital = (
 ) => {
   if (capital) {
     try {
-      return `${new Intl.NumberFormat('fr-FR', {
-        style: 'currency',
-        currency: devise ?? 'EUR',
-      }).format(capital)} ${estVariable ? '(variable)' : '(fixe)'}`;
+      return `${new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: devise ?? "EUR",
+      }).format(capital)} ${estVariable ? "(variable)" : "(fixe)"}`;
     } catch {
-      return `${capital} ${devise} ${estVariable ? '(variable)' : '(fixe)'}`;
+      return `${capital} ${devise} ${estVariable ? "(variable)" : "(fixe)"}`;
     }
   }
-  return '';
+  return "";
 };

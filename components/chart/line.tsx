@@ -1,17 +1,17 @@
 import {
-  Chart as ChartJS,
   CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
+  type ChartData,
+  Chart as ChartJS,
+  type ChartOptions,
   Title as ChartTitle,
-  Tooltip,
   Legend,
-  ChartData,
-  ChartOptions,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { htmlLegendPlugin } from './html-legend-plugin';
+  LinearScale,
+  LineElement,
+  PointElement,
+  Tooltip,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { htmlLegendPlugin } from "./html-legend-plugin";
 
 ChartJS.register(
   CategoryScale,
@@ -24,8 +24,8 @@ ChartJS.register(
 );
 
 type LineChartProps = {
-  data: ChartData<'line'>;
-  options?: ChartOptions<'line'>;
+  data: ChartData<"line">;
+  options?: ChartOptions<"line">;
   height?: number | string;
   width?: number | string;
   htmlLegendId?: string;
@@ -34,29 +34,29 @@ type LineChartProps = {
 export const LineChart = ({
   data,
   options = {},
-  height = '400px',
-  width = '100%',
+  height = "400px",
+  width = "100%",
   // to use an html legend provide a unique id and disable canvas lengend in chart options
-  htmlLegendId = '',
+  htmlLegendId = "",
 }: LineChartProps) => {
   const htmlLegendContainerId = htmlLegendId;
 
   return (
     <>
       {htmlLegendContainerId && (
-        <div id={htmlLegendContainerId} className="layout-right" />
+        <div className="layout-right" id={htmlLegendContainerId} />
       )}
       <div>
         <Line
-          options={{ ...options, maintainAspectRatio: false }}
           data={data}
-          width={width}
           height={height}
+          options={{ ...options, maintainAspectRatio: false }}
           plugins={[
             ...(htmlLegendContainerId
               ? [htmlLegendPlugin(htmlLegendContainerId)]
               : []),
           ]}
+          width={width}
         />
       </div>
     </>

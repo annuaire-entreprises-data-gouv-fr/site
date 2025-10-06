@@ -1,8 +1,8 @@
-import { HttpForbiddenError } from '#clients/exceptions';
-import { InternalError } from '#models/exceptions';
-import { getHidePersonalDataRequestFCSession } from '#utils/session';
-import { randomBytes } from 'crypto';
-import { BaseClient, Issuer, generators } from 'openid-client';
+import { randomBytes } from "crypto";
+import { type BaseClient, generators, Issuer } from "openid-client";
+import { HttpForbiddenError } from "#clients/exceptions";
+import { InternalError } from "#models/exceptions";
+import { getHidePersonalDataRequestFCSession } from "#utils/session";
 
 let _client = undefined as BaseClient | undefined;
 
@@ -16,34 +16,33 @@ const POST_LOGOUT_REDIRECT_URI =
 export const getClient = async () => {
   if (_client) {
     return _client;
-  } else {
-    if (
-      !CLIENT_ID ||
-      !URL ||
-      !CLIENT_SECRET ||
-      !REDIRECT_URI ||
-      !POST_LOGOUT_REDIRECT_URI
-    ) {
-      throw new InternalError({
-        message: 'FRANCE CONNECT ENV variables are not defined',
-      });
-    }
-    const franceConnectIssuer = await Issuer.discover(
-      `${URL}/api/v2/.well-known/openid-configuration`
-    );
-
-    _client = new franceConnectIssuer.Client({
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      redirect_uris: [REDIRECT_URI],
-      post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
-      id_token_signed_response_alg: 'RS256',
-      userinfo_signed_response_alg: 'RS256',
-      response_types: ['code'],
-    });
-
-    return _client;
   }
+  if (
+    !CLIENT_ID ||
+    !URL ||
+    !CLIENT_SECRET ||
+    !REDIRECT_URI ||
+    !POST_LOGOUT_REDIRECT_URI
+  ) {
+    throw new InternalError({
+      message: "FRANCE CONNECT ENV variables are not defined",
+    });
+  }
+  const franceConnectIssuer = await Issuer.discover(
+    `${URL}/api/v2/.well-known/openid-configuration`
+  );
+
+  _client = new franceConnectIssuer.Client({
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    redirect_uris: [REDIRECT_URI],
+    post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
+    id_token_signed_response_alg: "RS256",
+    userinfo_signed_response_alg: "RS256",
+    response_types: ["code"],
+  });
+
+  return _client;
 };
 
 export const franceConnectAuthorizeUrl = async (req: any) => {
@@ -55,12 +54,12 @@ export const franceConnectAuthorizeUrl = async (req: any) => {
   };
   await session.save();
   return client.authorizationUrl({
-    scope: 'openid ' + franceConnectScope.join(' '),
-    acr_values: 'eidas1',
+    scope: "openid " + franceConnectScope.join(" "),
+    acr_values: "eidas1",
     ...session.FC_CONNECT_CHECK,
   });
 };
-const franceConnectScope = ['family_name', 'given_name', 'birthdate'] as const;
+const franceConnectScope = ["family_name", "given_name", "birthdate"] as const;
 
 export type IFranceConnectUserInfo = Partial<
   Record<(typeof franceConnectScope)[number], string | undefined>
@@ -84,7 +83,7 @@ export async function franceConnectAuthenticate(
   await req.session.save();
   const { access_token, id_token } = tokenSet;
   if (!access_token || !id_token) {
-    throw new HttpForbiddenError('No access token');
+    throw new HttpForbiddenError("No access token");
   }
 
   const userInfo = await client.userinfo(access_token);
@@ -95,11 +94,11 @@ export const franceConnectLogoutUrl = async (req: any) => {
   const franceConnect = getHidePersonalDataRequestFCSession(req.session);
   const id_token_hint = franceConnect?.tokenId;
   if (!id_token_hint) {
-    throw new InternalError({ message: 'No token id' });
+    throw new InternalError({ message: "No token id" });
   }
   const client = await getClient();
 
-  const state = `state${randomBytes(32).toString('hex')}`;
+  const state = `state${randomBytes(32).toString("hex")}`;
 
   delete req.session.franceConnect;
   await req.session.save();

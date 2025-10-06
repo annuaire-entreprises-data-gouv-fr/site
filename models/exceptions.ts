@@ -1,4 +1,4 @@
-import { EAdministration } from './administrations/EAdministration';
+import type { EAdministration } from "./administrations/EAdministration";
 
 type IExceptionArgument = {
   /** Name of the exception, CamelCase
@@ -27,14 +27,14 @@ type IExceptionArgument = {
   };
 };
 
-export type IExceptionContext = NonNullable<IExceptionArgument['context']>;
+export type IExceptionContext = NonNullable<IExceptionArgument["context"]>;
 
 export class Exception extends Error {
   public name: string;
   public context: IExceptionContext;
   constructor({ name, message, cause, context }: IExceptionArgument) {
-    if (message == undefined && cause && 'name' in cause) {
-      message = cause.name !== 'Error' ? cause.name : cause.message;
+    if (message == undefined && cause && "name" in cause) {
+      message = cause.name !== "Error" ? cause.name : cause.message;
     }
     super(message, { cause });
     this.name = name;
@@ -54,7 +54,7 @@ type IFetchRessourceExceptionArgument = {
   ressource: string;
   /** The administration that was called */
   administration?: EAdministration;
-} & Omit<IExceptionArgument, 'name'>;
+} & Omit<IExceptionArgument, "name">;
 
 export class FetchRessourceException extends Exception {
   public administration: EAdministration | undefined;
@@ -78,7 +78,7 @@ export class FetchRessourceException extends Exception {
  */
 export function throwUnreachableCaseError(value: never): never {
   throw new InternalError({
-    message: `Unreachable case`,
+    message: "Unreachable case",
     context: { details: value },
   });
 }
@@ -93,7 +93,7 @@ export class ValidationError extends Exception {
     cause?: any;
     context?: IExceptionContext;
   }) {
-    super({ name: 'ValidationError', ...args });
+    super({ name: "ValidationError", ...args });
   }
 }
 
@@ -109,6 +109,6 @@ export class InternalError extends Exception {
     cause?: any;
     context?: IExceptionContext;
   }) {
-    super({ name: 'InternalError', ...args });
+    super({ name: "InternalError", ...args });
   }
 }

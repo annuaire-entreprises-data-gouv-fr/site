@@ -1,0 +1,121 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["ultracite"],
+  "linter": {
+    "rules": {
+      "a11y": {
+        "noRedundantRoles": "off",
+        "useSemanticElements": "off",
+        "noNoninteractiveElementInteractions": "off",
+        "noStaticElementInteractions": "off",
+        "useKeyWithClickEvents": "off",
+        "useValidAnchor": "off",
+        "noLabelWithoutControl": "off",
+        "useAriaPropsSupportedByRole": "off",
+        "useIframeTitle": "off",
+        "useHtmlLang": "off",
+        "noInteractiveElementToNoninteractiveRole": "off",
+        "noNoninteractiveTabindex": "off",
+        "noSvgWithoutTitle": "off",
+        "useButtonType": "off"
+      },
+      "style": {
+        "useConsistentBuiltinInstantiation": "off",
+        "noMagicNumbers": "off",
+        "useConsistentArrayType": "off",
+        "noNonNullAssertion": "off",
+        "noNestedTernary": "off",
+        "useNodejsImportProtocol": "off",
+        "useTemplate": "off",
+        "noEnum": "off",
+        "useBlockStatements": "off",
+        "noParameterAssign": "off",
+        "noParameterProperties": "off",
+        "useAtIndex": "off",
+        "useConsistentMemberAccessibility": "off",
+        "useDefaultParameterLast": "off",
+        "useFilenamingConvention": "off",
+        "useForOf": "off",
+        "useReadonlyClassProperties": "off",
+        "noDescendingSpecificity": "off",
+        "noNamespace": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off",
+        "useAwait": "off",
+        "noEvolvingTypes": "off",
+        "noShadowRestrictedNames": "off",
+        "noConsole": "off",
+        "noVar": "off",
+        "noDoubleEquals": "off",
+        "noImplicitAnyLet": "off",
+        "noMisplacedAssertion": "off",
+        "noSkippedTests": "off",
+        "useIterableCallbackReturn": "off",
+        "noAsyncPromiseExecutor": "off",
+        "noEmptyBlockStatements": "off",
+        "noGlobalIsNan": "off",
+        "useGuardForIn": "off",
+        "noAlert": "off",
+        "noAssignInExpressions": "off",
+        "noDuplicateProperties": "off",
+        "noRedeclare": "off",
+        "noShorthandPropertyOverrides": "off",
+        "useErrorMessage": "off",
+        "noConstantBinaryExpressions": "off",
+        "noDocumentCookie": "off"
+      },
+      "performance": {
+        "noImgElement": "off",
+        "noDelete": "off",
+        "useTopLevelRegex": "off",
+        "noNamespaceImport": "off",
+        "noAccumulatingSpread": "off",
+        "noBarrelFile": "off"
+      },
+      "nursery": {
+        "useImageSize": "off",
+        "noShadow": "off",
+        "useMaxParams": "off",
+        "useConsistentTypeDefinitions": "off",
+        "noMisusedPromises": "off",
+        "useSortedClasses": "off"
+      },
+      "complexity": {
+        "useLiteralKeys": "off",
+        "noExcessiveCognitiveComplexity": "off",
+        "noUselessFragments": "off",
+        "useOptionalChain": "off",
+        "noBannedTypes": "off",
+        "noForEach": "off",
+        "useDateNow": "off",
+        "noUselessSwitchCase": "off",
+        "noStaticOnlyClass": "off",
+        "noUselessCatch": "off",
+        "useSimplifiedLogicExpression": "off"
+      },
+      "correctness": {
+        "useJsxKeyInIterable": "off",
+        "noUnusedVariables": "off",
+        "noUnusedFunctionParameters": "off",
+        "noEmptyPattern": "off",
+        "useExhaustiveDependencies": "off",
+        "useParseIntRadix": "off",
+        "useSingleJsDocAsterisk": "off",
+        "noInnerDeclarations": "off",
+        "noUnsafeFinally": "off",
+        "noUnknownMediaFeatureName": "off",
+        "noUnknownProperty": "off",
+        "noChildrenProp": "off",
+        "noInvalidUseBeforeDeclaration": "off",
+        "noNestedComponentDefinitions": "off",
+        "noUndeclaredVariables": "off",
+        "noUnusedPrivateClassMembers": "off"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      }
+    }
+  }
+}

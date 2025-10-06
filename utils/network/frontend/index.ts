@@ -1,18 +1,18 @@
-import { HttpTimeoutError } from '#clients/exceptions';
-import constants from '#models/constants';
+import { HttpTimeoutError } from "#clients/exceptions";
+import constants from "#models/constants";
 import {
   Exception,
-  IExceptionContext,
+  type IExceptionContext,
   InternalError,
-} from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { IDefaultRequestConfig } from '..';
-import { httpErrorHandler } from '../utils/http-error-handler';
+} from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import type { IDefaultRequestConfig } from "..";
+import { httpErrorHandler } from "../utils/http-error-handler";
 
 function buildUrl(url: string, params: any) {
   try {
     const serializedParams = new URLSearchParams(params).toString();
-    const separator = url.indexOf('?') > 0 ? '&' : '?';
+    const separator = url.indexOf("?") > 0 ? "&" : "?";
     if (!serializedParams) {
       return url;
     }
@@ -20,7 +20,7 @@ function buildUrl(url: string, params: any) {
   } catch (e: any) {
     logErrorInSentry(
       new Exception({
-        name: 'BuildURLWithParamsException',
+        name: "BuildURLWithParamsException",
         cause: e,
         context: {
           details: url,
@@ -33,25 +33,25 @@ function buildUrl(url: string, params: any) {
 
 export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
   if (!config.url) {
-    throw new InternalError({ message: 'Url is required' });
+    throw new InternalError({ message: "Url is required" });
   }
   // use cache is ignore on frontend as it is handled by browser
 
   const controller = new AbortController();
   const timeoutId = setTimeout(() => {
-    controller.abort(new HttpTimeoutError('Timeout'));
+    controller.abort(new HttpTimeoutError("Timeout"));
   }, config.timeout || constants.timeout.XXXXL);
 
   try {
     const response = await fetch(buildUrl(config.url, config.params), {
       signal: controller.signal,
       headers: config.headers,
-      method: config.method || 'GET',
+      method: config.method || "GET",
       body: config.data as BodyInit | null | undefined,
     });
     const isJson = response.headers
-      .get('content-type')
-      ?.includes('application/json');
+      .get("content-type")
+      ?.includes("application/json");
 
     if (!response.ok) {
       return httpErrorHandler(
@@ -62,11 +62,11 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
       );
     }
 
-    if (config.responseType == 'blob') {
+    if (config.responseType == "blob") {
       return response.blob() as T;
     }
 
-    if (config.responseType == 'arraybuffer') {
+    if (config.responseType == "arraybuffer") {
       return response.arrayBuffer() as T;
     }
     const data = await (isJson ? response.json() : response.text());
@@ -89,7 +89,7 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
 }
 
 let pendingUnload = false;
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.onbeforeunload = () => {
     pendingUnload = true;
   };
@@ -98,8 +98,8 @@ if (typeof window !== 'undefined') {
 export class RequestAbortedDuringUnloadException extends Exception {
   constructor(args: { context: IExceptionContext; cause: any }) {
     super({
-      name: 'RequestAbortedDuringUnloadException',
-      message: 'Fetch request aborted because user is navigating away',
+      name: "RequestAbortedDuringUnloadException",
+      message: "Fetch request aborted because user is navigating away",
       ...args,
     });
   }
@@ -111,7 +111,7 @@ export class FailToFetchError extends Exception {
     public status: number
   ) {
     super({
-      name: 'FailToFetchError',
+      name: "FailToFetchError",
       ...args,
     });
   }

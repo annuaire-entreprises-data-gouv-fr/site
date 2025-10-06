@@ -1,8 +1,8 @@
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { IMonitoring, IRatio } from '#models/monitoring';
-import { httpGet } from '#utils/network';
-import { DailyUptimeRatioConverter } from './series';
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import type { IMonitoring, IRatio } from "#models/monitoring";
+import { httpGet } from "#utils/network";
+import { DailyUptimeRatioConverter } from "./series";
 
 export type IMonitorLog = {
   id?: number;
@@ -31,8 +31,8 @@ export const clientMonitoring = async (
   const url = routes.tooling.monitoring.getBySlug(slug);
   const response = await httpGet<IUpdownIODowntimes[]>(url, {
     headers: {
-      'Accept-Encoding': 'gzip',
-      'X-API-Key': process.env.UPDOWN_IO_API_KEY,
+      "Accept-Encoding": "gzip",
+      "X-API-Key": process.env.UPDOWN_IO_API_KEY,
     },
     timeout: constants.timeout.XL,
   });
@@ -57,11 +57,8 @@ const mapToDomainObject = (
   const monitorStartDate = startDate ? new Date(startDate) : null;
   const series = dailySeries.export(monitorStartDate);
 
-  const avg = (ratios: IRatio[]) => {
-    return (
-      ratios.reduce((sum, ratio) => ratio.ratioNumber + sum, 0) / ratios.length
-    );
-  };
+  const avg = (ratios: IRatio[]) =>
+    ratios.reduce((sum, ratio) => ratio.ratioNumber + sum, 0) / ratios.length;
 
   return {
     series,

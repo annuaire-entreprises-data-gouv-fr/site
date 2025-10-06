@@ -1,14 +1,15 @@
-import { Warning } from '#components-ui/alerts';
-import { Icon } from '#components-ui/icon/wrapper';
-import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
-import Logo from '#components-ui/logo';
-import { administrationsMetaData } from '#models/administrations';
-import { EAdministration } from '#models/administrations/EAdministration';
-import constants from '#models/constants';
-import { formatDate, formatDateLong, isTwoMonthOld } from '#utils/helpers';
-import React, { PropsWithChildren } from 'react';
-import SectionErrorBoundary from './section-error-boundary';
-import style from './style.module.css';
+import type React from "react";
+import type { PropsWithChildren } from "react";
+import { Warning } from "#components-ui/alerts";
+import { Icon } from "#components-ui/icon/wrapper";
+import DataSourcesTooltip from "#components-ui/information-tooltip/data-sources-tooltip";
+import Logo from "#components-ui/logo";
+import { administrationsMetaData } from "#models/administrations";
+import type { EAdministration } from "#models/administrations/EAdministration";
+import constants from "#models/constants";
+import { formatDate, formatDateLong, isTwoMonthOld } from "#utils/helpers";
+import SectionErrorBoundary from "./section-error-boundary";
+import style from "./style.module.css";
 export interface ISectionProps {
   title: string;
   width?: number;
@@ -34,7 +35,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   const isOld = lastModified && isTwoMonthOld(lastModified);
   const last = lastModified || new Date();
 
-  const faqLink = `/administration/${dataSources.map((d) => d.slug).join('_')}`;
+  const faqLink = `/administration/${dataSources.map((d) => d.slug).join("_")}`;
 
   const borderColor = isProtected
     ? constants.colors.espaceAgentPastel
@@ -46,7 +47,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   return (
     <SectionErrorBoundary title={title}>
       <div
-        className={style['section-container']}
+        className={style["section-container"]}
         id={id}
         style={{ width: `${width}%`, borderColor }}
       >
@@ -57,35 +58,35 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
             </Icon>
           </div>
         )}
-        <div className={style['section-header']}>
+        <div className={style["section-header"]}>
           <h2 style={{ color: titleColor, backgroundColor: borderColor }}>
             {title}
           </h2>
-          <div className={style['section-logo-wrapper']}>
+          <div className={style["section-logo-wrapper"]}>
             {dataSources.map(
               ({ slug, long, logoType, short }) =>
                 logoType && (
                   <a
-                    key={long}
-                    href={faqLink}
-                    title={long}
                     className="no-style-link"
+                    href={faqLink}
+                    key={long}
+                    title={long}
                   >
-                    {logoType === 'portrait' ? (
+                    {logoType === "portrait" ? (
                       <Logo
-                        title={long}
                         alt={short}
-                        slug={slug}
-                        width={70}
                         height={40}
+                        slug={slug}
+                        title={long}
+                        width={70}
                       />
                     ) : (
                       <Logo
-                        title={long}
                         alt={short}
-                        slug={slug}
-                        width={170}
                         height={40}
+                        slug={slug}
+                        title={long}
+                        width={170}
                       />
                     )}
                   </a>
@@ -102,7 +103,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         )}
         <div>{children}</div>
         {dataSources.length > 0 && (
-          <div className={style['administration-page-link']}>
+          <div className={style["administration-page-link"]}>
             <DataSourcesTooltip
               dataSources={dataSources}
               lastUpdatedAt={formatDate(last)}

@@ -1,10 +1,10 @@
-import { ConnexionSubLayout } from '#components-ui/connexion-layout';
-import connexionRefusedPicture from '#components-ui/illustrations/connexion-failed';
-import constants from '#models/constants';
-import { Metadata } from 'next';
+import type { Metadata } from "next";
+import { ConnexionSubLayout } from "#components-ui/connexion-layout";
+import connexionRefusedPicture from "#components-ui/illustrations/connexion-failed";
+import constants from "#models/constants";
 export const metadata: Metadata = {
-  title: 'Vous n’êtes pas autorisé(e) à accéder à l’espace agent',
-  robots: 'noindex, nofollow',
+  title: "Vous n’êtes pas autorisé(e) à accéder à l’espace agent",
+  robots: "noindex, nofollow",
 };
 
 export default function RequiredHabilitationPage() {
@@ -16,7 +16,7 @@ export default function RequiredHabilitationPage() {
         public.
       </div>
       <p>
-        Si vous n’êtes pas prestataire vous pouvez{' '}
+        Si vous n’êtes pas prestataire vous pouvez{" "}
         <a href={constants.links.parcours.contact}>nous contacter</a> pour que
         nous étudions votre situation.
       </p>

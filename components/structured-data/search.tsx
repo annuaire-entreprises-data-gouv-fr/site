@@ -1,8 +1,7 @@
-import React from 'react';
+import type React from "react";
 
 const StructuredDataSearchAction: React.FC<{}> = () => (
   <script
-    type="application/ld+json"
     dangerouslySetInnerHTML={{
       __html: `{
         "@context": "https://schema.org",
@@ -26,6 +25,7 @@ const StructuredDataSearchAction: React.FC<{}> = () => (
         }]
       }`,
     }}
+    type="application/ld+json"
   />
 );
 

@@ -1,13 +1,13 @@
-import { clientEducationNationale } from '#clients/education-nationale';
-import { HttpNotFound } from '#clients/exceptions';
+import { clientEducationNationale } from "#clients/education-nationale";
+import { HttpNotFound } from "#clients/exceptions";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { Siren } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { EAdministration } from './administrations/EAdministration';
-import { FetchRessourceException } from './exceptions';
+  type IAPINotRespondingError,
+} from "#models/api-not-responding";
+import type { Siren } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { EAdministration } from "./administrations/EAdministration";
+import { FetchRessourceException } from "./exceptions";
 
 export interface IEtablissementsScolaires {
   currentPage: number;
@@ -42,7 +42,7 @@ export const getEtablissementsScolaires = async (
     }
     logErrorInSentry(
       new FetchRessourceException({
-        ressource: 'EtablissementsScolaires',
+        ressource: "EtablissementsScolaires",
         cause: e,
         context: {
           siren,

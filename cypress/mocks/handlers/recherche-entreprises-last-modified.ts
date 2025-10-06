@@ -1,7 +1,7 @@
-import { HttpResponse, HttpResponseResolver } from 'msw';
-import rechercheEntrepriseLastModified from '../../fixtures/recherche-entreprise-last-modified.json';
+import { HttpResponse, type HttpResponseResolver } from "msw";
+import rechercheEntrepriseLastModified from "../../fixtures/recherche-entreprise-last-modified.json" with {
+  type: "json",
+};
 
 export const rechercheEntrepriseLastModifiedHandler: HttpResponseResolver =
-  async ({ request }) => {
-    return HttpResponse.json(rechercheEntrepriseLastModified);
-  };
+  async ({ request }) => HttpResponse.json(rechercheEntrepriseLastModified);

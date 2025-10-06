@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
-import { isAPI404 } from '#models/api-not-responding';
-import { IDataFetchingState } from '#models/data-fetching';
-import { ISectionProps, Section } from '..';
-import { DataSectionContent, IDataSectionContentProps } from './content';
+import { isAPI404 } from "#models/api-not-responding";
+import type { IDataFetchingState } from "#models/data-fetching";
+import { type ISectionProps, Section } from "..";
+import { DataSectionContent, type IDataSectionContentProps } from "./content";
 
 interface IDataSectionProps<T>
   extends ISectionProps,
@@ -25,20 +23,19 @@ export function DataSection<T extends Exclude<unknown, IDataFetchingState>>({
     return null;
   }
 
-  //@ts-ignore
+  //@ts-expect-error
   const lastModified = props?.lastModified ?? data?.lastModified ?? null;
 
   return (
     <Section {...props} lastModified={lastModified}>
       <DataSectionContent
+        additionalInfoOnError={additionalInfoOnError}
+        children={children}
         data={data}
         notFoundInfo={notFoundInfo}
-        children={children}
-        additionalInfoOnError={additionalInfoOnError}
       />
     </Section>
   );
 }
-/* eslint-enable react/jsx-props-no-spreading */
 
-export { AsyncDataSectionClient as DataSectionClient } from './client';
+export { AsyncDataSectionClient as DataSectionClient } from "./client";

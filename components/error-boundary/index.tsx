@@ -1,7 +1,7 @@
-import * as Sentry from '@sentry/react';
-import React from 'react';
-import { ClientErrorExplanations } from '../error-explanations';
-import { LayoutDefault } from '../layouts/layout-default';
+import * as Sentry from "@sentry/react";
+import type React from "react";
+import { ClientErrorExplanations } from "../error-explanations";
+import { LayoutDefault } from "../layouts/layout-default";
 
 export default function ErrorBoundary({
   children,
@@ -10,14 +10,14 @@ export default function ErrorBoundary({
 }) {
   return (
     <Sentry.ErrorBoundary
+      beforeCapture={(scope) => {
+        scope.setLevel("fatal");
+      }}
       fallback={
         <LayoutDefault>
           <ClientErrorExplanations />
         </LayoutDefault>
       }
-      beforeCapture={(scope) => {
-        scope.setLevel('fatal');
-      }}
     >
       {children}
     </Sentry.ErrorBoundary>

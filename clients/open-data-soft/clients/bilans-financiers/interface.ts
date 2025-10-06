@@ -20,6 +20,6 @@ export interface IAPIBilanResponse {
   capacite_de_remboursement: number;
   ratio_de_liquidite: number;
   taux_d_endettement: number;
-  type_bilan: 'C' | 'K' | 'S';
-  confidentiality: 'Public' | string;
+  type_bilan: "C" | "K" | "S";
+  confidentiality: "Public" | string;
 }

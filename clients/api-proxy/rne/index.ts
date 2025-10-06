@@ -1,23 +1,23 @@
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import {
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import type {
   IDirigeants,
   IEtatCivil,
   IObservations,
   IPersonneMorale,
-} from '#models/rne/types';
+} from "#models/rne/types";
 import {
   formatFirstNames,
   formatLastName,
   formatRole,
-  Siren,
-} from '#utils/helpers';
-import { clientAPIProxy } from '../client';
-import {
+  type Siren,
+} from "#utils/helpers";
+import { clientAPIProxy } from "../client";
+import type {
   IRNEEtatCivilProxyResponse,
   IRNEPersonneMoraleProxyResponse,
   IRNEProxyResponse,
-} from './types';
+} from "./types";
 
 /**
  * RNE through the API proxy - API RNE
@@ -55,15 +55,15 @@ const mapToDomainObject = ({
   dirigeants: IDirigeants;
 } => {
   const newDirigeants = dirigeants.map((dirigeant) => {
-    if (!('siren' in dirigeant || 'denomination' in dirigeant)) {
+    if (!("siren" in dirigeant || "denomination" in dirigeant)) {
       const etatCivil = dirigeant as IRNEEtatCivilProxyResponse;
 
-      const { prenom, prenoms } = formatFirstNames(etatCivil.prenom, ', ');
+      const { prenom, prenoms } = formatFirstNames(etatCivil.prenom, ", ");
 
       return {
         sexe: null,
         nom: formatLastName(etatCivil.nom),
-        dateNaissance: '',
+        dateNaissance: "",
         dateNaissancePartial: etatCivil.dateNaissancePartial,
         prenom,
         prenoms,

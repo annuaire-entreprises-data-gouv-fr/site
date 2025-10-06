@@ -1,49 +1,47 @@
-import React from 'react';
-import { Icon } from '#components-ui/icon/wrapper';
+import type React from "react";
+import { Icon } from "#components-ui/icon/wrapper";
 import {
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
-} from '#models/api-not-responding';
-import { IConformite } from '#models/espace-agent/conformite';
+} from "#models/api-not-responding";
+import type { IConformite } from "#models/espace-agent/conformite";
 
 const APINotRespongingElement: React.FC<{
   data: IAPINotRespondingError;
   administration: string;
-}> = ({ data, administration }) => {
-  return (
-    <>
-      {(data?.errorType === 408 && (
-        <>
-          <i>
-            <Icon slug="alertFill" color="orange">
-              La récupération du document auprès des services {administration} a
-              pris trop de temps.
-            </Icon>
-          </i>
-          <br />
-          <a href="">Rechargez la page</a> ou ré-essayez plus-tard.
-          <br />
-          <br />
-        </>
-      )) || (
-        <>
-          <i>
-            <Icon slug="errorFill" color="#df0a00">
-              La récupération du document auprès des services {administration} a
-              échoué.
-            </Icon>
-          </i>
-          <br />
-          Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui
-          demander la pièce directement.
-          <br />
-          <br />
-        </>
-      )}
-    </>
-  );
-};
+}> = ({ data, administration }) => (
+  <>
+    {(data?.errorType === 408 && (
+      <>
+        <i>
+          <Icon color="orange" slug="alertFill">
+            La récupération du document auprès des services {administration} a
+            pris trop de temps.
+          </Icon>
+        </i>
+        <br />
+        <a href="">Rechargez la page</a> ou ré-essayez plus-tard.
+        <br />
+        <br />
+      </>
+    )) || (
+      <>
+        <i>
+          <Icon color="#df0a00" slug="errorFill">
+            La récupération du document auprès des services {administration} a
+            échoué.
+          </Icon>
+        </i>
+        <br />
+        Ré-essayez plus tard ou rapprochez-vous de l’entreprise pour lui
+        demander la pièce directement.
+        <br />
+        <br />
+      </>
+    )}
+  </>
+);
 
 const Conformite: React.FC<{
   data: IConformite | IAPINotRespondingError;
@@ -54,23 +52,22 @@ const Conformite: React.FC<{
       return (
         <Icon slug="closed">{administration} : document introuvable.</Icon>
       );
-    } else {
-      return (
-        <APINotRespongingElement data={data} administration={administration} />
-      );
     }
+    return (
+      <APINotRespongingElement administration={administration} data={data} />
+    );
   }
 
   const valid = data.isValid === true;
-  const iconSlug = valid ? 'open' : 'closed';
-  const label = `${administration} : ${valid ? '' : 'non-'}conforme`;
+  const iconSlug = valid ? "open" : "closed";
+  const label = `${administration} : ${valid ? "" : "non-"}conforme`;
 
   return (
     <div className="layout-space-between">
       <Icon slug={iconSlug}>{label}</Icon>
       {data.url && (
         <a href={data.url}>
-          <Icon slug="download">{data.label || 'télécharger'}</Icon>
+          <Icon slug="download">{data.label || "télécharger"}</Icon>
         </a>
       )}
     </div>

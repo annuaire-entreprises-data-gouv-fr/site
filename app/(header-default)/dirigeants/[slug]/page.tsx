@@ -1,35 +1,35 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { DonneesPriveesSection } from '#components/donnees-privees-section';
-import Title from '#components/title-section';
-import { FICHE } from '#components/title-section/tabs';
+import type { Metadata } from "next";
+import { DonneesPriveesSection } from "#components/donnees-privees-section";
+import Title from "#components/title-section";
+import { FICHE } from "#components/title-section/tabs";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { estDiffusible } from '#models/core/diffusion';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import { estDiffusible } from "#models/core/diffusion";
 import {
+  type IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
-  IUniteLegale,
-} from '#models/core/types';
+} from "#models/core/types";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
-} from '#utils/helpers';
-import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
+} from "#utils/helpers";
+import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
-  AppRouterProps,
-} from '#utils/server-side-helper/app/extract-params';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { Metadata } from 'next';
-import DirigeantsAssociationSection from './_component/sections/association/dirigeants';
-import ElusSection from './_component/sections/collectivite/elus-section';
-import DPOSection from './_component/sections/entreprise/dpo/section';
-import DirigeantsEntrepriseSection from './_component/sections/entreprise/entreprise-section';
-import DirigeantSummary from './_component/sections/entreprise/summary';
-import ResponsablesServicePublicSection from './_component/sections/service-public';
+  type AppRouterProps,
+} from "#utils/server-side-helper/app/extract-params";
+import getSession from "#utils/server-side-helper/app/get-session";
+import DirigeantsAssociationSection from "./_component/sections/association/dirigeants";
+import ElusSection from "./_component/sections/collectivite/elus-section";
+import DPOSection from "./_component/sections/entreprise/dpo/section";
+import DirigeantsEntrepriseSection from "./_component/sections/entreprise/entreprise-section";
+import DirigeantSummary from "./_component/sections/entreprise/summary";
+import ResponsablesServicePublicSection from "./_component/sections/service-public";
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -41,7 +41,7 @@ export const generateMetadata = async (
   return {
     title: `Dirigeants - ${uniteLegalePageTitle(uniteLegale)}`,
     description: uniteLegalePageDescription(uniteLegale),
-    robots: 'noindex',
+    robots: "noindex",
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`,
     },
@@ -82,14 +82,14 @@ const DirigeantsContent = ({
   if (isAssociation(uniteLegale)) {
     return (
       <DirigeantsAssociationSection
-        uniteLegale={uniteLegale}
         session={session}
+        uniteLegale={uniteLegale}
       />
     );
   }
   // Entreprises & EI
   return (
-    <DirigeantsEntrepriseSection uniteLegale={uniteLegale} session={session} />
+    <DirigeantsEntrepriseSection session={session} uniteLegale={uniteLegale} />
   );
 };
 
@@ -104,14 +104,14 @@ const DirigeantsPage = async (props: AppRouterProps) => {
     <>
       <div className="content-container">
         <Title
-          uniteLegale={uniteLegale}
           ficheType={FICHE.DIRIGEANTS}
           session={session}
+          uniteLegale={uniteLegale}
         />
         <DirigeantSummary session={session} uniteLegale={uniteLegale} />
-        <DirigeantsContent uniteLegale={uniteLegale} session={session} />
+        <DirigeantsContent session={session} uniteLegale={uniteLegale} />
         <HorizontalSeparator />
-        <DPOSection uniteLegale={uniteLegale} session={session} />
+        <DPOSection session={session} uniteLegale={uniteLegale} />
       </div>
     </>
   );

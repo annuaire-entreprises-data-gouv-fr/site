@@ -1,21 +1,21 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import { IEgapro } from '#models/certifications/egapro';
-import { Siren } from '#utils/helpers';
-import { httpGet } from '#utils/network';
-import { IEgaproItem, IEgaproResponse } from './types';
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import type { IEgapro } from "#models/certifications/egapro";
+import type { Siren } from "#utils/helpers";
+import { httpGet } from "#utils/network";
+import type { IEgaproItem, IEgaproResponse } from "./types";
 
 const employeesSizeRangeMapping = {
-  '50:250': '50 à 250 salariés',
-  '251:999': '251 à 999 salariés',
-  '1000:': '1000 salariés ou plus',
+  "50:250": "50 à 250 salariés",
+  "251:999": "251 à 999 salariés",
+  "1000:": "1000 salariés ou plus",
 };
 
 /**
  * EGAPRO
  * https://egapro.travail.gouv.fr/
  */
-export const clientEgapro = async (siren: Siren): Promise<IEgapro['index']> => {
+export const clientEgapro = async (siren: Siren): Promise<IEgapro["index"]> => {
   const response = await httpGet<IEgaproResponse>(routes.egapro.index, {
     params: { q: siren },
   });
@@ -30,7 +30,7 @@ export const clientEgapro = async (siren: Siren): Promise<IEgapro['index']> => {
   return mapToDomainObject(dataSearch[0]);
 };
 
-const mapToDomainObject = (egapro: IEgaproItem): IEgapro['index'] => {
+const mapToDomainObject = (egapro: IEgaproItem): IEgapro["index"] => {
   const {
     notes,
     notes_augmentations,
@@ -56,7 +56,7 @@ const mapToDomainObject = (egapro: IEgaproItem): IEgapro['index'] => {
   // index is valid for declaration year + 1
   const indexYears = years.map((y) => {
     try {
-      return (parseInt(y, 10) + 1).toString();
+      return (Number.parseInt(y, 10) + 1).toString();
     } catch {
       return y;
     }
@@ -64,10 +64,10 @@ const mapToDomainObject = (egapro: IEgaproItem): IEgapro['index'] => {
 
   return {
     employeesSizeRange:
-      employeesSizeRangeMapping[egapro.entreprise?.effectif?.tranche || ''],
+      employeesSizeRangeMapping[egapro.entreprise?.effectif?.tranche || ""],
     years,
-    moreThan1000: egapro.entreprise?.effectif?.tranche === '1000:',
-    lessThan250: egapro.entreprise?.effectif?.tranche === '50:250',
+    moreThan1000: egapro.entreprise?.effectif?.tranche === "1000:",
+    lessThan250: egapro.entreprise?.effectif?.tranche === "50:250",
     indexYears,
     scores: {
       notes: years.map((y) => notes[y] ?? null),

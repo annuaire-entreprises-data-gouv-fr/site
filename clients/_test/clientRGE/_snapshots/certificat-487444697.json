@@ -1,7 +1,5 @@
 {
-  "args": [
-    "487444697"
-  ],
+  "args": ["487444697"],
   "result": {
     "companyInfo": {
       "adresse": "22 RUE MAISON BLANCHE, 24330, BOULAZAC ISLE MANOIRE",
@@ -16,9 +14,7 @@
       {
         "logoPath": "/images/rge/logo-rge-qualifelec.jpg",
         "codeQualification": "43SPVRGE",
-        "domaines": [
-          "Panneaux solaires photovoltaïques"
-        ],
+        "domaines": ["Panneaux solaires photovoltaïques"],
         "nomCertificat": "Certificat Qualifelec RGE",
         "nomQualification": "Panneaux Solaires Photovoltaïques (43SPVRGE)",
         "organisme": "qualifelec",

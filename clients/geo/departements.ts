@@ -1,7 +1,7 @@
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { httpGet } from '#utils/network';
-import { IGeoElement } from '.';
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import { httpGet } from "#utils/network";
+import type { IGeoElement } from ".";
 
 type IGeoDepartementResponse = {
   nom: string;
@@ -34,12 +34,9 @@ export const clientDepartementByCode = async (
 
 const mapToDomainObject = (
   response: IGeoDepartementResponse[]
-): IGeoElement[] => {
-  return response.map((departement) => {
-    return {
-      label: `${departement.nom} (${departement.code})`,
-      value: departement.code,
-      type: 'dep',
-    };
-  });
-};
+): IGeoElement[] =>
+  response.map((departement) => ({
+    label: `${departement.nom} (${departement.code})`,
+    value: departement.code,
+    type: "dep",
+  }));

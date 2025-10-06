@@ -1,11 +1,11 @@
-import FAQLink from '#components-ui/faq-link';
-import { Tag } from '#components-ui/tag';
-import { MTPEI } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IOrganismeFormation } from '#models/certifications/organismes-de-formation';
+import { MTPEI } from "#components/administrations";
+import { DataSection } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import FAQLink from "#components-ui/faq-link";
+import { Tag } from "#components-ui/tag";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IOrganismeFormation } from "#models/certifications/organismes-de-formation";
 
 type OrganismeDeFormationSectionProps = {
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
@@ -16,30 +16,29 @@ export const OrganismeDeFormationSection = ({
 }: OrganismeDeFormationSectionProps) => {
   return (
     <DataSection
-      title="Organisme de formation"
-      sources={[EAdministration.MTPEI]}
-      id="organisme-de-formation"
       data={organismesDeFormation}
-      // if 404 from DGEFP we can assume this organism is NOT qualiopi
+      id="organisme-de-formation"
       notFoundInfo={<OrganismeFormationLabel qualiopiCertified={false} />}
+      sources={[EAdministration.MTPEI]}
+      // if 404 from DGEFP we can assume this organism is NOT qualiopi
+      title="Organisme de formation"
     >
       {(organismesDeFormation) => {
         // we use definition from DGEFP rather than recherche entreprise which can be outdated
         const qualiopiCertified = organismesDeFormation.qualiopiCertified;
 
         const head = [
-          'Numéro Déclaration Activité (NDA)',
-          'Détails',
-          ...(qualiopiCertified ? ['Certification(s) Qualiopi'] : []),
+          "Numéro Déclaration Activité (NDA)",
+          "Détails",
+          ...(qualiopiCertified ? ["Certification(s) Qualiopi"] : []),
         ];
 
         return (
           <>
             <OrganismeFormationLabel qualiopiCertified={qualiopiCertified} />
             <FullTable
-              head={head}
               body={organismesDeFormation.records.map((fields) => [
-                <Tag>{fields.nda ? fields.nda : 'Inconnu'}</Tag>,
+                <Tag>{fields.nda ? fields.nda : "Inconnu"}</Tag>,
                 <>
                   {fields.specialite && (
                     <>
@@ -49,21 +48,21 @@ export const OrganismeDeFormationSection = ({
                   )}
                   {fields.formateurs && (
                     <>
-                      <strong>Effectifs formateurs :</strong>{' '}
+                      <strong>Effectifs formateurs :</strong>{" "}
                       {fields.formateurs}
                       <br />
                     </>
                   )}
                   {fields.stagiaires && (
                     <>
-                      <strong>Effectifs stagiaires :</strong>{' '}
+                      <strong>Effectifs stagiaires :</strong>{" "}
                       {fields.stagiaires}
                       <br />
                     </>
                   )}
                   {fields.dateDeclaration && (
                     <>
-                      <strong>Déclaration : </strong> le{' '}
+                      <strong>Déclaration : </strong> le{" "}
                       {fields.dateDeclaration}
                       {fields.region && <>, en région {fields.region}</>}
                       <br />
@@ -80,7 +79,8 @@ export const OrganismeDeFormationSection = ({
                     ]
                   : []),
               ])}
-            />{' '}
+              head={head}
+            />{" "}
           </>
         );
       }}
@@ -90,8 +90,8 @@ export const OrganismeDeFormationSection = ({
 
 const FAQQaliopi = () => (
   <FAQLink
-    tooltipLabel="certifiée Qualiopi"
     to="/faq/qualiopi-organisme-formation"
+    tooltipLabel="certifiée Qualiopi"
   >
     La certification Qualiopi est accordée par le <MTPEI /> aux organismes de
     formation répondant à certains critères de qualité.
@@ -100,7 +100,7 @@ const FAQQaliopi = () => (
 
 const OrganismeFormationLabel = ({ qualiopiCertified = false }) => (
   <>
-    Cette structure est un organisme de formation,{' '}
+    Cette structure est un organisme de formation,{" "}
     <FAQLink tooltipLabel="à jour de ses obligations">
       Un organisme de formation est à jour de ses obligations si il a bien
       déclaré auprès du Préfet de Région territorialement compétent son Bilan

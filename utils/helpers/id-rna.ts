@@ -1,11 +1,11 @@
-import { NotAValidIdRnaError } from '#models/core/types';
+import { NotAValidIdRnaError } from "#models/core/types";
 
 /**
  * IdRna types
  */
 type Brand<K, T> = K & { __brand: T };
 
-export type IdRna = Brand<string, 'IdRna'>;
+export type IdRna = Brand<string, "IdRna">;
 
 /**
  * Two valid Id RNA format

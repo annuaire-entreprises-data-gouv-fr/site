@@ -1,11 +1,11 @@
-import { clientProfessionnelBio } from '#clients/api-bio';
-import { IBioResponse } from '#clients/api-bio/interface';
-import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { APINotRespondingFactory } from '#models/api-not-responding';
-import { FetchRessourceException } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '../core/types';
+import { clientProfessionnelBio } from "#clients/api-bio";
+import type { IBioResponse } from "#clients/api-bio/interface";
+import { HttpNotFound } from "#clients/exceptions";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { APINotRespondingFactory } from "#models/api-not-responding";
+import { FetchRessourceException } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import type { IUniteLegale } from "../core/types";
 
 export interface IEtablissementsBio {
   etablissementsBio: IEtablissementBio[];
@@ -34,7 +34,7 @@ export interface IBioCertification {
   };
   url: string;
   organization: string;
-  status: IBioResponse['items'][0]['certificats'][0]['etatCertification'] | '';
+  status: IBioResponse["items"][0]["certificats"][0]["etatCertification"] | "";
   exempted: boolean;
 }
 
@@ -50,7 +50,7 @@ export const getBio = async (uniteLegale: IUniteLegale) => {
     }
     logErrorInSentry(
       new FetchRessourceException({
-        ressource: 'ProfessionnelBio',
+        ressource: "ProfessionnelBio",
         cause: e,
         context: {
           siren: uniteLegale.siren,

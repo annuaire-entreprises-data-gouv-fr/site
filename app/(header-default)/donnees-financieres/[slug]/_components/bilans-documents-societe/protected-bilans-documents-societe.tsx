@@ -1,32 +1,31 @@
-'use client';
+"use client";
 
-import routes from '#clients/routes';
-import { Warning } from '#components-ui/alerts';
-import ButtonLink from '#components-ui/button';
-import FAQLink from '#components-ui/faq-link';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import routes from "#clients/routes";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { FullTable } from "#components/table/full";
+import { Warning } from "#components-ui/alerts";
+import ButtonLink from "#components-ui/button";
+import FAQLink from "#components-ui/faq-link";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { ISession } from "#models/authentication/user/session";
 import {
-  IUniteLegale,
+  type IUniteLegale,
   isAssociation,
   isServicePublic,
-} from '#models/core/types';
-import { IDocumentsRNE } from '#models/rne/types';
-import { formatDateLong, pluralize } from '#utils/helpers';
-import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import { BilanTypeTag } from '../bilan-tag';
+} from "#models/core/types";
+import type { IDocumentsRNE } from "#models/rne/types";
+import { formatDateLong, pluralize } from "#utils/helpers";
+import { getFiscalYear } from "#utils/helpers/formatting/format-fiscal-year";
+import { BilanTypeTag } from "../bilan-tag";
 
 const NoBilans = () => (
   <>Aucun compte n’a été déposé au RNE pour cette entreprise.</>
 );
 
-const BilansTable = ({ bilans }: { bilans: IDocumentsRNE['bilans'] }) => (
+const BilansTable = ({ bilans }: { bilans: IDocumentsRNE["bilans"] }) => (
   <FullTable
-    head={['Date de dépôt', 'Année fiscale', 'Type de bilan', 'Lien']}
     body={bilans.map((a) => [
       formatDateLong(a.dateDepot),
       getFiscalYear(a.dateCloture),
@@ -40,6 +39,7 @@ const BilansTable = ({ bilans }: { bilans: IDocumentsRNE['bilans'] }) => (
         Télécharger
       </ButtonLink>,
     ])}
+    head={["Date de dépôt", "Année fiscale", "Type de bilan", "Lien"]}
   />
 );
 
@@ -57,11 +57,9 @@ export default function BilansDocumentsSocieteProtected({
   );
   return (
     <AsyncDataSectionClient
-      title="Bilans au format PDF"
+      data={documents}
       id="bilans-pdf"
       isProtected
-      sources={[EAdministration.INPI]}
-      data={documents}
       notFoundInfo={
         <>
           {(isAssociation(uniteLegale) || isServicePublic(uniteLegale)) && (
@@ -76,6 +74,8 @@ export default function BilansDocumentsSocieteProtected({
           <NoBilans />
         </>
       }
+      sources={[EAdministration.INPI]}
+      title="Bilans au format PDF"
     >
       {(documents) =>
         documents.bilans?.length === 0 ? (
@@ -84,13 +84,13 @@ export default function BilansDocumentsSocieteProtected({
           <>
             <p>
               Cette entreprise possède {documents.bilans.length} bilan
-              {pluralize(documents.bilans)} déposé{pluralize(documents.bilans)}{' '}
+              {pluralize(documents.bilans)} déposé{pluralize(documents.bilans)}{" "}
               au RNE :
             </p>
             {documents.hasBilanConsolide && (
               <>
                 <h3>
-                  Bilans{' '}
+                  Bilans{" "}
                   <FAQLink tooltipLabel="Consolidés">
                     Une entreprise peut déposer différents types de bilans :
                     <ul>
@@ -104,23 +104,23 @@ export default function BilansDocumentsSocieteProtected({
                   </FAQLink>
                 </h3>
                 <div>
-                  Cette entreprise a notamment déclaré des{' '}
+                  Cette entreprise a notamment déclaré des{" "}
                   <FAQLink
-                    tooltipLabel="bilans consolidés"
                     to="/faq/donnees-financieres#quest-ce-quun-bilan-consolide"
+                    tooltipLabel="bilans consolidés"
                   >
                     Qu’est-ce qu’un bilan consolidé ?
                   </FAQLink>
                 </div>
                 <br />
                 <BilansTable
-                  bilans={documents.bilans.filter((b) => b.typeBilan === 'K')}
+                  bilans={documents.bilans.filter((b) => b.typeBilan === "K")}
                 />
                 <br />
               </>
             )}
             <h3>
-              Bilans{' '}
+              Bilans{" "}
               <FAQLink tooltipLabel="Complets ou Simplifiés">
                 Une entreprise peut déposer différents types de bilans :
                 <ul>
@@ -134,7 +134,7 @@ export default function BilansDocumentsSocieteProtected({
               </FAQLink>
             </h3>
             <BilansTable
-              bilans={documents.bilans.filter((b) => b.typeBilan !== 'K')}
+              bilans={documents.bilans.filter((b) => b.typeBilan !== "K")}
             />
           </>
         )

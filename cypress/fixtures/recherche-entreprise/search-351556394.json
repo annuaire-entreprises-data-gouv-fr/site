@@ -88,9 +88,7 @@
           "date_immatriculation": "1989-08-08",
           "date_radiation": "2009-03-17",
           "duree_personne_morale": null,
-          "nature_entreprise": [
-            "Commerciale"
-          ],
+          "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": null,
           "capital_social": 7622.45,
           "capital_variable": false,

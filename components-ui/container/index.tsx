@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
-import styles from './style.module.css';
+import type { ReactNode } from "react";
+import styles from "./style.module.css";
+
 type ContainerProps = {
   children: ReactNode;
   className?: string;
@@ -23,13 +24,13 @@ type ContainerProps = {
 export default function FullWidthContainer({
   children,
   style = {},
-  className = '',
+  className = "",
 }: ContainerProps) {
   return (
     <>
-      <div className={styles['outer-outer-container']}>
+      <div className={styles["outer-outer-container"]}>
         <div
-          className={`${className} ${styles['outer-container']}`}
+          className={`${className} ${styles["outer-container"]}`}
           style={style}
         >
           <div className="fr-container">{children}</div>

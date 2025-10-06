@@ -1,14 +1,14 @@
-import { clientAPIInclusion } from '#clients/api-inclusion';
-import { clientInclusionKindMetadata } from '#clients/api-inclusion/inclusion-kind';
-import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { clientAPIInclusion } from "#clients/api-inclusion";
+import { clientInclusionKindMetadata } from "#clients/api-inclusion/inclusion-kind";
+import { HttpNotFound } from "#clients/exceptions";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { FetchRessourceException } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '../core/types';
+  type IAPINotRespondingError,
+} from "#models/api-not-responding";
+import { FetchRessourceException } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import type { IUniteLegale } from "../core/types";
 
 export type IEntrepriseInclusive = {
   marcheInclusionLink: string;
@@ -24,7 +24,7 @@ export const getEntrepriseInclusive = async (
 ): Promise<IEntrepriseInclusive[] | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.estEntrepriseInclusive) {
-      throw new HttpNotFound('Not an entreprise inclusive');
+      throw new HttpNotFound("Not an entreprise inclusive");
     }
     const entrepriseInclusiveList = await clientAPIInclusion(uniteLegale.siren);
     return await Promise.all(
@@ -32,7 +32,7 @@ export const getEntrepriseInclusive = async (
         const kindLabel = await clientInclusionKindMetadata(kind);
         return {
           ...rest,
-          category: kindLabel?.parent || '',
+          category: kindLabel?.parent || "",
           type: kindLabel?.name ? `${kindLabel?.name} (${kind})` : kind,
         };
       })
@@ -44,7 +44,7 @@ export const getEntrepriseInclusive = async (
     logErrorInSentry(
       new FetchRessourceException({
         cause: e,
-        ressource: 'EntrepriseInclusive',
+        ressource: "EntrepriseInclusive",
         context: {
           siren: uniteLegale.siren,
         },

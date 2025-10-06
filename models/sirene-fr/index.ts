@@ -1,10 +1,10 @@
-import { HttpNotFound } from '#clients/exceptions';
+import type { ExportCsvInput } from "app/api/export-sirene/input-validation";
+import type { Readable } from "stream";
+import { HttpNotFound } from "#clients/exceptions";
 import {
   clientSireneInsee,
   clientSireneInseeCount,
-} from '#clients/sirene-insee/export-sirene';
-import { ExportCsvInput } from 'app/api/export-sirene/input-validation';
-import { Readable } from 'stream';
+} from "#clients/sirene-insee/export-sirene";
 
 export const getEtablissementListe = async (
   searchParams: ExportCsvInput

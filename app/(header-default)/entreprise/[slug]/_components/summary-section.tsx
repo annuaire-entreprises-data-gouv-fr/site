@@ -1,38 +1,38 @@
-import FAQLink from '#components-ui/faq-link';
-import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
+import type React from "react";
+import { ConventionCollectivesBadgesSection } from "#components/badges-section/convention-collectives";
 import {
-  LabelsAndCertificatesBadgesSection,
   checkHasLabelsAndCertificates,
   checkHasQuality,
+  LabelsAndCertificatesBadgesSection,
   labelsAndCertificatesSources,
-} from '#components/badges-section/labels-and-certificates';
-import { ProtectedCertificatesBadgesSection } from '#components/badges-section/labels-and-certificates/protected-certificats';
-import EORICell from '#components/eori-cell';
-import { Section } from '#components/section';
-import { TwoColumnTable } from '#components/table/simple';
-import TVACell from '#components/tva-cell';
-import { EAdministration } from '#models/administrations/EAdministration';
+} from "#components/badges-section/labels-and-certificates";
+import { ProtectedCertificatesBadgesSection } from "#components/badges-section/labels-and-certificates/protected-certificats";
+import EORICell from "#components/eori-cell";
+import { Section } from "#components/section";
+import { TwoColumnTable } from "#components/table/simple";
+import TVACell from "#components/tva-cell";
+import FAQLink from "#components-ui/faq-link";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { estActif } from '#models/core/etat-administratif';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import { estActif } from "#models/core/etat-administratif";
 import {
-  IUniteLegale,
+  type IUniteLegale,
   isAssociation,
   isServicePublic,
-} from '#models/core/types';
-import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
-import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
-import React from 'react';
-import { EffectifCell } from './effectif-cell';
+} from "#models/core/types";
+import { formatDate, formatIntFr, formatSiret } from "#utils/helpers";
+import { libelleCategorieEntreprise } from "#utils/helpers/formatting/categories-entreprise";
+import { EffectifCell } from "./effectif-cell";
 import {
   UniteLegaleInscriptionIG,
   UniteLegaleInscriptionRNA,
   UniteLegaleInscriptionRNE,
   UniteLegaleInscriptionSirene,
-} from './inscriptions';
+} from "./inscriptions";
 
 const UniteLegaleSummarySection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -57,22 +57,22 @@ const UniteLegaleSummarySection: React.FC<{
       </FAQLink>,
       <>
         <UniteLegaleInscriptionSirene
-          uniteLegale={uniteLegale}
           session={session}
+          uniteLegale={uniteLegale}
         />
         <UniteLegaleInscriptionRNE
-          uniteLegale={uniteLegale}
           session={session}
+          uniteLegale={uniteLegale}
         />
         <UniteLegaleInscriptionIG uniteLegale={uniteLegale} />
         <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
       </>,
     ],
-    ['', <br />],
-    ['Dénomination', uniteLegale.nomComplet],
-    ['SIREN', formatIntFr(uniteLegale.siren)],
+    ["", <br />],
+    ["Dénomination", uniteLegale.nomComplet],
+    ["SIREN", formatIntFr(uniteLegale.siren)],
     [
-      'SIRET du siège social',
+      "SIRET du siège social",
       uniteLegale.siege &&
         uniteLegale.siege.siret &&
         formatSiret((uniteLegale.siege || {}).siret),
@@ -83,34 +83,34 @@ const UniteLegaleSummarySection: React.FC<{
     ],
     [
       <FAQLink
-        tooltipLabel="N° EORI"
         to="https://www.economie.gouv.fr/entreprises/numero-eori"
+        tooltipLabel="N° EORI"
       >
         Le numéro EORI (Economic Operator Registration and Identification) est
         un identifiant unique communautaire permettant d’identifier l’entreprise
         dans ses relations avec les autorités douanières.
       </FAQLink>,
       uniteLegale.siege.siret ? (
-        <EORICell siret={uniteLegale.siege.siret} session={session} />
+        <EORICell session={session} siret={uniteLegale.siege.siret} />
       ) : (
-        ''
+        ""
       ),
     ],
-    ['Activité principale (NAF/APE)', uniteLegale.libelleActivitePrincipale],
-    ['Code NAF/APE', uniteLegale.activitePrincipale],
+    ["Activité principale (NAF/APE)", uniteLegale.libelleActivitePrincipale],
+    ["Code NAF/APE", uniteLegale.activitePrincipale],
     [
       <a href="/faq/modifier-adresse">Adresse postale</a>,
       uniteLegale.siege.adressePostale,
     ],
-    ['Forme juridique', uniteLegale.libelleNatureJuridique],
+    ["Forme juridique", uniteLegale.libelleNatureJuridique],
     [
-      'Effectif salarié',
-      <EffectifCell uniteLegale={uniteLegale} session={session} />,
+      "Effectif salarié",
+      <EffectifCell session={session} uniteLegale={uniteLegale} />,
     ],
     [
       <FAQLink
-        tooltipLabel="Taille de la structure"
         to="https://www.insee.fr/fr/metadonnees/definition/c1057"
+        tooltipLabel="Taille de la structure"
       >
         La taille de l’entreprise, ou catégorie d’entreprise, est une variable
         statistique calculée par l’Insee sur la base de l’effectif, du chiffre
@@ -118,13 +118,13 @@ const UniteLegaleSummarySection: React.FC<{
       </FAQLink>,
       libelleCategorieEntreprise(uniteLegale),
     ],
-    ['Date de création', formatDate(uniteLegale.dateCreation)],
-    ...(!estActif(uniteLegale)
-      ? [['Date de fermeture', formatDate(uniteLegale.dateFermeture)]]
-      : []),
-    ['', <br />],
+    ["Date de création", formatDate(uniteLegale.dateCreation)],
+    ...(estActif(uniteLegale)
+      ? []
+      : [["Date de fermeture", formatDate(uniteLegale.dateFermeture)]]),
+    ["", <br />],
     [
-      'Convention(s) collective(s)',
+      "Convention(s) collective(s)",
       <ConventionCollectivesBadgesSection
         conventionCollectives={conventionsCollectives}
         siren={uniteLegale.siren}
@@ -133,10 +133,10 @@ const UniteLegaleSummarySection: React.FC<{
     // agents : we dont know yet if there are labels and certifs
     ...(hasRights(session, ApplicationRights.protectedCertificats)
       ? [
-          ['', <br />],
+          ["", <br />],
           [
             `${
-              checkHasQuality(uniteLegale) ? 'Qualités, l' : 'L'
+              checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
             }abels et certificats`,
             <ProtectedCertificatesBadgesSection
               session={session}
@@ -145,23 +145,23 @@ const UniteLegaleSummarySection: React.FC<{
           ],
         ]
       : hasLabelsAndCertificates
-      ? [
-          ['', <br />],
-          [
-            `${
-              checkHasQuality(uniteLegale) ? 'Qualités, l' : 'L'
-            }abels et certificats`,
-            <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />,
-          ],
-        ]
-      : //  open data and no certif : we can hide the whole line
-        []),
+        ? [
+            ["", <br />],
+            [
+              `${
+                checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
+              }abels et certificats`,
+              <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />,
+            ],
+          ]
+        : //  open data and no certif : we can hide the whole line
+          []),
   ];
 
   return (
     <div id="entreprise">
       <Section
-        title={`Informations légales de ${uniteLegale.nomComplet}`}
+        lastModified={uniteLegale.dateDerniereMiseAJour}
         sources={[
           EAdministration.INSEE,
           EAdministration.VIES,
@@ -170,14 +170,14 @@ const UniteLegaleSummarySection: React.FC<{
           ...(isAssociation(uniteLegale)
             ? [EAdministration.DILA]
             : isServicePublic(uniteLegale)
-            ? []
-            : [EAdministration.INPI]),
+              ? []
+              : [EAdministration.INPI]),
           ...(conventionsCollectives.length > 0 ? [EAdministration.MTPEI] : []),
           ...(hasRights(session, ApplicationRights.effectifsAnnuels)
             ? [EAdministration.GIP_MDS]
             : []),
         ]}
-        lastModified={uniteLegale.dateDerniereMiseAJour}
+        title={`Informations légales de ${uniteLegale.nomComplet}`}
       >
         <TwoColumnTable body={data} />
       </Section>

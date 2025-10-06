@@ -40,9 +40,7 @@
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
           "libelle_voie": "LA RENAUDIERE",
-          "liste_enseignes": [
-            "LES INSECTES"
-          ],
+          "liste_enseignes": ["LES INSECTES"],
           "liste_finess": null,
           "liste_id_bio": null,
           "liste_idcc": null,
@@ -90,9 +88,7 @@
           "date_immatriculation": null,
           "date_radiation": null,
           "duree_personne_morale": null,
-          "nature_entreprise": [
-            "Agricole : Périmètre des actifs agricoles"
-          ],
+          "nature_entreprise": ["Agricole : Périmètre des actifs agricoles"],
           "date_cloture_exercice": null,
           "capital_social": null,
           "capital_variable": false,

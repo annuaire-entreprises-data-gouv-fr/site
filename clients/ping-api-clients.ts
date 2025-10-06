@@ -1,56 +1,60 @@
-import { clientAssociation } from '#clients/api-proxy/association';
-import { tvaNumber } from '#models/tva/utils';
+import { clientAssociation } from "#clients/api-proxy/association";
+import { tvaNumber } from "#models/tva/utils";
 import {
   verifyIdRna,
   verifySiren,
   verifySiret,
   verifyTVANumber,
-} from '#utils/helpers';
-import { clientAPIInclusion } from './api-inclusion';
-import { clientEORI } from './api-proxy/eori';
-import { clientUniteLegaleIG } from './api-proxy/greffe';
-import { clientTVA } from './api-proxy/tva';
-import { clientDocuments } from './api-rne/documents';
-import clientSearchRechercheEntreprise from './recherche-entreprise';
-import { clientUniteLegaleRechercheEntreprise } from './recherche-entreprise/siren';
-import { clientUniteLegaleInsee } from './sirene-insee/siren';
+} from "#utils/helpers";
+import { clientAPIInclusion } from "./api-inclusion";
+import { clientEORI } from "./api-proxy/eori";
+import { clientUniteLegaleIG } from "./api-proxy/greffe";
+import { clientTVA } from "./api-proxy/tva";
+import { clientDocuments } from "./api-rne/documents";
+import clientSearchRechercheEntreprise from "./recherche-entreprise";
+import { clientUniteLegaleRechercheEntreprise } from "./recherche-entreprise/siren";
+import { clientUniteLegaleInsee } from "./sirene-insee/siren";
 
 export class APISlugNotFound extends Error {
-  constructor(public status: number, public message: string) {
+  constructor(
+    public status: number,
+    public message: string
+  ) {
     super();
   }
 }
 
 const ping = async (slug: string | string[]) => {
-  const sirenGanymede = verifySiren('880878145');
-  const siretGanymede = verifySiret('88087814500015');
-  const sirenDanone = verifySiren('552032534');
-  const sirenInclusion = verifySiren('419437629');
+  const sirenGanymede = verifySiren("880878145");
+  const siretGanymede = verifySiret("88087814500015");
+  const sirenDanone = verifySiren("552032534");
+  const sirenInclusion = verifySiren("419437629");
 
   switch (slug) {
-    case 'api-proxy-ig':
+    case "api-proxy-ig":
       return await clientUniteLegaleIG(sirenDanone);
-    case 'api-sirene-insee':
+    case "api-sirene-insee":
       return await clientUniteLegaleInsee(sirenGanymede, 1, false);
-    case 'api-sirene-donnees-ouvertes':
+    case "api-sirene-donnees-ouvertes":
       return await clientUniteLegaleRechercheEntreprise(sirenGanymede, 1);
-    case 'api-association':
-      return await clientAssociation(verifyIdRna('W551000280'), '');
-    case 'api-marche-inclusion':
+    case "api-association":
+      return await clientAssociation(verifyIdRna("W551000280"), "");
+    case "api-marche-inclusion":
       return await clientAPIInclusion(sirenInclusion);
-    case 'api-tva':
+    case "api-tva": {
       const tva = verifyTVANumber(tvaNumber(sirenDanone));
       return await clientTVA(tva);
-    case 'api-eori':
+    }
+    case "api-eori":
       return await clientEORI(siretGanymede);
-    case 'api-recherche':
+    case "api-recherche":
       return await clientSearchRechercheEntreprise({
-        searchTerms: 'test',
+        searchTerms: "test",
         pageResultatsRecherche: 1,
         searchFilterParams: undefined,
         inclureEtablissements: false,
       });
-    case 'api-rne':
+    case "api-rne":
       return await clientDocuments(sirenDanone, {
         disableSensitiveRequestLogger: true,
       });
@@ -66,8 +70,7 @@ export const pingAPIClient = async (slug: string | string[]) => {
   } catch (e: any) {
     if (e instanceof APISlugNotFound) {
       throw e;
-    } else {
-      return { test: false, status: e.status || 500 };
     }
+    return { test: false, status: e.status || 500 };
   }
 };

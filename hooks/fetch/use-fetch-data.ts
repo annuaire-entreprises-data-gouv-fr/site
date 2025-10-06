@@ -1,14 +1,14 @@
-import { EAdministration } from '#models/administrations/EAdministration';
+import { useEffect, useState } from "react";
+import type { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { IDataFetchingState } from '#models/data-fetching';
+  type IAPINotRespondingError,
+} from "#models/api-not-responding";
+import { IDataFetchingState } from "#models/data-fetching";
 import {
   FailToFetchError,
   RequestAbortedDuringUnloadException,
-} from '#utils/network/frontend';
-import { useEffect, useState } from 'react';
+} from "#utils/network/frontend";
 
 type IFetchDataType<T> = {
   fetchData: () => Promise<T>;
@@ -38,7 +38,7 @@ export function useFetchExternalData<T>(
         if (e instanceof RequestAbortedDuringUnloadException) {
           return;
         }
-        if (429 === e.status) {
+        if (e.status === 429) {
           setResponse(IDataFetchingState.TOO_MANY_REQUESTS);
           return;
         }

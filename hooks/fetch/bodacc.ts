@@ -1,10 +1,10 @@
-import { clientBodacc } from '#clients/open-data-soft/clients/bodacc';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale } from '#models/core/types';
-import { FetchRessourceException } from '#models/exceptions';
-import { verifySiren } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { useFetchExternalData } from './use-fetch-data';
+import { clientBodacc } from "#clients/open-data-soft/clients/bodacc";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { IUniteLegale } from "#models/core/types";
+import { FetchRessourceException } from "#models/exceptions";
+import { verifySiren } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchBODACC(uniteLegale: IUniteLegale) {
   return useFetchExternalData(
@@ -16,7 +16,7 @@ export function useFetchBODACC(uniteLegale: IUniteLegale) {
           return;
         }
         const exception = new FetchRessourceException({
-          ressource: 'BODACC',
+          ressource: "BODACC",
           administration: EAdministration.DILA,
           cause: e,
           context: {

@@ -5,11 +5,12 @@
 // ***********************************************
 //
 //
-import { comptesAgents } from '#cypress/mocks/comptes-agents';
-import { IAgentScope } from '#models/authentication/agent/scopes/constants';
-import { ISession } from '#models/authentication/user/session';
-import { sessionOptions } from '#utils/session';
-import { sealData } from 'iron-session';
+
+import { sealData } from "iron-session";
+import { comptesAgents } from "#cypress/mocks/comptes-agents";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
+import type { ISession } from "#models/authentication/user/session";
+import { sessionOptions } from "#utils/session";
 
 declare global {
   namespace Cypress {
@@ -20,7 +21,7 @@ declare global {
 }
 
 const generateSessionCookie = async (inputEmail?: string) => {
-  const email = inputEmail || 'user@yopmail.com';
+  const email = inputEmail || "user@yopmail.com";
   const user = comptesAgents.find((agent) => agent.email === email);
 
   if (!user) {
@@ -29,16 +30,16 @@ const generateSessionCookie = async (inputEmail?: string) => {
 
   const session: ISession = {
     user: {
-      idpId: '123456789',
-      proConnectSub: '123456789',
-      domain: 'yopmail.com',
-      siret: '12345678912345',
-      familyName: 'John Doe',
-      firstName: 'John Doe',
-      fullName: 'John Doe',
+      idpId: "123456789",
+      proConnectSub: "123456789",
+      domain: "yopmail.com",
+      siret: "12345678912345",
+      familyName: "John Doe",
+      firstName: "John Doe",
+      fullName: "John Doe",
       email: user.email,
-      scopes: user.scopes.split(' ') as IAgentScope[],
-      userType: 'Super-agent connecté',
+      scopes: user.scopes.split(" ") as IAgentScope[],
+      userType: "Super-agent connecté",
       isSuperAgent: true,
       agentIsNotVerified: false,
     },
@@ -46,18 +47,16 @@ const generateSessionCookie = async (inputEmail?: string) => {
 
   return sealData(session, {
     password:
-      Cypress.env('IRON_SESSION_PWD') || 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+      Cypress.env("IRON_SESSION_PWD") || "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
   });
 };
 
-Cypress.Commands.add('login', (email?: string) => {
-  cy.then(() => {
-    return generateSessionCookie(email);
-  })
+Cypress.Commands.add("login", (email?: string) => {
+  cy.then(() => generateSessionCookie(email))
     .then((validSessionCookie) => {
       cy.setCookie(sessionOptions.cookieName, validSessionCookie);
     })
     .then(() => {
-      window.localStorage.setItem('welcome-modal-agent', 'true');
+      window.localStorage.setItem("welcome-modal-agent", "true");
     });
 });

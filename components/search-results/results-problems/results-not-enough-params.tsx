@@ -1,7 +1,7 @@
-import { getFaqArticlesByTag } from '#models/article/faq';
+import { getFaqArticlesByTag } from "#models/article/faq";
 
 export const NotEnoughParams = () => {
-  const articles = getFaqArticlesByTag(['search']);
+  const articles = getFaqArticlesByTag(["search"]);
   return (
     <div>
       <br />

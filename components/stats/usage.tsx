@@ -1,8 +1,8 @@
-'use client';
-import { DoughnutChart } from '#components/chart/doughnut';
-import { LineChart } from '#components/chart/line';
-import constants from '#models/constants';
-import { ChartData } from 'chart.js';
+"use client";
+import type { ChartData } from "chart.js";
+import { DoughnutChart } from "#components/chart/doughnut";
+import { LineChart } from "#components/chart/line";
+import constants from "#models/constants";
 
 export const UsageStats: React.FC<{
   copyPasteAction: {
@@ -15,18 +15,18 @@ export const UsageStats: React.FC<{
   }[];
   mostCopied: { label: string; count: number }[];
 }> = ({ redirectedSiren, copyPasteAction, mostCopied }) => {
-  const data: ChartData<'line', (number | null)[], string> = {
+  const data: ChartData<"line", (number | null)[], string> = {
     labels: redirectedSiren.map((redirected) => redirected.label),
     datasets: [
       {
-        label: 'Utilisation du siren/siret dans la recherche',
+        label: "Utilisation du siren/siret dans la recherche",
         tension: 0.3,
         data: redirectedSiren.map((redirected) => redirected.value || null),
         borderColor: constants.chartColors[6],
         backgroundColor: constants.chartColors[6],
       },
       {
-        label: 'Utilisation du copier-coller',
+        label: "Utilisation du copier-coller",
         data: copyPasteAction.map((action) => action.value || null),
         tension: 0.3,
         borderColor: constants.chartColors[1],
@@ -45,13 +45,13 @@ export const UsageStats: React.FC<{
         <p>
           Nous suivons en particulier l’utilisation du copier-coller et le
           nombre de siren/siret utilisé directement dans le moteur de recherche,
-          car ces deux indicateurs sont corrélés à l’application du{' '}
+          car ces deux indicateurs sont corrélés à l’application du{" "}
           <a href="https://en.wikipedia.org/wiki/Once-only_principle">
             <strong>Dites-Le-Nous-Une-Fois</strong> (DLNUF)
           </a>
           .
         </p>
-        <LineChart height="300px" data={data} />
+        <LineChart data={data} height="300px" />
         <br />
         <div className="chart-container">
           <div>
@@ -63,10 +63,10 @@ export const UsageStats: React.FC<{
               démarches administratives.
             </p>
             <p>
-              Du côté des administrations publiques,{' '}
+              Du côté des administrations publiques,{" "}
               <strong>le numéro siren/siret</strong> est l’identifiant
               systématiquement utilisé pour identifier une entreprise lors d’une
-              démarche. Pour traiter un dossier, un{' '}
+              démarche. Pour traiter un dossier, un{" "}
               <strong>agent public</strong> peut coller le siren/siret
               directement dans la barre de recherche de l’Annuaire des
               Entreprises et retrouver immédiatement la fiche publique de
@@ -75,43 +75,42 @@ export const UsageStats: React.FC<{
           </div>
           <div>
             <DoughnutChart
-              height="200px"
               data={{
                 labels: mostCopied.map((el) => el.label),
                 datasets: [
                   {
-                    label: 'Nombre de copier-coller',
+                    label: "Nombre de copier-coller",
                     data: mostCopied.map((el) => el.count),
                     backgroundColor: constants.chartColors,
-                    borderColor: 'transparent',
+                    borderColor: "transparent",
                     hoverOffset: 4,
                   },
                 ],
               }}
+              height="200px"
               pluginOptions={{
                 tooltip: {
                   callbacks: {
                     label(context) {
                       const safeData = context.dataset.data as number[];
                       const total = safeData.reduce(
-                        (previousValue, currentValue) => {
-                          return previousValue + currentValue;
-                        },
+                        (previousValue, currentValue) =>
+                          previousValue + currentValue,
                         0
                       );
-                      return Math.round((context.parsed * 100) / total) + '%';
+                      return Math.round((context.parsed * 100) / total) + "%";
                     },
                   },
                 },
                 title: {
                   display: true,
-                  text: 'Ci-dessus : répartition des données les plus copiées-collées.',
-                  position: 'bottom',
-                  align: 'center',
+                  text: "Ci-dessus : répartition des données les plus copiées-collées.",
+                  position: "bottom",
+                  align: "center",
                 },
                 legend: {
-                  position: 'right',
-                  align: 'start',
+                  position: "right",
+                  align: "start",
                 },
               }}
             />

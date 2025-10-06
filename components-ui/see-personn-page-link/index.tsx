@@ -1,5 +1,5 @@
-import { IEtatCivil, IEtatCivilMergedIGInpi } from '#models/rne/types';
-import { Siren } from '#utils/helpers';
+import type { IEtatCivil, IEtatCivilMergedIGInpi } from "#models/rne/types";
+import type { Siren } from "#utils/helpers";
 
 export const SeePersonPageLink = ({
   person,
@@ -14,9 +14,9 @@ export const SeePersonPageLink = ({
     href={`/personne?n=${person.nom}&fn=${
       person.prenoms || person.prenom
     }&partialDate=${person.dateNaissancePartial}${
-      sirenFrom ? `&sirenFrom=${sirenFrom}` : ''
+      sirenFrom ? `&sirenFrom=${sirenFrom}` : ""
     }`}
   >
-    {label || '→ voir ses entreprises'}
+    {label || "→ voir ses entreprises"}
   </a>
 );

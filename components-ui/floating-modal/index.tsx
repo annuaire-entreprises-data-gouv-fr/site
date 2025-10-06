@@ -1,9 +1,10 @@
-import { forwardRef } from 'react';
-import styles from './style.module.css';
+import { forwardRef } from "react";
+import styles from "./style.module.css";
+
 type IProps = React.HTMLAttributes<HTMLDivElement> & {
   agentColor?: boolean;
   noMobile?: boolean;
-  elevation?: 'low' | 'high';
+  elevation?: "low" | "high";
   footer?: React.ReactNode;
 };
 export default forwardRef(function FloatingModal(
@@ -12,7 +13,7 @@ export default forwardRef(function FloatingModal(
     agentColor = false,
     footer,
     noMobile = false,
-    elevation = 'high',
+    elevation = "high",
     ...props
   }: IProps,
   ref: React.Ref<HTMLDivElement>
@@ -21,17 +22,17 @@ export default forwardRef(function FloatingModal(
     <div
       {...props}
       className={
-        styles['floating-modal'] +
-        ' ' +
-        (agentColor ? styles['agent'] : '') +
-        ' ' +
-        (props.className ?? '') +
-        ' ' +
-        (noMobile ? styles['no-mobile'] : '') +
-        ' ' +
-        (elevation === 'low'
-          ? styles['elevation-low']
-          : styles['elevation-high'])
+        styles["floating-modal"] +
+        " " +
+        (agentColor ? styles["agent"] : "") +
+        " " +
+        (props.className ?? "") +
+        " " +
+        (noMobile ? styles["no-mobile"] : "") +
+        " " +
+        (elevation === "low"
+          ? styles["elevation-low"]
+          : styles["elevation-high"])
       }
       ref={ref}
     >

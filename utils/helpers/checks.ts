@@ -1,10 +1,13 @@
-import { estDiffusible } from '#models/core/diffusion';
-import { estActif } from '#models/core/etat-administratif';
-import { isEntrepreneurIndividuel, IUniteLegale } from '#models/core/types';
+import { estDiffusible } from "#models/core/diffusion";
+import { estActif } from "#models/core/etat-administratif";
+import {
+  type IUniteLegale,
+  isEntrepreneurIndividuel,
+} from "#models/core/types";
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string
-) => ['1', '10', '1000'].indexOf(natureJuridique) > -1;
+) => ["1", "10", "1000"].indexOf(natureJuridique) > -1;
 
 export const isTwoMonthOld = (dateAsString: string) => {
   try {

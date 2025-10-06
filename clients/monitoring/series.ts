@@ -1,5 +1,5 @@
-import { IRatio } from '#models/monitoring';
-import { IUpdownIODowntimes } from '.';
+import type { IRatio } from "#models/monitoring";
+import type { IUpdownIODowntimes } from ".";
 
 type ILog = {
   date: Date;
@@ -103,18 +103,16 @@ export class DailyUptimeRatioConverter {
   export(monitorStartDate: Date | null): IRatio[] {
     return Object.values(this._days)
       .sort((a, b) => (a.date < b.date ? -1 : 1))
-      .map((day) => {
-        return {
-          ratioNumber: day.uptime,
-          date: getDDMMYYYY(day.date),
-          wasMonitorUp: monitorStartDate ? monitorStartDate < day.date : true,
-        };
-      });
+      .map((day) => ({
+        ratioNumber: day.uptime,
+        date: getDDMMYYYY(day.date),
+        wasMonitorUp: monitorStartDate ? monitorStartDate < day.date : true,
+      }));
   }
 }
 
 function getDDMMYYYY(d: Date): string {
-  return new Intl.DateTimeFormat('fr-FR', { timeZone: 'UTC' }).format(d);
+  return new Intl.DateTimeFormat("fr-FR", { timeZone: "UTC" }).format(d);
 }
 
 function addUTCDay(d: Date, day: number) {

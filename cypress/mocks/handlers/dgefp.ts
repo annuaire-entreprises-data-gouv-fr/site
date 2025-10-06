@@ -1,6 +1,5 @@
-import { HttpResponse, HttpResponseResolver } from 'msw';
-import dgefp from '../../fixtures/dgefp.json';
+import { HttpResponse, type HttpResponseResolver } from "msw";
+import dgefp from "../../fixtures/dgefp.json" with { type: "json" };
 
-export const dgefpHandler: HttpResponseResolver = ({ request }) => {
-  return HttpResponse.json(dgefp);
-};
+export const dgefpHandler: HttpResponseResolver = ({ request }) =>
+  HttpResponse.json(dgefp);

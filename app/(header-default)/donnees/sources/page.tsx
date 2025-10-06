@@ -1,17 +1,17 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { Icon } from '#components-ui/icon/wrapper';
-import { Tag } from '#components-ui/tag';
-import { Section } from '#components/section';
-import { TwoColumnTable } from '#components/table/simple';
-import { administrationsMetaData, allAPI } from '#models/administrations';
-import constants from '#models/constants';
-import { Metadata } from 'next';
-import React from 'react';
+import type { Metadata } from "next";
+import React from "react";
+import { Section } from "#components/section";
+import { TwoColumnTable } from "#components/table/simple";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import { Icon } from "#components-ui/icon/wrapper";
+import { Tag } from "#components-ui/tag";
+import { administrationsMetaData, allAPI } from "#models/administrations";
+import constants from "#models/constants";
 
 export const metadata: Metadata = {
-  title: 'Sources des données utilisées dans l’Annuaire des Entreprises',
+  title: "Sources des données utilisées dans l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/donnees/sources',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/donnees/sources",
   },
 };
 
@@ -26,8 +26,8 @@ export default function DataSourcesPage() {
       <p>
         L’Annuaire des Entreprises utilise les données de différentes
         administrations. Toutes les données accessibles sur le site proviennent
-        d’un jeu de données librement téléchargeable sur{' '}
-        <a href="https://data.gouv.fr">data.gouv.fr</a> et sont accessibles{' '}
+        d’un jeu de données librement téléchargeable sur{" "}
+        <a href="https://data.gouv.fr">data.gouv.fr</a> et sont accessibles{" "}
         <a href="/donnees/api">par API</a>.
       </p>
       <p>
@@ -46,14 +46,14 @@ export default function DataSourcesPage() {
                 <a
                   href={`#${slug}-${sourceIndex}`}
                   style={{
-                    display: 'inline-block',
+                    display: "inline-block",
                   }}
                 >
                   <span>
                     {isProtected ? (
                       <Icon
-                        slug="lockFill"
                         color={constants.colors.espaceAgent}
+                        slug="lockFill"
                       >
                         {source.label}
                       </Icon>
@@ -78,16 +78,16 @@ export default function DataSourcesPage() {
 
                 return (
                   <Section
-                    key={label}
                     id={`${slug}-${sourceIndex}`}
-                    title={label}
-                    sources={[administrationEnum]}
                     isProtected={isProtected}
+                    key={label}
+                    sources={[administrationEnum]}
+                    title={label}
                   >
                     <TwoColumnTable
                       body={[
                         [
-                          'Données',
+                          "Données",
                           (data || []).map(({ label }) => (
                             <Tag key={label}>{label}</Tag>
                           )),
@@ -96,12 +96,12 @@ export default function DataSourcesPage() {
                           ? []
                           : [
                               [
-                                'Source de données',
+                                "Source de données",
                                 datagouvLink ? (
                                   <a
-                                    target="_blank"
-                                    rel="noreferrer noopener"
                                     href={datagouvLink}
+                                    rel="noreferrer noopener"
+                                    target="_blank"
                                   >
                                     Consulter le jeu de données
                                   </a>
@@ -115,16 +115,16 @@ export default function DataSourcesPage() {
                         ...(api
                           ? [
                               [
-                                'API utilisée',
+                                "API utilisée",
                                 <>
                                   <strong>{api.apiName}</strong>
                                   {api.apiDocumentationLink && (
                                     <>
-                                      {' ('}
+                                      {" ("}
                                       <a
                                         href={api.apiDocumentationLink}
-                                        target="_blank"
                                         rel="noreferrer noopener"
+                                        target="_blank"
                                       >
                                         documentation
                                       </a>
@@ -138,11 +138,11 @@ export default function DataSourcesPage() {
                         ...(api && api.updownIoId
                           ? [
                               [
-                                'Taux de disponibilité de l’API',
+                                "Taux de disponibilité de l’API",
                                 <a
                                   href={`/donnees/api#${api.apiSlug}`}
-                                  target="_blank"
                                   rel="noreferrer noopener"
+                                  target="_blank"
                                 >
                                   Consulter le taux de disponibilité
                                 </a>,
@@ -152,7 +152,7 @@ export default function DataSourcesPage() {
                         ...(contact
                           ? [
                               [
-                                'Administration responsable',
+                                "Administration responsable",
                                 <a href={contact}>
                                   <Icon slug="mail">Contacter ({short})</Icon>
                                 </a>,

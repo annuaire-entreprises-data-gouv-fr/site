@@ -1,13 +1,13 @@
-import { HttpNotFound } from '#clients/exceptions';
-import { clientEntrepreneurSpectacles } from '#clients/open-data-soft/clients/entrepreneur-spectacles';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { HttpNotFound } from "#clients/exceptions";
+import { clientEntrepreneurSpectacles } from "#clients/open-data-soft/clients/entrepreneur-spectacles";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { FetchRessourceException } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '../core/types';
+  type IAPINotRespondingError,
+} from "#models/api-not-responding";
+import { FetchRessourceException } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import type { IUniteLegale } from "../core/types";
 
 export interface IEntrepreneurSpectaclesCertification {
   licences: {
@@ -37,7 +37,7 @@ export const getEntrepreneurSpectaclesCertification = async (
     logErrorInSentry(
       new FetchRessourceException({
         cause: e,
-        ressource: 'EntrepreneurSpectacles',
+        ressource: "EntrepreneurSpectacles",
         context: {
           siren: uniteLegale.siren,
         },

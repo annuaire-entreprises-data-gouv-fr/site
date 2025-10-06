@@ -1,10 +1,11 @@
-import Logo from '#components-ui/logo';
-import { administrationsMetaData } from '#models/administrations';
-import styles from './style.module.css';
+import Logo from "#components-ui/logo";
+import { administrationsMetaData } from "#models/administrations";
+import styles from "./style.module.css";
+
 const AdministrationDescription: React.FC<{
   slug: string; // EAdministration
-  titleLevel?: 'h2' | 'h3';
-}> = ({ slug, titleLevel = 'h2' }) => {
+  titleLevel?: "h2" | "h3";
+}> = ({ slug, titleLevel = "h2" }) => {
   if (!administrationsMetaData[slug]) {
     throw new Error(`Administration ${slug} does not exist`);
   }
@@ -20,18 +21,18 @@ const AdministrationDescription: React.FC<{
   } = administrationsMetaData[slug];
 
   return (
-    <div className={styles['administration-wrapper']} id={slug}>
+    <div className={styles["administration-wrapper"]} id={slug}>
       <div>
         <Logo
-          title={long}
           alt={`Logo ${short}`}
-          slug={logoType ? slug : 'rf'}
-          width={80}
           height={80}
+          slug={logoType ? slug : "rf"}
+          title={long}
+          width={80}
         />
       </div>
       <div>
-        {titleLevel === 'h2' ? <h2>{long}</h2> : <h3>{long}</h3>}
+        {titleLevel === "h2" ? <h2>{long}</h2> : <h3>{long}</h3>}
         <section>
           <p>{description}</p>
           {dataSources.length > 0 && (
@@ -55,16 +56,16 @@ const AdministrationDescription: React.FC<{
             <br />
             {contact && (
               <a
-                rel="noreferrer noopener"
-                target="_blank"
                 href={
-                  (contact || '').indexOf('@') > -1
+                  (contact || "").indexOf("@") > -1
                     ? `mailto:${contact}`
                     : contact
                 }
+                rel="noreferrer noopener"
+                target="_blank"
               >
-                → Contacter cette{' '}
-                {estServicePublic ? 'administration' : 'organisation'}
+                → Contacter cette{" "}
+                {estServicePublic ? "administration" : "organisation"}
               </a>
             )}
           </p>

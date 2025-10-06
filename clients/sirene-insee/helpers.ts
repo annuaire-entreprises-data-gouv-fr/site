@@ -3,8 +3,7 @@
  * INSEE sets its old "denomination usuelle" to "SUPPRESSION DU NOM COMMERCIAL".
  * This function removes that specific mention.
  */
-export const formatDenominationUsuelle = (denominationUsuelle: string) => {
-  return denominationUsuelle !== 'SUPPRESSION DU NOM COMMERCIAL'
+export const formatDenominationUsuelle = (denominationUsuelle: string) =>
+  denominationUsuelle !== "SUPPRESSION DU NOM COMMERCIAL"
     ? denominationUsuelle
-    : '';
-};
+    : "";

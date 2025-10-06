@@ -1,4 +1,4 @@
-import { IDefaultRequestConfig, httpGet } from '#utils/network';
+import { httpGet, type IDefaultRequestConfig } from "#utils/network";
 
 /**
  * GET for API Proxy api
@@ -14,7 +14,7 @@ export async function clientAPIProxy<T>(
   return await httpGet(route, {
     ...options,
     headers: {
-      'X-APIkey': process.env.PROXY_API_KEY || '',
+      "X-APIkey": process.env.PROXY_API_KEY || "",
       ...options?.headers,
     },
   });

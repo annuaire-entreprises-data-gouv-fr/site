@@ -1,16 +1,16 @@
-import React from 'react';
+import type React from "react";
 
 const HiddenH1: React.FC<{ title: string }> = ({ title }) => (
   <h1
     style={{
-      clip: 'rect(1px, 1px, 1px, 1px)',
-      height: '1px',
-      overflow: 'hidden',
-      position: 'absolute',
-      whiteSpace: 'nowrap',
-      width: '1px',
-      zIndex: -'1',
-      userSelect: 'none',
+      clip: "rect(1px, 1px, 1px, 1px)",
+      height: "1px",
+      overflow: "hidden",
+      position: "absolute",
+      whiteSpace: "nowrap",
+      width: "1px",
+      zIndex: -"1",
+      userSelect: "none",
     }}
   >
     {title}

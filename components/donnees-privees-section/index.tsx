@@ -1,9 +1,8 @@
-import AgentWall from '#components/espace-agent-components/agent-wall';
+import AgentWall from "#components/espace-agent-components/agent-wall";
 
 export const DonneesPriveesSection = ({ title }: { title?: string }) => (
   <AgentWall
     id=""
-    title={title ? `${title} (données privées)` : 'Données privées'}
     sectionIntro={
       <p>
         Les dirigeants de cette entreprise ont demandé à ce que ces informations
@@ -11,5 +10,6 @@ export const DonneesPriveesSection = ({ title }: { title?: string }) => (
         consulter ces informations.
       </p>
     }
+    title={title ? `${title} (données privées)` : "Données privées"}
   />
 );

@@ -1,17 +1,17 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import { IEgapro } from '#models/certifications/egapro';
-import { Siren } from '#utils/helpers';
-import { httpGet } from '#utils/network';
-import {
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import type { IEgapro } from "#models/certifications/egapro";
+import type { Siren } from "#utils/helpers";
+import { httpGet } from "#utils/network";
+import type {
   IEgaproRepresentation,
   IEgaproRepresentationItem,
   IEgaproRepresentationResponse,
-} from './types';
+} from "./types";
 
 export const clientEgaproRepresentationEquilibre = async (
   siren: Siren
-): Promise<IEgapro['representation']> => {
+): Promise<IEgapro["representation"]> => {
   const responseSearchApi = await httpGet<IEgaproRepresentationResponse>(
     routes.egapro.representation,
     {

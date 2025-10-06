@@ -1,25 +1,25 @@
-import HiddenH1 from '#components/a11y-components/hidden-h1';
-import { HeaderWithAdvancedSearch } from '#components/header/header-advanced-search';
-import SearchResultsMap from '#components/search-results/map';
-import StructuredDataSearchAction from '#components/structured-data/search';
-import { searchWithoutProtectedSiren } from '#models/search';
-import SearchFilterParams from '#models/search/search-filter-params';
-import { parseIntWithDefaultValue } from '#utils/helpers';
-import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
-import { Metadata } from 'next';
+import type { Metadata } from "next";
+import HiddenH1 from "#components/a11y-components/hidden-h1";
+import { HeaderWithAdvancedSearch } from "#components/header/header-advanced-search";
+import SearchResultsMap from "#components/search-results/map";
+import StructuredDataSearchAction from "#components/structured-data/search";
+import { searchWithoutProtectedSiren } from "#models/search";
+import SearchFilterParams from "#models/search/search-filter-params";
+import { parseIntWithDefaultValue } from "#utils/helpers";
+import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
 
 export const metadata: Metadata = {
-  title: 'Rechercher une entreprise sur la carte',
+  title: "Rechercher une entreprise sur la carte",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/rechercher/carte',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/rechercher/carte",
   },
-  robots: 'noindex, nofollow',
+  robots: "noindex, nofollow",
 };
 
 export default async function MapSearchResultPage(props: AppRouterProps) {
   const searchParams = await props.searchParams;
-  const searchTerm = (searchParams.terme || '') as string;
-  const pageParam = (searchParams.page || '') as string;
+  const searchTerm = (searchParams.terme || "") as string;
+  const pageParam = (searchParams.page || "") as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
   const searchFilterParams = new SearchFilterParams(searchParams);
 
@@ -33,19 +33,19 @@ export default async function MapSearchResultPage(props: AppRouterProps) {
   return (
     <>
       <HeaderWithAdvancedSearch
-        useSearchBar={true}
+        currentSearchTerm={searchTerm}
+        searchParams={searchFilterParamsJSON}
         useAgentCTA={true}
         useMap={true}
-        searchParams={searchFilterParamsJSON}
-        currentSearchTerm={searchTerm}
+        useSearchBar={true}
       />
-      <main style={{ maxWidth: '100%', marginBottom: 0 }} className="map">
+      <main className="map" style={{ maxWidth: "100%", marginBottom: 0 }}>
         <StructuredDataSearchAction />
         <HiddenH1 title="Résultats de recherche" />
         <SearchResultsMap
           results={results}
-          searchTerm={searchTerm}
           searchFilterParams={searchFilterParamsJSON}
+          searchTerm={searchTerm}
         />
       </main>
     </>

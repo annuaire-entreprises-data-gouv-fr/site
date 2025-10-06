@@ -1,5 +1,5 @@
-import { IPersonneMorale } from '#models/rne/types';
-import { formatIntFr } from '#utils/helpers';
+import type { IPersonneMorale } from "#models/rne/types";
+import { formatIntFr } from "#utils/helpers";
 
 export default function PersonneMoraleInfos({
   dirigeant,
@@ -11,13 +11,13 @@ export default function PersonneMoraleInfos({
       <strong>{dirigeant.denomination}</strong>
       {dirigeant.siren ? (
         <>
-          {' - '}
+          {" - "}
           <a href={`/entreprise/${dirigeant.siren}`}>
             {formatIntFr(dirigeant.siren)}
           </a>
         </>
       ) : (
-        ''
+        ""
       )}
       {dirigeant.natureJuridique && (
         <>

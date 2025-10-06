@@ -1,16 +1,16 @@
 import {
   clientDownloadActe,
   clientDownloadBilan,
-} from '#clients/api-rne/download';
-import { HttpBadRequestError, HttpForbiddenError } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations/EAdministration';
+} from "#clients/api-rne/download";
+import { HttpBadRequestError, HttpForbiddenError } from "#clients/exceptions";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { FetchRessourceException } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import withSessionPagesRouter from '#utils/session/with-session-pages-router';
+} from "#models/authentication/user/rights";
+import { FetchRessourceException } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import withSessionPagesRouter from "#utils/session/with-session-pages-router";
 
 // This can't be migrated to App Router
 // because responseLimit: false is not supported
@@ -27,31 +27,31 @@ export default withSessionPagesRouter(async function download(req, res) {
 
   try {
     if (!hasRights(session, ApplicationRights.documentsRne)) {
-      throw new HttpForbiddenError('Unauthorized account');
+      throw new HttpForbiddenError("Unauthorized account");
     }
 
     if (!slug) {
-      throw new HttpBadRequestError('Please provide a valid acte id');
+      throw new HttpBadRequestError("Please provide a valid acte id");
     }
 
-    let pdf = '';
-    if (type === 'bilan') {
+    let pdf = "";
+    if (type === "bilan") {
       pdf = await clientDownloadBilan(slug as string);
-    } else if (type === 'acte') {
+    } else if (type === "acte") {
       pdf = await clientDownloadActe(slug as string);
     } else {
-      throw new HttpBadRequestError('Please provide a valid document type');
+      throw new HttpBadRequestError("Please provide a valid document type");
     }
 
     res.status(200);
-    res.setHeader('content-type', 'application/pdf');
-    res.end(Buffer.from(pdf, 'binary'));
+    res.setHeader("content-type", "application/pdf");
+    res.end(Buffer.from(pdf, "binary"));
   } catch (e: any) {
-    const message = 'Failed to download document';
+    const message = "Failed to download document";
     logErrorInSentry(
       new FetchRessourceException({
         cause: e,
-        ressource: 'RNEDocuments',
+        ressource: "RNEDocuments",
         message,
         administration: EAdministration.INPI,
         context: { details: slug as string },

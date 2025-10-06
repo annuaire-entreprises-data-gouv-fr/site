@@ -1,0 +1,27 @@
+commit-msg:
+  commands:
+    "lint commit message":
+      run: npx commitlint --edit {1}
+
+pre-commit:
+  parallel: true
+  jobs:
+    - run: npx ultracite fix
+      glob:
+        - "*.js"
+        - "*.jsx"
+        - "*.ts"
+        - "*.tsx"
+        - "*.json"
+        - "*.jsonc"
+        - "*.css"
+      stage_fixed: true
+    - run: npm run test:unit
+      glob:
+        - "*.js"
+        - "*.jsx"
+        - "*.ts"
+        - "*.tsx"
+        - "*.json"
+        - "*.jsonc"
+        - "*.css"

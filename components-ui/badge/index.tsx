@@ -1,7 +1,7 @@
-import { MouseEventHandler, PropsWithChildren } from 'react';
-import { IIconsSlug } from '#components-ui/icon';
-import { Icon } from '#components-ui/icon/wrapper';
-import styles from './styles.module.css';
+import type { MouseEventHandler, PropsWithChildren } from "react";
+import type { IIconsSlug } from "#components-ui/icon";
+import { Icon } from "#components-ui/icon/wrapper";
+import styles from "./styles.module.css";
 
 interface IProps extends IPartialBadgeProps {
   icon: IIconsSlug;
@@ -16,7 +16,7 @@ export interface IPartialBadgeProps {
   onClick?: MouseEventHandler;
   link?: {
     href: string;
-    'aria-label': string;
+    "aria-label": string;
   };
 }
 
@@ -38,29 +38,29 @@ export function Badge({
     }>
   ) =>
     link ? (
-      <a href={link.href} aria-label={link['aria-label']} {...props} />
+      <a aria-label={link["aria-label"]} href={link.href} {...props} />
     ) : (
       <span {...props} />
     );
 
   return (
     <ContainerComponent
-      onClick={onClick}
       className={`${styles.badgeWrapper} ${
-        onClick && !link && !isSelected ? styles.badgeWrapperOnClick : ''
-      } ${!!onClick ? ' cursor-pointer' : ''}`}
+        onClick && !link && !isSelected ? styles.badgeWrapperOnClick : ""
+      } ${onClick ? " cursor-pointer" : ""}`}
+      onClick={onClick}
       style={{
-        border: isSelected ? '2px solid #000091' : '2px solid transparent',
-        fontSize: small ? '0.9rem' : '1rem',
+        border: isSelected ? "2px solid #000091" : "2px solid transparent",
+        fontSize: small ? "0.9rem" : "1rem",
       }}
     >
       <span
-        className={styles.badgeIcon}
         aria-hidden
+        className={styles.badgeIcon}
         style={{
-          backgroundColor: backgroundColor,
+          backgroundColor,
           color: fontColor,
-          padding: small ? '0 6px' : '2px 8px',
+          padding: small ? "0 6px" : "2px 8px",
         }}
       >
         <Icon size={16} slug={icon} />
@@ -68,7 +68,7 @@ export function Badge({
       <span
         className={styles.badgeLabel}
         style={{
-          padding: small ? '0 8px 0 6px' : '2px 10px 2px 8px',
+          padding: small ? "0 8px 0 6px" : "2px 10px 2px 8px",
         }}
       >
         {label}

@@ -1,14 +1,14 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import { INPI, INSEE } from '#components/administrations';
-import { Metadata } from 'next';
+import type { Metadata } from "next";
+import { INPI, INSEE } from "#components/administrations";
+import TextWrapper from "#components-ui/text-wrapper";
 
 export const metadata: Metadata = {
-  title: 'Comment retrouver les données contenues dans un extrait KBIS ou D1 ?',
+  title: "Comment retrouver les données contenues dans un extrait KBIS ou D1 ?",
   alternates: {
     canonical:
-      'https://annuaire-entreprises.data.gouv.fr/a-propos/donnees-extrait-kbis',
+      "https://annuaire-entreprises.data.gouv.fr/a-propos/donnees-extrait-kbis",
   },
-  robots: 'index, follow',
+  robots: "index, follow",
 };
 
 export default function ExtraitKbis() {
@@ -19,10 +19,10 @@ export default function ExtraitKbis() {
           Retrouver les données contenues dans un extrait KBIS ou un extrait D1
         </h1>
         <p>
-          Publié en Mai 2021,{' '}
+          Publié en Mai 2021,{" "}
           <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043523262">
             le décret de suppression du KBIS
-          </a>{' '}
+          </a>{" "}
           supprime le recours aux extraits KBIS (Registre du Commerce) et D1
           (Répertoire des Métiers) dans les démarches administratives des
           personnes morales.
@@ -33,10 +33,10 @@ export default function ExtraitKbis() {
           entreprise auprès de son Centre de Formalité des Entreprises (CFE).
         </p>
         <p>
-          Il est important de faire la différence entre{' '}
+          Il est important de faire la différence entre{" "}
           <strong>l’extrait KBIS</strong> qui est l’extrait d’immatriculation au
-          Registre du Commerce et des Sociétés, qui concerne les{' '}
-          <strong>entreprises commerciales</strong> et{' '}
+          Registre du Commerce et des Sociétés, qui concerne les{" "}
+          <strong>entreprises commerciales</strong> et{" "}
           <strong>l’extrait D1</strong> qui est l’extrait d’immatriculation au
           Répertoire des Métiers de la Chambre de Métiers et de l’Artisanat et
           qui concerne <strong>les entreprises artisanales</strong>.
@@ -47,7 +47,7 @@ export default function ExtraitKbis() {
             site annuaire-entreprises.data.gouv.fr ?
           </h2>
           <p>
-            Pour retrouver les informations d’immatriculation d’une entreprise,{' '}
+            Pour retrouver les informations d’immatriculation d’une entreprise,{" "}
             <a href="/">utilisez le moteur de recherche</a> pour trouver la page
             de l’entreprise concernée.
           </p>
@@ -81,7 +81,7 @@ export default function ExtraitKbis() {
           </p>
           <code>
             https://annuaire-entreprises.data.gouv.fr/entreprise/
-            <i>{'{insérer_le_numéro_siren}'}</i>
+            <i>{"{insérer_le_numéro_siren}"}</i>
           </code>
           <h2>
             Quelles sont les API qui donnent accès aux données d’immatriculation
@@ -94,11 +94,11 @@ export default function ExtraitKbis() {
           </p>
           <p>
             <strong>NB :</strong> toutes les APIs du service public sont
-            référencées sur{' '}
+            référencées sur{" "}
             <a
-              target="_blank"
-              rel="noreferrer noopener"
               href="https://api.gouv.fr"
+              rel="noreferrer noopener"
+              target="_blank"
             >
               api.gouv.fr
             </a>
@@ -125,9 +125,9 @@ export default function ExtraitKbis() {
           </ul>
           <p>
             <a
-              target="_blank"
-              rel="noreferrer noopener"
               href="https://www.data.gouv.fr/fr/dataservices/api-entreprise"
+              rel="noreferrer noopener"
+              target="_blank"
             >
               ⇢ En savoir plus sur API Entreprise
             </a>

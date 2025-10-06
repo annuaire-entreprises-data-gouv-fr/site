@@ -1,9 +1,9 @@
-import { HttpUnauthorizedError } from '#clients/exceptions';
-import rolesDataClient from '#clients/roles-data';
-import { IRolesDataUser } from '#clients/roles-data/interface';
-import { Groups } from '#models/authentication/group/groups';
-import { FetchRessourceException } from '#models/exceptions';
-import { logFatalErrorInSentry } from '#utils/sentry';
+import { HttpUnauthorizedError } from "#clients/exceptions";
+import rolesDataClient from "#clients/roles-data";
+import type { IRolesDataUser } from "#clients/roles-data/interface";
+import { Groups } from "#models/authentication/group/groups";
+import { FetchRessourceException } from "#models/exceptions";
+import { logFatalErrorInSentry } from "#utils/sentry";
 
 export class Group {
   private groupId: number;
@@ -37,7 +37,7 @@ export class Group {
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'Roles.data',
+          ressource: "Roles.data",
           cause: error,
         })
       );
@@ -57,7 +57,7 @@ export class Group {
       const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {
         throw new HttpUnauthorizedError(
-          'User does not have admin permissions for this group'
+          "User does not have admin permissions for this group"
         );
       }
 
@@ -66,7 +66,7 @@ export class Group {
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'Roles.data',
+          ressource: "Roles.data",
           cause: error,
         })
       );
@@ -88,7 +88,7 @@ export class Group {
 
       if (!isAdmin) {
         throw new HttpUnauthorizedError(
-          'User does not have admin permissions for this group'
+          "User does not have admin permissions for this group"
         );
       }
 
@@ -102,7 +102,7 @@ export class Group {
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'Roles.data',
+          ressource: "Roles.data",
           cause: error,
         })
       );
@@ -123,7 +123,7 @@ export class Group {
       const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {
         throw new HttpUnauthorizedError(
-          'User does not have admin permissions for this group'
+          "User does not have admin permissions for this group"
         );
       }
 
@@ -137,7 +137,7 @@ export class Group {
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'Roles.data',
+          ressource: "Roles.data",
           cause: error,
         })
       );
@@ -157,7 +157,7 @@ export class Group {
       const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
       if (!isAdmin) {
         throw new HttpUnauthorizedError(
-          'User does not have admin permissions for this group'
+          "User does not have admin permissions for this group"
         );
       }
 
@@ -171,7 +171,7 @@ export class Group {
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
-          ressource: 'Roles.data',
+          ressource: "Roles.data",
           cause: error,
         })
       );

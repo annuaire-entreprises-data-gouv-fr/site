@@ -1,12 +1,12 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import {
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import type {
   IEtablissementBio,
   IEtablissementsBio,
-} from '#models/certifications/bio';
-import { Siren, formatAdresse, verifySiret } from '#utils/helpers';
-import { httpGet } from '#utils/network';
-import { IBioItem, IBioResponse } from './interface';
+} from "#models/certifications/bio";
+import { formatAdresse, type Siren, verifySiret } from "#utils/helpers";
+import { httpGet } from "#utils/network";
+import type { IBioItem, IBioResponse } from "./interface";
 
 /**
  * BIO
@@ -39,9 +39,9 @@ export const clientProfessionnelBio = async (
 const mapToDomainObject = (bioItems: IBioItem[]): IEtablissementBio[] => {
   return bioItems.reduce((etablissementsBio: IEtablissementBio[], bioItem) => {
     const {
-      lieu = '',
-      codePostal = '',
-      ville = '',
+      lieu = "",
+      codePostal = "",
+      ville = "",
     } = (bioItem?.adressesOperateurs || [])[0] || {};
 
     const adresse = formatAdresse({
@@ -51,38 +51,38 @@ const mapToDomainObject = (bioItems: IBioItem[]): IEtablissementBio[] => {
     });
 
     // reset invalide siret
-    let siret = '';
+    let siret = "";
     try {
-      siret = verifySiret(bioItem.siret || '');
+      siret = verifySiret(bioItem.siret || "");
     } catch {}
 
     const validCertificates = (bioItem.certificats || []).filter(
-      (certif) => certif.etatCertification === 'ENGAGEE'
+      (certif) => certif.etatCertification === "ENGAGEE"
     );
 
     if (validCertificates.length > 0) {
       const {
-        dateArret = '',
-        dateEngagement = '',
-        dateSuspension = '',
-        dateNotification = '',
-        url = '',
-        organisme = '',
-        etatCertification = '',
+        dateArret = "",
+        dateEngagement = "",
+        dateSuspension = "",
+        dateNotification = "",
+        url = "",
+        organisme = "",
+        etatCertification = "",
       } = validCertificates.length > 0 ? validCertificates[0] : {};
 
       etablissementsBio.push({
-        numeroBio: (bioItem.numeroBio || '').toString(),
-        enseigne: bioItem.reseau || '',
+        numeroBio: (bioItem.numeroBio || "").toString(),
+        enseigne: bioItem.reseau || "",
         denomination:
-          bioItem.denominationcourante || bioItem.raisonSociale || '',
+          bioItem.denominationcourante || bioItem.raisonSociale || "",
         adresse,
         siret,
         websites: bioItem.siteWebs?.map((site) => site.url),
         activities: bioItem.activites?.map((activity) => activity.nom),
         categories: bioItem.categories?.map((category) => category.nom),
         products: bioItem.productions?.map((product) => product.nom),
-        onlyBio: bioItem.mixite === 'Non',
+        onlyBio: bioItem.mixite === "Non",
         certificat: {
           date: {
             end: dateArret,

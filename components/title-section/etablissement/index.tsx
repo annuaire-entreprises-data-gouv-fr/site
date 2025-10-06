@@ -1,23 +1,23 @@
-import { Warning } from '#components-ui/alerts';
-import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import { PrintNever } from '#components-ui/print-visibility';
-import SocialMedia from '#components-ui/social-media';
-import { Tag } from '#components-ui/tag';
-import IsActiveTag from '#components-ui/tag/is-active-tag';
-import { NonDiffusibleTag } from '#components-ui/tag/non-diffusible-tag';
-import { EtablissementDescription } from '#components/etablissement-description';
-import MapEtablissement from '#components/map/map-etablissement';
-import { CopyPaste } from '#components/table/copy-paste';
-import UniteLegaleBadge from '#components/unite-legale-badge';
-import { ISession } from '#models/authentication/user/session';
-import { estDiffusible, estNonDiffusibleStrict } from '#models/core/diffusion';
-import { IEtablissement, IUniteLegale } from '#models/core/types';
-import { formatIntFr, formatSiret } from '#utils/helpers';
-import React from 'react';
-import { INSEE } from '../../administrations';
-import TitleAlerts from '../alerts';
-import { TabsForEtablissement } from '../tabs';
-import styles from './styles.module.css';
+import type React from "react";
+import { EtablissementDescription } from "#components/etablissement-description";
+import MapEtablissement from "#components/map/map-etablissement";
+import { CopyPaste } from "#components/table/copy-paste";
+import UniteLegaleBadge from "#components/unite-legale-badge";
+import { Warning } from "#components-ui/alerts";
+import { SimpleSeparator } from "#components-ui/horizontal-separator";
+import { PrintNever } from "#components-ui/print-visibility";
+import SocialMedia from "#components-ui/social-media";
+import { Tag } from "#components-ui/tag";
+import IsActiveTag from "#components-ui/tag/is-active-tag";
+import { NonDiffusibleTag } from "#components-ui/tag/non-diffusible-tag";
+import type { ISession } from "#models/authentication/user/session";
+import { estDiffusible, estNonDiffusibleStrict } from "#models/core/diffusion";
+import type { IEtablissement, IUniteLegale } from "#models/core/types";
+import { formatIntFr, formatSiret } from "#utils/helpers";
+import { INSEE } from "../../administrations";
+import TitleAlerts from "../alerts";
+import { TabsForEtablissement } from "../tabs";
+import styles from "./styles.module.css";
 
 const TitleEtablissementWithDenomination: React.FC<{
   uniteLegale: IUniteLegale;
@@ -29,9 +29,9 @@ const TitleEtablissementWithDenomination: React.FC<{
       etablissement.oldSiret !== etablissement.siret && (
         <Warning full>
           Cet établissement est inscrit en double à l’
-          <INSEE /> : {formatSiret(etablissement.oldSiret)} et{' '}
+          <INSEE /> : {formatSiret(etablissement.oldSiret)} et{" "}
           {formatSiret(etablissement.siret)}. Pour voir les informations
-          complètes, consultez la page{' '}
+          complètes, consultez la page{" "}
           <a href={`/etablissement/${etablissement.siret}`}>
             {formatSiret(etablissement.siret)}
           </a>
@@ -40,19 +40,19 @@ const TitleEtablissementWithDenomination: React.FC<{
       )}
 
     <TitleAlerts
-      uniteLegale={uniteLegale}
       session={session}
       statutDiffusion={etablissement.statutDiffusion}
+      uniteLegale={uniteLegale}
     />
 
     <h1>
-      Établissement{' '}
+      Établissement{" "}
       {etablissement.enseigne ||
         etablissement.denomination ||
-        uniteLegale.nomComplet}{' '}
+        uniteLegale.nomComplet}{" "}
       {etablissement.commune && (
         <>
-          à{' '}
+          à{" "}
           <a href={`/etablissement/${etablissement.siret}`}>
             {etablissement.commune}
           </a>
@@ -64,9 +64,9 @@ const TitleEtablissementWithDenomination: React.FC<{
         <div className={styles.subTitle}>
           <span className={styles.sirenOrSiret}>
             <CopyPaste
-              shouldRemoveSpace={true}
               disableCopyIcon={true}
               label="SIRET"
+              shouldRemoveSpace={true}
             >
               {formatSiret(etablissement.siret)}
             </CopyPaste>
@@ -74,8 +74,8 @@ const TitleEtablissementWithDenomination: React.FC<{
           <NonDiffusibleTag etablissementOrUniteLegale={etablissement} />
           <IsActiveTag
             etatAdministratif={etablissement.etatAdministratif}
-            statutDiffusion={etablissement.statutDiffusion}
             since={etablissement.dateFermeture}
+            statutDiffusion={etablissement.statutDiffusion}
           />
         </div>
         <div className={styles.subSubTitle}>
@@ -84,7 +84,7 @@ const TitleEtablissementWithDenomination: React.FC<{
               <span>Cet établissement est </span>
               {etablissement.estSiege ? (
                 <>
-                  le{' '}
+                  le{" "}
                   <Tag color="info" size="small">
                     siège social
                   </Tag>
@@ -109,11 +109,11 @@ const TitleEtablissementWithDenomination: React.FC<{
               <UniteLegaleBadge uniteLegale={uniteLegale} />
               <span className={styles.sirenTitle}>
                 &nbsp;‣&nbsp;
-                <span style={{ display: 'inline-flex' }}>
+                <span style={{ display: "inline-flex" }}>
                   <CopyPaste
-                    shouldRemoveSpace={true}
                     disableCopyIcon={true}
                     label="SIREN"
+                    shouldRemoveSpace={true}
                   >
                     {formatIntFr(uniteLegale.siren)}
                   </CopyPaste>
@@ -121,15 +121,15 @@ const TitleEtablissementWithDenomination: React.FC<{
               </span>
               <IsActiveTag
                 etatAdministratif={uniteLegale.etatAdministratif}
-                statutDiffusion={uniteLegale.statutDiffusion}
                 size="small"
+                statutDiffusion={uniteLegale.statutDiffusion}
               />
               <PrintNever>
                 <SimpleSeparator />
 
                 <TabsForEtablissement
-                  uniteLegale={uniteLegale}
                   session={session}
+                  uniteLegale={uniteLegale}
                 />
               </PrintNever>
             </div>
@@ -145,12 +145,12 @@ const TitleEtablissementWithDenomination: React.FC<{
     </div>
     <br />
     <SocialMedia
-      path={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}
       label={
         etablissement.enseigne ||
         etablissement.denomination ||
         uniteLegale.nomComplet
       }
+      path={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}
     />
     {estNonDiffusibleStrict(etablissement) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>

@@ -1,6 +1,6 @@
-import { PrintNever } from '#components-ui/print-visibility';
-import constants from '#models/constants';
-import styles from './styles.module.css';
+import { PrintNever } from "#components-ui/print-visibility";
+import constants from "#models/constants";
+import styles from "./styles.module.css";
 
 const TEMP_INCIDENT_BANNER_MESSAGE = `
         🚨 Nous rencontrons actuellement des difficultés techniques, le service peut être temporairement indisponible.
@@ -12,22 +12,21 @@ const DISPLAY_INCIDENT_BANNER = false;
 export default function TempIncidentBanner() {
   if (!DISPLAY_INCIDENT_BANNER) {
     return null;
-  } else {
-    return (
-      <PrintNever>
-        <div
-          id="temp-incident"
-          role="dialog"
-          aria-label="Incident en cours"
-          className={styles.npsModal}
-          style={{
-            backgroundColor: constants.colors.pastelBlue,
-            borderColor: constants.colors.frBlue,
-          }}
-        >
-          <div className="fr-container">{TEMP_INCIDENT_BANNER_MESSAGE}</div>
-        </div>
-      </PrintNever>
-    );
   }
+  return (
+    <PrintNever>
+      <div
+        aria-label="Incident en cours"
+        className={styles.npsModal}
+        id="temp-incident"
+        role="dialog"
+        style={{
+          backgroundColor: constants.colors.pastelBlue,
+          borderColor: constants.colors.frBlue,
+        }}
+      >
+        <div className="fr-container">{TEMP_INCIDENT_BANNER_MESSAGE}</div>
+      </div>
+    </PrintNever>
+  );
 }

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import constants from '#models/constants';
-import { ISearchResults } from '#models/search';
-import { formatIntFr, formatSiret } from '#utils/helpers';
-import maplibregl, { Map } from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
-import { useEffect, useRef } from 'react';
-import { checkLatLng } from './check-lat-lng';
-import { hasWebGLSupport } from './has-web-gl';
-import './map.css';
+import maplibregl, { type Map } from "maplibre-gl";
+import constants from "#models/constants";
+import type { ISearchResults } from "#models/search";
+import { formatIntFr, formatSiret } from "#utils/helpers";
+import "maplibre-gl/dist/maplibre-gl.css";
+import { useEffect, useRef } from "react";
+import { checkLatLng } from "./check-lat-lng";
+import { hasWebGLSupport } from "./has-web-gl";
+import "./map.css";
 
 function MapWithResults({
   results,
@@ -28,14 +28,15 @@ function MapWithResults({
 
     if (!hasWebGLSupport()) {
       alert(
-        'Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte.'
+        "Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte."
       );
       return;
     }
 
     map.current = new maplibregl.Map({
       container: mapContainer.current,
-      style: `https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json`,
+      style:
+        "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json",
       center: [2, 47],
       zoom: 4.5,
       minZoom: 3,
@@ -61,8 +62,8 @@ function MapWithResults({
 
         new maplibregl.Marker({ color: constants.colors.frBlue })
           .setLngLat([
-            parseFloat(result.siege.longitude),
-            parseFloat(result.siege.latitude),
+            Number.parseFloat(result.siege.longitude),
+            Number.parseFloat(result.siege.latitude),
           ])
           .setPopup(popup)
           .addTo(map.current!);
@@ -84,11 +85,11 @@ function MapWithResults({
           );
 
           new maplibregl.Marker({
-            color: shouldColorZipCode ? 'yellow' : constants.colors.pastelBlue,
+            color: shouldColorZipCode ? "yellow" : constants.colors.pastelBlue,
           })
             .setLngLat([
-              parseFloat(match.longitude),
-              parseFloat(match.latitude),
+              Number.parseFloat(match.longitude),
+              Number.parseFloat(match.latitude),
             ])
             .setPopup(popup)
             .addTo(map.current!);
@@ -99,9 +100,9 @@ function MapWithResults({
 
   return (
     <div
-      ref={mapContainer}
       className="map"
-      style={{ width: '100%', zIndex: '0', height, backgroundColor: '#f0f0f0' }}
+      ref={mapContainer}
+      style={{ width: "100%", zIndex: "0", height, backgroundColor: "#f0f0f0" }}
     />
   );
 }

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import LocalPageCounter from '#components/search-results/results-pagination/local-pagination';
-import { AsyncDataSectionClient } from '#components/section/data-section/client';
-import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { useFetchBilanGes } from 'hooks/fetch/bilan-ges';
-import { useState } from 'react';
+import { useFetchBilanGes } from "hooks/fetch/bilan-ges";
+import { useState } from "react";
+import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
+import { AsyncDataSectionClient } from "#components/section/data-section/client";
+import { FullTable } from "#components/table/full";
+import { EAdministration } from "#models/administrations/EAdministration";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
 
 type IProps = {
   uniteLegale: IUniteLegale;
@@ -15,8 +15,8 @@ type IProps = {
 };
 
 const formatEmissions = (value: number): string => {
-  if (value === 0) return 'Non renseigné';
-  return value.toLocaleString('fr-FR');
+  if (value === 0) return "Non renseigné";
+  return value.toLocaleString("fr-FR");
 };
 
 /**
@@ -28,8 +28,6 @@ export default function BilanGesSection({ uniteLegale, session }: IProps) {
 
   return (
     <AsyncDataSectionClient
-      title="Bilans GES (Gaz à Effet de Serre)"
-      sources={[EAdministration.ADEME]}
       data={bilanGes}
       id="bilan-ges"
       notFoundInfo={
@@ -38,10 +36,12 @@ export default function BilanGesSection({ uniteLegale, session }: IProps) {
           structure.
         </p>
       }
+      sources={[EAdministration.ADEME]}
+      title="Bilans GES (Gaz à Effet de Serre)"
     >
       {(bilanGes) => {
         const { total } = bilanGes.meta;
-        const plural = total > 1 ? 's' : '';
+        const plural = total > 1 ? "s" : "";
         const pageSize = 20;
 
         const sortedBilans = [...bilanGes.data].sort(
@@ -57,34 +57,34 @@ export default function BilanGesSection({ uniteLegale, session }: IProps) {
 
             {total > pageSize && (
               <LocalPageCounter
-                currentPage={currentPage}
-                totalPages={Math.ceil(total / pageSize)}
-                onPageChange={setCurrentPage}
                 compact={true}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+                totalPages={Math.ceil(total / pageSize)}
               />
             )}
 
             <FullTable
-              head={[
-                'Indicateur',
-                ...sortedBilans.map((bilan) => bilan.anneeReporting.toString()),
-              ]}
               body={[
                 [
-                  'Total des émissions (tCO2e)',
+                  "Total des émissions (tCO2e)",
                   ...sortedBilans.map((bilan) =>
                     formatEmissions(bilan.totalEmissions)
                   ),
                 ],
               ]}
+              head={[
+                "Indicateur",
+                ...sortedBilans.map((bilan) => bilan.anneeReporting.toString()),
+              ]}
             />
 
             {total > pageSize && (
               <LocalPageCounter
-                currentPage={currentPage}
-                totalPages={Math.ceil(total / pageSize)}
-                onPageChange={setCurrentPage}
                 compact={true}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+                totalPages={Math.ceil(total / pageSize)}
               />
             )}
           </>

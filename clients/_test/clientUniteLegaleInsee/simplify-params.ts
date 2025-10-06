@@ -1,4 +1,4 @@
-import { Siren } from '#utils/helpers';
+import type { Siren } from "#utils/helpers";
 
 export default function simplifyParams(siren: Siren) {
   return siren;

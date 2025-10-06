@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { Icon } from '#components-ui/icon/wrapper';
+import { useStorage } from "hooks";
+import { useEffect, useState } from "react";
+import { Icon } from "#components-ui/icon/wrapper";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { lastDates } from '#models/historique-modifications';
-import { formatDate } from '#utils/helpers';
-import { useStorage } from 'hooks';
-import { useEffect, useState } from 'react';
-import style from './changelog-notification.module.css';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import { lastDates } from "#models/historique-modifications";
+import { formatDate } from "#utils/helpers";
+import style from "./changelog-notification.module.css";
 
-const NEW_SINCE_LAST_VISIT_ID = 'new-since-last-visit';
+const NEW_SINCE_LAST_VISIT_ID = "new-since-last-visit";
 
 function convertToISO(frenchDate: string) {
-  const [day, month, year] = frenchDate.split('/');
+  const [day, month, year] = frenchDate.split("/");
   return `${year}-${month}-${day}`;
 }
 
@@ -29,7 +29,7 @@ export default function ChangelogNotification({
   const [shouldDisplayNotif, setShouldDisplayNotif] = useState(false);
 
   const [lastChangelogViewed, saveLastChangelogViewed] = useStorage(
-    'local',
+    "local",
     NEW_SINCE_LAST_VISIT_ID,
     null
   );
@@ -41,7 +41,7 @@ export default function ChangelogNotification({
 
   useEffect(() => {
     const pageIsChangelog =
-      window.location.pathname === '/historique-des-modifications';
+      window.location.pathname === "/historique-des-modifications";
 
     if (pageIsChangelog) {
       saveLastChangelogViewed(lastRelevantChangelog);
@@ -62,8 +62,8 @@ export default function ChangelogNotification({
 
   return shouldDisplayNotif ? (
     <a
+      className={style.changelogNotification + " fr-link"}
       href="/historique-des-modifications"
-      className={style.changelogNotification + ' fr-link'}
       title="Découvrir les dernières évolutions de l’Annuaire des Entreprises"
     >
       <Icon slug="present">

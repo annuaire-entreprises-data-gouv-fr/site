@@ -1,13 +1,18 @@
-'use client';
+"use client";
 
-import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
-import { IGeoElement } from '#clients/geo';
-import { Info, Warning } from '#components-ui/alerts';
-import { Loader } from '#components-ui/loader';
-import { isAPI404, isAPINotResponding } from '#models/api-not-responding';
-import { searchGeoElementByText } from '#models/geo';
-import { debounce } from '#utils/helpers/debounce';
-import { useStorage } from 'hooks';
+import { useStorage } from "hooks";
+import {
+  type KeyboardEventHandler,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import type { IGeoElement } from "#clients/geo";
+import { Info, Warning } from "#components-ui/alerts";
+import { Loader } from "#components-ui/loader";
+import { isAPI404, isAPINotResponding } from "#models/api-not-responding";
+import { searchGeoElementByText } from "#models/geo";
+import { debounce } from "#utils/helpers/debounce";
 
 enum Issue {
   NONE = 2,
@@ -19,7 +24,7 @@ export const FilterGeo: React.FC<{
   cp_dep?: string;
   cp_dep_label?: string;
   cp_dep_type?: string;
-}> = ({ cp_dep = '', cp_dep_label = '', cp_dep_type = '' }) => {
+}> = ({ cp_dep = "", cp_dep_label = "", cp_dep_type = "" }) => {
   const [labelDep, setLabelDep] = useState(cp_dep_label);
   const [dep, setDep] = useState(cp_dep);
   const [typeDep, setTypeDep] = useState(cp_dep_type);
@@ -30,13 +35,12 @@ export const FilterGeo: React.FC<{
   const [geoSuggests, setGeoSuggests] = useState<IGeoElement[]>([]);
 
   const [suggestsHistory, setSuggestsHistory] = useStorage(
-    'local',
-    'geo-search-history-4',
+    "local",
+    "geo-search-history-4",
     []
   );
   const [showSuggestsHistory, setShowSuggestsHistory] = useState(false);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const search = useCallback(
     debounce(async (term: string) => {
       setLoading(true);
@@ -114,9 +118,8 @@ export const FilterGeo: React.FC<{
       // in case of remaining pending requests
       setLoading(false);
       return;
-    } else {
-      search(searchTerm);
     }
+    search(searchTerm);
   }, [searchTerm, setGeoSuggests, setIssue, labelDep, search]);
 
   // only show suggest history on browser to avoid rehydration conflict with server rendered html
@@ -125,29 +128,29 @@ export const FilterGeo: React.FC<{
   return (
     <>
       <input
-        id="geo-search-input"
-        className="fr-input"
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        onFocus={() => setSearchTerm('')}
-        placeholder="ex : Rennes"
         autoComplete="off"
+        className="fr-input"
+        id="geo-search-input"
+        onChange={onChange}
+        onFocus={() => setSearchTerm("")}
+        onKeyDown={onKeyDown}
+        placeholder="ex : Rennes"
         type="search"
         value={searchTerm}
       />
       <input
         name="cp_dep_label"
-        value={labelDep}
-        type="hidden"
         onChange={() => {}}
+        type="hidden"
+        value={labelDep}
       />
       <input
         name="cp_dep_type"
-        value={typeDep}
-        type="hidden"
         onChange={() => {}}
+        type="hidden"
+        value={typeDep}
       />
-      <input name="cp_dep" value={dep} type="hidden" onChange={() => {}} />
+      <input name="cp_dep" onChange={() => {}} type="hidden" value={dep} />
       {issue !== Issue.NONE ? (
         issue === Issue.NORESULT ? (
           <Info>Aucun résultat ne correspond à votre recherche.</Info>
@@ -167,8 +170,8 @@ export const FilterGeo: React.FC<{
                 <strong>Localisations récentes :</strong>
                 {suggestsHistory.map((suggest: IGeoElement) => (
                   <div
-                    key={'suggest-history-' + suggest.label}
                     className="suggest cursor-pointer"
+                    key={"suggest-history-" + suggest.label}
                     onClick={() => selectDep(suggest)}
                   >
                     {suggest.label}
@@ -184,8 +187,8 @@ export const FilterGeo: React.FC<{
             ) : (
               geoSuggests.map((suggest: IGeoElement) => (
                 <div
-                  key={suggest.label}
                   className="suggest cursor-pointer"
+                  key={suggest.label}
                   onClick={() => selectDep(suggest)}
                 >
                   {suggest.label}

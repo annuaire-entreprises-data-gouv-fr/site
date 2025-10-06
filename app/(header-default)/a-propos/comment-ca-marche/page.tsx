@@ -1,15 +1,15 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import { administrationsMetaData } from '#models/administrations';
-import constants from '#models/constants';
-import { Metadata } from 'next';
+import type { Metadata } from "next";
+import TextWrapper from "#components-ui/text-wrapper";
+import { administrationsMetaData } from "#models/administrations";
+import constants from "#models/constants";
 
 export const metadata: Metadata = {
-  title: 'Comment ça marche ?',
+  title: "Comment ça marche ?",
   alternates: {
     canonical:
-      'https://annuaire-entreprises.data.gouv.fr/a-propos/comment-ca-marche',
+      "https://annuaire-entreprises.data.gouv.fr/a-propos/comment-ca-marche",
   },
-  robots: 'index, follow',
+  robots: "index, follow",
 };
 
 export default function About() {
@@ -24,14 +24,14 @@ export default function About() {
           administration.
         </p>
         <p>
-          Ce site ne fait{' '}
+          Ce site ne fait{" "}
           <strong>
             que centraliser les données. Il ne les modifie pas et ne les stocke
             pas.
           </strong>
         </p>
         <p>
-          Il est opéré par{' '}
+          Il est opéré par{" "}
           <a href="/equipe">
             une équipe de la Direction Interministérielle du Numérique
           </a>
@@ -90,7 +90,7 @@ export default function About() {
           </p>
           <p>
             Ces bases de données sont récupérées grâce aux téléservices
-            développés par les{' '}
+            développés par les{" "}
             <a href="/administration">administrations partenaires</a> :
           </p>
           <ul>
@@ -104,15 +104,15 @@ export default function About() {
           </ul>
           <h2>
             A quel point les données utilisées par l’Annuaire des Entreprises
-            sont ouvertes et disponibles ?{' '}
+            sont ouvertes et disponibles ?{" "}
           </h2>
           <p>
             Toutes les données utilisées sont ouvertes en open data et
-            accessibles sur{' '}
+            accessibles sur{" "}
             <a
               href="https://data.gouv.fr/"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               data.gouv.fr
             </a>
@@ -120,29 +120,29 @@ export default function About() {
           </p>
           <p>
             Si vous souhaitez les réutiliser, vous pouvez utiliser les APIs du
-            service public qui sont référencées sur{' '}
+            service public qui sont référencées sur{" "}
             <a
               href="https://api.gouv.fr/"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               api.gouv.fr
             </a>
             .
           </p>
           <p>
-            Vous pouvez également retrouver les{' '}
-            <a href="/donnees/sources">sources de données</a> de l’Annuaire et{' '}
+            Vous pouvez également retrouver les{" "}
+            <a href="/donnees/sources">sources de données</a> de l’Annuaire et{" "}
             <a href="/donnees/api">statut des API utilisées</a>.
           </p>
           <p>
             <strong>NB</strong> : L’Annuaire des Entreprises a développé sa
             propre API pour son moteur de recherche et la met également à
-            disposition gratuitement :{' '}
+            disposition gratuitement :{" "}
             <a
               href="https://www.data.gouv.fr/fr/dataservices/api-recherche-dentreprises/"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               l’API Recherche d’Entreprises
             </a>
@@ -160,12 +160,12 @@ export default function About() {
             <li>Générer un QR code ?</li>
           </ul>
           <p>
-            Découvrez notre{' '}
+            Découvrez notre{" "}
             <a href="https://annuaire-entreprises.data.gouv.fr/partager">
               guide sur le sujet
-            </a>{' '}
+            </a>{" "}
             et n’hésitez pas à nous contacter afin que nous puissions vous aider
-            via notre{' '}
+            via notre{" "}
             <a href={constants.links.parcours.contact}>formulaire de contact</a>
             .
           </p>
@@ -181,12 +181,12 @@ export default function About() {
           <ul>
             <li>
               Proposer aux entrepreneur(e)s un moyen simple et efficace de
-              retrouver facilement les informations légales de leur entreprise :{' '}
-              <strong>numéro SIRET, numéro SIREN, numéro de TVA etc.</strong>{' '}
+              retrouver facilement les informations légales de leur entreprise :{" "}
+              <strong>numéro SIRET, numéro SIREN, numéro de TVA etc.</strong>{" "}
               afin de les utiliser dans leurs démarches administratives.
             </li>
             <li>
-              Permettre aux agents publics de retrouver{' '}
+              Permettre aux agents publics de retrouver{" "}
               <a href="https://annuaire-entreprises.data.gouv.fr/donnees-extrait-kbis">
                 toutes les informations contenues dans un extrait KBIS ou D1
               </a>
@@ -195,22 +195,22 @@ export default function About() {
             <li>
               Permettre à tout un chacun de vérifier qu’une entreprise existe,
               de consulter ses informations et de lutter contre la fraude. En
-              cas de problème, contactez les services de la{' '}
+              cas de problème, contactez les services de la{" "}
               <a
                 href="https://www.economie.gouv.fr/dgccrf"
-                target="_blank"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 DGCCRF
-              </a>{' '}
-              et plus particulièrement{' '}
+              </a>{" "}
+              et plus particulièrement{" "}
               <a
                 href="https://signal.conso.gouv.fr"
-                target="_blank"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 Signal Conso
-              </a>{' '}
+              </a>{" "}
               dans les cas de fraudes à la consommation.
             </li>
           </ul>

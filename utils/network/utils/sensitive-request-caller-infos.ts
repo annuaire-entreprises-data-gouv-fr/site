@@ -1,6 +1,6 @@
-import { HttpUnauthorizedError } from '#clients/exceptions';
-import getSession from '#utils/server-side-helper/app/get-session';
-import { ISensitiveCaller } from './sensitive-request-logger';
+import { HttpUnauthorizedError } from "#clients/exceptions";
+import getSession from "#utils/server-side-helper/app/get-session";
+import type { ISensitiveCaller } from "./sensitive-request-logger";
 
 export async function sensitiveRequestCallerInfos(): Promise<ISensitiveCaller> {
   const session = await getSession();
@@ -9,7 +9,7 @@ export async function sensitiveRequestCallerInfos(): Promise<ISensitiveCaller> {
     const { email, domain, siret = null, scopes = [] } = session.user;
 
     if (!email) {
-      throw new HttpUnauthorizedError('Sensitive requests require an email');
+      throw new HttpUnauthorizedError("Sensitive requests require an email");
     }
 
     return {
@@ -20,6 +20,6 @@ export async function sensitiveRequestCallerInfos(): Promise<ISensitiveCaller> {
     };
   }
   throw new HttpUnauthorizedError(
-    'Sensitive requests require an authenticated user'
+    "Sensitive requests require an authenticated user"
   );
 }

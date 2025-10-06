@@ -1,12 +1,12 @@
-import { clientBanGeoLoc } from '#clients/base-adresse-nationale';
-import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
+import { clientBanGeoLoc } from "#clients/base-adresse-nationale";
+import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
-describe('clientBanGeoLoc', () => {
+describe("clientBanGeoLoc", () => {
   [
-    'rue jules ferry, 64110 mazeres-lezons',
-    'rue jules ferry 64110 mazeres-lezons',
-    '16 rue de tolbiac, 75013 paris 13e',
-    '16 rue de tolbiac 75013 paris 13',
+    "rue jules ferry, 64110 mazeres-lezons",
+    "rue jules ferry 64110 mazeres-lezons",
+    "16 rue de tolbiac, 75013 paris 13e",
+    "16 rue de tolbiac 75013 paris 13",
   ].forEach(expectClientToMatchSnapshotWithAddress);
 });
 

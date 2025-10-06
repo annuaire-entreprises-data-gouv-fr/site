@@ -1,12 +1,12 @@
-import { LngLatLike } from 'maplibre-gl';
+import type { LngLatLike } from "maplibre-gl";
 
 export function checkLatLng(
   latitude: string,
   longitude: string
 ): LngLatLike | null {
   try {
-    const lat = parseFloat(latitude);
-    const lng = parseFloat(longitude);
+    const lat = Number.parseFloat(latitude);
+    const lng = Number.parseFloat(longitude);
     if (
       isNaN(lat) ||
       isNaN(lng) ||
@@ -15,7 +15,7 @@ export function checkLatLng(
       lng < -180 ||
       lng > 180
     ) {
-      throw new Error('Invalid coords');
+      throw new Error("Invalid coords");
     }
 
     return {

@@ -1,22 +1,24 @@
-'use client';
-/* eslint-disable react/jsx-props-no-spreading */
+"use client";
 
-import { FadeIn } from '#components-ui/animation/fade-in';
-import { HeightTransition } from '#components-ui/animation/height-transition';
-import { IAPINotRespondingError, isAPI404 } from '#models/api-not-responding';
+import { useTimeout } from "hooks/use-timeout";
+import { useEffect, useState } from "react";
+import { FadeIn } from "#components-ui/animation/fade-in";
+import { HeightTransition } from "#components-ui/animation/height-transition";
 import {
-  IDataFetchingState,
+  type IAPINotRespondingError,
+  isAPI404,
+} from "#models/api-not-responding";
+import {
   hasFetchError,
+  IDataFetchingState,
   isDataLoading,
   isDataSuccess,
   isUnauthorized,
-} from '#models/data-fetching';
-import { useTimeout } from 'hooks/use-timeout';
-import { useEffect, useState } from 'react';
-import { ISectionProps, Section } from '..';
-import { DataSectionContent } from './content';
-import DataFetchErrorExplanation from './error';
-import { DataSectionLoader } from './loader';
+} from "#models/data-fetching";
+import { type ISectionProps, Section } from "..";
+import { DataSectionContent } from "./content";
+import DataFetchErrorExplanation from "./error";
+import { DataSectionLoader } from "./loader";
 
 interface IDataSectionClientProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IDataFetchingState | T;
@@ -36,7 +38,7 @@ export function AsyncDataSectionClient<T>({
   }
 
   if (isDataLoading(data) && !showLoadingState) {
-    return <div style={{ minHeight: '80px' }} />;
+    return <div style={{ minHeight: "80px" }} />;
   }
 
   if (showLoadingState) {
@@ -60,7 +62,7 @@ export function AsyncDataSectionClient<T>({
   if (props.notFoundInfo === null && isAPI404(data)) {
     return null;
   }
-  //@ts-ignore
+  //@ts-expect-error
   const lastModified = data?.lastModified || null;
 
   return (
@@ -68,10 +70,10 @@ export function AsyncDataSectionClient<T>({
       <HeightTransition>
         <FadeIn key={lastModified}>
           <DataSectionContent
+            additionalInfoOnError={props.additionalInfoOnError}
+            children={props.children}
             data={data}
             notFoundInfo={props.notFoundInfo}
-            children={props.children}
-            additionalInfoOnError={props.additionalInfoOnError}
           />
         </FadeIn>
       </HeightTransition>
@@ -93,7 +95,6 @@ function useShowLoadingState<T>(
     if (!isDataLoading(data) && before100ms) {
       setDataLoadedBefore100ms(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   if (before100ms || dataLoadedBefore100ms) {

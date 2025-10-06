@@ -1,11 +1,11 @@
-import { getAgentUserType } from '#models/authentication/user/helpers';
+import { getAgentUserType } from "#models/authentication/user/helpers";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
 
-const TRACKER_BASE_URL = 'https://stats.data.gouv.fr';
+const TRACKER_BASE_URL = "https://stats.data.gouv.fr";
 export function MatomoInit({ session }: { session: ISession | null }) {
   return (
     <>
@@ -18,7 +18,7 @@ export function MatomoInit({ session }: { session: ISession | null }) {
                   ? `_paq.push(['setCustomDimension', '1', '${getAgentUserType(
                       session
                     )}']);`
-                  : ''
+                  : ""
               }
               _paq.push(['trackPageView']);
               _paq.push(['enableLinkTracking']);
@@ -26,7 +26,7 @@ export function MatomoInit({ session }: { session: ISession | null }) {
               _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
               `,
         }}
-      ></script>
+      />
       <div
         dangerouslySetInnerHTML={{
           __html: `

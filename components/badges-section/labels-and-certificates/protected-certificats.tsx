@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { Loader } from '#components-ui/loader';
-import NonRenseigne from '#components/non-renseigne';
-import { ProtectedInlineData } from '#components/protected-inline-data';
-import { ISession } from '#models/authentication/user/session';
-import { hasAnyError, isDataLoading } from '#models/data-fetching';
-import { APIRoutesPaths } from 'app/api/data-fetching/routes-paths';
-import { useAPIRouteData } from 'hooks/fetch/use-API-route-data';
-import React from 'react';
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import React from "react";
+import NonRenseigne from "#components/non-renseigne";
+import { ProtectedInlineData } from "#components/protected-inline-data";
+import { Loader } from "#components-ui/loader";
+import type { ISession } from "#models/authentication/user/session";
+import { hasAnyError, isDataLoading } from "#models/data-fetching";
+import type { IUniteLegale } from "../../../models/core/types";
 import {
-  LabelsAndCertificatesBadgesSection,
   checkHasLabelsAndCertificates,
-} from '.';
-import { IUniteLegale } from '../../../models/core/types';
-import { LabelWithLinkToSection } from './label-with-link-to-section';
+  LabelsAndCertificatesBadgesSection,
+} from ".";
+import { LabelWithLinkToSection } from "./label-with-link-to-section";
 
 export const ProtectedCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -97,9 +97,9 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
 
       <ProtectedInlineData>
         {protectedCertificates.map((certificate, index) =>
-          !hasAnyError(certificate.data) ? (
+          hasAnyError(certificate.data) ? null : (
             <React.Fragment key={index}>{certificate.render}</React.Fragment>
-          ) : null
+          )
         )}
       </ProtectedInlineData>
     </>

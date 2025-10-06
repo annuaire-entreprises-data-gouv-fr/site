@@ -1,8 +1,8 @@
-import { clientDocuments } from '#clients/api-rne/documents';
-import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { APINotRespondingFactory } from '#models/api-not-responding';
-import { verifySiren } from '#utils/helpers';
+import { clientDocuments } from "#clients/api-rne/documents";
+import { HttpNotFound } from "#clients/exceptions";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { APINotRespondingFactory } from "#models/api-not-responding";
+import { verifySiren } from "#utils/helpers";
 
 export async function getDocumentsRNEProtected(maybeSiren: string) {
   const siren = verifySiren(maybeSiren);

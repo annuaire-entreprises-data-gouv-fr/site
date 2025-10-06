@@ -1,6 +1,6 @@
-import { HttpServerError } from '#clients/exceptions';
-import { FetchRessourceException } from '#models/exceptions';
-import { logWarningInSentry } from '#utils/sentry';
+import { HttpServerError } from "#clients/exceptions";
+import { FetchRessourceException } from "#models/exceptions";
+import { logWarningInSentry } from "#utils/sentry";
 
 /**
  * Caches a promise response in memory
@@ -23,7 +23,7 @@ export class DataStore<T> {
     private fetchData: () => Promise<any>,
     private storeName: string,
     private mapToDomainObject: (result: any) => { [key: string]: T },
-    private TTR = 86400000
+    private TTR = 86_400_000
   ) {
     this.data = null;
     this.onGoingRefresh = null;
@@ -63,7 +63,7 @@ export class DataStore<T> {
       throw new HttpServerError(`Empty data list : ${this.storeName}`);
     }
     const value = this.data[key];
-    return typeof value === 'undefined' ? null : value;
+    return typeof value === "undefined" ? null : value;
   };
 
   getKeys = async () => {

@@ -1,6 +1,6 @@
-import { estActif } from '#models/core/etat-administratif';
-import { IEtablissement, IUniteLegale } from '../core/types';
-import { tvaNumber } from './utils';
+import { estActif } from "#models/core/etat-administratif";
+import type { IEtablissement, IUniteLegale } from "../core/types";
+import { tvaNumber } from "./utils";
 
 export type ITVAIntracommunautaire = {
   tvaNumber: string;

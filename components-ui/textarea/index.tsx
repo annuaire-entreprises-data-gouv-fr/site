@@ -1,10 +1,10 @@
 import {
-  ChangeEventHandler,
-  DetailedHTMLProps,
-  TextareaHTMLAttributes,
+  type ChangeEventHandler,
+  type DetailedHTMLProps,
   forwardRef,
+  type TextareaHTMLAttributes,
   useCallback,
-} from 'react';
+} from "react";
 
 type IProps = DetailedHTMLProps<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
@@ -21,7 +21,7 @@ function TextArea(
     (e) => {
       onChange?.(e);
       if (!autoResize) return;
-      e.target.style.height = 'inherit';
+      e.target.style.height = "inherit";
       e.target.style.height = `${e.target.scrollHeight}px`;
     },
     [onChange, autoResize]
@@ -30,13 +30,13 @@ function TextArea(
   return (
     <textarea
       {...rest}
-      style={{
-        resize: autoResize ? 'none' : 'vertical',
-        overflow: autoResize ? 'hidden' : 'auto',
-      }}
-      ref={ref}
-      className={'fr-input ' + (className ?? '')}
+      className={"fr-input " + (className ?? "")}
       onChange={handleChange}
+      ref={ref}
+      style={{
+        resize: autoResize ? "none" : "vertical",
+        overflow: autoResize ? "hidden" : "auto",
+      }}
     />
   );
 }

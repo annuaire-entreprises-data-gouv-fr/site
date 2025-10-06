@@ -1,13 +1,13 @@
-import { ConnexionSubLayout } from '#components-ui/connexion-layout';
-import logoutPicture from '#components-ui/illustrations/logout';
-import { Metadata } from 'next';
+import type { Metadata } from "next";
+import { ConnexionSubLayout } from "#components-ui/connexion-layout";
+import logoutPicture from "#components-ui/illustrations/logout";
 
 export const metadata: Metadata = {
-  title: 'Vous êtes bien deconnecté',
+  title: "Vous êtes bien deconnecté",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/connexion/au-revoir',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/connexion/au-revoir",
   },
-  robots: 'noindex, nofollow',
+  robots: "noindex, nofollow",
 };
 
 export default function ConnexionGoodbyePage() {

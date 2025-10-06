@@ -1,13 +1,11 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
-import AdministrationNotRespondingMessage from '#components/administration-not-responding/message';
-import { administrationsMetaData } from '#models/administrations';
+import AdministrationNotRespondingMessage from "#components/administration-not-responding/message";
+import { administrationsMetaData } from "#models/administrations";
 import {
-  IAPINotRespondingError,
+  type IAPINotRespondingError,
   isAPI404,
   isAPINotResponding,
-} from '#models/api-not-responding';
-import { IDataFetchingState } from '#models/data-fetching';
+} from "#models/api-not-responding";
+import type { IDataFetchingState } from "#models/data-fetching";
 
 export type IDataSectionContentProps<T> = {
   data: IAPINotRespondingError | T;
@@ -17,7 +15,7 @@ export type IDataSectionContentProps<T> = {
 };
 
 export function DataSectionContent<
-  T extends Exclude<unknown, IDataFetchingState.LOADING>
+  T extends Exclude<unknown, IDataFetchingState.LOADING>,
 >({
   data,
   notFoundInfo,

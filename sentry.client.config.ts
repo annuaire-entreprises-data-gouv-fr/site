@@ -1,8 +1,9 @@
-import * as Sentry from '@sentry/nextjs';
-import { Exception } from '#models/exceptions';
-import { isNextJSSentryActivated } from '#utils/sentry';
-import { getTransactionNameFromUrl } from '#utils/sentry/tracing';
-import isUserAgentABot from '#utils/user-agent';
+import * as Sentry from "@sentry/nextjs";
+import { Exception } from "#models/exceptions";
+import { isNextJSSentryActivated } from "#utils/sentry";
+import { getTransactionNameFromUrl } from "#utils/sentry/tracing";
+import isUserAgentABot from "#utils/user-agent";
+
 declare global {
   interface Window {
     IS_OUTDATED_BROWSER: boolean;
@@ -40,9 +41,9 @@ if (isNextJSSentryActivated) {
 
       if (
         hint.originalException &&
-        typeof hint.originalException === 'object' &&
-        'message' in hint.originalException &&
-        typeof hint.originalException.message === 'string'
+        typeof hint.originalException === "object" &&
+        "message" in hint.originalException &&
+        typeof hint.originalException.message === "string"
       ) {
         /*
         A LOT of hydration error happens in production. This can be due to a lot of reasons:
@@ -67,7 +68,7 @@ if (isNextJSSentryActivated) {
             /Minified React error #(422|423|418|425)/
           )
         ) {
-          event.fingerprint = ['React hydration error'];
+          event.fingerprint = ["React hydration error"];
         }
 
         /*
@@ -76,20 +77,20 @@ if (isNextJSSentryActivated) {
         if (
           hint.originalException.message.match(/Loading chunk [\d]+ failed/)
         ) {
-          event.fingerprint = ['Chunk load error'];
+          event.fingerprint = ["Chunk load error"];
         }
       }
 
       if (!event.tags) {
         event.tags = {};
       }
-      event.tags['is_bot'] = isUserAgentABot(navigator.userAgent || '');
+      event.tags["is_bot"] = isUserAgentABot(navigator.userAgent || "");
 
       return event;
     },
 
     beforeSendTransaction(event) {
-      if (event.transaction && event.transaction.startsWith('/')) {
+      if (event.transaction && event.transaction.startsWith("/")) {
         event.transaction = getTransactionNameFromUrl(event.transaction);
       }
 

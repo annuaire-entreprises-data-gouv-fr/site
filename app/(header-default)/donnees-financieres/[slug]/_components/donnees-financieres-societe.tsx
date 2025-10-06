@@ -1,18 +1,18 @@
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { DonneesPriveesSection } from '#components/donnees-privees-section';
+import { DonneesPriveesSection } from "#components/donnees-privees-section";
+import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { estDiffusible } from '#models/core/diffusion';
-import { IUniteLegale } from '#models/core/types';
-import { BilansDocumentsSociete } from './bilans-documents-societe';
-import { ComptesBodaccSociete } from './comptes-bodacc-societe';
-import { FinancesSocieteSummary } from './finances-societe-summary';
-import { IndicateursFinanciers } from './indicateurs-financiers';
-import { IndicateursFinanciersBDF } from './indicateurs-financiers-bdf';
-import { LiassesFiscales } from './liasses-fiscales';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import { estDiffusible } from "#models/core/diffusion";
+import type { IUniteLegale } from "#models/core/types";
+import { BilansDocumentsSociete } from "./bilans-documents-societe";
+import { ComptesBodaccSociete } from "./comptes-bodacc-societe";
+import { FinancesSocieteSummary } from "./finances-societe-summary";
+import { IndicateursFinanciers } from "./indicateurs-financiers";
+import { IndicateursFinanciersBDF } from "./indicateurs-financiers-bdf";
+import { LiassesFiscales } from "./liasses-fiscales";
 
 export default function DonneesFinancieresSociete({
   uniteLegale,
@@ -26,7 +26,7 @@ export default function DonneesFinancieresSociete({
       <FinancesSocieteSummary session={session} />
       {estDiffusible(uniteLegale) ||
       hasRights(session, ApplicationRights.nonDiffusible) ? (
-        <IndicateursFinanciers uniteLegale={uniteLegale} session={session} />
+        <IndicateursFinanciers session={session} uniteLegale={uniteLegale} />
       ) : (
         <DonneesPriveesSection title="Indicateurs financiers" />
       )}
@@ -34,15 +34,15 @@ export default function DonneesFinancieresSociete({
         <>
           <HorizontalSeparator />
           <IndicateursFinanciersBDF
-            uniteLegale={uniteLegale}
             session={session}
+            uniteLegale={uniteLegale}
           />
         </>
       )}
-      <BilansDocumentsSociete uniteLegale={uniteLegale} session={session} />
+      <BilansDocumentsSociete session={session} uniteLegale={uniteLegale} />
       <HorizontalSeparator />
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
-      <LiassesFiscales uniteLegale={uniteLegale} session={session} />
+      <LiassesFiscales session={session} uniteLegale={uniteLegale} />
     </>
   );
 }

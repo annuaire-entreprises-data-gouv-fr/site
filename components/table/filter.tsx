@@ -1,4 +1,4 @@
-import { MultiSelect } from '#components-ui/select/multi-select';
+import { MultiSelect } from "#components-ui/select/multi-select";
 
 type IProps = {
   onChange: (selectedValues: string[]) => void;
@@ -18,18 +18,18 @@ export default function TableFilter({
   }
 
   return (
-    <div className="layout-right" style={{ marginBottom: '15px' }}>
+    <div className="layout-right" style={{ marginBottom: "15px" }}>
       <MultiSelect
-        placeholder={placeholder}
-        instanceId="table-filter"
         id="table-filter"
+        instanceId="table-filter"
+        maxWidth="375px"
+        menuPosition="absolute"
         onChange={onChange}
         options={dataSelect.map(({ value, label }) => ({
           value,
           label,
         }))}
-        maxWidth="375px"
-        menuPosition="absolute"
+        placeholder={placeholder}
       />
     </div>
   );

@@ -1,64 +1,64 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import { Metadata } from 'next';
-import styles from './style.module.css';
+import type { Metadata } from "next";
+import TextWrapper from "#components-ui/text-wrapper";
+import styles from "./style.module.css";
 
 const team = [
   {
-    photoUrl: '/images/team/hajar.jpg',
-    fullname: 'Hajar Ait El Kadi',
-    pronoun: 'une',
-    role: 'intrapreneure',
+    photoUrl: "/images/team/hajar.jpg",
+    fullname: "Hajar Ait El Kadi",
+    pronoun: "une",
+    role: "intrapreneure",
   },
   {
-    photoUrl: '/images/team/hadrien.jpg',
-    fullname: 'Hadrien Bossard',
-    pronoun: 'un',
-    role: 'data engineer',
+    photoUrl: "/images/team/hadrien.jpg",
+    fullname: "Hadrien Bossard",
+    pronoun: "un",
+    role: "data engineer",
   },
   {
-    photoUrl: '/images/team/anais.jpg',
-    fullname: 'Anais Tailhade',
-    pronoun: 'une',
-    role: 'coach support utilisateur',
+    photoUrl: "/images/team/anais.jpg",
+    fullname: "Anais Tailhade",
+    pronoun: "une",
+    role: "coach support utilisateur",
   },
   {
-    photoUrl: '/images/team/laura.jpg',
-    fullname: 'Laura Chevillotte',
-    pronoun: 'une',
-    role: 'responsable du support utilisateur',
+    photoUrl: "/images/team/laura.jpg",
+    fullname: "Laura Chevillotte",
+    pronoun: "une",
+    role: "responsable du support utilisateur",
   },
   {
-    photoUrl: '/images/team/paul.jpeg',
-    fullname: 'Paul Lesur',
-    pronoun: 'un',
-    role: 'devops',
+    photoUrl: "/images/team/paul.jpeg",
+    fullname: "Paul Lesur",
+    pronoun: "un",
+    role: "devops",
   },
   {
-    photoUrl: '/images/team/jonathan.jpg',
-    fullname: 'Jonathan Louis',
-    pronoun: 'un',
-    role: 'chargé de déploiement SEO & communication',
+    photoUrl: "/images/team/jonathan.jpg",
+    fullname: "Jonathan Louis",
+    pronoun: "un",
+    role: "chargé de déploiement SEO & communication",
   },
   {
-    photoUrl: '/images/team/amandine.jpg',
-    fullname: 'Amandine Audras',
-    pronoun: 'une',
-    role: 'UX designeure',
+    photoUrl: "/images/team/amandine.jpg",
+    fullname: "Amandine Audras",
+    pronoun: "une",
+    role: "UX designeure",
   },
   {
-    photoUrl: '/images/team/alan.jpg',
-    fullname: 'Alan Chauchet',
-    pronoun: 'un',
-    role: 'lead développeur',
+    photoUrl: "/images/team/alan.jpg",
+    fullname: "Alan Chauchet",
+    pronoun: "un",
+    role: "lead développeur",
   },
 ];
 
 export const metadata: Metadata = {
-  title: 'Qui est l’équipe derrière l’Annuaire des Entreprises',
+  title: "Qui est l’équipe derrière l’Annuaire des Entreprises",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/equipe',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/a-propos/equipe",
   },
-  robots: 'noindex, follow',
+  robots: "noindex, follow",
 };
 
 export default function Equipe() {
@@ -69,15 +69,15 @@ export default function Equipe() {
         <h2>Qui construit l’Annuaire des Entreprises ?</h2>
         <p>
           Ce site public est développé et maintenu par la Direction
-          interministérielle du numérique{' '}
+          interministérielle du numérique{" "}
           <a
             href="https://www.numerique.gouv.fr/dinum/"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             (DINUM)
           </a>
-          en coopération avec les{' '}
+          en coopération avec les{" "}
           <a href="/donnees/sources">
             administrations qui fournissent la donnée
           </a>
@@ -86,8 +86,8 @@ export default function Equipe() {
 
         <h2>Notre méthode</h2>
         <p>
-          L’Annuaire des Entreprises est un site de l’État qui s’inspire des{' '}
-          <a href="https://beta.gouv.fr/manifeste">méthodes agiles</a>{' '}
+          L’Annuaire des Entreprises est un site de l’État qui s’inspire des{" "}
+          <a href="https://beta.gouv.fr/manifeste">méthodes agiles</a>{" "}
           développées au sein de <a href="https://beta.gouv.fr/">beta.gouv</a>.
         </p>
 
@@ -128,11 +128,11 @@ export default function Equipe() {
           </li>
           <li>
             Effectuer une correction sur une information affichée (pour une
-            entreprise, consultez{' '}
+            entreprise, consultez{" "}
             <a href="https://formalites.entreprises.gouv.fr">
               le site de formalités des entreprises de l’INPI
             </a>
-            , pour une association consultez{' '}
+            , pour une association consultez{" "}
             <a href="https://lecompteasso.associations.gouv.fr/">
               Le Compte Asso
             </a>
@@ -153,18 +153,18 @@ export default function Equipe() {
           ))}
         </ul>
         <p>
-          Plus d’informations{' '}
+          Plus d’informations{" "}
           <a href="https://beta.gouv.fr/startups/annuaire-entreprises.html">
             sur la page beta.gouv du projet
           </a>
           .
         </p>
-        <div className={styles['team-members']}>
+        <div className={styles["team-members"]}>
           {team.map((member) => (
-            <div className={styles['team-member']} key={member.fullname}>
+            <div className={styles["team-member"]} key={member.fullname}>
               <img
+                alt={`${member.fullname} - ${member.role}`}
                 src={member.photoUrl}
-                alt={`Photo de ${member.fullname} - ${member.role}`}
                 title={`Photo de ${member.fullname} - ${member.role}`}
               />
             </div>

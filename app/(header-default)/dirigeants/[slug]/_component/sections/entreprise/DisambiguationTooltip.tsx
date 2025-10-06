@@ -1,4 +1,4 @@
-import FAQLink from '#components-ui/faq-link';
+import FAQLink from "#components-ui/faq-link";
 
 export default function DisambiguationTooltip({
   dataType,
@@ -15,7 +15,7 @@ export default function DisambiguationTooltip({
 
   return (
     <>
-      {' ('}
+      {" ("}
       {!isInIg && (
         <FAQLink tooltipLabel="incohérence">
           Ce {dataType} n‘apparait pas dans les données d‘Infogreffe.
@@ -26,7 +26,7 @@ export default function DisambiguationTooltip({
           Ce {dataType} n‘apparait pas dans les données de l‘INPI.
         </FAQLink>
       )}
-      {')'}
+      {")"}
     </>
   );
 }

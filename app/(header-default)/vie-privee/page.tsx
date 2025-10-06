@@ -1,12 +1,12 @@
-import TextWrapper from '#components-ui/text-wrapper';
-import constants from '#models/constants';
-import { Metadata } from 'next';
+import type { Metadata } from "next";
+import TextWrapper from "#components-ui/text-wrapper";
+import constants from "#models/constants";
 
 export const metadata: Metadata = {
-  title: 'Politique de confidentialité',
-  robots: 'noindex, nofollow',
+  title: "Politique de confidentialité",
+  robots: "noindex, nofollow",
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/vie-privee',
+    canonical: "https://annuaire-entreprises.data.gouv.fr/vie-privee",
   },
 };
 
@@ -89,7 +89,7 @@ const Privacy = () => (
       via les services suivants : Institut national de la statistique et des
       études économiques (Insee), Institut national de la propriété industrielle
       (INPI), la Direction de l’information légale et administrative (DILA).
-      Pour plus d’informations, voir{' '}
+      Pour plus d’informations, voir{" "}
       <a href="https://annuaire-entreprises.data.gouv.fr/donnees/sources">
         ici
       </a>
@@ -174,7 +174,7 @@ const Privacy = () => (
       <li>D’un droit à la limitation du traitement.</li>
     </ul>
     <p>
-      Pour les exercer, contactez-nous via notre{' '}
+      Pour les exercer, contactez-nous via notre{" "}
       <a href={constants.links.parcours.contact}>formulaire de contact</a>.
     </p>
     <p>Ou bien à :</p>
@@ -192,7 +192,7 @@ const Privacy = () => (
       demander une preuve de votre identité.
     </p>
     <p>
-      Pour vous aider dans votre démarche, vous trouverez{' '}
+      Pour vous aider dans votre démarche, vous trouverez{" "}
       <a href="https://www.cnil.fr/fr/modele/courrier/exercer-son-droit-dacces">
         un modèle de courrier élaboré par la CNIL
       </a>
@@ -203,7 +203,7 @@ const Privacy = () => (
       saurait dépasser 1 mois à compter de la réception de votre demande.
     </p>
     <p>
-      Vous pouvez introduire une réclamation auprès de la{' '}
+      Vous pouvez introduire une réclamation auprès de la{" "}
       <a href="https://www.cnil.fr/fr/cnil-direct/question/adresser-une-reclamation-plainte-la-cnil-quelles-conditions-et-comment">
         CNIL
       </a>
@@ -370,21 +370,21 @@ const Privacy = () => (
     <p>
       L’Annuaire des Entreprises utilise l’outil de mesure d’audience Matomo,
       configuré en mode exempté, et ne nécessitant pas le recueil de votre
-      consentement conformément aux recommandations de la CNIL.{' '}
+      consentement conformément aux recommandations de la CNIL.{" "}
     </p>
     <p>
       Vous êtes suivis de manière anonyme, décochez la case pour ne plus être
       suivis même anonymement.
     </p>
     <iframe
+      src="https://stats.data.gouv.fr/index.php?module=CoreAdminHome&action=optOut&language=fr&backgroundColor=&fontColor=333&fontSize=16px&fontFamily=sans-serif&overflow=visible"
       style={{
-        overflow: 'visible',
-        borderWidth: '0',
-        width: '100%',
+        overflow: "visible",
+        borderWidth: "0",
+        width: "100%",
       }}
       title="Optout cookie"
-      src="https://stats.data.gouv.fr/index.php?module=CoreAdminHome&action=optOut&language=fr&backgroundColor=&fontColor=333&fontSize=16px&fontFamily=sans-serif&overflow=visible"
-    ></iframe>
+    />
 
     <p>
       Pour aller plus loin, vous pouvez consulter les ﬁches proposées par la

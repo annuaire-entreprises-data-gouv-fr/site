@@ -1,7 +1,7 @@
-import { clientApiEntrepriseQualibat } from '#clients/api-entreprise/certificats/qualibat';
-import { IAPINotRespondingError } from '#models/api-not-responding';
-import { verifySiret } from '#utils/helpers';
-import { handleApiEntrepriseError } from '../utils';
+import { clientApiEntrepriseQualibat } from "#clients/api-entreprise/certificats/qualibat";
+import type { IAPINotRespondingError } from "#models/api-not-responding";
+import { verifySiret } from "#utils/helpers";
+import { handleApiEntrepriseError } from "../utils";
 export type IQualibat = {
   documentUrl: string;
   dateEmission: string | null;
@@ -29,6 +29,6 @@ export const getQualibat = async (
 ): Promise<IQualibat | IAPINotRespondingError> => {
   const siret = verifySiret(maybeSiret);
   return clientApiEntrepriseQualibat(siret).catch((error) =>
-    handleApiEntrepriseError(error, { siret, apiResource: 'Qualibat' })
+    handleApiEntrepriseError(error, { siret, apiResource: "Qualibat" })
   );
 };

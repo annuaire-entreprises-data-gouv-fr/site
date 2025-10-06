@@ -1,6 +1,6 @@
-import { IncomingMessage } from 'http';
-import { IExceptionContext } from '#models/exceptions';
-import { verifySiren, verifySiret } from '#utils/helpers';
+import type { IncomingMessage } from "http";
+import type { IExceptionContext } from "#models/exceptions";
+import { verifySiren, verifySiret } from "#utils/helpers";
 
 export const getContext = (
   req: IncomingMessage | undefined,
@@ -24,8 +24,8 @@ export const getContext = (
   const metadata = req
     ? {
         page: req.url,
-        referer: headers['referer'],
-        browser: headers['user-agent'] as string,
+        referer: headers["referer"],
+        browser: headers["user-agent"] as string,
       }
     : {};
 

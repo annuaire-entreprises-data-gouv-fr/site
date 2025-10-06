@@ -1,15 +1,15 @@
 import {
   ApplicationRights,
   hasRights,
-} from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
 
 export const FinancesSocieteSummary = ({
   session,
 }: {
   session: ISession | null;
 }) => (
-  <nav role="navigation" aria-labelledby="finances-societe-summary-title">
+  <nav aria-labelledby="finances-societe-summary-title" role="navigation">
     <strong id="finances-societe-summary-title">
       Informations financières disponibles :
     </strong>

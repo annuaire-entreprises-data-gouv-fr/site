@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { IUniteLegale, isAssociation } from '#models/core/types';
+import { type IUniteLegale, isAssociation } from "#models/core/types";
 
 type IProp = {
   /**
@@ -19,14 +19,14 @@ type IProp = {
 
 export function UniteLegalePageLink({ uniteLegale, href, siteName }: IProp) {
   const linkLabel = isAssociation(uniteLegale)
-    ? `la page de l’association`
-    : `la page de l’entreprise`;
-  const siteDescription = siteName ? ` sur ${siteName}` : '';
+    ? "la page de l’association"
+    : "la page de l’entreprise";
+  const siteDescription = siteName ? ` sur ${siteName}` : "";
   return (
     <>
       <a
-        href={href}
         aria-label={`Voir ${linkLabel}${siteDescription}`}
+        href={href}
         rel="noreferrer noopener"
         target="_blank"
       >

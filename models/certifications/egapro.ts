@@ -1,14 +1,14 @@
-import { clientEgapro } from '#clients/egapro';
-import { clientEgaproRepresentationEquilibre } from '#clients/egapro/representationEquilibre';
-import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { clientEgapro } from "#clients/egapro";
+import { clientEgaproRepresentationEquilibre } from "#clients/egapro/representationEquilibre";
+import { HttpNotFound } from "#clients/exceptions";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { FetchRessourceException } from '#models/exceptions';
-import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '../core/types';
+  type IAPINotRespondingError,
+} from "#models/api-not-responding";
+import { FetchRessourceException } from "#models/exceptions";
+import logErrorInSentry from "#utils/sentry";
+import type { IUniteLegale } from "../core/types";
 
 export interface IEgapro {
   index: {
@@ -67,7 +67,7 @@ export const getEgapro = async (
     logErrorInSentry(
       new FetchRessourceException({
         cause: e,
-        ressource: 'Egapro',
+        ressource: "Egapro",
         context: {
           siren: uniteLegale.siren,
         },

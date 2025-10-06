@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { ISession } from '#models/authentication/user/session';
-import { getHidePersonalDataRequestFCSession } from '#utils/session';
-import { useEffect, useState } from 'react';
-import { ConnectionFranceConnect } from './connection-france-connect';
-import { RenseignerSiren } from './renseigner-siren';
-import { RequestState } from './request-state';
+import { useEffect, useState } from "react";
+import type { ISession } from "#models/authentication/user/session";
+import { getHidePersonalDataRequestFCSession } from "#utils/session";
+import { ConnectionFranceConnect } from "./connection-france-connect";
+import { RenseignerSiren } from "./renseigner-siren";
+import { RequestState } from "./request-state";
 
 type IProps = {
   session: ISession | null;
@@ -23,15 +23,15 @@ export default function HidePersonalDataPageClient({ session }: IProps) {
     setError(null);
 
     try {
-      const response = await fetch('/api/hide-personal-data', {
-        method: 'POST',
+      const response = await fetch("/api/hide-personal-data", {
+        method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(
-          errorData.message || 'Une erreur inattendue est survenue.'
+          errorData.message || "Une erreur inattendue est survenue."
         );
       }
 
@@ -41,7 +41,7 @@ export default function HidePersonalDataPageClient({ session }: IProps) {
       if (error instanceof Error) {
         setError(error.message);
       } else {
-        setError('Une erreur inattendue est survenue.');
+        setError("Une erreur inattendue est survenue.");
       }
     }
   };

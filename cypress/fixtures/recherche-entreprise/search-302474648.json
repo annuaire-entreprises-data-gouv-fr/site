@@ -42,12 +42,8 @@
           "libelle_voie": "MARC BLOCH",
           "liste_enseignes": null,
           "liste_finess": null,
-          "liste_id_bio": [
-            "112492"
-          ],
-          "liste_idcc": [
-            "1505"
-          ],
+          "liste_id_bio": ["112492"],
+          "liste_idcc": ["1505"],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -107,10 +103,7 @@
           "date_immatriculation": null,
           "date_radiation": null,
           "duree_personne_morale": 30,
-          "nature_entreprise": [
-            "Commerciale",
-            "Libérale réglementée"
-          ],
+          "nature_entreprise": ["Commerciale", "Libérale réglementée"],
           "date_cloture_exercice": null,
           "capital_social": 240000,
           "capital_variable": false,
@@ -126,9 +119,7 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": [
-            "1505"
-          ],
+          "liste_idcc": ["1505"],
           "egapro_renseignee": true,
           "est_association": false,
           "est_bio": true,

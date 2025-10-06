@@ -1,4 +1,4 @@
-import 'dotenv/config';
-import { toMatchFile } from 'jest-file-snapshot';
+import "dotenv/config";
+import { toMatchFile } from "jest-file-snapshot";
 
 expect.extend({ toMatchFile });

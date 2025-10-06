@@ -1,14 +1,14 @@
-import { clientTVA } from '#clients/api-proxy/tva';
-import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations/EAdministration';
+import { clientTVA } from "#clients/api-proxy/tva";
+import { HttpNotFound } from "#clients/exceptions";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
-} from '#models/api-not-responding';
-import { FetchRessourceException } from '#models/exceptions';
-import { verifySiren, verifyTVANumber } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { tvaNumber } from './utils';
+  type IAPINotRespondingError,
+} from "#models/api-not-responding";
+import { FetchRessourceException } from "#models/exceptions";
+import { verifySiren, verifyTVANumber } from "#utils/helpers";
+import logErrorInSentry from "#utils/sentry";
+import { tvaNumber } from "./utils";
 
 export const buildAndVerifyTVA = async (
   slug: string
@@ -21,7 +21,7 @@ export const buildAndVerifyTVA = async (
   } catch (e: any) {
     logErrorInSentry(
       new FetchRessourceException({
-        ressource: 'TVAValidation',
+        ressource: "TVAValidation",
         cause: e,
         context: { slug },
       })

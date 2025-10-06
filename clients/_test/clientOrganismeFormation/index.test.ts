@@ -1,16 +1,16 @@
-import { clientOrganismeFormation } from '#clients/open-data-soft/clients/qualiopi';
-import { Siren } from '#utils/helpers';
-import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
+import { clientOrganismeFormation } from "#clients/open-data-soft/clients/qualiopi";
+import type { Siren } from "#utils/helpers";
+import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
-describe('clientOrganismeFormation', () => {
-  it('Should match snapshot', async () => {
+describe("clientOrganismeFormation", () => {
+  it("Should match snapshot", async () => {
     await expectClientToMatchSnapshot({
       client: clientOrganismeFormation,
-      args: ['356000000' as Siren],
+      args: ["356000000" as Siren],
       __dirname,
-      snapshotFile: 'qualiopi-laposte.json',
+      snapshotFile: "qualiopi-laposte.json",
       postProcessResult: (result) => {
-        result.lastModified = '2023-10-18T23:19:19.590091+00:00';
+        result.lastModified = "2023-10-18T23:19:19.590091+00:00";
       },
     });
   });

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import ProtectedSectionWithUseCase from '#components/section-with-use-case';
-import { DataSectionClient } from '#components/section/data-section';
-import { EAdministration } from '#models/administrations/EAdministration';
-import { ApplicationRights } from '#models/authentication/user/rights';
-import { ISession } from '#models/authentication/user/session';
-import { IUniteLegale } from '#models/core/types';
-import { UseCase } from '#models/use-cases';
-import { ProtectedIndicateursFinanciersBDF } from './protected-indicateurs-financiers-bdf';
+import { DataSectionClient } from "#components/section/data-section";
+import ProtectedSectionWithUseCase from "#components/section-with-use-case";
+import { EAdministration } from "#models/administrations/EAdministration";
+import { ApplicationRights } from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import type { IUniteLegale } from "#models/core/types";
+import { UseCase } from "#models/use-cases";
+import { ProtectedIndicateursFinanciersBDF } from "./protected-indicateurs-financiers-bdf";
 
 export function IndicateursFinanciersBDF({
   uniteLegale,
@@ -26,11 +26,11 @@ export function IndicateursFinanciersBDF({
   if (!isMoreThanThreeYearsOld) {
     return (
       <DataSectionClient
-        title="Indicateurs financiers de la Banque de France"
-        id="indicateurs-financiers-banque-de-france"
-        sources={[EAdministration.BANQUE_DE_FRANCE]}
-        isProtected
         data={null}
+        id="indicateurs-financiers-banque-de-france"
+        isProtected
+        sources={[EAdministration.BANQUE_DE_FRANCE]}
+        title="Indicateurs financiers de la Banque de France"
       >
         {() => (
           <p>
@@ -46,13 +46,13 @@ export function IndicateursFinanciersBDF({
 
   return (
     <ProtectedSectionWithUseCase
-      session={session}
-      uniteLegale={uniteLegale}
-      title="Indicateurs financiers de la Banque de France"
-      id="indicateurs-financiers-banque-de-france"
-      sources={[EAdministration.BANQUE_DE_FRANCE]}
       allowedUseCases={[UseCase.fraude]}
+      id="indicateurs-financiers-banque-de-france"
       requiredRight={ApplicationRights.bilansBDF}
+      session={session}
+      sources={[EAdministration.BANQUE_DE_FRANCE]}
+      title="Indicateurs financiers de la Banque de France"
+      uniteLegale={uniteLegale}
       WrappedSection={ProtectedIndicateursFinanciersBDF}
     />
   );

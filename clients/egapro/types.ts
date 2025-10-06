@@ -38,7 +38,7 @@ export type IEgaproItem = {
     code_naf: string;
     ues?: IUes | null;
     effectif: {
-      tranche: '50:250' | '251:999' | '1000:';
+      tranche: "50:250" | "251:999" | "1000:";
     };
   };
   notes: { [key: string]: number };

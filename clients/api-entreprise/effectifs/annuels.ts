@@ -1,8 +1,8 @@
-import routes from '#clients/routes';
-import { IEffectifsAnnuelsProtected } from '#models/espace-agent/effectifs/annuels';
-import { Siren } from '#utils/helpers';
-import clientAPIEntreprise from '../client';
-import { IAPIEntrepriseRcpEffectifsAnnuels } from './types';
+import routes from "#clients/routes";
+import type { IEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
+import type { Siren } from "#utils/helpers";
+import clientAPIEntreprise from "../client";
+import type { IAPIEntrepriseRcpEffectifsAnnuels } from "./types";
 
 /**
  * GET effectifs from API Entreprise
@@ -20,9 +20,10 @@ export async function clientApiEntrepriseEffectifsAnnuels(
 const mapToDomainObject = ({
   data: { effectifs_annuel, annee },
 }: IAPIEntrepriseRcpEffectifsAnnuels): IEffectifsAnnuelsProtected => {
-  const trancheEffectif = effectifs_annuel.reduce((sum, item) => {
-    return sum + (item.value || 0);
-  }, 0);
+  const trancheEffectif = effectifs_annuel.reduce(
+    (sum, item) => sum + (item.value || 0),
+    0
+  );
 
   return {
     effectif: trancheEffectif, // can be a float

@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import DualRangeSlider from '#components-ui/dual-range-slider';
-import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import constants from '#models/constants';
-import { formatCurrency } from '#utils/helpers';
-import { useState } from 'react';
+import { useState } from "react";
+import DualRangeSlider from "#components-ui/dual-range-slider";
+import { SimpleSeparator } from "#components-ui/horizontal-separator";
+import constants from "#models/constants";
+import { formatCurrency } from "#utils/helpers";
 
 // Discretize "chiffre d'affaires" possible values
 export const CA = [
-  0, 1000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000,
-  50000000000, 100000000000,
+  0, 1000, 100_000, 1_000_000, 10_000_000, 100_000_000, 1_000_000_000,
+  10_000_000_000, 50_000_000_000, 100_000_000_000,
 ];
 
 // Discretize "resultat net" possible values
 export const Res = [
-  -100000000000, -50000000000, -1000000000, -100000000, -1000000, 0, 100000,
-  1000000, 10000000, 100000000, 1000000000, 10000000000, 50000000000,
-  100000000000,
+  -100_000_000_000, -50_000_000_000, -1_000_000_000, -100_000_000, -1_000_000,
+  0, 100_000, 1_000_000, 10_000_000, 100_000_000, 1_000_000_000, 10_000_000_000,
+  50_000_000_000, 100_000_000_000,
 ];
 
 /**
@@ -32,7 +32,7 @@ const findNearestValueIndex = (
   defaultValue: number,
   value?: number | null
 ) => {
-  if (typeof value === 'undefined' || value === null) {
+  if (typeof value === "undefined" || value === null) {
     return defaultValue;
   }
 
@@ -65,71 +65,71 @@ export const FilterFinances: React.FC<{
     <>
       {valueCA.min > 0 && (
         <>
-          <label htmlFor="ca-min-input" className="fr-label fr-sr-only">
+          <label className="fr-label fr-sr-only" htmlFor="ca-min-input">
             Chiffre d&apos;affaires minimum
           </label>
           <input
             id="ca-min-input"
             name="ca_min"
-            value={CA[valueCA.min]}
-            type="hidden"
             onChange={() => {}}
+            type="hidden"
+            value={CA[valueCA.min]}
           />
         </>
       )}
       {valueCA.max < CA.length - 1 && (
         <>
-          <label htmlFor="ca-max-input" className="fr-label fr-sr-only">
+          <label className="fr-label fr-sr-only" htmlFor="ca-max-input">
             Chiffre d&apos;affaires maximum
           </label>
           <input
             id="ca-max-input"
             name="ca_max"
-            value={CA[valueCA.max]}
-            type="hidden"
             onChange={() => {}}
+            type="hidden"
+            value={CA[valueCA.max]}
           />
         </>
       )}
       {valueRes.min > 0 && (
         <>
-          <label htmlFor="res-min-input" className="fr-label fr-sr-only">
+          <label className="fr-label fr-sr-only" htmlFor="res-min-input">
             Résultat net minimum
           </label>
           <input
             id="res-min-input"
             name="res_min"
-            value={Res[valueRes.min]}
-            type="hidden"
             onChange={() => {}}
+            type="hidden"
+            value={Res[valueRes.min]}
           />
         </>
       )}
       {valueRes.max < Res.length - 1 && (
         <>
-          <label htmlFor="res-max-input" className="fr-label fr-sr-only">
+          <label className="fr-label fr-sr-only" htmlFor="res-max-input">
             Résultat net maximum
           </label>
           <input
             id="res-max-input"
             name="res_max"
-            value={Res[valueRes.max]}
-            type="hidden"
             onChange={() => {}}
+            type="hidden"
+            value={Res[valueRes.max]}
           />
         </>
       )}
       <fieldset>
         <legend>Chiffre d‘affaires :</legend>
         <DualRangeSlider
+          color={constants.chartColors[4]}
+          defaultValue={valueCA}
           idPrefix="ca"
           label="Chiffre d‘affaires"
-          min={0}
           max={CA.length - 1}
-          step={1}
-          defaultValue={valueCA}
+          min={0}
           onChange={setValueCA}
-          color={constants.chartColors[4]}
+          step={1}
         />
       </fieldset>
       <div className="legend">
@@ -140,14 +140,14 @@ export const FilterFinances: React.FC<{
       <fieldset>
         <legend>Résultat net :</legend>
         <DualRangeSlider
+          color={constants.chartColors[1]}
+          defaultValue={valueRes}
           idPrefix="res"
           label="Résultat net"
-          min={0}
           max={Res.length - 1}
-          step={1}
-          defaultValue={valueRes}
+          min={0}
           onChange={setValueRes}
-          color={constants.chartColors[1]}
+          step={1}
         />
       </fieldset>
       <div className="legend">

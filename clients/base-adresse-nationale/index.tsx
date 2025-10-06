@@ -1,9 +1,9 @@
-import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import constants from '#models/constants';
-import { IGeoLoc } from '#models/geo-loc';
-import { httpGet } from '#utils/network';
-import { IBANResponse } from './types';
+import { HttpNotFound } from "#clients/exceptions";
+import routes from "#clients/routes";
+import constants from "#models/constants";
+import type { IGeoLoc } from "#models/geo-loc";
+import { httpGet } from "#utils/network";
+import type { IBANResponse } from "./types";
 
 /**
  * GET address for geoloc
@@ -14,11 +14,11 @@ export const clientBanGeoLoc = async (
 ): Promise<IGeoLoc> => {
   // remove all characters that are not digits or letters at the begining of adress as it triggers a 400
   const sanitizedAdress = adresse
-    .replace(/^[^a-zA-Z0-9]*/, '')
-    .replaceAll(' ', '+');
+    .replace(/^[^a-zA-Z0-9]*/, "")
+    .replaceAll(" ", "+");
 
   const query = `q=${sanitizedAdress}${
-    postCode ? `&postcode=${postCode}` : ''
+    postCode ? `&postcode=${postCode}` : ""
   }`;
   const route = `${routes.ban}?${query}`;
   const response = await httpGet<IBANResponse>(route, {
@@ -31,7 +31,7 @@ export const clientBanGeoLoc = async (
 const mapToDomainObject = (response: IBANResponse): IGeoLoc => {
   const { features } = response;
   if (features.length === 0) {
-    throw new HttpNotFound('No results in API BAN');
+    throw new HttpNotFound("No results in API BAN");
   }
   const coordinates = features[0].geometry.coordinates;
   return {
