@@ -7,7 +7,7 @@ import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import type { IEtatCivil } from "#models/rne/types";
 import {
   type IdRna,
-  isNotPersonneMoraleFromNatureJuridique,
+  isSocietePersonnePhysiqueFromNatureJuridique,
   type Siren,
   type Siret,
 } from "#utils/helpers";
@@ -272,7 +272,7 @@ export const isEntrepreneurIndividuel = (
 export const isPersonneMorale = (uniteLegale: IUniteLegale): boolean =>
   !(
     isEntrepreneurIndividuel(uniteLegale) ||
-    isNotPersonneMoraleFromNatureJuridique(uniteLegale.natureJuridique)
+    isSocietePersonnePhysiqueFromNatureJuridique(uniteLegale.natureJuridique)
   );
 
 export const isPersonnePhysique = (uniteLegale: IUniteLegale): boolean =>

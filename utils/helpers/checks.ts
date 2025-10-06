@@ -6,7 +6,7 @@ export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string
 ) => ["1", "10", "1000"].indexOf(natureJuridique) > -1;
 
-export const isNotPersonneMoraleFromNatureJuridique = (
+export const isSocietePersonnePhysiqueFromNatureJuridique = (
   natureJuridique: string
 ) => natureJuridique.startsWith("2");
 
