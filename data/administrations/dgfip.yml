@@ -16,6 +16,10 @@ dataSources:
     apiSlug: api-entreprise
     data:
       - label: Chiffre d’affaires
+  - label: Liens capitalistiques
+    apiSlug: api-entreprise
+    data:
+      - label: Liens capitalistiques
 logoType: portrait
 description: |
   La Direction Générale des Finances Publiques (DGFiP) est la direction de l'administration française qui gère la fiscalité de l’État français et des collectivités territoriales. Elle gère l’imposition des particuliers et des entreprises, en définit les règles juridiques, en assure le recouvrement et en instruit les contentieux fiscaux.
