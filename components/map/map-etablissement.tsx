@@ -80,10 +80,6 @@ export function MapEtablissement({
           <br />
           Cela peut-être dû à un problème d’affichage, ou à un problème dans les
           coordonnées de l’établissement.
-          <br />
-          (coordonnées [{etablissement?.latitude || "⎽"}°,{" "}
-          {etablissement?.longitude || "⎽"}
-          °])
         </i>
       )}
     </div>
