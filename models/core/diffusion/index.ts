@@ -79,7 +79,6 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
   // for search results, anonymise matching etablissements
   if ("matchingEtablissements" in uniteLegale) {
     uniteLegale.matchingEtablissements = anonymiseEtablissementsList(
-      uniteLegale,
       uniteLegale.matchingEtablissements,
       session
     );
@@ -89,11 +88,7 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
     return uniteLegale;
   }
   uniteLegale.nomComplet = getNomComplet(uniteLegale, session);
-  uniteLegale.siege = anonymiseEtablissement(
-    uniteLegale,
-    uniteLegale.siege,
-    session
-  );
+  uniteLegale.siege = anonymiseEtablissement(uniteLegale.siege, session);
   uniteLegale.chemin = uniteLegale.siren;
   return uniteLegale;
 };
@@ -106,7 +101,6 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
  * @returns
  */
 export const anonymiseEtablissement = (
-  uniteLegale: IUniteLegale,
   etablissement: IEtablissement,
   session: ISession | null
 ) => {
@@ -116,27 +110,20 @@ export const anonymiseEtablissement = (
   const { adressePostale, adresse, commune, codePostal } = etablissement || {};
 
   etablissement.adresse = formatAdresseForDiffusion(
-    uniteLegale,
     etablissement,
     adresse,
     commune
   );
   etablissement.adressePostale = formatAdresseForDiffusion(
-    uniteLegale,
     etablissement,
     adressePostale,
     commune
   );
   etablissement.codePostal = formatCodePostalForDiffusion(
-    uniteLegale,
     etablissement,
     codePostal
   );
-  etablissement.commune = formatCommuneForDiffusion(
-    uniteLegale,
-    etablissement,
-    commune
-  );
+  etablissement.commune = formatCommuneForDiffusion(etablissement, commune);
 
   etablissement.enseigne = defaultNonDiffusiblePlaceHolder(etablissement);
   etablissement.denomination = defaultNonDiffusiblePlaceHolder(etablissement);
@@ -145,33 +132,25 @@ export const anonymiseEtablissement = (
 };
 
 const anonymiseEtablissementsList = (
-  uniteLegale: IUniteLegale,
   etablissements: IEtablissement[],
   session: ISession | null
-) => etablissements.map((e) => anonymiseEtablissement(uniteLegale, e, session));
+) => etablissements.map((e) => anonymiseEtablissement(e, session));
 
 const anonymiseUniteLegaleEtablissements = (
   uniteLegale: IUniteLegale,
   etablissements: IEtablissementsList["etablissements"],
   session: ISession | null
 ) => {
-  etablissements.all = anonymiseEtablissementsList(
-    uniteLegale,
-    etablissements.all,
-    session
-  );
+  etablissements.all = anonymiseEtablissementsList(etablissements.all, session);
   etablissements.open = anonymiseEtablissementsList(
-    uniteLegale,
     etablissements.open,
     session
   );
   etablissements.unknown = anonymiseEtablissementsList(
-    uniteLegale,
     etablissements.unknown,
     session
   );
   etablissements.closed = anonymiseEtablissementsList(
-    uniteLegale,
     etablissements.closed,
     session
   );
@@ -212,7 +191,6 @@ const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {
 };
 
 const formatAdresseForDiffusion = (
-  uniteLegale: IUniteLegale,
   etablissement: IEtablissement,
   adresse: string,
   commune: string
@@ -221,14 +199,13 @@ const formatAdresseForDiffusion = (
     return adresse || "Adresse inconnue";
   }
 
-  if (!commune || isPersonnePhysique(uniteLegale)) {
+  if (!commune || isPersonnePhysique(etablissement)) {
     return defaultNonDiffusiblePlaceHolder(etablissement);
   }
   return nonDiffusibleDataFormatter(commune);
 };
 
 const formatCodePostalForDiffusion = (
-  uniteLegale: IUniteLegale,
   etablissement: IEtablissement,
   codePostal: string
 ) => {
@@ -236,7 +213,7 @@ const formatCodePostalForDiffusion = (
     return codePostal;
   }
 
-  if (isPersonnePhysique(uniteLegale)) {
+  if (isPersonnePhysique(etablissement)) {
     return defaultNonDiffusiblePlaceHolder(etablissement);
   }
 
@@ -244,7 +221,6 @@ const formatCodePostalForDiffusion = (
 };
 
 const formatCommuneForDiffusion = (
-  uniteLegale: IUniteLegale,
   etablissement: IEtablissement,
   commune: string
 ) => {
@@ -252,7 +228,7 @@ const formatCommuneForDiffusion = (
     return commune;
   }
 
-  if (isPersonnePhysique(uniteLegale)) {
+  if (isPersonnePhysique(etablissement)) {
     return defaultNonDiffusiblePlaceHolder(etablissement);
   }
 

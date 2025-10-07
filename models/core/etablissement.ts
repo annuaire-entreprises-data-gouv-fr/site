@@ -58,7 +58,8 @@ const getEtablissementFromSlug = async (
     etablissement.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
   }
 
-  return etablissement;
+  const session = await getSession();
+  return anonymiseEtablissement(etablissement, session);
 };
 
 /**
@@ -227,7 +228,7 @@ const getEtablissementWithUniteLegaleFromSlug = async (
   slug: string,
   isBot = false
 ): Promise<IEtablissementWithUniteLegale> => {
-  let etablissement = await getEtablissementFromSlug(slug, {
+  const etablissement = await getEtablissementFromSlug(slug, {
     isBot,
   });
 
@@ -239,9 +240,6 @@ const getEtablissementWithUniteLegaleFromSlug = async (
   if (uniteLegale.anciensSiegesSirets.indexOf(etablissement.siret) > -1) {
     etablissement.ancienSiege = true;
   }
-
-  const session = await getSession();
-  etablissement = anonymiseEtablissement(uniteLegale, etablissement, session);
 
   return { etablissement, uniteLegale };
 };

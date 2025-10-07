@@ -1,6 +1,5 @@
 import { HttpForbiddenError } from "#clients/exceptions";
 import routes from "#clients/routes";
-import { estDiffusible } from "#models/core/diffusion";
 import { createNonDiffusibleEtablissement } from "#models/core/etablissement";
 import { createEtablissementsList } from "#models/core/etablissements-list";
 import { estActif } from "#models/core/etat-administratif";
@@ -9,12 +8,12 @@ import {
   createDefaultUniteLegale,
   type IUniteLegale,
 } from "#models/core/types";
-import { isProtectedSiren } from "#models/protected-siren";
 import {
   agregateTripleFields,
   capitalize,
   formatNameFull,
   isEntrepreneurIndividuelFromNatureJuridique,
+  isSocietePersonnePhysiqueFromNatureJuridique,
   type Siren,
   type Siret,
 } from "#utils/helpers";
@@ -109,16 +108,9 @@ export const clientUniteLegaleInsee = async (
   const denominationUsuelle =
     siege?.denomination || tmpUniteLegale.denominationUsuelle || "";
 
-  // We remove sigle from the name if the UL is protected or non diffusible
-  // uniteLegale.statutDiffusion cannot have been set to protected at this point so we need to check it here
-  const shouldDisplaySigle =
-    tmpUniteLegale.sigle &&
-    estDiffusible(uniteLegale) &&
-    !(await isProtectedSiren(siren));
-
   const nomComplet = `${tmpUniteLegale.denomination}${
     denominationUsuelle ? ` (${denominationUsuelle})` : ""
-  }${shouldDisplaySigle ? ` (${tmpUniteLegale.sigle})` : ""}`;
+  }${tmpUniteLegale.sigle ? ` (${tmpUniteLegale.sigle})` : ""}`;
 
   const etablissementsList = allEtablissements?.list || [siege];
   etablissementsList.forEach(
@@ -190,6 +182,10 @@ const mapToDomainObject = (
   const estEntrepreneurIndividuel = isEntrepreneurIndividuelFromNatureJuridique(
     categorieJuridiqueUniteLegale
   );
+  const estPersonneMorale = !(
+    estEntrepreneurIndividuel ||
+    isSocietePersonnePhysiqueFromNatureJuridique(categorieJuridiqueUniteLegale)
+  );
 
   const libelleActivitePrincipaleUniteLegale = libelleFromCodeNAF(
     activitePrincipaleUniteLegale,
@@ -211,6 +207,7 @@ const mapToDomainObject = (
   }
 
   siege.complements.estEntrepreneurIndividuel = estEntrepreneurIndividuel;
+  siege.complements.estPersonneMorale = estPersonneMorale;
 
   /**
    *   either siege nom commercial or pre 2008 unite legale nom commercial
@@ -285,6 +282,7 @@ const mapToDomainObject = (
       complements: {
         ...defaultUniteLegale.complements,
         estEntrepreneurIndividuel,
+        estPersonneMorale,
         estEss: economieSocialeSolidaireUniteLegale === "O",
       },
       association: {

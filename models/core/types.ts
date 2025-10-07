@@ -5,12 +5,7 @@ import {
 } from "#models/core/etablissements-list";
 import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import type { IEtatCivil } from "#models/rne/types";
-import {
-  type IdRna,
-  isSocietePersonnePhysiqueFromNatureJuridique,
-  type Siren,
-  type Siret,
-} from "#utils/helpers";
+import type { IdRna, Siren, Siret } from "#utils/helpers";
 import { EAdministration } from "../administrations/EAdministration";
 import {
   Exception,
@@ -184,6 +179,7 @@ export interface IUniteLegaleImmatriculation {
 export interface IUniteLegaleComplements {
   estBio: boolean;
   estEntrepreneurIndividuel: boolean;
+  estPersonneMorale: boolean;
   estEss: boolean;
   estEntrepreneurSpectacle: boolean;
   statutEntrepreneurSpectacle: string;
@@ -208,6 +204,7 @@ export interface IUniteLegaleComplements {
 export const createDefaultUniteLegaleComplements =
   (): IUniteLegaleComplements => ({
     estEntrepreneurIndividuel: false,
+    estPersonneMorale: false,
     estEss: false,
     estBio: false,
     estEntrepreneurSpectacle: false,
@@ -233,6 +230,7 @@ export const createDefaultUniteLegaleComplements =
 export interface IEtablissementComplements {
   // this is used to determined if etablissement belongs to an EI - useful to determinie wether we should use insee
   estEntrepreneurIndividuel: boolean;
+  estPersonneMorale: boolean;
   idFiness: string[];
   idBio: string[];
   idOrganismeFormation: string[];
@@ -243,6 +241,7 @@ export interface IEtablissementComplements {
 export const createDefaultEtablissementComplements =
   (): IEtablissementComplements => ({
     estEntrepreneurIndividuel: false,
+    estPersonneMorale: false,
     idFiness: [],
     idBio: [],
     idOrganismeFormation: [],
@@ -269,12 +268,13 @@ export const isEntrepreneurIndividuel = (
   uniteLegaleOrEtablissement: IUniteLegale | IEtablissement
 ): boolean => uniteLegaleOrEtablissement.complements.estEntrepreneurIndividuel;
 
-export const isPersonnePhysique = (uniteLegale: IUniteLegale): boolean =>
-  isEntrepreneurIndividuel(uniteLegale) ||
-  isSocietePersonnePhysiqueFromNatureJuridique(uniteLegale.natureJuridique);
+export const isPersonnePhysique = (
+  uniteLegaleOrEtablissement: IUniteLegale | IEtablissement
+): boolean => !uniteLegaleOrEtablissement.complements.estPersonneMorale;
 
-export const isPersonneMorale = (uniteLegale: IUniteLegale): boolean =>
-  !isPersonnePhysique(uniteLegale);
+export const isPersonneMorale = (
+  uniteLegaleOrEtablissement: IUniteLegale | IEtablissement
+): boolean => uniteLegaleOrEtablissement.complements.estPersonneMorale;
 
 export interface ICollectiviteTerritoriale
   extends Omit<IUniteLegale, "colter"> {

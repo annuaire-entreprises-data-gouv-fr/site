@@ -210,6 +210,9 @@ class UniteLegaleBuilder {
      */
     return {
       ...uniteLegaleInsee,
+      nomComplet:
+        uniteLegaleRechercheEntreprise.nomComplet ??
+        uniteLegaleInsee.nomComplet,
       complements: {
         ...uniteLegaleInsee?.complements,
         ...uniteLegaleRechercheEntreprise.complements,

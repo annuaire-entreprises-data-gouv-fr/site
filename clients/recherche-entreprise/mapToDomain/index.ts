@@ -9,6 +9,8 @@ import {
   formatFirstNames,
   formatLastName,
   formatRole,
+  isEntrepreneurIndividuelFromNatureJuridique,
+  isSocietePersonnePhysiqueFromNatureJuridique,
   type Siret,
   verifySiret,
 } from "#utils/helpers";
@@ -52,7 +54,7 @@ export const mapToImmatriculation = (i: IResult["immatriculation"] | null) => {
 
 export const mapToSiege = (
   siege: IResult["siege"],
-  est_entrepreneur_individuel: boolean
+  natureJuridique: string
 ) => {
   if (!siege || Object.keys(siege).length === 0 || !siege.siret) {
     return {
@@ -60,7 +62,7 @@ export const mapToSiege = (
       siret: "" as Siret,
     };
   }
-  return mapToEtablissement(siege, est_entrepreneur_individuel);
+  return mapToEtablissement(siege, natureJuridique);
 };
 
 export const mapToDirigeantModel = (
@@ -112,7 +114,7 @@ export const mapToElusModel = (eluRaw: any): IEtatCivil => {
 
 export const mapToEtablissement = (
   etablissement: ISiege | IMatchingEtablissement,
-  estEntrepreneurIndividuel: boolean
+  natureJuridique: string
 ): IEtablissement => {
   const {
     siret,
@@ -155,6 +157,13 @@ export const mapToEtablissement = (
     siret
   );
 
+  const estEntrepreneurIndividuel =
+    isEntrepreneurIndividuelFromNatureJuridique(natureJuridique);
+  const estPersonneMorale = !(
+    estEntrepreneurIndividuel ||
+    isSocietePersonnePhysiqueFromNatureJuridique(natureJuridique)
+  );
+
   return {
     ...createDefaultEtablissement(),
     siren: extractSirenFromSiret(siret),
@@ -188,6 +197,7 @@ export const mapToEtablissement = (
     dateFermeture: date_fermeture ?? "",
     complements: {
       estEntrepreneurIndividuel,
+      estPersonneMorale,
       idFiness: liste_finess || [],
       idBio: liste_id_bio || [],
       idOrganismeFormation: liste_id_organisme_formation || [],
