@@ -25,5 +25,5 @@
 
 .expanded .button-container {
   position: sticky;
-  margin-top: calc(var(--collapsed-height) - 8rem);
+  margin-top: 8rem;
 }
