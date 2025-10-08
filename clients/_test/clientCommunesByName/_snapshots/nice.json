@@ -1,7 +1,5 @@
 {
-  "args": [
-    "Nice"
-  ],
+  "args": ["Nice"],
   "result": [
     {
       "type": "insee",
