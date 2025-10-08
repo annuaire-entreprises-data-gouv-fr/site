@@ -7,6 +7,7 @@ export enum EAdministration {
   DINUM = "dinum",
   MC = "mc",
   MEF = "mef",
+  MSS = "mss",
   INPI = "inpi",
   INSEE = "insee",
   MTPEI = "mtpei",

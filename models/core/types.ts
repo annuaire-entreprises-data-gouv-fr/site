@@ -199,6 +199,7 @@ export interface IUniteLegaleComplements {
   estAlimConfiance: boolean;
   bilanGesRenseigne: boolean;
   estUai: boolean;
+  idFinessJuridiques: string[];
 }
 
 export const createDefaultUniteLegaleComplements =
@@ -225,6 +226,7 @@ export const createDefaultUniteLegaleComplements =
     estPatrimoineVivant: false,
     estAlimConfiance: false,
     bilanGesRenseigne: false,
+    idFinessJuridiques: [],
   });
 
 export interface IEtablissementComplements {

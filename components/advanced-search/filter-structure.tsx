@@ -117,6 +117,13 @@ export const FilterStructure: React.FC<{
         />
 
         <LabelAndCertificateBadge
+          isSelected={labelsSelected.includes("finess")}
+          label="Établissement Sanitaires et sociaux (Finess)"
+          onClick={() => toggleLabel("finess")}
+          small
+        />
+
+        <LabelAndCertificateBadge
           isSelected={labelsSelected.includes("bio")}
           label="Professionnels du Bio"
           onClick={() => toggleLabel("bio")}

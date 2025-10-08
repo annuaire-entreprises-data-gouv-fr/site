@@ -86,6 +86,10 @@ const routes = {
     dpo: "https://tabular-api.data.gouv.fr/api/resources/c5d02b42-1008-4406-83f5-3a81c8b936a3/data/",
     entrepreneursSpectacles:
       "https://tabular-api.data.gouv.fr/api/resources/fb6c3b2e-da8c-4e69-a719-6a96329e4cb2/data/",
+    finessGeo:
+      "https://tabular-api.data.gouv.fr/api/resources/935e1dc5-afce-4d45-9fda-47b18f7444e6/data/",
+    finessJuridique:
+      "https://tabular-api.data.gouv.fr/api/resources/35d75f72-3ae5-4c4a-abd2-9aad340576a1/data/",
   },
   dataSubvention: {
     pageBySirenOrIdRna: (sirenOrIdRna: string) =>

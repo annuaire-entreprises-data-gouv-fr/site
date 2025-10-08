@@ -1,0 +1,37 @@
+@media (min-width: 768px) {
+  .firstCell {
+    position: relative;
+    min-height: 80px;
+    margin: 0;
+    padding: 0;
+    padding-left: 30px;
+  }
+
+  .firstCell:before {
+    display: block;
+    top: 0;
+    left: 20px;
+    width: 13px;
+    height: 15px;
+    content: "";
+    position: absolute;
+    border-bottom: 1px dashed #ccc;
+  }
+
+  .firstCell:after {
+    display: block;
+    top: 0;
+    left: 20px;
+    width: 13px;
+    height: 100%;
+    content: "";
+    position: absolute;
+    border-left: 1px dashed #ccc;
+  }
+  .firstCell.last:after {
+    display: none;
+  }
+  .firstCell.last:before {
+    border-left: 1px dashed #ccc;
+  }
+}

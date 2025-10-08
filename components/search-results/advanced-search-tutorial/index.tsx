@@ -40,8 +40,8 @@ export const AdvancedSearchTutorial = () => (
           <li>
             <Icon color={constants.colors.frBlue} slug="building">
               <strong>Structure&nbsp;:</strong>&#8200;filtrez par type de
-              structure ou labels (ESS, Société à mission, Entreprise Inclusive,
-              RGE, Spectacle vivant, Qualiopi, Bio)
+              structure ou labels (ESS, Société à mission, RGE, Spectacle
+              vivant, Qualiopi, Bio etc.)
             </Icon>
           </li>
           <li>
