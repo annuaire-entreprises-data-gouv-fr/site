@@ -1,6 +1,10 @@
 import { URLSearchParams } from "url";
 import { HttpServerError, HttpUnauthorizedError } from "#clients/exceptions";
 import routes from "#clients/routes";
+import {
+  ApplicationRights,
+  hasRights,
+} from "#models/authentication/user/rights";
 import constants from "#models/constants";
 import { Information } from "#models/exceptions";
 import httpClient, {
@@ -9,6 +13,7 @@ import httpClient, {
   type IDefaultRequestConfig,
 } from "#utils/network";
 import { logInfoInSentry } from "#utils/sentry";
+import getSession from "#utils/server-side-helper/app/get-session";
 
 type IAccessToken = {
   data: {
@@ -155,6 +160,14 @@ const exportCsvClient = new httpInseeClient(
   process.env.INSEE_PASSWORD_EXPORT_CSV
 );
 
+const agentsClient = new httpInseeClient(
+  routes.sireneInsee.auth,
+  process.env.INSEE_CLIENT_ID_AGENTS,
+  process.env.INSEE_CLIENT_SECRET_AGENTS,
+  process.env.INSEE_USERNAME_AGENTS,
+  process.env.INSEE_PASSWORD_AGENTS
+);
+
 /**
  * Insee API client
  *
@@ -168,7 +181,13 @@ export async function inseeClientGet<T>(
   config: IDefaultRequestConfig = {},
   useFallback = false
 ): Promise<T> {
-  const client = useFallback ? fallbackClient : defaultClient;
+  const session = await getSession();
+
+  const baseClient = hasRights(session, ApplicationRights.isAgent)
+    ? agentsClient
+    : defaultClient;
+
+  const client = useFallback ? fallbackClient : baseClient;
   return (await client.get(route, {
     timeout: constants.timeout.S,
     ...config,
