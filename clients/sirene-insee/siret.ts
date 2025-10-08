@@ -11,7 +11,7 @@ import {
   extractSirenFromSiret,
   formatAdresse,
   isEntrepreneurIndividuelFromNatureJuridique,
-  isSocietePersonnePhysiqueFromNatureJuridique,
+  isPersonneMoraleFromNatureJuridique,
   type Siret,
 } from "#utils/helpers";
 import { libelleFromCodeNAF } from "#utils/helpers/formatting/labels";
@@ -219,10 +219,8 @@ const mapEtablissementToDomainObject = (
 
   defaultEtablissement.complements.estEntrepreneurIndividuel =
     isEntrepreneurIndividuelFromNatureJuridique(categorieJuridiqueUniteLegale);
-  defaultEtablissement.complements.estPersonneMorale = !(
-    defaultEtablissement.complements.estEntrepreneurIndividuel ||
-    isSocietePersonnePhysiqueFromNatureJuridique(categorieJuridiqueUniteLegale)
-  );
+  defaultEtablissement.complements.estPersonneMorale =
+    isPersonneMoraleFromNatureJuridique(categorieJuridiqueUniteLegale);
 
   const {
     complementAdresseEtablissement,

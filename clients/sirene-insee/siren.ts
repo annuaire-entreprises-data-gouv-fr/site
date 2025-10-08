@@ -13,7 +13,7 @@ import {
   capitalize,
   formatNameFull,
   isEntrepreneurIndividuelFromNatureJuridique,
-  isSocietePersonnePhysiqueFromNatureJuridique,
+  isPersonneMoraleFromNatureJuridique,
   type Siren,
   type Siret,
 } from "#utils/helpers";
@@ -182,9 +182,8 @@ const mapToDomainObject = (
   const estEntrepreneurIndividuel = isEntrepreneurIndividuelFromNatureJuridique(
     categorieJuridiqueUniteLegale
   );
-  const estPersonneMorale = !(
-    estEntrepreneurIndividuel ||
-    isSocietePersonnePhysiqueFromNatureJuridique(categorieJuridiqueUniteLegale)
+  const estPersonneMorale = isPersonneMoraleFromNatureJuridique(
+    categorieJuridiqueUniteLegale
   );
 
   const libelleActivitePrincipaleUniteLegale = libelleFromCodeNAF(

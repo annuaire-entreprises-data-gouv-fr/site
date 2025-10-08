@@ -10,7 +10,7 @@ import {
   formatLastName,
   formatRole,
   isEntrepreneurIndividuelFromNatureJuridique,
-  isSocietePersonnePhysiqueFromNatureJuridique,
+  isPersonneMoraleFromNatureJuridique,
   type Siret,
   verifySiret,
 } from "#utils/helpers";
@@ -159,10 +159,8 @@ export const mapToEtablissement = (
 
   const estEntrepreneurIndividuel =
     isEntrepreneurIndividuelFromNatureJuridique(natureJuridique);
-  const estPersonneMorale = !(
-    estEntrepreneurIndividuel ||
-    isSocietePersonnePhysiqueFromNatureJuridique(natureJuridique)
-  );
+  const estPersonneMorale =
+    isPersonneMoraleFromNatureJuridique(natureJuridique);
 
   return {
     ...createDefaultEtablissement(),

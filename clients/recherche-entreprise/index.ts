@@ -11,7 +11,7 @@ import type { ISearchResults } from "#models/search";
 import type SearchFilterParams from "#models/search/search-filter-params";
 import {
   isEntrepreneurIndividuelFromNatureJuridique,
-  isSocietePersonnePhysiqueFromNatureJuridique,
+  isPersonneMoraleFromNatureJuridique,
   parseIntWithDefaultValue,
   verifySiren,
 } from "#utils/helpers";
@@ -227,10 +227,8 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
 
   const estEntrepreneurIndividuel =
     isEntrepreneurIndividuelFromNatureJuridique(nature_juridique);
-  const estPersonneMorale = !(
-    estEntrepreneurIndividuel ||
-    isSocietePersonnePhysiqueFromNatureJuridique(nature_juridique)
-  );
+  const estPersonneMorale =
+    isPersonneMoraleFromNatureJuridique(nature_juridique);
 
   return {
     ...createDefaultUniteLegale(siren),
