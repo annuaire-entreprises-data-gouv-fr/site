@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 08/010/2025
+  target:
+    site: true
+  body: |
+    Ajout du fichier des établissements sanitaires et sociaux (Finess) dans l'onglet "Labels et certificats"
 - date: 06/06/2025
   target:
     site: true

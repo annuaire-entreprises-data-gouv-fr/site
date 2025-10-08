@@ -1,16 +1,17 @@
-import AlimConfianceSection from "app/(header-default)/dirigeants/[slug]/_component/sections/entreprise/alim-confiance/section";
 import type { Metadata } from "next";
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from "#components/badges-section/labels-and-certificates";
 import { LabelAchatsResponsables } from "#components/labels-and-certificates/achats-responsables";
+import AlimConfianceSection from "#components/labels-and-certificates/alim-confiance/section";
 import BilanGesSection from "#components/labels-and-certificates/bilan-ges";
 import { CertificationsBioSection } from "#components/labels-and-certificates/bio";
 import { EgaproSection } from "#components/labels-and-certificates/egapro";
 import { CertificationsEntrepreneurSpectaclesSection } from "#components/labels-and-certificates/entrepreneur-spectacles";
 import { EntrepriseInclusiveSection } from "#components/labels-and-certificates/entreprise-inclusive";
 import { CertificationESSSection } from "#components/labels-and-certificates/ess";
+import FinessSection from "#components/labels-and-certificates/finess";
 import { OrganismeDeFormationSection } from "#components/labels-and-certificates/organismes-de-formation";
 import { LabelPatrimoineVivant } from "#components/labels-and-certificates/patrimoine-vivant";
 import { CertificationsRGESection } from "#components/labels-and-certificates/rge";
@@ -73,6 +74,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
     estPatrimoineVivant,
     estAlimConfiance,
     bilanGesRenseigne,
+    estFiness,
   } = uniteLegale.complements;
 
   const {
@@ -105,6 +107,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
           />
         )}
         {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
+        {estFiness && <FinessSection uniteLegale={uniteLegale} />}
         {estRge && (
           <CertificationsRGESection
             certificationsRGE={rge}
@@ -135,12 +138,9 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         )}
         {estAchatsResponsables && <LabelAchatsResponsables />}
         {estPatrimoineVivant && <LabelPatrimoineVivant />}
-        {estAlimConfiance && (
-          <AlimConfianceSection session={session} uniteLegale={uniteLegale} />
-        )}
-        {bilanGesRenseigne && (
-          <BilanGesSection session={session} uniteLegale={uniteLegale} />
-        )}
+        {estAlimConfiance && <AlimConfianceSection uniteLegale={uniteLegale} />}
+
+        {bilanGesRenseigne && <BilanGesSection uniteLegale={uniteLegale} />}
       </div>
     </>
   );
