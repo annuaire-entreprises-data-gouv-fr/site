@@ -7,13 +7,11 @@ import { AsyncDataSectionClient } from "#components/section/data-section/client"
 import { FullTable } from "#components/table/full";
 import { Tag } from "#components-ui/tag";
 import { EAdministration } from "#models/administrations/EAdministration";
-import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import { formatDate, formatSiret } from "#utils/helpers";
 
 type IProps = {
   uniteLegale: IUniteLegale;
-  session: ISession | null;
 };
 
 /**

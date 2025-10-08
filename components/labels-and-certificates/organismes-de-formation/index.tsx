@@ -80,6 +80,7 @@ export const OrganismeDeFormationSection = ({
                   : []),
               ])}
               head={head}
+              verticalAlign="top"
             />{" "}
           </>
         );

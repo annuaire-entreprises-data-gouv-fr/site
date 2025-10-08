@@ -1,0 +1,14 @@
+slug: mss
+short: MSS
+long: Ministère des Solidarités et de la Santé
+site: https://sante.gouv.fr/
+contact: https://sante.gouv.fr/ministere/article/nous-contacter
+dataSources:
+  - label: Liste des établissements FIness (sanitaire et social)
+    apiSlug: liste-finess
+    datagouvLink: https://www.data.gouv.fr/datasets/reexposition-des-donnees-finess
+    data:
+      - label: numéro Finess
+estServicePublic: true
+description: |
+  Le ministère des solidarités et de la santé met en œuvre la politique du gouvernement dans les domaines de la solidarité, de la santé publique et de la protection sociale.
