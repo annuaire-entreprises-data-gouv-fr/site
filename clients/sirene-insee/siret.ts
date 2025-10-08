@@ -10,6 +10,8 @@ import {
   agregateTripleFields,
   extractSirenFromSiret,
   formatAdresse,
+  isEntrepreneurIndividuelFromNatureJuridique,
+  isPersonneMoraleFromNatureJuridique,
   type Siret,
 } from "#utils/helpers";
 import { libelleFromCodeNAF } from "#utils/helpers/formatting/labels";
@@ -172,6 +174,7 @@ const mapEtablissementToDomainObject = (
     adresseEtablissement,
     statutDiffusionEtablissement,
     periodesEtablissement,
+    uniteLegale: { categorieJuridiqueUniteLegale },
   } = inseeEtablissement;
 
   // get last periode to obtain most recent data
@@ -213,6 +216,11 @@ const mapEtablissementToDomainObject = (
     : lastStateChange.dateDebut;
 
   const defaultEtablissement = createDefaultEtablissement();
+
+  defaultEtablissement.complements.estEntrepreneurIndividuel =
+    isEntrepreneurIndividuelFromNatureJuridique(categorieJuridiqueUniteLegale);
+  defaultEtablissement.complements.estPersonneMorale =
+    isPersonneMoraleFromNatureJuridique(categorieJuridiqueUniteLegale);
 
   const {
     complementAdresseEtablissement,

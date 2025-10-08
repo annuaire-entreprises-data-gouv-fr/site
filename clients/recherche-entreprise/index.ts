@@ -9,7 +9,12 @@ import {
 } from "#models/core/types";
 import type { ISearchResults } from "#models/search";
 import type SearchFilterParams from "#models/search/search-filter-params";
-import { parseIntWithDefaultValue, verifySiren } from "#utils/helpers";
+import {
+  isEntrepreneurIndividuelFromNatureJuridique,
+  isPersonneMoraleFromNatureJuridique,
+  parseIntWithDefaultValue,
+  verifySiren,
+} from "#utils/helpers";
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAFWithoutNomenclature,
@@ -195,11 +200,11 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       }
     : { codeColter: null };
 
-  const etablissementSiege = mapToSiege(siege, est_entrepreneur_individuel);
+  const etablissementSiege = mapToSiege(siege, nature_juridique);
 
   const matchingEtablissements = matching_etablissements.map(
     (matchingEtablissement) =>
-      mapToEtablissement(matchingEtablissement, est_entrepreneur_individuel)
+      mapToEtablissement(matchingEtablissement, nature_juridique)
   );
 
   // case no open etablisssment
@@ -213,14 +218,17 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
 
   const etablissementsList = createEtablissementsList(
     etablissements.length > 0
-      ? etablissements.map((e) =>
-          mapToEtablissement(e, est_entrepreneur_individuel)
-        )
+      ? etablissements.map((e) => mapToEtablissement(e, nature_juridique))
       : [etablissementSiege],
     pageEtablissements,
     result.nombre_etablissements,
     result.nombre_etablissements_ouverts
   );
+
+  const estEntrepreneurIndividuel =
+    isEntrepreneurIndividuelFromNatureJuridique(nature_juridique);
+  const estPersonneMorale =
+    isPersonneMoraleFromNatureJuridique(nature_juridique);
 
   return {
     ...createDefaultUniteLegale(siren),
@@ -255,7 +263,8 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       estEss: est_ess,
       estServicePublic: est_service_public,
       estL100_3: est_l100_3,
-      estEntrepreneurIndividuel: est_entrepreneur_individuel,
+      estEntrepreneurIndividuel,
+      estPersonneMorale,
       estEntrepreneurSpectacle: est_entrepreneur_spectacle,
       statutEntrepreneurSpectacle: statut_entrepreneur_spectacle,
       estFiness: est_finess,

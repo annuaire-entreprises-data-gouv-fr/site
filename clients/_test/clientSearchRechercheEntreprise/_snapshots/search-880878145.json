@@ -40,6 +40,7 @@
           "longitude": "2.305917",
           "complements": {
             "estEntrepreneurIndividuel": false,
+            "estPersonneMorale": true,
             "idFiness": [],
             "idBio": [],
             "idOrganismeFormation": [],
@@ -86,6 +87,7 @@
               "longitude": "2.305917",
               "complements": {
                 "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
                 "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
@@ -126,6 +128,7 @@
               "longitude": "2.305917",
               "complements": {
                 "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
                 "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
@@ -149,9 +152,9 @@
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": null,
-        "anneeCategorieEntreprise": "2022",
-        "categorieEntreprise": "PME",
+        "trancheEffectif": "NN",
+        "anneeCategorieEntreprise": null,
+        "categorieEntreprise": null,
         "anneeTrancheEffectif": null,
         "complements": {
           "estBio": false,
@@ -159,6 +162,7 @@
           "estServicePublic": false,
           "estL100_3": false,
           "estEntrepreneurIndividuel": false,
+          "estPersonneMorale": true,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
           "estFiness": false,

@@ -24,7 +24,14 @@ describe("Dirigeants ESSOR ENERGIES (SOLARSUD)", () => {
 describe("Dirigeants non-diffusible ", () => {
   it("Should not display dirigeants", () => {
     cy.visit("/dirigeants/908595879");
-    cy.contains("▪︎ ▪︎ ▪︎ information protégée ▪︎ ▪︎ ▪︎").should("be.visible");
+    cy.findByRole("heading", { name: "SEVERNAYA", level: 1 }).should(
+      "be.visible"
+    );
+    cy.findAllByRole("status")
+      .first()
+      .within(() => {
+        cy.contains("protégé").should("be.visible");
+      });
     cy.contains("Dirigeant(s) (données privées)").should("be.visible");
   });
   it("[LOGGED] Should display dirigeants", () => {

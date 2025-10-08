@@ -1,10 +1,12 @@
 import { HttpBadRequestError, HttpNotFound } from "#clients/exceptions";
 import clientSearchRechercheEntreprise from "#clients/recherche-entreprise";
+import { anonymiseUniteLegale, ISTATUTDIFFUSION } from "#models/core/diffusion";
 import {
   FetchRechercheEntrepriseException,
   type IEtablissement,
   IsLikelyASirenOrSiretException,
   type IUniteLegale,
+  isPersonnePhysique,
   NotEnoughParamsException,
 } from "#models/core/types";
 import { Exception } from "#models/exceptions";
@@ -17,6 +19,7 @@ import {
 } from "#utils/helpers";
 import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
 import { logWarningInSentry } from "#utils/sentry";
+import getSession from "#utils/server-side-helper/app/get-session";
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
@@ -101,7 +104,7 @@ const search = async (
 };
 
 /**
- * Research a search query but remove any protected Siren from result list
+ * Research a search query but remove any protected personne physique from result list
  * @param searchTerm
  * @param page
  * @param searchFilterParams
@@ -112,17 +115,29 @@ export const searchWithoutProtectedSiren = async (
   page: number,
   searchFilterParams: SearchFilterParams
 ): Promise<ISearchResults> => {
+  const session = await getSession();
   const results = await search(searchTerm, page, searchFilterParams);
-  const newResults = [];
+  const newResults: ISearchResult[] = [];
 
   for (let i = 0; i < results.results.length; i++) {
     const currentResult = results.results[i];
-    if (await isProtectedSiren(currentResult.siren)) {
+    const isProtected = await isProtectedSiren(currentResult.siren);
+
+    if (isProtected && isPersonnePhysique(currentResult)) {
       results.resultCount -= 1;
     } else {
-      newResults.push(currentResult);
+      if (isProtected) {
+        currentResult.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+        currentResult.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+        currentResult.matchingEtablissements.forEach((etablissement) => {
+          etablissement.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+        });
+      }
+
+      newResults.push(anonymiseUniteLegale(currentResult, session));
     }
   }
+
   results.results = newResults;
   return results;
 };

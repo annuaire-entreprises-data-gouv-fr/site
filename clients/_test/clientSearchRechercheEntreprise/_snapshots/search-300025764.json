@@ -36,10 +36,11 @@
           "libelleActivitePrincipale": "Location de logements (68.20A)",
           "trancheEffectif": "N",
           "anneeTrancheEffectif": null,
-          "latitude": "48.111673",
-          "longitude": "-1.681846",
+          "latitude": "[NON-DIFFUSIBLE]",
+          "longitude": "[NON-DIFFUSIBLE]",
           "complements": {
             "estEntrepreneurIndividuel": true,
+            "estPersonneMorale": false,
             "idFiness": [],
             "idBio": [],
             "idOrganismeFormation": [],
@@ -82,10 +83,11 @@
               "libelleActivitePrincipale": "Location de logements (68.20A)",
               "trancheEffectif": "N",
               "anneeTrancheEffectif": null,
-              "latitude": "48.111673",
-              "longitude": "-1.681846",
+              "latitude": "[NON-DIFFUSIBLE]",
+              "longitude": "[NON-DIFFUSIBLE]",
               "complements": {
                 "estEntrepreneurIndividuel": true,
+                "estPersonneMorale": false,
                 "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
@@ -120,10 +122,11 @@
               "libelleActivitePrincipale": "Location de logements (68.20A)",
               "trancheEffectif": "N",
               "anneeTrancheEffectif": null,
-              "latitude": "48.111673",
-              "longitude": "-1.681846",
+              "latitude": "[NON-DIFFUSIBLE]",
+              "longitude": "[NON-DIFFUSIBLE]",
               "complements": {
                 "estEntrepreneurIndividuel": true,
+                "estPersonneMorale": false,
                 "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
@@ -149,8 +152,8 @@
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": null,
-        "anneeCategorieEntreprise": "2022",
+        "trancheEffectif": "NN",
+        "anneeCategorieEntreprise": "2023",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
         "complements": {
@@ -159,6 +162,7 @@
           "estServicePublic": false,
           "estL100_3": false,
           "estEntrepreneurIndividuel": true,
+          "estPersonneMorale": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
           "estFiness": false,
@@ -206,8 +210,8 @@
             "prenom": "[non-Diffusible]",
             "prenoms": "[non-Diffusible]",
             "role": "",
-            "nationalite": null,
-            "dateNaissancePartial": null
+            "nationalite": "[NON-DIFFUSIBLE]",
+            "dateNaissancePartial": "[NON-DIFFUSIBLE]"
           }
         ]
       }

@@ -34,7 +34,7 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
     link ? (
       <a aria-label={link["aria-label"]} href={link.href} {...props} />
     ) : (
-      <span {...props} />
+      <span role="status" {...props} />
     );
 
   return (

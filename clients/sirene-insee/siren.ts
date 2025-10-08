@@ -13,6 +13,7 @@ import {
   capitalize,
   formatNameFull,
   isEntrepreneurIndividuelFromNatureJuridique,
+  isPersonneMoraleFromNatureJuridique,
   type Siren,
   type Siret,
 } from "#utils/helpers";
@@ -178,6 +179,13 @@ const mapToDomainObject = (
     denominationUsuelle3UniteLegale,
   } = periodesUniteLegale[0];
 
+  const estEntrepreneurIndividuel = isEntrepreneurIndividuelFromNatureJuridique(
+    categorieJuridiqueUniteLegale
+  );
+  const estPersonneMorale = isPersonneMoraleFromNatureJuridique(
+    categorieJuridiqueUniteLegale
+  );
+
   const libelleActivitePrincipaleUniteLegale = libelleFromCodeNAF(
     activitePrincipaleUniteLegale,
     nomenclatureActivitePrincipaleUniteLegale,
@@ -196,6 +204,9 @@ const mapToDomainObject = (
     siege.estSiege = true;
     siege.trancheEffectif = "";
   }
+
+  siege.complements.estEntrepreneurIndividuel = estEntrepreneurIndividuel;
+  siege.complements.estPersonneMorale = estPersonneMorale;
 
   /**
    *   either siege nom commercial or pre 2008 unite legale nom commercial
@@ -218,10 +229,6 @@ const mapToDomainObject = (
   )}`.trim();
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
-
-  const estEntrepreneurIndividuel = isEntrepreneurIndividuelFromNatureJuridique(
-    categorieJuridiqueUniteLegale
-  );
 
   const dateDernierTraitement = (dateDernierTraitementUniteLegale || "").split(
     "T"
@@ -274,6 +281,7 @@ const mapToDomainObject = (
       complements: {
         ...defaultUniteLegale.complements,
         estEntrepreneurIndividuel,
+        estPersonneMorale,
         estEss: economieSocialeSolidaireUniteLegale === "O",
       },
       association: {

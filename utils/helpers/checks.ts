@@ -1,13 +1,19 @@
 import { estDiffusible } from "#models/core/diffusion";
 import { estActif } from "#models/core/etat-administratif";
-import {
-  type IUniteLegale,
-  isEntrepreneurIndividuel,
-} from "#models/core/types";
+import { type IUniteLegale, isPersonnePhysique } from "#models/core/types";
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string
 ) => ["1", "10", "1000"].indexOf(natureJuridique) > -1;
+
+// Unités non dotées de la personnalité morale have a nature juridique starting with 2
+const isSocietePersonnePhysiqueFromNatureJuridique = (
+  natureJuridique: string
+) => natureJuridique.startsWith("2");
+
+export const isPersonneMoraleFromNatureJuridique = (natureJuridique: string) =>
+  !isEntrepreneurIndividuelFromNatureJuridique(natureJuridique) &&
+  !isSocietePersonnePhysiqueFromNatureJuridique(natureJuridique);
 
 export const isTwoMonthOld = (dateAsString: string) => {
   try {
@@ -24,8 +30,8 @@ export const isTwoMonthOld = (dateAsString: string) => {
  * Return true if an uniteLegale should be **ignored** by indexing bots
  */
 export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
-  if (isEntrepreneurIndividuel(uniteLegale)) {
-    // we dont index EI
+  if (isPersonnePhysique(uniteLegale)) {
+    // we dont index personnes physiques
     return true;
   }
   if (!estActif(uniteLegale)) {

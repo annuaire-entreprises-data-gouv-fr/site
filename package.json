@@ -28,6 +28,7 @@
     "@react-spring/web": "^10.0.1",
     "@sentry/browser": "^8.55.0",
     "@sentry/nextjs": "^8.55.0",
+    "@testing-library/cypress": "^10.1.0",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@vcarl/remark-headings": "^0.1.0",

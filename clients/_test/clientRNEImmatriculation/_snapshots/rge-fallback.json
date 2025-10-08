@@ -28,25 +28,6 @@
         "description": "Radiation du RCS de Bordeaux le 07/03/2023"
       }
     ],
-    "dirigeants": [
-      {
-        "sexe": null,
-        "nom": "POUYANNE",
-        "dateNaissance": "",
-        "dateNaissancePartial": "1965-10",
-        "prenom": "David",
-        "prenoms": "David, Jean-Claude",
-        "role": "GERANT"
-      },
-      {
-        "sexe": null,
-        "nom": "POUYANNE (POUYANNE)",
-        "dateNaissance": "",
-        "dateNaissancePartial": "1965-10",
-        "prenom": "David",
-        "prenoms": "David, Jean, Claude",
-        "role": "GERANT"
-      }
-    ]
+    "dirigeants": []
   }
 }

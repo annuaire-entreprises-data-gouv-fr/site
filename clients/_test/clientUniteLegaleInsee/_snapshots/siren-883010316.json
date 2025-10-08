@@ -25,12 +25,13 @@
       "commune": "GAGNY",
       "activitePrincipale": "70.22Z",
       "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
-      "trancheEffectif": null,
+      "trancheEffectif": "NN",
       "anneeTrancheEffectif": null,
       "latitude": "",
       "longitude": "",
       "complements": {
-        "estEntrepreneurIndividuel": false,
+        "estEntrepreneurIndividuel": true,
+        "estPersonneMorale": false,
         "idFiness": [],
         "idBio": [],
         "idOrganismeFormation": [],
@@ -71,12 +72,13 @@
           "commune": "GAGNY",
           "activitePrincipale": "70.22Z",
           "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
-          "trancheEffectif": null,
+          "trancheEffectif": "NN",
           "anneeTrancheEffectif": null,
           "latitude": "",
           "longitude": "",
           "complements": {
-            "estEntrepreneurIndividuel": false,
+            "estEntrepreneurIndividuel": true,
+            "estPersonneMorale": false,
             "idFiness": [],
             "idBio": [],
             "idOrganismeFormation": [],
@@ -111,12 +113,13 @@
           "commune": "GAGNY",
           "activitePrincipale": "70.22Z",
           "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
-          "trancheEffectif": null,
+          "trancheEffectif": "NN",
           "anneeTrancheEffectif": null,
           "latitude": "",
           "longitude": "",
           "complements": {
-            "estEntrepreneurIndividuel": false,
+            "estEntrepreneurIndividuel": true,
+            "estPersonneMorale": false,
             "idFiness": [],
             "idBio": [],
             "idOrganismeFormation": [],
@@ -140,18 +143,20 @@
     "dateMiseAJourInpi": "",
     "dateMiseAJourIG": "",
     "dateDebutActivite": "2020-09-01",
-    "trancheEffectif": null,
+    "trancheEffectif": "NN",
     "anneeCategorieEntreprise": null,
     "categorieEntreprise": null,
     "anneeTrancheEffectif": null,
     "complements": {
       "estEntrepreneurIndividuel": true,
+      "estPersonneMorale": false,
       "estEss": false,
       "estBio": false,
       "estEntrepreneurSpectacle": false,
       "egaproRenseignee": false,
       "statutEntrepreneurSpectacle": "",
       "estServicePublic": false,
+      "estL100_3": false,
       "estFiness": false,
       "estRge": false,
       "estOrganismeFormation": false,
@@ -160,7 +165,11 @@
       "estUai": false,
       "estAssociation": false,
       "estEntrepriseInclusive": false,
-      "typeEntrepriseInclusive": ""
+      "typeEntrepriseInclusive": "",
+      "estAchatsResponsables": false,
+      "estPatrimoineVivant": false,
+      "estAlimConfiance": false,
+      "bilanGesRenseigne": false
     },
     "association": {
       "idAssociation": null
@@ -169,6 +178,7 @@
       "codeColter": null
     },
     "listeIdcc": [],
-    "immatriculation": null
+    "immatriculation": null,
+    "isNbEtablissementOuvertReliable": false
   }
 }
