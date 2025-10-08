@@ -8,8 +8,8 @@ export const isEntrepreneurIndividuelFromNatureJuridique = (
 
 // Unités non dotées de la personnalité morale have a nature juridique starting with 2
 const isSocietePersonnePhysiqueFromNatureJuridique = (
-  natureJuridique: string
-) => natureJuridique.startsWith("2");
+  natureJuridique: string | null
+) => !!natureJuridique?.startsWith("2");
 
 export const isPersonneMoraleFromNatureJuridique = (natureJuridique: string) =>
   !isEntrepreneurIndividuelFromNatureJuridique(natureJuridique) &&
