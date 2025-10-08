@@ -11,7 +11,12 @@ import { getIdccTitle } from "#models/conventions-collectives";
 import { createEtablissementsList } from "#models/core/etablissements-list";
 import { estActif, IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import { isProtectedSiren } from "#models/protected-siren";
-import { isLuhnValid, type Siren, verifySiren } from "#utils/helpers";
+import {
+  isLuhnValid,
+  isPersonneMoraleFromNatureJuridique,
+  type Siren,
+  verifySiren,
+} from "#utils/helpers";
 import {
   logFatalErrorInSentry,
   logInfoInSentry,
@@ -210,9 +215,13 @@ class UniteLegaleBuilder {
      */
     return {
       ...uniteLegaleInsee,
-      nomComplet:
-        uniteLegaleRechercheEntreprise.nomComplet ??
-        uniteLegaleInsee.nomComplet,
+      // The uniteLegale from rechercheEntreprise properly removes sigle for non diffusible personnes morales
+      nomComplet: isPersonneMoraleFromNatureJuridique(
+        uniteLegaleInsee.natureJuridique
+      )
+        ? (uniteLegaleRechercheEntreprise.nomComplet ??
+          uniteLegaleInsee.nomComplet)
+        : uniteLegaleInsee.nomComplet,
       complements: {
         ...uniteLegaleInsee?.complements,
         ...uniteLegaleRechercheEntreprise.complements,

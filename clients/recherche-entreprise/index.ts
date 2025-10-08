@@ -164,7 +164,6 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     collectivite_territoriale = null,
     est_bio = false,
     egapro_renseignee = false,
-    est_entrepreneur_individuel = false,
     est_organisme_formation = false,
     est_qualiopi = false,
     est_entrepreneur_spectacle = false,
