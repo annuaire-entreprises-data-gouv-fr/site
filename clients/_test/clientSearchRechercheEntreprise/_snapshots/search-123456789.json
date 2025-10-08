@@ -40,6 +40,7 @@
           "longitude": "",
           "complements": {
             "estEntrepreneurIndividuel": false,
+            "estPersonneMorale": false,
             "idFiness": [],
             "idBio": [],
             "idOrganismeFormation": [],
@@ -86,6 +87,7 @@
               "longitude": "",
               "complements": {
                 "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": false,
                 "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
@@ -126,6 +128,7 @@
               "longitude": "",
               "complements": {
                 "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": false,
                 "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
@@ -159,6 +162,7 @@
           "estServicePublic": false,
           "estL100_3": false,
           "estEntrepreneurIndividuel": true,
+          "estPersonneMorale": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
           "estFiness": false,
@@ -190,7 +194,9 @@
           "dateImmatriculation": "",
           "duree": 0,
           "dateFin": "",
-          "natureEntreprise": ["Agricole : Périmètre des actifs agricoles"],
+          "natureEntreprise": [
+            "Agricole : Périmètre des actifs agricoles"
+          ],
           "dateCloture": "",
           "isPersonneMorale": false,
           "capital": ""

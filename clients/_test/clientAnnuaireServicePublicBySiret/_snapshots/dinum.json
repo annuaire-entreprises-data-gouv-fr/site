@@ -1,5 +1,7 @@
 {
-  "args": ["13002526500013"],
+  "args": [
+    "13002526500013"
+  ],
   "result": {
     "affectationPersonne": [
       {
@@ -53,7 +55,7 @@
       "formulaireContact": null,
       "annuaireServicePublic": {
         "libelle": "Informations supplémentaires (annuaire du service-public)",
-        "valeur": "https://lannuaire.service-public.fr/gouvernement/d1a97841-b4bf-46df-a089-1003e4e266b4"
+        "valeur": "https://lannuaire.service-public.gouv.fr/gouvernement/d1a97841-b4bf-46df-a089-1003e4e266b4"
       },
       "organigramme": {
         "libelle": "Organigramme de la direction interministérielle du numérique",
@@ -61,7 +63,7 @@
       }
     },
     "telephone": null,
-    "urlServicePublic": "https://lannuaire.service-public.fr/gouvernement/d1a97841-b4bf-46df-a089-1003e4e266b4",
+    "urlServicePublic": "https://lannuaire.service-public.gouv.fr/gouvernement/d1a97841-b4bf-46df-a089-1003e4e266b4",
     "adresseCourriel": null,
     "sigle": null,
     "categorie": "SI",

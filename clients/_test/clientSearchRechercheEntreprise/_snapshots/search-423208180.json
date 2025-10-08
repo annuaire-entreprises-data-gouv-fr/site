@@ -40,6 +40,7 @@
           "longitude": "3.050857",
           "complements": {
             "estEntrepreneurIndividuel": false,
+            "estPersonneMorale": true,
             "idFiness": [],
             "idBio": [],
             "idOrganismeFormation": [],
@@ -86,6 +87,7 @@
               "longitude": "3.050857",
               "complements": {
                 "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
                 "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
@@ -124,6 +126,7 @@
               "longitude": "3.050857",
               "complements": {
                 "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
                 "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
@@ -149,7 +152,7 @@
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": null,
+        "trancheEffectif": "NN",
         "anneeCategorieEntreprise": null,
         "categorieEntreprise": null,
         "anneeTrancheEffectif": null,
@@ -159,6 +162,7 @@
           "estServicePublic": false,
           "estL100_3": false,
           "estEntrepreneurIndividuel": false,
+          "estPersonneMorale": true,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
           "estFiness": false,
@@ -190,7 +194,9 @@
           "dateImmatriculation": "1999-06-21",
           "duree": 50,
           "dateFin": "21/06/2049",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "",
           "isPersonneMorale": true,
           "capital": "36 000,00 € (fixe)"

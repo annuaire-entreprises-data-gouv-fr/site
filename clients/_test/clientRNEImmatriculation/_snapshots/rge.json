@@ -1,5 +1,7 @@
 {
-  "args": ["487444697"],
+  "args": [
+    "487444697"
+  ],
   "result": {
     "observations": [
       {
@@ -45,7 +47,7 @@
         "dateNaissancePartial": "1965-10",
         "prenom": "David",
         "prenoms": "David, Jean, Claude",
-        "role": ""
+        "role": "GERANT"
       }
     ]
   }

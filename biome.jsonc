@@ -1,6 +1,9 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite"],
+  "formatter": {
+    "includes": ["!**/_snapshots/**"]
+  },
   "linter": {
     "rules": {
       "a11y": {

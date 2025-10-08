@@ -1,5 +1,7 @@
 {
-  "args": ["16 rue de tolbiac 75013 paris 13"],
+  "args": [
+    "16 rue de tolbiac 75013 paris 13"
+  ],
   "result": {
     "lat": "48.829633",
     "long": "2.374801",
