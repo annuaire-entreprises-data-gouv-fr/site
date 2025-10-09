@@ -136,6 +136,7 @@ export class httpInseeClient {
  * NB: we want to limit instance to share the /token authentication calls
  */
 
+// Insee client used for public calls, will fallback to fallbackClient on failure
 const defaultClient = new httpInseeClient(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID,
@@ -144,6 +145,7 @@ const defaultClient = new httpInseeClient(
   process.env.INSEE_PASSWORD
 );
 
+// Insee client used as a fallback in case public or agent calls fail
 const fallbackClient = new httpInseeClient(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID_FALLBACK,
@@ -152,6 +154,7 @@ const fallbackClient = new httpInseeClient(
   process.env.INSEE_PASSWORD
 );
 
+// Insee client used for export csv calls
 const exportCsvClient = new httpInseeClient(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID_EXPORT_CSV,
@@ -160,6 +163,7 @@ const exportCsvClient = new httpInseeClient(
   process.env.INSEE_PASSWORD_EXPORT_CSV
 );
 
+// Insee client used for agent calls, will fallback to fallbackClient on failure
 const agentsClient = new httpInseeClient(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID_AGENTS,
