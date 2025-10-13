@@ -1,6 +1,10 @@
 import { URLSearchParams } from "url";
 import { HttpServerError, HttpUnauthorizedError } from "#clients/exceptions";
 import routes from "#clients/routes";
+import {
+  ApplicationRights,
+  hasRights,
+} from "#models/authentication/user/rights";
 import constants from "#models/constants";
 import { Information } from "#models/exceptions";
 import httpClient, {
@@ -9,6 +13,7 @@ import httpClient, {
   type IDefaultRequestConfig,
 } from "#utils/network";
 import { logInfoInSentry } from "#utils/sentry";
+import getSession from "#utils/server-side-helper/app/get-session";
 
 type IAccessToken = {
   data: {
@@ -131,6 +136,7 @@ export class httpInseeClient {
  * NB: we want to limit instance to share the /token authentication calls
  */
 
+// Insee client used for public calls, will fallback to fallbackClient on failure
 const defaultClient = new httpInseeClient(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID,
@@ -139,6 +145,7 @@ const defaultClient = new httpInseeClient(
   process.env.INSEE_PASSWORD
 );
 
+// Insee client used as a fallback in case public or agent calls fail
 const fallbackClient = new httpInseeClient(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID_FALLBACK,
@@ -147,12 +154,22 @@ const fallbackClient = new httpInseeClient(
   process.env.INSEE_PASSWORD
 );
 
+// Insee client used for export csv calls
 const exportCsvClient = new httpInseeClient(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID_EXPORT_CSV,
   process.env.INSEE_CLIENT_SECRET_EXPORT_CSV,
   process.env.INSEE_USERNAME_EXPORT_CSV,
   process.env.INSEE_PASSWORD_EXPORT_CSV
+);
+
+// Insee client used for agent calls, will fallback to fallbackClient on failure
+const agentsClient = new httpInseeClient(
+  routes.sireneInsee.auth,
+  process.env.INSEE_CLIENT_ID_AGENTS,
+  process.env.INSEE_CLIENT_SECRET_AGENTS,
+  process.env.INSEE_USERNAME_AGENTS,
+  process.env.INSEE_PASSWORD_AGENTS
 );
 
 /**
@@ -168,7 +185,13 @@ export async function inseeClientGet<T>(
   config: IDefaultRequestConfig = {},
   useFallback = false
 ): Promise<T> {
-  const client = useFallback ? fallbackClient : defaultClient;
+  const session = await getSession();
+
+  const baseClient = hasRights(session, ApplicationRights.isAgent)
+    ? agentsClient
+    : defaultClient;
+
+  const client = useFallback ? fallbackClient : baseClient;
   return (await client.get(route, {
     timeout: constants.timeout.S,
     ...config,
