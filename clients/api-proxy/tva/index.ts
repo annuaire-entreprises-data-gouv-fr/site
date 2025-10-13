@@ -4,26 +4,7 @@ import constants from "#models/constants";
 import type { TVANumber } from "#utils/helpers";
 
 type IVIESResponse = {
-  isValid: boolean;
-  requestDate: string; //'2022-08-31T17:46:07.763Z';
-  userError: string; //'VALID';
-  name: string; //'SASU GANYMEDE';
-  address: string; //'OCP BUSINESS CENTER 4\n128 RUE LA BOETIE\n75008 PARIS';
-  requestIdentifier: string; //'';
-  vatNumber: string; //'09880878145';
-  viesApproximate: any;
-  // {
-  //   name: '---';
-  //   street: '---';
-  //   postalCode: '---';
-  //   city: '---';
-  //   companyType: '---';
-  //   matchName: 3;
-  //   matchStreet: 3;
-  //   matchPostalCode: 3;
-  //   matchCity: 3;
-  //   matchCompanyType: 3;
-  // };
+  tva: string | null;
 };
 
 /**
@@ -45,13 +26,17 @@ export class TVAUserException extends Error {
 export const clientTVA = async (tva: TVANumber): Promise<string | null> => {
   const url = routes.proxy.tva(tva);
 
-  const data = await clientAPIProxy<IVIESResponse>(url, {
-    timeout: constants.timeout.XXL,
-  });
+  try {
+    const data = await clientAPIProxy<IVIESResponse>(url, {
+      timeout: constants.timeout.XXL,
+    });
 
-  if (data.userError && ["VALID", "INVALID"].indexOf(data.userError) === -1) {
-    throw new TVAUserException(data.userError);
+    return data.tva;
+  } catch (e: any) {
+    if (e instanceof Error) {
+      throw new TVAUserException(e.message);
+    }
+
+    throw e;
   }
-
-  return data.isValid ? data.vatNumber : null;
 };
