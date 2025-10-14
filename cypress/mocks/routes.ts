@@ -49,12 +49,24 @@ import { tvaHandler } from "./handlers/tva";
 import { upDownIoHandler } from "./handlers/up-down-io";
 
 export const routesHandlers = [
-  http.get(routes.proxy.tva("*"), tvaHandler),
-  http.get(routes.proxy.eori("*"), eoriHandler),
-  http.get(routes.proxy.ig("*"), igHandler),
-  http.get(routes.proxy.association("*"), associationHandler),
-  http.get(routes.proxy.rne.immatriculation.default("*"), rneDefaultHandler),
-  http.get(routes.proxy.rne.immatriculation.fallback("*"), rneFallbackHandler),
+  http.get(`${process.env.PROXY_API_URL}${routes.proxy.tva("*")}`, tvaHandler),
+  http.get(
+    `${process.env.PROXY_API_URL}${routes.proxy.eori("*")}`,
+    eoriHandler
+  ),
+  http.get(`${process.env.PROXY_API_URL}${routes.proxy.ig("*")}`, igHandler),
+  http.get(
+    `${process.env.PROXY_API_URL}${routes.proxy.association("*")}`,
+    associationHandler
+  ),
+  http.get(
+    `${process.env.PROXY_API_URL}${routes.proxy.rne.immatriculation.default("*")}`,
+    rneDefaultHandler
+  ),
+  http.get(
+    `${process.env.PROXY_API_URL}${routes.proxy.rne.immatriculation.fallback("*")}`,
+    rneFallbackHandler
+  ),
   http.get(
     routes.rechercheEntreprise.lastModified,
     rechercheEntrepriseLastModifiedHandler
