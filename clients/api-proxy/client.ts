@@ -11,7 +11,7 @@ export async function clientAPIProxy<T>(
   route: string,
   options: IDefaultRequestConfig
 ): Promise<T> {
-  return await httpGet(route, {
+  return await httpGet(`${process.env.PROXY_API_URL}${route}`, {
     ...options,
     headers: {
       "X-APIkey": process.env.PROXY_API_KEY || "",

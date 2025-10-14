@@ -112,6 +112,7 @@ jobs:
     env:
       NEXT_PUBLIC_END2END_MOCKING: enabled
       NEXT_PUBLIC_BASE_URL: http://localhost:3000
+      PROXY_API_URL: http://uselessurl2.com
       API_ENTREPRISE_URL: http://uselessurl.com
       API_ENTREPRISE_TOKEN: XXXXXX
       OVH_S3_MONITORING_ACCESS_KEY: XXXXXX
