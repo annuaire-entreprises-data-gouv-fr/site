@@ -5,9 +5,9 @@
  */
 
 export const PROBLEMATIC_QUERY_PARAMS = [
-  'pathFrom',
-  'redirected',
-  'isABot',
+  "pathFrom",
+  "redirected",
+  "isABot",
   // Add other parameters that should trigger noindex
 ] as const;
 
