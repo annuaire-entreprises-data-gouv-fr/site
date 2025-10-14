@@ -23,13 +23,14 @@ export type IAPIEntrepriseResponse<T> = {
 export default async function clientAPIEntreprise<T, U>(
   route: string,
   mapToDomainObject: (e: T) => U,
-  options?: {
+  options: {
     useCase?: UseCase;
-  },
-  publicRequest = false
+    publicRequest?: boolean;
+  } = {}
 ) {
+  const { publicRequest = false, useCase = "annuaire-entreprises" } = options;
+
   const url = `${process.env.API_ENTREPRISE_URL}${route}`;
-  const useCase = options?.useCase ? options.useCase : "annuaire-entreprises";
 
   const callerInfos = publicRequest
     ? {

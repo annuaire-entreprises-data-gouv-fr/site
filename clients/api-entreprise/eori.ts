@@ -1,6 +1,6 @@
-import routes from '#clients/routes';
-import { Siret } from '#utils/helpers';
-import clientAPIEntreprise from './client';
+import routes from "#clients/routes";
+import type { Siret } from "#utils/helpers";
+import clientAPIEntreprise from "./client";
 
 export type IAPIEntrepriseEORIResponse = {
   data: {
@@ -21,11 +21,11 @@ const mapToDomainObject = (
   isValid: response.data.actif === true,
 });
 
-export const clientAPIEntrepriseEORI = async (
+export const clientAPIEntrepriseEORI = (
   siret: Siret
-): Promise<IAPIEntrepriseEORI> => {
-  return await clientAPIEntreprise<
-    IAPIEntrepriseEORIResponse,
-    IAPIEntrepriseEORI
-  >(routes.apiEntreprise.eori(siret), mapToDomainObject, undefined, true);
-};
+): Promise<IAPIEntrepriseEORI> =>
+  clientAPIEntreprise<IAPIEntrepriseEORIResponse, IAPIEntrepriseEORI>(
+    routes.apiEntreprise.eori(siret),
+    mapToDomainObject,
+    { publicRequest: true }
+  );
