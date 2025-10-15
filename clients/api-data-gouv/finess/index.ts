@@ -1,38 +1,59 @@
-import { HttpNotFound } from "#clients/exceptions";
 import routes from "#clients/routes";
 import constants from "#models/constants";
 import type { IFiness } from "#models/finess/type";
-import { formatAdresse, type Siren } from "#utils/helpers";
+import { formatAdresse } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 
 export const clientFiness = async (
-  siren: Siren
-): Promise<{ [idFiness: string]: IFiness[] }> => {
-  const response = await httpGet<IFinessDatagouvResponse>(
-    `${routes.datagouv.finess}?Siret__contains=${siren}&page_size=100`,
-    {
-      timeout: constants.timeout.L,
-    }
-  );
+  nofinessejList: string[]
+): Promise<IFiness[]> => {
+  const [finessJuridique, finessGeo] = await Promise.all([
+    httpGet<IFinessJuridiqueDatagouvResponse>(
+      `${routes.datagouv.finess}?nofinessej__in=${nofinessejList.join(",")}&page_size=100`,
+      {
+        timeout: constants.timeout.L,
+      }
+    ),
+    httpGet<IFinessGeoDatagouvResponse>(
+      `${routes.datagouv.finess}?nofinessej__in=${nofinessejList.join(",")}&page_size=100`,
+      {
+        timeout: constants.timeout.L,
+      }
+    ),
+  ]);
 
-  if (response.data.length === 0) {
-    throw new HttpNotFound(`No Finess record found for siren ${siren}`);
-  }
+  return finessJuridique.data
+    .map(mapJuridiqueToDomainObject)
+    .map((juridiqueEntity) => {
+      juridiqueEntity.geoFiness = finessGeo.data
+        .filter((geo) => geo.nofinessej === juridiqueEntity.nofinessej)
+        .map(mapGeoToDomainObject);
 
-  const finessList = response.data.map(mapToDomainObject);
-
-  return finessList.reduce(
-    (aggregate: { [idFiness: string]: IFiness[] }, current: IFiness) => {
-      const previous = aggregate[current.idFiness] || [];
-      aggregate[current.idFiness] = [...previous, current];
-      return aggregate;
-    },
-    {}
-  );
+      return juridiqueEntity;
+    });
 };
 
-const mapToDomainObject = (response: IFinessItem) => ({
-  idFiness: response["nofinessej"] || "",
+const mapJuridiqueToDomainObject = (response: IFinessJuridiqueItem) => ({
+  nofinessej: response["nofinessej"] || "",
+  raisonSociale:
+    response["RaisonSocialeLongue"] || response["RaisonSociale"] || "",
+  siret: response["Siret"] || "",
+  phone: response["Telephone"] || "",
+  category: response["LibelleCategorie"] || "",
+  MFT: response["LibelleMft"] || "",
+  SPH: response["LibelleSph"] || "",
+  adresse: formatAdresse({
+    numeroVoie: response["NumeroVoie"],
+    typeVoie: response["TypeVoie"],
+    libelleVoie: response["LibelleVoie"],
+    libelleCommuneCedex: response["LigneAcheminement"],
+  }),
+  geoFiness: [],
+});
+
+const mapGeoToDomainObject = (response: IFinessGeoItem) => ({
+  nofinessej: response["nofinessej"] || "",
+  nofinesset: response["nofinesset"] || "",
   raisonSociale:
     response["RaisonSocialeLongue"] || response["RaisonSociale"] || "",
   siret: response["Siret"] || "",

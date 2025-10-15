@@ -52,7 +52,7 @@ const FinessSection: React.FC<{
             </div>
             <br />
             <FullTable
-              body={Object.values(data).map((aggregatedEtabForAnIdFiness) => [
+              body={data.map((finessEntity) => [
                 <Tag>{aggregatedEtabForAnIdFiness[0].idFiness}</Tag>,
                 <>
                   {aggregatedEtabForAnIdFiness.map((etab, index) => (

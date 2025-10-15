@@ -2,14 +2,13 @@ import { clientFiness } from "#clients/api-data-gouv/finess";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IUniteLegale } from "#models/core/types";
 import { FetchRessourceException } from "#models/exceptions";
-import { verifySiren } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchFiness(uniteLegale: IUniteLegale) {
   return useFetchExternalData(
     {
-      fetchData: () => clientFiness(verifySiren(uniteLegale.siren)),
+      fetchData: () => clientFiness(uniteLegale.complements.listeFiness),
       administration: EAdministration.MSS,
       logError: (e: any) => {
         if (e.status === 404) {
