@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { OPENGRAPH_IMAGES, SITE_DESCRIPTION, SITE_NAME } from ".";
+import { SITE_DESCRIPTION, SITE_NAME } from ".";
 
 export function meta(obj: Metadata): Metadata {
   obj.metadataBase = new URL("https://annuaire-entreprises.data.gouv.fr");
@@ -11,7 +11,6 @@ export function meta(obj: Metadata): Metadata {
   // @ts-expect-error
   obj.openGraph.type ??= "website";
   obj.openGraph.locale ??= "fr_FR";
-  obj.openGraph.images ??= OPENGRAPH_IMAGES;
   obj.openGraph.siteName = SITE_NAME;
 
   obj.formatDetection = { telephone: false };
