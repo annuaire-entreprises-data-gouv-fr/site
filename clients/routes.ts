@@ -10,6 +10,8 @@ const routes = {
       "https://koumoul.com/data-fair/api/v1/datasets/9nd9avrbto3l14md-wkode4o/lines",
   },
   apiAssociation: {
+    associationPartenaires: (rnaOrSiren: string) =>
+      `/apim/api-asso-partenaires/api/structure/${rnaOrSiren}`,
     association: (rnaOrSiren: string) =>
       `/apim/api-asso/api/structure/${rnaOrSiren}`,
   },

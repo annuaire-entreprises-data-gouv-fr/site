@@ -29,6 +29,14 @@ export type IAssociationResponse = {
   document_rna: any[];
 };
 
+export type IAssociationPartenairesResponse = {
+  asso: Omit<IAssociationResponse, "etablissement"> & {
+    etablissements?: {
+      etablissement: Etablissement[] | Etablissement;
+    };
+  };
+};
+
 type Identite = {
   nom: string;
   nom_sirene: string;

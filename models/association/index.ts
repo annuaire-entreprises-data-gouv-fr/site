@@ -1,4 +1,7 @@
-import { clientAPIAssociation } from "#clients/api-association";
+import {
+  clientAPIAssociation,
+  clientAPIAssociationPartenaires,
+} from "#clients/api-association";
 import { clientBanGeoLoc } from "#clients/base-adresse-nationale";
 import { HttpNotFound } from "#clients/exceptions";
 import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
@@ -33,10 +36,26 @@ export const getAssociationFromSlug = async (
 
   let data: IDataAssociation;
   try {
-    data = await clientAPIAssociation(siren, uniteLegale.siege.siret);
+    data = await clientAPIAssociationPartenaires(
+      siren,
+      uniteLegale.siege.siret
+    ).catch((e) => {
+      if (!(e instanceof HttpNotFound)) {
+        return clientAPIAssociation(siren, uniteLegale.siege.siret);
+      }
+      throw e;
+    });
 
     if (rna && rna !== data.idAssociation) {
-      data = await clientAPIAssociation(rna as IdRna, uniteLegale.siege.siret);
+      data = await clientAPIAssociationPartenaires(
+        rna as IdRna,
+        uniteLegale.siege.siret
+      ).catch((e) => {
+        if (!(e instanceof HttpNotFound)) {
+          return clientAPIAssociation(rna as IdRna, uniteLegale.siege.siret);
+        }
+        throw e;
+      });
     }
 
     const adresseInconsistency = await verifyAdressConsistency(

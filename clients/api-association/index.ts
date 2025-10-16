@@ -1,13 +1,17 @@
-import { HttpUnauthorizedError } from "#clients/exceptions";
+import { XMLParser } from "fast-xml-parser";
+import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
 import routes from "#clients/routes";
 import type { IDataAssociation } from "#models/association/types";
 import constants from "#models/constants";
 import { formatAdresse, type IdRna, type Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
-import type { IAssociationResponse } from "./types";
+import type {
+  IAssociationPartenairesResponse,
+  IAssociationResponse,
+} from "./types";
 
 /**
- * Wrapper client to call API Association
+ * Wrapper client to call API Association (public API)
  *
  * Takes either a RNA or Siren, but Siren seems to work much better
  * @param rnaOrSiren
@@ -25,13 +29,47 @@ export async function clientAPIAssociation(
   const url = `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.association(encodeURIComponent(rnaOrSiren))}`;
 
   const response = await httpGet<IAssociationResponse>(url, {
+    timeout: constants.timeout.XXXL,
+  });
+
+  return mapToDomainObject(response, siretSiege);
+}
+
+/**
+ * Wrapper client to call API Association Partenaires (private API)
+ *
+ * Takes either a RNA or Siren, but Siren seems to work much better
+ * @param rnaOrSiren
+ * @param siretSiege
+ * @returns IDataAssociation
+ */
+export async function clientAPIAssociationPartenaires(
+  rnaOrSiren: IdRna | Siren,
+  siretSiege: string
+) {
+  if (!process.env.API_ASSOCIATION_URL || !process.env.API_ASSOCIATION_KEY) {
+    throw new HttpUnauthorizedError("Missing API Association credentials");
+  }
+
+  const url = `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.associationPartenaires(encodeURIComponent(rnaOrSiren))}`;
+
+  const response = await httpGet<string>(url, {
     headers: {
       "X-Gravitee-Api-Key": process.env.API_ASSOCIATION_KEY,
     },
     timeout: constants.timeout.XXXL,
   });
 
-  return mapToDomainObject(response, siretSiege);
+  const parser = new XMLParser();
+  const jsonResponse = parser.parse(
+    response
+  ) as IAssociationPartenairesResponse;
+
+  if (!jsonResponse.asso) {
+    throw new HttpNotFound("Association not found");
+  }
+
+  return mapToDomainObject(jsonResponse.asso, siretSiege);
 }
 
 const mapToDomainObject = (
