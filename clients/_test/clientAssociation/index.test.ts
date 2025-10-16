@@ -1,4 +1,4 @@
-import { clientAssociation } from "#clients/api-proxy/association";
+import { clientAPIAssociation } from "#clients/api-association";
 import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 import simplifyParams from "./simplify-params";
@@ -6,7 +6,7 @@ import simplifyParams from "./simplify-params";
 describe("clientAssociation", () => {
   it("Should match snapshot", async () => {
     await expectClientToMatchSnapshot({
-      client: clientAssociation,
+      client: clientAPIAssociation,
       args: ["800329849" as Siren, "80032984900023"],
       snapshotFile: "association.json",
       simplifyParams,
@@ -15,7 +15,7 @@ describe("clientAssociation", () => {
   });
   it("Should match snapshot for association with bilans", async () => {
     await expectClientToMatchSnapshot({
-      client: clientAssociation,
+      client: clientAPIAssociation,
       args: ["338365059" as Siren, "33836505900017"],
       simplifyParams,
       snapshotFile: "association-with-bilans.json",

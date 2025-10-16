@@ -56,10 +56,6 @@ export const routesHandlers = [
   ),
   http.get(`${process.env.PROXY_API_URL}${routes.proxy.ig("*")}`, igHandler),
   http.get(
-    `${process.env.PROXY_API_URL}${routes.proxy.association("*")}`,
-    associationHandler
-  ),
-  http.get(
     `${process.env.PROXY_API_URL}${routes.proxy.rne.immatriculation.default("*")}`,
     rneDefaultHandler
   ),
@@ -191,6 +187,10 @@ export const routesHandlers = [
       "*"
     )}`,
     mandatairesRcsHandler
+  ),
+  http.get(
+    `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.association("*")}`,
+    associationHandler
   ),
   http.get(
     `https://${process.env.OVH_S3_MONITORING_BUCKET}.s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/monitoring_comptes_agents.csv`,

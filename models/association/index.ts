@@ -1,4 +1,4 @@
-import { clientAssociation } from "#clients/api-proxy/association";
+import { clientAPIAssociation } from "#clients/api-association";
 import { clientBanGeoLoc } from "#clients/base-adresse-nationale";
 import { HttpNotFound } from "#clients/exceptions";
 import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
@@ -33,10 +33,10 @@ export const getAssociationFromSlug = async (
 
   let data: IDataAssociation;
   try {
-    data = await clientAssociation(siren, uniteLegale.siege.siret);
+    data = await clientAPIAssociation(siren, uniteLegale.siege.siret);
 
     if (rna && rna !== data.idAssociation) {
-      data = await clientAssociation(rna as IdRna, uniteLegale.siege.siret);
+      data = await clientAPIAssociation(rna as IdRna, uniteLegale.siege.siret);
     }
 
     const adresseInconsistency = await verifyAdressConsistency(

@@ -1,31 +1,38 @@
-import { HttpNotFound } from "#clients/exceptions";
+import { HttpUnauthorizedError } from "#clients/exceptions";
 import routes from "#clients/routes";
 import type { IDataAssociation } from "#models/association/types";
 import constants from "#models/constants";
 import { formatAdresse, type IdRna, type Siren } from "#utils/helpers";
-import { clientAPIProxy } from "../client";
+import { httpGet } from "#utils/network";
 import type { IAssociationResponse } from "./types";
 
 /**
- * Association through the API proxy
+ * Wrapper client to call API Association
  *
  * Takes either a RNA or Siren, but Siren seems to work much better
- * @param idRna
+ * @param rnaOrSiren
+ * @param siretSiege
+ * @returns IDataAssociation
  */
-export const clientAssociation = async (
+export async function clientAPIAssociation(
   rnaOrSiren: IdRna | Siren,
   siretSiege: string
-) => {
-  const response = await clientAPIProxy<IAssociationResponse>(
-    routes.proxy.association(rnaOrSiren),
-    { timeout: constants.timeout.XL }
-  );
-
-  if (response.identite && Object.keys(response.identite).length === 1) {
-    throw new HttpNotFound(rnaOrSiren);
+) {
+  if (!process.env.API_ASSOCIATION_URL) {
+    throw new HttpUnauthorizedError("Missing API Association URL");
   }
+
+  const url = `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.association(encodeURIComponent(rnaOrSiren))}`;
+
+  const response = await httpGet<IAssociationResponse>(url, {
+    headers: {
+      "X-Gravitee-Api-Key": process.env.API_ASSOCIATION_KEY,
+    },
+    timeout: constants.timeout.XXXL,
+  });
+
   return mapToDomainObject(response, siretSiege);
-};
+}
 
 const mapToDomainObject = (
   association: IAssociationResponse,
