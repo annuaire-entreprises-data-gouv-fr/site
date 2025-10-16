@@ -1,11 +1,16 @@
 import {
-  clientAPIAssociation,
-  clientAPIAssociationPartenaires,
+  clientAPIAssociationPrivate,
+  clientAPIAssociationPublic,
 } from "#clients/api-association";
 import { clientBanGeoLoc } from "#clients/base-adresse-nationale";
 import { HttpNotFound } from "#clients/exceptions";
 import { getUniteLegaleFromSlug } from "#models/core/unite-legale";
-import { type IdRna, removeSpecialChars, type Siren } from "#utils/helpers";
+import {
+  type IdRna,
+  removeSpecialChars,
+  type Siren,
+  type Siret,
+} from "#utils/helpers";
 import logErrorInSentry, { logWarningInSentry } from "#utils/sentry";
 import { EAdministration } from "../administrations/EAdministration";
 import {
@@ -19,6 +24,17 @@ import {
   type IExceptionContext,
 } from "../exceptions";
 import type { IDataAssociation } from "./types";
+
+const getAssociationWithFallback = (
+  rnaOrSiren: IdRna | Siren,
+  siret: Siret
+): Promise<IDataAssociation> =>
+  clientAPIAssociationPrivate(rnaOrSiren, siret).catch((e) => {
+    if (!(e instanceof HttpNotFound)) {
+      return clientAPIAssociationPublic(rnaOrSiren, siret);
+    }
+    throw e;
+  });
 
 export const getAssociationFromSlug = async (
   slug: string
@@ -36,26 +52,13 @@ export const getAssociationFromSlug = async (
 
   let data: IDataAssociation;
   try {
-    data = await clientAPIAssociationPartenaires(
-      siren,
-      uniteLegale.siege.siret
-    ).catch((e) => {
-      if (!(e instanceof HttpNotFound)) {
-        return clientAPIAssociation(siren, uniteLegale.siege.siret);
-      }
-      throw e;
-    });
+    data = await getAssociationWithFallback(siren, uniteLegale.siege.siret);
 
     if (rna && rna !== data.idAssociation) {
-      data = await clientAPIAssociationPartenaires(
+      data = await getAssociationWithFallback(
         rna as IdRna,
         uniteLegale.siege.siret
-      ).catch((e) => {
-        if (!(e instanceof HttpNotFound)) {
-          return clientAPIAssociation(rna as IdRna, uniteLegale.siege.siret);
-        }
-        throw e;
-      });
+      );
     }
 
     const adresseInconsistency = await verifyAdressConsistency(

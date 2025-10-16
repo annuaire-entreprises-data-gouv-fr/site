@@ -18,7 +18,7 @@ import type {
  * @param siretSiege
  * @returns IDataAssociation
  */
-export async function clientAPIAssociation(
+export async function clientAPIAssociationPublic(
   rnaOrSiren: IdRna | Siren,
   siretSiege: string
 ) {
@@ -43,7 +43,7 @@ export async function clientAPIAssociation(
  * @param siretSiege
  * @returns IDataAssociation
  */
-export async function clientAPIAssociationPartenaires(
+export async function clientAPIAssociationPrivate(
   rnaOrSiren: IdRna | Siren,
   siretSiege: string
 ) {
