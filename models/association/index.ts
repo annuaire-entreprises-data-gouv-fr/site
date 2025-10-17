@@ -30,10 +30,10 @@ const getAssociationWithFallback = (
   siret: Siret
 ): Promise<IDataAssociation> =>
   clientAPIAssociationPrivate(rnaOrSiren, siret).catch((e) => {
-    if (!(e instanceof HttpNotFound)) {
-      return clientAPIAssociationPublic(rnaOrSiren, siret);
+    if (e instanceof HttpNotFound) {
+      throw e;
     }
-    throw e;
+    return clientAPIAssociationPublic(rnaOrSiren, siret);
   });
 
 export const getAssociationFromSlug = async (
