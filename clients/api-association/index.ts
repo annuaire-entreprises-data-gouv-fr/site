@@ -1,30 +1,91 @@
-import { HttpNotFound } from "#clients/exceptions";
+import { XMLParser } from "fast-xml-parser";
+import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
 import routes from "#clients/routes";
 import type { IDataAssociation } from "#models/association/types";
 import constants from "#models/constants";
 import { formatAdresse, type IdRna, type Siren } from "#utils/helpers";
-import { clientAPIProxy } from "../client";
-import type { IAssociationResponse } from "./types";
+import { httpGet } from "#utils/network";
+import type {
+  IAssociationPartenairesResponse,
+  IAssociationResponse,
+} from "./types";
 
 /**
- * Association through the API proxy
+ * Wrapper client to call API Association (public API)
  *
  * Takes either a RNA or Siren, but Siren seems to work much better
- * @param idRna
+ * @param rnaOrSiren
+ * @param siretSiege
+ * @returns IDataAssociation
  */
-export const clientAssociation = async (
+export async function clientAPIAssociationPublic(
   rnaOrSiren: IdRna | Siren,
   siretSiege: string
-) => {
-  const response = await clientAPIProxy<IAssociationResponse>(
-    routes.proxy.association(rnaOrSiren),
-    { timeout: constants.timeout.XL }
-  );
-
-  if (response.identite && Object.keys(response.identite).length === 1) {
-    throw new HttpNotFound(rnaOrSiren);
+) {
+  if (!process.env.API_ASSOCIATION_URL) {
+    throw new HttpUnauthorizedError("Missing API Association URL");
   }
+
+  const url = `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.association(encodeURIComponent(rnaOrSiren))}`;
+
+  const response = await httpGet<IAssociationResponse>(url, {
+    timeout: constants.timeout.XXXL,
+  });
+
   return mapToDomainObject(response, siretSiege);
+}
+
+/**
+ * Wrapper client to call API Association Partenaires (private API)
+ *
+ * Takes either a RNA or Siren, but Siren seems to work much better
+ * @param rnaOrSiren
+ * @param siretSiege
+ * @returns IDataAssociation
+ */
+export async function clientAPIAssociationPrivate(
+  rnaOrSiren: IdRna | Siren,
+  siretSiege: string
+) {
+  if (!process.env.API_ASSOCIATION_URL || !process.env.API_ASSOCIATION_KEY) {
+    throw new HttpUnauthorizedError("Missing API Association credentials");
+  }
+
+  const url = `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.associationPartenaires(encodeURIComponent(rnaOrSiren))}`;
+
+  const response = await httpGet<string>(url, {
+    headers: {
+      "X-Gravitee-Api-Key": process.env.API_ASSOCIATION_KEY,
+    },
+    timeout: constants.timeout.XXXL,
+  });
+
+  return mapToDomainObject(mapPrivateToPublicResponse(response), siretSiege);
+}
+
+const mapToArray = <T>(obj: T | T[] | undefined): T[] => {
+  if (Array.isArray(obj)) {
+    return obj;
+  }
+  return obj ? [obj] : [];
+};
+
+const mapPrivateToPublicResponse = (response: string): IAssociationResponse => {
+  const parser = new XMLParser();
+  const jsonResponse = parser.parse(
+    response
+  ) as IAssociationPartenairesResponse;
+
+  if (!jsonResponse.asso) {
+    throw new HttpNotFound("Association not found");
+  }
+
+  return {
+    ...jsonResponse.asso,
+    etablissement: mapToArray(jsonResponse.asso.etablissements?.etablissement),
+    agrement: mapToArray(jsonResponse.asso.agrements?.agrement),
+    compte: mapToArray(jsonResponse.asso.comptes?.compte),
+  };
 };
 
 const mapToDomainObject = (

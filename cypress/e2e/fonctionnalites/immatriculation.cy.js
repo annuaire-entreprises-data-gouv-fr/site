@@ -8,7 +8,7 @@ describe("Immatriculation RNE", () => {
   it("Should display immatriculation even for non diffusible", () => {
     cy.visit("/entreprise/300025764");
     cy.contains("Immatriculée au RNE");
-    cy.contains("Gestion de biens, Libérale non réglementée");
+    cy.contains("Libérale non réglementée, Gestion de biens");
   });
 
   it("Should display immatriculation even for closed structure", () => {

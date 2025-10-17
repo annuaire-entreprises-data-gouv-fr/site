@@ -19,7 +19,10 @@ import {
   apiSireneInseeSirenHandler,
   apiSireneInseeSiretHandler,
 } from "./handlers/api-sirene-insee";
-import { associationHandler } from "./handlers/association";
+import {
+  associationPrivateHandler,
+  associationPublicHandler,
+} from "./handlers/association";
 import { baseAdresseNationaleHandler } from "./handlers/base-adresse-nationale";
 import { bodaccHandler } from "./handlers/bodacc";
 import { carteProfessionnelleTravauxPublicsHandler } from "./handlers/carte-professionnelle-travaux-publics";
@@ -55,10 +58,6 @@ export const routesHandlers = [
     eoriHandler
   ),
   http.get(`${process.env.PROXY_API_URL}${routes.proxy.ig("*")}`, igHandler),
-  http.get(
-    `${process.env.PROXY_API_URL}${routes.proxy.association("*")}`,
-    associationHandler
-  ),
   http.get(
     `${process.env.PROXY_API_URL}${routes.proxy.rne.immatriculation.default("*")}`,
     rneDefaultHandler
@@ -191,6 +190,14 @@ export const routesHandlers = [
       "*"
     )}`,
     mandatairesRcsHandler
+  ),
+  http.get(
+    `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.association("*")}`,
+    associationPublicHandler
+  ),
+  http.get(
+    `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.associationPartenaires("*")}`,
+    associationPrivateHandler
   ),
   http.get(
     `https://${process.env.OVH_S3_MONITORING_BUCKET}.s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/monitoring_comptes_agents.csv`,

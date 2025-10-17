@@ -24,6 +24,8 @@ describe("Simple search with searchTerms", () => {
     "842019051",
     "423208180",
     "383657467",
+    "400461356",
+    "400485504",
     "Ganymede",
     "Kikou",
     "123456789",

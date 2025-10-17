@@ -6,7 +6,7 @@ describe("Fiche résumé DANONE", () => {
     ).should("be.visible");
     cy.contains("Informations légales de DANONE").should("be.visible");
     cy.contains(
-      "Son siège social est domicilié au 17 BOULEVARD HAUSSMANN 75009 PARIS."
+      "Son siège social est domicilié au 59 RUE LA FAYETTE 75009 PARIS."
     ).should("be.visible");
     // TVA number
     cy.contains("N° TVA Intracommunautaire").should("be.visible");
@@ -16,14 +16,14 @@ describe("Fiche résumé DANONE", () => {
     cy.contains("FR123 456 789 0").should("be.visible");
     // Effectifs
     cy.contains("Effectif salarié").should("be.visible");
-    cy.contains("1 000 à 1 999 salariés, en 2022").should("be.visible");
+    cy.contains("1 000 à 1 999 salariés, en 2023").should("be.visible");
   });
   it("[LOGGED] Should display basic infos", () => {
     cy.login();
     cy.visit("/entreprise/danone-552032534");
     // Effectifs
     cy.contains("Effectif salarié").should("be.visible");
-    cy.contains("1 000 à 1 999 salariés, en 2022").should("be.visible");
+    cy.contains("1 000 à 1 999 salariés, en 2023").should("be.visible");
     // Résumé pour les agents publics
     cy.contains("Résumé pour les agents publics").should("be.visible");
     cy.contains("Documents juridiques").should("be.visible");
