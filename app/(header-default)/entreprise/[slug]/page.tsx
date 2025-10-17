@@ -10,7 +10,7 @@ import EtablissementSection from "#components/etablissement-section";
 import MatomoEventRedirected from "#components/matomo-event/search-redirected";
 import { NonDiffusibleStrictSection } from "#components/non-diffusible-section";
 import ServicePublicSection from "#components/service-public-section";
-import StructuredDataBreadcrumb from "#components/structured-data/breadcrumb";
+import StructuredDataBreadcrumb from "#components/structured-data/StructuredDataBreadcrumb";
 import Title from "#components/title-section";
 import { FICHE } from "#components/title-section/tabs";
 import { HorizontalSeparator } from "#components-ui/horizontal-separator";
@@ -27,10 +27,11 @@ import {
 import { getRechercheEntrepriseSourcesLastModified } from "#models/recherche-entreprise-modified";
 import {
   extractSirenOrSiretSlugFromUrl,
-  shouldNotIndex,
+  shouldAddNoIndexNoFollow,
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#utils/helpers";
+import { shouldAddNoIndex } from "#utils/seo/noindex-query-params";
 import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
   type AppRouterProps,
@@ -43,10 +44,18 @@ export const generateMetadata = async (
   const { slug, page, isBot } = await extractParamsAppRouter(props);
 
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
+
+  const searchParams = await props.searchParams;
+  const robots = {
+    follow: !shouldAddNoIndexNoFollow(uniteLegale),
+    index: !(
+      shouldAddNoIndexNoFollow(uniteLegale) || shouldAddNoIndex(searchParams)
+    ),
+  };
   return {
     title: uniteLegalePageTitle(uniteLegale),
     description: uniteLegalePageDescription(uniteLegale),
-    robots: shouldNotIndex(uniteLegale) ? "noindex, nofollow" : "index, follow",
+    robots,
     ...(uniteLegale.chemin && {
       alternates: {
         canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`,
