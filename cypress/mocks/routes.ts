@@ -20,8 +20,8 @@ import {
   apiSireneInseeSiretHandler,
 } from "./handlers/api-sirene-insee";
 import {
-  associationHandler,
-  associationPartenairesHandler,
+  associationPrivateHandler,
+  associationPublicHandler,
 } from "./handlers/association";
 import { baseAdresseNationaleHandler } from "./handlers/base-adresse-nationale";
 import { bodaccHandler } from "./handlers/bodacc";
@@ -193,11 +193,11 @@ export const routesHandlers = [
   ),
   http.get(
     `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.association("*")}`,
-    associationHandler
+    associationPublicHandler
   ),
   http.get(
     `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.associationPartenaires("*")}`,
-    associationPartenairesHandler
+    associationPrivateHandler
   ),
   http.get(
     `https://${process.env.OVH_S3_MONITORING_BUCKET}.s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/monitoring_comptes_agents.csv`,

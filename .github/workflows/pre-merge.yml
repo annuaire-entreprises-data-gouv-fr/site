@@ -115,6 +115,7 @@ jobs:
       API_ENTREPRISE_URL: http://uselessurl.com
       PROXY_API_URL: http://uselessurl2.com
       API_ASSOCIATION_URL: http://uselessurl3.com
+      API_ASSOCIATION_KEY: XXXXXX
       API_ENTREPRISE_TOKEN: XXXXXX
       OVH_S3_MONITORING_ACCESS_KEY: XXXXXX
       OVH_S3_MONITORING_SECRET: XXXXXX

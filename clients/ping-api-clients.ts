@@ -5,7 +5,10 @@ import {
   verifySiret,
   verifyTVANumber,
 } from "#utils/helpers";
-import { clientAPIAssociationPublic } from "./api-association";
+import {
+  clientAPIAssociationPrivate,
+  clientAPIAssociationPublic,
+} from "./api-association";
 import { clientAPIInclusion } from "./api-inclusion";
 import { clientEORI } from "./api-proxy/eori";
 import { clientUniteLegaleIG } from "./api-proxy/greffe";
@@ -39,6 +42,8 @@ const ping = async (slug: string | string[]) => {
       return await clientUniteLegaleRechercheEntreprise(sirenGanymede, 1);
     case "api-association":
       return await clientAPIAssociationPublic(verifyIdRna("W551000280"), "");
+    case "api-association-private":
+      return await clientAPIAssociationPrivate(verifyIdRna("W551000280"), "");
     case "api-marche-inclusion":
       return await clientAPIInclusion(sirenInclusion);
     case "api-tva": {

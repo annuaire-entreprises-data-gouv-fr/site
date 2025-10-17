@@ -60,6 +60,17 @@ export async function clientAPIAssociationPrivate(
     timeout: constants.timeout.XXXL,
   });
 
+  return mapToDomainObject(mapPrivateToPublicResponse(response), siretSiege);
+}
+
+const mapToArray = <T>(obj: T | T[] | undefined): T[] => {
+  if (Array.isArray(obj)) {
+    return obj;
+  }
+  return obj ? [obj] : [];
+};
+
+const mapPrivateToPublicResponse = (response: string): IAssociationResponse => {
   const parser = new XMLParser();
   const jsonResponse = parser.parse(
     response
@@ -69,8 +80,13 @@ export async function clientAPIAssociationPrivate(
     throw new HttpNotFound("Association not found");
   }
 
-  return mapToDomainObject(jsonResponse.asso, siretSiege);
-}
+  return {
+    ...jsonResponse.asso,
+    etablissement: mapToArray(jsonResponse.asso.etablissements?.etablissement),
+    agrement: mapToArray(jsonResponse.asso.agrements?.agrement),
+    compte: mapToArray(jsonResponse.asso.comptes?.compte),
+  };
+};
 
 const mapToDomainObject = (
   association: IAssociationResponse,

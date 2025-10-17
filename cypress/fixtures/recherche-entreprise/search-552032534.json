@@ -7,63 +7,63 @@
         "nom_complet": "DANONE",
         "nom_raison_sociale": "DANONE",
         "sigle": null,
-        "nombre_etablissements": 17,
+        "nombre_etablissements": 18,
         "nombre_etablissements_ouverts": 2,
         "siege": {
           "activite_principale": "70.10Z",
           "activite_principale_registre_metier": null,
-          "annee_tranche_effectif_salarie": "2022",
-          "adresse": "17 BOULEVARD HAUSSMANN 75009 PARIS",
-          "caractere_employeur": "O",
+          "annee_tranche_effectif_salarie": null,
+          "adresse": "59 RUE LA FAYETTE 75009 PARIS",
+          "caractere_employeur": "N",
           "cedex": null,
           "code_pays_etranger": null,
           "code_postal": "75009",
           "commune": "75109",
           "complement_adresse": null,
-          "coordonnees": "48.872565,2.334926",
-          "date_creation": "2003-10-20",
-          "date_debut_activite": "2008-01-01",
+          "coordonnees": "48.87590696098471,2.3434570265778594",
+          "date_creation": "2025-08-19",
+          "date_debut_activite": "2025-08-19",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-06-22T05:26:24",
+          "date_mise_a_jour_insee": "2025-10-10T16:33:30.744",
           "departement": "75",
           "distribution_speciale": null,
           "epci": "200054781",
           "est_siege": true,
           "etat_administratif": "A",
-          "geo_adresse": "17 Boulevard Haussmann 75009 Paris",
-          "geo_id": "75109_4485_00017",
+          "geo_adresse": null,
+          "geo_id": null,
           "indice_repetition": null,
-          "latitude": "48.872565",
+          "latitude": "48.87590696098471",
           "libelle_cedex": null,
           "libelle_commune": "PARIS",
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
-          "libelle_voie": "HAUSSMANN",
+          "libelle_voie": "LA FAYETTE",
           "liste_enseignes": null,
-          "liste_finess": ["750073181"],
+          "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["9999"],
+          "liste_idcc": null,
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
-          "longitude": "2.334926",
+          "longitude": "2.3434570265778594",
           "nom_commercial": null,
-          "numero_voie": "17",
+          "numero_voie": "59",
           "region": "11",
-          "siret": "55203253400646",
+          "siret": "55203253400703",
           "statut_diffusion_etablissement": "O",
-          "tranche_effectif_salarie": "42",
-          "type_voie": "BOULEVARD"
+          "tranche_effectif_salarie": "NN",
+          "type_voie": "RUE"
         },
         "activite_principale": "70.10Z",
         "categorie_entreprise": "GE",
         "caractere_employeur": null,
-        "annee_categorie_entreprise": "2022",
+        "annee_categorie_entreprise": "2023",
         "date_creation": "1955-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T15:34:48",
-        "date_mise_a_jour_insee": "2024-06-22T05:26:24",
+        "date_mise_a_jour": "2025-10-17T09:40:30",
+        "date_mise_a_jour_insee": "2025-10-10T16:33:30.751",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
           {
@@ -72,7 +72,7 @@
             "annee_de_naissance": "1964",
             "date_de_naissance": "1964-12",
             "qualite": "Directeur Général",
-            "nationalite": "Française",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -81,7 +81,7 @@
             "annee_de_naissance": "1967",
             "date_de_naissance": "1967-08",
             "qualite": "Administrateur",
-            "nationalite": "Française",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -90,7 +90,7 @@
             "annee_de_naissance": "1962",
             "date_de_naissance": "1962-11",
             "qualite": "Administrateur",
-            "nationalite": "Française",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -99,7 +99,7 @@
             "annee_de_naissance": "1960",
             "date_de_naissance": "1960-02",
             "qualite": "Administrateur",
-            "nationalite": "Canadienne",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -108,7 +108,7 @@
             "annee_de_naissance": "1961",
             "date_de_naissance": "1961-08",
             "qualite": "Administrateur",
-            "nationalite": "Danoise",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -117,7 +117,7 @@
             "annee_de_naissance": "1964",
             "date_de_naissance": "1964-09",
             "qualite": "Administrateur",
-            "nationalite": "Américaine",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -126,7 +126,7 @@
             "annee_de_naissance": "1960",
             "date_de_naissance": "1960-07",
             "qualite": "Administrateur",
-            "nationalite": "Indienne",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -140,11 +140,11 @@
           },
           {
             "nom": "PICAUD (ROAUX)",
-            "prenoms": "GERALDINE",
+            "prenoms": "GÉRALDINE",
             "annee_de_naissance": "1970",
             "date_de_naissance": "1970-02",
             "qualite": "Administrateur",
-            "nationalite": "Française",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -153,7 +153,7 @@
             "annee_de_naissance": "1957",
             "date_de_naissance": "1957-05",
             "qualite": "Administrateur",
-            "nationalite": "Britannique",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -161,8 +161,8 @@
             "prenoms": "GILLES",
             "annee_de_naissance": "1958",
             "date_de_naissance": "1958-10",
-            "qualite": "Administrateur",
-            "nationalite": "Française",
+            "qualite": "Président du conseil d'administration",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -172,8 +172,8 @@
             "type_dirigeant": "personne morale"
           },
           {
-            "siren": "387953961",
-            "denomination": "MAZARS ET ASSOCIÉS",
+            "siren": "784824153",
+            "denomination": "FORVIS MAZARS SA",
             "qualite": "Commissaire aux comptes titulaire",
             "type_dirigeant": "personne morale"
           }
@@ -182,7 +182,7 @@
         "nature_juridique": "5599",
         "section_activite_principale": "M",
         "tranche_effectif_salarie": "42",
-        "annee_tranche_effectif_salarie": "2022",
+        "annee_tranche_effectif_salarie": "2023",
         "statut_diffusion": "O",
         "matching_etablissements": [],
         "immatriculation": {
@@ -192,14 +192,14 @@
           "duree_personne_morale": 99,
           "nature_entreprise": ["Commerciale"],
           "date_cloture_exercice": "3112",
-          "capital_social": 169888497.75,
+          "capital_social": 170348620.75,
           "capital_variable": false,
           "devise_capital": "EUR",
           "indicateur_associe_unique": false
         },
         "finances": {
-          "2022": {
-            "ca": 24281000000,
+          "2024": {
+            "ca": 27376000000,
             "resultat_net": 0
           }
         },
@@ -208,6 +208,8 @@
           "convention_collective_renseignee": true,
           "liste_idcc": ["9999"],
           "egapro_renseignee": true,
+          "est_achats_responsables": false,
+          "est_alim_confiance": false,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -219,9 +221,12 @@
           "liste_id_organisme_formation": null,
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
+          "est_patrimoine_vivant": false,
+          "bilan_ges_renseigne": false,
           "identifiant_association": null,
           "statut_entrepreneur_spectacle": null,
           "type_siae": null

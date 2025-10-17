@@ -12,7 +12,7 @@
         "siege": {
           "activite_principale": "43.21A",
           "activite_principale_registre_metier": "4321AB",
-          "annee_tranche_effectif_salarie": "2022",
+          "annee_tranche_effectif_salarie": "2023",
           "adresse": "22 RUE MAISON BLANCHE 24330 BOULAZAC ISLE MANOIRE",
           "caractere_employeur": "N",
           "cedex": null,
@@ -53,16 +53,16 @@
           "region": "75",
           "siret": "48744469700428",
           "statut_diffusion_etablissement": "O",
-          "tranche_effectif_salarie": "11",
+          "tranche_effectif_salarie": "12",
           "type_voie": "RUE"
         },
         "activite_principale": "35.11Z",
         "categorie_entreprise": "ETI",
         "caractere_employeur": null,
-        "annee_categorie_entreprise": "2022",
+        "annee_categorie_entreprise": "2023",
         "date_creation": "2005-12-06",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T14:55:30",
+        "date_mise_a_jour": "2025-10-17T07:24:11",
         "date_mise_a_jour_insee": "2024-05-09T05:09:57",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
@@ -71,7 +71,7 @@
             "prenoms": "DAVID JEAN CLAUDE",
             "annee_de_naissance": "1965",
             "date_de_naissance": "1965-10",
-            "qualite": null,
+            "qualite": "Gérant",
             "nationalite": null,
             "type_dirigeant": "personne physique"
           },
@@ -81,21 +81,21 @@
             "annee_de_naissance": "1965",
             "date_de_naissance": "1965-10",
             "qualite": "Gérant",
-            "nationalite": "Française",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           }
         ],
         "etat_administratif": "A",
         "nature_juridique": "5499",
         "section_activite_principale": "D",
-        "tranche_effectif_salarie": "11",
-        "annee_tranche_effectif_salarie": "2022",
+        "tranche_effectif_salarie": "12",
+        "annee_tranche_effectif_salarie": "2023",
         "statut_diffusion": "O",
         "matching_etablissements": [
           {
             "activite_principale": "43.21A",
             "ancien_siege": false,
-            "annee_tranche_effectif_salarie": "2022",
+            "annee_tranche_effectif_salarie": "2023",
             "adresse": "22 RUE MAISON BLANCHE 24330 BOULAZAC ISLE MANOIRE",
             "caractere_employeur": "N",
             "code_postal": "24330",
@@ -121,7 +121,7 @@
             "region": "75",
             "siret": "48744469700428",
             "statut_diffusion_etablissement": "O",
-            "tranche_effectif_salarie": "11"
+            "tranche_effectif_salarie": "12"
           }
         ],
         "immatriculation": {
@@ -131,8 +131,8 @@
           "duree_personne_morale": 99,
           "nature_entreprise": [
             "Gestion de biens",
-            "Artisanale non réglementée",
-            "Commerciale"
+            "Commerciale",
+            "Artisanale non réglementée"
           ],
           "date_cloture_exercice": "3112",
           "capital_social": 2099975,
@@ -151,6 +151,8 @@
           "convention_collective_renseignee": false,
           "liste_idcc": null,
           "egapro_renseignee": false,
+          "est_achats_responsables": false,
+          "est_alim_confiance": false,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -162,9 +164,12 @@
           "liste_id_organisme_formation": null,
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
+          "est_patrimoine_vivant": false,
+          "bilan_ges_renseigne": false,
           "identifiant_association": null,
           "statut_entrepreneur_spectacle": null,
           "type_siae": null
