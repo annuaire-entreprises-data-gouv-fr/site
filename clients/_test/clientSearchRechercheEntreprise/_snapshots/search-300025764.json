@@ -194,7 +194,10 @@
           "dateImmatriculation": "1981-10-01",
           "duree": 0,
           "dateFin": "",
-          "natureEntreprise": ["Libérale non réglementée", "Gestion de biens"],
+          "natureEntreprise": [
+            "Libérale non réglementée",
+            "Gestion de biens"
+          ],
           "dateCloture": "",
           "isPersonneMorale": false,
           "capital": ""
