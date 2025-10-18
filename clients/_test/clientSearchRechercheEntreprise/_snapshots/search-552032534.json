@@ -14,7 +14,7 @@
         "oldSiren": "552032534",
         "siege": {
           "siren": "552032534",
-          "siret": "55203253400646",
+          "siret": "55203253400703",
           "oldSiret": "",
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
@@ -22,37 +22,32 @@
           "ancienSiege": false,
           "enseigne": "",
           "denomination": null,
-          "nic": "00646",
-          "dateCreation": "2003-10-20",
+          "nic": "00703",
+          "dateCreation": "2025-08-19",
           "dateDerniereMiseAJour": "",
           "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2008-01-01",
+          "dateDebutActivite": "2025-08-19",
           "dateFermeture": "",
-          "adresse": "17 BOULEVARD HAUSSMANN 75009 PARIS",
-          "adressePostale": "17 BOULEVARD HAUSSMANN 75009 PARIS",
+          "adresse": "59 RUE LA FAYETTE 75009 PARIS",
+          "adressePostale": "59 RUE LA FAYETTE 75009 PARIS",
           "codePostal": "75009",
           "commune": "PARIS",
           "activitePrincipale": "70.10Z",
           "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
-          "trancheEffectif": "42",
-          "anneeTrancheEffectif": "2023",
-          "latitude": "48.872565",
-          "longitude": "2.334926",
+          "trancheEffectif": "N",
+          "anneeTrancheEffectif": null,
+          "latitude": "48.87590696098471",
+          "longitude": "2.3434570265778594",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "estPersonneMorale": true,
-            "idFiness": ["750073181"],
+            "idFiness": [],
             "idBio": [],
             "idOrganismeFormation": [],
             "idRge": [],
             "idUai": []
           },
-          "listeIdcc": [
-            {
-              "idcc": "9999",
-              "title": ""
-            }
-          ]
+          "listeIdcc": []
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -66,7 +61,7 @@
           "all": [
             {
               "siren": "552032534",
-              "siret": "55203253400646",
+              "siret": "55203253400703",
               "oldSiret": "",
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
@@ -74,43 +69,38 @@
               "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
-              "nic": "00646",
-              "dateCreation": "2003-10-20",
+              "nic": "00703",
+              "dateCreation": "2025-08-19",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2008-01-01",
+              "dateDebutActivite": "2025-08-19",
               "dateFermeture": "",
-              "adresse": "17 BOULEVARD HAUSSMANN 75009 PARIS",
-              "adressePostale": "17 BOULEVARD HAUSSMANN 75009 PARIS",
+              "adresse": "59 RUE LA FAYETTE 75009 PARIS",
+              "adressePostale": "59 RUE LA FAYETTE 75009 PARIS",
               "codePostal": "75009",
               "commune": "PARIS",
               "activitePrincipale": "70.10Z",
               "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
-              "trancheEffectif": "42",
-              "anneeTrancheEffectif": "2023",
-              "latitude": "48.872565",
-              "longitude": "2.334926",
+              "trancheEffectif": "N",
+              "anneeTrancheEffectif": null,
+              "latitude": "48.87590696098471",
+              "longitude": "2.3434570265778594",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "estPersonneMorale": true,
-                "idFiness": ["750073181"],
+                "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
               },
-              "listeIdcc": [
-                {
-                  "idcc": "9999",
-                  "title": ""
-                }
-              ]
+              "listeIdcc": []
             }
           ],
           "open": [
             {
               "siren": "552032534",
-              "siret": "55203253400646",
+              "siret": "55203253400703",
               "oldSiret": "",
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
@@ -118,43 +108,38 @@
               "ancienSiege": false,
               "enseigne": "",
               "denomination": null,
-              "nic": "00646",
-              "dateCreation": "2003-10-20",
+              "nic": "00703",
+              "dateCreation": "2025-08-19",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2008-01-01",
+              "dateDebutActivite": "2025-08-19",
               "dateFermeture": "",
-              "adresse": "17 BOULEVARD HAUSSMANN 75009 PARIS",
-              "adressePostale": "17 BOULEVARD HAUSSMANN 75009 PARIS",
+              "adresse": "59 RUE LA FAYETTE 75009 PARIS",
+              "adressePostale": "59 RUE LA FAYETTE 75009 PARIS",
               "codePostal": "75009",
               "commune": "PARIS",
               "activitePrincipale": "70.10Z",
               "libelleActivitePrincipale": "Activités des sièges sociaux (70.10Z)",
-              "trancheEffectif": "42",
-              "anneeTrancheEffectif": "2023",
-              "latitude": "48.872565",
-              "longitude": "2.334926",
+              "trancheEffectif": "N",
+              "anneeTrancheEffectif": null,
+              "latitude": "48.87590696098471",
+              "longitude": "2.3434570265778594",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "estPersonneMorale": true,
-                "idFiness": ["750073181"],
+                "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
                 "idRge": [],
                 "idUai": []
               },
-              "listeIdcc": [
-                {
-                  "idcc": "9999",
-                  "title": ""
-                }
-              ]
+              "listeIdcc": []
             }
           ],
           "unknown": [],
           "closed": [],
           "nombreEtablissementsOuverts": 2,
-          "nombreEtablissements": 17,
+          "nombreEtablissements": 18,
           "usePagination": false,
           "currentEtablissementPage": 1
         },
@@ -163,7 +148,7 @@
         "dateCreation": "1955-01-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2025-08-20T09:22:48",
+        "dateMiseAJourInsee": "2025-10-10T16:33:30.751",
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -214,14 +199,16 @@
           "dateImmatriculation": "1955-03-01",
           "duree": 99,
           "dateFin": "01/03/2054",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "3112",
           "isPersonneMorale": true,
           "capital": "170 348 620,75 € (fixe)"
         },
         "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [],
-        "nombreEtablissements": 17,
+        "nombreEtablissements": 18,
         "nombreEtablissementsOuverts": 2,
         "dirigeants": [
           {
