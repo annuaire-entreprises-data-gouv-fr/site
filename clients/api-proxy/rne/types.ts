@@ -3,6 +3,8 @@ export type IRNEEtatCivilProxyResponse = {
   prenom: string;
   role: string;
   dateNaissancePartial: string;
+  estDemissionnaire: boolean;
+  dateDemission: string | null;
 };
 export type IRNEPersonneMoraleProxyResponse = {
   denomination: string;

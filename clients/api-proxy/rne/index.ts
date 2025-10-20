@@ -68,6 +68,8 @@ const mapToDomainObject = ({
         prenom,
         prenoms,
         role: formatRole(etatCivil.role),
+        estDemissionnaire: etatCivil.estDemissionnaire,
+        dateDemission: etatCivil.dateDemission,
       } as IEtatCivil;
     }
     const personneMorale = dirigeant as IRNEPersonneMoraleProxyResponse;

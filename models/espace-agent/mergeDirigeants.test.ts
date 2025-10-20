@@ -12,6 +12,8 @@ describe("mergeDirigeants", () => {
         role: "Président",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
       {
         sexe: "M",
@@ -21,6 +23,8 @@ describe("mergeDirigeants", () => {
         role: "Directeur Général",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 
@@ -50,6 +54,8 @@ describe("mergeDirigeants", () => {
         role: "Président",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 
@@ -62,6 +68,8 @@ describe("mergeDirigeants", () => {
         role: "Directeur Général",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 
@@ -89,6 +97,8 @@ describe("mergeDirigeants", () => {
         role: "Président",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
       {
         sexe: "M",
@@ -98,6 +108,8 @@ describe("mergeDirigeants", () => {
         role: "Président",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 
@@ -126,6 +138,8 @@ describe("mergeDirigeants", () => {
         role: "Président",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 
@@ -138,6 +152,8 @@ describe("mergeDirigeants", () => {
         role: "Président",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 
@@ -164,6 +180,8 @@ describe("mergeDirigeants", () => {
         role: "Président",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 
@@ -176,6 +194,8 @@ describe("mergeDirigeants", () => {
         role: "Président",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 
@@ -211,6 +231,8 @@ describe("mergeDirigeants", () => {
         role: "Président",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 
@@ -244,6 +266,8 @@ describe("mergeDirigeants", () => {
         role: "CTO",
         lieuNaissance: "Lyon",
         dateNaissance: "1990-05-15",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 
@@ -256,6 +280,8 @@ describe("mergeDirigeants", () => {
         role: "CEO",
         lieuNaissance: "Paris",
         dateNaissance: "1980-01-01",
+        estDemissionnaire: false,
+        dateDemission: null,
       },
     ];
 

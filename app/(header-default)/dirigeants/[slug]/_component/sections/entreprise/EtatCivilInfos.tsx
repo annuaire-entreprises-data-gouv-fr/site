@@ -11,15 +11,27 @@ export default function EtatCivilInfos({
   }${(dirigeant.nom || "").toUpperCase()}`;
 
   return (
-    <>
-      {nomComplet}
-      {dirigeant.dateNaissance || dirigeant.dateNaissancePartial
-        ? `, né(e) ${
-            dirigeant.dateNaissance
-              ? "le " + formatDateLong(dirigeant.dateNaissance)
-              : "en " + formatDatePartial(dirigeant.dateNaissancePartial)
-          }${dirigeant.lieuNaissance ? `, à ${dirigeant.lieuNaissance}` : ""}`
-        : ""}
-    </>
+    <div>
+      <span>
+        {nomComplet}
+        {dirigeant.dateNaissance || dirigeant.dateNaissancePartial
+          ? `, né(e) ${
+              dirigeant.dateNaissance
+                ? "le " + formatDateLong(dirigeant.dateNaissance)
+                : "en " + formatDatePartial(dirigeant.dateNaissancePartial)
+            }${dirigeant.lieuNaissance ? `, à ${dirigeant.lieuNaissance}` : ""}`
+          : ""}
+      </span>
+      {dirigeant.estDemissionnaire && (
+        <div>
+          <i>
+            {dirigeant.dateDemission
+              ? "démissionnaire depuis le " +
+                formatDateLong(dirigeant.dateDemission)
+              : "démissionnaire"}
+          </i>
+        </div>
+      )}
+    </div>
   );
 }
