@@ -206,7 +206,9 @@ const routes = {
     rne: {
       immatriculation: {
         default: (siren: string) => `/rne/${siren}`,
-        fallback: (siren: string) => `/rne/fallback/${siren}`,
+      },
+      observations: {
+        fallback: (siren: string) => `/rne/observations/fallback/${siren}`,
       },
     },
     association: (rnaOrSiren: string) => `/association/${rnaOrSiren}`,

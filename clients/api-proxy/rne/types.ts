@@ -36,3 +36,6 @@ export type IRNEProxyResponse = {
   observations: IRNEObservationsProxyResponse;
   dirigeants: (IRNEPersonneMoraleProxyResponse | IRNEEtatCivilProxyResponse)[];
 };
+
+export type IRNEObservationsFallbackProxyResponse =
+  IRNEObservationsProxyResponse;

@@ -46,7 +46,10 @@ import { rechercheEntrepriseIdccHandler } from "./handlers/recherche-entreprises
 import { rechercheEntrepriseIdccMetadataHandler } from "./handlers/recherche-entreprises-idcc-metadata";
 import { rechercheEntrepriseLastModifiedHandler } from "./handlers/recherche-entreprises-last-modified";
 import { rgeHandler } from "./handlers/rge";
-import { rneDefaultHandler, rneFallbackHandler } from "./handlers/rne";
+import {
+  rneDefaultHandler,
+  rneObservationsFallbackHandler,
+} from "./handlers/rne";
 import { s3HandlerMonitoring } from "./handlers/s3";
 import { tvaHandler } from "./handlers/tva";
 import { upDownIoHandler } from "./handlers/up-down-io";
@@ -63,8 +66,8 @@ export const routesHandlers = [
     rneDefaultHandler
   ),
   http.get(
-    `${process.env.PROXY_API_URL}${routes.proxy.rne.immatriculation.fallback("*")}`,
-    rneFallbackHandler
+    `${process.env.PROXY_API_URL}${routes.proxy.rne.observations.fallback("*")}`,
+    rneObservationsFallbackHandler
   ),
   http.get(
     routes.rechercheEntreprise.lastModified,

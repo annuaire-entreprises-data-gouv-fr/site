@@ -15,6 +15,7 @@ import {
 import { clientAPIProxy } from "../client";
 import type {
   IRNEEtatCivilProxyResponse,
+  IRNEObservationsFallbackProxyResponse,
   IRNEPersonneMoraleProxyResponse,
   IRNEProxyResponse,
 } from "./types";
@@ -34,17 +35,17 @@ export const clientRNEImmatriculation = async (siren: Siren) => {
 };
 
 /**
- * RNE through the API proxy - scrapping site as fallback
+ * RNE observations through the API proxy - scrapping site as fallback
  * @param siren
  */
-export const clientRNEImmatriculationFallback = async (siren: Siren) => {
-  const response = await clientAPIProxy<IRNEProxyResponse>(
-    routes.proxy.rne.immatriculation.fallback(siren),
+export const clientRNEObservationsFallback = async (siren: Siren) => {
+  const response = await clientAPIProxy<IRNEObservationsFallbackProxyResponse>(
+    routes.proxy.rne.observations.fallback(siren),
     {
       timeout: constants.timeout.XXXL,
     }
   );
-  return mapToDomainObject(response);
+  return mapObservationsToDomainObject(response);
 };
 
 const mapToDomainObject = ({
@@ -83,7 +84,17 @@ const mapToDomainObject = ({
   });
 
   return {
-    observations,
+    observations: mapObservationsToDomainObject(observations),
     dirigeants: newDirigeants,
   };
 };
+
+function mapObservationsToDomainObject(
+  observations: IRNEObservationsFallbackProxyResponse
+): IObservations {
+  return observations.map((observation) => ({
+    dateAjout: observation.dateAjout,
+    description: observation.description,
+    numObservation: observation.numObservation,
+  }));
+}
