@@ -11,22 +11,25 @@ export type IAssociationResponse = {
   representant_legal: any[];
   rh?: Rh[];
   agrement?: Agrement[];
-  compte: {
-    dons: number; //6904;
-    subv: number; //63523;
-    produits: number; //250305;
-    charges: number; //230274;
-    resultat: number; //20031;
-    id: number; //39562;
-    subv_cause: string; //'interet departemental des actions sociales et de santé';
-    aides_3ans: number; //72110;
-    id_siret: number | string; //'77567227221138';
-    annee: number; //2019;
-  }[];
+  compte: Compte[];
   etablissement?: Etablissement[];
   rib: any[];
   document_dac: any[];
   document_rna: any[];
+};
+
+export type IAssociationPartenairesResponse = {
+  asso: Omit<IAssociationResponse, "etablissement"> & {
+    etablissements?: {
+      etablissement: Etablissement[] | Etablissement;
+    };
+    agrements?: {
+      agrement: Agrement[] | Agrement;
+    };
+    comptes?: {
+      compte: Compte[] | Compte;
+    };
+  };
 };
 
 type Identite = {
@@ -166,6 +169,19 @@ type Agrement = {
   attributeur: string;
   id: number;
   date_attribution: string;
+};
+
+type Compte = {
+  dons: number; //6904;
+  subv: number; //63523;
+  produits: number; //250305;
+  charges: number; //230274;
+  resultat: number; //20031;
+  id: number; //39562;
+  subv_cause: string; //'interet departemental des actions sociales et de santé';
+  aides_3ans: number; //72110;
+  id_siret: number | string; //'77567227221138';
+  annee: number; //2019;
 };
 
 type Etablissement = {
