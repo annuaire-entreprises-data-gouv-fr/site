@@ -338,7 +338,7 @@ const getNpsRecords = async () => {
     monthlyNps.push({
       number,
       label,
-      values: npsData[label],
+      values: npsData[label] ?? {},
     });
   });
   return { monthlyNps, userResponses: nps.totals };
