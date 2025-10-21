@@ -2,6 +2,7 @@ import { readFromGrist } from "#clients/external-tooling/grist";
 import routes from "#clients/routes";
 import constants from "#models/constants";
 import { FetchRessourceException, InternalError } from "#models/exceptions";
+import { DataStore } from "#utils/data-store";
 import httpClient from "#utils/network";
 
 export type IMatomoStats = {
@@ -171,7 +172,7 @@ const matomoHttpClient = async <T>(url: string) =>
     }),
   });
 
-export const clientMatomoStats = async (): Promise<IMatomoStats> => {
+const getStats = async (): Promise<IMatomoStats> => {
   const SITE_ID = process.env.MATOMO_SITE_ID;
   const API_SITE_ID = process.env.MATOMO_API_SITE_ID;
 
@@ -214,6 +215,16 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
     });
   }
 };
+
+const store = new DataStore<IMatomoStats>(
+  getStats,
+  "matomo-stats",
+  (response: IMatomoStats) => ({ matomoStats: response }),
+  3_600_000
+);
+
+export const clientMatomoStats = (): Promise<IMatomoStats> =>
+  store.get("matomoStats") as Promise<IMatomoStats>;
 
 /**
  * API URL Builder
@@ -327,7 +338,7 @@ const getNpsRecords = async () => {
     monthlyNps.push({
       number,
       label,
-      values: npsData[label],
+      values: npsData[label] ?? {},
     });
   });
   return { monthlyNps, userResponses: nps.totals };

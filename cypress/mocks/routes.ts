@@ -39,6 +39,7 @@ import { igHandler } from "./handlers/ig";
 import { journalOfficielAssociationsHandler } from "./handlers/journal-officiel-associations";
 import { liensCapitalistiquesHandler } from "./handlers/liens-capitalistiques";
 import { mandatairesRcsHandler } from "./handlers/mandataires-rcs";
+import { matomoReportHandler } from "./handlers/matomo-report";
 import { odsMetadataHandler } from "./handlers/ods-metadata";
 import { effectifsHandler } from "./handlers/rcd-effectifs-annuels";
 import { rechercheEntrepriseHandler } from "./handlers/recherche-entreprises";
@@ -203,5 +204,15 @@ export const routesHandlers = [
     `https://${process.env.OVH_S3_MONITORING_BUCKET}.s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/monitoring_comptes_agents.csv`,
     s3HandlerMonitoring
   ),
+  http.post(
+    routes.tooling.matomo.report.copyPasteEvents + "*",
+    matomoReportHandler
+  ),
+  http.post(routes.tooling.matomo.report.npsEvents + "*", matomoReportHandler),
+  http.post(
+    routes.tooling.matomo.report.bulkRequest + "*",
+    matomoReportHandler
+  ),
+  http.post(routes.tooling.matomo.tracker + "*", matomoReportHandler),
   http.get(routes.tooling.grist + "*", gristHandler),
 ];

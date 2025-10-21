@@ -11,6 +11,13 @@
 #   site: true
 
 ---
+- date: 21/10/2025
+  target:
+    site: true
+  body: |
+    Ajout des dirigeants démissionnaires dans l'onglet "Dirigeants".
+
+    Information récupérée depuis l'api du RNE.
 - date: 06/06/2025
   target:
     site: true
