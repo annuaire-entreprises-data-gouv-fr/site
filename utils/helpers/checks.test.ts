@@ -36,26 +36,42 @@ describe("Check shouldIndex", () => {
   });
   test("EI fails", () => {
     const u = createDefaultUniteLegale("000000000" as Siren);
-    u.complements.estEntrepreneurIndividuel = true;
+    u.etatAdministratif = IETATADMINSTRATIF.ACTIF;
+    u.statutDiffusion = ISTATUTDIFFUSION.DIFFUSIBLE;
     u.complements.estPersonneMorale = false;
+    u.complements.estEntrepreneurIndividuel = true;
     expect(shouldNotIndex(u)).toBe(true);
   });
   test("Closed succeed", () => {
     const u = createDefaultUniteLegale("000000000" as Siren);
+    u.complements.estEntrepreneurIndividuel = false;
+    u.complements.estPersonneMorale = true;
+    u.statutDiffusion = ISTATUTDIFFUSION.DIFFUSIBLE;
     u.etatAdministratif = IETATADMINSTRATIF.CESSEE;
-    u.complements.estPersonneMorale = true;
     expect(shouldNotIndex(u)).toBe(true);
   });
-  test("NonDiffusible succeed", () => {
+  test("NonDiffusible strict succeed", () => {
     const u = createDefaultUniteLegale("000000000" as Siren);
+    u.etatAdministratif = IETATADMINSTRATIF.ACTIF;
+    u.complements.estEntrepreneurIndividuel = false;
+    u.complements.estPersonneMorale = true;
     u.statutDiffusion = ISTATUTDIFFUSION.NON_DIFF_STRICT;
-    u.complements.estPersonneMorale = true;
     expect(shouldNotIndex(u)).toBe(true);
   });
-  test("PartiallyDiffusible succeed", () => {
+  test("PartiallyDiffusible fails", () => {
     const u = createDefaultUniteLegale("000000000" as Siren);
-    u.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
+    u.etatAdministratif = IETATADMINSTRATIF.ACTIF;
+    u.complements.estEntrepreneurIndividuel = false;
     u.complements.estPersonneMorale = true;
-    expect(shouldNotIndex(u)).toBe(true);
+    u.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
+    expect(shouldNotIndex(u)).toBe(false);
+  });
+  test("ProtectedDiffusible fails", () => {
+    const u = createDefaultUniteLegale("000000000" as Siren);
+    u.etatAdministratif = IETATADMINSTRATIF.ACTIF;
+    u.complements.estEntrepreneurIndividuel = false;
+    u.complements.estPersonneMorale = true;
+    u.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+    expect(shouldNotIndex(u)).toBe(false);
   });
 });

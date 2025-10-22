@@ -1,4 +1,4 @@
-import { estDiffusible } from "#models/core/diffusion";
+import { estNonDiffusibleStrict } from "#models/core/diffusion";
 import { estActif } from "#models/core/etat-administratif";
 import { type IUniteLegale, isPersonnePhysique } from "#models/core/types";
 
@@ -38,8 +38,8 @@ export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
     // we dont index closed entities
     return true;
   }
-  if (!estDiffusible(uniteLegale)) {
-    // we dont index non diffusible or partially diffusible
+  if (estNonDiffusibleStrict(uniteLegale)) {
+    // we dont index non diffusible strict
     return true;
   }
   return false;
