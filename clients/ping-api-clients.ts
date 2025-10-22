@@ -48,7 +48,7 @@ const ping = async (slug: string | string[]) => {
       return await clientAPIInclusion(sirenInclusion);
     case "api-tva": {
       const tva = verifyTVANumber(tvaNumber(sirenDanone));
-      return await clientTVA(tva);
+      return await clientTVA(tva, true);
     }
     case "api-eori":
       return await clientEORI(siretGanymede);
