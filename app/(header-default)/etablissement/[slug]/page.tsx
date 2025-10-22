@@ -9,8 +9,9 @@ import { isServicePublic } from "#models/core/types";
 import {
   etablissementPageDescription,
   etablissementPageTitle,
-  shouldNotIndex,
+  shouldAddNoIndexNoFollow,
 } from "#utils/helpers";
+import { shouldAddNoIndex } from "#utils/seo/noindex-query-params";
 import { cachedEtablissementWithUniteLegale } from "#utils/server-side-helper/app/cached-methods";
 import extractParamsAppRouter, {
   type AppRouterProps,
@@ -24,6 +25,14 @@ export const generateMetadata = async (
   const { uniteLegale, etablissement } =
     await cachedEtablissementWithUniteLegale(slug, isBot);
 
+  const searchParams = await props.searchParams;
+  const robots = {
+    follow: !shouldAddNoIndexNoFollow(uniteLegale),
+    index: !(
+      shouldAddNoIndexNoFollow(uniteLegale) || shouldAddNoIndex(searchParams)
+    ),
+  };
+
   const title = `${
     etablissement.estSiege ? "Siège social" : "Etablissement secondaire"
   } - ${etablissementPageTitle(etablissement, uniteLegale)}`;
@@ -31,7 +40,7 @@ export const generateMetadata = async (
   return {
     title,
     description: etablissementPageDescription(etablissement, uniteLegale),
-    robots: shouldNotIndex(uniteLegale) ? "noindex, nofollow" : "index, follow",
+    robots,
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`,
     },
