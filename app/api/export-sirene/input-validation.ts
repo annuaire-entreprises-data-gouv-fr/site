@@ -53,7 +53,7 @@ export const exportCsvSchema = z.object({
       to: dateValidator.optional(),
     })
     .optional(),
-  siretsAndSirens: z.array(sirenSiretValidator).max(100).optional(),
+  siretsAndSirens: z.array(sirenSiretValidator).max(500).optional(),
   ess: z
     .object({
       inclure: z.boolean(),
