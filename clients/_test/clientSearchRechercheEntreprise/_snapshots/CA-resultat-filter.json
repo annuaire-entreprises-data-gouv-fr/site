@@ -47,12 +47,7 @@
             "idRge": [],
             "idUai": []
           },
-          "listeIdcc": [
-            {
-              "idcc": "1486",
-              "title": ""
-            }
-          ]
+          "listeIdcc": []
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -99,12 +94,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "listeIdcc": [
-                {
-                  "idcc": "1486",
-                  "title": ""
-                }
-              ]
+              "listeIdcc": []
             }
           ],
           "open": [
@@ -143,12 +133,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "listeIdcc": [
-                {
-                  "idcc": "1486",
-                  "title": ""
-                }
-              ]
+              "listeIdcc": []
             }
           ],
           "unknown": [],
@@ -202,12 +187,7 @@
         "colter": {
           "codeColter": null
         },
-        "listeIdcc": [
-          {
-            "idcc": "1486",
-            "title": ""
-          }
-        ],
+        "listeIdcc": [],
         "immatriculation": null,
         "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [
@@ -246,12 +226,7 @@
               "idRge": [],
               "idUai": []
             },
-            "listeIdcc": [
-              {
-                "idcc": "1486",
-                "title": ""
-              }
-            ]
+            "listeIdcc": []
           }
         ],
         "nombreEtablissements": 1,
@@ -264,7 +239,9 @@
             "prenoms": "Philippe",
             "role": "PRESIDENT DE SAS",
             "nationalite": "Française",
-            "dateNaissancePartial": "1966-01"
+            "dateNaissancePartial": "1966-01",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       },
@@ -597,7 +574,9 @@
             "prenoms": "Charles",
             "role": "DIRECTEUR GENERAL",
             "nationalite": null,
-            "dateNaissancePartial": "1944-05"
+            "dateNaissancePartial": "1944-05",
+            "estDemissionnaire": false,
+            "dateDemission": null
           },
           {
             "sexe": null,
@@ -606,7 +585,9 @@
             "prenoms": "Olivier",
             "role": "COMMISSAIRE AUX COMPTES SUPPLEANT",
             "nationalite": null,
-            "dateNaissancePartial": "1971-11"
+            "dateNaissancePartial": "1971-11",
+            "estDemissionnaire": false,
+            "dateDemission": null
           },
           {
             "siren": "432345783",
@@ -850,7 +831,9 @@
             "prenoms": "Franck",
             "role": "GERANT",
             "nationalite": "FRANÇAISE",
-            "dateNaissancePartial": "1952-06"
+            "dateNaissancePartial": "1952-06",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       },
@@ -1084,7 +1067,9 @@
             "prenoms": "Dominique",
             "role": "GERANT",
             "nationalite": "Française",
-            "dateNaissancePartial": "1964-10"
+            "dateNaissancePartial": "1964-10",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       },
@@ -1318,7 +1303,9 @@
             "prenoms": "Suat",
             "role": "GERANT",
             "nationalite": "Turque",
-            "dateNaissancePartial": "1980-08"
+            "dateNaissancePartial": "1980-08",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       },
@@ -1577,7 +1564,9 @@
             "prenoms": "Caroline",
             "role": "DIRECTEUR GENERAL",
             "nationalite": null,
-            "dateNaissancePartial": "1977-03"
+            "dateNaissancePartial": "1977-03",
+            "estDemissionnaire": false,
+            "dateDemission": null
           },
           {
             "sexe": null,
@@ -1586,7 +1575,9 @@
             "prenoms": "Eric",
             "role": "PRESIDENT DE SAS",
             "nationalite": null,
-            "dateNaissancePartial": "1947-09"
+            "dateNaissancePartial": "1947-09",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }
