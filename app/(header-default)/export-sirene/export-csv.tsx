@@ -143,6 +143,13 @@ export default function ExportCsv() {
       const body = await response.json();
 
       if (body.error) {
+        if (
+          "details" in body &&
+          Array.isArray(body.details) &&
+          body.details.length > 0
+        ) {
+          throw new Error(body.details[0].message);
+        }
         throw new Error(
           body.error || "Une erreur est survenue, veuillez réessayer plus tard"
         );

@@ -5,15 +5,20 @@ const sirenSiretValidator = z.string().refine(
     const cleaned = value.replace(/\s/g, "");
     return /^[0-9]{9}$/.test(cleaned) || /^[0-9]{14}$/.test(cleaned);
   },
-  { message: "Must be a valid SIREN (9 digits) or SIRET (14 digits)" }
+  {
+    message:
+      "Le fichier ne doit contenir que des SIREN (9 chiffres) ou SIRET (14 chiffres) valides",
+  }
 );
 
 const dateValidator = z
   .string()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format");
+  .regex(/^\d{4}-\d{2}-\d{2}$/, "La date doit être au format YYYY-MM-DD");
 
 const locationValidator = z
-  .array(z.string().regex(/^\d+$/, "Must contain only digits"))
+  .array(
+    z.string().regex(/^\d+$/, "Le champ doit contenir uniquement des chiffres")
+  )
   .optional();
 
 export const exportCsvSchema = z.object({
@@ -36,10 +41,10 @@ export const exportCsvSchema = z.object({
         .string()
         .regex(
           /^(\d{4}|\d{2}\*|\d\*)$/,
-          'Must be a 4-digit code, a 2-digit code followed by "*" or a 1-digit code followed by "*"'
+          'La catégorie légale doit être un code à 4 chiffres, 2 chiffres suivis de "* ou 1 chiffre suivi de "*"'
         )
     )
-    .max(100)
+    .max(100, "Un maximum de 100 catégories légales peuvent être sélectionnées")
     .optional(),
   creationDate: z
     .object({
@@ -53,7 +58,10 @@ export const exportCsvSchema = z.object({
       to: dateValidator.optional(),
     })
     .optional(),
-  siretsAndSirens: z.array(sirenSiretValidator).max(500).optional(),
+  siretsAndSirens: z
+    .array(sirenSiretValidator)
+    .max(100, "Le fichier ne doit pas contenir plus de 500 SIREN et SIRET")
+    .optional(),
   ess: z
     .object({
       inclure: z.boolean(),
@@ -80,18 +88,13 @@ export const exportCsvSchema = z.object({
     .array(
       z
         .string()
-        .regex(
-          /^\d{1,2}\.\d{1,2}[A-Z]$/,
-          "Must be a valid NAF code (like 01.12Z)"
-        )
+        .regex(/^\d{1,2}\.\d{1,2}[A-Z]$/, "Code NAF invalide (ex: 01.12Z)")
     )
+    .max(100, "Un maximum de 100 codes NAF peuvent être sélectionnés")
     .optional(),
   sap: z
-    .array(
-      z
-        .string()
-        .regex(/^[A-Z]$/, "Must be a valid SAP code (1 uppercase letter)")
-    )
+    .array(z.string().regex(/^[A-Z]$/, "Code SAP invalide (ex: A)"))
+    .max(100, "Un maximum de 100 codes SAP peuvent être sélectionnés")
     .optional(),
 });
 
