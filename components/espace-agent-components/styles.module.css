@@ -52,3 +52,36 @@
     content: none !important;
   }
 }
+
+.cardHabilitation {
+  background-color: #fff;
+  border: 1px solid var(--purple-glycine-main-494);
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 8.1px 0px #0000bd47;
+}
+
+.cardHabilitationTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.cardHabilitationDescription {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.cardHabilitationButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  & a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  & a::after {
+    content: none !important;
+  }
+}

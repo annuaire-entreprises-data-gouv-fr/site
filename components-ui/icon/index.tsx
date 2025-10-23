@@ -535,6 +535,45 @@ const bookletFill = (
   </svg>
 );
 
+const editBoxFill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="m16.757 3-7.466 7.466.008 4.247 4.238-.007L21 7.243V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12.757Zm3.728-.9L21.9 3.516l-9.192 9.192-1.412.003-.002-1.417L20.485 2.1Z" />
+  </svg>
+);
+
+const book2Fill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M21 18H6a1 1 0 0 0 0 2h15v2H6a3 3 0 0 1-3-3V4a2 2 0 0 1 2-2h16v16Zm-5-9V7H8v2h8Z" />
+  </svg>
+);
+
+const infoFill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M19.5,2.5h-15c-1.1,0-2,0.9-2,2v15c0,1.1,0.9,2,2,2h15c1.1,0,2-0.9,2-2v-15C21.5,3.4,20.6,2.5,19.5,2.5z M13,17h-2v-6h2V17z M13,9h-2V7h2V9z" />
+  </svg>
+);
+
 export type IIconsSlug = keyof typeof icons;
 
 export const icons = {
@@ -576,4 +615,7 @@ export const icons = {
   mapPinFill,
   scaleFill,
   bookletFill,
+  editBoxFill,
+  book2Fill,
+  infoFill,
 };
