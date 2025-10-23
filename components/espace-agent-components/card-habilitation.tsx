@@ -1,0 +1,42 @@
+import { useId } from "react";
+import ButtonLink from "#components-ui/button";
+import { Icon } from "#components-ui/icon/wrapper";
+import { Tag } from "#components-ui/tag";
+import constants from "#models/constants";
+import styles from "./styles.module.css";
+
+export const CardHabilitation = () => {
+  const labelId = useId();
+
+  return (
+    <article aria-labelledby={labelId} className={styles.cardHabilitation}>
+      <Tag color="agent">
+        <Icon slug="infoFill">Habilitation</Icon>
+      </Tag>
+      <p className={styles.cardHabilitationTitle} id={labelId}>
+        Accédez à des données supplémentaires sous habilitation !
+      </p>
+      <p className={styles.cardHabilitationDescription}>
+        Votre mission concerne la fraude, les marchés publics, les subventions
+        aux associations ou les aides publiques ?
+      </p>
+      <div className={styles.cardHabilitationButtons}>
+        <ButtonLink
+          alt
+          ariaLabel="Se renseigner sur l’habilitation"
+          target="_blank"
+          to={constants.links.documentation.habilitation}
+        >
+          <Icon slug="book2Fill">Se renseigner sur l’habilitation</Icon>
+        </ButtonLink>
+        <ButtonLink
+          ariaLabel="Demander une habilitation"
+          target="_blank"
+          to={`${process.env.DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`}
+        >
+          <Icon slug="editBoxFill">Demander une habilitation</Icon>
+        </ButtonLink>
+      </div>
+    </article>
+  );
+};
