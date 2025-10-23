@@ -405,6 +405,19 @@ const discussion = (
   </svg>
 );
 
+const chat3Fill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M7.291 20.824 2 22l1.176-5.291A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.956 9.956 0 0 1-4.709-1.176Z" />
+  </svg>
+);
+
 const accountLine = (
   <svg
     fill="currentColor"
@@ -428,6 +441,19 @@ const present = (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M15 2a4 4 0 0 1 3.464 6.001L23 8v2h-2v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10H1V8l4.536.001A4 4 0 0 1 12 3.355 3.983 3.983 0 0 1 15 2Zm-4 8H5v9h6v-9Zm8 0h-6v9h6v-9ZM9 4a2 2 0 0 0-.15 3.995L9 8h2V6a2 2 0 0 0-1.697-1.977l-.154-.018L9 4Zm6 0a2 2 0 0 0-1.995 1.85L13 6v2h2a2 2 0 0 0 1.995-1.85L17 6a2 2 0 0 0-2-2Z" />
+  </svg>
+);
+
+const giftFill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M15 2a4 4 0 0 1 3.464 6.001L23 8v2h-2v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10H1V8l4.536.001A4 4 0 0 1 12 3.355 3.983 3.983 0 0 1 15 2Zm-2 8h-2v10h2V10ZM9 4a2 2 0 0 0-.15 3.995L9 8h2V6a2 2 0 0 0-1.697-1.977l-.154-.018L9 4Zm6 0a2 2 0 0 0-1.995 1.85L13 6v2h2a2 2 0 0 0 1.995-1.85L17 6a2 2 0 0 0-2-2Z" />
   </svg>
 );
 
@@ -496,6 +522,19 @@ const ballPenFill = (
   </svg>
 );
 
+const bookletFill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M8 2v20H4v-4H2v-2h2v-3H2v-2h2V8H2V6h2V2h4Zm12.005 0C21.107 2 22 2.898 22 3.99v16.02c0 1.099-.893 1.99-1.995 1.99H10V2h10.005Z" />
+  </svg>
+);
+
 export type IIconsSlug = keyof typeof icons;
 
 export const icons = {
@@ -510,6 +549,7 @@ export const icons = {
   collectiviteFill,
   communityFill,
   discussion,
+  chat3Fill,
   download,
   ballPenFill,
   errorFill,
@@ -525,6 +565,7 @@ export const icons = {
   moneyCircle,
   open,
   present,
+  giftFill,
   print,
   qrCode,
   questionFill,
@@ -534,4 +575,5 @@ export const icons = {
   calendarFill,
   mapPinFill,
   scaleFill,
+  bookletFill,
 };

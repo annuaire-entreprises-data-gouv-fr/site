@@ -38,7 +38,7 @@ const CompteAgentAccueil = async () => {
 
   return (
     <>
-      {session?.user?.isSuperAgent && <AgentNavigation />}
+      <AgentNavigation />
       <section className="layout-space-between-start">
         <div style={{ maxWidth: "50%" }}>
           <h1>Bienvenue dans votre espace agent</h1>
