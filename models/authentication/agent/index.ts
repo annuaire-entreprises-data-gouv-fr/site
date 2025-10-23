@@ -12,5 +12,4 @@ export type IAgentInfo = {
   scopes: IAgentScope[];
   userType: string;
   isSuperAgent: boolean;
-  agentIsNotVerified: boolean;
 };

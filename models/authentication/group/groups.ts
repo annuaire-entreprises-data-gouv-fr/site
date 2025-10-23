@@ -1,10 +1,9 @@
-import { HttpLocked, HttpNotFound } from "#clients/exceptions";
+import { HttpNotFound } from "#clients/exceptions";
 import { default as rolesDataClient } from "#clients/roles-data";
 import type { IRolesDataUser } from "#clients/roles-data/interface";
 import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import { FetchRessourceException } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
-import { AgentNotVerifiedException } from "../authentication-exceptions";
 
 export type IRolesDataGroup = {
   id: number;
@@ -27,9 +26,6 @@ export class Groups {
     try {
       return await rolesDataClient.getGroupsByEmail(userEmail, userSub);
     } catch (error) {
-      if (error instanceof HttpLocked) {
-        throw new AgentNotVerifiedException(error);
-      }
       if (error instanceof HttpNotFound) {
         // user not in roles.data
         return [];
