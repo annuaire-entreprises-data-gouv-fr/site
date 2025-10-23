@@ -4,7 +4,7 @@ import {
   NeedASiretException,
   PrestataireException,
 } from "#models/authentication/authentication-exceptions";
-import { Groups } from "#models/authentication/group/groups";
+import { AgentsGroup, getAgentGroups } from "#models/authentication/group";
 import { isSiret, verifySiret } from "#utils/helpers";
 import { AgentOrganisation } from "../organisation";
 import { defaultAgentScopes } from "../scopes/constants";
@@ -100,9 +100,9 @@ export class AgentConnected {
   async getAgentHabilitation() {
     const superAgentScopes = new Scopes();
 
-    const groups = await Groups.find(this.email, this.proConnectSub);
-    groups.forEach((group) => {
-      superAgentScopes.add(group.scopes);
+    const groups = await getAgentGroups();
+    groups.forEach((agentGroup) => {
+      superAgentScopes.add(agentGroup.group.scopes);
     });
 
     if (superAgentScopes.hasScopes()) {
