@@ -4,19 +4,19 @@ import {
   NeedASiretException,
   PrestataireException,
 } from "#models/authentication/authentication-exceptions";
-import { Groups } from "#models/authentication/group/groups";
+import { AgentsGroup } from "#models/authentication/group";
 import { AgentConnected } from "./index";
 
-jest.mock("#models/authentication/group/groups", () => ({
+jest.mock("#models/authentication/group/index.ts", () => ({
   Groups: {
-    find: jest.fn(),
+    getAgentGroups: jest.fn(),
     getScopeForAgent: jest.fn(),
   },
 }));
 
 jest.mock("#models/authentication/agent/organisation");
 
-const mockGroups = jest.mocked(Groups);
+const mockGroups = jest.mocked(AgentsGroup);
 const mockAgentOrganisation = jest.mocked(AgentOrganisation);
 
 describe("AgentConnected", () => {

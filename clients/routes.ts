@@ -265,49 +265,19 @@ const routes = {
         `https://updown.io/api/checks/${slug}/downtimes`,
     },
   },
-  datapass: {
-    auth: {
-      token: "/oauth/token",
-    },
-    demandes: {
-      getById: (id: number) => `/demandes/${id}`,
-    },
-  },
   rolesData: {
-    auth: {
-      token: "/auth/token",
-    },
-    users: {
-      getByEmail: (email: string) =>
-        `/users/search?email=${encodeURIComponent(email)}`,
-    },
     groups: {
-      getGroups: "/groups/",
-      getGroupsByEmail: (userEmail: string, userSub: string) =>
-        `/groups/search?user_email=${encodeURIComponent(
-          userEmail
-        )}&user_sub=${userSub}`,
-      create: (actingUserSub: string) =>
-        `/groups?acting_user_sub=${actingUserSub}`,
-      updateName: (groupId: number, groupName: string, actingUserSub: string) =>
-        `/groups/${groupId}?group_name=${encodeURIComponent(
+      getGroups: "/resource-server/groups/",
+      updateName: (groupId: number, groupName: string) =>
+        `/resource-server/groups/${groupId}?group_name=${encodeURIComponent(
           groupName
-        )}&acting_user_sub=${actingUserSub}`,
-      addUserToGroup: (groupId: number, actingUserSub: string) =>
-        `/groups/${groupId}/users?acting_user_sub=${actingUserSub}`,
-      updateUserFromGroup: (
-        groupId: number,
-        userId: number,
-        roleId: number,
-        actingUserSub: string
-      ) =>
-        `/groups/${groupId}/users/${userId}?role_id=${roleId}&acting_user_sub=${actingUserSub}`,
-      removeUserFromGroup: (
-        groupId: number,
-        userId: number,
-        actingUserSub: string
-      ) =>
-        `/groups/${groupId}/users/${userId}?acting_user_sub=${actingUserSub}`,
+        )}`,
+      addUserToGroup: (groupId: number) =>
+        `/resource-server/groups/${groupId}/users`,
+      updateUserFromGroup: (groupId: number, userId: number, roleId: number) =>
+        `/resource-server/groups/${groupId}/users/${userId}?role_id=${roleId}`,
+      removeUserFromGroup: (groupId: number, userId: number) =>
+        `/resource-server/groups/${groupId}/users/${userId}?`,
     },
     roles: {
       get: "/roles",
