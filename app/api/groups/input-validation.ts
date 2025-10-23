@@ -26,6 +26,11 @@ const roleIdValidator = z
   .int("Role ID must be an integer")
   .positive("Role ID must be positive");
 
+const userIdValidator = z
+  .number()
+  .int("User ID must be an integer")
+  .positive("User ID must be positive");
+
 const groupNameValidator = z
   .string()
   .min(1, "Group name is required")
@@ -53,12 +58,12 @@ export const addUserSchema = z.object({
 });
 
 export const updateUserSchema = z.object({
-  userEmail: emailValidator,
+  userId: userIdValidator,
   roleId: roleIdValidator,
 });
 
 export const removeUserSchema = z.object({
-  userEmail: emailValidator,
+  userId: userIdValidator,
 });
 
 export const updateNameSchema = z.object({

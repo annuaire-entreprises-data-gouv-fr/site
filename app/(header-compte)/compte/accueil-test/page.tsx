@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import AgentNavigation from "#components/espace-agent-components/agent-navigation";
 import { FullTable } from "#components/table/full";
-import { Warning } from "#components-ui/alerts";
 import { Badge } from "#components-ui/badge";
 import ButtonLink from "#components-ui/button";
 import FullWidthContainer from "#components-ui/container";
@@ -146,22 +145,6 @@ const CompteAgentAccueil = async () => {
       </FullWidthContainer>
       <div className="content-container">
         <h2 id="droits-acces">Les données auxquelles vous avez accès</h2>
-        {session?.user?.agentIsNotVerified && (
-          <Warning>
-            <strong>Attention</strong>, vous faites partie d’un groupe qui
-            devrait vous donner accès à des données supplémentaires, mais votre
-            compte n’est pas encore <strong>activé</strong>.
-            <br />
-            <a
-              href="https://roles.data.gouv.fr/ui/activation"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              Activez votre compte
-            </a>
-            , puis déconnectez-vous et reconnectez-vous.
-          </Warning>
-        )}
         <p>
           Voici la liste des données auxquelles vous avez actuellement accès en
           tant qu’agent public.

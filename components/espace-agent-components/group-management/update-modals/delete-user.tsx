@@ -23,7 +23,7 @@ export default function DeleteUserButton({
   const [loading, setLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const handleRemove = (userEmail: string) => async () => {
+  const handleRemove = (userEmail: string, userId: number) => async () => {
     setLoading(true);
 
     try {
@@ -33,7 +33,7 @@ export default function DeleteUserButton({
         headers: {
           "Content-Type": "application/json",
         },
-        data: JSON.stringify({ userEmail }),
+        data: JSON.stringify({ userId }),
       });
 
       deleteUserFromGroupState(userEmail);
@@ -101,7 +101,10 @@ export default function DeleteUserButton({
           </div>
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
-            <ButtonLink disabled={loading} onClick={handleRemove(user.email)}>
+            <ButtonLink
+              disabled={loading}
+              onClick={handleRemove(user.email, user.id)}
+            >
               {loading ? "Suppression..." : "Confirmer la suppression"}
             </ButtonLink>
             <ButtonLink alt disabled={loading} onClick={closeConfirmation}>

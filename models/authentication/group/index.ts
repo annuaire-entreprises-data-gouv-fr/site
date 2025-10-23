@@ -1,39 +1,72 @@
-import { HttpUnauthorizedError } from "#clients/exceptions";
-import rolesDataClient from "#clients/roles-data";
+import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
+import {
+  clientRolesAddUserToGroup,
+  clientRolesGetGroups,
+  clientRolesRemoveUserFromGroup,
+  clientRolesUpdateName,
+  clientRolesUpdateUserFromGroup,
+} from "#clients/roles-data";
 import type { IRolesDataUser } from "#clients/roles-data/interface";
-import { Groups } from "#models/authentication/group/groups";
 import { FetchRessourceException } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
+import type { IAgentScope } from "../agent/scopes/constants";
 
-export class Group {
-  private groupId: number;
+export const getAgentGroups = async (): Promise<AgentsGroup[]> => {
+  try {
+    const groups = await clientRolesGetGroups();
 
-  constructor(groupId: number) {
-    this.groupId = groupId;
+    return groups.map((g) => new AgentsGroup(g));
+  } catch (error) {
+    if (error instanceof HttpNotFound) {
+      // user not in roles.data
+      return [];
+    }
+
+    logFatalErrorInSentry(
+      new FetchRessourceException({
+        ressource: "Roles.data Groups",
+        cause: error,
+      })
+    );
+
+    return [];
+  }
+};
+
+export type IRolesDataGroup = {
+  id: number;
+  name: string;
+  organisation_siret: string;
+  users: IRolesDataUser[];
+  scopes: IAgentScope[];
+  contract_description: string;
+  contract_url?: string;
+};
+
+export class AgentsGroup {
+  group: IRolesDataGroup;
+
+  constructor(data: IRolesDataGroup) {
+    this.group = data;
   }
 
   /**
-   * Get the group ID
+   * Only run command if user is group admin
    */
-  getId(): number {
-    return this.groupId;
-  }
-
-  /**
-   * Check if a user is an admin of this group
-   */
-  async isUserAdmin(userEmail: string, userSub: string): Promise<boolean> {
+  async adminRunner<T>(
+    userEmail: string,
+    callback: () => Promise<T>
+  ): Promise<T> {
     try {
-      const groups = await Groups.find(userEmail, userSub);
-      const groupData =
-        groups.find((group) => group.id === this.groupId) || null;
-
-      if (!groupData) {
-        return false;
+      const user = this.group.users.find((user) => user.email === userEmail);
+      const isAdmin = user?.is_admin ?? false;
+      if (isAdmin) {
+        return await callback();
       }
 
-      const user = groupData.users.find((user) => user.email === userEmail);
-      return user?.is_admin ?? false;
+      throw new HttpUnauthorizedError(
+        "User does not have admin permissions for this group"
+      );
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
@@ -45,137 +78,43 @@ export class Group {
     }
   }
 
-  /**
-   * Add a user to this group (requires admin permissions)
-   */
-  async updateName(
+  async updateGroupName(
     adminEmail: string,
-    adminSub: string,
-    groupName: string
-  ): Promise<boolean> {
-    try {
-      const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
-      if (!isAdmin) {
-        throw new HttpUnauthorizedError(
-          "User does not have admin permissions for this group"
-        );
-      }
-
-      await rolesDataClient.updateName(this.groupId, groupName, adminSub);
-      return true;
-    } catch (error) {
-      logFatalErrorInSentry(
-        new FetchRessourceException({
-          ressource: "Roles.data",
-          cause: error,
-        })
-      );
-      throw error;
-    }
+    newGroupName: string
+  ): Promise<void> {
+    return await this.adminRunner<void>(adminEmail, async () => {
+      await clientRolesUpdateName(this.group.id, newGroupName);
+    });
   }
 
-  /**
-   * Add a user to this group (requires admin permissions)
-   */
-  async addUser(
+  async addUserToGroup(
     adminEmail: string,
-    adminSub: string,
     userEmail: string,
     roleId: number
   ): Promise<IRolesDataUser> {
-    try {
-      const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
-
-      if (!isAdmin) {
-        throw new HttpUnauthorizedError(
-          "User does not have admin permissions for this group"
-        );
-      }
-
-      const user = await rolesDataClient.addUserToGroup(
-        this.groupId,
-        userEmail,
-        roleId,
-        adminSub
-      );
-      return user;
-    } catch (error) {
-      logFatalErrorInSentry(
-        new FetchRessourceException({
-          ressource: "Roles.data",
-          cause: error,
-        })
-      );
-      throw error;
-    }
+    return await this.adminRunner<IRolesDataUser>(
+      adminEmail,
+      async () =>
+        await clientRolesAddUserToGroup(this.group.id, userEmail, roleId)
+    );
   }
 
-  /**
-   * Update a user from a group (requires admin permissions)
-   */
-  async updateUser(
+  async updateUserRoleInGroup(
     adminEmail: string,
-    adminSub: string,
-    userEmail: string,
+    userId: number,
     roleId: number
   ): Promise<IRolesDataUser> {
-    try {
-      const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
-      if (!isAdmin) {
-        throw new HttpUnauthorizedError(
-          "User does not have admin permissions for this group"
-        );
-      }
-
-      const user = await rolesDataClient.updateUserFromGroup(
-        this.groupId,
-        userEmail,
-        roleId,
-        adminSub
-      );
-      return user;
-    } catch (error) {
-      logFatalErrorInSentry(
-        new FetchRessourceException({
-          ressource: "Roles.data",
-          cause: error,
-        })
-      );
-      throw error;
-    }
+    return await this.adminRunner<IRolesDataUser>(
+      adminEmail,
+      async () =>
+        await clientRolesUpdateUserFromGroup(this.group.id, userId, roleId)
+    );
   }
 
-  /**
-   * Remove a user from this group (requires admin permissions)
-   */
-  async removeUserFromGroup(
-    adminEmail: string,
-    adminSub: string,
-    userEmail: string
-  ): Promise<boolean> {
-    try {
-      const isAdmin = await this.isUserAdmin(adminEmail, adminSub);
-      if (!isAdmin) {
-        throw new HttpUnauthorizedError(
-          "User does not have admin permissions for this group"
-        );
-      }
-
-      const user = await rolesDataClient.getUserByEmail(userEmail);
-      await rolesDataClient.removeUserFromGroup(
-        this.groupId,
-        user.id,
-        adminSub
-      );
-      return true;
-    } catch (error) {
-      logFatalErrorInSentry(
-        new FetchRessourceException({
-          ressource: "Roles.data",
-          cause: error,
-        })
-      );
-      throw error;
-    }
+  async removeUserFromGroup(adminEmail: string, userId: number): Promise<void> {
+    return await this.adminRunner<void>(
+      adminEmail,
+      async () => await clientRolesRemoveUserFromGroup(this.group.id, userId)
+    );
   }
 }

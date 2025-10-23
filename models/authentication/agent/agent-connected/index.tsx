@@ -1,7 +1,6 @@
 import type { IProConnectUserInfo } from "#clients/authentication/pro-connect/strategy";
 import { Scopes } from "#models/authentication/agent/scopes";
 import {
-  AgentNotVerifiedException,
   NeedASiretException,
   PrestataireException,
 } from "#models/authentication/authentication-exceptions";
@@ -80,17 +79,9 @@ export class AgentConnected {
    * @returns
    */
   async getHabilitationLevel() {
-    // If agent is not verified, he still belongs to a group and need activation
-    let agentIsNotVerified = false;
-    try {
-      const agentHabilitation = await this.getAgentHabilitation();
-      if (agentHabilitation) {
-        return agentHabilitation;
-      }
-    } catch (e) {
-      if (e instanceof AgentNotVerifiedException) {
-        agentIsNotVerified = true;
-      }
+    const agentHabilitation = await this.getAgentHabilitation();
+    if (agentHabilitation) {
+      return agentHabilitation;
     }
 
     // this exclude prestataires and stop connexion workflow
@@ -103,7 +94,6 @@ export class AgentConnected {
 
     return {
       ...habilitationInheritedFromOrganisation,
-      agentIsNotVerified,
     };
   }
 
@@ -120,7 +110,6 @@ export class AgentConnected {
         scopes: [...defaultAgentScopes, ...superAgentScopes.scopes],
         userType: "Super-agent connecté",
         isSuperAgent: true,
-        agentIsNotVerified: false,
       };
     }
 

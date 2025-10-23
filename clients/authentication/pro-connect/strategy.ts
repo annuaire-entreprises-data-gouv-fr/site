@@ -112,6 +112,32 @@ export const proConnectAuthenticate = async (
   return userInfo;
 };
 
+export const proConnectRefreshAccessToken = async (
+  req: IReqWithSession
+): Promise<IProConnectUserInfo> => {
+  const client = await getClient();
+
+  const params = client.callbackParams(req.nextUrl.toString());
+
+  const tokenSet = await client.callback(REDIRECT_URI, params, {
+    nonce: req.session.nonce,
+    state: req.session.state,
+  });
+
+  const accessToken = tokenSet.access_token;
+  if (!accessToken) {
+    throw new HttpForbiddenError("No access token");
+  }
+
+  const userInfo = (await client.userinfo(tokenSet)) as IProConnectUserInfo;
+  req.session.nonce = undefined;
+  req.session.state = undefined;
+  req.session.idToken = tokenSet.id_token;
+  await req.session.save();
+
+  return userInfo;
+};
+
 export const proConnectLogoutUrl = async (req: IReqWithSession) => {
   const client = await getClient();
   return client.endSessionUrl({

@@ -5,7 +5,7 @@ import type {
 } from "#clients/roles-data/interface";
 import NonRenseigne from "#components/non-renseigne";
 import { FullTable } from "#components/table/full";
-import type { IRolesDataGroup } from "#models/authentication/group/groups";
+import type { IRolesDataGroup } from "#models/authentication/group";
 import { formatSiret } from "#utils/helpers";
 import AddUserModal from "./update-modals/add-user";
 import DeleteUserButton from "./update-modals/delete-user";

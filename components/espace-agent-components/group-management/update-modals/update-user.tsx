@@ -28,7 +28,7 @@ export default function UpdateUserSelect({
       headers: {
         "Content-Type": "application/json",
       },
-      data: JSON.stringify({ userEmail: user.email, roleId }),
+      data: JSON.stringify({ userId: user.id, roleId }),
     });
 
   const handleUpdate = async (roleId: number) => {

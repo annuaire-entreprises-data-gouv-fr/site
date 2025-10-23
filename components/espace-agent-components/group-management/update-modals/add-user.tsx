@@ -6,7 +6,7 @@ import { validateEmail } from "#components/espace-agent-components/helpers/form-
 import ButtonLink from "#components-ui/button";
 import { FullScreenModal } from "#components-ui/full-screen-modal";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
-import type { IRolesDataGroup } from "#models/authentication/group/groups";
+import type { IRolesDataGroup } from "#models/authentication/group";
 import httpClient from "#utils/network";
 
 const MODAL_ID = "add-user";
