@@ -18,26 +18,38 @@
     Ajout des dirigeants démissionnaires dans l'onglet "Dirigeants".
 
     Information récupérée depuis l'api du RNE.
+- date: 22/09/2025
+  target:
+    site: true
+  body: |
+    Ajout de la fonctionnalité permettant de constituer une liste d’établissements à partir du répertoire SIRENE.
+
+    Export via [cette page](https://annuaire-entreprises.data.gouv.fr/export-sirene).
+- date: 05/09/2025
+  target:
+    agent: true
+  body: |
+    Mise à disposition de la fonctionnalité de gestion de groupe pour les agents habilités.
 - date: 06/06/2025
   target:
     site: true
   body: |
-    Ajout des bilans GES (Gaz à Effet de Serre) dans l'onglet "Labels et certificats"
+    Ajout des bilans GES (Gaz à Effet de Serre) dans l'onglet "Labels et certificats".
 - date: 15/05/2025
   target:
     site: true
   body: |
-    Refonte de la page établissement
+    Refonte de la page établissement.
 - date: 28/04/2025
   target:
     site: true
   body: |
-    Ajout des résultats des contrôles sanitaires (dispositif d'information Alim’confiance)
+    Ajout des résultats des contrôles sanitaires (dispositif d'information Alim’confiance).
 - date: 23/04/2025
   target:
     site: true
   body: |
-    Ajout de la liste des entreprises labellisées "Entreprise du Patrimoine Vivant"
+    Ajout de la liste des entreprises labellisées "Entreprise du Patrimoine Vivant".
 - date: 18/04/2025
   target:
     site: true
@@ -82,7 +94,7 @@
   target:
     site: true
   body: |
-    Désormais, les collectivités possèdent à la fois le badge "Administration" et "Collectivité territoriale" car ce sont des administrations au sens du Code des Relations entre le Public et l'Administration (CRPA)
+    Désormais, les collectivités possèdent à la fois le badge "Administration" et "Collectivité territoriale" car ce sont des administrations au sens du Code des Relations entre le Public et l'Administration (CRPA).
 - date: 30/01/2025
   target:
     site: true
@@ -134,18 +146,18 @@
   body: Ajout de la vérification du [numéro EORI](https://www.economie.gouv.fr/entreprises/numero-eori) pour tous les visiteurs.
 - date: 14/05/2024
   body: |
-    Nouvelles données dans l’espace agent public : carte de travaux publics FNTP, N° EORI, certificats Qualifelec, Qualibat et OPQIBI
+    Nouvelles données dans l’espace agent public : carte de travaux publics FNTP, N° EORI, certificats Qualifelec, Qualibat et OPQIBI.
   target:
     agent: true
 - date: 24/03/2024
   body: |
-    Nouvelle source de données et nouveau filtre : les Entreprises Sociales Inclusives
+    Nouvelle source de données et nouveau filtre : les Entreprises Sociales Inclusives.
   target:
     api: true
     site: true
 - date: 24/02/2024
   body: |
-    Ajout du filtre géographique EPCI
+    Ajout du filtre géographique EPCI.
   target:
     api: true
     site: true
@@ -156,13 +168,13 @@
     Ajoute les dirigeants et les informations de contact des services publics (administration, collectivités etc.).
 - date: 10/08/2023
   body: |
-    Possibilité de filtrer par chiffre d’affaires et résultat net
+    Possibilité de filtrer par chiffre d’affaires et résultat net.
   target:
     api: true
     site: true
 - date: 03/08/2023
   body: |
-    Possibilité de filtrer par région
+    Possibilité de filtrer par région.
   target:
     api: true
     site: true
@@ -171,18 +183,18 @@
     Publication des données financières des associations dans l'onglet "Données financières"
 - date: 07/06/2023
   body: |
-    Publication des données financières des sociétés dans l'onglet "Données financières"
+    Publication des données financières des sociétés dans l'onglet "Données financières".
 - date: 26/04/2023
   body: |
-    Ajout de filtres sur la taille d’entreprise et le nombre de salariés
+    Ajout de filtres sur la taille d’entreprise et le nombre de salariés.
 
-    Ajout du [filtre catégorie d'entreprise](https://sirene.fr/static-resources/htm/v_sommaire.htm#6) et du filtre [effectif salarié](https://sirene.fr/static-resources/htm/v_sommaire.htm#27)
+    Ajout du [filtre catégorie d'entreprise](https://sirene.fr/static-resources/htm/v_sommaire.htm#6) et du filtre [effectif salarié](https://sirene.fr/static-resources/htm/v_sommaire.htm#27).
   target:
     api: true
     site: true
 - date: 25/04/2023
   body: |
-    Ajout de la page [équipe](/equipe)
+    Ajout de la page [équipe](/equipe).
 - date: 17/04/2023
   body: |
     Ajout des représentations équilibrées d’une entreprise - Egapro dans le moteur de recherche et la page Labels et certificats
@@ -230,61 +242,61 @@
     site: true
 - date: 02/01/2023
   body: |
-    Ajout de l’onglet Établissements Scolaires avec la liste des établissements UAI
+    Ajout de l’onglet Établissements Scolaires avec la liste des établissements UAI.
 - date: 20/12/2022
   body: |
-    Ajout de l'onglet labels & certificats avec les entreprises RGE, ESS, et Spectacle Vivant
+    Ajout de l'onglet labels & certificats avec les entreprises RGE, ESS, et Spectacle Vivant.
 - date: 08/12/2022
   body: |
-    Ajout des dépôts de comptes des associations, à retrouver sur l'onglet "Annonces"
+    Ajout des dépôts de comptes des associations, à retrouver sur l'onglet "Annonces".
 - date: 02/12/2022
   body: |
-    Gestion des collectivités territoriales. Ajout des codes géographiques des communes, départements et régions, ainsi que des élus
+    Gestion des collectivités territoriales. Ajout des codes géographiques des communes, départements et régions, ainsi que des élus.
   target:
     api: true
     site: true
 - date: 25/11/2022
   body: |
-    'Création de badges distinguants les différents types de personnes morales : Administration publique, Entreprise individuelle, Association'
+    Création de badges distinguants les différents types de personnes morales : Administration publique, Entreprise individuelle, Association.
 - date: 17/11/2022
   body: |
-    Ajout des dirigeant(e)s d’entreprise dans la recherche
+    Ajout des dirigeant(e)s d’entreprise dans la recherche.
   target:
     api: true
     site: true
 - date: 12/11/2022
   body: |
-    Ajout d’un filtre géographique avec auto complétion
+    Ajout d’un filtre géographique avec auto complétion.
 - date: 19/09/2022
   body: |
-    Refonte de la page [Questions fréquentes](/faq)
+    Refonte de la page [Questions fréquentes](/faq).
 - date: 02/09/2022
   body: |
-    Mise en place d’une vérification dynamique du numéro de TVA par le [VIES](/administration/vies)
+    Mise en place d’une vérification dynamique du numéro de TVA par le [VIES](/administration/vies).
 - date: 29/08/2022
   body: |
-    Nouvelle mise en page de la liste des établissements
+    Nouvelle mise en page de la liste des établissements.
 - date: 17/08/2022
   body: |
-    Ajout des mentions "ancien siège social" pour les établissements concernés
+    Ajout des mentions "ancien siège social" pour les établissements concernés.
 - date: 17/08/2022
   body: |
-    Refonte de la page "Sources de données & statut des API"
+    Refonte de la page "Sources de données & statut des API".
 - date: 02/08/2022
   body: |
-    Utilisation systématique des majuscules pour les dénominations et enseigne
+    Utilisation systématique des majuscules pour les dénominations et enseigne.
 - date: 29/06/2022
   body: |
-    Ajout de l’état administratif "en sommeil"
+    Ajout de l’état administratif "en sommeil".
 - date: 17/06/2022
   body: |
-    Ajout du filtre par département dans la recherche avancée
+    Ajout du filtre par département dans la recherche avancée.
   target:
     api: true
     site: true
 - date: 09/06/2022
   body: |
-    Ajout de raccourcis de navigation dans la page "Informations Générales"
+    Ajout de raccourcis de navigation dans la page "Informations Générales".
 - date: 09/06/2022
   body: |
     Mise en place de filtres de recherche avancés :
@@ -295,4 +307,4 @@
     site: true
 - date: 08/06/2022
   body: |
-    Création d’une page "Nouveautés"
+    Création d’une page "Nouveautés".
