@@ -123,7 +123,7 @@ export default function AccesByAPIPage() {
       <p>
         Afin d’y voir un peu plus clair, voici une comparaison entre les
         principales API citées sur cette page (Sirene, RNE, API Recherche
-        entreprise, API Entreprise) :
+        d'Entreprises, API Entreprise) :
       </p>
       <div className="fr-table">
         <table>
@@ -137,7 +137,7 @@ export default function AccesByAPIPage() {
           </thead>
           <tbody>
             <tr>
-              <td>API Recherche d’entreprises</td> <td>DINUM</td>{" "}
+              <td>API Recherche d’Entreprises</td> <td>DINUM</td>{" "}
               <td>100% ouverte</td> <td>400 appels/min/IP</td>
               <td>RNE, Sirene, IDCC, Ratios financiers etc.</td>
             </tr>
