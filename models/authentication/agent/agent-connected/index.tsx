@@ -4,7 +4,7 @@ import {
   NeedASiretException,
   PrestataireException,
 } from "#models/authentication/authentication-exceptions";
-import { AgentsGroup, getAgentGroups } from "#models/authentication/group";
+import { getAgentGroups } from "#models/authentication/group";
 import { isSiret, verifySiret } from "#utils/helpers";
 import { AgentOrganisation } from "../organisation";
 import { defaultAgentScopes } from "../scopes/constants";
