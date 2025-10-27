@@ -60,7 +60,7 @@ export const exportCsvSchema = z.object({
     .optional(),
   siretsAndSirens: z
     .array(sirenSiretValidator)
-    .max(100, "Le fichier ne doit pas contenir plus de 500 SIREN et SIRET")
+    .max(500, "Le fichier ne doit pas contenir plus de 500 SIREN et SIRET")
     .optional(),
   ess: z
     .object({
