@@ -10,16 +10,17 @@ type IVIESResponse = {
 /**
  * Call VIES to validate a French TVA number
  * @param tva
+ * @param useCache : whether to use the cache or not
  * @returns TVA number if valid else null
  */
 export const clientTVA = async (
   tva: TVANumber,
-  noCache = false
+  useCache = true
 ): Promise<string | null> => {
   let url = routes.proxy.tva(tva);
 
-  if (noCache) {
-    url += "?noCache=true";
+  if (!useCache) {
+    url += "?useCache=false";
   }
 
   const data = await clientAPIProxy<IVIESResponse>(url, {
