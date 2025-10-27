@@ -1,7 +1,9 @@
 "use client";
 
+import { clsx } from "clsx";
 import type React from "react";
 import type { MouseEventHandler, PropsWithChildren } from "react";
+import styles from "./styles.module.css";
 
 type IProps = {
   role?: string;
@@ -13,6 +15,7 @@ type IProps = {
   target?: "_blank";
   ariaLabel?: string;
   nofollow?: boolean;
+  hideExternalIcon?: boolean;
   onClick?: MouseEventHandler;
 };
 
@@ -27,40 +30,42 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   ariaLabel,
   target = "",
   nofollow = false,
+  hideExternalIcon = false,
   onClick = () => {},
-}) => (
-  <>
-    {to ? (
-      <a
-        aria-label={ariaLabel}
-        className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
-          small ? " fr-btn--sm " : ""
-        }`}
-        href={(to || "").indexOf("@") > -1 ? `mailto:${to}` : to}
-        rel={
-          (target === "_blank" ? "noopener noreferrer" : "") +
-          (nofollow ? "nofollow" : "")
-        }
-        role={role}
-        target={target}
-      >
-        {children}
-      </a>
-    ) : (
-      <button
-        aria-label={ariaLabel}
-        className={`fr-btn ${alt ? " fr-btn--secondary " : ""} ${
-          small ? " fr-btn--sm " : ""
-        }`}
-        disabled={disabled}
-        onClick={onClick}
-        role={role}
-        type={type || "submit"}
-      >
-        {children}
-      </button>
-    )}
-  </>
-);
+}) => {
+  const className = clsx("fr-btn", {
+    "fr-btn--secondary": alt,
+    "fr-btn--sm": small,
+  });
+
+  return to ? (
+    <a
+      aria-label={ariaLabel}
+      className={clsx(className, {
+        [styles.hideExternalIcon]: hideExternalIcon,
+      })}
+      href={(to || "").indexOf("@") > -1 ? `mailto:${to}` : to}
+      rel={
+        (target === "_blank" ? "noopener noreferrer" : "") +
+        (nofollow ? "nofollow" : "")
+      }
+      role={role}
+      target={target}
+    >
+      {children}
+    </a>
+  ) : (
+    <button
+      aria-label={ariaLabel}
+      className={className}
+      disabled={disabled}
+      onClick={onClick}
+      role={role}
+      type={type || "submit"}
+    >
+      {children}
+    </button>
+  );
+};
 
 export default ButtonLink;

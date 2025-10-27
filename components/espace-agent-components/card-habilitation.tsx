@@ -20,23 +20,29 @@ export const CardHabilitation = () => {
         Votre mission concerne la fraude, les marchés publics, les subventions
         aux associations ou les aides publiques ?
       </p>
-      <div className={styles.cardHabilitationButtons}>
-        <ButtonLink
-          alt
-          ariaLabel="Se renseigner sur l’habilitation"
-          target="_blank"
-          to={constants.links.documentation.habilitation}
-        >
-          <Icon slug="book2Fill">Se renseigner sur l’habilitation</Icon>
-        </ButtonLink>
-        <ButtonLink
-          ariaLabel="Demander une habilitation"
-          target="_blank"
-          to={`${process.env.DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`}
-        >
-          <Icon slug="editBoxFill">Demander une habilitation</Icon>
-        </ButtonLink>
-      </div>
+      <ul className="fr-btns-group">
+        <li>
+          <ButtonLink
+            alt
+            ariaLabel="Se renseigner sur l’habilitation"
+            hideExternalIcon
+            target="_blank"
+            to={constants.links.documentation.habilitation}
+          >
+            <Icon slug="book2Fill">Se renseigner sur l’habilitation</Icon>
+          </ButtonLink>
+        </li>
+        <li>
+          <ButtonLink
+            ariaLabel="Demander une habilitation"
+            hideExternalIcon
+            target="_blank"
+            to={`${process.env.DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`}
+          >
+            <Icon slug="editBoxFill">Demander une habilitation</Icon>
+          </ButtonLink>
+        </li>
+      </ul>
     </article>
   );
 };

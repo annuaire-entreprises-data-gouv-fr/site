@@ -67,7 +67,7 @@ export const HabilitationsTable = async () => {
     }) as [ApplicationRights, React.ReactNode][];
 
   return (
-    <div className="fr-table">
+    <div className="fr-table fr-table--no-scroll">
       <div className="fr-table__wrapper">
         <div className="fr-table__container">
           <div className="fr-table__content">

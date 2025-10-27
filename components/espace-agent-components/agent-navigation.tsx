@@ -41,6 +41,7 @@ export default async function AgentNavigation() {
               <ButtonLink
                 alt
                 ariaLabel="Nouveautés"
+                hideExternalIcon
                 target="_blank"
                 to="/historique-des-modifications"
               >
@@ -51,6 +52,7 @@ export default async function AgentNavigation() {
               <ButtonLink
                 alt
                 ariaLabel="Salon Tchap"
+                hideExternalIcon
                 target="_blank"
                 to={constants.links.tchap}
               >
@@ -61,6 +63,7 @@ export default async function AgentNavigation() {
               <ButtonLink
                 alt
                 ariaLabel="Documentation"
+                hideExternalIcon
                 target="_blank"
                 to={constants.links.documentation.home}
               >
