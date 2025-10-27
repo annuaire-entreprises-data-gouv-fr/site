@@ -1,6 +1,5 @@
 import { type SentryBuildOptions, withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
-import getContentSecurityPolicy from "#utils/headers/content-security-policy";
 import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
 import redirects from "./redirects.json" with { type: "json" };
 
@@ -51,10 +50,7 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: [
-          {
-            key: "Content-Security-Policy",
-            value: getContentSecurityPolicy(),
-          },
+          // CSP is dynamically set in middleware.ts using a nonce
           {
             key: "Access-Control-Allow-Origin",
             value: getBaseUrl(),

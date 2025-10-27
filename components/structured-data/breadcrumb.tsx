@@ -1,13 +1,15 @@
-import type React from "react";
 import type { IUniteLegale } from "#models/core/types";
+import { getNonce } from "#utils/headers/nonce";
 import {
   getDepartementFromCodePostal,
   getUrlFromDepartement,
   libelleFromDepartement,
 } from "#utils/helpers/formatting/labels";
 
-const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
+const StructuredDataBreadcrumb = async ({
   uniteLegale,
+}: {
+  uniteLegale: IUniteLegale;
 }) => {
   try {
     const naf = uniteLegale.activitePrincipale;
@@ -18,6 +20,7 @@ const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
       throw new Error();
     }
 
+    const nonce = await getNonce();
     return (
       <script
         dangerouslySetInnerHTML={{
@@ -44,6 +47,7 @@ const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
           }]
         }`,
         }}
+        nonce={nonce}
         type="application/ld+json"
       />
     );

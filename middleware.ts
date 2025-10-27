@@ -3,6 +3,8 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import type { ISession } from "#models/authentication/user/session";
 import { Exception } from "#models/exceptions";
+import getContentSecurityPolicy from "#utils/headers/content-security-policy";
+import { generateNonce } from "#utils/headers/nonce";
 import {
   extractSirenOrSiretFromRechercherUrl,
   extractSirenOrSiretSlugFromUrl,
@@ -89,12 +91,31 @@ export async function middleware(request: NextRequest) {
     requestHeaders.set("x-redirected", isRedirected);
   }
 
+  /**
+   * Generate CSP & nonce for this request
+   *
+   * How It Works (Request Flow)
+   * 1. User requests page
+   * 2. Middleware runs (set headers x-nonce and CSP script-src 'nonce-Xy9Pqr...')
+   * 3. Server Component (app/layout.tsx) reads nonce from headers
+   * 4. HTML renders <script nonce="Xy9Pqr...">matomo code</script>
+   * 5. If browser sees XSS without nonce → ❌ Blocked
+   */
+  const nonce = generateNonce();
+  requestHeaders.set("x-nonce", nonce);
+
   const response = NextResponse.next({
     request: {
       // Apply new request headers
       headers: requestHeaders,
     },
   });
+
+  // Set CSP header with nonce
+  response.headers.set(
+    "Content-Security-Policy",
+    getContentSecurityPolicy(nonce)
+  );
   const session = await getIronSession<ISession>(
     request,
     response,

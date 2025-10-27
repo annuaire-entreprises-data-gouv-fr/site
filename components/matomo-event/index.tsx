@@ -1,17 +1,24 @@
+import { getNonce } from "#utils/headers/nonce";
+
 /**
  * Log an event in matomo but rendered from server side
  * @param param0
  * @returns
  */
-const MatomoEvent: React.FC<{
+const MatomoEvent = async ({
+  category,
+  action,
+  name,
+}: {
   category: string;
   action: string;
   name: string;
-}> = ({ category, action, name }) => (
-  <div
-    dangerouslySetInnerHTML={{
-      __html: `
-        <script>
+}) => {
+  const nonce = await getNonce();
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
           var _paq = window._paq || [];
           _paq.push([
               'trackEvent',
@@ -19,9 +26,10 @@ const MatomoEvent: React.FC<{
               '${action}',
               '${name}',
           ]);
-        </script>
         `,
-    }}
-  />
-);
+      }}
+      nonce={nonce}
+    />
+  );
+};
 export default MatomoEvent;

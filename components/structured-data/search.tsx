@@ -1,9 +1,11 @@
-import type React from "react";
+import { getNonce } from "#utils/headers/nonce";
 
-const StructuredDataSearchAction: React.FC<{}> = () => (
-  <script
-    dangerouslySetInnerHTML={{
-      __html: `{
+const StructuredDataSearchAction = async () => {
+  const nonce = await getNonce();
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `{
         "@context": "https://schema.org",
         "@type": "WebSite",
         "url": "https://annuaire-entreprises.data.gouv.fr",
@@ -24,9 +26,11 @@ const StructuredDataSearchAction: React.FC<{}> = () => (
           "query-input": "required name=search_term_string"
         }]
       }`,
-    }}
-    type="application/ld+json"
-  />
-);
+      }}
+      nonce={nonce}
+      type="application/ld+json"
+    />
+  );
+};
 
 export default StructuredDataSearchAction;

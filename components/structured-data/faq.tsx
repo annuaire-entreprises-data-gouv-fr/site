@@ -1,4 +1,4 @@
-import type React from "react";
+import { getNonce } from "#utils/headers/nonce";
 
 const generateFAQuestion = (question: string, answer: string): String => `{
     "@type": "Question",
@@ -9,10 +9,12 @@ const generateFAQuestion = (question: string, answer: string): String => `{
     }
   }`;
 
-const StructuredDataFAQ: React.FC<{ data: string[][] }> = ({ data }) => (
-  <script
-    dangerouslySetInnerHTML={{
-      __html: `{
+const StructuredDataFAQ = async ({ data }: { data: string[][] }) => {
+  const nonce = await getNonce();
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `{
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [${data
@@ -20,9 +22,11 @@ const StructuredDataFAQ: React.FC<{ data: string[][] }> = ({ data }) => (
           .join(",")}]
       }
       `,
-    }}
-    type="application/ld+json"
-  />
-);
+      }}
+      nonce={nonce}
+      type="application/ld+json"
+    />
+  );
+};
 
 export default StructuredDataFAQ;

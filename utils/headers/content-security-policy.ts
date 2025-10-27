@@ -1,13 +1,7 @@
-const cspDirectives = {
+const staticCspDirectives = {
   "default-src": ["'self'"],
-  "script-src": [
-    "'self'",
-    "'unsafe-inline'",
-    "'unsafe-eval'",
-    "https://stats.data.gouv.fr/",
-  ],
   "worker-src": ["'self'", "blob:"],
-  "style-src": ["'self'", "'unsafe-inline'"],
+  "style-src": ["'self'", "'unsafe-inline'"], // Keep for inline styles, consider removing later
   "img-src": ["'self'", "data:"],
   "frame-src": [
     "'self'",
@@ -31,9 +25,23 @@ const cspDirectives = {
     "https://tabular-api.data.gouv.fr",
     "https://koumoul.com",
   ],
+  "object-src": ["'none'"],
+  "base-uri": ["'self'"],
 };
 
-export default function getContentSecurityPolicy() {
+export default function getContentSecurityPolicy(nonce: string) {
+  // Build script-src with nonce
+  const scriptSrc = [
+    "'self'",
+    `'nonce-${nonce}'`,
+    "https://stats.data.gouv.fr/",
+  ];
+
+  const cspDirectives = {
+    ...staticCspDirectives,
+    "script-src": scriptSrc,
+  };
+
   return Object.entries(cspDirectives)
     .map(([key, values]) => `${key} ${values.join(" ")}`)
     .join("; ");
