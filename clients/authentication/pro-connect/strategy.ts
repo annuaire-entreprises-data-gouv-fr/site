@@ -3,6 +3,7 @@
 
 import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
+import getSession from "#utils/server-side-helper/app/get-session";
 import type { IReqWithSession } from "#utils/session/with-session";
 
 let _client = undefined as BaseClient | undefined;
@@ -99,6 +100,7 @@ export const proConnectAuthenticate = async (
   });
 
   const accessToken = tokenSet.access_token;
+
   if (!accessToken) {
     throw new HttpForbiddenError("No access token");
   }
@@ -106,33 +108,14 @@ export const proConnectAuthenticate = async (
   const userInfo = (await client.userinfo(tokenSet)) as IProConnectUserInfo;
   req.session.nonce = undefined;
   req.session.state = undefined;
-  req.session.idToken = tokenSet.id_token;
-  await req.session.save();
 
-  return userInfo;
-};
+  req.session.proConnectTokenSet = {
+    idToken: tokenSet.id_token,
+    accessToken: tokenSet.access_token,
+    accessTokenExpiresAt: (tokenSet.expires_at || 0) * 1000,
+    refreshToken: tokenSet.refresh_token,
+  };
 
-export const proConnectRefreshAccessToken = async (
-  req: IReqWithSession
-): Promise<IProConnectUserInfo> => {
-  const client = await getClient();
-
-  const params = client.callbackParams(req.nextUrl.toString());
-
-  const tokenSet = await client.callback(REDIRECT_URI, params, {
-    nonce: req.session.nonce,
-    state: req.session.state,
-  });
-
-  const accessToken = tokenSet.access_token;
-  if (!accessToken) {
-    throw new HttpForbiddenError("No access token");
-  }
-
-  const userInfo = (await client.userinfo(tokenSet)) as IProConnectUserInfo;
-  req.session.nonce = undefined;
-  req.session.state = undefined;
-  req.session.idToken = tokenSet.id_token;
   await req.session.save();
 
   return userInfo;
@@ -141,7 +124,43 @@ export const proConnectRefreshAccessToken = async (
 export const proConnectLogoutUrl = async (req: IReqWithSession) => {
   const client = await getClient();
   return client.endSessionUrl({
-    id_token_hint: req.session.idToken,
+    id_token_hint: req.session?.proConnectTokenSet?.idToken,
     post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI,
   });
+};
+
+export const proConnectGetOrRefreshAccessToken = async (): Promise<string> => {
+  const session = await getSession();
+
+  if (
+    !(
+      session?.proConnectTokenSet?.accessToken &&
+      session?.proConnectTokenSet?.accessTokenExpiresAt &&
+      session?.proConnectTokenSet?.refreshToken
+    )
+  ) {
+    throw new HttpForbiddenError(
+      "Access token and refresh token are needed to refresh token"
+    );
+  }
+
+  const accessTokenTimeToLive =
+    session.proConnectTokenSet.accessTokenExpiresAt - Date.now();
+  if (accessTokenTimeToLive > 5000) {
+    return session.proConnectTokenSet.accessToken;
+  }
+
+  const client = await getClient();
+  const tokenSet = await client.refresh(
+    session?.proConnectTokenSet?.refreshToken
+  );
+
+  session.proConnectTokenSet = {
+    idToken: tokenSet.id_token,
+    accessToken: tokenSet.access_token,
+    accessTokenExpiresAt: tokenSet.expires_at,
+    refreshToken: tokenSet.refreshToken as string,
+  };
+
+  return tokenSet.accessToken as string;
 };

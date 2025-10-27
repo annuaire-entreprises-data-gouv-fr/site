@@ -4,10 +4,15 @@ export type ISession = {
   lastVisitTimestamp?: number;
   user: IAgentInfo | null;
 
-  // agent connect
+  // pro connect
   state?: string;
   nonce?: string;
-  idToken?: string;
+  proConnectTokenSet?: {
+    idToken?: string;
+    accessToken?: string;
+    accessTokenExpiresAt?: number;
+    refreshToken?: string;
+  };
   // connexion
   pathFrom?: string;
 

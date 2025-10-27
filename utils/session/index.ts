@@ -5,9 +5,11 @@ import { isAbsoluteUrl } from "#utils/server-side-helper/app/is-absolute-url";
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
-  cookieName: "annuaire-entreprises-user-session-4",
+  cookieName: "annuaire-entreprises-user-session-5",
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
+    httpOnly: true, // ✅ Critical for XSS protection
+    sameSite: "lax", // ✅ CSRF protection
   },
   ttl: 43_200, // 12h
 };

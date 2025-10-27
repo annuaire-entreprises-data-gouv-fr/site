@@ -1,25 +1,22 @@
-import { HttpUnauthorizedError } from "#clients/exceptions";
+import { HttpServerError } from "#clients/exceptions";
 import httpClient, { type IDefaultRequestConfig } from "#utils/network";
-import getSession from "#utils/server-side-helper/app/get-session";
-import { proConnectRefreshAccessToken } from "./strategy";
+import { proConnectGetOrRefreshAccessToken } from "./strategy";
 
 export async function rolesDataResourceServerClient<T>(
   config: IDefaultRequestConfig
 ): Promise<T> {
-  const session = await getSession();
-  const refreshToken = session.refreshToken;
-  if (!refreshToken) {
-    throw new HttpUnauthorizedError(
-      "Refresh token is required for resource server"
-    );
+  try {
+    const accessToken = await proConnectGetOrRefreshAccessToken();
+
+    return await httpClient<T>({
+      ...config,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  } catch (e) {
+    // if proconnect refresh fails ->
+    // if roles fails ->
+    throw new HttpServerError("hey");
   }
-
-  const newAccesToken = await proConnectRefreshAccessToken(refreshToken);
-
-  return await httpClient<T>({
-    ...config,
-    headers: {
-      Authorization: `Bearer ${newAccesToken}`,
-    },
-  });
 }
