@@ -35,7 +35,14 @@ export const HabilitationsTable = async () => {
           habilitation = (
             <div className="fr-grid-row">
               {groupsGrantingRight.map((group) => (
-                <Tag color="success" key={group.id}>
+                <Tag
+                  color="success"
+                  key={group.id}
+                  link={{
+                    href: `/compte/mes-groupes#group-${group.id}`,
+                    "aria-label": `Voir le groupe ${group.name}`,
+                  }}
+                >
                   <Icon slug="groupFill">{group.name}</Icon>
                 </Tag>
               ))}
