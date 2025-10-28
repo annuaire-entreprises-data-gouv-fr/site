@@ -9,7 +9,6 @@ import {
   type IUniteLegale,
 } from "#models/core/types";
 import {
-  agregateTripleFields,
   capitalize,
   formatNameFull,
   isEntrepreneurIndividuelFromNatureJuridique,
@@ -27,7 +26,6 @@ import {
   statuDiffusionFromStatutDiffusionInsee,
 } from "../../utils/helpers/insee-variables";
 import { inseeClientGet } from ".";
-import { formatDenominationUsuelle } from "./helpers";
 import {
   clientAllEtablissementsInsee,
   clientEtablissementInsee,
@@ -67,16 +65,12 @@ type IPeriodeUniteLegale = {
   caractereEmployeurUniteLegale: string;
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
-  denominationUsuelle1UniteLegale: string;
-  denominationUsuelle2UniteLegale: string;
-  denominationUsuelle3UniteLegale: string;
 };
 
 type TmpUniteLegale = {
   uniteLegale: IUniteLegale;
   tmpUniteLegale: {
     denomination: string;
-    denominationUsuelle: string;
     sigle: string;
   };
 };
@@ -105,11 +99,8 @@ export const clientUniteLegaleInsee = async (
 
   const siege = realSiege || uniteLegale.siege;
 
-  const denominationUsuelle =
-    siege?.denomination || tmpUniteLegale.denominationUsuelle || "";
-
   const nomComplet = `${tmpUniteLegale.denomination}${
-    denominationUsuelle ? ` (${denominationUsuelle})` : ""
+    siege?.denomination ? ` (${siege?.denomination})` : ""
   }${tmpUniteLegale.sigle ? ` (${tmpUniteLegale.sigle})` : ""}`;
 
   const etablissementsList = allEtablissements?.list || [siege];
@@ -174,9 +165,6 @@ const mapToDomainObject = (
     caractereEmployeurUniteLegale,
     nomUniteLegale,
     nomUsageUniteLegale,
-    denominationUsuelle1UniteLegale,
-    denominationUsuelle2UniteLegale,
-    denominationUsuelle3UniteLegale,
   } = periodesUniteLegale[0];
 
   const estEntrepreneurIndividuel = isEntrepreneurIndividuelFromNatureJuridique(
@@ -207,19 +195,6 @@ const mapToDomainObject = (
 
   siege.complements.estEntrepreneurIndividuel = estEntrepreneurIndividuel;
   siege.complements.estPersonneMorale = estPersonneMorale;
-
-  /**
-   *   either siege nom commercial or pre 2008 unite legale nom commercial
-   *  https://www.sirene.fr/sirene/public/variable/denominationUsuelleEtablissement
-   */
-  const denominationUsuelleUniteLegale =
-    siege.denomination ||
-    agregateTripleFields(
-      formatDenominationUsuelle(denominationUsuelle1UniteLegale),
-      formatDenominationUsuelle(denominationUsuelle2UniteLegale),
-      formatDenominationUsuelle(denominationUsuelle3UniteLegale)
-    ) ||
-    "";
 
   // EI names and firstName
   // remove trailing whitespace in case name or firstname is missing
@@ -289,7 +264,6 @@ const mapToDomainObject = (
       },
     },
     tmpUniteLegale: {
-      denominationUsuelle: denominationUsuelleUniteLegale,
       denomination: denominationUniteLegale || names || "Nom inconnu",
       sigle: sigleUniteLegale,
     },
