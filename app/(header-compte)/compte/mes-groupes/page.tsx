@@ -5,7 +5,7 @@ import { GroupManagement } from "#components/espace-agent-components/group-manag
 import { getAgentGroups } from "#models/authentication/group";
 import { rolesMetadataStore } from "#models/authentication/group/roles";
 import { pluralize } from "#utils/helpers";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 
 export const metadata: Metadata = {
   title: "Vos groupes au sein de l’Annuaire des Entreprises",

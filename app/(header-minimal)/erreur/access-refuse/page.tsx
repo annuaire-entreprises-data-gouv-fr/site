@@ -1,11 +1,13 @@
-import type { GetServerSideProps } from "next";
-import type { NextPageWithLayout } from "pages/_app";
-import Meta from "#components/meta/meta-client";
+import type { Metadata } from "next";
 import ButtonLink from "#components-ui/button";
 
-const Forbidden: NextPageWithLayout = () => (
+export const metadata: Metadata = {
+  title: "L’accès au site vous est refusé",
+  robots: "noindex, nofollow",
+};
+
+const ForbiddenPage = () => (
   <>
-    <Meta noIndex={true} title="Accès refusé" />
     <h1>Accès refusé 🚫</h1>
     <p>
       Notre algorithme de détection pense que vous êtes un robot. <br />
@@ -28,9 +30,4 @@ const Forbidden: NextPageWithLayout = () => (
   </>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  context.res.statusCode = 403;
-  return { props: {} };
-};
-
-export default Forbidden;
+export default ForbiddenPage;

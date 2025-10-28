@@ -1,4 +1,4 @@
-import { getNonce } from "#utils/server-side-helper/app/headers/nonce";
+import { getNonce } from "#utils/server-side-helper/headers/nonce";
 
 /**
  * Log an event in matomo but rendered from server side

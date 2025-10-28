@@ -13,7 +13,7 @@ import SearchFilterParams, {
   hasSearchParam,
 } from "#models/search/search-filter-params";
 import { parseIntWithDefaultValue } from "#utils/helpers";
-import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
+import type { AppRouterProps } from "#utils/server-side-helper/extract-params";
 
 export const metadata: Metadata = {
   title: "Rechercher une entreprise, une administration ou une association",

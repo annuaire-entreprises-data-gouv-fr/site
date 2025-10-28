@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { BrowserIsOutdatedBanner } from "#components/banner/browser-is-outdated";
 import { MatomoInit } from "#components/matomo-event/init";
-import { meta } from "#components/meta/meta-server";
-import getSession from "#utils/server-side-helper/app/get-session";
+import { meta } from "#components/meta/meta";
+import getSession from "#utils/server-side-helper/get-session";
 import "../style/dsfr.min.css";
 import "../style/globals.css";
 import { PrefetchImgs } from "./_component/prefetch-dsfr-imgs";

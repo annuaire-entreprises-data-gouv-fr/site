@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { AgentConnectionFailedException } from "#models/authentication/authentication-exceptions";
 import logErrorInSentry from "#utils/sentry";
-import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 import { cleanAgentSession, cleanPathFrom, getPathFrom } from "#utils/session";
 import withSession from "#utils/session/with-session";
 

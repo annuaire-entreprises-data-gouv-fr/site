@@ -12,8 +12,8 @@ import {
 } from "#models/protected-siren/request-siren-protection";
 import { hasSirenFormat } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
-import extractParamsAppRouter from "#utils/server-side-helper/app/extract-params";
-import getSession from "#utils/server-side-helper/app/get-session";
+import extractParamsAppRouter from "#utils/server-side-helper/extract-params";
+import getSession from "#utils/server-side-helper/get-session";
 import { getHidePersonalDataRequestFCSession } from "#utils/session";
 
 export type IFormState = {

@@ -1,12 +1,14 @@
-import type { GetServerSideProps } from "next";
-import type { NextPageWithLayout } from "pages/_app";
-import Meta from "#components/meta/meta-client";
+import type { Metadata } from "next";
 import ButtonLink from "#components-ui/button";
 import constants from "#models/constants";
 
-const TooManyRequest: NextPageWithLayout = () => (
+export const metadata: Metadata = {
+  title: "Trop de requête de votre part",
+  robots: "noindex, nofollow",
+};
+
+const TooManyRequestPage = () => (
   <>
-    <Meta noIndex={true} title="Trop de requête de votre part" />
     <h1>Nous avons reçu trop de demandes de votre part 📈</h1>
     <p>
       Notre site a reçu trop de demandes de la part de votre adresse IP en un
@@ -47,9 +49,4 @@ const TooManyRequest: NextPageWithLayout = () => (
   </>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  context.res.statusCode = 429;
-  return { props: {} };
-};
-
-export default TooManyRequest;
+export default TooManyRequestPage;

@@ -4,7 +4,7 @@ import {
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
-import { getNonce } from "#utils/server-side-helper/app/headers/nonce";
+import { getNonce } from "#utils/server-side-helper/headers/nonce";
 
 const TRACKER_BASE_URL = "https://stats.data.gouv.fr";
 export async function MatomoInit({ session }: { session: ISession | null }) {

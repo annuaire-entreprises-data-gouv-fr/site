@@ -9,7 +9,7 @@ import { getAllLandingPages, getLandingPage } from "#models/landing-pages";
 import type {
   AppRouterProps,
   IParams,
-} from "#utils/server-side-helper/app/extract-params";
+} from "#utils/server-side-helper/extract-params";
 import styles from "./style.module.css";
 
 export default function LandingPage(props: AppRouterProps) {

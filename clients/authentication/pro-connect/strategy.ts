@@ -3,7 +3,7 @@
 
 import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 import type { IReqWithSession } from "#utils/session/with-session";
 
 let _client = undefined as BaseClient | undefined;

@@ -11,7 +11,7 @@ import {
 } from "#models/authentication/user/rights";
 import constants from "#models/constants";
 import { changelogData } from "#models/historique-modifications";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 
 const lastChangelog = changelogData[0];
 

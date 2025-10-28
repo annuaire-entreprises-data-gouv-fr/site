@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { logConversionEvent } from "#utils/matomo";
-import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 
 type IProps = {
   shouldRedirectToReferer?: boolean;

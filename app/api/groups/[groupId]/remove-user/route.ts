@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { HttpNotFound } from "#clients/exceptions";
 import { getAgentGroups } from "#models/authentication/group";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 import { removeUserSchema } from "../../input-validation";
 import { withAgentAuth, withErrorHandling } from "../../route-wrappers";
 
@@ -12,7 +12,7 @@ async function removeUserHandler(
   const groupId = (await params).groupId;
   const agentGroups = await getAgentGroups();
   const group = agentGroups.find(
-    (group) => group.group.id.toString() === groupId
+    (group) => group.data.id.toString() === groupId
   );
 
   if (!group) {

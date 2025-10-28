@@ -1,8 +1,7 @@
-import type { GetServerSideProps } from "next";
-import type { NextPageWithLayout } from "pages/_app";
+import type { Metadata } from "next";
+import { use } from "react";
 import { INPI, INSEE } from "#components/administrations";
 import MatomoEvent from "#components/matomo-event";
-import Meta from "#components/meta/meta-client";
 import {
   formatIntFr,
   formatSiret,
@@ -10,14 +9,27 @@ import {
   isSiren,
   isSiret,
 } from "#utils/helpers";
+import type { AppRouterProps } from "#utils/server-side-helper/extract-params";
 
-type SirenOrSiretNotFoundPageProps = {
-  slug?: string;
+export const metadata: Metadata = {
+  title: "Numéro d’identification introuvable",
+  robots: "noindex, nofollow",
 };
 
-const SirenOrSiretNotFoundPage: NextPageWithLayout<
-  SirenOrSiretNotFoundPageProps
-> = ({ slug = "" }) => {
+const SirenOrSiretNotFoundPage = (props: AppRouterProps) => {
+  const params = use(props.params);
+
+  const slug = params.slug;
+
+  if (!isSiren(slug) && !isSiret(slug)) {
+    return {
+      redirect: {
+        destination: "/not-found",
+        permanent: false,
+      },
+    };
+  }
+
   const slugIsSiren = isSiren(slug);
   const type = slugIsSiren ? "SIREN" : "SIRET";
   const formatted = slugIsSiren ? formatIntFr(slug) : formatSiret(slug);
@@ -25,7 +37,6 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
   if (isLuhnValid(slug)) {
     return (
       <>
-        <Meta noIndex={true} title="Numéro d’identification introuvable" />
         <MatomoEvent action="sirenOrSiretNotFound" category="error" name="" />
         <h1>
           Le numéro {type} “{formatted}” est introuvable
@@ -62,7 +73,6 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
   }
   return (
     <>
-      <Meta noIndex={true} title="Numéro d’identification invalide" />
       <MatomoEvent action="sirenOrSiretInvalid" category="error" name="" />
       <h1>
         Le numéro {type} “{formatted}” est invalide
@@ -99,22 +109,6 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
       </div>
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  context.res.statusCode = 404;
-  const slug = (context?.params?.slug || "") as string;
-
-  if (!isSiren(slug) && !isSiret(slug)) {
-    return {
-      redirect: {
-        destination: "/404",
-        permanent: false,
-      },
-    };
-  }
-
-  return { props: { slug } };
 };
 
 export default SirenOrSiretNotFoundPage;

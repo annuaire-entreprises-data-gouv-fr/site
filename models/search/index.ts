@@ -19,7 +19,7 @@ import {
 } from "#utils/helpers";
 import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
 import { logWarningInSentry } from "#utils/sentry";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;

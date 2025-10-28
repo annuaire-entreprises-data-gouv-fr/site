@@ -19,11 +19,11 @@ import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#utils/helpers";
-import { cachedGetUniteLegale } from "#utils/server-side-helper/app/cached-methods";
+import { cachedGetUniteLegale } from "#utils/server-side-helper/cached-methods";
 import extractParamsAppRouter, {
   type AppRouterProps,
-} from "#utils/server-side-helper/app/extract-params";
-import getSession from "#utils/server-side-helper/app/get-session";
+} from "#utils/server-side-helper/extract-params";
+import getSession from "#utils/server-side-helper/get-session";
 import DirigeantsAssociationSection from "./_component/sections/association/dirigeants";
 import ElusSection from "./_component/sections/collectivite/elus-section";
 import DPOSection from "./_component/sections/entreprise/dpo/section";

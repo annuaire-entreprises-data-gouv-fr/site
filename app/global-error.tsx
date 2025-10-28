@@ -2,6 +2,7 @@
 
 import { useLog500ErrorAppClient } from "hooks";
 import NextError from "next/error";
+import { ServerErrorExplanations } from "#components/error-explanations";
 
 export default function GlobalError({
   error,
@@ -12,6 +13,7 @@ export default function GlobalError({
   return (
     <html>
       <body>
+        <ServerErrorExplanations />
         {/* This is the default Next.js error component. */}
         <NextError statusCode={500} />
       </body>

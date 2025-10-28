@@ -44,10 +44,10 @@ export type IRolesDataGroup = {
 };
 
 export class AgentsGroup {
-  group: IRolesDataGroup;
+  data: IRolesDataGroup;
 
   constructor(data: IRolesDataGroup) {
-    this.group = data;
+    this.data = data;
   }
 
   /**
@@ -58,7 +58,7 @@ export class AgentsGroup {
     callback: () => Promise<T>
   ): Promise<T> {
     try {
-      const user = this.group.users.find((user) => user.email === userEmail);
+      const user = this.data.users.find((user) => user.email === userEmail);
       const isAdmin = user?.is_admin ?? false;
       if (isAdmin) {
         return await callback();
@@ -83,7 +83,7 @@ export class AgentsGroup {
     newGroupName: string
   ): Promise<void> {
     return await this.adminRunner<void>(adminEmail, async () => {
-      await clientRolesUpdateName(this.group.id, newGroupName);
+      await clientRolesUpdateName(this.data.id, newGroupName);
     });
   }
 
@@ -95,7 +95,7 @@ export class AgentsGroup {
     return await this.adminRunner<IRolesDataUser>(
       adminEmail,
       async () =>
-        await clientRolesAddUserToGroup(this.group.id, userEmail, roleId)
+        await clientRolesAddUserToGroup(this.data.id, userEmail, roleId)
     );
   }
 
@@ -107,14 +107,14 @@ export class AgentsGroup {
     return await this.adminRunner<IRolesDataUser>(
       adminEmail,
       async () =>
-        await clientRolesUpdateUserFromGroup(this.group.id, userId, roleId)
+        await clientRolesUpdateUserFromGroup(this.data.id, userId, roleId)
     );
   }
 
   async removeUserFromGroup(adminEmail: string, userId: number): Promise<void> {
     return await this.adminRunner<void>(
       adminEmail,
-      async () => await clientRolesRemoveUserFromGroup(this.group.id, userId)
+      async () => await clientRolesRemoveUserFromGroup(this.data.id, userId)
     );
   }
 }

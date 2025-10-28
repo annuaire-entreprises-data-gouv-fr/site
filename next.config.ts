@@ -1,6 +1,6 @@
 import { type SentryBuildOptions, withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
-import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 import redirects from "./redirects.json" with { type: "json" };
 
 const WITH_SENTRY =

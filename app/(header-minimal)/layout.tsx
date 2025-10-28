@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { HeaderAppRouter } from "#components/header/header-app-router";
-import { meta } from "#components/meta/meta-server";
+import { Header } from "#components/header/header";
+import { meta } from "#components/meta/meta";
 import { Question } from "#components/question";
 
 export const metadata: Metadata = meta({});
@@ -12,11 +12,7 @@ export default function HomeLayout({
 }) {
   return (
     <>
-      <HeaderAppRouter
-        useAgentBanner={false}
-        useAgentCTA={false}
-        useSearchBar={false}
-      />
+      <Header useAgentBanner={false} useAgentCTA={false} useSearchBar={false} />
       <main className="fr-container">{children}</main>
       <Question />
     </>

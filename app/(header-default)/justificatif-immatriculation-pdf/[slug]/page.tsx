@@ -8,7 +8,7 @@ import { EAdministration } from "#models/administrations/EAdministration";
 import { formatIntFr } from "#utils/helpers";
 import extractParamsAppRouter, {
   type AppRouterProps,
-} from "#utils/server-side-helper/app/extract-params";
+} from "#utils/server-side-helper/extract-params";
 import { InpiPDFDownloader } from "./_components/inpi-pdf-downloader";
 
 export const generateMetadata = async (
