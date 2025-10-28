@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { AgentsGroup } from "#models/authentication/group";
+import { updateUserRoleInGroup } from "#models/authentication/group";
 import { updateUserSchema } from "../../input-validation";
 import { withAgentAuth, withErrorHandling } from "../../route-wrappers";
 
@@ -11,7 +11,7 @@ async function updateUserHandler(
   const body = await request.json();
   const validatedData = updateUserSchema.parse(body);
 
-  const user = await AgentsGroup.updateUserRoleInGroup(
+  const user = await updateUserRoleInGroup(
     groupId,
     validatedData.userId,
     validatedData.roleId

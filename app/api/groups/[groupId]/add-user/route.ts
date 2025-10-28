@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { AgentsGroup } from "#models/authentication/group";
+import { addUserToGroup } from "#models/authentication/group";
 import { addUserSchema } from "../../input-validation";
 import { withAgentAuth, withErrorHandling } from "../../route-wrappers";
 
@@ -11,7 +11,7 @@ async function addUserHandler(
   const body = await request.json();
   const validatedData = addUserSchema.parse(body);
 
-  const user = await AgentsGroup.addUserToGroup(
+  const user = await addUserToGroup(
     groupId,
     validatedData.userEmail,
     validatedData.roleId

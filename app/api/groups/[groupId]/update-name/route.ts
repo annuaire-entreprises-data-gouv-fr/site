@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { AgentsGroup } from "#models/authentication/group";
+import { updateGroupName } from "#models/authentication/group";
 import { updateNameSchema } from "../../input-validation";
 import { withAgentAuth, withErrorHandling } from "../../route-wrappers";
 
@@ -11,7 +11,7 @@ async function updateNameHandler(
   const body = await request.json();
   const validatedData = updateNameSchema.parse(body);
 
-  await AgentsGroup.updateGroupName(groupId, validatedData.groupName);
+  await updateGroupName(groupId, validatedData.groupName);
 
   return NextResponse.json({ success: true });
 }

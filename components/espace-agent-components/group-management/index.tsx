@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { IRolesDataRoles } from "#clients/roles-data/interface";
-import type { AgentsGroup, IAgentsGroup } from "#models/authentication/group";
+import type { IAgentsGroup } from "#models/authentication/group";
 import { GroupItem } from "./group-item";
 
 export function GroupManagement({
@@ -12,11 +12,9 @@ export function GroupManagement({
 }: {
   currentUserEmail: string;
   roles: IRolesDataRoles[];
-  initialGroups: AgentsGroup[];
+  initialGroups: IAgentsGroup[];
 }) {
-  const [groups, setGroups] = useState<IAgentsGroup[]>(
-    initialGroups.map((g) => g.data)
-  );
+  const [groups, setGroups] = useState<IAgentsGroup[]>(initialGroups);
 
   if (groups.length === 0) {
     return <div>Aucun groupe</div>;

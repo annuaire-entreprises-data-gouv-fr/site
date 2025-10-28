@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { AgentsGroup } from "#models/authentication/group";
+import { removeUserFromGroup } from "#models/authentication/group";
 import { removeUserSchema } from "../../input-validation";
 import { withAgentAuth, withErrorHandling } from "../../route-wrappers";
 
@@ -11,7 +11,7 @@ async function removeUserHandler(
   const body = await request.json();
   const validatedData = removeUserSchema.parse(body);
 
-  await AgentsGroup.removeUserFromGroup(groupId, validatedData.userId);
+  await removeUserFromGroup(groupId, validatedData.userId);
 
   return NextResponse.json({ success: true });
 }

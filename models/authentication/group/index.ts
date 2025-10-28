@@ -11,28 +11,6 @@ import { FetchRessourceException } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
 import type { IAgentScope } from "../agent/scopes/constants";
 
-export const getAgentGroups = async (): Promise<AgentsGroup[]> => {
-  try {
-    const groups = await clientRolesGetGroups();
-
-    return groups.map((g) => new AgentsGroup(g));
-  } catch (error) {
-    if (error instanceof HttpNotFound) {
-      // user not in roles.data
-      return [];
-    }
-
-    logFatalErrorInSentry(
-      new FetchRessourceException({
-        ressource: "Roles.data Groups",
-        cause: error,
-      })
-    );
-
-    return [];
-  }
-};
-
 export type IAgentsGroup = {
   id: number;
   name: string;
@@ -43,62 +21,68 @@ export type IAgentsGroup = {
   contract_url?: string;
 };
 
-export class AgentsGroup {
-  data: IAgentsGroup;
-
-  constructor(data: IAgentsGroup) {
-    this.data = data;
+async function run<T>(callback: () => Promise<T>): Promise<T> {
+  try {
+    return await callback();
+  } catch (error) {
+    logFatalErrorInSentry(
+      new FetchRessourceException({
+        ressource: "Roles.data",
+        cause: error,
+      })
+    );
+    throw error;
   }
+}
 
-  static async run<T>(callback: () => Promise<T>): Promise<T> {
+export const getAgentGroups = async (): Promise<IAgentsGroup[]> => {
+  return await run<IAgentsGroup[]>(async () => {
     try {
-      return await callback();
+      return await clientRolesGetGroups();
     } catch (error) {
-      logFatalErrorInSentry(
-        new FetchRessourceException({
-          ressource: "Roles.data",
-          cause: error,
-        })
-      );
+      if (error instanceof HttpNotFound) {
+        // user not in roles.data
+        return [];
+      }
       throw error;
     }
-  }
+  });
+};
 
-  static async updateGroupName(
-    groupId: number,
-    newGroupName: string
-  ): Promise<void> {
-    return await AgentsGroup.run<void>(async () => {
-      await clientRolesUpdateName(groupId, newGroupName);
-    });
-  }
+export async function updateGroupName(
+  groupId: number,
+  newGroupName: string
+): Promise<void> {
+  return await run<void>(async () => {
+    await clientRolesUpdateName(groupId, newGroupName);
+  });
+}
 
-  static async addUserToGroup(
-    groupId: number,
-    userEmail: string,
-    roleId: number
-  ): Promise<IRolesDataUser> {
-    return await AgentsGroup.run<IRolesDataUser>(
-      async () => await clientRolesAddUserToGroup(groupId, userEmail, roleId)
-    );
-  }
+export async function addUserToGroup(
+  groupId: number,
+  userEmail: string,
+  roleId: number
+): Promise<IRolesDataUser> {
+  return await run<IRolesDataUser>(
+    async () => await clientRolesAddUserToGroup(groupId, userEmail, roleId)
+  );
+}
 
-  static async updateUserRoleInGroup(
-    groupId: number,
-    userId: number,
-    roleId: number
-  ): Promise<IRolesDataUser> {
-    return await AgentsGroup.run<IRolesDataUser>(
-      async () => await clientRolesUpdateUserFromGroup(groupId, userId, roleId)
-    );
-  }
+export async function updateUserRoleInGroup(
+  groupId: number,
+  userId: number,
+  roleId: number
+): Promise<IRolesDataUser> {
+  return await run<IRolesDataUser>(
+    async () => await clientRolesUpdateUserFromGroup(groupId, userId, roleId)
+  );
+}
 
-  static async removeUserFromGroup(
-    groupId: number,
-    userId: number
-  ): Promise<void> {
-    return await AgentsGroup.run<void>(
-      async () => await clientRolesRemoveUserFromGroup(groupId, userId)
-    );
-  }
+export async function removeUserFromGroup(
+  groupId: number,
+  userId: number
+): Promise<void> {
+  return await run<void>(
+    async () => await clientRolesRemoveUserFromGroup(groupId, userId)
+  );
 }

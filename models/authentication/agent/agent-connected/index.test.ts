@@ -4,7 +4,10 @@ import {
   NeedASiretException,
   PrestataireException,
 } from "#models/authentication/authentication-exceptions";
-import { getAgentGroups } from "#models/authentication/group";
+import {
+  getAgentGroups,
+  type IAgentsGroup,
+} from "#models/authentication/group";
 import { AgentConnected } from "./index";
 
 jest.mock("#models/authentication/group/index.ts", () => ({
@@ -24,7 +27,7 @@ describe("AgentConnected", () => {
     organisation_siret: "123456789",
     contract: "test-contract",
     users: [],
-    scopes: "rne nonDiffusible",
+    scopes: ["rne", "nonDiffusible"] as IAgentScope[],
     contract_description: "test-contract-description",
   };
   const mockUserInfo = {
@@ -147,7 +150,7 @@ describe("AgentConnected", () => {
     it("should return agent habilitation when available", async () => {
       const groupScopes: IAgentScope[] = ["rne", "nonDiffusible"];
       mockGetAgentGroups.mockResolvedValue([
-        { data: { ...mockGroup, scopes: groupScopes } } as any,
+        { ...mockGroup, scopes: groupScopes } as IAgentsGroup,
       ]);
 
       const agent = new AgentConnected(mockUserInfo);
@@ -162,7 +165,7 @@ describe("AgentConnected", () => {
 
     it("should throw PrestataireException for prestataire users", async () => {
       mockGetAgentGroups.mockResolvedValue([
-        { data: { ...mockGroup, scopes: [] } } as any,
+        { ...mockGroup, scopes: [] } as IAgentsGroup,
       ]);
       const prestataireUserInfo = {
         ...mockUserInfo,
@@ -176,7 +179,7 @@ describe("AgentConnected", () => {
 
     it("should fallback to organisation habilitation when no agent habilitation", async () => {
       mockGetAgentGroups.mockResolvedValue([
-        { data: { ...mockGroup, scopes: [] } } as any,
+        { ...mockGroup, scopes: [] } as IAgentsGroup,
       ]);
       const mockOrgHabilitation = {
         scopes: ["org-scope"],
@@ -204,7 +207,7 @@ describe("AgentConnected", () => {
     it("should return complete agent info with habilitation", async () => {
       const groupScopes: IAgentScope[] = ["rne", "nonDiffusible"];
       mockGetAgentGroups.mockResolvedValue([
-        { data: { ...mockGroup, scopes: groupScopes } } as any,
+        { ...mockGroup, scopes: groupScopes } as IAgentsGroup,
       ]);
 
       const agent = new AgentConnected(mockUserInfo);

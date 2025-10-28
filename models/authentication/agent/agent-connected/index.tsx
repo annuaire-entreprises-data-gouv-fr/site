@@ -102,7 +102,7 @@ export class AgentConnected {
 
     const groups = await getAgentGroups();
     groups.forEach((agentGroup) => {
-      superAgentScopes.add(agentGroup.data.scopes);
+      superAgentScopes.add(agentGroup.scopes);
     });
 
     if (superAgentScopes.hasScopes()) {
