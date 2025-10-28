@@ -2,10 +2,7 @@
 
 import { useState } from "react";
 import type { IRolesDataRoles } from "#clients/roles-data/interface";
-import type {
-  AgentsGroup,
-  IRolesDataGroup,
-} from "#models/authentication/group";
+import type { AgentsGroup, IAgentsGroup } from "#models/authentication/group";
 import { GroupItem } from "./group-item";
 
 export function GroupManagement({
@@ -17,7 +14,7 @@ export function GroupManagement({
   roles: IRolesDataRoles[];
   initialGroups: AgentsGroup[];
 }) {
-  const [groups, setGroups] = useState<IRolesDataGroup[]>(
+  const [groups, setGroups] = useState<IAgentsGroup[]>(
     initialGroups.map((g) => g.data)
   );
 
@@ -30,7 +27,7 @@ export function GroupManagement({
       (user) => user.email === currentUserEmail
     );
     const isAdmin = Boolean(currentUserRole?.is_admin);
-    const setGroup = (group: IRolesDataGroup) => {
+    const setGroup = (group: IAgentsGroup) => {
       setGroups(groups.map((g) => (g.id === group.id ? group : g)));
     };
     const deleteGroup = (groupId: number) => {

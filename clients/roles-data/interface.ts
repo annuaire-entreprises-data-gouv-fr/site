@@ -18,7 +18,7 @@ export type IRolesDataUser = {
   is_admin: boolean;
 };
 
-export interface IRolesDataGroupCreate {
+export interface IAgentsGroupCreate {
   name: string;
   organisation_siret: string;
   admin: { email: string };
@@ -28,7 +28,7 @@ export interface IRolesDataGroupCreate {
   members?: { email: string }[];
 }
 
-export interface IRolesDataGroupResponse extends IRolesDataGroupCreate {
+export interface IAgentsGroupResponse extends IAgentsGroupCreate {
   id: number;
   users: IRolesDataUser[];
 }

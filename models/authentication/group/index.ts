@@ -1,4 +1,4 @@
-import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
+import { HttpNotFound } from "#clients/exceptions";
 import {
   clientRolesAddUserToGroup,
   clientRolesGetGroups,
@@ -33,7 +33,7 @@ export const getAgentGroups = async (): Promise<AgentsGroup[]> => {
   }
 };
 
-export type IRolesDataGroup = {
+export type IAgentsGroup = {
   id: number;
   name: string;
   organisation_siret: string;
@@ -44,29 +44,15 @@ export type IRolesDataGroup = {
 };
 
 export class AgentsGroup {
-  data: IRolesDataGroup;
+  data: IAgentsGroup;
 
-  constructor(data: IRolesDataGroup) {
+  constructor(data: IAgentsGroup) {
     this.data = data;
   }
 
-  /**
-   * Only run command if user is group admin
-   */
-  async adminRunner<T>(
-    userEmail: string,
-    callback: () => Promise<T>
-  ): Promise<T> {
+  static async run<T>(callback: () => Promise<T>): Promise<T> {
     try {
-      const user = this.data.users.find((user) => user.email === userEmail);
-      const isAdmin = user?.is_admin ?? false;
-      if (isAdmin) {
-        return await callback();
-      }
-
-      throw new HttpUnauthorizedError(
-        "User does not have admin permissions for this group"
-      );
+      return await callback();
     } catch (error) {
       logFatalErrorInSentry(
         new FetchRessourceException({
@@ -78,43 +64,41 @@ export class AgentsGroup {
     }
   }
 
-  async updateGroupName(
-    adminEmail: string,
+  static async updateGroupName(
+    groupId: number,
     newGroupName: string
   ): Promise<void> {
-    return await this.adminRunner<void>(adminEmail, async () => {
-      await clientRolesUpdateName(this.data.id, newGroupName);
+    return await AgentsGroup.run<void>(async () => {
+      await clientRolesUpdateName(groupId, newGroupName);
     });
   }
 
-  async addUserToGroup(
-    adminEmail: string,
+  static async addUserToGroup(
+    groupId: number,
     userEmail: string,
     roleId: number
   ): Promise<IRolesDataUser> {
-    return await this.adminRunner<IRolesDataUser>(
-      adminEmail,
-      async () =>
-        await clientRolesAddUserToGroup(this.data.id, userEmail, roleId)
+    return await AgentsGroup.run<IRolesDataUser>(
+      async () => await clientRolesAddUserToGroup(groupId, userEmail, roleId)
     );
   }
 
-  async updateUserRoleInGroup(
-    adminEmail: string,
+  static async updateUserRoleInGroup(
+    groupId: number,
     userId: number,
     roleId: number
   ): Promise<IRolesDataUser> {
-    return await this.adminRunner<IRolesDataUser>(
-      adminEmail,
-      async () =>
-        await clientRolesUpdateUserFromGroup(this.data.id, userId, roleId)
+    return await AgentsGroup.run<IRolesDataUser>(
+      async () => await clientRolesUpdateUserFromGroup(groupId, userId, roleId)
     );
   }
 
-  async removeUserFromGroup(adminEmail: string, userId: number): Promise<void> {
-    return await this.adminRunner<void>(
-      adminEmail,
-      async () => await clientRolesRemoveUserFromGroup(this.data.id, userId)
+  static async removeUserFromGroup(
+    groupId: number,
+    userId: number
+  ): Promise<void> {
+    return await AgentsGroup.run<void>(
+      async () => await clientRolesRemoveUserFromGroup(groupId, userId)
     );
   }
 }

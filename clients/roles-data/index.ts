@@ -1,10 +1,10 @@
 import { rolesDataResourceServerClient } from "#clients/authentication/pro-connect/resource-server-client";
 import routes from "#clients/routes";
-import type { IRolesDataGroup } from "#models/authentication/group";
+import type { IAgentsGroup } from "#models/authentication/group";
 import { InternalError } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
 import type {
-  IRolesDataGroupResponse,
+  IAgentsGroupResponse,
   IRolesDataRoles,
   IRolesDataUser,
 } from "./interface";
@@ -14,20 +14,16 @@ import { parseAgentScopes } from "./parse";
  * Roles.data
  * https://roles.data.gouv.fr/
  */
-export const clientRolesGetGroups = async (): Promise<IRolesDataGroup[]> => {
+export const clientRolesGetGroups = async (): Promise<IAgentsGroup[]> => {
   const url = routes.rolesData.groups.getGroups;
-  const response = await rolesDataResourceServerClient<
-    IRolesDataGroupResponse[]
-  >({
+  const response = await rolesDataResourceServerClient<IAgentsGroupResponse[]>({
     url,
     method: "GET",
   });
   return mapToDomainObject(response);
 };
 
-const mapToDomainObject = (
-  response: IRolesDataGroupResponse[]
-): IRolesDataGroup[] =>
+const mapToDomainObject = (response: IAgentsGroupResponse[]): IAgentsGroup[] =>
   response.map((group) => {
     const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
     if (inValidScopes.length > 0) {

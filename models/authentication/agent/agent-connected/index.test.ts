@@ -147,7 +147,7 @@ describe("AgentConnected", () => {
     it("should return agent habilitation when available", async () => {
       const groupScopes: IAgentScope[] = ["rne", "nonDiffusible"];
       mockGetAgentGroups.mockResolvedValue([
-        { group: { ...mockGroup, scopes: groupScopes } } as any,
+        { data: { ...mockGroup, scopes: groupScopes } } as any,
       ]);
 
       const agent = new AgentConnected(mockUserInfo);
@@ -162,7 +162,7 @@ describe("AgentConnected", () => {
 
     it("should throw PrestataireException for prestataire users", async () => {
       mockGetAgentGroups.mockResolvedValue([
-        { group: { ...mockGroup, scopes: [] } } as any,
+        { data: { ...mockGroup, scopes: [] } } as any,
       ]);
       const prestataireUserInfo = {
         ...mockUserInfo,
@@ -176,7 +176,7 @@ describe("AgentConnected", () => {
 
     it("should fallback to organisation habilitation when no agent habilitation", async () => {
       mockGetAgentGroups.mockResolvedValue([
-        { group: { ...mockGroup, scopes: [] } } as any,
+        { data: { ...mockGroup, scopes: [] } } as any,
       ]);
       const mockOrgHabilitation = {
         scopes: ["org-scope"],
@@ -204,7 +204,7 @@ describe("AgentConnected", () => {
     it("should return complete agent info with habilitation", async () => {
       const groupScopes: IAgentScope[] = ["rne", "nonDiffusible"];
       mockGetAgentGroups.mockResolvedValue([
-        { group: { ...mockGroup, scopes: groupScopes } } as any,
+        { data: { ...mockGroup, scopes: groupScopes } } as any,
       ]);
 
       const agent = new AgentConnected(mockUserInfo);

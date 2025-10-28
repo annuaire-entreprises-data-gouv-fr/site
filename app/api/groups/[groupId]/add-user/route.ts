@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { HttpNotFound } from "#clients/exceptions";
-import { getAgentGroups } from "#models/authentication/group";
-import getSession from "#utils/server-side-helper/get-session";
+import { AgentsGroup } from "#models/authentication/group";
 import { addUserSchema } from "../../input-validation";
 import { withAgentAuth, withErrorHandling } from "../../route-wrappers";
 
@@ -9,22 +7,12 @@ async function addUserHandler(
   request: Request,
   { params }: { params: Promise<{ groupId: string }> }
 ) {
-  const groupId = (await params).groupId;
-  const agentGroups = await getAgentGroups();
-  const group = agentGroups.find(
-    (group) => group.data.id.toString() === groupId
-  );
-
-  if (!group) {
-    throw new HttpNotFound("Group or user does not exist");
-  }
-
-  const session = await getSession();
+  const groupId = Number.parseInt((await params).groupId, 10);
   const body = await request.json();
   const validatedData = addUserSchema.parse(body);
 
-  const user = await group.addUserToGroup(
-    session!.user!.email,
+  const user = await AgentsGroup.addUserToGroup(
+    groupId,
     validatedData.userEmail,
     validatedData.roleId
   );

@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { HttpNotFound } from "#clients/exceptions";
-import { getAgentGroups } from "#models/authentication/group";
-import getSession from "#utils/server-side-helper/get-session";
+import { AgentsGroup } from "#models/authentication/group";
 import { removeUserSchema } from "../../input-validation";
 import { withAgentAuth, withErrorHandling } from "../../route-wrappers";
 
@@ -9,21 +7,11 @@ async function removeUserHandler(
   request: Request,
   { params }: { params: Promise<{ groupId: string }> }
 ) {
-  const groupId = (await params).groupId;
-  const agentGroups = await getAgentGroups();
-  const group = agentGroups.find(
-    (group) => group.data.id.toString() === groupId
-  );
-
-  if (!group) {
-    throw new HttpNotFound("Group does not exist or user not in group");
-  }
-
-  const session = await getSession();
+  const groupId = Number.parseInt((await params).groupId, 10);
   const body = await request.json();
   const validatedData = removeUserSchema.parse(body);
 
-  await group.removeUserFromGroup(session!.user!.email, validatedData.userId);
+  await AgentsGroup.removeUserFromGroup(groupId, validatedData.userId);
 
   return NextResponse.json({ success: true });
 }
