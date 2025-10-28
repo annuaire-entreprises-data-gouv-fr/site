@@ -63,7 +63,13 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
   const userScopes = getIAgentScope(session);
 
   if (!ApplicationRightsToScopes[right]) {
-    return true;
+    if (right === ApplicationRights.opendata) {
+      return true;
+    }
+
+    throw new Error(
+      `Invalid right ${right} : missing scope requirement in ApplicationRightsToScopes`
+    );
   }
 
   return userScopes.includes(ApplicationRightsToScopes[right]);
@@ -78,7 +84,17 @@ export function getGroupsGrantingRights(
 ) {
   const requiredScope = ApplicationRightsToScopes[right];
 
-  if (!requiredScope || defaultAgentScopes.includes(requiredScope)) {
+  if (!requiredScope) {
+    if (right === ApplicationRights.opendata) {
+      return [];
+    }
+
+    throw new Error(
+      `Invalid right ${right} : missing scope requirement in ApplicationRightsToScopes `
+    );
+  }
+
+  if (defaultAgentScopes.includes(requiredScope)) {
     return [];
   }
 
