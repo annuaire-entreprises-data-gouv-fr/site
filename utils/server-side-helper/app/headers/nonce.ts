@@ -34,16 +34,18 @@ export function generateNonce(): string {
 }
 
 /**
- * Get the nonce from request headers (set by middleware).
+ * Get the nonce from request headers in App Router Server Components.
  *
- * This should be called in Server Components to retrieve the nonce
- * and pass it to inline script tags.
+ * This reads the nonce from the x-nonce header that was set by middleware.
+ * **Only works in App Router Server Components.**
+ *
+ * For Pages Router, use `getPageRouterNonce()` from `utils/server-side-helper/page/headers/nonce`
  *
  * @returns The nonce value or undefined if not set
  *
  * @example
  * ```typescript
- * // In a Server Component
+ * // In an App Router Server Component
  * export default async function Layout() {
  *   const nonce = await getNonce();
  *   return <script nonce={nonce}>...</script>

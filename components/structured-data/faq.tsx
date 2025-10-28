@@ -1,4 +1,4 @@
-import { getNonce } from "#utils/headers/nonce";
+import { getNonce } from "#utils/server-side-helper/app/headers/nonce";
 
 const generateFAQuestion = (question: string, answer: string): String => `{
     "@type": "Question",

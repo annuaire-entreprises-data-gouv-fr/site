@@ -3,8 +3,6 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import type { ISession } from "#models/authentication/user/session";
 import { Exception } from "#models/exceptions";
-import getContentSecurityPolicy from "#utils/headers/content-security-policy";
-import { generateNonce } from "#utils/headers/nonce";
 import {
   extractSirenOrSiretFromRechercherUrl,
   extractSirenOrSiretSlugFromUrl,
@@ -13,6 +11,8 @@ import {
 } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import getContentSecurityPolicy from "#utils/server-side-helper/app/headers/content-security-policy";
+import { generateNonce } from "#utils/server-side-helper/app/headers/nonce";
 import { sessionOptions, setVisitTimestamp } from "#utils/session";
 
 const shouldRedirect = (path: string, search: string, url: string) => {

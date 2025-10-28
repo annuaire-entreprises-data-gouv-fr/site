@@ -1,10 +1,10 @@
 import type { IUniteLegale } from "#models/core/types";
-import { getNonce } from "#utils/headers/nonce";
 import {
   getDepartementFromCodePostal,
   getUrlFromDepartement,
   libelleFromDepartement,
 } from "#utils/helpers/formatting/labels";
+import { getNonce } from "#utils/server-side-helper/app/headers/nonce";
 
 const StructuredDataBreadcrumb = async ({
   uniteLegale,
