@@ -5,7 +5,7 @@ import {
   isAPI404,
   isAPINotResponding,
 } from "#models/api-not-responding";
-import type { IConformite } from "#models/espace-agent/conformite";
+import type { IConformiteFiscale } from "#models/espace-agent/conformite";
 
 const APINotRespongingElement: React.FC<{
   data: IAPINotRespondingError;
@@ -43,28 +43,25 @@ const APINotRespongingElement: React.FC<{
   </>
 );
 
-const Conformite: React.FC<{
-  data: IConformite | IAPINotRespondingError;
-  administration: string;
-}> = ({ data, administration }) => {
+const administration = "DGFiP";
+
+const ConformiteFiscale: React.FC<{
+  data: IConformiteFiscale | IAPINotRespondingError;
+}> = ({ data }) => {
   if (isAPINotResponding(data)) {
     if (isAPI404(data)) {
-      return (
-        <Icon slug="closed">{administration} : document introuvable.</Icon>
-      );
+      return <Icon slug="closed">{administration} : non-conforme.</Icon>;
     }
     return (
       <APINotRespongingElement administration={administration} data={data} />
     );
   }
 
-  const valid = data.isValid === true;
-  const iconSlug = valid ? "open" : "closed";
-  const label = `${administration} : ${valid ? "" : "non-"}conforme`;
-
   return (
     <div className="layout-space-between">
-      <Icon slug={iconSlug}>{label}</Icon>
+      <Icon className="fr-mr-1v" slug="open">
+        {administration} :
+      </Icon>
       {data.url && (
         <a href={data.url}>
           <Icon slug="download">{data.label || "télécharger"}</Icon>
@@ -74,4 +71,4 @@ const Conformite: React.FC<{
   );
 };
 
-export default Conformite;
+export default ConformiteFiscale;

@@ -6,16 +6,29 @@ import type { UseCase } from "#models/use-cases";
 import { extractSirenFromSiret, verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
 
-export type IConformite = {
-  isValid: boolean | null;
+type IConformite = {
   url: string | null;
   label: string | null;
 };
 
+export type IConformiteFiscale = IConformite & {
+  dateDelivrance: string;
+};
+
+export type IConformiteVigilance = IConformite & {
+  status: "a_jour" | "non_a_jour";
+  dateDelivrance: string;
+  dateFinValidite: string;
+};
+
+export type IConformiteMSA = IConformite & {
+  status: "a_jour" | "non_a_jour" | "sous_investigation";
+};
+
 export type IConformiteUniteLegale = {
-  fiscale: IConformite | IAPINotRespondingError;
-  vigilance: IConformite | IAPINotRespondingError;
-  msa: IConformite | IAPINotRespondingError;
+  fiscale: IConformiteFiscale | IAPINotRespondingError;
+  vigilance: IConformiteVigilance | IAPINotRespondingError;
+  msa: IConformiteMSA | IAPINotRespondingError;
 };
 
 export const getConformiteEntreprise = async (
