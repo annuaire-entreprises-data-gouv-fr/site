@@ -1,4 +1,3 @@
-import crypto from "crypto";
 import { headers } from "next/headers";
 
 /**
@@ -16,7 +15,7 @@ import { headers } from "next/headers";
  * 2. **Server adds nonce to CSP header**: `script-src 'nonce-Xy9Pqr...'`
  * 3. **Server adds nonce to trusted scripts**: `<script nonce="Xy9Pqr...">...</script>`
  * 4. **Browser only executes scripts** with matching nonce
- 
+
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP#nonces
  * @see middleware.ts for nonce generation and CSP header setup
  */
@@ -26,11 +25,14 @@ import { headers } from "next/headers";
  *
  * Creates a 128-bit (16-byte) random value encoded as base64.
  * This should be called once per request in middleware.
+ * Uses Web Crypto API for edge runtime compatibility.
  *
  * @returns Base64-encoded random string (e.g., "Xy9Pqr...==")
  */
 export function generateNonce(): string {
-  return crypto.randomBytes(16).toString("base64");
+  const buffer = new Uint8Array(16);
+  crypto.getRandomValues(buffer);
+  return btoa(String.fromCharCode(...buffer));
 }
 
 /**
