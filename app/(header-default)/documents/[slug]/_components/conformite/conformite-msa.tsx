@@ -19,16 +19,14 @@ const ConformiteMSA: React.FC<{
     }
 
     if (data.status === "a_jour") {
-      return <span>conforme</span>;
+      return "conforme";
     }
 
     if (data.status === "sous_investigation") {
-      return (
-        <span>l'entreprise est en cours d'analyse par un agent de la MSA</span>
-      );
+      return "l'entreprise est en cours d'analyse par un agent de la MSA";
     }
 
-    return <span>non-conforme</span>;
+    return "l'entreprise n'est pas à jour de ses cotisations";
   }, [data]);
 
   if (isAPINotResponding(data)) {

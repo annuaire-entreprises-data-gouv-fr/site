@@ -6,6 +6,7 @@ import {
   isAPINotResponding,
 } from "#models/api-not-responding";
 import type { IConformiteVigilance } from "#models/espace-agent/conformite";
+import { ConformiteDocument } from "./conformite-document";
 import APINotRespongingElement from "./conformite-not-responding";
 
 const administration = "URSSAF";
@@ -19,16 +20,10 @@ const ConformiteVigilance: React.FC<{
     }
 
     if (data.status === "a_jour") {
-      return data.url ? (
-        <a href={data.url}>
-          <Icon slug="download">{data.label || "télécharger"}</Icon>
-        </a>
-      ) : (
-        <span className="fr-col">conforme (document indisponible)</span>
-      );
+      return data.url ? "conforme" : "conforme (document indisponible)";
     }
 
-    return <span className="fr-col">non-conforme</span>;
+    return "l'entreprise n'est pas à jour de ses cotisations";
   }, [data]);
 
   if (isAPINotResponding(data)) {
@@ -43,9 +38,15 @@ const ConformiteVigilance: React.FC<{
         className="fr-mr-1v"
         slug={data.status === "a_jour" ? "open" : "closed"}
       >
-        {administration} :
+        {administration} : {content}
       </Icon>
-      {content}
+      {data.url && (
+        <ConformiteDocument
+          dateDelivrance={data.dateDelivrance}
+          label={data.label}
+          url={data.url}
+        />
+      )}
     </div>
   );
 };
