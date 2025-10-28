@@ -1,4 +1,3 @@
-import { HttpServerError } from "#clients/exceptions";
 import httpClient, { type IDefaultRequestConfig } from "#utils/network";
 import { proConnectGetOrRefreshAccessToken } from "./strategy";
 
@@ -15,8 +14,6 @@ export async function rolesDataResourceServerClient<T>(
       },
     });
   } catch (e) {
-    // if proconnect refresh fails ->
-    // if roles fails ->
-    throw new HttpServerError("hey");
+    throw e;
   }
 }

@@ -25,6 +25,8 @@ async function run<T>(callback: () => Promise<T>): Promise<T> {
   try {
     return await callback();
   } catch (error) {
+    // erreur pro connect et redirections
+
     logFatalErrorInSentry(
       new FetchRessourceException({
         ressource: "Roles.data",
