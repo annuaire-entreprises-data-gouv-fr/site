@@ -14,11 +14,10 @@ export type IEORIValidation = {
 };
 
 export const getEORIValidation = async (
-  eori: string
+  siret: string
 ): Promise<IEORIValidation | IAPINotRespondingError> => {
   try {
-    const siret = verifySiret(eori);
-    const data = await clientEORI(siret);
+    const data = await clientEORI(verifySiret(siret));
     if (!data) {
       throw new Error("EOS response is empty");
     }
@@ -28,7 +27,7 @@ export const getEORIValidation = async (
       new FetchRessourceException({
         ressource: "EORIValidation",
         cause: e,
-        context: { slug: eori },
+        context: { slug: siret },
       })
     );
     return APINotRespondingFactory(EAdministration.DOUANES, e.status || 500);

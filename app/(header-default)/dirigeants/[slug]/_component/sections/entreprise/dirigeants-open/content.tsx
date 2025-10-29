@@ -63,6 +63,18 @@ export function sortDirigeants(
   a: IEtatCivil | IPersonneMorale,
   b: IEtatCivil | IPersonneMorale
 ): -1 | 1 | 0 {
+  const estDemissionnaireA =
+    "estDemissionnaire" in a ? a.estDemissionnaire : false;
+  const estDemissionnaireB =
+    "estDemissionnaire" in b ? b.estDemissionnaire : false;
+
+  if (estDemissionnaireA && !estDemissionnaireB) {
+    return 1;
+  }
+  if (!estDemissionnaireA && estDemissionnaireB) {
+    return -1;
+  }
+
   const roleA = a.role;
   const roleB = b.role;
   if (roleA === roleB) {

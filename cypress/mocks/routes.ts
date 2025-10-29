@@ -19,7 +19,10 @@ import {
   apiSireneInseeSirenHandler,
   apiSireneInseeSiretHandler,
 } from "./handlers/api-sirene-insee";
-import { associationHandler } from "./handlers/association";
+import {
+  associationPrivateHandler,
+  associationPublicHandler,
+} from "./handlers/association";
 import { baseAdresseNationaleHandler } from "./handlers/base-adresse-nationale";
 import { bodaccHandler } from "./handlers/bodacc";
 import { carteProfessionnelleTravauxPublicsHandler } from "./handlers/carte-professionnelle-travaux-publics";
@@ -36,6 +39,7 @@ import { igHandler } from "./handlers/ig";
 import { journalOfficielAssociationsHandler } from "./handlers/journal-officiel-associations";
 import { liensCapitalistiquesHandler } from "./handlers/liens-capitalistiques";
 import { mandatairesRcsHandler } from "./handlers/mandataires-rcs";
+import { matomoReportHandler } from "./handlers/matomo-report";
 import { odsMetadataHandler } from "./handlers/ods-metadata";
 import { effectifsHandler } from "./handlers/rcd-effectifs-annuels";
 import { rechercheEntrepriseHandler } from "./handlers/recherche-entreprises";
@@ -43,18 +47,29 @@ import { rechercheEntrepriseIdccHandler } from "./handlers/recherche-entreprises
 import { rechercheEntrepriseIdccMetadataHandler } from "./handlers/recherche-entreprises-idcc-metadata";
 import { rechercheEntrepriseLastModifiedHandler } from "./handlers/recherche-entreprises-last-modified";
 import { rgeHandler } from "./handlers/rge";
-import { rneDefaultHandler, rneFallbackHandler } from "./handlers/rne";
+import {
+  rneDefaultHandler,
+  rneObservationsFallbackHandler,
+} from "./handlers/rne";
 import { s3HandlerMonitoring } from "./handlers/s3";
 import { tvaHandler } from "./handlers/tva";
 import { upDownIoHandler } from "./handlers/up-down-io";
 
 export const routesHandlers = [
-  http.get(routes.proxy.tva("*"), tvaHandler),
-  http.get(routes.proxy.eori("*"), eoriHandler),
-  http.get(routes.proxy.ig("*"), igHandler),
-  http.get(routes.proxy.association("*"), associationHandler),
-  http.get(routes.proxy.rne.immatriculation.default("*"), rneDefaultHandler),
-  http.get(routes.proxy.rne.immatriculation.fallback("*"), rneFallbackHandler),
+  http.get(`${process.env.PROXY_API_URL}${routes.proxy.tva("*")}`, tvaHandler),
+  http.get(
+    `${process.env.PROXY_API_URL}${routes.proxy.eori("*")}`,
+    eoriHandler
+  ),
+  http.get(`${process.env.PROXY_API_URL}${routes.proxy.ig("*")}`, igHandler),
+  http.get(
+    `${process.env.PROXY_API_URL}${routes.proxy.rne.immatriculation.default("*")}`,
+    rneDefaultHandler
+  ),
+  http.get(
+    `${process.env.PROXY_API_URL}${routes.proxy.rne.observations.fallback("*")}`,
+    rneObservationsFallbackHandler
+  ),
   http.get(
     routes.rechercheEntreprise.lastModified,
     rechercheEntrepriseLastModifiedHandler
@@ -181,8 +196,26 @@ export const routesHandlers = [
     mandatairesRcsHandler
   ),
   http.get(
+    `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.association("*")}`,
+    associationPublicHandler
+  ),
+  http.get(
+    `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.associationPartenaires("*")}`,
+    associationPrivateHandler
+  ),
+  http.get(
     `https://${process.env.OVH_S3_MONITORING_BUCKET}.s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/monitoring_comptes_agents.csv`,
     s3HandlerMonitoring
   ),
+  http.post(
+    routes.tooling.matomo.report.copyPasteEvents + "*",
+    matomoReportHandler
+  ),
+  http.post(routes.tooling.matomo.report.npsEvents + "*", matomoReportHandler),
+  http.post(
+    routes.tooling.matomo.report.bulkRequest + "*",
+    matomoReportHandler
+  ),
+  http.post(routes.tooling.matomo.tracker + "*", matomoReportHandler),
   http.get(routes.tooling.grist + "*", gristHandler),
 ];

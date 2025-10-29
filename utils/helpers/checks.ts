@@ -1,4 +1,4 @@
-import { estDiffusible } from "#models/core/diffusion";
+import { estNonDiffusibleStrict } from "#models/core/diffusion";
 import { estActif } from "#models/core/etat-administratif";
 import { type IUniteLegale, isPersonnePhysique } from "#models/core/types";
 
@@ -8,8 +8,8 @@ export const isEntrepreneurIndividuelFromNatureJuridique = (
 
 // Unités non dotées de la personnalité morale have a nature juridique starting with 2
 const isSocietePersonnePhysiqueFromNatureJuridique = (
-  natureJuridique: string
-) => natureJuridique.startsWith("2");
+  natureJuridique: string | null
+) => !!natureJuridique?.startsWith("2");
 
 export const isPersonneMoraleFromNatureJuridique = (natureJuridique: string) =>
   !isEntrepreneurIndividuelFromNatureJuridique(natureJuridique) &&
@@ -38,8 +38,8 @@ export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
     // we dont index closed entities
     return true;
   }
-  if (!estDiffusible(uniteLegale)) {
-    // we dont index non diffusible or partially diffusible
+  if (estNonDiffusibleStrict(uniteLegale)) {
+    // we dont index non diffusible strict
     return true;
   }
   return false;

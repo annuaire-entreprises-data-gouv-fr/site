@@ -12,7 +12,7 @@
         "siege": {
           "activite_principale": "38.32Z",
           "activite_principale_registre_metier": null,
-          "annee_tranche_effectif_salarie": "2022",
+          "annee_tranche_effectif_salarie": "2023",
           "adresse": "ZONE ARTISANORD 1 AVENUE DE LA BAUXITE 13015 MARSEILLE",
           "caractere_employeur": "O",
           "cedex": null,
@@ -25,7 +25,7 @@
           "date_debut_activite": "2017-11-15",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-03-30T07:54:53",
+          "date_mise_a_jour_insee": "2025-02-06T02:35:41",
           "departement": "13",
           "distribution_speciale": null,
           "epci": "200054807",
@@ -53,16 +53,16 @@
           "region": "93",
           "siret": "53374499100035",
           "statut_diffusion_etablissement": "O",
-          "tranche_effectif_salarie": "21",
+          "tranche_effectif_salarie": "12",
           "type_voie": "AVENUE"
         },
         "activite_principale": "38.32Z",
         "categorie_entreprise": "PME",
         "caractere_employeur": null,
-        "annee_categorie_entreprise": "2022",
+        "annee_categorie_entreprise": "2023",
         "date_creation": "2011-07-15",
         "date_fermeture": null,
-        "date_mise_a_jour": "2024-12-10T15:30:26",
+        "date_mise_a_jour": "2025-10-17T07:51:42",
         "date_mise_a_jour_insee": "2024-03-22T14:26:06",
         "date_mise_a_jour_rne": "2024-05-19T16:49:33",
         "dirigeants": [
@@ -79,16 +79,16 @@
         "etat_administratif": "A",
         "nature_juridique": "5710",
         "section_activite_principale": "E",
-        "tranche_effectif_salarie": "21",
-        "annee_tranche_effectif_salarie": "2022",
+        "tranche_effectif_salarie": "12",
+        "annee_tranche_effectif_salarie": "2023",
         "statut_diffusion": "O",
         "matching_etablissements": [],
         "immatriculation": {
-          "date_debut_activite": "2011-07-15",
+          "date_debut_activite": null,
           "date_immatriculation": "2011-08-04",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": ["Commerciale", "Gestion de biens"],
+          "nature_entreprise": ["Gestion de biens"],
           "date_cloture_exercice": "3112",
           "capital_social": 10000,
           "capital_variable": false,
@@ -96,9 +96,9 @@
           "indicateur_associe_unique": false
         },
         "finances": {
-          "2021": {
-            "ca": 0,
-            "resultat_net": 86584
+          "2024": {
+            "ca": 3130136,
+            "resultat_net": 363112
           }
         },
         "complements": {
@@ -106,6 +106,8 @@
           "convention_collective_renseignee": true,
           "liste_idcc": ["0637"],
           "egapro_renseignee": false,
+          "est_achats_responsables": false,
+          "est_alim_confiance": false,
           "est_association": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
@@ -117,9 +119,12 @@
           "liste_id_organisme_formation": null,
           "est_rge": false,
           "est_service_public": false,
+          "est_l100_3": false,
           "est_siae": true,
           "est_societe_mission": false,
           "est_uai": false,
+          "est_patrimoine_vivant": false,
+          "bilan_ges_renseigne": false,
           "identifiant_association": null,
           "statut_entrepreneur_spectacle": null,
           "type_siae": "EI"

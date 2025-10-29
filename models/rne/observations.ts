@@ -1,6 +1,6 @@
 import {
   clientRNEImmatriculation,
-  clientRNEImmatriculationFallback,
+  clientRNEObservationsFallback,
 } from "#clients/api-proxy/rne";
 import { HttpNotFound } from "#clients/exceptions";
 import { EAdministration } from "#models/administrations/EAdministration";
@@ -12,7 +12,7 @@ import { type Siren, verifySiren } from "#utils/helpers";
 import type { IObservationsWithMetadata } from "./types";
 
 const fallback = async (siren: Siren) => {
-  const { observations } = await clientRNEImmatriculationFallback(siren);
+  const observations = await clientRNEObservationsFallback(siren);
   return { data: observations, metadata: { isFallback: true } };
 };
 

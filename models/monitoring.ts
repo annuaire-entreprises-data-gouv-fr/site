@@ -1,4 +1,5 @@
 import { clientMonitoring } from "#clients/monitoring";
+import { DataStore } from "#utils/data-store";
 import { logWarningInSentry } from "#utils/sentry";
 import { administrationsMetaData } from "./administrations";
 import type { EAdministration } from "./administrations/EAdministration";
@@ -26,7 +27,7 @@ export interface IMonitoringWithMetaData
   administrationEnum: EAdministration;
 }
 
-export const getMonitorsByAdministration = async (): Promise<{
+const fetchMonitorsByAdministration = async (): Promise<{
   [key: string]: IMonitoringWithMetaData[];
 }> => {
   const allMonitoringsByAdministration = {} as {
@@ -90,3 +91,19 @@ export const getMonitorsByAdministration = async (): Promise<{
 
   return allMonitoringsByAdministration;
 };
+
+const store = new DataStore<{
+  [key: string]: IMonitoringWithMetaData[];
+}>(
+  fetchMonitorsByAdministration,
+  "monitors-by-administration",
+  (response) => ({ monitorsByAdministration: response }),
+  30_000
+);
+
+export const getMonitorsByAdministration = async (): Promise<{
+  [key: string]: IMonitoringWithMetaData[];
+}> =>
+  store.get("monitorsByAdministration") as Promise<{
+    [key: string]: IMonitoringWithMetaData[];
+  }>;

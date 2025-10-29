@@ -14,7 +14,7 @@ export const NpsStats: React.FC<{
 
   const totalAvg =
     monthlyNps.reduce(
-      (sum, { values }) => sum + (values["all"][statsType] || 0),
+      (sum, { values }) => sum + (values["all"]?.[statsType] || 0),
       0
     ) / 12;
   const npsMaxRange = statsType === "avg" ? 10 : 100;
@@ -35,7 +35,9 @@ export const NpsStats: React.FC<{
       {
         backgroundColor: constants.chartColors[2],
         borderColor: constants.chartColors[2],
-        data: monthlyNps.map(({ values }) => values["all"][statsType] || null),
+        data: monthlyNps.map(
+          ({ values }) => values["all"]?.[statsType] || null
+        ),
         label: `${npsPrefixLabel} de tous les utilisateurs`,
         tension: 0.3,
       },
@@ -43,7 +45,7 @@ export const NpsStats: React.FC<{
         backgroundColor: constants.chartColors[6],
         borderColor: constants.chartColors[6],
         data: monthlyNps.map(
-          ({ values }) => values["Agent public"][statsType],
+          ({ values }) => values["Agent public"]?.[statsType],
           null
         ),
         label: `${npsPrefixLabel} des agents`,

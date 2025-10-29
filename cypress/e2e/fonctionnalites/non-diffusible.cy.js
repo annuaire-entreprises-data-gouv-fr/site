@@ -76,23 +76,24 @@ describe("Non-diffusible", () => {
           .last()
           .within(() => {
             cy.findByRole("button", {
-              name: /▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎/,
+              name: /▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎/,
             }).should("be.visible");
           });
       });
 
-    cy.get("#etablissement")
-      .findAllByRole("row")
-      .filter(':contains("Enseigne de l’établissement")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /▪︎ ▪︎ ▪︎ information protégée ▪︎ ▪︎ ▪︎/,
-            }).should("be.visible");
-          });
-      });
+    // TODO re-enable this check after data update and examples generation
+    // cy.get("#etablissement")
+    //   .findAllByRole("row")
+    //   .filter(':contains("Enseigne de l’établissement")')
+    //   .within(() => {
+    //     cy.findAllByRole("cell")
+    //       .last()
+    //       .within(() => {
+    //         cy.findByRole("button", {
+    //           name: /▪︎ ▪︎ ▪︎ information protégée ▪︎ ▪︎ ▪︎/,
+    //         }).should("be.visible");
+    //       });
+    //   });
     cy.get("#etablissement")
       .findAllByRole("row")
       .filter(':contains("Adresse")')
@@ -101,7 +102,7 @@ describe("Non-diffusible", () => {
           .last()
           .within(() => {
             cy.findByRole("button", {
-              name: /▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎/,
+              name: /▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎/,
             }).should("be.visible");
           });
       });
@@ -114,15 +115,14 @@ describe("Non-diffusible", () => {
           .filter(':contains("Détails (nom, enseigne, adresse)")')
           .first()
           .within(() => {
+            // TODO re-enable this check after data update and examples generation
             // Ensure enseigne is hidden
-            cy.findByRole("link", {
-              name: /▪︎ ▪︎ ▪︎ information protégée ▪︎ ▪︎ ▪︎/,
-            }).should("be.visible");
+            // cy.findByRole("link", {
+            //   name: /▪︎ ▪︎ ▪︎ information protégée ▪︎ ▪︎ ▪︎/,
+            // }).should("be.visible");
 
             // Ensure address fallbacks to commune
-            cy.findByText("▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎ ▪︎").should(
-              "be.visible"
-            );
+            cy.findByText("▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎").should("be.visible");
           });
       });
   });

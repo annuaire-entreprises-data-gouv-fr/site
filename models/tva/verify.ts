@@ -5,9 +5,7 @@ import {
   APINotRespondingFactory,
   type IAPINotRespondingError,
 } from "#models/api-not-responding";
-import { FetchRessourceException } from "#models/exceptions";
 import { verifySiren, verifyTVANumber } from "#utils/helpers";
-import logErrorInSentry from "#utils/sentry";
 import { tvaNumber } from "./utils";
 
 export const buildAndVerifyTVA = async (
@@ -19,13 +17,6 @@ export const buildAndVerifyTVA = async (
   try {
     return { tva: await clientTVA(tvaNumberFromSiren) };
   } catch (e: any) {
-    logErrorInSentry(
-      new FetchRessourceException({
-        ressource: "TVAValidation",
-        cause: e,
-        context: { slug },
-      })
-    );
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.VIES, 404);
     }

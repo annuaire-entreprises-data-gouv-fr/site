@@ -94,6 +94,8 @@ export const mapToDirigeantModel = (
     role: formatRole(qualite),
     nationalite,
     dateNaissancePartial: date_de_naissance,
+    estDemissionnaire: false,
+    dateDemission: null,
   };
 };
 
@@ -109,6 +111,8 @@ export const mapToElusModel = (eluRaw: any): IEtatCivil => {
     role: fonction,
     dateNaissancePartial: annee_de_naissance,
     lieuNaissance: "",
+    estDemissionnaire: false,
+    dateDemission: null,
   };
 };
 

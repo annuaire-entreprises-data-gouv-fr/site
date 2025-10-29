@@ -77,7 +77,7 @@ export default function EORICell({ siret, session }: IProps) {
   }
   return eoriValidation.isValid ? (
     <CopyPaste label="eori" shouldRemoveSpace>
-      {"FR " + formatSiret(eoriValidation.eori)}
+      {formatSiret(eoriValidation.eori)}
     </CopyPaste>
   ) : (
     <i>Pas de n° EORI valide</i>

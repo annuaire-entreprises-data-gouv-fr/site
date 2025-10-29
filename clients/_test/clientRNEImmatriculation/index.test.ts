@@ -1,6 +1,6 @@
 import {
   clientRNEImmatriculation,
-  clientRNEImmatriculationFallback,
+  clientRNEObservationsFallback,
 } from "#clients/api-proxy/rne";
 import type { Siren } from "#utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
@@ -53,7 +53,7 @@ describe("clientRNEImmatriculationFallback", () => {
     "Should match snapshot for protected uniteLegale with the characteristics (RGE)",
     async () => {
       await expectClientToMatchSnapshot({
-        client: clientRNEImmatriculationFallback,
+        client: clientRNEObservationsFallback,
         args: ["487444697" as Siren],
         __dirname,
         snapshotFile: "rge-fallback.json",

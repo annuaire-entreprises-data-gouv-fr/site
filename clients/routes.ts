@@ -9,6 +9,12 @@ const routes = {
     bilanGes:
       "https://koumoul.com/data-fair/api/v1/datasets/9nd9avrbto3l14md-wkode4o/lines",
   },
+  apiAssociation: {
+    associationPartenaires: (rnaOrSiren: string) =>
+      `/apim/api-asso-partenaires/api/structure/${rnaOrSiren}`,
+    association: (rnaOrSiren: string) =>
+      `/apim/api-asso/api/structure/${rnaOrSiren}`,
+  },
   apiEntreprise: {
     association: (siren: string) =>
       `/v4/djepva/api-association/associations/${siren}`,
@@ -198,22 +204,18 @@ const routes = {
     },
   },
   proxy: {
-    ig: (siren: string) =>
-      `https://annuaire-entreprises-api-proxy.api.gouv.fr/ig/${siren}`,
+    ig: (siren: string) => `/ig/${siren}`,
     rne: {
       immatriculation: {
-        default: (siren: string) =>
-          `https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/${siren}`,
-        fallback: (siren: string) =>
-          `https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/fallback/${siren}`,
+        default: (siren: string) => `/rne/${siren}`,
+      },
+      observations: {
+        fallback: (siren: string) => `/rne/observations/fallback/${siren}`,
       },
     },
-    association: (rnaOrSiren: string) =>
-      `https://annuaire-entreprises-api-proxy.api.gouv.fr/association/${rnaOrSiren}`,
-    tva: (tvaNumber: string) =>
-      `https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/${tvaNumber}`,
-    eori: (siret: string) =>
-      `https://annuaire-entreprises-api-proxy.api.gouv.fr/eori/${siret}`,
+    association: (rnaOrSiren: string) => `/association/${rnaOrSiren}`,
+    tva: (tvaNumber: string) => `/tva/${tvaNumber}`,
+    eori: (siret: string) => `/eori/${siret}`,
   },
   rne: {
     portail: {

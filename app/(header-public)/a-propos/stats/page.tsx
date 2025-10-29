@@ -4,8 +4,7 @@ import { NpsStats } from "#components/stats/nps";
 import { TraficStats } from "#components/stats/trafic";
 import { UsageStats } from "#components/stats/usage";
 
-export const dynamic = "force-static";
-export const revalidate = 14_400; // 4 * 3600 = 4 hours;
+export const dynamic = "force-dynamic";
 
 async function fetchStats(): Promise<IMatomoStats> {
   const {

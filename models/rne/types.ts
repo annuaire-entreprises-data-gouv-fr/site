@@ -28,6 +28,8 @@ export interface IEtatCivil {
   dateNaissancePartial?: string;
   dateNaissance?: string;
   nationalite?: string;
+  estDemissionnaire: boolean;
+  dateDemission: string | null;
 }
 
 export type IEtatCivilLiensCapitalistiques = IEtatCivil & {
