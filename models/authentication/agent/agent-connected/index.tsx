@@ -84,17 +84,12 @@ export class AgentConnected {
       return agentHabilitation;
     }
 
-    // this exclude prestataires and stop connexion workflow
     if (this.isLikelyPrestataire()) {
+      // this exclude prestataires and stop connexion workflow
       throw new PrestataireException(`${this.email} is a prestataire`);
     }
-
-    const habilitationInheritedFromOrganisation =
-      await this.getOrganisationHabilitation();
-
-    return {
-      ...habilitationInheritedFromOrganisation,
-    };
+    // if no individuals rights, user inherit from orga rights
+    return await this.getOrganisationHabilitation();
   }
 
   async getAgentHabilitation() {
