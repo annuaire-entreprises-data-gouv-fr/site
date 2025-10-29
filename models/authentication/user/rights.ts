@@ -2,7 +2,7 @@ import {
   defaultAgentScopes,
   type IAgentScope,
 } from "../agent/scopes/constants";
-import type { IRolesDataGroup } from "../group/groups";
+import type { IAgentsGroup } from "../group";
 import { getIAgentScope } from "./helpers";
 import type { ISession } from "./session";
 
@@ -79,7 +79,7 @@ export function hasRights(session: ISession | null, right: ApplicationRights) {
  * Get all the groups granting a specific right to the user
  */
 export function getGroupsGrantingRights(
-  userGroups: IRolesDataGroup[],
+  userGroups: IAgentsGroup[],
   right: ApplicationRights
 ) {
   const requiredScope = ApplicationRightsToScopes[right];

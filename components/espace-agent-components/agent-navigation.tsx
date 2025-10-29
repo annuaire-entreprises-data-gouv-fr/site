@@ -2,7 +2,7 @@ import ButtonLink from "#components-ui/button";
 import FullWidthContainer from "#components-ui/container";
 import { Icon } from "#components-ui/icon/wrapper";
 import constants from "#models/constants";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 import AgentNavigationLink from "./agent-navigation-link";
 import styles from "./styles.module.css";
 

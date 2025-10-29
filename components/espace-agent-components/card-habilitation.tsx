@@ -9,7 +9,11 @@ export const CardHabilitation = () => {
   const labelId = useId();
 
   return (
-    <article aria-labelledby={labelId} className={styles.cardHabilitation}>
+    <article
+      aria-labelledby={labelId}
+      className={styles.cardHabilitation}
+      hidden
+    >
       <Tag color="agent">
         <Icon slug="infoFill">Habilitation</Icon>
       </Tag>
