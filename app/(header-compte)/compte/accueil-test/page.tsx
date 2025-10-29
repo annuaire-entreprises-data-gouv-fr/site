@@ -6,6 +6,7 @@ import { Warning } from "#components-ui/alerts";
 import { Badge } from "#components-ui/badge";
 import ButtonLink from "#components-ui/button";
 import FullWidthContainer from "#components-ui/container";
+import { Icon } from "#components-ui/icon/wrapper";
 import {
   ApplicationRights,
   hasRights,
@@ -34,7 +35,7 @@ const CompteAgentAccueil = async () => {
   const appRights = Object.values(ApplicationRights)
     .filter((scope) => scope !== ApplicationRights.isAgent)
     .map((scope) => [scope, hasRights(session, scope)])
-    .filter(([a, b]) => b);
+    .sort((a, b) => (a[1] ? -1 : 1));
 
   return (
     <>
@@ -165,10 +166,15 @@ const CompteAgentAccueil = async () => {
           Voici la liste des données auxquelles vous avez actuellement accès en
           tant qu’agent public.
         </p>
-
+        <br />
         <FullTable
           body={appRights.map(([a, b]) => [
             a,
+            b ? (
+              <>Agent public</>
+            ) : (
+              <Icon slug="lockFill">Sous habilitation</Icon>
+            ),
             <Badge
               backgroundColor="#ddd"
               fontColor="#666"
@@ -176,9 +182,41 @@ const CompteAgentAccueil = async () => {
               label={b ? "Oui" : "Non"}
             />,
           ])}
-          head={["Données", "Droits"]}
+          head={["Données", "Cadre légal", "Droits"]}
         />
       </div>
+
+      {(true || !session?.user?.isSuperAgent) && (
+        <div className="content-container">
+          <h2>Les données supplémentaires</h2>
+          <p>
+            Lorsque le tableau indique{" "}
+            <Badge
+              backgroundColor="#ddd"
+              fontColor="#666"
+              icon={"closed"}
+              label={"Non"}
+            />
+            , cela signifie que ces données nécessitent une habilitation.
+          </p>
+          <p>
+            En faisant une demande, vous pouvez obtenir des droits
+            supplémentaires si votre mission concerne :
+          </p>
+          <ul>
+            <li>La fraude</li>
+            <li>Les marchés publics</li>
+            <li>Les subventions aux associations</li>
+            <li>Les aides publiques</li>
+          </ul>
+          <br />
+          <ButtonLink
+            to={`${process.env.DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`}
+          >
+            Demander une habilitation
+          </ButtonLink>
+        </div>
+      )}
     </>
   );
 };

@@ -67,7 +67,7 @@ export function GroupItem({
   );
 
   return (
-    <div className="fr-card fr-mt-3w" id={`group-${group.id}`}>
+    <div className="fr-card fr-mt-3w">
       <div className="fr-card__body">
         <div className="fr-card__content" style={{ display: "flex" }}>
           <div className="fr-mb-3w">
