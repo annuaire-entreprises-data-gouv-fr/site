@@ -5,6 +5,7 @@ import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
 import getSession from "#utils/server-side-helper/get-session";
 import type { IReqWithSession } from "#utils/session/with-session";
+import { ProConnectRefreshTokenExpired } from "./exceptions";
 
 let _client = undefined as BaseClient | undefined;
 
@@ -146,21 +147,30 @@ export const proConnectGetOrRefreshAccessToken = async (): Promise<string> => {
 
   const accessTokenTimeToLive =
     session.proConnectTokenSet.accessTokenExpiresAt - Date.now();
+
   if (accessTokenTimeToLive > 5000) {
     return session.proConnectTokenSet.accessToken;
   }
 
-  const client = await getClient();
-  const tokenSet = await client.refresh(
-    session?.proConnectTokenSet?.refreshToken
-  );
+  try {
+    const client = await getClient();
 
-  session.proConnectTokenSet = {
-    idToken: tokenSet.id_token,
-    accessToken: tokenSet.access_token,
-    accessTokenExpiresAt: tokenSet.expires_at,
-    refreshToken: tokenSet.refreshToken as string,
-  };
+    const tokenSet = await client.refresh(
+      session?.proConnectTokenSet?.refreshToken
+    );
 
-  return tokenSet.accessToken as string;
+    session.proConnectTokenSet = {
+      idToken: tokenSet.id_token,
+      accessToken: tokenSet.access_token,
+      accessTokenExpiresAt: tokenSet.expires_at,
+      refreshToken: tokenSet.refreshToken as string,
+    };
+
+    return tokenSet.access_token as string;
+  } catch (e: any) {
+    if (e?.error === "invalid_grant") {
+      throw new ProConnectRefreshTokenExpired({ cause: e });
+    }
+    throw e;
+  }
 };

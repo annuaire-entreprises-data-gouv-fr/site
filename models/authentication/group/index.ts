@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import { ProConnectRefreshTokenExpired } from "#clients/authentication/pro-connect/exceptions";
 import { HttpNotFound } from "#clients/exceptions";
 import {
   clientRolesAddUserToGroup,
@@ -25,7 +27,9 @@ async function run<T>(callback: () => Promise<T>): Promise<T> {
   try {
     return await callback();
   } catch (error) {
-    // erreur pro connect et redirections
+    if (error instanceof ProConnectRefreshTokenExpired) {
+      redirect("token_expired");
+    }
 
     logFatalErrorInSentry(
       new FetchRessourceException({

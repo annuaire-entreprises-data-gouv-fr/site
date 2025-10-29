@@ -1,12 +1,12 @@
 import { Icon } from "#components-ui/icon/wrapper";
 import { Tag } from "#components-ui/tag";
-import { Groups } from "#models/authentication/group/groups";
+import { getAgentGroups } from "#models/authentication/group";
 import {
   ApplicationRights,
   getGroupsGrantingRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 
 export const HabilitationsTable = async () => {
   const session = await getSession();
@@ -15,10 +15,7 @@ export const HabilitationsTable = async () => {
     return null;
   }
 
-  const groups = await Groups.find(
-    session.user.email,
-    session.user.proConnectSub
-  );
+  const groups = await getAgentGroups();
 
   const appRights = Object.values(ApplicationRights)
     .filter(

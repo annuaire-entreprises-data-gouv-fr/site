@@ -37,7 +37,6 @@ const mapToDomainObject = (response: IAgentsGroupResponse[]): IAgentsGroup[] =>
       );
     }
     return {
-      users: [],
       ...group,
       scopes: validScopes,
     };
@@ -78,12 +77,13 @@ export const clientRolesAddUserToGroup = async (
 
 export const clientRolesUpdateUserFromGroup = async (
   groupId: number,
-  roleId: number,
-  userId: number
+  userId: number,
+  roleId: number
 ): Promise<IRolesDataUser> => {
   const url =
     process.env.ROLES_DATA_URL +
     routes.rolesData.groups.updateUserFromGroup(groupId, userId, roleId);
+
   return await rolesDataResourceServerClient<IRolesDataUser>({
     url,
     method: "PATCH",
