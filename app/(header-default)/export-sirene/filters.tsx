@@ -10,6 +10,7 @@ import { categoriesJuridiquesNiveau1 } from "#utils/helpers/formatting/metadata/
 import { categoriesJuridiquesNiveau2 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
 import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
 import { codesSectionNAF } from "#utils/helpers/formatting/metadata/codes-section-NAF";
+import { CategoriesJuridiquesFileInput } from "./categories-juridiques-file-input";
 import { getEffectifLabel } from "./constants";
 import type { ExtendedExportCsvInput } from "./export-csv";
 import { LocationFilter } from "./location-filter";
@@ -463,6 +464,7 @@ export default function Filters({
                 }
                 options={getLegalCategoriesNiveau1()}
                 placeholder="Choisir une catégorie juridique"
+                value={filters.legalCategoriesNiveau1}
               />
             </div>
 
@@ -484,6 +486,7 @@ export default function Filters({
                 }
                 options={getLegalCategoriesNiveau2()}
                 placeholder="Choisir une catégorie juridique"
+                value={filters.legalCategoriesNiveau2}
               />
             </div>
 
@@ -505,8 +508,18 @@ export default function Filters({
                 }
                 options={getLegalCategoriesNiveau3()}
                 placeholder="Choisir une catégorie juridique"
+                value={filters.legalCategoriesNiveau3}
               />
             </div>
+
+            <CategoriesJuridiquesFileInput
+              onChangeCategoriesJuridiques={(params) => {
+                setFilters((prev) => ({
+                  ...prev,
+                  ...params,
+                }));
+              }}
+            />
           </div>
         </section>
       </div>
