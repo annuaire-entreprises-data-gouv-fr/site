@@ -4,9 +4,8 @@ import {
   getUrlFromDepartement,
   libelleFromDepartement,
 } from "#utils/helpers/formatting/labels";
-import { getNonce } from "#utils/server-side-helper/headers/nonce";
 
-const StructuredDataBreadcrumb = async ({
+const StructuredDataBreadcrumb = ({
   uniteLegale,
 }: {
   uniteLegale: IUniteLegale;
@@ -20,7 +19,6 @@ const StructuredDataBreadcrumb = async ({
       throw new Error();
     }
 
-    const nonce = await getNonce();
     return (
       <script
         dangerouslySetInnerHTML={{
@@ -47,7 +45,6 @@ const StructuredDataBreadcrumb = async ({
           }]
         }`,
         }}
-        nonce={nonce}
         type="application/ld+json"
       />
     );

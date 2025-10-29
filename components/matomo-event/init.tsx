@@ -4,11 +4,9 @@ import {
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
-import { getNonce } from "#utils/server-side-helper/headers/nonce";
 
 const TRACKER_BASE_URL = "https://stats.data.gouv.fr";
-export async function MatomoInit({ session }: { session: ISession | null }) {
-  const nonce = await getNonce();
+export function MatomoInit({ session }: { session: ISession | null }) {
   return (
     <>
       <script
@@ -28,12 +26,10 @@ export async function MatomoInit({ session }: { session: ISession | null }) {
               _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
               `,
         }}
-        nonce={nonce}
       />
       <script
         async
         defer
-        nonce={nonce}
         src={`${TRACKER_BASE_URL}/piwik.js`}
         type="text/javascript"
       />

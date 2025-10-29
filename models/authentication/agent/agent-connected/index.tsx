@@ -100,7 +100,7 @@ export class AgentConnected {
   async getAgentHabilitation() {
     const superAgentScopes = new Scopes();
 
-    const groups = await getAgentGroups();
+    const groups = await getAgentGroups({ allowProConnectRedirection: false });
 
     groups.forEach((agentGroup) => {
       superAgentScopes.add(agentGroup.scopes);

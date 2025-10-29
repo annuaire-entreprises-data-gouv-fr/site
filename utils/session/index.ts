@@ -32,7 +32,17 @@ export const setAgentSession = async (
 };
 
 export const cleanAgentSession = async (session: IronSession<ISession>) => {
-  session.destroy();
+  session.state = undefined;
+  session.nonce = undefined;
+  session.proConnectTokenSet = undefined;
+  session.user = null;
+  await session.save();
+};
+
+export const cleanFranceConnectSession = async (
+  session: IronSession<ISession>
+) => {
+  session.franceConnectHidePersonalDataSession = undefined;
   await session.save();
 };
 
@@ -56,7 +66,7 @@ export const setPathFrom = async (
 export const getPathFrom = (session: IronSession<ISession>) => session.pathFrom;
 
 export const cleanPathFrom = async (session: IronSession<ISession>) => {
-  delete session.pathFrom;
+  session.pathFrom = undefined;
   await session.save();
 };
 

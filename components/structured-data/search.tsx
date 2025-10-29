@@ -1,11 +1,7 @@
-import { getNonce } from "#utils/server-side-helper/headers/nonce";
-
-const StructuredDataSearchAction = async () => {
-  const nonce = await getNonce();
-  return (
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `{
+const StructuredDataSearchAction = () => (
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `{
         "@context": "https://schema.org",
         "@type": "WebSite",
         "url": "https://annuaire-entreprises.data.gouv.fr",
@@ -26,11 +22,9 @@ const StructuredDataSearchAction = async () => {
           "query-input": "required name=search_term_string"
         }]
       }`,
-      }}
-      nonce={nonce}
-      type="application/ld+json"
-    />
-  );
-};
+    }}
+    type="application/ld+json"
+  />
+);
 
 export default StructuredDataSearchAction;

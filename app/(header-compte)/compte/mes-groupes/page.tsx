@@ -24,7 +24,7 @@ const MesGroupesPage = async () => {
 
   const [roles, groups] = await Promise.all([
     rolesMetadataStore.getRoles(),
-    getAgentGroups(),
+    getAgentGroups({ allowProConnectRedirection: true }),
   ]);
 
   return (

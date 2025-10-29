@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { ProConnectRefreshTokenExpired } from "#clients/authentication/pro-connect/exceptions";
+import { ProConnectReconnexionNeeded } from "#clients/authentication/pro-connect/exceptions";
 import { HttpNotFound } from "#clients/exceptions";
 import {
   clientRolesAddUserToGroup,
@@ -27,10 +27,6 @@ async function run<T>(callback: () => Promise<T>): Promise<T> {
   try {
     return await callback();
   } catch (error) {
-    if (error instanceof ProConnectRefreshTokenExpired) {
-      redirect("token_expired");
-    }
-
     logFatalErrorInSentry(
       new FetchRessourceException({
         ressource: "Roles.data",
@@ -41,14 +37,27 @@ async function run<T>(callback: () => Promise<T>): Promise<T> {
   }
 }
 
-export const getAgentGroups = async (): Promise<IAgentsGroup[]> => {
+export const getAgentGroups = async ({
+  allowProConnectRedirection,
+}: {
+  allowProConnectRedirection: boolean;
+}): Promise<IAgentsGroup[]> => {
   return await run<IAgentsGroup[]>(async () => {
     try {
+      if (allowProConnectRedirection) {
+        throw new ProConnectReconnexionNeeded({ cause: "hey", message: "hey" });
+      }
       return await clientRolesGetGroups();
     } catch (error) {
       if (error instanceof HttpNotFound) {
         // user not in roles.data
         return [];
+      }
+      if (
+        !!allowProConnectRedirection &&
+        error instanceof ProConnectReconnexionNeeded
+      ) {
+        return redirect("/api/auth/agent-connect/login");
       }
       throw error;
     }

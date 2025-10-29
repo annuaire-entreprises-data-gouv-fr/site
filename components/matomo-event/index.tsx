@@ -1,11 +1,9 @@
-import { getNonce } from "#utils/server-side-helper/headers/nonce";
-
 /**
  * Log an event in matomo but rendered from server side
  * @param param0
  * @returns
  */
-const MatomoEvent = async ({
+const MatomoEvent = ({
   category,
   action,
   name,
@@ -13,12 +11,10 @@ const MatomoEvent = async ({
   category: string;
   action: string;
   name: string;
-}) => {
-  const nonce = await getNonce();
-  return (
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
+}) => (
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `
           var _paq = window._paq || [];
           _paq.push([
               'trackEvent',
@@ -27,9 +23,7 @@ const MatomoEvent = async ({
               '${name}',
           ]);
         `,
-      }}
-      nonce={nonce}
-    />
-  );
-};
+    }}
+  />
+);
 export default MatomoEvent;

@@ -1,5 +1,3 @@
-import { getNonce } from "#utils/server-side-helper/headers/nonce";
-
 const generateFAQuestion = (question: string, answer: string): String => `{
     "@type": "Question",
     "name": ${JSON.stringify(question)},
@@ -9,12 +7,10 @@ const generateFAQuestion = (question: string, answer: string): String => `{
     }
   }`;
 
-const StructuredDataFAQ = async ({ data }: { data: string[][] }) => {
-  const nonce = await getNonce();
-  return (
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `{
+const StructuredDataFAQ = ({ data }: { data: string[][] }) => (
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `{
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [${data
@@ -22,11 +18,9 @@ const StructuredDataFAQ = async ({ data }: { data: string[][] }) => {
           .join(",")}]
       }
       `,
-      }}
-      nonce={nonce}
-      type="application/ld+json"
-    />
-  );
-};
+    }}
+    type="application/ld+json"
+  />
+);
 
 export default StructuredDataFAQ;

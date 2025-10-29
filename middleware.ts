@@ -11,8 +11,6 @@ import {
 } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
-import getContentSecurityPolicy from "#utils/server-side-helper/headers/content-security-policy";
-import { generateNonce } from "#utils/server-side-helper/headers/nonce";
 import { sessionOptions, setVisitTimestamp } from "#utils/session";
 
 const shouldRedirect = (path: string, search: string, url: string) => {
@@ -91,19 +89,6 @@ export async function middleware(request: NextRequest) {
     requestHeaders.set("x-redirected", isRedirected);
   }
 
-  /**
-   * Generate CSP & nonce for this request
-   *
-   * How It Works (Request Flow)
-   * 1. User requests page
-   * 2. Middleware runs (set headers x-nonce and CSP script-src 'nonce-Xy9Pqr...')
-   * 3. Server Component (app/layout.tsx) reads nonce from headers
-   * 4. HTML renders <script nonce="Xy9Pqr...">matomo code</script>
-   * 5. If browser sees XSS without nonce → ❌ Blocked
-   */
-  const nonce = generateNonce();
-  requestHeaders.set("x-nonce", nonce);
-
   const response = NextResponse.next({
     request: {
       // Apply new request headers
@@ -111,11 +96,6 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  // Set CSP header with nonce
-  response.headers.set(
-    "Content-Security-Policy",
-    getContentSecurityPolicy(nonce)
-  );
   const session = await getIronSession<ISession>(
     request,
     response,

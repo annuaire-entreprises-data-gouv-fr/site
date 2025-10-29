@@ -5,7 +5,7 @@ import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
 import getSession from "#utils/server-side-helper/get-session";
 import type { IReqWithSession } from "#utils/session/with-session";
-import { ProConnectRefreshTokenExpired } from "./exceptions";
+import { ProConnectReconnexionNeeded } from "./exceptions";
 
 let _client = undefined as BaseClient | undefined;
 
@@ -168,9 +168,9 @@ export const proConnectGetOrRefreshAccessToken = async (): Promise<string> => {
 
     return tokenSet.access_token as string;
   } catch (e: any) {
-    if (e?.error === "invalid_grant") {
-      throw new ProConnectRefreshTokenExpired({ cause: e });
-    }
-    throw e;
+    throw new ProConnectReconnexionNeeded({
+      cause: e,
+      message: "Could not refresh ProConnect token",
+    });
   }
 };

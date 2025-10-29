@@ -15,7 +15,7 @@ export const HabilitationsTable = async () => {
     return null;
   }
 
-  const groups = await getAgentGroups();
+  const groups = await getAgentGroups({ allowProConnectRedirection: true });
 
   const appRights = Object.values(ApplicationRights)
     .filter(

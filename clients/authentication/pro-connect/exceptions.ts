@@ -1,9 +1,10 @@
 import { Exception } from "#models/exceptions";
 
-export class ProConnectRefreshTokenExpired extends Exception {
+export class ProConnectReconnexionNeeded extends Exception {
   constructor(args: {
+    message: string;
     cause?: any;
   }) {
-    super({ name: "ProConnectRefreshTokenExpired", ...args });
+    super({ name: "ProConnectReconnexionNeeded", ...args });
   }
 }
