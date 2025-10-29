@@ -4,11 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function AgentNavigationLink({
-  id,
   href,
   label,
 }: {
-  id: string;
   href: string;
   label: string;
 }) {
@@ -16,12 +14,10 @@ export default function AgentNavigationLink({
 
   return (
     <Link
-      aria-selected={pathname === href}
-      className="fr-tabs__tab"
+      aria-current={pathname === href ? "page" : undefined}
+      className={"fr-nav__link"}
       href={href}
-      id={id}
       key={href}
-      role="tab"
     >
       {label}
     </Link>
