@@ -14,7 +14,7 @@ import {
   parseIntWithDefaultValue,
 } from "#utils/helpers";
 import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
-import type { AppRouterProps } from "#utils/server-side-helper/app/extract-params";
+import type { AppRouterProps } from "#utils/server-side-helper/extract-params";
 
 async function extractParamsPersonne(props: AppRouterProps) {
   const searchParams = await props.searchParams;

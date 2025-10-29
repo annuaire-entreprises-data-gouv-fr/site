@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "#components/footer";
-import { HeaderAppRouter } from "#components/header/header-app-router";
-import { meta } from "#components/meta/meta-server";
+import { Header } from "#components/header/header";
+import { meta } from "#components/meta/meta";
 import { NotificationProvider } from "#components/notification-provider";
 
 export const metadata: Metadata = meta({});
@@ -13,11 +13,7 @@ export default function LayoutWithSearchBar({
 }) {
   return (
     <NotificationProvider>
-      <HeaderAppRouter
-        useAgentBanner={false}
-        useAgentCTA={true}
-        useSearchBar={true}
-      />
+      <Header useAgentBanner={false} useAgentCTA={true} useSearchBar={true} />
       <main className="fr-container">{children}</main>
       <Footer />
     </NotificationProvider>

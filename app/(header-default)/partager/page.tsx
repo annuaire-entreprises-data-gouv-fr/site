@@ -1,7 +1,7 @@
 import TextWrapper from "components-ui/text-wrapper";
 import type { Metadata } from "next";
 import { Icon } from "#components-ui/icon/wrapper";
-import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 
 export const metadata: Metadata = {
   title: "Réutiliser ou partager l’Annuaire des Entreprises",

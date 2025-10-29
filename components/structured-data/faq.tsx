@@ -1,5 +1,3 @@
-import type React from "react";
-
 const generateFAQuestion = (question: string, answer: string): String => `{
     "@type": "Question",
     "name": ${JSON.stringify(question)},
@@ -9,7 +7,7 @@ const generateFAQuestion = (question: string, answer: string): String => `{
     }
   }`;
 
-const StructuredDataFAQ: React.FC<{ data: string[][] }> = ({ data }) => (
+const StructuredDataFAQ = ({ data }: { data: string[][] }) => (
   <script
     dangerouslySetInnerHTML={{
       __html: `{

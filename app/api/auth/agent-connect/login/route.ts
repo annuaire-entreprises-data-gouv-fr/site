@@ -2,15 +2,18 @@ import { NextResponse } from "next/server";
 import { proConnectAuthorizeUrl } from "#clients/authentication/pro-connect/strategy";
 import { AgentConnectionFailedException } from "#models/authentication/authentication-exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
-import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
-import { setPathFrom } from "#utils/session";
+import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
+import {
+  cleanAgentSession,
+  cleanFranceConnectSession,
+  setPathFrom,
+} from "#utils/session";
 import withSession from "#utils/session/with-session";
 
 export const GET = withSession(async function loginRoute(req) {
   try {
-    if (req.session.franceConnectHidePersonalDataSession) {
-      throw new Error("User is already logged in with FranceConnect");
-    }
+    await cleanAgentSession(req.session);
+    await cleanFranceConnectSession(req.session);
 
     const referer = req.headers.get("referer") || "";
     const baseURL = getBaseUrl();

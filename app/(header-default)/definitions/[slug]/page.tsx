@@ -11,7 +11,7 @@ import { logWarningInSentry } from "#utils/sentry";
 import type {
   AppRouterProps,
   IParams,
-} from "#utils/server-side-helper/app/extract-params";
+} from "#utils/server-side-helper/extract-params";
 
 const cachedGetDefinition = cache((slug: string) => {
   const definition = getDefinition(slug);

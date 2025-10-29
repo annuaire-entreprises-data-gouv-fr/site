@@ -3,15 +3,18 @@
  * @param param0
  * @returns
  */
-const MatomoEvent: React.FC<{
+const MatomoEvent = ({
+  category,
+  action,
+  name,
+}: {
   category: string;
   action: string;
   name: string;
-}> = ({ category, action, name }) => (
-  <div
+}) => (
+  <script
     dangerouslySetInnerHTML={{
       __html: `
-        <script>
           var _paq = window._paq || [];
           _paq.push([
               'trackEvent',
@@ -19,7 +22,6 @@ const MatomoEvent: React.FC<{
               '${action}',
               '${name}',
           ]);
-        </script>
         `,
     }}
   />

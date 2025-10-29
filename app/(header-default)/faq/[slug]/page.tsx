@@ -10,7 +10,7 @@ import { logWarningInSentry } from "#utils/sentry";
 import type {
   AppRouterProps,
   IParams,
-} from "#utils/server-side-helper/app/extract-params";
+} from "#utils/server-side-helper/extract-params";
 
 // should not happen since we declared generateStaticParams
 const redirectFAQPageNotFound = (slug: string) => {

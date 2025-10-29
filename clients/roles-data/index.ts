@@ -1,10 +1,11 @@
+import { rolesDataResourceServerClient } from "#clients/authentication/pro-connect/resource-server-client";
 import routes from "#clients/routes";
-import type { IRolesDataGroup } from "#models/authentication/group/groups";
+import type { IAgentsGroup } from "#models/authentication/group";
 import { InternalError } from "#models/exceptions";
+import { httpGet } from "#utils/network";
 import logErrorInSentry from "#utils/sentry";
-import { rolesdataApiClient } from "./client";
 import type {
-  IRolesDataGroupResponse,
+  IAgentsGroupResponse,
   IRolesDataRoles,
   IRolesDataUser,
 } from "./interface";
@@ -14,25 +15,20 @@ import { parseAgentScopes } from "./parse";
  * Roles.data
  * https://roles.data.gouv.fr/
  */
-export const getGroupsByEmail = async (
-  userEmail: string,
-  userSub: string
-): Promise<IRolesDataGroup[]> => {
-  const route = routes.rolesData.groups.getGroupsByEmail(userEmail, userSub);
-  const response = await rolesdataApiClient.fetch<IRolesDataGroupResponse[]>(
-    route,
-    {
-      method: "GET",
-    }
-  );
+export const clientRolesGetGroups = async (): Promise<IAgentsGroup[]> => {
+  const url = process.env.ROLES_DATA_URL + routes.rolesData.groups.getGroups;
+  const response = await rolesDataResourceServerClient<IAgentsGroupResponse[]>({
+    url,
+    method: "GET",
+  });
+
   return mapToDomainObject(response);
 };
 
-const mapToDomainObject = (
-  response: IRolesDataGroupResponse[]
-): IRolesDataGroup[] =>
+const mapToDomainObject = (response: IAgentsGroupResponse[]): IAgentsGroup[] =>
   response.map((group) => {
     const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
+
     if (inValidScopes.length > 0) {
       logErrorInSentry(
         new InternalError({
@@ -46,90 +42,64 @@ const mapToDomainObject = (
     };
   });
 
-export const getRolesMetadata = async (): Promise<IRolesDataRoles[]> => {
-  const route = routes.rolesData.roles.get;
-  return await rolesdataApiClient.fetch<IRolesDataRoles[]>(route, {
-    method: "GET",
-  });
+export const clientRolesGetMetadata = async (): Promise<IRolesDataRoles[]> => {
+  const url = process.env.ROLES_DATA_URL + routes.rolesData.roles.get;
+  return await httpGet<IRolesDataRoles[]>(url);
 };
 
-export const getUserByEmail = async (
-  email: string
-): Promise<IRolesDataUser> => {
-  const route = routes.rolesData.users.getByEmail(email);
-  return await rolesdataApiClient.fetch<IRolesDataUser>(route, {
-    method: "GET",
-  });
-};
-
-export const updateName = async (
+export const clientRolesUpdateName = async (
   groupId: number,
-  groupName: string,
-  actingUserSub: string
-): Promise<null> => {
-  const route = routes.rolesData.groups.updateName(
-    groupId,
-    groupName,
-    actingUserSub
-  );
-  return await rolesdataApiClient.fetch<null>(route, {
+  groupName: string
+): Promise<void> => {
+  const route =
+    process.env.ROLES_DATA_URL +
+    routes.rolesData.groups.updateName(groupId, groupName);
+  return await rolesDataResourceServerClient<void>({
+    url: route,
     method: "PUT",
   });
 };
 
-export const addUserToGroup = async (
+export const clientRolesAddUserToGroup = async (
   groupId: number,
   email: string,
-  roleId: number,
-  actingUserSub: string
+  roleId: number
 ): Promise<IRolesDataUser> => {
-  const route = routes.rolesData.groups.addUserToGroup(groupId, actingUserSub);
-  return await rolesdataApiClient.fetch<IRolesDataUser>(route, {
+  const url =
+    process.env.ROLES_DATA_URL +
+    routes.rolesData.groups.addUserToGroup(groupId);
+  return await rolesDataResourceServerClient<IRolesDataUser>({
+    url,
     method: "POST",
     data: { email, role_id: roleId },
   });
 };
 
-export const updateUserFromGroup = async (
+export const clientRolesUpdateUserFromGroup = async (
   groupId: number,
-  email: string,
-  roleId: number,
-  actingUserSub: string
+  userId: number,
+  roleId: number
 ): Promise<IRolesDataUser> => {
-  const user = await getUserByEmail(email);
-  const route = routes.rolesData.groups.updateUserFromGroup(
-    groupId,
-    user.id,
-    roleId,
-    actingUserSub
-  );
-  return await rolesdataApiClient.fetch<IRolesDataUser>(route, {
+  const url =
+    process.env.ROLES_DATA_URL +
+    routes.rolesData.groups.updateUserFromGroup(groupId, userId, roleId);
+
+  return await rolesDataResourceServerClient<IRolesDataUser>({
+    url,
     method: "PATCH",
   });
 };
 
-export const removeUserFromGroup = async (
+export const clientRolesRemoveUserFromGroup = async (
   groupId: number,
-  userId: number,
-  actingUserSub: string
-): Promise<null> => {
-  const route = routes.rolesData.groups.removeUserFromGroup(
-    groupId,
-    userId,
-    actingUserSub
-  );
+  userId: number
+): Promise<void> => {
+  const url =
+    process.env.ROLES_DATA_URL +
+    routes.rolesData.groups.removeUserFromGroup(groupId, userId);
 
-  return await rolesdataApiClient.fetch<null>(route, {
+  return await rolesDataResourceServerClient<void>({
+    url,
     method: "DELETE",
   });
-};
-
-export default {
-  getGroupsByEmail,
-  getRolesMetadata,
-  getUserByEmail,
-  updateName,
-  addUserToGroup,
-  updateUserFromGroup,
-  removeUserFromGroup,
 };

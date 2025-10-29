@@ -2,7 +2,6 @@
 
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import MatomoEvent from "#components/matomo-event";
 import { CopyPaste } from "#components/table/copy-paste";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
@@ -152,14 +151,6 @@ const VerifyTVA: React.FC<{
         <TVAInvalide
           multipleNum={mayHaveMultipleTVANumber.allTime}
           number={tvaNumber}
-        />
-      )}
-
-      {Math.random() < 0.0001 && (
-        <MatomoEvent
-          action={tva ? "valid" : "invalid"}
-          category="tva"
-          name={siren}
         />
       )}
     </>

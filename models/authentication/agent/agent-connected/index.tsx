@@ -1,11 +1,10 @@
 import type { IProConnectUserInfo } from "#clients/authentication/pro-connect/strategy";
 import { Scopes } from "#models/authentication/agent/scopes";
 import {
-  AgentNotVerifiedException,
   NeedASiretException,
   PrestataireException,
 } from "#models/authentication/authentication-exceptions";
-import { Groups } from "#models/authentication/group/groups";
+import { getAgentGroups } from "#models/authentication/group";
 import { isSiret, verifySiret } from "#utils/helpers";
 import { AgentOrganisation } from "../organisation";
 import { defaultAgentScopes } from "../scopes/constants";
@@ -80,39 +79,26 @@ export class AgentConnected {
    * @returns
    */
   async getHabilitationLevel() {
-    // If agent is not verified, he still belongs to a group and need activation
-    let agentIsNotVerified = false;
-    try {
-      const agentHabilitation = await this.getAgentHabilitation();
-      if (agentHabilitation) {
-        return agentHabilitation;
-      }
-    } catch (e) {
-      if (e instanceof AgentNotVerifiedException) {
-        agentIsNotVerified = true;
-      }
+    const agentHabilitation = await this.getAgentHabilitation();
+    if (agentHabilitation) {
+      return agentHabilitation;
     }
 
-    // this exclude prestataires and stop connexion workflow
     if (this.isLikelyPrestataire()) {
+      // this exclude prestataires and stop connexion workflow
       throw new PrestataireException(`${this.email} is a prestataire`);
     }
-
-    const habilitationInheritedFromOrganisation =
-      await this.getOrganisationHabilitation();
-
-    return {
-      ...habilitationInheritedFromOrganisation,
-      agentIsNotVerified,
-    };
+    // if no individuals rights, user inherit from orga rights
+    return await this.getOrganisationHabilitation();
   }
 
   async getAgentHabilitation() {
     const superAgentScopes = new Scopes();
 
-    const groups = await Groups.find(this.email, this.proConnectSub);
-    groups.forEach((group) => {
-      superAgentScopes.add(group.scopes);
+    const groups = await getAgentGroups({ allowProConnectRedirection: false });
+
+    groups.forEach((agentGroup) => {
+      superAgentScopes.add(agentGroup.scopes);
     });
 
     if (superAgentScopes.hasScopes()) {
@@ -120,7 +106,6 @@ export class AgentConnected {
         scopes: [...defaultAgentScopes, ...superAgentScopes.scopes],
         userType: "Super-agent connecté",
         isSuperAgent: true,
-        agentIsNotVerified: false,
       };
     }
 

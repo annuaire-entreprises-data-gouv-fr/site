@@ -1,5 +1,5 @@
 import { HttpUnauthorizedError } from "#clients/exceptions";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 import type { ISensitiveCaller } from "./sensitive-request-logger";
 
 export async function sensitiveRequestCallerInfos(): Promise<ISensitiveCaller> {

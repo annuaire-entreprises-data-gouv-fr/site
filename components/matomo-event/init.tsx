@@ -27,12 +27,11 @@ export function MatomoInit({ session }: { session: ISession | null }) {
               `,
         }}
       />
-      <div
-        dangerouslySetInnerHTML={{
-          __html: `
-        <script type="text/javascript" async defer src="${TRACKER_BASE_URL}/piwik.js"></script>
-      `,
-        }}
+      <script
+        async
+        defer
+        src={`${TRACKER_BASE_URL}/piwik.js`}
+        type="text/javascript"
       />
     </>
   );

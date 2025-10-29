@@ -10,7 +10,7 @@ import {
   isLikelyASiret,
 } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
-import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 import { sessionOptions, setVisitTimestamp } from "#utils/session";
 
 const shouldRedirect = (path: string, search: string, url: string) => {
@@ -21,7 +21,7 @@ const shouldRedirect = (path: string, search: string, url: string) => {
         return new URL(`/etablissement/${sirenOrSiretSlug}`, url);
       }
       if (!isLikelyASiren(sirenOrSiretSlug)) {
-        return new URL("/404", url);
+        return new URL("/not-found", url);
       }
     }
 
@@ -31,7 +31,7 @@ const shouldRedirect = (path: string, search: string, url: string) => {
         return new URL(`/entreprise/${sirenOrSiretSlug}`, url);
       }
       if (!isLikelyASiret(sirenOrSiretSlug)) {
-        return new URL("/404", url);
+        return new URL("/not-found", url);
       }
     }
 
@@ -95,6 +95,7 @@ export async function middleware(request: NextRequest) {
       headers: requestHeaders,
     },
   });
+
   const session = await getIronSession<ISession>(
     request,
     response,

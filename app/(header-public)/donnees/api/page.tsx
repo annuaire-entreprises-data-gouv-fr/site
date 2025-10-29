@@ -36,13 +36,11 @@ export default async function StatusPage() {
 
   return (
     <>
-      <div
+      <script
         dangerouslySetInnerHTML={{
           __html: `
-            <script>
-              // reload page every minute
-              window.setTimeout(function() {window.location.reload()}, 60*1000)
-            </script>
+            // reload page every minute
+            window.setTimeout(function() {window.location.reload()}, 60*1000)
         `,
         }}
       />

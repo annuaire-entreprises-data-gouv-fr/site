@@ -27,7 +27,7 @@ const handleException = (e: any, slug: string) => {
         context: { slug },
       })
     );
-    redirect("/404");
+    redirect("/not-found");
   } else if (
     e instanceof SirenNotFoundError ||
     e instanceof SiretNotFoundError

@@ -25,21 +25,6 @@ const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
   </div>
 );
 
-const ServerErrorExplanations = () => (
-  <ErrorTemplate>
-    <h1>Oh non, c’est la panne 😱</h1>
-    <p>
-      Si vous voyez cette page, c’est que l’ordinateur qui fait marcher ce site
-      internet a rencontré une petite panne. Pas d’inquiétude, le reste du site
-      fonctionne toujours !
-    </p>
-    <p>
-      Ce problème a été automatiquement signalé à notre équipe technique, qui va
-      essayer de le corriger au plus vite.
-    </p>
-  </ErrorTemplate>
-);
-
 const ClientErrorExplanations = ({ error }: { error?: Error }) => (
   <ErrorTemplate>
     {error?.name === "ChunkLoadError" ? (
@@ -102,5 +87,4 @@ export {
   ClientErrorExplanations,
   ErrorNotFoundExplanations,
   SearchErrorExplanations,
-  ServerErrorExplanations,
 };

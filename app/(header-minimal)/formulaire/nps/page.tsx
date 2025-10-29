@@ -7,7 +7,7 @@ import {
 import { isLoggedIn } from "#models/authentication/user/rights";
 import constants from "#models/constants";
 import { randomId } from "#utils/helpers";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 import styles from "./style.module.css";
 
 const visitorTypes = [

@@ -1,13 +1,15 @@
 import type { IronSession, SessionOptions } from "iron-session";
 import type { IAgentInfo } from "#models/authentication/agent";
 import type { ISession } from "#models/authentication/user/session";
-import { isAbsoluteUrl } from "#utils/server-side-helper/app/is-absolute-url";
+import { isAbsoluteUrl } from "#utils/server-side-helper/is-absolute-url";
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
-  cookieName: "annuaire-entreprises-user-session-4",
+  cookieName: "annuaire-entreprises-user-session-5",
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
+    httpOnly: true, // ✅ Critical for XSS protection
+    sameSite: "lax", // ✅ CSRF protection
   },
   ttl: 43_200, // 12h
 };
@@ -30,7 +32,17 @@ export const setAgentSession = async (
 };
 
 export const cleanAgentSession = async (session: IronSession<ISession>) => {
-  session.destroy();
+  session.state = undefined;
+  session.nonce = undefined;
+  session.proConnectTokenSet = undefined;
+  session.user = null;
+  await session.save();
+};
+
+export const cleanFranceConnectSession = async (
+  session: IronSession<ISession>
+) => {
+  session.franceConnectHidePersonalDataSession = undefined;
   await session.save();
 };
 
@@ -54,7 +66,7 @@ export const setPathFrom = async (
 export const getPathFrom = (session: IronSession<ISession>) => session.pathFrom;
 
 export const cleanPathFrom = async (session: IronSession<ISession>) => {
-  delete session.pathFrom;
+  session.pathFrom = undefined;
   await session.save();
 };
 

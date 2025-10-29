@@ -9,15 +9,6 @@ export class AgentConnectionFailedException extends Exception {
   }
 }
 
-export class AgentNotVerifiedException extends Exception {
-  constructor(args: { cause?: any; context?: { slug: string } }) {
-    super({
-      name: "AgentNotVerifiedException",
-      ...args,
-    });
-  }
-}
-
 export class PrestataireException extends Exception {
   constructor(details: string) {
     super({

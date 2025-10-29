@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { meta } from "#components/meta/meta-server";
+import { meta } from "#components/meta/meta";
 import { Question } from "#components/question";
 
 export const metadata: Metadata = meta({});

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { franceConnectAuthenticate } from "#clients/authentication/france-connect/strategy";
 import logErrorInSentry from "#utils/sentry";
-import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 import { setHidePersonalDataRequestFCSession } from "#utils/session";
 import withSession from "#utils/session/with-session";
 import { FranceConnectFailedException } from "../france-connect-types";

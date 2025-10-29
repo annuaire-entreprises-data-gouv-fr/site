@@ -1,4 +1,3 @@
-import type React from "react";
 import type { IUniteLegale } from "#models/core/types";
 import {
   getDepartementFromCodePostal,
@@ -6,8 +5,10 @@ import {
   libelleFromDepartement,
 } from "#utils/helpers/formatting/labels";
 
-const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
+const StructuredDataBreadcrumb = ({
   uniteLegale,
+}: {
+  uniteLegale: IUniteLegale;
 }) => {
   try {
     const naf = uniteLegale.activitePrincipale;

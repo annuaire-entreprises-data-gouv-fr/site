@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import logErrorInSentry from "#utils/sentry";
-import { getBaseUrl } from "#utils/server-side-helper/app/get-base-url";
+import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 import { getPathFrom } from "#utils/session";
 import withSession from "#utils/session/with-session";
 import { FranceConnectLogoutFailedException } from "../france-connect-types";

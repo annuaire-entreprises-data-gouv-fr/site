@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import AgentNavigation from "#components/espace-agent-components/agent-navigation";
 import { GroupManagement } from "#components/espace-agent-components/group-management";
-import { Groups } from "#models/authentication/group/groups";
+import { getAgentGroups } from "#models/authentication/group";
 import { rolesMetadataStore } from "#models/authentication/group/roles";
 import { pluralize } from "#utils/helpers";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 
 export const metadata: Metadata = {
   title: "Vos groupes au sein de l’Annuaire des Entreprises",
@@ -24,7 +24,7 @@ const MesGroupesPage = async () => {
 
   const [roles, groups] = await Promise.all([
     rolesMetadataStore.getRoles(),
-    Groups.find(session.user.email, session.user.proConnectSub),
+    getAgentGroups({ allowProConnectRedirection: true }),
   ]);
 
   return (

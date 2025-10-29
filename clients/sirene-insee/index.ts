@@ -13,7 +13,7 @@ import httpClient, {
   type IDefaultRequestConfig,
 } from "#utils/network";
 import { logInfoInSentry } from "#utils/sentry";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 
 type IAccessToken = {
   data: {

@@ -5,7 +5,7 @@ import type {
 } from "#clients/roles-data/interface";
 import NonRenseigne from "#components/non-renseigne";
 import { FullTable } from "#components/table/full";
-import type { IRolesDataGroup } from "#models/authentication/group/groups";
+import type { IAgentsGroup } from "#models/authentication/group";
 import { formatSiret } from "#utils/helpers";
 import AddUserModal from "./update-modals/add-user";
 import DeleteUserButton from "./update-modals/delete-user";
@@ -16,7 +16,7 @@ const NotAdminTable = ({
   group,
   currentUserEmail,
 }: {
-  group: IRolesDataGroup;
+  group: IAgentsGroup;
   currentUserEmail: string;
 }) => (
   <FullTable
@@ -44,9 +44,9 @@ export function GroupItem({
   roles,
 }: {
   currentUserEmail: string;
-  group: IRolesDataGroup;
+  group: IAgentsGroup;
   isAdmin: boolean;
-  setGroup: (group: IRolesDataGroup) => void;
+  setGroup: (group: IAgentsGroup) => void;
   deleteGroup: (groupId: number) => void;
   roles: IRolesDataRoles[];
 }) {

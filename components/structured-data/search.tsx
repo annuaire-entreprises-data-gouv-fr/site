@@ -1,6 +1,4 @@
-import type React from "react";
-
-const StructuredDataSearchAction: React.FC<{}> = () => (
+const StructuredDataSearchAction = () => (
   <script
     dangerouslySetInnerHTML={{
       __html: `{

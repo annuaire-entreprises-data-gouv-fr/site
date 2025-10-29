@@ -7,7 +7,7 @@ import {
 } from "#models/authentication/user/rights";
 import { InternalError } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
-import getSession from "#utils/server-side-helper/app/get-session";
+import getSession from "#utils/server-side-helper/get-session";
 
 type RouteHandler<TContext> = (
   request: Request,

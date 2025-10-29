@@ -1,23 +1,19 @@
 import { NextResponse } from "next/server";
-import getSession from "#utils/server-side-helper/app/get-session";
+import { updateUserRoleInGroup } from "#models/authentication/group";
 import { updateUserSchema } from "../../input-validation";
-import { getGroup } from "../../route-helpers";
 import { withAgentAuth, withErrorHandling } from "../../route-wrappers";
 
 async function updateUserHandler(
   request: Request,
   { params }: { params: Promise<{ groupId: string }> }
 ) {
-  const session = await getSession();
-  const group = await getGroup(params);
-
+  const groupId = Number.parseInt((await params).groupId, 10);
   const body = await request.json();
   const validatedData = updateUserSchema.parse(body);
 
-  const user = await group.updateUser(
-    session!.user!.email,
-    session!.user!.proConnectSub,
-    validatedData.userEmail,
+  const user = await updateUserRoleInGroup(
+    groupId,
+    validatedData.userId,
     validatedData.roleId
   );
 
