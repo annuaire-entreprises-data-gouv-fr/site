@@ -11,6 +11,12 @@
 #   site: true
 
 ---
+- date: 29/10/2025
+  target:
+    site: true
+    api: true
+  body: |
+    Exclusion des dénominations usuelles des unités légales du nom complet des entreprises.
 - date: 21/10/2025
   target:
     site: true
