@@ -44,9 +44,6 @@ export const getAgentGroups = async ({
 }): Promise<IAgentsGroup[]> => {
   return await run<IAgentsGroup[]>(async () => {
     try {
-      if (allowProConnectRedirection) {
-        throw new ProConnectReconnexionNeeded({ cause: "hey", message: "hey" });
-      }
       return await clientRolesGetGroups();
     } catch (error) {
       if (error instanceof HttpNotFound) {

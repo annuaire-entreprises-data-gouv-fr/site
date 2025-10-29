@@ -1,8 +1,3 @@
-import {
-  defaultAgentScopes,
-  type IAgentScope,
-} from "../agent/scopes/constants";
-import type { IAgentsGroup } from "../group";
 import { getIAgentScope } from "./helpers";
 import type { ISession } from "./session";
 
@@ -31,74 +26,49 @@ export enum ApplicationRights {
   liassesFiscales = "Accès aux liasses fiscales (DGFiP)",
 }
 
-export const ApplicationRightsToScopes: Record<
-  ApplicationRights,
-  IAgentScope | null
-> = {
-  [ApplicationRights.opendata]: null,
-  [ApplicationRights.actesRne]: "rne",
-  [ApplicationRights.bilansRne]: "rne",
-  [ApplicationRights.documentsRne]: "rne",
-  [ApplicationRights.bilansBDF]: "bilans_bdf",
-  [ApplicationRights.conformite]: "conformite",
-  [ApplicationRights.chiffreAffaires]: "chiffre_affaires",
-  [ApplicationRights.liassesFiscales]: "liasses_fiscales",
-  [ApplicationRights.liensCapitalistiques]: "liens_capitalistiques",
-  [ApplicationRights.effectifsAnnuels]: "effectifs_annuels",
-  [ApplicationRights.protectedCertificats]: "pseudo_opendata",
-  [ApplicationRights.mandatairesRCS]: "pseudo_opendata",
-  [ApplicationRights.subventionsAssociation]: "pseudo_opendata",
-  [ApplicationRights.associationProtected]: "pseudo_opendata",
-  [ApplicationRights.beneficiaires]: "beneficiaires",
-  [ApplicationRights.nonDiffusible]: "nonDiffusible",
-  [ApplicationRights.isAgent]: "agent",
-  [ApplicationRights.travauxPublics]: "travaux_publics",
-  [ApplicationRights.administrateur]: "administrateur",
-};
-
 /**
  * Does the user have the right to access a view
  */
 export function hasRights(session: ISession | null, right: ApplicationRights) {
   const userScopes = getIAgentScope(session);
-
-  if (!ApplicationRightsToScopes[right]) {
-    if (right === ApplicationRights.opendata) {
+  switch (right) {
+    case ApplicationRights.opendata:
       return true;
-    }
-
-    throw new Error(
-      `Invalid right ${right} : missing scope requirement in ApplicationRightsToScopes`
-    );
+    case ApplicationRights.actesRne:
+    case ApplicationRights.bilansRne:
+    case ApplicationRights.documentsRne:
+      return userScopes.includes("rne");
+    case ApplicationRights.bilansBDF:
+      return userScopes.includes("bilans_bdf");
+    case ApplicationRights.conformite:
+      return userScopes.includes("conformite");
+    case ApplicationRights.chiffreAffaires:
+      return userScopes.includes("chiffre_affaires");
+    case ApplicationRights.liassesFiscales:
+      return userScopes.includes("liasses_fiscales");
+    case ApplicationRights.liensCapitalistiques:
+      return userScopes.includes("liens_capitalistiques");
+    case ApplicationRights.effectifsAnnuels:
+      return userScopes.includes("effectifs_annuels");
+    case ApplicationRights.protectedCertificats:
+    case ApplicationRights.mandatairesRCS:
+    case ApplicationRights.subventionsAssociation:
+    case ApplicationRights.associationProtected:
+      // not open data but available for all agents
+      return userScopes.includes("pseudo_opendata");
+    case ApplicationRights.beneficiaires:
+      return userScopes.includes("beneficiaires");
+    case ApplicationRights.nonDiffusible:
+      return userScopes.includes("nonDiffusible");
+    case ApplicationRights.isAgent:
+      return userScopes.includes("agent");
+    case ApplicationRights.travauxPublics:
+      return userScopes.includes("travaux_publics");
+    case ApplicationRights.administrateur:
+      return userScopes.includes("administrateur");
+    default:
+      return false;
   }
-
-  return userScopes.includes(ApplicationRightsToScopes[right]);
-}
-
-/**
- * Get all the groups granting a specific right to the user
- */
-export function getGroupsGrantingRights(
-  agentGroups: IAgentsGroup[],
-  right: ApplicationRights
-) {
-  const requiredScope = ApplicationRightsToScopes[right];
-
-  if (!requiredScope) {
-    if (right === ApplicationRights.opendata) {
-      return [];
-    }
-
-    throw new Error(
-      `Invalid right ${right} : missing scope requirement in ApplicationRightsToScopes `
-    );
-  }
-
-  if (defaultAgentScopes.includes(requiredScope)) {
-    return [];
-  }
-
-  return agentGroups.filter((group) => group.scopes.includes(requiredScope));
 }
 
 export function isLoggedIn(session: ISession | null) {
