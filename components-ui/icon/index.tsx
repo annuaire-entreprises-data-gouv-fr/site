@@ -405,6 +405,19 @@ const discussion = (
   </svg>
 );
 
+const chat3Fill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M7.291 20.824 2 22l1.176-5.291A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.956 9.956 0 0 1-4.709-1.176Z" />
+  </svg>
+);
+
 const accountLine = (
   <svg
     fill="currentColor"
@@ -428,6 +441,19 @@ const present = (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M15 2a4 4 0 0 1 3.464 6.001L23 8v2h-2v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10H1V8l4.536.001A4 4 0 0 1 12 3.355 3.983 3.983 0 0 1 15 2Zm-4 8H5v9h6v-9Zm8 0h-6v9h6v-9ZM9 4a2 2 0 0 0-.15 3.995L9 8h2V6a2 2 0 0 0-1.697-1.977l-.154-.018L9 4Zm6 0a2 2 0 0 0-1.995 1.85L13 6v2h2a2 2 0 0 0 1.995-1.85L17 6a2 2 0 0 0-2-2Z" />
+  </svg>
+);
+
+const giftFill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M15 2a4 4 0 0 1 3.464 6.001L23 8v2h-2v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10H1V8l4.536.001A4 4 0 0 1 12 3.355 3.983 3.983 0 0 1 15 2Zm-2 8h-2v10h2V10ZM9 4a2 2 0 0 0-.15 3.995L9 8h2V6a2 2 0 0 0-1.697-1.977l-.154-.018L9 4Zm6 0a2 2 0 0 0-1.995 1.85L13 6v2h2a2 2 0 0 0 1.995-1.85L17 6a2 2 0 0 0-2-2Z" />
   </svg>
 );
 
@@ -496,6 +522,83 @@ const ballPenFill = (
   </svg>
 );
 
+const bookletFill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M8 2v20H4v-4H2v-2h2v-3H2v-2h2V8H2V6h2V2h4Zm12.005 0C21.107 2 22 2.898 22 3.99v16.02c0 1.099-.893 1.99-1.995 1.99H10V2h10.005Z" />
+  </svg>
+);
+
+const editBoxFill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="m16.757 3-7.466 7.466.008 4.247 4.238-.007L21 7.243V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12.757Zm3.728-.9L21.9 3.516l-9.192 9.192-1.412.003-.002-1.417L20.485 2.1Z" />
+  </svg>
+);
+
+const book2Fill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M21 18H6a1 1 0 0 0 0 2h15v2H6a3 3 0 0 1-3-3V4a2 2 0 0 1 2-2h16v16Zm-5-9V7H8v2h8Z" />
+  </svg>
+);
+
+const infoFill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M19.5,2.5h-15c-1.1,0-2,0.9-2,2v15c0,1.1,0.9,2,2,2h15c1.1,0,2-0.9,2-2v-15C21.5,3.4,20.6,2.5,19.5,2.5z M13,17h-2v-6h2V17z M13,9h-2V7h2V9z" />
+  </svg>
+);
+
+const checkLine = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="m10 15.172 9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414 4.95 4.95Z" />
+  </svg>
+);
+
+const closeCircleFill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z" />
+  </svg>
+);
 export type IIconsSlug = keyof typeof icons;
 
 export const icons = {
@@ -510,6 +613,7 @@ export const icons = {
   collectiviteFill,
   communityFill,
   discussion,
+  chat3Fill,
   download,
   ballPenFill,
   errorFill,
@@ -525,6 +629,7 @@ export const icons = {
   moneyCircle,
   open,
   present,
+  giftFill,
   print,
   qrCode,
   questionFill,
@@ -534,4 +639,10 @@ export const icons = {
   calendarFill,
   mapPinFill,
   scaleFill,
+  bookletFill,
+  editBoxFill,
+  book2Fill,
+  infoFill,
+  checkLine,
+  closeCircleFill,
 };
