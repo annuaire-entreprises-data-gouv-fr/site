@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import AgentNavigation from "#components/espace-agent-components/agent-navigation";
 import { FullTable } from "#components/table/full";
+
 import { Badge } from "#components-ui/badge";
 import ButtonLink from "#components-ui/button";
 import FullWidthContainer from "#components-ui/container";
