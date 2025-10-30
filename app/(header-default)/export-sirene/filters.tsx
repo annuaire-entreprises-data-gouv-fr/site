@@ -15,6 +15,7 @@ import { getEffectifLabel } from "./constants";
 import type { ExtendedExportCsvInput } from "./export-csv";
 import { LocationFilter } from "./location-filter";
 import LocationTags from "./location-tags";
+import { LocationsFileInput } from "./locations-fie-input";
 import { NAFFileInput } from "./naf-file-input";
 import SiretFilter from "./siret-filter";
 import styles from "./styles.module.css";
@@ -347,6 +348,16 @@ export default function Filters({
                           loc.value === location.value
                         )
                     ),
+                  }));
+                }}
+              />
+            </div>
+            <div className={styles.filterColumn}>
+              <LocationsFileInput
+                onChangeLocations={(params) => {
+                  setFilters((prev) => ({
+                    ...prev,
+                    ...params,
                   }));
                 }}
               />
