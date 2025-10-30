@@ -16,6 +16,7 @@ import { getEffectifLabel } from "./constants";
 import type { ExtendedExportCsvInput } from "./export-csv";
 import { LocationFilter } from "./location-filter";
 import LocationTags from "./location-tags";
+import { NAFFileInput } from "./naf-file-input";
 import SiretFilter from "./siret-filter";
 import styles from "./styles.module.css";
 
@@ -421,6 +422,18 @@ export default function Filters({
                   }`,
                 }))}
                 placeholder="Choisir un code NAF/APE"
+                value={filters.naf}
+              />
+            </div>
+
+            <div className={styles.filterColumn}>
+              <NAFFileInput
+                onChangeNAF={(params) => {
+                  setFilters((prev) => ({
+                    ...prev,
+                    ...params,
+                  }));
+                }}
               />
             </div>
           </div>
