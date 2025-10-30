@@ -10,7 +10,9 @@ import type { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { UseCase } from "#models/use-cases";
-import Conformite from "./conformite";
+import ConformiteFiscale from "./conformite-fiscale";
+import ConformiteMSA from "./conformite-msa";
+import ConformiteVigilance from "./conformite-vigilance";
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -58,20 +60,14 @@ function ConformiteSection({
             body={[
               [
                 "Conformité fiscale",
-                <Conformite
-                  administration="DGFiP"
-                  data={conformite?.fiscale}
-                />,
+                <ConformiteFiscale data={conformite?.fiscale} />,
               ],
               [
                 "Conformité sociale",
                 <>
-                  <Conformite
-                    administration="URSSAF"
-                    data={conformite?.vigilance}
-                  />
+                  <ConformiteVigilance data={conformite?.vigilance} />
                   <br />
-                  <Conformite administration="MSA" data={conformite?.msa} />
+                  <ConformiteMSA data={conformite?.msa} />
                 </>,
               ],
             ]}

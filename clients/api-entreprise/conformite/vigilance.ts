@@ -1,12 +1,12 @@
 import routes from "#clients/routes";
-import type { IConformite } from "#models/espace-agent/conformite";
+import type { IConformiteVigilance } from "#models/espace-agent/conformite";
 import type { UseCase } from "#models/use-cases";
 import type { Siren } from "#utils/helpers";
 import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseConformiteVigilance = IAPIEntrepriseResponse<{
   entity_status: {
-    code: "ok";
+    code: "ok" | "refus_de_delivrance";
     libelle: string;
     description: string;
   };
@@ -23,16 +23,19 @@ export const clientApiEntrepriseConformiteVigilance = async (
   siren: Siren,
   useCase?: UseCase
 ) =>
-  await clientAPIEntreprise<IAPIEntrepriseConformiteVigilance, IConformite>(
-    routes.apiEntreprise.conformite.vigilance(siren),
-    mapToDomainObject,
-    {
-      useCase,
-    }
-  );
+  await clientAPIEntreprise<
+    IAPIEntrepriseConformiteVigilance,
+    IConformiteVigilance
+  >(routes.apiEntreprise.conformite.vigilance(siren), mapToDomainObject, {
+    useCase,
+  });
 
-const mapToDomainObject = (response: IAPIEntrepriseConformiteVigilance) => ({
-  url: response.data.document_url,
-  isValid: response.data?.entity_status?.code === "ok",
-  label: "Attestation de vigilance",
-});
+const mapToDomainObject = (response: IAPIEntrepriseConformiteVigilance) =>
+  ({
+    url: response.data.document_url,
+    status:
+      response.data?.entity_status?.code === "ok" ? "a_jour" : "non_a_jour",
+    dateDelivrance: response.data.date_debut_validite,
+    dateFinValidite: response.data.date_fin_validite,
+    label: "Attestation de vigilance",
+  }) as const;

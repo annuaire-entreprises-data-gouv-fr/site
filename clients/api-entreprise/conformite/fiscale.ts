@@ -1,5 +1,5 @@
 import routes from "#clients/routes";
-import type { IConformite } from "#models/espace-agent/conformite";
+import type { IConformiteFiscale } from "#models/espace-agent/conformite";
 import type { UseCase } from "#models/use-cases";
 import type { Siren } from "#utils/helpers";
 import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
@@ -18,16 +18,15 @@ export const clientApiEntrepriseConformiteFiscale = async (
   siren: Siren,
   useCase?: UseCase
 ) =>
-  await clientAPIEntreprise<IAPIEntrepriseConformiteFiscale, IConformite>(
-    routes.apiEntreprise.conformite.fiscale(siren),
-    mapToDomainObject,
-    {
-      useCase,
-    }
-  );
+  await clientAPIEntreprise<
+    IAPIEntrepriseConformiteFiscale,
+    IConformiteFiscale
+  >(routes.apiEntreprise.conformite.fiscale(siren), mapToDomainObject, {
+    useCase,
+  });
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => ({
   url: response.data.document_url,
-  isValid: true,
+  dateDelivrance: response.data.date_delivrance_attestation,
   label: "Attestation fiscale",
 });
