@@ -21,7 +21,8 @@ export const HabilitationsTable = async () => {
     .filter(
       (scope) =>
         scope !== ApplicationRights.isAgent &&
-        scope !== ApplicationRights.opendata
+        scope !== ApplicationRights.opendata &&
+        scope !== ApplicationRights.administrateur
     )
     .map((scope) => {
       const hasRight = hasRights(session, scope);
