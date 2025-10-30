@@ -47,7 +47,7 @@ export function NAFFileInput(props: NAFFileInputProps) {
 
   return (
     <div className={styles.filterColumn}>
-      <label className="fr-mb-2v" htmlFor="siret-file-input">
+      <label className="fr-mb-2v" htmlFor="naf-file-input">
         Charger{" "}
         <FAQLink tooltipLabel="une liste de codes NAF/APE">
           <div>
@@ -65,7 +65,7 @@ export function NAFFileInput(props: NAFFileInputProps) {
       <input
         accept=".txt"
         hidden
-        id="siret-file-input"
+        id="naf-file-input"
         onChange={handleFileChange}
         ref={fileInputRef}
         type="file"
