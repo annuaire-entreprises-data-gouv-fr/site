@@ -107,6 +107,8 @@
 .filterColumn {
   min-width: 45%;
   max-width: 600px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {

@@ -1,9 +1,11 @@
+import { useMemo } from "react";
 import ReactSelect, { type MultiValue, type Props } from "react-select";
 import ClientOnly from "#components/client-only";
 import type { ISelectOptions } from "./type";
 
 type MultiSelectProps = {
   defaultValue?: string | string[];
+  value?: string[];
   id: string;
   instanceId: Props["instanceId"];
   name?: string;
@@ -16,6 +18,7 @@ type MultiSelectProps = {
 
 export const MultiSelect = ({
   defaultValue,
+  value,
   id,
   instanceId,
   name,
@@ -51,6 +54,15 @@ export const MultiSelect = ({
       onChange(options.map((o) => o.value));
     }
   };
+
+  const multiSelectValue = useMemo(() => {
+    if (value) {
+      return value.map((v) => ({
+        value: v,
+        label: options.find((option) => option.value === v)?.["label"],
+      }));
+    }
+  }, [value, options]);
 
   return (
     <ClientOnly>
@@ -96,6 +108,7 @@ export const MultiSelect = ({
             }),
             multiValue: (base) => ({ ...base, backgroundColor: "#FFF" }),
           }}
+          value={multiSelectValue}
         />
       </div>
     </ClientOnly>
