@@ -11,6 +11,13 @@
 #   site: true
 
 ---
+- date: 30/10/2025
+  target:
+    agent: true
+  body: |
+    Refonte de la page « Mon espace » : affichage des habilitations pour chaque accès aux données restreintes.
+
+    Activation de compte désormais automatique (suppression du parcours manuel).
 - date: 29/10/2025
   target:
     site: true
