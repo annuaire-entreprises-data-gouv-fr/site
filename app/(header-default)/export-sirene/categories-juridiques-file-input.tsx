@@ -57,7 +57,7 @@ export function CategoriesJuridiquesFileInput(
 
   return (
     <div className={styles.filterColumn}>
-      <label className="fr-mb-2v" htmlFor="siret-file-input">
+      <label className="fr-mb-2v" htmlFor="categories-juridiques-file-input">
         Charger{" "}
         <FAQLink tooltipLabel="une liste de catégories juridiques">
           <div>
@@ -76,7 +76,7 @@ export function CategoriesJuridiquesFileInput(
       <input
         accept=".txt"
         hidden
-        id="siret-file-input"
+        id="categories-juridiques-file-input"
         onChange={handleFileChange}
         ref={fileInputRef}
         type="file"
