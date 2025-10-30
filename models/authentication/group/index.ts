@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { ProConnectReconnexionNeeded } from "#clients/authentication/pro-connect/exceptions";
-import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
+import { HttpNotFound } from "#clients/exceptions";
 import {
   clientRolesAddUserToGroup,
   clientRolesGetGroups,
@@ -46,16 +46,6 @@ export const getAgentGroups = async ({
     try {
       return await clientRolesGetGroups();
     } catch (error) {
-      if (error instanceof HttpUnauthorizedError) {
-        logFatalErrorInSentry(
-          new FetchRessourceException({
-            ressource: "Roles.data",
-            cause: error,
-          })
-        );
-        return [];
-      }
-
       if (error instanceof HttpNotFound) {
         // user not in roles.data
         return [];
