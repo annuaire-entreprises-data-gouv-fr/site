@@ -14,10 +14,6 @@ type CategoriesJuridiquesFileInputProps = {
   }) => void;
 };
 
-const regexNiveau1 = /^\d$/;
-const regexNiveau2 = /^\d{2}$/;
-const regexNiveau3 = /^\d{4}$/;
-
 export function CategoriesJuridiquesFileInput(
   props: CategoriesJuridiquesFileInputProps
 ) {
@@ -26,19 +22,15 @@ export function CategoriesJuridiquesFileInput(
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log("handleFileChange", e.target.files?.[0]);
       const file = e.target.files?.[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-          console.log("reader.onload", e.target?.result);
           const content = e.target?.result as string;
           const lines = content
             .split("\n")
             .map((line) => line.trim())
             .filter((line) => line.length > 0);
-
-          console.log("lines", lines);
 
           const legalCategoriesNiveau1 = lines.filter(
             (line) => line in categoriesJuridiquesNiveau1
@@ -65,9 +57,9 @@ export function CategoriesJuridiquesFileInput(
 
   return (
     <div className={styles.filterColumn}>
-      <label htmlFor="siret-file-input">
-        Sélectionner{" "}
-        <FAQLink tooltipLabel="un fichier contenant des catégories juridiques">
+      <label className="fr-mb-2v" htmlFor="siret-file-input">
+        Charger{" "}
+        <FAQLink tooltipLabel="une liste de catégories juridiques">
           <div>
             Votre fichier doit avoir les caractéristiques suivantes :
             <ul>
