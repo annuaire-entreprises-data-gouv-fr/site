@@ -215,7 +215,9 @@
             "prenoms": "David, Jean, Claude",
             "role": "GERANT",
             "nationalite": null,
-            "dateNaissancePartial": "1965-10"
+            "dateNaissancePartial": "1965-10",
+            "estDemissionnaire": false,
+            "dateDemission": null
           },
           {
             "sexe": null,
@@ -224,7 +226,9 @@
             "prenoms": "David, Jean-Claude",
             "role": "GERANT",
             "nationalite": null,
-            "dateNaissancePartial": "1965-10"
+            "dateNaissancePartial": "1965-10",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }
