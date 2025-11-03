@@ -29,7 +29,7 @@ export async function clientAPIAssociationPublic(
   const url = `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.association(encodeURIComponent(rnaOrSiren))}`;
 
   const response = await httpGet<IAssociationResponse>(url, {
-    timeout: constants.timeout.XXXL,
+    timeout: constants.timeout.XL,
   });
 
   return mapToDomainObject(response, siretSiege);
@@ -57,7 +57,7 @@ export async function clientAPIAssociationPrivate(
     headers: {
       "X-Gravitee-Api-Key": process.env.API_ASSOCIATION_KEY,
     },
-    timeout: constants.timeout.XXXL,
+    timeout: constants.timeout.XL,
   });
 
   return mapToDomainObject(mapPrivateToPublicResponse(response), siretSiege);
