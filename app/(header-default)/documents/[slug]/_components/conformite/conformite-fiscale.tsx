@@ -1,4 +1,5 @@
 import type React from "react";
+import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import {
   type IAPINotRespondingError,
@@ -18,8 +19,17 @@ const ConformiteFiscale: React.FC<{
     if (isAPI404(data)) {
       return (
         <Icon slug="closed">
-          {administration} : cette entreprise n'est pas à jour de ses
-          obligations fiscales
+          {administration} :{" "}
+          <FAQLink tooltipLabel="Attestation fiscale non disponible">
+            Dans certains cas, l’attestation fiscale ne peut pas être récupérée
+            automatiquement.
+            <br />
+            Cela ne signifie pas nécessairement que l’entreprise/association
+            n’est pas à jour de ses obligations fiscales.
+            <br />
+            Vous pouvez vous rapprocher de l’unité légale pour lui demander la
+            pièce directement.
+          </FAQLink>
         </Icon>
       );
     }
