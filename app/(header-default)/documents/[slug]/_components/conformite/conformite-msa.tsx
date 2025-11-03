@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import {
   type IAPINotRespondingError,
+  isAPI404,
   isAPINotResponding,
 } from "#models/api-not-responding";
 import type { IConformiteMSA } from "#models/espace-agent/conformite";
@@ -23,14 +24,18 @@ const ConformiteMSA: React.FC<{
     }
 
     if (data.status === "sous_investigation") {
-      return "l'entreprise est en cours d'analyse par un agent de la MSA";
+      return "cette entreprise est en cours d'analyse par un agent de la MSA";
     }
 
-    return "l'entreprise n'est pas à jour de ses cotisations";
+    return "cette entreprise n'est pas à jour de ses cotisations";
   }, [data]);
 
   if (isAPINotResponding(data)) {
-    return (
+    return isAPI404(data) ? (
+      <Icon slug="closed">
+        {administration} : aucune donnée n'est disponible pour cette entreprise
+      </Icon>
+    ) : (
       <APINotRespongingElement administration={administration} data={data} />
     );
   }
