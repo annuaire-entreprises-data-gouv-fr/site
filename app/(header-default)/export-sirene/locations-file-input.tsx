@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import ButtonLink from "#components-ui/button";
 import FAQLink from "#components-ui/faq-link";
 import styles from "./styles.module.css";
@@ -19,10 +19,12 @@ const regexCommuneLocations = /^\d{5}$/;
 export function LocationsFileInput(props: LocationsFileInputProps) {
   const { onChangeLocations } = props;
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [invalidLocations, setInvalidLocations] = useState<string[]>([]);
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
+      setInvalidLocations([]);
       if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -32,19 +34,35 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
             .map((line) => line.trim())
             .filter((line) => line.length > 0);
 
-          const locations = lines
-            .map((line) =>
-              regexDepartementLocations.test(line)
-                ? { type: "dep", value: line, label: `${line} - Département` }
-                : regexCommuneLocations.test(line)
-                  ? { type: "cp", value: line, label: `${line} - Commune` }
-                  : null
-            )
-            .filter((line) => line !== null) as Location[];
+          const { locations, invalidLocations } = lines.reduce(
+            (acc, line) => {
+              if (regexDepartementLocations.test(line)) {
+                acc.locations.push({
+                  type: "dep",
+                  value: line,
+                  label: `${line} - Département`,
+                });
+              } else if (regexCommuneLocations.test(line)) {
+                acc.locations.push({
+                  type: "cp",
+                  value: line,
+                  label: `${line} - Commune`,
+                });
+              } else {
+                acc.invalidLocations.push(line);
+              }
+              return acc;
+            },
+            { locations: [] as Location[], invalidLocations: [] as string[] }
+          );
 
-          onChangeLocations({
-            locations,
-          });
+          if (invalidLocations.length > 0) {
+            setInvalidLocations(invalidLocations);
+          } else {
+            onChangeLocations({
+              locations,
+            });
+          }
         };
 
         reader.readAsText(file);
@@ -84,6 +102,21 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
       >
         Sélectionner un fichier .txt
       </ButtonLink>
+      {invalidLocations.length > 0 && (
+        <div className={styles.errorMessage}>
+          <FAQLink
+            tooltipLabel={`${invalidLocations.length} code(s) de département ou de commune invalide(s)`}
+          >
+            <ul>
+              {invalidLocations.slice(0, 5).map((location) => (
+                <li key={location}>{location}</li>
+              ))}
+              {invalidLocations.length > 5 && <li>...</li>}
+            </ul>
+          </FAQLink>{" "}
+          détecté(s).
+        </div>
+      )}
     </div>
   );
 }
