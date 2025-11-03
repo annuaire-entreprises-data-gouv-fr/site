@@ -26,7 +26,6 @@ import {
 } from "#models/core/types";
 import { getRechercheEntrepriseSourcesLastModified } from "#models/recherche-entreprise-modified";
 import {
-  extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -64,13 +63,12 @@ export default async function UniteLegalePage(props: AppRouterProps) {
     getRechercheEntrepriseSourcesLastModified(),
   ]);
 
-  const extractedSiren = extractSirenOrSiretSlugFromUrl(slug);
-  // We redirect from /entreprise/${siren} to /entreprise/${slug}
+  // We redirect from /entreprise/${siren} to /entreprise/${chemin}
   // Nb: in somes cases, there can be a two redirects :
-  // /rechercher?terme=${siren} -> /entreprise/${siren}?redirected=1 -> /entreprise/${slug}?redirected=1
+  // /rechercher?terme=${siren} -> /entreprise/${siren}?redirected=1 -> /entreprise/${chemin}?redirected=1
   if (
-    slug === extractedSiren &&
     uniteLegale.chemin &&
+    uniteLegale.chemin !== slug &&
     uniteLegale.chemin !== uniteLegale.siren
   ) {
     const searchParams = await props.searchParams;
