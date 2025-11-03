@@ -18,8 +18,8 @@ const ConformiteFiscale: React.FC<{
     if (isAPI404(data)) {
       return (
         <Icon slug="closed">
-          {administration} : l'entreprise n'est pas à jour de ses obligations
-          fiscales
+          {administration} : cette entreprise n'est pas à jour de ses
+          obligations fiscales
         </Icon>
       );
     }

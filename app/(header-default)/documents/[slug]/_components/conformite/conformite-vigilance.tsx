@@ -23,7 +23,7 @@ const ConformiteVigilance: React.FC<{
       return data.url ? "conforme" : "conforme (document indisponible)";
     }
 
-    return "l'entreprise n'est pas à jour de ses cotisations";
+    return "cette entreprise n'est pas à jour de ses cotisations";
   }, [data]);
 
   if (isAPINotResponding(data)) {

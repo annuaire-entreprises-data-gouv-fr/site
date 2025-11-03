@@ -24,16 +24,16 @@ const ConformiteMSA: React.FC<{
     }
 
     if (data.status === "sous_investigation") {
-      return "l'entreprise est en cours d'analyse par un agent de la MSA";
+      return "cette entreprise est en cours d'analyse par un agent de la MSA";
     }
 
-    return "l'entreprise n'est pas à jour de ses cotisations";
+    return "cette entreprise n'est pas à jour de ses cotisations";
   }, [data]);
 
   if (isAPINotResponding(data)) {
     return isAPI404(data) ? (
       <Icon slug="closed">
-        {administration} : aucune donnée disponible pour l'entreprise
+        {administration} : aucune donnée n'est disponible pour cette entreprise
       </Icon>
     ) : (
       <APINotRespongingElement administration={administration} data={data} />
