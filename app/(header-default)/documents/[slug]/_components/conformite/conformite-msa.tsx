@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import {
   type IAPINotRespondingError,
+  isAPI404,
   isAPINotResponding,
 } from "#models/api-not-responding";
 import type { IConformiteMSA } from "#models/espace-agent/conformite";
@@ -30,7 +31,11 @@ const ConformiteMSA: React.FC<{
   }, [data]);
 
   if (isAPINotResponding(data)) {
-    return (
+    return isAPI404(data) ? (
+      <Icon slug="closed">
+        {administration} : aucune donnée disponible pour l'entreprise
+      </Icon>
+    ) : (
       <APINotRespongingElement administration={administration} data={data} />
     );
   }
