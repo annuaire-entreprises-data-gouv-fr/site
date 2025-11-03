@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import ButtonLink from "#components-ui/button";
 import FAQLink from "#components-ui/faq-link";
 import { categoriesJuridiquesNiveau3 } from "#utils/helpers/formatting/metadata/categories-juridiques";
@@ -19,10 +19,12 @@ export function CategoriesJuridiquesFileInput(
 ) {
   const { onChangeCategoriesJuridiques } = props;
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [invalidCategories, setInvalidCategories] = useState<string[]>([]);
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
+      setInvalidCategories([]);
       if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -32,21 +34,41 @@ export function CategoriesJuridiquesFileInput(
             .map((line) => line.trim())
             .filter((line) => line.length > 0);
 
-          const legalCategoriesNiveau1 = lines.filter(
-            (line) => line in categoriesJuridiquesNiveau1
-          );
-          const legalCategoriesNiveau2 = lines.filter(
-            (line) => line in categoriesJuridiquesNiveau2
-          );
-          const legalCategoriesNiveau3 = lines.filter(
-            (line) => line in categoriesJuridiquesNiveau3
-          );
-
-          onChangeCategoriesJuridiques({
+          const {
             legalCategoriesNiveau1,
             legalCategoriesNiveau2,
             legalCategoriesNiveau3,
-          });
+            invalidCategories,
+          } = lines.reduce(
+            (acc, line) => {
+              if (line in categoriesJuridiquesNiveau1) {
+                acc.legalCategoriesNiveau1.push(line);
+              } else if (line in categoriesJuridiquesNiveau2) {
+                acc.legalCategoriesNiveau2.push(line);
+              } else if (line in categoriesJuridiquesNiveau3) {
+                acc.legalCategoriesNiveau3.push(line);
+              } else {
+                acc.invalidCategories.push(line);
+              }
+              return acc;
+            },
+            {
+              legalCategoriesNiveau1: [] as string[],
+              legalCategoriesNiveau2: [] as string[],
+              legalCategoriesNiveau3: [] as string[],
+              invalidCategories: [] as string[],
+            }
+          );
+
+          if (invalidCategories.length > 0) {
+            setInvalidCategories(invalidCategories);
+          } else {
+            onChangeCategoriesJuridiques({
+              legalCategoriesNiveau1,
+              legalCategoriesNiveau2,
+              legalCategoriesNiveau3,
+            });
+          }
         };
 
         reader.readAsText(file);
@@ -88,6 +110,21 @@ export function CategoriesJuridiquesFileInput(
       >
         Sélectionner un fichier .txt
       </ButtonLink>
+      {invalidCategories.length > 0 && (
+        <div className={styles.errorMessage}>
+          <FAQLink
+            tooltipLabel={`${invalidCategories.length} catégorie(s) invalide(s)`}
+          >
+            <ul>
+              {invalidCategories.slice(0, 5).map((category) => (
+                <li key={category}>{category}</li>
+              ))}
+              {invalidCategories.length > 5 && <li>...</li>}
+            </ul>
+          </FAQLink>{" "}
+          détectée(s).
+        </div>
+      )}
     </div>
   );
 }
