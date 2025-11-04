@@ -16,6 +16,7 @@ import { getEffectifLabel } from "./constants";
 import type { ExtendedExportCsvInput } from "./export-csv";
 import { LocationFilter } from "./location-filter";
 import LocationTags from "./location-tags";
+import { NAFFileInput } from "./naf-file-input";
 import SiretFilter from "./siret-filter";
 import styles from "./styles.module.css";
 
@@ -373,54 +374,72 @@ export default function Filters({
               </FAQLink>
             </Icon>
           </h2>
-          <div className={styles.inputContainer}>
-            <div className={styles.filterColumn}>
-              <label htmlFor="sap-multi-select">
-                Domaine d‘activité (Section) :
-              </label>
-              <MultiSelect
-                defaultValue={filters.sap}
-                id="sap-multi-select"
-                instanceId="sap-multi-select"
-                menuPosition="fixed"
-                name="sap"
-                onChange={(values) => {
-                  setFilters((prev) => ({
-                    ...prev,
-                    sap: values,
-                  }));
-                }}
-                options={Object.keys(codesSectionNAF).map((code) => ({
-                  value: code,
-                  label: `${code} - ${codesSectionNAF[code]}`,
-                }))}
-                placeholder="Choisir un domaine d'activité"
-              />
+          <div
+            className={clsx(
+              styles.gridInputContainer,
+              "fr-grid-row fr-grid-row--gutters"
+            )}
+          >
+            <div className="fr-col-12 fr-col-md-5">
+              <div>
+                <label htmlFor="sap-multi-select">
+                  Domaine d‘activité (Section) :
+                </label>
+                <MultiSelect
+                  defaultValue={filters.sap}
+                  id="sap-multi-select"
+                  instanceId="sap-multi-select"
+                  menuPosition="fixed"
+                  name="sap"
+                  onChange={(values) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      sap: values,
+                    }));
+                  }}
+                  options={Object.keys(codesSectionNAF).map((code) => ({
+                    value: code,
+                    label: `${code} - ${codesSectionNAF[code]}`,
+                  }))}
+                  placeholder="Choisir un domaine d'activité"
+                />
+              </div>
+              <div className={styles.filterColumn}>
+                <label htmlFor="naf-multi-select">
+                  Code NAF/APE (Sous-classe) :
+                </label>
+                <MultiSelect
+                  defaultValue={filters.naf}
+                  id="naf-multi-select"
+                  instanceId="naf-multi-select"
+                  menuPosition="fixed"
+                  name="naf"
+                  onChange={(values) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      naf: values,
+                    }));
+                  }}
+                  options={Object.keys(codesNAFRev2).map((code) => ({
+                    value: code,
+                    label: `${code} - ${
+                      codesNAFRev2[code as keyof typeof codesNAFRev2]
+                    }`,
+                  }))}
+                  placeholder="Choisir un code NAF/APE"
+                  value={filters.naf}
+                />
+              </div>
             </div>
 
-            <div className={styles.filterColumn}>
-              <label htmlFor="naf-multi-select">
-                Code NAF/APE (Sous-classe) :
-              </label>
-              <MultiSelect
-                defaultValue={filters.naf}
-                id="naf-multi-select"
-                instanceId="naf-multi-select"
-                menuPosition="fixed"
-                name="naf"
-                onChange={(values) => {
+            <div className="fr-col-12 fr-col-md-6">
+              <NAFFileInput
+                onChangeNAF={(params) => {
                   setFilters((prev) => ({
                     ...prev,
-                    naf: values,
+                    ...params,
                   }));
                 }}
-                options={Object.keys(codesNAFRev2).map((code) => ({
-                  value: code,
-                  label: `${code} - ${
-                    codesNAFRev2[code as keyof typeof codesNAFRev2]
-                  }`,
-                }))}
-                placeholder="Choisir un code NAF/APE"
               />
             </div>
           </div>
