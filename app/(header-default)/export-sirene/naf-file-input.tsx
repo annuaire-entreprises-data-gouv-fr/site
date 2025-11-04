@@ -1,8 +1,7 @@
-import { useCallback, useRef, useState } from "react";
-import ButtonLink from "#components-ui/button";
-import FAQLink from "#components-ui/faq-link";
+import { useCallback, useState } from "react";
+import { Error } from "#components-ui/alerts";
 import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
-import styles from "./styles.module.css";
+import { FileInput } from "./file-input";
 
 type NAFFileInputProps = {
   onChangeNAF: (params: { naf: string[] }) => void;
@@ -12,101 +11,60 @@ const regexNAFWithoutDot = /^\d{4}[A-Z]$/;
 
 export function NAFFileInput(props: NAFFileInputProps) {
   const { onChangeNAF } = props;
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [invalidNAF, setInvalidNAF] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleFileChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      setInvalidNAF([]);
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const content = e.target?.result as string;
-          const lines = content
-            .split("\n")
-            .map((line) => line.trim())
-            .filter((line) => line.length > 0);
+  const processFileContent = useCallback(
+    (fileContent: string) => {
+      setError(null);
+      const lines = fileContent
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0);
 
-          const formattedLines = lines.map((line) =>
-            regexNAFWithoutDot.test(line)
-              ? `${line.slice(0, 2)}.${line.slice(2)}`
-              : line
-          );
+      const formattedLines = lines.map((line) =>
+        regexNAFWithoutDot.test(line)
+          ? `${line.slice(0, 2)}.${line.slice(2)}`
+          : line
+      );
 
-          const { naf, invalidNAF } = formattedLines.reduce(
-            (acc, line) => {
-              if (line in codesNAFRev2) {
-                acc.naf.push(line);
-              } else {
-                acc.invalidNAF.push(line);
-              }
-              return acc;
-            },
-            { naf: [] as string[], invalidNAF: [] as string[] }
-          );
-
-          if (invalidNAF.length > 0) {
-            setInvalidNAF(invalidNAF);
+      const { naf, invalidNAF } = formattedLines.reduce(
+        (acc, line) => {
+          if (line in codesNAFRev2) {
+            acc.naf.push(line);
           } else {
-            onChangeNAF({
-              naf,
-            });
+            acc.invalidNAF.push(line);
           }
-        };
+          return acc;
+        },
+        { naf: [] as string[], invalidNAF: [] as string[] }
+      );
 
-        reader.readAsText(file);
+      if (invalidNAF.length > 0) {
+        setError(
+          `La liste contient ${invalidNAF.length} erreur(s) : corrigez-les puis rechargez le fichier.`
+        );
+      } else {
+        onChangeNAF({
+          naf,
+        });
       }
     },
     [onChangeNAF]
   );
 
   return (
-    <div className={styles.filterColumn}>
-      <label className="fr-mb-2v" htmlFor="naf-file-input">
-        Charger{" "}
-        <FAQLink tooltipLabel="une liste de codes NAF/APE">
-          <div>
-            Votre fichier doit avoir les caractéristiques suivantes :
-            <ul>
-              <li>format .txt (UTF-8)</li>
-              <li>
-                code NAF sur 4 positions et une lettre (ex: 0112Z ou 01.12Z)
-              </li>
-              <li>un code par ligne, sans séparateur et sans ligne à vide</li>
-            </ul>
-          </div>
-        </FAQLink>
-      </label>
-      <input
-        accept=".txt"
-        hidden
-        id="naf-file-input"
-        onChange={handleFileChange}
-        ref={fileInputRef}
-        type="file"
+    <div>
+      <label className="fr-mb-2v">Filtrer en chargeant une liste</label>
+      <FileInput
+        description="Un code NAF/APE par ligne"
+        onChange={processFileContent}
+        onError={setError}
       />
-      <ButtonLink
-        alt
-        onClick={() => fileInputRef.current?.click()}
-        type="button"
-      >
-        Sélectionner un fichier .txt
-      </ButtonLink>
-      {invalidNAF.length > 0 && (
-        <div className={styles.errorMessage}>
-          <FAQLink
-            tooltipLabel={`${invalidNAF.length} code(s) NAF/APE invalide(s)`}
-          >
-            <ul>
-              {invalidNAF.slice(0, 5).map((naf) => (
-                <li key={naf}>{naf}</li>
-              ))}
-              {invalidNAF.length > 5 && <li>...</li>}
-            </ul>
-          </FAQLink>{" "}
-          détecté(s).
-        </div>
+      {error && (
+        <Error>
+          <strong>Votre fichier n’a pas pu être chargé.</strong>
+          <p className="fr-my-0">{error}</p>
+        </Error>
       )}
     </div>
   );

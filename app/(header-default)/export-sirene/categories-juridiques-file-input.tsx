@@ -70,9 +70,7 @@ export function CategoriesJuridiquesFileInput(
 
   return (
     <div>
-      <label className="fr-mb-2v" htmlFor="categories-juridiques-file-input">
-        Filtrer en chargeant une liste
-      </label>
+      <label className="fr-mb-2v">Filtrer en chargeant une liste</label>
       <FileInput
         description="Un code catégorie légale par ligne"
         onChange={processFileContent}
