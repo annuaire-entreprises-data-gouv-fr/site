@@ -316,44 +316,51 @@ export default function Filters({
               </FAQLink>
             </Icon>
           </h2>
-          <div className={styles.inputContainer}>
-            <div className={styles.filterColumn}>
-              <LocationFilter
-                onSelect={(
-                  type: "cp" | "dep" | "reg" | "insee",
-                  value: string,
-                  label: string
-                ) => {
-                  setFilters((prev) => ({
-                    ...prev,
-                    locations: [
-                      ...prev.locations.filter(
-                        (loc) => !(loc.type === type && loc.value === value)
+          <div
+            className={clsx(
+              styles.gridInputContainer,
+              "fr-grid-row fr-grid-row--gutters"
+            )}
+          >
+            <div className="fr-col-12 fr-col-md-5">
+              <div>
+                <LocationFilter
+                  onSelect={(
+                    type: "cp" | "dep" | "reg" | "insee",
+                    value: string,
+                    label: string
+                  ) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      locations: [
+                        ...prev.locations.filter(
+                          (loc) => !(loc.type === type && loc.value === value)
+                        ),
+                        { type, value, label },
+                      ],
+                    }));
+                  }}
+                />
+              </div>
+              <div>
+                <LocationTags
+                  filters={filters}
+                  handleClick={(location) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      locations: prev.locations.filter(
+                        (loc) =>
+                          !(
+                            loc.type === location.type &&
+                            loc.value === location.value
+                          )
                       ),
-                      { type, value, label },
-                    ],
-                  }));
-                }}
-              />
+                    }));
+                  }}
+                />
+              </div>
             </div>
-            <div className={styles.filterColumn}>
-              <LocationTags
-                filters={filters}
-                handleClick={(location) => {
-                  setFilters((prev) => ({
-                    ...prev,
-                    locations: prev.locations.filter(
-                      (loc) =>
-                        !(
-                          loc.type === location.type &&
-                          loc.value === location.value
-                        )
-                    ),
-                  }));
-                }}
-              />
-            </div>
-            <div className={styles.filterColumn}>
+            <div className="fr-col-12 fr-col-md-6">
               <LocationsFileInput
                 onChangeLocations={(params) => {
                   setFilters((prev) => ({
