@@ -41,3 +41,9 @@ export const updateGroupNameSchema = z.object({
   groupId: groupIdValidator,
   groupName: groupNameValidator,
 });
+
+export const updateUserRoleInGroupSchema = z.object({
+  groupId: groupIdValidator,
+  userId: userIdValidator,
+  roleId: roleIdValidator,
+});

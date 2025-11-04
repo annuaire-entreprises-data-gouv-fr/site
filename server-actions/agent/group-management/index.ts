@@ -5,11 +5,13 @@ import {
   addUserToGroup,
   removeUserFromGroup,
   updateGroupName,
+  updateUserRoleInGroup,
 } from "#models/authentication/group";
 import {
   addUserToGroupSchema,
   removeUserFromGroupSchema,
   updateGroupNameSchema,
+  updateUserRoleInGroupSchema,
 } from "./schemas";
 
 export const addUserToGroupAction = agentActionClient
@@ -35,4 +37,15 @@ export const updateGroupNameAction = agentActionClient
   .action(
     async ({ parsedInput }) =>
       await updateGroupName(parsedInput.groupId, parsedInput.groupName)
+  );
+
+export const updateUserRoleInGroupAction = agentActionClient
+  .inputSchema(updateUserRoleInGroupSchema)
+  .action(
+    async ({ parsedInput }) =>
+      await updateUserRoleInGroup(
+        parsedInput.groupId,
+        parsedInput.userId,
+        parsedInput.roleId
+      )
   );
