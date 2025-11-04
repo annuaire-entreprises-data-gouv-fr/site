@@ -1,13 +1,14 @@
 "use client";
 
+import { useAction } from "next-safe-action/hooks";
 import { useEffect, useRef, useState } from "react";
+import { addUserToGroupAction } from "server-actions/agent/group-management";
 import type { IRolesDataUser } from "#clients/roles-data/interface";
 import { validateEmail } from "#components/espace-agent-components/helpers/form-validation";
 import ButtonLink from "#components-ui/button";
 import { FullScreenModal } from "#components-ui/full-screen-modal";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
 import type { IAgentsGroup } from "#models/authentication/group";
-import httpClient from "#utils/network";
 
 const MODAL_ID = "add-user";
 
@@ -24,8 +25,29 @@ export default function AddUserModal({
   const [isVisible, setIsVisible] = useState(false);
   const [inputEmail, setInputEmail] = useState("");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { execute, isPending } = useAction(addUserToGroupAction, {
+    onSuccess: (result) => {
+      addUserToGroupState(result.data);
+
+      showNotification({
+        type: NotificationTypeEnum.SUCCESS,
+        title: "Membre ajouté avec succès",
+        message: `${result.data.email} a été ajouté au groupe ${group.name}`,
+      });
+
+      setInputEmail("");
+      setIsVisible(false);
+    },
+    onError: ({ error }) => {
+      showNotification({
+        type: NotificationTypeEnum.ERROR,
+        title: "Erreur lors de l'ajout du membre",
+        message: error.serverError?.message,
+      });
+    },
+  });
 
   useEffect(() => {
     if (inputRef.current && isVisible) {
@@ -34,64 +56,33 @@ export default function AddUserModal({
   }, [isVisible]);
 
   const handleAddNewUser = async () => {
-    setLoading(true);
     setValidationErrors([]);
 
-    try {
-      const userEmail = inputEmail.trim();
+    const userEmail = inputEmail.trim();
 
-      const emailValidationError = validateEmail(userEmail);
-      if (emailValidationError) {
-        setValidationErrors([emailValidationError]);
-        showNotification({
-          type: NotificationTypeEnum.ERROR,
-          title: "Ajout impossible",
-          message: emailValidationError,
-        });
-        return;
-      }
-
-      // Check if user already exists in group
-      if (
-        group.users.some((user: IRolesDataUser) => user.email === userEmail)
-      ) {
-        setValidationErrors(["Cet utilisateur est déjà membre de ce groupe"]);
-        showNotification({
-          type: NotificationTypeEnum.ERROR,
-          title: "Ajout impossible",
-          message: "Cet utilisateur est déjà membre de ce groupe",
-        });
-        return;
-      }
-
-      const user = await httpClient<IRolesDataUser>({
-        url: `/api/groups/${group.id}/add-user`,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify({ userEmail, roleId: defaultRoleId }),
-      });
-
-      addUserToGroupState(user);
-
-      showNotification({
-        type: NotificationTypeEnum.SUCCESS,
-        title: "Membre ajouté avec succès",
-        message: `${userEmail} a été ajouté au groupe ${group.name}`,
-      });
-
-      setInputEmail("");
-      setIsVisible(false);
-    } catch (error: any) {
+    const emailValidationError = validateEmail(userEmail);
+    if (emailValidationError) {
+      setValidationErrors([emailValidationError]);
       showNotification({
         type: NotificationTypeEnum.ERROR,
-        title: "Erreur lors de l'ajout du membre",
-        message: error?.message,
+        title: "Ajout impossible",
+        message: emailValidationError,
       });
-    } finally {
-      setLoading(false);
+      return;
     }
+
+    // Check if user already exists in group
+    if (group.users.some((user: IRolesDataUser) => user.email === userEmail)) {
+      setValidationErrors(["Cet utilisateur est déjà membre de ce groupe"]);
+      showNotification({
+        type: NotificationTypeEnum.ERROR,
+        title: "Ajout impossible",
+        message: "Cet utilisateur est déjà membre de ce groupe",
+      });
+      return;
+    }
+
+    execute({ groupId: group.id, userEmail, roleId: defaultRoleId });
   };
 
   const handleClose = () => {
@@ -139,7 +130,7 @@ export default function AddUserModal({
                 className={`fr-input ${
                   validationErrors.length > 0 ? "fr-input--error" : ""
                 }`}
-                disabled={loading}
+                disabled={isPending}
                 id={`new-user-email-${group.id}`}
                 onChange={(e) => {
                   setInputEmail(e.target.value);
@@ -148,7 +139,7 @@ export default function AddUserModal({
                   }
                 }}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" && inputEmail?.trim() && !loading) {
+                  if (e.key === "Enter" && inputEmail?.trim() && !isPending) {
                     handleAddNewUser();
                   }
                 }}
@@ -171,12 +162,12 @@ export default function AddUserModal({
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
             <ButtonLink
-              disabled={!inputEmail?.trim() || loading}
+              disabled={!inputEmail?.trim() || isPending}
               onClick={handleAddNewUser}
             >
-              {loading ? "Ajout en cours..." : "Ajouter"}
+              {isPending ? "Ajout en cours..." : "Ajouter"}
             </ButtonLink>
-            <ButtonLink alt disabled={loading} onClick={handleClose}>
+            <ButtonLink alt disabled={isPending} onClick={handleClose}>
               Annuler
             </ButtonLink>
           </div>
