@@ -190,8 +190,14 @@ div.location-filter-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   cursor: pointer;
+}
+
+.fileUploadLabelDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .fileUploadLabel span {
