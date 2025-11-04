@@ -475,13 +475,13 @@ export const codesNAFRev2: Record<string, string> = {
   "46.49Z":
     "Commerce de gros (commerce interentreprises) d’autres biens domestiques",
   "46.51Z":
-    "Commerce de gros (commerce interentreprises) d’ordinateurs, d’équipements informatiques périphériques et de ,logiciels",
+    "Commerce de gros (commerce interentreprises) d’ordinateurs, d’équipements informatiques périphériques et de logiciels",
   "46.52Z":
     "Commerce de gros (commerce interentreprises) de composants et d’équipements électroniques et de ,télécommunication",
   "46.61Z": "Commerce de gros (commerce interentreprises) de matériel agricole",
   "46.62Z": "Commerce de gros (commerce interentreprises) de machines-outils",
   "46.63Z":
-    "Commerce de gros (commerce interentreprises) de machines pour l’extraction, la construction et le génie ,civil",
+    "Commerce de gros (commerce interentreprises) de machines pour l’extraction, la construction et le génie civil",
   "46.64Z":
     "Commerce de gros (commerce interentreprises) de machines pour l’industrie textile et l’habillement",
   "46.65Z":
@@ -493,7 +493,7 @@ export const codesNAFRev2: Record<string, string> = {
   "46.69B":
     "Commerce de gros (commerce interentreprises) de fournitures et équipements industriels divers",
   "46.69C":
-    "Commerce de gros (commerce interentreprises) de fournitures et équipements divers pour le commerce et les ,services",
+    "Commerce de gros (commerce interentreprises) de fournitures et équipements divers pour le commerce et les services",
   "46.71Z":
     "Commerce de gros (commerce interentreprises) de combustibles et de produits annexes",
   "46.72Z":
@@ -564,7 +564,7 @@ export const codesNAFRev2: Record<string, string> = {
   "47.75Z":
     "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé",
   "47.76Z":
-    "Commerce de détail de fleurs, plantes, graines, engrais, animaux de compagnie et aliments pour ces animaux ,en magasin spécialisé",
+    "Commerce de détail de fleurs, plantes, graines, engrais, animaux de compagnie et aliments pour ces animaux, en magasin spécialisé",
   "47.77Z":
     "Commerce de détail d’articles d’horlogerie et de bijouterie en magasin spécialisé",
   "47.78A": "Commerces de détail d’optique",
