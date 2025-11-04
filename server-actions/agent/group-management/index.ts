@@ -1,20 +1,19 @@
 "use server";
 
 import { agentActionClient } from "server-actions/safe-action";
-import { z } from "zod";
 import {
   addUserToGroup,
   removeUserFromGroup,
+  updateGroupName,
 } from "#models/authentication/group";
+import {
+  addUserToGroupSchema,
+  removeUserFromGroupSchema,
+  updateGroupNameSchema,
+} from "./schemas";
 
 export const addUserToGroupAction = agentActionClient
-  .inputSchema(
-    z.object({
-      groupId: z.number(),
-      userEmail: z.string().email(),
-      roleId: z.number(),
-    })
-  )
+  .inputSchema(addUserToGroupSchema)
   .action(
     async ({ parsedInput }) =>
       await addUserToGroup(
@@ -25,13 +24,15 @@ export const addUserToGroupAction = agentActionClient
   );
 
 export const removeUserFromGroupAction = agentActionClient
-  .inputSchema(
-    z.object({
-      groupId: z.number(),
-      userId: z.number(),
-    })
-  )
+  .inputSchema(removeUserFromGroupSchema)
   .action(
     async ({ parsedInput }) =>
       await removeUserFromGroup(parsedInput.groupId, parsedInput.userId)
+  );
+
+export const updateGroupNameAction = agentActionClient
+  .inputSchema(updateGroupNameSchema)
+  .action(
+    async ({ parsedInput }) =>
+      await updateGroupName(parsedInput.groupId, parsedInput.groupName)
   );
