@@ -4,7 +4,6 @@ import { categoriesJuridiquesNiveau3 } from "#utils/helpers/formatting/metadata/
 import { categoriesJuridiquesNiveau1 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-1";
 import { categoriesJuridiquesNiveau2 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
 import { FileInput } from "./file-input";
-import styles from "./styles.module.css";
 
 type CategoriesJuridiquesFileInputProps = {
   onChangeCategoriesJuridiques: (params: {
@@ -70,7 +69,7 @@ export function CategoriesJuridiquesFileInput(
   );
 
   return (
-    <div className={styles.filterColumn}>
+    <div>
       <label className="fr-mb-2v" htmlFor="categories-juridiques-file-input">
         Filtrer en chargeant une liste
       </label>

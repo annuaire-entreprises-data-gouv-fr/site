@@ -66,6 +66,10 @@
   flex-wrap: wrap;
 }
 
+.gridInputContainer {
+  justify-content: space-between;
+}
+
 .dateGroup {
   margin-bottom: 16px;
 }

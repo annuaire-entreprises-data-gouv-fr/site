@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { Dispatch, SetStateAction } from "react";
 import DualRangeSlider from "#components-ui/dual-range-slider";
 import FAQLink from "#components-ui/faq-link";
@@ -445,81 +446,88 @@ export default function Filters({
               </FAQLink>
             </Icon>
           </h2>
-          <div className={styles.inputContainer}>
-            <div className={styles.filterColumn}>
-              <label htmlFor="nature-juridique-niveau-1-multi-select">
-                Catégorie juridique (Niveau 1) :
-              </label>
-              <MultiSelect
-                defaultValue={filters.legalCategoriesNiveau1}
-                id="nature-juridique-niveau-1-multi-select"
-                instanceId="nature-juridique-niveau-1-multi-select"
-                menuPosition="fixed"
-                name="nature_juridique"
-                onChange={(values: string[]) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    legalCategoriesNiveau1: values,
-                  }))
-                }
-                options={getLegalCategoriesNiveau1()}
-                placeholder="Choisir une catégorie juridique"
-                value={filters.legalCategoriesNiveau1}
-              />
+          <div
+            className={clsx(
+              styles.gridInputContainer,
+              "fr-grid-row fr-grid-row--gutters"
+            )}
+          >
+            <div className="fr-col-12 fr-col-md-5">
+              <div>
+                <label htmlFor="nature-juridique-niveau-1-multi-select">
+                  Catégorie juridique (Niveau 1) :
+                </label>
+                <MultiSelect
+                  defaultValue={filters.legalCategoriesNiveau1}
+                  id="nature-juridique-niveau-1-multi-select"
+                  instanceId="nature-juridique-niveau-1-multi-select"
+                  menuPosition="fixed"
+                  name="nature_juridique"
+                  onChange={(values: string[]) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      legalCategoriesNiveau1: values,
+                    }))
+                  }
+                  options={getLegalCategoriesNiveau1()}
+                  placeholder="Choisir une catégorie juridique"
+                  value={filters.legalCategoriesNiveau1}
+                />
+              </div>
+              <div>
+                <label htmlFor="nature-juridique-niveau-2-multi-select">
+                  Catégorie juridique (Niveau 2) :
+                </label>
+                <MultiSelect
+                  defaultValue={filters.legalCategoriesNiveau2}
+                  id="nature-juridique-niveau-2-multi-select"
+                  instanceId="nature-juridique-niveau-2-multi-select"
+                  menuPosition="fixed"
+                  name="nature_juridique"
+                  onChange={(values: string[]) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      legalCategoriesNiveau2: values,
+                    }))
+                  }
+                  options={getLegalCategoriesNiveau2()}
+                  placeholder="Choisir une catégorie juridique"
+                  value={filters.legalCategoriesNiveau2}
+                />
+              </div>
+              <div>
+                <label htmlFor="nature-juridique-niveau-3-multi-select">
+                  Catégorie juridique (Niveau 3) :
+                </label>
+                <MultiSelect
+                  defaultValue={filters.legalCategoriesNiveau3}
+                  id="nature-juridique-niveau-3-multi-select"
+                  instanceId="nature-juridique-niveau-3-multi-select"
+                  menuPosition="fixed"
+                  name="nature_juridique"
+                  onChange={(values: string[]) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      legalCategoriesNiveau3: values,
+                    }))
+                  }
+                  options={getLegalCategoriesNiveau3()}
+                  placeholder="Choisir une catégorie juridique"
+                  value={filters.legalCategoriesNiveau3}
+                />
+              </div>
             </div>
 
-            <div className={styles.filterColumn}>
-              <label htmlFor="nature-juridique-niveau-2-multi-select">
-                Catégorie juridique (Niveau 2) :
-              </label>
-              <MultiSelect
-                defaultValue={filters.legalCategoriesNiveau2}
-                id="nature-juridique-niveau-2-multi-select"
-                instanceId="nature-juridique-niveau-2-multi-select"
-                menuPosition="fixed"
-                name="nature_juridique"
-                onChange={(values: string[]) =>
+            <div className="fr-col-12 fr-col-md-6">
+              <CategoriesJuridiquesFileInput
+                onChangeCategoriesJuridiques={(params) => {
                   setFilters((prev) => ({
                     ...prev,
-                    legalCategoriesNiveau2: values,
-                  }))
-                }
-                options={getLegalCategoriesNiveau2()}
-                placeholder="Choisir une catégorie juridique"
-                value={filters.legalCategoriesNiveau2}
+                    ...params,
+                  }));
+                }}
               />
             </div>
-
-            <div className={styles.filterColumn}>
-              <label htmlFor="nature-juridique-niveau-3-multi-select">
-                Catégorie juridique (Niveau 3) :
-              </label>
-              <MultiSelect
-                defaultValue={filters.legalCategoriesNiveau3}
-                id="nature-juridique-niveau-3-multi-select"
-                instanceId="nature-juridique-niveau-3-multi-select"
-                menuPosition="fixed"
-                name="nature_juridique"
-                onChange={(values: string[]) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    legalCategoriesNiveau3: values,
-                  }))
-                }
-                options={getLegalCategoriesNiveau3()}
-                placeholder="Choisir une catégorie juridique"
-                value={filters.legalCategoriesNiveau3}
-              />
-            </div>
-
-            <CategoriesJuridiquesFileInput
-              onChangeCategoriesJuridiques={(params) => {
-                setFilters((prev) => ({
-                  ...prev,
-                  ...params,
-                }));
-              }}
-            />
           </div>
         </section>
       </div>
