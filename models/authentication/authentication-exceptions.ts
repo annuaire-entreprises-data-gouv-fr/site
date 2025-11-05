@@ -1,4 +1,5 @@
 import { Exception } from "#models/exceptions";
+import type { Siren } from "#utils/helpers";
 
 export class AgentConnectionFailedException extends Exception {
   constructor(args: { cause?: any; context?: { slug: string } }) {
@@ -39,6 +40,18 @@ export class NeedASiretException extends Exception {
       message,
       context: {
         details: userId,
+      },
+    });
+  }
+}
+
+export class OrganisationNotAnAdministration extends Exception {
+  constructor(siren: Siren, name: string) {
+    super({
+      name: "OrganisationIsNotAnAdministration",
+      context: {
+        siren,
+        details: name,
       },
     });
   }
