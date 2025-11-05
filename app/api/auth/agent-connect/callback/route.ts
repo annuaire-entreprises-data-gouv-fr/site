@@ -75,7 +75,8 @@ export const GET = withSession(async function callbackRoute(req) {
     }
     if (e instanceof CanRequestAuthorizationException) {
       return NextResponse.redirect(
-        getBaseUrl() + "/connexion/habilitation/requise"
+        getBaseUrl() +
+          `/connexion/habilitation/requise?siren=${e.context.siren}&name=${encodeURIComponent(e.context.details ?? "")}`
       );
     }
     if (e instanceof NeedASiretException) {
@@ -88,7 +89,7 @@ export const GET = withSession(async function callbackRoute(req) {
     if (e instanceof OrganisationNotAnAdministration) {
       return NextResponse.redirect(
         getBaseUrl() +
-          `/connexion/habilitation/refusee?siren=${e.context.siren}&name=${e.context.details}`
+          `/connexion/habilitation/refusee?siren=${e.context.siren}&name=${encodeURIComponent(e.context.details ?? "")}`
       );
     }
     return NextResponse.redirect(getBaseUrl() + "/connexion/echec-connexion");

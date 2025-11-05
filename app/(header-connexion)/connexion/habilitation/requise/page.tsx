@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { ConnexionSubLayout } from "#components-ui/connexion-layout";
 import connexionRefusedPicture from "#components-ui/illustrations/connexion-failed";
+import type { AppRouterProps } from "#utils/server-side-helper/extract-params";
 export const metadata: Metadata = {
   title: "Vous n’êtes pas autorisé(e) à accéder à l’espace agent",
   robots: "noindex, nofollow",
 };
 
-export default function RequiredHabilitationPage() {
+export default async function RequiredHabilitationPage(props: AppRouterProps) {
+  const searchParams = await props.searchParams;
   return (
     <ConnexionSubLayout img={connexionRefusedPicture}>
       <h1>Vous n’êtes pas autorisé(e) à accéder à l’espace agent</h1>
@@ -16,7 +18,11 @@ export default function RequiredHabilitationPage() {
         le public et l’administration (CRPA).
       </div>
       <p>
-        Votre organisation <strong>ne fait pas partie</strong> de la{" "}
+        L'organisation à laquelle vous appartenez (
+        <a href={`/entreprise/${searchParams.siren}`}>
+          {searchParams.name || searchParams.siren}
+        </a>
+        ) <strong>ne fait pas partie</strong> de la{" "}
         <a href="https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises/">
           liste des administrations
         </a>{" "}

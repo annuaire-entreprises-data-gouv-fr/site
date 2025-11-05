@@ -22,11 +22,11 @@ export class PrestataireException extends Exception {
 }
 
 export class CanRequestAuthorizationException extends Exception {
-  constructor(codeJuridique: string, siren: string) {
+  constructor(siren: string, name: string) {
     super({
       name: "OrganisationCanRequestAuthorizationException",
       context: {
-        details: codeJuridique,
+        details: name,
         siren,
       },
     });
