@@ -43,8 +43,8 @@ export class AgentOrganisation {
     }
     if (mightBeAnAuthorizedAdministration(codeJuridique)) {
       throw new CanRequestAuthorizationException(
-        uniteLegale.natureJuridique,
-        this.siren
+        uniteLegale.siren,
+        uniteLegale.nomComplet
       );
     }
     throw new OrganisationNotAnAdministration(
