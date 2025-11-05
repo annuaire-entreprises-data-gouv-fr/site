@@ -1,6 +1,9 @@
-import { HttpForbiddenError, HttpServerError } from "#clients/exceptions";
+import { HttpServerError } from "#clients/exceptions";
 import { isAPINotResponding } from "#models/api-not-responding";
-import { CanRequestAuthorizationException } from "#models/authentication/authentication-exceptions";
+import {
+  CanRequestAuthorizationException,
+  OrganisationNotAnAdministration,
+} from "#models/authentication/authentication-exceptions";
 import type { IUniteLegale } from "#models/core/types";
 import { fetchUniteLegaleFromRechercheEntreprise } from "#models/core/unite-legale";
 import { extractSirenFromSiret, type Siren, type Siret } from "#utils/helpers";
@@ -15,11 +18,9 @@ const organisationHabilitation = {
 };
 
 export class AgentOrganisation {
-  private isFromMCP: boolean;
   private siren: Siren;
 
-  constructor(idpId: string, siret: Siret) {
-    this.isFromMCP = this.isMCP(idpId);
+  constructor(siret: Siret) {
     this.siren = extractSirenFromSiret(siret);
   }
 
@@ -35,10 +36,7 @@ export class AgentOrganisation {
     }
 
     const codeJuridique = (uniteLegale.natureJuridique || "").replace(".", "");
-    const isAuthorized = this.isAnAuthorizedAdministration(
-      uniteLegale,
-      codeJuridique
-    );
+    const isAuthorized = this.isAnAuthorizedAdministration(uniteLegale);
 
     if (isAuthorized) {
       return organisationHabilitation;
@@ -49,24 +47,17 @@ export class AgentOrganisation {
         this.siren
       );
     }
-    throw new HttpForbiddenError("Organization is not a service public");
+    throw new OrganisationNotAnAdministration(
+      uniteLegale.siren,
+      uniteLegale.nomComplet
+    );
   }
 
-  isAnAuthorizedAdministration(
-    uniteLegale: IUniteLegale,
-    codeJuridique: string
-  ) {
+  isAnAuthorizedAdministration(uniteLegale: IUniteLegale) {
     if (isOrganisationWhitelisted(this.siren)) {
       return true;
     }
     if (uniteLegale.complements.estL100_3) {
-      return true;
-    }
-    return false;
-  }
-
-  isMCP(idp_id: string) {
-    if (idp_id === "71144ab3-ee1a-4401-b7b3-79b44f7daeeb") {
       return true;
     }
     return false;

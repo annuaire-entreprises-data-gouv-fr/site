@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { proConnectAuthenticate } from "#clients/authentication/pro-connect/strategy";
-import { HttpForbiddenError } from "#clients/exceptions";
 import { AgentConnected } from "#models/authentication/agent/agent-connected";
 import {
   AgentConnectionFailedException,
   CanRequestAuthorizationException,
   NeedASiretException,
+  OrganisationNotAnAdministration,
   PrestataireException,
 } from "#models/authentication/authentication-exceptions";
 import { Information } from "#models/exceptions";
@@ -85,9 +85,10 @@ export const GET = withSession(async function callbackRoute(req) {
         getBaseUrl() + "/connexion/habilitation/administration-inconnue"
       );
     }
-    if (e instanceof HttpForbiddenError) {
+    if (e instanceof OrganisationNotAnAdministration) {
       return NextResponse.redirect(
-        getBaseUrl() + "/connexion/habilitation/refusee"
+        getBaseUrl() +
+          `/connexion/habilitation/refusee?siren=${e.context.siren}&name=${e.context.details}`
       );
     }
     return NextResponse.redirect(getBaseUrl() + "/connexion/echec-connexion");

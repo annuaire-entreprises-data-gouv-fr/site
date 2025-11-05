@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { ConnexionSubLayout } from "#components-ui/connexion-layout";
 import connexionRefusedPicture from "#components-ui/illustrations/connexion-failed";
+import type { AppRouterProps } from "#utils/server-side-helper/extract-params";
 
 export const metadata: Metadata = {
   title: "Accès à l’espace agent refusé",
   robots: "noindex, nofollow",
 };
 
-export default function RefusedConnexionPage() {
+export default async function RefusedConnexionPage(props: AppRouterProps) {
+  const searchParams = await props.searchParams;
   return (
     <ConnexionSubLayout img={connexionRefusedPicture}>
       <h1>L’accès à l’espace agent vous est refusé</h1>
@@ -16,8 +18,12 @@ export default function RefusedConnexionPage() {
         public.
       </div>
       <p>
-        Votre organisation n’est pas une administration et par conséquent,
-        l’accès à l’espace agent vous est refusé.
+        L’organisation à laquelle vous appartenez (
+        <a href={`/entreprise/${searchParams.siren}`}>
+          {searchParams.name || searchParams.siren}
+        </a>
+        ) n’est pas une administration et par conséquent, l’accès à l’espace
+        agent vous est refusé.
       </p>
       <a href="/">← Retourner au moteur de recherche</a>
     </ConnexionSubLayout>

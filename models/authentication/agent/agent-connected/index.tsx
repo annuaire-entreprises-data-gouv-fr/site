@@ -113,7 +113,7 @@ export class AgentConnected {
   }
 
   async getOrganisationHabilitation() {
-    const organisation = new AgentOrganisation(this.idpId, this.siret);
+    const organisation = new AgentOrganisation(this.siret);
     return await organisation.getHabilitationLevel();
   }
 
