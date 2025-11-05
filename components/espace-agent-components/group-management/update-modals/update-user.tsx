@@ -1,10 +1,11 @@
+import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
+import { updateUserRoleInGroupAction } from "server-actions/agent/group-management";
 import type {
   IRolesDataRoles,
   IRolesDataUser,
 } from "#clients/roles-data/interface";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
-import httpClient from "#utils/network";
 
 export default function UpdateUserSelect({
   user,
@@ -18,53 +19,44 @@ export default function UpdateUserSelect({
   updateUserFromGroupState: (user: IRolesDataUser) => void;
 }) {
   const { showNotification } = useNotification();
-  const [loading, setLoading] = useState(false);
   const [optimisticRoleId, setOptimisticRoleId] = useState<number | null>(null);
 
-  const postUpdateUser = async (roleId: number) =>
-    await httpClient<IRolesDataUser>({
-      url: `/api/groups/${groupId}/update-user`,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify({ userId: user.id, roleId }),
-    });
-
-  const handleUpdate = async (roleId: number) => {
-    setLoading(true);
-    setOptimisticRoleId(roleId);
-
-    try {
-      const updatedUser = await postUpdateUser(roleId);
-      updateUserFromGroupState(updatedUser);
+  const { execute, isPending } = useAction(updateUserRoleInGroupAction, {
+    onSuccess: (result) => {
+      updateUserFromGroupState(result.data);
       setOptimisticRoleId(null);
 
       // Show success notification
       const roleName =
-        roles.find((r) => r.id === roleId)?.role_name || "utilisateur";
+        roles.find((r) => r.id === result.data.role_id)?.role_name ||
+        "utilisateur";
       showNotification({
         type: NotificationTypeEnum.SUCCESS,
         title: "Changement pris en compte",
         message: `Le rôle de ${user.email} a été changé en "${roleName}".`,
       });
-    } catch (error: any) {
+    },
+    onError: ({ error }) => {
       setOptimisticRoleId(null);
       showNotification({
         type: NotificationTypeEnum.ERROR,
         title: "Erreur lors de la mise à jour du rôle",
-        message: error?.message,
+        message: error.serverError?.message,
       });
-    } finally {
-      setLoading(false);
-    }
+    },
+  });
+
+  const handleUpdate = async (roleId: number) => {
+    setOptimisticRoleId(roleId);
+
+    execute({ groupId, userId: user.id, roleId });
   };
 
   return (
     <>
       <select
         className="fr-select"
-        disabled={loading}
+        disabled={isPending}
         onChange={(e) => handleUpdate(Number.parseInt(e.target.value))}
         value={optimisticRoleId ?? user.role_id}
       >

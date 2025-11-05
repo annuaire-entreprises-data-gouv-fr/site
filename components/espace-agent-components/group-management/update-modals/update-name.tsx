@@ -1,10 +1,11 @@
+import { useAction } from "next-safe-action/hooks";
 import { useEffect, useRef, useState } from "react";
+import { updateGroupNameAction } from "server-actions/agent/group-management";
 import { validateGroupName } from "#components/espace-agent-components/helpers/form-validation";
 import ButtonLink from "#components-ui/button";
 import { FullScreenModal } from "#components-ui/full-screen-modal";
 import { Icon } from "#components-ui/icon/wrapper";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
-import httpClient from "#utils/network";
 
 export default function UpdateNameModal({
   groupId,
@@ -18,9 +19,28 @@ export default function UpdateNameModal({
   const { showNotification } = useNotification();
   const [isVisible, setIsVisible] = useState(false);
   const [groupName, setGroupName] = useState(initialName);
-  const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { execute, isPending } = useAction(updateGroupNameAction, {
+    onSuccess: () => {
+      updateGroupNameState(groupName);
+      setIsVisible(false);
+
+      showNotification({
+        type: NotificationTypeEnum.SUCCESS,
+        title: "Nom du groupe mis à jour",
+        message: `Le groupe a été renommé "${groupName}"`,
+      });
+    },
+    onError: ({ error }) => {
+      showNotification({
+        type: NotificationTypeEnum.ERROR,
+        title: "Erreur lors de la mise à jour du nom",
+        message: error.serverError?.message,
+      });
+    },
+  });
 
   useEffect(() => {
     if (inputRef.current && isVisible) {
@@ -30,48 +50,21 @@ export default function UpdateNameModal({
   }, [isVisible, initialName]);
 
   const handleUpdateName = async () => {
-    setLoading(true);
     setValidationErrors([]);
 
-    try {
-      // Client-side validation
-      const nameValidationError = validateGroupName(groupName);
-      if (nameValidationError) {
-        setValidationErrors([nameValidationError]);
-        showNotification({
-          type: NotificationTypeEnum.ERROR,
-          title: "Nom invalide",
-          message: nameValidationError,
-        });
-        return;
-      }
-
-      await httpClient({
-        url: `/api/groups/${groupId}/update-name`,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify({ groupName }),
-      });
-
-      updateGroupNameState(groupName);
-      setIsVisible(false);
-
-      showNotification({
-        type: NotificationTypeEnum.SUCCESS,
-        title: "Nom du groupe mis à jour",
-        message: `Le groupe a été renommé "${groupName}"`,
-      });
-    } catch (error: any) {
+    // Client-side validation
+    const nameValidationError = validateGroupName(groupName);
+    if (nameValidationError) {
+      setValidationErrors([nameValidationError]);
       showNotification({
         type: NotificationTypeEnum.ERROR,
-        title: "Erreur lors de la mise à jour du nom",
-        message: error?.message,
+        title: "Nom invalide",
+        message: nameValidationError,
       });
-    } finally {
-      setLoading(false);
+      return;
     }
+
+    execute({ groupId, groupName });
   };
 
   const handleCancel = () => {
@@ -135,7 +128,7 @@ export default function UpdateNameModal({
                 className={`fr-input ${
                   validationErrors.length > 0 ? "fr-input--error" : ""
                 }`}
-                disabled={loading}
+                disabled={isPending}
                 id={`group-name-${groupId}`}
                 onChange={(e) => {
                   setGroupName(e.target.value);
@@ -144,7 +137,7 @@ export default function UpdateNameModal({
                   }
                 }}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" && groupName?.trim() && !loading) {
+                  if (e.key === "Enter" && groupName?.trim() && !isPending) {
                     handleUpdateName();
                   }
                 }}
@@ -157,12 +150,12 @@ export default function UpdateNameModal({
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
             <ButtonLink
-              disabled={!groupName?.trim() || loading}
+              disabled={!groupName?.trim() || isPending}
               onClick={handleUpdateName}
             >
-              {loading ? "Sauvegarde..." : "Sauvegarder"}
+              {isPending ? "Sauvegarde..." : "Sauvegarder"}
             </ButtonLink>
-            <ButtonLink alt disabled={loading} onClick={handleCancel}>
+            <ButtonLink alt disabled={isPending} onClick={handleCancel}>
               Annuler
             </ButtonLink>
           </div>
