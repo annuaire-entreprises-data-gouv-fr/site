@@ -91,7 +91,10 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     serverActions: {
-      allowedOrigins: [getBaseUrl()],
+      allowedOrigins: [
+        getBaseUrl().replace(/https?:\/\//, ""),
+        "backend_server",
+      ],
     },
   },
 };
