@@ -89,6 +89,11 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  experimental: {
+    serverActions: {
+      allowedOrigins: [getBaseUrl()],
+    },
+  },
 };
 
 const sentryBuildOptions: SentryBuildOptions = {
