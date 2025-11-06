@@ -103,7 +103,7 @@ const FinessSection: React.FC<{
                 fichier
               </a>{" "}
               <FAQLink tooltipLabel="Finess">
-                Le FIchier National des Etablissements Sanitaires et Sociaux
+                Le Fichier National des Etablissements Sanitaires et Sociaux
                 regroupe l’ensemble des établissements sanitaires, sociaux,
                 médico-sociaux, et de formation aux professions de ces secteurs
               </FAQLink>
