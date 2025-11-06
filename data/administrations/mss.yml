@@ -4,7 +4,7 @@ long: Ministère des Solidarités et de la Santé
 site: https://sante.gouv.fr/
 contact: https://sante.gouv.fr/ministere/article/nous-contacter
 dataSources:
-  - label: Liste des établissements FIness (sanitaire et social)
+  - label: Liste des établissements Finess (sanitaire et social)
     apiSlug: liste-finess
     datagouvLink: https://www.data.gouv.fr/datasets/reexposition-des-donnees-finess
     data:
