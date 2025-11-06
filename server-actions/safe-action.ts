@@ -10,6 +10,11 @@ import { InternalError } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
 import getSession from "#utils/server-side-helper/get-session";
 
+export type ServerActionError = {
+  message: string;
+  status: number;
+};
+
 export const actionClient = createSafeActionClient({
   handleServerError(error) {
     if (error instanceof ProConnectReconnexionNeeded) {
@@ -55,5 +60,5 @@ export const agentActionClient = actionClient.use(async ({ next }) => {
     throw new HttpUnauthorizedError("Unauthorized: Agent access required");
   }
 
-  return next();
+  return next({ ctx: { session } });
 });

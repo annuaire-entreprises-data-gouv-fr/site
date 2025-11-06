@@ -12,13 +12,6 @@ describe("Data fetching routes", () => {
     });
 
     cy.request({
-      url: "/api/data-fetching/espace-agent/conformite/552032534",
-      failOnStatusCode: false,
-    }).then((resp) => {
-      expect(resp.status).to.eq(403);
-    });
-
-    cy.request({
       url: "/api/data-fetching/espace-agent/rne/documents/552032534",
       failOnStatusCode: false,
     }).then((resp) => {
