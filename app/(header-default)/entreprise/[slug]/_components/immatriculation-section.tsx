@@ -112,7 +112,7 @@ export const UniteLegaleImmatriculationSection = ({
                     (procédures collectives, ventes, créations, modification,
                     radiation et dépôt des comptes)
                   </FAQLink>,
-                  <a href={`/dirigeants/${uniteLegale.siren}`}>
+                  <a href={`/annonces/${uniteLegale.siren}`}>
                     → Consulter les annonces
                   </a>,
                 ],
