@@ -6,7 +6,7 @@ dump.rdb
 #protected-siren (fetching data from grist)
 public/protected-siren.txt
 
-#cspell 
+#cspell
 cspell.json
 
 # dependencies
@@ -67,3 +67,6 @@ cypress/screenshots
 
 # typescript
 tsconfig.tsbuildinfo
+
+# mise
+mise*.toml
