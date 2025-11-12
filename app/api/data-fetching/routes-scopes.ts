@@ -10,8 +10,6 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
   // documents RNE - Open data but restricted to agents only
   [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
-  // person
-  [APIRoutesPaths.EspaceAgentBeneficiaires]: ApplicationRights.beneficiaires,
   //association
   [APIRoutesPaths.EspaceAgentAssociationProtected]:
     ApplicationRights.associationProtected,

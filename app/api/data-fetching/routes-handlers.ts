@@ -1,7 +1,6 @@
 import { getAssociationFromSlug } from "#models/association";
 import { getEORIValidation } from "#models/eori-validation";
 import { getAssociationProtected } from "#models/espace-agent/association-protected";
-import { getBeneficiaires } from "#models/espace-agent/beneficiaires";
 import { getBilansProtected } from "#models/espace-agent/bilans";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
@@ -17,9 +16,6 @@ import { APIRoutesPaths } from "./routes-paths";
 import { withRateLimiting, withUseCase } from "./utils";
 
 export const APIRoutesHandlers = {
-  [APIRoutesPaths.EspaceAgentBeneficiaires]: withRateLimiting(
-    withUseCase(getBeneficiaires)
-  ),
   [APIRoutesPaths.EspaceAgentRneDocuments]: withRateLimiting(
     getDocumentsRNEProtected
   ),

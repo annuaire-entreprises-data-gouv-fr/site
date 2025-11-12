@@ -2,6 +2,7 @@
 
 import { agentActionClient } from "server-actions/safe-action";
 import { ApplicationRights } from "#models/authentication/user/rights";
+import { getBeneficiaires } from "#models/espace-agent/beneficiaires";
 import { getOpqibi } from "#models/espace-agent/certificats/opqibi";
 import { getQualibat } from "#models/espace-agent/certificats/qualibat";
 import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
@@ -13,6 +14,7 @@ import {
   withUseCase,
 } from "../middlewares";
 import {
+  getAgentBeneficiairesSchema,
   getAgentConformiteEntrepriseSchema,
   getAgentDirigeantsProtectedSchema,
   getAgentOpqibiSchema,
@@ -54,6 +56,16 @@ export const getAgentDirigeantsProtectedAction = agentActionClient
   .action(async ({ parsedInput }) => {
     const { siren, isEI } = parsedInput;
     return await getDirigeantsProtected(siren, isEI);
+  });
+
+export const getAgentBeneficiairesAction = agentActionClient
+  .use(withRateLimiting)
+  .use(withUseCase)
+  .use(withApplicationRight(ApplicationRights.beneficiaires))
+  .inputSchema(getAgentBeneficiairesSchema)
+  .action(async ({ parsedInput }) => {
+    const { siren, useCase } = parsedInput;
+    return await getBeneficiaires(siren, useCase);
   });
 
 export const getAgentConformiteEntrepriseAction = agentActionClient
