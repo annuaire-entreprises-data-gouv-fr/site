@@ -20,7 +20,6 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.SubventionsAssociation]:
     ApplicationRights.subventionsAssociation,
   // certificats
-  [APIRoutesPaths.EspaceAgentQualibat]: ApplicationRights.protectedCertificats,
   [APIRoutesPaths.EspaceAgentQualifelec]:
     ApplicationRights.protectedCertificats,
   // BTP

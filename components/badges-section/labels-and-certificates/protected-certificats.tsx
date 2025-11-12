@@ -3,7 +3,10 @@
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import React, { useMemo } from "react";
-import { getAgentOpqibiAction } from "server-actions/agent/data-fetching";
+import {
+  getAgentOpqibiAction,
+  getAgentQualibatAction,
+} from "server-actions/agent/data-fetching";
 import NonRenseigne from "#components/non-renseigne";
 import { ProtectedInlineData } from "#components/protected-inline-data";
 import { Loader } from "#components-ui/loader";
@@ -27,6 +30,10 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
+  const qualibatInput = useMemo(
+    () => ({ siret: uniteLegale.siege.siret }),
+    [uniteLegale.siege.siret]
+  );
   const protectedCertificates = [
     {
       data: useServerActionData(getAgentOpqibiAction, session, opqibiInput),
@@ -40,11 +47,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
       ),
     },
     {
-      data: useAPIRouteData(
-        APIRoutesPaths.EspaceAgentQualibat,
-        uniteLegale.siege.siret,
-        session
-      ),
+      data: useServerActionData(getAgentQualibatAction, session, qualibatInput),
       render: (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure a obtenue un label de fiabilité QUALIBAT, garantissant sa qualification dans le bâtiment"
