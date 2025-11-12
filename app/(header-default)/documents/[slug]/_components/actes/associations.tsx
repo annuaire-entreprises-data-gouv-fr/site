@@ -1,13 +1,13 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { useMemo, useState } from "react";
+import { getAgentAssociationProtectedAction } from "server-actions/agent/data-fetching";
 import { DataSectionClient } from "#components/section/data-section";
 import TableFilter from "#components/table/filter";
 import { FullTable } from "#components/table/full";
 import ButtonLink from "#components-ui/button";
 import FAQLink from "#components-ui/faq-link";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
@@ -24,11 +24,14 @@ export const AgentActesAssociation: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
-
-  const associationProtected = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentAssociationProtected,
-    uniteLegale.siren,
-    session
+  const input = useMemo(
+    () => ({ siren: uniteLegale.siren }),
+    [uniteLegale.siren]
+  );
+  const associationProtected = useServerActionData(
+    getAgentAssociationProtectedAction,
+    session,
+    input
   );
 
   const etablissementsForFilter = useMemo(() => {

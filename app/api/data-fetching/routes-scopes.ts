@@ -9,8 +9,6 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.VerifyTva]: ApplicationRights.opendata,
   [APIRoutesPaths.EoriValidation]: ApplicationRights.opendata,
   //association
-  [APIRoutesPaths.EspaceAgentAssociationProtected]:
-    ApplicationRights.associationProtected,
   [APIRoutesPaths.SubventionsAssociation]:
     ApplicationRights.subventionsAssociation,
   // BTP

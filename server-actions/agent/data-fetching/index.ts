@@ -2,6 +2,7 @@
 
 import { agentActionClient } from "server-actions/safe-action";
 import { ApplicationRights } from "#models/authentication/user/rights";
+import { getAssociationProtected } from "#models/espace-agent/association-protected";
 import { getBeneficiaires } from "#models/espace-agent/beneficiaires";
 import { getOpqibi } from "#models/espace-agent/certificats/opqibi";
 import { getQualibat } from "#models/espace-agent/certificats/qualibat";
@@ -15,6 +16,7 @@ import {
   withUseCase,
 } from "../middlewares";
 import {
+  getAgentAssociationProtectedSchema,
   getAgentBeneficiairesSchema,
   getAgentConformiteEntrepriseSchema,
   getAgentDirigeantsProtectedSchema,
@@ -88,4 +90,12 @@ export const getAgentRNEDocumentsAction = agentActionClient
   .action(async ({ parsedInput }) => {
     const { siren } = parsedInput;
     return await getDocumentsRNEProtected(siren);
+  });
+
+export const getAgentAssociationProtectedAction = agentActionClient
+  .use(withApplicationRight(ApplicationRights.associationProtected))
+  .inputSchema(getAgentAssociationProtectedSchema)
+  .action(async ({ parsedInput }) => {
+    const { siren } = parsedInput;
+    return await getAssociationProtected(siren);
   });

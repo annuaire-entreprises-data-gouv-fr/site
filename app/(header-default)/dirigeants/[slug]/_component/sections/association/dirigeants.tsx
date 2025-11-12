@@ -1,8 +1,7 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { useMemo, useState } from "react";
+import { getAgentAssociationProtectedAction } from "server-actions/agent/data-fetching";
 import AgentWallAssociationProtected from "#components/espace-agent-components/agent-wall/association";
 import { DataSectionClient } from "#components/section/data-section";
 import TableFilter from "#components/table/filter";
@@ -10,6 +9,7 @@ import { FullTable } from "#components/table/full";
 import FAQLink from "#components-ui/faq-link";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { Tag } from "#components-ui/tag";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
@@ -31,10 +31,14 @@ const NoDirigeants = () => (
  */
 function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
   const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
-  const associationProtected = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentAssociationProtected,
-    uniteLegale.siren,
-    session
+  const input = useMemo(
+    () => ({ siren: uniteLegale.siren }),
+    [uniteLegale.siren]
+  );
+  const associationProtected = useServerActionData(
+    getAgentAssociationProtectedAction,
+    session,
+    input
   );
 
   const etablissementsForFilter = useMemo(() => {

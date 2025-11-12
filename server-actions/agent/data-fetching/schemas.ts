@@ -31,3 +31,7 @@ export const getAgentConformiteEntrepriseSchema = z.object({
 export const getAgentRNEDocumentsSchema = z.object({
   siren: z.string().min(1, "Siren is required"),
 });
+
+export const getAgentAssociationProtectedSchema = z.object({
+  siren: z.string().min(1, "Siren is required"),
+});
