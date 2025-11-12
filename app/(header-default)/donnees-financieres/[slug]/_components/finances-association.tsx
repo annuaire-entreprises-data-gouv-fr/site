@@ -1,11 +1,12 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { getAssociationAction } from "server-actions/public/data-fetching";
 import { DJEPVA } from "#components/administrations";
 import { LineChart } from "#components/chart/line";
 import { DataSectionClient } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
@@ -32,11 +33,11 @@ export default function FinancesAssociationSection({
   uniteLegale: IAssociation;
   session: ISession | null;
 }) {
-  const data = useAPIRouteData(
-    APIRoutesPaths.Association,
-    uniteLegale.siren,
-    session
+  const input = useMemo(
+    () => ({ slug: uniteLegale.siren }),
+    [uniteLegale.siren]
   );
+  const data = useServerActionData(getAssociationAction, session, input);
   if (!data) return null;
 
   return (

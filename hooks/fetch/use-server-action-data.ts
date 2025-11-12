@@ -1,5 +1,3 @@
-import type { APIRoutesHandlers } from "app/api/data-fetching/routes-handlers";
-import type { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import type {
   InferInputOrDefault,
   StandardSchemaV1,
@@ -7,7 +5,6 @@ import type {
 import { type HookSafeActionFn, useAction } from "next-safe-action/hooks";
 import { useEffect } from "react";
 import type { ServerActionError } from "server-actions/safe-action";
-import type { UnwrapPromise } from "types";
 import {
   ApplicationRights,
   hasRights,
@@ -15,25 +12,13 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 import { IDataFetchingState } from "#models/data-fetching";
 
-export type RouteResponse<T> = T extends APIRoutesPaths
-  ? UnwrapPromise<ReturnType<(typeof APIRoutesHandlers)[T]>>
-  : never;
-
-export type RouteParams<T> = T extends APIRoutesPaths
-  ? Parameters<(typeof APIRoutesHandlers)[T]>[1]
-  : never;
-
-type Options<T extends APIRoutesPaths> = {
-  params?: RouteParams<T>;
-};
-
 /**
  * Hook to fetch data from internal API
  * @param action : server action to execute
  * @param session : user session, used to check rights
  * @param input : input for the action
  * @param requiredRight : ApplicationRights required to execute the action
- * @returns {IDataFetchingState | RouteResponse<T>} - The API loading state or the fetched data
+ * @returns {IDataFetchingState | Data} - The API loading state or the fetched data
  */
 export function useServerActionData<S extends StandardSchemaV1, CVE, Data>(
   action: HookSafeActionFn<ServerActionError, S, CVE, Data>,

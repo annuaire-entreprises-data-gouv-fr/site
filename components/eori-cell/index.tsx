@@ -1,10 +1,11 @@
 "use client";
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { getEoriValidationAction } from "server-actions/public/data-fetching";
 import { CopyPaste } from "#components/table/copy-paste";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { Loader } from "#components-ui/loader";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { isAPINotResponding } from "#models/api-not-responding";
 import type { ISession } from "#models/authentication/user/session";
 import {
@@ -19,10 +20,11 @@ type IProps = {
   session: ISession | null;
 };
 export default function EORICell({ siret, session }: IProps) {
-  const eoriValidation = useAPIRouteData(
-    APIRoutesPaths.EoriValidation,
-    siret,
-    session
+  const input = useMemo(() => ({ siret }), [siret]);
+  const eoriValidation = useServerActionData(
+    getEoriValidationAction,
+    session,
+    input
   );
 
   if (isDataLoading(eoriValidation)) {

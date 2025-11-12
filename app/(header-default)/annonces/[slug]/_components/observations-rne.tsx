@@ -1,11 +1,12 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { getRneObservationsAction } from "server-actions/public/data-fetching";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
 import InpiPartiallyDownWarning from "#components-ui/alerts-with-explanations/inpi-partially-down";
 import { Tag } from "#components-ui/tag";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
@@ -14,10 +15,14 @@ export const ObservationsRNE: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const observations = useAPIRouteData(
-    APIRoutesPaths.Observations,
-    uniteLegale.siren,
-    session
+  const input = useMemo(
+    () => ({ siren: uniteLegale.siren }),
+    [uniteLegale.siren]
+  );
+  const observations = useServerActionData(
+    getRneObservationsAction,
+    session,
+    input
   );
 
   return (

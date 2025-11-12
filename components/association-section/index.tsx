@@ -1,13 +1,14 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { getAssociationAction } from "server-actions/public/data-fetching";
 import { DJEPVA, MI } from "#components/administrations";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
 import AssociationAdressAlert from "#components-ui/alerts-with-explanations/association-adress";
 import FAQLink from "#components-ui/faq-link";
 import BreakPageForPrint from "#components-ui/print-break-page";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IDataAssociation } from "#models/association/types";
 import type { ISession } from "#models/authentication/user/session";
@@ -146,11 +147,11 @@ const AssociationSection = ({
 }) => {
   const { idAssociation = "" } = uniteLegale.association;
 
-  const association = useAPIRouteData(
-    APIRoutesPaths.Association,
-    uniteLegale.siren,
-    session
+  const input = useMemo(
+    () => ({ slug: uniteLegale.siren }),
+    [uniteLegale.siren]
   );
+  const association = useServerActionData(getAssociationAction, session, input);
 
   return (
     <>

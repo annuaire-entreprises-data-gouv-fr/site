@@ -1,12 +1,13 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { verifyTvaAction } from "server-actions/public/data-fetching";
 import { CopyPaste } from "#components/table/copy-paste";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { Loader } from "#components-ui/loader";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import type { IUniteLegale } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
 import type { ITVAIntracommunautaire } from "#models/tva";
@@ -82,7 +83,8 @@ const VerifyTVA: React.FC<{
   siren: Siren;
 }> = ({ tva: tvaProp, siren }) => {
   const { tvaNumber, mayHaveMultipleTVANumber } = tvaProp;
-  const verification = useAPIRouteData(APIRoutesPaths.VerifyTva, siren, null);
+  const input = useMemo(() => ({ slug: siren }), [siren]);
+  const verification = useServerActionData(verifyTvaAction, null, input);
   if (isDataLoading(verification)) {
     return (
       <>
