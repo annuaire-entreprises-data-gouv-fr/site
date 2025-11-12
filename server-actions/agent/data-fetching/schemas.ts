@@ -13,6 +13,11 @@ export const getAgentQualifelecSchema = z.object({
   siret: z.string().min(1, "Siret is required"),
 });
 
+export const getAgentDirigeantsProtectedSchema = z.object({
+  siren: z.string().min(1, "Siren is required"),
+  isEI: z.boolean().optional(),
+});
+
 export const getAgentConformiteEntrepriseSchema = z.object({
   siret: z.string().min(1, "Siret is required"),
   useCase: z.nativeEnum(UseCase).optional(),

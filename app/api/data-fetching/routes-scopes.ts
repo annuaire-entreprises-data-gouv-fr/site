@@ -12,8 +12,6 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
   [APIRoutesPaths.EspaceAgentRneDocuments]: ApplicationRights.documentsRne,
   // person
   [APIRoutesPaths.EspaceAgentBeneficiaires]: ApplicationRights.beneficiaires,
-  [APIRoutesPaths.EspaceAgentDirigeantsProtected]:
-    ApplicationRights.mandatairesRCS,
   //association
   [APIRoutesPaths.EspaceAgentAssociationProtected]:
     ApplicationRights.associationProtected,

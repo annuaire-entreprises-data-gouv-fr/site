@@ -5,7 +5,6 @@ import { getBeneficiaires } from "#models/espace-agent/beneficiaires";
 import { getBilansProtected } from "#models/espace-agent/bilans";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
-import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
 import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
 import { getLiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
 import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
@@ -18,9 +17,6 @@ import { APIRoutesPaths } from "./routes-paths";
 import { withRateLimiting, withUseCase } from "./utils";
 
 export const APIRoutesHandlers = {
-  [APIRoutesPaths.EspaceAgentDirigeantsProtected]: withRateLimiting(
-    getDirigeantsProtected
-  ),
   [APIRoutesPaths.EspaceAgentBeneficiaires]: withRateLimiting(
     withUseCase(getBeneficiaires)
   ),

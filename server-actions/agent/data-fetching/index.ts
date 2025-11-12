@@ -6,6 +6,7 @@ import { getOpqibi } from "#models/espace-agent/certificats/opqibi";
 import { getQualibat } from "#models/espace-agent/certificats/qualibat";
 import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
 import { getConformiteEntreprise } from "#models/espace-agent/conformite";
+import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
 import {
   withApplicationRight,
   withRateLimiting,
@@ -13,6 +14,7 @@ import {
 } from "../middlewares";
 import {
   getAgentConformiteEntrepriseSchema,
+  getAgentDirigeantsProtectedSchema,
   getAgentOpqibiSchema,
   getAgentQualibatSchema,
   getAgentQualifelecSchema,
@@ -43,6 +45,15 @@ export const getAgentQualifelecAction = agentActionClient
   .action(async ({ parsedInput }) => {
     const { siret } = parsedInput;
     return await getQualifelec(siret);
+  });
+
+export const getAgentDirigeantsProtectedAction = agentActionClient
+  .use(withRateLimiting)
+  .use(withApplicationRight(ApplicationRights.mandatairesRCS))
+  .inputSchema(getAgentDirigeantsProtectedSchema)
+  .action(async ({ parsedInput }) => {
+    const { siren, isEI } = parsedInput;
+    return await getDirigeantsProtected(siren, isEI);
   });
 
 export const getAgentConformiteEntrepriseAction = agentActionClient

@@ -1,14 +1,14 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { useMemo } from "react";
+import { getAgentDirigeantsProtectedAction } from "server-actions/agent/data-fetching";
 import routes from "#clients/routes";
 import { INPI } from "#components/administrations";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { UniteLegalePageLink } from "#components/unite-legale-page-link";
 import { Info } from "#components-ui/alerts";
 import InpiPartiallyDownWarning from "#components-ui/alerts-with-explanations/inpi-partially-down";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import {
@@ -31,17 +31,17 @@ export default function DirigeantsSectionProtected({
   session,
 }: IProps) {
   const isEI = isEntrepreneurIndividuel(uniteLegale);
-  const params = useMemo(
+  const input = useMemo(
     () => ({
-      params: { isEI },
+      siren: uniteLegale.siren,
+      isEI,
     }),
     [isEI]
   );
-  const dirigeants = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentDirigeantsProtected,
-    uniteLegale.siren,
+  const dirigeants = useServerActionData(
+    getAgentDirigeantsProtectedAction,
     session,
-    params
+    input
   );
 
   return (
