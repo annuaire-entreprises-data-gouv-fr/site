@@ -1,8 +1,7 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { type ChangeEvent, Fragment, useMemo, useState } from "react";
+import { getAgentLiassesFiscalesProtectedAction } from "server-actions/agent/data-fetching";
 import NonRenseigne from "#components/non-renseigne";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
@@ -10,6 +9,7 @@ import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import { Loader } from "#components-ui/loader";
 import { Select } from "#components-ui/select";
 import { Tag } from "#components-ui/tag";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import { isAPI404 } from "#models/api-not-responding";
 import type { ISession } from "#models/authentication/user/session";
@@ -28,18 +28,15 @@ const InnerLiassesSection = ({
   selectedYear: string;
   useCase: UseCase;
 }) => {
-  const params = useMemo(
-    () => ({
-      params: { year: selectedYear, useCase },
-    }),
-    [selectedYear, useCase]
+  const input = useMemo(
+    () => ({ siren: uniteLegale.siren, year: selectedYear, useCase }),
+    [uniteLegale.siren, selectedYear, useCase]
   );
 
-  const liassesFiscalesProtected = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentLiassesFiscalesProtected,
-    uniteLegale.siren,
+  const liassesFiscalesProtected = useServerActionData(
+    getAgentLiassesFiscalesProtectedAction,
     session,
-    params
+    input
   );
 
   if (isDataLoading(liassesFiscalesProtected)) {

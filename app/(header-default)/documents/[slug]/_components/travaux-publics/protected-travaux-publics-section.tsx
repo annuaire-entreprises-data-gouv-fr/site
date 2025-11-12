@@ -1,12 +1,12 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { useMemo } from "react";
+import { getAgentTravauxPublicsAction } from "server-actions/agent/data-fetching";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import {
   type IAPINotRespondingError,
@@ -74,17 +74,14 @@ export default function ProtectedTravauxPublicsSection({
   sources: EAdministration[];
   isProtected: boolean;
 }) {
-  const params = useMemo(
-    () => ({
-      params: { useCase },
-    }),
-    [useCase]
+  const input = useMemo(
+    () => ({ siret: uniteLegale.siege.siret, useCase }),
+    [uniteLegale.siege.siret, useCase]
   );
-  const travauxPublics = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentTravauxPublics,
-    uniteLegale.siege.siret,
+  const travauxPublics = useServerActionData(
+    getAgentTravauxPublicsAction,
     session,
-    params
+    input
   );
 
   return (

@@ -39,3 +39,34 @@ export const getAgentAssociationProtectedSchema = z.object({
 export const getAgentEffectifsAnnuelsProtectedSchema = z.object({
   siren: z.string().min(1, "Siren is required"),
 });
+
+export const getAgentBilansProtectedSchema = z.object({
+  siren: z.string().min(1, "Siren is required"),
+  useCase: z.nativeEnum(UseCase).optional(),
+});
+
+export const getAgentChiffreAffairesProtectedSchema = z.object({
+  siret: z.string().min(1, "Siret is required"),
+  useCase: z.nativeEnum(UseCase).optional(),
+});
+
+export const getAgentTravauxPublicsSchema = z.object({
+  siret: z.string().min(1, "Siret is required"),
+  useCase: z.nativeEnum(UseCase).optional(),
+});
+
+export const getAgentLiassesFiscalesProtectedSchema = z.object({
+  siren: z.string().min(1, "Siren is required"),
+  year: z.string().optional(),
+  useCase: z.nativeEnum(UseCase).optional(),
+});
+
+export const getAgentLiensCapitalistiquesProtectedSchema = z.object({
+  siren: z.string().min(1, "Siren is required"),
+  year: z.string().optional(),
+  useCase: z.nativeEnum(UseCase).optional(),
+});
+
+export const getAgentSubventionsAssociationSchema = z.object({
+  slug: z.string().min(1, "Slug is required"),
+});

@@ -1,8 +1,7 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { type ChangeEvent, useEffect, useMemo, useState } from "react";
+import { getAgentSubventionsAssociationAction } from "server-actions/agent/data-fetching";
 import routes from "#clients/routes";
 import { DJEPVA } from "#components/administrations";
 import AgentWall from "#components/espace-agent-components/agent-wall";
@@ -12,6 +11,7 @@ import { FullTable } from "#components/table/full";
 import FAQLink from "#components-ui/faq-link";
 import { Select } from "#components-ui/select";
 import { Tag } from "#components-ui/tag";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IAssociation } from "#models/core/types";
@@ -101,10 +101,14 @@ export default function SubventionsAssociationSection({
     []
   );
 
-  const subventions = useAPIRouteData(
-    APIRoutesPaths.SubventionsAssociation,
-    uniteLegale.siren,
-    session
+  const input = useMemo(
+    () => ({ slug: uniteLegale.siren }),
+    [uniteLegale.siren]
+  );
+  const subventions = useServerActionData(
+    getAgentSubventionsAssociationAction,
+    session,
+    input
   );
 
   const allYears = useMemo(() => {
