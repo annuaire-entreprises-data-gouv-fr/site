@@ -1,11 +1,10 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import React, { useMemo } from "react";
 import {
   getAgentOpqibiAction,
   getAgentQualibatAction,
+  getAgentQualifelecAction,
 } from "server-actions/agent/data-fetching";
 import NonRenseigne from "#components/non-renseigne";
 import { ProtectedInlineData } from "#components/protected-inline-data";
@@ -34,6 +33,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
     () => ({ siret: uniteLegale.siege.siret }),
     [uniteLegale.siege.siret]
   );
+  const qualifelecInput = qualibatInput;
   const protectedCertificates = [
     {
       data: useServerActionData(getAgentOpqibiAction, session, opqibiInput),
@@ -58,10 +58,10 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
       ),
     },
     {
-      data: useAPIRouteData(
-        APIRoutesPaths.EspaceAgentQualifelec,
-        uniteLegale.siege.siret,
-        session
+      data: useServerActionData(
+        getAgentQualifelecAction,
+        session,
+        qualifelecInput
       ),
       render: (
         <LabelWithLinkToSection

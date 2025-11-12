@@ -19,9 +19,6 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
     ApplicationRights.associationProtected,
   [APIRoutesPaths.SubventionsAssociation]:
     ApplicationRights.subventionsAssociation,
-  // certificats
-  [APIRoutesPaths.EspaceAgentQualifelec]:
-    ApplicationRights.protectedCertificats,
   // BTP
   [APIRoutesPaths.EspaceAgentTravauxPublics]: ApplicationRights.travauxPublics,
   // fiscal & social

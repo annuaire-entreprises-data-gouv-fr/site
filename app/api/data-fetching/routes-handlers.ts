@@ -3,7 +3,6 @@ import { getEORIValidation } from "#models/eori-validation";
 import { getAssociationProtected } from "#models/espace-agent/association-protected";
 import { getBeneficiaires } from "#models/espace-agent/beneficiaires";
 import { getBilansProtected } from "#models/espace-agent/bilans";
-import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
 import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
@@ -19,7 +18,6 @@ import { APIRoutesPaths } from "./routes-paths";
 import { withRateLimiting, withUseCase } from "./utils";
 
 export const APIRoutesHandlers = {
-  [APIRoutesPaths.EspaceAgentQualifelec]: withRateLimiting(getQualifelec),
   [APIRoutesPaths.EspaceAgentDirigeantsProtected]: withRateLimiting(
     getDirigeantsProtected
   ),

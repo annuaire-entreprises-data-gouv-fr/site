@@ -4,6 +4,7 @@ import { agentActionClient } from "server-actions/safe-action";
 import { ApplicationRights } from "#models/authentication/user/rights";
 import { getOpqibi } from "#models/espace-agent/certificats/opqibi";
 import { getQualibat } from "#models/espace-agent/certificats/qualibat";
+import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
 import { getConformiteEntreprise } from "#models/espace-agent/conformite";
 import {
   withApplicationRight,
@@ -14,6 +15,7 @@ import {
   getAgentConformiteEntrepriseSchema,
   getAgentOpqibiSchema,
   getAgentQualibatSchema,
+  getAgentQualifelecSchema,
 } from "./schemas";
 
 export const getAgentOpqibiAction = agentActionClient
@@ -32,6 +34,15 @@ export const getAgentQualibatAction = agentActionClient
   .action(async ({ parsedInput }) => {
     const { siret } = parsedInput;
     return await getQualibat(siret);
+  });
+
+export const getAgentQualifelecAction = agentActionClient
+  .use(withRateLimiting)
+  .use(withApplicationRight(ApplicationRights.protectedCertificats))
+  .inputSchema(getAgentQualifelecSchema)
+  .action(async ({ parsedInput }) => {
+    const { siret } = parsedInput;
+    return await getQualifelec(siret);
   });
 
 export const getAgentConformiteEntrepriseAction = agentActionClient

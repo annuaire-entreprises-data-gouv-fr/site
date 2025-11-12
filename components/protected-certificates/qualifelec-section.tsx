@@ -1,10 +1,11 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { getAgentQualifelecAction } from "server-actions/agent/data-fetching";
 import { DataSectionClient } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import ButtonLink from "#components-ui/button";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
@@ -17,10 +18,14 @@ export function QualifelecSection({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
-  const qualifelec = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentQualifelec,
-    uniteLegale.siege.siret,
-    session
+  const input = useMemo(
+    () => ({ siret: uniteLegale.siege.siret }),
+    [uniteLegale.siege.siret]
+  );
+  const qualifelec = useServerActionData(
+    getAgentQualifelecAction,
+    session,
+    input
   );
   return (
     <DataSectionClient
