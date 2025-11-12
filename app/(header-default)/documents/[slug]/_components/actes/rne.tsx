@@ -1,13 +1,14 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { getAgentRNEDocumentsAction } from "server-actions/agent/data-fetching";
 import routes from "#clients/routes";
 import { DataSectionClient } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import { Info } from "#components-ui/alerts";
 import ButtonLink from "#components-ui/button";
 import ShowMore from "#components-ui/show-more";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import { type IUniteLegale, isServicePublic } from "#models/core/types";
@@ -18,10 +19,14 @@ export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const documentsRne = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentRneDocuments,
-    uniteLegale.siren,
-    session
+  const input = useMemo(
+    () => ({ siren: uniteLegale.siren }),
+    [uniteLegale.siren]
+  );
+  const documentsRne = useServerActionData(
+    getAgentRNEDocumentsAction,
+    session,
+    input
   );
 
   return (

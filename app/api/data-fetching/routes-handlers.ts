@@ -6,7 +6,6 @@ import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affair
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
 import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
 import { getLiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
-import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
 import { getTravauxPublic } from "#models/espace-agent/travaux-publics";
 import { getDirigeantsRNE } from "#models/rne/dirigeants";
 import { getRNEObservations } from "#models/rne/observations";
@@ -16,9 +15,6 @@ import { APIRoutesPaths } from "./routes-paths";
 import { withRateLimiting, withUseCase } from "./utils";
 
 export const APIRoutesHandlers = {
-  [APIRoutesPaths.EspaceAgentRneDocuments]: withRateLimiting(
-    getDocumentsRNEProtected
-  ),
   [APIRoutesPaths.EspaceAgentAssociationProtected]: getAssociationProtected,
   [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]: withRateLimiting(
     getEffectifsAnnuelsProtected

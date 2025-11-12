@@ -1,13 +1,14 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { getAgentRNEDocumentsAction } from "server-actions/agent/data-fetching";
 import routes from "#clients/routes";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
 import { Warning } from "#components-ui/alerts";
 import ButtonLink from "#components-ui/button";
 import FAQLink from "#components-ui/faq-link";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import {
@@ -50,10 +51,14 @@ export default function BilansDocumentsSocieteProtected({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
-  const documents = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentRneDocuments,
-    uniteLegale.siren,
-    session
+  const input = useMemo(
+    () => ({ siren: uniteLegale.siren }),
+    [uniteLegale.siren]
+  );
+  const documents = useServerActionData(
+    getAgentRNEDocumentsAction,
+    session,
+    input
   );
   return (
     <AsyncDataSectionClient

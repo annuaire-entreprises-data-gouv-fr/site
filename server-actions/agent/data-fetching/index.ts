@@ -8,6 +8,7 @@ import { getQualibat } from "#models/espace-agent/certificats/qualibat";
 import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
 import { getConformiteEntreprise } from "#models/espace-agent/conformite";
 import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
+import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
 import {
   withApplicationRight,
   withRateLimiting,
@@ -20,6 +21,7 @@ import {
   getAgentOpqibiSchema,
   getAgentQualibatSchema,
   getAgentQualifelecSchema,
+  getAgentRNEDocumentsSchema,
 } from "./schemas";
 
 export const getAgentOpqibiAction = agentActionClient
@@ -77,4 +79,13 @@ export const getAgentConformiteEntrepriseAction = agentActionClient
     const { siret, useCase } = parsedInput;
 
     return await getConformiteEntreprise(siret, { useCase });
+  });
+
+export const getAgentRNEDocumentsAction = agentActionClient
+  .use(withRateLimiting)
+  .use(withApplicationRight(ApplicationRights.documentsRne))
+  .inputSchema(getAgentRNEDocumentsSchema)
+  .action(async ({ parsedInput }) => {
+    const { siren } = parsedInput;
+    return await getDocumentsRNEProtected(siren);
   });
