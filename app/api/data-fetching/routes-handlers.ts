@@ -3,7 +3,6 @@ import { getEORIValidation } from "#models/eori-validation";
 import { getBilansProtected } from "#models/espace-agent/bilans";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
-import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
 import { getLiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
 import { getTravauxPublic } from "#models/espace-agent/travaux-publics";
 import { getDirigeantsRNE } from "#models/rne/dirigeants";
@@ -14,9 +13,6 @@ import { APIRoutesPaths } from "./routes-paths";
 import { withRateLimiting, withUseCase } from "./utils";
 
 export const APIRoutesHandlers = {
-  [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]: withRateLimiting(
-    getEffectifsAnnuelsProtected
-  ),
   [APIRoutesPaths.EspaceAgentBilansProtected]: withRateLimiting(
     withUseCase(getBilansProtected)
   ),

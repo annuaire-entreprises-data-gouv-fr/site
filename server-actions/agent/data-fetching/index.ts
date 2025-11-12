@@ -9,6 +9,7 @@ import { getQualibat } from "#models/espace-agent/certificats/qualibat";
 import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
 import { getConformiteEntreprise } from "#models/espace-agent/conformite";
 import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
+import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
 import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
 import {
   withApplicationRight,
@@ -20,6 +21,7 @@ import {
   getAgentBeneficiairesSchema,
   getAgentConformiteEntrepriseSchema,
   getAgentDirigeantsProtectedSchema,
+  getAgentEffectifsAnnuelsProtectedSchema,
   getAgentOpqibiSchema,
   getAgentQualibatSchema,
   getAgentQualifelecSchema,
@@ -98,4 +100,13 @@ export const getAgentAssociationProtectedAction = agentActionClient
   .action(async ({ parsedInput }) => {
     const { siren } = parsedInput;
     return await getAssociationProtected(siren);
+  });
+
+export const getAgentEffectifsAnnuelsProtectedAction = agentActionClient
+  .use(withRateLimiting)
+  .use(withApplicationRight(ApplicationRights.effectifsAnnuels))
+  .inputSchema(getAgentEffectifsAnnuelsProtectedSchema)
+  .action(async ({ parsedInput }) => {
+    const { siren } = parsedInput;
+    return await getEffectifsAnnuelsProtected(siren);
   });

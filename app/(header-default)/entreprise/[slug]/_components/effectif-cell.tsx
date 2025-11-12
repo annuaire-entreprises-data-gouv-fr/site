@@ -1,7 +1,7 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { getAgentEffectifsAnnuelsProtectedAction } from "server-actions/agent/data-fetching";
 import { GIPMDS, INSEE } from "#components/administrations";
 import NonRenseigne from "#components/non-renseigne";
 import { ProtectedInlineData } from "#components/protected-inline-data";
@@ -9,6 +9,7 @@ import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { Loader } from "#components-ui/loader";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { isAPI404 } from "#models/api-not-responding";
 import {
   ApplicationRights,
@@ -38,10 +39,14 @@ export const ProtectedEffectifCell = ({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) => {
-  const effectifsAnnuelsProtected = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected,
-    uniteLegale.siren,
-    session
+  const input = useMemo(
+    () => ({ siren: uniteLegale.siren }),
+    [uniteLegale.siren]
+  );
+  const effectifsAnnuelsProtected = useServerActionData(
+    getAgentEffectifsAnnuelsProtectedAction,
+    session,
+    input
   );
 
   if (isDataLoading(effectifsAnnuelsProtected)) {

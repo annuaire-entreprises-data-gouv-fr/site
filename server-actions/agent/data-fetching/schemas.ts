@@ -35,3 +35,7 @@ export const getAgentRNEDocumentsSchema = z.object({
 export const getAgentAssociationProtectedSchema = z.object({
   siren: z.string().min(1, "Siren is required"),
 });
+
+export const getAgentEffectifsAnnuelsProtectedSchema = z.object({
+  siren: z.string().min(1, "Siren is required"),
+});
