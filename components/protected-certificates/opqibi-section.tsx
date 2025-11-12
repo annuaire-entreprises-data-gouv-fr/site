@@ -1,10 +1,11 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { useMemo } from "react";
+import { getAgentOpqibiAction } from "server-actions/agent/data-fetching";
 import { DataSectionClient } from "#components/section/data-section";
 import { TwoColumnTable } from "#components/table/simple";
 import FAQLink from "#components-ui/faq-link";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
@@ -15,11 +16,11 @@ export const OpqibiSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const opqibi = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentOpqibi,
-    uniteLegale.siren,
-    session
+  const input = useMemo(
+    () => ({ siren: uniteLegale.siren }),
+    [uniteLegale.siren]
   );
+  const opqibi = useServerActionData(getAgentOpqibiAction, session, input);
   return (
     <DataSectionClient
       data={opqibi}

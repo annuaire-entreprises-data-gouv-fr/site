@@ -2,10 +2,12 @@
 
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import React from "react";
+import React, { useMemo } from "react";
+import { getAgentOpqibiAction } from "server-actions/agent/data-fetching";
 import NonRenseigne from "#components/non-renseigne";
 import { ProtectedInlineData } from "#components/protected-inline-data";
 import { Loader } from "#components-ui/loader";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import type { ISession } from "#models/authentication/user/session";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
 import type { IUniteLegale } from "../../../models/core/types";
@@ -21,13 +23,13 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
 }> = ({ uniteLegale, session }) => {
   const hasOtherCertificates = checkHasLabelsAndCertificates(uniteLegale);
 
+  const opqibiInput = useMemo(
+    () => ({ siren: uniteLegale.siren }),
+    [uniteLegale.siren]
+  );
   const protectedCertificates = [
     {
-      data: useAPIRouteData(
-        APIRoutesPaths.EspaceAgentOpqibi,
-        uniteLegale.siren,
-        session
-      ),
+      data: useServerActionData(getAgentOpqibiAction, session, opqibiInput),
       render: (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure possède une certification délivrée par l'association OPQIBI, attestant de ses différentes qualifications d'ingénierie"
