@@ -34,6 +34,9 @@ export const GET = withSession(async function callbackRoute(req) {
         })
       );
       if (userInfo.idp_id === "9e139e69-de07-4cbe-987f-d12cb38c0368") {
+        console.info(
+          `[DEBUG] ${userInfo.idp_id} - siret received: ${userInfo.siret}`
+        );
         // Ministère de la Justice – temporary workaround until Proconnect fix
         userInfo.siret = "11001001400014";
       }
