@@ -298,7 +298,7 @@ export default function Filters({
       </div>
 
       <div>
-        <section>
+        <section className={styles.formSection}>
           <h2>
             <Icon color={constants.colors.frBlue} slug="mapPinFill">
               Filtrer par{" "}
@@ -322,7 +322,7 @@ export default function Filters({
               "fr-grid-row fr-grid-row--gutters"
             )}
           >
-            <div className="fr-col-12 fr-col-md-5">
+            <div className="fr-col-12 fr-col-md-6">
               <div>
                 <LocationFilter
                   onSelect={(
@@ -360,7 +360,7 @@ export default function Filters({
                 />
               </div>
             </div>
-            <div className="fr-col-12 fr-col-md-6">
+            <div className="fr-col-12 fr-col-md-5">
               <LocationsFileInput
                 onChangeLocations={(params) => {
                   setFilters((prev) => ({
@@ -398,7 +398,7 @@ export default function Filters({
               "fr-grid-row fr-grid-row--gutters"
             )}
           >
-            <div className="fr-col-12 fr-col-md-5">
+            <div className="fr-col-12 fr-col-md-6">
               <div>
                 <label htmlFor="sap-multi-select">
                   Domaine d‘activité (Section) :
@@ -450,7 +450,7 @@ export default function Filters({
               </div>
             </div>
 
-            <div className="fr-col-12 fr-col-md-6">
+            <div className="fr-col-12 fr-col-md-5">
               <NAFFileInput
                 onChangeNAF={(params) => {
                   setFilters((prev) => ({
@@ -489,7 +489,7 @@ export default function Filters({
               "fr-grid-row fr-grid-row--gutters"
             )}
           >
-            <div className="fr-col-12 fr-col-md-5">
+            <div className="fr-col-12 fr-col-md-6">
               <div>
                 <label htmlFor="nature-juridique-niveau-1-multi-select">
                   Catégorie juridique (Niveau 1) :
@@ -555,7 +555,7 @@ export default function Filters({
               </div>
             </div>
 
-            <div className="fr-col-12 fr-col-md-6">
+            <div className="fr-col-12 fr-col-md-5">
               <CategoriesJuridiquesFileInput
                 onChangeCategoriesJuridiques={(params) => {
                   setFilters((prev) => ({

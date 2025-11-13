@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
 import { Error } from "#components-ui/alerts";
+import FaqLink from "#components-ui/faq-link";
 import { FileInput } from "./file-input";
+import styles from "./styles.module.css";
 
 type Location = {
   type: "dep" | "cp";
@@ -64,7 +66,25 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
 
   return (
     <div>
-      <label className="fr-mb-2v">Filtrer en chargeant une liste</label>
+      <label>
+        Filtrer en chargeant{" "}
+        <FaqLink tooltipLabel="une liste">
+          Votre fichier doit avoir les caractéristiques suivantes :
+          <ul>
+            <li>format .txt (UTF-8)</li>
+            <li>
+              code département (2 ou 3 chiffres) ou code commune (5 chiffres)
+            </li>
+            <li>un code par ligne, sans séparateur et sans ligne à vide</li>
+          </ul>
+          Exemple :
+          <ul className={styles.fileExampleList}>
+            <li>01</li>
+            <li>80131</li>
+            <li>59069</li>
+          </ul>
+        </FaqLink>
+      </label>
       <FileInput
         description="Un code département ou commune par ligne"
         onChange={processFileContent}
