@@ -10,7 +10,6 @@ import { getConformiteEntreprise } from "#models/espace-agent/conformite";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
 import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
 import { getLiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
-import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
 import { getTravauxPublic } from "#models/espace-agent/travaux-publics";
 import { getSubventionsAssociationFromSlug } from "#models/subventions/association";
 import {
@@ -27,7 +26,6 @@ import {
   getAgentEffectifsAnnuelsProtectedSchema,
   getAgentLiassesFiscalesProtectedSchema,
   getAgentLiensCapitalistiquesProtectedSchema,
-  getAgentRNEDocumentsSchema,
   getAgentSubventionsAssociationSchema,
   getAgentTravauxPublicsSchema,
 } from "./schemas";
@@ -51,15 +49,6 @@ export const getAgentConformiteEntrepriseAction = agentActionClient
     const { siret, useCase } = parsedInput;
 
     return await getConformiteEntreprise(siret, { useCase });
-  });
-
-export const getAgentRNEDocumentsAction = agentActionClient
-  .use(withRateLimiting)
-  .use(withApplicationRight(ApplicationRights.documentsRne))
-  .inputSchema(getAgentRNEDocumentsSchema)
-  .action(async ({ parsedInput }) => {
-    const { siren } = parsedInput;
-    return await getDocumentsRNEProtected(siren);
   });
 
 export const getAgentAssociationProtectedAction = agentActionClient

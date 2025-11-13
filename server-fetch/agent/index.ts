@@ -14,7 +14,11 @@ import {
   type IQualifelec,
 } from "#models/espace-agent/certificats/qualifelec";
 import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
-import type { IDirigeantsWithMetadataMergedIGInpi } from "#models/rne/types";
+import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
+import type {
+  IDirigeantsWithMetadataMergedIGInpi,
+  IDocumentsRNE,
+} from "#models/rne/types";
 import { withAgentRateLimiter } from "#utils/server-side-helper/with-agent-rate-limiter";
 import { withApplicationRight } from "#utils/server-side-helper/with-application-right";
 import { withErrorHandler } from "#utils/server-side-helper/with-error-handler";
@@ -68,6 +72,20 @@ export const getDirigeantsProtectedFetcher = withErrorHandler<
       session?.user?.email ?? null
     ),
     ApplicationRights.mandatairesRCS,
+    session
+  )(siren, session)
+);
+
+export const getAgentRNEDocumentsFetcher = withErrorHandler<
+  IDocumentsRNE | IAPINotRespondingError,
+  [string, ISession | null]
+>((siren, session) =>
+  withApplicationRight(
+    withAgentRateLimiter(
+      () => getDocumentsRNEProtected(siren),
+      session?.user?.email ?? null
+    ),
+    ApplicationRights.documentsRne,
     session
   )(siren, session)
 );
