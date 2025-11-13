@@ -27,6 +27,10 @@ import type {
   IDirigeantsWithMetadataMergedIGInpi,
   IDocumentsRNE,
 } from "#models/rne/types";
+import {
+  getSubventionsAssociationFromSlug,
+  type ISubventions,
+} from "#models/subventions/association";
 import { withAgentRateLimiter } from "#utils/server-side-helper/with-agent-rate-limiter";
 import { withApplicationRight } from "#utils/server-side-helper/with-application-right";
 import { withErrorHandler } from "#utils/server-side-helper/with-error-handler";
@@ -119,6 +123,20 @@ export const getAgentEffectifsAnnuelsProtectedFetcher = withErrorHandler<
       session?.user?.email ?? null
     ),
     ApplicationRights.effectifsAnnuels,
+    session
+  )(siren, session)
+);
+
+export const getAgentSubventionsAssociationFetcher = withErrorHandler<
+  ISubventions | IAPINotRespondingError,
+  [string, ISession | null]
+>((siren, session) =>
+  withApplicationRight(
+    withAgentRateLimiter(
+      () => getSubventionsAssociationFromSlug(siren),
+      session?.user?.email ?? null
+    ),
+    ApplicationRights.subventionsAssociation,
     session
   )(siren, session)
 );

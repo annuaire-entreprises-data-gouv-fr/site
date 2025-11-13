@@ -9,7 +9,6 @@ import { getConformiteEntreprise } from "#models/espace-agent/conformite";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
 import { getLiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
 import { getTravauxPublic } from "#models/espace-agent/travaux-publics";
-import { getSubventionsAssociationFromSlug } from "#models/subventions/association";
 import {
   withApplicationRight,
   withRateLimiting,
@@ -22,7 +21,6 @@ import {
   getAgentConformiteEntrepriseSchema,
   getAgentLiassesFiscalesProtectedSchema,
   getAgentLiensCapitalistiquesProtectedSchema,
-  getAgentSubventionsAssociationSchema,
   getAgentTravauxPublicsSchema,
 } from "./schemas";
 
@@ -95,13 +93,4 @@ export const getAgentLiensCapitalistiquesProtectedAction = agentActionClient
   .action(async ({ parsedInput }) => {
     const { siren, year, useCase } = parsedInput;
     return await getLiensCapitalistiquesProtected(siren, { year, useCase });
-  });
-
-export const getAgentSubventionsAssociationAction = agentActionClient
-  .use(withRateLimiting)
-  .use(withApplicationRight(ApplicationRights.subventionsAssociation))
-  .inputSchema(getAgentSubventionsAssociationSchema)
-  .action(async ({ parsedInput }) => {
-    const { slug } = parsedInput;
-    return await getSubventionsAssociationFromSlug(slug);
   });
