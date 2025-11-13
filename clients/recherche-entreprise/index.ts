@@ -178,6 +178,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     statut_entrepreneur_spectacle = "",
     est_association = false,
     liste_idcc = [],
+    liste_finess_juridique = [],
     est_siae = false,
     type_siae = "",
     est_achats_responsables = false,
@@ -280,6 +281,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       estPatrimoineVivant: est_patrimoine_vivant,
       estAlimConfiance: est_alim_confiance,
       bilanGesRenseigne: bilan_ges_renseigne,
+      idFinessJuridiques: liste_finess_juridique,
     },
     immatriculation: mapToImmatriculation(immatriculation),
     association: {
