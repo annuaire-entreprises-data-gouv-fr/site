@@ -16,6 +16,7 @@ import { getEffectifLabel } from "./constants";
 import type { ExtendedExportCsvInput } from "./export-csv";
 import { LocationFilter } from "./location-filter";
 import LocationTags from "./location-tags";
+import { LocationsFileInput } from "./locations-file-input";
 import { NAFFileInput } from "./naf-file-input";
 import SiretFilter from "./siret-filter";
 import styles from "./styles.module.css";
@@ -297,7 +298,7 @@ export default function Filters({
       </div>
 
       <div>
-        <section>
+        <section className={styles.formSection}>
           <h2>
             <Icon color={constants.colors.frBlue} slug="mapPinFill">
               Filtrer par{" "}
@@ -315,39 +316,56 @@ export default function Filters({
               </FAQLink>
             </Icon>
           </h2>
-          <div className={styles.inputContainer}>
-            <div className={styles.filterColumn}>
-              <LocationFilter
-                onSelect={(
-                  type: "cp" | "dep" | "reg" | "insee",
-                  value: string,
-                  label: string
-                ) => {
-                  setFilters((prev) => ({
-                    ...prev,
-                    locations: [
-                      ...prev.locations.filter(
-                        (loc) => !(loc.type === type && loc.value === value)
+          <div
+            className={clsx(
+              styles.gridInputContainer,
+              "fr-grid-row fr-grid-row--gutters"
+            )}
+          >
+            <div className="fr-col-12 fr-col-md-6">
+              <div>
+                <LocationFilter
+                  onSelect={(
+                    type: "cp" | "dep" | "reg" | "insee",
+                    value: string,
+                    label: string
+                  ) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      locations: [
+                        ...prev.locations.filter(
+                          (loc) => !(loc.type === type && loc.value === value)
+                        ),
+                        { type, value, label },
+                      ],
+                    }));
+                  }}
+                />
+              </div>
+              <div>
+                <LocationTags
+                  filters={filters}
+                  handleClick={(location) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      locations: prev.locations.filter(
+                        (loc) =>
+                          !(
+                            loc.type === location.type &&
+                            loc.value === location.value
+                          )
                       ),
-                      { type, value, label },
-                    ],
-                  }));
-                }}
-              />
+                    }));
+                  }}
+                />
+              </div>
             </div>
-            <div className={styles.filterColumn}>
-              <LocationTags
-                filters={filters}
-                handleClick={(location) => {
+            <div className="fr-col-12 fr-col-md-5">
+              <LocationsFileInput
+                onChangeLocations={(params) => {
                   setFilters((prev) => ({
                     ...prev,
-                    locations: prev.locations.filter(
-                      (loc) =>
-                        !(
-                          loc.type === location.type &&
-                          loc.value === location.value
-                        )
-                    ),
+                    ...params,
                   }));
                 }}
               />
@@ -380,7 +398,7 @@ export default function Filters({
               "fr-grid-row fr-grid-row--gutters"
             )}
           >
-            <div className="fr-col-12 fr-col-md-5">
+            <div className="fr-col-12 fr-col-md-6">
               <div>
                 <label htmlFor="sap-multi-select">
                   Domaine d‘activité (Section) :
@@ -432,7 +450,7 @@ export default function Filters({
               </div>
             </div>
 
-            <div className="fr-col-12 fr-col-md-6">
+            <div className="fr-col-12 fr-col-md-5">
               <NAFFileInput
                 onChangeNAF={(params) => {
                   setFilters((prev) => ({
@@ -471,7 +489,7 @@ export default function Filters({
               "fr-grid-row fr-grid-row--gutters"
             )}
           >
-            <div className="fr-col-12 fr-col-md-5">
+            <div className="fr-col-12 fr-col-md-6">
               <div>
                 <label htmlFor="nature-juridique-niveau-1-multi-select">
                   Catégorie juridique (Niveau 1) :
@@ -537,7 +555,7 @@ export default function Filters({
               </div>
             </div>
 
-            <div className="fr-col-12 fr-col-md-6">
+            <div className="fr-col-12 fr-col-md-5">
               <CategoriesJuridiquesFileInput
                 onChangeCategoriesJuridiques={(params) => {
                   setFilters((prev) => ({

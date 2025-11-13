@@ -1,9 +1,11 @@
 import { useCallback, useState } from "react";
 import { Error } from "#components-ui/alerts";
+import FaqLink from "#components-ui/faq-link";
 import { categoriesJuridiquesNiveau3 } from "#utils/helpers/formatting/metadata/categories-juridiques";
 import { categoriesJuridiquesNiveau1 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-1";
 import { categoriesJuridiquesNiveau2 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
 import { FileInput } from "./file-input";
+import styles from "./styles.module.css";
 
 type CategoriesJuridiquesFileInputProps = {
   onChangeCategoriesJuridiques: (params: {
@@ -70,7 +72,28 @@ export function CategoriesJuridiquesFileInput(
 
   return (
     <div>
-      <label className="fr-mb-2v">Filtrer en chargeant une liste</label>
+      <label>
+        Filtrer en chargeant{" "}
+        <FaqLink tooltipLabel="une liste">
+          Votre fichier doit avoir les caractéristiques suivantes :
+          <ul>
+            <li>format .txt (UTF-8)</li>
+            <li>
+              catégorie juridique sur 1, 2 ou 4 positions en fonction du niveau
+              choisi
+            </li>
+            <li>un code par ligne, sans séparateur et sans ligne à vide</li>
+          </ul>
+          Exemple :
+          <ul className={styles.fileExampleList}>
+            <li>1</li>
+            <li>3290</li>
+            <li>4</li>
+            <li>5202</li>
+            <li>31</li>
+          </ul>
+        </FaqLink>
+      </label>
       <FileInput
         description="Un code catégorie légale par ligne"
         onChange={processFileContent}
