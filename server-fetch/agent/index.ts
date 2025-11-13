@@ -13,6 +13,8 @@ import {
   getQualifelec,
   type IQualifelec,
 } from "#models/espace-agent/certificats/qualifelec";
+import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
+import type { IDirigeantsWithMetadataMergedIGInpi } from "#models/rne/types";
 import { withAgentRateLimiter } from "#utils/server-side-helper/with-agent-rate-limiter";
 import { withApplicationRight } from "#utils/server-side-helper/with-application-right";
 import { withErrorHandler } from "#utils/server-side-helper/with-error-handler";
@@ -54,4 +56,18 @@ export const getQualifelecFetcher = withErrorHandler<
     ApplicationRights.protectedCertificats,
     session
   )(siret, session)
+);
+
+export const getDirigeantsProtectedFetcher = withErrorHandler<
+  IDirigeantsWithMetadataMergedIGInpi | IAPINotRespondingError,
+  [string, boolean, ISession | null]
+>((siren, isEI, session) =>
+  withApplicationRight(
+    withAgentRateLimiter(
+      () => getDirigeantsProtected(siren, isEI),
+      session?.user?.email ?? null
+    ),
+    ApplicationRights.mandatairesRCS,
+    session
+  )(siren, session)
 );

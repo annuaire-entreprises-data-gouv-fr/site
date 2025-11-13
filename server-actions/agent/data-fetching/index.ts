@@ -8,7 +8,6 @@ import { getBilansProtected } from "#models/espace-agent/bilans";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
 import { getConformiteEntreprise } from "#models/espace-agent/conformite";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
-import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
 import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
 import { getLiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
 import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
@@ -25,7 +24,6 @@ import {
   getAgentBilansProtectedSchema,
   getAgentChiffreAffairesProtectedSchema,
   getAgentConformiteEntrepriseSchema,
-  getAgentDirigeantsProtectedSchema,
   getAgentEffectifsAnnuelsProtectedSchema,
   getAgentLiassesFiscalesProtectedSchema,
   getAgentLiensCapitalistiquesProtectedSchema,
@@ -33,15 +31,6 @@ import {
   getAgentSubventionsAssociationSchema,
   getAgentTravauxPublicsSchema,
 } from "./schemas";
-
-export const getAgentDirigeantsProtectedAction = agentActionClient
-  .use(withRateLimiting)
-  .use(withApplicationRight(ApplicationRights.mandatairesRCS))
-  .inputSchema(getAgentDirigeantsProtectedSchema)
-  .action(async ({ parsedInput }) => {
-    const { siren, isEI } = parsedInput;
-    return await getDirigeantsProtected(siren, isEI);
-  });
 
 export const getAgentBeneficiairesAction = agentActionClient
   .use(withRateLimiting)
