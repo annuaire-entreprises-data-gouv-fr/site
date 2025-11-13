@@ -1,16 +1,8 @@
-"use client";
-import { useMemo } from "react";
-import { getRneDirigeantsAction } from "server-actions/public/data-fetching";
-import routes from "#clients/routes";
-import { INPI } from "#components/administrations";
-import { AsyncDataSectionClient } from "#components/section/data-section/client";
-import { UniteLegalePageLink } from "#components/unite-legale-page-link";
-import InpiPartiallyDownWarning from "#components-ui/alerts-with-explanations/inpi-partially-down";
-import { useServerActionData } from "#hooks/fetch/use-server-action-data";
+import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
-import { pluralize } from "#utils/helpers";
+import { getDirigeantsRNE } from "#models/rne/dirigeants";
 import DirigeantsContent from "./content";
 
 type IProps = {
@@ -21,19 +13,12 @@ type IProps = {
 /**
  * Dirigeants section
  */
-export default function DirigeantsSection({ uniteLegale, session }: IProps) {
-  const input = useMemo(
-    () => ({ siren: uniteLegale.siren }),
-    [uniteLegale.siren]
-  );
-  const dirigeants = useServerActionData(
-    getRneDirigeantsAction,
-    session,
-    input
-  );
+export default function DirigeantsSection({ uniteLegale }: IProps) {
+  const dirigeants = getDirigeantsRNE(uniteLegale.siren);
 
   return (
-    <AsyncDataSectionClient
+    <AsyncDataSectionServer
+      ContentComponent={DirigeantsContent}
       data={dirigeants}
       id="dirigeants-section"
       isProtected={false}
@@ -43,51 +28,11 @@ export default function DirigeantsSection({ uniteLegale, session }: IProps) {
           <strong>Registre National des Entreprises (RNE)</strong>
         </>
       }
+      otherContentProps={{
+        uniteLegale,
+      }}
       sources={[EAdministration.INPI]}
       title="Dirigeant(s)"
-    >
-      {(dirigeants) => {
-        const plural = pluralize(dirigeants.data);
-        return (
-          <>
-            {dirigeants.metadata?.isFallback && <InpiPartiallyDownWarning />}
-            {dirigeants.data.length === 0 ? (
-              <p>
-                Cette entreprise est enregistrée au{" "}
-                <strong>Registre National des Entreprises (RNE)</strong>, mais
-                n’y possède aucun dirigeant.
-              </p>
-            ) : (
-              <>
-                <p>
-                  Cette entreprise possède {dirigeants.data.length} dirigeant
-                  {plural} enregistré{plural} au{" "}
-                  <strong>Registre National des Entreprises (RNE)</strong> tenu
-                  par l’
-                  <INPI />. Pour en savoir plus, vous pouvez consulter{" "}
-                  <UniteLegalePageLink
-                    href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
-                    siteName="le site de l’INPI"
-                    uniteLegale={uniteLegale}
-                  />
-                  .
-                </p>
-                <p>
-                  <strong>NB :</strong> si vous êtes agent public, vous pouvez
-                  accéder à l’état civil complet (lieu et date de naissance
-                  complète) en vous connectant à{" "}
-                  <a href="/lp/agent-public">l’espace agent public</a>.
-                </p>
-
-                <DirigeantsContent
-                  dirigeants={dirigeants}
-                  uniteLegale={uniteLegale}
-                />
-              </>
-            )}
-          </>
-        );
-      }}
-    </AsyncDataSectionClient>
+    />
   );
 }
