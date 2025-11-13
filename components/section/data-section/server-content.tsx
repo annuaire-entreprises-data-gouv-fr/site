@@ -76,13 +76,14 @@ export function AsyncDataSectionServerContent<
             data={awaitedData}
             notFoundInfo={props.notFoundInfo}
           >
-            {(contentData) => {
-              const contentProps = {
-                ...props.otherContentProps,
-                data: contentData,
-              } as ContentComponentProps;
-              return <ContentComponent {...contentProps} />;
-            }}
+            {(contentData) => (
+              <ContentComponent
+                {...({
+                  data: contentData,
+                  ...props.otherContentProps,
+                } as ContentComponentProps)}
+              />
+            )}
           </DataSectionContent>
         </FadeIn>
       </HeightTransition>
