@@ -1,11 +1,10 @@
 import { Suspense } from "react";
+import { buildAndVerifyTVAFetcher } from "server-fetch/public";
 import FAQLink from "#components-ui/faq-link";
 import { Loader } from "#components-ui/loader";
 import type { IUniteLegale } from "#models/core/types";
 import type { ITVAIntracommunautaire } from "#models/tva";
-import { buildAndVerifyTVA } from "#models/tva/verify";
 import type { Siren } from "#utils/helpers";
-import { withErrorHandler } from "#utils/server-side-helper/with-error-handler";
 import { TVACellContent } from "./content";
 
 const NoTVA = () => (
@@ -38,7 +37,7 @@ const VerifyTVA: React.FC<{
   siren: Siren;
 }> = ({ tva: tvaProp, siren }) => {
   const { tvaNumber, mayHaveMultipleTVANumber } = tvaProp;
-  const verification = withErrorHandler(() => buildAndVerifyTVA(siren));
+  const verification = buildAndVerifyTVAFetcher(siren);
 
   return (
     <Suspense

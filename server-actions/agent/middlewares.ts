@@ -1,16 +1,11 @@
 import type { MiddlewareFn } from "next-safe-action";
 import type { ServerActionError } from "server-actions/safe-action";
-import { agentRateLimiter } from "#clients/authentication/rate-limiter";
-import {
-  HttpBadRequestError,
-  HttpUnauthorizedError,
-} from "#clients/exceptions";
-import {
-  type ApplicationRights,
-  hasRights,
-} from "#models/authentication/user/rights";
+import { HttpBadRequestError } from "#clients/exceptions";
+import type { ApplicationRights } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import { UseCase } from "#models/use-cases";
+import { withAgentRateLimiter } from "#utils/server-side-helper/with-agent-rate-limiter";
+import { withApplicationRight as withApplicationRightHelper } from "#utils/server-side-helper/with-application-right";
 
 export const withRateLimiting: MiddlewareFn<
   ServerActionError,
@@ -20,15 +15,7 @@ export const withRateLimiting: MiddlewareFn<
 > = async ({ next, ctx }) => {
   const session = ctx.session;
 
-  const email = session?.user?.email;
-
-  if (!email) {
-    throw new HttpBadRequestError("User email not found");
-  }
-
-  await agentRateLimiter.verify(email);
-
-  return next();
+  return withAgentRateLimiter(next, session?.user?.email ?? null)();
 };
 
 type UseCaseInput = {
@@ -54,8 +41,6 @@ export const withApplicationRight =
   ): MiddlewareFn<ServerActionError, unknown, { session: ISession }, {}> =>
   async ({ next, ctx }) => {
     const session = ctx.session;
-    if (!hasRights(session, right)) {
-      throw new HttpUnauthorizedError(`Unauthorized: ${right} access required`);
-    }
-    return next();
+
+    return withApplicationRightHelper(next, right, session)();
   };

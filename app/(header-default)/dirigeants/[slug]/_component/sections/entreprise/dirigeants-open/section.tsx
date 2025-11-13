@@ -1,9 +1,8 @@
+import { getDirigeantsRNEFetcher } from "server-fetch/public";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
-import { getDirigeantsRNE } from "#models/rne/dirigeants";
-import { withErrorHandler } from "#utils/server-side-helper/with-error-handler";
 import DirigeantsContent from "./content";
 
 type IProps = {
@@ -15,9 +14,7 @@ type IProps = {
  * Dirigeants section
  */
 export default function DirigeantsSection({ uniteLegale }: IProps) {
-  const dirigeants = withErrorHandler(() =>
-    getDirigeantsRNE(uniteLegale.siren)
-  );
+  const dirigeants = getDirigeantsRNEFetcher(uniteLegale.siren);
 
   return (
     <AsyncDataSectionServer
