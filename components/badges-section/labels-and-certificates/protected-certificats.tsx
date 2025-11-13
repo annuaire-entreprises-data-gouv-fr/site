@@ -1,17 +1,13 @@
-"use client";
-
-import React, { useMemo } from "react";
+import React from "react";
 import {
-  getAgentOpqibiAction,
-  getAgentQualibatAction,
-  getAgentQualifelecAction,
-} from "server-actions/agent/data-fetching";
+  getOpqibiFetcher,
+  getQualibatFetcher,
+  getQualifelecFetcher,
+} from "server-fetch/agent";
 import NonRenseigne from "#components/non-renseigne";
 import { ProtectedInlineData } from "#components/protected-inline-data";
-import { Loader } from "#components-ui/loader";
-import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import type { ISession } from "#models/authentication/user/session";
-import { hasAnyError, isDataLoading } from "#models/data-fetching";
+import { hasAnyError } from "#models/data-fetching";
 import type { IUniteLegale } from "../../../models/core/types";
 import {
   checkHasLabelsAndCertificates,
@@ -22,21 +18,18 @@ import { LabelWithLinkToSection } from "./label-with-link-to-section";
 export const ProtectedCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+}> = async ({ uniteLegale, session }) => {
   const hasOtherCertificates = checkHasLabelsAndCertificates(uniteLegale);
 
-  const opqibiInput = useMemo(
-    () => ({ siren: uniteLegale.siren }),
-    [uniteLegale.siren]
-  );
-  const qualibatInput = useMemo(
-    () => ({ siret: uniteLegale.siege.siret }),
-    [uniteLegale.siege.siret]
-  );
-  const qualifelecInput = qualibatInput;
+  const [opqibi, qualibat, qualifelec] = await Promise.all([
+    getOpqibiFetcher(uniteLegale.siren, session),
+    getQualibatFetcher(uniteLegale.siege.siret, session),
+    getQualifelecFetcher(uniteLegale.siege.siret, session),
+  ]);
+
   const protectedCertificates = [
     {
-      data: useServerActionData(getAgentOpqibiAction, session, opqibiInput),
+      data: opqibi,
       render: (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure possède une certification délivrée par l'association OPQIBI, attestant de ses différentes qualifications d'ingénierie"
@@ -47,7 +40,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
       ),
     },
     {
-      data: useServerActionData(getAgentQualibatAction, session, qualibatInput),
+      data: qualibat,
       render: (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure a obtenue un label de fiabilité QUALIBAT, garantissant sa qualification dans le bâtiment"
@@ -58,11 +51,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
       ),
     },
     {
-      data: useServerActionData(
-        getAgentQualifelecAction,
-        session,
-        qualifelecInput
-      ),
+      data: qualifelec,
       render: (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure est certifiée par QUALIFELEC, attestant de ses qualifications dans le domaine du génie électrique et énergétique"
@@ -85,15 +74,6 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
     ) : (
       <NonRenseigne />
     );
-  }
-
-  // loading state
-  const anythingIsStillLoading = !!protectedCertificates.find(
-    (maybeLoadingState) => isDataLoading(maybeLoadingState.data)
-  );
-
-  if (anythingIsStillLoading) {
-    return <Loader />;
   }
 
   return (

@@ -5,9 +5,6 @@ import { ApplicationRights } from "#models/authentication/user/rights";
 import { getAssociationProtected } from "#models/espace-agent/association-protected";
 import { getBeneficiaires } from "#models/espace-agent/beneficiaires";
 import { getBilansProtected } from "#models/espace-agent/bilans";
-import { getOpqibi } from "#models/espace-agent/certificats/opqibi";
-import { getQualibat } from "#models/espace-agent/certificats/qualibat";
-import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
 import { getConformiteEntreprise } from "#models/espace-agent/conformite";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
@@ -32,40 +29,10 @@ import {
   getAgentEffectifsAnnuelsProtectedSchema,
   getAgentLiassesFiscalesProtectedSchema,
   getAgentLiensCapitalistiquesProtectedSchema,
-  getAgentOpqibiSchema,
-  getAgentQualibatSchema,
-  getAgentQualifelecSchema,
   getAgentRNEDocumentsSchema,
   getAgentSubventionsAssociationSchema,
   getAgentTravauxPublicsSchema,
 } from "./schemas";
-
-export const getAgentOpqibiAction = agentActionClient
-  .use(withRateLimiting)
-  .use(withApplicationRight(ApplicationRights.protectedCertificats))
-  .inputSchema(getAgentOpqibiSchema)
-  .action(async ({ parsedInput }) => {
-    const { siren } = parsedInput;
-    return await getOpqibi(siren);
-  });
-
-export const getAgentQualibatAction = agentActionClient
-  .use(withRateLimiting)
-  .use(withApplicationRight(ApplicationRights.protectedCertificats))
-  .inputSchema(getAgentQualibatSchema)
-  .action(async ({ parsedInput }) => {
-    const { siret } = parsedInput;
-    return await getQualibat(siret);
-  });
-
-export const getAgentQualifelecAction = agentActionClient
-  .use(withRateLimiting)
-  .use(withApplicationRight(ApplicationRights.protectedCertificats))
-  .inputSchema(getAgentQualifelecSchema)
-  .action(async ({ parsedInput }) => {
-    const { siret } = parsedInput;
-    return await getQualifelec(siret);
-  });
 
 export const getAgentDirigeantsProtectedAction = agentActionClient
   .use(withRateLimiting)
