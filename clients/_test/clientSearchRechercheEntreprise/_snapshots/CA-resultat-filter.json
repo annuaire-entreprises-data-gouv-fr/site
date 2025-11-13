@@ -47,12 +47,7 @@
             "idRge": [],
             "idUai": []
           },
-          "listeIdcc": [
-            {
-              "idcc": "1486",
-              "title": ""
-            }
-          ]
+          "listeIdcc": []
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -99,12 +94,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "listeIdcc": [
-                {
-                  "idcc": "1486",
-                  "title": ""
-                }
-              ]
+              "listeIdcc": []
             }
           ],
           "open": [
@@ -143,12 +133,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "listeIdcc": [
-                {
-                  "idcc": "1486",
-                  "title": ""
-                }
-              ]
+              "listeIdcc": []
             }
           ],
           "unknown": [],
@@ -202,12 +187,7 @@
         "colter": {
           "codeColter": null
         },
-        "listeIdcc": [
-          {
-            "idcc": "1486",
-            "title": ""
-          }
-        ],
+        "listeIdcc": [],
         "immatriculation": null,
         "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [
@@ -246,12 +226,7 @@
               "idRge": [],
               "idUai": []
             },
-            "listeIdcc": [
-              {
-                "idcc": "1486",
-                "title": ""
-              }
-            ]
+            "listeIdcc": []
           }
         ],
         "nombreEtablissements": 1,
@@ -264,7 +239,9 @@
             "prenoms": "Philippe",
             "role": "PRESIDENT DE SAS",
             "nationalite": "Française",
-            "dateNaissancePartial": "1966-01"
+            "dateNaissancePartial": "1966-01",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       },
@@ -597,7 +574,9 @@
             "prenoms": "Charles",
             "role": "DIRECTEUR GENERAL",
             "nationalite": null,
-            "dateNaissancePartial": "1944-05"
+            "dateNaissancePartial": "1944-05",
+            "estDemissionnaire": false,
+            "dateDemission": null
           },
           {
             "sexe": null,
@@ -606,7 +585,9 @@
             "prenoms": "Olivier",
             "role": "COMMISSAIRE AUX COMPTES SUPPLEANT",
             "nationalite": null,
-            "dateNaissancePartial": "1971-11"
+            "dateNaissancePartial": "1971-11",
+            "estDemissionnaire": false,
+            "dateDemission": null
           },
           {
             "siren": "432345783",
@@ -617,6 +598,242 @@
             "siren": "702621590",
             "denomination": "TALENZ ARES AUDIT",
             "role": "COMMISSAIRE AUX COMPTES TITULAIRE"
+          }
+        ]
+      },
+      {
+        "siren": "491470597",
+        "oldSiren": "491470597",
+        "siege": {
+          "siren": "491470597",
+          "siret": "49147059700031",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "ancienSiege": false,
+          "enseigne": "",
+          "denomination": null,
+          "nic": "00031",
+          "dateCreation": "2020-05-01",
+          "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
+          "dateDebutActivite": "2020-05-01",
+          "dateFermeture": "",
+          "adresse": "16 CHEMIN DE GANYMEDE 33460 MACAU",
+          "adressePostale": "16 CHEMIN DE GANYMEDE 33460 MACAU",
+          "codePostal": "33460",
+          "commune": "MACAU",
+          "activitePrincipale": "46.19B",
+          "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
+          "trancheEffectif": "N",
+          "anneeTrancheEffectif": null,
+          "latitude": "45.00782",
+          "longitude": "-0.619455",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "estPersonneMorale": true,
+            "idFiness": [],
+            "idBio": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
+          "listeIdcc": []
+        },
+        "tva": null,
+        "anciensSiegesSirets": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "MCDC 31264",
+        "chemin": "mcdc-31264-491470597",
+        "natureJuridique": "5499",
+        "libelleNatureJuridique": "Société à responsabilité limitée (sans autre indication)",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "491470597",
+              "siret": "49147059700031",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00031",
+              "dateCreation": "2020-05-01",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2020-05-01",
+              "dateFermeture": "",
+              "adresse": "16 CHEMIN DE GANYMEDE 33460 MACAU",
+              "adressePostale": "16 CHEMIN DE GANYMEDE 33460 MACAU",
+              "codePostal": "33460",
+              "commune": "MACAU",
+              "activitePrincipale": "46.19B",
+              "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
+              "trancheEffectif": "N",
+              "anneeTrancheEffectif": null,
+              "latitude": "45.00782",
+              "longitude": "-0.619455",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
+                "idFiness": [],
+                "idBio": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
+              "listeIdcc": []
+            }
+          ],
+          "open": [
+            {
+              "siren": "491470597",
+              "siret": "49147059700031",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00031",
+              "dateCreation": "2020-05-01",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2020-05-01",
+              "dateFermeture": "",
+              "adresse": "16 CHEMIN DE GANYMEDE 33460 MACAU",
+              "adressePostale": "16 CHEMIN DE GANYMEDE 33460 MACAU",
+              "codePostal": "33460",
+              "commune": "MACAU",
+              "activitePrincipale": "46.19B",
+              "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
+              "trancheEffectif": "N",
+              "anneeTrancheEffectif": null,
+              "latitude": "45.00782",
+              "longitude": "-0.619455",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
+                "idFiness": [],
+                "idBio": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
+              "listeIdcc": []
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 3,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "46.19B",
+        "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers",
+        "dateCreation": "2006-09-01",
+        "dateFermeture": "",
+        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
+        "dateMiseAJourInsee": "2024-03-22T14:26:06",
+        "dateMiseAJourInpi": "2024-09-21T03:34:50",
+        "dateMiseAJourIG": "",
+        "dateDebutActivite": "",
+        "trancheEffectif": "NN",
+        "anneeCategorieEntreprise": "2023",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estL100_3": false,
+          "estEntrepreneurIndividuel": false,
+          "estPersonneMorale": true,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": false,
+          "estAchatsResponsables": false,
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null,
+          "estPatrimoineVivant": false,
+          "estAlimConfiance": false,
+          "bilanGesRenseigne": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "listeIdcc": [],
+        "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
+        "matchingEtablissements": [
+          {
+            "siren": "491470597",
+            "siret": "49147059700031",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "ancienSiege": false,
+            "enseigne": "",
+            "denomination": null,
+            "nic": "00031",
+            "dateCreation": "2020-05-01",
+            "dateDerniereMiseAJour": "",
+            "dateMiseAJourInsee": "",
+            "dateDebutActivite": "2020-05-01",
+            "dateFermeture": "",
+            "adresse": "16 CHEMIN DE GANYMEDE 33460 MACAU",
+            "adressePostale": "16 CHEMIN DE GANYMEDE 33460 MACAU",
+            "codePostal": "33460",
+            "commune": "MACAU",
+            "activitePrincipale": "46.19B",
+            "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
+            "trancheEffectif": "N",
+            "anneeTrancheEffectif": null,
+            "latitude": "45.00782",
+            "longitude": "-0.619455",
+            "complements": {
+              "estEntrepreneurIndividuel": false,
+              "estPersonneMorale": true,
+              "idFiness": [],
+              "idBio": [],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
+            "listeIdcc": []
+          }
+        ],
+        "nombreEtablissements": 3,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "CORBINEAU",
+            "prenom": "Dominique",
+            "prenoms": "Dominique",
+            "role": "GERANT",
+            "nationalite": "Française",
+            "dateNaissancePartial": "1964-10",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       },
@@ -850,241 +1067,9 @@
             "prenoms": "Franck",
             "role": "GERANT",
             "nationalite": "FRANÇAISE",
-            "dateNaissancePartial": "1952-06"
-          }
-        ]
-      },
-      {
-        "siren": "491470597",
-        "oldSiren": "491470597",
-        "siege": {
-          "siren": "491470597",
-          "siret": "49147059700031",
-          "oldSiret": "",
-          "etatAdministratif": "en activité",
-          "statutDiffusion": "diffusible",
-          "estSiege": true,
-          "ancienSiege": false,
-          "enseigne": "",
-          "denomination": null,
-          "nic": "00031",
-          "dateCreation": "2020-05-01",
-          "dateDerniereMiseAJour": "",
-          "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2020-05-01",
-          "dateFermeture": "",
-          "adresse": "16 CHEMIN DE GANYMEDE 33460 MACAU",
-          "adressePostale": "16 CHEMIN DE GANYMEDE 33460 MACAU",
-          "codePostal": "33460",
-          "commune": "MACAU",
-          "activitePrincipale": "46.19B",
-          "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-          "trancheEffectif": "N",
-          "anneeTrancheEffectif": null,
-          "latitude": "45.00782",
-          "longitude": "-0.619455",
-          "complements": {
-            "estEntrepreneurIndividuel": false,
-            "estPersonneMorale": true,
-            "idFiness": [],
-            "idBio": [],
-            "idOrganismeFormation": [],
-            "idRge": [],
-            "idUai": []
-          },
-          "listeIdcc": []
-        },
-        "tva": null,
-        "anciensSiegesSirets": [],
-        "statutDiffusion": "diffusible",
-        "etatAdministratif": "en activité",
-        "nomComplet": "MCDC 31264 (MCDC 31264)",
-        "chemin": "mcdc-31264-mcdc-31264-491470597",
-        "natureJuridique": "5499",
-        "libelleNatureJuridique": "Société à responsabilité limitée (sans autre indication)",
-        "etablissements": {
-          "all": [
-            {
-              "siren": "491470597",
-              "siret": "49147059700031",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "ancienSiege": false,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00031",
-              "dateCreation": "2020-05-01",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2020-05-01",
-              "dateFermeture": "",
-              "adresse": "16 CHEMIN DE GANYMEDE 33460 MACAU",
-              "adressePostale": "16 CHEMIN DE GANYMEDE 33460 MACAU",
-              "codePostal": "33460",
-              "commune": "MACAU",
-              "activitePrincipale": "46.19B",
-              "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-              "trancheEffectif": "N",
-              "anneeTrancheEffectif": null,
-              "latitude": "45.00782",
-              "longitude": "-0.619455",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "estPersonneMorale": true,
-                "idFiness": [],
-                "idBio": [],
-                "idOrganismeFormation": [],
-                "idRge": [],
-                "idUai": []
-              },
-              "listeIdcc": []
-            }
-          ],
-          "open": [
-            {
-              "siren": "491470597",
-              "siret": "49147059700031",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "ancienSiege": false,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00031",
-              "dateCreation": "2020-05-01",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2020-05-01",
-              "dateFermeture": "",
-              "adresse": "16 CHEMIN DE GANYMEDE 33460 MACAU",
-              "adressePostale": "16 CHEMIN DE GANYMEDE 33460 MACAU",
-              "codePostal": "33460",
-              "commune": "MACAU",
-              "activitePrincipale": "46.19B",
-              "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-              "trancheEffectif": "N",
-              "anneeTrancheEffectif": null,
-              "latitude": "45.00782",
-              "longitude": "-0.619455",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "estPersonneMorale": true,
-                "idFiness": [],
-                "idBio": [],
-                "idOrganismeFormation": [],
-                "idRge": [],
-                "idUai": []
-              },
-              "listeIdcc": []
-            }
-          ],
-          "unknown": [],
-          "closed": [],
-          "nombreEtablissementsOuverts": 1,
-          "nombreEtablissements": 3,
-          "usePagination": false,
-          "currentEtablissementPage": 1
-        },
-        "activitePrincipale": "46.19B",
-        "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers",
-        "dateCreation": "2006-09-01",
-        "dateFermeture": "",
-        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-09-21T03:34:50",
-        "dateMiseAJourIG": "",
-        "dateDebutActivite": "",
-        "trancheEffectif": "NN",
-        "anneeCategorieEntreprise": "2023",
-        "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": null,
-        "complements": {
-          "estBio": false,
-          "estEss": false,
-          "estServicePublic": false,
-          "estL100_3": false,
-          "estEntrepreneurIndividuel": false,
-          "estPersonneMorale": true,
-          "estEntrepreneurSpectacle": false,
-          "statutEntrepreneurSpectacle": null,
-          "estFiness": false,
-          "egaproRenseignee": false,
-          "estRge": false,
-          "estOrganismeFormation": false,
-          "estSocieteMission": false,
-          "estQualiopi": false,
-          "estAssociation": false,
-          "estUai": false,
-          "estAchatsResponsables": false,
-          "estEntrepriseInclusive": false,
-          "typeEntrepriseInclusive": null,
-          "estPatrimoineVivant": false,
-          "estAlimConfiance": false,
-          "bilanGesRenseigne": false
-        },
-        "association": {
-          "idAssociation": null,
-          "data": null
-        },
-        "colter": {
-          "codeColter": null
-        },
-        "listeIdcc": [],
-        "immatriculation": null,
-        "isNbEtablissementOuvertReliable": true,
-        "matchingEtablissements": [
-          {
-            "siren": "491470597",
-            "siret": "49147059700031",
-            "oldSiret": "",
-            "etatAdministratif": "en activité",
-            "statutDiffusion": "diffusible",
-            "estSiege": true,
-            "ancienSiege": false,
-            "enseigne": "",
-            "denomination": null,
-            "nic": "00031",
-            "dateCreation": "2020-05-01",
-            "dateDerniereMiseAJour": "",
-            "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2020-05-01",
-            "dateFermeture": "",
-            "adresse": "16 CHEMIN DE GANYMEDE 33460 MACAU",
-            "adressePostale": "16 CHEMIN DE GANYMEDE 33460 MACAU",
-            "codePostal": "33460",
-            "commune": "MACAU",
-            "activitePrincipale": "46.19B",
-            "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-            "trancheEffectif": "N",
-            "anneeTrancheEffectif": null,
-            "latitude": "45.00782",
-            "longitude": "-0.619455",
-            "complements": {
-              "estEntrepreneurIndividuel": false,
-              "estPersonneMorale": true,
-              "idFiness": [],
-              "idBio": [],
-              "idOrganismeFormation": [],
-              "idRge": [],
-              "idUai": []
-            },
-            "listeIdcc": []
-          }
-        ],
-        "nombreEtablissements": 3,
-        "nombreEtablissementsOuverts": 1,
-        "dirigeants": [
-          {
-            "sexe": null,
-            "nom": "CORBINEAU",
-            "prenom": "Dominique",
-            "prenoms": "Dominique",
-            "role": "GERANT",
-            "nationalite": "Française",
-            "dateNaissancePartial": "1964-10"
+            "dateNaissancePartial": "1952-06",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       },
@@ -1318,7 +1303,9 @@
             "prenoms": "Suat",
             "role": "GERANT",
             "nationalite": "Turque",
-            "dateNaissancePartial": "1980-08"
+            "dateNaissancePartial": "1980-08",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       },
@@ -1577,7 +1564,9 @@
             "prenoms": "Caroline",
             "role": "DIRECTEUR GENERAL",
             "nationalite": null,
-            "dateNaissancePartial": "1977-03"
+            "dateNaissancePartial": "1977-03",
+            "estDemissionnaire": false,
+            "dateDemission": null
           },
           {
             "sexe": null,
@@ -1586,7 +1575,9 @@
             "prenoms": "Eric",
             "role": "PRESIDENT DE SAS",
             "nationalite": null,
-            "dateNaissancePartial": "1947-09"
+            "dateNaissancePartial": "1947-09",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }
