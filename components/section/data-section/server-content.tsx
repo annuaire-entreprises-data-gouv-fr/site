@@ -9,6 +9,7 @@ import {
 } from "#models/api-not-responding";
 import {
   hasFetchError,
+  type IDataFetchingState,
   isDataLoading,
   isUnauthorized,
 } from "#models/data-fetching";
@@ -21,7 +22,7 @@ export interface IDataSectionServerContentProps<
   T,
   ContentComponentProps extends { data: T },
 > extends ISectionProps {
-  data: Promise<IAPINotRespondingError | T>;
+  data: Promise<IAPINotRespondingError | IDataFetchingState | T>;
   notFoundInfo?: NonNullable<React.ReactNode> | null;
   additionalInfoOnError?: React.ReactNode;
   ContentComponent: React.FC<ContentComponentProps>;

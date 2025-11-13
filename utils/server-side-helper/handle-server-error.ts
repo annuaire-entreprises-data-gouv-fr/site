@@ -1,0 +1,37 @@
+import { redirect } from "next/navigation";
+import { ProConnectReconnexionNeeded } from "#clients/authentication/pro-connect/exceptions";
+import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
+import { InternalError } from "#models/exceptions";
+import { logFatalErrorInSentry } from "#utils/sentry";
+
+export function handleServerError(error: unknown) {
+  if (error instanceof ProConnectReconnexionNeeded) {
+    return redirect("/api/auth/agent-connect/login");
+  }
+
+  if (error instanceof HttpUnauthorizedError) {
+    return {
+      message: "Unauthorized",
+      status: 401,
+    };
+  }
+
+  if (error instanceof HttpNotFound) {
+    return {
+      message: "Not found",
+      status: 404,
+    };
+  }
+
+  logFatalErrorInSentry(
+    new InternalError({
+      message: "Internal error",
+      cause: error,
+    })
+  );
+
+  return {
+    message: "Internal server error",
+    status: 500,
+  };
+}

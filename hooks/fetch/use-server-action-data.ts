@@ -11,6 +11,7 @@ import {
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import { IDataFetchingState } from "#models/data-fetching";
+import { convertErrorToFetchingState } from "#utils/helpers/convert-error";
 
 /**
  * Hook to fetch data from internal API
@@ -41,22 +42,7 @@ export function useServerActionData<S extends StandardSchemaV1, CVE, Data>(
   }
 
   if (hasErrored) {
-    if (
-      result.serverError?.status &&
-      [408, 504, 401].includes(result.serverError.status)
-    ) {
-      return IDataFetchingState.CONNECTIVITY_ERROR;
-    }
-
-    if (result.serverError?.status === 432) {
-      return IDataFetchingState.AGENT_OVER_RATE_LIMITS;
-    }
-
-    if (result.serverError?.status === 429) {
-      return IDataFetchingState.TOO_MANY_REQUESTS;
-    }
-
-    return IDataFetchingState.MODEL_ERROR;
+    return convertErrorToFetchingState(result.serverError?.status ?? null);
   }
 
   return result.data as Data;
