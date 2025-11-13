@@ -1,12 +1,8 @@
 import type { MiddlewareFn } from "next-safe-action";
 import type { ServerActionError } from "server-actions/safe-action";
-import {
-  AgentOverRateLimitException,
-  agentRateLimiter,
-} from "#clients/authentication/rate-limiter";
+import { agentRateLimiter } from "#clients/authentication/rate-limiter";
 import {
   HttpBadRequestError,
-  HttpLocked,
   HttpUnauthorizedError,
 } from "#clients/exceptions";
 import {
@@ -30,16 +26,9 @@ export const withRateLimiting: MiddlewareFn<
     throw new HttpBadRequestError("User email not found");
   }
 
-  try {
-    await agentRateLimiter.verify(email);
+  await agentRateLimiter.verify(email);
 
-    return next();
-  } catch (e) {
-    if (e instanceof AgentOverRateLimitException) {
-      throw new HttpLocked("Agent over rate limit");
-    }
-    throw e;
-  }
+  return next();
 };
 
 type UseCaseInput = {

@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { ProConnectReconnexionNeeded } from "#clients/authentication/pro-connect/exceptions";
+import { AgentOverRateLimitException } from "#clients/authentication/rate-limiter";
 import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
 import { InternalError } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
@@ -7,6 +8,13 @@ import { logFatalErrorInSentry } from "#utils/sentry";
 export function handleServerError(error: unknown) {
   if (error instanceof ProConnectReconnexionNeeded) {
     return redirect("/api/auth/agent-connect/login");
+  }
+
+  if (error instanceof AgentOverRateLimitException) {
+    return {
+      message: "Agent over rate limit",
+      status: 432,
+    };
   }
 
   if (error instanceof HttpUnauthorizedError) {
