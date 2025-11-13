@@ -18,6 +18,10 @@ import {
   type IQualifelec,
 } from "#models/espace-agent/certificats/qualifelec";
 import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
+import {
+  getEffectifsAnnuelsProtected,
+  type IEffectifsAnnuelsProtected,
+} from "#models/espace-agent/effectifs/annuels";
 import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
 import type {
   IDirigeantsWithMetadataMergedIGInpi,
@@ -101,6 +105,20 @@ export const getAgentAssociationProtectedFetcher = withErrorHandler<
   withApplicationRight(
     () => getAssociationProtected(siren),
     ApplicationRights.associationProtected,
+    session
+  )(siren, session)
+);
+
+export const getAgentEffectifsAnnuelsProtectedFetcher = withErrorHandler<
+  IEffectifsAnnuelsProtected | IAPINotRespondingError,
+  [string, ISession | null]
+>((siren, session) =>
+  withApplicationRight(
+    withAgentRateLimiter(
+      () => getEffectifsAnnuelsProtected(siren),
+      session?.user?.email ?? null
+    ),
+    ApplicationRights.effectifsAnnuels,
     session
   )(siren, session)
 );

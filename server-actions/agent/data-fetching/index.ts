@@ -7,7 +7,6 @@ import { getBilansProtected } from "#models/espace-agent/bilans";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
 import { getConformiteEntreprise } from "#models/espace-agent/conformite";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
-import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
 import { getLiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
 import { getTravauxPublic } from "#models/espace-agent/travaux-publics";
 import { getSubventionsAssociationFromSlug } from "#models/subventions/association";
@@ -21,7 +20,6 @@ import {
   getAgentBilansProtectedSchema,
   getAgentChiffreAffairesProtectedSchema,
   getAgentConformiteEntrepriseSchema,
-  getAgentEffectifsAnnuelsProtectedSchema,
   getAgentLiassesFiscalesProtectedSchema,
   getAgentLiensCapitalistiquesProtectedSchema,
   getAgentSubventionsAssociationSchema,
@@ -47,15 +45,6 @@ export const getAgentConformiteEntrepriseAction = agentActionClient
     const { siret, useCase } = parsedInput;
 
     return await getConformiteEntreprise(siret, { useCase });
-  });
-
-export const getAgentEffectifsAnnuelsProtectedAction = agentActionClient
-  .use(withRateLimiting)
-  .use(withApplicationRight(ApplicationRights.effectifsAnnuels))
-  .inputSchema(getAgentEffectifsAnnuelsProtectedSchema)
-  .action(async ({ parsedInput }) => {
-    const { siren } = parsedInput;
-    return await getEffectifsAnnuelsProtected(siren);
   });
 
 export const getAgentBilansProtectedAction = agentActionClient
