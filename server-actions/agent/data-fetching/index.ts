@@ -2,7 +2,6 @@
 
 import { agentActionClient } from "server-actions/safe-action";
 import { ApplicationRights } from "#models/authentication/user/rights";
-import { getAssociationProtected } from "#models/espace-agent/association-protected";
 import { getBeneficiaires } from "#models/espace-agent/beneficiaires";
 import { getBilansProtected } from "#models/espace-agent/bilans";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
@@ -18,7 +17,6 @@ import {
   withUseCase,
 } from "../middlewares";
 import {
-  getAgentAssociationProtectedSchema,
   getAgentBeneficiairesSchema,
   getAgentBilansProtectedSchema,
   getAgentChiffreAffairesProtectedSchema,
@@ -49,14 +47,6 @@ export const getAgentConformiteEntrepriseAction = agentActionClient
     const { siret, useCase } = parsedInput;
 
     return await getConformiteEntreprise(siret, { useCase });
-  });
-
-export const getAgentAssociationProtectedAction = agentActionClient
-  .use(withApplicationRight(ApplicationRights.associationProtected))
-  .inputSchema(getAgentAssociationProtectedSchema)
-  .action(async ({ parsedInput }) => {
-    const { siren } = parsedInput;
-    return await getAssociationProtected(siren);
   });
 
 export const getAgentEffectifsAnnuelsProtectedAction = agentActionClient

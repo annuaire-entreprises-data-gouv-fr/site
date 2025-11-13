@@ -1,4 +1,4 @@
-import { HttpUnauthorizedError } from "#clients/exceptions";
+import { HttpMissingRightError } from "#clients/exceptions";
 import {
   type ApplicationRights,
   hasRights,
@@ -16,7 +16,7 @@ export function withApplicationRight<T>(
       session !== undefined ? session : await getSession();
 
     if (!hasRights(resolvedSession, applicationRight)) {
-      throw new HttpUnauthorizedError(
+      throw new HttpMissingRightError(
         `Unauthorized: ${applicationRight} access required`
       );
     }

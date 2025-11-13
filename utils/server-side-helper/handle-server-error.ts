@@ -1,7 +1,11 @@
 import { redirect } from "next/navigation";
 import { ProConnectReconnexionNeeded } from "#clients/authentication/pro-connect/exceptions";
 import { AgentOverRateLimitException } from "#clients/authentication/rate-limiter";
-import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
+import {
+  HttpMissingRightError,
+  HttpNotFound,
+  HttpUnauthorizedError,
+} from "#clients/exceptions";
 import { InternalError } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
 
@@ -21,6 +25,13 @@ export function handleServerError(error: unknown) {
     return {
       message: "Unauthorized",
       status: 401,
+    };
+  }
+
+  if (error instanceof HttpMissingRightError) {
+    return {
+      message: "Missing right",
+      status: 433,
     };
   }
 

@@ -24,6 +24,7 @@ export interface IDataSectionServerContentProps<
 > extends ISectionProps {
   data: Promise<IAPINotRespondingError | IDataFetchingState | T>;
   notFoundInfo?: NonNullable<React.ReactNode> | null;
+  unauthorizedContent?: NonNullable<React.ReactNode> | null;
   additionalInfoOnError?: React.ReactNode;
   ContentComponent: React.FC<ContentComponentProps>;
   otherContentProps: Omit<ContentComponentProps, "data">;
@@ -35,12 +36,13 @@ export function AsyncDataSectionServerContent<
 >({
   data,
   ContentComponent,
+  unauthorizedContent,
   ...props
 }: IDataSectionServerContentProps<T, ContentComponentProps>) {
   const awaitedData = use(data);
 
   if (isUnauthorized(awaitedData)) {
-    return null;
+    return unauthorizedContent;
   }
 
   if (isDataLoading(awaitedData)) {

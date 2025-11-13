@@ -2,6 +2,10 @@ import type { IAPINotRespondingError } from "#models/api-not-responding";
 import { ApplicationRights } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import {
+  getAssociationProtected,
+  type IAssociationProtected,
+} from "#models/espace-agent/association-protected";
+import {
   getOpqibi,
   type IOpqibi,
 } from "#models/espace-agent/certificats/opqibi";
@@ -86,6 +90,17 @@ export const getAgentRNEDocumentsFetcher = withErrorHandler<
       session?.user?.email ?? null
     ),
     ApplicationRights.documentsRne,
+    session
+  )(siren, session)
+);
+
+export const getAgentAssociationProtectedFetcher = withErrorHandler<
+  IAssociationProtected | IAPINotRespondingError,
+  [string, ISession | null]
+>((siren, session) =>
+  withApplicationRight(
+    () => getAssociationProtected(siren),
+    ApplicationRights.associationProtected,
     session
   )(siren, session)
 );
