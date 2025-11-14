@@ -91,10 +91,3 @@ export class HttpForbiddenError extends HttpError {
     this.name = "HttpForbiddenError";
   }
 }
-
-export class HttpMissingRightError extends HttpError {
-  constructor(public message: string) {
-    super(message, 433);
-    this.name = "HttpMissingRightError";
-  }
-}

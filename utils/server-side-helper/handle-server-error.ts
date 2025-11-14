@@ -1,11 +1,8 @@
 import { redirect } from "next/navigation";
+import { MissingApplicationRightException } from "server-fetch/agent/middlewares";
 import { ProConnectReconnexionNeeded } from "#clients/authentication/pro-connect/exceptions";
 import { AgentOverRateLimitException } from "#clients/authentication/rate-limiter";
-import {
-  HttpMissingRightError,
-  HttpNotFound,
-  HttpUnauthorizedError,
-} from "#clients/exceptions";
+import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";
 import { InternalError } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
 
@@ -28,7 +25,7 @@ export function handleServerError(error: unknown) {
     };
   }
 
-  if (error instanceof HttpMissingRightError) {
+  if (error instanceof MissingApplicationRightException) {
     return {
       message: "Missing right",
       status: 433,

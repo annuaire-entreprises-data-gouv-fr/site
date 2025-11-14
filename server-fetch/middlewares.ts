@@ -1,5 +1,5 @@
 import { convertErrorToFetchingState } from "#utils/helpers/convert-error";
-import { handleServerError } from "./handle-server-error";
+import { handleServerError } from "#utils/server-side-helper/handle-server-error";
 
 export function withErrorHandler<T, Args extends any[]>(
   fn: (...args: Args) => Promise<T>

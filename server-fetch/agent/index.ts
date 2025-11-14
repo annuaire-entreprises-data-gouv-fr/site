@@ -9,9 +9,8 @@ import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/ann
 import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
 import { getSubventionsAssociationFromSlug } from "#models/subventions/association";
 import type { Siren, Siret } from "#utils/helpers";
-import { withAgentRateLimiter } from "#utils/server-side-helper/with-agent-rate-limiter";
-import { withApplicationRight } from "#utils/server-side-helper/with-application-right";
-import { withErrorHandler } from "#utils/server-side-helper/with-error-handler";
+import { withErrorHandler } from "../middlewares";
+import { withAgentRateLimiter, withApplicationRight } from "./middlewares";
 
 export const getOpqibiFetcher = withErrorHandler(
   (siren: Siren, session: ISession | null) =>
@@ -83,7 +82,7 @@ export const getAgentAssociationProtectedFetcher = withErrorHandler(
 );
 
 export const getAgentEffectifsAnnuelsProtectedFetcher = withErrorHandler(
-  (siren, session) =>
+  (siren: Siren, session: ISession | null) =>
     withApplicationRight(
       withAgentRateLimiter(
         () => getEffectifsAnnuelsProtected(siren),

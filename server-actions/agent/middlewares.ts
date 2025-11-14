@@ -4,8 +4,10 @@ import { HttpBadRequestError } from "#clients/exceptions";
 import type { ApplicationRights } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import { UseCase } from "#models/use-cases";
-import { withAgentRateLimiter } from "#utils/server-side-helper/with-agent-rate-limiter";
-import { withApplicationRight as withApplicationRightHelper } from "#utils/server-side-helper/with-application-right";
+import {
+  withAgentRateLimiter,
+  withApplicationRight as withApplicationRightHelper,
+} from "../../server-fetch/agent/middlewares";
 
 export const withRateLimiting: MiddlewareFn<
   ServerActionError,
