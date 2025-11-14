@@ -1,13 +1,13 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useFetchFinancesSociete } from "hooks";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { useMemo } from "react";
+import { getAgentChiffreAffairesProtectedAction } from "server-actions/agent/data-fetching";
 import {
   AsyncDataSectionClient,
   mergeDataSources,
 } from "#components/section/data-section/client";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
@@ -30,17 +30,14 @@ export function ProtectedFinancesSocieteSection({
 }) {
   const financesSociete = useFetchFinancesSociete(uniteLegale);
 
-  const params = useMemo(
-    () => ({
-      params: { useCase },
-    }),
-    [useCase]
+  const input = useMemo(
+    () => ({ siret: uniteLegale.siege.siret, useCase }),
+    [uniteLegale.siege.siret, useCase]
   );
-  const chiffreAffairesProtected = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentChiffreAffairesProtected,
-    uniteLegale.siege.siret,
+  const chiffreAffairesProtected = useServerActionData(
+    getAgentChiffreAffairesProtectedAction,
     session,
-    params
+    input
   );
 
   const mergedFinancesSociete = useMemo(

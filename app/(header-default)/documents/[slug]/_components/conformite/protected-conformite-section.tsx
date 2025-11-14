@@ -1,12 +1,13 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { useMemo } from "react";
+import { getAgentConformiteEntrepriseAction } from "server-actions/agent/data-fetching";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
 import { PrintNever } from "#components-ui/print-visibility";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import type { EAdministration } from "#models/administrations/EAdministration";
+import { ApplicationRights } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { UseCase } from "#models/use-cases";
@@ -35,15 +36,16 @@ function ConformiteSection({
 }: IProps) {
   const params = useMemo(
     () => ({
-      params: { useCase },
+      siret: uniteLegale.siege.siret,
+      useCase,
     }),
-    [useCase]
+    [useCase, uniteLegale.siege.siret]
   );
-  const conformite = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentConformite,
-    uniteLegale.siege.siret,
+  const conformite = useServerActionData(
+    getAgentConformiteEntrepriseAction,
     session,
-    params
+    params,
+    ApplicationRights.conformite
   );
 
   return (

@@ -18,7 +18,7 @@ import { mergeDirigeants } from "./utils";
 
 export const getDirigeantsProtected = async (
   maybeSiren: string,
-  params: { isEI?: boolean }
+  isEI?: boolean
 ): Promise<IDirigeantsWithMetadataMergedIGInpi | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
 
@@ -41,7 +41,7 @@ export const getDirigeantsProtected = async (
 
     // EI data is not standardised. It lacks birthdate in RNE and is randomly populated in IG
     let dirigeantMerged: IDirigeantsMergedIGInpi = [];
-    if (params.isEI) {
+    if (isEI) {
       if (rcsData.length === 0) {
         // Ignore IG
         dirigeantMerged = mergeDirigeants({ rne: rneData, rcs: rneData });
