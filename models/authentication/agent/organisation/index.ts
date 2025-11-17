@@ -7,12 +7,13 @@ import {
 import type { IUniteLegale } from "#models/core/types";
 import { fetchUniteLegaleFromRechercheEntreprise } from "#models/core/unite-legale";
 import { extractSirenFromSiret, type Siren, type Siret } from "#utils/helpers";
-import { defaultAgentScopes } from "../scopes/constants";
+import { defaultAgentScopes, type IAgentScope } from "../scopes/constants";
 import { mightBeAnAuthorizedAdministration } from "./might-be-an-administration";
 import { isOrganisationWhitelisted } from "./whitelisted-administrations";
 
 const organisationHabilitation = {
   scopes: [...defaultAgentScopes],
+  groupsScopes: {} as Record<Siret, IAgentScope[]>,
   userType: "Agent connecté",
   isSuperAgent: false,
 };

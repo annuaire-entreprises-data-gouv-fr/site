@@ -1,3 +1,4 @@
+import type { Siret } from "#utils/helpers";
 import type { IAgentScope } from "./scopes/constants";
 
 export type IAgentInfo = {
@@ -10,6 +11,7 @@ export type IAgentInfo = {
   fullName: string;
   siret: string;
   scopes: IAgentScope[];
+  groupsScopes: Record<Siret, IAgentScope[]>;
   userType: string;
   isSuperAgent: boolean;
 };
