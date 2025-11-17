@@ -4,16 +4,21 @@ import {
   APINotRespondingFactory,
   type IAPINotRespondingError,
 } from "#models/api-not-responding";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IDirigeants } from "#models/rne/types";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
 
 export const getMandatairesRCS = async (
-  maybeSiren: string
+  maybeSiren: string,
+  scope: IAgentScope | null
 ): Promise<IDirigeants | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
   try {
-    const mandatairesRCS = await clientApiEntrepriseMandatairesRCS(siren);
+    const mandatairesRCS = await clientApiEntrepriseMandatairesRCS(
+      siren,
+      scope
+    );
     if (mandatairesRCS.length === 0) {
       return APINotRespondingFactory(EAdministration.INFOGREFFE, 404);
     }

@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
 import type { Siren } from "#utils/helpers";
 import clientAPIEntreprise from "../client";
@@ -9,12 +10,15 @@ import type { IAPIEntrepriseRcpEffectifsAnnuels } from "./types";
  */
 export async function clientApiEntrepriseEffectifsAnnuels(
   siren: Siren,
-  year: number
+  year: number,
+  scope: IAgentScope | null
 ) {
   return await clientAPIEntreprise<
     IAPIEntrepriseRcpEffectifsAnnuels,
     IEffectifsAnnuelsProtected
-  >(routes.apiEntreprise.effectifs.annuels(siren, year), mapToDomainObject);
+  >(routes.apiEntreprise.effectifs.annuels(siren, year), mapToDomainObject, {
+    scope,
+  });
 }
 
 const mapToDomainObject = ({

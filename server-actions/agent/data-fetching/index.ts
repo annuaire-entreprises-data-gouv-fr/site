@@ -1,7 +1,10 @@
 "use server";
 
 import { agentActionClient } from "server-actions/safe-action";
-import { ApplicationRights } from "#models/authentication/user/rights";
+import {
+  ApplicationRights,
+  ApplicationRightsToScopes,
+} from "#models/authentication/user/rights";
 import { getBeneficiaires } from "#models/espace-agent/beneficiaires";
 import { getBilansProtected } from "#models/espace-agent/bilans";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
@@ -31,7 +34,11 @@ export const getAgentBeneficiairesAction = agentActionClient
   .inputSchema(getAgentBeneficiairesSchema)
   .action(async ({ parsedInput }) => {
     const { siren, useCase } = parsedInput;
-    return await getBeneficiaires(siren, useCase);
+    return await getBeneficiaires(
+      siren,
+      ApplicationRightsToScopes[ApplicationRights.beneficiaires],
+      useCase
+    );
   });
 
 export const getAgentConformiteEntrepriseAction = agentActionClient
@@ -42,7 +49,10 @@ export const getAgentConformiteEntrepriseAction = agentActionClient
   .action(async ({ parsedInput }) => {
     const { siret, useCase } = parsedInput;
 
-    return await getConformiteEntreprise(siret, { useCase });
+    return await getConformiteEntreprise(siret, {
+      scope: ApplicationRightsToScopes[ApplicationRights.conformite],
+      useCase,
+    });
   });
 
 export const getAgentBilansProtectedAction = agentActionClient
@@ -52,7 +62,10 @@ export const getAgentBilansProtectedAction = agentActionClient
   .inputSchema(getAgentBilansProtectedSchema)
   .action(async ({ parsedInput }) => {
     const { siren, useCase } = parsedInput;
-    return await getBilansProtected(siren, { useCase });
+    return await getBilansProtected(siren, {
+      scope: ApplicationRightsToScopes[ApplicationRights.bilansBDF],
+      useCase,
+    });
   });
 
 export const getAgentChiffreAffairesProtectedAction = agentActionClient
@@ -62,7 +75,10 @@ export const getAgentChiffreAffairesProtectedAction = agentActionClient
   .inputSchema(getAgentChiffreAffairesProtectedSchema)
   .action(async ({ parsedInput }) => {
     const { siret, useCase } = parsedInput;
-    return await getChiffreAffairesProtected(siret, { useCase });
+    return await getChiffreAffairesProtected(siret, {
+      scope: ApplicationRightsToScopes[ApplicationRights.chiffreAffaires],
+      useCase,
+    });
   });
 
 export const getAgentTravauxPublicsAction = agentActionClient
@@ -72,7 +88,10 @@ export const getAgentTravauxPublicsAction = agentActionClient
   .inputSchema(getAgentTravauxPublicsSchema)
   .action(async ({ parsedInput }) => {
     const { siret, useCase } = parsedInput;
-    return await getTravauxPublic(siret, { useCase });
+    return await getTravauxPublic(siret, {
+      scope: ApplicationRightsToScopes[ApplicationRights.travauxPublics],
+      useCase,
+    });
   });
 
 export const getAgentLiassesFiscalesProtectedAction = agentActionClient
@@ -82,7 +101,11 @@ export const getAgentLiassesFiscalesProtectedAction = agentActionClient
   .inputSchema(getAgentLiassesFiscalesProtectedSchema)
   .action(async ({ parsedInput }) => {
     const { siren, year, useCase } = parsedInput;
-    return await getLiassesFiscalesProtected(siren, { year, useCase });
+    return await getLiassesFiscalesProtected(siren, {
+      scope: ApplicationRightsToScopes[ApplicationRights.liassesFiscales],
+      year,
+      useCase,
+    });
   });
 
 export const getAgentLiensCapitalistiquesProtectedAction = agentActionClient
@@ -92,5 +115,9 @@ export const getAgentLiensCapitalistiquesProtectedAction = agentActionClient
   .inputSchema(getAgentLiensCapitalistiquesProtectedSchema)
   .action(async ({ parsedInput }) => {
     const { siren, year, useCase } = parsedInput;
-    return await getLiensCapitalistiquesProtected(siren, { year, useCase });
+    return await getLiensCapitalistiquesProtected(siren, {
+      scope: ApplicationRightsToScopes[ApplicationRights.liensCapitalistiques],
+      year,
+      useCase,
+    });
   });

@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IBeneficiairesEffectif } from "#models/espace-agent/beneficiaires";
 import type { UseCase } from "#models/use-cases";
 import { formatNameFull, type Siren } from "#utils/helpers";
@@ -27,12 +28,16 @@ export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
  */
 export const clientApiEntrepriseBeneficiaires = async (
   siren: Siren,
+  scope: IAgentScope | null,
   useCase?: UseCase
 ) =>
   await clientAPIEntreprise<
     IAPIEntrepriseBeneficiaires,
     Array<IBeneficiairesEffectif>
-  >(routes.apiEntreprise.beneficiaires(siren), mapToDomainObject, { useCase });
+  >(routes.apiEntreprise.beneficiaires(siren), mapToDomainObject, {
+    scope,
+    useCase,
+  });
 
 const mapToDomainObject = (
   response: IAPIEntrepriseBeneficiaires

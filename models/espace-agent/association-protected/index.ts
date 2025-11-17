@@ -1,5 +1,9 @@
 import { clientApiEntrepriseAssociation } from "#clients/api-entreprise/association";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
+import {
+  ApplicationRights,
+  ApplicationRightsToScopes,
+} from "#models/authentication/user/rights";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 
@@ -56,7 +60,10 @@ export const getAssociationProtected = async (
   maybeSiren: string
 ): Promise<IAssociationProtected | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
-  return clientApiEntrepriseAssociation(siren).catch((error) =>
+  return clientApiEntrepriseAssociation(
+    siren,
+    ApplicationRightsToScopes[ApplicationRights.associationProtected]
+  ).catch((error) =>
     handleApiEntrepriseError(error, {
       siren,
       apiResource: "AssociationProtected",

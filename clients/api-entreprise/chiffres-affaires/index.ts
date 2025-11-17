@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
 import type { UseCase } from "#models/use-cases";
 import type { Siret } from "#utils/helpers";
@@ -11,12 +12,14 @@ import type { IAPIEntrepriseChiffreAffaires } from "./types";
  */
 export async function clientApiEntrepriseChiffreAffaires(
   siret: Siret,
+  scope: IAgentScope | null,
   useCase?: UseCase
 ) {
   return await clientAPIEntreprise<
     IAPIEntrepriseChiffreAffaires,
     IChiffreAffairesProtected
   >(routes.apiEntreprise.dgfip.chiffreAffaires(siret), mapToDomainObject, {
+    scope,
     useCase,
   });
 }
