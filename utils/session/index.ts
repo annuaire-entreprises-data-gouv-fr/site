@@ -5,7 +5,7 @@ import { isAbsoluteUrl } from "#utils/server-side-helper/is-absolute-url";
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
-  cookieName: "annuaire-entreprises-user-session-5",
+  cookieName: "annuaire-entreprises-user-session-6",
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
     httpOnly: true, // ✅ Critical for XSS protection
