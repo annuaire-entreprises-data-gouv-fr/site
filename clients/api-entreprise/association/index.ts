@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IAssociationProtected } from "#models/espace-agent/association-protected";
 import type { Siren } from "#utils/helpers";
 import clientAPIEntreprise from "../client";
@@ -7,11 +8,14 @@ import type { IAPIEntrepriseAssociation } from "./types";
 /**
  * GET association from API Entreprise
  */
-export async function clientApiEntrepriseAssociation(siren: Siren) {
+export async function clientApiEntrepriseAssociation(
+  siren: Siren,
+  scope: IAgentScope | null
+) {
   return await clientAPIEntreprise<
     IAPIEntrepriseAssociation,
     IAssociationProtected
-  >(routes.apiEntreprise.association(siren), mapToDomainObject);
+  >(routes.apiEntreprise.association(siren), mapToDomainObject, { scope });
 }
 
 const mapToDomainObject = (

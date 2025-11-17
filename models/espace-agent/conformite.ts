@@ -2,6 +2,7 @@ import { clientApiEntrepriseConformiteFiscale } from "#clients/api-entreprise/co
 import { clientApiEntrepriseConformiteMSA } from "#clients/api-entreprise/conformite/msa";
 import { clientApiEntrepriseConformiteVigilance } from "#clients/api-entreprise/conformite/vigilance";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { UseCase } from "#models/use-cases";
 import { extractSirenFromSiret, verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
@@ -33,33 +34,41 @@ export type IConformiteUniteLegale = {
 
 export const getConformiteEntreprise = async (
   maybeSiret: string,
-  params: { useCase?: UseCase }
+  params: { useCase?: UseCase; scope: IAgentScope | null }
 ): Promise<IConformiteUniteLegale> => {
   const siret = verifySiret(maybeSiret as string);
   const siren = extractSirenFromSiret(siret);
 
   const [fiscale, vigilance, msa] = await Promise.all([
-    clientApiEntrepriseConformiteFiscale(siren, params.useCase).catch((error) =>
+    clientApiEntrepriseConformiteFiscale(
+      siren,
+      params.scope,
+      params.useCase
+    ).catch((error) =>
       handleApiEntrepriseError(error, {
         siren,
         siret,
         apiResource: "ConformiteFiscale",
       })
     ),
-    clientApiEntrepriseConformiteVigilance(siren, params.useCase).catch(
+    clientApiEntrepriseConformiteVigilance(
+      siren,
+      params.scope,
+      params.useCase
+    ).catch((error) =>
+      handleApiEntrepriseError(error, {
+        siren,
+        siret,
+        apiResource: "ConformiteVigilance",
+      })
+    ),
+    clientApiEntrepriseConformiteMSA(siret, params.scope, params.useCase).catch(
       (error) =>
         handleApiEntrepriseError(error, {
           siren,
           siret,
-          apiResource: "ConformiteVigilance",
+          apiResource: "ConformiteMSA",
         })
-    ),
-    clientApiEntrepriseConformiteMSA(siret, params.useCase).catch((error) =>
-      handleApiEntrepriseError(error, {
-        siren,
-        siret,
-        apiResource: "ConformiteMSA",
-      })
     ),
   ]);
 

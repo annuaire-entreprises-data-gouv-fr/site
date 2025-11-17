@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IQualibat } from "#models/espace-agent/certificats/qualibat";
 import type { Siret } from "#utils/helpers";
 import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
@@ -29,10 +30,14 @@ export type IAPIEntrepriseQualibat = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseQualibat = async (siret: Siret) =>
+export const clientApiEntrepriseQualibat = async (
+  siret: Siret,
+  scope: IAgentScope | null
+) =>
   await clientAPIEntreprise(
     routes.apiEntreprise.certifications.qualibat(siret),
-    mapToDomainObject
+    mapToDomainObject,
+    { scope }
   );
 
 const mapToDomainObject = ({ data }: IAPIEntrepriseQualibat): IQualibat => ({

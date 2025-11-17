@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { ILiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
 import type { UseCase } from "#models/use-cases";
 import type { Siren } from "#utils/helpers";
@@ -10,6 +11,7 @@ import type { IAPIEntrepriseLiassesFiscales } from "./types";
  */
 export async function clientApiEntrepriseDgfipLiassesFiscales(
   siren: Siren,
+  scope: IAgentScope | null,
   year?: string,
   useCase?: UseCase
 ) {
@@ -19,7 +21,7 @@ export async function clientApiEntrepriseDgfipLiassesFiscales(
   >(
     routes.apiEntreprise.dgfip.liassesFiscales(siren, year),
     mapToDomainObject,
-    { useCase }
+    { scope, useCase }
   );
 }
 

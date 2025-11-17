@@ -1,4 +1,7 @@
-import { ApplicationRights } from "#models/authentication/user/rights";
+import {
+  ApplicationRights,
+  ApplicationRightsToScopes,
+} from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import { getAssociationProtected } from "#models/espace-agent/association-protected";
 import { getOpqibi } from "#models/espace-agent/certificats/opqibi";
@@ -16,7 +19,11 @@ export const getOpqibiFetcher = withErrorHandler(
   (siren: Siren, session: ISession | null) =>
     withApplicationRight(
       withAgentRateLimiter(
-        () => getOpqibi(siren),
+        () =>
+          getOpqibi(
+            siren,
+            ApplicationRightsToScopes[ApplicationRights.protectedCertificats]
+          ),
         session?.user?.email ?? null
       ),
       ApplicationRights.protectedCertificats,
@@ -28,7 +35,11 @@ export const getQualibatFetcher = withErrorHandler(
   (siret: Siret, session: ISession | null) =>
     withApplicationRight(
       withAgentRateLimiter(
-        () => getQualibat(siret),
+        () =>
+          getQualibat(
+            siret,
+            ApplicationRightsToScopes[ApplicationRights.protectedCertificats]
+          ),
         session?.user?.email ?? null
       ),
       ApplicationRights.protectedCertificats,
@@ -40,7 +51,11 @@ export const getQualifelecFetcher = withErrorHandler(
   (siret: Siret, session: ISession | null) =>
     withApplicationRight(
       withAgentRateLimiter(
-        () => getQualifelec(siret),
+        () =>
+          getQualifelec(
+            siret,
+            ApplicationRightsToScopes[ApplicationRights.protectedCertificats]
+          ),
         session?.user?.email ?? null
       ),
       ApplicationRights.protectedCertificats,
@@ -52,7 +67,12 @@ export const getDirigeantsProtectedFetcher = withErrorHandler(
   (siren: Siren, isEI: boolean, session: ISession | null) =>
     withApplicationRight(
       withAgentRateLimiter(
-        () => getDirigeantsProtected(siren, isEI),
+        () =>
+          getDirigeantsProtected(
+            siren,
+            isEI,
+            ApplicationRightsToScopes[ApplicationRights.mandatairesRCS]
+          ),
         session?.user?.email ?? null
       ),
       ApplicationRights.mandatairesRCS,
@@ -75,7 +95,11 @@ export const getAgentRNEDocumentsFetcher = withErrorHandler(
 export const getAgentAssociationProtectedFetcher = withErrorHandler(
   (siren: Siren, session: ISession | null) =>
     withApplicationRight(
-      () => getAssociationProtected(siren),
+      () =>
+        getAssociationProtected(
+          siren,
+          ApplicationRightsToScopes[ApplicationRights.associationProtected]
+        ),
       ApplicationRights.associationProtected,
       session
     )(siren, session)
@@ -85,7 +109,11 @@ export const getAgentEffectifsAnnuelsProtectedFetcher = withErrorHandler(
   (siren: Siren, session: ISession | null) =>
     withApplicationRight(
       withAgentRateLimiter(
-        () => getEffectifsAnnuelsProtected(siren),
+        () =>
+          getEffectifsAnnuelsProtected(
+            siren,
+            ApplicationRightsToScopes[ApplicationRights.effectifsAnnuels]
+          ),
         session?.user?.email ?? null
       ),
       ApplicationRights.effectifsAnnuels,

@@ -4,6 +4,7 @@ import {
   APINotRespondingFactory,
   type IAPINotRespondingError,
 } from "#models/api-not-responding";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import { verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 
@@ -46,10 +47,11 @@ export type IQualifelec = Array<{
   };
 }>;
 export const getQualifelec = async (
-  maybeSiret: string
+  maybeSiret: string,
+  scope: IAgentScope | null
 ): Promise<IQualifelec | IAPINotRespondingError> => {
   const siret = verifySiret(maybeSiret);
-  return clientApiEntrepriseQualifelec(siret)
+  return clientApiEntrepriseQualifelec(siret, scope)
     .then((response) =>
       response.length === 0
         ? APINotRespondingFactory(EAdministration.QUALIFELEC, 404)

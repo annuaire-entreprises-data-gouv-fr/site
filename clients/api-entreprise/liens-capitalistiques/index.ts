@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { ILiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
 import type {
   IEtatCivilLiensCapitalistiques,
@@ -14,6 +15,7 @@ import type { IAPIEntrepriseLiensCapitalistiques } from "./types";
  */
 export async function clientApiEntrepriseLiensCapitalistiques(
   siren: Siren,
+  scope: IAgentScope | null,
   year?: string,
   useCase?: UseCase
 ) {
@@ -23,7 +25,7 @@ export async function clientApiEntrepriseLiensCapitalistiques(
   >(
     routes.apiEntreprise.dgfip.liensCapitalistiques(siren, year),
     mapToDomainObject,
-    { useCase }
+    { scope, useCase }
   );
 }
 

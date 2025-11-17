@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IOpqibi } from "#models/espace-agent/certificats/opqibi";
 import type { Siren } from "#utils/helpers";
 import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
@@ -28,10 +29,14 @@ export type IAPIEntrepriseOpqibi = IAPIEntrepriseResponse<{
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseOpqibi = async (siren: Siren) =>
+export const clientApiEntrepriseOpqibi = async (
+  siren: Siren,
+  scope: IAgentScope | null
+) =>
   await clientAPIEntreprise(
     routes.apiEntreprise.certifications.opqibi(siren),
-    mapToDomainObject
+    mapToDomainObject,
+    { scope }
   );
 
 const mapQualification = (
