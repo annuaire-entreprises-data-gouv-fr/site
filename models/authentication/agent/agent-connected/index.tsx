@@ -7,7 +7,7 @@ import {
 import { getAgentGroups } from "#models/authentication/group";
 import { isSiret, verifySiret } from "#utils/helpers";
 import { AgentOrganisation } from "../organisation";
-import { defaultAgentScopes } from "../scopes/constants";
+import { defaultAgentScopes, type IAgentScope } from "../scopes/constants";
 
 export class AgentConnected {
   private domain;
@@ -94,16 +94,19 @@ export class AgentConnected {
 
   async getAgentHabilitation() {
     const superAgentScopes = new Scopes();
+    const groupsScopes: Record<string, IAgentScope[]> = {};
 
     const groups = await getAgentGroups({ allowProConnectRedirection: false });
 
     groups.forEach((agentGroup) => {
       superAgentScopes.add(agentGroup.scopes);
+      groupsScopes[agentGroup.organisation_siret] = agentGroup.scopes;
     });
 
     if (superAgentScopes.hasScopes()) {
       return {
         scopes: [...defaultAgentScopes, ...superAgentScopes.scopes],
+        groupsScopes,
         userType: "Super-agent connecté",
         isSuperAgent: true,
       };

@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IQualifelec } from "#models/espace-agent/certificats/qualifelec";
 import type { Siret } from "#utils/helpers";
 import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
@@ -51,10 +52,14 @@ export type IAPIEntrepriseQualifelec = IAPIEntrepriseResponse<
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseQualifelec = async (siret: Siret) =>
+export const clientApiEntrepriseQualifelec = async (
+  siret: Siret,
+  scope: IAgentScope | null
+) =>
   await clientAPIEntreprise<IAPIEntrepriseQualifelec, IQualifelec>(
     routes.apiEntreprise.certifications.qualifelec(siret),
-    mapToDomainObject
+    mapToDomainObject,
+    { scope }
   );
 
 const mapToDomainObject = (response: IAPIEntrepriseQualifelec): IQualifelec =>

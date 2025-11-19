@@ -1,4 +1,5 @@
 import { HttpUnauthorizedError } from "#clients/exceptions";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import constants from "#models/constants";
 import { InternalError } from "#models/exceptions";
 import type { UseCase } from "#models/use-cases";
@@ -25,12 +26,13 @@ export default async function clientAPIEntreprise<T, U>(
   mapToDomainObject: (e: T) => U,
   options?: {
     useCase?: UseCase;
+    scope?: IAgentScope | null;
   }
 ) {
   const url = `${process.env.API_ENTREPRISE_URL}${route}`;
   const useCase = options?.useCase ? options.useCase : "annuaire-entreprises";
 
-  const callerInfos = await sensitiveRequestCallerInfos();
+  const callerInfos = await sensitiveRequestCallerInfos(options?.scope);
   sensitiveRequestLogger(url, callerInfos, useCase);
 
   if (!callerInfos.siret) {

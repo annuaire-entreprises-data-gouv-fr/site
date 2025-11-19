@@ -1,5 +1,6 @@
 import { clientApiEntrepriseOpqibi } from "#clients/api-entreprise/opqibi";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 
@@ -22,10 +23,11 @@ export type IOpqibi = {
 };
 
 export const getOpqibi = async (
-  maybeSiren: string
+  maybeSiren: string,
+  scope: IAgentScope | null
 ): Promise<IOpqibi | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
-  return clientApiEntrepriseOpqibi(siren).catch((error) =>
+  return clientApiEntrepriseOpqibi(siren, scope).catch((error) =>
     handleApiEntrepriseError(error, { siren, apiResource: "Opqibi" })
   );
 };
