@@ -1,11 +1,9 @@
+import { clientEntrepreneursSpectacles } from "#clients/api-data-gouv/entrepreneurs-spectacles";
+import type { IEntrepreneursSpectacles } from "#clients/api-data-gouv/entrepreneurs-spectacles/interface";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
 import { getEgapro, type IEgapro } from "#models/certifications/egapro";
 import type { IUniteLegale } from "../core/types";
 import { getBio, type IEtablissementsBio } from "./bio";
-import {
-  getEntrepreneurSpectaclesCertification,
-  type IEntrepreneurSpectaclesCertification,
-} from "./entrepreneur-spectacles";
 import {
   getEntrepriseInclusive,
   type IEntrepriseInclusive,
@@ -21,9 +19,7 @@ export interface ICertifications {
   uniteLegale: IUniteLegale;
   bio: IEtablissementsBio | IAPINotRespondingError;
   rge: IRGECertification | IAPINotRespondingError;
-  entrepreneurSpectacles:
-    | IEntrepreneurSpectaclesCertification
-    | IAPINotRespondingError;
+  entrepreneurSpectacles: IEntrepreneursSpectacles | IAPINotRespondingError;
   egapro: IEgapro | IAPINotRespondingError;
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
   ess: IESS | IAPINotRespondingError;
@@ -43,7 +39,7 @@ export const getCertificationsFromSlug = async (
     entrepriseInclusive,
   ] = await Promise.all([
     getRGECertifications(uniteLegale),
-    getEntrepreneurSpectaclesCertification(uniteLegale),
+    clientEntrepreneursSpectacles(uniteLegale.siren),
     getBio(uniteLegale),
     getEgapro(uniteLegale),
     getOrganismesDeFormation(uniteLegale),
