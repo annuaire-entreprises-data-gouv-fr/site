@@ -1,11 +1,11 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
-import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { useMemo } from "react";
+import { getAgentBilansProtectedAction } from "server-actions/agent/data-fetching";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
 import FAQLink from "#components-ui/faq-link";
+import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
@@ -29,17 +29,14 @@ export function ProtectedIndicateursFinanciersBDF({
   sources: EAdministration[];
   isProtected: boolean;
 }) {
-  const params = useMemo(
-    () => ({
-      params: { useCase },
-    }),
-    [useCase]
+  const input = useMemo(
+    () => ({ siren: uniteLegale.siren, useCase }),
+    [uniteLegale.siren, useCase]
   );
-  const banqueDeFranceBilansProtected = useAPIRouteData(
-    APIRoutesPaths.EspaceAgentBilansProtected,
-    uniteLegale.siren,
+  const banqueDeFranceBilansProtected = useServerActionData(
+    getAgentBilansProtectedAction,
     session,
-    params
+    input
   );
 
   return (

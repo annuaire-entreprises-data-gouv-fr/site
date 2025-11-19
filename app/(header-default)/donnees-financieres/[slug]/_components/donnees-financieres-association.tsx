@@ -34,7 +34,7 @@ export default function DonneesFinancieresAssociation({
         </ul>
         <br />
       </nav>
-      <FinancesAssociationSection session={session} uniteLegale={uniteLegale} />
+      <FinancesAssociationSection uniteLegale={uniteLegale} />
       <ComptesAssociationSection uniteLegale={uniteLegale} />
       <HorizontalSeparator />
       <SubventionsAssociationSection

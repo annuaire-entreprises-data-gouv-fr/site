@@ -72,7 +72,7 @@ const AnnoncesPage = async (props: AppRouterProps) => {
             </ul>
             <AnnoncesBodacc uniteLegale={uniteLegale} />
             {uniteLegale.dateMiseAJourInpi && (
-              <ObservationsRNE session={session} uniteLegale={uniteLegale} />
+              <ObservationsRNE uniteLegale={uniteLegale} />
             )}
             {isAssociation(uniteLegale) && (
               <AnnoncesJOAFESection uniteLegale={uniteLegale} />
