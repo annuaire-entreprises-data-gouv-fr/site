@@ -57,7 +57,7 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
         );
       } else {
         onChangeLocations({
-          locations,
+          locations: [...new Set(locations)],
         });
       }
     },
@@ -69,11 +69,12 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
       <label>
         Filtrer en chargeant{" "}
         <FaqLink tooltipLabel="une liste">
-          Votre fichier doit avoir les caractéristiques suivantes :
+          Format requis :
           <ul>
-            <li>format .txt (UTF-8)</li>
+            <li>fichier .txt (UTF-8)</li>
             <li>
               code département (2 ou 3 chiffres) ou code commune (5 chiffres)
+              uniquement
             </li>
             <li>un code par ligne, sans séparateur et sans ligne à vide</li>
           </ul>

@@ -61,9 +61,9 @@ export function CategoriesJuridiquesFileInput(
         );
       } else {
         onChangeCategoriesJuridiques({
-          legalCategoriesNiveau1,
-          legalCategoriesNiveau2,
-          legalCategoriesNiveau3,
+          legalCategoriesNiveau1: [...new Set(legalCategoriesNiveau1)],
+          legalCategoriesNiveau2: [...new Set(legalCategoriesNiveau2)],
+          legalCategoriesNiveau3: [...new Set(legalCategoriesNiveau3)],
         });
       }
     },
@@ -75,14 +75,15 @@ export function CategoriesJuridiquesFileInput(
       <label>
         Filtrer en chargeant{" "}
         <FaqLink tooltipLabel="une liste">
-          Votre fichier doit avoir les caractéristiques suivantes :
+          Format requis :
           <ul>
-            <li>format .txt (UTF-8)</li>
+            <li>fichier .txt (UTF-8)</li>
             <li>
-              catégorie juridique sur 1, 2 ou 4 positions en fonction du niveau
-              choisi
+              catégorie juridique sur 1, 2 ou 4 positions uniquement en fonction
+              du niveau choisi
             </li>
             <li>un code par ligne, sans séparateur et sans ligne à vide</li>
+            <li>100 lignes maximum</li>
           </ul>
           Exemple :
           <ul className={styles.fileExampleList}>

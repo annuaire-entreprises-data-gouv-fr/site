@@ -47,7 +47,7 @@ export function NAFFileInput(props: NAFFileInputProps) {
         );
       } else {
         onChangeNAF({
-          naf,
+          naf: [...new Set(naf)],
         });
       }
     },
@@ -59,11 +59,12 @@ export function NAFFileInput(props: NAFFileInputProps) {
       <label>
         Filtrer en chargeant{" "}
         <FaqLink tooltipLabel="une liste">
-          Votre fichier doit avoir les caractéristiques suivantes :
+          Format requis :
           <ul>
-            <li>format .txt (UTF-8)</li>
-            <li>code NAF complet (4 chiffres et une lettre)</li>
+            <li>fichier .txt (UTF-8)</li>
+            <li>code NAF complet (4 chiffres et une lettre) uniquement</li>
             <li>un code par ligne, sans séparateur et sans ligne à vide</li>
+            <li>100 lignes maximum</li>
           </ul>
           Exemple :
           <ul className={styles.fileExampleList}>
