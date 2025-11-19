@@ -84,6 +84,8 @@ const routes = {
       "https://tabular-api.data.gouv.fr/api/resources/fdfabe62-a581-41a1-998f-73fc53da3398/data/",
     ess: "https://tabular-api.data.gouv.fr/api/resources/57bc99ca-0432-4b46-8fcc-e76a35c9efaf/data/",
     dpo: "https://tabular-api.data.gouv.fr/api/resources/c5d02b42-1008-4406-83f5-3a81c8b936a3/data/",
+    entrepreneursSpectacles:
+      "https://tabular-api.data.gouv.fr/api/resources/fb6c3b2e-da8c-4e69-a719-6a96329e4cb2/data/",
   },
   dataSubvention: {
     pageBySirenOrIdRna: (sirenOrIdRna: string) =>
