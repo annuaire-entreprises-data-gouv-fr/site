@@ -32,17 +32,21 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
       const { locations, invalidLocations } = lines.reduce(
         (acc, line) => {
           if (regexDepartementLocations.test(line)) {
-            acc.locations.push({
-              type: "dep",
-              value: line,
-              label: `${line} - Département`,
-            });
+            if (!acc.locations.some((loc) => loc.value === line)) {
+              acc.locations.push({
+                type: "dep",
+                value: line,
+                label: `${line} - Département`,
+              });
+            }
           } else if (regexCommuneLocations.test(line)) {
-            acc.locations.push({
-              type: "cp",
-              value: line,
-              label: `${line} - Commune`,
-            });
+            if (!acc.locations.some((loc) => loc.value === line)) {
+              acc.locations.push({
+                type: "cp",
+                value: line,
+                label: `${line} - Commune`,
+              });
+            }
           } else {
             acc.invalidLocations.push(line);
           }
@@ -57,7 +61,7 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
         );
       } else {
         onChangeLocations({
-          locations: [...new Set(locations)],
+          locations,
         });
       }
     },
