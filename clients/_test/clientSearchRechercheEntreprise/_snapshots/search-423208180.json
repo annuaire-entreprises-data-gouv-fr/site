@@ -194,7 +194,9 @@
           "dateImmatriculation": "1999-06-21",
           "duree": 50,
           "dateFin": "21/06/2049",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "",
           "isPersonneMorale": true,
           "capital": "36 000,00 € (fixe)"
@@ -211,7 +213,9 @@
             "prenoms": "Nicole",
             "role": "ASSOCIE INDEFINIMENT RESPONSABLE",
             "nationalite": "Française",
-            "dateNaissancePartial": "1941-09"
+            "dateNaissancePartial": "1941-09",
+            "estDemissionnaire": false,
+            "dateDemission": null
           },
           {
             "sexe": null,
@@ -220,7 +224,9 @@
             "prenoms": "Alain",
             "role": "ASSOCIE INDEFINIMENT RESPONSABLE",
             "nationalite": "Française",
-            "dateNaissancePartial": "1944-12"
+            "dateNaissancePartial": "1944-12",
+            "estDemissionnaire": false,
+            "dateDemission": null
           },
           {
             "sexe": null,
@@ -229,7 +235,9 @@
             "prenoms": "Jean-Philippe",
             "role": "GERANT ET ASSOCIE INDEFINIMENT RESPONSABLE",
             "nationalite": "Française",
-            "dateNaissancePartial": "1971-08"
+            "dateNaissancePartial": "1971-08",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }

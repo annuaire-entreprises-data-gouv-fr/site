@@ -194,7 +194,10 @@
           "dateImmatriculation": "1981-10-01",
           "duree": 0,
           "dateFin": "",
-          "natureEntreprise": ["Libérale non réglementée", "Gestion de biens"],
+          "natureEntreprise": [
+            "Libérale non réglementée",
+            "Gestion de biens"
+          ],
           "dateCloture": "",
           "isPersonneMorale": false,
           "capital": ""
@@ -211,7 +214,9 @@
             "prenoms": "[non-Diffusible]",
             "role": "",
             "nationalite": "[NON-DIFFUSIBLE]",
-            "dateNaissancePartial": "[NON-DIFFUSIBLE]"
+            "dateNaissancePartial": "[NON-DIFFUSIBLE]",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }
