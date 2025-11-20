@@ -1,9 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { Error } from "#components-ui/alerts";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import constants from "#models/constants";
+import { FileInput } from "./file-input";
 import styles from "./styles.module.css";
 
 interface SiretFilterProps {
@@ -15,96 +17,52 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
   siretsAndSirens,
   onSiretsAndSirensChange,
 }) => {
-  const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const validateSiretOrSiren = (value: string): boolean => {
     const trimmed = value.trim();
     return /^\d{9}$/.test(trimmed) || /^\d{14}$/.test(trimmed);
   };
 
-  const processFile = (file: File) => {
+  const processFileContent = (fileContent: string) => {
     setError(null);
 
-    if (file.type !== "text/plain" && !file.name.endsWith(".txt")) {
-      setError("Veuillez sélectionner un fichier .txt");
-      return;
-    }
+    try {
+      const lines = fileContent
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0);
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const content = e.target?.result as string;
-        const lines = content
-          .split("\n")
-          .map((line) => line.trim())
-          .filter((line) => line.length > 0);
-
-        if (lines.length > 500) {
-          setError(
-            "Le fichier contient plus de 500 lignes. Vous ne pouvez pas charger plus de 500 lignes."
-          );
-          return;
-        }
-
-        const invalidValues = lines.filter(
-          (line) => !validateSiretOrSiren(line)
+      if (lines.length > 500) {
+        setError(
+          "Le fichier contient plus de 500 lignes. Vous ne pouvez pas charger plus de 500 lignes."
         );
-
-        if (invalidValues.length > 0) {
-          setError(
-            `${invalidValues.length} valeur(s) invalide(s) détectée(s). Un SIREN doit contenir exactement 9 chiffres, un SIRET doit contenir exactement 14 chiffres.`
-          );
-          return;
-        }
-
-        const validValues = lines.filter((line) => validateSiretOrSiren(line));
-        onSiretsAndSirensChange(validValues);
-
-        if (validValues.length === 0) {
-          setError("Aucun SIREN ou SIRET valide trouvé dans le fichier");
-        }
-      } catch (err) {
-        setError("Erreur lors de la lecture du fichier");
+        return;
       }
-    };
 
-    reader.readAsText(file);
-  };
+      const invalidValues = lines.filter((line) => !validateSiretOrSiren(line));
 
-  const handleDrag = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
-  };
+      if (invalidValues.length > 0) {
+        setError(
+          `${invalidValues.length} valeur(s) invalide(s) détectée(s). Un SIREN doit contenir exactement 9 chiffres, un SIRET doit contenir exactement 14 chiffres.`
+        );
+        return;
+      }
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
+      const validValues = lines.filter((line) => validateSiretOrSiren(line));
+      onSiretsAndSirensChange(validValues);
 
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      processFile(e.dataTransfer.files[0]);
-    }
-  };
-
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      processFile(e.target.files[0]);
+      if (validValues.length === 0) {
+        setError("Aucun SIREN ou SIRET valide trouvé dans le fichier");
+      }
+    } catch (err) {
+      setError("Erreur lors de la lecture du fichier");
     }
   };
 
   const clearSiretList = () => {
     onSiretsAndSirensChange([]);
     setError(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
   };
 
   return (
@@ -138,37 +96,18 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
       <br />
 
       <div className={styles.siretContainer}>
-        <div
-          className={`${styles.fileUploadArea} ${
-            dragActive ? styles.dragActive : ""
-          }`}
-          onDragEnter={handleDrag}
-          onDragLeave={handleDrag}
-          onDragOver={handleDrag}
-          onDrop={handleDrop}
-        >
-          <input
-            accept=".txt"
-            className={styles.fileInput}
-            id="siret-file-input"
-            onChange={handleFileInput}
-            ref={fileInputRef}
-            type="file"
-          />
-          <label className={styles.fileUploadLabel} htmlFor="siret-file-input">
-            <Icon color={constants.colors.frBlue} slug="download" />
-            <span>
-              Glissez-déposez votre fichier .txt ici ou cliquez pour le
-              sélectionner
-            </span>
-            <small>
-              Le fichier doit contenir un SIREN ou SIRET par ligne (9 ou 14
-              chiffres)
-            </small>
-          </label>
-        </div>
+        <FileInput
+          description="Un SIREN / SIRET par ligne"
+          onChange={processFileContent}
+          onError={setError}
+        />
 
-        {error && <div className={styles.errorMessage}>{error}</div>}
+        {error && (
+          <Error>
+            <strong>Votre fichier n’a pas pu être chargé.</strong>
+            <p className="fr-my-0">{error}</p>
+          </Error>
+        )}
 
         {siretsAndSirens.length > 0 && (
           <div className={styles.siretListContainer}>

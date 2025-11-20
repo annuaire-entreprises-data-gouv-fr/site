@@ -6,6 +6,7 @@ import type { MouseEventHandler, PropsWithChildren } from "react";
 import styles from "./styles.module.css";
 
 type IProps = {
+  id?: string;
   role?: string;
   small?: boolean;
   to?: string;
@@ -20,6 +21,7 @@ type IProps = {
 };
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
+  id,
   role,
   disabled,
   to,
@@ -45,6 +47,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         [styles.hideExternalIcon]: hideExternalIcon,
       })}
       href={(to || "").indexOf("@") > -1 ? `mailto:${to}` : to}
+      id={id}
       rel={
         (target === "_blank" ? "noopener noreferrer" : "") +
         (nofollow ? "nofollow" : "")
@@ -59,6 +62,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
       aria-label={ariaLabel}
       className={className}
       disabled={disabled}
+      id={id}
       onClick={onClick}
       role={role}
       type={type || "submit"}

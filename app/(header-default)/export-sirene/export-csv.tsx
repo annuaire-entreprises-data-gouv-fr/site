@@ -64,12 +64,7 @@ export default function ExportCsv() {
   const [showResults, setShowResults] = useState(false);
 
   const resetFilters = () => {
-    setFilters(defaultFilters);
-    setShowResults(false);
-    setCountResult(null);
-    setError(null);
-    setIsLoading(false);
-    setIsCountLoading(false);
+    window.location.reload();
   };
 
   const modifyFilters = () => {
