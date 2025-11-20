@@ -47,12 +47,7 @@
             "idRge": [],
             "idUai": []
           },
-          "listeIdcc": [
-            {
-              "idcc": "3090",
-              "title": ""
-            }
-          ]
+          "listeIdcc": []
         },
         "tva": null,
         "anciensSiegesSirets": [],
@@ -99,12 +94,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "listeIdcc": [
-                {
-                  "idcc": "3090",
-                  "title": ""
-                }
-              ]
+              "listeIdcc": []
             }
           ],
           "open": [
@@ -143,12 +133,7 @@
                 "idRge": [],
                 "idUai": []
               },
-              "listeIdcc": [
-                {
-                  "idcc": "3090",
-                  "title": ""
-                }
-              ]
+              "listeIdcc": []
             }
           ],
           "unknown": [],
@@ -202,12 +187,7 @@
         "colter": {
           "codeColter": null
         },
-        "listeIdcc": [
-          {
-            "idcc": "3090",
-            "title": ""
-          }
-        ],
+        "listeIdcc": [],
         "immatriculation": null,
         "isNbEtablissementOuvertReliable": true,
         "matchingEtablissements": [],
