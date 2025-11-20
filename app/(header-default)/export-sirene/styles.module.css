@@ -234,3 +234,10 @@ div.location-filter-container {
   flex-wrap: wrap;
   gap: 8px;
 }
+
+.fileExampleList {
+  list-style: none;
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+  border-left: 1px solid #ddd;
+}

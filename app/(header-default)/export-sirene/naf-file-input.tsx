@@ -1,7 +1,9 @@
 import { useCallback, useState } from "react";
 import { Error } from "#components-ui/alerts";
+import FaqLink from "#components-ui/faq-link";
 import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
 import { FileInput } from "./file-input";
+import styles from "./styles.module.css";
 
 type NAFFileInputProps = {
   onChangeNAF: (params: { naf: string[] }) => void;
@@ -45,7 +47,7 @@ export function NAFFileInput(props: NAFFileInputProps) {
         );
       } else {
         onChangeNAF({
-          naf,
+          naf: [...new Set(naf)],
         });
       }
     },
@@ -54,7 +56,24 @@ export function NAFFileInput(props: NAFFileInputProps) {
 
   return (
     <div>
-      <label className="fr-mb-2v">Filtrer en chargeant une liste</label>
+      <label>
+        Filtrer en chargeant{" "}
+        <FaqLink tooltipLabel="une liste">
+          Format requis :
+          <ul>
+            <li>fichier .txt (UTF-8)</li>
+            <li>code NAF complet (4 chiffres et une lettre) uniquement</li>
+            <li>un code par ligne, sans séparateur et sans ligne à vide</li>
+            <li>100 lignes maximum</li>
+          </ul>
+          Exemple :
+          <ul className={styles.fileExampleList}>
+            <li>0124Z</li>
+            <li>2120Z</li>
+            <li>4765Z</li>
+          </ul>
+        </FaqLink>
+      </label>
       <FileInput
         description="Un code NAF/APE par ligne"
         onChange={processFileContent}
