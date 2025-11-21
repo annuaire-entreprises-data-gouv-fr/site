@@ -11,6 +11,7 @@
 # more:
 #   - label: libellé
 #     href: url
+slug: adresse-personnelle
 administrations:
   - insee
 title: Pourquoi mon adresse personnelle apparaît-elle sur ce site ?
