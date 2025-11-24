@@ -7,5 +7,9 @@ version: 2
 updates:
   - package-ecosystem: "" # See documentation for possible values
     directory: "/" # Location of package manifests
+    cooldown:
+      semver-major-days: 5
+      semver-minor-days: 3
+      semver-patch-days: 0
     schedule:
       interval: "weekly"
