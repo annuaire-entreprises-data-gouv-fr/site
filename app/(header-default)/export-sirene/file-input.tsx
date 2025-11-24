@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useCallback, useId, useRef, useState } from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import constants from "#models/constants";
@@ -70,9 +71,9 @@ export function FileInput(props: FileInputProps) {
 
   return (
     <div
-      className={`${styles.fileUploadArea} ${
-        dragActive ? styles.dragActive : ""
-      }`}
+      className={clsx(styles.fileUploadArea, "fr-mt-2v", {
+        [styles.dragActive]: dragActive,
+      })}
       onDragEnter={handleDrag}
       onDragLeave={handleDrag}
       onDragOver={handleDrag}
