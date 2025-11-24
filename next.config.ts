@@ -70,15 +70,6 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/:path*{/}?",
-        headers: [
-          {
-            key: "X-Accel-Buffering",
-            value: "no",
-          },
-        ],
-      },
-      {
         source: "/api/share/button:id(\\d+)",
         headers: [
           {
