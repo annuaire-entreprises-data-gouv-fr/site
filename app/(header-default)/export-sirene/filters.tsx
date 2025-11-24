@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { Dispatch, SetStateAction } from "react";
 import DualRangeSlider from "#components-ui/dual-range-slider";
 import FAQLink from "#components-ui/faq-link";
@@ -10,10 +11,13 @@ import { categoriesJuridiquesNiveau1 } from "#utils/helpers/formatting/metadata/
 import { categoriesJuridiquesNiveau2 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
 import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
 import { codesSectionNAF } from "#utils/helpers/formatting/metadata/codes-section-NAF";
+import { CategoriesJuridiquesFileInput } from "./categories-juridiques-file-input";
 import { getEffectifLabel } from "./constants";
 import type { ExtendedExportCsvInput } from "./export-csv";
 import { LocationFilter } from "./location-filter";
 import LocationTags from "./location-tags";
+import { LocationsFileInput } from "./locations-file-input";
+import { NAFFileInput } from "./naf-file-input";
 import SiretFilter from "./siret-filter";
 import styles from "./styles.module.css";
 
@@ -294,7 +298,7 @@ export default function Filters({
       </div>
 
       <div>
-        <section>
+        <section className={styles.formSection}>
           <h2>
             <Icon color={constants.colors.frBlue} slug="mapPinFill">
               Filtrer par{" "}
@@ -312,39 +316,56 @@ export default function Filters({
               </FAQLink>
             </Icon>
           </h2>
-          <div className={styles.inputContainer}>
-            <div className={styles.filterColumn}>
-              <LocationFilter
-                onSelect={(
-                  type: "cp" | "dep" | "reg" | "insee",
-                  value: string,
-                  label: string
-                ) => {
-                  setFilters((prev) => ({
-                    ...prev,
-                    locations: [
-                      ...prev.locations.filter(
-                        (loc) => !(loc.type === type && loc.value === value)
+          <div
+            className={clsx(
+              styles.gridInputContainer,
+              "fr-grid-row fr-grid-row--gutters"
+            )}
+          >
+            <div className="fr-col-12 fr-col-md-6">
+              <div>
+                <LocationFilter
+                  onSelect={(
+                    type: "cp" | "dep" | "reg" | "insee",
+                    value: string,
+                    label: string
+                  ) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      locations: [
+                        ...prev.locations.filter(
+                          (loc) => !(loc.type === type && loc.value === value)
+                        ),
+                        { type, value, label },
+                      ],
+                    }));
+                  }}
+                />
+              </div>
+              <div>
+                <LocationTags
+                  filters={filters}
+                  handleClick={(location) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      locations: prev.locations.filter(
+                        (loc) =>
+                          !(
+                            loc.type === location.type &&
+                            loc.value === location.value
+                          )
                       ),
-                      { type, value, label },
-                    ],
-                  }));
-                }}
-              />
+                    }));
+                  }}
+                />
+              </div>
             </div>
-            <div className={styles.filterColumn}>
-              <LocationTags
-                filters={filters}
-                handleClick={(location) => {
+            <div className="fr-col-12 fr-col-md-5">
+              <LocationsFileInput
+                onChangeLocations={(params) => {
                   setFilters((prev) => ({
                     ...prev,
-                    locations: prev.locations.filter(
-                      (loc) =>
-                        !(
-                          loc.type === location.type &&
-                          loc.value === location.value
-                        )
-                    ),
+                    ...params,
                   }));
                 }}
               />
@@ -371,54 +392,72 @@ export default function Filters({
               </FAQLink>
             </Icon>
           </h2>
-          <div className={styles.inputContainer}>
-            <div className={styles.filterColumn}>
-              <label htmlFor="sap-multi-select">
-                Domaine d‘activité (Section) :
-              </label>
-              <MultiSelect
-                defaultValue={filters.sap}
-                id="sap-multi-select"
-                instanceId="sap-multi-select"
-                menuPosition="fixed"
-                name="sap"
-                onChange={(values) => {
-                  setFilters((prev) => ({
-                    ...prev,
-                    sap: values,
-                  }));
-                }}
-                options={Object.keys(codesSectionNAF).map((code) => ({
-                  value: code,
-                  label: `${code} - ${codesSectionNAF[code]}`,
-                }))}
-                placeholder="Choisir un domaine d'activité"
-              />
+          <div
+            className={clsx(
+              styles.gridInputContainer,
+              "fr-grid-row fr-grid-row--gutters"
+            )}
+          >
+            <div className="fr-col-12 fr-col-md-6">
+              <div>
+                <label htmlFor="sap-multi-select">
+                  Domaine d‘activité (Section) :
+                </label>
+                <MultiSelect
+                  defaultValue={filters.sap}
+                  id="sap-multi-select"
+                  instanceId="sap-multi-select"
+                  menuPosition="fixed"
+                  name="sap"
+                  onChange={(values) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      sap: values,
+                    }));
+                  }}
+                  options={Object.keys(codesSectionNAF).map((code) => ({
+                    value: code,
+                    label: `${code} - ${codesSectionNAF[code]}`,
+                  }))}
+                  placeholder="Choisir un domaine d'activité"
+                />
+              </div>
+              <div className={styles.filterColumn}>
+                <label htmlFor="naf-multi-select">
+                  Code NAF/APE (Sous-classe) :
+                </label>
+                <MultiSelect
+                  defaultValue={filters.naf}
+                  id="naf-multi-select"
+                  instanceId="naf-multi-select"
+                  menuPosition="fixed"
+                  name="naf"
+                  onChange={(values) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      naf: values,
+                    }));
+                  }}
+                  options={Object.keys(codesNAFRev2).map((code) => ({
+                    value: code,
+                    label: `${code} - ${
+                      codesNAFRev2[code as keyof typeof codesNAFRev2]
+                    }`,
+                  }))}
+                  placeholder="Choisir un code NAF/APE"
+                  value={filters.naf}
+                />
+              </div>
             </div>
 
-            <div className={styles.filterColumn}>
-              <label htmlFor="naf-multi-select">
-                Code NAF/APE (Sous-classe) :
-              </label>
-              <MultiSelect
-                defaultValue={filters.naf}
-                id="naf-multi-select"
-                instanceId="naf-multi-select"
-                menuPosition="fixed"
-                name="naf"
-                onChange={(values) => {
+            <div className="fr-col-12 fr-col-md-5">
+              <NAFFileInput
+                onChangeNAF={(params) => {
                   setFilters((prev) => ({
                     ...prev,
-                    naf: values,
+                    ...params,
                   }));
                 }}
-                options={Object.keys(codesNAFRev2).map((code) => ({
-                  value: code,
-                  label: `${code} - ${
-                    codesNAFRev2[code as keyof typeof codesNAFRev2]
-                  }`,
-                }))}
-                placeholder="Choisir un code NAF/APE"
               />
             </div>
           </div>
@@ -444,67 +483,86 @@ export default function Filters({
               </FAQLink>
             </Icon>
           </h2>
-          <div className={styles.inputContainer}>
-            <div className={styles.filterColumn}>
-              <label htmlFor="nature-juridique-niveau-1-multi-select">
-                Catégorie juridique (Niveau 1) :
-              </label>
-              <MultiSelect
-                defaultValue={filters.legalCategoriesNiveau1}
-                id="nature-juridique-niveau-1-multi-select"
-                instanceId="nature-juridique-niveau-1-multi-select"
-                menuPosition="fixed"
-                name="nature_juridique"
-                onChange={(values: string[]) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    legalCategoriesNiveau1: values,
-                  }))
-                }
-                options={getLegalCategoriesNiveau1()}
-                placeholder="Choisir une catégorie juridique"
-              />
+          <div
+            className={clsx(
+              styles.gridInputContainer,
+              "fr-grid-row fr-grid-row--gutters"
+            )}
+          >
+            <div className="fr-col-12 fr-col-md-6">
+              <div>
+                <label htmlFor="nature-juridique-niveau-1-multi-select">
+                  Catégorie juridique (Niveau 1) :
+                </label>
+                <MultiSelect
+                  defaultValue={filters.legalCategoriesNiveau1}
+                  id="nature-juridique-niveau-1-multi-select"
+                  instanceId="nature-juridique-niveau-1-multi-select"
+                  menuPosition="fixed"
+                  name="nature_juridique"
+                  onChange={(values: string[]) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      legalCategoriesNiveau1: values,
+                    }))
+                  }
+                  options={getLegalCategoriesNiveau1()}
+                  placeholder="Choisir une catégorie juridique"
+                  value={filters.legalCategoriesNiveau1}
+                />
+              </div>
+              <div>
+                <label htmlFor="nature-juridique-niveau-2-multi-select">
+                  Catégorie juridique (Niveau 2) :
+                </label>
+                <MultiSelect
+                  defaultValue={filters.legalCategoriesNiveau2}
+                  id="nature-juridique-niveau-2-multi-select"
+                  instanceId="nature-juridique-niveau-2-multi-select"
+                  menuPosition="fixed"
+                  name="nature_juridique"
+                  onChange={(values: string[]) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      legalCategoriesNiveau2: values,
+                    }))
+                  }
+                  options={getLegalCategoriesNiveau2()}
+                  placeholder="Choisir une catégorie juridique"
+                  value={filters.legalCategoriesNiveau2}
+                />
+              </div>
+              <div>
+                <label htmlFor="nature-juridique-niveau-3-multi-select">
+                  Catégorie juridique (Niveau 3) :
+                </label>
+                <MultiSelect
+                  defaultValue={filters.legalCategoriesNiveau3}
+                  id="nature-juridique-niveau-3-multi-select"
+                  instanceId="nature-juridique-niveau-3-multi-select"
+                  menuPosition="fixed"
+                  name="nature_juridique"
+                  onChange={(values: string[]) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      legalCategoriesNiveau3: values,
+                    }))
+                  }
+                  options={getLegalCategoriesNiveau3()}
+                  placeholder="Choisir une catégorie juridique"
+                  value={filters.legalCategoriesNiveau3}
+                />
+              </div>
             </div>
 
-            <div className={styles.filterColumn}>
-              <label htmlFor="nature-juridique-niveau-2-multi-select">
-                Catégorie juridique (Niveau 2) :
-              </label>
-              <MultiSelect
-                defaultValue={filters.legalCategoriesNiveau2}
-                id="nature-juridique-niveau-2-multi-select"
-                instanceId="nature-juridique-niveau-2-multi-select"
-                menuPosition="fixed"
-                name="nature_juridique"
-                onChange={(values: string[]) =>
+            <div className="fr-col-12 fr-col-md-5">
+              <CategoriesJuridiquesFileInput
+                onChangeCategoriesJuridiques={(params) => {
                   setFilters((prev) => ({
                     ...prev,
-                    legalCategoriesNiveau2: values,
-                  }))
-                }
-                options={getLegalCategoriesNiveau2()}
-                placeholder="Choisir une catégorie juridique"
-              />
-            </div>
-
-            <div className={styles.filterColumn}>
-              <label htmlFor="nature-juridique-niveau-3-multi-select">
-                Catégorie juridique (Niveau 3) :
-              </label>
-              <MultiSelect
-                defaultValue={filters.legalCategoriesNiveau3}
-                id="nature-juridique-niveau-3-multi-select"
-                instanceId="nature-juridique-niveau-3-multi-select"
-                menuPosition="fixed"
-                name="nature_juridique"
-                onChange={(values: string[]) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    legalCategoriesNiveau3: values,
-                  }))
-                }
-                options={getLegalCategoriesNiveau3()}
-                placeholder="Choisir une catégorie juridique"
+                    ...params,
+                  }));
+                }}
               />
             </div>
           </div>

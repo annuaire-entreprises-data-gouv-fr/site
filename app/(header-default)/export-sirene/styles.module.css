@@ -66,6 +66,10 @@
   flex-wrap: wrap;
 }
 
+.gridInputContainer {
+  justify-content: space-between;
+}
+
 .dateGroup {
   margin-bottom: 16px;
 }
@@ -107,6 +111,9 @@
 .filterColumn {
   min-width: 45%;
   max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 @media (max-width: 768px) {
@@ -187,8 +194,14 @@ div.location-filter-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   cursor: pointer;
+}
+
+.fileUploadLabelDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .fileUploadLabel span {
@@ -220,4 +233,11 @@ div.location-filter-container {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.fileExampleList {
+  list-style: none;
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+  border-left: 1px solid #ddd;
 }
