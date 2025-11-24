@@ -1,9 +1,11 @@
 import { useCallback, useState } from "react";
 import { Error } from "#components-ui/alerts";
+import FaqLink from "#components-ui/faq-link";
 import { categoriesJuridiquesNiveau3 } from "#utils/helpers/formatting/metadata/categories-juridiques";
 import { categoriesJuridiquesNiveau1 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-1";
 import { categoriesJuridiquesNiveau2 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
 import { FileInput } from "./file-input";
+import styles from "./styles.module.css";
 
 type CategoriesJuridiquesFileInputProps = {
   onChangeCategoriesJuridiques: (params: {
@@ -59,9 +61,9 @@ export function CategoriesJuridiquesFileInput(
         );
       } else {
         onChangeCategoriesJuridiques({
-          legalCategoriesNiveau1,
-          legalCategoriesNiveau2,
-          legalCategoriesNiveau3,
+          legalCategoriesNiveau1: [...new Set(legalCategoriesNiveau1)],
+          legalCategoriesNiveau2: [...new Set(legalCategoriesNiveau2)],
+          legalCategoriesNiveau3: [...new Set(legalCategoriesNiveau3)],
         });
       }
     },
@@ -70,8 +72,28 @@ export function CategoriesJuridiquesFileInput(
 
   return (
     <div>
-      <label className="fr-mb-2v" htmlFor="categories-juridiques-file-input">
-        Filtrer en chargeant une liste
+      <label>
+        Filtrer en chargeant{" "}
+        <FaqLink tooltipLabel="une liste">
+          Format requis :
+          <ul>
+            <li>fichier .txt (UTF-8)</li>
+            <li>
+              catégorie juridique sur 1, 2 ou 4 positions uniquement en fonction
+              du niveau choisi
+            </li>
+            <li>un code par ligne, sans séparateur et sans ligne à vide</li>
+            <li>100 lignes maximum</li>
+          </ul>
+          Exemple :
+          <ul className={styles.fileExampleList}>
+            <li>1</li>
+            <li>3290</li>
+            <li>4</li>
+            <li>5202</li>
+            <li>31</li>
+          </ul>
+        </FaqLink>
       </label>
       <FileInput
         description="Un code catégorie légale par ligne"
