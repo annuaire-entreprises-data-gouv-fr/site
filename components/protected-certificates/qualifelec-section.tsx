@@ -1,9 +1,14 @@
-import { getQualifelecFetcher } from "server-fetch/agent";
-import { AsyncDataSectionServer } from "#components/section/data-section/server";
+"use client";
+
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
+import { DataSectionClient } from "#components/section/data-section";
+import { FullTable } from "#components/table/full";
+import ButtonLink from "#components-ui/button";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
-import { QualifelecContent } from "./qualifelec-content";
+import { formatDate, formatDateLong } from "#utils/helpers";
 
 export function QualifelecSection({
   uniteLegale,
@@ -12,11 +17,13 @@ export function QualifelecSection({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
-  const qualifelec = getQualifelecFetcher(uniteLegale.siege.siret, session);
-
+  const qualifelec = useAPIRouteData(
+    APIRoutesPaths.EspaceAgentQualifelec,
+    uniteLegale.siege.siret,
+    session
+  );
   return (
-    <AsyncDataSectionServer
-      ContentComponent={QualifelecContent}
+    <DataSectionClient
       data={qualifelec}
       id="qualifelec"
       isProtected
@@ -34,9 +41,62 @@ export function QualifelecSection({
           .
         </>
       }
-      otherContentProps={{}}
       sources={[EAdministration.QUALIFELEC]}
       title="Certificats Qualifelec"
-    />
+    >
+      {(qualifelec) => (
+        <>
+          <p>
+            Cette entreprise possède un ou plusieurs{" "}
+            <a
+              aria-label="En savoir plus sur les certificats Qualifelec, nouvelle fenêtre"
+              href="https://www.qualifelec.fr/pourquoi-choisir-une-entreprise-qualifelec/le-certificat-qualifelec-la-meilleure-des-recommandations/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              certificats Qualifelec
+            </a>{" "}
+            valides.
+          </p>
+          <FullTable
+            body={qualifelec.map((c) => [
+              c.numero,
+              c.qualification.label,
+              `Du ${formatDate(c.dateDebut)} au ${formatDate(c.dateFin)}`,
+              <ul>
+                <li>
+                  Assurance civile : {c.assuranceCivile.nom} (du{" "}
+                  {formatDateLong(c.assuranceCivile.dateDebut)} au{" "}
+                  {formatDateLong(c.assuranceCivile.dateFin)})
+                </li>
+                <li>
+                  Assurance décennale : {c.assuranceDecennale.nom} (du{" "}
+                  {formatDateLong(c.assuranceDecennale.dateDebut)} au{" "}
+                  {formatDateLong(c.assuranceDecennale.dateFin)})
+                </li>
+              </ul>,
+
+              <ButtonLink
+                alt
+                ariaLabel="Télécharger le certificat Qualifelec, nouvelle fenêtre"
+                small
+                target="_blank"
+                to={c.documentUrl}
+              >
+                Télécharger
+              </ButtonLink>,
+            ])}
+            head={[
+              "N°",
+              "Qualification",
+              "Validité",
+              "Assurances",
+              "Certificat",
+            ]}
+            verticalAlign="top"
+          />
+        </>
+      )}
+    </DataSectionClient>
   );
 }

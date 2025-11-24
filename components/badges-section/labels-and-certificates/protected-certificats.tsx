@@ -1,13 +1,13 @@
+"use client";
+
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import React from "react";
-import {
-  getOpqibiFetcher,
-  getQualibatFetcher,
-  getQualifelecFetcher,
-} from "server-fetch/agent";
 import NonRenseigne from "#components/non-renseigne";
 import { ProtectedInlineData } from "#components/protected-inline-data";
+import { Loader } from "#components-ui/loader";
 import type { ISession } from "#models/authentication/user/session";
-import { hasAnyError } from "#models/data-fetching";
+import { hasAnyError, isDataLoading } from "#models/data-fetching";
 import type { IUniteLegale } from "../../../models/core/types";
 import {
   checkHasLabelsAndCertificates,
@@ -18,18 +18,16 @@ import { LabelWithLinkToSection } from "./label-with-link-to-section";
 export const ProtectedCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = async ({ uniteLegale, session }) => {
+}> = ({ uniteLegale, session }) => {
   const hasOtherCertificates = checkHasLabelsAndCertificates(uniteLegale);
-
-  const [opqibi, qualibat, qualifelec] = await Promise.all([
-    getOpqibiFetcher(uniteLegale.siren, session),
-    getQualibatFetcher(uniteLegale.siege.siret, session),
-    getQualifelecFetcher(uniteLegale.siege.siret, session),
-  ]);
 
   const protectedCertificates = [
     {
-      data: opqibi,
+      data: useAPIRouteData(
+        APIRoutesPaths.EspaceAgentOpqibi,
+        uniteLegale.siren,
+        session
+      ),
       render: (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure possède une certification délivrée par l'association OPQIBI, attestant de ses différentes qualifications d'ingénierie"
@@ -40,7 +38,11 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
       ),
     },
     {
-      data: qualibat,
+      data: useAPIRouteData(
+        APIRoutesPaths.EspaceAgentQualibat,
+        uniteLegale.siege.siret,
+        session
+      ),
       render: (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure a obtenue un label de fiabilité QUALIBAT, garantissant sa qualification dans le bâtiment"
@@ -51,7 +53,11 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
       ),
     },
     {
-      data: qualifelec,
+      data: useAPIRouteData(
+        APIRoutesPaths.EspaceAgentQualifelec,
+        uniteLegale.siege.siret,
+        session
+      ),
       render: (
         <LabelWithLinkToSection
           informationTooltipLabel="Cette structure est certifiée par QUALIFELEC, attestant de ses qualifications dans le domaine du génie électrique et énergétique"
@@ -74,6 +80,15 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
     ) : (
       <NonRenseigne />
     );
+  }
+
+  // loading state
+  const anythingIsStillLoading = !!protectedCertificates.find(
+    (maybeLoadingState) => isDataLoading(maybeLoadingState.data)
+  );
+
+  if (anythingIsStillLoading) {
+    return <Loader />;
   }
 
   return (

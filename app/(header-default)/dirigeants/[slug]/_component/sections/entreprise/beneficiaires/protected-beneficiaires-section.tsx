@@ -1,7 +1,8 @@
 "use client";
 
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { useMemo } from "react";
-import { getAgentBeneficiairesAction } from "server-actions/agent/data-fetching";
 import routes from "#clients/routes";
 import { INPI } from "#components/administrations";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
@@ -9,7 +10,6 @@ import { FullTable } from "#components/table/full";
 import { UniteLegalePageLink } from "#components/unite-legale-page-link";
 import FAQLink from "#components-ui/faq-link";
 import { Tag } from "#components-ui/tag";
-import { useServerActionData } from "#hooks/fetch/use-server-action-data";
 import type { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
@@ -39,17 +39,17 @@ export default function ProtectedBeneficiairesSection({
   sources: EAdministration[];
   isProtected: boolean;
 }) {
-  const input = useMemo(
+  const params = useMemo(
     () => ({
-      siren: uniteLegale.siren,
-      useCase,
+      params: { useCase },
     }),
     [useCase]
   );
-  const beneficiaires = useServerActionData(
-    getAgentBeneficiairesAction,
+  const beneficiaires = useAPIRouteData(
+    APIRoutesPaths.EspaceAgentBeneficiaires,
+    uniteLegale.siren,
     session,
-    input
+    params
   );
 
   return (

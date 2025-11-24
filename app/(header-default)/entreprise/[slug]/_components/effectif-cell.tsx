@@ -1,18 +1,24 @@
-import { Suspense } from "react";
-import { getAgentEffectifsAnnuelsProtectedFetcher } from "server-fetch/agent";
+"use client";
+
+import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
+import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import { GIPMDS, INSEE } from "#components/administrations";
 import NonRenseigne from "#components/non-renseigne";
 import { ProtectedInlineData } from "#components/protected-inline-data";
 import FAQLink from "#components-ui/faq-link";
+import { Icon } from "#components-ui/icon/wrapper";
+import InformationTooltip from "#components-ui/information-tooltip";
 import { Loader } from "#components-ui/loader";
+import { isAPI404 } from "#models/api-not-responding";
 import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
+import { hasAnyError, isDataLoading } from "#models/data-fetching";
+import { formatFloatFr } from "#utils/helpers";
 import { libelleTrancheEffectif } from "#utils/helpers/formatting/codes-effectifs";
-import { EffectifCellContent } from "./effectif-cell-content";
 
 export const FAQEffectifAnnuel = () => (
   <FAQLink tooltipLabel="Effectif annuel">
@@ -32,24 +38,52 @@ export const ProtectedEffectifCell = ({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) => {
-  const effectifsAnnuelsProtected = getAgentEffectifsAnnuelsProtectedFetcher(
+  const effectifsAnnuelsProtected = useAPIRouteData(
+    APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected,
     uniteLegale.siren,
     session
   );
 
+  if (isDataLoading(effectifsAnnuelsProtected)) {
+    return (
+      <ProtectedInlineData>
+        <Loader />
+        &nbsp;
+      </ProtectedInlineData>
+    );
+  }
+
+  if (isAPI404(effectifsAnnuelsProtected)) {
+    return <ProtectedInlineData>Pas de données</ProtectedInlineData>;
+  }
+
+  if (hasAnyError(effectifsAnnuelsProtected)) {
+    return (
+      <InformationTooltip
+        horizontalOrientation="left"
+        label={
+          <>
+            Nous n’avons pas pu récupérer les effectifs de cette structure car
+            le téléservice ne fonctionne pas actuellement. Merci de ré-essayer
+            plus tard.
+          </>
+        }
+        left="5px"
+        tabIndex={0}
+      >
+        <Icon color="#df0a00" slug="errorFill">
+          <em>Service indisponible</em>
+        </Icon>
+      </InformationTooltip>
+    );
+  }
+
+  const { effectif, anneeEffectif } = effectifsAnnuelsProtected;
   return (
-    <Suspense
-      fallback={
-        <ProtectedInlineData>
-          <Loader />
-          &nbsp;
-        </ProtectedInlineData>
-      }
-    >
-      <EffectifCellContent
-        effectifsAnnuelsProtected={effectifsAnnuelsProtected}
-      />
-    </Suspense>
+    <ProtectedInlineData>
+      {formatFloatFr(effectif.toString())} salarié{effectif > 1 ? "s" : ""}, en{" "}
+      {anneeEffectif}
+    </ProtectedInlineData>
   );
 };
 

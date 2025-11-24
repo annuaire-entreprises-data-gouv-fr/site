@@ -1,5 +1,4 @@
 import type React from "react";
-import { Suspense } from "react";
 import { ConventionCollectivesBadgesSection } from "#components/badges-section/convention-collectives";
 import {
   checkHasLabelsAndCertificates,
@@ -13,7 +12,6 @@ import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import TVACell from "#components/tva-cell";
 import FAQLink from "#components-ui/faq-link";
-import { Loader } from "#components-ui/loader";
 import { EAdministration } from "#models/administrations/EAdministration";
 import {
   ApplicationRights,
@@ -93,7 +91,7 @@ const UniteLegaleSummarySection: React.FC<{
         dans ses relations avec les autorités douanières.
       </FAQLink>,
       uniteLegale.siege.siret ? (
-        <EORICell siret={uniteLegale.siege.siret} />
+        <EORICell session={session} siret={uniteLegale.siege.siret} />
       ) : (
         ""
       ),
@@ -140,12 +138,10 @@ const UniteLegaleSummarySection: React.FC<{
             `${
               checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
             }abels et certificats`,
-            <Suspense fallback={<Loader />}>
-              <ProtectedCertificatesBadgesSection
-                session={session}
-                uniteLegale={uniteLegale}
-              />
-            </Suspense>,
+            <ProtectedCertificatesBadgesSection
+              session={session}
+              uniteLegale={uniteLegale}
+            />,
           ],
         ]
       : hasLabelsAndCertificates
