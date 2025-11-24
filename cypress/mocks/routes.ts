@@ -97,6 +97,10 @@ export const routesHandlers = [
     apiInclusionMetadataHandler
   ),
   http.get(routes.datagouv.ess, apiDataGouvEssHandler),
+  http.get(
+    routes.datagouv.entrepreneursSpectacles,
+    entrepreneurSpectaclesHandler
+  ),
   http.get(routes.tooling.monitoring.getBySlug("*"), upDownIoHandler),
   http.get(routes.apiDataSubvention.grants("*"), apiDataSubventionHandler),
   http.get(routes.egapro.index, egaproHandler),
@@ -110,14 +114,6 @@ export const routesHandlers = [
   http.get(routes.geo.departements, apiGeoDepartementsHandler),
   http.get(routes.geo.regions, apiGeoRegionsHandler),
   http.get(routes.geo.epcis, apiGeoEpcisHandler),
-  http.get(
-    routes.certifications.entrepreneurSpectacles.ods.search,
-    entrepreneurSpectaclesHandler
-  ),
-  http.get(
-    routes.certifications.entrepreneurSpectacles.ods.metadata,
-    odsMetadataHandler
-  ),
   http.get(
     routes.annuaireServicePublic.ods.search,
     annuaireServicePublicHandler

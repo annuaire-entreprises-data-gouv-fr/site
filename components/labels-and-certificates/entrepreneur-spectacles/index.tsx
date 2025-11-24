@@ -1,4 +1,5 @@
 import type React from "react";
+import type { IEntrepreneursSpectacles } from "#clients/api-data-gouv/entrepreneurs-spectacles/interface";
 import { MC } from "#components/administrations";
 import NonRenseigne from "#components/non-renseigne";
 import { DataSection } from "#components/section/data-section";
@@ -9,13 +10,10 @@ import InformationTooltip from "#components-ui/information-tooltip";
 import { Tag } from "#components-ui/tag";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
-import type { IEntrepreneurSpectaclesCertification } from "#models/certifications/entrepreneur-spectacles";
 import { formatDate, pluralize } from "#utils/helpers";
 
 export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
-  entrepreneurSpectacles:
-    | IEntrepreneurSpectaclesCertification
-    | IAPINotRespondingError;
+  entrepreneurSpectacles: IEntrepreneursSpectacles | IAPINotRespondingError;
 }> = ({ entrepreneurSpectacles }) => (
   <DataSection
     data={entrepreneurSpectacles}
