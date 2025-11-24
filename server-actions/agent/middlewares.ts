@@ -5,8 +5,8 @@ import type { ApplicationRights } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import { UseCase } from "#models/use-cases";
 import {
-  withAgentRateLimiter,
-  withApplicationRight as withApplicationRightHelper,
+  verifyAgentRateLimit,
+  verifyApplicationRight,
 } from "../../server-fetch/agent/middlewares";
 
 export const withRateLimiting: MiddlewareFn<
@@ -17,7 +17,8 @@ export const withRateLimiting: MiddlewareFn<
 > = async ({ next, ctx }) => {
   const session = ctx.session;
 
-  return withAgentRateLimiter(next, session?.user?.email ?? null)();
+  await verifyAgentRateLimit(session?.user?.email ?? null);
+  return next();
 };
 
 type UseCaseInput = {
@@ -44,5 +45,6 @@ export const withApplicationRight =
   async ({ next, ctx }) => {
     const session = ctx.session;
 
-    return withApplicationRightHelper(next, right, session)();
+    verifyApplicationRight(session, right);
+    return next();
   };

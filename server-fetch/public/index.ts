@@ -3,16 +3,20 @@ import { getEORIValidation } from "#models/eori-validation";
 import { getDirigeantsRNE } from "#models/rne/dirigeants";
 import { getRNEObservations } from "#models/rne/observations";
 import { buildAndVerifyTVA } from "#models/tva/verify";
-import { withErrorHandler } from "../middlewares";
+import { createPublicFetcher } from "./middlewares";
 
-export const getRNEObservationsFetcher = withErrorHandler(getRNEObservations);
+export const getRNEObservationsFetcher =
+  createPublicFetcher(getRNEObservations).build();
 
-export const getDirigeantsRNEFetcher = withErrorHandler(getDirigeantsRNE);
+export const getDirigeantsRNEFetcher =
+  createPublicFetcher(getDirigeantsRNE).build();
 
-export const getAssociationFromSlugFetcher = withErrorHandler(
+export const getAssociationFromSlugFetcher = createPublicFetcher(
   getAssociationFromSlug
-);
+).build();
 
-export const getEORIValidationFetcher = withErrorHandler(getEORIValidation);
+export const getEORIValidationFetcher =
+  createPublicFetcher(getEORIValidation).build();
 
-export const buildAndVerifyTVAFetcher = withErrorHandler(buildAndVerifyTVA);
+export const buildAndVerifyTVAFetcher =
+  createPublicFetcher(buildAndVerifyTVA).build();
