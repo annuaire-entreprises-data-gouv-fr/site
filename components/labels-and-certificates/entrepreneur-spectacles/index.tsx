@@ -44,30 +44,49 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
 
       return (
         <>
-          Cette structure possède {plural ? "plusieurs" : "un"} récépissé
-          {plural} de déclaration d’activité <FAQ /> déposé{plural} sur{" "}
+          Cet organisme déclare exercer une activité d’entrepreneur de
+          spectacles vivants, à titre principal ou occasionnel. Cette activité
+          ne peut être exercée qu’en cas de détention de licence d’entrepreneur
+          de spectacles vivants (récépissé de déclaration au statut « valide »),
+          sauf exceptions suivantes : moins de 7 spectacles par an sont
+          organisés et soit l’activité principale n’est pas le spectacle soit
+          l’organisme est un groupement d’artistes amateurs.
+          <br />
+          <br />
+          Le numéro d’un récépissé « valide » vaut numéro de licence. La licence
+          est attribuée pour cinq ans, sauf retrait en cas d’illégalité. La
+          catégorie de licence indiquée par le préfixe du numéro indique le
+          métier pour lequel la licence est accordée (exploitant de lieu,
+          producteur, diffuseur, tourneur).
+          <br />
+          <br />
+          Pour toute information complémentaire veuillez consulter la plateforme
+          des entrepreneurs de spectacles vivants :{" "}
           <a
-            href="https://www.culture.gouv.fr/Thematiques/Theatre-spectacles/Pour-les-professionnels/Plateforme-des-entrepreneurs-de-spectacles-vivants-PLATESV#deux"
+            href="https://www.culture.gouv.fr/thematiques/theatre-spectacles/pour-les-professionnels/plateforme-des-entrepreneurs-de-spectacles-vivants"
             rel="noreferrer noopener"
             target="_blank"
           >
-            la plateforme PLATES
-          </a>{" "}
-          du <MC />.
-          <p>
-            Le <strong>numéro de récépissé est le numéro de déclaration</strong>
-            . Le récépissé est valide 30 jours après que le dossier ait été reçu
-            complet et conforme à la réglementation. Un récépissé de déclaration
-            au statut valide est <strong>valable pour cinq ans</strong>.
-          </p>
-          <p>
-            Si une déclaration que vous avez faite n’apparaît pas sur le tableau
-            après plus d’un mois, veuillez contacter{" "}
-            <a href="https://mesdemarches.culture.gouv.fr/loc_fr/mcc/?__CSRFTOKEN__=ade60dc8-891d-439e-b355-0438dea9a33c">
-              le service des démarches en lignes
-            </a>{" "}
-            du <MC />.
-          </p>
+            cliquez ici
+          </a>
+          <br />
+          <br />
+          <strong>Si cet organisme est votre organisme :</strong>
+          <br />
+          Pour toute question concernant le contenu de votre déclaration
+          veuillez consulter la direction des affaires régionales de votre
+          établissement principal.
+          <br />
+          Pour toute question technique veuillez consulter la page suivante :{" "}
+          <a
+            href="https://www.culture.gouv.fr/aides-demarches/prise-en-main-et-utilisation-de-demarches-simplifiees"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            cliquez ici
+          </a>
+          <br />
+          <br />
           <FullTable
             body={entrepreneurSpectacles.licences.map(
               ({
@@ -75,9 +94,9 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
                 categorie,
                 nomLieu,
                 type,
-                dateDepot,
                 dateValidite,
                 statut,
+                dateFinValidite,
               }) => [
                 <Tag>{numeroRecepisse}</Tag>,
                 <>
@@ -85,19 +104,14 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
                   <br />
                   {formatLicence(categorie, nomLieu)}
                 </>,
-                formatDate(dateDepot),
                 <Validity
                   dateDeValidite={dateValidite}
+                  dateFinValidite={dateFinValidite}
                   statut={(statut || "").toLowerCase()}
                 />,
               ]
             )}
-            head={[
-              "Numéro de récépissé",
-              "Type de déclaration",
-              "Date de dépôt",
-              "Validité",
-            ]}
+            head={["Numéro de récépissé", "Type de déclaration", "Validité"]}
           />
         </>
       );
@@ -141,7 +155,15 @@ const formatLicence = (categorie: string, type: string, nomLieu = "") => {
   }
 };
 
-const Validity = ({ statut = "", dateDeValidite = "" }) => {
+const Validity = ({
+  statut = "",
+  dateDeValidite,
+  dateFinValidite,
+}: {
+  statut: string;
+  dateDeValidite: string;
+  dateFinValidite: string | null;
+}) => {
   switch (statut) {
     case "valide":
       return (
@@ -169,7 +191,7 @@ const Validity = ({ statut = "", dateDeValidite = "" }) => {
           tabIndex={0}
         >
           <Tag color="error">Invalidé</Tag>
-          {dateDeValidite ? ` depuis le ${dateDeValidite}` : ""}
+          {dateFinValidite ? ` depuis le ${formatDate(dateFinValidite)}` : ""}
         </InformationTooltip>
       );
     case "invalide":
@@ -179,6 +201,7 @@ const Validity = ({ statut = "", dateDeValidite = "" }) => {
           tabIndex={0}
         >
           <Tag color="error">Invalide</Tag>
+          {dateFinValidite ? ` depuis le ${formatDate(dateFinValidite)}` : ""}
         </InformationTooltip>
       );
     case "expiré":
@@ -188,6 +211,7 @@ const Validity = ({ statut = "", dateDeValidite = "" }) => {
           tabIndex={0}
         >
           <Tag color="error">Expiré</Tag>
+          {dateFinValidite ? ` depuis le ${formatDate(dateFinValidite)}` : ""}
         </InformationTooltip>
       );
     default:
