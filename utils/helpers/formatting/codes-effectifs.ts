@@ -46,7 +46,7 @@ export const libelleTrancheEffectif = (
   }
 
   if (trancheEffectif === CUSTOM_CODE_TRANCHE_EFFECTIF_EMPLOYEUR) {
-    return "Unité employeuse (au moins un salarié au cours de l'année de référence)";
+    return "Unité employeuse (au moins un salarié)";
   }
 
   const libelle = trancheEffectif ? codesEffectifs[trancheEffectif] : null;
