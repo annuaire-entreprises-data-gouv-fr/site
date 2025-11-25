@@ -1,13 +1,15 @@
 import { agentRateLimiter } from "#clients/authentication/rate-limiter";
-import { HttpBadRequestError } from "#clients/exceptions";
 import {
-  type ApplicationRights,
+  HttpBadRequestError,
+  HttpUnauthorizedError,
+} from "#clients/exceptions";
+import {
+  ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import type { IDataFetchingState } from "#models/data-fetching";
 import { Exception } from "#models/exceptions";
-import getSession from "#utils/server-side-helper/get-session";
 import {
   type Fetcher,
   type IFetcherFactory,
@@ -35,16 +37,11 @@ export function verifyApplicationRight(
 }
 
 export async function verifyAgentRateLimit(sessionEmail?: string | null) {
-  const email =
-    sessionEmail !== undefined
-      ? sessionEmail
-      : (await getSession())?.user?.email;
-
-  if (!email) {
+  if (!sessionEmail) {
     throw new HttpBadRequestError("User email not found");
   }
 
-  await agentRateLimiter.verify(email);
+  await agentRateLimiter.verify(sessionEmail);
 }
 
 class AgentFetcherFactory<Args extends any[], Result>
@@ -74,6 +71,12 @@ class AgentFetcherFactory<Args extends any[], Result>
       async (...args: [...Args, session: ISession | null]) => {
         const session = args[args.length - 1] as ISession | null;
         const loaderArgs = args.slice(0, -1) as Args;
+
+        if (!hasRights(session, ApplicationRights.isAgent)) {
+          throw new HttpUnauthorizedError(
+            "Unauthorized: Agent access required"
+          );
+        }
 
         if (this._needsRateLimit) {
           await verifyAgentRateLimit(session?.user?.email);

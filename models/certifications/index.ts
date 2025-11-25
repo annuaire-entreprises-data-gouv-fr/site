@@ -39,7 +39,7 @@ export const getCertificationsFromSlug = async (
     entrepriseInclusive,
   ] = await Promise.all([
     getRGECertifications(uniteLegale),
-    clientEntrepreneursSpectacles(uniteLegale.siren),
+    clientEntrepreneursSpectacles(uniteLegale),
     getBio(uniteLegale),
     getEgapro(uniteLegale),
     getOrganismesDeFormation(uniteLegale),
