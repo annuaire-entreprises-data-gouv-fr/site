@@ -67,6 +67,8 @@ const mapToDomainObject = (
     numeroRecepisse: item.numero_recepisse,
     statut: item.statut_recepisse,
     dateValidite: item.date_validite,
+    dateFinValidite:
+      item.date_expire_licence || item.date_retrait_licence || null,
     dateDepot: item.date_depot_dossier,
     type: item.type_declaration,
     nomLieu: item.nom_lieu,

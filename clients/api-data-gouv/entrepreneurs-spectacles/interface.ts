@@ -40,6 +40,7 @@ type IEntrepreneursSpectaclesLicence = {
   numeroRecepisse: string;
   statut: string;
   dateValidite: string;
+  dateFinValidite: string | null;
   dateDepot: string;
   type: string;
   nomLieu: string;
