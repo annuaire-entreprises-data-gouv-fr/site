@@ -32,6 +32,7 @@ import {
   mapToEtablissement,
   mapToImmatriculation,
   mapToSiege,
+  mapToTrancheEffectif,
 } from "./mapToDomain";
 
 type ClientSearchRechercheEntreprise = {
@@ -229,6 +230,16 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
   const estPersonneMorale =
     isPersonneMoraleFromNatureJuridique(nature_juridique);
 
+  const isAtLeastEmployeur =
+    caractere_employeur === "O" ||
+    siege?.caractere_employeur === "O" ||
+    etablissements.some((e) => e.caractere_employeur === "O");
+
+  const trancheEffectif = mapToTrancheEffectif(
+    tranche_effectif_salarie,
+    isAtLeastEmployeur ? "O" : caractere_employeur
+  );
+
   return {
     ...createDefaultUniteLegale(siren),
     siege: etablissementSiege,
@@ -245,9 +256,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
     categorieEntreprise: categorie_entreprise,
     anneeCategorieEntreprise: annee_categorie_entreprise,
-    trancheEffectif:
-      tranche_effectif_salarie ??
-      (caractere_employeur === "N" ? caractere_employeur : null),
+    trancheEffectif,
     anneeTrancheEffectif: annee_tranche_effectif_salarie,
     chemin: result.slug || result.siren,
     natureJuridique: nature_juridique || "",

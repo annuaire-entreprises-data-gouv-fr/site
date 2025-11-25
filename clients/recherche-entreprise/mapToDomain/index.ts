@@ -28,6 +28,34 @@ import type {
   ISiege,
 } from "../interface";
 
+export const CUSTOM_CODE_TRANCHE_EFFECTIF_EMPLOYEUR = "__O__";
+
+/**
+ * Map tranche effectif from RNE to tranche effectif or custom code
+ * trancheEffectif is a statistics code and can be null / NN (no employees) even though caractereEmployeur can be O (employeur) or N (non employeur)
+ * so in case trancheEffectif is null / NN we try to fallback on caractereEmployeur
+ * @param trancheEffectif tranche effectif from RNE
+ * @param caractereEmployeur caractere employeur from RNE
+ * @returns tranche effectif or custom code
+ */
+export const mapToTrancheEffectif = <T>(
+  trancheEffectif: T,
+  caractereEmployeur: string | null
+): T | "N" | typeof CUSTOM_CODE_TRANCHE_EFFECTIF_EMPLOYEUR => {
+  if (!trancheEffectif && caractereEmployeur === "N") {
+    return "N";
+  }
+
+  if (
+    (!trancheEffectif || trancheEffectif === "NN") &&
+    caractereEmployeur === "O"
+  ) {
+    return CUSTOM_CODE_TRANCHE_EFFECTIF_EMPLOYEUR;
+  }
+
+  return trancheEffectif;
+};
+
 export const mapToImmatriculation = (i: IResult["immatriculation"] | null) => {
   if (!i) {
     return null;
@@ -176,10 +204,10 @@ export const mapToEtablissement = (
     codePostal: code_postal,
     commune: libelle_commune,
     adressePostale,
-    trancheEffectif:
-      caractere_employeur === "N"
-        ? caractere_employeur
-        : tranche_effectif_salarie,
+    trancheEffectif: mapToTrancheEffectif(
+      tranche_effectif_salarie,
+      caractere_employeur
+    ),
     anneeTrancheEffectif: annee_tranche_effectif_salarie,
     latitude,
     longitude,

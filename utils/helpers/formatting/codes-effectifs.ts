@@ -1,3 +1,4 @@
+import { CUSTOM_CODE_TRANCHE_EFFECTIF_EMPLOYEUR } from "#clients/recherche-entreprise/mapToDomain";
 import type { IUniteLegale } from "#models/core/types";
 
 export const codesEffectifsOptions = [
@@ -42,6 +43,10 @@ export const libelleTrancheEffectif = (
   if (trancheEffectif === "N") {
     // not an actual Insee value, we set it arbitrarily when caractereEmployeurUniteLegale is set to 'N' meaning unite legale does not have any employee
     return "Unité non employeuse";
+  }
+
+  if (trancheEffectif === CUSTOM_CODE_TRANCHE_EFFECTIF_EMPLOYEUR) {
+    return "Unité employeuse (au moins un salarié au cours de l'année de référence)";
   }
 
   const libelle = trancheEffectif ? codesEffectifs[trancheEffectif] : null;
