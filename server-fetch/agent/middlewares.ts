@@ -1,8 +1,5 @@
 import { agentRateLimiter } from "#clients/authentication/rate-limiter";
-import {
-  HttpBadRequestError,
-  HttpUnauthorizedError,
-} from "#clients/exceptions";
+import { HttpBadRequestError } from "#clients/exceptions";
 import {
   ApplicationRights,
   hasRights,
@@ -73,9 +70,9 @@ class AgentFetcherFactory<Args extends any[], Result>
         const loaderArgs = args.slice(0, -1) as Args;
 
         if (!hasRights(session, ApplicationRights.isAgent)) {
-          throw new HttpUnauthorizedError(
-            "Unauthorized: Agent access required"
-          );
+          throw new MissingApplicationRightException({
+            message: "Unauthorized: Agent access required",
+          });
         }
 
         if (this._needsRateLimit) {
