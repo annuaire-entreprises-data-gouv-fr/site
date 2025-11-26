@@ -2,6 +2,7 @@ import type { IDataFetchingState } from "#models/data-fetching";
 import {
   type Fetcher,
   type IFetcherFactory,
+  ignoreBot,
   withErrorHandler,
 } from "../middlewares";
 
@@ -15,7 +16,11 @@ class PublicFetcherFactory<Args extends any[], Result>
   ) => Promise<
     Result | Exclude<IDataFetchingState, IDataFetchingState.LOADING>
   > {
-    return withErrorHandler(async (...args: Args) => this.loader(...args));
+    return withErrorHandler(async (...args: Args) => {
+      await ignoreBot();
+
+      return this.loader(...args);
+    });
   }
 }
 

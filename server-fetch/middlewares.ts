@@ -1,3 +1,6 @@
+import { headers } from "next/headers";
+import { userAgent } from "next/server";
+import { HttpUnauthorizedError } from "#clients/exceptions";
 import type { IDataFetchingState } from "#models/data-fetching";
 import { convertErrorToFetchingState } from "#utils/helpers/convert-error";
 import { handleServerError } from "#utils/server-side-helper/handle-server-error";
@@ -14,6 +17,15 @@ export function withErrorHandler<T, Args extends any[]>(
       return convertErrorToFetchingState(formattedError.status);
     }
   };
+}
+
+export async function ignoreBot() {
+  const resolvedHeaders = await headers();
+  const { isBot } = userAgent({ headers: resolvedHeaders });
+
+  if (isBot) {
+    throw new HttpUnauthorizedError("Antibot activated : user is a bot");
+  }
 }
 
 export type Fetcher<Args extends any[], Result> = (
