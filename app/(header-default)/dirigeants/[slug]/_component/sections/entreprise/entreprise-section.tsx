@@ -24,10 +24,7 @@ export default function DirigeantsEntrepriseSection({
   return (
     <>
       {hasRights(session, ApplicationRights.mandatairesRCS) ? (
-        <DirigeantsSectionProtected
-          session={session}
-          uniteLegale={uniteLegale}
-        />
+        <DirigeantsSectionProtected uniteLegale={uniteLegale} />
       ) : (
         <DirigeantsSection session={session} uniteLegale={uniteLegale} />
       )}

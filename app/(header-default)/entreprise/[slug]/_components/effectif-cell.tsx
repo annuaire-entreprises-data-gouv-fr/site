@@ -27,14 +27,11 @@ export const FAQEffectifAnnuel = () => (
 
 export const ProtectedEffectifCell = ({
   uniteLegale,
-  session,
 }: {
   uniteLegale: IUniteLegale;
-  session: ISession | null;
 }) => {
   const effectifsAnnuelsProtected = getAgentEffectifsAnnuelsProtectedFetcher(
-    uniteLegale.siren,
-    session
+    uniteLegale.siren
   );
 
   return (
@@ -74,7 +71,7 @@ export const EffectifCell = ({
           <span>
             <FAQEffectifAnnuel /> (<GIPMDS />) :{" "}
           </span>
-          <ProtectedEffectifCell session={session} uniteLegale={uniteLegale} />
+          <ProtectedEffectifCell uniteLegale={uniteLegale} />
         </li>
       </ul>
     );

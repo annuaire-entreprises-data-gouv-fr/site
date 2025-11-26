@@ -6,7 +6,6 @@ import {
 } from "server-fetch/agent";
 import NonRenseigne from "#components/non-renseigne";
 import { ProtectedInlineData } from "#components/protected-inline-data";
-import type { ISession } from "#models/authentication/user/session";
 import { hasAnyError } from "#models/data-fetching";
 import type { IUniteLegale } from "../../../models/core/types";
 import {
@@ -17,14 +16,13 @@ import { LabelWithLinkToSection } from "./label-with-link-to-section";
 
 export const ProtectedCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = async ({ uniteLegale, session }) => {
+}> = async ({ uniteLegale }) => {
   const hasOtherCertificates = checkHasLabelsAndCertificates(uniteLegale);
 
   const [opqibi, qualibat, qualifelec] = await Promise.all([
-    getOpqibiFetcher(uniteLegale.siren, session),
-    getQualibatFetcher(uniteLegale.siege.siret, session),
-    getQualifelecFetcher(uniteLegale.siege.siret, session),
+    getOpqibiFetcher(uniteLegale.siren),
+    getQualibatFetcher(uniteLegale.siege.siret),
+    getQualifelecFetcher(uniteLegale.siege.siret),
   ]);
 
   const protectedCertificates = [
