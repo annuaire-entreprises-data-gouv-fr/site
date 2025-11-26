@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IBilansProtected } from "#models/espace-agent/bilans";
 import type { UseCase } from "#models/use-cases";
 import type { Siren } from "#utils/helpers";
@@ -10,12 +11,14 @@ import type { IAPIEntrepriseBanqueDeFranceBilans } from "./types";
  */
 export async function clientApiEntrepriseBilans(
   siren: Siren,
+  scope: IAgentScope | null,
   useCase?: UseCase
 ) {
   return await clientAPIEntreprise<
     IAPIEntrepriseBanqueDeFranceBilans,
     IBilansProtected
   >(routes.apiEntreprise.banqueDeFrance.bilans(siren), mapToDomainObject, {
+    scope,
     useCase,
   });
 }

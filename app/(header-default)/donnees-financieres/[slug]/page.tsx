@@ -41,10 +41,7 @@ const FinancePage = async (props: AppRouterProps) => {
           uniteLegale={uniteLegale}
         />
         {isAssociation(uniteLegale) ? (
-          <DonneesFinancieresAssociation
-            session={session}
-            uniteLegale={uniteLegale}
-          />
+          <DonneesFinancieresAssociation uniteLegale={uniteLegale} />
         ) : (
           <DonneesFinancieresSociete
             session={session}

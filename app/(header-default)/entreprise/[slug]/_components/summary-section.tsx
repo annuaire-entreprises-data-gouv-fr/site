@@ -141,10 +141,7 @@ const UniteLegaleSummarySection: React.FC<{
               checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
             }abels et certificats`,
             <Suspense fallback={<Loader />}>
-              <ProtectedCertificatesBadgesSection
-                session={session}
-                uniteLegale={uniteLegale}
-              />
+              <ProtectedCertificatesBadgesSection uniteLegale={uniteLegale} />
             </Suspense>,
           ],
         ]

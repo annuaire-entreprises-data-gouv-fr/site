@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IConformiteFiscale } from "#models/espace-agent/conformite";
 import type { UseCase } from "#models/use-cases";
 import type { Siren } from "#utils/helpers";
@@ -16,12 +17,14 @@ export type IAPIEntrepriseConformiteFiscale = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseConformiteFiscale = async (
   siren: Siren,
+  scope: IAgentScope | null,
   useCase?: UseCase
 ) =>
   await clientAPIEntreprise<
     IAPIEntrepriseConformiteFiscale,
     IConformiteFiscale
   >(routes.apiEntreprise.conformite.fiscale(siren), mapToDomainObject, {
+    scope,
     useCase,
   });
 

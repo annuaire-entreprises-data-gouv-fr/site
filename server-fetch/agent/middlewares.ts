@@ -7,6 +7,7 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 import type { IDataFetchingState } from "#models/data-fetching";
 import { Exception } from "#models/exceptions";
+import getSession from "#utils/server-side-helper/get-session";
 import {
   type Fetcher,
   type IFetcherFactory,
@@ -43,7 +44,7 @@ export async function verifyAgentRateLimit(sessionEmail?: string | null) {
 }
 
 class AgentFetcherFactory<Args extends any[], Result>
-  implements IFetcherFactory<[...Args, session: ISession | null], Result>
+  implements IFetcherFactory<Args, Result>
 {
   private _needsRateLimit = false;
   private _requiredRight: ApplicationRights | null = null;
@@ -61,34 +62,31 @@ class AgentFetcherFactory<Args extends any[], Result>
   }
 
   build(): (
-    ...args: [...Args, session: ISession | null]
+    ...args: Args
   ) => Promise<
     Result | Exclude<IDataFetchingState, IDataFetchingState.LOADING>
   > {
-    return withErrorHandler(
-      async (...args: [...Args, session: ISession | null]) => {
-        const session = args[args.length - 1] as ISession | null;
-        const loaderArgs = args.slice(0, -1) as Args;
+    return withErrorHandler(async (...args: Args) => {
+      const session = await getSession();
 
-        if (!hasRights(session, ApplicationRights.isAgent)) {
-          throw new MissingApplicationRightException({
-            message: "Unauthorized: Agent access required",
-          });
-        }
-
-        await ignoreBot();
-
-        if (this._needsRateLimit) {
-          await verifyAgentRateLimit(session?.user?.email);
-        }
-
-        if (this._requiredRight) {
-          verifyApplicationRight(session, this._requiredRight);
-        }
-
-        return this.loader(...loaderArgs);
+      if (!hasRights(session, ApplicationRights.isAgent)) {
+        throw new MissingApplicationRightException({
+          message: "Unauthorized: Agent access required",
+        });
       }
-    );
+
+      await ignoreBot();
+
+      if (this._needsRateLimit) {
+        await verifyAgentRateLimit(session?.user?.email);
+      }
+
+      if (this._requiredRight) {
+        verifyApplicationRight(session, this._requiredRight);
+      }
+
+      return this.loader(...args);
+    });
   }
 }
 

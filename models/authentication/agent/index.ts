@@ -10,6 +10,7 @@ export type IAgentInfo = {
   fullName: string;
   siret: string;
   scopes: IAgentScope[];
+  groupsScopes: Record<string, IAgentScope[]>;
   userType: string;
   isSuperAgent: boolean;
 };

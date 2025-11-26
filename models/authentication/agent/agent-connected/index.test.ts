@@ -158,6 +158,9 @@ describe("AgentConnected", () => {
 
       expect(result).toEqual({
         scopes: expect.arrayContaining([...groupScopes]),
+        groupsScopes: {
+          "123456789": groupScopes,
+        },
         userType: "Super-agent connecté",
         isSuperAgent: true,
       });
@@ -223,6 +226,9 @@ describe("AgentConnected", () => {
         fullName: "John Doe",
         siret: "12345678900000",
         scopes: expect.arrayContaining(groupScopes),
+        groupsScopes: {
+          "123456789": groupScopes,
+        },
         userType: "Super-agent connecté",
         isSuperAgent: true,
       });

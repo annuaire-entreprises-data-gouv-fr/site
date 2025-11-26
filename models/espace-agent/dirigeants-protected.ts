@@ -5,6 +5,10 @@ import {
   isAPI404,
   isAPINotResponding,
 } from "#models/api-not-responding";
+import {
+  ApplicationRights,
+  ApplicationRightsToScopes,
+} from "#models/authentication/user/rights";
 import { InternalError } from "#models/exceptions";
 import { getDirigeantsRNE } from "#models/rne/dirigeants";
 import type {
@@ -18,12 +22,15 @@ import { mergeDirigeants } from "./utils";
 
 export const getDirigeantsProtected = async (
   maybeSiren: string,
-  isEI?: boolean
+  isEI: boolean
 ): Promise<IDirigeantsWithMetadataMergedIGInpi | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
 
   const [dirigeantsRCS, dirigeantsRNE] = await Promise.all([
-    getMandatairesRCS(siren),
+    getMandatairesRCS(
+      siren,
+      ApplicationRightsToScopes[ApplicationRights.mandatairesRCS]
+    ),
     getDirigeantsRNE(siren),
   ]);
 

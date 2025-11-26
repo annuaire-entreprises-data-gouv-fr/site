@@ -24,6 +24,21 @@ export const GET = withSession(async function callbackRoute(req) {
     const userInfo = await proConnectAuthenticate(req);
     siretForException = userInfo.siret;
 
+    // Ministère de la Justice – temporary log to debug Proconnect fix
+    if (userInfo.idp_id === "9e139e69-de07-4cbe-987f-d12cb38c0368") {
+      console.info(
+        `[DEBUG] ${userInfo.idp_id} - siret received: ${userInfo.siret}`
+      );
+      logWarningInSentry(
+        new Information({
+          name: "MinistereDeLaJusticeSiretExceptionnalLogs",
+          context: {
+            details: `${userInfo.idp_id} - siret: ${userInfo.siret}`,
+          },
+        })
+      );
+    }
+
     if (!userInfo.siret) {
       logWarningInSentry(
         new Information({

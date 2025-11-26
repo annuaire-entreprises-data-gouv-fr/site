@@ -2,15 +2,13 @@ import { getAgentRNEDocumentsFetcher } from "server-fetch/agent";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { Info } from "#components-ui/alerts";
 import { EAdministration } from "#models/administrations/EAdministration";
-import type { ISession } from "#models/authentication/user/session";
 import { type IUniteLegale, isServicePublic } from "#models/core/types";
 import RNEContent from "./rne-content";
 
 export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
-  const documentsRne = getAgentRNEDocumentsFetcher(uniteLegale.siren, session);
+}> = ({ uniteLegale }) => {
+  const documentsRne = getAgentRNEDocumentsFetcher(uniteLegale.siren);
 
   return (
     <AsyncDataSectionServer

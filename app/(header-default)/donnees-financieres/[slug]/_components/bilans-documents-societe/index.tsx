@@ -30,7 +30,7 @@ export function BilansDocumentsSociete({
   return (
     <>
       <HorizontalSeparator />
-      <AgentBilansSection session={session} uniteLegale={uniteLegale} />
+      <AgentBilansSection uniteLegale={uniteLegale} />
     </>
   );
 }

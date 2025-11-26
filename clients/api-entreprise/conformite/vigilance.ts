@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IConformiteVigilance } from "#models/espace-agent/conformite";
 import type { UseCase } from "#models/use-cases";
 import type { Siren } from "#utils/helpers";
@@ -21,12 +22,14 @@ export type IAPIEntrepriseConformiteVigilance = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseConformiteVigilance = async (
   siren: Siren,
+  scope: IAgentScope | null,
   useCase?: UseCase
 ) =>
   await clientAPIEntreprise<
     IAPIEntrepriseConformiteVigilance,
     IConformiteVigilance
   >(routes.apiEntreprise.conformite.vigilance(siren), mapToDomainObject, {
+    scope,
     useCase,
   });
 

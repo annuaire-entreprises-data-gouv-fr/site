@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type {
   IDirigeants,
   IEtatCivil,
@@ -42,10 +43,14 @@ export type IAPIEntrepriseMandatairesRCS = IAPIEntrepriseResponse<
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseMandatairesRCS = async (siren: Siren) =>
+export const clientApiEntrepriseMandatairesRCS = async (
+  siren: Siren,
+  scope: IAgentScope | null
+) =>
   await clientAPIEntreprise<IAPIEntrepriseMandatairesRCS, IDirigeants>(
     routes.apiEntreprise.mandatairesRCS(siren),
-    mapToDomainObject
+    mapToDomainObject,
+    { scope }
   );
 
 const mapToDomainObject = (

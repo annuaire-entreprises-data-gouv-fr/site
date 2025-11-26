@@ -1,5 +1,9 @@
 import { clientApiEntrepriseQualibat } from "#clients/api-entreprise/certificats/qualibat";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
+import {
+  ApplicationRights,
+  ApplicationRightsToScopes,
+} from "#models/authentication/user/rights";
 import { verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 export type IQualibat = {
@@ -28,7 +32,10 @@ export const getQualibat = async (
   maybeSiret: string
 ): Promise<IQualibat | IAPINotRespondingError> => {
   const siret = verifySiret(maybeSiret);
-  return clientApiEntrepriseQualibat(siret).catch((error) =>
+  return clientApiEntrepriseQualibat(
+    siret,
+    ApplicationRightsToScopes[ApplicationRights.protectedCertificats]
+  ).catch((error) =>
     handleApiEntrepriseError(error, { siret, apiResource: "Qualibat" })
   );
 };

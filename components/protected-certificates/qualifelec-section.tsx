@@ -1,18 +1,15 @@
 import { getQualifelecFetcher } from "server-fetch/agent";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { EAdministration } from "#models/administrations/EAdministration";
-import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import { QualifelecContent } from "./qualifelec-content";
 
 export function QualifelecSection({
   uniteLegale,
-  session,
 }: {
   uniteLegale: IUniteLegale;
-  session: ISession | null;
 }) {
-  const qualifelec = getQualifelecFetcher(uniteLegale.siege.siret, session);
+  const qualifelec = getQualifelecFetcher(uniteLegale.siege.siret);
 
   return (
     <AsyncDataSectionServer

@@ -1,4 +1,5 @@
 import routes from "#clients/routes";
+import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IDocumentDownloader } from "#models/espace-agent/travaux-publics";
 import type { UseCase } from "#models/use-cases";
 import type { Siren, Siret } from "#utils/helpers";
@@ -14,12 +15,13 @@ export type IAPIEntrepriseDocumentTravauxPublics = IAPIEntrepriseResponse<{
  */
 export const clientApiEntrepriseCibtp = async (
   siret: Siret,
+  scope: IAgentScope | null,
   useCase?: UseCase
 ) =>
   await clientAPIEntreprise(
     routes.apiEntreprise.certifications.cibtp(siret),
     mapToDomainObject,
-    { useCase }
+    { scope, useCase }
   );
 
 /**
@@ -27,12 +29,13 @@ export const clientApiEntrepriseCibtp = async (
  */
 export const clientApiEntrepriseProbtp = async (
   siret: Siret,
+  scope: IAgentScope | null,
   useCase?: UseCase
 ) =>
   await clientAPIEntreprise(
     routes.apiEntreprise.certifications.probtp(siret),
     mapToDomainObject,
-    { useCase }
+    { scope, useCase }
   );
 
 /**
@@ -40,12 +43,13 @@ export const clientApiEntrepriseProbtp = async (
  */
 export const clientApiEntrepriseCnetp = async (
   siren: Siren,
+  scope: IAgentScope | null,
   useCase?: UseCase
 ) =>
   await clientAPIEntreprise(
     routes.apiEntreprise.certifications.cnetp(siren),
     mapToDomainObject,
-    { useCase }
+    { scope, useCase }
   );
 
 /**
@@ -53,12 +57,13 @@ export const clientApiEntrepriseCnetp = async (
  */
 export const clientApiEntrepriseCarteProfessionnelleTravauxPublics = async (
   siren: Siren,
+  scope: IAgentScope | null,
   useCase?: UseCase
 ) =>
   await clientAPIEntreprise(
     routes.apiEntreprise.carteProfessionnelleTravauxPublics(siren),
     mapToDomainObject,
-    { useCase }
+    { scope, useCase }
   );
 
 const mapToDomainObject = (

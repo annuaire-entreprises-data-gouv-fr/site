@@ -1,7 +1,6 @@
 import { getDirigeantsProtectedFetcher } from "server-fetch/agent";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { EAdministration } from "#models/administrations/EAdministration";
-import type { ISession } from "#models/authentication/user/session";
 import {
   type IUniteLegale,
   isEntrepreneurIndividuel,
@@ -10,22 +9,14 @@ import DirigeantsContentProtected from "./content";
 
 type IProps = {
   uniteLegale: IUniteLegale;
-  session: ISession | null;
 };
 
 /**
  * Dirigeants section protected
  */
-export default function DirigeantsSectionProtected({
-  uniteLegale,
-  session,
-}: IProps) {
+export default function DirigeantsSectionProtected({ uniteLegale }: IProps) {
   const isEI = isEntrepreneurIndividuel(uniteLegale);
-  const dirigeants = getDirigeantsProtectedFetcher(
-    uniteLegale.siren,
-    isEI,
-    session
-  );
+  const dirigeants = getDirigeantsProtectedFetcher(uniteLegale.siren, isEI);
 
   return (
     <AsyncDataSectionServer

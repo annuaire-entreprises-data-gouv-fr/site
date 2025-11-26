@@ -1,15 +1,13 @@
 import { getOpqibiFetcher } from "server-fetch/agent";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { EAdministration } from "#models/administrations/EAdministration";
-import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import { OpqibiContent } from "./opqibi-content";
 
 export const OpqibiSection: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
-  const data = getOpqibiFetcher(uniteLegale.siren, session);
+}> = ({ uniteLegale }) => {
+  const data = getOpqibiFetcher(uniteLegale.siren);
 
   return (
     <AsyncDataSectionServer

@@ -1,15 +1,13 @@
 import { getQualibatFetcher } from "server-fetch/agent";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { EAdministration } from "#models/administrations/EAdministration";
-import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import { QualibatContent } from "./qualibat-content";
 
 export const QualibatSection: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
-  const qualibat = getQualibatFetcher(uniteLegale.siege.siret, session);
+}> = ({ uniteLegale }) => {
+  const qualibat = getQualibatFetcher(uniteLegale.siege.siret);
   return (
     <AsyncDataSectionServer
       ContentComponent={QualibatContent}

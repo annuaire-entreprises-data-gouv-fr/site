@@ -1,5 +1,9 @@
 import { clientApiEntrepriseEffectifsAnnuels } from "#clients/api-entreprise/effectifs/annuels";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
+import {
+  ApplicationRights,
+  ApplicationRightsToScopes,
+} from "#models/authentication/user/rights";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 
@@ -18,11 +22,14 @@ export const getEffectifsAnnuelsProtected = async (
 
   const effectifsAnnuelsYear =
     currentMonth === 0 ? currentYear - 2 : currentYear - 1;
-  return clientApiEntrepriseEffectifsAnnuels(siren, effectifsAnnuelsYear).catch(
-    (error) =>
-      handleApiEntrepriseError(error, {
-        siren,
-        apiResource: "EffectifsAnnuelsProtected",
-      })
+  return clientApiEntrepriseEffectifsAnnuels(
+    siren,
+    effectifsAnnuelsYear,
+    ApplicationRightsToScopes[ApplicationRights.effectifsAnnuels]
+  ).catch((error) =>
+    handleApiEntrepriseError(error, {
+      siren,
+      apiResource: "EffectifsAnnuelsProtected",
+    })
   );
 };

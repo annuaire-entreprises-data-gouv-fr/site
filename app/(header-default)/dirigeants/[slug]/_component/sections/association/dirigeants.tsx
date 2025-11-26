@@ -2,22 +2,19 @@ import { getAgentAssociationProtectedFetcher } from "server-fetch/agent";
 import AgentWallAssociationProtected from "#components/espace-agent-components/agent-wall/association";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { EAdministration } from "#models/administrations/EAdministration";
-import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import { DirigeantsAssociationContent, NoDirigeants } from "./content";
 
 type IProps = {
   uniteLegale: IUniteLegale;
-  session: ISession | null;
 };
 
 /**
  * Dirigeants for agents : RNA or Le compte asso
  */
-function DirigeantsAssociationSection({ uniteLegale, session }: IProps) {
+function DirigeantsAssociationSection({ uniteLegale }: IProps) {
   const associationProtected = getAgentAssociationProtectedFetcher(
-    uniteLegale.siren,
-    session
+    uniteLegale.siren
   );
 
   return (
