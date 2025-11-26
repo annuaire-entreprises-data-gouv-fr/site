@@ -10,6 +10,7 @@ import { Exception } from "#models/exceptions";
 import {
   type Fetcher,
   type IFetcherFactory,
+  ignoreBot,
   withErrorHandler,
 } from "../middlewares";
 
@@ -74,6 +75,8 @@ class AgentFetcherFactory<Args extends any[], Result>
             message: "Unauthorized: Agent access required",
           });
         }
+
+        await ignoreBot();
 
         if (this._needsRateLimit) {
           await verifyAgentRateLimit(session?.user?.email);
