@@ -3,7 +3,9 @@
 import { useCallback } from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
+import { Exception } from "#models/exceptions";
 import { isSiren } from "#utils/helpers";
+import { logWarningInSentry } from "#utils/sentry";
 
 type QrCodeProps = {
   siren: string;
@@ -11,17 +13,26 @@ type QrCodeProps = {
 
 export function QrCode({ siren }: QrCodeProps) {
   const onDownload = useCallback(async () => {
-    const path = `${isSiren(siren) ? "entreprise" : "etablissement"}/${siren}`;
-    const uri = encodeURI(
-      `https://annuaire-entreprises.data.gouv.fr/${path}?mtm_campaign=qr-code`
-    );
-    const qrCode = await createQRCode(uri);
-    const qrCodeUrl = URL.createObjectURL(qrCode);
-    const a = document.createElement("a");
-    a.href = qrCodeUrl;
-    a.download = `QR_code_page_${siren}.png`;
-    a.click();
-    URL.revokeObjectURL(qrCodeUrl);
+    try {
+      const path = `${isSiren(siren) ? "entreprise" : "etablissement"}/${siren}`;
+      const uri = encodeURI(
+        `https://annuaire-entreprises.data.gouv.fr/${path}?mtm_campaign=qr-code`
+      );
+      const qrCode = await createQRCode(uri);
+      const qrCodeUrl = URL.createObjectURL(qrCode);
+      const a = document.createElement("a");
+      a.href = qrCodeUrl;
+      a.download = `QR_code_page_${siren}.png`;
+      a.click();
+      URL.revokeObjectURL(qrCodeUrl);
+    } catch (e) {
+      logWarningInSentry(
+        new Exception({
+          name: "QRCodeGeneratorFailed",
+          message: e instanceof Error ? e.message : "unknown error",
+        })
+      );
+    }
   }, [siren]);
 
   return (
