@@ -34,7 +34,7 @@
           "commune": "GAGNY",
           "activitePrincipale": "70.22Z",
           "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-          "trancheEffectif": "N",
+          "trancheEffectif": "NN",
           "anneeTrancheEffectif": null,
           "latitude": "48.886494",
           "longitude": "2.542338",
@@ -81,7 +81,7 @@
               "commune": "GAGNY",
               "activitePrincipale": "70.22Z",
               "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
               "latitude": "48.886494",
               "longitude": "2.542338",
@@ -122,7 +122,7 @@
               "commune": "GAGNY",
               "activitePrincipale": "70.22Z",
               "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
               "latitude": "48.886494",
               "longitude": "2.542338",
@@ -211,7 +211,9 @@
             "prenoms": "Raphael",
             "role": "",
             "nationalite": null,
-            "dateNaissancePartial": null
+            "dateNaissancePartial": null,
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }

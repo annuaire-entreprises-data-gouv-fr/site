@@ -211,7 +211,9 @@
             "prenoms": "Claire",
             "role": "",
             "nationalite": null,
-            "dateNaissancePartial": null
+            "dateNaissancePartial": null,
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }

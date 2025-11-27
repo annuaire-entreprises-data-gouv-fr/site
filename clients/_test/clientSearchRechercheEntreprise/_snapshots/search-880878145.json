@@ -34,7 +34,7 @@
           "commune": "PARIS 8",
           "activitePrincipale": "62.02A",
           "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-          "trancheEffectif": "N",
+          "trancheEffectif": "NN",
           "anneeTrancheEffectif": null,
           "latitude": "48.870938",
           "longitude": "2.305917",
@@ -81,7 +81,7 @@
               "commune": "PARIS 8",
               "activitePrincipale": "62.02A",
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
               "latitude": "48.870938",
               "longitude": "2.305917",
@@ -122,7 +122,7 @@
               "commune": "PARIS 8",
               "activitePrincipale": "62.02A",
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
               "latitude": "48.870938",
               "longitude": "2.305917",
@@ -211,7 +211,9 @@
             "prenoms": "Xavier, Marie, Erwan",
             "role": "LIQUIDATEUR",
             "nationalite": "Française",
-            "dateNaissancePartial": "1990-02"
+            "dateNaissancePartial": "1990-02",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }

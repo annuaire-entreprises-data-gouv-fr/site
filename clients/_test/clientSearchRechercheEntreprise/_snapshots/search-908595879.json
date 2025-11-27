@@ -231,7 +231,9 @@
             "prenoms": "Pierre",
             "role": "PRESIDENT DE SAS",
             "nationalite": "Française",
-            "dateNaissancePartial": "1985-12"
+            "dateNaissancePartial": "1985-12",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }

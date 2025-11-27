@@ -34,7 +34,7 @@
           "commune": "RENNES",
           "activitePrincipale": "68.20A",
           "libelleActivitePrincipale": "Location de logements (68.20A)",
-          "trancheEffectif": "N",
+          "trancheEffectif": "NN",
           "anneeTrancheEffectif": null,
           "latitude": "[NON-DIFFUSIBLE]",
           "longitude": "[NON-DIFFUSIBLE]",
@@ -81,7 +81,7 @@
               "commune": "RENNES",
               "activitePrincipale": "68.20A",
               "libelleActivitePrincipale": "Location de logements (68.20A)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
               "latitude": "[NON-DIFFUSIBLE]",
               "longitude": "[NON-DIFFUSIBLE]",
@@ -120,7 +120,7 @@
               "commune": "RENNES",
               "activitePrincipale": "68.20A",
               "libelleActivitePrincipale": "Location de logements (68.20A)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
               "latitude": "[NON-DIFFUSIBLE]",
               "longitude": "[NON-DIFFUSIBLE]",
@@ -211,7 +211,9 @@
             "prenoms": "[non-Diffusible]",
             "role": "",
             "nationalite": "[NON-DIFFUSIBLE]",
-            "dateNaissancePartial": "[NON-DIFFUSIBLE]"
+            "dateNaissancePartial": "[NON-DIFFUSIBLE]",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }

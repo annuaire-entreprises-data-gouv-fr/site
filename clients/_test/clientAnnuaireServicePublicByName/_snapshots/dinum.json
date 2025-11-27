@@ -20,7 +20,7 @@
       },
       {
         "nom": "Floriane BEAUDRON",
-        "fonction": "Cheffe de la mission communication",
+        "fonction": "Responsable de la mission communication",
         "lienTexteAffectation": {
           "libelle": "JORF n°0206 du 5 septembre 2025",
           "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052193643"
@@ -35,11 +35,27 @@
         }
       },
       {
-        "nom": "Emmanuelle MERLIN",
-        "fonction": "Cheffe de la mission Europe et International",
+        "nom": "Arnaud GODDAT",
+        "fonction": "Responsable de la mission Pilotage des ressources financières et marchés",
         "lienTexteAffectation": {
-          "libelle": "JORF n°0236 du 11 octobre 2023",
-          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000048186298"
+          "libelle": "JORF n°0206 du 5 septembre 2025",
+          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052193643"
+        }
+      },
+      {
+        "nom": "Cécile LE GUEN",
+        "fonction": "Administratrice générale des données déléguée de la DINUM",
+        "lienTexteAffectation": {
+          "libelle": "",
+          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052193643"
+        }
+      },
+      {
+        "nom": "Frédéric CULLE",
+        "fonction": "Responsable de la cellule cyber, responsable sécurité des systèmes d'information",
+        "lienTexteAffectation": {
+          "libelle": "",
+          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052193643"
         }
       }
     ],
