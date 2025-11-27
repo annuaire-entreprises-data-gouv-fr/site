@@ -8,12 +8,7 @@ import {
   OrganisationNotAnAdministration,
   PrestataireException,
 } from "#models/authentication/authentication-exceptions";
-import { Information } from "#models/exceptions";
-import {
-  logFatalErrorInSentry,
-  logInfoInSentry,
-  logWarningInSentry,
-} from "#utils/sentry";
+import { logFatalErrorInSentry, logInfoInSentry } from "#utils/sentry";
 import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 import { cleanPathFrom, getPathFrom, setAgentSession } from "#utils/session";
 import withSession from "#utils/session/with-session";
@@ -23,39 +18,6 @@ export const GET = withSession(async function callbackRoute(req) {
   try {
     const userInfo = await proConnectAuthenticate(req);
     siretForException = userInfo.siret;
-
-    // Ministère de la Justice – temporary log to debug Proconnect fix
-    if (userInfo.idp_id === "9e139e69-de07-4cbe-987f-d12cb38c0368") {
-      console.info(
-        `[DEBUG] ${userInfo.idp_id} - siret received: ${userInfo.siret}`
-      );
-      logWarningInSentry(
-        new Information({
-          name: "MinistereDeLaJusticeSiretExceptionnalLogs",
-          context: {
-            details: `${userInfo.idp_id} - siret: ${userInfo.siret}`,
-          },
-        })
-      );
-    }
-
-    if (!userInfo.siret) {
-      logWarningInSentry(
-        new Information({
-          name: "NoSiretExceptionnalLogs",
-          context: {
-            details: `${userInfo.idp_id} - siret: ${userInfo.siret}`,
-          },
-        })
-      );
-      if (userInfo.idp_id === "9e139e69-de07-4cbe-987f-d12cb38c0368") {
-        console.info(
-          `[DEBUG] ${userInfo.idp_id} - siret received: ${userInfo.siret}`
-        );
-        // Ministère de la Justice – temporary workaround until Proconnect fix
-        userInfo.siret = "11001001400014";
-      }
-    }
 
     const agent = new AgentConnected(userInfo);
 

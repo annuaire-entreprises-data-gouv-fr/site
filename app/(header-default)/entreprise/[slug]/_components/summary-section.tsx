@@ -106,7 +106,13 @@ const UniteLegaleSummarySection: React.FC<{
     ],
     ["Forme juridique", uniteLegale.libelleNatureJuridique],
     [
-      "Effectif salarié",
+      <FAQLink tooltipLabel="Effectif salarié">
+        L’effectif salarié est une variable qui s’affiche à partir de deux
+        données de l’Insee : la tranche d’effectifs salariés, qui est une
+        variable statistique (données arrêtées au 31/12 de l’année n-2), et le
+        caractère employeur des établissements (données déclaratives maintenues
+        par l'URSSAF).
+      </FAQLink>,
       <EffectifCell session={session} uniteLegale={uniteLegale} />,
     ],
     [
