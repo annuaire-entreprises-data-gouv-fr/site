@@ -62,11 +62,11 @@
               "title": ""
             },
             {
-              "idcc": "2420",
+              "idcc": "1596",
               "title": ""
             },
             {
-              "idcc": "1596",
+              "idcc": "2420",
               "title": ""
             }
           ]
@@ -131,11 +131,11 @@
                   "title": ""
                 },
                 {
-                  "idcc": "2420",
+                  "idcc": "1596",
                   "title": ""
                 },
                 {
-                  "idcc": "1596",
+                  "idcc": "2420",
                   "title": ""
                 }
               ]
@@ -192,11 +192,11 @@
                   "title": ""
                 },
                 {
-                  "idcc": "2420",
+                  "idcc": "1596",
                   "title": ""
                 },
                 {
-                  "idcc": "1596",
+                  "idcc": "2420",
                   "title": ""
                 }
               ]
@@ -255,11 +255,11 @@
         },
         "listeIdcc": [
           {
-            "idcc": "1596",
+            "idcc": "2609",
             "title": ""
           },
           {
-            "idcc": "2609",
+            "idcc": "1596",
             "title": ""
           },
           {
@@ -273,7 +273,10 @@
           "dateImmatriculation": "2018-11-12",
           "duree": 99,
           "dateFin": "12/11/2117",
-          "natureEntreprise": ["Artisanale réglementée", "Commerciale"],
+          "natureEntreprise": [
+            "Artisanale réglementée",
+            "Commerciale"
+          ],
           "dateCloture": "3112",
           "isPersonneMorale": true,
           "capital": "5 000,00 € (fixe)"
@@ -290,7 +293,9 @@
             "prenoms": "Lionel, Andre",
             "role": "",
             "nationalite": null,
-            "dateNaissancePartial": "1981-04"
+            "dateNaissancePartial": "1981-04",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }

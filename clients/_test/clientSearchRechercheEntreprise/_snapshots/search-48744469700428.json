@@ -34,7 +34,7 @@
           "commune": "BOULAZAC ISLE MANOIRE",
           "activitePrincipale": "43.21A",
           "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
-          "trancheEffectif": "N",
+          "trancheEffectif": "12",
           "anneeTrancheEffectif": "2023",
           "latitude": "45.150722",
           "longitude": "0.788652",
@@ -81,7 +81,7 @@
               "commune": "BOULAZAC ISLE MANOIRE",
               "activitePrincipale": "43.21A",
               "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "12",
               "anneeTrancheEffectif": "2023",
               "latitude": "45.150722",
               "longitude": "0.788652",
@@ -120,7 +120,7 @@
               "commune": "BOULAZAC ISLE MANOIRE",
               "activitePrincipale": "43.21A",
               "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "12",
               "anneeTrancheEffectif": "2023",
               "latitude": "45.150722",
               "longitude": "0.788652",
@@ -227,7 +227,7 @@
             "commune": "BOULAZAC ISLE MANOIRE",
             "activitePrincipale": "43.21A",
             "libelleActivitePrincipale": "Travaux d’installation électrique dans tous locaux (43.21A)",
-            "trancheEffectif": "N",
+            "trancheEffectif": "12",
             "anneeTrancheEffectif": "2023",
             "latitude": "45.150722",
             "longitude": "0.788652",
@@ -253,7 +253,9 @@
             "prenoms": "David, Jean, Claude",
             "role": "GERANT",
             "nationalite": null,
-            "dateNaissancePartial": "1965-10"
+            "dateNaissancePartial": "1965-10",
+            "estDemissionnaire": false,
+            "dateDemission": null
           },
           {
             "sexe": null,
@@ -262,7 +264,9 @@
             "prenoms": "David, Jean-Claude",
             "role": "GERANT",
             "nationalite": null,
-            "dateNaissancePartial": "1965-10"
+            "dateNaissancePartial": "1965-10",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }

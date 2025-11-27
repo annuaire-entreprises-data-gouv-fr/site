@@ -1,0 +1,39 @@
+{
+  "args": [
+    {
+      "siren": "800329849",
+      "complements": {
+        "estEntrepreneurSpectacle": true
+      }
+    }
+  ],
+  "result": {
+    "licences": [
+      {
+        "categorie": "2",
+        "numeroRecepisse": "PLATESV-R-2021-006193",
+        "statut": "Invalide",
+        "dateValidite": null,
+        "dateFinValidite": null,
+        "dateDepot": "2021-05-18",
+        "type": "Renouvellement",
+        "nomLieu": null
+      },
+      {
+        "categorie": "2",
+        "numeroRecepisse": "PLATESV-R-2021-006658",
+        "statut": "Valide",
+        "dateValidite": "2021-07-11",
+        "dateFinValidite": null,
+        "dateDepot": "2021-05-27",
+        "type": "Renouvellement",
+        "nomLieu": null
+      }
+    ],
+    "meta": {
+      "page": 1,
+      "page_size": 20,
+      "total": 2
+    }
+  }
+}

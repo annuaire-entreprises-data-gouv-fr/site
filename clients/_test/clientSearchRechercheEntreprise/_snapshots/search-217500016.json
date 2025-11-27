@@ -49,11 +49,11 @@
           },
           "listeIdcc": [
             {
-              "idcc": "5003",
+              "idcc": "5021",
               "title": ""
             },
             {
-              "idcc": "5021",
+              "idcc": "5003",
               "title": ""
             }
           ]
@@ -105,11 +105,11 @@
               },
               "listeIdcc": [
                 {
-                  "idcc": "5003",
+                  "idcc": "5021",
                   "title": ""
                 },
                 {
-                  "idcc": "5021",
+                  "idcc": "5003",
                   "title": ""
                 }
               ]
@@ -153,11 +153,11 @@
               },
               "listeIdcc": [
                 {
-                  "idcc": "5003",
+                  "idcc": "5021",
                   "title": ""
                 },
                 {
-                  "idcc": "5021",
+                  "idcc": "5003",
                   "title": ""
                 }
               ]
@@ -223,7 +223,9 @@
               "prenoms": "Maya",
               "role": null,
               "dateNaissancePartial": "1970-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -232,7 +234,9 @@
               "prenoms": "David",
               "role": null,
               "dateNaissancePartial": "1970-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -241,7 +245,9 @@
               "prenoms": "Jean-Noël",
               "role": null,
               "dateNaissancePartial": "1974-01",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -250,7 +256,9 @@
               "prenoms": "Samia",
               "role": null,
               "dateNaissancePartial": "1978-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -259,7 +267,9 @@
               "prenoms": "Frédéric",
               "role": null,
               "dateNaissancePartial": "1979-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -268,7 +278,9 @@
               "prenoms": "Vincent",
               "role": null,
               "dateNaissancePartial": "1985-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -277,7 +289,9 @@
               "prenoms": "Véronique",
               "role": null,
               "dateNaissancePartial": "1955-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -286,7 +300,9 @@
               "prenoms": "Jacques",
               "role": "5ème adjoint au Maire",
               "dateNaissancePartial": "1966-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -295,7 +311,9 @@
               "prenoms": "Antoine",
               "role": null,
               "dateNaissancePartial": "1966-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -304,7 +322,9 @@
               "prenoms": "David",
               "role": "7ème adjoint au Maire",
               "dateNaissancePartial": "1978-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -313,7 +333,9 @@
               "prenoms": "René-François",
               "role": null,
               "dateNaissancePartial": "1950-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -322,7 +344,9 @@
               "prenoms": "Jean-Didier",
               "role": null,
               "dateNaissancePartial": "1971-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -331,7 +355,9 @@
               "prenoms": "Florence",
               "role": null,
               "dateNaissancePartial": "1962-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -340,7 +366,9 @@
               "prenoms": "Hélène",
               "role": "2ème adjoint au Maire",
               "dateNaissancePartial": "1981-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -349,7 +377,9 @@
               "prenoms": "Anne",
               "role": null,
               "dateNaissancePartial": "1962-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -358,7 +388,9 @@
               "prenoms": "Célia",
               "role": null,
               "dateNaissancePartial": "1981-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -367,7 +399,9 @@
               "prenoms": "Patrick",
               "role": "1er adjoint au Maire",
               "dateNaissancePartial": "1956-07",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -376,7 +410,9 @@
               "prenoms": "Jack-Yves",
               "role": null,
               "dateNaissancePartial": "1956-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -385,7 +421,9 @@
               "prenoms": "Nicolas",
               "role": "36ème adjoint au Maire",
               "dateNaissancePartial": "1974-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -394,7 +432,9 @@
               "prenoms": "Alix",
               "role": null,
               "dateNaissancePartial": "1978-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -403,7 +443,9 @@
               "prenoms": "Geoffroy",
               "role": null,
               "dateNaissancePartial": "1978-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -412,7 +454,9 @@
               "prenoms": "Pierre-Yves",
               "role": null,
               "dateNaissancePartial": "1977-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -421,7 +465,9 @@
               "prenoms": "Anne-Claire",
               "role": "6ème adjoint au Maire",
               "dateNaissancePartial": "1987-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -430,7 +476,9 @@
               "prenoms": "Sandrine",
               "role": null,
               "dateNaissancePartial": "1961-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -439,7 +487,9 @@
               "prenoms": "Ian",
               "role": null,
               "dateNaissancePartial": "1980-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -448,7 +498,9 @@
               "prenoms": "Colombe",
               "role": null,
               "dateNaissancePartial": "1976-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -457,7 +509,9 @@
               "prenoms": "Véronique",
               "role": null,
               "dateNaissancePartial": "1960-01",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -466,7 +520,9 @@
               "prenoms": "Delphine",
               "role": null,
               "dateNaissancePartial": "1974-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -475,7 +531,9 @@
               "prenoms": "Grégory",
               "role": null,
               "dateNaissancePartial": "1975-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -484,7 +542,9 @@
               "prenoms": "Stéphane",
               "role": null,
               "dateNaissancePartial": "1963-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -493,7 +553,9 @@
               "prenoms": "Gauthier",
               "role": null,
               "dateNaissancePartial": "1981-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -502,7 +564,9 @@
               "prenoms": "Marie-Claire",
               "role": null,
               "dateNaissancePartial": "1963-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -511,7 +575,9 @@
               "prenoms": "Pierre",
               "role": null,
               "dateNaissancePartial": "1968-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -520,7 +586,9 @@
               "prenoms": "Sandrine",
               "role": "10ème adjoint au Maire",
               "dateNaissancePartial": "1972-01",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -529,7 +597,9 @@
               "prenoms": "Thomas",
               "role": "37ème adjoint au Maire",
               "dateNaissancePartial": "1985-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -538,7 +608,9 @@
               "prenoms": "Mahor",
               "role": null,
               "dateNaissancePartial": "1975-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -547,7 +619,9 @@
               "prenoms": "Emmanuel",
               "role": null,
               "dateNaissancePartial": "1981-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -556,7 +630,9 @@
               "prenoms": "Maxime",
               "role": null,
               "dateNaissancePartial": "1984-07",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -565,7 +641,9 @@
               "prenoms": "Alice",
               "role": null,
               "dateNaissancePartial": "1978-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -574,7 +652,9 @@
               "prenoms": "François",
               "role": null,
               "dateNaissancePartial": "1953-01",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -583,7 +663,9 @@
               "prenoms": "Alexandra",
               "role": null,
               "dateNaissancePartial": "1967-01",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -592,7 +674,9 @@
               "prenoms": "Jérôme",
               "role": null,
               "dateNaissancePartial": "1967-01",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -601,7 +685,9 @@
               "prenoms": "Daniel-Georges",
               "role": null,
               "dateNaissancePartial": "1956-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -610,7 +696,9 @@
               "prenoms": "Jeanne",
               "role": null,
               "dateNaissancePartial": "1953-07",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -619,7 +707,9 @@
               "prenoms": "François",
               "role": null,
               "dateNaissancePartial": "1962-01",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -628,7 +718,9 @@
               "prenoms": "Rachida",
               "role": null,
               "dateNaissancePartial": "1965-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -637,7 +729,9 @@
               "prenoms": "Emmanuelle",
               "role": null,
               "dateNaissancePartial": "1971-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -646,7 +740,9 @@
               "prenoms": "Jean-Philippe",
               "role": null,
               "dateNaissancePartial": "1965-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -655,7 +751,9 @@
               "prenoms": "Claire",
               "role": null,
               "dateNaissancePartial": "1956-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -664,7 +762,9 @@
               "prenoms": "Séverine",
               "role": null,
               "dateNaissancePartial": "1969-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -673,7 +773,9 @@
               "prenoms": "Inès",
               "role": null,
               "dateNaissancePartial": "1987-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -682,7 +784,9 @@
               "prenoms": "François-Marie",
               "role": null,
               "dateNaissancePartial": "1980-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -691,7 +795,9 @@
               "prenoms": "Marie-Caroline",
               "role": null,
               "dateNaissancePartial": "1978-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -700,7 +806,9 @@
               "prenoms": "Catherine",
               "role": null,
               "dateNaissancePartial": "1957-07",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -709,7 +817,9 @@
               "prenoms": "Nour",
               "role": null,
               "dateNaissancePartial": "1979-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -718,7 +828,9 @@
               "prenoms": "Lamia",
               "role": null,
               "dateNaissancePartial": "1986-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -727,7 +839,9 @@
               "prenoms": "Agnès",
               "role": null,
               "dateNaissancePartial": "1970-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -736,7 +850,9 @@
               "prenoms": "Corine",
               "role": null,
               "dateNaissancePartial": "1957-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -745,7 +861,9 @@
               "prenoms": "Léa",
               "role": "12ème adjoint au Maire",
               "dateNaissancePartial": "1978-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -754,7 +872,9 @@
               "prenoms": "Alexandre",
               "role": null,
               "dateNaissancePartial": "1986-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -763,7 +883,9 @@
               "prenoms": "Ségolène",
               "role": null,
               "dateNaissancePartial": "1994-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -772,7 +894,9 @@
               "prenoms": "Rémi",
               "role": null,
               "dateNaissancePartial": "1971-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -781,7 +905,9 @@
               "prenoms": "Afaf",
               "role": "14ème adjoint au Maire",
               "dateNaissancePartial": "1975-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -790,7 +916,9 @@
               "prenoms": "Jacques",
               "role": "13ème adjoint au Maire",
               "dateNaissancePartial": "1969-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -799,7 +927,9 @@
               "prenoms": "Nelly",
               "role": null,
               "dateNaissancePartial": "1985-01",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -808,7 +938,9 @@
               "prenoms": "Geneviève",
               "role": null,
               "dateNaissancePartial": "1955-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -817,7 +949,9 @@
               "prenoms": "Maud",
               "role": null,
               "dateNaissancePartial": "1979-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -826,7 +960,9 @@
               "prenoms": "Jean-Philippe",
               "role": null,
               "dateNaissancePartial": "1964-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -835,7 +971,9 @@
               "prenoms": "Christophe",
               "role": null,
               "dateNaissancePartial": "1956-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -844,7 +982,9 @@
               "prenoms": "Jérôme",
               "role": null,
               "dateNaissancePartial": "1970-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -853,7 +993,9 @@
               "prenoms": "Barbara",
               "role": null,
               "dateNaissancePartial": "1987-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -862,7 +1004,9 @@
               "prenoms": "Philippe",
               "role": null,
               "dateNaissancePartial": "1954-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -871,7 +1015,9 @@
               "prenoms": "Alexis",
               "role": null,
               "dateNaissancePartial": "1956-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -880,7 +1026,9 @@
               "prenoms": "Rudolph",
               "role": null,
               "dateNaissancePartial": "1979-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -889,7 +1037,9 @@
               "prenoms": "Emmanuel",
               "role": null,
               "dateNaissancePartial": "1977-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -898,7 +1048,9 @@
               "prenoms": "Antoinette",
               "role": null,
               "dateNaissancePartial": "1970-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -907,7 +1059,9 @@
               "prenoms": "Antoine",
               "role": "17ème adjoint au Maire",
               "dateNaissancePartial": "1989-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -916,7 +1070,9 @@
               "prenoms": "Paul",
               "role": null,
               "dateNaissancePartial": "1993-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -925,7 +1081,9 @@
               "prenoms": "Céline",
               "role": null,
               "dateNaissancePartial": "1993-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -934,7 +1092,9 @@
               "prenoms": "Anne",
               "role": "Maire",
               "dateNaissancePartial": "1959-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -943,7 +1103,9 @@
               "prenoms": "Frédéric",
               "role": "19ème adjoint au Maire",
               "dateNaissancePartial": "1969-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -952,7 +1114,9 @@
               "prenoms": "Catherine",
               "role": null,
               "dateNaissancePartial": "1975-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -961,7 +1125,9 @@
               "prenoms": "Hélène",
               "role": null,
               "dateNaissancePartial": "1968-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -970,7 +1136,9 @@
               "prenoms": "Boris",
               "role": null,
               "dateNaissancePartial": "1985-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -979,7 +1147,9 @@
               "prenoms": "Nicolas",
               "role": null,
               "dateNaissancePartial": "1965-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -988,7 +1158,9 @@
               "prenoms": "Halima",
               "role": null,
               "dateNaissancePartial": "1966-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -997,7 +1169,9 @@
               "prenoms": "Farida",
               "role": null,
               "dateNaissancePartial": "1952-07",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1006,7 +1180,9 @@
               "prenoms": "Dominique",
               "role": null,
               "dateNaissancePartial": "1953-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1015,7 +1191,9 @@
               "prenoms": "Nadine, Pénélope",
               "role": "16ème adjoint au Maire",
               "dateNaissancePartial": "1959-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1024,7 +1202,9 @@
               "prenoms": "Fatoumata",
               "role": null,
               "dateNaissancePartial": "1981-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1033,7 +1213,9 @@
               "prenoms": "Johanne",
               "role": null,
               "dateNaissancePartial": "1982-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1042,7 +1224,9 @@
               "prenoms": "Brigitte",
               "role": null,
               "dateNaissancePartial": "1959-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1051,7 +1235,9 @@
               "prenoms": "Anessa",
               "role": null,
               "dateNaissancePartial": "1983-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1060,7 +1246,9 @@
               "prenoms": "Jean",
               "role": null,
               "dateNaissancePartial": "1990-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1069,7 +1257,9 @@
               "prenoms": "Nathalie",
               "role": null,
               "dateNaissancePartial": "1962-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1078,7 +1268,9 @@
               "prenoms": "Jean-Pierre",
               "role": null,
               "dateNaissancePartial": "1954-07",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1087,7 +1279,9 @@
               "prenoms": "Béatrice",
               "role": null,
               "dateNaissancePartial": "1965-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1096,7 +1290,9 @@
               "prenoms": "Franck",
               "role": null,
               "dateNaissancePartial": "1964-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1105,7 +1301,9 @@
               "prenoms": "Eric",
               "role": null,
               "dateNaissancePartial": "1980-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1114,7 +1312,9 @@
               "prenoms": "Maud",
               "role": null,
               "dateNaissancePartial": "1975-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1123,7 +1323,9 @@
               "prenoms": "Marie-Christine",
               "role": "18ème adjoint au Maire",
               "dateNaissancePartial": "1953-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1132,7 +1334,9 @@
               "prenoms": "Dan",
               "role": "21ème adjoint au Maire",
               "dateNaissancePartial": "1975-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1141,7 +1345,9 @@
               "prenoms": "Florentin",
               "role": "23ème adjoint au Maire",
               "dateNaissancePartial": "1986-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1150,7 +1356,9 @@
               "prenoms": "Véronique",
               "role": "20ème adjoint au Maire",
               "dateNaissancePartial": "1971-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1159,7 +1367,9 @@
               "prenoms": "Jérôme",
               "role": null,
               "dateNaissancePartial": "1971-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1168,7 +1378,9 @@
               "prenoms": "Carline",
               "role": null,
               "dateNaissancePartial": "1980-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1177,7 +1389,9 @@
               "prenoms": "Roger",
               "role": null,
               "dateNaissancePartial": "1950-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1186,7 +1400,9 @@
               "prenoms": "Delphine",
               "role": null,
               "dateNaissancePartial": "1970-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1195,7 +1411,9 @@
               "prenoms": "Nathalie",
               "role": null,
               "dateNaissancePartial": "1979-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1204,7 +1422,9 @@
               "prenoms": "Franck",
               "role": null,
               "dateNaissancePartial": "1961-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1213,7 +1433,9 @@
               "prenoms": "Douchka",
               "role": null,
               "dateNaissancePartial": "1978-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1222,7 +1444,9 @@
               "prenoms": "Jacques",
               "role": null,
               "dateNaissancePartial": "1955-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1231,7 +1455,9 @@
               "prenoms": "Jean-François",
               "role": null,
               "dateNaissancePartial": "1981-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1240,7 +1466,9 @@
               "prenoms": "Emmanuel",
               "role": null,
               "dateNaissancePartial": "1969-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1249,7 +1477,9 @@
               "prenoms": "Emile",
               "role": null,
               "dateNaissancePartial": "1985-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1258,7 +1488,9 @@
               "prenoms": "Valérie",
               "role": null,
               "dateNaissancePartial": "1976-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1267,7 +1499,9 @@
               "prenoms": "Camille",
               "role": null,
               "dateNaissancePartial": "1990-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1276,7 +1510,9 @@
               "prenoms": "Christophe",
               "role": "25ème adjoint au Maire",
               "dateNaissancePartial": "1969-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1285,7 +1521,9 @@
               "prenoms": "Arnaud",
               "role": "27ème adjoint au Maire",
               "dateNaissancePartial": "1971-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1294,7 +1532,9 @@
               "prenoms": "Aminata",
               "role": null,
               "dateNaissancePartial": "1980-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1303,7 +1543,9 @@
               "prenoms": "Nicolas",
               "role": "29ème adjoint au Maire",
               "dateNaissancePartial": "1971-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1312,7 +1554,9 @@
               "prenoms": "Jean-Baptiste",
               "role": null,
               "dateNaissancePartial": "1979-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1321,7 +1565,9 @@
               "prenoms": "Laurence",
               "role": "22ème adjoint au Maire",
               "dateNaissancePartial": "1963-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1330,7 +1576,9 @@
               "prenoms": "Béatrice",
               "role": null,
               "dateNaissancePartial": "1957-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1339,7 +1587,9 @@
               "prenoms": "Carine",
               "role": null,
               "dateNaissancePartial": "1974-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1348,7 +1598,9 @@
               "prenoms": "Emmanuelle",
               "role": null,
               "dateNaissancePartial": "1971-01",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1357,7 +1609,9 @@
               "prenoms": "Aurélie",
               "role": null,
               "dateNaissancePartial": "1989-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1366,7 +1620,9 @@
               "prenoms": "Eric",
               "role": null,
               "dateNaissancePartial": "1956-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1375,7 +1631,9 @@
               "prenoms": "Olivia",
               "role": "24ème adjoint au Maire",
               "dateNaissancePartial": "1975-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1384,7 +1642,9 @@
               "prenoms": "Raphaëlle",
               "role": null,
               "dateNaissancePartial": "1964-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1393,7 +1653,9 @@
               "prenoms": "Audrey",
               "role": "26ème adjoint au Maire",
               "dateNaissancePartial": "1972-02",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1402,7 +1664,9 @@
               "prenoms": "Frédéric",
               "role": null,
               "dateNaissancePartial": "1957-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1411,7 +1675,9 @@
               "prenoms": "Pierre",
               "role": "31ème adjoint au Maire",
               "dateNaissancePartial": "1980-07",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1420,7 +1686,9 @@
               "prenoms": "Sylvain",
               "role": null,
               "dateNaissancePartial": "1974-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1429,7 +1697,9 @@
               "prenoms": "Marie-José",
               "role": null,
               "dateNaissancePartial": "1960-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1438,7 +1708,9 @@
               "prenoms": "Jérémy",
               "role": null,
               "dateNaissancePartial": "1981-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1447,7 +1719,9 @@
               "prenoms": "Emmanuelle",
               "role": null,
               "dateNaissancePartial": "1966-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1456,7 +1730,9 @@
               "prenoms": "Carine",
               "role": "28ème adjoint au Maire",
               "dateNaissancePartial": "1972-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1465,7 +1741,9 @@
               "prenoms": "Jean-Luc",
               "role": "33ème adjoint au Maire",
               "dateNaissancePartial": "1959-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1474,7 +1752,9 @@
               "prenoms": "Raphaëlle",
               "role": null,
               "dateNaissancePartial": "1992-01",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1483,7 +1763,9 @@
               "prenoms": "Chloe",
               "role": null,
               "dateNaissancePartial": "1989-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1492,7 +1774,9 @@
               "prenoms": "Hamidou",
               "role": null,
               "dateNaissancePartial": "1956-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1501,7 +1785,9 @@
               "prenoms": "Hermano",
               "role": null,
               "dateNaissancePartial": "1966-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1510,7 +1796,9 @@
               "prenoms": "Hanna",
               "role": null,
               "dateNaissancePartial": "1991-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1519,7 +1807,9 @@
               "prenoms": "Paul",
               "role": "37ème adjoint au Maire",
               "dateNaissancePartial": "1976-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1528,7 +1818,9 @@
               "prenoms": "Florian",
               "role": null,
               "dateNaissancePartial": "1976-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1537,7 +1829,9 @@
               "prenoms": "Laurent",
               "role": null,
               "dateNaissancePartial": "1977-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1546,7 +1840,9 @@
               "prenoms": "Anne",
               "role": null,
               "dateNaissancePartial": "1964-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1555,7 +1851,9 @@
               "prenoms": "Elisabeth",
               "role": null,
               "dateNaissancePartial": "1962-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1564,7 +1862,9 @@
               "prenoms": "Francis",
               "role": null,
               "dateNaissancePartial": "1954-03",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1573,7 +1873,9 @@
               "prenoms": "Karen",
               "role": "32ème adjoint au Maire",
               "dateNaissancePartial": "1962-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1582,7 +1884,9 @@
               "prenoms": "Delphine",
               "role": null,
               "dateNaissancePartial": "1972-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1591,7 +1895,9 @@
               "prenoms": "Alice",
               "role": null,
               "dateNaissancePartial": "1993-08",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1600,7 +1906,9 @@
               "prenoms": "Mélody",
               "role": "35ème adjoint au Maire",
               "dateNaissancePartial": "1984-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1609,7 +1917,9 @@
               "prenoms": "Anouch",
               "role": "34ème adjoint au Maire",
               "dateNaissancePartial": "1991-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1618,7 +1928,9 @@
               "prenoms": "Marie",
               "role": null,
               "dateNaissancePartial": "1947-10",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1627,7 +1939,9 @@
               "prenoms": "Anne-Claire",
               "role": null,
               "dateNaissancePartial": "1981-09",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1636,7 +1950,9 @@
               "prenoms": "Léa",
               "role": null,
               "dateNaissancePartial": "1990-11",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1645,7 +1961,9 @@
               "prenoms": "François",
               "role": null,
               "dateNaissancePartial": "1969-12",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "F",
@@ -1654,7 +1972,9 @@
               "prenoms": "Dominique",
               "role": "36ème adjoint au Maire",
               "dateNaissancePartial": "1954-07",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1663,7 +1983,9 @@
               "prenoms": "Patrick",
               "role": null,
               "dateNaissancePartial": "1976-07",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1672,7 +1994,9 @@
               "prenoms": "Aurélien",
               "role": null,
               "dateNaissancePartial": "1969-04",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1681,7 +2005,9 @@
               "prenoms": "Ariel",
               "role": null,
               "dateNaissancePartial": "1973-06",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             },
             {
               "sexe": "M",
@@ -1690,7 +2016,9 @@
               "prenoms": "Karim",
               "role": null,
               "dateNaissancePartial": "1989-05",
-              "lieuNaissance": ""
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
             }
           ]
         },
@@ -1704,11 +2032,11 @@
             "title": ""
           },
           {
-            "idcc": "5022",
+            "idcc": "1043",
             "title": ""
           },
           {
-            "idcc": "1043",
+            "idcc": "5022",
             "title": ""
           },
           {

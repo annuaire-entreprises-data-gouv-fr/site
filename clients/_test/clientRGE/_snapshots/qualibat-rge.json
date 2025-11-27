@@ -1,5 +1,7 @@
 {
-  "args": ["843701079"],
+  "args": [
+    "843701079"
+  ],
   "result": {
     "companyInfo": {
       "adresse": "LD LA VAURELLE, 81170, CORDES-SUR-CIEL",
@@ -7,7 +9,7 @@
       "nomEntreprise": "BESOIN DE TOIT",
       "siret": "84370107900017",
       "siteInternet": "",
-      "telephone": "",
+      "telephone": "06 88 47 70 42",
       "workingWithIndividual": true
     },
     "certifications": [

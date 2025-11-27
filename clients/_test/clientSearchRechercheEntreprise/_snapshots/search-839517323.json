@@ -34,12 +34,13 @@
           "commune": "GAGNY",
           "activitePrincipale": "62.02A",
           "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-          "trancheEffectif": "N",
+          "trancheEffectif": "NN",
           "anneeTrancheEffectif": null,
           "latitude": "48.886494",
           "longitude": "2.542338",
           "complements": {
             "estEntrepreneurIndividuel": false,
+            "estPersonneMorale": true,
             "idFiness": [],
             "idBio": [],
             "idOrganismeFormation": [],
@@ -80,12 +81,13 @@
               "commune": "GAGNY",
               "activitePrincipale": "62.02A",
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
               "latitude": "48.886494",
               "longitude": "2.542338",
               "complements": {
                 "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
                 "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
@@ -120,12 +122,13 @@
               "commune": "GAGNY",
               "activitePrincipale": "62.02A",
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
               "latitude": "48.886494",
               "longitude": "2.542338",
               "complements": {
                 "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
                 "idFiness": [],
                 "idBio": [],
                 "idOrganismeFormation": [],
@@ -149,7 +152,7 @@
         "dateMiseAJourInpi": "2024-05-19T16:49:33",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
-        "trancheEffectif": null,
+        "trancheEffectif": "NN",
         "anneeCategorieEntreprise": null,
         "categorieEntreprise": null,
         "anneeTrancheEffectif": null,
@@ -159,6 +162,7 @@
           "estServicePublic": false,
           "estL100_3": false,
           "estEntrepreneurIndividuel": false,
+          "estPersonneMorale": true,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
           "estFiness": false,
@@ -190,7 +194,9 @@
           "dateImmatriculation": "2018-05-12",
           "duree": 99,
           "dateFin": "12/05/2117",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "3006",
           "isPersonneMorale": true,
           "capital": "1 000,00 € (fixe)"
@@ -207,7 +213,9 @@
             "prenoms": "Raphael",
             "role": "LIQUIDATEUR",
             "nationalite": "Française",
-            "dateNaissancePartial": "1990-07"
+            "dateNaissancePartial": "1990-07",
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }

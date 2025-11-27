@@ -34,7 +34,7 @@
           "commune": "LE PORT",
           "activitePrincipale": "66.22Z",
           "libelleActivitePrincipale": "Activités des agents et courtiers d’assurances (66.22Z)",
-          "trancheEffectif": "N",
+          "trancheEffectif": "NN",
           "anneeTrancheEffectif": null,
           "latitude": "-20.939999",
           "longitude": "55.292503",
@@ -81,7 +81,7 @@
               "commune": "LE PORT",
               "activitePrincipale": "66.22Z",
               "libelleActivitePrincipale": "Activités des agents et courtiers d’assurances (66.22Z)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
               "latitude": "-20.939999",
               "longitude": "55.292503",
@@ -122,7 +122,7 @@
               "commune": "LE PORT",
               "activitePrincipale": "66.22Z",
               "libelleActivitePrincipale": "Activités des agents et courtiers d’assurances (66.22Z)",
-              "trancheEffectif": "N",
+              "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
               "latitude": "-20.939999",
               "longitude": "55.292503",
@@ -194,7 +194,9 @@
           "dateImmatriculation": "1989-08-08",
           "duree": 0,
           "dateFin": "",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "",
           "isPersonneMorale": true,
           "capital": "7 622,45 € (fixe)"
@@ -211,7 +213,9 @@
             "prenoms": "",
             "role": "GERANT",
             "nationalite": null,
-            "dateNaissancePartial": null
+            "dateNaissancePartial": null,
+            "estDemissionnaire": false,
+            "dateDemission": null
           }
         ]
       }
