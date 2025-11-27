@@ -1,8 +1,5 @@
 {
-  "args": [
-    "198100125",
-    1
-  ],
+  "args": ["198100125", 1],
   "result": {
     "currentPage": 1,
     "resultCount": 1,

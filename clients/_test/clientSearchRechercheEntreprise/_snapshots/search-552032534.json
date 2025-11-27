@@ -199,9 +199,7 @@
           "dateImmatriculation": "1955-03-01",
           "duree": 99,
           "dateFin": "01/03/2054",
-          "natureEntreprise": [
-            "Commerciale"
-          ],
+          "natureEntreprise": ["Commerciale"],
           "dateCloture": "3112",
           "isPersonneMorale": true,
           "capital": "170 348 620,75 € (fixe)"
