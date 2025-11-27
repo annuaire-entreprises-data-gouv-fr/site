@@ -11,6 +11,18 @@
 #   site: true
 
 ---
+- date: 26/11/2025
+  target:
+    site: true
+  body: |
+    Utilisation de l’API tabulaire de [data.gouv.fr](https://www.data.gouv.fr/datasets/licences-et-demandes-de-licences-dentrepreneurs-de-spectacles-vivants) pour afficher les licences et demandes de licences des entrepreneurs de spectacles vivants, permettant également l'affichage des dates de dépôt et de retrait des licences.
+- date: 24/11/2025
+  target:
+    site: true
+  body: |
+    Ajout de la possibilité d'exporter une liste d’établissements à partir du répertoire SIRENE en important des fichiers .txt comprenant des catégories juridiques, des codes NAF/APE ou des localisations.
+
+    Export via [cette page](https://annuaire-entreprises.data.gouv.fr/export-sirene).
 - date: 30/10/2025
   target:
     agent: true
