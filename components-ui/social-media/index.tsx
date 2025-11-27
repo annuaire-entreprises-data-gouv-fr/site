@@ -4,6 +4,7 @@ import InformationTooltip from "#components-ui/information-tooltip";
 import { PrintNever } from "#components-ui/print-visibility";
 import type { Siren } from "#utils/helpers";
 import PrintButton from "./print-button";
+import { QrCode } from "./qr-code";
 import styles from "./styles.module.css";
 
 const SocialMedia: React.FC<{
@@ -45,25 +46,7 @@ const SocialMedia: React.FC<{
           </a>
         </InformationTooltip>
       </span>
-      {siren && (
-        <span>
-          <InformationTooltip
-            ariaRelation="describedby"
-            horizontalOrientation="right"
-            label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cette page"
-            tabIndex={undefined}
-          >
-            <a
-              aria-label="Partager cette page grâce à un QR Code"
-              className="no-style-link"
-              download={`QR_code_page_${siren}.jpeg`}
-              href={`/api/share/qr/${siren}`}
-            >
-              <Icon slug="qrCode" />
-            </a>
-          </InformationTooltip>
-        </span>
-      )}
+      {siren && <QrCode siren={siren} />}
       <span>
         <PrintButton />
       </span>
