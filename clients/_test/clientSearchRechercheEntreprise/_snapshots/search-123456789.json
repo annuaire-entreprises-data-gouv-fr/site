@@ -194,7 +194,9 @@
           "dateImmatriculation": "",
           "duree": 0,
           "dateFin": "",
-          "natureEntreprise": ["Agricole : Périmètre des actifs agricoles"],
+          "natureEntreprise": [
+            "Agricole : Périmètre des actifs agricoles"
+          ],
           "dateCloture": "",
           "isPersonneMorale": false,
           "capital": ""
@@ -210,8 +212,8 @@
             "prenom": "Claire",
             "prenoms": "Claire",
             "role": "",
-            "nationalite": null,
-            "dateNaissancePartial": null,
+            "nationalite": "FRANÇAISE",
+            "dateNaissancePartial": "1978-10",
             "estDemissionnaire": false,
             "dateDemission": null
           }
