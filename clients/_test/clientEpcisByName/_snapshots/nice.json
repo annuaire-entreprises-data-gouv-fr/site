@@ -1,5 +1,7 @@
 {
-  "args": ["Nice"],
+  "args": [
+    "Nice"
+  ],
   "result": [
     {
       "label": "Métropole Nice Côte d'Azur (EPCI)",

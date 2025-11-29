@@ -194,7 +194,9 @@
           "dateImmatriculation": "1989-08-08",
           "duree": 0,
           "dateFin": "",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "",
           "isPersonneMorale": true,
           "capital": "7 622,45 € (fixe)"

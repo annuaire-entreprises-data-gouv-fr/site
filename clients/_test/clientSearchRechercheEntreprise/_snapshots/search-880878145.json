@@ -194,7 +194,9 @@
           "dateImmatriculation": "2020-01-23",
           "duree": 99,
           "dateFin": "23/01/2119",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "3112",
           "isPersonneMorale": true,
           "capital": "1 000,00 € (fixe)"
