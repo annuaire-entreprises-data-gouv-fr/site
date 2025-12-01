@@ -1,0 +1,15 @@
+.brandLinkItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  p {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0;
+    max-width: 135px;
+    text-align: center;
+  }
+}
