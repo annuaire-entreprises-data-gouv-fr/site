@@ -235,9 +235,7 @@ const Footer = () => (
             </p>
             <a
               className="fr-footer__brand-link"
-              href="https://data.gouv.fr"
-              rel="noopener noreferrer"
-              target="_blank"
+              href="#"
               title="Aller à l'accueil du site - data.gouv.fr - République Française"
             >
               <img
