@@ -22,6 +22,7 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
     estAchatsResponsables,
     estPatrimoineVivant,
     estAlimConfiance,
+    estFiness,
     bilanGesRenseigne,
   } = uniteLegale.complements;
   if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
@@ -35,6 +36,7 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
   if (estPatrimoineVivant) sources.push(EAdministration.MEF);
   if (estAlimConfiance) sources.push(EAdministration.MAA);
   if (bilanGesRenseigne) sources.push(EAdministration.ADEME);
+  if (estFiness) sources.push(EAdministration.MSS);
   return sources;
 };
 
@@ -60,6 +62,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     estPatrimoineVivant,
     estAlimConfiance,
     bilanGesRenseigne,
+    estFiness,
   } = uniteLegale.complements;
 
   return (
@@ -85,6 +88,14 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
           informationTooltipLabel="Cette structure est une Entreprise Inclusive"
           label={`Entreprise Sociale Inclusive (${typeEntrepriseInclusive})`}
           sectionId="entreprise-inclusive"
+          siren={uniteLegale.siren}
+        />
+      )}
+      {estFiness && (
+        <LabelWithLinkToSection
+          informationTooltipLabel="Cette structure est déclarée en tant qu’établissement sanitaire ou social (FINESS)"
+          label="Finess - Établissement Sanitaire et Social"
+          sectionId="finess"
           siren={uniteLegale.siren}
         />
       )}

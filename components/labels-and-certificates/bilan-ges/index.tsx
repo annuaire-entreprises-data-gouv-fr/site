@@ -6,12 +6,10 @@ import LocalPageCounter from "#components/search-results/results-pagination/loca
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
-import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 
 type IProps = {
   uniteLegale: IUniteLegale;
-  session: ISession | null;
 };
 
 const formatEmissions = (value: number): string => {
@@ -22,7 +20,7 @@ const formatEmissions = (value: number): string => {
 /**
  * Bilan GES section
  */
-export default function BilanGesSection({ uniteLegale, session }: IProps) {
+export default function BilanGesSection({ uniteLegale }: IProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const bilanGes = useFetchBilanGes(uniteLegale, currentPage);
 

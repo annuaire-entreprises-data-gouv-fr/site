@@ -14,6 +14,9 @@ apiMonitors:
   - apiName: API Liste des DPOs
     apiSlug: liste-dpo
     updownIoId: ojx4
+  - apiName: API Liste des établissements FINESS
+    apiSlug: liste-finess
+    updownIoId: 7ol6
   - apiName: API Recherche d’entreprises
     apiSlug: recherche-entreprise
     apiDocumentationLink: https://www.data.gouv.fr/fr/dataservices/api-recherche-dentreprises/

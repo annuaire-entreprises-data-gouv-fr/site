@@ -127,6 +127,7 @@ export type IComplements = {
   est_alim_confiance: boolean;
   bilan_ges_renseigne: boolean;
   liste_idcc: string[];
+  liste_finess_juridique: string[];
 };
 
 export type IImmatriculationResponse = {
