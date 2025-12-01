@@ -118,7 +118,7 @@ export const FilterStructure: React.FC<{
 
         <LabelAndCertificateBadge
           isSelected={labelsSelected.includes("finess")}
-          label="Établissement Sanitaires et sociaux (Finess)"
+          label="Établissements sanitaires et sociaux (Finess)"
           onClick={() => toggleLabel("finess")}
           small
         />

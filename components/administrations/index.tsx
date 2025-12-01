@@ -60,7 +60,7 @@ export const MI = ({ queryString = "" }) => (
 
 export const MSS = ({ queryString = "" }) => (
   <a
-    href={`/administration/mi${queryString}`}
+    href={`/administration/mss${queryString}`}
     title="Ministère des Solidarités et de la Santé"
   >
     ministère des Solidarités et de la Santé
