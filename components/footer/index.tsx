@@ -225,13 +225,28 @@ const Footer = () => (
       </div>
       <div className="fr-container">
         <div className="fr-footer__body">
-          <div className="fr-footer__brand">
-            <a className="fr-logo" href="#" title="république française">
+          <div className="fr-footer__brand fr-enlarge-link">
+            <p className="fr-logo" title="république française">
               <span className="fr-logo__title">
                 république
                 <br />
                 française
               </span>
+            </p>
+            <a
+              className="fr-footer__brand-link"
+              href="https://data.gouv.fr"
+              rel="noopener noreferrer"
+              target="_blank"
+              title="Aller à l'accueil du site - data.gouv.fr - République Française"
+            >
+              <img
+                alt="logo data.gouv.fr"
+                className="inline -translate-y-[15%] h-12"
+                height={48}
+                src="/images/logos/data-gouv.svg"
+                width={152}
+              />
             </a>
           </div>
           <div className="fr-footer__content">
