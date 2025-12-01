@@ -1,7 +1,9 @@
+import { clsx } from "clsx";
 import Logo from "#components-ui/logo";
 import { PrintNever } from "#components-ui/print-visibility";
 import { administrationsMetaData } from "#models/administrations";
 import { getAllLandingPages } from "#models/landing-pages";
+import styles from "./style.module.css";
 
 const Footer = () => (
   <PrintNever>
@@ -234,17 +236,18 @@ const Footer = () => (
               </span>
             </p>
             <a
-              className="fr-footer__brand-link"
+              className={clsx("fr-footer__brand-link", styles.brandLinkItem)}
               href="#"
-              title="Aller à l'accueil du site - data.gouv.fr - République Française"
+              title="Aller à l'accueil du site - annuaire-entreprises.data.gouv.fr - République Française"
             >
               <img
                 alt="logo data.gouv.fr"
                 className="inline -translate-y-[15%] h-12"
-                height={48}
+                height={64}
                 src="/images/logos/data-gouv.svg"
-                width={152}
+                width={64}
               />
+              <p>Produit de l'écosystème datagouv</p>
             </a>
           </div>
           <div className="fr-footer__content">
