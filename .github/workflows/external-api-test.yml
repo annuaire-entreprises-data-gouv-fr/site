@@ -48,6 +48,7 @@ jobs:
       - name: Run API client unit tests
         run: |
           npm run test:api-clients:update-snapshots -- --runInBand --testTimeout=61000 --silent
+          npm run lint:fix
 
       - name: 'Create a PR if there is a diff in the snapshots'
         uses: peter-evans/create-pull-request@v7
