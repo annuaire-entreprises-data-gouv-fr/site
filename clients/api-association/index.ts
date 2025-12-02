@@ -122,11 +122,7 @@ const mapToDomainObject = (
     pays: paysGestion = "",
     voie: voieGestion = "",
   } = association?.coordonnees?.adresse_gestion || {};
-  const {
-    telephone = "",
-    courriel = "",
-    site_web = "",
-  } = association?.coordonnees || {};
+  const { site_web = "" } = association?.coordonnees || {};
 
   const protocol = (site_web || "").indexOf("http") === 0 ? "" : "https://";
   const siteWeb = site_web ? `${protocol}${site_web}` : "";
@@ -136,9 +132,7 @@ const mapToDomainObject = (
     idAssociation: id_rna,
     nomComplet: nom,
     objet,
-    telephone,
     libelleFamille: lib_famille1,
-    mail: courriel,
     siteWeb,
     agrement: agrement.map((agr) => ({
       ...agr,

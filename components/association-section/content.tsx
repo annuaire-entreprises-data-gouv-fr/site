@@ -66,8 +66,6 @@ const getTableData = (
     datePublicationJournalOfficiel = "",
     dateCreation = "",
     dateDissolution = "",
-    telephone = "",
-    mail = "",
     siteWeb = "",
     agrement = [],
     eligibiliteCEC = false,
@@ -134,27 +132,6 @@ const getTableData = (
     [
       "Adresse de gestion",
       getPersonnalDataAssociation(adresseGestion, uniteLegale, session),
-    ],
-
-    [
-      "Téléphone",
-      telephone
-        ? getPersonnalDataAssociation(
-            <a href={`tel:${telephone}`}>{telephone}</a>,
-            uniteLegale,
-            session
-          )
-        : "",
-    ],
-    [
-      "Email",
-      mail
-        ? getPersonnalDataAssociation(
-            <a href={`mailto:${mail}`}>{mail}</a>,
-            uniteLegale,
-            session
-          )
-        : "",
     ],
     [
       "Site web",
