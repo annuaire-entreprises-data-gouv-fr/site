@@ -3,9 +3,7 @@ export interface IDataAssociation {
   idAssociation: string;
   nomComplet: string;
   objet: string;
-  telephone: string;
   libelleFamille: string;
-  mail: string;
   siteWeb: string;
   utilPublique: boolean;
   impotCommerciaux: boolean;

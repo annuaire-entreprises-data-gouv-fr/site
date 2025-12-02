@@ -11,7 +11,7 @@ import { EgaproSection } from "#components/labels-and-certificates/egapro";
 import { CertificationsEntrepreneurSpectaclesSection } from "#components/labels-and-certificates/entrepreneur-spectacles";
 import { EntrepriseInclusiveSection } from "#components/labels-and-certificates/entreprise-inclusive";
 import { CertificationESSSection } from "#components/labels-and-certificates/ess";
-import FinessSection from "#components/labels-and-certificates/finess";
+// import FinessSection from "#components/labels-and-certificates/finess";
 import { OrganismeDeFormationSection } from "#components/labels-and-certificates/organismes-de-formation";
 import { LabelPatrimoineVivant } from "#components/labels-and-certificates/patrimoine-vivant";
 import { CertificationsRGESection } from "#components/labels-and-certificates/rge";
@@ -74,7 +74,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
     estPatrimoineVivant,
     estAlimConfiance,
     bilanGesRenseigne,
-    estFiness,
+    // estFiness,
   } = uniteLegale.complements;
 
   const {
@@ -107,7 +107,7 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
           />
         )}
         {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
-        {estFiness && <FinessSection uniteLegale={uniteLegale} />}
+        {/* {estFiness && <FinessSection uniteLegale={uniteLegale} />} */}
         {estRge && (
           <CertificationsRGESection
             certificationsRGE={rge}
