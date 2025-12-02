@@ -108,6 +108,7 @@ export const HeaderCore: React.FC<IProps> = ({
                       </div>
                     ) : null}
                     <div className={styles.menuMobile}>
+                      {useExportSirene && <ExportSirene />}
                       <ChangelogNotification session={session} />
                       <Menu session={session} useAgentCTA={useAgentCTA} />
                     </div>
