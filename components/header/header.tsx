@@ -8,6 +8,7 @@ type IProps = {
   useAgentBanner?: boolean;
   useReconnectBanner?: boolean;
   useMap?: boolean;
+  useExportSirene?: boolean;
   plugin?: React.JSX.Element;
   currentSearchTerm?: string;
 };
@@ -21,6 +22,7 @@ export const Header: React.FC<IProps> = async ({
   useReconnectBanner = true,
   plugin,
   currentSearchTerm = "",
+  useExportSirene = false,
 }) => {
   const session = await getSession();
 
@@ -31,6 +33,7 @@ export const Header: React.FC<IProps> = async ({
       session={session}
       useAgentBanner={useAgentBanner}
       useAgentCTA={useAgentCTA}
+      useExportSirene={useExportSirene}
       useLogo={useLogo}
       useMap={useMap}
       useReconnectBanner={useReconnectBanner}

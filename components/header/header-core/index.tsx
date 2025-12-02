@@ -13,6 +13,7 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
 import ChangelogNotification from "../changelog-notification";
+import { ExportSirene } from "../export-sirene";
 import Menu from "../menu";
 import styles from "./styles.module.css";
 
@@ -25,6 +26,7 @@ type IProps = {
   useReconnectBanner?: boolean;
   useMap?: boolean;
   useInfoBanner?: boolean;
+  useExportSirene?: boolean;
   session: ISession | null;
   plugin?: React.JSX.Element;
 };
@@ -39,6 +41,7 @@ export const HeaderCore: React.FC<IProps> = ({
   useMap = false,
   plugin = null,
   session,
+  useExportSirene = false,
 }) => (
   <>
     {useReconnectBanner && <ReconnectBanner session={session} />}
@@ -118,6 +121,11 @@ export const HeaderCore: React.FC<IProps> = ({
                 <div className="fr-header__tools">
                   <div className="fr-header__tools-links">
                     <ul className="fr-links-group">
+                      {useExportSirene && (
+                        <li>
+                          <ExportSirene />
+                        </li>
+                      )}
                       <li>
                         <ChangelogNotification session={session} />
                       </li>

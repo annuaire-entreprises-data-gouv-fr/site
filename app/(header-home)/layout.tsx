@@ -18,7 +18,12 @@ export default function HomeLayout({
     <>
       <NPSBanner />
       <TempIncidentBanner />
-      <Header useAgentBanner={false} useAgentCTA={true} useSearchBar={false} />
+      <Header
+        useAgentBanner={false}
+        useAgentCTA
+        useExportSirene
+        useSearchBar={false}
+      />
       <main className="fr-container">{children}</main>
       <SocialNetworks />
       <Question />
