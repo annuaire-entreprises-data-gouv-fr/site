@@ -5,10 +5,17 @@ import { FetchRessourceException } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
-export function useFetchFiness(uniteLegale: IUniteLegale) {
+export function useFetchFiness(
+  uniteLegale: IUniteLegale,
+  finessEtablissementsPage = 1
+) {
   return useFetchExternalData(
     {
-      fetchData: () => clientFiness(uniteLegale.complements.idFinessJuridiques),
+      fetchData: () =>
+        clientFiness(
+          uniteLegale.complements.idFinessJuridiques,
+          finessEtablissementsPage
+        ),
       administration: EAdministration.MSS,
       logError: (e: any) => {
         if (e.status === 404) {
@@ -25,6 +32,6 @@ export function useFetchFiness(uniteLegale: IUniteLegale) {
         logErrorInSentry(exception);
       },
     },
-    [uniteLegale]
+    [uniteLegale, finessEtablissementsPage]
   );
 }

@@ -1,36 +1,45 @@
 import routes from "#clients/routes";
 import constants from "#models/constants";
-import type { IFiness, IFinessEtablissement } from "#models/finess/type";
+import type {
+  IFiness,
+  IFinessEtablissement,
+  IFinessList,
+} from "#models/finess/type";
 import { formatAdresse } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 
 export const clientFiness = async (
-  nofinessejList: string[]
-): Promise<IFiness[]> => {
+  nofinessejList: string[],
+  finessEtablissementsPage = 1
+): Promise<IFinessList> => {
   const [finessJuridiqueEntities, finessGeoEntities] = await Promise.all([
     httpGet<IFinessJuridiqueDatagouvResponse>(
-      `${routes.datagouv.finessJuridique}?nofiness__in=${nofinessejList.join(",")}&page_size=100`,
+      `${routes.datagouv.finessJuridique}?nofiness__in=${nofinessejList.join(",")}&nofiness__sort=asc&page_size=100`,
       {
         timeout: constants.timeout.L,
       }
     ),
-    await httpGet<IFinessGeoDatagouvResponse>(
-      `${routes.datagouv.finessGeo}?nofinessej__in=${nofinessejList.join(",")}&page_size=100`,
+    httpGet<IFinessGeoDatagouvResponse>(
+      `${routes.datagouv.finessGeo}?nofinessej__in=${nofinessejList.join(",")}&nofinessej__sort=asc&page=${finessEtablissementsPage}&page_size=100`,
       {
         timeout: constants.timeout.L,
       }
     ),
   ]);
 
-  return finessJuridiqueEntities.data
-    .map(mapJuridiqueToDomainObject)
-    .map((juridiqueEntity) => {
-      juridiqueEntity.finessEtablissements = finessGeoEntities.data
-        .filter((geo) => geo.nofinessej === juridiqueEntity.idFinessJuridique)
-        .map(mapGeoToDomainObject);
+  return {
+    data: finessJuridiqueEntities.data
+      .map(mapJuridiqueToDomainObject)
+      .map((juridiqueEntity) => {
+        juridiqueEntity.finessEtablissements = finessGeoEntities.data
+          .filter((geo) => geo.nofinessej === juridiqueEntity.idFinessJuridique)
+          .map(mapGeoToDomainObject);
 
-      return juridiqueEntity;
-    });
+        return juridiqueEntity;
+      }),
+    meta: finessJuridiqueEntities.meta,
+    etablissementsMeta: finessGeoEntities.meta,
+  };
 };
 
 const mapJuridiqueToDomainObject = (
