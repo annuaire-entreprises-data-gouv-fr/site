@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useCallback, useId, useState } from "react";
 import { MSS } from "#components/administrations";
 import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
 import { DataSectionClient } from "#components/section/data-section";
@@ -87,6 +87,18 @@ const FinessSection: React.FC<{
 }> = ({ uniteLegale }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const response = useFetchFiness(uniteLegale, currentPage);
+  const id = useId();
+
+  const onChangePage = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    [id]
+  );
 
   return (
     <>
@@ -98,7 +110,7 @@ const FinessSection: React.FC<{
       >
         {(finessList) => (
           <>
-            <div>
+            <div id={id}>
               Cette structure est présente dans le{" "}
               <a
                 href="https://finess.esante.gouv.fr"
@@ -116,22 +128,22 @@ const FinessSection: React.FC<{
               <br />
             </div>
             <br />
-            {finessList.etablissementsMeta.total > 100 && (
-              <LocalPageCounter
-                compact={true}
-                currentPage={currentPage}
-                onPageChange={setCurrentPage}
-                totalPages={Math.ceil(
-                  finessList.etablissementsMeta.total /
-                    finessList.etablissementsMeta.page_size
-                )}
-              />
-            )}
             {finessList.data.length > 0 && (
               <FullTable
                 body={formatFinessData(finessList.data)}
                 head={["Numéro Finess", "Type", "Détails", "Fiche Finess"]}
                 verticalAlign="top"
+              />
+            )}
+            {finessList.etablissementsMeta.total > 100 && (
+              <LocalPageCounter
+                compact={true}
+                currentPage={currentPage}
+                onPageChange={onChangePage}
+                totalPages={Math.ceil(
+                  finessList.etablissementsMeta.total /
+                    finessList.etablissementsMeta.page_size
+                )}
               />
             )}
           </>

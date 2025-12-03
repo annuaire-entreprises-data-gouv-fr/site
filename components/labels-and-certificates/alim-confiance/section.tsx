@@ -1,7 +1,7 @@
 "use client";
 
 import { useFetchAlimConfiance } from "hooks/fetch/alim-confiance";
-import { useState } from "react";
+import { useCallback, useId, useState } from "react";
 import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
@@ -20,6 +20,18 @@ type IProps = {
 export default function AlimConfianceSection({ uniteLegale }: IProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const alimConfiance = useFetchAlimConfiance(uniteLegale, currentPage);
+  const id = useId();
+
+  const onChangePage = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    [id]
+  );
 
   return (
     <AsyncDataSectionClient
@@ -41,20 +53,11 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
 
         return (
           <>
-            <div>
+            <div id={id}>
               <p>
                 Cette structure possède {total} établissement
                 {plural} ayant fait l‘objet d‘un contrôle sanitaire :
               </p>
-
-              {total > 20 && (
-                <LocalPageCounter
-                  compact={true}
-                  currentPage={currentPage}
-                  onPageChange={setCurrentPage}
-                  totalPages={Math.ceil(total / page_size)}
-                />
-              )}
 
               <FullTable
                 body={alimConfiance.data.map(
@@ -109,6 +112,14 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
                   "Type d'activité",
                 ]}
               />
+              {total > 20 && (
+                <LocalPageCounter
+                  compact={true}
+                  currentPage={currentPage}
+                  onPageChange={onChangePage}
+                  totalPages={Math.ceil(total / page_size)}
+                />
+              )}
             </div>
           </>
         );
