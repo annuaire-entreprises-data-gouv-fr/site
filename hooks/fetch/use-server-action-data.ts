@@ -30,8 +30,10 @@ export function useServerActionData<S extends StandardSchemaV1, CVE, Data>(
   const { execute, isPending, result, isIdle, hasErrored } = useAction(action);
 
   useEffect(() => {
-    execute(input);
-  }, [input]);
+    if (hasRights(session, requiredRight)) {
+      execute(input);
+    }
+  }, [input, session, requiredRight]);
 
   if (!hasRights(session, requiredRight)) {
     return IDataFetchingState.UNAUTHORIZED;
