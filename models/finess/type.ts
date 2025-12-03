@@ -5,6 +5,20 @@ export type IFiness = {
   finessEtablissements: IFinessEtablissement[];
 };
 
+export type IFinessList = {
+  data: IFiness[];
+  meta: {
+    page: number;
+    page_size: number;
+    total: number;
+  };
+  etablissementsMeta: {
+    page: number;
+    page_size: number;
+    total: number;
+  };
+};
+
 export type IFinessEtablissement = {
   idFinessGeo: string;
   siret: string;

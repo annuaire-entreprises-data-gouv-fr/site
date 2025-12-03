@@ -1,7 +1,9 @@
 "use client";
 
 import type React from "react";
+import { useState } from "react";
 import { MSS } from "#components/administrations";
+import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
 import { DataSectionClient } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import ButtonLink from "#components-ui/button";
@@ -18,24 +20,26 @@ const formatFinessData = (data: IFiness[]) => {
   const body = [] as any[];
 
   data.forEach((finessJuridiqueEntity) => {
-    body.push([
-      <Tag>{finessJuridiqueEntity.idFinessJuridique}</Tag>,
-      <Tag color="info">Juridique</Tag>,
-      <div>
-        <a href={`/entreprise/${finessJuridiqueEntity.siren}`}>
-          {formatIntFr(finessJuridiqueEntity.siren)}
-        </a>
-        {" ∙ "}
-        {finessJuridiqueEntity.raisonSociale}
-      </div>,
-      <ButtonLink
-        small
-        target="_blank"
-        to={`https://finess.esante.gouv.fr/fininter/jsp/actionDetailEtablissement.do?noFiness=${finessJuridiqueEntity.idFinessJuridique}`}
-      >
-        Consulter
-      </ButtonLink>,
-    ]);
+    if (finessJuridiqueEntity.finessEtablissements.length > 0) {
+      body.push([
+        <Tag>{finessJuridiqueEntity.idFinessJuridique}</Tag>,
+        <Tag color="info">Juridique</Tag>,
+        <div>
+          <a href={`/entreprise/${finessJuridiqueEntity.siren}`}>
+            {formatIntFr(finessJuridiqueEntity.siren)}
+          </a>
+          {" ∙ "}
+          {finessJuridiqueEntity.raisonSociale}
+        </div>,
+        <ButtonLink
+          small
+          target="_blank"
+          to={`https://finess.esante.gouv.fr/fininter/jsp/actionDetailEtablissement.do?noFiness=${finessJuridiqueEntity.idFinessJuridique}`}
+        >
+          Consulter
+        </ButtonLink>,
+      ]);
+    }
 
     finessJuridiqueEntity.finessEtablissements.forEach((etab, index) =>
       body.push([
@@ -81,17 +85,18 @@ const formatFinessData = (data: IFiness[]) => {
 const FinessSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const data = useFetchFiness(uniteLegale);
+  const [currentPage, setCurrentPage] = useState(1);
+  const response = useFetchFiness(uniteLegale, currentPage);
 
   return (
     <>
       <DataSectionClient
-        data={data}
+        data={response}
         id="finess"
         sources={[EAdministration.MSS]}
         title={"Établissement Sanitaire et Social (FINESS)"}
       >
-        {(data) => (
+        {(finessList) => (
           <>
             <div>
               Cette structure est présente dans le{" "}
@@ -111,9 +116,20 @@ const FinessSection: React.FC<{
               <br />
             </div>
             <br />
-            {data.length > 0 && (
+            {finessList.etablissementsMeta.total > 100 && (
+              <LocalPageCounter
+                compact={true}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+                totalPages={Math.ceil(
+                  finessList.etablissementsMeta.total /
+                    finessList.etablissementsMeta.page_size
+                )}
+              />
+            )}
+            {finessList.data.length > 0 && (
               <FullTable
-                body={formatFinessData(data)}
+                body={formatFinessData(finessList.data)}
                 head={["Numéro Finess", "Type", "Détails", "Fiche Finess"]}
                 verticalAlign="top"
               />
