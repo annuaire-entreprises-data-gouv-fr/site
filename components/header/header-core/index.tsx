@@ -108,8 +108,8 @@ export const HeaderCore: React.FC<IProps> = ({
                       </div>
                     ) : null}
                     <div className={styles.menuMobile}>
-                      {useExportSirene && <ExportSirene />}
                       <ChangelogNotification session={session} />
+                      {useExportSirene && <ExportSirene />}
                       <Menu session={session} useAgentCTA={useAgentCTA} />
                     </div>
                   </div>
@@ -122,14 +122,14 @@ export const HeaderCore: React.FC<IProps> = ({
                 <div className="fr-header__tools">
                   <div className="fr-header__tools-links">
                     <ul className="fr-links-group">
+                      <li>
+                        <ChangelogNotification session={session} />
+                      </li>
                       {useExportSirene && (
                         <li>
                           <ExportSirene />
                         </li>
                       )}
-                      <li>
-                        <ChangelogNotification session={session} />
-                      </li>
                       <li>
                         <Menu session={session} useAgentCTA={useAgentCTA} />
                       </li>
