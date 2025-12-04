@@ -193,7 +193,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
