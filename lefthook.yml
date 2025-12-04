@@ -25,3 +25,14 @@ pre-commit:
         - "*.json"
         - "*.jsonc"
         - "*.css"
+    - run: npx tsc --noEmit
+      glob:
+        - "*.js"
+        - "*.jsx"
+        - "*.ts"
+        - "*.tsx"
+        - "*.json"
+        - "*.jsonc"
+        - "*.css"
+        
+
