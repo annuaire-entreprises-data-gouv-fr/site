@@ -21,6 +21,7 @@ WARNING: Building without uploading sourcemap to Sentry
 `);
 }
 const nextConfig: NextConfig = {
+  output: "standalone",
   webpack: (config, { isServer }) => {
     config.module.rules.push({
       test: /\.ya?ml$/,
