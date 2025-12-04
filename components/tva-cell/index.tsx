@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { Suspense } from "react";
 import { buildAndVerifyTVAFetcher } from "server-fetch/public";
 import FAQLink from "#components-ui/faq-link";
@@ -35,9 +36,10 @@ const NoTVA = () => (
 const VerifyTVA: React.FC<{
   tva: ITVAIntracommunautaire;
   siren: Siren;
-}> = ({ tva: tvaProp, siren }) => {
+}> = async ({ tva: tvaProp, siren }) => {
   const { tvaNumber, mayHaveMultipleTVANumber } = tvaProp;
-  const verification = buildAndVerifyTVAFetcher(siren);
+  const userAgent = (await headers()).get("user-agent") || "";
+  const verification = buildAndVerifyTVAFetcher(siren, userAgent);
 
   return (
     <Suspense

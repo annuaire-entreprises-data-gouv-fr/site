@@ -21,7 +21,7 @@ describe("clientTVA", () => {
       for (const arg of testValues) {
         await expectClientToMatchSnapshot({
           client: clientTVA,
-          args: [arg as TVANumber],
+          args: [arg as TVANumber, "test-user-agent"],
           __dirname,
           snapshotFile: `tva-${arg}.json`,
         });
