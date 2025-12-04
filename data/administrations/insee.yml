@@ -22,7 +22,7 @@ dataSources:
         targets:
           - agent
       - label: SIREN d’une association
-        form: https://entreprendre.service-public.fr/vosdroits/R55385
+        form: https://entreprendre.service-public.gouv.fr/vosdroits/R55385
         targets:
           - association
       - label: Informations des structures de l’ESS

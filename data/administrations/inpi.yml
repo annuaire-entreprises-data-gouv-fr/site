@@ -17,7 +17,7 @@ dataSources:
     data:
       - label: Dénomination, NAF, État administratif, Forme juridique et Adresse d’une entreprise
         apiSlug: rne
-        form: https://entreprendre.service-public.fr/vosdroits/F24023
+        form: https://entreprendre.service-public.gouv.fr/vosdroits/F24023
         targets:
           - entreprise
           - independant
@@ -28,12 +28,12 @@ dataSources:
           - entreprise
       - label: Dirigeants d’une entreprise
         apiSlug: rne
-        form: https://entreprendre.service-public.fr/vosdroits/F36173
+        form: https://entreprendre.service-public.gouv.fr/vosdroits/F36173
         targets:
           - entreprise
       - label: Bénéficaires Effectifs d’une entreprise
         apiSlug: rne
-        form: https://entreprendre.service-public.fr/vosdroits/F36703
+        form: https://entreprendre.service-public.gouv.fr/vosdroits/F36703
         targets:
           - entreprise
       - label: Informations contenues dans un extrait RNE
