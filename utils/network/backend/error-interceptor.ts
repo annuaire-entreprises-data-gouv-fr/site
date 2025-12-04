@@ -28,7 +28,8 @@ const errorInterceptor = (error: AxiosError) => {
         url,
         status,
         startTime ? endTime - startTime : undefined,
-        error.request?.method
+        error.request?.method,
+        ""
       )
     );
   }

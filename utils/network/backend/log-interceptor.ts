@@ -18,6 +18,12 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
   const endTime = new Date().getTime();
   //@ts-expect-error
   const startTime = response?.config?.metadata?.startTime;
+  const initialAgent =
+    (response.request?._header as string | undefined)
+      ?.split("\n")
+      .find((line) => line.startsWith("x-initial-user-agent:"))
+      ?.split(":")[1]
+      .trim() || "";
 
   // logged into stdout
   console.info(
@@ -25,7 +31,8 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
       response?.config?.url || "",
       response?.status,
       startTime ? endTime - startTime : undefined,
-      (response?.config?.method || "").toUpperCase()
+      (response?.config?.method || "").toUpperCase(),
+      initialAgent || ""
     )
   );
   return response;
