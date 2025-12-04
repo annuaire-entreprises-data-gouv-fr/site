@@ -21,7 +21,7 @@ const cspDirectives = {
     "https://bodacc-datadila.opendatasoft.com/",
     "https://data.economie.gouv.fr/",
     "https://journal-officiel-datadila.opendatasoft.com/",
-    "https://api-lannuaire.service-public.fr/",
+    "https://api-lannuaire.service-public.gouv.fr/",
     "https://data.culture.gouv.fr/",
     "https://data.inpi.fr/",
     "https://openmaptiles.geo.data.gouv.fr/",

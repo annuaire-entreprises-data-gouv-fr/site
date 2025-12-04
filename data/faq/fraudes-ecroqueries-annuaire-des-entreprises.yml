@@ -21,12 +21,12 @@ seo:
 more:
   - label: 'Prélèvements bancaires : comment vous opposer à des prélèvements indus ?'
     href: https://www.economie.gouv.fr/dgccrf/Publications/Vie-pratique/Fiches-pratiques/prelevements-bancaires-comment-vous-opposer-des-prelevements-indus
-  - label: Fiche "Escroquerie" sur service-public.fr
-    href: https://www.service-public.fr/particuliers/vosdroits/F1520
-  - label: Fiche "Comment porter plainte ?" sur service-public.fr
-    href: https://www.service-public.fr/particuliers/vosdroits/F1435
-  - label: Fiche "Arnaque sur internet" sur service-public.fr
-    href: https://www.service-public.fr/particuliers/vosdroits/N31138
+  - label: Fiche "Escroquerie" sur service-public.gouv.fr
+    href: https://www.service-public.gouv.fr/particuliers/vosdroits/F1520
+  - label: Fiche "Comment porter plainte ?" sur service-public.gouv.fr
+    href: https://www.service-public.gouv.fr/particuliers/vosdroits/F1435
+  - label: Fiche "Arnaque sur internet" sur service-public.gouv.fr
+    href: https://www.service-public.gouv.fr/particuliers/vosdroits/N31138
 body: |
   L’Annuaire des Entreprises ne vous **prélèvera jamais d’argent**. 
 
@@ -38,4 +38,4 @@ body: |
 
   En cas de prélèvement anormal sur votre compte bancaire, **demandez immédiatement à votre banque de le bloquer**. Selon les cas, elle peut être amenée à vous rembourser des prélèvements faits sans votre autorisation.
 
-  Vous pouvez [également porter plainte](https://www.service-public.fr/particuliers/vosdroits/F1435) dans un commissariat de police ou à la gendarmerie.
+  Vous pouvez [également porter plainte](https://www.service-public.gouv.fr/particuliers/vosdroits/F1435) dans un commissariat de police ou à la gendarmerie.

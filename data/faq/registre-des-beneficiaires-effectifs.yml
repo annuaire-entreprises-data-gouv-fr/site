@@ -53,7 +53,7 @@ body: |
   Si votre demande est motivée par un intérêt légitime, vous pouvez la soumettre à l'INPI. Vous devez remplir le [formulaire de demande d’accès](https://www.inpi.fr/sites/default/files/Formulaire%20demande%20acc%C3%A8s%20BE.pdf) et y joindre les [pièces justifiant cet accès légitime](https://www.inpi.fr/sites/default/files/exemple_tableau_pi%C3%A8ce_justificaitve.pdf) puis les soumettre à [l’INPI](https://data.inpi.fr/content/editorial/acces_BE).
 more:
   - label: La fiche explicative sur entreprendre.service-public
-    href: https://entreprendre.service-public.fr/actualites/A17554
+    href: https://entreprendre.service-public.gouv.fr/actualites/A17554
 cta:
   label: ⇢ Effectuer une demande d’accès au RBE sur data.inpi.fr
   to: https://data.inpi.fr/content/editorial/acces_BE

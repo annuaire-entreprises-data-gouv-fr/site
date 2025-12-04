@@ -27,7 +27,7 @@ cta:
   label: ⇢ Lire la fiche explicative sur le code du travail numérique
   to: https://code.travail.gouv.fr/fiche-service-public/convention-collective
 more:
-  - label: Définition d’une convention collective sur service-public.fr
-    href: https://www.service-public.fr/particuliers/vosdroits/F78
+  - label: Définition d’une convention collective sur service-public.gouv.fr
+    href: https://www.service-public.gouv.fr/particuliers/vosdroits/F78
   - label: Comment faire sa déclaration IDCC ?
     href: https://www.net-entreprises.fr/astuces-net-entreprises/idcc-comment-faire-sa-declaration-selon-la-norme-dsn-2023/

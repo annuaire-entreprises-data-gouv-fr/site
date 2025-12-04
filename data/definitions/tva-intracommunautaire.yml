@@ -28,11 +28,11 @@ body: |
   Toutefois, cet identifiant n’est pas accessible pour une entreprise si :
 
   - elle n'est pas assujettie à la TVA (du fait de la nature de son activité par exemple).
-  - elle dépend du régime de la franchise en base et n’a pas sollicité le numéro auprès de son SIE de rattachement.(https://entreprendre.service-public.fr/vosdroits/R38712)
+  - elle dépend du régime de la franchise en base et n’a pas sollicité le numéro auprès de son SIE de rattachement.(https://entreprendre.service-public.gouv.fr/vosdroits/R38712)
   - elle a fait l'objet d'une suspension de son numéro par l'administration fiscale.
   - elle n'est plus en activité.
 
-  Pour en savoir plus consultez la page fiche explicative sur [entreprendre.service-public.fr](https://entreprendre.service-public.fr/vosdroits/F23570)
+  Pour en savoir plus consultez la page fiche explicative sur [entreprendre.service-public.gouv.fr](https://entreprendre.service-public.gouv.fr/vosdroits/F23570)
 
   ## Où trouver un numéro de TVA intracommunautaire en ligne ?
 
@@ -68,8 +68,8 @@ body: |
 
   Une entreprise assujettie à la TVA possède un numéro de TVA pour chacun de ses codes d’activité (NAF/APE). Dans ce cas, le numéro de TVA affiché sur l’Annuaire des Entreprises est celui de son premier code d’activité.
 more:
-  - label: Consulter la page dédiée sur service-public.fr
-    href: https://entreprendre.service-public.fr/vosdroits/F23570
+  - label: Consulter la page dédiée sur service-public.gouv.fr
+    href: https://entreprendre.service-public.gouv.fr/vosdroits/F23570
   - label: Consulter les explications détaillées sur economie.gouv.fr
     href: https://www.economie.gouv.fr/entreprises/activite-entreprise-numero-tva-intracommunautaire
   - label: Consulter la définition sur economie.gouv.fr

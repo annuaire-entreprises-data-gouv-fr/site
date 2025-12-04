@@ -121,11 +121,11 @@ const Footer = () => (
                 <li className="fr-footer__content-item">
                   <a
                     className="fr-footer__top-link"
-                    href="https://entreprendre.service-public.fr/"
+                    href="https://entreprendre.service-public.gouv.fr/"
                     rel="noreferrer noopener"
                     target="_blank"
                   >
-                    entreprendre.service-public.fr
+                    entreprendre.service-public.gouv.fr
                   </a>
                 </li>
                 <li className="fr-footer__content-item">
@@ -151,11 +151,11 @@ const Footer = () => (
                 <li className="fr-footer__content-item">
                   <a
                     className="fr-footer__top-link"
-                    href="https://conseillers-entreprises.service-public.fr"
+                    href="https://conseillers-entreprises.service-public.gouv.fr"
                     rel="noreferrer noopener"
                     target="_blank"
                   >
-                    conseillers-entreprises.service-public.fr
+                    conseillers-entreprises.service-public.gouv.fr
                   </a>
                 </li>
               </ul>
@@ -298,12 +298,12 @@ const Footer = () => (
               <li className="fr-footer__content-item">
                 <a
                   className="fr-footer__content-link"
-                  href="https://service-public.fr"
+                  href="https://service-public.gouv.fr"
                   rel="noopener external"
                   target="_blank"
                   title="Service Public - nouvelle fenêtre"
                 >
-                  service-public.fr
+                  service-public.gouv.fr
                 </a>
               </li>
               <li className="fr-footer__content-item">

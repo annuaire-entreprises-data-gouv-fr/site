@@ -13,6 +13,6 @@ dataSources:
     datagouvLink: https://www.data.gouv.fr/fr/datasets/declarations-des-entrepreneurs-de-spectacles-vivants/
     data:
       - label: Informations des Entrepreneurs de spectacles vivants
-        form: https://entreprendre.service-public.fr/vosdroits/F22365
+        form: https://entreprendre.service-public.gouv.fr/vosdroits/F22365
 description: |
   Le ministère de la Culture publie les déclarations des entrepreneurs de spectacles vivants.

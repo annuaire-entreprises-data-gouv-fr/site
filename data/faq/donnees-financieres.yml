@@ -8,7 +8,7 @@ seo:
 body: |
   ## D’où proviennent les données financières affichées sur l’Annuaire des Entreprises ?
 
-  Le dépôt des comptes annuels est une [obligation légale pour toutes les sociétés commerciales (SA, SAS, SARL, EURL, SCI…)](https://entreprendre.service-public.fr/vosdroits/F31214). Ces données sont ensuite traitées et publiées par l'[INPI](https://data.inpi.fr). 
+  Le dépôt des comptes annuels est une [obligation légale pour toutes les sociétés commerciales (SA, SAS, SARL, EURL, SCI…)](https://entreprendre.service-public.gouv.fr/vosdroits/F31214). Ces données sont ensuite traitées et publiées par l'[INPI](https://data.inpi.fr). 
 
   Ce sont des données ouvertes et accessibles au public. 
 
@@ -24,7 +24,7 @@ body: |
 
   ### Cas particulier : les micro-entrepreneurs et les entreprises individuelles
 
-  Les données financières des entreprises individuelles sont [déclarées auprès des Urssaf](https://entreprendre.service-public.fr/vosdroits/R19133) et ne sont pas publiques. C'est pour cette raison que vous ne pouvez pas les consulter sur l’Annuaire des Entreprises.
+  Les données financières des entreprises individuelles sont [déclarées auprès des Urssaf](https://entreprendre.service-public.gouv.fr/vosdroits/R19133) et ne sont pas publiques. C'est pour cette raison que vous ne pouvez pas les consulter sur l’Annuaire des Entreprises.
 
   ## Définition des indicateurs
 
@@ -61,11 +61,11 @@ body: |
   La consolidation des comptes permet de présenter un état des comptes au niveau du groupe, comme si le siège social et toutes les filiales ne formaient qu'une seule et unique entité.
 cta:
   label: Déclarer ses comptes annuels
-  to: https://entreprendre.service-public.fr/vosdroits/F31214
+  to: https://entreprendre.service-public.gouv.fr/vosdroits/F31214
 more:
   - label: En savoir plus sur les informations financières accesibles au public
     href: https://www.economie.gouv.fr/facileco/quelles-sont-informations-accessibles-au-public
   - label: "Comprendre : la date de clorûre d'un exercice comptable"
-    href: https://entreprendre.service-public.fr/vosdroits/F32069
+    href: https://entreprendre.service-public.gouv.fr/vosdroits/F32069
   - label: "Micro-entrepreneur : déclaration en ligne du chiffre d'affaires (régime micro-social simplifié)"
-    href: https://entreprendre.service-public.fr/vosdroits/R19133
+    href: https://entreprendre.service-public.gouv.fr/vosdroits/R19133

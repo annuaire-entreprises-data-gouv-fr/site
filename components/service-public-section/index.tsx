@@ -29,7 +29,7 @@ export default function ServicePublicSection({
             Cette administration n’a pas été retrouvé dans l’
             <a
               aria-label="Voir l’Annuaire du service public, nouvelle fenêtre"
-              href="https://lannuaire.service-public.fr/"
+              href="https://lannuaire.service-public.gouv.fr/"
               rel="noopener noreferrer"
               target="_blank"
             >

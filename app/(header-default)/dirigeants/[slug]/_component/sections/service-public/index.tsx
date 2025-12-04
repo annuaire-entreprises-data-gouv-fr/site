@@ -93,7 +93,7 @@ export default function ResponsablesServicePublicSection({
                 Cette administration n’a pas de responsable enregistré dans l’
                 <a
                   aria-label="Voir l’Annuaire de l’administration, nouvelle fenêtre"
-                  href="https://lannuaire.service-public.fr/"
+                  href="https://lannuaire.service-public.gouv.fr/"
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -119,7 +119,7 @@ const NotFoundInfo = () => (
     Cette administration n’a pas été retrouvé dans l’
     <a
       aria-label="Voir l’Annuaire de l’administration, nouvelle fenêtre"
-      href="https://lannuaire.service-public.fr/"
+      href="https://lannuaire.service-public.gouv.fr/"
       rel="noopener noreferrer"
       target="_blank"
     >

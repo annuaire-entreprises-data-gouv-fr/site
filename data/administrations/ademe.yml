@@ -18,7 +18,7 @@ dataSources:
     datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-rge-1/
     data:
       - label: Informations des professionnels RGE
-        form: https://entreprendre.service-public.fr/vosdroits/F32251
+        form: https://entreprendre.service-public.gouv.fr/vosdroits/F32251
   - label: Bilans GES (Gaz à Effet de Serre)
     apiSlug: bilan-ges
     datagouvLink: https://www.data.gouv.fr/fr/datasets/bilans-ges/

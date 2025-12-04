@@ -43,7 +43,7 @@ export type IServicePublicRecord = {
   code_insee_commune: string | null; // "38185",
   statut_de_diffusion: string | null; // "true",
   adresse: string | null; // "[{"type_adresse": "Adresse", "complement1": "Bus France Services Pimms Médiation Grenoble - ZR", "complement2": "", "numero_voie": "97 galerie de l'Arlequin", "service_distribution": "", "code_postal": "38100", "nom_commune": "Grenoble", "pays": "France", "continent": "Europe", "longitude": "5.73261", "latitude": "45.16411", "accessibilite": "", "note_accessibilite": ""}]",
-  url_service_public: string | null; // "https://lannuaire.service-public.fr/auvergne-rhone-alpes/isere/533cea79-fcee-4186-9b18-c6b3ea08892d",
+  url_service_public: string | null; // "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/isere/533cea79-fcee-4186-9b18-c6b3ea08892d",
   information_complementaire: string | null;
   date_diffusion: string | null;
 };
