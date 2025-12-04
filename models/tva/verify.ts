@@ -9,14 +9,13 @@ import { verifySiren, verifyTVANumber } from "#utils/helpers";
 import { tvaNumber } from "./utils";
 
 export const buildAndVerifyTVA = async (
-  slug: string,
-  userAgent: string
+  slug: string
 ): Promise<{ tva: string | null } | IAPINotRespondingError> => {
   const siren = verifySiren(slug);
   const tvaNumberFromSiren = verifyTVANumber(tvaNumber(siren));
 
   try {
-    return { tva: await clientTVA(tvaNumberFromSiren, userAgent) };
+    return { tva: await clientTVA(tvaNumberFromSiren) };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.VIES, 404);

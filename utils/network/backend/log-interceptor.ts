@@ -24,6 +24,12 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
       .find((line) => line.startsWith("x-initial-user-agent:"))
       ?.split(":")[1]
       .trim() || "";
+  const requestId =
+    (response.request?._header as string | undefined)
+      ?.split("\n")
+      .find((line) => line.startsWith("x-request-id:"))
+      ?.split(":")[1]
+      .trim() || "";
 
   // logged into stdout
   console.info(
@@ -32,7 +38,8 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
       response?.status,
       startTime ? endTime - startTime : undefined,
       (response?.config?.method || "").toUpperCase(),
-      initialAgent || ""
+      initialAgent || "",
+      requestId || ""
     )
   );
   return response;
