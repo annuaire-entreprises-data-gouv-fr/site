@@ -31,7 +31,12 @@ export default async function HomeLayout({
 }) {
   const session = await getSession();
   return (
-    <html lang="fr" style={marianne.style} suppressHydrationWarning>
+    <html
+      className="standalone-version"
+      lang="fr"
+      style={marianne.style}
+      suppressHydrationWarning
+    >
       <head>
         <link
           href="https://annuaire-entreprises.data.gouv.fr/opensearch.xml"
