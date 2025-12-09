@@ -2,23 +2,9 @@ import fs from "fs";
 import { HttpResponse, type HttpResponseResolver } from "msw";
 import path from "path";
 
-function getProjectRoot() {
-  const cwd = process.cwd();
-  // When running from .next/standalone, go back to actual project root
-  if (cwd.endsWith(path.join(".next", "standalone"))) {
-    return path.resolve(cwd, "..", "..");
-  }
-  return cwd;
-}
-
 function getSnapshots() {
   try {
-    const folderPath = path.join(
-      getProjectRoot(),
-      "cypress",
-      "fixtures",
-      "recherche-entreprise"
-    );
+    const folderPath = "./cypress/fixtures/recherche-entreprise";
     const files = fs.readdirSync(folderPath);
 
     const jsonFiles = files.filter((file) => file.endsWith(".json"));
