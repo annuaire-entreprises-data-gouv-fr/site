@@ -15,10 +15,9 @@ if (
 ) {
   // Mock server for Cypress, must be put here according to :
   // https://github.com/mswjs/examples/pull/101/files
-  import("#cypress/mocks/server").then(({ mockServer }) => {
-    mockServer.listen({
-      onUnhandledRequest: "error",
-    });
+  const { mockServer } = require("#cypress/mocks/server");
+  mockServer.listen({
+    onUnhandledRequest: "error",
   });
 }
 
@@ -31,12 +30,7 @@ export default async function HomeLayout({
 }) {
   const session = await getSession();
   return (
-    <html
-      className="standalone-version"
-      lang="fr"
-      style={marianne.style}
-      suppressHydrationWarning
-    >
+    <html lang="fr" style={marianne.style} suppressHydrationWarning>
       <head>
         <link
           href="https://annuaire-entreprises.data.gouv.fr/opensearch.xml"
