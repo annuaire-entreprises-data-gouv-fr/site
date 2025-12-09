@@ -55,163 +55,221 @@ import { s3HandlerMonitoring } from "./handlers/s3";
 import { tvaHandler } from "./handlers/tva";
 import { upDownIoHandler } from "./handlers/up-down-io";
 
+const stripQueryParams = (url: string) => url.split("?")[0];
+
 export const routesHandlers = [
-  http.get(`${process.env.PROXY_API_URL}${routes.proxy.tva("*")}`, tvaHandler),
   http.get(
-    `${process.env.PROXY_API_URL}${routes.proxy.eori("*")}`,
+    stripQueryParams(`${process.env.PROXY_API_URL}${routes.proxy.tva("*")}`),
+    tvaHandler
+  ),
+  http.get(
+    stripQueryParams(`${process.env.PROXY_API_URL}${routes.proxy.eori("*")}`),
     eoriHandler
   ),
-  http.get(`${process.env.PROXY_API_URL}${routes.proxy.ig("*")}`, igHandler),
   http.get(
-    `${process.env.PROXY_API_URL}${routes.proxy.rne.immatriculation.default("*")}`,
+    stripQueryParams(`${process.env.PROXY_API_URL}${routes.proxy.ig("*")}`),
+    igHandler
+  ),
+  http.get(
+    stripQueryParams(
+      `${process.env.PROXY_API_URL}${routes.proxy.rne.immatriculation.default("*")}`
+    ),
     rneDefaultHandler
   ),
   http.get(
-    `${process.env.PROXY_API_URL}${routes.proxy.rne.observations.fallback("*")}`,
+    stripQueryParams(
+      `${process.env.PROXY_API_URL}${routes.proxy.rne.observations.fallback("*")}`
+    ),
     rneObservationsFallbackHandler
   ),
   http.get(
-    routes.rechercheEntreprise.lastModified,
+    stripQueryParams(routes.rechercheEntreprise.lastModified),
     rechercheEntrepriseLastModifiedHandler
   ),
   http.get(
-    routes.rechercheEntreprise.rechercheUniteLegale,
+    stripQueryParams(routes.rechercheEntreprise.rechercheUniteLegale),
     rechercheEntrepriseHandler
   ),
   http.get(
-    routes.rechercheEntreprise.idcc.metadata,
+    stripQueryParams(routes.rechercheEntreprise.idcc.metadata),
     rechercheEntrepriseIdccMetadataHandler
   ),
   http.get(
-    routes.rechercheEntreprise.idcc.getBySiren(":siren"),
+    stripQueryParams(routes.rechercheEntreprise.idcc.getBySiren(":siren")),
     rechercheEntrepriseIdccHandler
   ),
-  http.get(routes.certifications.rge.api, rgeHandler),
-  http.get(routes.certifications.bio.api, apiBioHandler),
+  http.get(stripQueryParams(routes.certifications.rge.api), rgeHandler),
+  http.get(stripQueryParams(routes.certifications.bio.api), apiBioHandler),
   http.get(
-    routes.certifications.entrepriseInclusive.api.getBySiren("*"),
+    stripQueryParams(
+      routes.certifications.entrepriseInclusive.api.getBySiren("*")
+    ),
     apiInclusionHandler
   ),
   http.get(
-    routes.certifications.entrepriseInclusive.api.metadata,
+    stripQueryParams(routes.certifications.entrepriseInclusive.api.metadata),
     apiInclusionMetadataHandler
   ),
-  http.get(routes.datagouv.ess, apiDataGouvEssHandler),
+  http.get(stripQueryParams(routes.datagouv.ess), apiDataGouvEssHandler),
   http.get(
-    routes.datagouv.entrepreneursSpectacles,
+    stripQueryParams(routes.datagouv.entrepreneursSpectacles),
     entrepreneurSpectaclesHandler
   ),
-  http.get(routes.tooling.monitoring.getBySlug("*"), upDownIoHandler),
-  http.get(routes.apiDataSubvention.grants("*"), apiDataSubventionHandler),
-  http.get(routes.egapro.index, egaproHandler),
-  http.get(routes.egapro.representation, egaproRepresentationHandler),
-  http.get(routes.educationNationale.search, educationNationaleHandler),
-  http.get(routes.ban, baseAdresseNationaleHandler),
-  http.post(routes.sireneInsee.auth, apiSireneInseeAuthHandler),
-  http.get(routes.sireneInsee.getBySiret("*"), apiSireneInseeSiretHandler),
-  http.get(routes.sireneInsee.getBySiren("*"), apiSireneInseeSirenHandler),
-  http.get(routes.geo.communes, apiGeoCommunesHandler),
-  http.get(routes.geo.departements, apiGeoDepartementsHandler),
-  http.get(routes.geo.regions, apiGeoRegionsHandler),
-  http.get(routes.geo.epcis, apiGeoEpcisHandler),
   http.get(
-    routes.annuaireServicePublic.ods.search,
+    stripQueryParams(routes.tooling.monitoring.getBySlug("*")),
+    upDownIoHandler
+  ),
+  http.get(
+    stripQueryParams(routes.apiDataSubvention.grants("*")),
+    apiDataSubventionHandler
+  ),
+  http.get(stripQueryParams(routes.egapro.index), egaproHandler),
+  http.get(
+    stripQueryParams(routes.egapro.representation),
+    egaproRepresentationHandler
+  ),
+  http.get(
+    stripQueryParams(routes.educationNationale.search),
+    educationNationaleHandler
+  ),
+  http.get(stripQueryParams(routes.ban), baseAdresseNationaleHandler),
+  http.post(routes.sireneInsee.auth, apiSireneInseeAuthHandler),
+  http.get(
+    stripQueryParams(routes.sireneInsee.getBySiret("*")),
+    apiSireneInseeSiretHandler
+  ),
+  http.get(
+    stripQueryParams(routes.sireneInsee.getBySiren("*")),
+    apiSireneInseeSirenHandler
+  ),
+  http.get(stripQueryParams(routes.geo.communes), apiGeoCommunesHandler),
+  http.get(
+    stripQueryParams(routes.geo.departements),
+    apiGeoDepartementsHandler
+  ),
+  http.get(stripQueryParams(routes.geo.regions), apiGeoRegionsHandler),
+  http.get(stripQueryParams(routes.geo.epcis), apiGeoEpcisHandler),
+  http.get(
+    stripQueryParams(routes.annuaireServicePublic.ods.search),
     annuaireServicePublicHandler
   ),
-  http.get(routes.annuaireServicePublic.ods.metadata, odsMetadataHandler),
-  http.get(routes.donneesFinancieres.ods.search, donneesFinancieresHandler),
-  http.get(routes.donneesFinancieres.ods.metadata, odsMetadataHandler),
-  http.get(routes.bodacc.ods.search, bodaccHandler),
-  http.get(routes.bodacc.ods.metadata, odsMetadataHandler),
-  http.get(routes.dgefp.search, dgefpHandler),
-  http.get(routes.dgefp.metadata, odsMetadataHandler),
   http.get(
-    routes.journalOfficielAssociations.ods.search,
+    stripQueryParams(routes.annuaireServicePublic.ods.metadata),
+    odsMetadataHandler
+  ),
+  http.get(
+    stripQueryParams(routes.donneesFinancieres.ods.search),
+    donneesFinancieresHandler
+  ),
+  http.get(
+    stripQueryParams(routes.donneesFinancieres.ods.metadata),
+    odsMetadataHandler
+  ),
+  http.get(stripQueryParams(routes.bodacc.ods.search), bodaccHandler),
+  http.get(stripQueryParams(routes.bodacc.ods.metadata), odsMetadataHandler),
+  http.get(stripQueryParams(routes.dgefp.search), dgefpHandler),
+  http.get(stripQueryParams(routes.dgefp.metadata), odsMetadataHandler),
+  http.get(
+    stripQueryParams(routes.journalOfficielAssociations.ods.search),
     journalOfficielAssociationsHandler
   ),
-  http.get(routes.journalOfficielAssociations.ods.metadata, odsMetadataHandler),
   http.get(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.effectifs.annuels(
-      "*",
-      "*"
-    )}`,
+    stripQueryParams(routes.journalOfficielAssociations.ods.metadata),
+    odsMetadataHandler
+  ),
+  http.get(
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.effectifs.annuels("*", "*")}`
+    ),
     effectifsHandler
   ),
   http.get(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.dgfip.liensCapitalistiques("*", "*")}`,
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.dgfip.liensCapitalistiques("*", "*")}`
+    ),
     liensCapitalistiquesHandler
   ),
   http.get(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale(
-      "*"
-    )}`,
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale("*")}`
+    ),
     conformiteHandler
   ),
   http.get(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.conformite.vigilance("*")}`,
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.vigilance("*")}`
+    ),
     conformiteHandler
   ),
   http.get(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.msa(
-      "*"
-    )}`,
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.msa("*")}`
+    ),
     conformiteHandler
   ),
   http.get(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.carteProfessionnelleTravauxPublics("*")}`,
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.carteProfessionnelleTravauxPublics("*")}`
+    ),
     carteProfessionnelleTravauxPublicsHandler
   ),
   http.get(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.certifications.cibtp("*")}`,
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.certifications.cibtp("*")}`
+    ),
     certificationsHandler
   ),
   http.get(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.certifications.cnetp("*")}`,
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.certifications.cnetp("*")}`
+    ),
     certificationsHandler
   ),
   http.get(
-    `${
-      process.env.API_ENTREPRISE_URL
-    }${routes.apiEntreprise.certifications.probtp("*")}`,
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.certifications.probtp("*")}`
+    ),
     certificationsHandler
   ),
   http.get(
-    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.mandatairesRCS(
-      "*"
-    )}`,
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.mandatairesRCS("*")}`
+    ),
     mandatairesRcsHandler
   ),
   http.get(
-    `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.association("*")}`,
+    stripQueryParams(
+      `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.association("*")}`
+    ),
     associationPublicHandler
   ),
   http.get(
-    `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.associationPartenaires("*")}`,
+    stripQueryParams(
+      `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.associationPartenaires("*")}`
+    ),
     associationPrivateHandler
   ),
   http.get(
-    `https://${process.env.OVH_S3_MONITORING_BUCKET}.s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/monitoring_comptes_agents.csv`,
+    stripQueryParams(
+      `https://${process.env.OVH_S3_MONITORING_BUCKET}.s3.${process.env.OVH_S3_MONITORING_REGION}.io.cloud.ovh.net/monitoring_comptes_agents.csv`
+    ),
     s3HandlerMonitoring
   ),
   http.post(
-    routes.tooling.matomo.report.copyPasteEvents + "*",
+    stripQueryParams(routes.tooling.matomo.report.copyPasteEvents + "*"),
     matomoReportHandler
   ),
-  http.post(routes.tooling.matomo.report.npsEvents + "*", matomoReportHandler),
   http.post(
-    routes.tooling.matomo.report.bulkRequest + "*",
+    stripQueryParams(routes.tooling.matomo.report.npsEvents + "*"),
     matomoReportHandler
   ),
-  http.post(routes.tooling.matomo.tracker + "*", matomoReportHandler),
-  http.get(routes.tooling.grist + "*", gristHandler),
+  http.post(
+    stripQueryParams(routes.tooling.matomo.report.bulkRequest + "*"),
+    matomoReportHandler
+  ),
+  http.post(
+    stripQueryParams(routes.tooling.matomo.tracker + "*"),
+    matomoReportHandler
+  ),
+  http.get(stripQueryParams(routes.tooling.grist + "*"), gristHandler),
 ];
