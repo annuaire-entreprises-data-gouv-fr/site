@@ -88,7 +88,7 @@
     "ultracite": "^5.4.7"
   },
   "optionalDependencies": {
-    "@swc/core-linux-x64-gnu": "^1.7.36",
+    "@swc/core-linux-x64-gnu": "^1.15.3",
     "esbuild-linux-64": "^0.15.18",
     "tsconfig-paths": "^4.2.0"
   }
