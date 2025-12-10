@@ -5,7 +5,7 @@ import { FileInput } from "./file-input";
 import styles from "./styles.module.css";
 
 type Location = {
-  type: "dep" | "cp";
+  type: "dep" | "insee";
   value: string;
   label: string;
 };
@@ -42,7 +42,7 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
           } else if (regexCommuneLocations.test(line)) {
             if (!acc.locations.some((loc) => loc.value === line)) {
               acc.locations.push({
-                type: "cp",
+                type: "insee",
                 value: line,
                 label: `${line} - Commune`,
               });
