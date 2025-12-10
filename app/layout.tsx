@@ -15,10 +15,9 @@ if (
 ) {
   // Mock server for Cypress, must be put here according to :
   // https://github.com/mswjs/examples/pull/101/files
-  import("#cypress/mocks/server").then(({ mockServer }) => {
-    mockServer.listen({
-      onUnhandledRequest: "error",
-    });
+  const { mockServer } = require("#cypress/mocks/server");
+  mockServer.listen({
+    onUnhandledRequest: "error",
   });
 }
 
