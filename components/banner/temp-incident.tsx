@@ -4,9 +4,9 @@ import styles from "./styles.module.css";
 
 const TEMP_INCIDENT_BANNER = {
   message: `
-  ⚠️ Notre partenaire ProConnect est en cours de mise à jour. Durant cette période, il est possible que les agents publics rencontrent des difficultés à se connecter.
-  Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser pour la gêne occasionnée.`,
-  shouldDisplay: false,
+  🚨 Nous rencontrons actuellement des difficultés techniques, le service peut être temporairement indisponible.
+    Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser pour la gêne occasionnée.`,
+  shouldDisplay: true,
 };
 
 export default function TempIncidentBanner() {
