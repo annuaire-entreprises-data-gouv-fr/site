@@ -3,6 +3,7 @@ import Favourites from "#components/favourites";
 import SearchBar from "#components/search-bar";
 import StructuredDataSearchAction from "#components/structured-data/search";
 import { LogoAnnuaireWithEasterEgg } from "#components-ui/logo-annuaire/logo-with-easter-egg";
+import { isFeatureFlagEnabled } from "#models/feature-flags";
 
 export const metadata: Metadata = {
   title:
@@ -15,10 +16,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function IndexPage() {
+export default async function IndexPage() {
+  const isExportSireneFeatureFlagEnabled = await isFeatureFlagEnabled(
+    "new_agent_onboarding"
+  );
+
   return (
     <>
       <StructuredDataSearchAction />
+      {isExportSireneFeatureFlagEnabled ? (
+        <div>Feature flag enabled</div>
+      ) : (
+        <div>Feature flag disabled</div>
+      )}
       <div className="layout-center">
         <form
           action={"/rechercher"}

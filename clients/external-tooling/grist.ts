@@ -23,6 +23,10 @@ const gristTables = {
     docId: "uE2WGSjyBbSfiuSGbQiN9K",
     tableId: "Protected_siren",
   },
+  "feature-flags": {
+    docId: "uE2WGSjyBbSfiuSGbQiN9K",
+    tableId: "Feature_flags",
+  },
 } as const;
 
 function getGristUrl(tableKey: keyof typeof gristTables) {
@@ -61,6 +65,7 @@ export async function logInGrist(
 }
 
 export async function readFromGrist(tableKey: keyof typeof gristTables) {
+  console.log("==== getGristUrl(tableKey) ==== ", getGristUrl(tableKey));
   const { records } = await httpClient<IGristRecords>({
     method: "GET",
     url: getGristUrl(tableKey),
