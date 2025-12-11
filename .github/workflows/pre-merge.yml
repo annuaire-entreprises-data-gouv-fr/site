@@ -11,7 +11,7 @@ on:
 # Be extremely careful as the env variables defined here are accessible by all the actions of the workflow.
 # For critical env variable, declare it within the action.
 env:
-  node-version: 18.x
+  node-version: 20.x
   INSEE_USERNAME: ${{ secrets.INSEE_USERNAME }}
   INSEE_PASSWORD: ${{ secrets.INSEE_PASSWORD }}
   INSEE_CLIENT_ID: ${{ secrets.INSEE_CLIENT_ID }}
