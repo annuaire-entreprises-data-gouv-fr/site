@@ -1,0 +1,17 @@
+name: Adds all pull requests to project board
+
+on:
+  pull_request:
+    types:
+      - opened
+      - labeled
+
+jobs:
+  add-to-project:
+    name: Add pull request to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/annuaire-entreprises-data-gouv-fr/projects/1
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
