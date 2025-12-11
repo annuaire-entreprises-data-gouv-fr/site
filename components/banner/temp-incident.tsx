@@ -6,7 +6,7 @@ const TEMP_INCIDENT_BANNER = {
   message: `
   🚨 Nous rencontrons actuellement des difficultés techniques, le service peut être temporairement indisponible.
     Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser pour la gêne occasionnée.`,
-  shouldDisplay: true,
+  shouldDisplay: false,
 };
 
 export default function TempIncidentBanner() {
