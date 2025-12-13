@@ -6,7 +6,7 @@
   },
   "result": {
     "currentPage": 1,
-    "resultCount": 6,
+    "resultCount": 5,
     "pageCount": 1,
     "results": [
       {
@@ -193,7 +193,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -454,7 +455,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -795,7 +797,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -1031,7 +1034,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -1093,242 +1097,6 @@
             "role": "GERANT",
             "nationalite": "FRANÇAISE",
             "dateNaissancePartial": "1952-06",
-            "estDemissionnaire": false,
-            "dateDemission": null
-          }
-        ]
-      },
-      {
-        "siren": "800069130",
-        "oldSiren": "800069130",
-        "siege": {
-          "siren": "800069130",
-          "siret": "80006913000022",
-          "oldSiret": "",
-          "etatAdministratif": "en activité",
-          "statutDiffusion": "diffusible",
-          "estSiege": true,
-          "ancienSiege": false,
-          "enseigne": "",
-          "denomination": null,
-          "nic": "00022",
-          "dateCreation": "2024-06-06",
-          "dateDerniereMiseAJour": "",
-          "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2024-06-06",
-          "dateFermeture": "",
-          "adresse": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
-          "adressePostale": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
-          "codePostal": "34990",
-          "commune": "JUVIGNAC",
-          "activitePrincipale": "43.33Z",
-          "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs (43.33Z)",
-          "trancheEffectif": "__O__",
-          "anneeTrancheEffectif": null,
-          "latitude": "43.616979",
-          "longitude": "3.811008",
-          "complements": {
-            "estEntrepreneurIndividuel": false,
-            "estPersonneMorale": true,
-            "idFiness": [],
-            "idBio": [],
-            "idOrganismeFormation": [],
-            "idRge": [],
-            "idUai": []
-          },
-          "listeIdcc": []
-        },
-        "tva": null,
-        "anciensSiegesSirets": [],
-        "statutDiffusion": "diffusible",
-        "etatAdministratif": "en activité",
-        "nomComplet": "SOL GRAND SUD (S.G.S)",
-        "chemin": "sol-grand-sud-s-g-s-800069130",
-        "natureJuridique": "5499",
-        "libelleNatureJuridique": "Société à responsabilité limitée (sans autre indication)",
-        "etablissements": {
-          "all": [
-            {
-              "siren": "800069130",
-              "siret": "80006913000022",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "ancienSiege": false,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00022",
-              "dateCreation": "2024-06-06",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2024-06-06",
-              "dateFermeture": "",
-              "adresse": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
-              "adressePostale": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
-              "codePostal": "34990",
-              "commune": "JUVIGNAC",
-              "activitePrincipale": "43.33Z",
-              "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs (43.33Z)",
-              "trancheEffectif": "__O__",
-              "anneeTrancheEffectif": null,
-              "latitude": "43.616979",
-              "longitude": "3.811008",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "estPersonneMorale": true,
-                "idFiness": [],
-                "idBio": [],
-                "idOrganismeFormation": [],
-                "idRge": [],
-                "idUai": []
-              },
-              "listeIdcc": []
-            }
-          ],
-          "open": [
-            {
-              "siren": "800069130",
-              "siret": "80006913000022",
-              "oldSiret": "",
-              "etatAdministratif": "en activité",
-              "statutDiffusion": "diffusible",
-              "estSiege": true,
-              "ancienSiege": false,
-              "enseigne": "",
-              "denomination": null,
-              "nic": "00022",
-              "dateCreation": "2024-06-06",
-              "dateDerniereMiseAJour": "",
-              "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2024-06-06",
-              "dateFermeture": "",
-              "adresse": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
-              "adressePostale": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
-              "codePostal": "34990",
-              "commune": "JUVIGNAC",
-              "activitePrincipale": "43.33Z",
-              "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs (43.33Z)",
-              "trancheEffectif": "__O__",
-              "anneeTrancheEffectif": null,
-              "latitude": "43.616979",
-              "longitude": "3.811008",
-              "complements": {
-                "estEntrepreneurIndividuel": false,
-                "estPersonneMorale": true,
-                "idFiness": [],
-                "idBio": [],
-                "idOrganismeFormation": [],
-                "idRge": [],
-                "idUai": []
-              },
-              "listeIdcc": []
-            }
-          ],
-          "unknown": [],
-          "closed": [],
-          "nombreEtablissementsOuverts": 1,
-          "nombreEtablissements": 2,
-          "usePagination": false,
-          "currentEtablissementPage": 1
-        },
-        "activitePrincipale": "43.33Z",
-        "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs",
-        "dateCreation": "2014-01-13",
-        "dateFermeture": "",
-        "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-06-27T12:21:00",
-        "dateMiseAJourInpi": "2024-09-21T03:34:50",
-        "dateMiseAJourIG": "",
-        "dateDebutActivite": "",
-        "trancheEffectif": "01",
-        "anneeCategorieEntreprise": "2023",
-        "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2023",
-        "complements": {
-          "estBio": false,
-          "estEss": false,
-          "estServicePublic": false,
-          "estL100_3": false,
-          "estEntrepreneurIndividuel": false,
-          "estPersonneMorale": true,
-          "estEntrepreneurSpectacle": false,
-          "statutEntrepreneurSpectacle": null,
-          "estFiness": false,
-          "egaproRenseignee": false,
-          "estRge": false,
-          "estOrganismeFormation": false,
-          "estSocieteMission": false,
-          "estQualiopi": false,
-          "estAssociation": false,
-          "estUai": false,
-          "estAchatsResponsables": false,
-          "estEntrepriseInclusive": false,
-          "typeEntrepriseInclusive": null,
-          "estPatrimoineVivant": false,
-          "estAlimConfiance": false,
-          "bilanGesRenseigne": false
-        },
-        "association": {
-          "idAssociation": null,
-          "data": null
-        },
-        "colter": {
-          "codeColter": null
-        },
-        "listeIdcc": [],
-        "immatriculation": null,
-        "isNbEtablissementOuvertReliable": true,
-        "matchingEtablissements": [
-          {
-            "siren": "800069130",
-            "siret": "80006913000022",
-            "oldSiret": "",
-            "etatAdministratif": "en activité",
-            "statutDiffusion": "diffusible",
-            "estSiege": true,
-            "ancienSiege": false,
-            "enseigne": "",
-            "denomination": null,
-            "nic": "00022",
-            "dateCreation": "2024-06-06",
-            "dateDerniereMiseAJour": "",
-            "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2024-06-06",
-            "dateFermeture": "",
-            "adresse": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
-            "adressePostale": "RES GREEN VIEW APT B309 125 RUE GANYMEDE 34990 JUVIGNAC",
-            "codePostal": "34990",
-            "commune": "JUVIGNAC",
-            "activitePrincipale": "43.33Z",
-            "libelleActivitePrincipale": "Travaux de revêtement des sols et des murs (43.33Z)",
-            "trancheEffectif": "__O__",
-            "anneeTrancheEffectif": null,
-            "latitude": "43.616979",
-            "longitude": "3.811008",
-            "complements": {
-              "estEntrepreneurIndividuel": false,
-              "estPersonneMorale": true,
-              "idFiness": [],
-              "idBio": [],
-              "idOrganismeFormation": [],
-              "idRge": [],
-              "idUai": []
-            },
-            "listeIdcc": []
-          }
-        ],
-        "nombreEtablissements": 2,
-        "nombreEtablissementsOuverts": 1,
-        "dirigeants": [
-          {
-            "sexe": null,
-            "nom": "TURK (TURK)",
-            "prenom": "Suat",
-            "prenoms": "Suat",
-            "role": "GERANT",
-            "nationalite": "Turque",
-            "dateNaissancePartial": "1980-08",
             "estDemissionnaire": false,
             "dateDemission": null
           }
@@ -1518,7 +1286,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,

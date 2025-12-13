@@ -205,7 +205,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": true,
-          "bilanGesRenseigne": true
+          "bilanGesRenseigne": true,
+          "idFinessJuridiques": ["750805483", "750002008"]
         },
         "association": {
           "idAssociation": null,
