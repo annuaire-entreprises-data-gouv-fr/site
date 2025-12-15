@@ -23,6 +23,13 @@ export type IAgentsGroup = {
   contract_url?: string;
 };
 
+export type IAgentsOrganizationGroup = {
+  id: number;
+  name: string;
+  adminEmail: string;
+  scopes: IAgentScope[];
+};
+
 async function run<T>(callback: () => Promise<T>): Promise<T> {
   try {
     return await callback();

@@ -286,6 +286,9 @@ const routes = {
       removeUserFromGroup: (groupId: number, userId: number) =>
         `/resource-server/groups/${groupId}/users/${userId}?`,
     },
+    organizations: {
+      getGroups: "/resource-server/organizations/groups",
+    },
     roles: {
       get: "/roles",
     },
