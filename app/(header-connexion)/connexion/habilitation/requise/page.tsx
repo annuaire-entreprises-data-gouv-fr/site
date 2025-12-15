@@ -28,7 +28,7 @@ export default async function RequiredHabilitationPage(props: AppRouterProps) {
         </a>{" "}
         <strong>au sens de l’article L. 100-3</strong>. Si vous appartenez bien
         à une administration L. 100-3, vous pouvez{" "}
-        <a href="https://www.demarches-simplifiees.fr/commencer/demande-d-ajout-a-la-liste-des-administrations">
+        <a href="https://demarche.numerique.gouv.fr/commencer/demande-d-ajout-a-la-liste-des-administrations">
           faire une demande d’ajout
         </a>{" "}
         de votre organisation à la liste.
