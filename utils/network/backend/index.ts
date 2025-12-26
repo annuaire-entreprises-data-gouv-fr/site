@@ -41,11 +41,24 @@ const axiosInstanceFactory = (timeout = constants.timeout.L): AxiosInstance => {
 const axiosInstance = axiosInstanceFactory();
 
 async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
+  const { headers } = await import("next/headers");
+
+  let resolvedHeaders: Headers;
+  try {
+    resolvedHeaders = await headers();
+  } catch (error) {
+    resolvedHeaders = new Headers();
+  }
+  const userAgent = resolvedHeaders.get("user-agent") || "";
+  const requestId = resolvedHeaders.get("x-request-id") || "";
+
   const response = await axiosInstance({
     timeout: constants.timeout.L,
     ...config,
     headers: {
       "User-Agent": "annuaire-entreprises-site",
+      "x-initial-user-agent": userAgent,
+      "x-request-id": requestId,
       ...(config.headers || {}),
     },
   });
@@ -53,5 +66,3 @@ async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
 }
 
 export { httpBackClient };
-
-export default httpBackClient;
