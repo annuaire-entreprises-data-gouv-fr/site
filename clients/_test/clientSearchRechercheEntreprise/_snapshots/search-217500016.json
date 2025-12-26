@@ -175,7 +175,7 @@
         "dateCreation": "1983-03-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2025-09-03T15:38:45",
+        "dateMiseAJourInsee": "2025-12-06T05:40:24",
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -205,7 +205,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": true,
-          "bilanGesRenseigne": true
+          "bilanGesRenseigne": true,
+          "idFinessJuridiques": ["750805483", "750002008"]
         },
         "association": {
           "idAssociation": null,

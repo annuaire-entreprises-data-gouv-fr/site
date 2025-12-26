@@ -178,7 +178,8 @@
           "typeEntrepriseInclusive": "ESAT",
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -210,8 +211,8 @@
             "prenom": "Claire",
             "prenoms": "Claire",
             "role": "",
-            "nationalite": null,
-            "dateNaissancePartial": null,
+            "nationalite": "FRANÇAISE",
+            "dateNaissancePartial": "1978-10",
             "estDemissionnaire": false,
             "dateDemission": null
           }
