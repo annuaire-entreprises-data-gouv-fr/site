@@ -32,3 +32,10 @@ export interface IAgentsGroupResponse extends IAgentsGroupCreate {
   id: number;
   users: IRolesDataUser[];
 }
+
+export interface IAgentsOrganizationGroupResponse {
+  id: number;
+  name: string;
+  admin: { email: string };
+  scopes: string;
+}
