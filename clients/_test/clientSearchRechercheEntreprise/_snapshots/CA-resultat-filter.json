@@ -26,7 +26,7 @@
           "dateCreation": "2016-01-15",
           "dateDerniereMiseAJour": "",
           "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2017-06-01",
+          "dateDebutActivite": "2016-01-15",
           "dateFermeture": "",
           "adresse": "3 RUE DE LA GAITE 75014 PARIS",
           "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
@@ -78,7 +78,7 @@
               "dateCreation": "2016-01-15",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2017-06-01",
+              "dateDebutActivite": "2016-01-15",
               "dateFermeture": "",
               "adresse": "3 RUE DE LA GAITE 75014 PARIS",
               "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
@@ -122,7 +122,7 @@
               "dateCreation": "2016-01-15",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2017-06-01",
+              "dateDebutActivite": "2016-01-15",
               "dateFermeture": "",
               "adresse": "3 RUE DE LA GAITE 75014 PARIS",
               "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
@@ -163,7 +163,7 @@
         "dateCreation": "2016-01-15",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-03-22T14:26:06",
+        "dateMiseAJourInsee": "2025-12-06T09:21:13",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -193,7 +193,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -225,7 +226,7 @@
             "dateCreation": "2016-01-15",
             "dateDerniereMiseAJour": "",
             "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2017-06-01",
+            "dateDebutActivite": "2016-01-15",
             "dateFermeture": "",
             "adresse": "3 RUE DE LA GAITE 75014 PARIS",
             "adressePostale": "3 RUE DE LA GAITE 75014 PARIS",
@@ -287,7 +288,7 @@
           "dateCreation": "2013-07-01",
           "dateDerniereMiseAJour": "",
           "dateMiseAJourInsee": "",
-          "dateDebutActivite": "2022-07-18",
+          "dateDebutActivite": "2013-07-01",
           "dateFermeture": "",
           "adresse": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
           "adressePostale": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
@@ -339,7 +340,7 @@
               "dateCreation": "2013-07-01",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2022-07-18",
+              "dateDebutActivite": "2013-07-01",
               "dateFermeture": "",
               "adresse": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
               "adressePostale": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
@@ -383,7 +384,7 @@
               "dateCreation": "2013-07-01",
               "dateDerniereMiseAJour": "",
               "dateMiseAJourInsee": "",
-              "dateDebutActivite": "2022-07-18",
+              "dateDebutActivite": "2013-07-01",
               "dateFermeture": "",
               "adresse": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
               "adressePostale": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
@@ -424,7 +425,7 @@
         "dateCreation": "1997-12-08",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-10-17T05:12:35",
+        "dateMiseAJourInsee": "2025-12-06T06:27:31",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -454,7 +455,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -486,7 +488,7 @@
             "dateCreation": "2013-07-01",
             "dateDerniereMiseAJour": "",
             "dateMiseAJourInsee": "",
-            "dateDebutActivite": "2022-07-18",
+            "dateDebutActivite": "2013-07-01",
             "dateFermeture": "",
             "adresse": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
             "adressePostale": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
@@ -765,7 +767,7 @@
         "dateCreation": "2006-09-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-03-22T14:26:06",
+        "dateMiseAJourInsee": "2025-12-06T08:55:43",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -795,7 +797,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -1001,7 +1004,7 @@
         "dateCreation": "2004-09-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2025-02-10T10:01:13",
+        "dateMiseAJourInsee": "2025-12-06T09:50:48",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -1031,7 +1034,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -1237,7 +1241,7 @@
         "dateCreation": "2014-01-13",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-06-27T12:21:00",
+        "dateMiseAJourInsee": "2025-12-06T10:30:20",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -1267,7 +1271,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -1488,7 +1493,7 @@
         "dateCreation": "2019-07-09",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2024-09-21T03:34:50",
-        "dateMiseAJourInsee": "2024-09-03T13:11:44",
+        "dateMiseAJourInsee": "2025-12-06T08:22:41",
         "dateMiseAJourInpi": "2024-09-21T03:34:50",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -1518,7 +1523,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
