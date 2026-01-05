@@ -37,6 +37,7 @@ export interface IEtablissement {
   commune: string;
   activitePrincipale: string;
   libelleActivitePrincipale: string;
+  libelleActivitePrincipaleNaf25: string;
   trancheEffectif: string;
   anneeTrancheEffectif: string | null;
   latitude: string;
@@ -73,6 +74,7 @@ export const createDefaultEtablissement = (): IEtablissement => ({
   commune: "",
   activitePrincipale: "",
   libelleActivitePrincipale: "",
+  libelleActivitePrincipaleNaf25: "",
   trancheEffectif: "",
   anneeTrancheEffectif: "",
   latitude: "",
@@ -92,6 +94,7 @@ export interface IUniteLegale extends IEtablissementsList {
   libelleNatureJuridique: string;
   activitePrincipale: string;
   libelleActivitePrincipale: string;
+  libelleActivitePrincipaleNaf25: string;
   dateCreation: string;
   dateDerniereMiseAJour: string;
   // should never be empty
@@ -140,6 +143,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     etablissements: createEtablissementsList([siege]),
     activitePrincipale: "",
     libelleActivitePrincipale: "",
+    libelleActivitePrincipaleNaf25: "",
     dateCreation: "",
     dateFermeture: "",
     dateDerniereMiseAJour: "",

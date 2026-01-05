@@ -1,6 +1,7 @@
 import { escapeString } from "./formatting";
 import { categoriesJuridiquesNiveau3 } from "./metadata/categories-juridiques";
 import { codesNAF1993 } from "./metadata/codes-NAF-1993";
+import { codesNAF2025 } from "./metadata/codes-NAF-2025";
 import { codesNAFRev1 } from "./metadata/codes-NAF-rev-1";
 import { codesNAFRev2 } from "./metadata/codes-NAF-rev-2";
 import { codesNAP } from "./metadata/codes-NAP";
@@ -57,6 +58,8 @@ const getNomenclature = (nomenclature: string) => {
       return codesNAFRev1;
     case "NAF1993":
       return codesNAF1993;
+    case "NAF2025":
+      return codesNAF2025;
     case "NAFRev2":
     default:
       return codesNAFRev2;
@@ -89,6 +92,7 @@ export const libelleFromCodeNAFWithoutNomenclature = (
     codesNAFRev2,
     codesNAFRev1,
     codesNAF1993,
+    codesNAF2025,
     codesNAP,
   ]) {
     const label = nomenclature[code];

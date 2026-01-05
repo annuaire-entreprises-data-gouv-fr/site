@@ -101,6 +101,23 @@ const UniteLegaleSummarySection: React.FC<{
     ["Activité principale (NAF/APE)", uniteLegale.libelleActivitePrincipale],
     ["Code NAF/APE", uniteLegale.activitePrincipale],
     [
+      <FAQLink tooltipLabel="Activité principale (NAF 2025)">
+        Le code NAF 2025 est une variable issue de la nouvelle nomenclature
+        d’activités de l’Insee. Il sera applicable à partir du 1ᵉʳ janvier 2027
+        et coexistera jusqu’en fin 2026 avec la NAF actuellement en vigueur.
+        <br />
+        <br />
+        <a
+          href="https://www.insee.fr/fr/information/8181066"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          En savoir plus sur la nomenclature NAF 2025 sur le site de l’Insee
+        </a>
+      </FAQLink>,
+      uniteLegale.libelleActivitePrincipaleNaf25,
+    ],
+    [
       <a href="/faq/modifier-adresse">Adresse postale</a>,
       uniteLegale.siege.adressePostale,
     ],

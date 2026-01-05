@@ -161,6 +161,7 @@ export const mapToEtablissement = (
     ancien_siege = false,
     nom_commercial = "",
     activite_principale = "",
+    activite_principale_naf25 = "",
     date_creation = "",
     date_debut_activite = "",
     date_fermeture = "",
@@ -221,6 +222,9 @@ export const mapToEtablissement = (
     denomination: nom_commercial,
     libelleActivitePrincipale:
       libelleFromCodeNAFWithoutNomenclature(activite_principale),
+    libelleActivitePrincipaleNaf25: libelleFromCodeNAFWithoutNomenclature(
+      activite_principale_naf25
+    ),
     activitePrincipale: activite_principale,
     dateCreation: parseDateCreationInsee(date_creation),
     dateDebutActivite: date_debut_activite ?? "",
