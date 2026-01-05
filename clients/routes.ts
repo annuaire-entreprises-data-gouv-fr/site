@@ -63,7 +63,7 @@ const routes = {
         `/v3/gip_mds/unites_legales/${siren}/effectifs_annuels/${year}`,
     },
   },
-  ban: "https://api-adresse.data.gouv.fr/search",
+  ban: "https://data.geopf.fr/geocodage/search",
   bodacc: {
     ods: {
       metadata:
