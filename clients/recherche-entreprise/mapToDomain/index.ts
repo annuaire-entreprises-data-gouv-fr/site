@@ -20,7 +20,7 @@ import {
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
 } from "#utils/helpers/insee-variables";
-import { getCapital, getDateFin } from "#utils/helpers/rne-variables";
+import { getCapital } from "#utils/helpers/rne-variables";
 import type {
   IDirigeant,
   IMatchingEtablissement,
@@ -61,14 +61,13 @@ export const mapToImmatriculation = (i: IResult["immatriculation"] | null) => {
     return null;
   }
 
-  const duree = i?.duree_personne_morale ?? 0;
   const dateImmatriculation = i?.date_immatriculation ?? "";
+  const dateFin = i?.date_fin_existence ?? "";
   return {
     dateDebutActivite: i?.date_debut_activite ?? "",
     dateRadiation: i?.date_radiation ?? "",
     dateImmatriculation,
-    duree,
-    dateFin: getDateFin(duree, dateImmatriculation),
+    dateFin,
     natureEntreprise: i?.nature_entreprise || [],
     dateCloture: i?.date_cloture_exercice ?? "",
     isPersonneMorale: !!i?.capital_social,
