@@ -66,6 +66,7 @@ export class SireneQueryBuilder {
       "enseigne3Etablissement",
       "denominationUsuelleEtablissement",
       "activitePrincipaleEtablissement",
+      "activitePrincipaleNAF25Etablissement",
       "nomenclatureActivitePrincipaleEtablissement",
       "caractereEmployeurEtablissement",
       "coordonneeLambertAbscisseEtablissement",
