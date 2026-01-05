@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import type { Dispatch, SetStateAction } from "react";
+import { type Dispatch, type SetStateAction, useMemo } from "react";
 import DualRangeSlider from "#components-ui/dual-range-slider";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
@@ -54,8 +54,6 @@ const getLegalCategoriesNiveau1 = () =>
     label: `${categorie} - ${categoriesJuridiquesNiveau1[categorie]}`,
   }));
 
-const todayString = new Date().toISOString().split("T")[0];
-
 export default function Filters({
   setFilters,
   filters,
@@ -71,6 +69,8 @@ export default function Filters({
         : [...prev.categories, value],
     }));
   };
+
+  const todayString = useMemo(() => new Date().toISOString().split("T")[0], []);
 
   return (
     <>
