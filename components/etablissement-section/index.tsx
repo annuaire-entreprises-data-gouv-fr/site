@@ -6,6 +6,7 @@ import ExtraitRNELink from "#components/justificatifs/extrait-rne-link";
 import { Section } from "#components/section";
 import { CopyPaste } from "#components/table/copy-paste";
 import { TwoColumnTable } from "#components/table/simple";
+import FAQLink from "#components-ui/faq-link";
 import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import BreakPageForPrint from "#components-ui/print-break-page";
 import { PrintNever } from "#components-ui/print-visibility";
@@ -100,6 +101,23 @@ const EtablissementSection: React.FC<IProps> = ({
       etablissement.libelleActivitePrincipale,
     ],
     ["Code NAF/APE de l’établissement", etablissement.activitePrincipale],
+    [
+      <FAQLink tooltipLabel="Activité principale de l’établissement (NAF 2025)">
+        Le code NAF 2025 est une variable issue de la nouvelle nomenclature
+        d’activités de l’Insee. Il sera applicable à partir du 1ᵉʳ janvier 2027
+        et coexistera jusqu’en fin 2026 avec la NAF actuellement en vigueur.
+        <br />
+        <br />
+        <a
+          href="https://www.insee.fr/fr/information/8181066"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          En savoir plus sur la nomenclature NAF 2025 sur le site de l’Insee
+        </a>
+      </FAQLink>,
+      etablissement.libelleActivitePrincipaleNaf25,
+    ],
     ["Forme juridique", uniteLegale.libelleNatureJuridique],
     [
       "Tranche d’effectif salarié",

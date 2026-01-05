@@ -265,6 +265,9 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       result.activite_principale,
       false
     ),
+    libelleActivitePrincipaleNaf25: libelleFromCodeNAFWithoutNomenclature(
+      result.activite_principale_naf25
+    ),
     activitePrincipale: result.activite_principale,
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {

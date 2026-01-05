@@ -13,6 +13,7 @@ export type IResult = {
   nombre_etablissements_ouverts: number;
   siege: ISiege;
   activite_principale: string;
+  activite_principale_naf25: string;
   date_creation: string;
   date_fermeture: string;
   date_mise_a_jour: string;
@@ -52,6 +53,7 @@ export type IDirigeant = {
 export type IEtablissementCore = {
   ancien_siege: boolean;
   activite_principale: string;
+  activite_principale_naf25: string;
   adresse: string;
   commune: string;
   code_postal: string;
