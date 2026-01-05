@@ -135,8 +135,8 @@ export type IComplements = {
 export type IImmatriculationResponse = {
   date_debut_activite: string | null;
   date_immatriculation: string | null;
+  date_fin_existence: string | null;
   date_radiation: string | null;
-  duree_personne_morale: number | null;
   nature_entreprise: string[];
   date_cloture_exercice: string | null;
   capital_social: number | null;

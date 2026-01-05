@@ -173,7 +173,6 @@ export interface IUniteLegaleImmatriculation {
   dateImmatriculation: string;
   dateRadiation: string;
   dateFin: string;
-  duree: number | string;
   natureEntreprise: string[];
   dateCloture: string;
   isPersonneMorale: boolean;

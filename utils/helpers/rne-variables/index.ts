@@ -1,25 +1,3 @@
-import { formatDate } from "../formatting/formatting";
-
-/**
- * compute date at which personne morale will end
- * @param duree
- * @param dateImmatriculation
- * @returns
- */
-export function getDateFin(
-  duree: number | null,
-  dateImmatriculation: string | null
-): string {
-  try {
-    if (duree && dateImmatriculation) {
-      const d = new Date(dateImmatriculation);
-      d.setFullYear(d.getFullYear() + duree);
-      return formatDate(d) || "";
-    }
-  } catch {}
-  return "";
-}
-
 /**
  * Compute capital social
  *

@@ -188,6 +188,7 @@
         "immatriculation": {
           "date_debut_activite": null,
           "date_immatriculation": "1955-03-01",
+          "date_fin_existence": "2054-03-01",
           "date_radiation": null,
           "duree_personne_morale": 99,
           "nature_entreprise": ["Commerciale"],
