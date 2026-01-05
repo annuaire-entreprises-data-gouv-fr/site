@@ -2,7 +2,7 @@ describe("Immatriculation RNE", () => {
   it("Should display immatriculation", () => {
     cy.visit("/entreprise/552032534");
     cy.contains("Immatriculée au RNE");
-    cy.contains("99 ans, jusqu’au 01/03/2054");
+    cy.contains("01/03/2054");
   });
 
   it("Should display immatriculation even for non diffusible", () => {
@@ -14,7 +14,7 @@ describe("Immatriculation RNE", () => {
   it("Should display immatriculation even for closed structure", () => {
     cy.visit("/entreprise/880878145");
     cy.contains("Radiée au RNE");
-    cy.contains("99 ans, jusqu’au 23/01/2119");
+    cy.contains("23/01/2119");
   });
 
   // could also use 929081255, 784410607

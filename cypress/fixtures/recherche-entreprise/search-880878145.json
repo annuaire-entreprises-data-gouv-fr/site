@@ -86,6 +86,7 @@
         "immatriculation": {
           "date_debut_activite": "2020-01-13",
           "date_immatriculation": "2020-01-23",
+          "date_fin_existence": "2119-01-23",
           "date_radiation": "2022-11-14",
           "duree_personne_morale": 99,
           "nature_entreprise": ["Commerciale"],
