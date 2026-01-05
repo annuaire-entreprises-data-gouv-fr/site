@@ -11,6 +11,12 @@
 #   site: true
 
 ---
+- date: 05/01/2026
+  target:
+    api: true
+    site: true
+  body: |
+    Ajout de l'activité principale de l'entreprise et des établissements selon la [nouvelle nomenclature NAF 2025](https://www.insee.fr/fr/information/8181066).
 - date: 01/12/2025
   target:
     site: true
