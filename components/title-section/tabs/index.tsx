@@ -165,7 +165,7 @@ export const TabsForEtablissement: React.FC<{
       {tabs
         .filter(({ shouldDisplay }) => shouldDisplay)
         .map(({ path, pathPrefix, label, noFollow }) => (
-          <li>
+          <li key={label}>
             <a
               href={path || `${pathPrefix}${uniteLegale.siren}`}
               rel={noFollow ? "nofollow" : ""}
