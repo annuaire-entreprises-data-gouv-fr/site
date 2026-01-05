@@ -50,6 +50,7 @@ type IInseeUniteLegaleResponse = {
     prenomUsuelUniteLegale: string;
     sexeUniteLegale: "M" | "F";
     identifiantAssociationUniteLegale: string | null;
+    activitePrincipaleNAF25UniteLegale: string;
   };
 };
 
@@ -151,6 +152,7 @@ const mapToDomainObject = (
     identifiantAssociationUniteLegale,
     categorieEntreprise,
     anneeCategorieEntreprise,
+    activitePrincipaleNAF25UniteLegale = "",
   } = response.uniteLegale;
 
   const {
@@ -179,6 +181,10 @@ const mapToDomainObject = (
     nomenclatureActivitePrincipaleUniteLegale,
     false
   );
+  const libelleActivitePrincipaleNaf25UniteLegale = libelleFromCodeNAF(
+    activitePrincipaleNAF25UniteLegale,
+    "NAF2025"
+  );
 
   const siege = createDefaultEtablissement();
 
@@ -189,6 +195,7 @@ const mapToDomainObject = (
     siege.dateCreation = dateDebut;
     siege.activitePrincipale = "";
     siege.libelleActivitePrincipale = "";
+    siege.libelleActivitePrincipaleNaf25 = "";
     siege.estSiege = true;
     siege.trancheEffectif = "";
   }
@@ -233,6 +240,7 @@ const mapToDomainObject = (
       ),
       activitePrincipale: activitePrincipaleUniteLegale,
       libelleActivitePrincipale: libelleActivitePrincipaleUniteLegale,
+      libelleActivitePrincipaleNaf25: libelleActivitePrincipaleNaf25UniteLegale,
       etablissements: createEtablissementsList([siege]),
       dateCreation: parseDateCreationInsee(dateCreationUniteLegale),
       dateDerniereMiseAJour: new Date().toISOString(),

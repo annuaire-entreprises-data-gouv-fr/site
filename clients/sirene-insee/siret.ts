@@ -42,6 +42,7 @@ type IInseeEtablissement = {
   dateCreationEtablissement: string;
   dateDernierTraitementEtablissement: string;
   activitePrincipaleRegistreMetiersEtablissement: string;
+  activitePrincipaleNAF25Etablissement: string;
   periodesEtablissement: {
     dateFin: string;
     dateDebut: string;
@@ -52,6 +53,7 @@ type IInseeEtablissement = {
     etatAdministratifEtablissement: string;
     changementEtatAdministratifEtablissement: boolean;
     activitePrincipaleEtablissement: string;
+    activitePrincipaleNaf25Etablissement: string;
     nomenclatureActivitePrincipaleEtablissement: string;
   }[];
   adresseEtablissement: {
@@ -163,11 +165,17 @@ const mapEtablissementToDomainObject = (
     throw new HttpNotFound("Not Found");
   }
 
+  console.log(
+    "inseeEtablissement",
+    JSON.stringify(inseeEtablissement, null, 2)
+  );
+
   const {
     nic,
     siret,
     etablissementSiege,
     trancheEffectifsEtablissement,
+    activitePrincipaleNAF25Etablissement,
     anneeEffectifsEtablissement,
     dateCreationEtablissement,
     dateDernierTraitementEtablissement,
@@ -277,6 +285,10 @@ const mapEtablissementToDomainObject = (
       activitePrincipaleEtablissement,
       nomenclatureActivitePrincipaleEtablissement,
       false
+    ),
+    libelleActivitePrincipaleNaf25: libelleFromCodeNAF(
+      activitePrincipaleNAF25Etablissement,
+      "NAF2025"
     ),
     dateDerniereMiseAJour: new Date().toISOString(),
     dateMiseAJourInsee: dateDernierTraitementEtablissement,
