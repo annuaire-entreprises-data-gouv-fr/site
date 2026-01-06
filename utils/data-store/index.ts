@@ -12,6 +12,7 @@ export class DataStore<T> {
   private data: { [key: string]: T } | null;
   private onGoingRefresh: Promise<T> | null;
   private shouldAttemptRefresh: boolean;
+  private timeoutId: NodeJS.Timeout | null;
 
   /**
    * @param getData
@@ -28,6 +29,7 @@ export class DataStore<T> {
     this.data = null;
     this.onGoingRefresh = null;
     this.shouldAttemptRefresh = this.TTR > 0;
+    this.timeoutId = null;
   }
 
   private refresh = async () => {
@@ -36,7 +38,10 @@ export class DataStore<T> {
         this.onGoingRefresh = this.fetchData();
 
         if (this.shouldAttemptRefresh) {
-          setTimeout(this.refresh, this.TTR);
+          if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+          }
+          this.timeoutId = setTimeout(this.refresh, this.TTR);
         }
       }
 
