@@ -1,5 +1,6 @@
 import TextWrapper from "components-ui/text-wrapper";
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import { Icon } from "#components-ui/icon/wrapper";
 import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 
@@ -16,9 +17,9 @@ export default function PartagerPage() {
       <TextWrapper>
         <h1>Réutiliser & partager</h1>
         <p>
-          <a href="/comment-ca-marche">L’Annuaire des Entreprises</a> permet de
-          facilement retrouver l’ensemble des informations publiques disponibles
-          sur une entreprise, une association ou une administration.
+          <Link href="/comment-ca-marche">L'Annuaire des Entreprises</Link>{" "}
+          permet de facilement retrouver l’ensemble des informations publiques
+          disponibles sur une entreprise, une association ou une administration.
           <br />
           Retrouvez sur cette page comment rendre ces données accessibles à vos
           utilisateurs et partenaires.
@@ -140,7 +141,7 @@ export default function PartagerPage() {
           </p>
           <ul>
             <li>
-              Allez sur le <a href="/">moteur de recherche</a>
+              Allez sur le <Link href="/">moteur de recherche</Link>
             </li>
             <li>Trouvez l’entreprise et accédez à sa fiche</li>
             <li>
@@ -161,7 +162,7 @@ export default function PartagerPage() {
             SIRET ou le SIREN), vous pouvez fluidifier l’expérience utilisateur
             et limiter les erreurs de saisie, en invitant à retrouver les
             informations demandées grâce à{" "}
-            <a href="/">notre moteur de recherche</a>.
+            <Link href="/">notre moteur de recherche</Link>.
           </p>
           <h3>Comment faire ?</h3>
           <p>
@@ -202,7 +203,7 @@ export default function PartagerPage() {
           <p>
             Toutes les données utilisées sur l’Annuaire des Entreprises sont
             librement accessibles par API. Consultez la page{" "}
-            <a href="/donnees/api">statut des API</a> pour en savoir plus.
+            <Link href="/donnees/api">statut des API</Link> pour en savoir plus.
           </p>
         </div>
       </TextWrapper>

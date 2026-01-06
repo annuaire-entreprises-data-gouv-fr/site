@@ -1,155 +1,163 @@
+import { Link } from "#components/Link";
+
 export const INSEE = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/insee${queryString}`}
     title="Institut National de la Statistique et des Études Économiques"
   >
     Insee
-  </a>
+  </Link>
 );
 
 export const ADEME = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/ademe${queryString}`}
     title="ADEME - Agence de la transition écologique "
   >
     ADEME
-  </a>
+  </Link>
 );
 
 export const INPI = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/inpi${queryString}`}
     title="Institut National de la Propriété Industrielle"
   >
     INPI
-  </a>
+  </Link>
 );
 
 export const ESSFrance = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/ess-france${queryString}`}
     title="ESS France ou Chambre Française de l'Economie Sociale et Solidaire"
   >
     ESS France
-  </a>
+  </Link>
 );
 
 export const DILA = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/dila${queryString}`}
     title="Direction de l’Information Légale et Administrative"
   >
     DILA
-  </a>
+  </Link>
 );
 
 export const MTPEI = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/mtpei${queryString}`}
     title="Ministère du Travail de l’Emploi et de l’Insertion"
   >
     ministère du Travail de l’Emploi et de l’Insertion
-  </a>
+  </Link>
 );
 
 export const MI = ({ queryString = "" }) => (
-  <a href={`/administration/mi${queryString}`} title="Ministère de l’Intérieur">
+  <Link
+    href={`/administration/mi${queryString}`}
+    title="Ministère de l’Intérieur"
+  >
     ministère de l’Intérieur
-  </a>
+  </Link>
 );
 
 export const MSS = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/mss${queryString}`}
     title="Ministère des Solidarités et de la Santé"
   >
     ministère des Solidarités et de la Santé
-  </a>
+  </Link>
 );
 
 export const DJEPVA = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/djepva${queryString}`}
     title="Direction de la Jeunesse de l’Éducation Populaire et de la Vie Associative"
   >
     Direction de la Jeunesse de l’Éducation Populaire et de la Vie Associative
-  </a>
+  </Link>
 );
 
 export const DataSubvention = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/data-subvention${queryString}`}
     title="Data Subvention"
   >
     Data Subvention
-  </a>
+  </Link>
 );
 
 export const MEF = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/mef${queryString}`}
     title="Ministère de l’Économie et des Finances"
   >
     ministère de l’Économie et des Finances
-  </a>
+  </Link>
 );
 
 export const MC = ({ queryString = "" }) => (
-  <a href={`/administration/mc${queryString}`} title="Ministère de la Culture">
+  <Link
+    href={`/administration/mc${queryString}`}
+    title="Ministère de la Culture"
+  >
     ministère de la Culture
-  </a>
+  </Link>
 );
 
 export const EDUCNAT = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/education-nationale${queryString}`}
     title="Éducation nationale"
   >
     éducation nationale
-  </a>
+  </Link>
 );
 
 export const DINUM = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/dinum${queryString}`}
     title="Direction Interministérielle du Numérique"
   >
     DINUM
-  </a>
+  </Link>
 );
 
 export const MarcheInclusion = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/marche-inclusion${queryString}`}
     title="Le Marché de l’Inclusion"
   >
     Marché de l’Inclusion
-  </a>
+  </Link>
 );
 
 export const GIPMDS = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/gip-mds${queryString}`}
     title="Groupement d’intérêt public Modernisation des déclarations sociales"
   >
     GIP MDS
-  </a>
+  </Link>
 );
 
 export const DGFiP = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/dgfip${queryString}`}
     title="Direction générale des Finances publiques"
   >
     DGFiP
-  </a>
+  </Link>
 );
 
 export const CNIL = ({ queryString = "" }) => (
-  <a
+  <Link
     href={`/administration/cnil${queryString}`}
     title="Commission Nationale de l'Informatique et des Libertés"
   >
     CNIL
-  </a>
+  </Link>
 );

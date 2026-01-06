@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Link } from "#components/Link";
 import { Loader } from "#components-ui/loader";
 import { isSiren } from "#utils/helpers";
 
@@ -62,9 +63,9 @@ export function RenseignerSiren({ postFormData }: RenseignerSirenProps) {
         </div>
       </fieldset>
       <p>
-        <a href="/" rel="noopener noreferrer" target="_blank">
+        <Link href="/" rel="noopener noreferrer" target="_blank">
           → Rechercher le SIREN de mon entreprise
-        </a>
+        </Link>
       </p>
       <p className="fr-mt-6w">
         <button

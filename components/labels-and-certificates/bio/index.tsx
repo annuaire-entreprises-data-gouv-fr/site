@@ -1,5 +1,6 @@
 import type React from "react";
 import routes from "#clients/routes";
+import { Link } from "#components/Link";
 import NonRenseigne from "#components/non-renseigne";
 import { DataSection } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
@@ -67,7 +68,9 @@ export const CertificationsBioSection: React.FC<{
               }) => [
                 <>
                   {siret && (
-                    <a href={`/etablissement/${siret}`}>{formatSiret(siret)}</a>
+                    <Link href={`/etablissement/${siret}`}>
+                      {formatSiret(siret)}
+                    </Link>
                   )}
                   {denomination && (
                     <div>

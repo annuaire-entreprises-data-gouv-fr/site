@@ -3,6 +3,7 @@ import { ConventionCollectivesBadgesSection } from "#components/badges-section/c
 import { labelsAndCertificatesSources } from "#components/badges-section/labels-and-certificates";
 import AvisSituationLink from "#components/justificatifs/avis-situation-link";
 import ExtraitRNELink from "#components/justificatifs/extrait-rne-link";
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { CopyPaste } from "#components/table/copy-paste";
 import { TwoColumnTable } from "#components/table/simple";
@@ -56,9 +57,9 @@ const EtablissementSection: React.FC<IProps> = ({
                 <Tag>secondaire</Tag>
               )}
               {" ( "}
-              <a href={`/entreprise/${uniteLegale.chemin}`} key="entite">
+              <Link href={`/entreprise/${uniteLegale.chemin}`} key="entite">
                 → voir la page {uniteLegaleLabel}
-              </a>
+              </Link>
               {" )"}
             </>,
           ],
@@ -71,7 +72,7 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [["Nom de l’établissement", etablissement.denomination]]
       : []),
     [
-      <a href="/faq/modifier-adresse">Adresse</a>,
+      <Link href="/faq/modifier-adresse">Adresse</Link>,
       etablissement.adresse ? (
         <CopyPaste label="Adresse">{etablissement.adresse}</CopyPaste>
       ) : (
@@ -84,11 +85,13 @@ const EtablissementSection: React.FC<IProps> = ({
       ? []
       : [
           [
-            <a href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</a>,
+            <Link href="/faq/tva-intracommunautaire">
+              N° TVA Intracommunautaire
+            </Link>,
             <PrintNever key="siege-social-link">
-              <a href={`/entreprise/${uniteLegale.chemin}`} key="entite">
+              <Link href={`/entreprise/${uniteLegale.chemin}`} key="entite">
                 → voir la page {uniteLegaleLabel}
-              </a>
+              </Link>
             </PrintNever>,
           ],
         ]),
@@ -178,7 +181,7 @@ const EtablissementSection: React.FC<IProps> = ({
             <>
               <br />
               Extrait RNE {uniteLegaleLabel} (
-              <a href="/faq/extrait-kbis">équivalent KBIS/D1</a>) :{" "}
+              <Link href="/faq/extrait-kbis">équivalent KBIS/D1</Link>) :{" "}
               <ExtraitRNELink session={session} uniteLegale={uniteLegale} />
             </>
           )}

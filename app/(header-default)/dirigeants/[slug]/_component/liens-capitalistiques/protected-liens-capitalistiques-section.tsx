@@ -4,6 +4,7 @@ import EtatCivilInfos from "app/(header-default)/dirigeants/[slug]/_component/se
 import { type ChangeEvent, useMemo, useState } from "react";
 import { getAgentLiensCapitalistiquesProtectedAction } from "server-actions/agent/data-fetching";
 import { DGFiP } from "#components/administrations";
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { FullTable } from "#components/table/full";
 import { Loader } from "#components-ui/loader";
@@ -84,7 +85,7 @@ function LiensCapitalistiquesContent({
     <div>{lien.pays}</div>,
     <div>{lien.denomination}</div>,
     <div>
-      <a href={`/entreprise/${lien.siren}`}>{formatIntFr(lien.siren)}</a>
+      <Link href={`/entreprise/${lien.siren}`}>{formatIntFr(lien.siren)}</Link>
     </div>,
     <div>{lien.natureJuridique}</div>,
     <div>{lien.pourcentage}%</div>,

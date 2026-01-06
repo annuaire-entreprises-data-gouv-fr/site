@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import TextWrapper from "#components-ui/text-wrapper";
 import styles from "./style.module.css";
 
@@ -78,9 +79,9 @@ export default function Equipe() {
             (DINUM)
           </a>
           en coopération avec les{" "}
-          <a href="/donnees/sources">
+          <Link href="/donnees/sources">
             administrations qui fournissent la donnée
-          </a>
+          </Link>
           .
         </p>
 

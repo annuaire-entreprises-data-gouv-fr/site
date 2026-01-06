@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "#components/Link";
 import { Icon } from "#components-ui/icon/wrapper";
 import styles from "./export-sirene.module.css";
 

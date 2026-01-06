@@ -1,4 +1,5 @@
 import type React from "react";
+import { Link } from "#components/Link";
 import type { IUniteLegale } from "#models/core/types";
 import {
   capitalize,
@@ -64,13 +65,13 @@ export const UniteLegaleDescription: React.FC<{
         {uniteLegale.siege && uniteLegale.siege.adresse && (
           <>
             Son{" "}
-            <a href={`/etablissement/${uniteLegale.siege.siret}`}>
+            <Link href={`/etablissement/${uniteLegale.siege.siret}`}>
               siège social
-            </a>{" "}
+            </Link>{" "}
             est domicilié au{" "}
-            <a href={`/etablissement/${uniteLegale.siege.siret}`}>
+            <Link href={`/etablissement/${uniteLegale.siege.siret}`}>
               {uniteLegale.siege.adresse}
-            </a>
+            </Link>
             .
           </>
         )}

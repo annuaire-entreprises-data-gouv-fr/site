@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import ButtonLink from "#components-ui/button";
 import { MultiChoice } from "#components-ui/multi-choice";
 import {
@@ -66,7 +67,7 @@ const FeedBackPage = async () => {
         <div>
           Attention, <strong>ce formulaire est anonyme</strong>. Si vous avez
           une demande précise,{" "}
-          <a href={constants.links.parcours.contact}>contactez-nous</a>.
+          <Link href={constants.links.parcours.contact}>contactez-nous</Link>.
         </div>
         <div className="content-container form-container">
           <form

@@ -1,5 +1,6 @@
 import type React from "react";
 import { MarcheInclusion } from "#components/administrations";
+import { Link } from "#components/Link";
 import { DataSection } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
 import ButtonLink from "#components-ui/button";
@@ -43,7 +44,9 @@ export const EntrepriseInclusiveSection: React.FC<{
               city,
               department,
             }) => [
-              <a href={`/etablissement/${siret}`}>{formatSiret(siret)}</a>,
+              <Link href={`/etablissement/${siret}`}>
+                {formatSiret(siret)}
+              </Link>,
               category,
               type,
               <>

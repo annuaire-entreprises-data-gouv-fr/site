@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import { Icon } from "#components-ui/icon/wrapper";
 import constants from "#models/constants";
 import styles from "./style.module.css";
@@ -63,10 +64,10 @@ export const AdvancedSearchTutorial = () => (
       <div>
         <Icon color={constants.colors.frBlue} slug="download">
           Vous pouvez également{" "}
-          <a href="/export-sirene">
-            générer une liste d’établissements (au format CSV)
-          </a>{" "}
-          grâce à l’outil d’export des données Sirene.
+          <Link href="/export-sirene">
+            générer une liste d'établissements (au format CSV)
+          </Link>{" "}
+          grâce à l'outil d'export des données Sirene.
         </Icon>
       </div>
     </div>

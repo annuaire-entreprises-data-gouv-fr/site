@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import {
   ApplicationRights,
   hasRights,
@@ -17,9 +18,9 @@ export const ContactAnswer: React.FC<IProps> = ({ session, userType }) => (
         Si vous possédez une <strong>entreprise individuelle</strong> dont vous
         souhaitez <strong>cacher ou afficher</strong> les informations
         personnelles,{" "}
-        <a href="/faq/rendre-mon-entreprise-non-diffusible">
+        <Link href="/faq/rendre-mon-entreprise-non-diffusible">
           consultez notre fiche
-        </a>
+        </Link>
         .
       </p>
     )}

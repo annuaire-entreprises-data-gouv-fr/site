@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import { ConnexionSubLayout } from "#components-ui/connexion-layout";
 import connexionRefusedPicture from "#components-ui/illustrations/connexion-failed";
 import constants from "#models/constants";
@@ -17,10 +18,10 @@ export default function RequiredHabilitationPage() {
       </div>
       <p>
         Si vous n’êtes pas prestataire vous pouvez{" "}
-        <a href={constants.links.parcours.contact}>nous contacter</a> pour que
-        nous étudions votre situation.
+        <Link href={constants.links.parcours.contact}>nous contacter</Link> pour
+        que nous étudions votre situation.
       </p>
-      <a href="/">← Retourner au moteur de recherche</a>
+      <Link href="/">← Retourner au moteur de recherche</Link>
     </ConnexionSubLayout>
   );
 }

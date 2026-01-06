@@ -1,5 +1,6 @@
 import routes from "#clients/routes";
 import { INPI } from "#components/administrations";
+import { Link } from "#components/Link";
 import ButtonLink from "#components-ui/button";
 import { Icon } from "#components-ui/icon/wrapper";
 import { PrintNever } from "#components-ui/print-visibility";
@@ -38,7 +39,7 @@ export const DataInpiLinkWithExplanations = ({
         Pour accéder aux données contenues dans un extrait d’immatriculation
         (équivalent de{" "}
         <strong>
-          <a href="/faq/extrait-kbis">l’extrait KBIS ou D1</a>
+          <Link href="/faq/extrait-kbis">l'extrait KBIS ou D1</Link>
         </strong>
         ), vous pouvez soit télécharger l’{" "}
         <strong>

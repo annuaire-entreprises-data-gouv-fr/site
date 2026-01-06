@@ -1,3 +1,5 @@
+import { Link } from "#components/Link";
+
 const Breadcrumb: React.FC<{ links: { href: string; label: string }[] }> = ({
   links,
 }) => (
@@ -6,9 +8,9 @@ const Breadcrumb: React.FC<{ links: { href: string; label: string }[] }> = ({
       <ol className="fr-breadcrumb__list">
         {links.map(({ label, href = "" }, index) => (
           <li key={href + index}>
-            <a className="fr-breadcrumb__link" href={href}>
+            <Link className="fr-breadcrumb__link" href={href}>
               {label}
-            </a>
+            </Link>
           </li>
         ))}
       </ol>

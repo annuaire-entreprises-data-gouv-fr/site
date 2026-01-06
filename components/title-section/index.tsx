@@ -1,4 +1,5 @@
 import type React from "react";
+import { Link } from "#components/Link";
 import { SaveFavourite } from "#components/save-favourite";
 import { CopyPaste } from "#components/table/copy-paste";
 import UniteLegaleBadge from "#components/unite-legale-badge";
@@ -39,9 +40,9 @@ const Title: React.FC<IProps> = ({
         siren={uniteLegale.siren}
       />
       <h1>
-        <a href={`/entreprise/${uniteLegale.chemin}`}>
+        <Link href={`/entreprise/${uniteLegale.chemin}`}>
           {uniteLegale.nomComplet}
-        </a>
+        </Link>
       </h1>
       <div className={styles.subTitle}>
         <UniteLegaleBadge uniteLegale={uniteLegale} />

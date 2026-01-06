@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import parseMarkdownSync from "#components/markdown/parse-markdown";
 import StructuredDataFAQ from "#components/structured-data/faq";
 import TextWrapper from "#components-ui/text-wrapper";
@@ -79,12 +80,12 @@ export default function FAQPage() {
             <ul>
               {(articlesByGroup[key] || []).map(({ slug, title }, index) => (
                 <li key={slug + index}>
-                  <a href={`/faq/${slug}`}>{title}</a>
+                  <Link href={`/faq/${slug}`}>{title}</Link>
                 </li>
               ))}
               {(additionnalLink || []).map(({ href, label }, index) => (
                 <li key={href + index}>
-                  <a href={href}>{label}</a>
+                  <Link href={href}>{label}</Link>
                 </li>
               ))}
             </ul>

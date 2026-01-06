@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { use } from "react";
 import { INPI, INSEE } from "#components/administrations";
+import { Link } from "#components/Link";
 import MatomoEvent from "#components/matomo-event";
 import {
   formatIntFr,
@@ -55,7 +56,7 @@ const SirenOrSiretNotFoundPage = (props: AppRouterProps) => {
             </li>
             <li>
               Ce numéro fait peut-être référence à une entreprise{" "}
-              <a href="/faq">non-diffusible</a>.
+              <Link href="/faq">non-diffusible</Link>.
             </li>
             <li>
               Ce numéro fait peut-être référence à une structure publique dont
@@ -64,7 +65,11 @@ const SirenOrSiretNotFoundPage = (props: AppRouterProps) => {
             </li>
             <li>
               Ce numéro fait peut-être référence à une entreprise crée récemment
-              et <a href="/faq">nos informations ne sont pas encore à jour</a>.
+              et{" "}
+              <Link href="/faq">
+                nos informations ne sont pas encore à jour
+              </Link>
+              .
             </li>
           </ul>
         </div>

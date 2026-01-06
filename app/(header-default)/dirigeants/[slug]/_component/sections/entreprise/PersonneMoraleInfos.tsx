@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import type { IPersonneMorale } from "#models/rne/types";
 import { formatIntFr } from "#utils/helpers";
 
@@ -12,9 +13,9 @@ export default function PersonneMoraleInfos({
       {dirigeant.siren ? (
         <>
           {" - "}
-          <a href={`/entreprise/${dirigeant.siren}`}>
+          <Link href={`/entreprise/${dirigeant.siren}`}>
             {formatIntFr(dirigeant.siren)}
-          </a>
+          </Link>
         </>
       ) : (
         ""

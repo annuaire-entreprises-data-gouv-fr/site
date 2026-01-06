@@ -9,6 +9,7 @@ import {
 } from "#components/badges-section/labels-and-certificates";
 import { ProtectedCertificatesBadgesSection } from "#components/badges-section/labels-and-certificates/protected-certificats";
 import EORICell from "#components/eori-cell";
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import TVACell from "#components/tva-cell";
@@ -80,7 +81,7 @@ const UniteLegaleSummarySection: React.FC<{
         formatSiret((uniteLegale.siege || {}).siret),
     ],
     [
-      <a href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</a>,
+      <Link href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</Link>,
       <TVACell uniteLegale={uniteLegale} />,
     ],
     [
@@ -118,7 +119,7 @@ const UniteLegaleSummarySection: React.FC<{
       uniteLegale.libelleActivitePrincipaleNaf25,
     ],
     [
-      <a href="/faq/modifier-adresse">Adresse postale</a>,
+      <Link href="/faq/modifier-adresse">Adresse postale</Link>,
       uniteLegale.siege.adressePostale,
     ],
     ["Forme juridique", uniteLegale.libelleNatureJuridique],

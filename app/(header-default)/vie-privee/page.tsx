@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import TextWrapper from "#components-ui/text-wrapper";
 import constants from "#models/constants";
 
@@ -175,7 +176,8 @@ const Privacy = () => (
     </ul>
     <p>
       Pour les exercer, contactez-nous via notre{" "}
-      <a href={constants.links.parcours.contact}>formulaire de contact</a>.
+      <Link href={constants.links.parcours.contact}>formulaire de contact</Link>
+      .
     </p>
     <p>Ou bien à :</p>
     <ul>

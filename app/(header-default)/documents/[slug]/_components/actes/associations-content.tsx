@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Link } from "#components/Link";
 import TableFilter from "#components/table/filter";
 import { FullTable } from "#components/table/full";
 import ButtonLink from "#components-ui/button";
@@ -88,9 +89,9 @@ export const AssociationsContent = ({
                   etablissement,
                   url,
                 }) => [
-                  <a href={`/etablissement/${etablissement.siret}`}>
+                  <Link href={`/etablissement/${etablissement.siret}`}>
                     {formatSiret(etablissement.siret)}
-                  </a>,
+                  </Link>,
                   formatDate(date_depot),
                   annee_validite,
                   <>

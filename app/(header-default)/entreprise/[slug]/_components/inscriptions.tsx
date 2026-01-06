@@ -2,6 +2,7 @@ import type React from "react";
 import type { PropsWithChildren } from "react";
 import AvisSituationLink from "#components/justificatifs/avis-situation-link";
 import ExtraitRNELink from "#components/justificatifs/extrait-rne-link";
+import { Link } from "#components/Link";
 import { OpenClosedTag } from "#components-ui/badge/frequent";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
@@ -243,9 +244,9 @@ export const UniteLegaleInscriptionRNA = ({
     <Wrapper
       link={
         <Icon slug="download">
-          <a href={`/documents/${uniteLegale.siren}`}>
+          <Link href={`/documents/${uniteLegale.siren}`}>
             Annonce de création au JOAFE
-          </a>
+          </Link>
         </Icon>
       }
     >

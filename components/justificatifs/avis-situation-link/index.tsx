@@ -1,5 +1,6 @@
 import type React from "react";
 import routes from "#clients/routes";
+import { Link } from "#components/Link";
 import ButtonLink from "#components-ui/button";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
@@ -54,9 +55,9 @@ const AvisSituationLink: React.FC<{
     );
   }
   return (
-    <a href="/faq/justificatif-immatriculation-non-diffusible">
+    <Link href="/faq/justificatif-immatriculation-non-diffusible">
       {documentNonDiffusiblePlaceHolder(etablissement)}
-    </a>
+    </Link>
   );
 };
 

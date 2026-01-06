@@ -1,4 +1,5 @@
 import type React from "react";
+import { Link } from "#components/Link";
 import NonRenseigne from "#components/non-renseigne";
 import PageCounter from "#components/search-results/results-pagination";
 import { Section } from "#components/section";
@@ -28,9 +29,9 @@ const EtablissementTable: React.FC<{
 
       <FullTable
         body={etablissements.map((etablissement: IEtablissement) => [
-          <a href={`/etablissement/${etablissement.siret}`}>
+          <Link href={`/etablissement/${etablissement.siret}`}>
             {formatSiret(etablissement.siret)}
-          </a>,
+          </Link>,
           <>
             {estNonDiffusibleStrict(etablissement) ? (
               <NonRenseigne />
@@ -45,12 +46,12 @@ const EtablissementTable: React.FC<{
               <>
                 <span style={{ fontVariant: "all-small-caps" }}>
                   {(etablissement.enseigne || etablissement.denomination) && (
-                    <a href={`/etablissement/${etablissement.siret}`}>
+                    <Link href={`/etablissement/${etablissement.siret}`}>
                       <strong>
                         {etablissement.enseigne || etablissement.denomination}
                         <br />
                       </strong>
-                    </a>
+                    </Link>
                   )}
                   <>{etablissement.adresse}</>
                 </span>

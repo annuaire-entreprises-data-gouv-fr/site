@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Link } from "#components/Link";
 import TableFilter from "#components/table/filter";
 import { FullTable } from "#components/table/full";
 import FAQLink from "#components-ui/faq-link";
@@ -73,9 +74,9 @@ export const DirigeantsAssociationContent = ({
                   courriel,
                 }) => [
                   <>
-                    <a href={`/etablissement/${etablissement.siret}`}>
+                    <Link href={`/etablissement/${etablissement.siret}`}>
                       {formatSiret(etablissement.siret)}
-                    </a>
+                    </Link>
                     {etablissement.siege && <Tag color="info">siège</Tag>}
                   </>,
 

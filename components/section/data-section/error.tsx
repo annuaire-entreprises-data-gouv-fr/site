@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import { Error } from "#components-ui/alerts";
 import constants from "#models/constants";
 import { IDataFetchingState } from "#models/data-fetching";
@@ -47,7 +48,7 @@ export default function DataFetchErrorExplanation({
         </p>
         <p>
           Si la situation perdure, vous pouvez{" "}
-          <a href={constants.links.parcours.contact}>nous contacter</a>.
+          <Link href={constants.links.parcours.contact}>nous contacter</Link>.
         </p>
       </Error>
     );

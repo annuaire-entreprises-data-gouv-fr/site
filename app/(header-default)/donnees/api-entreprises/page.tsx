@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DINUM, INPI, INSEE } from "#components/administrations";
+import { Link } from "#components/Link";
 
 export const metadata: Metadata = {
   title: "API Recherche d’entreprises & API Entreprise",
@@ -31,10 +32,11 @@ export default function AccesByAPIPage() {
         National des Entreprises (RNE) et la base Sirene). Elle permet d’accéder
         aux principales données ouvertes des entreprises françaises. Elle
         contient par exemple les données de la{" "}
-        <a href="/rechercher?terme=edf">page de recherche</a> et celles de la{" "}
-        <a href="/entreprise/electricite-de-france-edf-552081317">
+        <Link href="/rechercher?terme=edf">page de recherche</Link> et celles de
+        la{" "}
+        <Link href="/entreprise/electricite-de-france-edf-552081317">
           fiche résumé
-        </a>
+        </Link>
         .
       </p>
       <ul>
@@ -55,12 +57,12 @@ export default function AccesByAPIPage() {
         <strong>ne donne pas accès à toutes les données</strong> affichées sur
         l’Annuaire des Entreprises. En effet, dès que c’est possible, le site
         utilise les API fournies par les{" "}
-        <a href="/administration">administrations compétentes</a>.
+        <Link href="/administration">administrations compétentes</Link>.
         <br />
       </p>
       <p>
         La liste des données et des API utilisées par le site est disponible sur
-        la page <a href="/donnees/sources">source de données</a>.
+        la page <Link href="/donnees/sources">source de données</Link>.
       </p>
       <h2>L’API Entreprise</h2>
       <p>
@@ -76,7 +78,7 @@ export default function AccesByAPIPage() {
         haut niveau d’habilitation. Ses données sont accessibles sur l’Annuaires
         des Entreprises, uniquement <strong>aux agents publics</strong>. Pour en
         savoir plus,{" "}
-        <a href="/lp/agent-public">découvrez l’espace agent public</a>.
+        <Link href="/lp/agent-public">découvrez l'espace agent public</Link>.
       </p>
       <ul>
         <li>

@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import FloatingModal from "#components-ui/floating-modal";
 import { Icon } from "#components-ui/icon/wrapper";
 import { getAgentDisplayName } from "#models/authentication/user/helpers";
@@ -37,16 +38,19 @@ const Menu: React.FC<{
         id="menu-modal"
         role="dialog"
       >
-        <a
+        <Link
           aria-label="Gestion de mon compte agent public"
           href={"/compte/accueil"}
         >
           Mon espace
-        </a>
+        </Link>
         {session?.user?.isSuperAgent && (
-          <a aria-label="Gestion de mes groupes" href={"/compte/mes-groupes"}>
+          <Link
+            aria-label="Gestion de mes groupes"
+            href={"/compte/mes-groupes"}
+          >
             Mes groupes
-          </a>
+          </Link>
         )}
         <a
           aria-label="Documentation de l’espace agent public"

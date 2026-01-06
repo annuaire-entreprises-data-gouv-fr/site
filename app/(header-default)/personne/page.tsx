@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import PageCounter from "#components/search-results/results-pagination";
 import StructuredDataSearchAction from "#components/structured-data/search";
 import { FullTable } from "#components/table/full";
@@ -74,9 +75,9 @@ export default async function PersonnePage(props: AppRouterProps) {
     <div className="content-container">
       <StructuredDataSearchAction />
       {sirenFrom && (
-        <a href={`/dirigeants/${sirenFrom}`}>
+        <Link href={`/dirigeants/${sirenFrom}`}>
           ← Retourner à la page précédente
-        </a>
+        </Link>
       )}
       <h1>
         {structureCountLabel} structure{plural} associée{plural} à {prenom}{" "}
@@ -102,10 +103,13 @@ export default async function PersonnePage(props: AppRouterProps) {
         <br />
         Si <strong>vous ne retrouvez pas une entreprise</strong> qui devrait se
         trouver dans la liste, vous pouvez effectuer une recherche{" "}
-        <a href={`/rechercher?fn=${prenoms}&n=${nom}`}>sans filtre d’âge</a> ou{" "}
-        <a href={`/rechercher?fn=${prenom}&n=${nom}`}>
+        <Link href={`/rechercher?fn=${prenoms}&n=${nom}`}>
+          sans filtre d’âge
+        </Link>{" "}
+        ou{" "}
+        <Link href={`/rechercher?fn=${prenom}&n=${nom}`}>
           sans prénom secondaire et sans filtre d’âge
-        </a>
+        </Link>
         .
       </Info>
       <br />
@@ -113,9 +117,9 @@ export default async function PersonnePage(props: AppRouterProps) {
       {results.results.length > 0 ? (
         <FullTable
           body={results.results.map((result) => [
-            <a href={`/entreprise/${result.chemin}`}>
+            <Link href={`/entreprise/${result.chemin}`}>
               {formatIntFr(result.siren)}
-            </a>,
+            </Link>,
             <>
               {result.nomComplet}
               <br />
@@ -127,12 +131,12 @@ export default async function PersonnePage(props: AppRouterProps) {
                   {isPersonneMorale(dirigeantOrElu) ? (
                     <>
                       {dirigeantOrElu.siren ? (
-                        <a
+                        <Link
                           aria-label={`Voir les dirigeants de cette entreprise (siren ${dirigeantOrElu.siren})`}
                           href={`/dirigeants/${dirigeantOrElu.siren}`}
                         >
                           {dirigeantOrElu.denomination}
-                        </a>
+                        </Link>
                       ) : (
                         dirigeantOrElu.denomination
                       )}

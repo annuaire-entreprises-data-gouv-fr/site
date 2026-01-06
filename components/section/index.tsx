@@ -1,5 +1,6 @@
 import type React from "react";
 import type { PropsWithChildren } from "react";
+import { Link } from "#components/Link";
 import { Warning } from "#components-ui/alerts";
 import { Icon } from "#components-ui/icon/wrapper";
 import DataSourcesTooltip from "#components-ui/information-tooltip/data-sources-tooltip";
@@ -66,7 +67,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
             {dataSources.map(
               ({ slug, long, logoType, short }) =>
                 logoType && (
-                  <a
+                  <Link
                     className="no-style-link"
                     href={faqLink}
                     key={long}
@@ -89,7 +90,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
                         width={170}
                       />
                     )}
-                  </a>
+                  </Link>
                 )
             )}
           </div>

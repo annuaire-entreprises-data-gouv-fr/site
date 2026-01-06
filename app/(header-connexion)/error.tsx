@@ -2,6 +2,7 @@
 
 import { type NextAppError, useLogFatalErrorAppClient } from "hooks";
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import { ConnexionSubLayout } from "#components-ui/connexion-layout";
 import connexionFailedPicture from "#components-ui/illustrations/connexion-failed";
 import constants from "#models/constants";
@@ -22,9 +23,9 @@ export default function ErrorPage({ error }: { error: NextAppError }) {
       <h1>Votre tentative de connexion a échoué</h1>
       <p>
         Merci de réessayer plus tard. Si le problème se reproduit, merci de{" "}
-        <a href={constants.links.parcours.contact}>nous contacter.</a>
+        <Link href={constants.links.parcours.contact}>nous contacter.</Link>
       </p>
-      <a href="/">← Retourner au moteur de recherche</a>
+      <Link href="/">← Retourner au moteur de recherche</Link>
     </ConnexionSubLayout>
   );
 }

@@ -1,12 +1,13 @@
 import { INPI } from "#components/administrations";
+import { Link } from "#components/Link";
 import { Warning } from "#components-ui/alerts";
 
 export const WarningRBE = () => (
   <Warning>
     Depuis le 31 juillet 2024, le{" "}
-    <a href="/faq/registre-des-beneficiaires-effectifs">
-      registre des bénéficiaires effectifs n’est plus accessible sur le site
-    </a>
+    <Link href="/faq/registre-des-beneficiaires-effectifs">
+      registre des bénéficiaires effectifs n'est plus accessible sur le site
+    </Link>
     , en application de la{" "}
     <a
       href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000049761732"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import React from "react";
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import { HorizontalSeparator } from "#components-ui/horizontal-separator";
@@ -28,7 +29,7 @@ export default function DataSourcesPage() {
         administrations. Toutes les données accessibles sur le site proviennent
         d’un jeu de données librement téléchargeable sur{" "}
         <a href="https://data.gouv.fr">data.gouv.fr</a> et sont accessibles{" "}
-        <a href="/donnees/api">par API</a>.
+        <Link href="/donnees/api">par API</Link>.
       </p>
       <p>
         Voici donc la liste des données utilisées sur l’Annuaire des Entreprises
@@ -138,14 +139,14 @@ export default function DataSourcesPage() {
                         ...(api && api.updownIoId
                           ? [
                               [
-                                "Taux de disponibilité de l’API",
-                                <a
+                                "Taux de disponibilité de l'API",
+                                <Link
                                   href={`/donnees/api#${api.apiSlug}`}
                                   rel="noreferrer noopener"
                                   target="_blank"
                                 >
                                   Consulter le taux de disponibilité
-                                </a>,
+                                </Link>,
                               ],
                             ]
                           : []),

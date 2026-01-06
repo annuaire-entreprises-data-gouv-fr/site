@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import { getFaqArticlesByTag } from "#models/article/faq";
 
 export const NotEnoughParams = () => {
@@ -29,12 +30,12 @@ export const NotEnoughParams = () => {
         <ul>
           {articles.map(({ slug, title }) => (
             <li key={slug}>
-              <a href={`/faq/${slug}`}>{title}</a>
+              <Link href={`/faq/${slug}`}>{title}</Link>
             </li>
           ))}
         </ul>
         <p>
-          <a href="/faq">→ Voir toutes les questions fréquentes</a>
+          <Link href="/faq">→ Voir toutes les questions fréquentes</Link>
         </p>
       </div>
       <br />

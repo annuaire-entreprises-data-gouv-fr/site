@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import { HorizontalSeparator } from "#components-ui/horizontal-separator";
@@ -22,31 +23,31 @@ export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => (
         body={[
           [
             "Documents juridiques",
-            <a href={`/documents/${uniteLegale.siren}#actes`}>
+            <Link href={`/documents/${uniteLegale.siren}#actes`}>
               → Consulter les Actes et les Statuts constitutifs
-            </a>,
+            </Link>,
           ],
           ["", <br />],
           [
             <>Données financières</>,
-            <a href={`/donnees-financieres/${uniteLegale.siren}`}>
+            <Link href={`/donnees-financieres/${uniteLegale.siren}`}>
               → Consulter les indicateurs financiers
-            </a>,
+            </Link>,
           ],
           [
             "",
-            <a href={`/donnees-financieres/${uniteLegale.siren}#bilans`}>
+            <Link href={`/donnees-financieres/${uniteLegale.siren}#bilans`}>
               <Icon slug="download">Télécharger les bilans</Icon>
-            </a>,
+            </Link>,
           ],
           ...(hasRights(session, ApplicationRights.conformite)
             ? [
                 ["", <br />],
                 [
                   "Conformité",
-                  <a href={`/documents/${uniteLegale.siren}#conformite`}>
+                  <Link href={`/documents/${uniteLegale.siren}#conformite`}>
                     → Attestations de conformité fiscales et sociales
-                  </a>,
+                  </Link>,
                 ],
               ]
             : []),
@@ -54,9 +55,11 @@ export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => (
             ? [
                 [
                   "Travaux",
-                  <a href={`/documents/${uniteLegale.siren}#travaux-publics`}>
+                  <Link
+                    href={`/documents/${uniteLegale.siren}#travaux-publics`}
+                  >
                     → Justificatifs relatifs aux entreprises de travaux publics
-                  </a>,
+                  </Link>,
                 ],
               ]
             : []),

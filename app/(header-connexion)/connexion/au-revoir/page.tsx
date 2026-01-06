@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import { ConnexionSubLayout } from "#components-ui/connexion-layout";
 import logoutPicture from "#components-ui/illustrations/logout";
 
@@ -15,7 +16,7 @@ export default function ConnexionGoodbyePage() {
     <ConnexionSubLayout img={logoutPicture}>
       <h1>Vous êtes bien déconnecté(e)</h1>
       <p>Merci de votre visite</p>
-      <a href="/">← Revenir au moteur de recherche</a>
+      <Link href="/">← Revenir au moteur de recherche</Link>
     </ConnexionSubLayout>
   );
 }

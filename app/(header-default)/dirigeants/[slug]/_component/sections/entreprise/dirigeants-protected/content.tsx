@@ -2,6 +2,7 @@
 
 import routes from "#clients/routes";
 import { INPI } from "#components/administrations";
+import { Link } from "#components/Link";
 import { FullTable } from "#components/table/full";
 import { UniteLegalePageLink } from "#components/unite-legale-page-link";
 import { Info } from "#components-ui/alerts";
@@ -49,9 +50,9 @@ export default function DirigeantsContentProtected({
       if (dirigeant.siren) {
         const defaultDenom = dirigeant.denomination || dirigeant.siren;
         infos.push(
-          <a href={`/dirigeants/${dirigeant.siren}`} key={dirigeant.siren}>
+          <Link href={`/dirigeants/${dirigeant.siren}`} key={dirigeant.siren}>
             → voir les dirigeants de {defaultDenom}
-          </a>
+          </Link>
         );
       }
       return infos;

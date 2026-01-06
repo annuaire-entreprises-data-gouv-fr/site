@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+import { Link } from "#components/Link";
 import ButtonLink from "#components-ui/button";
 import constants from "#models/constants";
 
@@ -7,8 +8,8 @@ const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
     {children}
     <p>
       Si vous êtes arrivé sur cette page en cliquant sur un lien du site, merci
-      de <a href={constants.links.parcours.contact}>nous contacter</a> pour que
-      nous puissions trouver la panne 🕵️‍♀️.
+      de <Link href={constants.links.parcours.contact}>nous contacter</Link>{" "}
+      pour que nous puissions trouver la panne 🕵️‍♀️.
     </p>
     <p>En attendant, vous pouvez toujours :</p>
     <ul className="fr-btns-group fr-btns-group--inline-md">
@@ -37,8 +38,8 @@ const ClientErrorExplanations = ({ error }: { error?: Error }) => (
         </p>
         <p>
           Si la situation perdure, merci de{" "}
-          <a href={constants.links.parcours.contact}>nous contacter</a> pour que
-          nous puissions trouver la panne 🕵️‍♀️.
+          <Link href={constants.links.parcours.contact}>nous contacter</Link>{" "}
+          pour que nous puissions trouver la panne 🕵️‍♀️.
         </p>
       </>
     ) : (
@@ -73,12 +74,13 @@ const SearchErrorExplanations = () => (
   <div>
     <p>
       Le moteur de recherche est momentanément indisponible et devrait{" "}
-      <a href="/rechercher">fonctionner de nouveau</a> dans quelques instants.
+      <Link href="/rechercher">fonctionner de nouveau</Link> dans quelques
+      instants.
     </p>
     <p>
       Si la situation perdure, merci de{" "}
-      <a href={constants.links.parcours.contact}>nous contacter</a> pour que
-      nous puissions trouver la panne 🕵️‍♀️.
+      <Link href={constants.links.parcours.contact}>nous contacter</Link> pour
+      que nous puissions trouver la panne 🕵️‍♀️.
     </p>
   </div>
 );
