@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Favourites from "#components/favourites";
+import { Link } from "#components/Link";
 import SearchBar from "#components/search-bar";
 import StructuredDataSearchAction from "#components/structured-data/search";
 import { LogoAnnuaireWithEasterEgg } from "#components-ui/logo-annuaire/logo-with-easter-egg";
@@ -53,7 +54,7 @@ export default function IndexPage() {
 
           <br />
           <div className="layout-center">
-            <a href="/rechercher">→ Effectuer une recherche avancée</a>
+            <Link href="/rechercher">→ Effectuer une recherche avancée</Link>
           </div>
         </form>
       </div>
