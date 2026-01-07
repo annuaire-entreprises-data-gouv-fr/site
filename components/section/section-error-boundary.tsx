@@ -1,4 +1,5 @@
 import { ErrorBoundary as SentryErrorBoundary } from "@sentry/nextjs";
+import { Link } from "#components/Link";
 import { Warning } from "#components-ui/alerts";
 import constants from "#models/constants";
 import { Section } from ".";
@@ -21,8 +22,10 @@ export default function SectionErrorBoundary({
             <p>
               L’équipe technique a été notifiée. Si le problème persiste, vous
               pouvez{" "}
-              <a href={constants.links.parcours.contact}>nous contacter</a> pour
-              que nous puissions trouver la panne 🕵️‍♀️.
+              <Link href={constants.links.parcours.contact}>
+                nous contacter
+              </Link>{" "}
+              pour que nous puissions trouver la panne 🕵️‍♀️.
             </p>
           )}
         </Section>

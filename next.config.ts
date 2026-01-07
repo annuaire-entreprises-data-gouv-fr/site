@@ -89,6 +89,15 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/api/feature-flags",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-cache",
+          },
+        ],
+      },
+      {
         source: "/api/(feedback/nps|hide-personal-data)",
         headers: [
           {

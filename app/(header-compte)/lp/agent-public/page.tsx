@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import ButtonLink from "#components-ui/button";
 import { default as ButtonProConnect } from "#components-ui/button-pro-connect";
@@ -250,9 +251,9 @@ const LandingPageAgent = async (props: AppRouterProps) => {
             )}
         </div>
         <p>
-          <a href="/administration">
+          <Link href="/administration">
             → Voir la liste complète des administrations partenaires
-          </a>
+          </Link>
         </p>
       </section>
     </div>

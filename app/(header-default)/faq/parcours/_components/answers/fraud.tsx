@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import ButtonLink from "#components-ui/button";
 import { ParcoursAnswer } from ".";
 
@@ -6,9 +7,9 @@ export const FraudAnswer: React.FC<{}> = ({}) => (
     <strong>Attention à la fraude :</strong> l’Annuaire des Entreprises est un
     service public <strong>gratuit</strong> et ne vous demandera{" "}
     <strong>jamais</strong> d’argent. Pour en savoir plus, consultez{" "}
-    <a href="/faq/fraudes-ecroqueries-annuaire-des-entreprises">
+    <Link href="/faq/fraudes-ecroqueries-annuaire-des-entreprises">
       notre fiche explicative
-    </a>
+    </Link>
     .
     <p>
       Si vous désirez signaler une entreprise frauduleuse, rendez-vous sur{" "}

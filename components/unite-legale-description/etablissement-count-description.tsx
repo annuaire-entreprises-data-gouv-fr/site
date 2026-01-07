@@ -1,4 +1,5 @@
 import type React from "react";
+import { Link } from "#components/Link";
 import type { IUniteLegale } from "#models/core/types";
 
 export const UniteLegaleEtablissementCountDescription: React.FC<{
@@ -14,9 +15,9 @@ export const UniteLegaleEtablissementCountDescription: React.FC<{
 
   return (
     <>
-      <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+      <Link href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
         {nombreEtablissements} établissement{plural}
-      </a>
+      </Link>
       {hasOpenEtablissements &&
         (!usePagination || uniteLegale.isNbEtablissementOuvertReliable) &&
         nombreEtablissements !== nombreEtablissementsOuverts && (

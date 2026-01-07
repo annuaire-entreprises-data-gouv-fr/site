@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { use } from "react";
 import { INPI } from "#components/administrations";
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import { Info } from "#components-ui/alerts";
@@ -31,7 +32,7 @@ export default function InpiPDF({ params }: AppRouterProps) {
   return (
     <>
       <br />
-      <a href={`/entreprise/${slug}`}>← Retour à la fiche résumée</a>
+      <Link href={`/entreprise/${slug}`}>← Retour à la fiche résumée</Link>
       <div className="content-container">
         <h1>Téléchargement du justificatif d’immatriculation</h1>
 
@@ -53,7 +54,7 @@ export default function InpiPDF({ params }: AppRouterProps) {
           <p>
             Le téléchargement de l’extrait d’immatriculation au Répertoire
             National des Entreprises (RNE) a commencé pour le SIREN{" "}
-            <a href={`/entreprise/${slug}`}>{formatIntFr(slug)}</a>.
+            <Link href={`/entreprise/${slug}`}>{formatIntFr(slug)}</Link>.
           </p>
           <TwoColumnTable
             body={[

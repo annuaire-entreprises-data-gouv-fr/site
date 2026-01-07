@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import Logo from "#components-ui/logo";
 import { administrationsMetaData } from "#models/administrations";
 import styles from "./style.module.css";
@@ -42,7 +43,7 @@ const AdministrationDescription: React.FC<{
                 {dataSources.map(({ data = [] }) =>
                   data.map(({ label }) => (
                     <li key={label}>
-                      <a href={`/donnees/sources#${slug}`}>{label}</a>
+                      <Link href={`/donnees/sources#${slug}`}>{label}</Link>
                     </li>
                   ))
                 )}
@@ -50,9 +51,9 @@ const AdministrationDescription: React.FC<{
             </div>
           )}
           <p>
-            <a href={`/donnees/sources#${slug}`}>
+            <Link href={`/donnees/sources#${slug}`}>
               → Télécharger ou réutiliser ces données
-            </a>
+            </Link>
             <br />
             {contact && (
               <a

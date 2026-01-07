@@ -2,6 +2,7 @@
 
 import routes from "#clients/routes";
 import { INPI } from "#components/administrations";
+import { Link } from "#components/Link";
 import { FullTable } from "#components/table/full";
 import { UniteLegalePageLink } from "#components/unite-legale-page-link";
 import InpiPartiallyDownWarning from "#components-ui/alerts-with-explanations/inpi-partially-down";
@@ -38,9 +39,9 @@ export default function DirigeantsContent({
       if (dirigeant.siren) {
         const defaultDenom = dirigeant.denomination || dirigeant.siren;
         infos.push(
-          <a href={`/dirigeants/${dirigeant.siren}`} key={dirigeant.siren}>
+          <Link href={`/dirigeants/${dirigeant.siren}`} key={dirigeant.siren}>
             → voir les dirigeants de {defaultDenom}
-          </a>
+          </Link>
         );
       }
       return infos;
@@ -83,8 +84,9 @@ export default function DirigeantsContent({
           </p>
           <p>
             <strong>NB :</strong> si vous êtes agent public, vous pouvez accéder
-            à l’état civil complet (lieu et date de naissance complète) en vous
-            connectant à <a href="/lp/agent-public">l’espace agent public</a>.
+            à l'état civil complet (lieu et date de naissance complète) en vous
+            connectant à{" "}
+            <Link href="/lp/agent-public">l'espace agent public</Link>.
           </p>
           <FullTable
             body={dirigeants.data

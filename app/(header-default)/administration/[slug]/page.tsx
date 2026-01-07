@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import AdministrationDescription from "#components/administrations/administration-description";
+import { Link } from "#components/Link";
 import TextWrapper from "#components-ui/text-wrapper";
 import { administrationsMetaData } from "#models/administrations";
 import type { EAdministration } from "#models/administrations/EAdministration";
@@ -63,14 +64,14 @@ export default async function AdministrationPage(props: AppRouterProps) {
           <ul>
             {articles.map(({ slug, title }) => (
               <li key={slug}>
-                <a href={`/faq/${slug}`}>{title}</a>
+                <Link href={`/faq/${slug}`}>{title}</Link>
               </li>
             ))}
           </ul>
           <br />
           <div>
             Vous ne trouvez pas la réponse à votre question ?{" "}
-            <a href="/faq">→ voir toutes les questions fréquentes</a>
+            <Link href="/faq">→ voir toutes les questions fréquentes</Link>
           </div>
         </>
       )}

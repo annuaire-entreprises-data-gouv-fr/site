@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import { ConnexionSubLayout } from "#components-ui/connexion-layout";
 import connexionRefusedPicture from "#components-ui/illustrations/connexion-failed";
 import type { AppRouterProps } from "#utils/server-side-helper/extract-params";
@@ -19,9 +20,9 @@ export default async function RequiredHabilitationPage(props: AppRouterProps) {
       </div>
       <p>
         L'organisation à laquelle vous appartenez (
-        <a href={`/entreprise/${searchParams.siren}`}>
+        <Link href={`/entreprise/${searchParams.siren}`}>
           {searchParams.name || searchParams.siren}
-        </a>
+        </Link>
         ) <strong>ne fait pas partie</strong> de la{" "}
         <a href="https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises/">
           liste des administrations
@@ -37,7 +38,7 @@ export default async function RequiredHabilitationPage(props: AppRouterProps) {
         Si votre demande est acceptée, vous obtiendrez automatiquement l’accès à
         l’espace agent.
       </p>
-      <a href="/">← Retourner au moteur de recherche</a>
+      <Link href="/">← Retourner au moteur de recherche</Link>
     </ConnexionSubLayout>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useFetchDPO } from "hooks/fetch/dpo";
 import { CNIL } from "#components/administrations";
+import { Link } from "#components/Link";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
 import { EAdministration } from "#models/administrations/EAdministration";
@@ -49,9 +50,9 @@ export default function DPOSection({ uniteLegale }: IProps) {
                 ? [
                     [
                       "SIREN",
-                      <a href={`/entreprise/${dpo.organismeDesigne.siren}`}>
+                      <Link href={`/entreprise/${dpo.organismeDesigne.siren}`}>
                         {formatIntFr(dpo.organismeDesigne.siren)}
-                      </a>,
+                      </Link>,
                     ],
                   ]
                 : []),

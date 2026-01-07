@@ -1,5 +1,6 @@
 import type React from "react";
 import ReconnectBanner from "#components/banner/reconnect";
+import { Link } from "#components/Link";
 import LoadBar from "#components/load-bar";
 import SearchBar from "#components/search-bar";
 import { WelcomeModalAgent } from "#components/welcome-modal-agent";
@@ -72,13 +73,13 @@ export const HeaderCore: React.FC<IProps> = ({
                     style={{ overflow: "visible" }}
                   >
                     <div className="fr-header__logo">
-                      <a href="/" title="République française">
+                      <Link href="/" title="République française">
                         <p className="fr-logo">
                           République
                           <br />
                           française
                         </p>
-                      </a>
+                      </Link>
                     </div>
                     {useSearchBar || useLogo ? (
                       <div
@@ -87,7 +88,7 @@ export const HeaderCore: React.FC<IProps> = ({
                           marginRight: "15px",
                         }}
                       >
-                        <a href="/" title="L’Annuaire des Entreprises">
+                        <Link href="/" title="L'Annuaire des Entreprises">
                           <svg
                             fill="none"
                             height={54}
@@ -104,7 +105,7 @@ export const HeaderCore: React.FC<IProps> = ({
                               fill="#161616"
                             />
                           </svg>
-                        </a>
+                        </Link>
                       </div>
                     ) : null}
                     <div className={styles.menuMobile}>
@@ -147,11 +148,11 @@ export const HeaderCore: React.FC<IProps> = ({
       <div className={styles.agentBanner} role="banner">
         <PrintNever>
           <div className="fr-container">
-            Vous êtes connecté(e) en tant qu’<strong>agent public</strong>. Vous
+            Vous êtes connecté(e) en tant qu'<strong>agent public</strong>. Vous
             pouvez{" "}
-            <a href="/compte/accueil">
+            <Link href="/compte/accueil">
               consulter le récapitulatif de vos droits.
-            </a>
+            </Link>
             <br />
             Vous pouvez accéder à des données réservées à l’administration,
             identifiables par les cadres roses et la mention “{" "}

@@ -3,6 +3,7 @@
 import type React from "react";
 import { useCallback, useId, useState } from "react";
 import { MSS } from "#components/administrations";
+import { Link } from "#components/Link";
 import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
 import { DataSectionClient } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
@@ -25,9 +26,9 @@ const formatFinessData = (data: IFiness[]) => {
         <Tag>{finessJuridiqueEntity.idFinessJuridique}</Tag>,
         <Tag color="info">Juridique</Tag>,
         <div>
-          <a href={`/entreprise/${finessJuridiqueEntity.siren}`}>
+          <Link href={`/entreprise/${finessJuridiqueEntity.siren}`}>
             {formatIntFr(finessJuridiqueEntity.siren)}
-          </a>
+          </Link>
           {" ∙ "}
           {finessJuridiqueEntity.raisonSociale}
         </div>,
@@ -53,7 +54,9 @@ const formatFinessData = (data: IFiness[]) => {
         </div>,
         <Tag color="new">Etablissement</Tag>,
         <>
-          <a href={`/etablissement/${etab.siret}`}>{formatSiret(etab.siret)}</a>
+          <Link href={`/etablissement/${etab.siret}`}>
+            {formatSiret(etab.siret)}
+          </Link>
           {" ∙ "}
           <strong>{etab.raisonSociale}</strong>
           <br />

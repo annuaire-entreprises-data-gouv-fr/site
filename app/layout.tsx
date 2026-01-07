@@ -6,6 +6,7 @@ import getSession from "#utils/server-side-helper/get-session";
 import "../style/dsfr.min.css";
 import "../style/globals.css";
 import { PrefetchImgs } from "./_component/prefetch-dsfr-imgs";
+import { ClientProviders } from "./client-providers";
 import { marianne } from "./fonts";
 
 if (
@@ -45,7 +46,9 @@ export default async function HomeLayout({
           process.env.MATOMO_SITE_ID && <MatomoInit session={session} />}
         <PrefetchImgs />
         <BrowserIsOutdatedBanner>
-          <div style={{ width: "100%" }}>{children}</div>
+          <ClientProviders>
+            <div style={{ width: "100%" }}>{children}</div>
+          </ClientProviders>
         </BrowserIsOutdatedBanner>
       </body>
     </html>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import { FullTable } from "#components/table/full";
 import TextWrapper from "#components-ui/text-wrapper";
 
@@ -16,9 +17,9 @@ export default function Budget() {
       <TextWrapper>
         <h1>Budget</h1>
         <p>
-          <a href="https://annuaire-entreprises.data.gouv.fr">
-            <strong>L’Annuaire des Entreprises</strong>
-          </a>{" "}
+          <Link href="/">
+            <strong>L'Annuaire des Entreprises</strong>
+          </Link>{" "}
           est un service public numérique, c’est pourquoi nous sommes
           transparents sur les ressources allouées et la manière dont elles sont
           employées.
@@ -107,8 +108,8 @@ export default function Budget() {
         <br />
         <p>
           En 2024, la DINUM a créé un{" "}
-          <a href="/lp/agent-public">compte pour les agents publics</a>. Ce
-          compte permet aux agents publics d’accéder à des données
+          <Link href="/lp/agent-public">compte pour les agents publics</Link>.
+          Ce compte permet aux agents publics d’accéder à des données
           complémentaires sur les entreprises. Cela{" "}
           <strong>facilite leur travail</strong> et leur{" "}
           <strong>
@@ -126,7 +127,7 @@ export default function Budget() {
         />
         <p>
           Le détail de nos mesures d’impact est disponible sur notre{" "}
-          <a href="/a-propos/stats">page de statistiques</a>.
+          <Link href="/a-propos/stats">page de statistiques</Link>.
         </p>
       </TextWrapper>
     </div>

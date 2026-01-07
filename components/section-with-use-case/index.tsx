@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { AskUseCase } from "#components/section-with-use-case/ask-use-case";
 import type { EAdministration } from "#models/administrations/EAdministration";
@@ -25,9 +26,11 @@ type WrappedSectionProps = {
 const DefaultIntroContent = () => (
   <p>
     Les agents publics peuvent demander à accéder à cette donnée uniquement dans
-    les cas d’usages justifiant d’un intérêt légitime. En déclarant le cadre
+    les cas d'usage justifiant d'un intérêt légitime. En déclarant le cadre
     juridique dans lequel vous accédez à ces données, vous vous engagez{" "}
-    <a href="/modalites-utilisation">à respecter nos modalités d’utilisation</a>
+    <Link href="/modalites-utilisation">
+      à respecter nos modalités d'utilisation
+    </Link>
     .
   </p>
 );

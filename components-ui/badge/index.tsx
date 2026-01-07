@@ -1,4 +1,5 @@
 import type { MouseEventHandler, PropsWithChildren } from "react";
+import { Link } from "#components/Link";
 import type { IIconsSlug } from "#components-ui/icon";
 import { Icon } from "#components-ui/icon/wrapper";
 import styles from "./styles.module.css";
@@ -38,7 +39,7 @@ export function Badge({
     }>
   ) =>
     link ? (
-      <a aria-label={link["aria-label"]} href={link.href} {...props} />
+      <Link aria-label={link["aria-label"]} href={link.href} {...props} />
     ) : (
       <span {...props} />
     );

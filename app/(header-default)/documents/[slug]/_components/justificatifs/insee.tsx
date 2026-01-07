@@ -1,6 +1,7 @@
 import type React from "react";
 import { INSEE } from "#components/administrations";
 import AvisSituationLink from "#components/justificatifs/avis-situation-link";
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { FullTable } from "#components/table/full";
 import ButtonLink from "#components-ui/button";
@@ -22,9 +23,9 @@ const AvisSituationTable: React.FC<{
 }> = ({ etablissements, session }) => (
   <FullTable
     body={etablissements.map((etablissement: IEtablissement) => [
-      <a href={`/etablissement/${etablissement.siret}`}>
+      <Link href={`/etablissement/${etablissement.siret}`}>
         {formatSiret(etablissement.siret)}
-      </a>,
+      </Link>,
       <>
         {etablissement.adresse}
         {etablissement.estSiege && <Tag color="info">siège social</Tag>}

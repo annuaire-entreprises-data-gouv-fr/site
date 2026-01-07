@@ -2,6 +2,7 @@
 import { type ChangeEvent, useState } from "react";
 import type { IMatomoStats } from "#clients/matomo";
 import { StackedBarChart } from "#components/chart/stack-bar";
+import { Link } from "#components/Link";
 import { Select } from "#components-ui/select";
 import constants from "#models/constants";
 
@@ -80,9 +81,9 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
             ProConnect
           </a>{" "}
           pour{" "}
-          <a href="https://annuaire-entreprises.data.gouv.fr/lp/agent-public">
+          <Link href="/lp/agent-public">
             avoir accès à des informations additionnelles (actes, statuts, etc.)
-          </a>
+          </Link>
           .
         </li>
       </ul>
@@ -121,9 +122,9 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
       </ul>
       <p>
         Nous suivons également le nombre d’appels reçus par{" "}
-        <a href="/donnees/api-entreprises">
-          notre API de Recherche d’entreprises
-        </a>
+        <Link href="/donnees/api-entreprises">
+          notre API de Recherche d'entreprises
+        </Link>
         . Ce chiffre inclut les appels provenant du site{" "}
         <strong>Annuaire des Entreprises</strong> et les appels externes,
         provenant d’acteurs privés ou publics.

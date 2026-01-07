@@ -1,5 +1,6 @@
 import { INPI } from "#components/administrations";
 import { DataInpiLinkWithExplanations } from "#components/justificatifs/data-inpi-link";
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import FAQLink from "#components-ui/faq-link";
@@ -97,9 +98,9 @@ export const UniteLegaleImmatriculationSection = ({
                   : []),
                 [
                   "Dirigeants",
-                  <a href={`/dirigeants/${uniteLegale.siren}`}>
+                  <Link href={`/dirigeants/${uniteLegale.siren}`}>
                     → Consulter la liste des dirigeants
-                  </a>,
+                  </Link>,
                 ],
                 [
                   <FAQLink tooltipLabel="Annonces et observations">
@@ -108,9 +109,9 @@ export const UniteLegaleImmatriculationSection = ({
                     (procédures collectives, ventes, créations, modification,
                     radiation et dépôt des comptes)
                   </FAQLink>,
-                  <a href={`/annonces/${uniteLegale.siren}`}>
+                  <Link href={`/annonces/${uniteLegale.siren}`}>
                     → Consulter les annonces
-                  </a>,
+                  </Link>,
                 ],
               ]
             : []),

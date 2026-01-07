@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { clientMatomoStats, type IMatomoStats } from "#clients/matomo";
+import { Link } from "#components/Link";
 import { NpsStats } from "#components/stats/nps";
 import { TraficStats } from "#components/stats/trafic";
 import { UsageStats } from "#components/stats/usage";
@@ -42,7 +43,7 @@ export default async function StatsPage() {
       <h1>Statistiques d’utilisation</h1>
       <p>
         Découvrez nos statistiques d’utilisation. Toutes les données recueillies
-        sont <a href="/vie-privee">anonymisées</a>.
+        sont <Link href="/vie-privee">anonymisées</Link>.
       </p>
       <h2>Utilisation du service</h2>
       <TraficStats visits={visits} />

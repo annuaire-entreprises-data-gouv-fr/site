@@ -1,4 +1,5 @@
 import type React from "react";
+import { Link } from "#components/Link";
 import UniteLegaleBadge from "#components/unite-legale-badge";
 import { Icon } from "#components-ui/icon/wrapper";
 import IsActiveTag from "#components-ui/tag/is-active-tag";
@@ -72,7 +73,7 @@ const ResultItem: React.FC<{
 
   return (
     <div className={styles["result-item"]}>
-      <a
+      <Link
         className="result-link no-style-link"
         data-siren={result.siren}
         href={`/entreprise/${result.chemin}`}
@@ -114,7 +115,7 @@ const ResultItem: React.FC<{
             </span>
           </Icon>
         </div>
-      </a>
+      </Link>
       <ul className={styles["matching-etablissement"]}>
         {(result.matchingEtablissements || [])
           .filter((e) => !e.estSiege)

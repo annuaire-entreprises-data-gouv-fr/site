@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import TextWrapper from "#components-ui/text-wrapper";
 import constants from "#models/constants";
 
@@ -45,7 +46,9 @@ function Accessibility() {
       <ul>
         <li>
           Écrivez-nous via notre{" "}
-          <a href={constants.links.parcours.contact}>formulaire de contact</a>
+          <Link href={constants.links.parcours.contact}>
+            formulaire de contact
+          </Link>
         </li>
         <li>Adresse : DINUM 20 avenue de Ségur 75007 Paris</li>
       </ul>

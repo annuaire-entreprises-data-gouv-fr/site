@@ -3,10 +3,13 @@ import routes from "#clients/routes";
 import constants from "#models/constants";
 import { DataStore } from "#utils/data-store";
 
-type FeatureFlag =
-  | "new_agent_onboarding"
-  | "other_new_feature"
-  | "an_off_feature";
+const FEATURE_FLAGS = [
+  "incident_banner_displayed",
+  "new_agent_onboarding",
+  "other_new_feature",
+  "an_off_feature",
+] as const;
+export type FeatureFlag = (typeof FEATURE_FLAGS)[number];
 type FeatureFlagValue = boolean | string;
 
 /**
@@ -36,7 +39,14 @@ class FeatureFlagsList {
     response: {
       [key in FeatureFlag]: FeatureFlagValue;
     }
-  ) => response;
+  ) =>
+    FEATURE_FLAGS.reduce(
+      (acc, flag) => {
+        acc[flag] = response[flag];
+        return acc;
+      },
+      {} as { [key in FeatureFlag]: FeatureFlagValue }
+    );
 }
 
 const featureFlags = new FeatureFlagsList();

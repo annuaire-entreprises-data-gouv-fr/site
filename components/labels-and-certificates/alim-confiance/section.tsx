@@ -2,6 +2,7 @@
 
 import { useFetchAlimConfiance } from "hooks/fetch/alim-confiance";
 import { useCallback, useId, useState } from "react";
+import { Link } from "#components/Link";
 import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
@@ -74,9 +75,9 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
                   }) => [
                     <>
                       {siret && (
-                        <a href={`/etablissement/${siret}`}>
+                        <Link href={`/etablissement/${siret}`}>
                           {formatSiret(siret)}
-                        </a>
+                        </Link>
                       )}
                       {denomination && <div>{denomination}</div>}
                       {adresse && codePostal && commune && (

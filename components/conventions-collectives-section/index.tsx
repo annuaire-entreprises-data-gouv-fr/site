@@ -1,6 +1,7 @@
 import type React from "react";
 import routes from "#clients/routes";
 import { MTPEI } from "#components/administrations";
+import { Link } from "#components/Link";
 import NonRenseigne from "#components/non-renseigne";
 import { DataSection } from "#components/section/data-section";
 import { FullTable } from "#components/table/full";
@@ -143,9 +144,9 @@ const ConventionsCollectivesSection: React.FC<{
                   <ul>
                     {(sirets || []).map((siret) => (
                       <li key={siret}>
-                        <a href={`/etablissement/${siret}`}>
+                        <Link href={`/etablissement/${siret}`}>
                           {formatSiret(siret)}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>,

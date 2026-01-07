@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { FullTable } from "#components/table/full";
 import ButtonProConnect from "#components-ui/button-pro-connect";
@@ -24,7 +25,7 @@ const AgentWall: React.FC<{
         <h3>Vous êtes agent public ?</h3>
         <p>
           Accédez immédiatement à ces données sur{" "}
-          <a href="/lp/agent-public">l’espace agent public</a>.{" "}
+          <Link href="/lp/agent-public">l'espace agent public</Link>.{" "}
           <>
             En vous connectant vous acceptez nos{" "}
             <a
@@ -32,13 +33,13 @@ const AgentWall: React.FC<{
               rel="noreferrer noopener"
               target="_blank"
             >
-              modalités d’utilisation
+              modalités d'utilisation
             </a>
             .
           </>
         </p>
         <ButtonProConnect event="AGENT_WALL" noFootLink />
-        <a href="/lp/agent-public">⇢ Découvrir l’espace agent public</a>
+        <Link href="/lp/agent-public">⇢ Découvrir l'espace agent public</Link>
       </FloatingModal>
       <div aria-hidden className={style["blur"]} tab-index="-1">
         <p>

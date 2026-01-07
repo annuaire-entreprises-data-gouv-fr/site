@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import FAQLink from "#components-ui/faq-link";
 import getSession from "#utils/server-side-helper/get-session";
 import ChangelogWithFilters from "./_components";
@@ -24,8 +25,11 @@ export default async function ChangelogPage() {
           sans création de compte
         </FAQLink>
         , de l’
-        <a href="/lp/agent-public">Espace agent public</a> et de l’
-        <a href="/donnees/api-entreprises">API de Recherche d’Entreprises</a>.
+        <Link href="/lp/agent-public">Espace agent public</Link> et de l'
+        <Link href="/donnees/api-entreprises">
+          API de Recherche d'Entreprises
+        </Link>
+        .
       </p>
       <ChangelogWithFilters session={session} />
     </>

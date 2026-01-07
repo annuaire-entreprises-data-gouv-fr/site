@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import TextWrapper from "#components-ui/text-wrapper";
 import { allDataToModify } from "#models/administrations/data-to-modify";
 
@@ -10,7 +11,7 @@ export default function FAQPage() {
       <ul>
         {allDataToModify.map(({ label, slug }) => (
           <li key={slug}>
-            <a href={`/faq/modifier/${slug}`}>{label}</a>
+            <Link href={`/faq/modifier/${slug}`}>{label}</Link>
           </li>
         ))}
       </ul>

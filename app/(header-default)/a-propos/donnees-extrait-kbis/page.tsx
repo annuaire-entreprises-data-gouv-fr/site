@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { INPI, INSEE } from "#components/administrations";
+import { Link } from "#components/Link";
 import TextWrapper from "#components-ui/text-wrapper";
 
 export const metadata: Metadata = {
@@ -48,8 +49,8 @@ export default function ExtraitKbis() {
           </h2>
           <p>
             Pour retrouver les informations d’immatriculation d’une entreprise,{" "}
-            <a href="/">utilisez le moteur de recherche</a> pour trouver la page
-            de l’entreprise concernée.
+            <Link href="/">utilisez le moteur de recherche</Link> pour trouver
+            la page de l'entreprise concernée.
           </p>
           <p>
             Une fois sur la page de l’entreprise, retrouvez les données

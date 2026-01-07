@@ -1,4 +1,5 @@
 import type React from "react";
+import { Link } from "#components/Link";
 import FAQLink from "#components-ui/faq-link";
 import { estNonDiffusibleStrict } from "#models/core/diffusion";
 import { estActif, IETATADMINSTRATIF } from "#models/core/etat-administratif";
@@ -55,14 +56,14 @@ export const EtablissementDescription: React.FC<IProps> = ({
               <br />
               <br />
               Il faut bien distinguer la{" "}
-              <a href={`/entreprise/${uniteLegale.chemin}`}>
+              <Link href={`/entreprise/${uniteLegale.chemin}`}>
                 fiche résumé{" "}
                 {uniteLegaleLabelWithPronounContracted(uniteLegale)}
-              </a>{" "}
+              </Link>{" "}
               et les{" "}
-              <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+              <Link href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                 fiches de ses établissements
-              </a>
+              </Link>
               .
             </FAQLink>
             , immatriculé sous le siret {formatSiret(etablissement.siret)}, est
@@ -93,23 +94,23 @@ export const EtablissementDescription: React.FC<IProps> = ({
               <> un établissement secondaire</>
             )}{" "}
             {uniteLegaleLabelWithPronounContracted(uniteLegale)}{" "}
-            <a href={`/entreprise/${uniteLegale.chemin}`}>
+            <Link href={`/entreprise/${uniteLegale.chemin}`}>
               {uniteLegale.nomComplet}
-            </a>
+            </Link>
             {uniteLegale.etablissements.all.length > 1 ? (
               <>
                 , qui possède{" "}
-                <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+                <Link href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                   {uniteLegale.etablissements.nombreEtablissements - 1} autre(s)
                   établissement(s)
-                </a>
+                </Link>
               </>
             ) : (
               <>
                 {" et "}
-                <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+                <Link href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                   son unique établissement
-                </a>
+                </Link>
               </>
             )}
             .

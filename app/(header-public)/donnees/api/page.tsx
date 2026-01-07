@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
 import ApiMonitoring from "#components/api-monitoring";
+import { Link } from "#components/Link";
 import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import { administrationsMetaData } from "#models/administrations";
 import type { IAdministrationsMetaData } from "#models/administrations/types";
@@ -49,9 +50,9 @@ export default async function StatusPage() {
         <p>
           L’Annuaire des Entreprises utilise les données de différentes
           administrations en lien avec les entreprises, les associations et les
-          services publics. Les <a href="/donnees/sources">données</a> sont
-          accessibles par le biais de téléservices appelés API. Ces API sont{" "}
-          <strong>ouvertes à tous</strong>.
+          services publics. Les <Link href="/donnees/sources">données</Link>{" "}
+          sont accessibles par le biais de téléservices appelés API. Ces API
+          sont <strong>ouvertes à tous</strong>.
         </p>
         <p>
           Cette page détaille la liste des API utilisées et leur disponibilité

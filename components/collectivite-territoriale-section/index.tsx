@@ -1,4 +1,5 @@
 import type React from "react";
+import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import FAQLink from "#components-ui/faq-link";
@@ -40,9 +41,9 @@ const CollectiviteTerritorialeSection: React.FC<{
     [
       "Élus",
       elus.length > 0 ? (
-        <a href={`/dirigeants/${uniteLegale.siren}`}>
+        <Link href={`/dirigeants/${uniteLegale.siren}`}>
           → voir les {elus.length} élu(s)
-        </a>
+        </Link>
       ) : (
         ""
       ),

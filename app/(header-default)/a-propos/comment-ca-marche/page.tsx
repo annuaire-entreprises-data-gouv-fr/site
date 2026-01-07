@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Link } from "#components/Link";
 import TextWrapper from "#components-ui/text-wrapper";
 import { administrationsMetaData } from "#models/administrations";
 import constants from "#models/constants";
@@ -32,9 +33,9 @@ export default function About() {
         </p>
         <p>
           Il est opéré par{" "}
-          <a href="/equipe">
+          <Link href="/equipe">
             une équipe de la Direction Interministérielle du Numérique
-          </a>
+          </Link>
           .
         </p>
         <div>
@@ -91,14 +92,14 @@ export default function About() {
           <p>
             Ces bases de données sont récupérées grâce aux téléservices
             développés par les{" "}
-            <a href="/administration">administrations partenaires</a> :
+            <Link href="/administration">administrations partenaires</Link> :
           </p>
           <ul>
             {allAdministrations.map((administration) => (
               <li key={administration.slug}>
-                <a href={`/administration#${administration.slug}`}>
+                <Link href={`/administration#${administration.slug}`}>
                   {administration.long}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -132,8 +133,9 @@ export default function About() {
           </p>
           <p>
             Vous pouvez également retrouver les{" "}
-            <a href="/donnees/sources">sources de données</a> de l’Annuaire et{" "}
-            <a href="/donnees/api">statut des API utilisées</a>.
+            <Link href="/donnees/sources">sources de données</Link> de
+            l'Annuaire et{" "}
+            <Link href="/donnees/api">statut des API utilisées</Link>.
           </p>
           <p>
             <strong>NB</strong> : L’Annuaire des Entreprises a développé sa
@@ -160,13 +162,12 @@ export default function About() {
             <li>Générer un QR code ?</li>
           </ul>
           <p>
-            Découvrez notre{" "}
-            <a href="https://annuaire-entreprises.data.gouv.fr/partager">
-              guide sur le sujet
-            </a>{" "}
-            et n’hésitez pas à nous contacter afin que nous puissions vous aider
+            Découvrez notre <Link href="/partager">guide sur le sujet</Link> et
+            n'hésitez pas à nous contacter afin que nous puissions vous aider
             via notre{" "}
-            <a href={constants.links.parcours.contact}>formulaire de contact</a>
+            <Link href={constants.links.parcours.contact}>
+              formulaire de contact
+            </Link>
             .
           </p>
           <h2>
@@ -187,9 +188,9 @@ export default function About() {
             </li>
             <li>
               Permettre aux agents publics de retrouver{" "}
-              <a href="https://annuaire-entreprises.data.gouv.fr/donnees-extrait-kbis">
+              <Link href="/donnees-extrait-kbis">
                 toutes les informations contenues dans un extrait KBIS ou D1
-              </a>
+              </Link>
               .
             </li>
             <li>

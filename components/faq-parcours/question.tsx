@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+import { Link } from "#components/Link";
 import { Warning } from "#components-ui/alerts";
 import { MultiChoice } from "#components-ui/multi-choice";
 import TextWrapper from "#components-ui/text-wrapper";
@@ -52,9 +53,9 @@ export default function Question({
                 Entreprise est un service public <strong>gratuit</strong> et ne
                 vous demandera <strong>jamais</strong> d’argent. Pour en savoir
                 plus, consultez{" "}
-                <a href="/faq/fraudes-ecroqueries-annuaire-des-entreprises">
+                <Link href="/faq/fraudes-ecroqueries-annuaire-des-entreprises">
                   notre fiche explicative
-                </a>
+                </Link>
                 .
               </Warning>
             )}
@@ -63,9 +64,9 @@ export default function Question({
               Si vous possédez une <strong>entreprise individuelle</strong> dont
               vous souhaitez <strong>cacher ou afficher</strong> les
               informations personnelles,{" "}
-              <a href="/faq/rendre-mon-entreprise-non-diffusible">
+              <Link href="/faq/rendre-mon-entreprise-non-diffusible">
                 consultez notre fiche
-              </a>
+              </Link>
               .
             </p>
           )}
@@ -126,10 +127,11 @@ export default function Question({
             Si la modification concerne{" "}
             <strong>l’affichage de données personnelles</strong> sur le site,
             consultez{" "}
-            <a href="/faq/supprimer-donnees-personnelles-entreprise">
+            <Link href="/faq/supprimer-donnees-personnelles-entreprise">
               notre fiche dédiée
-            </a>{" "}
-            ou notre <a href="/vie-privee">politique de confidentialité</a>.
+            </Link>{" "}
+            ou notre{" "}
+            <Link href="/vie-privee">politique de confidentialité</Link>.
           </p>
           <p>
             Pour le reste, l’Annuaire des Entreprises centralise les

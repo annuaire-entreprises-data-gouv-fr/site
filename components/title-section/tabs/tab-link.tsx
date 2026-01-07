@@ -1,3 +1,4 @@
+import { Link } from "#components/Link";
 import styles from "./styles.module.css";
 
 type IProps = {
@@ -15,13 +16,13 @@ export default function TabLink({
   width,
 }: IProps) {
   return (
-    <a
+    <Link
       className={`${active ? styles.activeLink : ""} no-style-link`}
       href={href}
       rel={noFollow ? "nofollow" : ""}
       style={{ width }}
     >
       {active ? label : <h2>{label}</h2>}
-    </a>
+    </Link>
   );
 }

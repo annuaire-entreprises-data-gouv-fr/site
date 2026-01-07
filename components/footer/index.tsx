@@ -1,4 +1,5 @@
 import { clsx } from "clsx";
+import { Link } from "#components/Link";
 import Logo from "#components-ui/logo";
 import { PrintNever } from "#components-ui/print-visibility";
 import { administrationsMetaData } from "#models/administrations";
@@ -21,24 +22,30 @@ const Footer = () => (
                   .filter((lp) => !lp.isServicePublic)
                   .map(({ slug, footerLabel }) => (
                     <li key={slug}>
-                      <a className="fr-footer__top-link" href={`/lp/${slug}`}>
+                      <Link
+                        className="fr-footer__top-link"
+                        href={`/lp/${slug}`}
+                      >
                         {footerLabel}
-                      </a>
+                      </Link>
                     </li>
                   ))}
               </ul>
               <br />
               <strong className="fr-footer__top-cat">
-                Vérifier les informations légales d’une administration
+                Vérifier les informations légales d'une administration
               </strong>
               <ul className="fr-footer__top-list">
                 {getAllLandingPages()
                   .filter((lp) => lp.isServicePublic)
                   .map(({ slug, footerLabel }) => (
                     <li key={slug}>
-                      <a className="fr-footer__top-link" href={`/lp/${slug}`}>
+                      <Link
+                        className="fr-footer__top-link"
+                        href={`/lp/${slug}`}
+                      >
                         {footerLabel}
-                      </a>
+                      </Link>
                     </li>
                   ))}
               </ul>
@@ -48,21 +55,21 @@ const Footer = () => (
               </strong>
               <ul className="fr-footer__top-list">
                 <li>
-                  <a
+                  <Link
                     className="fr-footer__top-link"
                     href="/departements/index.html"
                   >
                     Entreprises françaises par département
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <br />
               <strong className="fr-footer__top-cat">Répertoire Sirene</strong>
               <ul className="fr-footer__top-list">
                 <li>
-                  <a className="fr-footer__top-link" href="/export-sirene">
-                    Générer une liste d’établissements (SIRET) au format CSV
-                  </a>
+                  <Link className="fr-footer__top-link" href="/export-sirene">
+                    Générer une liste d'établissements (SIRET) au format CSV
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -72,9 +79,9 @@ const Footer = () => (
               </strong>
               <ul className="fr-footer__top-list">
                 <li>
-                  <a className="fr-footer__top-link" href="/partager">
+                  <Link className="fr-footer__top-link" href="/partager">
                     Réutiliser & partager
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -87,22 +94,22 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/donnees/sources">
+                  <Link className="fr-footer__top-link" href="/donnees/sources">
                     Sources de données
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="fr-footer__top-link"
                     href="/donnees/api-entreprises"
                   >
-                    API Recherche d’entreprises & API Entreprise
-                  </a>
+                    API Recherche d'entreprises & API Entreprise
+                  </Link>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/donnees/api">
+                  <Link className="fr-footer__top-link" href="/donnees/api">
                     Disponibilité des API
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <br />
@@ -164,61 +171,61 @@ const Footer = () => (
               <strong className="fr-footer__top-cat">Aide</strong>
               <ul className="fr-footer__top-list">
                 <li>
-                  <a className="fr-footer__top-link" href="/faq">
+                  <Link className="fr-footer__top-link" href="/faq">
                     Questions fréquentes
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/definitions">
+                  <Link className="fr-footer__top-link" href="/definitions">
                     Définitions
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="fr-footer__top-link"
                     href="/formulaire/supprimer-donnees-personnelles-entreprise"
                   >
                     Supprimer ses données personnelles
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <br />
               <strong className="fr-footer__top-cat">
-                L’Annuaire des Entreprises
+                L'Annuaire des Entreprises
               </strong>
               <ul className="fr-footer__top-list">
                 <li>
-                  <a
+                  <Link
                     className="fr-footer__top-link"
                     href="/a-propos/comment-ca-marche"
                   >
                     À propos
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/administration">
+                  <Link className="fr-footer__top-link" href="/administration">
                     Administrations partenaires
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/lp/agent-public">
-                    L’espace agent public
-                  </a>
+                  <Link className="fr-footer__top-link" href="/lp/agent-public">
+                    L'espace agent public
+                  </Link>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/a-propos/stats">
-                    Statistiques d’usage
-                  </a>
+                  <Link className="fr-footer__top-link" href="/a-propos/stats">
+                    Statistiques d'usage
+                  </Link>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/a-propos/budget">
+                  <Link className="fr-footer__top-link" href="/a-propos/budget">
                     Budget
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/a-propos/equipe">
+                  <Link className="fr-footer__top-link" href="/a-propos/equipe">
                     Équipe
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -235,9 +242,9 @@ const Footer = () => (
                 française
               </span>
             </p>
-            <a
+            <Link
               className={clsx("fr-footer__brand-link", styles.brandLinkItem)}
-              href="#"
+              href="/"
               title="Aller à l'accueil du site - annuaire-entreprises.data.gouv.fr - République Française"
             >
               <img
@@ -248,17 +255,17 @@ const Footer = () => (
                 width={64}
               />
               <p>Produit de l'écosystème datagouv</p>
-            </a>
+            </Link>
           </div>
           <div className="fr-footer__content">
             <p className="fr-footer__content-desc">
               Ce site permet de retrouver toutes les données publiques détenues
-              par l’administration sur une entreprise, une association ou une
+              par l'administration sur une entreprise, une association ou une
               administration et{" "}
-              <a href="/a-propos/donnees-extrait-kbis">
+              <Link href="/a-propos/donnees-extrait-kbis">
                 en particulier les données contenues dans un extrait KBIS
-              </a>{" "}
-              ou de l’extrait D1.
+              </Link>{" "}
+              ou de l'extrait D1.
             </p>
             <p className="fr-footer__content-desc">
               Il est opéré par la{" "}
@@ -329,7 +336,7 @@ const Footer = () => (
                   .filter(({ logoType }) => !!logoType)
                   .map(({ slug, logoType, long, short }) => (
                     <li key={long}>
-                      <a
+                      <Link
                         className="fr-footer__partners-link"
                         href={`/administration#${slug}`}
                       >
@@ -354,11 +361,11 @@ const Footer = () => (
                             width={100}
                           />
                         )}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 <li key="all">
-                  <a
+                  <Link
                     className="fr-footer__partners-link"
                     href="/administration"
                   >
@@ -375,7 +382,7 @@ const Footer = () => (
                       ].join("\r\n")}
                       width={80}
                     />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -384,35 +391,35 @@ const Footer = () => (
         <div className="fr-footer__bottom">
           <ul className="fr-footer__bottom-list">
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/vie-privee">
+              <Link className="fr-footer__bottom-link" href="/vie-privee">
                 Vie privée & cookies
-              </a>
+              </Link>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/mentions-legales">
+              <Link className="fr-footer__bottom-link" href="/mentions-legales">
                 Mentions légales
-              </a>
+              </Link>
             </li>
             <li className="fr-footer__bottom-item">
-              <a
+              <Link
                 className="fr-footer__bottom-link"
                 href="/modalites-utilisation"
               >
-                Modalités d’Utilisation
-              </a>
+                Modalités d'Utilisation
+              </Link>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/accessibilite">
+              <Link className="fr-footer__bottom-link" href="/accessibilite">
                 Accessibilité : non conforme
-              </a>
+              </Link>
             </li>
             <li className="fr-footer__bottom-item">
-              <a
+              <Link
                 className="fr-footer__bottom-link"
                 href="/historique-des-modifications"
               >
                 Historique des changements
-              </a>
+              </Link>
             </li>
             <li className="fr-footer__bottom-item">
               <a
