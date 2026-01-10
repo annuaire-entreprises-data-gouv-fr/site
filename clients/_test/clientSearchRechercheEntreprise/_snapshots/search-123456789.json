@@ -34,6 +34,7 @@
           "commune": "",
           "activitePrincipale": "",
           "libelleActivitePrincipale": "",
+          "libelleActivitePrincipaleNaf25": "",
           "trancheEffectif": "",
           "anneeTrancheEffectif": "",
           "latitude": "",
@@ -81,6 +82,7 @@
               "commune": "",
               "activitePrincipale": "",
               "libelleActivitePrincipale": "",
+              "libelleActivitePrincipaleNaf25": "",
               "trancheEffectif": "",
               "anneeTrancheEffectif": "",
               "latitude": "",
@@ -122,6 +124,7 @@
               "commune": "",
               "activitePrincipale": "",
               "libelleActivitePrincipale": "",
+              "libelleActivitePrincipaleNaf25": "",
               "trancheEffectif": "",
               "anneeTrancheEffectif": "",
               "latitude": "",
@@ -145,6 +148,7 @@
         },
         "activitePrincipale": null,
         "libelleActivitePrincipale": "Activité inconnue",
+        "libelleActivitePrincipaleNaf25": "Activité inconnue",
         "dateCreation": "2024-02-14",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
@@ -178,7 +182,8 @@
           "typeEntrepriseInclusive": "ESAT",
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null
         },
         "association": {
           "idAssociation": null,
@@ -192,7 +197,6 @@
           "dateDebutActivite": "",
           "dateRadiation": "",
           "dateImmatriculation": "",
-          "duree": 0,
           "dateFin": "",
           "natureEntreprise": ["Agricole : Périmètre des actifs agricoles"],
           "dateCloture": "",
@@ -210,8 +214,8 @@
             "prenom": "Claire",
             "prenoms": "Claire",
             "role": "",
-            "nationalite": null,
-            "dateNaissancePartial": null,
+            "nationalite": "FRANÇAISE",
+            "dateNaissancePartial": "1978-10",
             "estDemissionnaire": false,
             "dateDemission": null
           }

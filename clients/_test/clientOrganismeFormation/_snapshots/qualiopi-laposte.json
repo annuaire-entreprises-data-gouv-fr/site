@@ -3,16 +3,6 @@
   "result": {
     "records": [
       {
-        "nda": "11755565775",
-        "exNda": "11755565775",
-        "region": "Île-de-France",
-        "dateDeclaration": "28/05/2025",
-        "specialite": "Informatique, traitement de l'information, réseaux de transmission des données/Développement des capacités comportementales et relationnelles",
-        "stagiaires": 1270,
-        "formateurs": 166,
-        "certifications": ["Actions de formations"]
-      },
-      {
         "nda": "11755762075",
         "exNda": "11755762075",
         "region": "Île-de-France",
@@ -20,6 +10,16 @@
         "specialite": "Spécialités plutitechnologiques, mécanique-électricité/Ressources humaines, gestion du personnel, gestion de l'emploi",
         "stagiaires": 107,
         "formateurs": 77,
+        "certifications": ["Actions de formations"]
+      },
+      {
+        "nda": "11755565775",
+        "exNda": "11755565775",
+        "region": "Île-de-France",
+        "dateDeclaration": "28/05/2025",
+        "specialite": "Informatique, traitement de l'information, réseaux de transmission des données/Développement des capacités comportementales et relationnelles",
+        "stagiaires": 1270,
+        "formateurs": 166,
         "certifications": ["Actions de formations"]
       }
     ],

@@ -34,6 +34,7 @@
           "commune": "PARIS 04",
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+          "libelleActivitePrincipaleNaf25": "Activités d’administration publique générale (84.11Y)",
           "trancheEffectif": "42",
           "anneeTrancheEffectif": "2023",
           "latitude": "48.856145",
@@ -90,6 +91,7 @@
               "commune": "PARIS 04",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "libelleActivitePrincipaleNaf25": "Activités d’administration publique générale (84.11Y)",
               "trancheEffectif": "42",
               "anneeTrancheEffectif": "2023",
               "latitude": "48.856145",
@@ -138,6 +140,7 @@
               "commune": "PARIS 04",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "libelleActivitePrincipaleNaf25": "Activités d’administration publique générale (84.11Y)",
               "trancheEffectif": "42",
               "anneeTrancheEffectif": "2023",
               "latitude": "48.856145",
@@ -172,10 +175,11 @@
         },
         "activitePrincipale": "84.11Z",
         "libelleActivitePrincipale": "Administration publique générale",
+        "libelleActivitePrincipaleNaf25": "Activités d’administration publique générale (84.11Y)",
         "dateCreation": "1983-03-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
-        "dateMiseAJourInsee": "2025-09-03T15:38:45",
+        "dateMiseAJourInsee": "2025-12-06T05:40:24",
         "dateMiseAJourInpi": "",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
@@ -205,7 +209,8 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": true,
-          "bilanGesRenseigne": true
+          "bilanGesRenseigne": true,
+          "idFinessJuridiques": ["750805483", "750002008"]
         },
         "association": {
           "idAssociation": null,
@@ -432,6 +437,17 @@
               "prenoms": "Alix",
               "role": null,
               "dateNaissancePartial": "1978-04",
+              "lieuNaissance": "",
+              "estDemissionnaire": false,
+              "dateDemission": null
+            },
+            {
+              "sexe": "M",
+              "nom": "BOUIGUE",
+              "prenom": "Richard",
+              "prenoms": "Richard",
+              "role": null,
+              "dateNaissancePartial": "1970-03",
               "lieuNaissance": "",
               "estDemissionnaire": false,
               "dateDemission": null
@@ -1383,17 +1399,6 @@
               "dateDemission": null
             },
             {
-              "sexe": "M",
-              "nom": "MADEC",
-              "prenom": "Roger",
-              "prenoms": "Roger",
-              "role": null,
-              "dateNaissancePartial": "1950-10",
-              "lieuNaissance": "",
-              "estDemissionnaire": false,
-              "dateDemission": null
-            },
-            {
               "sexe": "F",
               "nom": "MALACHARD DES REYSSIERS",
               "prenom": "Delphine",
@@ -1433,17 +1438,6 @@
               "prenoms": "Douchka",
               "role": null,
               "dateNaissancePartial": "1978-04",
-              "lieuNaissance": "",
-              "estDemissionnaire": false,
-              "dateDemission": null
-            },
-            {
-              "sexe": "M",
-              "nom": "MARTIAL",
-              "prenom": "Jacques",
-              "prenoms": "Jacques",
-              "role": null,
-              "dateNaissancePartial": "1955-11",
               "lieuNaissance": "",
               "estDemissionnaire": false,
               "dateDemission": null
@@ -1961,17 +1955,6 @@
               "prenoms": "François",
               "role": null,
               "dateNaissancePartial": "1969-12",
-              "lieuNaissance": "",
-              "estDemissionnaire": false,
-              "dateDemission": null
-            },
-            {
-              "sexe": "F",
-              "nom": "VERSINI",
-              "prenom": "Dominique",
-              "prenoms": "Dominique",
-              "role": "36ème adjoint au Maire",
-              "dateNaissancePartial": "1954-07",
               "lieuNaissance": "",
               "estDemissionnaire": false,
               "dateDemission": null
