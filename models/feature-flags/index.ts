@@ -5,9 +5,7 @@ import { DataStore } from "#utils/data-store";
 
 const FEATURE_FLAGS = [
   "incident_banner_displayed",
-  "new_agent_onboarding",
-  "other_new_feature",
-  "an_off_feature",
+  "proconnect_incident_banner_displayed",
 ] as const;
 export type FeatureFlag = (typeof FEATURE_FLAGS)[number];
 type FeatureFlagValue = boolean | string;

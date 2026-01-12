@@ -6,17 +6,29 @@ import constants from "#models/constants";
 import styles from "./styles.module.css";
 
 const TEMP_INCIDENT_BANNER = {
-  message: `
+  default: `
   🚨 Nous rencontrons actuellement des difficultés techniques, le service peut être temporairement indisponible.
+    Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser pour la gêne occasionnée.`,
+  proconnect: `
+  🚨 Notre partenaire ProConnect rencontre actuellement des difficultés techniques, le service de connexion aux espaces agent public peut être temporairement indisponible.
     Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser pour la gêne occasionnée.`,
 };
 
 export default function TempIncidentBanner() {
-  const { isEnabled } = useFeatureFlag("incident_banner_displayed");
+  const { isEnabled: isDefaultIncidentEnabled } = useFeatureFlag(
+    "incident_banner_displayed"
+  );
+  const { isEnabled: isProconnectIncidentEnabled } = useFeatureFlag(
+    "proconnect_incident_banner_displayed"
+  );
 
-  if (!isEnabled) {
+  if (!isDefaultIncidentEnabled && !isProconnectIncidentEnabled) {
     return null;
   }
+
+  const message = isProconnectIncidentEnabled
+    ? TEMP_INCIDENT_BANNER.proconnect
+    : TEMP_INCIDENT_BANNER.default;
 
   return (
     <PrintNever>
@@ -30,7 +42,7 @@ export default function TempIncidentBanner() {
           borderColor: constants.colors.frBlue,
         }}
       >
-        <div className="fr-container">{TEMP_INCIDENT_BANNER.message}</div>
+        <div className="fr-container">{message}</div>
       </div>
     </PrintNever>
   );
