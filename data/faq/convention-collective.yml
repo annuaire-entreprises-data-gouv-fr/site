@@ -11,10 +11,9 @@
 # more:
 #   - label: libellé
 #     href: url
-slug: convention-collective
 administrations:
   - mtpei
-title: Qu'est-ce qu'une convention collective ?
+title: Qu’est-ce qu’une convention collective ?
 group: notions
 seo:
   description: Une convention collective contient les règles de droit du travail (contrat, congés, salaires...) applicables à une entreprise.
