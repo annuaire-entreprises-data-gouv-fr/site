@@ -95,6 +95,10 @@ const nextConfig: NextConfig = {
             key: "Cache-Control",
             value: "no-cache",
           },
+          {
+            key: "Access-Control-Max-Age",
+            value: "0",
+          },
         ],
       },
       {
