@@ -29,21 +29,6 @@ export const clientRolesGetGroups = async (): Promise<IAgentsGroup[]> => {
   return mapToDomainObject(response);
 };
 
-export const clientRolesGetOrganizationsGroups = async (): Promise<
-  IAgentsOrganizationGroup[]
-> => {
-  const url =
-    process.env.ROLES_DATA_URL + routes.rolesData.organizations.getGroups;
-  const response = await rolesDataResourceServerClient<
-    IAgentsOrganizationGroupResponse[]
-  >({
-    url,
-    method: "GET",
-  });
-
-  return mapToDomainObjectOrganizationGroups(response);
-};
-
 const mapToDomainObject = (response: IAgentsGroupResponse[]): IAgentsGroup[] =>
   response.map((group) => {
     const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
@@ -60,6 +45,21 @@ const mapToDomainObject = (response: IAgentsGroupResponse[]): IAgentsGroup[] =>
       scopes: validScopes,
     };
   });
+
+export const clientRolesGetOrganizationsGroups = async (): Promise<
+  IAgentsOrganizationGroup[]
+> => {
+  const url =
+    process.env.ROLES_DATA_URL + routes.rolesData.organizations.getGroups;
+  const response = await rolesDataResourceServerClient<
+    IAgentsOrganizationGroupResponse[]
+  >({
+    url,
+    method: "GET",
+  });
+
+  return mapToDomainObjectOrganizationGroups(response);
+};
 
 const mapToDomainObjectOrganizationGroups = (
   response: IAgentsOrganizationGroupResponse[]

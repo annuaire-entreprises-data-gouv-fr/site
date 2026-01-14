@@ -1,22 +1,22 @@
 import { Icon } from "#components-ui/icon/wrapper";
 import { Tag } from "#components-ui/tag";
-import { getAgentGroups } from "#models/authentication/group";
+import type { IAgentsGroup } from "#models/authentication/group";
 import {
   ApplicationRights,
   getGroupsGrantingRights,
   hasRights,
 } from "#models/authentication/user/rights";
-import getSession from "#utils/server-side-helper/get-session";
+import type { ISession } from "#models/authentication/user/session";
 
-export const HabilitationsTable = async () => {
-  const session = await getSession();
+interface IHabilitationsTableProps {
+  session: ISession;
+  groups: IAgentsGroup[];
+}
 
-  if (!session?.user) {
-    return null;
-  }
-
-  const groups = await getAgentGroups({ allowProConnectRedirection: true });
-
+export const HabilitationsTable = async ({
+  session,
+  groups,
+}: IHabilitationsTableProps) => {
   const appRights = Object.values(ApplicationRights)
     .filter(
       (scope) =>
