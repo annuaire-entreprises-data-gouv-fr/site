@@ -78,7 +78,7 @@ const mapToDomainObjectOrganizationGroups = (
     return {
       id: group.id,
       name: group.name,
-      adminEmail: group.admin_emails[0] ?? "",
+      adminEmails: group.admin_emails,
       scopes: validScopes,
     };
   });

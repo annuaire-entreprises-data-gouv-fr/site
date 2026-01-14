@@ -1,39 +1,68 @@
 "use client";
 
-import { useAction } from "next-safe-action/hooks";
 import { useCallback, useId, useState } from "react";
 import { getOrganizationsGroupsAction } from "server-actions/agent/group-management";
 import ButtonLink from "#components-ui/button";
 import { Icon } from "#components-ui/icon/wrapper";
 import { Tag } from "#components-ui/tag";
-import type { IAgentsGroup } from "#models/authentication/group";
+import type {
+  IAgentsGroup,
+  IAgentsOrganizationGroup,
+} from "#models/authentication/group";
 import constants from "#models/constants";
+import { ActiveGroupsModal } from "./active-groups-modal";
 import { NoGroupsModal } from "./no-groups-modal";
+import { OrganisationGroupsModal } from "./organisation-groups-modal";
 import styles from "./styles.module.css";
 
 interface ICardHabilitationProps {
+  habilitationUrl: string;
   groups: IAgentsGroup[];
 }
 
-const habilitationUrl = `${process.env.DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`;
-
-export const CardHabilitation = ({ groups }: ICardHabilitationProps) => {
+export const CardHabilitation = ({
+  habilitationUrl,
+  groups,
+}: ICardHabilitationProps) => {
   const labelId = useId();
+
+  const [organisationGroups, setOrganisationGroups] = useState<
+    IAgentsOrganizationGroup[] | null
+  >(null);
+
   const [isNoGroupsModalOpen, setIsNoGroupsModalOpen] = useState(false);
   const [isActiveGroupsModalOpen, setIsActiveGroupsModalOpen] = useState(false);
   const [isOrganisationGroupsModalOpen, setIsOrganisationGroupsModalOpen] =
     useState(false);
 
-  const {
-    executeAsync: getOrganisationGroups,
-    result: { data },
-  } = useAction(getOrganizationsGroupsAction);
+  const getOrganisationGroups = useCallback(async () => {
+    if (organisationGroups) {
+      return organisationGroups;
+    }
+
+    const { data } = await getOrganizationsGroupsAction();
+    const newOrganisationGroups = data
+      ? data.filter((group) => !groups.some((g) => g.id === group.id))
+      : [];
+
+    setOrganisationGroups(newOrganisationGroups);
+
+    return newOrganisationGroups;
+  }, [groups, organisationGroups]);
+
+  const openNewHabilitation = useCallback(() => {
+    setIsActiveGroupsModalOpen(false);
+    setIsOrganisationGroupsModalOpen(false);
+    setIsNoGroupsModalOpen(false);
+
+    window.open(habilitationUrl, "_blank");
+  }, [habilitationUrl]);
 
   const onHabilitationClick = useCallback(async () => {
     if (groups.length === 0) {
-      const organisationGroups = data ?? (await getOrganisationGroups()).data;
+      const orgGroups = await getOrganisationGroups();
 
-      if (organisationGroups?.length) {
+      if (orgGroups.length) {
         setIsOrganisationGroupsModalOpen(true);
       } else {
         setIsNoGroupsModalOpen(true);
@@ -41,11 +70,19 @@ export const CardHabilitation = ({ groups }: ICardHabilitationProps) => {
     } else {
       setIsActiveGroupsModalOpen(true);
     }
-  }, [data, getOrganisationGroups, groups]);
+  }, [getOrganisationGroups, groups]);
 
-  const openNewHabilitation = useCallback(() => {
-    window.open(habilitationUrl, "_blank");
-  }, []);
+  const onConfirmActiveGroupsModal = useCallback(async () => {
+    const orgGroups = await getOrganisationGroups();
+
+    setIsActiveGroupsModalOpen(false);
+
+    if (orgGroups.length) {
+      setIsOrganisationGroupsModalOpen(true);
+    } else {
+      openNewHabilitation();
+    }
+  }, [getOrganisationGroups, openNewHabilitation]);
 
   return (
     <article aria-labelledby={labelId} className={styles.cardHabilitation}>
@@ -83,6 +120,18 @@ export const CardHabilitation = ({ groups }: ICardHabilitationProps) => {
       <NoGroupsModal
         isVisible={isNoGroupsModalOpen}
         onCancel={() => setIsNoGroupsModalOpen(false)}
+        onConfirm={openNewHabilitation}
+      />
+      <ActiveGroupsModal
+        groups={groups}
+        isVisible={isActiveGroupsModalOpen}
+        onCancel={() => setIsActiveGroupsModalOpen(false)}
+        onConfirm={onConfirmActiveGroupsModal}
+      />
+      <OrganisationGroupsModal
+        groups={organisationGroups ?? []}
+        isVisible={isOrganisationGroupsModalOpen}
+        onCancel={() => setIsOrganisationGroupsModalOpen(false)}
         onConfirm={openNewHabilitation}
       />
     </article>

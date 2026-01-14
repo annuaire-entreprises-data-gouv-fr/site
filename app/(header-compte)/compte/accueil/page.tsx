@@ -27,6 +27,7 @@ const CompteAgentAccueil = async () => {
   }
 
   const groups = await getAgentGroups({ allowProConnectRedirection: true });
+  const habilitationUrl = `${process.env.DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`;
 
   return (
     <>
@@ -40,7 +41,7 @@ const CompteAgentAccueil = async () => {
         </div>
         <div className="fr-col-md-1 fr-col-12" />
         <div className="fr-col-md-4 fr-col-12">
-          <CardHabilitation groups={groups} />
+          <CardHabilitation groups={groups} habilitationUrl={habilitationUrl} />
         </div>
       </section>
     </>

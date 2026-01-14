@@ -47,7 +47,7 @@ export const NoGroupsModal = ({
         </p>
       </div>
 
-      <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
+      <div className="fr-btns-group fr-btns-group--left">
         <div style={{ width: "fit-content" }}>
           <ButtonLink onClick={onConfirm}>Continuer</ButtonLink>
         </div>
