@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import AgentNavigation from "#components/espace-agent-components/agent-navigation";
 import { CardHabilitation } from "#components/espace-agent-components/card-habilitation";
 import { HabilitationsTable } from "#components/espace-agent-components/habilitations-table";
+import { getAgentGroups } from "#models/authentication/group";
 import { getAgentFullName } from "#models/authentication/user/helpers";
 import {
   ApplicationRights,
@@ -25,6 +26,9 @@ const CompteAgentAccueil = async () => {
     return redirect("/lp/agent-public");
   }
 
+  const groups = await getAgentGroups({ allowProConnectRedirection: true });
+  const habilitationUrl = `${process.env.DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`;
+
   return (
     <>
       <AgentNavigation />
@@ -33,11 +37,11 @@ const CompteAgentAccueil = async () => {
           <h1 className="fr-h1 fr-mt-0">
             Bonjour {getAgentFullName(session)},
           </h1>
-          <HabilitationsTable />
+          <HabilitationsTable groups={groups} session={session} />
         </div>
         <div className="fr-col-md-1 fr-col-12" />
         <div className="fr-col-md-4 fr-col-12">
-          <CardHabilitation />
+          <CardHabilitation groups={groups} habilitationUrl={habilitationUrl} />
         </div>
       </section>
     </>

@@ -26,7 +26,7 @@ export type IAgentsGroup = {
 export type IAgentsOrganizationGroup = {
   id: number;
   name: string;
-  adminEmail: string;
+  adminEmails: string[];
   scopes: IAgentScope[];
 };
 

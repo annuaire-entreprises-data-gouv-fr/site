@@ -1,12 +1,88 @@
-import { useId } from "react";
+"use client";
+
+import { useCallback, useId, useState } from "react";
+import { getOrganizationsGroupsAction } from "server-actions/agent/group-management";
 import ButtonLink from "#components-ui/button";
 import { Icon } from "#components-ui/icon/wrapper";
 import { Tag } from "#components-ui/tag";
+import type {
+  IAgentsGroup,
+  IAgentsOrganizationGroup,
+} from "#models/authentication/group";
 import constants from "#models/constants";
+import { ActiveGroupsModal } from "./active-groups-modal";
+import { NoGroupsModal } from "./no-groups-modal";
+import { OrganisationGroupsModal } from "./organisation-groups-modal";
 import styles from "./styles.module.css";
 
-export const CardHabilitation = () => {
+interface ICardHabilitationProps {
+  habilitationUrl: string;
+  groups: IAgentsGroup[];
+}
+
+export const CardHabilitation = ({
+  habilitationUrl,
+  groups,
+}: ICardHabilitationProps) => {
   const labelId = useId();
+
+  const [organisationGroups, setOrganisationGroups] = useState<
+    IAgentsOrganizationGroup[] | null
+  >(null);
+
+  const [isNoGroupsModalOpen, setIsNoGroupsModalOpen] = useState(false);
+  const [isActiveGroupsModalOpen, setIsActiveGroupsModalOpen] = useState(false);
+  const [isOrganisationGroupsModalOpen, setIsOrganisationGroupsModalOpen] =
+    useState(false);
+
+  const getOrganisationGroups = useCallback(async () => {
+    if (organisationGroups) {
+      return organisationGroups;
+    }
+
+    const { data } = await getOrganizationsGroupsAction();
+    const newOrganisationGroups = data
+      ? data.filter((group) => !groups.some((g) => g.id === group.id))
+      : [];
+
+    setOrganisationGroups(newOrganisationGroups);
+
+    return newOrganisationGroups;
+  }, [groups, organisationGroups]);
+
+  const openNewHabilitation = useCallback(() => {
+    setIsActiveGroupsModalOpen(false);
+    setIsOrganisationGroupsModalOpen(false);
+    setIsNoGroupsModalOpen(false);
+
+    window.open(habilitationUrl, "_blank");
+  }, [habilitationUrl]);
+
+  const onHabilitationClick = useCallback(async () => {
+    if (groups.length === 0) {
+      const orgGroups = await getOrganisationGroups();
+
+      if (orgGroups.length) {
+        setIsOrganisationGroupsModalOpen(true);
+      } else {
+        setIsNoGroupsModalOpen(true);
+      }
+    } else {
+      setIsActiveGroupsModalOpen(true);
+    }
+  }, [getOrganisationGroups, groups]);
+
+  const onConfirmActiveGroupsModal = useCallback(async () => {
+    const orgGroups = await getOrganisationGroups();
+
+    setIsActiveGroupsModalOpen(false);
+
+    if (orgGroups.length) {
+      setIsOrganisationGroupsModalOpen(true);
+    } else {
+      openNewHabilitation();
+    }
+  }, [getOrganisationGroups, openNewHabilitation]);
 
   return (
     <article aria-labelledby={labelId} className={styles.cardHabilitation}>
@@ -35,14 +111,29 @@ export const CardHabilitation = () => {
         <li>
           <ButtonLink
             ariaLabel="Demander une habilitation"
-            hideExternalIcon
-            target="_blank"
-            to={`${process.env.DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`}
+            onClick={onHabilitationClick}
           >
             <Icon slug="editBoxFill">Demander une habilitation</Icon>
           </ButtonLink>
         </li>
       </ul>
+      <NoGroupsModal
+        isVisible={isNoGroupsModalOpen}
+        onCancel={() => setIsNoGroupsModalOpen(false)}
+        onConfirm={openNewHabilitation}
+      />
+      <ActiveGroupsModal
+        groups={groups}
+        isVisible={isActiveGroupsModalOpen}
+        onCancel={() => setIsActiveGroupsModalOpen(false)}
+        onConfirm={onConfirmActiveGroupsModal}
+      />
+      <OrganisationGroupsModal
+        groups={organisationGroups ?? []}
+        isVisible={isOrganisationGroupsModalOpen}
+        onCancel={() => setIsOrganisationGroupsModalOpen(false)}
+        onConfirm={openNewHabilitation}
+      />
     </article>
   );
 };
