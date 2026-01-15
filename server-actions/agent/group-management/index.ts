@@ -1,6 +1,7 @@
 "use server";
 
 import { agentActionClient } from "server-actions/safe-action";
+import { clientRolesGetOrganizationsGroups } from "#clients/roles-data";
 import {
   addUserToGroup,
   removeUserFromGroup,
@@ -49,3 +50,7 @@ export const updateUserRoleInGroupAction = agentActionClient
         parsedInput.roleId
       )
   );
+
+export const getOrganizationsGroupsAction = agentActionClient.action(
+  async () => await clientRolesGetOrganizationsGroups()
+);

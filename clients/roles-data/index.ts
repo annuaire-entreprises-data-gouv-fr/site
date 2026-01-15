@@ -1,11 +1,15 @@
 import { rolesDataResourceServerClient } from "#clients/authentication/pro-connect/resource-server-client";
 import routes from "#clients/routes";
-import type { IAgentsGroup } from "#models/authentication/group";
+import type {
+  IAgentsGroup,
+  IAgentsOrganizationGroup,
+} from "#models/authentication/group";
 import { InternalError } from "#models/exceptions";
 import { httpGet } from "#utils/network";
 import logErrorInSentry from "#utils/sentry";
 import type {
   IAgentsGroupResponse,
+  IAgentsOrganizationGroupResponse,
   IRolesDataRoles,
   IRolesDataUser,
 } from "./interface";
@@ -25,6 +29,21 @@ export const clientRolesGetGroups = async (): Promise<IAgentsGroup[]> => {
   return mapToDomainObject(response);
 };
 
+export const clientRolesGetOrganizationsGroups = async (): Promise<
+  IAgentsOrganizationGroup[]
+> => {
+  const url =
+    process.env.ROLES_DATA_URL + routes.rolesData.organizations.getGroups;
+  const response = await rolesDataResourceServerClient<
+    IAgentsOrganizationGroupResponse[]
+  >({
+    url,
+    method: "GET",
+  });
+
+  return mapToDomainObjectOrganizationGroups(response);
+};
+
 const mapToDomainObject = (response: IAgentsGroupResponse[]): IAgentsGroup[] =>
   response.map((group) => {
     const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
@@ -38,6 +57,28 @@ const mapToDomainObject = (response: IAgentsGroupResponse[]): IAgentsGroup[] =>
     }
     return {
       ...group,
+      scopes: validScopes,
+    };
+  });
+
+const mapToDomainObjectOrganizationGroups = (
+  response: IAgentsOrganizationGroupResponse[]
+): IAgentsOrganizationGroup[] =>
+  response.map((group) => {
+    const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
+
+    if (inValidScopes.length > 0) {
+      logErrorInSentry(
+        new InternalError({
+          message: `Unknown agent scopes : ${inValidScopes.join(",")}`,
+        })
+      );
+    }
+
+    return {
+      id: group.id,
+      name: group.name,
+      adminEmail: group.admin_emails[0] ?? "",
       scopes: validScopes,
     };
   });
