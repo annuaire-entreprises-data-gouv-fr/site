@@ -2,15 +2,19 @@
 
 import ButtonLink from "#components-ui/button";
 import { FullScreenModal } from "#components-ui/full-screen-modal";
+import { Loader } from "#components-ui/loader";
+import styles from "./styles.module.css";
 
 interface INoGroupsModalProps {
   isVisible: boolean;
+  isLoading: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 }
 
 export const NoGroupsModal = ({
   isVisible,
+  isLoading,
   onConfirm,
   onCancel,
 }: INoGroupsModalProps) => (
@@ -49,7 +53,12 @@ export const NoGroupsModal = ({
 
       <div className="fr-btns-group fr-btns-group--left">
         <div style={{ width: "fit-content" }}>
-          <ButtonLink onClick={onConfirm}>Continuer</ButtonLink>
+          <ButtonLink onClick={onConfirm}>
+            <div className={styles.loaderContainer}>
+              Continuer
+              {isLoading && <Loader />}
+            </div>
+          </ButtonLink>
         </div>
       </div>
     </div>

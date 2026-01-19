@@ -29,6 +29,8 @@ export const CardHabilitation = ({
   const [organisationGroups, setOrganisationGroups] = useState<
     IAgentsOrganizationGroup[] | null
   >(null);
+  const [isLoadingOrganisationGroups, setIsLoadingOrganisationGroups] =
+    useState(false);
 
   const [isNoGroupsModalOpen, setIsNoGroupsModalOpen] = useState(false);
   const [isActiveGroupsModalOpen, setIsActiveGroupsModalOpen] = useState(false);
@@ -40,14 +42,24 @@ export const CardHabilitation = ({
       return organisationGroups;
     }
 
-    const { data } = await getOrganizationsGroupsAction();
-    const newOrganisationGroups = data
-      ? data.filter((group) => !groups.some((g) => g.id === group.id))
-      : [];
+    setIsLoadingOrganisationGroups(true);
 
-    setOrganisationGroups(newOrganisationGroups);
+    try {
+      const { data } = await getOrganizationsGroupsAction();
+      const newOrganisationGroups = data
+        ? data.filter((group) => !groups.some((g) => g.id === group.id))
+        : [];
 
-    return newOrganisationGroups;
+      setOrganisationGroups(newOrganisationGroups);
+      setIsLoadingOrganisationGroups(false);
+
+      return newOrganisationGroups;
+    } catch {
+      setOrganisationGroups(null);
+      setIsLoadingOrganisationGroups(false);
+
+      return [];
+    }
   }, [groups, organisationGroups]);
 
   const openNewHabilitation = useCallback(() => {
@@ -118,12 +130,14 @@ export const CardHabilitation = ({
         </li>
       </ul>
       <NoGroupsModal
+        isLoading={isLoadingOrganisationGroups}
         isVisible={isNoGroupsModalOpen}
         onCancel={() => setIsNoGroupsModalOpen(false)}
         onConfirm={openNewHabilitation}
       />
       <ActiveGroupsModal
         groups={groups}
+        isLoading={isLoadingOrganisationGroups}
         isVisible={isActiveGroupsModalOpen}
         onCancel={() => setIsActiveGroupsModalOpen(false)}
         onConfirm={onConfirmActiveGroupsModal}

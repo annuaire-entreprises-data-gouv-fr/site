@@ -58,7 +58,16 @@ export const OrganisationGroupsModal = ({
                         <td>
                           <ButtonLink
                             alt
-                            to={`mailto:${group.adminEmails.join(", ")}`}
+                            to={`${group.adminEmails.join(",")}?subject=${encodeURIComponent(`Demande d'accès au groupe « ${group.name} »`)}&body=${encodeURIComponent(`Bonjour,
+
+Serait-il possible de m'ajouter au groupe « ${group.name} » sur l'espace agent de l'Annuaire des Entreprises
+                            (${process.env.NEXT_PUBLIC_BASE_URL}/compte/mes-groupes#group-${group.id}) ?
+
+Cet accès me permettra de consulter les données auxquelles vous êtes habilités.
+
+Je vous remercie par avance pour votre aide.
+
+Cordialement,`)}`}
                           >
                             Rejoindre
                           </ButtonLink>
@@ -80,7 +89,7 @@ export const OrganisationGroupsModal = ({
           <br />
           <br />
           Votre groupe n'est pas répertorié ? Faites une demande d'habilitation
-          pour en créer une nouvelle.
+          pour en créer un nouveau.
         </p>
       </div>
 
