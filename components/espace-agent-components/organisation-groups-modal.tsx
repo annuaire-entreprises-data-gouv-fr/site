@@ -89,7 +89,7 @@ Cordialement,`)}`}
           <br />
           <br />
           Votre groupe n'est pas répertorié ? Faites une demande d'habilitation
-          pour en créer une nouvelle.
+          pour en créer un nouveau.
         </p>
       </div>
 

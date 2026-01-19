@@ -2,11 +2,14 @@
 
 import ButtonLink from "#components-ui/button";
 import { FullScreenModal } from "#components-ui/full-screen-modal";
+import { Loader } from "#components-ui/loader";
 import type { IAgentsGroup } from "#models/authentication/group";
+import styles from "./styles.module.css";
 
 interface IActiveGroupsModalProps {
   groups: IAgentsGroup[];
   isVisible: boolean;
+  isLoading: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -14,6 +17,7 @@ interface IActiveGroupsModalProps {
 export const ActiveGroupsModal = ({
   groups,
   isVisible,
+  isLoading,
   onConfirm,
   onCancel,
 }: IActiveGroupsModalProps) => (
@@ -79,7 +83,12 @@ export const ActiveGroupsModal = ({
 
       <div className="fr-btns-group fr-btns-group--left">
         <div style={{ width: "fit-content" }}>
-          <ButtonLink onClick={onConfirm}>Continuer</ButtonLink>
+          <ButtonLink onClick={onConfirm}>
+            <div className={styles.loaderContainer}>
+              Continuer
+              {isLoading && <Loader />}
+            </div>
+          </ButtonLink>
         </div>
       </div>
     </div>
