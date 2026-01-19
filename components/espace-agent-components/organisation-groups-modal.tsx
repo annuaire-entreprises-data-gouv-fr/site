@@ -58,7 +58,7 @@ export const OrganisationGroupsModal = ({
                         <td>
                           <ButtonLink
                             alt
-                            to={`mailto:${group.adminEmails.join(",")}?subject=${encodeURIComponent(`Demande d'accès au groupe « ${group.name} »`)}&body=${encodeURIComponent(`Bonjour,
+                            to={`${group.adminEmails.join(",")}?subject=${encodeURIComponent(`Demande d'accès au groupe « ${group.name} »`)}&body=${encodeURIComponent(`Bonjour,
 
 Serait-il possible de m'ajouter au groupe « ${group.name} » sur l'espace agent de l'Annuaire des Entreprises
                             (${process.env.NEXT_PUBLIC_BASE_URL}/compte/mes-groupes#group-${group.id}) ?
