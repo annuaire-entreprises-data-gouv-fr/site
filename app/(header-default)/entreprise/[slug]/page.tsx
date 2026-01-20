@@ -26,7 +26,7 @@ import {
 } from "#models/core/types";
 import { getRechercheEntrepriseSourcesLastModified } from "#models/recherche-entreprise-modified";
 import {
-  shouldNotIndex,
+  shouldNotIndexUniteLegale,
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#utils/helpers";
@@ -45,7 +45,9 @@ export const generateMetadata = async (
   return {
     title: uniteLegalePageTitle(uniteLegale),
     description: uniteLegalePageDescription(uniteLegale),
-    robots: shouldNotIndex(uniteLegale) ? "noindex, nofollow" : "index, follow",
+    robots: shouldNotIndexUniteLegale(uniteLegale)
+      ? "noindex, nofollow"
+      : "index, follow",
     ...(uniteLegale.chemin && {
       alternates: {
         canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`,

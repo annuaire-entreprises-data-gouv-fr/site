@@ -9,7 +9,8 @@ import { isServicePublic } from "#models/core/types";
 import {
   etablissementPageDescription,
   etablissementPageTitle,
-  shouldNotIndex,
+  shouldNotIndexEtablissement,
+  shouldNotIndexUniteLegale,
 } from "#utils/helpers";
 import { cachedEtablissementWithUniteLegale } from "#utils/server-side-helper/cached-methods";
 import extractParamsAppRouter, {
@@ -31,7 +32,11 @@ export const generateMetadata = async (
   return {
     title,
     description: etablissementPageDescription(etablissement, uniteLegale),
-    robots: shouldNotIndex(uniteLegale) ? "noindex, nofollow" : "index, follow",
+    robots:
+      shouldNotIndexUniteLegale(uniteLegale) ||
+      shouldNotIndexEtablissement(etablissement)
+        ? "noindex, nofollow"
+        : "index, follow",
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`,
     },
