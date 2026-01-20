@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { NPSBanner } from "#components/banner/nps";
+import Proconnect2FABanner from "#components/banner/proconnect-2fa";
 import TempIncidentBanner from "#components/banner/temp-incident";
 import Footer from "#components/footer";
 import { Header } from "#components/header/header";
@@ -22,6 +23,7 @@ export default function LayoutPublic({
     <>
       <NPSBanner />
       <TempIncidentBanner />
+      <Proconnect2FABanner />
       <Header
         useAgentBanner={false}
         useAgentCTA={false}
