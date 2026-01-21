@@ -21,21 +21,3 @@
   border: none;
   background-color: transparent;
 }
-
-.unspacedParagraph {
-  margin: 0;
-}
-
-.proconnect2FABanner {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-@media (max-width: 768px) {
-  .proconnect2FABanner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
