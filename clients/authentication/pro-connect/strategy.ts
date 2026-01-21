@@ -19,8 +19,6 @@ const POST_LOGOUT_REDIRECT_URI =
   process.env.AGENTCONNECT_POST_LOGOUT_REDIRECT_URI;
 
 const SCOPES = "openid given_name usual_name email siret idp_id";
-const ACR_VALUES =
-  "https://proconnect.gouv.fr/assurance/consistency-checked-2fa";
 
 export const getClient = async () => {
   if (_client) {
@@ -61,15 +59,12 @@ export const proConnectAuthorizeUrl = async (req: IReqWithSession) => {
 
   return client.authorizationUrl({
     scope: SCOPES,
-    acr_values: ACR_VALUES,
+    acr_values: "eidas1",
     nonce,
     state,
     claims: {
       id_token: {
         amr: {
-          essential: true,
-        },
-        acr: {
           essential: true,
         },
       },
@@ -104,10 +99,6 @@ export const proConnectAuthenticate = async (
     nonce: req.session.nonce,
     state: req.session.state,
   });
-
-  if (tokenSet.claims().acr !== ACR_VALUES) {
-    throw new HttpForbiddenError("ACR values are not valid");
-  }
 
   const accessToken = tokenSet.access_token;
 

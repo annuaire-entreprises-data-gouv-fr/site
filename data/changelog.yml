@@ -11,16 +11,6 @@
 #   site: true
 
 ---
-- date: 21/01/2026
-  target:
-    agent: true
-  body: |
-    Lors de leur connexion, les agents publics doivent désormais configurer l'authentification à double facteur, sécurisant ainsi davantage leur espace.
-- date: 19/01/2026
-  target:
-    agent: true
-  body: |
-    Les agents publics sont désormais notifiés des groupes auxquels ils ont accès ainsi que les groupes disponibles au sein de leur organisation , avant qu’une nouvelle demande d’habilitation ne soit démarrée.
 - date: 05/01/2026
   target:
     api: true
