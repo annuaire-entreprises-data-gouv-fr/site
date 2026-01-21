@@ -5,7 +5,7 @@ import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
 import getSession from "#utils/server-side-helper/get-session";
 import type { IReqWithSession } from "#utils/session/with-session";
-import { ProConnectReconnexionNeeded } from "./exceptions";
+import { ProConnect2FANeeded, ProConnectReconnexionNeeded } from "./exceptions";
 
 let _client = undefined as BaseClient | undefined;
 
@@ -17,10 +17,15 @@ const ISSUER_URL = process.env.AGENTCONNECT_URL_DISCOVER;
 const REDIRECT_URI = process.env.AGENTCONNECT_REDIRECT_URI;
 const POST_LOGOUT_REDIRECT_URI =
   process.env.AGENTCONNECT_POST_LOGOUT_REDIRECT_URI;
+const PROCONNECT_IDP_ID = "71144ab3-ee1a-4401-b7b3-79b44f7daeeb";
 
 const SCOPES = "openid given_name usual_name email siret idp_id";
-const ACR_VALUES =
-  "https://proconnect.gouv.fr/assurance/consistency-checked-2fa";
+const ACR_VALUES_2FA = [
+  "eidas2", // login / pwd + 2FA
+  "eidas3", // physical card with PIN + certificates
+  "https://proconnect.gouv.fr/assurance/self-asserted-2fa", // declarative identity + 2FA
+  "https://proconnect.gouv.fr/assurance/consistency-checked-2fa", // verified identity + 2FA
+].join(" ");
 
 export const getClient = async () => {
   if (_client) {
@@ -49,7 +54,11 @@ export const getClient = async () => {
   return _client;
 };
 
-export const proConnectAuthorizeUrl = async (req: IReqWithSession) => {
+export const proConnectAuthorizeUrl = async (
+  req: IReqWithSession,
+  force2FA = false,
+  loginHint?: string
+) => {
   const client = await getClient();
 
   const nonce = generators.nonce();
@@ -61,17 +70,16 @@ export const proConnectAuthorizeUrl = async (req: IReqWithSession) => {
 
   return client.authorizationUrl({
     scope: SCOPES,
-    acr_values: ACR_VALUES,
+    acr_values: force2FA ? ACR_VALUES_2FA : undefined,
     nonce,
     state,
+    login_hint: loginHint,
     claims: {
       id_token: {
         amr: {
           essential: true,
         },
-        acr: {
-          essential: true,
-        },
+        ...(force2FA ? { acr: { essential: true } } : {}),
       },
     },
   });
@@ -105,9 +113,7 @@ export const proConnectAuthenticate = async (
     state: req.session.state,
   });
 
-  if (tokenSet.claims().acr !== ACR_VALUES) {
-    throw new HttpForbiddenError("ACR values are not valid");
-  }
+  const used2FA = tokenSet.claims().amr?.includes("mfa");
 
   const accessToken = tokenSet.access_token;
 
@@ -116,6 +122,14 @@ export const proConnectAuthenticate = async (
   }
 
   const userInfo = (await client.userinfo(tokenSet)) as IProConnectUserInfo;
+
+  if (!used2FA && userInfo.idp_id === PROCONNECT_IDP_ID) {
+    throw new ProConnect2FANeeded({
+      message: "2FA needed for ProConnect Identity Provider",
+      loginHint: userInfo.email,
+    });
+  }
+
   req.session.nonce = undefined;
   req.session.state = undefined;
 
