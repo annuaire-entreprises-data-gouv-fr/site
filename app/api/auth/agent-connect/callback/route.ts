@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { proConnectAuthenticate } from "#clients/authentication/pro-connect/strategy";
+import { ProConnect2FANeeded } from "#clients/authentication/pro-connect/exceptions";
+import {
+  proConnectAuthenticate,
+  proConnectAuthorizeUrl,
+} from "#clients/authentication/pro-connect/strategy";
 import { AgentConnected } from "#models/authentication/agent/agent-connected";
 import {
   AgentConnectionFailedException,
@@ -42,6 +46,11 @@ export const GET = withSession(async function callbackRoute(req) {
     });
     return response;
   } catch (e: any) {
+    if (e instanceof ProConnect2FANeeded) {
+      const newAuthUrl = await proConnectAuthorizeUrl(req, true, e.loginHint);
+      return NextResponse.redirect(newAuthUrl);
+    }
+
     logFatalErrorInSentry(
       new AgentConnectionFailedException({
         cause: e,

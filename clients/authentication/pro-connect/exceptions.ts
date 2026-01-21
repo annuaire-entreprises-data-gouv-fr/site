@@ -8,3 +8,16 @@ export class ProConnectReconnexionNeeded extends Exception {
     super({ name: "ProConnectReconnexionNeeded", ...args });
   }
 }
+
+export class ProConnect2FANeeded extends Exception {
+  public loginHint: string;
+
+  constructor(args: {
+    message: string;
+    cause?: any;
+    loginHint: string;
+  }) {
+    super({ name: "ProConnect2FANeeded", ...args });
+    this.loginHint = args.loginHint;
+  }
+}
