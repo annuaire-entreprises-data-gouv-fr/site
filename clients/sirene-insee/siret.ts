@@ -165,11 +165,6 @@ const mapEtablissementToDomainObject = (
     throw new HttpNotFound("Not Found");
   }
 
-  console.log(
-    "inseeEtablissement",
-    JSON.stringify(inseeEtablissement, null, 2)
-  );
-
   const {
     nic,
     siret,
