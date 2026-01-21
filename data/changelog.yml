@@ -20,7 +20,7 @@
   target:
     agent: true
   body: |
-    Les agents publics sont désormais notifiés des groupes auxquels ils ont accès ainsi que les groupes disponibles au sein de leur organisation , avant qu’une nouvelle demande d’habilitation ne soit démarrée.
+    Les agents publics sont désormais notifiés des groupes auxquels ils ont accès ainsi que les groupes disponibles au sein de leur organisation, avant qu’une nouvelle demande d’habilitation ne soit démarrée.
 - date: 05/01/2026
   target:
     api: true
