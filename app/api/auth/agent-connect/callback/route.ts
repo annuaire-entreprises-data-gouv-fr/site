@@ -12,20 +12,40 @@ import {
   OrganisationNotAnAdministration,
   PrestataireException,
 } from "#models/authentication/authentication-exceptions";
+import { LoggerContext } from "#utils/logger-context";
 import { logFatalErrorInSentry, logInfoInSentry } from "#utils/sentry";
 import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 import { cleanPathFrom, getPathFrom, setAgentSession } from "#utils/session";
 import withSession from "#utils/session/with-session";
 
 export const GET = withSession(async function callbackRoute(req) {
-  let siretForException = "" as string | undefined;
+  const loggerContext = new LoggerContext("agent-connect/callback");
+
   try {
-    const userInfo = await proConnectAuthenticate(req);
-    siretForException = userInfo.siret;
+    loggerContext.setContext({
+      "session.state": req.session.state?.slice(0, 8) ?? "non renseigné",
+      siret: "siret non renseigné",
+      "calls.proConnectAuthenticate": false,
+    });
+
+    const userInfo = await proConnectAuthenticate(req, loggerContext);
+
+    loggerContext.setContext({
+      siret: userInfo.siret,
+      "calls.proConnectAuthenticate": true,
+    });
 
     const agent = new AgentConnected(userInfo);
 
+    loggerContext.setContext({
+      "calls.AgentConnected": true,
+    });
+
     const agentInfo = await agent.getAndVerifyAgentInfo();
+
+    loggerContext.setContext({
+      "calls.agent.getAndVerifyAgentInfo": true,
+    });
 
     const session = req.session;
 
@@ -39,22 +59,63 @@ export const GET = withSession(async function callbackRoute(req) {
       path = pathFrom;
     }
 
+    loggerContext.setContext({
+      "redirect.path": path,
+    });
+
     const response = NextResponse.redirect(getBaseUrl() + path);
     response.cookies.set("user-was-logged-in", "true", {
       maxAge: 60 * 60 * 24 * 30,
       path: "/",
     });
+
+    loggerContext.success();
+
     return response;
   } catch (e: any) {
     if (e instanceof ProConnect2FANeeded) {
-      const newAuthUrl = await proConnectAuthorizeUrl(req, true, e.loginHint);
-      return NextResponse.redirect(newAuthUrl);
+      try {
+        const newAuthUrl = await proConnectAuthorizeUrl({
+          req,
+          force2FA: true,
+          loginHint: e.loginHint,
+          skipStateGeneration: true,
+        });
+
+        const url = new URL(newAuthUrl);
+        url.searchParams.set(
+          "state",
+          url.searchParams.get("state")?.slice(0, 8) ?? "non renseigné"
+        );
+        url.searchParams.set(
+          "nonce",
+          url.searchParams.get("nonce")?.slice(0, 8) ?? "non renseigné"
+        );
+        url.searchParams.delete("login_hint");
+
+        loggerContext.error("ProConnect2FANeeded", e.message, {
+          "2FA.newAuthUrl": url.toString(),
+        });
+
+        return NextResponse.redirect(newAuthUrl);
+      } catch (e: any) {
+        loggerContext.error("ProConnectAuthorizeUrlError", e.message);
+      }
     }
+
+    loggerContext.error(
+      e instanceof Error ? e.name : "Logger__Unknown",
+      e instanceof Error ? e.message : "Logger__Unknown"
+    );
 
     logFatalErrorInSentry(
       new AgentConnectionFailedException({
         cause: e,
-        context: { slug: siretForException || "siret non renseigné" },
+        context: {
+          slug:
+            (loggerContext.getContextKey("siret") as string) ||
+            "siret non renseigné",
+        },
       })
     );
     if (e instanceof PrestataireException) {
