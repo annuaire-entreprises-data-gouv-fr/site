@@ -19,7 +19,10 @@ import { cleanPathFrom, getPathFrom, setAgentSession } from "#utils/session";
 import withSession from "#utils/session/with-session";
 
 export const GET = withSession(async function callbackRoute(req) {
-  const loggerContext = new LoggerContext("agent-connect/callback");
+  const loggerContext = new LoggerContext(
+    "/api/auth/agent-connect/callback",
+    "GET"
+  );
 
   try {
     loggerContext.setContext({
