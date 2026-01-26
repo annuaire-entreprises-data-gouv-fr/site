@@ -25,7 +25,8 @@ export const GET = withSession(async function loginRoute(req) {
       "";
 
     await setPathFrom(req.session, pathFrom);
-    const url = await proConnectAuthorizeUrl(req);
+    const url = await proConnectAuthorizeUrl({ req });
+
     return NextResponse.redirect(url);
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));

@@ -3,6 +3,8 @@
 
 import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
+import { InternalError } from "#models/exceptions";
+import type { LoggerContext } from "#utils/logger-context";
 import getSession from "#utils/server-side-helper/get-session";
 import type { IReqWithSession } from "#utils/session/with-session";
 import { ProConnect2FANeeded, ProConnectReconnexionNeeded } from "./exceptions";
@@ -54,19 +56,29 @@ export const getClient = async () => {
   return _client;
 };
 
-export const proConnectAuthorizeUrl = async (
-  req: IReqWithSession,
-  force2FA = false,
-  loginHint?: string
-) => {
+export const proConnectAuthorizeUrl = async (params: {
+  req: IReqWithSession;
+  force2FA?: boolean;
+  loginHint?: string;
+  skipStateGeneration?: boolean;
+}) => {
+  const { req, force2FA, loginHint, skipStateGeneration } = params;
   const client = await getClient();
 
-  const nonce = generators.nonce();
-  const state = generators.state();
+  if (skipStateGeneration && !(req.session.nonce && req.session.state)) {
+    throw new InternalError({
+      message: "State and nonce are required when skipStateGeneration is true",
+    });
+  }
 
-  req.session.state = state;
-  req.session.nonce = nonce;
-  await req.session.save();
+  const nonce = skipStateGeneration ? req.session.nonce : generators.nonce();
+  const state = skipStateGeneration ? req.session.state : generators.state();
+
+  if (!skipStateGeneration) {
+    req.session.state = state;
+    req.session.nonce = nonce;
+    await req.session.save();
+  }
 
   return client.authorizationUrl({
     scope: SCOPES,
@@ -102,18 +114,36 @@ export type IProConnectUserInfo = {
 };
 
 export const proConnectAuthenticate = async (
-  req: IReqWithSession
+  req: IReqWithSession,
+  loggerContext: LoggerContext
 ): Promise<IProConnectUserInfo> => {
   const client = await getClient();
 
   const params = client.callbackParams(req.nextUrl.toString());
+
+  loggerContext.setContext({
+    "calls.proConnectAuthenticate.client.callbackParams": true,
+    "proConnectAuthenticate.params.state":
+      params.state?.slice(0, 8) ?? "non renseigné",
+  });
 
   const tokenSet = await client.callback(REDIRECT_URI, params, {
     nonce: req.session.nonce,
     state: req.session.state,
   });
 
+  loggerContext.setContext({
+    "calls.proConnectAuthenticate.client.callback": true,
+  });
+
   const used2FA = tokenSet.claims().amr?.includes("mfa");
+
+  loggerContext.setContext({
+    "proConnectAuthenticate.used2FA": used2FA,
+    "proConnectAuthenticate.tokenSet.claims.amr":
+      tokenSet.claims().amr?.join(" ") ?? "non renseigné",
+    "proConnectAuthenticate.hasAccessToken": !!tokenSet.access_token,
+  });
 
   const accessToken = tokenSet.access_token;
 
@@ -122,6 +152,11 @@ export const proConnectAuthenticate = async (
   }
 
   const userInfo = (await client.userinfo(tokenSet)) as IProConnectUserInfo;
+
+  loggerContext.setContext({
+    "calls.proConnectAuthenticate.client.userinfo": true,
+    "proConnectAuthenticate.idp_id": userInfo.idp_id ?? "non renseigné",
+  });
 
   if (!used2FA && userInfo.idp_id === PROCONNECT_IDP_ID) {
     throw new ProConnect2FANeeded({
