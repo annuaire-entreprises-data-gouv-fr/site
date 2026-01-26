@@ -99,13 +99,22 @@ export class AgentConnected {
     const groups = await getAgentGroups({ allowProConnectRedirection: false });
 
     groups.forEach((agentGroup) => {
+      const groupsNewScopes = agentGroup.scopes.filter(
+        (scope) => !superAgentScopes.hasScope(scope)
+      );
+
+      if (groupsNewScopes.length > 0) {
+        groupsScopes[agentGroup.organisation_siret] = groupsNewScopes;
+      }
+
       superAgentScopes.add(agentGroup.scopes);
-      groupsScopes[agentGroup.organisation_siret] = agentGroup.scopes;
     });
 
     if (superAgentScopes.hasScopes()) {
       return {
-        scopes: [...defaultAgentScopes, ...superAgentScopes.scopes],
+        scopes: [
+          ...new Set([...defaultAgentScopes, ...superAgentScopes.scopes]),
+        ],
         groupsScopes,
         userType: "Super-agent connecté",
         isSuperAgent: true,
