@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import { getAssociationFromSlugFetcher } from "server-fetch/public";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { EAdministration } from "#models/administrations/EAdministration";
@@ -15,7 +16,12 @@ export default function FinancesAssociationSection({
 }: {
   uniteLegale: IAssociation;
 }) {
-  const data = getAssociationFromSlugFetcher(uniteLegale.siren);
+  const controller = new AbortController();
+  const data = getAssociationFromSlugFetcher(uniteLegale.siren, controller);
+
+  after(() => {
+    controller.abort();
+  });
 
   return (
     <AsyncDataSectionServer

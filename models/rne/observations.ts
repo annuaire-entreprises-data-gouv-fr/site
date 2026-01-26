@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   clientRNEImmatriculation,
   clientRNEObservationsFallback,
@@ -11,8 +12,11 @@ import {
 import { type Siren, verifySiren } from "#utils/helpers";
 import type { IObservationsWithMetadata } from "./types";
 
-const fallback = async (siren: Siren) => {
-  const observations = await clientRNEObservationsFallback(siren);
+// Value returned when the request is aborted
+const ABORTED_VALUE = { data: [], metadata: { isFallback: false } };
+
+const fallback = async (siren: Siren, controller?: AbortController) => {
+  const observations = await clientRNEObservationsFallback(siren, controller);
   return { data: observations, metadata: { isFallback: true } };
 };
 
@@ -21,21 +25,32 @@ const fallback = async (siren: Siren) => {
  * @param siren
  */
 export const getRNEObservations = async (
-  maybeSiren: string
+  maybeSiren: string,
+  controller?: AbortController
 ): Promise<IAPINotRespondingError | IObservationsWithMetadata> => {
   const siren = verifySiren(maybeSiren);
 
+  if (controller?.signal.aborted) {
+    return ABORTED_VALUE;
+  }
+
   try {
-    const { observations } = await clientRNEImmatriculation(siren);
+    const { observations } = await clientRNEImmatriculation(siren, controller);
     return { data: observations, metadata: { isFallback: false } };
   } catch (eDefaultTry: any) {
+    if (axios.isCancel(eDefaultTry)) {
+      return ABORTED_VALUE;
+    }
     if (eDefaultTry instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }
 
     try {
-      return await fallback(siren);
+      return await fallback(siren, controller);
     } catch (eFallback: any) {
+      if (axios.isCancel(eFallback)) {
+        return ABORTED_VALUE;
+      }
       if (eFallback instanceof HttpNotFound) {
         return APINotRespondingFactory(EAdministration.INPI, 404);
       }

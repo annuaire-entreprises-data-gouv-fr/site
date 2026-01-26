@@ -1,3 +1,4 @@
+import axios from "axios";
 import { clientEORI } from "#clients/api-proxy/eori";
 import { verifySiret } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
@@ -13,16 +14,26 @@ export type IEORIValidation = {
   isValid: boolean;
 };
 
+// Value returned when the request is aborted
+const ABORTED_VALUE = { eori: "", isValid: false };
+
 export const getEORIValidation = async (
-  siret: string
+  siret: string,
+  controller?: AbortController
 ): Promise<IEORIValidation | IAPINotRespondingError> => {
   try {
-    const data = await clientEORI(verifySiret(siret));
+    if (controller?.signal.aborted) {
+      return ABORTED_VALUE;
+    }
+    const data = await clientEORI(verifySiret(siret), controller);
     if (!data) {
       throw new Error("EOS response is empty");
     }
     return data;
   } catch (e: any) {
+    if (axios.isCancel(e)) {
+      return ABORTED_VALUE;
+    }
     logErrorInSentry(
       new FetchRessourceException({
         ressource: "EORIValidation",

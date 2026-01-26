@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import { getAssociationFromSlugFetcher } from "server-fetch/public";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import BreakPageForPrint from "#components-ui/print-break-page";
@@ -14,7 +15,15 @@ const AssociationSection = ({
   uniteLegale: IAssociation;
   session: ISession | null;
 }) => {
-  const association = getAssociationFromSlugFetcher(uniteLegale.siren);
+  const controller = new AbortController();
+  const association = getAssociationFromSlugFetcher(
+    uniteLegale.siren,
+    controller
+  );
+
+  after(() => {
+    controller.abort();
+  });
 
   return (
     <>

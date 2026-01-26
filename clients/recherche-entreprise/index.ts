@@ -47,14 +47,17 @@ type ClientSearchRechercheEntreprise = {
 /**
  * Get raw results for searchTerms from Sirene open API
  */
-export const clientSearchRechercheEntrepriseRaw = async ({
-  searchTerms,
-  searchFilterParams,
-  inclureEtablissements = false,
-  inclureImmatriculation = false,
-  pageResultatsRecherche = 1,
-  pageEtablissements = 1,
-}: ClientSearchRechercheEntreprise): Promise<ISearchResponse> => {
+export const clientSearchRechercheEntrepriseRaw = async (
+  {
+    searchTerms,
+    searchFilterParams,
+    inclureEtablissements = false,
+    inclureImmatriculation = false,
+    pageResultatsRecherche = 1,
+    pageEtablissements = 1,
+  }: ClientSearchRechercheEntreprise,
+  controller?: AbortController
+): Promise<ISearchResponse> => {
   const encodedTerms = encodeURIComponent(searchTerms);
 
   const route =
@@ -93,6 +96,7 @@ export const clientSearchRechercheEntrepriseRaw = async ({
   const results = await httpGet<ISearchResponse>(url, {
     timeout,
     headers: { referer: "annuaire-entreprises-site" },
+    signal: controller?.signal,
   });
   return results;
 };
@@ -100,22 +104,28 @@ export const clientSearchRechercheEntrepriseRaw = async ({
 /**
  * Get results for searchTerms from Sirene open API and map to domain
  */
-const clientSearchRechercheEntreprise = async ({
-  searchTerms,
-  searchFilterParams,
-  inclureEtablissements = false,
-  inclureImmatriculation = false,
-  pageResultatsRecherche = 1,
-  pageEtablissements = 1,
-}: ClientSearchRechercheEntreprise): Promise<ISearchResults> => {
-  const results = await clientSearchRechercheEntrepriseRaw({
+const clientSearchRechercheEntreprise = async (
+  {
     searchTerms,
     searchFilterParams,
-    inclureEtablissements,
-    inclureImmatriculation,
-    pageResultatsRecherche,
-    pageEtablissements,
-  });
+    inclureEtablissements = false,
+    inclureImmatriculation = false,
+    pageResultatsRecherche = 1,
+    pageEtablissements = 1,
+  }: ClientSearchRechercheEntreprise,
+  controller?: AbortController
+): Promise<ISearchResults> => {
+  const results = await clientSearchRechercheEntrepriseRaw(
+    {
+      searchTerms,
+      searchFilterParams,
+      inclureEtablissements,
+      inclureImmatriculation,
+      pageResultatsRecherche,
+      pageEtablissements,
+    },
+    controller
+  );
 
   if (!results.results || results.results.length === 0) {
     throw new HttpNotFound("No results");

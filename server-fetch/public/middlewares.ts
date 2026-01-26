@@ -1,5 +1,6 @@
 import type { IDataFetchingState } from "#models/data-fetching";
 import {
+  delayFetcher,
   type Fetcher,
   type IFetcherFactory,
   ignoreBot,
@@ -18,6 +19,8 @@ class PublicFetcherFactory<Args extends any[], Result>
   > {
     return withErrorHandler(async (...args: Args) => {
       await ignoreBot();
+      // Delay the fetcher so that bots fetching HTML pages don't trigger the fetcher
+      await delayFetcher(300);
 
       return this.loader(...args);
     });

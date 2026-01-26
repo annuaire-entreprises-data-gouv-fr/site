@@ -1,3 +1,4 @@
+import axios from "axios";
 import { clientRNEImmatriculation } from "#clients/api-proxy/rne";
 import { HttpNotFound } from "#clients/exceptions";
 import { clientDirigeantsRechercheEntreprise } from "#clients/recherche-entreprise/dirigeants";
@@ -9,8 +10,14 @@ import {
 import { type Siren, verifySiren } from "#utils/helpers";
 import type { IDirigeantsWithMetadata } from "./types";
 
-const fallback = async (siren: Siren) => {
-  const dirigeants = await clientDirigeantsRechercheEntreprise(siren);
+// Value returned when the request is aborted
+const ABORTED_VALUE = { data: [], metadata: { isFallback: false } };
+
+const fallback = async (siren: Siren, controller?: AbortController) => {
+  const dirigeants = await clientDirigeantsRechercheEntreprise(
+    siren,
+    controller
+  );
   return { data: dirigeants, metadata: { isFallback: true } };
 };
 
@@ -19,20 +26,32 @@ const fallback = async (siren: Siren) => {
  * @param siren
  */
 export const getDirigeantsRNE = async (
-  maybeSiren: string
+  maybeSiren: string,
+  controller?: AbortController
 ): Promise<IAPINotRespondingError | IDirigeantsWithMetadata> => {
   const siren = verifySiren(maybeSiren);
+
+  if (controller?.signal.aborted) {
+    return ABORTED_VALUE;
+  }
+
   try {
-    const { dirigeants } = await clientRNEImmatriculation(siren);
+    const { dirigeants } = await clientRNEImmatriculation(siren, controller);
     return { data: dirigeants, metadata: { isFallback: false } };
   } catch (e: any) {
+    if (axios.isCancel(e)) {
+      return ABORTED_VALUE;
+    }
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }
 
     try {
-      return await fallback(siren);
+      return await fallback(siren, controller);
     } catch (eFallback) {
+      if (axios.isCancel(eFallback)) {
+        return ABORTED_VALUE;
+      }
       if (eFallback instanceof HttpNotFound) {
         return APINotRespondingFactory(EAdministration.INPI, 404);
       }

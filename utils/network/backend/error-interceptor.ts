@@ -1,4 +1,5 @@
 import type { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 import { formatLog } from "../utils/format-log";
 import { httpErrorHandler } from "../utils/http-error-handler";
 
@@ -14,6 +15,10 @@ const getStatus = (response?: AxiosResponse, message?: string) => {
 
 const errorInterceptor = (error: AxiosError) => {
   const { config, response, message } = error || {};
+
+  if (axios.isCancel(error)) {
+    throw error;
+  }
 
   const url = (config?.url || "an unknown url").substring(0, 100);
   const status = getStatus(response, message);

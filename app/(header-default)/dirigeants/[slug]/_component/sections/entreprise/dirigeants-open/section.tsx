@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import { getDirigeantsRNEFetcher } from "server-fetch/public";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { EAdministration } from "#models/administrations/EAdministration";
@@ -14,7 +15,12 @@ type IProps = {
  * Dirigeants section
  */
 export default function DirigeantsSection({ uniteLegale }: IProps) {
-  const dirigeants = getDirigeantsRNEFetcher(uniteLegale.siren);
+  const controller = new AbortController();
+  const dirigeants = getDirigeantsRNEFetcher(uniteLegale.siren, controller);
+
+  after(() => {
+    controller.abort();
+  });
 
   return (
     <AsyncDataSectionServer
