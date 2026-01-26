@@ -20,7 +20,8 @@ import type {
  */
 export async function clientAPIAssociationPublic(
   rnaOrSiren: IdRna | Siren,
-  siretSiege: string
+  siretSiege: string,
+  controller?: AbortController
 ) {
   if (!process.env.API_ASSOCIATION_URL) {
     throw new HttpUnauthorizedError("Missing API Association URL");
@@ -30,6 +31,7 @@ export async function clientAPIAssociationPublic(
 
   const response = await httpGet<IAssociationResponse>(url, {
     timeout: constants.timeout.XXL,
+    signal: controller?.signal,
   });
 
   return mapToDomainObject(response, siretSiege);
@@ -45,7 +47,8 @@ export async function clientAPIAssociationPublic(
  */
 export async function clientAPIAssociationPrivate(
   rnaOrSiren: IdRna | Siren,
-  siretSiege: string
+  siretSiege: string,
+  controller?: AbortController
 ) {
   if (!process.env.API_ASSOCIATION_URL || !process.env.API_ASSOCIATION_KEY) {
     throw new HttpUnauthorizedError("Missing API Association credentials");
@@ -58,6 +61,7 @@ export async function clientAPIAssociationPrivate(
       "X-Gravitee-Api-Key": process.env.API_ASSOCIATION_KEY,
     },
     timeout: constants.timeout.XXL,
+    signal: controller?.signal,
   });
 
   return mapToDomainObject(mapPrivateToPublicResponse(response), siretSiege);

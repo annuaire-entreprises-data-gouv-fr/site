@@ -15,7 +15,8 @@ type IVIESResponse = {
  */
 export const clientTVA = async (
   tva: TVANumber,
-  useCache = true
+  useCache = true,
+  controller?: AbortController
 ): Promise<string | null> => {
   let url = routes.proxy.tva(tva);
 
@@ -25,6 +26,7 @@ export const clientTVA = async (
 
   const data = await clientAPIProxy<IVIESResponse>(url, {
     timeout: constants.timeout.XXL,
+    signal: controller?.signal,
   });
 
   return data.tva;

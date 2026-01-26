@@ -6,6 +6,7 @@ export type IDefaultRequestConfig = {
   method?: "POST" | "GET" | "PATCH" | "PUT" | "DELETE";
   responseType?: "blob" | "arraybuffer" | "stream";
   data?: unknown;
+  signal?: AbortSignal;
 };
 
 /**

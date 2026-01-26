@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   clientAPIAssociationPrivate,
   clientAPIAssociationPublic,
@@ -27,23 +28,25 @@ import type { IDataAssociation } from "./types";
 
 const getAssociationWithFallback = (
   rnaOrSiren: IdRna | Siren,
-  siret: Siret
+  siret: Siret,
+  controller?: AbortController
 ): Promise<IDataAssociation> =>
-  clientAPIAssociationPrivate(rnaOrSiren, siret).catch((e) => {
+  clientAPIAssociationPrivate(rnaOrSiren, siret, controller).catch((e) => {
     if (e instanceof HttpNotFound) {
       throw e;
     }
-    return clientAPIAssociationPublic(rnaOrSiren, siret);
+    return clientAPIAssociationPublic(rnaOrSiren, siret, controller);
   });
 
 export const getAssociationFromSlug = async (
-  slug: string
+  slug: string,
+  controller?: AbortController
 ): Promise<IDataAssociation | IAPINotRespondingError | null> => {
   const uniteLegale = await getUniteLegaleFromSlug(slug, {
     isBot: false,
   });
 
-  if (!isAssociation(uniteLegale)) {
+  if (controller?.signal.aborted || !isAssociation(uniteLegale)) {
     return null;
   }
 
@@ -52,12 +55,17 @@ export const getAssociationFromSlug = async (
 
   let data: IDataAssociation;
   try {
-    data = await getAssociationWithFallback(siren, uniteLegale.siege.siret);
+    data = await getAssociationWithFallback(
+      siren,
+      uniteLegale.siege.siret,
+      controller
+    );
 
     if (rna && rna !== data.idAssociation) {
       data = await getAssociationWithFallback(
         rna as IdRna,
-        uniteLegale.siege.siret
+        uniteLegale.siege.siret,
+        controller
       );
     }
 
@@ -72,6 +80,9 @@ export const getAssociationFromSlug = async (
       adresseInconsistency,
     };
   } catch (e: any) {
+    if (axios.isCancel(e)) {
+      return null;
+    }
     if (e instanceof HttpNotFound) {
       logWarningInSentry(
         new FetchAssociationException({

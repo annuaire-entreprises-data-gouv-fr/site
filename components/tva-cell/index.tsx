@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import { Suspense } from "react";
 import { buildAndVerifyTVAFetcher } from "server-fetch/public";
 import FAQLink from "#components-ui/faq-link";
@@ -37,7 +38,13 @@ const VerifyTVA: React.FC<{
   siren: Siren;
 }> = async ({ tva: tvaProp, siren }) => {
   const { tvaNumber, mayHaveMultipleTVANumber } = tvaProp;
-  const verification = buildAndVerifyTVAFetcher(siren);
+
+  const controller = new AbortController();
+  const verification = buildAndVerifyTVAFetcher(siren, controller);
+
+  after(() => {
+    controller.abort();
+  });
 
   return (
     <Suspense

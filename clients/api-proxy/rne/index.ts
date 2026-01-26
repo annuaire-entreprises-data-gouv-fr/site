@@ -24,11 +24,15 @@ import type {
  * RNE through the API proxy - API RNE
  * @param siren
  */
-export const clientRNEImmatriculation = async (siren: Siren) => {
+export const clientRNEImmatriculation = async (
+  siren: Siren,
+  controller?: AbortController
+) => {
   const response = await clientAPIProxy<IRNEProxyResponse>(
     routes.proxy.rne.immatriculation.default(siren),
     {
       timeout: constants.timeout.XS,
+      signal: controller?.signal,
     }
   );
   return mapToDomainObject(response);
@@ -38,11 +42,15 @@ export const clientRNEImmatriculation = async (siren: Siren) => {
  * RNE observations through the API proxy - scrapping site as fallback
  * @param siren
  */
-export const clientRNEObservationsFallback = async (siren: Siren) => {
+export const clientRNEObservationsFallback = async (
+  siren: Siren,
+  controller?: AbortController
+) => {
   const response = await clientAPIProxy<IRNEObservationsFallbackProxyResponse>(
     routes.proxy.rne.observations.fallback(siren),
     {
       timeout: constants.timeout.XXXL,
+      signal: controller?.signal,
     }
   );
   return mapObservationsToDomainObject(response);

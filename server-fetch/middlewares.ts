@@ -33,6 +33,10 @@ export async function ignoreBot() {
   }
 }
 
+export async function delayFetcher(timeMs: number) {
+  return new Promise((resolve) => setTimeout(resolve, timeMs));
+}
+
 export type Fetcher<Args extends any[], Result> = (
   ...args: Args
 ) => Promise<Result>;

@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import { getRNEObservationsFetcher } from "server-fetch/public";
 import { AsyncDataSectionServer } from "#components/section/data-section/server";
 import { EAdministration } from "#models/administrations/EAdministration";
@@ -7,7 +8,12 @@ import { ObservationsRNEContent } from "./content";
 export const ObservationsRNE: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const observations = getRNEObservationsFetcher(uniteLegale.siren);
+  const controller = new AbortController();
+  const observations = getRNEObservationsFetcher(uniteLegale.siren, controller);
+
+  after(() => {
+    controller.abort();
+  });
 
   return (
     <AsyncDataSectionServer
