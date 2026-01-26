@@ -17,7 +17,12 @@ const dateValidator = z
 
 const locationValidator = z
   .array(
-    z.string().regex(/^\d+$/, "Le champ doit contenir uniquement des chiffres")
+    z
+      .string()
+      .regex(
+        /^[\dA-Z]+$/,
+        "Le champ doit contenir uniquement des chiffres et/ou des lettres majuscules"
+      )
   )
   .optional();
 
