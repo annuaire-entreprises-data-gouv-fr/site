@@ -122,10 +122,28 @@ describe("AgentConnected", () => {
       expect(agent.isLikelyPrestataire()).toBe(true);
     });
 
+    it("should detect numerique.gouv.fr with ext and alias in name as prestataire", () => {
+      const prestataireUserInfo = {
+        ...mockUserInfo,
+        email: "test.ext+1@numerique.gouv.fr",
+      };
+      const agent = new AgentConnected(prestataireUserInfo);
+      expect(agent.isLikelyPrestataire()).toBe(true);
+    });
+
     it("should detect prestataire by email pattern", () => {
       const prestataireUserInfo = {
         ...mockUserInfo,
         email: "test.prestataire@example.com",
+      };
+      const agent = new AgentConnected(prestataireUserInfo);
+      expect(agent.isLikelyPrestataire()).toBe(true);
+    });
+
+    it("should detect prestataire with alias by email pattern", () => {
+      const prestataireUserInfo = {
+        ...mockUserInfo,
+        email: "test.prestataire+alias@example.com",
       };
       const agent = new AgentConnected(prestataireUserInfo);
       expect(agent.isLikelyPrestataire()).toBe(true);
