@@ -136,11 +136,12 @@ const UniteLegaleSummarySection: React.FC<{
     [
       <FAQLink
         to="https://www.insee.fr/fr/metadonnees/definition/c1057"
-        tooltipLabel="Taille de la structure"
+        tooltipLabel="Catégorie d'entreprise"
       >
-        La taille de l’entreprise, ou catégorie d’entreprise, est une variable
-        statistique calculée par l’Insee sur la base de l’effectif, du chiffre
-        d’affaires et du total du bilan.
+        La catégorie d'entreprise est une variable statistique calculée par
+        l'Insee. Lorsque l'unité légale appartient à un groupe, la donnée est
+        calculée au niveau du groupe auquel appartient l'unité légale. Cette
+        donnée n'est pas utilisable à des fins administratives.
       </FAQLink>,
       libelleCategorieEntreprise(uniteLegale),
     ],
