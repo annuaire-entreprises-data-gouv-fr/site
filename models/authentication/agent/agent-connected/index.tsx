@@ -64,9 +64,21 @@ export class AgentConnected {
     }
 
     if (
-      this.email.match(
-        /[.@-]*(ext|external|externe|presta|prestataire|consultant)(s)*[.@-]/g
-      )
+      // Handle email aliases by extracting the base local part (before '+' sign)
+      (() => {
+        const emailParts = this.email.split("@");
+        if (emailParts.length !== 2) return false;
+        let local = emailParts[0];
+        // Remove alias part after '+'
+        local = local.split("+")[0];
+
+        // create an email without the alias
+        const normalizedEmail = [local, emailParts[1]].join("@");
+
+        return normalizedEmail.match(
+          /[.@-](ext|external|externe|presta|prestataire|consultant)(s)?[.@-]/gi
+        );
+      })()
     ) {
       return true;
     }
