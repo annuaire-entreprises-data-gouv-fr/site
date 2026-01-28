@@ -4,7 +4,7 @@ import { removeUserFromGroupAction } from "server-actions/agent/group-management
 import type { IRolesDataUser } from "#clients/roles-data/interface";
 import { Warning } from "#components-ui/alerts";
 import ButtonLink from "#components-ui/button";
-import { FullScreenModal } from "#components-ui/full-screen-modal";
+import { Modal } from "#components-ui/modal";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
 
 export default function DeleteUserButton({
@@ -61,7 +61,7 @@ export default function DeleteUserButton({
         <span aria-hidden="true">Supprimer</span>
       </ButtonLink>
 
-      <FullScreenModal
+      <Modal
         isVisible={showConfirmation}
         modalId="delete-user-confirmation"
         onClose={closeConfirmation}
@@ -96,7 +96,7 @@ export default function DeleteUserButton({
             </ButtonLink>
           </div>
         </div>
-      </FullScreenModal>
+      </Modal>
     </>
   );
 }

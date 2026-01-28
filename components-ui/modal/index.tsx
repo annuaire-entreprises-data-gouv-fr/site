@@ -8,7 +8,7 @@ import FloatingModal from "#components-ui/floating-modal";
 import { PrintNever } from "#components-ui/print-visibility";
 import styles from "./styles.module.css";
 
-export const FullScreenModal: React.FC<{
+export const Modal: React.FC<{
   size?: "medium" | "full";
   children: React.ReactNode;
   isVisible: boolean;

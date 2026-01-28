@@ -1,7 +1,7 @@
 "use client";
 
 import ButtonLink from "#components-ui/button";
-import { FullScreenModal } from "#components-ui/full-screen-modal";
+import { Modal } from "#components-ui/modal";
 import { Tag } from "#components-ui/tag";
 import type { IAgentsOrganizationGroup } from "#models/authentication/group";
 import { getRightsForGroupScopes } from "#models/authentication/user/rights";
@@ -19,7 +19,7 @@ export const OrganisationGroupsModal = ({
   onConfirm,
   onCancel,
 }: IOrganisationGroupsModalProps) => (
-  <FullScreenModal
+  <Modal
     isVisible={isVisible}
     modalId="organisation-groups-modal"
     onClose={onCancel}
@@ -114,5 +114,5 @@ Cordialement,`)}`}
         </div>
       </div>
     </div>
-  </FullScreenModal>
+  </Modal>
 );
