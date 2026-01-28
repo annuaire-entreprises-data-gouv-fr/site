@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import type React from "react";
 import ClientOnly from "#components/client-only";
 import ButtonClose from "#components-ui/button/button-close";
@@ -7,19 +8,30 @@ import FloatingModal from "#components-ui/floating-modal";
 import { PrintNever } from "#components-ui/print-visibility";
 import styles from "./styles.module.css";
 
-export const FullScreenModal: React.FC<{
+export const Modal: React.FC<{
+  size?: "medium" | "full";
   children: React.ReactNode;
   isVisible: boolean;
   modalId: string;
   textAlign?: "center" | "left";
   onClose: () => void;
-}> = ({ children, isVisible, modalId, onClose, textAlign = "center" }) => (
+}> = ({
+  size = "medium",
+  children,
+  isVisible,
+  modalId,
+  onClose,
+  textAlign = "center",
+}) => (
   <ClientOnly>
     {isVisible ? (
       <PrintNever>
         <div className={styles.modalOverlay} onClick={onClose}>
           <FloatingModal
-            className={styles.fullScreenModal}
+            className={clsx(
+              styles.fullScreenModal,
+              size === "full" && styles.fullScreenModalFull
+            )}
             elevation="high"
             id={modalId}
             onClick={(e) => e.stopPropagation()}

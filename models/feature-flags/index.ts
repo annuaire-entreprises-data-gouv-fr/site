@@ -26,7 +26,7 @@ class FeatureFlagsList {
           {
             timeout: constants.timeout.M,
           }
-        ),
+        ).catch(() => ({})),
       "feature-flags",
       this.mapResponseToFeatureFlagsList,
       this.TTL

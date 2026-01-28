@@ -104,3 +104,11 @@ export function getGroupsGrantingRights(
 export function isLoggedIn(session: ISession | null) {
   return getIAgentScope(session).length > 0;
 }
+
+export function getRightsForGroupScopes(groupScopes: IAgentScope[]) {
+  return Object.values(ApplicationRights).filter(
+    (right) =>
+      ApplicationRightsToScopes[right] &&
+      groupScopes.includes(ApplicationRightsToScopes[right])
+  );
+}

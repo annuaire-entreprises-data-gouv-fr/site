@@ -1,8 +1,8 @@
 "use client";
 
 import ButtonLink from "#components-ui/button";
-import { FullScreenModal } from "#components-ui/full-screen-modal";
 import { Loader } from "#components-ui/loader";
+import { Modal } from "#components-ui/modal";
 import styles from "./styles.module.css";
 
 interface INoGroupsModalProps {
@@ -18,7 +18,7 @@ export const NoGroupsModal = ({
   onConfirm,
   onCancel,
 }: INoGroupsModalProps) => (
-  <FullScreenModal
+  <Modal
     isVisible={isVisible}
     modalId="no-groups-modal"
     onClose={onCancel}
@@ -62,5 +62,5 @@ export const NoGroupsModal = ({
         </div>
       </div>
     </div>
-  </FullScreenModal>
+  </Modal>
 );
