@@ -1,8 +1,8 @@
 "use client";
 
 import ButtonLink from "#components-ui/button";
+import { FullScreenModal } from "#components-ui/full-screen-modal";
 import { Loader } from "#components-ui/loader";
-import { Modal } from "#components-ui/modal";
 import type { IAgentsGroup } from "#models/authentication/group";
 import styles from "./styles.module.css";
 
@@ -21,7 +21,7 @@ export const ActiveGroupsModal = ({
   onConfirm,
   onCancel,
 }: IActiveGroupsModalProps) => (
-  <Modal
+  <FullScreenModal
     isVisible={isVisible}
     modalId="no-groups-modal"
     onClose={onCancel}
@@ -92,5 +92,5 @@ export const ActiveGroupsModal = ({
         </div>
       </div>
     </div>
-  </Modal>
+  </FullScreenModal>
 );

@@ -4,7 +4,7 @@ import { useStorage } from "hooks";
 import type React from "react";
 import { useEffect, useState } from "react";
 import constants from "#models/constants";
-import { Modal } from "../../components-ui/modal";
+import { FullScreenModal } from "../../components-ui/full-screen-modal";
 
 const MODAL_ID = "welcome-modal-agent";
 
@@ -24,7 +24,7 @@ export const WelcomeModalAgent: React.FC = () => {
   }, [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered]);
 
   return (
-    <Modal
+    <FullScreenModal
       isVisible={isVisible}
       modalId={MODAL_ID}
       onClose={() => setIsVisible(false)}
@@ -66,6 +66,6 @@ export const WelcomeModalAgent: React.FC = () => {
       >
         Continuer ma navigation
       </button>
-    </Modal>
+    </FullScreenModal>
   );
 };
