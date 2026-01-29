@@ -1,10 +1,8 @@
 "use client";
 
 import ButtonLink from "#components-ui/button";
-import { Modal } from "#components-ui/modal";
-import { Tag } from "#components-ui/tag";
+import { FullScreenModal } from "#components-ui/full-screen-modal";
 import type { IAgentsOrganizationGroup } from "#models/authentication/group";
-import { getRightsForGroupScopes } from "#models/authentication/user/rights";
 
 interface IOrganisationGroupsModalProps {
   groups: IAgentsOrganizationGroup[];
@@ -19,11 +17,10 @@ export const OrganisationGroupsModal = ({
   onConfirm,
   onCancel,
 }: IOrganisationGroupsModalProps) => (
-  <Modal
+  <FullScreenModal
     isVisible={isVisible}
     modalId="organisation-groups-modal"
     onClose={onCancel}
-    size="full"
     textAlign="left"
   >
     <div className="fr-container">
@@ -45,7 +42,6 @@ export const OrganisationGroupsModal = ({
                   <thead>
                     <tr>
                       <th scope="col">Nom du groupe</th>
-                      <th scope="col">Habilitations</th>
                       <th scope="col">Administrateur</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -54,15 +50,6 @@ export const OrganisationGroupsModal = ({
                     {groups.map((group) => (
                       <tr key={group.id}>
                         <td>{group.name}</td>
-                        <td className="fr-grid-row">
-                          {getRightsForGroupScopes(group.scopes).map(
-                            (right) => (
-                              <Tag color="success" key={right}>
-                                {right}
-                              </Tag>
-                            )
-                          )}
-                        </td>
                         <td>
                           {group.adminEmails.length > 0
                             ? group.adminEmails.join(", ")
@@ -114,5 +101,5 @@ Cordialement,`)}`}
         </div>
       </div>
     </div>
-  </Modal>
+  </FullScreenModal>
 );

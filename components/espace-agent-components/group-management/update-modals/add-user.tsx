@@ -6,7 +6,7 @@ import { addUserToGroupAction } from "server-actions/agent/group-management";
 import type { IRolesDataUser } from "#clients/roles-data/interface";
 import { validateEmail } from "#components/espace-agent-components/helpers/form-validation";
 import ButtonLink from "#components-ui/button";
-import { Modal } from "#components-ui/modal";
+import { FullScreenModal } from "#components-ui/full-screen-modal";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
 import type { IAgentsGroup } from "#models/authentication/group";
 
@@ -96,7 +96,7 @@ export default function AddUserModal({
       <ButtonLink onClick={() => setIsVisible(true)}>
         Ajouter un membre
       </ButtonLink>
-      <Modal
+      <FullScreenModal
         isVisible={isVisible}
         modalId={MODAL_ID}
         onClose={handleClose}
@@ -172,7 +172,7 @@ export default function AddUserModal({
             </ButtonLink>
           </div>
         </div>
-      </Modal>
+      </FullScreenModal>
     </>
   );
 }
