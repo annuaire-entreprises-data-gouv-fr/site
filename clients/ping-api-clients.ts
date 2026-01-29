@@ -14,6 +14,7 @@ import { clientEORI } from "./api-proxy/eori";
 import { clientUniteLegaleIG } from "./api-proxy/greffe";
 import { clientTVA } from "./api-proxy/tva";
 import { clientDocuments } from "./api-rne/documents";
+import { clientBodacc } from "./open-data-soft/clients/bodacc";
 import clientSearchRechercheEntreprise from "./recherche-entreprise";
 import { clientUniteLegaleRechercheEntreprise } from "./recherche-entreprise/siren";
 import { clientUniteLegaleInsee } from "./sirene-insee/siren";
@@ -63,6 +64,8 @@ const ping = async (slug: string | string[]) => {
       return await clientDocuments(sirenDanone, {
         disableSensitiveRequestLogger: true,
       });
+    case "api-bodacc":
+      return await clientBodacc(sirenDanone);
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }
