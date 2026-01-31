@@ -1,8 +1,8 @@
 {
   "args": ["rue jules ferry 64110 mazeres-lezons"],
   "result": {
-    "lat": "43.277531",
-    "long": "-0.356241",
+    "lat": "43.277654",
+    "long": "-0.356164",
     "geoCodedAdress": "rue Jules Ferry 64110 Mazères-Lezons"
   }
 }
