@@ -16,10 +16,12 @@ const agentOptions = {
   maxFreeSockets: 128, // Maximum number of sockets to leave open in a free state. Only relevant if keepAlive is set to true. Defaults to 256.
 };
 
+const DEFAULT_TIMEOUT = constants.timeout.L;
+
 /**
  * Returns a cache-enabled axios instance
  */
-const axiosInstanceFactory = (timeout = constants.timeout.L): AxiosInstance => {
+const axiosInstanceFactory = (timeout = DEFAULT_TIMEOUT): AxiosInstance => {
   const axiosOptions = {
     timeout,
     httpsAgent: new https.Agent(agentOptions),
@@ -41,14 +43,20 @@ const axiosInstanceFactory = (timeout = constants.timeout.L): AxiosInstance => {
 const axiosInstance = axiosInstanceFactory();
 
 async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
+  const timeoutSignal = AbortSignal.timeout(config.timeout || DEFAULT_TIMEOUT);
+
   const response = await axiosInstance({
-    timeout: constants.timeout.L,
+    timeout: DEFAULT_TIMEOUT,
     ...config,
+    signal: config.signal
+      ? AbortSignal.any([timeoutSignal, config.signal])
+      : timeoutSignal,
     headers: {
       "User-Agent": "annuaire-entreprises-site",
       ...(config.headers || {}),
     },
   });
+
   return response.data;
 }
 
