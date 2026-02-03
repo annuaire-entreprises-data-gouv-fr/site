@@ -6,6 +6,7 @@ import { Exception } from "#models/exceptions";
 import { convertErrorToFetchingState } from "#utils/helpers/convert-error";
 import { logWarningInSentry } from "#utils/sentry";
 import { handleServerError } from "#utils/server-side-helper/handle-server-error";
+import isUserAgentABot from "#utils/user-agent";
 
 export function withErrorHandler<T, Args extends any[]>(
   fn: (...args: Args) => Promise<T>
@@ -24,8 +25,9 @@ export function withErrorHandler<T, Args extends any[]>(
 export async function ignoreBot() {
   const resolvedHeaders = await headers();
   const { isBot } = userAgent({ headers: resolvedHeaders });
+  const isCrawler = isUserAgentABot(resolvedHeaders.get("user-agent") || "");
 
-  if (isBot) {
+  if (isBot || isCrawler) {
     logWarningInSentry(
       new Exception({ name: "UserAgentException", message: "User is a bot" })
     );
