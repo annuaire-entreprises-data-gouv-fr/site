@@ -15,6 +15,7 @@ import { clientUniteLegaleIG } from "./api-proxy/greffe";
 import { clientTVA } from "./api-proxy/tva";
 import { clientDocuments } from "./api-rne/documents";
 import { clientBodacc } from "./open-data-soft/clients/bodacc";
+import { clientJOAFE } from "./open-data-soft/clients/journal-officiel-associations";
 import clientSearchRechercheEntreprise from "./recherche-entreprise";
 import { clientUniteLegaleRechercheEntreprise } from "./recherche-entreprise/siren";
 import { clientUniteLegaleInsee } from "./sirene-insee/siren";
@@ -66,6 +67,8 @@ const ping = async (slug: string | string[]) => {
       });
     case "api-bodacc":
       return await clientBodacc(sirenDanone);
+    case "api-joafe":
+      return await clientJOAFE("W691053905");
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }
