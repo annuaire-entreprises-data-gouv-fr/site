@@ -139,9 +139,24 @@ const UniteLegaleSummarySection: React.FC<{
         tooltipLabel="Catégorie d'entreprise"
       >
         La catégorie d'entreprise est une variable statistique calculée par
-        l'Insee. Lorsque l'unité légale appartient à un groupe, la donnée est
-        calculée au niveau du groupe auquel appartient l'unité légale. Cette
-        donnée n'est pas utilisable à des fins administratives.
+        l'Insee. Lorsque l'unité légale appartient à un{" "}
+        <a
+          href="https://www.insee.fr/fr/metadonnees/definition/c1041"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          groupe
+        </a>
+        , la donnée est{" "}
+        <a
+          href="https://www.insee.fr/fr/metadonnees/definition/c1057"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          calculée au niveau du groupe
+        </a>{" "}
+        auquel appartient l'unité légale. Cette donnée n'est pas utilisable à
+        des fins administratives.
       </FAQLink>,
       libelleCategorieEntreprise(uniteLegale),
     ],
