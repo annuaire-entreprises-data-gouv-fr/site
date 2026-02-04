@@ -3,7 +3,7 @@ import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
 import { createDefaultUniteLegale } from "../../models/core/types";
 import {
   isEntrepreneurIndividuelFromNatureJuridique,
-  shouldNotIndex,
+  shouldNotIndexUniteLegale,
 } from "./checks";
 import type { Siren } from "./siren-and-siret";
 
@@ -32,7 +32,7 @@ describe("Check shouldIndex", () => {
     u.etatAdministratif = IETATADMINSTRATIF.ACTIF;
     u.complements.estEntrepreneurIndividuel = false;
     u.complements.estPersonneMorale = true;
-    expect(shouldNotIndex(u)).toBe(false);
+    expect(shouldNotIndexUniteLegale(u)).toBe(false);
   });
   test("EI fails", () => {
     const u = createDefaultUniteLegale("000000000" as Siren);
@@ -40,7 +40,7 @@ describe("Check shouldIndex", () => {
     u.statutDiffusion = ISTATUTDIFFUSION.DIFFUSIBLE;
     u.complements.estPersonneMorale = false;
     u.complements.estEntrepreneurIndividuel = true;
-    expect(shouldNotIndex(u)).toBe(true);
+    expect(shouldNotIndexUniteLegale(u)).toBe(true);
   });
   test("Closed succeed", () => {
     const u = createDefaultUniteLegale("000000000" as Siren);
@@ -48,7 +48,7 @@ describe("Check shouldIndex", () => {
     u.complements.estPersonneMorale = true;
     u.statutDiffusion = ISTATUTDIFFUSION.DIFFUSIBLE;
     u.etatAdministratif = IETATADMINSTRATIF.CESSEE;
-    expect(shouldNotIndex(u)).toBe(true);
+    expect(shouldNotIndexUniteLegale(u)).toBe(true);
   });
   test("NonDiffusible strict succeed", () => {
     const u = createDefaultUniteLegale("000000000" as Siren);
@@ -56,7 +56,7 @@ describe("Check shouldIndex", () => {
     u.complements.estEntrepreneurIndividuel = false;
     u.complements.estPersonneMorale = true;
     u.statutDiffusion = ISTATUTDIFFUSION.NON_DIFF_STRICT;
-    expect(shouldNotIndex(u)).toBe(true);
+    expect(shouldNotIndexUniteLegale(u)).toBe(true);
   });
   test("PartiallyDiffusible fails", () => {
     const u = createDefaultUniteLegale("000000000" as Siren);
@@ -64,7 +64,7 @@ describe("Check shouldIndex", () => {
     u.complements.estEntrepreneurIndividuel = false;
     u.complements.estPersonneMorale = true;
     u.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
-    expect(shouldNotIndex(u)).toBe(false);
+    expect(shouldNotIndexUniteLegale(u)).toBe(false);
   });
   test("ProtectedDiffusible fails", () => {
     const u = createDefaultUniteLegale("000000000" as Siren);
@@ -72,6 +72,6 @@ describe("Check shouldIndex", () => {
     u.complements.estEntrepreneurIndividuel = false;
     u.complements.estPersonneMorale = true;
     u.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
-    expect(shouldNotIndex(u)).toBe(false);
+    expect(shouldNotIndexUniteLegale(u)).toBe(false);
   });
 });
