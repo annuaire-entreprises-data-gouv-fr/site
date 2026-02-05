@@ -599,7 +599,32 @@ const closeCircleFill = (
     <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z" />
   </svg>
 );
-export type IIconsSlug = keyof typeof icons;
+
+const chevronDown = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="m12 13.172 4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222l4.95 4.95Z" />
+  </svg>
+);
+
+const chevronUp = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="m12 10.828-4.95 4.95-1.414-1.414L12 8l6.364 6.364-1.414 1.414-4.95-4.95Z" />
+  </svg>
+);
 
 export const icons = {
   searchLine,
@@ -645,4 +670,7 @@ export const icons = {
   infoFill,
   checkLine,
   closeCircleFill,
+  chevronDown,
+  chevronUp,
 };
+export type IIconsSlug = keyof typeof icons;

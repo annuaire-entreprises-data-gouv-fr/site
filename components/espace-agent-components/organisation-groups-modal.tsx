@@ -1,6 +1,9 @@
 "use client";
 
+import clsx from "clsx";
+import { useState } from "react";
 import ButtonLink from "#components-ui/button";
+import { Icon } from "#components-ui/icon/wrapper";
 import { Modal } from "#components-ui/modal";
 import { Tag } from "#components-ui/tag";
 import type { IAgentsOrganizationGroup } from "#models/authentication/group";
@@ -8,6 +11,7 @@ import {
   ApplicationRights,
   getRightsForGroupScopes,
 } from "#models/authentication/user/rights";
+import styles from "./styles.module.css";
 
 interface IOrganisationGroupsModalProps {
   groups: IAgentsOrganizationGroup[];
@@ -38,6 +42,73 @@ const rewordedRights = {
   [ApplicationRights.liassesFiscales]: "Liasses fiscales (DGFiP)",
 };
 
+const ExpandableGroupRow = ({ group }: { group: IAgentsOrganizationGroup }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const rights = getRightsForGroupScopes(group.scopes).filter(
+    (scope) =>
+      scope !== ApplicationRights.isAgent &&
+      scope !== ApplicationRights.opendata &&
+      scope !== ApplicationRights.administrateur
+  );
+
+  const mailtoUrl = `${group.adminEmails.join(",") || ""}?subject=${encodeURIComponent(`Demande d'accès au groupe « ${group.name} »`)}&body=${encodeURIComponent(`Bonjour,
+
+Serait-il possible de m'ajouter au groupe « ${group.name} » sur l'espace agent de l'Annuaire des Entreprises
+(${process.env.NEXT_PUBLIC_BASE_URL}/compte/mes-groupes#group-${group.id}) ?
+
+Cet accès me permettra de consulter les données auxquelles vous êtes habilités.
+
+Je vous remercie par avance pour votre aide.
+
+Cordialement,`)}`;
+
+  return (
+    <>
+      <tr
+        onClick={() => setIsExpanded(!isExpanded)}
+        style={{ cursor: "pointer" }}
+      >
+        <td>{group.name}</td>
+        <td>
+          {group.adminEmails.length > 0 ? group.adminEmails.join(", ") : "N/A"}
+        </td>
+        <td>
+          <div className={styles.chevronContainer}>
+            <Icon slug={isExpanded ? "chevronUp" : "chevronDown"} />
+          </div>
+        </td>
+      </tr>
+      {isExpanded && (
+        <tr>
+          <td
+            colSpan={3}
+            style={{ backgroundColor: "var(--background-alt-grey)" }}
+          >
+            <p className="fr-text--bold fr-pt-1w">
+              Données accessibles par le groupe :
+            </p>
+            <div className={clsx(styles.expandedGroupRow, "fr-py-1w")}>
+              <div className={styles.expandedGroupRowRights}>
+                {rights.map((right) => (
+                  <Tag color="success" key={right} size="small">
+                    {rewordedRights[right]}
+                  </Tag>
+                ))}
+              </div>
+              <div className={styles.joinGroupButton}>
+                <ButtonLink alt small to={mailtoUrl}>
+                  Rejoindre
+                </ButtonLink>
+              </div>
+            </div>
+          </td>
+        </tr>
+      )}
+    </>
+  );
+};
+
 export const OrganisationGroupsModal = ({
   groups,
   isVisible,
@@ -62,60 +133,27 @@ export const OrganisationGroupsModal = ({
         </p>
 
         <div className="fr-table fr-table--no-scroll">
-          <div className="fr-table__wrapper">
+          <div className={clsx(styles.tableFullWidth, "fr-table__wrapper")}>
             <div className="fr-table__container">
               <div className="fr-table__content">
-                <table>
+                <table className={styles.tableFullWidth}>
                   <caption hidden>Groupes existants</caption>
                   <thead>
                     <tr>
-                      <th scope="col">Nom du groupe</th>
-                      <th scope="col">Habilitations</th>
-                      <th scope="col">Administrateur</th>
-                      <th scope="col">Action</th>
+                      <th className={styles.groupNameColumn} scope="col">
+                        Nom du groupe
+                      </th>
+                      <th className={styles.adminColumn} scope="col">
+                        Administrateur
+                      </th>
+                      <th className={styles.chevronColumn} scope="col">
+                        <span className="fr-sr-only">Actions</span>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {groups.map((group) => (
-                      <tr key={group.id}>
-                        <td>{group.name}</td>
-                        <td className="fr-grid-row">
-                          {getRightsForGroupScopes(group.scopes)
-                            .filter(
-                              (scope) =>
-                                scope !== ApplicationRights.isAgent &&
-                                scope !== ApplicationRights.opendata &&
-                                scope !== ApplicationRights.administrateur
-                            )
-                            .map((right) => (
-                              <Tag color="success" key={right}>
-                                {rewordedRights[right]}
-                              </Tag>
-                            ))}
-                        </td>
-                        <td>
-                          {group.adminEmails.length > 0
-                            ? group.adminEmails.join(", ")
-                            : "N/A"}
-                        </td>
-                        <td>
-                          <ButtonLink
-                            alt
-                            to={`${group.adminEmails.join(",")}?subject=${encodeURIComponent(`Demande d'accès au groupe « ${group.name} »`)}&body=${encodeURIComponent(`Bonjour,
-
-Serait-il possible de m'ajouter au groupe « ${group.name} » sur l'espace agent de l'Annuaire des Entreprises
-                            (${process.env.NEXT_PUBLIC_BASE_URL}/compte/mes-groupes#group-${group.id}) ?
-
-Cet accès me permettra de consulter les données auxquelles vous êtes habilités.
-
-Je vous remercie par avance pour votre aide.
-
-Cordialement,`)}`}
-                          >
-                            Rejoindre
-                          </ButtonLink>
-                        </td>
-                      </tr>
+                      <ExpandableGroupRow group={group} key={group.id} />
                     ))}
                   </tbody>
                 </table>
