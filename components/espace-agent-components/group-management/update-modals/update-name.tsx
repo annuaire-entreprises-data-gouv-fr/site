@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { updateGroupNameAction } from "server-actions/agent/group-management";
 import { validateGroupName } from "#components/espace-agent-components/helpers/form-validation";
 import ButtonLink from "#components-ui/button";
-import { FullScreenModal } from "#components-ui/full-screen-modal";
 import { Icon } from "#components-ui/icon/wrapper";
+import { Modal } from "#components-ui/modal";
 import { NotificationTypeEnum, useNotification } from "#hooks/use-notification";
 
 export default function UpdateNameModal({
@@ -94,7 +94,7 @@ export default function UpdateNameModal({
           )
         </button>
       </h2>
-      <FullScreenModal
+      <Modal
         isVisible={isVisible}
         modalId={`update-name-${groupId}`}
         onClose={handleCancel}
@@ -160,7 +160,7 @@ export default function UpdateNameModal({
             </ButtonLink>
           </div>
         </div>
-      </FullScreenModal>
+      </Modal>
     </>
   );
 }
