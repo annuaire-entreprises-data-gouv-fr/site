@@ -30,7 +30,7 @@ const rewordedRights = {
   [ApplicationRights.associationProtected]:
     "Actes, statuts et données des dirigeants des associations",
   [ApplicationRights.mandatairesRCS]: "État civil des dirigeants d’entreprise",
-  [ApplicationRights.beneficiaires]: "Registre des Bénéficiaires Effectifs",
+  [ApplicationRights.beneficiaires]: "Registre des bénéficiaires effectifs",
   [ApplicationRights.conformite]:
     "Attestations de conformité fiscale et sociale",
   [ApplicationRights.subventionsAssociation]: "Subventions des associations",
