@@ -72,3 +72,42 @@
   align-items: center;
   gap: 8px;
 }
+
+.chevronContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tableFullWidth {
+  width: 100% !important;
+}
+
+.groupNameColumn {
+  width: 40%;
+}
+
+.adminColumn {
+  width: calc(60% - 50px);
+}
+
+.chevronColumn {
+  width: 50px;
+}
+
+.expandedGroupRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.expandedGroupRowRights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1rem;
+}
+
+.joinGroupButton {
+  width: fit-content;
+}

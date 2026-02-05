@@ -29,6 +29,12 @@
   }
 }
 
+.fullScreenModalFull {
+  max-width: calc(100% - 2rem);
+  max-height: calc(100% - 2rem);
+  padding: 0;
+}
+
 .closeButton {
   position: absolute;
   top: 1rem;
