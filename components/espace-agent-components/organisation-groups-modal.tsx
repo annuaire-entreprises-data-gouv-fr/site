@@ -4,7 +4,10 @@ import ButtonLink from "#components-ui/button";
 import { Modal } from "#components-ui/modal";
 import { Tag } from "#components-ui/tag";
 import type { IAgentsOrganizationGroup } from "#models/authentication/group";
-import { getRightsForGroupScopes } from "#models/authentication/user/rights";
+import {
+  ApplicationRights,
+  getRightsForGroupScopes,
+} from "#models/authentication/user/rights";
 
 interface IOrganisationGroupsModalProps {
   groups: IAgentsOrganizationGroup[];
@@ -12,6 +15,28 @@ interface IOrganisationGroupsModalProps {
   onConfirm: () => void;
   onCancel: () => void;
 }
+
+const rewordedRights = {
+  [ApplicationRights.nonDiffusible]: "Données des entreprises non diffusibles",
+  [ApplicationRights.actesRne]: "Actes au RNE",
+  [ApplicationRights.bilansRne]: "Bilans au RNE",
+  [ApplicationRights.documentsRne]: "Documents au RNE",
+  [ApplicationRights.protectedCertificats]:
+    "Certificats Qualifelec, Qualibat et OPQIBI",
+  [ApplicationRights.associationProtected]:
+    "Actes, statuts et données des dirigeants des associations",
+  [ApplicationRights.mandatairesRCS]: "État civil des dirigeants d’entreprise",
+  [ApplicationRights.beneficiaires]: "Registre des Bénéficiaires Effectifs",
+  [ApplicationRights.conformite]:
+    "Attestations de conformité fiscale et sociale",
+  [ApplicationRights.subventionsAssociation]: "Subventions des associations",
+  [ApplicationRights.effectifsAnnuels]: "Effectifs annuels (RCD)",
+  [ApplicationRights.bilansBDF]: "Bilans (Banque de France)",
+  [ApplicationRights.chiffreAffaires]: "Chiffres d’affaires (DGFiP)",
+  [ApplicationRights.liensCapitalistiques]: "Lens capitalistiques (DGFiP)",
+  [ApplicationRights.travauxPublics]: "Données relatives aux travaux publics",
+  [ApplicationRights.liassesFiscales]: "Liasses fiscales (DGFiP)",
+};
 
 export const OrganisationGroupsModal = ({
   groups,
@@ -55,13 +80,18 @@ export const OrganisationGroupsModal = ({
                       <tr key={group.id}>
                         <td>{group.name}</td>
                         <td className="fr-grid-row">
-                          {getRightsForGroupScopes(group.scopes).map(
-                            (right) => (
-                              <Tag color="success" key={right}>
-                                {right}
-                              </Tag>
+                          {getRightsForGroupScopes(group.scopes)
+                            .filter(
+                              (scope) =>
+                                scope !== ApplicationRights.isAgent &&
+                                scope !== ApplicationRights.opendata &&
+                                scope !== ApplicationRights.administrateur
                             )
-                          )}
+                            .map((right) => (
+                              <Tag color="success" key={right}>
+                                {rewordedRights[right]}
+                              </Tag>
+                            ))}
                         </td>
                         <td>
                           {group.adminEmails.length > 0
