@@ -86,8 +86,28 @@
   background: #fff;
 }
 
+.data-card-shell {
+  padding-bottom: 2rem;
+}
+
 .data-card-header {
   margin-bottom: 1rem;
+}
+
+.data-card-content {
+  align-items: flex-start;
+}
+
+.illustration-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem !important;
+}
+
+.data-illustration {
+  max-width: 100%;
+  width: 12rem;
 }
 
 .data-card h3 {
@@ -101,21 +121,20 @@
 
 .data-card ul {
   margin: 0;
-  padding-left: 1.2rem;
+  list-style: none;
+  padding-left: 0;
 }
 
 .data-card li {
   margin-bottom: 0.35rem;
 }
 
-.data-card li span {
-  margin-left: 0.3rem;
-}
-
 .data-card-footer {
-  margin-top: 1.5rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid #d6d8ff;
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid #cdd7ff;
+  border-radius: 0.5rem;
+  background: #eef3ff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,6 +144,12 @@
 .data-card-footer p {
   margin: 0;
   font-size: 1.25rem;
+}
+
+.habilitation-tag {
+  display: inline-flex;
+  margin-left: 0.3rem;
+  vertical-align: middle;
 }
 
 .logged-in {
@@ -175,5 +200,9 @@
   .data-card-footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .data-illustration {
+    width: 8rem;
   }
 }
