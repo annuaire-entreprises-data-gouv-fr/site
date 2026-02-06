@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import ButtonLink from "#components-ui/button";
 import { Icon } from "#components-ui/icon/wrapper";
 import { Modal } from "#components-ui/modal";
@@ -45,11 +45,22 @@ const rewordedRights = {
 const ExpandableGroupRow = ({ group }: { group: IAgentsOrganizationGroup }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const rights = getRightsForGroupScopes(group.scopes).filter(
-    (scope) =>
-      scope !== ApplicationRights.isAgent &&
-      scope !== ApplicationRights.opendata &&
-      scope !== ApplicationRights.administrateur
+  const rights = useMemo(
+    () =>
+      getRightsForGroupScopes(group.scopes).filter(
+        (scope) =>
+          scope !== ApplicationRights.isAgent &&
+          scope !== ApplicationRights.opendata &&
+          scope !== ApplicationRights.administrateur
+      ),
+    [group.scopes]
+  );
+
+  const handleJoinGroupClicked = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.stopPropagation();
+    },
+    []
   );
 
   const mailtoUrl = `${group.adminEmails.join(",") || ""}?subject=${encodeURIComponent(`Demande d'accès au groupe « ${group.name} »`)}&body=${encodeURIComponent(`Bonjour,
@@ -66,12 +77,24 @@ Cordialement,`)}`;
   return (
     <>
       <tr
+        className={styles.groupRow}
         onClick={() => setIsExpanded(!isExpanded)}
-        style={{ cursor: "pointer" }}
       >
         <td>{group.name}</td>
         <td>
           {group.adminEmails.length > 0 ? group.adminEmails.join(", ") : "N/A"}
+        </td>
+        <td>
+          <div className={styles.joinGroupButton}>
+            <ButtonLink
+              alt
+              onClick={handleJoinGroupClicked}
+              small
+              to={mailtoUrl}
+            >
+              Rejoindre
+            </ButtonLink>
+          </div>
         </td>
         <td>
           <div className={styles.chevronContainer}>
@@ -82,7 +105,7 @@ Cordialement,`)}`;
       {isExpanded && (
         <tr>
           <td
-            colSpan={3}
+            colSpan={4}
             style={{ backgroundColor: "var(--background-alt-grey)" }}
           >
             <p className="fr-text--bold fr-pt-1w">
@@ -95,11 +118,6 @@ Cordialement,`)}`;
                     {rewordedRights[right]}
                   </Tag>
                 ))}
-              </div>
-              <div className={styles.joinGroupButton}>
-                <ButtonLink alt small to={mailtoUrl}>
-                  Rejoindre
-                </ButtonLink>
               </div>
             </div>
           </td>
@@ -146,9 +164,10 @@ export const OrganisationGroupsModal = ({
                       <th className={styles.adminColumn} scope="col">
                         Administrateur
                       </th>
-                      <th className={styles.chevronColumn} scope="col">
+                      <th className={styles.actionColumn} scope="col">
                         <span className="fr-sr-only">Actions</span>
                       </th>
+                      <th className={styles.chevronColumn} scope="col" />
                     </tr>
                   </thead>
                   <tbody>

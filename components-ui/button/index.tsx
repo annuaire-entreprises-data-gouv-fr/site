@@ -48,6 +48,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
       })}
       href={(to || "").indexOf("@") > -1 ? `mailto:${to}` : to}
       id={id}
+      onClick={onClick}
       rel={
         (target === "_blank" ? "noopener noreferrer" : "") +
         (nofollow ? "nofollow" : "")

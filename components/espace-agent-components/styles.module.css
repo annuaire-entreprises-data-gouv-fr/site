@@ -91,8 +91,20 @@
   width: calc(60% - 50px);
 }
 
+.actionColumn {
+  width: 89px;
+}
+
 .chevronColumn {
   width: 50px;
+}
+
+.groupRow {
+  cursor: pointer;
+}
+
+.groupRow:hover td {
+  background-color: var(--background-alt-grey) !important;
 }
 
 .expandedGroupRow {
