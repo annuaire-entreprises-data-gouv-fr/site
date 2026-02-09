@@ -30,49 +30,24 @@
   justify-content: center;
 }
 
-.video-placeholder {
+.hero-video {
   position: relative;
   border-radius: 0.75rem;
   border: 1px solid #c7c2f9;
   box-shadow: 0 8px 30px rgba(0, 0, 145, 0.18);
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #f9f9ff,
-      #f9f9ff 12px,
-      #f2f3ff 12px,
-      #f2f3ff 24px
-    ), #f5f7ff;
+  background: #f5f7ff;
   width: min(100%, 980px);
-  min-height: 19rem;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
 
-.video-label {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  font-size: 0.875rem;
-  color: #3f3f5a;
-  background: rgba(255, 255, 255, 0.75);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-}
-
-.play-button {
-  border: 0;
-  width: 7rem;
-  height: 7rem;
-  border-radius: 9999px;
-  font-size: 2.8rem;
-  line-height: 1;
-  color: #000091;
-  background: #fff;
-  box-shadow: 0 2px 18px rgba(0, 0, 145, 0.25);
-  opacity: 0.9;
+.hero-video-player {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #f5f7ff;
+  cursor: pointer !important;
 }
 
 .data-section h2 {
@@ -181,16 +156,6 @@
 
   .hero-brand img:last-child {
     height: 2.75rem;
-  }
-
-  .video-placeholder {
-    min-height: 13rem;
-  }
-
-  .play-button {
-    width: 5.5rem;
-    height: 5.5rem;
-    font-size: 2.2rem;
   }
 
   .data-card {

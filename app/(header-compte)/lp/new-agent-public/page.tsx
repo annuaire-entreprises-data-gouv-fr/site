@@ -37,18 +37,17 @@ const NewLandingPageAgent = () => (
         </div>
       </div>
 
-      <div className={styles["video-placeholder"]}>
-        <div className={styles["video-label"]}>
-          Aperçu de l’espace agent public (vidéo à venir)
-        </div>
-        <button
-          aria-label="Lecture de la vidéo de présentation (bientôt disponible)"
-          className={styles["play-button"]}
-          disabled
-          type="button"
+      <div className={styles["hero-video"]}>
+        {/** biome-ignore lint/a11y/useMediaCaption: no audio */}
+        <video
+          aria-label="Vidéo de présentation de l'Annuaire des Entreprises"
+          className={styles["hero-video-player"]}
+          controls
+          preload="metadata"
         >
-          ▶
-        </button>
+          <source src="/videos/agent_landing.compressed.mp4" type="video/mp4" />
+          Votre navigateur ne supporte pas la lecture de vidéos HTML5.
+        </video>
       </div>
     </section>
 
