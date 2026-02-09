@@ -12,19 +12,6 @@ export type IRNEPersonneMoraleProxyResponse = {
   role: string;
   siren: string;
 };
-type IRNEIdentiteProxyResponse = {
-  capital: string;
-  dateCessationActivite: string;
-  dateClotureExercice: string;
-  dateDebutActiv: string;
-  dateImmatriculation: string;
-  dateRadiation: string;
-  denomination: string;
-  dureePersonneMorale: number;
-  isPersonneMorale: boolean;
-  libelleNatureJuridique: string;
-  natureEntreprise: string;
-};
 export type IRNEObservationsProxyResponse = {
   dateAjout: string;
   description: string;
@@ -32,7 +19,6 @@ export type IRNEObservationsProxyResponse = {
 }[];
 
 export type IRNEProxyResponse = {
-  identite: IRNEIdentiteProxyResponse;
   observations: IRNEObservationsProxyResponse;
   dirigeants: (IRNEPersonneMoraleProxyResponse | IRNEEtatCivilProxyResponse)[];
 };
