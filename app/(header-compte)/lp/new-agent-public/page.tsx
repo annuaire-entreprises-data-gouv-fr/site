@@ -8,7 +8,7 @@ import styles from "./style.module.css";
 export const metadata: Metadata = {
   title: "Espace agent | L’Annuaire des Entreprises",
   description: "L’annuaire de référence pour toutes les données d’entreprise.",
-  robots: "index, follow",
+  robots: "noindex, nofollow",
   alternates: {
     canonical: "https://annuaire-entreprises.data.gouv.fr/lp/new-agent-public",
   },
