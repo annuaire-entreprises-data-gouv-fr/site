@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { use } from "react";
+import routes from "#clients/routes";
 import { INPI } from "#components/administrations";
 import { Link } from "#components/Link";
 import { Section } from "#components/section";
 import { TwoColumnTable } from "#components/table/simple";
 import { Info } from "#components-ui/alerts";
+import ButtonLink from "#components-ui/button";
+import { Icon } from "#components-ui/icon/wrapper";
 import { EAdministration } from "#models/administrations/EAdministration";
 import { formatIntFr } from "#utils/helpers";
 import extractParamsAppRouter, {
@@ -25,6 +28,23 @@ export const generateMetadata = async (
     },
   };
 };
+
+const SHOULD_DIRECT_DOWNLOAD = true;
+
+function INPIPDFDirectDownload({ siren }: { siren: string }) {
+  return (
+    <div className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center fr-py-2v">
+      <ButtonLink
+        target="_blank"
+        to={`${routes.rne.portail.pdf}?format=pdf&ids=[${siren}]`}
+      >
+        <Icon slug="download">
+          Télécharger le justificatif d’immatriculation
+        </Icon>
+      </ButtonLink>
+    </div>
+  );
+}
 
 export default function InpiPDF({ params }: AppRouterProps) {
   const { slug } = use(params);
@@ -51,16 +71,25 @@ export default function InpiPDF({ params }: AppRouterProps) {
             Mais quand le service est surchargé, le téléchargement peut
             atteindre plusieurs minutes <strong>voire échouer</strong>.
           </Info>
-          <p>
-            Le téléchargement de l’extrait d’immatriculation au Répertoire
-            National des Entreprises (RNE) a commencé pour le SIREN{" "}
-            <Link href={`/entreprise/${slug}`}>{formatIntFr(slug)}</Link>.
-          </p>
-          <TwoColumnTable
-            body={[
-              ["Statut du téléchargement", <InpiPDFDownloader siren={slug} />],
-            ]}
-          />
+          {SHOULD_DIRECT_DOWNLOAD ? (
+            <INPIPDFDirectDownload siren={slug} />
+          ) : (
+            <>
+              <p>
+                Le téléchargement de l’extrait d’immatriculation au Répertoire
+                National des Entreprises (RNE) a commencé pour le SIREN{" "}
+                <Link href={`/entreprise/${slug}`}>{formatIntFr(slug)}</Link>.
+              </p>
+              <TwoColumnTable
+                body={[
+                  [
+                    "Statut du téléchargement",
+                    <InpiPDFDownloader siren={slug} />,
+                  ],
+                ]}
+              />
+            </>
+          )}
         </Section>
       </div>
     </>
