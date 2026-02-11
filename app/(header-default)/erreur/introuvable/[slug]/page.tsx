@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { use } from "react";
 import { INPI, INSEE } from "#components/administrations";
 import { Link } from "#components/Link";
@@ -24,7 +23,12 @@ const SirenOrSiretNotFoundPage = (props: AppRouterProps) => {
   const slug = params.slug;
 
   if (!isSiren(slug) && !isSiret(slug)) {
-    return redirect("/not-found");
+    return {
+      redirect: {
+        destination: "/not-found",
+        permanent: false,
+      },
+    };
   }
 
   const slugIsSiren = isSiren(slug);

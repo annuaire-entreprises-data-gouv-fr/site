@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Fragment } from "react";
 import { Link } from "#components/Link";
 import parseMarkdownSync from "#components/markdown/parse-markdown";
 import StructuredDataFAQ from "#components/structured-data/faq";
@@ -76,7 +75,7 @@ export default function FAQPage() {
       <TextWrapper>
         <h1>Réponses à vos questions (FAQ) :</h1>
         {config.map(({ title, key, additionnalLink }) => (
-          <Fragment key={key}>
+          <>
             <h2>{title}</h2>
             <ul>
               {(articlesByGroup[key] || []).map(({ slug, title }, index) => (
@@ -90,7 +89,7 @@ export default function FAQPage() {
                 </li>
               ))}
             </ul>
-          </Fragment>
+          </>
         ))}
       </TextWrapper>
     </>
