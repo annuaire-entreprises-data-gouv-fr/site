@@ -12,6 +12,9 @@ const TEMP_INCIDENT_BANNER = {
   proconnect: `
   🚨 Notre partenaire ProConnect rencontre actuellement des difficultés techniques, le service de connexion aux espaces agent public peut être temporairement indisponible.
     Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser pour la gêne occasionnée.`,
+  partnersData: `
+  🚨 Certains données et fonctionnalités sont temporairement indisponibles en raison d’instabilités chez nos partenaires.
+    Veuillez nous excuser pour la gêne occasionnée.`,
 };
 
 export default function TempIncidentBanner() {
@@ -21,14 +24,26 @@ export default function TempIncidentBanner() {
   const { isEnabled: isProconnectIncidentEnabled } = useFeatureFlag(
     "proconnect_incident_banner_displayed"
   );
+  const { isEnabled: isPartnersDataIncidentEnabled } = useFeatureFlag(
+    "partners_data_incident_banner_displayed"
+  );
 
-  if (!isDefaultIncidentEnabled && !isProconnectIncidentEnabled) {
+  if (
+    !isDefaultIncidentEnabled &&
+    !isProconnectIncidentEnabled &&
+    !isPartnersDataIncidentEnabled
+  ) {
     return null;
   }
 
-  const message = isProconnectIncidentEnabled
-    ? TEMP_INCIDENT_BANNER.proconnect
-    : TEMP_INCIDENT_BANNER.default;
+  let message = TEMP_INCIDENT_BANNER.default;
+
+  if (isPartnersDataIncidentEnabled) {
+    message = TEMP_INCIDENT_BANNER.partnersData;
+  }
+  if (isProconnectIncidentEnabled) {
+    message = TEMP_INCIDENT_BANNER.proconnect;
+  }
 
   return (
     <PrintNever>
