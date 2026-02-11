@@ -25,7 +25,7 @@
     "lint:fix": "ultracite fix"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.758.0",
+    "@aws-sdk/client-s3": "^3.987.0",
     "@react-spring/web": "^10.0.1",
     "@sentry/browser": "^8.55.0",
     "@sentry/nextjs": "^8.55.0",
@@ -40,7 +40,7 @@
     "crawler-user-agents": "^1.27.0",
     "cssnano": "^6.1.2",
     "dotenv": "^16.4.5",
-    "fast-xml-parser": "^5.3.0",
+    "fast-xml-parser": "^5.3.5",
     "iron-session": "^8.0.4",
     "js-yaml-loader": "~1.2.2",
     "maplibre-gl": "^4.7.1",
