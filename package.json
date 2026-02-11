@@ -40,7 +40,7 @@
     "crawler-user-agents": "^1.27.0",
     "cssnano": "^6.1.2",
     "dotenv": "^16.4.5",
-    "fast-xml-parser": "^5.3.0",
+    "fast-xml-parser": "^5.3.4",
     "iron-session": "^8.0.4",
     "js-yaml-loader": "~1.2.2",
     "maplibre-gl": "^4.7.1",
