@@ -6,7 +6,7 @@ import { httpGet } from "#utils/network";
 export const clientIdccRechercheEntreprise = async (
   siren: Siren
 ): Promise<IConventionsCollectives> => {
-  const url = routes.rechercheEntreprise.idcc.getBySiren(siren);
+  const url = `${process.env.API_RECHERCHE_ENTREPRISE_URL}${routes.rechercheEntreprise.idcc.getBySiren(siren)}`;
   const data = await httpGet<IConventionsCollectives>(url, {});
 
   return data;

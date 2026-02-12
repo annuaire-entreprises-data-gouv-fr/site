@@ -245,14 +245,12 @@ const routes = {
     listEtablissements: "https://api.insee.fr/api-sirene/prive/3.11/siret",
   },
   rechercheEntreprise: {
-    rechercheUniteLegale: "https://recherche-entreprises.api.gouv.fr/search",
+    rechercheUniteLegale: "/search",
     idcc: {
-      metadata: "https://recherche-entreprises.api.gouv.fr/idcc/metadata",
-      getBySiren: (siren: string) =>
-        `https://recherche-entreprises.api.gouv.fr/idcc/${siren}`,
+      metadata: "/idcc/metadata",
+      getBySiren: (siren: string) => `/idcc/${siren}`,
     },
-    lastModified:
-      "https://recherche-entreprises.api.gouv.fr/sources/last_modified",
+    lastModified: "/sources/last_modified",
   },
   tooling: {
     grist: "https://grist.numerique.gouv.fr/api/docs/",

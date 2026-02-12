@@ -3,7 +3,10 @@ import { DataStore } from "#utils/data-store";
 import { httpGet } from "#utils/network";
 
 const store = new DataStore<string>(
-  () => httpGet(routes.rechercheEntreprise.lastModified),
+  () =>
+    httpGet(
+      `${process.env.API_RECHERCHE_ENTREPRISE_URL}${routes.rechercheEntreprise.lastModified}`
+    ),
   "recherche-entreprise-last-modified",
   (response) => response
 );
