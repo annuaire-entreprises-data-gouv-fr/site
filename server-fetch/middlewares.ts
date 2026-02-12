@@ -2,9 +2,7 @@ import { headers } from "next/headers";
 import { userAgent } from "next/server";
 import { HttpUnauthorizedError } from "#clients/exceptions";
 import type { IDataFetchingState } from "#models/data-fetching";
-import { Exception } from "#models/exceptions";
 import { convertErrorToFetchingState } from "#utils/helpers/convert-error";
-import { logWarningInSentry } from "#utils/sentry";
 import { handleServerError } from "#utils/server-side-helper/handle-server-error";
 import isUserAgentABot from "#utils/user-agent";
 
@@ -28,9 +26,6 @@ export async function ignoreBot() {
   const isCrawler = isUserAgentABot(resolvedHeaders.get("user-agent") || "");
 
   if (isBot || isCrawler) {
-    logWarningInSentry(
-      new Exception({ name: "UserAgentException", message: "User is a bot" })
-    );
     throw new HttpUnauthorizedError("Antibot activated : user is a bot");
   }
 }
