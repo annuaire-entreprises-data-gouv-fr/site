@@ -26,6 +26,78 @@ export interface ExtendedExportCsvInput extends ExportCsvInput {
 
 const getFileSize = (count: number) => Math.ceil((count * 300) / 1000);
 
+const DEFAULT_ERROR_MESSAGE =
+  "Une erreur est survenue. Veuillez réessayer dans quelques instants.";
+const SERVICE_UNAVAILABLE_MESSAGE =
+  "Le service d’export est temporairement indisponible. Veuillez réessayer dans quelques minutes.";
+const INVALID_FILTERS_MESSAGE =
+  "Certains critères saisis sont invalides. Vérifiez vos filtres puis relancez.";
+
+type ApiErrorBody = {
+  error?: string;
+  details?: Array<{ field?: string; message?: string }>;
+};
+
+const getStatusErrorMessage = (status: number): string => {
+  if (status === 400) {
+    return INVALID_FILTERS_MESSAGE;
+  }
+  if (status === 413) {
+    return "La requête est trop volumineuse. Réduisez le nombre de filtres puis réessayez.";
+  }
+  if (status === 429) {
+    return "Le service d'export est trop sollicité. Patientez quelques instants puis réessayez.";
+  }
+  if (status >= 500) {
+    return SERVICE_UNAVAILABLE_MESSAGE;
+  }
+  return DEFAULT_ERROR_MESSAGE;
+};
+
+const getFriendlyErrorMessage = (
+  errorBody?: ApiErrorBody | null,
+  status?: number
+): string => {
+  const firstDetailMessage = errorBody?.details?.find((detail) =>
+    Boolean(detail?.message)
+  )?.message;
+
+  if (firstDetailMessage) {
+    if (/^invalid enum value/i.test(firstDetailMessage)) {
+      return INVALID_FILTERS_MESSAGE;
+    }
+    return firstDetailMessage;
+  }
+
+  const rawError = errorBody?.error?.trim();
+
+  if (rawError) {
+    if (/internal server error/i.test(rawError)) {
+      return SERVICE_UNAVAILABLE_MESSAGE;
+    }
+    if (/validation failed/i.test(rawError)) {
+      return INVALID_FILTERS_MESSAGE;
+    }
+    return rawError;
+  }
+
+  if (typeof status === "number") {
+    return getStatusErrorMessage(status);
+  }
+
+  return DEFAULT_ERROR_MESSAGE;
+};
+
+const getFriendlyCatchMessage = (error: unknown): string => {
+  if (error instanceof Error) {
+    if (/failed to fetch|networkerror/i.test(error.message)) {
+      return "Impossible de contacter le service d’export. Vérifiez votre connexion puis réessayez.";
+    }
+    return error.message || DEFAULT_ERROR_MESSAGE;
+  }
+  return DEFAULT_ERROR_MESSAGE;
+};
+
 const defaultFilters: ExtendedExportCsvInput = {
   headcount: { min: 0, max: 14 },
   headcountEnabled: false,
@@ -135,19 +207,14 @@ export default function ExportCsv() {
         body: JSON.stringify({ ...query, count: true }),
       });
 
-      const body = await response.json();
+      const body = (await response.json()) as ApiErrorBody & { count?: number };
 
-      if (body.error) {
-        if (
-          "details" in body &&
-          Array.isArray(body.details) &&
-          body.details.length > 0
-        ) {
-          throw new Error(body.details[0].message);
-        }
-        throw new Error(
-          body.error || "Une erreur est survenue, veuillez réessayer plus tard"
-        );
+      if (!response.ok || body.error) {
+        throw new Error(getFriendlyErrorMessage(body, response.status));
+      }
+
+      if (typeof body.count !== "number") {
+        throw new Error(DEFAULT_ERROR_MESSAGE);
       }
 
       setCountResult({ count: body.count, filters: query });
@@ -158,11 +225,7 @@ export default function ExportCsv() {
 
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Une erreur est survenue, veuillez réessayer plus tard"
-      );
+      setError(getFriendlyCatchMessage(err));
     } finally {
       setIsCountLoading(false);
     }
@@ -187,13 +250,13 @@ export default function ExportCsv() {
 
       const contentType = response.headers.get("Content-Type");
       if (contentType?.includes("application/json")) {
-        const body = await response.json();
-        if (body.error) {
-          throw new Error(
-            body.error ||
-              "Une erreur est survenue, veuillez réessayer plus tard"
-          );
+        const body = (await response.json()) as ApiErrorBody;
+
+        if (!response.ok || body.error) {
+          throw new Error(getFriendlyErrorMessage(body, response.status));
         }
+      } else if (!response.ok) {
+        throw new Error(getFriendlyErrorMessage(undefined, response.status));
       }
 
       const blob = await response.blob();
@@ -208,11 +271,7 @@ export default function ExportCsv() {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Une erreur est survenue, veuillez réessayer plus tard"
-      );
+      setError(getFriendlyCatchMessage(err));
     } finally {
       setIsLoading(false);
     }
