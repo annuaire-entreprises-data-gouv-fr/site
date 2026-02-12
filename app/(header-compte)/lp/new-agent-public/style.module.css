@@ -1,18 +1,9 @@
-.page {
-  padding-bottom: 3rem;
-}
-
 .page section {
   margin-bottom: 4rem;
 }
 
 .hero {
-  margin: 0 -1rem 4rem;
   padding: 1rem 1rem 4rem;
-  background:
-    radial-gradient(circle at 15% 25%, #f5efff 0, transparent 40%),
-    radial-gradient(circle at 80% 30%, #e8f4ff 0, transparent 42%),
-    linear-gradient(180deg, #f7f8ff 0%, #e9f5ff 65%, #ffffff 100%);
 }
 
 .hero-content {
@@ -45,7 +36,7 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1280 / 872;
   background: #f5f7ff;
   cursor: pointer !important;
 }
@@ -71,6 +62,13 @@
 
 .data-card-content {
   align-items: flex-start;
+}
+
+.data-card-content ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
 }
 
 .illustration-col {
@@ -123,7 +121,6 @@
 
 .habilitation-tag {
   display: inline-flex;
-  margin-left: 0.3rem;
   vertical-align: middle;
 }
 

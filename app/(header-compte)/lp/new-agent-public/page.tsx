@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { default as ButtonProConnect } from "#components-ui/button-pro-connect";
+import FullWidthContainer from "#components-ui/container";
 import { Icon } from "#components-ui/icon/wrapper";
 import { Tag } from "#components-ui/tag";
 import constants from "#models/constants";
@@ -16,41 +17,51 @@ export const metadata: Metadata = {
 
 const NewLandingPageAgent = () => (
   <div className={styles["page"]}>
-    <section className={styles["hero"]}>
-      <div className={styles["hero-content"]}>
-        <h1>
-          L’Annuaire de référence pour
-          <br />
-          toutes les données d’entreprise
-        </h1>
-        <p className="fr-text--lead">
-          Accédez aux données essentielles pour vos missions
-          <br />
-          et prenez vos décisions en toute confiance.
-        </p>
-        <div className={styles["hero-cta"]}>
-          <ButtonProConnect
-            event="BTN_LP_HERO"
-            noFootLink
-            shouldRedirectToReferer
-          />
+    <FullWidthContainer
+      style={{
+        background: `radial-gradient(circle at 15% 25%, #f5efff 0, transparent 40%),
+           radial-gradient(circle at 80% 30%, #e8f4ff 0, transparent 42%),
+           linear-gradient(180deg, #f7f8ff 0%, #e9f5ff 65%, #ffffff 100%)`,
+      }}
+    >
+      <section className={styles["hero"]}>
+        <div className={styles["hero-content"]}>
+          <h1>
+            L’Annuaire de référence pour
+            <br />
+            toutes les données d’entreprise
+          </h1>
+          <p className="fr-text--lead">
+            Accédez aux données essentielles pour vos missions
+            <br />
+            et prenez vos décisions en toute confiance.
+          </p>
+          <div className={styles["hero-cta"]}>
+            <ButtonProConnect
+              event="BTN_LP_HERO"
+              noFootLink
+              shouldRedirectToReferer
+            />
+          </div>
         </div>
-      </div>
 
-      <div className={styles["hero-video"]}>
-        {/** biome-ignore lint/a11y/useMediaCaption: no audio */}
-        <video
-          aria-label="Vidéo de présentation de l'Annuaire des Entreprises"
-          className={styles["hero-video-player"]}
-          controls
-          preload="metadata"
-        >
-          <source src="/videos/agent_landing.compressed.mp4" type="video/mp4" />
-          Votre navigateur ne supporte pas la lecture de vidéos HTML5.
-        </video>
-      </div>
-    </section>
-
+        <div className={styles["hero-video"]}>
+          {/** biome-ignore lint/a11y/useMediaCaption: no audio */}
+          <video
+            aria-label="Vidéo de présentation de l'Annuaire des Entreprises"
+            className={styles["hero-video-player"]}
+            controls
+            preload="metadata"
+          >
+            <source
+              src="/videos/agent_landing.compressed.mp4"
+              type="video/mp4"
+            />
+            Votre navigateur ne supporte pas la lecture de vidéos HTML5.
+          </video>
+        </div>
+      </section>
+    </FullWidthContainer>
     <section className={styles["data-section"]}>
       <h2>
         Toutes les données des entreprises et des associations, au même endroit.
