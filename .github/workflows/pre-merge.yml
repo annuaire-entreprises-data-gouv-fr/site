@@ -90,6 +90,8 @@ jobs:
     name: Unit tests
     runs-on: ubuntu-latest
     needs: [dependencies]
+    env:
+      API_RECHERCHE_ENTREPRISE_URL: https://staging.recherche-entreprises.api.gouv.fr
 
     steps:
       - uses: actions/checkout@v4
@@ -111,7 +113,8 @@ jobs:
       NEXT_PUBLIC_END2END_MOCKING: enabled
       NEXT_PUBLIC_BASE_URL: http://localhost:3000
       API_ENTREPRISE_URL: http://uselessurl.com
-      PROXY_API_URL: http://uselessurl2.com
+      API_RECHERCHE_ENTREPRISE_URL: http://uselessurl2.com
+      PROXY_API_URL: http://uselessurl3.com
       API_ASSOCIATION_URL: http://uselessurl3.com
       API_ASSOCIATION_KEY: XXXXXX
       API_ENTREPRISE_TOKEN: XXXXXX

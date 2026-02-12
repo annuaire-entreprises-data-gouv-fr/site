@@ -83,19 +83,27 @@ export const routesHandlers = [
     rneObservationsFallbackHandler
   ),
   http.get(
-    stripQueryParams(routes.rechercheEntreprise.lastModified),
+    stripQueryParams(
+      `${process.env.API_RECHERCHE_ENTREPRISE_URL}${routes.rechercheEntreprise.lastModified}`
+    ),
     rechercheEntrepriseLastModifiedHandler
   ),
   http.get(
-    stripQueryParams(routes.rechercheEntreprise.rechercheUniteLegale),
+    stripQueryParams(
+      `${process.env.API_RECHERCHE_ENTREPRISE_URL}${routes.rechercheEntreprise.rechercheUniteLegale}`
+    ),
     rechercheEntrepriseHandler
   ),
   http.get(
-    stripQueryParams(routes.rechercheEntreprise.idcc.metadata),
+    stripQueryParams(
+      `${process.env.API_RECHERCHE_ENTREPRISE_URL}${routes.rechercheEntreprise.idcc.metadata}`
+    ),
     rechercheEntrepriseIdccMetadataHandler
   ),
   http.get(
-    stripQueryParams(routes.rechercheEntreprise.idcc.getBySiren(":siren")),
+    stripQueryParams(
+      `${process.env.API_RECHERCHE_ENTREPRISE_URL}${routes.rechercheEntreprise.idcc.getBySiren(":siren")}`
+    ),
     rechercheEntrepriseIdccHandler
   ),
   http.get(stripQueryParams(routes.certifications.rge.api), rgeHandler),

@@ -38,7 +38,10 @@ function mapToDomainObject(response: IIdccMetadata) {
 }
 
 const store = new DataStore<ICCWithMetadata>(
-  () => httpGet(routes.rechercheEntreprise.idcc.metadata),
+  () =>
+    httpGet(
+      `${process.env.API_RECHERCHE_ENTREPRISE_URL}${routes.rechercheEntreprise.idcc.metadata}`
+    ),
   "idcc-metadata",
   mapToDomainObject
 );

@@ -62,7 +62,7 @@ export const clientSearchRechercheEntrepriseRaw = async (
 
   const route =
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
-    routes.rechercheEntreprise.rechercheUniteLegale;
+    `${process.env.API_RECHERCHE_ENTREPRISE_URL}${routes.rechercheEntreprise.rechercheUniteLegale}`;
 
   const filters = searchFilterParams?.toApiURI();
 
