@@ -47,6 +47,8 @@ export class AgentConnected {
   }
 
   isLikelyPrestataire = () => {
+    const normalizedDomain = this.domain.replace(/^@/, "").toLowerCase();
+
     for (const bannedDomain of [
       "i-carre.net",
       "beta.gouv.fr",
@@ -58,9 +60,15 @@ export class AgentConnected {
       "monstagedetroisieme.fr",
       "scn.rie.gouv.fr",
     ]) {
-      if (this.domain.indexOf(bannedDomain) > -1) {
+      if (normalizedDomain.indexOf(bannedDomain) > -1) {
         return true;
       }
+    }
+
+    if (
+      /(^|\.)(eleve?s?|etud?e?s?|etudiant|promo\d+)\./i.test(normalizedDomain)
+    ) {
+      return true;
     }
 
     if (
