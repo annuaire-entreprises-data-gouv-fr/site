@@ -3,6 +3,7 @@ import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
 import routes from "#clients/routes";
 import { INPI } from "#components/administrations";
+import { Link } from "#components/Link";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { UniteLegalePageLink } from "#components/unite-legale-page-link";
 import InpiPartiallyDownWarning from "#components-ui/alerts-with-explanations/inpi-partially-down";
@@ -71,7 +72,7 @@ export default function DirigeantsSection({ uniteLegale, session }: IProps) {
                   <strong>NB :</strong> si vous êtes agent public, vous pouvez
                   accéder à l’état civil complet (lieu et date de naissance
                   complète) en vous connectant à{" "}
-                  <a href="/lp/agent-public">l’espace agent public</a>.
+                  <Link href="/lp/agent-public">l’espace agent public</Link>.
                 </p>
 
                 <DirigeantsContent
