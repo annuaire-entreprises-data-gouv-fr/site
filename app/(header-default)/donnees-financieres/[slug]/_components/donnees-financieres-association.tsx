@@ -1,4 +1,5 @@
 import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import type { ISession } from "#models/authentication/user/session";
 import type { IAssociation } from "#models/core/types";
 import ComptesAssociationSection from "./comptes-association";
 import FinancesAssociationSection from "./finances-association";
@@ -6,7 +7,9 @@ import SubventionsAssociationSection from "./subventions-association";
 
 export default function DonneesFinancieresAssociation({
   uniteLegale,
+  session,
 }: {
+  session: ISession | null;
   uniteLegale: IAssociation;
 }) {
   return (
@@ -31,7 +34,7 @@ export default function DonneesFinancieresAssociation({
         </ul>
         <br />
       </nav>
-      <FinancesAssociationSection uniteLegale={uniteLegale} />
+      <FinancesAssociationSection session={session} uniteLegale={uniteLegale} />
       <ComptesAssociationSection uniteLegale={uniteLegale} />
       <HorizontalSeparator />
       <SubventionsAssociationSection uniteLegale={uniteLegale} />
