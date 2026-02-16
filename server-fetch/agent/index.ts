@@ -3,7 +3,6 @@ import { getOpqibi } from "#models/espace-agent/certificats/opqibi";
 import { getQualibat } from "#models/espace-agent/certificats/qualibat";
 import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
 import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
-import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
 import { createAgentFetcher } from "./middlewares";
 
 export const getOpqibiFetcher = createAgentFetcher(getOpqibi)
@@ -26,11 +25,4 @@ export const getDirigeantsProtectedFetcher = createAgentFetcher(
 )
   .withRateLimit()
   .withApplicationRight(ApplicationRights.mandatairesRCS)
-  .build();
-
-export const getAgentRNEDocumentsFetcher = createAgentFetcher(
-  getDocumentsRNEProtected
-)
-  .withRateLimit()
-  .withApplicationRight(ApplicationRights.documentsRne)
   .build();
