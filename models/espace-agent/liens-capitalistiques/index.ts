@@ -1,6 +1,9 @@
 import { clientApiEntrepriseLiensCapitalistiques } from "#clients/api-entreprise/liens-capitalistiques";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
-import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
+import {
+  ApplicationRights,
+  ApplicationRightsToScopes,
+} from "#models/authentication/user/rights";
 import type {
   IEtatCivilLiensCapitalistiques,
   IPersonneMoraleLiensCapitalistiques,
@@ -16,14 +19,16 @@ export type ILiensCapitalistiquesProtected = {
   filiales: Array<IPersonneMoraleLiensCapitalistiques>;
 };
 
+const scope = ApplicationRightsToScopes[ApplicationRights.liensCapitalistiques];
+
 export const getLiensCapitalistiquesProtected = async (
   maybeSiren: string,
-  params: { year?: string; useCase?: UseCase; scope: IAgentScope | null }
+  params: { year?: string; useCase?: UseCase }
 ): Promise<ILiensCapitalistiquesProtected | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
   return clientApiEntrepriseLiensCapitalistiques(
     siren,
-    params.scope,
+    scope,
     params.year,
     params.useCase
   ).catch((error) =>

@@ -15,8 +15,8 @@ import type { IObservationsWithMetadata } from "./types";
 // Value returned when the request is aborted
 const ABORTED_VALUE = { data: [], metadata: { isFallback: false } };
 
-const fallback = async (siren: Siren, controller?: AbortController) => {
-  const observations = await clientRNEObservationsFallback(siren, controller);
+const fallback = async (siren: Siren, signal?: AbortSignal) => {
+  const observations = await clientRNEObservationsFallback(siren, signal);
   return { data: observations, metadata: { isFallback: true } };
 };
 
@@ -26,16 +26,19 @@ const fallback = async (siren: Siren, controller?: AbortController) => {
  */
 export const getRNEObservations = async (
   maybeSiren: string,
-  controller?: AbortController
+  params: { signal?: AbortSignal }
 ): Promise<IAPINotRespondingError | IObservationsWithMetadata> => {
   const siren = verifySiren(maybeSiren);
 
-  if (controller?.signal.aborted) {
+  if (params.signal?.aborted) {
     return ABORTED_VALUE;
   }
 
   try {
-    const { observations } = await clientRNEImmatriculation(siren, controller);
+    const { observations } = await clientRNEImmatriculation(
+      siren,
+      params.signal
+    );
     return { data: observations, metadata: { isFallback: false } };
   } catch (eDefaultTry: any) {
     if (axios.isCancel(eDefaultTry)) {
@@ -46,7 +49,7 @@ export const getRNEObservations = async (
     }
 
     try {
-      return await fallback(siren, controller);
+      return await fallback(siren, params.signal);
     } catch (eFallback: any) {
       if (axios.isCancel(eFallback)) {
         return ABORTED_VALUE;

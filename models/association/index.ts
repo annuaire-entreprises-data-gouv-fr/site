@@ -29,24 +29,24 @@ import type { IDataAssociation } from "./types";
 const getAssociationWithFallback = (
   rnaOrSiren: IdRna | Siren,
   siret: Siret,
-  controller?: AbortController
+  signal?: AbortSignal
 ): Promise<IDataAssociation> =>
-  clientAPIAssociationPrivate(rnaOrSiren, siret, controller).catch((e) => {
+  clientAPIAssociationPrivate(rnaOrSiren, siret, signal).catch((e) => {
     if (e instanceof HttpNotFound) {
       throw e;
     }
-    return clientAPIAssociationPublic(rnaOrSiren, siret, controller);
+    return clientAPIAssociationPublic(rnaOrSiren, siret, signal);
   });
 
 export const getAssociationFromSlug = async (
   slug: string,
-  controller?: AbortController
+  params: { signal?: AbortSignal }
 ): Promise<IDataAssociation | IAPINotRespondingError | null> => {
   const uniteLegale = await getUniteLegaleFromSlug(slug, {
     isBot: false,
   });
 
-  if (controller?.signal.aborted || !isAssociation(uniteLegale)) {
+  if (params.signal?.aborted || !isAssociation(uniteLegale)) {
     return null;
   }
 
@@ -58,14 +58,14 @@ export const getAssociationFromSlug = async (
     data = await getAssociationWithFallback(
       siren,
       uniteLegale.siege.siret,
-      controller
+      params.signal
     );
 
     if (rna && rna !== data.idAssociation) {
       data = await getAssociationWithFallback(
         rna as IdRna,
         uniteLegale.siege.siret,
-        controller
+        params.signal
       );
     }
 

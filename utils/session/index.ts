@@ -14,6 +14,11 @@ export const sessionOptions: SessionOptions = {
   ttl: 43_200, // 12h
 };
 
+export async function setVisitTimestamp(session: IronSession<ISession>) {
+  session.lastVisitTimestamp = new Date().getTime();
+  await session.save();
+}
+
 /**
  * Utils for AgentConnect session
  */

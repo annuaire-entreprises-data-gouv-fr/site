@@ -14,9 +14,9 @@ const ABORTED_VALUE = { tva: null };
 
 export const buildAndVerifyTVA = async (
   slug: string,
-  controller?: AbortController
+  params: { signal?: AbortSignal }
 ): Promise<{ tva: string | null } | IAPINotRespondingError> => {
-  if (controller?.signal.aborted) {
+  if (params.signal?.aborted) {
     return ABORTED_VALUE;
   }
 
@@ -24,7 +24,9 @@ export const buildAndVerifyTVA = async (
   const tvaNumberFromSiren = verifyTVANumber(tvaNumber(siren));
 
   try {
-    return { tva: await clientTVA(tvaNumberFromSiren, true, controller) };
+    return {
+      tva: await clientTVA(tvaNumberFromSiren, true, params.signal),
+    };
   } catch (e: any) {
     if (axios.isCancel(e)) {
       return ABORTED_VALUE;

@@ -16,7 +16,7 @@ type IProps = {
  */
 export default function DirigeantsSectionProtected({ uniteLegale }: IProps) {
   const isEI = isEntrepreneurIndividuel(uniteLegale);
-  const dirigeants = getDirigeantsProtectedFetcher(uniteLegale.siren, isEI);
+  const dirigeants = getDirigeantsProtectedFetcher(uniteLegale.siren, { isEI });
 
   return (
     <AsyncDataSectionServer

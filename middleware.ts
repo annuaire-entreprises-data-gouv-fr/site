@@ -1,5 +1,7 @@
+import { getIronSession } from "iron-session";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import type { ISession } from "#models/authentication/user/session";
 import { Exception } from "#models/exceptions";
 import {
   extractSirenOrSiretFromRechercherUrl,
@@ -9,6 +11,7 @@ import {
 } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
+import { sessionOptions, setVisitTimestamp } from "#utils/session";
 
 const shouldRedirect = (path: string, search: string, url: string) => {
   try {
@@ -86,12 +89,21 @@ export async function middleware(request: NextRequest) {
     requestHeaders.set("x-redirected", isRedirected);
   }
 
-  return NextResponse.next({
+  const response = NextResponse.next({
     request: {
       // Apply new request headers
       headers: requestHeaders,
     },
   });
+
+  const session = await getIronSession<ISession>(
+    request,
+    response,
+    sessionOptions
+  );
+  await setVisitTimestamp(session);
+
+  return response;
 }
 
 export const config = {
