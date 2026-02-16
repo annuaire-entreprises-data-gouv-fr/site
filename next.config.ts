@@ -71,7 +71,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/:path*{/}?",
+        source: "/api/(export-sirene|download/espace-agent/documents/:slug)",
         headers: [
           {
             key: "X-Accel-Buffering",
