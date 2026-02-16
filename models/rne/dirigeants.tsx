@@ -13,11 +13,8 @@ import type { IDirigeantsWithMetadata } from "./types";
 // Value returned when the request is aborted
 const ABORTED_VALUE = { data: [], metadata: { isFallback: false } };
 
-const fallback = async (siren: Siren, controller?: AbortController) => {
-  const dirigeants = await clientDirigeantsRechercheEntreprise(
-    siren,
-    controller
-  );
+const fallback = async (siren: Siren, signal?: AbortSignal) => {
+  const dirigeants = await clientDirigeantsRechercheEntreprise(siren, signal);
   return { data: dirigeants, metadata: { isFallback: true } };
 };
 
@@ -27,16 +24,16 @@ const fallback = async (siren: Siren, controller?: AbortController) => {
  */
 export const getDirigeantsRNE = async (
   maybeSiren: string,
-  controller?: AbortController
+  params: { signal?: AbortSignal }
 ): Promise<IAPINotRespondingError | IDirigeantsWithMetadata> => {
   const siren = verifySiren(maybeSiren);
 
-  if (controller?.signal.aborted) {
+  if (params.signal?.aborted) {
     return ABORTED_VALUE;
   }
 
   try {
-    const { dirigeants } = await clientRNEImmatriculation(siren, controller);
+    const { dirigeants } = await clientRNEImmatriculation(siren, params.signal);
     return { data: dirigeants, metadata: { isFallback: false } };
   } catch (e: any) {
     if (axios.isCancel(e)) {
@@ -47,7 +44,7 @@ export const getDirigeantsRNE = async (
     }
 
     try {
-      return await fallback(siren, controller);
+      return await fallback(siren, params.signal);
     } catch (eFallback) {
       if (axios.isCancel(eFallback)) {
         return ABORTED_VALUE;

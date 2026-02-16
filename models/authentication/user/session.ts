@@ -1,6 +1,7 @@
 import type { IAgentInfo } from "../agent";
 
 export type ISession = {
+  lastVisitTimestamp?: number;
   user: IAgentInfo | null;
 
   // pro connect

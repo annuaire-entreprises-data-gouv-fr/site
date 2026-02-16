@@ -26,13 +26,13 @@ import type {
  */
 export const clientRNEImmatriculation = async (
   siren: Siren,
-  controller?: AbortController
+  signal?: AbortSignal
 ) => {
   const response = await clientAPIProxy<IRNEProxyResponse>(
     routes.proxy.rne.immatriculation.default(siren),
     {
       timeout: constants.timeout.XS,
-      signal: controller?.signal,
+      signal,
     }
   );
   return mapToDomainObject(response);
@@ -44,13 +44,13 @@ export const clientRNEImmatriculation = async (
  */
 export const clientRNEObservationsFallback = async (
   siren: Siren,
-  controller?: AbortController
+  signal?: AbortSignal
 ) => {
   const response = await clientAPIProxy<IRNEObservationsFallbackProxyResponse>(
     routes.proxy.rne.observations.fallback(siren),
     {
       timeout: constants.timeout.XXXL,
-      signal: controller?.signal,
+      signal,
     }
   );
   return mapObservationsToDomainObject(response);

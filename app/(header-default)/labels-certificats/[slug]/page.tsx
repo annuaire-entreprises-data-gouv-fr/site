@@ -117,9 +117,9 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
         )}
         {hasRights(session, ApplicationRights.protectedCertificats) && (
           <>
-            <QualibatSection uniteLegale={uniteLegale} />
-            <QualifelecSection uniteLegale={uniteLegale} />
-            <OpqibiSection uniteLegale={uniteLegale} />
+            <QualibatSection session={session} uniteLegale={uniteLegale} />
+            <QualifelecSection session={session} uniteLegale={uniteLegale} />
+            <OpqibiSection session={session} uniteLegale={uniteLegale} />
           </>
         )}
         {estOrganismeFormation && (

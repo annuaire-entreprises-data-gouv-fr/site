@@ -56,7 +56,7 @@ export const clientSearchRechercheEntrepriseRaw = async (
     pageResultatsRecherche = 1,
     pageEtablissements = 1,
   }: ClientSearchRechercheEntreprise,
-  controller?: AbortController
+  signal?: AbortSignal
 ): Promise<ISearchResponse> => {
   const encodedTerms = encodeURIComponent(searchTerms);
 
@@ -96,7 +96,7 @@ export const clientSearchRechercheEntrepriseRaw = async (
   const results = await httpGet<ISearchResponse>(url, {
     timeout,
     headers: { referer: "annuaire-entreprises-site" },
-    signal: controller?.signal,
+    signal,
   });
   return results;
 };
@@ -113,7 +113,7 @@ const clientSearchRechercheEntreprise = async (
     pageResultatsRecherche = 1,
     pageEtablissements = 1,
   }: ClientSearchRechercheEntreprise,
-  controller?: AbortController
+  signal?: AbortSignal
 ): Promise<ISearchResults> => {
   const results = await clientSearchRechercheEntrepriseRaw(
     {
@@ -124,7 +124,7 @@ const clientSearchRechercheEntreprise = async (
       pageResultatsRecherche,
       pageEtablissements,
     },
-    controller
+    signal
   );
 
   if (!results.results || results.results.length === 0) {

@@ -10,9 +10,9 @@ import { clientAPIProxy } from "../client";
  */
 export const clientEORI = async (
   siret: Siret,
-  controller?: AbortController
+  signal?: AbortSignal
 ): Promise<IEORIValidation> =>
   await clientAPIProxy<IEORIValidation>(routes.proxy.eori(siret), {
     timeout: constants.timeout.XXL,
-    signal: controller?.signal,
+    signal,
   });

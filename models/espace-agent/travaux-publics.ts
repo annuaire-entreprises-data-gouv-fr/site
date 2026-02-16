@@ -5,7 +5,10 @@ import {
   clientApiEntrepriseProbtp,
 } from "#clients/api-entreprise/travaux-publics";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
-import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
+import {
+  ApplicationRights,
+  ApplicationRightsToScopes,
+} from "#models/authentication/user/rights";
 import type { UseCase } from "#models/use-cases";
 import { extractSirenFromSiret, verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
@@ -21,9 +24,11 @@ export type ITravauxPublics = {
   probtp: IDocumentDownloader | IAPINotRespondingError;
 };
 
+const scope = ApplicationRightsToScopes[ApplicationRights.travauxPublics];
+
 export const getTravauxPublic = async (
   slug: string,
-  params: { useCase?: UseCase; scope: IAgentScope | null }
+  params: { useCase?: UseCase }
 ): Promise<ITravauxPublics | IAPINotRespondingError> => {
   const siret = verifySiret(slug as string);
   const siren = extractSirenFromSiret(siret);
@@ -38,18 +43,12 @@ export const getTravauxPublic = async (
   const [fntp, cibtp, cnetp, probtp] = await Promise.all([
     clientApiEntrepriseCarteProfessionnelleTravauxPublics(
       siren,
-      params.scope,
+      scope,
       params.useCase
     ).catch(errorHandler),
-    clientApiEntrepriseCibtp(siret, params.scope, params.useCase).catch(
-      errorHandler
-    ),
-    clientApiEntrepriseCnetp(siren, params.scope, params.useCase).catch(
-      errorHandler
-    ),
-    clientApiEntrepriseProbtp(siret, params.scope, params.useCase).catch(
-      errorHandler
-    ),
+    clientApiEntrepriseCibtp(siret, scope, params.useCase).catch(errorHandler),
+    clientApiEntrepriseCnetp(siren, scope, params.useCase).catch(errorHandler),
+    clientApiEntrepriseProbtp(siret, scope, params.useCase).catch(errorHandler),
   ]);
   return { fntp, cibtp, cnetp, probtp };
 };

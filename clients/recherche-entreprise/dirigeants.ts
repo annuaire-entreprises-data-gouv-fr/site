@@ -4,7 +4,7 @@ import clientSearchRechercheEntreprise from ".";
 
 export const clientDirigeantsRechercheEntreprise = async (
   siren: Siren,
-  controller?: AbortController
+  signal?: AbortSignal
 ): Promise<IDirigeants> => {
   const { results } = await clientSearchRechercheEntreprise(
     {
@@ -14,7 +14,7 @@ export const clientDirigeantsRechercheEntreprise = async (
       inclureImmatriculation: false,
       pageEtablissements: 1,
     },
-    controller
+    signal
   );
 
   if (!results.length || !results[0]) {

@@ -80,7 +80,12 @@ const DirigeantsContent = ({
 
   // Association
   if (isAssociation(uniteLegale)) {
-    return <DirigeantsAssociationSection uniteLegale={uniteLegale} />;
+    return (
+      <DirigeantsAssociationSection
+        session={session}
+        uniteLegale={uniteLegale}
+      />
+    );
   }
   // Entreprises & EI
   return (

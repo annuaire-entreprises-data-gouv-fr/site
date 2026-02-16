@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { MissingApplicationRightException } from "server-fetch/agent/middlewares";
+import { MissingApplicationRightException } from "server-actions/agent/middlewares";
 import { ProConnectReconnexionNeeded } from "#clients/authentication/pro-connect/exceptions";
 import { AgentOverRateLimitException } from "#clients/authentication/rate-limiter";
 import { HttpNotFound, HttpUnauthorizedError } from "#clients/exceptions";

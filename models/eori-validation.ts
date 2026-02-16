@@ -19,13 +19,13 @@ const ABORTED_VALUE = { eori: "", isValid: false };
 
 export const getEORIValidation = async (
   siret: string,
-  controller?: AbortController
+  params: { signal?: AbortSignal }
 ): Promise<IEORIValidation | IAPINotRespondingError> => {
   try {
-    if (controller?.signal.aborted) {
+    if (params.signal?.aborted) {
       return ABORTED_VALUE;
     }
-    const data = await clientEORI(verifySiret(siret), controller);
+    const data = await clientEORI(verifySiret(siret), params.signal);
     if (!data) {
       throw new Error("EOS response is empty");
     }
