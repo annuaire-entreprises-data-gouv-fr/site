@@ -1,13 +1,42 @@
 import type { MiddlewareFn } from "next-safe-action";
 import type { ServerActionError } from "server-actions/safe-action";
+import { agentRateLimiter } from "#clients/authentication/rate-limiter";
 import { HttpBadRequestError } from "#clients/exceptions";
-import type { ApplicationRights } from "#models/authentication/user/rights";
-import type { ISession } from "#models/authentication/user/session";
-import { UseCase } from "#models/use-cases";
 import {
-  verifyAgentRateLimit,
-  verifyApplicationRight,
-} from "../../server-fetch/agent/middlewares";
+  type ApplicationRights,
+  hasRights,
+} from "#models/authentication/user/rights";
+import type { ISession } from "#models/authentication/user/session";
+import { Exception } from "#models/exceptions";
+import { UseCase } from "#models/use-cases";
+
+export class MissingApplicationRightException extends Exception {
+  constructor(args: {
+    message: string;
+    cause?: any;
+  }) {
+    super({ name: "MissingApplicationRightException", ...args });
+  }
+}
+
+export function verifyApplicationRight(
+  session: ISession | null,
+  applicationRight: ApplicationRights
+) {
+  if (!hasRights(session, applicationRight)) {
+    throw new MissingApplicationRightException({
+      message: `Unauthorized: ${applicationRight} access required`,
+    });
+  }
+}
+
+export async function verifyAgentRateLimit(sessionEmail?: string | null) {
+  if (!sessionEmail) {
+    throw new HttpBadRequestError("User email not found");
+  }
+
+  await agentRateLimiter.verify(sessionEmail);
+}
 
 export const withRateLimiting: MiddlewareFn<
   ServerActionError,
