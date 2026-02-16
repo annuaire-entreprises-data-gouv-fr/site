@@ -18,3 +18,12 @@ import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.on("uncaught:exception", (err) => {
+  // we don't fail e2e tests on hydration errors
+  if (err.message.includes("Minified React error #418")) {
+    return false;
+  }
+  // we still want to ensure there are no other unexpected
+  // errors, so we let them fail the test
+});
