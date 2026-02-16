@@ -1,5 +1,4 @@
 import { ApplicationRights } from "#models/authentication/user/rights";
-import { getAssociationProtected } from "#models/espace-agent/association-protected";
 import { getOpqibi } from "#models/espace-agent/certificats/opqibi";
 import { getQualibat } from "#models/espace-agent/certificats/qualibat";
 import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
@@ -34,10 +33,4 @@ export const getAgentRNEDocumentsFetcher = createAgentFetcher(
 )
   .withRateLimit()
   .withApplicationRight(ApplicationRights.documentsRne)
-  .build();
-
-export const getAgentAssociationProtectedFetcher = createAgentFetcher(
-  getAssociationProtected
-)
-  .withApplicationRight(ApplicationRights.associationProtected)
   .build();
