@@ -6,7 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
@@ -24,7 +24,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es6",
-    "types": ["jest"],
+    "types": ["jest", "webpack-env"],
     "plugins": [
       {
         "name": "next"
@@ -33,11 +33,5 @@
     "strictNullChecks": true
   },
   "exclude": ["node_modules"],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }
