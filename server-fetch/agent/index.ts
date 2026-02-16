@@ -2,7 +2,6 @@ import { ApplicationRights } from "#models/authentication/user/rights";
 import { getOpqibi } from "#models/espace-agent/certificats/opqibi";
 import { getQualibat } from "#models/espace-agent/certificats/qualibat";
 import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
-import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
 import { createAgentFetcher } from "./middlewares";
 
 export const getOpqibiFetcher = createAgentFetcher(getOpqibi)
@@ -18,11 +17,4 @@ export const getQualibatFetcher = createAgentFetcher(getQualibat)
 export const getQualifelecFetcher = createAgentFetcher(getQualifelec)
   .withRateLimit()
   .withApplicationRight(ApplicationRights.protectedCertificats)
-  .build();
-
-export const getDirigeantsProtectedFetcher = createAgentFetcher(
-  getDirigeantsProtected
-)
-  .withRateLimit()
-  .withApplicationRight(ApplicationRights.mandatairesRCS)
   .build();
