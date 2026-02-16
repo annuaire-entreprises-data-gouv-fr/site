@@ -162,6 +162,33 @@ describe("AgentConnected", () => {
       const agent = new AgentConnected(mockUserInfo);
       expect(agent.isLikelyPrestataire()).toBe(false);
     });
+
+    it.each([
+      "test@eleves.ira-bastia.gouv.fr",
+      "test@eleve.ira-nantes.gouv.fr",
+      "test@promo56.ira-metz.gouv.fr",
+      "test@promo57.ira-metz.gouv.fr",
+      "test@etudiant.univ-reims.fr",
+      "test@etudiant.univ-lr.fr",
+      "test@etu.univ-montp3.fr",
+      "test@etud.univ-tln.fr",
+    ])("should detect student email domain as prestataire: %s", (email) => {
+      const studentUserInfo = {
+        ...mockUserInfo,
+        email,
+      };
+      const agent = new AgentConnected(studentUserInfo);
+      expect(agent.isLikelyPrestataire()).toBe(true);
+    });
+
+    it("should not detect close non-student domain patterns as prestataire", () => {
+      const userInfo = {
+        ...mockUserInfo,
+        email: "test@etudo.univ-reims.fr",
+      };
+      const agent = new AgentConnected(userInfo);
+      expect(agent.isLikelyPrestataire()).toBe(false);
+    });
   });
 
   describe("getHabilitationLevel", () => {
