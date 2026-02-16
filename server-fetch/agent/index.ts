@@ -6,7 +6,6 @@ import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
 import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
 import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
 import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
-import { getSubventionsAssociationFromSlug } from "#models/subventions/association";
 import { createAgentFetcher } from "./middlewares";
 
 export const getOpqibiFetcher = createAgentFetcher(getOpqibi)
@@ -49,11 +48,4 @@ export const getAgentEffectifsAnnuelsProtectedFetcher = createAgentFetcher(
 )
   .withRateLimit()
   .withApplicationRight(ApplicationRights.effectifsAnnuels)
-  .build();
-
-export const getAgentSubventionsAssociationFetcher = createAgentFetcher(
-  getSubventionsAssociationFromSlug
-)
-  .withRateLimit()
-  .withApplicationRight(ApplicationRights.subventionsAssociation)
   .build();

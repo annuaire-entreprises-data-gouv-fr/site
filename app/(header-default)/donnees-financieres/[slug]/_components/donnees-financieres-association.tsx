@@ -37,7 +37,10 @@ export default function DonneesFinancieresAssociation({
       <FinancesAssociationSection session={session} uniteLegale={uniteLegale} />
       <ComptesAssociationSection uniteLegale={uniteLegale} />
       <HorizontalSeparator />
-      <SubventionsAssociationSection uniteLegale={uniteLegale} />
+      <SubventionsAssociationSection
+        session={session}
+        uniteLegale={uniteLegale}
+      />
     </>
   );
 }
