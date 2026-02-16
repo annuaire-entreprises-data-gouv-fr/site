@@ -1,5 +1,4 @@
 import { getAssociationFromSlug } from "#models/association";
-import { getEORIValidation } from "#models/eori-validation";
 import { getDirigeantsRNE } from "#models/rne/dirigeants";
 import { getRNEObservations } from "#models/rne/observations";
 import { createPublicFetcher } from "./middlewares";
@@ -13,6 +12,3 @@ export const getDirigeantsRNEFetcher =
 export const getAssociationFromSlugFetcher = createPublicFetcher(
   getAssociationFromSlug
 ).build();
-
-export const getEORIValidationFetcher =
-  createPublicFetcher(getEORIValidation).build();

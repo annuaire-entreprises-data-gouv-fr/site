@@ -94,7 +94,7 @@ const UniteLegaleSummarySection: React.FC<{
         dans ses relations avec les autorités douanières.
       </FAQLink>,
       uniteLegale.siege.siret ? (
-        <EORICell siret={uniteLegale.siege.siret} />
+        <EORICell session={session} siret={uniteLegale.siege.siret} />
       ) : (
         ""
       ),
