@@ -8,6 +8,8 @@ const constants = {
       home: "https://guides.data.gouv.fr/annuaire-des-entreprises",
       agentRateLimiting:
         "https://guides.data.gouv.fr/guides-de-data.gouv.fr/annuaire-des-entreprises/pour-approfondir/plafond-de-consultation-de-donnees",
+      agentDecouverte:
+        "https://guides.data.gouv.fr/guides-de-data.gouv.fr/annuaire-des-entreprises/pour-bien-commencer/decouvrir-lespace-agent",
       habilitation:
         "https://guides.data.gouv.fr/guides-de-data.gouv.fr/annuaire-des-entreprises/pour-approfondir/types-de-donnees-et-habilitations/obtenir-une-habilitation",
     },

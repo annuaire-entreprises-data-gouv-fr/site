@@ -6,6 +6,7 @@ type IProps = {
   useSearchBar?: boolean;
   useAgentCTA?: boolean;
   useAgentBanner?: boolean;
+  useAgentDocumentation?: boolean;
   useReconnectBanner?: boolean;
   useMap?: boolean;
   useExportSirene?: boolean;
@@ -19,6 +20,7 @@ export const Header: React.FC<IProps> = async ({
   useMap = false,
   useAgentCTA = false,
   useAgentBanner = false,
+  useAgentDocumentation = false,
   useReconnectBanner = true,
   plugin,
   currentSearchTerm = "",
@@ -33,6 +35,7 @@ export const Header: React.FC<IProps> = async ({
       session={session}
       useAgentBanner={useAgentBanner}
       useAgentCTA={useAgentCTA}
+      useAgentDocumentation={useAgentDocumentation}
       useExportSirene={useExportSirene}
       useLogo={useLogo}
       useMap={useMap}
