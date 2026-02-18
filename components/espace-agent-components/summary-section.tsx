@@ -40,13 +40,28 @@ export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => (
               <Icon slug="download">Télécharger les bilans</Icon>
             </Link>,
           ],
-          ...(hasRights(session, ApplicationRights.conformite)
+          ...(hasRights(session, ApplicationRights.conformiteSociale)
             ? [
                 ["", <br />],
                 [
                   "Conformité",
-                  <Link href={`/documents/${uniteLegale.siren}#conformite`}>
-                    → Attestations de conformité fiscales et sociales
+                  <Link
+                    href={`/documents/${uniteLegale.siren}#conformite-sociale`}
+                  >
+                    → Attestations de conformité sociale
+                  </Link>,
+                ],
+              ]
+            : []),
+          ...(hasRights(session, ApplicationRights.conformiteFiscale)
+            ? [
+                ["", <br />],
+                [
+                  "Conformité",
+                  <Link
+                    href={`/documents/${uniteLegale.siren}#conformite-fiscale`}
+                  >
+                    → Attestations de conformité fiscale
                   </Link>,
                 ],
               ]

@@ -4,9 +4,10 @@ import { ApplicationRights } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import { UseCase } from "#models/use-cases";
-import ProtectedConformiteSection from "./protected-conformite-section";
+import { ProtectedConformiteFiscaleSection } from "./protected-conformite-fiscale-section";
+import { ProtectedConformiteSocialeSection } from "./protected-conformite-sociale-section";
 
-const ConformiteSection = ({
+export const ConformiteSocialeSection = ({
   uniteLegale,
   session,
 }: {
@@ -15,17 +16,31 @@ const ConformiteSection = ({
 }) => (
   <ProtectedSectionWithUseCase
     allowedUseCases={[UseCase.marches, UseCase.aidesPubliques, UseCase.fraude]}
-    id="conformite"
-    requiredRight={ApplicationRights.conformite}
+    id="conformite-sociale"
+    requiredRight={ApplicationRights.conformiteSociale}
     session={session}
-    sources={[
-      EAdministration.DGFIP,
-      EAdministration.URSSAF,
-      EAdministration.MSA,
-    ]}
-    title="Attestations de conformité sociale et fiscale"
+    sources={[EAdministration.URSSAF, EAdministration.MSA]}
+    title="Attestations de conformité sociale"
     uniteLegale={uniteLegale}
-    WrappedSection={ProtectedConformiteSection}
+    WrappedSection={ProtectedConformiteSocialeSection}
   />
 );
-export default ConformiteSection;
+
+export const ConformiteFiscaleSection = ({
+  uniteLegale,
+  session,
+}: {
+  uniteLegale: IUniteLegale;
+  session: ISession | null;
+}) => (
+  <ProtectedSectionWithUseCase
+    allowedUseCases={[UseCase.marches, UseCase.aidesPubliques]}
+    id="conformite-fiscale"
+    requiredRight={ApplicationRights.conformiteFiscale}
+    session={session}
+    sources={[EAdministration.DGFIP]}
+    title="Attestations de conformité fiscale"
+    uniteLegale={uniteLegale}
+    WrappedSection={ProtectedConformiteFiscaleSection}
+  />
+);

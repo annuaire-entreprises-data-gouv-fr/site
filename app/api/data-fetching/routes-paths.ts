@@ -1,5 +1,4 @@
 export enum APIRoutesPaths {
-  EspaceAgentConformite = "espace-agent/conformite",
   EspaceAgentOpqibi = "espace-agent/opqibi",
   EspaceAgentQualibat = "espace-agent/qualibat",
   EspaceAgentQualifelec = "espace-agent/qualifelec",

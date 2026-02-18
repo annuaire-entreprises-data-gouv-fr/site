@@ -5,7 +5,10 @@ import { ApplicationRights } from "#models/authentication/user/rights";
 import { getBeneficiaires } from "#models/espace-agent/beneficiaires";
 import { getBilansProtected } from "#models/espace-agent/bilans";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
-import { getConformiteEntreprise } from "#models/espace-agent/conformite";
+import {
+  getConformiteFiscaleEntreprise,
+  getConformiteSocialeEntreprise,
+} from "#models/espace-agent/conformite";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
 import { getLiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
 import { getTravauxPublic } from "#models/espace-agent/travaux-publics";
@@ -18,7 +21,8 @@ import {
   getAgentBeneficiairesSchema,
   getAgentBilansProtectedSchema,
   getAgentChiffreAffairesProtectedSchema,
-  getAgentConformiteEntrepriseSchema,
+  getAgentConformiteFiscaleEntrepriseSchema,
+  getAgentConformiteSocialeEntrepriseSchema,
   getAgentLiassesFiscalesProtectedSchema,
   getAgentLiensCapitalistiquesProtectedSchema,
   getAgentTravauxPublicsSchema,
@@ -34,15 +38,28 @@ export const getAgentBeneficiairesAction = agentActionClient
     return await getBeneficiaires(siren, { useCase });
   });
 
-export const getAgentConformiteEntrepriseAction = agentActionClient
+export const getAgentConformiteSocialeEntrepriseAction = agentActionClient
   .use(withRateLimiting)
   .use(withUseCase)
-  .use(withApplicationRight(ApplicationRights.conformite))
-  .inputSchema(getAgentConformiteEntrepriseSchema)
+  .use(withApplicationRight(ApplicationRights.conformiteSociale))
+  .inputSchema(getAgentConformiteSocialeEntrepriseSchema)
   .action(async ({ parsedInput }) => {
     const { siret, useCase } = parsedInput;
 
-    return await getConformiteEntreprise(siret, {
+    return await getConformiteSocialeEntreprise(siret, {
+      useCase,
+    });
+  });
+
+export const getAgentConformiteFiscaleEntrepriseAction = agentActionClient
+  .use(withRateLimiting)
+  .use(withUseCase)
+  .use(withApplicationRight(ApplicationRights.conformiteFiscale))
+  .inputSchema(getAgentConformiteFiscaleEntrepriseSchema)
+  .action(async ({ parsedInput }) => {
+    const { siret, useCase } = parsedInput;
+
+    return await getConformiteFiscaleEntreprise(siret, {
       useCase,
     });
   });

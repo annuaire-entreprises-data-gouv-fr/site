@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { getAgentConformiteEntrepriseAction } from "server-actions/agent/data-fetching";
+import { getAgentConformiteFiscaleEntrepriseAction } from "server-actions/agent/data-fetching";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { TwoColumnTable } from "#components/table/simple";
 import { PrintNever } from "#components-ui/print-visibility";
@@ -12,8 +12,6 @@ import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { UseCase } from "#models/use-cases";
 import ConformiteFiscale from "./conformite-fiscale";
-import ConformiteMSA from "./conformite-msa";
-import ConformiteVigilance from "./conformite-vigilance";
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -25,7 +23,7 @@ interface IProps {
   isProtected: boolean;
 }
 
-function ConformiteSection({
+export function ProtectedConformiteFiscaleSection({
   uniteLegale,
   session,
   useCase,
@@ -42,10 +40,10 @@ function ConformiteSection({
     [useCase, uniteLegale.siege.siret]
   );
   const conformite = useServerActionData(
-    getAgentConformiteEntrepriseAction,
+    getAgentConformiteFiscaleEntrepriseAction,
     session,
     params,
-    ApplicationRights.conformite
+    ApplicationRights.conformiteFiscale
   );
 
   return (
@@ -64,14 +62,6 @@ function ConformiteSection({
                 "Conformité fiscale",
                 <ConformiteFiscale data={conformite?.fiscale} />,
               ],
-              [
-                "Conformité sociale",
-                <>
-                  <ConformiteVigilance data={conformite?.vigilance} />
-                  <br />
-                  <ConformiteMSA data={conformite?.msa} />
-                </>,
-              ],
             ]}
           />
         )}
@@ -79,5 +69,3 @@ function ConformiteSection({
     </PrintNever>
   );
 }
-
-export default ConformiteSection;
