@@ -13,6 +13,7 @@ import {
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
+import { AgentDocumentation } from "../agent-documentation";
 import ChangelogNotification from "../changelog-notification";
 import { ExportSirene } from "../export-sirene";
 import Menu from "../menu";
@@ -24,6 +25,7 @@ type IProps = {
   useSearchBar?: boolean;
   useAgentCTA?: boolean;
   useAgentBanner?: boolean;
+  useAgentDocumentation?: boolean;
   useReconnectBanner?: boolean;
   useMap?: boolean;
   useInfoBanner?: boolean;
@@ -38,6 +40,7 @@ export const HeaderCore: React.FC<IProps> = ({
   useSearchBar = false,
   useAgentCTA = false,
   useAgentBanner = false,
+  useAgentDocumentation = false,
   useReconnectBanner = true,
   useMap = false,
   plugin = null,
@@ -111,6 +114,7 @@ export const HeaderCore: React.FC<IProps> = ({
                     <div className={styles.menuMobile}>
                       <ChangelogNotification session={session} />
                       {useExportSirene && <ExportSirene />}
+                      {useAgentDocumentation && <AgentDocumentation />}
                       <Menu session={session} useAgentCTA={useAgentCTA} />
                     </div>
                   </div>
@@ -129,6 +133,11 @@ export const HeaderCore: React.FC<IProps> = ({
                       {useExportSirene && (
                         <li>
                           <ExportSirene />
+                        </li>
+                      )}
+                      {useAgentDocumentation && (
+                        <li>
+                          <AgentDocumentation />
                         </li>
                       )}
                       <li>
