@@ -114,7 +114,9 @@ export const HeaderCore: React.FC<IProps> = ({
                     <div className={styles.menuMobile}>
                       <ChangelogNotification session={session} />
                       {useExportSirene && <ExportSirene />}
-                      {useAgentDocumentation && <AgentDocumentation />}
+                      {useAgentDocumentation && !isLoggedIn(session) && (
+                        <AgentDocumentation />
+                      )}
                       <Menu session={session} useAgentCTA={useAgentCTA} />
                     </div>
                   </div>
@@ -135,7 +137,7 @@ export const HeaderCore: React.FC<IProps> = ({
                           <ExportSirene />
                         </li>
                       )}
-                      {useAgentDocumentation && (
+                      {useAgentDocumentation && !isLoggedIn(session) && (
                         <li>
                           <AgentDocumentation />
                         </li>

@@ -13,7 +13,12 @@ export default function LayoutWithSearchBar({
 }) {
   return (
     <NotificationProvider>
-      <Header useAgentBanner={false} useAgentCTA={true} useSearchBar={true} />
+      <Header
+        useAgentBanner={false}
+        useAgentCTA={true}
+        useAgentDocumentation={true}
+        useSearchBar={true}
+      />
       <main className="fr-container">{children}</main>
       <Footer />
     </NotificationProvider>
