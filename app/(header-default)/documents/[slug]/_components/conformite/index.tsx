@@ -39,7 +39,7 @@ export const ConformiteFiscaleSection = ({
     requiredRight={ApplicationRights.conformiteFiscale}
     session={session}
     sources={[EAdministration.DGFIP]}
-    title="Attestations de conformité fiscale"
+    title="Attestation de conformité fiscale"
     uniteLegale={uniteLegale}
     WrappedSection={ProtectedConformiteFiscaleSection}
   />

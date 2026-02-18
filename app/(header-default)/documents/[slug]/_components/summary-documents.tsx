@@ -18,7 +18,7 @@ export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
       )}
       {hasRights(session, ApplicationRights.conformiteFiscale) && (
         <li>
-          <a href="#conformite-fiscale">Attestations de conformité fiscale</a>
+          <a href="#conformite-fiscale">Attestation de conformité fiscale</a>
         </li>
       )}
       <li>

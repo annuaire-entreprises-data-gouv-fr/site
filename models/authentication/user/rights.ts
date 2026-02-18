@@ -20,7 +20,7 @@ export enum ApplicationRights {
   associationProtected = "Actes, statuts et données des dirigeants des associations",
   mandatairesRCS = "État civil complet des dirigeants d’entreprise",
   beneficiaires = "Registre des Bénéficiaires Effectifs",
-  conformiteFiscale = "Attestations de conformité fiscale (DGFiP)",
+  conformiteFiscale = "Attestation de conformité fiscale (DGFiP)",
   conformiteSociale = "Attestations de conformité sociale (Urssaf & MSA)",
   subventionsAssociation = "Données des subventions des associations",
   effectifsAnnuels = "Effectifs annuels (RCD)",

@@ -61,7 +61,7 @@ export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => (
                   <Link
                     href={`/documents/${uniteLegale.siren}#conformite-fiscale`}
                   >
-                    → Attestations de conformité fiscale
+                    → Attestation de conformité fiscale
                   </Link>,
                 ],
               ]
