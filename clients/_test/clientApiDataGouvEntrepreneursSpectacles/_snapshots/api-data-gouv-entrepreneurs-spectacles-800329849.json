@@ -28,12 +28,22 @@
         "dateDepot": "2021-05-27",
         "type": "Renouvellement",
         "nomLieu": null
+      },
+      {
+        "categorie": "2",
+        "numeroRecepisse": "2-012704",
+        "statut": "En instruction",
+        "dateValidite": null,
+        "dateFinValidite": null,
+        "dateDepot": "2026-01-20",
+        "type": "Renouvellement",
+        "nomLieu": null
       }
     ],
     "meta": {
       "page": 1,
       "page_size": 20,
-      "total": 2
+      "total": 3
     }
   }
 }
