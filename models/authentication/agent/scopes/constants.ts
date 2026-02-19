@@ -11,6 +11,8 @@ export const allAgentScopes = [
   "rne",
   "nonDiffusible",
   "conformite",
+  "conformite_fiscale",
+  "conformite_sociale",
   "beneficiaires",
   "agent",
   "pseudo_opendata",
@@ -26,21 +28,23 @@ export const allAgentScopes = [
 export const marchePublicScopes: IAgentScope[] = [
   "liens_capitalistiques",
   "beneficiaires",
-  "conformite",
+  "conformite_fiscale",
+  "conformite_sociale",
   "travaux_publics",
 ];
 
 export const aidesPubliquesScopes: IAgentScope[] = [
   "liens_capitalistiques",
   "beneficiaires",
-  "conformite",
+  "conformite_fiscale",
+  "conformite_sociale",
   "travaux_publics",
 ];
 
 export const lutteContreLaFraudeScopes: IAgentScope[] = [
   "liens_capitalistiques",
   "beneficiaires",
-  "conformite",
+  "conformite_sociale",
   "travaux_publics",
   "bilans_bdf",
   "liasses_fiscales",

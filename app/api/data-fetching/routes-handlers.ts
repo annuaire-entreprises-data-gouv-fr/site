@@ -7,7 +7,6 @@ import { getOpqibi } from "#models/espace-agent/certificats/opqibi";
 import { getQualibat } from "#models/espace-agent/certificats/qualibat";
 import { getQualifelec } from "#models/espace-agent/certificats/qualifelec";
 import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affaires";
-import { getConformiteEntreprise } from "#models/espace-agent/conformite";
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
 import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
 import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
@@ -22,9 +21,6 @@ import { APIRoutesPaths } from "./routes-paths";
 import { withRateLimiting, withUseCase } from "./utils";
 
 export const APIRoutesHandlers = {
-  [APIRoutesPaths.EspaceAgentConformite]: withRateLimiting(
-    withUseCase(getConformiteEntreprise)
-  ),
   [APIRoutesPaths.EspaceAgentOpqibi]: withRateLimiting(getOpqibi),
   [APIRoutesPaths.EspaceAgentQualibat]: withRateLimiting(getQualibat),
   [APIRoutesPaths.EspaceAgentQualifelec]: withRateLimiting(getQualifelec),

@@ -11,11 +11,14 @@ export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
       <li>
         <a href="#justificatifs">Justificatifs d’immatriculation</a>
       </li>
-      {hasRights(session, ApplicationRights.conformite) && (
+      {hasRights(session, ApplicationRights.conformiteSociale) && (
         <li>
-          <a href="#conformite">
-            Attestations de conformité sociale et fiscale
-          </a>
+          <a href="#conformite-sociale">Attestations de conformité sociale</a>
+        </li>
+      )}
+      {hasRights(session, ApplicationRights.conformiteFiscale) && (
+        <li>
+          <a href="#conformite-fiscale">Attestation de conformité fiscale</a>
         </li>
       )}
       <li>

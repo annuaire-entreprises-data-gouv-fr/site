@@ -18,7 +18,10 @@ import extractParamsAppRouter, {
 } from "#utils/server-side-helper/extract-params";
 import getSession from "#utils/server-side-helper/get-session";
 import ActesSection from "./_components/actes";
-import ConformiteSection from "./_components/conformite";
+import {
+  ConformiteFiscaleSection,
+  ConformiteSocialeSection,
+} from "./_components/conformite";
 import JustificatifsSection from "./_components/justificatifs";
 import { SummaryDocuments } from "./_components/summary-documents";
 import TravauxPublicsSection from "./_components/travaux-publics";
@@ -58,8 +61,17 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
         <HorizontalSeparator />
         <BreakPageForPrint />
         <PrintNever>
-          {hasRights(session, ApplicationRights.conformite) && (
-            <ConformiteSection session={session} uniteLegale={uniteLegale} />
+          {hasRights(session, ApplicationRights.conformiteSociale) && (
+            <ConformiteSocialeSection
+              session={session}
+              uniteLegale={uniteLegale}
+            />
+          )}
+          {hasRights(session, ApplicationRights.conformiteFiscale) && (
+            <ConformiteFiscaleSection
+              session={session}
+              uniteLegale={uniteLegale}
+            />
           )}
           <ActesSection session={session} uniteLegale={uniteLegale} />
           {hasRights(session, ApplicationRights.travauxPublics) && (

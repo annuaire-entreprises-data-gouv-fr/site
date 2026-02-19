@@ -29,39 +29,40 @@ export type IConformiteMSA = IConformite & {
   status: "a_jour" | "non_a_jour" | "sous_investigation";
 };
 
-export type IConformiteUniteLegale = {
-  fiscale: IConformiteFiscale | IAPINotRespondingError;
+export type IConformiteSocialeUniteLegale = {
   vigilance: IConformiteVigilance | IAPINotRespondingError;
   msa: IConformiteMSA | IAPINotRespondingError;
 };
 
-const scope = ApplicationRightsToScopes[ApplicationRights.conformite];
+export type IConformiteFiscaleUniteLegale = {
+  fiscale: IConformiteFiscale | IAPINotRespondingError;
+};
 
-export const getConformiteEntreprise = async (
+const scopeSociale =
+  ApplicationRightsToScopes[ApplicationRights.conformiteSociale];
+const scopeFiscale =
+  ApplicationRightsToScopes[ApplicationRights.conformiteFiscale];
+
+export const getConformiteSocialeEntreprise = async (
   maybeSiret: string,
   params: { useCase?: UseCase }
-): Promise<IConformiteUniteLegale> => {
+): Promise<IConformiteSocialeUniteLegale> => {
   const siret = verifySiret(maybeSiret as string);
   const siren = extractSirenFromSiret(siret);
 
-  const [fiscale, vigilance, msa] = await Promise.all([
-    clientApiEntrepriseConformiteFiscale(siren, scope, params.useCase).catch(
-      (error) =>
-        handleApiEntrepriseError(error, {
-          siren,
-          siret,
-          apiResource: "ConformiteFiscale",
-        })
+  const [vigilance, msa] = await Promise.all([
+    clientApiEntrepriseConformiteVigilance(
+      siren,
+      scopeSociale,
+      params.useCase
+    ).catch((error) =>
+      handleApiEntrepriseError(error, {
+        siren,
+        siret,
+        apiResource: "ConformiteVigilance",
+      })
     ),
-    clientApiEntrepriseConformiteVigilance(siren, scope, params.useCase).catch(
-      (error) =>
-        handleApiEntrepriseError(error, {
-          siren,
-          siret,
-          apiResource: "ConformiteVigilance",
-        })
-    ),
-    clientApiEntrepriseConformiteMSA(siret, scope, params.useCase).catch(
+    clientApiEntrepriseConformiteMSA(siret, scopeSociale, params.useCase).catch(
       (error) =>
         handleApiEntrepriseError(error, {
           siren,
@@ -72,8 +73,31 @@ export const getConformiteEntreprise = async (
   ]);
 
   return {
-    fiscale,
     vigilance,
     msa,
+  };
+};
+
+export const getConformiteFiscaleEntreprise = async (
+  maybeSiret: string,
+  params: { useCase?: UseCase }
+): Promise<IConformiteFiscaleUniteLegale> => {
+  const siret = verifySiret(maybeSiret as string);
+  const siren = extractSirenFromSiret(siret);
+
+  const fiscale = await clientApiEntrepriseConformiteFiscale(
+    siren,
+    scopeFiscale,
+    params.useCase
+  ).catch((error) =>
+    handleApiEntrepriseError(error, {
+      siren,
+      siret,
+      apiResource: "ConformiteFiscale",
+    })
+  );
+
+  return {
+    fiscale,
   };
 };

@@ -6,7 +6,12 @@ export const getAgentBeneficiairesSchema = z.object({
   useCase: z.nativeEnum(UseCase).optional(),
 });
 
-export const getAgentConformiteEntrepriseSchema = z.object({
+export const getAgentConformiteFiscaleEntrepriseSchema = z.object({
+  siret: z.string().min(1, "Siret is required"),
+  useCase: z.nativeEnum(UseCase).optional(),
+});
+
+export const getAgentConformiteSocialeEntrepriseSchema = z.object({
   siret: z.string().min(1, "Siret is required"),
   useCase: z.nativeEnum(UseCase).optional(),
 });
