@@ -11,6 +11,7 @@
 # more:
 #   - label: libellé
 #     href: url
+slug: extraire-liste-entreprises
 administrations:
   - insee
 group: data
