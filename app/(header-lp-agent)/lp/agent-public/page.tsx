@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
-import { Link } from "#components/Link";
-import { Section } from "#components/section";
-import ButtonLink from "#components-ui/button";
 import { default as ButtonProConnect } from "#components-ui/button-pro-connect";
 import FullWidthContainer from "#components-ui/container";
-import { SimpleSeparator } from "#components-ui/horizontal-separator";
 import { Icon } from "#components-ui/icon/wrapper";
 import { Tag } from "#components-ui/tag";
-import { administrationsMetaData } from "#models/administrations";
-import { isLoggedIn } from "#models/authentication/user/rights";
-import type { ISession } from "#models/authentication/user/session";
 import constants from "#models/constants";
-import type { AppRouterProps } from "#utils/server-side-helper/extract-params";
-import getSession from "#utils/server-side-helper/get-session";
 import styles from "./style.module.css";
 
 export const metadata: Metadata = {
@@ -25,239 +16,196 @@ export const metadata: Metadata = {
   },
 };
 
-const isLoggedInMessage = (session: ISession | null) => (
-  <div>
-    Vous êtes connecté en tant que : <strong>{session?.user?.email}</strong>
-  </div>
-);
-
-const LandingPageAgent = async (props: AppRouterProps) => {
-  const session = await getSession();
-
-  return (
-    <div className={styles["page"]}>
+const LandingPageAgent = () => (
+  <div className={styles["page"]}>
+    <FullWidthContainer
+      style={{
+        background: `radial-gradient(circle at 15% 25%, #f5efff 0, transparent 40%),
+           radial-gradient(circle at 80% 30%, #e8f4ff 0, transparent 42%),
+           linear-gradient(180deg, #f7f8ff 0%, #e9f5ff 65%, #ffffff 100%)`,
+      }}
+    >
       <section className={styles["hero"]}>
-        <div>
-          <header style={{ marginBottom: "2rem" }}>
-            <h1>Agents publics, votre temps est précieux !</h1>
-            <p className="fr-text--lead">
-              Accédez à toutes les données publiques des entreprises et des
-              associations. C’est gratuit, pour toutes les administrations.
-            </p>
-            <a
-              href="/modalites-utilisation"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              Consultez nos modalités d’utilisation
-            </a>
-          </header>
-          {isLoggedIn(session) ? (
-            isLoggedInMessage(session)
-          ) : (
+        <div className={styles["hero-content"]}>
+          <h1>
+            L’Annuaire de référence pour
+            <br />
+            toutes les données d’entreprise
+          </h1>
+          <p className="fr-text--lead">
+            Accédez aux données essentielles pour vos missions
+            <br />
+            et prenez vos décisions en toute confiance.
+          </p>
+          <div className={styles["hero-cta"]}>
             <ButtonProConnect
               event="BTN_LP_HERO"
               noFootLink
               shouldRedirectToReferer
             />
-          )}
-        </div>
-        <img alt="" src="/images/lp-agent/secure-folder 1.svg" />
-      </section>
-      <FullWidthContainer>
-        <h2>
-          Toutes les données des entreprises et des associations, au même
-          endroit
-        </h2>
-        <p>
-          Plus besoin de redemander les pièces justificatives et les documents
-          aux entreprises, tout est <strong>déjà</strong> dans l’Annuaire des
-          Entreprises !
-        </p>
-        <section
-          className={`fr-grid-row fr-grid-row--gutters ${styles["value"]}`}
-        >
-          <div className="fr-col-12  fr-col-md-4">
-            <Section title="Site grand public">
-              <i>Accessible à toutes et à tous</i>
-              <SimpleSeparator />
-              <ul>
-                <li>Dénomination, adresse etc.</li>
-                <li>N° TVA et EORI</li>
-                <li>Justificatifs d’existence</li>
-                <li>Annonces légales</li>
-                <li>Dirigeant(e)s</li>
-                <li>Qualiopi, BIO et RGE</li>
-                <li>Label entreprise inclusive</li>
-                <li>Index Egapro</li>
-                <li>Qualité ESS</li>
-                <li>Comptes de résultats</li>
-                <li>Élus et dirigeants d’administration</li>
-              </ul>
-            </Section>
           </div>
-          <div className="fr-col-12  fr-col-md-8">
-            <Section isProtected title="Espace agent public">
+        </div>
+
+        <div className={styles["hero-video"]}>
+          {/** biome-ignore lint/a11y/useMediaCaption: no audio */}
+          <video
+            aria-label="Vidéo de présentation de l'Annuaire des Entreprises"
+            className={styles["hero-video-player"]}
+            controls
+            preload="metadata"
+          >
+            <source
+              src="/videos/agent_landing.compressed.mp4"
+              type="video/mp4"
+            />
+            Votre navigateur ne supporte pas la lecture de vidéos HTML5.
+          </video>
+        </div>
+      </section>
+    </FullWidthContainer>
+    <section className={styles["data-section"]}>
+      <h2>
+        Toutes les données des entreprises et des associations, au même endroit.
+      </h2>
+      <p className="fr-text--lg">
+        Plus besoin de redemander les pièces justificatives et les documents aux
+        entreprises, tout est déjà dans l’Annuaire des Entreprises.
+      </p>
+
+      <div className={styles["data-card-shell"]}>
+        <div className={styles["data-card"]}>
+          <div className="fr-grid-row fr-grid-row--gutters">
+            <div
+              className={`fr-col-12 fr-col-md-3 ${styles["illustration-col"]}`}
+            />
+
+            <div className="fr-col-12 fr-col-md-9">
+              <div className={styles["data-card-header"]}>
+                <h3>Données accessibles via l’Annuaire des Entreprises</h3>
+                <p>
+                  Cette liste s’adapte à votre mission et vos habilitations
+                  juridiques.
+                </p>
+                <a
+                  href={constants.links.documentation.habilitation}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  Tout savoir sur les habilitations
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`fr-grid-row fr-grid-row--gutters ${styles["data-card-content"]}`}
+          >
+            <div
+              className={`fr-col-12 fr-col-md-3 ${styles["illustration-col"]}`}
+            >
+              <img
+                alt=""
+                className={styles["data-illustration"]}
+                src="/images/lp-agent/illu_locked_files.svg"
+              />
+            </div>
+
+            <div className="fr-col-12 fr-col-md-9">
               <div className="fr-grid-row fr-grid-row--gutters">
-                <div className="fr-col-12  fr-col-md-6">
-                  <i>Accessible aux administrations, sans conditions</i>
-                  <SimpleSeparator />
+                <div className="fr-col-12 fr-col-md-6">
+                  <h4>Identité & informations officielles</h4>
                   <ul>
+                    <li>Dénomination, adresse etc.</li>
+                    <li>N° TVA et EORI</li>
+                    <li>Justificatifs d’existence</li>
+                    <li>Annonces légales</li>
                     <li>Données des non-diffusibles</li>
-                    <li>Date de naissance des dirigeant(e)s</li>
-                    <li>Comparaison des dirigeants RCS/RNE</li>
-                    <li>Qualibat, OPQIBI, Qualifelec</li>
-                    <li>Dirigeant(e)s des associations</li>
-                    <li>Documents des associations (PDF)</li>
+                    <li>
+                      Effectifs annuels <HabilitationTag />
+                    </li>
+                    <li>
+                      Liens capitalistiques <HabilitationTag />
+                    </li>
+                  </ul>
+
+                  <h4>Documents et conformité des entreprises</h4>
+                  <ul>
                     <li>Documents et actes au RNE (PDF)</li>
-                    <li>Bilans au RNE (PDF)</li>
+                    <li>
+                      Conformité fiscale, sociale et MSA <HabilitationTag />
+                    </li>
+                  </ul>
+
+                  <h4>Comptes et bilans</h4>
+                  <ul>
+                    <li>Comptes de résultats</li>
+                    <li>Bilans au RNE</li>
+                    <li>
+                      Chiffres d’affaires <HabilitationTag />
+                    </li>
+                    <li>
+                      Liasses fiscales <HabilitationTag />
+                    </li>
+                    <li>
+                      Bilans de la Banque de France <HabilitationTag />
+                    </li>
+                    <li>
+                      Registre des Bénéficiaires Effectifs <HabilitationTag />
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="fr-col-12 fr-col-md-6">
+                  <h4>Qualité et labels</h4>
+                  <ul>
+                    <li>Qualibat, OPQIBI, Qualifelec</li>
+                    <li>Label entreprise inclusive</li>
+                    <li>Qualiopi, BIO et RGE</li>
+                    <li>Index Egapro</li>
+                    <li>Qualité ESS</li>
+                    <li>
+                      Travaux publics (CIBTP, CNETP, ProBTP, FNTP){" "}
+                      <HabilitationTag />
+                    </li>
+                  </ul>
+
+                  <h4>Dirigeant(es)</h4>
+                  <ul>
+                    <li>Noms des dirigeant(es)</li>
+                    <li>Date de naissance des dirigeant(es)</li>
+                    <li>Comparaison des dirigeants RCS/RNE</li>
+                    <li>Élus et dirigeants d’administration</li>
+                  </ul>
+
+                  <h4>Associations</h4>
+                  <ul>
+                    <li>Dirigeant(es) des associations</li>
+                    <li>Documents des associations (PDF)</li>
                     <li>Subventions des associations</li>
                   </ul>
                 </div>
-                <div className="fr-col-12  fr-col-md-6">
-                  <i>Sous condition d’habilitation juridique</i>
-                  <SimpleSeparator />
-                  <ul>
-                    <li>
-                      Conformité fiscale, sociale et MSA
-                      <span className={styles["asterix-et-obelix"]}>*</span>
-                    </li>
-                    <li>
-                      Effectifs annuels
-                      <span className={styles["asterix-et-obelix"]}>*</span>
-                    </li>
-                    <li>
-                      Chiffres d’affaires
-                      <span className={styles["asterix-et-obelix"]}>*</span>
-                    </li>
-                    <li>
-                      Liens capitalistiques
-                      <span className={styles["asterix-et-obelix"]}>*</span>
-                    </li>
-                    <li>
-                      Bilans de la Banque de France
-                      <span className={styles["asterix-et-obelix"]}>*</span>
-                    </li>
-                    <li>
-                      Travaux publics (CIBTP, CNETP, ProBTP, FNTP)
-                      <span className={styles["asterix-et-obelix"]}>*</span>
-                    </li>
-                    <li>
-                      Liasses fiscales
-                      <span className={styles["asterix-et-obelix"]}>*</span>
-                    </li>
-                    <li>
-                      Registre des Bénéficiaires Effectifs
-                      <span className={styles["asterix-et-obelix"]}>*</span>
-                    </li>
-                  </ul>
-                  <span className={styles["asterix-et-obelix"]}>*</span>
-                  <i>
-                    🚧 fonctionnalité en cours de construction.{" "}
-                    <a href={constants.links.tchap}>Suivez-nous sur Tchap</a>{" "}
-                    pour être informé(e) des avancées.
-                  </i>
-                </div>
-              </div>
-              <SimpleSeparator />
-              <div className="layout-center">
-                {isLoggedIn(session) ? (
-                  isLoggedInMessage(session)
-                ) : (
-                  <ButtonProConnect
-                    event="BTN_LP_HERO"
-                    shouldRedirectToReferer
-                  />
-                )}
-              </div>
-            </Section>
-          </div>
-        </section>
-      </FullWidthContainer>
-      <FullWidthContainer
-        style={{
-          background: "var(--annuaire-colors-pastelBlue)",
-        }}
-      >
-        <section>
-          <h2>Comment l’Annuaire vous aide au quotidien ?</h2>
-          <div className={styles["case-example"]}>
-            <div>
-              <Tag color="agent">
-                <Icon slug="lockFill">Écarter les risques de fraude</Icon>
-              </Tag>
-              <img alt="" src="/images/lp-agent/illu_fraude.svg" />
-              <div>
-                <p>
-                  J’ai directement accès aux informations des entreprises
-                  non-diffusibles, sans avoir à leur demander de documents en
-                  plus !
-                </p>
-                <div>
-                  <strong>Chargé du calcul de la cotisation CFE</strong>
-                </div>
-                <i>Administration centrale</i>
-              </div>
-            </div>
-            <div>
-              <Tag color="agent">
-                <Icon slug="lockFill">Instruire un marché public</Icon>
-              </Tag>
-              <img alt="" src="/images/lp-agent/illu_marchepublic.svg" />
-              <div>
-                <p>
-                  Je dois vérifier que nos titulaires sont toujours à jour de
-                  leurs obligations fiscales et sociales pour une attribution et
-                  un suivi des marchés publics.
-                </p>
-                <div>
-                  <strong>Chargé de mission de la commande publique</strong>
-                </div>
-                <i>Administration déconcentrée</i>
               </div>
             </div>
           </div>
-        </section>
-      </FullWidthContainer>
-      <br />
-      <section
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "1rem",
-        }}
-      >
-        <h2>
-          Rejoignez les agents qui utilisent déjà l’Annuaire des Entreprises !
-        </h2>
-        <ButtonLink to={constants.links.tchap}>
-          Rejoindre la communauté sur Tchap
-        </ButtonLink>
-      </section>
-      <br />
-      <section>
-        <h3>
-          L’Annuaire des Entreprises est opéré par la DINUM, avec le partenariat
-          des administrations suivantes :
-        </h3>
-        <div className={styles["logo-soup"]}>
-          {Object.values(administrationsMetaData)
-            .sort((a, b) => a.long.localeCompare(b.long))
-            .map(({ slug, long, logoType }) =>
-              logoType && slug ? (
-                <img alt={long} key={slug} src={`/images/logos/${slug}.svg`} />
-              ) : null
-            )}
         </div>
-        <p>
-          <Link href="/administration">
-            → Voir la liste complète des administrations partenaires
-          </Link>
-        </p>
-      </section>
-    </div>
-  );
-};
+
+        <div className={styles["data-card-footer"]}>
+          <p>
+            Pour accéder aux données, il ne reste plus qu’à vous connecter !
+          </p>
+          <ButtonProConnect event="BTN_LP_HERO" />
+        </div>
+      </div>
+    </section>
+  </div>
+);
+
+const HabilitationTag = () => (
+  <span className={styles["habilitation-tag"]}>
+    <Tag color="agent" size="small">
+      <Icon slug="lockFill">Sous habilitation</Icon>
+    </Tag>
+  </span>
+);
 
 export default LandingPageAgent;
