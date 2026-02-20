@@ -68,8 +68,9 @@ const LandingPageAgent = () => (
         Toutes les données des entreprises et des associations, au même endroit.
       </h2>
       <p className="fr-text--lg">
-        En tant qu'agent public, plus besoin de redemander les pièces justificatives et les documents aux
-        entreprises, tout est déjà dans l’Annuaire des Entreprises.
+        En tant qu'agent public, plus besoin de redemander les pièces
+        justificatives et les documents aux entreprises, tout est déjà dans
+        l’Annuaire des Entreprises.
       </p>
 
       <div className={styles["data-card-shell"]}>
@@ -81,7 +82,10 @@ const LandingPageAgent = () => (
 
             <div className="fr-col-12 fr-col-md-9">
               <div className={styles["data-card-header"]}>
-                <h3>Données accessibles via l’Annuaire des Entreprises pour les agents publics</h3>
+                <h3>
+                  Données accessibles via l’Annuaire des Entreprises pour les
+                  agents publics
+                </h3>
                 <p>
                   Cette liste s’adapte à votre mission et vos habilitations
                   juridiques.
