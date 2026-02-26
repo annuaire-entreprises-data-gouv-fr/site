@@ -2,7 +2,6 @@
 .github
 .next
 coverage
-cypress
 node_modules
 perf-results
 
