@@ -23,6 +23,7 @@ cspell.json
 
 # production
 /build
+/perf-results
 
 # misc
 .DS_Store
