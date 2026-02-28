@@ -1,6 +1,10 @@
 import { estNonDiffusibleStrict } from "#models/core/diffusion";
 import { estActif } from "#models/core/etat-administratif";
-import { type IUniteLegale, isPersonnePhysique } from "#models/core/types";
+import {
+  type IEtablissement,
+  type IUniteLegale,
+  isPersonnePhysique,
+} from "#models/core/types";
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string
@@ -29,7 +33,7 @@ export const isTwoMonthOld = (dateAsString: string) => {
 /**
  * Return true if an uniteLegale should be **ignored** by indexing bots
  */
-export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
+export const shouldNotIndexUniteLegale = (uniteLegale: IUniteLegale) => {
   if (isPersonnePhysique(uniteLegale)) {
     // we dont index personnes physiques
     return true;
@@ -39,6 +43,25 @@ export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
     return true;
   }
   if (estNonDiffusibleStrict(uniteLegale)) {
+    // we dont index non diffusible strict
+    return true;
+  }
+  return false;
+};
+
+/**
+ * Return true if an etablissement should be **ignored** by indexing bots
+ */
+export const shouldNotIndexEtablissement = (etablissement: IEtablissement) => {
+  if (isPersonnePhysique(etablissement)) {
+    // we dont index personnes physiques
+    return true;
+  }
+  if (!estActif(etablissement)) {
+    // we dont index closed entities
+    return true;
+  }
+  if (estNonDiffusibleStrict(etablissement)) {
     // we dont index non diffusible strict
     return true;
   }
