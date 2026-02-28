@@ -19,7 +19,6 @@ const codeJuridiquesThatMightBeAuthorized: string[] = [
   "6565",
   "6566",
   "6567",
-  "7321",
   "7322",
   "7323",
   "7345",
