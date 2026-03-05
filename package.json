@@ -22,7 +22,8 @@
     "test:api-clients": "jest clients --silent",
     "test:api-clients:update-snapshots": "jest clients --silent -u",
     "lint": "ultracite check",
-    "lint:fix": "ultracite fix"
+    "lint:fix": "ultracite fix",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.992.0",
@@ -44,9 +45,10 @@
     "iron-session": "^8.0.4",
     "maplibre-gl": "^4.7.1",
     "matomo-tracker": "~2.2.4",
-    "next": "^16.1.6",
+    "next": "16.1.6",
     "next-safe-action": "^8.0.11",
     "openid-client": "^5.7.1",
+    "patch-package": "^8.0.1",
     "qrcode": "^1.5.4",
     "react": "^19.2.4",
     "react-chartjs-2": "^5.3.0",
