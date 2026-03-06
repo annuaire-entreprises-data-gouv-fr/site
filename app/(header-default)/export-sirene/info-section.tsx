@@ -50,7 +50,7 @@ export default function InfoSection() {
         </a>{" "}
         et ce{" "}
         <a
-          href="https://guides.data.gouv.fr/reutiliser-des-donnees/guide-traitement-et-analyse-de-donnees/manipuler-des-donnees/ouvrir-des-donnees"
+          href="https://guides.data.gouv.fr/guides/reutiliser-des-donnees/guide-traitement-et-analyse-de-donnees/manipuler-des-donnees/ouvrir-des-donnees"
           rel="noreferrer noopener"
           target="_blank"
         >
