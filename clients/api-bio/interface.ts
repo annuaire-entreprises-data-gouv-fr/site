@@ -1,91 +1,91 @@
-export type IBioResponse = {
-  nbTotal: string;
+export interface IBioResponse {
   items: IBioItem[];
-};
+  nbTotal: string;
+}
 
-export type IBioItem = {
-  id: number;
-  raisonSociale: string;
+export interface IBioItem {
+  activites: Activite[];
+  adressesOperateurs: AdressesOperateur[];
+  categories: Category[];
+  certificats: Certificat[];
+  codeNAF?: string;
+  dateMaj: string;
   denominationcourante: string;
+  email?: string;
+  gerant?: string;
+  id: number;
+  mixite: string;
+  numeroBio: number;
+  productions: Production[];
+  raisonSociale: string;
   reseau: string;
   siret?: string;
-  numeroBio: number;
-  telephone?: string;
-  email?: string;
-  codeNAF?: string;
-  gerant?: string;
-  dateMaj: string;
-  telephoneCommerciale?: string;
-  categories: Category[];
   siteWebs: SiteWeb[];
-  adressesOperateurs: AdressesOperateur[];
-  productions: Production[];
-  activites: Activite[];
-  certificats: Certificat[];
-  mixite: string;
-};
+  telephone?: string;
+  telephoneCommerciale?: string;
+}
 
-export type Category = {
+export interface Category {
   id: number;
   nom: string;
-};
+}
 
-export type SiteWeb = {
-  id: number;
-  url: string;
+export interface SiteWeb {
   active: boolean;
+  id: number;
   operateurId: number;
-  typeSiteWebId: number;
   typeSiteWeb: TypeSiteWeb;
-};
+  typeSiteWebId: number;
+  url: string;
+}
 
-export type TypeSiteWeb = {
+export interface TypeSiteWeb {
   id: number;
   nom: string;
   status: number;
-};
+}
 
-export type AdressesOperateur = {
-  id: number;
-  lieu: string;
-  codePostal: string;
-  ville: string;
-  lat: number;
-  long: number;
-  codeCommune: string;
+export interface AdressesOperateur {
   active: boolean;
+  codeCommune: string;
+  codePostal: string;
   departementId: number;
+  id: number;
+  lat: number;
+  lieu: string;
+  long: number;
   typeAdresseOperateurs: string[];
-};
+  ville: string;
+}
 
-export type Production = {
-  id: number;
+export interface Production {
   code: string;
-  nom: string;
   etatProductions: EtatProduction[];
-};
-
-export type EtatProduction = {
-  id: number;
-  etatProduction: string;
-};
-
-export type Activite = {
   id: number;
   nom: string;
-};
+}
 
-export type Certificat = {
-  organisme: string;
+export interface EtatProduction {
+  etatProduction: string;
+  id: number;
+}
+
+export interface Activite {
+  id: number;
+  nom: string;
+}
+
+export interface Certificat {
+  dateArret?: string;
+  dateEngagement?: string;
+  dateNotification: string;
+  dateSuspension?: string;
   etatCertification?:
     | "ARRETEE"
     | "ENGAGEE"
     | "NON ENGAGEE"
     | "SUSPENDUE"
     | null;
-  dateSuspension?: string;
-  dateArret?: string;
-  dateEngagement?: string;
-  dateNotification: string;
+  organisme: string;
   url: string;
-};
+}

@@ -7,9 +7,9 @@ import { Exception } from "#models/exceptions";
 import { isSiren } from "#utils/helpers";
 import { logWarningInSentry } from "#utils/sentry";
 
-type QrCodeProps = {
+interface QrCodeProps {
   siren: string;
-};
+}
 
 export function QrCode({ siren }: QrCodeProps) {
   const onDownload = useCallback(async () => {

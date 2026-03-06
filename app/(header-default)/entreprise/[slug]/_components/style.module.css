@@ -1,9 +1,9 @@
 .inscriptions-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
   column-gap: 20px;
+  align-items: center;
+  justify-content: space-between;
 }
 .inscriptions-wrapper > div {
   flex-grow: 1;

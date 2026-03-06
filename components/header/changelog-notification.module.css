@@ -1,13 +1,13 @@
 .changelogNotification::before {
-  content: "";
   position: absolute;
   top: 5px;
   right: 2px;
   width: 10px;
   height: 10px;
+  content: "";
   background-color: #ff0000;
-  border-radius: 50%;
   border: 2px solid #fff;
+  border-radius: 50%;
 }
 
 .changelogNotification {

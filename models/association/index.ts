@@ -111,11 +111,11 @@ export const getAssociationFromSlug = async (
   }
 };
 
-type IFetchAssociationExceptionArgs = {
-  message?: string;
+interface IFetchAssociationExceptionArgs {
   cause: any;
   context?: IExceptionContext;
-};
+  message?: string;
+}
 class FetchAssociationException extends FetchRessourceException {
   constructor(args: IFetchAssociationExceptionArgs) {
     super({

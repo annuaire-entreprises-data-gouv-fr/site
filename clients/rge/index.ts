@@ -8,7 +8,7 @@ import type { Siren } from "#utils/helpers";
 import { httpGet } from "#utils/network";
 import { getCertificatLogoPath } from "../../utils/helpers/certifications/certificats-logo";
 
-type IRGEResponse = {
+interface IRGEResponse {
   results: {
     adresse: string;
     code_postal: string;
@@ -26,7 +26,7 @@ type IRGEResponse = {
     telephone: string;
     url_qualification: string;
   }[];
-};
+}
 
 /**
  * Reconnu Garant de l'Environnement (RGE)

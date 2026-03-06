@@ -10,11 +10,11 @@ import {
   RequestAbortedDuringUnloadException,
 } from "#utils/network/frontend";
 
-type IFetchDataType<T> = {
-  fetchData: () => Promise<T>;
+interface IFetchDataType<T> {
   administration: EAdministration;
+  fetchData: () => Promise<T>;
   logError: (error: any) => void;
-};
+}
 
 /**
  * Hook to fetch data from an external public API (i.e. opendatasoft, service-public, etc.)

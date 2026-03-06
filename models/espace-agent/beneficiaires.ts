@@ -12,19 +12,14 @@ import type { UseCase } from "#models/use-cases";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
 
-type IModalite = {
-  total: number;
-  pleine_propriete: number;
+interface IModalite {
   nue_propriete: number;
-};
+  pleine_propriete: number;
+  total: number;
+}
 
-export type IBeneficiairesEffectif = {
-  nom: string;
-  prenoms: string;
-  moisNaissance: string;
+export interface IBeneficiairesEffectif {
   anneeNaissance: string;
-  nationalite: string;
-  paysResidence: string;
   modalites: {
     detention_de_capital: {
       parts_totale: number;
@@ -71,7 +66,12 @@ export type IBeneficiairesEffectif = {
     representant_legal: boolean;
     representant_legal_placement_sans_gestion_deleguee: boolean;
   };
-};
+  moisNaissance: string;
+  nationalite: string;
+  nom: string;
+  paysResidence: string;
+  prenoms: string;
+}
 
 const scope = ApplicationRightsToScopes[ApplicationRights.beneficiaires];
 

@@ -13,15 +13,15 @@ import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import type { UseCase } from "#models/use-cases";
 
-type WrappedSectionProps = {
-  uniteLegale: IUniteLegale;
-  session: ISession | null;
-  useCase: UseCase;
-  title: string;
+interface WrappedSectionProps {
   id: string;
-  sources: EAdministration[];
   isProtected: boolean;
-};
+  session: ISession | null;
+  sources: EAdministration[];
+  title: string;
+  uniteLegale: IUniteLegale;
+  useCase: UseCase;
+}
 
 const DefaultIntroContent = () => (
   <p>

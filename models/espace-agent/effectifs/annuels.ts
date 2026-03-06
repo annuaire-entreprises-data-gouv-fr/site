@@ -7,10 +7,10 @@ import {
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 
-export type IEffectifsAnnuelsProtected = {
-  effectif: number;
+export interface IEffectifsAnnuelsProtected {
   anneeEffectif: string;
-};
+  effectif: number;
+}
 
 export const getEffectifsAnnuelsProtected = async (
   maybeSiren: string

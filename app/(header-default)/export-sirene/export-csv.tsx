@@ -11,17 +11,17 @@ import InfoSection from "./info-section";
 import styles from "./styles.module.css";
 
 export interface ExtendedExportCsvInput extends ExportCsvInput {
-  headcount: { min: number; max: number };
   categories: ("PME" | "ETI" | "GE")[];
+  headcount: { min: number; max: number };
   headcountEnabled: boolean;
+  legalCategoriesNiveau1: string[];
+  legalCategoriesNiveau2: string[];
+  legalCategoriesNiveau3: string[];
   locations: Array<{
     type: "cp" | "dep" | "reg" | "insee";
     value: string;
     label: string;
   }>;
-  legalCategoriesNiveau1: string[];
-  legalCategoriesNiveau2: string[];
-  legalCategoriesNiveau3: string[];
 }
 
 const getFileSize = (count: number) => Math.ceil((count * 300) / 1000);
@@ -33,10 +33,10 @@ const SERVICE_UNAVAILABLE_MESSAGE =
 const INVALID_FILTERS_MESSAGE =
   "Certains critères saisis sont invalides. Vérifiez vos filtres puis relancez.";
 
-type ApiErrorBody = {
-  error?: string;
+interface ApiErrorBody {
   details?: Array<{ field?: string; message?: string }>;
-};
+  error?: string;
+}
 
 const getStatusErrorMessage = (status: number): string => {
   if (status === 400) {

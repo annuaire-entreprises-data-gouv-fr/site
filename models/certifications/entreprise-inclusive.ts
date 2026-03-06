@@ -10,14 +10,14 @@ import { FetchRessourceException } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
 import type { IUniteLegale } from "../core/types";
 
-export type IEntrepriseInclusive = {
-  marcheInclusionLink: string;
-  type: string;
+export interface IEntrepriseInclusive {
   category: string;
-  siret: string;
   city: string;
   department: string;
-};
+  marcheInclusionLink: string;
+  siret: string;
+  type: string;
+}
 
 export const getEntrepriseInclusive = async (
   uniteLegale: IUniteLegale

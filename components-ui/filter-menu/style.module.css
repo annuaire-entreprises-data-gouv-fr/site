@@ -1,12 +1,12 @@
 .selected-filter-container {
   display: flex;
   align-items: center;
-  padding: 5px 30px 5px 10px;
   justify-content: center;
+  padding: 5px 30px 5px 10px;
   color: var(--annuaire-colors-frBlue);
   background-color: var(--annuaire-colors-pastelBlue);
-  border-radius: 3px;
   border: 1px solid var(--annuaire-colors-frBlue);
+  border-radius: 3px;
 }
 
 .selected-filter-container:hover {
@@ -14,10 +14,10 @@
 }
 
 .selected-filter-container > a {
-  padding: 5px 10px 5px 5px;
-  font-weight: bold;
   position: absolute;
   right: 0;
+  padding: 5px 10px 5px 5px;
+  font-weight: bold;
 }
 
 .selected-filter-container > a:hover {
@@ -28,65 +28,65 @@
 
 div.search-filter-label-container {
   position: relative;
-  margin: 0;
-  user-select: none;
-  margin-right: 8px;
   padding-top: 4px;
   padding-bottom: 4px;
+  margin: 0;
+  margin-right: 8px;
+  user-select: none;
 }
 
 span.search-filter-label {
-  color: var(--text-default-grey);
-  user-select: none;
   display: flex;
   align-items: center;
+  padding: 5px 10px;
+  color: var(--text-default-grey);
   cursor: pointer;
+  user-select: none;
   border: 1px solid #ccc;
   border-radius: 3px;
-  padding: 5px 10px;
 }
 
 span.search-filter-label:hover {
-  border-color: #0a76f6;
   background-color: #fefefe;
+  border-color: #0a76f6;
 }
 
 .close-container {
-  z-index: 10010;
-  display: none;
   position: fixed;
   top: 20px;
   right: 20px;
+  z-index: 10010;
+  display: none;
 }
 
 .container {
-  box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
-  top: 100%;
-  border: none;
-  left: 0;
   position: absolute;
-  margin-top: 5px;
-  width: 480px;
+  top: 100%;
+  left: 0;
   z-index: 1000;
+  width: 480px;
+  margin-top: 5px;
+  border: none;
+  box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
 }
 
 .container:before {
-  content: " ";
   position: absolute;
   bottom: 100%;
   /* At the bottom of the tooltip */
   left: 10%;
   margin-left: 0;
-  border-width: 10px;
-  border-style: solid;
+  content: " ";
   border-color: transparent transparent white transparent;
+  border-style: solid;
+  border-width: 10px;
 }
 
 .container > .filter-container {
-  max-height: 400px;
-  overflow-y: auto;
   z-index: 100;
+  max-height: 400px;
   padding: 0 4px;
+  overflow-y: auto;
 }
 
 @media only screen and (min-width: 1px) and (max-width: 992px) {
@@ -94,9 +94,9 @@ span.search-filter-label:hover {
     position: fixed;
     top: 0;
     left: 0;
-    padding-top: 50px !important;
     width: 100vw;
     height: 100vh;
+    padding-top: 50px !important;
     margin-top: 0;
   }
 

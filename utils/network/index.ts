@@ -1,13 +1,13 @@
-export type IDefaultRequestConfig = {
-  url?: string;
-  timeout?: number;
-  params?: any;
+export interface IDefaultRequestConfig {
+  data?: unknown;
   headers?: any;
   method?: "POST" | "GET" | "PATCH" | "PUT" | "DELETE";
+  params?: any;
   responseType?: "blob" | "arraybuffer" | "stream";
-  data?: unknown;
   signal?: AbortSignal;
-};
+  timeout?: number;
+  url?: string;
+}
 
 /**
  * Inner client allow us to resolve async import on module load

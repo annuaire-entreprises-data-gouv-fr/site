@@ -3,8 +3,6 @@ import type { PropsWithChildren } from "react";
 import styles from "./styles.module.css";
 
 interface ITagProps {
-  size?: "medium" | "small";
-  id?: string;
   color?:
     | "default"
     | "error"
@@ -13,12 +11,14 @@ interface ITagProps {
     | "success"
     | "warning"
     | "agent";
+  id?: string;
   // title?: string;
   link?: {
     href: string;
     "aria-label": string;
   };
   maxWidth?: string;
+  size?: "medium" | "small";
 }
 
 export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({

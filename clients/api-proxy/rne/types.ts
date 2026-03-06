@@ -1,27 +1,27 @@
-export type IRNEEtatCivilProxyResponse = {
+export interface IRNEEtatCivilProxyResponse {
+  dateDemission: string | null;
+  dateNaissancePartial: string;
+  estDemissionnaire: boolean;
   nom: string;
   prenom: string;
   role: string;
-  dateNaissancePartial: string;
-  estDemissionnaire: boolean;
-  dateDemission: string | null;
-};
-export type IRNEPersonneMoraleProxyResponse = {
+}
+export interface IRNEPersonneMoraleProxyResponse {
   denomination: string;
   natureJuridique: string;
   role: string;
   siren: string;
-};
+}
 export type IRNEObservationsProxyResponse = {
   dateAjout: string;
   description: string;
   numObservation: string;
 }[];
 
-export type IRNEProxyResponse = {
-  observations: IRNEObservationsProxyResponse;
+export interface IRNEProxyResponse {
   dirigeants: (IRNEPersonneMoraleProxyResponse | IRNEEtatCivilProxyResponse)[];
-};
+  observations: IRNEObservationsProxyResponse;
+}
 
 export type IRNEObservationsFallbackProxyResponse =
   IRNEObservationsProxyResponse;

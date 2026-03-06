@@ -30,15 +30,6 @@ export type INomCertificat =
   | "Qualisol Collectif";
 
 export interface IRGECertification {
-  companyInfo: {
-    nomEntreprise: string;
-    adresse: string;
-    email: string;
-    siret: string;
-    siteInternet: string;
-    telephone: string;
-    workingWithIndividual: boolean;
-  };
   certifications: {
     logoPath: string;
     codeQualification: string;
@@ -48,6 +39,15 @@ export interface IRGECertification {
     organisme: string;
     urlQualification: string;
   }[];
+  companyInfo: {
+    nomEntreprise: string;
+    adresse: string;
+    email: string;
+    siret: string;
+    siteInternet: string;
+    telephone: string;
+    workingWithIndividual: boolean;
+  };
 }
 
 export const getRGECertifications = async (

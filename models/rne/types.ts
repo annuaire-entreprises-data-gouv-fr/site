@@ -1,15 +1,15 @@
 interface IActeRNE {
-  id: string;
   dateDepot: string;
   detailsDocuments: { nom: string; label: string }[];
+  id: string;
 }
 
 interface IBilanRNE {
-  id: string;
-  dateDepot: string;
-  dateCloture: string;
-  typeBilan: string;
   confidentiality: string;
+  dateCloture: string;
+  dateDepot: string;
+  id: string;
+  typeBilan: string;
 }
 
 export interface IDocumentsRNE {
@@ -19,17 +19,17 @@ export interface IDocumentsRNE {
 }
 
 export interface IEtatCivil {
-  sexe: "M" | "F" | null;
+  dateDemission: string | null;
+  dateNaissance?: string;
+  dateNaissancePartial?: string;
+  estDemissionnaire: boolean;
+  lieuNaissance?: string;
+  nationalite?: string;
   nom: string;
   prenom: string;
   prenoms: string;
   role: string | null;
-  lieuNaissance?: string;
-  dateNaissancePartial?: string;
-  dateNaissance?: string;
-  nationalite?: string;
-  estDemissionnaire: boolean;
-  dateDemission: string | null;
+  sexe: "M" | "F" | null;
 }
 
 export type IEtatCivilLiensCapitalistiques = IEtatCivil & {
@@ -45,10 +45,10 @@ export type IEtatCivilMergedIGInpi = IEtatCivil & {
 };
 
 export interface IPersonneMorale {
-  siren: string;
   denomination: string;
   natureJuridique: string | null;
   role: string | null;
+  siren: string;
 }
 
 export type IPersonneMoraleMergedIGInpi = IPersonneMorale & {
@@ -97,7 +97,7 @@ export interface IDirigeantsWithMetadataMergedIGInpi {
 }
 
 export interface IRole {
-  label: string;
-  isInInpi?: boolean;
   isInIg?: boolean;
+  isInInpi?: boolean;
+  label: string;
 }

@@ -14,13 +14,13 @@ import {
 import ActiveFilterLabel from "./active-filter-label";
 import styles from "./style.module.css";
 
-type FilterMenuProps = {
-  label: string;
+interface FilterMenuProps {
   activeFilter: ISearchFilter;
+  addSaveClearButton: boolean;
+  label: string;
   searchParams: IParams;
   searchTerm: string;
-  addSaveClearButton: boolean;
-};
+}
 
 export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
   children,

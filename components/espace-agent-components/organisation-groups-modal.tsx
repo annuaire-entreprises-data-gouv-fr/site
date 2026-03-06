@@ -16,8 +16,8 @@ import styles from "./styles.module.css";
 interface IOrganisationGroupsModalProps {
   groups: IAgentsOrganizationGroup[];
   isVisible: boolean;
-  onConfirm: () => void;
   onCancel: () => void;
+  onConfirm: () => void;
 }
 
 const rewordedRights = {

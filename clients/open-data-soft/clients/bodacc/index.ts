@@ -9,31 +9,31 @@ import { logWarningInSentry } from "#utils/sentry";
 type IBodaccRecords = IBodaccA | IBodaccB | IBodaccC;
 
 interface IBodaccCoreRecord {
-  tribunal: string; // "TRIBUNAL DE COMMERCE DE BORDEAUX"
-  cp: string; // "33150"
-  region_code: number; // 75
-  region_nom_officiel: string; //'Île-de-France';
-  numerodepartement: string; // "33"
-  departement_nom_officiel: string; // "Gironde"
-  id: string; // "A202002333642"
-  publicationavis_facette: string; // "Bodacc A"
-  registre: string; // "833 310 592,833310592"
-  ville: string; // "Cenon"
   commercant: string; // "DJ BATIMENT"
+  cp: string; // "33150"
   dateparution: string; // "2020-11-30"
-  parution: string; // "20200233"
-  typeavis: string; // "annonce"
-  typeavis_lib: string; // "Avis initial"
+  departement_nom_officiel: string; // "Gironde"
   familleavis: string; // "collective"
   familleavis_lib: string; // "Procédures collectives"
-  publicationavis: string; // "A"
+  id: string; // "A202002333642"
   listepersonnes: string; // "{\"personne\": {\"typePersonne\": \"pm\", \"activite\": \"travaux de bâtiment et de rénovation intérieur et extérieur, peinture, ravalement, maçonnerie, plomberie, électricité.\", \"denomination\": \"DJ BATIMENT\", \"formeJuridique\": \"Société par actions simplifiée à associé unique\", \"numeroImmatriculation\": {\"codeRCS\": \"RCS\", \"numeroIdentification\": \"833 310 592\", \"nomGreffeImmat\": \"Bordeaux\"}, \"adresseSiegeSocial\": {\"ville\": \"Cenon\", \"pays\": \"france\", \"typeVoie\": \"rue\", \"codePostal\": \"33150\", \"numeroVoie\": \"16\", \"nomVoie\": \"du 8 Mai 1945\"}}}"
   numeroannonce: number; // 993
+  numerodepartement: string; // "33"
+  parution: string; // "20200233"
+  publicationavis: string; // "A"
+  publicationavis_facette: string; // "Bodacc A"
+  region_code: number; // 75
+  region_nom_officiel: string; //'Île-de-France';
+  registre: string; // "833 310 592,833310592"
+  tribunal: string; // "TRIBUNAL DE COMMERCE DE BORDEAUX"
+  typeavis: string; // "annonce"
+  typeavis_lib: string; // "Avis initial"
+  ville: string; // "Cenon"
 }
 
 interface IBodaccA extends IBodaccCoreRecord {
-  jugement?: string; // "{\"date\": \"2020-11-19\", \"complementJugement\": \"Jugement prononçant la clôture de la procédure de liquidation judiciaire pour insuffisance d'actif.\", \"type\": \"initial\", \"famille\": \"Jugement de clôture\", \"nature\": \"Jugement de clôture pour insuffisance d'actif\"}"
   acte?: string;
+  jugement?: string; // "{\"date\": \"2020-11-19\", \"complementJugement\": \"Jugement prononçant la clôture de la procédure de liquidation judiciaire pour insuffisance d'actif.\", \"type\": \"initial\", \"famille\": \"Jugement de clôture\", \"nature\": \"Jugement de clôture pour insuffisance d'actif\"}"
   // ex acte  :`{"creation": {"categorieCreation": "Immatriculation d'une personne physique suite à création d'un établissement principal"}, "dateCommencementActivite": "2017-10-01"}`
 }
 
@@ -165,12 +165,12 @@ const extractDetails = (annonce: IBodaccRecords): string => {
   }
 };
 
-type IBodaccParsingExceptionArguments = {
+interface IBodaccParsingExceptionArguments {
   cause: any;
   context: {
     details: string;
   };
-};
+}
 class BodaccParsingException extends Exception {
   constructor(args: IBodaccParsingExceptionArguments) {
     super({ name: "BodaccParsingException", ...args });

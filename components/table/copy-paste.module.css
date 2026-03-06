@@ -1,21 +1,21 @@
 .copyButton {
-  font-size: inherit;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+  width: 100%;
   padding: 0;
   margin: 0;
-  border: none;
-  background: none !important;
-  cursor: pointer;
-  color: inherit;
-  font-weight: inherit;
-  width: 100%;
-  position: relative;
   font-family: inherit;
-  flex-wrap: wrap;
-  display: flex;
-  align-items: center;
+  font-size: inherit;
+  font-weight: inherit;
   line-height: inherit;
-  gap: 5px;
+  color: inherit;
   text-align: left;
+  cursor: pointer;
+  background: none !important;
+  border: none;
 }
 
 .copyIconDisabled:hover {
@@ -27,28 +27,28 @@
 }
 
 .copyIconDisabled:active {
-  filter: brightness(0.9);
   background-color: var(--annuaire-colors-pastelBlue) !important;
+  filter: brightness(0.9);
 }
 
 .copyIcon {
-  background-color: var(--annuaire-colors-pastelBlue);
-  border-radius: 3px;
-  color: var(--annuaire-colors-frBlue);
-  padding: 0 4px;
   display: inline-flex;
   align-items: center;
-  animation: fadeIn 0.1s ease-in-out;
+  padding: 0 4px;
   font-size: 0.9rem;
+  color: var(--annuaire-colors-frBlue);
+  background-color: var(--annuaire-colors-pastelBlue);
+  border-radius: 3px;
+  animation: fadeIn 0.1s ease-in-out;
   will-change: transform, opacity;
 }
 
 .copyIconAbsolute {
   position: absolute;
-  bottom: 0;
   right: 0;
-  box-shadow: -5px 0px 2px 5px rgba(255, 255, 255, 1);
+  bottom: 0;
   z-index: 100;
+  box-shadow: -5px 0px 2px 5px rgba(255, 255, 255, 1);
 }
 
 @keyframes fadeIn {

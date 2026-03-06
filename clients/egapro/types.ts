@@ -1,9 +1,9 @@
-export type IEgaproRepresentationResponse = {
-  data: IEgaproRepresentationItem[];
+export interface IEgaproRepresentationResponse {
   count: number;
-};
+  data: IEgaproRepresentationItem[];
+}
 
-export type IEgaproRepresentationItem = {
+export interface IEgaproRepresentationItem {
   entreprise: {
     raison_sociale: string;
     siren: string;
@@ -11,6 +11,7 @@ export type IEgaproRepresentationItem = {
     département: string;
     code_naf: string;
   };
+  label: string;
   représentation_équilibrée: {
     [year: string]: {
       pourcentage_femmes_cadres: number;
@@ -21,15 +22,14 @@ export type IEgaproRepresentationItem = {
       motif_non_calculabilité_membres: null;
     };
   };
-  label: string;
-};
+}
 
-export type IEgaproResponse = {
-  data?: IEgaproItem[] | null;
+export interface IEgaproResponse {
   count: number;
-};
+  data?: IEgaproItem[] | null;
+}
 
-export type IEgaproItem = {
+export interface IEgaproItem {
   entreprise: {
     raison_sociale: string;
     siren: string;
@@ -41,27 +41,27 @@ export type IEgaproItem = {
       tranche: "50:250" | "251:999" | "1000:";
     };
   };
+  label: string;
   notes: { [key: string]: number };
-  notes_remunerations: { [key: string]: number };
   notes_augmentations: { [key: string]: number };
-  notes_promotions: { [key: string]: number };
   notes_augmentations_et_promotions: { [key: string]: number };
   notes_conges_maternite: { [key: string]: number };
   notes_hautes_rémunérations: { [key: string]: number };
-  label: string;
-};
+  notes_promotions: { [key: string]: number };
+  notes_remunerations: { [key: string]: number };
+}
 
-export type IUes = {
-  nom: string;
+export interface IUes {
   entreprises?:
     | {
         raison_sociale: string;
         siren: string;
       }[]
     | null;
-};
+  nom: string;
+}
 
-export type IEgaproScore = {
+export interface IEgaproScore {
   annee: string | null;
   notes: number | null;
   notes_augmentations: number | null;
@@ -70,14 +70,14 @@ export type IEgaproScore = {
   notes_hautes_rémunérations: number | null;
   notes_promotions: number | null;
   notes_remunerations: number | null;
-};
+}
 
-export type IEgaproRepresentation = {
-  years: string[];
+export interface IEgaproRepresentation {
   scores: {
     pourcentageFemmesCadres: number[];
     pourcentageHommesCadres: number[];
     pourcentageFemmesMembres: number[];
     pourcentageHommesMembres: number[];
   };
-};
+  years: string[];
+}

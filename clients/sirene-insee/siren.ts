@@ -31,7 +31,7 @@ import {
   clientEtablissementInsee,
 } from "./siret";
 
-type IInseeUniteLegaleResponse = {
+interface IInseeUniteLegaleResponse {
   uniteLegale: {
     siren: Siren;
     sigleUniteLegale: string;
@@ -52,29 +52,29 @@ type IInseeUniteLegaleResponse = {
     identifiantAssociationUniteLegale: string | null;
     activitePrincipaleNAF25UniteLegale: string;
   };
-};
+}
 
-type IPeriodeUniteLegale = {
-  nicSiegeUniteLegale: string;
-  etatAdministratifUniteLegale: string;
-  economieSocialeSolidaireUniteLegale: string | null;
-  dateDebut: string;
+interface IPeriodeUniteLegale {
   activitePrincipaleUniteLegale: string;
-  nomenclatureActivitePrincipaleUniteLegale: string;
-  categorieJuridiqueUniteLegale: string;
-  denominationUniteLegale: string;
   caractereEmployeurUniteLegale: string;
+  categorieJuridiqueUniteLegale: string;
+  dateDebut: string;
+  denominationUniteLegale: string;
+  economieSocialeSolidaireUniteLegale: string | null;
+  etatAdministratifUniteLegale: string;
+  nicSiegeUniteLegale: string;
+  nomenclatureActivitePrincipaleUniteLegale: string;
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
-};
+}
 
-type TmpUniteLegale = {
-  uniteLegale: IUniteLegale;
+interface TmpUniteLegale {
   tmpUniteLegale: {
     denomination: string;
     sigle: string;
   };
-};
+  uniteLegale: IUniteLegale;
+}
 
 export const clientUniteLegaleInsee = async (
   siren: Siren,

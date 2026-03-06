@@ -206,12 +206,12 @@ const fetchEtablissementFromRechercheEntreprise = async (
   }
 };
 
-type IFetchEtablissementExceptionArgs = {
-  message: string;
-  cause: any;
+interface IFetchEtablissementExceptionArgs {
   administration: EAdministration;
+  cause: any;
   context?: IExceptionContext;
-};
+  message: string;
+}
 class FetchEtablissementException extends FetchRessourceException {
   constructor(args: IFetchEtablissementExceptionArgs) {
     super({

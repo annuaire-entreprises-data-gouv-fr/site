@@ -3,8 +3,8 @@ import logErrorInSentry from "#utils/sentry";
 import { FetchRechercheEntrepriseException } from "./core/types";
 
 export interface IRechercheEntrepriseSourcesLastModified {
-  rne: string | null;
   idcc: string | null;
+  rne: string | null;
 }
 
 /**

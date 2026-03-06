@@ -41,7 +41,7 @@ function itShouldMatchSnapshotForSearch(
   }`, async () => {
     await expectClientToMatchSnapshot({
       client: clientSearchRechercheEntreprise,
-      __dirname,
+      __dirname: import.meta.dirname,
       args: [
         {
           pageResultatsRecherche: 1,

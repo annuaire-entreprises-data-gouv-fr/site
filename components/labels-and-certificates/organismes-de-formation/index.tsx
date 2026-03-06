@@ -7,9 +7,9 @@ import { EAdministration } from "#models/administrations/EAdministration";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
 import type { IOrganismeFormation } from "#models/certifications/organismes-de-formation";
 
-type OrganismeDeFormationSectionProps = {
+interface OrganismeDeFormationSectionProps {
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
-};
+}
 
 export const OrganismeDeFormationSection = ({
   organismesDeFormation,

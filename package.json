@@ -22,7 +22,9 @@
     "test:api-clients": "jest clients --silent",
     "test:api-clients:update-snapshots": "jest clients --silent -u",
     "lint": "ultracite check",
-    "lint:fix": "ultracite fix"
+    "lint:fix": "ultracite fix",
+    "check": "ultracite check",
+    "fix": "ultracite fix"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.992.0",
@@ -63,7 +65,7 @@
     "zod": "^3.25.63"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.4",
+    "@biomejs/biome": "^2.4.5",
     "@commitlint/cli": "^18.6.1",
     "@commitlint/config-conventional": "^18.6.3",
     "@fullhuman/postcss-purgecss": "~5.0.0",
@@ -87,6 +89,6 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
-    "ultracite": "^5.4.7"
+    "ultracite": "^7.2.5"
   }
 }

@@ -283,21 +283,21 @@ const wrapWord = (word: string | null | undefined = "", punct = " ") => {
   return word.toString().toUpperCase() + punct;
 };
 
-type IAdressFields = {
-  complement?: string | null | undefined;
-  numeroVoie?: string | null | undefined;
-  indiceRepetition?: string | null | undefined;
-  typeVoie?: string | null | undefined;
-  libelleVoie?: string | null | undefined;
-  distributionSpeciale?: string | null | undefined;
-  codePostal?: string | null | undefined;
-  libelleCommune?: string | null | undefined;
+interface IAdressFields {
   codeCedex?: string | null | undefined;
+  codePaysEtranger?: string | null | undefined;
+  codePostal?: string | null | undefined;
+  complement?: string | null | undefined;
+  distributionSpeciale?: string | null | undefined;
+  indiceRepetition?: string | null | undefined;
+  libelleCommune?: string | null | undefined;
   libelleCommuneCedex?: string | null | undefined;
   libelleCommuneEtranger?: string | null | undefined;
-  codePaysEtranger?: string | null | undefined;
   libellePaysEtranger?: string | null | undefined;
-};
+  libelleVoie?: string | null | undefined;
+  numeroVoie?: string | null | undefined;
+  typeVoie?: string | null | undefined;
+}
 
 export const formatAdresse = ({
   complement = "",

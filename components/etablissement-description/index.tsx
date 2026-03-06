@@ -12,10 +12,10 @@ import {
   uniteLegaleLabelWithPronounContracted,
 } from "#utils/helpers";
 
-type IProps = {
+interface IProps {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
-};
+}
 
 const statusLabel = (etatAdministratif: IETATADMINSTRATIF) => {
   if (etatAdministratif === IETATADMINSTRATIF.ACTIF) {

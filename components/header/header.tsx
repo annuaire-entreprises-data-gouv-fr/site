@@ -1,18 +1,18 @@
 import getSession from "#utils/server-side-helper/get-session";
 import { HeaderCore } from "./header-core";
 
-type IProps = {
-  useLogo?: boolean;
-  useSearchBar?: boolean;
-  useAgentCTA?: boolean;
-  useAgentBanner?: boolean;
-  useAgentDocumentation?: boolean;
-  useReconnectBanner?: boolean;
-  useMap?: boolean;
-  useExportSirene?: boolean;
-  plugin?: React.JSX.Element;
+interface IProps {
   currentSearchTerm?: string;
-};
+  plugin?: React.JSX.Element;
+  useAgentBanner?: boolean;
+  useAgentCTA?: boolean;
+  useAgentDocumentation?: boolean;
+  useExportSirene?: boolean;
+  useLogo?: boolean;
+  useMap?: boolean;
+  useReconnectBanner?: boolean;
+  useSearchBar?: boolean;
+}
 
 export const Header: React.FC<IProps> = async ({
   useLogo = false,

@@ -1,9 +1,9 @@
-type IProps = {
-  onClick: () => void;
+interface IProps {
   ariaControls: string;
   ariaLabel: string;
   className?: string;
-};
+  onClick: () => void;
+}
 
 export default function ButtonClose({
   onClick,

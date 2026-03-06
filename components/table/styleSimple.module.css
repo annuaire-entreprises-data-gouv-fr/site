@@ -1,17 +1,17 @@
 table.two-column-table {
-  border-collapse: collapse;
-  text-align: left;
-  color: #081d35;
   width: 100%;
+  color: #081d35;
+  text-align: left;
+  border-collapse: collapse;
 }
 
 .two-column-table tr > td:first-of-type {
-  font-weight: bold;
   padding-right: 30px;
   padding-left: 10px;
-  border-right-width: 1px;
-  border-right-style: solid;
+  font-weight: bold;
   vertical-align: baseline;
+  border-right-style: solid;
+  border-right-width: 1px;
 }
 
 .two-column-table tr > td:first-of-type > div {
@@ -20,10 +20,10 @@ table.two-column-table {
 
 .two-column-table td,
 .two-column-table th {
-  border: none;
   padding: 3px;
-  background-color: #fff;
   padding-left: 30px;
+  background-color: #fff;
+  border: none;
 }
 
 table.two-column-table > thead {
@@ -38,23 +38,23 @@ table.two-column-table > thead {
   }
 
   .two-column-table tr > td {
-    border: none;
     padding: 0;
     margin: 0;
+    border: none;
   }
 
   .two-column-table tr > td:first-of-type {
-    border: none;
     padding: 0;
     margin: 0;
+    border: none;
   }
 }
 
 td.cell {
   width: auto;
   padding: 5px 3px;
-  background-color: #fff;
   padding-left: 30px;
+  background-color: #fff;
 }
 
 @media only screen and (min-width: 1px) and (max-width: 576px) {

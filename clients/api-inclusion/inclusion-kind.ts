@@ -3,7 +3,11 @@ import constants from "#models/constants";
 import { DataStore } from "#utils/data-store";
 import { httpGet } from "#utils/network";
 
-type InclusionMetadata = { id: string; name: string; parent: string };
+interface InclusionMetadata {
+  id: string;
+  name: string;
+  parent: string;
+}
 
 function mapToDomainObject(response: { results: InclusionMetadata[] }) {
   return response.results.reduce(

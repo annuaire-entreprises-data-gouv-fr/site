@@ -2,17 +2,17 @@ import { readFromS3 } from "#clients/external-tooling/s3";
 import { Information } from "#models/exceptions";
 import { logInfoInSentry } from "#utils/sentry";
 
-export type IAgentMonitoring = {
+export interface IAgentMonitoring {
   email: string;
   rateLimits: IAgentRateLimits;
-};
+}
 
-export type IAgentRateLimits = {
-  tenMinutes: number;
-  pastHour: number;
+export interface IAgentRateLimits {
   pastDay: number;
+  pastHour: number;
   pastWeek: number;
-};
+  tenMinutes: number;
+}
 
 function parseCSV(csvString: string) {
   const lines = csvString.trim().split("\n");

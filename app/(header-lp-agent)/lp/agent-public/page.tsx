@@ -110,7 +110,9 @@ const LandingPageAgent = () => (
               <img
                 alt=""
                 className={styles["data-illustration"]}
+                height="194"
                 src="/images/lp-agent/illu_locked_files.svg"
+                width="192"
               />
             </div>
 

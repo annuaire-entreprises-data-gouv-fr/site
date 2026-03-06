@@ -9,10 +9,10 @@ import {
   isServicePublic,
 } from "#models/core/types";
 
-type IDirigeantSummaryProps = {
-  uniteLegale: IUniteLegale;
+interface IDirigeantSummaryProps {
   session: ISession | null;
-};
+  uniteLegale: IUniteLegale;
+}
 
 const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   uniteLegale,

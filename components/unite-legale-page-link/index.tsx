@@ -2,11 +2,7 @@
 
 import { type IUniteLegale, isAssociation } from "#models/core/types";
 
-type IProp = {
-  /**
-   * The unite legale to use for the link label.
-   */
-  uniteLegale: IUniteLegale;
+interface IProp {
   /**
    * The href attribute for the link. Ex : /entreprise/123456789.
    */
@@ -15,7 +11,11 @@ type IProp = {
    * If external link, the site name for the link label (ex: "le site de l'INSEE" / "association.gouv.fr").
    */
   siteName?: string;
-};
+  /**
+   * The unite legale to use for the link label.
+   */
+  uniteLegale: IUniteLegale;
+}
 
 export function UniteLegalePageLink({ uniteLegale, href, siteName }: IProp) {
   const linkLabel = isAssociation(uniteLegale)

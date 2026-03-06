@@ -7,10 +7,10 @@ import {
 import getSession from "#utils/server-side-helper/get-session";
 import { handleServerError } from "#utils/server-side-helper/handle-server-error";
 
-export type ServerActionError = {
+export interface ServerActionError {
   message: string;
   status: number;
-};
+}
 
 export const actionClient = createSafeActionClient({
   handleServerError,

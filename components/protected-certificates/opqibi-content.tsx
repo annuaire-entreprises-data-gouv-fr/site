@@ -5,9 +5,9 @@ import FAQLink from "#components-ui/faq-link";
 import type { IOpqibi } from "#models/espace-agent/certificats/opqibi";
 import { formatDateLong } from "#utils/helpers";
 
-type OpqibiContentProps = {
+interface OpqibiContentProps {
   data: IOpqibi;
-};
+}
 
 export function OpqibiContent({ data: opqibi }: OpqibiContentProps) {
   return (

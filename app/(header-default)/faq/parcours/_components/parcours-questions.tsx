@@ -11,9 +11,9 @@ import { ContactAnswer } from "./answers/contact";
 import { ContactCompanyAnswer } from "./answers/contact-entreprise";
 import { FraudAnswer } from "./answers/fraud";
 
-type IProps = {
+interface IProps {
   session: ISession | null;
-};
+}
 
 export const FAQTargets = {
   particulier: "Particulier",

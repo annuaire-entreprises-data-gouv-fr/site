@@ -13,7 +13,7 @@ function expectClientToMatchSnapshotWithSiren(siren: Siren) {
   it(`Should match snapshot with siren ${siren}`, async () => {
     await expectClientToMatchSnapshot({
       client: clientUniteLegaleInsee,
-      __dirname,
+      __dirname: import.meta.dirname,
       args: [siren, 1, false],
       snapshotFile: `siren-${siren}.json`,
       simplifyParams,

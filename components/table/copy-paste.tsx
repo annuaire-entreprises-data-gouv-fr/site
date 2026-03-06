@@ -3,13 +3,13 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { InternalError } from "#models/exceptions";
 import style from "./copy-paste.module.css";
 
-type ICopyPasteProps = {
-  disableCopyIcon?: boolean;
-  shouldRemoveSpace?: boolean;
-  id?: string;
+interface ICopyPasteProps {
   children: string;
+  disableCopyIcon?: boolean;
+  id?: string;
   label: string;
-};
+  shouldRemoveSpace?: boolean;
+}
 
 function copyFallback(value: string) {
   const el = document.createElement("textarea");

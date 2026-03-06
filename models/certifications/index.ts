@@ -16,14 +16,14 @@ import {
 import { getRGECertifications, type IRGECertification } from "./rge";
 
 export interface ICertifications {
-  uniteLegale: IUniteLegale;
   bio: IEtablissementsBio | IAPINotRespondingError;
-  rge: IRGECertification | IAPINotRespondingError;
-  entrepreneurSpectacles: IEntrepreneursSpectacles | IAPINotRespondingError;
   egapro: IEgapro | IAPINotRespondingError;
-  organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
-  ess: IESS | IAPINotRespondingError;
+  entrepreneurSpectacles: IEntrepreneursSpectacles | IAPINotRespondingError;
   entrepriseInclusive: IEntrepriseInclusive[] | IAPINotRespondingError;
+  ess: IESS | IAPINotRespondingError;
+  organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
+  rge: IRGECertification | IAPINotRespondingError;
+  uniteLegale: IUniteLegale;
 }
 
 export const getCertificationsFromSlug = async (

@@ -16,9 +16,9 @@
   }
 
   .cta-actes {
-    margin: 20px 20%;
     position: absolute;
     z-index: 10;
+    margin: 20px 20%;
   }
 
   .cta-actes > h3 {

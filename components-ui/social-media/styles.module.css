@@ -1,14 +1,14 @@
 .socialMedia {
-  color: var(--annuaire-colors-frBlue);
   margin: 10px 0;
+  color: var(--annuaire-colors-frBlue);
 }
 
 .socialMedia button,
 .socialMedia a {
-  background: none !important;
-  border: none;
   padding: 0.5rem;
   margin: 0 5px;
+  background: none !important;
+  border: none;
 }
 
 .socialMedia button:focus-visible,

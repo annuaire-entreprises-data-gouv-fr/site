@@ -3,9 +3,9 @@ import { estDiffusible } from "./core/diffusion";
 import type { IEtablissement } from "./core/types";
 
 export interface IGeoLoc {
+  geoCodedAdress?: string;
   lat: string;
   long: string;
-  geoCodedAdress?: string;
 }
 
 /**

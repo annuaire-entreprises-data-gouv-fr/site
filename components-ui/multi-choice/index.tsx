@@ -3,7 +3,14 @@
 import type { ChangeEventHandler } from "react";
 import styles from "./style.module.css";
 
-export type IProps = {
+export interface IProps {
+  centered?: boolean;
+  idPrefix?: string;
+  large?: boolean;
+  legend?: string;
+  links?: boolean;
+  name?: string;
+  required?: boolean;
   values: {
     label: string;
     value?: string;
@@ -11,14 +18,7 @@ export type IProps = {
     href?: string;
     checked?: boolean;
   }[];
-  legend?: string;
-  idPrefix?: string;
-  name?: string;
-  required?: boolean;
-  centered?: boolean;
-  large?: boolean;
-  links?: boolean;
-};
+}
 
 const onKeyDown = (event: any, onclick?: Function) => {
   if (event.keyCode === 13 && onclick) {

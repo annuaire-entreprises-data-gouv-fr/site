@@ -7,7 +7,7 @@ describe("clientEpcisByName", () => {
       client: clientEpcisByName,
       args: ["Nice"],
       snapshotFile: "nice.json",
-      __dirname,
+      __dirname: import.meta.dirname,
     });
   });
 });

@@ -1,14 +1,14 @@
 import type { IMarkdown } from "#components/markdown/parse-markdown";
 
-export type IArticle = {
-  slug: string;
-  title: string;
+export interface IArticle {
+  body: IMarkdown;
+  cta: { label: string; to: string };
+  group: string;
+  more: { label: string; href: string }[];
   seo: {
     description: string;
     title?: string;
   };
-  group: string;
-  body: IMarkdown;
-  cta: { label: string; to: string };
-  more: { label: string; href: string }[];
-};
+  slug: string;
+  title: string;
+}

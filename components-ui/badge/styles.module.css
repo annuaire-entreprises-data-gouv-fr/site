@@ -2,12 +2,12 @@
   display: inline-flex;
   align-items: stretch;
   justify-content: center;
+  padding: 0;
   margin: 2px 0;
   margin-right: 0.25rem;
+  line-height: inherit;
   border: 2px solid transparent;
   border-radius: 50px;
-  padding: 0;
-  line-height: inherit;
 }
 
 .badgeWrapper:hover {
@@ -35,16 +35,16 @@ a.badgeWrapper:active {
 }
 
 .badgeIcon {
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
 }
 
 .badgeLabel {
+  font-weight: bold;
+  background-color: #eee;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
-  background-color: #eee;
-  font-weight: bold;
 }

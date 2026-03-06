@@ -14,10 +14,10 @@ import EtatCivilInfos from "../EtatCivilInfos";
 import PersonneMoraleInfos from "../PersonneMoraleInfos";
 import RolesInfos from "../RolesInfos";
 
-type IDirigeantContentProps = {
+interface IDirigeantContentProps {
   dirigeants: IDirigeantsWithMetadataMergedIGInpi;
   uniteLegale: IUniteLegale;
-};
+}
 
 export default function DirigeantsContentProtected({
   dirigeants,

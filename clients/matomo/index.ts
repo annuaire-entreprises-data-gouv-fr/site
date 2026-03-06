@@ -5,16 +5,8 @@ import { FetchRessourceException, InternalError } from "#models/exceptions";
 import { DataStore } from "#utils/data-store";
 import httpClient from "#utils/network";
 
-export type IMatomoStats = {
-  visits: {
-    label: string;
-    number: number;
-    agentReturning: number;
-    agentUnknown: number;
-    visitorReturning: number;
-    visitorUnknown: number;
-    apiRequests: number;
-  }[];
+export interface IMatomoStats {
+  copyPasteAction: { value: number; label: string }[];
   monthlyNps: {
     label: string;
     number: number;
@@ -26,11 +18,19 @@ export type IMatomoStats = {
       };
     };
   }[];
-  userResponses: { [key: string]: number };
   mostCopied: { label: string; count: number }[];
-  copyPasteAction: { value: number; label: string }[];
   redirectedSiren: { value: number; label: string }[];
-};
+  userResponses: { [key: string]: number };
+  visits: {
+    label: string;
+    number: number;
+    agentReturning: number;
+    agentUnknown: number;
+    visitorReturning: number;
+    visitorUnknown: number;
+    apiRequests: number;
+  }[];
+}
 
 const getLabel = (labelAsString: string, index: number) => {
   if (
@@ -65,16 +65,19 @@ const getLabel = (labelAsString: string, index: number) => {
   return labelAsString;
 };
 
-type IMatomoMonthlyStat = {
+interface IMatomoMonthlyStat {
+  nb_actions_new: number;
+  nb_actions_returning: number;
   nb_uniq_visitors_new: number;
   nb_uniq_visitors_returning: number;
   nb_visits_new: number;
   nb_visits_returning: number;
-  nb_actions_returning: number;
-  nb_actions_new: number;
-};
+}
 
-type IMatomoEventStat = { label: string; nb_events: number };
+interface IMatomoEventStat {
+  label: string;
+  nb_events: number;
+}
 
 /**
  * Turns matomo response into monthly stats

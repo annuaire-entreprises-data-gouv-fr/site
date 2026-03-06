@@ -14,10 +14,10 @@ import {
 } from "#models/data-fetching";
 import { formatSiret, type Siret } from "#utils/helpers";
 
-type IProps = {
-  siret: Siret;
+interface IProps {
   session: ISession | null;
-};
+  siret: Siret;
+}
 export default function EORICell({ siret, session }: IProps) {
   const eoriValidation = useAPIRouteData(
     APIRoutesPaths.EoriValidation,
