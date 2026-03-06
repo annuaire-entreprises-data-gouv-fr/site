@@ -35,6 +35,7 @@ const ESSNotFound = () => (
       <li>
         soit c’est une structure récente qui sera bientôt ajoutée à la liste
       </li>
+      <li>soit les données ESS France ne sont pas à jour (données de 2023)</li>
       <li>soit c’est une erreur dans la base SIRENE</li>
     </ul>
   </>
