@@ -165,8 +165,10 @@ export default function Equipe() {
             <div className={styles["team-member"]} key={member.fullname}>
               <img
                 alt={`${member.fullname} - ${member.role}`}
+                height="400"
                 src={member.photoUrl}
                 title={`Photo de ${member.fullname} - ${member.role}`}
+                width="400"
               />
             </div>
           ))}

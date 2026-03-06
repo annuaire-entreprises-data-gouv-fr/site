@@ -1,10 +1,10 @@
 .icon {
-  padding: 0;
   display: inline-flex;
-  align-items: center;
-  justify-content: baseline;
   flex-direction: row;
   flex-wrap: nowrap;
+  align-items: center;
+  justify-content: baseline;
+  padding: 0;
 }
 .icon > span {
   padding: 0;

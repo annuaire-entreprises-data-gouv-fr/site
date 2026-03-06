@@ -16,11 +16,11 @@ import TitleAlerts from "./alerts";
 import styles from "./styles.module.css";
 import { FICHE, Tabs } from "./tabs";
 
-type IProps = {
+interface IProps {
   ficheType?: FICHE;
-  uniteLegale: IUniteLegale;
   session: ISession | null;
-};
+  uniteLegale: IUniteLegale;
+}
 
 const Title: React.FC<IProps> = ({
   ficheType = FICHE.INFORMATION,

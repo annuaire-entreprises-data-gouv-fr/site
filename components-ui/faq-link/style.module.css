@@ -1,7 +1,7 @@
 .label {
-  border-bottom: 1px dotted #666;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  border-bottom: 1px dotted #666;
 }
 
 @media screen and (max-width: 768px) {

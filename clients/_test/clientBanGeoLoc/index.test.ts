@@ -14,7 +14,7 @@ function expectClientToMatchSnapshotWithAddress(address: string) {
   it(`Should match snapshot with address ${address}`, async () => {
     await expectClientToMatchSnapshot({
       client: clientBanGeoLoc,
-      __dirname,
+      __dirname: import.meta.dirname,
       args: [address],
       snapshotFile: `address-${address}.json`,
     });

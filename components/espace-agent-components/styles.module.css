@@ -9,18 +9,18 @@
 }
 
 .navContainerContent {
-  min-height: 67px;
   display: flex;
+  flex-wrap: wrap-reverse;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap-reverse;
+  min-height: 67px;
 }
 
 .navTabsList {
-  list-style-type: none;
+  width: fit-content;
   padding-left: 0;
   margin-top: auto;
-  width: fit-content;
+  list-style-type: none;
 }
 
 .navTabItem {
@@ -28,20 +28,20 @@
 }
 
 .navLinks {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  order: 2;
   min-width: fit-content;
   margin-left: auto;
-  order: 2;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 @media (max-width: 768px) {
   .navLinks {
-    margin-left: 0;
-    padding: 1rem 0;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 1rem 0;
+    margin-left: 0;
   }
 }
 
@@ -50,10 +50,10 @@
 }
 
 .cardHabilitation {
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
   background-color: #fff;
   border: 1px solid var(--purple-glycine-main-494);
   border-radius: 6px;
-  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
   box-shadow: 0px 0px 8.1px 0px #0000bd47;
 }
 
@@ -69,14 +69,14 @@
 
 .loaderContainer {
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
 }
 
 .chevronContainer {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .tableFullWidth {
@@ -109,9 +109,9 @@
 
 .expandedGroupRow {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .expandedGroupRowRights {

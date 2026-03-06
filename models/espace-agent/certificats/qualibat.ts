@@ -6,10 +6,10 @@ import {
 } from "#models/authentication/user/rights";
 import { verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
-export type IQualibat = {
-  documentUrl: string;
+export interface IQualibat {
   dateEmission: string | null;
   dateFinValidite: string | null;
+  documentUrl: string;
   informationsAdditionnelles: {
     assuranceResponsabiliteTravaux: {
       nom: string;
@@ -26,7 +26,7 @@ export type IQualibat = {
       dateAttribution: string;
     }>;
   } | null;
-};
+}
 
 export const getQualibat = async (
   maybeSiret: string

@@ -1,5 +1,5 @@
-export type IGeoElement = {
+export interface IGeoElement {
   label: string;
-  value: string;
   type: "insee" | "cp" | "dep" | "reg" | "epci";
-};
+  value: string;
+}

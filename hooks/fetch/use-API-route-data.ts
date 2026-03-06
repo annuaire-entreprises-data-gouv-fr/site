@@ -22,9 +22,9 @@ export type RouteParams<T> = T extends APIRoutesPaths
   ? Parameters<(typeof APIRoutesHandlers)[T]>[1]
   : never;
 
-type Options<T extends APIRoutesPaths> = {
+interface Options<T extends APIRoutesPaths> {
   params?: RouteParams<T>;
-};
+}
 
 /**
  * Hook to fetch data from internal API

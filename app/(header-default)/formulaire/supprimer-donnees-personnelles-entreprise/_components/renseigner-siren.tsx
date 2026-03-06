@@ -5,9 +5,9 @@ import { Link } from "#components/Link";
 import { Loader } from "#components-ui/loader";
 import { isSiren } from "#utils/helpers";
 
-type RenseignerSirenProps = {
+interface RenseignerSirenProps {
   postFormData: (formData: FormData) => Promise<void>;
-};
+}
 
 export function RenseignerSiren({ postFormData }: RenseignerSirenProps) {
   const [siren, setSiren] = useState("");

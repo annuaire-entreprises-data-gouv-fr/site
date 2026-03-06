@@ -1,7 +1,7 @@
-type IStepperProps = {
-  titles: Array<string>;
+interface IStepperProps {
   currentStep: number;
-};
+  titles: Array<string>;
+}
 export default function Stepper({ titles, currentStep }: IStepperProps) {
   const totalSteps = titles.length;
   return (

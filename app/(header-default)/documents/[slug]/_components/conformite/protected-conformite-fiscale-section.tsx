@@ -14,13 +14,13 @@ import type { UseCase } from "#models/use-cases";
 import ConformiteFiscale from "./conformite-fiscale";
 
 interface IProps {
-  uniteLegale: IUniteLegale;
-  session: ISession | null;
-  useCase: UseCase;
-  title: string;
   id: string;
-  sources: EAdministration[];
   isProtected: boolean;
+  session: ISession | null;
+  sources: EAdministration[];
+  title: string;
+  uniteLegale: IUniteLegale;
+  useCase: UseCase;
 }
 
 export function ProtectedConformiteFiscaleSection({

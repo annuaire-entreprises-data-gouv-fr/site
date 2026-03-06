@@ -30,7 +30,12 @@ export const WelcomeModalAgent: React.FC = () => {
       onClose={() => setIsVisible(false)}
     >
       <div className="layout-center">
-        <img alt="" height="150px" src="/images/lp-agent/secure-folder 1.svg" />
+        <img
+          alt=""
+          height="150px"
+          src="/images/lp-agent/secure-folder 1.svg"
+          width="150px"
+        />
       </div>
       <strong>Bonjour et bienvenue sur l’espace agent 👋</strong>
       <div style={{ textAlign: "left" }}>

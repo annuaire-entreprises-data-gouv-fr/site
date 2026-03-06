@@ -20,9 +20,9 @@ export enum ISTATUTDIFFUSION {
   DIFFUSIBLE = "diffusible",
 }
 
-type IUniteLegaleOrEtablissement = {
+interface IUniteLegaleOrEtablissement {
   statutDiffusion: ISTATUTDIFFUSION;
-};
+}
 
 const canSeeNonDiffusible = (session: ISession | null) =>
   hasRights(session, ApplicationRights.nonDiffusible);

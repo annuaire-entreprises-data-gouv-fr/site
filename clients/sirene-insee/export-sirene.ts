@@ -41,6 +41,7 @@ export const clientSireneInsee = async (params: ExportCsvInput) => {
 };
 
 export interface ISireneInseeCount {
+  etablissements: any[];
   header: {
     statut: number;
     message: string;
@@ -48,7 +49,6 @@ export interface ISireneInseeCount {
     debut: number;
     nombre: number;
   };
-  etablissements: any[];
 }
 
 export const clientSireneInseeCount = async (params: ExportCsvInput) => {

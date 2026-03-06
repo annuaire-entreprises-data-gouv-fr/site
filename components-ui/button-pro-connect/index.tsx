@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 import { logConversionEvent } from "#utils/matomo";
 import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 
-type IProps = {
-  shouldRedirectToReferer?: boolean;
+interface IProps {
   event: string;
   noFootLink?: boolean;
-};
+  shouldRedirectToReferer?: boolean;
+}
 
 const ButtonProConnect: React.FC<IProps> = ({
   shouldRedirectToReferer = false,

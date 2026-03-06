@@ -12,12 +12,12 @@ import type { UseCase } from "#models/use-cases";
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 
-export type ILiensCapitalistiquesProtected = {
+export interface ILiensCapitalistiquesProtected {
   actionnaires: Array<
     IPersonneMoraleLiensCapitalistiques | IEtatCivilLiensCapitalistiques
   >;
   filiales: Array<IPersonneMoraleLiensCapitalistiques>;
-};
+}
 
 const scope = ApplicationRightsToScopes[ApplicationRights.liensCapitalistiques];
 

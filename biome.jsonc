@@ -1,6 +1,9 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["ultracite"],
+  "extends": ["ultracite/biome/core", "ultracite/biome/next"],
+  "files": {
+    "includes": ["!**/*.min.css"]
+  },
   "linter": {
     "rules": {
       "a11y": {
@@ -75,10 +78,7 @@
         "noBarrelFile": "off"
       },
       "nursery": {
-        "useImageSize": "off",
         "noShadow": "off",
-        "useMaxParams": "off",
-        "useConsistentTypeDefinitions": "off",
         "noMisusedPromises": "off",
         "useSortedClasses": "off"
       },

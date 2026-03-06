@@ -9,8 +9,8 @@ import styles from "./styleSimple.module.css";
 
 interface ISectionProps {
   body: any[][];
-  id?: string;
   firstColumnWidth?: string;
+  id?: string;
 }
 
 const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({

@@ -13,32 +13,36 @@ type IProps = DetailedHTMLProps<
   autoResize?: boolean;
 };
 
-function TextArea(
-  { autoResize, onChange, className, ...rest }: IProps,
-  ref: React.Ref<HTMLTextAreaElement>
-) {
-  const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
-    (e) => {
-      onChange?.(e);
-      if (!autoResize) return;
-      e.target.style.height = "inherit";
-      e.target.style.height = `${e.target.scrollHeight}px`;
-    },
-    [onChange, autoResize]
-  );
+const TextArea = forwardRef(
+  (
+    { autoResize, onChange, className, ...rest }: IProps,
+    ref: React.Ref<HTMLTextAreaElement>
+  ) => {
+    const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
+      (e) => {
+        onChange?.(e);
+        if (!autoResize) return;
+        e.target.style.height = "inherit";
+        e.target.style.height = `${e.target.scrollHeight}px`;
+      },
+      [onChange, autoResize]
+    );
 
-  return (
-    <textarea
-      {...rest}
-      className={"fr-input " + (className ?? "")}
-      onChange={handleChange}
-      ref={ref}
-      style={{
-        resize: autoResize ? "none" : "vertical",
-        overflow: autoResize ? "hidden" : "auto",
-      }}
-    />
-  );
-}
+    return (
+      <textarea
+        {...rest}
+        className={"fr-input " + (className ?? "")}
+        onChange={handleChange}
+        ref={ref}
+        style={{
+          resize: autoResize ? "none" : "vertical",
+          overflow: autoResize ? "hidden" : "auto",
+        }}
+      />
+    );
+  }
+);
 
-export default forwardRef(TextArea);
+TextArea.displayName = "TextArea";
+
+export default TextArea;

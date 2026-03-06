@@ -12,9 +12,9 @@ import { EAdministration } from "#models/administrations/EAdministration";
 import type { IAssociation } from "#models/core/types";
 import { formatDate, formatIntFr } from "#utils/helpers";
 
-type IProps = {
+interface IProps {
   uniteLegale: IAssociation;
-};
+}
 
 export const JustificatifImmatriculationJOAFE: React.FC<IProps> = ({
   uniteLegale,

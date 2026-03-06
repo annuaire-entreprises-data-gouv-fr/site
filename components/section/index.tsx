@@ -12,12 +12,12 @@ import { formatDate, formatDateLong, isTwoMonthOld } from "#utils/helpers";
 import SectionErrorBoundary from "./section-error-boundary";
 import style from "./style.module.css";
 export interface ISectionProps {
+  id?: string;
+  isProtected?: boolean;
+  lastModified?: string | null;
+  sources?: EAdministration[];
   title: string;
   width?: number;
-  sources?: EAdministration[];
-  id?: string;
-  lastModified?: string | null;
-  isProtected?: boolean;
 }
 
 export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({

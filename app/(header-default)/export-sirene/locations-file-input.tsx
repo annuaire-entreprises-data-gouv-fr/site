@@ -4,15 +4,15 @@ import FaqLink from "#components-ui/faq-link";
 import { FileInput } from "./file-input";
 import styles from "./styles.module.css";
 
-type Location = {
+interface Location {
+  label: string;
   type: "dep" | "insee";
   value: string;
-  label: string;
-};
+}
 
-type LocationsFileInputProps = {
+interface LocationsFileInputProps {
   onChangeLocations: (params: { locations: Location[] }) => void;
-};
+}
 
 const regexDepartementLocations = /^\d{2,3}$/;
 const regexCommuneLocations = /^\d{5}$/;

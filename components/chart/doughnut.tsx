@@ -12,13 +12,13 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, ArcElement, ChartTitle, Tooltip, Legend);
 
-type StackedBarChartProps = {
-  height?: number | string;
-  width?: number | string;
+interface StackedBarChartProps {
   data: ChartData<"doughnut", any, unknown>;
-  usePercentage?: boolean;
+  height?: number | string;
   pluginOptions?: ChartOptions<"doughnut">["plugins"];
-};
+  usePercentage?: boolean;
+  width?: number | string;
+}
 
 const options: ChartOptions<"doughnut"> = {
   responsive: true,

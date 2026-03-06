@@ -13,10 +13,10 @@ import type { IUniteLegale } from "#models/core/types";
 import { pluralize } from "#utils/helpers";
 import DirigeantsContent from "./content";
 
-type IProps = {
-  uniteLegale: IUniteLegale;
+interface IProps {
   session: ISession | null;
-};
+  uniteLegale: IUniteLegale;
+}
 
 /**
  * Dirigeants section

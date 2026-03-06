@@ -3,9 +3,9 @@ import routes from "#clients/routes";
 import constants from "#models/constants";
 import type { TVANumber } from "#utils/helpers";
 
-type IVIESResponse = {
+interface IVIESResponse {
   tva: string | null;
-};
+}
 
 /**
  * Call VIES to validate a French TVA number

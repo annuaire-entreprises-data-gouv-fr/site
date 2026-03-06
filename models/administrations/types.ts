@@ -1,19 +1,12 @@
 import type { EAdministration } from "./EAdministration";
 
-export type IAdministrationsMetaData = {
+export interface IAdministrationsMetaData {
   [key: string]: IAdministrationMetaData;
-};
-export type IAdministrationMetaData = {
-  long: string;
-  short: string;
-  logoType: "portrait" | "paysage" | null;
+}
+export interface IAdministrationMetaData {
   administrationEnum: EAdministration;
-  slug: string;
-  description: string;
-  contact: string;
-  site: string;
   apiMonitors?: IAPIMonitorMetaData[];
-  estServicePublic: boolean;
+  contact: string;
   dataSources: {
     label: string;
     datagouvLink: string;
@@ -24,13 +17,20 @@ export type IAdministrationMetaData = {
       targets?: string[];
     }[];
   }[];
-};
+  description: string;
+  estServicePublic: boolean;
+  logoType: "portrait" | "paysage" | null;
+  long: string;
+  short: string;
+  site: string;
+  slug: string;
+}
 
-export type IAPIMonitorMetaData = {
-  updownIoId: string;
+export interface IAPIMonitorMetaData {
   apiDocumentationLink?: string;
-  startDate?: number;
-  isProtected?: boolean;
-  apiSlug: string;
   apiName: string;
-};
+  apiSlug: string;
+  isProtected?: boolean;
+  startDate?: number;
+  updownIoId: string;
+}

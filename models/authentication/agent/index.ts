@@ -1,16 +1,16 @@
 import type { IAgentScope } from "./scopes/constants";
 
-export type IAgentInfo = {
-  proConnectSub: string;
-  idpId: string;
+export interface IAgentInfo {
   domain: string;
   email: string;
   familyName: string;
   firstName: string;
   fullName: string;
-  siret: string;
-  scopes: IAgentScope[];
   groupsScopes: Record<string, IAgentScope[]>;
-  userType: string;
+  idpId: string;
   isSuperAgent: boolean;
-};
+  proConnectSub: string;
+  scopes: IAgentScope[];
+  siret: string;
+  userType: string;
+}

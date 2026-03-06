@@ -14,7 +14,7 @@ describe("clientRNEImmatriculation", () => {
       await expectClientToMatchSnapshot({
         client: clientRNEImmatriculation,
         args: ["908595879" as Siren],
-        __dirname,
+        __dirname: import.meta.dirname,
         snapshotFile: "protected.json",
       });
     },
@@ -27,7 +27,7 @@ describe("clientRNEImmatriculation", () => {
       await expectClientToMatchSnapshot({
         client: clientRNEImmatriculation,
         args: ["487444697" as Siren],
-        __dirname,
+        __dirname: import.meta.dirname,
         snapshotFile: "rge.json",
       });
     },
@@ -40,7 +40,7 @@ describe("clientRNEImmatriculation", () => {
       await expectClientToMatchSnapshot({
         client: clientRNEImmatriculation,
         args: ["356000000" as Siren],
-        __dirname,
+        __dirname: import.meta.dirname,
         snapshotFile: "siret-356000000.json",
       });
     },
@@ -55,7 +55,7 @@ describe("clientRNEImmatriculationFallback", () => {
       await expectClientToMatchSnapshot({
         client: clientRNEObservationsFallback,
         args: ["487444697" as Siren],
-        __dirname,
+        __dirname: import.meta.dirname,
         snapshotFile: "rge-fallback.json",
       });
     },

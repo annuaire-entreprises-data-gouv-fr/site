@@ -7,23 +7,23 @@ import {
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 
-type Qualification = {
-  nom: string;
+interface Qualification {
   codeQualification: string;
   definition: string;
+  nom: string;
   rge: boolean;
-};
-export type IOpqibi = {
-  numeroCertificat: string;
-  url: string;
-  dateDelivranceCertificat: string;
-  dureeValiditeCertificat: string;
+}
+export interface IOpqibi {
   assurances: string;
-  qualifications: Array<Qualification>;
+  dateDelivranceCertificat: string;
   dateValiditeQualifications: string;
-  qualificationsProbatoires: Array<Qualification>;
   dateValiditeQualificationsProbatoires: string;
-};
+  dureeValiditeCertificat: string;
+  numeroCertificat: string;
+  qualifications: Array<Qualification>;
+  qualificationsProbatoires: Array<Qualification>;
+  url: string;
+}
 
 export const getOpqibi = async (
   maybeSiren: string

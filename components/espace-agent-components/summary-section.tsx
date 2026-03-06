@@ -12,8 +12,8 @@ import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 
 interface IProps {
-  uniteLegale: IUniteLegale;
   session: ISession | null;
+  uniteLegale: IUniteLegale;
 }
 
 export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => (

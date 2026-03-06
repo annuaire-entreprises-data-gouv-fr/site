@@ -82,7 +82,7 @@ function itShouldMatchSnapshot(
       inclureImmatriculation: true,
     });
     expect(JSON.stringify({ searchTerms, result }, null, 2)).toMatchFile(
-      path.join(__dirname, ".", `search-${searchTerms}${suffix}.json`)
+      path.join(import.meta.dirname, ".", `search-${searchTerms}${suffix}.json`)
     );
   });
 }

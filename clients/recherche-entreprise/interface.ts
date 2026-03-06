@@ -1,85 +1,85 @@
-export type ISearchResponse = {
-  results: IResult[];
-  total_results: number;
+export interface ISearchResponse {
   page: unknown;
   per_page: number;
+  results: IResult[];
   total_pages: number;
-};
+  total_results: number;
+}
 
-export type IResult = {
-  siren: string;
-  nom_complet: string;
-  nombre_etablissements: number;
-  nombre_etablissements_ouverts: number;
-  siege: ISiege;
+export interface IResult {
   activite_principale: string;
   activite_principale_naf25: string;
+  annee_categorie_entreprise: string;
+  annee_tranche_effectif_salarie: string;
+  caractere_employeur: string;
+  categorie_entreprise: string;
+  complements: IComplements;
   date_creation: string;
   date_fermeture: string;
   date_mise_a_jour: string;
   date_mise_a_jour_insee: string;
   date_mise_a_jour_rne: string;
   dirigeants: IDirigeant[];
-  etat_administratif: string;
-  statut_diffusion: "O" | "P";
-  nature_juridique: string;
-  nom_raison_sociale: string;
-  section_activite_principale: string;
-  categorie_entreprise: string;
-  annee_categorie_entreprise: string;
-  tranche_effectif_salarie: string;
-  annee_tranche_effectif_salarie: string;
-  matching_etablissements: IMatchingEtablissement[];
   etablissements?: IMatchingEtablissement[];
-  complements: IComplements;
+  etat_administratif: string;
   immatriculation: IImmatriculationResponse;
-  caractere_employeur: string;
+  matching_etablissements: IMatchingEtablissement[];
+  nature_juridique: string;
+  nom_complet: string;
+  nom_raison_sociale: string;
+  nombre_etablissements: number;
+  nombre_etablissements_ouverts: number;
+  section_activite_principale: string;
+  siege: ISiege;
+  siren: string;
   slug: string;
-};
+  statut_diffusion: "O" | "P";
+  tranche_effectif_salarie: string;
+}
 
-export type IDirigeant = {
-  nom: string;
-  prenoms: string;
+export interface IDirigeant {
   annee_de_naissance: string;
   date_de_naissance: string;
-  nationalite: string;
-  qualite: string;
-  type_dirigeant: string;
-  siren: string;
   denomination: string;
+  nationalite: string;
+  nom: string;
+  prenoms: string;
+  qualite: string;
   sigle: any;
-};
+  siren: string;
+  type_dirigeant: string;
+}
 
-export type IEtablissementCore = {
-  ancien_siege: boolean;
+export interface IEtablissementCore {
   activite_principale: string;
   activite_principale_naf25: string;
   adresse: string;
-  commune: string;
+  ancien_siege: boolean;
+  annee_tranche_effectif_salarie: string;
+  caractere_employeur: string;
   code_postal: string;
-  libelle_commune: string;
+  commune: string;
+  date_creation: string;
+  date_debut_activite: string;
+  date_fermeture: string;
   est_siege: boolean;
   etat_administratif: string;
   geo_id: string;
   latitude: string;
+  libelle_commune: string;
   liste_enseignes: string[];
+  liste_finess: string[] | null;
+  liste_id_bio: string[] | null;
+  liste_id_organisme_formation: string[] | null;
+  liste_idcc: string[] | null;
+  liste_rge: string[] | null;
+  liste_uai: string[] | null;
   longitude: string;
   nom_commercial: string;
   siret: string;
-  date_creation: string;
-  date_debut_activite: string;
-  date_fermeture: string;
-  tranche_effectif_salarie: string;
-  caractere_employeur: string;
-  annee_tranche_effectif_salarie: string;
-  liste_finess: string[] | null;
-  liste_id_bio: string[] | null;
-  liste_idcc: string[] | null;
-  liste_id_organisme_formation: string[] | null;
-  liste_rge: string[] | null;
-  liste_uai: string[] | null;
   statut_diffusion_etablissement: string;
-};
+  tranche_effectif_salarie: string;
+}
 
 export interface ISiege extends IEtablissementCore {
   activite_principale_registre_metier: any;
@@ -103,58 +103,58 @@ export interface ISiege extends IEtablissementCore {
 
 export type IMatchingEtablissement = IEtablissementCore;
 
-export type IComplements = {
+export interface IComplements {
+  bilan_ges_renseigne: boolean;
   collectivite_territoriale: ICollectiviteTerritoriale;
   convention_collective_renseignee: boolean;
+  egapro_renseignee: boolean;
+  est_achats_responsables: boolean;
+  est_alim_confiance: boolean;
+  est_association: boolean;
+  est_bio: boolean;
   est_entrepreneur_individuel: boolean;
   est_entrepreneur_spectacle: boolean;
-  statut_entrepreneur_spectacle: "invalide" | "valide";
-  est_bio: boolean;
   est_ess: boolean;
-  est_organisme_formation: boolean;
-  est_qualiopi: boolean;
   est_finess: boolean;
-  est_service_public: boolean;
   est_l100_3: boolean;
-  egapro_renseignee: boolean;
-  est_rge: boolean;
-  est_uai: boolean;
-  est_societe_mission: boolean;
-  est_association: boolean;
-  identifiant_association: string;
-  est_siae: boolean;
-  type_siae: string;
-  est_achats_responsables: boolean;
+  est_organisme_formation: boolean;
   est_patrimoine_vivant: boolean;
-  est_alim_confiance: boolean;
-  bilan_ges_renseigne: boolean;
-  liste_idcc: string[];
+  est_qualiopi: boolean;
+  est_rge: boolean;
+  est_service_public: boolean;
+  est_siae: boolean;
+  est_societe_mission: boolean;
+  est_uai: boolean;
+  identifiant_association: string;
   liste_finess_juridique: string[];
-};
+  liste_idcc: string[];
+  statut_entrepreneur_spectacle: "invalide" | "valide";
+  type_siae: string;
+}
 
-export type IImmatriculationResponse = {
-  date_debut_activite: string | null;
-  date_immatriculation: string | null;
-  date_fin_existence: string | null;
-  date_radiation: string | null;
-  nature_entreprise: string[];
-  date_cloture_exercice: string | null;
+export interface IImmatriculationResponse {
   capital_social: number | null;
   capital_variable: boolean;
+  date_cloture_exercice: string | null;
+  date_debut_activite: string | null;
+  date_fin_existence: string | null;
+  date_immatriculation: string | null;
+  date_radiation: string | null;
   devise_capital: string | null;
-};
+  nature_entreprise: string[];
+}
 
-export type ICollectiviteTerritoriale = {
+export interface ICollectiviteTerritoriale {
   code: string;
   code_insee: string;
   elus: IElu[];
   niveau: string;
-};
+}
 
-export type IElu = {
-  nom: string;
-  prenoms: string;
+export interface IElu {
   annee_de_naissance: string;
   fonction: string;
+  nom: string;
+  prenoms: string;
   sexe: string;
-};
+}

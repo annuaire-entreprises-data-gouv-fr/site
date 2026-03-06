@@ -21,10 +21,10 @@ import DataFetchErrorExplanation from "./error";
 import { DataSectionLoader } from "./loader";
 
 interface IDataSectionClientProps<T> extends ISectionProps {
-  data: IAPINotRespondingError | IDataFetchingState | T;
-  notFoundInfo?: NonNullable<React.ReactNode> | null;
   additionalInfoOnError?: React.ReactNode;
   children: (data: T) => React.JSX.Element;
+  data: IAPINotRespondingError | IDataFetchingState | T;
+  notFoundInfo?: NonNullable<React.ReactNode> | null;
 }
 
 export function AsyncDataSectionClient<T>({

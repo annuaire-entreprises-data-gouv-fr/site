@@ -1,21 +1,6 @@
 import type { IAgentInfo } from "../agent";
 
-export type ISession = {
-  lastVisitTimestamp?: number;
-  user: IAgentInfo | null;
-
-  // pro connect
-  state?: string;
-  nonce?: string;
-  proConnectTokenSet?: {
-    idToken?: string;
-    accessToken?: string;
-    accessTokenExpiresAt?: number;
-    refreshToken?: string;
-  };
-  // connexion
-  pathFrom?: string;
-
+export interface ISession {
   // FranceConnect hide personal data request
   franceConnectHidePersonalDataSession?: {
     firstName?: string;
@@ -24,4 +9,18 @@ export type ISession = {
     tokenId: string;
     sub: string;
   };
-};
+  lastVisitTimestamp?: number;
+  nonce?: string;
+  // connexion
+  pathFrom?: string;
+  proConnectTokenSet?: {
+    idToken?: string;
+    accessToken?: string;
+    accessTokenExpiresAt?: number;
+    refreshToken?: string;
+  };
+
+  // pro connect
+  state?: string;
+  user: IAgentInfo | null;
+}

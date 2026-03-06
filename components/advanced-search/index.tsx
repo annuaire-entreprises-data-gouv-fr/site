@@ -2,11 +2,11 @@ import SearchFilters from "#components/advanced-search/search-filters";
 import type { IParams } from "#models/search/search-filter-params";
 import styles from "./style.module.css";
 
-type IProps = {
-  searchParams: IParams;
+interface IProps {
   currentSearchTerm: string;
   isMap: boolean;
-};
+  searchParams: IParams;
+}
 
 export const AdvancedSearch: React.FC<IProps> = ({
   searchParams = {},

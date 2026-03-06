@@ -18,10 +18,10 @@ import { isDataSuccess, isUnauthorized } from "#models/data-fetching";
 import { formatSiret } from "#utils/helpers";
 import { extractAssociationEtablissements } from "#utils/helpers/association";
 
-type IProps = {
-  uniteLegale: IUniteLegale;
+interface IProps {
   session: ISession | null;
-};
+  uniteLegale: IUniteLegale;
+}
 
 const NoDirigeants = () => (
   <>Aucun(e) dirigeant(e) n’a été retrouvé(e) pour cette association.</>

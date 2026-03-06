@@ -1,11 +1,11 @@
 import type { IAPIEntrepriseResponse } from "../client";
 
-type EffectifAnnuel = {
-  regime: string;
-  nature: string;
-  value: number | null;
+interface EffectifAnnuel {
   date_derniere_mise_a_jour: string | null;
-};
+  nature: string;
+  regime: string;
+  value: number | null;
+}
 
 export type IAPIEntrepriseRcpEffectifsAnnuels = IAPIEntrepriseResponse<{
   siren: string;

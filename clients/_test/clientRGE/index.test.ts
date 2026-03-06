@@ -7,7 +7,7 @@ describe("clientRGE", () => {
     await expectClientToMatchSnapshot({
       client: clientRGE,
       args: ["487444697" as Siren],
-      __dirname,
+      __dirname: import.meta.dirname,
       snapshotFile: "certificat-487444697.json",
     });
   });
@@ -15,7 +15,7 @@ describe("clientRGE", () => {
     await expectClientToMatchSnapshot({
       client: clientRGE,
       args: ["843701079" as Siren],
-      __dirname,
+      __dirname: import.meta.dirname,
       snapshotFile: "qualibat-rge.json",
     });
   });

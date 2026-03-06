@@ -7,7 +7,7 @@ describe("clientJOAFE", () => {
       client: clientJOAFE,
       args: ["W643000551"],
       snapshotFile: "association-joafe.json",
-      __dirname,
+      __dirname: import.meta.dirname,
       postProcessResult: (result) => {
         result.lastModified = "2023-10-18T23:19:19.590091+00:00";
       },

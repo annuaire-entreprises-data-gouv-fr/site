@@ -1,12 +1,12 @@
 import type React from "react";
 import pagesArray from "./pages-array";
 
-type IProps = {
-  currentPage: number;
-  totalPages: number;
+interface IProps {
   compact?: boolean;
+  currentPage: number;
   onPageChange: (page: number) => void;
-};
+  totalPages: number;
+}
 
 const First: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
   <li>

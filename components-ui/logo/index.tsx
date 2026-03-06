@@ -1,12 +1,12 @@
-type IProps = {
-  title: string;
+interface IProps {
   alt?: string;
-  width: number;
-  height: number;
-  slug: string;
   className?: string;
+  height: number;
   lazy?: boolean;
-};
+  slug: string;
+  title: string;
+  width: number;
+}
 
 /**
  * Logo renderer

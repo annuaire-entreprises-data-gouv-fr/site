@@ -4,9 +4,12 @@ import { convertDateToAge } from "#utils/helpers";
 export interface IParams {
   ageMax?: number | string;
   ageMin?: number | string;
+  ca_max?: number | null;
+  ca_min?: number | null;
+  categorie_entreprise?: string;
+  cp_dep?: string;
   cp_dep_label?: string;
   cp_dep_type?: string;
-  cp_dep?: string;
   dmax?: string;
   dmin?: string;
   etat?: string;
@@ -16,14 +19,11 @@ export interface IParams {
   n?: string;
   naf?: string;
   nature_juridique?: string;
-  categorie_entreprise?: string;
-  tranche_effectif_salarie?: string;
-  sap?: string;
-  type?: string;
-  ca_min?: number | null;
-  ca_max?: number | null;
-  res_min?: number | null;
   res_max?: number | null;
+  res_min?: number | null;
+  sap?: string;
+  tranche_effectif_salarie?: string;
+  type?: string;
 }
 
 class SearchFilterParams {
@@ -291,9 +291,9 @@ export const buildSearchQuery = (
   )}`;
 
 export interface ISearchFilter {
+  excludeParams: string[];
   icon: IIconsSlug;
   label: string;
-  excludeParams: string[];
 }
 
 export const hasDirigeantFilter = (params: IParams = {}) =>

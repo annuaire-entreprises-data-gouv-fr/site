@@ -3,9 +3,9 @@ import ButtonLink from "#components-ui/button";
 import { throwUnreachableCaseError } from "#models/exceptions";
 import type { IHidePersonalDataRequest } from "#models/protected-siren/request-siren-protection";
 
-type IProps = {
+interface IProps {
   hidePersonalDataRequest?: IHidePersonalDataRequest;
-};
+}
 export function RequestState({ hidePersonalDataRequest }: IProps) {
   return (
     <>

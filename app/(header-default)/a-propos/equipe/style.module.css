@@ -1,18 +1,19 @@
 .team-members {
-  margin: 60px auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  flex-wrap: wrap;
+  margin: 60px auto;
 }
 
 .team-member {
-  text-align: center;
   width: 80px;
+  text-align: center;
 }
 
 .team-member img {
   width: 100px;
-  border-radius: 50%;
+  height: auto;
   border: 5px solid #fff;
+  border-radius: 50%;
 }

@@ -1,8 +1,8 @@
-export type IBANResponse = {
+export interface IBANResponse {
   features: {
     geometry: {
       coordinates: number[];
     };
     properties: { label: string };
   }[];
-};
+}

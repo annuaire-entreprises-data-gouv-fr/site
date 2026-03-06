@@ -9,9 +9,9 @@ export enum NotificationTypeEnum {
 
 export interface INotification {
   id: string;
-  type: NotificationTypeEnum;
-  title: string;
   message?: string;
+  title: string;
+  type: NotificationTypeEnum;
 }
 
 export interface INotificationContext {

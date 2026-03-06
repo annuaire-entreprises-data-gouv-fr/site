@@ -19,20 +19,20 @@ import { ExportSirene } from "../export-sirene";
 import Menu from "../menu";
 import styles from "./styles.module.css";
 
-type IProps = {
+interface IProps {
   currentSearchTerm?: string;
-  useLogo?: boolean;
-  useSearchBar?: boolean;
-  useAgentCTA?: boolean;
-  useAgentBanner?: boolean;
-  useAgentDocumentation?: boolean;
-  useReconnectBanner?: boolean;
-  useMap?: boolean;
-  useInfoBanner?: boolean;
-  useExportSirene?: boolean;
-  session: ISession | null;
   plugin?: React.JSX.Element;
-};
+  session: ISession | null;
+  useAgentBanner?: boolean;
+  useAgentCTA?: boolean;
+  useAgentDocumentation?: boolean;
+  useExportSirene?: boolean;
+  useInfoBanner?: boolean;
+  useLogo?: boolean;
+  useMap?: boolean;
+  useReconnectBanner?: boolean;
+  useSearchBar?: boolean;
+}
 
 export const HeaderCore: React.FC<IProps> = ({
   currentSearchTerm = "",

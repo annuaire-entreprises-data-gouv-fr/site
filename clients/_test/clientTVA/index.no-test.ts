@@ -22,7 +22,7 @@ describe("clientTVA", () => {
         await expectClientToMatchSnapshot({
           client: clientTVA,
           args: [arg as TVANumber],
-          __dirname,
+          __dirname: import.meta.dirname,
           snapshotFile: `tva-${arg}.json`,
         });
       }

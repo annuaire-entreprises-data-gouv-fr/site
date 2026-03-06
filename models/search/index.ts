@@ -22,20 +22,20 @@ import { logWarningInSentry } from "#utils/sentry";
 import getSession from "#utils/server-side-helper/get-session";
 
 export interface ISearchResult extends IUniteLegale {
+  chemin: string;
+  dirigeants: IDirigeants;
+  matchingEtablissements: IEtablissement[];
   nombreEtablissements: number;
   nombreEtablissementsOuverts: number;
-  chemin: string;
-  matchingEtablissements: IEtablissement[];
-  dirigeants: IDirigeants;
 }
 
 export interface ISearchResults {
-  currentPage: number;
-  resultCount: number;
-  pageCount: number;
-  results: ISearchResult[];
-  notEnoughParams?: boolean;
   badParams?: boolean;
+  currentPage: number;
+  notEnoughParams?: boolean;
+  pageCount: number;
+  resultCount: number;
+  results: ISearchResult[];
 }
 
 const noResults = {

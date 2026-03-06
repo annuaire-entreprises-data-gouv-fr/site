@@ -20,14 +20,14 @@ ChartJS.register(
   Legend
 );
 
-type StackedBarChartProps = {
-  height?: number | string;
-  width?: number | string;
+interface StackedBarChartProps {
   data: ChartData<"bar", any, unknown>;
-  pluginOption?: ChartOptions<"bar">["plugins"];
+  height?: number | string;
   options?: ChartOptions<"bar">;
+  pluginOption?: ChartOptions<"bar">["plugins"];
   scales?: ChartOptions<"bar">["scales"];
-};
+  width?: number | string;
+}
 
 const defaultOptions = {
   plugins: {

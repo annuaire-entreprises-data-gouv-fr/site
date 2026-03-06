@@ -2,11 +2,11 @@ import type React from "react";
 import styles from "./styleFull.module.css";
 
 interface ISectionProps {
-  head: (string | React.JSX.Element)[];
   body: any[][];
+  columnWidths?: string[];
+  head: (string | React.JSX.Element)[];
   id?: string;
   verticalAlign?: "top" | "middle" | "bottom";
-  columnWidths?: string[];
 }
 
 export const FullTable: React.FC<ISectionProps> = ({

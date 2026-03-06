@@ -1,12 +1,12 @@
 interface IAnnonceBodacc {
-  titre: string;
-  sousTitre: string;
-  typeAvisLibelle: string;
-  tribunal: string;
-  numeroAnnonce: number;
   datePublication: string;
   details: string;
+  numeroAnnonce: number;
   path: string;
+  sousTitre: string;
+  titre: string;
+  tribunal: string;
+  typeAvisLibelle: string;
 }
 [];
 

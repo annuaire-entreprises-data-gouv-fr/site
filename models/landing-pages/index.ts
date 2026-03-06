@@ -1,21 +1,21 @@
 export interface ILandingPage {
-  slug: string;
-  title: string;
-  footerLabel: string;
-  published: boolean;
-  isServicePublic: boolean;
+  body: string;
+  datasources: string[];
   description: string;
   filter: {
     name: string;
     value: string;
   };
+  footerLabel: string;
+  isServicePublic: boolean;
+  published: boolean;
+  reassurance: { title: string; body: string }[];
   seo: {
     title: string;
     description: string;
   };
-  reassurance: { title: string; body: string }[];
-  datasources: string[];
-  body: string;
+  slug: string;
+  title: string;
 }
 
 const loadAllLandingPages = () => {

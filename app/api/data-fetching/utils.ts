@@ -14,11 +14,13 @@ import logErrorInSentry, { logInfoInSentry } from "#utils/sentry";
 import type { IReqWithSession } from "#utils/session/with-session";
 import type { APIRoutesPaths } from "./routes-paths";
 
-export type IContext = { params: Promise<{ slug: Array<string> }> };
+export interface IContext {
+  params: Promise<{ slug: Array<string> }>;
+}
 
 export interface IHandlerParams {
-  useCase?: UseCase;
   isEI?: boolean;
+  useCase?: UseCase;
   year?: string;
 }
 

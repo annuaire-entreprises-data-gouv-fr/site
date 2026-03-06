@@ -1,14 +1,14 @@
 import path from "path";
 import { HttpServerError, HttpTimeoutError } from "#clients/exceptions";
 
-type IParams<T extends unknown[], U> = {
-  client: (...args: T) => Promise<U>;
-  args: T;
-  snapshotFile: string;
-  simplifyParams?: (...args: T) => any;
-  postProcessResult?: (result: U) => void;
+interface IParams<T extends unknown[], U> {
   __dirname: string;
-};
+  args: T;
+  client: (...args: T) => Promise<U>;
+  postProcessResult?: (result: U) => void;
+  simplifyParams?: (...args: T) => any;
+  snapshotFile: string;
+}
 
 export async function expectClientToMatchSnapshot<T extends unknown[], U>({
   client,

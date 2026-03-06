@@ -8,10 +8,10 @@ import styles from "./styles.module.css";
 
 interface IActiveGroupsModalProps {
   groups: IAgentsGroup[];
-  isVisible: boolean;
   isLoading: boolean;
-  onConfirm: () => void;
+  isVisible: boolean;
   onCancel: () => void;
+  onConfirm: () => void;
 }
 
 export const ActiveGroupsModal = ({

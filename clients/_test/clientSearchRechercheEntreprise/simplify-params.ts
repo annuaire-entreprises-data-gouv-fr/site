@@ -1,10 +1,10 @@
-type IParams = {
+interface IParams {
   pageResultatsRecherche?: number;
-  searchTerms: string;
   searchFilterParams?: {
     toApiURI: () => string;
   };
-};
+  searchTerms: string;
+}
 
 export default function simplifyParams(a: IParams) {
   return {

@@ -2,30 +2,30 @@
   .firstCell {
     position: relative;
     min-height: 80px;
-    margin: 0;
     padding: 0;
     padding-left: 30px;
+    margin: 0;
   }
 
   .firstCell:before {
-    display: block;
+    position: absolute;
     top: 0;
     left: 20px;
+    display: block;
     width: 13px;
     height: 15px;
     content: "";
-    position: absolute;
     border-bottom: 1px dashed #ccc;
   }
 
   .firstCell:after {
-    display: block;
+    position: absolute;
     top: 0;
     left: 20px;
+    display: block;
     width: 13px;
     height: 100%;
     content: "";
-    position: absolute;
     border-left: 1px dashed #ccc;
   }
   .firstCell.last:after {
