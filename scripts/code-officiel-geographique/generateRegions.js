@@ -2,7 +2,10 @@ const fs = require("fs");
 const path = require("path");
 
 // Read and parse departments
-const departmentsCsvPath = path.join(__dirname, "v_departement_2025.csv");
+const departmentsCsvPath = path.join(
+  import.meta.dirname,
+  "v_departement_2025.csv"
+);
 const departmentsContent = fs.readFileSync(departmentsCsvPath, "utf-8");
 const departmentsLines = departmentsContent.split("\n").slice(1);
 
@@ -20,7 +23,7 @@ const departments = departmentsLines
   });
 
 // Read and parse regions
-const regionsCsvPath = path.join(__dirname, "v_region_2025.csv");
+const regionsCsvPath = path.join(import.meta.dirname, "v_region_2025.csv");
 const regionsContent = fs.readFileSync(regionsCsvPath, "utf-8");
 const regionsLines = regionsContent.split("\n").slice(1);
 
@@ -56,7 +59,7 @@ export const regions: Region[] = ${JSON.stringify(regions, null, 2)};
 `;
 
 // Write the output to a TypeScript file
-const outputPath = path.join(__dirname, "regions.ts");
+const outputPath = path.join(import.meta.dirname, "regions.ts");
 fs.writeFileSync(outputPath, tsContent);
 
 console.log(`Generated ${regions.length} regions in ${outputPath}`);

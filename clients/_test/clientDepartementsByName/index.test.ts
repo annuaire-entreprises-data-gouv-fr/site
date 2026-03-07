@@ -7,7 +7,7 @@ describe("clientDepartementsByName", () => {
       client: clientDepartementsByName,
       args: ["Nice"],
       snapshotFile: "nice.json",
-      __dirname,
+      __dirname: import.meta.dirname,
     });
   });
 });

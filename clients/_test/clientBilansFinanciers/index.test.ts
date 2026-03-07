@@ -8,7 +8,7 @@ describe("clientBilansFinanciers", () => {
       client: clientBilansFinanciers,
       args: ["487444697" as Siren],
       snapshotFile: "487444697.json",
-      __dirname,
+      __dirname: import.meta.dirname,
       postProcessResult: (result) => {
         result.lastModified = "2023-10-18T23:19:19.590091+00:00";
       },
@@ -19,7 +19,7 @@ describe("clientBilansFinanciers", () => {
       client: clientBilansFinanciers,
       args: ["552032534" as Siren],
       snapshotFile: "552032534.json",
-      __dirname,
+      __dirname: import.meta.dirname,
       postProcessResult: (result) => {
         result.lastModified = "2023-10-18T23:19:19.590091+00:00";
       },

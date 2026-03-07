@@ -23,13 +23,13 @@ import {
 } from "#utils/helpers";
 import { libelleTrancheEffectif } from "#utils/helpers/formatting/codes-effectifs";
 
-type IProps = {
-  session: ISession | null;
+interface IProps {
   etablissement: IEtablissement;
+  session: ISession | null;
   uniteLegale: IUniteLegale;
   usedInEntreprisePage?: boolean;
   withDenomination?: boolean;
-};
+}
 
 const EtablissementSection: React.FC<IProps> = ({
   etablissement,

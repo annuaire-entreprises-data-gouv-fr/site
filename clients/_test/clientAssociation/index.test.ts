@@ -10,7 +10,7 @@ describe("clientAssociation", () => {
       args: ["800329849" as Siren, "80032984900023"],
       snapshotFile: "association.json",
       simplifyParams,
-      __dirname,
+      __dirname: import.meta.dirname,
     });
   });
   it("Should match snapshot for association with bilans", async () => {
@@ -19,7 +19,7 @@ describe("clientAssociation", () => {
       args: ["338365059" as Siren, "33836505900017"],
       simplifyParams,
       snapshotFile: "association-with-bilans.json",
-      __dirname,
+      __dirname: import.meta.dirname,
     });
   });
 });

@@ -8,20 +8,20 @@
 .radio-group input[type="radio"] + label,
 .radio-group > div > a {
   display: block;
+  padding: 4px 10px;
+  color: var(--annuaire-colors-frBlue);
+  cursor: pointer;
+  background: #e5e5f4 !important;
+  border: 2px solid transparent;
   border-style: none;
   border-radius: 6px;
-  background: #e5e5f4 !important;
-  padding: 4px 10px;
-  cursor: pointer;
-  color: var(--annuaire-colors-frBlue);
-  border: 2px solid transparent;
 }
 
 .radio-group input[type="radio"] {
-  opacity: 0;
-  height: 0;
-  width: 0;
   position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
 }
 
 .radio-group input[type="radio"]:hover + label,
@@ -32,9 +32,9 @@
 
 .radio-group input[type="radio"]:focus-visible + label,
 .radio-group input[type="radio"] + label:focus {
+  outline-width: 2px;
   outline-style: solid;
   outline-color: #0a76f6;
-  outline-width: 2px;
   outline-offset: 2px;
 }
 

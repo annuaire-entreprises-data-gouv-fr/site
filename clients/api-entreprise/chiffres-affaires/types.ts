@@ -8,7 +8,7 @@ export type IAPIEntrepriseChiffreAffaires = IAPIEntrepriseResponse<
   }[]
 >;
 
-type FinancialData = {
+interface FinancialData {
   chiffre_affaires: number;
   date_fin_exercice: string;
-};
+}

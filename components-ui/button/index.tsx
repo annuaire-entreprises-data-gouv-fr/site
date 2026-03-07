@@ -5,20 +5,20 @@ import type React from "react";
 import type { MouseEventHandler, PropsWithChildren } from "react";
 import styles from "./styles.module.css";
 
-type IProps = {
+interface IProps {
+  alt?: boolean;
+  ariaLabel?: string;
+  disabled?: boolean;
+  hideExternalIcon?: boolean;
   id?: string;
+  nofollow?: boolean;
+  onClick?: MouseEventHandler;
   role?: string;
   small?: boolean;
+  target?: "_blank";
   to?: string;
   type?: "button" | "submit" | null;
-  disabled?: boolean;
-  alt?: boolean;
-  target?: "_blank";
-  ariaLabel?: string;
-  nofollow?: boolean;
-  hideExternalIcon?: boolean;
-  onClick?: MouseEventHandler;
-};
+}
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   id,

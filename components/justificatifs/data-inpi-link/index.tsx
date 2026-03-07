@@ -12,7 +12,10 @@ import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible } from "#models/core/diffusion";
 import type { IUniteLegale } from "#models/core/types";
 
-type IProps = { uniteLegale: IUniteLegale; session: ISession | null };
+interface IProps {
+  session: ISession | null;
+  uniteLegale: IUniteLegale;
+}
 
 export const DataInpiLinkWithExplanations = ({
   uniteLegale,

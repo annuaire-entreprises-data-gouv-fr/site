@@ -20,15 +20,16 @@ export interface IServicePublic {
   categorie: "SI" | "SIL" | "SL" | null;
   formulaireContact: string | null;
   lastModified: string;
-  mission: string | null;
-  nom: string | null;
-  sigle: string | null;
   liens: {
     organigramme: ILien | null;
     annuaireServicePublic: ILien | null;
     formulaireContact: ILien | null;
     sitesInternet: Array<ILien>;
   };
+  mission: string | null;
+  nom: string | null;
+  sigle: string | null;
+  subServicesId: string[];
   telephone: string | null;
   typeOrganisme:
     | null
@@ -52,12 +53,11 @@ export interface IServicePublic {
     | "Syndicat mixte"
     | "Établissement d'enseignement";
   urlServicePublic: string | null;
-  subServicesId: string[];
 }
-type ILien = {
+interface ILien {
   libelle: string;
   valeur: string;
-};
+}
 type IAffectationPersonne = Array<{
   nom: string | null;
   fonction: string;

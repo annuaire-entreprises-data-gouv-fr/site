@@ -1,7 +1,7 @@
 .row {
   display: flex;
-  gap: 32px;
   flex-wrap: wrap;
+  gap: 32px;
   margin-bottom: 32px;
 }
 
@@ -16,15 +16,15 @@
 }
 
 .formSection {
-  margin-bottom: 32px;
-  min-width: 340px;
   flex: 1;
+  min-width: 340px;
+  margin-bottom: 32px;
 }
 
 .formSection h2 {
-  border-bottom: 1px solid #ddd;
   padding-bottom: 12px;
   margin-bottom: 24px;
+  border-bottom: 1px solid #ddd;
 }
 
 .sizeSliderContainer {
@@ -38,18 +38,18 @@
 }
 
 .sliderHeader label {
+  margin: 0;
   font-size: 16px;
   font-weight: 500;
-  margin: 0;
 }
 
 .rangeDisplay {
-  background-color: var(--annuaire-colors-frBlue);
-  color: white;
   padding: 6px 12px;
-  border-radius: 16px;
-  font-weight: 500;
   font-size: 14px;
+  font-weight: 500;
+  color: white;
+  background-color: var(--annuaire-colors-frBlue);
+  border-radius: 16px;
 }
 
 .effectifLabels {
@@ -62,8 +62,8 @@
 
 .inputContainer {
   display: flex;
-  gap: 32px 64px;
   flex-wrap: wrap;
+  gap: 32px 64px;
 }
 
 .gridInputContainer {
@@ -85,35 +85,35 @@
 
 .buttonContainer {
   position: sticky;
-  background-color: #fff;
-  border-top: 1px solid #ddd;
-  padding: 10px 0;
+  bottom: 0;
+  z-index: 9;
   display: flex;
   gap: 16px;
   align-items: center;
-  z-index: 9;
-  bottom: 0;
+  padding: 10px 0;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
 }
 
 /* Error display */
 .errorMessage {
-  color: red;
   margin-top: 16px;
+  color: red;
   text-align: center;
 }
 
 /* File download section */
 .fileDownloadSection {
-  margin: 24px 0;
   padding: 20px 0;
+  margin: 24px 0;
 }
 
 .filterColumn {
-  min-width: 45%;
-  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-width: 45%;
+  max-width: 600px;
 }
 
 @media (max-width: 768px) {
@@ -124,22 +124,22 @@
 
 div.location-filter-container {
   position: relative;
-  margin: 0;
-  user-select: none;
-  margin-right: 8px;
   padding-top: 4px;
   padding-bottom: 4px;
+  margin: 0;
+  margin-right: 8px;
+  user-select: none;
 }
 
 .location-filter-modal-container {
-  box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
-  top: 100%;
-  border: none;
-  left: 0;
   position: absolute;
-  margin-top: 5px;
-  min-width: 320px;
+  top: 100%;
+  left: 0;
   z-index: 1000;
+  min-width: 320px;
+  margin-top: 5px;
+  border: none;
+  box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
 }
 
 .selectedLocations {
@@ -148,15 +148,15 @@ div.location-filter-container {
 }
 
 .locationTitle {
+  margin-bottom: 12px;
   font-size: 16px;
   font-weight: 500;
-  margin-bottom: 12px;
 }
 
 .noLocations {
-  color: #666;
-  font-style: italic;
   margin: 0;
+  font-style: italic;
+  color: #666;
 }
 
 /* SIRET Filter styles */
@@ -167,23 +167,23 @@ div.location-filter-container {
 }
 
 .fileUploadArea {
-  border: 2px dashed #ccc;
-  border-radius: 8px;
   padding: 32px;
   text-align: center;
-  transition: all 0.3s ease;
   cursor: pointer;
   background-color: #f9f9f9;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .fileUploadArea:hover {
-  border-color: var(--annuaire-colors-frBlue);
   background-color: #f0f8ff;
+  border-color: var(--annuaire-colors-frBlue);
 }
 
 .fileUploadArea.dragActive {
-  border-color: var(--annuaire-colors-frBlue);
   background-color: #e6f3ff;
+  border-color: var(--annuaire-colors-frBlue);
 }
 
 .fileInput {
@@ -193,8 +193,8 @@ div.location-filter-container {
 .fileUploadLabel {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 8px;
+  align-items: center;
   cursor: pointer;
 }
 
@@ -211,21 +211,21 @@ div.location-filter-container {
 }
 
 .fileUploadLabel small {
-  color: #666;
   font-size: 14px;
+  color: #666;
 }
 
 .siretListContainer {
-  border: 1px solid #ddd;
-  border-radius: 8px;
   padding: 16px;
   background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 .siretListHeader {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 12px;
 }
 
@@ -236,8 +236,8 @@ div.location-filter-container {
 }
 
 .fileExampleList {
-  list-style: none;
   padding-left: 1rem;
   margin-top: 0.5rem;
+  list-style: none;
   border-left: 1px solid #ddd;
 }

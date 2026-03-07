@@ -2,10 +2,10 @@
 import { animated } from "@react-spring/web";
 import { useHeightTransition } from "hooks/use-height-transition";
 
-type IHeightTransitionProps = {
-  children: React.ReactNode;
+interface IHeightTransitionProps {
   animateAppear?: boolean;
-};
+  children: React.ReactNode;
+}
 
 /**
  * Renders a component that animates its height when its children change.

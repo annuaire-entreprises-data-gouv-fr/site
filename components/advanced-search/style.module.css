@@ -4,9 +4,9 @@
 
 .search-filters-container > div {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   padding-top: 4px;
   padding-bottom: 4px;
 }
@@ -18,8 +18,8 @@
 
 .map-switch {
   flex-grow: 1;
-  text-align: right;
   max-width: 200px;
+  text-align: right;
 }
 
 @media only screen and (min-width: 1px) and (max-width: 768px) {

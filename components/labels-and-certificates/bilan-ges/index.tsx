@@ -8,9 +8,9 @@ import { FullTable } from "#components/table/full";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IUniteLegale } from "#models/core/types";
 
-type IProps = {
+interface IProps {
   uniteLegale: IUniteLegale;
-};
+}
 
 const formatEmissions = (value: number): string => {
   if (value === 0) return "Non renseigné";

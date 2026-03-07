@@ -3,10 +3,10 @@ import constants from "#models/constants";
 import { httpGet } from "#utils/network";
 import type { IGeoElement } from ".";
 
-type IGeoEpciResponse = {
-  nom: string;
+interface IGeoEpciResponse {
   code: string;
-};
+  nom: string;
+}
 
 export const clientEpcisBySiren = async (
   siren: string

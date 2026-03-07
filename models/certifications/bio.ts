@@ -12,17 +12,17 @@ export interface IEtablissementsBio {
 }
 
 export interface IEtablissementBio {
-  siret: string;
-  enseigne: string;
-  denomination: string;
-  adresse: string;
-  numeroBio: string;
-  websites: string[];
   activities: string[];
+  adresse: string;
   categories: string[];
-  products: string[];
-  onlyBio: boolean;
   certificat: IBioCertification;
+  denomination: string;
+  enseigne: string;
+  numeroBio: string;
+  onlyBio: boolean;
+  products: string[];
+  siret: string;
+  websites: string[];
 }
 
 export interface IBioCertification {
@@ -32,10 +32,10 @@ export interface IBioCertification {
     suspension: string;
     notification: string;
   };
-  url: string;
+  exempted: boolean;
   organization: string;
   status: IBioResponse["items"][0]["certificats"][0]["etatCertification"] | "";
-  exempted: boolean;
+  url: string;
 }
 
 export const getBio = async (uniteLegale: IUniteLegale) => {

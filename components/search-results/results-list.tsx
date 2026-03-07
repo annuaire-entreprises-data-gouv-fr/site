@@ -11,11 +11,11 @@ import type { ISearchResult } from "#models/search";
 import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
 import styles from "./style.module.css";
 
-type IProps = {
+interface IProps {
   results: ISearchResult[];
   searchTerm?: string;
   shouldColorZipCode?: boolean;
-};
+}
 
 const DirigeantsOrElusList: React.FC<{
   dirigeantsOrElus: IDirigeants;

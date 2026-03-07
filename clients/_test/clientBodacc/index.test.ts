@@ -9,7 +9,7 @@ describe("clientBODACC", () => {
       client: clientBodacc,
       args: ["880878145" as Siren],
       snapshotFile: "ganymede-bodacc.json",
-      __dirname,
+      __dirname: import.meta.dirname,
       postProcessResult,
     });
   });

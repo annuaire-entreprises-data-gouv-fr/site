@@ -35,14 +35,14 @@ import {
   mapToTrancheEffectif,
 } from "./mapToDomain";
 
-type ClientSearchRechercheEntreprise = {
-  searchTerms: string;
-  searchFilterParams?: SearchFilterParams;
+interface ClientSearchRechercheEntreprise {
   inclureEtablissements?: boolean;
   inclureImmatriculation?: boolean;
-  pageResultatsRecherche?: number;
   pageEtablissements?: number;
-};
+  pageResultatsRecherche?: number;
+  searchFilterParams?: SearchFilterParams;
+  searchTerms: string;
+}
 
 /**
  * Get raw results for searchTerms from Sirene open API

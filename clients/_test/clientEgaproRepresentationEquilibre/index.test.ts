@@ -8,7 +8,7 @@ describe("clientEgaproRepresentationEquilibre", () => {
       client: clientEgaproRepresentationEquilibre,
       args: ["356000000" as Siren],
       snapshotFile: "egapro-laposte.json",
-      __dirname,
+      __dirname: import.meta.dirname,
     });
   });
 });

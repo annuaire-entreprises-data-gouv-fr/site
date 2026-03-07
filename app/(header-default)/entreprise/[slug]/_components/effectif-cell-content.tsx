@@ -12,13 +12,13 @@ import { hasAnyError, type IDataFetchingState } from "#models/data-fetching";
 import type { IEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
 import { formatFloatFr } from "#utils/helpers";
 
-type EffectifCellContentProps = {
+interface EffectifCellContentProps {
   effectifsAnnuelsProtected: Promise<
     | IEffectifsAnnuelsProtected
     | IAPINotRespondingError
     | Exclude<IDataFetchingState, IDataFetchingState.LOADING>
   >;
-};
+}
 
 export const EffectifCellContent = ({
   effectifsAnnuelsProtected: effectifsAnnuelsProtectedPromise,

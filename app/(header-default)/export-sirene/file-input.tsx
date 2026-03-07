@@ -5,9 +5,9 @@ import constants from "#models/constants";
 import styles from "./styles.module.css";
 
 interface FileInputProps {
+  description: string;
   onChange: (fileContent: string) => void;
   onError: (error: string) => void;
-  description: string;
 }
 
 export function FileInput(props: FileInputProps) {

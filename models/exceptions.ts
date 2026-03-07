@@ -1,14 +1,6 @@
 import type { EAdministration } from "./administrations/EAdministration";
 
-type IExceptionArgument = {
-  /** Name of the exception, CamelCase
-   *  @example SiretNotFoundError
-   *
-   *  Should inform about what went wrong from a business point of view
-   */
-  name: string;
-  /** Message of the exception */
-  message?: string;
+interface IExceptionArgument {
   /** The technical error for this exception */
   cause?: any;
 
@@ -25,7 +17,15 @@ type IExceptionArgument = {
     digest?: string;
     domain?: string;
   };
-};
+  /** Message of the exception */
+  message?: string;
+  /** Name of the exception, CamelCase
+   *  @example SiretNotFoundError
+   *
+   *  Should inform about what went wrong from a business point of view
+   */
+  name: string;
+}
 
 export type IExceptionContext = NonNullable<IExceptionArgument["context"]>;
 

@@ -16,7 +16,7 @@ describe("clientAssociation", () => {
         },
       ],
       snapshotFile: "api-data-gouv-entrepreneurs-spectacles-800329849.json",
-      __dirname,
+      __dirname: import.meta.dirname,
     });
   });
 });

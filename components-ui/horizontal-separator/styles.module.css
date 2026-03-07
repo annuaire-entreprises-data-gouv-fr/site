@@ -1,8 +1,8 @@
 .simpleHorizontalSeparator {
-  margin: 15px 0;
   width: 100%;
-  background-color: var(--annuaire-colors-pastelBlue);
   height: 1px;
+  margin: 15px 0;
+  background-color: var(--annuaire-colors-pastelBlue);
 }
 
 .horizontalSeparator {
@@ -11,14 +11,14 @@
 }
 .horizontalSeparatorLine {
   width: 50px;
-  background-color: var(--annuaire-colors-pastelBlue);
   height: 2px;
   margin: 0 10px;
+  background-color: var(--annuaire-colors-pastelBlue);
 }
 
 .horizontalSeparatorCircle {
   width: 7px;
   height: 7px;
-  border-radius: 20px;
   background-color: var(--annuaire-colors-pastelBlue);
+  border-radius: 20px;
 }

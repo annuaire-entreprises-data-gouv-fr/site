@@ -7,12 +7,12 @@ import {
 import { verifySiren } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 
-type IDocumentAssociation = {
+interface IDocumentAssociation {
   date_depot: string; //'2019-01-01';
-  url: string;
   id: string;
   type: string; //'Budget prévisionnel';
-};
+  url: string;
+}
 
 type IDocumentDAC = IDocumentAssociation & {
   annee_validite: string; //'2019';
@@ -30,31 +30,31 @@ type IDocumentRNA = IDocumentAssociation & {
   };
 };
 
-type IAssociationDirigeant = {
+interface IAssociationDirigeant {
   civilite: string;
-  nom: string;
-  prenom: string;
-  fonction: string;
-  valideur_cec: boolean;
-  publication_internet: boolean;
-  telephone: string;
   courriel: string;
   etablissement: IAssociationEtablissement;
-};
+  fonction: string;
+  nom: string;
+  prenom: string;
+  publication_internet: boolean;
+  telephone: string;
+  valideur_cec: boolean;
+}
 
-export type IAssociationEtablissement = {
-  siret: string;
+export interface IAssociationEtablissement {
   adresse: string;
   siege: boolean;
-};
+  siret: string;
+}
 
-export type IAssociationProtected = {
+export interface IAssociationProtected {
+  dirigeants: IAssociationDirigeant[];
   documents: {
     rna: IDocumentRNA[];
     dac: IDocumentDAC[];
   };
-  dirigeants: IAssociationDirigeant[];
-};
+}
 
 export const getAssociationProtected = async (
   maybeSiren: string

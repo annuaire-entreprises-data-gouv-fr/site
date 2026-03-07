@@ -4,11 +4,11 @@ import { Exception } from "#models/exceptions";
 import httpClient from "#utils/network";
 import logErrorInSentry from "#utils/sentry";
 
-type IGristRecords = {
+interface IGristRecords {
   records: {
     fields: any;
   }[];
-};
+}
 
 const gristTables = {
   "nps-feedbacks": {

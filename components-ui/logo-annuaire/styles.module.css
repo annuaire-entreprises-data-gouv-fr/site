@@ -1,12 +1,12 @@
 .logoAnnuaire {
-  width: 260px;
-  height: 100px;
-  max-width: 90%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 260px;
+  max-width: 90%;
+  height: 100px;
+  margin: 0 auto;
 
   @media only screen and (min-width: 1px) and (max-width: 576px) {
     width: 250px;
@@ -15,27 +15,27 @@
 }
 .logoAnnuaire > span {
   position: absolute;
-  z-index: 0;
-  left: 0;
   top: 0;
+  left: 0;
+  z-index: 0;
   color: #e8edff;
 }
 
 .logoAnnuaire > h1 {
   position: absolute;
-  z-index: 1;
-  font-weight: 100;
-  font-size: 2rem;
-  line-height: 2rem;
   top: 20px;
   left: 25px;
+  z-index: 1;
   padding: 0;
   margin: 0;
+  font-size: 2rem;
+  font-weight: 100;
+  line-height: 2rem;
 
   @media only screen and (min-width: 1px) and (max-width: 576px) {
+    left: 30px;
     font-size: 1.7rem;
     line-height: 1.9rem;
-    left: 30px;
   }
 }
 
@@ -49,8 +49,8 @@
     height: 90px;
   }
   .logoAnnuaire > h1 {
+    left: 30px;
     font-size: 1.7rem;
     line-height: 1.9rem;
-    left: 30px;
   }
 }

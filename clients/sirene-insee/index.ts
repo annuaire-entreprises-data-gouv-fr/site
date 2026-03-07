@@ -15,7 +15,7 @@ import httpClient, {
 import { logInfoInSentry } from "#utils/sentry";
 import getSession from "#utils/server-side-helper/get-session";
 
-type IAccessToken = {
+interface IAccessToken {
   data: {
     access_token: string;
     expires_in: number;
@@ -23,7 +23,7 @@ type IAccessToken = {
     token_type: "Bearer" | string;
   };
   tokenExpiryTime: number;
-};
+}
 
 export class httpInseeClient {
   private _token: IAccessToken | null;

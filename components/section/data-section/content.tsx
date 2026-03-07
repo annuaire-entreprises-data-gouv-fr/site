@@ -7,12 +7,12 @@ import {
 } from "#models/api-not-responding";
 import type { IDataFetchingState } from "#models/data-fetching";
 
-export type IDataSectionContentProps<T> = {
-  data: IAPINotRespondingError | T;
-  notFoundInfo?: React.ReactNode;
+export interface IDataSectionContentProps<T> {
   additionalInfoOnError?: React.ReactNode;
   children: (data: T) => React.JSX.Element;
-};
+  data: IAPINotRespondingError | T;
+  notFoundInfo?: React.ReactNode;
+}
 
 export function DataSectionContent<
   T extends Exclude<unknown, IDataFetchingState.LOADING>,

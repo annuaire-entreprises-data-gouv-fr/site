@@ -1,9 +1,9 @@
 .titleBlock {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
   gap: 40px;
+  align-items: stretch;
+  justify-content: space-between;
 
   @media screen and (max-width: 768px) {
     flex-direction: column-reverse;
@@ -21,12 +21,12 @@
 
 .subTitle {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
+  align-items: center;
 }
 .sirenOrSiret {
-  font-variant: small-caps;
   font-size: 1.1rem;
+  font-variant: small-caps;
   color: #666;
 }
 
@@ -34,17 +34,17 @@
   display: flex;
 }
 .subSubTitle:before {
-  content: "";
+  position: relative;
+  display: inline-block;
   width: 20px;
   height: 20px;
   margin-right: 10px;
-  margin-left: 15px;
   margin-bottom: 4px;
+  margin-left: 15px;
+  content: "";
   border: 1px solid #bbb;
   border-top: none;
   border-right: none;
-  position: relative;
-  display: inline-block;
 }
 
 .subSubTitle > div:first-of-type {
@@ -52,7 +52,7 @@
 }
 
 .subSubTitle > div > div:last-of-type {
-  border: 2px solid var(--annuaire-colors-pastelBlue);
-  margin-top: 10px;
   padding: 15px 15px 5px 15px;
+  margin-top: 10px;
+  border: 2px solid var(--annuaire-colors-pastelBlue);
 }

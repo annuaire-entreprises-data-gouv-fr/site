@@ -4,12 +4,12 @@ import { type CSSProperties, useId, useState } from "react";
 import ButtonLink from "#components-ui/button";
 import styles from "./style.module.css";
 
-type IProps = {
+interface IProps {
+  "aria-label"?: string;
   children: React.ReactNode;
   collapsedHeight?: CSSProperties["maxHeight"];
-  "aria-label"?: string;
   label?: string;
-};
+}
 
 /*
 

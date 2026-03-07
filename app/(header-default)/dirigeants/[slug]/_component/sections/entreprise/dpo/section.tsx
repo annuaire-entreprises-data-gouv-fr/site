@@ -10,10 +10,10 @@ import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import { formatIntFr, uniteLegaleLabel } from "#utils/helpers";
 
-type IProps = {
-  uniteLegale: IUniteLegale;
+interface IProps {
   session: ISession | null;
-};
+  uniteLegale: IUniteLegale;
+}
 
 const DPONotFound = () => <p>Aucun DPO trouvé pour cette structure.</p>;
 

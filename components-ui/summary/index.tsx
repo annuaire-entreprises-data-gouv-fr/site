@@ -1,9 +1,9 @@
-type ISummaryProps = {
+interface ISummaryProps {
   headings: Array<{
     id: string;
     content: string;
   }>;
-};
+}
 
 export default function Summary(props: ISummaryProps) {
   if (props.headings.length === 0) {

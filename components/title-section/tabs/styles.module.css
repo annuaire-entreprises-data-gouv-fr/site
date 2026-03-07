@@ -1,11 +1,11 @@
 .activeLink {
-  box-shadow: none !important;
   background-color: #fff !important;
   border-bottom: 0 !important;
+  box-shadow: none !important;
 
   @media only screen and (min-width: 1px) and (max-width: 768px) {
-    border-bottom: 2px solid var(--annuaire-colors-pastelBlue) !important;
     line-height: 1.8rem !important;
+    border-bottom: 2px solid var(--annuaire-colors-pastelBlue) !important;
   }
 }
 
@@ -22,38 +22,38 @@
 }
 
 .titleTabs > a {
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  border: 2px solid var(--annuaire-colors-pastelBlue);
-  background-color: #efeffb;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  box-shadow: 0 -8px 5px -5px var(--annuaire-colors-pastelBlue) inset;
-  margin: 0 4px;
   padding: 5px;
+  margin: 0 4px;
   margin-bottom: -2px;
+  text-align: center;
+  background-color: #efeffb;
+  border: 2px solid var(--annuaire-colors-pastelBlue);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  box-shadow: 0 -8px 5px -5px var(--annuaire-colors-pastelBlue) inset;
 }
 
 .titleTabs > a > h2 {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 .titleTabs > a,
 .titleTabs > a > h2 {
-  color: var(--annuaire-colors-frBlue);
-  font-weight: bold;
-  font-size: 0.9rem;
-  line-height: 1.1rem;
   max-width: 150px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  line-height: 1.1rem;
+  color: var(--annuaire-colors-frBlue);
 
   @media only screen and (min-width: 1px) and (max-width: 768px) {
-    margin: 3px;
-    padding: 3px;
-    max-width: none;
     width: auto !important;
+    max-width: none;
+    padding: 3px;
+    margin: 3px;
   }
 }
 
@@ -63,11 +63,11 @@
 }
 
 .titleTabsEtablissement a h2 {
-  font-size: 1rem;
-  line-height: 1rem;
   display: inline-block;
-  margin: 0;
   padding: 0;
-  font-weight: bold;
+  margin: 0;
+  font-size: 1rem;
   font-size: 0.9rem;
+  font-weight: bold;
+  line-height: 1rem;
 }

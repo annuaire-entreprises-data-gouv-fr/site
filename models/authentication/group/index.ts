@@ -13,22 +13,22 @@ import { FetchRessourceException } from "#models/exceptions";
 import { logFatalErrorInSentry } from "#utils/sentry";
 import type { IAgentScope } from "../agent/scopes/constants";
 
-export type IAgentsGroup = {
+export interface IAgentsGroup {
+  contract_description: string;
+  contract_url?: string;
   id: number;
   name: string;
   organisation_siret: string;
-  users: IRolesDataUser[];
   scopes: IAgentScope[];
-  contract_description: string;
-  contract_url?: string;
-};
+  users: IRolesDataUser[];
+}
 
-export type IAgentsOrganizationGroup = {
+export interface IAgentsOrganizationGroup {
+  adminEmails: string[];
   id: number;
   name: string;
-  adminEmails: string[];
   scopes: IAgentScope[];
-};
+}
 
 async function run<T>(callback: () => Promise<T>): Promise<T> {
   try {

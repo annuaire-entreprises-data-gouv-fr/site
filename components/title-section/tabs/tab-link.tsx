@@ -1,13 +1,13 @@
 import { Link } from "#components/Link";
 import styles from "./styles.module.css";
 
-type IProps = {
-  label: string;
+interface IProps {
+  active: boolean;
   href: string;
+  label: string;
   noFollow?: boolean;
   width?: string;
-  active: boolean;
-};
+}
 export default function TabLink({
   active,
   href,

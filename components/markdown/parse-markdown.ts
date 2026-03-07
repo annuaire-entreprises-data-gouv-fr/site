@@ -5,21 +5,22 @@ import remarkHeadingId from "remark-heading-id";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
+import type { Compatible } from "unified/lib";
 
-export type IMarkdown = {
+export interface IMarkdown {
   __typename: "Markdown";
-};
+}
 
-type IParsedMakdown = {
-  raw: IMarkdown;
-  html: string;
+interface IParsedMakdown {
   headings: { id: string; content: string; depth: number }[];
-};
+  html: string;
+  raw: IMarkdown;
+}
 
 export default function parseMarkdownSync(
   body: IMarkdown | string
 ): IParsedMakdown {
-  const parsedBody = markdownProcessor.processSync(body);
+  const parsedBody = markdownProcessor.processSync(body as Compatible);
   return {
     raw: body as IMarkdown,
     html: removeSingleParagraph(parsedBody.value as string),

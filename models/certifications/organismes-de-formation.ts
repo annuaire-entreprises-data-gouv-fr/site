@@ -9,7 +9,9 @@ import { FetchRessourceException } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
 import type { IUniteLegale } from "../core/types";
 
-export type IOrganismeFormation = {
+export interface IOrganismeFormation {
+  lastModified: string | null;
+  qualiopiCertified: boolean;
   records: {
     nda: string | null;
     exNda: string | null;
@@ -20,9 +22,7 @@ export type IOrganismeFormation = {
     dateDeclaration: string | null;
     region: string | null;
   }[];
-  qualiopiCertified: boolean;
-  lastModified: string | null;
-};
+}
 
 export const getOrganismesDeFormation = async (
   uniteLegale: IUniteLegale

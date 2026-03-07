@@ -11,9 +11,9 @@ import { EAdministration } from "#models/administrations/EAdministration";
 import type { IUniteLegale } from "#models/core/types";
 import { formatDate, formatSiret } from "#utils/helpers";
 
-type IProps = {
+interface IProps {
   uniteLegale: IUniteLegale;
-};
+}
 
 /**
  * Alim'Confiance section

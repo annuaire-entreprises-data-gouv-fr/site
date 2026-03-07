@@ -5,20 +5,20 @@ import { Icon } from "#components-ui/icon/wrapper";
 import styles from "./styles.module.css";
 
 interface IProps extends IPartialBadgeProps {
-  icon: IIconsSlug;
   backgroundColor?: string;
   fontColor?: string;
+  icon: IIconsSlug;
 }
 
 export interface IPartialBadgeProps {
-  label?: string;
-  small?: boolean;
   isSelected?: boolean;
-  onClick?: MouseEventHandler;
+  label?: string;
   link?: {
     href: string;
     "aria-label": string;
   };
+  onClick?: MouseEventHandler;
+  small?: boolean;
 }
 
 export function Badge({

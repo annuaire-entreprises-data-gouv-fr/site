@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 // Read and parse NAF 5 niveaux CSV
-const nafCsvPath = path.join(__dirname, "naf2008_5_niveaux.csv");
+const nafCsvPath = path.join(import.meta.dirname, "naf2008_5_niveaux.csv");
 const nafContent = fs.readFileSync(nafCsvPath, "utf-8");
 const nafLines = nafContent.split("\n").slice(1); // Skip header
 
@@ -38,7 +38,7 @@ export const niv1ToNiv5Mapping: Niv1ToNiv5Mapping = ${JSON.stringify(
 `;
 
 // Write the output to a TypeScript file
-const outputPath = path.join(__dirname, "niv1ToNiv5Mapping.ts");
+const outputPath = path.join(import.meta.dirname, "niv1ToNiv5Mapping.ts");
 fs.writeFileSync(outputPath, tsContent);
 
 // Log summary

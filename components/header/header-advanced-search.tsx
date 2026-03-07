@@ -3,14 +3,14 @@ import { AdvancedSearch } from "#components/advanced-search";
 import type { IParams } from "#models/search/search-filter-params";
 import { Header } from "./header";
 
-type IProps = {
+interface IProps {
   currentSearchTerm?: string;
-  useMap?: boolean;
   searchParams: IParams;
-  useLogo?: boolean;
-  useSearchBar?: boolean;
   useAgentCTA?: boolean;
-};
+  useLogo?: boolean;
+  useMap?: boolean;
+  useSearchBar?: boolean;
+}
 
 export const HeaderWithAdvancedSearch: React.FC<IProps> = ({
   currentSearchTerm = "",

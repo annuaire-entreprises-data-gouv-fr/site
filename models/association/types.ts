@@ -1,13 +1,7 @@
 export interface IDataAssociation {
-  exId: string;
-  idAssociation: string;
-  nomComplet: string;
-  objet: string;
-  libelleFamille: string;
-  siteWeb: string;
-  utilPublique: boolean;
-  impotCommerciaux: boolean;
-  regime: string;
+  adresseGestion: string;
+  adresseInconsistency: boolean;
+  adresseSiege: string;
   agrement: {
     type: string;
     numero: string;
@@ -16,27 +10,33 @@ export interface IDataAssociation {
     id: number;
     dateAttribution: string;
   }[];
-  formeJuridique: string;
-  datePublicationJournalOfficiel: string;
+  bilans: IBilanFinancierAssociation[];
   dateCreation: string;
   dateDissolution: string;
+  datePublicationJournalOfficiel: string;
   eligibiliteCEC: boolean;
-  adresseSiege: string;
-  adresseGestion: string;
-  adresseInconsistency: boolean;
-  bilans: IBilanFinancierAssociation[];
+  exId: string;
+  formeJuridique: string;
+  idAssociation: string;
+  impotCommerciaux: boolean;
+  libelleFamille: string;
+  nomComplet: string;
+  objet: string;
+  regime: string;
+  siteWeb: string;
+  utilPublique: boolean;
 }
 
-type IBilanFinancierAssociation = {
-  dons: number;
-  subv: number;
-  produits: number;
+interface IBilanFinancierAssociation {
   charges: number;
+  dons: number;
+  produits: number;
   resultat: number;
+  subv: number;
   year: number;
-};
+}
 
 export interface IDataAssociationForAgents {
-  documentsRNA: any[];
   documentsDAC: any[];
+  documentsRNA: any[];
 }

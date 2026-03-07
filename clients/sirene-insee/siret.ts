@@ -22,40 +22,19 @@ import {
 } from "../../utils/helpers/insee-variables";
 import { inseeClientGet } from ".";
 
-type IInseeEtablissementResponse = {
+interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;
   etablissements: IInseeEtablissement[];
-};
+}
 
-type IInseeEtablissementsResponse = {
-  header: { total: number; debut: number; nombre: number };
+interface IInseeEtablissementsResponse {
   etablissements: IInseeEtablissement[];
-};
+  header: { total: number; debut: number; nombre: number };
+}
 
-type IInseeEtablissement = {
-  siret: Siret;
-  nic: string;
-  etablissementSiege: string;
-  statutDiffusionEtablissement: string;
-  trancheEffectifsEtablissement: string;
-  anneeEffectifsEtablissement: string;
-  dateCreationEtablissement: string;
-  dateDernierTraitementEtablissement: string;
-  activitePrincipaleRegistreMetiersEtablissement: string;
+interface IInseeEtablissement {
   activitePrincipaleNAF25Etablissement: string;
-  periodesEtablissement: {
-    dateFin: string;
-    dateDebut: string;
-    enseigne1Etablissement: string;
-    enseigne2Etablissement: string;
-    enseigne3Etablissement: string;
-    denominationUsuelleEtablissement: string;
-    etatAdministratifEtablissement: string;
-    changementEtatAdministratifEtablissement: boolean;
-    activitePrincipaleEtablissement: string;
-    activitePrincipaleNaf25Etablissement: string;
-    nomenclatureActivitePrincipaleEtablissement: string;
-  }[];
+  activitePrincipaleRegistreMetiersEtablissement: string;
   adresseEtablissement: {
     complementAdresseEtablissement: string;
     numeroVoieEtablissement: string;
@@ -71,28 +50,49 @@ type IInseeEtablissement = {
     codePaysEtrangerEtablissement: string;
     libellePaysEtrangerEtablissement: string;
   };
+  anneeEffectifsEtablissement: string;
+  dateCreationEtablissement: string;
+  dateDernierTraitementEtablissement: string;
+  etablissementSiege: string;
+  nic: string;
+  periodesEtablissement: {
+    dateFin: string;
+    dateDebut: string;
+    enseigne1Etablissement: string;
+    enseigne2Etablissement: string;
+    enseigne3Etablissement: string;
+    denominationUsuelleEtablissement: string;
+    etatAdministratifEtablissement: string;
+    changementEtatAdministratifEtablissement: boolean;
+    activitePrincipaleEtablissement: string;
+    activitePrincipaleNaf25Etablissement: string;
+    nomenclatureActivitePrincipaleEtablissement: string;
+  }[];
+  siret: Siret;
+  statutDiffusionEtablissement: string;
+  trancheEffectifsEtablissement: string;
   uniteLegale: IInseeetablissementUniteLegale;
-};
+}
 
 interface IInseeetablissementUniteLegale {
-  sigleUniteLegale: string;
-  dateCreationUniteLegale: string;
-  periodesUniteLegale: string;
-  dateDernierTraitementUniteLegale: string;
-  trancheEffectifsUniteLegale: string;
-  anneeEffectifsUniteLegale: string;
-  statutDiffusionUniteLegale: string;
-  prenom1UniteLegale: string;
-  sexeUniteLegale: string;
-  identifiantAssociationUniteLegale: string;
-  nicSiegeUniteLegale: string;
-  dateDebut: string;
   activitePrincipaleUniteLegale: string;
+  anneeEffectifsUniteLegale: string;
   categorieJuridiqueUniteLegale: string;
+  dateCreationUniteLegale: string;
+  dateDebut: string;
+  dateDernierTraitementUniteLegale: string;
   denominationUniteLegale: string;
   economieSocialeSolidaireUniteLegale: string;
   etatAdministratifUniteLegale: string;
+  identifiantAssociationUniteLegale: string;
+  nicSiegeUniteLegale: string;
   nomUniteLegale: string;
+  periodesUniteLegale: string;
+  prenom1UniteLegale: string;
+  sexeUniteLegale: string;
+  sigleUniteLegale: string;
+  statutDiffusionUniteLegale: string;
+  trancheEffectifsUniteLegale: string;
 }
 
 export const clientAllEtablissementsInsee = async (

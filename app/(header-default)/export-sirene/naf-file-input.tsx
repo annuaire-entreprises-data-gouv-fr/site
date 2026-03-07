@@ -5,9 +5,9 @@ import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2
 import { FileInput } from "./file-input";
 import styles from "./styles.module.css";
 
-type NAFFileInputProps = {
+interface NAFFileInputProps {
   onChangeNAF: (params: { naf: string[] }) => void;
-};
+}
 
 const regexNAFWithoutDot = /^\d{4}[A-Z]$/;
 

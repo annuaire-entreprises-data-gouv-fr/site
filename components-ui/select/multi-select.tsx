@@ -3,18 +3,18 @@ import ReactSelect, { type MultiValue, type Props } from "react-select";
 import ClientOnly from "#components/client-only";
 import type { ISelectOptions } from "./type";
 
-type MultiSelectProps = {
+interface MultiSelectProps {
   defaultValue?: string | string[];
-  value?: string[];
   id: string;
   instanceId: Props["instanceId"];
-  name?: string;
-  options: ISelectOptions[];
-  placeholder?: string;
-  onChange?: (values: string[]) => void;
   maxWidth?: string;
   menuPosition: "absolute" | "fixed";
-};
+  name?: string;
+  onChange?: (values: string[]) => void;
+  options: ISelectOptions[];
+  placeholder?: string;
+  value?: string[];
+}
 
 export const MultiSelect = ({
   defaultValue,

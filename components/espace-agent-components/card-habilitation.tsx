@@ -16,8 +16,8 @@ import { OrganisationGroupsModal } from "./organisation-groups-modal";
 import styles from "./styles.module.css";
 
 interface ICardHabilitationProps {
-  habilitationUrl: string;
   groups: IAgentsGroup[];
+  habilitationUrl: string;
 }
 
 export const CardHabilitation = ({

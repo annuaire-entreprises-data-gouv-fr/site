@@ -15,13 +15,13 @@ import ConformiteMSA from "./conformite-msa";
 import ConformiteVigilance from "./conformite-vigilance";
 
 interface IProps {
-  uniteLegale: IUniteLegale;
-  session: ISession | null;
-  useCase: UseCase;
-  title: string;
   id: string;
-  sources: EAdministration[];
   isProtected: boolean;
+  session: ISession | null;
+  sources: EAdministration[];
+  title: string;
+  uniteLegale: IUniteLegale;
+  useCase: UseCase;
 }
 
 export function ProtectedConformiteSocialeSection({

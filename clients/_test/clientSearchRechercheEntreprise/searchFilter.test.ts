@@ -14,7 +14,7 @@ describe("clientSearchRechercheEntreprise : use of search filters", () => {
   it("Should match snapshot for CA & resultat filter", async () => {
     await expectClientToMatchSnapshot({
       client: clientSearchRechercheEntreprise,
-      __dirname,
+      __dirname: import.meta.dirname,
       args: [
         {
           ...defaultParams,
