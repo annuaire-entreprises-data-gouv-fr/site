@@ -78,7 +78,6 @@
       },
       "nursery": {
         "noShadow": "off",
-        "noMisusedPromises": "off",
         "useSortedClasses": "off"
       },
       "complexity": {
