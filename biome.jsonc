@@ -7,7 +7,6 @@
   "linter": {
     "rules": {
       "a11y": {
-        "useKeyWithClickEvents": "off",
         "noSvgWithoutTitle": "off"
       },
       "style": {
