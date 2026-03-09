@@ -70,7 +70,7 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
 
   return (
     <div>
-      <label>
+      <p>
         Filtrer en chargeant{" "}
         <FaqLink tooltipLabel="une liste">
           Format requis :
@@ -89,7 +89,7 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
             <li>59069</li>
           </ul>
         </FaqLink>
-      </label>
+      </p>
       <FileInput
         description="Un code département ou commune par ligne"
         onChange={processFileContent}

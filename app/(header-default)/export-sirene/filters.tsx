@@ -805,10 +805,13 @@ export default function Filters({
               </FAQLink>
             </h3>
             <div className={styles.dateGroup}>
-              <label className={styles.dateLabel}>Depuis le</label>
+              <label className={styles.dateLabel} htmlFor="creation-date-from">
+                Depuis le
+              </label>
               <input
                 className={`fr-input ${styles.dateInput}`}
                 defaultValue={filters.creationDate?.from}
+                id="creation-date-from"
                 max={filters.creationDate?.to || todayString}
                 onChange={(e) =>
                   setFilters((prev) => ({
@@ -823,10 +826,13 @@ export default function Filters({
               />
             </div>
             <div>
-              <label className={styles.dateLabel}>Jusqu‘au</label>
+              <label className={styles.dateLabel} htmlFor="creation-date-to">
+                Jusqu‘au
+              </label>
               <input
                 className={`fr-input ${styles.dateInput}`}
                 defaultValue={filters.creationDate?.to}
+                id="creation-date-to"
                 max={todayString}
                 min={filters.creationDate?.from}
                 onChange={(e) =>
@@ -863,10 +869,13 @@ export default function Filters({
               </FAQLink>
             </h3>
             <div className={styles.dateGroup}>
-              <label className={styles.dateLabel}>Depuis le</label>
+              <label className={styles.dateLabel} htmlFor="update-date-from">
+                Depuis le
+              </label>
               <input
                 className={`fr-input ${styles.dateInput}`}
                 defaultValue={filters.updateDate?.from}
+                id="update-date-from"
                 max={filters.updateDate?.to || todayString}
                 onChange={(e) =>
                   setFilters((prev) => ({
@@ -881,10 +890,13 @@ export default function Filters({
               />
             </div>
             <div>
-              <label className={styles.dateLabel}>Jusqu‘au</label>
+              <label className={styles.dateLabel} htmlFor="update-date-to">
+                Jusqu‘au
+              </label>
               <input
                 className={`fr-input ${styles.dateInput}`}
                 defaultValue={filters.updateDate?.to}
+                id="update-date-to"
                 max={todayString}
                 min={filters.updateDate?.from}
                 onChange={(e) =>

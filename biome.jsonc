@@ -10,7 +10,6 @@
         "noNoninteractiveElementInteractions": "off",
         "noStaticElementInteractions": "off",
         "useKeyWithClickEvents": "off",
-        "noLabelWithoutControl": "off",
         "noSvgWithoutTitle": "off"
       },
       "style": {

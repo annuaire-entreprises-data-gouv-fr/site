@@ -56,7 +56,7 @@ export function NAFFileInput(props: NAFFileInputProps) {
 
   return (
     <div>
-      <label>
+      <p>
         Filtrer en chargeant{" "}
         <FaqLink tooltipLabel="une liste">
           Format requis :
@@ -73,7 +73,7 @@ export function NAFFileInput(props: NAFFileInputProps) {
             <li>4765Z</li>
           </ul>
         </FaqLink>
-      </label>
+      </p>
       <FileInput
         description="Un code NAF/APE par ligne"
         onChange={processFileContent}

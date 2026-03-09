@@ -72,7 +72,7 @@ export function CategoriesJuridiquesFileInput(
 
   return (
     <div>
-      <label>
+      <p>
         Filtrer en chargeant{" "}
         <FaqLink tooltipLabel="une liste">
           Format requis :
@@ -94,7 +94,7 @@ export function CategoriesJuridiquesFileInput(
             <li>31</li>
           </ul>
         </FaqLink>
-      </label>
+      </p>
       <FileInput
         description="Un code catégorie légale par ligne"
         onChange={processFileContent}
