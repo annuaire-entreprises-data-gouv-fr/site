@@ -6,21 +6,19 @@ import { formatNameFull, type Siren } from "#utils/helpers";
 import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
 
 export type IAPIEntrepriseBeneficiaires = IAPIEntrepriseResponse<
-  Array<
-    IAPIEntrepriseResponse<{
-      beneficiaire_uuid: string;
-      nom: string;
-      nom_usage: string;
-      prenoms: string[];
-      date_naissance: {
-        annee: string;
-        mois: string;
-      };
-      nationalite: string;
-      pays_residence: string;
-      modalites: IBeneficiairesEffectif["modalites"];
-    }>
-  >
+  IAPIEntrepriseResponse<{
+    beneficiaire_uuid: string;
+    nom: string;
+    nom_usage: string;
+    prenoms: string[];
+    date_naissance: {
+      annee: string;
+      mois: string;
+    };
+    nationalite: string;
+    pays_residence: string;
+    modalites: IBeneficiairesEffectif["modalites"];
+  }>[]
 >;
 
 /**
@@ -33,7 +31,7 @@ export const clientApiEntrepriseBeneficiaires = async (
 ) =>
   await clientAPIEntreprise<
     IAPIEntrepriseBeneficiaires,
-    Array<IBeneficiairesEffectif>
+    IBeneficiairesEffectif[]
   >(routes.apiEntreprise.beneficiaires(siren), mapToDomainObject, {
     scope,
     useCase,
@@ -41,7 +39,7 @@ export const clientApiEntrepriseBeneficiaires = async (
 
 const mapToDomainObject = (
   response: IAPIEntrepriseBeneficiaires
-): Array<IBeneficiairesEffectif> =>
+): IBeneficiairesEffectif[] =>
   response.data.map(({ data: beneficiaire }) => ({
     nom: formatNameFull(beneficiaire.nom, beneficiaire.nom_usage),
     prenoms: (beneficiaire.prenoms || "").join(", "),

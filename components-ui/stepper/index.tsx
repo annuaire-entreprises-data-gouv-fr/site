@@ -1,6 +1,6 @@
 interface IStepperProps {
   currentStep: number;
-  titles: Array<string>;
+  titles: string[];
 }
 export default function Stepper({ titles, currentStep }: IStepperProps) {
   const totalSteps = titles.length;

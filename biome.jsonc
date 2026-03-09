@@ -11,7 +11,6 @@
       },
       "style": {
         "noMagicNumbers": "off",
-        "useConsistentArrayType": "off",
         "noNestedTernary": "off",
         "useTemplate": "off",
         "noEnum": "off",

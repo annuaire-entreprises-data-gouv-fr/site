@@ -87,7 +87,7 @@ export default async function FAQArticle({ params }: AppRouterProps) {
   );
 }
 
-export async function generateStaticParams(): Promise<Array<IParams>> {
+export async function generateStaticParams(): Promise<IParams[]> {
   return allDataToModify
     .filter(({ slug }) => !!slug)
     .map(({ slug }) => ({

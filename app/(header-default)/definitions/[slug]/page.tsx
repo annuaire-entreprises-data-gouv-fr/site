@@ -82,7 +82,7 @@ export default function DefinitionPage({ params }: AppRouterProps) {
   );
 }
 
-export async function generateStaticParams(): Promise<Array<IParams>> {
+export async function generateStaticParams(): Promise<IParams[]> {
   return allDefinitions.map(({ slug }) => ({
     slug,
   }));

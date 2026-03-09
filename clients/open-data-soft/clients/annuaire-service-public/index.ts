@@ -133,9 +133,9 @@ const mapToDomainObject = (
  * @returns
  */
 function mapToServicesId(hierarchieSerialized: string): string[] {
-  const hierarchie = JSON.parse(
-    hierarchieSerialized || "null"
-  ) as Array<IServices> | null;
+  const hierarchie = JSON.parse(hierarchieSerialized || "null") as
+    | IServices[]
+    | null;
 
   if (!hierarchie || !hierarchie.length) {
     return [];
@@ -147,9 +147,9 @@ type IAffectationPersonne = IServicePublic["affectationPersonne"];
 function mapToAffectationPersonne(
   affectationRecord: string
 ): IAffectationPersonne {
-  const affectations = JSON.parse(
-    affectationRecord || "null"
-  ) as Array<IAffectationRecord> | null;
+  const affectations = JSON.parse(affectationRecord || "null") as
+    | IAffectationRecord[]
+    | null;
 
   if (!affectations || !affectations.length) {
     return null;

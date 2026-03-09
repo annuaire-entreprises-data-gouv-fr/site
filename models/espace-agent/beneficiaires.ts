@@ -78,7 +78,7 @@ const scope = ApplicationRightsToScopes[ApplicationRights.beneficiaires];
 export const getBeneficiaires = async (
   maybeSiren: string,
   params: { useCase?: UseCase }
-): Promise<Array<IBeneficiairesEffectif> | IAPINotRespondingError> => {
+): Promise<IBeneficiairesEffectif[] | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
   try {
     const beneficiaires = await clientApiEntrepriseBeneficiaires(

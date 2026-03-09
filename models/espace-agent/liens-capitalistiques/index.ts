@@ -16,7 +16,7 @@ export interface ILiensCapitalistiquesProtected {
   actionnaires: Array<
     IPersonneMoraleLiensCapitalistiques | IEtatCivilLiensCapitalistiques
   >;
-  filiales: Array<IPersonneMoraleLiensCapitalistiques>;
+  filiales: IPersonneMoraleLiensCapitalistiques[];
 }
 
 const scope = ApplicationRightsToScopes[ApplicationRights.liensCapitalistiques];

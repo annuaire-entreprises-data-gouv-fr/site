@@ -24,7 +24,7 @@ export interface IServicePublic {
     organigramme: ILien | null;
     annuaireServicePublic: ILien | null;
     formulaireContact: ILien | null;
-    sitesInternet: Array<ILien>;
+    sitesInternet: ILien[];
   };
   mission: string | null;
   nom: string | null;
