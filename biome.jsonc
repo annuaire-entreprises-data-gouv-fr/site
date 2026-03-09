@@ -59,7 +59,6 @@
         "useGuardForIn": "off",
         "noAlert": "off",
         "noDuplicateProperties": "off",
-        "noRedeclare": "off",
         "noShorthandPropertyOverrides": "off",
         "useErrorMessage": "off"
       },
