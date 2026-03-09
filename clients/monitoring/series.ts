@@ -45,7 +45,7 @@ export class DailyUptimeRatioConverter {
         (nextDay.getTime() - downStartDate.getTime()) / 1000;
 
       const timeSinceDownStartDate = Math.floor(
-        (new Date().getTime() - downStartDate.getTime()) / 1000
+        (Date.now() - downStartDate.getTime()) / 1000
       );
       const downtimeInSeconds = downtime.duration || timeSinceDownStartDate;
 

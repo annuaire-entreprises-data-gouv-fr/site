@@ -15,7 +15,7 @@ export const sessionOptions: SessionOptions = {
 };
 
 export async function setVisitTimestamp(session: IronSession<ISession>) {
-  session.lastVisitTimestamp = new Date().getTime();
+  session.lastVisitTimestamp = Date.now();
   await session.save();
 }
 

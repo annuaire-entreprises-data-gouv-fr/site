@@ -72,7 +72,6 @@
         "useOptionalChain": "off",
         "noBannedTypes": "off",
         "noForEach": "off",
-        "useDateNow": "off",
         "noUselessSwitchCase": "off",
         "useSimplifiedLogicExpression": "off"
       },
