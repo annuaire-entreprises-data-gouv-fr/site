@@ -73,6 +73,7 @@ function InformationTooltip({
   return (
     <>
       {/* biome-ignore lint/a11y/noStaticElementInteractions: this wrapper intentionally manages hover/focus state for arbitrary children */}
+      {/* biome-ignore lint/a11y/noNoninteractiveElementInteractions: this wrapper intentionally manages hover/focus state for arbitrary children */}
       <span
         className={style.wrapper}
         onBlur={handleBlur}

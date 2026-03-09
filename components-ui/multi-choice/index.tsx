@@ -66,6 +66,7 @@ export const MultiChoice: React.FC<IProps> = ({
                 type="radio"
                 value={value}
               />
+              {/* biome-ignore lint/a11y/noNoninteractiveElementInteractions: preserve existing keyboard interaction on the associated label */}
               <label
                 className="fr-label"
                 htmlFor={`${idPrefix}-${index}`}
