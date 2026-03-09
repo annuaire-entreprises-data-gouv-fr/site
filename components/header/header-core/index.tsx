@@ -155,7 +155,7 @@ export const HeaderCore: React.FC<IProps> = ({
       </PrintNever>
     </header>
     {useAgentBanner && hasRights(session, ApplicationRights.isAgent) && (
-      <div className={styles.agentBanner} role="banner">
+      <header className={styles.agentBanner}>
         <PrintNever>
           <div className="fr-container">
             Vous êtes connecté(e) en tant qu'<strong>agent public</strong>. Vous
@@ -174,7 +174,7 @@ export const HeaderCore: React.FC<IProps> = ({
             ”.
           </div>
         </PrintNever>
-      </div>
+      </header>
     )}
   </>
 );

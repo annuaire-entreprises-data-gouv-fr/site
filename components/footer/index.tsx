@@ -8,7 +8,7 @@ import styles from "./style.module.css";
 
 const Footer = () => (
   <PrintNever>
-    <footer className="fr-footer" id="footer" role="contentinfo">
+    <footer className="fr-footer" id="footer">
       <div className="fr-footer__top">
         <div className="fr-container">
           <div className="fr-grid-row fr-grid-row--start fr-grid-row--gutters">

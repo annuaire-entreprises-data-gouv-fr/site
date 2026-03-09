@@ -44,7 +44,7 @@ function TagContainer({
       {children}
     </a>
   ) : (
-    <span className={className} id={id} role="status" style={style}>
+    <span className={className} id={id} style={style}>
       {children}
     </span>
   );
