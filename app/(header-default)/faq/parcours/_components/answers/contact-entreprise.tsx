@@ -1,6 +1,6 @@
 import { ParcoursAnswer } from ".";
 
-export const ContactCompanyAnswer: React.FC<{}> = ({}) => (
+export const ContactCompanyAnswer: React.FC = () => (
   <ParcoursAnswer>
     <strong>C’est impossible de contacter une entreprise sur ce site</strong>.
     Il est inutile de nous écrire. Nous vous recommandons plutôt d’utiliser

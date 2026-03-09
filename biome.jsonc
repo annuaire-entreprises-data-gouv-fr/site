@@ -80,7 +80,6 @@
         "useJsxKeyInIterable": "off",
         "noUnusedVariables": "off",
         "noUnusedFunctionParameters": "off",
-        "noEmptyPattern": "off",
         "useExhaustiveDependencies": "off",
         "useParseIntRadix": "off",
         "useSingleJsDocAsterisk": "off",
