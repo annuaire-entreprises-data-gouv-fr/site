@@ -62,7 +62,6 @@
         "noRedeclare": "off",
         "noShorthandPropertyOverrides": "off",
         "useErrorMessage": "off",
-        "noConstantBinaryExpressions": "off",
         "noDocumentCookie": "off"
       },
       "performance": {

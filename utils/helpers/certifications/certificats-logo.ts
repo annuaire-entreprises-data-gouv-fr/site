@@ -22,7 +22,7 @@ const certificatsLogo = {
 export const getCertificatLogoPath = (nomCertificat: string) => {
   for (const [certificateSub, path] of Object.entries(certificatsLogo)) {
     if ((nomCertificat || "").toLowerCase().indexOf(certificateSub) !== -1) {
-      return `/images/rge/logo-rge-${path}` || "";
+      return `/images/rge/logo-rge-${path}`;
     }
   }
   return "";
