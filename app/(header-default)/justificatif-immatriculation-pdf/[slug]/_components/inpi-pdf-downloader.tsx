@@ -13,8 +13,8 @@ import { PDFFLoading } from "./pdf-loading";
 import { PDFNotFound } from "./pdf-not-found";
 
 function saveAsPdf(blob: Blob, siren: string) {
-  var url = window.URL.createObjectURL(blob);
-  var a = document.createElement("a");
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
   a.style.display = "none";
   a.href = url;
   a.download = "extrait_immatriculation_inpi_" + siren + ".pdf";

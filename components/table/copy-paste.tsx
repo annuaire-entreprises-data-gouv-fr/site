@@ -161,7 +161,7 @@ function CheckMarkSVG() {
 
 function logCopyPaste(label: string) {
   try {
-    var _paq = window._paq || [];
+    const _paq = window._paq || [];
     _paq.push(["trackEvent", "action", "copyPaste", `${label}`]);
   } catch {}
 }
