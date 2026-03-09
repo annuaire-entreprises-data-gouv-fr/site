@@ -13,7 +13,6 @@
         "noStaticElementInteractions": "off",
         "useKeyWithClickEvents": "off",
         "noLabelWithoutControl": "off",
-        "noNoninteractiveTabindex": "off",
         "noSvgWithoutTitle": "off"
       },
       "style": {
