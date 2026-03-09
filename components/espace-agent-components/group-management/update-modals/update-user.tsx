@@ -57,7 +57,7 @@ export default function UpdateUserSelect({
       <select
         className="fr-select"
         disabled={isPending}
-        onChange={(e) => handleUpdate(Number.parseInt(e.target.value))}
+        onChange={(e) => handleUpdate(Number.parseInt(e.target.value, 10))}
         value={optimisticRoleId ?? user.role_id}
       >
         {roles.map((role) => (

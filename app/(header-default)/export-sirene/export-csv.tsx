@@ -150,8 +150,8 @@ export default function ExportCsv() {
   const buildQuery = (): ExportCsvInput => ({
     ...(filters.headcountEnabled && {
       headcount: {
-        min: Number.parseInt(getEffectifCode(filters.headcount.min)),
-        max: Number.parseInt(getEffectifCode(filters.headcount.max)),
+        min: Number.parseInt(getEffectifCode(filters.headcount.min), 10),
+        max: Number.parseInt(getEffectifCode(filters.headcount.max), 10),
       },
     }),
     categories: filters.categories as ("PME" | "ETI" | "GE")[],

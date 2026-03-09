@@ -76,7 +76,6 @@
         "noUnusedVariables": "off",
         "noUnusedFunctionParameters": "off",
         "useExhaustiveDependencies": "off",
-        "useParseIntRadix": "off",
         "useSingleJsDocAsterisk": "off",
         "noInnerDeclarations": "off",
         "noUnknownMediaFeatureName": "off",
