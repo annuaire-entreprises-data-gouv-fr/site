@@ -8,7 +8,7 @@ export const formatLog = (
 ) =>
   [
     ["status", status],
-    ["time", time],
+    ["time", time ?? -1],
     ["request", url],
     ["method", method],
     ["userAgent", userAgent],
