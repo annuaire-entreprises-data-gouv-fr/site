@@ -10,8 +10,8 @@ const isUserAgentABot = (userAgent: string) => {
   try {
     return crawlers.some(
       (crawler) =>
-        RegExp(crawler.pattern).test(userAgent) ||
-        RegExp(crawler.pattern.toLocaleLowerCase()).test(userAgent)
+        new RegExp(crawler.pattern).test(userAgent) ||
+        new RegExp(crawler.pattern.toLocaleLowerCase()).test(userAgent)
     );
   } catch (e: any) {
     logWarningInSentry(

@@ -23,7 +23,6 @@
         "useButtonType": "off"
       },
       "style": {
-        "useConsistentBuiltinInstantiation": "off",
         "noMagicNumbers": "off",
         "useConsistentArrayType": "off",
         "noNonNullAssertion": "off",
