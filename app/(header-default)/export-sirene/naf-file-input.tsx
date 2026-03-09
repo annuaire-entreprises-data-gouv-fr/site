@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Error } from "#components-ui/alerts";
+import { AlertError } from "#components-ui/alerts";
 import FaqLink from "#components-ui/faq-link";
 import { codesNAFRev2 } from "#utils/helpers/formatting/metadata/codes-NAF-rev-2";
 import { FileInput } from "./file-input";
@@ -80,10 +80,10 @@ export function NAFFileInput(props: NAFFileInputProps) {
         onError={setError}
       />
       {error && (
-        <Error>
+        <AlertError>
           <strong>Votre fichier n’a pas pu être chargé.</strong>
           <p className="fr-my-0">{error}</p>
-        </Error>
+        </AlertError>
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Error } from "#components-ui/alerts";
+import { AlertError } from "#components-ui/alerts";
 import FaqLink from "#components-ui/faq-link";
 import { categoriesJuridiquesNiveau3 } from "#utils/helpers/formatting/metadata/categories-juridiques";
 import { categoriesJuridiquesNiveau1 } from "#utils/helpers/formatting/metadata/categories-juridiques-niveau-1";
@@ -101,10 +101,10 @@ export function CategoriesJuridiquesFileInput(
         onError={setError}
       />
       {error && (
-        <Error>
+        <AlertError>
           <strong>Votre fichier n’a pas pu être chargé.</strong>
           <p className="fr-my-0">{error}</p>
-        </Error>
+        </AlertError>
       )}
     </div>
   );

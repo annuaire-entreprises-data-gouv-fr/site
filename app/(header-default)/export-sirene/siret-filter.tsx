@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Error } from "#components-ui/alerts";
+import { AlertError } from "#components-ui/alerts";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import constants from "#models/constants";
@@ -103,10 +103,10 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
         />
 
         {error && (
-          <Error>
+          <AlertError>
             <strong>Votre fichier n’a pas pu être chargé.</strong>
             <p className="fr-my-0">{error}</p>
-          </Error>
+          </AlertError>
         )}
 
         {siretsAndSirens.length > 0 && (

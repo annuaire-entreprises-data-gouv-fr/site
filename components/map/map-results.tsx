@@ -1,6 +1,6 @@
 "use client";
 
-import maplibregl, { type Map } from "maplibre-gl";
+import maplibregl, { type Map as MapLibreMap } from "maplibre-gl";
 import constants from "#models/constants";
 import type { ISearchResults } from "#models/search";
 import { formatIntFr, formatSiret } from "#utils/helpers";
@@ -21,7 +21,7 @@ function MapWithResults({
 }) {
   const hasSupportedWebGl = hasWebGLSupport();
   const mapContainer = useRef<HTMLDivElement | null>(null);
-  const map = useRef<Map | null>(null);
+  const map = useRef<MapLibreMap | null>(null);
 
   useEffect(() => {
     if (!mapContainer.current) return;

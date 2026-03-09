@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Error } from "#components-ui/alerts";
+import { AlertError } from "#components-ui/alerts";
 import FaqLink from "#components-ui/faq-link";
 import { FileInput } from "./file-input";
 import styles from "./styles.module.css";
@@ -96,10 +96,10 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
         onError={setError}
       />
       {error && (
-        <Error>
+        <AlertError>
           <strong>Votre fichier n’a pas pu être chargé.</strong>
           <p className="fr-my-0">{error}</p>
-        </Error>
+        </AlertError>
       )}
     </div>
   );
