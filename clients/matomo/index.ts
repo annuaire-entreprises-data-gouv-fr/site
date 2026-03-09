@@ -317,7 +317,15 @@ const getNpsRecords = async () => {
   const npsData: any = {};
 
   for (const month in nps.months) {
+    if (!Object.hasOwn(nps.months, month)) {
+      continue;
+    }
+
     for (const userTypeKey in nps.months[month]) {
+      if (!Object.hasOwn(nps.months[month], userTypeKey)) {
+        continue;
+      }
+
       const ratings = nps.months[month][userTypeKey];
       const count = ratings.length;
 
