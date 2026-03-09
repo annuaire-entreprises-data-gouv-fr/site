@@ -33,7 +33,6 @@
         "useBlockStatements": "off",
         "noParameterAssign": "off",
         "noParameterProperties": "off",
-        "useAtIndex": "off",
         "useConsistentMemberAccessibility": "off",
         "useDefaultParameterLast": "off",
         "useFilenamingConvention": "off",
