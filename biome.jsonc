@@ -40,7 +40,6 @@
         "noMisplacedAssertion": "off",
         "useIterableCallbackReturn": "off",
         "noEmptyBlockStatements": "off",
-        "noAlert": "off",
         "noDuplicateProperties": "off"
       },
       "performance": {

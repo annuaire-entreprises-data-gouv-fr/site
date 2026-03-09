@@ -16,6 +16,7 @@ export function MapEtablissement({
   etablissement: IEtablissement;
 }) {
   const coords = useFetchGeoLoc(etablissement);
+  const hasSupportedWebGl = hasWebGLSupport();
 
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<Map | null>(null);
@@ -30,10 +31,7 @@ export function MapEtablissement({
     if (map.current || !coords) {
       return; // stops map from intializing more than once
     }
-    if (!hasWebGLSupport()) {
-      alert(
-        "Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte."
-      );
+    if (!hasSupportedWebGl) {
       return;
     }
 
@@ -58,7 +56,7 @@ export function MapEtablissement({
       .setLngLat(coords)
       .setPopup(popup)
       .addTo(map.current);
-  }, [etablissement, coords]);
+  }, [etablissement, coords, hasSupportedWebGl]);
 
   return (
     <div
@@ -74,7 +72,13 @@ export function MapEtablissement({
         textAlign: "center",
       }}
     >
-      {(!coords || hasAnyError(coords)) && (
+      {!hasSupportedWebGl && (
+        <i>
+          Votre navigateur ne supporte pas WebGL, qui est indispensable à
+          l’affichage de la carte.
+        </i>
+      )}
+      {hasSupportedWebGl && (!coords || hasAnyError(coords)) && (
         <i>
           Impossible d’afficher la carte.
           <br />

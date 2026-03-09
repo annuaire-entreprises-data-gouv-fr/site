@@ -19,6 +19,7 @@ function MapWithResults({
   height: string;
   shouldColorZipCode: boolean;
 }) {
+  const hasSupportedWebGl = hasWebGLSupport();
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
 
@@ -26,10 +27,7 @@ function MapWithResults({
     if (!mapContainer.current) return;
     if (map.current) return; // stops map from intializing more than once
 
-    if (!hasWebGLSupport()) {
-      alert(
-        "Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte."
-      );
+    if (!hasSupportedWebGl) {
       return;
     }
 
@@ -96,14 +94,21 @@ function MapWithResults({
         }
       });
     });
-  }, [results, shouldColorZipCode, mapContainer]);
+  }, [results, shouldColorZipCode, mapContainer, hasSupportedWebGl]);
 
   return (
     <div
       className="map"
       ref={mapContainer}
       style={{ width: "100%", zIndex: "0", height, backgroundColor: "#f0f0f0" }}
-    />
+    >
+      {!hasSupportedWebGl && (
+        <i>
+          Votre navigateur ne supporte pas WebGL, qui est indispensable à
+          l’affichage de la carte.
+        </i>
+      )}
+    </div>
   );
 }
 
