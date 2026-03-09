@@ -14,7 +14,6 @@
         "useKeyWithClickEvents": "off",
         "useValidAnchor": "off",
         "noLabelWithoutControl": "off",
-        "useAriaPropsSupportedByRole": "off",
         "noNoninteractiveTabindex": "off",
         "noSvgWithoutTitle": "off",
         "useButtonType": "off"
