@@ -58,7 +58,6 @@
         "noGlobalIsNan": "off",
         "useGuardForIn": "off",
         "noAlert": "off",
-        "noAssignInExpressions": "off",
         "noDuplicateProperties": "off",
         "noRedeclare": "off",
         "noShorthandPropertyOverrides": "off",
