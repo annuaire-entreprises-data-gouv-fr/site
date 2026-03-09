@@ -8,11 +8,10 @@
   }
 
   .blur {
-    filter: blur(6px);
-    user-select: none;
-    bubble-event: none;
-    pointer-events: none;
     display: block;
+    pointer-events: none;
+    user-select: none;
+    filter: blur(6px);
   }
 
   .cta-actes {

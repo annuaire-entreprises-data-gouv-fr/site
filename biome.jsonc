@@ -64,7 +64,6 @@
         "noUnusedFunctionParameters": "off",
         "useExhaustiveDependencies": "off",
         "noUnknownMediaFeatureName": "off",
-        "noUnknownProperty": "off",
         "noUndeclaredVariables": "off"
       },
       "security": {
