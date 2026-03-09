@@ -13,7 +13,7 @@ const SocialMedia: React.FC<{
   siren?: Siren;
 }> = ({ path, label, siren }) => (
   <PrintNever>
-    <div className={styles.socialMedia + " layout-right"}>
+    <div className={styles.socialMedia + "layout-right"}>
       <span>
         <InformationTooltip
           ariaRelation="labelledby"

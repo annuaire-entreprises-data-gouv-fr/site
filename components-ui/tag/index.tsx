@@ -61,7 +61,7 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
     <TagContainer
       className={
         styles.frBadge +
-        ` fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`
+        `fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`
       }
       id={id}
       link={link}

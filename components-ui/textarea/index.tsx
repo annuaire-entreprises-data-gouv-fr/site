@@ -31,7 +31,7 @@ const TextArea = forwardRef(
     return (
       <textarea
         {...rest}
-        className={"fr-input " + (className ?? "")}
+        className={"fr-input" + (className ?? "")}
         onChange={handleChange}
         ref={ref}
         style={{

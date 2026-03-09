@@ -5,7 +5,7 @@ export const SimpleSeparator = () => (
 );
 
 export const HorizontalSeparator = () => (
-  <div className={styles.horizontalSeparator + " layout-center"}>
+  <div className={styles.horizontalSeparator + "layout-center"}>
     <span className={styles.horizontalSeparatorLine} />
     <span className={styles.horizontalSeparatorCircle} />
     <span className={styles.horizontalSeparatorLine} />

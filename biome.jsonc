@@ -35,8 +35,7 @@
         "noBarrelFile": "off"
       },
       "nursery": {
-        "noShadow": "off",
-        "useSortedClasses": "off"
+        "noShadow": "off"
       },
       "complexity": {
         "useLiteralKeys": "off",

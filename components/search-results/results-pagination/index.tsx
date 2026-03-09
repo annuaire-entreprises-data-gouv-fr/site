@@ -135,7 +135,7 @@ const Page: React.FC<{
   <li>
     <a
       aria-current={currentPage === pageNum ? "page" : undefined}
-      className="fr-pagination__link "
+      className="fr-pagination__link"
       href={urlParams(pageNum, searchTerm, searchFilterParams, urlComplement)}
       title={`Page ${pageNum}`}
     >

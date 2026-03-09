@@ -249,7 +249,7 @@ const Footer = () => (
             >
               <img
                 alt="logo data.gouv.fr"
-                className="inline -translate-y-[15%] h-12"
+                className="inline h-12 -translate-y-[15%]"
                 height={64}
                 src="/images/logos/data-gouv.svg"
                 width={64}

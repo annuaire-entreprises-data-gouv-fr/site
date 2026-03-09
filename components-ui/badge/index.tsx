@@ -77,7 +77,7 @@ export function Badge({
     <BadgeContainer
       className={`${styles.badgeWrapper} ${
         onClick && !link && !isSelected ? styles.badgeWrapperOnClick : ""
-      } ${onClick ? " cursor-pointer" : ""}`}
+      } ${onClick ? "cursor-pointer" : ""}`}
       link={link}
       onClick={onClick}
       style={{

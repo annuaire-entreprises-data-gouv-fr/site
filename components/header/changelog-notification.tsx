@@ -62,7 +62,7 @@ export default function ChangelogNotification({
 
   return shouldDisplayNotif ? (
     <a
-      className={style.changelogNotification + " fr-link"}
+      className={style.changelogNotification + "fr-link"}
       href="/historique-des-modifications"
       title="Découvrir les dernières évolutions de l’Annuaire des Entreprises"
     >
