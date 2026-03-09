@@ -8,13 +8,7 @@ import {
 
 export const getEtablissementListe = async (
   searchParams: ExportCsvInput
-): Promise<Readable> => {
-  try {
-    return await clientSireneInsee(searchParams);
-  } catch (e: any) {
-    throw e;
-  }
-};
+): Promise<Readable> => await clientSireneInsee(searchParams);
 
 export const getEtablissementListeCount = async (
   searchParams: ExportCsvInput
