@@ -32,7 +32,6 @@
         "useAwait": "off",
         "noShadowRestrictedNames": "off",
         "noConsole": "off",
-        "noMisplacedAssertion": "off",
         "useIterableCallbackReturn": "off",
         "noEmptyBlockStatements": "off"
       },

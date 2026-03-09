@@ -111,26 +111,32 @@ describe("Check formatCurrency", () => {
 });
 
 describe("Check escapeString", () => {
-  expect(escapeString("ksdn'fk'jdnsfㅤé")).toBe("ksdn-fk-jdnsf-e");
+  test("Success", () => {
+    expect(escapeString("ksdn'fk'jdnsfㅤé")).toBe("ksdn-fk-jdnsf-e");
+  });
 });
 
 describe("Check removeSpecialChars", () => {
-  expect(removeSpecialChars("ksㅤdn'fk'jdnsfㅤé")).toBe("ksㅤdn'fk'jdnsfㅤe");
+  test("Success", () => {
+    expect(removeSpecialChars("ksㅤdn'fk'jdnsfㅤé")).toBe("ksㅤdn'fk'jdnsfㅤe");
+  });
 });
 
 describe("Check formatFirstNames", () => {
-  expect(formatFirstNames("Xavier, marie, Erwan", ", ")).toStrictEqual({
-    prenom: "Xavier",
-    prenoms: "Xavier, Marie, Erwan",
+  test("Success", () => {
+    expect(formatFirstNames("Xavier, marie, Erwan", ", ")).toStrictEqual({
+      prenom: "Xavier",
+      prenoms: "Xavier, Marie, Erwan",
+    });
+    expect(formatFirstNames("Xavier marie Erwan", " ")).toStrictEqual({
+      prenom: "Xavier",
+      prenoms: "Xavier, Marie, Erwan",
+    });
+    expect(formatFirstNames("", ", ")).toStrictEqual({
+      prenom: "",
+      prenoms: "",
+    });
+    expect(formatLastName("Monnier")).toStrictEqual("MONNIER");
+    expect(formatLastName("")).toStrictEqual("");
   });
-  expect(formatFirstNames("Xavier marie Erwan", " ")).toStrictEqual({
-    prenom: "Xavier",
-    prenoms: "Xavier, Marie, Erwan",
-  });
-  expect(formatFirstNames("", ", ")).toStrictEqual({
-    prenom: "",
-    prenoms: "",
-  });
-  expect(formatLastName("Monnier")).toStrictEqual("MONNIER");
-  expect(formatLastName("")).toStrictEqual("");
 });
