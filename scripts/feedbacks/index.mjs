@@ -84,7 +84,7 @@ function generateReport(data) {
 
     const mood = Number.parseInt(record.mood, 10);
 
-    if (mood === -1 || isNaN(mood)) {
+    if (mood === -1 || Number.isNaN(mood)) {
       return;
     }
 

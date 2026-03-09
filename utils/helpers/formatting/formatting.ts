@@ -161,7 +161,7 @@ export const getDateFromYYYYMM = safe((dPartial: string) => {
 export const convertDateToAge = safe((d: string) => {
   const ageMilliseconds = Date.now() - new Date(d).getTime();
 
-  if (isNaN(ageMilliseconds)) {
+  if (Number.isNaN(ageMilliseconds)) {
     return "";
   }
 
@@ -267,7 +267,7 @@ export const parseIntWithDefaultValue = (
 ) => {
   try {
     const result = Number.parseInt(intAsString, 10);
-    if (isNaN(result)) {
+    if (Number.isNaN(result)) {
       throw new Error();
     }
     return result;

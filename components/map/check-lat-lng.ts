@@ -8,8 +8,8 @@ export function checkLatLng(
     const lat = Number.parseFloat(latitude);
     const lng = Number.parseFloat(longitude);
     if (
-      isNaN(lat) ||
-      isNaN(lng) ||
+      Number.isNaN(lat) ||
+      Number.isNaN(lng) ||
       lat < -90 ||
       lat > 90 ||
       lng < -180 ||

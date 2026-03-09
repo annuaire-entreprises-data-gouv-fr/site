@@ -52,7 +52,6 @@
         "useIterableCallbackReturn": "off",
         "noAsyncPromiseExecutor": "off",
         "noEmptyBlockStatements": "off",
-        "noGlobalIsNan": "off",
         "useGuardForIn": "off",
         "noAlert": "off",
         "noDuplicateProperties": "off",
