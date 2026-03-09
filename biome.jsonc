@@ -35,8 +35,7 @@
         "noConsole": "off",
         "noMisplacedAssertion": "off",
         "useIterableCallbackReturn": "off",
-        "noEmptyBlockStatements": "off",
-        "noDuplicateProperties": "off"
+        "noEmptyBlockStatements": "off"
       },
       "performance": {
         "noImgElement": "off",

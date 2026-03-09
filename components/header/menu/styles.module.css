@@ -10,7 +10,6 @@
 
 .dialog {
   position: absolute;
-  position: absolute;
   z-index: 10;
   visibility: hidden;
   min-width: max-content;
