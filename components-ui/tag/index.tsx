@@ -1,5 +1,5 @@
 import type React from "react";
-import type { PropsWithChildren } from "react";
+import type { CSSProperties, PropsWithChildren } from "react";
 import styles from "./styles.module.css";
 
 interface ITagProps {
@@ -21,6 +21,35 @@ interface ITagProps {
   size?: "medium" | "small";
 }
 
+function TagContainer({
+  children,
+  className,
+  id,
+  link,
+  style,
+}: PropsWithChildren<{
+  className?: string;
+  id?: string;
+  link?: ITagProps["link"];
+  style?: CSSProperties;
+}>) {
+  return link ? (
+    <a
+      aria-label={link["aria-label"]}
+      className={className}
+      href={link.href}
+      id={id}
+      style={style}
+    >
+      {children}
+    </a>
+  ) : (
+    <span className={className} id={id} role="status" style={style}>
+      {children}
+    </span>
+  );
+}
+
 export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   children,
   id,
@@ -28,30 +57,20 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   color = "default",
   link,
 }) => {
-  const ContainerComponent = (
-    props: PropsWithChildren<{ style?: any; className?: string; id?: string }>
-  ) =>
-    link ? (
-      <a aria-label={link["aria-label"]} href={link.href} {...props} />
-    ) : (
-      <span role="status" {...props} />
-    );
-
   return (
-    <>
-      <ContainerComponent
-        className={
-          styles.frBadge +
-          ` fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`
-        }
-        id={id}
-        style={{
-          margin: "3px",
-        }}
-      >
-        {children}
-      </ContainerComponent>
-    </>
+    <TagContainer
+      className={
+        styles.frBadge +
+        ` fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`
+      }
+      id={id}
+      link={link}
+      style={{
+        margin: "3px",
+      }}
+    >
+      {children}
+    </TagContainer>
   );
 };
 

@@ -1,4 +1,8 @@
-import type { MouseEventHandler, PropsWithChildren } from "react";
+import type {
+  CSSProperties,
+  MouseEventHandler,
+  PropsWithChildren,
+} from "react";
 import { Link } from "#components/Link";
 import type { IIconsSlug } from "#components-ui/icon";
 import { Icon } from "#components-ui/icon/wrapper";
@@ -21,6 +25,35 @@ export interface IPartialBadgeProps {
   small?: boolean;
 }
 
+function BadgeContainer({
+  children,
+  className,
+  link,
+  onClick,
+  style,
+}: PropsWithChildren<{
+  className?: string;
+  link?: IPartialBadgeProps["link"];
+  onClick?: MouseEventHandler;
+  style?: CSSProperties;
+}>) {
+  return link ? (
+    <Link
+      aria-label={link["aria-label"]}
+      className={className}
+      href={link.href}
+      onClick={onClick}
+      style={style}
+    >
+      {children}
+    </Link>
+  ) : (
+    <span className={className} onClick={onClick} style={style}>
+      {children}
+    </span>
+  );
+}
+
 export function Badge({
   icon,
   label,
@@ -31,24 +64,12 @@ export function Badge({
   onClick,
   link,
 }: IProps) {
-  const ContainerComponent = (
-    props: PropsWithChildren<{
-      className?: string;
-      style?: { [key: string]: string };
-      onClick?: MouseEventHandler;
-    }>
-  ) =>
-    link ? (
-      <Link aria-label={link["aria-label"]} href={link.href} {...props} />
-    ) : (
-      <span {...props} />
-    );
-
   return (
-    <ContainerComponent
+    <BadgeContainer
       className={`${styles.badgeWrapper} ${
         onClick && !link && !isSelected ? styles.badgeWrapperOnClick : ""
       } ${onClick ? " cursor-pointer" : ""}`}
+      link={link}
       onClick={onClick}
       style={{
         border: isSelected ? "2px solid #000091" : "2px solid transparent",
@@ -74,6 +95,6 @@ export function Badge({
       >
         {label}
       </span>
-    </ContainerComponent>
+    </BadgeContainer>
   );
 }

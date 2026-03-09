@@ -77,7 +77,6 @@
         "noInnerDeclarations": "off",
         "noUnknownMediaFeatureName": "off",
         "noUnknownProperty": "off",
-        "noNestedComponentDefinitions": "off",
         "noUndeclaredVariables": "off"
       },
       "security": {
