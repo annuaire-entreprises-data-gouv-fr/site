@@ -32,7 +32,6 @@
         "useBlockStatements": "off",
         "noParameterProperties": "off",
         "useConsistentMemberAccessibility": "off",
-        "useDefaultParameterLast": "off",
         "useFilenamingConvention": "off",
         "useReadonlyClassProperties": "off",
         "noDescendingSpecificity": "off"

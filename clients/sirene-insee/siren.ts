@@ -78,7 +78,7 @@ interface TmpUniteLegale {
 
 export const clientUniteLegaleInsee = async (
   siren: Siren,
-  page = 1,
+  page: number,
   useFallback: boolean
 ): Promise<IUniteLegale> => {
   const { uniteLegale, tmpUniteLegale } = await clientTmpUniteLegale(

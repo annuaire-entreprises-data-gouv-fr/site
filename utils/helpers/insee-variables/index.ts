@@ -12,7 +12,7 @@ import logErrorInSentry from "../../sentry";
  * @returns
  */
 export const etatFromEtatAdministratifInsee = (
-  etatAdministratifInsee: "A" | "C" | "F" | "I" | string = "",
+  etatAdministratifInsee: "A" | "C" | "F" | "I" | string,
   sirenOrSiret: string
 ) => {
   switch (etatAdministratifInsee) {
@@ -35,7 +35,7 @@ export const etatFromEtatAdministratifInsee = (
  * @returns
  */
 export const statuDiffusionFromStatutDiffusionInsee = (
-  statutDiffusionInsee: "O" | "N" | "P" | string = "",
+  statutDiffusionInsee: "O" | "N" | "P" | string,
   sirenOrSiret: string
 ) => {
   switch (statutDiffusionInsee) {
