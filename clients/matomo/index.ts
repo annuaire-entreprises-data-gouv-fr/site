@@ -395,7 +395,7 @@ const getMonthLabelFromDate = (d: Date) => {
  */
 const lastTwelveMonths = () => {
   const lastYear = getLastYear();
-  const months = [];
+  const months: Array<{ firstDay: string; label: string; number: number }> = [];
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
     const monthLabel = getMonthLabelFromDate(lastYear);

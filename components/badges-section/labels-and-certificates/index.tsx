@@ -8,7 +8,7 @@ export const checkHasQuality = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEntrepriseInclusive;
 
 export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
-  const sources = [];
+  const sources: EAdministration[] = [];
   const {
     estEntrepreneurSpectacle,
     estEss,

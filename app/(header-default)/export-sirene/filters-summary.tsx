@@ -179,7 +179,7 @@ export default function FiltersSummary({
           </strong>{" "}
           {(() => {
             const { inclure, inclureNo, inclureNonRenseigne } = filters.ess;
-            const options = [];
+            const options: string[] = [];
             if (inclure) options.push("Oui");
             if (inclureNo) options.push("Non");
             if (inclureNonRenseigne) options.push("Non renseignées");
@@ -193,7 +193,7 @@ export default function FiltersSummary({
           <strong>Appartenance au champ des sociétés à mission :</strong>{" "}
           {(() => {
             const { inclure, inclureNo, inclureNonRenseigne } = filters.mission;
-            const options = [];
+            const options: string[] = [];
             if (inclure) options.push("Oui");
             if (inclureNo) options.push("Non");
             if (inclureNonRenseigne) options.push("Non renseignées");

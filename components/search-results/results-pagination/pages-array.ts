@@ -5,7 +5,7 @@ export const pagesArray = (
   const from = Math.max(1, currentPage - 5);
   const to = Math.min(totalPages, currentPage + 5);
 
-  const pages = [];
+  const pages: number[] = [];
   for (let page = from; page <= to; page++) {
     pages.push(page);
   }

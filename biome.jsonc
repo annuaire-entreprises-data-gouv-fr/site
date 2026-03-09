@@ -30,7 +30,6 @@
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "useAwait": "off",
-        "noEvolvingTypes": "off",
         "noShadowRestrictedNames": "off",
         "noConsole": "off",
         "noMisplacedAssertion": "off",
