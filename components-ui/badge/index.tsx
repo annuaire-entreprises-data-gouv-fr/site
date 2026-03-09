@@ -47,8 +47,17 @@ function BadgeContainer({
     >
       {children}
     </Link>
+  ) : onClick ? (
+    <button
+      className={className}
+      onClick={onClick}
+      style={{ background: "none", font: "inherit", padding: 0, ...style }}
+      type="button"
+    >
+      {children}
+    </button>
   ) : (
-    <span className={className} onClick={onClick} style={style}>
+    <span className={className} style={style}>
       {children}
     </span>
   );

@@ -8,7 +8,6 @@
     "rules": {
       "a11y": {
         "noNoninteractiveElementInteractions": "off",
-        "noStaticElementInteractions": "off",
         "useKeyWithClickEvents": "off",
         "noSvgWithoutTitle": "off"
       },

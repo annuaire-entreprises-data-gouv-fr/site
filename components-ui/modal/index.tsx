@@ -26,6 +26,7 @@ export const Modal: React.FC<{
   <ClientOnly>
     {isVisible ? (
       <PrintNever>
+        {/* biome-ignore lint/a11y/noStaticElementInteractions: the overlay intentionally handles pointer dismissal for the modal */}
         <div className={styles.modalOverlay} onClick={onClose}>
           <FloatingModal
             className={clsx(

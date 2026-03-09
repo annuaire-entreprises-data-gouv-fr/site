@@ -136,13 +136,14 @@ export const LocationFilter: React.FC<{
               </div>
             ) : (
               geoSuggests.map((suggest: IGeoElement) => (
-                <div
+                <button
                   className="suggest cursor-pointer"
                   key={suggest.label}
                   onClick={() => selectDep(suggest)}
+                  type="button"
                 >
                   {suggest.label}
-                </div>
+                </button>
               ))
             )}
           </div>
@@ -155,10 +156,15 @@ export const LocationFilter: React.FC<{
           max-height: 250px;
           margin-top: 10px;
         }
-        div.suggest {
+        .suggest {
           padding: 8px 4px;
+          display: block;
+          width: 100%;
+          text-align: left;
+          background: none;
+          border: none;
         }
-        div.suggest:hover {
+        .suggest:hover {
           background: #eee;
         }
       `}</style>

@@ -58,16 +58,17 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
                 query={clearFilterLink}
               />
             ) : (
-              <span
+              <button
                 className={styles["search-filter-label"]}
                 onClick={() => {
                   setOpen(!open);
                 }}
+                type="button"
               >
                 <Icon color={constants.colors.frBlue} slug={activeFilter.icon}>
                   {label}&nbsp;&nbsp;▾
                 </Icon>
-              </span>
+              </button>
             )}
           </div>
           {open && (

@@ -70,6 +70,7 @@ export function FileInput(props: FileInputProps) {
   );
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: drag-and-drop handlers intentionally live on the drop zone container
     <div
       className={clsx(styles.fileUploadArea, "fr-mt-2v", {
         [styles.dragActive]: dragActive,
