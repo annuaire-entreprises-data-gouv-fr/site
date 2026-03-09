@@ -11,8 +11,8 @@ import { FetchRessourceException } from "./exceptions";
 
 export interface IEtablissementsScolaires {
   currentPage: number;
-  resultCount: number;
   pageCount: number;
+  resultCount: number;
   results: {
     adresse: string;
     codePostal: string;

@@ -27,11 +27,11 @@
 }
 
 .loader > span {
-  background-color: #999;
+  display: inline-block;
   width: 5px;
   height: 5px;
-  border-radius: 100%;
   margin: 1px;
+  background-color: #999;
+  border-radius: 100%;
   animation-fill-mode: both;
-  display: inline-block;
 }

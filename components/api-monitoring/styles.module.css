@@ -3,18 +3,18 @@
   margin-bottom: 10px;
 }
 .metrics-title h3 {
-  margin-bottom: 10px;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 .mean-stats {
   display: flex;
   justify-content: space-between;
 }
 .mean-stats > div {
-  width: 24%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 24%;
 }
 .mean-stats > div strong {
   font-size: 1.1rem;
@@ -29,8 +29,8 @@
   flex-direction: row;
 }
 .uptime-chart {
-  flex-grow: 1;
   display: flex;
+  flex-grow: 1;
   margin: 0;
 }
 .uptime-chart > div {
@@ -39,21 +39,21 @@
 
 .serie {
   width: 100%;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 .serie-rectangle {
-  border-radius: 6px;
   height: 40px;
   margin: 5px 0;
-  transition: 100ms opacity ease-in-out;
   border: 2px solid #fff;
+  border-radius: 6px;
+  transition: 100ms opacity ease-in-out;
 }
 
 .serie-rectangle:hover {
+  height: 50px;
   margin: 0;
   opacity: 0.6;
-  height: 50px;
 }
 
 @media only screen and (min-width: 576px) and (max-width: 768px) {

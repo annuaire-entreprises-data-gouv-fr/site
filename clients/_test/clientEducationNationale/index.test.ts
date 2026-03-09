@@ -8,7 +8,7 @@ describe("clientEducationNationale", () => {
       client: clientEducationNationale,
       args: ["198100125" as Siren, 1],
       snapshotFile: "lycée-jean-jaurès-carmaux.json",
-      __dirname,
+      __dirname: import.meta.dirname,
     });
   });
 });

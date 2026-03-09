@@ -1,12 +1,12 @@
 "use client";
 
-type IProps = {
-  duration?: number;
-  delay?: number;
+interface IProps {
   children: React.ReactNode;
   className?: string;
+  delay?: number;
+  duration?: number;
   style?: React.CSSProperties;
-};
+}
 
 export const FadeIn = ({
   duration = 400,

@@ -3,12 +3,12 @@ import constants from "#models/constants";
 import { httpGet } from "#utils/network";
 import type { IGeoElement } from ".";
 
-type IGeoCommuneResponse = {
-  codesPostaux: string[];
-  nom: string;
+interface IGeoCommuneResponse {
   code: string;
+  codesPostaux: string[];
   departement?: { code: string; nom: string };
-};
+  nom: string;
+}
 
 export const clientCommunesByName = async (
   slug: string

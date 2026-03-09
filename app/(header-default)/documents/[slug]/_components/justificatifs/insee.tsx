@@ -45,10 +45,10 @@ const AvisSituationTable: React.FC<{
   />
 );
 
-type IProps = {
-  uniteLegale: IUniteLegale;
+interface IProps {
   session: ISession | null;
-};
+  uniteLegale: IUniteLegale;
+}
 
 const AvisSituationNonDiffusible = () => (
   <>

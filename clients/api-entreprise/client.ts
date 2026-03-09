@@ -8,11 +8,11 @@ import { sensitiveRequestCallerInfos } from "#utils/network/utils/sensitive-requ
 import { sensitiveRequestLogger } from "#utils/network/utils/sensitive-request-logger";
 import { logFatalErrorInSentry } from "#utils/sentry";
 
-export type IAPIEntrepriseResponse<T> = {
+export interface IAPIEntrepriseResponse<T> {
   data: T;
   links: {};
   meta: {};
-};
+}
 /**
  * Wrapper client to call API Entreprise
  *

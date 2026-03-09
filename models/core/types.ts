@@ -16,34 +16,34 @@ import type { ITVAIntracommunautaire } from "../tva";
 import { ISTATUTDIFFUSION } from "./diffusion";
 
 export interface IEtablissement {
-  siren: Siren;
-  siret: Siret;
-  oldSiret: Siret;
-  etatAdministratif: IETATADMINSTRATIF;
-  statutDiffusion: ISTATUTDIFFUSION;
-  estSiege: boolean;
-  ancienSiege: boolean;
-  enseigne: string | null;
-  denomination: string | null;
-  nic: string;
-  dateCreation: string;
-  dateDerniereMiseAJour: string;
-  dateMiseAJourInsee: string;
-  dateDebutActivite: string;
-  dateFermeture: string | null;
+  activitePrincipale: string;
   adresse: string;
   adressePostale: string;
+  ancienSiege: boolean;
+  anneeTrancheEffectif: string | null;
   codePostal: string;
   commune: string;
-  activitePrincipale: string;
+  complements: IEtablissementComplements;
+  dateCreation: string;
+  dateDebutActivite: string;
+  dateDerniereMiseAJour: string;
+  dateFermeture: string | null;
+  dateMiseAJourInsee: string;
+  denomination: string | null;
+  enseigne: string | null;
+  estSiege: boolean;
+  etatAdministratif: IETATADMINSTRATIF;
+  latitude: string;
   libelleActivitePrincipale: string;
   libelleActivitePrincipaleNaf25: string;
-  trancheEffectif: string;
-  anneeTrancheEffectif: string | null;
-  latitude: string;
-  longitude: string;
-  complements: IEtablissementComplements;
   listeIdcc: { idcc: string; title: string }[];
+  longitude: string;
+  nic: string;
+  oldSiret: Siret;
+  siren: Siren;
+  siret: Siret;
+  statutDiffusion: ISTATUTDIFFUSION;
+  trancheEffectif: string;
 }
 
 export interface IEtablissementWithUniteLegale {
@@ -84,45 +84,45 @@ export const createDefaultEtablissement = (): IEtablissement => ({
 });
 
 export interface IUniteLegale extends IEtablissementsList {
-  siren: Siren;
-  oldSiren: Siren;
-  tva: ITVAIntracommunautaire | null;
-  siege: IEtablissement;
+  activitePrincipale: string;
   // only used to pass information from unitelegale to the etablissement in insee response. Prefer etablissement.ancienSiege
   anciensSiegesSirets: Siret[];
-  natureJuridique: string;
-  libelleNatureJuridique: string;
-  activitePrincipale: string;
-  libelleActivitePrincipale: string;
-  libelleActivitePrincipaleNaf25: string;
-  dateCreation: string;
-  dateDerniereMiseAJour: string;
-  // should never be empty
-  dateMiseAJourInsee: string;
-  // should not be empty for companies
-  dateMiseAJourInpi: string;
-  // should only be filled when fallbacking on IG
-  dateMiseAJourIG: string;
-  dateDebutActivite: string;
-  dateFermeture: string;
-  statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
-  etatAdministratif: IETATADMINSTRATIF;
-  nomComplet: string;
-  chemin: string;
-  trancheEffectif: string | null;
-  anneeTrancheEffectif: string | null;
-  categorieEntreprise: string | null;
   anneeCategorieEntreprise: string | null;
-  complements: IUniteLegaleComplements;
-  immatriculation: IUniteLegaleImmatriculation | null;
+  anneeTrancheEffectif: string | null;
   association: {
     idAssociation: IdRna | string | null;
   };
+  categorieEntreprise: string | null;
+  chemin: string;
   colter: {
     codeColter: string | null;
   };
-  listeIdcc: { idcc: string; title: string }[];
+  complements: IUniteLegaleComplements;
+  dateCreation: string;
+  dateDebutActivite: string;
+  dateDerniereMiseAJour: string;
+  dateFermeture: string;
+  // should only be filled when fallbacking on IG
+  dateMiseAJourIG: string;
+  // should not be empty for companies
+  dateMiseAJourInpi: string;
+  // should never be empty
+  dateMiseAJourInsee: string;
+  etatAdministratif: IETATADMINSTRATIF;
+  immatriculation: IUniteLegaleImmatriculation | null;
   isNbEtablissementOuvertReliable: boolean;
+  libelleActivitePrincipale: string;
+  libelleActivitePrincipaleNaf25: string;
+  libelleNatureJuridique: string;
+  listeIdcc: { idcc: string; title: string }[];
+  natureJuridique: string;
+  nomComplet: string;
+  oldSiren: Siren;
+  siege: IEtablissement;
+  siren: Siren;
+  statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
+  trancheEffectif: string | null;
+  tva: ITVAIntracommunautaire | null;
 }
 
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
@@ -169,40 +169,40 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
 };
 
 export interface IUniteLegaleImmatriculation {
+  capital: string;
+  dateCloture: string;
   dateDebutActivite: string;
+  dateFin: string;
   dateImmatriculation: string;
   dateRadiation: string;
-  dateFin: string;
-  natureEntreprise: string[];
-  dateCloture: string;
   isPersonneMorale: boolean;
-  capital: string;
+  natureEntreprise: string[];
 }
 
 export interface IUniteLegaleComplements {
+  bilanGesRenseigne: boolean;
+  egaproRenseignee: boolean;
+  estAchatsResponsables: boolean;
+  estAlimConfiance: boolean;
+  estAssociation: boolean;
   estBio: boolean;
   estEntrepreneurIndividuel: boolean;
-  estPersonneMorale: boolean;
-  estEss: boolean;
   estEntrepreneurSpectacle: boolean;
-  statutEntrepreneurSpectacle: string;
+  estEntrepriseInclusive: boolean;
+  estEss: boolean;
   estFiness: boolean;
-  egaproRenseignee: boolean;
-  estServicePublic: boolean;
   estL100_3: boolean;
+  estOrganismeFormation: boolean;
+  estPatrimoineVivant: boolean;
+  estPersonneMorale: boolean;
   estQualiopi: boolean;
   estRge: boolean;
-  estOrganismeFormation: boolean;
+  estServicePublic: boolean;
   estSocieteMission: boolean;
-  estAssociation: boolean;
-  estEntrepriseInclusive: boolean;
-  typeEntrepriseInclusive: string;
-  estAchatsResponsables: boolean;
-  estPatrimoineVivant: boolean;
-  estAlimConfiance: boolean;
-  bilanGesRenseigne: boolean;
   estUai: boolean;
   idFinessJuridiques: string[];
+  statutEntrepreneurSpectacle: string;
+  typeEntrepriseInclusive: string;
 }
 
 export const createDefaultUniteLegaleComplements =
@@ -236,8 +236,8 @@ export interface IEtablissementComplements {
   // this is used to determined if etablissement belongs to an EI - useful to determinie wether we should use insee
   estEntrepreneurIndividuel: boolean;
   estPersonneMorale: boolean;
-  idFiness: string[];
   idBio: string[];
+  idFiness: string[];
   idOrganismeFormation: string[];
   idRge: string[];
   idUai: string[];

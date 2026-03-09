@@ -4,23 +4,23 @@ import parseMarkdownSync, {
 /** @ts-expect-error */
 import data from "../../data/changelog.yml";
 
-type IChangelogTarget = {
+interface IChangelogTarget {
   agent: boolean;
-  site: boolean;
   api: boolean;
-};
+  site: boolean;
+}
 
-type IChangelogRaw = {
-  date: string;
+interface IChangelogRaw {
   body: IMarkdown;
-  target?: IChangelogTarget;
-};
-
-export type IChangelog = {
   date: string;
-  target: IChangelogTarget;
+  target?: IChangelogTarget;
+}
+
+export interface IChangelog {
+  date: string;
   htmlBody: string;
-};
+  target: IChangelogTarget;
+}
 
 const loadData = (): IChangelog[] => {
   const noneTarget = {

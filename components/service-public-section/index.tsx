@@ -9,10 +9,10 @@ import { EAdministration } from "#models/administrations/EAdministration";
 import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import type { IServicePublic } from "#models/service-public";
 
-type IProps = {
-  uniteLegale: IUniteLegale;
+interface IProps {
   etablissement?: IEtablissement;
-};
+  uniteLegale: IUniteLegale;
+}
 
 export default function ServicePublicSection({
   uniteLegale,

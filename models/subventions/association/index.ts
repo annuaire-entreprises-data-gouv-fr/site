@@ -12,11 +12,11 @@ import logErrorInSentry, { logInfoInSentry } from "#utils/sentry";
 export type ISubventions = ISubvention[];
 
 export interface ISubvention {
-  year: number;
+  amount: number | undefined;
+  description: string;
   label: string;
   status: string;
-  description: string;
-  amount: number | undefined;
+  year: number;
 }
 
 export const getSubventionsAssociationFromSlug = async (

@@ -32,7 +32,9 @@ export const LogoAnnuaire = () => (
 export const LogoAnnuaireGif = () => (
   <img
     alt="Logo de l’Annuaire des Entreprises"
+    height="277"
     src="/images/annuaire-entreprises-paysage-large.gif"
-    style={{ height: "100px", margin: "auto", display: "block" }}
+    style={{ height: "120px", width: "auto", margin: "auto", display: "block" }}
+    width="560"
   />
 );

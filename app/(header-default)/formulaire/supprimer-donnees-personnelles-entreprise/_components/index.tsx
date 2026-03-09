@@ -7,9 +7,9 @@ import { ConnectionFranceConnect } from "./connection-france-connect";
 import { RenseignerSiren } from "./renseigner-siren";
 import { RequestState } from "./request-state";
 
-type IProps = {
+interface IProps {
   session: ISession | null;
-};
+}
 
 export default function HidePersonalDataPageClient({ session }: IProps) {
   const franceConnected = getHidePersonalDataRequestFCSession(session);

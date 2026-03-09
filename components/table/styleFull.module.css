@@ -1,20 +1,20 @@
 table.fullTable {
-  border-collapse: collapse;
-  text-align: left;
-  color: #081d35;
   width: 100%;
+  color: #081d35;
+  text-align: left;
   /* Do not break word on full table */
   word-break: initial;
+  border-collapse: collapse;
 }
 
 td.cell {
-  border: 1px solid var(--annuaire-colors-pastelBlue);
-  border-left: none;
-  border-right: none;
-  border: none;
   padding: 5px 0;
   padding-right: 10px;
   background-color: #fff;
+  border: 1px solid var(--annuaire-colors-pastelBlue);
+  border: none;
+  border-right: none;
+  border-left: none;
 }
 
 tr.row:hover td.cell {
@@ -25,8 +25,8 @@ tr.row:hover td.cell {
   table.fullTable,
   td.cell {
     display: block;
-    padding-left: 0 !important;
     padding-right: 0 !important;
+    padding-left: 0 !important;
   }
 
   thead.head {

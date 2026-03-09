@@ -1,31 +1,31 @@
-export type IFiness = {
+export interface IFiness {
+  finessEtablissements: IFinessEtablissement[];
   idFinessJuridique: string;
   raisonSociale: string;
   siren: string;
-  finessEtablissements: IFinessEtablissement[];
-};
+}
 
-export type IFinessList = {
+export interface IFinessList {
   data: IFiness[];
-  meta: {
-    page: number;
-    page_size: number;
-    total: number;
-  };
   etablissementsMeta: {
     page: number;
     page_size: number;
     total: number;
   };
-};
+  meta: {
+    page: number;
+    page_size: number;
+    total: number;
+  };
+}
 
-export type IFinessEtablissement = {
-  idFinessGeo: string;
-  siret: string;
-  raisonSociale: string;
-  phone: string;
-  category: string;
-  MFT: string;
-  SPH: string;
+export interface IFinessEtablissement {
   adresse: string;
-};
+  category: string;
+  idFinessGeo: string;
+  MFT: string;
+  phone: string;
+  raisonSociale: string;
+  SPH: string;
+  siret: string;
+}

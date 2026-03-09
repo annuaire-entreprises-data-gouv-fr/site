@@ -2,12 +2,14 @@ import { headers } from "next/headers";
 import { parseIntWithDefaultValue } from "#utils/helpers";
 import isUserAgentABot from "#utils/user-agent";
 
-export type IParams = { slug: string };
+export interface IParams {
+  slug: string;
+}
 
-export type AppRouterProps = {
+export interface AppRouterProps {
   params: Promise<IParams>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
+}
 
 async function extractParamsAppRouter({
   params,

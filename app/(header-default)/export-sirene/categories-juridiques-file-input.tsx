@@ -7,13 +7,13 @@ import { categoriesJuridiquesNiveau2 } from "#utils/helpers/formatting/metadata/
 import { FileInput } from "./file-input";
 import styles from "./styles.module.css";
 
-type CategoriesJuridiquesFileInputProps = {
+interface CategoriesJuridiquesFileInputProps {
   onChangeCategoriesJuridiques: (params: {
     legalCategoriesNiveau1: string[];
     legalCategoriesNiveau2: string[];
     legalCategoriesNiveau3: string[];
   }) => void;
-};
+}
 
 export function CategoriesJuridiquesFileInput(
   props: CategoriesJuridiquesFileInputProps

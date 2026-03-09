@@ -50,9 +50,9 @@ export const withRateLimiting: MiddlewareFn<
   return next();
 };
 
-type UseCaseInput = {
+interface UseCaseInput {
   useCase: UseCase;
-};
+}
 export const withUseCase: MiddlewareFn<
   ServerActionError,
   unknown,

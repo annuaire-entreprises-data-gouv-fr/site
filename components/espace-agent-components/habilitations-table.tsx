@@ -9,8 +9,8 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 
 interface IHabilitationsTableProps {
-  session: ISession;
   groups: IAgentsGroup[];
+  session: ISession;
 }
 
 export const HabilitationsTable = async ({

@@ -16,10 +16,10 @@ import extractParamsAppRouter from "#utils/server-side-helper/extract-params";
 import getSession from "#utils/server-side-helper/get-session";
 import { getHidePersonalDataRequestFCSession } from "#utils/session";
 
-export type IFormState = {
-  uniteLegale?: IUniteLegale;
+export interface IFormState {
   hidePersonalDataRequest?: IHidePersonalDataRequest;
-};
+  uniteLegale?: IUniteLegale;
+}
 
 export async function POST(request: Request) {
   try {

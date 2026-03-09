@@ -3,7 +3,7 @@ import type { ICCWithMetadata } from "#models/conventions-collectives";
 import { DataStore } from "#utils/data-store";
 import { httpGet } from "#utils/network";
 
-type IIdccMetadata = {
+interface IIdccMetadata {
   [idcc: string]: {
     "titre de la convention": string; //Convention collective na… des cabinets d'avocats
     id_kali: string; //KALICONT000005635185
@@ -14,7 +14,7 @@ type IIdccMetadata = {
     fin: string | null;
     url: string; //https://www.legifrance.g…/id/KALICONT000005635185
   };
-};
+}
 
 function mapToDomainObject(response: IIdccMetadata) {
   return Object.entries(response).reduce(

@@ -18,10 +18,10 @@ import {
 import { pluralize } from "#utils/helpers";
 import DirigeantsContentProtected from "./content";
 
-type IProps = {
-  uniteLegale: IUniteLegale;
+interface IProps {
   session: ISession | null;
-};
+  uniteLegale: IUniteLegale;
+}
 
 /**
  * Dirigeants section protected

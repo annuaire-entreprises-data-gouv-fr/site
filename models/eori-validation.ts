@@ -9,10 +9,10 @@ import {
 } from "./api-not-responding";
 import { FetchRessourceException } from "./exceptions";
 
-export type IEORIValidation = {
+export interface IEORIValidation {
   eori: string;
   isValid: boolean;
-};
+}
 
 // Value returned when the request is aborted
 const ABORTED_VALUE = { eori: "", isValid: false };

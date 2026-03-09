@@ -4,10 +4,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
  * A hooks that measure the size of an element, thanks to the ResizeObserver API.
  * @returns
  */
-type IMeasures = {
-  width: number | undefined;
+interface IMeasures {
   height: number | undefined;
-};
+  width: number | undefined;
+}
 export function useMeasure(): [
   ref: (node: HTMLElement | null) => void,
   measures: IMeasures,

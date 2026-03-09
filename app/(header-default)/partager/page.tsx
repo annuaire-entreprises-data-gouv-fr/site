@@ -125,7 +125,12 @@ export default function PartagerPage() {
             d’apporter toutes les informations légales nécessaires.
           </p>
           <p>Voici un exemple de QR code :</p>
-          <img alt="exemple de QR code" src="/images/QR_code_example.jpeg" />
+          <img
+            alt="exemple de QR code"
+            height="140"
+            src="/images/QR_code_example.jpeg"
+            width="140"
+          />
           <h3>Comment générer un QR code ?</h3>
           <p>
             Vous pouvez générer un lien{" "}
@@ -190,8 +195,10 @@ export default function PartagerPage() {
           <div>
             <img
               alt="exemple de liste de moteurs de recherche"
+              height="206"
               src="/images/Browser_example.png"
-              style={{ width: "100%" }}
+              style={{ width: "100%", height: "auto" }}
+              width="1654"
             />
           </div>
           <h3>Comment faire ?</h3>

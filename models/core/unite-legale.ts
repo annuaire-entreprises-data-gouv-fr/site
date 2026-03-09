@@ -50,8 +50,8 @@ import {
  */
 
 interface IUniteLegaleOptions {
-  page?: number;
   isBot: boolean;
+  page?: number;
 }
 
 /**

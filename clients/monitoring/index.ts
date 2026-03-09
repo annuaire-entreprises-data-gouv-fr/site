@@ -4,25 +4,25 @@ import type { IMonitoring, IRatio } from "#models/monitoring";
 import { httpGet } from "#utils/network";
 import { DailyUptimeRatioConverter } from "./series";
 
-export type IMonitorLog = {
-  id?: number;
-  type?: number;
+export interface IMonitorLog {
   datetime: number; // timestamp in seconds
   duration: number;
+  id?: number;
   reason?: {
     code: string;
     detail: string;
   };
-};
+  type?: number;
+}
 
-export type IUpdownIODowntimes = {
-  id: string;
-  error: string; // 'Response timeout (30 seconds)';
-  started_at: string; // '2023-11-15T23:09:17Z';
-  ended_at: string; // '2023-11-15T23:11:28Z';
+export interface IUpdownIODowntimes {
   duration: number; // in seconds
+  ended_at: string; // '2023-11-15T23:11:28Z';
+  error: string; // 'Response timeout (30 seconds)';
+  id: string;
   partial: boolean;
-};
+  started_at: string; // '2023-11-15T23:09:17Z';
+}
 
 export const clientMonitoring = async (
   slug: string,

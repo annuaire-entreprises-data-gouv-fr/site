@@ -5,8 +5,8 @@
 }
 
 .outer-container {
-  flex: 1 1 0%;
   display: flex;
+  flex: 1 1 0%;
   flex-direction: column;
   min-width: 100vw;
 }

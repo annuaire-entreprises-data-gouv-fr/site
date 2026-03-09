@@ -9,8 +9,8 @@ import { FileInput } from "./file-input";
 import styles from "./styles.module.css";
 
 interface SiretFilterProps {
-  siretsAndSirens: string[];
   onSiretsAndSirensChange: (siretList: string[]) => void;
+  siretsAndSirens: string[];
 }
 
 export const SiretFilter: React.FC<SiretFilterProps> = ({

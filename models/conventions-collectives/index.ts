@@ -10,21 +10,21 @@ import {
 import { FetchRessourceException } from "../exceptions";
 import { idccUpdates } from "./idcc-updates";
 
-export type IConventionsCollectives = {
+export interface IConventionsCollectives {
   [idcc: string]: string[];
-};
+}
 
-export type ICCWithMetadata = {
+export interface ICCWithMetadata {
+  etat?: string;
+  idcc?: string;
   idKali?: string | null;
   legifrance?: string | null;
-  title?: string;
   nature?: string;
-  etat?: string;
   sirets?: string[];
-  idcc?: string;
-  updated: ICCWithMetadata[];
+  title?: string;
   unknown: boolean;
-};
+  updated: ICCWithMetadata[];
+}
 
 /**
  * Get title from metadata for a single idcc

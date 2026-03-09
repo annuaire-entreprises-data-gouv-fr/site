@@ -13,16 +13,16 @@ import type { UseCase } from "#models/use-cases";
 import { extractSirenFromSiret, verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
 
-export type IDocumentDownloader = {
+export interface IDocumentDownloader {
   url: string;
-};
+}
 
-export type ITravauxPublics = {
-  fntp: IDocumentDownloader | IAPINotRespondingError;
+export interface ITravauxPublics {
   cibtp: IDocumentDownloader | IAPINotRespondingError;
   cnetp: IDocumentDownloader | IAPINotRespondingError;
+  fntp: IDocumentDownloader | IAPINotRespondingError;
   probtp: IDocumentDownloader | IAPINotRespondingError;
-};
+}
 
 const scope = ApplicationRightsToScopes[ApplicationRights.travauxPublics];
 

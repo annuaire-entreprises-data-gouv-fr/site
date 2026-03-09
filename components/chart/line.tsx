@@ -23,13 +23,13 @@ ChartJS.register(
   Legend
 );
 
-type LineChartProps = {
+interface LineChartProps {
   data: ChartData<"line">;
-  options?: ChartOptions<"line">;
   height?: number | string;
-  width?: number | string;
   htmlLegendId?: string;
-};
+  options?: ChartOptions<"line">;
+  width?: number | string;
+}
 
 export const LineChart = ({
   data,

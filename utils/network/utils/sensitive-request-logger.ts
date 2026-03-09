@@ -2,34 +2,34 @@ import { Exception } from "#models/exceptions";
 import { extractSirenOrSiretSlugFromUrl, randomId } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 
-type ISensitiveLogType = {
-  date: string;
-  timestamp: number;
-  request: {
-    route: string;
-    id: string;
-  };
+interface ISensitiveLogType {
   content: {
     resource_type: string | null;
     resource_id: string | null;
   };
+  date: string;
+  request: {
+    route: string;
+    id: string;
+  };
+  timestamp: number;
   url: {
     scheme: string;
     domain: string;
     path: string;
     query: string;
   };
-  user: ISensitiveCaller;
   useCase?: string;
-};
+  user: ISensitiveCaller;
+}
 
 // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-user.html
-export type ISensitiveCaller = {
-  email: string;
-  siret: string | null;
-  scopes: string[];
+export interface ISensitiveCaller {
   domain: string;
-};
+  email: string;
+  scopes: string[];
+  siret: string | null;
+}
 
 /**
  * Dedicated logger for sensitive requests.

@@ -7,9 +7,9 @@
 }
 
 .hero-content {
-  text-align: center;
   max-width: 48rem;
   margin: 0 auto 2rem;
+  text-align: center;
 }
 
 .hero-content h1 {
@@ -23,13 +23,13 @@
 
 .hero-video {
   position: relative;
-  border-radius: 0.75rem;
-  border: 1px solid #c7c2f9;
-  box-shadow: 0 8px 30px rgba(0, 0, 145, 0.18);
-  background: #f5f7ff;
   width: min(100%, 980px);
   margin: 0 auto;
   overflow: hidden;
+  background: #f5f7ff;
+  border: 1px solid #c7c2f9;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 145, 0.18);
 }
 
 .hero-video-player {
@@ -37,8 +37,8 @@
   width: 100%;
   height: auto;
   aspect-ratio: 1644 / 1080;
-  background: #f5f7ff;
   cursor: pointer !important;
+  background: #f5f7ff;
 }
 
 .data-section h2 {
@@ -46,10 +46,10 @@
 }
 
 .data-card {
-  border: 1px solid #d6d8ff;
-  border-radius: 0.5rem;
   padding: 1.5rem;
   background: #fff;
+  border: 1px solid #d6d8ff;
+  border-radius: 0.5rem;
 }
 
 .data-card-shell {
@@ -66,9 +66,9 @@
 
 .data-card-content ul li {
   display: flex;
-  align-items: center;
-  gap: 0.3rem;
   flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
 }
 
 .illustration-col {
@@ -79,8 +79,8 @@
 }
 
 .data-illustration {
-  max-width: 100%;
   width: 12rem;
+  max-width: 100%;
 }
 
 .data-card h3 {
@@ -93,9 +93,9 @@
 }
 
 .data-card ul {
+  padding-left: 0;
   margin: 0;
   list-style: none;
-  padding-left: 0;
 }
 
 .data-card li {
@@ -103,15 +103,15 @@
 }
 
 .data-card-footer {
-  margin-top: 1rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: space-between;
   padding: 1rem 1.25rem;
+  margin-top: 1rem;
+  background: #eef3ff;
   border: 1px solid #cdd7ff;
   border-radius: 0.5rem;
-  background: #eef3ff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1.25rem;
 }
 
 .data-card-footer p {
@@ -126,9 +126,9 @@
 
 .logged-in {
   padding: 0.75rem 1rem;
+  background: #fff;
   border: 1px solid #d6d8ff;
   border-radius: 0.5rem;
-  background: #fff;
 }
 
 @media (max-width: 768px) {
@@ -138,13 +138,13 @@
 
   .hero-top {
     flex-direction: column;
-    align-items: stretch;
     gap: 1rem;
+    align-items: stretch;
   }
 
   .hero-top a {
-    width: fit-content;
     align-self: flex-end;
+    width: fit-content;
   }
 
   .hero-brand img:first-child {

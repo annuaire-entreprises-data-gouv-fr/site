@@ -6,10 +6,10 @@ import { Modal } from "#components-ui/modal";
 import styles from "./styles.module.css";
 
 interface INoGroupsModalProps {
-  isVisible: boolean;
   isLoading: boolean;
-  onConfirm: () => void;
+  isVisible: boolean;
   onCancel: () => void;
+  onConfirm: () => void;
 }
 
 export const NoGroupsModal = ({

@@ -6,20 +6,20 @@ import type { EAdministration } from "./administrations/EAdministration";
 import type { IAPIMonitorMetaData } from "./administrations/types";
 import { FetchRessourceException } from "./exceptions";
 
-export type IRatio = {
-  ratioNumber: number;
+export interface IRatio {
   date?: string;
+  ratioNumber: number;
   wasMonitorUp?: boolean;
-};
-export type IMonitoring = {
+}
+export interface IMonitoring {
   isOnline: boolean;
+  series: IRatio[];
   uptime: {
     day: string;
     week: string;
     month: string;
   };
-  series: IRatio[];
-};
+}
 
 export interface IMonitoringWithMetaData
   extends IMonitoring,

@@ -1,17 +1,12 @@
 import type { Siren } from "#utils/helpers";
 
-export type IIGResponse = {
-  siren: Siren;
-  nomComplet: string;
-  etat: string;
-  natureJuridique: string;
+export interface IIGResponse {
   activitePrincipale: string;
-  libelleActivitePrincipale: string;
-  dateCreation: string;
-  siege: string;
   association: {
     idAssociation: string | null;
   };
+  dateCreation: string;
+  etat: string;
   immatriculation: {
     dateDebutActivite: string;
     dateFin: string;
@@ -23,4 +18,9 @@ export type IIGResponse = {
     isPersonneMorale: boolean;
     capital: string;
   };
-};
+  libelleActivitePrincipale: string;
+  natureJuridique: string;
+  nomComplet: string;
+  siege: string;
+  siren: Siren;
+}

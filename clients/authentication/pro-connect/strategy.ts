@@ -97,21 +97,21 @@ export const proConnectAuthorizeUrl = async (params: {
   });
 };
 
-export type IProConnectUserInfo = {
-  sub: string;
+export interface IProConnectUserInfo {
   email: string;
   email_verified: boolean;
   family_name: string | null;
   given_name: string | null;
-  phone_number: string | null;
-  job: string | null;
-  siret?: string;
-  is_external: boolean;
-  label: string | null;
-  is_collectivite_territoriale: boolean;
-  is_service_public: boolean;
   idp_id: string;
-};
+  is_collectivite_territoriale: boolean;
+  is_external: boolean;
+  is_service_public: boolean;
+  job: string | null;
+  label: string | null;
+  phone_number: string | null;
+  siret?: string;
+  sub: string;
+}
 
 export const proConnectAuthenticate = async (
   req: IReqWithSession,

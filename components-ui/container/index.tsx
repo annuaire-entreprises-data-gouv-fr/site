@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import styles from "./style.module.css";
 
-type ContainerProps = {
+interface ContainerProps {
   children: ReactNode;
   className?: string;
   style?: React.CSSProperties;
-};
+}
 
 /**
  * This container is a wrapper arround `.fr-container` from the DSFR

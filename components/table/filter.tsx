@@ -1,11 +1,11 @@
 import { MultiSelect } from "#components-ui/select/multi-select";
 
-type IProps = {
-  onChange: (selectedValues: string[]) => void;
+interface IProps {
   dataSelect: { value: string; label: string }[];
-  placeholder?: string;
   fallback?: React.JSX.Element | null;
-};
+  onChange: (selectedValues: string[]) => void;
+  placeholder?: string;
+}
 
 export default function TableFilter({
   dataSelect,

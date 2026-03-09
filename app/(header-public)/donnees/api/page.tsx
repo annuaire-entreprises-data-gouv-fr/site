@@ -13,10 +13,10 @@ import {
 export const dynamic = "force-dynamic";
 
 interface IProps {
+  administrationsMetaData: IAdministrationsMetaData;
   monitors: {
     [key: string]: IMonitoringWithMetaData[];
   };
-  administrationsMetaData: IAdministrationsMetaData;
 }
 
 async function fetchStatusData(): Promise<IProps> {

@@ -5,8 +5,8 @@ export interface Department {
 
 export interface Region {
   code: string;
-  name: string;
   departments: Department[];
+  name: string;
 }
 
 export const regions: Region[] = [

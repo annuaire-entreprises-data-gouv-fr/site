@@ -14,10 +14,10 @@ import { isPersonneMorale } from "#utils/helpers/is-personne-morale";
 import EtatCivilInfos from "../EtatCivilInfos";
 import PersonneMoraleInfos from "../PersonneMoraleInfos";
 
-type IDirigeantContentProps = {
+interface IDirigeantContentProps {
   dirigeants: IDirigeantsWithMetadata;
   uniteLegale: IUniteLegale;
-};
+}
 
 export default function DirigeantsContent({
   dirigeants,

@@ -10,10 +10,10 @@ import type { UseCase } from "#models/use-cases";
 import { extractSirenFromSiret, verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "./utils";
 
-type IConformite = {
-  url: string | null;
+interface IConformite {
   label: string | null;
-};
+  url: string | null;
+}
 
 export type IConformiteFiscale = IConformite & {
   dateDelivrance: string;
@@ -29,14 +29,14 @@ export type IConformiteMSA = IConformite & {
   status: "a_jour" | "non_a_jour" | "sous_investigation";
 };
 
-export type IConformiteSocialeUniteLegale = {
-  vigilance: IConformiteVigilance | IAPINotRespondingError;
+export interface IConformiteSocialeUniteLegale {
   msa: IConformiteMSA | IAPINotRespondingError;
-};
+  vigilance: IConformiteVigilance | IAPINotRespondingError;
+}
 
-export type IConformiteFiscaleUniteLegale = {
+export interface IConformiteFiscaleUniteLegale {
   fiscale: IConformiteFiscale | IAPINotRespondingError;
-};
+}
 
 const scopeSociale =
   ApplicationRightsToScopes[ApplicationRights.conformiteSociale];

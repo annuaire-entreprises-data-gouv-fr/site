@@ -10,10 +10,10 @@ export type IODSResponse =
       results: any[];
     };
 
-export type IODSMetadata = {
+export interface IODSMetadata {
   metas: {
     modified: string;
     metadata_processed: string;
     data_processed: string;
   };
-};
+}

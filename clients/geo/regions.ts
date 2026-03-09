@@ -3,10 +3,10 @@ import constants from "#models/constants";
 import { httpGet } from "#utils/network";
 import type { IGeoElement } from ".";
 
-type IGeoRegionResponse = {
-  nom: string;
+interface IGeoRegionResponse {
   code: string;
-};
+  nom: string;
+}
 
 export const clientRegionsByName = async (
   term: string

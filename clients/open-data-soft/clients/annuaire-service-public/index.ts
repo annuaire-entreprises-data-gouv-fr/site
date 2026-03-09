@@ -11,6 +11,7 @@ interface IServicePublicRecord {
   affectation_personne: string;
   categorie: string;
   formulaire_contact: string;
+  hierarchie: string;
   mission: string;
   nom: string;
   organigramme: string;
@@ -19,12 +20,15 @@ interface IServicePublicRecord {
   telephone: string;
   type_organisme: string;
   url_service_public: string;
-  hierarchie: string;
 }
 
-type IServices = { type_hierarchie: string; service: string };
+interface IServices {
+  service: string;
+  type_hierarchie: string;
+}
 
-type IAffectationRecord = {
+interface IAffectationRecord {
+  fonction: string;
   personne: {
     prenom: string;
     nom: string;
@@ -33,8 +37,7 @@ type IAffectationRecord = {
       valeur: string;
     }>;
   };
-  fonction: string;
-};
+}
 
 function firstArrayElement<T>(array: T[], defaultValue: T): T {
   if (array && array.length && array.length > 0) {

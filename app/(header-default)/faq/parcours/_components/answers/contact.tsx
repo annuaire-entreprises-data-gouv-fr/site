@@ -6,10 +6,10 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 import { ParcoursAnswer } from ".";
 
-type IProps = {
-  userType: string;
+interface IProps {
   session: ISession | null;
-};
+  userType: string;
+}
 
 export const ContactAnswer: React.FC<IProps> = ({ session, userType }) => (
   <ParcoursAnswer>

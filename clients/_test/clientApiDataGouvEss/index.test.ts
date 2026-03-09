@@ -8,7 +8,7 @@ describe("clientAssociation", () => {
       client: clientEss,
       args: ["800329849" as Siren],
       snapshotFile: "api-data-gouv-ess-800329849.json",
-      __dirname,
+      __dirname: import.meta.dirname,
     });
   });
 });

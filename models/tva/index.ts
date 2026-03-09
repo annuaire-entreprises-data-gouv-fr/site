@@ -2,13 +2,13 @@ import { estActif } from "#models/core/etat-administratif";
 import type { IEtablissement, IUniteLegale } from "../core/types";
 import { tvaNumber } from "./utils";
 
-export type ITVAIntracommunautaire = {
-  tvaNumber: string;
+export interface ITVAIntracommunautaire {
   mayHaveMultipleTVANumber: {
     allTime: boolean;
     currentlyActive: boolean;
   };
-};
+  tvaNumber: string;
+}
 
 function haveMultipleNafs(etablissementsList: IEtablissement[] = []) {
   return (

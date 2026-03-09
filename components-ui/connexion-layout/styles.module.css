@@ -1,32 +1,32 @@
 .connexion {
-  display: flex;
   position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px 0;
 }
 
 .connexion > div {
-  padding: 0 40px;
   width: 50%;
+  padding: 0 40px;
 }
 
 .image:before {
-  background-color: #f5f5fe;
-  border-radius: 8px;
   position: absolute;
   top: 0;
   bottom: 0;
-  content: "";
-  width: 55vw;
-  z-index: -1;
   left: calc(-51vw + 50%);
+  z-index: -1;
+  width: 55vw;
+  content: "";
+  background-color: #f5f5fe;
+  border-radius: 8px;
 }
 
 .image {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-height: 500px;
   padding: inherit 100px;
 }
@@ -34,10 +34,10 @@
   max-width: 400px;
 }
 .container {
-  margin-left: -80px;
-  border-radius: 8px;
-  background-color: #fff;
   padding-bottom: 40px !important;
+  margin-left: -80px;
+  background-color: #fff;
+  border-radius: 8px;
 }
 
 @media only screen and (min-width: 1px) and (max-width: 768px) {
@@ -48,8 +48,8 @@
     margin: 0;
   }
   .connexion > div {
+    width: 100%;
     padding: 40px;
     padding-top: 0;
-    width: 100%;
   }
 }

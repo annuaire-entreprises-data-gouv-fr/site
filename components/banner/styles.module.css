@@ -1,9 +1,9 @@
 .npsModal {
   display: block;
+  width: 100%;
   padding-top: 15px;
   padding-bottom: 15px;
   font-size: 0.9rem;
-  width: 100%;
   background-color: var(--annuaire-colors-yellow);
   border-bottom: 2px solid var(--annuaire-colors-frBlue);
 }
@@ -15,11 +15,11 @@
 }
 
 .npsModal > div > button {
-  box-shadow: none;
   padding: 0;
   outline: none;
-  border: none;
   background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .unspacedParagraph {
@@ -27,10 +27,10 @@
 }
 
 .proconnect2FABanner {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 @media (max-width: 768px) {

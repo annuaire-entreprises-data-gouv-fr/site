@@ -1,32 +1,18 @@
-type IBilanGesItem = {
+interface IBilanGesItem {
   __id: number;
-  id: string;
-  methode_beges_v4v5: string;
-  date_de_publication: string;
-  type_de_structure: string;
-  type_de_collectivite: string;
-  raison_sociale: string;
-  siren_principal: string;
-  apenaf_associe: string;
-  libelle: string;
-  nombre_de_salariesdagents: string;
-  population: string;
-  region: string;
-  code_departement: string;
-  departement: string;
-  structure_obligee: boolean;
-  mode_de_consolidation: string;
-  annee_de_reporting: number;
-  assujetti_dpefpcaet: boolean;
-  lien_dpefpcaet: string;
+  actions_et_moyens: string;
   aide_diag_decarbonaction: boolean;
-  seuil_dimportance_retenu: string;
-  niveau_dinfluence: boolean;
-  importance_strategique_et_vulnerabilites: boolean;
-  lignes_directrices_specifiques_au_secteur: boolean;
-  soustraitance: boolean;
-  engagement_du_personnel: boolean;
-  justification_des_postes_demissions_indirectes_ecartes: string;
+  analyse_des_resultats_obtenus: string;
+  annee_de_reporting: number;
+  apenaf_associe: string;
+  assujetti_dpefpcaet: boolean;
+  code_departement: string;
+  comparaison_avec_le_precedent_bilan: string;
+  complement_dinformation_sur_les_energies_garanties_dorigine_etou_renouvelables: string;
+  courriel: string;
+  date_de_publication: string;
+  departement: string;
+  des_emissions_evitees_ont_ete_calculees_pour: string;
   emissions_publication_p11: number;
   emissions_publication_p12: number;
   emissions_publication_p13: number;
@@ -49,7 +35,6 @@ type IBilanGesItem = {
   emissions_publication_p53: number;
   emissions_publication_p54: number;
   emissions_publication_p61: number;
-  une_annee_de_reference_a_ete_calculee: boolean;
   emissions_reference_p11: number;
   emissions_reference_p12: number;
   emissions_reference_p13: number;
@@ -72,72 +57,87 @@ type IBilanGesItem = {
   emissions_reference_p53: number;
   emissions_reference_p54: number;
   emissions_reference_p61: number;
-  presentation_de_lorganisation: string;
-  politique_developpement_durable: string;
+  engagement_du_personnel: boolean;
+  fonction: string;
+  id: string;
+  importance_strategique_et_vulnerabilites: boolean;
+  incertitudes: string;
+  justification_des_postes_demissions_indirectes_ecartes: string;
+  libelle: string;
+  lien_dpefpcaet: string;
+  lien_url_vers_le_rapport_complet_du_beges: string;
+  lignes_directrices_specifiques_au_secteur: boolean;
+  liste_des_facteurs_demission_fe_et_pouvoir_de_rechauffement_global_prg_utilises: string;
+  methode_beges_v4v5: string;
+  mode_de_consolidation: string;
+  niveau_dinfluence: boolean;
+  nombre_de_salariesdagents: string;
   objectif_emissions_directes: string;
   objectif_emissions_indirectes_significatives: string;
   objectif_pour_2030: string;
   objectif_pour_2050: string;
   objectifs_a_dautres_horizons_temporels: string;
-  actions_et_moyens: string;
-  analyse_des_resultats_obtenus: string;
-  des_emissions_evitees_ont_ete_calculees_pour: string;
   part_de_lenergie_garantie_dorigine_etou_renouvelable_dans_la_consommation_denergie: string;
-  complement_dinformation_sur_les_energies_garanties_dorigine_etou_renouvelables: string;
-  liste_des_facteurs_demission_fe_et_pouvoir_de_rechauffement_global_prg_utilises: string;
-  incertitudes: string;
-  sources: string;
+  politique_developpement_durable: string;
+  population: string;
+  presentation_de_lorganisation: string;
+  raison_sociale: string;
   recalcul: string;
-  siret: string;
-  comparaison_avec_le_precedent_bilan: string;
-  lien_url_vers_le_rapport_complet_du_beges: string;
+  region: string;
   responsable_du_suivi: string;
-  fonction: string;
+  seuil_dimportance_retenu: string;
+  siren_principal: string;
+  siret: string;
+  sources: string;
+  soustraitance: boolean;
+  structure_obligee: boolean;
   telephone: string;
-  courriel: string;
-};
+  type_de_collectivite: string;
+  type_de_structure: string;
+  une_annee_de_reference_a_ete_calculee: boolean;
+}
 
-type IBilanGesDatagouvResponse = {
-  total: number;
+interface IBilanGesDatagouvResponse {
   next: string | null;
   results: IBilanGesItem[];
-};
+  total: number;
+}
 
-type IBilanGes = {
-  id: string;
-  methodeBEGES: string;
-  datePublication: string;
-  typeStructure: string;
-  raisonSociale: string;
-  sirenPrincipal: string;
-  codeAPE: string;
-  libelle: string;
-  nombreSalaries: string;
-  region: string;
-  departement: string;
-  structureObligee: boolean;
-  modeConsolidation: string;
+interface IBilanGes {
+  actionsEtMoyens: string;
   anneeReporting: number;
+  autresEmissionsIndirectes: number;
+  codeAPE: string;
+  courriel: string;
+  datePublication: string;
+  departement: string;
   emissionsDirectes: number;
   emissionsIndirectesEnergie: number;
-  autresEmissionsIndirectes: number;
-  totalEmissions: number;
-  presentationOrganisation: string;
-  politiqueDeveloppementDurable: string;
-  actionsEtMoyens: string;
+  fonction: string;
+  id: string;
+  libelle: string;
+  lienRapportComplet: string;
+  methodeBEGES: string;
+  modeConsolidation: string;
+  nombreSalaries: string;
   objectifsPour2030: string;
   objectifsPour2050: string;
-  lienRapportComplet: string;
+  politiqueDeveloppementDurable: string;
+  presentationOrganisation: string;
+  raisonSociale: string;
+  region: string;
   responsableSuivi: string;
-  fonction: string;
+  sirenPrincipal: string;
+  structureObligee: boolean;
   telephone: string;
-  courriel: string;
-};
+  totalEmissions: number;
+  typeStructure: string;
+}
 
-type IBilanGesResponse = {
+interface IBilanGesResponse {
   data: IBilanGes[];
   meta: {
     total: number;
     next: string | null;
   };
-};
+}

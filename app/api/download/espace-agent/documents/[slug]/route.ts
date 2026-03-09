@@ -13,7 +13,9 @@ import { FetchRessourceException } from "#models/exceptions";
 import logErrorInSentry from "#utils/sentry";
 import withSession, { type IReqWithSession } from "#utils/session/with-session";
 
-export type IContext = { params: Promise<{ slug: string }> };
+export interface IContext {
+  params: Promise<{ slug: string }>;
+}
 
 export const GET = withSession(
   async (req: IReqWithSession, context: IContext) => {

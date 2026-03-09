@@ -1,36 +1,36 @@
-type ApplicationField<T> = {
-  value: T;
-  provider: string;
+interface ApplicationField<T> {
   last_update: string;
+  provider: string;
   type: string;
-};
+  value: T;
+}
 
 type SubventionStatus = "Accordé" | "Refusé" | "Prise en charge" | "Recevable";
 type SubventionLabel = "Accordé" | "Refusé" | "En instruction";
 
-type Contact = {
+interface Contact {
   email: ApplicationField<string>;
   telephone: ApplicationField<string>;
-};
+}
 
-type Montants = {
-  total: ApplicationField<number>;
+interface Montants {
+  accorde: ApplicationField<number>;
   demande: ApplicationField<number>;
   propose: ApplicationField<number>;
-  accorde: ApplicationField<number>;
-};
+  total: ApplicationField<number>;
+}
 
-type Versement = {
+interface Versement {
   acompte: ApplicationField<number>;
-  solde: ApplicationField<number>;
-  realise: ApplicationField<number>;
   compensation: {
     "n-1": ApplicationField<number>;
     reversement: ApplicationField<number>;
   };
-};
+  realise: ApplicationField<number>;
+  solde: ApplicationField<number>;
+}
 
-type Payment = {
+interface Payment {
   activitee: ApplicationField<string>;
   amount: ApplicationField<number>;
   bop: ApplicationField<string>;
@@ -46,11 +46,11 @@ type Payment = {
   programme: ApplicationField<string>;
   siret: ApplicationField<string>;
   versementKey: ApplicationField<string>;
-};
+}
 
-type ActionProposeeType = {
+interface ActionProposeeType {
+  description: ApplicationField<string>;
   ej: ApplicationField<string>;
-  rang: ApplicationField<number>;
   intitule: ApplicationField<string>;
   objectifs: ApplicationField<string>;
   objectifs_operationnels: {
@@ -58,19 +58,19 @@ type ActionProposeeType = {
     last_update: string;
     type: string;
   };
-  description: ApplicationField<string>;
-};
+  rang: ApplicationField<number>;
+}
 
-type TerritoireType = {
+interface TerritoireType {
+  commentaire: ApplicationField<string>;
   status: {
     provider: string;
     last_update: string;
     type: string;
   };
-  commentaire: ApplicationField<string>;
-};
+}
 
-type Application = {
+interface Application {
   actions_proposee: ActionProposeeType[];
   annee_demande: ApplicationField<number>;
   contact: Contact;
@@ -88,9 +88,9 @@ type Application = {
   territoires: TerritoireType[];
   versement: Versement;
   versementKey: ApplicationField<string>;
-};
+}
 
-type IGrantItem = {
+interface IGrantItem {
   application: Application;
   payments: Payment[];
-};
+}

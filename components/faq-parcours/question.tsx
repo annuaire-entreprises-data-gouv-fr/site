@@ -22,13 +22,13 @@ export enum EQuestionType {
   CONTACT = "contact",
   ALL = "all",
 }
-type IProps = {
+interface IProps {
+  questions: IFaqArticle[];
   questionType: EQuestionType;
+  session: ISession | null;
   setQuestionType: (type: EQuestionType) => void;
   userType: string;
-  questions: IFaqArticle[];
-  session: ISession | null;
-};
+}
 
 export default function Question({
   questionType,

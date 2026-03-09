@@ -66,9 +66,9 @@ export const AgentActesRNE: React.FC<{
   );
 };
 
-type IActesTableProps = {
+interface IActesTableProps {
   actes: IDocumentsRNE["actes"];
-};
+}
 export function ActesTable({ actes }: IActesTableProps) {
   return (
     <FullTable
