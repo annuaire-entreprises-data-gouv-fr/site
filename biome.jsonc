@@ -34,7 +34,6 @@
         "noEvolvingTypes": "off",
         "noShadowRestrictedNames": "off",
         "noConsole": "off",
-        "noImplicitAnyLet": "off",
         "noMisplacedAssertion": "off",
         "useIterableCallbackReturn": "off",
         "noEmptyBlockStatements": "off",

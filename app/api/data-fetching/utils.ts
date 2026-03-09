@@ -137,7 +137,7 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
         return new Response(e.message, { status: e.status });
       }
 
-      let routeAndSlug;
+      let routeAndSlug: { route: string; slug: string };
       try {
         routeAndSlug = await getRouteAndSlug(context);
       } catch (e) {
