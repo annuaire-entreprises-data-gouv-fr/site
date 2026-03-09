@@ -166,7 +166,7 @@ const mapToDomainObject = (
     adresseInconsistency: false,
     bilans: (association.compte || [])
       // id_siret type can be a number !
-      .filter((c) => c.annee > 0 && c.id_siret == siretSiege)
+      .filter((c) => c.annee > 0 && Number(c.id_siret) === Number(siretSiege))
       .map(
         ({
           dons = 0,

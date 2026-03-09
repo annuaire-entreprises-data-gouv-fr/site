@@ -16,7 +16,7 @@ import { capitalize, formatSiret, pluralize } from "#utils/helpers";
 function CCUnknown({ ccWithMetadata }: { ccWithMetadata: ICCWithMetadata[] }) {
   const unknown = ccWithMetadata.filter((e) => e.unknown);
 
-  if (unknown.length == 0) {
+  if (unknown.length === 0) {
     return ".";
   }
 
