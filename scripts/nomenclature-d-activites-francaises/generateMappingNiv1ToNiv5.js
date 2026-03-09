@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 // Read and parse NAF 5 niveaux CSV
 const nafCsvPath = path.join(import.meta.dirname, "naf2008_5_niveaux.csv");

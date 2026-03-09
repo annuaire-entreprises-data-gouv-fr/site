@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import { HttpServerError, HttpTimeoutError } from "#clients/exceptions";
 
 interface IParams<T extends unknown[], U> {

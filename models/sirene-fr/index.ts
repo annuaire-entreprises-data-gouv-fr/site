@@ -1,5 +1,5 @@
+import type { Readable } from "node:stream";
 import type { ExportCsvInput } from "app/api/export-sirene/input-validation";
-import type { Readable } from "stream";
 import { HttpNotFound } from "#clients/exceptions";
 import {
   clientSireneInsee,

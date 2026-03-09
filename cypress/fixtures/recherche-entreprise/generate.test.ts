@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import { clientSearchRechercheEntrepriseRaw } from "#clients/recherche-entreprise";
 import SearchFilterParams from "#models/search/search-filter-params";
 

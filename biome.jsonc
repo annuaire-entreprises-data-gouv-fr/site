@@ -28,7 +28,6 @@
         "useConsistentArrayType": "off",
         "noNonNullAssertion": "off",
         "noNestedTernary": "off",
-        "useNodejsImportProtocol": "off",
         "useTemplate": "off",
         "noEnum": "off",
         "useBlockStatements": "off",

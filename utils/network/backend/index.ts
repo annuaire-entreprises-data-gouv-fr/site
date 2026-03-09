@@ -1,6 +1,6 @@
+import http from "node:http";
+import https from "node:https";
 import Axios, { type AxiosInstance } from "axios";
-import http from "http";
-import https from "https";
 import constants from "#models/constants";
 import type { IDefaultRequestConfig } from "..";
 import errorInterceptor from "./error-interceptor";
