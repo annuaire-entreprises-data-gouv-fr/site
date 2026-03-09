@@ -91,22 +91,18 @@ export function GroupItem({
             <div>
               <strong>Habilitation :</strong>{" "}
               {group.contract_description || <i>Aucune habilitation</i>}
-              {group.contract_url && (
+              {group.contract_url && group.contract_url && (
                 <>
-                  {group.contract_url && (
-                    <>
-                      {" "}
-                      (
-                      <a
-                        href={group.contract_url}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        consulter
-                      </a>
-                      )
-                    </>
-                  )}
+                  {" "}
+                  (
+                  <a
+                    href={group.contract_url}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    consulter
+                  </a>
+                  )
                 </>
               )}
             </div>

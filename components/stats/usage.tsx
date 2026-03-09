@@ -35,88 +35,86 @@ export const UsageStats: React.FC<{
     ],
   };
   return (
-    <>
-      <div>
-        <p>
-          Ne pouvant suivre tous les usages du site, nous avons choisi de nous
-          concentrer sur le suivi des usages liés à la simplification des
-          démarches en ligne.
-        </p>
-        <p>
-          Nous suivons en particulier l’utilisation du copier-coller et le
-          nombre de siren/siret utilisé directement dans le moteur de recherche,
-          car ces deux indicateurs sont corrélés à l’application du{" "}
-          <a href="https://en.wikipedia.org/wiki/Once-only_principle">
-            <strong>Dites-Le-Nous-Une-Fois</strong> (DLNUF)
-          </a>
-          .
-        </p>
-        <LineChart data={data} height="300px" />
-        <br />
-        <div className="chart-container">
-          <div>
-            <p>
-              Le <strong>copier-coller</strong> sert majoritairement à copier
-              les numéros siren/siret. Beaucoup d’entrepreneurs ne connaissent
-              pas leurs informations par coeur et utilisent l’Annuaire des
-              Entreprises pour les retrouver, en particulier durant leurs
-              démarches administratives.
-            </p>
-            <p>
-              Du côté des administrations publiques,{" "}
-              <strong>le numéro siren/siret</strong> est l’identifiant
-              systématiquement utilisé pour identifier une entreprise lors d’une
-              démarche. Pour traiter un dossier, un{" "}
-              <strong>agent public</strong> peut coller le siren/siret
-              directement dans la barre de recherche de l’Annuaire des
-              Entreprises et retrouver immédiatement la fiche publique de
-              l’entreprise concernée.
-            </p>
-          </div>
-          <div>
-            <DoughnutChart
-              data={{
-                labels: mostCopied.map((el) => el.label),
-                datasets: [
-                  {
-                    label: "Nombre de copier-coller",
-                    data: mostCopied.map((el) => el.count),
-                    backgroundColor: constants.chartColors,
-                    borderColor: "transparent",
-                    hoverOffset: 4,
-                  },
-                ],
-              }}
-              height="200px"
-              pluginOptions={{
-                tooltip: {
-                  callbacks: {
-                    label(context) {
-                      const safeData = context.dataset.data as number[];
-                      const total = safeData.reduce(
-                        (previousValue, currentValue) =>
-                          previousValue + currentValue,
-                        0
-                      );
-                      return Math.round((context.parsed * 100) / total) + "%";
-                    },
-                  },
-                },
-                title: {
-                  display: true,
-                  text: "Ci-dessus : répartition des données les plus copiées-collées.",
-                  position: "bottom",
-                  align: "center",
-                },
-                legend: {
-                  position: "right",
-                  align: "start",
-                },
-              }}
-            />
-          </div>
+    <div>
+      <p>
+        Ne pouvant suivre tous les usages du site, nous avons choisi de nous
+        concentrer sur le suivi des usages liés à la simplification des
+        démarches en ligne.
+      </p>
+      <p>
+        Nous suivons en particulier l’utilisation du copier-coller et le nombre
+        de siren/siret utilisé directement dans le moteur de recherche, car ces
+        deux indicateurs sont corrélés à l’application du{" "}
+        <a href="https://en.wikipedia.org/wiki/Once-only_principle">
+          <strong>Dites-Le-Nous-Une-Fois</strong> (DLNUF)
+        </a>
+        .
+      </p>
+      <LineChart data={data} height="300px" />
+      <br />
+      <div className="chart-container">
+        <div>
+          <p>
+            Le <strong>copier-coller</strong> sert majoritairement à copier les
+            numéros siren/siret. Beaucoup d’entrepreneurs ne connaissent pas
+            leurs informations par coeur et utilisent l’Annuaire des Entreprises
+            pour les retrouver, en particulier durant leurs démarches
+            administratives.
+          </p>
+          <p>
+            Du côté des administrations publiques,{" "}
+            <strong>le numéro siren/siret</strong> est l’identifiant
+            systématiquement utilisé pour identifier une entreprise lors d’une
+            démarche. Pour traiter un dossier, un <strong>agent public</strong>{" "}
+            peut coller le siren/siret directement dans la barre de recherche de
+            l’Annuaire des Entreprises et retrouver immédiatement la fiche
+            publique de l’entreprise concernée.
+          </p>
         </div>
-        <style jsx>{`
+        <div>
+          <DoughnutChart
+            data={{
+              labels: mostCopied.map((el) => el.label),
+              datasets: [
+                {
+                  label: "Nombre de copier-coller",
+                  data: mostCopied.map((el) => el.count),
+                  backgroundColor: constants.chartColors,
+                  borderColor: "transparent",
+                  hoverOffset: 4,
+                },
+              ],
+            }}
+            height="200px"
+            pluginOptions={{
+              tooltip: {
+                callbacks: {
+                  label(context) {
+                    const safeData = context.dataset.data as number[];
+                    const total = safeData.reduce(
+                      (previousValue, currentValue) =>
+                        previousValue + currentValue,
+                      0
+                    );
+                    return Math.round((context.parsed * 100) / total) + "%";
+                  },
+                },
+              },
+              title: {
+                display: true,
+                text: "Ci-dessus : répartition des données les plus copiées-collées.",
+                position: "bottom",
+                align: "center",
+              },
+              legend: {
+                position: "right",
+                align: "start",
+              },
+            }}
+          />
+        </div>
+      </div>
+      <style jsx>{`
           .chart-container {
             display: flex;
             align-items: center;
@@ -141,7 +139,6 @@ export const UsageStats: React.FC<{
             }
           }
         `}</style>
-      </div>
-    </>
+    </div>
   );
 };

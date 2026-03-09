@@ -32,47 +32,41 @@ const EtablissementTable: React.FC<{
           <Link href={`/etablissement/${etablissement.siret}`}>
             {formatSiret(etablissement.siret)}
           </Link>,
-          <>
-            {estNonDiffusibleStrict(etablissement) ? (
-              <NonRenseigne />
-            ) : (
-              etablissement.libelleActivitePrincipale
-            )}
-          </>,
-          <>
-            {estNonDiffusibleStrict(etablissement) ? (
-              <NonRenseigne />
-            ) : (
-              <>
-                <span style={{ fontVariant: "all-small-caps" }}>
-                  {(etablissement.enseigne || etablissement.denomination) && (
-                    <Link href={`/etablissement/${etablissement.siret}`}>
-                      <strong>
-                        {etablissement.enseigne || etablissement.denomination}
-                        <br />
-                      </strong>
-                    </Link>
-                  )}
-                  <>{etablissement.adresse}</>
-                </span>
-                {etablissement.estSiege ? (
-                  <Tag color="info">siège social</Tag>
-                ) : etablissement.ancienSiege ? (
-                  <Tag>ancien siège social</Tag>
-                ) : null}
-              </>
-            )}
-          </>,
+          estNonDiffusibleStrict(etablissement) ? (
+            <NonRenseigne />
+          ) : (
+            etablissement.libelleActivitePrincipale
+          ),
+          estNonDiffusibleStrict(etablissement) ? (
+            <NonRenseigne />
+          ) : (
+            <>
+              <span style={{ fontVariant: "all-small-caps" }}>
+                {(etablissement.enseigne || etablissement.denomination) && (
+                  <Link href={`/etablissement/${etablissement.siret}`}>
+                    <strong>
+                      {etablissement.enseigne || etablissement.denomination}
+                      <br />
+                    </strong>
+                  </Link>
+                )}
+                {etablissement.adresse}
+              </span>
+              {etablissement.estSiege ? (
+                <Tag color="info">siège social</Tag>
+              ) : etablissement.ancienSiege ? (
+                <Tag>ancien siège social</Tag>
+              ) : null}
+            </>
+          ),
           (!estNonDiffusibleStrict(etablissement) &&
             formatDate(etablissement.dateCreation)) ||
             "",
-          <>
-            <IsActiveTag
-              etatAdministratif={etablissement.etatAdministratif}
-              since={etablissement.dateFermeture}
-              statutDiffusion={etablissement.statutDiffusion}
-            />
-          </>,
+          <IsActiveTag
+            etatAdministratif={etablissement.etatAdministratif}
+            since={etablissement.dateFermeture}
+            statutDiffusion={etablissement.statutDiffusion}
+          />,
         ])}
         head={[
           "SIRET",

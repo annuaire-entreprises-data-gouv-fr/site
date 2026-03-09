@@ -21,48 +21,46 @@ export default function ServicePublicSection({
   const servicePublic = useFetchServicePublic(uniteLegale, etablissement);
 
   return (
-    <>
-      <DataSectionClient
-        data={servicePublic}
-        notFoundInfo={
-          <p>
-            Cette administration n’a pas été retrouvé dans l’
-            <a
-              aria-label="Voir l’Annuaire du service public, nouvelle fenêtre"
-              href="https://lannuaire.service-public.gouv.fr/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Annuaire du service public
-            </a>
-            .
-          </p>
-        }
-        sources={[EAdministration.DILA]}
-        title={"Annuaire du service public"}
-      >
-        {(servicePublic) => (
-          <>
-            {servicePublic.mission && <p>{servicePublic.mission}</p>}
-            <TwoColumnTable body={getTableData(servicePublic, uniteLegale)} />
-            {servicePublic.liens.annuaireServicePublic && (
-              <p>
-                Retrouvez plus d&apos;informations sur la{" "}
-                <a
-                  aria-label="Voir la page de cette administration sur l’Annuaire du service public, nouvelle fenêtre"
-                  href={servicePublic.liens.annuaireServicePublic.valeur}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  fiche de l’Annuaire du service public
-                </a>
-                .
-              </p>
-            )}
-          </>
-        )}
-      </DataSectionClient>
-    </>
+    <DataSectionClient
+      data={servicePublic}
+      notFoundInfo={
+        <p>
+          Cette administration n’a pas été retrouvé dans l’
+          <a
+            aria-label="Voir l’Annuaire du service public, nouvelle fenêtre"
+            href="https://lannuaire.service-public.gouv.fr/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Annuaire du service public
+          </a>
+          .
+        </p>
+      }
+      sources={[EAdministration.DILA]}
+      title={"Annuaire du service public"}
+    >
+      {(servicePublic) => (
+        <>
+          {servicePublic.mission && <p>{servicePublic.mission}</p>}
+          <TwoColumnTable body={getTableData(servicePublic, uniteLegale)} />
+          {servicePublic.liens.annuaireServicePublic && (
+            <p>
+              Retrouvez plus d&apos;informations sur la{" "}
+              <a
+                aria-label="Voir la page de cette administration sur l’Annuaire du service public, nouvelle fenêtre"
+                href={servicePublic.liens.annuaireServicePublic.valeur}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                fiche de l’Annuaire du service public
+              </a>
+              .
+            </p>
+          )}
+        </>
+      )}
+    </DataSectionClient>
   );
 }
 

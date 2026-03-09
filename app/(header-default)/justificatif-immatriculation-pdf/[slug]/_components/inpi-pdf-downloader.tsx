@@ -55,9 +55,5 @@ export function InpiPDFDownloader({ siren }: { siren: string }) {
     return <PDFFailed downloadLink={downloadLink} />;
   }
 
-  return (
-    <>
-      <Tag color="success">succès</Tag>
-    </>
-  );
+  return <Tag color="success">succès</Tag>;
 }

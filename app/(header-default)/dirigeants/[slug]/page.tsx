@@ -101,19 +101,17 @@ const DirigeantsPage = async (props: AppRouterProps) => {
   const session = await getSession();
 
   return (
-    <>
-      <div className="content-container">
-        <Title
-          ficheType={FICHE.DIRIGEANTS}
-          session={session}
-          uniteLegale={uniteLegale}
-        />
-        <DirigeantSummary session={session} uniteLegale={uniteLegale} />
-        <DirigeantsContent session={session} uniteLegale={uniteLegale} />
-        <HorizontalSeparator />
-        <DPOSection session={session} uniteLegale={uniteLegale} />
-      </div>
-    </>
+    <div className="content-container">
+      <Title
+        ficheType={FICHE.DIRIGEANTS}
+        session={session}
+        uniteLegale={uniteLegale}
+      />
+      <DirigeantSummary session={session} uniteLegale={uniteLegale} />
+      <DirigeantsContent session={session} uniteLegale={uniteLegale} />
+      <HorizontalSeparator />
+      <DPOSection session={session} uniteLegale={uniteLegale} />
+    </div>
   );
 };
 

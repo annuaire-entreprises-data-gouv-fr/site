@@ -33,57 +33,55 @@ export default async function FAQArticle({ params }: AppRouterProps) {
   }
 
   return (
-    <>
-      <TextWrapper>
-        <Breadcrumb
-          links={[
-            { href: "/faq", label: "Questions fréquentes" },
-            {
-              href: "/faq/modifier",
-              label: "Comment modifier ces informations",
-            },
-            { href: "", label: dataToModify.label },
-          ]}
-        />
-        <h1>
-          Comment modifier : “<strong>{dataToModify.label}</strong>” ?
-        </h1>
-        <p />
-        <p>Ces informations proviennent de :</p>
-        <ul>
-          <li>
-            Source de la donnée :{" "}
-            <a href={dataToModify.datagouvLink}>{dataToModify.dataSource}</a>
-          </li>
-          <li>
-            Service responsable :{" "}
-            <a href={dataToModify.site}>{dataToModify.long}</a>.
-          </li>
-        </ul>
-        {dataToModify.form ? (
-          <>
-            <p>Cette administration propose une démarche en ligne&nbsp;:</p>
-            <ButtonLink to={dataToModify.form}>
-              Accéder à la démarche en ligne
-            </ButtonLink>
-          </>
-        ) : (
-          <>
-            <br />
-            <ButtonLink to={dataToModify.contact}>
-              Contacter le service ({dataToModify.short})
-            </ButtonLink>
-          </>
-        )}
-
-        <h2>Vous ne trouvez pas votre réponse ?</h2>
-        <div className="layout-left">
-          <ButtonLink alt small to="/faq">
-            Consultez notre FAQ
+    <TextWrapper>
+      <Breadcrumb
+        links={[
+          { href: "/faq", label: "Questions fréquentes" },
+          {
+            href: "/faq/modifier",
+            label: "Comment modifier ces informations",
+          },
+          { href: "", label: dataToModify.label },
+        ]}
+      />
+      <h1>
+        Comment modifier : “<strong>{dataToModify.label}</strong>” ?
+      </h1>
+      <p />
+      <p>Ces informations proviennent de :</p>
+      <ul>
+        <li>
+          Source de la donnée :{" "}
+          <a href={dataToModify.datagouvLink}>{dataToModify.dataSource}</a>
+        </li>
+        <li>
+          Service responsable :{" "}
+          <a href={dataToModify.site}>{dataToModify.long}</a>.
+        </li>
+      </ul>
+      {dataToModify.form ? (
+        <>
+          <p>Cette administration propose une démarche en ligne&nbsp;:</p>
+          <ButtonLink to={dataToModify.form}>
+            Accéder à la démarche en ligne
           </ButtonLink>
-        </div>
-      </TextWrapper>
-    </>
+        </>
+      ) : (
+        <>
+          <br />
+          <ButtonLink to={dataToModify.contact}>
+            Contacter le service ({dataToModify.short})
+          </ButtonLink>
+        </>
+      )}
+
+      <h2>Vous ne trouvez pas votre réponse ?</h2>
+      <div className="layout-left">
+        <ButtonLink alt small to="/faq">
+          Consultez notre FAQ
+        </ButtonLink>
+      </div>
+    </TextWrapper>
   );
 }
 

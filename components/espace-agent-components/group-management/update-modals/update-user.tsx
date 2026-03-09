@@ -53,19 +53,17 @@ export default function UpdateUserSelect({
   };
 
   return (
-    <>
-      <select
-        className="fr-select"
-        disabled={isPending}
-        onChange={(e) => handleUpdate(Number.parseInt(e.target.value, 10))}
-        value={optimisticRoleId ?? user.role_id}
-      >
-        {roles.map((role) => (
-          <option key={role.id} value={role.id}>
-            {role.role_name}
-          </option>
-        ))}
-      </select>
-    </>
+    <select
+      className="fr-select"
+      disabled={isPending}
+      onChange={(e) => handleUpdate(Number.parseInt(e.target.value, 10))}
+      value={optimisticRoleId ?? user.role_id}
+    >
+      {roles.map((role) => (
+        <option key={role.id} value={role.id}>
+          {role.role_name}
+        </option>
+      ))}
+    </select>
   );
 }

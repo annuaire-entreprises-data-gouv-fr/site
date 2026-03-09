@@ -52,32 +52,30 @@ const CollectiviteTerritorialeSection: React.FC<{
 
   const shouldDisplayCollectiviteLink = codeInsee && niveau === "commune";
   return (
-    <>
-      <Section
-        sources={[
-          EAdministration.INSEE,
-          EAdministration.MI,
-          EAdministration.DINUM,
-        ]}
-        title={"Collectivité territoriale"}
-      >
-        <TwoColumnTable body={data} />
-        {shouldDisplayCollectiviteLink && (
-          <>
-            <br />
-            Retrouvez plus d&apos;informations sur la{" "}
-            <a
-              href={`https://collectivite.fr/${codeInsee}`}
-              rel="noopener"
-              target="_blank"
-            >
-              fiche collectivites.fr
-            </a>
-            .
-          </>
-        )}
-      </Section>
-    </>
+    <Section
+      sources={[
+        EAdministration.INSEE,
+        EAdministration.MI,
+        EAdministration.DINUM,
+      ]}
+      title={"Collectivité territoriale"}
+    >
+      <TwoColumnTable body={data} />
+      {shouldDisplayCollectiviteLink && (
+        <>
+          <br />
+          Retrouvez plus d&apos;informations sur la{" "}
+          <a
+            href={`https://collectivite.fr/${codeInsee}`}
+            rel="noopener"
+            target="_blank"
+          >
+            fiche collectivites.fr
+          </a>
+          .
+        </>
+      )}
+    </Section>
   );
 };
 

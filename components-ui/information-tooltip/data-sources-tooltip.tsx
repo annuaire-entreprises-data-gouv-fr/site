@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import type { IAdministrationMetaData } from "#models/administrations/types";
 import constants from "#models/constants";
@@ -25,15 +25,9 @@ const DataSourcesTooltip: React.FC<{
     )}
     <InformationTooltip
       horizontalOrientation={orientation || "center"}
-      label={
-        <>
-          {dataSources.map((dataSource) => (
-            <React.Fragment key={dataSource.long}>
-              <div>{dataSource.long}.</div>
-            </React.Fragment>
-          ))}
-        </>
-      }
+      label={dataSources.map((dataSource) => (
+        <div key={dataSource.long}>{dataSource.long}.</div>
+      ))}
       tabIndex={undefined}
     >
       <a

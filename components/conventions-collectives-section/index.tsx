@@ -107,40 +107,36 @@ const ConventionsCollectivesSection: React.FC<{
               body={ccWithMetadata.map(
                 ({ idcc, sirets = [], nature, title, unknown, updated }) => [
                   <Tag id={`idcc-${idcc}`}>IDCC {idcc}</Tag>,
-                  <>
-                    {updated.length > 0 ? (
-                      <>
-                        <Tag color="new">IDCC Supprimée</Tag> et remplacée par :{" "}
-                        <ul>
-                          {updated.map((updatedCC, index) => (
-                            <li>
-                              {index !== 0 && " ou "}
-                              {updatedCC.title}
-                              <Tag>IDCC {updatedCC.idcc}</Tag>
-                            </li>
-                          ))}
-                        </ul>
-                      </>
-                    ) : unknown ? (
-                      <>
-                        <Tag color="warning">IDCC Inconnue</Tag>
-                      </>
-                    ) : (
-                      <>
-                        {nature && (
-                          <>
-                            <strong className="font-small">
-                              {capitalize(nature)}
-                            </strong>
-                            <br />
-                          </>
-                        )}
-                        <span className="font-small">
-                          {title || <NonRenseigne />}
-                        </span>
-                      </>
-                    )}
-                  </>,
+                  updated.length > 0 ? (
+                    <>
+                      <Tag color="new">IDCC Supprimée</Tag> et remplacée par :{" "}
+                      <ul>
+                        {updated.map((updatedCC, index) => (
+                          <li>
+                            {index !== 0 && " ou "}
+                            {updatedCC.title}
+                            <Tag>IDCC {updatedCC.idcc}</Tag>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : unknown ? (
+                    <Tag color="warning">IDCC Inconnue</Tag>
+                  ) : (
+                    <>
+                      {nature && (
+                        <>
+                          <strong className="font-small">
+                            {capitalize(nature)}
+                          </strong>
+                          <br />
+                        </>
+                      )}
+                      <span className="font-small">
+                        {title || <NonRenseigne />}
+                      </span>
+                    </>
+                  ),
                   <ul>
                     {(sirets || []).map((siret) => (
                       <li key={siret}>
@@ -150,25 +146,23 @@ const ConventionsCollectivesSection: React.FC<{
                       </li>
                     ))}
                   </ul>,
-                  <>
-                    {idcc === "9999" ? (
-                      <i>Sans convention collective</i>
-                    ) : unknown ? (
-                      <i>Convention collective inconnue</i>
-                    ) : (
-                      <ButtonLink
-                        alt
-                        aria-label={`Convention collective ${
-                          title || idcc
-                        }, consulter les informations`}
-                        small
-                        target="_blank"
-                        to={`${routes.conventionsCollectives.details}${idcc}?src_url=https://annuaire-entreprises.data.gouv.fr`}
-                      >
-                        ⇢&nbsp;Consulter
-                      </ButtonLink>
-                    )}
-                  </>,
+                  idcc === "9999" ? (
+                    <i>Sans convention collective</i>
+                  ) : unknown ? (
+                    <i>Convention collective inconnue</i>
+                  ) : (
+                    <ButtonLink
+                      alt
+                      aria-label={`Convention collective ${
+                        title || idcc
+                      }, consulter les informations`}
+                      small
+                      target="_blank"
+                      to={`${routes.conventionsCollectives.details}${idcc}?src_url=https://annuaire-entreprises.data.gouv.fr`}
+                    >
+                      ⇢&nbsp;Consulter
+                    </ButtonLink>
+                  ),
                 ]
               )}
               head={["N°IDCC", "Détails", "Etablissement(s)", "Explications"]}

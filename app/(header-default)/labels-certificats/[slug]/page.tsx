@@ -88,61 +88,57 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
   } = await getCertificationsFromSlug(uniteLegale);
 
   return (
-    <>
-      <div className="content-container">
-        <Title
-          ficheType={FICHE.CERTIFICATS}
+    <div className="content-container">
+      <Title
+        ficheType={FICHE.CERTIFICATS}
+        session={session}
+        uniteLegale={uniteLegale}
+      />
+      {!checkHasLabelsAndCertificates(uniteLegale) &&
+        !hasRights(session, ApplicationRights.protectedCertificats) && (
+          <p>Cette structure ne possède aucun label ou certificat.</p>
+        )}
+      {estEss && <CertificationESSSection ess={ess} />}
+      {estSocieteMission && <CertificationSocieteMission />}
+      {estEntrepriseInclusive && (
+        <EntrepriseInclusiveSection entrepriseInclusive={entrepriseInclusive} />
+      )}
+      {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
+      {estFiness && <FinessSection uniteLegale={uniteLegale} />}
+      {estRge && (
+        <CertificationsRGESection
+          certificationsRGE={rge}
           session={session}
           uniteLegale={uniteLegale}
         />
-        {!checkHasLabelsAndCertificates(uniteLegale) &&
-          !hasRights(session, ApplicationRights.protectedCertificats) && (
-            <p>Cette structure ne possède aucun label ou certificat.</p>
-          )}
-        {estEss && <CertificationESSSection ess={ess} />}
-        {estSocieteMission && <CertificationSocieteMission />}
-        {estEntrepriseInclusive && (
-          <EntrepriseInclusiveSection
-            entrepriseInclusive={entrepriseInclusive}
-          />
-        )}
-        {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
-        {estFiness && <FinessSection uniteLegale={uniteLegale} />}
-        {estRge && (
-          <CertificationsRGESection
-            certificationsRGE={rge}
-            session={session}
-            uniteLegale={uniteLegale}
-          />
-        )}
-        {hasRights(session, ApplicationRights.protectedCertificats) && (
-          <>
-            <QualibatSection session={session} uniteLegale={uniteLegale} />
-            <QualifelecSection session={session} uniteLegale={uniteLegale} />
-            <OpqibiSection session={session} uniteLegale={uniteLegale} />
-          </>
-        )}
-        {estOrganismeFormation && (
-          <OrganismeDeFormationSection
-            organismesDeFormation={organismesDeFormation}
-          />
-        )}
-        {egaproRenseignee && <EgaproSection egapro={egapro} />}
-        {estEntrepreneurSpectacle && (
-          <CertificationsEntrepreneurSpectaclesSection
-            entrepreneurSpectacles={entrepreneurSpectacles}
-          />
-        )}
-        {estBio && (
-          <CertificationsBioSection bio={bio} uniteLegale={uniteLegale} />
-        )}
-        {estAchatsResponsables && <LabelAchatsResponsables />}
-        {estPatrimoineVivant && <LabelPatrimoineVivant />}
-        {estAlimConfiance && <AlimConfianceSection uniteLegale={uniteLegale} />}
+      )}
+      {hasRights(session, ApplicationRights.protectedCertificats) && (
+        <>
+          <QualibatSection session={session} uniteLegale={uniteLegale} />
+          <QualifelecSection session={session} uniteLegale={uniteLegale} />
+          <OpqibiSection session={session} uniteLegale={uniteLegale} />
+        </>
+      )}
+      {estOrganismeFormation && (
+        <OrganismeDeFormationSection
+          organismesDeFormation={organismesDeFormation}
+        />
+      )}
+      {egaproRenseignee && <EgaproSection egapro={egapro} />}
+      {estEntrepreneurSpectacle && (
+        <CertificationsEntrepreneurSpectaclesSection
+          entrepreneurSpectacles={entrepreneurSpectacles}
+        />
+      )}
+      {estBio && (
+        <CertificationsBioSection bio={bio} uniteLegale={uniteLegale} />
+      )}
+      {estAchatsResponsables && <LabelAchatsResponsables />}
+      {estPatrimoineVivant && <LabelPatrimoineVivant />}
+      {estAlimConfiance && <AlimConfianceSection uniteLegale={uniteLegale} />}
 
-        {bilanGesRenseigne && <BilanGesSection uniteLegale={uniteLegale} />}
-      </div>
-    </>
+      {bilanGesRenseigne && <BilanGesSection uniteLegale={uniteLegale} />}
+    </div>
   );
 };
 

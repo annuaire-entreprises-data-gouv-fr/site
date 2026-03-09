@@ -33,26 +33,24 @@ const FinancePage = async (props: AppRouterProps) => {
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
   return (
-    <>
-      <div className="content-container">
-        <Title
-          ficheType={FICHE.FINANCES}
+    <div className="content-container">
+      <Title
+        ficheType={FICHE.FINANCES}
+        session={session}
+        uniteLegale={uniteLegale}
+      />
+      {isAssociation(uniteLegale) ? (
+        <DonneesFinancieresAssociation
           session={session}
           uniteLegale={uniteLegale}
         />
-        {isAssociation(uniteLegale) ? (
-          <DonneesFinancieresAssociation
-            session={session}
-            uniteLegale={uniteLegale}
-          />
-        ) : (
-          <DonneesFinancieresSociete
-            session={session}
-            uniteLegale={uniteLegale}
-          />
-        )}
-      </div>
-    </>
+      ) : (
+        <DonneesFinancieresSociete
+          session={session}
+          uniteLegale={uniteLegale}
+        />
+      )}
+    </div>
   );
 };
 

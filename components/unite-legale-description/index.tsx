@@ -25,10 +25,8 @@ export const UniteLegaleDescription: React.FC<{
   return (
     <>
       <p>
-        <>
-          {capitalize(uniteLegaleLabelWithPronoun(uniteLegale))}{" "}
-          {uniteLegale.nomComplet}
-        </>
+        {capitalize(uniteLegaleLabelWithPronoun(uniteLegale))}{" "}
+        {uniteLegale.nomComplet}
         {uniteLegale.dateCreation ? (
           <>
             {" "}

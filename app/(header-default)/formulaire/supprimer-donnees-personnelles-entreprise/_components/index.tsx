@@ -51,11 +51,7 @@ export default function HidePersonalDataPageClient({ session }: IProps) {
   }, [formState]);
 
   return formState.uniteLegale ? (
-    <>
-      <RequestState
-        hidePersonalDataRequest={formState.hidePersonalDataRequest}
-      />
-    </>
+    <RequestState hidePersonalDataRequest={formState.hidePersonalDataRequest} />
   ) : (
     <>
       <ConnectionFranceConnect session={session} />

@@ -132,25 +132,23 @@ export function ProtectedLiassesFiscales({
 
   return (
     <Section id={id} isProtected={isProtected} sources={sources} title={title}>
-      <>
-        <Select
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setSelectedYear(e.target.value)
-          }
-          options={options}
-          placeholder="Sélectionnez une année"
+      <Select
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setSelectedYear(e.target.value)
+        }
+        options={options}
+        placeholder="Sélectionnez une année"
+      />
+      {selectedYear ? (
+        <InnerLiassesSection
+          selectedYear={selectedYear}
+          session={session}
+          uniteLegale={uniteLegale}
+          useCase={useCase}
         />
-        {selectedYear ? (
-          <InnerLiassesSection
-            selectedYear={selectedYear}
-            session={session}
-            uniteLegale={uniteLegale}
-            useCase={useCase}
-          />
-        ) : (
-          <i>Sélectionnez une année pour voir sa liasse fiscale.</i>
-        )}
-      </>
+      ) : (
+        <i>Sélectionnez une année pour voir sa liasse fiscale.</i>
+      )}
     </Section>
   );
 }

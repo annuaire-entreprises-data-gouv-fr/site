@@ -39,7 +39,6 @@
       "complexity": {
         "useLiteralKeys": "off",
         "noExcessiveCognitiveComplexity": "off",
-        "noUselessFragments": "off",
         "noBannedTypes": "off",
         "noForEach": "off",
         "useSimplifiedLogicExpression": "off"

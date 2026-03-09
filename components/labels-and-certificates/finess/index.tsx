@@ -104,55 +104,53 @@ const FinessSection: React.FC<{
   );
 
   return (
-    <>
-      <DataSectionClient
-        data={response}
-        id="finess"
-        sources={[EAdministration.MSS]}
-        title={"Établissement Sanitaire et Social (FINESS)"}
-      >
-        {(finessList) => (
-          <>
-            <div id={id}>
-              Cette structure est présente dans le{" "}
-              <a
-                href="https://finess.esante.gouv.fr"
-                rel="noopener"
-                target="_blank"
-              >
-                fichier
-              </a>{" "}
-              <FAQLink tooltipLabel="Finess">
-                Le Fichier National des Etablissements Sanitaires et Sociaux
-                regroupe l’ensemble des établissements sanitaires, sociaux,
-                médico-sociaux, et de formation aux professions de ces secteurs
-              </FAQLink>
-              , tenu par le <MSS />.
-              <br />
-            </div>
+    <DataSectionClient
+      data={response}
+      id="finess"
+      sources={[EAdministration.MSS]}
+      title={"Établissement Sanitaire et Social (FINESS)"}
+    >
+      {(finessList) => (
+        <>
+          <div id={id}>
+            Cette structure est présente dans le{" "}
+            <a
+              href="https://finess.esante.gouv.fr"
+              rel="noopener"
+              target="_blank"
+            >
+              fichier
+            </a>{" "}
+            <FAQLink tooltipLabel="Finess">
+              Le Fichier National des Etablissements Sanitaires et Sociaux
+              regroupe l’ensemble des établissements sanitaires, sociaux,
+              médico-sociaux, et de formation aux professions de ces secteurs
+            </FAQLink>
+            , tenu par le <MSS />.
             <br />
-            {finessList.data.length > 0 && (
-              <FullTable
-                body={formatFinessData(finessList.data)}
-                head={["Numéro Finess", "Type", "Détails", "Fiche Finess"]}
-                verticalAlign="top"
-              />
-            )}
-            {finessList.etablissementsMeta.total > 100 && (
-              <LocalPageCounter
-                compact={true}
-                currentPage={currentPage}
-                onPageChange={onChangePage}
-                totalPages={Math.ceil(
-                  finessList.etablissementsMeta.total /
-                    finessList.etablissementsMeta.page_size
-                )}
-              />
-            )}
-          </>
-        )}
-      </DataSectionClient>
-    </>
+          </div>
+          <br />
+          {finessList.data.length > 0 && (
+            <FullTable
+              body={formatFinessData(finessList.data)}
+              head={["Numéro Finess", "Type", "Détails", "Fiche Finess"]}
+              verticalAlign="top"
+            />
+          )}
+          {finessList.etablissementsMeta.total > 100 && (
+            <LocalPageCounter
+              compact={true}
+              currentPage={currentPage}
+              onPageChange={onChangePage}
+              totalPages={Math.ceil(
+                finessList.etablissementsMeta.total /
+                  finessList.etablissementsMeta.page_size
+              )}
+            />
+          )}
+        </>
+      )}
+    </DataSectionClient>
   );
 };
 

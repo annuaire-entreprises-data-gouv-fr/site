@@ -25,18 +25,16 @@ const AgentWall: React.FC<{
         <h3>Vous êtes agent public ?</h3>
         <p>
           Accédez immédiatement à ces données sur{" "}
-          <Link href="/lp/agent-public">l'espace agent public</Link>.{" "}
-          <>
-            En vous connectant vous acceptez nos{" "}
-            <a
-              href="/modalites-utilisation"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              modalités d'utilisation
-            </a>
-            .
-          </>
+          <Link href="/lp/agent-public">l'espace agent public</Link>. En vous
+          connectant vous acceptez nos{" "}
+          <a
+            href="/modalites-utilisation"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            modalités d'utilisation
+          </a>
+          .
         </p>
         <ButtonProConnect event="AGENT_WALL" noFootLink />
         <Link href="/lp/agent-public">⇢ Découvrir l'espace agent public</Link>

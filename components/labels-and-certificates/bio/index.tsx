@@ -86,26 +86,23 @@ export const CertificationsBioSection: React.FC<{
                     <div>par {certificat.organization}</div>
                   )}
                 </>,
-                <>
-                  {certificat.exempted ? (
-                    <i>
-                      Dispensé de certification de par la nature de son
-                      activité.
-                    </i>
-                  ) : certificat.url ? (
-                    <a
-                      href={certificat.url}
-                      rel="noreferre noopener"
-                      target="_blank"
-                    >
-                      <Icon color="black" slug="file">
-                        certificat
-                      </Icon>
-                    </a>
-                  ) : (
-                    <i>document introuvable</i>
-                  )}
-                </>,
+                certificat.exempted ? (
+                  <i>
+                    Dispensé de certification de par la nature de son activité.
+                  </i>
+                ) : certificat.url ? (
+                  <a
+                    href={certificat.url}
+                    rel="noreferre noopener"
+                    target="_blank"
+                  >
+                    <Icon color="black" slug="file">
+                      certificat
+                    </Icon>
+                  </a>
+                ) : (
+                  <i>document introuvable</i>
+                ),
                 <div className="layout-center">
                   <ButtonLink
                     alt
