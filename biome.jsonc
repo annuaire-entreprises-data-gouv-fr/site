@@ -56,7 +56,6 @@
       },
       "performance": {
         "noImgElement": "off",
-        "noDelete": "off",
         "useTopLevelRegex": "off",
         "noNamespaceImport": "off",
         "noAccumulatingSpread": "off",
