@@ -38,12 +38,13 @@ function saveFavourite(visit: { siren: string; name: string; path: string }) {
       JSON.stringify(newFavourites.slice(0, 3))
     );
   } catch (e) {
-    if (e)
+    if (e) {
       logInfoInSentry(
         new Exception({
           name: "SaveFavouriteException",
           cause: e,
         })
       );
+    }
   }
 }

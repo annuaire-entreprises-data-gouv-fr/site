@@ -233,7 +233,9 @@ export default function ExportCsv() {
 
   const handleCsvExport = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!countResult || !filename) return;
+    if (!countResult || !filename) {
+      return;
+    }
 
     setIsLoading(true);
     setError(null);

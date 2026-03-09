@@ -189,7 +189,9 @@ export const formatAge = safe((date: string | Date) => {
 });
 
 export const capitalize = safe((str: string) => {
-  if (!str) return str;
+  if (!str) {
+    return str;
+  }
 
   return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
 });

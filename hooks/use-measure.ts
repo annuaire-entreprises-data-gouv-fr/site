@@ -33,7 +33,9 @@ export function useMeasure(): [
 
   const ref = useCallback(
     (node: HTMLElement | null) => {
-      if (!node) return;
+      if (!node) {
+        return;
+      }
       setNode(node);
       setMeasures({
         height: node.clientHeight,

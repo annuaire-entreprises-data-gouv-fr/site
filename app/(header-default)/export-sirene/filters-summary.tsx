@@ -180,9 +180,15 @@ export default function FiltersSummary({
           {(() => {
             const { inclure, inclureNo, inclureNonRenseigne } = filters.ess;
             const options: string[] = [];
-            if (inclure) options.push("Oui");
-            if (inclureNo) options.push("Non");
-            if (inclureNonRenseigne) options.push("Non renseignées");
+            if (inclure) {
+              options.push("Oui");
+            }
+            if (inclureNo) {
+              options.push("Non");
+            }
+            if (inclureNonRenseigne) {
+              options.push("Non renseignées");
+            }
             return options.length > 0 ? options.join(", ") : "Aucune sélection";
           })()}
         </p>
@@ -194,9 +200,15 @@ export default function FiltersSummary({
           {(() => {
             const { inclure, inclureNo, inclureNonRenseigne } = filters.mission;
             const options: string[] = [];
-            if (inclure) options.push("Oui");
-            if (inclureNo) options.push("Non");
-            if (inclureNonRenseigne) options.push("Non renseignées");
+            if (inclure) {
+              options.push("Oui");
+            }
+            if (inclureNo) {
+              options.push("Non");
+            }
+            if (inclureNonRenseigne) {
+              options.push("Non renseignées");
+            }
             return options.length > 0 ? options.join(", ") : "Aucune sélection";
           })()}
         </p>

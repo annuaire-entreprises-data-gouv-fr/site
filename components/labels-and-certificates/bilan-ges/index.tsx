@@ -13,7 +13,9 @@ interface IProps {
 }
 
 const formatEmissions = (value: number): string => {
-  if (value === 0) return "Non renseigné";
+  if (value === 0) {
+    return "Non renseigné";
+  }
   return value.toLocaleString("fr-FR");
 };
 

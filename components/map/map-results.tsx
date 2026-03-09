@@ -24,8 +24,12 @@ function MapWithResults({
   const map = useRef<MapLibreMap | null>(null);
 
   useEffect(() => {
-    if (!mapContainer.current) return;
-    if (map.current) return; // stops map from intializing more than once
+    if (!mapContainer.current) {
+      return;
+    }
+    if (map.current) {
+      return; // stops map from intializing more than once
+    }
 
     if (!hasSupportedWebGl) {
       return;

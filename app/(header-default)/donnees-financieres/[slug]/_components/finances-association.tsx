@@ -37,7 +37,9 @@ export default function FinancesAssociationSection({
     uniteLegale.siren,
     session
   );
-  if (!data) return null;
+  if (!data) {
+    return null;
+  }
 
   return (
     <DataSectionClient

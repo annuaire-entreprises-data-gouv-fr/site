@@ -21,7 +21,9 @@ const TextArea = forwardRef(
     const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
       (e) => {
         onChange?.(e);
-        if (!autoResize) return;
+        if (!autoResize) {
+          return;
+        }
         e.target.style.height = "inherit";
         e.target.style.height = `${e.target.scrollHeight}px`;
       },
