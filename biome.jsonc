@@ -90,7 +90,6 @@
         "noForEach": "off",
         "useDateNow": "off",
         "noUselessSwitchCase": "off",
-        "noStaticOnlyClass": "off",
         "noUselessCatch": "off",
         "useSimplifiedLogicExpression": "off"
       },
