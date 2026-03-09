@@ -105,8 +105,7 @@
         "noUnknownProperty": "off",
         "noChildrenProp": "off",
         "noNestedComponentDefinitions": "off",
-        "noUndeclaredVariables": "off",
-        "noUnusedPrivateClassMembers": "off"
+        "noUndeclaredVariables": "off"
       },
       "security": {
         "noDangerouslySetInnerHtml": "off"
