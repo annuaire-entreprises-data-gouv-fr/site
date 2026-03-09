@@ -147,16 +147,18 @@ export function GroupItem({
             <>
               <div style={{ alignSelf: "flex-end", marginBottom: "1rem" }}>
                 <div>
-                  <AddUserModal
-                    addUserToGroupState={(user: IRolesDataUser) => {
-                      setGroup({
-                        ...group,
-                        users: [...group.users, user],
-                      });
-                    }}
-                    defaultRoleId={defaultRoleId!}
-                    group={group}
-                  />
+                  {defaultRoleId !== undefined && (
+                    <AddUserModal
+                      addUserToGroupState={(user: IRolesDataUser) => {
+                        setGroup({
+                          ...group,
+                          users: [...group.users, user],
+                        });
+                      }}
+                      defaultRoleId={defaultRoleId}
+                      group={group}
+                    />
+                  )}
                 </div>
               </div>
 

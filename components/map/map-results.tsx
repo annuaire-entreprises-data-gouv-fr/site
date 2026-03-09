@@ -42,6 +42,11 @@ function MapWithResults({
         compact: true,
       },
     });
+    const mapInstance = map.current;
+
+    if (!mapInstance) {
+      return;
+    }
 
     results.results.forEach((result) => {
       const coordsSiege = checkLatLng(
@@ -64,7 +69,7 @@ function MapWithResults({
             Number.parseFloat(result.siege.latitude),
           ])
           .setPopup(popup)
-          .addTo(map.current!);
+          .addTo(mapInstance);
       }
 
       result.matchingEtablissements.forEach((match) => {
@@ -90,7 +95,7 @@ function MapWithResults({
               Number.parseFloat(match.latitude),
             ])
             .setPopup(popup)
-            .addTo(map.current!);
+            .addTo(mapInstance);
         }
       });
     });

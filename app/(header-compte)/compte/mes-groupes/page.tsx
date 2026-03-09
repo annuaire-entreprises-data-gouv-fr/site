@@ -41,7 +41,7 @@ const MesGroupesPage = async () => {
         Vous faites partie de {groups.length} groupe{pluralize(groups)} :
       </p>
       <GroupManagement
-        currentUserEmail={session!.user!.email}
+        currentUserEmail={session.user.email}
         initialGroups={groups}
         roles={roles}
       />
