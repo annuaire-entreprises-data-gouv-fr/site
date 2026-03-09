@@ -61,8 +61,7 @@
         "noDuplicateProperties": "off",
         "noRedeclare": "off",
         "noShorthandPropertyOverrides": "off",
-        "useErrorMessage": "off",
-        "noDocumentCookie": "off"
+        "useErrorMessage": "off"
       },
       "performance": {
         "noImgElement": "off",
