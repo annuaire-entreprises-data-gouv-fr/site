@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import {
   type ChangeEventHandler,
   type DetailedHTMLProps,
@@ -33,7 +34,7 @@ const TextArea = forwardRef(
     return (
       <textarea
         {...rest}
-        className={"fr-input" + (className ?? "")}
+        className={clsx("fr-input", className)}
         onChange={handleChange}
         ref={ref}
         style={{

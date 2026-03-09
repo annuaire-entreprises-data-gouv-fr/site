@@ -1,3 +1,5 @@
+import { clsx } from "clsx";
+
 interface IProps {
   ariaControls: string;
   ariaLabel: string;
@@ -15,7 +17,7 @@ export default function ButtonClose({
     <button
       aria-controls={ariaControls}
       aria-label={ariaLabel}
-      className={"fr-btn fr-btn--tertiary-no-outline" + (className ?? "")}
+      className={clsx("fr-btn", "fr-btn--tertiary-no-outline", className)}
       onClick={onClick}
       type="button"
     >

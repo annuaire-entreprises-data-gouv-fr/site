@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import { Link } from "#components/Link";
 import FloatingModal from "#components-ui/floating-modal";
 import { Icon } from "#components-ui/icon/wrapper";
@@ -13,7 +14,7 @@ const Menu: React.FC<{
   useAgentCTA: boolean;
 }> = ({ session, useAgentCTA }) =>
   isLoggedIn(session) ? (
-    <div className={styles.menuLogout + "fr-link"}>
+    <div className={clsx(styles.menuLogout, "fr-link")}>
       <div>
         <Icon slug="accountLine">
           <span className={styles.menuText}>

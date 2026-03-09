@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import type React from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
@@ -13,7 +14,7 @@ const SocialMedia: React.FC<{
   siren?: Siren;
 }> = ({ path, label, siren }) => (
   <PrintNever>
-    <div className={styles.socialMedia + "layout-right"}>
+    <div className={clsx(styles.socialMedia, "layout-right")}>
       <span>
         <InformationTooltip
           ariaRelation="labelledby"

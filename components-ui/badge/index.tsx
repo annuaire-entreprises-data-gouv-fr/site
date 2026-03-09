@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import type {
   CSSProperties,
   MouseEventHandler,
@@ -75,9 +76,11 @@ export function Badge({
 }: IProps) {
   return (
     <BadgeContainer
-      className={`${styles.badgeWrapper} ${
-        onClick && !link && !isSelected ? styles.badgeWrapperOnClick : ""
-      } ${onClick ? "cursor-pointer" : ""}`}
+      className={clsx(
+        styles.badgeWrapper,
+        onClick && !link && !isSelected && styles.badgeWrapperOnClick,
+        onClick && "cursor-pointer"
+      )}
       link={link}
       onClick={onClick}
       style={{

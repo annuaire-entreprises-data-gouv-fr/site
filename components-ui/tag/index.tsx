@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import type React from "react";
 import type { CSSProperties, PropsWithChildren } from "react";
 import styles from "./styles.module.css";
@@ -59,10 +60,13 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
 }) => {
   return (
     <TagContainer
-      className={
-        styles.frBadge +
-        `fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`
-      }
+      className={clsx(
+        styles.frBadge,
+        "fr-badge",
+        "fr-badge--no-icon",
+        badgeSize[size],
+        badgeColor[color]
+      )}
       id={id}
       link={link}
       style={{
