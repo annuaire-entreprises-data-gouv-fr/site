@@ -268,7 +268,7 @@ export const parseIntWithDefaultValue = (
   try {
     const result = Number.parseInt(intAsString, 10);
     if (Number.isNaN(result)) {
-      throw new Error();
+      throw new Error("Failed to parse integer");
     }
     return result;
   } catch {

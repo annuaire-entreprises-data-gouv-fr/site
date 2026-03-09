@@ -54,8 +54,7 @@
         "noEmptyBlockStatements": "off",
         "useGuardForIn": "off",
         "noAlert": "off",
-        "noDuplicateProperties": "off",
-        "useErrorMessage": "off"
+        "noDuplicateProperties": "off"
       },
       "performance": {
         "noImgElement": "off",

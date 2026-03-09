@@ -16,7 +16,7 @@ const StructuredDataBreadcrumb = ({
     const depUrl = getUrlFromDepartement(dep || "");
 
     if (!dep || !depUrl || !naf) {
-      throw new Error();
+      throw new Error("Breadcrumb data is incomplete");
     }
 
     return (
