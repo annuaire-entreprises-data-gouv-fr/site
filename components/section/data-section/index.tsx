@@ -30,10 +30,11 @@ export function DataSection<T extends Exclude<unknown, IDataFetchingState>>({
     <Section {...props} lastModified={lastModified}>
       <DataSectionContent
         additionalInfoOnError={additionalInfoOnError}
-        children={children}
         data={data}
         notFoundInfo={notFoundInfo}
-      />
+      >
+        {children}
+      </DataSectionContent>
     </Section>
   );
 }
