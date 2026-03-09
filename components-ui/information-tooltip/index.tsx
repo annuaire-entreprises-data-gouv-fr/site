@@ -114,7 +114,6 @@ const computeLeft = (orientation: "left" | "right" | "center", width = 250) => {
       return `calc(50% - ${width}px)`;
     case "left":
       return "50%";
-    case "center":
     default:
       return `calc(50% - ${Math.round(width / 2)}px)`;
   }

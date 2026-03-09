@@ -66,7 +66,6 @@
         "useOptionalChain": "off",
         "noBannedTypes": "off",
         "noForEach": "off",
-        "noUselessSwitchCase": "off",
         "useSimplifiedLogicExpression": "off"
       },
       "correctness": {

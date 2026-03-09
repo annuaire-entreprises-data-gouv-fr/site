@@ -174,7 +174,6 @@ export default function Question({
           />
         </>
       );
-    case EQuestionType.ALL:
     default: {
       let modifyText = " d’une entreprise, association ou administration";
 
