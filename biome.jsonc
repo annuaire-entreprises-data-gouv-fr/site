@@ -63,7 +63,6 @@
         "noUnusedVariables": "off",
         "noUnusedFunctionParameters": "off",
         "useExhaustiveDependencies": "off",
-        "noInnerDeclarations": "off",
         "noUnknownMediaFeatureName": "off",
         "noUnknownProperty": "off",
         "noUndeclaredVariables": "off"
