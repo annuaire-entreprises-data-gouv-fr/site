@@ -16,7 +16,6 @@ export function MapEtablissement({
   etablissement: IEtablissement;
 }) {
   const coords = useFetchGeoLoc(etablissement);
-  const hasSupportedWebGl = hasWebGLSupport();
 
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<Map | null>(null);
@@ -31,7 +30,11 @@ export function MapEtablissement({
     if (map.current || !coords) {
       return; // stops map from intializing more than once
     }
-    if (!hasSupportedWebGl) {
+    if (!hasWebGLSupport()) {
+      // biome-ignore lint/suspicious/noAlert: preserve the existing blocking feedback for unsupported browsers
+      alert(
+        "Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte."
+      );
       return;
     }
 
@@ -56,7 +59,7 @@ export function MapEtablissement({
       .setLngLat(coords)
       .setPopup(popup)
       .addTo(map.current);
-  }, [etablissement, coords, hasSupportedWebGl]);
+  }, [etablissement, coords]);
 
   return (
     <div
@@ -72,13 +75,7 @@ export function MapEtablissement({
         textAlign: "center",
       }}
     >
-      {!hasSupportedWebGl && (
-        <i>
-          Votre navigateur ne supporte pas WebGL, qui est indispensable à
-          l’affichage de la carte.
-        </i>
-      )}
-      {hasSupportedWebGl && (!coords || hasAnyError(coords)) && (
+      {(!coords || hasAnyError(coords)) && (
         <i>
           Impossible d’afficher la carte.
           <br />

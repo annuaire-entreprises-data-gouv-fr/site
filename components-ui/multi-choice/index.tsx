@@ -20,6 +20,12 @@ export interface IProps {
   }[];
 }
 
+const onKeyDown = (event: any, onclick?: Function) => {
+  if (event.keyCode === 13 && onclick) {
+    onclick();
+  }
+};
+
 export const MultiChoice: React.FC<IProps> = ({
   values,
   legend = "",
@@ -56,13 +62,17 @@ export const MultiChoice: React.FC<IProps> = ({
                 name={name}
                 onChange={onClick ? onClick : undefined}
                 required={required}
+                tabIndex={-1}
                 type="radio"
                 value={value}
               />
               <label
                 className="fr-label"
                 htmlFor={`${idPrefix}-${index}`}
+                onKeyDown={(e) => onKeyDown(e, onClick)}
                 style={computeStyle(large)}
+                // biome-ignore lint/a11y/noNoninteractiveTabindex: keep label keyboard-focusable to preserve current UX
+                tabIndex={0}
               >
                 {label}
               </label>
