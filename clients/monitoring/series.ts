@@ -32,8 +32,7 @@ export class DailyUptimeRatioConverter {
   }
 
   feed(downtimes: IUpdownIODowntimes[]) {
-    for (let i = 0; i < downtimes.length; i++) {
-      const downtime = downtimes[i];
+    for (const downtime of downtimes) {
       let downStartDate = new Date(downtime.started_at);
 
       if (downStartDate.getTime() < this._from.getTime()) {

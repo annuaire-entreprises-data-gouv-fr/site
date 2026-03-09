@@ -27,9 +27,9 @@ function saveFavourite(visit: { siren: string; name: string; path: string }) {
     const favourites = favouritesJSON ? JSON.parse(favouritesJSON) : [];
 
     const newFavourites = [visit];
-    for (let i = 0; i < favourites.length; i++) {
-      if (favourites[i].siren !== visit.siren) {
-        newFavourites.push(favourites[i]);
+    for (const favourite of favourites) {
+      if (favourite.siren !== visit.siren) {
+        newFavourites.push(favourite);
       }
     }
 

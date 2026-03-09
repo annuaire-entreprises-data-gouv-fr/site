@@ -34,7 +34,6 @@
         "useConsistentMemberAccessibility": "off",
         "useDefaultParameterLast": "off",
         "useFilenamingConvention": "off",
-        "useForOf": "off",
         "useReadonlyClassProperties": "off",
         "noDescendingSpecificity": "off"
       },
