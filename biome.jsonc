@@ -30,7 +30,6 @@
         "useTemplate": "off",
         "noEnum": "off",
         "useBlockStatements": "off",
-        "noParameterAssign": "off",
         "noParameterProperties": "off",
         "useConsistentMemberAccessibility": "off",
         "useDefaultParameterLast": "off",

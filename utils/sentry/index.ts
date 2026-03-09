@@ -26,9 +26,9 @@ const logInSentryFactory =
   (severity: SeverityLevel) => (exception: Exception) => {
     if (isNextJSSentryActivated) {
       Sentry.withScope((scope) => {
-        scope = getScope(exception, scope);
-        scope.setLevel(severity);
-        Sentry.captureException(exception, scope);
+        const sentryScope = getScope(exception, scope);
+        sentryScope.setLevel(severity);
+        Sentry.captureException(exception, sentryScope);
       });
     } else if (["fatal", "error"].indexOf(severity) > -1) {
       console.error(exception, JSON.stringify(exception.context));
