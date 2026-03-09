@@ -164,7 +164,7 @@ const PageCounter: React.FC<IProps> = ({
 
   return (
     <div className="layout-center" style={{ margin: "15px auto" }}>
-      <nav aria-label="Pagination" className="fr-pagination" role="navigation">
+      <nav aria-label="Pagination" className="fr-pagination">
         <ul className="fr-pagination__list">
           <First
             compact={compact}

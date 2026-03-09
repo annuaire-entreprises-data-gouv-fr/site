@@ -10,11 +10,7 @@ export default function Summary(props: ISummaryProps) {
     return null;
   }
   return (
-    <nav
-      aria-labelledby="fr-summary-title"
-      className="fr-summary"
-      role="navigation"
-    >
+    <nav aria-labelledby="fr-summary-title" className="fr-summary">
       <p className="fr-summary__title" id="fr-summary-title">
         Sommaire
       </p>

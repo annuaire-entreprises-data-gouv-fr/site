@@ -14,10 +14,7 @@ export default function DonneesFinancieresAssociation({
 }) {
   return (
     <>
-      <nav
-        aria-labelledby="finances-association-summary-title"
-        role="navigation"
-      >
+      <nav aria-labelledby="finances-association-summary-title">
         <strong id="finances-associtation-summary-title">
           Informations financières disponibles :
         </strong>

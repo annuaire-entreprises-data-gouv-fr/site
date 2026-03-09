@@ -7,7 +7,6 @@
   "linter": {
     "rules": {
       "a11y": {
-        "noRedundantRoles": "off",
         "useSemanticElements": "off",
         "noNoninteractiveElementInteractions": "off",
         "noStaticElementInteractions": "off",
