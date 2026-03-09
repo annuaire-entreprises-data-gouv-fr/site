@@ -53,7 +53,6 @@ export const HeaderCore: React.FC<IProps> = ({
     <LoadBar session={session} />
     <header
       className="fr-header"
-      role="banner"
       style={{ filter: useSearchBar ? undefined : "none" }}
     >
       <PrintNever>
