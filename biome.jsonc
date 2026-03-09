@@ -104,7 +104,6 @@
         "noUnknownMediaFeatureName": "off",
         "noUnknownProperty": "off",
         "noChildrenProp": "off",
-        "noInvalidUseBeforeDeclaration": "off",
         "noNestedComponentDefinitions": "off",
         "noUndeclaredVariables": "off",
         "noUnusedPrivateClassMembers": "off"
