@@ -48,7 +48,6 @@
         "noImplicitAnyLet": "off",
         "noMisplacedAssertion": "off",
         "useIterableCallbackReturn": "off",
-        "noAsyncPromiseExecutor": "off",
         "noEmptyBlockStatements": "off",
         "noAlert": "off",
         "noDuplicateProperties": "off"
