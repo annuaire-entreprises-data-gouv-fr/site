@@ -47,6 +47,7 @@ export function QrCode({ siren }: QrCodeProps) {
           aria-label="Partager cette page grâce à un QR Code"
           className="no-style-link"
           onClick={onDownload}
+          type="button"
         >
           <Icon slug="qrCode" />
         </button>

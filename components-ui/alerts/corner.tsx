@@ -28,6 +28,7 @@ const CornerAlert: React.FC<
       aria-label="Fermer la notification"
       className={styles.close}
       onClick={onDismiss}
+      type="button"
     >
       ✕
     </button>

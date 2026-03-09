@@ -14,6 +14,7 @@ const First: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
       className="fr-pagination__link fr-pagination__link--first fr-pagination__link--lg-label"
       disabled={currentPage <= 1}
       onClick={() => currentPage > 1 && onPageChange(1)}
+      type="button"
     >
       {compact ? "" : "Première page"}
     </button>
@@ -31,6 +32,7 @@ const Last: React.FC<IProps> = ({
       className="fr-pagination__link fr-pagination__link--last"
       disabled={currentPage >= totalPages}
       onClick={() => currentPage < totalPages && onPageChange(totalPages)}
+      type="button"
     >
       {compact ? "" : "Dernière page"}
     </button>
@@ -43,6 +45,7 @@ const Previous: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
       className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
       disabled={currentPage <= 1}
       onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
+      type="button"
     >
       {compact ? "" : "Page précédente"}
     </button>
@@ -60,6 +63,7 @@ const Next: React.FC<IProps> = ({
       className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
       disabled={currentPage >= totalPages}
       onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
+      type="button"
     >
       {compact ? "" : "Page suivante"}
     </button>
@@ -77,6 +81,7 @@ const Page: React.FC<{
       className="fr-pagination__link"
       onClick={() => onPageChange(pageNum)}
       title={`Page ${pageNum}`}
+      type="button"
     >
       {pageNum}
     </button>

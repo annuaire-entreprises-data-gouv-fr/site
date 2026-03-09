@@ -14,8 +14,7 @@
         "useKeyWithClickEvents": "off",
         "noLabelWithoutControl": "off",
         "noNoninteractiveTabindex": "off",
-        "noSvgWithoutTitle": "off",
-        "useButtonType": "off"
+        "noSvgWithoutTitle": "off"
       },
       "style": {
         "noMagicNumbers": "off",

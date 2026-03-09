@@ -95,6 +95,7 @@ export function CopyPaste({
       onMouseLeave={() => setHovered(false)}
       ref={element}
       title="Cliquez pour copier dans le presse-papier"
+      type="button"
     >
       <span id={id}>{children} </span>
       {(hovered || copied || focused) && !disableCopyIcon && (

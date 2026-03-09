@@ -41,6 +41,7 @@ const ButtonProConnect: React.FC<IProps> = ({
         <button
           className="fr-connect pro-connect"
           onClick={() => logConversionEvent(event)}
+          type="button"
         >
           <span className="fr-connect__login">S’identifier avec</span>
           <span className="fr-connect__brand">ProConnect</span>

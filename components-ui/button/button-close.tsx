@@ -17,6 +17,7 @@ export default function ButtonClose({
       aria-label={ariaLabel}
       className={"fr-btn fr-btn--tertiary-no-outline " + (className ?? "")}
       onClick={onClick}
+      type="button"
     >
       × Fermer
     </button>
