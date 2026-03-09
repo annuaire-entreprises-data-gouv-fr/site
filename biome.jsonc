@@ -55,7 +55,6 @@
       "performance": {
         "noImgElement": "off",
         "useTopLevelRegex": "off",
-        "noNamespaceImport": "off",
         "noBarrelFile": "off"
       },
       "nursery": {

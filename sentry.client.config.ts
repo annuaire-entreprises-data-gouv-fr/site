@@ -1,4 +1,4 @@
-import * as Sentry from "@sentry/nextjs";
+import { init } from "@sentry/nextjs";
 import { Exception } from "#models/exceptions";
 import { isNextJSSentryActivated } from "#utils/sentry";
 import { getTransactionNameFromUrl } from "#utils/sentry/tracing";
@@ -11,7 +11,7 @@ declare global {
 }
 
 if (isNextJSSentryActivated) {
-  Sentry.init({
+  init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
     tracesSampleRate: 0.005,
     maxBreadcrumbs: 2,
