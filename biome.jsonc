@@ -75,7 +75,6 @@
         "noUnusedVariables": "off",
         "noUnusedFunctionParameters": "off",
         "useExhaustiveDependencies": "off",
-        "useSingleJsDocAsterisk": "off",
         "noInnerDeclarations": "off",
         "noUnknownMediaFeatureName": "off",
         "noUnknownProperty": "off",

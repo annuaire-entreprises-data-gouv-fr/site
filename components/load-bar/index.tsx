@@ -47,7 +47,7 @@ const wait = async (timeout: number): Promise<void> =>
 /**
  * Load bar position from 0 to 100%
  * first two 0 = wait 200ms before triggering load bar
- *  */
+ */
 const positions = [
   0, 0, 3, 5, 10, 12, 15, 22, 28, 34, 35, 36, 38, 40, 45, 65, 66, 67, 67, 68,
   70, 73, 75, 77, 78, 80, 82, 83, 85, 86, 88, 88, 89, 90, 91, 92, 94, 94, 95,

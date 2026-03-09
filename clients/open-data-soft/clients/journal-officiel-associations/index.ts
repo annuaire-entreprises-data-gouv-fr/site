@@ -88,7 +88,7 @@ export const clientJOAFE = async (
 
 /**
  * DCA Dépôt des Compotes des Associations
- **/
+ */
 export const clientDCA = async (
   siren: Siren,
   idRna: IdRna | string

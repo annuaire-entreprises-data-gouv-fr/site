@@ -17,7 +17,7 @@ const certificatsLogo = {
  * match logo path on partial certificats names as several certificates share the same logo
  *
  * eg : "Qualibois module Air" and "Qualibois module Eau" => QualiBois.jpg
- *  */
+ */
 
 export const getCertificatLogoPath = (nomCertificat: string) => {
   for (const [certificateSub, path] of Object.entries(certificatsLogo)) {

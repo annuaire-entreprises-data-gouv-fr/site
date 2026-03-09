@@ -12,7 +12,7 @@ export const isTVANumber = (slug: string): slug is TVANumber =>
 
 /**
  * throw an exception if a string is not a TVA Number
- * */
+ */
 export const verifyTVANumber = (slug: string): TVANumber => {
   if (!isTVANumber(slug)) {
     throw new Error("Not a valid TVANumber");
@@ -39,7 +39,7 @@ export const isSiret = (slug: string): slug is Siret => {
 
 /**
  * throw an exception if a string is not a siren
- * */
+ */
 export const verifySiren = (slug: string): Siren => {
   if (!isSiren(slug)) {
     throw new NotASirenError(slug);
@@ -49,7 +49,7 @@ export const verifySiren = (slug: string): Siren => {
 
 /**
  * Throw an exception if a string is not a siret
- * */
+ */
 export const verifySiret = (slug: string): Siret => {
   if (!isSiret(slug)) {
     throw new NotASiretError(slug);

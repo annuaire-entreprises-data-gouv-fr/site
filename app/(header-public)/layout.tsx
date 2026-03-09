@@ -12,7 +12,7 @@ export const metadata: Metadata = meta({});
 /**
  * Layout component designed for pages without authentication.
  * It is mainly used for static pages as they can't access the session.
- **/
+ */
 export default function LayoutPublic({
   children,
 }: {
