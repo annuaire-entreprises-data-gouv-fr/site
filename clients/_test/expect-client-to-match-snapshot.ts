@@ -33,11 +33,12 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
       }
       throw e;
     }
-  } finally {
-    if (!result) {
-      return;
-    }
   }
+
+  if (!result) {
+    return;
+  }
+
   if (postProcessResult) {
     try {
       postProcessResult(result);

@@ -103,7 +103,6 @@
         "useParseIntRadix": "off",
         "useSingleJsDocAsterisk": "off",
         "noInnerDeclarations": "off",
-        "noUnsafeFinally": "off",
         "noUnknownMediaFeatureName": "off",
         "noUnknownProperty": "off",
         "noChildrenProp": "off",
