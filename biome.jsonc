@@ -56,7 +56,6 @@
         "noImgElement": "off",
         "useTopLevelRegex": "off",
         "noNamespaceImport": "off",
-        "noAccumulatingSpread": "off",
         "noBarrelFile": "off"
       },
       "nursery": {

@@ -39,32 +39,28 @@ export const clientCommuneByCp = async (cp: string): Promise<IGeoElement[]> => {
 const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] =>
   response
     .sort((a, b) => b.codesPostaux.length - a.codesPostaux.length)
-    .reduce(
-      (communes: IGeoElement[], commune: IGeoCommuneResponse) => [
-        ...communes,
-        ...(["Paris", "Lyon", "Marseille"].indexOf(commune.nom) === -1
-          ? [
-              {
-                type: "insee",
-                value: commune.code,
-                label: `${commune.nom}${
-                  commune.departement?.code
-                    ? ` (${commune.departement?.code})`
-                    : ""
-                } — toute la commune`,
-              } as IGeoElement,
-            ]
-          : []),
-        ...(commune.codesPostaux.length > 1
-          ? commune.codesPostaux.map(
-              (cp) =>
-                ({
-                  label: `${commune.nom} (${cp})`,
-                  value: cp,
-                  type: "cp",
-                }) as IGeoElement
-            )
-          : []),
-      ],
-      []
-    );
+    .flatMap((commune) => {
+      const elements: IGeoElement[] = [];
+
+      if (!["Paris", "Lyon", "Marseille"].includes(commune.nom)) {
+        elements.push({
+          type: "insee",
+          value: commune.code,
+          label: `${commune.nom}${
+            commune.departement?.code ? ` (${commune.departement.code})` : ""
+          } — toute la commune`,
+        });
+      }
+
+      if (commune.codesPostaux.length > 1) {
+        elements.push(
+          ...commune.codesPostaux.map((cp) => ({
+            label: `${commune.nom} (${cp})`,
+            value: cp,
+            type: "cp" as const,
+          }))
+        );
+      }
+
+      return elements;
+    });
