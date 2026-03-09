@@ -51,7 +51,6 @@
         "noDoubleEquals": "off",
         "noImplicitAnyLet": "off",
         "noMisplacedAssertion": "off",
-        "noSkippedTests": "off",
         "useIterableCallbackReturn": "off",
         "noAsyncPromiseExecutor": "off",
         "noEmptyBlockStatements": "off",
