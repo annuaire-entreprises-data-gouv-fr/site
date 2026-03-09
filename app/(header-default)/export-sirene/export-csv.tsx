@@ -342,17 +342,17 @@ export default function ExportCsv() {
             {isLoading ? (
               "Export en cours..."
             ) : (
-              <a
+              <button
                 className="fr-link fr-link--download"
-                href="#"
                 onClick={handleCsvExport}
+                type="button"
               >
                 {filename}
                 <span className="fr-link__detail">
                   CSV - Environ {formatNumber(getFileSize(countResult.count))}{" "}
                   Ko
                 </span>
-              </a>
+              </button>
             )}
           </div>
         </div>

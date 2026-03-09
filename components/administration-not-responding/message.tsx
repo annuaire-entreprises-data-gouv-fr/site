@@ -19,7 +19,7 @@ const AdministrationNotRespondingMessage: React.FC<IProps> = ({
       <br />
       <br />
       Vous pouvez{" "}
-      <a href="">cliquez-ici pour recharger la page et ré-essayer</a>.
+      <a href=".">cliquez-ici pour recharger la page et ré-essayer</a>.
     </Warning>
     <p>
       Pour en savoir plus sur l’état du service, vous pouvez consulter la

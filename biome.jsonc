@@ -12,7 +12,6 @@
         "noNoninteractiveElementInteractions": "off",
         "noStaticElementInteractions": "off",
         "useKeyWithClickEvents": "off",
-        "useValidAnchor": "off",
         "noLabelWithoutControl": "off",
         "noNoninteractiveTabindex": "off",
         "noSvgWithoutTitle": "off",

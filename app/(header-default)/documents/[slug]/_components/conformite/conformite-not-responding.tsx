@@ -15,7 +15,7 @@ const APINotRespongingElement: React.FC<{
           </Icon>
         </i>
         <br />
-        <a href="">Rechargez la page</a> ou ré-essayez plus-tard.
+        <a href=".">Rechargez la page</a> ou ré-essayez plus-tard.
         <br />
         <br />
       </>
