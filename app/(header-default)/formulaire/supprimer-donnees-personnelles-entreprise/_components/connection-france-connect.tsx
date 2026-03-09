@@ -10,8 +10,7 @@ export function ConnectionFranceConnect({
   session: ISession | null;
 }) {
   const missingDataInFranceConnect =
-    session &&
-    session.franceConnectHidePersonalDataSession &&
+    session?.franceConnectHidePersonalDataSession &&
     !getHidePersonalDataRequestFCSession(session);
 
   const franceConnectInfo =

@@ -53,7 +53,7 @@ export function FileInput(props: FileInputProps) {
       e.stopPropagation();
       setDragActive(false);
 
-      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      if (e.dataTransfer.files?.[0]) {
         processFile(e.dataTransfer.files[0]);
       }
     },
@@ -62,7 +62,7 @@ export function FileInput(props: FileInputProps) {
 
   const handleFileInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files && e.target.files[0]) {
+      if (e.target.files?.[0]) {
         processFile(e.target.files[0]);
       }
     },

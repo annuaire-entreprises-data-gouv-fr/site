@@ -40,7 +40,7 @@ interface IAffectationRecord {
 }
 
 function firstArrayElement<T>(array: T[], defaultValue: T): T {
-  if (array && array.length && array.length > 0) {
+  if (array?.length && array.length > 0) {
     return array[0] ?? defaultValue;
   }
   return defaultValue;

@@ -140,7 +140,7 @@ const extractDetails = (annonce: IBodaccRecords): string => {
         (annonce as IBodaccB).radiationaurcs || "{}"
       );
       const dateRadiation = formatDate(
-        (radiationaurcs.radiationPP || {}).dateCessationActivitePP
+        radiationaurcs.radiationPP?.dateCessationActivitePP
       );
 
       return dateRadiation ? `Radiation le ${dateRadiation}` : "";

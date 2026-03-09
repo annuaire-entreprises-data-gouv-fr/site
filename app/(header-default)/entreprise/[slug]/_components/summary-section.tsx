@@ -76,9 +76,7 @@ const UniteLegaleSummarySection: React.FC<{
     ["SIREN", formatIntFr(uniteLegale.siren)],
     [
       "SIRET du siège social",
-      uniteLegale.siege &&
-        uniteLegale.siege.siret &&
-        formatSiret((uniteLegale.siege || {}).siret),
+      uniteLegale.siege?.siret && formatSiret(uniteLegale.siege?.siret),
     ],
     [
       <Link href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</Link>,

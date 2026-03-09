@@ -90,7 +90,7 @@ if (isNextJSSentryActivated) {
     },
 
     beforeSendTransaction(event) {
-      if (event.transaction && event.transaction.startsWith("/")) {
+      if (event.transaction?.startsWith("/")) {
         event.transaction = getTransactionNameFromUrl(event.transaction);
       }
 
