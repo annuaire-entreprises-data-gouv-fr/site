@@ -72,6 +72,7 @@ export default function PartagerPage() {
             height="70"
             src={`${getBaseUrl()}/api/share/button/510973431`}
             style={{ border: "none", maxWidth: "100%" }}
+            title="Exemple de bouton de partage sombre"
             width="300"
           />
           <div />
@@ -79,6 +80,7 @@ export default function PartagerPage() {
             height="70"
             src={`${getBaseUrl()}/api/share/button/510973431?light=true`}
             style={{ border: "none", maxWidth: "100%" }}
+            title="Exemple de bouton de partage clair"
             width="300"
           />
           <h3>Comment ajouter un lien sur mon site ?</h3>
