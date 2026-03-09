@@ -15,7 +15,6 @@
         "useValidAnchor": "off",
         "noLabelWithoutControl": "off",
         "useAriaPropsSupportedByRole": "off",
-        "useHtmlLang": "off",
         "noInteractiveElementToNoninteractiveRole": "off",
         "noNoninteractiveTabindex": "off",
         "noSvgWithoutTitle": "off",
