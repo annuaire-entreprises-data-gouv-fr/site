@@ -137,7 +137,7 @@ const FAQ = () => (
   </FAQLink>
 );
 
-const formatLicence = (categorie: string, type: string, nomLieu = "") => {
+const formatLicence = (categorie: string, nomLieu = "") => {
   switch (categorie) {
     case "1":
       return (
