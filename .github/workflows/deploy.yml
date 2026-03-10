@@ -14,7 +14,13 @@ jobs:
     timeout-minutes: 15
     environment:
       name: staging
-
+    strategy:
+      matrix:
+        include:
+          - environment: staging-01
+            host: SSH_HOST_STAGING_V2
+          - environment: staging-02
+            host: SSH_STAGING_02
     steps:
       - uses: actions/checkout@v4
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1
@@ -23,9 +29,9 @@ jobs:
           app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
           app-shortname: "website"
           version: "main"
-          environment: "staging"
+          environment: "${{ matrix.environment }}"
           ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
-          ssh-host: ${{ secrets.SSH_HOST_STAGING_V2 }}
+          ssh-host: ${{ secrets[matrix.host] }}
           notify-on-failure: true
           notify-on-success: false
           notify-webhook: ${{ secrets.DEV_EVENT_HOOK }}
@@ -54,7 +60,7 @@ jobs:
           app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
           app-shortname: "website"
           version: "main"
-          environment: "production"
+          environment: "${{ matrix.environment }}"
           ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
           ssh-host: ${{ secrets[matrix.host] }}
           notify-on-failure: true
