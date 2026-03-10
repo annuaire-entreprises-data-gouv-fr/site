@@ -28,6 +28,7 @@ import {
 } from "#models/authentication/user/rights";
 import { getCertificationsFromSlug } from "#models/certifications";
 import {
+  parseIntWithDefaultValue,
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#utils/helpers";
@@ -61,6 +62,15 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
   const { slug, isBot } = await extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
+  const resolvedSearchParams = (await props.searchParams) || {};
+  const entrepreneurSpectaclesPageParam = (resolvedSearchParams[
+    "entrepreneur-spectacles-page"
+  ] || "") as string;
+  const entrepreneurSpectaclesPage = parseIntWithDefaultValue(
+    entrepreneurSpectaclesPageParam,
+    1
+  );
+
   const {
     estEss,
     estRge,
@@ -85,7 +95,9 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
     organismesDeFormation,
     ess,
     entrepriseInclusive,
-  } = await getCertificationsFromSlug(uniteLegale);
+  } = await getCertificationsFromSlug(uniteLegale, {
+    entrepreneurSpectaclesPage,
+  });
 
   return (
     <div className="content-container">

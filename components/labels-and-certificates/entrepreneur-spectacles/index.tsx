@@ -11,6 +11,7 @@ import { Tag } from "#components-ui/tag";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IAPINotRespondingError } from "#models/api-not-responding";
 import { formatDate, pluralize } from "#utils/helpers";
+import { EntrepreneurSpectaclesPagination } from "./pagination";
 
 export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
   entrepreneurSpectacles: IEntrepreneursSpectacles | IAPINotRespondingError;
@@ -113,6 +114,12 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
             )}
             head={["Numéro de récépissé", "Type de déclaration", "Validité"]}
           />
+          {entrepreneurSpectacles.meta.total >
+            entrepreneurSpectacles.meta.page_size && (
+            <EntrepreneurSpectaclesPagination
+              entrepreneurSpectacles={entrepreneurSpectacles}
+            />
+          )}
         </>
       );
     }}
