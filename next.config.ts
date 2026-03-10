@@ -89,7 +89,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/api/feature-flags",
+        source: "/(api/feature-flags|health)",
         headers: [
           {
             key: "Cache-Control",
