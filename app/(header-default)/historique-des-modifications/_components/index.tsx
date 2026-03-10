@@ -40,11 +40,7 @@ export default function ChangelogWithFilters({
           aria-labelledby="sidebar_category_legend"
           className="fr-fieldset"
         >
-          <legend
-            aria-label="Filtrer les nouveautés par périmètre"
-            className="fr-fieldset__legend"
-            id="sidebar_category_legend"
-          >
+          <legend className="fr-fieldset__legend" id="sidebar_category_legend">
             Filtrer par périmètre :
           </legend>
           <div className="fr-fieldset__element">

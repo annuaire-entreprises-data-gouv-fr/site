@@ -49,40 +49,35 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
   return (
-    <>
-      <div className="content-container">
-        <Title
-          ficheType={FICHE.DOCUMENTS}
-          session={session}
-          uniteLegale={uniteLegale}
-        />
-        <SummaryDocuments session={session} />
-        <JustificatifsSection session={session} uniteLegale={uniteLegale} />
-        <HorizontalSeparator />
-        <BreakPageForPrint />
-        <PrintNever>
-          {hasRights(session, ApplicationRights.conformiteSociale) && (
-            <ConformiteSocialeSection
-              session={session}
-              uniteLegale={uniteLegale}
-            />
-          )}
-          {hasRights(session, ApplicationRights.conformiteFiscale) && (
-            <ConformiteFiscaleSection
-              session={session}
-              uniteLegale={uniteLegale}
-            />
-          )}
-          <ActesSection session={session} uniteLegale={uniteLegale} />
-          {hasRights(session, ApplicationRights.travauxPublics) && (
-            <TravauxPublicsSection
-              session={session}
-              uniteLegale={uniteLegale}
-            />
-          )}
-        </PrintNever>
-      </div>
-    </>
+    <div className="content-container">
+      <Title
+        ficheType={FICHE.DOCUMENTS}
+        session={session}
+        uniteLegale={uniteLegale}
+      />
+      <SummaryDocuments session={session} />
+      <JustificatifsSection session={session} uniteLegale={uniteLegale} />
+      <HorizontalSeparator />
+      <BreakPageForPrint />
+      <PrintNever>
+        {hasRights(session, ApplicationRights.conformiteSociale) && (
+          <ConformiteSocialeSection
+            session={session}
+            uniteLegale={uniteLegale}
+          />
+        )}
+        {hasRights(session, ApplicationRights.conformiteFiscale) && (
+          <ConformiteFiscaleSection
+            session={session}
+            uniteLegale={uniteLegale}
+          />
+        )}
+        <ActesSection session={session} uniteLegale={uniteLegale} />
+        {hasRights(session, ApplicationRights.travauxPublics) && (
+          <TravauxPublicsSection session={session} uniteLegale={uniteLegale} />
+        )}
+      </PrintNever>
+    </div>
   );
 };
 

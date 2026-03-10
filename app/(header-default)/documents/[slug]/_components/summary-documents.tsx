@@ -5,7 +5,7 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 
 export const SummaryDocuments = ({ session }: { session: ISession | null }) => (
-  <nav aria-labelledby="document-summary-title" role="navigation">
+  <nav aria-labelledby="document-summary-title">
     <strong id="document-summary-title">Documents disponibles :</strong>
     <ul>
       <li>

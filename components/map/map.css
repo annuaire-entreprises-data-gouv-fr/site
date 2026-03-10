@@ -24,8 +24,6 @@
 .mapboxgl-ctrl-group button.mapboxgl-ctrl-compass,
 .maplibregl-canvas-container.maplibregl-interactive,
 .maplibregl-ctrl-group button.maplibregl-ctrl-compass {
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
   cursor: grab;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -40,8 +38,6 @@
 .mapboxgl-ctrl-group button.mapboxgl-ctrl-compass:active,
 .maplibregl-canvas-container.maplibregl-interactive:active,
 .maplibregl-ctrl-group button.maplibregl-ctrl-compass:active {
-  cursor: -webkit-grabbing;
-  cursor: -moz-grabbing;
   cursor: grabbing;
 }
 .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate,
@@ -602,7 +598,6 @@ a.maplibregl-ctrl-logo.maplibregl-compact {
   position: absolute;
   top: 0;
   left: 0;
-  display: -webkit-flex;
   display: flex;
   pointer-events: none;
   will-change: transform;

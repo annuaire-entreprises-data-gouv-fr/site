@@ -26,7 +26,17 @@ export const Modal: React.FC<{
   <ClientOnly>
     {isVisible ? (
       <PrintNever>
-        <div className={styles.modalOverlay} onClick={onClose}>
+        {/* biome-ignore lint/a11y/noStaticElementInteractions: the overlay intentionally handles pointer dismissal for the modal */}
+        {/* biome-ignore lint/a11y/noNoninteractiveElementInteractions: the overlay intentionally handles pointer dismissal for the modal */}
+        <div
+          className={styles.modalOverlay}
+          onClick={onClose}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              onClose();
+            }
+          }}
+        >
           <FloatingModal
             className={clsx(
               styles.fullScreenModal,

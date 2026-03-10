@@ -32,8 +32,7 @@ export class DailyUptimeRatioConverter {
   }
 
   feed(downtimes: IUpdownIODowntimes[]) {
-    for (let i = 0; i < downtimes.length; i++) {
-      const downtime = downtimes[i];
+    for (const downtime of downtimes) {
       let downStartDate = new Date(downtime.started_at);
 
       if (downStartDate.getTime() < this._from.getTime()) {
@@ -45,7 +44,7 @@ export class DailyUptimeRatioConverter {
         (nextDay.getTime() - downStartDate.getTime()) / 1000;
 
       const timeSinceDownStartDate = Math.floor(
-        (new Date().getTime() - downStartDate.getTime()) / 1000
+        (Date.now() - downStartDate.getTime()) / 1000
       );
       const downtimeInSeconds = downtime.duration || timeSinceDownStartDate;
 
@@ -124,7 +123,7 @@ function addUTCDay(d: Date, day: number) {
 /**
  *  For a given date, returns the Date of the next UTC day at 00:00:00
  *  ex: 19/07/2021 14:35:00 UTC => 20/07/2021 00:00:00
- *  */
+ */
 function getUTCNextDay(d: Date): Date {
   const next = new Date(
     Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1)

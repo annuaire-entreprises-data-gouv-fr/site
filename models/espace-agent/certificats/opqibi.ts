@@ -20,8 +20,8 @@ export interface IOpqibi {
   dateValiditeQualificationsProbatoires: string;
   dureeValiditeCertificat: string;
   numeroCertificat: string;
-  qualifications: Array<Qualification>;
-  qualificationsProbatoires: Array<Qualification>;
+  qualifications: Qualification[];
+  qualificationsProbatoires: Qualification[];
   url: string;
 }
 

@@ -60,7 +60,6 @@ const getNomenclature = (nomenclature: string) => {
       return codesNAF1993;
     case "NAF2025":
       return codesNAF2025;
-    case "NAFRev2":
     default:
       return codesNAFRev2;
   }

@@ -72,6 +72,8 @@ function InformationTooltip({
 
   return (
     <>
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: this wrapper intentionally manages hover/focus state for arbitrary children */}
+      {/* biome-ignore lint/a11y/noNoninteractiveElementInteractions: this wrapper intentionally manages hover/focus state for arbitrary children */}
       <span
         className={style.wrapper}
         onBlur={handleBlur}
@@ -114,7 +116,6 @@ const computeLeft = (orientation: "left" | "right" | "center", width = 250) => {
       return `calc(50% - ${width}px)`;
     case "left":
       return "50%";
-    case "center":
     default:
       return `calc(50% - ${Math.round(width / 2)}px)`;
   }

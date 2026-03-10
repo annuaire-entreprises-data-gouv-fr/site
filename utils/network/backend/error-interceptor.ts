@@ -37,7 +37,7 @@ const errorInterceptor = (error: AxiosError) => {
       .trim() || "";
 
   if (status !== 404) {
-    const endTime = new Date().getTime();
+    const endTime = Date.now();
     //@ts-expect-error
     const startTime = config?.metadata?.startTime;
     console.error(

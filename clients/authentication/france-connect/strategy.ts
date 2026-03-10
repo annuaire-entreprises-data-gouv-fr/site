@@ -1,4 +1,4 @@
-import { randomBytes } from "crypto";
+import { randomBytes } from "node:crypto";
 import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
 import { InternalError } from "#models/exceptions";
@@ -79,7 +79,7 @@ export async function franceConnectAuthenticate(
     params,
     req.session.FC_CONNECT_CHECK
   );
-  delete req.session.FC_CONNECT_CHECK;
+  req.session.FC_CONNECT_CHECK = undefined;
   await req.session.save();
   const { access_token, id_token } = tokenSet;
   if (!access_token || !id_token) {
@@ -100,7 +100,7 @@ export const franceConnectLogoutUrl = async (req: any) => {
 
   const state = `state${randomBytes(32).toString("hex")}`;
 
-  delete req.session.franceConnect;
+  req.session.franceConnectHidePersonalDataSession = undefined;
   await req.session.save();
   return client.endSessionUrl({
     post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI,

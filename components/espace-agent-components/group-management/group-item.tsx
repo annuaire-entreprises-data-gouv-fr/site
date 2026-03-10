@@ -91,22 +91,18 @@ export function GroupItem({
             <div>
               <strong>Habilitation :</strong>{" "}
               {group.contract_description || <i>Aucune habilitation</i>}
-              {group.contract_url && (
+              {group.contract_url && group.contract_url && (
                 <>
-                  {group.contract_url && (
-                    <>
-                      {" "}
-                      (
-                      <a
-                        href={group.contract_url}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        consulter
-                      </a>
-                      )
-                    </>
-                  )}
+                  {" "}
+                  (
+                  <a
+                    href={group.contract_url}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    consulter
+                  </a>
+                  )
                 </>
               )}
             </div>
@@ -147,16 +143,18 @@ export function GroupItem({
             <>
               <div style={{ alignSelf: "flex-end", marginBottom: "1rem" }}>
                 <div>
-                  <AddUserModal
-                    addUserToGroupState={(user: IRolesDataUser) => {
-                      setGroup({
-                        ...group,
-                        users: [...group.users, user],
-                      });
-                    }}
-                    defaultRoleId={defaultRoleId!}
-                    group={group}
-                  />
+                  {defaultRoleId !== undefined && (
+                    <AddUserModal
+                      addUserToGroupState={(user: IRolesDataUser) => {
+                        setGroup({
+                          ...group,
+                          users: [...group.users, user],
+                        });
+                      }}
+                      defaultRoleId={defaultRoleId}
+                      group={group}
+                    />
+                  )}
                 </div>
               </div>
 

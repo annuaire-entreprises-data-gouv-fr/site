@@ -282,7 +282,7 @@ const getNpsRecords = async () => {
   npsRecords.forEach((record) => {
     const mood = Number.parseInt(record.mood, 10);
 
-    if (mood === -1 || isNaN(mood)) {
+    if (mood === -1 || Number.isNaN(mood)) {
       return;
     }
 
@@ -317,7 +317,15 @@ const getNpsRecords = async () => {
   const npsData: any = {};
 
   for (const month in nps.months) {
+    if (!Object.hasOwn(nps.months, month)) {
+      continue;
+    }
+
     for (const userTypeKey in nps.months[month]) {
+      if (!Object.hasOwn(nps.months[month], userTypeKey)) {
+        continue;
+      }
+
       const ratings = nps.months[month][userTypeKey];
       const count = ratings.length;
 
@@ -387,7 +395,7 @@ const getMonthLabelFromDate = (d: Date) => {
  */
 const lastTwelveMonths = () => {
   const lastYear = getLastYear();
-  const months = [];
+  const months: Array<{ firstDay: string; label: string; number: number }> = [];
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
     const monthLabel = getMonthLabelFromDate(lastYear);

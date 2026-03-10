@@ -15,11 +15,9 @@ export default async function HidePersonalDataPage() {
 
   const title = "Demande de suppression de données personnelles";
   return (
-    <>
-      <TextWrapper>
-        <h1>{title}</h1>
-        <HidePersonalDataPageClient session={session} />
-      </TextWrapper>
-    </>
+    <TextWrapper>
+      <h1>{title}</h1>
+      <HidePersonalDataPageClient session={session} />
+    </TextWrapper>
   );
 }

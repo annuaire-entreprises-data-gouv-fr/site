@@ -58,24 +58,20 @@ export const UniteLegaleInscriptionIG = ({
           }.`}
           tabIndex={undefined}
         >
-          <>
-            {uniteLegale.immatriculation?.dateRadiation ? (
-              <OpenClosedTag icon="closed" label="Radiée sur Infogreffe">
-                le {formatDate(uniteLegale.immatriculation?.dateRadiation)}
-              </OpenClosedTag>
-            ) : (
-              <OpenClosedTag icon="open" label="Enregistrée sur Infogreffe">
-                {uniteLegale.immatriculation?.dateImmatriculation && (
-                  <>
-                    le{" "}
-                    {formatDate(
-                      uniteLegale.immatriculation?.dateImmatriculation
-                    )}
-                  </>
-                )}
-              </OpenClosedTag>
-            )}
-          </>
+          {uniteLegale.immatriculation?.dateRadiation ? (
+            <OpenClosedTag icon="closed" label="Radiée sur Infogreffe">
+              le {formatDate(uniteLegale.immatriculation?.dateRadiation)}
+            </OpenClosedTag>
+          ) : (
+            <OpenClosedTag icon="open" label="Enregistrée sur Infogreffe">
+              {uniteLegale.immatriculation?.dateImmatriculation && (
+                <>
+                  le{" "}
+                  {formatDate(uniteLegale.immatriculation?.dateImmatriculation)}
+                </>
+              )}
+            </OpenClosedTag>
+          )}
         </InformationTooltip>
       </Wrapper>
     );

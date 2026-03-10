@@ -1,5 +1,7 @@
 "use client";
 
+import { clsx } from "clsx";
+
 interface IProps {
   children: React.ReactNode;
   className?: string;
@@ -17,7 +19,7 @@ export const FadeIn = ({
 }: IProps) => (
   <>
     <div
-      className={(className ? className : "") + " fade-in-wrapper"}
+      className={clsx(className, "fade-in-wrapper")}
       style={{
         ...(style || {}),
         animationDuration: duration + "ms",

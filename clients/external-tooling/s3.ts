@@ -1,5 +1,5 @@
+import type { Readable } from "node:stream";
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import type { Readable } from "stream";
 import {
   HttpForbiddenError,
   HttpNotFound,
@@ -42,18 +42,16 @@ export async function readFromS3(
 
   const client = new S3Client(config);
 
-  const getBucket = (params: { Bucket: string; Key: string }) =>
-    new Promise(async (resolve, reject) => {
-      const getObjectCommand = new GetObjectCommand(params);
+  const getBucket = async (params: { Bucket: string; Key: string }) => {
+    try {
+      const response = await client.send(new GetObjectCommand(params));
 
-      try {
-        const response = await client.send(getObjectCommand);
+      // Store all of data chunks returned from the response data stream
+      // into an array then use Array#join() to use the returned contents as a String
+      const responseDataChunks: Buffer[] = [];
+      const stream = response.Body as Readable;
 
-        // Store all of data chunks returned from the response data stream
-        // into an array then use Array#join() to use the returned contents as a String
-        const responseDataChunks: Buffer[] = [];
-        const stream = response.Body as Readable;
-
+      return await new Promise<string>((resolve, reject) => {
         // Handle an error while streaming the response body
         stream.once("error", (err) => reject(err));
 
@@ -63,17 +61,18 @@ export async function readFromS3(
 
         // Once the stream has no more data, join the chunks into a string and return the string
         stream.once("end", () => resolve(responseDataChunks.join("")));
-      } catch (err: any) {
-        const statusCode = err["$metadata"]?.httpStatusCode;
-        if (statusCode === 404) {
-          return reject(new HttpNotFound(err.Code));
-        }
-        if (statusCode === 403) {
-          return reject(new HttpForbiddenError(err.Code));
-        }
-        return reject(new HttpServerError(err.Code));
+      });
+    } catch (err: any) {
+      const statusCode = err["$metadata"]?.httpStatusCode;
+      if (statusCode === 404) {
+        throw new HttpNotFound(err.Code);
       }
-    });
+      if (statusCode === 403) {
+        throw new HttpForbiddenError(err.Code);
+      }
+      throw new HttpServerError(err.Code);
+    }
+  };
 
   try {
     const data = await getBucket(params);

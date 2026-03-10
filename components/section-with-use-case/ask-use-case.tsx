@@ -13,12 +13,12 @@ export function AskUseCase({
   label?: string;
 }) {
   return (
-    <>
-      <form>
-        <label>
+    <form>
+      <fieldset>
+        <legend>
           {label ||
             "Dans quel cadre juridique souhaitez-vous accéder à ces données ?"}
-        </label>
+        </legend>
         <br />
         <MultiChoice
           idPrefix={`${idPrefix}-use-case`}
@@ -51,7 +51,7 @@ export function AskUseCase({
             },
           ]}
         />
-      </form>
-    </>
+      </fieldset>
+    </form>
   );
 }

@@ -75,7 +75,9 @@ export class AgentConnected {
       // Handle email aliases by extracting the base local part (before '+' sign)
       (() => {
         const emailParts = this.email.split("@");
-        if (emailParts.length !== 2) return false;
+        if (emailParts.length !== 2) {
+          return false;
+        }
         let local = emailParts[0];
         // Remove alias part after '+'
         local = local.split("+")[0];

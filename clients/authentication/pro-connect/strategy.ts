@@ -158,7 +158,11 @@ export const proConnectAuthenticate = async (
     "proConnectAuthenticate.idp_id": userInfo.idp_id ?? "non renseigné",
   });
 
-  if (!used2FA && userInfo.idp_id === PROCONNECT_IDP_ID) {
+  if (
+    !used2FA &&
+    userInfo.idp_id === PROCONNECT_IDP_ID &&
+    !process.env.AGENT_BYPASS_2FA?.includes(userInfo.email)
+  ) {
     throw new ProConnect2FANeeded({
       message: "2FA needed for ProConnect Identity Provider",
       loginHint: userInfo.email,

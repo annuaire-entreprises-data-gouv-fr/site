@@ -319,7 +319,7 @@ export const fetchUniteLegaleFromRechercheEntreprise = async (
  */
 const fetchUniteLegaleFromInsee = async (
   siren: Siren,
-  page = 1,
+  page: number,
   useFallback: boolean
 ): Promise<IUniteLegale | IAPINotRespondingError> => {
   try {

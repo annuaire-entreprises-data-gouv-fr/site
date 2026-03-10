@@ -76,7 +76,7 @@ export const NPSBanner: React.FC<{}> = () => {
               >
                 👍👎 Quel est votre avis sur l‘Annuaire des Entreprises ?
               </a>
-              <button onClick={close}>
+              <button onClick={close} type="button">
                 <strong>Ne plus afficher ce message ✕</strong>
               </button>
             </div>

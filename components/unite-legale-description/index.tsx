@@ -25,10 +25,8 @@ export const UniteLegaleDescription: React.FC<{
   return (
     <>
       <p>
-        <>
-          {capitalize(uniteLegaleLabelWithPronoun(uniteLegale))}{" "}
-          {uniteLegale.nomComplet}
-        </>
+        {capitalize(uniteLegaleLabelWithPronoun(uniteLegale))}{" "}
+        {uniteLegale.nomComplet}
         {uniteLegale.dateCreation ? (
           <>
             {" "}
@@ -62,7 +60,7 @@ export const UniteLegaleDescription: React.FC<{
         {libelleEffectifForDescription(uniteLegale)}
       </p>
       <p>
-        {uniteLegale.siege && uniteLegale.siege.adresse && (
+        {uniteLegale.siege?.adresse && (
           <>
             Son{" "}
             <Link href={`/etablissement/${uniteLegale.siege.siret}`}>

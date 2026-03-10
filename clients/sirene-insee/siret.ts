@@ -97,7 +97,7 @@ interface IInseeetablissementUniteLegale {
 
 export const clientAllEtablissementsInsee = async (
   siren: string,
-  page = 1,
+  page: number,
   useFallback: boolean
 ): Promise<{
   list: IEtablissement[];

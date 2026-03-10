@@ -31,45 +31,43 @@ export default async function FAQArticle({ params }: AppRouterProps) {
     return redirectFAQPageNotFound(slug);
   }
   return (
-    <>
-      <TextWrapper>
-        <Breadcrumb
-          links={[
-            { href: "/faq", label: "Questions fréquentes" },
-            { href: "", label: article.title },
-          ]}
-        />
-        <h1>{article.title}</h1>
-        <RenderMarkdownServerOnly>{article.body}</RenderMarkdownServerOnly>
-        {article.cta ? (
-          <div className="layout-left">
-            <ButtonLink to={article.cta.to}>{article.cta.label}</ButtonLink>
-          </div>
-        ) : null}
-        {article.more ? (
-          <div>
-            <h2>Sur le même sujet</h2>
-            <ul>
-              {article.more.map(({ href, label }) => (
-                <li key={href}>
-                  <a href={href}>{label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-        <h2>Vous ne trouvez pas votre réponse ?</h2>
+    <TextWrapper>
+      <Breadcrumb
+        links={[
+          { href: "/faq", label: "Questions fréquentes" },
+          { href: "", label: article.title },
+        ]}
+      />
+      <h1>{article.title}</h1>
+      <RenderMarkdownServerOnly>{article.body}</RenderMarkdownServerOnly>
+      {article.cta ? (
         <div className="layout-left">
-          <ButtonLink alt small to="/faq">
-            Consultez notre FAQ
-          </ButtonLink>
+          <ButtonLink to={article.cta.to}>{article.cta.label}</ButtonLink>
         </div>
-      </TextWrapper>
-    </>
+      ) : null}
+      {article.more ? (
+        <div>
+          <h2>Sur le même sujet</h2>
+          <ul>
+            {article.more.map(({ href, label }) => (
+              <li key={href}>
+                <a href={href}>{label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+      <h2>Vous ne trouvez pas votre réponse ?</h2>
+      <div className="layout-left">
+        <ButtonLink alt small to="/faq">
+          Consultez notre FAQ
+        </ButtonLink>
+      </div>
+    </TextWrapper>
   );
 }
 
-export async function generateStaticParams(): Promise<Array<IParams>> {
+export async function generateStaticParams(): Promise<IParams[]> {
   return allFaqArticles
     .filter(({ body }) => !!body)
     .map(({ slug }) => ({

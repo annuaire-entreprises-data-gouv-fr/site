@@ -129,18 +129,16 @@ export default async function PersonnePage(props: AppRouterProps) {
               {result.dirigeants.map((dirigeantOrElu) => (
                 <div>
                   {isPersonneMorale(dirigeantOrElu) ? (
-                    <>
-                      {dirigeantOrElu.siren ? (
-                        <Link
-                          aria-label={`Voir les dirigeants de cette entreprise (siren ${dirigeantOrElu.siren})`}
-                          href={`/dirigeants/${dirigeantOrElu.siren}`}
-                        >
-                          {dirigeantOrElu.denomination}
-                        </Link>
-                      ) : (
-                        dirigeantOrElu.denomination
-                      )}
-                    </>
+                    dirigeantOrElu.siren ? (
+                      <Link
+                        aria-label={`Voir les dirigeants de cette entreprise (siren ${dirigeantOrElu.siren})`}
+                        href={`/dirigeants/${dirigeantOrElu.siren}`}
+                      >
+                        {dirigeantOrElu.denomination}
+                      </Link>
+                    ) : (
+                      dirigeantOrElu.denomination
+                    )
                   ) : (
                     <>
                       {dirigeantOrElu.dateNaissancePartial ? (

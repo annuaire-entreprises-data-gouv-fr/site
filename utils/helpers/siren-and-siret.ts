@@ -12,7 +12,7 @@ export const isTVANumber = (slug: string): slug is TVANumber =>
 
 /**
  * throw an exception if a string is not a TVA Number
- * */
+ */
 export const verifyTVANumber = (slug: string): TVANumber => {
   if (!isTVANumber(slug)) {
     throw new Error("Not a valid TVANumber");
@@ -39,7 +39,7 @@ export const isSiret = (slug: string): slug is Siret => {
 
 /**
  * throw an exception if a string is not a siren
- * */
+ */
 export const verifySiren = (slug: string): Siren => {
   if (!isSiren(slug)) {
     throw new NotASirenError(slug);
@@ -49,7 +49,7 @@ export const verifySiren = (slug: string): Siren => {
 
 /**
  * Throw an exception if a string is not a siret
- * */
+ */
 export const verifySiret = (slug: string): Siret => {
   if (!isSiret(slug)) {
     throw new NotASiretError(slug);
@@ -121,7 +121,7 @@ export const extractSirenOrSiretSlugFromUrl = (slug: string) => {
   // match a string that ends with either 9 digit or 14 like a siren or a siret
   // we dont use a $ end match as there might be " or %22 at the end
   const match = slug.match(/\d{14}|\d{9}/g);
-  return match ? match[match.length - 1] : "";
+  return match?.at(-1) ?? "";
 };
 
 /**

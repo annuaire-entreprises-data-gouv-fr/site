@@ -1,5 +1,5 @@
 import { Link } from "#components/Link";
-import { Error } from "#components-ui/alerts";
+import { AlertError } from "#components-ui/alerts";
 import constants from "#models/constants";
 import { IDataFetchingState } from "#models/data-fetching";
 
@@ -14,7 +14,7 @@ export default function DataFetchErrorExplanation({
 }) {
   if (fetchErrorType === IDataFetchingState.CONNECTIVITY_ERROR) {
     return (
-      <Error>
+      <AlertError>
         <strong>Erreur lors du chargement de la donnée</strong>
         <p>
           Votre navigateur a rencontré une erreur en essayant de charger cette
@@ -24,12 +24,12 @@ export default function DataFetchErrorExplanation({
         <p>
           Vous pouvez essayer de recharger la page pour corriger le problème.
         </p>
-      </Error>
+      </AlertError>
     );
   }
   if (fetchErrorType === IDataFetchingState.AGENT_OVER_RATE_LIMITS) {
     return (
-      <Error>
+      <AlertError>
         <strong>Plafond de consultation atteint</strong>
         <p>
           Pour des raisons de sécurité, nous avons mis en place un nombre de
@@ -50,12 +50,12 @@ export default function DataFetchErrorExplanation({
           Si la situation perdure, vous pouvez{" "}
           <Link href={constants.links.parcours.contact}>nous contacter</Link>.
         </p>
-      </Error>
+      </AlertError>
     );
   }
   if (fetchErrorType === IDataFetchingState.TOO_MANY_REQUESTS) {
     return (
-      <Error>
+      <AlertError>
         <strong>Trop de requêtes</strong>
         <p>
           Vous avez dépassé le nombre de requêtes autorisées auprès de cette
@@ -70,11 +70,11 @@ export default function DataFetchErrorExplanation({
           <a href={constants.links.parcours.contact}>nous contacter</a> pour que
           nous puissions trouver la panne 🕵️‍♀️.
         </p>
-      </Error>
+      </AlertError>
     );
   }
   return (
-    <Error>
+    <AlertError>
       <strong>Erreur lors du chargement de la donnée</strong>
       <p>
         Une erreur est survenue lors de la récupération de la donnée. Cela vient
@@ -91,6 +91,6 @@ export default function DataFetchErrorExplanation({
         <a href={constants.links.parcours.contact}>nous contacter</a> pour que
         nous puissions trouver la panne 🕵️‍♀️.
       </p>
-    </Error>
+    </AlertError>
   );
 }

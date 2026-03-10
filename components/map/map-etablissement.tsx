@@ -1,7 +1,7 @@
 "use client";
 
 import { useFetchGeoLoc } from "hooks/fetch/geoloc";
-import maplibregl, { type Map } from "maplibre-gl";
+import maplibregl, { type Map as MapLibreMap } from "maplibre-gl";
 import constants from "#models/constants";
 import type { IEtablissement } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
@@ -18,7 +18,7 @@ export function MapEtablissement({
   const coords = useFetchGeoLoc(etablissement);
 
   const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<Map | null>(null);
+  const map = useRef<MapLibreMap | null>(null);
 
   useEffect(() => {
     if (isDataLoading(coords)) {
@@ -31,6 +31,7 @@ export function MapEtablissement({
       return; // stops map from intializing more than once
     }
     if (!hasWebGLSupport()) {
+      // biome-ignore lint/suspicious/noAlert: preserve the existing blocking feedback for unsupported browsers
       alert(
         "Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte."
       );

@@ -2,7 +2,6 @@ import {
   type IEtablissement,
   type IUniteLegale,
   isAssociation,
-  isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
   isServicePublic,
 } from "#models/core/types";
@@ -15,7 +14,6 @@ const uniteLegalePronounContracted = (uniteLegale: IUniteLegale) => {
     case isServicePublic(uniteLegale):
     case isEntrepreneurIndividuel(uniteLegale):
       return "de l’";
-    case isCollectiviteTerritoriale(uniteLegale):
     default:
       return "de la ";
   }

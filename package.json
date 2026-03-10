@@ -24,7 +24,8 @@
     "lint": "ultracite check",
     "lint:fix": "ultracite fix",
     "check": "ultracite check",
-    "fix": "ultracite fix"
+    "fix": "ultracite fix",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.992.0",

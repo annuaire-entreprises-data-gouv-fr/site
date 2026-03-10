@@ -161,7 +161,7 @@ export const getDateFromYYYYMM = safe((dPartial: string) => {
 export const convertDateToAge = safe((d: string) => {
   const ageMilliseconds = Date.now() - new Date(d).getTime();
 
-  if (isNaN(ageMilliseconds)) {
+  if (Number.isNaN(ageMilliseconds)) {
     return "";
   }
 
@@ -189,7 +189,9 @@ export const formatAge = safe((date: string | Date) => {
 });
 
 export const capitalize = safe((str: string) => {
-  if (!str) return str;
+  if (!str) {
+    return str;
+  }
 
   return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
 });
@@ -267,8 +269,8 @@ export const parseIntWithDefaultValue = (
 ) => {
   try {
     const result = Number.parseInt(intAsString, 10);
-    if (isNaN(result)) {
-      throw new Error();
+    if (Number.isNaN(result)) {
+      throw new Error("Failed to parse integer");
     }
     return result;
   } catch {

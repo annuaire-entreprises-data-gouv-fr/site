@@ -62,7 +62,7 @@ export default function ReconnectBanner({
               Voulez-vous vous reconnecter ?
             </a>
           </Icon>
-          <button onClick={handleClose}>
+          <button onClick={handleClose} type="button">
             <strong>Ne plus afficher ce message ✕</strong>
           </button>
         </div>

@@ -16,6 +16,7 @@ export default function PrintButton() {
         onClick={() => {
           window.print();
         }}
+        type="button"
       >
         <Icon className="cursor-pointer" slug="print" />
       </button>

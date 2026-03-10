@@ -44,21 +44,19 @@ export const clientApiDataSubvention = async (
 const mapToDomainObject = (grantItems: IGrantItem[]): ISubvention[] =>
   grantItems
     .filter((grantItem) => Boolean(grantItem.application))
-    .reduce((subventions: ISubvention[], grantItem) => {
+    .map((grantItem) => {
       const year = grantItem.application.annee_demande?.value ?? 0;
       const label = grantItem.application.statut_label?.value ?? "";
       const status = grantItem.application.status?.value ?? "";
       const description = grantItem.application.dispositif?.value ?? "";
       const amount = grantItem.application.montants?.accorde?.value;
 
-      const newSubvention: ISubvention = {
+      return {
         year,
         label,
         status,
         description,
         amount,
       };
-
-      return [...subventions, newSubvention];
-    }, [])
+    })
     .sort((a, b) => b.year - a.year);

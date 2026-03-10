@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import { HttpServerError, HttpTimeoutError } from "#clients/exceptions";
 
 interface IParams<T extends unknown[], U> {
@@ -33,11 +33,12 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
       }
       throw e;
     }
-  } finally {
-    if (!result) {
-      return;
-    }
   }
+
+  if (!result) {
+    return;
+  }
+
   if (postProcessResult) {
     try {
       postProcessResult(result);
@@ -48,6 +49,7 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
     }
   }
 
+  // biome-ignore lint/suspicious/noMisplacedAssertion: this helper is only called from inside test cases
   expect(
     JSON.stringify({ args: simplifyParams(...args), result }, null, 2)
   ).toMatchFile(path.join(__dirname, "_snapshots", snapshotFile));

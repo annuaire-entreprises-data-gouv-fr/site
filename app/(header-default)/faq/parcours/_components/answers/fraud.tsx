@@ -2,7 +2,7 @@ import { Link } from "#components/Link";
 import ButtonLink from "#components-ui/button";
 import { ParcoursAnswer } from ".";
 
-export const FraudAnswer: React.FC<{}> = ({}) => (
+export const FraudAnswer: React.FC = () => (
   <ParcoursAnswer>
     <strong>Attention à la fraude :</strong> l’Annuaire des Entreprises est un
     service public <strong>gratuit</strong> et ne vous demandera{" "}

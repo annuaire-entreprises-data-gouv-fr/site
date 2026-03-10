@@ -18,7 +18,7 @@ export function SaveFavourite(props: {
 const LOCALSTORAGE_KEY = "favourites-siren";
 function saveFavourite(visit: { siren: string; name: string; path: string }) {
   try {
-    var path = window.location.pathname;
+    const path = window.location.pathname;
     if (path.indexOf("/entreprise") !== 0) {
       return;
     }
@@ -26,10 +26,10 @@ function saveFavourite(visit: { siren: string; name: string; path: string }) {
     const favouritesJSON = window.localStorage.getItem(LOCALSTORAGE_KEY);
     const favourites = favouritesJSON ? JSON.parse(favouritesJSON) : [];
 
-    var newFavourites = [visit];
-    for (var i = 0; i < favourites.length; i++) {
-      if (favourites[i].siren !== visit.siren) {
-        newFavourites.push(favourites[i]);
+    const newFavourites = [visit];
+    for (const favourite of favourites) {
+      if (favourite.siren !== visit.siren) {
+        newFavourites.push(favourite);
       }
     }
 
@@ -38,12 +38,13 @@ function saveFavourite(visit: { siren: string; name: string; path: string }) {
       JSON.stringify(newFavourites.slice(0, 3))
     );
   } catch (e) {
-    if (e)
+    if (e) {
       logInfoInSentry(
         new Exception({
           name: "SaveFavouriteException",
           cause: e,
         })
       );
+    }
   }
 }

@@ -119,8 +119,7 @@ export const searchWithoutProtectedSiren = async (
   const results = await search(searchTerm, page, searchFilterParams);
   const newResults: ISearchResult[] = [];
 
-  for (let i = 0; i < results.results.length; i++) {
-    const currentResult = results.results[i];
+  for (const currentResult of results.results) {
     const isProtected = await isProtectedSiren(currentResult.siren);
 
     if (isProtected && isPersonnePhysique(currentResult)) {

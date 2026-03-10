@@ -25,7 +25,7 @@ export function shouldUseInsee<T extends {}>(
   }
 
   if (rechercheEntrepriseResponse) {
-    if (hasInconsistencies && hasInconsistencies(rechercheEntrepriseResponse)) {
+    if (hasInconsistencies?.(rechercheEntrepriseResponse)) {
       return true;
     }
 

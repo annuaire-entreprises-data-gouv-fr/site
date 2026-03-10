@@ -18,7 +18,7 @@ export const isPersonneMoraleFromNatureJuridique = (natureJuridique: string) =>
 export const isTwoMonthOld = (dateAsString: string) => {
   try {
     const date = new Date(dateAsString);
-    const timeDifference = new Date().getTime() - date.getTime();
+    const timeDifference = Date.now() - date.getTime();
 
     return Math.round(timeDifference / (3600 * 24 * 1000)) > 60;
   } catch {

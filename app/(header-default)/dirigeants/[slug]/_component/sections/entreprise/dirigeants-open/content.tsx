@@ -28,7 +28,7 @@ export default function DirigeantsContent({
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
     if (isPersonneMorale(dirigeant)) {
       const infos = [
-        <>{dirigeant.role}</>,
+        dirigeant.role,
         <PersonneMoraleInfos dirigeant={dirigeant} />,
       ];
 
@@ -42,10 +42,7 @@ export default function DirigeantsContent({
       }
       return infos;
     }
-    const infos = [
-      <>{dirigeant.role}</>,
-      <EtatCivilInfos dirigeant={dirigeant} />,
-    ];
+    const infos = [dirigeant.role, <EtatCivilInfos dirigeant={dirigeant} />];
 
     if (dirigeant.dateNaissancePartial) {
       infos.push(

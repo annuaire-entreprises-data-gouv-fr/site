@@ -112,7 +112,7 @@ export const CertificationsRGESection: React.FC<{
           </p>
           <FullTable
             body={certificationsRGE.certifications.map((certification) => [
-              <div className="font-small layout-left">
+              <div className="layout-left font-small">
                 {certification.logoPath && (
                   <div style={{ width: 72 }}>
                     <img

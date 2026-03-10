@@ -66,11 +66,13 @@ export const MultiChoice: React.FC<IProps> = ({
                 type="radio"
                 value={value}
               />
+              {/* biome-ignore lint/a11y/noNoninteractiveElementInteractions: preserve existing keyboard interaction on the associated label */}
               <label
                 className="fr-label"
                 htmlFor={`${idPrefix}-${index}`}
                 onKeyDown={(e) => onKeyDown(e, onClick)}
                 style={computeStyle(large)}
+                // biome-ignore lint/a11y/noNoninteractiveTabindex: keep label keyboard-focusable to preserve current UX
                 tabIndex={0}
               >
                 {label}

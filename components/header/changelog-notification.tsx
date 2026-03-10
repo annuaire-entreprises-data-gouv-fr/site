@@ -1,5 +1,6 @@
 "use client";
 
+import { clsx } from "clsx";
 import { useStorage } from "hooks";
 import { useEffect, useState } from "react";
 import { Icon } from "#components-ui/icon/wrapper";
@@ -62,7 +63,7 @@ export default function ChangelogNotification({
 
   return shouldDisplayNotif ? (
     <a
-      className={style.changelogNotification + " fr-link"}
+      className={clsx(style.changelogNotification, "fr-link")}
       href="/historique-des-modifications"
       title="Découvrir les dernières évolutions de l’Annuaire des Entreprises"
     >

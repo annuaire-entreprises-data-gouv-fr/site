@@ -44,66 +44,65 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
   const id = useId();
 
   return (
-    <>
-      <div className={styles["search-filter-label-container"]} ref={ref}>
+    <div className={styles["search-filter-label-container"]} ref={ref}>
+      <div>
         <div>
-          <div>
-            {activeFilter.label ? (
-              <ActiveFilterLabel
-                icon={activeFilter.icon}
-                label={activeFilter.label}
-                onClick={() => {
-                  setOpen(!open);
-                }}
-                query={clearFilterLink}
-              />
-            ) : (
-              <span
-                className={styles["search-filter-label"]}
-                onClick={() => {
-                  setOpen(!open);
-                }}
-              >
-                <Icon color={constants.colors.frBlue} slug={activeFilter.icon}>
-                  {label}&nbsp;&nbsp;▾
-                </Icon>
-              </span>
-            )}
-          </div>
-          {open && (
-            <ButtonClose
-              ariaControls={id}
-              ariaLabel="Fermer les filtres"
-              className={styles["close-container"]}
-              onClick={() => setOpen(false)}
+          {activeFilter.label ? (
+            <ActiveFilterLabel
+              icon={activeFilter.icon}
+              label={activeFilter.label}
+              onClick={() => {
+                setOpen(!open);
+              }}
+              query={clearFilterLink}
             />
+          ) : (
+            <button
+              className={styles["search-filter-label"]}
+              onClick={() => {
+                setOpen(!open);
+              }}
+              type="button"
+            >
+              <Icon color={constants.colors.frBlue} slug={activeFilter.icon}>
+                {label}&nbsp;&nbsp;▾
+              </Icon>
+            </button>
           )}
         </div>
-        <FloatingModal
-          aria-label={"Les filtres de " + activeFilter.label}
-          aria-modal={false}
-          className={styles["container"]}
-          style={{ display: open ? "block" : "none" }}
-        >
-          <div className={styles["filter-container"]}>{children}</div>
-          {addSaveClearButton && (
-            <>
-              <br />
-              <div className="layout-space-between">
-                <a
-                  className="fr-btn fr-btn--tertiary-no-outline fr-btn--sm"
-                  href={clearFilterLink}
-                >
-                  Effacer
-                </a>
-                <ButtonLink alt small type="submit">
-                  Appliquer
-                </ButtonLink>
-              </div>
-            </>
-          )}
-        </FloatingModal>
+        {open && (
+          <ButtonClose
+            ariaControls={id}
+            ariaLabel="Fermer les filtres"
+            className={styles["close-container"]}
+            onClick={() => setOpen(false)}
+          />
+        )}
       </div>
-    </>
+      <FloatingModal
+        aria-label={"Les filtres de " + activeFilter.label}
+        aria-modal={false}
+        className={styles["container"]}
+        style={{ display: open ? "block" : "none" }}
+      >
+        <div className={styles["filter-container"]}>{children}</div>
+        {addSaveClearButton && (
+          <>
+            <br />
+            <div className="layout-space-between">
+              <a
+                className="fr-btn fr-btn--tertiary-no-outline fr-btn--sm"
+                href={clearFilterLink}
+              >
+                Effacer
+              </a>
+              <ButtonLink alt small type="submit">
+                Appliquer
+              </ButtonLink>
+            </div>
+          </>
+        )}
+      </FloatingModal>
+    </div>
   );
 };

@@ -10,7 +10,6 @@
 
 .dialog {
   position: absolute;
-  position: absolute;
   z-index: 10;
   visibility: hidden;
   min-width: max-content;
@@ -19,7 +18,7 @@
 }
 
 .menuLogout:hover > .dialog,
-.menuLogout:focus-visible > .dialog,
+.menuLogout:focus-within > .dialog,
 .dialog:focus-visible,
 .dialog:hover {
   visibility: visible !important;
@@ -55,10 +54,9 @@
   }
 
   .menuLogout:hover > .dialog,
-  .menuLogout:focus-visible > .dialog,
+  .menuLogout:focus-within > .dialog,
   .dialog:focus-visible,
   .dialog:hover,
-  .menuLogout:focus > .dialog,
   .dialog:focus {
     visibility: visible !important;
     animation: appear-right 0.1s ease-in-out forwards;
@@ -77,7 +75,7 @@
   }
 
   .menuLogout:hover > .dialog,
-  .menuLogout:focus-visible > .dialog,
+  .menuLogout:focus-within > .dialog,
   .dialog:focus-visible,
   .dialog:hover {
     visibility: visible !important;

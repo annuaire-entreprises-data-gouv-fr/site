@@ -53,7 +53,7 @@ export function FileInput(props: FileInputProps) {
       e.stopPropagation();
       setDragActive(false);
 
-      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      if (e.dataTransfer.files?.[0]) {
         processFile(e.dataTransfer.files[0]);
       }
     },
@@ -62,7 +62,7 @@ export function FileInput(props: FileInputProps) {
 
   const handleFileInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files && e.target.files[0]) {
+      if (e.target.files?.[0]) {
         processFile(e.target.files[0]);
       }
     },
@@ -70,6 +70,8 @@ export function FileInput(props: FileInputProps) {
   );
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: drag-and-drop handlers intentionally live on the drop zone container
+    // biome-ignore lint/a11y/noNoninteractiveElementInteractions: drag-and-drop handlers intentionally live on the drop zone container
     <div
       className={clsx(styles.fileUploadArea, "fr-mt-2v", {
         [styles.dragActive]: dragActive,

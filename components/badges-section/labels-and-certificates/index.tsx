@@ -8,7 +8,7 @@ export const checkHasQuality = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEntrepriseInclusive;
 
 export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
-  const sources = [];
+  const sources: EAdministration[] = [];
   const {
     estEntrepreneurSpectacle,
     estEss,
@@ -25,18 +25,39 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
     estFiness,
     bilanGesRenseigne,
   } = uniteLegale.complements;
-  if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
-  if (estEss || estSocieteMission) sources.push(EAdministration.INSEE);
-  if (estBio) sources.push(EAdministration.AGENCE_BIO);
-  if (egaproRenseignee || estOrganismeFormation || estQualiopi)
+  if (estEntrepreneurSpectacle) {
+    sources.push(EAdministration.MC);
+  }
+  if (estEss || estSocieteMission) {
+    sources.push(EAdministration.INSEE);
+  }
+  if (estBio) {
+    sources.push(EAdministration.AGENCE_BIO);
+  }
+  if (egaproRenseignee || estOrganismeFormation || estQualiopi) {
     sources.push(EAdministration.MTPEI);
-  if (estRge) sources.push(EAdministration.ADEME);
-  if (estEntrepriseInclusive) sources.push(EAdministration.MARCHE_INCLUSION);
-  if (estAchatsResponsables) sources.push(EAdministration.MEF);
-  if (estPatrimoineVivant) sources.push(EAdministration.MEF);
-  if (estAlimConfiance) sources.push(EAdministration.MAA);
-  if (bilanGesRenseigne) sources.push(EAdministration.ADEME);
-  if (estFiness) sources.push(EAdministration.MSS);
+  }
+  if (estRge) {
+    sources.push(EAdministration.ADEME);
+  }
+  if (estEntrepriseInclusive) {
+    sources.push(EAdministration.MARCHE_INCLUSION);
+  }
+  if (estAchatsResponsables) {
+    sources.push(EAdministration.MEF);
+  }
+  if (estPatrimoineVivant) {
+    sources.push(EAdministration.MEF);
+  }
+  if (estAlimConfiance) {
+    sources.push(EAdministration.MAA);
+  }
+  if (bilanGesRenseigne) {
+    sources.push(EAdministration.ADEME);
+  }
+  if (estFiness) {
+    sources.push(EAdministration.MSS);
+  }
   return sources;
 };
 

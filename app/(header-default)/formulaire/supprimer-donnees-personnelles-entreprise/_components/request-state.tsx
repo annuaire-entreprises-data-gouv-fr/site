@@ -1,4 +1,4 @@
-import { Error, Info, Success } from "#components-ui/alerts";
+import { AlertError, Info, Success } from "#components-ui/alerts";
 import ButtonLink from "#components-ui/button";
 import { throwUnreachableCaseError } from "#models/exceptions";
 import type { IHidePersonalDataRequest } from "#models/protected-siren/request-siren-protection";
@@ -19,7 +19,7 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
             </p>
           </Success>
         ) : hidePersonalDataRequest === "DENIED" ? (
-          <Error full>
+          <AlertError full>
             <strong>Demande refusée</strong>
             <p>
               Votre demande a été refusée. Cela est vraisemblablement dû au fait
@@ -27,7 +27,7 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
               Veuillez contacter le support de l’annuaire des entreprises pour
               plus d’informations.
             </p>
-          </Error>
+          </AlertError>
         ) : hidePersonalDataRequest === "PENDING" ? (
           <Info>
             <strong>Votre demande est en cours</strong>

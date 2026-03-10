@@ -53,76 +53,74 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
         const plural = total > 1 ? "s" : "";
 
         return (
-          <>
-            <div id={id}>
-              <p>
-                Cette structure possède {total} établissement
-                {plural} ayant fait l‘objet d‘un contrôle sanitaire :
-              </p>
+          <div id={id}>
+            <p>
+              Cette structure possède {total} établissement
+              {plural} ayant fait l‘objet d‘un contrôle sanitaire :
+            </p>
 
-              <FullTable
-                body={alimConfiance.data.map(
-                  ({
-                    siret,
-                    denomination,
-                    adresse,
-                    codePostal,
-                    commune,
-                    libelleActiviteEtablissement,
-                    dateInspection,
-                    syntheseEvaluation,
-                    code,
-                  }) => [
-                    <>
-                      {siret && (
-                        <Link href={`/etablissement/${siret}`}>
-                          {formatSiret(siret)}
-                        </Link>
-                      )}
-                      {denomination && <div>{denomination}</div>}
-                      {adresse && codePostal && commune && (
-                        <div>
-                          {adresse} {codePostal} {commune}
-                        </div>
-                      )}
-                    </>,
-                    <Tag
-                      color={
-                        code === 4
-                          ? "error"
-                          : code === 3
-                            ? "warning"
-                            : code === 2
-                              ? "info"
-                              : "success"
-                      }
-                    >
-                      {syntheseEvaluation}
-                    </Tag>,
-                    <div>{formatDate(dateInspection)}</div>,
-                    <div>
-                      {libelleActiviteEtablissement.split("|").join(", ")}
-                    </div>,
-                  ]
-                )}
-                columnWidths={["40%", "20%", "25%", "15%"]}
-                head={[
-                  "Détail de l'établissement",
-                  "Résultat de l'évaluation",
-                  "Date d'inspection",
-                  "Type d'activité",
-                ]}
-              />
-              {total > 20 && (
-                <LocalPageCounter
-                  compact={true}
-                  currentPage={currentPage}
-                  onPageChange={onChangePage}
-                  totalPages={Math.ceil(total / page_size)}
-                />
+            <FullTable
+              body={alimConfiance.data.map(
+                ({
+                  siret,
+                  denomination,
+                  adresse,
+                  codePostal,
+                  commune,
+                  libelleActiviteEtablissement,
+                  dateInspection,
+                  syntheseEvaluation,
+                  code,
+                }) => [
+                  <>
+                    {siret && (
+                      <Link href={`/etablissement/${siret}`}>
+                        {formatSiret(siret)}
+                      </Link>
+                    )}
+                    {denomination && <div>{denomination}</div>}
+                    {adresse && codePostal && commune && (
+                      <div>
+                        {adresse} {codePostal} {commune}
+                      </div>
+                    )}
+                  </>,
+                  <Tag
+                    color={
+                      code === 4
+                        ? "error"
+                        : code === 3
+                          ? "warning"
+                          : code === 2
+                            ? "info"
+                            : "success"
+                    }
+                  >
+                    {syntheseEvaluation}
+                  </Tag>,
+                  <div>{formatDate(dateInspection)}</div>,
+                  <div>
+                    {libelleActiviteEtablissement.split("|").join(", ")}
+                  </div>,
+                ]
               )}
-            </div>
-          </>
+              columnWidths={["40%", "20%", "25%", "15%"]}
+              head={[
+                "Détail de l'établissement",
+                "Résultat de l'évaluation",
+                "Date d'inspection",
+                "Type d'activité",
+              ]}
+            />
+            {total > 20 && (
+              <LocalPageCounter
+                compact={true}
+                currentPage={currentPage}
+                onPageChange={onChangePage}
+                totalPages={Math.ceil(total / page_size)}
+              />
+            )}
+          </div>
         );
       }}
     </AsyncDataSectionClient>

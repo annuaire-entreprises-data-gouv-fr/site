@@ -7,7 +7,7 @@ import { formatLog } from "../utils/format-log";
  */
 export const addStartTimeInterceptor = (config: AxiosRequestConfig) => ({
   ...config,
-  metadata: { startTime: new Date().getTime() },
+  metadata: { startTime: Date.now() },
 });
 
 /**
@@ -15,7 +15,7 @@ export const addStartTimeInterceptor = (config: AxiosRequestConfig) => ({
  * @param response
  */
 export const logInterceptor = (response: AxiosResponse<any, any>) => {
-  const endTime = new Date().getTime();
+  const endTime = Date.now();
   //@ts-expect-error
   const startTime = response?.config?.metadata?.startTime;
   const initialAgent =

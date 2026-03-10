@@ -26,7 +26,7 @@ const DirigeantSummary: React.FC<IDirigeantSummaryProps> = ({
   }
 
   return (
-    <nav aria-labelledby="dirigeant-summary-title" role="navigation">
+    <nav aria-labelledby="dirigeant-summary-title">
       <strong id="dirigeant-summary-title">
         Informations disponibles sur les dirigeant(s) :
       </strong>

@@ -17,12 +17,12 @@ const certificatsLogo = {
  * match logo path on partial certificats names as several certificates share the same logo
  *
  * eg : "Qualibois module Air" and "Qualibois module Eau" => QualiBois.jpg
- *  */
+ */
 
 export const getCertificatLogoPath = (nomCertificat: string) => {
   for (const [certificateSub, path] of Object.entries(certificatsLogo)) {
     if ((nomCertificat || "").toLowerCase().indexOf(certificateSub) !== -1) {
-      return `/images/rge/logo-rge-${path}` || "";
+      return `/images/rge/logo-rge-${path}`;
     }
   }
   return "";

@@ -27,15 +27,13 @@ export default function FullWidthContainer({
   className = "",
 }: ContainerProps) {
   return (
-    <>
-      <div className={styles["outer-outer-container"]}>
-        <div
-          className={`${className} ${styles["outer-container"]}`}
-          style={style}
-        >
-          <div className="fr-container">{children}</div>
-        </div>
+    <div className={styles["outer-outer-container"]}>
+      <div
+        className={`${className} ${styles["outer-container"]}`}
+        style={style}
+      >
+        <div className="fr-container">{children}</div>
       </div>
-    </>
+    </div>
   );
 }

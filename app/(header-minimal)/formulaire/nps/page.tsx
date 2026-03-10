@@ -69,7 +69,7 @@ const FeedBackPage = async () => {
           une demande précise,{" "}
           <Link href={constants.links.parcours.contact}>contactez-nous</Link>.
         </div>
-        <div className="content-container form-container">
+        <div className="form-container content-container">
           <form
             action="/api/feedback/nps"
             className={styles["form-feedback-nps"]}

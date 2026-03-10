@@ -53,30 +53,28 @@ export default function ProtectedBeneficiairesSection({
   );
 
   return (
-    <>
-      <AsyncDataSectionClient
-        data={beneficiaires}
-        id={id}
-        isProtected={isProtected}
-        notFoundInfo={
-          <>
-            Cette structure n’est pas enregistrée au{" "}
-            <strong>Registre National des Entreprises (RNE)</strong>
-          </>
-        }
-        sources={sources}
-        title={title}
-      >
-        {(beneficiaires) => (
-          <>
-            <BénéficiairesContent
-              beneficiaires={beneficiaires}
-              uniteLegale={uniteLegale}
-            />
-          </>
-        )}
-      </AsyncDataSectionClient>
-    </>
+    <AsyncDataSectionClient
+      data={beneficiaires}
+      id={id}
+      isProtected={isProtected}
+      notFoundInfo={
+        <>
+          Cette structure n’est pas enregistrée au{" "}
+          <strong>Registre National des Entreprises (RNE)</strong>
+        </>
+      }
+      sources={sources}
+      title={title}
+    >
+      {(beneficiaires) => (
+        <>
+          <BénéficiairesContent
+            beneficiaires={beneficiaires}
+            uniteLegale={uniteLegale}
+          />
+        </>
+      )}
+    </AsyncDataSectionClient>
   );
 }
 
@@ -110,74 +108,67 @@ function BénéficiairesContent({
         ))}
     </>,
     beneficiaire.paysResidence,
-    <>
-      <ul className="no-style">
+    <ul className="no-style">
+      <li>
+        <FAQLink tooltipLabel="Part totale">
+          Pourcentage total du capital détenu et déclaré par le bénéficiaire qui
+          correspond à la somme des parts directes et indirectes. Ce total est
+          soit égal à 0%, soit supérieur ou égal à 25%. En effet, en dessous de
+          ce ratio, la personne physique ne déclare pas son capital.
+        </FAQLink>{" "}
+        :{" "}
+        <strong>
+          {beneficiaire.modalites.detention_de_capital.parts_totale}%
+        </strong>
+      </li>
+      {beneficiaire.modalites.detention_de_capital.parts_directes.detention && (
         <li>
-          <FAQLink tooltipLabel="Part totale">
-            Pourcentage total du capital détenu et déclaré par le bénéficiaire
-            qui correspond à la somme des parts directes et indirectes. Ce total
-            est soit égal à 0%, soit supérieur ou égal à 25%. En effet, en
-            dessous de ce ratio, la personne physique ne déclare pas son
-            capital.
+          <FAQLink tooltipLabel="Part directes">
+            Le bénéficiaire détient du capital direct (parts sociales ou
+            actions) de l’unité légale. Par opposition à une détention indirecte
+            du capital, via une personne morale.
           </FAQLink>{" "}
-          :{" "}
-          <strong>
-            {beneficiaire.modalites.detention_de_capital.parts_totale}%
-          </strong>
+          :
+          <PartCapitalModalite
+            capital={beneficiaire.modalites.detention_de_capital.parts_directes}
+          />
         </li>
-        {beneficiaire.modalites.detention_de_capital.parts_directes
-          .detention && (
-          <li>
-            <FAQLink tooltipLabel="Part directes">
-              Le bénéficiaire détient du capital direct (parts sociales ou
-              actions) de l’unité légale. Par opposition à une détention
-              indirecte du capital, via une personne morale.
-            </FAQLink>{" "}
-            :
-            <PartCapitalModalite
-              capital={
-                beneficiaire.modalites.detention_de_capital.parts_directes
-              }
-            />
-          </li>
-        )}
-        {!!beneficiaire.modalites.detention_de_capital.parts_indirectes
-          .par_indivision.total && (
-          <li>
-            <FAQLink tooltipLabel="Part en indivision">
-              Après un décès, le patrimoine du défunt est en indivision, s’il y
-              a plusieurs héritiers. Cela signifie que les biens de la
-              succession appartiennent indistinctement à tous les héritiers sans
-              que leurs parts respectives ne soient matériellement
-              individualisées.
-            </FAQLink>{" "}
-            :
-            <PartCapitalModalite
-              capital={
-                beneficiaire.modalites.detention_de_capital.parts_indirectes
-                  .par_indivision
-              }
-            />
-          </li>
-        )}
-        {!!beneficiaire.modalites.detention_de_capital.parts_indirectes
-          .via_personnes_morales.total && (
-          <li>
-            <FAQLink tooltipLabel="Part via personne morale">
-              Les parts indirectes peuvent être détenues par le biais d’une ou
-              de plusieurs personnes morales intermédiaires.
-            </FAQLink>{" "}
-            :
-            <PartCapitalModalite
-              capital={
-                beneficiaire.modalites.detention_de_capital.parts_indirectes
-                  .via_personnes_morales
-              }
-            />
-          </li>
-        )}
-      </ul>
-    </>,
+      )}
+      {!!beneficiaire.modalites.detention_de_capital.parts_indirectes
+        .par_indivision.total && (
+        <li>
+          <FAQLink tooltipLabel="Part en indivision">
+            Après un décès, le patrimoine du défunt est en indivision, s’il y a
+            plusieurs héritiers. Cela signifie que les biens de la succession
+            appartiennent indistinctement à tous les héritiers sans que leurs
+            parts respectives ne soient matériellement individualisées.
+          </FAQLink>{" "}
+          :
+          <PartCapitalModalite
+            capital={
+              beneficiaire.modalites.detention_de_capital.parts_indirectes
+                .par_indivision
+            }
+          />
+        </li>
+      )}
+      {!!beneficiaire.modalites.detention_de_capital.parts_indirectes
+        .via_personnes_morales.total && (
+        <li>
+          <FAQLink tooltipLabel="Part via personne morale">
+            Les parts indirectes peuvent être détenues par le biais d’une ou de
+            plusieurs personnes morales intermédiaires.
+          </FAQLink>{" "}
+          :
+          <PartCapitalModalite
+            capital={
+              beneficiaire.modalites.detention_de_capital.parts_indirectes
+                .via_personnes_morales
+            }
+          />
+        </li>
+      )}
+    </ul>,
     <ul className="no-style">
       <li>
         <FAQLink tooltipLabel="Total des droits">

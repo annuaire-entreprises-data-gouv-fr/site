@@ -1,14 +1,14 @@
 export const formatLog = (
   url: string,
   status: number,
-  time = -1,
+  time: number | undefined,
   method: string,
   userAgent: string,
   requestId: string
 ) =>
   [
     ["status", status],
-    ["time", time],
+    ["time", time ?? -1],
     ["request", url],
     ["method", method],
     ["userAgent", userAgent],

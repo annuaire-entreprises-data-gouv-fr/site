@@ -3,7 +3,7 @@ import type { IArticle } from "#models/article/type";
 export function loadAll<T extends IArticle>(
   articlesFolderContext: Record<string, T>
 ): T[] {
-  const articles = [] as Array<T>;
+  const articles = [] as T[];
   //@ts-expect-error
   const keys = articlesFolderContext.keys();
   const values = keys.map(articlesFolderContext);

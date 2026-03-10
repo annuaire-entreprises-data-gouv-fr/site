@@ -1,4 +1,4 @@
-import { URLSearchParams } from "url";
+import { URLSearchParams } from "node:url";
 import { HttpServerError, HttpUnauthorizedError } from "#clients/exceptions";
 import routes from "#clients/routes";
 import {
@@ -68,7 +68,7 @@ export class httpInseeClient {
       });
       this._token = {
         data,
-        tokenExpiryTime: new Date().getTime() + data.expires_in * 1000,
+        tokenExpiryTime: Date.now() + data.expires_in * 1000,
       };
     } catch (e) {
       this._token = null;
@@ -76,7 +76,7 @@ export class httpInseeClient {
   };
 
   isTokenExpired = () => {
-    const now = new Date().getTime();
+    const now = Date.now();
     const tokenExpiryTime = this._token ? this._token.tokenExpiryTime : 0;
     return now > tokenExpiryTime;
   };

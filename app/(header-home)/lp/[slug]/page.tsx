@@ -89,7 +89,7 @@ export default function LandingPage(props: AppRouterProps) {
   );
 }
 
-export async function generateStaticParams(): Promise<Array<IParams>> {
+export async function generateStaticParams(): Promise<IParams[]> {
   return getAllLandingPages().map(({ slug }) => ({
     slug,
   }));

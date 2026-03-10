@@ -19,7 +19,7 @@ const UniteLegaleBadge: React.FC<{
   small?: boolean;
   defaultBadgeShouldBeHid?: boolean;
 }> = ({ uniteLegale, small = false, defaultBadgeShouldBeHid = false }) => {
-  const badges = [];
+  const badges: React.ReactNode[] = [];
   if (isAssociation(uniteLegale)) {
     badges.push(<AssociationBadge small={small} />);
   }

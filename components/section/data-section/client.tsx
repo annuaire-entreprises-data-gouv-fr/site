@@ -71,10 +71,11 @@ export function AsyncDataSectionClient<T>({
         <FadeIn key={lastModified}>
           <DataSectionContent
             additionalInfoOnError={props.additionalInfoOnError}
-            children={props.children}
             data={data}
             notFoundInfo={props.notFoundInfo}
-          />
+          >
+            {props.children}
+          </DataSectionContent>
         </FadeIn>
       </HeightTransition>
     </Section>

@@ -45,44 +45,42 @@ const AnnoncesPage = async (props: AppRouterProps) => {
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
 
   return (
-    <>
-      <div className="content-container">
-        <Title
-          ficheType={FICHE.ANNONCES}
-          session={session}
-          uniteLegale={uniteLegale}
-        />
-        {estDiffusible(uniteLegale) ||
-        hasRights(session, ApplicationRights.nonDiffusible) ? (
-          <>
-            <ul>
-              <li>
-                <a href="#annonces-bodacc">Annonces au BODACC</a>
-              </li>
-              {uniteLegale.dateMiseAJourInpi && (
-                <li>
-                  <a href="#observations-rne">Observations au RNE</a>
-                </li>
-              )}
-              {isAssociation(uniteLegale) && (
-                <li>
-                  <a href="#annonces-joafe">Annonces au JOAFE</a>
-                </li>
-              )}
-            </ul>
-            <AnnoncesBodacc uniteLegale={uniteLegale} />
+    <div className="content-container">
+      <Title
+        ficheType={FICHE.ANNONCES}
+        session={session}
+        uniteLegale={uniteLegale}
+      />
+      {estDiffusible(uniteLegale) ||
+      hasRights(session, ApplicationRights.nonDiffusible) ? (
+        <>
+          <ul>
+            <li>
+              <a href="#annonces-bodacc">Annonces au BODACC</a>
+            </li>
             {uniteLegale.dateMiseAJourInpi && (
-              <ObservationsRNE session={session} uniteLegale={uniteLegale} />
+              <li>
+                <a href="#observations-rne">Observations au RNE</a>
+              </li>
             )}
             {isAssociation(uniteLegale) && (
-              <AnnoncesJOAFESection uniteLegale={uniteLegale} />
+              <li>
+                <a href="#annonces-joafe">Annonces au JOAFE</a>
+              </li>
             )}
-          </>
-        ) : (
-          <DonneesPriveesSection title="Annonces" />
-        )}
-      </div>
-    </>
+          </ul>
+          <AnnoncesBodacc uniteLegale={uniteLegale} />
+          {uniteLegale.dateMiseAJourInpi && (
+            <ObservationsRNE session={session} uniteLegale={uniteLegale} />
+          )}
+          {isAssociation(uniteLegale) && (
+            <AnnoncesJOAFESection uniteLegale={uniteLegale} />
+          )}
+        </>
+      ) : (
+        <DonneesPriveesSection title="Annonces" />
+      )}
+    </div>
   );
 };
 

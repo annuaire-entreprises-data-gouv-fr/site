@@ -1,6 +1,6 @@
 "use client";
 
-import maplibregl, { type Map } from "maplibre-gl";
+import maplibregl, { type Map as MapLibreMap } from "maplibre-gl";
 import constants from "#models/constants";
 import type { ISearchResults } from "#models/search";
 import { formatIntFr, formatSiret } from "#utils/helpers";
@@ -19,17 +19,19 @@ function MapWithResults({
   height: string;
   shouldColorZipCode: boolean;
 }) {
+  const hasSupportedWebGl = hasWebGLSupport();
   const mapContainer = useRef<HTMLDivElement | null>(null);
-  const map = useRef<Map | null>(null);
+  const map = useRef<MapLibreMap | null>(null);
 
   useEffect(() => {
-    if (!mapContainer.current) return;
-    if (map.current) return; // stops map from intializing more than once
+    if (!mapContainer.current) {
+      return;
+    }
+    if (map.current) {
+      return; // stops map from intializing more than once
+    }
 
-    if (!hasWebGLSupport()) {
-      alert(
-        "Votre navigateur ne supporte pas WebGL et WebGL est indispensable au chargement de la carte."
-      );
+    if (!hasSupportedWebGl) {
       return;
     }
 
@@ -44,6 +46,11 @@ function MapWithResults({
         compact: true,
       },
     });
+    const mapInstance = map.current;
+
+    if (!mapInstance) {
+      return;
+    }
 
     results.results.forEach((result) => {
       const coordsSiege = checkLatLng(
@@ -66,7 +73,7 @@ function MapWithResults({
             Number.parseFloat(result.siege.latitude),
           ])
           .setPopup(popup)
-          .addTo(map.current!);
+          .addTo(mapInstance);
       }
 
       result.matchingEtablissements.forEach((match) => {
@@ -76,7 +83,7 @@ function MapWithResults({
 
         const coordsEtab = checkLatLng(match.latitude, match.longitude);
         if (coordsEtab) {
-          var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
+          const popup = new maplibregl.Popup({ offset: 25 }).setHTML(
             `<div><strong><a href="/etablissement/${match.siret}">${formatSiret(
               match.siret
             )}</a></strong><br/>Etablissement secondaire de <a href="/entreprise/${
@@ -92,18 +99,25 @@ function MapWithResults({
               Number.parseFloat(match.latitude),
             ])
             .setPopup(popup)
-            .addTo(map.current!);
+            .addTo(mapInstance);
         }
       });
     });
-  }, [results, shouldColorZipCode, mapContainer]);
+  }, [results, shouldColorZipCode, mapContainer, hasSupportedWebGl]);
 
   return (
     <div
       className="map"
       ref={mapContainer}
       style={{ width: "100%", zIndex: "0", height, backgroundColor: "#f0f0f0" }}
-    />
+    >
+      {!hasSupportedWebGl && (
+        <i>
+          Votre navigateur ne supporte pas WebGL, qui est indispensable à
+          l’affichage de la carte.
+        </i>
+      )}
+    </div>
   );
 }
 

@@ -1,5 +1,5 @@
+import type { Readable } from "node:stream";
 import type { ExportCsvInput } from "app/api/export-sirene/input-validation";
-import type { Readable } from "stream";
 import { HttpNotFound } from "#clients/exceptions";
 import {
   clientSireneInsee,
@@ -8,13 +8,7 @@ import {
 
 export const getEtablissementListe = async (
   searchParams: ExportCsvInput
-): Promise<Readable> => {
-  try {
-    return await clientSireneInsee(searchParams);
-  } catch (e: any) {
-    throw e;
-  }
-};
+): Promise<Readable> => await clientSireneInsee(searchParams);
 
 export const getEtablissementListeCount = async (
   searchParams: ExportCsvInput

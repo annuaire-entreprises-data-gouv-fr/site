@@ -14,7 +14,7 @@ describe("clientBilansFinanciers", () => {
       },
     });
   });
-  it.skip("Should match snapshot 552032534", async () => {
+  it("Should match snapshot 552032534", async () => {
     await expectClientToMatchSnapshot({
       client: clientBilansFinanciers,
       args: ["552032534" as Siren],

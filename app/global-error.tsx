@@ -10,7 +10,7 @@ export default function GlobalError({
 }) {
   useLog500ErrorAppClient(error);
   return (
-    <html>
+    <html lang="fr">
       <body>
         {/* This is the default Next.js error component. */}
         <NextError statusCode={500} />

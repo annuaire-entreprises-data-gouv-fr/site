@@ -31,7 +31,7 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
 
     const infos = [
       elu.role ?? <NonRenseigne />,
-      <>{nomComplet}</>,
+      nomComplet,
       <span>
         {capitalize(formatDatePartial(elu.dateNaissancePartial) ?? "") || (
           <NonRenseigne />

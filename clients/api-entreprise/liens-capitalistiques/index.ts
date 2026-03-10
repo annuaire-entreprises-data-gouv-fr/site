@@ -53,9 +53,12 @@ const mapToDomainObject = (
         role: "",
       } as IPersonneMoraleLiensCapitalistiques;
     }
+    if (!personne_physique_attributes) {
+      throw new Error("Missing personne_physique_attributes");
+    }
     const { nom_patronymique_et_prenoms, civilite } =
-      personne_physique_attributes!;
-    const { mois, annee } = personne_physique_attributes!.date_naissance;
+      personne_physique_attributes;
+    const { mois, annee } = personne_physique_attributes.date_naissance;
 
     const { nom, prenoms } = nom_patronymique_et_prenoms.split(" ").reduce(
       (acc: { nom: string; prenoms: string }, motCourant: string) => {

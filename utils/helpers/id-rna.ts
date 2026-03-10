@@ -22,7 +22,7 @@ export const isIdRna = (slug: string): slug is IdRna => {
 
 /**
  * Throw an exception if a string is not a siret
- * */
+ */
 export const verifyIdRna = (slug: string): IdRna => {
   if (!slug || !isIdRna(slug)) {
     throw new NotAValidIdRnaError(slug);

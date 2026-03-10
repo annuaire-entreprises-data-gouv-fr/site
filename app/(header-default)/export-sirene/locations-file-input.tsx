@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Error } from "#components-ui/alerts";
+import { AlertError } from "#components-ui/alerts";
 import FaqLink from "#components-ui/faq-link";
 import { FileInput } from "./file-input";
 import styles from "./styles.module.css";
@@ -70,7 +70,7 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
 
   return (
     <div>
-      <label>
+      <p>
         Filtrer en chargeant{" "}
         <FaqLink tooltipLabel="une liste">
           Format requis :
@@ -89,17 +89,17 @@ export function LocationsFileInput(props: LocationsFileInputProps) {
             <li>59069</li>
           </ul>
         </FaqLink>
-      </label>
+      </p>
       <FileInput
         description="Un code département ou commune par ligne"
         onChange={processFileContent}
         onError={setError}
       />
       {error && (
-        <Error>
+        <AlertError>
           <strong>Votre fichier n’a pas pu être chargé.</strong>
           <p className="fr-my-0">{error}</p>
-        </Error>
+        </AlertError>
       )}
     </div>
   );

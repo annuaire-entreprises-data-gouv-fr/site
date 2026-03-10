@@ -86,6 +86,7 @@ export default function UpdateNameModal({
         <button
           className="fr-btn fr-btn--tertiary-no-outline"
           onClick={() => setIsVisible(true)}
+          type="button"
         >
           (
           <i>

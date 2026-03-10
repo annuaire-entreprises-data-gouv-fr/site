@@ -1,9 +1,13 @@
-import type { SeverityLevel } from "@sentry/nextjs";
-import * as Sentry from "@sentry/nextjs";
+import {
+  captureException,
+  type Scope,
+  type SeverityLevel,
+  withScope,
+} from "@sentry/nextjs";
 import { type Exception, FetchRessourceException } from "#models/exceptions";
 
 // scope allows to log stuff in tags in sentry
-function getScope(exception: Exception, scope: Sentry.Scope) {
+function getScope(exception: Exception, scope: Scope) {
   Object.entries(exception.context).forEach(([key, value]) => {
     try {
       value = (value || "N/A").substring(0, 195);
@@ -25,10 +29,10 @@ export const isNextJSSentryActivated =
 const logInSentryFactory =
   (severity: SeverityLevel) => (exception: Exception) => {
     if (isNextJSSentryActivated) {
-      Sentry.withScope((scope) => {
-        scope = getScope(exception, scope);
-        scope.setLevel(severity);
-        Sentry.captureException(exception, scope);
+      withScope((scope) => {
+        const sentryScope = getScope(exception, scope);
+        sentryScope.setLevel(severity);
+        captureException(exception, sentryScope);
       });
     } else if (["fatal", "error"].indexOf(severity) > -1) {
       console.error(exception, JSON.stringify(exception.context));

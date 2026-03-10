@@ -136,7 +136,7 @@ export default function DataSourcesPage() {
                               ],
                             ]
                           : []),
-                        ...(api && api.updownIoId
+                        ...(api?.updownIoId
                           ? [
                               [
                                 "Taux de disponibilité de l'API",

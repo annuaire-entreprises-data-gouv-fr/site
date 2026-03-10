@@ -78,7 +78,7 @@ export const Warning: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   </Alert>
 );
 
-export const Error: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
+export const AlertError: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   full,
   children,
 }) => (

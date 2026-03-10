@@ -9,7 +9,7 @@ export const logMatomoEvent = (
   action: string,
   label: string
 ) => {
-  var _paq = window._paq || [];
+  const _paq = window._paq || [];
   _paq.push(["trackEvent", category, action, label]);
 };
 

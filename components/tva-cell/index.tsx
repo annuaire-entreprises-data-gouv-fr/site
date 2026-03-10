@@ -97,56 +97,52 @@ const VerifyTVA: React.FC<{
   }
   if (hasAnyError(verification)) {
     return (
-      <>
-        <InformationTooltip
-          horizontalOrientation="left"
-          label={
-            <>
-              Nous n’avons pas pu controler la validité de ce numéro car le
-              téléservice du VIES ne fonctionne pas actuellement. Merci de
-              ré-essayer plus tard pour vérifier si cette structure est bien
-              assujettie à la TVA.
-            </>
-          }
-          left="5px"
-          tabIndex={0}
-        >
-          <Icon color="#df0a00" slug="errorFill">
-            <CopyCell number={tvaNumber} />
-          </Icon>
-        </InformationTooltip>
-      </>
+      <InformationTooltip
+        horizontalOrientation="left"
+        label={
+          <>
+            Nous n’avons pas pu controler la validité de ce numéro car le
+            téléservice du VIES ne fonctionne pas actuellement. Merci de
+            ré-essayer plus tard pour vérifier si cette structure est bien
+            assujettie à la TVA.
+          </>
+        }
+        left="5px"
+        tabIndex={0}
+      >
+        <Icon color="#df0a00" slug="errorFill">
+          <CopyCell number={tvaNumber} />
+        </Icon>
+      </InformationTooltip>
     );
   }
   const tva = verification?.tva;
   return (
     <>
       {tva ? (
-        <>
-          {mayHaveMultipleTVANumber.currentlyActive ? (
-            <InformationTooltip
-              horizontalOrientation="left"
-              label={
-                <>
-                  Attention, cette structure a plusieurs activités différentes.
-                  <br />
-                  Elle peut posséder un numéro de TVA Intracommunautaire pour
-                  chacune de ces activités.
-                  <br />
-                  Le numéro affiché correspond à son activité la plus ancienne.
-                </>
-              }
-              left="5px"
-              tabIndex={0}
-            >
-              <Icon color="#ffb300" slug="lightbulbFill">
-                <CopyCell number={tva} />
-              </Icon>
-            </InformationTooltip>
-          ) : (
-            <CopyCell number={tva} />
-          )}
-        </>
+        mayHaveMultipleTVANumber.currentlyActive ? (
+          <InformationTooltip
+            horizontalOrientation="left"
+            label={
+              <>
+                Attention, cette structure a plusieurs activités différentes.
+                <br />
+                Elle peut posséder un numéro de TVA Intracommunautaire pour
+                chacune de ces activités.
+                <br />
+                Le numéro affiché correspond à son activité la plus ancienne.
+              </>
+            }
+            left="5px"
+            tabIndex={0}
+          >
+            <Icon color="#ffb300" slug="lightbulbFill">
+              <CopyCell number={tva} />
+            </Icon>
+          </InformationTooltip>
+        ) : (
+          <CopyCell number={tva} />
+        )
       ) : (
         <TVAInvalide
           multipleNum={mayHaveMultipleTVANumber.allTime}

@@ -150,8 +150,8 @@ export default function ExportCsv() {
   const buildQuery = (): ExportCsvInput => ({
     ...(filters.headcountEnabled && {
       headcount: {
-        min: Number.parseInt(getEffectifCode(filters.headcount.min)),
-        max: Number.parseInt(getEffectifCode(filters.headcount.max)),
+        min: Number.parseInt(getEffectifCode(filters.headcount.min), 10),
+        max: Number.parseInt(getEffectifCode(filters.headcount.max), 10),
       },
     }),
     categories: filters.categories as ("PME" | "ETI" | "GE")[],
@@ -233,7 +233,9 @@ export default function ExportCsv() {
 
   const handleCsvExport = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!countResult || !filename) return;
+    if (!countResult || !filename) {
+      return;
+    }
 
     setIsLoading(true);
     setError(null);
@@ -342,17 +344,17 @@ export default function ExportCsv() {
             {isLoading ? (
               "Export en cours..."
             ) : (
-              <a
+              <button
                 className="fr-link fr-link--download"
-                href="#"
                 onClick={handleCsvExport}
+                type="button"
               >
                 {filename}
                 <span className="fr-link__detail">
                   CSV - Environ {formatNumber(getFileSize(countResult.count))}{" "}
                   Ko
                 </span>
-              </a>
+              </button>
             )}
           </div>
         </div>

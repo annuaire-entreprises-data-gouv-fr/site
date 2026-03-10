@@ -15,7 +15,7 @@ import type { IReqWithSession } from "#utils/session/with-session";
 import type { APIRoutesPaths } from "./routes-paths";
 
 export interface IContext {
-  params: Promise<{ slug: Array<string> }>;
+  params: Promise<{ slug: string[] }>;
 }
 
 export interface IHandlerParams {
@@ -115,7 +115,7 @@ export class APIRouteError extends Exception {
 }
 
 export async function getRouteAndSlug(context: {
-  params: Promise<{ slug: Array<string> }>;
+  params: Promise<{ slug: string[] }>;
 }) {
   try {
     const params = await context.params;
@@ -137,7 +137,7 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
         return new Response(e.message, { status: e.status });
       }
 
-      let routeAndSlug;
+      let routeAndSlug: { route: string; slug: string };
       try {
         routeAndSlug = await getRouteAndSlug(context);
       } catch (e) {

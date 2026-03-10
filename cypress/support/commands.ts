@@ -14,14 +14,6 @@ import type { IAgentScope } from "#models/authentication/agent/scopes/constants"
 import type { ISession } from "#models/authentication/user/session";
 import { sessionOptions } from "#utils/session";
 
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      login(email?: string): Chainable<void>;
-    }
-  }
-}
-
 const generateSessionCookie = async (inputEmail?: string) => {
   const email = inputEmail || "user@yopmail.com";
   const user = comptesAgents.find((agent) => agent.email === email);
@@ -53,7 +45,7 @@ const generateSessionCookie = async (inputEmail?: string) => {
   });
 };
 
-Cypress.Commands.add("login", (email?: string) => {
+Cypress.Commands.add("login" as never, (email?: string) => {
   cy.then(() => generateSessionCookie(email))
     .then((validSessionCookie) => {
       cy.setCookie(sessionOptions.cookieName, validSessionCookie);

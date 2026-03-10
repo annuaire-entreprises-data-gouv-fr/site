@@ -95,6 +95,7 @@ export function CopyPaste({
       onMouseLeave={() => setHovered(false)}
       ref={element}
       title="Cliquez pour copier dans le presse-papier"
+      type="button"
     >
       <span id={id}>{children} </span>
       {(hovered || copied || focused) && !disableCopyIcon && (
@@ -161,7 +162,7 @@ function CheckMarkSVG() {
 
 function logCopyPaste(label: string) {
   try {
-    var _paq = window._paq || [];
+    const _paq = window._paq || [];
     _paq.push(["trackEvent", "action", "copyPaste", `${label}`]);
   } catch {}
 }

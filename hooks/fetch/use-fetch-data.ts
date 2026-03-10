@@ -24,7 +24,7 @@ interface IFetchDataType<T> {
  */
 export function useFetchExternalData<T>(
   { fetchData, administration, logError }: IFetchDataType<T>,
-  dependencies: Array<unknown>
+  dependencies: unknown[]
 ) {
   const [response, setResponse] = useState<
     T | IAPINotRespondingError | IDataFetchingState
