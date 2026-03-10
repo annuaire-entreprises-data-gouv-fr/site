@@ -51,6 +51,7 @@
     "next": "15.3.9",
     "next-safe-action": "^8.0.11",
     "next-seo": "^6.6.0",
+    "nuqs": "^2.8.9",
     "openid-client": "^5.7.1",
     "qrcode": "^1.5.4",
     "react": "19.1.5",

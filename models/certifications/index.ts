@@ -27,7 +27,8 @@ export interface ICertifications {
 }
 
 export const getCertificationsFromSlug = async (
-  uniteLegale: IUniteLegale
+  uniteLegale: IUniteLegale,
+  options?: { entrepreneurSpectaclesPage?: number }
 ): Promise<ICertifications> => {
   const [
     rge,
@@ -39,7 +40,10 @@ export const getCertificationsFromSlug = async (
     entrepriseInclusive,
   ] = await Promise.all([
     getRGECertifications(uniteLegale),
-    clientEntrepreneursSpectacles(uniteLegale),
+    clientEntrepreneursSpectacles(
+      uniteLegale,
+      options?.entrepreneurSpectaclesPage
+    ),
     getBio(uniteLegale),
     getEgapro(uniteLegale),
     getOrganismesDeFormation(uniteLegale),
