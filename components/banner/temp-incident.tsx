@@ -16,8 +16,7 @@ const TEMP_INCIDENT_BANNER = {
   🚨 Certains données et fonctionnalités sont temporairement indisponibles en raison d’instabilités chez nos partenaires.
     Veuillez nous excuser pour la gêne occasionnée.`,
   dgfip: `
-  🚨 L'ensemble des endpoints relatif à la DGFIP (données financières) ne sont plus fonctionnels.
-    Aucune date de rétablissement n'a été encore communiquée par la DGFIP.  
+  🚨 Suite à un incident technique du côté de la DGFIP, les données associées (attestation fiscale, chiffre d’affaires, etc.) ne sont pas disponibles pour le moment.
     Veuillez nous excuser pour la gêne occasionnée.`,
 };
 
