@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { BannerManager } from "#components/banner/banner-manager";
 import { NPSBanner } from "#components/banner/nps";
-import TempIncidentBanner from "#components/banner/temp-incident";
 import Footer from "#components/footer";
 import { Header } from "#components/header/header";
 import { meta } from "#components/meta/meta";
@@ -21,7 +21,7 @@ export default function LayoutPublic({
   return (
     <>
       <NPSBanner />
-      <TempIncidentBanner />
+      <BannerManager />
       <Header
         useAgentBanner={false}
         useAgentCTA={false}

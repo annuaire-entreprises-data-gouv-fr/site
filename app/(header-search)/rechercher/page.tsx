@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import HiddenH1 from "#components/a11y-components/hidden-h1";
+import { BannerManager } from "#components/banner/banner-manager";
 import { NPSBanner } from "#components/banner/nps";
-import TempIncidentBanner from "#components/banner/temp-incident";
 import Footer from "#components/footer";
 import { HeaderWithAdvancedSearch } from "#components/header/header-advanced-search";
 import SearchResults from "#components/search-results";
@@ -40,7 +40,7 @@ const SearchResultPage = async (props: AppRouterProps) => {
   return (
     <>
       <NPSBanner />
-      <TempIncidentBanner />
+      <BannerManager />
       <HeaderWithAdvancedSearch
         currentSearchTerm={searchTerm}
         searchParams={searchFilterParamsJSON}
