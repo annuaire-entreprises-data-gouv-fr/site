@@ -46,8 +46,13 @@ interface IBodaccB extends IBodaccCoreRecord {
   radiationaurcs?: string; // "{\"radiationPM\": \"O\"}"
 }
 
-export const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
-  const searchUrl = `${routes.bodacc.ods.search}&q=registre%3A${siren}&sort=dateparution&facet=publicationavis&facet=publicationavis_facette&facet=typeavis&facet=typeavis_lib&facet=familleavis&facet=familleavis_lib&facet=numerodepartement&facet=departement_nom_officiel`;
+const PAGE_SIZE = 10;
+
+export const clientBodacc = async (
+  siren: Siren,
+  page = 1
+): Promise<IAnnoncesBodacc> => {
+  const searchUrl = `${routes.bodacc.ods.search}&q=registre%3A${siren}&sort=dateparution&facet=publicationavis&facet=publicationavis_facette&facet=typeavis&facet=typeavis_lib&facet=familleavis&facet=familleavis_lib&facet=numerodepartement&facet=departement_nom_officiel&rows=${PAGE_SIZE}&start=${(page - 1) * PAGE_SIZE}`;
   const metaDataUrl = routes.bodacc.ods.metadata;
   const response = await odsClient({ url: searchUrl }, metaDataUrl);
 
@@ -60,6 +65,7 @@ export const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
     procedures: response.records
       .map(extractProcedure)
       .filter((a: any) => a !== null),
+    meta: response.meta,
   };
 };
 

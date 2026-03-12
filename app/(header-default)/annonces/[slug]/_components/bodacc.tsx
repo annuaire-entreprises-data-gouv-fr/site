@@ -1,9 +1,11 @@
 "use client";
 
 import { useFetchBODACC } from "hooks";
+import { parseAsInteger, useQueryState } from "nuqs";
 import type React from "react";
 import routes from "#clients/routes";
 import { DILA } from "#components/administrations";
+import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
 import { UniteLegalePageLink } from "#components/unite-legale-page-link";
@@ -16,7 +18,11 @@ import { formatDate } from "#utils/helpers";
 const AnnoncesBodacc: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const bodacc = useFetchBODACC(uniteLegale);
+  const [currentPage, setCurrentPage] = useQueryState(
+    "annonces-bodacc-page",
+    parseAsInteger.withDefault(1)
+  );
+  const bodacc = useFetchBODACC(uniteLegale, currentPage);
 
   return (
     <AsyncDataSectionClient
@@ -96,6 +102,16 @@ const AnnoncesBodacc: React.FC<{
                 ])}
                 head={["Publication", "Details", "Lien"]}
               />
+              {bodacc.meta.total > bodacc.meta.page_size && (
+                <LocalPageCounter
+                  compact={true}
+                  currentPage={currentPage}
+                  onPageChange={setCurrentPage}
+                  totalPages={Math.ceil(
+                    bodacc.meta.total / bodacc.meta.page_size
+                  )}
+                />
+              )}
             </>
           )}
         </>
