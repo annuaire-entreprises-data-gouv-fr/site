@@ -19,7 +19,7 @@ export interface IServicePublic {
   affectationPersonne: IAffectationPersonne | null;
   categorie: "SI" | "SIL" | "SL" | null;
   formulaireContact: string | null;
-  lastModified: string;
+  lastModified: string | null;
   liens: {
     organigramme: ILien | null;
     annuaireServicePublic: ILien | null;
