@@ -15,9 +15,19 @@ const TEMP_INCIDENT_BANNER = {
   partnersData: `
   🚨 Certains données et fonctionnalités sont temporairement indisponibles en raison d’instabilités chez nos partenaires.
     Veuillez nous excuser pour la gêne occasionnée.`,
+  dgfip: `
+  🚨 L'ensemble des endpoints relatif à la DGFIP (données financières) ne sont plus fonctionnels.
+    Aucune date de rétablissement n'a été encore communiquée par la DGFIP.  
+    Veuillez nous excuser pour la gêne occasionnée.`,
 };
 
-export default function TempIncidentBanner() {
+interface ITempIncidentBannerProps {
+  isAgent: boolean;
+}
+
+export default function TempIncidentBanner({
+  isAgent,
+}: ITempIncidentBannerProps) {
   const { isEnabled: isDefaultIncidentEnabled } = useFeatureFlag(
     "incident_banner_displayed"
   );
@@ -27,11 +37,17 @@ export default function TempIncidentBanner() {
   const { isEnabled: isPartnersDataIncidentEnabled } = useFeatureFlag(
     "partners_data_incident_banner_displayed"
   );
+  const { isEnabled: isDgfipIncidentEnabled } = useFeatureFlag(
+    "dgfip_incident_banner_displayed"
+  );
+
+  const shouldDisplayDgfipIncident = isDgfipIncidentEnabled && isAgent;
 
   if (
     !isDefaultIncidentEnabled &&
     !isProconnectIncidentEnabled &&
-    !isPartnersDataIncidentEnabled
+    !isPartnersDataIncidentEnabled &&
+    !shouldDisplayDgfipIncident
   ) {
     return null;
   }
@@ -40,9 +56,10 @@ export default function TempIncidentBanner() {
 
   if (isPartnersDataIncidentEnabled) {
     message = TEMP_INCIDENT_BANNER.partnersData;
-  }
-  if (isProconnectIncidentEnabled) {
+  } else if (isProconnectIncidentEnabled) {
     message = TEMP_INCIDENT_BANNER.proconnect;
+  } else if (shouldDisplayDgfipIncident) {
+    message = TEMP_INCIDENT_BANNER.dgfip;
   }
 
   return (
