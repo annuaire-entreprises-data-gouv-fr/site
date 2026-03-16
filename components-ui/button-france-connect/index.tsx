@@ -2,7 +2,7 @@ import type React from "react";
 
 const ButtonFranceConnect: React.FC<{}> = () => (
   <div className="fr-connect-group">
-    <button className="fr-connect" type="button">
+    <button className="fr-connect" type="submit">
       <span className="fr-connect__login">S’identifier avec</span>
       <span className="fr-connect__brand">FranceConnect</span>
     </button>
