@@ -12,8 +12,9 @@ const getTsConfigBasePaths = () =>
 
 const config = {
   transform: {
-    "^.+\\.(t|j)sx?$": ["@swc/jest"],
+    "^.+\\.(m|t|j)sx?$": ["@swc/jest"],
   },
+  transformIgnorePatterns: ["/node_modules/(?!(msw|@mswjs|until-async)/)"],
   moduleNameMapper: {
     ...getTsConfigBasePaths(),
   },
