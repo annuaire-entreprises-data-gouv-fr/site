@@ -94,7 +94,7 @@ export const EffectifCell = ({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) => {
-  if (hasRights(session, ApplicationRights.effectifsAnnuels)) {
+  if (hasRights(session, ApplicationRights.effectifs)) {
     return (
       <ul>
         <li>

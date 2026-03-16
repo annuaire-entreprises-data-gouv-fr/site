@@ -16,7 +16,7 @@ export const allAgentScopes = [
   "beneficiaires",
   "agent",
   "pseudo_opendata",
-  "effectifs_annuels",
+  "effectifs",
   "chiffre_affaires",
   "travaux_publics",
   "bilans_bdf",

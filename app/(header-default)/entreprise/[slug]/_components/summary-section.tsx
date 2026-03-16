@@ -215,7 +215,7 @@ const UniteLegaleSummarySection: React.FC<{
               ? []
               : [EAdministration.INPI]),
           ...(conventionsCollectives.length > 0 ? [EAdministration.MTPEI] : []),
-          ...(hasRights(session, ApplicationRights.effectifsAnnuels)
+          ...(hasRights(session, ApplicationRights.effectifs)
             ? [EAdministration.GIP_MDS]
             : []),
         ]}
