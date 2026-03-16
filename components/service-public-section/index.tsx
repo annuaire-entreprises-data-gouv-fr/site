@@ -76,11 +76,11 @@ const getTableData = (
         servicePublic.typeOrganisme,
       ],
       servicePublic.affectationPersonne && [
-        "Dirigeants",
+        "Responsable(s)",
         <a
           href={`/dirigeants/${uniteLegale.siren}#responsables-service-public`}
         >
-          → voir les {servicePublic.affectationPersonne.length} dirigeant(es)
+          → voir les {servicePublic.affectationPersonne.length} responsable(s)
         </a>,
       ],
       ["Adresse postale", servicePublic.adressePostale],
