@@ -6,10 +6,10 @@ import { verifySiren } from "#utils/helpers";
 import logErrorInSentry from "#utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
-export function useFetchBODACC(uniteLegale: IUniteLegale) {
+export function useFetchBODACC(uniteLegale: IUniteLegale, page = 1) {
   return useFetchExternalData(
     {
-      fetchData: () => clientBodacc(verifySiren(uniteLegale.siren)),
+      fetchData: () => clientBodacc(verifySiren(uniteLegale.siren), page),
       administration: EAdministration.DILA,
       logError: (e: any) => {
         if (e.status === 404) {
@@ -26,6 +26,6 @@ export function useFetchBODACC(uniteLegale: IUniteLegale) {
         logErrorInSentry(exception);
       },
     },
-    [uniteLegale]
+    [uniteLegale, page]
   );
 }

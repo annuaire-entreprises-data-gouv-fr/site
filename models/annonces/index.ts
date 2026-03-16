@@ -14,6 +14,11 @@ export interface IAnnoncesBodacc {
   annonces: IAnnonceBodacc[];
   comptes: IAnnonceBodacc[];
   lastModified: string | null;
+  meta: {
+    page: number;
+    page_size: number;
+    total: number;
+  };
   procedures: {
     date: string;
     details: string;

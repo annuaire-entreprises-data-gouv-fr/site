@@ -82,7 +82,7 @@ export const clientAnnuaireServicePublicByName = async (
 
 export const clientAnnuaireServicePublicByIds = async (
   ids: string[]
-): Promise<IServicePublic[]> => {
+): Promise<Omit<IServicePublic, "lastModified">[]> => {
   const query = `id="${ids.join('" OR id="')}"`;
   const response = await queryAnnuaireServicePublic(query);
 
