@@ -40,6 +40,7 @@ import { journalOfficielAssociationsHandler } from "./handlers/journal-officiel-
 import { liensCapitalistiquesHandler } from "./handlers/liens-capitalistiques";
 import { mandatairesRcsHandler } from "./handlers/mandataires-rcs";
 import { matomoReportHandler } from "./handlers/matomo-report";
+import { minimisHandler } from "./handlers/minimis";
 import { odsMetadataHandler } from "./handlers/ods-metadata";
 import { effectifsHandler } from "./handlers/rcd-effectifs-annuels";
 import { rechercheEntrepriseHandler } from "./handlers/recherche-entreprises";
@@ -123,6 +124,7 @@ export const routesHandlers = [
     stripQueryParams(routes.datagouv.entrepreneursSpectacles),
     entrepreneurSpectaclesHandler
   ),
+  http.get(stripQueryParams(routes.datagouv.minimis), minimisHandler),
   http.get(
     stripQueryParams(routes.tooling.monitoring.getBySlug("*")),
     upDownIoHandler

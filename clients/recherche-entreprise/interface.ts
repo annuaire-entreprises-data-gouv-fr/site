@@ -104,6 +104,7 @@ export interface ISiege extends IEtablissementCore {
 export type IMatchingEtablissement = IEtablissementCore;
 
 export interface IComplements {
+  aide_minimis_renseignee: boolean;
   bilan_ges_renseigne: boolean;
   collectivite_territoriale: ICollectiviteTerritoriale;
   convention_collective_renseignee: boolean;

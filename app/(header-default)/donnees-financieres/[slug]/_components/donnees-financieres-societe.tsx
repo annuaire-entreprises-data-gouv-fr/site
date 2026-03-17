@@ -6,7 +6,11 @@ import {
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible } from "#models/core/diffusion";
-import type { IUniteLegale } from "#models/core/types";
+import {
+  hasAidesMinimisRenseignees,
+  type IUniteLegale,
+} from "#models/core/types";
+import { AidesMinimis } from "./aides";
 import { BilansDocumentsSociete } from "./bilans-documents-societe";
 import { ComptesBodaccSociete } from "./comptes-bodacc-societe";
 import { FinancesSocieteSummary } from "./finances-societe-summary";
@@ -43,6 +47,9 @@ export default function DonneesFinancieresSociete({
       <HorizontalSeparator />
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
       <LiassesFiscales session={session} uniteLegale={uniteLegale} />
+      {hasAidesMinimisRenseignees(uniteLegale) && (
+        <AidesMinimis session={session} uniteLegale={uniteLegale} />
+      )}
     </>
   );
 }

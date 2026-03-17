@@ -1,6 +1,7 @@
 "use server";
 
 import { agentActionClient } from "server-actions/safe-action";
+import { clientMinimis } from "#clients/api-data-gouv/minimis";
 import { ApplicationRights } from "#models/authentication/user/rights";
 import { getBeneficiaires } from "#models/espace-agent/beneficiaires";
 import { getBilansProtected } from "#models/espace-agent/bilans";
@@ -18,6 +19,7 @@ import {
   withUseCase,
 } from "../middlewares";
 import {
+  getAgentAidesMinimisSchema,
   getAgentBeneficiairesSchema,
   getAgentBilansProtectedSchema,
   getAgentChiffreAffairesProtectedSchema,
@@ -124,4 +126,12 @@ export const getAgentLiensCapitalistiquesProtectedAction = agentActionClient
       year,
       useCase,
     });
+  });
+
+export const getAgentAidesMinimisAction = agentActionClient
+  .use(withRateLimiting)
+  .inputSchema(getAgentAidesMinimisSchema)
+  .action(async ({ parsedInput }) => {
+    const { siren, page } = parsedInput;
+    return await clientMinimis(siren, page);
   });
