@@ -16,7 +16,7 @@ import { formatCurrency, formatDate } from "#utils/helpers";
 const NoAidesMinimis = () => (
   <>
     <MinimisDescription />
-    <p>Aucune aide Minimis n’a été déclarée par cette entreprise.</p>
+    <p>Aucune aide Minimis n’a été déclarée pour cette entreprise.</p>
   </>
 );
 
@@ -97,8 +97,8 @@ export default function AidesMinimisProtected({
           <>
             <MinimisDescription />
             <p>
-              Cette entreprise a déclaré {aidesMinimis.aides.length} aides
-              Minimis
+              Un total de {aidesMinimis.aides.length} aides Minimis a été
+              déclaré pour cette entreprise.
             </p>
             <AidesMinimisTable aidesMinimis={aidesMinimis.aides} />
             {aidesMinimis.meta.total > aidesMinimis.meta.page_size && (

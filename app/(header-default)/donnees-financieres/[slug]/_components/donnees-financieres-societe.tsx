@@ -47,7 +47,7 @@ export default function DonneesFinancieresSociete({
       <HorizontalSeparator />
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
       <LiassesFiscales session={session} uniteLegale={uniteLegale} />
-      {!hasAidesMinimisRenseignees(uniteLegale) && (
+      {hasAidesMinimisRenseignees(uniteLegale) && (
         <AidesMinimis session={session} uniteLegale={uniteLegale} />
       )}
     </>
