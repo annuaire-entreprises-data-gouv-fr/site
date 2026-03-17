@@ -42,3 +42,8 @@ export const getAgentLiensCapitalistiquesProtectedSchema = z.object({
   year: z.string().optional(),
   useCase: z.nativeEnum(UseCase).optional(),
 });
+
+export const getAgentAidesMinimisSchema = z.object({
+  siren: z.string().min(1, "Siren is required"),
+  page: z.number().optional(),
+});

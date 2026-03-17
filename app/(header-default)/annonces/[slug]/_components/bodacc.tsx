@@ -65,7 +65,7 @@ const AnnoncesBodacc: React.FC<{
           ) : (
             <>
               <p>
-                Elle possède {bodacc.annonces.length} annonces publiées au{" "}
+                Elle possède {bodacc.meta.total} annonces publiées au{" "}
                 <strong>
                   Bulletin Officiel Des Annonces Civiles et Commerciales
                   (BODACC)
