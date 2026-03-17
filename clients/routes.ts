@@ -90,6 +90,8 @@ const routes = {
       "https://tabular-api.data.gouv.fr/api/resources/935e1dc5-afce-4d45-9fda-47b18f7444e6/data/",
     finessJuridique:
       "https://tabular-api.data.gouv.fr/api/resources/35d75f72-3ae5-4c4a-abd2-9aad340576a1/data/",
+    minimis:
+      "https://tabular-api.data.gouv.fr/api/resources/f43a5294-8f79-4b40-b5f9-88b62ea1ad14/data/",
   },
   dataSubvention: {
     pageBySirenOrIdRna: (sirenOrIdRna: string) =>
