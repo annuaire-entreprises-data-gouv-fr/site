@@ -146,6 +146,7 @@ const LandingPageAgent = () => (
                   <ul>
                     <li>Comptes de résultats</li>
                     <li>Bilans au RNE</li>
+                    <li>Aides Minimis</li>
                     <li>
                       Chiffres d’affaires <HabilitationTag />
                     </li>
