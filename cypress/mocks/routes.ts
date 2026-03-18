@@ -42,7 +42,8 @@ import { mandatairesRcsHandler } from "./handlers/mandataires-rcs";
 import { matomoReportHandler } from "./handlers/matomo-report";
 import { minimisHandler } from "./handlers/minimis";
 import { odsMetadataHandler } from "./handlers/ods-metadata";
-import { effectifsHandler } from "./handlers/rcd-effectifs-annuels";
+import { effectifsAnnuelsHandler } from "./handlers/rcd-effectifs-annuels";
+import { effectifsMensuelsHandler } from "./handlers/rcd-effectifs-mensuels";
 import { rechercheEntrepriseHandler } from "./handlers/recherche-entreprises";
 import { rechercheEntrepriseIdccHandler } from "./handlers/recherche-entreprises-idcc";
 import { rechercheEntrepriseIdccMetadataHandler } from "./handlers/recherche-entreprises-idcc-metadata";
@@ -191,7 +192,13 @@ export const routesHandlers = [
     stripQueryParams(
       `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.effectifs.annuels("*", "*")}`
     ),
-    effectifsHandler
+    effectifsAnnuelsHandler
+  ),
+  http.get(
+    stripQueryParams(
+      `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.effectifs.mensuels("*", "*", "*")}`
+    ),
+    effectifsMensuelsHandler
   ),
   http.get(
     stripQueryParams(
