@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 18/03/2026
+  target:
+    agent: true
+  body: |
+    Ajout de l'effectif moyen mensuel des établissements dans la page "Établissements".
 - date: 17/03/2026
   target:
     agent: true

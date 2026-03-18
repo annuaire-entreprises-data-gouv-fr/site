@@ -130,6 +130,9 @@ const LandingPageAgent = () => (
                       Effectifs annuels <HabilitationTag />
                     </li>
                     <li>
+                      Effectifs mensuels des établissements <HabilitationTag />
+                    </li>
+                    <li>
                       Liens capitalistiques <HabilitationTag />
                     </li>
                   </ul>

@@ -21,7 +21,7 @@ import {
   formatSiret,
   uniteLegaleLabelWithPronounContracted,
 } from "#utils/helpers";
-import { libelleTrancheEffectif } from "#utils/helpers/formatting/codes-effectifs";
+import { EffectifCell } from "./effectif-cell";
 
 interface IProps {
   etablissement: IEtablissement;
@@ -124,12 +124,11 @@ const EtablissementSection: React.FC<IProps> = ({
     ["Forme juridique", uniteLegale.libelleNatureJuridique],
     [
       "Tranche d’effectif salarié",
-      libelleTrancheEffectif(
-        uniteLegale.trancheEffectif === "N"
-          ? "N"
-          : etablissement.trancheEffectif,
-        etablissement.anneeTrancheEffectif
-      ),
+      <EffectifCell
+        etablissement={etablissement}
+        session={session}
+        uniteLegale={uniteLegale}
+      />,
     ],
     [
       `Date de création ${uniteLegaleLabel}`,
