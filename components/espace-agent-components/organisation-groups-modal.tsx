@@ -34,7 +34,7 @@ const rewordedRights = {
   [ApplicationRights.conformiteFiscale]: "Attestation de conformité fiscale",
   [ApplicationRights.conformiteSociale]: "Attestations de conformité sociale",
   [ApplicationRights.subventionsAssociation]: "Subventions des associations",
-  [ApplicationRights.effectifsAnnuels]: "Effectifs annuels (RCD)",
+  [ApplicationRights.effectifs]: "Effectifs (RCD)",
   [ApplicationRights.bilansBDF]: "Bilans (Banque de France)",
   [ApplicationRights.chiffreAffaires]: "Chiffres d’affaires (DGFiP)",
   [ApplicationRights.liensCapitalistiques]: "Lens capitalistiques (DGFiP)",

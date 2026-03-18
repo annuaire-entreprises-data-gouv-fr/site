@@ -25,7 +25,7 @@ export const getEffectifsAnnuelsProtected = async (
   return clientApiEntrepriseEffectifsAnnuels(
     siren,
     effectifsAnnuelsYear,
-    ApplicationRightsToScopes[ApplicationRights.effectifsAnnuels]
+    ApplicationRightsToScopes[ApplicationRights.effectifs]
   ).catch((error) =>
     handleApiEntrepriseError(error, {
       siren,
