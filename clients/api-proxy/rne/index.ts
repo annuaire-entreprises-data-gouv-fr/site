@@ -100,9 +100,14 @@ const mapToDomainObject = ({
 function mapObservationsToDomainObject(
   observations: IRNEObservationsFallbackProxyResponse
 ): IObservations {
-  return observations.map((observation) => ({
-    dateAjout: observation.dateAjout,
-    description: observation.description,
-    numObservation: observation.numObservation,
-  }));
+  return observations
+    .map((observation) => ({
+      dateAjout: observation.dateAjout,
+      description: observation.description,
+      numObservation: observation.numObservation,
+    }))
+    .sort(
+      (a, b) =>
+        new Date(b.dateAjout).getTime() - new Date(a.dateAjout).getTime()
+    );
 }
