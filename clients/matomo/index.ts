@@ -59,7 +59,7 @@ const getLabel = (labelAsString: string, index: number) => {
   if (labelAsString.indexOf("NAF/APE") > -1) {
     return "Code NAF/APE";
   }
-  if (index > 7) {
+  if (index > 7 || labelAsString.toLowerCase().indexOf("object") > -1) {
     return "Autre";
   }
   return labelAsString;
