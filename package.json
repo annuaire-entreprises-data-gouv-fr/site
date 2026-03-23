@@ -47,7 +47,7 @@
     "iron-session": "^8.0.4",
     "maplibre-gl": "^4.7.1",
     "matomo-tracker": "~2.2.4",
-    "next": "^16.1.6",
+    "next": "^16.2.1",
     "next-safe-action": "^8.0.11",
     "nuqs": "^2.8.9",
     "openid-client": "^5.7.1",
