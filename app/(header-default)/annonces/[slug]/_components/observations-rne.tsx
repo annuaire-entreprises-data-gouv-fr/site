@@ -9,6 +9,7 @@ import { Tag } from "#components-ui/tag";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
+import { formatDate } from "#utils/helpers";
 
 export const ObservationsRNE: React.FC<{
   uniteLegale: IUniteLegale;
@@ -44,7 +45,7 @@ export const ObservationsRNE: React.FC<{
             </p>
             <FullTable
               body={data.map((o) => [
-                o.dateAjout,
+                <strong>{formatDate(o.dateAjout)}</strong>,
                 o.numObservation ? <Tag>{o.numObservation}</Tag> : "",
                 o.description,
               ])}
