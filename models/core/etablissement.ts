@@ -138,6 +138,11 @@ const fetchFromClients = async (
   // default case
   return {
     ...etablissementInsee,
+    latitude:
+      etablissementInsee.latitude || etablissementRechercheEntreprise.latitude,
+    longitude:
+      etablissementInsee.longitude ||
+      etablissementRechercheEntreprise.longitude,
     complements: {
       ...etablissementInsee?.complements,
       ...etablissementRechercheEntreprise.complements,
