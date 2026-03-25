@@ -1,11 +1,24 @@
+import routes from "#clients/routes";
+import geoCommunes from "../../fixtures/geo-communes.json";
+
 const path = "/rechercher";
 
 describe("Search page", () => {
   it("Open advanced search page", () => {
+    cy.intercept("GET", `${routes.geo.communes}*`, geoCommunes).as(
+      "searchCommunes"
+    );
+    cy.intercept("GET", `${routes.geo.departements}*`, []).as(
+      "searchDepartements"
+    );
+    cy.intercept("GET", `${routes.geo.regions}*`, []).as("searchRegions");
+    cy.intercept("GET", `${routes.geo.epcis}*`, []).as("searchEpcis");
+
     cy.visit("/");
     cy.contains("recherche avancée").click();
     cy.contains("Zone géographique").click();
     cy.get("#geo-search-input").type("Nice");
+    cy.wait("@searchCommunes");
     cy.contains("Nice (06000)").click();
     cy.contains("Appliquer").click();
     cy.location().should((loc) => {

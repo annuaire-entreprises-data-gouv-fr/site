@@ -1,0 +1,17 @@
+{
+  "data": {
+    "siret": "13002526500013",
+    "effectifs_mensuels": [
+      {
+        "regime": "regime_general",
+        "value": 17.34,
+        "nature": "effectif_moyen_mensuel",
+        "annee": "2025",
+        "mois": "02",
+        "date_derniere_mise_a_jour": "2026-03-18"
+      }
+    ]
+  },
+  "links": {},
+  "meta": {}
+}

@@ -10,6 +10,7 @@ import { getChiffreAffairesProtected } from "#models/espace-agent/chiffre-affair
 import { getLiassesFiscalesProtected } from "#models/espace-agent/dgfip/liasses-fiscales";
 import { getDirigeantsProtected } from "#models/espace-agent/dirigeants-protected";
 import { getEffectifsAnnuelsProtected } from "#models/espace-agent/effectifs/annuels";
+import { getEffectifsMensuelsProtected } from "#models/espace-agent/effectifs/mensuels";
 import { getLiensCapitalistiquesProtected } from "#models/espace-agent/liens-capitalistiques";
 import { getDocumentsRNEProtected } from "#models/espace-agent/rne-protected/documents";
 import { getTravauxPublic } from "#models/espace-agent/travaux-publics";
@@ -36,6 +37,9 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.EspaceAgentAssociationProtected]: getAssociationProtected,
   [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]: withRateLimiting(
     getEffectifsAnnuelsProtected
+  ),
+  [APIRoutesPaths.EspaceAgentEffectifsMensuelsProtected]: withRateLimiting(
+    getEffectifsMensuelsProtected
   ),
   [APIRoutesPaths.EspaceAgentBilansProtected]: withRateLimiting(
     withUseCase(getBilansProtected)

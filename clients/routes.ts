@@ -61,6 +61,12 @@ const routes = {
     effectifs: {
       annuels: (siren: string, year: string | number) =>
         `/v3/gip_mds/unites_legales/${siren}/effectifs_annuels/${year}`,
+      mensuels: (
+        siret: string,
+        year: string | number,
+        month: string | number
+      ) =>
+        `/v3/gip_mds/etablissements/${siret}/effectifs_mensuels/${month}/annee/${year}`,
     },
   },
   ban: "https://data.geopf.fr/geocodage/search",

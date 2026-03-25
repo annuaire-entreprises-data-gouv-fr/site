@@ -32,6 +32,8 @@ export const APIRoutesScopes: Record<APIRoutesPaths, ApplicationRights> = {
     ApplicationRights.chiffreAffaires,
   [APIRoutesPaths.EspaceAgentEffectifsAnnuelsProtected]:
     ApplicationRights.effectifs,
+  [APIRoutesPaths.EspaceAgentEffectifsMensuelsProtected]:
+    ApplicationRights.effectifs,
   [APIRoutesPaths.EspaceAgentLiassesFiscalesProtected]:
     ApplicationRights.liassesFiscales,
   [APIRoutesPaths.EspaceAgentLiensCapitalistiquesProtected]:
