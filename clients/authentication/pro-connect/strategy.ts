@@ -4,7 +4,7 @@
 import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
 import { InternalError } from "#models/exceptions";
-import type { LoggerContext } from "#utils/logger-context";
+import { getLoggerContext } from "#utils/logger-context";
 import getSession from "#utils/server-side-helper/get-session";
 import type { IReqWithSession } from "#utils/session/with-session";
 import { ProConnect2FANeeded, ProConnectReconnexionNeeded } from "./exceptions";
@@ -114,14 +114,14 @@ export interface IProConnectUserInfo {
 }
 
 export const proConnectAuthenticate = async (
-  req: IReqWithSession,
-  loggerContext: LoggerContext
+  req: IReqWithSession
 ): Promise<IProConnectUserInfo> => {
+  const loggerContext = getLoggerContext();
   const client = await getClient();
 
   const params = client.callbackParams(req.nextUrl.toString());
 
-  loggerContext.setContext({
+  loggerContext?.setContext({
     "calls.proConnectAuthenticate.client.callbackParams": true,
     "proConnectAuthenticate.params.state":
       params.state?.slice(0, 8) ?? "non renseigné",
@@ -132,13 +132,13 @@ export const proConnectAuthenticate = async (
     state: req.session.state,
   });
 
-  loggerContext.setContext({
+  loggerContext?.setContext({
     "calls.proConnectAuthenticate.client.callback": true,
   });
 
   const used2FA = tokenSet.claims().amr?.includes("mfa");
 
-  loggerContext.setContext({
+  loggerContext?.setContext({
     "proConnectAuthenticate.used2FA": used2FA,
     "proConnectAuthenticate.tokenSet.claims.amr":
       tokenSet.claims().amr?.join(" ") ?? "non renseigné",
@@ -153,7 +153,7 @@ export const proConnectAuthenticate = async (
 
   const userInfo = (await client.userinfo(tokenSet)) as IProConnectUserInfo;
 
-  loggerContext.setContext({
+  loggerContext?.setContext({
     "calls.proConnectAuthenticate.client.userinfo": true,
     "proConnectAuthenticate.idp_id": userInfo.idp_id ?? "non renseigné",
   });
