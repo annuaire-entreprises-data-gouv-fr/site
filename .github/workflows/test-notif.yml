@@ -17,4 +17,4 @@ jobs:
           tchap-url: "${{ secrets.TCHAP_URL }}"
           tchap-token: "${{ secrets.TCHAP_TOKEN }}"
           trigger-notification: true
-          message: "Test Github Action"
+          message: "Test <strong>Github Action</strong>"
