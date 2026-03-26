@@ -1,0 +1,19 @@
+name: 'Test notification'
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-notif:
+    name: Test Tchap
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/notify@test-tchap
+        with:
+          tchap-url: "${{ secrets.TCHAP_URL }}"
+          tchap-token: "${{ secrets.TCHAP_TOKEN }}"
+          trigger-notification: true
+          message: "Test Github Action"
