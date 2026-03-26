@@ -19,10 +19,22 @@ import { cleanPathFrom, getPathFrom, setAgentSession } from "#utils/session";
 import withSession from "#utils/session/with-session";
 
 export const GET = withSession(async function callbackRoute(req) {
-  const loggerContext = new LoggerContext(
-    "/api/auth/agent-connect/callback",
-    "GET"
-  );
+  const loggerContext = new LoggerContext({
+    event: {
+      category: ["api", "agent", "authentication"],
+      action: "agent-connect",
+      type: "callback",
+    },
+    url: {
+      domain: req.nextUrl.host,
+      path: req.nextUrl.pathname,
+      full: req.nextUrl.toString(),
+    },
+    request: {
+      method: req.method,
+      requestId: req.headers.get("x-request-id") || "",
+    },
+  });
 
   try {
     loggerContext.setContext({
@@ -72,7 +84,7 @@ export const GET = withSession(async function callbackRoute(req) {
       path: "/",
     });
 
-    loggerContext.success();
+    loggerContext.success({});
 
     return response;
   } catch (e: any) {
@@ -96,20 +108,40 @@ export const GET = withSession(async function callbackRoute(req) {
         );
         url.searchParams.delete("login_hint");
 
-        loggerContext.error("ProConnect2FANeeded", e.message, {
-          "2FA.newAuthUrl": url.toString(),
+        loggerContext.error({
+          statusCode: 302,
+          error: {
+            message: e.message,
+            type: "ProConnect2FANeeded",
+          },
+          context: {
+            "2FA.newAuthUrl": url.toString(),
+          },
         });
 
         return NextResponse.redirect(newAuthUrl);
       } catch (e: any) {
-        loggerContext.error("ProConnectAuthorizeUrlError", e.message);
+        loggerContext.error({
+          statusCode: 302,
+          error: {
+            message: e.message,
+            type: "ProConnectAuthorizeUrlError",
+          },
+        });
+
+        return NextResponse.redirect(
+          getBaseUrl() + "/connexion/echec-connexion"
+        );
       }
     }
 
-    loggerContext.error(
-      e instanceof Error ? e.name : "Logger__Unknown",
-      e instanceof Error ? e.message : "Logger__Unknown"
-    );
+    loggerContext.error({
+      statusCode: 302,
+      error: {
+        message: e instanceof Error ? e.name : "Logger__Unknown",
+        type: e instanceof Error ? e.name : "Logger__Unknown",
+      },
+    });
 
     logFatalErrorInSentry(
       new AgentConnectionFailedException({
