@@ -23,7 +23,7 @@ jobs:
             host: SSH_STAGING_02
     steps:
       - uses: actions/checkout@v4
-      - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1
+      - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
         with:
           app-to-deploy: "annuaire-entreprises-site"
           app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
@@ -34,7 +34,8 @@ jobs:
           ssh-host: ${{ secrets[matrix.host] }}
           notify-on-failure: true
           notify-on-success: false
-          notify-webhook: ${{ secrets.DEV_EVENT_HOOK }}
+          tchap-url: ${{ secrets.TCHAP_URL }}
+          tchap-token: ${{ secrets.TCHAP_TOKEN }}
 
   deploy-production:
     name: Deploy - production
@@ -54,7 +55,7 @@ jobs:
             host: SSH_PRODUCTION_03
     steps:
       - uses: actions/checkout@v4
-      - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1
+      - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
         with:
           app-to-deploy: "annuaire-entreprises-site"
           app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
@@ -65,4 +66,5 @@ jobs:
           ssh-host: ${{ secrets[matrix.host] }}
           notify-on-failure: true
           notify-on-success: true
-          notify-webhook: ${{ secrets.DEV_EVENT_HOOK }}
+          tchap-url: ${{ secrets.TCHAP_URL }}
+          tchap-token: ${{ secrets.TCHAP_TOKEN }}
