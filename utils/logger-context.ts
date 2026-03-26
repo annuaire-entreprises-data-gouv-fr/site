@@ -1,3 +1,6 @@
+import { AsyncLocalStorage } from "node:async_hooks";
+import { randomUUID } from "node:crypto";
+
 type IContext = Record<string, string | number | boolean | null | undefined>;
 
 type Status = "success" | "failure" | "unknown";
@@ -38,8 +41,8 @@ const DEFAULT_P99_MS = 1000 * 60 * 5; // 5 minutes
 
 export class LoggerContext {
   private event: LoggerEvent;
-  private url: LoggerUrl | null = null;
-  private request: LoggerRequest | null = null;
+  private url: LoggerUrl;
+  private request: LoggerRequest;
   private user: LoggerUser | null = null;
   private startTimeMs: number;
   private p99Ms: number;
@@ -47,15 +50,17 @@ export class LoggerContext {
 
   constructor(options: {
     event: LoggerEvent;
-    url?: LoggerUrl;
-    request?: LoggerRequest;
+    url: LoggerUrl;
+    request: Omit<LoggerRequest, "requestId"> & {
+      requestId: LoggerRequest["requestId"] | null;
+    };
     user?: LoggerUser;
     p99Ms?: number;
   }) {
     const {
       event,
-      url = null,
-      request = null,
+      url,
+      request,
       user = null,
       p99Ms = DEFAULT_P99_MS,
     } = options;
@@ -63,7 +68,12 @@ export class LoggerContext {
     this.event = event;
     this.startTimeMs = Date.now();
     this.url = url;
-    this.request = request;
+    this.request = request.requestId
+      ? (request as LoggerRequest)
+      : {
+          ...request,
+          requestId: `auto-generated-${randomUUID()}`,
+        };
     this.user = user;
     this.p99Ms = p99Ms;
   }
@@ -206,3 +216,16 @@ export class LoggerContext {
     return false;
   }
 }
+
+const loggerContextStorage = new AsyncLocalStorage<LoggerContext>();
+
+export const runWithLoggerContext = <T>(
+  context: LoggerContext,
+  fn: () => T
+): T => {
+  return loggerContextStorage.run(context, fn);
+};
+
+export const getLoggerContext = (): LoggerContext | undefined => {
+  return loggerContextStorage.getStore();
+};
