@@ -4,6 +4,7 @@ permissions:
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   test-notif:
