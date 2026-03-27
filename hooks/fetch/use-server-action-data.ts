@@ -1,7 +1,7 @@
 import type {
-  InferInputOrDefault,
-  StandardSchemaV1,
-} from "next-safe-action/dist/index.types-BAk5ylmT.mjs";
+  A as InferInputOrDefault,
+  M as StandardSchemaV1,
+} from "next-safe-action/dist/index.types-D20K6znn.mjs";
 import { type HookSafeActionFn, useAction } from "next-safe-action/hooks";
 import { useEffect } from "react";
 import type { ServerActionError } from "server-actions/safe-action";

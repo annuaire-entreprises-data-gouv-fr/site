@@ -69,6 +69,7 @@ export const OpqibiSection: React.FC<{
                 <a
                   aria-label="Voir au certificat sur le site OPQIBI, nouvelle fenêtre"
                   href={opqibi.url}
+                  rel="noopener"
                   target="_blank"
                 >
                   Voir le certificat

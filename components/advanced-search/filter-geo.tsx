@@ -151,16 +151,7 @@ export const FilterGeo: React.FC<{
         value={typeDep}
       />
       <input name="cp_dep" onChange={() => {}} type="hidden" value={dep} />
-      {issue !== Issue.NONE ? (
-        issue === Issue.NORESULT ? (
-          <Info>Aucun résultat ne correspond à votre recherche.</Info>
-        ) : (
-          <Warning>
-            La recherche géographique est momentanément indisponible et devrait
-            fonctionner de nouveau dans quelques instants.
-          </Warning>
-        )
-      ) : (
+      {issue === Issue.NONE ? (
         <>
           {showSuggestsHistory &&
             !searchTerm &&
@@ -199,6 +190,13 @@ export const FilterGeo: React.FC<{
             )}
           </div>
         </>
+      ) : issue === Issue.NORESULT ? (
+        <Info>Aucun résultat ne correspond à votre recherche.</Info>
+      ) : (
+        <Warning>
+          La recherche géographique est momentanément indisponible et devrait
+          fonctionner de nouveau dans quelques instants.
+        </Warning>
       )}
 
       <style jsx>{`
