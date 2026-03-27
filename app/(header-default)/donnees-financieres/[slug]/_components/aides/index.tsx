@@ -1,5 +1,4 @@
 import AgentWallDocuments from "#components/espace-agent-components/agent-wall/document";
-import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import {
   ApplicationRights,
   hasRights,
@@ -17,20 +16,12 @@ export function AidesMinimis({
 }) {
   if (!hasRights(session, ApplicationRights.isAgent)) {
     return (
-      <>
-        <HorizontalSeparator />
-        <AgentWallDocuments
-          id="aides-minimis"
-          title="Aides Minimis"
-          uniteLegale={uniteLegale}
-        />
-      </>
+      <AgentWallDocuments
+        id="aides-minimis"
+        title="Aides Minimis"
+        uniteLegale={uniteLegale}
+      />
     );
   }
-  return (
-    <>
-      <HorizontalSeparator />
-      <AidesMinimisProtected session={session} uniteLegale={uniteLegale} />
-    </>
-  );
+  return <AidesMinimisProtected session={session} uniteLegale={uniteLegale} />;
 }
