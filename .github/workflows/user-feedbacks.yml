@@ -24,10 +24,10 @@ jobs:
         run: |
           npm i node-fetch && GRIST_TABLE=${{ secrets.GRIST_FEEDBACKS_TABLE }} GRIST_API_KEY=${{ secrets.GRIST_API_KEY }}  TCHAP_FEEDBACKS_URL=${{ secrets.TCHAP_FEEDBACKS_URL }} TCHAP_TOKEN=${{ secrets.TCHAP_TOKEN }} node ./scripts/feedbacks/index.mjs
 
-      - name: Notify failure
-        if: failure()
-        uses: ./.github/actions/notify
-        with:
-          message: '🚨 ${{ github.event.repository.name }} : feedback report failed'
-          tchap-url: ${{ secrets.TCHAP_FEEDBACKS_URL }}
-          tchap-token: ${{ secrets.TCHAP_TOKEN }}
+      # - name: Notify failure
+      #   if: failure()
+      #   uses: ./.github/actions/notify
+      #   with:
+      #     message: '🚨 ${{ github.event.repository.name }} : feedback report failed'
+      #     tchap-url: ${{ secrets.TCHAP_FEEDBACKS_URL }}
+      #     tchap-token: ${{ secrets.TCHAP_TOKEN }}
