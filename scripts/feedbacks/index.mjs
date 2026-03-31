@@ -139,12 +139,18 @@ async function run() {
   const data = await fetchFeedbacks();
   const text = generateReport(data);
 
-  const post = await fetch(process.env.HOOK, {
+  const post = await fetch(process.env.TCHAP_FEEDBACKS_URL, {
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.TCHAP_TOKEN}`,
     },
     method: "post",
-    body: JSON.stringify({ text }),
+    body: JSON.stringify({
+      format: "org.matrix.custom.html",
+      msgtype: "m.notice",
+      body: text,
+      formatted_body: text,
+    }),
   });
   if (!post.ok) {
     console.error(post.error);
