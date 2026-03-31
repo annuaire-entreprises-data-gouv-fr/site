@@ -121,7 +121,7 @@ function generatePlainTextReport({ yesterday, moods, feedbacks, avg }) {
   const rows = feedbacks
     .map(
       (f) =>
-        `${String(f.mood).padStart(2, " ")} | ${f.email} | ${f.userType} | "${f.text.replaceAll("\n", "").replaceAll("\r", "")}"`
+        `${String(f.mood).padStart(2, " ")} | "${f.text.replaceAll("\n", "").replaceAll("\r", "")}" | ${f.userType} | ${f.email}`
     )
     .join("\n");
 
@@ -135,7 +135,7 @@ ${generateAsciiGraph(moods)}
 
 Commentaires
 
-Note | Email | Type | Commentaire
+Note | Commentaire | Type | Email
 ${rows}`;
 }
 
@@ -145,7 +145,7 @@ function generateHtmlReport({ yesterday, moods, feedbacks, avg }) {
       const cleanText = escapeHtml(
         f.text.replaceAll("\n", "").replaceAll("\r", "")
       );
-      return `<tr><td>${f.mood}</td><td>${escapeHtml(f.email)}</td><td>${escapeHtml(f.userType)}</td><td>${cleanText}</td></tr>`;
+      return `<tr><td>${f.mood}</td><td>${cleanText}</td><td>${escapeHtml(f.userType)}</td><td>${escapeHtml(f.email)}</td></tr>`;
     })
     .join("");
 
@@ -154,7 +154,7 @@ function generateHtmlReport({ yesterday, moods, feedbacks, avg }) {
 <h2>Distribution</h2>
 <pre><code>${escapeHtml(generateAsciiGraph(moods))}</code></pre>
 <h2>Commentaires</h2>
-<table><thead><tr><th>Note</th><th>Email</th><th>Type</th><th>Commentaire</th></tr></thead><tbody>${feedbackRows}</tbody></table>`;
+<table><thead><tr><th>Note</th><th>Commentaire</th><th>Type</th><th>Email</th></tr></thead><tbody>${feedbackRows}</tbody></table>`;
 }
 
 async function run() {
