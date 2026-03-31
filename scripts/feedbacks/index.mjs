@@ -1,7 +1,6 @@
 import fetch from "node-fetch";
 
 function generateAsciiGraph(data) {
-  // Create a frequency map to count occurrences of each value
   const frequencyMap = data.reduce((acc, value) => {
     acc[value] = (acc[value] || 0) + 1;
     return acc;
@@ -70,22 +69,30 @@ function getYesterday() {
   ).padStart(2, "0")}-${String(yesterday.getDate()).padStart(2, "0")}`;
 }
 
-function generateReport(data) {
+function escapeHtml(text) {
+  return text
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function collectFeedbackData(data) {
   const yesterday = getYesterday();
 
   const moods = [];
   const feedbacks = [];
-  let avg = 0;
+  let total = 0;
 
-  data.forEach((record) => {
+  for (const record of data) {
     if (record.date !== yesterday) {
-      return;
+      continue;
     }
 
     const mood = Number.parseInt(record.mood, 10);
 
     if (mood === -1 || Number.isNaN(mood)) {
-      return;
+      continue;
     }
 
     let userType = record.visitorType;
@@ -98,53 +105,76 @@ function generateReport(data) {
     const { text, email } = record;
 
     moods.push(mood);
-    avg += mood;
+    total += mood;
 
     if (text) {
       feedbacks.push({ text, mood, email, userType });
     }
-  });
+  }
 
-  avg = (avg / moods.length).toFixed(2);
+  const avg = (total / moods.length).toFixed(2);
 
-  const report = `
-# Feedbacks reçus le ${yesterday}
+  return { yesterday, moods, feedbacks, avg };
+}
 
-Hier, nous avons reçu ${moods.length} feedbacks. La note moyenne est de ${avg};
+function generatePlainTextReport({ yesterday, moods, feedbacks, avg }) {
+  const rows = feedbacks
+    .map(
+      (f) =>
+        `${String(f.mood).padStart(2, " ")} | "${f.text.replaceAll("\n", "").replaceAll("\r", "")}" | ${f.userType} | ${f.email}`
+    )
+    .join("\n");
 
-## Distribution
+  return `Feedbacks reçus le ${yesterday}
 
-\`\`\`
+Hier, nous avons reçu ${moods.length} feedbacks. La note moyenne est de ${avg}.
+
+Distribution
+
 ${generateAsciiGraph(moods)}
-\`\`\`
 
-## Commentaires
+Commentaires
 
-| Note  | Email  | Type | Commentaire |
-| :------------ |:---------------:| :-----:|-----:|
-${feedbacks
-  .map(
-    (f) =>
-      `|${String(f.mood).padStart(2, " ")}| ${f.email} | ${
-        f.userType
-      } | "${f.text.replaceAll("\n", "").replaceAll("\r", "")}" |`
-  )
-  .join("\n")}
-  `;
+Note | Commentaire | Type | Email
+${rows}`;
+}
 
-  return report;
+function generateHtmlReport({ yesterday, moods, feedbacks, avg }) {
+  const feedbackRows = feedbacks
+    .map((f) => {
+      const cleanText = escapeHtml(
+        f.text.replaceAll("\n", "").replaceAll("\r", "")
+      );
+      return `<tr><td>${f.mood}</td><td>${cleanText}</td><td>${escapeHtml(f.userType)}</td><td>${escapeHtml(f.email)}</td></tr>`;
+    })
+    .join("");
+
+  return `<h1>Feedbacks reçus le ${escapeHtml(yesterday)}</h1>
+<p>Hier, nous avons reçu <b>${moods.length}</b> feedbacks. La note moyenne est de <b>${escapeHtml(avg)}</b>.</p>
+<h2>Distribution</h2>
+<pre><code>${escapeHtml(generateAsciiGraph(moods))}</code></pre>
+<h2>Commentaires</h2>
+<table><thead><tr><th>Note</th><th>Commentaire</th><th>Type</th><th>Email</th></tr></thead><tbody>${feedbackRows}</tbody></table>`;
 }
 
 async function run() {
   const data = await fetchFeedbacks();
-  const text = generateReport(data);
+  const feedbackData = collectFeedbackData(data);
+  const body = generatePlainTextReport(feedbackData);
+  const formattedBody = generateHtmlReport(feedbackData);
 
-  const post = await fetch(process.env.HOOK, {
+  const post = await fetch(process.env.TCHAP_FEEDBACKS_URL, {
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.TCHAP_TOKEN}`,
     },
     method: "post",
-    body: JSON.stringify({ text }),
+    body: JSON.stringify({
+      format: "org.matrix.custom.html",
+      msgtype: "m.notice",
+      body,
+      formatted_body: formattedBody,
+    }),
   });
   if (!post.ok) {
     console.error(post.error);
