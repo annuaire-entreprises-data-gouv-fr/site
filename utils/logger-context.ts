@@ -12,9 +12,9 @@ interface LoggerEvent {
 }
 
 interface LoggerUrl {
-  domain: string;
-  full: string;
-  path: string;
+  method?: string;
+  params?: Record<string, string>;
+  url: string;
 }
 
 interface LoggerRequest {
@@ -50,7 +50,9 @@ export class LoggerContext {
 
   constructor(options: {
     event: LoggerEvent;
-    url: LoggerUrl;
+    url: Omit<LoggerUrl, "params"> & {
+      params: LoggerUrl["params"] | URLSearchParams | null;
+    };
     request: Omit<LoggerRequest, "requestId"> & {
       requestId: LoggerRequest["requestId"] | null;
     };
@@ -67,7 +69,15 @@ export class LoggerContext {
 
     this.event = event;
     this.startTimeMs = Date.now();
-    this.url = url;
+    this.url = {
+      url: url.url,
+      method: url.method,
+      params: url.params
+        ? url.params instanceof URLSearchParams
+          ? Object.fromEntries(url.params.entries())
+          : url.params
+        : undefined,
+    };
     this.request = request.requestId
       ? (request as LoggerRequest)
       : {
@@ -90,12 +100,14 @@ export class LoggerContext {
     return this.context[key];
   }
 
-  public success(options: {
-    service?: LoggerService;
-    statusCode?: number;
-    startTimeMs?: number;
-    context?: Partial<IContext>;
-  }) {
+  public success(
+    options: {
+      service?: LoggerService;
+      statusCode?: number;
+      startTimeMs?: number;
+      context?: Partial<IContext>;
+    } = {}
+  ) {
     const {
       service = null,
       statusCode = 200,
@@ -188,14 +200,50 @@ export class LoggerContext {
         duration: this.getDurationMs(endTimeMs),
       },
       http: {
-        ...(this.request ? { request: this.request } : {}),
+        ...(this.request
+          ? {
+              request: {
+                method: this.request.method.toUpperCase(),
+                requestId: this.request.requestId,
+              },
+            }
+          : {}),
         response: {
           status_code: statusCode,
         },
       },
-      ...(this.url ? { url: this.url } : {}),
+      ...(this.url
+        ? {
+            url: {
+              path: this.getPath(this.url.url),
+              domain: this.getDomain(this.url.url),
+              full: this.getFullUrl(this.url.url, this.url.params),
+              method: this.url.method?.toUpperCase(),
+            },
+          }
+        : {}),
       ...(error ? { error } : {}),
-      ...(service ? { service } : {}),
+      ...(service
+        ? {
+            service: {
+              name: service.name,
+              type: service.type,
+              ...(service.url
+                ? {
+                    url: {
+                      path: this.getPath(service.url.url),
+                      domain: this.getDomain(service.url.url),
+                      full: this.getFullUrl(
+                        service.url.url,
+                        service.url.params
+                      ),
+                      method: service.url.method?.toUpperCase(),
+                    },
+                  }
+                : {}),
+            },
+          }
+        : {}),
       ...(this.user ? { user: this.user } : {}),
       labels: { ...this.context, ...context },
     };
@@ -214,6 +262,30 @@ export class LoggerContext {
       return true;
     }
     return false;
+  }
+
+  private getPath(url: string) {
+    try {
+      return new URL(url).pathname;
+    } catch (e) {
+      return url;
+    }
+  }
+
+  private getDomain(url: string) {
+    try {
+      return new URL(url).hostname;
+    } catch (e) {
+      return "unknown";
+    }
+  }
+
+  private getFullUrl(url: string, params: any) {
+    try {
+      return url + (params ? `?${new URLSearchParams(params).toString()}` : "");
+    } catch (e) {
+      return url;
+    }
   }
 }
 
