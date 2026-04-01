@@ -26,9 +26,8 @@ export const GET = withSession(async function callbackRoute(req) {
       type: "callback",
     },
     url: {
-      domain: req.nextUrl.host,
-      path: req.nextUrl.pathname,
-      full: req.nextUrl.toString(),
+      url: req.nextUrl.toString(),
+      params: req.nextUrl.searchParams,
     },
     request: {
       method: req.method,
@@ -85,7 +84,7 @@ export const GET = withSession(async function callbackRoute(req) {
         path: "/",
       });
 
-      loggerContext.success({});
+      loggerContext.success();
 
       return response;
     } catch (e: unknown) {
