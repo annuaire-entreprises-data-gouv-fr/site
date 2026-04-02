@@ -76,11 +76,13 @@ export default function AidesMinimisProtected({
     () => ({ siren: uniteLegale.siren, page: currentPage }),
     [uniteLegale.siren, currentPage]
   );
+
   const aidesMinimis = useServerActionData(
     getAgentAidesMinimisAction,
     session,
     input
   );
+
   return (
     <AsyncDataSectionClient
       data={aidesMinimis}

@@ -1,11 +1,15 @@
 import AgentWallDocuments from "#components/espace-agent-components/agent-wall/document";
-import { HorizontalSeparator } from "#components-ui/horizontal-separator";
+import { Section } from "#components/section";
+import { EAdministration } from "#models/administrations/EAdministration";
 import {
   ApplicationRights,
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
-import type { IUniteLegale } from "#models/core/types";
+import {
+  hasAidesMinimisRenseignees,
+  type IUniteLegale,
+} from "#models/core/types";
 import AidesMinimisProtected from "./protected-aides-minimis";
 
 export function AidesMinimis({
@@ -17,20 +21,29 @@ export function AidesMinimis({
 }) {
   if (!hasRights(session, ApplicationRights.isAgent)) {
     return (
-      <>
-        <HorizontalSeparator />
-        <AgentWallDocuments
-          id="aides-minimis"
-          title="Aides Minimis"
-          uniteLegale={uniteLegale}
-        />
-      </>
+      <AgentWallDocuments
+        id="aides-minimis"
+        title="Aides Minimis"
+        uniteLegale={uniteLegale}
+      />
     );
   }
-  return (
-    <>
-      <HorizontalSeparator />
-      <AidesMinimisProtected session={session} uniteLegale={uniteLegale} />
-    </>
-  );
+
+  if (!hasAidesMinimisRenseignees(uniteLegale)) {
+    return (
+      <Section
+        id="aides-minimis"
+        isProtected
+        sources={[EAdministration.DINUM]}
+        title="Aides Minimis"
+      >
+        <p>
+          En raison de l’incomplétude du jeu de données, il est impossible de
+          savoir si cette entreprise a reçu des aides de Minimis.
+        </p>
+      </Section>
+    );
+  }
+
+  return <AidesMinimisProtected session={session} uniteLegale={uniteLegale} />;
 }
