@@ -58,6 +58,7 @@ interface IPeriodeUniteLegale {
   activitePrincipaleUniteLegale: string;
   caractereEmployeurUniteLegale: string;
   categorieJuridiqueUniteLegale: string;
+  changementEtatAdministratifUniteLegale: boolean;
   dateDebut: string;
   denominationUniteLegale: string;
   economieSocialeSolidaireUniteLegale: string | null;
@@ -221,6 +222,16 @@ const mapToDomainObject = (
     siren
   );
 
+  // get last state change to obtain closing date
+  const lastStateChange =
+    periodesUniteLegale.find(
+      (periode) => periode.changementEtatAdministratifUniteLegale === true
+    ) || periodesUniteLegale[0];
+
+  const dateFermeture = estActif({ etatAdministratif })
+    ? ""
+    : lastStateChange.dateDebut;
+
   return {
     uniteLegale: {
       ...defaultUniteLegale,
@@ -247,7 +258,7 @@ const mapToDomainObject = (
       dateMiseAJourInsee: dateDernierTraitement,
       dateMiseAJourInpi: "",
       dateDebutActivite: dateDebut,
-      dateFermeture: estActif({ etatAdministratif }) ? "" : dateDebut,
+      dateFermeture,
       etatAdministratif,
       statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
         statutDiffusionUniteLegale,
