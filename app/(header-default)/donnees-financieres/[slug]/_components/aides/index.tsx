@@ -38,8 +38,8 @@ export function AidesMinimis({
         title="Aides Minimis"
       >
         <p>
-          Les données relatives aux aides de minimis ne sont pas disponibles
-          pour cette entreprise, le jeu de données étant incomplet.
+          En raison de l’incomplétude du jeu de données, il est impossible de
+          savoir si cette entreprise a reçu des aides de Minimis.
         </p>
       </Section>
     );
