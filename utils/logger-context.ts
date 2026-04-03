@@ -1,24 +1,90 @@
+import { AsyncLocalStorage } from "node:async_hooks";
+import { randomUUID } from "node:crypto";
+
 type IContext = Record<string, string | number | boolean | null | undefined>;
+
+type Status = "success" | "failure" | "unknown";
+
+interface LoggerEvent {
+  action: string;
+  category: string[];
+  type: string;
+}
+
+interface LoggerUrl {
+  method?: string;
+  params?: Record<string, string>;
+  url: string;
+}
+
+interface LoggerRequest {
+  method: string;
+  requestId: string;
+}
+
+interface LoggerError {
+  message: string;
+  type: string;
+}
+
+interface LoggerService {
+  name: string;
+  type: string;
+  url: LoggerUrl;
+}
+
+interface LoggerUser {
+  id: string;
+}
 
 const DEFAULT_P99_MS = 1000 * 60 * 5; // 5 minutes
 
 export class LoggerContext {
-  private name: string;
-  private method: string | null = null;
+  private event: LoggerEvent;
+  private url: LoggerUrl;
+  private request: LoggerRequest;
+  private user: LoggerUser | null = null;
   private startTimeMs: number;
-  private endTimeMs: number | null = null;
-  private status: "success" | "error" | "pending" = "pending";
   private p99Ms: number;
   private context: IContext = {};
 
-  constructor(
-    name: string,
-    method: string | null = null,
-    p99Ms: number = DEFAULT_P99_MS
-  ) {
-    this.name = name;
+  constructor(options: {
+    event: LoggerEvent;
+    url: Omit<LoggerUrl, "params"> & {
+      params: LoggerUrl["params"] | URLSearchParams | null;
+    };
+    request: Omit<LoggerRequest, "requestId"> & {
+      requestId: LoggerRequest["requestId"] | null;
+    };
+    user?: LoggerUser;
+    p99Ms?: number;
+  }) {
+    const {
+      event,
+      url,
+      request,
+      user = null,
+      p99Ms = DEFAULT_P99_MS,
+    } = options;
+
+    this.event = event;
     this.startTimeMs = Date.now();
-    this.method = method;
+    this.url = {
+      url: url.url,
+      method: url.method,
+      params: url.params
+        ? url.params instanceof URLSearchParams
+          ? Object.fromEntries(url.params.entries())
+          : url.params
+        : undefined,
+    };
+    this.request = request.requestId
+      ? (request as LoggerRequest)
+      : {
+          ...request,
+          requestId: `auto-generated-${randomUUID()}`,
+        };
+    this.user = user;
     this.p99Ms = p99Ms;
   }
 
@@ -34,58 +100,204 @@ export class LoggerContext {
     return this.context[key];
   }
 
-  public success(context: Partial<IContext> = {}) {
-    this.status = "success";
-    this.endTimeMs = Date.now();
-    this.context = { ...this.context, ...context };
-
-    if (this.shouldLog()) {
-      console.info(JSON.stringify(this.toJSON()));
-    }
-  }
-
-  public error(
-    errorName: string,
-    errorMessage: string,
-    context: Partial<IContext> = {}
+  public success(
+    options: {
+      service?: LoggerService;
+      statusCode?: number;
+      startTimeMs?: number;
+      context?: Partial<IContext>;
+    } = {}
   ) {
-    this.status = "error";
-    this.endTimeMs = Date.now();
-    this.context = { ...this.context, ...context, errorName, errorMessage };
+    const {
+      service = null,
+      statusCode = 200,
+      startTimeMs = this.startTimeMs,
+      context = {},
+    } = options;
 
-    if (this.shouldLog()) {
-      console.error(JSON.stringify(this.toJSON()));
+    const endTimeMs = Date.now();
+
+    if (this.shouldLog(false, endTimeMs)) {
+      console.info(
+        JSON.stringify(
+          this.toJSON({
+            status: "success",
+            statusCode,
+            endTimeMs,
+            startTimeMs,
+            context,
+            service,
+            error: null,
+          })
+        )
+      );
     }
   }
 
-  private get durationMs() {
-    return this.endTimeMs ? this.endTimeMs - this.startTimeMs : null;
+  public error(options: {
+    error: LoggerError;
+    statusCode: number;
+    service?: LoggerService;
+    startTimeMs?: number;
+    context?: Partial<IContext>;
+  }) {
+    const {
+      error,
+      statusCode,
+      service = null,
+      startTimeMs = this.startTimeMs,
+      context = {},
+    } = options;
+    const endTimeMs = Date.now();
+
+    if (this.shouldLog(true, endTimeMs)) {
+      console.error(
+        JSON.stringify(
+          this.toJSON({
+            status: "failure",
+            statusCode,
+            error,
+            service,
+            context,
+            startTimeMs,
+            endTimeMs,
+          })
+        )
+      );
+    }
   }
 
-  private toJSON() {
+  private getDurationMs(endTimeMs: number) {
+    return endTimeMs - this.startTimeMs;
+  }
+
+  private toJSON(result: {
+    status: Status;
+    statusCode: number;
+    startTimeMs?: number;
+    endTimeMs: number;
+    error: LoggerError | null;
+    service: LoggerService | null;
+    context: IContext;
+  }) {
+    const {
+      status,
+      statusCode,
+      startTimeMs,
+      endTimeMs,
+      error,
+      service,
+      context,
+    } = result;
+
     return {
-      name: this.name,
-      method: this.method,
-      startTime: this.startTimeMs,
-      endTime: this.endTimeMs,
-      duration: this.durationMs,
-      status: this.status,
-      context: this.context,
+      "@timestamp": this.startTimeMs,
+      event: {
+        ...this.event,
+        outcome: status,
+        start: startTimeMs ?? this.startTimeMs,
+        end: endTimeMs,
+        duration: this.getDurationMs(endTimeMs),
+      },
+      http: {
+        ...(this.request
+          ? {
+              request: {
+                method: this.request.method.toUpperCase(),
+                requestId: this.request.requestId,
+              },
+            }
+          : {}),
+        response: {
+          status_code: statusCode,
+        },
+      },
+      ...(this.url
+        ? {
+            url: {
+              path: this.getPath(this.url.url),
+              domain: this.getDomain(this.url.url),
+              full: this.getFullUrl(this.url.url, this.url.params),
+              method: this.url.method?.toUpperCase(),
+            },
+          }
+        : {}),
+      ...(error ? { error } : {}),
+      ...(service
+        ? {
+            service: {
+              name: service.name,
+              type: service.type,
+              ...(service.url
+                ? {
+                    url: {
+                      path: this.getPath(service.url.url),
+                      domain: this.getDomain(service.url.url),
+                      full: this.getFullUrl(
+                        service.url.url,
+                        service.url.params
+                      ),
+                      method: service.url.method?.toUpperCase(),
+                    },
+                  }
+                : {}),
+            },
+          }
+        : {}),
+      ...(this.user ? { user: this.user } : {}),
+      labels: { ...this.context, ...context },
     };
   }
 
-  private shouldLog() {
+  private shouldLog(isFailure: boolean, endTimeMs: number) {
     // Always log the errors
-    if (this.status === "error") {
+    if (isFailure) {
       return true;
     }
 
-    const isAboveP99Ms = !!this.durationMs && this.durationMs > this.p99Ms;
+    const isAboveP99Ms = this.getDurationMs(endTimeMs) > this.p99Ms;
 
     // If the duration is above the p99Ms or 5% of the time, log the success
-    if (this.status === "success" && (isAboveP99Ms || Math.random() < 0.05)) {
+    if (!isFailure && (isAboveP99Ms || Math.random() < 0.05)) {
       return true;
     }
     return false;
   }
+
+  private getPath(url: string) {
+    try {
+      return new URL(url).pathname;
+    } catch (e) {
+      return url;
+    }
+  }
+
+  private getDomain(url: string) {
+    try {
+      return new URL(url).hostname;
+    } catch (e) {
+      return "unknown";
+    }
+  }
+
+  private getFullUrl(url: string, params: any) {
+    try {
+      return url + (params ? `?${new URLSearchParams(params).toString()}` : "");
+    } catch (e) {
+      return url;
+    }
+  }
 }
+
+const loggerContextStorage = new AsyncLocalStorage<LoggerContext>();
+
+export const runWithLoggerContext = <T>(
+  context: LoggerContext,
+  fn: () => T
+): T => {
+  return loggerContextStorage.run(context, fn);
+};
+
+export const getLoggerContext = (): LoggerContext | undefined => {
+  return loggerContextStorage.getStore();
+};
