@@ -194,7 +194,7 @@ export function FinancesSocieteChartAndTable({
             tooltip: {
               callbacks: {
                 label(tooltipItem) {
-                  return formatCurrency(tooltipItem.parsed.y.toString());
+                  return formatCurrency(tooltipItem.parsed.y?.toString());
                 },
               },
             },

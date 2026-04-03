@@ -10,7 +10,7 @@ import { type Exception, FetchRessourceException } from "#models/exceptions";
 function getScope(exception: Exception, scope: Scope) {
   Object.entries(exception.context).forEach(([key, value]) => {
     try {
-      value = (value || "N/A").substring(0, 195);
+      value = (value || "N/A").slice(0, 195);
       scope.setTag(key, value);
     } catch {
       scope.setTag(key, "Serialization failed");

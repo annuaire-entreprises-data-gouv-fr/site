@@ -74,7 +74,7 @@ const loadBarFactory = () => {
     _currentJobId: "",
     _loader: null as HTMLElement | null,
     async _run(step: number) {
-      const jobId = Math.random().toString(16).substring(7);
+      const jobId = Math.random().toString(16).slice(7);
 
       this._currentJobId = jobId;
       if (!this._loader) {

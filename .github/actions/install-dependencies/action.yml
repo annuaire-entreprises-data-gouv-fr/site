@@ -13,9 +13,9 @@ runs:
       with:
         # Cache node_modules. To cache global, you may try ~/.npm
         path: ./node_modules
-        key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-npm-cache-${{ env.node-version }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-npm-cache-
+          ${{ runner.os }}-npm-cache-${{ env.node-version }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
     - name: Install dependencies
