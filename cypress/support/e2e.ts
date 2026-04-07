@@ -21,7 +21,10 @@ import "./commands";
 
 Cypress.on("uncaught:exception", (err) => {
   // we don't fail e2e tests on hydration errors
-  if (err.message.includes("Minified React error #418")) {
+  if (
+    err.message.includes("Minified React error #418") ||
+    err.message.includes("Hydration failed")
+  ) {
     return false;
   }
   // we still want to ensure there are no other unexpected
