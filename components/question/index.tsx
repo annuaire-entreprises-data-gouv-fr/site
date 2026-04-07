@@ -8,6 +8,7 @@ export function Question() {
       <Link
         aria-label="Une question ? Accéder à la FAQ."
         className="no-style-link"
+        data-floating-question
         data-test-id="question-faq"
         href="/faq"
       >
