@@ -6,6 +6,7 @@ import { Header } from "#components/header/header";
 import { meta } from "#components/meta/meta";
 import { Question } from "#components/question";
 import SocialNetworks from "#components/social-network";
+import { BackToTop } from "#components-ui/back-to-top";
 
 export const metadata: Metadata = meta({});
 
@@ -23,6 +24,7 @@ export default function LayoutWithSearchBar({
       <SocialNetworks />
       <Question />
       <Footer />
+      <BackToTop />
     </>
   );
 }
