@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 08/04/2026
+  target:
+    site: true
+  body: |
+    Ajout d'un bouton permettant de revenir facilement en haut de la page lorsque le contenu est long.
 - date: 18/03/2026
   target:
     agent: true
