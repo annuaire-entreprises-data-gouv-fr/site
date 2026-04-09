@@ -21,7 +21,7 @@ export const clientEgaproRepresentationEquilibre = async (
 
   const dataSearch = responseSearchApi?.data;
 
-  if (!dataSearch || !dataSearch?.length) {
+  if (!dataSearch?.length) {
     throw new HttpNotFound(
       `Cannot found egapro data associate to siren : ${siren}`
     );

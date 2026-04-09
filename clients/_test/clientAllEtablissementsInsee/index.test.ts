@@ -16,13 +16,13 @@ describe("clientAllEtablissementsInsee", () => {
 
 function expectClientToMatchSnapshotWithSiren(siren: string, page = 1) {
   it(`Should match snapshot with siren ${siren}${
-    page !== 1 ? " and page " + page : ""
+    page === 1 ? "" : " and page " + page
   }`, async () => {
     await expectClientToMatchSnapshot({
       __dirname,
       client: clientAllEtablissementsInsee,
       args: [siren, page, false],
-      snapshotFile: `siren-${siren}${page !== 1 ? "-page-" + page : ""}.json`,
+      snapshotFile: `siren-${siren}${page === 1 ? "" : "-page-" + page}.json`,
       simplifyParams,
       postProcessResult: (result) => {
         result.list.forEach((etablissement) => {

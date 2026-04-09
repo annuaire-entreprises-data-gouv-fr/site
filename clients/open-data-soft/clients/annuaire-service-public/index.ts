@@ -137,7 +137,7 @@ function mapToServicesId(hierarchieSerialized: string): string[] {
     | IServices[]
     | null;
 
-  if (!hierarchie || !hierarchie.length) {
+  if (!hierarchie?.length) {
     return [];
   }
   return hierarchie.map((service) => service.service);
@@ -151,7 +151,7 @@ function mapToAffectationPersonne(
     | IAffectationRecord[]
     | null;
 
-  if (!affectations || !affectations.length) {
+  if (!affectations?.length) {
     return null;
   }
   return affectations.map((affectation) => ({
