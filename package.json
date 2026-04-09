@@ -41,7 +41,7 @@
     "chart.js": "^4.5.0",
     "clsx": "^2.1.1",
     "crawler-user-agents": "^1.27.0",
-    "cssnano": "^6.1.2",
+    "cssnano": "^7.1.4",
     "dotenv": "^16.4.5",
     "fast-xml-parser": "^5.5.10",
     "iron-session": "^8.0.4",
