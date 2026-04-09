@@ -12,7 +12,10 @@ import {
   OrganisationNotAnAdministration,
   PrestataireException,
 } from "#models/authentication/authentication-exceptions";
-import { LoggerContext, runWithLoggerContext } from "#utils/logger-context";
+import {
+  LoggerContext,
+  runWithLoggerContext,
+} from "#utils/logger/logger-context";
 import { logFatalErrorInSentry, logInfoInSentry } from "#utils/sentry";
 import { getBaseUrl } from "#utils/server-side-helper/get-base-url";
 import { cleanPathFrom, getPathFrom, setAgentSession } from "#utils/session";
