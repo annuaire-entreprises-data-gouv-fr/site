@@ -30,7 +30,10 @@ import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#utils/helpers";
-import { runPageWithLogger } from "#utils/logger/page-with-logger";
+import {
+  runGenerateMetadataWithLogger,
+  runPageWithLogger,
+} from "#utils/logger/page-with-logger";
 import { cachedGetUniteLegale } from "#utils/server-side-helper/cached-methods";
 import extractParamsAppRouter, {
   type AppRouterProps,
@@ -40,19 +43,27 @@ import getSession from "#utils/server-side-helper/get-session";
 export const generateMetadata = async (
   props: AppRouterProps
 ): Promise<Metadata> => {
-  const { slug, page, isBot } = await extractParamsAppRouter(props);
+  return runGenerateMetadataWithLogger(
+    props,
+    async () => {
+      const { slug, page, isBot } = await extractParamsAppRouter(props);
 
-  const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
-  return {
-    title: uniteLegalePageTitle(uniteLegale),
-    description: uniteLegalePageDescription(uniteLegale),
-    robots: shouldNotIndex(uniteLegale) ? "noindex, nofollow" : "index, follow",
-    ...(uniteLegale.chemin && {
-      alternates: {
-        canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`,
-      },
-    }),
-  };
+      const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
+      return {
+        title: uniteLegalePageTitle(uniteLegale),
+        description: uniteLegalePageDescription(uniteLegale),
+        robots: shouldNotIndex(uniteLegale)
+          ? "noindex, nofollow"
+          : "index, follow",
+        ...(uniteLegale.chemin && {
+          alternates: {
+            canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`,
+          },
+        }),
+      };
+    },
+    "/entreprise/[slug]"
+  );
 };
 
 export default async function UniteLegalePage(props: AppRouterProps) {
