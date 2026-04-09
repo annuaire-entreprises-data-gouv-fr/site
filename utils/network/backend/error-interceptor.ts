@@ -1,6 +1,6 @@
 import type { AxiosError, AxiosResponse } from "axios";
 import axios from "axios";
-import { getLoggerContext } from "#utils/logger-context";
+import { getLoggerContext } from "#utils/logger/logger-context";
 import { formatLog } from "../utils/format-log";
 import { httpErrorHandler } from "../utils/http-error-handler";
 

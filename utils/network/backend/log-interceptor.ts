@@ -1,5 +1,5 @@
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import { getLoggerContext } from "#utils/logger-context";
+import { getLoggerContext } from "#utils/logger/logger-context";
 import { formatLog } from "../utils/format-log";
 
 /**

@@ -30,6 +30,7 @@ import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#utils/helpers";
+import { runPageWithLogger } from "#utils/logger/page-with-logger";
 import { cachedGetUniteLegale } from "#utils/server-side-helper/cached-methods";
 import extractParamsAppRouter, {
   type AppRouterProps,
@@ -55,87 +56,96 @@ export const generateMetadata = async (
 };
 
 export default async function UniteLegalePage(props: AppRouterProps) {
-  const { slug, page, isBot, isRedirected } =
-    await extractParamsAppRouter(props);
-  const session = await getSession();
-  const [uniteLegale, sourcesLastModified] = await Promise.all([
-    cachedGetUniteLegale(slug, isBot, page),
-    getRechercheEntrepriseSourcesLastModified(),
-  ]);
+  return runPageWithLogger(
+    props,
+    async () => {
+      const { slug, page, isBot, isRedirected } =
+        await extractParamsAppRouter(props);
+      const session = await getSession();
+      const [uniteLegale, sourcesLastModified] = await Promise.all([
+        cachedGetUniteLegale(slug, isBot, page),
+        getRechercheEntrepriseSourcesLastModified(),
+      ]);
 
-  // We redirect from /entreprise/${siren} to /entreprise/${chemin}
-  // Nb: in somes cases, there can be a two redirects :
-  // /rechercher?terme=${siren} -> /entreprise/${siren}?redirected=1 -> /entreprise/${chemin}?redirected=1
-  if (
-    uniteLegale.chemin &&
-    uniteLegale.chemin !== slug &&
-    uniteLegale.chemin !== uniteLegale.siren
-  ) {
-    const searchParams = await props.searchParams;
-    const queryString = new URLSearchParams(
-      searchParams as Record<string, string>
-    ).toString();
-    permanentRedirect(
-      `/entreprise/${uniteLegale.chemin}${queryString ? `?${queryString}` : ""}`
-    );
-  }
+      // We redirect from /entreprise/${siren} to /entreprise/${chemin}
+      // Nb: in somes cases, there can be a two redirects :
+      // /rechercher?terme=${siren} -> /entreprise/${siren}?redirected=1 -> /entreprise/${chemin}?redirected=1
+      if (
+        uniteLegale.chemin &&
+        uniteLegale.chemin !== slug &&
+        uniteLegale.chemin !== uniteLegale.siren
+      ) {
+        const searchParams = await props.searchParams;
+        const queryString = new URLSearchParams(
+          searchParams as Record<string, string>
+        ).toString();
+        permanentRedirect(
+          `/entreprise/${uniteLegale.chemin}${queryString ? `?${queryString}` : ""}`
+        );
+      }
 
-  return (
-    <>
-      {isRedirected && (
-        <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />
-      )}
-      <div className="content-container">
-        <Title
-          ficheType={FICHE.INFORMATION}
-          session={session}
-          uniteLegale={uniteLegale}
-        />
-        {estNonDiffusibleStrict(uniteLegale) ? (
-          <NonDiffusibleStrictSection />
-        ) : (
-          <>
-            <UniteLegaleSummarySection
+      return (
+        <>
+          {isRedirected && (
+            <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />
+          )}
+          <div className="content-container">
+            <Title
+              ficheType={FICHE.INFORMATION}
               session={session}
               uniteLegale={uniteLegale}
             />
-            {hasRights(session, ApplicationRights.isAgent) && (
-              <EspaceAgentSummarySection
-                session={session}
-                uniteLegale={uniteLegale}
-              />
+            {estNonDiffusibleStrict(uniteLegale) ? (
+              <NonDiffusibleStrictSection />
+            ) : (
+              <>
+                <UniteLegaleSummarySection
+                  session={session}
+                  uniteLegale={uniteLegale}
+                />
+                {hasRights(session, ApplicationRights.isAgent) && (
+                  <EspaceAgentSummarySection
+                    session={session}
+                    uniteLegale={uniteLegale}
+                  />
+                )}
+                {uniteLegale.dateMiseAJourInpi && (
+                  <UniteLegaleImmatriculationSection
+                    rneLastModified={sourcesLastModified.rne}
+                    session={session}
+                    uniteLegale={uniteLegale}
+                  />
+                )}
+                {isCollectiviteTerritoriale(uniteLegale) && (
+                  <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
+                )}
+                {isServicePublic(uniteLegale) && (
+                  <ServicePublicSection uniteLegale={uniteLegale} />
+                )}
+                {!isBot && isAssociation(uniteLegale) && (
+                  <AssociationSection
+                    session={session}
+                    uniteLegale={uniteLegale}
+                  />
+                )}
+                <HorizontalSeparator />
+                {uniteLegale.siege && (
+                  <EtablissementSection
+                    etablissement={uniteLegale.siege}
+                    session={session}
+                    uniteLegale={uniteLegale}
+                    usedInEntreprisePage={true}
+                    withDenomination={false}
+                  />
+                )}
+                <EtablissementListeSection uniteLegale={uniteLegale} />
+              </>
             )}
-            {uniteLegale.dateMiseAJourInpi && (
-              <UniteLegaleImmatriculationSection
-                rneLastModified={sourcesLastModified.rne}
-                session={session}
-                uniteLegale={uniteLegale}
-              />
-            )}
-            {isCollectiviteTerritoriale(uniteLegale) && (
-              <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
-            )}
-            {isServicePublic(uniteLegale) && (
-              <ServicePublicSection uniteLegale={uniteLegale} />
-            )}
-            {!isBot && isAssociation(uniteLegale) && (
-              <AssociationSection session={session} uniteLegale={uniteLegale} />
-            )}
-            <HorizontalSeparator />
-            {uniteLegale.siege && (
-              <EtablissementSection
-                etablissement={uniteLegale.siege}
-                session={session}
-                uniteLegale={uniteLegale}
-                usedInEntreprisePage={true}
-                withDenomination={false}
-              />
-            )}
-            <EtablissementListeSection uniteLegale={uniteLegale} />
-          </>
-        )}
-      </div>
-      <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
-    </>
+          </div>
+          <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
+        </>
+      );
+    },
+    "/entreprise/[slug]"
   );
 }

@@ -4,7 +4,7 @@
 import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#clients/exceptions";
 import { InternalError } from "#models/exceptions";
-import { getLoggerContext } from "#utils/logger-context";
+import { getLoggerContext } from "#utils/logger/logger-context";
 import getSession from "#utils/server-side-helper/get-session";
 import type { IReqWithSession } from "#utils/session/with-session";
 import { ProConnect2FANeeded, ProConnectReconnexionNeeded } from "./exceptions";
