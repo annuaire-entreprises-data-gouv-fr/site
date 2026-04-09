@@ -15,7 +15,7 @@ import type {
 
 const cachedGetDefinition = cache((slug: string) => {
   const definition = getDefinition(slug);
-  if (!definition || !definition.body || !definition.title) {
+  if (!definition?.body || !definition.title) {
     // should not happen as we declared generateStaticParams
     logWarningInSentry(
       new Exception({
