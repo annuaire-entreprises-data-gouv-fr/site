@@ -1,5 +1,6 @@
 import type { AxiosError, AxiosResponse } from "axios";
 import axios from "axios";
+import { getLoggerContext } from "#utils/logger/logger-context";
 import { formatLog } from "../utils/format-log";
 import { httpErrorHandler } from "../utils/http-error-handler";
 
@@ -40,6 +41,26 @@ const errorInterceptor = (error: AxiosError) => {
     const endTime = Date.now();
     //@ts-expect-error
     const startTime = config?.metadata?.startTime;
+    const loggerContext = getLoggerContext();
+    if (loggerContext) {
+      loggerContext.error({
+        startTimeMs: startTime,
+        error: {
+          message,
+          type: "network-error",
+        },
+        statusCode: status,
+        service: {
+          name: "backend",
+          type: "http",
+          url: {
+            url,
+            params: config?.params,
+            method: config?.method,
+          },
+        },
+      });
+    }
     console.error(
       formatLog(
         url,
