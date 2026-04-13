@@ -15,6 +15,7 @@ import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible, estNonDiffusibleStrict } from "#models/core/diffusion";
 import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import { formatIntFr, formatSiret } from "#utils/helpers";
+import { estEnFrance } from "#utils/helpers/est-en-france";
 import { INSEE } from "../../administrations";
 import TitleAlerts from "../alerts";
 import { TabsForEtablissement } from "../tabs";
@@ -138,7 +139,7 @@ const TitleEtablissementWithDenomination: React.FC<{
         </div>
       </div>
 
-      {estDiffusible(etablissement) && (
+      {estDiffusible(etablissement) && estEnFrance(etablissement) && (
         <div>
           <MapEtablissement etablissement={etablissement} />
         </div>
