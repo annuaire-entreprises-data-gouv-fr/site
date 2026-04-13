@@ -88,7 +88,7 @@
     "postcss": "^8.4.49",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^9.6.0",
-    "ts-jest": "^29.2.5",
+    "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
     "ultracite": "^7.2.5"
