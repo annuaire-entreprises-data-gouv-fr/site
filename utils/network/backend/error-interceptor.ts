@@ -20,7 +20,7 @@ const errorInterceptor = (error: AxiosError) => {
     throw error;
   }
 
-  const url = (config?.url || "an unknown url").slice(0, 100);
+  const url = (config?.url || "an unknown url").substring(0, 100);
   const status = getStatus(response, message);
   const statusText = response?.statusText;
   const initialAgent =

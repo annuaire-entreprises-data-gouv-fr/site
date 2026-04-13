@@ -53,8 +53,8 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
       {elus.length > 0 ? (
         <>
           <p>
-            Cette collectivité possède {elus.length} élu{plural}{" "}
-            {`enregistré${plural} au Répertoire National des Élus`}&nbsp;:
+            Cette collectivité possède {elus.length} élu{plural} enregistré
+            {plural} au Répertoire National des Élus&nbsp;:
           </p>
           <FullTable
             body={elus.sort(sortElus).map((elu) => formatElus(elu))}

@@ -45,6 +45,7 @@ function TagContainer({
       {children}
     </a>
   ) : (
+    // biome-ignore lint/a11y/useSemanticElements: role status needed
     <span className={className} id={id} role="status" style={style}>
       {children}
     </span>

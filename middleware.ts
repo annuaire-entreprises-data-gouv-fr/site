@@ -60,7 +60,7 @@ const shouldRedirect = (path: string, search: string, url: string) => {
 };
 
 // This function can be marked `async` if using `await` inside
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const redirection = shouldRedirect(
     request.nextUrl.pathname,
     request.nextUrl.search,

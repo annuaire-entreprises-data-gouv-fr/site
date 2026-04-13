@@ -22,7 +22,7 @@ export const clientEgapro = async (siren: Siren): Promise<IEgapro["index"]> => {
 
   const dataSearch = response?.data;
 
-  if (!dataSearch?.length) {
+  if (!dataSearch || !dataSearch?.length) {
     throw new HttpNotFound(
       `Cannot found egapro data associate to siren : ${siren}`
     );

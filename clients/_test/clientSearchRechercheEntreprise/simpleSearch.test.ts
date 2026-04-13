@@ -35,9 +35,9 @@ function itShouldMatchSnapshotForSearch(
   pageEtablissements = 1
 ) {
   it(`Should match snapshot for search ${searchTerms} ${
-    pageEtablissements === 1
-      ? ""
-      : " and etablissement page " + pageEtablissements
+    pageEtablissements !== 1
+      ? " and etablissement page " + pageEtablissements
+      : ""
   }`, async () => {
     await expectClientToMatchSnapshot({
       client: clientSearchRechercheEntreprise,
@@ -51,7 +51,7 @@ function itShouldMatchSnapshotForSearch(
         },
       ],
       snapshotFile: `search-${searchTerms}${
-        pageEtablissements === 1 ? "" : `-${pageEtablissements}`
+        pageEtablissements !== 1 ? `-${pageEtablissements}` : ""
       }.json`,
       simplifyParams,
       postProcessResult: (result) => {

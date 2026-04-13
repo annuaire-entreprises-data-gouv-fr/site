@@ -5,6 +5,7 @@ import remarkHeadingId from "remark-heading-id";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
+import type { Compatible } from "unified/lib";
 
 export interface IMarkdown {
   __typename: "Markdown";
@@ -19,9 +20,7 @@ interface IParsedMakdown {
 export default function parseMarkdownSync(
   body: IMarkdown | string
 ): IParsedMakdown {
-  const parsedBody = markdownProcessor.processSync(
-    body as Parameters<typeof markdownProcessor.processSync>[0]
-  );
+  const parsedBody = markdownProcessor.processSync(body as Compatible);
   return {
     raw: body as IMarkdown,
     html: removeSingleParagraph(parsedBody.value as string),

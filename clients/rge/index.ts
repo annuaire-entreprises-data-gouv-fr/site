@@ -77,7 +77,13 @@ const mapToDomainObject = (rge: IRGEResponse) => {
     const findCertification = certifications.findIndex(
       (certification) => certification.nomCertificat === result.nom_certificat
     );
-    if (findCertification === -1) {
+    if (findCertification !== -1) {
+      if (result.domaine !== "Inconnu") {
+        const domaines = new Set(certifications[findCertification].domaines);
+        domaines.add(result.domaine);
+        certifications[findCertification].domaines = Array.from(domaines);
+      }
+    } else {
       const {
         code_qualification = "",
         domaine = "",
@@ -95,10 +101,6 @@ const mapToDomainObject = (rge: IRGEResponse) => {
         organisme,
         urlQualification: url_qualification,
       });
-    } else if (result.domaine !== "Inconnu") {
-      const domaines = new Set(certifications[findCertification].domaines);
-      domaines.add(result.domaine);
-      certifications[findCertification].domaines = Array.from(domaines);
     }
   });
   return {
