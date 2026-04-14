@@ -153,7 +153,7 @@ export const NpsStats: React.FC<{
             callbacks: {
               label(context) {
                 return `${context.dataset.label} ${Math.round(
-                  context.parsed.y
+                  context.parsed.y ?? 0
                 )}%`;
               },
             },

@@ -161,17 +161,17 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
         />
       )}
       {estEntrepreneurSpectacle &&
-        (statutEntrepreneurSpectacle !== "valide" ? (
+        (statutEntrepreneurSpectacle === "valide" ? (
           <LabelWithLinkToSection
-            informationTooltipLabel="Cette structure a demandé un récépissé de déclaration d’entrepreneur de spectacles vivants, mais le statut du récépissé n’est pas valide (en cours d’instruction ou invalide)"
-            label="Entrepreneur de spectacles vivants (pas de récépissé valide)"
+            informationTooltipLabel="Cette structure possède un récépissé de déclaration d’entrepreneur de spectacles vivants"
+            label="Entrepreneur de spectacles vivants"
             sectionId="entrepreneur-spectacles"
             siren={uniteLegale.siren}
           />
         ) : (
           <LabelWithLinkToSection
-            informationTooltipLabel="Cette structure possède un récépissé de déclaration d’entrepreneur de spectacles vivants"
-            label="Entrepreneur de spectacles vivants"
+            informationTooltipLabel="Cette structure a demandé un récépissé de déclaration d’entrepreneur de spectacles vivants, mais le statut du récépissé n’est pas valide (en cours d’instruction ou invalide)"
+            label="Entrepreneur de spectacles vivants (pas de récépissé valide)"
             sectionId="entrepreneur-spectacles"
             siren={uniteLegale.siren}
           />
