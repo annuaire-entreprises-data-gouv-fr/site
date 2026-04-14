@@ -119,7 +119,16 @@ export const LocationFilter: React.FC<{
         className={styles["location-filter-modal-container"]}
         style={{ display: open ? "block" : "none" }}
       >
-        {issue === Issue.NONE ? (
+        {issue !== Issue.NONE ? (
+          issue === Issue.NORESULT ? (
+            <Info>Aucun résultat ne correspond à votre recherche.</Info>
+          ) : (
+            <Warning>
+              La recherche géographique est momentanément indisponible et
+              devrait fonctionner de nouveau dans quelques instants.
+            </Warning>
+          )
+        ) : (
           <div className="drop-down">
             {isLoading ? (
               <div className="layout-center">
@@ -138,13 +147,6 @@ export const LocationFilter: React.FC<{
               ))
             )}
           </div>
-        ) : issue === Issue.NORESULT ? (
-          <Info>Aucun résultat ne correspond à votre recherche.</Info>
-        ) : (
-          <Warning>
-            La recherche géographique est momentanément indisponible et devrait
-            fonctionner de nouveau dans quelques instants.
-          </Warning>
         )}
       </FloatingModal>
 

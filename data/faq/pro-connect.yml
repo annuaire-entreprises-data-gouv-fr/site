@@ -11,7 +11,6 @@
 #   - label: libellé
 #     href: url
 # body: corps de texte (markdown)
-slug: pro-connect
 administrations:
   - dinum
 group: fonctionnement

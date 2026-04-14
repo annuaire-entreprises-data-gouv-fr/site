@@ -12,21 +12,11 @@ const getTsConfigBasePaths = () =>
 
 const config = {
   transform: {
-    "^.+\\.(m|t|j)sx?$": [
-      "@swc/jest",
-      {
-        module: {
-          type: "commonjs",
-        },
-      },
-    ],
+    "^.+\\.(m|t|j)sx?$": ["@swc/jest"],
   },
-  transformIgnorePatterns: [
-    "/node_modules/(?!(msw|@mswjs|until-async|rettime)/)",
-  ],
+  transformIgnorePatterns: ["/node_modules/(?!(msw|@mswjs|until-async)/)"],
   moduleNameMapper: {
     ...getTsConfigBasePaths(),
-    "^rettime$": "<rootDir>/node_modules/rettime/src/index.ts",
   },
   setupFilesAfterEnv: ["<rootDir>/setup-jest.ts"],
   testTimeout: 10_000,

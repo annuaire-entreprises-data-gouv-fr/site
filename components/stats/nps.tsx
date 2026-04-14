@@ -152,7 +152,9 @@ export const NpsStats: React.FC<{
           tooltip: {
             callbacks: {
               label(context) {
-                return `${context.dataset.label} ${context.parsed.y ? Math.round(context.parsed.y) : 0}%`;
+                return `${context.dataset.label} ${Math.round(
+                  context.parsed.y
+                )}%`;
               },
             },
           },

@@ -22,13 +22,18 @@ WARNING: Building without uploading sourcemap to Sentry
 }
 const nextConfig: NextConfig = {
   output: "standalone",
-  turbopack: {
-    rules: {
-      "*.{yaml,yml}": {
-        loaders: [{ loader: "yaml-loader", options: { asJSON: true } }],
-        as: "*.json",
-      },
-    },
+  webpack: (config, { isServer }) => {
+    config.module.rules.push({
+      test: /\.ya?ml$/,
+      use: "js-yaml-loader",
+    });
+    // https://github.com/open-telemetry/opentelemetry-js/issues/4173
+    // "Critical dependency: the request of a dependency is an expression"
+    // This ignores warnings we can't fix.
+    if (isServer) {
+      config.ignoreWarnings = [{ module: /opentelemetry/ }];
+    }
+    return config;
   },
   generateBuildId: () => process.env.SOURCE_VERSION || null,
   async redirects() {
