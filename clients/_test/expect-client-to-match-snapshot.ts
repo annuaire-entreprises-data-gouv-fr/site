@@ -49,7 +49,6 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
     }
   }
 
-  // biome-ignore lint/suspicious/noMisplacedAssertion: this helper is only called from inside test cases
   expect(
     JSON.stringify({ args: simplifyParams(...args), result }, null, 2)
   ).toMatchFile(path.join(__dirname, "_snapshots", snapshotFile));

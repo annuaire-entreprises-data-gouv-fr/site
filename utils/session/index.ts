@@ -98,9 +98,7 @@ export function getHidePersonalDataRequestFCSession(
   NonNullable<ISession["franceConnectHidePersonalDataSession"]>
 > | null {
   if (
-    !session ||
-    !session.franceConnectHidePersonalDataSession ||
-    !session.franceConnectHidePersonalDataSession.firstName ||
+    !session?.franceConnectHidePersonalDataSession?.firstName ||
     !session.franceConnectHidePersonalDataSession.familyName ||
     !session.franceConnectHidePersonalDataSession.birthdate
   ) {

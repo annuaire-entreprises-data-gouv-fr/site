@@ -56,7 +56,7 @@ const Menu: React.FC<{
         <a
           aria-label="Documentation de l’espace agent public"
           href={constants.links.documentation.home}
-          rel="nopener noreferer"
+          rel="noopener nopener noreferer"
           target="_blank"
         >
           Consulter la documentation
@@ -64,7 +64,7 @@ const Menu: React.FC<{
         <a
           aria-label="Canal Tchap"
           href={constants.links.tchap}
-          rel="nopener noreferer"
+          rel="noopener nopener noreferer"
           target="_blank"
         >
           Nous retrouver sur Tchap

@@ -87,7 +87,7 @@ export default function FinancesAssociationSection({
                   tooltip: {
                     callbacks: {
                       label(tooltipItem) {
-                        return formatCurrency(tooltipItem.parsed.y.toString());
+                        return formatCurrency(tooltipItem.parsed.y);
                       },
                     },
                   },
