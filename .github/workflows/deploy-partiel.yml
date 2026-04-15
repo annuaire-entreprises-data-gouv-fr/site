@@ -22,7 +22,7 @@ jobs:
           version: "main"
           environment: "production"
           ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
-          ssh-host: ${{ secrets.SSH_PRODUCTION_02 }}
+          ssh-host: ${{ secrets.SSH_PRODUCTION_01 }}
           notify-on-failure: true
           notify-on-success: true
           notify-webhook: ${{ secrets.DEV_EVENT_HOOK }}

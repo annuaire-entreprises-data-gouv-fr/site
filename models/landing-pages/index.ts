@@ -19,23 +19,15 @@ export interface ILandingPage {
 }
 
 const loadAllLandingPages = () => {
-  const landingPages = [] as ILandingPage[];
-  const landingPagesFolderContext = require.context(
-    "/data/landing-pages",
-    false,
-    /\.yml$/
-  );
-  const keys = landingPagesFolderContext.keys();
-  const values = keys.map(landingPagesFolderContext);
-
-  keys
-    // weirdly context add duplicates - this filter removes them
-    .filter((k: string) => k.indexOf("./") === 0)
-    .forEach((key: string, index: number) => {
-      const slug = key.replace(".yml", "").replace("./", "");
-      //@ts-expect-error
-      landingPages.push({ ...values[index], slug });
-    });
+  const landingPages = [
+    require("../../data/landing-pages/associations.yml") as ILandingPage,
+    require("../../data/landing-pages/collectivites-territoriales.yml") as ILandingPage,
+    require("../../data/landing-pages/entrepreneur-spectacles-vivants.yml") as ILandingPage,
+    require("../../data/landing-pages/entreprises-individuelles.yml") as ILandingPage,
+    require("../../data/landing-pages/ess-economie-sociale-solidaire.yml") as ILandingPage,
+    require("../../data/landing-pages/organisme-formation-qualiopi.yml") as ILandingPage,
+    require("../../data/landing-pages/rge.yml") as ILandingPage,
+  ];
 
   return landingPages.filter((page) => page.published || false);
 };
