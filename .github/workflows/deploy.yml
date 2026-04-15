@@ -4,67 +4,119 @@ permissions:
 
 on:
   push:
-    branches: [main]
+    # branches: [main]
   workflow_dispatch:
 
 jobs:
-  deploy-staging:
-    name: Deploy - staging
+  build-docker:
+    name: Build Docker image
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment:
-      name: staging
-    strategy:
-      matrix:
-        include:
-          - environment: staging-01
-            host: SSH_HOST_STAGING_V2
-          - environment: staging-02
-            host: SSH_STAGING_02
     steps:
       - uses: actions/checkout@v4
-      - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
+      - name: Create .env file
+        run: |
+          cat > .env << 'EOF'
+          INSEE_USERNAME=${{ secrets.INSEE_USERNAME }}
+          INSEE_PASSWORD=${{ secrets.INSEE_PASSWORD }}
+          INSEE_CLIENT_ID=${{ secrets.INSEE_CLIENT_ID }}
+          INSEE_CLIENT_SECRET=${{ secrets.INSEE_CLIENT_SECRET }}
+          INSEE_CLIENT_ID_FALLBACK=${{ secrets.INSEE_CLIENT_ID_FALLBACK }}
+          INSEE_CLIENT_SECRET_FALLBACK=${{ secrets.INSEE_CLIENT_SECRET_FALLBACK }}
+          INSEE_USERNAME_EXPORT_CSV=${{ secrets.INSEE_USERNAME_EXPORT_CSV }}
+          INSEE_PASSWORD_EXPORT_CSV=${{ secrets.INSEE_PASSWORD_EXPORT_CSV }}
+          INSEE_CLIENT_ID_EXPORT_CSV=${{ secrets.INSEE_CLIENT_ID_EXPORT_CSV }}
+          INSEE_CLIENT_SECRET_EXPORT_CSV=${{ secrets.INSEE_CLIENT_SECRET_EXPORT_CSV }}
+          INSEE_CLIENT_ID_AGENTS=${{ secrets.INSEE_CLIENT_ID_AGENTS }}
+          INSEE_CLIENT_SECRET_AGENTS=${{ secrets.INSEE_CLIENT_SECRET_AGENTS }}
+          INSEE_USERNAME_AGENTS=${{ secrets.INSEE_USERNAME_AGENTS }}
+          INSEE_PASSWORD_AGENTS=${{ secrets.INSEE_PASSWORD_AGENTS }}
+          INDEXING_ENABLED=enabled
+          MATOMO_ENABLED=disabled
+          MATOMO_SITE_ID=${{ secrets.MATOMO_SITE_ID }}
+          MATOMO_API_SITE_ID=${{ secrets.MATOMO_API_SITE_ID }}
+          MATOMO_TOKEN_AUTH=${{ secrets.MATOMO_TOKEN_AUTH }}
+          IRON_SESSION_PWD=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          GRIST_API_KEY=${{ secrets.GRIST_API_KEY }}
+          UPDOWN_IO_API_KEY=${{ secrets.UPDOWN_IO_API_KEY }}
+          EOF
+      - name: Sanitize branch name
+        run: echo "branch_name=$(echo '${{ github.ref_name }}' | sed 's/^[^\/]*\///')" >> $GITHUB_OUTPUT
+        id: sanitize
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
         with:
-          app-to-deploy: "annuaire-entreprises-site"
-          app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
-          app-shortname: "website"
-          version: "main"
-          environment: "${{ matrix.environment }}"
-          ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
-          ssh-host: ${{ secrets[matrix.host] }}
-          notify-on-failure: true
-          notify-on-success: false
-          tchap-url: ${{ secrets.TCHAP_URL }}
-          tchap-token: ${{ secrets.TCHAP_TOKEN }}
+          registry: ${{ secrets.GITLAB_REGISTRY_URL }}
+          username: ${{ secrets.GITLAB_REGISTRY_USER }}
+          password: ${{ secrets.GITLAB_REGISTRY_PAT }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/infra/ade-site:${{ github.sha }}
+            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/infra/ade-site:${{ steps.sanitize.outputs.branch_name }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
-  deploy-production:
-    name: Deploy - production
-    runs-on: ubuntu-latest
-    needs: [deploy-staging]
-    environment:
-      name: production
-    timeout-minutes: 15
-    strategy:
-      matrix:
-        include:
-          - environment: production-01
-            host: SSH_PRODUCTION_01
-          - environment: production-02
-            host: SSH_PRODUCTION_02
-          - environment: production-03
-            host: SSH_PRODUCTION_03
-    steps:
-      - uses: actions/checkout@v4
-      - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
-        with:
-          app-to-deploy: "annuaire-entreprises-site"
-          app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
-          app-shortname: "website"
-          version: "main"
-          environment: "${{ matrix.environment }}"
-          ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
-          ssh-host: ${{ secrets[matrix.host] }}
-          notify-on-failure: true
-          notify-on-success: true
-          tchap-url: ${{ secrets.TCHAP_URL }}
-          tchap-token: ${{ secrets.TCHAP_TOKEN }}
+  # deploy-staging:
+  #   name: Deploy - staging
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 15
+  #   needs: [build-docker]
+  #   environment:
+  #     name: staging
+  #   strategy:
+  #     matrix:
+  #       include:
+  #         - environment: staging-01
+  #           host: SSH_HOST_STAGING_V2
+  #         - environment: staging-02
+  #           host: SSH_STAGING_02
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
+  #       with:
+  #         app-to-deploy: "annuaire-entreprises-site"
+  #         app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
+  #         app-shortname: "website"
+  #         version: "main"
+  #         environment: "${{ matrix.environment }}"
+  #         ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
+  #         ssh-host: ${{ secrets[matrix.host] }}
+  #         notify-on-failure: true
+  #         notify-on-success: false
+  #         tchap-url: ${{ secrets.TCHAP_URL }}
+  #         tchap-token: ${{ secrets.TCHAP_TOKEN }}
+  #
+  # deploy-production:
+  #   name: Deploy - production
+  #   runs-on: ubuntu-latest
+  #   needs: [deploy-staging]
+  #   environment:
+  #     name: production
+  #   timeout-minutes: 15
+  #   strategy:
+  #     matrix:
+  #       include:
+  #         - environment: production-01
+  #           host: SSH_PRODUCTION_01
+  #         - environment: production-02
+  #           host: SSH_PRODUCTION_02
+  #         - environment: production-03
+  #           host: SSH_PRODUCTION_03
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
+  #       with:
+  #         app-to-deploy: "annuaire-entreprises-site"
+  #         app-repository: "https://github.com/annuaire-entreprises-data-gouv-fr/site.git"
+  #         app-shortname: "website"
+  #         version: "main"
+  #         environment: "${{ matrix.environment }}"
+  #         ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
+  #         ssh-host: ${{ secrets[matrix.host] }}
+  #         notify-on-failure: true
+  #         notify-on-success: true
+  #         tchap-url: ${{ secrets.TCHAP_URL }}
+  #         tchap-token: ${{ secrets.TCHAP_TOKEN }}
