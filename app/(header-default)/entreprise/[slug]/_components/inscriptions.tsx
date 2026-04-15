@@ -11,18 +11,19 @@ import { estActif } from "#models/core/etat-administratif";
 import {
   type IUniteLegale,
   isAssociation,
+  isFondation,
   isServicePublic,
 } from "#models/core/types";
 import { formatDate } from "#utils/helpers";
 import styles from "./style.module.css";
 
-const Wrapper: React.FC<PropsWithChildren<{ link: React.JSX.Element }>> = ({
+const Wrapper: React.FC<PropsWithChildren<{ link?: React.JSX.Element }>> = ({
   children,
   link,
 }) => (
   <div className={styles["inscriptions-wrapper"]}>
     <div>{children}</div>
-    <div className="layout-right">{link}</div>
+    {link && <div className="layout-right">{link}</div>}
   </div>
 );
 
@@ -254,6 +255,31 @@ export const UniteLegaleInscriptionRNA = ({
           <OpenClosedTag
             icon="open"
             label={"Inscrite au RNA (Ministère de l’Intérieur)"}
+          />
+        </a>
+      </InformationTooltip>
+    </Wrapper>
+  );
+};
+
+export const UniteLegaleInscriptionRNF = ({
+  uniteLegale,
+}: {
+  uniteLegale: IUniteLegale;
+}) => {
+  if (!isFondation(uniteLegale)) {
+    return null;
+  }
+  return (
+    <Wrapper>
+      <InformationTooltip
+        label="Cette structure est inscrite au Répertoire National des Fondations (RNF)."
+        tabIndex={undefined}
+      >
+        <a href="#rnf-section">
+          <OpenClosedTag
+            icon="open"
+            label={"Inscrite au RNF (Ministère de l’Intérieur)"}
           />
         </a>
       </InformationTooltip>
