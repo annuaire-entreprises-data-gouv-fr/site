@@ -52,11 +52,10 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           context: .
-          push: false
-          env-file: .env
+          push: true
           tags: |
-            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/ade-site:${{ github.sha }}
-            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/ade-site:${{ steps.sanitize.outputs.branch_name }}
+            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/infra/ade-site:${{ github.sha }}
+            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/infra/ade-site:${{ steps.sanitize.outputs.branch_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
