@@ -114,6 +114,7 @@ class SearchFilterParams {
       est_collectivite_territoriale: this.params.type === "ct",
       est_service_public: this.params.type === "sp",
       est_entrepreneur_individuel: this.params.type === "ei",
+      est_fondation: this.params.type === "fondation",
       section_activite_principale: this.params.sap,
       categorie_entreprise: this.params.categorie_entreprise,
       nature_juridique: this.params.nature_juridique,
@@ -233,6 +234,7 @@ class SearchFilterParams {
       ct: "Type : Collectivité territoriale ",
       sp: "Type : Administration",
       asso: "Type : Association ",
+      fondation: "Type : Fondation ",
       achats_responsables: "Label : Achats Responsables",
       patrimoine_vivant: "Label : Entreprise du Patrimoine Vivant",
     };
