@@ -192,6 +192,7 @@ export interface IUniteLegaleComplements {
   estEntrepriseInclusive: boolean;
   estEss: boolean;
   estFiness: boolean;
+  estFondation: boolean;
   estL100_3: boolean;
   estOrganismeFormation: boolean;
   estPatrimoineVivant: boolean;
@@ -202,8 +203,10 @@ export interface IUniteLegaleComplements {
   estSocieteMission: boolean;
   estUai: boolean;
   idFinessJuridiques: string[];
+  numeroRNF: string;
   statutEntrepreneurSpectacle: string;
   typeEntrepriseInclusive: string;
+  typeOrganismeRNF: string;
 }
 
 export const createDefaultUniteLegaleComplements =
@@ -224,6 +227,7 @@ export const createDefaultUniteLegaleComplements =
     estQualiopi: false,
     estUai: false,
     estAssociation: false,
+    estFondation: false,
     estEntrepriseInclusive: false,
     typeEntrepriseInclusive: "",
     estAchatsResponsables: false,
@@ -232,6 +236,8 @@ export const createDefaultUniteLegaleComplements =
     bilanGesRenseigne: false,
     idFinessJuridiques: [],
     aideMinimisRenseignee: false,
+    numeroRNF: "",
+    typeOrganismeRNF: "",
   });
 
 export interface IEtablissementComplements {
@@ -267,6 +273,20 @@ export const isAssociation = (
 ): toBeDetermined is IAssociation =>
   toBeDetermined.complements.estAssociation ||
   (toBeDetermined as IAssociation).association.idAssociation !== null;
+
+export const isFondation = (uniteLegale: IUniteLegale): boolean =>
+  uniteLegale.complements.estFondation;
+
+export const isFondationFDD = (uniteLegale: IUniteLegale): boolean =>
+  isFondation(uniteLegale) &&
+  uniteLegale.complements.typeOrganismeRNF === "FDD";
+
+export const isFondationFE = (uniteLegale: IUniteLegale): boolean =>
+  isFondation(uniteLegale) && uniteLegale.complements.typeOrganismeRNF === "FE";
+
+export const isFondationFRUP = (uniteLegale: IUniteLegale): boolean =>
+  isFondation(uniteLegale) &&
+  uniteLegale.complements.typeOrganismeRNF === "FRUP";
 
 export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estServicePublic;

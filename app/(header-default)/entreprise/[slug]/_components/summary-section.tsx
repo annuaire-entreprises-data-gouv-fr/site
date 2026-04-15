@@ -25,6 +25,7 @@ import { estActif } from "#models/core/etat-administratif";
 import {
   type IUniteLegale,
   isAssociation,
+  isFondation,
   isServicePublic,
 } from "#models/core/types";
 import { formatDate, formatIntFr, formatSiret } from "#utils/helpers";
@@ -74,6 +75,9 @@ const UniteLegaleSummarySection: React.FC<{
     ["", <br />],
     ["Dénomination", uniteLegale.nomComplet],
     ["SIREN", formatIntFr(uniteLegale.siren)],
+    ...(isFondation(uniteLegale)
+      ? [["N° RNF", uniteLegale.complements.numeroRNF]]
+      : []),
     [
       "SIRET du siège social",
       uniteLegale.siege?.siret && formatSiret(uniteLegale.siege?.siret),
