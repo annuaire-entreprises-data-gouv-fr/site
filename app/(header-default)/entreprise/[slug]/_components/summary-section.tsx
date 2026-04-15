@@ -209,6 +209,7 @@ const UniteLegaleSummarySection: React.FC<{
       <Section
         lastModified={uniteLegale.dateDerniereMiseAJour}
         sources={[
+          ...(isFondation(uniteLegale) ? [EAdministration.MI] : []),
           EAdministration.INSEE,
           EAdministration.VIES,
           EAdministration.DOUANES,
