@@ -117,7 +117,6 @@ export interface IComplements {
   est_entrepreneur_spectacle: boolean;
   est_ess: boolean;
   est_finess: boolean;
-  est_fondation: boolean;
   est_l100_3: boolean;
   est_organisme_formation: boolean;
   est_patrimoine_vivant: boolean;
@@ -130,9 +129,7 @@ export interface IComplements {
   identifiant_association: string;
   liste_finess_juridique: string[];
   liste_idcc: string[];
-  numero_rnf: string;
   statut_entrepreneur_spectacle: "invalide" | "valide";
-  type_organisme_rnf: string;
   type_siae: string;
 }
 

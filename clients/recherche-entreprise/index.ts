@@ -72,7 +72,7 @@ export const clientSearchRechercheEntrepriseRaw = async (
 
   let url = route;
   url += `?per_page=10&page=${pageResultatsRecherche}&q=${encodedTerms}&limite_matching_etablissements=3${
-    filters || ""
+    searchFilterParams?.toApiURI() || ""
   }`;
 
   url += "&include_admin=slug";
@@ -197,9 +197,6 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     est_alim_confiance = false,
     bilan_ges_renseigne = false,
     aide_minimis_renseignee = false,
-    est_fondation = false,
-    numero_rnf = "",
-    type_organisme_rnf = "",
   } = complements || {};
 
   const nomComplet = (result.nom_complet || "Nom inconnu").toUpperCase();
@@ -309,9 +306,6 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       bilanGesRenseigne: bilan_ges_renseigne,
       idFinessJuridiques: liste_finess_juridique,
       aideMinimisRenseignee: aide_minimis_renseignee,
-      estFondation: est_fondation,
-      numeroRNF: numero_rnf,
-      typeOrganismeRNF: type_organisme_rnf,
     },
     immatriculation: mapToImmatriculation(immatriculation),
     association: {
