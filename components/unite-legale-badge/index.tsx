@@ -4,10 +4,6 @@ import {
   CollectiviteTerritorialeBadge,
   DefaultStructureBadge,
   EntrepriseIndividuelleBadge,
-  FondationBadge,
-  FondationFDDBadge,
-  FondationFEBadge,
-  FondationFRUPBadge,
   ServicePublicBadge,
 } from "#components-ui/badge/frequent";
 import {
@@ -15,10 +11,6 @@ import {
   isAssociation,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
-  isFondation,
-  isFondationFDD,
-  isFondationFE,
-  isFondationFRUP,
   isServicePublic,
 } from "#models/core/types";
 
@@ -33,17 +25,6 @@ const UniteLegaleBadge: React.FC<{
   }
   if (isEntrepreneurIndividuel(uniteLegale)) {
     badges.push(<EntrepriseIndividuelleBadge small={small} />);
-  }
-  if (isFondation(uniteLegale)) {
-    if (isFondationFDD(uniteLegale)) {
-      badges.push(<FondationFDDBadge small={small} />);
-    } else if (isFondationFE(uniteLegale)) {
-      badges.push(<FondationFEBadge small={small} />);
-    } else if (isFondationFRUP(uniteLegale)) {
-      badges.push(<FondationFRUPBadge small={small} />);
-    } else {
-      badges.push(<FondationBadge small={small} />);
-    }
   }
 
   if (isServicePublic(uniteLegale)) {

@@ -36,66 +36,6 @@ export const AssociationBadge = ({
     small={small}
   />
 );
-export const FondationBadge = ({
-  small = false,
-  isSelected = false,
-  onClick,
-}: IPartialBadgeProps) => (
-  <Badge
-    backgroundColor="#e5d2f9"
-    fontColor="#3d0d71"
-    icon="awardFill"
-    isSelected={isSelected}
-    label="Fondation"
-    onClick={onClick}
-    small={small}
-  />
-);
-export const FondationFDDBadge = ({
-  small = false,
-  isSelected = false,
-  onClick,
-}: IPartialBadgeProps) => (
-  <Badge
-    backgroundColor="#e5d2f9"
-    fontColor="#3d0d71"
-    icon="awardFill"
-    isSelected={isSelected}
-    label="Fond de dotation"
-    onClick={onClick}
-    small={small}
-  />
-);
-export const FondationFEBadge = ({
-  small = false,
-  isSelected = false,
-  onClick,
-}: IPartialBadgeProps) => (
-  <Badge
-    backgroundColor="#e5d2f9"
-    fontColor="#3d0d71"
-    icon="awardFill"
-    isSelected={isSelected}
-    label="Fond d'entreprise"
-    onClick={onClick}
-    small={small}
-  />
-);
-export const FondationFRUPBadge = ({
-  small = false,
-  isSelected = false,
-  onClick,
-}: IPartialBadgeProps) => (
-  <Badge
-    backgroundColor="#e5d2f9"
-    fontColor="#3d0d71"
-    icon="awardFill"
-    isSelected={isSelected}
-    label="Fondation reconnue d'utilité publique"
-    onClick={onClick}
-    small={small}
-  />
-);
 export const EntrepriseIndividuelleBadge = ({
   small = false,
   isSelected = false,

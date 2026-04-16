@@ -25,7 +25,6 @@ import { estActif } from "#models/core/etat-administratif";
 import {
   type IUniteLegale,
   isAssociation,
-  isFondation,
   isServicePublic,
 } from "#models/core/types";
 import { formatDate, formatIntFr, formatSiret } from "#utils/helpers";
@@ -35,7 +34,6 @@ import {
   UniteLegaleInscriptionIG,
   UniteLegaleInscriptionRNA,
   UniteLegaleInscriptionRNE,
-  UniteLegaleInscriptionRNF,
   UniteLegaleInscriptionSirene,
 } from "./inscriptions";
 
@@ -70,16 +68,12 @@ const UniteLegaleSummarySection: React.FC<{
           uniteLegale={uniteLegale}
         />
         <UniteLegaleInscriptionIG uniteLegale={uniteLegale} />
-        <UniteLegaleInscriptionRNF uniteLegale={uniteLegale} />
         <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
       </>,
     ],
     ["", <br />],
     ["Dénomination", uniteLegale.nomComplet],
     ["SIREN", formatIntFr(uniteLegale.siren)],
-    ...(isFondation(uniteLegale)
-      ? [["N° RNF", uniteLegale.complements.numeroRNF]]
-      : []),
     [
       "SIRET du siège social",
       uniteLegale.siege?.siret && formatSiret(uniteLegale.siege?.siret),
@@ -211,7 +205,6 @@ const UniteLegaleSummarySection: React.FC<{
       <Section
         lastModified={uniteLegale.dateDerniereMiseAJour}
         sources={[
-          ...(isFondation(uniteLegale) ? [EAdministration.MI] : []),
           EAdministration.INSEE,
           EAdministration.VIES,
           EAdministration.DOUANES,
