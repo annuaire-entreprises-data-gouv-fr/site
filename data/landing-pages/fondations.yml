@@ -49,3 +49,5 @@ reassurance:
 datasources:
   - insee
   - inpi
+body: |
+  .
