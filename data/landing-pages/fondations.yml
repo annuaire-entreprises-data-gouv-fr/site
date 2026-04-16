@@ -47,6 +47,5 @@ reassurance:
     body: |
       [L'Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) centralise les informations qui sont le plus souvent demandées lors des démarches administratives des entrepreneurs et des indépendants.
 datasources:
-  - mi
   - insee
   - inpi

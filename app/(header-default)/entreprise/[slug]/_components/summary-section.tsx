@@ -35,7 +35,6 @@ import {
   UniteLegaleInscriptionIG,
   UniteLegaleInscriptionRNA,
   UniteLegaleInscriptionRNE,
-  UniteLegaleInscriptionRNF,
   UniteLegaleInscriptionSirene,
 } from "./inscriptions";
 
@@ -70,7 +69,6 @@ const UniteLegaleSummarySection: React.FC<{
           uniteLegale={uniteLegale}
         />
         <UniteLegaleInscriptionIG uniteLegale={uniteLegale} />
-        <UniteLegaleInscriptionRNF uniteLegale={uniteLegale} />
         <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
       </>,
     ],
