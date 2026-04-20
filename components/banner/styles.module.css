@@ -26,16 +26,12 @@
   margin: 0;
 }
 
-.proconnect2FABanner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.banner {
+  display: block;
   width: 100%;
-}
-
-@media (max-width: 768px) {
-  .proconnect2FABanner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 0.9rem;
+  background-color: var(--annuaire-colors-yellow);
+  border-bottom: 2px solid var(--annuaire-colors-frBlue);
 }

@@ -15,9 +15,10 @@ const TEMP_INCIDENT_BANNER = {
   partnersData: `
   🚨 Certains données et fonctionnalités sont temporairement indisponibles en raison d’instabilités chez nos partenaires.
     Veuillez nous excuser pour la gêne occasionnée.`,
-  dgfip: `
-  🚨 Suite à un incident technique du côté de la DGFIP, les données associées (attestation fiscale, chiffre d’affaires, etc.) ne sont pas disponibles pour le moment.
-    Veuillez nous excuser pour la gêne occasionnée.`,
+  proconnectMigration: `
+  🚧 <strong>Maintenance en cours chez notre partenaire ProConnect</strong>
+    <br/>En raison d’une opération de maintenance planifiée le <strong>21 avril à partir de 18h</strong>, l’accès à l’<strong>espace agent</strong> via ProConnect sera temporairement indisponible.
+    <br/>Nous vous remercions pour votre compréhension et vous invitons à réessayer ultérieurement.`,
 };
 
 interface ITempIncidentBannerProps {
@@ -36,17 +37,15 @@ export default function TempIncidentBanner({
   const { isEnabled: isPartnersDataIncidentEnabled } = useFeatureFlag(
     "partners_data_incident_banner_displayed"
   );
-  const { isEnabled: isDgfipIncidentEnabled } = useFeatureFlag(
-    "dgfip_incident_banner_displayed"
+  const { isEnabled: isProconnectMigrationEnabled } = useFeatureFlag(
+    "proconnect_migration_banner_displayed"
   );
-
-  const shouldDisplayDgfipIncident = isDgfipIncidentEnabled && isAgent;
 
   if (
     !isDefaultIncidentEnabled &&
     !isProconnectIncidentEnabled &&
     !isPartnersDataIncidentEnabled &&
-    !shouldDisplayDgfipIncident
+    !isProconnectMigrationEnabled
   ) {
     return null;
   }
@@ -57,15 +56,15 @@ export default function TempIncidentBanner({
     message = TEMP_INCIDENT_BANNER.partnersData;
   } else if (isProconnectIncidentEnabled) {
     message = TEMP_INCIDENT_BANNER.proconnect;
-  } else if (shouldDisplayDgfipIncident) {
-    message = TEMP_INCIDENT_BANNER.dgfip;
+  } else if (isProconnectMigrationEnabled) {
+    message = TEMP_INCIDENT_BANNER.proconnectMigration;
   }
 
   return (
     <PrintNever>
       <div
         aria-label="Incident en cours"
-        className={styles.npsModal}
+        className={styles.banner}
         id="temp-incident"
         role="dialog"
         style={{
@@ -73,7 +72,10 @@ export default function TempIncidentBanner({
           borderColor: constants.colors.frBlue,
         }}
       >
-        <div className="fr-container">{message}</div>
+        <div
+          className="fr-container"
+          dangerouslySetInnerHTML={{ __html: message }}
+        />
       </div>
     </PrintNever>
   );
