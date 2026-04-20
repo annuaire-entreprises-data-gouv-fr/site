@@ -1,3 +1,4 @@
+import { getAidesADEME } from "#models/aides-ademe";
 import { getAssociationFromSlug } from "#models/association";
 import { getEORIValidation } from "#models/eori-validation";
 import { getAssociationProtected } from "#models/espace-agent/association-protected";
@@ -64,4 +65,5 @@ export const APIRoutesHandlers = {
   [APIRoutesPaths.SubventionsAssociation]: withRateLimiting(
     getSubventionsAssociationFromSlug
   ),
+  [APIRoutesPaths.AidesADEME]: getAidesADEME,
 };

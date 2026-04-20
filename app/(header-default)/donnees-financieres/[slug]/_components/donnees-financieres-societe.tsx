@@ -7,7 +7,8 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible } from "#models/core/diffusion";
 import type { IUniteLegale } from "#models/core/types";
-import { AidesMinimis } from "./aides";
+import { AidesADEME } from "./aides-ademe";
+import { AidesMinimis } from "./aides-minimis";
 import { BilansDocumentsSociete } from "./bilans-documents-societe";
 import { ComptesBodaccSociete } from "./comptes-bodacc-societe";
 import { FinancesSocieteSummary } from "./finances-societe-summary";
@@ -45,6 +46,7 @@ export default function DonneesFinancieresSociete({
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
       <LiassesFiscales session={session} uniteLegale={uniteLegale} />
       <AidesMinimis session={session} uniteLegale={uniteLegale} />
+      <AidesADEME session={session} uniteLegale={uniteLegale} />
     </>
   );
 }

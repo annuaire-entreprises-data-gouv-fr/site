@@ -197,6 +197,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     est_alim_confiance = false,
     bilan_ges_renseigne = false,
     aide_minimis_renseignee = false,
+    a_aides_ademe = false,
   } = complements || {};
 
   const nomComplet = (result.nom_complet || "Nom inconnu").toUpperCase();
@@ -306,6 +307,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       bilanGesRenseigne: bilan_ges_renseigne,
       idFinessJuridiques: liste_finess_juridique,
       aideMinimisRenseignee: aide_minimis_renseignee,
+      aAidesADEME: a_aides_ademe,
     },
     immatriculation: mapToImmatriculation(immatriculation),
     association: {

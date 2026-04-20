@@ -98,6 +98,8 @@ const routes = {
       "https://tabular-api.data.gouv.fr/api/resources/35d75f72-3ae5-4c4a-abd2-9aad340576a1/data/",
     minimis:
       "https://tabular-api.data.gouv.fr/api/resources/f43a5294-8f79-4b40-b5f9-88b62ea1ad14/data/",
+    aidesAdeme:
+      "https://tabular-api.data.gouv.fr/api/resources/a514049e-6213-4b7e-81e2-5443fb7cd375/data/",
   },
   dataSubvention: {
     pageBySirenOrIdRna: (sirenOrIdRna: string) =>

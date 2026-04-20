@@ -19,4 +19,5 @@ export enum APIRoutesPaths {
   VerifyTva = "verify-tva",
   EoriValidation = "eori-validation",
   SubventionsAssociation = "subventions-association",
+  AidesADEME = "aides-ademe",
 }

@@ -35,11 +35,15 @@ async function getRoute(request: IReqWithSession, context: IContext) {
     isEI: boolean;
     useCase: UseCase;
     year: string;
+    page?: number;
     signal: AbortSignal;
   } = {
     isEI: searchParams.isEI === "true",
     useCase: searchParams.useCase as UseCase,
     year: searchParams.year,
+    page: searchParams.page
+      ? Number.parseInt(searchParams.page, 10)
+      : undefined,
     signal: request.signal,
   };
 

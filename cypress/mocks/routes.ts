@@ -1,5 +1,6 @@
 import { http } from "msw";
 import routes from "#clients/routes";
+import { aidesADEMEHandler } from "./handlers/aides-ademe";
 import { annuaireServicePublicHandler } from "./handlers/annuaire-service-public";
 import { apiBioHandler } from "./handlers/api-bio";
 import { apiDataGouvEssHandler } from "./handlers/api-data-gouv-ess";
@@ -126,6 +127,7 @@ export const routesHandlers = [
     entrepreneurSpectaclesHandler
   ),
   http.get(stripQueryParams(routes.datagouv.minimis), minimisHandler),
+  http.get(stripQueryParams(routes.datagouv.aidesAdeme), aidesADEMEHandler),
   http.get(
     stripQueryParams(routes.tooling.monitoring.getBySlug("*")),
     upDownIoHandler
