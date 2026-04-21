@@ -34,7 +34,7 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
 
   const loggerContext = getLoggerContext();
   if (loggerContext) {
-    loggerContext.success({
+    loggerContext.serviceSuccess({
       startTimeMs: startTime,
       service: {
         name: "backend",

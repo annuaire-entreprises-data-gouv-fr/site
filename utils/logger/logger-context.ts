@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 
 type IContext = Record<string, string | number | boolean | null | undefined>;
 
-type Status = "success" | "failure" | "unknown";
+type Status = "success" | "failure" | "unknown" | "pending";
 
 interface LoggerEvent {
   action: string;
@@ -122,6 +122,38 @@ export class LoggerContext {
         JSON.stringify(
           this.toJSON({
             status: "success",
+            statusCode,
+            endTimeMs,
+            startTimeMs,
+            context,
+            service,
+            error: null,
+          })
+        )
+      );
+    }
+  }
+
+  public serviceSuccess(options: {
+    service: LoggerService;
+    statusCode?: number;
+    startTimeMs?: number;
+    context?: Partial<IContext>;
+  }) {
+    const {
+      service,
+      statusCode = 200,
+      startTimeMs = this.startTimeMs,
+      context = {},
+    } = options;
+
+    const endTimeMs = Date.now();
+
+    if (this.shouldLog(false, endTimeMs)) {
+      console.info(
+        JSON.stringify(
+          this.toJSON({
+            status: "pending",
             statusCode,
             endTimeMs,
             startTimeMs,
