@@ -1,4 +1,5 @@
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
+import { getLoggerContext } from "#utils/logger/logger-context";
 import { formatLog } from "../utils/format-log";
 
 /**
@@ -31,6 +32,21 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
       ?.split(":")[1]
       .trim() || "";
 
+  const loggerContext = getLoggerContext();
+  if (loggerContext) {
+    loggerContext.serviceSuccess({
+      startTimeMs: startTime,
+      service: {
+        name: "backend",
+        type: "http",
+        url: {
+          url: response?.config?.url || "an unknown url",
+          params: response?.config?.params,
+          method: response?.config?.method,
+        },
+      },
+    });
+  }
   // logged into stdout
   console.info(
     formatLog(
