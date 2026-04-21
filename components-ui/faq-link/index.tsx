@@ -6,15 +6,19 @@ import constants from "#models/constants";
 import styles from "./style.module.css";
 
 const FAQLink: React.FC<
-  PropsWithChildren<{ tooltipLabel: string | React.JSX.Element; to?: string }>
-> = ({ to, tooltipLabel, children }) => (
+  PropsWithChildren<{
+    tooltipLabel: string | React.JSX.Element;
+    to?: string;
+    width?: number;
+  }>
+> = ({ to, tooltipLabel, children, width = 230 }) => (
   <InformationTooltip
     ariaRelation="describedby"
     horizontalOrientation="left"
     label={children}
     left="0px"
     tabIndex={to ? undefined : 0}
-    width={230}
+    width={width}
   >
     <LinkOrSpan ariaLabel={`En savoir plus sur ${tooltipLabel}`} to={to}>
       <span className={styles.label + " " + (to ? styles.link : "")}>
