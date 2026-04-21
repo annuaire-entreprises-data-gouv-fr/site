@@ -1,0 +1,15 @@
+slug: dge
+short: DGE
+long: Direction Générale des Entreprises (DGE)
+logoType: portrait
+site: https://www.entreprises.gouv.fr/
+contact: https://www.entreprises.gouv.fr/contact
+description: |
+  La Direction générale des Entreprises conçoit et met en œuvre les politiques publiques qui concourent au développement des entreprises.
+dataSources:
+  - label: Aides Minimis
+    apiSlug: aides-minimis
+    datagouvLink: https://www.data.gouv.fr/datasets/registre-public-des-aides-de-minimis
+    isProtected: true
+    data:
+      - label: Aides Minimis

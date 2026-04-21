@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 21/04/2026
+  target:
+    site: true
+  body: |
+    Ajout de la liste des aides ADEME pour les entreprises dans l'onglet "Données financières".
 - date: 08/04/2026
   target:
     site: true
