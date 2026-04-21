@@ -1,16 +1,13 @@
 "use client";
 
-import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { parseAsInteger, useQueryState } from "nuqs";
-import { useMemo } from "react";
 import type { IAidesADEME } from "#clients/api-data-gouv/aide-ademe/interface";
 import NonRenseigne from "#components/non-renseigne";
 import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
 import { AsyncDataSectionClient } from "#components/section/data-section/client";
 import { FullTable } from "#components/table/full";
-import { useAPIRouteData } from "#hooks/fetch/use-API-route-data";
+import { useFetchAidesADEME } from "#hooks/fetch/aides-ademe";
 import { EAdministration } from "#models/administrations/EAdministration";
-import type { ISession } from "#models/authentication/user/session";
 import type { IUniteLegale } from "#models/core/types";
 import { formatCurrency, formatDate } from "#utils/helpers";
 
@@ -27,7 +24,7 @@ const AidesADEMETable = ({
     body={aidesADEME.map((a) => [
       a.dateConvention ? formatDate(a.dateConvention) : <NonRenseigne />,
       formatCurrency(a.montant),
-      a.dispositifAide,
+      a.dispositifAide ?? <NonRenseigne />,
       a.objet,
     ])}
     head={["Date de convention", "Montant", "Dispositif", "Objet"]}
@@ -36,27 +33,15 @@ const AidesADEMETable = ({
 
 export default function AidesADEMEContent({
   uniteLegale,
-  session,
 }: {
   uniteLegale: IUniteLegale;
-  session: ISession | null;
 }) {
   const [currentPage, setCurrentPage] = useQueryState(
     "aides-ademe-page",
     parseAsInteger.withDefault(1)
   );
 
-  const options = useMemo(
-    () => ({ params: { page: currentPage } }),
-    [currentPage]
-  );
-
-  const aidesADEME = useAPIRouteData(
-    APIRoutesPaths.AidesADEME,
-    uniteLegale.siren,
-    session,
-    options
-  );
+  const aidesADEME = useFetchAidesADEME(uniteLegale, currentPage);
 
   return (
     <AsyncDataSectionClient

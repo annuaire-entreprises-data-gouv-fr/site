@@ -46,7 +46,7 @@ export default function DonneesFinancieresSociete({
       <ComptesBodaccSociete uniteLegale={uniteLegale} />
       <LiassesFiscales session={session} uniteLegale={uniteLegale} />
       <AidesMinimis session={session} uniteLegale={uniteLegale} />
-      <AidesADEME session={session} uniteLegale={uniteLegale} />
+      <AidesADEME uniteLegale={uniteLegale} />
     </>
   );
 }

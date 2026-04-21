@@ -3,7 +3,7 @@ interface IAidesADEMEDatagouvItem {
   conditionsVersement: string;
   dateConvention: string;
   datesPeriodeVersement: string;
-  dispositifAide: string;
+  dispositifAide: string | null;
   idAttribuant: string;
   idBeneficiaire: string;
   idRAE: string;
@@ -35,7 +35,7 @@ interface IAidesADEMEAide {
   conditionsVersement: string;
   dateConvention: string;
   datesPeriodeVersement: string;
-  dispositifAide: string;
+  dispositifAide: string | null;
   idBeneficiaire: string;
   montant: number;
   nature: string;
