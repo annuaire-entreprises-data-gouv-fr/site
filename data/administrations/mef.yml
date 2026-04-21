@@ -23,5 +23,11 @@ dataSources:
     datagouvLink: https://www.data.gouv.fr/fr/datasets/entreprises-du-patrimoine-vivant-epv/
     data:
       - label: Liste des labellisés Entreprise du Patrimoine Vivant
+  - label: Aides Minimis
+    apiSlug: aides-minimis
+    datagouvLink: https://www.data.gouv.fr/datasets/registre-public-des-aides-de-minimis
+    isProtected: true
+    data:
+      - label: Aides Minimis
 description: |
   Le ministère de l’Économie et des Finances, communément appelé « Bercy », est le ministère chargé des Finances publiques d’une part (budget) et de la politique économique de la France d’autre part.

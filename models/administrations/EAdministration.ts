@@ -31,5 +31,4 @@ export enum EAdministration {
   GIP_MDS = "gip-mds",
   BANQUE_DE_FRANCE = "banque-de-france",
   CNIL = "cnil",
-  DGE = "dge",
 }
