@@ -1,3 +1,4 @@
+import type { TNatureEffectif } from "#clients/api-entreprise/effectifs/types";
 import { hasRights } from "#models/authentication/user/rights";
 import type { UseCase } from "#models/use-cases";
 import withSession, { type IReqWithSession } from "#utils/session/with-session";
@@ -33,12 +34,15 @@ async function getRoute(request: IReqWithSession, context: IContext) {
 
   const validatedParams: {
     isEI: boolean;
+    natureEffectif: TNatureEffectif;
     useCase: UseCase;
     year: string;
     page?: number;
     signal: AbortSignal;
   } = {
     isEI: searchParams.isEI === "true",
+    natureEffectif:
+      (searchParams.natureEffectif as TNatureEffectif | undefined) ?? "moyen",
     useCase: searchParams.useCase as UseCase,
     year: searchParams.year,
     page: searchParams.page

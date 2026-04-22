@@ -1,6 +1,7 @@
 import EtablissementSection from "components/etablissement-section";
 import MatomoEventRedirected from "components/matomo-event/search-redirected";
 import type { Metadata } from "next";
+import EtablissementEffectifsMensuelsSection from "#components/etablissement-effectifs-mensuels-section";
 import { NonDiffusibleStrictSection } from "#components/non-diffusible-section";
 import ServicePublicSection from "#components/service-public-section";
 import { TitleEtablissementWithDenomination } from "#components/title-section/etablissement";
@@ -59,13 +60,19 @@ export default async function EtablissementPage(props: AppRouterProps) {
         {estNonDiffusibleStrict(etablissement) ? (
           <NonDiffusibleStrictSection />
         ) : (
-          <EtablissementSection
-            etablissement={etablissement}
-            session={session}
-            uniteLegale={uniteLegale}
-            usedInEntreprisePage={false}
-            withDenomination={true}
-          />
+          <>
+            <EtablissementSection
+              etablissement={etablissement}
+              session={session}
+              uniteLegale={uniteLegale}
+              usedInEntreprisePage={false}
+              withDenomination={true}
+            />
+            <EtablissementEffectifsMensuelsSection
+              etablissement={etablissement}
+              session={session}
+            />
+          </>
         )}
         {!isBot && isServicePublic(uniteLegale) && (
           <ServicePublicSection
