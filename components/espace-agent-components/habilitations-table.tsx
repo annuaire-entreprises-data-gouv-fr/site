@@ -122,13 +122,13 @@ const tooltipContent: Partial<
     <span>
       Attestation fiscale délivrée par la Direction générale des finances
       publiques (DGFIP), indiquant que l’entreprise est à jour de ses
-      obligations fiscales (exemple :{" "}
+      obligations fiscales (
       <a
         href="https://entreprise.api.gouv.fr/files/exemple-dgfip-attestation-fiscale.pdf"
         rel="noopener noreferrer"
         target="_blank"
       >
-        exemple-dgfip-attestation-fiscale.pdf
+        exemple.pdf
       </a>
       )
     </span>
@@ -137,20 +137,30 @@ const tooltipContent: Partial<
     <div>
       1. Statut des cotisations sociales d'une entreprise indiquant si elle est
       en règle auprès de la sécurité sociale agricole (MSA). <br />
+      <br />
       2. Attestation sociale délivrée à une entreprise acquittée de ses
       obligations de cotisations et contributions sociales auprès de l'URSSAF
       Caisse nationale.
+      <br />
       <a
         href="https://entreprise.api.gouv.fr/files/exemple-urssaf-attestation-sociale.pdf"
         rel="noopener noreferrer"
         target="_blank"
       >
-        exemple-urssaf-attestation-sociale.pdf
+        exemple.pdf
       </a>
     </div>
   ),
-  [ApplicationRights.effectifs]:
-    "Effectifs annuels et mensuels des régimes général et agricole d'une unité légale et d'un établissement, issus de l'Urssaf et de la MSA depuis le répertoire commun des déclarants opéré par le GIP-MDS. Inclut l'effectif moyen et les effectifs liés à l'obligation d'emploi des travailleurs handicapés.",
+  [ApplicationRights.effectifs]: (
+    <div>
+      Effectifs annuels et mensuels des régimes général et agricole d'une unité
+      légale et d'un établissement, issus de l'Urssaf et de la MSA depuis le
+      répertoire commun des déclarants opéré par le GIP-MDS.
+      <br />
+      Inclut l'effectif moyen et les effectifs liés à l'obligation d'emploi des
+      travailleurs handicapés.
+    </div>
+  ),
   [ApplicationRights.bilansBDF]:
     "Obtenir les trois derniers bilans d’une entreprise détenus par la Banque de France.",
   [ApplicationRights.chiffreAffaires]:
@@ -158,8 +168,7 @@ const tooltipContent: Partial<
   [ApplicationRights.liensCapitalistiques]: (
     <span>
       Actionnaires et filiales de l'entreprise déclarés dans les CERFA 2059F et
-      2059G des liasses fiscales de la DGFIP. (Télécharger les CERFA 2059F et
-      2059G :{" "}
+      2059G des liasses fiscales de la DGFIP. (
       <a
         href="https://entreprise.api.gouv.fr/files/cerfa-2059f-2059g.pdf"
         rel="noopener noreferrer"
@@ -176,40 +185,36 @@ const tooltipContent: Partial<
       bâtiment (CIBTP, CNETP), carte professionnelle de travaux publics (FNTP)
       et cotisation retraite dans le bâtiment (ProBTP).
       <br />
-      Télécharger un exemple de carte professionnelle FNTP :
       <a
         href="https://entreprise.api.gouv.fr/files/exemple-fntp-carte-professionnelle-travaux-publics.pdf"
         rel="noopener noreferrer"
         target="_blank"
       >
-        exemple-fntp-carte-professionnelle-travaux-publics.pdf
+        FNTP.pdf
       </a>
       <br />
-      Télécharger un exemple d’attestation CIBTP :
       <a
         href="https://entreprise.api.gouv.fr/files/exemple-cibtp-attestations_cotisations_conges_payes_chomage_intemperies.pdf"
         rel="noopener noreferrer"
         target="_blank"
       >
-        exemple-cibtp-attestations_cotisations_conges_payes_chomage_intemperies.pdf
+        CIBTP.pdf
       </a>
       <br />
-      Télécharger un exemple d’attestation CNETP :
       <a
         href="https://entreprise.api.gouv.fr/files/exemple-cnetp-attestations_cotisations_conges_payes_chomage_intemperies.pdf"
         rel="noopener noreferrer"
         target="_blank"
       >
-        exemple-cnetp-attestations_cotisations_conges_payes_chomage_intemperies.pdf
+        CNETP.pdf
       </a>
       <br />
-      Télécharger un exemple d’attestation ProBTP :
       <a
         href="https://entreprise.api.gouv.fr/files/exemple-probtp-conformites_cotisations_retraite.pdf"
         rel="noopener noreferrer"
         target="_blank"
       >
-        exemple-probtp-conformites_cotisations_retraite.pdf
+        ProBTP.pdf
       </a>
     </div>
   ),
@@ -218,13 +223,13 @@ const tooltipContent: Partial<
       Informations renseignées dans les liasses fiscales, issues des
       déclarations de résultat d’une entreprise auprès de la Direction générale
       des finances publiques (DGFIP). (Télécharger la liste des données
-      possibles par imprimé :
+      possibles par imprimé :{" "}
       <a
         href="https://entreprise.api.gouv.fr/files/api-entreprise_liasses_fiscales_liste-des-champs-par-imprime.xls"
         rel="noopener noreferrer"
         target="_blank"
       >
-        api-entreprise_liasses_fiscales_liste-des-champs-par-imprime.xls
+        exemple.xls
       </a>
       )
     </span>
