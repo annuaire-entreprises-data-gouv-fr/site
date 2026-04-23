@@ -49,7 +49,7 @@ export default function TempIncidentBanner({
           <strong>Maintenance en cours chez notre partenaire ProConnect</strong>
           <br />
           En raison d’une opération de maintenance planifiée le{" "}
-          <strong>21 avril à partir de 18h</strong>, l’accès à l’
+          <strong>23 avril à partir de 18h</strong>, l’accès à l’
           <strong>espace agent</strong> via ProConnect sera temporairement
           indisponible.
           <br />
