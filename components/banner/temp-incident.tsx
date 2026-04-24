@@ -38,7 +38,7 @@ export default function TempIncidentBanner({
   🚨 Nous rencontrons actuellement des difficultés techniques, le service peut être temporairement indisponible.
     Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser pour la gêne occasionnée.`,
       proconnect: `
-  🚨 Notre partenaire ProConnect rencontre actuellement des difficultés techniques, le service de connexion aux espaces agent public peut être temporairement indisponible.
+  🚨 Notre partenaire ProConnect rencontre actuellement des difficultés techniques, le service de connexion à l'espace agent public peut être temporairement indisponible.
     Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser pour la gêne occasionnée.`,
       partnersData: `
   🚨 Certains données et fonctionnalités sont temporairement indisponibles en raison d’instabilités chez nos partenaires.
