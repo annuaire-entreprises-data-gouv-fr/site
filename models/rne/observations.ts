@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   clientRNEImmatriculation,
   clientRNEObservationsFallback,
@@ -10,6 +9,7 @@ import {
   type IAPINotRespondingError,
 } from "#models/api-not-responding";
 import { type Siren, verifySiren } from "#utils/helpers";
+import { isAbortError } from "#utils/helpers/is-abort-error";
 import type { IObservationsWithMetadata } from "./types";
 
 // Value returned when the request is aborted
@@ -41,7 +41,7 @@ export const getRNEObservations = async (
     );
     return { data: observations, metadata: { isFallback: false } };
   } catch (eDefaultTry: any) {
-    if (axios.isCancel(eDefaultTry)) {
+    if (isAbortError(eDefaultTry)) {
       return ABORTED_VALUE;
     }
     if (eDefaultTry instanceof HttpNotFound) {
@@ -51,7 +51,7 @@ export const getRNEObservations = async (
     try {
       return await fallback(siren, params.signal);
     } catch (eFallback: any) {
-      if (axios.isCancel(eFallback)) {
+      if (isAbortError(eFallback)) {
         return ABORTED_VALUE;
       }
       if (eFallback instanceof HttpNotFound) {

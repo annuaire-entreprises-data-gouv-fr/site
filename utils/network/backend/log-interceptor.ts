@@ -1,12 +1,15 @@
-import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import { getLoggerContext } from "#utils/logger/logger-context";
 import { formatLog } from "../utils/format-log";
+import {
+  type BackendRequestConfig,
+  type BackendResponse,
+  getHeaderValue,
+} from "./types";
 
 /**
  * Add startTime to request
  * @param config
  */
-export const addStartTimeInterceptor = (config: AxiosRequestConfig) => ({
+export const addStartTimeInterceptor = (config: BackendRequestConfig) => ({
   ...config,
   metadata: { startTime: Date.now() },
 });
@@ -15,38 +18,15 @@ export const addStartTimeInterceptor = (config: AxiosRequestConfig) => ({
  * Log into STDOUT in production
  * @param response
  */
-export const logInterceptor = (response: AxiosResponse<any, any>) => {
+export const logInterceptor = <T>(response: BackendResponse<T>) => {
   const endTime = Date.now();
-  //@ts-expect-error
   const startTime = response?.config?.metadata?.startTime;
-  const initialAgent =
-    (response.request?._header as string | undefined)
-      ?.split("\n")
-      .find((line) => line.startsWith("x-initial-user-agent:"))
-      ?.split(":")[1]
-      .trim() || "";
-  const requestId =
-    (response.request?._header as string | undefined)
-      ?.split("\n")
-      .find((line) => line.startsWith("x-request-id:"))
-      ?.split(":")[1]
-      .trim() || "";
+  const initialAgent = getHeaderValue(
+    response.config.headers,
+    "x-initial-user-agent"
+  );
+  const requestId = getHeaderValue(response.config.headers, "x-request-id");
 
-  const loggerContext = getLoggerContext();
-  if (loggerContext) {
-    loggerContext.serviceSuccess({
-      startTimeMs: startTime,
-      service: {
-        name: "backend",
-        type: "http",
-        url: {
-          url: response?.config?.url || "an unknown url",
-          params: response?.config?.params,
-          method: response?.config?.method,
-        },
-      },
-    });
-  }
   // logged into stdout
   console.info(
     formatLog(

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { clientRNEImmatriculation } from "#clients/api-proxy/rne";
 import { HttpNotFound } from "#clients/exceptions";
 import { clientDirigeantsRechercheEntreprise } from "#clients/recherche-entreprise/dirigeants";
@@ -8,6 +7,7 @@ import {
   type IAPINotRespondingError,
 } from "#models/api-not-responding";
 import { type Siren, verifySiren } from "#utils/helpers";
+import { isAbortError } from "#utils/helpers/is-abort-error";
 import type { IDirigeantsWithMetadata } from "./types";
 
 // Value returned when the request is aborted
@@ -36,7 +36,7 @@ export const getDirigeantsRNE = async (
     const { dirigeants } = await clientRNEImmatriculation(siren, params.signal);
     return { data: dirigeants, metadata: { isFallback: false } };
   } catch (e: any) {
-    if (axios.isCancel(e)) {
+    if (isAbortError(e)) {
       return ABORTED_VALUE;
     }
     if (e instanceof HttpNotFound) {
@@ -46,7 +46,7 @@ export const getDirigeantsRNE = async (
     try {
       return await fallback(siren, params.signal);
     } catch (eFallback) {
-      if (axios.isCancel(eFallback)) {
+      if (isAbortError(eFallback)) {
         return ABORTED_VALUE;
       }
       if (eFallback instanceof HttpNotFound) {

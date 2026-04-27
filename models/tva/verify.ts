@@ -1,4 +1,3 @@
-import axios from "axios";
 import { clientTVA } from "#clients/api-proxy/tva";
 import { HttpNotFound } from "#clients/exceptions";
 import { EAdministration } from "#models/administrations/EAdministration";
@@ -7,6 +6,7 @@ import {
   type IAPINotRespondingError,
 } from "#models/api-not-responding";
 import { verifySiren, verifyTVANumber } from "#utils/helpers";
+import { isAbortError } from "#utils/helpers/is-abort-error";
 import { tvaNumber } from "./utils";
 
 // Value returned when the request is aborted
@@ -28,7 +28,7 @@ export const buildAndVerifyTVA = async (
       tva: await clientTVA(tvaNumberFromSiren, true, params.signal),
     };
   } catch (e: any) {
-    if (axios.isCancel(e)) {
+    if (isAbortError(e)) {
       return ABORTED_VALUE;
     }
     if (e instanceof HttpNotFound) {
