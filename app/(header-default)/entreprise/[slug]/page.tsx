@@ -42,8 +42,8 @@ import getSession from "#utils/server-side-helper/get-session";
 
 export const generateMetadata = async (
   props: AppRouterProps
-): Promise<Metadata> => {
-  return runGenerateMetadataWithLogger(
+): Promise<Metadata> =>
+  runGenerateMetadataWithLogger(
     props,
     async () => {
       const { slug, page, isBot } = await extractParamsAppRouter(props);
@@ -64,7 +64,6 @@ export const generateMetadata = async (
     },
     "/entreprise/[slug]"
   );
-};
 
 export default async function UniteLegalePage(props: AppRouterProps) {
   return runPageWithLogger(

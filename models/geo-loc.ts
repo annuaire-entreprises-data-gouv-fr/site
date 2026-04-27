@@ -21,7 +21,7 @@ export const getGeoLoc = async (etablissement: IEtablissement) => {
       );
     }
     return { lat: "", long: "" };
-  } catch (e: any) {
+  } catch {
     return { lat: "", long: "" };
   }
 };

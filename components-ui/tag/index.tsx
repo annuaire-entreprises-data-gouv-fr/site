@@ -57,26 +57,24 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   size = "medium",
   color = "default",
   link,
-}) => {
-  return (
-    <TagContainer
-      className={clsx(
-        styles.frBadge,
-        "fr-badge",
-        "fr-badge--no-icon",
-        badgeSize[size],
-        badgeColor[color]
-      )}
-      id={id}
-      link={link}
-      style={{
-        margin: "3px",
-      }}
-    >
-      {children}
-    </TagContainer>
-  );
-};
+}) => (
+  <TagContainer
+    className={clsx(
+      styles.frBadge,
+      "fr-badge",
+      "fr-badge--no-icon",
+      badgeSize[size],
+      badgeColor[color]
+    )}
+    id={id}
+    link={link}
+    style={{
+      margin: "3px",
+    }}
+  >
+    {children}
+  </TagContainer>
+);
 
 const badgeSize = {
   small: "fr-badge--sm",

@@ -33,10 +33,10 @@ export const getEffectifsMensuelsProtected = async (
     effectifsMensuelsYear,
     effectifsMensuelsMonth,
     ApplicationRightsToScopes[ApplicationRights.effectifs]
-  ).catch((error) => {
-    return handleApiEntrepriseError(error, {
+  ).catch((error) =>
+    handleApiEntrepriseError(error, {
       siret,
       apiResource: "EffectifsMensuelsProtected",
-    });
-  });
+    })
+  );
 };

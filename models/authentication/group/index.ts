@@ -58,7 +58,7 @@ export const getAgentGroups = async ({
         return [];
       }
       if (
-        !!allowProConnectRedirection &&
+        allowProConnectRedirection &&
         error instanceof ProConnectReconnexionNeeded
       ) {
         return redirect("/api/auth/agent-connect/login");
