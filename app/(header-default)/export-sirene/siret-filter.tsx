@@ -55,7 +55,7 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
       if (validValues.length === 0) {
         setError("Aucun SIREN ou SIRET valide trouvé dans le fichier");
       }
-    } catch (err) {
+    } catch {
       setError("Erreur lors de la lecture du fichier");
     }
   };

@@ -8,7 +8,6 @@ interface IAnnonceBodacc {
   tribunal: string;
   typeAvisLibelle: string;
 }
-[];
 
 export interface IAnnoncesBodacc {
   annonces: IAnnonceBodacc[];

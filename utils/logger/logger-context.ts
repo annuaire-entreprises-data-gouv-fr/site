@@ -299,7 +299,7 @@ export class LoggerContext {
   private getPath(url: string) {
     try {
       return new URL(url).pathname;
-    } catch (e) {
+    } catch {
       return url;
     }
   }
@@ -307,7 +307,7 @@ export class LoggerContext {
   private getDomain(url: string) {
     try {
       return new URL(url).hostname;
-    } catch (e) {
+    } catch {
       return "unknown";
     }
   }
@@ -315,7 +315,7 @@ export class LoggerContext {
   private getFullUrl(url: string, params: any) {
     try {
       return url + (params ? `?${new URLSearchParams(params).toString()}` : "");
-    } catch (e) {
+    } catch {
       return url;
     }
   }
@@ -326,10 +326,7 @@ const loggerContextStorage = new AsyncLocalStorage<LoggerContext>();
 export const runWithLoggerContext = <T>(
   context: LoggerContext,
   fn: () => T
-): T => {
-  return loggerContextStorage.run(context, fn);
-};
+): T => loggerContextStorage.run(context, fn);
 
-export const getLoggerContext = (): LoggerContext | undefined => {
-  return loggerContextStorage.getStore();
-};
+export const getLoggerContext = (): LoggerContext | undefined =>
+  loggerContextStorage.getStore();

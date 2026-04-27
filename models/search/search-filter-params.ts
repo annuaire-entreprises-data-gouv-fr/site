@@ -274,7 +274,7 @@ const serializeParams = (
   excludeParams: string[] = []
 ) =>
   Object.entries(params).reduce((uri, [key, value]) => {
-    if (!!value && excludeParams.indexOf(key) === -1) {
+    if (value && excludeParams.indexOf(key) === -1) {
       return `${uri}&${key}=${encodeURIComponent(value)}`;
     }
     return uri;

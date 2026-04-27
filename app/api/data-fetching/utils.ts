@@ -140,7 +140,7 @@ export function withHandleError(handler: RouteHandler): RouteHandler {
       let routeAndSlug: { route: string; slug: string };
       try {
         routeAndSlug = await getRouteAndSlug(context);
-      } catch (e) {
+      } catch {
         routeAndSlug = { route: "", slug: "" };
       }
       const error = new APIRouteError(

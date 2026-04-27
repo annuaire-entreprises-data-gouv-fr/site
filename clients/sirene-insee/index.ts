@@ -70,7 +70,7 @@ export class httpInseeClient {
         data,
         tokenExpiryTime: Date.now() + data.expires_in * 1000,
       };
-    } catch (e) {
+    } catch {
       this._token = null;
     }
   };

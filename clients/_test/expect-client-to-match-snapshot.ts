@@ -22,7 +22,7 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
   let result: U | undefined;
   try {
     result = await client(...args);
-  } catch (e) {
+  } catch {
     try {
       console.log("Second try");
       result = await client(...args);

@@ -12,7 +12,7 @@ function isStorageAvailable(type: "session" | "local") {
     store.setItem(test, test);
     store.removeItem(test);
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 }
