@@ -40,7 +40,7 @@ export default function DataSourcesPage() {
         {allAdministrations.map(({ dataSources, slug }) =>
           dataSources.map((source, sourceIndex) => {
             const api = allAPI[source.apiSlug];
-            const isProtected = api?.isProtected;
+            const isProtected = source.isProtected || api?.isProtected;
 
             return (
               <li key={`${source.label}-${slug}`}>
@@ -72,100 +72,99 @@ export default function DataSourcesPage() {
         ({ dataSources, administrationEnum, contact, slug, long, short }) => (
           <React.Fragment key={slug}>
             <h2 id={slug}>{long}</h2>
-            {dataSources.map(
-              ({ label, datagouvLink, data, apiSlug }, sourceIndex) => {
-                const api = allAPI[apiSlug];
-                const isProtected = api?.isProtected;
+            {dataSources.map((source, sourceIndex) => {
+              const { label, datagouvLink, data, apiSlug } = source;
+              const api = allAPI[apiSlug];
+              const isProtected = source.isProtected || api?.isProtected;
 
-                return (
-                  <Section
-                    id={`${slug}-${sourceIndex}`}
-                    isProtected={isProtected}
-                    key={label}
-                    sources={[administrationEnum]}
-                    title={label}
-                  >
-                    <TwoColumnTable
-                      body={[
-                        [
-                          "Données",
-                          (data || []).map(({ label }) => (
-                            <Tag key={label}>{label}</Tag>
-                          )),
-                        ],
-                        ...(isProtected
-                          ? []
-                          : [
-                              [
-                                "Source de données",
-                                datagouvLink ? (
-                                  <a
-                                    href={datagouvLink}
-                                    rel="noreferrer noopener"
-                                    target="_blank"
-                                  >
-                                    Consulter le jeu de données
-                                  </a>
-                                ) : (
-                                  <i>
-                                    Non renseigné ou non publié sur data.gouv.fr
-                                  </i>
-                                ),
-                              ],
-                            ]),
-                        ...(api
-                          ? [
-                              [
-                                "API utilisée",
-                                <>
-                                  <strong>{api.apiName}</strong>
-                                  {api.apiDocumentationLink && (
-                                    <>
-                                      {" ("}
-                                      <a
-                                        href={api.apiDocumentationLink}
-                                        rel="noreferrer noopener"
-                                        target="_blank"
-                                      >
-                                        documentation
-                                      </a>
-                                      )
-                                    </>
-                                  )}
-                                </>,
-                              ],
-                            ]
-                          : []),
-                        ...(api?.updownIoId
-                          ? [
-                              [
-                                "Taux de disponibilité de l'API",
-                                <Link
-                                  href={`/donnees/api#${api.apiSlug}`}
+              return (
+                <Section
+                  id={`${slug}-${sourceIndex}`}
+                  isProtected={isProtected}
+                  key={label}
+                  sources={[administrationEnum]}
+                  title={label}
+                >
+                  <TwoColumnTable
+                    body={[
+                      [
+                        "Données",
+                        (data || []).map(({ label }) => (
+                          <Tag key={label}>{label}</Tag>
+                        )),
+                      ],
+                      ...(isProtected
+                        ? []
+                        : [
+                            [
+                              "Source de données",
+                              datagouvLink ? (
+                                <a
+                                  href={datagouvLink}
                                   rel="noreferrer noopener"
                                   target="_blank"
                                 >
-                                  Consulter le taux de disponibilité
-                                </Link>,
-                              ],
-                            ]
-                          : []),
-                        ...(contact
-                          ? [
-                              [
-                                "Administration responsable",
-                                <a href={contact}>
-                                  <Icon slug="mail">Contacter ({short})</Icon>
-                                </a>,
-                              ],
-                            ]
-                          : []),
-                      ]}
-                    />
-                  </Section>
-                );
-              }
-            )}
+                                  Consulter le jeu de données
+                                </a>
+                              ) : (
+                                <i>
+                                  Non renseigné ou non publié sur data.gouv.fr
+                                </i>
+                              ),
+                            ],
+                          ]),
+                      ...(api
+                        ? [
+                            [
+                              "API utilisée",
+                              <>
+                                <strong>{api.apiName}</strong>
+                                {api.apiDocumentationLink && (
+                                  <>
+                                    {" ("}
+                                    <a
+                                      href={api.apiDocumentationLink}
+                                      rel="noreferrer noopener"
+                                      target="_blank"
+                                    >
+                                      documentation
+                                    </a>
+                                    )
+                                  </>
+                                )}
+                              </>,
+                            ],
+                          ]
+                        : []),
+                      ...(api?.updownIoId
+                        ? [
+                            [
+                              "Taux de disponibilité de l'API",
+                              <Link
+                                href={`/donnees/api#${api.apiSlug}`}
+                                rel="noreferrer noopener"
+                                target="_blank"
+                              >
+                                Consulter le taux de disponibilité
+                              </Link>,
+                            ],
+                          ]
+                        : []),
+                      ...(contact
+                        ? [
+                            [
+                              "Administration responsable",
+                              <a href={contact}>
+                                <Icon slug="mail">Contacter ({short})</Icon>
+                              </a>,
+                            ],
+                          ]
+                        : []),
+                    ]}
+                  />
+                </Section>
+              );
+            })}
             <HorizontalSeparator />
           </React.Fragment>
         )

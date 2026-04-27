@@ -180,7 +180,8 @@ export interface IUniteLegaleImmatriculation {
 }
 
 export interface IUniteLegaleComplements {
-  aideMinimisRenseignee: boolean;
+  aAideADEME: boolean;
+  aAideMinimis: boolean;
   bilanGesRenseigne: boolean;
   egaproRenseignee: boolean;
   estAchatsResponsables: boolean;
@@ -231,7 +232,8 @@ export const createDefaultUniteLegaleComplements =
     estAlimConfiance: false,
     bilanGesRenseigne: false,
     idFinessJuridiques: [],
-    aideMinimisRenseignee: false,
+    aAideMinimis: false,
+    aAideADEME: false,
   });
 
 export interface IEtablissementComplements {
@@ -285,7 +287,10 @@ export const isPersonneMorale = (
 
 export const hasAidesMinimisRenseignees = (
   uniteLegale: IUniteLegale
-): boolean => uniteLegale.complements.aideMinimisRenseignee;
+): boolean => uniteLegale.complements.aAideMinimis;
+
+export const hasAidesADEME = (uniteLegale: IUniteLegale): boolean =>
+  uniteLegale.complements.aAideADEME;
 
 export interface ICollectiviteTerritoriale
   extends Omit<IUniteLegale, "colter"> {

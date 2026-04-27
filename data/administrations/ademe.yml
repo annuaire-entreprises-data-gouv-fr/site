@@ -24,5 +24,10 @@ dataSources:
     datagouvLink: https://www.data.gouv.fr/fr/datasets/bilans-ges/
     data:
       - label: Bilans GES publiés par les organisations
+  - label: Aides financières de l'ADEME
+    apiSlug: aides-ademe
+    datagouvLink: https://www.data.gouv.fr/datasets/les-aides-financieres-de-lademe-1
+    data:
+      - label: Aides financières de l'ADEME
 description: |
   L'Agence de l'Environnement et de la Maîtrise de l'Energie a pour mission d’accompagner la transition écologique et énergétique notamment en participant au financement de projets ou à la recherche pour leur mise en œuvre.

@@ -11,6 +11,7 @@ export interface IAdministrationMetaData {
     label: string;
     datagouvLink: string;
     apiSlug: string;
+    isProtected?: boolean;
     data?: {
       label: string;
       form?: string;
