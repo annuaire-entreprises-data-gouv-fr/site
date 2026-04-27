@@ -35,7 +35,7 @@
     "@tanstack/react-query": "^5.90.16",
     "@testing-library/cypress": "^10.1.0",
     "@vcarl/remark-headings": "^0.1.0",
-    "axios": "^1.13.5",
+    "axios": "^1.15.2",
     "chart.js": "^4.5.0",
     "clsx": "^2.1.1",
     "crawler-user-agents": "^1.27.0",
