@@ -128,6 +128,14 @@ const routes = {
     search:
       "https://dgefp.opendatasoft.com/api/records/1.0/search/?dataset=liste-publique-des-of-v2",
   },
+  dgal: {
+    alimConfiance: {
+      metadata:
+        "https://dgal.opendatasoft.com/api/datasets/1.0/export_alimconfiance",
+      search:
+        "https://dgal.opendatasoft.com/api/explore/v2.1/catalog/datasets/export_alimconfiance/records",
+    },
+  },
   educationNationale: {
     metadata:
       "https://data.education.gouv.fr/api/datasets/1.0/fr-en-annuaire-education",

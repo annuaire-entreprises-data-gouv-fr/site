@@ -17,8 +17,10 @@ interface IODSClientResponse {
  */
 const odsClient = async (
   search: { url: string; config?: IDefaultRequestConfig },
-  metaDataUrl: string
+  metaDataUrl: string,
+  config?: { page?: number; pageSize?: number }
 ): Promise<IODSClientResponse> => {
+  const { page = 1, pageSize = 10 } = config || {};
   const timeout = constants.timeout.XXL;
   const [response, responseMetaData] = await Promise.all([
     httpGet<IODSResponse>(search.url, {
@@ -43,9 +45,9 @@ const odsClient = async (
         typeof results.parameters.start === "number" &&
         typeof results.parameters.rows === "number"
           ? Math.floor(results.parameters.start / results.parameters.rows) + 1
-          : 1,
-      page_size: results.parameters?.rows || 10,
-      total: results.nhits || 0,
+          : page,
+      page_size: results.parameters?.rows || pageSize,
+      total: results.nhits || results.total_count || 0,
     },
   };
 };
