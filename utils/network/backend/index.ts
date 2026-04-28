@@ -5,10 +5,10 @@ import constants from "#models/constants";
 import type { IDefaultRequestConfig } from "..";
 import errorInterceptor from "./error-interceptor";
 import { addStartTimeInterceptor, logInterceptor } from "./log-interceptor";
-import type {
+import {
   BackendError,
-  BackendRequestConfig,
-  BackendResponse,
+  type BackendRequestConfig,
+  type BackendResponse,
 } from "./types";
 
 /**
@@ -132,15 +132,14 @@ const createFetchError = (
   timeoutSignal: AbortSignal,
   callerSignal?: AbortSignal
 ) => {
-  const backendError = (
-    error instanceof Error
+  const backendError =
+    error instanceof BackendError
       ? error
-      : new Error(
+      : new BackendError(
           timeoutSignal.aborted
             ? `timeout of ${config.timeout || DEFAULT_TIMEOUT}ms exceeded`
             : `${error}`
-        )
-  ) as BackendError;
+        );
 
   if (timeoutSignal.aborted) {
     backendError.message = `timeout of ${config.timeout || DEFAULT_TIMEOUT}ms exceeded`;
@@ -188,18 +187,18 @@ async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
     } as RequestInit & { dispatcher: Agent });
 
     if (!response.ok) {
-      const error = new Error(
+      const backendError = new BackendError(
         `Request failed with status code ${response.status}`
-      ) as BackendError;
-      error.config = requestConfig;
-      error.response = {
+      );
+      backendError.config = requestConfig;
+      backendError.response = {
         config: requestConfig,
         data: undefined,
         headers: response.headers,
         status: response.status,
         statusText: response.statusText,
       };
-      throw error;
+      throw backendError;
     }
 
     const data = await parseResponse<T>(response, config.responseType);

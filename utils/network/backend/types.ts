@@ -14,8 +14,7 @@ export interface BackendResponse<T = unknown> {
   status: number;
   statusText: string;
 }
-
-export interface BackendError extends Error {
+export class BackendError extends Error {
   config?: BackendRequestConfig;
   isAbort?: boolean;
   isTimeout?: boolean;
