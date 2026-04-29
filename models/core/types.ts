@@ -285,9 +285,11 @@ export const isPersonneMorale = (
   uniteLegaleOrEtablissement: IUniteLegale | IEtablissement
 ): boolean => uniteLegaleOrEtablissement.complements.estPersonneMorale;
 
-export const hasAidesMinimisRenseignees = (
-  uniteLegale: IUniteLegale
-): boolean => uniteLegale.complements.aAideMinimis;
+export const hasAidesFinancieres = (uniteLegale: IUniteLegale): boolean =>
+  hasAidesMinimis(uniteLegale) || hasAidesADEME(uniteLegale);
+
+export const hasAidesMinimis = (uniteLegale: IUniteLegale): boolean =>
+  uniteLegale.complements.aAideMinimis;
 
 export const hasAidesADEME = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.aAideADEME;

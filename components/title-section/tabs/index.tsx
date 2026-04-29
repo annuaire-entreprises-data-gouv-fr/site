@@ -9,6 +9,7 @@ import {
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import {
+  hasAidesFinancieres,
   type IUniteLegale,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
@@ -37,9 +38,10 @@ const getUniteLegaleTabs = (
 ) => {
   const shouldDisplayFinances =
     // hide for public services
-    !isServicePublic(uniteLegale) &&
-    // hide for EI
-    !isEntrepreneurIndividuel(uniteLegale);
+    (!isServicePublic(uniteLegale) &&
+      // hide for EI
+      !isEntrepreneurIndividuel(uniteLegale)) ||
+    hasAidesFinancieres(uniteLegale);
 
   return [
     {
