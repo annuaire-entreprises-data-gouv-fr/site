@@ -30,6 +30,7 @@ const cspDirectives = {
     "https://data.geopf.fr",
     "https://tabular-api.data.gouv.fr",
     "https://koumoul.com",
+    "https://dgal.opendatasoft.com",
   ],
 };
 

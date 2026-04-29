@@ -1,4 +1,4 @@
-import { clientAlimConfiance } from "#clients/api-data-gouv/alim-confiance";
+import { clientAlimConfiance } from "#clients/open-data-soft/clients/alim-confiance";
 import { EAdministration } from "#models/administrations/EAdministration";
 import type { IUniteLegale } from "#models/core/types";
 import { FetchRessourceException } from "#models/exceptions";

@@ -1,9 +1,10 @@
 interface IODSCoreResponse {
-  nhits: number;
+  nhits?: number;
   parameters?: {
     rows: number;
     start: number;
   };
+  total_count?: number;
 }
 
 export type IODSResponse = IODSCoreResponse &
