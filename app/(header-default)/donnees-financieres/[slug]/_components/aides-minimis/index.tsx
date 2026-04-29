@@ -6,10 +6,7 @@ import {
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
-import {
-  hasAidesMinimisRenseignees,
-  type IUniteLegale,
-} from "#models/core/types";
+import { hasAidesMinimis, type IUniteLegale } from "#models/core/types";
 import AidesMinimisProtected from "./protected-aides-minimis";
 
 export function AidesMinimis({
@@ -29,7 +26,7 @@ export function AidesMinimis({
     );
   }
 
-  if (!hasAidesMinimisRenseignees(uniteLegale)) {
+  if (!hasAidesMinimis(uniteLegale)) {
     return (
       <Section
         id="aides-minimis"

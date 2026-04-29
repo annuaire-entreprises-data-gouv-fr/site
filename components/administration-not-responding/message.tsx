@@ -1,6 +1,7 @@
 import type React from "react";
 import { Warning } from "#components-ui/alerts";
 import type { IAdministrationMetaData } from "#models/administrations/types";
+import { ReloadButton } from "./reload-button";
 
 interface IProps {
   administrationMetaData: IAdministrationMetaData;
@@ -18,8 +19,7 @@ const AdministrationNotRespondingMessage: React.FC<IProps> = ({
       sommes désolés pour le dérangement.
       <br />
       <br />
-      Vous pouvez{" "}
-      <a href=".">cliquez-ici pour recharger la page et ré-essayer</a>.
+      Vous pouvez <ReloadButton />.
     </Warning>
     <p>
       Pour en savoir plus sur l’état du service, vous pouvez consulter la

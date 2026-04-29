@@ -47,7 +47,7 @@ export default function AidesADEMEContent({
     <AsyncDataSectionClient
       data={aidesADEME}
       id="aides-ademe"
-      notFoundInfo={<NoAidesADEME />}
+      notFoundInfo={null}
       sources={[EAdministration.ADEME]}
       title="Aides ADEME"
     >

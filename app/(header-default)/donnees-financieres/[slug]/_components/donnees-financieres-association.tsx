@@ -1,6 +1,8 @@
 import { HorizontalSeparator } from "#components-ui/horizontal-separator";
 import type { ISession } from "#models/authentication/user/session";
-import type { IAssociation } from "#models/core/types";
+import { hasAidesADEME, type IAssociation } from "#models/core/types";
+import { AidesADEME } from "./aides-ademe";
+import { AidesMinimis } from "./aides-minimis";
 import ComptesAssociationSection from "./comptes-association";
 import FinancesAssociationSection from "./finances-association";
 import SubventionsAssociationSection from "./subventions-association";
@@ -28,6 +30,14 @@ export default function DonneesFinancieresAssociation({
           <li>
             <a href="#detail-des-subventions">Subventions reçues</a>
           </li>
+          <li>
+            <a href="#aides-minimis">Aides Minimis</a>
+          </li>
+          {hasAidesADEME(uniteLegale) && (
+            <li>
+              <a href="#aides-ademe">Aides ADEME</a>
+            </li>
+          )}
         </ul>
         <br />
       </nav>
@@ -38,6 +48,8 @@ export default function DonneesFinancieresAssociation({
         session={session}
         uniteLegale={uniteLegale}
       />
+      <AidesMinimis session={session} uniteLegale={uniteLegale} />
+      <AidesADEME uniteLegale={uniteLegale} />
     </>
   );
 }

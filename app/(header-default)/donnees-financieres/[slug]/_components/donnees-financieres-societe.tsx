@@ -6,7 +6,11 @@ import {
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
 import { estDiffusible } from "#models/core/diffusion";
-import type { IUniteLegale } from "#models/core/types";
+import {
+  type IUniteLegale,
+  isEntrepreneurIndividuel,
+  isServicePublic,
+} from "#models/core/types";
 import { AidesADEME } from "./aides-ademe";
 import { AidesMinimis } from "./aides-minimis";
 import { BilansDocumentsSociete } from "./bilans-documents-societe";
@@ -23,28 +27,42 @@ export default function DonneesFinancieresSociete({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) {
+  const shouldShowOnlyAides =
+    isServicePublic(uniteLegale) || isEntrepreneurIndividuel(uniteLegale);
+
   return (
     <>
-      <FinancesSocieteSummary session={session} />
-      {estDiffusible(uniteLegale) ||
-      hasRights(session, ApplicationRights.nonDiffusible) ? (
-        <IndicateursFinanciers session={session} uniteLegale={uniteLegale} />
-      ) : (
-        <DonneesPriveesSection title="Indicateurs financiers" />
-      )}
-      {hasRights(session, ApplicationRights.bilansBDF) && (
+      <FinancesSocieteSummary
+        session={session}
+        shouldShowOnlyAides={shouldShowOnlyAides}
+        uniteLegale={uniteLegale}
+      />
+      {!shouldShowOnlyAides && (
         <>
+          {estDiffusible(uniteLegale) ||
+          hasRights(session, ApplicationRights.nonDiffusible) ? (
+            <IndicateursFinanciers
+              session={session}
+              uniteLegale={uniteLegale}
+            />
+          ) : (
+            <DonneesPriveesSection title="Indicateurs financiers" />
+          )}
+          {hasRights(session, ApplicationRights.bilansBDF) && (
+            <>
+              <HorizontalSeparator />
+              <IndicateursFinanciersBDF
+                session={session}
+                uniteLegale={uniteLegale}
+              />
+            </>
+          )}
+          <BilansDocumentsSociete session={session} uniteLegale={uniteLegale} />
           <HorizontalSeparator />
-          <IndicateursFinanciersBDF
-            session={session}
-            uniteLegale={uniteLegale}
-          />
+          <ComptesBodaccSociete uniteLegale={uniteLegale} />
+          <LiassesFiscales session={session} uniteLegale={uniteLegale} />
         </>
       )}
-      <BilansDocumentsSociete session={session} uniteLegale={uniteLegale} />
-      <HorizontalSeparator />
-      <ComptesBodaccSociete uniteLegale={uniteLegale} />
-      <LiassesFiscales session={session} uniteLegale={uniteLegale} />
       <AidesMinimis session={session} uniteLegale={uniteLegale} />
       <AidesADEME uniteLegale={uniteLegale} />
     </>
