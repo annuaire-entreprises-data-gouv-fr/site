@@ -45,7 +45,7 @@
     "js-yaml-loader": "~1.2.2",
     "maplibre-gl": "^4.7.1",
     "matomo-tracker": "~2.2.4",
-    "next": "15.3.9",
+    "next": "16.2.4",
     "next-safe-action": "^8.5.2",
     "next-seo": "^6.6.0",
     "nuqs": "^2.8.9",
