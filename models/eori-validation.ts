@@ -1,6 +1,6 @@
-import axios from "axios";
 import { clientEORI } from "#clients/api-proxy/eori";
 import { verifySiret } from "#utils/helpers";
+import { isAbortError } from "#utils/helpers/is-abort-error";
 import logErrorInSentry from "#utils/sentry";
 import { EAdministration } from "./administrations/EAdministration";
 import {
@@ -31,7 +31,7 @@ export const getEORIValidation = async (
     }
     return data;
   } catch (e: any) {
-    if (axios.isCancel(e)) {
+    if (isAbortError(e)) {
       return ABORTED_VALUE;
     }
     logErrorInSentry(

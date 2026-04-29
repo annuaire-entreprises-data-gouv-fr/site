@@ -58,7 +58,6 @@ public/manifest.json
 public/authorized-agents.txt
 
 # direnv
-.nvmrc
 .envrc
 
 # cypress

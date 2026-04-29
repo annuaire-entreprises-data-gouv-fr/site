@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   clientAPIAssociationPrivate,
   clientAPIAssociationPublic,
@@ -12,6 +11,7 @@ import {
   type Siren,
   type Siret,
 } from "#utils/helpers";
+import { isAbortError } from "#utils/helpers/is-abort-error";
 import logErrorInSentry, { logWarningInSentry } from "#utils/sentry";
 import { EAdministration } from "../administrations/EAdministration";
 import {
@@ -80,7 +80,7 @@ export const getAssociationFromSlug = async (
       adresseInconsistency,
     };
   } catch (e: any) {
-    if (axios.isCancel(e)) {
+    if (isAbortError(e)) {
       return null;
     }
     if (e instanceof HttpNotFound) {

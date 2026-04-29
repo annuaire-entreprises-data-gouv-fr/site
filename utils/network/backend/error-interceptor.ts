@@ -1,78 +1,49 @@
-import type { AxiosError, AxiosResponse } from "axios";
-import axios from "axios";
-import { getLoggerContext } from "#utils/logger/logger-context";
 import { formatLog } from "../utils/format-log";
 import { httpErrorHandler } from "../utils/http-error-handler";
+import { type BackendError, getHeaderValue } from "./types";
 
-const getStatus = (response?: AxiosResponse, message?: string) => {
+const getStatus = (error: BackendError) => {
+  const { response, message, isTimeout } = error;
+
   if (response?.status) {
     return response.status;
   }
-  if ((message || "").indexOf("timeout of") > -1) {
+
+  if (isTimeout || (message || "").toLowerCase().includes("timeout")) {
     return 408;
   }
+
   return 500;
 };
 
-const errorInterceptor = (error: AxiosError) => {
+const errorInterceptor = (error: BackendError): never => {
   const { config, response, message } = error || {};
 
-  if (axios.isCancel(error)) {
+  if (error.isAbort) {
     throw error;
   }
 
   const url = (config?.url || "an unknown url").slice(0, 100);
-  const status = getStatus(response, message);
+  const status = getStatus(error);
   const statusText = response?.statusText;
-  const initialAgent =
-    (error.request?._header as string | undefined)
-      ?.split("\n")
-      .find((line) => line.startsWith("x-initial-user-agent:"))
-      ?.split(":")[1]
-      .trim() || "";
-  const requestId =
-    (error.request?._header as string | undefined)
-      ?.split("\n")
-      .find((line) => line.startsWith("x-request-id:"))
-      ?.split(":")[1]
-      .trim() || "";
+  const initialAgent = getHeaderValue(config?.headers, "x-initial-user-agent");
+  const requestId = getHeaderValue(config?.headers, "x-request-id");
 
   if (status !== 404) {
     const endTime = Date.now();
-    //@ts-expect-error
     const startTime = config?.metadata?.startTime;
-    const loggerContext = getLoggerContext();
-    if (loggerContext) {
-      loggerContext.error({
-        startTimeMs: startTime,
-        error: {
-          message,
-          type: "network-error",
-        },
-        statusCode: status,
-        service: {
-          name: "backend",
-          type: "http",
-          url: {
-            url,
-            params: config?.params,
-            method: config?.method,
-          },
-        },
-      });
-    }
     console.error(
       formatLog(
         url,
         status,
         startTime ? endTime - startTime : undefined,
-        error.request?.method,
+        (config?.method || "").toUpperCase(),
         initialAgent || "",
         requestId || ""
       )
     );
   }
-  httpErrorHandler(url, status, statusText, message);
+  throw httpErrorHandler(url, status, statusText, message || "");
 };
 
 export default errorInterceptor;
