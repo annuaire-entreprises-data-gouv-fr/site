@@ -300,7 +300,7 @@ const routes = {
       updateUserFromGroup: (groupId: number, userId: number, roleId: number) =>
         `/resource-server/groups/${groupId}/users/${userId}?role_id=${roleId}`,
       removeUserFromGroup: (groupId: number, userId: number) =>
-        `/resource-server/groups/${groupId}/users/${userId}?`,
+        `/resource-server/groups/${groupId}/users/${userId}`,
     },
     organizations: {
       getGroups: "/resource-server/organizations/groups",

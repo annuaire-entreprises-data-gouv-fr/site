@@ -123,7 +123,16 @@ const parseResponse = async <T>(
   const isJson =
     contentType.includes("application/json") || contentType.includes("+json");
 
-  return (await (isJson ? response.json() : response.text())) as T;
+  if (!isJson) {
+    return (await response.text()) as T;
+  }
+
+  const text = await response.text();
+  if (!text.trim()) {
+    return undefined as T;
+  }
+
+  return JSON.parse(text) as T;
 };
 
 const createFetchError = (
