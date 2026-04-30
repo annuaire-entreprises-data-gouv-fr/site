@@ -1,4 +1,5 @@
 import { type NextRequest, userAgent } from "next/server";
+import type { TNatureEffectif } from "#clients/api-entreprise/effectifs/types";
 import {
   AgentOverRateLimitException,
   agentRateLimiter,
@@ -20,6 +21,7 @@ export interface IContext {
 
 export interface IHandlerParams {
   isEI?: boolean;
+  natureEffectif?: TNatureEffectif;
   useCase?: UseCase;
   year?: string;
 }

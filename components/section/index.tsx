@@ -12,6 +12,7 @@ import { formatDate, formatDateLong, isTwoMonthOld } from "#utils/helpers";
 import SectionErrorBoundary from "./section-error-boundary";
 import style from "./style.module.css";
 export interface ISectionProps {
+  header?: React.ReactNode;
   id?: string;
   isProtected?: boolean;
   lastModified?: string | null;
@@ -28,6 +29,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   lastModified = null,
   width = 100,
   isProtected = false,
+  header,
 }) => {
   const dataSources = Array.from(new Set(sources)).map(
     (key) => administrationsMetaData[key]
@@ -102,6 +104,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
             Dernière mise à jour : {formatDateLong(lastModified)}.
           </Warning>
         )}
+        {header}
         <div>{children}</div>
         {dataSources.length > 0 && (
           <div className={style["administration-page-link"]}>

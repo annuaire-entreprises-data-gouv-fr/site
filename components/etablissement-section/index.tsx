@@ -21,7 +21,6 @@ import {
   formatSiret,
   uniteLegaleLabelWithPronounContracted,
 } from "#utils/helpers";
-import { EffectifCell } from "./effectif-cell";
 
 interface IProps {
   etablissement: IEtablissement;
@@ -122,14 +121,6 @@ const EtablissementSection: React.FC<IProps> = ({
       etablissement.libelleActivitePrincipaleNaf25,
     ],
     ["Forme juridique", uniteLegale.libelleNatureJuridique],
-    [
-      "Tranche d’effectif salarié",
-      <EffectifCell
-        etablissement={etablissement}
-        session={session}
-        uniteLegale={uniteLegale}
-      />,
-    ],
     [
       `Date de création ${uniteLegaleLabel}`,
       formatDate(uniteLegale.dateCreation),

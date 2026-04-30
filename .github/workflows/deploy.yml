@@ -22,7 +22,7 @@ jobs:
           - environment: staging-02
             host: SSH_STAGING_02
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
         with:
           app-to-deploy: "annuaire-entreprises-site"
@@ -54,7 +54,7 @@ jobs:
           - environment: production-03
             host: SSH_PRODUCTION_03
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
         with:
           app-to-deploy: "annuaire-entreprises-site"

@@ -24,6 +24,7 @@ interface IDataSectionClientProps<T> extends ISectionProps {
   additionalInfoOnError?: React.ReactNode;
   children: (data: T) => React.JSX.Element;
   data: IAPINotRespondingError | IDataFetchingState | T;
+  loadingMinHeight?: number;
   notFoundInfo?: NonNullable<React.ReactNode> | null;
 }
 
@@ -38,7 +39,7 @@ export function AsyncDataSectionClient<T>({
   }
 
   if (isDataLoading(data) && !showLoadingState) {
-    return <div style={{ minHeight: "80px" }} />;
+    return <div style={{ minHeight: props.loadingMinHeight ?? 80 }} />;
   }
 
   if (showLoadingState) {

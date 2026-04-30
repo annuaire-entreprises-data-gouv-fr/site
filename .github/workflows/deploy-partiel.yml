@@ -13,7 +13,7 @@ jobs:
       name: production
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1
         with:
           app-to-deploy: "annuaire-entreprises-site"
