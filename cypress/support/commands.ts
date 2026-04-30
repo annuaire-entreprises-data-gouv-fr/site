@@ -13,6 +13,10 @@ import { comptesAgents } from "#cypress/mocks/comptes-agents";
 import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { ISession } from "#models/authentication/user/session";
 import { sessionOptions } from "#utils/session";
+import {
+  DATA_ACCESS_REMINDER_MODAL_ID,
+  INITIAL_WELCOME_MODAL_ID,
+} from "../../components/welcome-modal-agent/constants";
 
 const generateSessionCookie = async (inputEmail?: string) => {
   const email = inputEmail || "user@yopmail.com";
@@ -51,6 +55,7 @@ Cypress.Commands.add("login" as never, (email?: string) => {
       cy.setCookie(sessionOptions.cookieName, validSessionCookie);
     })
     .then(() => {
-      window.localStorage.setItem("welcome-modal-agent", "true");
+      window.localStorage.setItem(INITIAL_WELCOME_MODAL_ID, "true");
+      cy.setCookie(DATA_ACCESS_REMINDER_MODAL_ID, "true");
     });
 });

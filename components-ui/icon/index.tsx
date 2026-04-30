@@ -626,6 +626,24 @@ const chevronUp = (
   </svg>
 );
 
+const shieldFill = (
+  <svg
+    fill="currentColor"
+    height="100%"
+    stroke="none"
+    viewBox="0 0 48 48"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      clip-rule="evenodd"
+      d="M7.566 5.652L24 2L40.434 5.652C41.3489 5.85538 42 6.66678 42 7.604V27.578C42 31.5901 39.9944 35.3366 36.656 37.562L24 46L11.344 37.562C8.00623 35.337 6.00096 31.5914 6 27.58V7.604C6 6.66678 6.65112 5.85538 7.566 5.652Z"
+      fill="currentColor"
+      fill-rule="evenodd"
+    />
+  </svg>
+);
+
 export const icons = {
   searchLine,
   accountLine,
@@ -672,5 +690,6 @@ export const icons = {
   closeCircleFill,
   chevronDown,
   chevronUp,
+  shieldFill,
 };
 export type IIconsSlug = keyof typeof icons;

@@ -1,10 +1,23 @@
 import { useState } from "react";
+import {
+  getCookieBrowser,
+  type IBrowserCookieOptions,
+  setCookieBrowser,
+} from "#utils/cookies/browser-cookies";
 
-function isStorageAvailable(type: "session" | "local") {
+type StorageType = "session" | "local" | "cookie";
+
+const isBrowser = () => typeof window !== "undefined";
+
+function isStorageAvailable(type: StorageType) {
   const test = "test";
 
-  if (typeof window === "undefined") {
+  if (!isBrowser()) {
     return false;
+  }
+
+  if (type === "cookie") {
+    return navigator.cookieEnabled;
   }
 
   try {
@@ -20,50 +33,74 @@ function isStorageAvailable(type: "session" | "local") {
 const getStore = (type: "session" | "local") =>
   type === "session" ? window.sessionStorage : window.localStorage;
 
-export const useStorage = (
-  type: "session" | "local",
+const getStorageValue = <T>(
+  type: StorageType,
   key: string,
-  initialValue: any
+  initialValue: T,
+  storageAvailable: boolean
 ) => {
+  if (!storageAvailable) {
+    return initialValue;
+  }
+
+  try {
+    const item =
+      type === "cookie" ? getCookieBrowser(key) : getStore(type).getItem(key);
+    return item ? JSON.parse(item) : initialValue;
+  } catch (error) {
+    console.error(error);
+    return initialValue;
+  }
+};
+
+const setStorageValue = <T>(
+  type: StorageType,
+  key: string,
+  value: T,
+  cookieOptions?: IBrowserCookieOptions
+) => {
+  if (!isBrowser()) {
+    return;
+  }
+
+  const serializedValue = JSON.stringify(value);
+
+  if (type === "cookie") {
+    setCookieBrowser(key, serializedValue, cookieOptions);
+    return;
+  }
+
+  getStore(type).setItem(key, serializedValue);
+};
+
+export const useStorage = <T>(
+  type: StorageType,
+  key: string,
+  initialValue: T,
+  cookieOptions?: IBrowserCookieOptions
+): [T, (value: unknown) => void] => {
   const storageAvailable = isStorageAvailable(type);
 
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState(() => {
-    if (!storageAvailable) {
-      return initialValue;
-    }
-
-    try {
-      const store = getStore(type);
-      // Get from local storage by key
-      const item = store.getItem(key);
-      // Parse stored json or if none return initialValue
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.error(error);
-      return initialValue;
-    }
-  });
+  const [storedValue, setStoredValue] = useState(() =>
+    getStorageValue(type, key, initialValue, storageAvailable)
+  );
 
   if (!storageAvailable) {
     return [storedValue, () => {}];
   }
 
   // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setValue = (value: any) => {
+  // ... persists the new value to the requested browser storage.
+  const setValue = (value: unknown) => {
     try {
       // Allow value to be a function so we have same API as useState
       const valueToStore =
         value instanceof Function ? value(storedValue) : value;
       // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
-      if (typeof window !== "undefined") {
-        const store = getStore(type);
-        store.setItem(key, JSON.stringify(valueToStore));
-      }
+      setStoredValue(valueToStore as T);
+      setStorageValue(type, key, valueToStore, cookieOptions);
     } catch (error) {
       console.error(error);
     }
