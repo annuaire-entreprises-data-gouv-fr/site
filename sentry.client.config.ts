@@ -1,8 +1,28 @@
-import { init } from "@sentry/nextjs";
+import { type ErrorEvent, init } from "@sentry/nextjs";
 import { Exception } from "#models/exceptions";
 import { isNextJSSentryActivated } from "#utils/sentry";
 import { getTransactionNameFromUrl } from "#utils/sentry/tracing";
 import isUserAgentABot from "#utils/user-agent";
+
+const IMPERVA_BOT_VERIFICATION_FILE_REGEX = /Enter-Macbeth/;
+
+const isImpervaBotVerificationSource = (source: string | undefined) =>
+  source ? IMPERVA_BOT_VERIFICATION_FILE_REGEX.test(source) : false;
+
+const hasImpervaBotVerificationStackFrame = (event: ErrorEvent) => {
+  for (const exception of event.exception?.values ?? []) {
+    for (const frame of exception.stacktrace?.frames ?? []) {
+      if (
+        isImpervaBotVerificationSource(frame.filename) ||
+        isImpervaBotVerificationSource(frame.abs_path)
+      ) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+};
 
 declare global {
   interface Window {
@@ -19,6 +39,7 @@ if (isNextJSSentryActivated) {
     // An error can be thrown when a fetch request is aborted during a page unload
     // We don't want to log it to sentry so we ignore it.
     ignoreErrors: [/RequestAbortedDuringUnloadException/],
+    denyUrls: [IMPERVA_BOT_VERIFICATION_FILE_REGEX],
 
     beforeSend(event, hint) {
       // It is possible for sentry to load and catch errors even when
@@ -30,6 +51,9 @@ if (isNextJSSentryActivated) {
       // In these cases, we don't want to log the error to sentry to keep the logs clean.
 
       if (window.IS_OUTDATED_BROWSER) {
+        return null;
+      }
+      if (hasImpervaBotVerificationStackFrame(event)) {
         return null;
       }
       if (hint.originalException instanceof Exception) {
