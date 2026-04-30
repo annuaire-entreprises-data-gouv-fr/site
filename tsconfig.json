@@ -12,6 +12,7 @@
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {
+      "@tanstack/pacer/*": ["./node_modules/@tanstack/pacer/dist/*.d.ts"],
       "#clients/*": ["./clients/*"],
       "#cypress/*": ["./cypress/*"],
       "#components/*": ["./components/*"],

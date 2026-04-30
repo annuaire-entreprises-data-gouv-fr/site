@@ -1,3 +1,4 @@
+import { useDebouncedValue } from "@tanstack/react-pacer";
 import type { APIRoutesHandlers } from "app/api/data-fetching/routes-handlers";
 import type { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { APIRoutesScopes } from "app/api/data-fetching/routes-scopes";
@@ -44,17 +45,27 @@ export function useAPIRouteData<T extends APIRoutesPaths>(
     IDataFetchingState | RouteResponse<T>
   >(IDataFetchingState.LOADING);
 
+  const [debouncedOptions] = useDebouncedValue(options, {
+    wait: 300,
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       setResponse(IDataFetchingState.LOADING);
 
-      const response = await fetchAPIRoute<T>(route, slug, session, options);
+      const response = await fetchAPIRoute<T>(
+        route,
+        slug,
+        session,
+        debouncedOptions
+      );
       if (response) {
         setResponse(response);
       }
     };
+
     fetchData();
-  }, [slug, route, session, options]);
+  }, [slug, route, session, debouncedOptions]);
   return response;
 }
 
