@@ -2,6 +2,15 @@ interface ICookieStore {
   delete: (name: string) => Promise<void>;
 }
 
+export interface IBrowserCookieOptions {
+  domain?: string;
+  expires?: Date;
+  maxAge?: number;
+  path?: string;
+  sameSite?: "lax" | "strict" | "none" | "Lax" | "Strict" | "None";
+  secure?: boolean;
+}
+
 const getDocumentCookieSetter = () =>
   Object.getOwnPropertyDescriptor(Document.prototype, "cookie")?.set;
 
@@ -13,14 +22,57 @@ const hasCookieStore = (value: unknown): value is ICookieStore =>
 
 export function getCookieBrowser(name: string): string | null {
   if (typeof window !== "undefined") {
+    const encodedName = encodeURIComponent(name);
     const value = document.cookie
       .split("; ")
-      .find((row) => row.startsWith(`${name}=`))
-      ?.split("=")[1];
+      .find(
+        (row) => row.startsWith(`${encodedName}=`) || row.startsWith(`${name}=`)
+      );
 
-    return value || null;
+    if (!value) {
+      return null;
+    }
+
+    return decodeURIComponent(value.slice(value.indexOf("=") + 1));
   }
   return null;
+}
+
+export function setCookieBrowser(
+  name: string,
+  value: string,
+  options: IBrowserCookieOptions = {}
+) {
+  if (typeof window === "undefined" || !name) {
+    return;
+  }
+
+  const cookieParts = [
+    `${encodeURIComponent(name)}=${encodeURIComponent(value)}`,
+    `path=${options.path || "/"}`,
+  ];
+
+  if (options.domain) {
+    cookieParts.push(`domain=${options.domain}`);
+  }
+
+  if (options.expires) {
+    cookieParts.push(`expires=${options.expires.toUTCString()}`);
+  }
+
+  if (typeof options.maxAge === "number") {
+    cookieParts.push(`max-age=${options.maxAge}`);
+  }
+
+  if (options.sameSite) {
+    cookieParts.push(`SameSite=${options.sameSite}`);
+  }
+
+  if (options.secure) {
+    cookieParts.push("secure");
+  }
+
+  getDocumentCookieSetter()?.call(document, cookieParts.join("; "));
 }
 
 export function deleteCookieBrowser(name: string) {

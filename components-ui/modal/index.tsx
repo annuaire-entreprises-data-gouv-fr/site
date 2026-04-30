@@ -9,12 +9,12 @@ import { PrintNever } from "#components-ui/print-visibility";
 import styles from "./styles.module.css";
 
 export const Modal: React.FC<{
-  size?: "medium" | "full";
+  size?: "small" | "medium" | "full";
   children: React.ReactNode;
   isVisible: boolean;
   modalId: string;
   textAlign?: "center" | "left";
-  onClose: () => void;
+  onClose?: () => void;
 }> = ({
   size = "medium",
   children,
@@ -32,7 +32,7 @@ export const Modal: React.FC<{
           className={styles.modalOverlay}
           onClick={onClose}
           onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") {
+            if (onClose && (event.key === "Enter" || event.key === " ")) {
               onClose();
             }
           }}
@@ -40,7 +40,9 @@ export const Modal: React.FC<{
           <FloatingModal
             className={clsx(
               styles.fullScreenModal,
-              size === "full" && styles.fullScreenModalFull
+              !onClose && styles.fullScreenModalNoClose,
+              size === "full" && styles.fullScreenModalFull,
+              size === "small" && styles.fullScreenModalSmall
             )}
             elevation="high"
             id={modalId}
@@ -48,13 +50,15 @@ export const Modal: React.FC<{
             role="dialog"
             style={{ textAlign }}
           >
-            <div className={styles.closeButton}>
-              <ButtonClose
-                ariaControls={modalId}
-                ariaLabel="Fermer la modale de bienvenue"
-                onClick={onClose}
-              />
-            </div>
+            {onClose && (
+              <div className={styles.closeButton}>
+                <ButtonClose
+                  ariaControls={modalId}
+                  ariaLabel="Fermer la modale de bienvenue"
+                  onClick={onClose}
+                />
+              </div>
+            )}
             {children}
           </FloatingModal>
         </div>

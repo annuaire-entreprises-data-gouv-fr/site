@@ -29,6 +29,14 @@
   }
 }
 
+.fullScreenModalNoClose {
+  padding: 2rem;
+}
+
+.fullScreenModalSmall {
+  padding: 1rem 0;
+}
+
 .fullScreenModalFull {
   max-width: calc(100% - 2rem);
   max-height: calc(100% - 2rem);
