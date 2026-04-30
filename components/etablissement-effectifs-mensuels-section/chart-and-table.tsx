@@ -2,23 +2,9 @@
 
 import { LineChart } from "#components/chart/line";
 import { FullTable } from "#components/table/full";
-import FAQLink from "#components-ui/faq-link";
 import constants from "#models/constants";
 import type { IEffectifsMensuelsProtected } from "#models/espace-agent/effectifs/mensuels";
 import { formatDatePartial, formatFloatFr } from "#utils/helpers";
-
-export const FAQEffectifMensuel = () => (
-  <FAQLink tooltipLabel="Effectif mensuel">
-    L'effectif moyen mensuel (EMM), correspond à l'effectif moyen des régimes
-    général et agricole d'un établissement, issus de l'Urssaf et de la MSA
-    depuis le répertoire commun des déclarants opéré par le GIP-MDS. Il inclut
-    l'effectif moyen et les effectifs liés à l'obligation d'emploi travailleurs
-    handicapés.
-    <br />
-    Ces données sont issues du Répertoire Commun des Déclarants (RCD) et
-    réservées aux agents publics.
-  </FAQLink>
-);
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -66,7 +52,6 @@ export function EffectifsMensuelsChartAndTable({
 
   return (
     <>
-      <p>Voici l’évolution mensuelle de l’effectif de l’établissement.</p>
       <LineChart
         data={{
           labels: labels.map((date) => formatDatePartial(date) ?? date),
@@ -152,10 +137,7 @@ export function EffectifsMensuelsChartAndTable({
               ]
             : null,
         ].filter((item) => !!item)}
-        head={[
-          <FAQEffectifMensuel key="effectif-mensuel-definition" />,
-          ...labels.map((date) => formatDatePartial(date) ?? date),
-        ]}
+        head={["", ...labels.map((date) => formatDatePartial(date) ?? date)]}
       />
     </>
   );

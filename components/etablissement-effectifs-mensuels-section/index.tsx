@@ -77,6 +77,13 @@ const EtablissementEffectifsMensuelsSection = ({
       data={effectifsMensuelsProtected}
       header={
         <div className="fr-grid-row fr-grid-row--gutters fr-mb-2w">
+          <div className="fr-col-12">
+            <p>
+              Effectifs mensuels des régimes général et agricole d'un
+              établissement, issus de l'Urssaf et de la MSA depuis le répertoire
+              commun des déclarants opéré par le GIP-MDS.
+            </p>
+          </div>
           <div className="fr-col-12 fr-col-md-6">
             <div className="fr-select-group">
               <label
