@@ -46,7 +46,7 @@ const EtablissementEffectifsMensuelsSection = ({
   const natureEffectif: TNatureEffectif = selectedNatureEffectif;
   const yearOptions = useMemo(
     () =>
-      Array.from({ length: 21 }, (_, index) => {
+      Array.from({ length: 6 }, (_, index) => {
         const year = currentYear - index;
 
         return {
