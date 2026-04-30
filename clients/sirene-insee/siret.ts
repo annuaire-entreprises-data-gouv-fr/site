@@ -38,6 +38,7 @@ interface IInseeEtablissement {
   adresseEtablissement: {
     complementAdresseEtablissement: string;
     numeroVoieEtablissement: string;
+    dernierNumeroVoieEtablissement: string;
     indiceRepetitionEtablissement: string;
     typeVoieEtablissement: string;
     libelleVoieEtablissement: string;
@@ -228,6 +229,7 @@ const mapEtablissementToDomainObject = (
   const {
     complementAdresseEtablissement,
     numeroVoieEtablissement,
+    dernierNumeroVoieEtablissement,
     indiceRepetitionEtablissement,
     typeVoieEtablissement,
     libelleVoieEtablissement,
@@ -245,6 +247,7 @@ const mapEtablissementToDomainObject = (
   const adresse = formatAdresse({
     complement: complementAdresseEtablissement,
     numeroVoie: numeroVoieEtablissement,
+    dernierNumeroVoie: dernierNumeroVoieEtablissement,
     indiceRepetition: indiceRepetitionEtablissement,
     typeVoie: typeVoieEtablissement,
     libelleVoie: libelleVoieEtablissement,

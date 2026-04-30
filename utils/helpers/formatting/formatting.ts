@@ -290,6 +290,7 @@ interface IAdressFields {
   codePaysEtranger?: string | null | undefined;
   codePostal?: string | null | undefined;
   complement?: string | null | undefined;
+  dernierNumeroVoie?: string | null | undefined;
   distributionSpeciale?: string | null | undefined;
   indiceRepetition?: string | null | undefined;
   libelleCommune?: string | null | undefined;
@@ -304,6 +305,7 @@ interface IAdressFields {
 export const formatAdresse = ({
   complement = "",
   numeroVoie = "",
+  dernierNumeroVoie = "",
   indiceRepetition = "",
   typeVoie = "",
   libelleVoie = "",
@@ -319,6 +321,7 @@ export const formatAdresse = ({
   if (
     !complement &&
     !numeroVoie &&
+    !dernierNumeroVoie &&
     !typeVoie &&
     !libelleCommune &&
     !distributionSpeciale &&
@@ -336,7 +339,9 @@ export const formatAdresse = ({
 
   return [
     wrapWord(complement, ", "),
-    wrapWord(numeroVoie),
+    wrapWord(
+      `${numeroVoie ?? ""}${dernierNumeroVoie ? `-${dernierNumeroVoie}` : ""}`
+    ),
     wrapWord(indiceRepetition),
     wrapWord(fullLibelleFromTypeVoie),
     wrapWord(libelleVoie, ", "),
