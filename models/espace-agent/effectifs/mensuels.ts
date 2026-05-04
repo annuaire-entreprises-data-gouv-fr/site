@@ -5,6 +5,7 @@ import {
   ApplicationRights,
   ApplicationRightsToScopes,
 } from "#models/authentication/user/rights";
+import type { UseCase } from "#models/use-cases";
 import { verifySiret } from "#utils/helpers";
 import { handleApiEntrepriseError } from "../utils";
 
@@ -36,6 +37,7 @@ export const getEffectifsMensuelsProtected = async (
   params: {
     natureEffectif: TNatureEffectif;
     year: string;
+    useCase: UseCase;
   }
 ): Promise<IEffectifsMensuelsProtected | IAPINotRespondingError> => {
   const siret = verifySiret(maybeSiret);
@@ -66,6 +68,7 @@ export const getEffectifsMensuelsProtected = async (
     year,
     effectifsMensuelsMonth,
     ApplicationRightsToScopes[ApplicationRights.effectifs],
+    params.useCase,
     {
       profondeur,
       nature_effectif: natureEffectif,
