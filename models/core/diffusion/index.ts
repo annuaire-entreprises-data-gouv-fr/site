@@ -83,11 +83,12 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
     );
   }
 
+  uniteLegale.siege = anonymiseEtablissement(uniteLegale.siege, session);
+
   if (estDiffusible(uniteLegale)) {
     return uniteLegale;
   }
   uniteLegale.nomComplet = getNomComplet(uniteLegale, session);
-  uniteLegale.siege = anonymiseEtablissement(uniteLegale.siege, session);
   uniteLegale.chemin = uniteLegale.siren;
   return uniteLegale;
 };
