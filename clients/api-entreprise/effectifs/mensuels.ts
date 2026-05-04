@@ -1,6 +1,7 @@
 import routes from "#clients/routes";
 import type { IAgentScope } from "#models/authentication/agent/scopes/constants";
 import type { IEffectifsMensuelsProtected } from "#models/espace-agent/effectifs/mensuels";
+import type { UseCase } from "#models/use-cases";
 import type { Siret } from "#utils/helpers";
 import clientAPIEntreprise from "../client";
 import type {
@@ -16,6 +17,7 @@ export async function clientApiEntrepriseEffectifsMensuels(
   year: number,
   month: number,
   scope: IAgentScope | null,
+  useCase: UseCase,
   filters: {
     profondeur: number;
     nature_effectif: TNatureEffectif;
@@ -31,6 +33,7 @@ export async function clientApiEntrepriseEffectifsMensuels(
     (result) => mapToDomainObject(result),
     {
       scope,
+      useCase,
     }
   );
 }

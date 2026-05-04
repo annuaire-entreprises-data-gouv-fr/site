@@ -10,18 +10,52 @@ import {
   hasRights,
 } from "#models/authentication/user/rights";
 import type { ISession } from "#models/authentication/user/session";
-import type { IUniteLegale } from "#models/core/types";
+import type { IEtablissement, IUniteLegale } from "#models/core/types";
 import type { UseCase } from "#models/use-cases";
 
-interface WrappedSectionProps {
+interface WrappedSectionBaseProps {
   id: string;
   isProtected: boolean;
   session: ISession | null;
   sources: EAdministration[];
   title: string;
-  uniteLegale: IUniteLegale;
   useCase: UseCase;
 }
+
+interface WrappedSectionUniteLegaleProps extends WrappedSectionBaseProps {
+  uniteLegale: IUniteLegale;
+}
+
+interface WrappedSectionEtablissementProps extends WrappedSectionBaseProps {
+  etablissement: IEtablissement;
+}
+
+interface ProtectedSectionWithUseCaseBaseProps
+  extends Pick<
+    WrappedSectionBaseProps,
+    "id" | "session" | "sources" | "title"
+  > {
+  allowedUseCases: UseCase[];
+  noRightContent?: React.JSX.Element;
+  requiredRight: ApplicationRights;
+  useCaseFormContent?: React.JSX.Element;
+}
+
+interface ProtectedSectionWithUseCaseUniteLegaleProps
+  extends ProtectedSectionWithUseCaseBaseProps {
+  uniteLegale: IUniteLegale;
+  WrappedSection: React.ComponentType<WrappedSectionUniteLegaleProps>;
+}
+
+interface ProtectedSectionWithUseCaseEtablissementProps
+  extends ProtectedSectionWithUseCaseBaseProps {
+  etablissement: IEtablissement;
+  WrappedSection: React.ComponentType<WrappedSectionEtablissementProps>;
+}
+
+type ProtectedSectionWithUseCaseProps =
+  | ProtectedSectionWithUseCaseUniteLegaleProps
+  | ProtectedSectionWithUseCaseEtablissementProps;
 
 const DefaultIntroContent = () => (
   <p>
@@ -35,29 +69,19 @@ const DefaultIntroContent = () => (
   </p>
 );
 
-const ProtectedSectionWithUseCase: React.FC<{
-  uniteLegale: IUniteLegale;
-  session: ISession | null;
-  title: string;
-  id: string;
-  sources: EAdministration[];
-  allowedUseCases: UseCase[];
-  requiredRight: ApplicationRights;
-  noRightContent?: React.JSX.Element;
-  useCaseFormContent?: React.JSX.Element;
-  WrappedSection: React.ComponentType<WrappedSectionProps>;
-}> = ({
-  uniteLegale,
-  session,
-  title,
-  id,
-  sources,
-  allowedUseCases,
-  noRightContent,
-  useCaseFormContent,
-  requiredRight,
-  WrappedSection,
-}) => {
+const ProtectedSectionWithUseCase: React.FC<
+  ProtectedSectionWithUseCaseProps
+> = (props: ProtectedSectionWithUseCaseProps) => {
+  const {
+    session,
+    title,
+    id,
+    sources,
+    allowedUseCases,
+    noRightContent,
+    useCaseFormContent,
+    requiredRight,
+  } = props;
   const [useCase, setUseCase] = useState<UseCase>();
 
   if (!hasRights(session, requiredRight)) {
@@ -88,14 +112,32 @@ const ProtectedSectionWithUseCase: React.FC<{
     );
   }
 
+  if ("etablissement" in props) {
+    const WrappedSection = props.WrappedSection;
+
+    return (
+      <WrappedSection
+        etablissement={props.etablissement}
+        id={id}
+        isProtected
+        session={session}
+        sources={sources}
+        title={title}
+        useCase={useCase}
+      />
+    );
+  }
+
+  const WrappedSection = props.WrappedSection;
+
   return (
     <WrappedSection
       id={id}
-      isProtected={true}
+      isProtected
       session={session}
       sources={sources}
       title={title}
-      uniteLegale={uniteLegale}
+      uniteLegale={props.uniteLegale}
       useCase={useCase}
     />
   );
