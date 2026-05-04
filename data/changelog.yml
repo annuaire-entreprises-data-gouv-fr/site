@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 04/05/2026
+  target:
+    agent: true
+  body: |
+    Ajout de la courbe des effectifs mensuels des établissements dans la page "Établissements".
 - date: 21/04/2026
   target:
     site: true
