@@ -275,6 +275,9 @@ export const isAssociation = (
 export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estServicePublic;
 
+export const isAvocat = (uniteLegale: IUniteLegale): boolean =>
+  uniteLegale.complements.estAvocat;
+
 export const isEntrepreneurIndividuel = (
   uniteLegaleOrEtablissement: IUniteLegale | IEtablissement
 ): boolean => uniteLegaleOrEtablissement.complements.estEntrepreneurIndividuel;

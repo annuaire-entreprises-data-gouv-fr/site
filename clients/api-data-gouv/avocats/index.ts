@@ -52,6 +52,8 @@ const mapToDomainObject = (response: IAvocatsDatagouvResponse): IAvocats => ({
     nom: item.avNom,
     prenom: item.avPrenom,
     nomBarreau: item.NomBarreau,
+    languesParlees:
+      !item.spLibelle4 || item.spLibelle4 === "0" ? null : item.spLibelle4,
   })),
   meta: response.meta,
 });

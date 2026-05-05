@@ -32,6 +32,7 @@ export interface IAvocatsDatagouvResponse {
 }
 
 interface IAvocat {
+  languesParlees: string | null;
   nom: string;
   nomBarreau: string;
   prenom: string;
