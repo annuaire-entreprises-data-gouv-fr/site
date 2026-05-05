@@ -25,7 +25,7 @@ export default function ServicePublicSection({
       data={servicePublic}
       notFoundInfo={
         <p>
-          Cette administration n’a pas été retrouvé dans l’
+          Cette administration n’a pas été retrouvée dans l’
           <a
             aria-label="Voir l’Annuaire du service public, nouvelle fenêtre"
             href="https://lannuaire.service-public.gouv.fr/"
