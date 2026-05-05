@@ -1,6 +1,7 @@
 "use client";
 
 import { parseAsInteger, useQueryState } from "nuqs";
+import { useEffect } from "react";
 import type { IAvocats } from "#clients/api-data-gouv/avocats/interface";
 import NonRenseigne from "#components/non-renseigne";
 import LocalPageCounter from "#components/search-results/results-pagination/local-pagination";
@@ -36,6 +37,18 @@ export default function AvocatsSection({
   );
 
   const avocats = useFetchAvocats(uniteLegale, currentPage);
+
+  useEffect(() => {
+    if (window.location.hash !== "#avocats") {
+      return;
+    }
+
+    const animationFrame = window.requestAnimationFrame(() => {
+      document.getElementById("avocats")?.scrollIntoView();
+    });
+
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [avocats]);
 
   return (
     <AsyncDataSectionClient
