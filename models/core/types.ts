@@ -187,6 +187,7 @@ export interface IUniteLegaleComplements {
   estAchatsResponsables: boolean;
   estAlimConfiance: boolean;
   estAssociation: boolean;
+  estAvocat: boolean;
   estBio: boolean;
   estEntrepreneurIndividuel: boolean;
   estEntrepreneurSpectacle: boolean;
@@ -234,6 +235,7 @@ export const createDefaultUniteLegaleComplements =
     idFinessJuridiques: [],
     aAideMinimis: false,
     aAideADEME: false,
+    estAvocat: false,
   });
 
 export interface IEtablissementComplements {

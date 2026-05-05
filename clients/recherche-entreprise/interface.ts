@@ -113,6 +113,7 @@ export interface IComplements {
   est_achats_responsables: boolean;
   est_alim_confiance: boolean;
   est_association: boolean;
+  est_avocat: boolean;
   est_bio: boolean;
   est_entrepreneur_individuel: boolean;
   est_entrepreneur_spectacle: boolean;
