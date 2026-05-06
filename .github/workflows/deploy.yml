@@ -21,6 +21,10 @@ jobs:
             host: SSH_HOST_STAGING_V2
           - environment: staging-02
             host: SSH_STAGING_02
+          - environment: staging-03
+            host: SSH_STAGING_03
+          - environment: staging-04
+            host: SSH_STAGING_04
     steps:
       - uses: actions/checkout@v6
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
