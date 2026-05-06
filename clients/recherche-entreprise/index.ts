@@ -38,6 +38,7 @@ import {
 interface ClientSearchRechercheEntreprise {
   inclureEtablissements?: boolean;
   inclureImmatriculation?: boolean;
+  inclureTVA?: boolean;
   pageEtablissements?: number;
   pageResultatsRecherche?: number;
   searchFilterParams?: SearchFilterParams;
@@ -53,6 +54,7 @@ export const clientSearchRechercheEntrepriseRaw = async (
     searchFilterParams,
     inclureEtablissements = false,
     inclureImmatriculation = false,
+    inclureTVA = false,
     pageResultatsRecherche = 1,
     pageEtablissements = 1,
   }: ClientSearchRechercheEntreprise,
@@ -76,6 +78,10 @@ export const clientSearchRechercheEntrepriseRaw = async (
   }`;
 
   url += "&include_admin=slug";
+
+  if (inclureTVA) {
+    url += ",tva";
+  }
 
   if (inclureEtablissements) {
     url += ",etablissements";
@@ -110,6 +116,7 @@ const clientSearchRechercheEntreprise = async (
     searchFilterParams,
     inclureEtablissements = false,
     inclureImmatriculation = false,
+    inclureTVA = false,
     pageResultatsRecherche = 1,
     pageEtablissements = 1,
   }: ClientSearchRechercheEntreprise,
@@ -121,6 +128,7 @@ const clientSearchRechercheEntreprise = async (
       searchFilterParams,
       inclureEtablissements,
       inclureImmatriculation,
+      inclureTVA,
       pageResultatsRecherche,
       pageEtablissements,
     },
@@ -169,6 +177,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     caractere_employeur = "",
     etat_administratif,
     nombre_etablissements_ouverts,
+    tva,
   } = result;
 
   const {
@@ -323,6 +332,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     dateMiseAJourInpi: date_mise_a_jour_rne || "",
     dateFermeture: date_fermeture ?? "",
     listeIdcc: (liste_idcc || []).map((idcc) => ({ idcc, title: "" })),
+    tva,
   };
 };
 
