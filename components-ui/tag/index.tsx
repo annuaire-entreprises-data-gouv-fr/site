@@ -11,7 +11,12 @@ interface ITagProps {
     | "new"
     | "success"
     | "warning"
-    | "agent";
+    | "agent"
+    | "greenEmeraude"
+    | "yellowTournesol"
+    | "brownOpera"
+    | "pinkMacaron"
+    | "cafeCreme";
   id?: string;
   // title?: string;
   link?: {
@@ -89,4 +94,9 @@ const badgeColor = {
   info: "fr-badge--info",
   success: "fr-badge--success",
   agent: "fr-badge--purple-glycine",
+  greenEmeraude: "fr-badge--green-emeraude",
+  yellowTournesol: "fr-badge--yellow-tournesol",
+  brownOpera: "fr-badge--brown-opera",
+  pinkMacaron: "fr-badge--pink-macaron",
+  cafeCreme: "fr-badge--brown-cafe-creme",
 };
