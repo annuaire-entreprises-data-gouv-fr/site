@@ -195,6 +195,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     est_achats_responsables = false,
     est_patrimoine_vivant = false,
     est_alim_confiance = false,
+    est_avocat = false,
     bilan_ges_renseigne = false,
     a_aide_minimis = false,
     a_aide_ademe = false,
@@ -308,6 +309,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       idFinessJuridiques: liste_finess_juridique,
       aAideMinimis: a_aide_minimis,
       aAideADEME: a_aide_ademe,
+      estAvocat: est_avocat,
     },
     immatriculation: mapToImmatriculation(immatriculation),
     association: {

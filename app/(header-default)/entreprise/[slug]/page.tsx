@@ -1,3 +1,4 @@
+import AvocatsSection from "app/(header-default)/entreprise/[slug]/_components/avocats-section";
 import { UniteLegaleImmatriculationSection } from "app/(header-default)/entreprise/[slug]/_components/immatriculation-section";
 import UniteLegaleSummarySection from "app/(header-default)/entreprise/[slug]/_components/summary-section";
 import type { Metadata } from "next";
@@ -21,6 +22,7 @@ import {
 import { estNonDiffusibleStrict } from "#models/core/diffusion";
 import {
   isAssociation,
+  isAvocat,
   isCollectiviteTerritoriale,
   isServicePublic,
 } from "#models/core/types";
@@ -131,6 +133,9 @@ export default async function UniteLegalePage(props: AppRouterProps) {
                 )}
                 {isServicePublic(uniteLegale) && (
                   <ServicePublicSection uniteLegale={uniteLegale} />
+                )}
+                {isAvocat(uniteLegale) && (
+                  <AvocatsSection uniteLegale={uniteLegale} />
                 )}
                 {!isBot && isAssociation(uniteLegale) && (
                   <AssociationSection

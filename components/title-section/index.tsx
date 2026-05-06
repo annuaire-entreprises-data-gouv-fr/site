@@ -13,6 +13,7 @@ import { estNonDiffusibleStrict } from "#models/core/diffusion";
 import type { IUniteLegale } from "#models/core/types";
 import { formatIntFr } from "#utils/helpers";
 import TitleAlerts from "./alerts";
+import { AvocatTag } from "./avocat-tag";
 import styles from "./styles.module.css";
 import { FICHE, Tabs } from "./tabs";
 
@@ -64,6 +65,7 @@ const Title: React.FC<IProps> = ({
             etatAdministratif={uniteLegale.etatAdministratif}
             statutDiffusion={uniteLegale.statutDiffusion}
           />
+          <AvocatTag uniteLegale={uniteLegale} />
         </span>
       </div>
       {uniteLegale.etablissements.all && (

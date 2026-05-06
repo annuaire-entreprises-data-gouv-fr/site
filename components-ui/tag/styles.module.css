@@ -1,5 +1,5 @@
 a.frBadge {
-  text-decoration: underline;
+  text-decoration: none;
   border: none;
 }
 a.frBadge:hover {

@@ -100,6 +100,8 @@ const routes = {
       "https://tabular-api.data.gouv.fr/api/resources/f43a5294-8f79-4b40-b5f9-88b62ea1ad14/data/",
     aidesAdeme:
       "https://tabular-api.data.gouv.fr/api/resources/a514049e-6213-4b7e-81e2-5443fb7cd375/data/",
+    avocats:
+      "https://tabular-api.data.gouv.fr/api/resources/12b60803-3679-41d1-9289-523bb7601a4f/data/",
   },
   dataSubvention: {
     pageBySirenOrIdRna: (sirenOrIdRna: string) =>
