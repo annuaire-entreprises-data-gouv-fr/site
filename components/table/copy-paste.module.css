@@ -36,6 +36,7 @@
   align-items: center;
   padding: 0 4px;
   font-size: 0.9rem;
+  font-weight: normal;
   color: var(--annuaire-colors-frBlue);
   background-color: var(--annuaire-colors-pastelBlue);
   border-radius: 3px;

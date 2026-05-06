@@ -14,18 +14,9 @@
   list-style: none;
 }
 
-.tvaOnlyItem {
-  display: flex;
-  width: fit-content;
-}
-
 .tvaListItem {
   display: flex;
   width: fit-content;
-  padding: 0.25rem 0.5rem;
-  background: var(--background-alt-grey);
-  border: 1px solid var(--border-default-grey);
-  border-radius: 0.25rem;
 }
 
 .tvaShowMoreButton {

@@ -1,18 +1,15 @@
 "use client";
 
+import clsx from "clsx";
 import { useState } from "react";
 import { CopyPaste } from "#components/table/copy-paste";
 import { formatIntFr } from "#utils/helpers";
 import styles from "./style.module.css";
 
-const MAX_VISIBLE_TVA = 5;
+const MAX_VISIBLE_TVA = 3;
 
 const formatTVA = (tva: string) => {
-  const normalizedTVA = tva.replace(/\s/g, "");
-
-  if (normalizedTVA.startsWith("FR")) {
-    return formatIntFr(normalizedTVA);
-  }
+  const normalizedTVA = tva.replace(/\s/g, "").replace(/^FR/, "");
 
   return `FR${formatIntFr(normalizedTVA)}`;
 };
@@ -31,9 +28,10 @@ const TVAList: React.FC<{
       <ul className={styles.tvaList}>
         {displayedTVANumbers.map((tva) => (
           <li
-            className={
-              tvaNumbers.length === 1 ? styles.tvaOnlyItem : styles.tvaListItem
-            }
+            className={clsx(
+              styles.tvaListItem,
+              tvaNumbers.length > 1 && "fr-badge fr-badge--no-icon fr-badge--md"
+            )}
             key={tva}
           >
             <CopyPaste label="TVA" shouldRemoveSpace={true}>
