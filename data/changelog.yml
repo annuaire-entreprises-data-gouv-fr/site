@@ -11,6 +11,12 @@
 #   site: true
 
 ---
+- date: 06/05/2026
+  target:
+    site: true
+  body: |
+    Ajout du badge "Avocat" dans la page entreprise ainsi que la section "Avocats" listant les avocats enregistrés pour l'entreprise.
+    Les données sont issues de l'Annuaire des avocats de France publié par le Conseil national des barreaux.
 - date: 04/05/2026
   target:
     agent: true
