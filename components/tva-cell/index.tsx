@@ -13,7 +13,7 @@ import type { IUniteLegale } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
 import { getTvaUniteLegale } from "#models/tva";
 import { formatIntFr } from "#utils/helpers";
-import styles from "./style.module.css";
+import TVAList from "./tva-list";
 
 const NoTVA = () => (
   <i>
@@ -171,19 +171,11 @@ const TVACell: React.FC<{
     return <NoTVA />;
   }
 
-  if (!uniteLegale.tva) {
+  if (!uniteLegale.tva || uniteLegale.tva.length === 0) {
     return <VerifyTVA uniteLegale={uniteLegale} />;
   }
 
-  return (
-    <div className={styles.tvaContainer}>
-      {uniteLegale.tva.map((tva) => (
-        <CopyPaste key={tva} label="TVA" shouldRemoveSpace={true}>
-          {formatIntFr(tva)}
-        </CopyPaste>
-      ))}
-    </div>
-  );
+  return <TVAList tvaNumbers={uniteLegale.tva} />;
 };
 
 export default TVACell;

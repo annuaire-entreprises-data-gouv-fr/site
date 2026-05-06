@@ -1,6 +1,48 @@
-.tvaContainer {
+.tvaListContainer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  align-items: center;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.tvaList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tvaOnlyItem {
+  display: flex;
+  width: fit-content;
+}
+
+.tvaListItem {
+  display: flex;
+  width: fit-content;
+  padding: 0.25rem 0.5rem;
+  background: var(--background-alt-grey);
+  border: 1px solid var(--border-default-grey);
+  border-radius: 0.25rem;
+}
+
+.tvaShowMoreButton {
+  width: fit-content;
+  padding: 0;
+  color: var(--text-action-high-blue-france);
+  text-decoration: underline;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.tvaShowMoreButton:hover {
+  color: var(--text-action-high-blue-france-hover);
+}
+
+.tvaShowMoreButton:focus-visible {
+  outline: 2px solid var(--border-active-blue-france);
+  outline-offset: 2px;
 }
