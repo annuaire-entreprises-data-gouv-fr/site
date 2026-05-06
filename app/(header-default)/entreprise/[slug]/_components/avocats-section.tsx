@@ -22,7 +22,7 @@ const AvocatsTable = ({ avocats }: { avocats: IAvocats["avocats"] }) => (
       avocat.nomBarreau,
       avocat.languesParlees || <NonRenseigne />,
     ])}
-    head={["Avocat", "Inscrit au barreau", "Langues parlées"]}
+    head={["Avocat", "Barreau", "Langues parlées"]}
   />
 );
 
