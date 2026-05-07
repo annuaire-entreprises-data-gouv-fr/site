@@ -15,6 +15,7 @@ jobs:
     environment:
       name: staging
     strategy:
+      fail-fast: false
       matrix:
         include:
           - environment: staging-01
