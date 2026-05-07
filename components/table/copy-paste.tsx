@@ -1,4 +1,5 @@
 "use client";
+import clsx from "clsx";
 import { useLayoutEffect, useRef, useState } from "react";
 import { InternalError } from "#models/exceptions";
 import style from "./copy-paste.module.css";
@@ -8,6 +9,7 @@ interface ICopyPasteProps {
   disableCopyIcon?: boolean;
   id?: string;
   label: string;
+  noWrap?: boolean;
   shouldRemoveSpace?: boolean;
 }
 
@@ -25,6 +27,7 @@ export function CopyPaste({
   disableCopyIcon = false,
   id,
   label,
+  noWrap = false,
 }: ICopyPasteProps) {
   if (typeof children !== "string") {
     throw new InternalError({
@@ -85,9 +88,11 @@ export function CopyPaste({
   return (
     <button
       aria-label={`${children}, copier dans le presse-papier`}
-      className={`${style.copyButton} ${
-        disableCopyIcon ? style.copyIconDisabled : ""
-      }`}
+      className={clsx(
+        style.copyButton,
+        disableCopyIcon && style.copyIconDisabled,
+        noWrap && style.copyButtonNoWrap
+      )}
       onBlur={handleBlur}
       onClick={copyToClipboard}
       onFocus={() => setFocused(true)}

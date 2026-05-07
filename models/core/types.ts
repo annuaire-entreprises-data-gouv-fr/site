@@ -12,7 +12,6 @@ import {
   FetchRessourceException,
   type IExceptionContext,
 } from "../exceptions";
-import type { ITVAIntracommunautaire } from "../tva";
 import { ISTATUTDIFFUSION } from "./diffusion";
 
 export interface IEtablissement {
@@ -122,7 +121,7 @@ export interface IUniteLegale extends IEtablissementsList {
   siren: Siren;
   statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
   trancheEffectif: string | null;
-  tva: ITVAIntracommunautaire | null;
+  tva: string[] | null;
 }
 
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
@@ -132,7 +131,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     siren,
     oldSiren: siren,
     siege,
-    tva: null,
+    tva: [],
     anciensSiegesSirets: [],
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif: IETATADMINSTRATIF.INCONNU,

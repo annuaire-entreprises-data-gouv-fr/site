@@ -18,6 +18,10 @@
   border: none;
 }
 
+.copyButtonNoWrap {
+  flex-wrap: nowrap;
+}
+
 .copyIconDisabled:hover {
   border-radius: 3px;
 }
@@ -32,10 +36,12 @@
 }
 
 .copyIcon {
+  z-index: 10;
   display: inline-flex;
   align-items: center;
   padding: 0 4px;
   font-size: 0.9rem;
+  font-weight: normal;
   color: var(--annuaire-colors-frBlue);
   background-color: var(--annuaire-colors-pastelBlue);
   border-radius: 3px;
