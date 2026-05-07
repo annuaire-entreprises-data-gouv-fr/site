@@ -12,7 +12,6 @@ export const clientUniteLegaleRechercheEntreprise = async (
     pageResultatsRecherche: 1,
     inclureEtablissements: true,
     inclureImmatriculation: true,
-    inclureTVA: true,
     pageEtablissements,
   });
 

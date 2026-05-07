@@ -204,16 +204,6 @@ export const formatIntFr = safe((intAsString: string = "") => {
   return intAsString.replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
 });
 
-const FORMAT_TVA_PATTERN = /([\p{L}0-9])(?=(?:[\p{L}0-9]{3})+$)/gu;
-
-// biome-ignore lint/style/noInferrableTypes: needed for the safe function inference
-export const formatTVA = safe((tva: string = "") => {
-  if (!tva) {
-    return tva;
-  }
-  return tva.replace(FORMAT_TVA_PATTERN, "$1 ");
-});
-
 // biome-ignore lint/style/noInferrableTypes: needed for the safe function inference
 export const formatFloatFr = safe((floatAsString: string = "") => {
   if (!floatAsString) {
