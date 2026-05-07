@@ -22,6 +22,7 @@ const AvocatsTable = ({ avocats }: { avocats: IAvocats["avocats"] }) => (
       avocat.nomBarreau,
       avocat.languesParlees || <NonRenseigne />,
     ])}
+    columnWidths={["40%", "30%", "30%"]}
     head={["Avocat", "Barreau", "Langues parlées"]}
   />
 );

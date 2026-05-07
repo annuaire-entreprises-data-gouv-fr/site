@@ -31,7 +31,6 @@ import {
   isAPINotResponding,
 } from "../api-not-responding";
 import { FetchRessourceException, Information } from "../exceptions";
-import { getTvaUniteLegale } from "../tva";
 import { shouldUseInsee } from ".";
 import {
   anonymiseUniteLegale,
@@ -83,9 +82,6 @@ class UniteLegaleBuilder {
 
   build = async () => {
     const uniteLegale = await this.fetchFromClients();
-
-    // determine TVA
-    uniteLegale.tva = getTvaUniteLegale(uniteLegale);
 
     if (
       (await isProtectedSiren(uniteLegale.siren)) &&
@@ -239,6 +235,7 @@ class UniteLegaleBuilder {
         uniteLegaleInsee.dateMiseAJourInsee ??
         uniteLegaleRechercheEntreprise.dateMiseAJourInsee,
       dateMiseAJourInpi: uniteLegaleRechercheEntreprise.dateMiseAJourInpi,
+      tva: uniteLegaleRechercheEntreprise.tva,
     };
   };
 

@@ -35,6 +35,7 @@ export interface IResult {
   slug: string;
   statut_diffusion: "O" | "P";
   tranche_effectif_salarie: string;
+  tva: string[] | null;
 }
 
 export interface IDirigeant {
