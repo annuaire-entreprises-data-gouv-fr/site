@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { CopyPaste } from "#components/table/copy-paste";
-import { formatIntFr } from "#utils/helpers";
+import { formatTVA as formatTVAHelper } from "#utils/helpers";
 import styles from "./style.module.css";
 
 const MAX_VISIBLE_TVA = 3;
@@ -11,7 +11,7 @@ const MAX_VISIBLE_TVA = 3;
 const formatTVA = (tva: string) => {
   const normalizedTVA = tva.replace(/\s/g, "").replace(/^FR/, "");
 
-  return `FR${formatIntFr(normalizedTVA)}`;
+  return `FR${formatTVAHelper(normalizedTVA)}`;
 };
 
 const TVAList: React.FC<{
