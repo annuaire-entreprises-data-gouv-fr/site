@@ -10,7 +10,6 @@ export const clientEtablissementRechercheEntreprise = async (
     pageResultatsRecherche: 1,
     inclureEtablissements: false,
     inclureImmatriculation: false,
-    inclureTVA: false,
   });
 
   if (

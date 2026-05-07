@@ -2,18 +2,15 @@
 
 import { APIRoutesPaths } from "app/api/data-fetching/routes-paths";
 import { useAPIRouteData } from "hooks/fetch/use-API-route-data";
-import { useMemo } from "react";
 import { CopyPaste } from "#components/table/copy-paste";
 import FAQLink from "#components-ui/faq-link";
 import { Icon } from "#components-ui/icon/wrapper";
 import InformationTooltip from "#components-ui/information-tooltip";
 import { Loader } from "#components-ui/loader";
-import { estActif } from "#models/core/etat-administratif";
 import type { IUniteLegale } from "#models/core/types";
 import { hasAnyError, isDataLoading } from "#models/data-fetching";
-import { getTvaUniteLegale } from "#models/tva";
-import { formatIntFr } from "#utils/helpers";
-import TVAList from "./tva-list";
+import type { ITVAIntracommunautaire } from "#models/tva";
+import { formatIntFr, type Siren } from "#utils/helpers";
 
 const NoTVA = () => (
   <i>
@@ -81,17 +78,11 @@ const CopyCell = ({ number }: { number: string }) => (
  */
 
 const VerifyTVA: React.FC<{
-  uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
-  const tvaUniteLegale = useMemo(
-    () => getTvaUniteLegale(uniteLegale),
-    [uniteLegale]
-  );
-  const verification = useAPIRouteData(
-    APIRoutesPaths.VerifyTva,
-    uniteLegale.siren,
-    null
-  );
+  tva: ITVAIntracommunautaire;
+  siren: Siren;
+}> = ({ tva: tvaProp, siren }) => {
+  const { tvaNumber, mayHaveMultipleTVANumber } = tvaProp;
+  const verification = useAPIRouteData(APIRoutesPaths.VerifyTva, siren, null);
   if (isDataLoading(verification)) {
     return (
       <>
@@ -120,7 +111,7 @@ const VerifyTVA: React.FC<{
         tabIndex={0}
       >
         <Icon color="#df0a00" slug="errorFill">
-          <CopyCell number={tvaUniteLegale?.tvaNumber || ""} />
+          <CopyCell number={tvaNumber} />
         </Icon>
       </InformationTooltip>
     );
@@ -129,7 +120,7 @@ const VerifyTVA: React.FC<{
   return (
     <>
       {tva ? (
-        tvaUniteLegale?.mayHaveMultipleTVANumber.currentlyActive ? (
+        mayHaveMultipleTVANumber.currentlyActive ? (
           <InformationTooltip
             horizontalOrientation="left"
             label={
@@ -154,10 +145,8 @@ const VerifyTVA: React.FC<{
         )
       ) : (
         <TVAInvalide
-          multipleNum={
-            tvaUniteLegale?.mayHaveMultipleTVANumber.allTime || false
-          }
-          number={tvaUniteLegale?.tvaNumber || ""}
+          multipleNum={mayHaveMultipleTVANumber.allTime}
+          number={tvaNumber}
         />
       )}
     </>
@@ -167,15 +156,11 @@ const VerifyTVA: React.FC<{
 const TVACell: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  if (!estActif(uniteLegale)) {
+  if (!uniteLegale.tva) {
     return <NoTVA />;
   }
 
-  if (!uniteLegale.tva || uniteLegale.tva.length === 0) {
-    return <VerifyTVA uniteLegale={uniteLegale} />;
-  }
-
-  return <TVAList tvaNumbers={uniteLegale.tva} />;
+  return <VerifyTVA siren={uniteLegale.siren} tva={uniteLegale.tva} />;
 };
 
 export default TVACell;
