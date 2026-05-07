@@ -15,6 +15,22 @@ export interface IResult {
   };
   annee_categorie_entreprise: string;
   annee_tranche_effectif_salarie: string;
+  bodacc: {
+    radiation: {
+      est_radie: true;
+      id_annonce: string;
+      date: string | null;
+    } | null;
+    procedure_collective: {
+      statut:
+        | "sauvegarde"
+        | "liquidation_judiciaire"
+        | "redressement_judiciaire"
+        | null;
+      id_annonce: string;
+      date: string | null;
+    } | null;
+  };
   caractere_employeur: string;
   categorie_entreprise: string;
   complements: IComplements;

@@ -13,6 +13,7 @@ export const clientUniteLegaleRechercheEntreprise = async (
     inclureEtablissements: true,
     inclureImmatriculation: true,
     inclureTVA: true,
+    inclureBodacc: true,
     pageEtablissements,
   });
 

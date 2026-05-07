@@ -13,6 +13,7 @@ export const clientDirigeantsRechercheEntreprise = async (
       inclureEtablissements: false,
       inclureImmatriculation: false,
       inclureTVA: false,
+      inclureBodacc: false,
       pageEtablissements: 1,
     },
     signal

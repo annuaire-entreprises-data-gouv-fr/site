@@ -92,6 +92,22 @@ export interface IUniteLegale extends IEtablissementsList {
   association: {
     idAssociation: IdRna | string | null;
   };
+  bodacc: {
+    radiation: {
+      estRadie: true;
+      idAnnonce: string;
+      date: string | null;
+    } | null;
+    procedureCollective: {
+      statut:
+        | "sauvegarde"
+        | "liquidation_judiciaire"
+        | "redressement_judiciaire"
+        | null;
+      idAnnonce: string;
+      date: string | null;
+    } | null;
+  } | null;
   categorieEntreprise: string | null;
   chemin: string;
   colter: {
@@ -166,6 +182,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     listeIdcc: [],
     immatriculation: null,
     isNbEtablissementOuvertReliable: true,
+    bodacc: null,
   };
 };
 
