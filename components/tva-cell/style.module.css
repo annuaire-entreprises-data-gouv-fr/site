@@ -7,8 +7,9 @@
 
 .tvaList {
   display: flex;
-  flex-direction: column;
-  gap: 0.375rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -16,7 +17,15 @@
 
 .tvaListItem {
   display: flex;
-  width: fit-content;
+  flex-wrap: nowrap;
+  width: 142px;
+  max-width: 142px;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.tvaListItem button {
+  font-variant-numeric: tabular-nums;
 }
 
 .tvaShowMoreButton {

@@ -26,36 +26,38 @@ const TVAList: React.FC<{
   return (
     <div className={styles.tvaListContainer}>
       <ul className={styles.tvaList}>
-        {displayedTVANumbers.map((tva) => (
+        {displayedTVANumbers.map((tva, index) => (
           <li
             className={clsx(
               styles.tvaListItem,
-              tvaNumbers.length > 1 && "fr-badge fr-badge--no-icon fr-badge--md"
+              tvaNumbers.length > 1 && "fr-badge"
             )}
             key={tva}
           >
-            <CopyPaste label="TVA" shouldRemoveSpace={true}>
+            <CopyPaste label="TVA" noWrap shouldRemoveSpace>
               {formatTVA(tva)}
             </CopyPaste>
           </li>
         ))}
+        {shouldDisplayShowMore && (
+          <li>
+            <button
+              aria-label={
+                showAllTVA
+                  ? "Afficher moins de numéros de TVA"
+                  : `Afficher les ${
+                      tvaNumbers.length - MAX_VISIBLE_TVA
+                    } autres numéros de TVA`
+              }
+              className={styles.tvaShowMoreButton}
+              onClick={() => setShowAllTVA(!showAllTVA)}
+              type="button"
+            >
+              {showAllTVA ? "Voir moins" : "Voir plus"}
+            </button>
+          </li>
+        )}
       </ul>
-      {shouldDisplayShowMore && (
-        <button
-          aria-label={
-            showAllTVA
-              ? "Afficher moins de numéros de TVA"
-              : `Afficher les ${
-                  tvaNumbers.length - MAX_VISIBLE_TVA
-                } autres numéros de TVA`
-          }
-          className={styles.tvaShowMoreButton}
-          onClick={() => setShowAllTVA(!showAllTVA)}
-          type="button"
-        >
-          {showAllTVA ? "Voir moins" : "Voir plus"}
-        </button>
-      )}
     </div>
   );
 };
