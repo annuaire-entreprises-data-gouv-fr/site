@@ -83,6 +83,7 @@ export const createDefaultEtablissement = (): IEtablissement => ({
 });
 
 export interface IUniteLegale extends IEtablissementsList {
+  aAccesEspaceAgent: boolean;
   activitePrincipale: string;
   // only used to pass information from unitelegale to the etablissement in insee response. Prefer etablissement.ancienSiege
   anciensSiegesSirets: Siret[];
@@ -128,6 +129,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
   const siege = createDefaultEtablissement();
   siege.estSiege = true;
   return {
+    aAccesEspaceAgent: false,
     siren,
     oldSiren: siren,
     siege,
@@ -184,6 +186,7 @@ export interface IUniteLegaleComplements {
   bilanGesRenseigne: boolean;
   egaproRenseignee: boolean;
   estAchatsResponsables: boolean;
+  estAdministration: boolean;
   estAlimConfiance: boolean;
   estAssociation: boolean;
   estAvocat: boolean;
@@ -199,7 +202,6 @@ export interface IUniteLegaleComplements {
   estPersonneMorale: boolean;
   estQualiopi: boolean;
   estRge: boolean;
-  estServicePublic: boolean;
   estSocieteMission: boolean;
   estUai: boolean;
   idFinessJuridiques: string[];
@@ -216,7 +218,7 @@ export const createDefaultUniteLegaleComplements =
     estEntrepreneurSpectacle: false,
     egaproRenseignee: false,
     statutEntrepreneurSpectacle: "",
-    estServicePublic: false,
+    estAdministration: false,
     estL100_3: false,
     estFiness: false,
     estRge: false,
@@ -272,7 +274,7 @@ export const isAssociation = (
   (toBeDetermined as IAssociation).association.idAssociation !== null;
 
 export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
-  uniteLegale.complements.estServicePublic;
+  uniteLegale.complements.estAdministration;
 
 export const isAvocat = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estAvocat;
