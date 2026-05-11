@@ -82,7 +82,8 @@ function itShouldMatchSnapshot(
       inclureImmatriculation: true,
     });
     expect(JSON.stringify({ searchTerms, result }, null, 2)).toMatchFile(
-      path.join(import.meta.dirname, ".", `search-${searchTerms}${suffix}.json`)
+      // biome-ignore lint/correctness/noGlobalDirnameFilename: shhh
+      path.join(__dirname, ".", `search-${searchTerms}${suffix}.json`)
     );
   });
 }

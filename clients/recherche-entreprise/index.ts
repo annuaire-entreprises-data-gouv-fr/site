@@ -77,7 +77,7 @@ export const clientSearchRechercheEntrepriseRaw = async (
     searchFilterParams?.toApiURI() || ""
   }`;
 
-  url += "&include_admin=admin,slug";
+  url += "&include_admin=admin";
 
   if (inclureTVA) {
     url += ",tva";
@@ -261,6 +261,13 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     tranche_effectif_salarie,
     isAtLeastEmployeur ? "O" : caractere_employeur
   );
+
+  console.log("=========================================");
+  console.log(
+    "result.admin?.a_acces_espace_agent",
+    result.admin?.a_acces_espace_agent
+  );
+  console.log("=========================================");
 
   return {
     ...createDefaultUniteLegale(siren),
