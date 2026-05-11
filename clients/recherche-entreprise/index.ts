@@ -77,7 +77,7 @@ export const clientSearchRechercheEntrepriseRaw = async (
     searchFilterParams?.toApiURI() || ""
   }`;
 
-  url += "&include_admin=slug";
+  url += "&include_admin=admin,slug";
 
   if (inclureTVA) {
     url += ",tva";
