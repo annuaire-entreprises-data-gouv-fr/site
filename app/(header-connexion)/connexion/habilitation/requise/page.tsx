@@ -15,8 +15,7 @@ export default async function RequiredHabilitationPage(props: AppRouterProps) {
       <h1>Vous n’êtes pas autorisé(e) à accéder à l’espace agent</h1>
       <div>
         Seuls peuvent accéder à l’espace agent public les membres d’une
-        administration au sens de l’article L. 100-3 du code des relations entre
-        le public et l’administration (CRPA).
+        administration autorisée.
       </div>
       <p>
         L'organisation à laquelle vous appartenez (
@@ -25,10 +24,9 @@ export default async function RequiredHabilitationPage(props: AppRouterProps) {
         </Link>
         ) <strong>ne fait pas partie</strong> de la{" "}
         <a href="https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises/">
-          liste des administrations
-        </a>{" "}
-        <strong>au sens de l’article L. 100-3</strong>. Si vous appartenez bien
-        à une administration L. 100-3, vous pouvez{" "}
+          liste des administrations autorisées
+        </a>
+        . Si vous pensez que votre organisation est bien autorisée, vous pouvez{" "}
         <a href="https://demarche.numerique.gouv.fr/commencer/demande-d-ajout-a-la-liste-des-administrations">
           faire une demande d’ajout
         </a>{" "}

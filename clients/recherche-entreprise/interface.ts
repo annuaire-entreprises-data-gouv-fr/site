@@ -9,6 +9,10 @@ export interface ISearchResponse {
 export interface IResult {
   activite_principale: string;
   activite_principale_naf25: string;
+  admin: {
+    slug: string;
+    a_acces_espace_agent: boolean;
+  };
   annee_categorie_entreprise: string;
   annee_tranche_effectif_salarie: string;
   caractere_employeur: string;
@@ -32,7 +36,6 @@ export interface IResult {
   section_activite_principale: string;
   siege: ISiege;
   siren: string;
-  slug: string;
   statut_diffusion: "O" | "P";
   tranche_effectif_salarie: string;
   tva: string[] | null;
@@ -112,6 +115,7 @@ export interface IComplements {
   convention_collective_renseignee: boolean;
   egapro_renseignee: boolean;
   est_achats_responsables: boolean;
+  est_administration: boolean;
   est_alim_confiance: boolean;
   est_association: boolean;
   est_avocat: boolean;
@@ -120,12 +124,10 @@ export interface IComplements {
   est_entrepreneur_spectacle: boolean;
   est_ess: boolean;
   est_finess: boolean;
-  est_l100_3: boolean;
   est_organisme_formation: boolean;
   est_patrimoine_vivant: boolean;
   est_qualiopi: boolean;
   est_rge: boolean;
-  est_service_public: boolean;
   est_siae: boolean;
   est_societe_mission: boolean;
   est_uai: boolean;

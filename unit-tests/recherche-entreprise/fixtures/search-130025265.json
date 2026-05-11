@@ -9,6 +9,10 @@
         "sigle": "DINUM",
         "nombre_etablissements": 1,
         "nombre_etablissements_ouverts": 1,
+        "admin": {
+          "slug": "direction-interministerielle-du-numerique-dinum-130025265",
+          "a_acces_espace_agent": true
+        },
         "siege": {
           "activite_principale": "84.11Z",
           "activite_principale_registre_metier": null,

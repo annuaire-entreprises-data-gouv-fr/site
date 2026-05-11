@@ -9,7 +9,6 @@ import { fetchUniteLegaleFromRechercheEntreprise } from "#models/core/unite-lega
 import { extractSirenFromSiret, type Siren, type Siret } from "#utils/helpers";
 import { defaultAgentScopes, type IAgentScope } from "../scopes/constants";
 import { mightBeAnAuthorizedAdministration } from "./might-be-an-administration";
-import { isOrganisationWhitelisted } from "./whitelisted-administrations";
 
 const organisationHabilitation = {
   scopes: [...defaultAgentScopes],
@@ -55,12 +54,6 @@ export class AgentOrganisation {
   }
 
   isAnAuthorizedAdministration(uniteLegale: IUniteLegale) {
-    if (isOrganisationWhitelisted(this.siren)) {
-      return true;
-    }
-    if (uniteLegale.complements.estL100_3) {
-      return true;
-    }
-    return false;
+    return uniteLegale.aAccesEspaceAgent;
   }
 }

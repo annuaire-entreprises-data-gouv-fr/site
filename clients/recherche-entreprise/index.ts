@@ -77,7 +77,7 @@ export const clientSearchRechercheEntrepriseRaw = async (
     searchFilterParams?.toApiURI() || ""
   }`;
 
-  url += "&include_admin=slug";
+  url += "&include_admin=admin";
 
   if (inclureTVA) {
     url += ",tva";
@@ -190,8 +190,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     est_ess = false,
     est_finess = false,
     est_rge = false,
-    est_service_public = false,
-    est_l100_3 = false,
+    est_administration = false,
     est_uai = false,
     est_societe_mission = false,
     identifiant_association = null,
@@ -263,6 +262,13 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     isAtLeastEmployeur ? "O" : caractere_employeur
   );
 
+  console.log("=========================================");
+  console.log(
+    "result.admin?.a_acces_espace_agent",
+    result.admin?.a_acces_espace_agent
+  );
+  console.log("=========================================");
+
   return {
     ...createDefaultUniteLegale(siren),
     siege: etablissementSiege,
@@ -281,7 +287,8 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     anneeCategorieEntreprise: annee_categorie_entreprise,
     trancheEffectif,
     anneeTrancheEffectif: annee_tranche_effectif_salarie,
-    chemin: result.slug || result.siren,
+    chemin: result.admin?.slug || result.siren,
+    aAccesEspaceAgent: result.admin?.a_acces_espace_agent || false,
     natureJuridique: nature_juridique || "",
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
       result.activite_principale,
@@ -295,8 +302,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     complements: {
       estBio: est_bio,
       estEss: est_ess,
-      estServicePublic: est_service_public,
-      estL100_3: est_l100_3,
+      estAdministration: est_administration,
       estEntrepreneurIndividuel,
       estPersonneMorale,
       estEntrepreneurSpectacle: est_entrepreneur_spectacle,
