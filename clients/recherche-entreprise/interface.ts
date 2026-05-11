@@ -124,7 +124,6 @@ export interface IComplements {
   est_entrepreneur_spectacle: boolean;
   est_ess: boolean;
   est_finess: boolean;
-  est_l100_3: boolean;
   est_organisme_formation: boolean;
   est_patrimoine_vivant: boolean;
   est_qualiopi: boolean;

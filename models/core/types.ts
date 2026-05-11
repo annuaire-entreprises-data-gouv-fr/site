@@ -196,7 +196,6 @@ export interface IUniteLegaleComplements {
   estEntrepriseInclusive: boolean;
   estEss: boolean;
   estFiness: boolean;
-  estL100_3: boolean;
   estOrganismeFormation: boolean;
   estPatrimoineVivant: boolean;
   estPersonneMorale: boolean;
@@ -219,7 +218,6 @@ export const createDefaultUniteLegaleComplements =
     egaproRenseignee: false,
     statutEntrepreneurSpectacle: "",
     estAdministration: false,
-    estL100_3: false,
     estFiness: false,
     estRge: false,
     estOrganismeFormation: false,

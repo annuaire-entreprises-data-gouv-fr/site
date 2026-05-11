@@ -9,6 +9,10 @@
         "sigle": "ADEME",
         "nombre_etablissements": 68,
         "nombre_etablissements_ouverts": 30,
+        "admin": {
+          "slug": "ademe-385290309",
+          "a_acces_espace_agent": true
+        },
         "siege": {
           "activite_principale": "84.13Z",
           "activite_principale_naf25": "84.13Y",

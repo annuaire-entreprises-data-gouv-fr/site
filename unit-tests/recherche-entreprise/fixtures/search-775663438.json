@@ -9,6 +9,10 @@
         "sigle": "RATP",
         "nombre_etablissements": 336,
         "nombre_etablissements_ouverts": 257,
+        "admin": {
+          "slug": "ratp-775663438",
+          "a_acces_espace_agent": false
+        },
         "siege": {
           "activite_principale": "49.31Z",
           "activite_principale_naf25": "49.31G",

@@ -112,7 +112,7 @@ class SearchFilterParams {
       est_patrimoine_vivant: labels.includes("patrimoine_vivant"),
       est_association: this.params.type === "asso",
       est_collectivite_territoriale: this.params.type === "ct",
-      est_service_public: this.params.type === "sp",
+      est_administration: this.params.type === "sp",
       est_entrepreneur_individuel: this.params.type === "ei",
       section_activite_principale: this.params.sap,
       categorie_entreprise: this.params.categorie_entreprise,

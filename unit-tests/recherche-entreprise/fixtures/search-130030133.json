@@ -9,6 +9,10 @@
         "sigle": null,
         "nombre_etablissements": 1,
         "nombre_etablissements_ouverts": 1,
+        "admin": {
+          "slug": "plateforme-de-l-inclusion-130030133",
+          "a_acces_espace_agent": true
+        },
         "siege": {
           "activite_principale": "84.13Z",
           "activite_principale_naf25": "84.13Y",
