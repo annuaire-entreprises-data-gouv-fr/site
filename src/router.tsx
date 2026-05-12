@@ -1,6 +1,13 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
+import { initSentryClient } from "./utils/sentry/init.client";
+
+declare global {
+  interface Window {
+    IS_OUTDATED_BROWSER: boolean;
+  }
+}
 
 export function getRouter() {
   const queryClient = new QueryClient();
@@ -13,6 +20,10 @@ export function getRouter() {
     scrollRestoration: true,
     defaultPreload: false,
   });
+
+  if (!router.isServer) {
+    initSentryClient();
+  }
 
   return router;
 }

@@ -11,8 +11,9 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 3000",
-    "build": "vite build",
+    "dev": "NODE_OPTIONS='--import ./instrument.server.mjs' vite dev --port 3000",
+    "start": "node --import ./.output/server/instrument.server.mjs .output/server/index.mjs",
+    "build": "vite build && cp instrument.server.mjs .output/server",
     "preview": "vite preview",
     "lint": "ultracite check",
     "lint:fix": "ultracite fix",
@@ -23,6 +24,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "3.1045.0",
     "@react-spring/web": "^10.0.3",
+    "@sentry/tanstackstart-react": "^10.52.0",
     "@tanstack/react-devtools": "0.10.3",
     "@tanstack/react-query": "5.100.10",
     "@tanstack/react-router": "1.169.2",
@@ -55,12 +57,12 @@
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.1",
     "jsdom": "29.1.1",
+    "lefthook": "2.1.6",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "11.2.1",
     "typescript": "^5.7.2",
+    "ultracite": "7.7.0",
     "vite": "8.0.12",
-    "vitest": "^3.0.5",
-    "lefthook": "2.1.6",
-    "ultracite": "7.7.0"
+    "vitest": "^3.0.5"
   }
 }
