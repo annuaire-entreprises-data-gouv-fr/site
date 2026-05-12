@@ -226,6 +226,7 @@ class UniteLegaleBuilder {
         ...uniteLegaleInsee?.colter,
         ...uniteLegaleRechercheEntreprise.colter,
       },
+      bodacc: uniteLegaleRechercheEntreprise.bodacc,
       immatriculation: uniteLegaleRechercheEntreprise.immatriculation,
       chemin: uniteLegaleRechercheEntreprise.chemin,
       listeIdcc: uniteLegaleRechercheEntreprise.listeIdcc,
