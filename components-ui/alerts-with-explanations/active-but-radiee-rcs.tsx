@@ -5,6 +5,7 @@ import {
 import type { ISession } from "#models/authentication/user/session";
 import { estActif } from "#models/core/etat-administratif";
 import type { IUniteLegale } from "#models/core/types";
+import { isEntrepreneurIndividuel } from "../../models/core/types";
 import { Warning } from "../alerts";
 
 const ActiveButRadieeRCSAlert: React.FC<{
@@ -20,25 +21,38 @@ const ActiveButRadieeRCSAlert: React.FC<{
     return null;
   }
 
+  const radieText = `radié${isEntrepreneurIndividuel(uniteLegale) ? "" : "e"} dans le RCS`;
+
   const RCSText = uniteLegale.bodacc?.radiation?.idAnnonce ? (
     <a
       href={`https://www.bodacc.fr/pages/annonces-commerciales-detail/?q.id=id:${uniteLegale.bodacc?.radiation?.idAnnonce}`}
       rel="noopener noreferrer"
       target="_blank"
     >
-      radiée dans le RCS
+      {radieText}
     </a>
   ) : (
-    "radiée dans le RCS"
+    radieText
   );
 
   return (
     <Warning full>
-      Cette structure est indiquée comme étant en activité dans le RNE ainsi que
-      dans la base Sirene. En revanche, elle semble être {RCSText}. C’est une
-      situation inhabituelle, qui peut provenir de délais de traitement.
+      {isEntrepreneurIndividuel(uniteLegale) ? (
+        <>
+          Cette structure est indiquée comme étant en activité dans le RNE ainsi
+          que dans la base Sirene. En revanche, l'entreprise ou l'un de ses
+          établissements semble {RCSText}.
+        </>
+      ) : (
+        <>
+          Cette structure est indiquée comme étant en activité dans le RNE ainsi
+          que dans la base Sirene. En revanche, elle semble être {RCSText}.
+          C’est une situation inhabituelle, qui peut provenir de délais de
+          traitement.
+        </>
+      )}
     </Warning>
   );
 };
 
-export default ActiveButRadieeRCEAlert;
+export default ActiveButRadieeRCSAlert;
