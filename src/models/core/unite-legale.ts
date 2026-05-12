@@ -235,6 +235,7 @@ class UniteLegaleBuilder {
         uniteLegaleInsee.dateMiseAJourInsee ??
         uniteLegaleRechercheEntreprise.dateMiseAJourInsee,
       dateMiseAJourInpi: uniteLegaleRechercheEntreprise.dateMiseAJourInpi,
+      bodacc: uniteLegaleRechercheEntreprise.bodacc,
       tva: uniteLegaleRechercheEntreprise.tva,
     };
   };

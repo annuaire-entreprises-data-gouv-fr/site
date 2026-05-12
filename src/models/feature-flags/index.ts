@@ -8,6 +8,8 @@ const FEATURE_FLAGS = [
   "proconnect_incident_banner_displayed",
   "partners_data_incident_banner_displayed",
   "proconnect_migration_banner_displayed",
+  "bodacc_radiation_displayed",
+  "bodacc_procedure_collective_displayed",
 ] as const;
 export type FeatureFlag = (typeof FEATURE_FLAGS)[number];
 type FeatureFlagValue = boolean | string;
