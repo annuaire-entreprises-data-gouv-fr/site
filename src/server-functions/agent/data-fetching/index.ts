@@ -1,8 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { clientMinimis } from "#/clients/api-data-gouv/minimis";
-import { getAssociationFromSlug } from "#/models/association";
 import { ApplicationRights } from "#/models/authentication/user/rights";
-import { getEORIValidation } from "#/models/eori-validation";
 import { getAssociationProtected } from "#/models/espace-agent/association-protected";
 import { getBeneficiaires } from "#/models/espace-agent/beneficiaires";
 import { getBilansProtected } from "#/models/espace-agent/bilans";
@@ -21,10 +19,6 @@ import { getEffectifsMensuelsProtected } from "#/models/espace-agent/effectifs/m
 import { getLiensCapitalistiquesProtected } from "#/models/espace-agent/liens-capitalistiques";
 import { getDocumentsRNEProtected } from "#/models/espace-agent/rne-protected/documents";
 import { getTravauxPublic } from "#/models/espace-agent/travaux-publics";
-import { getDirigeantsRNE } from "#/models/rne/dirigeants";
-import { getRNEObservations } from "#/models/rne/observations";
-import { getSubventionsAssociationFromSlug } from "#/models/subventions/association";
-import { buildAndVerifyTVA } from "#/models/tva/verify";
 import {
   agentFnMiddleware,
   withApplicationRight,
@@ -39,21 +33,15 @@ import {
   getAgentConformiteFiscaleEntrepriseSchema,
   getAgentConformiteSocialeEntrepriseSchema,
   getAgentDirigeantsProtectedSchema,
-  getAgentDirigeantsSchema,
   getAgentDocumentsRNEProtectedSchema,
   getAgentEffectifsAnnuelsProtectedSchema,
   getAgentEffectifsMensuelsProtectedSchema,
   getAgentLiassesFiscalesProtectedSchema,
   getAgentLiensCapitalistiquesProtectedSchema,
-  getAgentObservationsSchema,
   getAgentOpqibiSchema,
   getAgentQualibatSchema,
   getAgentQualifelecSchema,
   getAgentTravauxPublicsSchema,
-  getAssociationSchema,
-  getSubventionsAssociationSchema,
-  validateEORISchema,
-  verifyTvaSchema,
 } from "./schemas";
 
 export const getAgentBeneficiairesAction = createServerFn()
@@ -345,52 +333,4 @@ export const getEspaceAgentLiensCapitalistiquesProtected = createServerFn()
   .handler(async ({ data }) => {
     const { siren, year, useCase } = data;
     return await getLiensCapitalistiquesProtected(siren, { year, useCase });
-  });
-
-export const getRneDirigeants = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(getAgentDirigeantsSchema)
-  .handler(async ({ data }) => {
-    const { siren } = data;
-    return await getDirigeantsRNE(siren, {});
-  });
-
-export const getRneObservations = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(getAgentObservationsSchema)
-  .handler(async ({ data }) => {
-    const { siren } = data;
-    return await getRNEObservations(siren, {});
-  });
-
-export const getAssociation = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(getAssociationSchema)
-  .handler(async ({ data }) => {
-    const { slug } = data;
-    return await getAssociationFromSlug(slug, {});
-  });
-
-export const verifyTva = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(verifyTvaSchema)
-  .handler(async ({ data }) => {
-    const { slug } = data;
-    return await buildAndVerifyTVA(slug, {});
-  });
-
-export const validateEORI = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(validateEORISchema)
-  .handler(async ({ data }) => {
-    const { siret } = data;
-    return await getEORIValidation(siret, {});
-  });
-
-export const getSubventionsAssociation = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(getSubventionsAssociationSchema)
-  .handler(async ({ data }) => {
-    const { slug } = data;
-    return await getSubventionsAssociationFromSlug(slug);
   });
