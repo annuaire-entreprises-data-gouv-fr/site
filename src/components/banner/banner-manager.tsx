@@ -1,8 +1,8 @@
-import getSession from "#/utils/server-side-helper/get-session";
+import { useAuth } from "#/contexts/auth.context";
 import TempIncidentBanner from "./temp-incident";
 
-export async function BannerManager() {
-  const session = await getSession();
+export function BannerManager() {
+  const { user } = useAuth();
 
-  return <TempIncidentBanner isAgent={!!session?.user} />;
+  return <TempIncidentBanner isAgent={!!user} />;
 }
