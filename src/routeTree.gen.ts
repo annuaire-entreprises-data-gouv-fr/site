@@ -9,18 +9,91 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as HeaderSearchRouteRouteImport } from './routes/_header-search/route'
+import { Route as HeaderPublicRouteRouteImport } from './routes/_header-public/route'
+import { Route as HeaderMinimalRouteRouteImport } from './routes/_header-minimal/route'
+import { Route as HeaderLpAgentRouteRouteImport } from './routes/_header-lp-agent/route'
+import { Route as HeaderHomeRouteRouteImport } from './routes/_header-home/route'
+import { Route as HeaderDefaultRouteRouteImport } from './routes/_header-default/route'
 import { Route as HeaderConnexionRouteRouteImport } from './routes/_header-connexion/route'
 import { Route as HeaderCompteRouteRouteImport } from './routes/_header-compte/route'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as HeaderHomeIndexRouteImport } from './routes/_header-home/index'
+import { Route as HeaderSearchRechercherRouteImport } from './routes/_header-search/rechercher'
+import { Route as HeaderDefaultViePriveeRouteImport } from './routes/_header-default/vie-privee'
+import { Route as HeaderDefaultPersonneRouteImport } from './routes/_header-default/personne'
+import { Route as HeaderDefaultPartagerRouteImport } from './routes/_header-default/partager'
+import { Route as HeaderDefaultModalitesUtilisationRouteImport } from './routes/_header-default/modalites-utilisation'
+import { Route as HeaderDefaultMentionsLegalesRouteImport } from './routes/_header-default/mentions-legales'
+import { Route as HeaderDefaultHistoriqueDesModificationsRouteImport } from './routes/_header-default/historique-des-modifications'
+import { Route as HeaderDefaultFaqRouteImport } from './routes/_header-default/faq'
+import { Route as HeaderDefaultExportSireneRouteImport } from './routes/_header-default/export-sirene'
+import { Route as HeaderDefaultDefinitionsRouteImport } from './routes/_header-default/definitions'
+import { Route as HeaderDefaultAdministrationRouteImport } from './routes/_header-default/administration'
+import { Route as HeaderDefaultAccessibiliteRouteImport } from './routes/_header-default/accessibilite'
+import { Route as HeaderSearchRechercherCarteRouteImport } from './routes/_header-search/rechercher.carte'
+import { Route as HeaderPublicDonneesApiRouteImport } from './routes/_header-public/donnees.api'
+import { Route as HeaderPublicAProposStatsRouteImport } from './routes/_header-public/a-propos.stats'
+import { Route as HeaderMinimalFormulaireNpsRouteImport } from './routes/_header-minimal/formulaire.nps'
+import { Route as HeaderMinimalFormulaireMerciRouteImport } from './routes/_header-minimal/formulaire.merci'
+import { Route as HeaderLpAgentLpAgentPublicRouteImport } from './routes/_header-lp-agent/lp.agent-public'
+import { Route as HeaderHomeLpSlugRouteImport } from './routes/_header-home/lp.$slug'
+import { Route as HeaderDefaultLabelsCertificatsSlugRouteImport } from './routes/_header-default/labels-certificats.$slug'
+import { Route as HeaderDefaultJustificatifImmatriculationPdfSlugRouteImport } from './routes/_header-default/justificatif-immatriculation-pdf.$slug'
+import { Route as HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRouteImport } from './routes/_header-default/formulaire.supprimer-donnees-personnelles-entreprise'
+import { Route as HeaderDefaultFaqParcoursRouteImport } from './routes/_header-default/faq.parcours'
+import { Route as HeaderDefaultFaqModifierRouteImport } from './routes/_header-default/faq.modifier'
+import { Route as HeaderDefaultFaqSlugRouteImport } from './routes/_header-default/faq.$slug'
+import { Route as HeaderDefaultEtablissementsScolairesSlugRouteImport } from './routes/_header-default/etablissements-scolaires.$slug'
+import { Route as HeaderDefaultEtablissementSlugRouteImport } from './routes/_header-default/etablissement.$slug'
+import { Route as HeaderDefaultEntrepriseSlugRouteImport } from './routes/_header-default/entreprise.$slug'
+import { Route as HeaderDefaultDonneesSourcesRouteImport } from './routes/_header-default/donnees.sources'
+import { Route as HeaderDefaultDonneesApiEntreprisesRouteImport } from './routes/_header-default/donnees.api-entreprises'
+import { Route as HeaderDefaultDonneesFinancieresSlugRouteImport } from './routes/_header-default/donnees-financieres.$slug'
+import { Route as HeaderDefaultDocumentsSlugRouteImport } from './routes/_header-default/documents.$slug'
+import { Route as HeaderDefaultDiversSlugRouteImport } from './routes/_header-default/divers.$slug'
+import { Route as HeaderDefaultDirigeantsSlugRouteImport } from './routes/_header-default/dirigeants.$slug'
+import { Route as HeaderDefaultDefinitionsSlugRouteImport } from './routes/_header-default/definitions.$slug'
+import { Route as HeaderDefaultAnnoncesSlugRouteImport } from './routes/_header-default/annonces.$slug'
+import { Route as HeaderDefaultAdministrationSlugRouteImport } from './routes/_header-default/administration.$slug'
+import { Route as HeaderDefaultAProposEquipeRouteImport } from './routes/_header-default/a-propos.equipe'
+import { Route as HeaderDefaultAProposDonneesExtraitKbisRouteImport } from './routes/_header-default/a-propos.donnees-extrait-kbis'
+import { Route as HeaderDefaultAProposCommentCaMarcheRouteImport } from './routes/_header-default/a-propos.comment-ca-marche'
+import { Route as HeaderDefaultAProposBudgetRouteImport } from './routes/_header-default/a-propos.budget'
 import { Route as HeaderConnexionConnexionEchecConnexionRouteImport } from './routes/_header-connexion/connexion.echec-connexion'
 import { Route as HeaderConnexionConnexionAuRevoirRouteImport } from './routes/_header-connexion/connexion.au-revoir'
 import { Route as HeaderCompteCompteMesGroupesRouteImport } from './routes/_header-compte/compte.mes-groupes'
 import { Route as HeaderCompteCompteAccueilRouteImport } from './routes/_header-compte/compte.accueil'
+import { Route as HeaderDefaultFaqModifierSlugRouteImport } from './routes/_header-default/faq.modifier.$slug'
+import { Route as HeaderDefaultErreurIntrouvableSlugRouteImport } from './routes/_header-default/erreur.introuvable.$slug'
 import { Route as HeaderConnexionConnexionHabilitationRequiseRouteImport } from './routes/_header-connexion/connexion.habilitation.requise'
 import { Route as HeaderConnexionConnexionHabilitationRefuseeRouteImport } from './routes/_header-connexion/connexion.habilitation.refusee'
 import { Route as HeaderConnexionConnexionHabilitationPrestatairesRouteImport } from './routes/_header-connexion/connexion.habilitation.prestataires'
 import { Route as HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport } from './routes/_header-connexion/connexion.habilitation.administration-inconnue'
 
+const HeaderSearchRouteRoute = HeaderSearchRouteRouteImport.update({
+  id: '/_header-search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeaderPublicRouteRoute = HeaderPublicRouteRouteImport.update({
+  id: '/_header-public',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeaderMinimalRouteRoute = HeaderMinimalRouteRouteImport.update({
+  id: '/_header-minimal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeaderLpAgentRouteRoute = HeaderLpAgentRouteRouteImport.update({
+  id: '/_header-lp-agent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeaderHomeRouteRoute = HeaderHomeRouteRouteImport.update({
+  id: '/_header-home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeaderDefaultRouteRoute = HeaderDefaultRouteRouteImport.update({
+  id: '/_header-default',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HeaderConnexionRouteRoute = HeaderConnexionRouteRouteImport.update({
   id: '/_header-connexion',
   getParentRoute: () => rootRouteImport,
@@ -29,11 +102,250 @@ const HeaderCompteRouteRoute = HeaderCompteRouteRouteImport.update({
   id: '/_header-compte',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const HeaderHomeIndexRoute = HeaderHomeIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => HeaderHomeRouteRoute,
 } as any)
+const HeaderSearchRechercherRoute = HeaderSearchRechercherRouteImport.update({
+  id: '/rechercher',
+  path: '/rechercher',
+  getParentRoute: () => HeaderSearchRouteRoute,
+} as any)
+const HeaderDefaultViePriveeRoute = HeaderDefaultViePriveeRouteImport.update({
+  id: '/vie-privee',
+  path: '/vie-privee',
+  getParentRoute: () => HeaderDefaultRouteRoute,
+} as any)
+const HeaderDefaultPersonneRoute = HeaderDefaultPersonneRouteImport.update({
+  id: '/personne',
+  path: '/personne',
+  getParentRoute: () => HeaderDefaultRouteRoute,
+} as any)
+const HeaderDefaultPartagerRoute = HeaderDefaultPartagerRouteImport.update({
+  id: '/partager',
+  path: '/partager',
+  getParentRoute: () => HeaderDefaultRouteRoute,
+} as any)
+const HeaderDefaultModalitesUtilisationRoute =
+  HeaderDefaultModalitesUtilisationRouteImport.update({
+    id: '/modalites-utilisation',
+    path: '/modalites-utilisation',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultMentionsLegalesRoute =
+  HeaderDefaultMentionsLegalesRouteImport.update({
+    id: '/mentions-legales',
+    path: '/mentions-legales',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultHistoriqueDesModificationsRoute =
+  HeaderDefaultHistoriqueDesModificationsRouteImport.update({
+    id: '/historique-des-modifications',
+    path: '/historique-des-modifications',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultFaqRoute = HeaderDefaultFaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => HeaderDefaultRouteRoute,
+} as any)
+const HeaderDefaultExportSireneRoute =
+  HeaderDefaultExportSireneRouteImport.update({
+    id: '/export-sirene',
+    path: '/export-sirene',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultDefinitionsRoute =
+  HeaderDefaultDefinitionsRouteImport.update({
+    id: '/definitions',
+    path: '/definitions',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultAdministrationRoute =
+  HeaderDefaultAdministrationRouteImport.update({
+    id: '/administration',
+    path: '/administration',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultAccessibiliteRoute =
+  HeaderDefaultAccessibiliteRouteImport.update({
+    id: '/accessibilite',
+    path: '/accessibilite',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderSearchRechercherCarteRoute =
+  HeaderSearchRechercherCarteRouteImport.update({
+    id: '/carte',
+    path: '/carte',
+    getParentRoute: () => HeaderSearchRechercherRoute,
+  } as any)
+const HeaderPublicDonneesApiRoute = HeaderPublicDonneesApiRouteImport.update({
+  id: '/donnees/api',
+  path: '/donnees/api',
+  getParentRoute: () => HeaderPublicRouteRoute,
+} as any)
+const HeaderPublicAProposStatsRoute =
+  HeaderPublicAProposStatsRouteImport.update({
+    id: '/a-propos/stats',
+    path: '/a-propos/stats',
+    getParentRoute: () => HeaderPublicRouteRoute,
+  } as any)
+const HeaderMinimalFormulaireNpsRoute =
+  HeaderMinimalFormulaireNpsRouteImport.update({
+    id: '/formulaire/nps',
+    path: '/formulaire/nps',
+    getParentRoute: () => HeaderMinimalRouteRoute,
+  } as any)
+const HeaderMinimalFormulaireMerciRoute =
+  HeaderMinimalFormulaireMerciRouteImport.update({
+    id: '/formulaire/merci',
+    path: '/formulaire/merci',
+    getParentRoute: () => HeaderMinimalRouteRoute,
+  } as any)
+const HeaderLpAgentLpAgentPublicRoute =
+  HeaderLpAgentLpAgentPublicRouteImport.update({
+    id: '/lp/agent-public',
+    path: '/lp/agent-public',
+    getParentRoute: () => HeaderLpAgentRouteRoute,
+  } as any)
+const HeaderHomeLpSlugRoute = HeaderHomeLpSlugRouteImport.update({
+  id: '/lp/$slug',
+  path: '/lp/$slug',
+  getParentRoute: () => HeaderHomeRouteRoute,
+} as any)
+const HeaderDefaultLabelsCertificatsSlugRoute =
+  HeaderDefaultLabelsCertificatsSlugRouteImport.update({
+    id: '/labels-certificats/$slug',
+    path: '/labels-certificats/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultJustificatifImmatriculationPdfSlugRoute =
+  HeaderDefaultJustificatifImmatriculationPdfSlugRouteImport.update({
+    id: '/justificatif-immatriculation-pdf/$slug',
+    path: '/justificatif-immatriculation-pdf/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute =
+  HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRouteImport.update(
+    {
+      id: '/formulaire/supprimer-donnees-personnelles-entreprise',
+      path: '/formulaire/supprimer-donnees-personnelles-entreprise',
+      getParentRoute: () => HeaderDefaultRouteRoute,
+    } as any,
+  )
+const HeaderDefaultFaqParcoursRoute =
+  HeaderDefaultFaqParcoursRouteImport.update({
+    id: '/parcours',
+    path: '/parcours',
+    getParentRoute: () => HeaderDefaultFaqRoute,
+  } as any)
+const HeaderDefaultFaqModifierRoute =
+  HeaderDefaultFaqModifierRouteImport.update({
+    id: '/modifier',
+    path: '/modifier',
+    getParentRoute: () => HeaderDefaultFaqRoute,
+  } as any)
+const HeaderDefaultFaqSlugRoute = HeaderDefaultFaqSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => HeaderDefaultFaqRoute,
+} as any)
+const HeaderDefaultEtablissementsScolairesSlugRoute =
+  HeaderDefaultEtablissementsScolairesSlugRouteImport.update({
+    id: '/etablissements-scolaires/$slug',
+    path: '/etablissements-scolaires/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultEtablissementSlugRoute =
+  HeaderDefaultEtablissementSlugRouteImport.update({
+    id: '/etablissement/$slug',
+    path: '/etablissement/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultEntrepriseSlugRoute =
+  HeaderDefaultEntrepriseSlugRouteImport.update({
+    id: '/entreprise/$slug',
+    path: '/entreprise/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultDonneesSourcesRoute =
+  HeaderDefaultDonneesSourcesRouteImport.update({
+    id: '/donnees/sources',
+    path: '/donnees/sources',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultDonneesApiEntreprisesRoute =
+  HeaderDefaultDonneesApiEntreprisesRouteImport.update({
+    id: '/donnees/api-entreprises',
+    path: '/donnees/api-entreprises',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultDonneesFinancieresSlugRoute =
+  HeaderDefaultDonneesFinancieresSlugRouteImport.update({
+    id: '/donnees-financieres/$slug',
+    path: '/donnees-financieres/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultDocumentsSlugRoute =
+  HeaderDefaultDocumentsSlugRouteImport.update({
+    id: '/documents/$slug',
+    path: '/documents/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultDiversSlugRoute = HeaderDefaultDiversSlugRouteImport.update({
+  id: '/divers/$slug',
+  path: '/divers/$slug',
+  getParentRoute: () => HeaderDefaultRouteRoute,
+} as any)
+const HeaderDefaultDirigeantsSlugRoute =
+  HeaderDefaultDirigeantsSlugRouteImport.update({
+    id: '/dirigeants/$slug',
+    path: '/dirigeants/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultDefinitionsSlugRoute =
+  HeaderDefaultDefinitionsSlugRouteImport.update({
+    id: '/$slug',
+    path: '/$slug',
+    getParentRoute: () => HeaderDefaultDefinitionsRoute,
+  } as any)
+const HeaderDefaultAnnoncesSlugRoute =
+  HeaderDefaultAnnoncesSlugRouteImport.update({
+    id: '/annonces/$slug',
+    path: '/annonces/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultAdministrationSlugRoute =
+  HeaderDefaultAdministrationSlugRouteImport.update({
+    id: '/$slug',
+    path: '/$slug',
+    getParentRoute: () => HeaderDefaultAdministrationRoute,
+  } as any)
+const HeaderDefaultAProposEquipeRoute =
+  HeaderDefaultAProposEquipeRouteImport.update({
+    id: '/a-propos/equipe',
+    path: '/a-propos/equipe',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultAProposDonneesExtraitKbisRoute =
+  HeaderDefaultAProposDonneesExtraitKbisRouteImport.update({
+    id: '/a-propos/donnees-extrait-kbis',
+    path: '/a-propos/donnees-extrait-kbis',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultAProposCommentCaMarcheRoute =
+  HeaderDefaultAProposCommentCaMarcheRouteImport.update({
+    id: '/a-propos/comment-ca-marche',
+    path: '/a-propos/comment-ca-marche',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultAProposBudgetRoute =
+  HeaderDefaultAProposBudgetRouteImport.update({
+    id: '/a-propos/budget',
+    path: '/a-propos/budget',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
 const HeaderConnexionConnexionEchecConnexionRoute =
   HeaderConnexionConnexionEchecConnexionRouteImport.update({
     id: '/connexion/echec-connexion',
@@ -57,6 +369,18 @@ const HeaderCompteCompteAccueilRoute =
     id: '/compte/accueil',
     path: '/compte/accueil',
     getParentRoute: () => HeaderCompteRouteRoute,
+  } as any)
+const HeaderDefaultFaqModifierSlugRoute =
+  HeaderDefaultFaqModifierSlugRouteImport.update({
+    id: '/$slug',
+    path: '/$slug',
+    getParentRoute: () => HeaderDefaultFaqModifierRoute,
+  } as any)
+const HeaderDefaultErreurIntrouvableSlugRoute =
+  HeaderDefaultErreurIntrouvableSlugRouteImport.update({
+    id: '/erreur/introuvable/$slug',
+    path: '/erreur/introuvable/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
 const HeaderConnexionConnexionHabilitationRequiseRoute =
   HeaderConnexionConnexionHabilitationRequiseRouteImport.update({
@@ -84,87 +408,404 @@ const HeaderConnexionConnexionHabilitationAdministrationInconnueRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof HeaderHomeIndexRoute
+  '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
+  '/administration': typeof HeaderDefaultAdministrationRouteWithChildren
+  '/definitions': typeof HeaderDefaultDefinitionsRouteWithChildren
+  '/export-sirene': typeof HeaderDefaultExportSireneRoute
+  '/faq': typeof HeaderDefaultFaqRouteWithChildren
+  '/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
+  '/mentions-legales': typeof HeaderDefaultMentionsLegalesRoute
+  '/modalites-utilisation': typeof HeaderDefaultModalitesUtilisationRoute
+  '/partager': typeof HeaderDefaultPartagerRoute
+  '/personne': typeof HeaderDefaultPersonneRoute
+  '/vie-privee': typeof HeaderDefaultViePriveeRoute
+  '/rechercher': typeof HeaderSearchRechercherRouteWithChildren
   '/compte/accueil': typeof HeaderCompteCompteAccueilRoute
   '/compte/mes-groupes': typeof HeaderCompteCompteMesGroupesRoute
   '/connexion/au-revoir': typeof HeaderConnexionConnexionAuRevoirRoute
   '/connexion/echec-connexion': typeof HeaderConnexionConnexionEchecConnexionRoute
+  '/a-propos/budget': typeof HeaderDefaultAProposBudgetRoute
+  '/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
+  '/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
+  '/a-propos/equipe': typeof HeaderDefaultAProposEquipeRoute
+  '/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
+  '/annonces/$slug': typeof HeaderDefaultAnnoncesSlugRoute
+  '/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
+  '/dirigeants/$slug': typeof HeaderDefaultDirigeantsSlugRoute
+  '/divers/$slug': typeof HeaderDefaultDiversSlugRoute
+  '/documents/$slug': typeof HeaderDefaultDocumentsSlugRoute
+  '/donnees-financieres/$slug': typeof HeaderDefaultDonneesFinancieresSlugRoute
+  '/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
+  '/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
+  '/entreprise/$slug': typeof HeaderDefaultEntrepriseSlugRoute
+  '/etablissement/$slug': typeof HeaderDefaultEtablissementSlugRoute
+  '/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
+  '/faq/$slug': typeof HeaderDefaultFaqSlugRoute
+  '/faq/modifier': typeof HeaderDefaultFaqModifierRouteWithChildren
+  '/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
+  '/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
+  '/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
+  '/labels-certificats/$slug': typeof HeaderDefaultLabelsCertificatsSlugRoute
+  '/lp/$slug': typeof HeaderHomeLpSlugRoute
+  '/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
+  '/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
+  '/formulaire/nps': typeof HeaderMinimalFormulaireNpsRoute
+  '/a-propos/stats': typeof HeaderPublicAProposStatsRoute
+  '/donnees/api': typeof HeaderPublicDonneesApiRoute
+  '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
+  '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
+  '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof HeaderHomeIndexRoute
+  '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
+  '/administration': typeof HeaderDefaultAdministrationRouteWithChildren
+  '/definitions': typeof HeaderDefaultDefinitionsRouteWithChildren
+  '/export-sirene': typeof HeaderDefaultExportSireneRoute
+  '/faq': typeof HeaderDefaultFaqRouteWithChildren
+  '/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
+  '/mentions-legales': typeof HeaderDefaultMentionsLegalesRoute
+  '/modalites-utilisation': typeof HeaderDefaultModalitesUtilisationRoute
+  '/partager': typeof HeaderDefaultPartagerRoute
+  '/personne': typeof HeaderDefaultPersonneRoute
+  '/vie-privee': typeof HeaderDefaultViePriveeRoute
+  '/rechercher': typeof HeaderSearchRechercherRouteWithChildren
   '/compte/accueil': typeof HeaderCompteCompteAccueilRoute
   '/compte/mes-groupes': typeof HeaderCompteCompteMesGroupesRoute
   '/connexion/au-revoir': typeof HeaderConnexionConnexionAuRevoirRoute
   '/connexion/echec-connexion': typeof HeaderConnexionConnexionEchecConnexionRoute
+  '/a-propos/budget': typeof HeaderDefaultAProposBudgetRoute
+  '/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
+  '/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
+  '/a-propos/equipe': typeof HeaderDefaultAProposEquipeRoute
+  '/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
+  '/annonces/$slug': typeof HeaderDefaultAnnoncesSlugRoute
+  '/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
+  '/dirigeants/$slug': typeof HeaderDefaultDirigeantsSlugRoute
+  '/divers/$slug': typeof HeaderDefaultDiversSlugRoute
+  '/documents/$slug': typeof HeaderDefaultDocumentsSlugRoute
+  '/donnees-financieres/$slug': typeof HeaderDefaultDonneesFinancieresSlugRoute
+  '/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
+  '/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
+  '/entreprise/$slug': typeof HeaderDefaultEntrepriseSlugRoute
+  '/etablissement/$slug': typeof HeaderDefaultEtablissementSlugRoute
+  '/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
+  '/faq/$slug': typeof HeaderDefaultFaqSlugRoute
+  '/faq/modifier': typeof HeaderDefaultFaqModifierRouteWithChildren
+  '/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
+  '/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
+  '/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
+  '/labels-certificats/$slug': typeof HeaderDefaultLabelsCertificatsSlugRoute
+  '/lp/$slug': typeof HeaderHomeLpSlugRoute
+  '/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
+  '/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
+  '/formulaire/nps': typeof HeaderMinimalFormulaireNpsRoute
+  '/a-propos/stats': typeof HeaderPublicAProposStatsRoute
+  '/donnees/api': typeof HeaderPublicDonneesApiRoute
+  '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
+  '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
+  '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/_header-compte': typeof HeaderCompteRouteRouteWithChildren
   '/_header-connexion': typeof HeaderConnexionRouteRouteWithChildren
+  '/_header-default': typeof HeaderDefaultRouteRouteWithChildren
+  '/_header-home': typeof HeaderHomeRouteRouteWithChildren
+  '/_header-lp-agent': typeof HeaderLpAgentRouteRouteWithChildren
+  '/_header-minimal': typeof HeaderMinimalRouteRouteWithChildren
+  '/_header-public': typeof HeaderPublicRouteRouteWithChildren
+  '/_header-search': typeof HeaderSearchRouteRouteWithChildren
+  '/_header-default/accessibilite': typeof HeaderDefaultAccessibiliteRoute
+  '/_header-default/administration': typeof HeaderDefaultAdministrationRouteWithChildren
+  '/_header-default/definitions': typeof HeaderDefaultDefinitionsRouteWithChildren
+  '/_header-default/export-sirene': typeof HeaderDefaultExportSireneRoute
+  '/_header-default/faq': typeof HeaderDefaultFaqRouteWithChildren
+  '/_header-default/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
+  '/_header-default/mentions-legales': typeof HeaderDefaultMentionsLegalesRoute
+  '/_header-default/modalites-utilisation': typeof HeaderDefaultModalitesUtilisationRoute
+  '/_header-default/partager': typeof HeaderDefaultPartagerRoute
+  '/_header-default/personne': typeof HeaderDefaultPersonneRoute
+  '/_header-default/vie-privee': typeof HeaderDefaultViePriveeRoute
+  '/_header-search/rechercher': typeof HeaderSearchRechercherRouteWithChildren
+  '/_header-home/': typeof HeaderHomeIndexRoute
   '/_header-compte/compte/accueil': typeof HeaderCompteCompteAccueilRoute
   '/_header-compte/compte/mes-groupes': typeof HeaderCompteCompteMesGroupesRoute
   '/_header-connexion/connexion/au-revoir': typeof HeaderConnexionConnexionAuRevoirRoute
   '/_header-connexion/connexion/echec-connexion': typeof HeaderConnexionConnexionEchecConnexionRoute
+  '/_header-default/a-propos/budget': typeof HeaderDefaultAProposBudgetRoute
+  '/_header-default/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
+  '/_header-default/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
+  '/_header-default/a-propos/equipe': typeof HeaderDefaultAProposEquipeRoute
+  '/_header-default/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
+  '/_header-default/annonces/$slug': typeof HeaderDefaultAnnoncesSlugRoute
+  '/_header-default/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
+  '/_header-default/dirigeants/$slug': typeof HeaderDefaultDirigeantsSlugRoute
+  '/_header-default/divers/$slug': typeof HeaderDefaultDiversSlugRoute
+  '/_header-default/documents/$slug': typeof HeaderDefaultDocumentsSlugRoute
+  '/_header-default/donnees-financieres/$slug': typeof HeaderDefaultDonneesFinancieresSlugRoute
+  '/_header-default/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
+  '/_header-default/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
+  '/_header-default/entreprise/$slug': typeof HeaderDefaultEntrepriseSlugRoute
+  '/_header-default/etablissement/$slug': typeof HeaderDefaultEtablissementSlugRoute
+  '/_header-default/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
+  '/_header-default/faq/$slug': typeof HeaderDefaultFaqSlugRoute
+  '/_header-default/faq/modifier': typeof HeaderDefaultFaqModifierRouteWithChildren
+  '/_header-default/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
+  '/_header-default/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
+  '/_header-default/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
+  '/_header-default/labels-certificats/$slug': typeof HeaderDefaultLabelsCertificatsSlugRoute
+  '/_header-home/lp/$slug': typeof HeaderHomeLpSlugRoute
+  '/_header-lp-agent/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
+  '/_header-minimal/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
+  '/_header-minimal/formulaire/nps': typeof HeaderMinimalFormulaireNpsRoute
+  '/_header-public/a-propos/stats': typeof HeaderPublicAProposStatsRoute
+  '/_header-public/donnees/api': typeof HeaderPublicDonneesApiRoute
+  '/_header-search/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/_header-connexion/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/_header-connexion/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/_header-connexion/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/_header-connexion/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
+  '/_header-default/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
+  '/_header-default/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/accessibilite'
+    | '/administration'
+    | '/definitions'
+    | '/export-sirene'
+    | '/faq'
+    | '/historique-des-modifications'
+    | '/mentions-legales'
+    | '/modalites-utilisation'
+    | '/partager'
+    | '/personne'
+    | '/vie-privee'
+    | '/rechercher'
     | '/compte/accueil'
     | '/compte/mes-groupes'
     | '/connexion/au-revoir'
     | '/connexion/echec-connexion'
+    | '/a-propos/budget'
+    | '/a-propos/comment-ca-marche'
+    | '/a-propos/donnees-extrait-kbis'
+    | '/a-propos/equipe'
+    | '/administration/$slug'
+    | '/annonces/$slug'
+    | '/definitions/$slug'
+    | '/dirigeants/$slug'
+    | '/divers/$slug'
+    | '/documents/$slug'
+    | '/donnees-financieres/$slug'
+    | '/donnees/api-entreprises'
+    | '/donnees/sources'
+    | '/entreprise/$slug'
+    | '/etablissement/$slug'
+    | '/etablissements-scolaires/$slug'
+    | '/faq/$slug'
+    | '/faq/modifier'
+    | '/faq/parcours'
+    | '/formulaire/supprimer-donnees-personnelles-entreprise'
+    | '/justificatif-immatriculation-pdf/$slug'
+    | '/labels-certificats/$slug'
+    | '/lp/$slug'
+    | '/lp/agent-public'
+    | '/formulaire/merci'
+    | '/formulaire/nps'
+    | '/a-propos/stats'
+    | '/donnees/api'
+    | '/rechercher/carte'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
     | '/connexion/habilitation/requise'
+    | '/erreur/introuvable/$slug'
+    | '/faq/modifier/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/accessibilite'
+    | '/administration'
+    | '/definitions'
+    | '/export-sirene'
+    | '/faq'
+    | '/historique-des-modifications'
+    | '/mentions-legales'
+    | '/modalites-utilisation'
+    | '/partager'
+    | '/personne'
+    | '/vie-privee'
+    | '/rechercher'
     | '/compte/accueil'
     | '/compte/mes-groupes'
     | '/connexion/au-revoir'
     | '/connexion/echec-connexion'
+    | '/a-propos/budget'
+    | '/a-propos/comment-ca-marche'
+    | '/a-propos/donnees-extrait-kbis'
+    | '/a-propos/equipe'
+    | '/administration/$slug'
+    | '/annonces/$slug'
+    | '/definitions/$slug'
+    | '/dirigeants/$slug'
+    | '/divers/$slug'
+    | '/documents/$slug'
+    | '/donnees-financieres/$slug'
+    | '/donnees/api-entreprises'
+    | '/donnees/sources'
+    | '/entreprise/$slug'
+    | '/etablissement/$slug'
+    | '/etablissements-scolaires/$slug'
+    | '/faq/$slug'
+    | '/faq/modifier'
+    | '/faq/parcours'
+    | '/formulaire/supprimer-donnees-personnelles-entreprise'
+    | '/justificatif-immatriculation-pdf/$slug'
+    | '/labels-certificats/$slug'
+    | '/lp/$slug'
+    | '/lp/agent-public'
+    | '/formulaire/merci'
+    | '/formulaire/nps'
+    | '/a-propos/stats'
+    | '/donnees/api'
+    | '/rechercher/carte'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
     | '/connexion/habilitation/requise'
+    | '/erreur/introuvable/$slug'
+    | '/faq/modifier/$slug'
   id:
     | '__root__'
-    | '/'
     | '/_header-compte'
     | '/_header-connexion'
+    | '/_header-default'
+    | '/_header-home'
+    | '/_header-lp-agent'
+    | '/_header-minimal'
+    | '/_header-public'
+    | '/_header-search'
+    | '/_header-default/accessibilite'
+    | '/_header-default/administration'
+    | '/_header-default/definitions'
+    | '/_header-default/export-sirene'
+    | '/_header-default/faq'
+    | '/_header-default/historique-des-modifications'
+    | '/_header-default/mentions-legales'
+    | '/_header-default/modalites-utilisation'
+    | '/_header-default/partager'
+    | '/_header-default/personne'
+    | '/_header-default/vie-privee'
+    | '/_header-search/rechercher'
+    | '/_header-home/'
     | '/_header-compte/compte/accueil'
     | '/_header-compte/compte/mes-groupes'
     | '/_header-connexion/connexion/au-revoir'
     | '/_header-connexion/connexion/echec-connexion'
+    | '/_header-default/a-propos/budget'
+    | '/_header-default/a-propos/comment-ca-marche'
+    | '/_header-default/a-propos/donnees-extrait-kbis'
+    | '/_header-default/a-propos/equipe'
+    | '/_header-default/administration/$slug'
+    | '/_header-default/annonces/$slug'
+    | '/_header-default/definitions/$slug'
+    | '/_header-default/dirigeants/$slug'
+    | '/_header-default/divers/$slug'
+    | '/_header-default/documents/$slug'
+    | '/_header-default/donnees-financieres/$slug'
+    | '/_header-default/donnees/api-entreprises'
+    | '/_header-default/donnees/sources'
+    | '/_header-default/entreprise/$slug'
+    | '/_header-default/etablissement/$slug'
+    | '/_header-default/etablissements-scolaires/$slug'
+    | '/_header-default/faq/$slug'
+    | '/_header-default/faq/modifier'
+    | '/_header-default/faq/parcours'
+    | '/_header-default/formulaire/supprimer-donnees-personnelles-entreprise'
+    | '/_header-default/justificatif-immatriculation-pdf/$slug'
+    | '/_header-default/labels-certificats/$slug'
+    | '/_header-home/lp/$slug'
+    | '/_header-lp-agent/lp/agent-public'
+    | '/_header-minimal/formulaire/merci'
+    | '/_header-minimal/formulaire/nps'
+    | '/_header-public/a-propos/stats'
+    | '/_header-public/donnees/api'
+    | '/_header-search/rechercher/carte'
     | '/_header-connexion/connexion/habilitation/administration-inconnue'
     | '/_header-connexion/connexion/habilitation/prestataires'
     | '/_header-connexion/connexion/habilitation/refusee'
     | '/_header-connexion/connexion/habilitation/requise'
+    | '/_header-default/erreur/introuvable/$slug'
+    | '/_header-default/faq/modifier/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   HeaderCompteRouteRoute: typeof HeaderCompteRouteRouteWithChildren
   HeaderConnexionRouteRoute: typeof HeaderConnexionRouteRouteWithChildren
+  HeaderDefaultRouteRoute: typeof HeaderDefaultRouteRouteWithChildren
+  HeaderHomeRouteRoute: typeof HeaderHomeRouteRouteWithChildren
+  HeaderLpAgentRouteRoute: typeof HeaderLpAgentRouteRouteWithChildren
+  HeaderMinimalRouteRoute: typeof HeaderMinimalRouteRouteWithChildren
+  HeaderPublicRouteRoute: typeof HeaderPublicRouteRouteWithChildren
+  HeaderSearchRouteRoute: typeof HeaderSearchRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_header-search': {
+      id: '/_header-search'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HeaderSearchRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_header-public': {
+      id: '/_header-public'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HeaderPublicRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_header-minimal': {
+      id: '/_header-minimal'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HeaderMinimalRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_header-lp-agent': {
+      id: '/_header-lp-agent'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HeaderLpAgentRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_header-home': {
+      id: '/_header-home'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HeaderHomeRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_header-default': {
+      id: '/_header-default'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HeaderDefaultRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_header-connexion': {
       id: '/_header-connexion'
       path: ''
@@ -179,12 +820,299 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderCompteRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_header-home/': {
+      id: '/_header-home/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof HeaderHomeIndexRouteImport
+      parentRoute: typeof HeaderHomeRouteRoute
+    }
+    '/_header-search/rechercher': {
+      id: '/_header-search/rechercher'
+      path: '/rechercher'
+      fullPath: '/rechercher'
+      preLoaderRoute: typeof HeaderSearchRechercherRouteImport
+      parentRoute: typeof HeaderSearchRouteRoute
+    }
+    '/_header-default/vie-privee': {
+      id: '/_header-default/vie-privee'
+      path: '/vie-privee'
+      fullPath: '/vie-privee'
+      preLoaderRoute: typeof HeaderDefaultViePriveeRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/personne': {
+      id: '/_header-default/personne'
+      path: '/personne'
+      fullPath: '/personne'
+      preLoaderRoute: typeof HeaderDefaultPersonneRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/partager': {
+      id: '/_header-default/partager'
+      path: '/partager'
+      fullPath: '/partager'
+      preLoaderRoute: typeof HeaderDefaultPartagerRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/modalites-utilisation': {
+      id: '/_header-default/modalites-utilisation'
+      path: '/modalites-utilisation'
+      fullPath: '/modalites-utilisation'
+      preLoaderRoute: typeof HeaderDefaultModalitesUtilisationRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/mentions-legales': {
+      id: '/_header-default/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof HeaderDefaultMentionsLegalesRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/historique-des-modifications': {
+      id: '/_header-default/historique-des-modifications'
+      path: '/historique-des-modifications'
+      fullPath: '/historique-des-modifications'
+      preLoaderRoute: typeof HeaderDefaultHistoriqueDesModificationsRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/faq': {
+      id: '/_header-default/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof HeaderDefaultFaqRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/export-sirene': {
+      id: '/_header-default/export-sirene'
+      path: '/export-sirene'
+      fullPath: '/export-sirene'
+      preLoaderRoute: typeof HeaderDefaultExportSireneRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/definitions': {
+      id: '/_header-default/definitions'
+      path: '/definitions'
+      fullPath: '/definitions'
+      preLoaderRoute: typeof HeaderDefaultDefinitionsRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/administration': {
+      id: '/_header-default/administration'
+      path: '/administration'
+      fullPath: '/administration'
+      preLoaderRoute: typeof HeaderDefaultAdministrationRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/accessibilite': {
+      id: '/_header-default/accessibilite'
+      path: '/accessibilite'
+      fullPath: '/accessibilite'
+      preLoaderRoute: typeof HeaderDefaultAccessibiliteRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-search/rechercher/carte': {
+      id: '/_header-search/rechercher/carte'
+      path: '/carte'
+      fullPath: '/rechercher/carte'
+      preLoaderRoute: typeof HeaderSearchRechercherCarteRouteImport
+      parentRoute: typeof HeaderSearchRechercherRoute
+    }
+    '/_header-public/donnees/api': {
+      id: '/_header-public/donnees/api'
+      path: '/donnees/api'
+      fullPath: '/donnees/api'
+      preLoaderRoute: typeof HeaderPublicDonneesApiRouteImport
+      parentRoute: typeof HeaderPublicRouteRoute
+    }
+    '/_header-public/a-propos/stats': {
+      id: '/_header-public/a-propos/stats'
+      path: '/a-propos/stats'
+      fullPath: '/a-propos/stats'
+      preLoaderRoute: typeof HeaderPublicAProposStatsRouteImport
+      parentRoute: typeof HeaderPublicRouteRoute
+    }
+    '/_header-minimal/formulaire/nps': {
+      id: '/_header-minimal/formulaire/nps'
+      path: '/formulaire/nps'
+      fullPath: '/formulaire/nps'
+      preLoaderRoute: typeof HeaderMinimalFormulaireNpsRouteImport
+      parentRoute: typeof HeaderMinimalRouteRoute
+    }
+    '/_header-minimal/formulaire/merci': {
+      id: '/_header-minimal/formulaire/merci'
+      path: '/formulaire/merci'
+      fullPath: '/formulaire/merci'
+      preLoaderRoute: typeof HeaderMinimalFormulaireMerciRouteImport
+      parentRoute: typeof HeaderMinimalRouteRoute
+    }
+    '/_header-lp-agent/lp/agent-public': {
+      id: '/_header-lp-agent/lp/agent-public'
+      path: '/lp/agent-public'
+      fullPath: '/lp/agent-public'
+      preLoaderRoute: typeof HeaderLpAgentLpAgentPublicRouteImport
+      parentRoute: typeof HeaderLpAgentRouteRoute
+    }
+    '/_header-home/lp/$slug': {
+      id: '/_header-home/lp/$slug'
+      path: '/lp/$slug'
+      fullPath: '/lp/$slug'
+      preLoaderRoute: typeof HeaderHomeLpSlugRouteImport
+      parentRoute: typeof HeaderHomeRouteRoute
+    }
+    '/_header-default/labels-certificats/$slug': {
+      id: '/_header-default/labels-certificats/$slug'
+      path: '/labels-certificats/$slug'
+      fullPath: '/labels-certificats/$slug'
+      preLoaderRoute: typeof HeaderDefaultLabelsCertificatsSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/justificatif-immatriculation-pdf/$slug': {
+      id: '/_header-default/justificatif-immatriculation-pdf/$slug'
+      path: '/justificatif-immatriculation-pdf/$slug'
+      fullPath: '/justificatif-immatriculation-pdf/$slug'
+      preLoaderRoute: typeof HeaderDefaultJustificatifImmatriculationPdfSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/formulaire/supprimer-donnees-personnelles-entreprise': {
+      id: '/_header-default/formulaire/supprimer-donnees-personnelles-entreprise'
+      path: '/formulaire/supprimer-donnees-personnelles-entreprise'
+      fullPath: '/formulaire/supprimer-donnees-personnelles-entreprise'
+      preLoaderRoute: typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/faq/parcours': {
+      id: '/_header-default/faq/parcours'
+      path: '/parcours'
+      fullPath: '/faq/parcours'
+      preLoaderRoute: typeof HeaderDefaultFaqParcoursRouteImport
+      parentRoute: typeof HeaderDefaultFaqRoute
+    }
+    '/_header-default/faq/modifier': {
+      id: '/_header-default/faq/modifier'
+      path: '/modifier'
+      fullPath: '/faq/modifier'
+      preLoaderRoute: typeof HeaderDefaultFaqModifierRouteImport
+      parentRoute: typeof HeaderDefaultFaqRoute
+    }
+    '/_header-default/faq/$slug': {
+      id: '/_header-default/faq/$slug'
+      path: '/$slug'
+      fullPath: '/faq/$slug'
+      preLoaderRoute: typeof HeaderDefaultFaqSlugRouteImport
+      parentRoute: typeof HeaderDefaultFaqRoute
+    }
+    '/_header-default/etablissements-scolaires/$slug': {
+      id: '/_header-default/etablissements-scolaires/$slug'
+      path: '/etablissements-scolaires/$slug'
+      fullPath: '/etablissements-scolaires/$slug'
+      preLoaderRoute: typeof HeaderDefaultEtablissementsScolairesSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/etablissement/$slug': {
+      id: '/_header-default/etablissement/$slug'
+      path: '/etablissement/$slug'
+      fullPath: '/etablissement/$slug'
+      preLoaderRoute: typeof HeaderDefaultEtablissementSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/entreprise/$slug': {
+      id: '/_header-default/entreprise/$slug'
+      path: '/entreprise/$slug'
+      fullPath: '/entreprise/$slug'
+      preLoaderRoute: typeof HeaderDefaultEntrepriseSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/donnees/sources': {
+      id: '/_header-default/donnees/sources'
+      path: '/donnees/sources'
+      fullPath: '/donnees/sources'
+      preLoaderRoute: typeof HeaderDefaultDonneesSourcesRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/donnees/api-entreprises': {
+      id: '/_header-default/donnees/api-entreprises'
+      path: '/donnees/api-entreprises'
+      fullPath: '/donnees/api-entreprises'
+      preLoaderRoute: typeof HeaderDefaultDonneesApiEntreprisesRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/donnees-financieres/$slug': {
+      id: '/_header-default/donnees-financieres/$slug'
+      path: '/donnees-financieres/$slug'
+      fullPath: '/donnees-financieres/$slug'
+      preLoaderRoute: typeof HeaderDefaultDonneesFinancieresSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/documents/$slug': {
+      id: '/_header-default/documents/$slug'
+      path: '/documents/$slug'
+      fullPath: '/documents/$slug'
+      preLoaderRoute: typeof HeaderDefaultDocumentsSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/divers/$slug': {
+      id: '/_header-default/divers/$slug'
+      path: '/divers/$slug'
+      fullPath: '/divers/$slug'
+      preLoaderRoute: typeof HeaderDefaultDiversSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/dirigeants/$slug': {
+      id: '/_header-default/dirigeants/$slug'
+      path: '/dirigeants/$slug'
+      fullPath: '/dirigeants/$slug'
+      preLoaderRoute: typeof HeaderDefaultDirigeantsSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/definitions/$slug': {
+      id: '/_header-default/definitions/$slug'
+      path: '/$slug'
+      fullPath: '/definitions/$slug'
+      preLoaderRoute: typeof HeaderDefaultDefinitionsSlugRouteImport
+      parentRoute: typeof HeaderDefaultDefinitionsRoute
+    }
+    '/_header-default/annonces/$slug': {
+      id: '/_header-default/annonces/$slug'
+      path: '/annonces/$slug'
+      fullPath: '/annonces/$slug'
+      preLoaderRoute: typeof HeaderDefaultAnnoncesSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/administration/$slug': {
+      id: '/_header-default/administration/$slug'
+      path: '/$slug'
+      fullPath: '/administration/$slug'
+      preLoaderRoute: typeof HeaderDefaultAdministrationSlugRouteImport
+      parentRoute: typeof HeaderDefaultAdministrationRoute
+    }
+    '/_header-default/a-propos/equipe': {
+      id: '/_header-default/a-propos/equipe'
+      path: '/a-propos/equipe'
+      fullPath: '/a-propos/equipe'
+      preLoaderRoute: typeof HeaderDefaultAProposEquipeRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/a-propos/donnees-extrait-kbis': {
+      id: '/_header-default/a-propos/donnees-extrait-kbis'
+      path: '/a-propos/donnees-extrait-kbis'
+      fullPath: '/a-propos/donnees-extrait-kbis'
+      preLoaderRoute: typeof HeaderDefaultAProposDonneesExtraitKbisRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/a-propos/comment-ca-marche': {
+      id: '/_header-default/a-propos/comment-ca-marche'
+      path: '/a-propos/comment-ca-marche'
+      fullPath: '/a-propos/comment-ca-marche'
+      preLoaderRoute: typeof HeaderDefaultAProposCommentCaMarcheRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/a-propos/budget': {
+      id: '/_header-default/a-propos/budget'
+      path: '/a-propos/budget'
+      fullPath: '/a-propos/budget'
+      preLoaderRoute: typeof HeaderDefaultAProposBudgetRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/_header-connexion/connexion/echec-connexion': {
       id: '/_header-connexion/connexion/echec-connexion'
@@ -213,6 +1141,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/compte/accueil'
       preLoaderRoute: typeof HeaderCompteCompteAccueilRouteImport
       parentRoute: typeof HeaderCompteRouteRoute
+    }
+    '/_header-default/faq/modifier/$slug': {
+      id: '/_header-default/faq/modifier/$slug'
+      path: '/$slug'
+      fullPath: '/faq/modifier/$slug'
+      preLoaderRoute: typeof HeaderDefaultFaqModifierSlugRouteImport
+      parentRoute: typeof HeaderDefaultFaqModifierRoute
+    }
+    '/_header-default/erreur/introuvable/$slug': {
+      id: '/_header-default/erreur/introuvable/$slug'
+      path: '/erreur/introuvable/$slug'
+      fullPath: '/erreur/introuvable/$slug'
+      preLoaderRoute: typeof HeaderDefaultErreurIntrouvableSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/_header-connexion/connexion/habilitation/requise': {
       id: '/_header-connexion/connexion/habilitation/requise'
@@ -284,10 +1226,227 @@ const HeaderConnexionRouteRouteChildren: HeaderConnexionRouteRouteChildren = {
 const HeaderConnexionRouteRouteWithChildren =
   HeaderConnexionRouteRoute._addFileChildren(HeaderConnexionRouteRouteChildren)
 
+interface HeaderDefaultAdministrationRouteChildren {
+  HeaderDefaultAdministrationSlugRoute: typeof HeaderDefaultAdministrationSlugRoute
+}
+
+const HeaderDefaultAdministrationRouteChildren: HeaderDefaultAdministrationRouteChildren =
+  {
+    HeaderDefaultAdministrationSlugRoute: HeaderDefaultAdministrationSlugRoute,
+  }
+
+const HeaderDefaultAdministrationRouteWithChildren =
+  HeaderDefaultAdministrationRoute._addFileChildren(
+    HeaderDefaultAdministrationRouteChildren,
+  )
+
+interface HeaderDefaultDefinitionsRouteChildren {
+  HeaderDefaultDefinitionsSlugRoute: typeof HeaderDefaultDefinitionsSlugRoute
+}
+
+const HeaderDefaultDefinitionsRouteChildren: HeaderDefaultDefinitionsRouteChildren =
+  {
+    HeaderDefaultDefinitionsSlugRoute: HeaderDefaultDefinitionsSlugRoute,
+  }
+
+const HeaderDefaultDefinitionsRouteWithChildren =
+  HeaderDefaultDefinitionsRoute._addFileChildren(
+    HeaderDefaultDefinitionsRouteChildren,
+  )
+
+interface HeaderDefaultFaqModifierRouteChildren {
+  HeaderDefaultFaqModifierSlugRoute: typeof HeaderDefaultFaqModifierSlugRoute
+}
+
+const HeaderDefaultFaqModifierRouteChildren: HeaderDefaultFaqModifierRouteChildren =
+  {
+    HeaderDefaultFaqModifierSlugRoute: HeaderDefaultFaqModifierSlugRoute,
+  }
+
+const HeaderDefaultFaqModifierRouteWithChildren =
+  HeaderDefaultFaqModifierRoute._addFileChildren(
+    HeaderDefaultFaqModifierRouteChildren,
+  )
+
+interface HeaderDefaultFaqRouteChildren {
+  HeaderDefaultFaqSlugRoute: typeof HeaderDefaultFaqSlugRoute
+  HeaderDefaultFaqModifierRoute: typeof HeaderDefaultFaqModifierRouteWithChildren
+  HeaderDefaultFaqParcoursRoute: typeof HeaderDefaultFaqParcoursRoute
+}
+
+const HeaderDefaultFaqRouteChildren: HeaderDefaultFaqRouteChildren = {
+  HeaderDefaultFaqSlugRoute: HeaderDefaultFaqSlugRoute,
+  HeaderDefaultFaqModifierRoute: HeaderDefaultFaqModifierRouteWithChildren,
+  HeaderDefaultFaqParcoursRoute: HeaderDefaultFaqParcoursRoute,
+}
+
+const HeaderDefaultFaqRouteWithChildren =
+  HeaderDefaultFaqRoute._addFileChildren(HeaderDefaultFaqRouteChildren)
+
+interface HeaderDefaultRouteRouteChildren {
+  HeaderDefaultAccessibiliteRoute: typeof HeaderDefaultAccessibiliteRoute
+  HeaderDefaultAdministrationRoute: typeof HeaderDefaultAdministrationRouteWithChildren
+  HeaderDefaultDefinitionsRoute: typeof HeaderDefaultDefinitionsRouteWithChildren
+  HeaderDefaultExportSireneRoute: typeof HeaderDefaultExportSireneRoute
+  HeaderDefaultFaqRoute: typeof HeaderDefaultFaqRouteWithChildren
+  HeaderDefaultHistoriqueDesModificationsRoute: typeof HeaderDefaultHistoriqueDesModificationsRoute
+  HeaderDefaultMentionsLegalesRoute: typeof HeaderDefaultMentionsLegalesRoute
+  HeaderDefaultModalitesUtilisationRoute: typeof HeaderDefaultModalitesUtilisationRoute
+  HeaderDefaultPartagerRoute: typeof HeaderDefaultPartagerRoute
+  HeaderDefaultPersonneRoute: typeof HeaderDefaultPersonneRoute
+  HeaderDefaultViePriveeRoute: typeof HeaderDefaultViePriveeRoute
+  HeaderDefaultAProposBudgetRoute: typeof HeaderDefaultAProposBudgetRoute
+  HeaderDefaultAProposCommentCaMarcheRoute: typeof HeaderDefaultAProposCommentCaMarcheRoute
+  HeaderDefaultAProposDonneesExtraitKbisRoute: typeof HeaderDefaultAProposDonneesExtraitKbisRoute
+  HeaderDefaultAProposEquipeRoute: typeof HeaderDefaultAProposEquipeRoute
+  HeaderDefaultAnnoncesSlugRoute: typeof HeaderDefaultAnnoncesSlugRoute
+  HeaderDefaultDirigeantsSlugRoute: typeof HeaderDefaultDirigeantsSlugRoute
+  HeaderDefaultDiversSlugRoute: typeof HeaderDefaultDiversSlugRoute
+  HeaderDefaultDocumentsSlugRoute: typeof HeaderDefaultDocumentsSlugRoute
+  HeaderDefaultDonneesFinancieresSlugRoute: typeof HeaderDefaultDonneesFinancieresSlugRoute
+  HeaderDefaultDonneesApiEntreprisesRoute: typeof HeaderDefaultDonneesApiEntreprisesRoute
+  HeaderDefaultDonneesSourcesRoute: typeof HeaderDefaultDonneesSourcesRoute
+  HeaderDefaultEntrepriseSlugRoute: typeof HeaderDefaultEntrepriseSlugRoute
+  HeaderDefaultEtablissementSlugRoute: typeof HeaderDefaultEtablissementSlugRoute
+  HeaderDefaultEtablissementsScolairesSlugRoute: typeof HeaderDefaultEtablissementsScolairesSlugRoute
+  HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute: typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
+  HeaderDefaultJustificatifImmatriculationPdfSlugRoute: typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
+  HeaderDefaultLabelsCertificatsSlugRoute: typeof HeaderDefaultLabelsCertificatsSlugRoute
+  HeaderDefaultErreurIntrouvableSlugRoute: typeof HeaderDefaultErreurIntrouvableSlugRoute
+}
+
+const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
+  HeaderDefaultAccessibiliteRoute: HeaderDefaultAccessibiliteRoute,
+  HeaderDefaultAdministrationRoute:
+    HeaderDefaultAdministrationRouteWithChildren,
+  HeaderDefaultDefinitionsRoute: HeaderDefaultDefinitionsRouteWithChildren,
+  HeaderDefaultExportSireneRoute: HeaderDefaultExportSireneRoute,
+  HeaderDefaultFaqRoute: HeaderDefaultFaqRouteWithChildren,
+  HeaderDefaultHistoriqueDesModificationsRoute:
+    HeaderDefaultHistoriqueDesModificationsRoute,
+  HeaderDefaultMentionsLegalesRoute: HeaderDefaultMentionsLegalesRoute,
+  HeaderDefaultModalitesUtilisationRoute:
+    HeaderDefaultModalitesUtilisationRoute,
+  HeaderDefaultPartagerRoute: HeaderDefaultPartagerRoute,
+  HeaderDefaultPersonneRoute: HeaderDefaultPersonneRoute,
+  HeaderDefaultViePriveeRoute: HeaderDefaultViePriveeRoute,
+  HeaderDefaultAProposBudgetRoute: HeaderDefaultAProposBudgetRoute,
+  HeaderDefaultAProposCommentCaMarcheRoute:
+    HeaderDefaultAProposCommentCaMarcheRoute,
+  HeaderDefaultAProposDonneesExtraitKbisRoute:
+    HeaderDefaultAProposDonneesExtraitKbisRoute,
+  HeaderDefaultAProposEquipeRoute: HeaderDefaultAProposEquipeRoute,
+  HeaderDefaultAnnoncesSlugRoute: HeaderDefaultAnnoncesSlugRoute,
+  HeaderDefaultDirigeantsSlugRoute: HeaderDefaultDirigeantsSlugRoute,
+  HeaderDefaultDiversSlugRoute: HeaderDefaultDiversSlugRoute,
+  HeaderDefaultDocumentsSlugRoute: HeaderDefaultDocumentsSlugRoute,
+  HeaderDefaultDonneesFinancieresSlugRoute:
+    HeaderDefaultDonneesFinancieresSlugRoute,
+  HeaderDefaultDonneesApiEntreprisesRoute:
+    HeaderDefaultDonneesApiEntreprisesRoute,
+  HeaderDefaultDonneesSourcesRoute: HeaderDefaultDonneesSourcesRoute,
+  HeaderDefaultEntrepriseSlugRoute: HeaderDefaultEntrepriseSlugRoute,
+  HeaderDefaultEtablissementSlugRoute: HeaderDefaultEtablissementSlugRoute,
+  HeaderDefaultEtablissementsScolairesSlugRoute:
+    HeaderDefaultEtablissementsScolairesSlugRoute,
+  HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute:
+    HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute,
+  HeaderDefaultJustificatifImmatriculationPdfSlugRoute:
+    HeaderDefaultJustificatifImmatriculationPdfSlugRoute,
+  HeaderDefaultLabelsCertificatsSlugRoute:
+    HeaderDefaultLabelsCertificatsSlugRoute,
+  HeaderDefaultErreurIntrouvableSlugRoute:
+    HeaderDefaultErreurIntrouvableSlugRoute,
+}
+
+const HeaderDefaultRouteRouteWithChildren =
+  HeaderDefaultRouteRoute._addFileChildren(HeaderDefaultRouteRouteChildren)
+
+interface HeaderHomeRouteRouteChildren {
+  HeaderHomeIndexRoute: typeof HeaderHomeIndexRoute
+  HeaderHomeLpSlugRoute: typeof HeaderHomeLpSlugRoute
+}
+
+const HeaderHomeRouteRouteChildren: HeaderHomeRouteRouteChildren = {
+  HeaderHomeIndexRoute: HeaderHomeIndexRoute,
+  HeaderHomeLpSlugRoute: HeaderHomeLpSlugRoute,
+}
+
+const HeaderHomeRouteRouteWithChildren = HeaderHomeRouteRoute._addFileChildren(
+  HeaderHomeRouteRouteChildren,
+)
+
+interface HeaderLpAgentRouteRouteChildren {
+  HeaderLpAgentLpAgentPublicRoute: typeof HeaderLpAgentLpAgentPublicRoute
+}
+
+const HeaderLpAgentRouteRouteChildren: HeaderLpAgentRouteRouteChildren = {
+  HeaderLpAgentLpAgentPublicRoute: HeaderLpAgentLpAgentPublicRoute,
+}
+
+const HeaderLpAgentRouteRouteWithChildren =
+  HeaderLpAgentRouteRoute._addFileChildren(HeaderLpAgentRouteRouteChildren)
+
+interface HeaderMinimalRouteRouteChildren {
+  HeaderMinimalFormulaireMerciRoute: typeof HeaderMinimalFormulaireMerciRoute
+  HeaderMinimalFormulaireNpsRoute: typeof HeaderMinimalFormulaireNpsRoute
+}
+
+const HeaderMinimalRouteRouteChildren: HeaderMinimalRouteRouteChildren = {
+  HeaderMinimalFormulaireMerciRoute: HeaderMinimalFormulaireMerciRoute,
+  HeaderMinimalFormulaireNpsRoute: HeaderMinimalFormulaireNpsRoute,
+}
+
+const HeaderMinimalRouteRouteWithChildren =
+  HeaderMinimalRouteRoute._addFileChildren(HeaderMinimalRouteRouteChildren)
+
+interface HeaderPublicRouteRouteChildren {
+  HeaderPublicAProposStatsRoute: typeof HeaderPublicAProposStatsRoute
+  HeaderPublicDonneesApiRoute: typeof HeaderPublicDonneesApiRoute
+}
+
+const HeaderPublicRouteRouteChildren: HeaderPublicRouteRouteChildren = {
+  HeaderPublicAProposStatsRoute: HeaderPublicAProposStatsRoute,
+  HeaderPublicDonneesApiRoute: HeaderPublicDonneesApiRoute,
+}
+
+const HeaderPublicRouteRouteWithChildren =
+  HeaderPublicRouteRoute._addFileChildren(HeaderPublicRouteRouteChildren)
+
+interface HeaderSearchRechercherRouteChildren {
+  HeaderSearchRechercherCarteRoute: typeof HeaderSearchRechercherCarteRoute
+}
+
+const HeaderSearchRechercherRouteChildren: HeaderSearchRechercherRouteChildren =
+  {
+    HeaderSearchRechercherCarteRoute: HeaderSearchRechercherCarteRoute,
+  }
+
+const HeaderSearchRechercherRouteWithChildren =
+  HeaderSearchRechercherRoute._addFileChildren(
+    HeaderSearchRechercherRouteChildren,
+  )
+
+interface HeaderSearchRouteRouteChildren {
+  HeaderSearchRechercherRoute: typeof HeaderSearchRechercherRouteWithChildren
+}
+
+const HeaderSearchRouteRouteChildren: HeaderSearchRouteRouteChildren = {
+  HeaderSearchRechercherRoute: HeaderSearchRechercherRouteWithChildren,
+}
+
+const HeaderSearchRouteRouteWithChildren =
+  HeaderSearchRouteRoute._addFileChildren(HeaderSearchRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   HeaderCompteRouteRoute: HeaderCompteRouteRouteWithChildren,
   HeaderConnexionRouteRoute: HeaderConnexionRouteRouteWithChildren,
+  HeaderDefaultRouteRoute: HeaderDefaultRouteRouteWithChildren,
+  HeaderHomeRouteRoute: HeaderHomeRouteRouteWithChildren,
+  HeaderLpAgentRouteRoute: HeaderLpAgentRouteRouteWithChildren,
+  HeaderMinimalRouteRoute: HeaderMinimalRouteRouteWithChildren,
+  HeaderPublicRouteRoute: HeaderPublicRouteRouteWithChildren,
+  HeaderSearchRouteRoute: HeaderSearchRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
