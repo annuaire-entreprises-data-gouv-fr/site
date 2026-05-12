@@ -1,0 +1,10 @@
+a.frBadge {
+  text-decoration: none;
+  border: none;
+}
+a.frBadge:hover {
+  filter: brightness(0.95);
+}
+a.frBadge:active {
+  filter: brightness(0.9);
+}

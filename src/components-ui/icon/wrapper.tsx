@@ -1,0 +1,44 @@
+import type { PropsWithChildren } from "react";
+import { type IIconsSlug, icons } from ".";
+import styles from "./styles.module.css";
+
+interface IProps {
+  className?: string;
+  color?: string;
+  id?: string;
+  size?: number;
+  slug: IIconsSlug;
+}
+
+export const Icon: React.FC<PropsWithChildren<IProps>> = ({
+  id,
+  className = "",
+  size = 18,
+  color,
+  children,
+  slug,
+}) => {
+  const icon = icons[slug];
+  if (!icon) {
+    console.error(`Error in <Icon/> : ${slug} icon does not exists`);
+  }
+  return (
+    <span className={styles.icon + " " + className} id={id}>
+      <span
+        style={{
+          height: size + "px",
+          width: size + "px",
+          color: color || "inherit",
+          marginRight: children ? "5px" : "0",
+          flexShrink: "0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {icon}
+      </span>
+      <span>{children}</span>
+    </span>
+  );
+};
