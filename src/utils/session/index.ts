@@ -1,32 +1,30 @@
-import {
-  getSession,
-  type SessionConfig,
-  updateSession,
-} from "@tanstack/react-start/server";
+/** biome-ignore-all lint/correctness/useHookAtTopLevel: not a hook */
+import { useSession } from "@tanstack/react-start/server";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import type { ISession } from "#/models/authentication/user/session";
 import { isAbsoluteUrl } from "#/utils/server-side-helper/is-absolute-url";
 
-export const sessionOptions: SessionConfig = {
-  password: process.env.IRON_SESSION_PWD as string,
-  name: "annuaire-entreprises-user-session-6",
-  cookie: {
-    secure: process.env.NODE_ENV === "production",
-    httpOnly: true, // ✅ Critical for XSS protection
-    sameSite: "lax", // ✅ CSRF protection
-  },
-  maxAge: 43_200, // 12h
-};
+function useAppSession() {
+  return useSession<ISession>({
+    password: process.env.IRON_SESSION_PWD as string,
+    name: "annuaire-entreprises-user-session-6",
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true, // ✅ Critical for XSS protection
+      sameSite: "lax", // ✅ CSRF protection
+    },
+    maxAge: 43_200, // 12h
+  });
+}
 
 export function getCurrentSession() {
-  return getSession<ISession>(sessionOptions);
+  return useAppSession();
 }
 
 type Session = Awaited<ReturnType<typeof getCurrentSession>>;
 
 export async function setVisitTimestamp(session: Session) {
-  await updateSession<ISession>(sessionOptions, {
-    ...session.data,
+  await session.update({
     lastVisitTimestamp: Date.now(),
   });
 }
@@ -36,15 +34,13 @@ export async function setVisitTimestamp(session: Session) {
  */
 
 export const setAgentSession = async (agent: IAgentInfo, session: Session) => {
-  await updateSession<ISession>(sessionOptions, {
-    ...session.data,
+  await session.update({
     user: agent,
   });
 };
 
 export const cleanAgentSession = async (session: Session) => {
-  await updateSession<ISession>(sessionOptions, {
-    ...session.data,
+  await session.update({
     state: undefined,
     nonce: undefined,
     proConnectTokenSet: undefined,
@@ -53,8 +49,7 @@ export const cleanAgentSession = async (session: Session) => {
 };
 
 export const cleanFranceConnectSession = async (session: Session) => {
-  await updateSession<ISession>(sessionOptions, {
-    ...session.data,
+  await session.update({
     franceConnectHidePersonalDataSession: undefined,
   });
 };
@@ -64,8 +59,7 @@ export const setStateAndNonce = async (
   state: string | undefined,
   nonce: string | undefined
 ) => {
-  await updateSession<ISession>(sessionOptions, {
-    ...session.data,
+  await session.update({
     state,
     nonce,
   });
@@ -75,8 +69,7 @@ export const setProConnectTokenSet = async (
   session: Session,
   proConnectTokenSet: ISession["proConnectTokenSet"]
 ) => {
-  await updateSession<ISession>(sessionOptions, {
-    ...session.data,
+  await session.update({
     proConnectTokenSet,
     state: undefined,
     nonce: undefined,
@@ -92,8 +85,7 @@ export const setPathFrom = async (session: Session, pathFrom: string) => {
     if (isAbsoluteUrl(pathFrom)) {
       throw new Error("Absolute URL not allowed");
     }
-    await updateSession<ISession>(sessionOptions, {
-      ...session.data,
+    await session.update({
       pathFrom,
     });
   }
@@ -102,8 +94,7 @@ export const setPathFrom = async (session: Session, pathFrom: string) => {
 export const getPathFrom = (session: Session) => session.data.pathFrom;
 
 export const cleanPathFrom = async (session: Session) => {
-  await updateSession<ISession>(sessionOptions, {
-    ...session.data,
+  await session.update({
     pathFrom: undefined,
   });
 };
@@ -120,8 +111,7 @@ export const setHidePersonalDataRequestFCSession = async (
   sub: string,
   session: Session
 ) => {
-  await updateSession<ISession>(sessionOptions, {
-    ...session.data,
+  await session.update({
     franceConnectHidePersonalDataSession: {
       firstName,
       familyName,
