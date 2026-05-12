@@ -1,6 +1,6 @@
-import type { IAssociationEtablissement } from "#models/espace-agent/association-protected";
-import { InternalError } from "#models/exceptions";
-import logErrorInSentry from "#utils/sentry";
+import type { IAssociationEtablissement } from "#/models/espace-agent/association-protected";
+import { InternalError } from "#/models/exceptions";
+import logErrorInSentry from "#/utils/sentry";
 import { formatSiret } from "../siren-and-siret";
 
 export const extractAssociationEtablissements = (

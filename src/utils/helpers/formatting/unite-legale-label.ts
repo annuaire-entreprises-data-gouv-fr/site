@@ -4,7 +4,7 @@ import {
   isAssociation,
   isEntrepreneurIndividuel,
   isServicePublic,
-} from "#models/core/types";
+} from "#/models/core/types";
 import { formatSiret } from "../siren-and-siret";
 import { capitalize, formatIntFr } from "./formatting";
 

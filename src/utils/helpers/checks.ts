@@ -1,6 +1,6 @@
-import { estNonDiffusibleStrict } from "#models/core/diffusion";
-import { estActif } from "#models/core/etat-administratif";
-import { type IUniteLegale, isPersonnePhysique } from "#models/core/types";
+import { estNonDiffusibleStrict } from "#/models/core/diffusion";
+import { estActif } from "#/models/core/etat-administratif";
+import { type IUniteLegale, isPersonnePhysique } from "#/models/core/types";
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string

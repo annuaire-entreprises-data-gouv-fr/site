@@ -1,4 +1,4 @@
-import type { IEtablissement } from "#models/core/types";
+import type { IEtablissement } from "#/models/core/types";
 
 /**
  * Check if the etablissement is in France

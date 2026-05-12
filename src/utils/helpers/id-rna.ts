@@ -1,4 +1,4 @@
-import { NotAValidIdRnaError } from "#models/core/types";
+import { NotAValidIdRnaError } from "#/models/core/types";
 
 /**
  * IdRna types

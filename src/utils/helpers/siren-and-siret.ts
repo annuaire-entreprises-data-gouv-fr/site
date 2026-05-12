@@ -1,4 +1,4 @@
-import { NotASirenError, NotASiretError } from "#models/core/types";
+import { NotASirenError, NotASiretError } from "#/models/core/types";
 
 /**
  * Siren and siret types
