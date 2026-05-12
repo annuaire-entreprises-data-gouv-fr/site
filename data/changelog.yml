@@ -16,7 +16,7 @@
     agent: true
     api: true
   body: |
-    Ajout des données relatives aux procédures collectives et aux radiations issues du BODACC
+    Ajout des données relatives aux procédures collectives et aux radiations issues du BODACC.
 - date: 11/05/2026
   target:
     agent: true
