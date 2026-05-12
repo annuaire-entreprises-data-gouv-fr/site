@@ -9,38 +9,176 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as HeaderConnexionRouteRouteImport } from './routes/_header-connexion/route'
+import { Route as HeaderCompteRouteRouteImport } from './routes/_header-compte/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HeaderConnexionConnexionEchecConnexionRouteImport } from './routes/_header-connexion/connexion.echec-connexion'
+import { Route as HeaderConnexionConnexionAuRevoirRouteImport } from './routes/_header-connexion/connexion.au-revoir'
+import { Route as HeaderCompteCompteMesGroupesRouteImport } from './routes/_header-compte/compte.mes-groupes'
+import { Route as HeaderCompteCompteAccueilRouteImport } from './routes/_header-compte/compte.accueil'
+import { Route as HeaderConnexionConnexionHabilitationRequiseRouteImport } from './routes/_header-connexion/connexion.habilitation.requise'
+import { Route as HeaderConnexionConnexionHabilitationRefuseeRouteImport } from './routes/_header-connexion/connexion.habilitation.refusee'
+import { Route as HeaderConnexionConnexionHabilitationPrestatairesRouteImport } from './routes/_header-connexion/connexion.habilitation.prestataires'
+import { Route as HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport } from './routes/_header-connexion/connexion.habilitation.administration-inconnue'
 
+const HeaderConnexionRouteRoute = HeaderConnexionRouteRouteImport.update({
+  id: '/_header-connexion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeaderCompteRouteRoute = HeaderCompteRouteRouteImport.update({
+  id: '/_header-compte',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HeaderConnexionConnexionEchecConnexionRoute =
+  HeaderConnexionConnexionEchecConnexionRouteImport.update({
+    id: '/connexion/echec-connexion',
+    path: '/connexion/echec-connexion',
+    getParentRoute: () => HeaderConnexionRouteRoute,
+  } as any)
+const HeaderConnexionConnexionAuRevoirRoute =
+  HeaderConnexionConnexionAuRevoirRouteImport.update({
+    id: '/connexion/au-revoir',
+    path: '/connexion/au-revoir',
+    getParentRoute: () => HeaderConnexionRouteRoute,
+  } as any)
+const HeaderCompteCompteMesGroupesRoute =
+  HeaderCompteCompteMesGroupesRouteImport.update({
+    id: '/compte/mes-groupes',
+    path: '/compte/mes-groupes',
+    getParentRoute: () => HeaderCompteRouteRoute,
+  } as any)
+const HeaderCompteCompteAccueilRoute =
+  HeaderCompteCompteAccueilRouteImport.update({
+    id: '/compte/accueil',
+    path: '/compte/accueil',
+    getParentRoute: () => HeaderCompteRouteRoute,
+  } as any)
+const HeaderConnexionConnexionHabilitationRequiseRoute =
+  HeaderConnexionConnexionHabilitationRequiseRouteImport.update({
+    id: '/connexion/habilitation/requise',
+    path: '/connexion/habilitation/requise',
+    getParentRoute: () => HeaderConnexionRouteRoute,
+  } as any)
+const HeaderConnexionConnexionHabilitationRefuseeRoute =
+  HeaderConnexionConnexionHabilitationRefuseeRouteImport.update({
+    id: '/connexion/habilitation/refusee',
+    path: '/connexion/habilitation/refusee',
+    getParentRoute: () => HeaderConnexionRouteRoute,
+  } as any)
+const HeaderConnexionConnexionHabilitationPrestatairesRoute =
+  HeaderConnexionConnexionHabilitationPrestatairesRouteImport.update({
+    id: '/connexion/habilitation/prestataires',
+    path: '/connexion/habilitation/prestataires',
+    getParentRoute: () => HeaderConnexionRouteRoute,
+  } as any)
+const HeaderConnexionConnexionHabilitationAdministrationInconnueRoute =
+  HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport.update({
+    id: '/connexion/habilitation/administration-inconnue',
+    path: '/connexion/habilitation/administration-inconnue',
+    getParentRoute: () => HeaderConnexionRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/compte/accueil': typeof HeaderCompteCompteAccueilRoute
+  '/compte/mes-groupes': typeof HeaderCompteCompteMesGroupesRoute
+  '/connexion/au-revoir': typeof HeaderConnexionConnexionAuRevoirRoute
+  '/connexion/echec-connexion': typeof HeaderConnexionConnexionEchecConnexionRoute
+  '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
+  '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
+  '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
+  '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/compte/accueil': typeof HeaderCompteCompteAccueilRoute
+  '/compte/mes-groupes': typeof HeaderCompteCompteMesGroupesRoute
+  '/connexion/au-revoir': typeof HeaderConnexionConnexionAuRevoirRoute
+  '/connexion/echec-connexion': typeof HeaderConnexionConnexionEchecConnexionRoute
+  '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
+  '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
+  '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
+  '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_header-compte': typeof HeaderCompteRouteRouteWithChildren
+  '/_header-connexion': typeof HeaderConnexionRouteRouteWithChildren
+  '/_header-compte/compte/accueil': typeof HeaderCompteCompteAccueilRoute
+  '/_header-compte/compte/mes-groupes': typeof HeaderCompteCompteMesGroupesRoute
+  '/_header-connexion/connexion/au-revoir': typeof HeaderConnexionConnexionAuRevoirRoute
+  '/_header-connexion/connexion/echec-connexion': typeof HeaderConnexionConnexionEchecConnexionRoute
+  '/_header-connexion/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
+  '/_header-connexion/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
+  '/_header-connexion/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
+  '/_header-connexion/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/compte/accueil'
+    | '/compte/mes-groupes'
+    | '/connexion/au-revoir'
+    | '/connexion/echec-connexion'
+    | '/connexion/habilitation/administration-inconnue'
+    | '/connexion/habilitation/prestataires'
+    | '/connexion/habilitation/refusee'
+    | '/connexion/habilitation/requise'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/compte/accueil'
+    | '/compte/mes-groupes'
+    | '/connexion/au-revoir'
+    | '/connexion/echec-connexion'
+    | '/connexion/habilitation/administration-inconnue'
+    | '/connexion/habilitation/prestataires'
+    | '/connexion/habilitation/refusee'
+    | '/connexion/habilitation/requise'
+  id:
+    | '__root__'
+    | '/'
+    | '/_header-compte'
+    | '/_header-connexion'
+    | '/_header-compte/compte/accueil'
+    | '/_header-compte/compte/mes-groupes'
+    | '/_header-connexion/connexion/au-revoir'
+    | '/_header-connexion/connexion/echec-connexion'
+    | '/_header-connexion/connexion/habilitation/administration-inconnue'
+    | '/_header-connexion/connexion/habilitation/prestataires'
+    | '/_header-connexion/connexion/habilitation/refusee'
+    | '/_header-connexion/connexion/habilitation/requise'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HeaderCompteRouteRoute: typeof HeaderCompteRouteRouteWithChildren
+  HeaderConnexionRouteRoute: typeof HeaderConnexionRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_header-connexion': {
+      id: '/_header-connexion'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HeaderConnexionRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_header-compte': {
+      id: '/_header-compte'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HeaderCompteRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +186,108 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_header-connexion/connexion/echec-connexion': {
+      id: '/_header-connexion/connexion/echec-connexion'
+      path: '/connexion/echec-connexion'
+      fullPath: '/connexion/echec-connexion'
+      preLoaderRoute: typeof HeaderConnexionConnexionEchecConnexionRouteImport
+      parentRoute: typeof HeaderConnexionRouteRoute
+    }
+    '/_header-connexion/connexion/au-revoir': {
+      id: '/_header-connexion/connexion/au-revoir'
+      path: '/connexion/au-revoir'
+      fullPath: '/connexion/au-revoir'
+      preLoaderRoute: typeof HeaderConnexionConnexionAuRevoirRouteImport
+      parentRoute: typeof HeaderConnexionRouteRoute
+    }
+    '/_header-compte/compte/mes-groupes': {
+      id: '/_header-compte/compte/mes-groupes'
+      path: '/compte/mes-groupes'
+      fullPath: '/compte/mes-groupes'
+      preLoaderRoute: typeof HeaderCompteCompteMesGroupesRouteImport
+      parentRoute: typeof HeaderCompteRouteRoute
+    }
+    '/_header-compte/compte/accueil': {
+      id: '/_header-compte/compte/accueil'
+      path: '/compte/accueil'
+      fullPath: '/compte/accueil'
+      preLoaderRoute: typeof HeaderCompteCompteAccueilRouteImport
+      parentRoute: typeof HeaderCompteRouteRoute
+    }
+    '/_header-connexion/connexion/habilitation/requise': {
+      id: '/_header-connexion/connexion/habilitation/requise'
+      path: '/connexion/habilitation/requise'
+      fullPath: '/connexion/habilitation/requise'
+      preLoaderRoute: typeof HeaderConnexionConnexionHabilitationRequiseRouteImport
+      parentRoute: typeof HeaderConnexionRouteRoute
+    }
+    '/_header-connexion/connexion/habilitation/refusee': {
+      id: '/_header-connexion/connexion/habilitation/refusee'
+      path: '/connexion/habilitation/refusee'
+      fullPath: '/connexion/habilitation/refusee'
+      preLoaderRoute: typeof HeaderConnexionConnexionHabilitationRefuseeRouteImport
+      parentRoute: typeof HeaderConnexionRouteRoute
+    }
+    '/_header-connexion/connexion/habilitation/prestataires': {
+      id: '/_header-connexion/connexion/habilitation/prestataires'
+      path: '/connexion/habilitation/prestataires'
+      fullPath: '/connexion/habilitation/prestataires'
+      preLoaderRoute: typeof HeaderConnexionConnexionHabilitationPrestatairesRouteImport
+      parentRoute: typeof HeaderConnexionRouteRoute
+    }
+    '/_header-connexion/connexion/habilitation/administration-inconnue': {
+      id: '/_header-connexion/connexion/habilitation/administration-inconnue'
+      path: '/connexion/habilitation/administration-inconnue'
+      fullPath: '/connexion/habilitation/administration-inconnue'
+      preLoaderRoute: typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport
+      parentRoute: typeof HeaderConnexionRouteRoute
+    }
   }
 }
 
+interface HeaderCompteRouteRouteChildren {
+  HeaderCompteCompteAccueilRoute: typeof HeaderCompteCompteAccueilRoute
+  HeaderCompteCompteMesGroupesRoute: typeof HeaderCompteCompteMesGroupesRoute
+}
+
+const HeaderCompteRouteRouteChildren: HeaderCompteRouteRouteChildren = {
+  HeaderCompteCompteAccueilRoute: HeaderCompteCompteAccueilRoute,
+  HeaderCompteCompteMesGroupesRoute: HeaderCompteCompteMesGroupesRoute,
+}
+
+const HeaderCompteRouteRouteWithChildren =
+  HeaderCompteRouteRoute._addFileChildren(HeaderCompteRouteRouteChildren)
+
+interface HeaderConnexionRouteRouteChildren {
+  HeaderConnexionConnexionAuRevoirRoute: typeof HeaderConnexionConnexionAuRevoirRoute
+  HeaderConnexionConnexionEchecConnexionRoute: typeof HeaderConnexionConnexionEchecConnexionRoute
+  HeaderConnexionConnexionHabilitationAdministrationInconnueRoute: typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
+  HeaderConnexionConnexionHabilitationPrestatairesRoute: typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
+  HeaderConnexionConnexionHabilitationRefuseeRoute: typeof HeaderConnexionConnexionHabilitationRefuseeRoute
+  HeaderConnexionConnexionHabilitationRequiseRoute: typeof HeaderConnexionConnexionHabilitationRequiseRoute
+}
+
+const HeaderConnexionRouteRouteChildren: HeaderConnexionRouteRouteChildren = {
+  HeaderConnexionConnexionAuRevoirRoute: HeaderConnexionConnexionAuRevoirRoute,
+  HeaderConnexionConnexionEchecConnexionRoute:
+    HeaderConnexionConnexionEchecConnexionRoute,
+  HeaderConnexionConnexionHabilitationAdministrationInconnueRoute:
+    HeaderConnexionConnexionHabilitationAdministrationInconnueRoute,
+  HeaderConnexionConnexionHabilitationPrestatairesRoute:
+    HeaderConnexionConnexionHabilitationPrestatairesRoute,
+  HeaderConnexionConnexionHabilitationRefuseeRoute:
+    HeaderConnexionConnexionHabilitationRefuseeRoute,
+  HeaderConnexionConnexionHabilitationRequiseRoute:
+    HeaderConnexionConnexionHabilitationRequiseRoute,
+}
+
+const HeaderConnexionRouteRouteWithChildren =
+  HeaderConnexionRouteRoute._addFileChildren(HeaderConnexionRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HeaderCompteRouteRoute: HeaderCompteRouteRouteWithChildren,
+  HeaderConnexionRouteRoute: HeaderConnexionRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

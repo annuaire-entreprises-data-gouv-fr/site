@@ -48,6 +48,6 @@ const constants = {
     "#b3d4ff",
     "#00bfa0",
   ],
-};
+} as const;
 
 export default constants;
