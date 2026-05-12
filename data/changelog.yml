@@ -11,6 +11,26 @@
 #   site: true
 
 ---
+- date: 12/05/2026
+  target:
+    agent: true
+    api: true
+  body: |
+    Ajout des données relatives aux procédures collectives et aux radiations issues du BODACC
+- date: 11/05/2026
+  target:
+    agent: true
+    site: true
+  body: |
+    Évolution du badge « Administration » afin d’inclure d’autres natures juridiques.
+    Élargissement des conditions d’accès à l’espace agent : l’accès est désormais ouvert à l’ensemble des services publics administratifs, et non plus uniquement aux membres des administrations au sens de l’article L.100-3 du CRPA.
+    La liste des administrations autorisées est disponible sur [data.gouv.fr](https://www.data.gouv.fr/datasets/liste-des-administrations-ayant-acces-a-lespace-agent-de-lannuaire-des-entreprises).
+- date: 11/05/2026
+  target:
+    api: true
+  body: |
+    Ajout du champ `est_administration`.
+    Dépréciation des champs `est_service_public` et `est_l100_3`, remplacés par `est_administration`.
 - date: 06/05/2026
   target:
     site: true
