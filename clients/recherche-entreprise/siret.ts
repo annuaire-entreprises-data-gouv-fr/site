@@ -11,6 +11,7 @@ export const clientEtablissementRechercheEntreprise = async (
     inclureEtablissements: false,
     inclureImmatriculation: false,
     inclureTVA: false,
+    inclureBodacc: false,
   });
 
   if (

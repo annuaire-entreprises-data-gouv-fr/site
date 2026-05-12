@@ -36,6 +36,7 @@ import {
 } from "./mapToDomain";
 
 interface ClientSearchRechercheEntreprise {
+  inclureBodacc?: boolean;
   inclureEtablissements?: boolean;
   inclureImmatriculation?: boolean;
   inclureTVA?: boolean;
@@ -55,6 +56,7 @@ export const clientSearchRechercheEntrepriseRaw = async (
     inclureEtablissements = false,
     inclureImmatriculation = false,
     inclureTVA = false,
+    inclureBodacc = false,
     pageResultatsRecherche = 1,
     pageEtablissements = 1,
   }: ClientSearchRechercheEntreprise,
@@ -81,6 +83,10 @@ export const clientSearchRechercheEntrepriseRaw = async (
 
   if (inclureTVA) {
     url += ",tva";
+  }
+
+  if (inclureBodacc) {
+    url += ",bodacc";
   }
 
   if (inclureEtablissements) {
@@ -117,6 +123,7 @@ const clientSearchRechercheEntreprise = async (
     inclureEtablissements = false,
     inclureImmatriculation = false,
     inclureTVA = false,
+    inclureBodacc = false,
     pageResultatsRecherche = 1,
     pageEtablissements = 1,
   }: ClientSearchRechercheEntreprise,
@@ -129,6 +136,7 @@ const clientSearchRechercheEntreprise = async (
       inclureEtablissements,
       inclureImmatriculation,
       inclureTVA,
+      inclureBodacc,
       pageResultatsRecherche,
       pageEtablissements,
     },
@@ -178,6 +186,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     etat_administratif,
     nombre_etablissements_ouverts,
     tva,
+    bodacc,
   } = result;
 
   const {
@@ -339,6 +348,24 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     dateFermeture: date_fermeture ?? "",
     listeIdcc: (liste_idcc || []).map((idcc) => ({ idcc, title: "" })),
     tva,
+    bodacc: bodacc
+      ? {
+          radiation: bodacc.radiation
+            ? {
+                estRadie: bodacc.radiation.est_radie,
+                idAnnonce: bodacc.radiation.id_annonce,
+                date: bodacc.radiation.date,
+              }
+            : null,
+          procedureCollective: bodacc.procedure_collective
+            ? {
+                statut: bodacc.procedure_collective.statut,
+                idAnnonce: bodacc.procedure_collective.id_annonce,
+                date: bodacc.procedure_collective.date,
+              }
+            : null,
+        }
+      : null,
   };
 };
 

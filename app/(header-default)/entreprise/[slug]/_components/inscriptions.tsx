@@ -168,7 +168,7 @@ export const UniteLegaleInscriptionRNE = ({
       >
         <InformationTooltip
           label={
-            "Cette structure est n’a pas été retrouvée dans le Registre National des Entreprises (RNE) tenu par l’INPI. Pourtant, vu sa forme juridique, elle devrait y être inscrite. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site data.inpi.fr"
+            "Cette structure n’a pas été retrouvée dans le Registre National des Entreprises (RNE) tenu par l’INPI. Pourtant, vu sa forme juridique, elle devrait y être inscrite. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site data.inpi.fr"
           }
           tabIndex={undefined}
         >

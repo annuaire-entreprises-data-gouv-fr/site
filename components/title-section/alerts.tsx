@@ -1,3 +1,4 @@
+import ActiveButRadieeRCEAlert from "#components-ui/alerts-with-explanations/active-but-radiee-rce";
 import MultipleSirenAlert from "#components-ui/alerts-with-explanations/multiple-siren";
 import NoSiegeSocialAlert from "#components-ui/alerts-with-explanations/no-siege-social";
 import NonDiffusibleAlert from "#components-ui/alerts-with-explanations/non-diffusible";
@@ -22,6 +23,7 @@ export default function TitleAlerts({
       <NoSiegeSocialAlert uniteLegale={uniteLegale} />
       <MultipleSirenAlert uniteLegale={uniteLegale} />
       <NotInSireneAlert uniteLegale={uniteLegale} />
+      <ActiveButRadieeRCEAlert session={session} uniteLegale={uniteLegale} />
       <NonDiffusibleAlert session={session} statutDiffusion={statutDiffusion} />
     </>
   );

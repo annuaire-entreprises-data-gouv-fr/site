@@ -36,6 +36,8 @@ import {
   UniteLegaleInscriptionRNE,
   UniteLegaleInscriptionSirene,
 } from "./inscriptions";
+import { UniteLegaleProcedureCollective } from "./procedure-collective";
+import { UniteLegaleRadiationRCS } from "./radiation-rcs";
 
 const UniteLegaleSummarySection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -69,6 +71,11 @@ const UniteLegaleSummarySection: React.FC<{
         />
         <UniteLegaleInscriptionIG uniteLegale={uniteLegale} />
         <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
+        <UniteLegaleRadiationRCS session={session} uniteLegale={uniteLegale} />
+        <UniteLegaleProcedureCollective
+          session={session}
+          uniteLegale={uniteLegale}
+        />
       </>,
     ],
     ["", <br />],

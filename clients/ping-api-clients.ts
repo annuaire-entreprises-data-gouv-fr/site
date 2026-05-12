@@ -61,6 +61,7 @@ const ping = async (slug: string | string[]) => {
         searchFilterParams: undefined,
         inclureEtablissements: false,
         inclureTVA: false,
+        inclureBodacc: false,
       });
     case "api-rne":
       return await clientDocuments(sirenDanone, {
