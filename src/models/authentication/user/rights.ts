@@ -61,7 +61,10 @@ export const ApplicationRightsToScopes: Record<
 /**
  * Does the user have the right to access a view
  */
-export function hasRights(session: ISession | null, right: ApplicationRights) {
+export function hasRights(
+  session: Partial<ISession> | null,
+  right: ApplicationRights
+) {
   const userScopes = getIAgentScope(session);
 
   if (!ApplicationRightsToScopes[right]) {
