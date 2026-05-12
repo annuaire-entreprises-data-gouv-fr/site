@@ -10,6 +10,7 @@
         "noSvgWithoutTitle": "off"
       },
       "style": {
+        "noHeadElement": "off",
         "noMagicNumbers": "off",
         "noNestedTernary": "off",
         "useTemplate": "off",
@@ -49,7 +50,8 @@
         "noUnusedFunctionParameters": "off",
         "useExhaustiveDependencies": "off",
         "noUnknownMediaFeatureName": "off",
-        "noUndeclaredVariables": "off"
+        "noUndeclaredVariables": "off",
+        "noUnknownProperty": "off"
       },
       "security": {
         "noDangerouslySetInnerHtml": "off"
