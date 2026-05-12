@@ -7,7 +7,7 @@ import { estActif } from "#models/core/etat-administratif";
 import type { IUniteLegale } from "#models/core/types";
 import { Warning } from "../alerts";
 
-const ActiveButRadieeRCEAlert: React.FC<{
+const ActiveButRadieeRCSAlert: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
@@ -20,22 +20,22 @@ const ActiveButRadieeRCEAlert: React.FC<{
     return null;
   }
 
-  const RCEText = uniteLegale.bodacc?.radiation?.idAnnonce ? (
+  const RCSText = uniteLegale.bodacc?.radiation?.idAnnonce ? (
     <a
       href={`https://www.bodacc.fr/pages/annonces-commerciales-detail/?q.id=id:${uniteLegale.bodacc?.radiation?.idAnnonce}`}
       rel="noopener noreferrer"
       target="_blank"
     >
-      radiée dans le RCE
+      radiée dans le RCS
     </a>
   ) : (
-    "radiée dans le RCE"
+    "radiée dans le RCS"
   );
 
   return (
     <Warning full>
       Cette structure est indiquée comme étant en activité dans le RNE ainsi que
-      dans la base Sirene. En revanche, elle semble être {RCEText}. C’est une
+      dans la base Sirene. En revanche, elle semble être {RCSText}. C’est une
       situation inhabituelle, qui peut provenir de délais de traitement.
     </Warning>
   );
