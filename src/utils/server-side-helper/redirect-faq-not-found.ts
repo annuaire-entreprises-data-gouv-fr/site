@@ -1,4 +1,4 @@
-import { redirect } from "@tanstack/react-router";
+import { notFound } from "@tanstack/react-router";
 import { Exception } from "#/models/exceptions";
 import { logWarningInSentry } from "#/utils/sentry";
 
@@ -9,5 +9,5 @@ export const redirectFAQPageNotFound = (slug: string) => {
       context: { slug },
     })
   );
-  redirect({ to: "/not-found", throw: true });
+  throw notFound();
 };
