@@ -1,6 +1,9 @@
+"use client";
+
 import type { PropsWithChildren } from "react";
 import { OpenClosedTag } from "#components-ui/badge/frequent";
 import InformationTooltip from "#components-ui/information-tooltip";
+import { useFeatureFlag } from "#hooks/use-feature-flag";
 import {
   ApplicationRights,
   hasRights,
@@ -23,7 +26,11 @@ export const UniteLegaleRadiationRCS = ({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) => {
+  const isBodaccRadiationDisplayed = useFeatureFlag(
+    "bodacc_radiation_displayed"
+  );
   if (
+    !isBodaccRadiationDisplayed.isEnabled ||
     !hasRights(session, ApplicationRights.isAgent) ||
     !uniteLegale.bodacc?.radiation?.estRadie
   ) {

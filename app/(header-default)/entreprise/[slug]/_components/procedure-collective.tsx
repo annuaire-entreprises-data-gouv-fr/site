@@ -1,6 +1,9 @@
+"use client";
+
 import type { PropsWithChildren } from "react";
 import { OpenClosedTag } from "#components-ui/badge/frequent";
 import InformationTooltip from "#components-ui/information-tooltip";
+import { useFeatureFlag } from "#hooks/use-feature-flag";
 import {
   ApplicationRights,
   hasRights,
@@ -36,7 +39,11 @@ export const UniteLegaleProcedureCollective = ({
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }) => {
+  const isBodaccProcedureCollectiveDisplayed = useFeatureFlag(
+    "bodacc_procedure_collective_displayed"
+  );
   if (
+    !isBodaccProcedureCollectiveDisplayed.isEnabled ||
     !hasRights(session, ApplicationRights.isAgent) ||
     !uniteLegale.bodacc?.procedureCollective?.statut
   ) {
