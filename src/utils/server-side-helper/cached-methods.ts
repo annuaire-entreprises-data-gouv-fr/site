@@ -1,4 +1,4 @@
-import { redirect } from "@tanstack/react-router";
+import { notFound, redirect } from "@tanstack/react-router";
 import { cache } from "react";
 import { HttpNotFound } from "#/clients/exceptions";
 import { getEtablissementWithUniteLegaleFromSlug } from "#/models/core/etablissement";
@@ -27,11 +27,10 @@ const handleException = (e: any, slug: string) => {
         context: { slug },
       })
     );
-    redirect({ to: "/not-found", throw: true });
-  } else if (
-    e instanceof SirenNotFoundError ||
-    e instanceof SiretNotFoundError
-  ) {
+    throw notFound();
+  }
+
+  if (e instanceof SirenNotFoundError || e instanceof SiretNotFoundError) {
     logWarningInSentry(
       new Exception({
         name: "SirenNotFoundOrInvalid",
@@ -39,19 +38,21 @@ const handleException = (e: any, slug: string) => {
         context: { slug },
       })
     );
-    redirect({ to: "/erreur/introuvable/" + slug, throw: true });
-  } else if (e instanceof FetchRechercheEntrepriseException) {
+    throw redirect({ to: "/erreur/introuvable/" + slug });
+  }
+
+  if (e instanceof FetchRechercheEntrepriseException) {
     logFatalErrorInSentry(e);
     throw e;
-  } else {
-    logFatalErrorInSentry(
-      new Exception({
-        name: "ServerErrorPageException",
-        cause: e,
-        context: { slug },
-      })
-    );
   }
+
+  logFatalErrorInSentry(
+    new Exception({
+      name: "ServerErrorPageException",
+      cause: e,
+      context: { slug },
+    })
+  );
 };
 
 /**

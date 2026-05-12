@@ -23,9 +23,8 @@ const SearchResultsMap: React.FC<{
     !results.results ||
     results.results.length === 0
   ) {
-    redirect({
+    throw redirect({
       to: `/rechercher/${buildSearchQuery(searchTerm, searchFilterParams)}`,
-      throw: true,
     });
   }
   const shouldColorZipCode = !!searchFilterParams.cp_dep;

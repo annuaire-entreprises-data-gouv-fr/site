@@ -16,7 +16,7 @@ export class MissingApplicationRightException extends Exception {
 
 export function handleServerError(error: unknown) {
   if (error instanceof ProConnectReconnexionNeeded) {
-    return redirect({ to: "/api/auth/agent-connect/login", throw: true });
+    throw redirect({ to: "/api/auth/agent-connect/login" });
   }
 
   if (error instanceof AgentOverRateLimitException) {
