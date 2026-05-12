@@ -1,9 +1,0 @@
-.agentLink::after {
-  display: none !important;
-}
-
-@media only screen and (min-width: 1px) and (max-width: 992px) {
-  .agentDocumentationText {
-    display: none;
-  }
-}
