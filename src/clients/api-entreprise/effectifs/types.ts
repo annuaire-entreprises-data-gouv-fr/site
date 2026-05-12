@@ -1,10 +1,13 @@
 import type { IAPIEntrepriseResponse } from "../client";
 
+export const TNatureEffectif = {
+  assujettissement_oeth: "assujettissement_oeth",
+  boeth: "boeth",
+  ecap: "ecap",
+  moyen: "moyen",
+} as const;
 export type TNatureEffectif =
-  | "assujettissement_oeth"
-  | "boeth"
-  | "ecap"
-  | "moyen";
+  (typeof TNatureEffectif)[keyof typeof TNatureEffectif];
 
 interface EffectifAnnuel {
   date_derniere_mise_a_jour: string | null;
