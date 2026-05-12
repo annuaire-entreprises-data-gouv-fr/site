@@ -4,8 +4,8 @@ export function loadAll<T extends IArticle>(
   articlesFolderContext: Record<string, T>
 ): T[] {
   const articles = [] as T[];
-  const keys = articlesFolderContext.keys();
-  const values = keys.map(articlesFolderContext);
+  const keys = Object.keys(articlesFolderContext);
+  const values = Object.values(articlesFolderContext);
 
   keys
     // weirdly context add duplicates - this filter removes them

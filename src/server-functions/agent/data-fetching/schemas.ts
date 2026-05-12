@@ -84,27 +84,3 @@ export const getAgentEffectifsMensuelsProtectedSchema = z.object({
   useCase: z.enum(UseCase),
   natureEffectif: z.enum(TNatureEffectif),
 });
-
-export const getAgentDirigeantsSchema = z.object({
-  siren: z.string().min(1, "Siren is required"),
-});
-
-export const getAgentObservationsSchema = z.object({
-  siren: z.string().min(1, "Siren is required"),
-});
-
-export const getAssociationSchema = z.object({
-  slug: z.string().min(1, "Slug is required"),
-});
-
-export const verifyTvaSchema = z.object({
-  slug: z.string().min(1, "Slug is required"),
-});
-
-export const validateEORISchema = z.object({
-  siret: z.string().min(1, "Siret is required"),
-});
-
-export const getSubventionsAssociationSchema = z.object({
-  slug: z.string().min(1, "Slug is required"),
-});

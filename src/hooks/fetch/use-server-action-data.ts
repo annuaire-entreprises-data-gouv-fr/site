@@ -5,7 +5,6 @@ import {
   useServerFn,
 } from "@tanstack/react-start";
 import type { Expand } from "node_modules/@tanstack/react-router/dist/cjs/index.d.cts";
-import { useEffect } from "react";
 import {
   ApplicationRights,
   hasRights,
@@ -36,12 +35,6 @@ export function useServerActionData<Input, Data>(
     queryFn: () => execute({ data: input }),
     enabled: hasRights(session, requiredRight),
   });
-
-  useEffect(() => {
-    if (hasRights(session, requiredRight)) {
-      execute({ data: input });
-    }
-  }, [input, session, requiredRight]);
 
   if (!hasRights(session, requiredRight)) {
     return IDataFetchingState.UNAUTHORIZED;

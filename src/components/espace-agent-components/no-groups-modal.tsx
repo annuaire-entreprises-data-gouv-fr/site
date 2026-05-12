@@ -1,0 +1,64 @@
+import ButtonLink from "#/components-ui/button";
+import { Loader } from "#/components-ui/loader";
+import { Modal } from "#/components-ui/modal";
+import styles from "./styles.module.css";
+
+interface INoGroupsModalProps {
+  isLoading: boolean;
+  isVisible: boolean;
+  onCancel: () => void;
+  onConfirm: () => void;
+}
+
+export const NoGroupsModal = ({
+  isVisible,
+  isLoading,
+  onConfirm,
+  onCancel,
+}: INoGroupsModalProps) => (
+  <Modal
+    isVisible={isVisible}
+    modalId="no-groups-modal"
+    onClose={onCancel}
+    textAlign="left"
+  >
+    <div className="fr-container">
+      <div className="fr-mb-4w">
+        <h2 className="fr-h2">Demander une habilitation</h2>
+        <p>
+          <strong className="fr-text--lg">
+            Une seule habilitation pour toute votre équipe !
+          </strong>
+          <br />
+          <br />
+          <strong>
+            L'habilitation que vous êtes sur le point de demander couvre toute
+            votre équipe.
+          </strong>
+          <br />
+          Vous pourrez pourrez ajouter des membres à votre groupe habilité, sans
+          que chacun ait besoin de faire une demande individuelle.
+          <br />
+          <br />
+          <strong>
+            Vous êtes la première personne à effectuer la demande ?
+          </strong>
+          <br />
+          Vous pourrez ensuite transférer vos droits d'administration à un ou
+          une autre responsable si nécessaire.
+        </p>
+      </div>
+
+      <div className="fr-btns-group fr-btns-group--left">
+        <div style={{ width: "fit-content" }}>
+          <ButtonLink onClick={onConfirm}>
+            <div className={styles.loaderContainer}>
+              Continuer
+              {isLoading && <Loader />}
+            </div>
+          </ButtonLink>
+        </div>
+      </div>
+    </div>
+  </Modal>
+);

@@ -1,0 +1,70 @@
+import { useLocation } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { Icon } from "#/components-ui/icon/wrapper";
+import { PrintNever } from "#/components-ui/print-visibility";
+import { isLoggedIn } from "#/models/authentication/user/rights";
+import type { ISession } from "#/models/authentication/user/session";
+import constants from "#/models/constants";
+import {
+  deleteCookieBrowser,
+  getCookieBrowser,
+} from "#/utils/cookies/browser-cookies";
+import styles from "./styles.module.css";
+
+export default function ReconnectBanner({
+  session,
+}: {
+  session: ISession | null;
+}) {
+  const [shouldDisplayBanner, setShouldDisplayBanner] = useState(false);
+  const currentlyLoggedIn = isLoggedIn(session);
+  const currentPath = useLocation().pathname;
+
+  useEffect(() => {
+    const wasLoggedIn = getCookieBrowser("user-was-logged-in") === "true";
+    const shouldDisplayBanner = wasLoggedIn && !currentlyLoggedIn;
+    setShouldDisplayBanner(shouldDisplayBanner);
+  }, [currentlyLoggedIn]);
+
+  /**
+   * Remove cookie on close or unmount
+   */
+  useEffect(() => {
+    if (shouldDisplayBanner) {
+      // no more display banner
+      deleteCookieBrowser("user-was-logged-in");
+    }
+  }, [shouldDisplayBanner]);
+
+  const handleClose = () => {
+    setShouldDisplayBanner(false);
+  };
+
+  return shouldDisplayBanner ? (
+    <PrintNever>
+      <div
+        aria-label="Voulez-vous vous reconnecter ?"
+        className={styles.npsModal}
+        id="reconnect"
+        role="dialog"
+        style={{
+          backgroundColor: constants.colors.espaceAgentPastel,
+          borderColor: constants.colors.espaceAgent,
+        }}
+      >
+        <div className="fr-container">
+          <Icon color={constants.colors.espaceAgent} slug="lockFill">
+            Pour des raisons de sécurité, vous avez été automatiquement
+            déconnecté après 24 heures.{" "}
+            <a href={`/api/auth/agent-connect/login?pathFrom=${currentPath}`}>
+              Voulez-vous vous reconnecter ?
+            </a>
+          </Icon>
+          <button onClick={handleClose} type="button">
+            <strong>Ne plus afficher ce message ✕</strong>
+          </button>
+        </div>
+      </div>
+    </PrintNever>
+  ) : null;
+}

@@ -1,0 +1,26 @@
+.blur {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .cta-wrapper {
+    position: relative;
+  }
+
+  .blur {
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    filter: blur(6px);
+  }
+
+  .cta-actes {
+    position: absolute;
+    z-index: 10;
+    margin: 20px 20%;
+  }
+
+  .cta-actes > h3 {
+    margin: 10px;
+  }
+}

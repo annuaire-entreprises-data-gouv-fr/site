@@ -1,0 +1,13 @@
+.load-bar {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 0;
+  height: 3px;
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+
+  @media (max-width: 768px) {
+    height: 5px;
+  }
+}
