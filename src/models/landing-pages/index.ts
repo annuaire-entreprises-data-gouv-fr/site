@@ -1,9 +1,3 @@
-import { readdirSync, readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-import { createServerOnlyFn } from "@tanstack/react-start";
-import { load } from "js-yaml";
-
 export interface ILandingPage {
   body: string;
   datasources: string[];
@@ -24,32 +18,24 @@ export interface ILandingPage {
   title: string;
 }
 
-const landingPagesDir = join(
-  dirname(fileURLToPath(import.meta.url)),
-  "../../data/landing-pages"
-);
+type LandingPageJson = Omit<ILandingPage, "slug">;
 
-const loadAllLandingPages = createServerOnlyFn(() => {
-  const landingPages = [] as ILandingPage[];
+const landingPageModules = import.meta.glob("../../data/landing-pages/*.json", {
+  eager: true,
+  import: "default",
+}) as Record<string, LandingPageJson>;
 
-  const fileNames = readdirSync(landingPagesDir).filter((name) =>
-    name.endsWith(".yml")
-  );
+const allLandingPages = [] as ILandingPage[];
 
-  for (const fileName of fileNames) {
-    const filePath = join(landingPagesDir, fileName);
-    const raw = readFileSync(filePath, "utf8");
-    const parsed = load(raw) as Omit<ILandingPage, "slug">;
-    const slug = fileName.replace(/\.yml$/i, "");
-    landingPages.push({ ...parsed, slug });
-  }
+for (const [path, parsed] of Object.entries(landingPageModules)) {
+  const fileName = path.slice(Math.max(0, path.lastIndexOf("/") + 1));
+  const slug = fileName.replace(/\.json$/i, "");
+  allLandingPages.push({ ...parsed, slug });
+}
 
-  return landingPages.filter((page) => page.published);
-});
+const publishedLandingPages = allLandingPages.filter((page) => page.published);
 
-export const getAllLandingPages = () => allLandingPages;
+export const getAllLandingPages = () => publishedLandingPages;
 
 export const getLandingPage = (slug: string) =>
-  allLandingPages.find((landingPage) => landingPage.slug === slug);
-
-const allLandingPages = loadAllLandingPages();
+  publishedLandingPages.find((landingPage) => landingPage.slug === slug);

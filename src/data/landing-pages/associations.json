@@ -1,0 +1,15 @@
+{
+  "slug": "associations",
+  "title": "une association",
+  "footerLabel": "Associations",
+  "published": false,
+  "description": "Retrouvez n’importe quelle association pourvue d’un numéro SIRET",
+  "filter": {
+    "name": "type",
+    "value": "asso"
+  },
+  "seo": {
+    "title": null,
+    "description": null
+  }
+}

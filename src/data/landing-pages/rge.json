@@ -1,0 +1,15 @@
+{
+  "slug": "rge",
+  "title": "une entreprise RGE",
+  "footerLabel": "Entreprises RGE (Reconnu Garant de l’Environnement)",
+  "published": false,
+  "description": "Retrouvez une entreprise Reconnue Garant de l’Environnement",
+  "filter": {
+    "name": "label",
+    "value": "rge"
+  },
+  "seo": {
+    "title": null,
+    "description": null
+  }
+}

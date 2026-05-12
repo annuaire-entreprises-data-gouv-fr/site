@@ -1,0 +1,22 @@
+{
+  "slug": "conseil-national-des-barreaux",
+  "short": "CNB",
+  "long": "Conseil national des barreaux",
+  "site": "https://cnb.avocat.fr/",
+  "contact": "https://cnb.avocat.fr/nous-contacter",
+  "logoType": "portrait",
+  "dataSources": [
+    {
+      "label": "Annuaire des avocats de France",
+      "apiSlug": "annuaire-national-des-avocats",
+      "datagouvLink": "https://www.data.gouv.fr/datasets/annuaire-des-avocats-de-france",
+      "data": [
+        {
+          "label": "Annuaire des avocats de France"
+        }
+      ]
+    }
+  ],
+  "estServicePublic": false,
+  "description": "Le Conseil national des barreaux (CNB) est un établissement d'utilité publique doté de la personnalité morale, crée par la loi n°90-1259 du 31 décembre 1990. Depuis 1992, c’est l'institution qui représente l’ensemble des avocats de France. Il a reçu de la loi des missions spécifiques qui régissent l’organisation de la profession.\n"
+}

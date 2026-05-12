@@ -1,0 +1,22 @@
+{
+  "title": "Numéro SIREN",
+  "seo": {
+    "title": "Numéro SIREN - définition - L’Annuaire des Entreprises",
+    "description": "Le SIREN est un numéro unique qui permet d’identifier chaque entreprise auprès des administrations"
+  },
+  "body": "\n## **Le numéro SIREN : définition**\n\nLe numéro SIREN (Système d'Identification du Répertoire des Entreprises) est le numéro d’immatriculation d’une entreprise. Il est composé de 9 chiffres attribués par l’INSEE (Institut National de la Statistique et des Etudes Economiques). Ce numéro permet l’identification de chaque unité légale (personne morale ou physique) par les administrations et organismes publics.\n\n**A noter :** les organismes, les services publics de l’État et les collectivités territoriales possèdent également un SIREN.\n\n## **A quoi sert le SIREN ?**\n\nLe numéro SIREN facilite l’accès aux informations légales d’une société. Cet identifiant permet :\n\n* de prouver l’existence d’une entreprise\n* d’assurer la transparence des informations transmises par une entreprise\n* la tenue de statistiques sur les entreprises par l’INSEE\n\n**A noter** : une société sans SIREN est une société qui n’a pas été immatriculée. Par conséquent, elle est dans l’illégalité.\n\n## **Quelle différence entre le SIREN et le SIRET ?**\n\nLe SIREN est un numéro de 9 chiffres permettant d’identifier une **personne morale** basée en France (entreprise, administration, association, indépendant…).\n\nLe SIRET est un numéro de 14 chiffres permettant d’identifier des **établissements** selon l’activité et la localisation (siège social, site de production…).\n\nSa formule de 14 chiffres est simple à retenir : **SIRET = SIREN + numéro NIC**\n\n**A noter** : une entreprise peut avoir plusieurs SIRET même si la majorité n’en possède qu’un seul (établissement unique).\n\n**Exemple : Electricité de France (EDF)**\n\n* SIRET du siège social : 552081317 66522\n* SIREN : 552081317\n* NIC : 66522\n\nSIRET = SIREN + numéro NIC\n\n552081317 66522 = 552081317 + 66522\n\n## **Comment obtenir un numéro de SIREN ?**\n\nLe numéro  SIREN est délivré automatiquement après la demande d’immatriculation de l’entreprise sur le site internet [des formalités des entreprises](https://formalites.entreprises.gouv.fr/). Si vous n’avez pas encore reçu ce numéro, vous pourrez suivre l’évolution du traitement de votre demande sur ce même site internet.\n\n## **Comment trouver un numéro de SIREN ?**\n\nLe SIREN est une donnée publique. Toute personne peut consulter ce numéro sur le site internet de [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr). Ceci, au même titre que le SIRET, le N° TVA Intracommunautaire, l’activité principale (NAF/APE), le code NAF/APE, etc.\n\nLe SIREN figure généralement sur différents documents commerciaux ou administratifs (liste non exhaustive) :\n\n* extrait Kbis\n* contrat de travail\n* fiche de paie\n* documents commerciaux (devis, bon de commande et facture)\n* support de communication (site internet, brochure, prospectus, carte de visite…)\n* courrier (partenaires commerciaux et autorité fiscale et administrative)\n* déclaration fiscale et administrative\n",
+  "more": [
+    {
+      "label": "SIRET",
+      "href": "/definitions/numero-siret"
+    },
+    {
+      "label": "Numéro de TVA intracommunautaire",
+      "href": "/definitions/numero-tva-intracommunautaire"
+    },
+    {
+      "label": "Kbis",
+      "href": "/definitions/kbis"
+    }
+  ]
+}

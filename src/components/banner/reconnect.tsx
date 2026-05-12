@@ -12,12 +12,12 @@ import {
 import styles from "./styles.module.css";
 
 export default function ReconnectBanner({
-  session,
+  user,
 }: {
-  session: ISession | null;
+  user: ISession["user"] | null;
 }) {
   const [shouldDisplayBanner, setShouldDisplayBanner] = useState(false);
-  const currentlyLoggedIn = isLoggedIn(session);
+  const currentlyLoggedIn = isLoggedIn({ user });
   const currentPath = useLocation().pathname;
 
   useEffect(() => {

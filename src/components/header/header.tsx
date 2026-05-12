@@ -1,4 +1,4 @@
-import getSession from "#/utils/server-side-helper/get-session";
+import { useAuth } from "#/contexts/auth.context";
 import { HeaderCore } from "./header-core";
 
 interface IProps {
@@ -14,7 +14,7 @@ interface IProps {
   useSearchBar?: boolean;
 }
 
-export const Header: React.FC<IProps> = async ({
+export const Header: React.FC<IProps> = ({
   useLogo = false,
   useSearchBar = false,
   useMap = false,
@@ -26,13 +26,12 @@ export const Header: React.FC<IProps> = async ({
   currentSearchTerm = "",
   useExportSirene = false,
 }) => {
-  const session = await getSession();
+  const { user } = useAuth();
 
   return (
     <HeaderCore
       currentSearchTerm={currentSearchTerm}
       plugin={plugin}
-      session={session}
       useAgentBanner={useAgentBanner}
       useAgentCTA={useAgentCTA}
       useAgentDocumentation={useAgentDocumentation}
@@ -40,6 +39,7 @@ export const Header: React.FC<IProps> = async ({
       useLogo={useLogo}
       useMap={useMap}
       useReconnectBanner={useReconnectBanner}
+      user={user}
       useSearchBar={useSearchBar}
     />
   );

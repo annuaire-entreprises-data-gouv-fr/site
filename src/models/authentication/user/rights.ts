@@ -106,7 +106,7 @@ export function getGroupsGrantingRights(
   return userGroups.filter((group) => group.scopes.includes(requiredScope));
 }
 
-export function isLoggedIn(session: ISession | null) {
+export function isLoggedIn(session: Partial<ISession> | null) {
   return getIAgentScope(session).length > 0;
 }
 
