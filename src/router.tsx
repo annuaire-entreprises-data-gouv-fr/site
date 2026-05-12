@@ -1,5 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
+import { GlobalError } from "./components/screens/global-error";
+import { NotFound } from "./components/screens/not-found";
 import { routeTree } from "./routeTree.gen";
 import { initSentryClient } from "./utils/sentry/init";
 
@@ -19,6 +21,12 @@ export function getRouter() {
     },
     scrollRestoration: true,
     defaultPreload: false,
+    defaultNotFoundComponent() {
+      return <NotFound />;
+    },
+    defaultErrorComponent(props) {
+      return <GlobalError error={props.error} />;
+    },
   });
 
   if (!router.isServer) {

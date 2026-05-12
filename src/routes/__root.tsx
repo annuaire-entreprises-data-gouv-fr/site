@@ -1,24 +1,17 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { createServerFn } from "@tanstack/react-start";
-import { BrowserIsOutdatedBanner } from "#/components/banner/browser-is-outdated";
-import { MatomoInit } from "#/components/matomo-event/init";
+import { ClientProviders } from "#/client-providers";
 import { meta } from "#/seo";
+import { getCurrentUserFn } from "#/server-functions/public/auth";
 import dsfrCss from "#/style/dsfr.min.css?url";
 import appCss from "#/style/globals.css?url";
-import { getCurrentSession } from "#/utils/session";
-
-const rootLoader = createServerFn().handler(async () => {
-  const session = await getCurrentSession();
-  return { session: session.data };
-});
 
 export const Route = createRootRoute({
   loader: async () => {
-    const { session } = await rootLoader();
+    const user = await getCurrentUserFn();
 
-    return { session };
+    return { user };
   },
   head: () => ({
     meta: meta({}),
@@ -43,7 +36,7 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const { session } = Route.useLoaderData();
+  const { user } = Route.useLoaderData();
 
   return (
     <html lang="fr" suppressHydrationWarning>
@@ -51,9 +44,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {process.env.NODE_ENV === "production" &&
-          process.env.MATOMO_SITE_ID && <MatomoInit session={session} />}
-        <BrowserIsOutdatedBanner>{children}</BrowserIsOutdatedBanner>
+        <ClientProviders user={user}>{children}</ClientProviders>
         <TanStackDevtools
           config={{
             position: "bottom-right",

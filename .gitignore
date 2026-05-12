@@ -69,3 +69,5 @@ tsconfig.tsbuildinfo
 
 # mise
 mise*.toml
+
+dist/

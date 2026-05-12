@@ -1,0 +1,22 @@
+{
+  "administrations": [
+    "dinum"
+  ],
+  "group": "fonctionnement",
+  "title": "Comment se connecter avec ProConnect ?",
+  "seo": {
+    "description": "ProConnect est la solution d’authentification de l’État qui simplifie l’accès de tous les professionnels à ses services numériques",
+    "title": "Comment se connecter avec ProConnect ?"
+  },
+  "cta": {
+    "label": "Se connecter à l’espace agent public avec ProConnect",
+    "to": "https://annuaire-entreprises.data.gouv.fr/lp/agent-public"
+  },
+  "more": [
+    {
+      "label": "En savoir plus sur ProConnect",
+      "href": "https://www.proconnect.gouv.fr/"
+    }
+  ],
+  "body": "## Qu’est-ce que ProConnect ?\n\nProConnect est la solution officielle d’authentification de l’État qui simplifie l’accès de tous les professionnels à ses services numériques.\n\nUnifiée et sécurisée, elle vous identifie en tant que professionnel du secteur public ou privé. \n\nCe nouveau service s’inscrit dans la stratégie d’interopérabilité portée par la [Direction Interministérielle du Numérique (DINUM)](https://www.numerique.gouv.fr/) visant à simplifier la gestion de multiples identifiants.\n\n**NB: Pour les agents publics, ProConnect succède à AgentConnect.**\n\n## ProConnect sur l’Annuaire des Entreprises\n\nSur l’Annuaire des Entreprises, ProConnect permet aux agents publics d’accéder à des informations complémentaires sur les entreprises, afin de mener à bien leurs missions.\n\n## S’identifier avec ProConnect\n\nPour accéder aux informations protégées des entreprises, associations et administrations, les agents publics doivent s’identifier via ProConnect sur L’Annuaire des Entreprises.\n\nPour ce faire, les étapes à suivre sont simples :\n- Repérez le bouton « S’identifier avec ProConnect » avec la mention « PRO » en jaune\n- Cliquez sur ce bouton\n- Renseignez votre adresse email professionnelle\n- Votre identité et votre éligibilité sont examinées\n- Accédez aux services partenaires, après la validation de votre identité\n\nProConnect s’inscrit dans la démarche de [La Suite numérique](https://lasuite.numerique.gouv.fr/) qui fédère tous les agents et professionnels de la sphère publique autour de services interconnectés.\n"
+}

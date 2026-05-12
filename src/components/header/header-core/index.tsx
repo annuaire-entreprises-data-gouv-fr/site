@@ -22,7 +22,6 @@ import styles from "./styles.module.css";
 interface IProps {
   currentSearchTerm?: string;
   plugin?: React.JSX.Element;
-  session: ISession | null;
   useAgentBanner?: boolean;
   useAgentCTA?: boolean;
   useAgentDocumentation?: boolean;
@@ -31,6 +30,7 @@ interface IProps {
   useLogo?: boolean;
   useMap?: boolean;
   useReconnectBanner?: boolean;
+  user: ISession["user"] | null;
   useSearchBar?: boolean;
 }
 
@@ -44,13 +44,13 @@ export const HeaderCore: React.FC<IProps> = ({
   useReconnectBanner = true,
   useMap = false,
   plugin = null,
-  session,
+  user,
   useExportSirene = false,
 }) => (
   <>
-    {useReconnectBanner && <ReconnectBanner session={session} />}
-    {isLoggedIn(session) && <WelcomeModalAgent />}
-    <LoadBar session={session} />
+    {useReconnectBanner && <ReconnectBanner user={user} />}
+    {isLoggedIn({ user }) && <WelcomeModalAgent />}
+    <LoadBar user={user} />
     <header
       className="fr-header"
       style={{ filter: useSearchBar ? undefined : "none" }}
@@ -111,12 +111,12 @@ export const HeaderCore: React.FC<IProps> = ({
                       </div>
                     ) : null}
                     <div className={styles.menuMobile}>
-                      <ChangelogNotification session={session} />
+                      <ChangelogNotification user={user} />
                       {useExportSirene && <ExportSirene />}
-                      {useAgentDocumentation && !isLoggedIn(session) && (
+                      {useAgentDocumentation && !isLoggedIn({ user }) && (
                         <AgentDocumentation />
                       )}
-                      <Menu session={session} useAgentCTA={useAgentCTA} />
+                      <Menu useAgentCTA={useAgentCTA} user={user} />
                     </div>
                   </div>
                   {useSearchBar ? (
@@ -129,20 +129,20 @@ export const HeaderCore: React.FC<IProps> = ({
                   <div className="fr-header__tools-links">
                     <ul className="fr-links-group">
                       <li>
-                        <ChangelogNotification session={session} />
+                        <ChangelogNotification user={user} />
                       </li>
                       {useExportSirene && (
                         <li>
                           <ExportSirene />
                         </li>
                       )}
-                      {useAgentDocumentation && !isLoggedIn(session) && (
+                      {useAgentDocumentation && !isLoggedIn({ user }) && (
                         <li>
                           <AgentDocumentation />
                         </li>
                       )}
                       <li>
-                        <Menu session={session} useAgentCTA={useAgentCTA} />
+                        <Menu useAgentCTA={useAgentCTA} user={user} />
                       </li>
                     </ul>
                   </div>
@@ -154,7 +154,7 @@ export const HeaderCore: React.FC<IProps> = ({
         </form>
       </PrintNever>
     </header>
-    {useAgentBanner && hasRights(session, ApplicationRights.isAgent) && (
+    {useAgentBanner && hasRights({ user }, ApplicationRights.isAgent) && (
       <header className={styles.agentBanner}>
         <PrintNever>
           <div className="fr-container">

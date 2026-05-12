@@ -5,6 +5,11 @@ export type IFaqArticle = {
   administrations: string[];
 } & IArticle;
 
+const faqModules = import.meta.glob("../../data/faq/*.json", {
+  eager: true,
+  import: "default",
+}) as Record<string, IFaqArticle>;
+
 export const loadAllFaqArticlesByGroup = () => {
   const articlesByGroup: { [key: string]: IFaqArticle[] } = {};
 
@@ -34,9 +39,6 @@ export const getFaqArticlesByTag = (tagList: string[]): IFaqArticle[] => {
   return Array.from(filteredArticles);
 };
 
-export const allFaqArticles = loadAll<IFaqArticle>(
-  // @ts-expect-error
-  require.context("data/faq", false, /\.yml$/)
-);
+export const allFaqArticles = loadAll<IFaqArticle>(faqModules);
 
 export const allFaqArticlesByGroup = loadAllFaqArticlesByGroup();

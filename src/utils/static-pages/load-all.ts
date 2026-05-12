@@ -1,19 +1,17 @@
 import type { IArticle } from "#/models/article/type";
 
-export function loadAll<T extends IArticle>(
-  articlesFolderContext: Record<string, T>
-): T[] {
-  const articles = [] as T[];
-  const keys = Object.keys(articlesFolderContext);
-  const values = Object.values(articlesFolderContext);
+const slugFromModulePath = (path: string) => {
+  const fileName = path.slice(Math.max(0, path.lastIndexOf("/") + 1));
+  return fileName.replace(/\.json$/i, "");
+};
 
-  keys
-    // weirdly context add duplicates - this filter removes them
-    .filter((k: string) => k.indexOf("./") === 0)
-    .forEach((key: string, index: number) => {
-      const slug = key.replace(".yml", "").replace("./", "");
-      articles.push({ ...values[index], slug });
-    });
+export function loadAll<T extends IArticle>(modules: Record<string, T>): T[] {
+  const articles = [] as T[];
+
+  for (const [path, value] of Object.entries(modules)) {
+    const slug = slugFromModulePath(path);
+    articles.push({ ...value, slug });
+  }
 
   return articles;
 }

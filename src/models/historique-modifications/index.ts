@@ -1,8 +1,5 @@
-import parseMarkdownSync, {
-  type IMarkdown,
-} from "#/components/markdown/parse-markdown";
-/** @ts-expect-error */
-import data from "../../data/changelog.yml";
+import parseMarkdownSync from "#/components/markdown/parse-markdown";
+import data from "../../data/changelog.json" with { type: "json" };
 
 interface IChangelogTarget {
   agent: boolean;
@@ -11,7 +8,7 @@ interface IChangelogTarget {
 }
 
 interface IChangelogRaw {
-  body: IMarkdown;
+  body: string;
   date: string;
   target?: IChangelogTarget;
 }
@@ -29,7 +26,7 @@ const loadData = (): IChangelog[] => {
     site: false,
   };
 
-  return (data as IChangelogRaw[]).map((d) => {
+  return (data as unknown as IChangelogRaw[]).map((d) => {
     const htmlBody = parseMarkdownSync(d.body).html;
     return {
       ...d,

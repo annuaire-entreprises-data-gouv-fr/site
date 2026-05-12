@@ -7,7 +7,7 @@ import type { ISession } from "#/models/authentication/user/session";
 import constants from "#/models/constants";
 import styles from "./style.module.css";
 
-export default function LoadBar({ session }: { session: ISession | null }) {
+export default function LoadBar({ user }: { user: ISession["user"] | null }) {
   useEffect(() => {
     const loadBar = loadBarFactory();
     if (typeof window !== "undefined") {
@@ -23,7 +23,7 @@ export default function LoadBar({ session }: { session: ISession | null }) {
       className={styles["load-bar"]}
       id="loader-bar"
       style={{
-        background: hasRights(session, ApplicationRights.isAgent)
+        background: hasRights({ user }, ApplicationRights.isAgent)
           ? constants.colors.espaceAgent
           : "transparent",
       }}

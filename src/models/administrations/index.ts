@@ -5,6 +5,23 @@ import type {
   IAPIMonitorMetaData,
 } from "./types";
 
+const administrationModules = import.meta.glob(
+  "../../data/administrations/*.json",
+  { eager: true, import: "default" }
+) as Record<string, IAdministrationMetaData>;
+
+const administrationBySlug = (): Record<string, IAdministrationMetaData> => {
+  const bySlug: Record<string, IAdministrationMetaData> = {};
+
+  for (const [path, data] of Object.entries(administrationModules)) {
+    const fileName = path.slice(Math.max(0, path.lastIndexOf("/") + 1));
+    const slug = fileName.replace(/\.json$/i, "");
+    bySlug[slug] = data;
+  }
+
+  return bySlug;
+};
+
 /**
  * Validate administration meta data as we load it (during build)
  * @param a
@@ -41,14 +58,17 @@ const validateMetaData = (
  */
 const loadMetadata = (): IAdministrationsMetaData => {
   const metadata = {} as { [k: string]: IAdministrationMetaData };
+  const bySlug = administrationBySlug();
 
-  Object.values(EAdministration).forEach((administrationEnum) => {
-    const data = require(
-      `../../data/administrations/${administrationEnum.toString()}.yml`
-    );
-
+  for (const administrationEnum of Object.values(EAdministration)) {
+    const data = bySlug[administrationEnum];
+    if (!data) {
+      throw new Error(
+        `Missing administration data JSON for "${administrationEnum}" (run npm run compile:data)`
+      );
+    }
     metadata[administrationEnum] = validateMetaData(data, administrationEnum);
-  });
+  }
   return metadata;
 };
 

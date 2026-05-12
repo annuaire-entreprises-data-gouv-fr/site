@@ -1,12 +1,13 @@
+import { useAuth } from "#/contexts/auth.context";
 import { getAgentUserType } from "#/models/authentication/user/helpers";
 import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 
 const TRACKER_BASE_URL = "https://stats.data.gouv.fr";
-export function MatomoInit({ session }: { session: Partial<ISession> }) {
+export function MatomoInit() {
+  const { user } = useAuth();
   return (
     <>
       <script
@@ -14,10 +15,10 @@ export function MatomoInit({ session }: { session: Partial<ISession> }) {
           __html: `
               var _paq = window._paq || [];
               ${
-                hasRights(session, ApplicationRights.isAgent)
-                  ? `_paq.push(['setCustomDimension', '1', '${getAgentUserType(
-                      session
-                    )}']);`
+                hasRights({ user }, ApplicationRights.isAgent)
+                  ? `_paq.push(['setCustomDimension', '1', '${getAgentUserType({
+                      user,
+                    })}']);`
                   : ""
               }
               _paq.push(['trackPageView']);

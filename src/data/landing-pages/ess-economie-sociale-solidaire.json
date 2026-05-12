@@ -1,0 +1,34 @@
+{
+  "slug": "ess-economie-sociale-solidaire",
+  "title": "une entreprise de l’ESS",
+  "footerLabel": "Entreprises de l’ESS (Economie Sociale et Solidaire)",
+  "published": true,
+  "description": "Retrouvez rapidement les associations et entreprises de l'Économie Sociale et Solidaire (ESS) en France.",
+  "filter": {
+    "name": "label",
+    "value": "ess"
+  },
+  "seo": {
+    "title": "Consultez le moteur de recherche de l’ESS",
+    "description": "Retrouvez rapidement les associations et entreprises de l'Économie Sociale et Solidaire (ESS) en France, grâce au moteur de recherche de l’Annuaire des Entreprises."
+  },
+  "reassurance": [
+    {
+      "title": "Définition de l’Économie Sociale et Solidaire",
+      "body": "L'ESS désigne un ensemble d'entreprises et d'associations dont le fonctionnement interne et les activités sont fondés sur un principe de solidarité et d'utilité sociale.\n"
+    },
+    {
+      "title": "Bénéficier de la base de donnée publique la plus récente",
+      "body": "- Dénomination sociale de l'organisation\n- Adresse\n- Forme juridique\n- Siège social\n- SIREN / SIRET\n"
+    },
+    {
+      "title": "Comment ça marche ?",
+      "body": "Toutes les structures de l'ESS - quelle que soit leur forme juridique - possèdent un numéro SIRET et par conséquent une fiche sur [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).\n"
+    }
+  ],
+  "datasources": [
+    "insee",
+    "ess-france"
+  ],
+  "body": "## Comment identifier les associations et les entreprises de l'économie sociale et solidaire ?\n\nLe secteur de l'ESS comprend une pluralité d'organisations, de formes juridiques différentes (associations, fondations, coopératives, mutuelles, \"entreprises de l'ESS\") qui suivent cependant les mêmes principes sociaux, lucratifs et de gouvernance.\n\nPour faire partie du périmètre de l'économie sociale tel que défini par l'INSEE, les \"entreprises de l'ESS\" doivent être enregistrées au [Registre National des Entreprises (RNE)](https://entreprendre.service-public.gouv.fr/actualites/A15855) sous cette dénomination.\n\n## Quels sont les critères à respecter ?\n\nLa loi du 31 juillet 2014 relative à l'économie sociale et solidaire définit les grands principes de l'ESS, trois conditions cumulatives à respecter :\n\n- poursuivre un but social autre que le seul partage des bénéfices\n- une lucrativité encadrée\n- une gouvernance démocratique et participative\n\nLes données utilisées ici sont celles de l'INSEE. Elles n'incluent pas le [label ESUS](https://www.economie.gouv.fr/entreprises/agrement-entreprise-solidaire-utilite-sociale-ess) du ministère de l'économie.\n"
+}

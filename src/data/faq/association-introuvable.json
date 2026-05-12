@@ -1,0 +1,22 @@
+{
+  "administrations": [
+    "mi",
+    "insee"
+  ],
+  "title": "Pourquoi je ne retrouve pas une association dans les résultats de recherche ?",
+  "group": "default",
+  "seo": {
+    "description": "Seules les associations qui possèdent un numéro SIREN et un numéro SIRET ont une fiche dans l’Annuaire des Entreprises."
+  },
+  "body": "Seules les associations qui possèdent un numéro SIREN et un numéro SIRET ont une fiche dans l’Annuaire des Entreprises.\n\nCelles qui n'en disposent pas ne sont donc référencées.\n\n## Pourquoi certaines associations ont un SIREN / SIRET et d'autres pas ?\n\nUne association doit posséder un SIREN et un SIRET si elle souhaite :\n- demander des subventions publiques\n- employer des salariés \n- exercer des activités commerciales qui conduisent au paiement de la TVA.\n\nElle doit en faire la demande auprès de l’administration. \n\nPour retrouver une association qui n'a pas de numéro SIRET, consultez [le Répertoire National des Associations(RNA)](https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/) qui regroupe toutes les associations françaises déclarées, avec ou sans numéro SIRET.\n\n**NB :** Le RNA (Répertoire National des Associations) est le fichier national recensant l'ensemble des informations sur les associations basées en France. Il est développé et maintenu par le ministère de l'Intérieur.\n",
+  "more": [
+    {
+      "label": "Qu’est-ce qu’une entreprise non-diffusible",
+      "href": "/faq/entreprise-non-diffusible"
+    }
+  ],
+  "cta": {
+    "label": "⇢ Demander l’attribution d’un numéro SIREN/SIRET",
+    "to": "https://lecompteasso.associations.gouv.fr/demander-lattribution-dun-n-siren-siret/"
+  }
+}

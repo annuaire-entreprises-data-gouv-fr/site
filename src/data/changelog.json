@@ -1,0 +1,502 @@
+[
+  {
+    "date": "12/05/2026",
+    "target": {
+      "agent": true,
+      "api": true
+    },
+    "body": "Ajout des données relatives aux procédures collectives et aux radiations issues du BODACC.\n"
+  },
+  {
+    "date": "11/05/2026",
+    "target": {
+      "agent": true,
+      "site": true
+    },
+    "body": "Évolution du badge « Administration » afin d’inclure d’autres natures juridiques.\nÉlargissement des conditions d’accès à l’espace agent : l’accès est désormais ouvert à l’ensemble des services publics administratifs, et non plus uniquement aux membres des administrations au sens de l’article L.100-3 du CRPA.\nLa liste des administrations autorisées est disponible sur [data.gouv.fr](https://www.data.gouv.fr/datasets/liste-des-administrations-ayant-acces-a-lespace-agent-de-lannuaire-des-entreprises).\n"
+  },
+  {
+    "date": "11/05/2026",
+    "target": {
+      "api": true
+    },
+    "body": "Ajout du champ `est_administration`.\nDépréciation des champs `est_service_public` et `est_l100_3`, remplacés par `est_administration`.\n"
+  },
+  {
+    "date": "06/05/2026",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout d’un badge « Avocat » sur la page entreprise, ainsi que d’une section « Avocats » listant les avocats référencés pour l’entreprise.\nLes données sont issues de l'Annuaire des avocats de France publié par le Conseil national des barreaux.\n"
+  },
+  {
+    "date": "04/05/2026",
+    "target": {
+      "agent": true
+    },
+    "body": "Ajout d’une modale rappelant que l’accès aux données est strictement limité aux missions de service public et sous la responsabilité de l’agent.\n"
+  },
+  {
+    "date": "30/04/2026",
+    "target": {
+      "agent": true
+    },
+    "body": "Ajout de la courbe des effectifs mensuels des établissements dans la page \"Établissements\".\n"
+  },
+  {
+    "date": "21/04/2026",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout de la liste des aides ADEME pour les entreprises dans l'onglet \"Données financières\".\n"
+  },
+  {
+    "date": "08/04/2026",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout d'un bouton permettant de revenir facilement en haut de la page lorsque le contenu est long.\n"
+  },
+  {
+    "date": "18/03/2026",
+    "target": {
+      "agent": true
+    },
+    "body": "Ajout de l'effectif moyen mensuel des établissements dans la page \"Établissements\".\n"
+  },
+  {
+    "date": "17/03/2026",
+    "target": {
+      "agent": true
+    },
+    "body": "Ajout de la liste des aides Minimis déclarées pour les entreprises dans l'onglet \"Données financières\".\n"
+  },
+  {
+    "date": "19/02/2026",
+    "target": {
+      "agent": true
+    },
+    "body": "Nouveau look pour la landing page de l'espace agent public.\n"
+  },
+  {
+    "date": "21/01/2026",
+    "target": {
+      "agent": true
+    },
+    "body": "Lors de leur connexion, les agents publics doivent désormais configurer l'authentification à double facteur, sécurisant ainsi davantage leur espace.\n"
+  },
+  {
+    "date": "19/01/2026",
+    "target": {
+      "agent": true
+    },
+    "body": "Les agents publics sont désormais notifiés des groupes auxquels ils ont accès ainsi que les groupes disponibles au sein de leur organisation, avant qu’une nouvelle demande d’habilitation ne soit démarrée.\n"
+  },
+  {
+    "date": "05/01/2026",
+    "target": {
+      "api": true,
+      "site": true
+    },
+    "body": "Affichage de la date de fin d'existence de la personne morale dans la section Immatriculation.\n"
+  },
+  {
+    "date": "05/01/2026",
+    "target": {
+      "api": true,
+      "site": true
+    },
+    "body": "Ajout de l'activité principale de l'entreprise et des établissements selon la [nouvelle nomenclature NAF 2025](https://www.insee.fr/fr/information/8181066).\n"
+  },
+  {
+    "date": "01/12/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout du fichier des établissements sanitaires et sociaux (Finess) dans l'onglet \"Labels et certificats\"\n"
+  },
+  {
+    "date": "26/11/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Utilisation de l’API tabulaire de [data.gouv.fr](https://www.data.gouv.fr/datasets/licences-et-demandes-de-licences-dentrepreneurs-de-spectacles-vivants) pour afficher les licences et demandes de licences des entrepreneurs de spectacles vivants, permettant également l'affichage des dates de dépôt et de retrait des licences.\n"
+  },
+  {
+    "date": "24/11/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout de la possibilité d'exporter une liste d’établissements à partir du répertoire SIRENE en important des fichiers .txt comprenant des catégories juridiques, des codes NAF/APE ou des localisations.\n\nExport via [cette page](https://annuaire-entreprises.data.gouv.fr/export-sirene).\n"
+  },
+  {
+    "date": "30/10/2025",
+    "target": {
+      "agent": true
+    },
+    "body": "Refonte de la page « Mon espace » : affichage des habilitations pour chaque accès aux données restreintes.\n\nActivation de compte désormais automatique (suppression du parcours manuel).\n"
+  },
+  {
+    "date": "29/10/2025",
+    "target": {
+      "site": true,
+      "api": true
+    },
+    "body": "Exclusion des dénominations usuelles des unités légales du nom complet des entreprises.\n"
+  },
+  {
+    "date": "21/10/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout des dirigeants démissionnaires dans l'onglet \"Dirigeants\".\n\nInformation récupérée depuis l'api du RNE.\n"
+  },
+  {
+    "date": "22/09/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout de la fonctionnalité permettant de constituer une liste d’établissements à partir du répertoire SIRENE.\n\nExport via [cette page](https://annuaire-entreprises.data.gouv.fr/export-sirene).\n"
+  },
+  {
+    "date": "05/09/2025",
+    "target": {
+      "agent": true
+    },
+    "body": "Mise à disposition de la fonctionnalité de gestion de groupe pour les agents habilités.\n"
+  },
+  {
+    "date": "06/06/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout des bilans GES (Gaz à Effet de Serre) dans l'onglet \"Labels et certificats\".\n"
+  },
+  {
+    "date": "15/05/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Refonte de la page établissement.\n"
+  },
+  {
+    "date": "28/04/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout des résultats des contrôles sanitaires (dispositif d'information Alim’confiance).\n"
+  },
+  {
+    "date": "23/04/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout de la liste des entreprises labellisées \"Entreprise du Patrimoine Vivant\".\n"
+  },
+  {
+    "date": "18/04/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout de la liste des entreprises labellisées \"Relations Fournisseurs et Achats Responsables\"\n"
+  },
+  {
+    "date": "08/04/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Modification de l'onglet \"Données financières\" pour les entreprises.\n\nQuand une entreprise déclare un bilan consolidé, il est désormais également possible de consulter les données du bilan simplifié ou complet.\n"
+  },
+  {
+    "date": "27/03/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Ajout des informations relatives aux Délégués à la Protection des Données (DPO) (accessibles dans l'[onglet “Dirigeants/Élus”](/dirigeants/210203766#dpo-section)).\n\nCes informations, issues des déclarations officielles auprès de la CNIL, permettent d'identifier facilement le contact responsable de la protection des données personnelles au sein d'une organisation.\n"
+  },
+  {
+    "date": "18/03/2025",
+    "target": {
+      "agent": true
+    },
+    "body": "À partir du mardi 18 mars, une limite maximale de consultations des données par plage horaire de l'espace agent est mise en place afin d’éviter tout usage abusif.\n\nEn cas de dépassement d'un seuil, les requêtes sont temporairement bloquées.\n\nPlus d'informations ici : [https://guides.data.gouv.fr/annuaire-des-entreprises](https://guides.data.gouv.fr/annuaire-des-entreprises)\n"
+  },
+  {
+    "date": "21/02/2025",
+    "target": {
+      "agent": true
+    },
+    "body": "À partir du vendredi 21 février, seuls les membres des administrations au sens de l'article L.100-3 sont autorisés à se connecter à l'espace agent.\n\nLa liste des administrations est définie ici : [https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises/](https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises/)\n"
+  },
+  {
+    "date": "17/02/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Désormais, la définition des administrations sur l’Annuaire des Entreprises s’appuie sur la [Liste des administrations françaises](https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises) publiée par la Direction interministérielle du numérique.\n"
+  },
+  {
+    "date": "06/02/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Désormais, les collectivités possèdent à la fois le badge \"Administration\" et \"Collectivité territoriale\" car ce sont des administrations au sens du Code des Relations entre le Public et l'Administration (CRPA).\n"
+  },
+  {
+    "date": "30/01/2025",
+    "target": {
+      "site": true
+    },
+    "body": "Dans le cadre du Code des Relations entre le Public et l'Administration (CRPA) le terme de “service public” est remplacé par celui d’“administration”, plus juste du point de vue juridique.\n"
+  },
+  {
+    "date": "18/11/2024",
+    "target": {
+      "agent": true
+    },
+    "body": "Désormais et pour des raisons de sécurité, les utilisateurs de l’espace agent public doivent se reconnecter tous les jours.\n"
+  },
+  {
+    "date": "18/11/2024",
+    "target": {
+      "agent": true
+    },
+    "body": "Les agents ont désormais accès aux données des subventions accordées aux associations. La donnée provient de [Data.subvention](https://datasubvention.beta.gouv.fr/). Elle est issue de Chorus et du Fonjep (Fonds de coopération de la\njeunesse et de l’éducation populaire).\n\nCes nouvelles informations peuvent être retrouvées dans l’onglet “données financières” d’une association.\n"
+  },
+  {
+    "date": "17/10/2024",
+    "target": {
+      "agent": true
+    },
+    "body": "Les agents disposent désormais d’une page “Mon compte” pour [consulter leurs droits d’accès](/compte).\n"
+  },
+  {
+    "date": "17/09/2024",
+    "target": {
+      "site": true
+    },
+    "body": "L’onglet **justificatif** disparait ! Les informations qu’il contenait ont été réparties dans les autres onglets. L’objectif est d'afficher dès la première page certaines informations essentielles (capital social, nature d’entreprise) et d'alléger l’interface :\n\n- les informations d’immatriculation au RNE (date d’immatriculation, capital social, nature d'entreprise) sont déplacées dans l’onglet **Fiche résumé**\n- les justificatifs d’existence (annonce JOAFE,  avis Sirene ou extrait RNE) sont déplacés dans l’onglet **Documents**\n- les observations au RNE (uniquement pour les entreprises) sont déplacées dans l’onglet **Annonces**, renommé **Annonces & observations**\n"
+  },
+  {
+    "date": "31/07/2024",
+    "target": {
+      "agent": true,
+      "site": true
+    },
+    "body": "À partir du 31 juillet, le registre des bénéficiaires effectifs n’est plus accessible ni sur le site public, ni sur l’espace agent public, en application de la [directive européenne 2024/1640 du 31 mai 2024](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000049761732).\n\nDésormais, seules les [personnes en mesure de justifier d’un intérêt légitime](https://www.inpi.fr/faq/qui-peut-acceder-aux-donnees-des-beneficiaires-effectifs) peuvent [effectuer une demande d’accès au registre auprès de l’INPI](https://data.inpi.fr/content/editorial/acces_BE).\n\nLa DINUM travaille avec la Direction générale du Trésor et l’INPI afin de rendre le registre accessible aux administrations, via l’espace agent public.\n"
+  },
+  {
+    "date": "22/07/2024",
+    "target": {
+      "agent": true
+    },
+    "body": "Les documents (actes, statuts et documents administratifs complémentaires) et les dirigeants des associations sont désormais accessibles aux agents publics.\n"
+  },
+  {
+    "date": "27/06/2024",
+    "body": "Ajout de la vérification du [numéro EORI](https://www.economie.gouv.fr/entreprises/numero-eori) pour tous les visiteurs."
+  },
+  {
+    "date": "14/05/2024",
+    "body": "Nouvelles données dans l’espace agent public : carte de travaux publics FNTP, N° EORI, certificats Qualifelec, Qualibat et OPQIBI.\n",
+    "target": {
+      "agent": true
+    }
+  },
+  {
+    "date": "24/03/2024",
+    "body": "Nouvelle source de données et nouveau filtre : les Entreprises Sociales Inclusives.\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "24/02/2024",
+    "body": "Ajout du filtre géographique EPCI.\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "14/02/2024",
+    "body": "Nouvelle source de données, [l’Annuaire du service public](https://lannuaire.service-public.gouv.fr/) :\n\nAjoute les dirigeants et les informations de contact des services publics (administration, collectivités etc.).\n"
+  },
+  {
+    "date": "10/08/2023",
+    "body": "Possibilité de filtrer par chiffre d’affaires et résultat net.\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "03/08/2023",
+    "body": "Possibilité de filtrer par région.\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "04/07/2023",
+    "body": "Publication des données financières des associations dans l'onglet \"Données financières\"\n"
+  },
+  {
+    "date": "07/06/2023",
+    "body": "Publication des données financières des sociétés dans l'onglet \"Données financières\".\n"
+  },
+  {
+    "date": "26/04/2023",
+    "body": "Ajout de filtres sur la taille d’entreprise et le nombre de salariés.\n\nAjout du [filtre catégorie d'entreprise](https://sirene.fr/static-resources/htm/v_sommaire.htm#6) et du filtre [effectif salarié](https://sirene.fr/static-resources/htm/v_sommaire.htm#27).\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "25/04/2023",
+    "body": "Ajout de la page [équipe](/equipe).\n"
+  },
+  {
+    "date": "17/04/2023",
+    "body": "Ajout des représentations équilibrées d’une entreprise - Egapro dans le moteur de recherche et la page Labels et certificats\n"
+  },
+  {
+    "date": "04/04/2023",
+    "body": "Ajout des certificats “Qualiopi - Organisme de formation” dans le moteur de recherche et la page Labels et certificats\n"
+  },
+  {
+    "date": "29/03/2023",
+    "body": "Ajout des déclarations d’égalité entre les femmes et les hommes - Egapro dans le moteur de recherche et la page Labels et certificats\n"
+  },
+  {
+    "date": "28/03/2023",
+    "body": "Ajout des informations \"Professionnels du Bio\" dans le moteur de recherche et la page Labels et certificats\n"
+  },
+  {
+    "date": "22/03/2023",
+    "body": "La page justificatif d’immatriculation fait peau neuve :\n\nSuite à la création du [Guichet unique](https://procedures.inpi.fr/?/) la base de donnée de référence pour prouver l’immatriculation d’une entreprise, retrouver ses bénéficiaires effectifs et ses dirigeants, est désormais le Registre National des Entreprises (RNE).\n\nCes données sont accessibles via [l’API RNE de l’Inpi](/administration/inpi).\n"
+  },
+  {
+    "date": "22/03/2023",
+    "body": "L’[Insee](/administration/insee) a mis en place une nouvelle politique de non-diffusion des données des entrepreneurs individuels :\n\nDésormais, seuls l’adresse et les nom et prénom de l’entrepreneur ne sont pas diffusés. Le reste des informations sont publiques ([en savoir plus](https://www.insee.fr/fr/information/6683782)).\n"
+  },
+  {
+    "date": "09/02/2023",
+    "body": "\"Enrichissement de la section association : agréments administratifs, éligibilité CEC, informations de contact (email, site web, tel), association d'intérêt public et régime d’association.\"\n"
+  },
+  {
+    "date": "27/01/2023",
+    "body": "Nouveaux filtres de type de structure et de Labels et certificats.\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "26/01/2023",
+    "body": "La sélection multiple fait son entrée dans les filtres d'activité et de code NAF.\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "25/01/2023",
+    "body": "Nouveaux filtres géographiques. Le site se souvient désormais de vos dernières recherches !\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "02/01/2023",
+    "body": "Ajout de l’onglet Établissements Scolaires avec la liste des établissements UAI.\n"
+  },
+  {
+    "date": "20/12/2022",
+    "body": "Ajout de l'onglet labels & certificats avec les entreprises RGE, ESS, et Spectacle Vivant.\n"
+  },
+  {
+    "date": "08/12/2022",
+    "body": "Ajout des dépôts de comptes des associations, à retrouver sur l'onglet \"Annonces\".\n"
+  },
+  {
+    "date": "02/12/2022",
+    "body": "Gestion des collectivités territoriales. Ajout des codes géographiques des communes, départements et régions, ainsi que des élus.\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "25/11/2022",
+    "body": "Création de badges distinguants les différents types de personnes morales : Administration publique, Entreprise individuelle, Association.\n"
+  },
+  {
+    "date": "17/11/2022",
+    "body": "Ajout des dirigeant(e)s d’entreprise dans la recherche.\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "12/11/2022",
+    "body": "Ajout d’un filtre géographique avec auto complétion.\n"
+  },
+  {
+    "date": "19/09/2022",
+    "body": "Refonte de la page [Questions fréquentes](/faq).\n"
+  },
+  {
+    "date": "02/09/2022",
+    "body": "Mise en place d’une vérification dynamique du numéro de TVA par le [VIES](/administration/vies).\n"
+  },
+  {
+    "date": "29/08/2022",
+    "body": "Nouvelle mise en page de la liste des établissements.\n"
+  },
+  {
+    "date": "17/08/2022",
+    "body": "Ajout des mentions \"ancien siège social\" pour les établissements concernés.\n"
+  },
+  {
+    "date": "17/08/2022",
+    "body": "Refonte de la page \"Sources de données & statut des API\".\n"
+  },
+  {
+    "date": "02/08/2022",
+    "body": "Utilisation systématique des majuscules pour les dénominations et enseigne.\n"
+  },
+  {
+    "date": "29/06/2022",
+    "body": "Ajout de l’état administratif \"en sommeil\".\n"
+  },
+  {
+    "date": "17/06/2022",
+    "body": "Ajout du filtre par département dans la recherche avancée.\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "09/06/2022",
+    "body": "Ajout de raccourcis de navigation dans la page \"Informations Générales\".\n"
+  },
+  {
+    "date": "09/06/2022",
+    "body": "Mise en place de filtres de recherche avancés :\n\nVous pouvez désormais affiner vos résultats de recherche par code postal et par domaine d'activité.\n",
+    "target": {
+      "api": true,
+      "site": true
+    }
+  },
+  {
+    "date": "08/06/2022",
+    "body": "Création d’une page \"Nouveautés\".\n"
+  }
+]

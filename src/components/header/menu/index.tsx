@@ -10,15 +10,15 @@ import { EspaceAgentLink } from "./espace-agent-link";
 import styles from "./styles.module.css";
 
 const Menu: React.FC<{
-  session: ISession | null;
+  user: ISession["user"] | null;
   useAgentCTA: boolean;
-}> = ({ session, useAgentCTA }) =>
-  isLoggedIn(session) ? (
+}> = ({ user, useAgentCTA }) =>
+  isLoggedIn({ user }) ? (
     <div className={clsx(styles.menuLogout, "fr-link")}>
       <div>
         <Icon slug="accountLine">
           <span className={styles.menuText}>
-            {getAgentDisplayName(session)}
+            {getAgentDisplayName({ user })}
             &nbsp;(
             <strong
               style={{
@@ -45,7 +45,7 @@ const Menu: React.FC<{
         >
           Mon espace
         </Link>
-        {session?.user?.isSuperAgent && (
+        {user?.isSuperAgent && (
           <Link
             aria-label="Gestion de mes groupes"
             href={"/compte/mes-groupes"}

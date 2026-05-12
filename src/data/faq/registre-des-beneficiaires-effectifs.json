@@ -1,0 +1,21 @@
+{
+  "administrations": [
+    "inpi"
+  ],
+  "group": "fonctionnement",
+  "title": "Comment accéder au Registre des Bénéficiaires Effectifs (RBE) ?",
+  "seo": {
+    "description": "Depuis le 31 juillet 2024, le Registre des Bénéficiaires Effectifs (RBE) n’est plus accessible au grand public. Découvrez qui peut y accéder et comment."
+  },
+  "body": "Depuis le 31 juillet 2024, le Registre des Bénéficiaires Effectifs (RBE) n’est plus accessible au grand public. Son accès est limité aux personnes justifiant d’un intérêt légitime.\n\n## Quelles sont les informations contenues dans le RBE ?\n\nLe RBE contient la liste des personnes physiques (associées ou actionnaires) qui détiennent, directement ou indirectement, plus de 25 % des droits de vote ou du capital d’une société ou qui disposent d'un pouvoir de contrôle sur celle-ci.\n\nLes données contenues dans le registre sont :\n- nom, prénoms, pseudonyme et nom d'usage\n- mois et année de naissance\n- pays de résidence et nationalité\n- nature et modalité de contrôle détenus par le bénéficiaire\n\n## Comment peut-on accéder au RBE à partir du 31 juillet 2024 ?\n\nDésormais, seules les autorités publiques compétentes et les personnes et organisations présentant un intérêt légitime peuvent y accéder. Voici les principaux cas de figure.\n\n### Vous êtes un agent public ?\n\nVous pouvez [faire une demande d’accès au RBE](#comment-faire-une-demande-dacces-au-rbe).\n\n### Vous êtes un professionnel assujetti aux obligations de lutte contre le blanchiment ?\n\nSi votre profession est [assujettie aux obligations de lutte contre le blanchiment d’argent et de lutte contre le financement du terrorisme](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042648575/) vous pouvez [faire une demande d’accès au RBE](#comment-faire-une-demande-dacces-au-rbe).\n\n### Vous êtes membre de la société civile ?\n\nVoici les cas de figure pouvant justifier d’un intérêt légitime et [faire une demande d’accès au RBE](#comment-faire-une-demande-dacces-au-rbe) :\n- les chercheurs et journalistes qui travaillent sur la transparence financière\n- les entreprises pouvant justifier de leur intérêt légitime\n\n## Comment faire une demande d’accès au RBE ?\n\nSi votre demande est motivée par un intérêt légitime, vous pouvez la soumettre à l'INPI. Vous devez remplir le [formulaire de demande d’accès](https://www.inpi.fr/sites/default/files/Formulaire%20demande%20acc%C3%A8s%20BE.pdf) et y joindre les [pièces justifiant cet accès légitime](https://www.inpi.fr/sites/default/files/exemple_tableau_pi%C3%A8ce_justificaitve.pdf) puis les soumettre à [l’INPI](https://data.inpi.fr/content/editorial/acces_BE).\n",
+  "more": [
+    {
+      "label": "La fiche explicative sur entreprendre.service-public",
+      "href": "https://entreprendre.service-public.gouv.fr/actualites/A17554"
+    }
+  ],
+  "cta": {
+    "label": "⇢ Effectuer une demande d’accès au RBE sur data.inpi.fr",
+    "to": "https://data.inpi.fr/content/editorial/acces_BE"
+  }
+}

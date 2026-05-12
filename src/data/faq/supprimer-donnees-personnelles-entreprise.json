@@ -1,0 +1,30 @@
+{
+  "administrations": [
+    "insee",
+    "inpi"
+  ],
+  "group": "default",
+  "title": "Comment supprimer les données personnelles de mon entreprise ?",
+  "seo": {
+    "description": "Les données d’une entreprise sont publiques mais une personne physique peut s’oppposer à ce qu’un site internet les publie."
+  },
+  "body": "En tant que dirigeant(e) d’entreprise, les données publiques de votre entreprise peuvent contenir des informations personnelles (nom et prénom) accessibles sur internet.\n\nCes données sont publiques mais vous pouvez vous opposer à ce qu’un site internet les publie.\n\nAinsi, pour faire disparaitre vos informations de dirigeant(e) du site L'Annuaire des Entreprises vous pouvez nous en faire la demande.\n",
+  "more": [
+    {
+      "label": "Changer de statut de diffusion (entreprise individuelle)",
+      "href": "https://statut-diffusion-sirene.insee.fr/"
+    },
+    {
+      "label": "Pourquoi mon adresse personnelle apparaît-elle sur ce site ?",
+      "href": "/faq/adresse-personnelle"
+    },
+    {
+      "label": "Consulter notre politique de confidentialité",
+      "href": "/vie-privee"
+    }
+  ],
+  "cta": {
+    "label": "Je souhaite cacher mes informations de dirigeant(e)",
+    "to": "/formulaire/supprimer-donnees-personnelles-entreprise"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "administrations": [
+    "inpi",
+    "urssaf"
+  ],
+  "title": "Comprendre les données financières publiques des sociétés",
+  "group": "notions",
+  "seo": {
+    "description": "Quelles sont les données financières publiées par les sociétés en France ?"
+  },
+  "body": "## D’où proviennent les données financières affichées sur l’Annuaire des Entreprises ?\n\nLe dépôt des comptes annuels est une [obligation légale pour toutes les sociétés commerciales (SA, SAS, SARL, EURL, SCI…)](https://entreprendre.service-public.gouv.fr/vosdroits/F31214). Ces données sont ensuite traitées et publiées par l'[INPI](https://data.inpi.fr). \n\nCe sont des données ouvertes et accessibles au public. \n\nSous certaines conditions, les micro, petites et moyennes entreprises peuvent demander à ce que leurs données ne soient pas publiées et restent confidentielles.  \n\n## Quelles sont les données financières affichées par l’Annuaire des Entreprises ?\n\nNous affichons les informations les plus importantes permettant de renseigner sur la santé financière d'une société : date de clôture des comptes, chiffre d'affaires, marge brut, EBE, résultat net.\n\n## D'où proviennent les données ?\n\nLes données utilisées sont issues de la base des bilans et comptes annuels de l'[INPI](https://data.inpi.fr). Les données ont ensuite été retraitées et mises à disposition par les équipes du [Ministère de l'Économie et des Finances](https://www.economie.gouv.fr/) et republiées sur [data.gouv.fr](https://www.data.gouv.fr/fr/datasets/ratios-financiers-bce-inpi/).\n\n### Cas particulier : les micro-entrepreneurs et les entreprises individuelles\n\nLes données financières des entreprises individuelles sont [déclarées auprès des Urssaf](https://entreprendre.service-public.gouv.fr/vosdroits/R19133) et ne sont pas publiques. C'est pour cette raison que vous ne pouvez pas les consulter sur l’Annuaire des Entreprises.\n\n## Définition des indicateurs\n\n### À quoi correspond la date de clôture ?\n\nLa date de clôture renseigne sur la date de fin d'un exercice comptable dont la durée est de 12 mois. \n\nSi le choix de cette date est libre et qu'elle se fait au moment de l'immatriculation de l'entreprise, la plupart des entreprises la fixent, par souci de simplicité, au 31 décembre. \n\n### Qu'est ce qu'un chiffre d'affaires ?\n\nLe chiffre d'affaires correspond à la somme, exprimée en euro, des ventes de marchandises, de produits fabriqués, de services et d'activités annexes. Il est égal au montant (hors taxes) de l'ensemble des transactions réalisées par l'entreprise dans le cadre de son activité . \n\nSa formule peut se résumer ainsi : chiffre d'affaires = prix de vente * quantité vendues.\n\n### Qu'est-ce que la marge brute ?\n\nLa marge brute est la différence hors taxes entre le prix de vente et le coût de revient de la production, ou dit autrement, entre le chiffre d'affaires et les coûts de production.\n\n### Que signifie EBE ?\n\nL'EBE (excédent brut d'exploitation) est la différence entre valeur ajoutée de la production et salaires, taxes et impôts. \n\nIl exprime la capacité d'une entreprise à générer des recettes de trésorerie. \n\n### Que représente le résultat net ?\n\nLe résultat net représente la différence totale entre produits et charges sur une année. Il permet de caractériser l'enrichissement ou l'appauvrissement de l'entreprise sur cette période.\n\n## Qu'est-ce qu'un bilan consolidé ?\n\nLe bilan consolidé concerne surtout les grandes entreprises qui ont plusieurs filiales.\n\nLa consolidation des comptes permet de présenter un état des comptes au niveau du groupe, comme si le siège social et toutes les filiales ne formaient qu'une seule et unique entité.\n",
+  "cta": {
+    "label": "Déclarer ses comptes annuels",
+    "to": "https://entreprendre.service-public.gouv.fr/vosdroits/F31214"
+  },
+  "more": [
+    {
+      "label": "En savoir plus sur les informations financières accesibles au public",
+      "href": "https://www.economie.gouv.fr/facileco/quelles-sont-informations-accessibles-au-public"
+    },
+    {
+      "label": "Comprendre : la date de clorûre d'un exercice comptable",
+      "href": "https://entreprendre.service-public.gouv.fr/vosdroits/F32069"
+    },
+    {
+      "label": "Micro-entrepreneur : déclaration en ligne du chiffre d'affaires (régime micro-social simplifié)",
+      "href": "https://entreprendre.service-public.gouv.fr/vosdroits/R19133"
+    }
+  ]
+}

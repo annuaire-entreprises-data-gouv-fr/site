@@ -1,0 +1,29 @@
+{
+  "administrations": [
+    "dila"
+  ],
+  "title": "BODACC",
+  "seo": {
+    "title": "BODACC - définition - L’Annuaire des Entreprises",
+    "description": "Le Bulletin Officiel des Annonces Civiles et Commerciales (BODACC) publie les actes enregistrés au registre du commerce et des sociétés (RCS)."
+  },
+  "body": "\n## Le BODACC : définition\n\nLe Bulletin Officiel des Annonces Civiles et Commerciales (BODACC) publie les actes enregistrés au registre du commerce et des sociétés (RCS). Il est édité par la Direction de l’Information Légale et Administrative (DILA) dans le cadre de sa mission de service public de la transparence économique et financière.\n\n## Que trouve-t-on sur le BODACC ?\n\nParmi la liste des actes consignés dans ce bulletin national, on retrouve :\n\n- les ventes et cessions\n- les immatriculations et créations d'établissement\n- les modifications et radiations de personnes physiques ou morales inscrites au RCS\n- les procédures (collectives, de conciliation ou de rétablissement professionnel)\n- les vis de dépôt des comptes des sociétés\n\nLe BODACC diffuse aussi certaines annonces civiles :\n\n- les annonces de rétablissement personnel\n- les déclarations d’acceptation de succession à concurrence de l’actif net\n- les avis d’envoi en possession\n\n## Les services gratuits disponibles sur Bodacc.fr\n\nLe site internet [bodacc.fr](https://www.bodacc.fr/pages/home/) vous permet de :\n\n- consulter gratuitement en ligne les annonces parues depuis 2008\n- télécharger gratuitement ces annonces au format PDF\n- créer gratuitement des alertes pour faire une veille sur les annonces commerciales\n- enregistrer vos recherches favorites pour gagner du temps à chaque visite\n\n## Les sources des annonces du BODAAC\n\nLes informations relatives aux entreprises ou commerçants immatriculés au RCS sont extraites des registres publics appartenants aux  :\n\n- greffes des tribunaux de commerce\n- tribunaux de proximité ou des tribunaux judiciaires\n- tribunaux mixtes de commerce d’outre-mer\n- tribunaux de première instance\n- cours d’appel\n\nLes annonces civiles, elles, sont transmises par :\n\n- les greffes des tribunaux civils\n- les notaires\n- les mandataires et les commissions de surendettement de la banque de France\n",
+  "more": [
+    {
+      "label": "Consulter le site du BODACC",
+      "href": "https://www.bodacc.fr/pages/home/"
+    },
+    {
+      "label": "SIREN",
+      "href": "/definitions/numero-siren"
+    },
+    {
+      "label": "SIRET",
+      "href": "/definitions/numero-siret"
+    },
+    {
+      "label": "Kbis",
+      "href": "/definitions/kbis"
+    }
+  ]
+}

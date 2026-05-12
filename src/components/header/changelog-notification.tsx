@@ -19,11 +19,11 @@ function convertToISO(frenchDate: string) {
 }
 
 export default function ChangelogNotification({
-  session,
+  user,
 }: {
-  session: ISession | null;
+  user: ISession["user"] | null;
 }) {
-  const isAgent = hasRights(session, ApplicationRights.isAgent);
+  const isAgent = hasRights({ user }, ApplicationRights.isAgent);
   const lastRelevantChangelog = isAgent ? lastDates.agent : lastDates.site;
   const [shouldDisplayNotif, setShouldDisplayNotif] = useState(false);
 
