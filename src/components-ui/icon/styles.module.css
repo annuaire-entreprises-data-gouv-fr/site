@@ -1,0 +1,11 @@
+.icon {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: baseline;
+  padding: 0;
+}
+.icon > span {
+  padding: 0;
+}

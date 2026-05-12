@@ -1,0 +1,107 @@
+.selected-filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 30px 5px 10px;
+  color: var(--annuaire-colors-frBlue);
+  background-color: var(--annuaire-colors-pastelBlue);
+  border: 1px solid var(--annuaire-colors-frBlue);
+  border-radius: 3px;
+}
+
+.selected-filter-container:hover {
+  border-color: #0a76f6;
+}
+
+.selected-filter-container > a {
+  position: absolute;
+  right: 0;
+  padding: 5px 10px 5px 5px;
+  font-weight: bold;
+}
+
+.selected-filter-container > a:hover {
+  background-color: #00009111;
+}
+
+/* === filter menu === */
+
+div.search-filter-label-container {
+  position: relative;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin: 0;
+  margin-right: 8px;
+  user-select: none;
+}
+
+.search-filter-label {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  color: var(--text-default-grey);
+  cursor: pointer;
+  user-select: none;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.search-filter-label:hover {
+  background-color: #fefefe;
+  border-color: #0a76f6;
+}
+
+.close-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10010;
+  display: none;
+}
+
+.container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  width: 480px;
+  margin-top: 5px;
+  border: none;
+  box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+.container:before {
+  position: absolute;
+  bottom: 100%;
+  /* At the bottom of the tooltip */
+  left: 10%;
+  margin-left: 0;
+  content: " ";
+  border-color: transparent transparent white transparent;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.container > .filter-container {
+  z-index: 100;
+  max-height: 400px;
+  padding: 0 4px;
+  overflow-y: auto;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 992px) {
+  .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 50px !important;
+    margin-top: 0;
+  }
+
+  .close-container {
+    display: block;
+  }
+}

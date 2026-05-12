@@ -1,0 +1,43 @@
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.radio-group > div > label,
+.radio-group > div > div,
+.radio-group input[type="radio"] + label,
+.radio-group > div > a {
+  display: block;
+  padding: 4px 10px;
+  color: var(--annuaire-colors-frBlue);
+  cursor: pointer;
+  background: #e5e5f4 !important;
+  border: 2px solid transparent;
+  border-style: none;
+  border-radius: 6px;
+}
+
+.radio-group input[type="radio"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.radio-group input[type="radio"]:hover + label,
+.radio-group > div > div:hover,
+.radio-group > div > a:hover {
+  border: 2px dashed var(--annuaire-colors-frBlue);
+}
+
+.radio-group input[type="radio"]:focus-visible + label,
+.radio-group input[type="radio"] + label:focus {
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: #0a76f6;
+  outline-offset: 2px;
+}
+
+.radio-group input[type="radio"]:checked + label {
+  border: 2px solid var(--annuaire-colors-frBlue);
+}

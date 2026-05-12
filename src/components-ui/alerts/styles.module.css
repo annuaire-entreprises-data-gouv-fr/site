@@ -1,0 +1,54 @@
+.alert {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 2px;
+}
+.alert > div:first-of-type {
+  margin-right: 10px;
+}
+
+.corner-banner {
+  position: relative;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  width: 500px;
+  max-width: 100%;
+  padding: 0.5rem 1rem;
+  margin: 10px 0;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+}
+
+.close {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.5rem;
+  padding: 0.25rem;
+  color: #666;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+.close:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

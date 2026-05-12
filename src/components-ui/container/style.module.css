@@ -1,0 +1,12 @@
+.outer-outer-container {
+  display: flex;
+  flex: 1 1 0%;
+  justify-content: center;
+}
+
+.outer-container {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  min-width: 100vw;
+}
