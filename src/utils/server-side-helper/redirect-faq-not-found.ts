@@ -9,5 +9,5 @@ export const redirectFAQPageNotFound = (slug: string) => {
       context: { slug },
     })
   );
-  redirect({ to: "/not-found" as any });
+  redirect({ to: "/not-found", throw: true });
 };

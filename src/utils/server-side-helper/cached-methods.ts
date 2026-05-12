@@ -27,7 +27,7 @@ const handleException = (e: any, slug: string) => {
         context: { slug },
       })
     );
-    redirect({ to: "/not-found" });
+    redirect({ to: "/not-found", throw: true });
   } else if (
     e instanceof SirenNotFoundError ||
     e instanceof SiretNotFoundError
@@ -39,7 +39,7 @@ const handleException = (e: any, slug: string) => {
         context: { slug },
       })
     );
-    redirect({ to: "/erreur/introuvable/" + slug });
+    redirect({ to: "/erreur/introuvable/" + slug, throw: true });
   } else if (e instanceof FetchRechercheEntrepriseException) {
     logFatalErrorInSentry(e);
     throw e;

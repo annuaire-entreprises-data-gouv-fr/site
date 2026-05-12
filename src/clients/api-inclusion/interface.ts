@@ -1,0 +1,31 @@
+interface APIInclusionResponse {
+  address: string; // '1 Avenue de la Bauxite';
+  brand: string; // 'Elise Méditerranée MARSEILLE IDDEE13';
+  city: string; // 'Marseille';
+  client_references: [];
+  contact_email: string; // 'elise.mediterranee@elise.com.fr';
+  contact_phone: string; // '0484253370';
+  contact_social_website: string; // '';
+  contact_website: string; // 'https://www.elise.com.fr';
+  created_at: string; // '2019-12-05T15:37:56.609000+01:00';
+  department: string; // '13';
+  id: number;
+  is_active: boolean; // true;
+  is_cocontracting: boolean; // true;
+  is_qpv: boolean; //false;
+  kind: string; // 'EI';
+  kind_parent: string; // 'Insertion';
+  labels_old: [];
+  logo_url: string; // 'https://cellar-c2.services.clever-cloud.com/c4-prod/siae_logo/571f1c19-6bed-4ae3-a4d3-10dc1cd9cd3c.png';
+  name: string; // 'IDDEE 13';
+  nature: string; // 'HEAD_OFFICE';
+  networks: { name: string; slug: string }[];
+  offers: { name: string; description: string }[];
+  post_code: string; // '13015';
+  presta_type: string[]; //['PREST', 'BUILD'];
+  region: string; //"Provence-Alpes-Côte d'Azur";
+  sectors: { name: string; slug: string }[];
+  siret: string; // '53374499100035';
+  slug: string; // 'iddee-13-13';
+  updated_at: string; // '2023-12-22T09:55:18.027575+01:00';
+}

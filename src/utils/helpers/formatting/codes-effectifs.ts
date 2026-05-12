@@ -1,5 +1,5 @@
-import { CUSTOM_CODE_TRANCHE_EFFECTIF_EMPLOYEUR } from "#clients/recherche-entreprise/mapToDomain";
-import type { IUniteLegale } from "#models/core/types";
+import { CUSTOM_CODE_TRANCHE_EFFECTIF_EMPLOYEUR } from "#/clients/recherche-entreprise/mapToDomain";
+import type { IUniteLegale } from "#/models/core/types";
 
 export const codesEffectifsOptions = [
   {

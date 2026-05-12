@@ -1,0 +1,35 @@
+import routes from "#/clients/routes";
+import type { IAgentScope } from "#/models/authentication/agent/scopes/constants";
+import type { IConformiteFiscale } from "#/models/espace-agent/conformite";
+import type { UseCase } from "#/models/use-cases";
+import type { Siren } from "#/utils/helpers";
+import clientAPIEntreprise, { type IAPIEntrepriseResponse } from "../client";
+
+export type IAPIEntrepriseConformiteFiscale = IAPIEntrepriseResponse<{
+  document_url: string;
+  document_url_expires_in: number;
+  date_delivrance_attestation: string;
+  date_periode_analysee: string;
+}>;
+
+/**
+ * GET documents from API Entreprise
+ */
+export const clientApiEntrepriseConformiteFiscale = async (
+  siren: Siren,
+  scope: IAgentScope | null,
+  useCase?: UseCase
+) =>
+  await clientAPIEntreprise<
+    IAPIEntrepriseConformiteFiscale,
+    IConformiteFiscale
+  >(routes.apiEntreprise.conformite.fiscale(siren), mapToDomainObject, {
+    scope,
+    useCase,
+  });
+
+const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => ({
+  url: response.data.document_url,
+  dateDelivrance: response.data.date_delivrance_attestation,
+  label: "Attestation fiscale",
+});

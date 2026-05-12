@@ -1,4 +1,4 @@
-import { IDataFetchingState } from "#models/data-fetching";
+import { IDataFetchingState } from "#/models/data-fetching";
 
 export function convertErrorToFetchingState(errorCode: number | null) {
   if (errorCode && [408, 504].includes(errorCode)) {

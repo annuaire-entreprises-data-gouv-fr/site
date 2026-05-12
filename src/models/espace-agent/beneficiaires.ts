@@ -1,0 +1,99 @@
+import { clientApiEntrepriseBeneficiaires } from "#/clients/api-entreprise/beneficiaires";
+import { EAdministration } from "#/models/administrations/EAdministration";
+import {
+  APINotRespondingFactory,
+  type IAPINotRespondingError,
+} from "#/models/api-not-responding";
+import {
+  ApplicationRights,
+  ApplicationRightsToScopes,
+} from "#/models/authentication/user/rights";
+import type { UseCase } from "#/models/use-cases";
+import { verifySiren } from "#/utils/helpers";
+import { handleApiEntrepriseError } from "./utils";
+
+interface IModalite {
+  nue_propriete: number;
+  pleine_propriete: number;
+  total: number;
+}
+
+export interface IBeneficiairesEffectif {
+  anneeNaissance: string;
+  modalites: {
+    detention_de_capital: {
+      parts_totale: number;
+      parts_directes: {
+        detention: boolean;
+        pleine_propriete: number;
+        nue_propriete: number;
+      };
+      parts_indirectes: {
+        detention: boolean;
+        par_indivision: IModalite;
+        via_personnes_morales: IModalite;
+      };
+    };
+    vocation_a_devenir_titulaire_de_parts: {
+      parts_directes: {
+        pleine_propriete: number;
+        nue_propriete: number;
+      };
+      parts_indirectes: {
+        par_indivision: IModalite;
+        via_personnes_morales: IModalite;
+      };
+    };
+    droits_de_vote: {
+      total: number;
+      directes: {
+        detention: boolean;
+        pleine_propriete: 51;
+        nue_propriete: number;
+        usufruit: number;
+      };
+      indirectes: {
+        detention: boolean;
+        par_indivision: IModalite & { usufruit: number };
+        via_personnes_morales: IModalite & { usufruit: number };
+      };
+    };
+    pouvoirs_de_controle: {
+      decision_ag: boolean;
+      nommage_membres_conseil_administratif: boolean;
+      autres: boolean;
+    };
+    representant_legal: boolean;
+    representant_legal_placement_sans_gestion_deleguee: boolean;
+  };
+  moisNaissance: string;
+  nationalite: string;
+  nom: string;
+  paysResidence: string;
+  prenoms: string;
+}
+
+const scope = ApplicationRightsToScopes[ApplicationRights.beneficiaires];
+
+export const getBeneficiaires = async (
+  maybeSiren: string,
+  params: { useCase?: UseCase }
+): Promise<IBeneficiairesEffectif[] | IAPINotRespondingError> => {
+  const siren = verifySiren(maybeSiren);
+  try {
+    const beneficiaires = await clientApiEntrepriseBeneficiaires(
+      siren,
+      scope,
+      params.useCase
+    );
+    if (beneficiaires.length === 0) {
+      return APINotRespondingFactory(EAdministration.INPI, 404);
+    }
+    return beneficiaires;
+  } catch (error) {
+    return handleApiEntrepriseError(error, {
+      siren,
+      apiResource: "BeneficiairesEffectifs",
+    });
+  }
+};

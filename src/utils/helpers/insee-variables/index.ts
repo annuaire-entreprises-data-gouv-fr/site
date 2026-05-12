@@ -1,7 +1,7 @@
-import { EAdministration } from "#models/administrations/EAdministration";
-import { ISTATUTDIFFUSION } from "#models/core/diffusion";
-import { IETATADMINSTRATIF } from "#models/core/etat-administratif";
-import { Exception } from "#models/exceptions";
+import { EAdministration } from "#/models/administrations/EAdministration";
+import { ISTATUTDIFFUSION } from "#/models/core/diffusion";
+import { IETATADMINSTRATIF } from "#/models/core/etat-administratif";
+import { Exception } from "#/models/exceptions";
 import logErrorInSentry from "../../sentry";
 
 /**

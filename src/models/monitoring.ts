@@ -1,0 +1,109 @@
+import { clientMonitoring } from "#/clients/monitoring";
+import { DataStore } from "#/utils/data-store";
+import { logWarningInSentry } from "#/utils/sentry";
+import { administrationsMetaData } from "./administrations";
+import type { EAdministration } from "./administrations/EAdministration";
+import type { IAPIMonitorMetaData } from "./administrations/types";
+import { FetchRessourceException } from "./exceptions";
+
+export interface IRatio {
+  date?: string;
+  ratioNumber: number;
+  wasMonitorUp?: boolean;
+}
+export interface IMonitoring {
+  isOnline: boolean;
+  series: IRatio[];
+  uptime: {
+    day: string;
+    week: string;
+    month: string;
+  };
+}
+
+export interface IMonitoringWithMetaData
+  extends IMonitoring,
+    IAPIMonitorMetaData {
+  administrationEnum: EAdministration;
+}
+
+const fetchMonitorsByAdministration = async (): Promise<{
+  [key: string]: IMonitoringWithMetaData[];
+}> => {
+  const allMonitoringsByAdministration = {} as {
+    [key: string]: IMonitoringWithMetaData[];
+  };
+
+  let allMonitorings = [] as IMonitoringWithMetaData[];
+  for (const { apiMonitors = [], administrationEnum } of Object.values(
+    administrationsMetaData
+  )) {
+    allMonitorings = [
+      ...allMonitorings,
+      ...(await Promise.all(
+        apiMonitors
+          .filter(({ updownIoId }) => !!updownIoId)
+          .map(
+            async ({
+              updownIoId,
+              apiDocumentationLink = null,
+              isProtected = false,
+              apiName = null,
+              apiSlug = null,
+              startDate = null,
+            }) => {
+              try {
+                const monitoring = await clientMonitoring(
+                  updownIoId,
+                  startDate
+                );
+                return {
+                  apiDocumentationLink,
+                  apiSlug,
+                  apiName,
+                  isProtected,
+                  administrationEnum,
+                  ...monitoring,
+                } as IMonitoringWithMetaData;
+              } catch (e: any) {
+                const error = new FetchRessourceException({
+                  cause: e,
+                  ressource: "ClientMonitoring",
+                  context: {
+                    details: apiName || "",
+                  },
+                });
+                logWarningInSentry(error);
+                throw error;
+              }
+            }
+          )
+      )),
+    ];
+  }
+
+  allMonitorings.forEach((monitorings) => {
+    allMonitoringsByAdministration[monitorings.administrationEnum] = [
+      ...(allMonitoringsByAdministration[monitorings.administrationEnum] || []),
+      monitorings,
+    ];
+  });
+
+  return allMonitoringsByAdministration;
+};
+
+const store = new DataStore<{
+  [key: string]: IMonitoringWithMetaData[];
+}>(
+  fetchMonitorsByAdministration,
+  "monitors-by-administration",
+  (response) => ({ monitorsByAdministration: response }),
+  30_000
+);
+
+export const getMonitorsByAdministration = async (): Promise<{
+  [key: string]: IMonitoringWithMetaData[];
+}> =>
+  store.get("monitorsByAdministration") as Promise<{
+    [key: string]: IMonitoringWithMetaData[];
+  }>;
