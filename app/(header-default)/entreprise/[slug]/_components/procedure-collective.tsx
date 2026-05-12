@@ -68,7 +68,10 @@ export const UniteLegaleProcedureCollective = ({
         <a
           href={`https://www.bodacc.fr/pages/annonces-commerciales-detail/?q.id=id:${uniteLegale.bodacc?.procedureCollective?.idAnnonce}`}
         >
-          <OpenClosedTag icon="closed" label="Procédure collective en cours" />
+          <OpenClosedTag
+            icon="questionFill"
+            label="Procédure collective en cours"
+          />
         </a>
       </InformationTooltip>
     </Wrapper>
