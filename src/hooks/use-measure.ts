@@ -1,0 +1,61 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
+
+/**
+ * A hooks that measure the size of an element, thanks to the ResizeObserver API.
+ * @returns
+ */
+interface IMeasures {
+  height: number | undefined;
+  width: number | undefined;
+}
+export function useMeasure(): [
+  ref: (node: HTMLElement | null) => void,
+  measures: IMeasures,
+] {
+  const [measures, setMeasures] = useState<IMeasures>({
+    width: undefined,
+    height: undefined,
+  });
+
+  const [node, setNode] = useState<HTMLElement | null>(null);
+
+  const elementObserver = useMemo(() => {
+    if (typeof window === "undefined" || !window.ResizeObserver) {
+      return;
+    }
+    return new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        setMeasures({ width, height });
+      }
+    });
+  }, []);
+
+  const ref = useCallback(
+    (node: HTMLElement | null) => {
+      if (!node) {
+        return;
+      }
+      setNode(node);
+      setMeasures({
+        height: node.clientHeight,
+        width: node.clientWidth,
+      });
+      if (elementObserver) {
+        elementObserver.observe(node);
+      }
+    },
+    [elementObserver]
+  );
+
+  useEffect(
+    () => () => {
+      if (node && elementObserver) {
+        elementObserver.unobserve(node);
+      }
+    },
+    [elementObserver, node]
+  );
+
+  return [ref, measures];
+}
