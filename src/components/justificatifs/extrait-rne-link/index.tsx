@@ -1,5 +1,4 @@
 import type React from "react";
-import { Link } from "#/components/Link";
 import ButtonLink from "#/components-ui/button";
 import { Icon } from "#/components-ui/icon/wrapper";
 import {
@@ -28,9 +27,7 @@ const ExtraitRNELink: React.FC<{
       <Icon slug="download">{label || "télécharger"}</Icon>
     </ButtonLink>
   ) : (
-    <Link href="/faq/justificatif-immatriculation-non-diffusible">
-      {documentNonDiffusiblePlaceHolder(uniteLegale)}
-    </Link>
+    documentNonDiffusiblePlaceHolder(uniteLegale)
   );
 
 export default ExtraitRNELink;
