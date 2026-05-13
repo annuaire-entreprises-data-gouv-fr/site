@@ -23,7 +23,6 @@ import { Route as ApiInpiPdfRouteImport } from './routes/api/inpi-pdf'
 import { Route as ApiHidePersonalDataRouteImport } from './routes/api/hide-personal-data'
 import { Route as ApiFeatureFlagsRouteImport } from './routes/api/feature-flags'
 import { Route as ApiExportSireneRouteImport } from './routes/api/export-sirene'
-import { Route as HeaderSearchRechercherRouteImport } from './routes/_header-search/rechercher'
 import { Route as HeaderDefaultViePriveeRouteImport } from './routes/_header-default/vie-privee'
 import { Route as HeaderDefaultPersonneRouteImport } from './routes/_header-default/personne'
 import { Route as HeaderDefaultPartagerRouteImport } from './routes/_header-default/partager'
@@ -35,9 +34,10 @@ import { Route as HeaderDefaultExportSireneRouteImport } from './routes/_header-
 import { Route as HeaderDefaultDefinitionsRouteImport } from './routes/_header-default/definitions'
 import { Route as HeaderDefaultAdministrationRouteImport } from './routes/_header-default/administration'
 import { Route as HeaderDefaultAccessibiliteRouteImport } from './routes/_header-default/accessibilite'
+import { Route as HeaderSearchRechercherIndexRouteImport } from './routes/_header-search/rechercher/index'
 import { Route as ApiPingSlugRouteImport } from './routes/api/ping/$slug'
 import { Route as ApiFeedbackNpsRouteImport } from './routes/api/feedback/nps'
-import { Route as HeaderSearchRechercherCarteRouteImport } from './routes/_header-search/rechercher.carte'
+import { Route as HeaderSearchRechercherCarteRouteImport } from './routes/_header-search/rechercher/carte'
 import { Route as HeaderPublicDonneesApiRouteImport } from './routes/_header-public/donnees.api'
 import { Route as HeaderPublicAProposStatsRouteImport } from './routes/_header-public/a-propos.stats'
 import { Route as HeaderMinimalFormulaireMerciRouteImport } from './routes/_header-minimal/formulaire/merci'
@@ -149,11 +149,6 @@ const ApiExportSireneRoute = ApiExportSireneRouteImport.update({
   path: '/api/export-sirene',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HeaderSearchRechercherRoute = HeaderSearchRechercherRouteImport.update({
-  id: '/rechercher',
-  path: '/rechercher',
-  getParentRoute: () => HeaderSearchRouteRoute,
-} as any)
 const HeaderDefaultViePriveeRoute = HeaderDefaultViePriveeRouteImport.update({
   id: '/vie-privee',
   path: '/vie-privee',
@@ -216,6 +211,12 @@ const HeaderDefaultAccessibiliteRoute =
     path: '/accessibilite',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
+const HeaderSearchRechercherIndexRoute =
+  HeaderSearchRechercherIndexRouteImport.update({
+    id: '/rechercher/',
+    path: '/rechercher/',
+    getParentRoute: () => HeaderSearchRouteRoute,
+  } as any)
 const ApiPingSlugRoute = ApiPingSlugRouteImport.update({
   id: '/api/ping/$slug',
   path: '/api/ping/$slug',
@@ -228,9 +229,9 @@ const ApiFeedbackNpsRoute = ApiFeedbackNpsRouteImport.update({
 } as any)
 const HeaderSearchRechercherCarteRoute =
   HeaderSearchRechercherCarteRouteImport.update({
-    id: '/carte',
-    path: '/carte',
-    getParentRoute: () => HeaderSearchRechercherRoute,
+    id: '/rechercher/carte',
+    path: '/rechercher/carte',
+    getParentRoute: () => HeaderSearchRouteRoute,
   } as any)
 const HeaderPublicDonneesApiRoute = HeaderPublicDonneesApiRouteImport.update({
   id: '/donnees/api',
@@ -531,7 +532,6 @@ export interface FileRoutesByFullPath {
   '/partager': typeof HeaderDefaultPartagerRoute
   '/personne': typeof HeaderDefaultPersonneRoute
   '/vie-privee': typeof HeaderDefaultViePriveeRoute
-  '/rechercher': typeof HeaderSearchRechercherRouteWithChildren
   '/api/export-sirene': typeof ApiExportSireneRoute
   '/api/feature-flags': typeof ApiFeatureFlagsRoute
   '/api/hide-personal-data': typeof ApiHidePersonalDataRoute
@@ -571,6 +571,7 @@ export interface FileRoutesByFullPath {
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
+  '/rechercher/': typeof HeaderSearchRechercherIndexRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
@@ -602,7 +603,6 @@ export interface FileRoutesByTo {
   '/partager': typeof HeaderDefaultPartagerRoute
   '/personne': typeof HeaderDefaultPersonneRoute
   '/vie-privee': typeof HeaderDefaultViePriveeRoute
-  '/rechercher': typeof HeaderSearchRechercherRouteWithChildren
   '/api/export-sirene': typeof ApiExportSireneRoute
   '/api/feature-flags': typeof ApiFeatureFlagsRoute
   '/api/hide-personal-data': typeof ApiHidePersonalDataRoute
@@ -642,6 +642,7 @@ export interface FileRoutesByTo {
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
+  '/rechercher': typeof HeaderSearchRechercherIndexRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
@@ -681,7 +682,6 @@ export interface FileRoutesById {
   '/_header-default/partager': typeof HeaderDefaultPartagerRoute
   '/_header-default/personne': typeof HeaderDefaultPersonneRoute
   '/_header-default/vie-privee': typeof HeaderDefaultViePriveeRoute
-  '/_header-search/rechercher': typeof HeaderSearchRechercherRouteWithChildren
   '/api/export-sirene': typeof ApiExportSireneRoute
   '/api/feature-flags': typeof ApiFeatureFlagsRoute
   '/api/hide-personal-data': typeof ApiHidePersonalDataRoute
@@ -722,6 +722,7 @@ export interface FileRoutesById {
   '/_header-search/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
+  '/_header-search/rechercher/': typeof HeaderSearchRechercherIndexRoute
   '/_header-connexion/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/_header-connexion/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/_header-connexion/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
@@ -755,7 +756,6 @@ export interface FileRouteTypes {
     | '/partager'
     | '/personne'
     | '/vie-privee'
-    | '/rechercher'
     | '/api/export-sirene'
     | '/api/feature-flags'
     | '/api/hide-personal-data'
@@ -795,6 +795,7 @@ export interface FileRouteTypes {
     | '/rechercher/carte'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
+    | '/rechercher/'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
@@ -826,7 +827,6 @@ export interface FileRouteTypes {
     | '/partager'
     | '/personne'
     | '/vie-privee'
-    | '/rechercher'
     | '/api/export-sirene'
     | '/api/feature-flags'
     | '/api/hide-personal-data'
@@ -866,6 +866,7 @@ export interface FileRouteTypes {
     | '/rechercher/carte'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
+    | '/rechercher'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
@@ -904,7 +905,6 @@ export interface FileRouteTypes {
     | '/_header-default/partager'
     | '/_header-default/personne'
     | '/_header-default/vie-privee'
-    | '/_header-search/rechercher'
     | '/api/export-sirene'
     | '/api/feature-flags'
     | '/api/hide-personal-data'
@@ -945,6 +945,7 @@ export interface FileRouteTypes {
     | '/_header-search/rechercher/carte'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
+    | '/_header-search/rechercher/'
     | '/_header-connexion/connexion/habilitation/administration-inconnue'
     | '/_header-connexion/connexion/habilitation/prestataires'
     | '/_header-connexion/connexion/habilitation/refusee'
@@ -1092,13 +1093,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiExportSireneRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_header-search/rechercher': {
-      id: '/_header-search/rechercher'
-      path: '/rechercher'
-      fullPath: '/rechercher'
-      preLoaderRoute: typeof HeaderSearchRechercherRouteImport
-      parentRoute: typeof HeaderSearchRouteRoute
-    }
     '/_header-default/vie-privee': {
       id: '/_header-default/vie-privee'
       path: '/vie-privee'
@@ -1176,6 +1170,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultAccessibiliteRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
+    '/_header-search/rechercher/': {
+      id: '/_header-search/rechercher/'
+      path: '/rechercher'
+      fullPath: '/rechercher/'
+      preLoaderRoute: typeof HeaderSearchRechercherIndexRouteImport
+      parentRoute: typeof HeaderSearchRouteRoute
+    }
     '/api/ping/$slug': {
       id: '/api/ping/$slug'
       path: '/api/ping/$slug'
@@ -1192,10 +1193,10 @@ declare module '@tanstack/react-router' {
     }
     '/_header-search/rechercher/carte': {
       id: '/_header-search/rechercher/carte'
-      path: '/carte'
+      path: '/rechercher/carte'
       fullPath: '/rechercher/carte'
       preLoaderRoute: typeof HeaderSearchRechercherCarteRouteImport
-      parentRoute: typeof HeaderSearchRechercherRoute
+      parentRoute: typeof HeaderSearchRouteRoute
     }
     '/_header-public/donnees/api': {
       id: '/_header-public/donnees/api'
@@ -1762,26 +1763,14 @@ const HeaderPublicRouteRouteChildren: HeaderPublicRouteRouteChildren = {
 const HeaderPublicRouteRouteWithChildren =
   HeaderPublicRouteRoute._addFileChildren(HeaderPublicRouteRouteChildren)
 
-interface HeaderSearchRechercherRouteChildren {
-  HeaderSearchRechercherCarteRoute: typeof HeaderSearchRechercherCarteRoute
-}
-
-const HeaderSearchRechercherRouteChildren: HeaderSearchRechercherRouteChildren =
-  {
-    HeaderSearchRechercherCarteRoute: HeaderSearchRechercherCarteRoute,
-  }
-
-const HeaderSearchRechercherRouteWithChildren =
-  HeaderSearchRechercherRoute._addFileChildren(
-    HeaderSearchRechercherRouteChildren,
-  )
-
 interface HeaderSearchRouteRouteChildren {
-  HeaderSearchRechercherRoute: typeof HeaderSearchRechercherRouteWithChildren
+  HeaderSearchRechercherCarteRoute: typeof HeaderSearchRechercherCarteRoute
+  HeaderSearchRechercherIndexRoute: typeof HeaderSearchRechercherIndexRoute
 }
 
 const HeaderSearchRouteRouteChildren: HeaderSearchRouteRouteChildren = {
-  HeaderSearchRechercherRoute: HeaderSearchRechercherRouteWithChildren,
+  HeaderSearchRechercherCarteRoute: HeaderSearchRechercherCarteRoute,
+  HeaderSearchRechercherIndexRoute: HeaderSearchRechercherIndexRoute,
 }
 
 const HeaderSearchRouteRouteWithChildren =

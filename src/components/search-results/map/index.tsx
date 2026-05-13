@@ -1,4 +1,4 @@
-import { redirect } from "@tanstack/react-router";
+import { ClientOnly, redirect } from "@tanstack/react-router";
 import MapWithResults from "#/components/map/map-results";
 import type { ISearchResults } from "#/models/search";
 import {
@@ -34,11 +34,13 @@ const SearchResultsMap: React.FC<{
   return (
     <>
       <div className={styles["map-container"]} style={{ height }}>
-        <MapWithResults
-          height={height}
-          results={results}
-          shouldColorZipCode={shouldColorZipCode}
-        />
+        <ClientOnly>
+          <MapWithResults
+            height={height}
+            results={results}
+            shouldColorZipCode={shouldColorZipCode}
+          />
+        </ClientOnly>
         <div className={styles["results-for-map-wrapper"]}>
           <ResultsCounter
             currentPage={results.currentPage}

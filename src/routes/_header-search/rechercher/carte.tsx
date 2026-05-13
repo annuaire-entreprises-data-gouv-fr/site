@@ -1,0 +1,105 @@
+import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import HiddenH1 from "#/components/a11y-components/hidden-h1";
+import { HeaderWithAdvancedSearch } from "#/components/header/header-advanced-search";
+import SearchResultsMap from "#/components/search-results/map";
+import { meta } from "#/seo";
+import { HeaderSearchError } from "../-error";
+import {
+  beforeLoadCheckTerme,
+  searchDefaultParams,
+  searchFn,
+  searchLoaderDeps,
+  searchQueryParamsSchema,
+} from "../-loader";
+
+export const Route = createFileRoute("/_header-search/rechercher/carte")({
+  validateSearch: searchQueryParamsSchema,
+  search: {
+    middlewares: [stripSearchParams(searchDefaultParams)],
+  },
+  loaderDeps: searchLoaderDeps,
+  head: () => {
+    const canonical =
+      "https://annuaire-entreprises.data.gouv.fr/rechercher/carte";
+    return {
+      meta: meta({
+        title: "Rechercher une entreprise sur la carte",
+        alternates: {
+          canonical,
+        },
+        robots: {
+          follow: false,
+        },
+      }),
+      links: [
+        {
+          rel: "canonical",
+          href: canonical,
+        },
+      ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            url: "https://annuaire-entreprises.data.gouv.fr",
+            potentialAction: [
+              {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate:
+                    "https://annuaire-entreprises.data.gouv.fr/rechercher?terme={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+              {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate:
+                    "https://annuaire-entreprises.data.gouv.fr/rechercher/carte?terme={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+            ],
+          }),
+        },
+      ],
+    };
+  },
+  beforeLoad: async (ctx) => {
+    const searchTerm = ctx.search.terme;
+
+    beforeLoadCheckTerme(searchTerm);
+  },
+  loader: async ({ deps }) => await searchFn({ data: deps }),
+  component: RouteComponent,
+  errorComponent: HeaderSearchError,
+});
+
+function RouteComponent() {
+  const { searchResults, searchFilterParamsJSON, searchTerm } =
+    Route.useLoaderData();
+
+  return (
+    <>
+      <HeaderWithAdvancedSearch
+        currentSearchTerm={searchTerm}
+        searchParams={searchFilterParamsJSON}
+        useAgentCTA={true}
+        useMap={true}
+        useSearchBar={true}
+      />
+      <main className="map" style={{ maxWidth: "100%", marginBottom: 0 }}>
+        <HiddenH1 title="Résultats de recherche" />
+        <SearchResultsMap
+          results={searchResults}
+          searchFilterParams={searchFilterParamsJSON}
+          searchTerm={searchTerm}
+        />
+      </main>
+    </>
+  );
+}
