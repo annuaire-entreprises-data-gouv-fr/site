@@ -6,7 +6,7 @@ import { beforeLoadCheckTerme } from "./-loader";
 
 export const Route = createFileRoute("/_header-search/rechercher/carte")({
   validateSearch: z.object({
-    terme: queryString.optional(),
+    terme: queryString.catch(""),
   }),
   loaderDeps: ({ search }) => ({ terme: search.terme }),
   beforeLoad: async (ctx) => {
