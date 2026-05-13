@@ -40,8 +40,7 @@ import { Route as ApiFeedbackNpsRouteImport } from './routes/api/feedback/nps'
 import { Route as HeaderSearchRechercherCarteRouteImport } from './routes/_header-search/rechercher.carte'
 import { Route as HeaderPublicDonneesApiRouteImport } from './routes/_header-public/donnees.api'
 import { Route as HeaderPublicAProposStatsRouteImport } from './routes/_header-public/a-propos.stats'
-import { Route as HeaderMinimalFormulaireNpsRouteImport } from './routes/_header-minimal/formulaire.nps'
-import { Route as HeaderMinimalFormulaireMerciRouteImport } from './routes/_header-minimal/formulaire.merci'
+import { Route as HeaderMinimalFormulaireMerciRouteImport } from './routes/_header-minimal/formulaire/merci'
 import { Route as HeaderLpAgentLpAgentPublicRouteImport } from './routes/_header-lp-agent/lp.agent-public'
 import { Route as HeaderHomeLpSlugRouteImport } from './routes/_header-home/lp/$slug'
 import { Route as HeaderDefaultLabelsCertificatsSlugRouteImport } from './routes/_header-default/labels-certificats.$slug'
@@ -70,6 +69,7 @@ import { Route as HeaderConnexionConnexionEchecConnexionRouteImport } from './ro
 import { Route as HeaderConnexionConnexionAuRevoirRouteImport } from './routes/_header-connexion/connexion.au-revoir'
 import { Route as HeaderCompteCompteMesGroupesRouteImport } from './routes/_header-compte/compte.mes-groupes'
 import { Route as HeaderCompteCompteAccueilRouteImport } from './routes/_header-compte/compte.accueil'
+import { Route as HeaderMinimalFormulaireNpsIndexRouteImport } from './routes/_header-minimal/formulaire/nps/index'
 import { Route as ApiShareButtonSlugRouteImport } from './routes/api/share/button/$slug'
 import { Route as ApiAuthFranceConnectLogoutCallbackRouteImport } from './routes/api/auth/france-connect/logout-callback'
 import { Route as ApiAuthFranceConnectLogoutRouteImport } from './routes/api/auth/france-connect/logout'
@@ -242,12 +242,6 @@ const HeaderPublicAProposStatsRoute =
     id: '/a-propos/stats',
     path: '/a-propos/stats',
     getParentRoute: () => HeaderPublicRouteRoute,
-  } as any)
-const HeaderMinimalFormulaireNpsRoute =
-  HeaderMinimalFormulaireNpsRouteImport.update({
-    id: '/formulaire/nps',
-    path: '/formulaire/nps',
-    getParentRoute: () => HeaderMinimalRouteRoute,
   } as any)
 const HeaderMinimalFormulaireMerciRoute =
   HeaderMinimalFormulaireMerciRouteImport.update({
@@ -422,6 +416,12 @@ const HeaderCompteCompteAccueilRoute =
     path: '/compte/accueil',
     getParentRoute: () => HeaderCompteRouteRoute,
   } as any)
+const HeaderMinimalFormulaireNpsIndexRoute =
+  HeaderMinimalFormulaireNpsIndexRouteImport.update({
+    id: '/formulaire/nps/',
+    path: '/formulaire/nps/',
+    getParentRoute: () => HeaderMinimalRouteRoute,
+  } as any)
 const ApiShareButtonSlugRoute = ApiShareButtonSlugRouteImport.update({
   id: '/api/share/button/$slug',
   path: '/api/share/button/$slug',
@@ -566,7 +566,6 @@ export interface FileRoutesByFullPath {
   '/lp/$slug': typeof HeaderHomeLpSlugRoute
   '/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
   '/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
-  '/formulaire/nps': typeof HeaderMinimalFormulaireNpsRoute
   '/a-propos/stats': typeof HeaderPublicAProposStatsRoute
   '/donnees/api': typeof HeaderPublicDonneesApiRoute
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
@@ -587,6 +586,7 @@ export interface FileRoutesByFullPath {
   '/api/auth/france-connect/logout': typeof ApiAuthFranceConnectLogoutRoute
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
+  '/formulaire/nps/': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
 export interface FileRoutesByTo {
@@ -637,7 +637,6 @@ export interface FileRoutesByTo {
   '/lp/$slug': typeof HeaderHomeLpSlugRoute
   '/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
   '/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
-  '/formulaire/nps': typeof HeaderMinimalFormulaireNpsRoute
   '/a-propos/stats': typeof HeaderPublicAProposStatsRoute
   '/donnees/api': typeof HeaderPublicDonneesApiRoute
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
@@ -658,6 +657,7 @@ export interface FileRoutesByTo {
   '/api/auth/france-connect/logout': typeof ApiAuthFranceConnectLogoutRoute
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
+  '/formulaire/nps': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
 export interface FileRoutesById {
@@ -717,7 +717,6 @@ export interface FileRoutesById {
   '/_header-home/lp/$slug': typeof HeaderHomeLpSlugRoute
   '/_header-lp-agent/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
   '/_header-minimal/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
-  '/_header-minimal/formulaire/nps': typeof HeaderMinimalFormulaireNpsRoute
   '/_header-public/a-propos/stats': typeof HeaderPublicAProposStatsRoute
   '/_header-public/donnees/api': typeof HeaderPublicDonneesApiRoute
   '/_header-search/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
@@ -738,6 +737,7 @@ export interface FileRoutesById {
   '/api/auth/france-connect/logout': typeof ApiAuthFranceConnectLogoutRoute
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
+  '/_header-minimal/formulaire/nps/': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
 export interface FileRouteTypes {
@@ -790,7 +790,6 @@ export interface FileRouteTypes {
     | '/lp/$slug'
     | '/lp/agent-public'
     | '/formulaire/merci'
-    | '/formulaire/nps'
     | '/a-propos/stats'
     | '/donnees/api'
     | '/rechercher/carte'
@@ -811,6 +810,7 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout'
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
+    | '/formulaire/nps/'
     | '/api/download/espace-agent/documents/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -861,7 +861,6 @@ export interface FileRouteTypes {
     | '/lp/$slug'
     | '/lp/agent-public'
     | '/formulaire/merci'
-    | '/formulaire/nps'
     | '/a-propos/stats'
     | '/donnees/api'
     | '/rechercher/carte'
@@ -882,6 +881,7 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout'
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
+    | '/formulaire/nps'
     | '/api/download/espace-agent/documents/$slug'
   id:
     | '__root__'
@@ -940,7 +940,6 @@ export interface FileRouteTypes {
     | '/_header-home/lp/$slug'
     | '/_header-lp-agent/lp/agent-public'
     | '/_header-minimal/formulaire/merci'
-    | '/_header-minimal/formulaire/nps'
     | '/_header-public/a-propos/stats'
     | '/_header-public/donnees/api'
     | '/_header-search/rechercher/carte'
@@ -961,6 +960,7 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout'
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
+    | '/_header-minimal/formulaire/nps/'
     | '/api/download/espace-agent/documents/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -1211,13 +1211,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderPublicAProposStatsRouteImport
       parentRoute: typeof HeaderPublicRouteRoute
     }
-    '/_header-minimal/formulaire/nps': {
-      id: '/_header-minimal/formulaire/nps'
-      path: '/formulaire/nps'
-      fullPath: '/formulaire/nps'
-      preLoaderRoute: typeof HeaderMinimalFormulaireNpsRouteImport
-      parentRoute: typeof HeaderMinimalRouteRoute
-    }
     '/_header-minimal/formulaire/merci': {
       id: '/_header-minimal/formulaire/merci'
       path: '/formulaire/merci'
@@ -1420,6 +1413,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/compte/accueil'
       preLoaderRoute: typeof HeaderCompteCompteAccueilRouteImport
       parentRoute: typeof HeaderCompteRouteRoute
+    }
+    '/_header-minimal/formulaire/nps/': {
+      id: '/_header-minimal/formulaire/nps/'
+      path: '/formulaire/nps'
+      fullPath: '/formulaire/nps/'
+      preLoaderRoute: typeof HeaderMinimalFormulaireNpsIndexRouteImport
+      parentRoute: typeof HeaderMinimalRouteRoute
     }
     '/api/share/button/$slug': {
       id: '/api/share/button/$slug'
@@ -1738,12 +1738,12 @@ const HeaderLpAgentRouteRouteWithChildren =
 
 interface HeaderMinimalRouteRouteChildren {
   HeaderMinimalFormulaireMerciRoute: typeof HeaderMinimalFormulaireMerciRoute
-  HeaderMinimalFormulaireNpsRoute: typeof HeaderMinimalFormulaireNpsRoute
+  HeaderMinimalFormulaireNpsIndexRoute: typeof HeaderMinimalFormulaireNpsIndexRoute
 }
 
 const HeaderMinimalRouteRouteChildren: HeaderMinimalRouteRouteChildren = {
   HeaderMinimalFormulaireMerciRoute: HeaderMinimalFormulaireMerciRoute,
-  HeaderMinimalFormulaireNpsRoute: HeaderMinimalFormulaireNpsRoute,
+  HeaderMinimalFormulaireNpsIndexRoute: HeaderMinimalFormulaireNpsIndexRoute,
 }
 
 const HeaderMinimalRouteRouteWithChildren =
