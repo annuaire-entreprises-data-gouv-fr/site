@@ -4,17 +4,17 @@ import NoSiegeSocialAlert from "#/components-ui/alerts-with-explanations/no-sieg
 import NonDiffusibleAlert from "#/components-ui/alerts-with-explanations/non-diffusible";
 import NotInSireneAlert from "#/components-ui/alerts-with-explanations/not-in-sirene-alert";
 import { NotLuhnValidAlert } from "#/components-ui/alerts-with-explanations/not-luhn-valid";
-import type { ISession } from "#/models/authentication/user/session";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import type { ISTATUTDIFFUSION } from "#/models/core/diffusion";
 import type { IUniteLegale } from "#/models/core/types";
 
 export default function TitleAlerts({
   uniteLegale,
-  session,
+  user,
   statutDiffusion,
 }: {
   uniteLegale: IUniteLegale;
-  session: ISession | null;
+  user: IAgentInfo | null;
   statutDiffusion: ISTATUTDIFFUSION;
 }) {
   return (
@@ -23,8 +23,8 @@ export default function TitleAlerts({
       <NoSiegeSocialAlert uniteLegale={uniteLegale} />
       <MultipleSirenAlert uniteLegale={uniteLegale} />
       <NotInSireneAlert uniteLegale={uniteLegale} />
-      <ActiveButRadieeRCSAlert session={session} uniteLegale={uniteLegale} />
-      <NonDiffusibleAlert session={session} statutDiffusion={statutDiffusion} />
+      <ActiveButRadieeRCSAlert uniteLegale={uniteLegale} user={user} />
+      <NonDiffusibleAlert statutDiffusion={statutDiffusion} user={user} />
     </>
   );
 }

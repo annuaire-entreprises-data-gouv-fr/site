@@ -4,23 +4,23 @@ import { TwoColumnTable } from "#/components/table/simple";
 import ButtonLink from "#/components-ui/button";
 import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import type { IUniteLegale } from "#/models/core/types";
 import { getEspaceAgentQualibat } from "#/server-functions/agent/data-fetching";
 import { formatDateLong } from "#/utils/helpers";
 
 export const QualibatSection: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+  user: IAgentInfo | null;
+}> = ({ uniteLegale, user }) => {
   const input = useMemo(
     () => ({ siret: uniteLegale.siege.siret }),
     [uniteLegale.siege.siret]
   );
   const qualibat = useServerActionData(
     getEspaceAgentQualibat,
-    session,
+    user,
     input,
     ApplicationRights.protectedCertificats
   );

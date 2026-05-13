@@ -1,19 +1,19 @@
 import ProtectedSectionWithUseCase from "#/components/section-with-use-case";
 import { EAdministration } from "#/models/administrations/EAdministration";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import type { IEtablissement } from "#/models/core/types";
 import { UseCase } from "#/models/use-cases";
 import ProtectedEtablissementEffectifsMensuelsSection from "./protected-effectifs-mensuels-section";
 
 interface IProps {
   etablissement: IEtablissement;
-  session: ISession | null;
+  user: IAgentInfo | null;
 }
 
 const EtablissementEffectifsMensuelsSection = ({
   etablissement,
-  session,
+  user,
 }: IProps) => (
   <ProtectedSectionWithUseCase
     allowedUseCases={[
@@ -25,9 +25,9 @@ const EtablissementEffectifsMensuelsSection = ({
     etablissement={etablissement}
     id="effectifs-mensuels"
     requiredRight={ApplicationRights.effectifs}
-    session={session}
     sources={[EAdministration.DGFIP]}
     title="Effectifs mensuels"
+    user={user}
     WrappedSection={ProtectedEtablissementEffectifsMensuelsSection}
   />
 );

@@ -3,8 +3,8 @@ import NonRenseigne from "#/components/non-renseigne";
 import { ProtectedInlineData } from "#/components/protected-inline-data";
 import { Loader } from "#/components-ui/loader";
 import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import { hasAnyError, isDataLoading } from "#/models/data-fetching";
 import {
   getEspaceAgentOpqibi,
@@ -20,15 +20,15 @@ import { LabelWithLinkToSection } from "./label-with-link-to-section";
 
 export const ProtectedCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+  user: IAgentInfo | null;
+}> = ({ uniteLegale, user }) => {
   const hasOtherCertificates = checkHasLabelsAndCertificates(uniteLegale);
 
   const protectedCertificates = [
     {
       data: useServerActionData(
         getEspaceAgentOpqibi,
-        session,
+        user,
         { siren: uniteLegale.siren },
         ApplicationRights.protectedCertificats
       ),
@@ -44,7 +44,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
     {
       data: useServerActionData(
         getEspaceAgentQualibat,
-        session,
+        user,
         { siret: uniteLegale.siege.siret },
         ApplicationRights.protectedCertificats
       ),
@@ -60,7 +60,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
     {
       data: useServerActionData(
         getEspaceAgentQualifelec,
-        session,
+        user,
         { siret: uniteLegale.siege.siret },
         ApplicationRights.protectedCertificats
       ),

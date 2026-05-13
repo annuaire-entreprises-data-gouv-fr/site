@@ -5,7 +5,7 @@ import {
   isAPINotResponding,
 } from "#/models/api-not-responding";
 import type { IDataAssociation } from "#/models/association/types";
-import type { ISession } from "#/models/authentication/user/session";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import { getPersonnalDataAssociation } from "#/models/core/diffusion";
 import type { IAssociation } from "#/models/core/types";
 import { Warning } from "../alerts";
@@ -13,8 +13,8 @@ import { Warning } from "../alerts";
 const AssociationAdressAlert: React.FC<{
   uniteLegale: IAssociation;
   association: IDataAssociation | IAPINotRespondingError | null;
-  session: ISession | null;
-}> = ({ uniteLegale, association, session }) => {
+  user: IAgentInfo | null;
+}> = ({ uniteLegale, association, user }) => {
   if (!association || isAPINotResponding(association)) {
     return null;
   }
@@ -35,7 +35,7 @@ const AssociationAdressAlert: React.FC<{
               {getPersonnalDataAssociation(
                 associationAdresse,
                 uniteLegale,
-                session
+                user
               ) || <NonRenseigne />}
             </li>
             <li>

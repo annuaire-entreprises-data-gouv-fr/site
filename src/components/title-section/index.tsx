@@ -8,7 +8,7 @@ import { UniteLegaleEtablissementCountDescription } from "#/components/unite-leg
 import SocialMedia from "#/components-ui/social-media";
 import IsActiveTag from "#/components-ui/tag/is-active-tag";
 import { NonDiffusibleTag } from "#/components-ui/tag/non-diffusible-tag";
-import type { ISession } from "#/models/authentication/user/session";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import { estNonDiffusibleStrict } from "#/models/core/diffusion";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatIntFr } from "#/utils/helpers";
@@ -19,21 +19,21 @@ import { FICHE, Tabs } from "./tabs";
 
 interface IProps {
   ficheType?: FICHE;
-  session: ISession | null;
   uniteLegale: IUniteLegale;
+  user: IAgentInfo | null;
 }
 
 const Title: React.FC<IProps> = ({
   ficheType = FICHE.INFORMATION,
   uniteLegale,
-  session,
+  user,
 }) => (
   <div className={styles.headerSection}>
     <div>
       <TitleAlerts
-        session={session}
         statutDiffusion={uniteLegale.statutDiffusion}
         uniteLegale={uniteLegale}
+        user={user}
       />
       <SaveFavourite
         name={uniteLegale.nomComplet}
@@ -85,11 +85,7 @@ const Title: React.FC<IProps> = ({
       <UniteLegaleDescription uniteLegale={uniteLegale} />
     )}
 
-    <Tabs
-      currentFicheType={ficheType}
-      session={session}
-      uniteLegale={uniteLegale}
-    />
+    <Tabs currentFicheType={ficheType} uniteLegale={uniteLegale} user={user} />
   </div>
 );
 

@@ -5,11 +5,11 @@ import {
   useServerFn,
 } from "@tanstack/react-start";
 import type { Expand } from "node_modules/@tanstack/react-router/dist/cjs/index.d.cts";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import { IDataFetchingState } from "#/models/data-fetching";
 import type { ServerActionError } from "#/server-functions/middlewares";
 import { convertErrorToFetchingState } from "#/utils/helpers/convert-error";
@@ -24,7 +24,7 @@ import { convertErrorToFetchingState } from "#/utils/helpers/convert-error";
  */
 export function useServerActionData<Input, Data>(
   action: RequiredFetcher<unknown, Input, Data>,
-  session: ISession | null,
+  user: IAgentInfo | null,
   input: Expand<IntersectAllValidatorInputs<unknown, Input>>,
   requiredRight: ApplicationRights = ApplicationRights.opendata
 ): Awaited<Data> | IDataFetchingState {
@@ -33,10 +33,10 @@ export function useServerActionData<Input, Data>(
   const { data, isPending, isLoading, isError, error } = useQuery({
     queryKey: ["server-function", action.url, input],
     queryFn: () => execute({ data: input }),
-    enabled: hasRights(session, requiredRight),
+    enabled: hasRights({ user }, requiredRight),
   });
 
-  if (!hasRights(session, requiredRight)) {
+  if (!hasRights({ user }, requiredRight)) {
     return IDataFetchingState.UNAUTHORIZED;
   }
 

@@ -4,18 +4,18 @@ import { FullTable } from "#/components/table/full";
 import ButtonLink from "#/components-ui/button";
 import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import type { IUniteLegale } from "#/models/core/types";
 import { getEspaceAgentQualifelec } from "#/server-functions/agent/data-fetching";
 import { formatDate, formatDateLong } from "#/utils/helpers";
 
 export function QualifelecSection({
   uniteLegale,
-  session,
+  user,
 }: {
   uniteLegale: IUniteLegale;
-  session: ISession | null;
+  user: IAgentInfo | null;
 }) {
   const input = useMemo(
     () => ({ siret: uniteLegale.siege.siret }),
@@ -23,7 +23,7 @@ export function QualifelecSection({
   );
   const qualifelec = useServerActionData(
     getEspaceAgentQualifelec,
-    session,
+    user,
     input,
     ApplicationRights.protectedCertificats
   );

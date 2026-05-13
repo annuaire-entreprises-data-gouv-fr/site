@@ -1,10 +1,10 @@
 import { INSEE } from "#/components/administrations";
 import { Link } from "#/components/Link";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import { estDiffusible, ISTATUTDIFFUSION } from "#/models/core/diffusion";
 import { Info, ProtectedData } from "../alerts";
 
@@ -42,15 +42,15 @@ const ProtectedSirenAlert = () => (
 
 export default function NonDiffusibleAlert({
   statutDiffusion,
-  session,
+  user,
 }: {
   statutDiffusion: ISTATUTDIFFUSION;
-  session: ISession | null;
+  user: IAgentInfo | null;
 }) {
   if (estDiffusible({ statutDiffusion })) {
     return null;
   }
-  if (hasRights(session, ApplicationRights.nonDiffusible)) {
+  if (hasRights({ user }, ApplicationRights.nonDiffusible)) {
     if (statutDiffusion === ISTATUTDIFFUSION.NON_DIFF_STRICT) {
       return (
         <ProtectedData full>

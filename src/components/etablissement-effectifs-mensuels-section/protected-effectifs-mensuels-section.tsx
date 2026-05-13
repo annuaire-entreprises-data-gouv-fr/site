@@ -3,7 +3,7 @@ import type { TNatureEffectif } from "#/clients/api-entreprise/effectifs/types";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
-import type { ISession } from "#/models/authentication/user/session";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IEtablissement } from "#/models/core/types";
 import type { UseCase } from "#/models/use-cases";
 import { getEspaceAgentEffectifsMensuelsProtected } from "#/server-functions/agent/data-fetching";
@@ -13,10 +13,10 @@ interface IProps {
   etablissement: IEtablissement;
   id: string;
   isProtected: boolean;
-  session: ISession | null;
   sources: EAdministration[];
   title: string;
   useCase: UseCase;
+  user: IAgentInfo | null;
 }
 
 const natureEffectifOptions: Record<TNatureEffectif, string> = {
@@ -35,7 +35,7 @@ const natureEffectifEntries: [TNatureEffectif, string][] = Object.entries(
 
 const ProtectedEtablissementEffectifsMensuelsSection = ({
   etablissement,
-  session,
+  user,
   useCase,
   title,
   id,
@@ -72,7 +72,7 @@ const ProtectedEtablissementEffectifsMensuelsSection = ({
   );
   const effectifsMensuelsProtected = useServerActionData(
     getEspaceAgentEffectifsMensuelsProtected,
-    session,
+    user,
     input
   );
 
