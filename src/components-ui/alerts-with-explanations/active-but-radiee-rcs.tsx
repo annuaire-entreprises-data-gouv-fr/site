@@ -1,8 +1,8 @@
+import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import { estActif } from "#/models/core/etat-administratif";
 import type { IUniteLegale } from "#/models/core/types";
 import { isEntrepreneurIndividuel } from "#/models/core/types";
@@ -10,10 +10,10 @@ import { Warning } from "../alerts";
 
 const ActiveButRadieeRCSAlert: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+  user: IAgentInfo | null;
+}> = ({ uniteLegale, user }) => {
   if (
-    !hasRights(session, ApplicationRights.isAgent) ||
+    !hasRights({ user }, ApplicationRights.isAgent) ||
     !uniteLegale.bodacc?.radiation?.estRadie ||
     !estActif(uniteLegale) ||
     uniteLegale.immatriculation?.dateRadiation

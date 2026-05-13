@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
   hasRights,
@@ -24,7 +25,7 @@ interface IUniteLegaleOrEtablissement {
   statutDiffusion: ISTATUTDIFFUSION;
 }
 
-const canSeeNonDiffusible = (session: ISession | null) =>
+const canSeeNonDiffusible = (session: Partial<ISession> | null) =>
   hasRights(session, ApplicationRights.nonDiffusible);
 
 /**
@@ -211,9 +212,9 @@ const formatAdresseForDiffusion = (
 export const getPersonnalDataAssociation = (
   adresse: string | ReactElement,
   uniteLegale: IUniteLegale,
-  session: ISession | null
+  user: IAgentInfo | null
 ) => {
-  const shouldDiff = canSeeNonDiffusible(session)
+  const shouldDiff = canSeeNonDiffusible({ user })
     ? true
     : estDiffusible(uniteLegale);
 

@@ -3,11 +3,11 @@ import {
   checkHasQuality,
 } from "#/components/badges-section/labels-and-certificates";
 import { PrintNever } from "#/components-ui/print-visibility";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import {
   hasAidesFinancieres,
   type IUniteLegale,
@@ -34,7 +34,7 @@ export enum FICHE {
 
 const getUniteLegaleTabs = (
   uniteLegale: IUniteLegale,
-  session: ISession | null
+  user: IAgentInfo | null
 ) => {
   const shouldDisplayFinances =
     // hide for public services
@@ -62,7 +62,7 @@ const getUniteLegaleTabs = (
         ? { label: "Élus & organigramme", width: "120px" }
         : isServicePublic(uniteLegale)
           ? { label: "Responsables & organigramme", width: "130px" }
-          : hasRights(session, ApplicationRights.liensCapitalistiques)
+          : hasRights({ user }, ApplicationRights.liensCapitalistiques)
             ? { label: "Dirigeants & actionnariat", width: "120px" }
             : { label: "Dirigeants" }),
     },
@@ -101,7 +101,7 @@ const getUniteLegaleTabs = (
       noFollow: false,
       shouldDisplay:
         checkHasLabelsAndCertificates(uniteLegale) ||
-        hasRights(session, ApplicationRights.protectedCertificats),
+        hasRights({ user }, ApplicationRights.protectedCertificats),
       width: checkHasQuality(uniteLegale) ? "200px" : "110px",
     },
     {
@@ -125,9 +125,9 @@ const getUniteLegaleTabs = (
 export const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ currentFicheType, uniteLegale, session }) => {
-  const tabs = getUniteLegaleTabs(uniteLegale, session);
+  user: IAgentInfo | null;
+}> = ({ currentFicheType, uniteLegale, user }) => {
+  const tabs = getUniteLegaleTabs(uniteLegale, user);
   return (
     <PrintNever>
       <div className={styles.titleTabs}>
@@ -159,9 +159,9 @@ export const Tabs: React.FC<{
 
 export const TabsForEtablissement: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
-  const tabs = getUniteLegaleTabs(uniteLegale, session);
+  user: IAgentInfo | null;
+}> = ({ uniteLegale, user }) => {
+  const tabs = getUniteLegaleTabs(uniteLegale, user);
   return (
     <ul className={styles.titleTabsEtablissement}>
       {tabs

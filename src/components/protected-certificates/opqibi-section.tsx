@@ -4,8 +4,8 @@ import { TwoColumnTable } from "#/components/table/simple";
 import FAQLink from "#/components-ui/faq-link";
 import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import type { IUniteLegale } from "#/models/core/types";
 import type { IOpqibi } from "#/models/espace-agent/certificats/opqibi";
 import { getEspaceAgentOpqibi } from "#/server-functions/agent/data-fetching";
@@ -13,15 +13,15 @@ import { formatDateLong } from "#/utils/helpers";
 
 export const OpqibiSection: React.FC<{
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
+  user: IAgentInfo | null;
+}> = ({ uniteLegale, user }) => {
   const input = useMemo(
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
   const opqibi = useServerActionData(
     getEspaceAgentOpqibi,
-    session,
+    user,
     input,
     ApplicationRights.protectedCertificats
   );

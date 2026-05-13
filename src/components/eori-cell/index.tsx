@@ -4,7 +4,7 @@ import InformationTooltip from "#/components-ui/information-tooltip";
 import { Loader } from "#/components-ui/loader";
 import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
 import { isAPINotResponding } from "#/models/api-not-responding";
-import type { ISession } from "#/models/authentication/user/session";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   hasFetchError,
   isDataLoading,
@@ -14,11 +14,11 @@ import { validateEORI } from "#/server-functions/public/data-fetching";
 import { formatSiret, type Siret } from "#/utils/helpers";
 
 interface IProps {
-  session: ISession | null;
   siret: Siret;
+  user: IAgentInfo | null;
 }
-export default function EORICell({ siret, session }: IProps) {
-  const eoriValidation = useServerActionData(validateEORI, session, { siret });
+export default function EORICell({ siret, user }: IProps) {
+  const eoriValidation = useServerActionData(validateEORI, user, { siret });
 
   if (isDataLoading(eoriValidation)) {
     return (

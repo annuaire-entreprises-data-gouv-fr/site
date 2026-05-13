@@ -11,7 +11,7 @@ import SocialMedia from "#/components-ui/social-media";
 import { Tag } from "#/components-ui/tag";
 import IsActiveTag from "#/components-ui/tag/is-active-tag";
 import { NonDiffusibleTag } from "#/components-ui/tag/non-diffusible-tag";
-import type { ISession } from "#/models/authentication/user/session";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import { estDiffusible, estNonDiffusibleStrict } from "#/models/core/diffusion";
 import type { IEtablissement, IUniteLegale } from "#/models/core/types";
 import { formatIntFr, formatSiret } from "#/utils/helpers";
@@ -24,8 +24,8 @@ import styles from "./styles.module.css";
 const TitleEtablissementWithDenomination: React.FC<{
   uniteLegale: IUniteLegale;
   etablissement: IEtablissement;
-  session: ISession | null;
-}> = ({ uniteLegale, etablissement, session }) => (
+  user: IAgentInfo | null;
+}> = ({ uniteLegale, etablissement, user }) => (
   <div className={styles.etablissementTitle}>
     {etablissement.oldSiret &&
       etablissement.oldSiret !== etablissement.siret && (
@@ -42,9 +42,9 @@ const TitleEtablissementWithDenomination: React.FC<{
       )}
 
     <TitleAlerts
-      session={session}
       statutDiffusion={etablissement.statutDiffusion}
       uniteLegale={uniteLegale}
+      user={user}
     />
 
     <h1>
@@ -129,10 +129,7 @@ const TitleEtablissementWithDenomination: React.FC<{
               <PrintNever>
                 <SimpleSeparator />
 
-                <TabsForEtablissement
-                  session={session}
-                  uniteLegale={uniteLegale}
-                />
+                <TabsForEtablissement uniteLegale={uniteLegale} user={user} />
               </PrintNever>
             </div>
           </div>

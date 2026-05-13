@@ -7,7 +7,7 @@ import BreakPageForPrint from "#/components-ui/print-break-page";
 import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IDataAssociation } from "#/models/association/types";
-import type { ISession } from "#/models/authentication/user/session";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import { getPersonnalDataAssociation } from "#/models/core/diffusion";
 import type { IAssociation, IUniteLegale } from "#/models/core/types";
 import { getAssociation } from "#/server-functions/public/data-fetching";
@@ -18,7 +18,7 @@ const getTableData = (
   idAssociation: string | IdRna,
   association: IDataAssociation,
   uniteLegale: IUniteLegale,
-  session: ISession | null
+  user: IAgentInfo | null
 ) => {
   const {
     nomComplet = "",
@@ -93,11 +93,11 @@ const getTableData = (
     ["", <br />],
     [
       "Adresse du siège",
-      getPersonnalDataAssociation(adresseSiege, uniteLegale, session),
+      getPersonnalDataAssociation(adresseSiege, uniteLegale, user),
     ],
     [
       "Adresse de gestion",
-      getPersonnalDataAssociation(adresseGestion, uniteLegale, session),
+      getPersonnalDataAssociation(adresseGestion, uniteLegale, user),
     ],
     [
       "Site web",
@@ -114,14 +114,14 @@ const getTableData = (
 
 const AssociationSection = ({
   uniteLegale,
-  session,
+  user,
 }: {
   uniteLegale: IAssociation;
-  session: ISession | null;
+  user: IAgentInfo | null;
 }) => {
   const { idAssociation = "" } = uniteLegale.association;
 
-  const association = useServerActionData(getAssociation, session, {
+  const association = useServerActionData(getAssociation, user, {
     slug: uniteLegale.association.idAssociation,
   });
 
@@ -139,8 +139,8 @@ const AssociationSection = ({
             <>
               <AssociationAdressAlert
                 association={association}
-                session={session}
                 uniteLegale={uniteLegale}
+                user={user}
               />
               <p>
                 Cette structure est inscrite au{" "}
@@ -158,7 +158,7 @@ const AssociationSection = ({
                   idAssociation,
                   association,
                   uniteLegale,
-                  session
+                  user
                 )}
               />
             </>

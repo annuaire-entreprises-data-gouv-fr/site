@@ -3,21 +3,21 @@ import { Link } from "#/components/Link";
 import { Section } from "#/components/section";
 import { AskUseCase } from "#/components/section-with-use-case/ask-use-case";
 import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   type ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import type { IEtablissement, IUniteLegale } from "#/models/core/types";
 import type { UseCase } from "#/models/use-cases";
 
 interface WrappedSectionBaseProps {
   id: string;
   isProtected: boolean;
-  session: ISession | null;
   sources: EAdministration[];
   title: string;
   useCase: UseCase;
+  user: IAgentInfo | null;
 }
 
 interface WrappedSectionUniteLegaleProps extends WrappedSectionBaseProps {
@@ -29,10 +29,7 @@ interface WrappedSectionEtablissementProps extends WrappedSectionBaseProps {
 }
 
 interface ProtectedSectionWithUseCaseBaseProps
-  extends Pick<
-    WrappedSectionBaseProps,
-    "id" | "session" | "sources" | "title"
-  > {
+  extends Pick<WrappedSectionBaseProps, "id" | "user" | "sources" | "title"> {
   allowedUseCases: UseCase[];
   noRightContent?: React.JSX.Element;
   requiredRight: ApplicationRights;
@@ -71,7 +68,7 @@ const ProtectedSectionWithUseCase: React.FC<
   ProtectedSectionWithUseCaseProps
 > = (props: ProtectedSectionWithUseCaseProps) => {
   const {
-    session,
+    user,
     title,
     id,
     sources,
@@ -82,7 +79,7 @@ const ProtectedSectionWithUseCase: React.FC<
   } = props;
   const [useCase, setUseCase] = useState<UseCase>();
 
-  if (!hasRights(session, requiredRight)) {
+  if (!hasRights({ user }, requiredRight)) {
     return noRightContent ? (
       <Section id={id} title={title}>
         {noRightContent}
@@ -118,10 +115,10 @@ const ProtectedSectionWithUseCase: React.FC<
         etablissement={props.etablissement}
         id={id}
         isProtected
-        session={session}
         sources={sources}
         title={title}
         useCase={useCase}
+        user={user}
       />
     );
   }
@@ -132,11 +129,11 @@ const ProtectedSectionWithUseCase: React.FC<
     <WrappedSection
       id={id}
       isProtected
-      session={session}
       sources={sources}
       title={title}
       uniteLegale={props.uniteLegale}
       useCase={useCase}
+      user={user}
     />
   );
 };
