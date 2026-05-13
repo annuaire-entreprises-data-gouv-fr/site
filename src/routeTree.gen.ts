@@ -32,9 +32,9 @@ import { Route as HeaderDefaultHistoriqueDesModificationsRouteImport } from './r
 import { Route as HeaderDefaultFaqRouteImport } from './routes/_header-default/faq'
 import { Route as HeaderDefaultExportSireneRouteImport } from './routes/_header-default/export-sirene'
 import { Route as HeaderDefaultDefinitionsRouteImport } from './routes/_header-default/definitions'
-import { Route as HeaderDefaultAdministrationRouteImport } from './routes/_header-default/administration'
 import { Route as HeaderDefaultAccessibiliteRouteImport } from './routes/_header-default/accessibilite'
 import { Route as HeaderSearchRechercherIndexRouteImport } from './routes/_header-search/rechercher/index'
+import { Route as HeaderDefaultAdministrationIndexRouteImport } from './routes/_header-default/administration.index'
 import { Route as ApiPingSlugRouteImport } from './routes/api/ping/$slug'
 import { Route as ApiFeedbackNpsRouteImport } from './routes/api/feedback/nps'
 import { Route as HeaderSearchRechercherCarteRouteImport } from './routes/_header-search/rechercher/carte'
@@ -199,12 +199,6 @@ const HeaderDefaultDefinitionsRoute =
     path: '/definitions',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
-const HeaderDefaultAdministrationRoute =
-  HeaderDefaultAdministrationRouteImport.update({
-    id: '/administration',
-    path: '/administration',
-    getParentRoute: () => HeaderDefaultRouteRoute,
-  } as any)
 const HeaderDefaultAccessibiliteRoute =
   HeaderDefaultAccessibiliteRouteImport.update({
     id: '/accessibilite',
@@ -216,6 +210,12 @@ const HeaderSearchRechercherIndexRoute =
     id: '/rechercher/',
     path: '/rechercher/',
     getParentRoute: () => HeaderSearchRouteRoute,
+  } as any)
+const HeaderDefaultAdministrationIndexRoute =
+  HeaderDefaultAdministrationIndexRouteImport.update({
+    id: '/administration/',
+    path: '/administration/',
+    getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
 const ApiPingSlugRoute = ApiPingSlugRouteImport.update({
   id: '/api/ping/$slug',
@@ -365,9 +365,9 @@ const HeaderDefaultAnnoncesSlugRoute =
   } as any)
 const HeaderDefaultAdministrationSlugRoute =
   HeaderDefaultAdministrationSlugRouteImport.update({
-    id: '/$slug',
-    path: '/$slug',
-    getParentRoute: () => HeaderDefaultAdministrationRoute,
+    id: '/administration/$slug',
+    path: '/administration/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
 const HeaderDefaultAProposDonneesExtraitKbisRoute =
   HeaderDefaultAProposDonneesExtraitKbisRouteImport.update({
@@ -522,7 +522,6 @@ const ApiDownloadEspaceAgentDocumentsSlugRoute =
 export interface FileRoutesByFullPath {
   '/': typeof HeaderHomeIndexRoute
   '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
-  '/administration': typeof HeaderDefaultAdministrationRouteWithChildren
   '/definitions': typeof HeaderDefaultDefinitionsRouteWithChildren
   '/export-sirene': typeof HeaderDefaultExportSireneRoute
   '/faq': typeof HeaderDefaultFaqRouteWithChildren
@@ -570,6 +569,7 @@ export interface FileRoutesByFullPath {
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
+  '/administration/': typeof HeaderDefaultAdministrationIndexRoute
   '/rechercher/': typeof HeaderSearchRechercherIndexRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
@@ -593,7 +593,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof HeaderHomeIndexRoute
   '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
-  '/administration': typeof HeaderDefaultAdministrationRouteWithChildren
   '/definitions': typeof HeaderDefaultDefinitionsRouteWithChildren
   '/export-sirene': typeof HeaderDefaultExportSireneRoute
   '/faq': typeof HeaderDefaultFaqRouteWithChildren
@@ -641,6 +640,7 @@ export interface FileRoutesByTo {
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
+  '/administration': typeof HeaderDefaultAdministrationIndexRoute
   '/rechercher': typeof HeaderSearchRechercherIndexRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
@@ -672,7 +672,6 @@ export interface FileRoutesById {
   '/_header-public': typeof HeaderPublicRouteRouteWithChildren
   '/_header-search': typeof HeaderSearchRouteRouteWithChildren
   '/_header-default/accessibilite': typeof HeaderDefaultAccessibiliteRoute
-  '/_header-default/administration': typeof HeaderDefaultAdministrationRouteWithChildren
   '/_header-default/definitions': typeof HeaderDefaultDefinitionsRouteWithChildren
   '/_header-default/export-sirene': typeof HeaderDefaultExportSireneRoute
   '/_header-default/faq': typeof HeaderDefaultFaqRouteWithChildren
@@ -721,6 +720,7 @@ export interface FileRoutesById {
   '/_header-search/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
+  '/_header-default/administration/': typeof HeaderDefaultAdministrationIndexRoute
   '/_header-search/rechercher/': typeof HeaderSearchRechercherIndexRoute
   '/_header-connexion/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/_header-connexion/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
@@ -746,7 +746,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/accessibilite'
-    | '/administration'
     | '/definitions'
     | '/export-sirene'
     | '/faq'
@@ -794,6 +793,7 @@ export interface FileRouteTypes {
     | '/rechercher/carte'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
+    | '/administration/'
     | '/rechercher/'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
@@ -817,7 +817,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/accessibilite'
-    | '/administration'
     | '/definitions'
     | '/export-sirene'
     | '/faq'
@@ -865,6 +864,7 @@ export interface FileRouteTypes {
     | '/rechercher/carte'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
+    | '/administration'
     | '/rechercher'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
@@ -895,7 +895,6 @@ export interface FileRouteTypes {
     | '/_header-public'
     | '/_header-search'
     | '/_header-default/accessibilite'
-    | '/_header-default/administration'
     | '/_header-default/definitions'
     | '/_header-default/export-sirene'
     | '/_header-default/faq'
@@ -944,6 +943,7 @@ export interface FileRouteTypes {
     | '/_header-search/rechercher/carte'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
+    | '/_header-default/administration/'
     | '/_header-search/rechercher/'
     | '/_header-connexion/connexion/habilitation/administration-inconnue'
     | '/_header-connexion/connexion/habilitation/prestataires'
@@ -1156,13 +1156,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultDefinitionsRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
-    '/_header-default/administration': {
-      id: '/_header-default/administration'
-      path: '/administration'
-      fullPath: '/administration'
-      preLoaderRoute: typeof HeaderDefaultAdministrationRouteImport
-      parentRoute: typeof HeaderDefaultRouteRoute
-    }
     '/_header-default/accessibilite': {
       id: '/_header-default/accessibilite'
       path: '/accessibilite'
@@ -1176,6 +1169,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/rechercher/'
       preLoaderRoute: typeof HeaderSearchRechercherIndexRouteImport
       parentRoute: typeof HeaderSearchRouteRoute
+    }
+    '/_header-default/administration/': {
+      id: '/_header-default/administration/'
+      path: '/administration'
+      fullPath: '/administration/'
+      preLoaderRoute: typeof HeaderDefaultAdministrationIndexRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/api/ping/$slug': {
       id: '/api/ping/$slug'
@@ -1354,10 +1354,10 @@ declare module '@tanstack/react-router' {
     }
     '/_header-default/administration/$slug': {
       id: '/_header-default/administration/$slug'
-      path: '/$slug'
+      path: '/administration/$slug'
       fullPath: '/administration/$slug'
       preLoaderRoute: typeof HeaderDefaultAdministrationSlugRouteImport
-      parentRoute: typeof HeaderDefaultAdministrationRoute
+      parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/_header-default/a-propos/donnees-extrait-kbis': {
       id: '/_header-default/a-propos/donnees-extrait-kbis'
@@ -1576,20 +1576,6 @@ const HeaderConnexionRouteRouteChildren: HeaderConnexionRouteRouteChildren = {
 const HeaderConnexionRouteRouteWithChildren =
   HeaderConnexionRouteRoute._addFileChildren(HeaderConnexionRouteRouteChildren)
 
-interface HeaderDefaultAdministrationRouteChildren {
-  HeaderDefaultAdministrationSlugRoute: typeof HeaderDefaultAdministrationSlugRoute
-}
-
-const HeaderDefaultAdministrationRouteChildren: HeaderDefaultAdministrationRouteChildren =
-  {
-    HeaderDefaultAdministrationSlugRoute: HeaderDefaultAdministrationSlugRoute,
-  }
-
-const HeaderDefaultAdministrationRouteWithChildren =
-  HeaderDefaultAdministrationRoute._addFileChildren(
-    HeaderDefaultAdministrationRouteChildren,
-  )
-
 interface HeaderDefaultDefinitionsRouteChildren {
   HeaderDefaultDefinitionsSlugRoute: typeof HeaderDefaultDefinitionsSlugRoute
 }
@@ -1635,7 +1621,6 @@ const HeaderDefaultFaqRouteWithChildren =
 
 interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultAccessibiliteRoute: typeof HeaderDefaultAccessibiliteRoute
-  HeaderDefaultAdministrationRoute: typeof HeaderDefaultAdministrationRouteWithChildren
   HeaderDefaultDefinitionsRoute: typeof HeaderDefaultDefinitionsRouteWithChildren
   HeaderDefaultExportSireneRoute: typeof HeaderDefaultExportSireneRoute
   HeaderDefaultFaqRoute: typeof HeaderDefaultFaqRouteWithChildren
@@ -1648,6 +1633,7 @@ interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultAProposBudgetRoute: typeof HeaderDefaultAProposBudgetRoute
   HeaderDefaultAProposCommentCaMarcheRoute: typeof HeaderDefaultAProposCommentCaMarcheRoute
   HeaderDefaultAProposDonneesExtraitKbisRoute: typeof HeaderDefaultAProposDonneesExtraitKbisRoute
+  HeaderDefaultAdministrationSlugRoute: typeof HeaderDefaultAdministrationSlugRoute
   HeaderDefaultAnnoncesSlugRoute: typeof HeaderDefaultAnnoncesSlugRoute
   HeaderDefaultDirigeantsSlugRoute: typeof HeaderDefaultDirigeantsSlugRoute
   HeaderDefaultDiversSlugRoute: typeof HeaderDefaultDiversSlugRoute
@@ -1661,14 +1647,13 @@ interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute: typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   HeaderDefaultJustificatifImmatriculationPdfSlugRoute: typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
   HeaderDefaultLabelsCertificatsSlugRoute: typeof HeaderDefaultLabelsCertificatsSlugRoute
+  HeaderDefaultAdministrationIndexRoute: typeof HeaderDefaultAdministrationIndexRoute
   HeaderDefaultErreurIntrouvableSlugRoute: typeof HeaderDefaultErreurIntrouvableSlugRoute
   HeaderDefaultAProposEquipeIndexRoute: typeof HeaderDefaultAProposEquipeIndexRoute
 }
 
 const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
   HeaderDefaultAccessibiliteRoute: HeaderDefaultAccessibiliteRoute,
-  HeaderDefaultAdministrationRoute:
-    HeaderDefaultAdministrationRouteWithChildren,
   HeaderDefaultDefinitionsRoute: HeaderDefaultDefinitionsRouteWithChildren,
   HeaderDefaultExportSireneRoute: HeaderDefaultExportSireneRoute,
   HeaderDefaultFaqRoute: HeaderDefaultFaqRouteWithChildren,
@@ -1685,6 +1670,7 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
     HeaderDefaultAProposCommentCaMarcheRoute,
   HeaderDefaultAProposDonneesExtraitKbisRoute:
     HeaderDefaultAProposDonneesExtraitKbisRoute,
+  HeaderDefaultAdministrationSlugRoute: HeaderDefaultAdministrationSlugRoute,
   HeaderDefaultAnnoncesSlugRoute: HeaderDefaultAnnoncesSlugRoute,
   HeaderDefaultDirigeantsSlugRoute: HeaderDefaultDirigeantsSlugRoute,
   HeaderDefaultDiversSlugRoute: HeaderDefaultDiversSlugRoute,
@@ -1704,6 +1690,7 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
     HeaderDefaultJustificatifImmatriculationPdfSlugRoute,
   HeaderDefaultLabelsCertificatsSlugRoute:
     HeaderDefaultLabelsCertificatsSlugRoute,
+  HeaderDefaultAdministrationIndexRoute: HeaderDefaultAdministrationIndexRoute,
   HeaderDefaultErreurIntrouvableSlugRoute:
     HeaderDefaultErreurIntrouvableSlugRoute,
   HeaderDefaultAProposEquipeIndexRoute: HeaderDefaultAProposEquipeIndexRoute,
