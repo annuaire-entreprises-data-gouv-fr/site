@@ -1,23 +1,23 @@
 import FAQLink from "#/components-ui/faq-link";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { Tag } from "#/components-ui/tag";
+import { useAuth } from "#/contexts/auth.context";
 import type { IAgentsGroup } from "#/models/authentication/group";
 import {
   ApplicationRights,
   getGroupsGrantingRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 
 interface IHabilitationsTableProps {
   groups: IAgentsGroup[];
-  session: ISession;
 }
 
 export const HabilitationsTable = async ({
-  session,
   groups,
 }: IHabilitationsTableProps) => {
+  const { user } = useAuth();
+
   const appRights = Object.values(ApplicationRights)
     .filter(
       (scope) =>
@@ -26,7 +26,7 @@ export const HabilitationsTable = async ({
         scope !== ApplicationRights.administrateur
     )
     .map((scope) => {
-      const hasRight = hasRights(session, scope);
+      const hasRight = hasRights({ user }, scope);
       let habilitation: React.ReactNode;
       if (hasRight) {
         const groupsGrantingRight = getGroupsGrantingRights(groups, scope);
