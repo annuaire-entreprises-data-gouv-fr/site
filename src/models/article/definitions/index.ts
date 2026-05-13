@@ -5,7 +5,7 @@ export type IDefinition = {
   administrations: string[];
 } & IArticle;
 
-const definitionModules = import.meta.glob("../../data/definitions/*.json", {
+const definitionModules = import.meta.glob("../../../data/definitions/*.json", {
   eager: true,
   import: "default",
 }) as Record<string, IDefinition>;
