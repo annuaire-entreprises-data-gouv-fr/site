@@ -1,8 +1,9 @@
 import { createContext, type ReactNode, useContext, useMemo } from "react";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import type { ISession } from "#/models/authentication/user/session";
 
 interface AuthContextType {
-  user: ISession["user"] | null;
+  user: IAgentInfo | null;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

@@ -1,13 +1,13 @@
 import ButtonLink from "#/components-ui/button";
 import FullWidthContainer from "#/components-ui/container";
 import { Icon } from "#/components-ui/icon/wrapper";
+import { useAuth } from "#/contexts/auth.context";
 import constants from "#/models/constants";
-import getSession from "#/utils/server-side-helper/get-session";
 import AgentNavigationLink from "./agent-navigation-link";
 import styles from "./styles.module.css";
 
-export default async function AgentNavigation() {
-  const session = await getSession();
+export default function AgentNavigation() {
+  const { user } = useAuth();
 
   const navLinks = [
     { id: "accueil", label: "Mon espace", href: "/compte/accueil" },
@@ -22,7 +22,7 @@ export default async function AgentNavigation() {
     >
       <nav className={styles.navContainer}>
         <div className={`${styles.navContainerContent}`}>
-          {session?.user?.isSuperAgent && (
+          {user?.isSuperAgent && (
             <ul
               aria-label="Navigation espace agent"
               className={`${styles.navTabsList} fr-tabs__list`}

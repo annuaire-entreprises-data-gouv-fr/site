@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { clientRolesGetOrganizationsGroups } from "#/clients/roles-data";
 import {
   addUserToGroup,
+  getAgentGroups,
   removeUserFromGroup,
   updateGroupName,
   updateUserRoleInGroup,
@@ -49,3 +50,9 @@ export const updateUserRoleInGroupAction = createServerFn({ method: "POST" })
 export const getOrganizationsGroupsAction = createServerFn()
   .middleware([agentFnMiddleware])
   .handler(async () => await clientRolesGetOrganizationsGroups());
+
+export const getAgentGroupsFn = createServerFn()
+  .middleware([agentFnMiddleware])
+  .handler(
+    async () => await getAgentGroups({ allowProConnectRedirection: true })
+  );

@@ -25,7 +25,8 @@ const SearchResultsMap: React.FC<{
   ) {
     throw redirect({
       to: "/rechercher",
-      search: buildSearchQuery(searchTerm, searchFilterParams),
+      // TODO: fix this type error and implement correct search
+      search: buildSearchQuery(searchTerm, searchFilterParams) as any,
     });
   }
   const shouldColorZipCode = !!searchFilterParams.cp_dep;
