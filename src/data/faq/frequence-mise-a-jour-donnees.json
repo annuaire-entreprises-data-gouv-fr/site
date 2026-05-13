@@ -1,8 +1,5 @@
 {
-  "administrations": [
-    "all",
-    "search"
-  ],
+  "administrations": ["all", "search"],
   "group": "fonctionnement",
   "title": "Quelle est la fréquence de mise à jour des données ?",
   "seo": {

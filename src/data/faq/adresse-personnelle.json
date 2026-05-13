@@ -1,7 +1,5 @@
 {
-  "administrations": [
-    "insee"
-  ],
+  "administrations": ["insee"],
   "title": "Pourquoi mon adresse personnelle apparaît-elle sur ce site ?",
   "group": "default",
   "seo": {

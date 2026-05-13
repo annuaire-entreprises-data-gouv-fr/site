@@ -18,6 +18,11 @@ import { Route as HeaderDefaultRouteRouteImport } from './routes/_header-default
 import { Route as HeaderConnexionRouteRouteImport } from './routes/_header-connexion/route'
 import { Route as HeaderCompteRouteRouteImport } from './routes/_header-compte/route'
 import { Route as HeaderHomeIndexRouteImport } from './routes/_header-home/index'
+import { Route as ApiProtectedSirenRouteImport } from './routes/api/protected-siren'
+import { Route as ApiInpiPdfRouteImport } from './routes/api/inpi-pdf'
+import { Route as ApiHidePersonalDataRouteImport } from './routes/api/hide-personal-data'
+import { Route as ApiFeatureFlagsRouteImport } from './routes/api/feature-flags'
+import { Route as ApiExportSireneRouteImport } from './routes/api/export-sirene'
 import { Route as HeaderSearchRechercherRouteImport } from './routes/_header-search/rechercher'
 import { Route as HeaderDefaultViePriveeRouteImport } from './routes/_header-default/vie-privee'
 import { Route as HeaderDefaultPersonneRouteImport } from './routes/_header-default/personne'
@@ -30,6 +35,8 @@ import { Route as HeaderDefaultExportSireneRouteImport } from './routes/_header-
 import { Route as HeaderDefaultDefinitionsRouteImport } from './routes/_header-default/definitions'
 import { Route as HeaderDefaultAdministrationRouteImport } from './routes/_header-default/administration'
 import { Route as HeaderDefaultAccessibiliteRouteImport } from './routes/_header-default/accessibilite'
+import { Route as ApiPingSlugRouteImport } from './routes/api/ping/$slug'
+import { Route as ApiFeedbackNpsRouteImport } from './routes/api/feedback/nps'
 import { Route as HeaderSearchRechercherCarteRouteImport } from './routes/_header-search/rechercher.carte'
 import { Route as HeaderPublicDonneesApiRouteImport } from './routes/_header-public/donnees.api'
 import { Route as HeaderPublicAProposStatsRouteImport } from './routes/_header-public/a-propos.stats'
@@ -63,12 +70,22 @@ import { Route as HeaderConnexionConnexionEchecConnexionRouteImport } from './ro
 import { Route as HeaderConnexionConnexionAuRevoirRouteImport } from './routes/_header-connexion/connexion.au-revoir'
 import { Route as HeaderCompteCompteMesGroupesRouteImport } from './routes/_header-compte/compte.mes-groupes'
 import { Route as HeaderCompteCompteAccueilRouteImport } from './routes/_header-compte/compte.accueil'
+import { Route as ApiShareButtonSlugRouteImport } from './routes/api/share/button/$slug'
+import { Route as ApiAuthFranceConnectLogoutCallbackRouteImport } from './routes/api/auth/france-connect/logout-callback'
+import { Route as ApiAuthFranceConnectLogoutRouteImport } from './routes/api/auth/france-connect/logout'
+import { Route as ApiAuthFranceConnectLoginRouteImport } from './routes/api/auth/france-connect/login'
+import { Route as ApiAuthFranceConnectCallbackRouteImport } from './routes/api/auth/france-connect/callback'
+import { Route as ApiAuthAgentConnectLogoutCallbackRouteImport } from './routes/api/auth/agent-connect/logout-callback'
+import { Route as ApiAuthAgentConnectLogoutRouteImport } from './routes/api/auth/agent-connect/logout'
+import { Route as ApiAuthAgentConnectLoginRouteImport } from './routes/api/auth/agent-connect/login'
+import { Route as ApiAuthAgentConnectCallbackRouteImport } from './routes/api/auth/agent-connect/callback'
 import { Route as HeaderDefaultFaqModifierSlugRouteImport } from './routes/_header-default/faq.modifier.$slug'
 import { Route as HeaderDefaultErreurIntrouvableSlugRouteImport } from './routes/_header-default/erreur.introuvable.$slug'
 import { Route as HeaderConnexionConnexionHabilitationRequiseRouteImport } from './routes/_header-connexion/connexion.habilitation.requise'
 import { Route as HeaderConnexionConnexionHabilitationRefuseeRouteImport } from './routes/_header-connexion/connexion.habilitation.refusee'
 import { Route as HeaderConnexionConnexionHabilitationPrestatairesRouteImport } from './routes/_header-connexion/connexion.habilitation.prestataires'
 import { Route as HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport } from './routes/_header-connexion/connexion.habilitation.administration-inconnue'
+import { Route as ApiDownloadEspaceAgentDocumentsSlugRouteImport } from './routes/api/download/espace-agent/documents/$slug'
 
 const HeaderSearchRouteRoute = HeaderSearchRouteRouteImport.update({
   id: '/_header-search',
@@ -106,6 +123,31 @@ const HeaderHomeIndexRoute = HeaderHomeIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => HeaderHomeRouteRoute,
+} as any)
+const ApiProtectedSirenRoute = ApiProtectedSirenRouteImport.update({
+  id: '/api/protected-siren',
+  path: '/api/protected-siren',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiInpiPdfRoute = ApiInpiPdfRouteImport.update({
+  id: '/api/inpi-pdf',
+  path: '/api/inpi-pdf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiHidePersonalDataRoute = ApiHidePersonalDataRouteImport.update({
+  id: '/api/hide-personal-data',
+  path: '/api/hide-personal-data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFeatureFlagsRoute = ApiFeatureFlagsRouteImport.update({
+  id: '/api/feature-flags',
+  path: '/api/feature-flags',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiExportSireneRoute = ApiExportSireneRouteImport.update({
+  id: '/api/export-sirene',
+  path: '/api/export-sirene',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const HeaderSearchRechercherRoute = HeaderSearchRechercherRouteImport.update({
   id: '/rechercher',
@@ -174,6 +216,16 @@ const HeaderDefaultAccessibiliteRoute =
     path: '/accessibilite',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
+const ApiPingSlugRoute = ApiPingSlugRouteImport.update({
+  id: '/api/ping/$slug',
+  path: '/api/ping/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFeedbackNpsRoute = ApiFeedbackNpsRouteImport.update({
+  id: '/api/feedback/nps',
+  path: '/api/feedback/nps',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HeaderSearchRechercherCarteRoute =
   HeaderSearchRechercherCarteRouteImport.update({
     id: '/carte',
@@ -370,6 +422,59 @@ const HeaderCompteCompteAccueilRoute =
     path: '/compte/accueil',
     getParentRoute: () => HeaderCompteRouteRoute,
   } as any)
+const ApiShareButtonSlugRoute = ApiShareButtonSlugRouteImport.update({
+  id: '/api/share/button/$slug',
+  path: '/api/share/button/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthFranceConnectLogoutCallbackRoute =
+  ApiAuthFranceConnectLogoutCallbackRouteImport.update({
+    id: '/api/auth/france-connect/logout-callback',
+    path: '/api/auth/france-connect/logout-callback',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAuthFranceConnectLogoutRoute =
+  ApiAuthFranceConnectLogoutRouteImport.update({
+    id: '/api/auth/france-connect/logout',
+    path: '/api/auth/france-connect/logout',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAuthFranceConnectLoginRoute =
+  ApiAuthFranceConnectLoginRouteImport.update({
+    id: '/api/auth/france-connect/login',
+    path: '/api/auth/france-connect/login',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAuthFranceConnectCallbackRoute =
+  ApiAuthFranceConnectCallbackRouteImport.update({
+    id: '/api/auth/france-connect/callback',
+    path: '/api/auth/france-connect/callback',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAuthAgentConnectLogoutCallbackRoute =
+  ApiAuthAgentConnectLogoutCallbackRouteImport.update({
+    id: '/api/auth/agent-connect/logout-callback',
+    path: '/api/auth/agent-connect/logout-callback',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAuthAgentConnectLogoutRoute =
+  ApiAuthAgentConnectLogoutRouteImport.update({
+    id: '/api/auth/agent-connect/logout',
+    path: '/api/auth/agent-connect/logout',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAuthAgentConnectLoginRoute =
+  ApiAuthAgentConnectLoginRouteImport.update({
+    id: '/api/auth/agent-connect/login',
+    path: '/api/auth/agent-connect/login',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiAuthAgentConnectCallbackRoute =
+  ApiAuthAgentConnectCallbackRouteImport.update({
+    id: '/api/auth/agent-connect/callback',
+    path: '/api/auth/agent-connect/callback',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const HeaderDefaultFaqModifierSlugRoute =
   HeaderDefaultFaqModifierSlugRouteImport.update({
     id: '/$slug',
@@ -406,6 +511,12 @@ const HeaderConnexionConnexionHabilitationAdministrationInconnueRoute =
     path: '/connexion/habilitation/administration-inconnue',
     getParentRoute: () => HeaderConnexionRouteRoute,
   } as any)
+const ApiDownloadEspaceAgentDocumentsSlugRoute =
+  ApiDownloadEspaceAgentDocumentsSlugRouteImport.update({
+    id: '/api/download/espace-agent/documents/$slug',
+    path: '/api/download/espace-agent/documents/$slug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof HeaderHomeIndexRoute
@@ -421,6 +532,11 @@ export interface FileRoutesByFullPath {
   '/personne': typeof HeaderDefaultPersonneRoute
   '/vie-privee': typeof HeaderDefaultViePriveeRoute
   '/rechercher': typeof HeaderSearchRechercherRouteWithChildren
+  '/api/export-sirene': typeof ApiExportSireneRoute
+  '/api/feature-flags': typeof ApiFeatureFlagsRoute
+  '/api/hide-personal-data': typeof ApiHidePersonalDataRoute
+  '/api/inpi-pdf': typeof ApiInpiPdfRoute
+  '/api/protected-siren': typeof ApiProtectedSirenRoute
   '/compte/accueil': typeof HeaderCompteCompteAccueilRoute
   '/compte/mes-groupes': typeof HeaderCompteCompteMesGroupesRoute
   '/connexion/au-revoir': typeof HeaderConnexionConnexionAuRevoirRoute
@@ -454,12 +570,24 @@ export interface FileRoutesByFullPath {
   '/a-propos/stats': typeof HeaderPublicAProposStatsRoute
   '/donnees/api': typeof HeaderPublicDonneesApiRoute
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
+  '/api/feedback/nps': typeof ApiFeedbackNpsRoute
+  '/api/ping/$slug': typeof ApiPingSlugRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
+  '/api/auth/agent-connect/callback': typeof ApiAuthAgentConnectCallbackRoute
+  '/api/auth/agent-connect/login': typeof ApiAuthAgentConnectLoginRoute
+  '/api/auth/agent-connect/logout': typeof ApiAuthAgentConnectLogoutRoute
+  '/api/auth/agent-connect/logout-callback': typeof ApiAuthAgentConnectLogoutCallbackRoute
+  '/api/auth/france-connect/callback': typeof ApiAuthFranceConnectCallbackRoute
+  '/api/auth/france-connect/login': typeof ApiAuthFranceConnectLoginRoute
+  '/api/auth/france-connect/logout': typeof ApiAuthFranceConnectLogoutRoute
+  '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
+  '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
+  '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof HeaderHomeIndexRoute
@@ -475,6 +603,11 @@ export interface FileRoutesByTo {
   '/personne': typeof HeaderDefaultPersonneRoute
   '/vie-privee': typeof HeaderDefaultViePriveeRoute
   '/rechercher': typeof HeaderSearchRechercherRouteWithChildren
+  '/api/export-sirene': typeof ApiExportSireneRoute
+  '/api/feature-flags': typeof ApiFeatureFlagsRoute
+  '/api/hide-personal-data': typeof ApiHidePersonalDataRoute
+  '/api/inpi-pdf': typeof ApiInpiPdfRoute
+  '/api/protected-siren': typeof ApiProtectedSirenRoute
   '/compte/accueil': typeof HeaderCompteCompteAccueilRoute
   '/compte/mes-groupes': typeof HeaderCompteCompteMesGroupesRoute
   '/connexion/au-revoir': typeof HeaderConnexionConnexionAuRevoirRoute
@@ -508,12 +641,24 @@ export interface FileRoutesByTo {
   '/a-propos/stats': typeof HeaderPublicAProposStatsRoute
   '/donnees/api': typeof HeaderPublicDonneesApiRoute
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
+  '/api/feedback/nps': typeof ApiFeedbackNpsRoute
+  '/api/ping/$slug': typeof ApiPingSlugRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
+  '/api/auth/agent-connect/callback': typeof ApiAuthAgentConnectCallbackRoute
+  '/api/auth/agent-connect/login': typeof ApiAuthAgentConnectLoginRoute
+  '/api/auth/agent-connect/logout': typeof ApiAuthAgentConnectLogoutRoute
+  '/api/auth/agent-connect/logout-callback': typeof ApiAuthAgentConnectLogoutCallbackRoute
+  '/api/auth/france-connect/callback': typeof ApiAuthFranceConnectCallbackRoute
+  '/api/auth/france-connect/login': typeof ApiAuthFranceConnectLoginRoute
+  '/api/auth/france-connect/logout': typeof ApiAuthFranceConnectLogoutRoute
+  '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
+  '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
+  '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -537,6 +682,11 @@ export interface FileRoutesById {
   '/_header-default/personne': typeof HeaderDefaultPersonneRoute
   '/_header-default/vie-privee': typeof HeaderDefaultViePriveeRoute
   '/_header-search/rechercher': typeof HeaderSearchRechercherRouteWithChildren
+  '/api/export-sirene': typeof ApiExportSireneRoute
+  '/api/feature-flags': typeof ApiFeatureFlagsRoute
+  '/api/hide-personal-data': typeof ApiHidePersonalDataRoute
+  '/api/inpi-pdf': typeof ApiInpiPdfRoute
+  '/api/protected-siren': typeof ApiProtectedSirenRoute
   '/_header-home/': typeof HeaderHomeIndexRoute
   '/_header-compte/compte/accueil': typeof HeaderCompteCompteAccueilRoute
   '/_header-compte/compte/mes-groupes': typeof HeaderCompteCompteMesGroupesRoute
@@ -571,12 +721,24 @@ export interface FileRoutesById {
   '/_header-public/a-propos/stats': typeof HeaderPublicAProposStatsRoute
   '/_header-public/donnees/api': typeof HeaderPublicDonneesApiRoute
   '/_header-search/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
+  '/api/feedback/nps': typeof ApiFeedbackNpsRoute
+  '/api/ping/$slug': typeof ApiPingSlugRoute
   '/_header-connexion/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/_header-connexion/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/_header-connexion/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/_header-connexion/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
   '/_header-default/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/_header-default/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
+  '/api/auth/agent-connect/callback': typeof ApiAuthAgentConnectCallbackRoute
+  '/api/auth/agent-connect/login': typeof ApiAuthAgentConnectLoginRoute
+  '/api/auth/agent-connect/logout': typeof ApiAuthAgentConnectLogoutRoute
+  '/api/auth/agent-connect/logout-callback': typeof ApiAuthAgentConnectLogoutCallbackRoute
+  '/api/auth/france-connect/callback': typeof ApiAuthFranceConnectCallbackRoute
+  '/api/auth/france-connect/login': typeof ApiAuthFranceConnectLoginRoute
+  '/api/auth/france-connect/logout': typeof ApiAuthFranceConnectLogoutRoute
+  '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
+  '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
+  '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -594,6 +756,11 @@ export interface FileRouteTypes {
     | '/personne'
     | '/vie-privee'
     | '/rechercher'
+    | '/api/export-sirene'
+    | '/api/feature-flags'
+    | '/api/hide-personal-data'
+    | '/api/inpi-pdf'
+    | '/api/protected-siren'
     | '/compte/accueil'
     | '/compte/mes-groupes'
     | '/connexion/au-revoir'
@@ -627,12 +794,24 @@ export interface FileRouteTypes {
     | '/a-propos/stats'
     | '/donnees/api'
     | '/rechercher/carte'
+    | '/api/feedback/nps'
+    | '/api/ping/$slug'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
     | '/connexion/habilitation/requise'
     | '/erreur/introuvable/$slug'
     | '/faq/modifier/$slug'
+    | '/api/auth/agent-connect/callback'
+    | '/api/auth/agent-connect/login'
+    | '/api/auth/agent-connect/logout'
+    | '/api/auth/agent-connect/logout-callback'
+    | '/api/auth/france-connect/callback'
+    | '/api/auth/france-connect/login'
+    | '/api/auth/france-connect/logout'
+    | '/api/auth/france-connect/logout-callback'
+    | '/api/share/button/$slug'
+    | '/api/download/espace-agent/documents/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -648,6 +827,11 @@ export interface FileRouteTypes {
     | '/personne'
     | '/vie-privee'
     | '/rechercher'
+    | '/api/export-sirene'
+    | '/api/feature-flags'
+    | '/api/hide-personal-data'
+    | '/api/inpi-pdf'
+    | '/api/protected-siren'
     | '/compte/accueil'
     | '/compte/mes-groupes'
     | '/connexion/au-revoir'
@@ -681,12 +865,24 @@ export interface FileRouteTypes {
     | '/a-propos/stats'
     | '/donnees/api'
     | '/rechercher/carte'
+    | '/api/feedback/nps'
+    | '/api/ping/$slug'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
     | '/connexion/habilitation/requise'
     | '/erreur/introuvable/$slug'
     | '/faq/modifier/$slug'
+    | '/api/auth/agent-connect/callback'
+    | '/api/auth/agent-connect/login'
+    | '/api/auth/agent-connect/logout'
+    | '/api/auth/agent-connect/logout-callback'
+    | '/api/auth/france-connect/callback'
+    | '/api/auth/france-connect/login'
+    | '/api/auth/france-connect/logout'
+    | '/api/auth/france-connect/logout-callback'
+    | '/api/share/button/$slug'
+    | '/api/download/espace-agent/documents/$slug'
   id:
     | '__root__'
     | '/_header-compte'
@@ -709,6 +905,11 @@ export interface FileRouteTypes {
     | '/_header-default/personne'
     | '/_header-default/vie-privee'
     | '/_header-search/rechercher'
+    | '/api/export-sirene'
+    | '/api/feature-flags'
+    | '/api/hide-personal-data'
+    | '/api/inpi-pdf'
+    | '/api/protected-siren'
     | '/_header-home/'
     | '/_header-compte/compte/accueil'
     | '/_header-compte/compte/mes-groupes'
@@ -743,12 +944,24 @@ export interface FileRouteTypes {
     | '/_header-public/a-propos/stats'
     | '/_header-public/donnees/api'
     | '/_header-search/rechercher/carte'
+    | '/api/feedback/nps'
+    | '/api/ping/$slug'
     | '/_header-connexion/connexion/habilitation/administration-inconnue'
     | '/_header-connexion/connexion/habilitation/prestataires'
     | '/_header-connexion/connexion/habilitation/refusee'
     | '/_header-connexion/connexion/habilitation/requise'
     | '/_header-default/erreur/introuvable/$slug'
     | '/_header-default/faq/modifier/$slug'
+    | '/api/auth/agent-connect/callback'
+    | '/api/auth/agent-connect/login'
+    | '/api/auth/agent-connect/logout'
+    | '/api/auth/agent-connect/logout-callback'
+    | '/api/auth/france-connect/callback'
+    | '/api/auth/france-connect/login'
+    | '/api/auth/france-connect/logout'
+    | '/api/auth/france-connect/logout-callback'
+    | '/api/share/button/$slug'
+    | '/api/download/espace-agent/documents/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -760,6 +973,23 @@ export interface RootRouteChildren {
   HeaderMinimalRouteRoute: typeof HeaderMinimalRouteRouteWithChildren
   HeaderPublicRouteRoute: typeof HeaderPublicRouteRouteWithChildren
   HeaderSearchRouteRoute: typeof HeaderSearchRouteRouteWithChildren
+  ApiExportSireneRoute: typeof ApiExportSireneRoute
+  ApiFeatureFlagsRoute: typeof ApiFeatureFlagsRoute
+  ApiHidePersonalDataRoute: typeof ApiHidePersonalDataRoute
+  ApiInpiPdfRoute: typeof ApiInpiPdfRoute
+  ApiProtectedSirenRoute: typeof ApiProtectedSirenRoute
+  ApiFeedbackNpsRoute: typeof ApiFeedbackNpsRoute
+  ApiPingSlugRoute: typeof ApiPingSlugRoute
+  ApiAuthAgentConnectCallbackRoute: typeof ApiAuthAgentConnectCallbackRoute
+  ApiAuthAgentConnectLoginRoute: typeof ApiAuthAgentConnectLoginRoute
+  ApiAuthAgentConnectLogoutRoute: typeof ApiAuthAgentConnectLogoutRoute
+  ApiAuthAgentConnectLogoutCallbackRoute: typeof ApiAuthAgentConnectLogoutCallbackRoute
+  ApiAuthFranceConnectCallbackRoute: typeof ApiAuthFranceConnectCallbackRoute
+  ApiAuthFranceConnectLoginRoute: typeof ApiAuthFranceConnectLoginRoute
+  ApiAuthFranceConnectLogoutRoute: typeof ApiAuthFranceConnectLogoutRoute
+  ApiAuthFranceConnectLogoutCallbackRoute: typeof ApiAuthFranceConnectLogoutCallbackRoute
+  ApiShareButtonSlugRoute: typeof ApiShareButtonSlugRoute
+  ApiDownloadEspaceAgentDocumentsSlugRoute: typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -826,6 +1056,41 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof HeaderHomeIndexRouteImport
       parentRoute: typeof HeaderHomeRouteRoute
+    }
+    '/api/protected-siren': {
+      id: '/api/protected-siren'
+      path: '/api/protected-siren'
+      fullPath: '/api/protected-siren'
+      preLoaderRoute: typeof ApiProtectedSirenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/inpi-pdf': {
+      id: '/api/inpi-pdf'
+      path: '/api/inpi-pdf'
+      fullPath: '/api/inpi-pdf'
+      preLoaderRoute: typeof ApiInpiPdfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/hide-personal-data': {
+      id: '/api/hide-personal-data'
+      path: '/api/hide-personal-data'
+      fullPath: '/api/hide-personal-data'
+      preLoaderRoute: typeof ApiHidePersonalDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/feature-flags': {
+      id: '/api/feature-flags'
+      path: '/api/feature-flags'
+      fullPath: '/api/feature-flags'
+      preLoaderRoute: typeof ApiFeatureFlagsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/export-sirene': {
+      id: '/api/export-sirene'
+      path: '/api/export-sirene'
+      fullPath: '/api/export-sirene'
+      preLoaderRoute: typeof ApiExportSireneRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_header-search/rechercher': {
       id: '/_header-search/rechercher'
@@ -910,6 +1175,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/accessibilite'
       preLoaderRoute: typeof HeaderDefaultAccessibiliteRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/api/ping/$slug': {
+      id: '/api/ping/$slug'
+      path: '/api/ping/$slug'
+      fullPath: '/api/ping/$slug'
+      preLoaderRoute: typeof ApiPingSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/feedback/nps': {
+      id: '/api/feedback/nps'
+      path: '/api/feedback/nps'
+      fullPath: '/api/feedback/nps'
+      preLoaderRoute: typeof ApiFeedbackNpsRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_header-search/rechercher/carte': {
       id: '/_header-search/rechercher/carte'
@@ -1142,6 +1421,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderCompteCompteAccueilRouteImport
       parentRoute: typeof HeaderCompteRouteRoute
     }
+    '/api/share/button/$slug': {
+      id: '/api/share/button/$slug'
+      path: '/api/share/button/$slug'
+      fullPath: '/api/share/button/$slug'
+      preLoaderRoute: typeof ApiShareButtonSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/france-connect/logout-callback': {
+      id: '/api/auth/france-connect/logout-callback'
+      path: '/api/auth/france-connect/logout-callback'
+      fullPath: '/api/auth/france-connect/logout-callback'
+      preLoaderRoute: typeof ApiAuthFranceConnectLogoutCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/france-connect/logout': {
+      id: '/api/auth/france-connect/logout'
+      path: '/api/auth/france-connect/logout'
+      fullPath: '/api/auth/france-connect/logout'
+      preLoaderRoute: typeof ApiAuthFranceConnectLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/france-connect/login': {
+      id: '/api/auth/france-connect/login'
+      path: '/api/auth/france-connect/login'
+      fullPath: '/api/auth/france-connect/login'
+      preLoaderRoute: typeof ApiAuthFranceConnectLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/france-connect/callback': {
+      id: '/api/auth/france-connect/callback'
+      path: '/api/auth/france-connect/callback'
+      fullPath: '/api/auth/france-connect/callback'
+      preLoaderRoute: typeof ApiAuthFranceConnectCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/agent-connect/logout-callback': {
+      id: '/api/auth/agent-connect/logout-callback'
+      path: '/api/auth/agent-connect/logout-callback'
+      fullPath: '/api/auth/agent-connect/logout-callback'
+      preLoaderRoute: typeof ApiAuthAgentConnectLogoutCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/agent-connect/logout': {
+      id: '/api/auth/agent-connect/logout'
+      path: '/api/auth/agent-connect/logout'
+      fullPath: '/api/auth/agent-connect/logout'
+      preLoaderRoute: typeof ApiAuthAgentConnectLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/agent-connect/login': {
+      id: '/api/auth/agent-connect/login'
+      path: '/api/auth/agent-connect/login'
+      fullPath: '/api/auth/agent-connect/login'
+      preLoaderRoute: typeof ApiAuthAgentConnectLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/agent-connect/callback': {
+      id: '/api/auth/agent-connect/callback'
+      path: '/api/auth/agent-connect/callback'
+      fullPath: '/api/auth/agent-connect/callback'
+      preLoaderRoute: typeof ApiAuthAgentConnectCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_header-default/faq/modifier/$slug': {
       id: '/_header-default/faq/modifier/$slug'
       path: '/$slug'
@@ -1183,6 +1525,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/connexion/habilitation/administration-inconnue'
       preLoaderRoute: typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport
       parentRoute: typeof HeaderConnexionRouteRoute
+    }
+    '/api/download/espace-agent/documents/$slug': {
+      id: '/api/download/espace-agent/documents/$slug'
+      path: '/api/download/espace-agent/documents/$slug'
+      fullPath: '/api/download/espace-agent/documents/$slug'
+      preLoaderRoute: typeof ApiDownloadEspaceAgentDocumentsSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -1447,6 +1796,26 @@ const rootRouteChildren: RootRouteChildren = {
   HeaderMinimalRouteRoute: HeaderMinimalRouteRouteWithChildren,
   HeaderPublicRouteRoute: HeaderPublicRouteRouteWithChildren,
   HeaderSearchRouteRoute: HeaderSearchRouteRouteWithChildren,
+  ApiExportSireneRoute: ApiExportSireneRoute,
+  ApiFeatureFlagsRoute: ApiFeatureFlagsRoute,
+  ApiHidePersonalDataRoute: ApiHidePersonalDataRoute,
+  ApiInpiPdfRoute: ApiInpiPdfRoute,
+  ApiProtectedSirenRoute: ApiProtectedSirenRoute,
+  ApiFeedbackNpsRoute: ApiFeedbackNpsRoute,
+  ApiPingSlugRoute: ApiPingSlugRoute,
+  ApiAuthAgentConnectCallbackRoute: ApiAuthAgentConnectCallbackRoute,
+  ApiAuthAgentConnectLoginRoute: ApiAuthAgentConnectLoginRoute,
+  ApiAuthAgentConnectLogoutRoute: ApiAuthAgentConnectLogoutRoute,
+  ApiAuthAgentConnectLogoutCallbackRoute:
+    ApiAuthAgentConnectLogoutCallbackRoute,
+  ApiAuthFranceConnectCallbackRoute: ApiAuthFranceConnectCallbackRoute,
+  ApiAuthFranceConnectLoginRoute: ApiAuthFranceConnectLoginRoute,
+  ApiAuthFranceConnectLogoutRoute: ApiAuthFranceConnectLogoutRoute,
+  ApiAuthFranceConnectLogoutCallbackRoute:
+    ApiAuthFranceConnectLogoutCallbackRoute,
+  ApiShareButtonSlugRoute: ApiShareButtonSlugRoute,
+  ApiDownloadEspaceAgentDocumentsSlugRoute:
+    ApiDownloadEspaceAgentDocumentsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

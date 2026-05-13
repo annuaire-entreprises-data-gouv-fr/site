@@ -1,8 +1,5 @@
 {
-  "administrations": [
-    "insee",
-    "inpi"
-  ],
+  "administrations": ["insee", "inpi"],
   "group": "default",
   "title": "Comment supprimer les données personnelles de mon entreprise ?",
   "seo": {

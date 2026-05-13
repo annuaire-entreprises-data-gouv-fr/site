@@ -1,7 +1,5 @@
 {
-  "administrations": [
-    "inpi"
-  ],
+  "administrations": ["inpi"],
   "group": "fonctionnement",
   "title": "Comment accéder au Registre des Bénéficiaires Effectifs (RBE) ?",
   "seo": {

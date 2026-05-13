@@ -32,4 +32,6 @@ const walk = (dir) => {
 };
 
 walk(dataRoot);
-process.stdout.write(`compile-data-yaml: wrote ${count} JSON file(s) under src/data\n`);
+process.stdout.write(
+  `compile-data-yaml: wrote ${count} JSON file(s) under src/data\n`
+);

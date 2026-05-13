@@ -1,7 +1,5 @@
 {
-  "administrations": [
-    "all"
-  ],
+  "administrations": ["all"],
   "group": "data",
   "title": "Comment puis-je utiliser ces données dans mon site internet ?",
   "seo": {

@@ -1,7 +1,5 @@
 {
-  "administrations": [
-    "insee"
-  ],
+  "administrations": ["insee"],
   "group": "modifier",
   "title": "Comment rendre mon entreprise individuelle diffusible ou non-diffusible ?",
   "seo": {

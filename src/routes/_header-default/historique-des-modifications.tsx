@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HeaderDefaultError } from "./-error";
 
-export const Route = createFileRoute("/_header-default/historique-des-modifications")({
+export const Route = createFileRoute(
+  "/_header-default/historique-des-modifications"
+)({
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
 });

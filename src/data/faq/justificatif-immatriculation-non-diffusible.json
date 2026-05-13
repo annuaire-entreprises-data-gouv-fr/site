@@ -1,7 +1,5 @@
 {
-  "administrations": [
-    "insee"
-  ],
+  "administrations": ["insee"],
   "group": "fonctionnement",
   "title": "Comment accéder à l’avis de situation d’une entreprise non-diffusible ?",
   "seo": {

@@ -1,7 +1,5 @@
 {
-  "administrations": [
-    "inpi"
-  ],
+  "administrations": ["inpi"],
   "group": "fonctionnement",
   "title": "Le justificatif d’immatriculation au RNE d’une entreprise est introuvable",
   "seo": {
