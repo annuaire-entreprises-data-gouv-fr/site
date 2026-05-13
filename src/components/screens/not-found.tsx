@@ -3,8 +3,12 @@ import Footer from "#/components/footer";
 import { Header } from "#/components/header/header";
 import { Question } from "#/components/question";
 
-export function NotFound() {
-  return (
+interface NotFoundProps {
+  withWrapper?: boolean;
+}
+
+export function NotFound({ withWrapper = true }: NotFoundProps) {
+  return withWrapper ? (
     <>
       <Header useAgentCTA={true} useSearchBar={true} />
       <main className="fr-container">
@@ -13,5 +17,7 @@ export function NotFound() {
       <Question />
       <Footer />
     </>
+  ) : (
+    <ErrorNotFoundExplanations />
   );
 }
