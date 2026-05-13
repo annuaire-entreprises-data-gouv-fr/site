@@ -129,23 +129,19 @@ export const extractSirenOrSiretSlugFromUrl = (slug: string) => {
  * @param rechercherUrl
  * @returns siren, siret or empty string
  */
-export const extractSirenOrSiretFromRechercherUrl = (rechercherUrl: string) => {
-  if (!rechercherUrl) {
+export const extractSirenOrSiretFromRechercherUrl = (terme: string) => {
+  if (!terme) {
     return "";
   }
 
-  let cleanedUrl = (rechercherUrl.match(/terme=([^&]*)/g) || [
-    "",
-  ])[0].replaceAll(/[+]|(%20|%22)/g, "");
-
-  if (cleanedUrl.match(/terme=FR/g)) {
-    if (cleanedUrl.match(/terme=FR\d{14}$/g)) {
+  if (terme.match(/^FR/g)) {
+    if (terme.match(/FR\d{14}$/g)) {
       // remove EORI number prefix when relevant
-      cleanedUrl = cleanedUrl.replace("terme=FR", "");
-    } else if (cleanedUrl.match(/terme=FR\d{11}$/g)) {
+      terme.replace("FR", "");
+    } else if (terme.match(/FR\d{11}$/g)) {
       // remove TVA number prefix when relevant
-      cleanedUrl = cleanedUrl.replace(/terme=FR\d{2}/g, "");
+      terme.replace(/FR\d{2}/g, "");
     }
   }
-  return extractSirenOrSiretSlugFromUrl(cleanedUrl);
+  return extractSirenOrSiretSlugFromUrl(terme);
 };
