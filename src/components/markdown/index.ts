@@ -1,1 +1,1 @@
-export { default as RenderMarkdownServerOnly } from "./RenderMarkdownServerOnly";
+export { default as RenderMarkdown } from "./RenderMarkdown";

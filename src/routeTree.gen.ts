@@ -43,7 +43,7 @@ import { Route as HeaderPublicAProposStatsRouteImport } from './routes/_header-p
 import { Route as HeaderMinimalFormulaireNpsRouteImport } from './routes/_header-minimal/formulaire.nps'
 import { Route as HeaderMinimalFormulaireMerciRouteImport } from './routes/_header-minimal/formulaire.merci'
 import { Route as HeaderLpAgentLpAgentPublicRouteImport } from './routes/_header-lp-agent/lp.agent-public'
-import { Route as HeaderHomeLpSlugRouteImport } from './routes/_header-home/lp.$slug'
+import { Route as HeaderHomeLpSlugRouteImport } from './routes/_header-home/lp/$slug'
 import { Route as HeaderDefaultLabelsCertificatsSlugRouteImport } from './routes/_header-default/labels-certificats.$slug'
 import { Route as HeaderDefaultJustificatifImmatriculationPdfSlugRouteImport } from './routes/_header-default/justificatif-immatriculation-pdf.$slug'
 import { Route as HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRouteImport } from './routes/_header-default/formulaire.supprimer-donnees-personnelles-entreprise'
