@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import z from "zod";
+import { queryString } from "#/utils/query";
 import { HeaderSearchError } from "./-error";
 import { beforeLoadCheckTerme } from "./-loader";
 
 export const Route = createFileRoute("/_header-search/rechercher")({
   validateSearch: z.object({
-    terme: z.string().optional(),
+    terme: queryString.optional(),
   }),
   loaderDeps: ({ search }) => ({ terme: search.terme }),
   beforeLoad: async (ctx) => {
