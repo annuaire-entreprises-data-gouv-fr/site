@@ -7,6 +7,7 @@ import {
   updateGroupName,
   updateUserRoleInGroup,
 } from "#/models/authentication/group";
+import { rolesMetadataStore } from "#/models/authentication/group/roles";
 import { agentFnMiddleware } from "#/server-functions/middlewares";
 import {
   addUserToGroupSchema,
@@ -56,3 +57,7 @@ export const getAgentGroupsFn = createServerFn()
   .handler(
     async () => await getAgentGroups({ allowProConnectRedirection: true })
   );
+
+export const getAgentRolesFn = createServerFn()
+  .middleware([agentFnMiddleware])
+  .handler(async () => rolesMetadataStore.getRoles());
