@@ -24,6 +24,7 @@ interface Metadata {
   };
   robots?: {
     follow?: boolean;
+    index?: boolean;
   };
   title?: string;
 }
@@ -65,10 +66,7 @@ export function meta(
     obj.openGraph.url ??= obj.alternates.canonical;
   }
 
-  obj.robots ??= {};
-  if (typeof obj.robots === "object" && obj.robots.follow !== false) {
-    obj.robots.follow = true;
-  }
+  obj.robots ??= { follow: true, index: true };
 
   return [
     {
@@ -87,7 +85,7 @@ export function meta(
     },
     {
       name: "robots",
-      content: obj.robots?.follow ? "index, follow" : "noindex, nofollow",
+      content: `${obj.robots?.index ? "index" : "noindex"}, ${obj.robots?.follow ? "follow" : "nofollow"}`,
     },
     {
       name: "og:title",

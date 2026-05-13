@@ -61,15 +61,15 @@ import { Route as HeaderDefaultDirigeantsSlugRouteImport } from './routes/_heade
 import { Route as HeaderDefaultDefinitionsSlugRouteImport } from './routes/_header-default/definitions.$slug'
 import { Route as HeaderDefaultAnnoncesSlugRouteImport } from './routes/_header-default/annonces.$slug'
 import { Route as HeaderDefaultAdministrationSlugRouteImport } from './routes/_header-default/administration.$slug'
-import { Route as HeaderDefaultAProposEquipeRouteImport } from './routes/_header-default/a-propos.equipe'
-import { Route as HeaderDefaultAProposDonneesExtraitKbisRouteImport } from './routes/_header-default/a-propos.donnees-extrait-kbis'
-import { Route as HeaderDefaultAProposCommentCaMarcheRouteImport } from './routes/_header-default/a-propos.comment-ca-marche'
-import { Route as HeaderDefaultAProposBudgetRouteImport } from './routes/_header-default/a-propos.budget'
+import { Route as HeaderDefaultAProposDonneesExtraitKbisRouteImport } from './routes/_header-default/a-propos/donnees-extrait-kbis'
+import { Route as HeaderDefaultAProposCommentCaMarcheRouteImport } from './routes/_header-default/a-propos/comment-ca-marche'
+import { Route as HeaderDefaultAProposBudgetRouteImport } from './routes/_header-default/a-propos/budget'
 import { Route as HeaderConnexionConnexionEchecConnexionRouteImport } from './routes/_header-connexion/connexion.echec-connexion'
 import { Route as HeaderConnexionConnexionAuRevoirRouteImport } from './routes/_header-connexion/connexion.au-revoir'
 import { Route as HeaderCompteCompteMesGroupesRouteImport } from './routes/_header-compte/compte.mes-groupes'
 import { Route as HeaderCompteCompteAccueilRouteImport } from './routes/_header-compte/compte.accueil'
 import { Route as HeaderMinimalFormulaireNpsIndexRouteImport } from './routes/_header-minimal/formulaire/nps/index'
+import { Route as HeaderDefaultAProposEquipeIndexRouteImport } from './routes/_header-default/a-propos/equipe/index'
 import { Route as ApiShareButtonSlugRouteImport } from './routes/api/share/button/$slug'
 import { Route as ApiAuthFranceConnectLogoutCallbackRouteImport } from './routes/api/auth/france-connect/logout-callback'
 import { Route as ApiAuthFranceConnectLogoutRouteImport } from './routes/api/auth/france-connect/logout'
@@ -369,12 +369,6 @@ const HeaderDefaultAdministrationSlugRoute =
     path: '/$slug',
     getParentRoute: () => HeaderDefaultAdministrationRoute,
   } as any)
-const HeaderDefaultAProposEquipeRoute =
-  HeaderDefaultAProposEquipeRouteImport.update({
-    id: '/a-propos/equipe',
-    path: '/a-propos/equipe',
-    getParentRoute: () => HeaderDefaultRouteRoute,
-  } as any)
 const HeaderDefaultAProposDonneesExtraitKbisRoute =
   HeaderDefaultAProposDonneesExtraitKbisRouteImport.update({
     id: '/a-propos/donnees-extrait-kbis',
@@ -422,6 +416,12 @@ const HeaderMinimalFormulaireNpsIndexRoute =
     id: '/formulaire/nps/',
     path: '/formulaire/nps/',
     getParentRoute: () => HeaderMinimalRouteRoute,
+  } as any)
+const HeaderDefaultAProposEquipeIndexRoute =
+  HeaderDefaultAProposEquipeIndexRouteImport.update({
+    id: '/a-propos/equipe/',
+    path: '/a-propos/equipe/',
+    getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
 const ApiShareButtonSlugRoute = ApiShareButtonSlugRouteImport.update({
   id: '/api/share/button/$slug',
@@ -544,7 +544,6 @@ export interface FileRoutesByFullPath {
   '/a-propos/budget': typeof HeaderDefaultAProposBudgetRoute
   '/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
   '/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
-  '/a-propos/equipe': typeof HeaderDefaultAProposEquipeRoute
   '/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
   '/annonces/$slug': typeof HeaderDefaultAnnoncesSlugRoute
   '/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
@@ -587,6 +586,7 @@ export interface FileRoutesByFullPath {
   '/api/auth/france-connect/logout': typeof ApiAuthFranceConnectLogoutRoute
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
+  '/a-propos/equipe/': typeof HeaderDefaultAProposEquipeIndexRoute
   '/formulaire/nps/': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
@@ -615,7 +615,6 @@ export interface FileRoutesByTo {
   '/a-propos/budget': typeof HeaderDefaultAProposBudgetRoute
   '/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
   '/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
-  '/a-propos/equipe': typeof HeaderDefaultAProposEquipeRoute
   '/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
   '/annonces/$slug': typeof HeaderDefaultAnnoncesSlugRoute
   '/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
@@ -658,6 +657,7 @@ export interface FileRoutesByTo {
   '/api/auth/france-connect/logout': typeof ApiAuthFranceConnectLogoutRoute
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
+  '/a-propos/equipe': typeof HeaderDefaultAProposEquipeIndexRoute
   '/formulaire/nps': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
@@ -695,7 +695,6 @@ export interface FileRoutesById {
   '/_header-default/a-propos/budget': typeof HeaderDefaultAProposBudgetRoute
   '/_header-default/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
   '/_header-default/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
-  '/_header-default/a-propos/equipe': typeof HeaderDefaultAProposEquipeRoute
   '/_header-default/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
   '/_header-default/annonces/$slug': typeof HeaderDefaultAnnoncesSlugRoute
   '/_header-default/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
@@ -738,6 +737,7 @@ export interface FileRoutesById {
   '/api/auth/france-connect/logout': typeof ApiAuthFranceConnectLogoutRoute
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
+  '/_header-default/a-propos/equipe/': typeof HeaderDefaultAProposEquipeIndexRoute
   '/_header-minimal/formulaire/nps/': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
@@ -768,7 +768,6 @@ export interface FileRouteTypes {
     | '/a-propos/budget'
     | '/a-propos/comment-ca-marche'
     | '/a-propos/donnees-extrait-kbis'
-    | '/a-propos/equipe'
     | '/administration/$slug'
     | '/annonces/$slug'
     | '/definitions/$slug'
@@ -811,6 +810,7 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout'
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
+    | '/a-propos/equipe/'
     | '/formulaire/nps/'
     | '/api/download/espace-agent/documents/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -839,7 +839,6 @@ export interface FileRouteTypes {
     | '/a-propos/budget'
     | '/a-propos/comment-ca-marche'
     | '/a-propos/donnees-extrait-kbis'
-    | '/a-propos/equipe'
     | '/administration/$slug'
     | '/annonces/$slug'
     | '/definitions/$slug'
@@ -882,6 +881,7 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout'
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
+    | '/a-propos/equipe'
     | '/formulaire/nps'
     | '/api/download/espace-agent/documents/$slug'
   id:
@@ -918,7 +918,6 @@ export interface FileRouteTypes {
     | '/_header-default/a-propos/budget'
     | '/_header-default/a-propos/comment-ca-marche'
     | '/_header-default/a-propos/donnees-extrait-kbis'
-    | '/_header-default/a-propos/equipe'
     | '/_header-default/administration/$slug'
     | '/_header-default/annonces/$slug'
     | '/_header-default/definitions/$slug'
@@ -961,6 +960,7 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout'
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
+    | '/_header-default/a-propos/equipe/'
     | '/_header-minimal/formulaire/nps/'
     | '/api/download/espace-agent/documents/$slug'
   fileRoutesById: FileRoutesById
@@ -1359,13 +1359,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultAdministrationSlugRouteImport
       parentRoute: typeof HeaderDefaultAdministrationRoute
     }
-    '/_header-default/a-propos/equipe': {
-      id: '/_header-default/a-propos/equipe'
-      path: '/a-propos/equipe'
-      fullPath: '/a-propos/equipe'
-      preLoaderRoute: typeof HeaderDefaultAProposEquipeRouteImport
-      parentRoute: typeof HeaderDefaultRouteRoute
-    }
     '/_header-default/a-propos/donnees-extrait-kbis': {
       id: '/_header-default/a-propos/donnees-extrait-kbis'
       path: '/a-propos/donnees-extrait-kbis'
@@ -1421,6 +1414,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/formulaire/nps/'
       preLoaderRoute: typeof HeaderMinimalFormulaireNpsIndexRouteImport
       parentRoute: typeof HeaderMinimalRouteRoute
+    }
+    '/_header-default/a-propos/equipe/': {
+      id: '/_header-default/a-propos/equipe/'
+      path: '/a-propos/equipe'
+      fullPath: '/a-propos/equipe/'
+      preLoaderRoute: typeof HeaderDefaultAProposEquipeIndexRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/api/share/button/$slug': {
       id: '/api/share/button/$slug'
@@ -1648,7 +1648,6 @@ interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultAProposBudgetRoute: typeof HeaderDefaultAProposBudgetRoute
   HeaderDefaultAProposCommentCaMarcheRoute: typeof HeaderDefaultAProposCommentCaMarcheRoute
   HeaderDefaultAProposDonneesExtraitKbisRoute: typeof HeaderDefaultAProposDonneesExtraitKbisRoute
-  HeaderDefaultAProposEquipeRoute: typeof HeaderDefaultAProposEquipeRoute
   HeaderDefaultAnnoncesSlugRoute: typeof HeaderDefaultAnnoncesSlugRoute
   HeaderDefaultDirigeantsSlugRoute: typeof HeaderDefaultDirigeantsSlugRoute
   HeaderDefaultDiversSlugRoute: typeof HeaderDefaultDiversSlugRoute
@@ -1663,6 +1662,7 @@ interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultJustificatifImmatriculationPdfSlugRoute: typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
   HeaderDefaultLabelsCertificatsSlugRoute: typeof HeaderDefaultLabelsCertificatsSlugRoute
   HeaderDefaultErreurIntrouvableSlugRoute: typeof HeaderDefaultErreurIntrouvableSlugRoute
+  HeaderDefaultAProposEquipeIndexRoute: typeof HeaderDefaultAProposEquipeIndexRoute
 }
 
 const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
@@ -1685,7 +1685,6 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
     HeaderDefaultAProposCommentCaMarcheRoute,
   HeaderDefaultAProposDonneesExtraitKbisRoute:
     HeaderDefaultAProposDonneesExtraitKbisRoute,
-  HeaderDefaultAProposEquipeRoute: HeaderDefaultAProposEquipeRoute,
   HeaderDefaultAnnoncesSlugRoute: HeaderDefaultAnnoncesSlugRoute,
   HeaderDefaultDirigeantsSlugRoute: HeaderDefaultDirigeantsSlugRoute,
   HeaderDefaultDiversSlugRoute: HeaderDefaultDiversSlugRoute,
@@ -1707,6 +1706,7 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
     HeaderDefaultLabelsCertificatsSlugRoute,
   HeaderDefaultErreurIntrouvableSlugRoute:
     HeaderDefaultErreurIntrouvableSlugRoute,
+  HeaderDefaultAProposEquipeIndexRoute: HeaderDefaultAProposEquipeIndexRoute,
 }
 
 const HeaderDefaultRouteRouteWithChildren =
