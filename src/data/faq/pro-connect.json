@@ -1,7 +1,5 @@
 {
-  "administrations": [
-    "dinum"
-  ],
+  "administrations": ["dinum"],
   "group": "fonctionnement",
   "title": "Comment se connecter avec ProConnect ?",
   "seo": {

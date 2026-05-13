@@ -1,7 +1,5 @@
 {
-  "administrations": [
-    "all"
-  ],
+  "administrations": ["all"],
   "group": "fraude",
   "title": "Fraudes et tentatives d’escroquerie au nom de L’Annuaire des Entreprises",
   "seo": {

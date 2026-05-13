@@ -1,8 +1,5 @@
 {
-  "administrations": [
-    "inpi",
-    "infogreffe"
-  ],
+  "administrations": ["inpi", "infogreffe"],
   "group": "defaults",
   "title": "Comment télécharger un extrait Kbis ?",
   "seo": {

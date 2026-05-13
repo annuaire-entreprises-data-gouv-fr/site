@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HeaderDefaultError } from "./-error";
 
-export const Route = createFileRoute("/_header-default/donnees/api-entreprises")({
+export const Route = createFileRoute(
+  "/_header-default/donnees/api-entreprises"
+)({
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
 });

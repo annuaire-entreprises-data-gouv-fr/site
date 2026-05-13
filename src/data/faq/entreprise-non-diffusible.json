@@ -1,7 +1,5 @@
 {
-  "administrations": [
-    "insee"
-  ],
+  "administrations": ["insee"],
   "group": "notions",
   "title": "Entreprise non-diffusible : définition",
   "seo": {

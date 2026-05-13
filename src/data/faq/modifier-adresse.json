@@ -1,8 +1,5 @@
 {
-  "administrations": [
-    "insee",
-    "inpi"
-  ],
+  "administrations": ["insee", "inpi"],
   "group": "modifier",
   "title": "Comment modifier l’adresse de mon entreprise ou association ?",
   "seo": {

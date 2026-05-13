@@ -1,8 +1,5 @@
 {
-  "administrations": [
-    "inpi",
-    "urssaf"
-  ],
+  "administrations": ["inpi", "urssaf"],
   "title": "Comprendre les données financières publiques des sociétés",
   "group": "notions",
   "seo": {

@@ -1,7 +1,5 @@
 {
-  "administrations": [
-    "insee"
-  ],
+  "administrations": ["insee"],
   "group": "notions",
   "title": "Qu'est-ce qu'une société à mission ?",
   "seo": {

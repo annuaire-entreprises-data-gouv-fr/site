@@ -1,8 +1,12 @@
 import { randomBytes } from "node:crypto";
+import { getRequestUrl } from "@tanstack/react-start/server";
 import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#/clients/exceptions";
 import { InternalError } from "#/models/exceptions";
-import { getHidePersonalDataRequestFCSession } from "#/utils/session";
+import {
+  getCurrentSession,
+  getHidePersonalDataRequestFCSession,
+} from "#/utils/session";
 
 let _client = undefined as BaseClient | undefined;
 
@@ -45,18 +49,19 @@ export const getClient = async () => {
   return _client;
 };
 
-export const franceConnectAuthorizeUrl = async (req: any) => {
+export const franceConnectAuthorizeUrl = async () => {
   const client = await getClient();
-  const session = req.session;
-  session.FC_CONNECT_CHECK = {
+  const session = await getCurrentSession();
+  const FC_CONNECT_CHECK = {
     state: generators.state(),
     nonce: generators.nonce(),
   };
-  await session.save();
+  await session.update({ FC_CONNECT_CHECK });
+
   return client.authorizationUrl({
     scope: "openid " + franceConnectScope.join(" "),
     acr_values: "eidas1",
-    ...session.FC_CONNECT_CHECK,
+    ...FC_CONNECT_CHECK,
   });
 };
 const franceConnectScope = ["family_name", "given_name", "birthdate"] as const;
@@ -68,19 +73,19 @@ export type IFranceConnectUserInfo = Partial<
   sub: string;
 };
 
-export async function franceConnectAuthenticate(
-  req: any
-): Promise<IFranceConnectUserInfo> {
+export async function franceConnectAuthenticate(): Promise<IFranceConnectUserInfo> {
   const client = await getClient();
-  const params = client.callbackParams(req);
+  const session = await getCurrentSession();
+  const url = getRequestUrl();
+  const params = client.callbackParams(url.toString());
   const tokenSet = await client.callback(
     // reuse redirect_uri
     REDIRECT_URI,
     params,
-    req.session.FC_CONNECT_CHECK
+    session.data.FC_CONNECT_CHECK
   );
-  req.session.FC_CONNECT_CHECK = undefined;
-  await req.session.save();
+  await session.update({ FC_CONNECT_CHECK: undefined });
+
   const { access_token, id_token } = tokenSet;
   if (!access_token || !id_token) {
     throw new HttpForbiddenError("No access token");
@@ -90,8 +95,9 @@ export async function franceConnectAuthenticate(
   return { ...userInfo, id_token, sub: userInfo.sub };
 }
 
-export const franceConnectLogoutUrl = async (req: any) => {
-  const franceConnect = getHidePersonalDataRequestFCSession(req.session);
+export const franceConnectLogoutUrl = async () => {
+  const session = await getCurrentSession();
+  const franceConnect = getHidePersonalDataRequestFCSession(session.data);
   const id_token_hint = franceConnect?.tokenId;
   if (!id_token_hint) {
     throw new InternalError({ message: "No token id" });
@@ -100,8 +106,8 @@ export const franceConnectLogoutUrl = async (req: any) => {
 
   const state = `state${randomBytes(32).toString("hex")}`;
 
-  req.session.franceConnectHidePersonalDataSession = undefined;
-  await req.session.save();
+  await session.update({ franceConnectHidePersonalDataSession: undefined });
+
   return client.endSessionUrl({
     post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI,
     client_id: CLIENT_ID,

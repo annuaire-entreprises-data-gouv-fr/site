@@ -27,10 +27,6 @@
       "body": "Les collectivités territoriales (communes, départements, régions) - quelle que soit leur taille - possèdent toutes un numéro SIRET et par conséquent une fiche sur [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).\n"
     }
   ],
-  "datasources": [
-    "insee",
-    "mi",
-    "education-nationale"
-  ],
+  "datasources": ["insee", "mi", "education-nationale"],
   "body": "## Comment identifier une collectivité territoriale ?\n\nLes collectivités territoriales sont des entités publiques distinctes de l'Etat qui disposent de l'autonomie juridique et s'administrent librement avec des conseils exécutifs élus. Ceux-ci exercent leur autorité, dans la limite des compétences accordées par la loi, sur leur territoire.\n\nCertaines collectivités ont des spécificités (statuts particuliers, autonomie plus ou moins importante...) qui peuvent expliquer des disparités dans les données et les appellations dans le moteur de recherche.\n"
 }

@@ -123,7 +123,7 @@ export const setHidePersonalDataRequestFCSession = async (
 };
 
 export function getHidePersonalDataRequestFCSession(
-  session: ISession | null
+  session: Partial<ISession> | null
 ): Required<
   NonNullable<ISession["franceConnectHidePersonalDataSession"]>
 > | null {

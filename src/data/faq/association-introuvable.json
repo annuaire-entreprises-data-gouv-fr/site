@@ -1,8 +1,5 @@
 {
-  "administrations": [
-    "mi",
-    "insee"
-  ],
+  "administrations": ["mi", "insee"],
   "title": "Pourquoi je ne retrouve pas une association dans les résultats de recherche ?",
   "group": "default",
   "seo": {

@@ -26,9 +26,6 @@
       "body": "Tous les entrepreneurs du spectacle vivant - quelle que soit leur forme juridique - possèdent un numéro SIRET et par conséquent une fiche sur [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).\n"
     }
   ],
-  "datasources": [
-    "insee",
-    "mc"
-  ],
+  "datasources": ["insee", "mc"],
   "body": "## Que recouvre le titre d'entrepreneur de spectacles vivants ?\n\nLes entrepreneurs de spectacles vivants sont les seules personnes physiques ou morales qui ont l'autorisation d'exploiter, de produire ou de diffuser des spectacles vivants en France.\n\nPour obtenir ce titre, une déclaration doit être déposée auprès des services préfectoraux (DRAC) qui peuvent refuser d'accorder le statut si les conditions ne sont pas remplies.\n\nSi la déclaration est valide, un récépissé valable pour cinq ans est accordé à l'entrepreneur de spectacles vivants.\n\nDepuis 2019, la licence est remplacée par un récépissé de déclaration d'activité d'entrepreneur de spectacles.\n\n## Quels sont les critères à respecter ?\n\nPour obtenir le titre d'entrepreneur de spectacles vivants, une personne physique doit être majeure et remplir l'une des conditions suivantes (une personne morale devra justifier qu'au moins un de ses membres les remplisse) :\n\n- Être diplômé de l'enseignement supérieur ou être titulaire d'un titre de même niveau inscrit au [répertoire national des certifications professionnelles](https://entreprendre.service-public.gouv.fr/vosdroits/R40438)\n- Avoir une expérience professionnelle d'au moins 6 mois dans le spectacle vivant (artiste, technicien, administratif dans le spectacle vivant)\n- Avoir suivi une formation d'au moins 125 heures ou avoir un ensemble de compétences dans le spectacle vivant\n\nLa personne déclarante doit également avoir suivi une formation à la sécurité des spectacles. Enfin, l'entrepreneur de spectacles ne doit pas avoir fait l'objet d'une décision judiciaire interdisant l'exercice d'une activité commerciale.\n\nPlus d'information [sur notre FAQ](https://annuaire-entreprises.data.gouv.fr/faq/entrepreneur-spectacles-vivants).\n"
 }

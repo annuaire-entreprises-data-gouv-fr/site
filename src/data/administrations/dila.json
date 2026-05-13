@@ -33,10 +33,7 @@
       "data": [
         {
           "label": "Annonces du BODACC",
-          "targets": [
-            "entreprise",
-            "independant"
-          ]
+          "targets": ["entreprise", "independant"]
         }
       ]
     },
@@ -47,9 +44,7 @@
       "data": [
         {
           "label": "Annonces du JOAFE",
-          "targets": [
-            "association"
-          ]
+          "targets": ["association"]
         }
       ]
     },
@@ -60,9 +55,7 @@
       "data": [
         {
           "label": "Annuaire des services publics",
-          "targets": [
-            "agent"
-          ]
+          "targets": ["agent"]
         }
       ]
     }
