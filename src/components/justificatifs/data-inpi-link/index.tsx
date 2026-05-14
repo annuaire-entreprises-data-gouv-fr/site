@@ -4,28 +4,25 @@ import { Link } from "#/components/Link";
 import ButtonLink from "#/components-ui/button";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { PrintNever } from "#/components-ui/print-visibility";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import { estDiffusible } from "#/models/core/diffusion";
 import type { IUniteLegale } from "#/models/core/types";
 
 interface IProps {
-  session: ISession | null;
   uniteLegale: IUniteLegale;
+  user: IAgentInfo | null;
 }
 
-export const DataInpiLinkWithExplanations = ({
-  uniteLegale,
-  session,
-}: IProps) => {
+export const DataInpiLinkWithExplanations = ({ uniteLegale, user }: IProps) => {
   const siteLink = `${routes.rne.portail.entreprise}${uniteLegale.siren}`;
 
   if (
     !estDiffusible(uniteLegale) &&
-    !hasRights(session, ApplicationRights.nonDiffusible)
+    !hasRights({ user }, ApplicationRights.nonDiffusible)
   ) {
     return (
       <>
