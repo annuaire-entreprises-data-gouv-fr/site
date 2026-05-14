@@ -43,7 +43,9 @@ const AdministrationDescription: React.FC<{
                 {dataSources.map(({ data = [] }) =>
                   data.map(({ label }) => (
                     <li key={label}>
-                      <Link href={`/donnees/sources#${slug}`}>{label}</Link>
+                      <Link hash={slug} to="/donnees/sources">
+                        {label}
+                      </Link>
                     </li>
                   ))
                 )}
@@ -51,7 +53,7 @@ const AdministrationDescription: React.FC<{
             </div>
           )}
           <p>
-            <Link href={`/donnees/sources#${slug}`}>
+            <Link hash={slug} to="/donnees/sources">
               → Télécharger ou réutiliser ces données
             </Link>
             <br />

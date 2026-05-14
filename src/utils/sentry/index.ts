@@ -24,7 +24,7 @@ function getScope(exception: Exception, scope: Scope) {
 }
 
 export const isSentryActivated =
-  !!process.env.VITE_SENTRY_DSN && process.env.NODE_ENV === "production";
+  !!import.meta.env.VITE_SENTRY_DSN && process.env.NODE_ENV === "production";
 
 const logInSentryFactory =
   (severity: SeverityLevel) => (exception: Exception) => {

@@ -13,9 +13,7 @@ interface IHabilitationsTableProps {
   groups: IAgentsGroup[];
 }
 
-export const HabilitationsTable = async ({
-  groups,
-}: IHabilitationsTableProps) => {
+export function HabilitationsTable({ groups }: IHabilitationsTableProps) {
   const { user } = useAuth();
 
   const appRights = Object.values(ApplicationRights)
@@ -101,7 +99,7 @@ export const HabilitationsTable = async ({
       </div>
     </div>
   );
-};
+}
 
 const tooltipContent: Partial<
   Record<

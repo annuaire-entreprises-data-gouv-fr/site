@@ -140,7 +140,10 @@ const ConventionsCollectivesSection: React.FC<{
                   <ul>
                     {(sirets || []).map((siret) => (
                       <li key={siret}>
-                        <Link href={`/etablissement/${siret}`}>
+                        <Link
+                          params={{ slug: siret }}
+                          to="/etablissement/$slug"
+                        >
                           {formatSiret(siret)}
                         </Link>
                       </li>

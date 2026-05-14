@@ -1,162 +1,180 @@
 import { Link } from "#/components/Link";
 
-export const INSEE = ({ queryString = "" }) => (
+export const INSEE = () => (
   <Link
-    href={`/administration/insee${queryString}`}
+    params={{ slug: "insee" }}
     title="Institut National de la Statistique et des Études Économiques"
+    to="/administration/$slug"
   >
     Insee
   </Link>
 );
 
-export const ADEME = ({ queryString = "" }) => (
+export const ADEME = () => (
   <Link
-    href={`/administration/ademe${queryString}`}
+    params={{ slug: "ademe" }}
     title="ADEME - Agence de la transition écologique "
+    to="/administration/$slug"
   >
     ADEME
   </Link>
 );
 
-export const INPI = ({ queryString = "" }) => (
+export const INPI = () => (
   <Link
-    href={`/administration/inpi${queryString}`}
+    params={{ slug: "inpi" }}
     title="Institut National de la Propriété Industrielle"
+    to="/administration/$slug"
   >
     INPI
   </Link>
 );
 
-export const ESSFrance = ({ queryString = "" }) => (
+export const ESSFrance = () => (
   <Link
-    href={`/administration/ess-france${queryString}`}
+    params={{ slug: "ess-france" }}
     title="ESS France ou Chambre Française de l'Economie Sociale et Solidaire"
+    to="/administration/$slug"
   >
     ESS France
   </Link>
 );
 
-export const DILA = ({ queryString = "" }) => (
+export const DILA = () => (
   <Link
-    href={`/administration/dila${queryString}`}
+    params={{ slug: "dila" }}
     title="Direction de l’Information Légale et Administrative"
+    to="/administration/$slug"
   >
     DILA
   </Link>
 );
 
-export const MTPEI = ({ queryString = "" }) => (
+export const MTPEI = () => (
   <Link
-    href={`/administration/mtpei${queryString}`}
+    params={{ slug: "mtpei" }}
     title="Ministère du Travail de l’Emploi et de l’Insertion"
+    to="/administration/$slug"
   >
     ministère du Travail de l’Emploi et de l’Insertion
   </Link>
 );
 
-export const MI = ({ queryString = "" }) => (
+export const MI = () => (
   <Link
-    href={`/administration/mi${queryString}`}
+    params={{ slug: "mi" }}
     title="Ministère de l’Intérieur"
+    to="/administration/$slug"
   >
     ministère de l’Intérieur
   </Link>
 );
 
-export const MSS = ({ queryString = "" }) => (
+export const MSS = () => (
   <Link
-    href={`/administration/mss${queryString}`}
+    params={{ slug: "mss" }}
     title="Ministère des Solidarités et de la Santé"
+    to="/administration/$slug"
   >
     ministère des Solidarités et de la Santé
   </Link>
 );
 
-export const DJEPVA = ({ queryString = "" }) => (
+export const DJEPVA = () => (
   <Link
-    href={`/administration/djepva${queryString}`}
+    params={{ slug: "djepva" }}
     title="Direction de la Jeunesse de l’Éducation Populaire et de la Vie Associative"
+    to="/administration/$slug"
   >
     Direction de la Jeunesse de l’Éducation Populaire et de la Vie Associative
   </Link>
 );
 
-export const DataSubvention = ({ queryString = "" }) => (
+export const DataSubvention = () => (
   <Link
-    href={`/administration/data-subvention${queryString}`}
+    params={{ slug: "data-subvention" }}
     title="Data Subvention"
+    to="/administration/$slug"
   >
     Data Subvention
   </Link>
 );
 
-export const MEF = ({ queryString = "" }) => (
+export const MEF = () => (
   <Link
-    href={`/administration/mef${queryString}`}
+    params={{ slug: "mef" }}
     title="Ministère de l’Économie et des Finances"
+    to="/administration/$slug"
   >
     ministère de l’Économie et des Finances
   </Link>
 );
 
-export const MC = ({ queryString = "" }) => (
+export const MC = () => (
   <Link
-    href={`/administration/mc${queryString}`}
+    params={{ slug: "mc" }}
     title="Ministère de la Culture"
+    to="/administration/$slug"
   >
     ministère de la Culture
   </Link>
 );
 
-export const EDUCNAT = ({ queryString = "" }) => (
+export const EDUCNAT = () => (
   <Link
-    href={`/administration/education-nationale${queryString}`}
+    params={{ slug: "education-nationale" }}
     title="Éducation nationale"
+    to="/administration/$slug"
   >
     éducation nationale
   </Link>
 );
 
-export const DINUM = ({ queryString = "" }) => (
+export const DINUM = () => (
   <Link
-    href={`/administration/dinum${queryString}`}
+    params={{ slug: "dinum" }}
     title="Direction Interministérielle du Numérique"
+    to="/administration/$slug"
   >
     DINUM
   </Link>
 );
 
-export const MarcheInclusion = ({ queryString = "" }) => (
+export const MarcheInclusion = () => (
   <Link
-    href={`/administration/marche-inclusion${queryString}`}
+    params={{ slug: "marche-inclusion" }}
     title="Le Marché de l’Inclusion"
+    to="/administration/$slug"
   >
     Marché de l’Inclusion
   </Link>
 );
 
-export const GIPMDS = ({ queryString = "" }) => (
+export const GIPMDS = () => (
   <Link
-    href={`/administration/gip-mds${queryString}`}
+    params={{ slug: "gip-mds" }}
     title="Groupement d’intérêt public Modernisation des déclarations sociales"
+    to="/administration/$slug"
   >
     GIP MDS
   </Link>
 );
 
-export const DGFiP = ({ queryString = "" }) => (
+export const DGFiP = () => (
   <Link
-    href={`/administration/dgfip${queryString}`}
+    params={{ slug: "dgfip" }}
     title="Direction générale des Finances publiques"
+    to="/administration/$slug"
   >
     DGFiP
   </Link>
 );
 
-export const CNIL = ({ queryString = "" }) => (
+export const CNIL = () => (
   <Link
-    href={`/administration/cnil${queryString}`}
+    params={{ slug: "cnil" }}
     title="Commission Nationale de l'Informatique et des Libertés"
+    to="/administration/$slug"
   >
     CNIL
   </Link>
