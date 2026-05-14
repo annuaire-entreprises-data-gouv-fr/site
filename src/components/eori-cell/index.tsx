@@ -2,7 +2,7 @@ import { CopyPaste } from "#/components/table/copy-paste";
 import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
 import { Loader } from "#/components-ui/loader";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { isAPINotResponding } from "#/models/api-not-responding";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
@@ -10,7 +10,7 @@ import {
   isDataLoading,
   isUnauthorized,
 } from "#/models/data-fetching";
-import { validateEORI } from "#/server-functions/public/data-fetching";
+import { validateEORIFn } from "#/server-functions/public/data-fetching";
 import { formatSiret, type Siret } from "#/utils/helpers";
 
 interface IProps {
@@ -18,7 +18,7 @@ interface IProps {
   user: IAgentInfo | null;
 }
 export default function EORICell({ siret, user }: IProps) {
-  const eoriValidation = useServerActionData(validateEORI, user, { siret });
+  const eoriValidation = useServerFnData(validateEORIFn, user, { siret });
 
   if (isDataLoading(eoriValidation)) {
     return (

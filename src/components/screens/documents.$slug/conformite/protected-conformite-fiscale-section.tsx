@@ -2,13 +2,13 @@ import { useMemo } from "react";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { TwoColumnTable } from "#/components/table/simple";
 import { PrintNever } from "#/components-ui/print-visibility";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type { UseCase } from "#/models/use-cases";
-import { getAgentConformiteFiscaleEntrepriseAction } from "#/server-functions/agent/data-fetching";
+import { getAgentConformiteFiscaleEntrepriseFn } from "#/server-functions/agent/data-fetching";
 import ConformiteFiscale from "./conformite-fiscale";
 
 interface IProps {
@@ -37,8 +37,8 @@ export function ProtectedConformiteFiscaleSection({
     }),
     [useCase, uniteLegale.siege.siret]
   );
-  const conformite = useServerActionData(
-    getAgentConformiteFiscaleEntrepriseAction,
+  const conformite = useServerFnData(
+    getAgentConformiteFiscaleEntrepriseFn,
     user,
     params,
     ApplicationRights.conformiteFiscale

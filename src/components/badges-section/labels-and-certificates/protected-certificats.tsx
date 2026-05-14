@@ -2,14 +2,14 @@ import React from "react";
 import NonRenseigne from "#/components/non-renseigne";
 import { ProtectedInlineData } from "#/components/protected-inline-data";
 import { Loader } from "#/components-ui/loader";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import { hasAnyError, isDataLoading } from "#/models/data-fetching";
 import {
-  getEspaceAgentOpqibi,
-  getEspaceAgentQualibat,
-  getEspaceAgentQualifelec,
+  getAgentOpqibiFn,
+  getAgentQualibatFn,
+  getAgentQualifelecFn,
 } from "#/server-functions/agent/data-fetching";
 import type { IUniteLegale } from "../../../models/core/types";
 import {
@@ -26,8 +26,8 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
 
   const protectedCertificates = [
     {
-      data: useServerActionData(
-        getEspaceAgentOpqibi,
+      data: useServerFnData(
+        getAgentOpqibiFn,
         user,
         { siren: uniteLegale.siren },
         ApplicationRights.protectedCertificats
@@ -42,8 +42,8 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
       ),
     },
     {
-      data: useServerActionData(
-        getEspaceAgentQualibat,
+      data: useServerFnData(
+        getAgentQualibatFn,
         user,
         { siret: uniteLegale.siege.siret },
         ApplicationRights.protectedCertificats
@@ -58,8 +58,8 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
       ),
     },
     {
-      data: useServerActionData(
-        getEspaceAgentQualifelec,
+      data: useServerFnData(
+        getAgentQualifelecFn,
         user,
         { siret: uniteLegale.siege.siret },
         ApplicationRights.protectedCertificats

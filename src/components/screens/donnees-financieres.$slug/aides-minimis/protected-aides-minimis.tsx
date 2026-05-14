@@ -4,11 +4,11 @@ import type { IMinimis } from "#/clients/api-data-gouv/minimis/interface";
 import LocalPageCounter from "#/components/search-results/results-pagination/local-pagination";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { FullTable } from "#/components/table/full";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IUniteLegale } from "#/models/core/types";
-import { getAgentAidesMinimisAction } from "#/server-functions/agent/data-fetching";
+import { getAgentAidesMinimisFn } from "#/server-functions/agent/data-fetching";
 import { formatCurrency, formatDate } from "#/utils/helpers";
 
 const NoAidesMinimis = () => (
@@ -86,11 +86,7 @@ export default function AidesMinimisProtected({
     [uniteLegale.siren, currentPage]
   );
 
-  const aidesMinimis = useServerActionData(
-    getAgentAidesMinimisAction,
-    user,
-    input
-  );
+  const aidesMinimis = useServerFnData(getAgentAidesMinimisFn, user, input);
 
   return (
     <AsyncDataSectionClient

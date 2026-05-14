@@ -2,12 +2,12 @@ import { getRouteApi } from "@tanstack/react-router";
 import { useCallback, useMemo } from "react";
 import type { TNatureEffectif } from "#/clients/api-entreprise/effectifs/types";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IEtablissement } from "#/models/core/types";
 import type { UseCase } from "#/models/use-cases";
-import { getEspaceAgentEffectifsMensuelsProtected } from "#/server-functions/agent/data-fetching";
+import { getAgentEffectifsMensuelsProtectedFn } from "#/server-functions/agent/data-fetching";
 import { EffectifsMensuelsChartAndTable } from "./chart-and-table";
 
 interface IProps {
@@ -95,8 +95,8 @@ const ProtectedEtablissementEffectifsMensuelsSection = ({
     }),
     [selectedNatureEffectif, selectedYear, useCase]
   );
-  const effectifsMensuelsProtected = useServerActionData(
-    getEspaceAgentEffectifsMensuelsProtected,
+  const effectifsMensuelsProtected = useServerFnData(
+    getAgentEffectifsMensuelsProtectedFn,
     user,
     input
   );

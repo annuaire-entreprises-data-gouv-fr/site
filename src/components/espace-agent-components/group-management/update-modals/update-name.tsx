@@ -8,7 +8,7 @@ import {
   NotificationTypeEnum,
   useNotification,
 } from "#/hooks/use-notification";
-import { updateGroupNameAction } from "#/server-functions/agent/group-management";
+import { updateGroupNameFn } from "#/server-functions/agent/group-management";
 
 export default function UpdateNameModal({
   groupId,
@@ -26,7 +26,7 @@ export default function UpdateNameModal({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const mutation = useMutation({
-    mutationFn: updateGroupNameAction,
+    mutationFn: updateGroupNameFn,
     onSuccess: () => {
       updateGroupNameState(groupName);
       setIsVisible(false);

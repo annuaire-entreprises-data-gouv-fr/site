@@ -6,7 +6,7 @@ import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { Loader } from "#/components-ui/loader";
 import { Select } from "#/components-ui/select";
 import { Tag } from "#/components-ui/tag";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
 import { isAPI404 } from "#/models/api-not-responding";
 import type { IAgentInfo } from "#/models/authentication/agent";
@@ -14,7 +14,7 @@ import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { hasAnyError, isDataLoading } from "#/models/data-fetching";
 import type { UseCase } from "#/models/use-cases";
-import { getAgentLiassesFiscalesProtectedAction } from "#/server-functions/agent/data-fetching";
+import { getAgentLiassesFiscalesProtectedFn } from "#/server-functions/agent/data-fetching";
 
 const InnerLiassesSection = ({
   uniteLegale,
@@ -32,8 +32,8 @@ const InnerLiassesSection = ({
     [uniteLegale.siren, selectedYear, useCase]
   );
 
-  const liassesFiscalesProtected = useServerActionData(
-    getAgentLiassesFiscalesProtectedAction,
+  const liassesFiscalesProtected = useServerFnData(
+    getAgentLiassesFiscalesProtectedFn,
     user,
     input,
     ApplicationRights.liassesFiscales

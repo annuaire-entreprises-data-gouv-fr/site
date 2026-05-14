@@ -8,7 +8,7 @@ import { FullTable } from "#/components/table/full";
 import FAQLink from "#/components-ui/faq-link";
 import { Select } from "#/components-ui/select";
 import { Tag } from "#/components-ui/tag";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IAssociation } from "#/models/core/types";
@@ -17,7 +17,7 @@ import type {
   ISubvention,
   ISubventions,
 } from "#/models/subventions/association";
-import { getSubventionsAssociation } from "#/server-functions/public/data-fetching";
+import { getSubventionsAssociationFn } from "#/server-functions/public/data-fetching";
 import { formatCurrency, type Siren } from "#/utils/helpers";
 
 const DataSubventionLink = () => (
@@ -103,11 +103,7 @@ export default function SubventionsAssociationSection({
     () => ({ slug: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const subventions = useServerActionData(
-    getSubventionsAssociation,
-    user,
-    input
-  );
+  const subventions = useServerFnData(getSubventionsAssociationFn, user, input);
 
   const allYears = useMemo(() => {
     if (!isDataSuccess(subventions)) {

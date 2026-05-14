@@ -4,13 +4,13 @@ import { TwoColumnTable } from "#/components/table/simple";
 import AssociationAdressAlert from "#/components-ui/alerts-with-explanations/association-adress";
 import FAQLink from "#/components-ui/faq-link";
 import BreakPageForPrint from "#/components-ui/print-break-page";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IDataAssociation } from "#/models/association/types";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { getPersonnalDataAssociation } from "#/models/core/diffusion";
 import type { IAssociation, IUniteLegale } from "#/models/core/types";
-import { getAssociation } from "#/server-functions/public/data-fetching";
+import { getAssociationFn } from "#/server-functions/public/data-fetching";
 import { formatDate, formatIntFr, type IdRna } from "#/utils/helpers";
 import { AssociationNotFound } from "./association-not-found";
 
@@ -121,7 +121,7 @@ const AssociationSection = ({
 }) => {
   const { idAssociation = "" } = uniteLegale.association;
 
-  const association = useServerActionData(getAssociation, user, {
+  const association = useServerFnData(getAssociationFn, user, {
     slug: uniteLegale.association.idAssociation,
   });
 

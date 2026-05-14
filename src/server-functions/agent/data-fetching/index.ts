@@ -44,7 +44,7 @@ import {
   getAgentTravauxPublicsSchema,
 } from "./schemas";
 
-export const getAgentBeneficiairesAction = createServerFn()
+export const getAgentBeneficiairesFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -57,7 +57,7 @@ export const getAgentBeneficiairesAction = createServerFn()
     return await getBeneficiaires(siren, { useCase });
   });
 
-export const getAgentConformiteSocialeEntrepriseAction = createServerFn()
+export const getAgentConformiteSocialeEntrepriseFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -70,7 +70,7 @@ export const getAgentConformiteSocialeEntrepriseAction = createServerFn()
     return await getConformiteSocialeEntreprise(siret, { useCase });
   });
 
-export const getAgentConformiteFiscaleEntrepriseAction = createServerFn()
+export const getAgentConformiteFiscaleEntrepriseFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -83,7 +83,7 @@ export const getAgentConformiteFiscaleEntrepriseAction = createServerFn()
     return await getConformiteFiscaleEntreprise(siret, { useCase });
   });
 
-export const getAgentBilansProtectedAction = createServerFn()
+export const getAgentBilansProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -96,7 +96,7 @@ export const getAgentBilansProtectedAction = createServerFn()
     return await getBilansProtected(siren, { useCase });
   });
 
-export const getAgentChiffreAffairesProtectedAction = createServerFn()
+export const getAgentChiffreAffairesProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -109,7 +109,7 @@ export const getAgentChiffreAffairesProtectedAction = createServerFn()
     return await getChiffreAffairesProtected(siret, { useCase });
   });
 
-export const getAgentTravauxPublicsAction = createServerFn()
+export const getAgentTravauxPublicsFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -122,7 +122,7 @@ export const getAgentTravauxPublicsAction = createServerFn()
     return await getTravauxPublic(siret, { useCase });
   });
 
-export const getAgentLiassesFiscalesProtectedAction = createServerFn()
+export const getAgentLiassesFiscalesProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -135,7 +135,7 @@ export const getAgentLiassesFiscalesProtectedAction = createServerFn()
     return await getLiassesFiscalesProtected(siren, { year, useCase });
   });
 
-export const getAgentLiensCapitalistiquesProtectedAction = createServerFn()
+export const getAgentLiensCapitalistiquesProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -148,7 +148,7 @@ export const getAgentLiensCapitalistiquesProtectedAction = createServerFn()
     return await getLiensCapitalistiquesProtected(siren, { year, useCase });
   });
 
-export const getAgentAidesMinimisAction = createServerFn()
+export const getAgentAidesMinimisFn = createServerFn()
   .middleware([agentFnMiddleware, withRateLimiting])
   .inputValidator(getAgentAidesMinimisSchema)
   .handler(async ({ data }) => {
@@ -158,7 +158,7 @@ export const getAgentAidesMinimisAction = createServerFn()
 
 /** Previous API routes */
 
-export const getEspaceAgentOpqibi = createServerFn()
+export const getAgentOpqibiFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -170,7 +170,7 @@ export const getEspaceAgentOpqibi = createServerFn()
     return await getOpqibi(siren);
   });
 
-export const getEspaceAgentQualibat = createServerFn()
+export const getAgentQualibatFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -182,7 +182,7 @@ export const getEspaceAgentQualibat = createServerFn()
     return await getQualibat(siret);
   });
 
-export const getEspaceAgentQualifelec = createServerFn()
+export const getAgentQualifelecFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -194,7 +194,7 @@ export const getEspaceAgentQualifelec = createServerFn()
     return await getQualifelec(siret);
   });
 
-export const getEspaceAgentDirigeantsProtected = createServerFn()
+export const getAgentDirigeantsProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -206,20 +206,7 @@ export const getEspaceAgentDirigeantsProtected = createServerFn()
     return await getDirigeantsProtected(siren, { isEI });
   });
 
-export const getEspaceAgentBeneficiaires = createServerFn()
-  .middleware([
-    agentFnMiddleware,
-    withRateLimiting,
-    withUseCase,
-    withApplicationRight(ApplicationRights.beneficiaires),
-  ])
-  .inputValidator(getAgentBeneficiairesSchema)
-  .handler(async ({ data }) => {
-    const { siren, useCase } = data;
-    return await getBeneficiaires(siren, { useCase });
-  });
-
-export const getEspaceAgentRneDocumentsAction = createServerFn()
+export const getAgentRneDocumentsFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -231,7 +218,7 @@ export const getEspaceAgentRneDocumentsAction = createServerFn()
     return await getDocumentsRNEProtected(siren);
   });
 
-export const getEspaceAgentAssociationProtected = createServerFn()
+export const getAgentAssociationProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withApplicationRight(ApplicationRights.associationProtected),
@@ -242,7 +229,7 @@ export const getEspaceAgentAssociationProtected = createServerFn()
     return await getAssociationProtected(siren);
   });
 
-export const getEspaceAgentEffectifsAnnuelsProtected = createServerFn()
+export const getAgentEffectifsAnnuelsProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -254,7 +241,7 @@ export const getEspaceAgentEffectifsAnnuelsProtected = createServerFn()
     return await getEffectifsAnnuelsProtected(siren);
   });
 
-export const getEspaceAgentEffectifsMensuelsProtected = createServerFn()
+export const getAgentEffectifsMensuelsProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
     withRateLimiting,
@@ -268,69 +255,4 @@ export const getEspaceAgentEffectifsMensuelsProtected = createServerFn()
       useCase,
       natureEffectif,
     });
-  });
-
-export const getEspaceAgentBilansProtected = createServerFn()
-  .middleware([
-    agentFnMiddleware,
-    withRateLimiting,
-    withUseCase,
-    withApplicationRight(ApplicationRights.bilansBDF),
-  ])
-  .inputValidator(getAgentBilansProtectedSchema)
-  .handler(async ({ data }) => {
-    const { siren, useCase } = data;
-    return await getBilansProtected(siren, { useCase });
-  });
-
-export const getEspaceAgentChiffreAffairesProtected = createServerFn()
-  .middleware([
-    agentFnMiddleware,
-    withRateLimiting,
-    withUseCase,
-    withApplicationRight(ApplicationRights.chiffreAffaires),
-  ])
-  .inputValidator(getAgentChiffreAffairesProtectedSchema)
-  .handler(async ({ data }) => {
-    const { siret, useCase } = data;
-    return await getChiffreAffairesProtected(siret, { useCase });
-  });
-
-export const getEspaceAgentTravauxPublics = createServerFn()
-  .middleware([
-    agentFnMiddleware,
-    withRateLimiting,
-    withUseCase,
-    withApplicationRight(ApplicationRights.travauxPublics),
-  ])
-  .inputValidator(getAgentTravauxPublicsSchema)
-  .handler(async ({ data }) => {
-    const { siret, useCase } = data;
-    return await getTravauxPublic(siret, { useCase });
-  });
-
-export const getEspaceAgentLiassesFiscalesProtected = createServerFn()
-  .middleware([
-    agentFnMiddleware,
-    withRateLimiting,
-    withUseCase,
-    withApplicationRight(ApplicationRights.liassesFiscales),
-  ])
-  .inputValidator(getAgentLiassesFiscalesProtectedSchema)
-  .handler(async ({ data }) => {
-    const { siren, year, useCase } = data;
-    return await getLiassesFiscalesProtected(siren, { year, useCase });
-  });
-
-export const getEspaceAgentLiensCapitalistiquesProtected = createServerFn()
-  .middleware([
-    agentFnMiddleware,
-    withRateLimiting,
-    withUseCase,
-    withApplicationRight(ApplicationRights.liensCapitalistiques),
-  ])
-  .inputValidator(getAgentLiensCapitalistiquesProtectedSchema)
-  .handler(async ({ data }) => {
-    const { siren, year, useCase } = data;
-    return await getLiensCapitalistiquesProtected(siren, { year, useCase });
   });

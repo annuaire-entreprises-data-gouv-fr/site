@@ -16,7 +16,7 @@ import {
   verifyTvaSchema,
 } from "./schemas";
 
-export const getRneDirigeants = createServerFn()
+export const getRneDirigeantsFn = createServerFn()
   .middleware([withApplicationRight(ApplicationRights.opendata)])
   .inputValidator(getDirigeantsSchema)
   .handler(async ({ data }) => {
@@ -24,7 +24,7 @@ export const getRneDirigeants = createServerFn()
     return await getDirigeantsRNE(siren, {});
   });
 
-export const getRneObservations = createServerFn()
+export const getRneObservationsFn = createServerFn()
   .middleware([withApplicationRight(ApplicationRights.opendata)])
   .inputValidator(getObservationsSchema)
   .handler(async ({ data }) => {
@@ -32,7 +32,7 @@ export const getRneObservations = createServerFn()
     return await getRNEObservations(siren, {});
   });
 
-export const getAssociation = createServerFn()
+export const getAssociationFn = createServerFn()
   .middleware([withApplicationRight(ApplicationRights.opendata)])
   .inputValidator(getAssociationSchema)
   .handler(async ({ data }) => {
@@ -40,7 +40,7 @@ export const getAssociation = createServerFn()
     return await getAssociationFromSlug(slug, {});
   });
 
-export const verifyTva = createServerFn()
+export const verifyTvaFn = createServerFn()
   .middleware([withApplicationRight(ApplicationRights.opendata)])
   .inputValidator(verifyTvaSchema)
   .handler(async ({ data }) => {
@@ -48,7 +48,7 @@ export const verifyTva = createServerFn()
     return await buildAndVerifyTVA(slug, {});
   });
 
-export const validateEORI = createServerFn()
+export const validateEORIFn = createServerFn()
   .middleware([withApplicationRight(ApplicationRights.opendata)])
   .inputValidator(validateEORISchema)
   .handler(async ({ data }) => {
@@ -56,7 +56,7 @@ export const validateEORI = createServerFn()
     return await getEORIValidation(siret, {});
   });
 
-export const getSubventionsAssociation = createServerFn()
+export const getSubventionsAssociationFn = createServerFn()
   .middleware([withApplicationRight(ApplicationRights.opendata)])
   .inputValidator(getSubventionsAssociationSchema)
   .handler(async ({ data }) => {

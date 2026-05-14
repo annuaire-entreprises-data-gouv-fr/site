@@ -5,7 +5,7 @@ import { AsyncDataSectionClient } from "#/components/section/data-section/client
 import { UniteLegalePageLink } from "#/components/unite-legale-page-link";
 import { Info } from "#/components-ui/alerts";
 import InpiPartiallyDownWarning from "#/components-ui/alerts-with-explanations/inpi-partially-down";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
@@ -13,7 +13,7 @@ import {
   type IUniteLegale,
   isEntrepreneurIndividuel,
 } from "#/models/core/types";
-import { getEspaceAgentDirigeantsProtected } from "#/server-functions/agent/data-fetching";
+import { getAgentDirigeantsProtectedFn } from "#/server-functions/agent/data-fetching";
 import { pluralize } from "#/utils/helpers";
 import DirigeantsContentProtected from "./content";
 
@@ -34,8 +34,8 @@ export default function DirigeantsSectionProtected({
     () => ({ siren: uniteLegale.siren, isEI }),
     [uniteLegale.siren, isEI]
   );
-  const dirigeants = useServerActionData(
-    getEspaceAgentDirigeantsProtected,
+  const dirigeants = useServerFnData(
+    getAgentDirigeantsProtectedFn,
     user,
     input,
     ApplicationRights.mandatairesRCS

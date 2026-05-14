@@ -5,13 +5,13 @@ import { FullTable } from "#/components/table/full";
 import { Info } from "#/components-ui/alerts";
 import ButtonLink from "#/components-ui/button";
 import ShowMore from "#/components-ui/show-more";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import { type IUniteLegale, isServicePublic } from "#/models/core/types";
 import type { IDocumentsRNE } from "#/models/rne/types";
-import { getEspaceAgentRneDocumentsAction } from "#/server-functions/agent/data-fetching";
+import { getAgentRneDocumentsFn } from "#/server-functions/agent/data-fetching";
 import { formatDateLong } from "#/utils/helpers";
 
 export const AgentActesRNE: React.FC<{
@@ -22,8 +22,8 @@ export const AgentActesRNE: React.FC<{
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const documentsRne = useServerActionData(
-    getEspaceAgentRneDocumentsAction,
+  const documentsRne = useServerFnData(
+    getAgentRneDocumentsFn,
     user,
     input,
     ApplicationRights.documentsRne

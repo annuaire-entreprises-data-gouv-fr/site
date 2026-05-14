@@ -9,7 +9,7 @@ import {
   useNotification,
 } from "#/hooks/use-notification";
 import type { IAgentsGroup } from "#/models/authentication/group";
-import { addUserToGroupAction } from "#/server-functions/agent/group-management";
+import { addUserToGroupFn } from "#/server-functions/agent/group-management";
 
 const MODAL_ID = "add-user";
 
@@ -29,7 +29,7 @@ export default function AddUserModal({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const mutation = useMutation({
-    mutationFn: addUserToGroupAction,
+    mutationFn: addUserToGroupFn,
     onSuccess: (result) => {
       addUserToGroupState(result);
 

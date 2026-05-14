@@ -2,12 +2,12 @@ import { useMemo } from "react";
 import { DataSectionClient } from "#/components/section/data-section";
 import { FullTable } from "#/components/table/full";
 import ButtonLink from "#/components-ui/button";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
-import { getEspaceAgentQualifelec } from "#/server-functions/agent/data-fetching";
+import { getAgentQualifelecFn } from "#/server-functions/agent/data-fetching";
 import { formatDate, formatDateLong } from "#/utils/helpers";
 
 export function QualifelecSection({
@@ -21,8 +21,8 @@ export function QualifelecSection({
     () => ({ siret: uniteLegale.siege.siret }),
     [uniteLegale.siege.siret]
   );
-  const qualifelec = useServerActionData(
-    getEspaceAgentQualifelec,
+  const qualifelec = useServerFnData(
+    getAgentQualifelecFn,
     user,
     input,
     ApplicationRights.protectedCertificats

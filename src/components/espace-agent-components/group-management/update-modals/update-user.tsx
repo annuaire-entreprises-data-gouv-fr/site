@@ -8,7 +8,7 @@ import {
   NotificationTypeEnum,
   useNotification,
 } from "#/hooks/use-notification";
-import { updateUserRoleInGroupAction } from "#/server-functions/agent/group-management";
+import { updateUserRoleInGroupFn } from "#/server-functions/agent/group-management";
 
 export default function UpdateUserSelect({
   user,
@@ -25,7 +25,7 @@ export default function UpdateUserSelect({
   const [optimisticRoleId, setOptimisticRoleId] = useState<number | null>(null);
 
   const mutation = useMutation({
-    mutationFn: updateUserRoleInGroupAction,
+    mutationFn: updateUserRoleInGroupFn,
     onSuccess: (result) => {
       updateUserFromGroupState(result);
       setOptimisticRoleId(null);

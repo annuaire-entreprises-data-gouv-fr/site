@@ -2,13 +2,13 @@ import { useMemo } from "react";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { FullTable } from "#/components/table/full";
 import FAQLink from "#/components-ui/faq-link";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type { UseCase } from "#/models/use-cases";
-import { getAgentBilansProtectedAction } from "#/server-functions/agent/data-fetching";
+import { getAgentBilansProtectedFn } from "#/server-functions/agent/data-fetching";
 import { formatCurrency, formatDate, getDateFromYYYYMM } from "#/utils/helpers";
 
 export function ProtectedIndicateursFinanciersBDF({
@@ -32,8 +32,8 @@ export function ProtectedIndicateursFinanciersBDF({
     () => ({ siren: uniteLegale.siren, useCase }),
     [uniteLegale.siren, useCase]
   );
-  const banqueDeFranceBilansProtected = useServerActionData(
-    getAgentBilansProtectedAction,
+  const banqueDeFranceBilansProtected = useServerFnData(
+    getAgentBilansProtectedFn,
     user,
     input,
     ApplicationRights.bilansBDF

@@ -6,7 +6,7 @@ import FAQLink from "#/components-ui/faq-link";
 import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
 import { Loader } from "#/components-ui/loader";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { isAPI404 } from "#/models/api-not-responding";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
@@ -15,7 +15,7 @@ import {
 } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { hasAnyError, isDataLoading } from "#/models/data-fetching";
-import { getEspaceAgentEffectifsAnnuelsProtected } from "#/server-functions/agent/data-fetching";
+import { getAgentEffectifsAnnuelsProtectedFn } from "#/server-functions/agent/data-fetching";
 import { formatFloatFr } from "#/utils/helpers";
 import { libelleTrancheEffectif } from "#/utils/helpers/formatting/codes-effectifs";
 
@@ -41,8 +41,8 @@ export const ProtectedEffectifCell = ({
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const effectifsAnnuelsProtected = useServerActionData(
-    getEspaceAgentEffectifsAnnuelsProtected,
+  const effectifsAnnuelsProtected = useServerFnData(
+    getAgentEffectifsAnnuelsProtectedFn,
     user,
     input,
     ApplicationRights.effectifs

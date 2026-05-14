@@ -4,7 +4,7 @@ import {
   mergeDataSources,
 } from "#/components/section/data-section/client";
 import { useFetchFinancesSociete } from "#/hooks/fetch/indicateurs-financiers-societe";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
@@ -15,7 +15,7 @@ import {
   type IIndicateursFinanciersSociete,
 } from "#/models/finances-societe/types";
 import type { UseCase } from "#/models/use-cases";
-import { getAgentChiffreAffairesProtectedAction } from "#/server-functions/agent/data-fetching";
+import { getAgentChiffreAffairesProtectedFn } from "#/server-functions/agent/data-fetching";
 import { FinancesSocieteInnerSection } from "./inner-section";
 
 export function ProtectedFinancesSocieteSection({
@@ -33,8 +33,8 @@ export function ProtectedFinancesSocieteSection({
     () => ({ siret: uniteLegale.siege.siret, useCase }),
     [uniteLegale.siege.siret, useCase]
   );
-  const chiffreAffairesProtected = useServerActionData(
-    getAgentChiffreAffairesProtectedAction,
+  const chiffreAffairesProtected = useServerFnData(
+    getAgentChiffreAffairesProtectedFn,
     user,
     input,
     ApplicationRights.chiffreAffaires
