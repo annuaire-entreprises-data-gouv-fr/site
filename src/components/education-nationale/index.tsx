@@ -21,8 +21,7 @@ export const EtablissementsScolairesSection: React.FC<{
         dans l’annuaire de l’
         <EDUCNAT />. En revanche, vous pouvez peut-être les retrouver grâce au{" "}
         <a href={routes.educationNationale.site}>
-          moteur de recherche de l’
-          <EDUCNAT />
+          moteur de recherche de l’éducation nationale
         </a>
         .
       </p>
