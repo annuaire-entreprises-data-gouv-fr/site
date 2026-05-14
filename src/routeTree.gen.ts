@@ -29,10 +29,10 @@ import { Route as HeaderDefaultPartagerRouteImport } from './routes/_header-defa
 import { Route as HeaderDefaultModalitesUtilisationRouteImport } from './routes/_header-default/modalites-utilisation'
 import { Route as HeaderDefaultMentionsLegalesRouteImport } from './routes/_header-default/mentions-legales'
 import { Route as HeaderDefaultHistoriqueDesModificationsRouteImport } from './routes/_header-default/historique-des-modifications'
-import { Route as HeaderDefaultFaqRouteImport } from './routes/_header-default/faq'
 import { Route as HeaderDefaultExportSireneRouteImport } from './routes/_header-default/export-sirene'
 import { Route as HeaderDefaultAccessibiliteRouteImport } from './routes/_header-default/accessibilite'
 import { Route as HeaderSearchRechercherIndexRouteImport } from './routes/_header-search/rechercher/index'
+import { Route as HeaderDefaultFaqIndexRouteImport } from './routes/_header-default/faq.index'
 import { Route as HeaderDefaultDefinitionsIndexRouteImport } from './routes/_header-default/definitions.index'
 import { Route as HeaderDefaultAdministrationIndexRouteImport } from './routes/_header-default/administration.index'
 import { Route as ApiPingSlugRouteImport } from './routes/api/ping/$slug'
@@ -47,7 +47,6 @@ import { Route as HeaderDefaultLabelsCertificatsSlugRouteImport } from './routes
 import { Route as HeaderDefaultJustificatifImmatriculationPdfSlugRouteImport } from './routes/_header-default/justificatif-immatriculation-pdf.$slug'
 import { Route as HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRouteImport } from './routes/_header-default/formulaire.supprimer-donnees-personnelles-entreprise'
 import { Route as HeaderDefaultFaqParcoursRouteImport } from './routes/_header-default/faq.parcours'
-import { Route as HeaderDefaultFaqModifierRouteImport } from './routes/_header-default/faq.modifier'
 import { Route as HeaderDefaultFaqSlugRouteImport } from './routes/_header-default/faq.$slug'
 import { Route as HeaderDefaultEtablissementsScolairesSlugRouteImport } from './routes/_header-default/etablissements-scolaires.$slug'
 import { Route as HeaderDefaultEtablissementSlugRouteImport } from './routes/_header-default/etablissement.$slug'
@@ -69,6 +68,7 @@ import { Route as HeaderConnexionConnexionAuRevoirRouteImport } from './routes/_
 import { Route as HeaderCompteCompteMesGroupesRouteImport } from './routes/_header-compte/compte.mes-groupes'
 import { Route as HeaderCompteCompteAccueilRouteImport } from './routes/_header-compte/compte.accueil'
 import { Route as HeaderMinimalFormulaireNpsIndexRouteImport } from './routes/_header-minimal/formulaire/nps/index'
+import { Route as HeaderDefaultFaqModifierIndexRouteImport } from './routes/_header-default/faq.modifier.index'
 import { Route as HeaderDefaultAProposEquipeIndexRouteImport } from './routes/_header-default/a-propos/equipe/index'
 import { Route as ApiShareButtonSlugRouteImport } from './routes/api/share/button/$slug'
 import { Route as ApiAuthFranceConnectLogoutCallbackRouteImport } from './routes/api/auth/france-connect/logout-callback'
@@ -182,11 +182,6 @@ const HeaderDefaultHistoriqueDesModificationsRoute =
     path: '/historique-des-modifications',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
-const HeaderDefaultFaqRoute = HeaderDefaultFaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => HeaderDefaultRouteRoute,
-} as any)
 const HeaderDefaultExportSireneRoute =
   HeaderDefaultExportSireneRouteImport.update({
     id: '/export-sirene',
@@ -205,6 +200,11 @@ const HeaderSearchRechercherIndexRoute =
     path: '/rechercher/',
     getParentRoute: () => HeaderSearchRouteRoute,
   } as any)
+const HeaderDefaultFaqIndexRoute = HeaderDefaultFaqIndexRouteImport.update({
+  id: '/faq/',
+  path: '/faq/',
+  getParentRoute: () => HeaderDefaultRouteRoute,
+} as any)
 const HeaderDefaultDefinitionsIndexRoute =
   HeaderDefaultDefinitionsIndexRouteImport.update({
     id: '/definitions/',
@@ -283,20 +283,14 @@ const HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute =
   )
 const HeaderDefaultFaqParcoursRoute =
   HeaderDefaultFaqParcoursRouteImport.update({
-    id: '/parcours',
-    path: '/parcours',
-    getParentRoute: () => HeaderDefaultFaqRoute,
-  } as any)
-const HeaderDefaultFaqModifierRoute =
-  HeaderDefaultFaqModifierRouteImport.update({
-    id: '/modifier',
-    path: '/modifier',
-    getParentRoute: () => HeaderDefaultFaqRoute,
+    id: '/faq/parcours',
+    path: '/faq/parcours',
+    getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
 const HeaderDefaultFaqSlugRoute = HeaderDefaultFaqSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => HeaderDefaultFaqRoute,
+  id: '/faq/$slug',
+  path: '/faq/$slug',
+  getParentRoute: () => HeaderDefaultRouteRoute,
 } as any)
 const HeaderDefaultEtablissementsScolairesSlugRoute =
   HeaderDefaultEtablissementsScolairesSlugRouteImport.update({
@@ -417,6 +411,12 @@ const HeaderMinimalFormulaireNpsIndexRoute =
     path: '/formulaire/nps/',
     getParentRoute: () => HeaderMinimalRouteRoute,
   } as any)
+const HeaderDefaultFaqModifierIndexRoute =
+  HeaderDefaultFaqModifierIndexRouteImport.update({
+    id: '/faq/modifier/',
+    path: '/faq/modifier/',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
 const HeaderDefaultAProposEquipeIndexRoute =
   HeaderDefaultAProposEquipeIndexRouteImport.update({
     id: '/a-propos/equipe/',
@@ -478,9 +478,9 @@ const ApiAuthAgentConnectCallbackRoute =
   } as any)
 const HeaderDefaultFaqModifierSlugRoute =
   HeaderDefaultFaqModifierSlugRouteImport.update({
-    id: '/$slug',
-    path: '/$slug',
-    getParentRoute: () => HeaderDefaultFaqModifierRoute,
+    id: '/faq/modifier/$slug',
+    path: '/faq/modifier/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
 const HeaderDefaultErreurIntrouvableSlugRoute =
   HeaderDefaultErreurIntrouvableSlugRouteImport.update({
@@ -523,7 +523,6 @@ export interface FileRoutesByFullPath {
   '/': typeof HeaderHomeIndexRoute
   '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
   '/export-sirene': typeof HeaderDefaultExportSireneRoute
-  '/faq': typeof HeaderDefaultFaqRouteWithChildren
   '/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
   '/mentions-legales': typeof HeaderDefaultMentionsLegalesRoute
   '/modalites-utilisation': typeof HeaderDefaultModalitesUtilisationRoute
@@ -555,7 +554,6 @@ export interface FileRoutesByFullPath {
   '/etablissement/$slug': typeof HeaderDefaultEtablissementSlugRoute
   '/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
   '/faq/$slug': typeof HeaderDefaultFaqSlugRoute
-  '/faq/modifier': typeof HeaderDefaultFaqModifierRouteWithChildren
   '/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
   '/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   '/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
@@ -570,6 +568,7 @@ export interface FileRoutesByFullPath {
   '/api/ping/$slug': typeof ApiPingSlugRoute
   '/administration/': typeof HeaderDefaultAdministrationIndexRoute
   '/definitions/': typeof HeaderDefaultDefinitionsIndexRoute
+  '/faq/': typeof HeaderDefaultFaqIndexRoute
   '/rechercher/': typeof HeaderSearchRechercherIndexRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
@@ -587,6 +586,7 @@ export interface FileRoutesByFullPath {
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
   '/a-propos/equipe/': typeof HeaderDefaultAProposEquipeIndexRoute
+  '/faq/modifier/': typeof HeaderDefaultFaqModifierIndexRoute
   '/formulaire/nps/': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
@@ -594,7 +594,6 @@ export interface FileRoutesByTo {
   '/': typeof HeaderHomeIndexRoute
   '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
   '/export-sirene': typeof HeaderDefaultExportSireneRoute
-  '/faq': typeof HeaderDefaultFaqRouteWithChildren
   '/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
   '/mentions-legales': typeof HeaderDefaultMentionsLegalesRoute
   '/modalites-utilisation': typeof HeaderDefaultModalitesUtilisationRoute
@@ -626,7 +625,6 @@ export interface FileRoutesByTo {
   '/etablissement/$slug': typeof HeaderDefaultEtablissementSlugRoute
   '/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
   '/faq/$slug': typeof HeaderDefaultFaqSlugRoute
-  '/faq/modifier': typeof HeaderDefaultFaqModifierRouteWithChildren
   '/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
   '/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   '/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
@@ -641,6 +639,7 @@ export interface FileRoutesByTo {
   '/api/ping/$slug': typeof ApiPingSlugRoute
   '/administration': typeof HeaderDefaultAdministrationIndexRoute
   '/definitions': typeof HeaderDefaultDefinitionsIndexRoute
+  '/faq': typeof HeaderDefaultFaqIndexRoute
   '/rechercher': typeof HeaderSearchRechercherIndexRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
@@ -658,6 +657,7 @@ export interface FileRoutesByTo {
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
   '/a-propos/equipe': typeof HeaderDefaultAProposEquipeIndexRoute
+  '/faq/modifier': typeof HeaderDefaultFaqModifierIndexRoute
   '/formulaire/nps': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
@@ -673,7 +673,6 @@ export interface FileRoutesById {
   '/_header-search': typeof HeaderSearchRouteRouteWithChildren
   '/_header-default/accessibilite': typeof HeaderDefaultAccessibiliteRoute
   '/_header-default/export-sirene': typeof HeaderDefaultExportSireneRoute
-  '/_header-default/faq': typeof HeaderDefaultFaqRouteWithChildren
   '/_header-default/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
   '/_header-default/mentions-legales': typeof HeaderDefaultMentionsLegalesRoute
   '/_header-default/modalites-utilisation': typeof HeaderDefaultModalitesUtilisationRoute
@@ -706,7 +705,6 @@ export interface FileRoutesById {
   '/_header-default/etablissement/$slug': typeof HeaderDefaultEtablissementSlugRoute
   '/_header-default/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
   '/_header-default/faq/$slug': typeof HeaderDefaultFaqSlugRoute
-  '/_header-default/faq/modifier': typeof HeaderDefaultFaqModifierRouteWithChildren
   '/_header-default/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
   '/_header-default/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   '/_header-default/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
@@ -721,6 +719,7 @@ export interface FileRoutesById {
   '/api/ping/$slug': typeof ApiPingSlugRoute
   '/_header-default/administration/': typeof HeaderDefaultAdministrationIndexRoute
   '/_header-default/definitions/': typeof HeaderDefaultDefinitionsIndexRoute
+  '/_header-default/faq/': typeof HeaderDefaultFaqIndexRoute
   '/_header-search/rechercher/': typeof HeaderSearchRechercherIndexRoute
   '/_header-connexion/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/_header-connexion/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
@@ -738,6 +737,7 @@ export interface FileRoutesById {
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
   '/_header-default/a-propos/equipe/': typeof HeaderDefaultAProposEquipeIndexRoute
+  '/_header-default/faq/modifier/': typeof HeaderDefaultFaqModifierIndexRoute
   '/_header-minimal/formulaire/nps/': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
 }
@@ -747,7 +747,6 @@ export interface FileRouteTypes {
     | '/'
     | '/accessibilite'
     | '/export-sirene'
-    | '/faq'
     | '/historique-des-modifications'
     | '/mentions-legales'
     | '/modalites-utilisation'
@@ -779,7 +778,6 @@ export interface FileRouteTypes {
     | '/etablissement/$slug'
     | '/etablissements-scolaires/$slug'
     | '/faq/$slug'
-    | '/faq/modifier'
     | '/faq/parcours'
     | '/formulaire/supprimer-donnees-personnelles-entreprise'
     | '/justificatif-immatriculation-pdf/$slug'
@@ -794,6 +792,7 @@ export interface FileRouteTypes {
     | '/api/ping/$slug'
     | '/administration/'
     | '/definitions/'
+    | '/faq/'
     | '/rechercher/'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
@@ -811,6 +810,7 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
     | '/a-propos/equipe/'
+    | '/faq/modifier/'
     | '/formulaire/nps/'
     | '/api/download/espace-agent/documents/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -818,7 +818,6 @@ export interface FileRouteTypes {
     | '/'
     | '/accessibilite'
     | '/export-sirene'
-    | '/faq'
     | '/historique-des-modifications'
     | '/mentions-legales'
     | '/modalites-utilisation'
@@ -850,7 +849,6 @@ export interface FileRouteTypes {
     | '/etablissement/$slug'
     | '/etablissements-scolaires/$slug'
     | '/faq/$slug'
-    | '/faq/modifier'
     | '/faq/parcours'
     | '/formulaire/supprimer-donnees-personnelles-entreprise'
     | '/justificatif-immatriculation-pdf/$slug'
@@ -865,6 +863,7 @@ export interface FileRouteTypes {
     | '/api/ping/$slug'
     | '/administration'
     | '/definitions'
+    | '/faq'
     | '/rechercher'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
@@ -882,6 +881,7 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
     | '/a-propos/equipe'
+    | '/faq/modifier'
     | '/formulaire/nps'
     | '/api/download/espace-agent/documents/$slug'
   id:
@@ -896,7 +896,6 @@ export interface FileRouteTypes {
     | '/_header-search'
     | '/_header-default/accessibilite'
     | '/_header-default/export-sirene'
-    | '/_header-default/faq'
     | '/_header-default/historique-des-modifications'
     | '/_header-default/mentions-legales'
     | '/_header-default/modalites-utilisation'
@@ -929,7 +928,6 @@ export interface FileRouteTypes {
     | '/_header-default/etablissement/$slug'
     | '/_header-default/etablissements-scolaires/$slug'
     | '/_header-default/faq/$slug'
-    | '/_header-default/faq/modifier'
     | '/_header-default/faq/parcours'
     | '/_header-default/formulaire/supprimer-donnees-personnelles-entreprise'
     | '/_header-default/justificatif-immatriculation-pdf/$slug'
@@ -944,6 +942,7 @@ export interface FileRouteTypes {
     | '/api/ping/$slug'
     | '/_header-default/administration/'
     | '/_header-default/definitions/'
+    | '/_header-default/faq/'
     | '/_header-search/rechercher/'
     | '/_header-connexion/connexion/habilitation/administration-inconnue'
     | '/_header-connexion/connexion/habilitation/prestataires'
@@ -961,6 +960,7 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
     | '/_header-default/a-propos/equipe/'
+    | '/_header-default/faq/modifier/'
     | '/_header-minimal/formulaire/nps/'
     | '/api/download/espace-agent/documents/$slug'
   fileRoutesById: FileRoutesById
@@ -1135,13 +1135,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultHistoriqueDesModificationsRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
-    '/_header-default/faq': {
-      id: '/_header-default/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof HeaderDefaultFaqRouteImport
-      parentRoute: typeof HeaderDefaultRouteRoute
-    }
     '/_header-default/export-sirene': {
       id: '/_header-default/export-sirene'
       path: '/export-sirene'
@@ -1162,6 +1155,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/rechercher/'
       preLoaderRoute: typeof HeaderSearchRechercherIndexRouteImport
       parentRoute: typeof HeaderSearchRouteRoute
+    }
+    '/_header-default/faq/': {
+      id: '/_header-default/faq/'
+      path: '/faq'
+      fullPath: '/faq/'
+      preLoaderRoute: typeof HeaderDefaultFaqIndexRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/_header-default/definitions/': {
       id: '/_header-default/definitions/'
@@ -1256,24 +1256,17 @@ declare module '@tanstack/react-router' {
     }
     '/_header-default/faq/parcours': {
       id: '/_header-default/faq/parcours'
-      path: '/parcours'
+      path: '/faq/parcours'
       fullPath: '/faq/parcours'
       preLoaderRoute: typeof HeaderDefaultFaqParcoursRouteImport
-      parentRoute: typeof HeaderDefaultFaqRoute
-    }
-    '/_header-default/faq/modifier': {
-      id: '/_header-default/faq/modifier'
-      path: '/modifier'
-      fullPath: '/faq/modifier'
-      preLoaderRoute: typeof HeaderDefaultFaqModifierRouteImport
-      parentRoute: typeof HeaderDefaultFaqRoute
+      parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/_header-default/faq/$slug': {
       id: '/_header-default/faq/$slug'
-      path: '/$slug'
+      path: '/faq/$slug'
       fullPath: '/faq/$slug'
       preLoaderRoute: typeof HeaderDefaultFaqSlugRouteImport
-      parentRoute: typeof HeaderDefaultFaqRoute
+      parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/_header-default/etablissements-scolaires/$slug': {
       id: '/_header-default/etablissements-scolaires/$slug'
@@ -1415,6 +1408,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderMinimalFormulaireNpsIndexRouteImport
       parentRoute: typeof HeaderMinimalRouteRoute
     }
+    '/_header-default/faq/modifier/': {
+      id: '/_header-default/faq/modifier/'
+      path: '/faq/modifier'
+      fullPath: '/faq/modifier/'
+      preLoaderRoute: typeof HeaderDefaultFaqModifierIndexRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
     '/_header-default/a-propos/equipe/': {
       id: '/_header-default/a-propos/equipe/'
       path: '/a-propos/equipe'
@@ -1487,10 +1487,10 @@ declare module '@tanstack/react-router' {
     }
     '/_header-default/faq/modifier/$slug': {
       id: '/_header-default/faq/modifier/$slug'
-      path: '/$slug'
+      path: '/faq/modifier/$slug'
       fullPath: '/faq/modifier/$slug'
       preLoaderRoute: typeof HeaderDefaultFaqModifierSlugRouteImport
-      parentRoute: typeof HeaderDefaultFaqModifierRoute
+      parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/_header-default/erreur/introuvable/$slug': {
       id: '/_header-default/erreur/introuvable/$slug'
@@ -1576,39 +1576,9 @@ const HeaderConnexionRouteRouteChildren: HeaderConnexionRouteRouteChildren = {
 const HeaderConnexionRouteRouteWithChildren =
   HeaderConnexionRouteRoute._addFileChildren(HeaderConnexionRouteRouteChildren)
 
-interface HeaderDefaultFaqModifierRouteChildren {
-  HeaderDefaultFaqModifierSlugRoute: typeof HeaderDefaultFaqModifierSlugRoute
-}
-
-const HeaderDefaultFaqModifierRouteChildren: HeaderDefaultFaqModifierRouteChildren =
-  {
-    HeaderDefaultFaqModifierSlugRoute: HeaderDefaultFaqModifierSlugRoute,
-  }
-
-const HeaderDefaultFaqModifierRouteWithChildren =
-  HeaderDefaultFaqModifierRoute._addFileChildren(
-    HeaderDefaultFaqModifierRouteChildren,
-  )
-
-interface HeaderDefaultFaqRouteChildren {
-  HeaderDefaultFaqSlugRoute: typeof HeaderDefaultFaqSlugRoute
-  HeaderDefaultFaqModifierRoute: typeof HeaderDefaultFaqModifierRouteWithChildren
-  HeaderDefaultFaqParcoursRoute: typeof HeaderDefaultFaqParcoursRoute
-}
-
-const HeaderDefaultFaqRouteChildren: HeaderDefaultFaqRouteChildren = {
-  HeaderDefaultFaqSlugRoute: HeaderDefaultFaqSlugRoute,
-  HeaderDefaultFaqModifierRoute: HeaderDefaultFaqModifierRouteWithChildren,
-  HeaderDefaultFaqParcoursRoute: HeaderDefaultFaqParcoursRoute,
-}
-
-const HeaderDefaultFaqRouteWithChildren =
-  HeaderDefaultFaqRoute._addFileChildren(HeaderDefaultFaqRouteChildren)
-
 interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultAccessibiliteRoute: typeof HeaderDefaultAccessibiliteRoute
   HeaderDefaultExportSireneRoute: typeof HeaderDefaultExportSireneRoute
-  HeaderDefaultFaqRoute: typeof HeaderDefaultFaqRouteWithChildren
   HeaderDefaultHistoriqueDesModificationsRoute: typeof HeaderDefaultHistoriqueDesModificationsRoute
   HeaderDefaultMentionsLegalesRoute: typeof HeaderDefaultMentionsLegalesRoute
   HeaderDefaultModalitesUtilisationRoute: typeof HeaderDefaultModalitesUtilisationRoute
@@ -1630,19 +1600,23 @@ interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultEntrepriseSlugRoute: typeof HeaderDefaultEntrepriseSlugRoute
   HeaderDefaultEtablissementSlugRoute: typeof HeaderDefaultEtablissementSlugRoute
   HeaderDefaultEtablissementsScolairesSlugRoute: typeof HeaderDefaultEtablissementsScolairesSlugRoute
+  HeaderDefaultFaqSlugRoute: typeof HeaderDefaultFaqSlugRoute
+  HeaderDefaultFaqParcoursRoute: typeof HeaderDefaultFaqParcoursRoute
   HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute: typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   HeaderDefaultJustificatifImmatriculationPdfSlugRoute: typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
   HeaderDefaultLabelsCertificatsSlugRoute: typeof HeaderDefaultLabelsCertificatsSlugRoute
   HeaderDefaultAdministrationIndexRoute: typeof HeaderDefaultAdministrationIndexRoute
   HeaderDefaultDefinitionsIndexRoute: typeof HeaderDefaultDefinitionsIndexRoute
+  HeaderDefaultFaqIndexRoute: typeof HeaderDefaultFaqIndexRoute
   HeaderDefaultErreurIntrouvableSlugRoute: typeof HeaderDefaultErreurIntrouvableSlugRoute
+  HeaderDefaultFaqModifierSlugRoute: typeof HeaderDefaultFaqModifierSlugRoute
   HeaderDefaultAProposEquipeIndexRoute: typeof HeaderDefaultAProposEquipeIndexRoute
+  HeaderDefaultFaqModifierIndexRoute: typeof HeaderDefaultFaqModifierIndexRoute
 }
 
 const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
   HeaderDefaultAccessibiliteRoute: HeaderDefaultAccessibiliteRoute,
   HeaderDefaultExportSireneRoute: HeaderDefaultExportSireneRoute,
-  HeaderDefaultFaqRoute: HeaderDefaultFaqRouteWithChildren,
   HeaderDefaultHistoriqueDesModificationsRoute:
     HeaderDefaultHistoriqueDesModificationsRoute,
   HeaderDefaultMentionsLegalesRoute: HeaderDefaultMentionsLegalesRoute,
@@ -1671,6 +1645,8 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
   HeaderDefaultEtablissementSlugRoute: HeaderDefaultEtablissementSlugRoute,
   HeaderDefaultEtablissementsScolairesSlugRoute:
     HeaderDefaultEtablissementsScolairesSlugRoute,
+  HeaderDefaultFaqSlugRoute: HeaderDefaultFaqSlugRoute,
+  HeaderDefaultFaqParcoursRoute: HeaderDefaultFaqParcoursRoute,
   HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute:
     HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute,
   HeaderDefaultJustificatifImmatriculationPdfSlugRoute:
@@ -1679,9 +1655,12 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
     HeaderDefaultLabelsCertificatsSlugRoute,
   HeaderDefaultAdministrationIndexRoute: HeaderDefaultAdministrationIndexRoute,
   HeaderDefaultDefinitionsIndexRoute: HeaderDefaultDefinitionsIndexRoute,
+  HeaderDefaultFaqIndexRoute: HeaderDefaultFaqIndexRoute,
   HeaderDefaultErreurIntrouvableSlugRoute:
     HeaderDefaultErreurIntrouvableSlugRoute,
+  HeaderDefaultFaqModifierSlugRoute: HeaderDefaultFaqModifierSlugRoute,
   HeaderDefaultAProposEquipeIndexRoute: HeaderDefaultAProposEquipeIndexRoute,
+  HeaderDefaultFaqModifierIndexRoute: HeaderDefaultFaqModifierIndexRoute,
 }
 
 const HeaderDefaultRouteRouteWithChildren =
