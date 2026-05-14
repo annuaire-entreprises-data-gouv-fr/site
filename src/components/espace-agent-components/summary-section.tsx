@@ -4,19 +4,19 @@ import { TwoColumnTable } from "#/components/table/simple";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { PrintNever } from "#/components-ui/print-visibility";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import type { IUniteLegale } from "#/models/core/types";
 
 interface IProps {
-  session: ISession | null;
   uniteLegale: IUniteLegale;
+  user: IAgentInfo | null;
 }
 
-export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => (
+export const EspaceAgentSummarySection = ({ uniteLegale, user }: IProps) => (
   <PrintNever>
     <Section isProtected title="Résumé pour les agents publics">
       <TwoColumnTable
@@ -40,7 +40,7 @@ export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => (
               <Icon slug="download">Télécharger les bilans</Icon>
             </Link>,
           ],
-          ...(hasRights(session, ApplicationRights.conformiteSociale)
+          ...(hasRights({ user }, ApplicationRights.conformiteSociale)
             ? [
                 ["", <br />],
                 [
@@ -53,7 +53,7 @@ export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => (
                 ],
               ]
             : []),
-          ...(hasRights(session, ApplicationRights.conformiteFiscale)
+          ...(hasRights({ user }, ApplicationRights.conformiteFiscale)
             ? [
                 ["", <br />],
                 [
@@ -66,7 +66,7 @@ export const EspaceAgentSummarySection = ({ uniteLegale, session }: IProps) => (
                 ],
               ]
             : []),
-          ...(hasRights(session, ApplicationRights.travauxPublics)
+          ...(hasRights({ user }, ApplicationRights.travauxPublics)
             ? [
                 [
                   "Travaux",

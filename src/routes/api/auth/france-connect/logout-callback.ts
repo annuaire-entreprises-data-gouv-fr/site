@@ -32,7 +32,6 @@ export const Route = createFileRoute(
           await session.update({
             FC_CONNECT_CHECK: undefined,
             franceConnectHidePersonalDataSession: undefined,
-            lastVisitTimestamp: undefined,
             pathFrom: undefined,
           });
 

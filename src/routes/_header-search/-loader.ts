@@ -22,7 +22,7 @@ export function beforeLoadCheckTerme(searchTerm: string | undefined) {
       to: "/etablissement/$slug",
       params: { slug: sirenOrSiretParam },
       search: {
-        redirected: "1",
+        redirected: 1,
       },
     });
   }
@@ -31,7 +31,7 @@ export function beforeLoadCheckTerme(searchTerm: string | undefined) {
       to: "/entreprise/$slug",
       params: { slug: sirenOrSiretParam },
       search: {
-        redirected: "1",
+        redirected: 1,
       },
     });
   }
