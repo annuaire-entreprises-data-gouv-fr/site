@@ -1,13 +1,78 @@
 import { createFileRoute } from "@tanstack/react-router";
+import DonneesFinancieresAssociation from "#/components/screens/donnees-financieres.$slug/donnees-financieres-association";
+import DonneesFinancieresSociete from "#/components/screens/donnees-financieres.$slug/donnees-financieres-societe";
+import Title from "#/components/title-section";
+import { FICHE } from "#/components/title-section/tabs";
+import { useAuth } from "#/contexts/auth.context";
+import { isAssociation } from "#/models/core/types";
+import { meta } from "#/seo";
+import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
+import {
+  uniteLegalePageDescription,
+  uniteLegalePageTitle,
+} from "#/utils/helpers";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute(
   "/_header-default/donnees-financieres/$slug"
 )({
+  loader: async ({ params }) => {
+    const uniteLegale = await getUniteLegaleFromSlugFn({
+      data: { slug: params.slug },
+    });
+
+    return { uniteLegale };
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) {
+      return {
+        meta: meta({
+          title: "Page non trouvée",
+          robots: {
+            follow: false,
+          },
+        }),
+      };
+    }
+
+    const { uniteLegale } = loaderData;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/donnees-financieres/${uniteLegale.siren}`;
+    return {
+      meta: meta({
+        title: `Données financières - ${uniteLegalePageTitle(uniteLegale)}`,
+        description: uniteLegalePageDescription(uniteLegale),
+        robots: {
+          follow: true,
+          index: false,
+        },
+        alternates: {
+          canonical,
+        },
+      }),
+      links: [
+        {
+          rel: "canonical",
+          href: canonical,
+        },
+      ],
+    };
+  },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
 });
 
 function RouteComponent() {
-  return <div>Hello "/_header-default/donnees-financieres/$slug"!</div>;
+  const { uniteLegale } = Route.useLoaderData();
+  const { user } = useAuth();
+
+  return (
+    <div className="content-container">
+      <Title ficheType={FICHE.FINANCES} uniteLegale={uniteLegale} user={user} />
+      {isAssociation(uniteLegale) ? (
+        <DonneesFinancieresAssociation uniteLegale={uniteLegale} user={user} />
+      ) : (
+        <DonneesFinancieresSociete uniteLegale={uniteLegale} user={user} />
+      )}
+    </div>
+  );
 }
