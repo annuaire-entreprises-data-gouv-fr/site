@@ -4,11 +4,11 @@ import { Link } from "#/components/Link";
 import ButtonLink from "#/components-ui/button";
 import FAQLink from "#/components-ui/faq-link";
 import { Icon } from "#/components-ui/icon/wrapper";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import type { ISession } from "#/models/authentication/user/session";
 import {
   documentNonDiffusiblePlaceHolder,
   estDiffusible,
@@ -18,10 +18,10 @@ import type { IEtablissement } from "#/models/core/types";
 
 const AvisSituationLink: React.FC<{
   etablissement: IEtablissement;
-  session: ISession | null;
+  user: IAgentInfo | null;
   label?: string;
   button?: boolean;
-}> = ({ etablissement, label, button = false, session }) => {
+}> = ({ etablissement, label, button = false, user }) => {
   const link = button ? (
     <ButtonLink
       alt
@@ -43,7 +43,7 @@ const AvisSituationLink: React.FC<{
   if (estDiffusible(etablissement)) {
     return link;
   }
-  if (hasRights(session, ApplicationRights.isAgent)) {
+  if (hasRights({ user }, ApplicationRights.isAgent)) {
     if (estNonDiffusibleProtected(etablissement)) {
       return link;
     }

@@ -13,7 +13,7 @@ import BreakPageForPrint from "#/components-ui/print-break-page";
 import { PrintNever } from "#/components-ui/print-visibility";
 import { Tag } from "#/components-ui/tag";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { ISession } from "#/models/authentication/user/session";
+import type { IAgentInfo } from "#/models/authentication/agent";
 import { estActif } from "#/models/core/etat-administratif";
 import type { IEtablissement, IUniteLegale } from "#/models/core/types";
 import {
@@ -24,9 +24,9 @@ import {
 
 interface IProps {
   etablissement: IEtablissement;
-  session: ISession | null;
   uniteLegale: IUniteLegale;
   usedInEntreprisePage?: boolean;
+  user: IAgentInfo | null;
   withDenomination?: boolean;
 }
 
@@ -35,7 +35,7 @@ const EtablissementSection: React.FC<IProps> = ({
   uniteLegale,
   usedInEntreprisePage,
   withDenomination,
-  session,
+  user,
 }) => {
   const uniteLegaleLabel = `${uniteLegaleLabelWithPronounContracted(
     uniteLegale
@@ -165,14 +165,14 @@ const EtablissementSection: React.FC<IProps> = ({
             button={true}
             etablissement={etablissement}
             label="télécharger"
-            session={session}
+            user={user}
           />
           {!usedInEntreprisePage && uniteLegale.dateMiseAJourInpi && (
             <>
               <br />
               Extrait RNE {uniteLegaleLabel} (
               <Link href="/faq/extrait-kbis">équivalent KBIS/D1</Link>) :{" "}
-              <ExtraitRNELink session={session} uniteLegale={uniteLegale} />
+              <ExtraitRNELink uniteLegale={uniteLegale} user={user} />
             </>
           )}
         </>
