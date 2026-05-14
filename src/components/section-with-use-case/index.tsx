@@ -57,7 +57,7 @@ const DefaultIntroContent = () => (
     Les agents publics peuvent demander à accéder à cette donnée uniquement dans
     les cas d'usage justifiant d'un intérêt légitime. En déclarant le cadre
     juridique dans lequel vous accédez à ces données, vous vous engagez{" "}
-    <Link href="/modalites-utilisation">
+    <Link to="/modalites-utilisation">
       à respecter nos modalités d'utilisation
     </Link>
     .

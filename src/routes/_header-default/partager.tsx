@@ -33,8 +33,8 @@ function RouteComponent() {
     <TextWrapper>
       <h1>Réutiliser & partager</h1>
       <p>
-        <Link href="/comment-ca-marche">L'Annuaire des Entreprises</Link> permet
-        de facilement retrouver l’ensemble des informations publiques
+        <Link to="/a-propos/comment-ca-marche">L'Annuaire des Entreprises</Link>{" "}
+        permet de facilement retrouver l’ensemble des informations publiques
         disponibles sur une entreprise, une association ou une administration.
         <br />
         Retrouvez sur cette page comment rendre ces données accessibles à vos

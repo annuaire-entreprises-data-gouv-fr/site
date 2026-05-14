@@ -78,7 +78,9 @@ function RouteComponent() {
           <ul>
             {articles.map(({ slug, title }) => (
               <li key={slug}>
-                <Link href={`/faq/${slug}`}>{title}</Link>
+                <Link params={{ slug }} to="/faq/$slug">
+                  {title}
+                </Link>
               </li>
             ))}
           </ul>

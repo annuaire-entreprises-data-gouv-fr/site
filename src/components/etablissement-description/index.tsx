@@ -56,12 +56,19 @@ export const EtablissementDescription: React.FC<IProps> = ({
               <br />
               <br />
               Il faut bien distinguer la{" "}
-              <Link href={`/entreprise/${uniteLegale.chemin}`}>
+              <Link
+                params={{ slug: uniteLegale.chemin }}
+                to="/entreprise/$slug"
+              >
                 fiche résumé{" "}
                 {uniteLegaleLabelWithPronounContracted(uniteLegale)}
               </Link>{" "}
               et les{" "}
-              <Link href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+              <Link
+                hash="etablissements"
+                params={{ slug: uniteLegale.chemin }}
+                to="/entreprise/$slug"
+              >
                 fiches de ses établissements
               </Link>
               .
@@ -94,13 +101,17 @@ export const EtablissementDescription: React.FC<IProps> = ({
               <> un établissement secondaire</>
             )}{" "}
             {uniteLegaleLabelWithPronounContracted(uniteLegale)}{" "}
-            <Link href={`/entreprise/${uniteLegale.chemin}`}>
+            <Link params={{ slug: uniteLegale.chemin }} to="/entreprise/$slug">
               {uniteLegale.nomComplet}
             </Link>
             {uniteLegale.etablissements.all.length > 1 ? (
               <>
                 , qui possède{" "}
-                <Link href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+                <Link
+                  hash="etablissements"
+                  params={{ slug: uniteLegale.chemin }}
+                  to="/entreprise/$slug"
+                >
                   {uniteLegale.etablissements.nombreEtablissements - 1} autre(s)
                   établissement(s)
                 </Link>
@@ -108,7 +119,11 @@ export const EtablissementDescription: React.FC<IProps> = ({
             ) : (
               <>
                 {" et "}
-                <Link href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+                <Link
+                  hash="etablissements"
+                  params={{ slug: uniteLegale.chemin }}
+                  to="/entreprise/$slug"
+                >
                   son unique établissement
                 </Link>
               </>

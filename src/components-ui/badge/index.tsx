@@ -1,5 +1,6 @@
 import { clsx } from "clsx";
 import type {
+  ComponentProps,
   CSSProperties,
   MouseEventHandler,
   PropsWithChildren,
@@ -19,7 +20,9 @@ export interface IPartialBadgeProps {
   isSelected?: boolean;
   label?: string;
   link?: {
-    href: string;
+    to: ComponentProps<typeof Link>["to"];
+    params: ComponentProps<typeof Link>["params"];
+    hash: ComponentProps<typeof Link>["hash"];
     "aria-label": string;
   };
   onClick?: MouseEventHandler;
@@ -42,9 +45,11 @@ function BadgeContainer({
     <Link
       aria-label={link["aria-label"]}
       className={className}
-      href={link.href}
+      hash={link.hash}
       onClick={onClick}
+      params={link.params}
       style={style}
+      to={link.to}
     >
       {children}
     </Link>

@@ -85,7 +85,9 @@ function LiensCapitalistiquesContent({
     <div>{lien.pays}</div>,
     <div>{lien.denomination}</div>,
     <div>
-      <Link href={`/entreprise/${lien.siren}`}>{formatIntFr(lien.siren)}</Link>
+      <Link params={{ slug: lien.siren }} to="/entreprise/$slug">
+        {formatIntFr(lien.siren)}
+      </Link>
     </div>,
     <div>{lien.natureJuridique}</div>,
     <div>{lien.pourcentage}%</div>,

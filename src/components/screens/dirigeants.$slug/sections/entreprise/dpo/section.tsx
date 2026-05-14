@@ -46,7 +46,10 @@ export default function DPOSection({ uniteLegale }: IProps) {
                 ? [
                     [
                       "SIREN",
-                      <Link href={`/entreprise/${dpo.organismeDesigne.siren}`}>
+                      <Link
+                        params={{ slug: dpo.organismeDesigne.siren }}
+                        to="/entreprise/$slug"
+                      >
                         {formatIntFr(dpo.organismeDesigne.siren)}
                       </Link>,
                     ],

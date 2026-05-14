@@ -56,7 +56,11 @@ const EtablissementSection: React.FC<IProps> = ({
                 <Tag>secondaire</Tag>
               )}
               {" ( "}
-              <Link href={`/entreprise/${uniteLegale.chemin}`} key="entite">
+              <Link
+                key="entite"
+                params={{ slug: uniteLegale.chemin }}
+                to="/entreprise/$slug"
+              >
                 → voir la page {uniteLegaleLabel}
               </Link>
               {" )"}
@@ -71,7 +75,9 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [["Nom de l’établissement", etablissement.denomination]]
       : []),
     [
-      <Link href="/faq/modifier-adresse">Adresse</Link>,
+      <Link params={{ slug: "modifier-adresse" }} to="/faq/$slug">
+        Adresse
+      </Link>,
       etablissement.adresse ? (
         <CopyPaste label="Adresse">{etablissement.adresse}</CopyPaste>
       ) : (
@@ -84,11 +90,15 @@ const EtablissementSection: React.FC<IProps> = ({
       ? []
       : [
           [
-            <Link href="/faq/tva-intracommunautaire">
+            <Link params={{ slug: "tva-intracommunautaire" }} to="/faq/$slug">
               N° TVA Intracommunautaire
             </Link>,
             <PrintNever key="siege-social-link">
-              <Link href={`/entreprise/${uniteLegale.chemin}`} key="entite">
+              <Link
+                key="entite"
+                params={{ slug: uniteLegale.chemin }}
+                to="/entreprise/$slug"
+              >
                 → voir la page {uniteLegaleLabel}
               </Link>
             </PrintNever>,
@@ -171,8 +181,10 @@ const EtablissementSection: React.FC<IProps> = ({
             <>
               <br />
               Extrait RNE {uniteLegaleLabel} (
-              <Link href="/faq/extrait-kbis">équivalent KBIS/D1</Link>) :{" "}
-              <ExtraitRNELink uniteLegale={uniteLegale} user={user} />
+              <Link params={{ slug: "extrait-kbis" }} to="/faq/$slug">
+                équivalent KBIS/D1
+              </Link>
+              ) : <ExtraitRNELink uniteLegale={uniteLegale} user={user} />
             </>
           )}
         </>

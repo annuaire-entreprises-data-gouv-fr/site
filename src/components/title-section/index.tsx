@@ -41,7 +41,7 @@ const Title: React.FC<IProps> = ({
         siren={uniteLegale.siren}
       />
       <h1>
-        <Link href={`/entreprise/${uniteLegale.chemin}`}>
+        <Link params={{ slug: uniteLegale.chemin }} to="/entreprise/$slug">
           {uniteLegale.nomComplet}
         </Link>
       </h1>

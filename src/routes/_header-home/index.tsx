@@ -99,7 +99,7 @@ function RouteComponent() {
 
           <br />
           <div className="layout-center">
-            <Link href="/rechercher">→ Effectuer une recherche avancée</Link>
+            <Link to="/rechercher">→ Effectuer une recherche avancée</Link>
           </div>
         </form>
       </div>

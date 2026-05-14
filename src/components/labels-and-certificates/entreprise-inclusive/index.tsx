@@ -44,7 +44,7 @@ export const EntrepriseInclusiveSection: React.FC<{
               city,
               department,
             }) => [
-              <Link href={`/etablissement/${siret}`}>
+              <Link params={{ slug: siret }} to="/etablissement/$slug">
                 {formatSiret(siret)}
               </Link>,
               category,

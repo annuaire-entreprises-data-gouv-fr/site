@@ -49,7 +49,9 @@ function RouteComponent() {
   return (
     <>
       <br />
-      <Link href={`/entreprise/${slug}`}>← Retour à la fiche résumée</Link>
+      <Link params={{ slug }} to="/entreprise/$slug">
+        ← Retour à la fiche résumée
+      </Link>
       <div className="content-container">
         <h1>Téléchargement du justificatif d’immatriculation</h1>
 

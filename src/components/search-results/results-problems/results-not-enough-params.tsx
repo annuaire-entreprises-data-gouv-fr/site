@@ -30,12 +30,14 @@ export const NotEnoughParams = () => {
         <ul>
           {articles.map(({ slug, title }) => (
             <li key={slug}>
-              <Link href={`/faq/${slug}`}>{title}</Link>
+              <Link params={{ slug }} to="/faq/$slug">
+                {title}
+              </Link>
             </li>
           ))}
         </ul>
         <p>
-          <Link href="/faq">→ Voir toutes les questions fréquentes</Link>
+          <Link to="/faq">→ Voir toutes les questions fréquentes</Link>
         </p>
       </div>
       <br />

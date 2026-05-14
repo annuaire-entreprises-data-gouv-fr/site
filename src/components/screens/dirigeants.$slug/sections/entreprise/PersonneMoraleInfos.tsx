@@ -13,7 +13,7 @@ export default function PersonneMoraleInfos({
       {dirigeant.siren ? (
         <>
           {" - "}
-          <Link href={`/entreprise/${dirigeant.siren}`}>
+          <Link params={{ slug: dirigeant.siren }} to="/entreprise/$slug">
             {formatIntFr(dirigeant.siren)}
           </Link>
         </>

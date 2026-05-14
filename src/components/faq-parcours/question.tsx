@@ -53,7 +53,12 @@ export default function Question({
                 Entreprise est un service public <strong>gratuit</strong> et ne
                 vous demandera <strong>jamais</strong> d’argent. Pour en savoir
                 plus, consultez{" "}
-                <Link href="/faq/fraudes-ecroqueries-annuaire-des-entreprises">
+                <Link
+                  params={{
+                    slug: "fraudes-ecroqueries-annuaire-des-entreprises",
+                  }}
+                  to="/faq/$slug"
+                >
                   notre fiche explicative
                 </Link>
                 .
@@ -64,7 +69,10 @@ export default function Question({
               Si vous possédez une <strong>entreprise individuelle</strong> dont
               vous souhaitez <strong>cacher ou afficher</strong> les
               informations personnelles,{" "}
-              <Link href="/faq/rendre-mon-entreprise-non-diffusible">
+              <Link
+                params={{ slug: "rendre-mon-entreprise-non-diffusible" }}
+                to="/faq/$slug"
+              >
                 consultez notre fiche
               </Link>
               .
@@ -127,11 +135,13 @@ export default function Question({
             Si la modification concerne{" "}
             <strong>l’affichage de données personnelles</strong> sur le site,
             consultez{" "}
-            <Link href="/faq/supprimer-donnees-personnelles-entreprise">
+            <Link
+              params={{ slug: "supprimer-donnees-personnelles-entreprise" }}
+              to="/faq/$slug"
+            >
               notre fiche dédiée
             </Link>{" "}
-            ou notre{" "}
-            <Link href="/vie-privee">politique de confidentialité</Link>.
+            ou notre <Link to="/vie-privee">politique de confidentialité</Link>.
           </p>
           <p>
             Pour le reste, l’Annuaire des Entreprises centralise les

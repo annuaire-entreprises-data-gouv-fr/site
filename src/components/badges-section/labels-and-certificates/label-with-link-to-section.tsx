@@ -17,7 +17,9 @@ export function LabelWithLinkToSection({
       <LabelAndCertificateBadge
         label={label}
         link={{
-          href: `/labels-certificats/${siren}#${sectionId}`,
+          hash: sectionId,
+          params: { slug: siren },
+          to: "/labels-certificats/$slug",
           "aria-label": `Consulter la section ${label} pour cette structure`,
         }}
       />

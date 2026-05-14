@@ -77,7 +77,9 @@ const UniteLegaleSummarySection: React.FC<{
       uniteLegale.siege?.siret && formatSiret(uniteLegale.siege?.siret),
     ],
     [
-      <Link href="/faq/tva-intracommunautaire">N° TVA Intracommunautaire</Link>,
+      <Link params={{ slug: "tva-intracommunautaire" }} to="/faq/$slug">
+        N° TVA Intracommunautaire
+      </Link>,
       <TVACell uniteLegale={uniteLegale} />,
     ],
     [
@@ -115,7 +117,9 @@ const UniteLegaleSummarySection: React.FC<{
       uniteLegale.libelleActivitePrincipaleNaf25,
     ],
     [
-      <Link href="/faq/modifier-adresse">Adresse postale</Link>,
+      <Link params={{ slug: "modifier-adresse" }} to="/faq/$slug">
+        Adresse postale
+      </Link>,
       uniteLegale.siege.adressePostale,
     ],
     ["Forme juridique", uniteLegale.libelleNatureJuridique],

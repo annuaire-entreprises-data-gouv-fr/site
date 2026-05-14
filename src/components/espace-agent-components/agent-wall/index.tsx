@@ -25,7 +25,7 @@ const AgentWall: React.FC<{
         <h3>Vous êtes agent public ?</h3>
         <p>
           Accédez immédiatement à ces données sur{" "}
-          <Link href="/lp/agent-public">l'espace agent public</Link>. En vous
+          <Link to="/lp/agent-public">l'espace agent public</Link>. En vous
           connectant vous acceptez nos{" "}
           <a
             href="/modalites-utilisation"
@@ -37,7 +37,7 @@ const AgentWall: React.FC<{
           .
         </p>
         <ButtonProConnect event="AGENT_WALL" noFootLink />
-        <Link href="/lp/agent-public">⇢ Découvrir l'espace agent public</Link>
+        <Link to="/lp/agent-public">⇢ Découvrir l'espace agent public</Link>
       </FloatingModal>
       <div aria-hidden className={style["blur"]} tab-index="-1">
         <p>

@@ -61,7 +61,7 @@ export function RenseignerSiren({ postFormData }: RenseignerSirenProps) {
         </div>
       </fieldset>
       <p>
-        <Link href="/" rel="noopener noreferrer" target="_blank">
+        <Link rel="noopener noreferrer" target="_blank" to="/">
           → Rechercher le SIREN de mon entreprise
         </Link>
       </p>

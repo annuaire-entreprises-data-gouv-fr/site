@@ -42,7 +42,11 @@ export default function DirigeantsContentProtected({
       if (dirigeant.siren) {
         const defaultDenom = dirigeant.denomination || dirigeant.siren;
         infos.push(
-          <Link href={`/dirigeants/${dirigeant.siren}`} key={dirigeant.siren}>
+          <Link
+            key={dirigeant.siren}
+            params={{ slug: dirigeant.siren }}
+            to="/dirigeants/$slug"
+          >
             → voir les dirigeants de {defaultDenom}
           </Link>
         );

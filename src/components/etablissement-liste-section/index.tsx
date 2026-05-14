@@ -29,7 +29,10 @@ const EtablissementTable: React.FC<{
 
       <FullTable
         body={etablissements.map((etablissement: IEtablissement) => [
-          <Link href={`/etablissement/${etablissement.siret}`}>
+          <Link
+            params={{ slug: etablissement.siret }}
+            to="/etablissement/$slug"
+          >
             {formatSiret(etablissement.siret)}
           </Link>,
           estNonDiffusibleStrict(etablissement) ? (
@@ -43,7 +46,10 @@ const EtablissementTable: React.FC<{
             <>
               <span style={{ fontVariant: "all-small-caps" }}>
                 {(etablissement.enseigne || etablissement.denomination) && (
-                  <Link href={`/etablissement/${etablissement.siret}`}>
+                  <Link
+                    params={{ slug: etablissement.siret }}
+                    to="/etablissement/$slug"
+                  >
                     <strong>
                       {etablissement.enseigne || etablissement.denomination}
                       <br />

@@ -63,11 +63,17 @@ export const UniteLegaleDescription: React.FC<{
         {uniteLegale.siege?.adresse && (
           <>
             Son{" "}
-            <Link href={`/etablissement/${uniteLegale.siege.siret}`}>
+            <Link
+              params={{ slug: uniteLegale.siege.siret }}
+              to="/etablissement/$slug"
+            >
               siège social
             </Link>{" "}
             est domicilié au{" "}
-            <Link href={`/etablissement/${uniteLegale.siege.siret}`}>
+            <Link
+              params={{ slug: uniteLegale.siege.siret }}
+              to="/etablissement/$slug"
+            >
               {uniteLegale.siege.adresse}
             </Link>
             .

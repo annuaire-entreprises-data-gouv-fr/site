@@ -24,7 +24,10 @@ const formatFinessData = (data: IFiness[]) => {
         <Tag>{finessJuridiqueEntity.idFinessJuridique}</Tag>,
         <Tag color="info">Juridique</Tag>,
         <div>
-          <Link href={`/entreprise/${finessJuridiqueEntity.siren}`}>
+          <Link
+            params={{ slug: finessJuridiqueEntity.siren }}
+            to="/entreprise/$slug"
+          >
             {formatIntFr(finessJuridiqueEntity.siren)}
           </Link>
           {" ∙ "}
@@ -52,7 +55,7 @@ const formatFinessData = (data: IFiness[]) => {
         </div>,
         <Tag color="new">Etablissement</Tag>,
         <>
-          <Link href={`/etablissement/${etab.siret}`}>
+          <Link params={{ slug: etab.siret }} to="/etablissement/$slug">
             {formatSiret(etab.siret)}
           </Link>
           {" ∙ "}

@@ -66,8 +66,8 @@ function RouteComponent() {
     <TextWrapper>
       <Breadcrumb
         links={[
-          { href: "/definitions", label: "Définitions" },
-          { href: "", label: definition.title },
+          { to: "/definitions", label: "Définitions" },
+          { to: ".", label: definition.title },
         ]}
       />
       <h1 className="definition-title">{definition.title}</h1>

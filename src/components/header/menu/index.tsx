@@ -41,15 +41,12 @@ const Menu: React.FC<{
       >
         <Link
           aria-label="Gestion de mon compte agent public"
-          href={"/compte/accueil"}
+          to="/compte/accueil"
         >
           Mon espace
         </Link>
         {user?.isSuperAgent && (
-          <Link
-            aria-label="Gestion de mes groupes"
-            href={"/compte/mes-groupes"}
-          >
+          <Link aria-label="Gestion de mes groupes" to="/compte/mes-groupes">
             Mes groupes
           </Link>
         )}

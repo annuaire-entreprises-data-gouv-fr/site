@@ -38,7 +38,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   const isOld = lastModified && isTwoMonthOld(lastModified);
   const last = lastModified || new Date();
 
-  const faqLink = `/administration/${dataSources.map((d) => d.slug).join("_")}`;
+  const faqLink = dataSources.map((d) => d.slug).join("_");
 
   const borderColor = isProtected
     ? constants.colors.espaceAgentPastel
@@ -71,9 +71,10 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
                 logoType && (
                   <Link
                     className="no-style-link"
-                    href={faqLink}
                     key={long}
+                    params={{ slug: faqLink }}
                     title={long}
+                    to="/administration/$slug"
                   >
                     {logoType === "portrait" ? (
                       <Logo

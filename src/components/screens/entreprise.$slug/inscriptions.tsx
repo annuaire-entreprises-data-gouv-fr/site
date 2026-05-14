@@ -240,7 +240,7 @@ export const UniteLegaleInscriptionRNA = ({
     <Wrapper
       link={
         <Icon slug="download">
-          <Link href={`/documents/${uniteLegale.siren}`}>
+          <Link params={{ slug: uniteLegale.siren }} to="/documents/$slug">
             Annonce de création au JOAFE
           </Link>
         </Icon>

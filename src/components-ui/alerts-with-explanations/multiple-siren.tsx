@@ -14,7 +14,7 @@ const MultipleSirenAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
         <INSEE /> : {formatIntFr(uniteLegale.oldSiren)} et{" "}
         {formatIntFr(uniteLegale.siren)}. Pour voir les informations complètes,
         consultez la page{" "}
-        <Link href={`/entreprise/${uniteLegale.siren}`}>
+        <Link params={{ slug: uniteLegale.siren }} to="/entreprise/$slug">
           {formatIntFr(uniteLegale.siren)}
         </Link>
         .

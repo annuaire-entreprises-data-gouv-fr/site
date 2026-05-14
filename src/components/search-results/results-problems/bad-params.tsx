@@ -12,10 +12,10 @@ export const BadParams = () => (
       <p>
         Vous pouvez essayez d’identifier le filtre qui pose problème. Si vous
         n’y parvenez pas,{" "}
-        <Link href={constants.links.parcours.contact}>
+        <Link to={constants.links.parcours.contact}>
           vous pouvez nous contacter
         </Link>{" "}
-        ou bien <Link href="/rechercher?terme=">effacer tous les filtres</Link>.
+        ou bien <Link to="/rechercher">effacer tous les filtres</Link>.
       </p>
     </div>
     <br />
