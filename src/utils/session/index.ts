@@ -23,12 +23,6 @@ export function getCurrentSession() {
 
 type Session = Awaited<ReturnType<typeof getCurrentSession>>;
 
-export async function setVisitTimestamp(session: Session) {
-  await session.update({
-    lastVisitTimestamp: Date.now(),
-  });
-}
-
 /**
  * Utils for AgentConnect session
  */

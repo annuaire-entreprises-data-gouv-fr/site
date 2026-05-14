@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { getRequestHeader } from "@tanstack/react-start/server";
 import {
   isEntrepreneurIndividuel,
   SirenNotFoundError,
@@ -8,9 +9,9 @@ import { Exception } from "#/models/exceptions";
 import { requestSirenProtection } from "#/models/protected-siren/request-siren-protection";
 import { hasSirenFormat } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
-import extractParamsAppRouter from "#/utils/server-side-helper/extract-params";
 import getSession from "#/utils/server-side-helper/get-session";
 import { getHidePersonalDataRequestFCSession } from "#/utils/session";
+import isUserAgentABot from "#/utils/user-agent";
 
 class HidePersonalDataFailedException extends Exception {
   constructor(args: { cause?: unknown }) {
@@ -35,7 +36,8 @@ export const Route = createFileRoute("/api/hide-personal-data")({
             );
           }
 
-          const { isBot } = await extractParamsAppRouter({});
+          const userAgent = getRequestHeader("user-agent") || "";
+          const isBot = isUserAgentABot(userAgent);
 
           const uniteLegale = await getUniteLegaleFromSlug(siren, {
             isBot,

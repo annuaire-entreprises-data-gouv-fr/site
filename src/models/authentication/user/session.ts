@@ -13,7 +13,6 @@ export interface ISession {
     tokenId: string;
     sub: string;
   };
-  lastVisitTimestamp?: number;
   nonce?: string;
   // connexion
   pathFrom?: string;
