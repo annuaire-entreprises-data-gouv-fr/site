@@ -41,10 +41,10 @@ export default function DonneesFinancieresAssociation({
         </ul>
         <br />
       </nav>
-      <FinancesAssociationSection uniteLegale={uniteLegale} user={user} />
+      <FinancesAssociationSection uniteLegale={uniteLegale} />
       <ComptesAssociationSection uniteLegale={uniteLegale} />
       <HorizontalSeparator />
-      <SubventionsAssociationSection uniteLegale={uniteLegale} user={user} />
+      <SubventionsAssociationSection uniteLegale={uniteLegale} />
       <AidesMinimis uniteLegale={uniteLegale} user={user} />
       <AidesADEME uniteLegale={uniteLegale} />
     </>

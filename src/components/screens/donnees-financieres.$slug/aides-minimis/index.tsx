@@ -42,5 +42,5 @@ export function AidesMinimis({
     );
   }
 
-  return <AidesMinimisProtected uniteLegale={uniteLegale} user={user} />;
+  return <AidesMinimisProtected uniteLegale={uniteLegale} />;
 }

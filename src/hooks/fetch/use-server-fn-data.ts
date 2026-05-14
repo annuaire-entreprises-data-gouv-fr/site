@@ -5,7 +5,7 @@ import {
   useServerFn,
 } from "@tanstack/react-start";
 import type { Expand } from "node_modules/@tanstack/react-router/dist/cjs/index.d.cts";
-import type { IAgentInfo } from "#/models/authentication/agent";
+import { useAuth } from "#/contexts/auth.context";
 import {
   ApplicationRights,
   hasRights,
@@ -24,10 +24,10 @@ import { convertErrorToFetchingState } from "#/utils/helpers/convert-error";
  */
 export function useServerFnData<Input, Data>(
   action: RequiredFetcher<unknown, Input, Data>,
-  user: IAgentInfo | null,
   input: Expand<IntersectAllValidatorInputs<unknown, Input>>,
   requiredRight: ApplicationRights = ApplicationRights.opendata
 ): Awaited<Data> | IDataFetchingState {
+  const { user } = useAuth();
   const execute = useServerFn(action);
 
   const { data, isPending, isLoading, isError, error } = useQuery({

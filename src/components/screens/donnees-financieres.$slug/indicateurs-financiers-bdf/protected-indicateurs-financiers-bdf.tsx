@@ -4,7 +4,6 @@ import { FullTable } from "#/components/table/full";
 import FAQLink from "#/components-ui/faq-link";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type { UseCase } from "#/models/use-cases";
@@ -13,7 +12,6 @@ import { formatCurrency, formatDate, getDateFromYYYYMM } from "#/utils/helpers";
 
 export function ProtectedIndicateursFinanciersBDF({
   uniteLegale,
-  user,
   useCase,
   title,
   id,
@@ -21,7 +19,6 @@ export function ProtectedIndicateursFinanciersBDF({
   isProtected,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
   useCase: UseCase;
   title: string;
   id: string;
@@ -34,7 +31,6 @@ export function ProtectedIndicateursFinanciersBDF({
   );
   const banqueDeFranceBilansProtected = useServerFnData(
     getAgentBilansProtectedFn,
-    user,
     input,
     ApplicationRights.bilansBDF
   );

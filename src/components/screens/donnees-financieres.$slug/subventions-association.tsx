@@ -10,7 +10,6 @@ import { Select } from "#/components-ui/select";
 import { Tag } from "#/components-ui/tag";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IAssociation } from "#/models/core/types";
 import { isDataSuccess, isUnauthorized } from "#/models/data-fetching";
 import type {
@@ -88,10 +87,8 @@ const SubventionDetails: React.FC<{
 
 export default function SubventionsAssociationSection({
   uniteLegale,
-  user,
 }: {
   uniteLegale: IAssociation;
-  user: IAgentInfo | null;
 }) {
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [selectedStatus, setSelectedStatus] = useState<string>("");
@@ -103,7 +100,7 @@ export default function SubventionsAssociationSection({
     () => ({ slug: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const subventions = useServerFnData(getSubventionsAssociationFn, user, input);
+  const subventions = useServerFnData(getSubventionsAssociationFn, input);
 
   const allYears = useMemo(() => {
     if (!isDataSuccess(subventions)) {

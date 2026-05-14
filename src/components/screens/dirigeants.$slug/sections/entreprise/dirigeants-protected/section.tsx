@@ -7,7 +7,6 @@ import { Info } from "#/components-ui/alerts";
 import InpiPartiallyDownWarning from "#/components-ui/alerts-with-explanations/inpi-partially-down";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import {
   type IUniteLegale,
@@ -19,16 +18,12 @@ import DirigeantsContentProtected from "./content";
 
 interface IProps {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
 }
 
 /**
  * Dirigeants section protected
  */
-export default function DirigeantsSectionProtected({
-  user,
-  uniteLegale,
-}: IProps) {
+export default function DirigeantsSectionProtected({ uniteLegale }: IProps) {
   const isEI = isEntrepreneurIndividuel(uniteLegale);
   const input = useMemo(
     () => ({ siren: uniteLegale.siren, isEI }),
@@ -36,7 +31,6 @@ export default function DirigeantsSectionProtected({
   );
   const dirigeants = useServerFnData(
     getAgentDirigeantsProtectedFn,
-    user,
     input,
     ApplicationRights.mandatairesRCS
   );

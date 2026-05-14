@@ -1,10 +1,10 @@
+import { useMemo } from "react";
 import { CopyPaste } from "#/components/table/copy-paste";
 import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
 import { Loader } from "#/components-ui/loader";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { isAPINotResponding } from "#/models/api-not-responding";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   hasFetchError,
   isDataLoading,
@@ -15,10 +15,10 @@ import { formatSiret, type Siret } from "#/utils/helpers";
 
 interface IProps {
   siret: Siret;
-  user: IAgentInfo | null;
 }
-export default function EORICell({ siret, user }: IProps) {
-  const eoriValidation = useServerFnData(validateEORIFn, user, { siret });
+export default function EORICell({ siret }: IProps) {
+  const input = useMemo(() => ({ siret }), [siret]);
+  const eoriValidation = useServerFnData(validateEORIFn, input);
 
   if (isDataLoading(eoriValidation)) {
     return (

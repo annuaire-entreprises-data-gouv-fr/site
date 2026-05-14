@@ -9,7 +9,6 @@ import { Tag } from "#/components-ui/tag";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
 import { isAPI404 } from "#/models/api-not-responding";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { hasAnyError, isDataLoading } from "#/models/data-fetching";
@@ -18,12 +17,10 @@ import { getAgentLiassesFiscalesProtectedFn } from "#/server-functions/agent/dat
 
 const InnerLiassesSection = ({
   uniteLegale,
-  user,
   selectedYear,
   useCase,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
   selectedYear: string;
   useCase: UseCase;
 }) => {
@@ -34,7 +31,6 @@ const InnerLiassesSection = ({
 
   const liassesFiscalesProtected = useServerFnData(
     getAgentLiassesFiscalesProtectedFn,
-    user,
     input,
     ApplicationRights.liassesFiscales
   );
@@ -101,7 +97,6 @@ const InnerLiassesSection = ({
 
 export function ProtectedLiassesFiscales({
   uniteLegale,
-  user,
   useCase,
   title,
   id,
@@ -109,7 +104,6 @@ export function ProtectedLiassesFiscales({
   isProtected,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
   useCase: UseCase;
   title: string;
   id: string;
@@ -144,7 +138,6 @@ export function ProtectedLiassesFiscales({
           selectedYear={selectedYear}
           uniteLegale={uniteLegale}
           useCase={useCase}
-          user={user}
         />
       ) : (
         <i>Sélectionnez une année pour voir sa liasse fiscale.</i>

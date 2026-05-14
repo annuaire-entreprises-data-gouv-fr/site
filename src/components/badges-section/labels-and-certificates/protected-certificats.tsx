@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import NonRenseigne from "#/components/non-renseigne";
 import { ProtectedInlineData } from "#/components/protected-inline-data";
 import { Loader } from "#/components-ui/loader";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import { hasAnyError, isDataLoading } from "#/models/data-fetching";
 import {
@@ -20,16 +19,26 @@ import { LabelWithLinkToSection } from "./label-with-link-to-section";
 
 export const ProtectedCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
-}> = ({ uniteLegale, user }) => {
+}> = ({ uniteLegale }) => {
   const hasOtherCertificates = checkHasLabelsAndCertificates(uniteLegale);
 
+  const getAgentOpqibiInput = useMemo(
+    () => ({ siren: uniteLegale.siren }),
+    [uniteLegale.siren]
+  );
+  const getAgentQualibatInput = useMemo(
+    () => ({ siret: uniteLegale.siege.siret }),
+    [uniteLegale.siege.siret]
+  );
+  const getAgentQualifelecInput = useMemo(
+    () => ({ siret: uniteLegale.siege.siret }),
+    [uniteLegale.siege.siret]
+  );
   const protectedCertificates = [
     {
       data: useServerFnData(
         getAgentOpqibiFn,
-        user,
-        { siren: uniteLegale.siren },
+        getAgentOpqibiInput,
         ApplicationRights.protectedCertificats
       ),
       render: (
@@ -44,8 +53,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
     {
       data: useServerFnData(
         getAgentQualibatFn,
-        user,
-        { siret: uniteLegale.siege.siret },
+        getAgentQualibatInput,
         ApplicationRights.protectedCertificats
       ),
       render: (
@@ -60,8 +68,7 @@ export const ProtectedCertificatesBadgesSection: React.FC<{
     {
       data: useServerFnData(
         getAgentQualifelecFn,
-        user,
-        { siret: uniteLegale.siege.siret },
+        getAgentQualifelecInput,
         ApplicationRights.protectedCertificats
       ),
       render: (

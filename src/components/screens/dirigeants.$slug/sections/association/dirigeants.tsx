@@ -9,7 +9,6 @@ import InformationTooltip from "#/components-ui/information-tooltip";
 import { Tag } from "#/components-ui/tag";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { isDataSuccess, isUnauthorized } from "#/models/data-fetching";
@@ -19,7 +18,6 @@ import { extractAssociationEtablissements } from "#/utils/helpers/association";
 
 interface IProps {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
 }
 
 const NoDirigeants = () => (
@@ -29,12 +27,15 @@ const NoDirigeants = () => (
 /**
  * Dirigeants for agents : RNA or Le compte asso
  */
-function DirigeantsAssociationSection({ uniteLegale, user }: IProps) {
+function DirigeantsAssociationSection({ uniteLegale }: IProps) {
   const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
+  const input = useMemo(
+    () => ({ siren: uniteLegale.siren }),
+    [uniteLegale.siren]
+  );
   const associationProtected = useServerFnData(
     getAgentAssociationProtectedFn,
-    user,
-    { siren: uniteLegale.siren },
+    input,
     ApplicationRights.associationProtected
   );
 

@@ -5,20 +5,18 @@ import InpiPartiallyDownWarning from "#/components-ui/alerts-with-explanations/i
 import { Tag } from "#/components-ui/tag";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IUniteLegale } from "#/models/core/types";
 import { getRneObservationsFn } from "#/server-functions/public/data-fetching";
 import { formatDate } from "#/utils/helpers";
 
 export const ObservationsRNE: React.FC<{
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
-}> = ({ uniteLegale, user }) => {
+}> = ({ uniteLegale }) => {
   const input = useMemo(
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const observations = useServerFnData(getRneObservationsFn, user, input);
+  const observations = useServerFnData(getRneObservationsFn, input);
 
   return (
     <AsyncDataSectionClient

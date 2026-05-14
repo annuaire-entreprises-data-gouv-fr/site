@@ -10,7 +10,6 @@ import {
   isAPI404,
   isAPINotResponding,
 } from "#/models/api-not-responding";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type { IDocumentDownloader } from "#/models/espace-agent/travaux-publics";
@@ -58,7 +57,6 @@ const DocumentDownloader = ({
 
 export default function ProtectedTravauxPublicsSection({
   uniteLegale,
-  user,
   useCase,
   title,
   id,
@@ -66,7 +64,6 @@ export default function ProtectedTravauxPublicsSection({
   isProtected,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
   useCase: UseCase;
   title: string;
   id: string;
@@ -79,7 +76,6 @@ export default function ProtectedTravauxPublicsSection({
   );
   const travauxPublics = useServerFnData(
     getAgentTravauxPublicsFn,
-    user,
     input,
     ApplicationRights.travauxPublics
   );

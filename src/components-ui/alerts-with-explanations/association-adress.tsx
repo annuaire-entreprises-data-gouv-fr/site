@@ -1,11 +1,11 @@
 import { INSEE, MI } from "#/components/administrations";
 import NonRenseigne from "#/components/non-renseigne";
+import { useAuth } from "#/contexts/auth.context";
 import {
   type IAPINotRespondingError,
   isAPINotResponding,
 } from "#/models/api-not-responding";
 import type { IDataAssociation } from "#/models/association/types";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { getPersonnalDataAssociation } from "#/models/core/diffusion";
 import type { IAssociation } from "#/models/core/types";
 import { Warning } from "../alerts";
@@ -13,8 +13,8 @@ import { Warning } from "../alerts";
 const AssociationAdressAlert: React.FC<{
   uniteLegale: IAssociation;
   association: IDataAssociation | IAPINotRespondingError | null;
-  user: IAgentInfo | null;
-}> = ({ uniteLegale, association, user }) => {
+}> = ({ uniteLegale, association }) => {
+  const { user } = useAuth();
   if (!association || isAPINotResponding(association)) {
     return null;
   }

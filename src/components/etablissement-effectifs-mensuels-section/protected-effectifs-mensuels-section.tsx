@@ -4,7 +4,6 @@ import type { TNatureEffectif } from "#/clients/api-entreprise/effectifs/types";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IEtablissement } from "#/models/core/types";
 import type { UseCase } from "#/models/use-cases";
 import { getAgentEffectifsMensuelsProtectedFn } from "#/server-functions/agent/data-fetching";
@@ -17,7 +16,6 @@ interface IProps {
   sources: EAdministration[];
   title: string;
   useCase: UseCase;
-  user: IAgentInfo | null;
 }
 
 const natureEffectifOptions: Record<TNatureEffectif, string> = {
@@ -38,7 +36,6 @@ const etablissementRoute = getRouteApi("/_header-default/etablissement/$slug");
 
 const ProtectedEtablissementEffectifsMensuelsSection = ({
   etablissement,
-  user,
   useCase,
   title,
   id,
@@ -97,7 +94,6 @@ const ProtectedEtablissementEffectifsMensuelsSection = ({
   );
   const effectifsMensuelsProtected = useServerFnData(
     getAgentEffectifsMensuelsProtectedFn,
-    user,
     input
   );
 

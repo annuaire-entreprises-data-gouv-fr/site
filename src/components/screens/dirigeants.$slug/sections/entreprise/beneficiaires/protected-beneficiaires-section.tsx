@@ -8,7 +8,6 @@ import FAQLink from "#/components-ui/faq-link";
 import { Tag } from "#/components-ui/tag";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type { IBeneficiairesEffectif } from "#/models/espace-agent/beneficiaires";
@@ -23,7 +22,6 @@ import { formatDatePartial, pluralize } from "#/utils/helpers";
  */
 export default function ProtectedBeneficiairesSection({
   uniteLegale,
-  user,
   useCase,
   title,
   id,
@@ -31,7 +29,6 @@ export default function ProtectedBeneficiairesSection({
   isProtected,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
   useCase: UseCase;
   title: string;
   id: string;
@@ -47,7 +44,6 @@ export default function ProtectedBeneficiairesSection({
   );
   const beneficiaires = useServerFnData(
     getAgentBeneficiairesFn,
-    user,
     input,
     ApplicationRights.beneficiaires
   );

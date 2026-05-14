@@ -35,7 +35,6 @@ export function ProtectedFinancesSocieteSection({
   );
   const chiffreAffairesProtected = useServerFnData(
     getAgentChiffreAffairesProtectedFn,
-    user,
     input,
     ApplicationRights.chiffreAffaires
   );

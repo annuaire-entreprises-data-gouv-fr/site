@@ -4,7 +4,6 @@ import { TwoColumnTable } from "#/components/table/simple";
 import ButtonLink from "#/components-ui/button";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { getAgentQualibatFn } from "#/server-functions/agent/data-fetching";
@@ -12,15 +11,13 @@ import { formatDateLong } from "#/utils/helpers";
 
 export const QualibatSection: React.FC<{
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
-}> = ({ uniteLegale, user }) => {
+}> = ({ uniteLegale }) => {
   const input = useMemo(
     () => ({ siret: uniteLegale.siege.siret }),
     [uniteLegale.siege.siret]
   );
   const qualibat = useServerFnData(
     getAgentQualibatFn,
-    user,
     input,
     ApplicationRights.protectedCertificats
   );

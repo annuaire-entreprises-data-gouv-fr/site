@@ -103,7 +103,7 @@ function RouteComponent() {
           </ul>
           <AnnoncesBodacc uniteLegale={uniteLegale} />
           {uniteLegale.dateMiseAJourInpi && (
-            <ObservationsRNE uniteLegale={uniteLegale} user={user} />
+            <ObservationsRNE uniteLegale={uniteLegale} />
           )}
           {isAssociation(uniteLegale) && (
             <AnnoncesJOAFESection uniteLegale={uniteLegale} />

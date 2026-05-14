@@ -4,7 +4,6 @@ import FAQLink from "#/components-ui/faq-link";
 import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
 import { Loader } from "#/components-ui/loader";
-import { useAuth } from "#/contexts/auth.context";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { estActif } from "#/models/core/etat-administratif";
 import type { IUniteLegale } from "#/models/core/types";
@@ -86,12 +85,11 @@ const VerifyTVA: React.FC<{
     () => getTvaUniteLegale(uniteLegale),
     [uniteLegale]
   );
-  const { user } = useAuth();
   const input = useMemo(
     () => ({ slug: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const verification = useServerFnData(verifyTvaFn, user, input);
+  const verification = useServerFnData(verifyTvaFn, input);
   if (isDataLoading(verification)) {
     return (
       <>

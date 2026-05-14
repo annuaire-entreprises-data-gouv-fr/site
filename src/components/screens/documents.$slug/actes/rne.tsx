@@ -7,7 +7,6 @@ import ButtonLink from "#/components-ui/button";
 import ShowMore from "#/components-ui/show-more";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import { type IUniteLegale, isServicePublic } from "#/models/core/types";
 import type { IDocumentsRNE } from "#/models/rne/types";
@@ -16,15 +15,13 @@ import { formatDateLong } from "#/utils/helpers";
 
 export const AgentActesRNE: React.FC<{
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
-}> = ({ uniteLegale, user }) => {
+}> = ({ uniteLegale }) => {
   const input = useMemo(
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
   const documentsRne = useServerFnData(
     getAgentRneDocumentsFn,
-    user,
     input,
     ApplicationRights.documentsRne
   );
