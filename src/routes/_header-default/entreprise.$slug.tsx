@@ -1,9 +1,4 @@
-import {
-  createFileRoute,
-  notFound,
-  redirect,
-  retainSearchParams,
-} from "@tanstack/react-router";
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestHeader } from "@tanstack/react-start/server";
 import z from "zod";
@@ -50,8 +45,8 @@ import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
 
 const loadEntreprisePage = createServerFn()
-  .inputValidator(z.object({ slug: z.string(), searchStr: z.string() }))
-  .handler(async ({ data: { slug, searchStr } }) => {
+  .inputValidator(z.object({ slug: z.string(), isRedirected: z.boolean() }))
+  .handler(async ({ data: { slug, isRedirected } }) => {
     const [uniteLegale, sourcesLastModified] = await Promise.all([
       getUniteLegaleFromSlugFn({
         data: { slug },
@@ -67,11 +62,13 @@ const loadEntreprisePage = createServerFn()
       throw redirect({
         to: "/entreprise/$slug",
         params: { slug: uniteLegale.chemin },
+        search: {
+          redirected: isRedirected ? 1 : undefined,
+        },
         statusCode: 308,
       });
     }
 
-    const isRedirected = searchStr.includes("redirected=1");
     const isFromSite = isRedirected
       ? (getRequestHeader("referer") || "").startsWith(getBaseUrl())
       : false;
@@ -88,9 +85,6 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
   validateSearch: z.object({
     redirected: z.literal(1).optional().catch(undefined),
   }),
-  search: {
-    middlewares: [retainSearchParams(["redirected"])],
-  },
   beforeLoad: async ({ params }) => {
     const slug = params.slug;
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
@@ -105,9 +99,10 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
       throw notFound();
     }
   },
-  loader: async ({ params, location }) =>
+  loaderDeps: ({ search }) => ({ redirected: search.redirected }),
+  loader: async ({ params, deps }) =>
     await loadEntreprisePage({
-      data: { slug: params.slug, searchStr: location.searchStr },
+      data: { slug: params.slug, isRedirected: deps.redirected === 1 },
     }),
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -150,6 +145,8 @@ function RouteComponent() {
   const { triggerRedirectedEvent, uniteLegale, isBot, sourcesLastModified } =
     Route.useLoaderData();
   const { user } = useAuth();
+
+  console.log("triggerRedirectedEvent", triggerRedirectedEvent);
 
   return (
     <>
