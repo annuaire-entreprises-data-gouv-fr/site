@@ -7,7 +7,6 @@ import ButtonLink from "#/components-ui/button";
 import FAQLink from "#/components-ui/faq-link";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { isDataSuccess } from "#/models/data-fetching";
@@ -21,8 +20,7 @@ const NoDocument = () => (
 
 export const AgentActesAssociation: React.FC<{
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
-}> = ({ uniteLegale, user }) => {
+}> = ({ uniteLegale }) => {
   const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
 
   const input = useMemo(
@@ -31,7 +29,6 @@ export const AgentActesAssociation: React.FC<{
   );
   const associationProtected = useServerFnData(
     getAgentAssociationProtectedFn,
-    user,
     input,
     ApplicationRights.associationProtected
   );

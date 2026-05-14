@@ -92,7 +92,7 @@ const UniteLegaleSummarySection: React.FC<{
         dans ses relations avec les autorités douanières.
       </FAQLink>,
       uniteLegale.siege.siret ? (
-        <EORICell siret={uniteLegale.siege.siret} user={user} />
+        <EORICell siret={uniteLegale.siege.siret} />
       ) : (
         ""
       ),
@@ -181,10 +181,7 @@ const UniteLegaleSummarySection: React.FC<{
               checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
             }abels et certificats`,
             <Suspense fallback={<Loader />}>
-              <ProtectedCertificatesBadgesSection
-                uniteLegale={uniteLegale}
-                user={user}
-              />
+              <ProtectedCertificatesBadgesSection uniteLegale={uniteLegale} />
             </Suspense>,
           ],
         ]

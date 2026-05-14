@@ -6,7 +6,6 @@ import { AsyncDataSectionClient } from "#/components/section/data-section/client
 import { FullTable } from "#/components/table/full";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IUniteLegale } from "#/models/core/types";
 import { getAgentAidesMinimisFn } from "#/server-functions/agent/data-fetching";
 import { formatCurrency, formatDate } from "#/utils/helpers";
@@ -64,10 +63,8 @@ const aidesMinimisRoute = getRouteApi(
 
 export default function AidesMinimisProtected({
   uniteLegale,
-  user,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
 }) {
   const { "aides-minimis-page": currentPage } = aidesMinimisRoute.useSearch();
   const navigate = aidesMinimisRoute.useNavigate();
@@ -86,7 +83,7 @@ export default function AidesMinimisProtected({
     [uniteLegale.siren, currentPage]
   );
 
-  const aidesMinimis = useServerFnData(getAgentAidesMinimisFn, user, input);
+  const aidesMinimis = useServerFnData(getAgentAidesMinimisFn, input);
 
   return (
     <AsyncDataSectionClient

@@ -5,7 +5,6 @@ import { DataSectionClient } from "#/components/section/data-section";
 import { FullTable } from "#/components/table/full";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import constants from "#/models/constants";
 import type { IAssociation } from "#/models/core/types";
 import { getAssociationFn } from "#/server-functions/public/data-fetching";
@@ -26,16 +25,14 @@ const colorCA = constants.chartColors[4];
  */
 export default function FinancesAssociationSection({
   uniteLegale,
-  user,
 }: {
   uniteLegale: IAssociation;
-  user: IAgentInfo | null;
 }) {
   const input = useMemo(
     () => ({ slug: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const data = useServerFnData(getAssociationFn, user, input);
+  const data = useServerFnData(getAssociationFn, input);
   if (!data) {
     return null;
   }

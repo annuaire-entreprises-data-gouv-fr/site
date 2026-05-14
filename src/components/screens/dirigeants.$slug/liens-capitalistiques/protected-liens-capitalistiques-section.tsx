@@ -8,7 +8,6 @@ import { Select } from "#/components-ui/select";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
 import { isAPI404 } from "#/models/api-not-responding";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { hasAnyError, isDataLoading } from "#/models/data-fetching";
@@ -24,12 +23,10 @@ import PersonneMoraleInfos from "../sections/entreprise/PersonneMoraleInfos";
 
 function LiensCapitalistiquesContent({
   uniteLegale,
-  user,
   selectedYear,
   useCase,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
   selectedYear: string;
   useCase: UseCase;
 }) {
@@ -40,7 +37,6 @@ function LiensCapitalistiquesContent({
 
   const liensCapitalistiquesProtected = useServerFnData(
     getAgentLiensCapitalistiquesProtectedFn,
-    user,
     input,
     ApplicationRights.liensCapitalistiques
   );
@@ -150,7 +146,6 @@ function LiensCapitalistiquesContent({
 
 export default function ProtectedLiensCapitalistiques({
   uniteLegale,
-  user,
   useCase,
   title,
   id,
@@ -158,7 +153,6 @@ export default function ProtectedLiensCapitalistiques({
   isProtected,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
   useCase: UseCase;
   title: string;
   id: string;
@@ -206,7 +200,6 @@ export default function ProtectedLiensCapitalistiques({
           selectedYear={selectedYear}
           uniteLegale={uniteLegale}
           useCase={useCase}
-          user={user}
         />
       )}
     </Section>

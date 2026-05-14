@@ -171,9 +171,9 @@ function RouteComponent() {
       )}
       {hasRights({ user }, ApplicationRights.protectedCertificats) && (
         <>
-          <QualibatSection uniteLegale={uniteLegale} user={user} />
-          <QualifelecSection uniteLegale={uniteLegale} user={user} />
-          <OpqibiSection uniteLegale={uniteLegale} user={user} />
+          <QualibatSection uniteLegale={uniteLegale} />
+          <QualifelecSection uniteLegale={uniteLegale} />
+          <OpqibiSection uniteLegale={uniteLegale} />
         </>
       )}
       {estOrganismeFormation && (

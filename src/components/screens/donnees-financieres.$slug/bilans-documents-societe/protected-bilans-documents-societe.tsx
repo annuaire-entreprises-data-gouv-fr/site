@@ -7,7 +7,6 @@ import ButtonLink from "#/components-ui/button";
 import FAQLink from "#/components-ui/faq-link";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import {
   type IUniteLegale,
@@ -45,10 +44,8 @@ const BilansTable = ({ bilans }: { bilans: IDocumentsRNE["bilans"] }) => (
 
 export default function BilansDocumentsSocieteProtected({
   uniteLegale,
-  user,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
 }) {
   const input = useMemo(
     () => ({ siren: uniteLegale.siren }),
@@ -56,7 +53,6 @@ export default function BilansDocumentsSocieteProtected({
   );
   const documents = useServerFnData(
     getAgentRneDocumentsFn,
-    user,
     input,
     ApplicationRights.documentsRne
   );

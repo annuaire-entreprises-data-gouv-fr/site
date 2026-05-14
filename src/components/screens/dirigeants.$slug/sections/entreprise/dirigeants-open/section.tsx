@@ -7,7 +7,6 @@ import { UniteLegalePageLink } from "#/components/unite-legale-page-link";
 import InpiPartiallyDownWarning from "#/components-ui/alerts-with-explanations/inpi-partially-down";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IUniteLegale } from "#/models/core/types";
 import { getRneDirigeantsFn } from "#/server-functions/public/data-fetching";
 import { pluralize } from "#/utils/helpers";
@@ -15,18 +14,17 @@ import DirigeantsContent from "./content";
 
 interface IProps {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
 }
 
 /**
  * Dirigeants section
  */
-export default function DirigeantsSection({ uniteLegale, user }: IProps) {
+export default function DirigeantsSection({ uniteLegale }: IProps) {
   const input = useMemo(
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const dirigeants = useServerFnData(getRneDirigeantsFn, user, input);
+  const dirigeants = useServerFnData(getRneDirigeantsFn, input);
 
   return (
     <AsyncDataSectionClient

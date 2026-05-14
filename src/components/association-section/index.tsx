@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { DJEPVA, MI } from "#/components/administrations";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { TwoColumnTable } from "#/components/table/simple";
@@ -121,9 +122,11 @@ const AssociationSection = ({
 }) => {
   const { idAssociation = "" } = uniteLegale.association;
 
-  const association = useServerFnData(getAssociationFn, user, {
-    slug: uniteLegale.association.idAssociation,
-  });
+  const input = useMemo(
+    () => ({ slug: uniteLegale.association.idAssociation }),
+    [uniteLegale.association.idAssociation]
+  );
+  const association = useServerFnData(getAssociationFn, input);
 
   return (
     <>
@@ -140,7 +143,6 @@ const AssociationSection = ({
               <AssociationAdressAlert
                 association={association}
                 uniteLegale={uniteLegale}
-                user={user}
               />
               <p>
                 Cette structure est inscrite au{" "}

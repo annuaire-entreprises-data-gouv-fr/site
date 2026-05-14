@@ -32,10 +32,8 @@ export const FAQEffectifAnnuel = () => (
 
 export const ProtectedEffectifCell = ({
   uniteLegale,
-  user,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
 }) => {
   const input = useMemo(
     () => ({ siren: uniteLegale.siren }),
@@ -43,7 +41,6 @@ export const ProtectedEffectifCell = ({
   );
   const effectifsAnnuelsProtected = useServerFnData(
     getAgentEffectifsAnnuelsProtectedFn,
-    user,
     input,
     ApplicationRights.effectifs
   );
@@ -112,7 +109,7 @@ export const EffectifCell = ({
           <span>
             <FAQEffectifAnnuel /> (<GIPMDS />) :{" "}
           </span>
-          <ProtectedEffectifCell uniteLegale={uniteLegale} user={user} />
+          <ProtectedEffectifCell uniteLegale={uniteLegale} />
         </li>
       </ul>
     );

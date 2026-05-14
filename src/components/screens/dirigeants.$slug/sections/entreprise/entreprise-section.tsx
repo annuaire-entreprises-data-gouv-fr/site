@@ -24,9 +24,9 @@ export default function DirigeantsEntrepriseSection({
   return (
     <>
       {hasRights({ user }, ApplicationRights.mandatairesRCS) ? (
-        <DirigeantsSectionProtected uniteLegale={uniteLegale} user={user} />
+        <DirigeantsSectionProtected uniteLegale={uniteLegale} />
       ) : (
-        <DirigeantsSection uniteLegale={uniteLegale} user={user} />
+        <DirigeantsSection uniteLegale={uniteLegale} />
       )}
       <BreakPageForPrint />
       {!isEntrepreneurIndividuel(uniteLegale) &&
