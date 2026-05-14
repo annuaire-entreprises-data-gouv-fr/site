@@ -8,7 +8,6 @@ import FAQLink from "#/components-ui/faq-link";
 import { Tag } from "#/components-ui/tag";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
-import type { ISession } from "#/models/authentication/user/session";
 import type { IRGECertification } from "#/models/certifications/rge";
 import type { IUniteLegale } from "#/models/core/types";
 import { pluralize } from "#/utils/helpers";
@@ -26,8 +25,7 @@ const renovLink = (slug: string) => {
 export const CertificationsRGESection: React.FC<{
   uniteLegale: IUniteLegale;
   certificationsRGE: IRGECertification | IAPINotRespondingError;
-  session: ISession | null;
-}> = ({ uniteLegale, certificationsRGE, session: _ }) => (
+}> = ({ uniteLegale, certificationsRGE }) => (
   <DataSection
     data={certificationsRGE}
     id="rge"
