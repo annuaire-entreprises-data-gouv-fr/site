@@ -5,7 +5,7 @@ import { FullTable } from "#/components/table/full";
 import { Warning } from "#/components-ui/alerts";
 import ButtonLink from "#/components-ui/button";
 import FAQLink from "#/components-ui/faq-link";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
@@ -15,7 +15,7 @@ import {
   isServicePublic,
 } from "#/models/core/types";
 import type { IDocumentsRNE } from "#/models/rne/types";
-import { getEspaceAgentRneDocumentsAction } from "#/server-functions/agent/data-fetching";
+import { getAgentRneDocumentsFn } from "#/server-functions/agent/data-fetching";
 import { formatDateLong, pluralize } from "#/utils/helpers";
 import { getFiscalYear } from "#/utils/helpers/formatting/format-fiscal-year";
 import { BilanTypeTag } from "../bilan-tag";
@@ -54,8 +54,8 @@ export default function BilansDocumentsSocieteProtected({
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const documents = useServerActionData(
-    getEspaceAgentRneDocumentsAction,
+  const documents = useServerFnData(
+    getAgentRneDocumentsFn,
     user,
     input,
     ApplicationRights.documentsRne

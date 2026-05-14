@@ -8,7 +8,7 @@ import {
   NotificationTypeEnum,
   useNotification,
 } from "#/hooks/use-notification";
-import { removeUserFromGroupAction } from "#/server-functions/agent/group-management";
+import { removeUserFromGroupFn } from "#/server-functions/agent/group-management";
 
 export default function DeleteUserButton({
   isCurrentUser,
@@ -27,7 +27,7 @@ export default function DeleteUserButton({
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const mutation = useMutation({
-    mutationFn: removeUserFromGroupAction,
+    mutationFn: removeUserFromGroupFn,
     onSuccess: () => {
       deleteUserFromGroupState(user.email);
       setShowConfirmation(false);

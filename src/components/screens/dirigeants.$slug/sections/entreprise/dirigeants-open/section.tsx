@@ -5,11 +5,11 @@ import { Link } from "#/components/Link";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { UniteLegalePageLink } from "#/components/unite-legale-page-link";
 import InpiPartiallyDownWarning from "#/components-ui/alerts-with-explanations/inpi-partially-down";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IUniteLegale } from "#/models/core/types";
-import { getRneDirigeants } from "#/server-functions/public/data-fetching";
+import { getRneDirigeantsFn } from "#/server-functions/public/data-fetching";
 import { pluralize } from "#/utils/helpers";
 import DirigeantsContent from "./content";
 
@@ -26,7 +26,7 @@ export default function DirigeantsSection({ uniteLegale, user }: IProps) {
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const dirigeants = useServerActionData(getRneDirigeants, user, input);
+  const dirigeants = useServerFnData(getRneDirigeantsFn, user, input);
 
   return (
     <AsyncDataSectionClient

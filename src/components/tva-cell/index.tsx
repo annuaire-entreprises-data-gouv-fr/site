@@ -5,12 +5,12 @@ import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
 import { Loader } from "#/components-ui/loader";
 import { useAuth } from "#/contexts/auth.context";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { estActif } from "#/models/core/etat-administratif";
 import type { IUniteLegale } from "#/models/core/types";
 import { hasAnyError, isDataLoading } from "#/models/data-fetching";
 import { getTvaUniteLegale } from "#/models/tva";
-import { verifyTva } from "#/server-functions/public/data-fetching";
+import { verifyTvaFn } from "#/server-functions/public/data-fetching";
 import { formatIntFr } from "#/utils/helpers";
 import TVAList from "./tva-list";
 
@@ -91,7 +91,7 @@ const VerifyTVA: React.FC<{
     () => ({ slug: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const verification = useServerActionData(verifyTva, user, input);
+  const verification = useServerFnData(verifyTvaFn, user, input);
   if (isDataLoading(verification)) {
     return (
       <>

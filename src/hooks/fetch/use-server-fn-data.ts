@@ -22,7 +22,7 @@ import { convertErrorToFetchingState } from "#/utils/helpers/convert-error";
  * @param requiredRight : ApplicationRights required to execute the action
  * @returns {IDataFetchingState | Data} - The API loading state or the fetched data
  */
-export function useServerActionData<Input, Data>(
+export function useServerFnData<Input, Data>(
   action: RequiredFetcher<unknown, Input, Data>,
   user: IAgentInfo | null,
   input: Expand<IntersectAllValidatorInputs<unknown, Input>>,

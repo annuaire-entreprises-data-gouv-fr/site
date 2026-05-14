@@ -2,13 +2,13 @@ import { useMemo } from "react";
 import { DataSectionClient } from "#/components/section/data-section";
 import { TwoColumnTable } from "#/components/table/simple";
 import FAQLink from "#/components-ui/faq-link";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type { IOpqibi } from "#/models/espace-agent/certificats/opqibi";
-import { getEspaceAgentOpqibi } from "#/server-functions/agent/data-fetching";
+import { getAgentOpqibiFn } from "#/server-functions/agent/data-fetching";
 import { formatDateLong } from "#/utils/helpers";
 
 export const OpqibiSection: React.FC<{
@@ -19,8 +19,8 @@ export const OpqibiSection: React.FC<{
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const opqibi = useServerActionData(
-    getEspaceAgentOpqibi,
+  const opqibi = useServerFnData(
+    getAgentOpqibiFn,
     user,
     input,
     ApplicationRights.protectedCertificats

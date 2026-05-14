@@ -7,13 +7,13 @@ import { FullTable } from "#/components/table/full";
 import FAQLink from "#/components-ui/faq-link";
 import InformationTooltip from "#/components-ui/information-tooltip";
 import { Tag } from "#/components-ui/tag";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { isDataSuccess, isUnauthorized } from "#/models/data-fetching";
-import { getEspaceAgentAssociationProtected } from "#/server-functions/agent/data-fetching";
+import { getAgentAssociationProtectedFn } from "#/server-functions/agent/data-fetching";
 import { formatSiret } from "#/utils/helpers";
 import { extractAssociationEtablissements } from "#/utils/helpers/association";
 
@@ -31,8 +31,8 @@ const NoDirigeants = () => (
  */
 function DirigeantsAssociationSection({ uniteLegale, user }: IProps) {
   const [selectedSiret, setSelectedSiret] = useState<string[]>([]);
-  const associationProtected = useServerActionData(
-    getEspaceAgentAssociationProtected,
+  const associationProtected = useServerFnData(
+    getAgentAssociationProtectedFn,
     user,
     { siren: uniteLegale.siren },
     ApplicationRights.associationProtected

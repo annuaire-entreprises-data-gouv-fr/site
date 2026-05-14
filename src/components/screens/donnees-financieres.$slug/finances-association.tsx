@@ -3,12 +3,12 @@ import { DJEPVA } from "#/components/administrations";
 import { LineChart } from "#/components/chart/line";
 import { DataSectionClient } from "#/components/section/data-section";
 import { FullTable } from "#/components/table/full";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import constants from "#/models/constants";
 import type { IAssociation } from "#/models/core/types";
-import { getAssociation } from "#/server-functions/public/data-fetching";
+import { getAssociationFn } from "#/server-functions/public/data-fetching";
 import { formatCurrency } from "#/utils/helpers";
 
 const ColorCircle = ({ color }: { color: string }) => (
@@ -35,7 +35,7 @@ export default function FinancesAssociationSection({
     () => ({ slug: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const data = useServerActionData(getAssociation, user, input);
+  const data = useServerFnData(getAssociationFn, user, input);
   if (!data) {
     return null;
   }

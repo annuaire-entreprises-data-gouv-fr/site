@@ -7,7 +7,7 @@ import type {
   IAgentsOrganizationGroup,
 } from "#/models/authentication/group";
 import constants from "#/models/constants";
-import { getOrganizationsGroupsAction } from "#/server-functions/agent/group-management";
+import { getOrganizationsGroupsFn } from "#/server-functions/agent/group-management";
 import { ActiveGroupsModal } from "./active-groups-modal";
 import { NoGroupsModal } from "./no-groups-modal";
 import { OrganisationGroupsModal } from "./organisation-groups-modal";
@@ -43,7 +43,7 @@ export const CardHabilitation = ({
     setIsLoadingOrganisationGroups(true);
 
     try {
-      const data = await getOrganizationsGroupsAction();
+      const data = await getOrganizationsGroupsFn();
       const newOrganisationGroups = data
         ? data.filter((group) => !groups.some((g) => g.id === group.id))
         : [];

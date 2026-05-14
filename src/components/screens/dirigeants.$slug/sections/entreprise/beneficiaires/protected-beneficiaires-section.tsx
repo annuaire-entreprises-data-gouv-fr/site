@@ -6,14 +6,14 @@ import { FullTable } from "#/components/table/full";
 import { UniteLegalePageLink } from "#/components/unite-legale-page-link";
 import FAQLink from "#/components-ui/faq-link";
 import { Tag } from "#/components-ui/tag";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type { IBeneficiairesEffectif } from "#/models/espace-agent/beneficiaires";
 import type { UseCase } from "#/models/use-cases";
-import { getEspaceAgentBeneficiaires } from "#/server-functions/agent/data-fetching";
+import { getAgentBeneficiairesFn } from "#/server-functions/agent/data-fetching";
 import { formatDatePartial, pluralize } from "#/utils/helpers";
 
 /**
@@ -45,8 +45,8 @@ export default function ProtectedBeneficiairesSection({
     }),
     [useCase]
   );
-  const beneficiaires = useServerActionData(
-    getEspaceAgentBeneficiaires,
+  const beneficiaires = useServerFnData(
+    getAgentBeneficiairesFn,
     user,
     input,
     ApplicationRights.beneficiaires

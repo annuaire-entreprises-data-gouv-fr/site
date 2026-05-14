@@ -5,7 +5,7 @@ import { Section } from "#/components/section";
 import { FullTable } from "#/components/table/full";
 import { Loader } from "#/components-ui/loader";
 import { Select } from "#/components-ui/select";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
 import { isAPI404 } from "#/models/api-not-responding";
 import type { IAgentInfo } from "#/models/authentication/agent";
@@ -17,7 +17,7 @@ import type {
   IPersonneMoraleLiensCapitalistiques,
 } from "#/models/rne/types";
 import type { UseCase } from "#/models/use-cases";
-import { getAgentLiensCapitalistiquesProtectedAction } from "#/server-functions/agent/data-fetching";
+import { getAgentLiensCapitalistiquesProtectedFn } from "#/server-functions/agent/data-fetching";
 import { formatIntFr, pluralize } from "#/utils/helpers/formatting/formatting";
 import EtatCivilInfos from "../sections/entreprise/EtatCivilInfos";
 import PersonneMoraleInfos from "../sections/entreprise/PersonneMoraleInfos";
@@ -38,8 +38,8 @@ function LiensCapitalistiquesContent({
     [uniteLegale.siren, selectedYear, useCase]
   );
 
-  const liensCapitalistiquesProtected = useServerActionData(
-    getAgentLiensCapitalistiquesProtectedAction,
+  const liensCapitalistiquesProtected = useServerFnData(
+    getAgentLiensCapitalistiquesProtectedFn,
     user,
     input,
     ApplicationRights.liensCapitalistiques

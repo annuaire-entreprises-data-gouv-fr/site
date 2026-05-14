@@ -3,7 +3,7 @@ import { AsyncDataSectionClient } from "#/components/section/data-section/client
 import { TwoColumnTable } from "#/components/table/simple";
 import FAQLink from "#/components-ui/faq-link";
 import { Icon } from "#/components-ui/icon/wrapper";
-import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import type { EAdministration } from "#/models/administrations/EAdministration";
 import {
   type IAPINotRespondingError,
@@ -15,7 +15,7 @@ import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type { IDocumentDownloader } from "#/models/espace-agent/travaux-publics";
 import type { UseCase } from "#/models/use-cases";
-import { getEspaceAgentTravauxPublics } from "#/server-functions/agent/data-fetching";
+import { getAgentTravauxPublicsFn } from "#/server-functions/agent/data-fetching";
 
 const DocumentDownloader = ({
   data,
@@ -77,8 +77,8 @@ export default function ProtectedTravauxPublicsSection({
     () => ({ siret: uniteLegale.siege.siret, useCase }),
     [uniteLegale.siege.siret, useCase]
   );
-  const travauxPublics = useServerActionData(
-    getEspaceAgentTravauxPublics,
+  const travauxPublics = useServerFnData(
+    getAgentTravauxPublicsFn,
     user,
     input,
     ApplicationRights.travauxPublics
