@@ -39,7 +39,9 @@ export const DataInpiLinkWithExplanations = ({ uniteLegale, user }: IProps) => {
         Pour accéder aux données contenues dans un extrait d’immatriculation
         (équivalent de{" "}
         <strong>
-          <Link href="/faq/extrait-kbis">l'extrait KBIS ou D1</Link>
+          <Link params={{ slug: "extrait-kbis" }} to="/faq/$slug">
+            l'extrait KBIS ou D1
+          </Link>
         </strong>
         ), vous pouvez soit télécharger l’{" "}
         <strong>

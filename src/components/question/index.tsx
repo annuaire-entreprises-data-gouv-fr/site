@@ -10,7 +10,7 @@ export function Question() {
         className="no-style-link"
         data-floating-question
         data-test-id="question-faq"
-        href="/faq"
+        to="/faq"
       >
         <span>Une question&nbsp;</span>
         <Icon size={24} slug="questionFill" />

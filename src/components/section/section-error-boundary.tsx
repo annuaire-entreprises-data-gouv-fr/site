@@ -22,9 +22,7 @@ export default function SectionErrorBoundary({
             <p>
               L’équipe technique a été notifiée. Si le problème persiste, vous
               pouvez{" "}
-              <Link href={constants.links.parcours.contact}>
-                nous contacter
-              </Link>{" "}
+              <Link to={constants.links.parcours.contact}>nous contacter</Link>{" "}
               pour que nous puissions trouver la panne 🕵️‍♀️.
             </p>
           )}

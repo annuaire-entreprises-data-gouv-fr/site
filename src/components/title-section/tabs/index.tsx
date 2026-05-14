@@ -1,7 +1,9 @@
+import type { ComponentProps } from "react";
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from "#/components/badges-section/labels-and-certificates";
+import { Link } from "#/components/Link";
 import { PrintNever } from "#/components-ui/print-visibility";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
@@ -32,10 +34,20 @@ export enum FICHE {
   ETABLISSEMENT = "fiche établissement",
 }
 
+interface ITab {
+  ficheType: FICHE;
+  label: string;
+  noFollow: boolean;
+  params: ComponentProps<typeof Link>["params"];
+  shouldDisplay: boolean;
+  to: ComponentProps<typeof Link>["to"];
+  width?: string;
+}
+
 const getUniteLegaleTabs = (
   uniteLegale: IUniteLegale,
   user: IAgentInfo | null
-) => {
+): ITab[] => {
   const shouldDisplayFinances =
     // hide for public services
     (!isServicePublic(uniteLegale) &&
@@ -47,15 +59,16 @@ const getUniteLegaleTabs = (
     {
       ficheType: FICHE.INFORMATION,
       label: "Fiche résumé",
-      path: `/entreprise/${uniteLegale.chemin}`,
+      params: { slug: uniteLegale.chemin },
+      to: "/entreprise/$slug",
       noFollow: false,
       shouldDisplay: true,
       width: "80px",
-      pathPrefix: "",
     },
     {
       ficheType: FICHE.DIRIGEANTS,
-      path: `/dirigeants/${uniteLegale.siren}`,
+      params: { slug: uniteLegale.siren },
+      to: "/dirigeants/$slug",
       noFollow: false,
       shouldDisplay: true,
       ...(isCollectiviteTerritoriale(uniteLegale)
@@ -69,7 +82,8 @@ const getUniteLegaleTabs = (
     {
       ficheType: FICHE.DOCUMENTS,
       label: "Documents",
-      path: `/documents/${uniteLegale.siren}`,
+      params: { slug: uniteLegale.siren },
+      to: "/documents/$slug",
       noFollow: false,
       shouldDisplay: true,
       width: "95px",
@@ -77,14 +91,16 @@ const getUniteLegaleTabs = (
     {
       ficheType: FICHE.FINANCES,
       label: "Données financières",
-      path: `/donnees-financieres/${uniteLegale.siren}`,
+      params: { slug: uniteLegale.siren },
+      to: "/donnees-financieres/$slug",
       noFollow: false,
       shouldDisplay: shouldDisplayFinances,
       width: "100px",
     },
     {
       ficheType: FICHE.ANNONCES,
-      path: `/annonces/${uniteLegale.siren}`,
+      params: { slug: uniteLegale.siren },
+      to: "/annonces/$slug",
       label: `Annonces${
         uniteLegale.dateMiseAJourInpi ? " et observations" : ""
       }`,
@@ -94,7 +110,8 @@ const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.CERTIFICATS,
-      path: `/labels-certificats/${uniteLegale.siren}`,
+      params: { slug: uniteLegale.siren },
+      to: "/labels-certificats/$slug",
       label: `${
         checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
       }abels et certificats`,
@@ -106,14 +123,16 @@ const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
-      path: `/etablissements-scolaires/${uniteLegale.siren}`,
+      params: { slug: uniteLegale.siren },
+      to: "/etablissements-scolaires/$slug",
       label: "Établissements scolaires",
       noFollow: false,
       shouldDisplay: uniteLegale.complements.estUai,
     },
     {
       ficheType: FICHE.DIVERS,
-      path: `/divers/${uniteLegale.siren}`,
+      params: { slug: uniteLegale.siren },
+      to: "/divers/$slug",
       label: "Conventions collectives",
       noFollow: false,
       shouldDisplay: (uniteLegale.listeIdcc || []).length > 0,
@@ -133,25 +152,17 @@ export const Tabs: React.FC<{
       <div className={styles.titleTabs}>
         {tabs
           .filter(({ shouldDisplay }) => shouldDisplay)
-          .map(
-            ({
-              path,
-              pathPrefix,
-              ficheType,
-              label,
-              noFollow,
-              width = "auto",
-            }) => (
-              <TabLink
-                active={currentFicheType === ficheType}
-                href={path || `${pathPrefix}${uniteLegale.siren}`}
-                key={label}
-                label={label}
-                noFollow={noFollow}
-                width={width}
-              />
-            )
-          )}
+          .map(({ to, params, ficheType, label, noFollow, width = "auto" }) => (
+            <TabLink
+              active={currentFicheType === ficheType}
+              key={label}
+              label={label}
+              noFollow={noFollow}
+              params={params}
+              to={to}
+              width={width}
+            />
+          ))}
       </div>
     </PrintNever>
   );
@@ -166,14 +177,11 @@ export const TabsForEtablissement: React.FC<{
     <ul className={styles.titleTabsEtablissement}>
       {tabs
         .filter(({ shouldDisplay }) => shouldDisplay)
-        .map(({ path, pathPrefix, label, noFollow }) => (
+        .map(({ to, params, label, noFollow }) => (
           <li key={label}>
-            <a
-              href={path || `${pathPrefix}${uniteLegale.siren}`}
-              rel={noFollow ? "nofollow" : ""}
-            >
+            <Link params={params} rel={noFollow ? "nofollow" : ""} to={to}>
               <h2>{label}</h2>
-            </a>
+            </Link>
           </li>
         ))}
     </ul>

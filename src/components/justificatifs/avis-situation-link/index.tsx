@@ -55,7 +55,10 @@ const AvisSituationLink: React.FC<{
     );
   }
   return (
-    <Link href="/faq/justificatif-immatriculation-non-diffusible">
+    <Link
+      params={{ slug: "justificatif-immatriculation-non-diffusible" }}
+      to="/faq/$slug"
+    >
       {documentNonDiffusiblePlaceHolder(etablissement)}
     </Link>
   );

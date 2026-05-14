@@ -106,7 +106,10 @@ function DirigeantsAssociationSection({ uniteLegale, user }: IProps) {
                       courriel,
                     }) => [
                       <>
-                        <Link href={`/etablissement/${etablissement.siret}`}>
+                        <Link
+                          params={{ slug: etablissement.siret }}
+                          to="/etablissement/$slug"
+                        >
                           {formatSiret(etablissement.siret)}
                         </Link>
                         {etablissement.siege && <Tag color="info">siège</Tag>}

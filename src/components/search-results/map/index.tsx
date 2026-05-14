@@ -1,10 +1,7 @@
-import { ClientOnly, redirect } from "@tanstack/react-router";
+import { ClientOnly, useNavigate, useSearch } from "@tanstack/react-router";
 import MapWithResults from "#/components/map/map-results";
 import type { ISearchResults } from "#/models/search";
-import {
-  buildSearchQuery,
-  type IParams,
-} from "#/models/search/search-filter-params";
+import type { IParams } from "#/models/search/search-filter-params";
 import ResultsCounter from "../results-counter";
 import ResultsList from "../results-list";
 import ResultsPagination from "../results-pagination";
@@ -17,16 +14,18 @@ const SearchResultsMap: React.FC<{
 }> = ({ results, searchTerm = "", searchFilterParams = {} }) => {
   const height = "calc(100vh - 230px)";
 
+  const searchParams = useSearch({ from: "/_header-search/rechercher/carte" });
+  const navigate = useNavigate();
+
   if (
     results.notEnoughParams ||
     results.badParams ||
     !results.results ||
     results.results.length === 0
   ) {
-    throw redirect({
+    navigate({
       to: "/rechercher",
-      // TODO: fix this type error and implement correct search
-      search: buildSearchQuery(searchTerm, searchFilterParams) as any,
+      search: searchParams,
     });
   }
   const shouldColorZipCode = !!searchFilterParams.cp_dep;

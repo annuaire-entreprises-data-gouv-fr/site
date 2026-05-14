@@ -72,7 +72,7 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
                 }) => [
                   <>
                     {siret && (
-                      <Link href={`/etablissement/${siret}`}>
+                      <Link params={{ slug: siret }} to="/etablissement/$slug">
                         {formatSiret(siret)}
                       </Link>
                     )}

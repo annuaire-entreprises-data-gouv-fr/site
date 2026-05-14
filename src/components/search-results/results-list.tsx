@@ -76,8 +76,9 @@ const ResultItem: React.FC<{
       <Link
         className="result-link no-style-link"
         data-siren={result.siren}
-        href={`/entreprise/${result.chemin}`}
         key={result.siren}
+        params={{ slug: result.chemin }}
+        to="/entreprise/$slug"
       >
         <div className={styles["title"]}>
           <span>{`${result.nomComplet}`}</span>

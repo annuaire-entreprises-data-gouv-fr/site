@@ -80,7 +80,7 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
             ProConnect
           </a>{" "}
           pour{" "}
-          <Link href="/lp/agent-public">
+          <Link to="/lp/agent-public">
             avoir accès à des informations additionnelles (actes, statuts, etc.)
           </Link>
           .
@@ -121,7 +121,7 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
       </ul>
       <p>
         Nous suivons également le nombre d’appels reçus par{" "}
-        <Link href="/donnees/api-entreprises">
+        <Link to="/donnees/api-entreprises">
           notre API de Recherche d'entreprises
         </Link>
         . Ce chiffre inclut les appels provenant du site{" "}

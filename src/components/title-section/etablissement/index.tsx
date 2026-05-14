@@ -34,7 +34,10 @@ const TitleEtablissementWithDenomination: React.FC<{
           <INSEE /> : {formatSiret(etablissement.oldSiret)} et{" "}
           {formatSiret(etablissement.siret)}. Pour voir les informations
           complètes, consultez la page{" "}
-          <Link href={`/etablissement/${etablissement.siret}`}>
+          <Link
+            params={{ slug: etablissement.siret }}
+            to="/etablissement/$slug"
+          >
             {formatSiret(etablissement.siret)}
           </Link>
           .
@@ -55,7 +58,10 @@ const TitleEtablissementWithDenomination: React.FC<{
       {etablissement.commune && (
         <>
           à{" "}
-          <Link href={`/etablissement/${etablissement.siret}`}>
+          <Link
+            params={{ slug: etablissement.siret }}
+            to="/etablissement/$slug"
+          >
             {etablissement.commune}
           </Link>
         </>
@@ -103,7 +109,10 @@ const TitleEtablissementWithDenomination: React.FC<{
             <div>
               <div>
                 <strong>
-                  <Link href={`/entreprise/${uniteLegale.chemin}`}>
+                  <Link
+                    params={{ slug: uniteLegale.chemin }}
+                    to="/entreprise/$slug"
+                  >
                     {uniteLegale.nomComplet}
                   </Link>
                 </strong>

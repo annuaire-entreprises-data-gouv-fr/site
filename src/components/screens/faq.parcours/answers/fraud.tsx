@@ -7,7 +7,10 @@ export const FraudAnswer: React.FC = () => (
     <strong>Attention à la fraude :</strong> l’Annuaire des Entreprises est un
     service public <strong>gratuit</strong> et ne vous demandera{" "}
     <strong>jamais</strong> d’argent. Pour en savoir plus, consultez{" "}
-    <Link href="/faq/fraudes-ecroqueries-annuaire-des-entreprises">
+    <Link
+      params={{ slug: "fraudes-ecroqueries-annuaire-des-entreprises" }}
+      to="/faq/$slug"
+    >
       notre fiche explicative
     </Link>
     .

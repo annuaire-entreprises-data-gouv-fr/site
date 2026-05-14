@@ -68,7 +68,7 @@ export const CertificationsBioSection: React.FC<{
               }) => [
                 <>
                   {siret && (
-                    <Link href={`/etablissement/${siret}`}>
+                    <Link params={{ slug: siret }} to="/etablissement/$slug">
                       {formatSiret(siret)}
                     </Link>
                   )}

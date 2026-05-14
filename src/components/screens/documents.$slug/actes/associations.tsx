@@ -110,7 +110,10 @@ export const AgentActesAssociation: React.FC<{
                       etablissement,
                       url,
                     }) => [
-                      <Link href={`/etablissement/${etablissement.siret}`}>
+                      <Link
+                        params={{ slug: etablissement.siret }}
+                        to="/etablissement/$slug"
+                      >
                         {formatSiret(etablissement.siret)}
                       </Link>,
                       formatDate(date_depot),

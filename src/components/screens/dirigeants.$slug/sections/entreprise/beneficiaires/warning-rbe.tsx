@@ -5,7 +5,10 @@ import { Warning } from "#/components-ui/alerts";
 export const WarningRBE = () => (
   <Warning>
     Depuis le 31 juillet 2024, le{" "}
-    <Link href="/faq/registre-des-beneficiaires-effectifs">
+    <Link
+      params={{ slug: "registre-des-beneficiaires-effectifs" }}
+      to="/faq/$slug"
+    >
       registre des bénéficiaires effectifs n'est plus accessible sur le site
     </Link>
     , en application de la{" "}

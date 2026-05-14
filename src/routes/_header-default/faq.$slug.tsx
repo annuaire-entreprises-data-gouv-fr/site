@@ -60,8 +60,8 @@ function RouteComponent() {
     <TextWrapper>
       <Breadcrumb
         links={[
-          { href: "/faq", label: "Questions fréquentes" },
-          { href: "", label: article.title },
+          { to: "/faq", label: "Questions fréquentes" },
+          { to: ".", label: article.title },
         ]}
       />
       <h1>{article.title}</h1>

@@ -23,7 +23,7 @@ const AvisSituationTable: React.FC<{
 }> = ({ etablissements, user }) => (
   <FullTable
     body={etablissements.map((etablissement: IEtablissement) => [
-      <Link href={`/etablissement/${etablissement.siret}`}>
+      <Link params={{ slug: etablissement.siret }} to="/etablissement/$slug">
         {formatSiret(etablissement.siret)}
       </Link>,
       <>

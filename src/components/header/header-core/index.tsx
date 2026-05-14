@@ -75,7 +75,7 @@ export const HeaderCore: React.FC<IProps> = ({
                     style={{ overflow: "visible" }}
                   >
                     <div className="fr-header__logo">
-                      <Link href="/" title="République française">
+                      <Link title="République française" to="/">
                         <p className="fr-logo">
                           République
                           <br />
@@ -90,7 +90,7 @@ export const HeaderCore: React.FC<IProps> = ({
                           marginRight: "15px",
                         }}
                       >
-                        <Link href="/" title="L'Annuaire des Entreprises">
+                        <Link title="L'Annuaire des Entreprises" to="/">
                           <svg
                             fill="none"
                             height={54}
@@ -160,7 +160,7 @@ export const HeaderCore: React.FC<IProps> = ({
           <div className="fr-container">
             Vous êtes connecté(e) en tant qu'<strong>agent public</strong>. Vous
             pouvez{" "}
-            <Link href="/compte/accueil">
+            <Link to="/compte/accueil">
               consulter le récapitulatif de vos droits.
             </Link>
             <br />

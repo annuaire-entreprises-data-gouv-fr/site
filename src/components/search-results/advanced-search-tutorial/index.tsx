@@ -64,7 +64,7 @@ export const AdvancedSearchTutorial = () => (
       <div>
         <Icon color={constants.colors.frBlue} slug="download">
           Vous pouvez également{" "}
-          <Link href="/export-sirene">
+          <Link to="/export-sirene">
             générer une liste d'établissements (au format CSV)
           </Link>{" "}
           grâce à l'outil d'export des données Sirene.

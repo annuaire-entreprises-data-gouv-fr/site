@@ -15,7 +15,11 @@ export const UniteLegaleEtablissementCountDescription: React.FC<{
 
   return (
     <>
-      <Link href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+      <Link
+        hash="etablissements"
+        params={{ slug: uniteLegale.chemin }}
+        to="/entreprise/$slug"
+      >
         {nombreEtablissements} établissement{plural}
       </Link>
       {hasOpenEtablissements &&

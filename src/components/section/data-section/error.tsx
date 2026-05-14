@@ -48,7 +48,7 @@ export default function DataFetchErrorExplanation({
         </p>
         <p>
           Si la situation perdure, vous pouvez{" "}
-          <Link href={constants.links.parcours.contact}>nous contacter</Link>.
+          <Link to={constants.links.parcours.contact}>nous contacter</Link>.
         </p>
       </AlertError>
     );

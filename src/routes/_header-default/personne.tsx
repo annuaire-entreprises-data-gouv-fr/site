@@ -157,11 +157,11 @@ function RouteComponent() {
         <br />
         Si <strong>vous ne retrouvez pas une entreprise</strong> qui devrait se
         trouver dans la liste, vous pouvez effectuer une recherche{" "}
-        <Link href={`/rechercher?fn=${prenoms}&n=${nom}`}>
+        <Link search={{ fn: prenoms, n: nom }} to="/rechercher">
           sans filtre d’âge
         </Link>{" "}
         ou{" "}
-        <Link href={`/rechercher?fn=${prenom}&n=${nom}`}>
+        <Link search={{ fn: prenom, n: nom }} to="/rechercher">
           sans prénom secondaire et sans filtre d’âge
         </Link>
         .
@@ -186,7 +186,8 @@ function RouteComponent() {
                     dirigeantOrElu.siren ? (
                       <Link
                         aria-label={`Voir les dirigeants de cette entreprise (siren ${dirigeantOrElu.siren})`}
-                        href={`/dirigeants/${dirigeantOrElu.siren}`}
+                        params={{ slug: dirigeantOrElu.siren }}
+                        to="/dirigeants/$slug"
                       >
                         {dirigeantOrElu.denomination}
                       </Link>
