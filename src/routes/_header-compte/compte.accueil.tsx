@@ -48,7 +48,7 @@ function RouteComponent() {
 
   const { user } = useAuth();
 
-  const habilitationUrl = `${process.env.VITE_DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`;
+  const habilitationUrl = `${import.meta.env.VITE_DATAPASS_URL}/demandes/annuaire-des-entreprises/nouveau`;
 
   if (!user) {
     return null;

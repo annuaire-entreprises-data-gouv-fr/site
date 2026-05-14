@@ -32,6 +32,15 @@ export default function AddUserModal({
     mutationFn: addUserToGroupAction,
     onSuccess: (result) => {
       addUserToGroupState(result);
+
+      showNotification({
+        type: NotificationTypeEnum.SUCCESS,
+        title: "Membre ajouté avec succès",
+        message: `${result.email} a été ajouté au groupe ${group.name}`,
+      });
+
+      setInputEmail("");
+      setIsVisible(false);
     },
     onError: (error) => {
       showNotification({

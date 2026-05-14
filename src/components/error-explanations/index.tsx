@@ -8,8 +8,8 @@ const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
     {children}
     <p>
       Si vous êtes arrivé sur cette page en cliquant sur un lien du site, merci
-      de <Link href={constants.links.parcours.contact}>nous contacter</Link>{" "}
-      pour que nous puissions trouver la panne 🕵️‍♀️.
+      de <Link to={constants.links.parcours.contact}>nous contacter</Link> pour
+      que nous puissions trouver la panne 🕵️‍♀️.
     </p>
     <p>En attendant, vous pouvez toujours :</p>
     <ul className="fr-btns-group fr-btns-group--inline-md">
@@ -38,8 +38,8 @@ const ClientErrorExplanations = ({ error }: { error?: Error }) => (
         </p>
         <p>
           Si la situation perdure, merci de{" "}
-          <Link href={constants.links.parcours.contact}>nous contacter</Link>{" "}
-          pour que nous puissions trouver la panne 🕵️‍♀️.
+          <Link to={constants.links.parcours.contact}>nous contacter</Link> pour
+          que nous puissions trouver la panne 🕵️‍♀️.
         </p>
       </>
     ) : (
@@ -74,13 +74,13 @@ const SearchErrorExplanations = () => (
   <div>
     <p>
       Le moteur de recherche est momentanément indisponible et devrait{" "}
-      <Link href="/rechercher">fonctionner de nouveau</Link> dans quelques
+      <Link to="/rechercher">fonctionner de nouveau</Link> dans quelques
       instants.
     </p>
     <p>
       Si la situation perdure, merci de{" "}
-      <Link href={constants.links.parcours.contact}>nous contacter</Link> pour
-      que nous puissions trouver la panne 🕵️‍♀️.
+      <Link to={constants.links.parcours.contact}>nous contacter</Link> pour que
+      nous puissions trouver la panne 🕵️‍♀️.
     </p>
   </div>
 );

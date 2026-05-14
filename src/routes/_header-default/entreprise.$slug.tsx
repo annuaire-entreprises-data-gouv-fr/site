@@ -146,8 +146,6 @@ function RouteComponent() {
     Route.useLoaderData();
   const { user } = useAuth();
 
-  console.log("triggerRedirectedEvent", triggerRedirectedEvent);
-
   return (
     <>
       {triggerRedirectedEvent && (

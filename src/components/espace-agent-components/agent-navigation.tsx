@@ -6,13 +6,14 @@ import constants from "#/models/constants";
 import AgentNavigationLink from "./agent-navigation-link";
 import styles from "./styles.module.css";
 
+const navLinks = [
+  { id: "accueil", label: "Mon espace", to: "/compte/accueil" },
+  { id: "groupes", label: "Mes groupes", to: "/compte/mes-groupes" },
+] as const;
+
 export default function AgentNavigation() {
   const { user } = useAuth();
 
-  const navLinks = [
-    { id: "accueil", label: "Mon espace", href: "/compte/accueil" },
-    { id: "groupes", label: "Mes groupes", href: "/compte/mes-groupes" },
-  ];
   return (
     <FullWidthContainer
       style={{
@@ -29,9 +30,9 @@ export default function AgentNavigation() {
               // biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: This ul is used as a tablist
               role="tablist"
             >
-              {navLinks.map(({ label, href, id }) => (
+              {navLinks.map(({ label, to, id }) => (
                 <li className={styles.navTabItem} key={id} role="presentation">
-                  <AgentNavigationLink href={href} id={id} label={label} />
+                  <AgentNavigationLink id={id} label={label} to={to} />
                 </li>
               ))}
             </ul>
