@@ -4,6 +4,7 @@ import Logo from "#/components-ui/logo";
 import { PrintNever } from "#/components-ui/print-visibility";
 import { administrationsMetaData } from "#/models/administrations";
 import { getAllLandingPages } from "#/models/landing-pages";
+import { getBaseUrl } from "#/utils/server-side-helper/get-base-url";
 import styles from "./style.module.css";
 
 const Footer = () => (
@@ -24,7 +25,8 @@ const Footer = () => (
                     <li key={slug}>
                       <Link
                         className="fr-footer__top-link"
-                        href={`/lp/${slug}`}
+                        params={{ slug }}
+                        to="/lp/$slug"
                       >
                         {footerLabel}
                       </Link>
@@ -42,7 +44,8 @@ const Footer = () => (
                     <li key={slug}>
                       <Link
                         className="fr-footer__top-link"
-                        href={`/lp/${slug}`}
+                        params={{ slug }}
+                        to="/lp/$slug"
                       >
                         {footerLabel}
                       </Link>
@@ -55,19 +58,19 @@ const Footer = () => (
               </strong>
               <ul className="fr-footer__top-list">
                 <li>
-                  <Link
+                  <a
                     className="fr-footer__top-link"
-                    href="/departements/index.html"
+                    href={`${getBaseUrl()}/departements/index.html`}
                   >
                     Entreprises françaises par département
-                  </Link>
+                  </a>
                 </li>
               </ul>
               <br />
               <strong className="fr-footer__top-cat">Répertoire Sirene</strong>
               <ul className="fr-footer__top-list">
                 <li>
-                  <Link className="fr-footer__top-link" href="/export-sirene">
+                  <Link className="fr-footer__top-link" to="/export-sirene">
                     Générer une liste d'établissements (SIRET) au format CSV
                   </Link>
                 </li>
@@ -79,7 +82,7 @@ const Footer = () => (
               </strong>
               <ul className="fr-footer__top-list">
                 <li>
-                  <Link className="fr-footer__top-link" href="/partager">
+                  <Link className="fr-footer__top-link" to="/partager">
                     Réutiliser & partager
                   </Link>
                 </li>
@@ -94,20 +97,20 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
-                  <Link className="fr-footer__top-link" href="/donnees/sources">
+                  <Link className="fr-footer__top-link" to="/donnees/sources">
                     Sources de données
                   </Link>
                 </li>
                 <li>
                   <Link
                     className="fr-footer__top-link"
-                    href="/donnees/api-entreprises"
+                    to="/donnees/api-entreprises"
                   >
                     API Recherche d'entreprises & API Entreprise
                   </Link>
                 </li>
                 <li>
-                  <Link className="fr-footer__top-link" href="/donnees/api">
+                  <Link className="fr-footer__top-link" to="/donnees/api">
                     Disponibilité des API
                   </Link>
                 </li>
@@ -171,19 +174,19 @@ const Footer = () => (
               <strong className="fr-footer__top-cat">Aide</strong>
               <ul className="fr-footer__top-list">
                 <li>
-                  <Link className="fr-footer__top-link" href="/faq">
+                  <Link className="fr-footer__top-link" to="/faq">
                     Questions fréquentes
                   </Link>
                 </li>
                 <li>
-                  <Link className="fr-footer__top-link" href="/definitions">
+                  <Link className="fr-footer__top-link" to="/definitions">
                     Définitions
                   </Link>
                 </li>
                 <li>
                   <Link
                     className="fr-footer__top-link"
-                    href="/formulaire/supprimer-donnees-personnelles-entreprise"
+                    to="/formulaire/supprimer-donnees-personnelles-entreprise"
                   >
                     Supprimer ses données personnelles
                   </Link>
@@ -197,33 +200,33 @@ const Footer = () => (
                 <li>
                   <Link
                     className="fr-footer__top-link"
-                    href="/a-propos/comment-ca-marche"
+                    to="/a-propos/comment-ca-marche"
                   >
                     À propos
                   </Link>
                 </li>
                 <li>
-                  <Link className="fr-footer__top-link" href="/administration">
+                  <Link className="fr-footer__top-link" to="/administration">
                     Administrations partenaires
                   </Link>
                 </li>
                 <li>
-                  <Link className="fr-footer__top-link" href="/lp/agent-public">
+                  <Link className="fr-footer__top-link" to="/lp/agent-public">
                     L'espace agent public
                   </Link>
                 </li>
                 <li>
-                  <Link className="fr-footer__top-link" href="/a-propos/stats">
+                  <Link className="fr-footer__top-link" to="/a-propos/stats">
                     Statistiques d'usage
                   </Link>
                 </li>
                 <li>
-                  <Link className="fr-footer__top-link" href="/a-propos/budget">
+                  <Link className="fr-footer__top-link" to="/a-propos/budget">
                     Budget
                   </Link>
                 </li>
                 <li>
-                  <Link className="fr-footer__top-link" href="/a-propos/equipe">
+                  <Link className="fr-footer__top-link" to="/a-propos/equipe">
                     Équipe
                   </Link>
                 </li>
@@ -244,8 +247,8 @@ const Footer = () => (
             </p>
             <Link
               className={clsx("fr-footer__brand-link", styles.brandLinkItem)}
-              href="/"
               title="Aller à l'accueil du site - annuaire-entreprises.data.gouv.fr - République Française"
+              to="/"
             >
               <img
                 alt="logo data.gouv.fr"
@@ -262,7 +265,7 @@ const Footer = () => (
               Ce site permet de retrouver toutes les données publiques détenues
               par l'administration sur une entreprise, une association ou une
               administration et{" "}
-              <Link href="/a-propos/donnees-extrait-kbis">
+              <Link to="/a-propos/donnees-extrait-kbis">
                 en particulier les données contenues dans un extrait KBIS
               </Link>{" "}
               ou de l'extrait D1.
@@ -338,7 +341,8 @@ const Footer = () => (
                     <li key={long}>
                       <Link
                         className="fr-footer__partners-link"
-                        href={`/administration#${slug}`}
+                        params={{ slug }}
+                        to="/administration/$slug"
                       >
                         {logoType === "portrait" ? (
                           <Logo
@@ -367,7 +371,7 @@ const Footer = () => (
                 <li key="all">
                   <Link
                     className="fr-footer__partners-link"
-                    href="/administration"
+                    to="/administration"
                   >
                     <Logo
                       className="fr-footer__logo"
@@ -391,32 +395,32 @@ const Footer = () => (
         <div className="fr-footer__bottom">
           <ul className="fr-footer__bottom-list">
             <li className="fr-footer__bottom-item">
-              <Link className="fr-footer__bottom-link" href="/vie-privee">
+              <Link className="fr-footer__bottom-link" to="/vie-privee">
                 Vie privée & cookies
               </Link>
             </li>
             <li className="fr-footer__bottom-item">
-              <Link className="fr-footer__bottom-link" href="/mentions-legales">
+              <Link className="fr-footer__bottom-link" to="/mentions-legales">
                 Mentions légales
               </Link>
             </li>
             <li className="fr-footer__bottom-item">
               <Link
                 className="fr-footer__bottom-link"
-                href="/modalites-utilisation"
+                to="/modalites-utilisation"
               >
                 Modalités d'Utilisation
               </Link>
             </li>
             <li className="fr-footer__bottom-item">
-              <Link className="fr-footer__bottom-link" href="/accessibilite">
+              <Link className="fr-footer__bottom-link" to="/accessibilite">
                 Accessibilité : non conforme
               </Link>
             </li>
             <li className="fr-footer__bottom-item">
               <Link
                 className="fr-footer__bottom-link"
-                href="/historique-des-modifications"
+                to="/historique-des-modifications"
               >
                 Historique des changements
               </Link>
