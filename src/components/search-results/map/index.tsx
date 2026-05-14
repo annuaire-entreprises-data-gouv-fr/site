@@ -1,4 +1,4 @@
-import { ClientOnly, useNavigate, useSearch } from "@tanstack/react-router";
+import { ClientOnly, getRouteApi } from "@tanstack/react-router";
 import MapWithResults from "#/components/map/map-results";
 import type { ISearchResults } from "#/models/search";
 import type { IParams } from "#/models/search/search-filter-params";
@@ -7,6 +7,8 @@ import ResultsList from "../results-list";
 import ResultsPagination from "../results-pagination";
 import styles from "./style.module.css";
 
+const searchResultsMapRoute = getRouteApi("/_header-search/rechercher/carte");
+
 const SearchResultsMap: React.FC<{
   searchTerm?: string;
   results: ISearchResults;
@@ -14,8 +16,8 @@ const SearchResultsMap: React.FC<{
 }> = ({ results, searchTerm = "", searchFilterParams = {} }) => {
   const height = "calc(100vh - 230px)";
 
-  const searchParams = useSearch({ from: "/_header-search/rechercher/carte" });
-  const navigate = useNavigate();
+  const searchParams = searchResultsMapRoute.useSearch();
+  const navigate = searchResultsMapRoute.useNavigate();
 
   if (
     results.notEnoughParams ||

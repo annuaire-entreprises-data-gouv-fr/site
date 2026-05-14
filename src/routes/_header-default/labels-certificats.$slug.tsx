@@ -56,7 +56,12 @@ export const Route = createFileRoute(
   "/_header-default/labels-certificats/$slug"
 )({
   validateSearch: z.object({
-    "entrepreneur-spectacles-page": z.number().min(1).catch(1),
+    "entrepreneur-spectacles-page": z
+      .number()
+      .min(1)
+      .optional()
+      .default(1)
+      .catch(1),
   }),
   search: {
     middlewares: [stripSearchParams({ "entrepreneur-spectacles-page": 1 })],

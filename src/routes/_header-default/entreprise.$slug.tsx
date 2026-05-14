@@ -1,4 +1,9 @@
-import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  notFound,
+  redirect,
+  stripSearchParams,
+} from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestHeader } from "@tanstack/react-start/server";
 import z from "zod";
@@ -84,7 +89,11 @@ const loadEntreprisePage = createServerFn()
 export const Route = createFileRoute("/_header-default/entreprise/$slug")({
   validateSearch: z.object({
     redirected: z.literal(1).optional().catch(undefined),
+    "avocats-page": z.number().min(1).optional().default(1).catch(1),
   }),
+  search: {
+    middlewares: [stripSearchParams({ "avocats-page": 1 })],
+  },
   beforeLoad: async ({ params }) => {
     const slug = params.slug;
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);

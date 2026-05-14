@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { getRouteApi } from "@tanstack/react-router";
+import { useCallback } from "react";
 import type { IAidesADEME } from "#/clients/api-data-gouv/aide-ademe/interface";
 import NonRenseigne from "#/components/non-renseigne";
 import LocalPageCounter from "#/components/search-results/results-pagination/local-pagination";
@@ -29,13 +30,26 @@ const AidesADEMETable = ({
   />
 );
 
+const aidesADEMERoute = getRouteApi(
+  "/_header-default/donnees-financieres/$slug"
+);
+
 export default function AidesADEMEContent({
   uniteLegale,
 }: {
   uniteLegale: IUniteLegale;
 }) {
-  // TODO fix nuqs
-  const [currentPage, setCurrentPage] = useState(1);
+  const { "aides-ademe-page": currentPage } = aidesADEMERoute.useSearch();
+  const navigate = aidesADEMERoute.useNavigate();
+  const onPageChange = useCallback(
+    (page: number) => {
+      navigate({
+        resetScroll: false,
+        search: (prev) => ({ ...prev, "aides-ademe-page": page }),
+      });
+    },
+    [navigate]
+  );
 
   const aidesADEME = useFetchAidesADEME(uniteLegale, currentPage);
 
@@ -61,7 +75,7 @@ export default function AidesADEMEContent({
               <LocalPageCounter
                 compact={true}
                 currentPage={currentPage}
-                onPageChange={setCurrentPage}
+                onPageChange={onPageChange}
                 totalPages={Math.ceil(
                   aidesADEME.meta.total / aidesADEME.meta.page_size
                 )}

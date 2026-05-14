@@ -48,11 +48,11 @@ const loadPersonnesPage = createServerFn()
 
 export const Route = createFileRoute("/_header-default/personne")({
   validateSearch: z.object({
-    page: z.number().min(1).catch(1),
-    sirenFrom: queryString.catch(""),
-    partialDate: queryString.catch(""),
-    fn: queryString.catch(""),
-    nom: queryString.catch(""),
+    page: z.number().min(1).optional().default(1).catch(1),
+    sirenFrom: queryString.optional().default("").catch(""),
+    partialDate: queryString.optional().default("").catch(""),
+    fn: queryString.optional().default("").catch(""),
+    nom: queryString.optional().default("").catch(""),
   }),
   search: {
     middlewares: [
