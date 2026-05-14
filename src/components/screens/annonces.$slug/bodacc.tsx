@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { getRouteApi } from "@tanstack/react-router";
+import { useCallback } from "react";
 import routes from "#/clients/routes";
 import { DILA } from "#/components/administrations";
 import LocalPageCounter from "#/components/search-results/results-pagination/local-pagination";
@@ -12,12 +13,24 @@ import { EAdministration } from "#/models/administrations/EAdministration";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
 
+const bodaccRoute = getRouteApi("/_header-default/annonces/$slug");
+
 const AnnoncesBodacc: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  // TODO fix nuqs
-  const [currentPage, setCurrentPage] = useState(1);
+  const { "annonces-bodacc-page": currentPage } = bodaccRoute.useSearch();
+  const navigate = bodaccRoute.useNavigate();
   const bodacc = useFetchBODACC(uniteLegale, currentPage);
+
+  const onPageChange = useCallback(
+    (page: number) => {
+      navigate({
+        resetScroll: false,
+        search: (prev) => ({ ...prev, "annonces-bodacc-page": page }),
+      });
+    },
+    [navigate]
+  );
 
   return (
     <AsyncDataSectionClient
@@ -101,7 +114,7 @@ const AnnoncesBodacc: React.FC<{
                 <LocalPageCounter
                   compact={true}
                   currentPage={currentPage}
-                  onPageChange={setCurrentPage}
+                  onPageChange={onPageChange}
                   totalPages={Math.ceil(
                     bodacc.meta.total / bodacc.meta.page_size
                   )}

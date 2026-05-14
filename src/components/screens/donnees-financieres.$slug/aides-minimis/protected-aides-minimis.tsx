@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { getRouteApi } from "@tanstack/react-router";
+import { useCallback, useMemo } from "react";
 import type { IMinimis } from "#/clients/api-data-gouv/minimis/interface";
 import LocalPageCounter from "#/components/search-results/results-pagination/local-pagination";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
@@ -57,6 +58,10 @@ const AidesMinimisTable = ({
   />
 );
 
+const aidesMinimisRoute = getRouteApi(
+  "/_header-default/donnees-financieres/$slug"
+);
+
 export default function AidesMinimisProtected({
   uniteLegale,
   user,
@@ -64,8 +69,17 @@ export default function AidesMinimisProtected({
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
 }) {
-  // TODO fix nuqs
-  const [currentPage, setCurrentPage] = useState(1);
+  const { "aides-minimis-page": currentPage } = aidesMinimisRoute.useSearch();
+  const navigate = aidesMinimisRoute.useNavigate();
+  const onPageChange = useCallback(
+    (page: number) => {
+      navigate({
+        resetScroll: false,
+        search: (prev) => ({ ...prev, "aides-minimis-page": page }),
+      });
+    },
+    [navigate]
+  );
 
   const input = useMemo(
     () => ({ siren: uniteLegale.siren, page: currentPage }),
@@ -102,7 +116,7 @@ export default function AidesMinimisProtected({
               <LocalPageCounter
                 compact={true}
                 currentPage={currentPage}
-                onPageChange={setCurrentPage}
+                onPageChange={onPageChange}
                 totalPages={Math.ceil(
                   aidesMinimis.meta.total / aidesMinimis.meta.page_size
                 )}

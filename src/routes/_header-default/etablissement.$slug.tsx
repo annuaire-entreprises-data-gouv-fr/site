@@ -1,8 +1,14 @@
-import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  notFound,
+  redirect,
+  stripSearchParams,
+} from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestHeader } from "@tanstack/react-start/server";
 import z from "zod";
 import EtablissementEffectifsMensuelsSection from "#/components/etablissement-effectifs-mensuels-section";
+import { natureEffectifValues } from "#/components/etablissement-effectifs-mensuels-section/protected-effectifs-mensuels-section";
 import EtablissementSection from "#/components/etablissement-section";
 import MatomoEventFromRedirected from "#/components/matomo-event/search-redirected";
 import { NonDiffusibleStrictSection } from "#/components/non-diffusible-section";
@@ -45,10 +51,32 @@ const loadEtablissementPage = createServerFn()
     return { etablissement, uniteLegale, triggerRedirectedEvent, isBot };
   });
 
+const currentYear = new Date().getFullYear();
+
 export const Route = createFileRoute("/_header-default/etablissement/$slug")({
   validateSearch: z.object({
     redirected: z.literal(1).optional().catch(undefined),
+    "effectifs-mensuels-annee": z
+      .number()
+      .min(currentYear - 5)
+      .max(currentYear)
+      .optional()
+      .default(currentYear)
+      .catch(currentYear),
+    "effectifs-mensuels-nature-effectif": z
+      .enum(natureEffectifValues)
+      .optional()
+      .default("moyen")
+      .catch("moyen"),
   }),
+  search: {
+    middlewares: [
+      stripSearchParams({
+        "effectifs-mensuels-annee": currentYear,
+        "effectifs-mensuels-nature-effectif": "moyen",
+      }),
+    ],
+  },
   beforeLoad: async ({ params }) => {
     const slug = params.slug;
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);

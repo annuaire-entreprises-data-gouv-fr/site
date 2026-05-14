@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { getRouteApi } from "@tanstack/react-router";
+import { useCallback, useEffect } from "react";
 import type { IAvocats } from "#/clients/api-data-gouv/avocats/interface";
 import NonRenseigne from "#/components/non-renseigne";
 import LocalPageCounter from "#/components/search-results/results-pagination/local-pagination";
@@ -24,13 +25,24 @@ const AvocatsTable = ({ avocats }: { avocats: IAvocats["avocats"] }) => (
   />
 );
 
+const avocatsRoute = getRouteApi("/_header-default/entreprise/$slug");
+
 export default function AvocatsSection({
   uniteLegale,
 }: {
   uniteLegale: IUniteLegale;
 }) {
-  // TODO fix nuqs
-  const [currentPage, setCurrentPage] = useState(1);
+  const { "avocats-page": currentPage } = avocatsRoute.useSearch();
+  const navigate = avocatsRoute.useNavigate();
+  const onPageChange = useCallback(
+    (page: number) => {
+      navigate({
+        resetScroll: false,
+        search: (prev) => ({ ...prev, "avocats-page": page }),
+      });
+    },
+    [navigate]
+  );
 
   const avocats = useFetchAvocats(uniteLegale, currentPage);
 
@@ -73,7 +85,7 @@ export default function AvocatsSection({
               <LocalPageCounter
                 compact={true}
                 currentPage={currentPage}
-                onPageChange={setCurrentPage}
+                onPageChange={onPageChange}
                 totalPages={Math.ceil(
                   avocats.meta.total / avocats.meta.page_size
                 )}

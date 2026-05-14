@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import z from "zod";
 import { DonneesPriveesSection } from "#/components/donnees-privees-section";
 import AnnoncesBodacc from "#/components/screens/annonces.$slug/bodacc";
 import AnnoncesJOAFESection from "#/components/screens/annonces.$slug/joafe";
@@ -21,6 +22,12 @@ import {
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/annonces/$slug")({
+  validateSearch: z.object({
+    "annonces-bodacc-page": z.number().min(1).optional().default(1).catch(1),
+  }),
+  search: {
+    middlewares: [stripSearchParams({ "annonces-bodacc-page": 1 })],
+  },
   loader: async ({ params }) => {
     const uniteLegale = await getUniteLegaleFromSlugFn({
       data: { slug: params.slug },

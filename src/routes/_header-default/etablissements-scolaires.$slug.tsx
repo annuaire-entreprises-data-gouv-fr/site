@@ -32,7 +32,7 @@ export const Route = createFileRoute(
   "/_header-default/etablissements-scolaires/$slug"
 )({
   validateSearch: z.object({
-    page: z.number().min(1).catch(1),
+    page: z.number().min(1).optional().default(1).catch(1),
   }),
   search: {
     middlewares: [stripSearchParams({ page: 1 })],

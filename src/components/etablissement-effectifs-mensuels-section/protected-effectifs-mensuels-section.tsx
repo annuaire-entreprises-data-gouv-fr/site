@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { getRouteApi } from "@tanstack/react-router";
+import { useCallback, useMemo } from "react";
 import type { TNatureEffectif } from "#/clients/api-entreprise/effectifs/types";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { useServerActionData } from "#/hooks/fetch/use-server-action-data";
@@ -26,12 +27,14 @@ const natureEffectifOptions: Record<TNatureEffectif, string> = {
   assujettissement_oeth: "Assujettissement OETH",
 };
 
-// const natureEffectifValues = Object.keys(
-//   natureEffectifOptions
-// ) as TNatureEffectif[];
+export const natureEffectifValues = Object.keys(
+  natureEffectifOptions
+) as TNatureEffectif[];
 const natureEffectifEntries: [TNatureEffectif, string][] = Object.entries(
   natureEffectifOptions
 ) as [TNatureEffectif, string][];
+
+const etablissementRoute = getRouteApi("/_header-default/etablissement/$slug");
 
 const ProtectedEtablissementEffectifsMensuelsSection = ({
   etablissement,
@@ -43,12 +46,34 @@ const ProtectedEtablissementEffectifsMensuelsSection = ({
   isProtected,
 }: IProps) => {
   const currentYear = new Date().getFullYear();
-  // TODO remigrate to nuqs like query binding
-  const [selectedYear, setSelectedYear] = useState(currentYear);
-  const [selectedNatureEffectif, setSelectedNatureEffectif] = useState(
-    "moyen" as TNatureEffectif
+  const {
+    "effectifs-mensuels-annee": selectedYear,
+    "effectifs-mensuels-nature-effectif": selectedNatureEffectif,
+  } = etablissementRoute.useSearch();
+  const navigate = etablissementRoute.useNavigate();
+
+  const onYearChange = useCallback(
+    (year: number) => {
+      navigate({
+        resetScroll: false,
+        search: (prev) => ({ ...prev, "effectifs-mensuels-annee": year }),
+      });
+    },
+    [navigate]
   );
-  const natureEffectif: TNatureEffectif = selectedNatureEffectif;
+  const onNatureEffectifChange = useCallback(
+    (natureEffectif: TNatureEffectif) => {
+      navigate({
+        resetScroll: false,
+        search: (prev) => ({
+          ...prev,
+          "effectifs-mensuels-nature-effectif": natureEffectif,
+        }),
+      });
+    },
+    [navigate]
+  );
+
   const yearOptions = useMemo(
     () =>
       Array.from({ length: 6 }, (_, index) => {
@@ -64,11 +89,11 @@ const ProtectedEtablissementEffectifsMensuelsSection = ({
   const input = useMemo(
     () => ({
       siret: etablissement.siret,
-      natureEffectif,
+      natureEffectif: selectedNatureEffectif,
       year: selectedYear.toString(),
       useCase,
     }),
-    [natureEffectif, selectedYear, useCase]
+    [selectedNatureEffectif, selectedYear, useCase]
   );
   const effectifsMensuelsProtected = useServerActionData(
     getEspaceAgentEffectifsMensuelsProtected,
@@ -100,9 +125,7 @@ const ProtectedEtablissementEffectifsMensuelsSection = ({
                 className="fr-select"
                 id="effectifs-mensuels-year-filter"
                 onChange={(event) => {
-                  setSelectedYear(
-                    Number.parseInt(event.currentTarget.value, 10)
-                  );
+                  onYearChange(Number.parseInt(event.currentTarget.value, 10));
                 }}
                 value={selectedYear.toString()}
               >
@@ -126,11 +149,11 @@ const ProtectedEtablissementEffectifsMensuelsSection = ({
                 className="fr-select"
                 id="effectifs-mensuels-nature-filter"
                 onChange={(event) => {
-                  setSelectedNatureEffectif(
+                  onNatureEffectifChange(
                     event.currentTarget.value as TNatureEffectif
                   );
                 }}
-                value={natureEffectif}
+                value={selectedNatureEffectif}
               >
                 {natureEffectifEntries.map(([value, label]) => (
                   <option key={value} value={value}>
