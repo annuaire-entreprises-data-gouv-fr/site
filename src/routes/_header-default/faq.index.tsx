@@ -1,0 +1,131 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "#/components/Link";
+import parseMarkdownSync from "#/components/markdown/parse-markdown";
+import StructuredDataFAQ from "#/components/structured-data/faq";
+import TextWrapper from "#/components-ui/text-wrapper";
+import { allFaqArticles, allFaqArticlesByGroup } from "#/models/article/faq";
+import { meta } from "#/seo";
+import { HeaderDefaultError } from "./-error";
+
+const config = [
+  {
+    title: "Informations générales",
+    key: "default",
+  },
+  {
+    title: "Fonctionnement du service",
+    key: "fonctionnement",
+  },
+  {
+    title: "Réutiliser les données",
+    key: "data",
+    additionnalLink: [
+      {
+        href: "/donnees/sources",
+        label: "Quelle est la liste des données utilisées sur ce site ?",
+      },
+      {
+        href: "/donnees/api-entreprises",
+        label:
+          "Quelle est la différence entre l’API Entreprise et l’API Recherche d’entreprises",
+      },
+    ],
+  },
+  {
+    title: "Modifier ou supprimer des données",
+    key: "modifier",
+    additionnalLink: [
+      {
+        href: "/faq/modifier",
+        label: "Comment modifier une information affichée sur ce site ?",
+      },
+    ],
+  },
+  {
+    title: "Nous contacter",
+    key: "contact",
+    additionnalLink: [
+      {
+        href: "/faq/parcours",
+        label: "Comment joindre une entreprise ?",
+      },
+      {
+        href: "/faq/parcours",
+        label: "Comment vous alerter d’une fraude ou tentative d’escroquerie ?",
+      },
+      {
+        href: "/faq/parcours",
+        label:
+          "Vous n’avez pas trouvé la réponse à votre question ? Contactez-nous !",
+      },
+    ],
+  },
+] as const;
+
+export const Route = createFileRoute("/_header-default/faq/")({
+  loader: async () => ({
+    faqArticles: allFaqArticles,
+    faqArticlesByGroup: allFaqArticlesByGroup,
+  }),
+  head: () => {
+    const canonical = "https://annuaire-entreprises.data.gouv.fr/faq";
+    return {
+      meta: meta({
+        title: "FAQ de l’Annuaire des Entreprises",
+        alternates: {
+          canonical,
+        },
+      }),
+      links: [
+        {
+          rel: "canonical",
+          href: canonical,
+        },
+      ],
+    };
+  },
+  component: RouteComponent,
+  errorComponent: HeaderDefaultError,
+});
+
+function RouteComponent() {
+  const { faqArticles, faqArticlesByGroup } = Route.useLoaderData();
+
+  return (
+    <>
+      <StructuredDataFAQ
+        data={faqArticles.map(({ title, body }) => [
+          title,
+          parseMarkdownSync(body).html,
+        ])}
+      />
+      <TextWrapper>
+        <h1>Réponses à vos questions (FAQ) :</h1>
+        {config.map((configItem) => (
+          <>
+            <h2>{configItem.title}</h2>
+            <ul>
+              {(faqArticlesByGroup[configItem.key] || []).map(
+                ({ slug, title }, index) => (
+                  <li key={slug + index}>
+                    <Link params={{ slug }} to="/faq/$slug">
+                      {title}
+                    </Link>
+                  </li>
+                )
+              )}
+              {("additionnalLink" in configItem
+                ? configItem.additionnalLink
+                : []
+              ).map(({ href, label }, index) => (
+                <li key={href + index}>
+                  <Link to={href}>{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        ))}
+      </TextWrapper>
+    </>
+  );
+}

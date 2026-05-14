@@ -5,7 +5,7 @@ export type IFaqArticle = {
   administrations: string[];
 } & IArticle;
 
-const faqModules = import.meta.glob("../../data/faq/*.json", {
+const faqModules = import.meta.glob("../../../data/faq/*.json", {
   eager: true,
   import: "default",
 }) as Record<string, IFaqArticle>;
