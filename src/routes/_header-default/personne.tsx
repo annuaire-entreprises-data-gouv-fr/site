@@ -81,14 +81,7 @@ export const Route = createFileRoute("/_header-default/personne")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return {
-        meta: meta({
-          title: "Page non trouvée",
-          robots: {
-            follow: false,
-          },
-        }),
-      };
+      return meta.notFound();
     }
 
     const { urlComplements } = loaderData;
@@ -96,10 +89,7 @@ export const Route = createFileRoute("/_header-default/personne")({
     return {
       meta: meta({
         title: "Liste des structures associées à un individu",
-        robots: {
-          follow: true,
-          index: false,
-        },
+        robots: "follow, noindex",
         alternates: {
           canonical,
         },

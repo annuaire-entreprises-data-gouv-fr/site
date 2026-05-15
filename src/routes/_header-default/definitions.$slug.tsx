@@ -27,14 +27,7 @@ export const Route = createFileRoute("/_header-default/definitions/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return {
-        meta: meta({
-          title: "Page non trouvée",
-          robots: {
-            follow: false,
-          },
-        }),
-      };
+      return meta.notFound();
     }
 
     const { definition } = loaderData;
@@ -43,6 +36,7 @@ export const Route = createFileRoute("/_header-default/definitions/$slug")({
       meta: meta({
         title: definition.seo.title || definition.title,
         description: definition.seo.description,
+        robots: "index, follow",
         alternates: {
           canonical,
         },

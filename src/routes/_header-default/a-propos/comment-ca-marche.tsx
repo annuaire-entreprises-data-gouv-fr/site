@@ -15,6 +15,7 @@ export const Route = createFileRoute(
     return {
       meta: meta({
         title: "Comment ça marche ?",
+        robots: "index, follow",
         alternates: {
           canonical,
         },

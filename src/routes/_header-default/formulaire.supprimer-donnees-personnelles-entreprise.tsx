@@ -39,6 +39,7 @@ export const Route = createFileRoute(
       title: "Demande de suppression de données personnelles",
       description:
         "Demande de suppression de données personnelles de dirigeant d’entreprise sur l’Annuaire des Entreprises",
+      robots: "index, follow",
     }),
   }),
   component: RouteComponent,

@@ -15,6 +15,7 @@ export const Route = createFileRoute(
       meta: meta({
         title:
           "Comment retrouver les données contenues dans un extrait KBIS ou D1 ?",
+        robots: "index, follow",
         alternates: {
           canonical,
         },

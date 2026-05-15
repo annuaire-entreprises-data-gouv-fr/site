@@ -15,10 +15,7 @@ export const Route = createFileRoute("/_header-default/a-propos/equipe/")({
         alternates: {
           canonical,
         },
-        robots: {
-          follow: true,
-          index: false,
-        },
+        robots: "noindex, follow",
       }),
       links: [
         {

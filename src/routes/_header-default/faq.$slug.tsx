@@ -25,11 +25,7 @@ export const Route = createFileRoute("/_header-default/faq/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return {
-        meta: meta({
-          title: "Page non trouvée",
-        }),
-      };
+      return meta.notFound();
     }
     const { article } = loaderData;
     const canonical = `https://annuaire-entreprises.data.gouv.fr/faq/${article.slug}`;
@@ -37,6 +33,7 @@ export const Route = createFileRoute("/_header-default/faq/$slug")({
       meta: meta({
         title: article.seo.title || article.title,
         description: article.seo.description,
+        robots: "index, follow",
         alternates: {
           canonical,
         },

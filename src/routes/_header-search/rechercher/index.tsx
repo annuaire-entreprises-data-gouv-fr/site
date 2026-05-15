@@ -32,9 +32,7 @@ export const Route = createFileRoute("/_header-search/rechercher/")({
         alternates: {
           canonical,
         },
-        robots: {
-          follow: false,
-        },
+        robots: "noindex, nofollow",
       }),
       links: [
         {

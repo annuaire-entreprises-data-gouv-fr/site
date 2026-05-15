@@ -12,6 +12,7 @@ export const Route = createFileRoute("/_header-default/definitions/")({
     return {
       meta: meta({
         title: "Definitions des termes utilisés sur l’Annuaire des Entreprises",
+        robots: "index, follow",
         alternates: {
           canonical,
         },

@@ -15,9 +15,7 @@ export const Route = createFileRoute(
     return {
       meta: meta({
         title: "Votre administration est inconnue de nos services",
-        robots: {
-          follow: false,
-        },
+        robots: "noindex, nofollow",
         alternates: {
           canonical,
         },

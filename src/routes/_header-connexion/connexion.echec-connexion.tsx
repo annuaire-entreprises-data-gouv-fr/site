@@ -15,9 +15,7 @@ export const Route = createFileRoute(
     return {
       meta: meta({
         title: "Votre tentative de connexion a échoué",
-        robots: {
-          follow: false,
-        },
+        robots: "noindex, nofollow",
         alternates: {
           canonical,
         },

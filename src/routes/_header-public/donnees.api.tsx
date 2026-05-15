@@ -24,9 +24,7 @@ export const Route = createFileRoute("/_header-public/donnees/api")({
     return {
       meta: meta({
         title: "Statut des API utilisées par l’Annuaire des Entreprises",
-        robots: {
-          follow: false,
-        },
+        robots: "noindex, follow",
         alternates: {
           canonical,
         },
