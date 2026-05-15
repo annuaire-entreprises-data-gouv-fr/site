@@ -31,7 +31,7 @@ env:
   MATOMO_SITE_ID: ${{ secrets.MATOMO_SITE_ID }}
   MATOMO_API_SITE_ID: ${{ secrets.MATOMO_API_SITE_ID }}
   MATOMO_TOKEN_AUTH: ${{ secrets.MATOMO_TOKEN_AUTH }}
-  IRON_SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
   UPDOWN_IO_API_KEY: ${{ secrets.UPDOWN_IO_API_KEY }}
 
@@ -140,11 +140,11 @@ jobs:
         uses: cypress-io/github-action@v6
         timeout-minutes: 10
         with:
-          start: node .next/standalone/server.js
+          start: npm run dev:e2e
           record: false
           config-file: ./cypress/cypress.config.ts
         env:
-          CYPRESS_IRON_SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
           VITE_END2END_MOCKING: enabled
       - name: Upload screenshots 📸
         uses: actions/upload-artifact@v4
@@ -168,4 +168,4 @@ jobs:
       - name: Load node_modules
         uses: ./.github/actions/load-dependencies
       - name: Run typescript check
-        run: npx tsc --noEmit
+        run: npm run typecheck
