@@ -209,7 +209,10 @@
           "estPatrimoineVivant": false,
           "estAlimConfiance": true,
           "bilanGesRenseigne": true,
-          "idFinessJuridiques": ["750805483", "750002008"],
+          "idFinessJuridiques": [
+            "750805483",
+            "750002008"
+          ],
           "aAideMinimis": false,
           "aAideADEME": true,
           "estAvocat": false

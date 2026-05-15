@@ -200,7 +200,10 @@
           "dateRadiation": "",
           "dateImmatriculation": "1981-10-01",
           "dateFin": "",
-          "natureEntreprise": ["Gestion de biens", "Libérale non réglementée"],
+          "natureEntreprise": [
+            "Gestion de biens",
+            "Libérale non réglementée"
+          ],
           "dateCloture": "",
           "isPersonneMorale": false,
           "capital": ""

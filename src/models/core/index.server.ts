@@ -5,7 +5,7 @@ import {
 } from "#/models/api-not-responding";
 
 export const shouldUseInsee = createServerOnlyFn(
-  async <T extends {}>(
+  <T extends {}>(
     rechercheEntrepriseResponse: T | IAPINotRespondingError,
     isBot: boolean,
     isEI: (r: T) => boolean,

@@ -200,7 +200,9 @@
           "dateRadiation": "",
           "dateImmatriculation": "1999-06-21",
           "dateFin": "2049-06-20",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "",
           "isPersonneMorale": true,
           "capital": "36 000,00 € (fixe)"

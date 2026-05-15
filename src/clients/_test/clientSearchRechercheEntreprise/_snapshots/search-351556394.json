@@ -10,6 +10,7 @@
     "pageCount": 1,
     "results": [
       {
+        "aAccesEspaceAgent": false,
         "siren": "351556394",
         "oldSiren": "351556394",
         "siege": {
@@ -34,10 +35,11 @@
           "commune": "LE PORT",
           "activitePrincipale": "66.22Z",
           "libelleActivitePrincipale": "Activités des agents et courtiers d’assurances (66.22Z)",
+          "libelleActivitePrincipaleNaf25": "Activité inconnue",
           "trancheEffectif": "NN",
           "anneeTrancheEffectif": null,
-          "latitude": "-20.939999",
-          "longitude": "55.292503",
+          "latitude": "-20.93988194",
+          "longitude": "55.292443379",
           "complements": {
             "estEntrepreneurIndividuel": false,
             "estPersonneMorale": true,
@@ -49,7 +51,6 @@
           },
           "listeIdcc": []
         },
-        "tva": null,
         "anciensSiegesSirets": [],
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en sommeil ou présumée inactive",
@@ -81,10 +82,11 @@
               "commune": "LE PORT",
               "activitePrincipale": "66.22Z",
               "libelleActivitePrincipale": "Activités des agents et courtiers d’assurances (66.22Z)",
+              "libelleActivitePrincipaleNaf25": "Activité inconnue",
               "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
-              "latitude": "-20.939999",
-              "longitude": "55.292503",
+              "latitude": "-20.93988194",
+              "longitude": "55.292443379",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "estPersonneMorale": true,
@@ -122,10 +124,11 @@
               "commune": "LE PORT",
               "activitePrincipale": "66.22Z",
               "libelleActivitePrincipale": "Activités des agents et courtiers d’assurances (66.22Z)",
+              "libelleActivitePrincipaleNaf25": "Activité inconnue",
               "trancheEffectif": "NN",
               "anneeTrancheEffectif": null,
-              "latitude": "-20.939999",
-              "longitude": "55.292503",
+              "latitude": "-20.93988194",
+              "longitude": "55.292443379",
               "complements": {
                 "estEntrepreneurIndividuel": false,
                 "estPersonneMorale": true,
@@ -145,11 +148,12 @@
         },
         "activitePrincipale": "66.22Z",
         "libelleActivitePrincipale": "Activités des agents et courtiers d’assurances",
+        "libelleActivitePrincipaleNaf25": "Activité inconnue",
         "dateCreation": "1989-08-01",
         "dateFermeture": "",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateMiseAJourInsee": "2024-03-22T14:26:06",
-        "dateMiseAJourInpi": "2024-05-19T16:49:33",
+        "dateMiseAJourInpi": "2024-05-19T17:01:20",
         "dateMiseAJourIG": "",
         "dateDebutActivite": "",
         "trancheEffectif": "NN",
@@ -159,8 +163,7 @@
         "complements": {
           "estBio": false,
           "estEss": false,
-          "estServicePublic": false,
-          "estL100_3": false,
+          "estAdministration": false,
           "estEntrepreneurIndividuel": false,
           "estPersonneMorale": true,
           "estEntrepreneurSpectacle": false,
@@ -178,7 +181,11 @@
           "typeEntrepriseInclusive": null,
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
-          "bilanGesRenseigne": false
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null,
+          "aAideMinimis": false,
+          "aAideADEME": false,
+          "estAvocat": false
         },
         "association": {
           "idAssociation": null,
@@ -190,16 +197,18 @@
         "listeIdcc": [],
         "immatriculation": {
           "dateDebutActivite": "1989-08-01",
-          "dateRadiation": "2009-03-17",
+          "dateRadiation": "",
           "dateImmatriculation": "1989-08-08",
-          "duree": 0,
           "dateFin": "",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "",
           "isPersonneMorale": true,
           "capital": "7 622,45 € (fixe)"
         },
         "isNbEtablissementOuvertReliable": true,
+        "bodacc": null,
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 0,

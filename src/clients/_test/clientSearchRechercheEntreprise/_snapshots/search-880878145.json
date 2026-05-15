@@ -200,7 +200,9 @@
           "dateRadiation": "2022-11-14",
           "dateImmatriculation": "2020-01-23",
           "dateFin": "2119-01-22",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "3112",
           "isPersonneMorale": true,
           "capital": "1 000,00 € (fixe)"

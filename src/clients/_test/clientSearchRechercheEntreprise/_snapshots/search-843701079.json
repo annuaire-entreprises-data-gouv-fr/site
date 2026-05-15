@@ -276,7 +276,10 @@
           "dateRadiation": "",
           "dateImmatriculation": "2018-11-12",
           "dateFin": "2117-11-11",
-          "natureEntreprise": ["Artisanale réglementée", "Commerciale"],
+          "natureEntreprise": [
+            "Artisanale réglementée",
+            "Commerciale"
+          ],
           "dateCloture": "3112",
           "isPersonneMorale": true,
           "capital": "5 000,00 € (fixe)"
