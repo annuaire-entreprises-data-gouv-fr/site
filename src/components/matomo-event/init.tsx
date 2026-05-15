@@ -24,7 +24,7 @@ export function MatomoInit() {
               _paq.push(['trackPageView']);
               _paq.push(['enableLinkTracking']);
               _paq.push(['setTrackerUrl', '${TRACKER_BASE_URL}/piwik.php']);
-              _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
+              _paq.push(['setSiteId', ${process.env.VITE_MATOMO_SITE_ID}]);
               `,
         }}
       />

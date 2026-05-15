@@ -178,7 +178,7 @@ const matomoHttpClient = createServerOnlyFn(async <T>(url: string) =>
 );
 
 const getStats = async (): Promise<IMatomoStats> => {
-  const SITE_ID = process.env.MATOMO_SITE_ID;
+  const SITE_ID = process.env.VITE_MATOMO_SITE_ID;
   const API_SITE_ID = process.env.MATOMO_API_SITE_ID;
 
   if (!SITE_ID || !API_SITE_ID) {
