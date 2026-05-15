@@ -134,14 +134,25 @@ export const extractSirenOrSiretFromRechercherUrl = (terme: string) => {
     return "";
   }
 
-  if (terme.match(/^FR/g)) {
-    if (terme.match(/FR\d{14}$/g)) {
-      // remove EORI number prefix when relevant
-      terme.replace("FR", "");
-    } else if (terme.match(/FR\d{11}$/g)) {
-      // remove TVA number prefix when relevant
-      terme.replace(/FR\d{2}/g, "");
+  const searchTerm = (() => {
+    try {
+      return (
+        new URL(terme, "http://localhost").searchParams.get("terme") ?? terme
+      );
+    } catch {
+      return terme;
     }
+  })();
+
+  const digits = searchTerm.replace(/\D/g, "");
+
+  if (searchTerm.startsWith("FR") && digits.length === 11) {
+    return digits.slice(2);
   }
-  return extractSirenOrSiretSlugFromUrl(terme);
+
+  if (digits.length >= 14) {
+    return digits.slice(0, 14);
+  }
+
+  return extractSirenOrSiretSlugFromUrl(digits);
 };
