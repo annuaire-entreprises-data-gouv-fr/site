@@ -9,6 +9,7 @@ import {
   ApplicationRights,
   getRightsForGroupScopes,
 } from "#/models/authentication/user/rights";
+import { getBaseUrl } from "#/utils/get-base-url";
 import styles from "./styles.module.css";
 
 interface IOrganisationGroupsModalProps {
@@ -64,7 +65,7 @@ const ExpandableGroupRow = ({ group }: { group: IAgentsOrganizationGroup }) => {
   const mailtoUrl = `${group.adminEmails.join(",") || ""}?subject=${encodeURIComponent(`Demande d'accès au groupe « ${group.name} »`)}&body=${encodeURIComponent(`Bonjour,
 
 Serait-il possible de m'ajouter au groupe « ${group.name} » sur l'espace agent de l'Annuaire des Entreprises
-(${process.env.NEXT_PUBLIC_BASE_URL}/compte/mes-groupes#group-${group.id}) ?
+(${getBaseUrl()}/compte/mes-groupes#group-${group.id}) ?
 
 Cet accès me permettra de consulter les données auxquelles vous êtes habilités.
 

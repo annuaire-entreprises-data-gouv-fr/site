@@ -33,7 +33,7 @@ describe("Header’s search bar", () => {
 
     cy.get(".fr-search-bar > button").click();
 
-    cy.url().should("include", "/rechercher?terme=&");
+    cy.url().should("not.include", "terme");
     cy.contains("Grâce aux filtres de recherche,");
   });
 

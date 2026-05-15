@@ -59,6 +59,6 @@ describe("Siren / Siret redirections", () => {
     cy.visit(
       "/rechercher?terme=&cp_dep_label=&cp_dep_type=&cp_dep=&fn=&n=&dmin=&dmax=&type=&label=&ca_min=100000000&etat=&sap=&naf=&nature_juridique=&tranche_effectif_salarie=&categorie_entreprise="
     );
-    cy.url().should("include", "/rechercher?terme=");
+    cy.url().should("include", "/rechercher?ca_min=100000000");
   });
 });

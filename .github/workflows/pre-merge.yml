@@ -111,7 +111,7 @@ jobs:
     needs: [dependencies]
     env:
       VITE_END2END_MOCKING: enabled
-      NEXT_PUBLIC_BASE_URL: http://localhost:3000
+      VITE_BASE_URL: http://localhost:3000
       API_ENTREPRISE_URL: http://uselessurl.com
       API_RECHERCHE_ENTREPRISE_URL: http://uselessurl2.com
       PROXY_API_URL: http://uselessurl3.com
