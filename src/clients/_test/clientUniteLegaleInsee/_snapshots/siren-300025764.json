@@ -43,7 +43,10 @@
       "listeIdcc": []
     },
     "tva": [],
-    "anciensSiegesSirets": ["30002576400022", "300025764null"],
+    "anciensSiegesSirets": [
+      "30002576400022",
+      "300025764null"
+    ],
     "statutDiffusion": "partiellement diffusible",
     "etatAdministratif": "en activité",
     "nomComplet": "Michel SAUVAGE",

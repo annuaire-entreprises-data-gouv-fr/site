@@ -1,5 +1,5 @@
 import path from "node:path";
-import { clientSearchRechercheEntrepriseRaw } from "#/clients/recherche-entreprise";
+import { clientSearchRechercheEntrepriseRaw } from "#/clients/recherche-entreprise/index.server";
 import SearchFilterParams from "#/models/search/search-filter-params";
 
 describe("Simple search with searchTerms", () => {

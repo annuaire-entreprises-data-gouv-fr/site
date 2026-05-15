@@ -2,6 +2,8 @@ describe("Siren / Siret redirections", () => {
   it("Formatted siren/siret redirection", () => {
     cy.visit("/");
 
+    cy.wait(1000);
+
     cy.get(".fr-search-bar > input")
       .type("552032534")
       .should("have.value", "552032534");
@@ -13,6 +15,8 @@ describe("Siren / Siret redirections", () => {
 
   it("Unformatted siren redirection", () => {
     cy.visit("/");
+
+    cy.wait(1000);
 
     cy.get(".fr-search-bar > input")
       .type("552 032 534")
@@ -26,6 +30,8 @@ describe("Siren / Siret redirections", () => {
   it("Not found redirection", () => {
     cy.visit("/");
 
+    cy.wait(1000);
+
     cy.get(".fr-search-bar > input")
       .type("123 456 789 00003")
       .should("have.value", "123 456 789 00003");
@@ -37,6 +43,8 @@ describe("Siren / Siret redirections", () => {
 
   it("Unformatted siret redirection", () => {
     cy.visit("/");
+
+    cy.wait(1000);
 
     cy.get(".fr-search-bar > input")
       .type("487 444 697 00428")

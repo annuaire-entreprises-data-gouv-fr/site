@@ -233,9 +233,19 @@ const getEtablissementWithUniteLegaleFromSlug = async (
   slug: string,
   isBot = false
 ): Promise<IEtablissementWithUniteLegale> => {
+  console.log(
+    "===================== getEtablissementWithUniteLegaleFromSlug ========================="
+  );
+  console.log("slug", slug);
+  console.log("isBot", isBot);
+  console.log("==============================================");
   const etablissement = await getEtablissementFromSlug(slug, {
     isBot,
   });
+
+  console.log("===================== etablissement =========================");
+  console.log("etablissement", etablissement);
+  console.log("==============================================");
 
   const uniteLegale = await getUniteLegaleFromSlug(etablissement.siren, {
     isBot,

@@ -47,7 +47,9 @@
             "idBio": [],
             "idOrganismeFormation": [],
             "idRge": [],
-            "idUai": ["0810012Y"]
+            "idUai": [
+              "0810012Y"
+            ]
           },
           "listeIdcc": [
             {
@@ -99,7 +101,9 @@
                 "idBio": [],
                 "idOrganismeFormation": [],
                 "idRge": [],
-                "idUai": ["0810012Y"]
+                "idUai": [
+                  "0810012Y"
+                ]
               },
               "listeIdcc": [
                 {
@@ -144,7 +148,9 @@
                 "idBio": [],
                 "idOrganismeFormation": [],
                 "idRge": [],
-                "idUai": ["0810012Y"]
+                "idUai": [
+                  "0810012Y"
+                ]
               },
               "listeIdcc": [
                 {

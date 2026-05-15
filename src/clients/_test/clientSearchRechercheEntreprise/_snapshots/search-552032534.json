@@ -197,7 +197,9 @@
           "estPatrimoineVivant": false,
           "estAlimConfiance": false,
           "bilanGesRenseigne": false,
-          "idFinessJuridiques": ["750073173"],
+          "idFinessJuridiques": [
+            "750073173"
+          ],
           "aAideMinimis": false,
           "aAideADEME": false,
           "estAvocat": false
@@ -220,7 +222,9 @@
           "dateRadiation": "",
           "dateImmatriculation": "1955-03-01",
           "dateFin": "2112-04-25",
-          "natureEntreprise": ["Commerciale"],
+          "natureEntreprise": [
+            "Commerciale"
+          ],
           "dateCloture": "3112",
           "isPersonneMorale": true,
           "capital": "170 348 620,75 € (fixe)"

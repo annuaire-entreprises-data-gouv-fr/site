@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["vite/client", "vitest/globals", "vitest/jsdom", "node"]
+  },
+  "include": ["./recherche-entreprise/generate.test.ts"],
+  "exclude": []
+}
