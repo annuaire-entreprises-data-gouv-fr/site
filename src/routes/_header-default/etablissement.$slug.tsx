@@ -18,7 +18,7 @@ import { TitleEtablissementWithDenomination } from "#/components/title-section/e
 import { useAuth } from "#/contexts/auth.context";
 import { estNonDiffusibleStrict } from "#/models/core/diffusion";
 import { isServicePublic } from "#/models/core/types";
-import { getEtablissementWithUniteLegaleFromSlugFn } from "#/server-functions/public/etablissement";
+import { getEtablissementWithUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import { getBaseUrl } from "#/utils/get-base-url";
 import {
   etablissementPageDescription,
