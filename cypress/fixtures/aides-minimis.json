@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "__id": 1,
+      "regime": "Minimis",
+      "nom_beneficiaire": "-",
+      "identifiant_beneficiaire": "024058671",
+      "montant_esb": 3490,
+      "instrument_aide": "Subvention directe",
+      "secteur_aide": "C.16.23",
+      "commune_beneficiaire": "-",
+      "pays_beneficiaire": "France",
+      "date_octroi": "2026-02-03",
+      "date_declaration": "2026-02-25",
+      "date_publication": "2026-02-25",
+      "autorite": "DGE - Economie Finances",
+      "operateur": "DGFIP - Economie Finances"
+    },
+    {
+      "__id": 2,
+      "regime": "Minimis",
+      "nom_beneficiaire": "-",
+      "identifiant_beneficiaire": "024058671",
+      "montant_esb": 2389,
+      "instrument_aide": "Subvention directe",
+      "secteur_aide": "C.16.23",
+      "commune_beneficiaire": "-",
+      "pays_beneficiaire": "France",
+      "date_octroi": "2026-02-02",
+      "date_declaration": "2026-02-25",
+      "date_publication": "2026-02-25",
+      "autorite": "DGE - Economie Finances",
+      "operateur": "DGFIP - Economie Finances"
+    }
+  ],
+  "meta": { "page": 1, "page_size": 20, "total": 2 }
+}

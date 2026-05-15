@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1851,
+    "name": "IDDEE 13",
+    "brand": "Elise Méditerranée MARSEILLE IDDEE13",
+    "slug": "iddee-13-13",
+    "siret": "53374499100035",
+    "nature": "HEAD_OFFICE",
+    "kind": "EI",
+    "kind_parent": "Insertion",
+    "presta_type": ["PREST", "BUILD"],
+    "contact_website": "https://www.elise.com.fr",
+    "logo_url": "https://cellar-c2.services.clever-cloud.com/c4-prod/siae_logo/571f1c19-6bed-4ae3-a4d3-10dc1cd9cd3c.png",
+    "address": "1 Avenue de la Bauxite",
+    "city": "Marseille",
+    "post_code": "13015",
+    "department": "13",
+    "region": "Provence-Alpes-Côte d'Azur",
+    "is_active": true,
+    "created_at": "2019-12-05T15:37:56.609000+01:00",
+    "updated_at": "2024-05-13T17:11:43.216561+02:00"
+  }
+]

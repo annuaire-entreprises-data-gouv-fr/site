@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["cypress", "@testing-library/cypress", "node"],
+    "strictNullChecks": true
+  },
+  "include": ["./**/*.ts", "./**/*.js", "./support/**/*"],
+  "exclude": ["./fixtures/recherche-entreprise/generate.test.ts"]
+}

@@ -1,0 +1,548 @@
+{
+  "data": [
+    {
+      "data": {
+        "annee": "2023",
+        "date_arrete_exercice": "2023-12",
+        "declarations": [
+          {
+            "numero_imprime": "2051",
+            "donnees": [
+              {
+                "code_nref": "300476",
+                "valeurs": ["33053963000"],
+                "evolution": -0.49,
+                "code_absolu": "2000536",
+                "intitule": "Total général bilan passif n , exercice n total i + total ii + total iii + total iv + total v",
+                "code_EDI": "EE:C516:5004:1",
+                "code": "EE",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300438",
+                "valeurs": ["16412590000"],
+                "evolution": 6.89,
+                "code_absolu": "2000497",
+                "intitule": "Total (i) exercice n , total des capitaux propres n",
+                "code_EDI": "DL:C516:5004:1",
+                "code": "DL",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300414",
+                "valeurs": ["169443000"],
+                "evolution": 0.29,
+                "code_absolu": "2000472",
+                "intitule": "Capital social ou individuel n",
+                "code_EDI": "DA:C516:5004:1",
+                "code": "DA",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "302359",
+                "valeurs": ["124687000"],
+                "evolution": 50.67,
+                "code_absolu": "2002767",
+                "intitule": "Total (iii) exercice n , total des provisions pour risques et charges n",
+                "code_EDI": "DR:C516:5004:1",
+                "code": "DR",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300451",
+                "valeurs": ["0"],
+                "evolution": null,
+                "code_absolu": "2000511",
+                "intitule": "Emprunts obligataires convertibles n",
+                "code_EDI": "DS:C516:5004:1",
+                "code": "DS",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300453",
+                "valeurs": ["12521998000"],
+                "evolution": -8.2,
+                "code_absolu": "2000513",
+                "intitule": "Autres emprunts obligataires n",
+                "code_EDI": "DT:C516:5004:1",
+                "code": "DT",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300455",
+                "valeurs": ["0"],
+                "evolution": null,
+                "code_absolu": "2000515",
+                "intitule": "Emprunts et dettes auprès des établissements de crédit n",
+                "code_EDI": "DU:C516:5004:1",
+                "code": "DU",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300458",
+                "valeurs": ["1619193000"],
+                "evolution": 105.43,
+                "code_absolu": "2000518",
+                "intitule": "Emprunts et dettes financières divers n",
+                "code_EDI": "DV:C516:5004:1",
+                "code": "DV",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          },
+          {
+            "numero_imprime": "2052",
+            "donnees": [
+              {
+                "code_nref": "300506",
+                "valeurs": ["890353000"],
+                "evolution": 27.43,
+                "code_absolu": "2000566",
+                "intitule": "Produits d'exploitation chiffre d'affaires net total",
+                "code_EDI": "FL:C516:5004:1",
+                "code": "FL",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          },
+          {
+            "numero_imprime": "2053",
+            "donnees": [
+              {
+                "code_nref": "300606",
+                "valeurs": ["2279827000"],
+                "evolution": 68.52,
+                "code_absolu": "2000666",
+                "intitule": "5 - bénéfice ou perte (total des produits - total des charges)",
+                "code_EDI": "HN:C516:5004:1",
+                "code": "HN",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          },
+          {
+            "numero_imprime": "2057",
+            "donnees": [
+              {
+                "code_nref": "301195",
+                "valeurs": ["0"],
+                "evolution": null,
+                "code_absolu": "2001265",
+                "intitule": "Dettes groupe, communauté d'exploitation et associés, montant brut",
+                "code_EDI": "VI:C516:5004:1",
+                "code": "VI",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          }
+        ],
+        "valeurs_calculees": [
+          {
+            "disponibilites": {
+              "valeur": "1000",
+              "evolution": -80
+            },
+            "total_dettes_stables": {
+              "valeur": "12521998000",
+              "evolution": -8.2
+            },
+            "valeur_ajoutee_bdf": {
+              "valeur": "196172000",
+              "evolution": 91.17
+            },
+            "besoin_en_fonds_de_roulement": {
+              "valeur": "-1938094000",
+              "evolution": 32.75
+            },
+            "excedent_brut_exploitation": {
+              "valeur": "-144735000",
+              "evolution": 26.23
+            },
+            "capacite_autofinancement": {
+              "valeur": "2486107000",
+              "evolution": 57.7
+            },
+            "fonds_roulement_net_global": {
+              "valeur": "-1920183000",
+              "evolution": 32.6
+            },
+            "ratio_fonds_roulement_net_global_sur_besoin_en_fonds_de_roulement": {
+              "valeur": 0,
+              "evolution": null
+            },
+            "dettes4_maturite_a_un_an_au_plus": {
+              "valeur": "0",
+              "evolution": null
+            }
+          }
+        ]
+      },
+      "links": {},
+      "meta": {}
+    },
+    {
+      "data": {
+        "annee": "2022",
+        "date_arrete_exercice": "2022-12",
+        "declarations": [
+          {
+            "numero_imprime": "2051",
+            "donnees": [
+              {
+                "code_nref": "300476",
+                "valeurs": ["33215094000"],
+                "evolution": -1.99,
+                "code_absolu": "2000536",
+                "intitule": "Total général bilan passif n , exercice n total i + total ii + total iii + total iv + total v",
+                "code_EDI": "EE:C516:5004:1",
+                "code": "EE",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300438",
+                "valeurs": ["15355104000"],
+                "evolution": -4.03,
+                "code_absolu": "2000497",
+                "intitule": "Total (i) exercice n , total des capitaux propres n",
+                "code_EDI": "DL:C516:5004:1",
+                "code": "DL",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300414",
+                "valeurs": ["168959000"],
+                "evolution": -1.72,
+                "code_absolu": "2000472",
+                "intitule": "Capital social ou individuel n",
+                "code_EDI": "DA:C516:5004:1",
+                "code": "DA",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "302359",
+                "valeurs": ["82756000"],
+                "evolution": -46.48,
+                "code_absolu": "2002767",
+                "intitule": "Total (iii) exercice n , total des provisions pour risques et charges n",
+                "code_EDI": "DR:C516:5004:1",
+                "code": "DR",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300451",
+                "valeurs": ["0"],
+                "evolution": null,
+                "code_absolu": "2000511",
+                "intitule": "Emprunts obligataires convertibles n",
+                "code_EDI": "DS:C516:5004:1",
+                "code": "DS",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300453",
+                "valeurs": ["13639809000"],
+                "evolution": -6.11,
+                "code_absolu": "2000513",
+                "intitule": "Autres emprunts obligataires n",
+                "code_EDI": "DT:C516:5004:1",
+                "code": "DT",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300455",
+                "valeurs": ["0"],
+                "evolution": null,
+                "code_absolu": "2000515",
+                "intitule": "Emprunts et dettes auprès des établissements de crédit n",
+                "code_EDI": "DU:C516:5004:1",
+                "code": "DU",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300458",
+                "valeurs": ["788193000"],
+                "evolution": -47.55,
+                "code_absolu": "2000518",
+                "intitule": "Emprunts et dettes financières divers n",
+                "code_EDI": "DV:C516:5004:1",
+                "code": "DV",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          },
+          {
+            "numero_imprime": "2052",
+            "donnees": [
+              {
+                "code_nref": "300506",
+                "valeurs": ["698698000"],
+                "evolution": 10.02,
+                "code_absolu": "2000566",
+                "intitule": "Produits d'exploitation chiffre d'affaires net total",
+                "code_EDI": "FL:C516:5004:1",
+                "code": "FL",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          },
+          {
+            "numero_imprime": "2053",
+            "donnees": [
+              {
+                "code_nref": "300606",
+                "valeurs": ["1352882000"],
+                "evolution": -63.18,
+                "code_absolu": "2000666",
+                "intitule": "5 - bénéfice ou perte (total des produits - total des charges)",
+                "code_EDI": "HN:C516:5004:1",
+                "code": "HN",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          },
+          {
+            "numero_imprime": "2057",
+            "donnees": [
+              {
+                "code_nref": "301195",
+                "valeurs": ["0"],
+                "evolution": null,
+                "code_absolu": "2001265",
+                "intitule": "Dettes groupe, communauté d'exploitation et associés, montant brut",
+                "code_EDI": "VI:C516:5004:1",
+                "code": "VI",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          }
+        ],
+        "valeurs_calculees": [
+          {
+            "disponibilites": {
+              "valeur": "5000",
+              "evolution": 400
+            },
+            "total_dettes_stables": {
+              "valeur": "13639809000",
+              "evolution": -6.11
+            },
+            "valeur_ajoutee_bdf": {
+              "valeur": "102614000",
+              "evolution": -22.31
+            },
+            "besoin_en_fonds_de_roulement": {
+              "valeur": "-2882040000",
+              "evolution": -119.27
+            },
+            "excedent_brut_exploitation": {
+              "valeur": "-196190000",
+              "evolution": -43.03
+            },
+            "capacite_autofinancement": {
+              "valeur": "1576476000",
+              "evolution": -60.04
+            },
+            "fonds_roulement_net_global": {
+              "valeur": "-2848939000",
+              "evolution": -124.22
+            },
+            "ratio_fonds_roulement_net_global_sur_besoin_en_fonds_de_roulement": {
+              "valeur": 0,
+              "evolution": null
+            },
+            "dettes4_maturite_a_un_an_au_plus": {
+              "valeur": "0",
+              "evolution": null
+            }
+          }
+        ]
+      },
+      "links": {},
+      "meta": {}
+    },
+    {
+      "data": {
+        "annee": "2021",
+        "date_arrete_exercice": "2021-12",
+        "declarations": [
+          {
+            "numero_imprime": "2051",
+            "donnees": [
+              {
+                "code_nref": "300476",
+                "valeurs": ["33890722000"],
+                "evolution": null,
+                "code_absolu": "2000536",
+                "intitule": "Total général bilan passif n , exercice n total i + total ii + total iii + total iv + total v",
+                "code_EDI": "EE:C516:5004:1",
+                "code": "EE",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300438",
+                "valeurs": ["16000374000"],
+                "evolution": null,
+                "code_absolu": "2000497",
+                "intitule": "Total (i) exercice n , total des capitaux propres n",
+                "code_EDI": "DL:C516:5004:1",
+                "code": "DL",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300414",
+                "valeurs": ["171921000"],
+                "evolution": null,
+                "code_absolu": "2000472",
+                "intitule": "Capital social ou individuel n",
+                "code_EDI": "DA:C516:5004:1",
+                "code": "DA",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "302359",
+                "valeurs": ["154627000"],
+                "evolution": null,
+                "code_absolu": "2002767",
+                "intitule": "Total (iii) exercice n , total des provisions pour risques et charges n",
+                "code_EDI": "DR:C516:5004:1",
+                "code": "DR",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300451",
+                "valeurs": ["0"],
+                "evolution": null,
+                "code_absolu": "2000511",
+                "intitule": "Emprunts obligataires convertibles n",
+                "code_EDI": "DS:C516:5004:1",
+                "code": "DS",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300453",
+                "valeurs": ["14527023000"],
+                "evolution": null,
+                "code_absolu": "2000513",
+                "intitule": "Autres emprunts obligataires n",
+                "code_EDI": "DT:C516:5004:1",
+                "code": "DT",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300455",
+                "valeurs": ["1000"],
+                "evolution": null,
+                "code_absolu": "2000515",
+                "intitule": "Emprunts et dettes auprès des établissements de crédit n",
+                "code_EDI": "DU:C516:5004:1",
+                "code": "DU",
+                "code_type_donnee": "MOA"
+              },
+              {
+                "code_nref": "300458",
+                "valeurs": ["1502882000"],
+                "evolution": null,
+                "code_absolu": "2000518",
+                "intitule": "Emprunts et dettes financières divers n",
+                "code_EDI": "DV:C516:5004:1",
+                "code": "DV",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          },
+          {
+            "numero_imprime": "2052",
+            "donnees": [
+              {
+                "code_nref": "300506",
+                "valeurs": ["635059000"],
+                "evolution": null,
+                "code_absolu": "2000566",
+                "intitule": "Produits d'exploitation chiffre d'affaires net total",
+                "code_EDI": "FL:C516:5004:1",
+                "code": "FL",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          },
+          {
+            "numero_imprime": "2053",
+            "donnees": [
+              {
+                "code_nref": "300606",
+                "valeurs": ["3674121000"],
+                "evolution": null,
+                "code_absolu": "2000666",
+                "intitule": "5 - bénéfice ou perte (total des produits - total des charges)",
+                "code_EDI": "HN:C516:5004:1",
+                "code": "HN",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          },
+          {
+            "numero_imprime": "2057",
+            "donnees": [
+              {
+                "code_nref": "301195",
+                "valeurs": ["0"],
+                "evolution": null,
+                "code_absolu": "2001265",
+                "intitule": "Dettes groupe, communauté d'exploitation et associés, montant brut",
+                "code_EDI": "VI:C516:5004:1",
+                "code": "VI",
+                "code_type_donnee": "MOA"
+              }
+            ]
+          }
+        ],
+        "valeurs_calculees": [
+          {
+            "disponibilites": {
+              "valeur": "1000",
+              "evolution": null
+            },
+            "total_dettes_stables": {
+              "valeur": "14527023000",
+              "evolution": null
+            },
+            "valeur_ajoutee_bdf": {
+              "valeur": "132078000",
+              "evolution": null
+            },
+            "besoin_en_fonds_de_roulement": {
+              "valeur": "-1314406000",
+              "evolution": null
+            },
+            "excedent_brut_exploitation": {
+              "valeur": "-137170000",
+              "evolution": null
+            },
+            "capacite_autofinancement": {
+              "valeur": "3944725000",
+              "evolution": null
+            },
+            "fonds_roulement_net_global": {
+              "valeur": "-1270591000",
+              "evolution": null
+            },
+            "ratio_fonds_roulement_net_global_sur_besoin_en_fonds_de_roulement": {
+              "valeur": 0,
+              "evolution": null
+            },
+            "dettes4_maturite_a_un_an_au_plus": {
+              "valeur": "1000",
+              "evolution": null
+            }
+          }
+        ]
+      },
+      "links": {},
+      "meta": {}
+    }
+  ],
+  "meta": {
+    "count": 3
+  },
+  "links": {}
+}

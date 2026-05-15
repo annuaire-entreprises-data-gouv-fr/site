@@ -1,0 +1,115 @@
+{
+  "nhits": 4,
+  "parameters": {
+    "dataset": "ratios_inpi_bce",
+    "q": "siren:487444697",
+    "rows": 10,
+    "start": 0,
+    "format": "json",
+    "timezone": "UTC"
+  },
+  "records": [
+    {
+      "datasetid": "ratios_inpi_bce",
+      "recordid": "acdf57029de7b235e2ff7eb74544ca9bdc6c08c1",
+      "fields": {
+        "taux_d_endettement": -121.548,
+        "credit_fournisseurs_jours": 116.598,
+        "couverture_des_interets": -3.373,
+        "capacite_de_remboursement": -2.718,
+        "marge_ebe": -27.746,
+        "ratio_de_vetuste": 64.985,
+        "autonomie_financiere": -36.881,
+        "caf_sur_ca": -28.351,
+        "poids_bfr_exploitation_sur_ca_jours": 138.585,
+        "marge_brute": 1231872,
+        "resultat_courant_avant_impots_sur_ca": -36.526,
+        "date_cloture_exercice": "2022-12-31",
+        "ebit": -660304,
+        "rotation_des_stocks_jours": 0.672,
+        "siren": "487444697",
+        "chiffre_d_affaires": 1848367,
+        "confidentiality": "Partiellement confidentiel",
+        "resultat_net": -693623,
+        "ebe": -514706,
+        "type_bilan": "C",
+        "poids_bfr_exploitation_sur_ca": 38.496,
+        "ratio_de_liquidite": 260.954,
+        "credit_clients_jours": 422.619
+      },
+      "record_timestamp": "2024-12-12T15:25:19Z"
+    },
+    {
+      "datasetid": "ratios_inpi_bce",
+      "recordid": "3526c59e0f35b8f4ef77cad35f9b709b5a38aee3",
+      "fields": {
+        "taux_d_endettement": 228.905,
+        "credit_fournisseurs_jours": 52.864,
+        "couverture_des_interets": 11.736,
+        "capacite_de_remboursement": 12.908,
+        "marge_ebe": 7.053,
+        "ratio_de_vetuste": 80.303,
+        "autonomie_financiere": 18.722,
+        "caf_sur_ca": 6.629,
+        "poids_bfr_exploitation_sur_ca_jours": 274.53,
+        "marge_brute": 487417,
+        "resultat_courant_avant_impots_sur_ca": -0.146,
+        "date_cloture_exercice": "2020-12-31",
+        "ebit": 3629,
+        "rotation_des_stocks_jours": 232.914,
+        "siren": "487444697",
+        "chiffre_d_affaires": 532463,
+        "confidentiality": "Public",
+        "resultat_net": 2198,
+        "ebe": 37552,
+        "type_bilan": "C",
+        "poids_bfr_exploitation_sur_ca": 76.258,
+        "ratio_de_liquidite": 360.23,
+        "credit_clients_jours": 225.321
+      },
+      "record_timestamp": "2024-12-12T15:25:19Z"
+    },
+    {
+      "datasetid": "ratios_inpi_bce",
+      "recordid": "76965ce13266084310b7dcf69bf9b67bd977a694",
+      "fields": {
+        "taux_d_endettement": 186.013,
+        "ratio_de_vetuste": 90.991,
+        "autonomie_financiere": 26.239,
+        "marge_brute": 0,
+        "date_cloture_exercice": "2019-12-31",
+        "ebit": 0,
+        "siren": "487444697",
+        "chiffre_d_affaires": 0,
+        "confidentiality": "Partiellement confidentiel",
+        "resultat_net": 15750,
+        "ebe": 0,
+        "type_bilan": "C",
+        "ratio_de_liquidite": 241.477
+      },
+      "record_timestamp": "2024-12-12T15:25:19Z"
+    },
+    {
+      "datasetid": "ratios_inpi_bce",
+      "recordid": "6be977e8e03457d082367106c04cebdb27680a3a",
+      "fields": {
+        "taux_d_endettement": -167.972,
+        "credit_fournisseurs_jours": 879.883,
+        "ratio_de_vetuste": 70.479,
+        "autonomie_financiere": -38.179,
+        "marge_brute": 0,
+        "date_cloture_exercice": "2021-12-31",
+        "ebit": 0,
+        "siren": "487444697",
+        "chiffre_d_affaires": 0,
+        "confidentiality": "Partiellement confidentiel",
+        "resultat_net": -715690,
+        "ebe": 0,
+        "type_bilan": "C",
+        "ratio_de_liquidite": 156.701,
+        "credit_clients_jours": 803.416
+      },
+      "record_timestamp": "2024-12-12T15:25:19Z"
+    }
+  ]
+}
