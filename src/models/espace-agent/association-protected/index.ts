@@ -1,4 +1,4 @@
-import { clientApiEntrepriseAssociation } from "#/clients/api-entreprise/association";
+import { clientApiEntrepriseAssociation } from "#/clients/api-entreprise/association/index.server";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,

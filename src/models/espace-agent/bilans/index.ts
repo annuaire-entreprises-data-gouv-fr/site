@@ -1,4 +1,4 @@
-import { clientApiEntrepriseBilans } from "#/clients/api-entreprise/bilans";
+import { clientApiEntrepriseBilans } from "#/clients/api-entreprise/bilans/index.server";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,

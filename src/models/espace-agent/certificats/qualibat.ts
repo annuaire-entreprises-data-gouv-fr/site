@@ -1,4 +1,4 @@
-import { clientApiEntrepriseQualibat } from "#/clients/api-entreprise/certificats/qualibat";
+import { clientApiEntrepriseQualibat } from "#/clients/api-entreprise/certificats/qualibat.server";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,

@@ -8,7 +8,7 @@ import {
   cleanPathFrom,
   getCurrentSession,
   getPathFrom,
-} from "#/utils/session";
+} from "#/utils/session/index.server";
 import { defaultHeadersMiddleware } from "../../-middlewares";
 
 export const Route = createFileRoute("/api/auth/agent-connect/logout-callback")(

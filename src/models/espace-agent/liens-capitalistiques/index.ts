@@ -1,4 +1,4 @@
-import { clientApiEntrepriseLiensCapitalistiques } from "#/clients/api-entreprise/liens-capitalistiques";
+import { clientApiEntrepriseLiensCapitalistiques } from "#/clients/api-entreprise/liens-capitalistiques/index.server";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,

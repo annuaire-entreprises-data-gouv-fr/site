@@ -1,4 +1,4 @@
-import { clientAPIAssociationPublic } from "#/clients/api-association";
+import { clientAPIAssociationPublic } from "#/clients/api-association/index.server";
 import type { Siren } from "#/utils/helpers";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 import simplifyParams from "./simplify-params";

@@ -5,7 +5,7 @@ import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import { getCurrentSession } from "#/utils/session";
+import { getCurrentSession } from "#/utils/session/index.server";
 
 export const getCurrentUserFn = createServerFn().handler(async () => {
   const session = await getCurrentSession();

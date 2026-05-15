@@ -1,4 +1,4 @@
-import type { IProConnectUserInfo } from "#/clients/authentication/pro-connect/strategy";
+import type { IProConnectUserInfo } from "#/clients/authentication/pro-connect/strategy.server";
 import { Scopes } from "#/models/authentication/agent/scopes";
 import {
   NeedASiretException,

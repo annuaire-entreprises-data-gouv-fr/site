@@ -6,7 +6,7 @@ import {
   cleanAgentSession,
   getCurrentSession,
   getPathFrom,
-} from "#/utils/session";
+} from "#/utils/session/index.server";
 import { defaultHeadersMiddleware } from "../../-middlewares";
 
 class FranceConnectLogoutFailedException extends Exception {

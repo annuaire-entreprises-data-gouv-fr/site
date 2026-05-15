@@ -1,4 +1,4 @@
-import { clientApiEntrepriseEffectifsAnnuels } from "#/clients/api-entreprise/effectifs/annuels";
+import { clientApiEntrepriseEffectifsAnnuels } from "#/clients/api-entreprise/effectifs/annuels.server";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,

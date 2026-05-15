@@ -1,4 +1,4 @@
-import { clientApiEntrepriseChiffreAffaires } from "#/clients/api-entreprise/chiffres-affaires";
+import { clientApiEntrepriseChiffreAffaires } from "#/clients/api-entreprise/chiffres-affaires/index.server";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,

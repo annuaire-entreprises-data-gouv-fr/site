@@ -1,9 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { franceConnectLogoutUrl } from "#/clients/authentication/france-connect/strategy";
+import { franceConnectLogoutUrl } from "#/clients/authentication/france-connect/strategy.server";
 import { Exception } from "#/models/exceptions";
 import { getBaseUrl } from "#/utils/get-base-url";
 import logErrorInSentry from "#/utils/sentry";
-import { getCurrentSession, setPathFrom } from "#/utils/session";
+import { getCurrentSession, setPathFrom } from "#/utils/session/index.server";
 import { defaultHeadersMiddleware } from "../../-middlewares";
 
 class FranceConnectLogoutFailedException extends Exception {

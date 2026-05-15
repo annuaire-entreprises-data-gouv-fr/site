@@ -1,9 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { proConnectLogoutUrl } from "#/clients/authentication/pro-connect/strategy";
+import { proConnectLogoutUrl } from "#/clients/authentication/pro-connect/strategy.server";
 import { AgentConnectionFailedException } from "#/models/authentication/authentication-exceptions";
 import { getBaseUrl } from "#/utils/get-base-url";
 import logErrorInSentry from "#/utils/sentry";
-import { getCurrentSession, setPathFrom } from "#/utils/session";
+import { getCurrentSession, setPathFrom } from "#/utils/session/index.server";
 import { defaultHeadersMiddleware } from "../../-middlewares";
 
 export const Route = createFileRoute("/api/auth/agent-connect/logout")({

@@ -1,4 +1,4 @@
-import { clientApiEntrepriseOpqibi } from "#/clients/api-entreprise/opqibi";
+import { clientApiEntrepriseOpqibi } from "#/clients/api-entreprise/opqibi/index.server";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,

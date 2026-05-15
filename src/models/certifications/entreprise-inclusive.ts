@@ -1,5 +1,5 @@
-import { clientAPIInclusion } from "#/clients/api-inclusion";
-import { clientInclusionKindMetadata } from "#/clients/api-inclusion/inclusion-kind";
+import { clientInclusionKindMetadata } from "#/clients/api-inclusion/inclusion-kind.server";
+import { clientAPIInclusion } from "#/clients/api-inclusion/index.server";
 import { HttpNotFound } from "#/clients/exceptions";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import {

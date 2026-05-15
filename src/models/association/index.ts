@@ -1,7 +1,7 @@
 import {
   clientAPIAssociationPrivate,
   clientAPIAssociationPublic,
-} from "#/clients/api-association";
+} from "#/clients/api-association/index.server";
 import { clientBanGeoLoc } from "#/clients/base-adresse-nationale";
 import { HttpNotFound } from "#/clients/exceptions";
 import { getUniteLegaleFromSlug } from "#/models/core/unite-legale";

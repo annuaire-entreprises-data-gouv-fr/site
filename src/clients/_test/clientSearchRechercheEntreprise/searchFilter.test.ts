@@ -1,4 +1,4 @@
-import clientSearchRechercheEntreprise from "#/clients/recherche-entreprise";
+import clientSearchRechercheEntreprise from "#/clients/recherche-entreprise/index.server";
 import type { ISearchResults } from "#/models/search";
 import SearchFilterParams from "#/models/search/search-filter-params";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
