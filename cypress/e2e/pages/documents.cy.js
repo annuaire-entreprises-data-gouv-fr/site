@@ -8,20 +8,21 @@ describe("Documents ESSOR ENERGIES (SOLARSUD)", () => {
   it("[LOGGED] Should display documents", () => {
     cy.login();
     cy.visit("/documents/487444697");
+    cy.wait(1000);
     // Conformité
     cy.contains("Attestations de conformité sociale").should("be.visible");
     cy.contains("Attestation de conformité fiscale").should("be.visible");
-    cy.contains("label", "Aides publiques").first().click();
+    cy.findAllByText("Marchés publics").first().click();
     cy.contains("URSSAF : conforme").should("be.visible");
     cy.contains("MSA : conforme").should("be.visible");
-    cy.contains("label", "Aides publiques").first().click();
+    cy.findAllByText("Aides publiques (aux entreprises)").first().click();
     cy.contains("DGFiP : conforme").should("be.visible");
     // Travaux publics
     cy.contains(
       "Justificatifs et certificats relatifs aux entreprises de travaux publics"
     ).should("be.visible");
     cy.contains("Travaux publics").should("be.visible");
-    cy.contains("label", "Aides publiques").click();
+    cy.findAllByText("Aides publiques (aux entreprises)").first().click();
     cy.contains("Carte de travaux publics").should("be.visible");
     cy.contains("FNTP : document disponible").should("be.visible");
     cy.contains("Cotisations congés & chômage").should("be.visible");
