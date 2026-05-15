@@ -12,7 +12,7 @@ import {
 import { FetchRessourceException } from "#/models/exceptions";
 import { defaultHeadersMiddleware } from "#/routes/api/-middlewares";
 import logErrorInSentry from "#/utils/sentry";
-import { getCurrentSession } from "#/utils/session";
+import { getCurrentSession } from "#/utils/session/index.server";
 
 export const Route = createFileRoute(
   "/api/download/espace-agent/documents/$slug"

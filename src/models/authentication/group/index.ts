@@ -7,7 +7,7 @@ import {
   clientRolesRemoveUserFromGroup,
   clientRolesUpdateName,
   clientRolesUpdateUserFromGroup,
-} from "#/clients/roles-data";
+} from "#/clients/roles-data/index.server";
 import type { IRolesDataUser } from "#/clients/roles-data/interface";
 import { FetchRessourceException } from "#/models/exceptions";
 import { logFatalErrorInSentry } from "#/utils/sentry";

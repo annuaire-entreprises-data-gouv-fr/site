@@ -4,7 +4,7 @@ import type { IDocumentsRNE } from "#/models/rne/types";
 import type { Siren } from "#/utils/helpers";
 import { sensitiveRequestCallerInfos } from "#/utils/network/utils/sensitive-request-caller-infos";
 import { sensitiveRequestLogger } from "#/utils/network/utils/sensitive-request-logger";
-import { actesApiRneClient } from "./auth";
+import { actesApiRneClient } from "./auth.server";
 
 export const clientDocuments = async (
   siren: Siren,

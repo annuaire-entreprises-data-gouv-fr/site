@@ -1,4 +1,4 @@
-import { clientMonitoring } from "#/clients/monitoring";
+import { clientMonitoring } from "#/clients/monitoring/index.server";
 import { DataStore } from "#/utils/data-store";
 import { logWarningInSentry } from "#/utils/sentry";
 import { administrationsMetaData } from "./administrations";

@@ -1,5 +1,5 @@
-import { clientIdccRechercheEntreprise } from "#/clients/recherche-entreprise/idcc";
-import { clientIdccMetadata } from "#/clients/recherche-entreprise/idcc-metadata";
+import { clientIdccRechercheEntreprise } from "#/clients/recherche-entreprise/idcc.server";
+import { clientIdccMetadata } from "#/clients/recherche-entreprise/idcc-metadata.server";
 import type { Siren } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
 import { EAdministration } from "../administrations/EAdministration";

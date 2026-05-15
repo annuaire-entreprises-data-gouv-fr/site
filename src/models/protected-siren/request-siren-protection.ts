@@ -1,4 +1,7 @@
-import { logInGrist, readFromGrist } from "#/clients/external-tooling/grist";
+import {
+  logInGrist,
+  readFromGrist,
+} from "#/clients/external-tooling/grist.server";
 import { isProtectedSiren } from "#/models/protected-siren";
 import { verifySiren } from "#/utils/helpers";
 

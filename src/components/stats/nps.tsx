@@ -1,6 +1,6 @@
 import type { ChartData } from "chart.js";
 import { type ChangeEvent, useState } from "react";
-import type { IMatomoStats } from "#/clients/matomo";
+import type { IMatomoStats } from "#/clients/matomo/index.server";
 import { LineChart } from "#/components/chart/line";
 import { StackedBarChart } from "#/components/chart/stack-bar";
 import { Link } from "#/components/Link";

@@ -1,4 +1,4 @@
-import { clientApiEntrepriseBeneficiaires } from "#/clients/api-entreprise/beneficiaires";
+import { clientApiEntrepriseBeneficiaires } from "#/clients/api-entreprise/beneficiaires/index.server";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import {
   APINotRespondingFactory,

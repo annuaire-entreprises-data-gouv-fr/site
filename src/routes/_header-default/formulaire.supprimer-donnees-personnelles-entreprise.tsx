@@ -6,7 +6,7 @@ import { meta } from "#/utils/seo";
 import {
   getCurrentSession,
   getHidePersonalDataRequestFCSession,
-} from "#/utils/session";
+} from "#/utils/session/index.server";
 import { HeaderDefaultError } from "./-error";
 
 const fetchHidePersonalDataRequestFn = createServerFn().handler(async () => {

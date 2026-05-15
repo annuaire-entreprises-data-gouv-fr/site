@@ -1,4 +1,4 @@
-import { clientRolesGetMetadata } from "#/clients/roles-data";
+import { clientRolesGetMetadata } from "#/clients/roles-data/index.server";
 import type { IRolesDataRoles } from "#/clients/roles-data/interface";
 import { DataStore } from "#/utils/data-store";
 

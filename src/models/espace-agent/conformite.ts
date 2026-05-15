@@ -1,6 +1,6 @@
-import { clientApiEntrepriseConformiteFiscale } from "#/clients/api-entreprise/conformite/fiscale";
-import { clientApiEntrepriseConformiteMSA } from "#/clients/api-entreprise/conformite/msa";
-import { clientApiEntrepriseConformiteVigilance } from "#/clients/api-entreprise/conformite/vigilance";
+import { clientApiEntrepriseConformiteFiscale } from "#/clients/api-entreprise/conformite/fiscale.server";
+import { clientApiEntrepriseConformiteMSA } from "#/clients/api-entreprise/conformite/msa.server";
+import { clientApiEntrepriseConformiteVigilance } from "#/clients/api-entreprise/conformite/vigilance.server";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,

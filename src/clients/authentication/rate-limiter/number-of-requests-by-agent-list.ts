@@ -1,4 +1,4 @@
-import { readFromS3 } from "#/clients/external-tooling/s3";
+import { readFromS3 } from "#/clients/external-tooling/s3.server";
 import { Information } from "#/models/exceptions";
 import { logInfoInSentry } from "#/utils/sentry";
 

@@ -10,7 +10,7 @@ import { requestSirenProtection } from "#/models/protected-siren/request-siren-p
 import { hasSirenFormat } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
 import getSession from "#/utils/server-side-helper/get-session";
-import { getHidePersonalDataRequestFCSession } from "#/utils/session";
+import { getHidePersonalDataRequestFCSession } from "#/utils/session/index.server";
 import isUserAgentABot from "#/utils/user-agent";
 import { defaultHeadersMiddleware } from "./-middlewares";
 

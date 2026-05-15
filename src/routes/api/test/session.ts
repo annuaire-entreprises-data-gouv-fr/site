@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type { IAgentScope } from "#/models/authentication/agent/scopes/constants";
 import type { ISession } from "#/models/authentication/user/session";
-import { getCurrentSession } from "#/utils/session";
+import { getCurrentSession } from "#/utils/session/index.server";
 
 export const Route = createFileRoute("/api/test/session")({
   server: {

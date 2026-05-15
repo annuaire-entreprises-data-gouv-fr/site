@@ -3,7 +3,7 @@ import {
   clientApiEntrepriseCibtp,
   clientApiEntrepriseCnetp,
   clientApiEntrepriseProbtp,
-} from "#/clients/api-entreprise/travaux-publics";
+} from "#/clients/api-entreprise/travaux-publics/index.server";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,

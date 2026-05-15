@@ -1,4 +1,4 @@
-import { clientAPIProxy } from "#/clients/api-proxy/client";
+import { clientAPIProxy } from "#/clients/api-proxy/client.server";
 import routes from "#/clients/routes";
 import constants from "#/models/constants";
 import type { TVANumber } from "#/utils/helpers";

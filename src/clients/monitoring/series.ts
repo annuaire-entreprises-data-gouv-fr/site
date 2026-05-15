@@ -1,5 +1,5 @@
 import type { IRatio } from "#/models/monitoring";
-import type { IUpdownIODowntimes } from ".";
+import type { IUpdownIODowntimes } from "./index.server";
 
 interface ILog {
   date: Date;

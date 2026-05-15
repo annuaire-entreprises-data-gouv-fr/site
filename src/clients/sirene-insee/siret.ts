@@ -20,7 +20,7 @@ import {
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
 } from "../../utils/helpers/insee-variables";
-import { inseeClientGet } from ".";
+import { inseeClientGet } from "./index.server";
 
 interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;

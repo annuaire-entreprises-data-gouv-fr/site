@@ -1,4 +1,4 @@
-import { clientRechercheEntrepriseLastModified } from "#/clients/recherche-entreprise/last-modified";
+import { clientRechercheEntrepriseLastModified } from "#/clients/recherche-entreprise/last-modified.server";
 import logErrorInSentry from "#/utils/sentry";
 import { FetchRechercheEntrepriseException } from "./core/types";
 

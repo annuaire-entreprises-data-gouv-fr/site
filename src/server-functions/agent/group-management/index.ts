@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { clientRolesGetOrganizationsGroups } from "#/clients/roles-data";
+import { clientRolesGetOrganizationsGroups } from "#/clients/roles-data/index.server";
 import {
   addUserToGroup,
   getAgentGroups,

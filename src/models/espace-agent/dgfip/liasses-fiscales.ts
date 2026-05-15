@@ -1,4 +1,4 @@
-import { clientApiEntrepriseDgfipLiassesFiscales } from "#/clients/api-entreprise/liasses-fiscales";
+import { clientApiEntrepriseDgfipLiassesFiscales } from "#/clients/api-entreprise/liasses-fiscales/index.server";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,

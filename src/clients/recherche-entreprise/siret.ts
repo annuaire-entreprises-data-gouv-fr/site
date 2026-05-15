@@ -1,6 +1,6 @@
 import { HttpNotFound } from "#/clients/exceptions";
 import type { IEtablissement } from "#/models/core/types";
-import clientSearchRechercheEntreprise from ".";
+import clientSearchRechercheEntreprise from "./index.server";
 
 export const clientEtablissementRechercheEntreprise = async (
   siret: string
