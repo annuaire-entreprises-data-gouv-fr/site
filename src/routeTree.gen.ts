@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as HeaderSearchRouteRouteImport } from './routes/_header-search/route'
 import { Route as HeaderPublicRouteRouteImport } from './routes/_header-public/route'
 import { Route as HeaderMinimalRouteRouteImport } from './routes/_header-minimal/route'
@@ -87,6 +88,11 @@ import { Route as HeaderConnexionConnexionHabilitationPrestatairesRouteImport } 
 import { Route as HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport } from './routes/_header-connexion/connexion.habilitation.administration-inconnue'
 import { Route as ApiDownloadEspaceAgentDocumentsSlugRouteImport } from './routes/api/download/espace-agent/documents/$slug'
 
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HeaderSearchRouteRoute = HeaderSearchRouteRouteImport.update({
   id: '/_header-search',
   getParentRoute: () => rootRouteImport,
@@ -521,6 +527,7 @@ const ApiDownloadEspaceAgentDocumentsSlugRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof HeaderHomeIndexRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
   '/export-sirene': typeof HeaderDefaultExportSireneRoute
   '/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
@@ -592,6 +599,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof HeaderHomeIndexRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
   '/export-sirene': typeof HeaderDefaultExportSireneRoute
   '/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
@@ -671,6 +679,7 @@ export interface FileRoutesById {
   '/_header-minimal': typeof HeaderMinimalRouteRouteWithChildren
   '/_header-public': typeof HeaderPublicRouteRouteWithChildren
   '/_header-search': typeof HeaderSearchRouteRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
   '/_header-default/accessibilite': typeof HeaderDefaultAccessibiliteRoute
   '/_header-default/export-sirene': typeof HeaderDefaultExportSireneRoute
   '/_header-default/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
@@ -745,6 +754,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/robots.txt'
     | '/accessibilite'
     | '/export-sirene'
     | '/historique-des-modifications'
@@ -816,6 +826,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/robots.txt'
     | '/accessibilite'
     | '/export-sirene'
     | '/historique-des-modifications'
@@ -894,6 +905,7 @@ export interface FileRouteTypes {
     | '/_header-minimal'
     | '/_header-public'
     | '/_header-search'
+    | '/robots.txt'
     | '/_header-default/accessibilite'
     | '/_header-default/export-sirene'
     | '/_header-default/historique-des-modifications'
@@ -974,6 +986,7 @@ export interface RootRouteChildren {
   HeaderMinimalRouteRoute: typeof HeaderMinimalRouteRouteWithChildren
   HeaderPublicRouteRoute: typeof HeaderPublicRouteRouteWithChildren
   HeaderSearchRouteRoute: typeof HeaderSearchRouteRouteWithChildren
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
   ApiExportSireneRoute: typeof ApiExportSireneRoute
   ApiFeatureFlagsRoute: typeof ApiFeatureFlagsRoute
   ApiHidePersonalDataRoute: typeof ApiHidePersonalDataRoute
@@ -995,6 +1008,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_header-search': {
       id: '/_header-search'
       path: ''
@@ -1739,6 +1759,7 @@ const rootRouteChildren: RootRouteChildren = {
   HeaderMinimalRouteRoute: HeaderMinimalRouteRouteWithChildren,
   HeaderPublicRouteRoute: HeaderPublicRouteRouteWithChildren,
   HeaderSearchRouteRoute: HeaderSearchRouteRouteWithChildren,
+  RobotsDottxtRoute: RobotsDottxtRoute,
   ApiExportSireneRoute: ApiExportSireneRoute,
   ApiFeatureFlagsRoute: ApiFeatureFlagsRoute,
   ApiHidePersonalDataRoute: ApiHidePersonalDataRoute,
