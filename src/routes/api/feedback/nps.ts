@@ -39,6 +39,7 @@ const logAllEvents = async (request: Request) => {
 export const Route = createFileRoute("/api/feedback/nps")({
   server: {
     handlers: {
+      OPTIONS: async () => new Response(null, { status: 204 }),
       POST: async ({ request }) => {
         logAllEvents(request);
 

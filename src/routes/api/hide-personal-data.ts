@@ -25,6 +25,7 @@ class HidePersonalDataFailedException extends Exception {
 export const Route = createFileRoute("/api/hide-personal-data")({
   server: {
     handlers: {
+      OPTIONS: async () => new Response(null, { status: 204 }),
       POST: async ({ request }) => {
         try {
           const formData = await request.formData();
