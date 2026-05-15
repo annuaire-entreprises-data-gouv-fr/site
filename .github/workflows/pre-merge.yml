@@ -31,7 +31,7 @@ env:
   MATOMO_SITE_ID: ${{ secrets.MATOMO_SITE_ID }}
   MATOMO_API_SITE_ID: ${{ secrets.MATOMO_API_SITE_ID }}
   MATOMO_TOKEN_AUTH: ${{ secrets.MATOMO_TOKEN_AUTH }}
-  IRON_SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
   UPDOWN_IO_API_KEY: ${{ secrets.UPDOWN_IO_API_KEY }}
 
@@ -110,8 +110,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [dependencies]
     env:
-      NEXT_PUBLIC_END2END_MOCKING: enabled
-      NEXT_PUBLIC_BASE_URL: http://localhost:3000
+      VITE_END2END_MOCKING: enabled
+      VITE_BASE_URL: http://localhost:3000
       API_ENTREPRISE_URL: http://uselessurl.com
       API_RECHERCHE_ENTREPRISE_URL: http://uselessurl2.com
       PROXY_API_URL: http://uselessurl3.com
@@ -134,18 +134,18 @@ jobs:
       - name: Build site with E2E mocking
         run: npm run build && npm run prepare-standalone-dir
         env:
-          NEXT_PUBLIC_END2END_MOCKING: enabled
+          VITE_END2END_MOCKING: enabled
       - name: Run Cypress tests 🧪
         # https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
         timeout-minutes: 10
         with:
-          start: node .next/standalone/server.js
+          start: npm run dev:e2e
           record: false
           config-file: ./cypress/cypress.config.ts
         env:
-          CYPRESS_IRON_SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-          NEXT_PUBLIC_END2END_MOCKING: enabled
+          SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          VITE_END2END_MOCKING: enabled
       - name: Upload screenshots 📸
         uses: actions/upload-artifact@v4
         # add the line below to store screenshots only on failures
@@ -168,4 +168,4 @@ jobs:
       - name: Load node_modules
         uses: ./.github/actions/load-dependencies
       - name: Run typescript check
-        run: npx tsc --noEmit
+        run: npm run typecheck

@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      "entreprise": {
+        "raison_sociale": "LA POSTE",
+        "siren": "356000000",
+        "région": "11",
+        "département": "75",
+        "code_naf": "53.10Z",
+        "ues": null,
+        "effectif": {
+          "tranche": "1000:"
+        }
+      },
+      "notes": {
+        "2018": 94,
+        "2019": 94,
+        "2020": 94,
+        "2021": 94,
+        "2022": 94
+      },
+      "notes_remunerations": {
+        "2018": 39,
+        "2019": 39,
+        "2020": 39,
+        "2021": 39,
+        "2022": 39
+      },
+      "notes_augmentations": {
+        "2018": 20,
+        "2019": 20,
+        "2020": 20,
+        "2021": 20,
+        "2022": 20
+      },
+      "notes_promotions": {
+        "2018": 15,
+        "2019": 15,
+        "2020": 15,
+        "2021": 15,
+        "2022": 15
+      },
+      "notes_augmentations_et_promotions": {
+        "2018": null,
+        "2019": null,
+        "2020": null,
+        "2021": null,
+        "2022": null
+      },
+      "notes_conges_maternite": {
+        "2018": 15,
+        "2019": 15,
+        "2020": 15,
+        "2021": 15,
+        "2022": 15
+      },
+      "notes_hautes_rémunérations": {
+        "2018": 5,
+        "2019": 5,
+        "2020": 5,
+        "2021": 5,
+        "2022": 5
+      },
+      "label": "LA POSTE"
+    }
+  ],
+  "count": 1
+}

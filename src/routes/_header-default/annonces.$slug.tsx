@@ -4,6 +4,7 @@ import { DonneesPriveesSection } from "#/components/donnees-privees-section";
 import AnnoncesBodacc from "#/components/screens/annonces.$slug/bodacc";
 import AnnoncesJOAFESection from "#/components/screens/annonces.$slug/joafe";
 import { ObservationsRNE } from "#/components/screens/annonces.$slug/observations-rne";
+import { NotFound } from "#/components/screens/not-found";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { useAuth } from "#/contexts/auth.context";
@@ -63,6 +64,7 @@ export const Route = createFileRoute("/_header-default/annonces/$slug")({
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {

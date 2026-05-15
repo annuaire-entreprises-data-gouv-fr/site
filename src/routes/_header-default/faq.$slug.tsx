@@ -1,5 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { RenderMarkdown } from "#/components/markdown";
+import { NotFound } from "#/components/screens/not-found";
 import Breadcrumb from "#/components-ui/breadcrumb";
 import ButtonLink from "#/components-ui/button";
 import TextWrapper from "#/components-ui/text-wrapper";
@@ -48,6 +49,7 @@ export const Route = createFileRoute("/_header-default/faq/$slug")({
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {

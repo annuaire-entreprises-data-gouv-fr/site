@@ -38,6 +38,7 @@ import { Route as HeaderSearchRechercherIndexRouteImport } from './routes/_heade
 import { Route as HeaderDefaultFaqIndexRouteImport } from './routes/_header-default/faq.index'
 import { Route as HeaderDefaultDefinitionsIndexRouteImport } from './routes/_header-default/definitions.index'
 import { Route as HeaderDefaultAdministrationIndexRouteImport } from './routes/_header-default/administration.index'
+import { Route as ApiTestSessionRouteImport } from './routes/api/test/session'
 import { Route as ApiPingSlugRouteImport } from './routes/api/ping/$slug'
 import { Route as ApiFeedbackNpsRouteImport } from './routes/api/feedback/nps'
 import { Route as HeaderSearchRechercherCarteRouteImport } from './routes/_header-search/rechercher/carte'
@@ -235,6 +236,11 @@ const HeaderDefaultAdministrationIndexRoute =
     path: '/administration/',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
+const ApiTestSessionRoute = ApiTestSessionRouteImport.update({
+  id: '/api/test/session',
+  path: '/api/test/session',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPingSlugRoute = ApiPingSlugRouteImport.update({
   id: '/api/ping/$slug',
   path: '/api/ping/$slug',
@@ -587,6 +593,7 @@ export interface FileRoutesByFullPath {
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
+  '/api/test/session': typeof ApiTestSessionRoute
   '/administration/': typeof HeaderDefaultAdministrationIndexRoute
   '/definitions/': typeof HeaderDefaultDefinitionsIndexRoute
   '/faq/': typeof HeaderDefaultFaqIndexRoute
@@ -661,6 +668,7 @@ export interface FileRoutesByTo {
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
+  '/api/test/session': typeof ApiTestSessionRoute
   '/administration': typeof HeaderDefaultAdministrationIndexRoute
   '/definitions': typeof HeaderDefaultDefinitionsIndexRoute
   '/faq': typeof HeaderDefaultFaqIndexRoute
@@ -744,6 +752,7 @@ export interface FileRoutesById {
   '/_header-search/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
+  '/api/test/session': typeof ApiTestSessionRoute
   '/_header-default/administration/': typeof HeaderDefaultAdministrationIndexRoute
   '/_header-default/definitions/': typeof HeaderDefaultDefinitionsIndexRoute
   '/_header-default/faq/': typeof HeaderDefaultFaqIndexRoute
@@ -820,6 +829,7 @@ export interface FileRouteTypes {
     | '/rechercher/carte'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
+    | '/api/test/session'
     | '/administration/'
     | '/definitions/'
     | '/faq/'
@@ -894,6 +904,7 @@ export interface FileRouteTypes {
     | '/rechercher/carte'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
+    | '/api/test/session'
     | '/administration'
     | '/definitions'
     | '/faq'
@@ -976,6 +987,7 @@ export interface FileRouteTypes {
     | '/_header-search/rechercher/carte'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
+    | '/api/test/session'
     | '/_header-default/administration/'
     | '/_header-default/definitions/'
     | '/_header-default/faq/'
@@ -1020,6 +1032,7 @@ export interface RootRouteChildren {
   ApiProtectedSirenRoute: typeof ApiProtectedSirenRoute
   ApiFeedbackNpsRoute: typeof ApiFeedbackNpsRoute
   ApiPingSlugRoute: typeof ApiPingSlugRoute
+  ApiTestSessionRoute: typeof ApiTestSessionRoute
   ApiAuthAgentConnectCallbackRoute: typeof ApiAuthAgentConnectCallbackRoute
   ApiAuthAgentConnectLoginRoute: typeof ApiAuthAgentConnectLoginRoute
   ApiAuthAgentConnectLogoutRoute: typeof ApiAuthAgentConnectLogoutRoute
@@ -1236,6 +1249,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/administration/'
       preLoaderRoute: typeof HeaderDefaultAdministrationIndexRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/api/test/session': {
+      id: '/api/test/session'
+      path: '/api/test/session'
+      fullPath: '/api/test/session'
+      preLoaderRoute: typeof ApiTestSessionRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/ping/$slug': {
       id: '/api/ping/$slug'
@@ -1809,6 +1829,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiProtectedSirenRoute: ApiProtectedSirenRoute,
   ApiFeedbackNpsRoute: ApiFeedbackNpsRoute,
   ApiPingSlugRoute: ApiPingSlugRoute,
+  ApiTestSessionRoute: ApiTestSessionRoute,
   ApiAuthAgentConnectCallbackRoute: ApiAuthAgentConnectCallbackRoute,
   ApiAuthAgentConnectLoginRoute: ApiAuthAgentConnectLoginRoute,
   ApiAuthAgentConnectLogoutRoute: ApiAuthAgentConnectLogoutRoute,

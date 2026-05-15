@@ -92,7 +92,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2125-04-24",
-          "nature_entreprise": ["Libérale non réglementée"],
+          "nature_entreprise": [
+            "Libérale non réglementée"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 500,
           "capital_variable": false,
@@ -228,7 +230,9 @@
           "date_radiation": "2022-11-14",
           "duree_personne_morale": 99,
           "date_fin_existence": "2119-01-22",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,

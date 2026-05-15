@@ -110,7 +110,9 @@
           "date_radiation": null,
           "duree_personne_morale": 50,
           "date_fin_existence": "2049-06-20",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": null,
           "capital_social": 36000,
           "capital_variable": false,

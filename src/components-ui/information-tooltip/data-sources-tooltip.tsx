@@ -1,4 +1,5 @@
 import type React from "react";
+import { Link } from "#/components/Link";
 import { Icon } from "#/components-ui/icon/wrapper";
 import type { IAdministrationMetaData } from "#/models/administrations/types";
 import constants from "#/models/constants";
@@ -30,12 +31,13 @@ const DataSourcesTooltip: React.FC<{
       ))}
       tabIndex={undefined}
     >
-      <a
+      <Link
         className={`no-style-link ${style["data-source"]}`}
-        href={link}
+        params={{ slug: link }}
         style={{
           color: constants.colors.frBlue,
         }}
+        to="/administration/$slug"
       >
         <span
           className="layout-center"
@@ -47,7 +49,7 @@ const DataSourcesTooltip: React.FC<{
           Source{pluralize(dataSources)}&nbsp;:&nbsp;
           {dataSources.map((dataSource) => dataSource.short).join(", ")}
         </span>
-      </a>
+      </Link>
     </InformationTooltip>
   </>
 );

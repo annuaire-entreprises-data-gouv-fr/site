@@ -92,7 +92,9 @@
           "date_radiation": "2022-11-14",
           "duree_personne_morale": 99,
           "date_fin_existence": "2119-01-22",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,

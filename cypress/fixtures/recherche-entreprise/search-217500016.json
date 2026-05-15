@@ -41,10 +41,15 @@
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
           "libelle_voie": "HOTEL VILLE ESP LIBERATION",
-          "liste_enseignes": ["MAIRIE"],
+          "liste_enseignes": [
+            "MAIRIE"
+          ],
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["5021", "5003"],
+          "liste_idcc": [
+            "5021",
+            "5003"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -1228,8 +1233,17 @@
             "niveau": "Ville de Paris"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": ["5021", "5003", "5022", "1043", "9999"],
-          "liste_finess_juridique": ["750805483", "750002008"],
+          "liste_idcc": [
+            "5021",
+            "5003",
+            "5022",
+            "1043",
+            "9999"
+          ],
+          "liste_finess_juridique": [
+            "750805483",
+            "750002008"
+          ],
           "egapro_renseignee": false,
           "est_achats_responsables": false,
           "est_alim_confiance": true,
@@ -1242,7 +1256,9 @@
           "est_finess": true,
           "est_organisme_formation": true,
           "est_qualiopi": true,
-          "liste_id_organisme_formation": ["11757308875"],
+          "liste_id_organisme_formation": [
+            "11757308875"
+          ],
           "est_rge": false,
           "est_siae": false,
           "est_societe_mission": false,

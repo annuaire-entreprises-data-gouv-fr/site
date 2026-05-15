@@ -44,7 +44,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["1486"],
+          "liste_idcc": [
+            "1486"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -107,7 +109,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": ["1486"],
+            "liste_idcc": [
+              "1486"
+            ],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -125,7 +129,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2115-01-19",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 10000,
           "capital_variable": false,
@@ -141,7 +147,9 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["1486"],
+          "liste_idcc": [
+            "1486"
+          ],
           "liste_finess_juridique": null,
           "egapro_renseignee": false,
           "est_achats_responsables": false,
@@ -155,7 +163,9 @@
           "est_finess": false,
           "est_organisme_formation": true,
           "est_qualiopi": false,
-          "liste_id_organisme_formation": ["11756944775"],
+          "liste_id_organisme_formation": [
+            "11756944775"
+          ],
           "est_rge": false,
           "est_siae": false,
           "est_societe_mission": false,
@@ -218,7 +228,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["0478"],
+          "liste_idcc": [
+            "0478"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -334,7 +346,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": ["0478"],
+            "liste_idcc": [
+              "0478"
+            ],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -384,7 +398,10 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2105-09-19",
-          "nature_entreprise": ["Commerciale", "Gestion de biens"],
+          "nature_entreprise": [
+            "Commerciale",
+            "Gestion de biens"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 84480,
           "capital_variable": false,
@@ -400,7 +417,9 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["0478"],
+          "liste_idcc": [
+            "0478"
+          ],
           "liste_finess_juridique": null,
           "egapro_renseignee": false,
           "est_achats_responsables": false,
@@ -558,7 +577,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2105-08-10",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,
@@ -648,7 +669,9 @@
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
           "libelle_voie": "CHAMBLAIN",
-          "liste_enseignes": ["SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE"],
+          "liste_enseignes": [
+            "SARL FRANK HATEM & EUGENIE ROSEC UCER-GANYMEDE"
+          ],
           "liste_finess": null,
           "liste_id_bio": null,
           "liste_idcc": null,
@@ -734,7 +757,9 @@
           "date_radiation": null,
           "duree_personne_morale": 60,
           "date_fin_existence": "2064-12-08",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 8000,
           "capital_variable": false,
@@ -908,7 +933,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2113-02-02",
-          "nature_entreprise": ["Artisanale non réglementée"],
+          "nature_entreprise": [
+            "Artisanale non réglementée"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 3000,
           "capital_variable": false,
@@ -1001,7 +1028,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["1527"],
+          "liste_idcc": [
+            "1527"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -1073,7 +1102,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": ["1527"],
+            "liste_idcc": [
+              "1527"
+            ],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -1091,7 +1122,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2118-08-07",
-          "nature_entreprise": ["Libérale non réglementée"],
+          "nature_entreprise": [
+            "Libérale non réglementée"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 10000,
           "capital_variable": false,
@@ -1107,7 +1140,9 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["1527"],
+          "liste_idcc": [
+            "1527"
+          ],
           "liste_finess_juridique": null,
           "egapro_renseignee": false,
           "est_achats_responsables": false,

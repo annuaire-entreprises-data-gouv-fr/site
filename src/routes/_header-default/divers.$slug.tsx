@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import ConventionsCollectivesSection from "#/components/conventions-collectives-section";
+import { NotFound } from "#/components/screens/not-found";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { useAuth } from "#/contexts/auth.context";
@@ -51,6 +52,7 @@ export const Route = createFileRoute("/_header-default/divers/$slug")({
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {

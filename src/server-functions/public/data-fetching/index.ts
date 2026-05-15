@@ -4,14 +4,12 @@ import { ApplicationRights } from "#/models/authentication/user/rights";
 import { getEORIValidation } from "#/models/eori-validation";
 import { getDirigeantsRNE } from "#/models/rne/dirigeants";
 import { getRNEObservations } from "#/models/rne/observations";
-import { getSubventionsAssociationFromSlug } from "#/models/subventions/association";
 import { buildAndVerifyTVA } from "#/models/tva/verify";
 import { withApplicationRight } from "../../middlewares";
 import {
   getAssociationSchema,
   getDirigeantsSchema,
   getObservationsSchema,
-  getSubventionsAssociationSchema,
   validateEORISchema,
   verifyTvaSchema,
 } from "./schemas";
@@ -54,12 +52,4 @@ export const validateEORIFn = createServerFn()
   .handler(async ({ data }) => {
     const { siret } = data;
     return await getEORIValidation(siret, {});
-  });
-
-export const getSubventionsAssociationFn = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(getSubventionsAssociationSchema)
-  .handler(async ({ data }) => {
-    const { slug } = data;
-    return await getSubventionsAssociationFromSlug(slug);
   });

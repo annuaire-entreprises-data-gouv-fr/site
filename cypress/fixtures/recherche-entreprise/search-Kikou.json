@@ -134,7 +134,9 @@
           "date_radiation": null,
           "duree_personne_morale": 30,
           "date_fin_existence": "2032-03-10",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 16500,
           "capital_variable": false,
@@ -303,7 +305,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2121-02-06",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 15000,
           "capital_variable": false,
@@ -391,7 +395,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["1501"],
+          "liste_idcc": [
+            "1501"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -454,7 +460,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": ["1501"],
+            "liste_idcc": [
+              "1501"
+            ],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -472,7 +480,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2121-02-28",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 8000,
           "capital_variable": false,
@@ -488,7 +498,9 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["1501"],
+          "liste_idcc": [
+            "1501"
+          ],
           "liste_finess_juridique": null,
           "egapro_renseignee": false,
           "est_achats_responsables": false,
@@ -646,7 +658,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2104-01-10",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 8000,
           "capital_variable": false,
@@ -893,7 +907,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2098-01-31",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": null,
           "capital_social": 304.9,
           "capital_variable": false,
@@ -1073,7 +1089,9 @@
             "geo_id": null,
             "latitude": "43.669397941",
             "libelle_commune": "BEAUZELLE",
-            "liste_enseignes": ["MY GYM"],
+            "liste_enseignes": [
+              "MY GYM"
+            ],
             "liste_finess": null,
             "liste_id_bio": null,
             "liste_idcc": null,
@@ -1094,7 +1112,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2107-03-25",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 8000,
           "capital_variable": false,
@@ -1281,7 +1301,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2115-07-28",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": null,
           "capital_social": 1500,
           "capital_variable": false,
@@ -1468,7 +1490,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2125-04-30",
-          "nature_entreprise": ["Gestion de biens"],
+          "nature_entreprise": [
+            "Gestion de biens"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,
@@ -1719,7 +1743,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2110-04-10",
-          "nature_entreprise": ["Gestion de biens"],
+          "nature_entreprise": [
+            "Gestion de biens"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,
@@ -1933,7 +1959,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2105-02-14",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": null,
           "capital_social": 2000,
           "capital_variable": false,

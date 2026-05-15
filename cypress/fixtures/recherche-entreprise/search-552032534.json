@@ -44,7 +44,9 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["9999"],
+          "liste_idcc": [
+            "9999"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -194,7 +196,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2112-04-25",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 170348620.75,
           "capital_variable": false,
@@ -210,8 +214,12 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["9999"],
-          "liste_finess_juridique": ["750073173"],
+          "liste_idcc": [
+            "9999"
+          ],
+          "liste_finess_juridique": [
+            "750073173"
+          ],
           "egapro_renseignee": true,
           "est_achats_responsables": false,
           "est_alim_confiance": false,
