@@ -7,11 +7,6 @@
   max-width: 90%;
   height: 100px;
   margin: 0 auto;
-
-  @media only screen and (min-width: 1px) and (max-width: 576px) {
-    width: 250px;
-    height: 90px;
-  }
 }
 .logoAnnuaire > span {
   position: absolute;
@@ -31,12 +26,6 @@
   font-size: 2rem;
   font-weight: 100;
   line-height: 2rem;
-
-  @media only screen and (min-width: 1px) and (max-width: 576px) {
-    left: 30px;
-    font-size: 1.7rem;
-    line-height: 1.9rem;
-  }
 }
 
 .logoAnnuaire > h1 > strong {

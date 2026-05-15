@@ -38,6 +38,7 @@
     "crawler-user-agents": "1.45.0",
     "fast-xml-parser": "5.8.0",
     "maplibre-gl": "5.24.0",
+    "nitro": "^3.0.260429-beta",
     "openid-client": "^5.7.1",
     "qrcode": "1.5.4",
     "react": "19.2.6",

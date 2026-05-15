@@ -71,5 +71,6 @@ tsconfig.tsbuildinfo
 mise*.toml
 
 dist/
+.output/
 
 src/data/**/*.json
