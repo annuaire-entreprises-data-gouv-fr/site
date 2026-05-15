@@ -1,0 +1,22 @@
+{
+  "data": {
+    "siren": "552032534",
+    "annee": "2022",
+    "effectifs_annuel": [
+      {
+        "regime": "regime_agricole",
+        "nature": "effectif_moyen_annuel",
+        "value": null,
+        "date_derniere_mise_a_jour": null
+      },
+      {
+        "regime": "regime_general",
+        "nature": "effectif_moyen_annuel",
+        "value": 333,
+        "date_derniere_mise_a_jour": "2023-03-30"
+      }
+    ]
+  },
+  "links": {},
+  "meta": {}
+}

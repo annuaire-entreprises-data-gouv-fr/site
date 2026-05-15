@@ -123,8 +123,8 @@ const AssociationSection = ({
   const { idAssociation = "" } = uniteLegale.association;
 
   const input = useMemo(
-    () => ({ slug: uniteLegale.association.idAssociation }),
-    [uniteLegale.association.idAssociation]
+    () => ({ slug: uniteLegale.siren }),
+    [uniteLegale.siren]
   );
   const association = useServerFnData(getAssociationFn, input);
 

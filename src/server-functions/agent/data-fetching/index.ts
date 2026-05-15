@@ -19,6 +19,7 @@ import { getEffectifsMensuelsProtected } from "#/models/espace-agent/effectifs/m
 import { getLiensCapitalistiquesProtected } from "#/models/espace-agent/liens-capitalistiques";
 import { getDocumentsRNEProtected } from "#/models/espace-agent/rne-protected/documents";
 import { getTravauxPublic } from "#/models/espace-agent/travaux-publics";
+import { getSubventionsAssociationFromSlug } from "#/models/subventions/association";
 import {
   agentFnMiddleware,
   withApplicationRight,
@@ -42,14 +43,15 @@ import {
   getAgentQualibatSchema,
   getAgentQualifelecSchema,
   getAgentTravauxPublicsSchema,
+  getSubventionsAssociationSchema,
 } from "./schemas";
 
 export const getAgentBeneficiairesFn = createServerFn()
   .middleware([
     agentFnMiddleware,
+    withApplicationRight(ApplicationRights.beneficiaires),
     withRateLimiting,
     withUseCase,
-    withApplicationRight(ApplicationRights.beneficiaires),
   ])
   .inputValidator(getAgentBeneficiairesSchema)
   .handler(async ({ data }) => {
@@ -60,9 +62,9 @@ export const getAgentBeneficiairesFn = createServerFn()
 export const getAgentConformiteSocialeEntrepriseFn = createServerFn()
   .middleware([
     agentFnMiddleware,
+    withApplicationRight(ApplicationRights.conformiteSociale),
     withRateLimiting,
     withUseCase,
-    withApplicationRight(ApplicationRights.conformiteSociale),
   ])
   .inputValidator(getAgentConformiteSocialeEntrepriseSchema)
   .handler(async ({ data }) => {
@@ -73,9 +75,9 @@ export const getAgentConformiteSocialeEntrepriseFn = createServerFn()
 export const getAgentConformiteFiscaleEntrepriseFn = createServerFn()
   .middleware([
     agentFnMiddleware,
+    withApplicationRight(ApplicationRights.conformiteFiscale),
     withRateLimiting,
     withUseCase,
-    withApplicationRight(ApplicationRights.conformiteFiscale),
   ])
   .inputValidator(getAgentConformiteFiscaleEntrepriseSchema)
   .handler(async ({ data }) => {
@@ -86,9 +88,9 @@ export const getAgentConformiteFiscaleEntrepriseFn = createServerFn()
 export const getAgentBilansProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
+    withApplicationRight(ApplicationRights.bilansBDF),
     withRateLimiting,
     withUseCase,
-    withApplicationRight(ApplicationRights.bilansBDF),
   ])
   .inputValidator(getAgentBilansProtectedSchema)
   .handler(async ({ data }) => {
@@ -99,9 +101,9 @@ export const getAgentBilansProtectedFn = createServerFn()
 export const getAgentChiffreAffairesProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
+    withApplicationRight(ApplicationRights.chiffreAffaires),
     withRateLimiting,
     withUseCase,
-    withApplicationRight(ApplicationRights.chiffreAffaires),
   ])
   .inputValidator(getAgentChiffreAffairesProtectedSchema)
   .handler(async ({ data }) => {
@@ -112,9 +114,9 @@ export const getAgentChiffreAffairesProtectedFn = createServerFn()
 export const getAgentTravauxPublicsFn = createServerFn()
   .middleware([
     agentFnMiddleware,
+    withApplicationRight(ApplicationRights.travauxPublics),
     withRateLimiting,
     withUseCase,
-    withApplicationRight(ApplicationRights.travauxPublics),
   ])
   .inputValidator(getAgentTravauxPublicsSchema)
   .handler(async ({ data }) => {
@@ -125,9 +127,9 @@ export const getAgentTravauxPublicsFn = createServerFn()
 export const getAgentLiassesFiscalesProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
+    withApplicationRight(ApplicationRights.liassesFiscales),
     withRateLimiting,
     withUseCase,
-    withApplicationRight(ApplicationRights.liassesFiscales),
   ])
   .inputValidator(getAgentLiassesFiscalesProtectedSchema)
   .handler(async ({ data }) => {
@@ -138,9 +140,9 @@ export const getAgentLiassesFiscalesProtectedFn = createServerFn()
 export const getAgentLiensCapitalistiquesProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
+    withApplicationRight(ApplicationRights.liensCapitalistiques),
     withRateLimiting,
     withUseCase,
-    withApplicationRight(ApplicationRights.liensCapitalistiques),
   ])
   .inputValidator(getAgentLiensCapitalistiquesProtectedSchema)
   .handler(async ({ data }) => {
@@ -161,8 +163,8 @@ export const getAgentAidesMinimisFn = createServerFn()
 export const getAgentOpqibiFn = createServerFn()
   .middleware([
     agentFnMiddleware,
-    withRateLimiting,
     withApplicationRight(ApplicationRights.protectedCertificats),
+    withRateLimiting,
   ])
   .inputValidator(getAgentOpqibiSchema)
   .handler(async ({ data }) => {
@@ -173,8 +175,8 @@ export const getAgentOpqibiFn = createServerFn()
 export const getAgentQualibatFn = createServerFn()
   .middleware([
     agentFnMiddleware,
-    withRateLimiting,
     withApplicationRight(ApplicationRights.protectedCertificats),
+    withRateLimiting,
   ])
   .inputValidator(getAgentQualibatSchema)
   .handler(async ({ data }) => {
@@ -185,8 +187,8 @@ export const getAgentQualibatFn = createServerFn()
 export const getAgentQualifelecFn = createServerFn()
   .middleware([
     agentFnMiddleware,
-    withRateLimiting,
     withApplicationRight(ApplicationRights.protectedCertificats),
+    withRateLimiting,
   ])
   .inputValidator(getAgentQualifelecSchema)
   .handler(async ({ data }) => {
@@ -197,8 +199,8 @@ export const getAgentQualifelecFn = createServerFn()
 export const getAgentDirigeantsProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
-    withRateLimiting,
     withApplicationRight(ApplicationRights.mandatairesRCS),
+    withRateLimiting,
   ])
   .inputValidator(getAgentDirigeantsProtectedSchema)
   .handler(async ({ data }) => {
@@ -209,8 +211,8 @@ export const getAgentDirigeantsProtectedFn = createServerFn()
 export const getAgentRneDocumentsFn = createServerFn()
   .middleware([
     agentFnMiddleware,
-    withRateLimiting,
     withApplicationRight(ApplicationRights.documentsRne),
+    withRateLimiting,
   ])
   .inputValidator(getAgentDocumentsRNEProtectedSchema)
   .handler(async ({ data }) => {
@@ -232,8 +234,8 @@ export const getAgentAssociationProtectedFn = createServerFn()
 export const getAgentEffectifsAnnuelsProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
-    withRateLimiting,
     withApplicationRight(ApplicationRights.effectifs),
+    withRateLimiting,
   ])
   .inputValidator(getAgentEffectifsAnnuelsProtectedSchema)
   .handler(async ({ data }) => {
@@ -244,8 +246,8 @@ export const getAgentEffectifsAnnuelsProtectedFn = createServerFn()
 export const getAgentEffectifsMensuelsProtectedFn = createServerFn()
   .middleware([
     agentFnMiddleware,
-    withRateLimiting,
     withApplicationRight(ApplicationRights.effectifs),
+    withRateLimiting,
   ])
   .inputValidator(getAgentEffectifsMensuelsProtectedSchema)
   .handler(async ({ data }) => {
@@ -255,4 +257,16 @@ export const getAgentEffectifsMensuelsProtectedFn = createServerFn()
       useCase,
       natureEffectif,
     });
+  });
+
+export const getSubventionsAssociationFn = createServerFn()
+  .middleware([
+    agentFnMiddleware,
+    withApplicationRight(ApplicationRights.subventionsAssociation),
+    withRateLimiting,
+  ])
+  .inputValidator(getSubventionsAssociationSchema)
+  .handler(async ({ data }) => {
+    const { slug } = data;
+    return await getSubventionsAssociationFromSlug(slug);
   });

@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import AdministrationDescription from "#/components/administrations/administration-description";
 import { Link } from "#/components/Link";
+import { NotFound } from "#/components/screens/not-found";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { administrationsMetaData } from "#/models/administrations";
 import { getFaqArticlesByTag } from "#/models/article/faq";
@@ -51,6 +52,7 @@ export const Route = createFileRoute("/_header-default/administration/$slug")({
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {

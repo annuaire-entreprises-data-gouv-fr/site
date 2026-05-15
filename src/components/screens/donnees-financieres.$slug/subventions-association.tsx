@@ -10,13 +10,14 @@ import { Select } from "#/components-ui/select";
 import { Tag } from "#/components-ui/tag";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/EAdministration";
+import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IAssociation } from "#/models/core/types";
 import { isDataSuccess, isUnauthorized } from "#/models/data-fetching";
 import type {
   ISubvention,
   ISubventions,
 } from "#/models/subventions/association";
-import { getSubventionsAssociationFn } from "#/server-functions/public/data-fetching";
+import { getSubventionsAssociationFn } from "#/server-functions/agent/data-fetching";
 import { formatCurrency, type Siren } from "#/utils/helpers";
 
 const DataSubventionLink = () => (
@@ -100,7 +101,11 @@ export default function SubventionsAssociationSection({
     () => ({ slug: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const subventions = useServerFnData(getSubventionsAssociationFn, input);
+  const subventions = useServerFnData(
+    getSubventionsAssociationFn,
+    input,
+    ApplicationRights.subventionsAssociation
+  );
 
   const allYears = useMemo(() => {
     if (!isDataSuccess(subventions)) {

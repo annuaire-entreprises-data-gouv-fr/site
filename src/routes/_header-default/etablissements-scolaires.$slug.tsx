@@ -2,6 +2,7 @@ import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { EtablissementsScolairesSection } from "#/components/education-nationale";
+import { NotFound } from "#/components/screens/not-found";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { useAuth } from "#/contexts/auth.context";
@@ -68,6 +69,7 @@ export const Route = createFileRoute(
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {

@@ -5,8 +5,12 @@ import type { ISession } from "#/models/authentication/user/session";
 import { isAbsoluteUrl } from "#/utils/server-side-helper/is-absolute-url";
 
 function useAppSession() {
+  if (!process.env.SESSION_PWD) {
+    throw new Error("SESSION_PWD is not set");
+  }
+
   return useSession<ISession>({
-    password: process.env.IRON_SESSION_PWD as string,
+    password: process.env.SESSION_PWD,
     name: "annuaire-entreprises-user-session-6",
     cookie: {
       secure: process.env.NODE_ENV === "production",

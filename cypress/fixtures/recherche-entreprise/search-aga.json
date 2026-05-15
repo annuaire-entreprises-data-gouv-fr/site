@@ -41,7 +41,9 @@
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
           "libelle_voie": "D'AVON",
-          "liste_enseignes": ["AGA"],
+          "liste_enseignes": [
+            "AGA"
+          ],
           "liste_finess": null,
           "liste_id_bio": null,
           "liste_idcc": null,
@@ -122,7 +124,9 @@
             "geo_id": null,
             "latitude": "48.407549148",
             "libelle_commune": "FONTAINEBLEAU",
-            "liste_enseignes": ["AGA"],
+            "liste_enseignes": [
+              "AGA"
+            ],
             "liste_finess": null,
             "liste_id_bio": null,
             "liste_idcc": null,
@@ -143,7 +147,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2122-11-20",
-          "nature_entreprise": ["Gestion de biens"],
+          "nature_entreprise": [
+            "Gestion de biens"
+          ],
           "date_cloture_exercice": null,
           "capital_social": 345900,
           "capital_variable": false,
@@ -339,7 +345,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2123-09-25",
-          "nature_entreprise": ["Gestion de biens"],
+          "nature_entreprise": [
+            "Gestion de biens"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 90,
           "capital_variable": false,
@@ -549,7 +557,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2110-10-26",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 5000,
           "capital_variable": false,
@@ -750,7 +760,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2121-02-13",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3103",
           "capital_social": 1000,
           "capital_variable": false,
@@ -930,7 +942,9 @@
             "liste_enseignes": null,
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": ["1505"],
+            "liste_idcc": [
+              "1505"
+            ],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -948,7 +962,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2120-10-20",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 10000,
           "capital_variable": false,
@@ -964,7 +980,9 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["1505"],
+          "liste_idcc": [
+            "1505"
+          ],
           "liste_finess_juridique": null,
           "egapro_renseignee": false,
           "est_achats_responsables": false,
@@ -1131,7 +1149,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2125-03-18",
-          "nature_entreprise": ["Gestion de biens"],
+          "nature_entreprise": [
+            "Gestion de biens"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,
@@ -1290,7 +1310,9 @@
           "date_radiation": null,
           "duree_personne_morale": null,
           "date_fin_existence": null,
-          "nature_entreprise": ["Libérale non réglementée"],
+          "nature_entreprise": [
+            "Libérale non réglementée"
+          ],
           "date_cloture_exercice": null,
           "capital_social": null,
           "capital_variable": false,
@@ -1459,7 +1481,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2121-08-03",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,
@@ -1843,7 +1867,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2113-11-02",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": null,
           "capital_social": 1000,
           "capital_variable": false,

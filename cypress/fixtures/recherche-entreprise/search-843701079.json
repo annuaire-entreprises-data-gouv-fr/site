@@ -44,7 +44,11 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["2420", "2609", "1596"],
+          "liste_idcc": [
+            "2420",
+            "2609",
+            "1596"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": [
             "3111D110",
@@ -100,7 +104,10 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2117-11-11",
-          "nature_entreprise": ["Artisanale réglementée", "Commerciale"],
+          "nature_entreprise": [
+            "Artisanale réglementée",
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 5000,
           "capital_variable": false,
@@ -111,7 +118,11 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["1596", "2420", "2609"],
+          "liste_idcc": [
+            "1596",
+            "2420",
+            "2609"
+          ],
           "liste_finess_juridique": null,
           "egapro_renseignee": false,
           "est_achats_responsables": false,

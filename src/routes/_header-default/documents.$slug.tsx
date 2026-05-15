@@ -7,6 +7,7 @@ import {
 import JustificatifsSection from "#/components/screens/documents.$slug/justificatifs";
 import { SummaryDocuments } from "#/components/screens/documents.$slug/summary-documents";
 import TravauxPublicsSection from "#/components/screens/documents.$slug/travaux-publics";
+import { NotFound } from "#/components/screens/not-found";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
@@ -59,6 +60,7 @@ export const Route = createFileRoute("/_header-default/documents/$slug")({
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {

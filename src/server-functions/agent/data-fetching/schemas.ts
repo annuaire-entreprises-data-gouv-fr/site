@@ -84,3 +84,7 @@ export const getAgentEffectifsMensuelsProtectedSchema = z.object({
   useCase: z.enum(UseCase),
   natureEffectif: z.enum(TNatureEffectif),
 });
+
+export const getSubventionsAssociationSchema = z.object({
+  slug: z.string().min(1, "Slug is required"),
+});

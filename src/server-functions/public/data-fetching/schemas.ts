@@ -19,7 +19,3 @@ export const verifyTvaSchema = z.object({
 export const validateEORISchema = z.object({
   siret: z.string().min(1, "Siret is required"),
 });
-
-export const getSubventionsAssociationSchema = z.object({
-  slug: z.string().min(1, "Slug is required"),
-});

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "674768b1d233cab436477906",
+    "details_url": "https://updown.io/downtimes/674768b1d233cab436477906",
+    "error": "SSL connect error",
+    "started_at": "2024-11-27T18:40:09Z",
+    "ended_at": "2024-11-27T18:50:02Z",
+    "duration": 593,
+    "partial": false
+  }
+]

@@ -35,6 +35,7 @@ describe("Simple search with searchTerms", () => {
     "aga",
     "302474648",
     "533744991",
+    "784410607",
   ].forEach((s) => itShouldMatchSnapshot(s));
 });
 
