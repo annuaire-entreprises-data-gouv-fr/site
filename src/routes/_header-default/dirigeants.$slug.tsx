@@ -6,6 +6,7 @@ import DPOSection from "#/components/screens/dirigeants.$slug/sections/entrepris
 import DirigeantsEntrepriseSection from "#/components/screens/dirigeants.$slug/sections/entreprise/entreprise-section";
 import DirigeantSummary from "#/components/screens/dirigeants.$slug/sections/entreprise/summary";
 import ResponsablesServicePublicSection from "#/components/screens/dirigeants.$slug/sections/service-public";
+import { NotFound } from "#/components/screens/not-found";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
@@ -64,6 +65,7 @@ export const Route = createFileRoute("/_header-default/dirigeants/$slug")({
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {

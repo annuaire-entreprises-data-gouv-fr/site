@@ -17,6 +17,7 @@ import { NonDiffusibleStrictSection } from "#/components/non-diffusible-section"
 import AvocatsSection from "#/components/screens/entreprise.$slug/avocats-section";
 import { UniteLegaleImmatriculationSection } from "#/components/screens/entreprise.$slug/immatriculation-section";
 import UniteLegaleSummarySection from "#/components/screens/entreprise.$slug/summary-section";
+import { NotFound } from "#/components/screens/not-found";
 import ServicePublicSection from "#/components/service-public-section";
 import StructuredDataBreadcrumb from "#/components/structured-data/breadcrumb";
 import Title from "#/components/title-section";
@@ -141,6 +142,7 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {

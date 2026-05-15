@@ -6,7 +6,7 @@ describe("Espace agent", {
   it("Page d'accueil", () => {
     cy.clearCookies();
     cy.visit("/");
-    cy.contains("Espace agent")
+    cy.contains("Espace agent public")
       // The element is present twice (mobile and desktop menu).
       // The mobile one is hidden but appears first in the DOM,
       // so we need to force the click

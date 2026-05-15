@@ -21,6 +21,7 @@ import { CertificationSocieteMission } from "#/components/labels-and-certificate
 import { OpqibiSection } from "#/components/protected-certificates/opqibi-section";
 import { QualibatSection } from "#/components/protected-certificates/qualibat-section";
 import { QualifelecSection } from "#/components/protected-certificates/qualifelec-section";
+import { NotFound } from "#/components/screens/not-found";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
@@ -102,6 +103,7 @@ export const Route = createFileRoute(
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {

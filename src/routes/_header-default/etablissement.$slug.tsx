@@ -12,6 +12,7 @@ import { natureEffectifValues } from "#/components/etablissement-effectifs-mensu
 import EtablissementSection from "#/components/etablissement-section";
 import MatomoEventFromRedirected from "#/components/matomo-event/search-redirected";
 import { NonDiffusibleStrictSection } from "#/components/non-diffusible-section";
+import { NotFound } from "#/components/screens/not-found";
 import ServicePublicSection from "#/components/service-public-section";
 import { TitleEtablissementWithDenomination } from "#/components/title-section/etablissement";
 import { useAuth } from "#/contexts/auth.context";
@@ -128,6 +129,7 @@ export const Route = createFileRoute("/_header-default/etablissement/$slug")({
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {

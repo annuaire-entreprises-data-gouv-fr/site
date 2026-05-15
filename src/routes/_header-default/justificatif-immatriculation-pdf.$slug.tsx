@@ -3,6 +3,7 @@ import routes from "#/clients/routes";
 import { INPI } from "#/components/administrations";
 import { Link } from "#/components/Link";
 import { InpiPDFDownloader } from "#/components/screens/justificatif-immatriculation-pdf.$slug/inpi-pdf-downloader";
+import { NotFound } from "#/components/screens/not-found";
 import { Section } from "#/components/section";
 import { TwoColumnTable } from "#/components/table/simple";
 import { Info } from "#/components-ui/alerts";
@@ -36,6 +37,7 @@ export const Route = createFileRoute(
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 const SHOULD_DIRECT_DOWNLOAD = true;

@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { INPI, INSEE } from "#/components/administrations";
 import { Link } from "#/components/Link";
 import MatomoEvent from "#/components/matomo-event";
+import { NotFound } from "#/components/screens/not-found";
 import {
   formatIntFr,
   formatSiret,
@@ -30,6 +31,7 @@ export const Route = createFileRoute(
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
+  notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
 function RouteComponent() {
