@@ -51,11 +51,17 @@ import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
 
 const loadEntreprisePage = createServerFn()
-  .inputValidator(z.object({ slug: z.string(), isRedirected: z.boolean() }))
-  .handler(async ({ data: { slug, isRedirected } }) => {
+  .inputValidator(
+    z.object({
+      slug: z.string(),
+      isRedirected: z.boolean(),
+      page: z.number().default(1),
+    })
+  )
+  .handler(async ({ data: { slug, isRedirected, page } }) => {
     const [uniteLegale, sourcesLastModified] = await Promise.all([
       getUniteLegaleFromSlugFn({
-        data: { slug },
+        data: { slug, page },
       }),
       getRechercheEntrepriseSourcesLastModified(),
     ]);
@@ -70,6 +76,7 @@ const loadEntreprisePage = createServerFn()
         params: { slug: uniteLegale.chemin },
         search: {
           redirected: isRedirected ? 1 : undefined,
+          page,
         },
         statusCode: 308,
       });
@@ -90,10 +97,11 @@ const loadEntreprisePage = createServerFn()
 export const Route = createFileRoute("/_header-default/entreprise/$slug")({
   validateSearch: z.object({
     redirected: z.literal(1).optional().catch(undefined),
+    page: z.number().min(1).optional().default(1).catch(1),
     "avocats-page": z.number().min(1).optional().default(1).catch(1),
   }),
   search: {
-    middlewares: [stripSearchParams({ "avocats-page": 1 })],
+    middlewares: [stripSearchParams({ page: 1, "avocats-page": 1 })],
   },
   beforeLoad: async ({ params }) => {
     const slug = params.slug;
@@ -109,10 +117,17 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
       throw notFound();
     }
   },
-  loaderDeps: ({ search }) => ({ redirected: search.redirected }),
+  loaderDeps: ({ search }) => ({
+    redirected: search.redirected,
+    page: search.page,
+  }),
   loader: async ({ params, deps }) =>
     await loadEntreprisePage({
-      data: { slug: params.slug, isRedirected: deps.redirected === 1 },
+      data: {
+        slug: params.slug,
+        isRedirected: deps.redirected === 1,
+        page: deps.page,
+      },
     }),
   head: ({ loaderData }) => {
     if (!loaderData) {

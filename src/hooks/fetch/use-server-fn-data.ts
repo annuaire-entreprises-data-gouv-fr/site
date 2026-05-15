@@ -33,6 +33,8 @@ export function useServerFnData<Input, Data>(
   const { data, isPending, isLoading, isError, error } = useQuery({
     queryKey: ["server-function", action.url, input],
     queryFn: () => execute({ data: input }),
+    retry: false,
+    refetchOnWindowFocus: false,
     enabled: hasRights({ user }, requiredRight),
   });
 
