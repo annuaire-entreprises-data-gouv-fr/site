@@ -16,9 +16,9 @@ const plugins =
           css: ["frontend/style/dsfr.min.css"],
           content: ["./src/**/*.{js,jsx,ts,tsx}"],
           safelist: {
-            standard: [/html/, /body/, /anchor-link/],
+            standard: [/html/, /body/, /anchor-link/, /^_/],
             deep: [],
-            greedy: [/maplibregl/],
+            greedy: [/maplibregl/, /^_/],
           },
           fontFace: true,
         }),
