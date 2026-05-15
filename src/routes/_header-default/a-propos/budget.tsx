@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "#/components/Link";
 import { FullTable } from "#/components/table/full";
 import TextWrapper from "#/components-ui/text-wrapper";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../-error";
 
 export const Route = createFileRoute("/_header-default/a-propos/budget")({

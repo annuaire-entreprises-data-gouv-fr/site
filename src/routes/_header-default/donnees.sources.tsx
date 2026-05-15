@@ -8,7 +8,7 @@ import { Icon } from "#/components-ui/icon/wrapper";
 import { Tag } from "#/components-ui/tag";
 import { administrationsMetaData, allAPI } from "#/models/administrations";
 import constants from "#/models/constants";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/donnees/sources")({

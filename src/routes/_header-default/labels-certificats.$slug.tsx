@@ -30,12 +30,12 @@ import {
   hasRights,
 } from "#/models/authentication/user/rights";
 import { getCertificationsFromSlug } from "#/models/certifications";
-import { meta } from "#/seo";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 const loadLabelsCertificatsPage = createServerFn()

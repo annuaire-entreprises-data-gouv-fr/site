@@ -5,8 +5,8 @@ import ButtonLink from "#/components-ui/button";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { getFaqArticle } from "#/models/article/faq";
 import { Exception } from "#/models/exceptions";
-import { meta } from "#/seo";
 import { logWarningInSentry } from "#/utils/sentry";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/faq/$slug")({

@@ -8,6 +8,7 @@ import {
   getEtablissementListeCount,
 } from "#/models/sirene-fr";
 import { logErrorInSentry } from "#/utils/sentry";
+import { defaultHeadersMiddleware } from "./-middlewares";
 
 class APIResponseError extends Error {
   constructor(
@@ -21,6 +22,11 @@ class APIResponseError extends Error {
 
 export const Route = createFileRoute("/api/export-sirene")({
   server: {
+    middleware: [
+      defaultHeadersMiddleware({
+        "X-Accel-Buffering": "no",
+      }),
+    ],
     handlers: {
       POST: async ({ request }) => {
         try {

@@ -3,9 +3,15 @@ import constants from "#/models/constants";
 import { Exception } from "#/models/exceptions";
 import { isSiren, isSiret } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
+import { defaultHeadersMiddleware } from "../../-middlewares";
 
 export const Route = createFileRoute("/api/share/button/$slug")({
   server: {
+    middleware: [
+      defaultHeadersMiddleware({
+        "Access-Control-Allow-Origin": "*",
+      }),
+    ],
     handlers: {
       GET: async ({ request, params }) => {
         const { slug } = params;

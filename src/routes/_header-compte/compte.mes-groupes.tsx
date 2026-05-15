@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import AgentNavigation from "#/components/espace-agent-components/agent-navigation";
 import { GroupManagement } from "#/components/espace-agent-components/group-management";
-import { meta } from "#/seo";
 import {
   getAgentGroupsFn,
   getAgentRolesFn,
 } from "#/server-functions/agent/group-management";
 import { agentAuthGuardFn } from "#/server-functions/public/auth";
 import { pluralize } from "#/utils/helpers";
+import { meta } from "#/utils/seo";
 import { HeaderCompteError } from "./-error";
 
 export const Route = createFileRoute("/_header-compte/compte/mes-groupes")({

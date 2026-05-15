@@ -4,9 +4,9 @@ import { CardHabilitation } from "#/components/espace-agent-components/card-habi
 import { HabilitationsTable } from "#/components/espace-agent-components/habilitations-table";
 import { useAuth } from "#/contexts/auth.context";
 import { getAgentFullName } from "#/models/authentication/user/helpers";
-import { meta } from "#/seo";
 import { getAgentGroupsFn } from "#/server-functions/agent/group-management";
 import { agentAuthGuardFn } from "#/server-functions/public/auth";
+import { meta } from "#/utils/seo";
 import { HeaderCompteError } from "./-error";
 
 export const Route = createFileRoute("/_header-compte/compte/accueil")({

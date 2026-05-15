@@ -2,7 +2,7 @@ import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 import HiddenH1 from "#/components/a11y-components/hidden-h1";
 import { HeaderWithAdvancedSearch } from "#/components/header/header-advanced-search";
 import SearchResultsMap from "#/components/search-results/map";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderSearchError } from "../-error";
 import {
   beforeLoadCheckTerme,

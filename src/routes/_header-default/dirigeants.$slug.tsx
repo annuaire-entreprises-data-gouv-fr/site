@@ -22,12 +22,12 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from "#/models/core/types";
-import { meta } from "#/seo";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/dirigeants/$slug")({

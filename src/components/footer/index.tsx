@@ -4,7 +4,7 @@ import Logo from "#/components-ui/logo";
 import { PrintNever } from "#/components-ui/print-visibility";
 import { administrationsMetaData } from "#/models/administrations";
 import { getAllLandingPages } from "#/models/landing-pages";
-import { getBaseUrl } from "#/utils/server-side-helper/get-base-url";
+import { getBaseUrl } from "#/utils/get-base-url";
 import styles from "./style.module.css";
 
 const Footer = () => (

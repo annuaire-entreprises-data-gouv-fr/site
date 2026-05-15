@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "#/components/Link";
 import { ConnexionSubLayout } from "#/components-ui/connexion-layout";
 import logoutPicture from "#/components-ui/illustrations/logout";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderConnexionError } from "./-error";
 
 export const Route = createFileRoute("/_header-connexion/connexion/au-revoir")({

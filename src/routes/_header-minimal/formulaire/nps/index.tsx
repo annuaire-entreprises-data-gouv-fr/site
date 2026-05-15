@@ -10,8 +10,8 @@ import {
 } from "#/models/authentication/user/helpers";
 import { isLoggedIn } from "#/models/authentication/user/rights";
 import constants from "#/models/constants";
-import { meta } from "#/seo";
 import { randomId } from "#/utils/helpers";
+import { meta } from "#/utils/seo";
 import styles from "./style.module.css";
 
 export const Route = createFileRoute("/_header-minimal/formulaire/nps/")({

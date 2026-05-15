@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import ExportCsv from "#/components/screens/export-sirene/export-csv";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/export-sirene")({

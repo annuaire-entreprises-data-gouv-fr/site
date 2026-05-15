@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import ButtonLink from "#/components-ui/button";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 
 export const Route = createFileRoute("/_header-minimal/formulaire/merci")({
   head: () => {

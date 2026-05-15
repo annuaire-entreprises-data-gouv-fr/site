@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ProtectedSirenDottxtRouteImport } from './routes/protected-siren[.]txt'
+import { Route as HealthRouteImport } from './routes/health'
 import { Route as HeaderSearchRouteRouteImport } from './routes/_header-search/route'
 import { Route as HeaderPublicRouteRouteImport } from './routes/_header-public/route'
 import { Route as HeaderMinimalRouteRouteImport } from './routes/_header-minimal/route'
@@ -97,6 +98,11 @@ const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
 const ProtectedSirenDottxtRoute = ProtectedSirenDottxtRouteImport.update({
   id: '/protected-siren.txt',
   path: '/protected-siren.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HealthRoute = HealthRouteImport.update({
+  id: '/health',
+  path: '/health',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HeaderSearchRouteRoute = HeaderSearchRouteRouteImport.update({
@@ -533,6 +539,7 @@ const ApiDownloadEspaceAgentDocumentsSlugRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof HeaderHomeIndexRoute
+  '/health': typeof HealthRoute
   '/protected-siren.txt': typeof ProtectedSirenDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
@@ -606,6 +613,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof HeaderHomeIndexRoute
+  '/health': typeof HealthRoute
   '/protected-siren.txt': typeof ProtectedSirenDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
@@ -687,6 +695,7 @@ export interface FileRoutesById {
   '/_header-minimal': typeof HeaderMinimalRouteRouteWithChildren
   '/_header-public': typeof HeaderPublicRouteRouteWithChildren
   '/_header-search': typeof HeaderSearchRouteRouteWithChildren
+  '/health': typeof HealthRoute
   '/protected-siren.txt': typeof ProtectedSirenDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/_header-default/accessibilite': typeof HeaderDefaultAccessibiliteRoute
@@ -763,6 +772,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/health'
     | '/protected-siren.txt'
     | '/robots.txt'
     | '/accessibilite'
@@ -836,6 +846,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/health'
     | '/protected-siren.txt'
     | '/robots.txt'
     | '/accessibilite'
@@ -916,6 +927,7 @@ export interface FileRouteTypes {
     | '/_header-minimal'
     | '/_header-public'
     | '/_header-search'
+    | '/health'
     | '/protected-siren.txt'
     | '/robots.txt'
     | '/_header-default/accessibilite'
@@ -998,6 +1010,7 @@ export interface RootRouteChildren {
   HeaderMinimalRouteRoute: typeof HeaderMinimalRouteRouteWithChildren
   HeaderPublicRouteRoute: typeof HeaderPublicRouteRouteWithChildren
   HeaderSearchRouteRoute: typeof HeaderSearchRouteRouteWithChildren
+  HealthRoute: typeof HealthRoute
   ProtectedSirenDottxtRoute: typeof ProtectedSirenDottxtRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   ApiExportSireneRoute: typeof ApiExportSireneRoute
@@ -1033,6 +1046,13 @@ declare module '@tanstack/react-router' {
       path: '/protected-siren.txt'
       fullPath: '/protected-siren.txt'
       preLoaderRoute: typeof ProtectedSirenDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/health': {
+      id: '/health'
+      path: '/health'
+      fullPath: '/health'
+      preLoaderRoute: typeof HealthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_header-search': {
@@ -1779,6 +1799,7 @@ const rootRouteChildren: RootRouteChildren = {
   HeaderMinimalRouteRoute: HeaderMinimalRouteRouteWithChildren,
   HeaderPublicRouteRoute: HeaderPublicRouteRouteWithChildren,
   HeaderSearchRouteRoute: HeaderSearchRouteRouteWithChildren,
+  HealthRoute: HealthRoute,
   ProtectedSirenDottxtRoute: ProtectedSirenDottxtRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   ApiExportSireneRoute: ApiExportSireneRoute,
@@ -1807,11 +1828,10 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
+import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }

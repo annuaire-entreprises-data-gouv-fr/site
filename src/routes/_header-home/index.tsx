@@ -3,7 +3,7 @@ import Favourites from "#/components/favourites";
 import { Link } from "#/components/Link";
 import SearchBar from "#/components/search-bar";
 import { LogoAnnuaireWithEasterEgg } from "#/components-ui/logo-annuaire/logo-with-easter-egg";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderHomeError } from "./-error";
 
 export const Route = createFileRoute("/_header-home/")({

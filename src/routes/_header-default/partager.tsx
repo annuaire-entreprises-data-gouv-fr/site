@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "#/components/Link";
 import { Icon } from "#/components-ui/icon/wrapper";
 import TextWrapper from "#/components-ui/text-wrapper";
-import { meta } from "#/seo";
-import { getBaseUrl } from "#/utils/server-side-helper/get-base-url";
+import { getBaseUrl } from "#/utils/get-base-url";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/partager")({

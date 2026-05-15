@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import AdministrationDescription from "#/components/administrations/administration-description";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { administrationsMetaData } from "#/models/administrations";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/administration/")({

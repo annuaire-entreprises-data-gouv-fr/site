@@ -6,7 +6,7 @@ import { NotFound } from "#/components/screens/not-found";
 import SearchBar from "#/components/search-bar";
 import { diamond } from "#/components-ui/logo-annuaire/logo-annuaire";
 import { getLandingPage } from "#/models/landing-pages";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderHomeError } from "../-error";
 import styles from "./style.module.css";
 

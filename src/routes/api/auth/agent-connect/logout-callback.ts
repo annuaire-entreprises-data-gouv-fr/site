@@ -1,18 +1,20 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { deleteCookie } from "@tanstack/react-start/server";
 import { AgentConnectionFailedException } from "#/models/authentication/authentication-exceptions";
+import { getBaseUrl } from "#/utils/get-base-url";
 import logErrorInSentry from "#/utils/sentry";
-import { getBaseUrl } from "#/utils/server-side-helper/get-base-url";
 import {
   cleanAgentSession,
   cleanPathFrom,
   getCurrentSession,
   getPathFrom,
 } from "#/utils/session";
+import { defaultHeadersMiddleware } from "../../-middlewares";
 
 export const Route = createFileRoute("/api/auth/agent-connect/logout-callback")(
   {
     server: {
+      middleware: [defaultHeadersMiddleware()],
       handlers: {
         GET: async () => {
           const session = await getCurrentSession();

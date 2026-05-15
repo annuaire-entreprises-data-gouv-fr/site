@@ -3,7 +3,7 @@ import { Link } from "#/components/Link";
 import ChangelogWithFilters from "#/components/screens/historique-des-modifications";
 import FAQLink from "#/components-ui/faq-link";
 import { useAuth } from "#/contexts/auth.context";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute(

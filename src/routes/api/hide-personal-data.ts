@@ -12,6 +12,7 @@ import logErrorInSentry from "#/utils/sentry";
 import getSession from "#/utils/server-side-helper/get-session";
 import { getHidePersonalDataRequestFCSession } from "#/utils/session";
 import isUserAgentABot from "#/utils/user-agent";
+import { defaultHeadersMiddleware } from "./-middlewares";
 
 class HidePersonalDataFailedException extends Exception {
   constructor(args: { cause?: unknown }) {
@@ -24,6 +25,11 @@ class HidePersonalDataFailedException extends Exception {
 
 export const Route = createFileRoute("/api/hide-personal-data")({
   server: {
+    middleware: [
+      defaultHeadersMiddleware({
+        "Access-Control-Allow-Methods": "POST,OPTIONS",
+      }),
+    ],
     handlers: {
       OPTIONS: async () => new Response(null, { status: 204 }),
       POST: async ({ request }) => {
