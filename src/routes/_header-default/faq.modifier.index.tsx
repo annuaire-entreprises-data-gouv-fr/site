@@ -12,6 +12,7 @@ export const Route = createFileRoute("/_header-default/faq/modifier/")({
       meta: meta({
         title:
           "FAQ : modifier une information présente sur l’Annuaire des Entreprises",
+        robots: "index, follow",
         alternates: {
           canonical,
         },

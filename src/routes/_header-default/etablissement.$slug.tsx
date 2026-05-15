@@ -98,15 +98,7 @@ export const Route = createFileRoute("/_header-default/etablissement/$slug")({
     }),
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return {
-        meta: meta({
-          title: "Page non trouvée",
-          robots: {
-            follow: false,
-            index: false,
-          },
-        }),
-      };
+      return meta.notFound();
     }
 
     const { etablissement, uniteLegale } = loaderData;
@@ -120,8 +112,8 @@ export const Route = createFileRoute("/_header-default/etablissement/$slug")({
         title,
         description: etablissementPageDescription(etablissement, uniteLegale),
         robots: shouldNotIndex(uniteLegale)
-          ? { follow: false, index: false }
-          : { follow: true, index: true },
+          ? "noindex, nofollow"
+          : "index, follow",
         alternates: {
           canonical,
         },

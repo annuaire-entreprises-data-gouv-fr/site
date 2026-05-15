@@ -21,9 +21,7 @@ export const Route = createFileRoute("/_header-minimal/formulaire/nps/")({
     return {
       meta: meta({
         title: "Quel est votre avis sur l’Annuaire des Entreprises ?",
-        robots: {
-          follow: false,
-        },
+        robots: "noindex, nofollow",
         alternates: {
           canonical,
         },

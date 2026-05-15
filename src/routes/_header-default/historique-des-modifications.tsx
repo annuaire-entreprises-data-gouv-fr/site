@@ -15,10 +15,7 @@ export const Route = createFileRoute(
     return {
       meta: meta({
         title: "Historique des changements",
-        robots: {
-          follow: true,
-          index: false,
-        },
+        robots: "noindex, follow",
         alternates: {
           canonical,
         },

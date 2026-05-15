@@ -28,9 +28,7 @@ export const Route = createFileRoute("/_header-public/a-propos/stats")({
     return {
       meta: meta({
         title: "Statistiques d’utilisation de l’Annuaire des Entreprises",
-        robots: {
-          follow: false,
-        },
+        robots: "noindex, follow",
         alternates: {
           canonical,
         },

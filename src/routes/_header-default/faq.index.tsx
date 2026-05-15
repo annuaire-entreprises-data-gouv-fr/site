@@ -72,6 +72,7 @@ export const Route = createFileRoute("/_header-default/faq/")({
     return {
       meta: meta({
         title: "FAQ de l’Annuaire des Entreprises",
+        robots: "index, follow",
         alternates: {
           canonical,
         },

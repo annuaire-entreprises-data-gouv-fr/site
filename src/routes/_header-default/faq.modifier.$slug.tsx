@@ -20,17 +20,14 @@ export const Route = createFileRoute("/_header-default/faq/modifier/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return {
-        meta: meta({
-          title: "Page non trouvée",
-        }),
-      };
+      return meta.notFound();
     }
     const { dataToModify } = loaderData;
     const canonical = `https://annuaire-entreprises.data.gouv.fr/faq/modifier/${dataToModify.slug}`;
     return {
       meta: meta({
         title: dataToModify.label,
+        robots: "index, follow",
       }),
       links: [
         {

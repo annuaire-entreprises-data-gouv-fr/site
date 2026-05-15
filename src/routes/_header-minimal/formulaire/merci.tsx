@@ -9,9 +9,7 @@ export const Route = createFileRoute("/_header-minimal/formulaire/merci")({
     return {
       meta: meta({
         title: "Merci beaucoup pour votre retour",
-        robots: {
-          follow: false,
-        },
+        robots: "noindex, nofollow",
         alternates: {
           canonical,
         },

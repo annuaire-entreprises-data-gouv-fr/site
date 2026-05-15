@@ -35,14 +35,7 @@ export const Route = createFileRoute(
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return {
-        meta: meta({
-          title: "Page non trouvée",
-          robots: {
-            follow: false,
-          },
-        }),
-      };
+      return meta.notFound();
     }
 
     const { uniteLegale } = loaderData;
@@ -51,10 +44,7 @@ export const Route = createFileRoute(
       meta: meta({
         title: `Données financières - ${uniteLegalePageTitle(uniteLegale)}`,
         description: uniteLegalePageDescription(uniteLegale),
-        robots: {
-          follow: true,
-          index: false,
-        },
+        robots: "noindex",
         alternates: {
           canonical,
         },

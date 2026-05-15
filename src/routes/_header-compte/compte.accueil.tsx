@@ -16,9 +16,7 @@ export const Route = createFileRoute("/_header-compte/compte/accueil")({
     return {
       meta: meta({
         title: "Votre compte utilisateur de l’Annuaire des Entreprises",
-        robots: {
-          follow: false,
-        },
+        robots: "noindex, nofollow",
         alternates: {
           canonical,
         },

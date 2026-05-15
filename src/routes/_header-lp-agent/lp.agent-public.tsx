@@ -17,6 +17,7 @@ export const Route = createFileRoute("/_header-lp-agent/lp/agent-public")({
         title: "Espace agent | L’Annuaire des Entreprises",
         description:
           "Les informations des entreprises sont toutes dans l’espace agent !",
+        robots: "index, follow",
         alternates: {
           canonical,
         },

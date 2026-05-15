@@ -21,10 +21,7 @@ export const Route = createFileRoute(
     return {
       meta: meta({
         title: "Télécharger le justificatif d’immatriculation",
-        robots: {
-          follow: false,
-          index: false,
-        },
+        robots: "noindex, nofollow",
         alternates: {
           canonical,
         },

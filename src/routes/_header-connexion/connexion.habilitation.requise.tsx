@@ -16,9 +16,7 @@ export const Route = createFileRoute(
     return {
       meta: meta({
         title: "Vous n’êtes pas autorisé(e) à accéder à l’espace agent",
-        robots: {
-          follow: false,
-        },
+        robots: "noindex, nofollow",
         alternates: {
           canonical,
         },

@@ -23,15 +23,7 @@ export const Route = createFileRoute("/_header-home/lp/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return {
-        meta: meta({
-          title: "Page non trouvée",
-          description: "La page que vous cherchez n'existe pas.",
-          robots: {
-            follow: false,
-          },
-        }),
-      };
+      return meta.notFound();
     }
     const { landingPage } = loaderData;
 
@@ -40,6 +32,7 @@ export const Route = createFileRoute("/_header-home/lp/$slug")({
       meta: meta({
         title: landingPage.seo.title || landingPage.title,
         description: landingPage.seo.description,
+        robots: "index, follow",
         alternates: {
           canonical,
         },

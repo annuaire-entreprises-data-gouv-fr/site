@@ -12,10 +12,7 @@ export const Route = createFileRoute("/_header-default/a-propos/budget")({
     return {
       meta: meta({
         title: "Budget de l’Annuaire des Entreprises",
-        robots: {
-          follow: true,
-          index: false,
-        },
+        robots: "noindex, follow",
         alternates: {
           canonical,
         },

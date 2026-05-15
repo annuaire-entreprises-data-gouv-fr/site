@@ -10,6 +10,7 @@ export const Route = createFileRoute("/_header-default/export-sirene")({
       meta: meta({
         title:
           "Générer une liste CSV d‘entreprises | L’Annuaire des Entreprises",
+        robots: "index, follow",
         alternates: {
           canonical,
         },

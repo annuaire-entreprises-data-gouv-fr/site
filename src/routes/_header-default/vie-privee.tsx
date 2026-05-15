@@ -11,10 +11,7 @@ export const Route = createFileRoute("/_header-default/vie-privee")({
     return {
       meta: meta({
         title: "Politique de confidentialité",
-        robots: {
-          follow: false,
-          index: false,
-        },
+        robots: "noindex, nofollow",
         alternates: {
           canonical,
         },

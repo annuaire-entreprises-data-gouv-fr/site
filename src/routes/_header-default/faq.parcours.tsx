@@ -10,6 +10,7 @@ export const Route = createFileRoute("/_header-default/faq/parcours")({
     return {
       meta: meta({
         title: "FAQ interactive de l’Annuaire des Entreprises",
+        robots: "index, follow",
         alternates: {
           canonical,
         },

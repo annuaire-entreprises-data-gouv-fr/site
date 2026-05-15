@@ -16,6 +16,7 @@ export const Route = createFileRoute("/_header-home/")({
           "L’Annuaire des Entreprises françaises : les informations légales officielles de l’administration",
         description:
           "L’administration permet aux particuliers, entrepreneurs et agents publics de vérifier les informations informations légales des entreprises, associations et services publics en France.",
+        robots: "index, follow",
         alternates: {
           canonical,
         },

@@ -22,10 +22,7 @@ interface Metadata {
     siteName?: string;
     url?: string;
   };
-  robots?: {
-    follow?: boolean;
-    index?: boolean;
-  };
+  robots?: string;
   title?: string;
 }
 
@@ -66,7 +63,7 @@ export function meta(
     obj.openGraph.url ??= obj.alternates.canonical;
   }
 
-  obj.robots ??= { follow: true, index: true };
+  obj.robots ??= "follow";
 
   return [
     {
@@ -85,7 +82,7 @@ export function meta(
     },
     {
       name: "robots",
-      content: `${obj.robots?.index ? "index" : "noindex"}, ${obj.robots?.follow ? "follow" : "nofollow"}`,
+      content: obj.robots,
     },
     {
       name: "og:title",
@@ -127,5 +124,28 @@ export function meta(
       name: "og:image:type",
       content: "image/jpeg",
     },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: obj.title },
+    { name: "twitter:description", content: obj.description },
+    { name: "twitter:image", content: obj.openGraph?.images?.[0]?.url ?? "" },
+    {
+      name: "twitter:image:alt",
+      content: obj.openGraph?.images?.[0]?.alt ?? "",
+    },
+    {
+      name: "twitter:image:width",
+      content: obj.openGraph?.images?.[0]?.width.toString() ?? "",
+    },
+    {
+      name: "twitter:image:height",
+      content: obj.openGraph?.images?.[0]?.height.toString() ?? "",
+    },
   ];
 }
+
+meta.notFound = () => ({
+  meta: meta({
+    title: "Page non trouvée",
+    robots: "noindex, nofollow",
+  }),
+});

@@ -14,9 +14,7 @@ export const Route = createFileRoute("/_header-default/accessibilite")({
         alternates: {
           canonical,
         },
-        robots: {
-          follow: false,
-        },
+        robots: "noindex, nofollow",
       }),
       links: [
         {
