@@ -1,21 +1,20 @@
 import { createMiddleware } from "@tanstack/react-start";
-import { agentRateLimiter } from "#/clients/authentication/rate-limiter";
+import { agentRateLimiter } from "#/clients/authentication/rate-limiter/index.server";
 import { HttpBadRequestError } from "#/clients/exceptions";
 import { UseCase } from "#/models/use-cases";
 import getSession from "#/utils/server-side-helper/get-session";
 
-export async function verifyAgentRateLimit(sessionEmail?: string | null) {
-  if (!sessionEmail) {
-    throw new HttpBadRequestError("User email not found");
-  }
-
-  await agentRateLimiter.verify(sessionEmail);
-}
-
 export const withRateLimiting = createMiddleware({ type: "function" }).server(
   async ({ next }) => {
     const session = await getSession();
-    await verifyAgentRateLimit(session?.user?.email ?? null);
+    const sessionEmail = session?.user?.email ?? null;
+
+    if (!sessionEmail) {
+      throw new HttpBadRequestError("User email not found");
+    }
+
+    await agentRateLimiter.verify(sessionEmail);
+
     return await next();
   }
 );

@@ -1,6 +1,6 @@
 import type { Readable } from "node:stream";
 import routes from "#/clients/routes";
-import { exportCsvClientPost } from "#/clients/sirene-insee";
+import { exportCsvClientPost } from "#/clients/sirene-insee/index.server";
 import constants from "#/models/constants";
 import { SireneQueryBuilder } from "./build-query";
 import type { ExportCsvInput } from "./input-validation";

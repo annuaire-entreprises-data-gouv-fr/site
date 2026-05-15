@@ -7,7 +7,7 @@ import {
 } from "#/models/core/types";
 import { formatDateYear, type Siren } from "#/utils/helpers";
 import { etatFromEtatAdministratifInsee } from "#/utils/helpers/insee-variables";
-import { clientAPIProxy } from "../client";
+import { clientAPIProxy } from "../client.server";
 import type { IIGResponse } from "./types";
 
 /**

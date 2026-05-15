@@ -8,15 +8,15 @@ import {
 import {
   clientAPIAssociationPrivate,
   clientAPIAssociationPublic,
-} from "./api-association";
-import { clientAPIInclusion } from "./api-inclusion";
+} from "./api-association/index.server";
+import { clientAPIInclusion } from "./api-inclusion/index.server";
 import { clientEORI } from "./api-proxy/eori";
 import { clientUniteLegaleIG } from "./api-proxy/greffe";
 import { clientTVA } from "./api-proxy/tva";
 import { clientDocuments } from "./api-rne/documents";
 import { clientBodacc } from "./open-data-soft/clients/bodacc";
 import { clientJOAFE } from "./open-data-soft/clients/journal-officiel-associations";
-import clientSearchRechercheEntreprise from "./recherche-entreprise";
+import clientSearchRechercheEntreprise from "./recherche-entreprise/index.server";
 import { clientUniteLegaleRechercheEntreprise } from "./recherche-entreprise/siren";
 import { clientUniteLegaleInsee } from "./sirene-insee/siren";
 

@@ -4,7 +4,7 @@ import { ProConnect2FANeeded } from "#/clients/authentication/pro-connect/except
 import {
   proConnectAuthenticate,
   proConnectAuthorizeUrl,
-} from "#/clients/authentication/pro-connect/strategy";
+} from "#/clients/authentication/pro-connect/strategy.server";
 import { AgentConnected } from "#/models/authentication/agent/agent-connected";
 import {
   AgentConnectionFailedException,
@@ -20,7 +20,7 @@ import {
   getCurrentSession,
   getPathFrom,
   setAgentSession,
-} from "#/utils/session";
+} from "#/utils/session/index.server";
 import { defaultHeadersMiddleware } from "../../-middlewares";
 
 export const Route = createFileRoute("/api/auth/agent-connect/callback")({

@@ -1,4 +1,4 @@
-import { clientApiEntrepriseEffectifsMensuels } from "#/clients/api-entreprise/effectifs/mensuels";
+import { clientApiEntrepriseEffectifsMensuels } from "#/clients/api-entreprise/effectifs/mensuels.server";
 import type { TNatureEffectif } from "#/clients/api-entreprise/effectifs/types";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {

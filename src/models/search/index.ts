@@ -1,5 +1,5 @@
 import { HttpBadRequestError, HttpNotFound } from "#/clients/exceptions";
-import clientSearchRechercheEntreprise from "#/clients/recherche-entreprise";
+import clientSearchRechercheEntreprise from "#/clients/recherche-entreprise/index.server";
 import {
   anonymiseUniteLegale,
   ISTATUTDIFFUSION,

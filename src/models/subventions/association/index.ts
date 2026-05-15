@@ -1,4 +1,4 @@
-import { clientApiDataSubvention } from "#/clients/api-data-subvention";
+import { clientApiDataSubvention } from "#/clients/api-data-subvention/index.server";
 import { HttpNotFound } from "#/clients/exceptions";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import {

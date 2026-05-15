@@ -31,12 +31,12 @@ import {
   isAPINotResponding,
 } from "../api-not-responding";
 import { FetchRessourceException, Information } from "../exceptions";
-import { shouldUseInsee } from ".";
 import {
   anonymiseUniteLegale,
   estDiffusible,
   ISTATUTDIFFUSION,
 } from "./diffusion";
+import { shouldUseInsee } from "./index.server";
 import {
   createDefaultUniteLegale,
   type IUniteLegale,

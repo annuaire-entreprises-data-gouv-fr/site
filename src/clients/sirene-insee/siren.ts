@@ -25,7 +25,7 @@ import {
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
 } from "../../utils/helpers/insee-variables";
-import { inseeClientGet } from ".";
+import { inseeClientGet } from "./index.server";
 import {
   clientAllEtablissementsInsee,
   clientEtablissementInsee,

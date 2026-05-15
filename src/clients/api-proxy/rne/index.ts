@@ -12,7 +12,7 @@ import {
   formatRole,
   type Siren,
 } from "#/utils/helpers";
-import { clientAPIProxy } from "../client";
+import { clientAPIProxy } from "../client.server";
 import type {
   IRNEEtatCivilProxyResponse,
   IRNEObservationsFallbackProxyResponse,

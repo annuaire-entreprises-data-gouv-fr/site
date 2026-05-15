@@ -1,4 +1,4 @@
-import type { IAPIEntrepriseResponse } from "../client";
+import type { IAPIEntrepriseResponse } from "../client.server";
 
 export const TNatureEffectif = {
   assujettissement_oeth: "assujettissement_oeth",

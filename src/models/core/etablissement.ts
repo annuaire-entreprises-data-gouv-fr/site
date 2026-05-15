@@ -26,12 +26,12 @@ import {
   isAPINotResponding,
 } from "../api-not-responding";
 import { FetchRessourceException, type IExceptionContext } from "../exceptions";
-import { shouldUseInsee } from ".";
 import {
   anonymiseEtablissement,
   estDiffusible,
   ISTATUTDIFFUSION,
 } from "./diffusion";
+import { shouldUseInsee } from "./index.server";
 import {
   createDefaultEtablissement,
   type IEtablissement,

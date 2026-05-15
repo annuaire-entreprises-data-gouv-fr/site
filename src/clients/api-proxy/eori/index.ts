@@ -2,7 +2,7 @@ import routes from "#/clients/routes";
 import constants from "#/models/constants";
 import type { IEORIValidation } from "#/models/eori-validation";
 import type { Siret } from "#/utils/helpers";
-import { clientAPIProxy } from "../client";
+import { clientAPIProxy } from "../client.server";
 
 /**
  * Call EORI to validate a French EORI number

@@ -1,4 +1,4 @@
-import { clientApiEntrepriseQualifelec } from "#/clients/api-entreprise/certificats/qualifelec";
+import { clientApiEntrepriseQualifelec } from "#/clients/api-entreprise/certificats/qualifelec.server";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import {
   APINotRespondingFactory,

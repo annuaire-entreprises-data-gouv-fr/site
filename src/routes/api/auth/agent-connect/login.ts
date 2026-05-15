@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { getRequestHeader } from "@tanstack/react-start/server";
-import { proConnectAuthorizeUrl } from "#/clients/authentication/pro-connect/strategy";
+import { proConnectAuthorizeUrl } from "#/clients/authentication/pro-connect/strategy.server";
 import { AgentConnectionFailedException } from "#/models/authentication/authentication-exceptions";
 import { getBaseUrl } from "#/utils/get-base-url";
 import { logFatalErrorInSentry } from "#/utils/sentry";
@@ -9,7 +9,7 @@ import {
   cleanFranceConnectSession,
   getCurrentSession,
   setPathFrom,
-} from "#/utils/session";
+} from "#/utils/session/index.server";
 import { defaultHeadersMiddleware } from "../../-middlewares";
 
 export const Route = createFileRoute("/api/auth/agent-connect/login")({

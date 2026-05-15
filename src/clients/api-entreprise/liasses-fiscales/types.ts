@@ -1,4 +1,4 @@
-import type { IAPIEntrepriseResponse } from "../client";
+import type { IAPIEntrepriseResponse } from "../client.server";
 
 interface Regime {
   code: string;
