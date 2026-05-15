@@ -6,7 +6,7 @@ describe("Fiche résumé DANONE", () => {
     ).should("be.visible");
     cy.contains("Informations légales de DANONE").should("be.visible");
     cy.contains(
-      "Son siège social est domicilié au 59 RUE LA FAYETTE 75009 PARIS."
+      "Son siège social est domicilié au 59-61 RUE LA FAYETTE 75009 PARIS."
     ).should("be.visible");
     // TVA number
     cy.contains("N° TVA Intracommunautaire").should("be.visible");
