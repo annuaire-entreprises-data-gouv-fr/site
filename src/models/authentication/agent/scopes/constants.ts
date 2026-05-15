@@ -10,7 +10,6 @@ export const defaultAgentScopes: IAgentScope[] = [
 export const allAgentScopes = [
   "rne",
   "nonDiffusible",
-  "conformite",
   "conformite_fiscale",
   "conformite_sociale",
   "beneficiaires",

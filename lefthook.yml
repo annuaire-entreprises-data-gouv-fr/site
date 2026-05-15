@@ -16,15 +16,15 @@ pre-commit:
         - "*.jsonc"
         - "*.css"
       stage_fixed: true
-    # - run: npm run test:unit
-    #   glob:
-    #     - "*.js"
-    #     - "*.jsx"
-    #     - "*.ts"
-    #     - "*.tsx"
-    #     - "*.json"
-    #     - "*.jsonc"
-    #     - "*.css"
+    - run: npm run test:unit
+      glob:
+        - "*.js"
+        - "*.jsx"
+        - "*.ts"
+        - "*.tsx"
+        - "*.json"
+        - "*.jsonc"
+        - "*.css"
     - run: npx tsc --noEmit
       glob:
         - "*.js"

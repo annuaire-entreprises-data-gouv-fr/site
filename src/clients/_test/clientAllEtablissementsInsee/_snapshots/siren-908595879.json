@@ -1,0 +1,50 @@
+{
+  "args": {
+    "siren": "908595879",
+    "page": 1
+  },
+  "result": {
+    "list": [
+      {
+        "siren": "908595879",
+        "siret": "90859587900010",
+        "oldSiret": "90859587900010",
+        "etatAdministratif": "en activité",
+        "statutDiffusion": "diffusible",
+        "estSiege": true,
+        "ancienSiege": false,
+        "enseigne": "",
+        "denomination": "",
+        "nic": "00010",
+        "dateCreation": "2022-01-01",
+        "dateDerniereMiseAJour": "2024-12-11T16:09:12.625Z",
+        "dateMiseAJourInsee": "2025-12-05T17:48:13.518",
+        "dateDebutActivite": "",
+        "dateFermeture": null,
+        "adresse": "10 RUE DE PENTHIEVRE, 75008 PARIS",
+        "adressePostale": "10 RUE DE PENTHIEVRE, 75008 PARIS",
+        "codePostal": "75008",
+        "commune": "PARIS",
+        "activitePrincipale": "70.21Z",
+        "libelleActivitePrincipale": "Conseil en relations publiques et communication",
+        "libelleActivitePrincipaleNaf25": "Activités de relations publiques et de communication (73.30Y)",
+        "trancheEffectif": "01",
+        "anneeTrancheEffectif": "2023",
+        "latitude": "",
+        "longitude": "",
+        "complements": {
+          "estEntrepreneurIndividuel": false,
+          "estPersonneMorale": true,
+          "idFiness": [],
+          "idBio": [],
+          "idOrganismeFormation": [],
+          "idRge": [],
+          "idUai": []
+        },
+        "listeIdcc": []
+      }
+    ],
+    "page": 1,
+    "count": 1
+  }
+}

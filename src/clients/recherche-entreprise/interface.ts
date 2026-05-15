@@ -1,4 +1,5 @@
 export interface ISearchResponse {
+  execution_time?: number;
   page: unknown;
   per_page: number;
   results: IResult[];
@@ -44,6 +45,7 @@ export interface IResult {
   etat_administratif: string;
   immatriculation: IImmatriculationResponse;
   matching_etablissements: IMatchingEtablissement[];
+  meta: unknown;
   nature_juridique: string;
   nom_complet: string;
   nom_raison_sociale: string;

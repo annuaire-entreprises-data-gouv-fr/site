@@ -1,0 +1,14 @@
+import { clientEducationNationale } from "#/clients/education-nationale";
+import type { Siren } from "#/utils/helpers";
+import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
+
+describe("clientEducationNationale", () => {
+  it("Should match snapshot", async () => {
+    await expectClientToMatchSnapshot({
+      client: clientEducationNationale,
+      args: ["198100125" as Siren, 1],
+      snapshotFile: "lycée-jean-jaurès-carmaux.json",
+      __dirname: import.meta.dirname,
+    });
+  });
+});

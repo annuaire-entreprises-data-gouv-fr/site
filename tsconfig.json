@@ -11,7 +11,7 @@
     },
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "resolveJsonModule": true,
-    "types": ["vite/client"],
+    "types": ["vite/client", "vitest/globals", "vitest/jsdom"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
