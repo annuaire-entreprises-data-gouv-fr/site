@@ -115,7 +115,9 @@
           "date_radiation": null,
           "duree_personne_morale": null,
           "date_fin_existence": null,
-          "nature_entreprise": ["Libérale non réglementée"],
+          "nature_entreprise": [
+            "Libérale non réglementée"
+          ],
           "date_cloture_exercice": null,
           "capital_social": null,
           "capital_variable": false,
@@ -284,7 +286,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2117-01-29",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 1500,
           "capital_variable": false,
@@ -453,7 +457,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2115-10-25",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3103",
           "capital_social": 1000,
           "capital_variable": false,
@@ -617,7 +623,9 @@
           "date_radiation": null,
           "duree_personne_morale": null,
           "date_fin_existence": null,
-          "nature_entreprise": ["Libérale non réglementée"],
+          "nature_entreprise": [
+            "Libérale non réglementée"
+          ],
           "date_cloture_exercice": null,
           "capital_social": null,
           "capital_variable": false,
@@ -786,7 +794,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2105-11-05",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3006",
           "capital_social": 5000,
           "capital_variable": false,
@@ -964,7 +974,10 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2117-07-24",
-          "nature_entreprise": ["Commerciale", "Gestion de biens"],
+          "nature_entreprise": [
+            "Commerciale",
+            "Gestion de biens"
+          ],
           "date_cloture_exercice": null,
           "capital_social": 11140,
           "capital_variable": false,
@@ -1342,7 +1355,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2122-07-19",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": null,
           "capital_social": 10000,
           "capital_variable": false,
@@ -1511,7 +1526,9 @@
           "date_radiation": null,
           "duree_personne_morale": 99,
           "date_fin_existence": "2120-01-07",
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 1000,
           "capital_variable": false,
@@ -1599,7 +1616,10 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["0247", "0675"],
+          "liste_idcc": [
+            "0247",
+            "0675"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
@@ -1662,10 +1682,14 @@
             "geo_id": null,
             "latitude": "48.1124355808552",
             "libelle_commune": "RENNES",
-            "liste_enseignes": ["AUBADE L ART D AIMER"],
+            "liste_enseignes": [
+              "AUBADE L ART D AIMER"
+            ],
             "liste_finess": null,
             "liste_id_bio": null,
-            "liste_idcc": ["0675"],
+            "liste_idcc": [
+              "0675"
+            ],
             "liste_id_organisme_formation": null,
             "liste_rge": null,
             "liste_uai": null,
@@ -1683,7 +1707,9 @@
           "date_radiation": null,
           "duree_personne_morale": null,
           "date_fin_existence": null,
-          "nature_entreprise": ["Commerciale"],
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 15754230,
           "capital_variable": false,
@@ -1699,7 +1725,10 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["0675", "0247"],
+          "liste_idcc": [
+            "0675",
+            "0247"
+          ],
           "liste_finess_juridique": null,
           "egapro_renseignee": true,
           "est_achats_responsables": false,
