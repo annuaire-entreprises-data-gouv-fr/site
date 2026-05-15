@@ -7,7 +7,7 @@ describe("Dirigeants and élus pages", () => {
 
   it("Elus page loads", () => {
     cy.visit("/dirigeants/217500016");
-    cy.contains("Anne HIDALGO").should("be.visible");
+    cy.contains("Emmanuel GRÉGOIRE").should("be.visible");
   });
 });
 

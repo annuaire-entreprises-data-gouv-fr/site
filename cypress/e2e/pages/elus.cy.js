@@ -5,6 +5,6 @@ describe("Élus VILLE DE PARIS", () => {
     cy.contains(
       "Cette collectivité possède 164 élus enregistrés au Répertoire National des Élus :"
     ).should("be.visible");
-    cy.contains("Anne HIDALGO").should("be.visible");
+    cy.contains("Emmanuel GRÉGOIRE").should("be.visible");
   });
 });

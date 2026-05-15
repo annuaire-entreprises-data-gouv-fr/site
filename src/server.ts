@@ -6,11 +6,7 @@ if (
   process.env.VITE_END2END_MOCKING === "enabled" &&
   process.env.BUILD_PHASE !== "true"
 ) {
-  import("../cypress/mocks/server").then(({ mockServer }) => {
-    mockServer.listen({
-      onUnhandledRequest: "error",
-    });
-  });
+  import("../cypress/mocks/server");
 }
 
 export default createServerEntry(
