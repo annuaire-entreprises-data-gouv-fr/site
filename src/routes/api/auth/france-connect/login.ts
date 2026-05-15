@@ -1,9 +1,10 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { franceConnectAuthorizeUrl } from "#/clients/authentication/france-connect/strategy";
 import { Exception } from "#/models/exceptions";
+import { getBaseUrl } from "#/utils/get-base-url";
 import { logFatalErrorInSentry } from "#/utils/sentry";
-import { getBaseUrl } from "#/utils/server-side-helper/get-base-url";
 import { getCurrentSession } from "#/utils/session";
+import { defaultHeadersMiddleware } from "../../-middlewares";
 
 class FranceConnectFailedException extends Exception {
   constructor(args: { cause?: unknown }) {
@@ -16,6 +17,7 @@ class FranceConnectFailedException extends Exception {
 
 export const Route = createFileRoute("/api/auth/france-connect/login")({
   server: {
+    middleware: [defaultHeadersMiddleware()],
     handlers: {
       GET: async () => {
         const session = await getCurrentSession();

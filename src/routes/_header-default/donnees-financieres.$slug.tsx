@@ -6,12 +6,12 @@ import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { useAuth } from "#/contexts/auth.context";
 import { isAssociation } from "#/models/core/types";
-import { meta } from "#/seo";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute(

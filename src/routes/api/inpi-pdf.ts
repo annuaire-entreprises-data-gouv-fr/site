@@ -3,9 +3,11 @@ import routes from "#/clients/routes";
 import { EAdministration } from "#/models/administrations/EAdministration";
 import { FetchRessourceException } from "#/models/exceptions";
 import logErrorInSentry from "#/utils/sentry";
+import { defaultHeadersMiddleware } from "./-middlewares";
 
 export const Route = createFileRoute("/api/inpi-pdf")({
   server: {
+    middleware: [defaultHeadersMiddleware()],
     handlers: {
       GET: async ({ request }) => {
         const searchParams = new URL(request.url).searchParams;

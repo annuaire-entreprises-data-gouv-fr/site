@@ -1,8 +1,8 @@
 import { useLocation } from "@tanstack/react-router";
 import type React from "react";
 import { useEffect, useState } from "react";
+import { getBaseUrl } from "#/utils/get-base-url";
 import { logConversionEvent } from "#/utils/matomo";
-import { getBaseUrl } from "#/utils/server-side-helper/get-base-url";
 
 interface IProps {
   event: string;

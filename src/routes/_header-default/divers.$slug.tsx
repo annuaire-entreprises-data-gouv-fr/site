@@ -5,12 +5,12 @@ import { FICHE } from "#/components/title-section/tabs";
 import { useAuth } from "#/contexts/auth.context";
 import { getAllIdccWithMetadata } from "#/models/conventions-collectives";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
-import { meta } from "#/seo";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/divers/$slug")({

@@ -17,8 +17,8 @@ import { TitleEtablissementWithDenomination } from "#/components/title-section/e
 import { useAuth } from "#/contexts/auth.context";
 import { estNonDiffusibleStrict } from "#/models/core/diffusion";
 import { isServicePublic } from "#/models/core/types";
-import { meta } from "#/seo";
 import { getEtablissementWithUniteLegaleFromSlugFn } from "#/server-functions/public/etablissement";
+import { getBaseUrl } from "#/utils/get-base-url";
 import {
   etablissementPageDescription,
   etablissementPageTitle,
@@ -27,7 +27,7 @@ import {
   isLikelyASiret,
   shouldNotIndex,
 } from "#/utils/helpers";
-import { getBaseUrl } from "#/utils/server-side-helper/get-base-url";
+import { meta } from "#/utils/seo";
 import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
 

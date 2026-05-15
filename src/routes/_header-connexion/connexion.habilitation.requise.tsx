@@ -3,8 +3,8 @@ import { z } from "zod";
 import { Link } from "#/components/Link";
 import { ConnexionSubLayout } from "#/components-ui/connexion-layout";
 import connexionRefusedPicture from "#/components-ui/illustrations/connexion-refused";
-import { meta } from "#/seo";
 import { queryString } from "#/utils/query";
+import { meta } from "#/utils/seo";
 import { HeaderConnexionError } from "./-error";
 
 export const Route = createFileRoute(

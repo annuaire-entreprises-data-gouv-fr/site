@@ -4,7 +4,7 @@ import FullWidthContainer from "#/components-ui/container";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { Tag } from "#/components-ui/tag";
 import constants from "#/models/constants";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderLpAgentError } from "./-error";
 import styles from "./style.module.css";
 

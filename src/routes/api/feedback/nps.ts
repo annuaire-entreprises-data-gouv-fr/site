@@ -2,6 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { logInGrist } from "#/clients/external-tooling/grist";
 import { Exception } from "#/models/exceptions";
 import logErrorInSentry from "#/utils/sentry";
+import { defaultHeadersMiddleware } from "../-middlewares";
 
 const logAllEvents = async (request: Request) => {
   try {
@@ -38,6 +39,11 @@ const logAllEvents = async (request: Request) => {
 
 export const Route = createFileRoute("/api/feedback/nps")({
   server: {
+    middleware: [
+      defaultHeadersMiddleware({
+        "Access-Control-Allow-Methods": "POST,OPTIONS",
+      }),
+    ],
     handlers: {
       OPTIONS: async () => new Response(null, { status: 204 }),
       POST: async ({ request }) => {

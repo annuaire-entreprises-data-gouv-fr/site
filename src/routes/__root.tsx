@@ -2,10 +2,11 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { ClientProviders } from "#/client-providers";
-import { meta } from "#/seo";
 import { getCurrentUserFn } from "#/server-functions/public/auth";
 import dsfrCss from "#/style/dsfr.min.css?url";
 import appCss from "#/style/globals.css?url";
+import { getDefaultHeaders } from "#/utils/headers/default";
+import { meta } from "#/utils/seo";
 
 export const Route = createRootRoute({
   loader: async () => {
@@ -32,6 +33,7 @@ export const Route = createRootRoute({
       },
     ],
   }),
+  headers: () => getDefaultHeaders(),
   shellComponent: RootDocument,
 });
 

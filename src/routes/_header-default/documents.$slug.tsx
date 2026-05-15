@@ -17,12 +17,12 @@ import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import { meta } from "#/seo";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers/formatting/unite-legale-label";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/documents/$slug")({

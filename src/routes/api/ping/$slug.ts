@@ -2,9 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { APISlugNotFound, pingAPIClient } from "#/clients/ping-api-clients";
 import { Exception } from "#/models/exceptions";
 import logErrorInSentry from "#/utils/sentry";
+import { defaultHeadersMiddleware } from "../-middlewares";
 
 export const Route = createFileRoute("/api/ping/$slug")({
   server: {
+    middleware: [defaultHeadersMiddleware()],
     handlers: {
       GET: async ({ params }) => {
         try {

@@ -13,17 +13,19 @@ import {
   OrganisationNotAnAdministration,
   PrestataireException,
 } from "#/models/authentication/authentication-exceptions";
+import { getBaseUrl } from "#/utils/get-base-url";
 import { logFatalErrorInSentry, logInfoInSentry } from "#/utils/sentry";
-import { getBaseUrl } from "#/utils/server-side-helper/get-base-url";
 import {
   cleanPathFrom,
   getCurrentSession,
   getPathFrom,
   setAgentSession,
 } from "#/utils/session";
+import { defaultHeadersMiddleware } from "../../-middlewares";
 
 export const Route = createFileRoute("/api/auth/agent-connect/callback")({
   server: {
+    middleware: [defaultHeadersMiddleware()],
     handlers: {
       GET: async () => {
         const session = await getCurrentSession();

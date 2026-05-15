@@ -9,7 +9,6 @@ import { Info } from "#/components-ui/alerts";
 import FAQLink from "#/components-ui/faq-link";
 import { SeePersonPageLink } from "#/components-ui/see-personn-page-link";
 import { searchPersonCompanies } from "#/models/search";
-import { meta } from "#/seo";
 import {
   convertDateToAge,
   formatDatePartial,
@@ -18,6 +17,7 @@ import {
 } from "#/utils/helpers";
 import { isPersonneMorale } from "#/utils/helpers/is-personne-morale";
 import { queryString } from "#/utils/query";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 const loadPersonnesPage = createServerFn()

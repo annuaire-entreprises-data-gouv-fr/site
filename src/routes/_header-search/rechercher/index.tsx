@@ -8,7 +8,7 @@ import SearchResults from "#/components/search-results";
 import { AdvancedSearchTutorial } from "#/components/search-results/advanced-search-tutorial";
 import SocialNetworks from "#/components/social-network";
 import { hasSearchParam } from "#/models/search/search-filter-params";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderSearchError } from "../-error";
 import {
   beforeLoadCheckTerme,

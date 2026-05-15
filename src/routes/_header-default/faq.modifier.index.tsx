@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "#/components/Link";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { allDataToModify } from "#/models/administrations/data-to-modify";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/faq/modifier/")({

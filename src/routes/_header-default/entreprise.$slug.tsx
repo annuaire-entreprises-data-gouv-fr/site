@@ -35,8 +35,8 @@ import {
   isServicePublic,
 } from "#/models/core/types";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
-import { meta } from "#/seo";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
+import { getBaseUrl } from "#/utils/get-base-url";
 import {
   extractSirenOrSiretSlugFromUrl,
   isLikelyASiren,
@@ -45,7 +45,7 @@ import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
-import { getBaseUrl } from "#/utils/server-side-helper/get-base-url";
+import { meta } from "#/utils/seo";
 import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
 

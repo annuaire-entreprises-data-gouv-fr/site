@@ -9,8 +9,8 @@ import { Info } from "#/components-ui/alerts";
 import ButtonLink from "#/components-ui/button";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { EAdministration } from "#/models/administrations/EAdministration";
-import { meta } from "#/seo";
 import { formatIntFr } from "#/utils/helpers";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute(

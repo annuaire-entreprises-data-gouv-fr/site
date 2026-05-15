@@ -2,7 +2,6 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { INPI, INSEE } from "#/components/administrations";
 import { Link } from "#/components/Link";
 import MatomoEvent from "#/components/matomo-event";
-import { meta } from "#/seo";
 import {
   formatIntFr,
   formatSiret,
@@ -10,6 +9,7 @@ import {
   isSiren,
   isSiret,
 } from "#/utils/helpers";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute(

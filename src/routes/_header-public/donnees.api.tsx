@@ -6,7 +6,7 @@ import { Link } from "#/components/Link";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { administrationsMetaData } from "#/models/administrations";
 import { getMonitorsByAdministration } from "#/models/monitoring";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderPublicError } from "./-error";
 
 const fetchMonitorsFn = createServerFn().handler(async () => {

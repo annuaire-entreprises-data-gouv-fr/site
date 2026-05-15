@@ -3,7 +3,7 @@ import parseMarkdownSync from "#/components/markdown/parse-markdown";
 import StructuredDataFAQ from "#/components/structured-data/faq";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { allDefinitions } from "#/models/article/definitions";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/definitions/")({

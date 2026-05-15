@@ -3,7 +3,7 @@ import { Link } from "#/components/Link";
 import { ConnexionSubLayout } from "#/components-ui/connexion-layout";
 import connexionFailedPicture from "#/components-ui/illustrations/connexion-failed";
 import constants from "#/models/constants";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderConnexionError } from "./-error";
 
 export const Route = createFileRoute(

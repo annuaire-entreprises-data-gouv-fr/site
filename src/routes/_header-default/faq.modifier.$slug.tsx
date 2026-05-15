@@ -3,7 +3,7 @@ import Breadcrumb from "#/components-ui/breadcrumb";
 import ButtonLink from "#/components-ui/button";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { getDataToModify } from "#/models/administrations/data-to-modify";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { redirectFAQPageNotFound } from "#/utils/server-side-helper/redirect-faq-not-found";
 import { HeaderDefaultError } from "./-error";
 

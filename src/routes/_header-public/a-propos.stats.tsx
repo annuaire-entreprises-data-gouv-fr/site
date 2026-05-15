@@ -5,7 +5,7 @@ import { Link } from "#/components/Link";
 import { NpsStats } from "#/components/stats/nps";
 import { TraficStats } from "#/components/stats/trafic";
 import { UsageStats } from "#/components/stats/usage";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderPublicError } from "./-error";
 
 const fetchStatsFn = createServerFn().handler(async () => {

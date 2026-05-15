@@ -10,6 +10,7 @@ import {
   hasRights,
 } from "#/models/authentication/user/rights";
 import { FetchRessourceException } from "#/models/exceptions";
+import { defaultHeadersMiddleware } from "#/routes/api/-middlewares";
 import logErrorInSentry from "#/utils/sentry";
 import { getCurrentSession } from "#/utils/session";
 
@@ -17,6 +18,11 @@ export const Route = createFileRoute(
   "/api/download/espace-agent/documents/$slug"
 )({
   server: {
+    middleware: [
+      defaultHeadersMiddleware({
+        "X-Accel-Buffering": "no",
+      }),
+    ],
     handlers: {
       GET: async ({ request, params }) => {
         const searchParams = new URL(request.url).searchParams;

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import ParcoursQuestions from "#/components/screens/faq.parcours/parcours-questions";
 import { useAuth } from "#/contexts/auth.context";
-import { meta } from "#/seo";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 export const Route = createFileRoute("/_header-default/faq/parcours")({
