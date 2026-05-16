@@ -131,10 +131,6 @@ jobs:
           node-version: ${{ env.node-version }}
       - name: Load node_modules
         uses: ./.github/actions/load-dependencies
-      - name: Build site with E2E mocking
-        run: npm run build && npm run prepare-standalone-dir
-        env:
-          VITE_END2END_MOCKING: enabled
       - name: Run Cypress tests 🧪
         # https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
@@ -167,5 +163,7 @@ jobs:
           node-version: ${{ env.node-version }}
       - name: Load node_modules
         uses: ./.github/actions/load-dependencies
+      - name: Generate json data
+        run: npm run compile:data
       - name: Run typescript check
         run: npm run typecheck
