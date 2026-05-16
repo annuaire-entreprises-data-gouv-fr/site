@@ -15,7 +15,7 @@
     "dev": "npm run compile:data && NODE_OPTIONS='--import ./instrument.server.mjs' vite dev --port 3000",
     "dev:e2e": "VITE_END2END_MOCKING=enabled npm run dev",
     "start": "node --import ./.output/server/instrument.server.mjs .output/server/index.mjs",
-    "build": "npm run compile:data && vite build && cp instrument.server.mjs .output/server",
+    "build": "npm run compile:data && vite build && node scripts/sync-nitro-public-assets.mjs && cp instrument.server.mjs .output/server",
     "preview": "vite preview",
     "test:end2end:run": "cypress run --config-file ./cypress/cypress.config.ts",
     "test:end2end:open": "cypress open --config-file ./cypress/cypress.config.ts",

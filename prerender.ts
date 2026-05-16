@@ -67,6 +67,9 @@ const faqModifierToPrerender = allAdministrations
   })
   .map((d) => `/faq/modifier/${d.slug}`);
 
+const normalizePrerenderPath = (path: string) =>
+  path.startsWith("/") ? path : `/${path}`;
+
 export const prerenderedPages = [
   "/",
   "/lp/agent-public",
@@ -93,4 +96,4 @@ export const prerenderedPages = [
   "/vie-privee",
   "/historique-des-modifications",
   "/robots.txt",
-];
+].map(normalizePrerenderPath);

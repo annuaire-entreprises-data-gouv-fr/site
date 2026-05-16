@@ -3,8 +3,8 @@ import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
-import { prerenderedPages } from "prerender";
 import { defineConfig } from "vite";
+import { prerenderedPages } from "./prerender";
 
 const config = defineConfig({
   css: {
@@ -21,7 +21,7 @@ const config = defineConfig({
         prerender: {
           enabled: true,
           crawlLinks: false,
-          autoSubfolderIndex: false,
+          autoSubfolderIndex: true,
         },
       })),
     }),
