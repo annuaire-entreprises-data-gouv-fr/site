@@ -1,0 +1,102 @@
+import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import { Fragment, useEffect } from "react";
+import ApiMonitoring from "#/components/api-monitoring";
+import { Link } from "#/components/Link";
+import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
+import { administrationsMetaData } from "#/models/administrations";
+import { getMonitorsByAdministration } from "#/models/monitoring";
+import { meta } from "#/utils/seo";
+import { HeaderPublicError } from "./-error";
+
+const fetchMonitorsFn = createServerFn().handler(async () => {
+  const monitors = await getMonitorsByAdministration();
+  return {
+    monitors,
+    administrationsMetaData,
+  };
+});
+
+export const Route = createFileRoute("/_header-public/donnees/api")({
+  loader: async () => await fetchMonitorsFn(),
+  head: () => {
+    const canonical = "https://annuaire-entreprises.data.gouv.fr/donnees/api";
+    return {
+      meta: meta({
+        title: "Statut des API utilisées par l’Annuaire des Entreprises",
+        robots: "noindex, follow",
+        alternates: {
+          canonical,
+        },
+      }),
+      links: [
+        {
+          rel: "canonical",
+          href: canonical,
+        },
+      ],
+    };
+  },
+  component: RouteComponent,
+  errorComponent: HeaderPublicError,
+});
+
+function RouteComponent() {
+  const router = useRouter();
+  const { monitors, administrationsMetaData } = Route.useLoaderData();
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      router.invalidate().catch(() => {
+        // Polling should not break the page if revalidation fails.
+      });
+    }, 60_000);
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, [router]);
+
+  return (
+    <div className="content-container">
+      <h1>Statut des API utilisées</h1>
+      <p>
+        L’Annuaire des Entreprises utilise les données de différentes
+        administrations en lien avec les entreprises, les associations et les
+        services publics. Les <Link to="/donnees/sources">données</Link> sont
+        accessibles par le biais de téléservices appelés API. Ces API sont{" "}
+        <strong>ouvertes à tous</strong>.
+      </p>
+      <p>
+        Cette page détaille la liste des API utilisées et leur disponibilité en
+        temps réel&nbsp;:
+      </p>
+      <strong>Sommaire</strong>
+      <ol>
+        {Object.keys(monitors).map((administrationEnum) =>
+          monitors[administrationEnum].map((monitor) => (
+            <li key={monitor.apiSlug}>
+              <span style={{ color: monitor.isOnline ? "#3bd671" : "#f29030" }}>
+                ●
+              </span>{" "}
+              <a href={`#${monitor.apiSlug}`}>{monitor.apiName}</a>
+            </li>
+          ))
+        )}
+      </ol>
+      {Object.keys(monitors).map((administrationEnum) => (
+        <Fragment key={administrationEnum}>
+          <h2 id={administrationsMetaData[administrationEnum]?.slug}>
+            {administrationsMetaData[administrationEnum]?.long}
+          </h2>
+          {monitors[administrationEnum].map((monitor) => (
+            <Fragment key={monitor.apiName}>
+              <h3 id={monitor.apiSlug}>{monitor.apiName}</h3>
+              <ApiMonitoring {...monitor} />
+            </Fragment>
+          ))}
+          <HorizontalSeparator />
+        </Fragment>
+      ))}
+    </div>
+  );
+}

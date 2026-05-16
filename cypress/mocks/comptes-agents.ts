@@ -1,7 +1,7 @@
 import {
   allAgentScopes,
   defaultAgentScopes,
-} from "#models/authentication/agent/scopes/constants";
+} from "#/models/authentication/agent/scopes/constants";
 
 export const comptesAgents = [
   {

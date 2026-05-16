@@ -60,6 +60,11 @@ describe("Pagination for multiple etablissement company", () => {
   it("Can click on first", () => {
     cy.visit(`/entreprise/${slug}?page=6`);
     cy.get(".fr-pagination__link--first").click();
-    cy.url().should("include", "page=1");
+    cy.get('.fr-pagination__link[aria-current="page"]').should(
+      "have.attr",
+      "href",
+      "?terme=&page=1#etablissements"
+    );
+    cy.url().should("not.include", "page");
   });
 });

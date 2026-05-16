@@ -1,4 +1,4 @@
-import routes from "#clients/routes";
+import routes from "#/clients/routes";
 import geoCommunes from "../../fixtures/geo-communes.json";
 
 const path = "/rechercher";
@@ -16,11 +16,17 @@ describe("Search page", () => {
 
     cy.visit("/");
     cy.contains("recherche avancée").click();
+    cy.wait(1000);
+
     cy.contains("Zone géographique").click();
+    cy.wait(200);
     cy.get("#geo-search-input").type("Nice");
     cy.wait("@searchCommunes");
+    cy.wait(200);
     cy.contains("Nice (06000)").click();
+    cy.wait(200);
     cy.contains("Appliquer").click();
+    cy.wait(200);
     cy.location().should((loc) => {
       expect(loc.search).includes("cp_dep=06000");
     });
@@ -39,6 +45,8 @@ describe("Advanced search on page " + path, () => {
   it("Shows filters", () => {
     cy.visit(path + "?terme=Ganymede");
 
+    cy.wait(1000);
+
     cy.contains("Zone géographique").click();
     cy.contains("Ville, département ou région").should("be.visible");
     cy.contains("Zone géographique").click();
@@ -56,6 +64,7 @@ describe("Advanced search on page " + path, () => {
 
   it("Filters propagate on pagination", () => {
     cy.visit(path + "?terme=la+poste&cp_dep=&sap=A");
+    cy.wait(1000);
     cy.get(".fr-pagination").should("exist");
     cy.get('.fr-pagination__link[title="Page 3"]').click();
     cy.url().should("include", "sap=A");
@@ -63,6 +72,7 @@ describe("Advanced search on page " + path, () => {
 
   it("Structure filters", () => {
     cy.visit(path + "?terme=");
+    cy.wait(1000);
     cy.contains("Structure").click();
     cy.contains("Qualités, labels et certificats").should("be.visible");
     cy.contains("Collectivité").click();
@@ -72,6 +82,7 @@ describe("Advanced search on page " + path, () => {
 
   it("Finances filters", () => {
     cy.visit(path + "?terme=ganymede&ca_min=100&res_max=100000");
+    cy.wait(1000);
     cy.contains("Filtre financier").click();
     cy.contains("Min : 1 K €").should("be.visible");
     cy.contains("Max : 100 K €").should("be.visible");

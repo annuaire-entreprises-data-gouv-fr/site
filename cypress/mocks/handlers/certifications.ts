@@ -3,5 +3,6 @@ import certifications from "../../fixtures/certifications.json" with {
   type: "json",
 };
 
-export const certificationsHandler: HttpResponseResolver = ({ request }) =>
-  HttpResponse.json(certifications);
+export const certificationsHandler: HttpResponseResolver = ({
+  request: _request,
+}) => HttpResponse.json(certifications);

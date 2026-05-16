@@ -4,9 +4,9 @@ import egaproRepresentation from "../../fixtures/egapro-representation.json" wit
   type: "json",
 };
 
-export const egaproHandler: HttpResponseResolver = ({ request }) =>
+export const egaproHandler: HttpResponseResolver = ({ request: _request }) =>
   HttpResponse.json(egapro);
 
 export const egaproRepresentationHandler: HttpResponseResolver = ({
-  request,
+  request: _request,
 }) => HttpResponse.json(egaproRepresentation);

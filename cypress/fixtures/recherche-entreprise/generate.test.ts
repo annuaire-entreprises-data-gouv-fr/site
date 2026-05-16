@@ -1,6 +1,6 @@
 import path from "node:path";
-import { clientSearchRechercheEntrepriseRaw } from "#clients/recherche-entreprise";
-import SearchFilterParams from "#models/search/search-filter-params";
+import { clientSearchRechercheEntrepriseRaw } from "#/clients/recherche-entreprise/index.server";
+import SearchFilterParams from "#/models/search/search-filter-params";
 
 describe("Simple search with searchTerms", () => {
   [
@@ -35,6 +35,7 @@ describe("Simple search with searchTerms", () => {
     "aga",
     "302474648",
     "533744991",
+    "784410607",
   ].forEach((s) => itShouldMatchSnapshot(s));
 });
 
@@ -81,9 +82,21 @@ function itShouldMatchSnapshot(
       searchFilterParams,
       inclureImmatriculation: true,
     });
-    expect(JSON.stringify({ searchTerms, result }, null, 2)).toMatchFile(
-      // biome-ignore lint/correctness/noGlobalDirnameFilename: shhh
-      path.join(__dirname, ".", `search-${searchTerms}${suffix}.json`)
+
+    // biome-ignore lint/performance/noDelete: needed
+    delete result.execution_time;
+
+    const cleanedResult = {
+      ...result,
+      results: result.results.map(({ meta, ...result }) => ({
+        ...result,
+      })),
+    };
+
+    await expect(
+      JSON.stringify({ searchTerms, result: cleanedResult }, null, 2)
+    ).toMatchFileSnapshot(
+      path.join(import.meta.dirname, ".", `search-${searchTerms}${suffix}.json`)
     );
   });
 }

@@ -2,7 +2,11 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite/biome/core", "ultracite/biome/next"],
   "files": {
-    "includes": ["!**/*.min.css"]
+    "includes": [
+      "!**/*.min.css",
+      "!cypress/fixtures/**/*.json",
+      "!src/clients/_test/**/*.json"
+    ]
   },
   "linter": {
     "rules": {
@@ -10,6 +14,7 @@
         "noSvgWithoutTitle": "off"
       },
       "style": {
+        "noHeadElement": "off",
         "noMagicNumbers": "off",
         "noNestedTernary": "off",
         "useTemplate": "off",
@@ -49,7 +54,8 @@
         "noUnusedFunctionParameters": "off",
         "useExhaustiveDependencies": "off",
         "noUnknownMediaFeatureName": "off",
-        "noUndeclaredVariables": "off"
+        "noUndeclaredVariables": "off",
+        "noUnknownProperty": "off"
       },
       "security": {
         "noDangerouslySetInnerHtml": "off"

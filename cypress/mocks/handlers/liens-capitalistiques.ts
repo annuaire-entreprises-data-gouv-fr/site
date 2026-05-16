@@ -4,5 +4,5 @@ import liensCapitalistiques from "../../fixtures/dgfip-liens-capitalistiques.jso
 };
 
 export const liensCapitalistiquesHandler: HttpResponseResolver = ({
-  request,
+  request: _request,
 }) => HttpResponse.json(liensCapitalistiques);

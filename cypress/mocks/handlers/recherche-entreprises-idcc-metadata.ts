@@ -4,4 +4,5 @@ import rechercheEntrepriseIdccMetadata from "../../fixtures/recherche-entreprise
 };
 
 export const rechercheEntrepriseIdccMetadataHandler: HttpResponseResolver =
-  async ({ request }) => HttpResponse.json(rechercheEntrepriseIdccMetadata);
+  async ({ request: _request }) =>
+    HttpResponse.json(rechercheEntrepriseIdccMetadata);

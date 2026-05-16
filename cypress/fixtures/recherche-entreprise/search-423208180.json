@@ -11,6 +11,7 @@
         "nombre_etablissements_ouverts": 1,
         "siege": {
           "activite_principale": "68.20B",
+          "activite_principale_naf25": "68.20H",
           "activite_principale_registre_metier": null,
           "annee_tranche_effectif_salarie": null,
           "adresse": "ESPACE SOLEIL BAT C ROUTE DE GRUISSAN 11100 NARBONNE",
@@ -20,21 +21,21 @@
           "code_postal": "11100",
           "commune": "11262",
           "complement_adresse": "ESPACE SOLEIL BAT C",
-          "coordonnees": "43.154121,3.050857",
+          "coordonnees": "43.167879418,3.0387085221",
           "date_creation": "1999-04-07",
           "date_debut_activite": "2008-01-01",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-03-30T04:30:06",
+          "date_mise_a_jour_insee": "2025-12-06T00:36:17",
           "departement": "11",
           "distribution_speciale": null,
           "epci": "241100593",
           "est_siege": true,
           "etat_administratif": "A",
-          "geo_adresse": "Route de Gruissan 11100 Narbonne",
-          "geo_id": "11262_7m8lgc",
+          "geo_adresse": null,
+          "geo_id": null,
           "indice_repetition": null,
-          "latitude": "43.154121",
+          "latitude": "43.167879418",
           "libelle_cedex": null,
           "libelle_commune": "NARBONNE",
           "libelle_commune_etranger": null,
@@ -47,9 +48,10 @@
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
-          "longitude": "3.050857",
+          "longitude": "3.0387085221",
           "nom_commercial": null,
           "numero_voie": null,
+          "dernier_numero_voie": null,
           "region": "76",
           "siret": "42320818000012",
           "statut_diffusion_etablissement": "O",
@@ -57,14 +59,15 @@
           "type_voie": "ROUTE"
         },
         "activite_principale": "68.20B",
+        "activite_principale_naf25": "68.20H",
         "categorie_entreprise": null,
         "caractere_employeur": null,
         "annee_categorie_entreprise": null,
         "date_creation": "1999-04-07",
         "date_fermeture": null,
-        "date_mise_a_jour": "2025-10-17T07:00:06",
-        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
-        "date_mise_a_jour_rne": "2024-05-19T16:49:33",
+        "date_mise_a_jour": "2026-05-15T09:51:32",
+        "date_mise_a_jour_insee": "2025-12-06T09:51:41",
+        "date_mise_a_jour_rne": "2024-05-19T17:01:20",
         "dirigeants": [
           {
             "nom": "CESAR (ARNAL)",
@@ -72,7 +75,7 @@
             "annee_de_naissance": "1941",
             "date_de_naissance": "1941-09",
             "qualite": "Associé indéfiniment responsable",
-            "nationalite": "Française",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -81,7 +84,7 @@
             "annee_de_naissance": "1944",
             "date_de_naissance": "1944-12",
             "qualite": "Associé indéfiniment responsable",
-            "nationalite": "Française",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           },
           {
@@ -90,7 +93,7 @@
             "annee_de_naissance": "1971",
             "date_de_naissance": "1971-08",
             "qualite": "Gérant et associé indéfiniment responsable",
-            "nationalite": "Française",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           }
         ],
@@ -106,7 +109,10 @@
           "date_immatriculation": "1999-06-21",
           "date_radiation": null,
           "duree_personne_morale": 50,
-          "nature_entreprise": ["Commerciale"],
+          "date_fin_existence": "2049-06-20",
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": null,
           "capital_social": 36000,
           "capital_variable": false,
@@ -118,10 +124,12 @@
           "collectivite_territoriale": null,
           "convention_collective_renseignee": false,
           "liste_idcc": null,
+          "liste_finess_juridique": null,
           "egapro_renseignee": false,
           "est_achats_responsables": false,
           "est_alim_confiance": false,
           "est_association": false,
+          "est_avocat": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
           "est_entrepreneur_spectacle": false,
@@ -131,8 +139,6 @@
           "est_qualiopi": false,
           "liste_id_organisme_formation": null,
           "est_rge": false,
-          "est_service_public": false,
-          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
@@ -140,9 +146,17 @@
           "bilan_ges_renseigne": false,
           "identifiant_association": null,
           "statut_entrepreneur_spectacle": null,
-          "type_siae": null
+          "type_siae": null,
+          "a_aide_minimis": false,
+          "a_aide_ademe": false,
+          "est_administration": false,
+          "est_service_public": false,
+          "est_l100_3": false
         },
-        "slug": "ganymede-423208180"
+        "admin": {
+          "slug": "ganymede-423208180",
+          "a_acces_espace_agent": false
+        }
       }
     ],
     "total_results": 1,

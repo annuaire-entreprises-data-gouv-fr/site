@@ -1,4 +1,4 @@
-import routes from "#clients/routes";
+import routes from "#/clients/routes";
 
 describe("Annonces et observations", () => {
   beforeEach(() => {

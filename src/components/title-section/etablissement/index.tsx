@@ -1,0 +1,174 @@
+import type React from "react";
+import { EtablissementDescription } from "#/components/etablissement-description";
+import { Link } from "#/components/Link";
+import MapEtablissement from "#/components/map/map-etablissement";
+import { CopyPaste } from "#/components/table/copy-paste";
+import UniteLegaleBadge from "#/components/unite-legale-badge";
+import { Warning } from "#/components-ui/alerts";
+import { SimpleSeparator } from "#/components-ui/horizontal-separator";
+import { PrintNever } from "#/components-ui/print-visibility";
+import SocialMedia from "#/components-ui/social-media";
+import { Tag } from "#/components-ui/tag";
+import IsActiveTag from "#/components-ui/tag/is-active-tag";
+import { NonDiffusibleTag } from "#/components-ui/tag/non-diffusible-tag";
+import type { IAgentInfo } from "#/models/authentication/agent";
+import { estDiffusible, estNonDiffusibleStrict } from "#/models/core/diffusion";
+import type { IEtablissement, IUniteLegale } from "#/models/core/types";
+import { formatIntFr, formatSiret } from "#/utils/helpers";
+import { estEnFrance } from "#/utils/helpers/est-en-france";
+import { INSEE } from "../../administrations";
+import TitleAlerts from "../alerts";
+import { TabsForEtablissement } from "../tabs";
+import styles from "./styles.module.css";
+
+const TitleEtablissementWithDenomination: React.FC<{
+  uniteLegale: IUniteLegale;
+  etablissement: IEtablissement;
+  user: IAgentInfo | null;
+}> = ({ uniteLegale, etablissement, user }) => (
+  <div className={styles.etablissementTitle}>
+    {etablissement.oldSiret &&
+      etablissement.oldSiret !== etablissement.siret && (
+        <Warning full>
+          Cet établissement est inscrit en double à l’
+          <INSEE /> : {formatSiret(etablissement.oldSiret)} et{" "}
+          {formatSiret(etablissement.siret)}. Pour voir les informations
+          complètes, consultez la page{" "}
+          <Link
+            params={{ slug: etablissement.siret }}
+            to="/etablissement/$slug"
+          >
+            {formatSiret(etablissement.siret)}
+          </Link>
+          .
+        </Warning>
+      )}
+
+    <TitleAlerts
+      statutDiffusion={etablissement.statutDiffusion}
+      uniteLegale={uniteLegale}
+      user={user}
+    />
+
+    <h1>
+      Établissement{" "}
+      {etablissement.enseigne ||
+        etablissement.denomination ||
+        uniteLegale.nomComplet}{" "}
+      {etablissement.commune && (
+        <>
+          à{" "}
+          <Link
+            params={{ slug: etablissement.siret }}
+            to="/etablissement/$slug"
+          >
+            {etablissement.commune}
+          </Link>
+        </>
+      )}
+    </h1>
+    <div className={styles.titleBlock}>
+      <div className={styles.titleBlockContent}>
+        <div className={styles.subTitle}>
+          <span className={styles.sirenOrSiret}>
+            <CopyPaste
+              disableCopyIcon={true}
+              label="SIRET"
+              shouldRemoveSpace={true}
+            >
+              {formatSiret(etablissement.siret)}
+            </CopyPaste>
+          </span>
+          <NonDiffusibleTag etablissementOrUniteLegale={etablissement} />
+          <IsActiveTag
+            etatAdministratif={etablissement.etatAdministratif}
+            since={etablissement.dateFermeture}
+            statutDiffusion={etablissement.statutDiffusion}
+          />
+        </div>
+        <div className={styles.subSubTitle}>
+          <div>
+            <div>
+              <span>Cet établissement est </span>
+              {etablissement.estSiege ? (
+                <>
+                  le{" "}
+                  <Tag color="info" size="small">
+                    siège social
+                  </Tag>
+                </>
+              ) : etablissement.ancienSiege ? (
+                <>
+                  un<Tag size="small">ancien siège social</Tag>
+                </>
+              ) : (
+                <Tag size="small">un établissement secondaire</Tag>
+              )}
+              <span> de :</span>
+            </div>
+            <div>
+              <div>
+                <strong>
+                  <Link
+                    params={{ slug: uniteLegale.chemin }}
+                    to="/entreprise/$slug"
+                  >
+                    {uniteLegale.nomComplet}
+                  </Link>
+                </strong>
+              </div>
+              <UniteLegaleBadge uniteLegale={uniteLegale} />
+              <span className={styles.sirenTitle}>
+                &nbsp;‣&nbsp;
+                <span style={{ display: "inline-flex" }}>
+                  <CopyPaste
+                    disableCopyIcon={true}
+                    label="SIREN"
+                    shouldRemoveSpace={true}
+                  >
+                    {formatIntFr(uniteLegale.siren)}
+                  </CopyPaste>
+                </span>
+              </span>
+              <IsActiveTag
+                etatAdministratif={uniteLegale.etatAdministratif}
+                size="small"
+                statutDiffusion={uniteLegale.statutDiffusion}
+              />
+              <PrintNever>
+                <SimpleSeparator />
+
+                <TabsForEtablissement uniteLegale={uniteLegale} user={user} />
+              </PrintNever>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {estDiffusible(etablissement) && estEnFrance(etablissement) && (
+        <div>
+          <MapEtablissement etablissement={etablissement} />
+        </div>
+      )}
+    </div>
+    <br />
+    <SocialMedia
+      label={
+        etablissement.enseigne ||
+        etablissement.denomination ||
+        uniteLegale.nomComplet
+      }
+      path={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}
+    />
+    {estNonDiffusibleStrict(etablissement) ? (
+      <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
+    ) : (
+      <EtablissementDescription
+        etablissement={etablissement}
+        uniteLegale={uniteLegale}
+      />
+    )}
+  </div>
+);
+
+export { TitleEtablissementWithDenomination };

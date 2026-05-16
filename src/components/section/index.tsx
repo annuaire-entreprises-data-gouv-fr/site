@@ -1,0 +1,123 @@
+import type React from "react";
+import type { PropsWithChildren } from "react";
+import { Link } from "#/components/Link";
+import { Warning } from "#/components-ui/alerts";
+import { Icon } from "#/components-ui/icon/wrapper";
+import DataSourcesTooltip from "#/components-ui/information-tooltip/data-sources-tooltip";
+import Logo from "#/components-ui/logo";
+import { administrationsMetaData } from "#/models/administrations";
+import type { EAdministration } from "#/models/administrations/EAdministration";
+import constants from "#/models/constants";
+import { formatDate, formatDateLong, isTwoMonthOld } from "#/utils/helpers";
+import SectionErrorBoundary from "./section-error-boundary";
+import style from "./style.module.css";
+export interface ISectionProps {
+  header?: React.ReactNode;
+  id?: string;
+  isProtected?: boolean;
+  lastModified?: string | null;
+  sources?: EAdministration[];
+  title: string;
+  width?: number;
+}
+
+export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
+  id,
+  children,
+  title,
+  sources = [],
+  lastModified = null,
+  width = 100,
+  isProtected = false,
+  header,
+}) => {
+  const dataSources = Array.from(new Set(sources)).map(
+    (key) => administrationsMetaData[key]
+  );
+
+  const isOld = lastModified && isTwoMonthOld(lastModified);
+  const last = lastModified || new Date();
+
+  const faqLink = dataSources.map((d) => d.slug).join("_");
+
+  const borderColor = isProtected
+    ? constants.colors.espaceAgentPastel
+    : constants.colors.pastelBlue;
+  const titleColor = isProtected
+    ? constants.colors.espaceAgent
+    : constants.colors.frBlue;
+
+  return (
+    <SectionErrorBoundary title={title}>
+      <div
+        className={style["section-container"]}
+        id={id}
+        style={{ width: `${width}%`, borderColor }}
+      >
+        {isProtected && (
+          <div className={style.protected}>
+            <Icon size={12} slug="lockFill">
+              Réservé aux agents publics
+            </Icon>
+          </div>
+        )}
+        <div className={style["section-header"]}>
+          <h2 style={{ color: titleColor, backgroundColor: borderColor }}>
+            {title}
+          </h2>
+          <div className={style["section-logo-wrapper"]}>
+            {dataSources.map(
+              ({ slug, long, logoType, short }) =>
+                logoType && (
+                  <Link
+                    className="no-style-link"
+                    key={long}
+                    params={{ slug: faqLink }}
+                    title={long}
+                    to="/administration/$slug"
+                  >
+                    {logoType === "portrait" ? (
+                      <Logo
+                        alt={short}
+                        height={40}
+                        slug={slug}
+                        title={long}
+                        width={70}
+                      />
+                    ) : (
+                      <Logo
+                        alt={short}
+                        height={40}
+                        slug={slug}
+                        title={long}
+                        width={170}
+                      />
+                    )}
+                  </Link>
+                )
+            )}
+          </div>
+        </div>
+
+        {isOld && lastModified && (
+          <Warning>
+            Ces données n’ont pas été mises à jour depuis plus de deux mois.
+            Dernière mise à jour : {formatDateLong(lastModified)}.
+          </Warning>
+        )}
+        {header}
+        <div>{children}</div>
+        {dataSources.length > 0 && (
+          <div className={style["administration-page-link"]}>
+            <DataSourcesTooltip
+              dataSources={dataSources}
+              lastUpdatedAt={formatDate(last)}
+              link={faqLink}
+              orientation="right"
+            />
+          </div>
+        )}
+      </div>
+    </SectionErrorBoundary>
+  );
+};

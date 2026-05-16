@@ -4,4 +4,5 @@ import rechercheEntrepriseLastModified from "../../fixtures/recherche-entreprise
 };
 
 export const rechercheEntrepriseLastModifiedHandler: HttpResponseResolver =
-  async ({ request }) => HttpResponse.json(rechercheEntrepriseLastModified);
+  async ({ request: _request }) =>
+    HttpResponse.json(rechercheEntrepriseLastModified);

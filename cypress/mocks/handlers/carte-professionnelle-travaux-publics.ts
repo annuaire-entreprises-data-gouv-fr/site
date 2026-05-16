@@ -4,4 +4,5 @@ import carteProfessionnelleTravauxPublics from "../../fixtures/carte-professionn
 };
 
 export const carteProfessionnelleTravauxPublicsHandler: HttpResponseResolver =
-  ({ request }) => HttpResponse.json(carteProfessionnelleTravauxPublics);
+  ({ request: _request }) =>
+    HttpResponse.json(carteProfessionnelleTravauxPublics);

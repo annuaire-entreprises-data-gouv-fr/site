@@ -11,6 +11,7 @@
         "nombre_etablissements_ouverts": 0,
         "siege": {
           "activite_principale": "62.02A",
+          "activite_principale_naf25": null,
           "activite_principale_registre_metier": null,
           "annee_tranche_effectif_salarie": null,
           "adresse": "17 RUE DE FRANCEVILLE 93220 GAGNY",
@@ -20,7 +21,7 @@
           "code_postal": "93220",
           "commune": "93032",
           "complement_adresse": null,
-          "coordonnees": "48.886494,2.542338",
+          "coordonnees": "48.886494395,2.542338263",
           "date_creation": "2018-05-06",
           "date_debut_activite": "2020-09-01",
           "date_fermeture": "2020-09-01",
@@ -31,10 +32,10 @@
           "epci": "200054781",
           "est_siege": true,
           "etat_administratif": "F",
-          "geo_adresse": "17 Rue de Franceville 93220 Gagny",
-          "geo_id": "93032_1230_00017",
+          "geo_adresse": null,
+          "geo_id": null,
           "indice_repetition": null,
-          "latitude": "48.886494",
+          "latitude": "48.886494395",
           "libelle_cedex": null,
           "libelle_commune": "GAGNY",
           "libelle_commune_etranger": null,
@@ -47,9 +48,10 @@
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
-          "longitude": "2.542338",
+          "longitude": "2.542338263",
           "nom_commercial": null,
           "numero_voie": "17",
+          "dernier_numero_voie": null,
           "region": "11",
           "siret": "83951732300011",
           "statut_diffusion_etablissement": "O",
@@ -57,14 +59,15 @@
           "type_voie": "RUE"
         },
         "activite_principale": "62.02A",
+        "activite_principale_naf25": null,
         "categorie_entreprise": null,
         "caractere_employeur": null,
         "annee_categorie_entreprise": null,
         "date_creation": "2018-05-06",
         "date_fermeture": "2021-10-11",
-        "date_mise_a_jour": "2025-10-17T08:37:37",
+        "date_mise_a_jour": "2026-05-15T11:00:03",
         "date_mise_a_jour_insee": "2024-03-22T14:26:06",
-        "date_mise_a_jour_rne": "2024-05-19T16:49:33",
+        "date_mise_a_jour_rne": "2024-05-19T17:01:20",
         "dirigeants": [
           {
             "nom": "DUBIGNY",
@@ -72,7 +75,7 @@
             "annee_de_naissance": "1990",
             "date_de_naissance": "1990-07",
             "qualite": "Liquidateur",
-            "nationalite": "Française",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           }
         ],
@@ -88,7 +91,10 @@
           "date_immatriculation": "2018-05-12",
           "date_radiation": "2021-10-15",
           "duree_personne_morale": 99,
-          "nature_entreprise": ["Commerciale"],
+          "date_fin_existence": "2117-05-11",
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3006",
           "capital_social": 1000,
           "capital_variable": false,
@@ -100,10 +106,12 @@
           "collectivite_territoriale": null,
           "convention_collective_renseignee": false,
           "liste_idcc": null,
+          "liste_finess_juridique": null,
           "egapro_renseignee": false,
           "est_achats_responsables": false,
           "est_alim_confiance": false,
           "est_association": false,
+          "est_avocat": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
           "est_entrepreneur_spectacle": false,
@@ -113,8 +121,6 @@
           "est_qualiopi": false,
           "liste_id_organisme_formation": null,
           "est_rge": false,
-          "est_service_public": false,
-          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
@@ -122,9 +128,17 @@
           "bilan_ges_renseigne": false,
           "identifiant_association": null,
           "statut_entrepreneur_spectacle": null,
-          "type_siae": null
+          "type_siae": null,
+          "a_aide_minimis": false,
+          "a_aide_ademe": false,
+          "est_administration": false,
+          "est_service_public": false,
+          "est_l100_3": false
         },
-        "slug": "red-needles-839517323"
+        "admin": {
+          "slug": "red-needles-839517323",
+          "a_acces_espace_agent": false
+        }
       }
     ],
     "total_results": 1,

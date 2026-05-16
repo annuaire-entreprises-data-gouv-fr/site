@@ -4,5 +4,5 @@ import baseAdresseNationale from "../../fixtures/base-adresse-nationale.json" wi
 };
 
 export const baseAdresseNationaleHandler: HttpResponseResolver = ({
-  request,
+  request: _request,
 }) => HttpResponse.json(baseAdresseNationale);

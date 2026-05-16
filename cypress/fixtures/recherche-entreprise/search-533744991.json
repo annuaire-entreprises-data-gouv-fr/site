@@ -11,6 +11,7 @@
         "nombre_etablissements_ouverts": 1,
         "siege": {
           "activite_principale": "38.32Z",
+          "activite_principale_naf25": "38.21Y",
           "activite_principale_registre_metier": null,
           "annee_tranche_effectif_salarie": "2023",
           "adresse": "ZONE ARTISANORD 1 AVENUE DE LA BAUXITE 13015 MARSEILLE",
@@ -20,21 +21,21 @@
           "code_postal": "13015",
           "commune": "13215",
           "complement_adresse": "ZONE ARTISANORD",
-          "coordonnees": "43.338657,5.367455",
+          "coordonnees": "43.338642833,5.3674665279",
           "date_creation": "2017-11-15",
           "date_debut_activite": "2017-11-15",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2025-02-06T02:35:41",
+          "date_mise_a_jour_insee": "2025-12-06T04:23:27",
           "departement": "13",
           "distribution_speciale": null,
           "epci": "200054807",
           "est_siege": true,
           "etat_administratif": "A",
-          "geo_adresse": "1 Avenue de la bauxite 13015 Marseille",
-          "geo_id": "13215_0890_00001",
+          "geo_adresse": null,
+          "geo_id": null,
           "indice_repetition": null,
-          "latitude": "43.338657",
+          "latitude": "43.338642833",
           "libelle_cedex": null,
           "libelle_commune": "MARSEILLE",
           "libelle_commune_etranger": null,
@@ -43,13 +44,16 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["0637"],
+          "liste_idcc": [
+            "0637"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
-          "longitude": "5.367455",
+          "longitude": "5.3674665279",
           "nom_commercial": null,
           "numero_voie": "1",
+          "dernier_numero_voie": null,
           "region": "93",
           "siret": "53374499100035",
           "statut_diffusion_etablissement": "O",
@@ -57,14 +61,15 @@
           "type_voie": "AVENUE"
         },
         "activite_principale": "38.32Z",
+        "activite_principale_naf25": "38.21Y",
         "categorie_entreprise": "PME",
         "caractere_employeur": null,
         "annee_categorie_entreprise": "2023",
         "date_creation": "2011-07-15",
         "date_fermeture": null,
-        "date_mise_a_jour": "2025-10-17T07:51:42",
-        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
-        "date_mise_a_jour_rne": "2024-05-19T16:49:33",
+        "date_mise_a_jour": "2026-05-15T10:27:31",
+        "date_mise_a_jour_insee": "2025-12-06T05:26:20",
+        "date_mise_a_jour_rne": "2024-05-19T17:01:20",
         "dirigeants": [
           {
             "nom": "PELLUAULT",
@@ -72,7 +77,7 @@
             "annee_de_naissance": "1969",
             "date_de_naissance": "1969-06",
             "qualite": "Président de SAS",
-            "nationalite": "Française",
+            "nationalite": null,
             "type_dirigeant": "personne physique"
           }
         ],
@@ -88,7 +93,10 @@
           "date_immatriculation": "2011-08-04",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": ["Gestion de biens"],
+          "date_fin_existence": "2110-08-03",
+          "nature_entreprise": [
+            "Gestion de biens"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 10000,
           "capital_variable": false,
@@ -104,11 +112,15 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["0637"],
+          "liste_idcc": [
+            "0637"
+          ],
+          "liste_finess_juridique": null,
           "egapro_renseignee": false,
           "est_achats_responsables": false,
           "est_alim_confiance": false,
           "est_association": false,
+          "est_avocat": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
           "est_entrepreneur_spectacle": false,
@@ -118,8 +130,6 @@
           "est_qualiopi": false,
           "liste_id_organisme_formation": null,
           "est_rge": false,
-          "est_service_public": false,
-          "est_l100_3": false,
           "est_siae": true,
           "est_societe_mission": false,
           "est_uai": false,
@@ -127,9 +137,17 @@
           "bilan_ges_renseigne": false,
           "identifiant_association": null,
           "statut_entrepreneur_spectacle": null,
-          "type_siae": "EI"
+          "type_siae": "EI",
+          "a_aide_minimis": false,
+          "a_aide_ademe": false,
+          "est_administration": false,
+          "est_service_public": false,
+          "est_l100_3": false
         },
-        "slug": "iddee-13-533744991"
+        "admin": {
+          "slug": "iddee-13-533744991",
+          "a_acces_espace_agent": false
+        }
       }
     ],
     "total_results": 1,

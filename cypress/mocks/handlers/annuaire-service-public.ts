@@ -1,5 +1,5 @@
 import { HttpResponse, type HttpResponseResolver } from "msw";
 
 export const annuaireServicePublicHandler: HttpResponseResolver = ({
-  request,
+  request: _request,
 }) => HttpResponse.json({});

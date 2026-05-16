@@ -1,0 +1,49 @@
+import { useEffect } from "react";
+import { Exception } from "#/models/exceptions";
+import { logInfoInSentry } from "#/utils/sentry";
+
+export function SaveFavourite(props: {
+  siren: string;
+  name: string;
+  path: string;
+}) {
+  useEffect(() => {
+    saveFavourite(props);
+  }, [props]);
+
+  return null;
+}
+
+const LOCALSTORAGE_KEY = "favourites-siren";
+function saveFavourite(visit: { siren: string; name: string; path: string }) {
+  try {
+    const path = window.location.pathname;
+    if (path.indexOf("/entreprise") !== 0) {
+      return;
+    }
+
+    const favouritesJSON = window.localStorage.getItem(LOCALSTORAGE_KEY);
+    const favourites = favouritesJSON ? JSON.parse(favouritesJSON) : [];
+
+    const newFavourites = [visit];
+    for (const favourite of favourites) {
+      if (favourite.siren !== visit.siren) {
+        newFavourites.push(favourite);
+      }
+    }
+
+    window.localStorage.setItem(
+      LOCALSTORAGE_KEY,
+      JSON.stringify(newFavourites.slice(0, 3))
+    );
+  } catch (e) {
+    if (e) {
+      logInfoInSentry(
+        new Exception({
+          name: "SaveFavouriteException",
+          cause: e,
+        })
+      );
+    }
+  }
+}

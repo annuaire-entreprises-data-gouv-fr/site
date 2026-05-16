@@ -1,0 +1,158 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { INPI, INSEE } from "#/components/administrations";
+import { Link } from "#/components/Link";
+import TextWrapper from "#/components-ui/text-wrapper";
+import { meta } from "#/utils/seo";
+import { HeaderDefaultError } from "../-error";
+
+export const Route = createFileRoute(
+  "/_header-default/a-propos/donnees-extrait-kbis"
+)({
+  head: () => {
+    const canonical =
+      "https://annuaire-entreprises.data.gouv.fr/a-propos/donnees-extrait-kbis";
+    return {
+      meta: meta({
+        title:
+          "Comment retrouver les données contenues dans un extrait KBIS ou D1 ?",
+        robots: "index, follow",
+        alternates: {
+          canonical,
+        },
+      }),
+      links: [
+        {
+          rel: "canonical",
+          href: canonical,
+        },
+      ],
+    };
+  },
+  component: RouteComponent,
+  errorComponent: HeaderDefaultError,
+});
+
+function RouteComponent() {
+  return (
+    <TextWrapper>
+      <h1>
+        Retrouver les données contenues dans un extrait KBIS ou un extrait D1
+      </h1>
+      <p>
+        Publié en Mai 2021,{" "}
+        <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043523262">
+          le décret de suppression du KBIS
+        </a>{" "}
+        supprime le recours aux extraits KBIS (Registre du Commerce) et D1
+        (Répertoire des Métiers) dans les démarches administratives des
+        personnes morales.
+      </p>
+      <h2>Qu’est-ce qu’un extrait KBIS / D1 ?</h2>
+      <p>
+        L’extrait d’immatriculation est une preuve de l’immatriculation d’une
+        entreprise auprès de son Centre de Formalité des Entreprises (CFE).
+      </p>
+      <p>
+        Il est important de faire la différence entre{" "}
+        <strong>l’extrait KBIS</strong> qui est l’extrait d’immatriculation au
+        Registre du Commerce et des Sociétés, qui concerne les{" "}
+        <strong>entreprises commerciales</strong> et{" "}
+        <strong>l’extrait D1</strong> qui est l’extrait d’immatriculation au
+        Répertoire des Métiers de la Chambre de Métiers et de l’Artisanat et qui
+        concerne <strong>les entreprises artisanales</strong>.
+      </p>
+      <div>
+        <h2>
+          Comment accéder aux données d’un extrait d’immatriculation via le site
+          annuaire-entreprises.data.gouv.fr ?
+        </h2>
+        <p>
+          Pour retrouver les informations d’immatriculation d’une entreprise,{" "}
+          <Link to="/">utilisez le moteur de recherche</Link> pour trouver la
+          page de l'entreprise concernée.
+        </p>
+        <p>
+          Une fois sur la page de l’entreprise, retrouvez les données
+          d’immatriculation issues du Registre National des Entreprises (RNE)
+          tenu par l’
+          <INPI />.
+        </p>
+        <h2>
+          Comment intégrer les données d’un extrait d’immatriculation à son
+          système d’information ?
+        </h2>
+        <p>
+          Vous travaillez sur un système d’information et vous avez besoin de
+          rendre disponible ces données dans votre site ou votre back-office ?
+          Deux choix s’offrent à vous :
+        </p>
+        <ol>
+          <li>
+            Utiliser les API : intégrez directement l’API de l’
+            <INPI /> à votre système d’information.
+          </li>
+          <li>
+            Intégrer le lien vers la page de l’Annuaire des Entreprises dans
+            votre application.
+          </li>
+        </ol>
+        <p>
+          <strong>NB :</strong> le lien se construit ainsi :
+        </p>
+        <code>
+          https://annuaire-entreprises.data.gouv.fr/entreprise/
+          <i>{"{insérer_le_numéro_siren}"}</i>
+        </code>
+        <h2>
+          Quelles sont les API qui donnent accès aux données d’immatriculation
+          des entreprises ?
+        </h2>
+        <p>
+          Toutes les sources de données affichées sur le site sont accessibles
+          grâce à l’API Registre National des Entreprises de l’
+          <INPI />.
+        </p>
+        <p>
+          <strong>NB :</strong> toutes les APIs du service public sont
+          référencées sur{" "}
+          <a
+            href="https://api.gouv.fr"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            api.gouv.fr
+          </a>
+          .
+        </p>
+        <h2>
+          Accéder à plus de données sur les entreprises et les associations via
+          API
+        </h2>
+        <p>
+          Il existe une API spéciale, <strong>API Entreprise</strong> réservée
+          aux administrations et à certaines entreprises éligibles, qui permet
+          d’accéder aux informations des entreprises détenues par
+          l’administration :
+        </p>
+        <ul>
+          <li>
+            les informations de la base sirene de l’
+            <INSEE />
+          </li>
+          <li>le chiffre d’affaire</li>
+          <li>les certifications professionnelles</li>
+          <li>... et bien d’autres</li>
+        </ul>
+        <p>
+          <a
+            href="https://www.data.gouv.fr/fr/dataservices/api-entreprise"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            ⇢ En savoir plus sur API Entreprise
+          </a>
+        </p>
+      </div>
+    </TextWrapper>
+  );
+}

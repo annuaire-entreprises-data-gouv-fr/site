@@ -11,6 +11,7 @@
         "nombre_etablissements_ouverts": 2917,
         "siege": {
           "activite_principale": "84.11Z",
+          "activite_principale_naf25": "84.11Y",
           "activite_principale_registre_metier": null,
           "annee_tranche_effectif_salarie": "2023",
           "adresse": "4 PL HOTEL VILLE ESP LIBERATION 75004 PARIS 04",
@@ -20,36 +21,42 @@
           "code_postal": "75004",
           "commune": "75104",
           "complement_adresse": null,
-          "coordonnees": "48.856145,2.351838",
+          "coordonnees": "48.856507956,2.3520586814",
           "date_creation": "1983-03-01",
           "date_debut_activite": "2008-01-01",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2024-09-04T05:20:51",
+          "date_mise_a_jour_insee": "2025-12-05T18:15:27",
           "departement": "75",
           "distribution_speciale": null,
           "epci": "200054781",
           "est_siege": true,
           "etat_administratif": "A",
-          "geo_adresse": "4 Place de l' Hotel de Ville - Esplanade de la Libération 75004 Paris",
-          "geo_id": "75104_4664_00004",
+          "geo_adresse": null,
+          "geo_id": null,
           "indice_repetition": null,
-          "latitude": "48.856145",
+          "latitude": "48.856507956",
           "libelle_cedex": null,
           "libelle_commune": "PARIS 04",
           "libelle_commune_etranger": null,
           "libelle_pays_etranger": null,
           "libelle_voie": "HOTEL VILLE ESP LIBERATION",
-          "liste_enseignes": ["MAIRIE"],
+          "liste_enseignes": [
+            "MAIRIE"
+          ],
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": ["5003", "5021"],
+          "liste_idcc": [
+            "5021",
+            "5003"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
-          "longitude": "2.351838",
+          "longitude": "2.3520586814",
           "nom_commercial": null,
           "numero_voie": "4",
+          "dernier_numero_voie": null,
           "region": "11",
           "siret": "21750001600019",
           "statut_diffusion_etablissement": "O",
@@ -57,13 +64,14 @@
           "type_voie": "PL"
         },
         "activite_principale": "84.11Z",
+        "activite_principale_naf25": "84.11Y",
         "categorie_entreprise": "GE",
         "caractere_employeur": null,
         "annee_categorie_entreprise": "2023",
         "date_creation": "1983-03-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2025-10-17T06:02:40",
-        "date_mise_a_jour_insee": "2025-09-03T15:38:45",
+        "date_mise_a_jour": "2026-05-15T09:12:11",
+        "date_mise_a_jour_insee": "2025-12-06T05:40:24",
         "date_mise_a_jour_rne": null,
         "dirigeants": [],
         "etat_administratif": "A",
@@ -81,9 +89,30 @@
             "code_insee": "75",
             "elus": [
               {
-                "nom": "AKKARI",
-                "prenoms": "Maya",
-                "annee_de_naissance": "1970-04",
+                "nom": "AHOUDIAN",
+                "prenoms": "Adji",
+                "annee_de_naissance": "1979-09",
+                "fonction": "26ème adjoint au Maire",
+                "sexe": "M"
+              },
+              {
+                "nom": "AKRAMI-CASTANON",
+                "prenoms": "Azadeh",
+                "annee_de_naissance": "1981-08",
+                "fonction": "13ème adjoint au Maire",
+                "sexe": "F"
+              },
+              {
+                "nom": "ALIBERT",
+                "prenoms": "Antoine",
+                "annee_de_naissance": "1989-06",
+                "fonction": "32ème adjoint au Maire",
+                "sexe": "M"
+              },
+              {
+                "nom": "ALIX",
+                "prenoms": "Marion-Emi",
+                "annee_de_naissance": "1989-10",
                 "fonction": null,
                 "sexe": "F"
               },
@@ -102,25 +131,25 @@
                 "sexe": "M"
               },
               {
-                "nom": "BADAT-KARAM",
-                "prenoms": "Samia",
-                "annee_de_naissance": "1978-08",
+                "nom": "ARENAS",
+                "prenoms": "Rodrigo",
+                "annee_de_naissance": "1974-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "ASTIE",
+                "prenoms": "Karl",
+                "annee_de_naissance": "1991-01",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "AUSTIN",
+                "prenoms": "Gwenaëlle",
+                "annee_de_naissance": "1965-10",
                 "fonction": null,
                 "sexe": "F"
-              },
-              {
-                "nom": "BADINA-SERPETTE",
-                "prenoms": "Frédéric",
-                "annee_de_naissance": "1979-12",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "BALADI",
-                "prenoms": "Vincent",
-                "annee_de_naissance": "1985-04",
-                "fonction": null,
-                "sexe": "M"
               },
               {
                 "nom": "BALDINI",
@@ -130,10 +159,24 @@
                 "sexe": "F"
               },
               {
+                "nom": "BARBAGLI",
+                "prenoms": "Karine",
+                "annee_de_naissance": "1972-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BATY",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1992-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
                 "nom": "BAUDRIER",
                 "prenoms": "Jacques",
                 "annee_de_naissance": "1966-06",
-                "fonction": "5ème adjoint au Maire",
+                "fonction": "3ème adjoint au Maire",
                 "sexe": "M"
               },
               {
@@ -147,20 +190,20 @@
                 "nom": "BELLIARD",
                 "prenoms": "David",
                 "annee_de_naissance": "1978-05",
-                "fonction": "7ème adjoint au Maire",
-                "sexe": "M"
-              },
-              {
-                "nom": "BERNARD",
-                "prenoms": "René-François",
-                "annee_de_naissance": "1950-11",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "BERTHAULT",
-                "prenoms": "Jean-Didier",
-                "annee_de_naissance": "1971-10",
+                "nom": "BENASSAYA",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1996-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "BENMOUFFOK",
+                "prenoms": "Saïd",
+                "annee_de_naissance": "1983-09",
                 "fonction": null,
                 "sexe": "M"
               },
@@ -172,10 +215,24 @@
                 "sexe": "F"
               },
               {
+                "nom": "BERTRAND",
+                "prenoms": "Agnès",
+                "annee_de_naissance": "1955-01",
+                "fonction": "29ème adjoint au Maire",
+                "sexe": "F"
+              },
+              {
                 "nom": "BIDARD",
                 "prenoms": "Hélène",
                 "annee_de_naissance": "1981-04",
-                "fonction": "2ème adjoint au Maire",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "BIKOULOULOU",
+                "prenoms": "Annah",
+                "annee_de_naissance": "1998-01",
+                "fonction": "23ème adjoint au Maire",
                 "sexe": "F"
               },
               {
@@ -186,39 +243,32 @@
                 "sexe": "F"
               },
               {
-                "nom": "BLAUEL",
-                "prenoms": "Célia",
-                "annee_de_naissance": "1981-11",
+                "nom": "BOILLOT",
+                "prenoms": "Julie",
+                "annee_de_naissance": "1981-04",
                 "fonction": null,
                 "sexe": "F"
               },
               {
-                "nom": "BLOCHE",
-                "prenoms": "Patrick",
-                "annee_de_naissance": "1956-07",
-                "fonction": "1er adjoint au Maire",
-                "sexe": "M"
-              },
-              {
-                "nom": "BOHBOT",
-                "prenoms": "Jack-Yves",
-                "annee_de_naissance": "1956-04",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "BONNET-OULALDJ",
+                "nom": "BONNET OULALDJ",
                 "prenoms": "Nicolas",
                 "annee_de_naissance": "1974-05",
-                "fonction": "36ème adjoint au Maire",
+                "fonction": "33ème adjoint au Maire",
                 "sexe": "M"
               },
               {
-                "nom": "BOUGERET",
-                "prenoms": "Alix",
-                "annee_de_naissance": "1978-04",
+                "nom": "BOUADMA",
+                "prenoms": "Lila",
+                "annee_de_naissance": "1971-01",
                 "fonction": null,
                 "sexe": "F"
+              },
+              {
+                "nom": "BOUIGUE",
+                "prenoms": "Richard",
+                "annee_de_naissance": "1970-03",
+                "fonction": "12ème adjoint au Maire",
+                "sexe": "M"
               },
               {
                 "nom": "BOULARD",
@@ -228,24 +278,24 @@
                 "sexe": "M"
               },
               {
-                "nom": "BOURNAZEL",
-                "prenoms": "Pierre-Yves",
-                "annee_de_naissance": "1977-08",
+                "nom": "BOURGEAT-LAMI",
+                "prenoms": "Yvain",
+                "annee_de_naissance": "1998-04",
                 "fonction": null,
                 "sexe": "M"
+              },
+              {
+                "nom": "BOURI",
+                "prenoms": "Amina",
+                "annee_de_naissance": "1993-04",
+                "fonction": "34ème adjoint au Maire",
+                "sexe": "F"
               },
               {
                 "nom": "BOUX",
                 "prenoms": "Anne-Claire",
                 "annee_de_naissance": "1987-03",
-                "fonction": "6ème adjoint au Maire",
-                "sexe": "F"
-              },
-              {
-                "nom": "BOËLLE",
-                "prenoms": "Sandrine",
-                "annee_de_naissance": "1961-05",
-                "fonction": null,
+                "fonction": "2ème adjoint au Maire",
                 "sexe": "F"
               },
               {
@@ -254,20 +304,6 @@
                 "annee_de_naissance": "1980-04",
                 "fonction": null,
                 "sexe": "M"
-              },
-              {
-                "nom": "BROSSEL",
-                "prenoms": "Colombe",
-                "annee_de_naissance": "1976-04",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "BUCAILLE",
-                "prenoms": "Véronique",
-                "annee_de_naissance": "1960-01",
-                "fonction": null,
-                "sexe": "F"
               },
               {
                 "nom": "BÜRKLI",
@@ -284,27 +320,6 @@
                 "sexe": "M"
               },
               {
-                "nom": "CAPLIEZ",
-                "prenoms": "Stéphane",
-                "annee_de_naissance": "1963-05",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "CARON-THIBAULT",
-                "prenoms": "Gauthier",
-                "annee_de_naissance": "1981-12",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "CARRERE-GEE",
-                "prenoms": "Marie-Claire",
-                "annee_de_naissance": "1963-03",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
                 "nom": "CASANOVA",
                 "prenoms": "Pierre",
                 "annee_de_naissance": "1968-06",
@@ -312,58 +327,51 @@
                 "sexe": "M"
               },
               {
-                "nom": "CHARNOZ",
-                "prenoms": "Sandrine",
-                "annee_de_naissance": "1972-01",
-                "fonction": "10ème adjoint au Maire",
+                "nom": "CASTETS",
+                "prenoms": "Lucie",
+                "annee_de_naissance": "1987-03",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CHAOUCHE",
+                "prenoms": "Sonia",
+                "annee_de_naissance": "1984-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "CHASSANIOL",
+                "prenoms": "Clara",
+                "annee_de_naissance": "1993-07",
+                "fonction": null,
                 "sexe": "F"
               },
               {
                 "nom": "CHEVANDIER",
                 "prenoms": "Thomas",
                 "annee_de_naissance": "1985-03",
-                "fonction": "37ème adjoint au Maire",
+                "fonction": "28ème adjoint au Maire",
                 "sexe": "M"
               },
               {
-                "nom": "CHICHE",
-                "prenoms": "Mahor",
-                "annee_de_naissance": "1975-09",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "COBLENCE",
-                "prenoms": "Emmanuel",
-                "annee_de_naissance": "1981-10",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "COCHARD",
-                "prenoms": "Maxime",
-                "annee_de_naissance": "1984-07",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "COFFIN",
-                "prenoms": "Alice",
-                "annee_de_naissance": "1978-04",
+                "nom": "CHIKIROU",
+                "prenoms": "Sophia",
+                "annee_de_naissance": "1979-06",
                 "fonction": null,
                 "sexe": "F"
-              },
-              {
-                "nom": "CONNAULT",
-                "prenoms": "François",
-                "annee_de_naissance": "1953-01",
-                "fonction": null,
-                "sexe": "M"
               },
               {
                 "nom": "CORDEBARD",
                 "prenoms": "Alexandra",
                 "annee_de_naissance": "1967-01",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "COULIBALY",
+                "prenoms": "Kadiatou",
+                "annee_de_naissance": "1993-01",
                 "fonction": null,
                 "sexe": "F"
               },
@@ -382,11 +390,18 @@
                 "sexe": "M"
               },
               {
-                "nom": "D'HAUTESERRE",
-                "prenoms": "Jeanne",
-                "annee_de_naissance": "1953-07",
+                "nom": "CREUZE",
+                "prenoms": "Eléonore",
+                "annee_de_naissance": "1962-05",
                 "fonction": null,
                 "sexe": "F"
+              },
+              {
+                "nom": "CROSNIER",
+                "prenoms": "Maxime",
+                "annee_de_naissance": "1991-08",
+                "fonction": "36ème adjoint au Maire",
+                "sexe": "M"
               },
               {
                 "nom": "DAGNAUD",
@@ -410,23 +425,16 @@
                 "sexe": "F"
               },
               {
-                "nom": "DAVIAUD",
-                "prenoms": "Jean-Philippe",
-                "annee_de_naissance": "1965-09",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "DE CLERMONT-TONNERRE",
-                "prenoms": "Claire",
-                "annee_de_naissance": "1956-02",
+                "nom": "DE COMPREIGNAC",
+                "prenoms": "Séverine",
+                "annee_de_naissance": "1969-02",
                 "fonction": null,
                 "sexe": "F"
               },
               {
-                "nom": "DE COMPREIGNAC",
-                "prenoms": "Séverine",
-                "annee_de_naissance": "1969-02",
+                "nom": "DE LA ROCHEFOUCAULD",
+                "prenoms": "Sophie",
+                "annee_de_naissance": "1965-10",
                 "fonction": null,
                 "sexe": "F"
               },
@@ -438,18 +446,25 @@
                 "sexe": "F"
               },
               {
+                "nom": "DELMESTRE",
+                "prenoms": "Mathieu",
+                "annee_de_naissance": "1985-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DES GAYETS",
+                "prenoms": "Maxime",
+                "annee_de_naissance": "1978-05",
+                "fonction": "18ème adjoint au Maire",
+                "sexe": "M"
+              },
+              {
                 "nom": "DIDIER",
                 "prenoms": "François-Marie",
                 "annee_de_naissance": "1980-10",
                 "fonction": null,
                 "sexe": "M"
-              },
-              {
-                "nom": "DOUCERÉ",
-                "prenoms": "Marie-Caroline",
-                "annee_de_naissance": "1978-08",
-                "fonction": null,
-                "sexe": "F"
               },
               {
                 "nom": "DUMAS",
@@ -459,6 +474,27 @@
                 "sexe": "F"
               },
               {
+                "nom": "DUPONT",
+                "prenoms": "Antoine",
+                "annee_de_naissance": "1990-04",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DUQUERROIR",
+                "prenoms": "Simon",
+                "annee_de_naissance": "1994-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "DURAND",
+                "prenoms": "Guillaume",
+                "annee_de_naissance": "1986-11",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
                 "nom": "DURAND-RAUCHER",
                 "prenoms": "Nour",
                 "annee_de_naissance": "1979-09",
@@ -466,10 +502,24 @@
                 "sexe": "M"
               },
               {
+                "nom": "DUTREUIL",
+                "prenoms": "Frédérique",
+                "annee_de_naissance": "1968-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "EKON",
+                "prenoms": "Carine",
+                "annee_de_naissance": "1987-12",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
                 "nom": "EL AARAJE",
                 "prenoms": "Lamia",
                 "annee_de_naissance": "1986-11",
-                "fonction": null,
+                "fonction": "1er adjoint au Maire",
                 "sexe": "F"
               },
               {
@@ -480,52 +530,17 @@
                 "sexe": "F"
               },
               {
-                "nom": "FAUGERON",
-                "prenoms": "Corine",
-                "annee_de_naissance": "1957-09",
+                "nom": "FOURDRINIER",
+                "prenoms": "Théa",
+                "annee_de_naissance": "1997-10",
                 "fonction": null,
                 "sexe": "F"
               },
               {
-                "nom": "FILOCHE",
-                "prenoms": "Léa",
-                "annee_de_naissance": "1978-05",
-                "fonction": "12ème adjoint au Maire",
-                "sexe": "F"
-              },
-              {
-                "nom": "FLORENTIN",
-                "prenoms": "Alexandre",
-                "annee_de_naissance": "1986-04",
+                "nom": "FREROT",
+                "prenoms": "Irénée",
+                "annee_de_naissance": "1989-11",
                 "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "FOUCHÉ",
-                "prenoms": "Ségolène",
-                "annee_de_naissance": "1994-08",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "FÉRAUD",
-                "prenoms": "Rémi",
-                "annee_de_naissance": "1971-08",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "GABELOTAUD",
-                "prenoms": "Afaf",
-                "annee_de_naissance": "1975-10",
-                "fonction": "14ème adjoint au Maire",
-                "sexe": "F"
-              },
-              {
-                "nom": "GALVANI",
-                "prenoms": "Jacques",
-                "annee_de_naissance": "1969-04",
-                "fonction": "13ème adjoint au Maire",
                 "sexe": "M"
               },
               {
@@ -550,31 +565,17 @@
                 "sexe": "F"
               },
               {
-                "nom": "GILLET",
-                "prenoms": "Jean-Philippe",
-                "annee_de_naissance": "1964-11",
+                "nom": "GERMONT",
+                "prenoms": "Alexia",
+                "annee_de_naissance": "1970-12",
                 "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "GIRARD",
-                "prenoms": "Christophe",
-                "annee_de_naissance": "1956-02",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "GLEIZES",
-                "prenoms": "Jérôme",
-                "annee_de_naissance": "1970-06",
-                "fonction": null,
-                "sexe": "M"
+                "sexe": "F"
               },
               {
                 "nom": "GOMES",
                 "prenoms": "Barbara",
                 "annee_de_naissance": "1987-05",
-                "fonction": null,
+                "fonction": "15ème adjoint au Maire",
                 "sexe": "F"
               },
               {
@@ -585,46 +586,60 @@
                 "sexe": "M"
               },
               {
-                "nom": "GOVCIYAN",
-                "prenoms": "Alexis",
-                "annee_de_naissance": "1956-10",
+                "nom": "GOZI",
+                "prenoms": "Sandro",
+                "annee_de_naissance": "1968-03",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "GRANIER",
-                "prenoms": "Rudolph",
-                "annee_de_naissance": "1979-06",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "GREGOIRE",
+                "nom": "GRÉGOIRE",
                 "prenoms": "Emmanuel",
                 "annee_de_naissance": "1977-12",
+                "fonction": "Maire",
+                "sexe": "M"
+              },
+              {
+                "nom": "GUENANEN",
+                "prenoms": "Valentin",
+                "annee_de_naissance": "1990-06",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "GUHL",
-                "prenoms": "Antoinette",
-                "annee_de_naissance": "1970-06",
+                "nom": "GUERRIER",
+                "prenoms": "Thierry",
+                "annee_de_naissance": "1959-08",
                 "fonction": null,
-                "sexe": "F"
+                "sexe": "M"
               },
               {
                 "nom": "GUILLOU",
                 "prenoms": "Antoine",
                 "annee_de_naissance": "1989-02",
-                "fonction": "17ème adjoint au Maire",
+                "fonction": "24ème adjoint au Maire",
                 "sexe": "M"
               },
               {
-                "nom": "HATTE",
-                "prenoms": "Paul",
-                "annee_de_naissance": "1993-09",
+                "nom": "HADDAD",
+                "prenoms": "Benjamin",
+                "annee_de_naissance": "1985-10",
                 "fonction": null,
                 "sexe": "M"
+              },
+              {
+                "nom": "HAVET",
+                "prenoms": "Kévin",
+                "annee_de_naissance": "1989-06",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "HAVET",
+                "prenoms": "Manon",
+                "annee_de_naissance": "1986-06",
+                "fonction": null,
+                "sexe": "F"
               },
               {
                 "nom": "HERVIEU",
@@ -634,18 +649,11 @@
                 "sexe": "F"
               },
               {
-                "nom": "HIDALGO",
-                "prenoms": "Anne",
-                "annee_de_naissance": "1959-06",
-                "fonction": "Maire",
+                "nom": "HOFFMAN",
+                "prenoms": "Emmanuelle",
+                "annee_de_naissance": "1964-12",
+                "fonction": null,
                 "sexe": "F"
-              },
-              {
-                "nom": "HOCQUARD",
-                "prenoms": "Frédéric",
-                "annee_de_naissance": "1969-09",
-                "fonction": "19ème adjoint au Maire",
-                "sexe": "M"
               },
               {
                 "nom": "IBLED",
@@ -655,25 +663,11 @@
                 "sexe": "F"
               },
               {
-                "nom": "JACQUEMONT",
-                "prenoms": "Hélène",
-                "annee_de_naissance": "1968-04",
+                "nom": "JARDIN",
+                "prenoms": "Alexandra",
+                "annee_de_naissance": "1983-03",
                 "fonction": null,
                 "sexe": "F"
-              },
-              {
-                "nom": "JAMET-FOURNIER",
-                "prenoms": "Boris",
-                "annee_de_naissance": "1985-08",
-                "fonction": null,
-                "sexe": "M"
-              },
-              {
-                "nom": "JEANNETÉ",
-                "prenoms": "Nicolas",
-                "annee_de_naissance": "1965-06",
-                "fonction": null,
-                "sexe": "M"
               },
               {
                 "nom": "JEMNI",
@@ -683,9 +677,16 @@
                 "sexe": "F"
               },
               {
-                "nom": "KERBOUA",
-                "prenoms": "Farida",
-                "annee_de_naissance": "1952-07",
+                "nom": "KANTÉ",
+                "prenoms": "Abdoulaye",
+                "annee_de_naissance": "1979-09",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "KARAOUN GOUEZOU",
+                "prenoms": "Rym",
+                "annee_de_naissance": "1977-12",
                 "fonction": null,
                 "sexe": "F"
               },
@@ -697,53 +698,39 @@
                 "sexe": "F"
               },
               {
-                "nom": "KOMITES",
-                "prenoms": "Nadine Pénélope",
-                "annee_de_naissance": "1959-05",
-                "fonction": "16ème adjoint au Maire",
+                "nom": "KISSI",
+                "prenoms": "Rania",
+                "annee_de_naissance": "1996-01",
+                "fonction": null,
                 "sexe": "F"
               },
               {
                 "nom": "KONÉ",
                 "prenoms": "Fatoumata",
                 "annee_de_naissance": "1981-06",
-                "fonction": null,
+                "fonction": "4ème adjoint au Maire",
                 "sexe": "F"
               },
               {
                 "nom": "KOUASSI",
                 "prenoms": "Johanne",
                 "annee_de_naissance": "1982-10",
-                "fonction": null,
+                "fonction": "9ème adjoint au Maire",
                 "sexe": "F"
               },
               {
-                "nom": "KUSTER",
-                "prenoms": "Brigitte",
-                "annee_de_naissance": "1959-04",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "LAHOUASSA",
-                "prenoms": "Anessa",
-                "annee_de_naissance": "1983-02",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "LAUSSUCQ",
-                "prenoms": "Jean",
-                "annee_de_naissance": "1990-02",
+                "nom": "LAVAL",
+                "prenoms": "Gaston",
+                "annee_de_naissance": "1991-10",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "LAVILLE",
-                "prenoms": "Nathalie",
-                "annee_de_naissance": "1962-10",
+                "nom": "LEBON",
+                "prenoms": "Luc",
+                "annee_de_naissance": "1966-10",
                 "fonction": null,
-                "sexe": "F"
+                "sexe": "M"
               },
               {
                 "nom": "LECOQ",
@@ -760,9 +747,9 @@
                 "sexe": "F"
               },
               {
-                "nom": "LEFEVRE",
-                "prenoms": "Franck",
-                "annee_de_naissance": "1964-09",
+                "nom": "LEHOUX",
+                "prenoms": "Arnaud",
+                "annee_de_naissance": "1993-10",
                 "fonction": null,
                 "sexe": "M"
               },
@@ -774,109 +761,88 @@
                 "sexe": "M"
               },
               {
-                "nom": "LELIEVRE",
-                "prenoms": "Maud",
-                "annee_de_naissance": "1975-04",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "LEMARDELEY",
-                "prenoms": "Marie-Christine",
-                "annee_de_naissance": "1953-02",
-                "fonction": "18ème adjoint au Maire",
-                "sexe": "F"
-              },
-              {
                 "nom": "LERT",
                 "prenoms": "Dan",
                 "annee_de_naissance": "1975-02",
-                "fonction": "21ème adjoint au Maire",
+                "fonction": "14ème adjoint au Maire",
                 "sexe": "M"
               },
               {
-                "nom": "LETISSIER",
-                "prenoms": "Florentin",
-                "annee_de_naissance": "1986-02",
-                "fonction": "23ème adjoint au Maire",
-                "sexe": "M"
-              },
-              {
-                "nom": "LEVIEUX",
-                "prenoms": "Véronique",
-                "annee_de_naissance": "1971-05",
-                "fonction": "20ème adjoint au Maire",
-                "sexe": "F"
-              },
-              {
-                "nom": "LORIAU",
-                "prenoms": "Jérôme",
-                "annee_de_naissance": "1971-04",
+                "nom": "LESIEUR",
+                "prenoms": "Antoine",
+                "annee_de_naissance": "1994-12",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "LUBIN-NOËL",
-                "prenoms": "Carline",
-                "annee_de_naissance": "1980-02",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "MADEC",
-                "prenoms": "Roger",
-                "annee_de_naissance": "1950-10",
+                "nom": "LISCIA",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1989-08",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "MALACHARD DES REYSSIERS",
-                "prenoms": "Delphine",
-                "annee_de_naissance": "1970-03",
+                "nom": "LOMBARD",
+                "prenoms": "Pierre",
+                "annee_de_naissance": "1987-03",
+                "fonction": "7ème adjoint au Maire",
+                "sexe": "M"
+              },
+              {
+                "nom": "LÉCUYER",
+                "prenoms": "Catherine",
+                "annee_de_naissance": "1973-02",
                 "fonction": null,
                 "sexe": "F"
               },
               {
-                "nom": "MAQUOI",
-                "prenoms": "Nathalie",
-                "annee_de_naissance": "1979-03",
+                "nom": "MADINIER",
+                "prenoms": "Ophélie",
+                "annee_de_naissance": "1995-08",
                 "fonction": null,
                 "sexe": "F"
               },
               {
-                "nom": "MARGAIN",
-                "prenoms": "Franck",
-                "annee_de_naissance": "1961-05",
+                "nom": "MAILLARD",
+                "prenoms": "Sylvain",
+                "annee_de_naissance": "1974-04",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "MARKOVIC",
-                "prenoms": "Douchka",
-                "annee_de_naissance": "1978-04",
+                "nom": "MARCHAND",
+                "prenoms": "Marie-Pierre",
+                "annee_de_naissance": "1961-12",
                 "fonction": null,
                 "sexe": "F"
               },
               {
-                "nom": "MARTIAL",
-                "prenoms": "Jacques",
-                "annee_de_naissance": "1955-11",
+                "nom": "MASCHINO",
+                "prenoms": "Sylvain",
+                "annee_de_naissance": "1989-12",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "MARTINS",
-                "prenoms": "Jean-François",
-                "annee_de_naissance": "1981-12",
+                "nom": "MENNUCCI",
+                "prenoms": "Alexandre",
+                "annee_de_naissance": "1993-09",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "MESSAS",
-                "prenoms": "Emmanuel",
-                "annee_de_naissance": "1969-09",
+                "nom": "MERGEY",
+                "prenoms": "Charles",
+                "annee_de_naissance": "1982-08",
                 "fonction": null,
                 "sexe": "M"
+              },
+              {
+                "nom": "MERZI",
+                "prenoms": "Yasmina",
+                "annee_de_naissance": "1970-11",
+                "fonction": "25ème adjoint au Maire",
+                "sexe": "F"
               },
               {
                 "nom": "MEUNIER",
@@ -900,32 +866,25 @@
                 "sexe": "F"
               },
               {
-                "nom": "NAJDOVSKI",
-                "prenoms": "Christophe",
-                "annee_de_naissance": "1969-08",
-                "fonction": "25ème adjoint au Maire",
-                "sexe": "M"
-              },
-              {
-                "nom": "NGATCHA",
-                "prenoms": "Arnaud",
-                "annee_de_naissance": "1971-08",
-                "fonction": "27ème adjoint au Maire",
-                "sexe": "M"
-              },
-              {
                 "nom": "NIAKATÉ",
                 "prenoms": "Aminata",
                 "annee_de_naissance": "1980-11",
+                "fonction": "9ème adjoint au Maire",
+                "sexe": "F"
+              },
+              {
+                "nom": "NICOL",
+                "prenoms": "Alexandra",
+                "annee_de_naissance": "1982-03",
                 "fonction": null,
                 "sexe": "F"
               },
               {
-                "nom": "NORDMAN",
-                "prenoms": "Nicolas",
-                "annee_de_naissance": "1971-03",
-                "fonction": "29ème adjoint au Maire",
-                "sexe": "M"
+                "nom": "NOURI",
+                "prenoms": "Sabrina",
+                "annee_de_naissance": "1983-08",
+                "fonction": null,
+                "sexe": "F"
               },
               {
                 "nom": "OLIVIER",
@@ -935,37 +894,44 @@
                 "sexe": "M"
               },
               {
-                "nom": "PATRICE",
-                "prenoms": "Laurence",
-                "annee_de_naissance": "1963-06",
-                "fonction": "22ème adjoint au Maire",
+                "nom": "OUVRET",
+                "prenoms": "Jeanne",
+                "annee_de_naissance": "2002-05",
+                "fonction": null,
                 "sexe": "F"
               },
               {
-                "nom": "PATRIE",
-                "prenoms": "Béatrice",
-                "annee_de_naissance": "1957-05",
+                "nom": "PARDO",
+                "prenoms": "Rachel-Flore",
+                "annee_de_naissance": "1993-11",
                 "fonction": null,
                 "sexe": "F"
+              },
+              {
+                "nom": "PASQUIER",
+                "prenoms": "Jules",
+                "annee_de_naissance": "2000-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "PATRICE",
+                "prenoms": "Laurence",
+                "annee_de_naissance": "1963-06",
+                "fonction": "31ème adjoint au Maire",
+                "sexe": "F"
+              },
+              {
+                "nom": "PECHENARD",
+                "prenoms": "Frederic",
+                "annee_de_naissance": "1957-03",
+                "fonction": null,
+                "sexe": "M"
               },
               {
                 "nom": "PETIT",
                 "prenoms": "Carine",
                 "annee_de_naissance": "1974-06",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "PIERRE-MARIE",
-                "prenoms": "Emmanuelle",
-                "annee_de_naissance": "1971-01",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "PIRILLO",
-                "prenoms": "Aurélie",
-                "annee_de_naissance": "1989-06",
                 "fonction": null,
                 "sexe": "F"
               },
@@ -977,13 +943,6 @@
                 "sexe": "M"
               },
               {
-                "nom": "POLSKI",
-                "prenoms": "Olivia",
-                "annee_de_naissance": "1975-06",
-                "fonction": "24ème adjoint au Maire",
-                "sexe": "F"
-              },
-              {
                 "nom": "PRIMET",
                 "prenoms": "Raphaëlle",
                 "annee_de_naissance": "1964-09",
@@ -991,25 +950,32 @@
                 "sexe": "F"
               },
               {
+                "nom": "PRUDHOMME",
+                "prenoms": "Christophe",
+                "annee_de_naissance": "1960-08",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
                 "nom": "PULVAR",
                 "prenoms": "Audrey",
                 "annee_de_naissance": "1972-02",
-                "fonction": "26ème adjoint au Maire",
+                "fonction": "17ème adjoint au Maire",
                 "sexe": "F"
-              },
-              {
-                "nom": "PÉCHENARD",
-                "prenoms": "Frédéric",
-                "annee_de_naissance": "1957-03",
-                "fonction": null,
-                "sexe": "M"
               },
               {
                 "nom": "RABADAN",
                 "prenoms": "Pierre",
                 "annee_de_naissance": "1980-07",
-                "fonction": "31ème adjoint au Maire",
+                "fonction": "30ème adjoint au Maire",
                 "sexe": "M"
+              },
+              {
+                "nom": "RAFOWICZ",
+                "prenoms": "Emma",
+                "annee_de_naissance": "1995-06",
+                "fonction": null,
+                "sexe": "F"
               },
               {
                 "nom": "RAIFAUD",
@@ -1019,13 +985,6 @@
                 "sexe": "M"
               },
               {
-                "nom": "RAYMOND-ROSSI",
-                "prenoms": "Marie-José",
-                "annee_de_naissance": "1960-06",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
                 "nom": "REDLER",
                 "prenoms": "Jérémy",
                 "annee_de_naissance": "1981-11",
@@ -1033,9 +992,9 @@
                 "sexe": "M"
               },
               {
-                "nom": "RIVIER",
-                "prenoms": "Emmanuelle",
-                "annee_de_naissance": "1966-03",
+                "nom": "ROCCA",
+                "prenoms": "Isabelle",
+                "annee_de_naissance": "1977-10",
                 "fonction": null,
                 "sexe": "F"
               },
@@ -1043,48 +1002,76 @@
                 "nom": "ROLLAND",
                 "prenoms": "Carine",
                 "annee_de_naissance": "1972-08",
-                "fonction": "28ème adjoint au Maire",
+                "fonction": "19ème adjoint au Maire",
                 "sexe": "F"
               },
               {
-                "nom": "ROMERO-MICHEL",
-                "prenoms": "Jean-Luc",
-                "annee_de_naissance": "1959-06",
-                "fonction": "33ème adjoint au Maire",
-                "sexe": "M"
-              },
-              {
-                "nom": "RÉMY-LELEU",
-                "prenoms": "Raphaëlle",
-                "annee_de_naissance": "1992-01",
-                "fonction": null,
+                "nom": "ROSSET",
+                "prenoms": "Marine",
+                "annee_de_naissance": "1985-12",
+                "fonction": "8ème adjoint au Maire",
                 "sexe": "F"
               },
               {
-                "nom": "SAGASPE",
-                "prenoms": "Chloe",
-                "annee_de_naissance": "1989-12",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "SAMAKE",
-                "prenoms": "Hamidou",
-                "annee_de_naissance": "1956-12",
+                "nom": "ROUFFIO",
+                "prenoms": "Tom",
+                "annee_de_naissance": "1988-05",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "SANCHES RUIVO",
-                "prenoms": "Hermano",
-                "annee_de_naissance": "1966-05",
+                "nom": "ROUVEAU",
+                "prenoms": "Nicolas",
+                "annee_de_naissance": "1988-07",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "SEBBAH",
-                "prenoms": "Hanna",
-                "annee_de_naissance": "1991-03",
+                "nom": "SABATIER",
+                "prenoms": "Juliette",
+                "annee_de_naissance": "1977-08",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "SAKET BOUDERBALA",
+                "prenoms": "Béchir",
+                "annee_de_naissance": "1995-02",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SAKHO",
+                "prenoms": "Ladji",
+                "annee_de_naissance": "1984-12",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SAUVAGE",
+                "prenoms": "Maxime",
+                "annee_de_naissance": "1988-12",
+                "fonction": "20ème adjoint au Maire",
+                "sexe": "M"
+              },
+              {
+                "nom": "SCHAHL",
+                "prenoms": "Éric",
+                "annee_de_naissance": "1973-10",
+                "fonction": null,
+                "sexe": "M"
+              },
+              {
+                "nom": "SCHIAPPA",
+                "prenoms": "Marlène",
+                "annee_de_naissance": "1982-11",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
+                "nom": "SERINO",
+                "prenoms": "Valentine",
+                "annee_de_naissance": "1991-06",
                 "fonction": null,
                 "sexe": "F"
               },
@@ -1092,85 +1079,78 @@
                 "nom": "SIMONDON",
                 "prenoms": "Paul",
                 "annee_de_naissance": "1976-11",
-                "fonction": "37ème adjoint au Maire",
+                "fonction": null,
                 "sexe": "M"
+              },
+              {
+                "nom": "SIRY-HOUARI",
+                "prenoms": "Gabrielle",
+                "annee_de_naissance": "1990-09",
+                "fonction": null,
+                "sexe": "F"
               },
               {
                 "nom": "SITBON",
                 "prenoms": "Florian",
                 "annee_de_naissance": "1976-05",
-                "fonction": null,
+                "fonction": "6ème adjoint au Maire",
                 "sexe": "M"
               },
               {
                 "nom": "SOREL",
                 "prenoms": "Laurent",
                 "annee_de_naissance": "1977-04",
+                "fonction": "35ème adjoint au Maire",
+                "sexe": "M"
+              },
+              {
+                "nom": "STERKERS",
+                "prenoms": "Jérôme",
+                "annee_de_naissance": "1977-01",
                 "fonction": null,
                 "sexe": "M"
               },
               {
-                "nom": "SOUYRIS",
-                "prenoms": "Anne",
-                "annee_de_naissance": "1964-08",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "STIBBE",
-                "prenoms": "Elisabeth",
-                "annee_de_naissance": "1962-12",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
-                "nom": "SZPINER",
-                "prenoms": "Francis",
-                "annee_de_naissance": "1954-03",
+                "nom": "TIBERTI",
+                "prenoms": "Adrien",
+                "annee_de_naissance": "1981-12",
                 "fonction": null,
                 "sexe": "M"
-              },
-              {
-                "nom": "TAÏEB",
-                "prenoms": "Karen",
-                "annee_de_naissance": "1962-11",
-                "fonction": "32ème adjoint au Maire",
-                "sexe": "F"
-              },
-              {
-                "nom": "TERLIZZI",
-                "prenoms": "Delphine",
-                "annee_de_naissance": "1972-12",
-                "fonction": null,
-                "sexe": "F"
               },
               {
                 "nom": "TIMSIT",
                 "prenoms": "Alice",
                 "annee_de_naissance": "1993-08",
-                "fonction": null,
+                "fonction": "5ème adjoint au Maire",
                 "sexe": "F"
+              },
+              {
+                "nom": "TIMSIT",
+                "prenoms": "Roland",
+                "annee_de_naissance": "1958-05",
+                "fonction": null,
+                "sexe": "M"
               },
               {
                 "nom": "TONOLLI",
                 "prenoms": "Mélody",
                 "annee_de_naissance": "1984-04",
-                "fonction": "35ème adjoint au Maire",
+                "fonction": "21ème adjoint au Maire",
                 "sexe": "F"
               },
               {
                 "nom": "TORANIAN",
                 "prenoms": "Anouch",
                 "annee_de_naissance": "1991-09",
-                "fonction": "34ème adjoint au Maire",
+                "fonction": "27ème adjoint au Maire",
                 "sexe": "F"
               },
               {
-                "nom": "TOUBIANA",
-                "prenoms": "Marie",
-                "annee_de_naissance": "1947-10",
+                "nom": "TRAN",
+                "prenoms": "Daniel",
+                "annee_de_naissance": "1991-09",
                 "fonction": null,
-                "sexe": "F"
+                "sexe": "M"
               },
               {
                 "nom": "TYSSANDIER",
@@ -1180,32 +1160,32 @@
                 "sexe": "F"
               },
               {
-                "nom": "VASA",
-                "prenoms": "Léa",
-                "annee_de_naissance": "1990-11",
-                "fonction": null,
-                "sexe": "F"
-              },
-              {
                 "nom": "VAUGLIN",
                 "prenoms": "François",
                 "annee_de_naissance": "1969-12",
-                "fonction": null,
+                "fonction": "22ème adjoint au Maire",
                 "sexe": "M"
               },
               {
-                "nom": "VERSINI",
-                "prenoms": "Dominique",
-                "annee_de_naissance": "1954-07",
-                "fonction": "36ème adjoint au Maire",
+                "nom": "VERZELETTI",
+                "prenoms": "Céline",
+                "annee_de_naissance": "1969-02",
+                "fonction": null,
                 "sexe": "F"
               },
               {
-                "nom": "VIRY",
-                "prenoms": "Patrick",
-                "annee_de_naissance": "1976-07",
+                "nom": "VIPARD",
+                "prenoms": "Laetitia",
+                "annee_de_naissance": "1979-04",
                 "fonction": null,
-                "sexe": "M"
+                "sexe": "F"
+              },
+              {
+                "nom": "VIZIOZ-BRAMI",
+                "prenoms": "Camille",
+                "annee_de_naissance": "1975-12",
+                "fonction": null,
+                "sexe": "F"
               },
               {
                 "nom": "VÉRON",
@@ -1215,6 +1195,13 @@
                 "sexe": "M"
               },
               {
+                "nom": "WALLER",
+                "prenoms": "Marion",
+                "annee_de_naissance": "1992-06",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
                 "nom": "WEIL",
                 "prenoms": "Ariel",
                 "annee_de_naissance": "1973-06",
@@ -1222,32 +1209,57 @@
                 "sexe": "M"
               },
               {
+                "nom": "YAFFA",
+                "prenoms": "Mams",
+                "annee_de_naissance": "1976-01",
+                "fonction": "16ème adjoint au Maire",
+                "sexe": "M"
+              },
+              {
+                "nom": "YAVCHITZ",
+                "prenoms": "Elisa",
+                "annee_de_naissance": "1973-05",
+                "fonction": null,
+                "sexe": "F"
+              },
+              {
                 "nom": "ZIADY",
                 "prenoms": "Karim",
                 "annee_de_naissance": "1989-05",
-                "fonction": null,
+                "fonction": "11ème adjoint au Maire",
                 "sexe": "M"
               }
             ],
             "niveau": "Ville de Paris"
           },
           "convention_collective_renseignee": true,
-          "liste_idcc": ["5021", "5003", "5022", "1043", "9999"],
+          "liste_idcc": [
+            "5021",
+            "5003",
+            "5022",
+            "1043",
+            "9999"
+          ],
+          "liste_finess_juridique": [
+            "750805483",
+            "750002008"
+          ],
           "egapro_renseignee": false,
           "est_achats_responsables": false,
           "est_alim_confiance": true,
           "est_association": false,
+          "est_avocat": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
           "est_entrepreneur_spectacle": true,
           "est_ess": false,
           "est_finess": true,
           "est_organisme_formation": true,
-          "est_qualiopi": false,
-          "liste_id_organisme_formation": ["11757308875"],
+          "est_qualiopi": true,
+          "liste_id_organisme_formation": [
+            "11757308875"
+          ],
           "est_rge": false,
-          "est_service_public": true,
-          "est_l100_3": true,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": true,
@@ -1255,9 +1267,17 @@
           "bilan_ges_renseigne": true,
           "identifiant_association": null,
           "statut_entrepreneur_spectacle": "valide",
-          "type_siae": null
+          "type_siae": null,
+          "a_aide_minimis": false,
+          "a_aide_ademe": true,
+          "est_administration": true,
+          "est_service_public": true,
+          "est_l100_3": true
         },
-        "slug": "ville-de-paris-217500016"
+        "admin": {
+          "slug": "ville-de-paris-217500016",
+          "a_acces_espace_agent": true
+        }
       }
     ],
     "total_results": 1,

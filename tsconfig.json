@@ -1,38 +1,31 @@
 {
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["cypress"],
   "compilerOptions": {
+    "target": "ES2022",
+    "jsx": "react-jsx",
+    "module": "ESNext",
     "baseUrl": ".",
-    "allowJs": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "incremental": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noEmit": true,
     "paths": {
-      "@tanstack/pacer/*": ["./node_modules/@tanstack/pacer/dist/*.d.ts"],
-      "#clients/*": ["./clients/*"],
-      "#cypress/*": ["./cypress/*"],
-      "#components/*": ["./components/*"],
-      "#components-ui/*": ["./components-ui/*"],
-      "#models/*": ["./models/*"],
-      "#utils/*": ["./utils/*"],
-      "#hooks/*": ["./hooks/*"]
+      "#/*": ["./src/*"],
+      "@/*": ["./src/*"]
     },
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "resolveJsonModule": true,
+    "types": ["vite/client", "vitest/globals", "vitest/jsdom"],
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+
+    /* Linting */
     "skipLibCheck": true,
     "strict": true,
-    "target": "es6",
-    "types": ["jest", "webpack-env"],
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "strictNullChecks": true
-  },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  }
 }

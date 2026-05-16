@@ -1,0 +1,33 @@
+{
+  "args": [
+    "843701079"
+  ],
+  "result": {
+    "companyInfo": {
+      "adresse": "LIEU-DIT LA VAURELLE, 81170, CORDES-SUR-CIEL",
+      "email": "compta@besoin2toit.fr",
+      "nomEntreprise": "BESOIN DE TOIT",
+      "siret": "84370107900017",
+      "siteInternet": "",
+      "telephone": "06 88 47 70 42",
+      "workingWithIndividual": true
+    },
+    "certifications": [
+      {
+        "logoPath": "/images/rge/logo-rge-qualibat.jpg",
+        "codeQualification": "3111D110",
+        "domaines": [
+          "Fenêtres de toit",
+          "Isolation par l'intérieur des murs ou rampants de toitures  ou plafonds",
+          "Isolation des toitures terrasses ou des toitures par l'extérieur",
+          "Isolation des combles perdus",
+          "Isolation des planchers bas"
+        ],
+        "nomCertificat": "QUALIBAT-RGE",
+        "nomQualification": "Tuiles canal (3111D110)",
+        "organisme": "qualibat",
+        "urlQualification": "https://www.qualibat.com/Views/GetFichier.aspx?fn=2026\\D31-Certificat-177096-E177096-1-20260123-RGEAnnexe.pdf"
+      }
+    ]
+  }
+}

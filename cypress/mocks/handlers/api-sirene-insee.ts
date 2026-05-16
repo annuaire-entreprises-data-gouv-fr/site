@@ -6,11 +6,14 @@ import apiSireneInseeSiren from "../../fixtures/api-sirene-insee-siren.json" wit
   type: "json",
 };
 
-export const apiSireneInseeSirenHandler: HttpResponseResolver = ({ request }) =>
-  HttpResponse.json(apiSireneInseeSiren);
+export const apiSireneInseeSirenHandler: HttpResponseResolver = ({
+  request: _request,
+}) => HttpResponse.json(apiSireneInseeSiren);
 
-export const apiSireneInseeSiretHandler: HttpResponseResolver = ({ request }) =>
-  HttpResponse.json(apiSireneInseeSiren);
+export const apiSireneInseeSiretHandler: HttpResponseResolver = ({
+  request: _request,
+}) => HttpResponse.json(apiSireneInseeSiren);
 
-export const apiSireneInseeAuthHandler: HttpResponseResolver = ({ request }) =>
-  HttpResponse.json(apiSireneInseeAuth);
+export const apiSireneInseeAuthHandler: HttpResponseResolver = ({
+  request: _request,
+}) => HttpResponse.json(apiSireneInseeAuth);

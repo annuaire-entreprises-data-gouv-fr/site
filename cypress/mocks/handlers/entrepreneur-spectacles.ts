@@ -4,5 +4,5 @@ import entrepreneurSpectacles from "../../fixtures/entrepreneur-spectacles.json"
 };
 
 export const entrepreneurSpectaclesHandler: HttpResponseResolver = ({
-  request,
+  request: _request,
 }) => HttpResponse.json(entrepreneurSpectacles);

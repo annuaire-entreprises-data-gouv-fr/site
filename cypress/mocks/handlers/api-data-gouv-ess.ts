@@ -3,5 +3,6 @@ import apiDataGouvEss from "../../fixtures/api-data-gouv-ess.json" with {
   type: "json",
 };
 
-export const apiDataGouvEssHandler: HttpResponseResolver = ({ request }) =>
-  HttpResponse.json(apiDataGouvEss);
+export const apiDataGouvEssHandler: HttpResponseResolver = ({
+  request: _request,
+}) => HttpResponse.json(apiDataGouvEss);

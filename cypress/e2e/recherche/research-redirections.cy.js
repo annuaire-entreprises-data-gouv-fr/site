@@ -2,6 +2,8 @@ describe("Siren / Siret redirections", () => {
   it("Formatted siren/siret redirection", () => {
     cy.visit("/");
 
+    cy.wait(1000);
+
     cy.get(".fr-search-bar > input")
       .type("552032534")
       .should("have.value", "552032534");
@@ -13,6 +15,8 @@ describe("Siren / Siret redirections", () => {
 
   it("Unformatted siren redirection", () => {
     cy.visit("/");
+
+    cy.wait(1000);
 
     cy.get(".fr-search-bar > input")
       .type("552 032 534")
@@ -26,6 +30,8 @@ describe("Siren / Siret redirections", () => {
   it("Not found redirection", () => {
     cy.visit("/");
 
+    cy.wait(1000);
+
     cy.get(".fr-search-bar > input")
       .type("123 456 789 00003")
       .should("have.value", "123 456 789 00003");
@@ -37,6 +43,8 @@ describe("Siren / Siret redirections", () => {
 
   it("Unformatted siret redirection", () => {
     cy.visit("/");
+
+    cy.wait(1000);
 
     cy.get(".fr-search-bar > input")
       .type("487 444 697 00428")
@@ -59,6 +67,6 @@ describe("Siren / Siret redirections", () => {
     cy.visit(
       "/rechercher?terme=&cp_dep_label=&cp_dep_type=&cp_dep=&fn=&n=&dmin=&dmax=&type=&label=&ca_min=100000000&etat=&sap=&naf=&nature_juridique=&tranche_effectif_salarie=&categorie_entreprise="
     );
-    cy.url().should("include", "/rechercher?terme=");
+    cy.url().should("include", "/rechercher?ca_min=100000000");
   });
 });

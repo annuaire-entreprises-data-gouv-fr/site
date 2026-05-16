@@ -1,10 +1,10 @@
 const pages = [
   "/",
   "/rechercher?terme=Kikou",
-  "/comment-ca-marche",
+  "/a-propos/comment-ca-marche",
   "/faq",
   "/accessibilite",
-  "/donnees-extrait-kbis",
+  "/a-propos/donnees-extrait-kbis",
   "/vie-privee",
 ];
 

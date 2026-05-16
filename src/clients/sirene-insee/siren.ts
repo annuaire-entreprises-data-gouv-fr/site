@@ -1,0 +1,290 @@
+import { HttpForbiddenError } from "#/clients/exceptions";
+import routes from "#/clients/routes";
+import { createNonDiffusibleEtablissement } from "#/models/core/etablissement";
+import { createEtablissementsList } from "#/models/core/etablissements-list";
+import { estActif } from "#/models/core/etat-administratif";
+import {
+  createDefaultEtablissement,
+  createDefaultUniteLegale,
+  type IUniteLegale,
+} from "#/models/core/types";
+import {
+  capitalize,
+  formatNameFull,
+  isEntrepreneurIndividuelFromNatureJuridique,
+  isPersonneMoraleFromNatureJuridique,
+  type Siren,
+  type Siret,
+} from "#/utils/helpers";
+import {
+  libelleFromCategoriesJuridiques,
+  libelleFromCodeNAF,
+} from "#/utils/helpers/formatting/labels";
+import {
+  etatFromEtatAdministratifInsee,
+  parseDateCreationInsee,
+  statuDiffusionFromStatutDiffusionInsee,
+} from "../../utils/helpers/insee-variables";
+import { inseeClientGet } from "./index.server";
+import {
+  clientAllEtablissementsInsee,
+  clientEtablissementInsee,
+} from "./siret";
+
+interface IInseeUniteLegaleResponse {
+  uniteLegale: {
+    siren: Siren;
+    sigleUniteLegale: string;
+    dateCreationUniteLegale: string;
+    periodesUniteLegale: IPeriodeUniteLegale[];
+    dateDernierTraitementUniteLegale: string;
+    trancheEffectifsUniteLegale: string;
+    anneeEffectifsUniteLegale: string;
+    statutDiffusionUniteLegale: string;
+    categorieEntreprise: string;
+    anneeCategorieEntreprise: string;
+    prenom1UniteLegale: string;
+    prenom2UniteLegale: string;
+    prenom3UniteLegale: string;
+    prenom4UniteLegale: string;
+    prenomUsuelUniteLegale: string;
+    sexeUniteLegale: "M" | "F";
+    identifiantAssociationUniteLegale: string | null;
+    activitePrincipaleNAF25UniteLegale: string;
+  };
+}
+
+interface IPeriodeUniteLegale {
+  activitePrincipaleUniteLegale: string;
+  caractereEmployeurUniteLegale: string;
+  categorieJuridiqueUniteLegale: string;
+  changementEtatAdministratifUniteLegale: boolean;
+  dateDebut: string;
+  denominationUniteLegale: string;
+  economieSocialeSolidaireUniteLegale: string | null;
+  etatAdministratifUniteLegale: string;
+  nicSiegeUniteLegale: string;
+  nomenclatureActivitePrincipaleUniteLegale: string;
+  nomUniteLegale: string;
+  nomUsageUniteLegale: string;
+}
+
+interface TmpUniteLegale {
+  tmpUniteLegale: {
+    denomination: string;
+    sigle: string;
+  };
+  uniteLegale: IUniteLegale;
+}
+
+export const clientUniteLegaleInsee = async (
+  siren: Siren,
+  page: number,
+  useFallback: boolean
+): Promise<IUniteLegale> => {
+  const { uniteLegale, tmpUniteLegale } = await clientTmpUniteLegale(
+    siren,
+    useFallback
+  );
+
+  const siretSiege = uniteLegale.siege.siret;
+
+  const [realSiege, allEtablissements] = await Promise.all([
+    clientEtablissementInsee(siretSiege, useFallback).catch((e) => {
+      if (e instanceof HttpForbiddenError) {
+        return createNonDiffusibleEtablissement(uniteLegale.siege.siret);
+      }
+      return null;
+    }), // better empty etablissement list than failing UL
+    clientAllEtablissementsInsee(siren, page, useFallback).catch(() => null),
+  ]);
+
+  const siege = realSiege || uniteLegale.siege;
+
+  const nomComplet = `${tmpUniteLegale.denomination}${
+    siege?.denomination ? ` (${siege?.denomination})` : ""
+  }${tmpUniteLegale.sigle ? ` (${tmpUniteLegale.sigle})` : ""}`;
+
+  const etablissementsList = allEtablissements?.list || [siege];
+  etablissementsList.forEach(
+    (e) =>
+      (e.ancienSiege = uniteLegale.anciensSiegesSirets.indexOf(e.siret) > -1)
+  );
+
+  const etablissements = createEtablissementsList(
+    etablissementsList,
+    allEtablissements?.page || 1,
+    allEtablissements?.count || 1
+  );
+
+  return {
+    ...uniteLegale,
+    isNbEtablissementOuvertReliable: false,
+    siege,
+    nomComplet,
+    etablissements,
+  };
+};
+
+const clientTmpUniteLegale = async (siren: Siren, useFallback: boolean) => {
+  const dataUniteLegale = await inseeClientGet<IInseeUniteLegaleResponse>(
+    routes.sireneInsee.getBySiren(siren),
+    {},
+    useFallback
+  );
+
+  return mapToDomainObject(siren, dataUniteLegale);
+};
+
+const mapToDomainObject = (
+  originalSiren: Siren,
+  response: IInseeUniteLegaleResponse
+): TmpUniteLegale => {
+  const {
+    siren,
+    sigleUniteLegale,
+    dateCreationUniteLegale,
+    periodesUniteLegale,
+    dateDernierTraitementUniteLegale,
+    trancheEffectifsUniteLegale,
+    anneeEffectifsUniteLegale,
+    statutDiffusionUniteLegale,
+    prenomUsuelUniteLegale,
+    identifiantAssociationUniteLegale,
+    categorieEntreprise,
+    anneeCategorieEntreprise,
+    activitePrincipaleNAF25UniteLegale = "",
+  } = response.uniteLegale;
+
+  const {
+    nicSiegeUniteLegale,
+    dateDebut,
+    activitePrincipaleUniteLegale = "",
+    nomenclatureActivitePrincipaleUniteLegale,
+    categorieJuridiqueUniteLegale,
+    denominationUniteLegale,
+    economieSocialeSolidaireUniteLegale,
+    etatAdministratifUniteLegale,
+    caractereEmployeurUniteLegale,
+    nomUniteLegale,
+    nomUsageUniteLegale,
+  } = periodesUniteLegale[0];
+
+  const estEntrepreneurIndividuel = isEntrepreneurIndividuelFromNatureJuridique(
+    categorieJuridiqueUniteLegale
+  );
+  const estPersonneMorale = isPersonneMoraleFromNatureJuridique(
+    categorieJuridiqueUniteLegale
+  );
+
+  const libelleActivitePrincipaleUniteLegale = libelleFromCodeNAF(
+    activitePrincipaleUniteLegale,
+    nomenclatureActivitePrincipaleUniteLegale,
+    false
+  );
+  const libelleActivitePrincipaleNaf25UniteLegale = libelleFromCodeNAF(
+    activitePrincipaleNAF25UniteLegale,
+    "NAF2025"
+  );
+
+  const siege = createDefaultEtablissement();
+
+  if (periodesUniteLegale && periodesUniteLegale.length > 0) {
+    siege.nic = nicSiegeUniteLegale;
+    siege.siren = siren;
+    siege.siret = (siren + nicSiegeUniteLegale) as Siret;
+    siege.dateCreation = dateDebut;
+    siege.activitePrincipale = "";
+    siege.libelleActivitePrincipale = "";
+    siege.libelleActivitePrincipaleNaf25 = "";
+    siege.estSiege = true;
+    siege.trancheEffectif = "";
+  }
+
+  siege.complements.estEntrepreneurIndividuel = estEntrepreneurIndividuel;
+  siege.complements.estPersonneMorale = estPersonneMorale;
+
+  // EI names and firstName
+  // remove trailing whitespace in case name or firstname is missing
+  const names = `${capitalize(prenomUsuelUniteLegale)} ${formatNameFull(
+    nomUniteLegale,
+    nomUsageUniteLegale
+  )}`.trim();
+
+  const defaultUniteLegale = createDefaultUniteLegale(siren);
+
+  const dateDernierTraitement = (dateDernierTraitementUniteLegale || "").split(
+    "T"
+  )[0];
+
+  const etatAdministratif = etatFromEtatAdministratifInsee(
+    etatAdministratifUniteLegale,
+    siren
+  );
+
+  // get last state change to obtain closing date
+  const lastStateChange =
+    periodesUniteLegale.find(
+      (periode) => periode.changementEtatAdministratifUniteLegale === true
+    ) || periodesUniteLegale[0];
+
+  const dateFermeture = estActif({ etatAdministratif })
+    ? ""
+    : lastStateChange.dateDebut;
+
+  return {
+    uniteLegale: {
+      ...defaultUniteLegale,
+      siren,
+      oldSiren: originalSiren,
+      siege,
+      anciensSiegesSirets: Array.from(
+        new Set(
+          periodesUniteLegale
+            .map((e) => (siren + e.nicSiegeUniteLegale) as Siret)
+            .filter((e) => e !== siege.siret)
+        )
+      ),
+      natureJuridique: categorieJuridiqueUniteLegale || "",
+      libelleNatureJuridique: libelleFromCategoriesJuridiques(
+        categorieJuridiqueUniteLegale
+      ),
+      activitePrincipale: activitePrincipaleUniteLegale,
+      libelleActivitePrincipale: libelleActivitePrincipaleUniteLegale,
+      libelleActivitePrincipaleNaf25: libelleActivitePrincipaleNaf25UniteLegale,
+      etablissements: createEtablissementsList([siege]),
+      dateCreation: parseDateCreationInsee(dateCreationUniteLegale),
+      dateDerniereMiseAJour: new Date().toISOString(),
+      dateMiseAJourInsee: dateDernierTraitement,
+      dateMiseAJourInpi: "",
+      dateDebutActivite: dateDebut,
+      dateFermeture,
+      etatAdministratif,
+      statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
+        statutDiffusionUniteLegale,
+        siren
+      ),
+      nomComplet: "",
+      chemin: siren,
+      trancheEffectif:
+        trancheEffectifsUniteLegale ??
+        (caractereEmployeurUniteLegale === "N" ? "N" : null),
+      anneeTrancheEffectif: anneeEffectifsUniteLegale,
+      categorieEntreprise,
+      anneeCategorieEntreprise,
+      complements: {
+        ...defaultUniteLegale.complements,
+        estEntrepreneurIndividuel,
+        estPersonneMorale,
+        estEss: economieSocialeSolidaireUniteLegale === "O",
+      },
+      association: {
+        idAssociation: identifiantAssociationUniteLegale || null,
+      },
+    },
+    tmpUniteLegale: {
+      denomination: denominationUniteLegale || names || "Nom inconnu",
+      sigle: sigleUniteLegale,
+    },
+  };
+};

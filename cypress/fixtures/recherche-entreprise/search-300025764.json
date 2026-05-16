@@ -11,6 +11,7 @@
         "nombre_etablissements_ouverts": 1,
         "siege": {
           "activite_principale": "68.20A",
+          "activite_principale_naf25": "68.20G",
           "activite_principale_registre_metier": null,
           "annee_tranche_effectif_salarie": null,
           "adresse": "[NON-DIFFUSIBLE]",
@@ -25,14 +26,14 @@
           "date_debut_activite": "2019-12-23",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2025-01-31T02:47:15",
+          "date_mise_a_jour_insee": "2025-12-06T03:11:04",
           "departement": "35",
           "distribution_speciale": "[NON-DIFFUSIBLE]",
           "epci": "243500139",
           "est_siege": true,
           "etat_administratif": "A",
           "geo_adresse": null,
-          "geo_id": "35238",
+          "geo_id": null,
           "indice_repetition": "[NON-DIFFUSIBLE]",
           "latitude": "[NON-DIFFUSIBLE]",
           "libelle_cedex": "[NON-DIFFUSIBLE]",
@@ -54,6 +55,7 @@
           "longitude": "[NON-DIFFUSIBLE]",
           "nom_commercial": "[NON-DIFFUSIBLE]",
           "numero_voie": "[NON-DIFFUSIBLE]",
+          "dernier_numero_voie": "[NON-DIFFUSIBLE]",
           "region": "53",
           "siret": "30002576400048",
           "statut_diffusion_etablissement": "P",
@@ -61,14 +63,15 @@
           "type_voie": "[NON-DIFFUSIBLE]"
         },
         "activite_principale": "68.20A",
+        "activite_principale_naf25": "68.20G",
         "categorie_entreprise": "PME",
         "caractere_employeur": null,
         "annee_categorie_entreprise": "2023",
         "date_creation": "1981-10-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2025-10-17T06:03:35",
-        "date_mise_a_jour_insee": "2024-03-22T14:26:06",
-        "date_mise_a_jour_rne": "2024-05-19T16:49:33",
+        "date_mise_a_jour": "2026-05-15T09:12:46",
+        "date_mise_a_jour_insee": "2025-12-06T05:32:55",
+        "date_mise_a_jour_rne": "2024-05-19T17:01:20",
         "dirigeants": [
           {
             "nom": "[NON-DIFFUSIBLE]",
@@ -92,7 +95,11 @@
           "date_immatriculation": "1981-10-01",
           "date_radiation": null,
           "duree_personne_morale": null,
-          "nature_entreprise": ["Libérale non réglementée", "Gestion de biens"],
+          "date_fin_existence": null,
+          "nature_entreprise": [
+            "Gestion de biens",
+            "Libérale non réglementée"
+          ],
           "date_cloture_exercice": null,
           "capital_social": null,
           "capital_variable": false,
@@ -104,10 +111,12 @@
           "collectivite_territoriale": null,
           "convention_collective_renseignee": false,
           "liste_idcc": null,
+          "liste_finess_juridique": null,
           "egapro_renseignee": false,
           "est_achats_responsables": false,
           "est_alim_confiance": false,
           "est_association": false,
+          "est_avocat": false,
           "est_bio": false,
           "est_entrepreneur_individuel": true,
           "est_entrepreneur_spectacle": false,
@@ -117,8 +126,6 @@
           "est_qualiopi": false,
           "liste_id_organisme_formation": null,
           "est_rge": false,
-          "est_service_public": false,
-          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
@@ -126,9 +133,17 @@
           "bilan_ges_renseigne": false,
           "identifiant_association": null,
           "statut_entrepreneur_spectacle": null,
-          "type_siae": null
+          "type_siae": null,
+          "a_aide_minimis": false,
+          "a_aide_ademe": false,
+          "est_administration": false,
+          "est_service_public": false,
+          "est_l100_3": false
         },
-        "slug": "300025764"
+        "admin": {
+          "slug": "300025764",
+          "a_acces_espace_agent": false
+        }
       }
     ],
     "total_results": 1,

@@ -7,25 +7,26 @@
         "nom_complet": "DANONE",
         "nom_raison_sociale": "DANONE",
         "sigle": null,
-        "nombre_etablissements": 18,
-        "nombre_etablissements_ouverts": 2,
+        "nombre_etablissements": 19,
+        "nombre_etablissements_ouverts": 3,
         "siege": {
           "activite_principale": "70.10Z",
+          "activite_principale_naf25": "66.30Y",
           "activite_principale_registre_metier": null,
           "annee_tranche_effectif_salarie": null,
-          "adresse": "59 RUE LA FAYETTE 75009 PARIS",
-          "caractere_employeur": "N",
+          "adresse": "59-61 RUE LA FAYETTE 75009 PARIS",
+          "caractere_employeur": "O",
           "cedex": null,
           "code_pays_etranger": null,
           "code_postal": "75009",
           "commune": "75109",
           "complement_adresse": null,
-          "coordonnees": "48.87590696098471,2.3434570265778594",
+          "coordonnees": "48.876352027085,2.34353622272517",
           "date_creation": "2025-08-19",
-          "date_debut_activite": "2025-08-19",
+          "date_debut_activite": "2025-11-03",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2025-10-10T16:33:30.744",
+          "date_mise_a_jour_insee": "2025-11-18T13:21:57",
           "departement": "75",
           "distribution_speciale": null,
           "epci": "200054781",
@@ -34,7 +35,7 @@
           "geo_adresse": null,
           "geo_id": null,
           "indice_repetition": null,
-          "latitude": "48.87590696098471",
+          "latitude": "48.876352027085",
           "libelle_cedex": null,
           "libelle_commune": "PARIS",
           "libelle_commune_etranger": null,
@@ -43,13 +44,16 @@
           "liste_enseignes": null,
           "liste_finess": null,
           "liste_id_bio": null,
-          "liste_idcc": null,
+          "liste_idcc": [
+            "9999"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
-          "longitude": "2.3434570265778594",
+          "longitude": "2.34353622272517",
           "nom_commercial": null,
           "numero_voie": "59",
+          "dernier_numero_voie": "61",
           "region": "11",
           "siret": "55203253400703",
           "statut_diffusion_etablissement": "O",
@@ -57,14 +61,15 @@
           "type_voie": "RUE"
         },
         "activite_principale": "70.10Z",
+        "activite_principale_naf25": "70.10Y",
         "categorie_entreprise": "GE",
         "caractere_employeur": null,
         "annee_categorie_entreprise": "2023",
         "date_creation": "1955-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2025-10-17T09:40:30",
-        "date_mise_a_jour_insee": "2025-10-10T16:33:30.751",
-        "date_mise_a_jour_rne": "2024-05-19T16:49:33",
+        "date_mise_a_jour": "2026-05-15T10:29:56",
+        "date_mise_a_jour_insee": "2026-04-10T13:28:37",
+        "date_mise_a_jour_rne": "2024-05-19T17:01:20",
         "dirigeants": [
           {
             "nom": "BERNARD DE SAINT AFFRIQUE",
@@ -188,10 +193,12 @@
         "immatriculation": {
           "date_debut_activite": null,
           "date_immatriculation": "1955-03-01",
-          "date_fin_existence": "2054-03-01",
           "date_radiation": null,
           "duree_personne_morale": 99,
-          "nature_entreprise": ["Commerciale"],
+          "date_fin_existence": "2112-04-25",
+          "nature_entreprise": [
+            "Commerciale"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 170348620.75,
           "capital_variable": false,
@@ -207,11 +214,17 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["9999"],
+          "liste_idcc": [
+            "9999"
+          ],
+          "liste_finess_juridique": [
+            "750073173"
+          ],
           "egapro_renseignee": true,
           "est_achats_responsables": false,
           "est_alim_confiance": false,
           "est_association": false,
+          "est_avocat": false,
           "est_bio": false,
           "est_entrepreneur_individuel": false,
           "est_entrepreneur_spectacle": false,
@@ -221,8 +234,6 @@
           "est_qualiopi": false,
           "liste_id_organisme_formation": null,
           "est_rge": false,
-          "est_service_public": false,
-          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
@@ -230,9 +241,17 @@
           "bilan_ges_renseigne": false,
           "identifiant_association": null,
           "statut_entrepreneur_spectacle": null,
-          "type_siae": null
+          "type_siae": null,
+          "a_aide_minimis": false,
+          "a_aide_ademe": false,
+          "est_administration": false,
+          "est_service_public": false,
+          "est_l100_3": false
         },
-        "slug": "danone-552032534"
+        "admin": {
+          "slug": "danone-552032534",
+          "a_acces_espace_agent": false
+        }
       }
     ],
     "total_results": 1,

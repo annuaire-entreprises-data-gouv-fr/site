@@ -1,0 +1,123 @@
+import { CNIL } from "#/components/administrations";
+import { Link } from "#/components/Link";
+import { AsyncDataSectionClient } from "#/components/section/data-section/client";
+import { TwoColumnTable } from "#/components/table/simple";
+import { useFetchDPO } from "#/hooks/fetch/dpo";
+import { EAdministration } from "#/models/administrations/EAdministration";
+import type { IUniteLegale } from "#/models/core/types";
+import { formatIntFr, uniteLegaleLabel } from "#/utils/helpers";
+
+interface IProps {
+  uniteLegale: IUniteLegale;
+}
+
+const DPONotFound = () => <p>Aucun DPO trouvé pour cette structure.</p>;
+
+/**
+ * DPO section
+ */
+export default function DPOSection({ uniteLegale }: IProps) {
+  const dpo = useFetchDPO(uniteLegale);
+
+  //www.data.gouv.fr/fr/datasets/organismes-ayant-designe-un-e-delegue-e-a-la-protection-des-donnees-dpd-dpo/
+  return (
+    <AsyncDataSectionClient
+      data={dpo}
+      id="dpo-section"
+      isProtected={false}
+      notFoundInfo={<DPONotFound />}
+      sources={[EAdministration.CNIL]}
+      title="Délégué à la Protection des Données (DPO)"
+    >
+      {(dpo) => (
+        <>
+          <p className="mt-4">
+            Cette {uniteLegaleLabel(uniteLegale)} a déclaré un Délégué à la
+            Protection des Données (DPO) auprès de la <CNIL />.
+          </p>
+          <p>
+            Le DPO est le point de contact privilégié pour toute question
+            relative à la protection des données personnelles. Vous trouverez
+            ci-dessous les coordonnées du DPO désigné par cette entreprise.
+          </p>
+          <TwoColumnTable
+            body={[
+              ...(dpo?.organismeDesigne.siren
+                ? [
+                    [
+                      "SIREN",
+                      <Link
+                        params={{ slug: dpo.organismeDesigne.siren }}
+                        to="/entreprise/$slug"
+                      >
+                        {formatIntFr(dpo.organismeDesigne.siren)}
+                      </Link>,
+                    ],
+                  ]
+                : []),
+              ...(dpo?.organismeDesigne.adressePostale
+                ? [
+                    [
+                      "Adresse complète",
+                      [
+                        dpo.organismeDesigne.adressePostale,
+                        dpo.organismeDesigne.codePostal,
+                        dpo.organismeDesigne.ville,
+                        dpo.organismeDesigne.pays,
+                      ]
+                        .filter(Boolean)
+                        .join(", "),
+                    ],
+                  ]
+                : []),
+              ...(dpo.contact.email
+                ? [
+                    [
+                      "Email",
+                      <a href={`mailto:${dpo.contact.email}`}>
+                        {dpo.contact.email}
+                      </a>,
+                    ],
+                  ]
+                : []),
+              ...(dpo.contact.url
+                ? [
+                    [
+                      "Site web",
+                      <a href={dpo.contact.url}>{dpo.contact.url}</a>,
+                    ],
+                  ]
+                : []),
+              ...(dpo.contact.telephone
+                ? [
+                    [
+                      "Téléphone",
+                      <a href={`tel:${dpo.contact.telephone}`}>
+                        {dpo.contact.telephone}
+                      </a>,
+                    ],
+                  ]
+                : []),
+              ...(dpo.contact.adressePostale
+                ? [
+                    [
+                      "Adresse complète",
+                      [
+                        dpo.contact.adressePostale,
+                        dpo.contact.codePostal,
+                        dpo.contact.ville,
+                        dpo.contact.pays,
+                      ]
+                        .filter(Boolean)
+                        .join(", "),
+                    ],
+                  ]
+                : []),
+              ...(dpo.contact.autre ? [["Autre", dpo.contact.autre]] : []),
+            ]}
+          />
+        </>
+      )}
+    </AsyncDataSectionClient>
+  );
+}

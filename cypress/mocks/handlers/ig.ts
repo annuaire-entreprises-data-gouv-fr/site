@@ -1,4 +1,4 @@
 import { HttpResponse, type HttpResponseResolver } from "msw";
 
-export const igHandler: HttpResponseResolver = ({ request }) =>
+export const igHandler: HttpResponseResolver = ({ request: _request }) =>
   HttpResponse.json({});

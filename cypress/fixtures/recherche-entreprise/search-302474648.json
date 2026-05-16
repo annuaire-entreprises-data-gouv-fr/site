@@ -4,13 +4,14 @@
     "results": [
       {
         "siren": "302474648",
-        "nom_complet": "NATURALIA FRANCE (NATURALIA FRANCE)",
+        "nom_complet": "NATURALIA FRANCE",
         "nom_raison_sociale": "NATURALIA FRANCE",
         "sigle": null,
-        "nombre_etablissements": 251,
-        "nombre_etablissements_ouverts": 167,
+        "nombre_etablissements": 252,
+        "nombre_etablissements_ouverts": 163,
         "siege": {
           "activite_principale": "47.29Z",
+          "activite_principale_naf25": "47.27H",
           "activite_principale_registre_metier": null,
           "annee_tranche_effectif_salarie": "2023",
           "adresse": "14 A 16 14 RUE MARC BLOCH 92110 CLICHY",
@@ -20,12 +21,12 @@
           "code_postal": "92110",
           "commune": "92024",
           "complement_adresse": "14 A 16",
-          "coordonnees": "48.91155899999998,2.3108400000000002",
+          "coordonnees": "48.911646052,2.3109754145",
           "date_creation": "2011-06-14",
           "date_debut_activite": "2011-06-14",
           "date_fermeture": null,
           "date_mise_a_jour": null,
-          "date_mise_a_jour_insee": "2025-10-03T12:01:47.594",
+          "date_mise_a_jour_insee": "2025-12-05T15:29:25",
           "departement": "92",
           "distribution_speciale": null,
           "epci": "200054781",
@@ -34,7 +35,7 @@
           "geo_adresse": null,
           "geo_id": null,
           "indice_repetition": null,
-          "latitude": "48.91155899999998",
+          "latitude": "48.911646052",
           "libelle_cedex": null,
           "libelle_commune": "CLICHY",
           "libelle_commune_etranger": null,
@@ -42,14 +43,21 @@
           "libelle_voie": "MARC BLOCH",
           "liste_enseignes": null,
           "liste_finess": null,
-          "liste_id_bio": [112492],
-          "liste_idcc": ["1505"],
+          "liste_id_bio": [
+            200693,
+            112492,
+            200731
+          ],
+          "liste_idcc": [
+            "1505"
+          ],
           "liste_id_organisme_formation": null,
           "liste_rge": null,
           "liste_uai": null,
-          "longitude": "2.3108400000000002",
+          "longitude": "2.3109754145",
           "nom_commercial": null,
           "numero_voie": "14",
+          "dernier_numero_voie": null,
           "region": "11",
           "siret": "30247464800664",
           "statut_diffusion_etablissement": "O",
@@ -57,14 +65,15 @@
           "type_voie": "RUE"
         },
         "activite_principale": "47.29Z",
+        "activite_principale_naf25": "47.27H",
         "categorie_entreprise": "GE",
         "caractere_employeur": null,
         "annee_categorie_entreprise": "2023",
         "date_creation": "1973-01-01",
         "date_fermeture": null,
-        "date_mise_a_jour": "2025-10-17T09:39:57",
-        "date_mise_a_jour_insee": "2025-10-13T15:34:59.699",
-        "date_mise_a_jour_rne": "2024-05-19T16:49:33",
+        "date_mise_a_jour": "2026-05-15T09:13:21",
+        "date_mise_a_jour_insee": "2026-04-08T14:32:09",
+        "date_mise_a_jour_rne": "2024-05-19T17:01:20",
         "dirigeants": [
           {
             "nom": "JOLIVET",
@@ -109,10 +118,14 @@
         "matching_etablissements": [],
         "immatriculation": {
           "date_debut_activite": null,
-          "date_immatriculation": null,
+          "date_immatriculation": "2003-09-01",
           "date_radiation": null,
           "duree_personne_morale": 30,
-          "nature_entreprise": ["Libérale réglementée", "Commerciale"],
+          "date_fin_existence": "2033-07-05",
+          "nature_entreprise": [
+            "Commerciale",
+            "Libérale réglementée"
+          ],
           "date_cloture_exercice": "3112",
           "capital_social": 240000,
           "capital_variable": false,
@@ -128,11 +141,15 @@
         "complements": {
           "collectivite_territoriale": null,
           "convention_collective_renseignee": true,
-          "liste_idcc": ["1505", "9999"],
+          "liste_idcc": [
+            "1505"
+          ],
+          "liste_finess_juridique": null,
           "egapro_renseignee": true,
           "est_achats_responsables": false,
           "est_alim_confiance": true,
           "est_association": false,
+          "est_avocat": false,
           "est_bio": true,
           "est_entrepreneur_individuel": false,
           "est_entrepreneur_spectacle": false,
@@ -142,8 +159,6 @@
           "est_qualiopi": false,
           "liste_id_organisme_formation": null,
           "est_rge": false,
-          "est_service_public": false,
-          "est_l100_3": false,
           "est_siae": false,
           "est_societe_mission": false,
           "est_uai": false,
@@ -151,9 +166,17 @@
           "bilan_ges_renseigne": false,
           "identifiant_association": null,
           "statut_entrepreneur_spectacle": null,
-          "type_siae": null
+          "type_siae": null,
+          "a_aide_minimis": false,
+          "a_aide_ademe": false,
+          "est_administration": false,
+          "est_service_public": false,
+          "est_l100_3": false
         },
-        "slug": "naturalia-france-naturalia-france-302474648"
+        "admin": {
+          "slug": "naturalia-france-302474648",
+          "a_acces_espace_agent": false
+        }
       }
     ],
     "total_results": 1,

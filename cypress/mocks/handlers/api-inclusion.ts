@@ -6,9 +6,10 @@ import apiInclusionMetadata from "../../fixtures/api-inclusion-metadata.json" wi
   type: "json",
 };
 
-export const apiInclusionHandler: HttpResponseResolver = ({ request }) =>
-  HttpResponse.json(apiInclusion);
+export const apiInclusionHandler: HttpResponseResolver = ({
+  request: _request,
+}) => HttpResponse.json(apiInclusion);
 
 export const apiInclusionMetadataHandler: HttpResponseResolver = ({
-  request,
+  request: _request,
 }) => HttpResponse.json(apiInclusionMetadata);
