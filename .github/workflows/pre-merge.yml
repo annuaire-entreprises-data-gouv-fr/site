@@ -111,17 +111,6 @@ jobs:
     needs: [dependencies]
     env:
       VITE_END2END_MOCKING: enabled
-      VITE_BASE_URL: http://localhost:3000
-      API_ENTREPRISE_URL: http://uselessurl.com
-      API_RECHERCHE_ENTREPRISE_URL: http://uselessurl2.com
-      PROXY_API_URL: http://uselessurl3.com
-      API_ASSOCIATION_URL: http://uselessurl3.com
-      API_ASSOCIATION_KEY: XXXXXX
-      API_ENTREPRISE_TOKEN: XXXXXX
-      OVH_S3_MONITORING_ACCESS_KEY: XXXXXX
-      OVH_S3_MONITORING_SECRET: XXXXXX
-      OVH_S3_MONITORING_BUCKET: uselessbucket
-      OVH_S3_MONITORING_REGION: region
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v6
@@ -131,10 +120,8 @@ jobs:
           node-version: ${{ env.node-version }}
       - name: Load node_modules
         uses: ./.github/actions/load-dependencies
-      - name: Build site with E2E mocking
-        run: npm run build && npm run prepare-standalone-dir
-        env:
-          VITE_END2END_MOCKING: enabled
+      - name: Copy .env.test to .env
+        run: cp .env.test .env
       - name: Run Cypress tests 🧪
         # https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
@@ -143,9 +130,6 @@ jobs:
           start: npm run dev:e2e
           record: false
           config-file: ./cypress/cypress.config.ts
-        env:
-          SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-          VITE_END2END_MOCKING: enabled
       - name: Upload screenshots 📸
         uses: actions/upload-artifact@v4
         # add the line below to store screenshots only on failures
@@ -167,5 +151,7 @@ jobs:
           node-version: ${{ env.node-version }}
       - name: Load node_modules
         uses: ./.github/actions/load-dependencies
+      - name: Generate json data
+        run: npm run compile:data
       - name: Run typescript check
         run: npm run typecheck
