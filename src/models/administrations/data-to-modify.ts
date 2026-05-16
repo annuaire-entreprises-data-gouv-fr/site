@@ -1,4 +1,4 @@
-import { slugify } from "#/utils/helpers";
+import { slugify } from "#/utils/helpers/formatting/slugify";
 import { administrationsMetaData, allAPI } from ".";
 
 const loadDataToModify = () =>
