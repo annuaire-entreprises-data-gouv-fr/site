@@ -4,7 +4,10 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
-    include: ["src/**/*.test.{ts,tsx}", "cypress/**/*.test.{ts,tsx}"],
+    include: [
+      "src/**/*.test.{ts,tsx}",
+      "e2e/fixtures/recherche-entreprise/generate.test.ts",
+    ],
     exclude: [
       "**/node_modules/**",
       "**/dist/**",
