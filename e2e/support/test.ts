@@ -60,7 +60,13 @@ export async function mockRoute(
         ""
       );
       await route.fulfill({
-        path: path.join(process.cwd(), "cypress", "fixtures", fixturePath),
+        path: path.join(
+          process.cwd(),
+          "src",
+          "e2e-mock",
+          "fixtures",
+          fixturePath
+        ),
       });
       return;
     }

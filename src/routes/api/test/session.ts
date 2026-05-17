@@ -18,7 +18,7 @@ export const Route = createFileRoute("/api/test/session")({
         }
 
         const { comptesAgents } = await import(
-          "../../../../cypress/mocks/comptes-agents"
+          "#/e2e-mock/mocks/comptes-agents"
         );
         const body = (await request.json().catch(() => ({}))) as {
           email?: string;

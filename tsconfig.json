@@ -1,6 +1,5 @@
 {
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["cypress"],
   "compilerOptions": {
     "target": "ES2022",
     "jsx": "react-jsx",

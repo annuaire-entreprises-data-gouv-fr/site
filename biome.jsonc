@@ -4,8 +4,9 @@
   "files": {
     "includes": [
       "!**/*.min.css",
-      "!cypress/fixtures/**/*.json",
-      "!src/clients/_test/**/*.json"
+      "!src/e2e-mock/fixtures/**/*.json",
+      "!src/clients/_test/**/*.json",
+      "!src/data/**/*.json"
     ]
   },
   "linter": {
