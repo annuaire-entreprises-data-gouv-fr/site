@@ -122,28 +122,24 @@ jobs:
         uses: ./.github/actions/load-dependencies
       - name: Copy .env.test to .env
         run: cp .env.test .env
-      - name: Run Cypress tests 🧪
-        # https://github.com/cypress-io/github-action
-        uses: cypress-io/github-action@v6
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - name: Run Playwright tests 🧪
         timeout-minutes: 10
-        with:
-          start: npm run dev:e2e
-          record: false
-          config-file: ./cypress/cypress.config.ts
-      - name: Upload videos 🎥
+        run: npm run test:end2end:run
+      - name: Upload Playwright report 📊
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: cypress-videos
-          path: cypress/videos
+          name: playwright-report
+          path: playwright-report
           if-no-files-found: ignore
-      - name: Upload screenshots 📸
+      - name: Upload Playwright test results 🎥
         uses: actions/upload-artifact@v4
-        # add the line below to store screenshots only on failures
         if: failure()
         with:
-          name: cypress-screenshots
-          path: cypress/screenshots
+          name: playwright-test-results
+          path: test-results
           if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
 
   typecheck:
