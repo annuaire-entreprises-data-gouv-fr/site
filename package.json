@@ -4,7 +4,7 @@
   "private": true,
   "engines": {
     "node": ">=22.22.2",
-    "npm": ">=10"
+    "pnpm": ">=11.1.2"
   },
   "type": "module",
   "imports": {
@@ -12,10 +12,10 @@
   },
   "scripts": {
     "compile:data": "node scripts/compile-data-yaml.mjs",
-    "dev": "npm run compile:data && NODE_OPTIONS='--import ./instrument.server.mjs' vite dev --port 3000",
-    "dev:e2e": "VITE_END2END_MOCKING=enabled npm run dev",
+    "dev": "pnpm run compile:data && NODE_OPTIONS='--import ./instrument.server.mjs' vite dev --port 3000",
+    "dev:e2e": "VITE_END2END_MOCKING=enabled pnpm run dev",
     "start": "node --import ./.output/server/instrument.server.mjs .output/server/index.mjs",
-    "build": "npm run compile:data && vite build && cp instrument.server.mjs .output/server",
+    "build": "pnpm run compile:data && vite build && cp instrument.server.mjs .output/server",
     "preview": "vite preview",
     "test:end2end:run": "playwright test",
     "test:end2end:open": "playwright test --ui",
@@ -44,6 +44,7 @@
     "@tanstack/router-plugin": "1.168.2",
     "@vcarl/remark-headings": "0.1.0",
     "chart.js": "4.5.1",
+    "clsx": "2.1.1",
     "crawler-user-agents": "1.45.0",
     "fast-xml-parser": "5.8.0",
     "maplibre-gl": "5.24.0",
@@ -60,34 +61,37 @@
     "remark-heading-id": "1.0.1",
     "remark-parse": "11.0.0",
     "remark-rehype": "11.1.2",
+    "undici": "7.25.0",
     "unified": "11.0.5",
     "zod": "4.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
-    "@commitlint/cli": "^18.6.1",
-    "@commitlint/config-conventional": "^18.6.3",
+    "@commitlint/cli": "21.0.1",
+    "@commitlint/config-conventional": "21.0.1",
     "@fullhuman/postcss-purgecss": "8.0.0",
-    "@playwright/test": "^1.60.0",
+    "@playwright/test": "1.60.0",
     "@tanstack/devtools-vite": "0.7.0",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.2",
     "@types/js-yaml": "4.0.9",
-    "@types/node": "^22.10.2",
+    "@types/node": "22.18.13",
     "@types/qrcode": "1.5.6",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@types/remark-heading-id": "^1.0.0",
+    "@types/remark-heading-id": "1.0.0",
     "@vitejs/plugin-react": "6.0.2",
+    "dotenv": "16.6.1",
     "js-yaml": "4.1.1",
     "jsdom": "29.1.1",
     "lefthook": "2.1.6",
     "msw": "2.14.6",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "11.2.1",
-    "typescript": "^5.7.2",
+    "typescript": "5.9.3",
     "ultracite": "7.7.0",
     "vite": "8.0.12",
-    "vitest": "^3.0.5"
-  }
+    "vitest": "4.1.6"
+  },
+  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499"
 }

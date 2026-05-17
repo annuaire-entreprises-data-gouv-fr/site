@@ -52,7 +52,7 @@ export const Route = createFileRoute("/_header-default/personne")({
     sirenFrom: queryString.optional().default("").catch(""),
     partialDate: queryString.optional().default("").catch(""),
     fn: queryString.optional().default("").catch(""),
-    nom: queryString.optional().default("").catch(""),
+    n: queryString.optional().default("").catch(""),
   }),
   search: {
     middlewares: [
@@ -61,7 +61,7 @@ export const Route = createFileRoute("/_header-default/personne")({
         sirenFrom: "",
         partialDate: "",
         fn: "",
-        nom: "",
+        n: "",
       }),
     ],
   },
@@ -70,10 +70,10 @@ export const Route = createFileRoute("/_header-default/personne")({
     sirenFrom: search.sirenFrom,
     partialDate: search.partialDate,
     fn: search.fn,
-    nom: search.nom,
+    n: search.n,
   }),
   loader: async ({ deps }) => {
-    const { page, sirenFrom, partialDate, fn, nom } = deps;
+    const { page, sirenFrom, partialDate, fn, n: nom } = deps;
 
     return await loadPersonnesPage({
       data: { page, sirenFrom, partialDate, fn, nom },
@@ -108,7 +108,7 @@ export const Route = createFileRoute("/_header-default/personne")({
 
 function RouteComponent() {
   const { results, urlComplements, prenom, prenoms } = Route.useLoaderData();
-  const { sirenFrom, partialDate, nom } = Route.useSearch();
+  const { sirenFrom, partialDate, n: nom } = Route.useSearch();
 
   const age = convertDateToAge(partialDate);
   const structureCountLabel =

@@ -5,19 +5,22 @@ runs:
   using: 'composite'
 
   steps:
+    - name: Enable pnpm
+      shell: bash
+      run: corepack enable pnpm
+
     - name: Cache node modules
       uses: actions/cache@v3
       id: restore-dependencies
       env:
         cache-name: cache-node-modules
       with:
-        # Cache node_modules. To cache global, you may try ~/.npm
         path: ./node_modules
-        key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-npm-cache-
+          ${{ runner.os }}-pnpm-cache-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
     - name: Install dependencies
       shell: bash
-      run: npm ci --include=dev --ignore-scripts
+      run: pnpm install --frozen-lockfile --prod=false --ignore-scripts

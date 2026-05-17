@@ -4,6 +4,10 @@ description: 'Load node dependencies previously cached with the action "install-
 runs:
   using: 'composite'
   steps:
+    - name: Enable pnpm
+      shell: bash
+      run: corepack enable pnpm
+
     - name: Load node modules
       uses: actions/cache@v3
       id: restore-dependencies
@@ -11,4 +15,4 @@ runs:
         cache-name: cache-node-modules
       with:
         path: ./node_modules
-        key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}

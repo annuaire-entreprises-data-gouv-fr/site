@@ -1,0 +1,33 @@
+packages:
+  - "."
+
+# npm security best practices
+# Source: https://github.com/lirantal/npm-security-best-practices
+
+# SECURITY: block packages newer than 1 days (1440 minutes)
+minimumReleaseAge: 1440
+
+# SECURITY: reject a version whose publishing trust signals regressed
+trustPolicy: no-downgrade
+
+# SECURITY: keep strict overrides only when necessary and vetted
+trustPolicyExclude:
+  - "undici-types@6.21.0"
+  - "jose@4.15.9"
+  - "semver@6.3.1"
+
+# SECURITY: pnpm blocks install scripts by default, enabled explicitly for:
+allowBuilds:
+  '@sentry/cli': true
+  lefthook: true
+  msw: true
+
+# SECURITY: fail the install if a dependency wants to run a build
+# script that isn't in the allow-list above
+strictDepBuilds: true
+
+# SECURITY: reject dependencies sourced from git URLs
+blockExoticSubdeps: true
+
+nodeVersion: "22.22.2"
+saveExact: true
