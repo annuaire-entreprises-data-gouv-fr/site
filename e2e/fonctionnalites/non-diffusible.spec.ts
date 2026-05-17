@@ -1,191 +1,129 @@
-import { cy, test } from "../support/test";
+import type { Page } from "@playwright/test";
+import {
+  expect,
+  firstCellByText,
+  goto,
+  lastCellByRowText,
+  test,
+} from "../support/test";
+
+const hiddenInfo = /▪︎ ▪︎ ▪︎ information non-diffusible ▪︎ ▪︎ ▪︎/;
+const parisInfo = /▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎/;
+
+async function expectLastCellButton(
+  page: Page,
+  section: string,
+  label: string,
+  name: RegExp
+) {
+  await expect(
+    lastCellByRowText(page, section, label).getByRole("button", { name })
+  ).toBeVisible();
+}
 
 test.describe("Non-diffusible", () => {
-  test("Non diffusible EI should have no name and address", () => {
-    cy.visit("/entreprise/300025764");
-    cy.contains("ne sont pas publiquement").should("have.length", 1);
-    cy.findByRole("heading", {
-      name: "▪︎ ▪︎ ▪︎ information non-diffusible ▪︎ ▪︎ ▪︎",
-      level: 1,
-    }).should("be.visible");
+  test("Non diffusible EI should have no name and address", async ({
+    page,
+  }) => {
+    await goto(page, "/entreprise/300025764");
 
-    cy.get("#entreprise")
-      .findAllByRole("row")
-      .filter(':contains("Adresse postale")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /▪︎ ▪︎ ▪︎ information non-diffusible ▪︎ ▪︎ ▪︎/,
-            }).should("be.visible");
-          });
-      });
+    await expect(page.getByText("ne sont pas publiquement")).toHaveCount(1);
+    await expect(
+      page.getByRole("heading", { name: hiddenInfo, level: 1 })
+    ).toBeVisible();
 
-    cy.get("#etablissement")
-      .findAllByRole("row")
-      .filter(':contains("Enseigne de l’établissement")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /▪︎ ▪︎ ▪︎ information non-diffusible ▪︎ ▪︎ ▪︎/,
-            }).should("be.visible");
-          });
-      });
-    cy.get("#etablissement")
-      .findAllByRole("row")
-      .filter(':contains("Adresse")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /▪︎ ▪︎ ▪︎ information non-diffusible ▪︎ ▪︎ ▪︎/,
-            }).should("be.visible");
-          });
-      });
+    await expectLastCellButton(
+      page,
+      "#entreprise",
+      "Adresse postale",
+      hiddenInfo
+    );
+    await expectLastCellButton(
+      page,
+      "#etablissement",
+      "Enseigne de l’établissement",
+      hiddenInfo
+    );
+    await expectLastCellButton(page, "#etablissement", "Adresse", hiddenInfo);
 
-    cy.get("#etablissements")
-      .findAllByRole("rowgroup")
-      .last()
-      .within(() => {
-        cy.findAllByRole("cell")
-          .filter(':contains("Détails (nom, enseigne, adresse)")')
-          .first()
-          .within(() => {
-            cy.findByRole("link", {
-              name: /▪︎ ▪︎ ▪︎ information non-diffusible ▪︎ ▪︎ ▪︎/,
-            }).should("be.visible");
-          });
-      });
+    const detailCell = firstCellByText(
+      page,
+      "#etablissements",
+      "Détails (nom, enseigne, adresse)"
+    );
+    await expect(
+      detailCell.getByRole("link", { name: hiddenInfo })
+    ).toBeVisible();
   });
 
-  test("Non diffusible Personne morale should have name but hidden address", () => {
-    cy.visit("/entreprise/908595879");
-    cy.contains("ne sont pas publiquement").should("have.length", 1);
-    cy.findByRole("heading", {
-      name: "SEVERNAYA",
-      level: 1,
-    }).should("be.visible");
+  test("Non diffusible Personne morale should have name but hidden address", async ({
+    page,
+  }) => {
+    await goto(page, "/entreprise/908595879");
 
-    cy.get("#entreprise")
-      .findAllByRole("row")
-      .filter(':contains("Adresse postale")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎/,
-            }).should("be.visible");
-          });
-      });
+    await expect(page.getByText("ne sont pas publiquement")).toHaveCount(1);
+    await expect(
+      page.getByRole("heading", { name: "SEVERNAYA", level: 1 })
+    ).toBeVisible();
 
-    // TODO re-enable this check after data update and examples generation
-    // cy.get("#etablissement")
-    //   .findAllByRole("row")
-    //   .filter(':contains("Enseigne de l’établissement")')
-    //   .within(() => {
-    //     cy.findAllByRole("cell")
-    //       .last()
-    //       .within(() => {
-    //         cy.findByRole("button", {
-    //           name: /▪︎ ▪︎ ▪︎ information protégée ▪︎ ▪︎ ▪︎/,
-    //         }).should("be.visible");
-    //       });
-    //   });
-    cy.get("#etablissement")
-      .findAllByRole("row")
-      .filter(':contains("Adresse")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎/,
-            }).should("be.visible");
-          });
-      });
+    await expectLastCellButton(
+      page,
+      "#entreprise",
+      "Adresse postale",
+      parisInfo
+    );
+    await expectLastCellButton(page, "#etablissement", "Adresse", parisInfo);
 
-    cy.get("#etablissements")
-      .findAllByRole("rowgroup")
-      .last()
-      .within(() => {
-        cy.findAllByRole("cell")
-          .filter(':contains("Détails (nom, enseigne, adresse)")')
-          .first()
-          .within(() => {
-            // TODO re-enable this check after data update and examples generation
-            // Ensure enseigne is hidden
-            // cy.findByRole("link", {
-            //   name: /▪︎ ▪︎ ▪︎ information protégée ▪︎ ▪︎ ▪︎/,
-            // }).should("be.visible");
-
-            // Ensure address fallbacks to commune
-            cy.findByText("▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎").should("be.visible");
-          });
-      });
+    const detailCell = firstCellByText(
+      page,
+      "#etablissements",
+      "Détails (nom, enseigne, adresse)"
+    );
+    await expect(detailCell.getByText("▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎")).toBeVisible();
   });
 
-  test("Should be diffusible and display details", () => {
-    cy.visit("/entreprise/880878145");
-    cy.contains("ne sont pas publiquement").should("have.length", 0);
+  test("Should be diffusible and display details", async ({ page }) => {
+    await goto(page, "/entreprise/880878145");
 
-    cy.findByRole("heading", {
-      name: "GANYMEDE",
-      level: 1,
-    }).should("be.visible");
+    await expect(page.getByText("ne sont pas publiquement")).toHaveCount(0);
+    await expect(
+      page.getByRole("heading", { name: "GANYMEDE", level: 1 })
+    ).toBeVisible();
 
-    cy.get("#entreprise")
-      .findAllByRole("row")
-      .filter(':contains("Adresse postale")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /128 RUE LA BOETIE 75008 PARIS 8/,
-            }).should("be.visible");
-          });
-      });
+    await expectLastCellButton(
+      page,
+      "#entreprise",
+      "Adresse postale",
+      /128 RUE LA BOETIE 75008 PARIS 8/
+    );
+    await expectLastCellButton(
+      page,
+      "#etablissement",
+      "Adresse",
+      /128 RUE LA BOETIE 75008 PARIS 8/
+    );
 
-    cy.get("#etablissement")
-      .findAllByRole("row")
-      .filter(':contains("Adresse")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /128 RUE LA BOETIE 75008 PARIS 8/,
-            }).should("be.visible");
-          });
-      });
-
-    cy.get("#etablissements")
-      .findAllByRole("rowgroup")
-      .last()
-      .within(() => {
-        cy.findAllByRole("cell")
-          .filter(':contains("Détails (nom, enseigne, adresse)")')
-          .first()
-          .within(() => {
-            cy.findByText("128 RUE LA BOETIE 75008 PARIS 8").should(
-              "be.visible"
-            );
-          });
-      });
+    const detailCell = firstCellByText(
+      page,
+      "#etablissements",
+      "Détails (nom, enseigne, adresse)"
+    );
+    await expect(
+      detailCell.getByText("128 RUE LA BOETIE 75008 PARIS 8")
+    ).toBeVisible();
   });
 
-  test("No dirigeant in non diffusible", () => {
-    cy.visit("/dirigeants/908595879");
-    cy.contains("Dirigeant(s) (données privées)").should("have.length", 1);
+  test("No dirigeant in non diffusible", async ({ page }) => {
+    await goto(page, "/dirigeants/908595879");
+    await expect(page.getByText("Dirigeant(s) (données privées)")).toHaveCount(
+      1
+    );
   });
 
-  test("No dirigeant in protected personne morale", () => {
-    cy.visit("/dirigeants/908595879");
-    cy.contains("Dirigeant(s) (données privées)").should("have.length", 1);
+  test("No dirigeant in protected personne morale", async ({ page }) => {
+    await goto(page, "/dirigeants/908595879");
+    await expect(page.getByText("Dirigeant(s) (données privées)")).toHaveCount(
+      1
+    );
   });
 });

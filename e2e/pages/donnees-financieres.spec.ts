@@ -1,60 +1,65 @@
 import routes from "#/clients/routes";
-import { cy, test } from "../support/test";
+import { expect, goto, login, mockRoute, test } from "../support/test";
 
 test.describe("Données financières", () => {
-  test("Should display Données financières section", () => {
-    cy.visit("/entreprise/487444697");
-    cy.contains("Données financières");
+  test("Should display Données financières section", async ({ page }) => {
+    await goto(page, "/entreprise/487444697");
+    await expect(page.getByText("Données financières").first()).toBeVisible();
   });
 
-  test("Should hide bilans when partially confidential", () => {
-    cy.intercept("GET", `${routes.donneesFinancieres.ods.search}*`, {
-      fixture: "../fixtures/donnees-financieres-confidential.json",
+  test("Should hide bilans when partially confidential", async ({ page }) => {
+    await mockRoute(page, `${routes.donneesFinancieres.ods.search}*`, {
+      fixture: "donnees-financieres-confidential.json",
     });
-    cy.intercept("GET", `${routes.donneesFinancieres.ods.metadata}*`, {
-      fixture: "../fixtures/ods-metadata.json",
+    await mockRoute(page, `${routes.donneesFinancieres.ods.metadata}*`, {
+      fixture: "ods-metadata.json",
     });
-    cy.visit("/donnees-financieres/487444697");
-    cy.contains(
-      "Les bilans de cette structure sont accompagnés d’une déclaration de confidentialité."
-    );
+
+    await goto(page, "/donnees-financieres/487444697");
+    await expect(
+      page.getByText(
+        "Les bilans de cette structure sont accompagnés d’une déclaration de confidentialité."
+      )
+    ).toBeVisible();
   });
 
-  test("Should display indicateurs financiers", () => {
-    cy.intercept("GET", `${routes.donneesFinancieres.ods.search}*`, {
-      fixture: "../fixtures/donnees-financieres.json",
+  test("Should display indicateurs financiers", async ({ page }) => {
+    await mockRoute(page, `${routes.donneesFinancieres.ods.search}*`, {
+      fixture: "donnees-financieres.json",
     });
-    cy.intercept("GET", `${routes.donneesFinancieres.ods.metadata}*`, {
-      fixture: "../fixtures/ods-metadata.json",
+    await mockRoute(page, `${routes.donneesFinancieres.ods.metadata}*`, {
+      fixture: "ods-metadata.json",
     });
-    cy.visit("/donnees-financieres/552032534");
-    cy.contains("Date de clôture");
-    cy.contains("31/12/2019");
 
-    cy.contains("Résultat net");
-    cy.contains("2 Mds €");
-
-    cy.contains("MEF, INPI");
+    await goto(page, "/donnees-financieres/552032534");
+    await expect(page.getByText("Date de clôture").first()).toBeVisible();
+    await expect(page.getByText("31/12/2019").first()).toBeVisible();
+    await expect(page.getByText("Résultat net").first()).toBeVisible();
+    await expect(page.getByText("2 Mds €").first()).toBeVisible();
+    await expect(page.getByText("MEF").first()).toBeVisible();
+    await expect(page.getByText("INPI").first()).toBeVisible();
   });
 
-  test("Should display dépôts de compte section (JOAFE)", () => {
-    cy.visit("/donnees-financieres/338365059");
-    cy.contains(
-      /Cette structure possède [\d]+ comptes publiés au Journal Officiel des Associations/
-    );
-    // Displays compte number
-    cy.contains("338365059_31122022");
+  test("Should display dépôts de compte section (JOAFE)", async ({ page }) => {
+    await goto(page, "/donnees-financieres/338365059");
+    await expect(
+      page.getByText(
+        /Cette structure possède [\d]+ comptes publiés au Journal Officiel des Associations/
+      )
+    ).toBeVisible();
+    await expect(page.getByText("338365059_31122022").first()).toBeVisible();
   });
 });
 
 test.describe("Bilans financiers (authenticated)", () => {
-  test.beforeEach(() => {
-    cy.login();
+  test.beforeEach(async ({ page, context }) => {
+    await login(page, context);
   });
-  test('Should display "Détail des subventions"', () => {
-    cy.visit("/donnees-financieres/338365059");
-    cy.contains("Subventions reçues").should("be.visible");
-    cy.contains("État").should("be.visible");
-    cy.contains("Refusé").should("be.visible");
+
+  test('Should display "Détail des subventions"', async ({ page }) => {
+    await goto(page, "/donnees-financieres/338365059");
+    await expect(page.getByText("Subventions reçues").first()).toBeVisible();
+    await expect(page.getByText("État").first()).toBeVisible();
+    await expect(page.getByText("Refusé").first()).toBeVisible();
   });
 });

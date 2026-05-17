@@ -1,62 +1,27 @@
-import { cy, test } from "../support/test";
+import { expect, goto, test } from "../support/test";
 
 test.describe("Espace agent", () => {
-  test("Page d'accueil", () => {
-    cy.clearCookies();
-    cy.visit("/");
-    cy.contains("Espace agent public")
-      // The element is present twice (mobile and desktop menu).
-      // The mobile one is hidden but appears first in the DOM,
-      // so we need to force the click
-      .click({ force: true });
-    cy.contains("button", "ProConnect");
+  test("Page d'accueil", async ({ context, page }) => {
+    await context.clearCookies();
+    await goto(page, "/");
+
+    await page
+      .getByRole("link", {
+        name: "Accéder à la page de connexion de l'espace agent public",
+      })
+      .click();
+    await expect(
+      page.getByRole("button", { name: /ProConnect/ }).first()
+    ).toBeVisible();
   });
 
-  test("Bouton agent connect sur les données protégées", () => {
-    cy.visit("/documents/487444697");
-    cy.contains("Réservé aux agents publics");
-    cy.contains("button", "ProConnect");
+  test("Bouton agent connect sur les données protégées", async ({ page }) => {
+    await goto(page, "/documents/487444697");
+    await expect(
+      page.getByText("Réservé aux agents publics").first()
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /ProConnect/ }).first()
+    ).toBeVisible();
   });
-
-  //   test('Connexion', () => {
-  //     cy.clearCookies({
-  //       domain: 'fca.integ01.dev-agentconnect.fr',
-  //     });
-  //     cy.clearCookies({
-  //       domain: 'app-sandbox.moncomptepro.beta.gouv.fr',
-  //     });
-  //     cy.clearCookies();
-  //     cy.visit(`/lp/agent-public`);
-  //     cy.contains('button', 'ProConnect').click();
-  //     cy.origin('fca.integ01.dev-agentconnect.fr', () => {
-  //       cy.get('input[type="email"]').clear().type('user@yopmail.com');
-  //       cy.get('button[type="submit"]').click();
-  //     });
-
-  //     cy.origin('app-sandbox.moncomptepro.beta.gouv.fr', () => {
-  //       cy.contains('Renseignez votre mot de passe');
-  //       cy.get('input[type="password"]').type('user@yopmail.com');
-  //       cy.contains('button', 'S’identifier').click();
-  //       cy.contains('DINUM').click();
-  //     });
-
-  //     cy.location().should((loc) => {
-  //       expect(loc.pathname).to.eq('/lp/agent-public');
-  //     });
-  //     cy.contains('user@yopmail.com');
-  //   });
-
-  //   test('Actes et statuts accessibles', () => {
-  //     cy.visit('/documents/487444697');
-  //     cy.contains('Actes et statuts');
-  //     cy.contains(/Cette entreprise possède [\d]+ document\(s\) au RNE/);
-  //   });
-
-  //   test('Bilans accessibles', () => {
-  //     cy.visit('/donnees-financieres/487444697');
-  //     cy.contains('Bilans');
-  //     cy.contains(
-  //       /Cette entreprise possède [\d]+ bilan\(s\) déposé\(s\) au RNE/
-  //     );
-  //   });
 });

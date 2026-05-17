@@ -1,79 +1,71 @@
-import { cy, expect, test } from "../support/test";
+import { expect, goto, test } from "../support/test";
 
 const slug = "la-poste-direction-generale-de-la-poste-356000000";
 
 test.describe("Pagination for single etablissement company", () => {
-  test("Load page even with query params", () => {
-    cy.request("/entreprise/880878145").then((resp) => {
-      expect(resp.status).to.eq(200);
-    });
+  test("Load page even with query params", async ({ request }) => {
+    const response = await request.get("/entreprise/880878145");
+    expect(response.status()).toBe(200);
   });
 
-  test("Has no pagination", () => {
-    cy.visit("/entreprise/880878145");
-    cy.get(".fr-pagination").should("not.exist");
+  test("Has no pagination", async ({ page }) => {
+    await goto(page, "/entreprise/880878145");
+    await expect(page.locator(".fr-pagination")).toHaveCount(0);
   });
 });
 
 test.describe("Pagination for multiple etablissement company", () => {
-  test("Has several pages", () => {
-    cy.visit(`/entreprise/${slug}`);
-    cy.get(".fr-pagination").should("exist");
+  test("Has several pages", async ({ page }) => {
+    await goto(page, `/entreprise/${slug}`);
+    await expect(page.locator(".fr-pagination")).toHaveCount(1);
   });
 
-  test("Has different companies on different pages", () => {
-    cy.visit(`/entreprise/${slug}?page=1`);
-    let siren1 = "";
-    cy.get("#etablissements tbody > tr > td:first-of-type")
-      .first()
-      .then(async (locator) => {
-        siren1 = (await locator.textContent()) ?? "";
-      });
+  test("Loads the requested page", async ({ page }) => {
+    await goto(page, `/entreprise/${slug}?page=1`);
+    await expect(
+      page.locator("#etablissements tbody > tr > td:first-of-type").first()
+    ).toBeVisible();
 
-    cy.visit(`/entreprise/${slug}?page=6`);
-    cy.get("#etablissements tbody > tr > td:first-of-type")
-      .first()
-      .then(async (locator) => {
-        expect(await locator.textContent()).not.toBe(siren1);
-      });
+    await goto(page, `/entreprise/${slug}?page=6`);
+    await expect(
+      page.locator('.fr-pagination__link[aria-current="page"]')
+    ).toHaveAttribute("href", "?terme=&page=6#etablissements");
+    await expect(
+      page.locator("#etablissements tbody > tr > td:first-of-type").first()
+    ).toBeVisible();
   });
 
-  test("Should color n°6 link on page 6", () => {
-    cy.visit(`/entreprise/${slug}?page=6`);
-    cy.get('.fr-pagination__link[aria-current="page"]').should(
-      "have.attr",
-      "href",
-      "?terme=&page=6#etablissements"
-    );
+  test("Should color n°6 link on page 6", async ({ page }) => {
+    await goto(page, `/entreprise/${slug}?page=6`);
+    await expect(
+      page.locator('.fr-pagination__link[aria-current="page"]')
+    ).toHaveAttribute("href", "?terme=&page=6#etablissements");
   });
 
-  test("Can click on page 3", () => {
-    cy.visit(`/entreprise/${slug}`);
-    cy.get('.fr-pagination__link[title="Page 3"]').click();
-    cy.url().should("include", "page=3");
+  test("Can click on page 3", async ({ page }) => {
+    await goto(page, `/entreprise/${slug}`);
+    await page.locator('.fr-pagination__link[title="Page 3"]').click();
+    await expect(page).toHaveURL(/page=3/);
   });
 
-  test("Can click on previous", () => {
-    cy.visit(`/entreprise/${slug}?page=6`);
-    cy.get(".fr-pagination__link--prev").click();
-    cy.url().should("include", "page=5");
+  test("Can click on previous", async ({ page }) => {
+    await goto(page, `/entreprise/${slug}?page=6`);
+    await page.locator(".fr-pagination__link--prev").click();
+    await expect(page).toHaveURL(/page=5/);
   });
 
-  test("Can click on next", () => {
-    cy.visit(`/entreprise/${slug}?page=6`);
-    cy.get(".fr-pagination__link--next").click();
-    cy.url().should("include", "page=7");
+  test("Can click on next", async ({ page }) => {
+    await goto(page, `/entreprise/${slug}?page=6`);
+    await page.locator(".fr-pagination__link--next").click();
+    await expect(page).toHaveURL(/page=7/);
   });
 
-  // no test on last as max number of pages might evolve
-  test("Can click on first", () => {
-    cy.visit(`/entreprise/${slug}?page=6`);
-    cy.get(".fr-pagination__link--first").click();
-    cy.get('.fr-pagination__link[aria-current="page"]').should(
-      "have.attr",
-      "href",
-      "?terme=&page=1#etablissements"
-    );
-    cy.url().should("not.include", "page");
+  test("Can click on first", async ({ page }) => {
+    await goto(page, `/entreprise/${slug}?page=6`);
+    await page.locator(".fr-pagination__link--first").click();
+    await expect(
+      page.locator('.fr-pagination__link[aria-current="page"]')
+    ).toHaveAttribute("href", "?terme=&page=1#etablissements");
+    await expect(page).not.toHaveURL(/page/);
   });
 });

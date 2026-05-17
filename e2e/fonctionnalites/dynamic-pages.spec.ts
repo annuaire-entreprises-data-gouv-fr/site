@@ -1,34 +1,44 @@
-import { cy, test } from "../support/test";
+import { expect, goto, test } from "../support/test";
 
 test.describe("Dirigeants and élus pages", () => {
-  test("Dirigeant page loads", () => {
-    cy.visit("/dirigeants/843701079");
-    cy.contains("Details").should("be.visible");
-    cy.contains("Lionel, Andre BERTRAND").should("be.visible");
+  test("Dirigeant page loads", async ({ page }) => {
+    await goto(page, "/dirigeants/843701079");
+    await expect(page.getByText("Details").first()).toBeVisible();
+    await expect(
+      page.getByText("Lionel, Andre BERTRAND").first()
+    ).toBeVisible();
   });
 
-  test("Elus page loads", () => {
-    cy.visit("/dirigeants/217500016");
-    cy.contains("Emmanuel GRÉGOIRE").should("be.visible");
+  test("Elus page loads", async ({ page }) => {
+    await goto(page, "/dirigeants/217500016");
+    await expect(page.getByText("Emmanuel GRÉGOIRE").first()).toBeVisible();
   });
 });
 
 test.describe("Labels and certificates", () => {
-  test("RGE", () => {
-    cy.visit("/entreprise/843701079");
-    cy.contains("Labels et certificats").should("be.visible");
-    cy.contains("RGE - Reconnu Garant de l’Environnement").should("be.visible");
+  test("RGE", async ({ page }) => {
+    await goto(page, "/entreprise/843701079");
+    await expect(page.getByText("Labels et certificats").first()).toBeVisible();
+    await expect(
+      page.getByText("RGE - Reconnu Garant de l’Environnement").first()
+    ).toBeVisible();
   });
 
-  test("ESS et Spectacle vivant", () => {
-    cy.visit("/entreprise/800329849");
-    cy.contains("Qualités, labels et certificats").should("be.visible");
-    cy.contains("ESS - Économie Sociale et Solidaire").should("be.visible");
-    cy.contains("Entrepreneur de spectacles vivants").should("be.visible");
+  test("ESS et Spectacle vivant", async ({ page }) => {
+    await goto(page, "/entreprise/800329849");
+    await expect(
+      page.getByText("Qualités, labels et certificats").first()
+    ).toBeVisible();
+    await expect(
+      page.getByText("ESS - Économie Sociale et Solidaire").first()
+    ).toBeVisible();
+    await expect(
+      page.getByText("Entrepreneur de spectacles vivants").first()
+    ).toBeVisible();
   });
 
-  test("No certificates", () => {
-    cy.visit("/entreprise/880878145");
-    cy.contains("abels et certificats").should("have.length", 0);
+  test("No certificates", async ({ page }) => {
+    await goto(page, "/entreprise/880878145");
+    await expect(page.getByText("Labels et certificats")).toHaveCount(0);
   });
 });

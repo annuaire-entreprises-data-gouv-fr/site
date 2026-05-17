@@ -1,74 +1,56 @@
-import { cy, test } from "../support/test";
+import { expect, goto, test } from "../support/test";
+
+const searchInput = ".fr-search-bar > input";
+const searchButton = ".fr-search-bar > button";
+
+async function search(page: import("@playwright/test").Page, value: string) {
+  await goto(page, "/");
+  await page.locator(searchInput).fill(value);
+  await expect(page.locator(searchInput)).toHaveValue(value);
+  await page.locator(searchButton).click();
+}
 
 test.describe("Siren / Siret redirections", () => {
-  test("Formatted siren/siret redirection", () => {
-    cy.visit("/");
-
-    cy.wait(1000);
-
-    cy.get(".fr-search-bar > input")
-      .type("552032534")
-      .should("have.value", "552032534");
-
-    cy.get(".fr-search-bar > button").click();
-
-    cy.url().should("include", "/entreprise/danone-552032534?redirected=1");
+  test("Formatted siren/siret redirection", async ({ page }) => {
+    await search(page, "552032534");
+    await expect(page).toHaveURL(
+      /\/entreprise\/danone-552032534\?redirected=1/
+    );
   });
 
-  test("Unformatted siren redirection", () => {
-    cy.visit("/");
-
-    cy.wait(1000);
-
-    cy.get(".fr-search-bar > input")
-      .type("552 032 534")
-      .should("have.value", "552 032 534");
-
-    cy.get(".fr-search-bar > button").click();
-
-    cy.url().should("include", "/entreprise/danone-552032534?redirected=1");
+  test("Unformatted siren redirection", async ({ page }) => {
+    await search(page, "552 032 534");
+    await expect(page).toHaveURL(
+      /\/entreprise\/danone-552032534\?redirected=1/
+    );
   });
 
-  test("Not found redirection", () => {
-    cy.visit("/");
-
-    cy.wait(1000);
-
-    cy.get(".fr-search-bar > input")
-      .type("123 456 789 00003")
-      .should("have.value", "123 456 789 00003");
-
-    cy.get(".fr-search-bar > button").click();
-
-    cy.url().should("include", "/erreur/introuvable/12345678900003");
+  test("Not found redirection", async ({ page }) => {
+    await search(page, "123 456 789 00003");
+    await expect(page).toHaveURL(/\/erreur\/introuvable\/12345678900003/);
   });
 
-  test("Unformatted siret redirection", () => {
-    cy.visit("/");
-
-    cy.wait(1000);
-
-    cy.get(".fr-search-bar > input")
-      .type("487 444 697 00428")
-      .should("have.value", "487 444 697 00428");
-
-    cy.get(".fr-search-bar > button").click();
-
-    cy.url().should("include", "/etablissement/48744469700428");
+  test("Unformatted siret redirection", async ({ page }) => {
+    await search(page, "487 444 697 00428");
+    await expect(page).toHaveURL(/\/etablissement\/48744469700428/);
   });
 
-  test("Entreprise/etablissement page redirection", () => {
-    cy.visit("/entreprise/48744469700428");
-    cy.url().should("include", "/etablissement/48744469700428");
+  test("Entreprise/etablissement page redirection", async ({ page }) => {
+    await goto(page, "/entreprise/48744469700428");
+    await expect(page).toHaveURL(/\/etablissement\/48744469700428/);
 
-    cy.visit("/etablissement/487444697");
-    cy.url().should("include", "/entreprise/essor-energies-solarsud-487444697");
+    await goto(page, "/etablissement/487444697");
+    await expect(page).toHaveURL(
+      /\/entreprise\/essor-energies-solarsud-487444697/
+    );
   });
 
-  test("Allow search request with 9 or plus digits", () => {
-    cy.visit(
+  test("Allow search request with 9 or plus digits", async ({ page }) => {
+    await goto(
+      page,
       "/rechercher?terme=&cp_dep_label=&cp_dep_type=&cp_dep=&fn=&n=&dmin=&dmax=&type=&label=&ca_min=100000000&etat=&sap=&naf=&nature_juridique=&tranche_effectif_salarie=&categorie_entreprise="
     );
-    cy.url().should("include", "/rechercher?ca_min=100000000");
+
+    await expect(page).toHaveURL(/\/rechercher\?ca_min=100000000/);
   });
 });

@@ -1,59 +1,72 @@
-import { cy, test } from "../support/test";
+import { expect, goto, login, test } from "../support/test";
 
 test.describe("Fiche résumé DANONE", () => {
-  test("Should display basic infos", () => {
-    cy.visit("/entreprise/danone-552032534");
-    cy.contains(
-      "Sa forme juridique est SA à conseil d'administration (s.a.i.)."
-    ).should("be.visible");
-    cy.contains("Informations légales de DANONE").should("be.visible");
-    cy.contains(
-      "Son siège social est domicilié au 59-61 RUE LA FAYETTE 75009 PARIS."
-    ).should("be.visible");
-    // TVA number
-    cy.contains("N° TVA Intracommunautaire").should("be.visible");
-    cy.contains("FR12 345 678 901").should("be.visible");
-    // EORI number
-    cy.contains("N° EORI").should("be.visible");
-    cy.contains("FR123 456 789 0").should("be.visible");
-    // Effectifs
-    cy.contains("Effectif salarié").should("be.visible");
-    cy.contains("1 000 à 1 999 salariés, en 2023").should("be.visible");
+  test("Should display basic infos", async ({ page }) => {
+    await goto(page, "/entreprise/danone-552032534");
+
+    await expect(
+      page.getByText(
+        "Sa forme juridique est SA à conseil d'administration (s.a.i.)."
+      )
+    ).toBeVisible();
+    await expect(
+      page.getByText("Informations légales de DANONE").first()
+    ).toBeVisible();
+    await expect(
+      page.getByText(
+        "Son siège social est domicilié au 59-61 RUE LA FAYETTE 75009 PARIS."
+      )
+    ).toBeVisible();
+    await expect(
+      page.getByText("N° TVA Intracommunautaire").first()
+    ).toBeVisible();
+    await expect(page.getByText("FR12 345 678 901").first()).toBeVisible();
+    await expect(page.getByText("N° EORI").first()).toBeVisible();
+    await expect(page.getByText("FR123 456 789 0").first()).toBeVisible();
+    await expect(page.getByText("Effectif salarié").first()).toBeVisible();
+    await expect(
+      page.getByText("1 000 à 1 999 salariés, en 2023").first()
+    ).toBeVisible();
   });
-  test("[LOGGED] Should display basic infos", () => {
-    cy.login();
-    cy.visit("/entreprise/danone-552032534");
-    // Effectifs
-    cy.contains("Effectif salarié").should("be.visible");
-    cy.contains("1 000 à 1 999 salariés, en 2023").should("be.visible");
-    // Résumé pour les agents publics
-    cy.contains("Résumé pour les agents publics").should("be.visible");
-    cy.contains("Documents juridiques").should("be.visible");
-    cy.contains("Consulter les Actes et les Statuts constitutifs").should(
-      "be.visible"
-    );
+
+  test("[LOGGED] Should display basic infos", async ({ page, context }) => {
+    await login(page, context);
+    await goto(page, "/entreprise/danone-552032534");
+
+    await expect(page.getByText("Effectif salarié").first()).toBeVisible();
+    await expect(
+      page.getByText("1 000 à 1 999 salariés, en 2023").first()
+    ).toBeVisible();
+    await expect(
+      page.getByText("Résumé pour les agents publics").first()
+    ).toBeVisible();
+    await expect(page.getByText("Documents juridiques").first()).toBeVisible();
+    await expect(
+      page.getByText("Consulter les Actes et les Statuts constitutifs")
+    ).toBeVisible();
   });
 });
 
 test.describe("Entreprises non-diffusibles", () => {
-  test("Should be non diffusible", () => {
-    cy.visit("/entreprise/300025764");
-    cy.contains("ne sont pas publiquement").should("have.length", 1);
+  test("Should be non diffusible", async ({ page }) => {
+    await goto(page, "/entreprise/300025764");
+    await expect(page.getByText("ne sont pas publiquement")).toHaveCount(1);
   });
 
-  test("Should be diffusible", () => {
-    cy.visit("/entreprise/880878145");
-    cy.contains("ne sont pas publiquement").should("have.length", 0);
+  test("Should be diffusible", async ({ page }) => {
+    await goto(page, "/entreprise/880878145");
+    await expect(page.getByText("ne sont pas publiquement")).toHaveCount(0);
   });
 });
 
 test.describe("TVA number special cases", () => {
-  test("TVA Non-assujettie", () => {
-    cy.visit("/entreprise/883010316").then(() => {
-      cy.contains("Pas de n° TVA valide");
-    });
-    cy.visit("/entreprise/423208180").then(() => {
-      cy.contains("Pas de n° TVA valide connu");
-    });
+  test("TVA Non-assujettie", async ({ page }) => {
+    await goto(page, "/entreprise/883010316");
+    await expect(page.getByText("Pas de n° TVA valide").first()).toBeVisible();
+
+    await goto(page, "/entreprise/423208180");
+    await expect(
+      page.getByText("Pas de n° TVA valide connu").first()
+    ).toBeVisible();
   });
 });

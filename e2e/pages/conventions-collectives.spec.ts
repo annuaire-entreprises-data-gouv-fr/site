@@ -1,15 +1,19 @@
-import { cy, test } from "../support/test";
+import { expect, goto, test } from "../support/test";
 
 test.describe("Conventions collectives", () => {
-  test("Should work for valid companies", () => {
-    cy.visit("/divers/356000000");
-    cy.contains("Convention d'entreprise La Poste - France Télécom");
+  test("Should work for valid companies", async ({ page }) => {
+    await goto(page, "/divers/356000000");
+    await expect(
+      page
+        .getByText("Convention d'entreprise La Poste - France Télécom")
+        .first()
+    ).toBeVisible();
   });
 
   // Need an example
-  // test('Should display Inconnues ou supprimées', () => {
-  //   cy.visit('/divers/592052302');
-  //   cy.contains('Inconnues ou supprimées');
-  //   cy.contains('et remplacée par :');
+  // test('Should display Inconnues ou supprimées', async ({ page }) => {
+  //   await goto(page, '/divers/592052302');
+  //   await expect(page.getByText('Inconnues ou supprimées').first()).toBeVisible();
+  //   await expect(page.getByText('et remplacée par :').first()).toBeVisible();
   // });
 });

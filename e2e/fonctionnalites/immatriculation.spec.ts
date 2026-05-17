@@ -1,26 +1,34 @@
-import { cy, test } from "../support/test";
+import { expect, goto, test } from "../support/test";
 
 test.describe("Immatriculation RNE", () => {
-  test("Should display immatriculation", () => {
-    cy.visit("/entreprise/552032534");
-    cy.contains("Immatriculée au RNE");
-    cy.contains("01/03/1955");
+  test("Should display immatriculation", async ({ page }) => {
+    await goto(page, "/entreprise/552032534");
+    await expect(page.getByText("Immatriculée au RNE").first()).toBeVisible();
+    await expect(page.getByText("01/03/1955").first()).toBeVisible();
   });
 
-  test("Should display immatriculation even for non diffusible", () => {
-    cy.visit("/entreprise/300025764");
-    cy.contains("Immatriculée au RNE");
-    cy.contains("Gestion de biens, Libérale non réglementée");
+  test("Should display immatriculation even for non diffusible", async ({
+    page,
+  }) => {
+    await goto(page, "/entreprise/300025764");
+    await expect(page.getByText("Immatriculée au RNE").first()).toBeVisible();
+    await expect(
+      page.getByText("Gestion de biens, Libérale non réglementée").first()
+    ).toBeVisible();
   });
 
-  test("Should display immatriculation even for closed structure", () => {
-    cy.visit("/entreprise/880878145");
-    cy.contains("Radiée au RNE");
-    cy.contains("14/11/2022");
+  test("Should display immatriculation even for closed structure", async ({
+    page,
+  }) => {
+    await goto(page, "/entreprise/880878145");
+    await expect(page.getByText("Radiée au RNE").first()).toBeVisible();
+    await expect(page.getByText("14/11/2022").first()).toBeVisible();
   });
 
-  test("Should display warning when not found in RNE", () => {
-    cy.visit("/entreprise/784410607");
-    cy.contains("Non trouvée dans le RNE");
+  test("Should display warning when not found in RNE", async ({ page }) => {
+    await goto(page, "/entreprise/784410607");
+    await expect(
+      page.getByText("Non trouvée dans le RNE").first()
+    ).toBeVisible();
   });
 });

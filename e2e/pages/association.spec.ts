@@ -1,118 +1,58 @@
-import { cy, test } from "../support/test";
+import type { Page } from "@playwright/test";
+import { expect, goto, lastCellByRowText, test } from "../support/test";
+
+async function expectAssociationRow(page: Page, label: string, value: RegExp) {
+  await expect(
+    lastCellByRowText(page, "#association-section", label).getByRole("button", {
+      name: value,
+    })
+  ).toBeVisible();
+}
 
 test.describe("Association", () => {
-  test("Should display association data from private api", () => {
-    cy.visit("/entreprise/400485504");
-    cy.findByRole("heading", { name: "L'ENFANT BLEU", level: 1 }).should(
-      "be.visible"
-    );
-    cy.findByText("Répertoire National des Associations").should("be.visible");
+  test("Should display association data from private api", async ({ page }) => {
+    await goto(page, "/entreprise/400485504");
 
-    cy.get("#association-section")
-      .findAllByRole("row")
-      .filter(':contains("N°RNA")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /W751 092 330/,
-            }).should("be.visible");
-          });
-      });
-    cy.get("#association-section")
-      .findAllByRole("row")
-      .filter(':contains("Nom")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /ASSOCIATION L'ENFANT BLEU ENFANCE MALTRAITEE/,
-            }).should("be.visible");
-          });
-      });
-    cy.get("#association-section")
-      .findAllByRole("row")
-      .filter(':contains("Regime")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /loi1901/,
-            }).should("be.visible");
-          });
-      });
-    cy.get("#association-section")
-      .findAllByRole("row")
-      .filter(':contains("Adresse du siège")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /18 RUE HOCHE, 92130 ISSY-LES-MOULINEAUX/,
-            }).should("be.visible");
-          });
-      });
+    await expect(
+      page.getByRole("heading", { name: "L'ENFANT BLEU", level: 1 })
+    ).toBeVisible();
+    await expect(page.locator("#association-section")).toBeVisible();
+
+    await expectAssociationRow(page, "N°RNA", /W751 092 330/);
+    await expectAssociationRow(
+      page,
+      "Nom",
+      /ASSOCIATION L'ENFANT BLEU ENFANCE MALTRAITEE/
+    );
+    await expectAssociationRow(page, "Regime", /loi1901/);
+    await expectAssociationRow(
+      page,
+      "Adresse du siège",
+      /18 RUE HOCHE, 92130 ISSY-LES-MOULINEAUX/
+    );
   });
 
-  test("Should fallback and display association data from public api when private api is not available", () => {
-    cy.visit("/entreprise/400461356");
-    cy.findByRole("heading", {
-      name: "LES RESTAURANTS DU COEUR",
-      level: 1,
-    }).should("be.visible");
-    cy.findByText("Répertoire National des Associations").should("be.visible");
+  test("Should fallback and display association data from public api when private api is not available", async ({
+    page,
+  }) => {
+    await goto(page, "/entreprise/400461356");
 
-    cy.get("#association-section")
-      .findAllByRole("row")
-      .filter(':contains("N°RNA")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /W491 004 193/,
-            }).should("be.visible");
-          });
-      });
-    cy.get("#association-section")
-      .findAllByRole("row")
-      .filter(':contains("Nom")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /LES RESTAURANTS DU COEUR DE MAINE ET LOIRE/,
-            }).should("be.visible");
-          });
-      });
-    cy.get("#association-section")
-      .findAllByRole("row")
-      .filter(':contains("Regime")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /loi1901/,
-            }).should("be.visible");
-          });
-      });
-    cy.get("#association-section")
-      .findAllByRole("row")
-      .filter(':contains("Adresse du siège")')
-      .within(() => {
-        cy.findAllByRole("cell")
-          .last()
-          .within(() => {
-            cy.findByRole("button", {
-              name: /10 SQUARE DUMONT D'URVILLE, 49000 ANGERS/,
-            }).should("be.visible");
-          });
-      });
+    await expect(
+      page.getByRole("heading", { name: "LES RESTAURANTS DU COEUR", level: 1 })
+    ).toBeVisible();
+    await expect(page.locator("#association-section")).toBeVisible();
+
+    await expectAssociationRow(page, "N°RNA", /W491 004 193/);
+    await expectAssociationRow(
+      page,
+      "Nom",
+      /LES RESTAURANTS DU COEUR DE MAINE ET LOIRE/
+    );
+    await expectAssociationRow(page, "Regime", /loi1901/);
+    await expectAssociationRow(
+      page,
+      "Adresse du siège",
+      /10 SQUARE DUMONT D'URVILLE, 49000 ANGERS/
+    );
   });
 });

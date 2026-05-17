@@ -1,23 +1,31 @@
-import { cy, test } from "../support/test";
+import { expect, goto, test } from "../support/test";
 
 test.describe("Etat administratif", () => {
-  test("Non diffusible", () => {
-    cy.visit("/entreprise/300025764");
-    cy.contains("information non-diffusible");
+  test("Non diffusible", async ({ page }) => {
+    await goto(page, "/entreprise/300025764");
+    await expect(
+      page.getByText("information non-diffusible").first()
+    ).toBeVisible();
   });
 
-  test("Diffusible", () => {
-    cy.visit("/entreprise/356000000");
-    cy.contains("en activité").should("have.length", 1);
+  test("Diffusible", async ({ page }) => {
+    await goto(page, "/entreprise/356000000");
+    await expect(
+      page.getByRole("status").filter({ hasText: "en activité" }).first()
+    ).toBeVisible();
   });
 
-  test("En sommeil", () => {
-    cy.visit("/entreprise/351556394");
-    cy.contains("en sommeil").should("have.length", 1);
+  test("En sommeil", async ({ page }) => {
+    await goto(page, "/entreprise/351556394");
+    await expect(
+      page.getByRole("status").filter({ hasText: "en sommeil" }).first()
+    ).toBeVisible();
   });
 
-  test("Cessée", () => {
-    cy.visit("/entreprise/839517323");
-    cy.contains("cessée").should("have.length", 1);
+  test("Cessée", async ({ page }) => {
+    await goto(page, "/entreprise/839517323");
+    await expect(
+      page.getByRole("status").filter({ hasText: "cessée" }).first()
+    ).toBeVisible();
   });
 });

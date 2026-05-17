@@ -1,12 +1,15 @@
-import { cy, test } from "../support/test";
+import { expect, goto, test } from "../support/test";
 
 test.describe("Élus VILLE DE PARIS", () => {
-  test("Should display élus", () => {
-    cy.visit("/dirigeants/217500016");
-    cy.contains("Élus").should("be.visible");
-    cy.contains(
-      "Cette collectivité possède 163 élus enregistrés au Répertoire National des Élus :"
-    ).should("be.visible");
-    cy.contains("Emmanuel GRÉGOIRE").should("be.visible");
+  test("Should display élus", async ({ page }) => {
+    await goto(page, "/dirigeants/217500016");
+
+    await expect(page.getByText("Élus").first()).toBeVisible();
+    await expect(
+      page.getByText(
+        "Cette collectivité possède 163 élus enregistrés au Répertoire National des Élus :"
+      )
+    ).toBeVisible();
+    await expect(page.getByText("Emmanuel GRÉGOIRE").first()).toBeVisible();
   });
 });
