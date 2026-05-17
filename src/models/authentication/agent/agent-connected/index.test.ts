@@ -67,12 +67,11 @@ describe("AgentConnected", () => {
     vi.clearAllMocks();
     // Setup the AgentOrganisation mock
     const mockGetHabilitationLevel = vi.fn();
-    mockAgentOrganisation.mockImplementation(
-      () =>
-        ({
-          getHabilitationLevel: mockGetHabilitationLevel,
-        }) as any
-    );
+    mockAgentOrganisation.mockImplementation(function MockAgentOrganisation() {
+      return {
+        getHabilitationLevel: mockGetHabilitationLevel,
+      } as any;
+    });
   });
 
   describe("constructor", () => {
@@ -239,10 +238,11 @@ describe("AgentConnected", () => {
         .fn()
         .mockResolvedValue(mockOrgHabilitation);
       mockAgentOrganisation.mockImplementation(
-        () =>
-          ({
+        function MockAgentOrganisation() {
+          return {
             getHabilitationLevel: mockGetHabilitationLevel,
-          }) as any
+          } as any;
+        }
       );
 
       const agent = new AgentConnected(mockUserInfo);
