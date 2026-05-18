@@ -1,0 +1,12 @@
+{
+  "args": [
+    "Nice"
+  ],
+  "result": [
+    {
+      "label": "Métropole Nice Côte d'Azur (EPCI)",
+      "value": "200030195",
+      "type": "epci"
+    }
+  ]
+}

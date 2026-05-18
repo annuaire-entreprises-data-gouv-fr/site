@@ -1,0 +1,156 @@
+/** biome-ignore-all lint/correctness/useHookAtTopLevel: not a hook */
+
+import { createServerOnlyFn } from "@tanstack/react-start";
+import { useSession } from "@tanstack/react-start/server";
+import type { IAgentInfo } from "#/models/authentication/agent";
+import type { ISession } from "#/models/authentication/user/session";
+import { isAbsoluteUrl } from "#/utils/server-side-helper/is-absolute-url";
+
+function useAppSession() {
+  if (!process.env.SESSION_PWD) {
+    throw new Error("SESSION_PWD is not set");
+  }
+
+  return useSession<ISession>({
+    password: process.env.SESSION_PWD,
+    name: "annuaire-entreprises-user-session-6",
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true, // ✅ Critical for XSS protection
+      sameSite: "lax", // ✅ CSRF protection
+    },
+    maxAge: 43_200, // 12h
+  });
+}
+
+export const getCurrentSession = createServerOnlyFn(() => useAppSession());
+
+type Session = Awaited<ReturnType<typeof getCurrentSession>>;
+
+/**
+ * Utils for AgentConnect session
+ */
+
+export const setAgentSession = createServerOnlyFn(
+  async (agent: IAgentInfo, session: Session) => {
+    await session.update({
+      user: agent,
+    });
+  }
+);
+
+export const cleanAgentSession = createServerOnlyFn(
+  async (session: Session) => {
+    await session.update({
+      state: undefined,
+      nonce: undefined,
+      proConnectTokenSet: undefined,
+      user: null,
+    });
+  }
+);
+
+export const cleanFranceConnectSession = createServerOnlyFn(
+  async (session: Session) => {
+    await session.update({
+      franceConnectHidePersonalDataSession: undefined,
+    });
+  }
+);
+
+export const setStateAndNonce = createServerOnlyFn(
+  async (
+    session: Session,
+    state: string | undefined,
+    nonce: string | undefined
+  ) => {
+    await session.update({
+      state,
+      nonce,
+    });
+  }
+);
+
+export const setProConnectTokenSet = createServerOnlyFn(
+  async (
+    session: Session,
+    proConnectTokenSet: ISession["proConnectTokenSet"]
+  ) => {
+    await session.update({
+      proConnectTokenSet,
+      state: undefined,
+      nonce: undefined,
+    });
+  }
+);
+
+/**
+ * Utils for AgentConnect redirection
+ */
+
+export const setPathFrom = createServerOnlyFn(
+  async (session: Session, pathFrom: string) => {
+    if (pathFrom) {
+      if (isAbsoluteUrl(pathFrom)) {
+        throw new Error("Absolute URL not allowed");
+      }
+      await session.update({
+        pathFrom,
+      });
+    }
+  }
+);
+
+export const getPathFrom = createServerOnlyFn(
+  (session: Session) => session.data.pathFrom
+);
+
+export const cleanPathFrom = createServerOnlyFn(async (session: Session) => {
+  await session.update({
+    pathFrom: undefined,
+  });
+});
+
+/**
+ * Utils for FranceConnect session
+ */
+
+export const setHidePersonalDataRequestFCSession = createServerOnlyFn(
+  async (
+    firstName: string | undefined,
+    familyName: string | undefined,
+    birthdate: string | undefined,
+    tokenId: string,
+    sub: string,
+    session: Session
+  ) => {
+    await session.update({
+      franceConnectHidePersonalDataSession: {
+        firstName,
+        familyName,
+        birthdate,
+        tokenId,
+        sub,
+      },
+    });
+  }
+);
+
+export const getHidePersonalDataRequestFCSession = createServerOnlyFn(
+  (
+    session: Partial<ISession> | null
+  ): Required<
+    NonNullable<ISession["franceConnectHidePersonalDataSession"]>
+  > | null => {
+    if (
+      !session?.franceConnectHidePersonalDataSession?.firstName ||
+      !session.franceConnectHidePersonalDataSession.familyName ||
+      !session.franceConnectHidePersonalDataSession.birthdate
+    ) {
+      return null;
+    }
+    return session.franceConnectHidePersonalDataSession as Required<
+      NonNullable<ISession["franceConnectHidePersonalDataSession"]>
+    >;
+  }
+);

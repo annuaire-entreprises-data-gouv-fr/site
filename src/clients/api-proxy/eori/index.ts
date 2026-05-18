@@ -1,0 +1,18 @@
+import routes from "#/clients/routes";
+import constants from "#/models/constants";
+import type { IEORIValidation } from "#/models/eori-validation";
+import type { Siret } from "#/utils/helpers";
+import { clientAPIProxy } from "../client.server";
+
+/**
+ * Call EORI to validate a French EORI number
+ * @param siret
+ */
+export const clientEORI = async (
+  siret: Siret,
+  signal?: AbortSignal
+): Promise<IEORIValidation> =>
+  await clientAPIProxy<IEORIValidation>(routes.proxy.eori(siret), {
+    timeout: constants.timeout.XXL,
+    signal,
+  });

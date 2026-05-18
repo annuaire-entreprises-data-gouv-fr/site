@@ -1,0 +1,57 @@
+import type React from "react";
+import { Link } from "#/components/Link";
+import { Icon } from "#/components-ui/icon/wrapper";
+import type { IAdministrationMetaData } from "#/models/administrations/types";
+import constants from "#/models/constants";
+import { pluralize } from "#/utils/helpers";
+import InformationTooltip from ".";
+import style from "./style.module.css";
+
+const DataSourcesTooltip: React.FC<{
+  dataSources: IAdministrationMetaData[];
+  lastUpdatedAt?: string;
+  link: string;
+  orientation?: "center" | "left" | "right";
+}> = ({ dataSources, lastUpdatedAt, link, orientation }) => (
+  <>
+    {lastUpdatedAt ? (
+      <>
+        <span className={style["updated-at"]}>
+          Mise à jour le {lastUpdatedAt}
+        </span>
+        <br />
+      </>
+    ) : (
+      ""
+    )}
+    <InformationTooltip
+      horizontalOrientation={orientation || "center"}
+      label={dataSources.map((dataSource) => (
+        <div key={dataSource.long}>{dataSource.long}.</div>
+      ))}
+      tabIndex={undefined}
+    >
+      <Link
+        className={`no-style-link ${style["data-source"]}`}
+        params={{ slug: link }}
+        style={{
+          color: constants.colors.frBlue,
+        }}
+        to="/administration/$slug"
+      >
+        <span
+          className="layout-center"
+          style={{ display: "inlineBloc", marginRight: "0.25rem" }}
+        >
+          <Icon color={constants.colors.frBlue} size={12} slug="information" />
+        </span>
+        <span>
+          Source{pluralize(dataSources)}&nbsp;:&nbsp;
+          {dataSources.map((dataSource) => dataSource.short).join(", ")}
+        </span>
+      </Link>
+    </InformationTooltip>
+  </>
+);
+
+export default DataSourcesTooltip;

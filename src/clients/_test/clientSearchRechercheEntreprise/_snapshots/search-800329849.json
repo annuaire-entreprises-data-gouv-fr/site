@@ -1,0 +1,228 @@
+{
+  "args": {
+    "pageResultatsRecherche": 1,
+    "searchTerms": "800329849",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "aAccesEspaceAgent": false,
+        "siren": "800329849",
+        "oldSiren": "800329849",
+        "siege": {
+          "siren": "800329849",
+          "siret": "80032984900023",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "ancienSiege": false,
+          "enseigne": "",
+          "denomination": null,
+          "nic": "00023",
+          "dateCreation": "2017-12-20",
+          "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
+          "dateDebutActivite": "2017-12-20",
+          "dateFermeture": "",
+          "adresse": "16 RUE DE TOLBIAC 75013 PARIS",
+          "adressePostale": "16 RUE DE TOLBIAC 75013 PARIS",
+          "codePostal": "75013",
+          "commune": "PARIS",
+          "activitePrincipale": "90.01Z",
+          "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
+          "libelleActivitePrincipaleNaf25": "Activités de production et organisation d'évènements culturels (90.39G)",
+          "trancheEffectif": "02",
+          "anneeTrancheEffectif": "2023",
+          "latitude": "48.8296292388604",
+          "longitude": "2.37481538361815",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "estPersonneMorale": true,
+            "idFiness": [],
+            "idBio": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
+          "listeIdcc": [
+            {
+              "idcc": "3090",
+              "title": ""
+            }
+          ]
+        },
+        "anciensSiegesSirets": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "THEATRE STEPHANE GILDAS",
+        "chemin": "theatre-stephane-gildas-800329849",
+        "natureJuridique": "9220",
+        "libelleNatureJuridique": "Association déclarée",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "800329849",
+              "siret": "80032984900023",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00023",
+              "dateCreation": "2017-12-20",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2017-12-20",
+              "dateFermeture": "",
+              "adresse": "16 RUE DE TOLBIAC 75013 PARIS",
+              "adressePostale": "16 RUE DE TOLBIAC 75013 PARIS",
+              "codePostal": "75013",
+              "commune": "PARIS",
+              "activitePrincipale": "90.01Z",
+              "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
+              "libelleActivitePrincipaleNaf25": "Activités de production et organisation d'évènements culturels (90.39G)",
+              "trancheEffectif": "02",
+              "anneeTrancheEffectif": "2023",
+              "latitude": "48.8296292388604",
+              "longitude": "2.37481538361815",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
+                "idFiness": [],
+                "idBio": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "3090",
+                  "title": ""
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "800329849",
+              "siret": "80032984900023",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00023",
+              "dateCreation": "2017-12-20",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2017-12-20",
+              "dateFermeture": "",
+              "adresse": "16 RUE DE TOLBIAC 75013 PARIS",
+              "adressePostale": "16 RUE DE TOLBIAC 75013 PARIS",
+              "codePostal": "75013",
+              "commune": "PARIS",
+              "activitePrincipale": "90.01Z",
+              "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
+              "libelleActivitePrincipaleNaf25": "Activités de production et organisation d'évènements culturels (90.39G)",
+              "trancheEffectif": "02",
+              "anneeTrancheEffectif": "2023",
+              "latitude": "48.8296292388604",
+              "longitude": "2.37481538361815",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
+                "idFiness": [],
+                "idBio": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "3090",
+                  "title": ""
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 2,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "90.01Z",
+        "libelleActivitePrincipale": "Arts du spectacle vivant",
+        "libelleActivitePrincipaleNaf25": "Activités de production et organisation d'évènements culturels (90.39G)",
+        "dateCreation": "2013-12-18",
+        "dateFermeture": "",
+        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2025-12-06T10:53:42",
+        "dateMiseAJourInpi": "",
+        "dateMiseAJourIG": "",
+        "dateDebutActivite": "",
+        "trancheEffectif": "02",
+        "anneeCategorieEntreprise": "2023",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2023",
+        "complements": {
+          "estBio": false,
+          "estEss": true,
+          "estAdministration": false,
+          "estEntrepreneurIndividuel": false,
+          "estPersonneMorale": true,
+          "estEntrepreneurSpectacle": true,
+          "statutEntrepreneurSpectacle": "valide",
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": true,
+          "estUai": false,
+          "estAchatsResponsables": false,
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null,
+          "estPatrimoineVivant": false,
+          "estAlimConfiance": false,
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null,
+          "aAideMinimis": false,
+          "aAideADEME": false,
+          "estAvocat": false
+        },
+        "association": {
+          "idAssociation": "W751222623",
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "listeIdcc": [
+          {
+            "idcc": "3090",
+            "title": ""
+          }
+        ],
+        "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
+        "bodacc": null,
+        "matchingEtablissements": [],
+        "nombreEtablissements": 2,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": []
+      }
+    ]
+  }
+}

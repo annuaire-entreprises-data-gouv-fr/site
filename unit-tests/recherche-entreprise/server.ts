@@ -7,7 +7,7 @@ import {
   type JsonBodyType,
 } from "msw";
 import { setupServer } from "msw/node";
-import routes from "#clients/routes";
+import routes from "#/clients/routes";
 
 const fixturesDir = path.join(
   process.cwd(),

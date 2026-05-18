@@ -25,7 +25,7 @@ pre-commit:
         - "*.json"
         - "*.jsonc"
         - "*.css"
-    - run: npx tsc --noEmit
+    - run: npm run typecheck
       glob:
         - "*.js"
         - "*.jsx"

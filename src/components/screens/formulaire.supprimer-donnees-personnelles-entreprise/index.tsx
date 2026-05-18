@@ -1,0 +1,73 @@
+import { useEffect, useState } from "react";
+import type { ISession } from "#/models/authentication/user/session";
+import { ConnectionFranceConnect } from "./connection-france-connect";
+import { RenseignerSiren } from "./renseigner-siren";
+import { RequestState } from "./request-state";
+
+interface IProps {
+  franceConnectInfo: Pick<
+    NonNullable<ISession["franceConnectHidePersonalDataSession"]>,
+    "firstName" | "familyName" | "birthdate"
+  > | null;
+  hasInvalidFCSession: boolean;
+}
+
+export default function HidePersonalDataPageClient({
+  franceConnectInfo,
+  hasInvalidFCSession,
+}: IProps) {
+  const [formState, setFormState] = useState({
+    uniteLegale: undefined,
+    hidePersonalDataRequest: undefined,
+  });
+  const [error, setError] = useState<string | null>(null);
+
+  const postFormData = async (formData: FormData) => {
+    setError(null);
+
+    try {
+      const response = await fetch("/api/hide-personal-data", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.message || "Une erreur inattendue est survenue."
+        );
+      }
+
+      const data = await response.json();
+      setFormState(data);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Une erreur inattendue est survenue.");
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [formState]);
+
+  return formState.uniteLegale ? (
+    <RequestState hidePersonalDataRequest={formState.hidePersonalDataRequest} />
+  ) : (
+    <>
+      <ConnectionFranceConnect
+        franceConnectInfo={franceConnectInfo}
+        hasInvalidFCSession={hasInvalidFCSession}
+      />
+      {franceConnectInfo && (
+        <>
+          <h2>Renseigner le SIREN de votre entreprise</h2>
+          <RenseignerSiren postFormData={postFormData} />
+          {error && <p className="fr-error-text">{error}</p>}
+        </>
+      )}
+    </>
+  );
+}

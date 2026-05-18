@@ -1,0 +1,234 @@
+{
+  "args": {
+    "pageResultatsRecherche": 1,
+    "searchTerms": "198100125",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "aAccesEspaceAgent": true,
+        "siren": "198100125",
+        "oldSiren": "198100125",
+        "siege": {
+          "siren": "198100125",
+          "siret": "19810012500014",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "ancienSiege": false,
+          "enseigne": "",
+          "denomination": null,
+          "nic": "00014",
+          "dateCreation": "1983-03-01",
+          "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
+          "dateDebutActivite": "2008-01-01",
+          "dateFermeture": "",
+          "adresse": "RTE DE BLAYE PARC DE LA VERRERIE 81400 BLAYE-LES-MINES",
+          "adressePostale": "RTE DE BLAYE PARC DE LA VERRERIE 81400 BLAYE-LES-MINES",
+          "codePostal": "81400",
+          "commune": "BLAYE-LES-MINES",
+          "activitePrincipale": "85.31Z",
+          "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
+          "libelleActivitePrincipaleNaf25": "Enseignement secondaire général (85.31Y)",
+          "trancheEffectif": "22",
+          "anneeTrancheEffectif": "2023",
+          "latitude": "44.048931276",
+          "longitude": "2.1406948503",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "estPersonneMorale": true,
+            "idFiness": [],
+            "idBio": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": [
+              "0810012Y"
+            ]
+          },
+          "listeIdcc": [
+            {
+              "idcc": "9999",
+              "title": ""
+            }
+          ]
+        },
+        "anciensSiegesSirets": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "LYCEE POLYVALENT JEAN JAURES",
+        "chemin": "lycee-polyvalent-jean-jaures-198100125",
+        "natureJuridique": "7331",
+        "libelleNatureJuridique": "Établissement public local d'enseignement",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "198100125",
+              "siret": "19810012500014",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00014",
+              "dateCreation": "1983-03-01",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2008-01-01",
+              "dateFermeture": "",
+              "adresse": "RTE DE BLAYE PARC DE LA VERRERIE 81400 BLAYE-LES-MINES",
+              "adressePostale": "RTE DE BLAYE PARC DE LA VERRERIE 81400 BLAYE-LES-MINES",
+              "codePostal": "81400",
+              "commune": "BLAYE-LES-MINES",
+              "activitePrincipale": "85.31Z",
+              "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
+              "libelleActivitePrincipaleNaf25": "Enseignement secondaire général (85.31Y)",
+              "trancheEffectif": "22",
+              "anneeTrancheEffectif": "2023",
+              "latitude": "44.048931276",
+              "longitude": "2.1406948503",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
+                "idFiness": [],
+                "idBio": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": [
+                  "0810012Y"
+                ]
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "9999",
+                  "title": ""
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "198100125",
+              "siret": "19810012500014",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "ancienSiege": false,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00014",
+              "dateCreation": "1983-03-01",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2008-01-01",
+              "dateFermeture": "",
+              "adresse": "RTE DE BLAYE PARC DE LA VERRERIE 81400 BLAYE-LES-MINES",
+              "adressePostale": "RTE DE BLAYE PARC DE LA VERRERIE 81400 BLAYE-LES-MINES",
+              "codePostal": "81400",
+              "commune": "BLAYE-LES-MINES",
+              "activitePrincipale": "85.31Z",
+              "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
+              "libelleActivitePrincipaleNaf25": "Enseignement secondaire général (85.31Y)",
+              "trancheEffectif": "22",
+              "anneeTrancheEffectif": "2023",
+              "latitude": "44.048931276",
+              "longitude": "2.1406948503",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "estPersonneMorale": true,
+                "idFiness": [],
+                "idBio": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": [
+                  "0810012Y"
+                ]
+              },
+              "listeIdcc": [
+                {
+                  "idcc": "9999",
+                  "title": ""
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 1,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "85.31Z",
+        "libelleActivitePrincipale": "Enseignement secondaire général",
+        "libelleActivitePrincipaleNaf25": "Enseignement secondaire général (85.31Y)",
+        "dateCreation": "1965-05-01",
+        "dateFermeture": "",
+        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2025-12-06T10:58:57",
+        "dateMiseAJourInpi": "",
+        "dateMiseAJourIG": "",
+        "dateDebutActivite": "",
+        "trancheEffectif": "22",
+        "anneeCategorieEntreprise": "2023",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2023",
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estAdministration": true,
+          "estEntrepreneurIndividuel": false,
+          "estPersonneMorale": true,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": true,
+          "estAchatsResponsables": false,
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null,
+          "estPatrimoineVivant": false,
+          "estAlimConfiance": true,
+          "bilanGesRenseigne": false,
+          "idFinessJuridiques": null,
+          "aAideMinimis": false,
+          "aAideADEME": false,
+          "estAvocat": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "listeIdcc": [
+          {
+            "idcc": "9999",
+            "title": ""
+          }
+        ],
+        "immatriculation": null,
+        "isNbEtablissementOuvertReliable": true,
+        "bodacc": null,
+        "matchingEtablissements": [],
+        "nombreEtablissements": 1,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": []
+      }
+    ]
+  }
+}

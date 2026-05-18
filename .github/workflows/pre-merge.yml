@@ -31,7 +31,7 @@ env:
   MATOMO_SITE_ID: ${{ secrets.MATOMO_SITE_ID }}
   MATOMO_API_SITE_ID: ${{ secrets.MATOMO_API_SITE_ID }}
   MATOMO_TOKEN_AUTH: ${{ secrets.MATOMO_TOKEN_AUTH }}
-  IRON_SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
   UPDOWN_IO_API_KEY: ${{ secrets.UPDOWN_IO_API_KEY }}
 
@@ -62,7 +62,7 @@ jobs:
       - name: Load node_modules
         uses: ./.github/actions/load-dependencies
       - name: Run linter
-        run: npm run lint
+        run: pnpm run lint
 
   build:
     name: Build
@@ -78,7 +78,7 @@ jobs:
         uses: ./.github/actions/load-dependencies
 
       - name: Build site
-        run: npm run build
+        run: pnpm run build
       - name: Cache site
         uses: actions/cache@v3
         id: restore-build
@@ -103,25 +103,14 @@ jobs:
         uses: ./.github/actions/load-dependencies
       - name: Run unit tests
         run: |
-          npm run test:unit
+          pnpm run test:unit
 
   testE2E:
     name: End2end tests
     runs-on: ubuntu-latest
     needs: [dependencies]
     env:
-      NEXT_PUBLIC_END2END_MOCKING: enabled
-      NEXT_PUBLIC_BASE_URL: http://localhost:3000
-      API_ENTREPRISE_URL: http://uselessurl.com
-      API_RECHERCHE_ENTREPRISE_URL: http://uselessurl2.com
-      PROXY_API_URL: http://uselessurl3.com
-      API_ASSOCIATION_URL: http://uselessurl3.com
-      API_ASSOCIATION_KEY: XXXXXX
-      API_ENTREPRISE_TOKEN: XXXXXX
-      OVH_S3_MONITORING_ACCESS_KEY: XXXXXX
-      OVH_S3_MONITORING_SECRET: XXXXXX
-      OVH_S3_MONITORING_BUCKET: uselessbucket
-      OVH_S3_MONITORING_REGION: region
+      VITE_END2END_MOCKING: enabled
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v6
@@ -131,28 +120,26 @@ jobs:
           node-version: ${{ env.node-version }}
       - name: Load node_modules
         uses: ./.github/actions/load-dependencies
-      - name: Build site with E2E mocking
-        run: npm run build && npm run prepare-standalone-dir
-        env:
-          NEXT_PUBLIC_END2END_MOCKING: enabled
-      - name: Run Cypress tests 🧪
-        # https://github.com/cypress-io/github-action
-        uses: cypress-io/github-action@v6
-        timeout-minutes: 10
-        with:
-          start: node .next/standalone/server.js
-          record: false
-          config-file: ./cypress/cypress.config.ts
-        env:
-          CYPRESS_IRON_SESSION_PWD: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-          NEXT_PUBLIC_END2END_MOCKING: enabled
-      - name: Upload screenshots 📸
+      - name: Copy .env.test to .env
+        run: cp .env.test .env
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run Playwright tests 🧪
+        timeout-minutes: 20
+        run: pnpm run test:end2end:run
+      - name: Upload Playwright report 📊
         uses: actions/upload-artifact@v4
-        # add the line below to store screenshots only on failures
         if: failure()
         with:
-          name: cypress-screenshots
-          path: cypress/screenshots
+          name: playwright-report
+          path: playwright-report
+          if-no-files-found: ignore
+      - name: Upload Playwright test results 🎥
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-test-results
+          path: test-results
           if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
 
   typecheck:
@@ -167,5 +154,7 @@ jobs:
           node-version: ${{ env.node-version }}
       - name: Load node_modules
         uses: ./.github/actions/load-dependencies
+      - name: Generate json data
+        run: pnpm run compile:data
       - name: Run typescript check
-        run: npx tsc --noEmit
+        run: pnpm run typecheck

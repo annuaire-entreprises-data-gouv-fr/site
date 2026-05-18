@@ -60,12 +60,19 @@ public/authorized-agents.txt
 # direnv
 .envrc
 
-# cypress
-cypress/videos
-cypress/screenshots
+# playwright
+playwright-report
+test-results
 
 # typescript
 tsconfig.tsbuildinfo
 
 # mise
 mise*.toml
+
+dist/
+.output/
+
+src/data/**/*.json
+
+.pnpm-store/

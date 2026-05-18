@@ -1,0 +1,262 @@
+import type React from "react";
+import type { PropsWithChildren } from "react";
+import AvisSituationLink from "#/components/justificatifs/avis-situation-link";
+import ExtraitRNELink from "#/components/justificatifs/extrait-rne-link";
+import { Link } from "#/components/Link";
+import { OpenClosedTag } from "#/components-ui/badge/frequent";
+import { Icon } from "#/components-ui/icon/wrapper";
+import InformationTooltip from "#/components-ui/information-tooltip";
+import type { IAgentInfo } from "#/models/authentication/agent";
+import { estActif } from "#/models/core/etat-administratif";
+import {
+  type IUniteLegale,
+  isAssociation,
+  isServicePublic,
+} from "#/models/core/types";
+import { formatDate } from "#/utils/helpers";
+import styles from "./style.module.css";
+
+const Wrapper: React.FC<PropsWithChildren<{ link: React.JSX.Element }>> = ({
+  children,
+  link,
+}) => (
+  <div className={styles["inscriptions-wrapper"]}>
+    <div>{children}</div>
+    <div className="layout-right">{link}</div>
+  </div>
+);
+
+export const UniteLegaleInscriptionIG = ({
+  uniteLegale,
+}: {
+  uniteLegale: IUniteLegale;
+}) => {
+  if (
+    !uniteLegale.dateMiseAJourInsee &&
+    !uniteLegale.dateMiseAJourInpi &&
+    uniteLegale.dateMiseAJourIG
+  ) {
+    return (
+      <Wrapper
+        link={
+          <a
+            href={`https://www.infogreffe.fr/entreprise/${uniteLegale.siren}`}
+            rel="noreferre noopener"
+            target="_blank"
+          >
+            → Consulter la fiche Infogreffe
+          </a>
+        }
+      >
+        <InformationTooltip
+          label={`Cette structure est enregistrée sur Infogreffe${
+            uniteLegale.immatriculation?.dateImmatriculation
+              ? `, depuis le ${formatDate(
+                  uniteLegale.immatriculation?.dateImmatriculation
+                )}`
+              : ""
+          }.`}
+          tabIndex={undefined}
+        >
+          {uniteLegale.immatriculation?.dateRadiation ? (
+            <OpenClosedTag icon="closed" label="Radiée sur Infogreffe">
+              le {formatDate(uniteLegale.immatriculation?.dateRadiation)}
+            </OpenClosedTag>
+          ) : (
+            <OpenClosedTag icon="open" label="Enregistrée sur Infogreffe">
+              {uniteLegale.immatriculation?.dateImmatriculation && (
+                <>
+                  le{" "}
+                  {formatDate(uniteLegale.immatriculation?.dateImmatriculation)}
+                </>
+              )}
+            </OpenClosedTag>
+          )}
+        </InformationTooltip>
+      </Wrapper>
+    );
+  }
+  return null;
+};
+
+export const UniteLegaleInscriptionSirene = ({
+  uniteLegale,
+  user,
+}: {
+  uniteLegale: IUniteLegale;
+  user: IAgentInfo | null;
+}) => {
+  if (!uniteLegale.dateMiseAJourInsee) {
+    return (
+      <InformationTooltip
+        label={
+          "Cette structure est n’a pas été retrouvée dans la base Sirene tenue par l’Insee. Pourtant, elle devrait s’y trouver. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site sirene.fr"
+        }
+        tabIndex={undefined}
+      >
+        <OpenClosedTag
+          icon="questionFill"
+          label="Non trouvée dans Sirene (Insee)"
+        />
+      </InformationTooltip>
+    );
+  }
+
+  return (
+    <Wrapper
+      link={
+        <AvisSituationLink
+          button={true}
+          etablissement={uniteLegale.siege}
+          label="Avis de situation"
+          user={user}
+        />
+      }
+    >
+      <InformationTooltip
+        label={`Cette structure est inscrite dans la base Sirene tenue par l’Insee${
+          uniteLegale.dateCreation
+            ? `, depuis le ${formatDate(uniteLegale.dateCreation)}`
+            : ""
+        }. Elle a été mise à jour le ${formatDate(
+          uniteLegale.dateMiseAJourInsee
+        )}.`}
+        tabIndex={undefined}
+      >
+        {estActif(uniteLegale) ? (
+          <OpenClosedTag icon="open" label="Inscrite (Insee)">
+            {uniteLegale.dateCreation && (
+              <>le {formatDate(uniteLegale.dateCreation)}</>
+            )}
+          </OpenClosedTag>
+        ) : (
+          <OpenClosedTag icon="closed" label="Cessée (Insee)">
+            {uniteLegale.dateCreation && (
+              <>le {formatDate(uniteLegale.dateFermeture)}</>
+            )}
+          </OpenClosedTag>
+        )}
+      </InformationTooltip>
+    </Wrapper>
+  );
+};
+
+export const UniteLegaleInscriptionRNE = ({
+  uniteLegale,
+  user,
+}: {
+  uniteLegale: IUniteLegale;
+  user: IAgentInfo | null;
+}) => {
+  if (!uniteLegale.dateMiseAJourInpi) {
+    if (isServicePublic(uniteLegale) || isAssociation(uniteLegale)) {
+      return null;
+    }
+    return (
+      <Wrapper
+        link={
+          <Icon slug="searchLine">
+            <a
+              href="https://data.inpi.fr"
+              rel="noreferre noopener"
+              target="_blank"
+            >
+              Rechercher sur data.inpi.fr
+            </a>
+          </Icon>
+        }
+      >
+        <InformationTooltip
+          label={
+            "Cette structure n’a pas été retrouvée dans le Registre National des Entreprises (RNE) tenu par l’INPI. Pourtant, vu sa forme juridique, elle devrait y être inscrite. Il peut s’agir d’une erreur ou d’un cas particulier. Vous pouvez essayer de la retrouver sur le site data.inpi.fr"
+          }
+          tabIndex={undefined}
+        >
+          <OpenClosedTag
+            icon="questionFill"
+            label="Non trouvée dans le RNE (INPI)"
+          />
+        </InformationTooltip>
+      </Wrapper>
+    );
+  }
+
+  return (
+    <Wrapper
+      link={
+        <ExtraitRNELink
+          label="Extrait RNE"
+          uniteLegale={uniteLegale}
+          user={user}
+        />
+      }
+    >
+      <InformationTooltip
+        label={`Cette structure est immatriculée au Registre National des Entreprises (RNE)${
+          uniteLegale.immatriculation?.dateImmatriculation
+            ? `, depuis le ${formatDate(
+                uniteLegale.immatriculation?.dateImmatriculation
+              )}`
+            : ""
+        }.${
+          uniteLegale.dateMiseAJourInpi
+            ? ` Elle a été mise à jour le ${formatDate(
+                uniteLegale.dateMiseAJourInpi
+              )}.`
+            : ""
+        }`}
+        tabIndex={undefined}
+      >
+        <a href="#immatriculation-rne">
+          {uniteLegale.immatriculation?.dateRadiation ? (
+            <OpenClosedTag icon="closed" label="Radiée au RNE (INPI)">
+              le {formatDate(uniteLegale.immatriculation?.dateRadiation)}
+            </OpenClosedTag>
+          ) : (
+            <OpenClosedTag icon="open" label="Immatriculée au RNE (INPI)">
+              {uniteLegale.immatriculation?.dateImmatriculation && (
+                <>
+                  le{" "}
+                  {formatDate(uniteLegale.immatriculation?.dateImmatriculation)}
+                </>
+              )}
+            </OpenClosedTag>
+          )}
+        </a>
+      </InformationTooltip>
+    </Wrapper>
+  );
+};
+
+export const UniteLegaleInscriptionRNA = ({
+  uniteLegale,
+}: {
+  uniteLegale: IUniteLegale;
+}) => {
+  if (!uniteLegale.association.idAssociation) {
+    return null;
+  }
+  return (
+    <Wrapper
+      link={
+        <Icon slug="download">
+          <Link params={{ slug: uniteLegale.siren }} to="/documents/$slug">
+            Annonce de création au JOAFE
+          </Link>
+        </Icon>
+      }
+    >
+      <InformationTooltip
+        label="Cette structure est inscrite au Répertoire National des Associations (RNA)."
+        tabIndex={undefined}
+      >
+        <a href="#association-section">
+          <OpenClosedTag
+            icon="open"
+            label={"Inscrite au RNA (Ministère de l’Intérieur)"}
+          />
+        </a>
+      </InformationTooltip>
+    </Wrapper>
+  );
+};
