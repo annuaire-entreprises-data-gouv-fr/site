@@ -19,7 +19,6 @@ import { UniteLegaleImmatriculationSection } from "#/components/screens/entrepri
 import UniteLegaleSummarySection from "#/components/screens/entreprise.$slug/summary-section";
 import { NotFound } from "#/components/screens/not-found";
 import ServicePublicSection from "#/components/service-public-section";
-import StructuredDataBreadcrumb from "#/components/structured-data/breadcrumb";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
@@ -46,6 +45,11 @@ import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
+import {
+  getDepartementFromCodePostal,
+  getUrlFromDepartement,
+  libelleFromDepartement,
+} from "#/utils/helpers/formatting/labels";
 import { meta } from "#/utils/seo";
 import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
@@ -136,6 +140,10 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
 
     const { uniteLegale } = loaderData;
     const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}`;
+    const naf = uniteLegale.activitePrincipale;
+    const dep = getDepartementFromCodePostal(uniteLegale.siege.codePostal);
+    const depUrl = getUrlFromDepartement(dep || "");
+
     return {
       meta: meta({
         title: uniteLegalePageTitle(uniteLegale),
@@ -153,6 +161,38 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
           href: canonical,
         },
       ],
+      scripts:
+        dep && depUrl && naf
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "BreadcrumbList",
+                  itemListElement: [
+                    {
+                      "@type": "ListItem",
+                      position: 1,
+                      name: "Entreprises par départements",
+                      item: "https://annuaire-entreprises.data.gouv.fr/departements/index.html",
+                    },
+                    {
+                      "@type": "ListItem",
+                      position: 2,
+                      name: `${libelleFromDepartement(dep)}`,
+                      item: `https://annuaire-entreprises.data.gouv.fr/departements/${depUrl}/index.html`,
+                    },
+                    {
+                      "@type": "ListItem",
+                      position: 3,
+                      name: naf,
+                      item: `https://annuaire-entreprises.data.gouv.fr/departements/${depUrl}/${naf}/1.html`,
+                    },
+                  ],
+                }),
+              },
+            ]
+          : [],
     };
   },
   component: RouteComponent,
@@ -220,7 +260,6 @@ function RouteComponent() {
           </>
         )}
       </div>
-      <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     </>
   );
 }

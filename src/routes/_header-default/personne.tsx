@@ -3,7 +3,6 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { Link } from "#/components/Link";
 import PageCounter from "#/components/search-results/results-pagination";
-import StructuredDataSearchAction from "#/components/structured-data/search";
 import { FullTable } from "#/components/table/full";
 import { Info } from "#/components-ui/alerts";
 import FAQLink from "#/components-ui/faq-link";
@@ -100,6 +99,36 @@ export const Route = createFileRoute("/_header-default/personne")({
           href: canonical,
         },
       ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            url: "https://annuaire-entreprises.data.gouv.fr",
+            potentialAction: [
+              {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate:
+                    "https://annuaire-entreprises.data.gouv.fr/rechercher?terme={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+              {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate:
+                    "https://annuaire-entreprises.data.gouv.fr/rechercher/carte?terme={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+            ],
+          }),
+        },
+      ],
     };
   },
   component: RouteComponent,
@@ -117,7 +146,6 @@ function RouteComponent() {
 
   return (
     <div className="content-container">
-      <StructuredDataSearchAction />
       {sirenFrom && (
         <Link params={{ slug: sirenFrom }} to="/dirigeants/$slug">
           ← Retourner à la page précédente
