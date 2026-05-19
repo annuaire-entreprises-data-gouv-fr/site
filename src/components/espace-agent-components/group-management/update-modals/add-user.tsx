@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState } from "react";
 import type { IRolesDataUser } from "#/clients/roles-data/interface";
 import { validateEmail } from "#/components/espace-agent-components/helpers/form-validation";
@@ -27,9 +28,10 @@ export default function AddUserModal({
   const [inputEmail, setInputEmail] = useState("");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const addUserToGroup = useServerFn(addUserToGroupFn);
 
   const mutation = useMutation({
-    mutationFn: addUserToGroupFn,
+    mutationFn: addUserToGroup,
     onSuccess: (result) => {
       addUserToGroupState(result);
 
