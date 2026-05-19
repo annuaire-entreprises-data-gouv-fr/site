@@ -44,7 +44,6 @@ export const cleanAgentSession = createServerOnlyFn(
     await session.update({
       state: undefined,
       nonce: undefined,
-      pkceCodeVerifier: undefined,
       proConnectTokenSet: undefined,
       user: null,
     });
@@ -63,13 +62,11 @@ export const setStateAndNonce = createServerOnlyFn(
   async (
     session: Session,
     state: string | undefined,
-    nonce: string | undefined,
-    pkceCodeVerifier?: string
+    nonce: string | undefined
   ) => {
     await session.update({
       state,
       nonce,
-      pkceCodeVerifier,
     });
   }
 );
@@ -83,7 +80,6 @@ export const setProConnectTokenSet = createServerOnlyFn(
       proConnectTokenSet,
       state: undefined,
       nonce: undefined,
-      pkceCodeVerifier: undefined,
     });
   }
 );
