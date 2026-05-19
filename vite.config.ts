@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { sentryTanstackStart } from "@sentry/tanstackstart-react/vite";
 import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
