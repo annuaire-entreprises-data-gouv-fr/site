@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import type {
   IRolesDataRoles,
@@ -23,9 +24,10 @@ export default function UpdateUserSelect({
 }) {
   const { showNotification } = useNotification();
   const [optimisticRoleId, setOptimisticRoleId] = useState<number | null>(null);
+  const updateUserRoleInGroup = useServerFn(updateUserRoleInGroupFn);
 
   const mutation = useMutation({
-    mutationFn: updateUserRoleInGroupFn,
+    mutationFn: updateUserRoleInGroup,
     onSuccess: (result) => {
       updateUserFromGroupState(result);
       setOptimisticRoleId(null);

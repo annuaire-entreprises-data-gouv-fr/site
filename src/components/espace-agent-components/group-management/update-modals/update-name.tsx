@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useRef, useState } from "react";
 import { validateGroupName } from "#/components/espace-agent-components/helpers/form-validation";
 import ButtonLink from "#/components-ui/button";
@@ -24,9 +25,10 @@ export default function UpdateNameModal({
   const [groupName, setGroupName] = useState(initialName);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const updateGroupName = useServerFn(updateGroupNameFn);
 
   const mutation = useMutation({
-    mutationFn: updateGroupNameFn,
+    mutationFn: updateGroupName,
     onSuccess: () => {
       updateGroupNameState(groupName);
       setIsVisible(false);
